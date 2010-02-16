@@ -49,11 +49,9 @@
             ${site.city}, ${site.state} ${site.zipcode}
           </div>
           <div style="height: 15px;"></div>
-          <g:if test="${site.imageUrl}">
-            <div>
-              <img src="${site.imageUrl}" alt="image"/> Note: Gallery goes here.
-            </div>
-          </g:if>
+          <!--
+            get the default image for the site here
+          -->
           <g:if test="${params.searchSize}">
             <div>
               Results for size  <span id="sizeDescription"></span>
