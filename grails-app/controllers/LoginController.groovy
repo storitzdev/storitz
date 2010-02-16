@@ -66,7 +66,7 @@ class LoginController {
 			postUrl = "${request.contextPath}${config.filterProcessesUrl}"
 		}
 
-		render view: view, model: [postUrl: postUrl]
+		render view: view, model: [postUrl: postUrl, title:'Login']
 	}
 
 	/**

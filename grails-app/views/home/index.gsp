@@ -118,6 +118,8 @@
                 transport.responseJSON.features.each(function(s) {
                     var location = new google.maps.LatLng(s.lat, s.lng);
                     features[s.id] = s;
+                    var offers = s.specialOffers.collect(function(n) { return n.description } ).join('<BR/>');
+
                     rows++;
 
                     var iconLink = s.units.any(function(n) { return n.unitsize.id == searchSize }) ? '${createLinkTo(dir:'images', file:'icn_map_blue.png')}' : '${createLinkTo(dir:'images', file:'icn_map_grn.png')}';
@@ -141,7 +143,7 @@
                       (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
                       (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
                       (priceTempControlled && priceTempControlled < 999999 ? '<a href="' + baseURL + s.id + '?priceTempControlled=true&searchSize=' + searchSize + '">$' + priceTempControlled + '</a>' : "&#8212;") +'</td><td class="textCenter">' +
-                      (s.specialOffer ? s.specialOffer : "&#8212;") + '</td></tr>';
+                      (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
                 $('stresults_div').update(tableContents);

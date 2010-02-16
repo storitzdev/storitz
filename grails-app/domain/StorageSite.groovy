@@ -1,11 +1,11 @@
+
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer ]
-    static fetchMode = [units:'eager', specialOffers:'eager']
+    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage ]
+    static fetchMode = [units:'eager',specialOffers:'eager']
 
     static constraints = {
       description(nullable:true)
-      imageUrl(nullable:true)
       logoUrl(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)
@@ -14,7 +14,6 @@ class StorageSite {
   
     String title
     String description
-    String imageUrl
     String logoUrl
     BigDecimal lat
     BigDecimal lng
