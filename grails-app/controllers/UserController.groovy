@@ -1,9 +1,15 @@
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import grails.converters.*;
+import org.codehaus.groovy.grails.web.json.*;
+
 /**
  * User controller.
  */
+@Secured(['ROLE_ADMIN'])
 class UserController {
 
 	def authenticateService
+    def webUtilService
 
 	// the delete, save and update actions only accept POST requests
 	static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
@@ -12,13 +18,39 @@ class UserController {
 		redirect action: list, params: params
 	}
 
+    def managers = {
+      webUtilService.nocache(response)
+      render(status: 200, contentType:"application/json", text:"${url.text}")
+
+    }
+
 	def list = {
+      
+        flash.username = params.username
+
 		if (!params.max) {
 			params.max = 10
 		}
-		[personList: User.list(params)]
+
+        def results
+
+        if (params.username) {
+          def query
+          def criteria = User.createCriteria()
+
+          query = {
+            and {
+              like("username", params.username+ '%')
+            }
+          }
+          results = criteria.list(params, query)
+        } else {
+          results = User.list(params)
+        }
+		[personList: results]
 	}
 
+    @Secured(['ROLE_ADMIN','ROLE_MANAGER','ROLE_USER'])
 	def show = {
 		def person = User.get(params.id)
 		if (!person) {
@@ -40,6 +72,7 @@ class UserController {
 	 * Person delete action. Before removing an existing person,
 	 * he should be removed from those authorities which he is involved.
 	 */
+
 	def delete = {
 
 		def person = User.get(params.id)
@@ -63,6 +96,7 @@ class UserController {
 		redirect action: list
 	}
 
+    @Secured(['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'])
 	def edit = {
 
 		def person = User.get(params.id)
@@ -119,16 +153,42 @@ class UserController {
 	 */
 	def save = {
 
-		def person = new User()
-		person.properties = params
-		person.passwd = authenticateService.encodePassword(params.passwd)
-		if (person.save()) {
-			addRoles(person)
-			redirect action: show, id: person.id
-		}
-		else {
-			render view: 'create', model: [authorityList: Role.list(), person: person]
-		}
+      def person = new User()
+      person.properties = params
+
+      def config = authenticateService.securityConfig
+      def defaultRole = config.security.defaultRole
+
+      def role = Role.findByAuthority(defaultRole)
+      if (!role) {
+          person.passwd = ''
+          flash.message = 'Default Role not found.'
+          render view: 'create', model: [person: person, authorityList: Role.list() ]
+          return
+      }
+
+      if (params.passwd != params.repasswd) {
+          person.passwd = ''
+          flash.message = 'The passwords you entered do not match.'
+          render view: 'create', model: [person: person, authorityList: Role.list() ]
+          return
+      }
+
+      def pass = authenticateService.encodePassword(params.passwd)
+      person.passwd = pass
+      person.enabled = true
+      person.emailShow = true
+      if (person.save()) {
+          addRoles(person)
+          // TODO - send email to new user
+
+          person.save(flush: true)
+          redirect action: show, id: person.id
+
+      } else {
+          person.passwd = ''
+          render view: 'create', model: [authorityList: Role.list(), person: person]
+      }
 	}
 
 	private void addRoles(person) {
@@ -157,3 +217,4 @@ class UserController {
 		return [person: person, roleMap: roleMap]
 	}
 }
+

@@ -18,6 +18,8 @@
       <H1>Admin Links</H1>
       <ul>
         <li><g:link controller="storageSize" action="list">Storage Unit Size list</g:link> </li>
+        <li><g:link controller="specialOffer" action="list">Manage Special Offers</g:link> </li>
+        <li><g:link controller="user" action="list">Show Users</g:link> </li>
       </ul>
     </div>
     <div style="height:30px;"></div>

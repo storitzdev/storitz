@@ -1,7 +1,7 @@
 
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage ]
+    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact ]
     static fetchMode = [units:'eager',specialOffers:'eager']
 
     static constraints = {
@@ -10,6 +10,8 @@ class StorageSite {
       zipcode(nullable:true)
       phone(nullable:true)
       url(nullable:true)
+      source(nullable:true)
+      sourceId(nullable:true)
     }
   
     String title
@@ -23,6 +25,8 @@ class StorageSite {
     String zipcode
     String url
     String phone
+    String source             // data source
+    String sourceId           // id from data source
 
   // site offers
     Boolean requiresInsurance
@@ -34,4 +38,10 @@ class StorageSite {
     Boolean isKeypad
     Boolean isCamera
     Boolean isUnitAlarmed
+
+  def users() {
+      return users.collect{it.user}
+  }
+
+
 }

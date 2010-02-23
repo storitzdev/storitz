@@ -1,0 +1,28 @@
+class SiteUser {
+
+    StorageSite site
+    User user
+
+    static constraints = {
+    }
+
+    static SiteUser link(site, user) {
+      def s = SiteUser.findBySiteAndUser(site, user)
+      if (!s) {
+        s = new SiteUser()
+        site?.addToUsers(s)
+        user?.addToSites(s)
+        s.save()
+      }
+      return s
+    }
+
+    static void unlink(site, user) {
+      def s = SiteUser.findBySiteAndUser(site, user)
+      if (s) {
+        site?.removeFromUsers(s)
+        user?.removeFromSites(s)
+        s.delete()
+      }
+    }
+}

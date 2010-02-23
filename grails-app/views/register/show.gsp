@@ -46,8 +46,8 @@
 				<td valign="top" class="name">Roles:</td>
 				<td valign="top" class="value">
 					<ul>
-					<g:each var='authority' in="${person.authorities}">
-						<li>${authority.authority}</li>
+					<g:each var='role' in="${roleNames}">
+						<li>${role}</li>
 					</g:each>
 					</ul>
 				</td>

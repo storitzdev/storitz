@@ -1,14 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+  <head>
+    <g:set var="title" value="Edit Storage Unit Size"/>
+    <g:render template="/header" />
 
+    <script type="text/javascript">
+//<![CDATA[
+//]]>
+  </script>
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="layout" content="main" />
-        <title>Edit StorageSize</title>
-    </head>
-    <body>
+  </head>
+  <body>
+    <g:render template="/topnav" />
+    <div id="stcontent">
+      <g:render template="/logo_bar" />
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${resource(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
             <span class="menuButton"><g:link class="list" action="list">StorageSize List</g:link></span>
             <span class="menuButton"><g:link class="create" action="create">New StorageSize</g:link></span>
         </div>
@@ -74,5 +83,6 @@
                 </div>
             </g:form>
         </div>
+      </div>
     </body>
 </html>
