@@ -1,10 +1,12 @@
 class SpecialOffer {
 
-  static belongsTo = StorageSite
   static hasMany = [sites: StorageSite]
+  static belongsTo = StorageSite
 
-    static constraints = {
-    }
+  static constraints = {
+    manager(nullable: true)
+    code(nullable: true)
+  }
 
   User manager
   String code
