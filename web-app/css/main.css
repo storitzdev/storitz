@@ -357,3 +357,63 @@ Added styles
 #site_info {
     float: left;
 }
+
+#detail_tabs {
+    float: right;
+}
+
+.tab_button {
+    background-image: url(../images/btn-blue-121x24.png);
+    background-repeat: no-repeat;
+    width: 121px;
+    height: 24px;
+    margin: 10px 5px 5px 5px;
+}
+
+.tab_spacer {
+    width: 121px;
+    height: 24px;
+    margin: 10px 5px 5px 5px;
+}
+
+.button_text_hi {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 21px;
+    text-align: center;
+    color: white;
+}
+
+.button_text {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    line-height: 21px;
+    color: #154a99;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.vert_text {
+    line-height: 25px;
+}
+
+.step_header {
+    font: 14px "century gothic", verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #003883;
+    margin: 10px 20px;
+}
+
+.step_header_hi {
+    font: 14px "century gothic", verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #3fac00;
+    margin: 10px 20px;
+}

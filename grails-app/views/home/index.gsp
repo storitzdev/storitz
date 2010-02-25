@@ -128,6 +128,11 @@
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
                     var priceTempControlled = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isTempControlled) ? n.price : 999999; });
 
+                    var keypadImg = s.isKeypad ? '<img src="${createLinkTo(dir:'images', file:'icon-keypad-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
+                    var cameraImg = s.isCamera ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var gateImg   = s.isGate ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var alarmImg  = s.isUnitAlarmed ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
+
                     s.marker = new google.maps.Marker({
                       map: map,
                       title: s.title,
@@ -137,8 +142,8 @@
                     google.maps.event.addListener(s.marker, 'click', function() {
                       markerClick(s);
                     });
-                    tableContents += '<tr><td><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '">' + s.address +'</a></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
+                    tableContents += '<tr><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
+                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '">' + s.address +'</a></div><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + '</div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
                       (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
                       (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
                       (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
