@@ -1,4 +1,4 @@
-import grails.test.*
+import grails.test.ControllerUnitTestCase
 
 class STMapControllerTests extends ControllerUnitTestCase {
     protected void setUp() {

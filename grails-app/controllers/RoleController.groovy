@@ -1,3 +1,5 @@
+import Role
+
 /**
  * Authority Controller.
  */

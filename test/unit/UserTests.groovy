@@ -1,4 +1,4 @@
-import grails.test.*
+import grails.test.GrailsUnitTestCase
 
 class UserTests extends GrailsUnitTestCase {
     protected void setUp() {

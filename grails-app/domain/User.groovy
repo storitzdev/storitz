@@ -1,3 +1,7 @@
+import Role
+import SiteUser
+import SpecialOffer
+
 /**
  * User domain class.
  */

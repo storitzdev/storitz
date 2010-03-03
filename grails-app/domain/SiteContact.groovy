@@ -1,3 +1,5 @@
+import StorageSite
+
 class SiteContact {
 
     static belongsTo = [ site: StorageSite ]

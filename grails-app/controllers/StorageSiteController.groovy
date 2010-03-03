@@ -1,3 +1,5 @@
+import StorageSite
+
 class StorageSiteController {
 
   def detail = {

@@ -1,3 +1,5 @@
+import StorageSize
+
 class HomeController {
 
     def index = {

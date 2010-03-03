@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/storagetech" docBase="storagetech"
+   crossContext="true" reloadable="true" debug="1">
+
+<Resource name="jdbc/storagetech"
+          auth="Container"
+          type="javax.sql.DataSource"
+          driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://127.0.0.1:3306/storagetech?autoReconnect=true"
+          username="storagetech"
+          password="st3ch@m"
+          validationQuery="select 1"
+          maxActive="20"
+          maxIdle="10"
+          maxWait="-1"/>
+
+</Context>

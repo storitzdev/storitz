@@ -1,12 +1,11 @@
 package com.storagetech.geoip;
 
-import com.maxmind.geoip.LookupService;
 import com.maxmind.geoip.Location;
+import com.maxmind.geoip.LookupService;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class GeoIp {

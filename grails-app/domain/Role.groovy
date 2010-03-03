@@ -1,6 +1,4 @@
-
-
-
+import User
 
 /**
  * Authority domain class.

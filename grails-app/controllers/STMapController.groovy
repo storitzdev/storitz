@@ -1,6 +1,6 @@
-import grails.converters.deep.*
-import com.storagetech.geoip.*;
-import com.maxmind.geoip.Location;
+import StorageSite
+import com.storagetech.geoip.GeoIp
+import grails.converters.JSON
 
 class STMapController {
 
@@ -17,6 +17,7 @@ class STMapController {
           between("lng", new java.math.BigDecimal(params.swLng), new java.math.BigDecimal(params.neLng))
         }
       }
+      JSON.use("deep")
       render (status: 200, contentType:"application/json", text:"{ features: ${results as JSON} }")
     }
 
@@ -32,6 +33,7 @@ class STMapController {
 
     if (!loc) {
     }
+    JSON.use("deep")
     render (status:200, contentType:"application/json", text:"${loc as JSON}")
   }
 
@@ -49,6 +51,7 @@ class STMapController {
         }
       }
     }
+    JSON.use("deep")
     render (status: 200, contentType:"application/json", text:"{ features: ${results as JSON} }")
   }
 

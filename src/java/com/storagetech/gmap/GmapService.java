@@ -1,12 +1,12 @@
 package com.storagetech.gmap;
 
 import com.google.gdata.client.maps.MapsService;
+import com.google.gdata.data.Person;
+import com.google.gdata.data.PlainTextConstruct;
+import com.google.gdata.data.maps.MapEntry;
+import com.google.gdata.data.maps.MapFeed;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
-import com.google.gdata.data.maps.MapFeed;
-import com.google.gdata.data.maps.MapEntry;
-import com.google.gdata.data.PlainTextConstruct;
-import com.google.gdata.data.Person;
 
 import java.io.IOException;
 import java.net.URL;

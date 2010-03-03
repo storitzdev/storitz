@@ -97,7 +97,7 @@
 
           var bounds = map.getBounds();
           if (!bounds) return;
-          new Ajax.Request("${createLink(controller:'sTMap', action:'jsonp')}",
+          new Ajax.Request("${createLink(controller:'STMap', action:'jsonp')}",
           {
               method:'get',
               parameters: {sizeId: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
@@ -128,10 +128,10 @@
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
                     var priceTempControlled = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isTempControlled) ? n.price : 999999; });
 
-                    var keypadImg = s.isKeypad ? '<img src="${createLinkTo(dir:'images', file:'icon-keypad-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
-                    var cameraImg = s.isCamera ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var gateImg   = s.isGate ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var alarmImg  = s.isUnitAlarmed ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-blue-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var keypadImg = s.isKeypad ? '<img src="${createLinkTo(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
+                    var cameraImg = s.isCamera ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var gateImg   = s.isGate ? '<img src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var alarmImg  = s.isUnitAlarmed ? '<img src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
 
                     s.marker = new google.maps.Marker({
                       map: map,
@@ -164,7 +164,7 @@
 
         function createMap() {
           var iploc;
-          var req = new Ajax.Request("${createLink(controller:'sTMap', action:'iplocate')}",
+          var req = new Ajax.Request("${createLink(controller:'STMap', action:'iplocate')}",
           {
             method:'get',
             onSuccess:function(transport) {

@@ -1,6 +1,6 @@
+import Role
+import User
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
-import grails.converters.*;
-import org.codehaus.groovy.grails.web.json.*;
 
 /**
  * User controller.

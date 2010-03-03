@@ -71,10 +71,10 @@
         </div>
         <div class="right">
           <div class="right vert_text">
-            <span class="step_header">Search Storage</span>
-            <span class="step_header_hi">Review Options</span>
-            <span class="step_header">Billing Information</span>
-            <span class="step_header">Confirm Order</span>
+            <span id="step1" class="step_header">Search Storage</span>
+            <span id="step2" class="step_header_hi">Review Options</span>
+            <span id="step3" class="step_header">Billing Information</span>
+            <span id="step4" class="step_header">Confirm Order</span>
           </div>
           <div style="clear:both;"></div>
           <div id="map">

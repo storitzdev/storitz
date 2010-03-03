@@ -1,3 +1,5 @@
+import StorageSite
+
 class SiteImage {
 
   static belongsTo = [ site: StorageSite]

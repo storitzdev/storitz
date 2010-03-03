@@ -1,4 +1,4 @@
-import grails.test.*
+import grails.test.ControllerUnitTestCase
 
 class StorageSizeControllerTests extends ControllerUnitTestCase {
     protected void setUp() {
