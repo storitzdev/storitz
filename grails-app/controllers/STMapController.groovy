@@ -1,6 +1,7 @@
 import StorageSite
 import com.storagetech.geoip.GeoIp
 import grails.converters.JSON
+import org.hibernate.FetchMode as FM
 
 class STMapController {
 
@@ -16,6 +17,8 @@ class STMapController {
           between("lat", new java.math.BigDecimal(params.swLat), new java.math.BigDecimal(params.neLat))
           between("lng", new java.math.BigDecimal(params.swLng), new java.math.BigDecimal(params.neLng))
         }
+        fetchMode('units', FM.EAGER)
+        fetchMode('specialOffers', FM.EAGER)
       }
       JSON.use("deep")
       render (status: 200, contentType:"application/json", text:"{ features: ${results as JSON} }")

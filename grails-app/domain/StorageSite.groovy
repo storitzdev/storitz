@@ -12,6 +12,7 @@ class StorageSite {
       url(nullable:true)
       source(nullable:true)
       sourceId(nullable:true)
+      address2(nullable:true)
     }
   
     String title
@@ -20,6 +21,7 @@ class StorageSite {
     BigDecimal lat
     BigDecimal lng
     String address
+    String address2
     String city
     String state
     String zipcode

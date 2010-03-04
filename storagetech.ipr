@@ -261,20 +261,6 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="http://svn.webeasy.com/svn/storagetech/branches">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="http://svn.webeasy.com/svn/storagetech/tags">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="http://svn.webeasy.com/svn/storagetech/branches" />

@@ -1,6 +1,7 @@
 class SiteLinkController {
 
   def siteLinkService
+  def geocodeService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -26,7 +27,7 @@ class SiteLinkController {
     def siteLinkInstance = new SiteLink(params)
     if (siteLinkInstance.save(flush: true)) {
       // read in sites
-      def siteCount = corpSites(siteLinkInstance)
+      corpSites(siteLinkInstance)
       flash.message = "Feed " + createCount + " sites created " + updateCount + " sites updated." 
       redirect(action: "show", id: siteLinkInstance.id)
     }
@@ -114,12 +115,35 @@ class SiteLinkController {
     )
     StringWriter writer = new StringWriter()
 
+    updateCount = createCount = 0
+
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      writer << tab.sLocationCode
-      unitCount++
+      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      if (site) {
+        updateCount++
+      } else {
+        site = new StorageSite()
+        createCount++
+      }
+      def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() +', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
+      def geoResult = geocodeService.geocode(address)
+
+      site.lat = geoResult.Placemark[0].Point.coordinates[0]
+      site.lng = geoResult.Placemark[0].Point.coordinates[1]
+      
+      site.sourceId = tab.SiteID.text()
+      site.source = "SL"
+      site.title = tab.sSiteName.text()
+      site.address = tab.sSiteAddr1.text()
+      site.address2 = tab.sSiteAddr2.text()
+      site.city = tab.sSiteCity.text()
+      site.state = tab.sSiteRegion.text()
+      site.zipcode = tab.sSitePostalCode.text()
+
+      // TODO add contacts
+
+      site.save()
     }
-    println writer.toString()
-    return unitCount
   }
 
   def unitsAvailable(siteLink, siteId) {
