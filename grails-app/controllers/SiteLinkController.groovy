@@ -121,6 +121,12 @@ class SiteLinkController {
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
       if (site) {
         updateCount++
+        site.contacts.each { contact ->
+          contact.delete()
+        }
+        site.units.each { unit ->
+          unit.delete()
+        }
       } else {
         site = new StorageSite()
         createCount++
@@ -140,14 +146,17 @@ class SiteLinkController {
       site.state = tab.sSiteRegion.text()
       site.zipcode = tab.sSitePostalCode.text()
 
-      // TODO add contacts
+      def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
+      site.addToContacts(contact)
 
-      site.save()
+      unitsAvailable(siteLink, site)
+
+      site.save(flush:true)
     }
   }
 
-  def unitsAvailable(siteLink, siteId) {
-    def ret = siteLinkService.getUnitsAvailable(siteLink.corpCode, siteId, siteLink.userName, siteLink.password, 0)
+  def unitsAvailable(siteLink, site) {
+    def ret = siteLinkService.getUnitsAvailable(siteLink.corpCode, site.sourceId, siteLink.userName, siteLink.password, 0)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -155,11 +164,22 @@ class SiteLinkController {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    def writer = new StringWriter()
-    def subset = records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      writer << "Unit Name" + tab.sUnitName + " Unit ID" + tab.UnitID + "\n"
+    records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {unit ->
+      def siteUnit = new StorageUnit()
+      siteUnit.description = unit.sTypeName.text()
+      siteUnit.unitNumber = unit.UnitID.text()
+      siteUnit.price = unit.dcStdRate.text()
+      siteUnit.isUpper = unit.iFloor.text() > 1
+      siteUnit.isInterior = unit.bInside.text()
+      siteUnit.isAlarm = unit.bAlarm.text()
+      siteUnit.isTempControlled = unit.bClimate.text()
+      siteUnit.isDriveup = false
+      siteUnit.isPowered = unit.bPower.text()
+      siteUnit.displaySize = Integer.parseInt(unit.dcWidth.text()) + " X " + Integer.parseInt(unit.dcLength.text())
+
+      // TODO get closest site
+      site.addToUnits(siteUnit)
     }
-    render writer.toString()
   }
 
 
