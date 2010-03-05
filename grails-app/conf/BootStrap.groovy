@@ -4,11 +4,11 @@ class BootStrap {
 
      def init = { servletContext ->
        
-       def roleUser = new Role( authority: 'ROLE_USER', description: 'Authenticated User').save()
-       def roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save()
-       def roleManager = new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save()
+       def roleUser = new Role( authority: 'ROLE_USER', description: 'Authenticated User').save(flush: true)
+       def roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
+       def roleManager = new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
 
-       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('fud2me'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', authorities:[ roleUser, roleAdmin ]).save();
+       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('fud2me'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', authorities:[ roleUser, roleAdmin ])
        roleAdmin.addToPeople(admin)
        roleUser.addToPeople(admin)
        admin.save(flush: true)
