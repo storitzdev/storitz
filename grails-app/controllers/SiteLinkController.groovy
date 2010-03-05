@@ -145,6 +145,13 @@ class SiteLinkController {
       site.city = tab.sSiteCity.text()
       site.state = tab.sSiteRegion.text()
       site.zipcode = tab.sSitePostalCode.text()
+      site.requiresInsurance = false
+      site.boxesAvailable = true
+      site.freeTruck = false
+      site.isGate = false
+      site.isKeypad = false
+      site.isCamera = false
+      site.isUnitAlarmed = false
 
       def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
       site.addToContacts(contact)
@@ -175,9 +182,21 @@ class SiteLinkController {
       siteUnit.isTempControlled = unit.bClimate.text()
       siteUnit.isDriveup = false
       siteUnit.isPowered = unit.bPower.text()
-      siteUnit.displaySize = Integer.parseInt(unit.dcWidth.text()) + " X " + Integer.parseInt(unit.dcLength.text())
+      Integer width = Integer.parseInt(unit.dcWidth.text())
+      Integer length = Integer.parseInt(unit.dcLength.text())
+      siteUnit.displaySize =  width + " X " + length
 
-      // TODO get closest site
+      def unitSize = StorageSize.findByWidthAndLength(width, length)
+      if (unitSize == null) {
+        def foundSize = width * length
+        def unitSizes = StorageSize.list() { unit ->
+          if (foundSize < unit.width * unit.length) {
+            unitSize = unit
+            foundSize = abs(foundSize - unit.width * unit.length)
+          }
+        }
+      }
+      siteUnit.unitsize = unitSize
       site.addToUnits(siteUnit)
     }
   }
