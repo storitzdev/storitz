@@ -189,10 +189,10 @@ class SiteLinkController {
       def unitSize = StorageSize.findByWidthAndLength(width, length)
       if (unitSize == null) {
         def foundSize = width * length
-        def unitSizes = StorageSize.list() { unit ->
-          if (foundSize < unit.width * unit.length) {
-            unitSize = unit
-            foundSize = abs(foundSize - unit.width * unit.length)
+        StorageSize.list() { u ->
+          if (foundSize < u.width * u.length) {
+            unitSize = u
+            foundSize = abs(foundSize - u.width * u.length)
           }
         }
       }
