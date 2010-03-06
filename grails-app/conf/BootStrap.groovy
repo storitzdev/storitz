@@ -8,9 +8,13 @@ class BootStrap {
        def roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
        def roleManager = new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
 
-       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('fud2me'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com').save()
-       roleAdmin.addToPeople(admin)
-       roleUser.addToPeople(admin)
+       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('fud2me'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com')
+       if (roleAdmin) {
+        roleAdmin.addToPeople(admin)
+       }
+       if (roleUser) {
+        roleUser.addToPeople(admin)
+       }
        admin.save(flush: true)
 
        def site1 = new StorageSite( title:'Public Storage - Self Storage', address:'1606 Cotner Ave', city:'Los Angeles', state:'CA', zipcode: '90064', phone:'(800) 883-8369', url:'http://publicstorage.com', lat:'34.0482555637589', lng:'-118.446877335723', freeTruck: true, requiresInsurance: true, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false ).save();

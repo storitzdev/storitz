@@ -14,6 +14,6 @@ class Role {
 
 	static constraints = {
 		authority(blank: false, unique: true)
-		description()
+		description(blank:false)
 	}
 }

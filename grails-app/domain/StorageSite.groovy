@@ -12,6 +12,7 @@ class StorageSite {
       url(nullable:true)
       source(nullable:true)
       sourceId(nullable:true)
+      sourceLoc(nullable:true)
       address2(nullable:true)
     }
   
@@ -29,6 +30,7 @@ class StorageSite {
     String phone
     String source             // data source
     String sourceId           // id from data source
+    String sourceLoc          // location name
 
   // site offers
     Boolean requiresInsurance

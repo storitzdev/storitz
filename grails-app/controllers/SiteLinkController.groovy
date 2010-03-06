@@ -7,6 +7,7 @@ class SiteLinkController {
 
   Integer createCount
   Integer updateCount
+  Integer unitCount
 
   def index = {
     redirect(action: "list", params: params)
@@ -28,7 +29,7 @@ class SiteLinkController {
     if (siteLinkInstance.save(flush: true)) {
       // read in sites
       corpSites(siteLinkInstance)
-      flash.message = "Feed " + createCount + " sites created " + updateCount + " sites updated." 
+      flash.message = "Feed " + createCount + " sites created " + updateCount + " sites updated " + unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)
     }
     else {
@@ -115,7 +116,7 @@ class SiteLinkController {
     )
     StringWriter writer = new StringWriter()
 
-    updateCount = createCount = 0
+    updateCount = createCount = unitCount = 0
 
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
@@ -138,6 +139,7 @@ class SiteLinkController {
       site.lng = geoResult.Placemark[0].Point.coordinates[1]
       
       site.sourceId = tab.SiteID.text()
+      site.sourceLoc = tab.sLocationCode.text()
       site.source = "SL"
       site.title = tab.sSiteName.text()
       site.address = tab.sSiteAddr1.text()
@@ -163,7 +165,7 @@ class SiteLinkController {
   }
 
   def unitsAvailable(siteLink, site) {
-    def ret = siteLinkService.getUnitsAvailable(siteLink.corpCode, site.sourceId, siteLink.userName, siteLink.password, 0)
+    def ret = siteLinkService.getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, 0)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -175,28 +177,34 @@ class SiteLinkController {
       def siteUnit = new StorageUnit()
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
-      siteUnit.price = unit.dcStdRate.text()
+      siteUnit.price = new BigDecimal(unit.dcStdRate.text())
       siteUnit.isUpper = unit.iFloor.text() > 1
       siteUnit.isInterior = unit.bInside.text()
       siteUnit.isAlarm = unit.bAlarm.text()
       siteUnit.isTempControlled = unit.bClimate.text()
       siteUnit.isDriveup = false
       siteUnit.isPowered = unit.bPower.text()
-      Integer width = Integer.parseInt(unit.dcWidth.text())
-      Integer length = Integer.parseInt(unit.dcLength.text())
+      Integer width = (int)Double.parseDouble(unit.dcWidth.text())
+      Integer length = (int)Double.parseDouble(unit.dcLength.text())
       siteUnit.displaySize =  width + " X " + length
 
       def unitSize = StorageSize.findByWidthAndLength(width, length)
       if (unitSize == null) {
-        def foundSize = width * length
-        StorageSize.list() { u ->
-          if (foundSize < u.width * u.length) {
+
+        def unitArea = width * length
+        def foundSize = 0
+        StorageSize.findAll().each { u ->
+          if (Math.abs(unitArea - foundSize) > Math.abs(unitArea - u.width * u.length)) {
             unitSize = u
-            foundSize = abs(foundSize - u.width * u.length)
+            foundSize = u.width * u.length
           }
         }
       }
       siteUnit.unitsize = unitSize
+      siteUnit.save()
+
+      unitCount++;
+
       site.addToUnits(siteUnit)
     }
   }
