@@ -7,6 +7,7 @@ class StorageUnit {
       startAvail(nullable:true)
     }
 
+    StorageSite site
     String description
     String unitNumber
     Boolean isUpper

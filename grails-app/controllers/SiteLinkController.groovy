@@ -114,7 +114,6 @@ class SiteLinkController {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    StringWriter writer = new StringWriter()
 
     updateCount = createCount = unitCount = 0
 
@@ -122,22 +121,22 @@ class SiteLinkController {
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
       if (site) {
         updateCount++
-        site.contacts.each { contact ->
+        site.contacts.each {contact ->
           contact.delete()
         }
-        site.units.each { unit ->
+        site.units.each {unit ->
           unit.delete()
         }
       } else {
         site = new StorageSite()
         createCount++
       }
-      def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() +', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
+      def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
       def geoResult = geocodeService.geocode(address)
 
-      site.lat = geoResult.Placemark[0].Point.coordinates[0]
-      site.lng = geoResult.Placemark[0].Point.coordinates[1]
-      
+      site.lng = geoResult.Placemark[0].Point.coordinates[0]
+      site.lat = geoResult.Placemark[0].Point.coordinates[1]
+
       site.sourceId = tab.SiteID.text()
       site.sourceLoc = tab.sLocationCode.text()
       site.source = "SL"
@@ -158,9 +157,11 @@ class SiteLinkController {
       def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
       site.addToContacts(contact)
 
+      site.save()
+      
       unitsAvailable(siteLink, site)
 
-      site.save(flush:true)
+      site.save(flush: true)
     }
   }
 
@@ -175,6 +176,7 @@ class SiteLinkController {
     )
     records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {unit ->
       def siteUnit = new StorageUnit()
+      siteUnit.site = site
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
       siteUnit.price = new BigDecimal(unit.dcStdRate.text())
@@ -184,28 +186,35 @@ class SiteLinkController {
       siteUnit.isTempControlled = unit.bClimate.text()
       siteUnit.isDriveup = false
       siteUnit.isPowered = unit.bPower.text()
-      Integer width = (int)Double.parseDouble(unit.dcWidth.text())
-      Integer length = (int)Double.parseDouble(unit.dcLength.text())
-      siteUnit.displaySize =  width + " X " + length
+      siteUnit.isAvailable = true
+      siteUnit.isSecure = false
+      Integer width = (int) Double.parseDouble(unit.dcWidth.text())
+      Integer length = (int) Double.parseDouble(unit.dcLength.text())
+      siteUnit.displaySize = width + " X " + length
 
       def unitSize = StorageSize.findByWidthAndLength(width, length)
       if (unitSize == null) {
 
         def unitArea = width * length
         def foundSize = 0
-        StorageSize.findAll().each { u ->
+        StorageSize.findAll().each {u ->
           if (Math.abs(unitArea - foundSize) > Math.abs(unitArea - u.width * u.length)) {
             unitSize = u
             foundSize = u.width * u.length
           }
         }
       }
-      siteUnit.unitsize = unitSize
-      siteUnit.save()
+      if (unitSize) {
+        siteUnit.unitsize = unitSize
+        if (!siteUnit.save()) {
+          siteUnit.errors.allErrors.each { println it }
+        }
+        unitCount++;
 
-      unitCount++;
-
-      site.addToUnits(siteUnit)
+        site.addToUnits(siteUnit)
+      } else {
+        println "Skipping unit due to size: width=" + width + " length=" + length
+      }
     }
   }
 
