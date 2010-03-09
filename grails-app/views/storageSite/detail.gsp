@@ -106,7 +106,7 @@
           </div>
           <div style="clear:both;"></div>
           <div id="map">
-            <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=400x320&maptype=roadmap&markers=color:blue|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+            <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=color:blue|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
           </div>
           <div id="detail_tabs">
             <div class="left tab_button button_text_hi">Photos</div><div class="right tab_spacer button_text">Get Directions</div>
@@ -118,6 +118,8 @@
               <div id="dirPanel"></div>
             </div>
           </div>
+          <div style="clear:both;"></div>
+          <div class="price_options"></div>
         </div>
         <div style="clear: both;"/>
       </div>
