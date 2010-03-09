@@ -350,12 +350,26 @@ Added styles
 #map {
     width: 300px;
     height: 300px;
-    padding: 10px;
+    padding: 10px 5px;
     float: right;    
 }
 
 #site_info {
     float: left;
+}
+
+#site_logo {
+    float: left;
+    width: 120px;
+    height: 120px;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#site_address {
+    float: left;
+    margin: 1em;
 }
 
 #detail_tabs {
@@ -416,4 +430,23 @@ Added styles
     font-weight: bold;
     color: #3fac00;
     margin: 10px 20px;
+}
+
+.section_header {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #154A99;
+}
+
+.icon_text {
+    font: 11px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #154A99;
+}
+
+.other_details {
+    background-image: url(../images/bkg-tablehead-257x30.gif);
+    background-repeat: no-repeat;
+    width: 257px;
+    height: 30px;
 }
