@@ -456,7 +456,7 @@ Added styles
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     line-height: 30px;
-    padding-left: 20px;
+    padding: 0px 20px;
     color: white;
 }
 
@@ -466,3 +466,4 @@ Added styles
     width: 666px;
     height: 30px;
 }
+

@@ -180,7 +180,7 @@ class SiteLinkController {
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
       siteUnit.price = new BigDecimal(unit.dcStdRate.text())
-      siteUnit.isUpper = unit.iFloor.text() > 1
+      siteUnit.isUpper = Integer.parseInt(unit.iFloor.text()) > 1
       siteUnit.isInterior = unit.bInside.text()
       siteUnit.isAlarm = unit.bAlarm.text()
       siteUnit.isTempControlled = unit.bClimate.text()

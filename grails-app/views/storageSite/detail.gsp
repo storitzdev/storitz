@@ -90,11 +90,43 @@
               <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
             </div>
           </g:if>
-          <div style="padding-top: 10px;" class="section_header">
+          <div style="padding: 10px 0px;" class="section_header">
             Site Features:
           </div>
+          <g:if test="${site.freeTruck}">
+            <div class="icon_text">
+              <img src="${createLinkTo(dir:'images', file:'icon-rentaltruck32.gif')}" alt="Rental Truck"/> Rental Truck
+            </div>
+          </g:if>
+          <g:if test="${site.isGate}">
+            <div class="icon_text">
+              <img src="${createLinkTo(dir:'images', file:'icon-gate32.gif')}" alt="Gated"/> Gated
+            </div>
+          </g:if>
+          <g:if test="${site.isKeypad}">
+            <div class="icon_text">
+              <img src="${createLinkTo(dir:'images', file:'icon-keypad32.gif')}" alt="Keypad"/> Keypad Entry
+            </div>
+          </g:if>
+          <g:if test="${site.isCamera}">
+            <div class="icon_text">
+              <img src="${createLinkTo(dir:'images', file:'icon-camera32.gif')}" alt="Camera"/> Camera
+            </div>
+          </g:if>
+          <g:if test="${site.isUnitAlarmed}">
+            <div class="icon_text">
+              <img src="${createLinkTo(dir:'images', file:'icon-alarm32.gif')}" alt="Alarmed"/> Unit Alarmed
+            </div>
+          </g:if>
           <div class="other_details header_text_hi">
             Special Offers:
+          </div>
+          <div class="icon_text">
+            <ul>
+              <g:each var="offer" in="${site.specialOffers}">
+                <li>${offer.description}</li>
+              </g:each>
+            </ul>
           </div>
         </div>
         <div class="right">
@@ -119,7 +151,10 @@
             </div>
           </div>
           <div style="clear:both;"></div>
-          <div class="price_options"></div>
+          <div class="price_options">
+            <span class="header_text_hi">Options</span>
+            <span class="header_text_hi right">Price</span>
+          </div>
         </div>
         <div style="clear: both;"/>
       </div>
