@@ -452,6 +452,14 @@ Added styles
     height: 30px;
 }
 
+.header_text_hi {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 30px;
+    padding-left: 20px;
+    color: white;
+}
+
 .price_options {
     background-image: url(../images/bkg-tablehead-666x30.gif);
     background-repeat: no-repeat;

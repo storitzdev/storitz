@@ -93,7 +93,7 @@
           <div style="padding-top: 10px;" class="section_header">
             Site Features:
           </div>
-          <div class="other_details button_text_hi">
+          <div class="other_details header_text_hi">
             Special Offers:
           </div>
         </div>
