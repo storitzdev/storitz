@@ -1,13 +1,12 @@
 class StorageUnit {
 
-    static belongsTo = [ site: StorageSite]
+    static belongsTo = StorageSite
   
     static constraints = {
       description(nullable:true)
       startAvail(nullable:true)
     }
 
-    StorageSite site
     String description
     String unitNumber
     Boolean isUpper

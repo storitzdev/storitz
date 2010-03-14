@@ -100,7 +100,7 @@
           new Ajax.Request("${createLink(controller:'STMap', action:'jsonp')}",
           {
               method:'get',
-              parameters: {sizeId: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
+              parameters: {searchSize: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
               onSuccess:function(transport) {
                 if (resizeable) {
                   if (transport.responseJSON.features.length < 2) {
@@ -132,7 +132,7 @@
                     var cameraImg = s.isCamera ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var gateImg   = s.isGate ? '<img src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var alarmImg  = s.isUnitAlarmed ? '<img src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var truckImg  = s.isUnitAlarmed ? '<img src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var truckImg  = s.freeTruck ? '<img src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>' : '<span style="width:20px; margin: 1px;"></span>';
 
                     s.marker = new google.maps.Marker({
                       map: map,

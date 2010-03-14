@@ -176,16 +176,15 @@ class SiteLinkController {
     )
     records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {unit ->
       def siteUnit = new StorageUnit()
-      siteUnit.site = site
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
       siteUnit.price = new BigDecimal(unit.dcStdRate.text())
-      siteUnit.isUpper = Integer.parseInt(unit.iFloor.text()) > 1
-      siteUnit.isInterior = unit.bInside.text()
-      siteUnit.isAlarm = unit.bAlarm.text()
-      siteUnit.isTempControlled = unit.bClimate.text()
+      siteUnit.isUpper = (Integer.parseInt(unit.iFloor.text()) > 1)
+      siteUnit.isInterior = Boolean.parseBoolean(unit.bInside.text())
+      siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
+      siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
       siteUnit.isDriveup = false
-      siteUnit.isPowered = unit.bPower.text()
+      siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
       siteUnit.isAvailable = true
       siteUnit.isSecure = false
       Integer width = (int) Double.parseDouble(unit.dcWidth.text())
