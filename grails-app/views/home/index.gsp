@@ -122,7 +122,7 @@
 
                     rows++;
 
-                    var iconLink = s.units.any(function(n) { return n.unitsize.id == searchSize }) ? '${createLinkTo(dir:'images', file:'icn_map_blue.png')}' : '${createLinkTo(dir:'images', file:'icn_map_grn.png')}';
+                    var iconLink = s.units.size() == 0 ? '${createLinkTo(dir:'images', file:'icn_map_grn.png')}' : '${createLinkTo(dir:'images', file:'icn_map_blue.png')}';
                     var priceDriveup = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isDriveup) ? n.price : 999999; });
                     var priceInterior = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isInterior) ? n.price : 999999; });
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });

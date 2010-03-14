@@ -28,16 +28,11 @@ class STMapController {
         fetchMode('specialOffers', FM.EAGER)
         maxResults(100)
       }
-      /**
-       *     Boolean requiresInsurance
-    Boolean boxesAvailable
-    Boolean freeTruck
 
-       */
       def sw = new StringWriter()
       sw << "["
       results.eachWithIndex { site, i ->
-        sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":${site.freeTruck}, \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"specialOffers\":["
+        sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":${site.freeTruck}, \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"specialOffers\":["
         site.specialOffers.eachWithIndex{ offer, j ->
           sw << "{\"description\":\"${offer.description}\" }"
           if (j < site.specialOffers.size() - 1) {

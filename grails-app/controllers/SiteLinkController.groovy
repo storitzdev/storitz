@@ -183,7 +183,7 @@ class SiteLinkController {
       siteUnit.isInterior = Boolean.parseBoolean(unit.bInside.text())
       siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
       siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
-      siteUnit.isDriveup = false
+      siteUnit.isDriveup = !siteUnit.isUpper && !siteUnit.isInterior
       siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
       siteUnit.isAvailable = true
       siteUnit.isSecure = false
