@@ -13,10 +13,17 @@
 
     var directionsService;
     var storageSize = [];
+    var searchSize;
+    var unitId = ${params.id};
+
+    var priceDriveup = ${params.priceDriveup ? "true" : "false"};
+    var priceInterior = ${params.priceInterior ? "true" : "false"};
+    var priceUpper = ${params.priceUpper ? "true" : "false"};
+    var priceTempControlled = ${params.priceTempControlled ? "true" : "false"};
 
     <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
-    // searchSize = ${params.searchSize}
     <g:if test="${params.searchSize}">
+      searchSize = ${params.searchSize};
       var sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
 
@@ -26,12 +33,73 @@
       }
     }
 
-    var keypadImg = ${site.isKeypad} ? '<img src="${createLinkTo(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
-    var cameraImg = ${site.isCamera} ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
-    var gateImg   = ${site.isGate} ? '<img src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
-    var alarmImg  = ${site.isUnitAlarmed} ? '<img src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-    var truckImg  = ${site.isUnitAlarmed} ? '<img src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>' : '<span style="width:20px; margin: 1px;"></span>';
+    <g:if test="${site.isKeypad}">
+      var keypadImg = '<img src="${createLinkTo(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>';
+    </g:if>
+    <g:else >
+      var keypadImg = '<span style="width:20px; margin:1px;"></span>';
+    </g:else>
+    <g:if test="${site.isCamera}">
+      var cameraImg = '<img src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>';
+    </g:if>
+    <g:else>
+      var cameraImg = '<span style="width:20px; margin: 1px;"></span>';
+    </g:else>
+    <g:if test="${site.isGate}">
+      var gateImg   = '<img src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>';
+    </g:if>
+    <g:else>
+      var gateImg   =  '<span style="width:20px; margin: 1px;"></span>';
+    </g:else>
+    <g:if test="${site.isUnitAlarmed}">
+      var alarmImg  = '<img src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>';
+    </g:if>
+    <g:else>
+      var alarmImg  = '<span style="width:20px; margin: 1px;"></span>';
+    </g:else>
+    <g:if test="${site.freeTruck}">
+      var truckImg  = '<img src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+    </g:if>
+    <g:else>
+      var truckImg  = '<span style="width:20px; margin: 1px;"></span>';
+    </g:else>
 
+    function buildTable() {
+      new Ajax.Request("${createLink(controller:'storageSite', action:'detailUnits')}",
+      {
+        method:'get',
+        parameters: {searchSize: searchSize, id: unitId},
+        onSuccess:function(transport) {
+          var tableBody = "<table>"
+          var units = transport.responseJSON.units;
+          var rowCount = 0;
+          if (units) {
+            if (units.driveup) {
+              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td><td class=\"price_text\"><span class=\"price_text\">$" + units.driveup.price + "</span></td>";
+              tableBody += "</tr>";
+            }
+            if (units.interior) {
+              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td><td class=\"price_text\"><span class=\"price_text\">$" + units.interior.price + "</span></td>";
+              tableBody += "</tr>";
+            }
+            if (units.upper) {
+              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td><td class=\"price_text\"><span class=\"price_text\">$" + units.upper.price + "</span></td>";
+              tableBody += "</tr>";
+            }
+            if (units.tempcontrolled) {
+              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.tempcontrolled.id + "\"" + (priceTempControlled ? " checked=\"true\"" : "") + "/> A/C</td><td class=\"price_text\"><span class=\"price_text\">$" + units.tempcontrolled.price + "</span></td>";
+              tableBody += "</tr>";
+            }
+          }
+          tableBody += "</table>"
+          $('price_table').update(tableBody);
+        }
+      });
+    }
     function createMap() {
       directionsService = new google.maps.DirectionsService();
     }
@@ -41,10 +109,21 @@
         $('sizeHelp').setStyle({ top: this.offsetTop - 10 + "px", left: this.offsetLeft + this.width + 10 + "px" });
         Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
       });
-
     }
 
-    FastInit.addOnLoad(setupSize, setupHelp);
+    function sizeChange() {
+      $('unitsize').observe('change', function(event) {
+        searchSize = $F('unitsize');
+        buildTable();
+      })
+    }
+  Event.observe(window, 'load', function() {
+    setupSize();
+    buildTable();
+    setupHelp();
+    sizeChange();
+  });
+
 //]]>
   </script>
 
@@ -83,13 +162,16 @@
           <!--
             get the default image for the site here
           -->
-          <g:if test="${params.searchSize}">
-            <div>
-              <div class="section_header">Available sizes:  (currently <span id="sizeDescription"></span>)</div>
-              <g:select name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
-              <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
-            </div>
-          </g:if>
+          <div>
+            <div class="section_header">Available sizes:  (currently <span id="sizeDescription">undefined</span>)</div>
+            <g:if test="${params.searchSize}">
+              <g:select id="unitsize" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
+            </g:if>
+            <g:else>
+              <g:select id="unitsize" name="unitsize" from="${sizeList}" optionValue="description" value="1" optionKey="id" />
+            </g:else>
+            <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
+          </div>
           <div style="padding: 10px 0px;" class="section_header">
             Site Features:
           </div>
@@ -118,6 +200,7 @@
               <img src="${createLinkTo(dir:'images', file:'icon-alarm32.gif')}" alt="Alarmed"/> Unit Alarmed
             </div>
           </g:if>
+          <div style="height:10px;"></div>
           <div class="other_details header_text_hi">
             Special Offers:
           </div>
@@ -154,6 +237,8 @@
           <div class="price_options">
             <span class="header_text_hi">Options</span>
             <span class="header_text_hi right">Price</span>
+          </div>
+          <div id="price_table">
           </div>
         </div>
         <div style="clear: both;"/>

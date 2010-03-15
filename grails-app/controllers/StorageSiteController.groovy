@@ -6,7 +6,9 @@ class StorageSiteController {
 
     def site = StorageSite.get(params.id)
 
-    def sizeList = site.units.collect{ it.unitsize }.unique().sort()
+    def sizeList = site.units.collect{ it.unitsize }.unique()
+    sizeList.add(StorageSize.get(1))
+    sizeList.sort{ it.width * it.length }
 
     [ sizeList: sizeList, site : site, title: site.title ]
   }
@@ -15,10 +17,8 @@ class StorageSiteController {
 
     def site = StorageSite.get(params.id)
     
-    def criteria = StorageUnit.createCriteria()
-
     if (!params.searchSize) {
-      render(status: 200, contentType: "application/json", text: "{ units: [] }")
+      render(status: 200, contentType: "application/json", text: "{ \"units\": null }")
       return
     }
 
@@ -28,6 +28,6 @@ class StorageSiteController {
     def driveupResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isDriveup }.min{ it.price } as StorageUnit[]
     def upperResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isUpper }.min{ it.price } as StorageUnit[]
     def tempcontrolledResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isTempControlled }.min{ it.price } as StorageUnit[]
-    render(status: 200, contentType: "application/json", text: "{ units: { interior: ${intResult as JSON}, driveup: ${driveupResult as JSON}, upper: ${upperResult as JSON}, tempcontrolled: ${tempcontrolledResult as JSON} } }")
+    render(status: 200, contentType: "application/json", text: "{ \"units\": { \"interior\": ${intResult as JSON}, \"driveup\": ${driveupResult as JSON}, \"upper\": ${upperResult as JSON}, \"tempcontrolled\": ${tempcontrolledResult as JSON} } }")
   }
 }

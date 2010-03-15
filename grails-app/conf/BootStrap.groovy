@@ -53,6 +53,7 @@ class BootStrap {
        offer5.addToSites(site7)
        offer6.addToSites(site8)
 
+       def sizeUndefined = new StorageSize( description:'No size chosen', width: 0, length: 0).save();
        def size5x5 = new StorageSize( description:'5 x 5', width: 5, length: 5).save();
        def size5x10 = new StorageSize( description:'5 x 10', width: 5, length: 10).save();
        def size7x10 = new StorageSize( description:'7 x 10', width: 7, length: 10).save();

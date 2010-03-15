@@ -179,11 +179,13 @@ class SiteLinkController {
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
       siteUnit.price = new BigDecimal(unit.dcStdRate.text())
-      siteUnit.isUpper = (Integer.parseInt(unit.iFloor.text()) > 1)
-      siteUnit.isInterior = Boolean.parseBoolean(unit.bInside.text())
+      def floor = Integer.parseInt(unit.iFloor.text())
+      def typeName = unit.sTypeName.text()
+      siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
+      siteUnit.isInterior = Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/
       siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
       siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
-      siteUnit.isDriveup = !siteUnit.isUpper && !siteUnit.isInterior
+      siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
       siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
       siteUnit.isAvailable = true
       siteUnit.isSecure = false

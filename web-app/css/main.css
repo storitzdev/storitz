@@ -284,7 +284,14 @@ Added styles
     width: 100%;
 }
 
-#stresults_div td, #stresults_div th {
+#price_table table {
+    font-size: 12px;
+    color: #154A99;
+    font-weight: bold;
+    width: 666px;
+}
+
+#stresults_div td, #stresults_div th, #price_table td, #price_table th {
 	padding: 0.5em;
 	border: 0px solid #CCC;
 	/*white-space: nowrap;
@@ -465,5 +472,13 @@ Added styles
     background-repeat: no-repeat;
     width: 666px;
     height: 30px;
+}
+
+.price_table {
+    width: 666px;
+}
+
+.price_text {
+    padding-left: 250px;
 }
 
