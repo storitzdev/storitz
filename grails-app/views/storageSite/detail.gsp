@@ -117,11 +117,44 @@
         buildTable();
       })
     }
+
+    function directionTab() {
+      $('direction_button').observe('click', function(event) {
+        $('photo_button').removeClassName('tab_button');
+        $('photo_button').removeClassName('button_text_hi');
+        $('photo_button').addClassName('tab_spacer');
+        $('photo_button').addClassName('button_text');
+        $('direction_button').removeClassName('tab_spacer');
+        $('direction_button').removeClassName('button_text');
+        $('direction_button').addClassName('tab_button');
+        $('direction_button').addClassName('button_text_hi');
+        $('photos').hide();
+        $('directions').show();
+      })
+    }
+
+    function photoTab() {
+      $('photo_button').observe('click', function(event) {
+        $('direction_button').removeClassName('tab_button');
+        $('direction_button').removeClassName('button_text_hi');
+        $('direction_button').addClassName('tab_spacer');
+        $('direction_button').addClassName('button_text');
+        $('photo_button').removeClassName('tab_spacer');
+        $('photo_button').removeClassName('button_text');
+        $('photo_button').addClassName('tab_button');
+        $('photo_button').addClassName('button_text_hi');
+        $('directions').hide();
+        $('photos').show();
+      })
+    }
+
   Event.observe(window, 'load', function() {
     setupSize();
     buildTable();
     setupHelp();
     sizeChange();
+    directionTab();
+    photoTab();
   });
 
 //]]>
@@ -224,12 +257,18 @@
             <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=color:blue|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
           </div>
           <div id="detail_tabs">
-            <div class="left tab_button button_text_hi">Photos</div><div class="right tab_spacer button_text">Get Directions</div>
+            <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
             <div style="clear: both;"></div>
             <div id="photos">
+              Photos
             </div>
-            <div id="directions" style="visibility:hidden">
-              <input type="text" name="srcAddr" id="srcAddr"/><input type="button" name="getDirections" value="Get Directions"/>
+            <div id="directions" style="display:none;">
+              <div>
+                Start Address: <input type="text" name="srcAddr" id="srcAddr"/>
+              </div>
+              <div>
+                <input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
+              </div>
               <div id="dirPanel"></div>
             </div>
           </div>
