@@ -3,7 +3,6 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
     <g:render template="/header" />
 
     <script type="text/javascript">
@@ -12,9 +11,11 @@
     google.load("scriptaculous", "1.8.3");
 
     var directionsService;
+    var directionsDisplay;
     var storageSize = [];
     var searchSize;
     var unitId = ${params.id};
+    var destLatLng;
 
     var priceDriveup = ${params.priceDriveup ? "true" : "false"};
     var priceInterior = ${params.priceInterior ? "true" : "false"};
@@ -101,13 +102,32 @@
       });
     }
     function createMap() {
+      destLatLng = new google.maps.LatLng(${site.lat}, ${site.lng});
       directionsService = new google.maps.DirectionsService();
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      directionsDisplay.setPanel($('dirPanel'));
     }
 
     function setupHelp() {
       $('sizeInfo').observe('click', function(event) {
         $('sizeHelp').setStyle({ top: this.offsetTop - 10 + "px", left: this.offsetLeft + this.width + 10 + "px" });
         Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
+      });
+    }
+
+    function getDirections() {
+      $('get_directions').observe('click', function(event) {
+        var request = {
+                origin:$F('srcAddr'),
+                destination:destLatLng,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            };
+            directionsService.route(request, function(response, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+              }
+            });
+
       });
     }
 
@@ -149,12 +169,14 @@
     }
 
   Event.observe(window, 'load', function() {
+    createMap();
     setupSize();
     buildTable();
     setupHelp();
     sizeChange();
     directionTab();
     photoTab();
+    getDirections();
   });
 
 //]]>

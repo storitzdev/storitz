@@ -392,6 +392,11 @@ Added styles
     margin: 10px 5px 5px 5px;
 }
 
+#directions {
+    padding: 0.5em;
+    width: 260px;
+}
+
 .tab_spacer {
     width: 121px;
     height: 24px;
