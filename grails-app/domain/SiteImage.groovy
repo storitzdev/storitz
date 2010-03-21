@@ -11,4 +11,5 @@ class SiteImage {
   Integer imgOrder
   Boolean isCover
   String fileLocation
+  String basename
 }

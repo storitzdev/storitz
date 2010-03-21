@@ -17,6 +17,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
           <root url="file://$MODULE_DIR$/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/image-tools-1.0.4/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <building>
@@ -2782,6 +2783,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/acegi-0.5.2/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/acegi-0.5.2/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/acegi-0.5.2/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/image-tools-1.0.4/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/tomcat-1.2.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/ws-client-1.0/grails-app/services" isTestSource="false" />
     </content>
@@ -2817,11 +2819,13 @@
           <root url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/acegi-0.5.2/lib" />
           <root url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/ws-client-1.0/lib" />
           <root url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/tomcat-1.2.1/lib" />
+          <root url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/image-tools-1.0.4/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/../../.grails/1.1.1/projects/storagetech/plugins/hibernate-1.1.1/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/acegi-0.5.2/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/image-tools-1.0.4/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/tomcat-1.2.1/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/../../.grails/1.2.1/projects/storagetech/plugins/ws-client-1.0/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />

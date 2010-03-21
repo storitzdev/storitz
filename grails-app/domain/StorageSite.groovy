@@ -2,10 +2,10 @@
 class StorageSite {
 
     static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact ]
-    static fetchMode = [specialOffers:'eager', units:'eager']
+    static fetchMode = []
 
     static constraints = {
-      description(nullable:true)
+      description(widget:'textarea', nullable:true)
       logoUrl(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)
