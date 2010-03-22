@@ -17,7 +17,7 @@ class STMapController {
           between("lat", new java.math.BigDecimal(params.swLat), new java.math.BigDecimal(params.neLat))
           between("lng", new java.math.BigDecimal(params.swLng), new java.math.BigDecimal(params.neLng))
         }
-        if (params.searchSize) {
+        if (params.searchSize && params.int('searchSize') != 1) {
           fetchMode('units', FM.EAGER)
           units {
             unitsize {

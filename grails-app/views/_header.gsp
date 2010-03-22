@@ -14,6 +14,7 @@
   <g:javascript src="fastinit.js" />
   <g:javascript src="tablekit.js" />
   <g:javascript src="calendarview.js" />
+  <g:javascript src="tooltip.js" />
   <link href="${createLinkTo(dir:'css', file:'main.css')}" media="screen" rel="stylesheet" type="text/css" />
   <link href="${createLinkTo(dir:'css', file:'tablekit.css')}" media="screen" rel="stylesheet" type="text/css" />
   <link href="${createLinkTo(dir:'css', file:'calendarview.css')}" media="screen" rel="stylesheet" type="text/css" />

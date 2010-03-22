@@ -14,6 +14,8 @@ class StorageSite {
       sourceId(nullable:true)
       sourceLoc(nullable:true)
       address2(nullable:true)
+      adminFee(nullable:true)
+      lockFee(nullable:true)
     }
   
     String title
@@ -42,6 +44,10 @@ class StorageSite {
     Boolean isKeypad
     Boolean isCamera
     Boolean isUnitAlarmed
+
+  // Fees
+    BigDecimal adminFee
+    BigDecimal lockFee
 
   def users() {
       return users.collect{it.user}

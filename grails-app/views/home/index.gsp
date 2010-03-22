@@ -19,6 +19,7 @@
         var infoWindow;
         var features = [];
         var storageSize = [];
+        var tooltips = new Hash();
         var searchAddr;
         var searchSize;
         var searchSizeDesc;
@@ -97,6 +98,12 @@
 
           var bounds = map.getBounds();
           if (!bounds) return;
+
+          tooltips.each(function(t) {
+            t.value.destroy();
+            tooltips.unset(t.name);
+          });
+
           new Ajax.Request("${createLink(controller:'STMap', action:'jsonp')}",
           {
               method:'get',
@@ -128,11 +135,27 @@
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
                     var priceTempControlled = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isTempControlled) ? n.price : 999999; });
 
-                    var keypadImg = s.isKeypad ? '<img src="${createLinkTo(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
-                    var cameraImg = s.isCamera ? '<img src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var gateImg   = s.isGate ? '<img src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var alarmImg  = s.isUnitAlarmed ? '<img src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var truckImg  = s.freeTruck ? '<img src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" src="${createLinkTo(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
+                    var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var gateImg   = s.isGate ? '<img id="gate' + s.id +'" src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var truckImg  = s.freeTruck ? '<img id="truck' + s.id +'" src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>' : '<span style="width:20px; margin: 1px;"></span>';
+
+                    if (s.isKeypad) {
+                      tooltips.set("keypad" + s.id, "tooltip_keypad");
+                    }
+                    if (s.isCamera) {
+                      tooltips.set("camera" + s.id, "tooltip_camera");
+                    }
+                    if (s.isGate) {
+                      tooltips.set("gate" + s.id, "tooltip_gate");
+                    }
+                    if (s.isUnitAlarmed) {
+                      tooltips.set("alarm" + s.id, "tooltip_alarm");
+                    }
+                    if (s.freeTruck) {
+                      tooltips.set("truck" + s.id, "tooltip_truck");
+                    }
 
                     s.marker = new google.maps.Marker({
                       map: map,
@@ -155,6 +178,9 @@
                 $('stresults_div').update(tableContents);
                 if (rows > 0) {
                   new TableKit('stresults' + randId, { editable:false, stripe:true });
+                  tooltips.each(function(pair) {
+                     tooltips.set(pair.key, new Tooltip(pair.key, pair.value));
+                  });
                 }
               },
               onFailure:function(transport) {
@@ -282,7 +308,7 @@
                   </div>
                 </div>
               </div>
-              <div style="float: left; margin-left: 20px;">
+              <div style="float: left;">
                 <div>Start Date:</div>
                 <input type="text" id="date" style="width: 105px;" />
               </div>
@@ -314,6 +340,21 @@
       <div style="height:30px;"></div>
       <g:render template="/footer" />
       <g:render template="/size_popup" />
+      <div id="tooltip_keypad" class="tooltip">
+      Keypad Entry
+      </div>
+      <div id="tooltip_camera" class="tooltip">
+      Video Camera Security
+      </div>
+      <div id="tooltip_gate" class="tooltip">
+      Security Gate
+      </div>
+      <div id="tooltip_alarm" class="tooltip">
+      Unit level alarms
+      </div>
+      <div id="tooltip_truck" class="tooltip">
+      Free Move-In Truck Available
+      </div>
       <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
     </body>
 </html>

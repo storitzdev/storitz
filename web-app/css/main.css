@@ -487,3 +487,12 @@ Added styles
     padding-left: 250px;
 }
 
+.tooltip {
+    width: auto;
+      padding: 3px 7px 4px 6px;
+      border: 1px solid #336;
+      background-color: #f7f7ee;
+      font: normal 0.9em/1.2em arial, helvetica, sans-serif;
+      text-align: left;
+      color: #000;
+}
