@@ -496,3 +496,11 @@ Added styles
       text-align: left;
       color: #000;
 }
+
+#price_total {
+    font: 15px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #154A99;
+    line-height: 34px;
+    padding-right: 20px;
+}

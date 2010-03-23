@@ -13,8 +13,10 @@
     var directionsService;
     var directionsDisplay;
     var storageSize = [];
+    var prices = [];
     var searchSize;
     var unitId = ${params.id};
+    var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
     var destLatLng;
 
     var priceDriveup = ${params.priceDriveup ? "true" : "false"};
@@ -79,21 +81,37 @@
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td><td class=\"price_text\"><span class=\"price_text\">$" + units.driveup.price + "</span></td>";
               tableBody += "</tr>";
+              prices[units.driveup.id] = units.driveup.price;
+              if (priceDriveup) {
+                $('price_total').update("Price: $" + (additionalFees + units.driveup.price));
+              }
             }
             if (units.interior) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td><td class=\"price_text\"><span class=\"price_text\">$" + units.interior.price + "</span></td>";
               tableBody += "</tr>";
+              prices[units.interior.id] = units.interior.price;
+              if (priceInterior) {
+                $('price_total').update("Price: $" + (additionalFees + units.interior.price));
+              }
             }
             if (units.upper) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td><td class=\"price_text\"><span class=\"price_text\">$" + units.upper.price + "</span></td>";
               tableBody += "</tr>";
+              prices[units.upper.id] = units.upper.price;
+              if (priceUpper) {
+                $('price_total').update("Price: $" + (additionalFees + units.upper.price));
+              }
             }
             if (units.tempcontrolled) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.tempcontrolled.id + "\"" + (priceTempControlled ? " checked=\"true\"" : "") + "/> A/C</td><td class=\"price_text\"><span class=\"price_text\">$" + units.tempcontrolled.price + "</span></td>";
               tableBody += "</tr>";
+              prices[units.tempcontrolled.id] = units.tempcontrolled.price;
+              if (priceTempControlled) {
+                $('price_total').update("Price: $" + (additionalFees + units.tempcontrolled.price));
+              }
             }
           }
           tableBody += "</table>"
@@ -168,6 +186,14 @@
       })
     }
 
+    function unitTypeClick() {
+      $('price_table').observe('click', function(event) {
+        var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
+        $('price_total').update("Price: $" + (prices[unitId] + additionalFees));
+      });
+    }
+
+
   Event.observe(window, 'load', function() {
     createMap();
     setupSize();
@@ -177,6 +203,7 @@
     directionTab();
     photoTab();
     getDirections();
+    unitTypeClick();
   });
 
 //]]>
@@ -300,6 +327,10 @@
             <span class="header_text_hi right">Price</span>
           </div>
           <div id="price_table">
+          </div>
+          <div style="height:10px;"></div>
+          <div style="float: right;">
+            <span id="price_total"></span><img src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
           </div>
         </div>
         <div style="clear: both;"/>
