@@ -1,20 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <g:set var="title" value="Create Storage Site"/>
+  <g:render template="/header"/>
 
+  <script type="text/javascript">
+    //<![CDATA[
+      google.load("jquery", "1.4.2");
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'storageSite.label', default: 'StorageSite')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
-    </head>
-    <body>
+      jQuery.noConflict();
+
+    //]]>
+  </script>
+  <script src="http://www.fyneworks.com/jquery/multiple-file-upload/jquery.blockUI.js" type="text/javascript"></script>
+  <script src="http://jquery-multifile-plugin.googlecode.com/svn/trunk/jquery.MultiFile.js" type="text/javascript"></script>
+  <script src="http://www.fyneworks.com/jquery/multiple-file-upload/jquery.MetaData.js" type="text/javascript"></script>
+
+</head>
+<body>
+<g:render template="/topnav"/>
+<div id="stcontent">
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+          <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
+          <span class="menuButton"><g:link class="list" action="list">List Sites</g:link></span>
+          <span class="menuButton"><g:link class="create" action="create">Create new Site</g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+            <h1>Edit Site</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -23,13 +37,22 @@
                 <g:renderErrors bean="${storageSiteInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" >
+            <g:uploadForm method="post" >
                 <g:hiddenField name="id" value="${storageSiteInstance?.id}" />
                 <g:hiddenField name="version" value="${storageSiteInstance?.version}" />
                 <div class="dialog">
                     <table>
                         <tbody>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="title"><g:message code="storageSite.title.label" default="Title" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'title', 'errors')}">
+                                    <g:textField name="title" value="${storageSiteInstance?.title}" />
+                                </td>
+                            </tr>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="description"><g:message code="storageSite.description.label" default="Description" /></label>
@@ -41,19 +64,55 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="logoUrl"><g:message code="storageSite.logoUrl.label" default="Logo Url" /></label>
+                                  <label for="address"><g:message code="storageSite.address.label" default="Address" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'logoUrl', 'errors')}">
-                                    <g:textField name="logoUrl" value="${storageSiteInstance?.logoUrl}" />
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'address', 'errors')}">
+                                    <g:textField name="address" value="${storageSiteInstance?.address}" />
                                 </td>
                             </tr>
-                        
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="address2"><g:message code="storageSite.address2.label" default="Address2" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'address2', 'errors')}">
+                                    <g:textField name="address2" value="${storageSiteInstance?.address2}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="city"><g:message code="storageSite.city.label" default="City" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'city', 'errors')}">
+                                    <g:textField name="city" value="${storageSiteInstance?.city}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="state"><g:message code="storageSite.state.label" default="State" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'state', 'errors')}">
+                                    <g:textField name="state" value="${storageSiteInstance?.state}" />
+                                </td>
+                            </tr>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="zipcode"><g:message code="storageSite.zipcode.label" default="Zipcode" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'zipcode', 'errors')}">
                                     <g:textField name="zipcode" value="${storageSiteInstance?.zipcode}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="logoUrl"><g:message code="storageSite.logoUrl.label" default="Logo" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'logoUrl', 'errors')}">
+                                    <input type="file" name="logoUrl" value="${storageSiteInstance?.logoUrl}" />
                                 </td>
                             </tr>
                         
@@ -67,75 +126,28 @@
                             </tr>
                         
                             <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="url"><g:message code="storageSite.url.label" default="Url" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'url', 'errors')}">
-                                    <g:textField name="url" value="${storageSiteInstance?.url}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="source"><g:message code="storageSite.source.label" default="Source" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'source', 'errors')}">
-                                    <g:textField name="source" value="${storageSiteInstance?.source}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="sourceId"><g:message code="storageSite.sourceId.label" default="Source Id" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'sourceId', 'errors')}">
-                                    <g:textField name="sourceId" value="${storageSiteInstance?.sourceId}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="sourceLoc"><g:message code="storageSite.sourceLoc.label" default="Source Loc" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'sourceLoc', 'errors')}">
-                                    <g:textField name="sourceLoc" value="${storageSiteInstance?.sourceLoc}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="address2"><g:message code="storageSite.address2.label" default="Address2" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'address2', 'errors')}">
-                                    <g:textField name="address2" value="${storageSiteInstance?.address2}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="users"><g:message code="storageSite.users.label" default="Users" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'users', 'errors')}">
-                                    
-<ul>
-<g:each in="${storageSiteInstance?.users?}" var="u">
-    <li><g:link controller="siteUser" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="siteUser" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteUser.label', default: 'SiteUser')])}</g:link>
+                              <td colspan="2" valign="top"><h3>Attributes</h3></td>
 
-                                </td>
                             </tr>
-                        
+
+                          <tr class="prop">
+                              <td valign="top" class="name">
+                                <label for="isGate"><g:message code="storageSite.isGate.label" default="Gated Site Entry" /></label>
+                              </td>
+                              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isGate', 'errors')}">
+                                  <g:checkBox name="isGate" value="${storageSiteInstance?.isGate}" />
+                              </td>
+                          </tr>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="isGate"><g:message code="storageSite.isGate.label" default="Is Gate" /></label>
+                                  <label for="freeTruck"><g:message code="storageSite.freeTruck.label" default="Free Moving Truck" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isGate', 'errors')}">
-                                    <g:checkBox name="isGate" value="${storageSiteInstance?.isGate}" />
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'freeTruck', 'errors')}">
+                                    <g:checkBox name="freeTruck" value="${storageSiteInstance?.freeTruck}" />
                                 </td>
                             </tr>
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="boxesAvailable"><g:message code="storageSite.boxesAvailable.label" default="Boxes Available" /></label>
@@ -144,31 +156,56 @@
                                     <g:checkBox name="boxesAvailable" value="${storageSiteInstance?.boxesAvailable}" />
                                 </td>
                             </tr>
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="state"><g:message code="storageSite.state.label" default="State" /></label>
+                                  <label for="requiresInsurance"><g:message code="storageSite.requiresInsurance.label" default="Requires Insurance" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'state', 'errors')}">
-                                    <g:textField name="state" value="${storageSiteInstance?.state}" />
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'requiresInsurance', 'errors')}">
+                                    <g:checkBox name="requiresInsurance" value="${storageSiteInstance?.requiresInsurance}" />
                                 </td>
                             </tr>
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="lng"><g:message code="storageSite.lng.label" default="Lng" /></label>
+                                  <label for="isKeypad"><g:message code="storageSite.isKeypad.label" default="Keypad Entry" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'lng', 'errors')}">
-                                    <g:textField name="lng" value="${fieldValue(bean: storageSiteInstance, field: 'lng')}" />
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isKeypad', 'errors')}">
+                                    <g:checkBox name="isKeypad" value="${storageSiteInstance?.isKeypad}" />
                                 </td>
                             </tr>
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="freeTruck"><g:message code="storageSite.freeTruck.label" default="Free Truck" /></label>
+                                  <label for="isUnitAlarmed"><g:message code="storageSite.isUnitAlarmed.label" default="Unit Alarmed" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'freeTruck', 'errors')}">
-                                    <g:checkBox name="freeTruck" value="${storageSiteInstance?.freeTruck}" />
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isUnitAlarmed', 'errors')}">
+                                    <g:checkBox name="isUnitAlarmed" value="${storageSiteInstance?.isUnitAlarmed}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="isCamera"><g:message code="storageSite.isCamera.label" default="Video Security" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isCamera', 'errors')}">
+                                    <g:checkBox name="isCamera" value="${storageSiteInstance?.isCamera}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="users"><g:message code="storageSite.users.label" default="Users" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'users', 'errors')}">
+                                    
+                                  <ul>
+                                  <g:each in="${storageSiteInstance?.users?}" var="u">
+                                      <li><g:link controller="siteUser" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
+                                  </g:each>
+                                  </ul>
+                                  <g:link controller="siteUser" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteUser.label', default: 'SiteUser')])}</g:link>
+
                                 </td>
                             </tr>
                         
@@ -178,58 +215,13 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'contacts', 'errors')}">
                                     
-<ul>
-<g:each in="${storageSiteInstance?.contacts?}" var="c">
-    <li><g:link controller="siteContact" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="siteContact" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteContact.label', default: 'SiteContact')])}</g:link>
+                                  <ul>
+                                  <g:each in="${storageSiteInstance?.contacts?}" var="c">
+                                      <li><g:link controller="siteContact" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+                                  </g:each>
+                                  </ul>
+                                  <g:link controller="siteContact" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteContact.label', default: 'SiteContact')])}</g:link>
 
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="city"><g:message code="storageSite.city.label" default="City" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'city', 'errors')}">
-                                    <g:textField name="city" value="${storageSiteInstance?.city}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="title"><g:message code="storageSite.title.label" default="Title" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'title', 'errors')}">
-                                    <g:textField name="title" value="${storageSiteInstance?.title}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="requiresInsurance"><g:message code="storageSite.requiresInsurance.label" default="Requires Insurance" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'requiresInsurance', 'errors')}">
-                                    <g:checkBox name="requiresInsurance" value="${storageSiteInstance?.requiresInsurance}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="isKeypad"><g:message code="storageSite.isKeypad.label" default="Is Keypad" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isKeypad', 'errors')}">
-                                    <g:checkBox name="isKeypad" value="${storageSiteInstance?.isKeypad}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="lat"><g:message code="storageSite.lat.label" default="Lat" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'lat', 'errors')}">
-                                    <g:textField name="lat" value="${fieldValue(bean: storageSiteInstance, field: 'lat')}" />
                                 </td>
                             </tr>
                         
@@ -244,52 +236,16 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="isUnitAlarmed"><g:message code="storageSite.isUnitAlarmed.label" default="Is Unit Alarmed" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isUnitAlarmed', 'errors')}">
-                                    <g:checkBox name="isUnitAlarmed" value="${storageSiteInstance?.isUnitAlarmed}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="units"><g:message code="storageSite.units.label" default="Units" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'units', 'errors')}">
-                                    <g:select name="units" from="${StorageUnit.list()}" multiple="yes" optionKey="id" size="5" value="${storageSiteInstance?.units}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="address"><g:message code="storageSite.address.label" default="Address" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'address', 'errors')}">
-                                    <g:textField name="address" value="${storageSiteInstance?.address}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="isCamera"><g:message code="storageSite.isCamera.label" default="Is Camera" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isCamera', 'errors')}">
-                                    <g:checkBox name="isCamera" value="${storageSiteInstance?.isCamera}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="images"><g:message code="storageSite.images.label" default="Images" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'images', 'errors')}">
                                     
-<ul>
-<g:each in="${storageSiteInstance?.images?}" var="i">
-    <li><g:link controller="siteImage" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="siteImage" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteImage.label', default: 'SiteImage')])}</g:link>
+                                    <ul>
+                                    <g:each in="${storageSiteInstance?.images?}" var="i">
+                                        <li><g:link controller="siteImage" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
+                                    </g:each>
+                                    </ul>
+                                    <g:link controller="siteImage" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteImage.label', default: 'SiteImage')])}</g:link>
 
                                 </td>
                             </tr>
@@ -301,7 +257,8 @@
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </div>
-            </g:form>
+            </g:uploadForm>
         </div>
+      </div>
     </body>
 </html>

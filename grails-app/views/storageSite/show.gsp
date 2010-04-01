@@ -113,9 +113,33 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSite.isGate.label" default="Is Gate"/></td>
+          <td valign="top" class="name"><g:message code="storageSite.contacts.label" default="Contacts"/></td>
 
-          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isGate}"/></td>
+          <td valign="top" style="text-align: left;" class="value">
+            <ul>
+              <g:each in="${storageSiteInstance.contacts}" var="c">
+                <li><g:link controller="siteContact" action="show" id="${c.id}">${c.name} - ${c.email}</g:link></li>
+              </g:each>
+            </ul>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.specialOffers.label" default="Special Offers"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <ul>
+              <g:each in="${storageSiteInstance.specialOffers}" var="s">
+                <li><g:link controller="specialOffer" action="show" id="${s.id}">${s?.description}</g:link></li>
+              </g:each>
+            </ul>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td colspan="2" valign="top"><h3>Attributes</h3></td>
 
         </tr>
 
@@ -134,19 +158,6 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSite.contacts.label" default="Contacts"/></td>
-
-          <td valign="top" style="text-align: left;" class="value">
-            <ul>
-              <g:each in="${storageSiteInstance.contacts}" var="c">
-                <li><g:link controller="siteContact" action="show" id="${c.id}">${c.name} - ${c.email}</g:link></li>
-              </g:each>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.requiresInsurance.label" default="Requires Insurance"/></td>
 
           <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.requiresInsurance}"/></td>
@@ -154,22 +165,16 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSite.isKeypad.label" default="Is Keypad"/></td>
+          <td valign="top" class="name"><g:message code="storageSite.isGate.label" default="Is Gate"/></td>
 
-          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isKeypad}"/></td>
+          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isGate}"/></td>
 
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSite.specialOffers.label" default="Special Offers"/></td>
+          <td valign="top" class="name"><g:message code="storageSite.isKeypad.label" default="Is Keypad"/></td>
 
-          <td valign="top" style="text-align: left;" class="value">
-            <ul>
-              <g:each in="${storageSiteInstance.specialOffers}" var="s">
-                <li><g:link controller="specialOffer" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
-              </g:each>
-            </ul>
-          </td>
+          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isKeypad}"/></td>
 
         </tr>
 
@@ -187,6 +192,23 @@
 
         </tr>
 
+        <tr class="prop">
+          <td colspan="2" valign="top"><h3>Images</h3></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">Images</td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <ul>
+              <g:each in="${storageSiteInstance.images}" var="i">
+                <li><img src="${resource(dir:'images', file: i.thumbnail)}" alt="image${i.id}"/></li>
+              </g:each>
+            </ul>
+          </td>
+
+        </tr>
         </tbody>
       </table>
     </div>

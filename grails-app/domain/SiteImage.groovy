@@ -12,4 +12,8 @@ class SiteImage {
   Boolean isCover
   String fileLocation
   String basename
+
+  def thumbnail() {
+    return basename + "/thumb_" + fileLocation
+  }
 }
