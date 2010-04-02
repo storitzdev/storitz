@@ -16,6 +16,7 @@
     var prices = [];
     var searchSize;
     var unitId = ${params.id};
+    var rentalFormReady = false;
     var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
     var destLatLng;
 
@@ -190,6 +191,16 @@
       $('price_table').observe('click', function(event) {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
         $('price_total').update("Price: $" + (prices[unitId] + additionalFees));
+        rentalFormReady = true;
+        $('rentmeBtn').show();
+      });
+    }
+
+    function rentmeClick() {
+      $('rentme').observe('click', function(event) {
+        if (rentalFormReady) {
+          $('rentalForm').show();
+        }
       });
     }
 
@@ -204,6 +215,7 @@
     photoTab();
     getDirections();
     unitTypeClick();
+    rentmeClick();
   });
 
 //]]>
@@ -329,11 +341,14 @@
           <div id="price_table">
           </div>
           <div style="height:10px;"></div>
-          <div style="float: right;">
-            <span id="price_total"></span><img src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
+          <div id="rentmeBtn" style="float: right; display: none;">
+            <span id="price_total"></span><img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
           </div>
         </div>
         <div style="clear: both;"/>
+        <div id="rentalForm" style="display: none;">
+          Rental form...
+        </div>
       </div>
     </div>
     <div style="height:30px;"></div>

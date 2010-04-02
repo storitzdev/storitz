@@ -1,3 +1,4 @@
+import storagetech.constants.TruckType;
 
 class StorageSite {
 
@@ -16,6 +17,7 @@ class StorageSite {
       address2(nullable:true)
       adminFee(nullable:true)
       lockFee(nullable:true)
+      freeTruck(nullable:false)
     }
   
     String title
@@ -37,7 +39,7 @@ class StorageSite {
   // site offers
     Boolean requiresInsurance
     Boolean boxesAvailable
-    Boolean freeTruck
+    TruckType freeTruck
 
   // site security
     Boolean isGate

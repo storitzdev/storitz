@@ -139,7 +139,18 @@
                     var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var gateImg   = s.isGate ? '<img id="gate' + s.id +'" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var truckImg  = s.freeTruck ? '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>' : '<span style="width:20px; margin: 1px;"></span>';
+
+                    switch(s.freeTruck) {
+                      case "Free":
+                        var truckImg =  '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+                        break;
+                      case "Rental":
+                        var truckImg =  '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+                        break;
+                      default:
+                        var truckImg = '<span style="width:20px; margin: 1px;"></span>';
+                        break;
+                    }
 
                     if (s.isKeypad) {
                       tooltips.set("keypad" + s.id, "tooltip_keypad");
