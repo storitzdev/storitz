@@ -141,10 +141,10 @@
                     var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
 
                     switch(s.freeTruck) {
-                      case "Free":
+                      case "FREE":
                         var truckImg =  '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
                         break;
-                      case "Rental":
+                      case "RENTAL":
                         var truckImg =  '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
                         break;
                       default:
