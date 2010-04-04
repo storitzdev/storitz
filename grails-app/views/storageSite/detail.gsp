@@ -14,6 +14,7 @@
     var directionsDisplay;
     var storageSize = [];
     var prices = [];
+    var unitTypes = [];
     var searchSize;
     var unitId = ${params.id};
     var rentalFormReady = false;
@@ -77,14 +78,20 @@
           var tableBody = "<table>"
           var units = transport.responseJSON.units;
           var rowCount = 0;
+          $('priceDriveup').value = false;
+          $('priceUpper').value = false;
+          $('priceInterior').value = false;
+          $('priceTempControlled').value = false;
           if (units) {
             if (units.driveup) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td><td class=\"price_text\"><span class=\"price_text\">$" + units.driveup.price + "</span></td>";
               tableBody += "</tr>";
               prices[units.driveup.id] = units.driveup.price;
+              unitTypes[units.driveup.id] = 'priceDriveup';
               if (priceDriveup) {
                 $('price_total').update("Price: $" + (additionalFees + units.driveup.price));
+                $('priceDriveup').value = true;
               }
             }
             if (units.interior) {
@@ -92,8 +99,10 @@
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td><td class=\"price_text\"><span class=\"price_text\">$" + units.interior.price + "</span></td>";
               tableBody += "</tr>";
               prices[units.interior.id] = units.interior.price;
+              unitTypes[units.interior.id] = 'priceInterior';
               if (priceInterior) {
                 $('price_total').update("Price: $" + (additionalFees + units.interior.price));
+                $('priceInterior').value = true;
               }
             }
             if (units.upper) {
@@ -101,8 +110,10 @@
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td><td class=\"price_text\"><span class=\"price_text\">$" + units.upper.price + "</span></td>";
               tableBody += "</tr>";
               prices[units.upper.id] = units.upper.price;
+              unitTypes[units.upper.id] = 'priceUpper';
               if (priceUpper) {
                 $('price_total').update("Price: $" + (additionalFees + units.upper.price));
+                $('priceUpper').value = true;
               }
             }
             if (units.tempcontrolled) {
@@ -110,8 +121,10 @@
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.tempcontrolled.id + "\"" + (priceTempControlled ? " checked=\"true\"" : "") + "/> A/C</td><td class=\"price_text\"><span class=\"price_text\">$" + units.tempcontrolled.price + "</span></td>";
               tableBody += "</tr>";
               prices[units.tempcontrolled.id] = units.tempcontrolled.price;
+              unitTypes[units.tempcontrolled.id] = 'priceTempControlled';
               if (priceTempControlled) {
                 $('price_total').update("Price: $" + (additionalFees + units.tempcontrolled.price));
+                $('priceTempControlled').value = true;
               }
             }
           }
@@ -191,6 +204,16 @@
       $('price_table').observe('click', function(event) {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
         $('price_total').update("Price: $" + (prices[unitId] + additionalFees));
+        $('unitId').value = unitId;
+        priceUpper = false;
+        priceInterior = false;
+        priceDriveup = false;
+        priceTempControlled = false;
+        eval(unitTypes[unitId] + "= true;");
+        $('priceDriveup').value = priceDriveup;
+        $('priceUpper').value = priceUpper;
+        $('priceInterior').value = priceInterior;
+        $('priceTempControlled').value = priceTempControlled;
         rentalFormReady = true;
         $('rentmeBtn').show();
       });
@@ -199,6 +222,10 @@
     function rentmeClick() {
       $('rentme').observe('click', function(event) {
         if (rentalFormReady) {
+          $('step2').removeClassName('step_header_hi');
+          $('step2').addClassName('step_header');
+          $('step3').removeClassName('step_header');
+          $('step3').addClassName('step_header_hi');
           $('rentalForm').show();
         }
       });
@@ -347,7 +374,137 @@
         </div>
         <div style="clear: both;"/>
         <div id="rentalForm" style="display: none;">
-          Rental form...
+          <input type="hidden" id="priceDriveup" value="" />
+          <input type="hidden" id="priceInterior" value="" />
+          <input type="hidden" id="priceUpper" value="" />
+          <input type="hidden" id="priceTempControlled" value="" />
+          <input type="hidden" id="unitId" value="" />
+          <table>
+            <tbody>
+              <tr>
+                <th colspan="2">Primary Contact:</th>
+                <th colspan="2">Secondary Contact:</th>
+              </tr>
+              <tr>
+                <td valign="top" class="name">
+                  <label for="contactPrimary.firstName">First Name:</label>
+                </td>
+                <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.firstName', 'errors')}">
+                    <g:textField name="contactPrimary.firstName" value="${rentalTransaction?.contactPrimary?.firstName}" />
+                </td>
+                <td valign="top" class="name">
+                  <label for="contactSecondary.firstName">First Name:</label>
+                </td>
+                <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.firstName', 'errors')}">
+                    <g:textField name="contactSecondary.firstName" value="${rentalTransaction?.contactSecondary?.firstName}" />
+                </td>
+              </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.lastName">Last Name:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.lastName', 'errors')}">
+                  <g:textField name="contactPrimary.lastName" value="${rentalTransaction?.contactPrimary?.lastName}" />
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.lastName">Last Name:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.lastName', 'errors')}">
+                  <g:textField name="contactSecondary.lastName" value="${rentalTransaction?.contactSecondary?.lastName}" />
+              </td>
+            </tr>
+            <tr>
+              <th colspan="4">&nbsp;</th>
+            </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.streetNumber">Street Number:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetNumber', 'errors')}">
+                  <g:textField name="contactPrimary.streetNumber" value="${rentalTransaction?.contactPrimary?.streetNumber}" />
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.streetNumber">Street Number:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.streetNumber', 'errors')}">
+                  <g:textField name="contactSecondary.streetNumber" value="${rentalTransaction?.contactSecondary?.streetNumber}" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.streetNumber">Street Name:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.street', 'errors')}">
+                  <g:textField name="contactPrimary.street" value="${rentalTransaction?.contactPrimary?.street}" />
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.streetNumber">Street Name:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.street', 'errors')}">
+                  <g:textField name="contactSecondary.street" value="${rentalTransaction?.contactSecondary?.street}" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.streetNumber">Street Suffix:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetType', 'errors')}">
+                  <g:select name="contactPrimary.streetType" from="${storagetech.constants.StreetType.list()}" value="${rentalTransaction?.contactPrimary?.streetType}" optionValue="value"/>
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.streetNumber">Street Suffix:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.streetType', 'errors')}">
+                  <g:select name="contactSecondary.streetType" from="${storagetech.constants.StreetType.list()}" value="${rentalTransaction?.contactSecondary?.streetType}" optionValue="value"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.unit">Unit/Apt.:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.unit', 'errors')}">
+                  <g:textField name="contactPrimary.unit" value="${rentalTransaction?.contactPrimary?.unit}" />
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.unit">Unit/Apt.:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.unit', 'errors')}">
+                  <g:textField name="contactSecondary.unit" value="${rentalTransaction?.contactSecondary?.unit}" />
+              </td>
+            </tr>
+            <tr>
+              <th colspan="4">&nbsp;</th>
+            </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.city">City:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.city', 'errors')}">
+                  <g:textField name="contactPrimary.city" value="${rentalTransaction?.contactPrimary?.city}" />
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.city">City:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.city', 'errors')}">
+                  <g:textField name="contactSecondary.city" value="${rentalTransaction?.contactSecondary?.city}" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" class="name">
+                <label for="contactPrimary.state">State:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.state', 'errors')}">
+                <g:select name="contactPrimary.state" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactPrimary?.state}" optionValue="value"/>
+              </td>
+              <td valign="top" class="name">
+                <label for="contactSecondary.state">State:</label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.state', 'errors')}">
+                <g:select name="contactSecondary.state" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

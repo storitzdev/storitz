@@ -29,8 +29,14 @@ public enum StreetType {
 
   final String display;
 
-  StreetType(String display) { this.display = display; }
+  StreetType(String display) {
+    this.display = display;
+  }
 
+  String getValue() {
+    return this.display;
+  }
+  
   static list() {
     [STREET, AVENUE, BOULEVARD, DRIVE, ROAD, PLACE, LANE, PARKWAY, ROUTE, JUNCTION, HIGHWAY, EXPRESSWAY, MOTORWAY, PARKWAY, TERRACE, HEIGHTS, WAY]
   }

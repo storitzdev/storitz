@@ -8,6 +8,7 @@ package storagetech.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum State {
+  NONE("--"),
   ALABAMA("AL"),
   ALASKA("AK"),
   AMERICAN_SAMOA("AS"),
@@ -78,9 +79,13 @@ public enum State {
 
   State(String display) { this.display = display }
 
+  String getValue() {
+    return this.display;
+  }
+
   static list() {
     [
-            ALABAMA, ALASKA, AMERICAN_SAMOA, ARIZONA, ARKANSAS, CALIFORNIA, COLORADO,
+            NONE, ALABAMA, ALASKA, AMERICAN_SAMOA, ARIZONA, ARKANSAS, CALIFORNIA, COLORADO,
             CONNECTICUT, DELAWARE, DISTRICT_OF_COLUMBIA, FEDERATED_STATES_OF_MICRONESIA,
             FLORIDA, GEORGIA, GUAM, HAWAII, IDAHO, ILLINOIS, INDIANA, IOWA,
             KANSAS, KENTUCKY, LOUISIANA, MAINE, MARSHALL_ISLANDS, MARYLAND,
