@@ -1,3 +1,5 @@
+import storagetech.constants.TruckType
+
 class SiteLinkController {
 
   def siteLinkService
@@ -148,7 +150,7 @@ class SiteLinkController {
       site.zipcode = tab.sSitePostalCode.text()
       site.requiresInsurance = false
       site.boxesAvailable = true
-      site.freeTruck = false
+      site.freeTruck = TruckType.NONE
       site.isGate = false
       site.isKeypad = false
       site.isCamera = false
