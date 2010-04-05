@@ -15,6 +15,8 @@ public enum IdType {
 
   IdType(String display) { this.display = display; }
 
+  String getValue() { return this.display }
+
   static list() {
     [DRIVERSLICENSE, PASSPORT]
   }

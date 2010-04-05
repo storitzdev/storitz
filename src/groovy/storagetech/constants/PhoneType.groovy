@@ -16,6 +16,8 @@ public enum PhoneType {
 
   PhoneType(String display) { this.display = display; }
 
+  String getValue() { return this.display }
+
   static list() {
     [HOME, MOBILE, OFFICE]
   }

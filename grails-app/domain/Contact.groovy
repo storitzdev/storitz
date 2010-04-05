@@ -1,6 +1,7 @@
 import storagetech.constants.StreetType;
 import storagetech.constants.PhoneType;
 import storagetech.constants.State;
+import storagetech.constants.Country;
 
 class Contact {
 
@@ -14,7 +15,7 @@ class Contact {
     State state
     String province
     String zipcode
-    String country
+    Country country
     String phone
     PhoneType phoneType
     String email
