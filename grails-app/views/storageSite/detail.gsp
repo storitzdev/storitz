@@ -34,40 +34,9 @@
 
     function setupSize() {
       if(typeof(sizeDescription) !== 'undefined')  {
-        $('sizeDescription').replace(sizeDescription);
+        $('sizeDescription').update(sizeDescription);
       }
     }
-
-    <g:if test="${site.isKeypad}">
-      var keypadImg = '<img src="${createLinkTo(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>';
-    </g:if>
-    <g:else >
-      var keypadImg = '<span style="width:20px; margin:1px;"></span>';
-    </g:else>
-    <g:if test="${site.isCamera}">
-      var cameraImg = '<img src="${createLinkTo(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>';
-    </g:if>
-    <g:else>
-      var cameraImg = '<span style="width:20px; margin: 1px;"></span>';
-    </g:else>
-    <g:if test="${site.isGate}">
-      var gateImg   = '<img src="${createLinkTo(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>';
-    </g:if>
-    <g:else>
-      var gateImg   =  '<span style="width:20px; margin: 1px;"></span>';
-    </g:else>
-    <g:if test="${site.isUnitAlarmed}">
-      var alarmImg  = '<img src="${createLinkTo(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>';
-    </g:if>
-    <g:else>
-      var alarmImg  = '<span style="width:20px; margin: 1px;"></span>';
-    </g:else>
-    <g:if test="${site.freeTruck}">
-      var truckImg  = '<img src="${createLinkTo(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
-    </g:if>
-    <g:else>
-      var truckImg  = '<span style="width:20px; margin: 1px;"></span>';
-    </g:else>
 
     function buildTable() {
       new Ajax.Request("${createLink(controller:'storageSite', action:'detailUnits')}",
@@ -166,6 +135,7 @@
     function sizeChange() {
       $('unitsize').observe('change', function(event) {
         searchSize = $F('unitsize');
+        $('sizeDescription').update(storageSize[searchSize]);
         buildTable();
       })
     }
@@ -317,29 +287,35 @@
           <div style="padding: 10px 0px;" class="section_header">
             Site Features:
           </div>
-          <g:if test="${site.freeTruck}">
+
+          <g:if test="${site.freeTruck  == storagetech.constants.TruckType.FREE}">
             <div class="icon_text">
-              <img src="${createLinkTo(dir:'images', file:'icon-rentaltruck32.gif')}" alt="Rental Truck"/> Rental Truck
+              <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/> Free Truck
+            </div>
+          </g:if>
+          <g:if test="${site.freeTruck  == storagetech.constants.TruckType.RENTAL}">
+            <div class="icon_text">
+              <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/> Rental Truck
             </div>
           </g:if>
           <g:if test="${site.isGate}">
             <div class="icon_text">
-              <img src="${createLinkTo(dir:'images', file:'icon-gate32.gif')}" alt="Gated"/> Gated
+              <img src="${createLinkTo(dir:'images', file:'icon3d-gate32.jpg')}" alt="Gated"/> Gated
             </div>
           </g:if>
           <g:if test="${site.isKeypad}">
             <div class="icon_text">
-              <img src="${createLinkTo(dir:'images', file:'icon-keypad32.gif')}" alt="Keypad"/> Keypad Entry
+              <img src="${createLinkTo(dir:'images', file:'icon3d-keypad32.jpg')}" alt="Keypad"/> Keypad Entry
             </div>
           </g:if>
           <g:if test="${site.isCamera}">
             <div class="icon_text">
-              <img src="${createLinkTo(dir:'images', file:'icon-camera32.gif')}" alt="Camera"/> Camera
+              <img src="${createLinkTo(dir:'images', file:'icon3d-camera32.jpg')}" alt="Camera"/> Camera
             </div>
           </g:if>
           <g:if test="${site.isUnitAlarmed}">
             <div class="icon_text">
-              <img src="${createLinkTo(dir:'images', file:'icon-alarm32.gif')}" alt="Alarmed"/> Unit Alarmed
+              <img src="${createLinkTo(dir:'images', file:'icon3d-alarm32.jpg')}" alt="Alarmed"/> Unit Alarmed
             </div>
           </g:if>
           <div style="height:10px;"></div>
@@ -685,7 +661,10 @@
                   <label for="reserveTruck">Insurance:</label>
                 </td>
                 <td valign="top" colspan="3" class="value">
-                  TBD. This site requires insurance.  Must waive or supply choices here.
+                    <p><input type="radio" name="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</p>
+                  <g:each in="${site.insurances.sort{it.premium}}" var="ins">
+                    <p><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></p>
+                  </g:each>
                 </td>
               </tr>
             </g:if>

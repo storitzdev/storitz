@@ -2,7 +2,7 @@ import storagetech.constants.TruckType;
 
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact ]
+    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact, insurances:Insurance ]
     static fetchMode = []
 
     static constraints = {

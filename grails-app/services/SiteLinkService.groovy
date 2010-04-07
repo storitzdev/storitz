@@ -80,6 +80,27 @@ class SiteLinkService {
     postAction(payload, 'UnitsInformation_v2')
   }
 
+  def getInsurance(corpCode, locationCode, userName, password) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:InsuranceCoverageRetrieve>
+         <!--Optional:-->
+         <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+         <!--Optional:-->
+         <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+         <!--Optional:-->
+         <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+         <!--Optional:-->
+         <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+      </cal:InsuranceCoverageRetrieve>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'InsuranceCoverageRetrieve')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl)
 

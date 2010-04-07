@@ -129,6 +129,9 @@ class SiteLinkController {
         site.units.each {unit ->
           unit.delete()
         }
+        site.insurances.each {ins ->
+          ins.delete()
+        }
       } else {
         site = new StorageSite()
         createCount++
@@ -162,6 +165,7 @@ class SiteLinkController {
       site.save()
       
       unitsAvailable(siteLink, site)
+      site.requiresInsurance = insurance(siteLink, site)
 
       site.save(flush: true)
     }
@@ -221,5 +225,31 @@ class SiteLinkController {
     }
   }
 
+  def insurance(siteLink, site) {
+    def ret = siteLinkService.getInsurance(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def count = 0;
+    records.'soap:Body'.'*:InsuranceCoverageRetrieveResponse'.'*:InsuranceCoverageRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table'.each {ins ->
+      def insurance = new Insurance()
+      insurance.insuranceId = Integer.parseInt(ins.InsurCoverageID.text())
+      insurance.totalCoverage = new BigDecimal(ins.dcCoverage.text())
+      insurance.premium = new BigDecimal(ins.dcPremium.text())
+      insurance.percentTheft = new BigDecimal(ins.dcPCTheft.text())
+      insurance.provider = ins.sProvidor.text()
+      count++;
+
+      if (!insurance.save()) {
+        insurance.errors.allErrors.each { println it }
+      }
+      site.addToInsurances(insurance)
+    }
+    return count > 0
+  }
 
 }

@@ -100,7 +100,9 @@
           if (!bounds) return;
 
           tooltips.each(function(t) {
-            t.value.destroy();
+            if (typeof t.value.destroy == 'function') {
+              t.value.destroy();
+            }
             tooltips.unset(t.name);
           });
 
