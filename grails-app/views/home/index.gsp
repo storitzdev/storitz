@@ -131,7 +131,7 @@
 
                     rows++;
 
-                    var iconLink = s.units.size() == 0 ? '${resource(dir:'images', file:'icn_map_grn.png')}' : '${resource(dir:'images', file:'icn_map_blue.png')}';
+                    var iconLink = s.units.size() == 0 ? '${resource(dir:'images', file:'gray-icon.png')}' : '${resource(dir:'images', file:'icn_map_grn.png')}';
                     var priceDriveup = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isDriveup) ? n.price : 999999; });
                     var priceInterior = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isInterior) ? n.price : 999999; });
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
@@ -335,10 +335,10 @@
           <div style="height: 20px;"></div>
           <div class="large" style="padding-left: 1em; padding-bottom: 0.5em; font-weight: bold;">Legend:</div>
           <div style="clear: both; padding-left: 1.5em;">
-            <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'icn_map_blue.png')}" style="vertical-align: top;" alt="blue map icon"/></div> <div style="margin-left: 2em;">Storage site that meets your search criteria</div>
+            <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'icn_map_grn.png')}" style="vertical-align: top;" alt="blue map icon"/></div> <div style="margin-left: 2em;">Storage site that meets your search criteria</div>
           </div>
           <div style="clear: both; padding-left: 1.5em;">
-            <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'icn_map_grn.png')}" style="vertical-align: top;" alt="green map icon"/></div> <div style="margin-left: 2em;">Storage site without your size or availability date</div>
+            <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'gray-icon.png')}" style="vertical-align: top;" alt="green map icon"/></div> <div style="margin-left: 2em;">Storage site without your size or availability date</div>
           </div>
         </div>
         <div id="gmap">
