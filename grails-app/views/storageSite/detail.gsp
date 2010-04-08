@@ -13,6 +13,7 @@
     var directionsService;
     var directionsDisplay;
     var storageSize = [];
+    var premiums = [];
     var prices = [];
     var unitTypes = [];
     var searchSize;
@@ -31,6 +32,8 @@
       searchSize = ${params.searchSize};
       var sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
+    <g:each var="ins" in="${site.insurances}">premiums[${ins.insuranceId}] = ${ins.premium};</g:each>
+    var premium = 0;
 
     function setupSize() {
       if(typeof(sizeDescription) !== 'undefined')  {
@@ -173,7 +176,7 @@
     function unitTypeClick() {
       $('price_table').observe('click', function(event) {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
-        $('price_total').update("Price: $" + (prices[unitId] + additionalFees));
+        $('price_total').update("Price: $" + (prices[unitId] + additionalFees + premium));
         $('unitId').value = unitId;
         priceUpper = false;
         priceInterior = false;
@@ -186,6 +189,15 @@
         $('priceTempControlled').value = priceTempControlled;
         rentalFormReady = true;
         $('rentmeBtn').show();
+      });
+    }
+
+    function insuranceClick() {
+      $('insuranceChoices').observe('click', function(event) {
+        var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
+        var unitId = $F('unitId');
+        premium = premiums[insId];
+        $('price_total').update("Price: $" + (prices[unitId] + additionalFees + premium));
       });
     }
 
@@ -234,6 +246,9 @@
     unitTypeClick();
     idTypeClick();
     rentmeClick();
+    <g:if test="${site.requiresInsurance}">
+    insuranceClick();
+    </g:if>
   });
 
 //]]>
@@ -661,10 +676,12 @@
                   <label for="reserveTruck">Insurance:</label>
                 </td>
                 <td valign="top" colspan="3" class="value">
+                    <div id="insuranceChoices">
                     <p><input type="radio" name="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</p>
-                  <g:each in="${site.insurances.sort{it.premium}}" var="ins">
-                    <p><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></p>
-                  </g:each>
+                      <g:each in="${site.insurances.sort{it.premium}}" var="ins">
+                        <p><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></p>
+                      </g:each>
+                    </div>
                 </td>
               </tr>
             </g:if>

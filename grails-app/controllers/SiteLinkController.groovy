@@ -166,6 +166,9 @@ class SiteLinkController {
       
       unitsAvailable(siteLink, site)
       site.requiresInsurance = insurance(siteLink, site)
+      if (site.units.size() > 0) {
+        site.adminFee = adminFees(siteLink,  site.units.asList().get(0).unitNumber, site)
+      }
 
       site.save(flush: true)
     }
@@ -180,6 +183,7 @@ class SiteLinkController {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
+    def adminFeeSet = false;
     records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {unit ->
       def siteUnit = new StorageUnit()
       siteUnit.description = unit.sTypeName.text()
@@ -250,6 +254,25 @@ class SiteLinkController {
       site.addToInsurances(insurance)
     }
     return count > 0
+  }
+
+  def adminFees(siteLink, unitId, site) {
+    def ret = siteLinkService.getMoveinCost(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, unitId)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def adminFee = new BigDecimal(0)
+    records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table'.each {fee->
+      if (fee.ChargeDescription.text() == 'Administrative Fee') {
+        adminFee = new BigDecimal(fee.dcTenantRate.text())
+      }
+    }
+    println('returning fee=' + adminFee)
+    return adminFee
   }
 
 }

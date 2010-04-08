@@ -101,6 +101,29 @@ class SiteLinkService {
     postAction(payload, 'InsuranceCoverageRetrieve')
   }
 
+  def getMoveinCost(corpCode, locationCode, userName, password, unitId) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+       <soapenv:Header/>
+       <soapenv:Body>
+          <cal:MoveInCostRetrieve>
+             <!--Optional:-->
+             <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+             <!--Optional:-->
+             <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+             <!--Optional:-->
+             <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+             <!--Optional:-->
+             <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+             <cal:iUnitID>""" + unitId + """</cal:iUnitID>
+             <cal:dMoveInDate>""" + new Date().format('yyyy-MM-dd') + """T09:00:00</cal:dMoveInDate>
+          </cal:MoveInCostRetrieve>
+       </soapenv:Body>
+    </soapenv:Envelope>"""
+
+    postAction(payload, 'MoveInCostRetrieve')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl)
 
