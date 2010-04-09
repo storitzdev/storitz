@@ -275,4 +275,18 @@ class SiteLinkController {
     return adminFee
   }
 
+  def getPromos(siteLink, site) {
+    def ret = siteLinkService.getPromos(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def adminFee = new BigDecimal(0)
+    records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans'.each { promo->
+    }
+  }
+
 }

@@ -124,6 +124,27 @@ class SiteLinkService {
     postAction(payload, 'MoveInCostRetrieve')
   }
 
+  def getPromos(corpCode, locationCode, userName, password) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:PromotionsRetrieve>
+         <!--Optional:-->
+         <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+         <!--Optional:-->
+         <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+         <!--Optional:-->
+         <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+         <!--Optional:-->
+         <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+      </cal:PromotionsRetrieve>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'PromotionsRetrieve')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl)
 
