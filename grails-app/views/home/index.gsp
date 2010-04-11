@@ -68,7 +68,7 @@
            }
         }
 
-        function markerClick(feature) {
+        function markerOver(feature) {
           var c = '<div style="width: 300px;"><h3>' + feature.title + '</h3>';
             if (feature.logoUrl) {
               c += '<div style="float: left;"><img src="' + feature.logoUrl + '" alt="' + feature.title + '"/></div>';
@@ -83,15 +83,21 @@
             infoWindow.close();
           }
           infoWindow = new google.maps.InfoWindow({content: c, maxWidth: 300});
-          google.maps.event.addListener(infoWindow, 'closeclick', function() { delete infoWindow });
+          google.maps.event.addListener(infoWindow, 'mouseout', function() { delete infoWindow });
           infoWindow.open(map, feature.marker);
+        }
+
+        function markerOut(feature) {
+          if (infoWindow) {
+            infoWindow.close();
+          }
         }
 
         function panTo(markerId) {
           window.setTimeout(function() {
             map.panTo(features[markerId].marker.getPosition());
           }, 250);
-          markerClick(features[markerId]);
+          markerOver(features[markerId]);
         }
 
         function getMarkers(resizeable) {
@@ -176,8 +182,8 @@
                       position: location,
                       icon: iconLink
                     });
-                    google.maps.event.addListener(s.marker, 'click', function() {
-                      markerClick(s);
+                    google.maps.event.addListener(s.marker, 'mouseover', function() {
+                      markerOver(s);
                     });
                     tableContents += '<tr><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
                       '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '">' + s.address +'</a></div><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg + '</div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
