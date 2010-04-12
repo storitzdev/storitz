@@ -29,12 +29,12 @@ class BootStrap {
        def site7 = new StorageSite( title:'A-American Self Storage: West Los Angeles', address:'2300 Federal Ave.', city:'Los Angeles', state:'CA', zipcode:'90064-1406', phone:'(310) 597-4004', url:'http://aamericanselfstorage.com', lat:'34.0339469723605', lng:'-118.444585453274', freeTruck: TruckType.FREE, requiresInsurance: false, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 20, lockFee: 12 ).save();
        def site8 = new StorageSite( title:'Storquest Self Storage', address:'2531 Sawtelle Blvd.', city:'Los Angeles', state:'CA', zipcode:'90064', phone:'(310) 817-6710', url:'http://storquest.com', lat:'34.0292128938148', lng:'-118.441494670588', freeTruck: TruckType.RENTAL, requiresInsurance: false, boxesAvailable:false, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 30, lockFee: 10  ).save();
 
-       def offer1 = new SpecialOffer(name: 'Second Month $1', description:'Second Month $1', prepay: false, active: true, inMonth: 2, expireMonth: 1, prepayMonths: 1, promoType: PromoType.FIXED_RATE, promoQty: new BigDecimal(1.00)).save();
-       def offer2 = new SpecialOffer(name:'Second Month 50% off', description:'Second Month 50% off', prepay: false, active: true, inMonth: 2, expireMonth: 1, prepayMonths: 1, promoType: PromoType.PERCENT_OFF, promoQty: new BigDecimal(0.50)).save();
-       def offer3 = new SpecialOffer(name:'$19.95 Moves you in', description:'$19.95 Moves you in', prepay: false, active: true, inMonth: 1, expireMonth: 1, prepayMonths: 1, promoType: PromoType.FIXED_RATE, promoQty: new BigDecimal(19.95)).save();
-       def offer4 = new SpecialOffer(name:'$10 Off move in', description:'$10 Off move in', prepay: false, active: true, inMonth: 1, prepayMonths: 1, expireMonth: 1, promoType: PromoType.AMOUNT_OFF, promoQty: new BigDecimal(10.00)).save();
-       def offer5 = new SpecialOffer(name:'4 mos. 50% off', description:'4 mos. 50% off', prepay: true, active: true, inMonth: 1, expireMonth: 4, prepayMonths: 4, promoType: PromoType.PERCENT_OFF, promoQty: new BigDecimal(0.50)).save();
-       def offer6 = new SpecialOffer(name:'Second Month Free', description:'Second Month Free', prepay: true, active: true, inMonth: 2, expireMonth: 1, prepayMonths: 2, promoType: PromoType.PERCENT_OFF, promoQty: new BigDecimal(1.00)).save();
+       def offer1 = new SpecialOffer(promoName: 'Second Month $1', description:'Second Month $1', prepay: false, active: true, inMonth: 2, expireMonth: 1, prepayMonths: 1, promoType: PromoType.FIXED_RATE, promoQty: new BigDecimal(1.00)).save();
+       def offer2 = new SpecialOffer(promoName:'Second Month 50% off', description:'Second Month 50% off', prepay: false, active: true, inMonth: 2, expireMonth: 1, prepayMonths: 1, promoType: PromoType.PERCENT_OFF, promoQty: new BigDecimal(0.50)).save();
+       def offer3 = new SpecialOffer(promoName:'$19.95 Moves you in', description:'$19.95 Moves you in', prepay: false, active: true, inMonth: 1, expireMonth: 1, prepayMonths: 1, promoType: PromoType.FIXED_RATE, promoQty: new BigDecimal(19.95)).save();
+       def offer4 = new SpecialOffer(promoName:'$10 Off move in', description:'$10 Off move in', prepay: false, active: true, inMonth: 1, prepayMonths: 1, expireMonth: 1, promoType: PromoType.AMOUNT_OFF, promoQty: new BigDecimal(10.00)).save();
+       def offer5 = new SpecialOffer(promoName:'4 mos. 50% off', description:'4 mos. 50% off', prepay: true, active: true, inMonth: 1, expireMonth: 4, prepayMonths: 4, promoType: PromoType.PERCENT_OFF, promoQty: new BigDecimal(0.50)).save();
+       def offer6 = new SpecialOffer(promoName:'Second Month Free', description:'Second Month Free', prepay: true, active: true, inMonth: 2, expireMonth: 1, prepayMonths: 2, promoType: PromoType.PERCENT_OFF, promoQty: new BigDecimal(1.00)).save();
 
        site1.addToSpecialOffers(offer1)
        site2.addToSpecialOffers(offer2)
@@ -46,15 +46,6 @@ class BootStrap {
        site7.addToSpecialOffers(offer3)
        site7.addToSpecialOffers(offer5)
        site8.addToSpecialOffers(offer6)
-       offer1.addToSites(site1)
-       offer2.addToSites(site2)
-       offer3.addToSites(site2)
-       offer3.addToSites(site3)
-       offer3.addToSites(site7)
-       offer4.addToSites(site4)
-       offer5.addToSites(site5)
-       offer5.addToSites(site7)
-       offer6.addToSites(site8)
 
        def sizeUndefined = new StorageSize( description:'No size chosen', width: 0, length: 0).save();
        def size5x5 = new StorageSize( description:'5 x 5', width: 5, length: 5).save();

@@ -1,4 +1,5 @@
 import storagetech.constants.TruckType
+import storagetech.constants.PromoType
 
 class SiteLinkController {
 
@@ -169,7 +170,7 @@ class SiteLinkController {
       if (site.units.size() > 0) {
         site.adminFee = adminFees(siteLink,  site.units.asList().get(0).unitNumber, site)
       }
-
+      getPromos(siteLink, site)
       site.save(flush: true)
     }
   }
@@ -286,6 +287,37 @@ class SiteLinkController {
     )
     def adminFee = new BigDecimal(0)
     records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans'.each { promo->
+      def showOn = Integer.parseInt(promo.iShowOn.text())
+      def promoName = promo.sPlanName
+      if ((showOn == 0 || showOn == 1) && promoName != 'Manual') {
+        SpecialOffer specialOffer = new SpecialOffer()
+        specialOffer.concessionId = Integer.parseInt(promo.ConcessionID.text())
+        specialOffer.active = true;
+        specialOffer.prepayMonths = Integer.parseInt(promo.iPrePaidMonths.text())
+        specialOffer.description = promo.sDescription
+        specialOffer.promoName = promoName
+        specialOffer.expireMonth = Integer.parseInt(promo.iExpirMonths.text())
+        specialOffer.prepay = Boolean.parseBoolean(promo.bPrepay.text())
+        specialOffer.inMonth = Integer.parseInt(promo.iInMonth.text())
+        def ptype = Integer.parseInt(promo.iAmtType.text())
+        switch(ptype) {
+          case 0:
+            specialOffer.promoType = PromoType.AMOUNT_OFF
+            specialOffer.promoQty = new BigDecimal(promo.dcFixedDiscount.text())
+            break
+
+          case 1:
+            specialOffer.promoType = PromoType.PERCENT_OFF
+            specialOffer.promoQty = new BigDecimal(promo.dcPCDiscount.text())
+            break
+
+          case 2:
+            specialOffer.promoType = PromoType.FIXED_RATE
+            specialOffer.promoQty = new BigDecimal(promo.dcChgAmt.text())
+        }
+        specialOffer.save()
+        site.addToSpecialOffers(specialOffer)
+      }
     }
   }
 

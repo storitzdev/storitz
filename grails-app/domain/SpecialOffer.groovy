@@ -2,7 +2,6 @@ import storagetech.constants.PromoType
 
 class SpecialOffer {
 
-  static hasMany = [sites: StorageSite]
   static belongsTo = StorageSite
 
   // TODO - make this work for demo
@@ -15,7 +14,7 @@ class SpecialOffer {
 
   String code
   Integer concessionId
-  String name
+  String promoName
   String description
   Boolean prepay
   BigDecimal promoQty

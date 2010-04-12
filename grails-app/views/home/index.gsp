@@ -127,13 +127,13 @@
                   }
                 }
                 var randId = Math.floor(Math.random() * 100001);
-                var tableContents = '<div class="srText">Search Results for size ' + searchSizeDesc + ' near ' + searchAddr + ' starting on ' + searchDate + '</td></tr></div><table class="sortable" id="stresults' + randId + '"><thead><tr><th class="addrwidth" id="title">Title</th><th class="sortfirstasc distwidth white" id="distance">Distance</th><th class="stprice pricewidth white">Drive Up</th><th class="stprice pricewidth white">Interior</th><th class="stprice pricewidth white">Upper</th><th class="stprice pricewidth white">A/C</th><th class="white">Special Offers</th></tr></thead><tbody>';
+                var tableContents = '<div class="srText">Search Results for size ' + searchSizeDesc + ' near ' + searchAddr + ' starting on ' + searchDate + '</td></tr></div><table class="sortable" id="stresults' + randId + '"><thead><tr><th class="addrwidth" id="title">Title</th><th class="sortfirstasc distwidth white" id="distance">Distance</th><th class="stprice pricewidth white">Drive Up</th><th class="stprice pricewidth white">Interior</th><th class="stprice pricewidth white">Upper</th><td></td><th class="white">Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
 
                 transport.responseJSON.features.each(function(s) {
                     var location = new google.maps.LatLng(s.lat, s.lng);
                     features[s.id] = s;
-                    var offers = s.specialOffers.collect(function(n) { return n.description } ).join('<BR/>');
+                    var offers = s.specialOffers.collect(function(n) { return n.promoName } ).join('<BR/>');
 
                     rows++;
 
@@ -141,7 +141,6 @@
                     var priceDriveup = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isDriveup) ? n.price : 999999; });
                     var priceInterior = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isInterior) ? n.price : 999999; });
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
-                    var priceTempControlled = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isTempControlled) ? n.price : 999999; });
 
                     var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
                     var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
@@ -189,8 +188,7 @@
                       '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '">' + s.address +'</a></div><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg + '</div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
                       (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
                       (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceTempControlled && priceTempControlled < 999999 ? '<a href="' + baseURL + s.id + '?priceTempControlled=true&searchSize=' + searchSize + '">$' + priceTempControlled + '</a>' : "&#8212;") +'</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td></td><td class="specialOfferText">' +
                       (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';

@@ -25,7 +25,6 @@
     var priceDriveup = ${params.priceDriveup ? "true" : "false"};
     var priceInterior = ${params.priceInterior ? "true" : "false"};
     var priceUpper = ${params.priceUpper ? "true" : "false"};
-    var priceTempControlled = ${params.priceTempControlled ? "true" : "false"};
 
     <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
     <g:if test="${params.searchSize}">
@@ -53,7 +52,6 @@
           $('priceDriveup').value = false;
           $('priceUpper').value = false;
           $('priceInterior').value = false;
-          $('priceTempControlled').value = false;
           if (units) {
             if (units.driveup) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
@@ -86,17 +84,6 @@
               if (priceUpper) {
                 $('price_total').update("Price: $" + (additionalFees + units.upper.price));
                 $('priceUpper').value = true;
-              }
-            }
-            if (units.tempcontrolled) {
-              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.tempcontrolled.id + "\"" + (priceTempControlled ? " checked=\"true\"" : "") + "/> A/C</td><td class=\"price_text\"><span class=\"price_text\">$" + units.tempcontrolled.price + "</span></td>";
-              tableBody += "</tr>";
-              prices[units.tempcontrolled.id] = units.tempcontrolled.price;
-              unitTypes[units.tempcontrolled.id] = 'priceTempControlled';
-              if (priceTempControlled) {
-                $('price_total').update("Price: $" + (additionalFees + units.tempcontrolled.price));
-                $('priceTempControlled').value = true;
               }
             }
           }
@@ -181,12 +168,10 @@
         priceUpper = false;
         priceInterior = false;
         priceDriveup = false;
-        priceTempControlled = false;
         eval(unitTypes[unitId] + "= true;");
         $('priceDriveup').value = priceDriveup;
         $('priceUpper').value = priceUpper;
         $('priceInterior').value = priceInterior;
-        $('priceTempControlled').value = priceTempControlled;
         rentalFormReady = true;
         $('rentmeBtn').show();
       });
@@ -340,7 +325,7 @@
           <div class="icon_text">
             <ul>
               <g:each var="offer" in="${site.specialOffers}">
-                <li>${offer.description}</li>
+                <li>${offer.promoName}</li> 
               </g:each>
             </ul>
           </div>
@@ -389,7 +374,6 @@
           <input type="hidden" id="priceDriveup" value="" />
           <input type="hidden" id="priceInterior" value="" />
           <input type="hidden" id="priceUpper" value="" />
-          <input type="hidden" id="priceTempControlled" value="" />
           <input type="hidden" id="unitId" value="" />
           <table style="width:100%;">
             <tbody>
