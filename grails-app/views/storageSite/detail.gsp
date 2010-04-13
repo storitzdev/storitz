@@ -60,8 +60,11 @@
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
               if (priceDriveup) {
-                $('price_total').update("Price: $" + (additionalFees + units.driveup.price));
+                $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
+                $('price_total').update("Total: $" + (additionalFees + units.driveup.price));
                 $('priceDriveup').value = true;
+                rentalFormReady = true;
+                $('rentmeBtn').show();
               }
             }
             if (units.interior) {
@@ -71,8 +74,11 @@
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
               if (priceInterior) {
-                $('price_total').update("Price: $" + (additionalFees + units.interior.price));
+                $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
+                $('price_total').update("Total: $" + (additionalFees + units.interior.price));
                 $('priceInterior').value = true;
+                rentalFormReady = true;
+                $('rentmeBtn').show();
               }
             }
             if (units.upper) {
@@ -82,8 +88,11 @@
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
               if (priceUpper) {
-                $('price_total').update("Price: $" + (additionalFees + units.upper.price));
+                $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
+                $('price_total').update("Total: $" + (additionalFees + units.upper.price));
                 $('priceUpper').value = true;
+                rentalFormReady = true;
+                $('rentmeBtn').show();
               }
             }
           }
@@ -163,7 +172,8 @@
     function unitTypeClick() {
       $('price_table').observe('click', function(event) {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
-        $('price_total').update("Price: $" + (prices[unitId] + additionalFees + premium));
+        $('price_total').update("Total: $" + (prices[unitId] + additionalFees + premium));
+        $('price_monthly').update("Monthly: $" + (prices[unitId]));
         $('unitId').value = unitId;
         priceUpper = false;
         priceInterior = false;
@@ -182,7 +192,8 @@
         var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
         var unitId = $F('unitId');
         premium = premiums[insId];
-        $('price_total').update("Price: $" + (prices[unitId] + additionalFees + premium));
+        $('price_insurance').update("Insurance: $" + (premium));
+        $('price_total').update("Total: $" + (prices[unitId] + additionalFees + premium));
       });
     }
 
@@ -366,7 +377,11 @@
           </div>
           <div style="height:10px;"></div>
           <div id="rentmeBtn" style="float: right; display: none;">
-            <span id="price_total"></span><img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
+            <p><span id="price_monthly"></span></p>
+            <p><span id="price_admin"></span></p>
+            <p><span id="price_insurance"></span></p>
+            <p><span id="price_total"></span></p>
+            <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
           </div>
         </div>
         <div style="clear: both;"/>
