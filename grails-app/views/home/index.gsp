@@ -121,7 +121,7 @@
                   if (transport.responseJSON.features.length < 2) {
                     map.setZoom(map.getZoom() - 1);
                     getMarkers(resizeable);
-                  } else if (transport.responseJSON.features.length > 50) {
+                  } else if (transport.responseJSON.features.length > 8) {
                     map.setZoom(map.getZoom + 1);
                     getMarkers(resizeable);
                   }

@@ -11,6 +11,8 @@ class STMapController {
 
     def jsonp = {
 
+      // println("?searchSize=" + params.searchSize + "&swLat=" + params.swLat + "&neLat=" + params.neLat + "&swLng=" + params.swLng + "&neLng=" + params.neLng)
+      
       def sites = StorageSite.createCriteria()
       def results = sites.listDistinct {
         and {

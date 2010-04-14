@@ -60,6 +60,7 @@
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
               if (priceDriveup) {
+                $('price_monthly').update("Monthly: $" + (prices[unitId]));
                 $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
                 $('price_total').update("Total: $" + (additionalFees + units.driveup.price));
                 $('priceDriveup').value = true;
@@ -74,6 +75,7 @@
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
               if (priceInterior) {
+                $('price_monthly').update("Monthly: $" + (prices[unitId]));
                 $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
                 $('price_total').update("Total: $" + (additionalFees + units.interior.price));
                 $('priceInterior').value = true;
@@ -88,6 +90,7 @@
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
               if (priceUpper) {
+                $('price_monthly').update("Monthly: $" + (prices[unitId]));
                 $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
                 $('price_total').update("Total: $" + (additionalFees + units.upper.price));
                 $('priceUpper').value = true;

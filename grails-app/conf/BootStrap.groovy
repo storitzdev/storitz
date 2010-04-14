@@ -20,10 +20,11 @@ class BootStrap {
        }
        admin.save(flush: true)
 
+       /**
        def site1 = new StorageSite( title:'Public Storage - Self Storage', address:'1606 Cotner Ave', city:'Los Angeles', state:'CA', zipcode: '90064', phone:'(800) 883-8369', url:'http://publicstorage.com', lat:'34.0482555637589', lng:'-118.446877335723', freeTruck: TruckType.FREE, requiresInsurance: true, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 25, lockFee: 14).save();
        def site2 = new StorageSite( title:'Public Storage', address:'1617 Pontius Ave', city:'Los Angeles', state:'CA', zipcode: '90064', phone:'(310) 914-4572', url:'http://publicstorage.com', lat:'34.0480245162411', lng:'-118.446916184277', freeTruck: TruckType.NONE, requiresInsurance: true, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 20, lockFee: 14 ).save();
        def site3 = new StorageSite( title:'A-1 Self Storage: Full Security', address:'11820 W. Olympic Blvd.', city:'Los Angeles', state:'CA', zipcode: '90064', phone:'(310) 571-0044', url:'http://selfstorage1.com', lat:'34.044858', lng:'-118.448436', freeTruck: TruckType.RENTAL, requiresInsurance: true, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 22, lockFee: 8 ).save();
-       def site4 = new StorageSite( title:'Public Storage - Self Storage', address:'1606 Cotner Ave', city:'Los Angeles', state:'CA', zipcode: '90064', phone:'(800) 883-8369', url:'http://publicstorage.com', lat:'34.0365126774481', lng:'-118.425388593827', freeTruck: TruckType.FREE, requiresInsurance: true, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 20, lockFee: 0 ).save();
+       def site4 = new StorageSite( title:'Public Storage - Self Storage', address:'11200 W Pico Blvd', city:'Los Angeles', state:'CA', zipcode: '90064', phone:'(800) 883-8369', url:'http://publicstorage.com', lat:'34.0365126774481', lng:'-118.425388593827', freeTruck: TruckType.FREE, requiresInsurance: true, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 20, lockFee: 0 ).save();
        def site5 = new StorageSite( title:'Westwood Self Storage', address:'1901 S Sepulveda Blvd', city:'Los Angeles', state:'CA', zipcode:'90025-5619', phone:'(310) 478-1901', url:'http://www.executiveselfstorage.com', lat:'34.1074181042622', lng:'-118.480301588142', freeTruck: TruckType.NONE, requiresInsurance: false, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 25, lockFee: 0 ).save();
        def site6 = new StorageSite( title:'EZ Storage - Self Storage', address:'11471 West Pico Blvd.', city:'Los Angeles', state:'CA', zipcode:'90064', phone:'(877) 351-6029', url:'http://ezstorageonline.com', lat:'34.0340018834908', lng:'-118.441389137916', freeTruck: TruckType.RENTAL, requiresInsurance: false, boxesAvailable:false, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 25, lockFee: 12).save();
        def site7 = new StorageSite( title:'A-American Self Storage: West Los Angeles', address:'2300 Federal Ave.', city:'Los Angeles', state:'CA', zipcode:'90064-1406', phone:'(310) 597-4004', url:'http://aamericanselfstorage.com', lat:'34.0339469723605', lng:'-118.444585453274', freeTruck: TruckType.FREE, requiresInsurance: false, boxesAvailable:true, isGate: true, isKeypad: true, isCamera: true, isUnitAlarmed: false, adminFee: 20, lockFee: 12 ).save();
@@ -46,6 +47,7 @@ class BootStrap {
        site7.addToSpecialOffers(offer3)
        site7.addToSpecialOffers(offer5)
        site8.addToSpecialOffers(offer6)
+       **/
 
        def sizeUndefined = new StorageSize( description:'No size chosen', width: 0, length: 0).save();
        def size5x5 = new StorageSize( description:'5 x 5', width: 5, length: 5).save();
@@ -57,6 +59,7 @@ class BootStrap {
        def size10x25 = new StorageSize( description:'10 x 25', width: 10, length: 25).save();
        def size10x30 = new StorageSize( description:'10 x 30', width: 10, length: 30).save();
 
+       /**
        site1.addToUnits(new StorageUnit( unitsize: size5x5, unitNumber: '1', isUpper: true, isInterior: false, isAlarm: false, isDriveup: false, isSecure: false, isTempControlled: false, isPowered: false, price: 62, displaySize: "5 X 5", isAvailable: true).save())
        site1.addToUnits(new StorageUnit( unitsize: size5x5, unitNumber: '2', isUpper: false, isInterior: false, isAlarm: false, isDriveup: true, isSecure: false, isTempControlled: false, isPowered: false, price: 69, displaySize: "5 X 5", isAvailable: true).save())
        site1.addToUnits(new StorageUnit( unitsize: size5x5, unitNumber: '3', isUpper: false, isInterior: true, isAlarm: false, isDriveup: false, isSecure: false, isTempControlled: false, isPowered: false, price: 65, displaySize: "5 X 5", isAvailable: true).save())
@@ -227,7 +230,7 @@ class BootStrap {
        site8.addToUnits(new StorageUnit( unitsize: size10x20, unitNumber: '16', isUpper: true, isInterior:false, isAlarm: false, isDriveup: false, isSecure: false, isTempControlled: false, isPowered: false, price: 239,  displaySize: "10 X 20", isAvailable: true).save())
        site8.addToUnits(new StorageUnit( unitsize: size10x20, unitNumber: '17', isUpper: false, isInterior: false, isAlarm: false, isDriveup: true, isSecure: false, isTempControlled: false, isPowered: false, price: 303, displaySize: "10 X 20", isAvailable: true).save())
        site8.addToUnits(new StorageUnit( unitsize: size10x20, unitNumber: '18', isUpper: false, isInterior: true, isAlarm: false, isDriveup: false, isSecure: false, isTempControlled: false, isPowered: false, price: 265, displaySize: "10 X 20", isAvailable: true).save())
-
+       **/
      }
 
      def destroy = {
