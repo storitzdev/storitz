@@ -185,10 +185,10 @@
                       markerOver(s);
                     });
                     tableContents += '<tr><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '">' + s.address +'</a></div><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg + '</div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td></td><td class="specialOfferText">' +
+                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '">' + s.address +'</a></div><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg + '</div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td></td><td class="specialOfferText">' +
                       (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';

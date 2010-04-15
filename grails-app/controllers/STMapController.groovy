@@ -11,8 +11,6 @@ class STMapController {
 
     def jsonp = {
 
-      // println("?searchSize=" + params.searchSize + "&swLat=" + params.swLat + "&neLat=" + params.neLat + "&swLng=" + params.swLng + "&neLng=" + params.neLng)
-      
       def sites = StorageSite.createCriteria()
       def results = sites.listDistinct {
         and {
@@ -28,7 +26,6 @@ class STMapController {
           }
         }
         fetchMode('specialOffers', FM.EAGER)
-        maxResults(100)
       }
 
       def sw = new StringWriter()

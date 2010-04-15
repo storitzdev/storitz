@@ -21,6 +21,9 @@
     var rentalFormReady = false;
     var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
     var destLatLng;
+    var startDate;
+    var specialOfferId;
+    var monthlyRent;
 
     var priceDriveup = ${params.priceDriveup ? "true" : "false"};
     var priceInterior = ${params.priceInterior ? "true" : "false"};
@@ -60,6 +63,7 @@
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
               if (priceDriveup) {
+                monthlyRent = prices[unitId];
                 $('price_monthly').update("Monthly: $" + (prices[unitId]));
                 $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
                 $('price_total').update("Total: $" + (additionalFees + units.driveup.price));
@@ -75,6 +79,7 @@
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
               if (priceInterior) {
+                monthlyRent = prices[unitId];
                 $('price_monthly').update("Monthly: $" + (prices[unitId]));
                 $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
                 $('price_total').update("Total: $" + (additionalFees + units.interior.price));
@@ -90,6 +95,7 @@
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
               if (priceUpper) {
+                monthlyRent = prices[unitId];
                 $('price_monthly').update("Monthly: $" + (prices[unitId]));
                 $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
                 $('price_total').update("Total: $" + (additionalFees + units.upper.price));
@@ -175,6 +181,7 @@
     function unitTypeClick() {
       $('price_table').observe('click', function(event) {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
+        monthlyRent = prices[unitId];
         $('price_total').update("Total: $" + (prices[unitId] + additionalFees + premium));
         $('price_monthly').update("Monthly: $" + (prices[unitId]));
         $('unitId').value = unitId;
@@ -197,6 +204,14 @@
         premium = premiums[insId];
         $('price_insurance').update("Insurance: $" + (premium));
         $('price_total').update("Total: $" + (prices[unitId] + additionalFees + premium));
+      });
+    }
+
+    function specialOfferSelect() {
+      $('specialOffers').observe('click', function(event) {
+        var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
+
+        // TODO - call ajax to calc price, etc.
       });
     }
 
@@ -232,6 +247,14 @@
       });
     }
 
+    function setupCalendar() {
+      Calendar.setup({
+          dateField     : 'date',
+          triggerElement: 'date',
+          dateFormat    : '%m-%d-%Y'
+      });
+    }
+
 
   Event.observe(window, 'load', function() {
     createMap();
@@ -245,6 +268,8 @@
     unitTypeClick();
     idTypeClick();
     rentmeClick();
+    setupCalendar();
+    specialOfferSelect();
     <g:if test="${site.requiresInsurance}">
     insuranceClick();
     </g:if>
@@ -298,6 +323,10 @@
             </g:else>
             <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
           </div>
+          <div>
+            <div class="section_header">Start Date:</div>
+            <input type="text" id="date" style="width: 105px;" value="${params.date}"/>
+          </div>
           <div style="padding: 10px 0px;" class="section_header">
             Site Features:
           </div>
@@ -338,9 +367,13 @@
           </div>
           <div class="icon_text">
             <ul>
-              <g:each var="offer" in="${site.specialOffers}">
-                <li>${offer.promoName}</li> 
-              </g:each>
+              <div id="specialOffers">
+              <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
+                <g:each in="${site.specialOffers}" var="offer">
+                  <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
+                </g:each>
+              </div>
+
             </ul>
           </div>
         </div>
