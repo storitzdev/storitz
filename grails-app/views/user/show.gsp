@@ -99,7 +99,8 @@
             <div class="buttons">
                 <g:form>
                     <input type="hidden" name="id" value="${person?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" value="Edit" /></span>
+                    <!-- <span class="button"><g:actionSubmit class="edit" value="Edit" /></span>  -->
+                    <span class="button"><g:link class="edit" action="edit" id="${person?.id}">Edit</g:link></span>                  
                     <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
                 </g:form>
             </div>
