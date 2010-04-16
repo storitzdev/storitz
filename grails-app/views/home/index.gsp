@@ -129,12 +129,18 @@
                 var randId = Math.floor(Math.random() * 100001);
                 var tableContents = '<div class="srText">Search Results for size ' + searchSizeDesc + ' near ' + searchAddr + ' starting on ' + searchDate + '</td></tr></div><table class="sortable" id="stresults' + randId + '"><thead><tr><th class="addrwidth" id="title">Title</th><th class="sortfirstasc distwidth white" id="distance">Distance</th><th class="stprice pricewidth white">Drive Up</th><th class="stprice pricewidth white">Interior</th><th class="stprice pricewidth white">Upper</th><td></td><th class="white">Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
-
+                var offers;
                 transport.responseJSON.features.each(function(s) {
                     var location = new google.maps.LatLng(s.lat, s.lng);
                     features[s.id] = s;
-                    var offers = s.specialOffers.collect(function(n) { return n.promoName } ).join('<BR/>');
-
+                    var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
+                    var offersArr = $A(s.specialOffers.pluck('promoName'));
+                    if (offersArr.size() > 1 ) {
+                      offers = '<div id="offers' + s.id + '">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none" class="tooltip">' + offersTip + '</div>';
+                      tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
+                    } else {
+                      offers = offersArr[0];
+                    }
                     rows++;
 
                     var iconLink = s.units.size() == 0 ? '${resource(dir:'images', file:'gray-icon.png')}' : '${resource(dir:'images', file:'icn_map_grn.png')}';
@@ -171,7 +177,7 @@
                     if (s.isUnitAlarmed) {
                       tooltips.set("alarm" + s.id, "tooltip_alarm");
                     }
-                    if (s.freeTruck) {
+                    if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
                       tooltips.set("truck" + s.id, "tooltip_truck");
                     }
 
