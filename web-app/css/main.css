@@ -284,14 +284,17 @@ Added styles
     width: 100%;
 }
 
-#price_table table {
+#price_table, #price_totals {
     font-size: 12px;
-    color: #154A99;
     font-weight: bold;
     width: 666px;
 }
 
-#stresults_div td, #stresults_div th, #price_table td, #price_table th {
+#price_table thead, #price_totals tfoot {
+    color: white;
+}
+
+#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td {
 	padding: 0.5em;
 	border: 0px solid #CCC;
 	/*white-space: nowrap;
@@ -483,12 +486,8 @@ Added styles
     height: 30px;
 }
 
-.price_table {
-    width: 666px;
-}
-
 .price_text {
-    padding-left: 250px;
+    text-align: right;
 }
 
 .tooltip {
@@ -502,9 +501,7 @@ Added styles
 }
 
 #price_total {
-    font: 15px verdana, arial, helvetica, sans-serif;
+    font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
-    color: #154A99;
-    line-height: 34px;
-    padding-right: 20px;
+    color: white;
 }

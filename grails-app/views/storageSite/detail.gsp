@@ -16,14 +16,15 @@
     var premiums = [];
     var prices = [];
     var unitTypes = [];
+    var specialOffers = [];
     var searchSize;
     var unitId = ${params.id};
     var rentalFormReady = false;
     var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
     var destLatLng;
-    var startDate;
+    var startDate = "${params.date}";
     var specialOfferId;
-    var monthlyRent;
+    var monthlyRent = 0;
 
     var priceDriveup = ${params.priceDriveup ? "true" : "false"};
     var priceInterior = ${params.priceInterior ? "true" : "false"};
@@ -35,7 +36,12 @@
       var sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
     <g:each var="ins" in="${site.insurances}">premiums[${ins.insuranceId}] = ${ins.premium};</g:each>
+    specialOffers[-1] = { active: true, promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
+    <g:each var="offer" in="${site.specialOffers}">
+      specialOffers[${offer.id}] = { active: ${offer.active}, promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
+    </g:each>
     var premium = 0;
+    var offerChosen = specialOffers[-1];
 
     function setupSize() {
       if(typeof(sizeDescription) !== 'undefined')  {
@@ -49,7 +55,7 @@
         method:'get',
         parameters: {searchSize: searchSize, id: unitId},
         onSuccess:function(transport) {
-          var tableBody = "<table>"
+          var tableBody = "";
           var units = transport.responseJSON.units;
           var rowCount = 0;
           $('priceDriveup').value = false;
@@ -58,15 +64,15 @@
           if (units) {
             if (units.driveup) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td><td class=\"price_text\"><span class=\"price_text\">$" + units.driveup.price + "</span></td>";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td>";
+              tableBody += "<td class=\"price_text\">" + offerChosen.prepayMonths + "</td><td class=\"price_text\">$" + units.driveup.price + "</td>";
+              tableBody += "<td class=\"price_text\">$" + units.driveup.price*offerChosen.prepayMonths + "</td>";
               tableBody += "</tr>";
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
               if (priceDriveup) {
+                unitId = units.driveup.id;
                 monthlyRent = prices[unitId];
-                $('price_monthly').update("Monthly: $" + (prices[unitId]));
-                $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
-                $('price_total').update("Total: $" + (additionalFees + units.driveup.price));
                 $('priceDriveup').value = true;
                 rentalFormReady = true;
                 $('rentmeBtn').show();
@@ -74,15 +80,15 @@
             }
             if (units.interior) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td><td class=\"price_text\"><span class=\"price_text\">$" + units.interior.price + "</span></td>";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td>";
+              tableBody += "<td class=\"price_text\">" + offerChosen.prepayMonths + "</td><td class=\"price_text\">$" + units.interior.price + "</td>";
+              tableBody += "<td class=\"price_text\">$" + units.interior.price*offerChosen.prepayMonths + "</td>";
               tableBody += "</tr>";
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
               if (priceInterior) {
+                unitId = units.interior.id;
                 monthlyRent = prices[unitId];
-                $('price_monthly').update("Monthly: $" + (prices[unitId]));
-                $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
-                $('price_total').update("Total: $" + (additionalFees + units.interior.price));
                 $('priceInterior').value = true;
                 rentalFormReady = true;
                 $('rentmeBtn').show();
@@ -90,23 +96,23 @@
             }
             if (units.upper) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td><td class=\"price_text\"><span class=\"price_text\">$" + units.upper.price + "</span></td>";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td>";
+              tableBody += "<td class=\"price_text\">" + offerChosen.prepayMonths + "</td><td class=\"price_text\">$" + units.upper.price + "</td>";
+              tableBody += "<td class=\"price_text\">$" + units.upper.price*offerChosen.prepayMonths + "</td>";
               tableBody += "</tr>";
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
               if (priceUpper) {
+                unitId = units.upper.id;
                 monthlyRent = prices[unitId];
-                $('price_monthly').update("Monthly: $" + (prices[unitId]));
-                $('price_admin').update("Admin Fees (one time): $" + (additionalFees));
-                $('price_total').update("Total: $" + (additionalFees + units.upper.price));
                 $('priceUpper').value = true;
                 rentalFormReady = true;
                 $('rentmeBtn').show();
               }
             }
           }
-          tableBody += "</table>"
-          $('price_table').update(tableBody);
+          $('price_body').update(tableBody);
+          showTotals();
         }
       });
     }
@@ -182,8 +188,6 @@
       $('price_table').observe('click', function(event) {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
         monthlyRent = prices[unitId];
-        $('price_total').update("Total: $" + (prices[unitId] + additionalFees + premium));
-        $('price_monthly').update("Monthly: $" + (prices[unitId]));
         $('unitId').value = unitId;
         priceUpper = false;
         priceInterior = false;
@@ -192,6 +196,7 @@
         $('priceDriveup').value = priceDriveup;
         $('priceUpper').value = priceUpper;
         $('priceInterior').value = priceInterior;
+        showTotals();
         rentalFormReady = true;
         $('rentmeBtn').show();
       });
@@ -202,17 +207,36 @@
         var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
         var unitId = $F('unitId');
         premium = premiums[insId];
-        $('price_insurance').update("Insurance: $" + (premium));
-        $('price_total').update("Total: $" + (prices[unitId] + additionalFees + premium));
+        showTotals();
       });
     }
 
     function specialOfferSelect() {
       $('specialOffers').observe('click', function(event) {
         var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
-
-        // TODO - call ajax to calc price, etc.
+        offerChosen = specialOffers[offerId];
+        showTotals();
       });
+    }
+
+    function showTotals() {
+      var tableBody = "";
+      if (premium > 0) {
+        tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + offerChosen.prepayMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + offerChosen.prepayMonths*premium + "</td></tr>";
+      }
+      tableBody += "<tr><td>Admin Fees:</td><td colspan=\"2\"></td><td class=\"price_text\">$" + additionalFees + "</td></tr>";
+
+      if (startDate) {
+        var freeMonths = 0; // TODO - calc free months
+        var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
+        paidThru.setMonth( paidThru. getMonth() + freeMonths + offerChosen.prepayMonths);
+        tableBody += "<tr><td>Paid Through Date:</td><td colspan=\"2\"></td><td class=\"price_text\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
+      }
+      var total_movein = additionalFees + monthlyRent*offerChosen.prepayMonths + premium*offerChosen.prepayMonths;
+
+      // TODO - calculate paid through date
+      $('price_totals_body').update(tableBody);
+      $('price_total').update("$" + total_movein);
     }
 
     function rentmeClick() {
@@ -255,6 +279,10 @@
       });
     }
 
+  function onDateChange() {
+    startDate = $F('date');
+    showTotals();
+  }
 
   Event.observe(window, 'load', function() {
     createMap();
@@ -325,7 +353,7 @@
           </div>
           <div>
             <div class="section_header">Start Date:</div>
-            <input type="text" id="date" style="width: 105px;" value="${params.date}"/>
+            <input type="text" id="date" style="width: 105px;" value="${params.date}" onchange="onDateChange()"/>
           </div>
           <div style="padding: 10px 0px;" class="section_header">
             Site Features:
@@ -370,7 +398,9 @@
               <div id="specialOffers">
               <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
                 <g:each in="${site.specialOffers}" var="offer">
-                  <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
+                  <g:if test="${offer.active}">
+                    <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
+                  </g:if>
                 </g:each>
               </div>
 
@@ -405,18 +435,32 @@
             </div>
           </div>
           <div style="clear:both;"></div>
-          <div class="price_options">
-            <span class="header_text_hi">Options</span>
-            <span class="header_text_hi right">Price</span>
-          </div>
-          <div id="price_table">
-          </div>
+          <table id="price_table">
+            <thead class="price_options">
+              <tr>
+                <th>Options</th>
+                <th>Months</th>
+                <th>Monthly Rent</th>
+                <th>Total Rent</th>
+              </tr>
+            </thead>
+            <tbody id="price_body">
+            </tbody>
+          </table>
+          <table id="price_totals">
+            <tbody id="price_totals_body">
+            </tbody>
+            <tfoot class="price_options">
+              <tr>
+                <th>Total Move-In Cost:</th>
+                <th></th>
+                <th></th>
+                <th id="price_total" class="price_text"></th>
+              </tr>
+            </tfoot>
+          </table>
           <div style="height:10px;"></div>
           <div id="rentmeBtn" style="float: right; display: none;">
-            <p><span id="price_monthly"></span></p>
-            <p><span id="price_admin"></span></p>
-            <p><span id="price_insurance"></span></p>
-            <p><span id="price_total"></span></p>
             <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
           </div>
         </div>
