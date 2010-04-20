@@ -18,7 +18,8 @@
     var unitTypes = [];
     var specialOffers = [];
     var searchSize;
-    var unitId = ${params.id};
+    var unitId;
+    var siteId = ${params.id};
     var rentalFormReady = false;
     var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
     var destLatLng;
@@ -36,9 +37,9 @@
       var sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
     <g:each var="ins" in="${site.insurances}">premiums[${ins.insuranceId}] = ${ins.premium};</g:each>
-    specialOffers[-1] = { active: true, promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
+    var defaultOffer = specialOffers[-1] = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
     <g:each var="offer" in="${site.specialOffers}">
-      specialOffers[${offer.id}] = { active: ${offer.active}, promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
+      specialOffers[${offer.id}] = { active: ${offer.active}, promoName: "${offer.promoName}", promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
     </g:each>
     var premium = 0;
     var offerChosen = specialOffers[-1];
@@ -53,7 +54,7 @@
       new Ajax.Request("${createLink(controller:'storageSite', action:'detailUnits')}",
       {
         method:'get',
-        parameters: {searchSize: searchSize, id: unitId},
+        parameters: {searchSize: searchSize, id: siteId },
         onSuccess:function(transport) {
           var tableBody = "";
           var units = transport.responseJSON.units;
@@ -214,25 +215,51 @@
     function specialOfferSelect() {
       $('specialOffers').observe('click', function(event) {
         var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
+        var oldOfferMonths = offerChosen.prepayMonths;
         offerChosen = specialOffers[offerId];
-        showTotals();
+        if (oldOfferMonths != offerChosen.prepayMonths)  {
+          buildTable();
+        } else {
+          showTotals();
+        }
       });
     }
 
     function showTotals() {
       var tableBody = "";
+      var freeMonths = 0;
       if (premium > 0) {
         tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + offerChosen.prepayMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + offerChosen.prepayMonths*premium + "</td></tr>";
       }
       tableBody += "<tr><td>Admin Fees:</td><td colspan=\"2\"></td><td class=\"price_text\">$" + additionalFees + "</td></tr>";
 
-      if (startDate) {
-        var freeMonths = 0; // TODO - calc free months
+      var offerDiscount = 0;
+      if (offerChosen != defaultOffer) {
+
+        switch(offerChosen.promoType) {
+          case "AMOUNT_OFF":
+            if (offerChosen.prepayMonths >= offerChosen.inMonth) {
+              offerDiscount = offerChosen.promoQty * offerChosen.prepayMonths;
+            }
+            break;
+
+          case "PERCENT_OFF":
+            if (offerChosen.prepayMonths >= offerChosen.inMonth) {
+              offerDiscount = (offerChosen.promoQty/100.0) * offerChosen.prepayMonths * monthlyRent;
+            }
+            break;
+
+          case "FIXED_RATE":
+            break;
+        }
+        tableBody += "<tr><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount + "</td></tr>";
+      }
+      if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
         paidThru.setMonth( paidThru. getMonth() + freeMonths + offerChosen.prepayMonths);
         tableBody += "<tr><td>Paid Through Date:</td><td colspan=\"2\"></td><td class=\"price_text\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
       }
-      var total_movein = additionalFees + monthlyRent*offerChosen.prepayMonths + premium*offerChosen.prepayMonths;
+      var total_movein = additionalFees + monthlyRent*offerChosen.prepayMonths + premium*offerChosen.prepayMonths - offerDiscount;
 
       // TODO - calculate paid through date
       $('price_totals_body').update(tableBody);

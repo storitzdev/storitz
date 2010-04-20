@@ -490,6 +490,10 @@ Added styles
     text-align: right;
 }
 
+.specialOfferText {
+    color: green;
+}
+
 .tooltip {
     width: auto;
       padding: 3px 7px 4px 6px;
