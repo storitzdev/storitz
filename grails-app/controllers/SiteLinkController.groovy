@@ -160,12 +160,30 @@ class SiteLinkController {
       site.isCamera = false
       site.isUnitAlarmed = false
 
+      site.openWeekday = !Boolean.parseBoolean(tab.bClosedWeekdays.text())
+      site.openSaturday = !Boolean.parseBoolean(tab.bClosedSaturday.text())
+      site.openSunday = !Boolean.parseBoolean(tab.bClosedSunday.text())
+
+      def sWeekdayStart = tab.dWeekdayStrt.text()
+      def sWeekdayEnd = tab.dWeekdayEnd.text()
+      def sSaturdayStart = tab.dSaturdayStrt.text()
+      def sSaturdayEnd = tab.dSaturdayEnd.text()
+      def sSundayStart = tab.dSundayStrt.text()
+      def sSundayEnd = tab.dSundayEnd.text()
+      site.startWeekday = sWeekdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sWeekdayStart) : null
+      site.endWeekday = sWeekdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sWeekdayEnd) : null
+      site.startSaturday = sSaturdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSaturdayStart) : null
+      site.endSaturday = sSaturdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSaturdayEnd) : null
+      site.startSunday = sSundayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSundayStart) : null
+      site.endSunday = sSundayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSundayEnd) : null
+
       def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
       site.addToContacts(contact)
 
       site.save()
-      
+
       unitsAvailable(siteLink, site)
+
       site.requiresInsurance = insurance(siteLink, site)
       if (site.units.size() > 0) {
         site.adminFee = adminFees(siteLink,  site.units.asList().get(0).unitNumber, site)

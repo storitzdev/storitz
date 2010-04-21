@@ -509,3 +509,8 @@ Added styles
     font-weight: bold;
     color: white;
 }
+
+.returnLink a:link, .returnLink a:visited, .returnLink a:hover {
+    color: green;
+    text-decoration: none;
+}

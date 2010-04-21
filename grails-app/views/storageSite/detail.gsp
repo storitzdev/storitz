@@ -360,6 +360,28 @@
             <div>
               ${site.city}, ${site.state} ${site.zipcode}
             </div>
+            <div style="height: 10px;"></div>
+            <div>
+              Weekdays:
+              <g:if test="${site.openWeekday}">
+                <g:formatDate format="h:mma" date="${site.startWeekday}"/> - <g:formatDate format="h:mma" date="${site.endWeekday}"/>
+              </g:if>
+              <g:else>Closed</g:else>
+            </div>
+            <div>
+              Saturday:
+              <g:if test="${site.openSaturday}">
+                <g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/>
+              </g:if>
+              <g:else>Closed</g:else>
+            </div>
+            <div>
+              Sunday:
+              <g:if test="${site.openSunday}">
+                <g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/>
+              </g:if>
+              <g:else>Closed</g:else>
+            </div>
           </div>
           <div style="clear: both; height: 15px;"></div>
           <div>
@@ -435,68 +457,86 @@
           </div>
         </div>
         <div class="right">
-          <div class="right vert_text">
-            <span id="step1" class="step_header">Search Storage</span>
-            <span id="step2" class="step_header_hi">Review Options</span>
-            <span id="step3" class="step_header">Billing Information</span>
-            <span id="step4" class="step_header">Confirm Order</span>
-          </div>
-          <div style="clear:both;"></div>
-          <div id="map">
-            <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=color:blue|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
-          </div>
-          <div id="detail_tabs">
-            <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
-            <div style="clear: both;"></div>
-            <div id="photos">
-              Photos
-            </div>
-            <div id="directions" style="display:none;">
-              <div>
-                Start Address: <input type="text" name="srcAddr" id="srcAddr"/>
+          <div id="detailInfo">
+            <div>
+              <div class="returnLink" style="margin-left: 100px; float: left;">
+                <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
+                  &laquo; Back to Seach Results
+                </g:link>
               </div>
-              <div>
-                <input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
+              <div class="returnLink" style="margin-right: 100px; float: right;">
+                <g:link controller="home" action="index">
+                  Results Start New Search &raquo;
+                </g:link>
               </div>
-              <div id="dirPanel"></div>
             </div>
-          </div>
-          <div style="clear:both;"></div>
-          <table id="price_table">
-            <thead class="price_options">
-              <tr>
-                <th>Options</th>
-                <th>Months</th>
-                <th>Monthly Rent</th>
-                <th>Total Rent</th>
-              </tr>
-            </thead>
-            <tbody id="price_body">
-            </tbody>
-          </table>
-          <table id="price_totals">
-            <tbody id="price_totals_body">
-            </tbody>
-            <tfoot class="price_options">
-              <tr>
-                <th>Total Move-In Cost:</th>
-                <th></th>
-                <th></th>
-                <th id="price_total" class="price_text"></th>
-              </tr>
-            </tfoot>
-          </table>
-          <div style="height:10px;"></div>
-          <div id="rentmeBtn" style="float: right; display: none;">
-            <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
+            <div style="height: 10px; clear: both;"></div>
+            <div id="map">
+              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=color:blue|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+            </div>
+            <div id="detail_tabs">
+              <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
+              <div style="clear: both;"></div>
+              <div id="photos">
+                Photos
+              </div>
+              <div id="directions" style="display:none;">
+                <div>
+                  Start Address: <input type="text" name="srcAddr" id="srcAddr"/>
+                </div>
+                <div>
+                  <input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
+                </div>
+                <div id="dirPanel"></div>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+            <table id="price_table">
+              <thead class="price_options">
+                <tr>
+                  <th>Options</th>
+                  <th>Months</th>
+                  <th>Monthly Rent</th>
+                  <th>Total Rent</th>
+                </tr>
+              </thead>
+              <tbody id="price_body">
+              </tbody>
+            </table>
+            <table id="price_totals">
+              <tbody id="price_totals_body">
+              </tbody>
+              <tfoot class="price_options">
+                <tr>
+                  <th>Total Move-In Cost:</th>
+                  <th></th>
+                  <th></th>
+                  <th id="price_total" class="price_text"></th>
+                </tr>
+              </tfoot>
+            </table>
+            <div style="height:10px;"></div>
+            <div id="rentmeBtn" style="float: right; display: none;">
+              <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
+            </div>
           </div>
         </div>
-        <div style="clear: both;"/>
+        <div style="clear:both;"></div>
         <div id="rentalForm" style="display: none;">
           <input type="hidden" id="priceDriveup" value="" />
           <input type="hidden" id="priceInterior" value="" />
           <input type="hidden" id="priceUpper" value="" />
           <input type="hidden" id="unitId" value="" />
+
+          <div class="right vert_text">
+            <span id="step1" class="step_header_hi">Primary Contact</span>
+            <span id="step2" class="step_header">Secondary Contact</span>
+            <span id="step3" class="step_header">Rental Options</span>
+            <span id="step4" class="step_header">Billing Info</span>
+            <span id="step5" class="step_header">Confirm Order</span>
+          </div>
+          <div style="clear:both;"></div>
+
           <table style="width:100%;">
             <tbody>
               <tr>

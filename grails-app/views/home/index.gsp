@@ -78,7 +78,7 @@
             if (feature.description) {
               c += feature.description;
             }
-            c += '<div style="text-align: center;"><a href="' + baseURL + feature.id + '">details</a></div></div>';
+            c += '<div style="text-align: center;"><a href="' + baseURL + feature.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
           if (infoWindow) {
             infoWindow.close();
           }
@@ -191,10 +191,10 @@
                       markerOver(s);
                     });
                     tableContents += '<tr><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '">' + s.address +'</a></div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
+                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
@@ -303,7 +303,16 @@
           });
         }
 
-        FastInit.addOnLoad(setupCalendar, setupHelp, setupForm);
+        Event.observe(window, 'load', function() {
+          setupCalendar();
+          setupHelp();
+          setupForm();
+          if ($F('address') !== '')  {
+            showAddress($F('address'), $F('size'), $F('date'));
+          }
+        });
+
+        //FastInit.addOnLoad(setupCalendar, setupHelp, setupForm);
 //]]>
       </script>
     </head>
@@ -320,20 +329,20 @@
             <form id="gsearch" action="" method="post">
               <div>Enter an address, city, state or zip code:</div>
               <div>
-                <input type="text" name="address" id="address"/>
+                <input type="text" name="address" id="address" value="${params.address}"/>
               </div>
               <div style="float: left;">
                 <div>
                   <div>Unit Size:</div>
                   <div style="height: 30px;">
-                    <g:select name="size" id="size" from="${sizeList}" optionKey="id" optionValue="description"/>
+                    <g:select name="size" id="size" from="${sizeList}" value="${params.size}" optionKey="id" optionValue="description"/>
                     <img id="sizeInfo" style="vertical-align: middle;" src="${resource(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
                   </div>
                 </div>
               </div>
               <div style="float: left;">
                 <div>Start Date:</div>
-                <input type="text" id="date" style="width: 105px;" />
+                <input type="text" id="date" style="width: 105px;" value="${params.date}"/>
               </div>
               <div style="clear: both; height: 10px;"></div>
               <div>

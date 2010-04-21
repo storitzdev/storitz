@@ -18,6 +18,15 @@ class StorageSite {
       adminFee(nullable:true)
       lockFee(nullable:true)
       freeTruck(nullable:false)
+      openWeekday(nullable:true)
+      openSaturday(nullable:true)
+      openSunday(nullable:true)
+      startWeekday(nullable:true)
+      endWeekday(nullable:true)
+      startSaturday(nullable:true)
+      endSaturday(nullable:true)
+      startSunday(nullable:true)
+      endSunday(nullable:true)
     }
   
     String title
@@ -50,6 +59,17 @@ class StorageSite {
   // Fees
     BigDecimal adminFee
     BigDecimal lockFee
+
+  // Operation Hours
+    Boolean openWeekday
+    Boolean openSaturday
+    Boolean openSunday
+    Date startWeekday
+    Date endWeekday
+    Date startSaturday
+    Date endSaturday
+    Date startSunday
+    Date endSunday
 
   def users() {
       return users.collect{it.user}
