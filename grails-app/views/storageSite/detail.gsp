@@ -59,6 +59,7 @@
           var tableBody = "";
           var units = transport.responseJSON.units;
           var rowCount = 0;
+          var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
           $('priceDriveup').value = false;
           $('priceUpper').value = false;
           $('priceInterior').value = false;
@@ -66,8 +67,8 @@
             if (units.driveup) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td>";
-              tableBody += "<td class=\"price_text\">" + offerChosen.prepayMonths + "</td><td class=\"price_text\">$" + units.driveup.price + "</td>";
-              tableBody += "<td class=\"price_text\">$" + units.driveup.price*offerChosen.prepayMonths + "</td>";
+              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price + "</td>";
+              tableBody += "<td class=\"price_text\">$" + units.driveup.price*durationMonths + "</td>";
               tableBody += "</tr>";
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
@@ -82,8 +83,8 @@
             if (units.interior) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td>";
-              tableBody += "<td class=\"price_text\">" + offerChosen.prepayMonths + "</td><td class=\"price_text\">$" + units.interior.price + "</td>";
-              tableBody += "<td class=\"price_text\">$" + units.interior.price*offerChosen.prepayMonths + "</td>";
+              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price + "</td>";
+              tableBody += "<td class=\"price_text\">$" + units.interior.price*durationMonths + "</td>";
               tableBody += "</tr>";
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
@@ -98,8 +99,8 @@
             if (units.upper) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td>";
-              tableBody += "<td class=\"price_text\">" + offerChosen.prepayMonths + "</td><td class=\"price_text\">$" + units.upper.price + "</td>";
-              tableBody += "<td class=\"price_text\">$" + units.upper.price*offerChosen.prepayMonths + "</td>";
+              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price + "</td>";
+              tableBody += "<td class=\"price_text\">$" + units.upper.price*durationMonths + "</td>";
               tableBody += "</tr>";
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
@@ -215,9 +216,9 @@
     function specialOfferSelect() {
       $('specialOffers').observe('click', function(event) {
         var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
-        var oldOfferMonths = offerChosen.prepayMonths;
+        var oldOfferMonths = offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth;
         offerChosen = specialOffers[offerId];
-        if (oldOfferMonths != offerChosen.prepayMonths)  {
+        if (oldOfferMonths != offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth)  {
           buildTable();
         } else {
           showTotals();
@@ -227,7 +228,6 @@
 
     function showTotals() {
       var tableBody = "";
-      var freeMonths = 0;
       if (premium > 0) {
         tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + offerChosen.prepayMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + offerChosen.prepayMonths*premium + "</td></tr>";
       }
@@ -238,28 +238,25 @@
 
         switch(offerChosen.promoType) {
           case "AMOUNT_OFF":
-            if (offerChosen.prepayMonths >= offerChosen.inMonth) {
-              offerDiscount = offerChosen.promoQty * offerChosen.prepayMonths;
-            }
+            offerDiscount = offerChosen.promoQty * offerChosen.expireMonth;
             break;
 
           case "PERCENT_OFF":
-            if (offerChosen.prepayMonths >= offerChosen.inMonth) {
-              offerDiscount = (offerChosen.promoQty/100.0) * offerChosen.prepayMonths * monthlyRent;
-            }
+            offerDiscount = (offerChosen.promoQty/100.0) * offerChosen.expireMonth * monthlyRent;
             break;
 
           case "FIXED_RATE":
+            offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
             break;
         }
-        tableBody += "<tr><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount + "</td></tr>";
+        tableBody += "<tr><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount*offerChosen.expireMonth + "</td></tr>";
       }
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
-        paidThru.setMonth( paidThru. getMonth() + freeMonths + offerChosen.prepayMonths);
+        paidThru.setMonth( paidThru.getMonth() + (offerChosen.prepay ? (offerChosen.prepayMonths + offerChosen.expireMonth) : (offerChosen.inMonth - 1) + offerChosen.expireMonth));
         tableBody += "<tr><td>Paid Through Date:</td><td colspan=\"2\"></td><td class=\"price_text\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
       }
-      var total_movein = additionalFees + monthlyRent*offerChosen.prepayMonths + premium*offerChosen.prepayMonths - offerDiscount;
+      var total_movein = additionalFees + (monthlyRent + premium)*(offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth) - offerDiscount*offerChosen.expireMonth;
 
       // TODO - calculate paid through date
       $('price_totals_body').update(tableBody);

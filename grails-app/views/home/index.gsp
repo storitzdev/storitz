@@ -28,6 +28,7 @@
         var oldBounds;
         var baseURL = '${request.contextPath}/storageSite/detail/';
         var mapSmoother = false;
+        var mapLoaded = false;
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
@@ -249,6 +250,7 @@
               TableKit.Sortable.init($('stresults'), {editable:false, stripe:true});
               getMarkers(true);
               google.maps.event.addListener(map, 'bounds_changed', redrawMap);
+              google.maps.event.addListener(map, 'tilesloaded', checkMapSubmit);
               geocoder = new google.maps.Geocoder();
             }
           });
@@ -303,16 +305,14 @@
           });
         }
 
-        Event.observe(window, 'load', function() {
-          setupCalendar();
-          setupHelp();
-          setupForm();
-          if ($F('address') !== '')  {
+        function checkMapSubmit() {
+          if (!mapLoaded && $F('address') != '') {
             showAddress($F('address'), $F('size'), $F('date'));
+            mapLoaded = true;
           }
-        });
+        }
 
-        //FastInit.addOnLoad(setupCalendar, setupHelp, setupForm);
+        FastInit.addOnLoad(setupCalendar, setupHelp, setupForm);
 //]]>
       </script>
     </head>
