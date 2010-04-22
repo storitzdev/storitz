@@ -1,14 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+  <head>
+    <g:set var="title" value="User List"/>
+    <g:render template="/header" />
 
+    <script type="text/javascript">
+//<![CDATA[
+//]]>
+  </script>
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="layout" content="main" />
-        <title>Edit User</title>
-    </head>
-    <body>
+  </head>
+  <body>
+    <g:render template="/topnav" />
+    <div id="stcontent">
+      <g:render template="/logo_bar" />
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${resource(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
             <span class="menuButton"><g:link class="list" action="list">User List</g:link></span>
             <span class="menuButton"><g:link class="create" action="create">New User</g:link></span>
         </div>
@@ -33,8 +42,8 @@
                                 <td valign="top" class="name">
                                     <label for="username">Username:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'username','errors')}">
-                                    <input type="text" id="username" name="username" value="${fieldValue(bean:userInstance,field:'username')}"/>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
+                                    <input type="text" id="username" name="username" value="${fieldValue(bean:person,field:'username')}"/>
                                 </td>
                             </tr> 
                         
@@ -42,26 +51,28 @@
                                 <td valign="top" class="name">
                                     <label for="userRealName">User Real Name:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'userRealName','errors')}">
-                                    <input type="text" id="userRealName" name="userRealName" value="${fieldValue(bean:userInstance,field:'userRealName')}"/>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
+                                    <input type="text" id="userRealName" name="userRealName" value="${fieldValue(bean:person,field:'userRealName')}"/>
                                 </td>
                             </tr> 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="passwd">Passwd:</label>
+                                    <label for="passwd">Password:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'passwd','errors')}">
-                                    <input type="text" id="passwd" name="passwd" value="${fieldValue(bean:userInstance,field:'passwd')}"/>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'passwd','errors')}">
+                                    <input type="text" id="passwd" name="passwd" value="${person?.passwd?.encodeAsHTML()}"/>
                                 </td>
                             </tr> 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="manager">Manager:</label>
+                                    <label>Manager:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'manager','errors')}">
-                                    <g:select optionKey="id" from="${User.list()}" name="manager.id" value="${userInstance?.manager?.id}" noSelection="['null':'']"></g:select>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'manager','errors')}">
+                                    <g:select from="${User.list()}" value="${person?.manager?.id}"
+                                              optionKey="id" optionValue="userRealName" name="manager.id"
+                                              noSelection="['null':'No manager selected']"/>
                                 </td>
                             </tr> 
                         
@@ -69,17 +80,22 @@
                                 <td valign="top" class="name">
                                     <label for="enabled">Enabled:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'enabled','errors')}">
-                                    <g:checkBox name="enabled" value="${userInstance?.enabled}" ></g:checkBox>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
+                                    <g:checkBox name="enabled" value="${person?.enabled}" />
                                 </td>
                             </tr> 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="authorities">Authorities:</label>
+                                    <label>Assign Roles:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'authorities','errors')}">
-                                    
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'authorities','errors')}">
+                                    <table><g:each var="role" in="${roleMap.keySet()}">
+                                      <tr>
+                                        <td valign="top" class="name" align="left">${role.authority.encodeAsHTML()}</td>
+                                        <td align="left"><g:checkBox name="${role.authority}" value="${roleMap[role]}"/></td>
+                                      </tr>
+                                    </g:each></table>
                                 </td>
                             </tr> 
                         
@@ -87,8 +103,8 @@
                                 <td valign="top" class="name">
                                     <label for="description">Description:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'description','errors')}">
-                                    <input type="text" id="description" name="description" value="${fieldValue(bean:userInstance,field:'description')}"/>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'description','errors')}">
+                                    <input type="text" id="description" name="description" value="${fieldValue(bean:person,field:'description')}"/>
                                 </td>
                             </tr> 
                         
@@ -96,8 +112,8 @@
                                 <td valign="top" class="name">
                                     <label for="email">Email:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'email','errors')}">
-                                    <input type="text" id="email" name="email" value="${fieldValue(bean:userInstance,field:'email')}"/>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'email','errors')}">
+                                    <input type="text" id="email" name="email" value="${fieldValue(bean:person,field:'email')}"/>
                                 </td>
                             </tr> 
                         
@@ -105,23 +121,23 @@
                                 <td valign="top" class="name">
                                     <label for="emailShow">Email Show:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'emailShow','errors')}">
-                                    <g:checkBox name="emailShow" value="${userInstance?.emailShow}" ></g:checkBox>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'emailShow','errors')}">
+                                    <g:checkBox name="emailShow" value="${person?.emailShow}" />
                                 </td>
                             </tr> 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="sites">Sites:</label>
+                                    <label>Sites:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'sites','errors')}">
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'sites','errors')}">
                                     
-<ul>
-<g:each var="s" in="${userInstance?.sites?}">
-    <li><g:link controller="siteUser" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="siteUser" params="['user.id':userInstance?.id]" action="create">Add SiteUser</g:link>
+                                  <ul>
+                                    <g:each var="s" in="${person?.sites}">
+                                        <li><g:link controller="siteUser" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+                                    </g:each>
+                                  </ul>
+                                  <g:link controller="siteUser" params="['user.id':person?.id]" action="create">Add SiteUser</g:link>
 
                                 </td>
                             </tr> 
@@ -130,8 +146,8 @@
                                 <td valign="top" class="name">
                                     <label for="pass">Pass:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:userInstance,field:'pass','errors')}">
-                                    <input type="text" name="pass" id="pass" value="${fieldValue(bean:userInstance,field:'pass')}" />
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'pass','errors')}">
+                                    <input type="text" name="pass" id="pass" value="${fieldValue(bean:person,field:'pass')}" />
                                 </td>
                             </tr> 
                         
@@ -141,8 +157,10 @@
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" value="Update" /></span>
                     <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
+                    <span class="button"><g:link class="edit" action="show" id="${person?.id}">Cancel</g:link></span>
                 </div>
             </g:form>
         </div>
+      </div>
     </body>
 </html>

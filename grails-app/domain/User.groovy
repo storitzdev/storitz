@@ -44,4 +44,6 @@ class User {
 		return sites.collect{it.site}
 	}
 
+    // TODO create a version of list with an exclude for showing possible managers
+
 }

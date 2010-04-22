@@ -145,7 +145,9 @@ class UserController {
 	}
 
 	def create = {
-		[person: new User(params), authorityList: Role.list()]
+        def person = new User()
+        person.properties = params
+		[person: person, authorityList: Role.list()]
 	}
 
 	/**
@@ -205,15 +207,15 @@ class UserController {
 		roles.sort { r1, r2 ->
 			r1.authority <=> r2.authority
 		}
-		Set userRoleNames = []
+		def userRoleNames = new HashSet([]) as Set
 		for (role in person.authorities) {
 			userRoleNames << role.authority
 		}
-		LinkedHashMap<Role, Boolean> roleMap = [:]
+		def roleMap = [:] as Map  //map of Role -> boolean
 		for (role in roles) {
 			roleMap[(role)] = userRoleNames.contains(role.authority)
 		}
-
+      
 		return [person: person, roleMap: roleMap]
 	}
 }
