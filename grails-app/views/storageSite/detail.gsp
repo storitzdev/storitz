@@ -58,6 +58,7 @@
         onSuccess:function(transport) {
           var tableBody = "";
           var units = transport.responseJSON.units;
+          var unitCount = (units.driveUp ? 1 : 0) + (units.interior ? 1 : 0) + (units.upper ? 1 : 0);
           var rowCount = 0;
           var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
           $('priceDriveup').value = false;
@@ -66,13 +67,13 @@
           if (units) {
             if (units.driveup) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup ? " checked=\"true\"" : "") + "/> Drive up</td>";
-              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price + "</td>";
-              tableBody += "<td class=\"price_text\">$" + units.driveup.price*durationMonths + "</td>";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup || unitCount == 1 ? " checked=\"true\"" : "") + "/> Drive up</td>";
+              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
+              tableBody += "<td class=\"price_text\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
-              if (priceDriveup) {
+              if (priceDriveup || unitCount == 1) {
                 unitId = units.driveup.id;
                 monthlyRent = prices[unitId];
                 $('priceDriveup').value = true;
@@ -82,13 +83,13 @@
             }
             if (units.interior) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior ? " checked=\"true\"" : "") + "/> Interior</td>";
-              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price + "</td>";
-              tableBody += "<td class=\"price_text\">$" + units.interior.price*durationMonths + "</td>";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior || unitCount == 1 ? " checked=\"true\"" : "") + "/> Interior</td>";
+              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
+              tableBody += "<td class=\"price_text\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
-              if (priceInterior) {
+              if (priceInterior || unitCount == 1) {
                 unitId = units.interior.id;
                 monthlyRent = prices[unitId];
                 $('priceInterior').value = true;
@@ -98,13 +99,13 @@
             }
             if (units.upper) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper ? " checked=\"true\"" : "") + "/> Upper</td>";
-              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price + "</td>";
-              tableBody += "<td class=\"price_text\">$" + units.upper.price*durationMonths + "</td>";
+              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper || unitCount == 1 ? " checked=\"true\"" : "") + "/> Upper</td>";
+              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
+              tableBody += "<td class=\"price_text\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
-              if (priceUpper) {
+              if (priceUpper || unitCount == 1) {
                 unitId = units.upper.id;
                 monthlyRent = prices[unitId];
                 $('priceUpper').value = true;
@@ -228,10 +229,11 @@
 
     function showTotals() {
       var tableBody = "";
+      var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
       if (premium > 0) {
-        tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + offerChosen.prepayMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + offerChosen.prepayMonths*premium + "</td></tr>";
+        tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + durationMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
       }
-      tableBody += "<tr><td>Admin Fees:</td><td colspan=\"2\"></td><td class=\"price_text\">$" + additionalFees + "</td></tr>";
+      tableBody += "<tr><td>Admin Fees:</td><td colspan=\"2\"></td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
 
       var offerDiscount = 0;
       if (offerChosen != defaultOffer) {
@@ -249,18 +251,18 @@
             offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
             break;
         }
-        tableBody += "<tr><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount*offerChosen.expireMonth + "</td></tr>";
+        tableBody += "<tr><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
-        paidThru.setMonth( paidThru.getMonth() + (offerChosen.prepay ? (offerChosen.prepayMonths + offerChosen.expireMonth) : (offerChosen.inMonth - 1) + offerChosen.expireMonth));
+        paidThru.setMonth( paidThru.getMonth() + durationMonths);
         tableBody += "<tr><td>Paid Through Date:</td><td colspan=\"2\"></td><td class=\"price_text\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
       }
-      var total_movein = additionalFees + (monthlyRent + premium)*(offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth) - offerDiscount*offerChosen.expireMonth;
+      var total_movein = additionalFees + (monthlyRent + premium)*durationMonths - offerDiscount;
 
       // TODO - calculate paid through date
       $('price_totals_body').update(tableBody);
-      $('price_total').update("$" + total_movein);
+      $('price_total').update("$" + total_movein.toFixed(2));
     }
 
     function rentmeClick() {
@@ -469,7 +471,7 @@
             </div>
             <div style="height: 10px; clear: both;"></div>
             <div id="map">
-              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=color:blue|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=icon:${resource(base:'http://storagetech.webeasy.com/storagetech', dir:'images', file:'icn_map_grn.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
             </div>
             <div id="detail_tabs">
               <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
