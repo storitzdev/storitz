@@ -29,6 +29,7 @@
         var baseURL = '${request.contextPath}/storageSite/detail/';
         var mapSmoother = false;
         var mapLoaded = false;
+        var savedFeature;
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
@@ -83,12 +84,21 @@
           if (infoWindow) {
             infoWindow.close();
           }
+          if (savedFeature) {
+            $('row'+savedFeature.id).removeClassName('rowhighlight');
+          }
           infoWindow = new google.maps.InfoWindow({content: c, maxWidth: 300});
-          google.maps.event.addListener(infoWindow, 'mouseout', function() { delete infoWindow });
+          google.maps.event.addListener(infoWindow, 'mouseout', function() {
+            delete infoWindow;
+          });
           infoWindow.open(map, feature.marker);
+          $('row'+feature.id).addClassName('rowhighlight');
+          savedFeature = feature;
         }
 
         function markerOut(feature) {
+          $('row'+feature.id).removeClassName('rowhighlight');
+          savedFeature = null;
           if (infoWindow) {
             infoWindow.close();
           }
@@ -191,11 +201,11 @@
                     google.maps.event.addListener(s.marker, 'mouseover', function() {
                       markerOver(s);
                     });
-                    tableContents += '<tr><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
+                    tableContents += '<tr id="row' + s.id + '" class="' + (rows % 2 == 1 ? 'rowodd' : 'roweven') + '"><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
                       '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceDriveup + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceInterior + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceUpper + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';

@@ -113,7 +113,7 @@ div.errors li {
     padding-left: 30px;
 }
 
-td.errors select {
+td.errors select, .rowhighlight {
     border: 1px solid red;
 }
 td.errors input {
