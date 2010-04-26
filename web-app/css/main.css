@@ -177,6 +177,17 @@ td.errors input {
     width: 85%;
 }
 
+.checkout_value {
+    text-align: left;
+    float: left;
+}
+
+.checkout_name {
+    text-align: left;
+    white-space: nowrap;
+    float: left;
+}
+
 /* ACTION BUTTONS */
 
 .buttons {
@@ -307,11 +318,40 @@ Added styles
     width: 666px;
 }
 
-#price_table thead, #price_totals tfoot {
+.checkout_header {
+    font-size: 12px;
+    font-weight: bold;
+    width: 666px;
+    padding-top: 8px;
+    padding-left: 10px;
+}
+
+.checkout_section_header {
+    background-color: #F2F2F2;
+    color: #052d72;
+    font-weight: bold;
+    font: 12px "century gothic", verdana, arial, helvetica, sans-serif;
+    width: 646px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+}
+
+.checkout_fields {
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.checkout_labels {
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+#price_table thead, #price_totals tfoot, table.checkout_table thead {
     color: white;
 }
 
-#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td {
+#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_table th, #checkout_price_table td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0px solid #CCC;
 	/*white-space: nowrap;
@@ -319,7 +359,7 @@ Added styles
 }
 
 #instructions {
-    font-family: 'century gothic';
+    font-family: "century gothic", verdana, arial, helvetica, sans-serif;
     font-weight: bolder;
     color: #052d72;
     font-size: 15px;
@@ -459,14 +499,14 @@ Added styles
     font: 14px "century gothic", verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     color: #003883;
-    margin: 10px 20px;
+    margin-right: 20px;
 }
 
 .step_header_hi {
     font: 14px "century gothic", verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     color: #3fac00;
-    margin: 10px 20px;
+    margin-right: 20px;
 }
 
 .section_header {
@@ -530,4 +570,10 @@ Added styles
 .returnLink a:link, .returnLink a:visited, .returnLink a:hover {
     color: green;
     text-decoration: none;
+}
+
+.bullet {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
 }
