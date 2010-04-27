@@ -116,6 +116,7 @@ div.errors li {
 td.errors select, .rowhighlight {
     border: 1px solid red;
 }
+
 td.errors input {
     border: 1px solid red;
 }
@@ -577,3 +578,9 @@ Added styles
     font-weight: bold;
     font-size: 20px;
 }
+
+.rowhighlight {
+    border: 1px solid #3fac00;
+;
+}
+
