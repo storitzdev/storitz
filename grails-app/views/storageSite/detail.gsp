@@ -297,6 +297,13 @@
       });
     }
 
+    function details_return() {
+      $('left_info').show();
+      $('left_checkout_info').hide();
+      $('rentalForm').hide();
+      $('detailInfo').show();
+    }
+
     function idTypeClick() {
       $('idType').observe('change', function(event) {
          var idType = $F('idType');
@@ -317,6 +324,85 @@
       });
     }
 
+    function primaryCountryClick() {
+      $('contactPrimary.country').observe('change', function(event) {
+        var country = $F('contactPrimary.country');
+        if (country == "US") {
+          $('primaryProvinceField').hide();
+          $('primaryStateField').show();
+          $('primaryProvinceLabel').hide();
+          $('primaryStateLabel').show();
+        } else {
+          $('primaryProvinceField').show();
+          $('primaryStateField').hide();
+          $('primaryProvinceLabel').show();
+          $('primaryStateLabel').hide();
+        }
+      });
+    }
+
+    function validateStep1() {
+      var valid = true;
+      valid &= Validation.validate('contactPrimary.firstName');
+      valid &= Validation.validate('contactPrimary.lastName');
+      valid &= Validation.validate('contactPrimary.streetNumber');
+      valid &= Validation.validate('contactPrimary.street');
+      valid &= Validation.validate('contactPrimary.city');
+      valid &= Validation.validate('contactPrimary.state');
+      valid &= Validation.validate('contactPrimary.zipcode');
+      valid &= Validation.validate('contactPrimary.phone');
+      valid &= Validation.validate('contactPrimary.email');
+      valid &= Validation.validate('idNumber');
+      return valid;
+    }
+
+    function nextStep1() {
+      if (validateStep1()) {
+        $('step1_bullet').hide();
+        $('step2_bullet').show();
+        $('step1').removeClassName('step_header_hi');
+        $('step1').addClassName('step_header');
+        $('step2').removeClassName('step_header');
+        $('step2').addClassName('step_header_hi');
+        $('primary_contact').hide();
+        $('secondary_contact').show();
+      }
+    }
+
+    function prevStep2() {
+      $('step2_bullet').hide();
+      $('step1_bullet').show();
+      $('step1').addClassName('step_header_hi');
+      $('step1').removeClassName('step_header');
+      $('step2').addClassName('step_header');
+      $('step2').removeClassName('step_header_hi');
+      $('secondary_contact').hide();
+      $('primary_contact').show();
+    }
+
+    function nextStep2() {
+        // TODO validate fields
+      $('step2_bullet').hide();
+      $('step3_bullet').show();
+      $('step2').removeClassName('step_header_hi');
+      $('step2').addClassName('step_header');
+      $('step3').removeClassName('step_header');
+      $('step3').addClassName('step_header_hi');
+      $('secondary_contact').hide();
+      $('rental_info').show();
+    }
+
+    function prevStep3() {
+      $('step3_bullet').hide();
+      $('step2_bullet').show();
+      $('step3').removeClassName('step_header_hi');
+      $('step3').addClassName('step_header');
+      $('step2').removeClassName('step_header');
+      $('step2').addClassName('step_header_hi');
+      $('rental_info').hide();
+      $('secondary_contact').show();
+    }
+
     function setupCalendar() {
       Calendar.setup({
           dateField     : 'date',
@@ -328,6 +414,9 @@
   function onDateChange() {
     startDate = $F('date');
     showTotals();
+  }
+
+  function setupValidation() {
   }
 
   Event.observe(window, 'load', function() {
@@ -344,6 +433,8 @@
     rentmeClick();
     setupCalendar();
     specialOfferSelect();
+    setupValidation();
+    primaryCountryClick();
     <g:if test="${site.requiresInsurance}">
     insuranceClick();
     </g:if>
@@ -611,10 +702,10 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.firstName', 'errors')}">
-                    <g:textField name="contactPrimary.firstName" style="width: 180px;" value="${rentalTransaction?.contactPrimary?.firstName}" />
+                    <g:textField id="contactPrimary.firstName" name="contactPrimary.firstName" style="width: 180px;" class="required" value="${rentalTransaction?.contactPrimary?.firstName}" />
                 </div>
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.lastName', 'errors')}">
-                  <g:textField name="contactPrimary.lastName" style="width: 180px;" value="${rentalTransaction?.contactPrimary?.lastName}" />
+                  <g:textField id="contactPrimary.lastName" name="contactPrimary.lastName" style="width: 180px;" class="required" value="${rentalTransaction?.contactPrimary?.lastName}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -632,16 +723,16 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetNumber', 'errors')}">
-                    <g:textField name="contactPrimary.streetNumber" style="width:80px;" value="${rentalTransaction?.contactPrimary?.streetNumber}" />
+                    <g:textField name="contactPrimary.streetNumber" id="contactPrimary.streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.streetNumber}" />
                 </div>
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.street', 'errors')}">
-                    <g:textField name="contactPrimary.street" style="width:180px;" value="${rentalTransaction?.contactPrimary?.street}" />
+                    <g:textField name="contactPrimary.street" id="contactPrimary.street" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.street}" />
                 </div>
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetType', 'errors')}">
-                    <g:select name="contactPrimary.streetType" style="width:80px;" from="${storagetech.constants.StreetType.list()}" value="${rentalTransaction?.contactPrimary?.streetType}" optionValue="value"/>
+                    <g:select name="contactPrimary.streetType" id="contactPrimary.streetType" style="width:80px;" from="${storagetech.constants.StreetType.list()}" value="${rentalTransaction?.contactPrimary?.streetType}" optionValue="value"/>
                 </div>
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.unit', 'errors')}">
-                    <g:textField name="contactPrimary.unit" style="width:80px;" value="${rentalTransaction?.contactPrimary?.unit}" />
+                    <g:textField name="contactPrimary.unit" id="contactPrimary.unit" style="width:80px;" value="${rentalTransaction?.contactPrimary?.unit}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -662,19 +753,19 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.city', 'errors')}">
-                    <g:textField name="contactPrimary.city" style="width:180px;" value="${rentalTransaction?.contactPrimary?.city}" />
+                    <g:textField name="contactPrimary.city" name="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.city}" />
                 </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.state', 'errors')}">
-                  <g:select name="contactPrimary.state" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactPrimary?.state}" optionValue="value"/>
+                <div id="primaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.state', 'errors')}">
+                  <g:select name="contactPrimary.state" id="contactPrimary.state" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactPrimary?.state}" optionValue="value"/>
                 </div>
-                <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.province', 'errors')}" style="width: 200px;display: none;">
-                  <g:textField name="contactPrimary.province" style="width:180px;" value="${rentalTransaction?.contactPrimary?.province}" />
+                <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.province', 'errors')}" style="width: 150px;display: none;">
+                  <g:textField name="contactPrimary.province" name="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransaction?.contactPrimary?.province}" />
                 </div>
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.zipcode', 'errors')}">
-                    <g:textField name="contactPrimary.zipcode" style="width:80px;" value="${rentalTransaction?.contactPrimary?.zipcode}" />
+                    <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.zipcode}" />
                 </div>
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.country', 'errors')}">
-                  <g:select name="contactPrimary.country" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.contactPrimary?.country}" optionKey="key" optionValue="display"/>
+                  <g:select name="contactPrimary.country" id="contactPrimary.country" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.contactPrimary?.country}" optionKey="key" optionValue="display"/>
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -682,10 +773,10 @@
                 <div style="width:200px;" class="checkout_name">
                   <label for="contactPrimary.city">City</label>
                 </div>
-                <div style="width:100px;" class="checkout_name">
+                <div style="width:100px;" id="primaryStateLabel" class="checkout_name">
                   <label for="contactPrimary.state">State</label>
                 </div>
-                <div style="width: 200px;display: none;"id="primaryProvinceLabel" class="checkout_name">
+                <div style="width: 150px;display: none;" id="primaryProvinceLabel" class="checkout_name">
                   <label for="contactPrimary.province">Province</label>
                 </div>
                 <div style="width:100px;" class="checkout_name">
@@ -701,13 +792,13 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phoneType', 'errors')}">
-                    <g:select name="contactPrimary.phoneType" style="width:80px;" from="${storagetech.constants.PhoneType.list()}" value="${rentalTransaction?.contactPrimary?.phoneType}" optionValue="value"/>
+                    <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storagetech.constants.PhoneType.list()}" value="${rentalTransaction?.contactPrimary?.phoneType}" optionValue="value"/>
                 </div>
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phone', 'errors')}">
-                    <g:textField name="contactPrimary.phone" style="width:180px;" value="${rentalTransaction?.contactPrimary?.phone}" />
+                    <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.phone}" />
                 </div>
                 <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.email', 'errors')}">
-                    <g:textField name="contactPrimary.email" style="width:280px;" value="${rentalTransaction?.contactPrimary?.email}" />
+                    <g:textField name="contactPrimary.email" id="contactPrimary.email" class="required validate-email" style="width:280px;" value="${rentalTransaction?.contactPrimary?.email}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -731,13 +822,13 @@
                     <g:select id="idType" name="idType" style="width:180px;" from="${storagetech.constants.IdType.list()}" value="${rentalTransaction?.idType}" optionValue="value"/>
                 </div>
                 <div id="idStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idState', 'errors')}">
-                    <g:select name="idState" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.idState}" optionValue="value"/>
+                    <g:select name="idState" id="idState" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.idState}" optionValue="value"/>
                 </div>
                 <div id="idCountryField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idCountry', 'errors')}" style="width:200px;display: none;">
-                    <g:select name="idCountry" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.idCountry}" optionKey="key" optionValue="display"/>
+                    <g:select name="idCountry" id="idCountry" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.idCountry}" optionKey="key" optionValue="display"/>
                 </div>
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idNumber', 'errors')}">
-                    <g:textField name="idNumber" style="width:180px;" value="${rentalTransaction?.idNumber}" />
+                    <g:textField name="idNumber" id="idNumber" class="required" style="width:180px;" value="${rentalTransaction?.idNumber}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -755,6 +846,10 @@
                   <label for="idNumber">ID Number</label>
                 </div>
                 <div style="clear:both;"></div>
+              </div>
+              <div style="height:30px;line-height:30px;">
+                <a href="#" onclick="details_return(); return false">Back to details</a>&nbsp;
+                <a href="#" onclick="nextStep1(); return false">Next</a>
               </div>
             </div>
 
@@ -824,7 +919,7 @@
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.state', 'errors')}">
                   <g:select name="contactSecondary.state" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
                 </div>
-                <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.province', 'errors')}" style="width: 200px;display: none;">
+                <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.province', 'errors')}" style="width: 200px;display: none;">
                   <g:textField name="contactSecondary.province" style="width:180px;" value="${rentalTransaction?.contactSecondary?.province}" />
                 </div>
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.zipcode', 'errors')}">
@@ -880,6 +975,11 @@
                 </div>
                 <div style="clear:both;"></div>
               </div>
+            <div style="height:30px;line-height:30px;">
+              <a href="#" onclick="details_return(); return false">Back to details</a>&nbsp;
+              <a href="#" onclick="prevStep2(); return false">Prev</a>
+              <a href="#" onclick="nextStep2(); return false">Next</a>
+            </div>
             </div>
 
           <!-- Rental Info -->
