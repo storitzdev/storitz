@@ -131,16 +131,16 @@ input.disabled {
 	background-color: #F2F2F2;
 }
 
-input.required, textarea.required {
+input.required, textarea.required, select.required, checkbox.required {
 	border: 1px solid #052d72;
 }
 
-input.validation-failed, textarea.validation-failed {
+input.validation-failed, textarea.validation-failed, select.validation-failed, checkbox.validation-failed {
 	border: 1px solid #FF3300;
 	color : #FF3300;
 }
 
-input.validation-passed, textarea.validation-passed {
+input.validation-passed, textarea.validation-passed, select.validation-passed, checkbox.validation-passed {
 	border: 1px solid #00CC00;
 	color : #000;
 }

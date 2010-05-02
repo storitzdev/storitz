@@ -7,6 +7,7 @@ class Contact {
 
     String firstName
     String lastName
+    String suffixName
     String streetNumber
     String street
     StreetType streetType
@@ -23,6 +24,7 @@ class Contact {
     static constraints = {
       email(email:true)
       zipcode(size:5..10)
+      suffixName(nullable:true)
       unit(nullable:true)
       province(nullable:true)
       country(nullable:true)
