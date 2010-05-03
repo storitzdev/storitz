@@ -250,7 +250,7 @@
       if (premium > 0) {
         tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + durationMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
       }
-      tableBody += "<tr><td>Admin Fees:</td><td colspan=\"2\"></td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+      tableBody += "<tr><td>Admin Fees:</td><td></td><td></td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
 
       var offerDiscount = 0;
       if (offerChosen != defaultOffer) {
@@ -268,7 +268,7 @@
             offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
             break;
         }
-        tableBody += "<tr><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
+        tableBody += "<tr class=\"roweven\"><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
@@ -389,6 +389,14 @@
       return valid;
     }
 
+    function validateStep3() {
+      var valid = true;
+      valid &= Validation.validate('rentalUse');
+      valid &= Validation.validate('insuranceId');
+      valid &= Validation.validate('terms');
+      return valid;
+    }
+
     function nextStep1() {
       if (validateStep1()) {
         $('step1_bullet').hide();
@@ -438,7 +446,16 @@
     }
 
     function nextStep3() {
-      
+      if (validateStep3()) {
+        $('step3_bullet').hide();
+        $('step4_bullet').show();
+        $('step3').removeClassName('step_header_hi');
+        $('step3').addClassName('step_header');
+        $('step4').removeClassName('step_header');
+        $('step4').addClassName('step_header_hi');
+        $('rental_info').hide();
+        // TODO - show checkouts
+      }
     }
 
     function setupCalendar() {
@@ -488,7 +505,7 @@
     <div id="stcontent">
       <g:render template="/logo_bar" />
       <div>
-        <div id="site_info">
+        <div id="site_info" style="margin-top: 25px;">
           <div id="site_logo">
           </div>
           <div id="site_address">
@@ -608,51 +625,51 @@
             </div>
           </div>
           <div id="left_checkout_info" style="display: none;">
-            <div>
+            <div class="section_header">
               Unit size: <span id="checkout_unit_size"></span>
             </div>
-            <div>
+            <div class="section_header">
               Move in date: <span id="checkout_movein_date"></span>
             </div>
-            <table id="checkout_price_table" style="width: 300px;">
+            <div style="height: 15px;"></div>
+            <div class="order_summary_top header_text_hi">Order Summary</div>
+            <table id="checkout_price_table" style="width: 300px; border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
               <thead>
-                <tr>
+                <tr style="background: #F1F8E9;">
                   <th>Options</th>
                   <th>Months</th>
-                  <th>Monthly Rent</th>
+                  <th>Rent</th>
                   <th>Total Rent</th>
                 </tr>
               </thead>
               <tbody id="checkout_price_body">
               </tbody>
             </table>
-            <table id="checkout_price_totals" style="width: 300px;">
+            <table id="checkout_price_totals" style="width: 300px;border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
               <tbody id="checkout_price_totals_body">
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Total Move-In Cost:</th>
-                  <th></th>
-                  <th></th>
-                  <th id="checkout_price_total"></th>
-                </tr>
-              </tfoot>
             </table>
+            <div class="order_summary_bottom">
+              <div class="left header_text_hi">Total Move-In Cost:</div>
+              <div class="right header_text_hi_right" id="checkout_price_total"></div>
+              <div stlye="clear: both;"></div>
+            </div>
             <div style="height: 10px;"></div>
             <div class="returnLink">
+              <a href="#" onclick="details_return(); return false">&laquo; Back to details</a>&nbsp;|
               <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
                 &laquo; Back to Seach Results
               </g:link>
             </div>
             <div class="returnLink">
               <g:link controller="home" action="index">
-                Results Start New Search &raquo;
+                New Search &raquo;
               </g:link>
             </div>
           </div>
         </div>
 
-        <div class="right">
+        <div style="width: 670px;" class="right">
           <div id="detailInfo">
             <div>
               <div class="returnLink" style="margin-left: 100px; float: left;">
@@ -662,7 +679,7 @@
               </div>
               <div class="returnLink" style="margin-right: 100px; float: right;">
                 <g:link controller="home" action="index">
-                  Results Start New Search &raquo;
+                  New Search &raquo;
                 </g:link>
               </div>
             </div>
@@ -688,12 +705,12 @@
             </div>
             <div style="clear:both;"></div>
             <table id="price_table">
-              <thead class="price_options">
-                <tr>
-                  <th>Options</th>
-                  <th>Months</th>
-                  <th>Monthly Rent</th>
-                  <th>Total Rent</th>
+              <thead>
+                <tr class="price_options">
+                  <th style="width:200px;">Options</th>
+                  <th style="width:200px;">Months</th>
+                  <th style="width:200px;">Rent</th>
+                  <th style="width:200px;">Total Rent</th>
                 </tr>
               </thead>
               <tbody id="price_body">
@@ -702,12 +719,12 @@
             <table id="price_totals">
               <tbody id="price_totals_body">
               </tbody>
-              <tfoot class="price_options">
-                <tr>
-                  <th>Total Move-In Cost:</th>
-                  <th></th>
-                  <th></th>
-                  <th id="price_total" class="price_text"></th>
+              <tfoot>
+                <tr class="price_options">
+                  <th style="width:200px;">Total Move-In Cost:</th>
+                  <th style="width:200px;"></th>
+                  <th style="width:200px;"></th>
+                  <th id="price_total"  style="width:200px;" class="price_text"></th>
                 </tr>
               </tfoot>
             </table>
@@ -892,9 +909,10 @@
                 </div>
                 <div style="clear:both;"></div>
               </div>
-              <div style="height:30px;line-height:30px;">
-                <a href="#" onclick="details_return(); return false">Back to details</a>&nbsp;
-                <a href="#" onclick="nextStep1(); return false">Next</a>
+              <div style="margin-top: 20px;">
+                <div class="left"><img src="${resource(dir:'images', file:'btn-back2.png')}" onclick="details_return(); return false" alt="Back"></div>
+                <div class="right"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
+                <div style="clear:both;"></div>
               </div>
             </div>
 
@@ -1026,12 +1044,13 @@
                 </div>
                 <div style="clear:both;"></div>
               </div>
-            <div style="height:30px;line-height:30px;">
-              <a href="#" onclick="details_return(); return false">Back to details</a>&nbsp;
-              <a href="#" onclick="prevStep2(); return false">Prev</a>
-              <a href="#" onclick="nextStep2(); return false">Next</a>
+            <div style="margin-top: 20px;">
+              <div class="left"><img src="${resource(dir:'images', file:'btn-back2.png')}" onclick="details_return(); return false" alt="Back"></div>
+              <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
+              <div class="right"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
+              <div style="clear:both;"></div>
             </div>
-            </div>
+          </div>
 
           <!-- Rental Info -->
           <div id="rental_info" style="display:none;">
@@ -1097,14 +1116,15 @@
               </div>
               <div class="checkout_fields">
                 <div class="value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
-                    <g:checkBox name="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions to rent this property
+                    <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions to rent this property
                 </div>
                 <div style="clear:both;"></div>
               </div>
-              <div style="height:30px;line-height:30px;">
-                <a href="#" onclick="details_return(); return false">Back to details</a>&nbsp;
-                <a href="#" onclick="prevStep3(); return false">Prev</a>
-                <a href="#" onclick="nextStep3(); return false">Next</a>
+              <div style="margin-top: 20px;">
+                <div class="left"><img src="${resource(dir:'images', file:'btn-back2.png')}" onclick="details_return(); return false" alt="Back"></div>
+                <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
+                <div class="right"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
+                <div style="clear:both;"></div>
               </div>
             </div>
           </div>

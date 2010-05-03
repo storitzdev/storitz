@@ -132,6 +132,7 @@ Object.extend(Validation, {
 		var prop = '__advice'+name.camelize();
 		try {
 		if(Validation.isVisible(elm) && !v.test($F(elm), elm)) {
+            /*
 			if(!elm[prop]) {
 				var advice = Validation.getAdvice(name, elm);
 				if(advice == null) {
@@ -158,6 +159,7 @@ Object.extend(Validation, {
 					new Effect.Appear(advice, {duration : 1 });
 				}
 			}
+			*/
 			elm[prop] = true;
 			elm.removeClassName('validation-passed');
 			elm.addClassName('validation-failed');

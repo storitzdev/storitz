@@ -9,7 +9,7 @@
 html, body {
     background: #fff;
     color: #333;
-    font: 11px "century gothic", verdana, arial, helvetica, sans-serif;
+    font: 11px verdana, arial, helvetica, sans-serif;
     min-width: 1000px;
     min-height: 594px;
     padding: 0px;
@@ -50,6 +50,10 @@ textarea {
 
 input:focus, select:focus, textarea:focus {
     border: 1px solid #b2d1ff;
+}
+
+tr th {
+    background: transparent;
 }
 
 /* NAVIGATION MENU */
@@ -352,10 +356,10 @@ Added styles
 }
 
 .checkout_section_header {
-    background-color: #F2F2F2;
+    background-color: #f1f8e9;
     color: #052d72;
     font-weight: bold;
-    font: 12px "century gothic", verdana, arial, helvetica, sans-serif;
+    font: 13px verdana, arial, helvetica, sans-serif;
     width: 646px;
     height: 30px;
     line-height: 30px;
@@ -370,13 +374,14 @@ Added styles
 .checkout_labels {
     padding-bottom: 10px;
     padding-left: 20px;
+    color: #154A99;
 }
 
 #price_table thead, #price_totals tfoot, table.checkout_table thead {
     color: white;
 }
 
-#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_table th, #checkout_price_table td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
+#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_table th, #checkout_price_table td, #checkout_price_totals th, #checkout_price_totals tbody td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0px solid #CCC;
 	/*white-space: nowrap;
@@ -384,7 +389,7 @@ Added styles
 }
 
 #instructions {
-    font-family: "century gothic", verdana, arial, helvetica, sans-serif;
+    font-family: verdana, arial, helvetica, sans-serif;
     font-weight: bolder;
     color: #052d72;
     font-size: 15px;
@@ -518,17 +523,19 @@ Added styles
 
 .vert_text {
     line-height: 25px;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
 
 .step_header {
-    font: 14px "century gothic", verdana, arial, helvetica, sans-serif;
+    font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     color: #003883;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .step_header_hi {
-    font: 14px "century gothic", verdana, arial, helvetica, sans-serif;
+    font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     color: #3fac00;
     margin-right: 20px;
@@ -547,25 +554,52 @@ Added styles
 }
 
 .other_details {
-    background-image: url(../images/bkg-tablehead-257x30.gif);
+    background-image: url(../images/bkg-tablehead-300x30.gif);
     background-repeat: no-repeat;
-    width: 257px;
+    width: 300px;
     height: 30px;
+    display: block;
+}
+
+.order_summary_top {
+    background-image: url(../images/bkg-order-summary-top.gif);
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 31px;
+    display: block;
+}
+
+.order_summary_bottom {
+    background-image: url(../images/bkg-order-summary-bottom.gif);
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 31px;
+    display: block;
 }
 
 .header_text_hi {
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     line-height: 30px;
-    padding: 0px 20px;
+    padding: 0 0 0 20px;
     color: white;
 }
+
+.header_text_hi_right {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 30px;
+    padding: 0 10px 0 0;
+    color: white;
+}
+
 
 .price_options {
     background-image: url(../images/bkg-tablehead-666x30.gif);
     background-repeat: no-repeat;
     width: 666px;
     height: 30px;
+    display: block;
 }
 
 .price_text {
