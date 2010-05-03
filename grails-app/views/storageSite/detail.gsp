@@ -392,7 +392,7 @@
     function validateStep3() {
       var valid = true;
       valid &= Validation.validate('rentalUse');
-      valid &= Validation.validate('insuranceId');
+      valid &= Validation.validate('insuranceChoices');
       valid &= Validation.validate('terms');
       return valid;
     }
@@ -986,7 +986,7 @@
                     <g:textField name="contactSecondary.city" id="contactSecondary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.city}" />
                 </div>
                 <div id="secondaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.state', 'errors')}">
-                  <g:select name="contactSecondary.state" id="contactSecondary.state" class="validate-select" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
+                  <g:select name="contactSecondary.state" id="contactSecondary.state" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
                 </div>
                 <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.province', 'errors')}" style="width: 200px;display: none;">
                   <g:textField name="contactSecondary.province" id="contactSecondary.province" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.province}" />
@@ -1061,8 +1061,8 @@
               Rental Use
             </div>
             <div class="checkout_fields">
-              <div class="value ${hasErrors(bean: rentalTransaction, field: 'rentalUse', 'errors')}">
-                  <g:radioGroup name="rentalUse" id="rentalUse" class="required" labels="${storagetech.constants.RentalUse.labels()}" values="${storagetech.constants.RentalUse.list()}" value="${rentalTransaction?.rentalUse}">
+              <div id="rentalUse" class="validate-one-required value ${hasErrors(bean: rentalTransaction, field: 'rentalUse', 'errors')}">
+                  <g:radioGroup name="rentalUse" labels="${storagetech.constants.RentalUse.labels()}" values="${storagetech.constants.RentalUse.list()}" value="${rentalTransaction?.rentalUse}">
                     <div class="left" style="width:200px;">${it.radio} ${it.label}</div>
                   </g:radioGroup>
               </div>
@@ -1094,7 +1094,7 @@
                 Insurance
               </div>
               <div class="checkout_fields" style="width:646px;">
-                <div id="insuranceChoices">
+                <div id="insuranceChoices" class="validate-one-required" >
                   <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" id="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
                   <g:each in="${site.insurances.sort{it.premium}}" var="ins">
                     <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>

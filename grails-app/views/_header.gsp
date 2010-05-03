@@ -3,6 +3,7 @@
   <meta name="KEYWORDS" content="storage, personal storage, moving"/>
   <meta name="ROBOTS" content="FOLLOW"/>
   <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+  <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
 
   <script type="text/javascript">
 //<![CDATA[
