@@ -59,7 +59,7 @@
           var tableBody = "";
           var checkoutTableBody = "";
           var units = transport.responseJSON.units;
-          var unitCount = (units.driveUp ? 1 : 0) + (units.interior ? 1 : 0) + (units.upper ? 1 : 0);
+          var unitCount = (typeof(units.driveUp) !== 'undefined' ? 1 : 0) + (typeof(units.interior) !== 'undefined' ? 1 : 0) + (typeof(units.upper) !== 'undefined' ? 1 : 0);
           var rowCount = 0;
           var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
           $('priceDriveup').value = false;
@@ -393,7 +393,7 @@
       var valid = true;
       valid &= Validation.validate('rentalUse');
       valid &= Validation.validate('insuranceChoices');
-      valid &= Validation.validate('terms');
+      valid &= Validation.validate('termsHolder');
       return valid;
     }
 
@@ -1061,12 +1061,12 @@
               Rental Use
             </div>
             <div class="checkout_fields">
-              <div id="rentalUse" class="validate-one-required value ${hasErrors(bean: rentalTransaction, field: 'rentalUse', 'errors')}">
+              <div id="rentalUse" class="validate-one-radio value ${hasErrors(bean: rentalTransaction, field: 'rentalUse', 'errors')}">
                   <g:radioGroup name="rentalUse" labels="${storagetech.constants.RentalUse.labels()}" values="${storagetech.constants.RentalUse.list()}" value="${rentalTransaction?.rentalUse}">
                     <div class="left" style="width:200px;">${it.radio} ${it.label}</div>
                   </g:radioGroup>
+                  <div style="clear:both;"></div>
               </div>
-              <div style="clear:both;"></div>
             </div>
             <g:if test="${site.freeTruck == storagetech.constants.TruckType.FREE}">
               <div class="checkout_section_header">
@@ -1094,13 +1094,13 @@
                 Insurance
               </div>
               <div class="checkout_fields" style="width:646px;">
-                <div id="insuranceChoices" class="validate-one-required" >
+                <div id="insuranceChoices" class="validate-one-radio" >
                   <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" id="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
                   <g:each in="${site.insurances.sort{it.premium}}" var="ins">
                     <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
                   </g:each>
+                  <div style="clear:both;"></div>
                 </div>
-                <div style="clear:both;"></div>
               </div>
               <div class="checkout_section_header">
                 Active Military
@@ -1115,7 +1115,7 @@
                 Terms
               </div>
               <div class="checkout_fields">
-                <div class="value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
+                <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
                     <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions to rent this property
                 </div>
                 <div style="clear:both;"></div>

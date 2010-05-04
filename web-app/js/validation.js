@@ -131,7 +131,8 @@ Object.extend(Validation, {
 		var v = Validation.get(name);
 		var prop = '__advice'+name.camelize();
 		try {
-		if(Validation.isVisible(elm) && !v.test($F(elm), elm)) {
+        var val = elm.tagName.toLowerCase() != 'div' ? $F(elm) : null;
+		if(Validation.isVisible(elm) && !v.test(val, elm)) {
             /*
 			if(!elm[prop]) {
 				var advice = Validation.getAdvice(name, elm);
@@ -278,5 +279,11 @@ Validation.addAllThese([
 				return $A(options).any(function(elm) {
 					return $F(elm);
 				});
-			}]
-]);
+			}],
+    ['validate-one-radio', 'Please select one of the above options.', function (v,elm) {
+                return elm.select('input:checked[type=radio]').pluck('value').length > 0;
+            }],
+    ['validate-one-checkbox', 'Please select one of the above options.', function (v,elm) {
+                return elm.select('input:checked[type=checkbox]').pluck('value').length > 0;
+            }]
+        ]);
