@@ -302,7 +302,7 @@
 
         function setupHelp() {
           $('sizeInfo').observe('click', function(event) {
-            $('sizeHelp').setStyle({ top: this.offsetTop - 10 + "px", left: this.offsetLeft + this.width + 10 + "px" });
+            $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
             Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
           });
 

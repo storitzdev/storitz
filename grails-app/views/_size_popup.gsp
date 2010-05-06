@@ -1,4 +1,4 @@
-<div id="sizeHelp" style="display: none;">
+<div id="sizeHelp" style="display: none;width: 400px;">
   <table id="sizeHelpContents">
     <thead>
     <tr>

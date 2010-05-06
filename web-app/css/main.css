@@ -383,7 +383,7 @@ Added styles
 
 #stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_table th, #checkout_price_table td, #checkout_price_totals th, #checkout_price_totals tbody td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
-	border: 0px solid #CCC;
+	border: 0px;
 	/*white-space: nowrap;
 	overflow: hidden;*/
 }
@@ -600,6 +600,7 @@ Added styles
     width: 666px;
     height: 30px;
     display: block;
+    position: relative;
 }
 
 .price_text {

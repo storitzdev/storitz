@@ -145,7 +145,7 @@
 
     function setupHelp() {
       $('sizeInfo').observe('click', function(event) {
-        $('sizeHelp').setStyle({ top: this.offsetTop - 10 + "px", left: this.offsetLeft + this.width + 10 + "px" });
+        $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
         Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
       });
     }
@@ -634,14 +634,12 @@
             <div style="height: 15px;"></div>
             <div class="order_summary_top header_text_hi">Order Summary</div>
             <table id="checkout_price_table" style="width: 300px; border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
-              <thead>
-                <tr style="background: #F1F8E9;">
-                  <th>Options</th>
-                  <th>Months</th>
-                  <th>Rent</th>
-                  <th>Total Rent</th>
-                </tr>
-              </thead>
+              <tr style="background: #F1F8E9;">
+                <th>Options</th>
+                <th>Months</th>
+                <th>Rent</th>
+                <th>Total Rent</th>
+              </tr>
               <tbody id="checkout_price_body">
               </tbody>
             </table>
@@ -707,9 +705,9 @@
             <table id="price_table">
               <thead>
                 <tr class="price_options">
-                  <th style="width:200px;">Options</th>
-                  <th style="width:200px;">Months</th>
-                  <th style="width:200px;">Rent</th>
+                  <th style="width:216px;">Options</th>
+                  <th style="width:100px;">Months</th>
+                  <th style="width:150px;">Rent</th>
                   <th style="width:200px;">Total Rent</th>
                 </tr>
               </thead>
@@ -1107,7 +1105,7 @@
               </div>
               <div class="checkout_fields">
                 <div class="value ${hasErrors(bean: rentalTransaction, field: 'activeMilitary', 'errors')}">
-                    <g:checkBox name="activeMilitary" value="${rentalTransaction?.activeMilitary}" /> Are you an active military member?
+                    <g:checkBox name="activeMilitary" value="${rentalTransaction?.activeMilitary}" /> Are you a member of the US Armed Forces and on active duty?
                 </div>
                 <div style="clear:both;"></div>
               </div>
