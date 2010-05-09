@@ -290,6 +290,16 @@ Added styles
     background-image: url("../images/bkg_topbar.gif");
 }
 
+#tollFree {
+    font: 16px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #3fac00;
+    float: right;
+    margin-top: -35px;
+    margin-right: 50px;
+    z-index: -10;
+}
+
 #footer {
     height: 360px;
     background-image: url("../images/bkg_footer.gif");
@@ -453,10 +463,6 @@ Added styles
     height: 300px;
     padding: 10px 5px;
     float: right;    
-}
-
-#site_info {
-    float: left;
 }
 
 #site_logo {
@@ -624,7 +630,6 @@ Added styles
 #price_total {
     font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
-    color: white;
 }
 
 .returnLink a:link, .returnLink a:visited, .returnLink a:hover {

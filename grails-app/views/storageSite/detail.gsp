@@ -69,7 +69,7 @@
             if (units.driveup) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup || unitCount == 1 ? " checked=\"true\"" : "") + "/> Drive up</td>";
-              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
+              tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
               tableBody += "<td class=\"price_text\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.driveup.id] = units.driveup.price;
@@ -82,7 +82,7 @@
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
                 checkoutTableBody += "<td>Drive up</td>";
-                checkoutTableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
+                checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
                 checkoutTableBody += "<td class=\"price_text\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
                 checkoutTableBody += "</tr>";
               }
@@ -90,7 +90,7 @@
             if (units.interior) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior || unitCount == 1 ? " checked=\"true\"" : "") + "/> Interior</td>";
-              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
+              tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
               tableBody += "<td class=\"price_text\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.interior.id] = units.interior.price;
@@ -103,7 +103,7 @@
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
                 checkoutTableBody += "<td>Interior</td>";
-                checkoutTableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
+                checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
                 checkoutTableBody += "<td class=\"price_text\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
                 checkoutTableBody += "</tr>";
               }
@@ -111,7 +111,7 @@
             if (units.upper) {
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper || unitCount == 1 ? " checked=\"true\"" : "") + "/> Upper</td>";
-              tableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
+              tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
               tableBody += "<td class=\"price_text\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.upper.id] = units.upper.price;
@@ -124,7 +124,7 @@
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
                 checkoutTableBody += "<td>Upper</td>";
-                checkoutTableBody += "<td class=\"price_text\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
+                checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
                 checkoutTableBody += "<td class=\"price_text\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
                 checkoutTableBody += "</tr>";
               }
@@ -248,7 +248,7 @@
       var tableBody = "";
       var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
       if (premium > 0) {
-        tableBody += "<tr><td>Insurance:</td><td class=\"price_text\">" + durationMonths +"</td><td class=\"price_text\">$" + premium + "</td><td class=\"price_text\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
+        tableBody += "<tr><td style=\"width: 40%;\">Insurance:</td><td class=\"textCenter\" style=\"width: 20%;\">" + durationMonths +"</td><td class=\"price_text\" style=\"width: 20%;\">$" + premium + "</td><td class=\"price_text\" style=\"width: 20%;\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
       }
       tableBody += "<tr><td>Admin Fees:</td><td></td><td></td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
 
@@ -268,12 +268,12 @@
             offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
             break;
         }
-        tableBody += "<tr class=\"roweven\"><td>Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td colspan=\"2\"></td><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
+        tableBody += "<tr class=\"roweven\"><td  colspan=\"3\">Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
         paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        tableBody += "<tr><td>Paid Through Date:</td><td colspan=\"2\"></td><td class=\"price_text\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
+        tableBody += "<tr><td colspan=\"2\">Paid Through Date:</td><td colspan=\"2\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
       }
       var total_movein = additionalFees + (monthlyRent + premium)*durationMonths - offerDiscount;
 
@@ -504,52 +504,52 @@
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
-      <div>
-        <div id="site_info" style="margin-top: 25px;">
-          <div id="site_logo">
-          </div>
-          <div id="site_address">
-            <div class="title">
-            ${site.title}
-            </div>
-            <g:if test="${site.logoUrl}">
-              <div>
-                <img src="${site.logoUrl}" alt="logo"/>
+        <div id="site_info" class="left" style="margin-top: 25px;">
+          <div class="left" style="margin-bottom: 10px;">
+            <div id="site_logo"></div>
+            <div id="site_address">
+              <div class="title">
+              ${site.title}
               </div>
-            </g:if>
-            <div>
-              ${site.address}
-            </div>
-            <div>
-              ${site.address2}
-            </div>
-            <div>
-              ${site.city}, ${site.state} ${site.zipcode}
-            </div>
-            <div style="height: 10px;"></div>
-            <div>
-              Weekdays:
-              <g:if test="${site.openWeekday}">
-                <g:formatDate format="h:mma" date="${site.startWeekday}"/> - <g:formatDate format="h:mma" date="${site.endWeekday}"/>
+              <g:if test="${site.logoUrl}">
+                <div>
+                  <img src="${site.logoUrl}" alt="logo"/>
+                </div>
               </g:if>
-              <g:else>Closed</g:else>
-            </div>
-            <div>
-              Saturday:
-              <g:if test="${site.openSaturday}">
-                <g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/>
-              </g:if>
-              <g:else>Closed</g:else>
-            </div>
-            <div>
-              Sunday:
-              <g:if test="${site.openSunday}">
-                <g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/>
-              </g:if>
-              <g:else>Closed</g:else>
+              <div>
+                ${site.address}
+              </div>
+              <div>
+                ${site.address2}
+              </div>
+              <div>
+                ${site.city}, ${site.state} ${site.zipcode}
+              </div>
             </div>
           </div>
-          <div style="clear: both; height: 15px;"></div>
+          <div style="clear:both;"></div>
+          <div>
+            Weekdays:
+            <g:if test="${site.openWeekday}">
+              <g:formatDate format="h:mma" date="${site.startWeekday}"/> - <g:formatDate format="h:mma" date="${site.endWeekday}"/>
+            </g:if>
+            <g:else>Closed</g:else>
+          </div>
+          <div>
+            Saturday:
+            <g:if test="${site.openSaturday}">
+              <g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/>
+            </g:if>
+            <g:else>Closed</g:else>
+          </div>
+          <div>
+            Sunday:
+            <g:if test="${site.openSunday}">
+              <g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/>
+            </g:if>
+            <g:else>Closed</g:else>
+          </div>
+          <div style="height: 10px;"></div>
           <div>
             ${site.description}
           </div>
@@ -628,6 +628,7 @@
             <div class="section_header">
               Unit size: <span id="checkout_unit_size"></span>
             </div>
+            <div style="height: 5px;"></div>
             <div class="section_header">
               Move in date: <span id="checkout_movein_date"></span>
             </div>
@@ -635,10 +636,10 @@
             <div class="order_summary_top header_text_hi">Order Summary</div>
             <table id="checkout_price_table" style="width: 300px; border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
               <tr style="background: #F1F8E9;">
-                <th>Options</th>
-                <th>Months</th>
-                <th>Rent</th>
-                <th>Total Rent</th>
+                <th class="width: 120px;">Options</th>
+                <th class="width: 60px;">Months</th>
+                <th class="width: 60px;">Rent</th>
+                <th class="width: 60px;">Total Rent</th>
               </tr>
               <tbody id="checkout_price_body">
               </tbody>
@@ -717,14 +718,10 @@
             <table id="price_totals">
               <tbody id="price_totals_body">
               </tbody>
-              <tfoot>
-                <tr class="price_options">
-                  <th style="width:200px;">Total Move-In Cost:</th>
-                  <th style="width:200px;"></th>
-                  <th style="width:200px;"></th>
-                  <th id="price_total"  style="width:200px;" class="price_text"></th>
-                </tr>
-              </tfoot>
+              <tr>
+                <th colspan="3" style="width:600px;text-align: right;">Total Move-In Cost:</th>
+                <th id="price_total" style="width:200px;" class="price_text"></th>
+              </tr>
             </table>
             <div style="height:10px;"></div>
             <div id="rentmeBtn" style="float: right; display: none;">
@@ -1127,7 +1124,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
     <div style="clear:both; height:30px;"></div>
     <g:render template="/footer" />
