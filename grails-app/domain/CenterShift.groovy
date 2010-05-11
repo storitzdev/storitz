@@ -1,0 +1,5 @@
+class CenterShift {
+
+    static constraints = {
+    }
+}
