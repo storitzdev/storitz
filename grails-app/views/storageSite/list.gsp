@@ -36,6 +36,8 @@
                             <g:sortableColumn property="city" title="${message(code: 'storageSite.city.label', default: 'City')}" />
                         
                             <g:sortableColumn property="zipcode" title="${message(code: 'storageSite.zipcode.label', default: 'Zipcode')}" />
+
+                            <th>Edit</th>
                         
                         </tr>
                     </thead>
@@ -50,7 +52,9 @@
                             <td>${fieldValue(bean: storageSiteInstance, field: "city")}</td>
                         
                             <td>${fieldValue(bean: storageSiteInstance, field: "zipcode")}</td>
-                        
+
+                            <td><g:link action="edit" id="${storageSiteInstance.id}">edit</g:link></td>
+
                         </tr>
                     </g:each>
                     </tbody>

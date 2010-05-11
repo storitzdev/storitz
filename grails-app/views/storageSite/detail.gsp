@@ -270,16 +270,20 @@
         }
         tableBody += "<tr class=\"roweven\"><td  colspan=\"3\">Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
+      var paidThruRow = "";
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
         paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        tableBody += "<tr><td colspan=\"2\">Paid Through Date:</td><td colspan=\"2\">" + paidThru.print("%m-%d-%Y") + "</td></tr>";
+        paidThruRow = "<tr><td colspan=\"2\">Paid Through Date:</td><td colspan=\"2\">" + paidThru.print("%o/%d/%y") + "</td></tr>";
       }
       var total_movein = additionalFees + (monthlyRent + premium)*durationMonths - offerDiscount;
 
       // TODO - calculate paid through date
-      $('price_totals_body').update(tableBody);
+      $('price_totals_body').update(tableBody + paidThruRow);
       $('checkout_price_totals_body').update(tableBody);
+      if (typeof(paidThru) !== 'undefined') {
+        $('checkout_paid_through_date').update(paidThru.print("%o/%d/%y"));
+      }
       $('price_total').update("$" + total_movein.toFixed(2));
       $('checkout_price_total').update("$" + total_movein.toFixed(2));
     }
@@ -287,7 +291,8 @@
     function rentmeClick() {
       $('rentme').observe('click', function(event) {
         if (rentalFormReady) {
-          $('checkout_movein_date').update($F('date'));
+          var sdate = Date.parseDate($F('date'), "%m-%d-%Y");
+          $('checkout_movein_date').update(sdate.print("%o/%d/%y"));
           $('checkout_unit_size').update(storageSize[searchSize]);
           $('left_info').hide();
           $('left_checkout_info').show();
@@ -511,9 +516,9 @@
               <div class="title">
               ${site.title}
               </div>
-              <g:if test="${site.logoUrl}">
+              <g:if test="${site.logo}">
                 <div>
-                  <img src="${site.logoUrl}" alt="logo"/>
+                  <img src="${resource(dir: 'images', file:site.logo.src())}" alt="logo"/>
                 </div>
               </g:if>
               <div>
@@ -625,21 +630,42 @@
             </div>
           </div>
           <div id="left_checkout_info" style="display: none;">
-            <div class="section_header">
-              Unit size: <span id="checkout_unit_size"></span>
-            </div>
-            <div style="height: 5px;"></div>
-            <div class="section_header">
-              Move in date: <span id="checkout_movein_date"></span>
-            </div>
             <div style="height: 15px;"></div>
             <div class="order_summary_top header_text_hi">Order Summary</div>
             <table id="checkout_price_table" style="width: 300px; border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
+              <tr style="height: 15px;">
+                <td class="section_header" colspan="4">&nbsp;
+                </td>
+              </tr>
+              <tr>
+                <td class="section_header" colspan="4">
+                  Unit size: <span id="checkout_unit_size"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="section_header" colspan="4">
+                  Move in date: <span id="checkout_movein_date"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="section_header" colspan="4">
+                  Paid through date: <span id="checkout_paid_through_date"></span>
+                </td>
+              </tr>
+              <tr style="height: 15px;">
+                <td class="section_header" colspan="4">&nbsp;
+                </td>
+              </tr>
+
               <tr style="background: #F1F8E9;">
                 <th class="width: 120px;">Options</th>
                 <th class="width: 60px;">Months</th>
                 <th class="width: 60px;">Rent</th>
                 <th class="width: 60px;">Total Rent</th>
+              </tr>
+              <tr style="height: 10px;">
+                <td class="section_header" colspan="4">&nbsp;
+                </td>
               </tr>
               <tbody id="checkout_price_body">
               </tbody>

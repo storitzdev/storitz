@@ -807,6 +807,7 @@ Date.prototype.print = function (str) {
   s["%k"] = hr;   // hour, range 0 to 23 (24h format)
   s["%l"] = ir;   // hour, range 1 to 12 (12h format)
   s["%m"] = (m < 9) ? ("0" + (1+m)) : (1+m); // month, range 01 to 12
+  s["%o"] = (1+m); // month, range 01 to 12
   s["%M"] = (min < 10) ? ("0" + min) : min; // minute, range 00 to 59
   s["%n"] = "\n";   // a newline character
   s["%p"] = pm ? "PM" : "AM";

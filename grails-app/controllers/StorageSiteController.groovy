@@ -2,6 +2,9 @@ import grails.converters.JSON
 
 class StorageSiteController {
 
+  def siteLinkService
+  def geocodeService
+
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
   def index = {
@@ -66,6 +69,16 @@ class StorageSiteController {
           return
         }
       }
+      for(specialOffer in storageSiteInstance.specialOffers) {
+        def offerString = "specialOffer_" + specialOffer.id
+        println("offerString is ${offerString}, params.offerString = " + params.getAt(offerString))
+        if (params.getAt(offerString)) {
+          specialOffer.active = true;
+        } else {
+          specialOffer.active = false;
+        }
+        specialOffer.save();
+      }
       storageSiteInstance.properties = params
       if (!storageSiteInstance.hasErrors() && storageSiteInstance.save(flush: true)) {
         flash.message = "${message(code: 'default.updated.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
@@ -78,6 +91,17 @@ class StorageSiteController {
     else {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
       redirect(action: "list")
+    }
+  }
+
+  def refresh = {
+    def storageSiteInstance = StorageSite.get(params.id)
+
+    if (storageSiteInstance.source == "SL") {
+      def stats = new storagetech.SiteLinkStats()
+      siteLinkService.updateSite(storageSiteInstance, stats, geocodeService)
+      flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
+      redirect(action: "show", id: storageSiteInstance.id)
     }
   }
 

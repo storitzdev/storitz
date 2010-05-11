@@ -37,6 +37,17 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.logo.label" default="Logo"/></td>
+
+          <td valign="top" class="value">
+            <g:if test="${storageSiteInstance?.logo}">
+              <img src="${resource(dir:'image', file:storageSiteInstance.logo.src())}" alt="logo"/>
+            </g:if>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.title.label" default="Title"/></td>
 
           <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "title")}</td>
@@ -100,25 +111,12 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSite.users.label" default="Users"/></td>
-
-          <td valign="top" style="text-align: left;" class="value">
-            <ul>
-              <g:each in="${storageSiteInstance.users}" var="u">
-                <li><g:link controller="siteUser" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
-              </g:each>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.contacts.label" default="Contacts"/></td>
 
           <td valign="top" style="text-align: left;" class="value">
             <ul>
               <g:each in="${storageSiteInstance.contacts}" var="c">
-                <li><g:link controller="siteContact" action="show" id="${c.id}">${c.name} - ${c.email}</g:link></li>
+                <li>${c.name} - ${c.email}</li>
               </g:each>
             </ul>
           </td>
@@ -131,10 +129,29 @@
           <td valign="top" style="text-align: left;" class="value">
             <ul>
               <g:each in="${storageSiteInstance.specialOffers}" var="s">
-                <li><g:link controller="specialOffer" action="show" id="${s.id}">${s?.description}</g:link></li>
+                <li>${s.active ? 'active' : 'inactive'} - ${s?.promoName}</li>
               </g:each>
             </ul>
           </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td colspan="2" valign="top"><h3>Fees</h3></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.lockFee.label" default="Lock Fee"/></td>
+
+          <td valign="top" class="value"><g:formatNumber number="${storageSiteInstance.lockFee}" type="currency" currencyCode="USD" /></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.adminFee.label" default="Admin Fee"/></td>
+
+          <td valign="top" class="value"><g:formatNumber number="${storageSiteInstance.adminFee}" type="currency" currencyCode="USD" /></td>
 
         </tr>
 
@@ -153,7 +170,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.freeTruck.label" default="Free Truck"/></td>
 
-          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.freeTruck}"/></td>
+          <td valign="top" class="value">${storageSiteInstance?.freeTruck}</td>
 
         </tr>
 
@@ -217,6 +234,7 @@
         <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
         <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
         <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+        <span class="button"><g:actionSubmit class="create" action="refresh" value="${message(code: 'default.buttom.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
       </g:form>
     </div>
   </div>

@@ -109,10 +109,13 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="logoUrl"><g:message code="storageSite.logoUrl.label" default="Logo" /></label>
+                                  <label for="logoFile"><g:message code="storageSite.logo.label" default="Logo" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'logoUrl', 'errors')}">
-                                    <input type="file" name="logoUrl" value="${storageSiteInstance?.logoUrl}" />
+                                <td valign="top" class="value">
+                                    <g:if test="${storageSiteInstance?.logo}">
+                                      <img src="${resource(dir:'image', file:storageSiteInstance.logo.src())}" alt="logo"/>
+                                    </g:if>
+                                    <input type="file" name="logoFile" />
                                 </td>
                             </tr>
                         
@@ -125,10 +128,33 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
+                          <tr class="prop">
+                            <td colspan="2" valign="top"><h3>Fees</h3></td>
+
+                          </tr>
+
+                          <tr class="prop">
+                              <td valign="top" class="name">
+                                <label for="adminFee"><g:message code="storageSite.adminFee.label" default="Admin Fee" /></label>
+                              </td>
+                              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'adminFee', 'errors')}">
+                                  <g:textField name="adminFee" value="${storageSiteInstance?.adminFee}" />
+                              </td>
+                          </tr>
+
+                          <tr class="prop">
+                              <td valign="top" class="name">
+                                <label for="lockFee"><g:message code="storageSite.lockFee.label" default="Lock Fee" /></label>
+                              </td>
+                              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'lockFee', 'errors')}">
+                                  <g:textField name="lockFee" value="${storageSiteInstance?.lockFee}" />
+                              </td>
+                          </tr>
+
+                          <tr class="prop">
                               <td colspan="2" valign="top"><h3>Attributes</h3></td>
 
-                            </tr>
+                          </tr>
 
                           <tr class="prop">
                               <td valign="top" class="name">
@@ -144,7 +170,7 @@
                                   <label for="freeTruck"><g:message code="storageSite.freeTruck.label" default="Free Moving Truck" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'freeTruck', 'errors')}">
-                                    <g:checkBox name="freeTruck" value="${storageSiteInstance?.freeTruck}" />
+                                    <g:select name="freeTruck" from="${storagetech.constants.TruckType.list()}" value="${storageSiteInstance?.freeTruck}" optionValue="display" />
                                 </td>
                             </tr>
 
@@ -195,29 +221,13 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="users"><g:message code="storageSite.users.label" default="Users" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'users', 'errors')}">
-                                    
-                                  <ul>
-                                  <g:each in="${storageSiteInstance?.users?}" var="u">
-                                      <li><g:link controller="siteUser" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
-                                  </g:each>
-                                  </ul>
-                                  <g:link controller="siteUser" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteUser.label', default: 'SiteUser')])}</g:link>
-
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="contacts"><g:message code="storageSite.contacts.label" default="Contacts" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'contacts', 'errors')}">
                                     
                                   <ul>
                                   <g:each in="${storageSiteInstance?.contacts?}" var="c">
-                                      <li><g:link controller="siteContact" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+                                      <li><g:link controller="siteContact" action="show" id="${c.id}">${c.name} - ${c.email}</g:link></li>
                                   </g:each>
                                   </ul>
                                   <g:link controller="siteContact" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteContact.label', default: 'SiteContact')])}</g:link>
@@ -230,7 +240,11 @@
                                   <label for="specialOffers"><g:message code="storageSite.specialOffers.label" default="Special Offers" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'specialOffers', 'errors')}">
-                                    <g:select name="specialOffers" from="${SpecialOffer.list()}" multiple="yes" optionKey="id" size="5" value="${storageSiteInstance?.specialOffers}" />
+                                  <ul>
+                                    <g:each in="${storageSiteInstance?.specialOffers?}" var="o">
+                                      <li><g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> ${o.promoName}</li>
+                                    </g:each>
+                                  </ul>
                                 </td>
                             </tr>
                         

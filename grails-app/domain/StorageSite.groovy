@@ -7,7 +7,7 @@ class StorageSite {
 
     static constraints = {
       description(widget:'textarea', nullable:true)
-      logoUrl(nullable:true)
+      logo(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)
       url(nullable:true)
@@ -27,11 +27,13 @@ class StorageSite {
       endSaturday(nullable:true)
       startSunday(nullable:true)
       endSunday(nullable:true)
+      siteLink(nullable:true)
+      centerShift(nullable:true)
     }
   
     String title
     String description
-    String logoUrl
+    SiteImage logo
     BigDecimal lat
     BigDecimal lng
     String address
@@ -70,6 +72,10 @@ class StorageSite {
     Date endSaturday
     Date startSunday
     Date endSunday
+
+  // data feeds
+    SiteLink siteLink
+    CenterShift centerShift
 
   def users() {
       return users.collect{it.user}

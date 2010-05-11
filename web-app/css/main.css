@@ -391,11 +391,18 @@ Added styles
     color: white;
 }
 
-#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_table th, #checkout_price_table td, #checkout_price_totals th, #checkout_price_totals tbody td, #rentalForm td, #rentalForm th {
+#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals tbody td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0px;
 	/*white-space: nowrap;
 	overflow: hidden;*/
+}
+
+#checkout_price_table th, #checkout_price_table td {
+    padding: 0 0.5em;
+    border: 0px;
+    /*white-space: nowrap;
+    overflow: hidden;*/
 }
 
 #instructions {
