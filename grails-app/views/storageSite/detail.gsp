@@ -291,6 +291,7 @@
     function rentmeClick() {
       $('rentme').observe('click', function(event) {
         if (rentalFormReady) {
+          $('sizeHelp').hide();
           var sdate = Date.parseDate($F('date'), "%m-%d-%Y");
           $('checkout_movein_date').update(sdate.print("%o/%d/%y"));
           $('checkout_unit_size').update(storageSize[searchSize]);
