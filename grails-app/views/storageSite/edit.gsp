@@ -113,7 +113,7 @@
                                 </td>
                                 <td valign="top" class="value">
                                     <g:if test="${storageSiteInstance?.logo}">
-                                      <img src="${resource(dir:'image', file:storageSiteInstance.logo.src())}" alt="logo"/>
+                                      <img src="${resource(file:storageSiteInstance.logo.src())}" alt="logo"/>
                                     </g:if>
                                     <input type="file" name="logoFile" />
                                 </td>

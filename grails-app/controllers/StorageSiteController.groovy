@@ -4,6 +4,7 @@ class StorageSiteController {
 
   def siteLinkService
   def geocodeService
+  def fileUploadService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -26,6 +27,9 @@ class StorageSiteController {
 
   def save = {
     def storageSiteInstance = new StorageSite(params)
+
+    // TODO handle logo
+
     if (storageSiteInstance.save(flush: true)) {
       flash.message = "${message(code: 'default.created.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
       redirect(action: "show", id: storageSiteInstance.id)
@@ -69,6 +73,35 @@ class StorageSiteController {
           return
         }
       }
+      // TODO handle logo image file
+      def logoFile = request.getFile('logoFile')
+      Integer siteId = Integer.parseInt(params.id)
+      def fileLocation = 'logo_' + params.id + '.jpg'
+      if (fileUploadService.moveFile(logoFile, '/images/upload', fileLocation, siteId)) {
+        def tmpPath = fileUploadService.getFilePath('/images/upload', fileLocation, siteId)
+        def filePath = fileUploadService.getFilePath('/images/site', fileLocation, siteId)
+        println "Saving image to tmpPath: " + tmpPath
+        def imageTool = new ImageTool()
+        imageTool.load(tmpPath)
+        imageTool.thumbnail(120)
+        def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
+        dstFile.mkdirs()
+        imageTool.writeResult(filePath, "JPEG")
+        def tmpFile = new File(tmpPath)
+        tmpFile.delete()
+        println "Deleting " + tmpPath + " and saving image to filePath: " + filePath
+        if (storageSiteInstance.logo == null) {
+          storageSiteInstance.logo = new SiteImage()
+        }
+        storageSiteInstance.logo.isLogo = true
+        storageSiteInstance.logo.hasThumbnail = false
+        storageSiteInstance.logo.isCover = false
+        storageSiteInstance.logo.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
+        storageSiteInstance.logo.fileLocation = fileLocation
+        storageSiteInstance.logo.site = storageSiteInstance
+      }
+
+
       for(specialOffer in storageSiteInstance.specialOffers) {
         def offerString = "specialOffer_" + specialOffer.id
         println("offerString is ${offerString}, params.offerString = " + params.getAt(offerString))

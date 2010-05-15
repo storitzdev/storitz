@@ -512,16 +512,17 @@
       <g:render template="/logo_bar" />
         <div id="site_info" class="left" style="margin-top: 25px;">
           <div class="left" style="margin-bottom: 10px;">
-            <div id="site_logo"></div>
+            <div id="site_logo">
+              <div style="display:table-cell; vertical-align:middle;">
+              <g:if test="${site?.logo}">
+                <img src="${resource(file:site.logo.src())}" alt="${site.title} Logo"/>
+              </g:if>
+              </div>
+            </div>
             <div id="site_address">
               <div class="title">
-              ${site.title}
+                ${site.title}
               </div>
-              <g:if test="${site.logo}">
-                <div>
-                  <img src="${resource(dir: 'images', file:site.logo.src())}" alt="logo"/>
-                </div>
-              </g:if>
               <div>
                 ${site.address}
               </div>

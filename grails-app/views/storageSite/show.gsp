@@ -41,7 +41,7 @@
 
           <td valign="top" class="value">
             <g:if test="${storageSiteInstance?.logo}">
-              <img src="${resource(dir:'image', file:storageSiteInstance.logo.src())}" alt="logo"/>
+              <img src="${resource(file:storageSiteInstance.logo.src())}" alt="logo"/>
             </g:if>
           </td>
 
@@ -220,7 +220,7 @@
           <td valign="top" style="text-align: left;" class="value">
             <ul>
               <g:each in="${storageSiteInstance.images}" var="i">
-                <li><img src="${resource(dir:'images', file: i.thumbnail)}" alt="image${i.id}"/></li>
+                <li><img src="${i.src()}" alt="image${i.id}"/></li>
               </g:each>
             </ul>
           </td>

@@ -11,6 +11,7 @@ class SiteImage {
   Integer imgOrder
   Boolean isCover
   Boolean isLogo
+  Boolean hasThumbnail
   String fileLocation
   String basename
 
@@ -19,9 +20,6 @@ class SiteImage {
   }
 
   def src() {
-    if (isLogo) {
-      return basename + "/logo_" + fileLocation
-    }
-    return basename + "/" + fileLocation
+    return basename +  fileLocation
   }
 }
