@@ -10,13 +10,14 @@
     //<![CDATA[
       google.load("jquery", "1.4.2");
 
-      jQuery.noConflict();
+    google.setOnLoadCallback(function() {
+        jQuery.noConflict();
+    });
 
     //]]>
   </script>
-  <script src="http://www.fyneworks.com/jquery/multiple-file-upload/jquery.blockUI.js" type="text/javascript"></script>
-  <script src="http://jquery-multifile-plugin.googlecode.com/svn/trunk/jquery.MultiFile.js" type="text/javascript"></script>
-  <script src="http://www.fyneworks.com/jquery/multiple-file-upload/jquery.MetaData.js" type="text/javascript"></script>
+  <g:javascript src="jquery.MetaDeta.js" />
+  <g:javascript src="jquery.MultiFile.js" />
 
 </head>
 <body>
@@ -256,10 +257,13 @@
                                     
                                     <ul>
                                     <g:each in="${storageSiteInstance?.images?}" var="i">
-                                        <li><g:link controller="siteImage" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
+                                        <g:if test="${!i.isLogo}">
+                                          <li><img src="${resource(file:i.src())}" alt="image ${i}"/></li>
+                                        </g:if>
                                     </g:each>
                                     </ul>
-                                    <g:link controller="siteImage" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteImage.label', default: 'SiteImage')])}</g:link>
+                                    <div>Enter as many images as you wish, by adding browsing one at a time:</div>
+                                    <input type="file" name="imageFile" class="multi" accept="gif|jpg|png|jpeg"/>
 
                                 </td>
                             </tr>

@@ -7,8 +7,6 @@
 
     <script type="text/javascript">
 //<![CDATA[
-    google.load("prototype", "1.6.1.0");
-    google.load("scriptaculous", "1.8.3");
 
     var directionsService;
     var directionsDisplay;
