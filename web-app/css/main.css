@@ -399,7 +399,7 @@ Added styles
 }
 
 #checkout_price_table th, #checkout_price_table td {
-    padding: 0 0.;
+    padding: 0 0.5em;
     border: 0px;
     /*white-space: nowrap;
     overflow: hidden;*/
@@ -417,10 +417,62 @@ Added styles
 #sizeHelp {
     position: absolute;
     background-color: white;
+    border: 4px solid #0971C2;
 }
 
 #sizeHelpContents {
     font-size: 10px;
+}
+
+#helpHeader {
+    background-image: url(../images/bkg-storage-sizes-header2.jpg);
+    width: 524px;
+    height: 59px;
+    color: white;
+    background-repeat: no-repeat;
+}
+
+#helpHeaderText {
+    font: 18px verdana;
+    margin-left: 55px;
+    line-height: 59px;
+}
+
+div.helpBox {
+    float: left;
+    padding: 2px 5px 1px 10px;
+    width: 110px;
+    height: 60px;
+}
+
+.helpBoxText {
+    float: left;
+    padding: 2px 5px 1px 5px;
+    height: 60px;
+    display: table;
+}
+
+div.helpBoxSeparator {
+    clear: both;
+    width: 504px;
+    height: 1px;
+    margin: 0 10px;    
+    border-bottom: #9f9f9f dotted thin;
+}
+
+.helpBoxTextTitle {
+    font: bold 11px verdana;
+    color: #0867b5;
+}
+
+.helpBoxTextBody {
+    font: 11px verdana;
+    color: #333;
+}
+
+.helpBoxTextHolder {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .srText {
