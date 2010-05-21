@@ -1,6 +1,10 @@
 <div id="sizeHelp" style="display: none;">
   <div id="helpHeader">
-    <div id="helpHeaderText">How much storage do you need?</div> 
+    <div id="helpHeaderText">How much storage do you need?</div>
+    <div id="helpClose">
+      <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
+      <div class="left"><img style="vertical-align: middle;" src="${resource(dir:'images', file:'popup-checkbox.png')}" alt="close box"/></div>
+    </div>
   </div>
   <div>
     <div class="helpBox">

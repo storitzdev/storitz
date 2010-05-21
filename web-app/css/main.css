@@ -436,6 +436,14 @@ Added styles
     font: 18px verdana;
     margin-left: 55px;
     line-height: 59px;
+    float: left;
+}
+
+#helpClose {
+    font: 10px verdana;
+    color: #a3d2f2;
+    float: right;
+    margin: 10px;
 }
 
 div.helpBox {
@@ -449,6 +457,7 @@ div.helpBox {
     float: left;
     padding: 2px 5px 1px 5px;
     height: 60px;
+    width: 385px;
     display: table;
 }
 

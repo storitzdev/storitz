@@ -146,6 +146,9 @@
         $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
         Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
       });
+      $('helpClose').observe('click', function(event) {
+        Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
+      });
     }
 
     function getDirections() {
