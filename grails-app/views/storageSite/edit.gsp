@@ -258,7 +258,7 @@
                                     <ul>
                                     <g:each in="${storageSiteInstance?.images?}" var="i">
                                         <g:if test="${!i.isLogo}">
-                                          <li><img src="${resource(file:i.src())}" alt="image ${i}"/></li>
+                                          <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/> - <g:link params="[siteImageId: i.id]" action="deleteImage" id="${storageSiteInstance?.id}" controller="storageSite">remove</g:link></li>
                                         </g:if>
                                     </g:each>
                                     </ul>
@@ -274,6 +274,7 @@
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <span class="button"><g:actionSubmit class="create" action="show" value="${message(code: 'default.button.show.label', default: 'Show')}" /></span>
                 </div>
             </g:uploadForm>
         </div>

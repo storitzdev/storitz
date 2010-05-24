@@ -76,6 +76,7 @@ class StorageSite {
   // data feeds
     SiteLink siteLink
     CenterShift centerShift
+    Long lastUpdate
 
   def users() {
       return users.collect{it.user}

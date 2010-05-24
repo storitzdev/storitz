@@ -219,8 +219,10 @@
 
           <td valign="top" style="text-align: left;" class="value">
             <ul>
-              <g:each in="${storageSiteInstance.images}" var="i">
-                <li><img src="${i.src()}" alt="image${i.id}"/></li>
+              <g:each in="${storageSiteInstance?.images?}" var="i">
+                  <g:if test="${!i.isLogo}">
+                    <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/></li>
+                  </g:if>
               </g:each>
             </ul>
           </td>
@@ -235,6 +237,7 @@
         <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
         <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
         <span class="button"><g:actionSubmit class="create" action="refresh" value="${message(code: 'default.buttom.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
+        <span class="button"><g:actionSubmit class="create" action="units" value="${message(code: 'default.buttom.refresh.label', default: 'Reload Available Units')}" /></span>
       </g:form>
     </div>
   </div>

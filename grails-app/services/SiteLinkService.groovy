@@ -12,7 +12,9 @@ class SiteLinkService {
 
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
 
-  boolean transactional = true
+  static MSDateEpoch = new Date().parse('yyyy/MM/dd', '1900/01/01') 
+
+  boolean transactional = false
 
   def getSites(corpCode, userName, password) {
 
@@ -217,6 +219,7 @@ class SiteLinkService {
       } else {
         site = new StorageSite()
         stats.createCount++
+        site.lastUpdate = 0
       }
       getSiteDetails(siteLink, site, tab, stats, geocodeService)
     }
@@ -303,18 +306,30 @@ class SiteLinkService {
       site.specialOffers.each {offer ->
         offer.delete()
       }
-      site.contacts.clear();
-      site.units.clear();
-      site.insurances.clear();
-      site.specialOffers.clear();
+      site.contacts.clear()
+      site.units.clear()
+      site.insurances.clear()
+      site.specialOffers.clear()
+      site.lastUpdate = 0
       site.save(flush: true)
       getSiteDetails(site.siteLink, site, tab, stats, geocodeService)
     }
 
   }
 
+  def updateUnits(site, stats) {
+    site.units.each {unit ->
+      unit.delete()
+    }
+    site.units.clear()
+    site.save()
+    unitsAvailable(site.siteLink, site, stats)
+    site.save(flush: true)
+  }
+
   def unitsAvailable(siteLink, site, stats) {
-    def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, 0)
+    println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
+    def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, site.lastUpdate)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -324,6 +339,7 @@ class SiteLinkService {
     )
     def adminFeeSet = false;
     records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {unit ->
+
       def siteUnit = new StorageUnit()
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
@@ -366,6 +382,17 @@ class SiteLinkService {
         println "Skipping unit due to size: width=" + width + " length=" + length
       }
     }
+    // compute last update
+    def now = new Date()
+    def daySinceEpoch = now - MSDateEpoch
+    def c = Calendar.instance
+    c.set(Calendar.HOUR,  0)
+    c.set(Calendar.MINUTE, 0)
+    c.set(Calendar.SECOND, 0)
+    def millisSinceMidnight = now.time - c.timeInMillis
+    def ticks = ((millisSinceMidnight * 4)/3).longValue() + (daySinceEpoch.longValue() << 32).longValue()
+
+    site.lastUpdate = ticks
   }
 
   def insurance(siteLink, site) {

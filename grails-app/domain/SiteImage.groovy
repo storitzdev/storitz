@@ -16,7 +16,11 @@ class SiteImage {
   String basename
 
   def thumbnail() {
-    return basename + "/thumb_" + fileLocation
+    return basename + "thumb_" + fileLocation
+  }
+
+  def mid() {
+    return basename + "mid_" + fileLocation
   }
 
   def src() {

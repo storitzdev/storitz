@@ -62,6 +62,8 @@ class StorageSiteController {
   }
 
   def update = {
+    println "Update params:" + params.inspect()
+    
     def storageSiteInstance = StorageSite.get(params.id)
     if (storageSiteInstance) {
       if (params.version) {
@@ -77,7 +79,7 @@ class StorageSiteController {
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def fileLocation = 'logo_' + params.id + '.jpg'
-      if (fileUploadService.moveFile(logoFile, '/images/upload', fileLocation, siteId)) {
+      if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', fileLocation, siteId)) {
         def tmpPath = fileUploadService.getFilePath('/images/upload', fileLocation, siteId)
         def filePath = fileUploadService.getFilePath('/images/site', fileLocation, siteId)
         println "Saving image to tmpPath: " + tmpPath
@@ -89,7 +91,6 @@ class StorageSiteController {
         imageTool.writeResult(filePath, "JPEG")
         def tmpFile = new File(tmpPath)
         tmpFile.delete()
-        println "Deleting " + tmpPath + " and saving image to filePath: " + filePath
         if (storageSiteInstance.logo == null) {
           storageSiteInstance.logo = new SiteImage()
         }
@@ -99,6 +100,41 @@ class StorageSiteController {
         storageSiteInstance.logo.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
         storageSiteInstance.logo.fileLocation = fileLocation
         storageSiteInstance.logo.site = storageSiteInstance
+      }
+
+      params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
+        def imgFile = request.getFile(img.key)
+        if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename, siteId)) {
+          println "Uploading image file:" + imgFile.originalFilename + " size: " + imgFile.size
+          def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename, siteId)
+          def filePath = fileUploadService.getFilePath('/images/site', imgFile.originalFilename, siteId)
+          def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + imgFile.originalFilename, siteId)
+          def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + imgFile.originalFilename, siteId)
+          println "Saving image to tmpPath: " + tmpPath
+          def imageTool = new ImageTool()
+          imageTool.load(tmpPath)
+          imageTool.saveOriginal()
+          imageTool.thumbnail(600)
+          def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
+          dstFile.mkdirs()
+          imageTool.writeResult(filePath, "JPEG")
+          imageTool.restoreOriginal()
+          imageTool.thumbnail (320)
+          imageTool.writeResult(filePathMid, "JPEG")
+          imageTool.restoreOriginal()
+          imageTool.thumbnail (60)
+          imageTool.writeResult(filePathThumb, "JPEG")
+          def tmpFile = new File(tmpPath)
+          tmpFile.delete()
+          def siteImg = new SiteImage()
+          siteImg.isLogo = false
+          siteImg.hasThumbnail = true
+          siteImg.isCover = false
+          siteImg.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
+          siteImg.fileLocation = imgFile.originalFilename
+          siteImg.site = storageSiteInstance
+          storageSiteInstance.addToImages(siteImg)          
+        }
       }
 
 
@@ -138,6 +174,17 @@ class StorageSiteController {
     }
   }
 
+  def units = {
+    def storageSiteInstance = StorageSite.get(params.id)
+
+    if (storageSiteInstance.source == "SL") {
+      def stats = new storagetech.SiteLinkStats()
+      siteLinkService.updateUnits(storageSiteInstance, stats)
+      flash.message = "${message(code: 'default.units.message', args: [stats.unitCount])}"
+      redirect(action: "show", id: storageSiteInstance.id)
+    }
+  }
+
   def delete = {
     def storageSiteInstance = StorageSite.get(params.id)
     if (storageSiteInstance) {
@@ -155,6 +202,27 @@ class StorageSiteController {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
       redirect(action: "list")
     }
+  }
+
+  def deleteImage = {
+    def site = StorageSite.get(params.id)
+
+    def siteImage = SiteImage.get(params.siteImageId)
+
+    def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid_' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb_' + siteImage.fileLocation, site.id) ]
+
+    deleteList.each{
+      def file = new File(it)
+      file.delete()
+    }
+
+    site.removeFromImages(siteImage)
+
+    siteImage.delete()
+
+    site.save(flush: true)
+
+    redirect(action: "edit", id: params.id)
   }
 
   def detail = {
