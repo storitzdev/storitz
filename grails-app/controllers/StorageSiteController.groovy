@@ -75,7 +75,6 @@ class StorageSiteController {
           return
         }
       }
-      // TODO handle logo image file
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def fileLocation = 'logo_' + params.id + '.jpg'
@@ -100,8 +99,12 @@ class StorageSiteController {
         storageSiteInstance.logo.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
         storageSiteInstance.logo.fileLocation = fileLocation
         storageSiteInstance.logo.site = storageSiteInstance
+        storageSiteInstance.logo.imgOrder = 0;
       }
 
+      def imgOrder = storageSiteInstance.images.collect{ it.imgOrder }.max()
+      if (!imgOrder) imgOrder = 0;
+      
       params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
         def imgFile = request.getFile(img.key)
         if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename, siteId)) {
@@ -133,6 +136,7 @@ class StorageSiteController {
           siteImg.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
           siteImg.fileLocation = imgFile.originalFilename
           siteImg.site = storageSiteInstance
+          siteImg.imgOrder = ++imgOrder
           storageSiteInstance.addToImages(siteImg)          
         }
       }

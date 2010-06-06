@@ -527,7 +527,7 @@ div.helpBoxSeparator {
 }
 
 #map {
-    width: 360px;
+    width: 300px;
     height: 300px;
     padding: 10px 5px;
     float: right;    
@@ -560,6 +560,7 @@ div.helpBoxSeparator {
     width: 121px;
     height: 24px;
     margin: 10px 5px 5px 5px;
+    cursor:pointer;
 }
 
 #directions {
@@ -571,6 +572,7 @@ div.helpBoxSeparator {
     width: 121px;
     height: 24px;
     margin: 10px 5px 5px 5px;
+    cursor:pointer;
 }
 
 .button_text_hi {
@@ -669,7 +671,6 @@ div.helpBoxSeparator {
     color: white;
 }
 
-
 .price_options {
     background-image: url(../images/bkg-tablehead-666x30.gif);
     background-repeat: no-repeat;
@@ -715,6 +716,45 @@ div.helpBoxSeparator {
 
 .rowhighlight {
     border: 1px solid #3fac00;
-;
+}
+
+#imgFrame {
+    height: 240px;
+    width: 320px;
+    padding: 2px;
+}
+
+#thumbWrapper {
+	overflow:hidden;
+	padding:4px 2px;
+	width: 320px;
+	float:left;
+	height:40px;
+	position: relative;
+}
+
+#items{
+	margin:0px 0px;
+	padding:0px;
+	list-style:none;
+	width:50000px;
+	position: relative;
+	letter-spacing:0em;
+}
+#items li{
+	float:left;
+	list-style:none;
+	margin-right:2px;
+}
+#items .thumb{
+	width:60px;
+	height:40px;
+	cursor:pointer;
+	margin:0px;
+	padding:0px;
+}
+#items .large{
+	display:none;
+	position:absolute;
 }
 

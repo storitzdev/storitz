@@ -478,6 +478,20 @@
     showTotals();
   }
 
+  function showImage(img) {
+    $('imgFrame').setStyle({visibility:'hidden'});
+    var imgElem = new Element("img", {src:img, alt:""});
+    $('imgFrame').update(imgElem);
+    $('imgFrame').setStyle({visibility:'visible'});
+    new Effect.Opacity(
+     'imgFrame', {
+        from: 0.0,
+        to: 1.0,
+        duration: 1.0
+     }
+    );
+  }
+
   function setupValidation() {
   }
 
@@ -558,9 +572,10 @@
             <g:else>Closed</g:else>
           </div>
           <div style="height: 10px;"></div>
-          <div>
+          <div style="width:300px;">
             ${site.description}
           </div>
+          <div style="height: 10px;"></div>
 
           <!--
             get the default image for the site here
@@ -713,13 +728,43 @@
             </div>
             <div style="height: 10px; clear: both;"></div>
             <div id="map">
-              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=360x300&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_map_grn.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=300x300&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_map_grn.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
             </div>
             <div id="detail_tabs">
               <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
               <div style="clear: both;"></div>
               <div id="photos">
-                Photos
+                <div class="left" style="margin-top: 108px;">
+                  <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow"/>
+                </div>
+                <div class="left" id="imgFrame">
+                  <g:if test="${site.siteImages().size() > 0}">
+                      <img src="${resource(file:site.coverImage().mid())}" alt=""/>
+                  </g:if>
+                  <g:else>
+                    <img src="${resource(dir: 'images', file:'placeholder.jpg')}" alt="place holder"/>
+                  </g:else>
+                </div>
+                <div class="left" style="margin-top: 108px;">
+                  <img src="${resource(dir: 'images', file:'slideshow-rightarrow1.png')}" alt="right arrow"/>
+                </div>
+                <div style="clear: both;"></div>
+                <div class="left" style="margin-top: 14px;">
+                  <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow"/>
+                </div>
+                <div class="left" id="thumbWrapper">
+                  <ul id="items">
+                     <g:each var="siteImg" in="${site.siteImages()}">
+                         <li class="thumb">
+                           <img id="${'img' + siteImg.imgOrder}" src="${resource(file:siteImg.thumbnail())}" alt="" onclick="showImage('${resource(file:siteImg.mid())}')"/>
+                         </li>
+                     </g:each>
+                  </ul>
+                </div>
+                <div class="left" style="margin-top: 14px;">
+                  <img src="${resource(dir: 'images', file:'slideshow-rightarrow1.png')}" alt="right arrow"/>
+                </div>
+                <div style="clear: both;height: 5px;"></div>
               </div>
               <div id="directions" style="display:none;">
                 <div>

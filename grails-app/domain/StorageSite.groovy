@@ -82,5 +82,14 @@ class StorageSite {
       return users.collect{it.user}
   }
 
+  def siteImages() {
+    return images.findAll{ !it.isLogo }.sort{ it.imgOrder }
+  }
 
+  def coverImage() {
+    def imgs = images.findAll{ it.isCover }
+
+    if (imgs.size() > 0) return imgs.getAt(0)
+    else return siteImages().getAt(0)
+  }
 }

@@ -11,7 +11,7 @@ class BootStrap {
        def roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
        def roleManager = new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
 
-       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('fud2me'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com')
+       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com')
        if (roleAdmin) {
         roleAdmin.addToPeople(admin)
        }
