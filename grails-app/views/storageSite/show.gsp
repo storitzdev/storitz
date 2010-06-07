@@ -129,7 +129,7 @@
           <td valign="top" style="text-align: left;" class="value">
             <ul>
               <g:each in="${storageSiteInstance.specialOffers}" var="s">
-                <li>${s.active ? 'active' : 'inactive'} - ${s?.promoName}</li>
+                <li>${s.active ? 'active' : 'inactive'} ${s.featured ? 'featured' : ''} - ${s?.promoName}</li>
               </g:each>
             </ul>
           </td>

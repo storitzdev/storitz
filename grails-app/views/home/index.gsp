@@ -145,12 +145,18 @@
                     var location = new google.maps.LatLng(s.lat, s.lng);
                     features[s.id] = s;
                     var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
-                    var offersArr = $A(s.specialOffers.pluck('promoName'));
-                    if (offersArr.size() > 1 ) {
-                      offers = '<div id="offers' + s.id + '">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none" class="tooltip">' + offersTip + '</div>';
+                    var featuredArr = $A(s.featuredOffers.pluck('promoName'));
+                    if (featuredArr.size() > 1 ) {
+                      offers = '<div id="offers' + s.id + '">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none" class="tooltip">' + offersTip + '</div>';
                       tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
                     } else {
-                      offers = offersArr[0];
+                      var offersArr = $A(s.specialOffers.pluck('promoName'));
+                      if (offersArr.size() > 1 ) {
+                        offers = '<div id="offers' + s.id + '">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none" class="tooltip">' + offersTip + '</div>';
+                        tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
+                      } else {
+                        offers = offersArr[0];
+                      }
                     }
                     rows++;
 
@@ -305,7 +311,9 @@
             $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
             Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
           });
-
+          $('helpClose').observe('click', function(event) {
+            Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
+          });
         }
 
         function setupForm() {

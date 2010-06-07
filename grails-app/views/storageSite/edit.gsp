@@ -243,7 +243,7 @@
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'specialOffers', 'errors')}">
                                   <ul>
                                     <g:each in="${storageSiteInstance?.specialOffers?}" var="o">
-                                      <li><g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> ${o.promoName}</li>
+                                      <li>active <g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> featured <g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/> ${o.promoName}</li>
                                     </g:each>
                                   </ul>
                                 </td>

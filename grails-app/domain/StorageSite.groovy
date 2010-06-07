@@ -92,4 +92,16 @@ class StorageSite {
     if (imgs.size() > 0) return imgs.getAt(0)
     else return siteImages().getAt(0)
   }
+
+  def featuredOffers() {
+    return specialOffers.findAll{ it.active && it.featured}.sort{ it.id }
+  }
+
+  def specialOffers() {
+    return specialOffers.findAll{ it.active }.sort{ it.id }
+  }
+
+  def nonFeaturedOffers() {
+    return specialOffers.findAll{ it.active && !it.featured }.sort{ it.id }
+  }
 }

@@ -458,6 +458,7 @@ class SiteLinkService {
         SpecialOffer specialOffer = new SpecialOffer()
         specialOffer.concessionId = Integer.parseInt(promo.ConcessionID.text())
         specialOffer.active = true;
+        specialOffer.featured = false;
         specialOffer.prepayMonths = Integer.parseInt(promo.iPrePaidMonths.text())
         specialOffer.description = promo.sDescription
         specialOffer.promoName = promoName

@@ -32,13 +32,18 @@ class STMapController {
       sw << "["
       results.eachWithIndex { site, i ->
         sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"specialOffers\":["
-        site.specialOffers.eachWithIndex{ offer, j ->
-          if (offer.active) {
+        site.specialOffers().eachWithIndex{ offer, j ->
+          sw << "{\"promoName\":\"${offer.promoName}\" }"
+          if (j < site.specialOffers().size() - 1) {
+            sw << ","
+          }
+        }
+        sw << "], \"featuredOffers\":["
+          site.featuredOffers().eachWithIndex{ offer, j ->
             sw << "{\"promoName\":\"${offer.promoName}\" }"
-            if (j < site.specialOffers.size() - 1) {
+            if (j < site.featuredOffers().size() - 1) {
               sw << ","
             }
-          }
         }
         sw << "], \"units\":["
         site.units.eachWithIndex{ unit, j ->

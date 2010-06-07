@@ -23,4 +23,5 @@ class SpecialOffer {
   Integer inMonth
   Integer expireMonth
   Boolean active
+  Boolean featured
 }

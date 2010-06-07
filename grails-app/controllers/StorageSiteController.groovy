@@ -117,15 +117,15 @@ class StorageSiteController {
           def imageTool = new ImageTool()
           imageTool.load(tmpPath)
           imageTool.saveOriginal()
-          imageTool.thumbnail(600)
+          imageTool.thumbnailSpecial(600, 400, 2, 1)
           def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
           dstFile.mkdirs()
           imageTool.writeResult(filePath, "JPEG")
           imageTool.restoreOriginal()
-          imageTool.thumbnail (320)
+          imageTool.thumbnailSpecial (320, 240, 2, 1)
           imageTool.writeResult(filePathMid, "JPEG")
           imageTool.restoreOriginal()
-          imageTool.thumbnail (60)
+          imageTool.thumbnailSpecial (60, 40, 2, 2)
           imageTool.writeResult(filePathThumb, "JPEG")
           def tmpFile = new File(tmpPath)
           tmpFile.delete()
@@ -144,11 +144,18 @@ class StorageSiteController {
 
       for(specialOffer in storageSiteInstance.specialOffers) {
         def offerString = "specialOffer_" + specialOffer.id
-        println("offerString is ${offerString}, params.offerString = " + params.getAt(offerString))
+        def featuredOfferString = "featuredOffer_" + specialOffer.id
+
         if (params.getAt(offerString)) {
           specialOffer.active = true;
         } else {
           specialOffer.active = false;
+        }
+
+        if (params.getAt(featuredOfferString)) {
+          specialOffer.featured = true;
+        } else {
+          specialOffer.featured = false;
         }
         specialOffer.save();
       }

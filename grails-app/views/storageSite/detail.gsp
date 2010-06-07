@@ -573,7 +573,18 @@
           </div>
           <div style="height: 10px;"></div>
           <div style="width:300px;">
+            <g:if test="${site.description.size() > 100}">
+              ${site.description.substring(0, site.description.lastIndexOf(' ', 100))}
+              <span id="moreDescription">
+                <a href="#" onclick="$('moreDescription').hide();Effect.BlindDown('hiddenDescription');return false;">more...</a>
+              </span>
+              <span id="hiddenDescription" style="display: none;">
+                ${site.description.substring(site.description.lastIndexOf(' ', 100) + 1)}
+              </span>
+            </g:if>
+            <g:else>
             ${site.description}
+            </g:else>
           </div>
           <div style="height: 10px;"></div>
 
@@ -635,16 +646,22 @@
             </div>
 
             <div class="icon_text">
-              <ul>
-                <div id="specialOffers">
-                <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
-                  <g:each in="${site.specialOffers}" var="offer">
-                    <g:if test="${offer.active}">
-                      <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
-                    </g:if>
+              <div id="specialOffers">
+              <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
+                <g:each in="${site.featuredOffers()}" var="offer">
+                  <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
+                </g:each>
+                <g:if test="${site.nonFeaturedOffers().size() > 0}">
+                  <div id="moreSpecialOffers" class="right">
+                    <a href="#" onclick="Effect.BlindDown('nonFeaturedOffers');$('moreSpecialOffers').hide();return false;">more special offers...</a>
+                  </div>
+                </g:if>
+                <div id="nonFeaturedOffers" style="display:none">
+                  <g:each in="${site.nonFeaturedOffers()}" var="offer">
+                    <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
                   </g:each>
                 </div>
-              </ul>
+              </div>
             </div>
           </div>
           <div id="left_checkout_info" style="display: none;">
@@ -734,10 +751,7 @@
               <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
               <div style="clear: both;"></div>
               <div id="photos">
-                <div class="left" style="margin-top: 108px;">
-                  <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow"/>
-                </div>
-                <div class="left" id="imgFrame">
+                <div id="imgFrame">
                   <g:if test="${site.siteImages().size() > 0}">
                       <img src="${resource(file:site.coverImage().mid())}" alt=""/>
                   </g:if>
@@ -745,10 +759,6 @@
                     <img src="${resource(dir: 'images', file:'placeholder.jpg')}" alt="place holder"/>
                   </g:else>
                 </div>
-                <div class="left" style="margin-top: 108px;">
-                  <img src="${resource(dir: 'images', file:'slideshow-rightarrow1.png')}" alt="right arrow"/>
-                </div>
-                <div style="clear: both;"></div>
                 <div class="left" style="margin-top: 14px;">
                   <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow"/>
                 </div>
@@ -780,10 +790,10 @@
             <table id="price_table">
               <thead>
                 <tr class="price_options">
-                  <th style="width:216px;">Options</th>
+                  <th style="width:200px; text-align: left;">Options</th>
                   <th style="width:100px;">Months</th>
-                  <th style="width:150px;">Rent</th>
-                  <th style="width:200px;">Total Rent</th>
+                  <th style="width:200px; text-align: right;">Monthly Rent</th>
+                  <th style="width:166px; text-align: right;">Total Rent</th>
                 </tr>
               </thead>
               <tbody id="price_body">
