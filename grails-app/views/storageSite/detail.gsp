@@ -24,6 +24,7 @@
     var startDate = "${params.date}";
     var specialOfferId;
     var monthlyRent = 0;
+    var galleryImageNum = 0;
 
     var priceDriveup = ${params.priceDriveup ? "true" : "false"};
     var priceInterior = ${params.priceInterior ? "true" : "false"};
@@ -479,17 +480,36 @@
   }
 
   function showImage(img) {
-    $('imgFrame').setStyle({visibility:'hidden'});
-    var imgElem = new Element("img", {src:img, alt:""});
+    new Effect.Opacity(
+     'imgFrame', {
+        from: 1.0,
+        to: 0.0,
+        duration: 0.5
+     }
+    );
+    var imgElem = new Element("img", {src:img, alt:"", visibility:"hidden"});
     $('imgFrame').update(imgElem);
-    $('imgFrame').setStyle({visibility:'visible'});
     new Effect.Opacity(
      'imgFrame', {
         from: 0.0,
         to: 1.0,
-        duration: 1.0
+        duration: 0.5
      }
     );
+  }
+
+  function galleryRight() {
+    if (galleryImageNum < (${site.siteImages().size()} -5)) {
+      galleryImageNum++;
+      new Effect.Move('items', { x: -62, y:0, mode:'relative'});
+    }
+  }
+
+  function galleryLeft() {
+    if (galleryImageNum > 0) {
+      galleryImageNum--;
+      new Effect.Move('items', { x: 62, y:0, mode:'relative'});
+    }
   }
 
   function setupValidation() {
@@ -573,7 +593,7 @@
           </div>
           <div style="height: 10px;"></div>
           <div style="width:300px;">
-            <g:if test="${site.description.size() > 100}">
+            <g:if test="${site.description && site.description.size() > 100}">
               ${site.description.substring(0, site.description.lastIndexOf(' ', 100))}
               <span id="moreDescription">
                 <a href="#" onclick="$('moreDescription').hide();Effect.BlindDown('hiddenDescription');return false;">more...</a>
@@ -653,7 +673,7 @@
                 </g:each>
                 <g:if test="${site.nonFeaturedOffers().size() > 0}">
                   <div id="moreSpecialOffers" class="right">
-                    <a href="#" onclick="Effect.BlindDown('nonFeaturedOffers');$('moreSpecialOffers').hide();return false;">more special offers...</a>
+                    <a href="#" onclick="$('moreSpecialOffers').hide();Effect.BlindDown('nonFeaturedOffers');return false;">more special offers...</a>
                   </div>
                 </g:if>
                 <div id="nonFeaturedOffers" style="display:none">
@@ -760,7 +780,7 @@
                   </g:else>
                 </div>
                 <div class="left" style="margin-top: 14px;">
-                  <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow"/>
+                  <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow" onclick="galleryLeft()"/>
                 </div>
                 <div class="left" id="thumbWrapper">
                   <ul id="items">
@@ -772,7 +792,7 @@
                   </ul>
                 </div>
                 <div class="left" style="margin-top: 14px;">
-                  <img src="${resource(dir: 'images', file:'slideshow-rightarrow1.png')}" alt="right arrow"/>
+                  <img src="${resource(dir: 'images', file:'slideshow-rightarrow1.png')}" alt="right arrow" onclick="galleryRight()"/>
                 </div>
                 <div style="clear: both;height: 5px;"></div>
               </div>
