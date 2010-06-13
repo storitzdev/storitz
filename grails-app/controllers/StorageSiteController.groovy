@@ -2,6 +2,7 @@ import grails.converters.JSON
 
 class StorageSiteController {
 
+  def authenticateService
   def siteLinkService
   def geocodeService
   def fileUploadService
@@ -13,10 +14,24 @@ class StorageSiteController {
   }
 
   def list = {
-    params.max = Math.min(params.max ? params.int('max') : 10, 100)
-    println "Storage Site count = " + StorageSite.count()
-    def results = StorageSite.list(params)
-    [storageSiteInstanceList: StorageSite.list(params), storageSiteInstanceTotal: StorageSite.count()]
+    def username = session["username"]
+    def results
+    def count
+
+    println "Found username = " + username
+    if (username == "admin") {
+      params.max = Math.min(params.max ? params.int('max') : 10, 100)
+      results = StorageSite.listOrderByTitle(params)
+      count = StorageSite.count()
+    } else {
+      def user = session["user"]
+      def max = Math.min(params.max ? params.int('max') : 10, 100)
+      def offset = params.offset ? params.int('offset') : 0
+      results = SiteUser.findAllByUser(user).collect{ it.site }.sort{ it.title }
+      count = results.size()
+      results = results.subList(offset, offset + max < count ? offset + max : count)
+    }
+    [storageSiteInstanceList: results, storageSiteInstanceTotal: count]
   }
 
   def create = {

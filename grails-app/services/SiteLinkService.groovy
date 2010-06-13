@@ -205,6 +205,7 @@ class SiteLinkService {
 
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      def newSite = false
       if (site) {
         stats.updateCount++
         site.contacts.each {contact ->
@@ -220,12 +221,13 @@ class SiteLinkService {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
+        newSite = true
       }
-      getSiteDetails(siteLink, site, tab, stats, geocodeService)
+      getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite)
     }
   }
 
-  def getSiteDetails(siteLink, site, tab, stats, geocodeService) {
+  def getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
     def geoResult = geocodeService.geocode(address)
 
@@ -273,6 +275,9 @@ class SiteLinkService {
     site.addToContacts(contact)
 
     site.save()
+    if (newSite) {
+      SiteUser.link(site, siteLink.manager)
+    }
 
     unitsAvailable(siteLink, site, stats)
 
@@ -312,7 +317,7 @@ class SiteLinkService {
       site.specialOffers.clear()
       site.lastUpdate = 0
       site.save(flush: true)
-      getSiteDetails(site.siteLink, site, tab, stats, geocodeService)
+      getSiteDetails(site.siteLink, site, tab, stats, geocodeService, false)
     }
 
   }

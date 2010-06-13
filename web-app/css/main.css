@@ -253,6 +253,16 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
     padding-left: 28px;
 }
 
+.buttons input.add {
+    background: transparent url(../images/skin/database_add.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+.buttons input.table {
+    background: transparent url(../images/skin/database_table.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
 .buttons a {
     background: #fff;
     border: 0;

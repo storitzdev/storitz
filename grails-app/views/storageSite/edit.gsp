@@ -26,7 +26,9 @@
         <div class="nav">
           <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
           <span class="menuButton"><g:link class="list" action="list">List Sites</g:link></span>
-          <span class="menuButton"><g:link class="create" action="create">Create new Site</g:link></span>
+          <g:ifAnyGranted role="ROLE_ADMIN">
+            <span class="menuButton"><g:link class="create" action="create">Create new Site</g:link></span>
+          </g:ifAnyGranted>
         </div>
         <div class="body">
             <h1>Edit Site</h1>
@@ -274,7 +276,7 @@
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                    <span class="button"><g:actionSubmit class="create" action="show" value="${message(code: 'default.button.show.label', default: 'Show')}" /></span>
+                    <span class="button"><g:actionSubmit class="table" action="show" value="${message(code: 'default.button.show.label', default: 'Show')}" /></span>
                 </div>
             </g:uploadForm>
         </div>

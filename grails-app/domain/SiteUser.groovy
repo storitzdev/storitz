@@ -10,6 +10,8 @@ class SiteUser {
       def s = SiteUser.findBySiteAndUser(site, user)
       if (!s) {
         s = new SiteUser()
+        s.user = user
+        s.site = site
         site?.addToUsers(s)
         user?.addToSites(s)
         s.save()

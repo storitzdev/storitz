@@ -18,7 +18,9 @@
   <div class="nav">
     <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
     <span class="menuButton"><g:link class="list" action="list">List Storage Sites</g:link></span>
-    <span class="menuButton"><g:link class="create" action="create">Create New Storage Site</g:link></span>
+    <g:ifAnyGranted role="ROLE_ADMIN">
+      <span class="menuButton"><g:link class="create" action="create">Create New Storage Site</g:link></span>
+    </g:ifAnyGranted>
   </div>
   <div class="body">
     <h1>Storage Site Details</h1>
@@ -219,7 +221,7 @@
 
           <td valign="top" style="text-align: left;" class="value">
             <ul>
-              <g:each in="${storageSiteInstance?.images?}" var="i">
+              <g:each in="${storageSiteInstance?.images}" var="i">
                   <g:if test="${!i.isLogo}">
                     <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/></li>
                   </g:if>
@@ -236,8 +238,8 @@
         <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
         <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
         <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        <span class="button"><g:actionSubmit class="create" action="refresh" value="${message(code: 'default.buttom.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
-        <span class="button"><g:actionSubmit class="create" action="units" value="${message(code: 'default.buttom.refresh.label', default: 'Reload Available Units')}" /></span>
+        <span class="button"><g:actionSubmit class="add" action="refresh" value="${message(code: 'default.buttom.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
+        <span class="button"><g:actionSubmit class="add" action="units" value="${message(code: 'default.buttom.refresh.label', default: 'Reload Available Units')}" /></span>
       </g:form>
     </div>
   </div>

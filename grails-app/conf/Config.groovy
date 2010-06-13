@@ -33,12 +33,15 @@ grails.enable.native2ascii = true
 environments {
     production {
         grails.serverURL = "http://storagetech.webeasy.com/${appName}"
+        security.httpsPort = 443
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
+        security.httpsPort = 8443
     }
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
+        security.httpsPort = 8443
     }
 
 }
