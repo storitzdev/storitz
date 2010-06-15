@@ -55,7 +55,7 @@
         method:'get',
         parameters: {searchSize: searchSize, id: siteId },
         onSuccess:function(transport) {
-          var tableBody = "";
+          var tableBody = "<tr><td colspan=\"4\">Select from the following storage options:</td></tr>";
           var checkoutTableBody = "";
           var units = transport.responseJSON.units;
           var unitCount = (typeof(units.driveUp) !== 'undefined' ? 1 : 0) + (typeof(units.interior) !== 'undefined' ? 1 : 0) + (typeof(units.upper) !== 'undefined' ? 1 : 0);
@@ -248,11 +248,11 @@
 
     function showTotals() {
       var tableBody = "";
+      
       var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
       if (premium > 0) {
         tableBody += "<tr><td style=\"width: 40%;\">Insurance:</td><td class=\"textCenter\" style=\"width: 20%;\">" + durationMonths +"</td><td class=\"price_text\" style=\"width: 20%;\">$" + premium + "</td><td class=\"price_text\" style=\"width: 20%;\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
       }
-      tableBody += "<tr><td>Admin Fees:</td><td></td><td></td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
 
       var offerDiscount = 0;
       if (offerChosen != defaultOffer) {
@@ -270,13 +270,16 @@
             offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
             break;
         }
-        tableBody += "<tr class=\"roweven\"><td  colspan=\"3\">Special Offer<BR/><span class=\"specialOfferText\">" + offerChosen.promoName + "</span><td class=\"price_text specialOfferText\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
+        tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
+
+      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+
       var paidThruRow = "";
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
         paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        paidThruRow = "<tr><td colspan=\"2\">Paid Through Date:</td><td colspan=\"2\">" + paidThru.print("%o/%d/%y") + "</td></tr>";
+        paidThruRow = "<tr class=\"tableLine\"><td colspan=\"4\">Paid Through Date: <span class=\"specialOfferText\">" + paidThru.print("%o/%d/%y") + "</span></td></tr>";
       }
       var total_movein = additionalFees + (monthlyRent + premium)*durationMonths - offerDiscount;
 
@@ -480,20 +483,14 @@
   }
 
   function showImage(img) {
-    new Effect.Opacity(
-     'imgFrame', {
-        from: 1.0,
-        to: 0.0,
-        duration: 0.5
-     }
-    );
     var imgElem = new Element("img", {src:img, alt:"", visibility:"hidden"});
     $('imgFrame').update(imgElem);
     new Effect.Opacity(
      'imgFrame', {
         from: 0.0,
         to: 1.0,
-        duration: 0.5
+        duration: 0.5,
+        queue: 'end'
      }
     );
   }
@@ -548,11 +545,9 @@
         <div id="site_info" class="left" style="margin-top: 25px;">
           <div class="left" style="margin-bottom: 10px;">
             <div id="site_logo">
-              <div style="display:table-cell; vertical-align:middle;">
               <g:if test="${site?.logo}">
                 <img src="${resource(file:site.logo.src())}" alt="${site.title} Logo"/>
               </g:if>
-              </div>
             </div>
             <div id="site_address">
               <div class="title">
@@ -592,15 +587,22 @@
             <g:else>Closed</g:else>
           </div>
           <div style="height: 10px;"></div>
-          <div style="width:300px;">
+          <div style="width: 280px;">
             <g:if test="${site.description && site.description.size() > 100}">
               ${site.description.substring(0, site.description.lastIndexOf(' ', 100))}
-              <span id="moreDescription">
-                <a href="#" onclick="$('moreDescription').hide();Effect.BlindDown('hiddenDescription');return false;">more...</a>
-              </span>
+              <div id="moreDescription" class="expanding">
+                <div class="right">
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreDescription', 'appear', {queue: 'end'}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end'});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
+                </div>
+              </div>
               <span id="hiddenDescription" style="display: none;">
                 ${site.description.substring(site.description.lastIndexOf(' ', 100) + 1)}
               </span>
+              <div id="lessDescription" style="display: none;" class="expanding">
+                <div class="right">
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessDescription', 'appear', {queue: 'end'}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end'});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
+                </div>
+              </div>
             </g:if>
             <g:else>
             ${site.description}
@@ -662,7 +664,7 @@
             </g:if>
             <div style="height:10px;"></div>
             <div class="other_details header_text_hi">
-              Special Offers:
+              Featured Offers:
             </div>
 
             <div class="icon_text">
@@ -672,8 +674,10 @@
                   <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
                 </g:each>
                 <g:if test="${site.nonFeaturedOffers().size() > 0}">
-                  <div id="moreSpecialOffers" class="right">
-                    <a href="#" onclick="$('moreSpecialOffers').hide();Effect.BlindDown('nonFeaturedOffers');return false;">more special offers...</a>
+                  <div id="moreSpecialOffers" class="expanding">
+                    <div class="right">
+                      <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end'});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end'});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
+                    </div>
                   </div>
                 </g:if>
                 <div id="nonFeaturedOffers" style="display:none">
@@ -681,6 +685,12 @@
                     <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
                   </g:each>
                 </div>
+                <div id="lessSpecialOffers" style="display: none;" class="expanding">
+                  <div class="right">
+                    <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessSpecialOffers', 'appear', {queue: 'end'}); Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end'});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> See Only Featured Offers</a>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -749,26 +759,27 @@
           </div>
         </div>
 
-        <div style="width: 670px;" class="right">
+        <div style="width: 685px;" class="right">
           <div id="detailInfo">
-            <div>
-              <div class="returnLink" style="margin-left: 100px; float: left;">
-                <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
-                  &laquo; Back to Seach Results
+            <div style="margin-top: -20px;">
+              <div class="returnLink right" style="padding: 0 0.5em; margin-right: 30px;">
+                <g:link controller="home" action="index">
+                  New Search
                 </g:link>
               </div>
-              <div class="returnLink" style="margin-right: 100px; float: right;">
-                <g:link controller="home" action="index">
-                  New Search &raquo;
+              <div class="returnLink right">|</div>
+              <div class="returnLink right" style="padding: 0 0.5em;">
+                <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
+                 Back to Seach Results
                 </g:link>
               </div>
             </div>
-            <div style="height: 10px; clear: both;"></div>
+            <div style="height: 25px; clear: both;"></div>
             <div id="map">
-              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=300x300&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_map_grn.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_map_grn.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
             </div>
             <div id="detail_tabs">
-              <div id="photo_button" class="left tab_button button_text_hi">Photos</div><div id="direction_button" class="right tab_spacer button_text">Get Directions</div>
+              <div id="photo_button" class="left tab_button_on button_text_hi">Photos</div><div id="direction_button" class="right tab_button_off button_text">Directions</div>
               <div style="clear: both;"></div>
               <div id="photos">
                 <div id="imgFrame">
@@ -819,17 +830,18 @@
               <tbody id="price_body">
               </tbody>
             </table>
+            <div style="height: 10px;"></div>
             <table id="price_totals">
               <tbody id="price_totals_body">
               </tbody>
-              <tr>
-                <th colspan="3" style="width:600px;text-align: right;">Total Move-In Cost:</th>
-                <th id="price_total" style="width:200px;" class="price_text"></th>
+              <tr class="price_options">
+                <th style="width: 500px; text-align: left;">Total Move-In Cost:</th>
+                <th id="price_total" class="price_text" style="width:166px;"></th>
               </tr>
             </table>
             <div style="height:10px;"></div>
             <div id="rentmeBtn" style="float: right; display: none;">
-              <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rentme-106x34.gif')}" alt="Rent Me"/>
+              <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
             </div>
           </div>
 

@@ -71,6 +71,8 @@ class STMapController {
 
     def loc = geoIp.getLocation(request.getRemoteAddr())
 
+    println "GeoIP: ${geoIp} servletContext=${servletContext} remoteAddr: ${request.getRemoteAddr()}"
+
     JSON.use("deep")
     render (status:200, contentType:"application/json", text:"${loc as JSON}")
   }

@@ -81,6 +81,9 @@ tr.rowodd {
 
 tr.roweven {
 	background-color: #F1F8E9;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .sortcol {

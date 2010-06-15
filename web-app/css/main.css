@@ -362,6 +362,7 @@ Added styles
 }
 
 #price_table, #price_totals {
+    color: #052d72;
     font-size: 12px;
     font-weight: bold;
     width: 666px;
@@ -397,7 +398,7 @@ Added styles
     color: #154A99;
 }
 
-#price_table thead, #price_totals tfoot, table.checkout_table thead {
+#price_table thead, #price_totals th, table.checkout_table thead {
     color: white;
 }
 
@@ -406,6 +407,9 @@ Added styles
 	border: 0px;
 	/*white-space: nowrap;
 	overflow: hidden;*/
+}
+#checkout_price_table {
+    color: #052d72;
 }
 
 #checkout_price_table th, #checkout_price_table td {
@@ -533,25 +537,16 @@ div.helpBoxSeparator {
 .title {
     font-weight: bold;
     font-size: 15px;
-    padding: 0.5em;
+    padding: 0.5em 0;
 }
 
 #map {
-    width: 300px;
-    height: 300px;
-    padding: 10px 5px;
+    background-image: url(../images/map-frame.png);
+    background-repeat: no-repeat;
+    width: 334px;
+    height: 285px;
+    padding: 10px;
     float: right;    
-}
-
-#site_logo {
-    float: left;
-    width: 126px;
-    height: 126px;
-    padding: 3px;
-    display: table;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
 }
 
 #site_address {
@@ -564,12 +559,12 @@ div.helpBoxSeparator {
     float: right;
 }
 
-.tab_button {
-    background-image: url(../images/btn-blue-121x24.png);
+.tab_button_on {
+    background-image: url(../images/btn-gallery-on.png);
     background-repeat: no-repeat;
-    width: 121px;
-    height: 24px;
-    margin: 10px 5px 5px 5px;
+    width: 154px;
+    height: 30px;
+    margin: 5px 5px 7px 5px;
     cursor:pointer;
 }
 
@@ -578,17 +573,19 @@ div.helpBoxSeparator {
     width: 260px;
 }
 
-.tab_spacer {
-    width: 121px;
-    height: 24px;
-    margin: 10px 5px 5px 5px;
+.tab_button_off {
+    background-image: url(../images/btn-gallery-off.png);
+    background-repeat: no-repeat;
+    width: 154px;
+    height: 30px;
+    margin: 5px 5px 7px 5px;
     cursor:pointer;
 }
 
 .button_text_hi {
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
-    line-height: 21px;
+    line-height: 30px;
     text-align: center;
     color: white;
 }
@@ -597,7 +594,7 @@ div.helpBoxSeparator {
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
-    line-height: 21px;
+    line-height: 30px;
     color: #154a99;
 }
 
@@ -644,7 +641,7 @@ div.helpBoxSeparator {
 .other_details {
     background-image: url(../images/bkg-tablehead-300x30.gif);
     background-repeat: no-repeat;
-    width: 300px;
+    width: 280px;
     height: 30px;
     display: block;
 }
@@ -652,7 +649,7 @@ div.helpBoxSeparator {
 .order_summary_top {
     background-image: url(../images/bkg-order-summary-top.gif);
     background-repeat: no-repeat;
-    width: 300px;
+    width: 280px;
     height: 31px;
     display: block;
 }
@@ -713,13 +710,17 @@ div.helpBoxSeparator {
     font-weight: bold;
 }
 
+.returnLink {
+    color: #3fac00;
+}
+
 .returnLink a:link, .returnLink a:visited, .returnLink a:hover {
-    color: green;
+    color: #3fac00;
     text-decoration: none;
 }
 
 .bullet {
-    color: green;
+    color: #3fac00;
     font-weight: bold;
     font-size: 20px;
 }
@@ -768,3 +769,11 @@ div.helpBoxSeparator {
 	position:absolute;
 }
 
+.expanding, .tableLine {
+    border-top: slategray dotted thin;
+    padding: 1em 0;
+}
+
+.expanding a, .expanding a:visited {
+    color: #3fac00;
+}

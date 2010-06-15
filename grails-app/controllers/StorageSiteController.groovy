@@ -99,7 +99,7 @@ class StorageSiteController {
         println "Saving image to tmpPath: " + tmpPath
         def imageTool = new ImageTool()
         imageTool.load(tmpPath)
-        imageTool.thumbnail(120)
+        imageTool.thumbnailSpecial(250, 100, 2, 1)
         def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
         dstFile.mkdirs()
         imageTool.writeResult(filePath, "JPEG")
