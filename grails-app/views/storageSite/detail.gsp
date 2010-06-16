@@ -178,13 +178,13 @@
 
     function directionTab() {
       $('direction_button').observe('click', function(event) {
-        $('photo_button').removeClassName('tab_button');
+        $('photo_button').removeClassName('tab_button_on');
         $('photo_button').removeClassName('button_text_hi');
-        $('photo_button').addClassName('tab_spacer');
+        $('photo_button').addClassName('tab_button_off');
         $('photo_button').addClassName('button_text');
-        $('direction_button').removeClassName('tab_spacer');
+        $('direction_button').removeClassName('tab_button_off');
         $('direction_button').removeClassName('button_text');
-        $('direction_button').addClassName('tab_button');
+        $('direction_button').addClassName('tab_button_on');
         $('direction_button').addClassName('button_text_hi');
         $('photos').hide();
         $('directions').show();
@@ -193,13 +193,13 @@
 
     function photoTab() {
       $('photo_button').observe('click', function(event) {
-        $('direction_button').removeClassName('tab_button');
+        $('direction_button').removeClassName('tab_button_on');
         $('direction_button').removeClassName('button_text_hi');
-        $('direction_button').addClassName('tab_spacer');
+        $('direction_button').addClassName('tab_button_off');
         $('direction_button').addClassName('button_text');
-        $('photo_button').removeClassName('tab_spacer');
+        $('photo_button').removeClassName('tab_button_off');
         $('photo_button').removeClassName('button_text');
-        $('photo_button').addClassName('tab_button');
+        $('photo_button').addClassName('tab_button_on');
         $('photo_button').addClassName('button_text_hi');
         $('directions').hide();
         $('photos').show();
@@ -270,10 +270,10 @@
             offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
             break;
         }
-        tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
+        tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text borderRight\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
 
-      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"price_text borderRight\">$" + additionalFees.toFixed(2) + "</td></tr>";
 
       var paidThruRow = "";
       if (typeof(startDate) !== 'undefined') {
@@ -295,7 +295,7 @@
 
     function rentmeClick() {
       $('rentme').observe('click', function(event) {
-        if (rentalFormReady) {
+        if (rentalFormReady && validateRentme()) {
           $('sizeHelp').hide();
           var sdate = Date.parseDate($F('date'), "%m-%d-%Y");
           $('checkout_movein_date').update(sdate.print("%o/%d/%y"));
@@ -405,6 +405,13 @@
       valid &= Validation.validate('rentalUse');
       valid &= Validation.validate('insuranceChoices');
       valid &= Validation.validate('termsHolder');
+      return valid;
+    }
+
+    function validateRentme() {
+      var valid = true;
+      valid &= Validation.validate('unitsize');
+      valid &= Validation.validate('date');
       return valid;
     }
 
@@ -532,6 +539,7 @@
     <g:if test="${site.requiresInsurance}">
     insuranceClick();
     </g:if>
+    validateRentme();
   });
 
 //]]>
@@ -592,7 +600,7 @@
               ${site.description.substring(0, site.description.lastIndexOf(' ', 100))}
               <div id="moreDescription" class="expanding">
                 <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreDescription', 'appear', {queue: 'end'}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end'});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.5}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
                 </div>
               </div>
               <span id="hiddenDescription" style="display: none;">
@@ -600,7 +608,7 @@
               </span>
               <div id="lessDescription" style="display: none;" class="expanding">
                 <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessDescription', 'appear', {queue: 'end'}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end'});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.5}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
                 </div>
               </div>
             </g:if>
@@ -617,16 +625,16 @@
             <div>
               <div class="section_header">Available sizes:  (currently <span id="sizeDescription">undefined</span>)</div>
               <g:if test="${params.searchSize}">
-                <g:select id="unitsize" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
+                <g:select id="unitsize" class="validate-selection" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
               </g:if>
               <g:else>
-                <g:select id="unitsize" name="unitsize" from="${sizeList}" optionValue="description" value="1" optionKey="id" />
+                <g:select id="unitsize" class="validate-selection" name="unitsize" from="${sizeList}" optionValue="description" value="1" optionKey="id" />
               </g:else>
               <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
             </div>
             <div>
               <div class="section_header">Start Date:</div>
-              <input type="text" id="date" style="width: 105px;" value="${params.date}" onchange="onDateChange()"/>
+              <input type="text" class="required validate-date-us" id="date" style="width: 105px;" value="${params.date}" onchange="onDateChange()"/>
             </div>
             <div style="padding: 10px 0px;" class="section_header">
               Site Features:
@@ -669,6 +677,7 @@
 
             <div class="icon_text">
               <div id="specialOffers">
+              <p style="width: 300px; font-size: 10px;">Select from the list below to take advantage of these Special Offers!</p>
               <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
                 <g:each in="${site.featuredOffers()}" var="offer">
                   <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
@@ -676,7 +685,7 @@
                 <g:if test="${site.nonFeaturedOffers().size() > 0}">
                   <div id="moreSpecialOffers" class="expanding">
                     <div class="right">
-                      <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end'});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end'});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
+                      <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.5});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
                     </div>
                   </div>
                 </g:if>
@@ -687,7 +696,7 @@
                 </div>
                 <div id="lessSpecialOffers" style="display: none;" class="expanding">
                   <div class="right">
-                    <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessSpecialOffers', 'appear', {queue: 'end'}); Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end'});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> See Only Featured Offers</a>
+                    <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessSpecialOffers', 'appear', {queue: 'end', duration: 0.5}); Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> See Only Featured Offers</a>
                   </div>
                 </div>
 
@@ -735,7 +744,7 @@
               <tbody id="checkout_price_body">
               </tbody>
             </table>
-            <table id="checkout_price_totals" style="width: 300px;border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
+            <table id="checkout_price_totals" style="width: 300px;">
               <tbody id="checkout_price_totals_body">
               </tbody>
             </table>
@@ -840,7 +849,7 @@
               </tr>
             </table>
             <div style="height:10px;"></div>
-            <div id="rentmeBtn" style="float: right; display: none;">
+            <div id="rentmeBtn" style="float: right; margin-right: 20px; display: none;">
               <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
             </div>
           </div>

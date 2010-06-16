@@ -402,13 +402,15 @@ Added styles
     color: white;
 }
 
-#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals tbody td, #rentalForm td, #rentalForm th {
+#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0px;
+    display: table-cell;
+    border-collapse: collapse;
 	/*white-space: nowrap;
 	overflow: hidden;*/
 }
-#checkout_price_table {
+#checkout_price_table, #checkout_price_totals {
     color: #052d72;
 }
 
@@ -417,6 +419,19 @@ Added styles
     border: 0px;
     /*white-space: nowrap;
     overflow: hidden;*/
+}
+
+#checkout_price_totals tr {
+    border-left: #154A99 1px solid;
+}
+
+#checkout_price_totals_body td.borderRight {
+    border-right: #154A99 1px solid;
+}
+
+#checkout_price_totals td {
+    border-left: 0;
+    border-right: 0;
 }
 
 #instructions {
@@ -683,6 +698,7 @@ div.helpBoxSeparator {
     background-repeat: no-repeat;
     width: 666px;
     height: 30px;
+    line-height: 20px;
     display: block;
     position: relative;
 }
