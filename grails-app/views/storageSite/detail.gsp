@@ -273,17 +273,17 @@
         tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text borderRight\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
 
-      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"price_text borderRight\">$" + additionalFees.toFixed(2) + "</td></tr>";
+      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"borderRight price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
 
       var paidThruRow = "";
       if (typeof(startDate) !== 'undefined') {
         var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
         paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        paidThruRow = "<tr class=\"tableLine\"><td colspan=\"4\">Paid Through Date: <span class=\"specialOfferText\">" + paidThru.print("%o/%d/%y") + "</span></td></tr>";
+        // can't use colspan=4 or it renders border wrong in Chrome/Safari
+        paidThruRow = "<tr class=\"tableLine\"><td colspan=\"2\">Paid Through Date: <span class=\"specialOfferText\">" + paidThru.print("%o/%d/%y") + "</span></td><td></td><td></td></tr>";
       }
       var total_movein = additionalFees + (monthlyRent + premium)*durationMonths - offerDiscount;
 
-      // TODO - calculate paid through date
       $('price_totals_body').update(tableBody + paidThruRow);
       $('checkout_price_totals_body').update(tableBody);
       if (typeof(paidThru) !== 'undefined') {
@@ -489,8 +489,14 @@
     showTotals();
   }
 
-  function showImage(img) {
-    var imgElem = new Element("img", {src:img, alt:"", visibility:"hidden"});
+  function showImage(img, newElem) {
+    var oldElem = $$('img.gallerySelected').each(function(elem) {
+      elem.removeClassName('gallerySelected');
+      elem.addClassName('galleryNormal');
+    });
+    $(newElem).removeClassName('galleryNormal');
+    $(newElem).addClassName('gallerySelected');
+    var imgElem = new Element("img", {src:img, alt:"", visibility:"hidden", style:"display:block;margin:auto;"});
     $('imgFrame').update(imgElem);
     new Effect.Opacity(
      'imgFrame', {
@@ -502,18 +508,54 @@
     );
   }
 
-  function galleryRight() {
-    if (galleryImageNum < (${site.siteImages().size()} -5)) {
-      galleryImageNum++;
-      new Effect.Move('items', { x: -62, y:0, mode:'relative'});
-    }
+  function rightArrowClick() {
+    $('rightArrow').observe('click', function(event) {
+      if (galleryImageNum < (${site.siteImages().size()} - 4)) {
+        galleryImageNum++;
+        new Effect.Move('items', { x: -62, y:0, mode:'relative'});
+        if (galleryImageNum >= (${site.siteImages().size()} - 4)) {
+          if($('rightArrow').hasClassName('rightArrowActive')) {
+            $('rightArrow').removeClassName('rightArrowActive');
+            $('rightArrow').addClassName('rightArrowNull');
+          }
+        }
+        if ($('leftArrow').hasClassName('leftArrowNull')) {
+          $('leftArrow').addClassName('leftArrowActive');
+          $('leftArrow').removeClassName('leftArrowNull');
+        }
+      } else {
+        if($('rightArrow').hasClassName('rightArrowActive')) {
+          $('rightArrow').removeClassName('rightArrowActive');
+          $('rightArrow').addClassName('rightArrowNull');
+        }
+      }
+    });
   }
 
-  function galleryLeft() {
-    if (galleryImageNum > 0) {
-      galleryImageNum--;
-      new Effect.Move('items', { x: 62, y:0, mode:'relative'});
-    }
+  function leftArrowClick() {
+    $('leftArrow').observe('click', function(event) {
+      if (galleryImageNum > 0) {
+        galleryImageNum--;
+        new Effect.Move('items', { x: 62, y:0, mode:'relative'});
+        if (galleryImageNum < (${site.siteImages().size()} - 4)) {
+          if($('rightArrow').hasClassName('rightArrowNull')) {
+            $('rightArrow').removeClassName('rightArrowNull');
+            $('rightArrow').addClassName('rightArrowActive');
+          }
+        }
+        if (galleryImageNum == 0) {
+          if($('leftArrow').hasClassName('leftArrowActive')) {
+            $('leftArrow').removeClassName('leftArrowActive');
+            $('leftArrow').addClassName('leftArrowNull');
+          }
+        }
+      } else {
+        if($('leftArrow').hasClassName('leftArrowActive')) {
+          $('leftArrow').removeClassName('leftArrowActive');
+          $('leftArrow').addClassName('leftArrowNull');
+        }
+      }
+    });
   }
 
   function setupValidation() {
@@ -539,6 +581,8 @@
     <g:if test="${site.requiresInsurance}">
     insuranceClick();
     </g:if>
+    rightArrowClick();
+    leftArrowClick();
     validateRentme();
   });
 
@@ -793,26 +837,24 @@
               <div id="photos">
                 <div id="imgFrame">
                   <g:if test="${site.siteImages().size() > 0}">
-                      <img src="${resource(file:site.coverImage().mid())}" alt=""/>
+                      <img src="${resource(file:site.coverImage().mid())}" style="display:block;margin:auto;" alt=""/>
                   </g:if>
                   <g:else>
                     <img src="${resource(dir: 'images', file:'placeholder.jpg')}" alt="place holder"/>
                   </g:else>
                 </div>
-                <div class="left" style="margin-top: 14px;">
-                  <img src="${resource(dir: 'images', file:'slideshow-leftarrow1.png')}" alt="left arrow" onclick="galleryLeft()"/>
+                <div id="leftArrow" class="left leftArrowNull" style="margin-top: 8px;">
                 </div>
                 <div class="left" id="thumbWrapper">
                   <ul id="items">
-                     <g:each var="siteImg" in="${site.siteImages()}">
+                     <g:each var="siteImg" in="${site.siteImages()}" status="i">
                          <li class="thumb">
-                           <img id="${'img' + siteImg.imgOrder}" src="${resource(file:siteImg.thumbnail())}" alt="" onclick="showImage('${resource(file:siteImg.mid())}')"/>
+                           <img id="img${siteImg.imgOrder}" class="${i == 0 ? 'gallerySelected' : 'galleryNormal'}" src="${resource(file:siteImg.thumbnail())}" alt="" onclick="showImage('${resource(file:siteImg.mid())}', 'img${siteImg.imgOrder}')"/>
                          </li>
                      </g:each>
                   </ul>
                 </div>
-                <div class="left" style="margin-top: 14px;">
-                  <img src="${resource(dir: 'images', file:'slideshow-rightarrow1.png')}" alt="right arrow" onclick="galleryRight()"/>
+                <div id="rightArrow" class="left ${site.siteImages().size() > 4 ? 'rightArrowActive' : 'rightArrowNull'}" style="margin-top: 8px;">
                 </div>
                 <div style="clear: both;height: 5px;"></div>
               </div>

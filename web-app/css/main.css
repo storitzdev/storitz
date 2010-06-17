@@ -362,7 +362,7 @@ Added styles
 }
 
 #price_table, #price_totals {
-    color: #052d72;
+    color: #154b99;
     font-size: 12px;
     font-weight: bold;
     width: 666px;
@@ -378,7 +378,7 @@ Added styles
 
 .checkout_section_header {
     background-color: #f1f8e9;
-    color: #052d72;
+    color: #154b99;
     font-weight: bold;
     font: 13px verdana, arial, helvetica, sans-serif;
     width: 646px;
@@ -411,7 +411,7 @@ Added styles
 	overflow: hidden;*/
 }
 #checkout_price_table, #checkout_price_totals {
-    color: #052d72;
+    color: #154b99;
 }
 
 #checkout_price_table th, #checkout_price_table td {
@@ -748,15 +748,22 @@ div.helpBoxSeparator {
 #imgFrame {
     height: 240px;
     width: 320px;
-    padding: 2px;
+    border: 1px solid #b9c0c8;
+    background-image: url(../images/gallery-backplate.jpg);
+    background-repeat: no-repeat;
+}
+
+#imgFrame img {
+    vertical-align:middle;
+    margin:0 auto;
 }
 
 #thumbWrapper {
 	overflow:hidden;
 	padding:4px 2px;
-	width: 296px;
+	width: 236px;
 	float:left;
-	height:40px;
+	height:46px;
 	position: relative;
 }
 
@@ -785,8 +792,59 @@ div.helpBoxSeparator {
 	position:absolute;
 }
 
+div.leftArrowNull {
+    height: 46px;
+    width: 44px;
+    background-image: url("../images/btn-gallery-left-arrow-null.gif");
+    background-repeat: no-repeat;
+}
+
+div.leftArrowActive {
+    height: 46px;
+    width: 44px;
+    background-image: url("../images/btn-gallery-left-arrow-active.gif");
+    background-repeat: no-repeat;
+}
+
+div.leftArrowActive:hover {
+    height: 46px;
+    width: 44px;
+    background-image: url("../images/btn-gallery-left-arrow-hover.gif");
+    background-repeat: no-repeat;
+}
+
+div.rightArrowNull {
+    height: 46px;
+    width: 44px;
+    background-image: url("../images/btn-gallery-right-arrow-null.gif");
+    background-repeat: no-repeat;
+}
+
+div.rightArrowActive {
+    height: 46px;
+    width: 44px;
+    background-image: url("../images/btn-gallery-right-arrow-active.gif");
+    background-repeat: no-repeat;
+}
+
+div.rightArrowActive:hover {
+    height: 46px;
+    width: 44px;
+    background-image: url("../images/btn-gallery-right-arrow-hover.gif");
+    background-repeat: no-repeat;
+}
+
+.galleryNormal {
+    margin: 3px 0;
+    border: 1px solid #b9c0c8;
+}
+
+.gallerySelected {
+    border: 3px solid #024a94;
+}
+
 .expanding, .tableLine {
-    border-top: slategray dotted thin;
+    border-top: slategray dotted 1px;
     padding: 1em 0;
 }
 
