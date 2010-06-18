@@ -1,5 +1,5 @@
 <div>
-  <div style="z-index: 100; float: left;">
+  <div style="z-index: 100; float: left; margin-top: 22px;">
     <g:link controller="home" action="index">
       <img src="${createLinkTo(dir:'images', file:'logo_storitz.gif')}" class="noborder" alt="StorageTech Logo"/>
     </g:link>

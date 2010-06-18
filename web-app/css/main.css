@@ -306,7 +306,7 @@ Added styles
     color: #3fac00;
     float: right;
     margin-top: -35px;
-    margin-right: 50px;
+    margin-right: 25px;
     z-index: -10;
 }
 
@@ -317,8 +317,7 @@ Added styles
 }
 
 .small {
-    font-size: 8px;
-    font-family: verdana, arial, helvetica, sans-serif;
+    font: 11px verdana, arial, helvetica, sans-serif;
 }
 
 .bold {
@@ -425,6 +424,10 @@ Added styles
     border-left: #154A99 1px solid;
 }
 
+#price_totals td {
+    padding: 15px 20px;
+}
+
 #checkout_price_totals_body td.borderRight {
     border-right: #154A99 1px solid;
 }
@@ -432,6 +435,8 @@ Added styles
 #checkout_price_totals td {
     border-left: 0;
     border-right: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 #instructions {
@@ -567,7 +572,14 @@ div.helpBoxSeparator {
 #site_address {
     float: left;
     width: 180px;
-    margin: 0.5em;
+    margin: 0.5em 0;
+    line-height: 16px;
+    font-size: 11px;
+}
+
+.siteInfoText {
+    line-height: 16px;
+    font-size: 11px;
 }
 
 #detail_tabs {
@@ -650,7 +662,25 @@ div.helpBoxSeparator {
 .icon_text {
     font: 11px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+    height: 32px;
+    line-height: 32px;
     color: #154A99;
+    padding: 3px 1em;
+}
+
+.featuredOfferText {
+    font: 11px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #154A99;
+    padding: 0 0 0 5px;
+}
+
+.featuredOfferHeader {
+    color: #333;
+    line-height: 14px;
+    font-size: 10px;
+    font-weight: normal;
+    width: 290px;
 }
 
 .other_details {

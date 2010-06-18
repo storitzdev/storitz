@@ -55,7 +55,7 @@
         method:'get',
         parameters: {searchSize: searchSize, id: siteId },
         onSuccess:function(transport) {
-          var tableBody = "<tr><td colspan=\"4\">Select from the following storage options:</td></tr>";
+          var tableBody = "<tr><td colspan=\"4\" style=\"padding-left:20px;\">Select from the following storage options:</td></tr>";
           var checkoutTableBody = "";
           var units = transport.responseJSON.units;
           var unitCount = (typeof(units.driveUp) !== 'undefined' ? 1 : 0) + (typeof(units.interior) !== 'undefined' ? 1 : 0) + (typeof(units.upper) !== 'undefined' ? 1 : 0);
@@ -69,7 +69,7 @@
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup || unitCount == 1 ? " checked=\"true\"" : "") + "/> Drive up</td>";
               tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
-              tableBody += "<td class=\"price_text\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
+              tableBody += "<td class=\"price_text\" style=\"padding-right:20px;\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.driveup.id] = units.driveup.price;
               unitTypes[units.driveup.id] = 'priceDriveup';
@@ -80,7 +80,7 @@
                 rentalFormReady = true;
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
-                checkoutTableBody += "<td>Drive up</td>";
+                checkoutTableBody += "<td style=\"padding-bottom:10px;\">Drive up</td>";
                 checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
                 checkoutTableBody += "<td class=\"price_text\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
                 checkoutTableBody += "</tr>";
@@ -90,7 +90,7 @@
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior || unitCount == 1 ? " checked=\"true\"" : "") + "/> Interior</td>";
               tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
-              tableBody += "<td class=\"price_text\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
+              tableBody += "<td class=\"price_text\" style=\"padding-right:20px;\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.interior.id] = units.interior.price;
               unitTypes[units.interior.id] = 'priceInterior';
@@ -101,7 +101,7 @@
                 rentalFormReady = true;
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
-                checkoutTableBody += "<td>Interior</td>";
+                checkoutTableBody += "<td style=\"padding-bottom:10px;\">Interior</td>";
                 checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
                 checkoutTableBody += "<td class=\"price_text\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
                 checkoutTableBody += "</tr>";
@@ -111,7 +111,7 @@
               tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
               tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper || unitCount == 1 ? " checked=\"true\"" : "") + "/> Upper</td>";
               tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
-              tableBody += "<td class=\"price_text\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
+              tableBody += "<td class=\"price_text\" style=\"padding-right:20px;\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
               tableBody += "</tr>";
               prices[units.upper.id] = units.upper.price;
               unitTypes[units.upper.id] = 'priceUpper';
@@ -122,7 +122,7 @@
                 rentalFormReady = true;
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
-                checkoutTableBody += "<td>Upper</td>";
+                checkoutTableBody += "<td style=\"padding-bottom:10px;\">Upper</td>";
                 checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
                 checkoutTableBody += "<td class=\"price_text\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
                 checkoutTableBody += "</tr>";
@@ -594,7 +594,7 @@
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
-        <div id="site_info" class="left" style="margin-top: 25px;">
+        <div id="site_info" class="left" style="margin-top: 26px;">
           <div class="left" style="margin-bottom: 10px;">
             <div id="site_logo">
               <g:if test="${site?.logo}">
@@ -617,21 +617,21 @@
             </div>
           </div>
           <div style="clear:both;"></div>
-          <div>
+          <div class="siteInfoText">
             Weekdays:
             <g:if test="${site.openWeekday}">
               <g:formatDate format="h:mma" date="${site.startWeekday}"/> - <g:formatDate format="h:mma" date="${site.endWeekday}"/>
             </g:if>
             <g:else>Closed</g:else>
           </div>
-          <div>
+          <div class="siteInfoText">
             Saturday:
             <g:if test="${site.openSaturday}">
               <g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/>
             </g:if>
             <g:else>Closed</g:else>
           </div>
-          <div>
+          <div class="siteInfoText">
             Sunday:
             <g:if test="${site.openSunday}">
               <g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/>
@@ -639,20 +639,20 @@
             <g:else>Closed</g:else>
           </div>
           <div style="height: 10px;"></div>
-          <div style="width: 280px;">
-            <g:if test="${site.description && site.description.size() > 100}">
-              ${site.description.substring(0, site.description.lastIndexOf(' ', 100))}
+          <div style="width: 280px;" class="siteInfoText">
+            <g:if test="${site.description && site.description.size() > 90}">
+              ${site.description.substring(0, site.description.lastIndexOf(' ', 90))}
               <div id="moreDescription" class="expanding">
                 <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.5}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
                 </div>
               </div>
               <span id="hiddenDescription" style="display: none;">
-                ${site.description.substring(site.description.lastIndexOf(' ', 100) + 1)}
+                ${site.description.substring(site.description.lastIndexOf(' ', 90) + 1)}
               </span>
               <div id="lessDescription" style="display: none;" class="expanding">
                 <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.5}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
                 </div>
               </div>
             </g:if>
@@ -660,7 +660,7 @@
             ${site.description}
             </g:else>
           </div>
-          <div style="height: 10px;"></div>
+          <div style="height: 18px;"></div>
 
           <!--
             get the default image for the site here
@@ -676,52 +676,64 @@
               </g:else>
               <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
             </div>
+            <div style="height: 18px;"></div>
             <div>
               <div class="section_header">Start Date:</div>
               <input type="text" class="required validate-date-us" id="date" style="width: 105px;" value="${params.date}" onchange="onDateChange()"/>
             </div>
-            <div style="padding: 10px 0px;" class="section_header">
+            <div style="padding: 18px 0 10px;" class="section_header">
               Site Features:
             </div>
 
             <g:if test="${site.freeTruck  == storagetech.constants.TruckType.FREE}">
-              <div class="icon_text">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/> Free Truck
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/>
               </div>
+              <div class="left icon_text">Free Truck</div>
+              <div style="clear: both;"></div>
             </g:if>
             <g:if test="${site.freeTruck  == storagetech.constants.TruckType.RENTAL}">
-              <div class="icon_text">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/> Rental Truck
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/>
               </div>
+              <div class="left icon_text">Rental Truck</div>
+              <div style="clear: both;"></div>
             </g:if>
             <g:if test="${site.isGate}">
-              <div class="icon_text">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-gate32.jpg')}" alt="Gated"/> Gated
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-gate32.jpg')}" alt="Gated"/>
               </div>
+              <div class="left icon_text">Gated</div>
+              <div style="clear: both;"></div>
             </g:if>
             <g:if test="${site.isKeypad}">
-              <div class="icon_text">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-keypad32.jpg')}" alt="Keypad"/> Keypad Entry
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-keypad32.jpg')}" alt="Keypad"/>
               </div>
+              <div class="left icon_text">Keypad Entry</div>
+              <div style="clear: both;"></div>
             </g:if>
             <g:if test="${site.isCamera}">
-              <div class="icon_text">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-camera32.jpg')}" alt="Camera"/> Camera
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-camera32.jpg')}" alt="Camera"/>
               </div>
+              <div class="left icon_text">Camera</div>
+              <div style="clear: both;"></div>
             </g:if>
             <g:if test="${site.isUnitAlarmed}">
-              <div class="icon_text">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-alarm32.jpg')}" alt="Alarmed"/> Unit Alarmed
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-alarm32.jpg')}" alt="Alarmed"/>
               </div>
+              <div class="left icon_text">Unit Alarmed</div>
+              <div style="clear: both;"></div>
             </g:if>
-            <div style="height:10px;"></div>
+            <div style="height:21px;"></div>
             <div class="other_details header_text_hi">
               Featured Offers:
             </div>
-
-            <div class="icon_text">
+            <div class="featuredOfferText">
               <div id="specialOffers">
-              <p style="width: 300px; font-size: 10px;">Select from the list below to take advantage of these Special Offers!</p>
+              <p class="featuredOfferHeader">Select from the list below to take advantage of these Special Offers!</p>
               <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
                 <g:each in="${site.featuredOffers()}" var="offer">
                   <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
@@ -729,7 +741,7 @@
                 <g:if test="${site.nonFeaturedOffers().size() > 0}">
                   <div id="moreSpecialOffers" class="expanding">
                     <div class="right">
-                      <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.5});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
+                      <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.1});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
                     </div>
                   </div>
                 </g:if>
@@ -740,7 +752,7 @@
                 </div>
                 <div id="lessSpecialOffers" style="display: none;" class="expanding">
                   <div class="right">
-                    <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessSpecialOffers', 'appear', {queue: 'end', duration: 0.5}); Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.5});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> See Only Featured Offers</a>
+                    <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessSpecialOffers', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> See Only Featured Offers</a>
                   </div>
                 </div>
 
@@ -815,7 +827,7 @@
         <div style="width: 685px;" class="right">
           <div id="detailInfo">
             <div style="margin-top: -20px;">
-              <div class="returnLink right" style="padding: 0 0.5em; margin-right: 30px;">
+              <div class="returnLink right" style="padding: 0 0.5em; margin-right: 20px;">
                 <g:link controller="home" action="index">
                   New Search
                 </g:link>
@@ -872,7 +884,7 @@
             <table id="price_table">
               <thead>
                 <tr class="price_options">
-                  <th style="width:200px; text-align: left;">Options</th>
+                  <th style="width:200px; text-align: left; padding-left:20px;">Options</th>
                   <th style="width:100px;">Months</th>
                   <th style="width:200px; text-align: right;">Monthly Rent</th>
                   <th style="width:166px; text-align: right;">Total Rent</th>
@@ -886,11 +898,16 @@
               <tbody id="price_totals_body">
               </tbody>
               <tr class="price_options">
-                <th style="width: 500px; text-align: left;">Total Move-In Cost:</th>
-                <th id="price_total" class="price_text" style="width:166px;"></th>
+                <th style="width: 500px; text-align: left; padding-left:20px;">Total Move-In Cost:</th>
+                <th id="price_total" class="price_text" style="width:166px; padding-right: 20px;"></th>
               </tr>
             </table>
-            <div style="height:10px;"></div>
+            <div style="height:15px;"></div>
+            <div class="left">
+              <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
+                <img src="${resource(dir:'images', file:'btn-back-silver.png')}" alt="back home"/>
+              </g:link>
+            </div>
             <div id="rentmeBtn" style="float: right; margin-right: 20px; display: none;">
               <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
             </div>
