@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/storagetech" docBase="storagetech"
+<Context path="/storitz" docBase="storitz"
    crossContext="true" reloadable="true" debug="1">
 
-<Resource name="jdbc/storagetech"
+<Resource name="jdbc/storitz"
           auth="Container"
           type="javax.sql.DataSource"
           driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://127.0.0.1:3306/storagetech?autoReconnect=true"
-          username="storagetech"
+          url="jdbc:mysql://127.0.0.1:3306/storitz?autoReconnect=true"
+          username="storitz"
           password="st3ch@m"
           validationQuery="select 1"
           maxActive="20"

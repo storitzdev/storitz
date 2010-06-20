@@ -1,5 +1,5 @@
 import StorageSite
-import com.storagetech.geoip.GeoIp
+import com.storitz.geoip.GeoIp
 import grails.converters.JSON
 import org.hibernate.FetchMode as FM
 

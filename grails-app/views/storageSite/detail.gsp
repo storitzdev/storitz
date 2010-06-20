@@ -685,7 +685,7 @@
               Site Features:
             </div>
 
-            <g:if test="${site.freeTruck  == storagetech.constants.TruckType.FREE}">
+            <g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">
               <div class="left">
                 <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/>
               </div>
@@ -905,7 +905,7 @@
             <div style="height:15px;"></div>
             <div class="left">
               <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
-                <img src="${resource(dir:'images', file:'btn-back-silver.png')}" alt="back home"/>
+                <img src="${resource(dir:'images', file:'btn-back-silver.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
               </g:link>
             </div>
             <div id="rentmeBtn" style="float: right; margin-right: 20px; display: none;">
@@ -1033,7 +1033,7 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phoneType', 'errors')}">
-                    <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storagetech.constants.PhoneType.list()}" value="${rentalTransaction?.contactPrimary?.phoneType}" optionValue="value"/>
+                    <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storitz.constants.PhoneType.list()}" value="${rentalTransaction?.contactPrimary?.phoneType}" optionValue="value"/>
                 </div>
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phone', 'errors')}">
                     <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.phone}" />
@@ -1063,7 +1063,7 @@
                     <g:select id="idType" name="idType" style="width:180px;" from="${storagetech.constants.IdType.list()}" value="${rentalTransaction?.idType}" optionValue="value"/>
                 </div>
                 <div id="idStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idState', 'errors')}">
-                    <g:select name="idState" id="idState" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.idState}" optionValue="value"/>
+                    <g:select name="idState" id="idState" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransaction?.idState}" optionValue="value"/>
                 </div>
                 <div id="idCountryField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idCountry', 'errors')}" style="width:200px;display: none;">
                     <g:select name="idCountry" id="idCountry" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.idCountry}" optionKey="key" optionValue="display"/>
@@ -1247,7 +1247,7 @@
                   <div style="clear:both;"></div>
               </div>
             </div>
-            <g:if test="${site.freeTruck == storagetech.constants.TruckType.FREE}">
+            <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}">
               <div class="checkout_section_header">
                 Free Truck
               </div>

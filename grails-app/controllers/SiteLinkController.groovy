@@ -25,7 +25,7 @@ class SiteLinkController {
     def siteLinkInstance = new SiteLink(params)
     if (siteLinkInstance.save(flush: true)) {
       // read in sites
-      def stats = new storagetech.SiteLinkStats()
+      def stats = new storitz.SiteLinkStats()
       siteLinkService.corpSites(siteLinkInstance, stats, geocodeService)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)

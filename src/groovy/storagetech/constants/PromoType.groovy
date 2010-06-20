@@ -1,4 +1,4 @@
-package storagetech.constants
+package storitz.constants
 
 public enum PromoType {
     AMOUNT_OFF,

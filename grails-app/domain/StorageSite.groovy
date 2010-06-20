@@ -1,4 +1,4 @@
-import storagetech.constants.TruckType;
+import storitz.constants.TruckType;
 
 class StorageSite {
 

@@ -1,7 +1,7 @@
-import storagetech.constants.IdType
-import storagetech.constants.State
-import storagetech.constants.Country
-import storagetech.constants.RentalUse
+import storitz.constants.IdType
+import storitz.constants.State
+import storitz.constants.Country
+import storitz.constants.RentalUse
 
 class RentalTransaction {
 

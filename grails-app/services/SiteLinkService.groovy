@@ -5,8 +5,8 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
 import static groovyx.net.http.ContentType.XML
 
-import storagetech.constants.TruckType
-import storagetech.constants.PromoType
+import storitz.constants.TruckType
+import storitz.constants.PromoType
 
 class SiteLinkService {
 

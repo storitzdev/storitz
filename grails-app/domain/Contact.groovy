@@ -1,7 +1,7 @@
-import storagetech.constants.StreetType;
-import storagetech.constants.PhoneType;
-import storagetech.constants.State;
-import storagetech.constants.Country;
+import storitz.constants.StreetType;
+import storitz.constants.PhoneType;
+import storitz.constants.State;
+import storitz.constants.Country;
 
 class Contact {
 

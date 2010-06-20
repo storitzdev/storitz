@@ -1,4 +1,4 @@
-package com.storagetech.geoip;
+package com.storitz.geoip;
 
 import com.maxmind.geoip.Location;
 import com.maxmind.geoip.LookupService;
@@ -28,7 +28,7 @@ public class GeoIp {
         if (geoFile == null) {
             InputStream stream;
             Properties prop = new Properties();
-            String propertyFile = "/WEB-INF/storagetech.properties";
+            String propertyFile = "/WEB-INF/storitz.properties";
             String propertyName = "geodb." + os;
             try {
                 // Get the property as stream.

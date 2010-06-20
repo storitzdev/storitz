@@ -193,7 +193,7 @@ class StorageSiteController {
     def storageSiteInstance = StorageSite.get(params.id)
 
     if (storageSiteInstance.source == "SL") {
-      def stats = new storagetech.SiteLinkStats()
+      def stats = new storitz.SiteLinkStats()
       siteLinkService.updateSite(storageSiteInstance, stats, geocodeService)
       flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
       redirect(action: "show", id: storageSiteInstance.id)
@@ -204,7 +204,7 @@ class StorageSiteController {
     def storageSiteInstance = StorageSite.get(params.id)
 
     if (storageSiteInstance.source == "SL") {
-      def stats = new storagetech.SiteLinkStats()
+      def stats = new storitz.SiteLinkStats()
       siteLinkService.updateUnits(storageSiteInstance, stats)
       flash.message = "${message(code: 'default.units.message', args: [stats.unitCount])}"
       redirect(action: "show", id: storageSiteInstance.id)

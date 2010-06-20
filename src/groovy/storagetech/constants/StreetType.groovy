@@ -1,4 +1,4 @@
-package storagetech.constants
+package storitz.constants
 
 /**
  * Created by IntelliJ IDEA.

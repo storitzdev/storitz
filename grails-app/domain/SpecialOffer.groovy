@@ -1,4 +1,4 @@
-import storagetech.constants.PromoType
+import storitz.constants.PromoType
 
 class SpecialOffer {
 

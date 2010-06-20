@@ -1,4 +1,4 @@
-package com.storagetech.gmap;
+package com.storitz.gmap;
 
 import com.google.gdata.client.maps.MapsService;
 import com.google.gdata.data.Person;
@@ -61,7 +61,7 @@ public class GmapService {
     }
 
     public GmapService() {
-        myService = new MapsService("storagetech");
+        myService = new MapsService("storitz");
 
         try {
             myService.setUserCredentials("mamster@webeasy.com", "fpb123");

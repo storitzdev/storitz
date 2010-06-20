@@ -28,7 +28,7 @@ environments {
   production {
     dataSource {
       dbCreate = "update"
-      jndiName = "java:comp/env/jdbc/storagetech"
+      jndiName = "java:comp/env/jdbc/storitz"
     }
   }
 }
