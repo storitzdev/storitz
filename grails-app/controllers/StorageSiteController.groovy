@@ -70,8 +70,7 @@ class StorageSiteController {
     if (!storageSiteInstance) {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
       redirect(action: "list")
-    }
-    else {
+    } else {
       return [storageSiteInstance: storageSiteInstance]
     }
   }
@@ -160,6 +159,7 @@ class StorageSiteController {
       for(specialOffer in storageSiteInstance.specialOffers) {
         def offerString = "specialOffer_" + specialOffer.id
         def featuredOfferString = "featuredOffer_" + specialOffer.id
+        def promoNameString = "promoName_" + specialOffer.id
 
         if (params.getAt(offerString)) {
           specialOffer.active = true;
@@ -171,6 +171,10 @@ class StorageSiteController {
           specialOffer.featured = true;
         } else {
           specialOffer.featured = false;
+        }
+
+        if (params.getAt(promoNameString)) {
+          specialOffer.promoName = params.getAt(promoNameString)
         }
         specialOffer.save();
       }

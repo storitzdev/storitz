@@ -12,8 +12,8 @@ html, body {
     font: 11px verdana, arial, helvetica, sans-serif;
     min-width: 1000px;
     min-height: 594px;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 a:link, a:visited, a:hover {
@@ -60,8 +60,9 @@ tr th {
 
 .nav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-style: solid none solid none;	
+    border-color: #ccc;
+    border-width: 1px;
+    border-style: solid none solid none;
     margin-top: 5px;
     padding: 7px 12px;
 }
@@ -112,7 +113,7 @@ div.errors ul {
     padding: 0;	
 }
 div.errors li {
-	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
+	background: url(../images/skin/exclamation.png) 8px 0 no-repeat;
     line-height: 16px;
     padding-left: 30px;
 }
@@ -127,7 +128,7 @@ td.errors input {
 
 .errorField {
     border: 1px solid red;
-    background-color: lightgoldenrodyellow;
+    background-color: #fafad2;
 }
 
 input.disabled {
@@ -177,7 +178,8 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 }
 .paginateButtons a {
     background: #fff;
-    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
     border-color: #ccc #aaa #aaa #ccc;
     color: #666;
     margin: 0 3px;
@@ -330,7 +332,7 @@ Added styles
 
 #search {
     border-width: 1px;
-    border-color: lightgray;
+    border-color: #d3d3d3;
     border-style: solid;
     border-spacing: 2px;
     background-image: url("../images/bkg_searchform.gif");
@@ -403,7 +405,7 @@ Added styles
 
 #stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
-	border: 0px;
+	border: 0;
     display: table-cell;
     border-collapse: collapse;
 	/*white-space: nowrap;
@@ -415,7 +417,7 @@ Added styles
 
 #checkout_price_table th, #checkout_price_table td {
     padding: 0 0.5em;
-    border: 0px;
+    border: 0;
     /*white-space: nowrap;
     overflow: hidden;*/
 }
@@ -591,7 +593,7 @@ div.helpBoxSeparator {
     background-repeat: no-repeat;
     width: 154px;
     height: 30px;
-    margin: 5px 5px 7px 5px;
+    margin: 0 5px 12px 5px;
     cursor:pointer;
 }
 
@@ -605,7 +607,7 @@ div.helpBoxSeparator {
     background-repeat: no-repeat;
     width: 154px;
     height: 30px;
-    margin: 5px 5px 7px 5px;
+    margin: 0 5px 12px 5px;
     cursor:pointer;
 }
 
@@ -798,12 +800,12 @@ div.helpBoxSeparator {
 }
 
 #items{
-	margin:0px 0px;
-	padding:0px;
+	margin: 0;
+	padding: 0;
 	list-style:none;
 	width:50000px;
 	position: relative;
-	letter-spacing:0em;
+	letter-spacing: 0;
 }
 #items li{
 	float:left;
@@ -814,8 +816,8 @@ div.helpBoxSeparator {
 	width:60px;
 	height:40px;
 	cursor:pointer;
-	margin:0px;
-	padding:0px;
+	margin: 0;
+	padding: 0;
 }
 #items .large{
 	display:none;
@@ -827,6 +829,11 @@ div.leftArrowNull {
     width: 44px;
     background-image: url("../images/btn-gallery-left-arrow-null.gif");
     background-repeat: no-repeat;
+}
+
+div.arrowEmpty {
+    height: 46px;
+    width: 44px;
 }
 
 div.leftArrowActive {
@@ -874,7 +881,7 @@ div.rightArrowActive:hover {
 }
 
 .expanding, .tableLine {
-    border-top: slategray dotted 1px;
+    border-top: #708090 dotted thin;
     padding: 1em 0;
 }
 

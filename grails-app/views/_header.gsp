@@ -1,4 +1,4 @@
-  <title>::StorageTech - ${title}::</title>
+  <title>::Storitz - ${title}::</title>
   <meta name="DESCRIPTION" content="Find storage facilities close to you at the best price."/>
   <meta name="KEYWORDS" content="storage, personal storage, moving"/>
   <meta name="ROBOTS" content="FOLLOW"/>

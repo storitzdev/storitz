@@ -147,13 +147,13 @@
         $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
         Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
       });
-      $('helpClose').observe('click', function(event) {
+      $('helpClose').observe('click', function() {
         Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
       });
     }
 
     function getDirections() {
-      $('get_directions').observe('click', function(event) {
+      $('get_directions').observe('click', function() {
         var request = {
                 origin:$F('srcAddr'),
                 destination:destLatLng,
@@ -169,7 +169,7 @@
     }
 
     function sizeChange() {
-      $('unitsize').observe('change', function(event) {
+      $('unitsize').observe('change', function() {
         searchSize = $F('unitsize');
         $('sizeDescription').update(storageSize[searchSize]);
         buildTable();
@@ -177,7 +177,7 @@
     }
 
     function directionTab() {
-      $('direction_button').observe('click', function(event) {
+      $('direction_button').observe('click', function() {
         $('photo_button').removeClassName('tab_button_on');
         $('photo_button').removeClassName('button_text_hi');
         $('photo_button').addClassName('tab_button_off');
@@ -192,7 +192,7 @@
     }
 
     function photoTab() {
-      $('photo_button').observe('click', function(event) {
+      $('photo_button').observe('click', function() {
         $('direction_button').removeClassName('tab_button_on');
         $('direction_button').removeClassName('button_text_hi');
         $('direction_button').addClassName('tab_button_off');
@@ -207,7 +207,7 @@
     }
 
     function unitTypeClick() {
-      $('price_table').observe('click', function(event) {
+      $('price_table').observe('click', function() {
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
         monthlyRent = prices[unitId];
         $('unitId').value = unitId;
@@ -225,7 +225,7 @@
     }
 
     function insuranceClick() {
-      $('insuranceChoices').observe('click', function(event) {
+      $('insuranceChoices').observe('click', function() {
         var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
         var unitId = $F('unitId');
         premium = premiums[insId];
@@ -234,7 +234,7 @@
     }
 
     function specialOfferSelect() {
-      $('specialOffers').observe('click', function(event) {
+      $('specialOffers').observe('click', function() {
         var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
         var oldOfferMonths = offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth;
         offerChosen = specialOffers[offerId];
@@ -294,7 +294,7 @@
     }
 
     function rentmeClick() {
-      $('rentme').observe('click', function(event) {
+      $('rentme').observe('click', function() {
         if (rentalFormReady && validateRentme()) {
           $('sizeHelp').hide();
           var sdate = Date.parseDate($F('date'), "%m-%d-%Y");
@@ -316,7 +316,7 @@
     }
 
     function idTypeClick() {
-      $('idType').observe('change', function(event) {
+      $('idType').observe('change', function() {
          var idType = $F('idType');
          switch($F('idType')) {
             case "PASSPORT":
@@ -336,7 +336,7 @@
     }
 
     function primaryCountryClick() {
-      $('contactPrimary.country').observe('change', function(event) {
+      $('contactPrimary.country').observe('change', function() {
         var country = $F('contactPrimary.country');
         if (country == "US") {
           $('primaryProvinceField').hide();
@@ -353,7 +353,7 @@
     }
 
     function secondaryCountryClick() {
-      $('contactSecondary.country').observe('change', function(event) {
+      $('contactSecondary.country').observe('change', function() {
         var country = $F('contactSecondary.country');
         if (country == "US") {
           $('secondaryProvinceField').hide();
@@ -490,7 +490,7 @@
   }
 
   function showImage(img, newElem) {
-    var oldElem = $$('img.gallerySelected').each(function(elem) {
+    $$('img.gallerySelected').each(function(elem) {
       elem.removeClassName('gallerySelected');
       elem.addClassName('galleryNormal');
     });
@@ -509,7 +509,7 @@
   }
 
   function rightArrowClick() {
-    $('rightArrow').observe('click', function(event) {
+    $('rightArrow').observe('click', function() {
       if (galleryImageNum < (${site.siteImages().size()} - 4)) {
         galleryImageNum++;
         new Effect.Move('items', { x: -62, y:0, mode:'relative'});
@@ -533,8 +533,8 @@
   }
 
   function leftArrowClick() {
-    $('leftArrow').observe('click', function(event) {
-      if (galleryImageNum > 0) {
+    $('leftArrow').observe('click', function() {
+      if ((${site.siteImages().size()}) > 4 && galleryImageNum > 0) {
         galleryImageNum--;
         new Effect.Move('items', { x: 62, y:0, mode:'relative'});
         if (galleryImageNum < (${site.siteImages().size()} - 4)) {
@@ -740,8 +740,8 @@
                 </g:each>
                 <g:if test="${site.nonFeaturedOffers().size() > 0}">
                   <div id="moreSpecialOffers" class="expanding">
-                    <div class="right">
-                      <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.1});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
+                    <div class="right" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.1});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end', duration: 0.1});return false;">
+                      <a href="#" style="text-decoration: none;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
                     </div>
                   </div>
                 </g:if>
@@ -855,7 +855,7 @@
                     <img src="${resource(dir: 'images', file:'placeholder.jpg')}" alt="place holder"/>
                   </g:else>
                 </div>
-                <div id="leftArrow" class="left leftArrowNull" style="margin-top: 8px;">
+                <div id="leftArrow" class="left ${site.siteImages().size() > 4 ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
                 </div>
                 <div class="left" id="thumbWrapper">
                   <ul id="items">
@@ -866,13 +866,13 @@
                      </g:each>
                   </ul>
                 </div>
-                <div id="rightArrow" class="left ${site.siteImages().size() > 4 ? 'rightArrowActive' : 'rightArrowNull'}" style="margin-top: 8px;">
+                <div id="rightArrow" class="left ${site.siteImages().size() > 4 ? 'rightArrowActive' : 'arrowEmpty'}" style="margin-top: 8px;">
                 </div>
                 <div style="clear: both;height: 5px;"></div>
               </div>
               <div id="directions" style="display:none;">
                 <div>
-                  Start Address: <input type="text" name="srcAddr" id="srcAddr"/>
+                  <label for="srcAddr">Start Address:</label> <input type="text" name="srcAddr" id="srcAddr"/>
                 </div>
                 <div>
                   <input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
@@ -905,7 +905,7 @@
             <div style="height:15px;"></div>
             <div class="left">
               <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
-                <img src="${resource(dir:'images', file:'btn-back-silver.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
+                <img src="${resource(dir:'images', file:'btn-previous2.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
               </g:link>
             </div>
             <div id="rentmeBtn" style="float: right; margin-right: 20px; display: none;">
@@ -982,7 +982,7 @@
                   <label for="contactPrimary.streetNumber">Street Number</label>
                 </div>
                 <div style="width:200px;" class="checkout_name">
-                  <label for="contactPrimary.streetName">Street Name</label>
+                  <label for="contactPrimary.street">Street Name</label>
                 </div>
                 <div style="width:100px;" class="checkout_name">
                   <label for="contactPrimary.streetType">Street Suffix</label>
@@ -994,13 +994,13 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.city', 'errors')}">
-                    <g:textField name="contactPrimary.city" name="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.city}" />
+                    <g:textField name="contactPrimary.city" id="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.city}" />
                 </div>
                 <div id="primaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.state', 'errors')}">
                   <g:select name="contactPrimary.state" id="contactPrimary.state" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactPrimary?.state}" optionValue="value"/>
                 </div>
                 <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.province', 'errors')}" style="width: 150px;display: none;">
-                  <g:textField name="contactPrimary.province" name="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransaction?.contactPrimary?.province}" />
+                  <g:textField name="contactPrimary.province" id="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransaction?.contactPrimary?.province}" />
                 </div>
                 <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.zipcode', 'errors')}">
                     <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.zipcode}" />
@@ -1089,7 +1089,7 @@
                 <div style="clear:both;"></div>
               </div>
               <div style="margin-top: 20px;">
-                <div class="left"><img src="${resource(dir:'images', file:'btn-back2.png')}" onclick="details_return(); return false" alt="Back"></div>
+                <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
                 <div class="right"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
                 <div style="clear:both;"></div>
               </div>
@@ -1150,7 +1150,7 @@
                   <label for="contactSecondary.streetNumber">Street Number</label>
                 </div>
                 <div style="width:200px;" class="checkout_name">
-                  <label for="contactSecondary.streetName">Street Name</label>
+                  <label for="contactSecondary.street">Street Name</label>
                 </div>
                 <div style="width:100px;" class="checkout_name">
                   <label for="contactSecondary.streetType">Street Suffix</label>
@@ -1224,9 +1224,8 @@
                 <div style="clear:both;"></div>
               </div>
             <div style="margin-top: 20px;">
-              <div class="left"><img src="${resource(dir:'images', file:'btn-back2.png')}" onclick="details_return(); return false" alt="Back"></div>
               <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
-              <div class="right"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
+              <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
               <div style="clear:both;"></div>
             </div>
           </div>
@@ -1300,9 +1299,8 @@
                 <div style="clear:both;"></div>
               </div>
               <div style="margin-top: 20px;">
-                <div class="left"><img src="${resource(dir:'images', file:'btn-back2.png')}" onclick="details_return(); return false" alt="Back"></div>
                 <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
-                <div class="right"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
+                <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
                 <div style="clear:both;"></div>
               </div>
             </div>

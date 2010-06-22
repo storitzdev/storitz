@@ -112,7 +112,7 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="logoFile"><g:message code="storageSite.logo.label" default="Logo" /></label>
+                                  <g:message code="storageSite.logo.label" default="Logo" />
                                 </td>
                                 <td valign="top" class="value">
                                     <g:if test="${storageSiteInstance?.logo}">
@@ -224,12 +224,12 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="contacts"><g:message code="storageSite.contacts.label" default="Contacts" /></label>
+                                  <g:message code="storageSite.contacts.label" default="Contacts" />
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'contacts', 'errors')}">
                                     
                                   <ul>
-                                  <g:each in="${storageSiteInstance?.contacts?}" var="c">
+                                  <g:each in="${storageSiteInstance?.contacts}" var="c">
                                       <li><g:link controller="siteContact" action="show" id="${c.id}">${c.name} - ${c.email}</g:link></li>
                                   </g:each>
                                   </ul>
@@ -240,12 +240,12 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="specialOffers"><g:message code="storageSite.specialOffers.label" default="Special Offers" /></label>
+                                  <g:message code="storageSite.specialOffers.label" default="Special Offers" />
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'specialOffers', 'errors')}">
                                   <ul>
-                                    <g:each in="${storageSiteInstance?.specialOffers?}" var="o">
-                                      <li>active <g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> featured <g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/> ${o.promoName}</li>
+                                    <g:each in="${storageSiteInstance?.specialOffers}" var="o">
+                                      <li>active <g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> featured <g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/> <g:textField name="promoName_${o.id}" value="${o.promoName}"/></li>
                                     </g:each>
                                   </ul>
                                 </td>
@@ -253,12 +253,12 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="images"><g:message code="storageSite.images.label" default="Images" /></label>
+                                  <g:message code="storageSite.images.label" default="Images" />
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'images', 'errors')}">
                                     
                                     <ul>
-                                    <g:each in="${storageSiteInstance?.images?}" var="i">
+                                    <g:each in="${storageSiteInstance?.images}" var="i">
                                         <g:if test="${!i.isLogo}">
                                           <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/> - <g:link params="[siteImageId: i.id]" action="deleteImage" id="${storageSiteInstance?.id}" controller="storageSite">remove</g:link></li>
                                         </g:if>

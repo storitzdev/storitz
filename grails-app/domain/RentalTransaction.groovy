@@ -2,6 +2,7 @@ import storitz.constants.IdType
 import storitz.constants.State
 import storitz.constants.Country
 import storitz.constants.RentalUse
+import storitz.constants.TransactionStatus
 
 class RentalTransaction {
 
@@ -15,6 +16,7 @@ class RentalTransaction {
   Boolean activeMilitary
   Boolean terms
   RentalUse rentalUse
+  TransactionStatus status
   String unit_choice
   StorageSite site
   Boolean priceDriveup
