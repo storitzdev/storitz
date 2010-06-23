@@ -15,8 +15,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="3a85bc51-0c73-4513-9a3e-af17dd580ecc" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.ipr" afterPath="$PROJECT_DIR$/storitz.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/gallery-backplate.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
     </list>
     <ignored path="$USER_HOME_GRIFFON$/" />
     <ignored path="storagetech.iws" />
@@ -90,7 +93,7 @@
       <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="884" column="0" selection-start="15773" selection-end="15773" vertical-scroll-proportion="0.0">
+            <state line="685" column="24" selection-start="12008" selection-end="12008" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -99,7 +102,7 @@
       <file leaf-file-name="detail.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1302" column="104" selection-start="69070" selection-end="69077" vertical-scroll-proportion="0.33333334">
+            <state line="879" column="19" selection-start="39371" selection-end="39371" vertical-scroll-proportion="0.33136094">
               <folding />
             </state>
           </provider>
@@ -135,7 +138,7 @@
       <file leaf-file-name="RentalTransaction.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="26" selection-start="436" selection-end="436" vertical-scroll-proportion="-6.652174">
+            <state line="34" column="28" selection-start="792" selection-end="792" vertical-scroll-proportion="-7.5869565">
               <folding />
             </state>
           </provider>
@@ -195,11 +198,11 @@
       <list>
         <option value="$PROJECT_DIR$/grails-app/views/_header.gsp" />
         <option value="$PROJECT_DIR$/src/groovy/storitz/constants/TransactionStatus.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/StorageSiteController.groovy" />
         <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy" />
       </list>
     </option>
   </component>
@@ -209,7 +212,18 @@
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
-      <profile-state />
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id>JavaScript</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>JavaScript</id>
+          </State>
+        </selected-state>
+      </profile-state>
     </entry>
   </component>
   <component name="ProjectLevelVcsManager">
@@ -1010,7 +1024,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="870" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.22175732" order="2" side_tool="true" content_ui="tabs" />
@@ -1021,15 +1035,15 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33006993" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.22175732" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496361" sideWeight="0.66013986" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496361" sideWeight="0.6610879" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32914925" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1053,7 +1067,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added transaction status for RentalTransaction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added text to transaction form&#10;Added insurance checkbox&#10;Added hazardous materials checkbox&#10;changed storagetech in title to storitz" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1070,6 +1084,8 @@
     <MESSAGE value="Renamed all storagetech references to storitz&#10;Upgrade to IntelliJ 9" />
     <MESSAGE value="Admin edit special offer text&#10;Moved buttons to match height of photo&#10;Empty controls when fewer than 4 pics&#10;" />
     <MESSAGE value="Added transaction status for RentalTransaction" />
+    <MESSAGE value="Added image" />
+    <MESSAGE value="Added text to transaction form&#10;Added insurance checkbox&#10;Added hazardous materials checkbox&#10;changed storagetech in title to storitz" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1186,16 +1202,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="26" selection-start="436" selection-end="436" vertical-scroll-proportion="-6.652174">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="246" column="84" selection-start="14693" selection-end="14693" vertical-scroll-proportion="-2.0">
@@ -1212,18 +1218,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="884" column="0" selection-start="15773" selection-end="15773" vertical-scroll-proportion="0.0">
+        <state line="685" column="24" selection-start="12008" selection-end="12008" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="28" selection-start="792" selection-end="792" vertical-scroll-proportion="-7.5869565">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1302" column="104" selection-start="69070" selection-end="69077" vertical-scroll-proportion="0.33333334">
+        <state line="879" column="19" selection-start="39371" selection-end="39371" vertical-scroll-proportion="0.33136094">
           <folding />
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+      <state key="Copyright.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+        </UIState>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+    </states>
   </component>
 </project>
 

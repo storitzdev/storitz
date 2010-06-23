@@ -74,6 +74,25 @@
   </component>
   <component name="IdProvider" IDEtalkID="E26191F7F22E320B0BF2F4F72B17A80A" />
   <component name="InspectionProjectProfileManager">
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="myValues">
+            <value>
+              <list size="1">
+                <item index="0" class="java.lang.String" itemvalue="onclick" />
+              </list>
+            </value>
+          </option>
+          <option name="myCustomValuesEnabled" value="true" />
+        </inspection_tool>
+      </profile>
+    </profiles>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="SERVER PROBLEM" />
       <item index="1" class="java.lang.String" itemvalue="INFO" />

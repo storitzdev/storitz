@@ -404,6 +404,8 @@
       var valid = true;
       valid &= Validation.validate('rentalUse');
       valid &= Validation.validate('insuranceChoices');
+      valid &= Validation.validate('insuranceTermsHolder');
+      valid &= Validation.validate('hazardousMaterialsHolder');
       valid &= Validation.validate('termsHolder');
       return valid;
     }
@@ -932,6 +934,9 @@
               <div class="price_options checkout_header white">
                 Primary Contact Information
               </div>
+              <div class="formInstructions">
+                Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our Privacy Policy
+              </div>
               <div class="checkout_section_header">
                 Name
               </div>
@@ -1099,6 +1104,9 @@
             <div id="secondary_contact" style="display:none;">
               <div class="price_options checkout_header white">
                 Secondary Contact Information
+              </div>
+              <div class="formInstructions">
+                Storage Property Owners (and most States) require a second contact with distinct address and phone number in the event your property is at risk and you are incapacitated or unreachable. A good second contact is a parent or friend.
               </div>
               <div class="checkout_section_header">
                 Name
@@ -1271,6 +1279,9 @@
               <div class="checkout_section_header">
                 Insurance
               </div>
+              <div class="formInstructions">
+                Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
+              </div>
               <div class="checkout_fields" style="width:646px;">
                 <div id="insuranceChoices" class="validate-one-radio" >
                   <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" id="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
@@ -1280,8 +1291,17 @@
                   <div style="clear:both;"></div>
                 </div>
               </div>
+              <div class="checkout_fields">
+                <div id="insuranceTermsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'insuranceTerms', 'errors')}">
+                    <g:checkBox name="insuranceTerms" id="insuranceTerms" class="required" value="${rentalTransaction?.insuranceTerms}" /> By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
+                </div>
+                <div style="clear:both;"></div>
+              </div>
               <div class="checkout_section_header">
                 Active Military
+              </div>
+              <div class="formInstructions">
+                Active US Military renters are not eligible for lien auctions. This protects your items while you are on duty.
               </div>
               <div class="checkout_fields">
                 <div class="value ${hasErrors(bean: rentalTransaction, field: 'activeMilitary', 'errors')}">
@@ -1290,11 +1310,20 @@
                 <div style="clear:both;"></div>
               </div>
               <div class="checkout_section_header">
+                Hazardous Materials
+              </div>
+              <div class="checkout_fields">
+                <div id="hazardousMaterialsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'hazardousMaterials', 'errors')}">
+                    <g:checkBox name="hazardousMaterials" id="hazardousMaterials" class="required" value="${rentalTransaction?.hazardousMaterials}" /> By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+              <div class="checkout_section_header">
                 Terms
               </div>
               <div class="checkout_fields">
                 <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
-                    <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions to rent this property
+                    <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions of the Storage Rental Agreement
                 </div>
                 <div style="clear:both;"></div>
               </div>

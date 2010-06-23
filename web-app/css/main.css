@@ -331,12 +331,9 @@ Added styles
 }
 
 #search {
-    border-width: 1px;
-    border-color: #d3d3d3;
-    border-style: solid;
+    border: 1px solid #d3d3d3;
     border-spacing: 2px;
-    background-image: url("../images/bkg_searchform.gif");
-    background-color: #fff;
+    background: #fff url("../images/bkg_searchform.gif");
     padding: 3px;
     width: 250px;
     height: 367px;
@@ -461,11 +458,10 @@ Added styles
 }
 
 #helpHeader {
-    background-image: url(../images/bkg-storage-sizes-header2.jpg);
+    background: url(../images/bkg-storage-sizes-header2.jpg) no-repeat;
     width: 524px;
     height: 59px;
     color: white;
-    background-repeat: no-repeat;
 }
 
 #helpHeaderText {
@@ -563,8 +559,7 @@ div.helpBoxSeparator {
 }
 
 #map {
-    background-image: url(../images/map-frame.png);
-    background-repeat: no-repeat;
+    background: url(../images/map-frame.png) no-repeat;
     width: 334px;
     height: 285px;
     padding: 10px;
@@ -589,8 +584,7 @@ div.helpBoxSeparator {
 }
 
 .tab_button_on {
-    background-image: url(../images/btn-gallery-on.png);
-    background-repeat: no-repeat;
+    background: url(../images/btn-gallery-on.png) no-repeat;
     width: 154px;
     height: 30px;
     margin: 0 5px 12px 5px;
@@ -603,8 +597,7 @@ div.helpBoxSeparator {
 }
 
 .tab_button_off {
-    background-image: url(../images/btn-gallery-off.png);
-    background-repeat: no-repeat;
+    background: url(../images/btn-gallery-off.png) no-repeat;
     width: 154px;
     height: 30px;
     margin: 0 5px 12px 5px;
@@ -685,25 +678,30 @@ div.helpBoxSeparator {
     width: 290px;
 }
 
+.formInstructions {
+    color: #333;
+    line-height: 14px;
+    font-size: 10px;
+    font-weight: normal;
+    padding-bottom: 1em;    
+}
+
 .other_details {
-    background-image: url(../images/bkg-tablehead-300x30.gif);
-    background-repeat: no-repeat;
+    background: url(../images/bkg-tablehead-300x30.gif) no-repeat;
     width: 280px;
     height: 30px;
     display: block;
 }
 
 .order_summary_top {
-    background-image: url(../images/bkg-order-summary-top.gif);
-    background-repeat: no-repeat;
+    background: url(../images/bkg-order-summary-top.gif) no-repeat;
     width: 280px;
     height: 31px;
     display: block;
 }
 
 .order_summary_bottom {
-    background-image: url(../images/bkg-order-summary-bottom.gif);
-    background-repeat: no-repeat;
+    background: url(../images/bkg-order-summary-bottom.gif) no-repeat;
     width: 300px;
     height: 31px;
     display: block;
@@ -726,8 +724,7 @@ div.helpBoxSeparator {
 }
 
 .price_options {
-    background-image: url(../images/bkg-tablehead-666x30.gif);
-    background-repeat: no-repeat;
+    background: url(../images/bkg-tablehead-666x30.gif) no-repeat;
     width: 666px;
     height: 30px;
     line-height: 20px;
@@ -781,8 +778,7 @@ div.helpBoxSeparator {
     height: 240px;
     width: 320px;
     border: 1px solid #b9c0c8;
-    background-image: url(../images/gallery-backplate.jpg);
-    background-repeat: no-repeat;
+    background: url(../images/gallery-backplate.jpg) no-repeat;
 }
 
 #imgFrame img {
@@ -827,8 +823,7 @@ div.helpBoxSeparator {
 div.leftArrowNull {
     height: 46px;
     width: 44px;
-    background-image: url("../images/btn-gallery-left-arrow-null.gif");
-    background-repeat: no-repeat;
+    background: url("../images/btn-gallery-left-arrow-null.gif") no-repeat;
 }
 
 div.arrowEmpty {
@@ -867,8 +862,7 @@ div.rightArrowActive {
 div.rightArrowActive:hover {
     height: 46px;
     width: 44px;
-    background-image: url("../images/btn-gallery-right-arrow-hover.gif");
-    background-repeat: no-repeat;
+    background: url("../images/btn-gallery-right-arrow-hover.gif") no-repeat;
 }
 
 .galleryNormal {

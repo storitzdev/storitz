@@ -14,6 +14,8 @@ class RentalTransaction {
   String idNumber
   Boolean reserveTruck
   Boolean activeMilitary
+  Boolean insuranceTerms
+  Boolean hazardousMaterials
   Boolean terms
   RentalUse rentalUse
   TransactionStatus status
