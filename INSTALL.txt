@@ -1,0 +1,12 @@
+1) Install Grails 1.2.1.
+
+2) Check out project from SVN.
+
+3) CD to the project dir.
+
+4) Install the following plugins:
+
+grails install-plugin acegi
+grails install-plugin http://www.arquetipos.co.cr/blog/files/grails-image-tools-1.0.4.zip
+grails install-plugin rest
+grails install-plugin ws-client
