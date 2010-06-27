@@ -305,8 +305,11 @@ public enum Country {
             UNITED_STATES_MINOR_OUTLYING_ISLANDS, URUGUAY, UZBEKISTAN, VANUATU, VENEZUELA,
             VIETNAM, VIRGIN_ISLANDS_BRITISH, VIRGIN_ISLANDS_US, WALLIS_AND_FUTUNA, WESTERN_SAHARA,
             YEMEN, ZAMBIA, ZIMBABWE
-
     ]
+  }
+
+  public static Country fromText(String key) {
+    return list().find{ it.getKey() == key }
   }
 
 }

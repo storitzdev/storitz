@@ -5,6 +5,7 @@
       <configuration>
         <webroots>
           <root url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/image-tools-1.0.4/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/rest-0.3/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -38,11 +39,13 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/tomcat-1.2.1/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/ws-client-1.0/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/image-tools-1.0.4/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/rest-0.3/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/acegi-0.5.2/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/image-tools-1.0.4/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/rest-0.3/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/tomcat-1.2.1/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/ws-client-1.0/lib" recursive="false" />
       </library>

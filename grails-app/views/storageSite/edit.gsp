@@ -173,7 +173,7 @@
                                   <label for="freeTruck"><g:message code="storageSite.freeTruck.label" default="Free Moving Truck" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'freeTruck', 'errors')}">
-                                    <g:select name="freeTruck" from="${storagetech.constants.TruckType.list()}" value="${storageSiteInstance?.freeTruck}" optionValue="display" />
+                                    <g:select name="freeTruck" from="${storitz.constants.TruckType.list()}" value="${storageSiteInstance?.freeTruck}" optionValue="display" />
                                 </td>
                             </tr>
 

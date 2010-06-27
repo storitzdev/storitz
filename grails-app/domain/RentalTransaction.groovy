@@ -14,21 +14,23 @@ class RentalTransaction {
   String idNumber
   Boolean reserveTruck
   Boolean activeMilitary
-  Boolean insuranceTerms
-  Boolean hazardousMaterials
-  Boolean terms
   RentalUse rentalUse
   TransactionStatus status
-  String unit_choice
+  Long unitId
+  Long promoId
+  Long insuranceId
   StorageSite site
   Boolean priceDriveup
   Boolean priceInterior
   Boolean priceUpper
   Boolean priceTempControlled
   Integer searchSize
+  Date bookingDate
+  Date moveInDate
 
   static constraints = {
   }
 
-  static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize']  
+  static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize', 'reserveTruck',
+    'terms', 'hazardousMaterials', 'insuranceTerms']  
 }

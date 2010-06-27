@@ -36,6 +36,7 @@
       var sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
     <g:each var="ins" in="${site.insurances}">premiums[${ins.insuranceId}] = ${ins.premium};</g:each>
+    premiums[-999] = 0;
     var defaultOffer = specialOffers[-1] = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
     <g:each var="offer" in="${site.specialOffers}">
       specialOffers[${offer.id}] = { active: ${offer.active}, promoName: "${offer.promoName}", promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
@@ -236,6 +237,7 @@
     function specialOfferSelect() {
       $('specialOffers').observe('click', function() {
         var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
+        $('promoId').value = offerId;
         var oldOfferMonths = offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth;
         offerChosen = specialOffers[offerId];
         if (oldOfferMonths != offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth)  {
@@ -251,7 +253,7 @@
       
       var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
       if (premium > 0) {
-        tableBody += "<tr><td style=\"width: 40%;\">Insurance:</td><td class=\"textCenter\" style=\"width: 20%;\">" + durationMonths +"</td><td class=\"price_text\" style=\"width: 20%;\">$" + premium + "</td><td class=\"price_text\" style=\"width: 20%;\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
+        tableBody += "<tr class=\"tableLine\"><td colspan=\"\">Insurance:</td><td class=\"textCenter\">" + durationMonths +"</td><td class=\"price_text\">$" + premium.toFixed(2) + "</td><td class=\"price_text borderRight\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
       }
 
       var offerDiscount = 0;
@@ -299,6 +301,7 @@
           $('sizeHelp').hide();
           var sdate = Date.parseDate($F('date'), "%m-%d-%Y");
           $('checkout_movein_date').update(sdate.print("%o/%d/%y"));
+          $('moveInDate').value = $F('date');
           $('checkout_unit_size').update(storageSize[searchSize]);
           $('left_info').hide();
           $('left_checkout_info').show();
@@ -474,7 +477,7 @@
         $('step4').removeClassName('step_header');
         $('step4').addClassName('step_header_hi');
         $('rental_info').hide();
-        // TODO - show checkouts
+        $('rentalTransaction').submit();
       }
     }
 
@@ -694,7 +697,7 @@
               <div class="left icon_text">Free Truck</div>
               <div style="clear: both;"></div>
             </g:if>
-            <g:if test="${site.freeTruck  == storagetech.constants.TruckType.RENTAL}">
+            <g:if test="${site.freeTruck  == storitz.constants.TruckType.RENTAL}">
               <div class="left">
                 <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/>
               </div>
@@ -916,423 +919,428 @@
           </div>
 
           <div id="rentalForm" style="display: none;">
-            <input type="hidden" id="priceDriveup" value="" />
-            <input type="hidden" id="priceInterior" value="" />
-            <input type="hidden" id="priceUpper" value="" />
-            <input type="hidden" id="unitId" value="" />
+            <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
+              <input type="hidden" name="priceDriveup" id="priceDriveup" value="" />
+              <input type="hidden" name="priceInterior" id="priceInterior" value="" />
+              <input type="hidden" name="priceUpper" id="priceUpper" value="" />
+              <input type="hidden" name="unitId" id="unitId" value="" />
+              <input type="hidden" name="promoId" id="promoId" value="" />
+              <input type="hidden" name="site" value="${params.id}" />
+              <input type="hidden" name="moveInDate" id="moveInDate" value="" />
 
-            <div class="vert_text">
-              <span id="step1_bullet" class="bullet">&#8226</span><span id="step1" class="step_header_hi">Primary Contact</span>
-              <span id="step2_bullet" class="bullet" style="display: none;">&#8226</span><span id="step2" class="step_header">Secondary Contact</span>
-              <span id="step3_bullet" class="bullet" style="display: none;">&#8226</span><span id="step3" class="step_header">Rental Options</span>
-              <span id="step4_bullet" class="bullet" style="display: none;">&#8226</span><span id="step4" class="step_header">Billing Info</span>
-              <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Confirm Order</span>
-            </div>
+              <div class="vert_text">
+                <span id="step1_bullet" class="bullet">&#8226</span><span id="step1" class="step_header_hi">Primary Contact</span>
+                <span id="step2_bullet" class="bullet" style="display: none;">&#8226</span><span id="step2" class="step_header">Secondary Contact</span>
+                <span id="step3_bullet" class="bullet" style="display: none;">&#8226</span><span id="step3" class="step_header">Rental Options</span>
+                <span id="step4_bullet" class="bullet" style="display: none;">&#8226</span><span id="step4" class="step_header">Billing Info</span>
+                <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Confirm Order</span>
+              </div>
 
-            <!-- Primary Contact -->
-            <div id="primary_contact">
-              <div class="price_options checkout_header white">
-                Primary Contact Information
-              </div>
-              <div class="formInstructions">
-                Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our Privacy Policy
-              </div>
-              <div class="checkout_section_header">
-                Name
-              </div>
-              <div class="checkout_fields">
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.firstName', 'errors')}">
-                    <g:textField id="contactPrimary.firstName" name="contactPrimary.firstName" style="width: 180px;" class="required" value="${rentalTransaction?.contactPrimary?.firstName}" />
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.lastName', 'errors')}">
-                  <g:textField id="contactPrimary.lastName" name="contactPrimary.lastName" style="width: 180px;" class="required" value="${rentalTransaction?.contactPrimary?.lastName}" />
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.suffixName', 'errors')}">
-                  <g:textField id="contactPrimary.suffixName" name="contactPrimary.suffixName" style="width: 80px;" value="${rentalTransaction?.contactPrimary?.suffixName}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div class="checkout_name" style="width:200px;">
-                  <label for="contactPrimary.firstName">First Name</label>
-                </div>
-                <div class="checkout_name" style="width:200px;">
-                  <label for="contactPrimary.lastName">Last Name</label>
-                </div>
-                <div class="checkout_name" style="width:100px;">
-                  <label for="contactPrimary.suffixName">Suffix</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Address
-              </div>
-              <div class="checkout_fields">
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetNumber', 'errors')}">
-                    <g:textField name="contactPrimary.streetNumber" id="contactPrimary.streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.streetNumber}" />
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.street', 'errors')}">
-                    <g:textField name="contactPrimary.street" id="contactPrimary.street" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.street}" />
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetType', 'errors')}">
-                    <g:select name="contactPrimary.streetType" id="contactPrimary.streetType" style="width:80px;" from="${storagetech.constants.StreetType.list()}" value="${rentalTransaction?.contactPrimary?.streetType}" optionValue="value"/>
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.unit', 'errors')}">
-                    <g:textField name="contactPrimary.unit" id="contactPrimary.unit" style="width:80px;" value="${rentalTransaction?.contactPrimary?.unit}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactPrimary.streetNumber">Street Number</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactPrimary.street">Street Name</label>
-                </div>
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactPrimary.streetType">Street Suffix</label>
-                </div>
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactPrimary.unit">Unit/Apt.</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_fields">
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.city', 'errors')}">
-                    <g:textField name="contactPrimary.city" id="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.city}" />
-                </div>
-                <div id="primaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.state', 'errors')}">
-                  <g:select name="contactPrimary.state" id="contactPrimary.state" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactPrimary?.state}" optionValue="value"/>
-                </div>
-                <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.province', 'errors')}" style="width: 150px;display: none;">
-                  <g:textField name="contactPrimary.province" id="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransaction?.contactPrimary?.province}" />
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.zipcode', 'errors')}">
-                    <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.zipcode}" />
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.country', 'errors')}">
-                  <g:select name="contactPrimary.country" id="contactPrimary.country" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.contactPrimary?.country}" optionKey="key" optionValue="display"/>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactPrimary.city">City</label>
-                </div>
-                <div style="width:100px;" id="primaryStateLabel" class="checkout_name">
-                  <label for="contactPrimary.state">State</label>
-                </div>
-                <div style="width: 150px;display: none;" id="primaryProvinceLabel" class="checkout_name">
-                  <label for="contactPrimary.province">Province</label>
-                </div>
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactPrimary.zipcode">Postal Code</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactPrimary.country">Country</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Phone / Email
-              </div>
-              <div class="checkout_fields">
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phoneType', 'errors')}">
-                    <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storitz.constants.PhoneType.list()}" value="${rentalTransaction?.contactPrimary?.phoneType}" optionValue="value"/>
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phone', 'errors')}">
-                    <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.phone}" />
-                </div>
-                <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.email', 'errors')}">
-                    <g:textField name="contactPrimary.email" id="contactPrimary.email" class="required validate-email" style="width:280px;" value="${rentalTransaction?.contactPrimary?.email}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactPrimary.phoneType">Phone Type</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactPrimary.phone">Phone Number</label>
-                </div>
-                <div style="width:300px;" class="checkout_name">
-                  <label for="contactPrimary.email">Email</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                ID Information
-              </div>
-              <div class="checkout_fields">
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idType', 'errors')}">
-                    <g:select id="idType" name="idType" style="width:180px;" from="${storagetech.constants.IdType.list()}" value="${rentalTransaction?.idType}" optionValue="value"/>
-                </div>
-                <div id="idStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idState', 'errors')}">
-                    <g:select name="idState" id="idState" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransaction?.idState}" optionValue="value"/>
-                </div>
-                <div id="idCountryField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idCountry', 'errors')}" style="width:200px;display: none;">
-                    <g:select name="idCountry" id="idCountry" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.idCountry}" optionKey="key" optionValue="display"/>
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idNumber', 'errors')}">
-                    <g:textField name="idNumber" id="idNumber" class="required" style="width:180px;" value="${rentalTransaction?.idNumber}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:200px;" class="checkout_name">
-                  <label for="idType">ID Type</label>
-                </div>
-                <div id="idStateLabel" style="width:100px;" class="checkout_name">
-                  <label for="idState">ID State</label>
-                </div>
-                <div id="idCountryLabel" class="checkout_name" style="width:200px;display: none;">
-                  <label for="idCountry">ID Country</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="idNumber">ID Number</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div style="margin-top: 20px;">
-                <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
-                <div class="right"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
-                <div style="clear:both;"></div>
-              </div>
-            </div>
-
-            <!-- Secondary Contact -->
-            <div id="secondary_contact" style="display:none;">
-              <div class="price_options checkout_header white">
-                Secondary Contact Information
-              </div>
-              <div class="formInstructions">
-                Storage Property Owners (and most States) require a second contact with distinct address and phone number in the event your property is at risk and you are incapacitated or unreachable. A good second contact is a parent or friend.
-              </div>
-              <div class="checkout_section_header">
-                Name
-              </div>
-              <div class="checkout_fields">
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.firstName', 'errors')}">
-                    <g:textField name="contactSecondary.firstName" id="contactSecondary.firstName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.firstName}" />
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.lastName', 'errors')}">
-                  <g:textField name="contactSecondary.lastName" id="contactSecondary.lastName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.lastName}" />
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.suffixName', 'errors')}">
-                  <g:textField name="contactSecondary.suffixName" id="contactSecondary.suffixName" style="width: 80px;" value="${rentalTransaction?.contactSecondary?.suffixName}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div class="checkout_name" style="width:200px;">
-                  <label for="contactSecondary.firstName">First Name</label>
-                </div>
-                <div class="checkout_name" style="width:200px;">
-                  <label for="contactSecondary.lastName">Last Name</label>
-                </div>
-                <div class="checkout_name" style="width:100px;">
-                  <label for="contactSecondary.suffixName">Suffix</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Address
-              </div>
-              <div class="checkout_fields">
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.streetNumber', 'errors')}">
-                    <g:textField name="contactSecondary.streetNumber" id="contactSecondary.streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.streetNumber}" />
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.street', 'errors')}">
-                    <g:textField name="contactSecondary.street" id="contactSecondary.street" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.street}" />
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.streetType', 'errors')}">
-                    <g:select name="contactSecondary.streetType" id="contactSecondary.streetType" style="width:80px;" from="${storagetech.constants.StreetType.list()}" value="${rentalTransaction?.contactSecondary?.streetType}" optionValue="value"/>
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.unit', 'errors')}">
-                    <g:textField name="contactSecondary.unit" id="contactSecondary.unit" style="width:80px;" value="${rentalTransaction?.contactSecondary?.unit}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactSecondary.streetNumber">Street Number</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactSecondary.street">Street Name</label>
-                </div>
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactSecondary.streetType">Street Suffix</label>
-                </div>
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactSecondary.unit">Unit/Apt.</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_fields">
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.city', 'errors')}">
-                    <g:textField name="contactSecondary.city" id="contactSecondary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.city}" />
-                </div>
-                <div id="secondaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.state', 'errors')}">
-                  <g:select name="contactSecondary.state" id="contactSecondary.state" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
-                </div>
-                <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.province', 'errors')}" style="width: 200px;display: none;">
-                  <g:textField name="contactSecondary.province" id="contactSecondary.province" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.province}" />
-                </div>
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.zipcode', 'errors')}">
-                    <g:textField name="contactSecondary.zipcode" id="contactSecondary.zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.zipcode}" />
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.country', 'errors')}">
-                  <g:select name="contactSecondary.country" id="contactSecondary.country" style="width:180px;" from="${storagetech.constants.Country.list()}" value="${rentalTransaction?.contactSecondary?.country}" optionKey="key" optionValue="display"/>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactSecondary.city">City</label>
-                </div>
-                <div style="width:100px;" id="secondaryStateLabel" class="checkout_name">
-                  <label for="contactSecondary.state">State</label>
-                </div>
-                <div style="width: 200px;display: none;" id="secondaryProvinceLabel" class="checkout_name">
-                  <label for="contactSecondary.province">Province</label>
-                </div>
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactSecondary.zipcode">Postal Code</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactSecondary.country">Country</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Phone / Email
-              </div>
-              <div class="checkout_fields">
-                <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.phoneType', 'errors')}">
-                    <g:select name="contactSecondary.phoneType" id="contactSecondary.phoneType" style="width:80px;" from="${storagetech.constants.PhoneType.list()}" value="${rentalTransaction?.contactSecondary?.phoneType}" optionValue="value"/>
-                </div>
-                <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.phone', 'errors')}">
-                    <g:textField name="contactSecondary.phone" id="contactSecondary.phone" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.phone}" />
-                </div>
-                <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.email', 'errors')}">
-                    <g:textField name="contactSecondary.email" id="contactSecondary.email" class="required validate-email" style="width:280px;" value="${rentalTransaction?.contactSecondary?.email}" />
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_labels">
-                <div style="width:100px;" class="checkout_name">
-                  <label for="contactSecondary.phoneType">Phone Type</label>
-                </div>
-                <div style="width:200px;" class="checkout_name">
-                  <label for="contactSecondary.phone">Phone Number</label>
-                </div>
-                <div style="width:300px;" class="checkout_name">
-                  <label for="contactSecondary.email">Email</label>
-                </div>
-                <div style="clear:both;"></div>
-              </div>
-            <div style="margin-top: 20px;">
-              <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
-              <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
-              <div style="clear:both;"></div>
-            </div>
-          </div>
-
-          <!-- Rental Info -->
-          <div id="rental_info" style="display:none;">
-            <div class="price_options checkout_header white">
-              Rental Options
-            </div>
-            <div class="checkout_section_header">
-              Rental Use
-            </div>
-            <div class="checkout_fields">
-              <div id="rentalUse" class="validate-one-radio value ${hasErrors(bean: rentalTransaction, field: 'rentalUse', 'errors')}">
-                  <g:radioGroup name="rentalUse" labels="${storagetech.constants.RentalUse.labels()}" values="${storagetech.constants.RentalUse.list()}" value="${rentalTransaction?.rentalUse}">
-                    <div class="left" style="width:200px;">${it.radio} ${it.label}</div>
-                  </g:radioGroup>
+              <!-- Primary Contact -->
+              <div id="primary_contact">
+                <div class="price_options checkout_header white">
+                  Primary Contact Information
+                </div>
+                <div class="formInstructions">
+                  Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our Privacy Policy
+                </div>
+                <div class="checkout_section_header">
+                  Name
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.firstName', 'errors')}">
+                      <g:textField id="contactPrimary.firstName" name="contactPrimary.firstName" style="width: 180px;" class="required" value="${rentalTransaction?.contactPrimary?.firstName}" />
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.lastName', 'errors')}">
+                    <g:textField id="contactPrimary.lastName" name="contactPrimary.lastName" style="width: 180px;" class="required" value="${rentalTransaction?.contactPrimary?.lastName}" />
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.suffixName', 'errors')}">
+                    <g:textField id="contactPrimary.suffixName" name="contactPrimary.suffixName" style="width: 80px;" value="${rentalTransaction?.contactPrimary?.suffixName}" />
+                  </div>
                   <div style="clear:both;"></div>
-              </div>
-            </div>
-            <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}">
-              <div class="checkout_section_header">
-                Free Truck
-              </div>
-              <div class="checkout_fields">
-                <div class="value ${hasErrors(bean: rentalTransaction, field: 'reserveTruck', 'errors')}">
-                    <g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /> Reserve Free Truck for this move in
                 </div>
-                <div style="clear:both;"></div>
-              </div>
-            </g:if>
-            <g:elseif test="${site.freeTruck == storagetech.constants.TruckType.RENTAL}">
-              <div class="checkout_section_header">
-                Rental Truck
-              </div>
-              <div class="checkout_fields">
-                <div class="value ${hasErrors(bean: rentalTransaction, field: 'reserveTruck', 'errors')}">
-                    <g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /> Reserve Rental Truck for this move in
+                <div class="checkout_labels">
+                  <div class="checkout_name" style="width:200px;">
+                    <label for="contactPrimary.firstName">First Name</label>
+                  </div>
+                  <div class="checkout_name" style="width:200px;">
+                    <label for="contactPrimary.lastName">Last Name</label>
+                  </div>
+                  <div class="checkout_name" style="width:100px;">
+                    <label for="contactPrimary.suffixName">Suffix</label>
+                  </div>
+                  <div style="clear:both;"></div>
                 </div>
-                <div style="clear:both;"></div>
-              </div>
-              </g:elseif>
-              <div class="checkout_section_header">
-                Insurance
-              </div>
-              <div class="formInstructions">
-                Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
-              </div>
-              <div class="checkout_fields" style="width:646px;">
-                <div id="insuranceChoices" class="validate-one-radio" >
-                  <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" id="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
-                  <g:each in="${site.insurances.sort{it.premium}}" var="ins">
-                    <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
-                  </g:each>
+                <div class="checkout_section_header">
+                  Address
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetNumber', 'errors')}">
+                      <g:textField name="contactPrimary.streetNumber" id="contactPrimary.streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.streetNumber}" />
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.street', 'errors')}">
+                      <g:textField name="contactPrimary.street" id="contactPrimary.street" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.street}" />
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetType', 'errors')}">
+                      <g:select name="contactPrimary.streetType" id="contactPrimary.streetType" style="width:80px;" from="${storitz.constants.StreetType.list()}" value="${rentalTransaction?.contactPrimary?.streetType}" optionValue="value"/>
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.unit', 'errors')}">
+                      <g:textField name="contactPrimary.unit" id="contactPrimary.unit" style="width:80px;" value="${rentalTransaction?.contactPrimary?.unit}" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactPrimary.streetNumber">Street Number</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactPrimary.street">Street Name</label>
+                  </div>
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactPrimary.streetType">Street Suffix</label>
+                  </div>
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactPrimary.unit">Unit/Apt.</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.city', 'errors')}">
+                      <g:textField name="contactPrimary.city" id="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.city}" />
+                  </div>
+                  <div id="primaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.state', 'errors')}">
+                    <g:select name="contactPrimary.state" id="contactPrimary.state" class="validate-selection" style="width:80px;" from="${storagetech.constants.State.list()}" value="${rentalTransaction?.contactPrimary?.state}" optionValue="value"/>
+                  </div>
+                  <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.province', 'errors')}" style="width: 150px;display: none;">
+                    <g:textField name="contactPrimary.province" id="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransaction?.contactPrimary?.province}" />
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.zipcode', 'errors')}">
+                      <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.zipcode}" />
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.country', 'errors')}">
+                    <g:select name="contactPrimary.country" id="contactPrimary.country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransaction?.contactPrimary?.country?.key}" optionKey="key" optionValue="display"/>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactPrimary.city">City</label>
+                  </div>
+                  <div style="width:100px;" id="primaryStateLabel" class="checkout_name">
+                    <label for="contactPrimary.state">State</label>
+                  </div>
+                  <div style="width: 150px;display: none;" id="primaryProvinceLabel" class="checkout_name">
+                    <label for="contactPrimary.province">Province</label>
+                  </div>
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactPrimary.zipcode">Postal Code</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactPrimary.country">Country</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  Phone / Email
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phoneType', 'errors')}">
+                      <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storitz.constants.PhoneType.list()}" value="${rentalTransaction?.contactPrimary?.phoneType}" optionValue="value"/>
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.phone', 'errors')}">
+                      <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.phone}" />
+                  </div>
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.email', 'errors')}">
+                      <g:textField name="contactPrimary.email" id="contactPrimary.email" class="required validate-email" style="width:280px;" value="${rentalTransaction?.contactPrimary?.email}" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactPrimary.phoneType">Phone Type</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactPrimary.phone">Phone Number</label>
+                  </div>
+                  <div style="width:300px;" class="checkout_name">
+                    <label for="contactPrimary.email">Email</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  ID Information
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idType', 'errors')}">
+                      <g:select id="idType" name="idType" style="width:180px;" from="${storitz.constants.IdType.list()}" value="${rentalTransaction?.idType}" optionValue="value"/>
+                  </div>
+                  <div id="idStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idState', 'errors')}">
+                      <g:select name="idState" id="idState" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransaction?.idState}" optionValue="value"/>
+                  </div>
+                  <div id="idCountryField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idCountry', 'errors')}" style="width:200px;display: none;">
+                      <g:select name="idCountry" id="idCountry" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransaction?.idCountry?.key}" optionKey="key" optionValue="display"/>
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'idNumber', 'errors')}">
+                      <g:textField name="idNumber" id="idNumber" class="required" style="width:180px;" value="${rentalTransaction?.idNumber}" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="idType">ID Type</label>
+                  </div>
+                  <div id="idStateLabel" style="width:100px;" class="checkout_name">
+                    <label for="idState">ID State</label>
+                  </div>
+                  <div id="idCountryLabel" class="checkout_name" style="width:200px;display: none;">
+                    <label for="idCountry">ID Country</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="idNumber">ID Number</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div style="margin-top: 20px;">
+                  <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
+                  <div class="right"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
-              <div class="checkout_fields">
-                <div id="insuranceTermsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'insuranceTerms', 'errors')}">
-                    <g:checkBox name="insuranceTerms" id="insuranceTerms" class="required" value="${rentalTransaction?.insuranceTerms}" /> By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
+
+              <!-- Secondary Contact -->
+              <div id="secondary_contact" style="display:none;">
+                <div class="price_options checkout_header white">
+                  Secondary Contact Information
                 </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Active Military
-              </div>
-              <div class="formInstructions">
-                Active US Military renters are not eligible for lien auctions. This protects your items while you are on duty.
-              </div>
-              <div class="checkout_fields">
-                <div class="value ${hasErrors(bean: rentalTransaction, field: 'activeMilitary', 'errors')}">
-                    <g:checkBox name="activeMilitary" value="${rentalTransaction?.activeMilitary}" /> Are you a member of the US Armed Forces and on active duty?
+                <div class="formInstructions">
+                  Storage Property Owners (and most States) require a second contact with distinct address and phone number in the event your property is at risk and you are incapacitated or unreachable. A good second contact is a parent or friend.
                 </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Hazardous Materials
-              </div>
-              <div class="checkout_fields">
-                <div id="hazardousMaterialsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'hazardousMaterials', 'errors')}">
-                    <g:checkBox name="hazardousMaterials" id="hazardousMaterials" class="required" value="${rentalTransaction?.hazardousMaterials}" /> By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
+                <div class="checkout_section_header">
+                  Name
                 </div>
-                <div style="clear:both;"></div>
-              </div>
-              <div class="checkout_section_header">
-                Terms
-              </div>
-              <div class="checkout_fields">
-                <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
-                    <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions of the Storage Rental Agreement
+                <div class="checkout_fields">
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.firstName', 'errors')}">
+                      <g:textField name="contactSecondary.firstName" id="contactSecondary.firstName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.firstName}" />
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.lastName', 'errors')}">
+                    <g:textField name="contactSecondary.lastName" id="contactSecondary.lastName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.lastName}" />
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.suffixName', 'errors')}">
+                    <g:textField name="contactSecondary.suffixName" id="contactSecondary.suffixName" style="width: 80px;" value="${rentalTransaction?.contactSecondary?.suffixName}" />
+                  </div>
+                  <div style="clear:both;"></div>
                 </div>
-                <div style="clear:both;"></div>
+                <div class="checkout_labels">
+                  <div class="checkout_name" style="width:200px;">
+                    <label for="contactSecondary.firstName">First Name</label>
+                  </div>
+                  <div class="checkout_name" style="width:200px;">
+                    <label for="contactSecondary.lastName">Last Name</label>
+                  </div>
+                  <div class="checkout_name" style="width:100px;">
+                    <label for="contactSecondary.suffixName">Suffix</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  Address
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.streetNumber', 'errors')}">
+                      <g:textField name="contactSecondary.streetNumber" id="contactSecondary.streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.streetNumber}" />
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.street', 'errors')}">
+                      <g:textField name="contactSecondary.street" id="contactSecondary.street" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.street}" />
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.streetType', 'errors')}">
+                      <g:select name="contactSecondary.streetType" id="contactSecondary.streetType" style="width:80px;" from="${storitz.constants.StreetType.list()}" value="${rentalTransaction?.contactSecondary?.streetType}" optionValue="value"/>
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.unit', 'errors')}">
+                      <g:textField name="contactSecondary.unit" id="contactSecondary.unit" style="width:80px;" value="${rentalTransaction?.contactSecondary?.unit}" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactSecondary.streetNumber">Street Number</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactSecondary.street">Street Name</label>
+                  </div>
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactSecondary.streetType">Street Suffix</label>
+                  </div>
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactSecondary.unit">Unit/Apt.</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.city', 'errors')}">
+                      <g:textField name="contactSecondary.city" id="contactSecondary.city" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.city}" />
+                  </div>
+                  <div id="secondaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.state', 'errors')}">
+                    <g:select name="contactSecondary.state" id="contactSecondary.state" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
+                  </div>
+                  <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.province', 'errors')}" style="width: 200px;display: none;">
+                    <g:textField name="contactSecondary.province" id="contactSecondary.province" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.province}" />
+                  </div>
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.zipcode', 'errors')}">
+                      <g:textField name="contactSecondary.zipcode" id="contactSecondary.zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.zipcode}" />
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.country', 'errors')}">
+                    <g:select name="contactSecondary.country" id="contactSecondary.country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransaction?.contactSecondary?.country?.key}" optionKey="key" optionValue="display"/>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactSecondary.city">City</label>
+                  </div>
+                  <div style="width:100px;" id="secondaryStateLabel" class="checkout_name">
+                    <label for="contactSecondary.state">State</label>
+                  </div>
+                  <div style="width: 200px;display: none;" id="secondaryProvinceLabel" class="checkout_name">
+                    <label for="contactSecondary.province">Province</label>
+                  </div>
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactSecondary.zipcode">Postal Code</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactSecondary.country">Country</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  Phone / Email
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.phoneType', 'errors')}">
+                      <g:select name="contactSecondary.phoneType" id="contactSecondary.phoneType" style="width:80px;" from="${storitz.constants.PhoneType.list()}" value="${rentalTransaction?.contactSecondary?.phoneType}" optionValue="value"/>
+                  </div>
+                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.phone', 'errors')}">
+                      <g:textField name="contactSecondary.phone" id="contactSecondary.phone" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.phone}" />
+                  </div>
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.email', 'errors')}">
+                      <g:textField name="contactSecondary.email" id="contactSecondary.email" class="required validate-email" style="width:280px;" value="${rentalTransaction?.contactSecondary?.email}" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:100px;" class="checkout_name">
+                    <label for="contactSecondary.phoneType">Phone Type</label>
+                  </div>
+                  <div style="width:200px;" class="checkout_name">
+                    <label for="contactSecondary.phone">Phone Number</label>
+                  </div>
+                  <div style="width:300px;" class="checkout_name">
+                    <label for="contactSecondary.email">Email</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div style="margin-top: 20px;">
+                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
+                  <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
+                  <div style="clear:both;"></div>
+                </div>
               </div>
-              <div style="margin-top: 20px;">
-                <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
-                <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
-                <div style="clear:both;"></div>
+
+              <!-- Rental Info -->
+              <div id="rental_info" style="display:none;">
+                <div class="price_options checkout_header white">
+                  Rental Options
+                </div>
+                <div class="checkout_section_header">
+                  Rental Use
+                </div>
+                <div class="checkout_fields">
+                  <div id="rentalUse" class="validate-one-radio value ${hasErrors(bean: rentalTransaction, field: 'rentalUse', 'errors')}">
+                      <g:radioGroup name="rentalUse" labels="${storitz.constants.RentalUse.labels()}" values="${storitz.constants.RentalUse.list()}" value="${rentalTransaction?.rentalUse}">
+                        <div class="left" style="width:200px;">${it.radio} ${it.label}</div>
+                      </g:radioGroup>
+                      <div style="clear:both;"></div>
+                  </div>
+                </div>
+                <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}">
+                  <div class="checkout_section_header">
+                    Free Truck
+                  </div>
+                  <div class="checkout_fields">
+                    <div class="value ${hasErrors(bean: rentalTransaction, field: 'reserveTruck', 'errors')}">
+                        <g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /> Reserve Free Truck for this move in
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                </g:if>
+                <g:elseif test="${site.freeTruck == storitz.constants.TruckType.RENTAL}">
+                  <div class="checkout_section_header">
+                    Rental Truck
+                  </div>
+                  <div class="checkout_fields">
+                    <div class="value ${hasErrors(bean: rentalTransaction, field: 'reserveTruck', 'errors')}">
+                        <g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /> Reserve Rental Truck for this move in
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                </g:elseif>
+                <div class="checkout_section_header">
+                  Insurance
+                </div>
+                <div class="formInstructions">
+                  Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
+                </div>
+                <div class="checkout_fields" style="width:646px;">
+                  <div id="insuranceChoices" class="validate-one-radio" >
+                    <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" id="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
+                    <g:each in="${site.insurances.sort{it.premium}}" var="ins">
+                      <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
+                    </g:each>
+                    <div style="clear:both;"></div>
+                  </div>
+                </div>
+                <div class="checkout_fields">
+                  <div id="insuranceTermsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'insuranceTerms', 'errors')}">
+                      <g:checkBox name="insuranceTerms" id="insuranceTerms" class="required" value="${rentalTransaction?.insuranceTerms}" /> By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  Active Military
+                </div>
+                <div class="formInstructions">
+                  Active US Military renters are not eligible for lien auctions. This protects your items while you are on duty.
+                </div>
+                <div class="checkout_fields">
+                  <div class="value ${hasErrors(bean: rentalTransaction, field: 'activeMilitary', 'errors')}">
+                      <g:checkBox name="activeMilitary" value="${rentalTransaction?.activeMilitary}" /> Are you a member of the US Armed Forces and on active duty?
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  Hazardous Materials
+                </div>
+                <div class="checkout_fields">
+                  <div id="hazardousMaterialsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'hazardousMaterials', 'errors')}">
+                      <g:checkBox name="hazardousMaterials" id="hazardousMaterials" class="required" value="${rentalTransaction?.hazardousMaterials}" /> By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_section_header">
+                  Terms
+                </div>
+                <div class="checkout_fields">
+                  <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
+                      <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions of the Storage Rental Agreement
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div style="margin-top: 20px;">
+                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
+                  <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
+                  <div style="clear:both;"></div>
+                </div>
               </div>
-            </div>
+            </g:form>
           </div>
         </div>
     </div>
