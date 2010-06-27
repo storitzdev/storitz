@@ -20,7 +20,7 @@ import java.net.URL;
  */
 public class GmapService {
 
-    final static String STORAGETECH_MAP_URL = "http://maps.google.com/maps/feeds/maps/216045305154148112243/full/000439cb966a17d77fd04";
+    final static String STORITZ_MAP_URL = "http://maps.google.com/maps/feeds/maps/216045305154148112243/full/000439cb966a17d77fd04";
     final static String API_KEY = "ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA";
     final MapsService myService;
 
