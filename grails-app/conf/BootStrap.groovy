@@ -1,5 +1,5 @@
-import storagetech.constants.TruckType;
-import storagetech.constants.PromoType
+import storitz.constants.TruckType;
+import storitz.constants.PromoType
 
 class BootStrap {
 
