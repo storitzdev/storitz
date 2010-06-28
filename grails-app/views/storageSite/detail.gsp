@@ -78,6 +78,7 @@
                 unitId = units.driveup.id;
                 monthlyRent = prices[unitId];
                 $('priceDriveup').value = true;
+                $('unitId').value = unitId;
                 rentalFormReady = true;
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
@@ -99,6 +100,7 @@
                 unitId = units.interior.id;
                 monthlyRent = prices[unitId];
                 $('priceInterior').value = true;
+                $('unitId').value = unitId;
                 rentalFormReady = true;
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
@@ -120,6 +122,7 @@
                 unitId = units.upper.id;
                 monthlyRent = prices[unitId];
                 $('priceUpper').value = true;
+                $('unitId').value = unitId;
                 rentalFormReady = true;
                 $('rentmeBtn').show();
                 checkoutTableBody += "<tr>";
@@ -228,7 +231,6 @@
     function insuranceClick() {
       $('insuranceChoices').observe('click', function() {
         var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
-        var unitId = $F('unitId');
         premium = premiums[insId];
         showTotals();
       });

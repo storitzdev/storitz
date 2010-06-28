@@ -16,7 +16,9 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="3a85bc51-0c73-4513-9a3e-af17dd580ecc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/storitz/gmap/GmapService.java" afterPath="$PROJECT_DIR$/src/java/com/storitz/gmap/GmapService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/groovy/storitz/spring/CountryClassPropertyEditor.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.groovy" afterPath="$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
     </list>
     <ignored path="$USER_HOME_GRIFFON$/" />
     <ignored path=".idea/workspace.xml" />
@@ -87,55 +89,22 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="175" column="71" selection-start="9783" selection-end="9790" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/list.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1030" column="42" selection-start="50201" selection-end="50201" vertical-scroll-proportion="-4.4736843">
+            <state line="1012" column="39" selection-start="48241" selection-end="48246" vertical-scroll-proportion="-1.4868422">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_logo_bar.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/_logo_bar.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="43" selection-start="341" selection-end="341" vertical-scroll-proportion="-5.44">
-              <folding />
-            </state>
+      <file leaf-file-name="RentalTransaction.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GmapService.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/com/storitz/gmap/GmapService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="55" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.30289534">
+            <state line="6" column="6" selection-start="181" selection-end="181" vertical-scroll-proportion="-0.73913044">
               <folding />
             </state>
           </provider>
@@ -165,7 +134,43 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="4" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0">
+            <state line="15" column="9" selection-start="324" selection-end="329" vertical-scroll-proportion="-5.5434785">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resources.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/spring/resources.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="51" selection-start="22" selection-end="51" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomPropertyEditorRegistrar.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="73" selection-start="765" selection-end="791" vertical-scroll-proportion="0.63109046">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CountryClassPropertyEditor.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/groovy/storitz/spring/CountryClassPropertyEditor.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="62" selection-start="300" selection-end="321" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Country.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/Country.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="12" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -181,22 +186,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/controllers/StorageSiteController.groovy" />
         <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy" />
         <option value="$PROJECT_DIR$/src/java/com/storitz/spring/CustomPropertyEditor.java" />
         <option value="$PROJECT_DIR$/src/java/com/storitz/spring/CustomPropertyEditorRegistrar.java" />
         <option value="$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.java" />
-        <option value="$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/RentalTransactionController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$PROJECT_DIR$/src/groovy/storitz/constants/Country.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" />
         <option value="$PROJECT_DIR$/src/java/com/storitz/gmap/GmapService.java" />
+        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/src/groovy/storitz/spring/CountryClassPropertyEditor.groovy" />
+        <option value="$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.groovy" />
       </list>
     </option>
   </component>
@@ -1163,16 +1168,16 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.66387725" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32969433" sideWeight="0.66387725" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.22036262" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.66248256" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.66387725" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496361" sideWeight="0.66387725" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.66387725" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32635984" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1264,55 +1269,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="35" selection-start="113" selection-end="124" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/Country.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="41" selection-start="12036" selection-end="12036" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="24" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME_GRAILS$/1.2.1/projects/storitz/plugins/tomcat-1.2.1/src/groovy/org/grails/tomcat/TomcatServer.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="0" selection-start="5681" selection-end="5681" vertical-scroll-proportion="0.33255813">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/StreetType.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="18" selection-start="199" selection-end="209" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/unit/HomeControllerTests.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="19" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="175" column="71" selection-start="9783" selection-end="9790" vertical-scroll-proportion="0.0">
@@ -1334,26 +1290,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Contact.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="4" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/create.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="54" selection-start="505" selection-end="505" vertical-scroll-proportion="-0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1030" column="42" selection-start="50201" selection-end="50201" vertical-scroll-proportion="-4.4736843">
           <folding />
         </state>
       </provider>
@@ -1374,7 +1313,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/storitz/gmap/GmapService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="55" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.30289534">
+        <state line="20" column="13" selection-start="575" selection-end="575" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1012" column="39" selection-start="48241" selection-end="48246" vertical-scroll-proportion="-1.4868422">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/RentalTransaction.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="6" selection-start="181" selection-end="181" vertical-scroll-proportion="-0.73913044">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Contact.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="9" selection-start="324" selection-end="329" vertical-scroll-proportion="-5.5434785">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/State.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="12" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/spring/resources.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="51" selection-start="22" selection-end="51" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/Country.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="12" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_12/src.zip!/java/beans/PropertyEditorSupport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="378" selection-end="378" vertical-scroll-proportion="-8.424594">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/spring/CountryClassPropertyEditor.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="62" selection-start="300" selection-end="321" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/spring/CustomPropertyEditorRegistrar.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="73" selection-start="765" selection-end="791" vertical-scroll-proportion="0.63109046">
           <folding />
         </state>
       </provider>
