@@ -1,3 +1,7 @@
+import com.storitz.SiteLink
+import grails.plugins.springsecurity.Secured
+
+@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController {
 
 
@@ -38,7 +42,7 @@ class SiteLinkController {
   def show = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (!siteLinkInstance) {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), params.id])}"
       redirect(action: "list")
     }
     else {
@@ -49,7 +53,7 @@ class SiteLinkController {
   def edit = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (!siteLinkInstance) {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), params.id])}"
       redirect(action: "list")
     }
     else {
@@ -64,14 +68,14 @@ class SiteLinkController {
         def version = params.version.toLong()
         if (siteLinkInstance.version > version) {
 
-          siteLinkInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'siteLink.label', default: 'SiteLink')] as Object[], "Another user has updated this SiteLink while you were editing")
+          siteLinkInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'siteLink.label', default: 'com.storitz.SiteLink')] as Object[], "Another user has updated this com.storitz.SiteLink while you were editing")
           render(view: "edit", model: [siteLinkInstance: siteLinkInstance])
           return
         }
       }
       siteLinkInstance.properties = params
       if (!siteLinkInstance.hasErrors() && siteLinkInstance.save(flush: true)) {
-        flash.message = "${message(code: 'default.updated.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), siteLinkInstance.id])}"
+        flash.message = "${message(code: 'default.updated.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), siteLinkInstance.id])}"
         redirect(action: "show", id: siteLinkInstance.id)
       }
       else {
@@ -79,7 +83,7 @@ class SiteLinkController {
       }
     }
     else {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), params.id])}"
       redirect(action: "list")
     }
   }
@@ -89,16 +93,16 @@ class SiteLinkController {
     if (siteLinkInstance) {
       try {
         siteLinkInstance.delete(flush: true)
-        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), params.id])}"
+        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), params.id])}"
         redirect(action: "list")
       }
       catch (org.springframework.dao.DataIntegrityViolationException e) {
-        flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), params.id])}"
+        flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), params.id])}"
         redirect(action: "show", id: params.id)
       }
     }
     else {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'SiteLink'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'siteLink.label', default: 'com.storitz.SiteLink'), params.id])}"
       redirect(action: "list")
     }
   }

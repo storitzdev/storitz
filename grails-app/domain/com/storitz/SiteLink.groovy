@@ -1,3 +1,4 @@
+package com.storitz
 class SiteLink {
 
   static hasMany = [sites: StorageSite]

@@ -1,3 +1,4 @@
+package com.storitz
 class StorageSize {
 
     static constraints = {

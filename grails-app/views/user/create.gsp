@@ -104,24 +104,42 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="emailShow">Email Show:</label>
+                                    <label for="accountExpired">Account Expired:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'emailShow','errors')}">
-                                    <g:checkBox name="emailShow" value="${person?.emailShow}" ></g:checkBox>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'accountExpired','errors')}">
+                                    <g:checkBox name="accountExpired" value="${person?.accountExpired}" ></g:checkBox>
                                 </td>
                             </tr> 
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="accountLocked">Account Locked:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'accountLocked','errors')}">
+                                    <g:checkBox name="accountLocked" value="${person?.accountLocked}" ></g:checkBox>
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="passwordExpired">Password Expired:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'passwordExpired','errors')}">
+                                    <g:checkBox name="passwordExpired" value="${person?.passwordExpired}" ></g:checkBox>
+                                </td>
+                            </tr>
+
                             <tr class='prop'>
                                 <td valign='top' class='name'><label for='passwd'>Password:</label></td>
-                                <td valign='top' class='value ${hasErrors(bean:person,field:'passwd','errors')}'>
-                                    <input type="password" name='passwd' value="${person?.passwd?.encodeAsHTML()}"/>
+                                <td valign='top' class='value ${hasErrors(bean:person,field:'password','errors')}'>
+                                    <input type="password" name='passwd' value="${person?.password?.encodeAsHTML()}"/>
                                 </td>
                             </tr>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'><label for='enabled'>Confirm Password:</label></td>
-                                <td valign='top' class='value ${hasErrors(bean:person,field:'passwd','errors')}'>
-                                    <input type="password" name='repasswd' value="${person?.passwd?.encodeAsHTML()}"/>
+                                <td valign='top' class='value ${hasErrors(bean:person,field:'password','errors')}'>
+                                    <input type="password" name='repasswd' value="${person?.password?.encodeAsHTML()}"/>
                                 </td>
                             </tr>
 

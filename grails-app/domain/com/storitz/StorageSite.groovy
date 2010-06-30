@@ -1,4 +1,13 @@
-import storitz.constants.TruckType;
+package com.storitz
+
+import storitz.constants.TruckType
+import com.storitz.CenterShift
+import com.storitz.Insurance
+import com.storitz.SiteContact
+import com.storitz.SiteImage
+import com.storitz.SiteLink
+import com.storitz.StorageUnit
+import com.storitz.SiteUser;
 
 class StorageSite {
 

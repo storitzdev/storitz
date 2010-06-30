@@ -37,10 +37,10 @@
 
           <tr class="prop">
             <td valign="top" class="name">
-              <label for="manager"><g:message code="siteLink.manager.label" default="Manager"/></label>
+              <label for="manager.id"><g:message code="siteLink.manager.label" default="Manager"/></label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: siteLinkInstance, field: 'manager', 'errors')}">
-              <g:select name="manager.id" from="${User.list()}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.username}" noSelection="['null': '']"/>
+              <g:select name="manager.id" from="${com.storitz.User.list()}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.username}" noSelection="['null': '']"/>
             </td>
           </tr>
 

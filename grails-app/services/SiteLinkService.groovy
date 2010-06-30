@@ -1,12 +1,16 @@
-import org.apache.commons.httpclient.*;
-import org.apache.commons.httpclient.methods.*;
-
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
 import static groovyx.net.http.ContentType.XML
 
 import storitz.constants.TruckType
 import storitz.constants.PromoType
+import com.storitz.Insurance
+import com.storitz.SiteContact
+import com.storitz.StorageUnit
+import com.storitz.SiteUser
+import com.storitz.StorageSite
+import com.storitz.SpecialOffer
+import com.storitz.StorageSize
 
 class SiteLinkService {
 
@@ -178,7 +182,7 @@ class SiteLinkService {
       "Unexpected failure: ${resp.statusLine} "
     }
 
-    def resp = http.request(Method.POST, XML) {req ->
+    http.request(Method.POST, XML) {req ->
 
       delegate.headers['Content-Type'] = "text/xml"
 
@@ -342,14 +346,13 @@ class SiteLinkService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    def adminFeeSet = false;
-    records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table'.each {unit ->
 
+    for (unit in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table') {
       def siteUnit = new StorageUnit()
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
-      siteUnit.price = new BigDecimal(unit.dcStdRate.text())
-      def floor = Integer.parseInt(unit.iFloor.text())
+      siteUnit.price = unit.dcStdRate.text() as BigDecimal
+      def floor = unit.iFloor.text() as Integer
       def typeName = unit.sTypeName.text()
       siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
       siteUnit.isInterior = Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/
@@ -410,12 +413,12 @@ class SiteLinkService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     def count = 0;
-    records.'soap:Body'.'*:InsuranceCoverageRetrieveResponse'.'*:InsuranceCoverageRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table'.each {ins ->
+    for (ins in records.'soap:Body'.'*:InsuranceCoverageRetrieveResponse'.'*:InsuranceCoverageRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
       def insurance = new Insurance()
       insurance.insuranceId = Integer.parseInt(ins.InsurCoverageID.text())
-      insurance.totalCoverage = new BigDecimal(ins.dcCoverage.text())
-      insurance.premium = new BigDecimal(ins.dcPremium.text())
-      insurance.percentTheft = new BigDecimal(ins.dcPCTheft.text())
+      insurance.totalCoverage = ins.dcCoverage.text() as BigDecimal
+      insurance.premium = ins.dcPremium.text() as BigDecimal
+      insurance.percentTheft = ins.dcPCTheft.text() as BigDecimal
       insurance.provider = ins.sProvidor.text()
       count++;
 
@@ -437,9 +440,9 @@ class SiteLinkService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     def adminFee = new BigDecimal(0)
-    records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table'.each {fee ->
+    for (fee in records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
       if (fee.ChargeDescription.text() == 'Administrative Fee') {
-        adminFee = new BigDecimal(fee.dcTenantRate.text())
+        adminFee = new BigDecimal(fee.dcTenantRate.text() as String)
       }
     }
     println('returning fee=' + adminFee)
@@ -455,7 +458,6 @@ class SiteLinkService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    def adminFee = new BigDecimal(0)
     records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans'.each {promo ->
       def showOn = Integer.parseInt(promo.iShowOn.text())
       def promoName = promo.sPlanName
@@ -474,17 +476,17 @@ class SiteLinkService {
         switch (ptype) {
           case 0:
             specialOffer.promoType = PromoType.AMOUNT_OFF
-            specialOffer.promoQty = new BigDecimal(promo.dcFixedDiscount.text())
+            specialOffer.promoQty = promo.dcFixedDiscount.text() as BigDecimal
             break
 
           case 1:
             specialOffer.promoType = PromoType.PERCENT_OFF
-            specialOffer.promoQty = new BigDecimal(promo.dcPCDiscount.text())
+            specialOffer.promoQty = promo.dcPCDiscount.text() as BigDecimal
             break
 
           case 2:
             specialOffer.promoType = PromoType.FIXED_RATE
-            specialOffer.promoQty = new BigDecimal(promo.dcChgAmt.text())
+            specialOffer.promoQty = promo.dcChgAmt.text() as BigDecimal
         }
         specialOffer.save()
         site.addToSpecialOffers(specialOffer)

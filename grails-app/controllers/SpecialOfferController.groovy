@@ -1,4 +1,5 @@
-import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.storitz.SpecialOffer
+import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_ADMIN'])
 class SpecialOfferController {
@@ -61,7 +62,7 @@ class SpecialOfferController {
                 def version = params.version.toLong()
                 if(specialOfferInstance.version > version) {
                     
-                    specialOfferInstance.errors.rejectValue("version", "specialOffer.optimistic.locking.failure", "Another user has updated this SpecialOffer while you were editing.")
+                    specialOfferInstance.errors.rejectValue("version", "specialOffer.optimistic.locking.failure", "Another user has updated this com.storitz.SpecialOffer while you were editing.")
                     render(view:'edit',model:[specialOfferInstance:specialOfferInstance])
                     return
                 }

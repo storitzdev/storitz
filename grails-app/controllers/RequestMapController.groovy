@@ -1,4 +1,4 @@
-import RequestMap
+import com.storitz.RequestMap
 
 /**
  * Requestmap controller.

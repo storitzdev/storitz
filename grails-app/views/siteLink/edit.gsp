@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<%@ page import="com.storitz.StorageSite" %>
+
+
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Edit SiteLink Feed"/>
@@ -40,7 +41,7 @@
 
           <tr class="prop">
             <td valign="top" class="name">
-              <label for="manager"><g:message code="siteLink.manager.label" default="Manager"/></label>
+              <label for="manager.id"><g:message code="siteLink.manager.label" default="Manager"/></label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: siteLinkInstance, field: 'manager', 'errors')}">
               <g:select name="manager.id" from="${User.list()}" optionKey="id" value="${siteLinkInstance?.manager?.id}" noSelection="['null': '']"/>

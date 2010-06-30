@@ -1,4 +1,4 @@
-import StorageSite
+import com.storitz.StorageSite
 import com.storitz.geoip.GeoIp
 import grails.converters.JSON
 import org.hibernate.FetchMode as FM
@@ -14,8 +14,8 @@ class STMapController {
       def sites = StorageSite.createCriteria()
       def results = sites.listDistinct {
         and {
-          between("lat", new java.math.BigDecimal(params.swLat), new java.math.BigDecimal(params.neLat))
-          between("lng", new java.math.BigDecimal(params.swLng), new java.math.BigDecimal(params.neLng))
+          between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
+          between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
         }
         if (params.searchSize && params.int('searchSize') != 1) {
           fetchMode('units', FM.EAGER)
@@ -71,8 +71,6 @@ class STMapController {
 
     def loc = geoIp.getLocation(request.getRemoteAddr())
 
-    println "GeoIP: ${geoIp} servletContext=${servletContext} remoteAddr: ${request.getRemoteAddr()}"
-
     JSON.use("deep")
     render (status:200, contentType:"application/json", text:"${loc as JSON}")
   }
@@ -82,12 +80,12 @@ class STMapController {
     def sites = StorageSite.createCriteria()
     def results = sites.listDistinct {
       and {
-        between("lat", new java.math.BigDecimal(params.swLat), new java.math.BigDecimal(params.neLat))
-        between("lng", new java.math.BigDecimal(params.swLng), new java.math.BigDecimal(params.neLng))
+        between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
+        between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
       }
       units {
         size {
-          ne("id", new Long(params.sizeId))
+          ne("id", params.sizeId as Long)
         }
       }
     }

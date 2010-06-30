@@ -1,6 +1,8 @@
-import Role
-import User
-import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.storitz.Role
+import com.storitz.User
+import grails.plugins.springsecurity.Secured
+import com.storitz.UserRole
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 /**
  * User controller.
@@ -8,7 +10,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class UserController {
 
-	def authenticateService
+	def springSecurityService
     def webUtilService
 
 	// the delete, save and update actions only accept POST requests
@@ -77,15 +79,15 @@ class UserController {
 
 		def person = User.get(params.id)
 		if (person) {
-			def authPrincipal = authenticateService.principal()
+			def authPrincipal = springSecurityService.principal()
 			//avoid self-delete if the logged-in user is an admin
 			if (!(authPrincipal instanceof String) && authPrincipal.username == person.username) {
 				flash.message = "You can not delete yourself, please login as another admin and try again"
 			}
 			else {
 				//first, delete this person from People_Authorities table.
-				Role.findAll().each { it.removeFromPeople(person) }
-				person.delete()
+                UserRole.removeAll(person)
+                person.delete()
 				flash.message = "User $params.id deleted."
 			}
 		}
@@ -129,13 +131,13 @@ class UserController {
 			return
 		}
 
-		def oldPassword = person.passwd
+		def oldPassword = person.password
 		person.properties = params
 		if (!params.passwd.equals(oldPassword)) {
-			person.passwd = authenticateService.encodePassword(params.passwd)
+			person.password = springSecurityService.encodePassword(params.passwd)
 		}
 		if (person.save()) {
-			Role.findAll().each { it.removeFromPeople(person) }
+			UserRole.removeAll(person)
 			addRoles(person)
 			redirect action: show, id: person.id
 		}
@@ -158,28 +160,24 @@ class UserController {
       def person = new User()
       person.properties = params
 
-      def config = authenticateService.securityConfig
-      def defaultRole = config.security.defaultRole
-
-      def role = Role.findByAuthority(defaultRole)
-      if (!role) {
-          person.passwd = ''
+      def roleCount = params.findAll{ it.key.contains('ROLE') }.size()
+      if (roleCount == 0) {
+          person.password = ''
           flash.message = 'Default Role not found.'
           render view: 'create', model: [person: person, authorityList: Role.list() ]
           return
       }
 
       if (params.passwd != params.repasswd) {
-          person.passwd = ''
+          person.password = ''
           flash.message = 'The passwords you entered do not match.'
           render view: 'create', model: [person: person, authorityList: Role.list() ]
           return
       }
 
-      def pass = authenticateService.encodePassword(params.passwd)
-      person.passwd = pass
+      def pass = springSecurityService.encodePassword(params.passwd)
+      person.password = pass
       person.enabled = true
-      person.emailShow = true
       if (person.save()) {
           addRoles(person)
           // TODO - send email to new user
@@ -188,7 +186,7 @@ class UserController {
           redirect action: show, id: person.id
 
       } else {
-          person.passwd = ''
+          person.password = ''
           render view: 'create', model: [authorityList: Role.list(), person: person]
       }
 	}
@@ -196,7 +194,8 @@ class UserController {
 	private void addRoles(person) {
 		for (String key in params.keySet()) {
 			if (key.contains('ROLE') && 'on' == params.get(key)) {
-				Role.findByAuthority(key).addToPeople(person)
+				def role = Role.findByAuthority(key)
+                if (role) UserRole.create(person, role, true)
 			}
 		}
 	}

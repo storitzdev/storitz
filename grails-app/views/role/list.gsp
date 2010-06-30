@@ -43,7 +43,7 @@
 		</div>
 
 		<div class="paginateButtons">
-			<g:paginate total="${Role.count()}" />
+			<g:paginate total="${com.storitz.Role.count()}" />
 		</div>
 	</div>
 </body>

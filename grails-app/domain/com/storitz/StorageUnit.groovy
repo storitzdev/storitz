@@ -1,3 +1,4 @@
+package com.storitz
 class StorageUnit {
 
     static belongsTo = StorageSite

@@ -17,9 +17,9 @@
 <div id="stcontent">
         <div class="nav">
           <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
-          <g:ifAnyGranted role="ROLE_ADMIN">
+          <sec:ifAnyGranted roles="ROLE_ADMIN">
             <span class="menuButton"><g:link class="create" action="create">Create New Site</g:link></span>
-          </g:ifAnyGranted>
+          </sec:ifAnyGranted>
         </div>
         <div class="body">
             <h1>Storage Site List</h1>

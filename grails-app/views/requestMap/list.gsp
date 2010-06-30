@@ -43,7 +43,7 @@
 		</div>
 
 		<div class="paginateButtons">
-			<g:paginate total="${RequestMap.count()}" />
+			<g:paginate total="${com.storitz.RequestMap.count()}" />
 		</div>
 
 	</div>

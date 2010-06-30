@@ -26,9 +26,9 @@
         <div class="nav">
           <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
           <span class="menuButton"><g:link class="list" action="list">List Sites</g:link></span>
-          <g:ifAnyGranted role="ROLE_ADMIN">
+          <sec:ifAnyGranted roles="ROLE_ADMIN">
             <span class="menuButton"><g:link class="create" action="create">Create new Site</g:link></span>
-          </g:ifAnyGranted>
+          </sec:ifAnyGranted>
         </div>
         <div class="body">
             <h1>Edit Site</h1>
@@ -233,7 +233,7 @@
                                       <li><g:link controller="siteContact" action="show" id="${c.id}">${c.name} - ${c.email}</g:link></li>
                                   </g:each>
                                   </ul>
-                                  <g:link controller="siteContact" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteContact.label', default: 'SiteContact')])}</g:link>
+                                  <g:link controller="siteContact" action="create" params="['storageSite.id': storageSiteInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'siteContact.label', default: 'com.storitz.SiteContact')])}</g:link>
 
                                 </td>
                             </tr>

@@ -69,11 +69,10 @@ log4j = {
     warn   'org.mortbay.log'
 }
 
-
-     
-
 //log4j.logger.org.springframework.security='off,stdout'
-
-//log4j.logger.org.springframework.security='off,stdout'
-
-//log4j.logger.org.springframework.security='off,stdout'
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.storitz.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.storitz.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.storitz.Role'
+grails.plugins.springsecurity.requestMap.className = 'com.storitz.RequestMap'
+grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity.SecurityConfigType.Annotation

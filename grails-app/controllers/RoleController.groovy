@@ -1,4 +1,4 @@
-import Role
+import com.storitz.Role
 
 /**
  * Authority Controller.

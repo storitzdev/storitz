@@ -1,6 +1,11 @@
+import com.storitz.StorageSize
+import com.storitz.User
+import com.storitz.Role
+import com.storitz.UserRole
+
 class BootStrap {
 
-     def authenticateService
+     def springSecurityService
 
      def init = { servletContext ->
        
@@ -8,14 +13,10 @@ class BootStrap {
        def roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
        new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
 
-       def admin = new User( username:'admin', passwd:authenticateService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com')
-       if (roleAdmin) {
-        roleAdmin.addToPeople(admin)
-       }
-       if (roleUser) {
-        roleUser.addToPeople(admin)
-       }
+       def admin = new User( username:'admin', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
        admin.save(flush: true)
+       UserRole.create(admin, roleUser, true)
+       UserRole.create(admin, roleAdmin, true)
 
        if (StorageSize.list().size() == 0) {
          new StorageSize( description:'No size chosen', width: 0, length: 0).save();

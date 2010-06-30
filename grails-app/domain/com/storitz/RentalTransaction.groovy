@@ -1,8 +1,11 @@
+package com.storitz
+
 import storitz.constants.IdType
 import storitz.constants.State
 import storitz.constants.Country
 import storitz.constants.RentalUse
 import storitz.constants.TransactionStatus
+import com.storitz.Contact
 
 class RentalTransaction {
 

@@ -24,8 +24,7 @@ public enum StreetType {
   PIKE("Pike"),
   TERRACE("Ter."),
   HEIGHTS("Hgts."),
-  WAY("Way")
-  ;
+  WAY("Way");
 
   final String display;
 

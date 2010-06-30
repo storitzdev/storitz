@@ -1,3 +1,4 @@
+package com.storitz
 class SiteUser {
 
     StorageSite site

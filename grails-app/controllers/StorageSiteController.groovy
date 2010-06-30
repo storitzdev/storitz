@@ -1,4 +1,9 @@
 import grails.converters.JSON
+import com.storitz.SiteImage
+import com.storitz.StorageUnit
+import com.storitz.SiteUser
+import com.storitz.StorageSite
+import com.storitz.StorageSize
 
 class StorageSiteController {
 
@@ -46,7 +51,7 @@ class StorageSiteController {
     // TODO handle logo
 
     if (storageSiteInstance.save(flush: true)) {
-      flash.message = "${message(code: 'default.created.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
+      flash.message = "${message(code: 'default.created.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
       redirect(action: "show", id: storageSiteInstance.id)
     }
     else {
@@ -57,7 +62,7 @@ class StorageSiteController {
   def show = {
     def storageSiteInstance = StorageSite.get(params.id)
     if (!storageSiteInstance) {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     }
     else {
@@ -68,7 +73,7 @@ class StorageSiteController {
   def edit = {
     def storageSiteInstance = StorageSite.get(params.id)
     if (!storageSiteInstance) {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     } else {
       return [storageSiteInstance: storageSiteInstance]
@@ -84,7 +89,7 @@ class StorageSiteController {
         def version = params.version.toLong()
         if (storageSiteInstance.version > version) {
 
-          storageSiteInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'storageSite.label', default: 'StorageSite')] as Object[], "Another user has updated this StorageSite while you were editing")
+          storageSiteInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'storageSite.label', default: 'com.storitz.StorageSite')] as Object[], "Another user has updated this com.storitz.StorageSite while you were editing")
           render(view: "edit", model: [storageSiteInstance: storageSiteInstance])
           return
         }
@@ -180,7 +185,7 @@ class StorageSiteController {
       }
       storageSiteInstance.properties = params
       if (!storageSiteInstance.hasErrors() && storageSiteInstance.save(flush: true)) {
-        flash.message = "${message(code: 'default.updated.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
+        flash.message = "${message(code: 'default.updated.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
         redirect(action: "show", id: storageSiteInstance.id)
       }
       else {
@@ -188,7 +193,7 @@ class StorageSiteController {
       }
     }
     else {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     }
   }
@@ -199,7 +204,7 @@ class StorageSiteController {
     if (storageSiteInstance.source == "SL") {
       def stats = new storitz.SiteLinkStats()
       siteLinkService.updateSite(storageSiteInstance, stats, geocodeService)
-      flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), storageSiteInstance.id])}"
+      flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
       redirect(action: "show", id: storageSiteInstance.id)
     }
   }
@@ -220,16 +225,16 @@ class StorageSiteController {
     if (storageSiteInstance) {
       try {
         storageSiteInstance.delete(flush: true)
-        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
+        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
         redirect(action: "list")
       }
       catch (org.springframework.dao.DataIntegrityViolationException e) {
-        flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
+        flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
         redirect(action: "show", id: params.id)
       }
     }
     else {
-      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'StorageSite'), params.id])}"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     }
   }

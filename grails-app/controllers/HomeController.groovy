@@ -1,4 +1,4 @@
-import StorageSize
+import com.storitz.StorageSize
 
 class HomeController {
 

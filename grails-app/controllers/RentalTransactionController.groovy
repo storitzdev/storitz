@@ -1,4 +1,6 @@
 import storitz.constants.TransactionStatus
+import com.storitz.RentalTransaction
+import com.storitz.StorageSite
 
 class RentalTransactionController {
 
@@ -28,7 +30,7 @@ class RentalTransactionController {
         rentalTransactionInstance.bookingDate = new Date()
         rentalTransactionInstance.site = site
         if (rentalTransactionInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), rentalTransactionInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
             redirect(action: "show", id: rentalTransactionInstance.id)
         }
         else {
@@ -39,7 +41,7 @@ class RentalTransactionController {
     def show = {
         def rentalTransactionInstance = RentalTransaction.get(params.id)
         if (!rentalTransactionInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -50,7 +52,7 @@ class RentalTransactionController {
     def edit = {
         def rentalTransactionInstance = RentalTransaction.get(params.id)
         if (!rentalTransactionInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -65,14 +67,14 @@ class RentalTransactionController {
                 def version = params.version.toLong()
                 if (rentalTransactionInstance.version > version) {
                     
-                    rentalTransactionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'rentalTransaction.label', default: 'RentalTransaction')] as Object[], "Another user has updated this RentalTransaction while you were editing")
+                    rentalTransactionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction')] as Object[], "Another user has updated this com.storitz.RentalTransaction while you were editing")
                     render(view: "edit", model: [rentalTransactionInstance: rentalTransactionInstance])
                     return
                 }
             }
             rentalTransactionInstance.properties = params
             if (!rentalTransactionInstance.hasErrors() && rentalTransactionInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), rentalTransactionInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
                 redirect(action: "show", id: rentalTransactionInstance.id)
             }
             else {
@@ -80,7 +82,7 @@ class RentalTransactionController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -90,16 +92,16 @@ class RentalTransactionController {
         if (rentalTransactionInstance) {
             try {
                 rentalTransactionInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'RentalTransaction'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
             redirect(action: "list")
         }
     }

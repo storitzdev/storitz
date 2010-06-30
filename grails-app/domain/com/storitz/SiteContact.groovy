@@ -1,4 +1,4 @@
-import StorageSite
+package com.storitz
 
 class SiteContact {
 

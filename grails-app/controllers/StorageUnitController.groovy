@@ -1,4 +1,4 @@
-import StorageUnit
+import com.storitz.StorageUnit
 
 class StorageUnitController {
 
