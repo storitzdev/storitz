@@ -268,7 +268,7 @@ class StorageSiteController {
     sizeList.add(StorageSize.get(1))
     sizeList.sort { it.width * it.length }
 
-    [sizeList: sizeList, site: site, title: site.title]
+    [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"]
   }
 
   def detailUnits = {
