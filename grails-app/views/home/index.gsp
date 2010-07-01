@@ -33,10 +33,10 @@
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
-                pattern : /^—|<[aA].+\$(\d+)<\/[aA]>/,
+                pattern : /^ï¿½|<[aA].+\$(\d+)<\/[aA]>/,
                 normal : function(v) {
                     // This will grab the first thing that looks like a number from a string, so you can use it to order a column of various srings containing numbers.
-                    if (v == '—') return -1;
+                    if (v == 'ï¿½') return -1;
                     v = parseFloat(v.replace(/^\$(\d+)/,"$1"));
                     return isNaN(v) ? 0 : v;
                 }
@@ -138,7 +138,7 @@
                   }
                 }
                 var randId = Math.floor(Math.random() * 100001);
-                var tableContents = '<div class="srText">Search Results for size ' + searchSizeDesc + ' near ' + searchAddr + ' starting on ' + searchDate + '</td></tr></div><table class="sortable" id="stresults' + randId + '"><thead><tr><th class="addrwidth" id="title">Title</th><th class="sortfirstasc distwidth white" id="distance">Distance</th><th class="stprice pricewidth white">Drive Up</th><th class="stprice pricewidth white">Interior</th><th class="stprice pricewidth white">Upper</th><th>Features</th><th class="white">Special Offers</th></tr></thead><tbody>';
+                var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Drive Up</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Upper</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
                 var offers;
                 transport.responseJSON.features.each(function(s) {
@@ -147,12 +147,12 @@
                     var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
                     var featuredArr = $A(s.featuredOffers.pluck('promoName'));
                     if (featuredArr.size() > 1 ) {
-                      offers = '<div id="offers' + s.id + '">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none" class="tooltip">' + offersTip + '</div>';
+                      offers = '<div id="offers' + s.id + '" class=\"pointer\">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
                       tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
                     } else {
                       var offersArr = $A(s.specialOffers.pluck('promoName'));
                       if (offersArr.size() > 1 ) {
-                        offers = '<div id="offers' + s.id + '">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none" class="tooltip">' + offersTip + '</div>';
+                        offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
                         tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
                       } else {
                         offers = offersArr[0];
@@ -165,17 +165,17 @@
                     var priceInterior = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isInterior) ? n.price : 999999; });
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
 
-                    var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
-                    var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var gateImg   = s.isGate ? '<img id="gate' + s.id +'" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
+                    var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var gateImg   = s.isGate ? '<img id="gate' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
 
                     switch(s.freeTruck) {
                       case "FREE":
-                        var truckImg =  '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+                        var truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
                         break;
                       case "RENTAL":
-                        var truckImg =  '<img id="truck' + s.id +'" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+                        var truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
                         break;
                       default:
                         var truckImg = '<span style="width:20px; margin: 1px;"></span>';
@@ -207,11 +207,11 @@
                     google.maps.event.addListener(s.marker, 'mouseover', function() {
                       markerOver(s);
                     });
-                    tableContents += '<tr id="row' + s.id + '" class="' + (rows % 2 == 1 ? 'rowodd' : 'roweven') + '"><td><div style="float:left;"><a href="#" class="no_underline" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
+                    tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
+                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
@@ -273,6 +273,9 @@
         }
 
         function showAddress(address, size, date) {
+
+          var validAddr = address.length > 4 && !address.startsWith('Enter ');
+
           if (address) {
             searchAddr = address;
           }
@@ -280,7 +283,7 @@
           searchDate = date;
           searchSizeDesc = storageSize[size];
 
-          if (geocoder && address) {
+          if (geocoder && validAddr) {
             geocoder.geocode( { 'address': address}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
@@ -317,10 +320,7 @@
         }
 
         function setupForm() {
-          $('gsearch').observe('submit', function(event) {
-            showAddress($F('address'), $F('size'), $F('date'));
-            Event.stop(event);
-          });
+          $('address').activate();
         }
 
         function checkMapSubmit() {
@@ -338,39 +338,36 @@
       <g:render template="/topnav" />
       <div id="stcontent">
         <g:render template="/logo_bar" />
+        <div style="height: 25px;"></div>
         <div id="search">
           <div id="instructions">
             Search for Storage
           </div>
-          <div style="height: 20px;"></div>
+          <div style="height: 5px;"></div>
           <div style="margin-left: 15px;">
             <form id="gsearch" action="" method="post">
-              <div>Enter an address, city, state or zip code:</div>
               <div>
-                <input type="text" name="address" id="address" value="${params.address}"/>
+                <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code...'}"/>
               </div>
-              <div style="float: left;">
-                <div>
-                  <div>Unit Size:</div>
-                  <div style="height: 30px;">
-                    <g:select name="size" id="size" from="${sizeList}" value="${params.size}" optionKey="id" optionValue="description"/>
-                    <img id="sizeInfo" style="vertical-align: middle;" src="${resource(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
-                  </div>
-                </div>
-              </div>
-              <div style="float: left;">
-                <div>Start Date:</div>
-                <input type="text" id="date" style="width: 105px;" value="${params.date}"/>
-              </div>
-              <div style="clear: both; height: 10px;"></div>
+              <div style="height: 10px;"></div>
               <div>
-                <input type="image" src="${resource(dir:'images', file:'btn_findstoragenow.gif')}" class="noborder" alt="Search Storage"/>
+                <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
+                <img id="sizeInfo" style="vertical-align: middle;" src="${resource(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
+              </div>
+              <div style="height: 10px;"></div>
+              <div>
+                <input type="text" id="date" class="inputBox" value="${params.date ? params.date : 'Click to pick move in date...'}"/>
+              </div>
+              <div style="height: 10px;"></div>
+              <div>
+                <input type="image" src="${resource(dir:'images', file:'btn-new-search.gif')}" class="noborder" onsubmit="showAddress($F('address'), $F('size'), $F('date'));return false;" alt="Search Storage"/>
               </div>
               <div style="clear: both; height: 10px;"></div>
             </form>
           </div>
-          <div style="height: 20px;"></div>
-          <div class="large" style="padding-left: 1em; padding-bottom: 0.5em; font-weight: bold;">Legend:</div>
+          <div style="height: 5px;"></div>
+          <div class="section_header">Legend</div>
+          <div style="height: 10px;"></div>
           <div style="clear: both; padding-left: 1.5em;">
             <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'icn_map_grn.png')}" style="vertical-align: top;" alt="blue map icon"/></div> <div style="margin-left: 2em;">Storage site that meets your search criteria</div>
           </div>
@@ -382,7 +379,12 @@
           <div id="map_canvas"></div>
         </div>
 
-        <div style="clear: both;"></div>
+        <div style="height: 20px;clear: both;"></div>
+
+        <div class="resultsBar">
+          Search Results
+        </div>
+        <div style="height: 20px;"></div>
 
         <div id="stresults_div">
         </div>

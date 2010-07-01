@@ -303,11 +303,10 @@ Added styles
 }
 
 #tollFree {
-    font: 16px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     color: #3fac00;
     float: right;
-    margin-top: -35px;
+    margin-top: -50px;
     margin-right: 25px;
     z-index: -10;
 }
@@ -330,33 +329,59 @@ Added styles
     font-size: 13px;
 }
 
+.blue {
+    color: #154A99;
+}
+
 #search {
-    border: 1px solid #d3d3d3;
-    border-spacing: 2px;
-    background: #fff url("../images/bkg_searchform.gif");
-    padding: 3px;
-    width: 250px;
-    height: 367px;
+    width: 280px;
+    height: 339px;
     float: left;
 }
 
+.inputBox {
+    font: 13px verdana, arial, helvetica, sans-serif;
+    width: 215px;
+    height: 20px;
+    color: #154A99;
+}
+
+input.inputBox:focus {
+    border: #154A99 solid 2px;
+}
+
+.inputSelect {
+    font: 13px verdana, arial, helvetica, sans-serif;
+    width: 200px;
+    line-height: 20px;
+    color: #154A99;
+}
+
 #gmap {
-    width: 718px;
+    background: #fff url("../images/map-frame-wide.png") no-repeat;
+    width: 650px;
+    height: 321px;
+    padding: 9px;
     float: left;
 }
 
 #map_canvas {
-    width: 710px;
-    height: 375px;
+    width: 650px;
+    height: 321px;
 }
 
-#stresults_div {
-    padding-right: 30px;
+div.resultsBar {
+    background: #fff url("../images/bar-search-results-wide-950.gif") no-repeat;
+    width: 920px;
+    padding-left: 30px;
+    color: white;
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 30px;
 }
 
 #stresults_div table {
-    font-size: 10px;
-    width: 100%;
+    width: 950px;
 }
 
 #price_table, #price_totals {
@@ -400,7 +425,7 @@ Added styles
     color: white;
 }
 
-#stresults_div td, #stresults_div th, #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
+#price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0;
     display: table-cell;
@@ -410,6 +435,12 @@ Added styles
 }
 #checkout_price_table, #checkout_price_totals {
     color: #154b99;
+}
+
+#stresults_div td, #stresults_div th {
+    border: 0;
+    display: table-cell;
+    border-collapse: collapse;
 }
 
 #checkout_price_table th, #checkout_price_table td {
@@ -441,10 +472,9 @@ Added styles
 #instructions {
     font-family: verdana, arial, helvetica, sans-serif;
     font-weight: bolder;
-    color: #052d72;
-    font-size: 15px;
+    color: #154A99;
+    font-size: 14px;
     padding-left: 15px;
-    padding-top: 10px;
 }
 
 #sizeHelp {
@@ -524,20 +554,31 @@ div.helpBoxSeparator {
     padding: 0.25em 0.25em 0.25em 0.65em;
 }
 
+a.siteTitle:link, a.siteTitle:visited, a.siteTitle:hover {
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
+    color: green;
+    font-weight: bold;
+}
+
 .no_underline {
     text-decoration: none;
 }
 
 .addrwidth {
-    width: 30%;
+    width: 25%;
 }
 
 .distwidth {
-    width: 7%;
+    width: 9%;
 }
 
 .pricewidth {
-    width: 7%;
+    width: 9%;
 }
 
 .white {
@@ -736,22 +777,31 @@ div.helpBoxSeparator {
     text-align: right;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .specialOfferText {
     color: green;
 }
 
 .tooltip {
     width: auto;
-      padding: 3px 7px 4px 6px;
-      border: 1px solid #336;
-      background-color: #f7f7ee;
-      font: normal 0.9em/1.2em arial, helvetica, sans-serif;
-      text-align: left;
-      color: #000;
+    padding: 3px 7px 4px 6px;
+    border: 1px solid #336;
+    background-color: #f7f7ee;
+    font: normal 0.9em/1.2em arial, helvetica, sans-serif;
+    text-align: left;
+    color: #000;
 }
 
 #price_total {
     font: 13px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.distance {
+    font: 11px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
 }
 
@@ -877,6 +927,14 @@ div.rightArrowActive:hover {
 .expanding, .tableLine {
     border-top: #708090 dotted thin;
     padding: 1em 0;
+}
+
+.strow {
+    border-bottom: #708090 dotted thin;
+}
+
+.stVert {
+    padding: 1.5em 0;
 }
 
 .expanding a, .expanding a:visited {

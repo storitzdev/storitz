@@ -71,19 +71,8 @@ td, th {
 }*/
 
 thead tr, tfoot {
-	background-color: #2376bc;
     position: relative;
-}
-
-tr.rowodd {
-	background-color: #FFF;
-}
-
-tr.roweven {
-	background-color: #F1F8E9;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    color: #154A99;    
 }
 
 .sortcol {
@@ -93,12 +82,13 @@ tr.roweven {
 	background-position: right center;
 }
 .sortasc {
-	background-color: #35addc;
-	background-image: url("../images/arrow-up.gif");
+	background-image: url("../images/up.gif");
+    background-position: right;
+    text-decoration: underline;
 }
 .sortdesc {
-	background-color: #35addc;
-	background-image: url("../images/arrow-down.gif");
+	background-image: url("../images/down.gif");
+    text-decoration: underline;
 }
 .nosort {
 	cursor: default;
