@@ -170,15 +170,13 @@
                     var gateImg   = s.isGate ? '<img id="gate' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
 
+                    var truckImg = '<span style="width:20px; margin: 1px;"></span>';
                     switch(s.freeTruck) {
                       case "FREE":
-                        var truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+                        truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
                         break;
                       case "RENTAL":
-                        var truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
-                        break;
-                      default:
-                        var truckImg = '<span style="width:20px; margin: 1px;"></span>';
+                        truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
                         break;
                     }
 
@@ -321,6 +319,10 @@
 
         function setupForm() {
           $('address').activate();
+          $('gsearch').observe('submit', function(event) {
+             showAddress($F('address'), $F('size'), $F('date'));
+            Event.stop(event);
+          });
         }
 
         function checkMapSubmit() {
@@ -360,7 +362,7 @@
               </div>
               <div style="height: 10px;"></div>
               <div>
-                <input type="image" src="${resource(dir:'images', file:'btn-new-search.gif')}" class="noborder" onsubmit="showAddress($F('address'), $F('size'), $F('date'));return false;" alt="Search Storage"/>
+                <input type="image" src="${resource(dir:'images', file:'btn-new-search.gif')}" class="noborder" alt="Search Storage"/>
               </div>
               <div style="clear: both; height: 10px;"></div>
             </form>
