@@ -272,6 +272,8 @@
 
         function showAddress(address, size, date) {
 
+          updateSearchMsg();
+          
           var validAddr = address.length > 4 && !address.startsWith('Enter ');
 
           if (address) {
@@ -285,7 +287,7 @@
             geocoder.geocode( { 'address': address}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
+                new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
@@ -319,10 +321,12 @@
 
         function setupForm() {
           $('address').activate();
-          $('gsearch').observe('submit', function(event) {
-             showAddress($F('address'), $F('size'), $F('date'));
-            Event.stop(event);
+          $('gsearchBtn').observe('click', function(event) {
+            showAddress($F('address'), $F('size'), $F('date'));
           });
+          $('size').observe('change', function() {
+            showAddress($F('address'), $F('size'), $F('date'));
+          });          
         }
 
         function checkMapSubmit() {
@@ -330,6 +334,43 @@
             showAddress($F('address'), $F('size'), $F('date'));
             mapLoaded = true;
           }
+        }
+
+        function updateSearchMsg() {
+          var msg;
+          var addrValid = !$F('address').startsWith('Enter ');
+          var sizeValid = $F('size') != 1;
+          var dateValid = !$F('date').startsWith('Click');
+          var startDate = dateValid ? Date.parseDate($F('date'), "%m-%d-%Y") : '';
+
+          if (addrValid && sizeValid && dateValid) {
+            msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
+                    '</span><span class="blue"> unit near </span><span class="green"> ' + $F('address') +
+                    '</span><span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
+                    '</span>';
+          } else if (sizeValid) {
+            msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
+                    '</span>';
+            if (addrValid) {
+              msg += '<span class="blue"> unit near </span><span class="green"> ' + $F('address') +
+                    '</span><span class="blue">. Please pick starting date.</span>';
+            } else {
+              msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
+                    '</span><span class="blue">. Please pick address or zip.</span>';
+            }
+          } else if (addrValid) {
+            msg = '<span class="blue">Searching near </span><span class="green">' + $F('address') +
+                  '</span>';
+            if (dateValid) {
+              msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
+                    '</span><span class="blue">. Please pick unit size.</span>';
+            } else {
+              msg += '<span class="blue">. Please pick unit size and starting date.</span>';
+            }
+          } else {
+            msg = '<span class="blue">Please pick an adddress or zip, unit size and start date.</span>';
+          }
+          $('searchMsg').update(msg);
         }
 
         FastInit.addOnLoad(setupCalendar, setupHelp, setupForm);
@@ -362,14 +403,14 @@
               </div>
               <div style="height: 10px;"></div>
               <div>
-                <input type="image" src="${resource(dir:'images', file:'btn-new-search.gif')}" class="noborder" alt="Search Storage"/>
+                <img id="gsearchBtn" src="${resource(dir:'images', file:'btn-new-search.gif')}" class="noborder" alt="Search Storage"/>
               </div>
               <div style="clear: both; height: 10px;"></div>
             </form>
           </div>
           <div style="height: 5px;"></div>
-          <div class="section_header">Legend</div>
-          <div style="height: 10px;"></div>
+          <div class="section_header blue">Legend</div>
+          <div style="height: 15px;"></div>
           <div style="clear: both; padding-left: 1.5em;">
             <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'icn_map_grn.png')}" style="vertical-align: top;" alt="blue map icon"/></div> <div style="margin-left: 2em;">Storage site that meets your search criteria</div>
           </div>
@@ -382,7 +423,8 @@
         </div>
 
         <div style="height: 20px;clear: both;"></div>
-
+        <div id="searchMsg" class="section_header"></div>
+        <div style="height: 20px;clear: both;"></div>
         <div class="resultsBar">
           Search Results
         </div>

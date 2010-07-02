@@ -333,6 +333,10 @@ Added styles
     color: #154A99;
 }
 
+.green {
+    color: #3fac00;
+}
+
 #search {
     width: 280px;
     height: 339px;
@@ -692,7 +696,6 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 .section_header {
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
-    color: #154A99;
 }
 
 .icon_text {
@@ -771,6 +774,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     line-height: 20px;
     display: block;
     position: relative;
+    color: white;
 }
 
 .price_text {

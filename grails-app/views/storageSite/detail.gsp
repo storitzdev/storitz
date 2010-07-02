@@ -180,6 +180,14 @@
       })
     }
 
+    function dateChange() {
+      $('date').observe('change', function() {
+        startDate = $F('date');
+        showTotals();
+        Validation.validate('date');
+      });
+    }
+
     function directionTab() {
       $('direction_button').observe('click', function() {
         $('photo_button').removeClassName('tab_button_on');
@@ -491,10 +499,6 @@
       });
     }
 
-  function onDateChange() {
-    startDate = $F('date');
-    showTotals();
-  }
 
   function showImage(img, newElem) {
     $$('img.gallerySelected').each(function(elem) {
@@ -676,17 +680,17 @@
             <div>
               <div class="section_header">Available sizes:  (currently <span id="sizeDescription">undefined</span>)</div>
               <g:if test="${params.searchSize}">
-                <g:select id="unitsize" class="validate-selection" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
+                <g:select id="unitsize" class="validate-selection" style="width:150px;" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
               </g:if>
               <g:else>
-                <g:select id="unitsize" class="validate-selection" name="unitsize" from="${sizeList}" optionValue="description" value="1" optionKey="id" />
+                <g:select id="unitsize" class="validate-selection" style="width:150px;" name="unitsize" from="${sizeList}" optionValue="description" value="1" optionKey="id" />
               </g:else>
               <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
             </div>
             <div style="height: 18px;"></div>
             <div>
               <div class="section_header">Start Date:</div>
-              <input type="text" class="required validate-date-us" id="date" style="width: 105px;" value="${params.date}" onchange="onDateChange()"/>
+              <input type="text" class="required validate-date-us" id="date" style="width: 150px;" value="${params.date}"/>
             </div>
             <div style="padding: 18px 0 10px;" class="section_header">
               Site Features:

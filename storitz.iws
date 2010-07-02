@@ -19,7 +19,9 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="3a85bc51-0c73-4513-9a3e-af17dd580ecc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/home/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
     </list>
     <ignored path="storagetech.iws" />
     <ignored path="$USER_HOME_GRAILS$/" />
@@ -114,19 +116,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_logo_bar.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/_logo_bar.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="79" selection-start="584" selection-end="584" vertical-scroll-proportion="-11.56">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="572" column="13" selection-start="10292" selection-end="10292" vertical-scroll-proportion="-5.92">
+            <state line="338" column="0" selection-start="6076" selection-end="6076" vertical-scroll-proportion="-5.44">
               <folding />
             </state>
           </provider>
@@ -135,7 +128,16 @@
       <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="349" column="29" selection-start="17218" selection-end="17225" vertical-scroll-proportion="0.33236152">
+            <state line="367" column="43" selection-start="18684" selection-end="18684" vertical-scroll-proportion="1.1749271">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="301" column="73" selection-start="14810" selection-end="14836" vertical-scroll-proportion="40.105263">
               <folding />
             </state>
           </provider>
@@ -205,7 +207,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp" />
         <option value="$PROJECT_DIR$/src/templates/artifacts/DomainClass.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy" />
@@ -218,8 +219,9 @@
         <option value="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$PROJECT_DIR$/web-app/css/tablekit.css" />
-        <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/web-app/js/calendarview.js" />
+        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
       </list>
     </option>
@@ -1138,7 +1140,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Home page look and feel" />
+    <option name="LAST_COMMIT_MESSAGE" value="More look and feel and form submission" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1165,6 +1167,7 @@
     <MESSAGE value="Added missing libs&#10;" />
     <MESSAGE value="remove logs from SVN" />
     <MESSAGE value="Home page look and feel" />
+    <MESSAGE value="More look and feel and form submission" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1208,13 +1211,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/SiteLinkController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="68" selection-start="2215" selection-end="2216" vertical-scroll-proportion="0.9065934">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/StorageSiteController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="270" column="92" selection-start="10862" selection-end="10862" vertical-scroll-proportion="-9.807693">
@@ -1292,13 +1288,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="572" column="13" selection-start="10292" selection-end="10292" vertical-scroll-proportion="-5.92">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/STMapController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="6" selection-start="136" selection-end="136" vertical-scroll-proportion="12.423077">
@@ -1313,9 +1302,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="338" column="0" selection-start="6076" selection-end="6076" vertical-scroll-proportion="-5.44">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="301" column="73" selection-start="14810" selection-end="14836" vertical-scroll-proportion="40.105263">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="349" column="29" selection-start="17218" selection-end="17225" vertical-scroll-proportion="0.33236152">
+        <state line="367" column="43" selection-start="18684" selection-end="18684" vertical-scroll-proportion="1.1749271">
           <folding />
         </state>
       </provider>
