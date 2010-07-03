@@ -11,7 +11,7 @@ import com.storitz.SiteUser;
 
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact, insurances:Insurance ]
+    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact, insurances:Insurance, visits:Visit ]
     static fetchMode = []
 
     static constraints = {

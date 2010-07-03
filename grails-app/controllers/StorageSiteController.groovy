@@ -4,6 +4,7 @@ import com.storitz.StorageUnit
 import com.storitz.SiteUser
 import com.storitz.StorageSite
 import com.storitz.StorageSize
+import com.storitz.Visit
 
 class StorageSiteController {
 
@@ -267,6 +268,10 @@ class StorageSiteController {
     def sizeList = site.units.collect { it.unitsize }.unique()
     sizeList.add(StorageSize.get(1))
     sizeList.sort { it.width * it.length }
+
+//    println "Detail view for $site ${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
+
+    site.addToVisits(new Visit())
 
     [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"]
   }

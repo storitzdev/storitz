@@ -230,6 +230,18 @@
           </td>
 
         </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.visits.label" default="Visits"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <span>${storageSiteInstance.visits.size()} : </span>
+              <g:each in="${storageSiteInstance.visits}" var="v">
+                <span>${v.dateCreated}, </span>
+              </g:each>
+          </td>
+        </tr>
+
         </tbody>
       </table>
     </div>
