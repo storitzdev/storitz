@@ -368,7 +368,7 @@
               msg += '<span class="blue">. Please pick unit size and starting date.</span>';
             }
           } else {
-            msg = '<span class="blue">Please pick an adddress or zip, unit size and start date.</span>';
+            msg = '<span class="blue">Search Results near you. Please pick an adddress or zip, unit size and start date.</span>';
           }
           $('searchMsg').update(msg);
         }
@@ -378,6 +378,7 @@
       </script>
     </head>
     <body>
+    <div id="body">
       <g:render template="/topnav" />
       <div id="stcontent">
         <g:render template="/logo_bar" />
@@ -394,8 +395,13 @@
               </div>
               <div style="height: 10px;"></div>
               <div>
-                <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
-                <img id="sizeInfo" style="vertical-align: middle;" src="${resource(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
+                <div class="left">
+                  <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
+                </div>
+                <div class="left" style="padding: 4px 7px;">
+                  <img id="sizeInfo" src="${resource(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
+                </div>
+                <div style="clear: both;"></div>
               </div>
               <div style="height: 10px;"></div>
               <div>
@@ -433,7 +439,7 @@
         <div id="stresults_div">
         </div>
       </div>
-      <div style="height:30px;"></div>
+      <div style="height:100px;"></div>
       <g:render template="/footer" />
       <g:render template="/size_popup" />
       <div id="tooltip_keypad" style="display:none" class="tooltip">
@@ -452,5 +458,6 @@
       Free Move-In Truck Available
       </div>
       <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
+    </div>
     </body>
 </html>

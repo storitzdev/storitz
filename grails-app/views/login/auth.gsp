@@ -13,6 +13,7 @@
 
   </head>
   <body>
+    <div id="body">
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
@@ -25,11 +26,11 @@
               <form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
                   <p>
                       <label for='username'>Login ID</label>
-                      <input type='text' class='text_' name='j_username' id='username' />
+                      <input type='text' class='inputBox' name='j_username' id='username' />
                   </p>
                   <p>
                       <label for='password'>Password</label>
-                      <input type='password' class='text_' name='j_password' id='password' />
+                      <input type='password' class='inputBox' name='j_password' id='password' />
                   </p>
                   <p>
                       <label for='remember_me'>Remember me</label>
@@ -50,4 +51,6 @@
 })();
 // -->
 </script>
+</div>
 </body>
+</html>

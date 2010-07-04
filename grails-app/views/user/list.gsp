@@ -13,6 +13,7 @@
 
   </head>
   <body>
+    <div id="body">
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
@@ -86,5 +87,6 @@
             </div>
         </div>
       </div>
-    </body>
+    </div>
+  </body>
 </html>

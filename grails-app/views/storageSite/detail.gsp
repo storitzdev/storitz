@@ -46,7 +46,11 @@
 
     function setupSize() {
       if(typeof(sizeDescription) !== 'undefined')  {
-        $('sizeDescription').update(sizeDescription);
+        if (searchSize > 1) {
+          $('sizeDescription').update(storageSize[searchSize]);
+        } else {
+          $('sizeDescription').update(' not chosen');
+        }
       }
     }
 
@@ -175,7 +179,11 @@
     function sizeChange() {
       $('unitsize').observe('change', function() {
         searchSize = $F('unitsize');
-        $('sizeDescription').update(storageSize[searchSize]);
+        if (searchSize > 1) {
+          $('sizeDescription').update(storageSize[searchSize]);
+        } else {
+          $('sizeDescription').update(' not chosen');
+        }
         buildTable();
       })
     }
@@ -602,6 +610,7 @@
 
   </head>
   <body>
+    <div id="body">
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
@@ -1354,5 +1363,6 @@
     <g:render template="/footer" />
     <g:render template="/size_popup" />
     <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
+    </div>
   </body>
 </html>

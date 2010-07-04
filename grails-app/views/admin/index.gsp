@@ -12,6 +12,7 @@
 
   </head>
   <body>
+    <div id="body">
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
@@ -29,5 +30,6 @@
     </div>
     <div style="height:30px;"></div>
     <g:render template="/footer" />
+    </div>
   </body>
 </html>

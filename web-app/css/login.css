@@ -3,16 +3,18 @@
 	text-align:center;
 }
 #login .inner {
-	width:260px;
+	width:350px;
 	margin:0px auto;
 	text-align:left;
 	padding:10px;
 	border-top:1px dashed #499ede;
 	border-bottom:1px dashed #499ede;
 	background-color:#EEF;
+    color: #154A99;
 }
+
 #login .inner .fheader {
-	padding:4px;margin:3px 0px 3px 0;color:#2e3741;font-size:14px;font-weight:bold;
+	padding:4px;margin:3px 0px 3px 0;font-size:14px;font-weight:bold;
 }
 #login .inner .cssform p {
 	clear: left;
@@ -22,9 +24,6 @@
 	border-top: 1px dashed gray;
 	margin-bottom: 10px;
 	height: 1%;
-}
-#login .inner .cssform input[type='text'] {
-	width: 120px;
 }
 #login .inner .cssform label {
 	font-weight: bold;

@@ -13,6 +13,7 @@
 
   </head>
   <body>
+    <div id="body">
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
@@ -162,5 +163,6 @@
             </g:form>
         </div>
       </div>
+    </div>
     </body>
 </html>

@@ -6,6 +6,7 @@
         <webroots>
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -15,6 +16,13 @@
     <exclude-output />
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/src/groovy" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2">
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/spring-security-core-0.4">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/spring-security-core-0.4/src/java" isTestSource="false" />
@@ -38,10 +46,12 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" recursive="false" />
