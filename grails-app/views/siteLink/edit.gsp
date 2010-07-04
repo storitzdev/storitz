@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<div id="body">
 <g:render template="/topnav"/>
 <div id="stcontent">
   <g:render template="/logo_bar"/>
@@ -93,6 +94,7 @@
       </div>
     </g:form>
   </div>
+</div>
 </div>
 </body>
 </html>

@@ -661,23 +661,26 @@
           <div style="height: 10px;"></div>
           <div style="width: 280px;" class="siteInfoText">
             <g:if test="${site.description && site.description.size() > 90}">
-              ${site.description.substring(0, site.description.lastIndexOf(' ', 90))}
+              <div id="partialDescription" class="left">
+                ${site.description.decodeHTML().substring(0, site.description.decodeHTML().lastIndexOf(' ', 90))}
+              </div>
+              <div id="hiddenDescription" style="display: none;">
+                ${site.description.decodeHTML()}
+              </div>
+              <div style="clear: both;"></div>
               <div id="moreDescription" class="expanding">
                 <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('partialDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
                 </div>
               </div>
-              <span id="hiddenDescription" style="display: none;">
-                ${site.description.substring(site.description.lastIndexOf(' ', 90) + 1)}
-              </span>
               <div id="lessDescription" style="display: none;" class="expanding">
                 <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
+                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('partialDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
                 </div>
               </div>
             </g:if>
             <g:else>
-            ${site.description}
+            ${site.description.decodeHTML()}
             </g:else>
           </div>
           <div style="height: 18px;"></div>

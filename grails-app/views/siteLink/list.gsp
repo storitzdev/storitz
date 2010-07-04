@@ -13,6 +13,7 @@
 
 </head>
 <body>
+<div id="body">
 <g:render template="/topnav"/>
 <div id="stcontent">
   <g:render template="/logo_bar"/>
@@ -65,6 +66,7 @@
       <g:paginate total="${siteLinkInstanceTotal}"/>
     </div>
   </div>
+</div>
 </div>
 </body>
 </html>

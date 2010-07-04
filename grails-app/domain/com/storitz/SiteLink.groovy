@@ -14,4 +14,5 @@ class SiteLink {
   String corpCode
   String userName
   String password
+
 }

@@ -62,7 +62,13 @@
                 <label for="description"><g:message code="storageSite.description.label" default="Description"/></label>
               </td>
               <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'description', 'errors')}">
-                <g:textArea name="description" cols="40" rows="5" value="${storageSiteInstance?.description}"/>
+                <fckeditor:editor
+                  name="description"
+                  width="680"
+                  height="300"
+                  toolbar="Basic">
+                  ${storageSiteInstance?.description}
+                </fckeditor:editor>
               </td>
             </tr>
 

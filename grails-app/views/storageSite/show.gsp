@@ -60,7 +60,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.description.label" default="Description"/></td>
 
-          <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "description")}</td>
+          <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "description").decodeHTML()}</td>
 
         </tr>
 

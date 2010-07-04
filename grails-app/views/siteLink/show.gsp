@@ -13,6 +13,7 @@
 
 </head>
 <body>
+<div id="body">
 <g:render template="/topnav"/>
 <div id="stcontent">
   <g:render template="/logo_bar"/>
@@ -70,14 +71,12 @@
 
           <td valign="top" style="text-align: left;" class="value">
             <ul>
-              <g:each in="${siteLinkInstance.sites}" var="s">
-                <li><g:link controller="storageSite" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+              <g:each in="${siteLinkInstance.sites.sort{ it.title }}" var="s">
+                <li><g:link controller="storageSite" action="show" id="${s.id}">${s?.title}</g:link></li>
               </g:each>
             </ul>
           </td>
-
         </tr>
-
         </tbody>
       </table>
     </div>
@@ -89,6 +88,7 @@
       </g:form>
     </div>
   </div>
+</div>
 </div>
 </body>
 </html>
