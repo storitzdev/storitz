@@ -1,13 +1,6 @@
 package com.storitz
 
 import storitz.constants.TruckType
-import com.storitz.CenterShift
-import com.storitz.Insurance
-import com.storitz.SiteContact
-import com.storitz.SiteImage
-import com.storitz.SiteLink
-import com.storitz.StorageUnit
-import com.storitz.SiteUser;
 
 class StorageSite {
 
@@ -15,7 +8,7 @@ class StorageSite {
     static fetchMode = []
 
     static constraints = {
-      description(widget:'textarea', nullable:true, length:2..1000)
+      description(widget:'textarea', nullable:true, size:2..2000)
       logo(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)
@@ -98,7 +91,7 @@ class StorageSite {
   def coverImage() {
     def imgs = images.findAll{ it.isCover }
 
-    if (imgs.size() > 0) return imgs.getAt(0)
+    if (imgs.size() > 0) return imgs[0]
     else return siteImages().getAt(0)
   }
 

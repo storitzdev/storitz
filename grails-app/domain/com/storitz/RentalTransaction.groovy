@@ -5,12 +5,12 @@ import storitz.constants.State
 import storitz.constants.Country
 import storitz.constants.RentalUse
 import storitz.constants.TransactionStatus
-import com.storitz.Contact
 
 class RentalTransaction {
 
   Contact contactPrimary
   Contact contactSecondary
+  Contact billingAddress
   IdType idType
   State idState
   Country idCountry
@@ -30,8 +30,11 @@ class RentalTransaction {
   Integer searchSize
   Date bookingDate
   Date moveInDate
+  ReferralCode referralCode
 
   static constraints = {
+    billingAddress(nullable:true)
+    referralCode(nullable:true)
   }
 
   static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize', 'reserveTruck',
