@@ -46,6 +46,10 @@ environments {
 
 }
 
+// This should be true at least during development.
+// Would have saved me time trying to figure out that my records weren't being saved and why. 
+grails.gorm.failOnError = true
+
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console

@@ -23,7 +23,7 @@ class StorageSiteController {
     def username = session["username"]
     def results
     def count
-
+    
     println "Found username = " + username
     if (username == "admin") {
       params.max = Math.min(params.max ? params.int('max') : 10, 100)
@@ -67,7 +67,10 @@ class StorageSiteController {
       redirect(action: "list")
     }
     else {
-      [storageSiteInstance: storageSiteInstance]
+      def visits = Visit.findAllBySite(storageSiteInstance)
+      println "${storageSiteInstance.id} ${visits.size()}"
+      
+      [storageSiteInstance: storageSiteInstance, visits:visits]
     }
   }
 
@@ -263,16 +266,25 @@ class StorageSiteController {
 
   def detail = {
 
-    def site = StorageSite.get(params.id)
-
-    def sizeList = site.units.collect { it.unitsize }.unique()
+    StorageSite site = StorageSite.get(params.id)
+    StorageSize unitSize = StorageSize.get(params.searchSize)
+    
+    Collection sizeList = site.units.collect { it.unitsize }.unique()
     sizeList.add(StorageSize.get(1))
     sizeList.sort { it.width * it.length }
 
-//    println "Detail view for $site ${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
+    def remoteAddr = request.remoteAddr
 
-    site.addToVisits(new Visit())
+    println "Detail visit by $remoteAddr for $site ${site.title} - ${site.zipcode} on search ${params.address} ${params.searchSize} ${params.date}"
 
+    // Don't try to store a non-date.
+    String searchDate = params.date
+    if (searchDate.startsWith('Click')) searchDate = null
+
+    Visit visit = new Visit(dateCreated:new Date(), site:site, remoteAddr:remoteAddr, unitSize:unitSize, searchAddress:params.address, searchDate:searchDate)
+    
+    if (!visit.save()) println "Visit log save failed!"
+    
     [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"]
   }
 
