@@ -6,7 +6,9 @@
 
 4) Install the following plugins:
 
-grails install-plugin acegi
+grails install-plugin spring-security-core
 grails install-plugin http://www.arquetipos.co.cr/blog/files/grails-image-tools-1.0.4.zip
 grails install-plugin rest
 grails install-plugin ws-client
+grails install-plugin fckeditor
+grails install-plugin sanitizer
