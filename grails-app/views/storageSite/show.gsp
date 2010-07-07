@@ -19,6 +19,7 @@
   <div class="nav">
     <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
     <span class="menuButton"><g:link class="list" action="list">List Storage Sites</g:link></span>
+    %{--<span class="menuButton"><g:link class="report" action="report" id="${storageSiteInstance.id}">Storage Site Report</g:link></span>--}%
     <sec:ifAnyGranted roles="ROLE_ADMIN">
       <span class="menuButton"><g:link class="create" action="create">Create New Storage Site</g:link></span>
     </sec:ifAnyGranted>
@@ -233,13 +234,10 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSite.visits.label" default="Visits"/></td>
+          <td valign="top" class="name"><g:message code="storageSite.visits.label" default="Visit Count"/></td>
 
           <td valign="top" style="text-align: left;" class="value">
-            %{--<span>${storageSiteInstance.visits.size()} : </span>--}%
-              <g:each in="${visits}" var="v">
-                <span>${v.dateCreated}, </span>
-              </g:each>
+            <span>${visitCount}</span>
           </td>
         </tr>
 
@@ -251,8 +249,9 @@
         <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
         <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
         <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        <span class="button"><g:actionSubmit class="add" action="refresh" value="${message(code: 'default.buttom.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
-        <span class="button"><g:actionSubmit class="add" action="units" value="${message(code: 'default.buttom.refresh.label', default: 'Reload Available Units')}" /></span>
+        <span class="button"><g:actionSubmit class="add" action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
+        <span class="button"><g:actionSubmit class="add" action="units" value="${message(code: 'default.button.refresh.label', default: 'Reload Available Units')}" /></span>
+        <span class="button"><g:actionSubmit class="table" action="report" value="${message(code: 'default.button.report.label', default: 'Activity Report')}" /></span>
       </g:form>
     </div>
   </div>

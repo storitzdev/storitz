@@ -67,10 +67,26 @@ class StorageSiteController {
       redirect(action: "list")
     }
     else {
+      def visitCount = Visit.countBySite(storageSiteInstance)
+      println "${storageSiteInstance.id} $visitCount"
+      
+      [storageSiteInstance: storageSiteInstance, visitCount:visitCount]
+    }
+  }
+
+  def report = {
+    println "Report params:" + params.inspect()
+    def storageSiteInstance = StorageSite.get(params.id)
+    if (!storageSiteInstance) {
+      println "Failed to get site in report"
+      flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
+      redirect(action: "list")
+    }
+    else {
       def visits = Visit.findAllBySite(storageSiteInstance)
       println "${storageSiteInstance.id} ${visits.size()}"
-      
-      [storageSiteInstance: storageSiteInstance, visits:visits]
+
+      [storageSiteInstance: storageSiteInstance, visits: visits]
     }
   }
 
