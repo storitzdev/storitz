@@ -12,6 +12,7 @@ class StorageSiteController {
   def siteLinkService
   def geocodeService
   def fileUploadService
+  def markupSanitizerService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -48,7 +49,9 @@ class StorageSiteController {
 
   def save = {
     def storageSiteInstance = new StorageSite(params)
-
+    if (storageSiteInstance.description) {
+      storageSiteInstance.description = storageSiteInstance.description.encodeAsSanitizedMarkup()
+    }
     // TODO handle logo
 
     if (storageSiteInstance.save(flush: true)) {
@@ -101,8 +104,6 @@ class StorageSiteController {
   }
 
   def update = {
-    println "Update params:" + params.inspect()
-    
     def storageSiteInstance = StorageSite.get(params.id)
     if (storageSiteInstance) {
       if (params.version) {
@@ -114,6 +115,8 @@ class StorageSiteController {
           return
         }
       }
+      // sanitize description
+      //storageSiteInstance.description = storageSiteInstance.description.encodeAsSanitizedMarkup()
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def fileLocation = 'logo_' + params.id + '.jpg'

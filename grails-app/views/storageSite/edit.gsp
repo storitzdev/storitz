@@ -18,6 +18,8 @@
   </script>
   <g:javascript src="jquery.MetaDeta.js"/>
   <g:javascript src="jquery.MultiFile.js"/>
+  <g:javascript src="anytimec.js"/>
+  <link href="${createLinkTo(dir:'css', file:'anytimec.css')}" media="screen" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -136,6 +138,11 @@
               <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'phone', 'errors')}">
                 <g:textField name="phone" value="${storageSiteInstance?.phone}"/>
               </td>
+            </tr>
+
+            <tr class="prop">
+              <td colspan="2" valign="top"><h3>Hours of Operation</h3></td>
+
             </tr>
 
             <tr class="prop">

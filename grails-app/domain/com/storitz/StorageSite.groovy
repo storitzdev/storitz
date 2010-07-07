@@ -8,7 +8,7 @@ class StorageSite {
     static fetchMode = []
 
     static constraints = {
-      description(widget:'textarea', nullable:true, size:2..2000)
+      description(widget:'textarea', nullable:true, size:2..2000, markup:true)
       logo(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)

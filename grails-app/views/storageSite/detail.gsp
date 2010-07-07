@@ -702,7 +702,7 @@
             <div style="height: 18px;"></div>
             <div>
               <div class="section_header">Start Date:</div>
-              <input type="text" class="required validate-date-us" id="date" style="width: 150px;" value="${params.date}"/>
+              <label for="date"></label><input type="text" class="required validate-date-us" id="date" style="width: 150px;" value="${params.date}"/>
             </div>
             <div style="padding: 18px 0 10px;" class="section_header">
               Site Features:
@@ -830,7 +830,7 @@
             <div class="order_summary_bottom">
               <div class="left header_text_hi">Total Move-In Cost:</div>
               <div class="right header_text_hi_right" id="checkout_price_total"></div>
-              <div stlye="clear: both;"></div>
+              <div style="clear: both;"></div>
             </div>
             <div style="height: 10px;"></div>
             <div class="returnLink">
@@ -898,7 +898,7 @@
                   <label for="srcAddr">Start Address:</label> <input type="text" name="srcAddr" id="srcAddr"/>
                 </div>
                 <div>
-                  <input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
+                  <label for="get_directions"></label><input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
                 </div>
                 <div id="dirPanel"></div>
               </div>
@@ -1309,7 +1309,7 @@
                 </div>
                 <div class="checkout_fields" style="width:646px;">
                   <div id="insuranceChoices" class="validate-one-radio" >
-                    <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" id="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
+                    <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
                     <g:each in="${site.insurances.sort{it.premium}}" var="ins">
                       <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
                     </g:each>

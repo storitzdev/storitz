@@ -327,6 +327,9 @@
           $('size').observe('change', function() {
             showAddress($F('address'), $F('size'), $F('date'));
           });          
+          $('date').observe('change', function() {
+            showAddress($F('address'), $F('size'), $F('date'));
+          });
         }
 
         function checkMapSubmit() {
@@ -388,7 +391,7 @@
             Search for Storage
           </div>
           <div style="height: 5px;"></div>
-          <div style="margin-left: 15px;">
+          <div class="left15">
             <form id="gsearch" action="" method="post">
               <div>
                 <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code...'}"/>
@@ -415,12 +418,12 @@
             </form>
           </div>
           <div style="height: 5px;"></div>
-          <div class="section_header blue">Legend</div>
+          <div class="left15 section_header blue">Legend</div>
           <div style="height: 15px;"></div>
-          <div style="clear: both; padding-left: 1.5em;">
+          <div class="left15" style="clear: both;">
             <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'icn_map_grn.png')}" style="vertical-align: top;" alt="blue map icon"/></div> <div style="margin-left: 2em;">Storage site that meets your search criteria</div>
           </div>
-          <div style="clear: both; padding-left: 1.5em;">
+          <div class="left15" style="clear: both;">
             <div style="float: left; padding-right: 1em;"><img src="${resource(dir:'images', file:'gray-icon.png')}" style="vertical-align: top;" alt="green map icon"/></div> <div style="margin-left: 2em;">Storage site without your size or availability date</div>
           </div>
         </div>

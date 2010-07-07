@@ -4,7 +4,7 @@ import com.storitz.StorageSite
 
 class RentalTransactionController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save:"POST", update: "POST", delete: "POST"]
 
     def index = {
         redirect(action: "list", params: params)
@@ -31,7 +31,7 @@ class RentalTransactionController {
         rentalTransactionInstance.site = site
         if (rentalTransactionInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
-            redirect(action: "show", id: rentalTransactionInstance.id)
+            redirect(action: "payment", id: rentalTransactionInstance.id)
         }
         else {
             render(view: "create", model: [rentalTransactionInstance: rentalTransactionInstance])
@@ -46,6 +46,19 @@ class RentalTransactionController {
         }
         else {
             [rentalTransactionInstance: rentalTransactionInstance]
+        }
+    }
+
+    def payment = {
+        def rentalTransactionInstance = RentalTransaction.get(params.id)
+        if (!rentalTransactionInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
+            // TODO - handle error of not found transaction
+          [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
+        }
+        else {
+            // TODO - validate state to make sure we are not redoing a transaction
+            [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
         }
     }
 

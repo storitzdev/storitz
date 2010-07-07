@@ -19,7 +19,7 @@ class ChannelConfig {
         requestMap.put new RequestKey("/auth/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
         requestMap.put new RequestKey("/admin/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
         requestMap.put new RequestKey("/siteLink/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
-        requestMap.put new RequestKey("/rentalTransaction/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
+        requestMap.put new RequestKey("/rentalTransaction/payment/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
 
         // resources that must be served over http (basically everything else not already listed above)
         requestMap.put new RequestKey("/**"), [new SecurityConfig("REQUIRES_INSECURE_CHANNEL")] // all other pages should be served over http

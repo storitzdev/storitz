@@ -13,12 +13,12 @@
         (877) 456-2929
       </div>
     </div>
-    <div class="left" style="margin: 0 15px;">
+    <div class="left" style="margin: 0 15px;font-size:10px;">
       <div style="line-height: 16px;">
-        6:30am - 11pm C (M-F)
+        6:30am - 11pm CST (M-F)
       </div>
       <div style="line-height: 16px;">
-        8am - 8pm C (Sat-Sun)
+        8am - 8pm CST (Sat-Sun)
       </div>
     </div>
   </div>

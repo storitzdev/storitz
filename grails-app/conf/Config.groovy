@@ -80,3 +80,5 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.storitz.U
 grails.plugins.springsecurity.authority.className = 'com.storitz.Role'
 grails.plugins.springsecurity.requestMap.className = 'com.storitz.RequestMap'
 grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity.SecurityConfigType.Annotation
+
+grails.date.formats = ['dd-MM-yyyy', 'h:mm:a']
