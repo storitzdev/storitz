@@ -957,3 +957,9 @@ div.rightArrowActive:hover {
 .expanding a, .expanding a:visited {
     color: #3fac00;
 }
+
+.timeInput {
+    background-image: url("../images/clock.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+}

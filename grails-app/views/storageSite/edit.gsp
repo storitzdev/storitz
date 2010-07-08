@@ -12,7 +12,18 @@
 
     google.setOnLoadCallback(function() {
       jQuery.noConflict();
+
+      setupTimePickers();
     });
+
+    function setupTimePickers() {
+      AnyTime.picker("startWeekday", {format:"%h:%i%p"});
+      AnyTime.picker("endWeekday", {format:"%h:%i%p"});
+      AnyTime.picker("startSaturday", {format:"%h:%i%p"});
+      AnyTime.picker("endSaturday", {format:"%h:%i%p"});
+      AnyTime.picker("startSunday", {format:"%h:%i%p"});
+      AnyTime.picker("endSunday", {format:"%h:%i%p"});
+    }
 
     //]]>
   </script>
@@ -143,6 +154,33 @@
             <tr class="prop">
               <td colspan="2" valign="top"><h3>Hours of Operation</h3></td>
 
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="openWeekday"><g:message code="storageSite.openWeekday.label" default="Weekdays"/></label>
+              </td>
+              <td valign="top" class="name">
+                <g:checkBox name="openWeekday" value="${storageSiteInstance?.openWeekday}"/> Start <input type="text" class="timeInput" id="startWeekday" name="startWeekday" value="${storageSiteInstance?.startWeekday?.format("h:mma")}"/> End <input type="text" class="timeInput" id="endWeekday" name="endWeekday" value="${storageSiteInstance?.endWeekday?.format("h:mma")}"/>
+              </td>
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="openSaturday"><g:message code="storageSite.openSaturday.label" default="Saturdays"/></label>
+              </td>
+              <td valign="top" class="name">
+                <g:checkBox name="openSaturday" value="${storageSiteInstance?.openSaturday}"/> Start <input type="text" class="timeInput" id="startSaturday" name="startSaturday" value="${storageSiteInstance?.startSaturday?.format("h:mma")}"/> End <input type="text" class="timeInput" id="endSaturday" name="endSaturday" value="${storageSiteInstance?.endSaturday?.format("h:mma")}"/>
+              </td>
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="openSunday"><g:message code="storageSite.openSunday.label" default="Sundays"/></label>
+              </td>
+              <td valign="top" class="name">
+                <g:checkBox name="openSunday" value="${storageSiteInstance?.openSunday}"/> Start <input type="text" class="timeInput" id="startSunday" name="startSunday" value="${storageSiteInstance?.startSunday?.format("h:mma")}"/> End <input type="text" class="timeInput" id="endSunday" name="endSunday" value="${storageSiteInstance?.endSunday?.format("h:mma")}"/>  
+              </td>
             </tr>
 
             <tr class="prop">

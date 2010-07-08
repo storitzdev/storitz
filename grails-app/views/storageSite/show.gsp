@@ -141,6 +141,45 @@
         </tr>
 
         <tr class="prop">
+          <td colspan="2" valign="top"><h3>Hours of Operation</h3></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openWeekday.label" default="Weekdays"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openWeekday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openWeekday}">
+              Start: <g:formatDate date="${storageSiteInstance.startWeekday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endWeekday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openSaturday.label" default="Saturday"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openSaturday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openSaturday}">
+              Start: <g:formatDate date="${storageSiteInstance.startSaturday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endSaturday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openSunday.label" default="Sunday"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openSunday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openSunday}">
+              Start: <g:formatDate date="${storageSiteInstance.startSunday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endSunday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
+
+
+        <tr class="prop">
           <td colspan="2" valign="top"><h3>Fees</h3></td>
 
         </tr>
