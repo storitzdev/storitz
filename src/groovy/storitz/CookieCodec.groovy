@@ -14,7 +14,8 @@ class CookieCodec
     m.each { k, v ->
       sb.append(k)
       sb.append('<')
-      byte[] bytes = (v as String).getBytes('UTF-8')
+      // A null will be treated as an empty string.
+      byte[] bytes = ((v ?: '') as String).getBytes('UTF-8')
       String s = new String(UrlBase64.encode(bytes), 'ASCII')
       sb.append(s)
       sb.append('>')
