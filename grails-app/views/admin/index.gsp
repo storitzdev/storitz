@@ -17,15 +17,19 @@
     <div id="stcontent">
       <g:render template="/logo_bar" />
       <H1>Admin Links</H1>
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
       <ul>
         <li><g:link controller="storageSite" action="list">Manage Sites</g:link> </li>
-        <li><g:link controller="user" action="editPassword">Change Password</g:link> </li>
+        <li><g:link controller="user" action="password">Change Password</g:link> </li>
         <sec:ifAnyGranted roles="ROLE_ADMIN">
         <li><g:link controller="storageSize" action="list">Storage Unit Size list</g:link> </li>
         <li><g:link controller="specialOffer" action="list">Manage Special Offers</g:link> </li>
         <li><g:link controller="user" action="list">Show Users</g:link> </li>
         <li><g:link controller="siteLink" action="list">Manage SiteLink</g:link> </li>
         </sec:ifAnyGranted>
+        <li><g:link controller="logout">Log out</g:link></li>
       </ul>
     </div>
     <div style="height:30px;"></div>

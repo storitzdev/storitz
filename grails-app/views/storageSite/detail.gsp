@@ -702,7 +702,7 @@
             <div style="height: 18px;"></div>
             <div>
               <div class="section_header">Start Date:</div>
-              <label for="date"></label><input type="text" class="required validate-date-us" id="date" style="width: 150px;" value="${params.date}"/>
+              <label for="date"></label><input type="text" class="required validate-date-us dateInput" id="date" style="width: 150px;" value="${params.date}"/>
             </div>
             <div style="padding: 18px 0 10px;" class="section_header">
               Site Features:

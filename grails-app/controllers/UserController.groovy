@@ -111,6 +111,42 @@ class UserController {
 		return buildPersonModel(person)
 	}
 
+    def password = {
+      render view: 'changePassword'    
+    }
+
+    def changePassword = {
+
+      
+      def person = User.findByUsername(springSecurityService.principal.username)
+      if (!person) {
+          flash.message = "User not found with id $params.id"
+          redirect action: changePassword
+          return
+      }
+
+      def encOldPassword = springSecurityService.encodePassword(params.oldPasswd)
+      if (!person.password.equals(encOldPassword)) {
+        flash.message = 'The old password incorrect.'
+        render view: 'changePassword'
+        return
+      }
+      if (!params.passwd.equals(params.repasswd)) {
+        flash.message = 'The passwords you entered do not match.'
+        render view: 'changePassword'
+        return          
+      }
+      person.password = springSecurityService.encodePassword(params.passwd)
+      person.save(flush:true)
+
+      if (springSecurityService.loggedIn &&
+               springSecurityService.principal.username == person.username) {
+         springSecurityService.reauthenticate person.username
+      }
+      flash.message = 'Your password was successfully changed.'
+      redirect (controller: 'admin', action: 'index')
+    }
+
 	/**
 	 * Person update action.
 	 */
@@ -131,9 +167,13 @@ class UserController {
 			return
 		}
 
-		def oldPassword = person.password
+		def oldPassword = person.passwd
 		person.properties = params
 		if (!params.passwd.equals(oldPassword)) {
+            if (!params.passwd.equals(params.repasswd)) {
+               flash.message = 'The passwords you entered do not match.'
+               render view: 'edit', model: buildPersonMdel(person)
+            }
 			person.password = springSecurityService.encodePassword(params.passwd)
 		}
 		if (person.save()) {

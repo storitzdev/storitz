@@ -408,7 +408,7 @@
               </div>
               <div style="height: 10px;"></div>
               <div>
-                <input type="text" id="date" class="inputBox" value="${params.date ? params.date : 'Click to pick move in date...'}"/>
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to pick move in date...'}"/>
               </div>
               <div style="height: 10px;"></div>
               <div>

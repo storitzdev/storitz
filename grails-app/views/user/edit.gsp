@@ -61,11 +61,20 @@
                                 <td valign="top" class="name">
                                     <label for="passwd">Password:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'passwd','errors')}">
-                                    <input type="text" id="passwd" name="passwd" value="${person?.passwd?.encodeAsHTML()}"/>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'password','errors')}">
+                                    <input type="password" id="passwd" name="passwd" value="${person?.password?.encodeAsHTML()}"/>
                                 </td>
                             </tr> 
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="repasswd">Reenter Password:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:person,field:'password','errors')}">
+                                    <input type="password" id="repasswd" name="repasswd" value="${person?.password?.encodeAsHTML()}"/>
+                                </td>
+                            </tr>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label>Manager:</label>
