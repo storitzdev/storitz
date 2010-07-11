@@ -45,6 +45,11 @@ class UserRole implements Serializable {
 		executeUpdate 'DELETE FROM UserRole WHERE role=:role', [role: role]
 	}
 
+    static getUsersByRoleName(rolename) {
+      Role role = Role.findByAuthority(rolename)
+      return UserRole.findAllByRole(role).collect{ it.user }
+    }
+
 	static mapping = {
 		id composite: ['role', 'user']
 		version false

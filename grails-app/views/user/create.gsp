@@ -12,13 +12,6 @@
     google.load("prototype", "1.6.1.0");
     google.load("scriptaculous", "1.8.3");
 //]]>
-    function setupAutocomplete() {
-      new Ajax.Autocompleter("manager",
-                             "manager_choices",
-                             "${createLink(controller:'user', action:'managers')}",
-                             {}
-                            );
-    }
 
     FastInit.addOnLoad(setupAutocomplete);
   </script>
@@ -68,11 +61,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="manager">Manager:</label>
+                                    <label for="manager.id">Manager:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:person,field:'manager','errors')}">
-                                  <input type="text" id="manager" name="manager_autocomplete"/>
-                                  <div id="manager_choices" class="autocomplete" ></div>
+                                  <g:select name="manager.id" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.username}" noSelection="['null': '']"/>
                                 </td>
                             </tr> 
                         
@@ -133,7 +125,7 @@
                             <tr class='prop'>
                                 <td valign='top' class='name'><label for='passwd'>Password:</label></td>
                                 <td valign='top' class='value ${hasErrors(bean:person,field:'password','errors')}'>
-                                    <input type="password" name='passwd' value="${person?.password?.encodeAsHTML()}"/>
+                                    <input type="password" id="passwd" name='passwd' value="${person?.password?.encodeAsHTML()}"/>
                                 </td>
                             </tr>
 

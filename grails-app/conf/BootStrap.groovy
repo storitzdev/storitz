@@ -17,8 +17,9 @@ class BootStrap {
        if (!roleAdmin) {
         roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
        }
-       if (!Role.findByAuthority('ROLE_MANAGER')) {
-        new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
+       def roleManager = Role.findByAuthority('ROLE_MANAGER')
+       if (!roleManager) {
+        roleManager = new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
        }
        if (!Role.findByAuthority('ROLE_CALLCENTER')) {
          new Role( authority: 'ROLE_CALLCENTER', description: 'Call Center').save(flush: true)
@@ -28,6 +29,7 @@ class BootStrap {
          def admin = new User( username:'admin', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
          admin.save(flush: true)
          UserRole.create(admin, roleUser, true)
+         UserRole.create(admin, roleManager, true)
          UserRole.create(admin, roleAdmin, true)
        }
        
