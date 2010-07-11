@@ -8,16 +8,29 @@ class BootStrap {
      def springSecurityService
 
      def init = { servletContext ->
+
+       def roleUser = Role.findByAuthority('ROLE_USER')
+       if (!roleUser) {
+         roleUser = new Role( authority: 'ROLE_USER', description: 'Authenticated User').save(flush: true)
+       }
+       def roleAdmin = Role.findByAuthority('ROLE_ADMIN')
+       if (!roleAdmin) {
+        roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
+       }
+       if (!Role.findByAuthority('ROLE_MANAGER')) {
+        new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
+       }
+       if (!Role.findByAuthority('ROLE_CALLCENTER')) {
+         new Role( authority: 'ROLE_CALLCENTER', description: 'Call Center').save(flush: true)
+       }
+
+       if (!User.findByUsername('admin')) {
+         def admin = new User( username:'admin', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
+         admin.save(flush: true)
+         UserRole.create(admin, roleUser, true)
+         UserRole.create(admin, roleAdmin, true)
+       }
        
-       def roleUser = new Role( authority: 'ROLE_USER', description: 'Authenticated User').save(flush: true)
-       def roleAdmin = new Role( authority: 'ROLE_ADMIN', description: 'Admin user').save(flush: true)
-       new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
-
-       def admin = new User( username:'admin', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
-       admin.save(flush: true)
-       UserRole.create(admin, roleUser, true)
-       UserRole.create(admin, roleAdmin, true)
-
        if (StorageSize.list().size() == 0) {
          new StorageSize( description:'Choose a storage size...', width: 0, length: 0).save();
          new StorageSize( description:'5 x 5', width: 5, length: 5).save();

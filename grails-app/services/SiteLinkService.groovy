@@ -215,24 +215,32 @@ class SiteLinkService {
         site.contacts.each {contact ->
           contact.delete()
         }
+        site.contacts.clear()
         site.units.each {unit ->
           unit.delete()
         }
+        site.units.clear()
         site.insurances.each {ins ->
           ins.delete()
         }
+        site.insurances.clear()
+        site.save(flush:true)
       } else {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
         newSite = true
       }
-      getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite)
+      if (tab.sSitePostalCode.text().isNumber()) {
+        getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite)
+      }
     }
   }
 
   def getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
+
+    print "Found address: ${address}"
     def geoResult = geocodeService.geocode(address)
 
     site.lng = geoResult.Placemark[0].Point.coordinates[0]

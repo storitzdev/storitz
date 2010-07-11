@@ -27,14 +27,14 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${userInstance}">
+            <g:hasErrors bean="${person}">
             <div class="errors">
-                <g:renderErrors bean="${userInstance}" as="list" />
+                <g:renderErrors bean="${person}" as="list" />
             </div>
             </g:hasErrors>
             <g:form method="post" >
-                <input type="hidden" name="id" value="${userInstance?.id}" />
-                <input type="hidden" name="version" value="${userInstance?.version}" />
+                <input type="hidden" name="id" value="${person?.id}" />
+                <input type="hidden" name="version" value="${person?.version}" />
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -80,7 +80,7 @@
                                     <label>Manager:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:person,field:'manager','errors')}">
-                                    <g:select from="${User.list()}" value="${person?.manager?.id}"
+                                    <g:select from="${com.storitz.User.list()}" value="${person?.manager?.id}"
                                               optionKey="id" optionValue="userRealName" name="manager.id"
                                               noSelection="['null':'No manager selected']"/>
                                 </td>
@@ -124,40 +124,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:person,field:'email','errors')}">
                                     <input type="text" id="email" name="email" value="${fieldValue(bean:person,field:'email')}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="emailShow">Email Show:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'emailShow','errors')}">
-                                    <g:checkBox name="emailShow" value="${person?.emailShow}" />
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label>Sites:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'sites','errors')}">
-                                    
-                                  <ul>
-                                    <g:each var="s" in="${person?.sites}">
-                                        <li><g:link controller="siteUser" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
-                                    </g:each>
-                                  </ul>
-                                  <g:link controller="siteUser" params="['user.id':person?.id]" action="create">Add SiteUser</g:link>
-
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="pass">Pass:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'pass','errors')}">
-                                    <input type="text" name="pass" id="pass" value="${fieldValue(bean:person,field:'pass')}" />
                                 </td>
                             </tr> 
                         

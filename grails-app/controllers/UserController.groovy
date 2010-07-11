@@ -167,12 +167,12 @@ class UserController {
 			return
 		}
 
-		def oldPassword = person.passwd
+		def oldPassword = person.password
 		person.properties = params
 		if (!params.passwd.equals(oldPassword)) {
             if (!params.passwd.equals(params.repasswd)) {
                flash.message = 'The passwords you entered do not match.'
-               render view: 'edit', model: buildPersonMdel(person)
+               render view: 'edit', model: buildPersonModel(person)
             }
 			person.password = springSecurityService.encodePassword(params.passwd)
 		}

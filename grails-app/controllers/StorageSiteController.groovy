@@ -25,20 +25,31 @@ class StorageSiteController {
     def results
     def count
     
-    println "Found username = " + username
     if (username == "admin") {
-      params.max = Math.min(params.max ? params.int('max') : 10, 100)
-      results = StorageSite.listOrderByTitle(params)
-      count = StorageSite.count()
+      if (params.sitename) {
+        def q = "%${params.sitename}%"
+        def max = Math.min(params.max ? params.int('max') : 10, 100)
+        def offset = params.offset ? params.int('offset') : 0
+        count = StorageSite.countByTitleLike(q)
+        results = StorageSite.findAllByTitleLike(q, [max:max, sort:"title", offset:offset])
+      } else {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        results = StorageSite.listOrderByTitle(params)
+        count = StorageSite.count()
+      }
     } else {
       def user = session["user"]
       def max = Math.min(params.max ? params.int('max') : 10, 100)
       def offset = params.offset ? params.int('offset') : 0
-      results = SiteUser.findAllByUser(user).collect{ it.site }.sort{ it.title }
+      if (params.sitename) {
+        results = SiteUser.findAllByUser(user).collect{ it.site }.findAll{ it.title =~ /${params.sitename}/ }.sort{ it.title }
+      } else {
+        results = SiteUser.findAllByUser(user).collect{ it.site }.sort{ it.title }
+      }
       count = results.size()
       results = results.subList(offset, offset + max < count ? offset + max : count)
     }
-    [storageSiteInstanceList: results, storageSiteInstanceTotal: count]
+    return [storageSiteInstanceList: results, storageSiteInstanceTotal: count]
   }
 
   def create = {
