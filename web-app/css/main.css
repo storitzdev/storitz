@@ -740,7 +740,8 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     line-height: 14px;
     font-size: 10px;
     font-weight: normal;
-    padding-bottom: 1em;    
+    padding-bottom: 1em;
+    width: 666px;
 }
 
 .other_details {

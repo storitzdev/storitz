@@ -23,6 +23,7 @@
         var searchAddr;
         var searchSize;
         var searchSizeDesc;
+        var searchSizeDesc;
         var searchDate;
         var helpFadeout = null;
         var oldBounds;
@@ -332,6 +333,10 @@
           });
         }
 
+        function dateChange() {
+          showAddress($F('address'), $F('size'), $F('date'));
+        }
+
         function checkMapSubmit() {
           if (!mapLoaded && $F('address') != '') {
             showAddress($F('address'), $F('size'), $F('date'));
@@ -408,7 +413,7 @@
               </div>
               <div style="height: 10px;"></div>
               <div>
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to pick move in date...'}"/>
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to pick move in date...'}" onchange="dateChange()"/>
               </div>
               <div style="height: 10px;"></div>
               <div>

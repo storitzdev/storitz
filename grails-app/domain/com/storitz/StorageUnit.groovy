@@ -22,4 +22,21 @@ class StorageUnit {
     StorageSize unitsize    // used for searching
     String displaySize
     Boolean isAvailable
+
+    public String getUnitType() {
+      if (isUpper) return "Upper"
+      if (isDriveup) return "Drive up"
+      if (isInterior) return "Interior"
+      return "Unknown"
+    }
+
+    public void setUnitType(newType) {
+      if (newType == "Upper") {
+        isUpper = true
+      } else if (newType == "Interior") {
+        isInterior = true
+      } else if (newType == "Driveup" || newType == "Drive up") {
+        isDriveup = true
+      }
+    }
 }

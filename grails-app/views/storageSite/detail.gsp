@@ -189,11 +189,9 @@
     }
 
     function dateChange() {
-      $('date').observe('change', function() {
-        startDate = $F('date');
-        showTotals();
-        Validation.validate('date');
-      });
+      startDate = $F('date');
+      showTotals();
+      Validation.validate('date');
     }
 
     function directionTab() {
@@ -615,79 +613,8 @@
     <div id="stcontent">
       <g:render template="/logo_bar" />
         <div id="site_info" class="left" style="margin-top: 26px;">
-          <div class="left" style="margin-bottom: 10px;">
-            <div id="site_logo">
-              <g:if test="${site?.logo}">
-                <img src="${resource(file:site.logo.src())}" alt="${site.title} Logo"/>
-              </g:if>
-            </div>
-            <div id="site_address">
-              <div class="title">
-                ${site.title}
-              </div>
-              <div>
-                ${site.address}
-              </div>
-              <div>
-                ${site.address2}
-              </div>
-              <div>
-                ${site.city}, ${site.state} ${site.zipcode}
-              </div>
-            </div>
-          </div>
-          <div style="clear:both;"></div>
-          <div class="siteInfoText">
-            Weekdays:
-            <g:if test="${site.openWeekday}">
-              <g:formatDate format="h:mma" date="${site.startWeekday}"/> - <g:formatDate format="h:mma" date="${site.endWeekday}"/>
-            </g:if>
-            <g:else>Closed</g:else>
-          </div>
-          <div class="siteInfoText">
-            Saturday:
-            <g:if test="${site.openSaturday}">
-              <g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/>
-            </g:if>
-            <g:else>Closed</g:else>
-          </div>
-          <div class="siteInfoText">
-            Sunday:
-            <g:if test="${site.openSunday}">
-              <g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/>
-            </g:if>
-            <g:else>Closed</g:else>
-          </div>
-          <div style="height: 10px;"></div>
-          <div style="width: 280px;" class="siteInfoText">
-            <g:if test="${site.description && site.description.size() > 90}">
-              <div id="partialDescription" class="left">
-                ${site.description.decodeHTML().substring(0, site.description.decodeHTML().lastIndexOf(' ', 90))}
-              </div>
-              <div id="hiddenDescription" style="display: none;">
-                ${site.description.decodeHTML()}
-              </div>
-              <div style="clear: both;"></div>
-              <div id="moreDescription" class="expanding">
-                <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('partialDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
-                </div>
-              </div>
-              <div id="lessDescription" style="display: none;" class="expanding">
-                <div class="right">
-                  <a href="#" style="text-decoration: none;" onclick="Effect.toggle('partialDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
-                </div>
-              </div>
-            </g:if>
-            <g:else>
-            ${site.description.decodeHTML()}
-            </g:else>
-          </div>
-          <div style="height: 18px;"></div>
+          <g:render template="/siteInfo" />
 
-          <!--
-            get the default image for the site here
-          -->
           <div id="left_info">
             <div>
               <div class="section_header">Available sizes:  (currently <span id="sizeDescription">undefined</span>)</div>
@@ -702,7 +629,7 @@
             <div style="height: 18px;"></div>
             <div>
               <div class="section_header">Start Date:</div>
-              <label for="date"></label><input type="text" class="required validate-date-us dateInput" id="date" style="width: 150px;" value="${params.date}"/>
+              <label for="date"></label><input type="text" class="required validate-date-us dateInput" id="date" style="width: 150px;" value="${params.date}" onchange="dateChange()"/>
             </div>
             <div style="padding: 18px 0 10px;" class="section_header">
               Site Features:
@@ -782,69 +709,7 @@
               </div>
             </div>
           </div>
-          <div id="left_checkout_info" style="display: none;">
-            <div style="height: 15px;"></div>
-            <div class="order_summary_top header_text_hi">Order Summary</div>
-            <table id="checkout_price_table" style="width: 300px; border-left: #154A99 1px solid; border-right: #154A99 1px solid;">
-              <tr style="height: 15px;">
-                <td class="section_header" colspan="4">&nbsp;
-                </td>
-              </tr>
-              <tr>
-                <td class="section_header" colspan="4">
-                  Unit size: <span id="checkout_unit_size"></span>
-                </td>
-              </tr>
-              <tr>
-                <td class="section_header" colspan="4">
-                  Move in date: <span id="checkout_movein_date"></span>
-                </td>
-              </tr>
-              <tr>
-                <td class="section_header" colspan="4">
-                  Paid through date: <span id="checkout_paid_through_date"></span>
-                </td>
-              </tr>
-              <tr style="height: 15px;">
-                <td class="section_header" colspan="4">&nbsp;
-                </td>
-              </tr>
-
-              <tr style="background: #F1F8E9;">
-                <th class="width: 120px;">Options</th>
-                <th class="width: 60px;">Months</th>
-                <th class="width: 60px;">Rent</th>
-                <th class="width: 60px;">Total Rent</th>
-              </tr>
-              <tr style="height: 10px;">
-                <td class="section_header" colspan="4">&nbsp;
-                </td>
-              </tr>
-              <tbody id="checkout_price_body">
-              </tbody>
-            </table>
-            <table id="checkout_price_totals" style="width: 300px;">
-              <tbody id="checkout_price_totals_body">
-              </tbody>
-            </table>
-            <div class="order_summary_bottom">
-              <div class="left header_text_hi">Total Move-In Cost:</div>
-              <div class="right header_text_hi_right" id="checkout_price_total"></div>
-              <div style="clear: both;"></div>
-            </div>
-            <div style="height: 10px;"></div>
-            <div class="returnLink">
-              <a href="#" onclick="details_return(); return false">&laquo; Back to details</a>&nbsp;|
-              <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
-                &laquo; Back to Seach Results
-              </g:link>
-            </div>
-            <div class="returnLink">
-              <g:link controller="home" action="index">
-                New Search &raquo;
-              </g:link>
-            </div>
-          </div>
+          <g:render template="/orderSummary"/>
         </div>
 
         <div style="width: 685px;" class="right">

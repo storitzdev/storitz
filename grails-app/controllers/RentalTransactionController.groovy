@@ -1,6 +1,8 @@
 import storitz.constants.TransactionStatus
 import com.storitz.RentalTransaction
 import com.storitz.StorageSite
+import com.storitz.SpecialOffer
+import com.storitz.StorageUnit
 
 class RentalTransactionController {
 
@@ -28,6 +30,7 @@ class RentalTransactionController {
         def rentalTransactionInstance = new RentalTransaction(params)
         rentalTransactionInstance.status = TransactionStatus.BEGUN
         rentalTransactionInstance.bookingDate = new Date()
+        rentalTransactionInstance.moveInDate = Date.parse('MM-dd-yyyy', params.moveInDate)
         rentalTransactionInstance.site = site
         if (rentalTransactionInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
@@ -57,8 +60,15 @@ class RentalTransactionController {
           [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
         }
         else {
-            // TODO - validate state to make sure we are not redoing a transaction
-            [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
+          def promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+          def unit = StorageUnit.get(rentalTransactionInstance.unitId)
+          def ins = null
+          if (!rentalTransactionInstance.insuranceId == -999) {
+            ins = Insurance.get(rentalTransactionInstance.insuranceId)
+          }
+          // TODO - validate state to make sure we are not redoing a transaction
+          println "Rental transaction - movein: ${rentalTransactionInstance.moveInDate} booking date: ${rentalTransactionInstance.bookingDate}"
+          [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
         }
     }
 
