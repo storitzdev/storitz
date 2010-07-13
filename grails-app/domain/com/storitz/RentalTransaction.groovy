@@ -8,6 +8,8 @@ import storitz.constants.TransactionStatus
 
 class RentalTransaction {
 
+  static hasMany = [notes: TransactionNote]
+  
   Contact contactPrimary
   Contact contactSecondary
   Contact billingAddress
@@ -31,6 +33,7 @@ class RentalTransaction {
   Date bookingDate
   Date moveInDate
   ReferralCode referralCode
+  Boolean isCallCenter
 
   static constraints = {
     billingAddress(nullable:true)

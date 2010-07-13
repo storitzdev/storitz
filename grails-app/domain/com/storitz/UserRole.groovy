@@ -50,6 +50,12 @@ class UserRole implements Serializable {
       return UserRole.findAllByRole(role).collect{ it.user }
     }
 
+    static boolean userHasRole(User user, String rolename) {
+      Role role = Role.findByAuthority(rolename)
+      if (!role) return false
+      return get(user.id, role.id) != null
+    }
+
 	static mapping = {
 		id composite: ['role', 'user']
 		version false

@@ -3,8 +3,12 @@ import com.storitz.RentalTransaction
 import com.storitz.StorageSite
 import com.storitz.SpecialOffer
 import com.storitz.StorageUnit
+import com.storitz.UserRole
+import com.storitz.User
 
 class RentalTransactionController {
+
+    def springSecurityService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST"]
 
@@ -32,13 +36,17 @@ class RentalTransactionController {
         rentalTransactionInstance.bookingDate = new Date()
         rentalTransactionInstance.moveInDate = Date.parse('MM-dd-yyyy', params.moveInDate)
         rentalTransactionInstance.site = site
+
+        def person = User.findByUsername(springSecurityService.principal.username)
+        rentalTransactionInstance.isCallCenter = (UserRole.userHasRole(person, 'ROLE_CALLCENTER'))
+      
         if (rentalTransactionInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
-            redirect(action: "payment", id: rentalTransactionInstance.id)
-        }
-        else {
-            render(view: "create", model: [rentalTransactionInstance: rentalTransactionInstance])
-        }
+              flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
+              redirect(action: "payment", id: rentalTransactionInstance.id)
+          }
+          else {
+              render(view: "create", model: [rentalTransactionInstance: rentalTransactionInstance])
+          }
     }
 
     def show = {
