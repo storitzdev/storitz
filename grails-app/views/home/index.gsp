@@ -27,7 +27,8 @@
         var searchDate;
         var helpFadeout = null;
         var oldBounds;
-        var baseURL = '${request.contextPath}/storageSite/detail/';
+        %{--var baseURL = '${request.contextPath}/storageSite/detail/';--}%
+        var baseURL = '${request.contextPath}/self-storage/';
         var mapSmoother = false;
         var mapLoaded = false;
         var savedFeature;
@@ -71,6 +72,13 @@
            }
         }
 
+        function siteLink(s)
+        {
+          var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
+
+          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id;
+        }
+
         function markerOver(feature) {
           var c = '<div style="width: 300px;"><h3>' + feature.title + '</h3>';
             if (feature.logoUrl) {
@@ -81,7 +89,7 @@
             if (feature.description) {
               c += feature.description;
             }
-            c += '<div style="text-align: center;"><a href="' + baseURL + feature.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
+            c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
           if (infoWindow) {
             infoWindow.close();
           }
@@ -207,10 +215,10 @@
                       markerOver(s);
                     });
                     tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + baseURL + s.id + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + baseURL + s.id + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + baseURL + s.id + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + baseURL + s.id + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
+                      '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + gateImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';

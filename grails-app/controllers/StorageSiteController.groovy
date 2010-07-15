@@ -309,7 +309,7 @@ class StorageSiteController {
 
     // Don't try to store a non-date.
     String searchDate = params.date
-    if (searchDate.startsWith('Click')) searchDate = null
+    if (searchDate?.startsWith('Click')) searchDate = null
 
     Visit visit = new Visit(dateCreated:new Date(), site:site, remoteAddr:remoteAddr, unitSize:unitSize, searchAddress:params.address, searchDate:searchDate)
     

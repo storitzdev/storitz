@@ -1,12 +1,22 @@
 class UrlMappings {
     static mappings = {
-//      "/self-storage/$city/$site_title/$id?" {
+//      name siteLink: "/self-storage/$city/$site_title/$id" {
 //         controller = "storagesite"
 //         action = "detail"
 //         constraints {
 //           site_title(validator: { true })
 //         }
 //      }
+
+     "/self-storage/$city/$site_title/$id" {
+         controller = "storageSite"
+         action = "detail"
+      }
+
+      "/xxx/$id" {
+          controller = "storageSite"
+          action = "detail"
+       }
 
       // Land on homepage searching for an address which may be "city, state" or "zip"
       "/find/self-storage/$city/$state?" {
