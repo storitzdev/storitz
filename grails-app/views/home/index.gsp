@@ -23,7 +23,6 @@
         var searchAddr;
         var searchSize;
         var searchSizeDesc;
-        var searchSizeDesc;
         var searchDate;
         var helpFadeout = null;
         var oldBounds;
@@ -323,14 +322,14 @@
             $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
             Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
           });
-          $('helpClose').observe('click', function(event) {
+          $('helpClose').observe('click', function() {
             Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
           });
         }
 
         function setupForm() {
           $('address').activate();
-          $('gsearchBtn').observe('click', function(event) {
+          $('gsearchBtn').observe('click', function() {
             showAddress($F('address'), $F('size'), $F('date'));
           });
           $('size').observe('change', function() {
