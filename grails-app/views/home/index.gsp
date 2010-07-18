@@ -25,12 +25,14 @@
         var searchSizeDesc;
         var searchDate;
         var helpFadeout = null;
-        var oldBounds;
         %{--var baseURL = '${request.contextPath}/storageSite/detail/';--}%
         var baseURL = '${request.contextPath}/self-storage/';
-        var mapSmoother = false;
+        var inDrag = false;
         var mapLoaded = false;
+        var pendingResize = false;
         var savedFeature;
+        var siteCount = 0;
+        var bounds = null;
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
@@ -55,20 +57,25 @@
 
         function redrawMap() {
 
-          if (!mapSmoother) {
-            mapSmoother = true;
-            var timeoutFunc =  function() {
-              var newBounds = map.getBounds();
-              if (oldBounds && newBounds.equals(oldBounds)) {
-                 getMarkers(false);
-              } else {
-                oldBounds = newBounds;
-                window.setTimeout(timeoutFunc, 250);
-              }
-              mapSmoother = false;
-            };
-            window.setTimeout( timeoutFunc, 250);
-           }
+          bounds = map.getBounds();
+          if (pendingResize) {
+            getMarkers(true);
+            return;
+          }
+
+          if (!inDrag) {
+             getMarkers(false);
+          }
+
+        }
+
+        function dragStart() {
+          inDrag = true;
+        }
+
+        function dragEnd() {
+          inDrag = false;
+          getMarkers(false);
         }
 
         function siteLink(s)
@@ -92,7 +99,7 @@
           if (infoWindow) {
             infoWindow.close();
           }
-          if (savedFeature) {
+          if (savedFeature && $('row'+savedFeature.id)) {
             $('row'+savedFeature.id).removeClassName('rowhighlight');
           }
           infoWindow = new google.maps.InfoWindow({content: c, maxWidth: 300});
@@ -121,9 +128,6 @@
 
         function getMarkers(resizeable) {
 
-          var bounds = map.getBounds();
-          if (!bounds) return;
-
           tooltips.each(function(t) {
             if (typeof t.value.destroy == 'function') {
               t.value.destroy();
@@ -131,20 +135,58 @@
             tooltips.unset(t.name);
           });
 
+          if (!bounds || typeof(bounds) == 'undefined') {
+            return;
+          }
+
+          if (resizeable) {
+
+            new Ajax.Request("${createLink(controller:'STMap', action:'countSites')}",
+            {
+              method:'get',
+              parameters: {searchSize: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
+              onSuccess:function(transport) {
+                siteCount = transport.responseJSON.siteCount;
+                if (siteCount < 2) {
+                  if (map.getZoom() > 1) {
+                    pendingResize = true;
+                    map.setZoom(map.getZoom() - 1);
+                  }
+                } else if (siteCount > 20) {
+                  if (map.getZoom() >= 16) {
+                    pendingResize = true;
+                    map.setZoom(map.getZoom + 1);
+                  }
+                } else {
+                  pendingResize = false;
+                  drawMarkers();
+                }
+              },
+              onFailure:function(transport) {
+                alert("Something went wrong " + transport.responseText);
+              }
+            });
+            if (map.getZoom() <= 1 || map.getZoom() >= 16) {
+              pendingResize = false;
+            }
+            if (siteCount == 0 || siteCount > 20) {
+              return;
+            }
+          }  else {
+
+            pendingResize = false;
+            if (siteCount > 0) {
+              drawMarkers();
+            }
+          }
+        }
+
+        function drawMarkers() {
           new Ajax.Request("${createLink(controller:'STMap', action:'jsonp')}",
           {
               method:'get',
               parameters: {searchSize: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
               onSuccess:function(transport) {
-                if (resizeable) {
-                  if (transport.responseJSON.features.length < 2) {
-                    map.setZoom(map.getZoom() - 1);
-                    getMarkers(resizeable);
-                  } else if (transport.responseJSON.features.length > 8) {
-                    map.setZoom(map.getZoom + 1);
-                    getMarkers(resizeable);
-                  }
-                }
                 var randId = Math.floor(Math.random() * 100001);
                 var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Drive Up</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Upper</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
@@ -268,11 +310,11 @@
               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
               searchLat = iploc.lat();
               searchLng = iploc.lng();
-              oldBounds = map.getBounds();
               TableKit.Sortable.init($('stresults'), {editable:false, stripe:true});
-              getMarkers(true);
               google.maps.event.addListener(map, 'bounds_changed', redrawMap);
               google.maps.event.addListener(map, 'tilesloaded', checkMapSubmit);
+              google.maps.event.addListener(map, 'dragstart', dragStart);
+              google.maps.event.addListener(map, 'dragend', dragEnd);
               geocoder = new google.maps.Geocoder();
             }
           });
@@ -369,9 +411,11 @@
             if (addrValid) {
               msg += '<span class="blue"> unit near </span><span class="green"> ' + $F('address') +
                     '</span><span class="blue">. Please pick starting date.</span>';
-            } else {
+            } else if (dateValid) {
               msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
                     '</span><span class="blue">. Please pick address or zip.</span>';
+            } else {
+              msg += '<span class="blue">Please pick address or zip and start date.</span>';
             }
           } else if (addrValid) {
             msg = '<span class="blue">Searching near </span><span class="green">' + $F('address') +

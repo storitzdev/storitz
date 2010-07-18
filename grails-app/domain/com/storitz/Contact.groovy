@@ -24,7 +24,7 @@ class Contact {
     String email
 
     static constraints = {
-      email(email:true)
+      email(email:true, nullable: true)
       zipcode(size:5..10)
       suffixName(nullable:true)
       unit(nullable:true)

@@ -199,6 +199,7 @@ class StorageSiteController {
         def offerString = "specialOffer_" + specialOffer.id
         def featuredOfferString = "featuredOffer_" + specialOffer.id
         def promoNameString = "promoName_" + specialOffer.id
+        def promoDescString = "promoDesc_" + specialOffer.id
 
         if (params.getAt(offerString)) {
           specialOffer.active = true;
@@ -214,6 +215,9 @@ class StorageSiteController {
 
         if (params.getAt(promoNameString)) {
           specialOffer.promoName = params.getAt(promoNameString)
+        }
+        if (params.getAt(promoDescString)) {
+          specialOffer.description = params.getAt(promoDescString)
         }
         specialOffer.save();
       }
@@ -334,6 +338,12 @@ class StorageSiteController {
     def upperResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isUpper }.min { it.price } as StorageUnit[]
     def tempcontrolledResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isTempControlled }.min { it.price } as StorageUnit[]
     render(status: 200, contentType: "application/json", text: "{ \"units\": { \"interior\": ${intResult as JSON}, \"driveup\": ${driveupResult as JSON}, \"upper\": ${upperResult as JSON}, \"tempcontrolled\": ${tempcontrolledResult as JSON} } }")
+  }
+
+  def refreshInventory = {
+      storitz.UpdateInventoryJob.triggerNow([from:'Admin']);
+      flash.message = "${message(code: 'default.refreshInventory.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
+      redirect(controller:"admin", action:"index")
   }
 
 }

@@ -31,6 +31,8 @@ class StorageSite {
       endSunday(nullable:true)
       siteLink(nullable:true)
       centerShift(nullable:true)
+      bankAccount(nullable:true)
+      rentalAgreement(nullable:true)
     }
   
     String title
@@ -79,6 +81,11 @@ class StorageSite {
     SiteLink siteLink
     CenterShift centerShift
     Long lastUpdate
+
+  // bank account
+    BankAccount bankAccount
+
+    RentalAgreement rentalAgreement
 
   def users() {
       return users.collect{it.user}

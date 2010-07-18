@@ -296,8 +296,9 @@
               </td>
               <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'specialOffers', 'errors')}">
                 <ul>
+                    <li>active featured promotion description</li>
                   <g:each in="${storageSiteInstance?.specialOffers}" var="o">
-                    <li>active <g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> featured <g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/> <g:textField name="promoName_${o.id}" value="${o.promoName}"/></li>
+                    <li>active <g:checkBox name="specialOffer_${o.id}" value="${o.active}"/> featured <g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/> <g:textField name="promoName_${o.id}" value="${o.promoName}"/> <g:textField name="promoDesc_${o.id}" value="${o.description}"/></li>
                   </g:each>
                 </ul>
               </td>

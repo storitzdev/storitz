@@ -19,6 +19,7 @@ class StorageUnit {
     Boolean isPowered
     Date startAvail
     BigDecimal price
+    BigDecimal pushRate
     StorageSize unitsize    // used for searching
     String displaySize
     Boolean isAvailable

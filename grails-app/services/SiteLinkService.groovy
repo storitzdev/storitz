@@ -359,7 +359,8 @@ class SiteLinkService {
       def siteUnit = new StorageUnit()
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
-      siteUnit.price = unit.dcStdRate.text() as BigDecimal
+      // TODO - make the pushRate pull separately when available
+      siteUnit.price = siteUnit.pushRate = unit.dcStdRate.text() as BigDecimal
       def floor = unit.iFloor.text() as Integer
       def typeName = unit.sTypeName.text()
       siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)

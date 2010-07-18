@@ -1187,6 +1187,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
+                <div style="height: 10px;"></div>
                 <div class="checkout_section_header">
                   Active Military
                 </div>
@@ -1199,6 +1200,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
+                <div style="height: 10px;"></div>
                 <div class="checkout_section_header">
                   Hazardous Materials
                 </div>
@@ -1208,6 +1210,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
+                <div style="height: 10px;"></div>
                 <div class="checkout_section_header">
                   Terms
                 </div>
