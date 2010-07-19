@@ -815,8 +815,8 @@
                 <span id="step1_bullet" class="bullet">&#8226</span><span id="step1" class="step_header_hi">Primary Contact</span>
                 <span id="step2_bullet" class="bullet" style="display: none;">&#8226</span><span id="step2" class="step_header">Secondary Contact</span>
                 <span id="step3_bullet" class="bullet" style="display: none;">&#8226</span><span id="step3" class="step_header">Rental Options</span>
-                <span id="step4_bullet" class="bullet" style="display: none;">&#8226</span><span id="step4" class="step_header">Billing Info</span>
-                <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Confirm Order</span>
+                <span id="step4_bullet" class="bullet" style="display: none;">&#8226</span><span id="step4" class="step_header">Payment</span>
+                <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Order Complete</span>
               </div>
 
               <!-- Primary Contact -->
@@ -1144,6 +1144,7 @@
                       <div style="clear:both;"></div>
                   </div>
                 </div>
+                <div style="height: 20px;"></div>
                 <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}">
                   <div class="checkout_section_header">
                     Free Truck
@@ -1154,6 +1155,7 @@
                     </div>
                     <div style="clear:both;"></div>
                   </div>
+                  <div style="height: 20px;"></div>
                 </g:if>
                 <g:elseif test="${site.freeTruck == storitz.constants.TruckType.RENTAL}">
                   <div class="checkout_section_header">
@@ -1165,6 +1167,7 @@
                     </div>
                     <div style="clear:both;"></div>
                   </div>
+                  <div style="height: 20px;"></div>
                 </g:elseif>
                 <div class="checkout_section_header">
                   Insurance
@@ -1187,7 +1190,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
-                <div style="height: 10px;"></div>
+                <div style="height: 20px;"></div>
                 <div class="checkout_section_header">
                   Active Military
                 </div>
@@ -1200,7 +1203,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
-                <div style="height: 10px;"></div>
+                <div style="height: 20px;"></div>
                 <div class="checkout_section_header">
                   Hazardous Materials
                 </div>
@@ -1210,7 +1213,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
-                <div style="height: 10px;"></div>
+                <div style="height: 20px;"></div>
                 <div class="checkout_section_header">
                   Terms
                 </div>

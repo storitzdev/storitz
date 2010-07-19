@@ -70,10 +70,47 @@
     $('checkout_price_total').update("$" + total_movein.toFixed(2));
   }
 
+  function contactChange() {
+    $('billingAddress').observe('click', function() {
+      var contactType =  $('billingAddress').select('input:checked[type=radio]').pluck('value');
+      if (contactType == 'new') {
+        $('newContact').show();
+      } else {
+        $('newContact').hide();
+      }
+    });
+  }
+
+  function validateForm() {
+    var valid = true;
+    valid &= Validation.validate('cc_number');
+    valid &= Validation.validate('cc_cvv2');
+    var contactType =  $('billingAddress').select('input:checked[type=radio]').pluck('value');
+    if (contactType == 'new') {
+      valid &= Validation.validate('firstName');
+      valid &= Validation.validate('lastName');
+      valid &= Validation.validate('streetNumber');
+      valid &= Validation.validate('street');
+      valid &= Validation.validate('city');
+      valid &= Validation.validate('state');
+      valid &= Validation.validate('zipcode');
+    }
+    return valid;
+  }
+
+  function nextStep() {
+    if (validateForm()) {
+      $('rentalTransaction').submit();
+    }
+  }
+
+  function createMap() {}
+
   Event.observe(window, 'load', function() {
     $('left_checkout_info').show();
     $('returnLinks').hide();
     drawCheckoutTable();
+    contactChange();
   });
 //]]>
   </script>
@@ -98,8 +135,182 @@
                   <span id="step1_bullet" class="bullet" style="display: none;">&#8226</span><span id="step1" class="step_header">Primary Contact</span>
                   <span id="step2_bullet" class="bullet" style="display: none;">&#8226</span><span id="step2" class="step_header">Secondary Contact</span>
                   <span id="step3_bullet" class="bullet" style="display: none;">&#8226</span><span id="step3" class="step_header">Rental Options</span>
-                  <span id="step4_bullet" class="bullet">&#8226</span><span id="step4" class="step_header_hi">Billing Info</span>
-                  <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Confirm Order</span>
+                  <span id="step4_bullet" class="bullet">&#8226</span><span id="step4" class="step_header_hi">Payment</span>
+                  <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Order Complete</span>
+                </div>
+                <!-- error information here -->
+
+                <div class="price_options checkout_header white">
+                  Payment Info
+                </div>
+                <div class="formInstructions">
+                  The billing address will be used to verify your credit card payment - card holder name and address should match the billing
+                  address.  If it matches the primary or secondary contact you already entered, choose accordingly.  If not, enter a new contact.
+                </div>
+
+                <div class="checkout_section_header">
+                  Billing Address
+                </div>
+                <div class="checkout_fields">
+                  <div id="billingAddress" class="validate-one-radio value">
+                      <div class="left" style="width:200px;">
+                        <input type="radio"  name="billingAddress" value="primary" checked="checked"/> Primary Contact Address
+                      </div>
+                      <div class="left" style="width:200px;">
+                        <input type="radio" name="billingAddress" value="secondary"/> Secondary Contact Address
+                      </div>
+                      <div class="left" style="width:200px;">
+                        <input type="radio" name="billingAddress" value="new"/> Enter new address
+                      </div>
+                      <div style="height: 10px;clear: both;"></div>
+
+                      <div id="newContact" style="display:none;">
+                        <div class="checkout_section_header">
+                          Name
+                        </div>
+                        <div class="checkout_fields">
+                          <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.firstName', 'errors')}">
+                              <g:textField name="firstName" id="firstName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.firstName}" />
+                          </div>
+                          <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'lastName', 'errors')}">
+                            <g:textField name="lastName" id="lastName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.lastName}" />
+                          </div>
+                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'suffixName', 'errors')}">
+                            <g:textField name="suffixName" id="suffixName" style="width: 80px;" value="${rentalTransaction?.contactSecondary?.suffixName}" />
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_labels">
+                          <div class="checkout_name" style="width:200px;">
+                            <label for="firstName">First Name</label>
+                          </div>
+                          <div class="checkout_name" style="width:200px;">
+                            <label for="lastName">Last Name</label>
+                          </div>
+                          <div class="checkout_name" style="width:100px;">
+                            <label for="suffixName">Suffix</label>
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_section_header">
+                          Address
+                        </div>
+                        <div class="checkout_fields">
+                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'streetNumber', 'errors')}">
+                              <g:textField name="streetNumber" id="streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.streetNumber}" />
+                          </div>
+                          <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'street', 'errors')}">
+                              <g:textField name="street" id="street" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.street}" />
+                          </div>
+                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'streetType', 'errors')}">
+                              <g:select name="streetType" id="streetType" style="width:80px;" from="${storitz.constants.StreetType.list()}" value="${rentalTransaction?.contactSecondary?.streetType}" optionValue="value"/>
+                          </div>
+                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'unit', 'errors')}">
+                              <g:textField name="unit" id="unit" style="width:80px;" value="${rentalTransaction?.contactSecondary?.unit}" />
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_labels">
+                          <div style="width:100px;" class="checkout_name">
+                            <label for="streetNumber">Street Number</label>
+                          </div>
+                          <div style="width:200px;" class="checkout_name">
+                            <label for="street">Street Name</label>
+                          </div>
+                          <div style="width:100px;" class="checkout_name">
+                            <label for="streetType">Street Suffix</label>
+                          </div>
+                          <div style="width:100px;" class="checkout_name">
+                            <label for="unit">Unit/Apt.</label>
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_fields">
+                          <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'city', 'errors')}">
+                              <g:textField name="city" id="city" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.city}" />
+                          </div>
+                          <div id="secondaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'state', 'errors')}">
+                            <g:select name="state" id="state" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransaction?.contactSecondary?.state}" optionValue="value"/>
+                          </div>
+                          <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'province', 'errors')}" style="width: 200px;display: none;">
+                            <g:textField name="province" id="province" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.province}" />
+                          </div>
+                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'zipcode', 'errors')}">
+                              <g:textField name="zipcode" id="zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.zipcode}" />
+                          </div>
+                          <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'country', 'errors')}">
+                            <g:select name="country" id="country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransaction?.contactSecondary?.country?.key}" optionKey="key" optionValue="display"/>
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_labels">
+                          <div style="width:200px;" class="checkout_name">
+                            <label for="city">City</label>
+                          </div>
+                          <div style="width:100px;" id="secondaryStateLabel" class="checkout_name">
+                            <label for="state">State</label>
+                          </div>
+                          <div style="width: 200px;display: none;" id="secondaryProvinceLabel" class="checkout_name">
+                            <label for="province">Province</label>
+                          </div>
+                          <div style="width:100px;" class="checkout_name">
+                            <label for="zipcode">Postal Code</label>
+                          </div>
+                          <div style="width:200px;" class="checkout_name">
+                            <label for="country">Country</label>
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                        
+                      </div>
+                      <div style="clear:both;"></div>
+                  </div>
+                </div>
+                <div style="height: 20px;"></div>
+
+                <div class="checkout_section_header">
+                  Credit Card Info
+                </div>
+                <div style="height: 10px;"></div>
+                <div>
+                  <div class="left">
+                    <img src="${resource(dir:'images', file:'credit-cards.gif')}" alt="Credit Cards" />
+                  </div>
+                  <div class="left">
+                    <div class="checkout_labels">
+                      <div style="width:200px;" class="checkout_name">
+                        <label for="street">Card Number</label>
+                      </div>
+                      <div style="width:50px;" class="checkout_name">
+                        <label for="street">Month</label>
+                      </div>
+                      <div style="width:80px;" class="checkout_name">
+                        <label for="street">Year</label>
+                      </div>
+                      <div style="width:80px;" class="checkout_name">
+                        <label for="street">CVV2</label>
+                      </div>
+                    </div>
+                    <div class="checkout_fields">
+                      <div style="width:200px;" class="checkout_value">
+                          <g:textField name="cc_number" id="cc_number" class="required validate-credit-card" style="width:180px;" value="${cc_number}" />
+                      </div>
+                      <div style="width:50px;" class="checkout_value">
+                        <g:select name="cc_month" from="${1..12}" value="${cc_month}"/>
+                      </div>
+                      <div style="width:80px;" class="checkout_value">
+                        <g:select name="cc_year" from="${2010..2020}" value="${cc_year}"/>
+                      </div>
+                      <div style="width:80px;" class="checkout_value">
+                        <g:textField name="cc_cvv2" id="cc_cvv2" class="required validate-digits" style="width:80px;" value="${cc_cvv2}" />
+                      </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                </div>
+                <div style="clear:both; margin-top: 20px;">
+                  <div class="right"><img src="${resource(dir:'images', file:'btn-continue2.png')}" onclick="nextStep()" alt="Pay Now"></div>
+                  <div style="clear:both;"></div>
                 </div>
               </g:form>
             </div>

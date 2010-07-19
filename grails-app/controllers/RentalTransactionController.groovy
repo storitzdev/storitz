@@ -37,8 +37,12 @@ class RentalTransactionController {
         rentalTransactionInstance.moveInDate = Date.parse('MM-dd-yyyy', params.moveInDate)
         rentalTransactionInstance.site = site
 
-        def person = User.findByUsername(springSecurityService.principal.username)
-        rentalTransactionInstance.isCallCenter = (UserRole.userHasRole(person, 'ROLE_CALLCENTER'))
+        if (!springSecurityService.principal.equals('anonymousUser')) {
+          def person = User.findByUsername(springSecurityService.principal.username)
+          rentalTransactionInstance.isCallCenter = (UserRole.userHasRole(person, 'ROLE_CALLCENTER'))
+        } else {
+          rentalTransactionInstance.isCallCenter = false          
+        }
       
         if (rentalTransactionInstance.save(flush: true)) {
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"

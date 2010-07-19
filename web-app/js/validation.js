@@ -279,6 +279,9 @@ Validation.addAllThese([
 				// [$].##
 				return Validation.get('IsEmpty').test(v) ||  /^\$?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/.test(v)
 			}],
+    ['validate-credit-card', 'Please enter a valid credit card number', function(v) {
+                return Validation.get('IsEmpty').test(v) || isValidCardNumber(v);
+            }],
 	['validate-selection', 'Please make a selection', function(v,elm){
 				return elm.options ? elm.selectedIndex > 0 : !Validation.get('IsEmpty').test(v);
 			}],
@@ -296,3 +299,56 @@ Validation.addAllThese([
                 return elm.select('input:checked[type=checkbox]').pluck('value').length > 0;
             }]
         ]);
+
+
+/*********************
+ Misc validation code
+ *********************/
+
+function isValidCardNumber (strNum) {
+   var nCheck = 0;
+   var nDigit = 0;
+   var bEven = false;
+
+   for (n = strNum.length - 1; n >= 0; n--) {
+      var cDigit = strNum.charAt (n);
+      if (isDigit (cDigit)) {
+         var nDigit = parseInt(cDigit, 10);
+         if (bEven) {
+            if ((nDigit *= 2) > 9)
+               nDigit -= 9;
+         }
+         nCheck += nDigit;
+         bEven = ! bEven;
+      } else if (cDigit != ' ' && cDigit != '.' && cDigit != '-') {
+         return false;
+      }
+   }
+   return (nCheck % 10) == 0;
+}
+
+function isDigit (c) {
+   var strAllowed = "1234567890";
+   return (strAllowed.indexOf (c) != -1);
+}
+
+function isCardTypeCorrect (strNum, type) {
+   var nLen = 0;
+   for (n = 0; n < strNum.length; n++)
+   {
+      if (isDigit (strNum.substring (n,n+1)))
+         ++nLen;
+   }
+
+   if (type == 'Visa')
+      return ((strNum.substring(0,1) == '4') && (nLen == 13 || nLen == 16));
+   else if (type == 'Amex')
+      return ((strNum.substring(0,2) == '34' || strNum.substring(0,2) == '37') && (nLen == 15));
+   else if (type == 'Master Card')
+      return ((strNum.substring(0,2) == '51' || strNum.substring(0,2) == '52'
+              || strNum.substring(0,2) == '53' || strNum.substring(0,2) == '54'
+              || strNum.substring(0,2) == '55') && (nLen == 16));
+   else
+      return false;
+
+}
