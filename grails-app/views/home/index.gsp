@@ -25,7 +25,6 @@
         var searchSizeDesc;
         var searchDate;
         var helpFadeout = null;
-        %{--var baseURL = '${request.contextPath}/storageSite/detail/';--}%
         var baseURL = '${request.contextPath}/self-storage/';
         var inDrag = false;
         var mapLoaded = false;
@@ -38,7 +37,7 @@
             new TableKit.Sortable.Type('stprice', {
                 pattern : /^�|<[aA].+\$(\d+)<\/[aA]>/,
                 normal : function(v) {
-                    // This will grab the first thing that looks like a number from a string, so you can use it to order a column of various srings containing numbers.
+                    // This will grab the first thing that looks like a number from a string, so you can use it to order a column of various strings containing numbers.
                     if (v == '�') return -1;
                     v = parseFloat(v.replace(/^\$(\d+)/,"$1"));
                     return isNaN(v) ? 0 : v;

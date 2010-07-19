@@ -8,15 +8,15 @@ class UrlMappings {
 //         }
 //      }
 
-     "/self-storage/$city/$site_title/$id" {
-         controller = "storageSite"
-         action = "detail"
-      }
+     name siteLink: "/self-storage/$city/$site_title/$id" {
+        controller = "storageSite"
+        action = "detail"
+     }
 
-      "/xxx/$id" {
-          controller = "storageSite"
-          action = "detail"
-       }
+     "/xxx/$id" {
+        controller = "storageSite"
+        action = "detail"
+     }
 
       // Land on homepage searching for an address which may be "city, state" or "zip"
       "/find/self-storage/$city/$state?" {

@@ -1,6 +1,7 @@
 package com.storitz
 
 import storitz.constants.TruckType
+import java.util.regex.Pattern
 
 class StorageSite {
 
@@ -113,4 +114,146 @@ class StorageSite {
   def nonFeaturedOffers() {
     return specialOffers.findAll{ it.active && !it.featured }.sort{ it.id }
   }
+
+  def getSiteTitle() {
+
+    // TODO: Replace the regex in home/index.gsp with a value provided by the JSON response (STMap.jsonp).
+    // The current version doesn't deal with regex specials in the city name and there are too many cross-browser
+    // variations in regex to trust an escape routine coded here.
+    // Plus we don't want to allow for deviation between server and client sides.
+
+    // This should match what is in home/index.gsp and really that should get this value via JSON.
+    return title.replaceFirst(/(?i) ?[-\/]? ?${city} ?[-\/]? ?/, '')
+  }
+
+  def getStateName() {
+    return stateNamesByCode[state] ?: state
+  }
+
+  // All of the official USPS 2-letter state (and territory) codes.
+  static def stateNamesByCode = [
+          AL:"Alabama",
+          AK:"Alaska",
+          AZ:"Arizona",
+          AR:"Arkansas",
+          CA:"California",
+          CO:"Colorado",
+          CT:"Connecticut",
+          DE:"Delaware",
+          DC:"District of Columbia",
+          FL:"Florida",
+          GA:"Georgia",
+          HI:"Hawaii",
+          ID:"Idaho",
+          IL:"Illinois",
+          IN:"Indiana",
+          IA:"Iowa",
+          KS:"Kansas",
+          KY:"Kentucky",
+          LA:"Louisiana",
+          ME:"Maine",
+          MD:"Maryland",
+          MA:"Massachusetts",
+          MI:"Michigan",
+          MN:"Minnesota",
+          MS:"Mississippi",
+          MO:"Missouri",
+          MT:"Montana",
+          NE:"Nebraska",
+          NV:"Nevada",
+          NH:"New Hampshire",
+          NJ:"New Jersey",
+          NM:"New Mexico",
+          NY:"New York",
+          NC:"North Carolina",
+          ND:"North Dakota",
+          OH:"Ohio",
+          OK:"Oklahoma",
+          OR:"Oregon",
+          PA:"Pennsylvania",
+          RI:"Rhode Island",
+          SC:"South Carolina",
+          SD:"South Dakota",
+          TN:"Tennessee",
+          TX:"Texas",
+          UT:"Utah",
+          VT:"Vermont",
+          VA:"Virginia",
+          WA:"Washington",
+          WV:"West Virginia",
+          WI:"Wisconsin",
+          WY:"Wyoming",
+          AS:"American Samoa",
+          GU:"Guam",
+          MP:"Northern Mariana Islands",
+          PR:"Puerto Rico",
+          VI:"Virgin Islands",
+          FM:"Federated States of Micronesia",
+          MH:"Marshall Islands",
+          PW:"Palau",
+  ]
+
+//  static def stateCodesByName = [
+//          "Alabama":"AL",
+//          "Alaska":"AK",
+//          "American Samoa":"AS",
+//          "Arizona":"AZ",
+//          "Arkansas":"AR",
+//          "California":"CA",
+//          "Colorado":"CO",
+//          "Connecticut":"CT",
+//          "Delaware":"DE",
+//          "District of Columbia":"DC",
+//          "Federated States of Micronesia":"FM",
+//          "Florida":"FL",
+//          "Georgia":"GA",
+//          "Guam":"GU",
+//          "Hawaii":"HI",
+//          "Idaho":"ID",
+//          "Illinois":"IL",
+//          "Indiana":"IN",
+//          "Iowa":"IA",
+//          "Kansas":"KS",
+//          "Kentucky":"KY",
+//          "Louisiana":"LA",
+//          "Maine":"ME",
+//          "Marshall Islands":"MH",
+//          "Maryland":"MD",
+//          "Massachusetts":"MA",
+//          "Michigan":"MI",
+//          "Minnesota":"MN",
+//          "Mississippi":"MS",
+//          "Missouri":"MO",
+//          "Montana":"MT",
+//          "Nebraska":"NE",
+//          "Nevada":"NV",
+//          "New Hampshire":"NH",
+//          "New Jersey":"NJ",
+//          "New Mexico":"NM",
+//          "New York":"NY",
+//          "North Carolina":"NC",
+//          "North Dakota":"ND",
+//          "Northern Mariana Islands":"MP",
+//          "Ohio":"OH",
+//          "Oklahoma":"OK",
+//          "Oregon":"OR",
+//          "Palau":"PW",
+//          "Pennsylvania":"PA",
+//          "Puerto Rico":"PR",
+//          "Rhode Island":"RI",
+//          "South Carolina":"SC",
+//          "South Dakota":"SD",
+//          "Tennessee":"TN",
+//          "Texas":"TX",
+//          "Utah":"UT",
+//          "Vermont":"VT",
+//          "Virgin Islands":"VI",
+//          "Virginia":"VA",
+//          "Washington":"WA",
+//          "West Virginia":"WV",
+//          "Wisconsin":"WI",
+//          "Wyoming":"WY",
+//  ] as TreeMap
+
+  
 }
