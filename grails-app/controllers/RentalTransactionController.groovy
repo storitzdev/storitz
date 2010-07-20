@@ -5,10 +5,13 @@ import com.storitz.SpecialOffer
 import com.storitz.StorageUnit
 import com.storitz.UserRole
 import com.storitz.User
+import com.storitz.Insurance
 
 class RentalTransactionController {
 
     def springSecurityService
+    def siteLinkService
+    def cShiftService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST"]
 
@@ -82,6 +85,35 @@ class RentalTransactionController {
           println "Rental transaction - movein: ${rentalTransactionInstance.moveInDate} booking date: ${rentalTransactionInstance.bookingDate}"
           [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
         }
+    }
+
+    def pay = {
+      def rentalTransactionInstance = RentalTransaction.get(params.id)
+      if (params.billingAddress == 'new') {
+        def billingContact = new com.storitz.Contact(params)
+        if (!billingContact.save(flush: true)) {
+          def promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+          def unit = StorageUnit.get(rentalTransactionInstance.unitId)
+          def ins = null
+          if (!rentalTransactionInstance.insuranceId == -999) {
+            ins = Insurance.get(rentalTransactionInstance.insuranceId)
+          }
+          flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.Contact'), params.id])}"
+          [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
+        } else {
+          rentalTransactionInstance.billingAddress = billingContact
+        }
+      } else if (params.billingAddress == 'primary') {
+        rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactPrimary
+      } else {
+        rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactSecondary
+      }
+      // get MoveInCosts
+      if (rentalTransactionInstance.site.siteLink) {
+
+      } else if (rentalTransactionInstance.site.centerShift) {
+
+      }
     }
 
     def edit = {

@@ -128,8 +128,8 @@
       <div style="width: 685px;" class="right">
         <div id="detailIno">
             <div id="rentalForm">
-              <g:form action="paymentInfo" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
-                <input type="hidden" name="rentalAgreement" value="${params.id}" />
+              <g:form action="pay" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
+                <input type="hidden" name="id" value="${params.id}" />
 
                 <div class="vert_text">
                   <span id="step1_bullet" class="bullet" style="display: none;">&#8226</span><span id="step1" class="step_header">Primary Contact</span>
@@ -138,8 +138,9 @@
                   <span id="step4_bullet" class="bullet">&#8226</span><span id="step4" class="step_header_hi">Payment</span>
                   <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Order Complete</span>
                 </div>
-                <!-- error information here -->
-
+                <g:if test="${flash.message}">
+                  <div class="message">${flash.message}</div>
+                </g:if>
                 <div class="price_options checkout_header white">
                   Payment Info
                 </div>

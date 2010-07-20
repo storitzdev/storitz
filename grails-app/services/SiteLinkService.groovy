@@ -175,6 +175,30 @@ class SiteLinkService {
     postAction(payload, 'PromotionsRetrieve')
   }
 
+  def getMoveInWithDiscount(rentalTransaction) {
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:MoveInCostRetrieveWithDiscount>
+         <!--Optional:-->
+         <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
+         <!--Optional:-->
+         <cal:sLocationCode>""" + rentalTransaction.site.siteLink.sourceLoc + """</cal:sLocationCode>
+         <!--Optional:-->
+         <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
+         <!--Optional:-->
+         <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
+         <cal:iUnitID>""" + rentalTransaction.unitId + """</cal:iUnitID>
+         <cal:dMoveInDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dMoveInDate>
+         <cal:InsuranceCoverageID>""" + rentalTransaction.insuranceId + """</cal:InsuranceCoverageID>
+         <cal:ConcessionPlanID>""" + rentalTransaction.promoId + """</cal:ConcessionPlanID>
+      </cal:MoveInCostRetrieveWithDiscount>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'MoveInCostRetrieveWithDiscount')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl)
 
@@ -501,6 +525,25 @@ class SiteLinkService {
         site.addToSpecialOffers(specialOffer)
       }
     }
+  }
+
+  def moveInCostRetrieve(rentalTransaction) {
+    def ret = getMoveInWithDiscount(rentalTransaction)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def adminFee = new BigDecimal(0)
+    for (fee in records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      if (fee.ChargeDescription.text() == 'Administrative Fee') {
+        adminFee = new BigDecimal(fee.dcTenantRate.text() as String)
+      }
+    }
+    println('returning fee=' + adminFee)
+    return adminFee
   }
 
 }

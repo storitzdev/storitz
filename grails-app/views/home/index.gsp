@@ -409,24 +409,24 @@
                     '</span>';
             if (addrValid) {
               msg += '<span class="blue"> unit near </span><span class="green"> ' + $F('address') +
-                    '</span><span class="blue">. Please pick starting date.</span>';
+                    '</span><span class="blue">. Please select starting date.</span>';
             } else if (dateValid) {
               msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
-                    '</span><span class="blue">. Please pick address or zip.</span>';
+                    '</span><span class="blue">. Please select address or zip.</span>';
             } else {
-              msg += '<span class="blue">Please pick address or zip and start date.</span>';
+              msg += '<span class="blue">Please select address or zip and start date.</span>';
             }
           } else if (addrValid) {
             msg = '<span class="blue">Searching near </span><span class="green">' + $F('address') +
                   '</span>';
             if (dateValid) {
               msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
-                    '</span><span class="blue">. Please pick unit size.</span>';
+                    '</span><span class="blue">. Please select unit size.</span>';
             } else {
-              msg += '<span class="blue">. Please pick unit size and starting date.</span>';
+              msg += '<span class="blue">. Please select unit size and starting date.</span>';
             }
           } else {
-            msg = '<span class="blue">Search Results near you. Please pick an adddress or zip, unit size and start date.</span>';
+            msg = '<span class="blue">Search Results near you. Please select an adddress or zip, unit size and start date.</span>';
           }
           $('searchMsg').update(msg);
         }
@@ -463,7 +463,7 @@
               </div>
               <div style="height: 10px;"></div>
               <div>
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to pick move in date...'}" onchange="dateChange()"/>
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to select move in date...'}" onchange="dateChange()"/>
               </div>
               <div style="height: 10px;"></div>
               <div>
