@@ -27,6 +27,8 @@ class UrlMappings {
 //         address = { println ([params.city, params.state]) ; params.state ? (params.city + ', ' + params.state) : params.city }
       }
 
+      "/sitemap" (controller:"siteMap")
+
 // Don't really need to use constraints to sort out city vs zip.
 // Let search logic on home page deal with it.
 //      "/self-storage/$address" {
@@ -43,7 +45,11 @@ class UrlMappings {
 			 // apply constraints here
 		  }
 	  }
-      "/"(controller:"home", action:"index")
-	  "500"(view:'/error')
+
+      "/zzz" (controller:"home", action:"index")
+
+      "/" (controller:"home", action:"index")
+
+	  "500" (view:'/error')
 	}
 }
