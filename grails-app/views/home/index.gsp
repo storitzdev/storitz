@@ -254,7 +254,7 @@
                     google.maps.event.addListener(s.marker, 'mouseover', function() {
                       markerOver(s);
                     });
-                    tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="javascript:panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
+                    tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
                       '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
                       (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
                       (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
@@ -298,12 +298,14 @@
                 myOptions = {
                   zoom: 14,
                   center: iploc,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               } else {
                 myOptions = {
                   zoom: 14,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               }
               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
@@ -414,7 +416,7 @@
               msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
                     '</span><span class="blue">. Please select address or zip.</span>';
             } else {
-              msg += '<span class="blue">Please select address or zip and start date.</span>';
+              msg += '<span class="blue">Please select address or zip and move-in date.</span>';
             }
           } else if (addrValid) {
             msg = '<span class="blue">Searching near </span><span class="green">' + $F('address') +
@@ -426,7 +428,7 @@
               msg += '<span class="blue">. Please select unit size and starting date.</span>';
             }
           } else {
-            msg = '<span class="blue">Search Results near you. Please select an adddress or zip, unit size and start date.</span>';
+            msg = '<span class="blue">Search Results near you. Please select an address or zip, unit size and move-in date.</span>';
           }
           $('searchMsg').update(msg);
         }

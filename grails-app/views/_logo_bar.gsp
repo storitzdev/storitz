@@ -5,20 +5,12 @@
     </g:link>
   </div>
   <div id="tollFree">
-    <div class="left">
+    <div class="left" style="margin-right: 15px;">
       <div style="line-height: 14px; text-align: right;">
-        Call Toll Free
+        Call Us
       </div>
       <div style="font-size: 16px;">
         (877) 456-2929
-      </div>
-    </div>
-    <div class="left" style="margin: 0 15px;font-size:10px;">
-      <div style="line-height: 16px;">
-        6:30am - 11pm CST (M-F)
-      </div>
-      <div style="line-height: 16px;">
-        8am - 8pm CST (Sat-Sun)
       </div>
     </div>
   </div>

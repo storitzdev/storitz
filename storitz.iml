@@ -71,7 +71,7 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="groovyws" level="project" />
     <orderEntry type="library" exported="" name="gdata" level="project" />
-    <orderEntry type="module" module-name="storitz-grailsPlugins" />
+    <orderEntry type="module" module-name="storitz-grailsPlugins" exported="" />
   </component>
 </module>
 

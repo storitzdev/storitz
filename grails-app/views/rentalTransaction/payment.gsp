@@ -126,7 +126,7 @@
         <g:render template="/orderSummary"/>
       </div>
       <div style="width: 685px;" class="right">
-        <div id="detailIno">
+        <div id="detailInfo">
             <div id="rentalForm">
               <g:form action="pay" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
                 <input type="hidden" name="id" value="${params.id}" />
@@ -310,7 +310,7 @@
                   </div>
                 </div>
                 <div style="clear:both; margin-top: 20px;">
-                  <div class="right"><img src="${resource(dir:'images', file:'btn-continue2.png')}" onclick="nextStep()" alt="Pay Now"></div>
+                  <div class="right"><img src="${resource(dir:'images', file:'btn-pay-now.png')}" onclick="nextStep()" alt="Pay Now"></div>
                   <div style="clear:both;"></div>
                 </div>
               </g:form>

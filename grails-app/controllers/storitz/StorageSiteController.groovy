@@ -1,3 +1,5 @@
+package storitz
+
 import grails.converters.JSON
 import com.storitz.SiteImage
 import com.storitz.StorageUnit
@@ -5,6 +7,7 @@ import com.storitz.SiteUser
 import com.storitz.StorageSite
 import com.storitz.StorageSize
 import com.storitz.Visit
+import org.grails.plugins.imagetools.ImageTool
 
 class StorageSiteController {
 

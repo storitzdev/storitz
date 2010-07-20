@@ -970,3 +970,11 @@ div.rightArrowActive:hover {
     background-repeat: no-repeat;
     background-position: right center;
 }
+
+#staticMenu {
+    width: 280px;
+}
+
+.legalHeader {
+    font-weight: bold;
+}

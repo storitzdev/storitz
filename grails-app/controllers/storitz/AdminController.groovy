@@ -1,3 +1,5 @@
+package storitz
+
 import grails.plugins.springsecurity.Secured
 import com.storitz.User
 

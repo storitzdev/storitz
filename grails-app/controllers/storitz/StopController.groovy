@@ -1,3 +1,5 @@
+package storitz
+
 import grails.util.Environment
 import grails.plugins.springsecurity.Secured
 

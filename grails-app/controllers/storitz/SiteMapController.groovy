@@ -1,3 +1,5 @@
+package storitz
+
 import com.storitz.StorageSite
 
 import groovy.xml.StreamingMarkupBuilder;

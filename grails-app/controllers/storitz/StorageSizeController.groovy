@@ -1,3 +1,5 @@
+package storitz
+
 import com.storitz.StorageSize
 import grails.plugins.springsecurity.Secured
 

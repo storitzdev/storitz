@@ -1,7 +1,7 @@
 <div id="footer">
   <div style="padding: 2em;">
     <g:link controller="siteMap"><span class="small">Site Map</span></g:link> 
-    <span class="small">&copy; 2010 Storitz, All rights reserved.</span>
+    <span class="small">&copy; 2010 Storitz. All rights reserved.</span>
   </div>
 </div>
 <script type="text/javascript">

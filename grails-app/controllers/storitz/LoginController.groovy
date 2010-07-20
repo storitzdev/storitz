@@ -1,3 +1,5 @@
+package storitz
+
 import grails.converters.JSON
 
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
@@ -9,6 +11,7 @@ import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.security.core.context.SecurityContextHolder
 
 class LoginController {
 
@@ -59,7 +62,7 @@ class LoginController {
 	 */
 	def denied = {
 		if (springSecurityService.isLoggedIn() &&
-				authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
+				authenticationTrustResolver.isRememberMe(SecurityContextHolder.context?.authentication)) {
 			// have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
 			redirect action: full, params: params
 		}
@@ -71,7 +74,7 @@ class LoginController {
 	def full = {
 		def config = SpringSecurityUtils.securityConfig
 		render view: 'auth', params: params,
-			model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
+			model: [hasCookie: authenticationTrustResolver.isRememberMe(SecurityContextHolder.context?.authentication),
 			        postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
 	}
 

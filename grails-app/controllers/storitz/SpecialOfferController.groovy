@@ -1,3 +1,5 @@
+package storitz
+
 import com.storitz.SpecialOffer
 import grails.plugins.springsecurity.Secured
 

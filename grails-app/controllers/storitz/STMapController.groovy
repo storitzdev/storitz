@@ -1,7 +1,10 @@
+package storitz
+
 import com.storitz.StorageSite
 import com.storitz.geoip.GeoIp
 import grails.converters.JSON
 import org.hibernate.FetchMode as FM
+import org.hibernate.FetchMode
 
 class STMapController {
 
@@ -11,7 +14,6 @@ class STMapController {
     def index = { }
 
     def countSites = {
-      println "?swLat=${params.swLat}&neLat=${params.neLat}&swLng=${params.swLng}&neLng=${params.neLng}&searchSize=${params.searchSize}"
       
       def sites = StorageSite.createCriteria()
       def siteCount = sites.get {
@@ -23,7 +25,7 @@ class STMapController {
           between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
         }
         if (params.searchSize && params.int('searchSize') != 1) {
-          fetchMode('units', FM.EAGER)
+          fetchMode('units', FetchMode.EAGER)
           units {
             unitsize {
               eq("id", Long.parseLong(params.searchSize))
@@ -31,7 +33,6 @@ class STMapController {
           }
         }
       }
-      println "siteCount returned = ${siteCount}"
       webUtilService.nocache(response)
       render (status: 200, contentType:"application/json", text:"{ siteCount: ${siteCount} }")
     }
@@ -45,14 +46,14 @@ class STMapController {
           between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
         }
         if (params.searchSize && params.int('searchSize') != 1) {
-          fetchMode('units', FM.EAGER)
+          fetchMode('units', FetchMode.EAGER)
           units {
             unitsize {
               eq("id", Long.parseLong(params.searchSize))
             }
           }
         }
-        fetchMode('specialOffers', FM.EAGER)
+        fetchMode('specialOffers', FetchMode.EAGER)
       }
 
       def sw = new StringWriter()

@@ -628,7 +628,7 @@
             </div>
             <div style="height: 18px;"></div>
             <div>
-              <div class="section_header">Start Date:</div>
+              <div class="section_header">Move-in Date:</div>
               <label for="date"></label><input type="text" class="required validate-date-us dateInput" id="date" style="width: 150px;" value="${params.date}" onchange="dateChange()"/>
             </div>
             <div style="padding: 18px 0 10px;" class="section_header">
@@ -985,7 +985,7 @@
                 </div>
                 <div style="margin-top: 20px;">
                   <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
-                  <div class="right"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
+                  <div class="right"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
@@ -1122,7 +1122,7 @@
                   <div style="clear:both;"></div>
                 </div>
                 <div style="margin-top: 20px;">
-                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
+                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
                   <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
                   <div style="clear:both;"></div>
                 </div>
@@ -1224,7 +1224,7 @@
                   <div style="clear:both;"></div>
                 </div>
                 <div style="margin-top: 20px;">
-                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-nextstep2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
+                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
                   <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
                   <div style="clear:both;"></div>
                 </div>

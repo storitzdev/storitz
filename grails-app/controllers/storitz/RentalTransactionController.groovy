@@ -1,3 +1,5 @@
+package storitz
+
 import storitz.constants.TransactionStatus
 import com.storitz.RentalTransaction
 import com.storitz.StorageSite

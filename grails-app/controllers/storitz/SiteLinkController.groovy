@@ -1,3 +1,5 @@
+package storitz
+
 import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 
