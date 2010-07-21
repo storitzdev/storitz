@@ -5,11 +5,13 @@ import com.storitz.User
 import grails.plugins.springsecurity.Secured
 import com.storitz.UserRole
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import com.storitz.SiteUser
+import com.storitz.StorageSite
 
 /**
  * User controller.
  */
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class UserController {
 
 	def springSecurityService
@@ -38,6 +40,7 @@ class UserController {
 
         def results
 
+        def username = session["username"]
         if (params.username) {
           def query
           def criteria = User.createCriteria()
@@ -45,11 +48,18 @@ class UserController {
           query = {
             and {
               like("username", params.username+ '%')
+              if (username != 'admin') {
+                eq("manager", session["user"])
+              }
             }
           }
           results = criteria.list(params, query)
         } else {
-          results = User.list(params)
+          if (username == 'admin') {
+            results = User.list(params)
+          } else {
+            results = User.findAllByManager(session["user"])
+          }
         }
 		[personList: results]
 	}
@@ -69,7 +79,8 @@ class UserController {
 		roleNames.sort { n1, n2 ->
 			n1 <=> n2
 		}
-		[person: person, roleNames: roleNames]
+        def siteNames = SiteUser.findAllByUser(person).collect{ it.site.title }.sort()
+		[person: person, roleNames: roleNames, siteNames: siteNames]
 	}
 
 	/**
@@ -80,23 +91,26 @@ class UserController {
 	def delete = {
 
 		def person = User.get(params.id)
-		if (person) {
-			def authPrincipal = springSecurityService.principal()
-			//avoid self-delete if the logged-in user is an admin
-			if (!(authPrincipal instanceof String) && authPrincipal.username == person.username) {
-				flash.message = "You can not delete yourself, please login as another admin and try again"
-			}
-			else {
-				//first, delete this person from People_Authorities table.
-                UserRole.removeAll(person)
-                person.delete()
-				flash.message = "User $params.id deleted."
-			}
-		}
-		else {
-			flash.message = "User not found with id $params.id"
-		}
-
+        if (session["username"] == 'admin' || person.manager == session["user"]) {
+          if (person) {
+              def authPrincipal = springSecurityService.principal()
+              //avoid self-delete if the logged-in user is an admin
+              if (!(authPrincipal instanceof String) && authPrincipal.username == person.username) {
+                  flash.message = "You can not delete yourself, please login as another admin and try again"
+              }
+              else {
+                  //first, delete this person from People_Authorities table.
+                  UserRole.removeAll(person)
+                  person.delete()
+                  flash.message = "User $params.id deleted."
+              }
+          }
+          else {
+              flash.message = "User not found with id $params.id"
+          }
+        } else {
+          flash.message = "No permission to delete user."
+        }
 		redirect action: list
 	}
 
@@ -181,6 +195,8 @@ class UserController {
 		if (person.save()) {
 			UserRole.removeAll(person)
 			addRoles(person)
+            SiteUser.removeAll(person)
+            addSites(person)
 			redirect action: show, id: person.id
 		}
 		else {
@@ -191,7 +207,11 @@ class UserController {
 	def create = {
         def person = new User()
         person.properties = params
-		[person: person, authorityList: Role.list()]
+        def siteList = null
+        if (session["username"] != "admin") {
+          siteList = SiteUser.findAllByUser(session["user"]).collect{ it.site }
+        }
+		[person: person, authorityList: Role.list(), siteList: siteList]
 	}
 
 	/**
@@ -222,6 +242,7 @@ class UserController {
       person.enabled = true
       if (person.save()) {
           addRoles(person)
+          addSites(person)
           // TODO - send email to new user
 
           person.save(flush: true)
@@ -242,6 +263,16 @@ class UserController {
 		}
 	}
 
+    private void addSites(person) {
+      for (String key in params.keySet()) {
+        if (key.contains('SITE') && 'on' == params.get(key)) {
+          def siteId = key.substring(5) as Long
+          def site = StorageSite.get(siteId)
+          SiteUser.link(site, person)
+        }
+      }
+    }
+
 	private Map buildPersonModel(person) {
 
 		List roles = Role.list()
@@ -256,8 +287,13 @@ class UserController {
 		for (role in roles) {
 			roleMap[(role)] = userRoleNames.contains(role.authority)
 		}
-      
-		return [person: person, roleMap: roleMap]
+        List sites = SiteUser.findAllByUser(session["user"]).collect{ it.site }
+        List userSites = SiteUser.findAllByUser(person).collect{ it.site}
+        def siteMap = [:] as Map  //map of site -> boolean
+        for (site in sites) {
+            siteMap[(site)] = userSites.contains(site)
+        }
+		return [person: person, roleMap: roleMap, siteMap: siteMap]
 	}
 }
 

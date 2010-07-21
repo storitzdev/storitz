@@ -75,6 +75,7 @@
                                 </td>
                             </tr>
 
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label>Manager:</label>
@@ -85,7 +86,7 @@
                                               noSelection="['null':'No manager selected']"/>
                                 </td>
                             </tr> 
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="enabled">Enabled:</label>
@@ -108,7 +109,29 @@
                                     </g:each></table>
                                 </td>
                             </tr> 
-                        
+                        </sec:ifAnyGranted>
+                        <sec:ifNotGranted roles="ROLE_ADMIN">
+                          <input type="hidden" name="ROLE_USER" value="on"/>
+                        </sec:ifNotGranted>
+
+                        <sec:ifAnyGranted roles="ROLE_MANAGER">
+                          <sec:ifNotGranted roles="ROLE_ADMIN">
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label>Assign Site Privileges:</label>
+                                </td>
+                                <td valign="top" class="value">
+                                    <table><g:each var="site" in="${siteMap.keySet()}">
+                                      <tr>
+                                        <td valign="top" class="name" align="left">${site.title.encodeAsHTML()}</td>
+                                        <td align="left"><g:checkBox name="SITE_${site.id}" value="${siteMap[site]}"/></td>
+                                      </tr>
+                                    </g:each></table>
+                                </td>
+                              </tr> 
+                            </sec:ifNotGranted>
+                        </sec:ifAnyGranted>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="description">Description:</label>

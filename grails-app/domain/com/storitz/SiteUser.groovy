@@ -28,4 +28,10 @@ class SiteUser {
         s.delete()
       }
     }
+
+    static void removeAll(User user) {
+        executeUpdate 'DELETE FROM SiteUser WHERE user=:user', [user: user]
+    }
+
+
 }

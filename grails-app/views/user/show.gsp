@@ -56,7 +56,7 @@
                         <tr class="prop">
                             <td valign="top" class="name">Manager:</td>
                             
-                            <td valign="top" class="value"><g:link controller="user" action="show" id="${person?.manager?.username}">${userInstance?.manager?.encodeAsHTML()}</g:link></td>
+                            <td valign="top" class="value">${person?.manager?.username}</td>
                             
                         </tr>
                     
@@ -80,6 +80,19 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name">Site Privileges:</td>
+
+                            <td  valign="top" style="text-align:left;" class="value">
+                                <ul>
+                                <g:each var="site" in="${siteNames}">
+                                    <li>${site}</li>
+                                </g:each>
+                                </ul>
+                            </td>
+
+                        </tr>
+
                         <tr class="prop">
                             <td valign="top" class="name">Description:</td>
                             

@@ -58,7 +58,8 @@
                                     <input type="text" id="userRealName" name="userRealName" value="${fieldValue(bean:person,field:'userRealName')}"/>
                                 </td>
                             </tr> 
-                        
+
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="manager.id">Manager:</label>
@@ -67,7 +68,12 @@
                                   <g:select name="manager.id" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.username}" noSelection="['null': '']"/>
                                 </td>
                             </tr> 
-                        
+                        </sec:ifAnyGranted>
+                        <sec:ifNotGranted roles="ROLE_ADMIN">
+                            <input type="hidden" name="manager.id" value="${session["user"].id}" />
+                        </sec:ifNotGranted>
+
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="enabled">Enabled:</label>
@@ -76,7 +82,11 @@
                                     <g:checkBox name="enabled" value="${person?.enabled}" ></g:checkBox>
                                 </td>
                             </tr> 
-                        
+                        </sec:ifAnyGranted>
+                        <sec:ifNotGranted roles="ROLE_ADMIN">
+                          <input type="hidden" name="enabled" value="true"/>
+                        </sec:ifNotGranted>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="description">Description:</label>
@@ -94,7 +104,8 @@
                                     <input type="text" id="email" name="email" value="${fieldValue(bean:person,field:'email')}"/>
                                 </td>
                             </tr> 
-                        
+
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="accountExpired">Account Expired:</label>
@@ -103,7 +114,7 @@
                                     <g:checkBox name="accountExpired" value="${person?.accountExpired}" ></g:checkBox>
                                 </td>
                             </tr> 
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="accountLocked">Account Locked:</label>
@@ -121,6 +132,7 @@
                                     <g:checkBox name="passwordExpired" value="${person?.passwordExpired}" ></g:checkBox>
                                 </td>
                             </tr>
+                        </sec:ifAnyGranted>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'><label for='passwd'>Password:</label></td>
@@ -136,6 +148,7 @@
                                 </td>
                             </tr>
 
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <tr class="prop">
                                 <td valign="top" class="name" align="left">Assign Roles:</td>
                             </tr>
@@ -146,7 +159,25 @@
                                 <td align="left"><g:checkBox name="${it.authority}"/></td>
                             </tr>
                             </g:each>
-                        
+                        </sec:ifAnyGranted>
+                        <sec:ifNotGranted roles="ROLE_ADMIN">
+                          <input type="hidden" name="ROLE_USER" value="on"/>
+                        </sec:ifNotGranted>
+
+                        <sec:ifAnyGranted roles="ROLE_MANAGER">
+                          <sec:ifNotGranted roles="ROLE_ADMIN">
+                            <tr class="prop">
+                                <td valign="top" class="name" align="left">Assign Sites:</td>
+                            </tr>
+
+                            <g:each in="${siteList}">
+                                <td valign="top" class="name" align="left">${it.title.encodeAsHTML()}</td>
+                                <td align="left"><g:checkBox name="SITE_${it.id}"/></td>
+                            </tr>
+                            </g:each>
+                          </sec:ifNotGranted>
+                        </sec:ifAnyGranted>
+
                         </tbody>
                     </table>
                 </div>

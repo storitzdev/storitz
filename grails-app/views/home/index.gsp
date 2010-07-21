@@ -296,14 +296,14 @@
               var myOptions;
               if (iploc) {
                 myOptions = {
-                  zoom: 14,
+                  zoom: 10,
                   center: iploc,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               } else {
                 myOptions = {
-                  zoom: 14,
+                  zoom: 10,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };

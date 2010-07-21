@@ -3,7 +3,7 @@ package storitz
 import grails.plugins.springsecurity.Secured
 import com.storitz.User
 
-@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
+@Secured(['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER', 'ROLE_CALLCENTER'])
 class AdminController {
 
     def springSecurityService

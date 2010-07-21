@@ -113,6 +113,13 @@ class StorageSiteController {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     } else {
+      def username = session["username"]
+      if (username != "admin") {
+        if (!SiteUser.findBySiteAndUser(storageSiteInstance, session["user"])) {
+          flash.message = "${message(code: 'default.no.permission.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), username])}"
+          redirect(action: "list")
+        }
+      }
       return [storageSiteInstance: storageSiteInstance]
     }
   }
@@ -282,9 +289,7 @@ class StorageSiteController {
 
   def deleteImage = {
     def site = StorageSite.get(params.id)
-
     def siteImage = SiteImage.get(params.siteImageId)
-
     def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid_' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb_' + siteImage.fileLocation, site.id) ]
 
     deleteList.each{
@@ -293,11 +298,8 @@ class StorageSiteController {
     }
 
     site.removeFromImages(siteImage)
-
     siteImage.delete()
-
     site.save(flush: true)
-
     redirect(action: "edit", id: params.id)
   }
 
