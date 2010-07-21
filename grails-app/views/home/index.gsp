@@ -84,6 +84,20 @@
           return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id;
         }
 
+        function markerClick(feature) {
+            var url = siteLink(feature);
+            if (searchSize && searchSize > 1) {
+              url += '?searchSize=' + searchSize;
+            }
+            if (!$F('date').startsWith('Click')) {
+              url += '&date=' + $F('date');
+            }
+            if (!$F('address').startsWith('Enter ')) {
+              url += '&address=' + encodeURIComponent($F('address'));
+            }
+            window.location = url;
+        }
+
         function markerOver(feature) {
           var c = '<div style="width: 300px;"><h3>' + feature.title + '</h3>';
             if (feature.logoUrl) {
@@ -168,8 +182,10 @@
             if (map.getZoom() <= 1 || map.getZoom() >= 16) {
               pendingResize = false;
             }
-            if (siteCount == 0 || siteCount > 20) {
+            if (siteCount == 0) {
               return;
+            } else if (siteCount > 20) {
+              $('stresults_div').update("<div class=\"siteOverage\">Too many results returned.  Zoom in to see results.</div>");
             }
           }  else {
 
@@ -186,10 +202,16 @@
               method:'get',
               parameters: {searchSize: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
               onSuccess:function(transport) {
+
+                if (transport.responseJSON.siteCount >= 20) {
+                  $('stresults_div').update("<div class=\"siteOverage\">Too many results returned.  Zoom in to see results.</div>");
+                  return;                    
+                }
                 var randId = Math.floor(Math.random() * 100001);
                 var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Drive Up</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Upper</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
                 var offers;
+
                 transport.responseJSON.features.each(function(s) {
                     var location = new google.maps.LatLng(s.lat, s.lng);
                     features[s.id] = s;
@@ -254,6 +276,9 @@
                     google.maps.event.addListener(s.marker, 'mouseover', function() {
                       markerOver(s);
                     });
+                    google.maps.event.addListener(s.marker, 'click', function() {
+                      markerClick(s);
+                    });
                     tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
                       '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
                       (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
@@ -296,14 +321,14 @@
               var myOptions;
               if (iploc) {
                 myOptions = {
-                  zoom: 10,
+                  zoom: 12,
                   center: iploc,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               } else {
                 myOptions = {
-                  zoom: 10,
+                  zoom: 12,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
