@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.StorageSite" %>
+<%@ page import="com.storitz.UserRole; com.storitz.StorageSite" %>
 
 
 
@@ -45,7 +45,7 @@
               <label for="manager.id"><g:message code="siteLink.manager.label" default="Manager"/></label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: siteLinkInstance, field: 'manager', 'errors')}">
-              <g:select name="manager.id" from="${User.list()}" optionKey="id" value="${siteLinkInstance?.manager?.id}" noSelection="['null': '']"/>
+              <g:select name="manager.id" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" value="${siteLinkInstance?.manager?.id}" noSelection="['null': '']"/>
             </td>
           </tr>
 

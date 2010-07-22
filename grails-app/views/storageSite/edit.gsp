@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<%@ page import="com.storitz.UserRole" %>
+
+
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Create Storage Site"/>
@@ -84,6 +85,18 @@
                 </fckeditor:editor>
               </td>
             </tr>
+
+          <sec:ifAnyGranted roles="ROLE_ADMIN">
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="manager.id"><g:message code="siteLink.manager.label" default="Manager"/></label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: siteLinkInstance, field: 'manager', 'errors')}">
+                <g:select name="manager.id" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${siteUser?.user?.id}" noSelection="['null': '']"/>
+                <!-- siteUser user id = ${siteUser?.user?.id} -->
+              </td>
+            </tr>
+          </sec:ifAnyGranted>
 
             <tr class="prop">
               <td valign="top" class="name">

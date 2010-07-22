@@ -47,7 +47,7 @@ class UserRole implements Serializable {
 
     static getUsersByRoleName(rolename) {
       Role role = Role.findByAuthority(rolename)
-      return UserRole.findAllByRole(role).collect{ it.user }
+      return UserRole.findAllByRole(role).collect{ it.user }.sort()
     }
 
     static boolean userHasRole(User user, String rolename) {

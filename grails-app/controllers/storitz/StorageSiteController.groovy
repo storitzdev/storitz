@@ -8,6 +8,7 @@ import com.storitz.StorageSite
 import com.storitz.StorageSize
 import com.storitz.Visit
 import org.grails.plugins.imagetools.ImageTool
+import com.storitz.User
 
 class StorageSiteController {
 
@@ -120,7 +121,8 @@ class StorageSiteController {
           redirect(action: "list")
         }
       }
-      return [storageSiteInstance: storageSiteInstance]
+      def siteUser = SiteUser.find("from SiteUser as su where su.site = :site and su.user in (select ur.user from UserRole as ur, Role as r, User as u where ur.user = su.user and u.username != 'admin' and ur.user = u and ur.role = r and r.authority = :authority)", [site: storageSiteInstance, authority: 'ROLE_MANAGER'])
+      [storageSiteInstance: storageSiteInstance, siteUser: siteUser]
     }
   }
 
@@ -135,6 +137,11 @@ class StorageSiteController {
           render(view: "edit", model: [storageSiteInstance: storageSiteInstance])
           return
         }
+      }
+      def manager = User.get(params.manager?.id)
+      if (manager) {
+        SiteUser.unlink (storageSiteInstance, manager)
+        SiteUser.link(storageSiteInstance, manager)
       }
       // sanitize description
       //storageSiteInstance.description = storageSiteInstance.description.encodeAsSanitizedMarkup()
