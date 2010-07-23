@@ -16,6 +16,7 @@
     var unitTypes = [];
     var specialOffers = [];
     var searchSize;
+    var sizeDescription;
     var unitId;
     var siteId = ${params.id};
     var rentalFormReady = false;
@@ -33,7 +34,7 @@
     <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
     <g:if test="${params.searchSize}">
       searchSize = ${params.searchSize};
-      var sizeDescription = storageSize[ ${params.searchSize} ];
+      sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
     <g:each var="ins" in="${site.insurances}">premiums[${ins.insuranceId}] = ${ins.premium};</g:each>
     premiums[-999] = 0;
@@ -45,12 +46,14 @@
     var offerChosen = specialOffers[-1];
 
     function setupSize() {
-      if(typeof(sizeDescription) !== 'undefined')  {
-        if (searchSize > 1) {
-          $('sizeDescription').update(storageSize[searchSize]);
-        } else {
-          $('sizeDescription').update(' not chosen');
-        }
+      if (searchSize && searchSize > 1) {
+        $('sizeDescription').update(storageSize[searchSize]);
+      } else if ($F('unitsize')) {
+        searchSize = $F('unitsize');
+        searchDescription = storageSize[$F('unitsize')];
+        $('sizeDescription').update(storageSize[$F('unitsize')]);
+      } else {
+        $('sizeDescription').update(' not chosen');
       }
     }
 
@@ -683,7 +686,7 @@
             </div>
             <div class="featuredOfferText">
               <div id="specialOffers">
-              <p class="featuredOfferHeader">Select from the list below to take advantage of these Special Offers!</p>
+              <p class="featuredOfferHeader">Click on an offer below to see how much you can save.</p>
               <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
                 <g:each in="${site.featuredOffers()}" var="offer">
                   <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
@@ -729,7 +732,7 @@
             </div>
             <div style="height: 25px; clear: both;"></div>
             <div id="map">
-              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_map_grn.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
             </div>
             <div id="detail_tabs">
               <div id="photo_button" class="left tab_button_on button_text_hi">Photos</div><div id="direction_button" class="right tab_button_off button_text">Directions</div>
@@ -822,10 +825,10 @@
               <!-- Primary Contact -->
               <div id="primary_contact">
                 <div class="price_options checkout_header white">
-                  Primary Contact Information
+                  Contact Information
                 </div>
                 <div class="formInstructions">
-                  Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our Privacy Policy
+                  Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our <a href="${createLink(controller:'static', action:'privacy')}" target="_new">Privacy Policy</a>
                 </div>
                 <div class="checkout_section_header">
                   Name
@@ -993,10 +996,10 @@
               <!-- Secondary Contact -->
               <div id="secondary_contact" style="display:none;">
                 <div class="price_options checkout_header white">
-                  Secondary Contact Information
+                  Contact Information
                 </div>
                 <div class="formInstructions">
-                  Storage Property Owners (and most States) require a second contact with distinct address and phone number in the event your property is at risk and you are incapacitated or unreachable. A good second contact is a parent or friend.
+                  Storage property owners (and most states) require a second contact with distinct address and phone number in the event your property is at risk and you are unreachable. Consider using a close friend or relative.
                 </div>
                 <div class="checkout_section_header">
                   Name
@@ -1151,7 +1154,8 @@
                   </div>
                   <div class="checkout_fields">
                     <div class="value ${hasErrors(bean: rentalTransaction, field: 'reserveTruck', 'errors')}">
-                        <g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /> Reserve Free Truck for this move in
+                        <div class="left"><g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /></div><div class="checkBoxText"> Reserve Free Truck for this move in</div>
+                        <div style="clear:both;"></div>
                     </div>
                     <div style="clear:both;"></div>
                   </div>
@@ -1163,7 +1167,8 @@
                   </div>
                   <div class="checkout_fields">
                     <div class="value ${hasErrors(bean: rentalTransaction, field: 'reserveTruck', 'errors')}">
-                        <g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /> Reserve Rental Truck for this move in
+                        <div class="left"><g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransaction?.reserveTruck}" /></div><div class="checkBoxText"> Reserve Rental Truck for this move in</div>
+                        <div style="clear:both;"></div>
                     </div>
                     <div style="clear:both;"></div>
                   </div>
@@ -1186,7 +1191,8 @@
                 </div>
                 <div class="checkout_fields">
                   <div id="insuranceTermsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'insuranceTerms', 'errors')}">
-                      <g:checkBox name="insuranceTerms" id="insuranceTerms" class="required" value="${rentalTransaction?.insuranceTerms}" /> By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
+                      <div class="left"><g:checkBox name="insuranceTerms" id="insuranceTerms" class="required" value="${rentalTransaction?.insuranceTerms}" /></div><div class="checkBoxText"> By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property</div>
+                      <div style="clear:both;"></div>
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -1199,7 +1205,8 @@
                 </div>
                 <div class="checkout_fields">
                   <div class="value ${hasErrors(bean: rentalTransaction, field: 'activeMilitary', 'errors')}">
-                      <g:checkBox name="activeMilitary" value="${rentalTransaction?.activeMilitary}" /> Are you a member of the US Armed Forces and on active duty?
+                      <div class="left"><g:checkBox name="activeMilitary" value="${rentalTransaction?.activeMilitary}" /></div><div class="checkBoxText"> Are you a member of the US Armed Forces and on active duty?</div>
+                      <div style="clear:both;"></div>
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -1209,7 +1216,8 @@
                 </div>
                 <div class="checkout_fields">
                   <div id="hazardousMaterialsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'hazardousMaterials', 'errors')}">
-                      <g:checkBox name="hazardousMaterials" id="hazardousMaterials" class="required" value="${rentalTransaction?.hazardousMaterials}" /> By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
+                      <div class="left"><g:checkBox name="hazardousMaterials" id="hazardousMaterials" class="required" value="${rentalTransaction?.hazardousMaterials}" /></div><div class="checkBoxText"> By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.</div>
+                      <div style="clear:both;"></div>
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -1219,7 +1227,8 @@
                 </div>
                 <div class="checkout_fields">
                   <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
-                      <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /> I agree to the terms and conditions of the Storage Rental Agreement
+                      <div class="left"><g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /></div><div class="checkBoxText"> I agree to the terms and conditions of the Storage Rental Agreement</div>
+                      <div style="clear:both;"></div>
                   </div>
                   <div style="clear:both;"></div>
                 </div>

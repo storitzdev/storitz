@@ -978,3 +978,13 @@ div.rightArrowActive:hover {
 .legalHeader {
     font-weight: bold;
 }
+
+.nodot {
+    list-style: none;
+}
+
+.checkBoxText {
+    float: left;
+    margin-left: 1.5em;
+    width: 600px;
+}

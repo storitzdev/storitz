@@ -330,7 +330,7 @@
                     </g:if>
                   </g:each>
                 </ul>
-                <div>Enter as many images as you wish, by adding browsing one at a time:</div>
+                <div>Add as many photos as you like:</div>
                 <input type="file" name="imageFile" class="multi" accept="gif|jpg|png|jpeg"/>
 
               </td>

@@ -32,6 +32,8 @@
         var savedFeature;
         var siteCount = 0;
         var bounds = null;
+        var markerImageGreen = null;
+        var markerImageGray = null;
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
@@ -89,10 +91,10 @@
             if (searchSize && searchSize > 1) {
               url += '?searchSize=' + searchSize;
             }
-            if (!$F('date').startsWith('Click')) {
+            if ($F('date') && !$F('date').startsWith('Click')) {
               url += '&date=' + $F('date');
             }
-            if (!$F('address').startsWith('Enter ')) {
+            if ($F('address') && !$F('address').startsWith('Enter ')) {
               url += '&address=' + encodeURIComponent($F('address'));
             }
             window.location = url;
@@ -231,7 +233,7 @@
                     }
                     rows++;
 
-                    var iconLink = s.units.size() == 0 ? '${resource(dir:'images', file:'gray-icon.png')}' : '${resource(dir:'images', file:'icn_map_grn.png')}';
+                    var iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
                     var priceDriveup = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isDriveup) ? n.price : 999999; });
                     var priceInterior = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isInterior) ? n.price : 999999; });
                     var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
@@ -271,7 +273,7 @@
                       map: map,
                       title: s.title,
                       position: location,
-                      icon: iconLink
+                      icon: iconMarker
                     });
                     google.maps.event.addListener(s.marker, 'mouseover', function() {
                       markerOver(s);
@@ -333,7 +335,11 @@
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               }
+              markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_grn.png')}', null, null, new google.maps.Point(1, 32));
+              markerImageGray = new google.maps.MarkerImage('${resource(dir:'images', file:'gray-icon.png')}', null, null, new google.maps.Point(1, 32));
+
               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
+
               searchLat = iploc.lat();
               searchLng = iploc.lng();
               TableKit.Sortable.init($('stresults'), {editable:false, stripe:true});
