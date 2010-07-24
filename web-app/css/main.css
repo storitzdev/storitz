@@ -313,7 +313,7 @@ Added styles
     font-weight: bold;
     color: #3fac00;
     float: right;
-    margin-top: -50px;
+    margin-top: -33px;
     margin-right: 35px;
     z-index: -10;
 }
@@ -987,4 +987,9 @@ div.rightArrowActive:hover {
     float: left;
     margin-left: 1.5em;
     width: 600px;
+}
+
+a.footer:link, a.footer:visited, a.footer:hover {
+    color: #fff;
+    font-weight: bold;
 }
