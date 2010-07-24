@@ -52,7 +52,7 @@ public class GeoIp {
 
         if (lookupService == null) {
             try {
-                lookupService = new LookupService(file, LookupService.GEOIP_MEMORY_CACHE);
+                lookupService = new LookupService(file, LookupService.GEOIP_MEMORY_CACHE | LookupService.GEOIP_CHECK_CACHE);
             } catch (IOException e) {
                 e.printStackTrace();
             }

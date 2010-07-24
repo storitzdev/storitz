@@ -459,7 +459,7 @@
               msg += '<span class="blue">. Please select unit size and starting date.</span>';
             }
           } else {
-            msg = '<span class="blue">Search Results near you. Please select an address or zip, unit size and move-in date.</span>';
+            msg = '';
           }
           $('searchMsg').update(msg);
         }

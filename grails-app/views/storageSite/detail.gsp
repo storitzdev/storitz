@@ -47,13 +47,9 @@
 
     function setupSize() {
       if (searchSize && searchSize > 1) {
-        $('sizeDescription').update(storageSize[searchSize]);
       } else if ($F('unitsize')) {
         searchSize = $F('unitsize');
         searchDescription = storageSize[$F('unitsize')];
-        $('sizeDescription').update(storageSize[$F('unitsize')]);
-      } else {
-        $('sizeDescription').update(' not chosen');
       }
     }
 
@@ -182,11 +178,6 @@
     function sizeChange() {
       $('unitsize').observe('change', function() {
         searchSize = $F('unitsize');
-        if (searchSize > 1) {
-          $('sizeDescription').update(storageSize[searchSize]);
-        } else {
-          $('sizeDescription').update(' not chosen');
-        }
         buildTable();
       })
     }
@@ -620,7 +611,7 @@
 
           <div id="left_info">
             <div>
-              <div class="section_header">Available sizes:  (currently <span id="sizeDescription">undefined</span>)</div>
+              <div class="section_header">Choose a size:</div>
               <g:if test="${params.searchSize}">
                 <g:select id="unitsize" class="validate-selection" style="width:150px;" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
               </g:if>
@@ -732,7 +723,7 @@
             </div>
             <div style="height: 25px; clear: both;"></div>
             <div id="map">
-              <img src="http://maps.google.com/maps/api/staticmap?center=${site.lat},${site.lng}&zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.lat},${site.lng}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+              <img src="http://maps.google.com/maps/api/staticmap?zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.getFullAddress().encodeAsURL()}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
             </div>
             <div id="detail_tabs">
               <div id="photo_button" class="left tab_button_on button_text_hi">Photos</div><div id="direction_button" class="right tab_button_off button_text">Directions</div>

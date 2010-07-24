@@ -15,6 +15,7 @@ import com.storitz.StorageSize
 class SiteLinkService {
 
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
+  def siteLinkWsUrl35 = "https://www.smdservers.net/CCWs_3.5/CallCenterWs.asmx"
 
   static MSDateEpoch = new Date().parse('yyyy/MM/dd', '1900/01/01') 
 
@@ -200,7 +201,7 @@ class SiteLinkService {
   }
 
   private def postAction(payload, action) {
-    def http = new HTTPBuilder(siteLinkWsUrl)
+    def http = new HTTPBuilder(siteLinkWsUrl35)
 
     http.handler.failure = {resp, req ->
       "Unexpected failure: ${resp.statusLine} "
@@ -423,17 +424,10 @@ class SiteLinkService {
         println "Skipping unit due to size: width=" + width + " length=" + length
       }
     }
-    // compute last update
-    def now = new Date()
-    def daySinceEpoch = now - MSDateEpoch
-    def c = Calendar.instance
-    c.set(Calendar.HOUR,  0)
-    c.set(Calendar.MINUTE, 0)
-    c.set(Calendar.SECOND, 0)
-    def millisSinceMidnight = now.time - c.timeInMillis
-    def ticks = ((millisSinceMidnight * 4)/3).longValue() + (daySinceEpoch.longValue() << 32).longValue()
+    for (lastupdate in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table1') {
+      site.lastUpdate = lastupdate.lngLastTimePolled.text() as Long
+    }
 
-    site.lastUpdate = ticks
   }
 
   def insurance(siteLink, site) {
