@@ -19,15 +19,11 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="3a85bc51-0c73-4513-9a3e-af17dd580ecc" name="Default" comment="Finished delegation of privileges - let admin user assign managers to site">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/static/contactus.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/static/aboutus.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/static/refund.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/StaticController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/StaticController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_footer.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_footer.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/static/faq.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/ssa_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/Stumbleupon-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/FaceBook-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/delicious-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/Twitter-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/Digg-icon.png" />
     </list>
     <ignored path="$USER_HOME_GRIFFON$/" />
     <ignored path=".idea/workspace.xml" />
@@ -106,7 +102,7 @@
       <file leaf-file-name="_footer.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/_footer.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="37" selection-start="55" selection-end="55" vertical-scroll-proportion="-0.68">
+            <state line="1" column="37" selection-start="55" selection-end="55" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,7 +111,7 @@
       <file leaf-file-name="_logo_bar.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/_logo_bar.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="19" selection-start="257" selection-end="265" vertical-scroll-proportion="-4.08">
+            <state line="6" column="19" selection-start="257" selection-end="265" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,7 +120,7 @@
       <file leaf-file-name="terms.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/static/terms.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="84" selection-start="0" selection-end="39559" vertical-scroll-proportion="-0.33333334">
+            <state line="33" column="84" selection-start="0" selection-end="39559" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -133,7 +129,7 @@
       <file leaf-file-name="refund.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/static/refund.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="0" selection-end="846" vertical-scroll-proportion="-2.6666667">
+            <state line="25" column="0" selection-start="0" selection-end="846" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,7 +138,7 @@
       <file leaf-file-name="faq.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/static/faq.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="38" selection-start="670" selection-end="670" vertical-scroll-proportion="-3.6666667">
+            <state line="24" column="38" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -151,7 +147,7 @@
       <file leaf-file-name="contactus.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/static/contactus.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="22" selection-start="654" selection-end="654" vertical-scroll-proportion="-3.6666667">
+            <state line="24" column="22" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -160,7 +156,7 @@
       <file leaf-file-name="aboutus.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/static/aboutus.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="20" selection-start="652" selection-end="652" vertical-scroll-proportion="0.47826087">
+            <state line="24" column="20" selection-start="652" selection-end="652" vertical-scroll-proportion="0.5638126">
               <folding />
             </state>
           </provider>
@@ -169,7 +165,7 @@
       <file leaf-file-name="StaticController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StaticController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="20" selection-start="174" selection-end="174" vertical-scroll-proportion="-9.153846">
+            <state line="14" column="20" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -178,7 +174,7 @@
       <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="327" column="4" selection-start="5971" selection-end="5971" vertical-scroll-proportion="442.24">
+            <state line="327" column="4" selection-start="5971" selection-end="5971" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -610,9 +606,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -868,7 +864,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="870" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970226" sideWeight="0.66386557" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32775453" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -878,7 +874,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39888424" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32896653" sideWeight="0.67921895" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32969433" sideWeight="0.0" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32775453" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32217574" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -888,7 +884,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995633" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33042213" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31101814" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3098782" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31799164" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1033,6 +1029,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/images/delicious-icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="255" column="23" selection-start="9771" selection-end="9781" vertical-scroll-proportion="0.0">
@@ -1040,70 +1041,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/images/delicious-icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_footer.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="37" selection-start="55" selection-end="55" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/_logo_bar.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="257" selection-end="265" vertical-scroll-proportion="-4.08">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="327" column="4" selection-start="5971" selection-end="5971" vertical-scroll-proportion="442.24">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StaticController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="20" selection-start="174" selection-end="174" vertical-scroll-proportion="-9.153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_footer.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="37" selection-start="55" selection-end="55" vertical-scroll-proportion="-0.68">
+        <state line="6" column="19" selection-start="257" selection-end="265" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/static/terms.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="84" selection-start="0" selection-end="39559" vertical-scroll-proportion="-0.33333334">
+        <state line="33" column="84" selection-start="0" selection-end="39559" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/static/refund.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="0" selection-end="846" vertical-scroll-proportion="-2.6666667">
+        <state line="25" column="0" selection-start="0" selection-end="846" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/static/faq.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="38" selection-start="670" selection-end="670" vertical-scroll-proportion="-3.6666667">
+        <state line="24" column="38" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/static/contactus.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="22" selection-start="654" selection-end="654" vertical-scroll-proportion="-3.6666667">
+        <state line="24" column="22" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StaticController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="20" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="327" column="4" selection-start="5971" selection-end="5971" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/static/aboutus.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="20" selection-start="652" selection-end="652" vertical-scroll-proportion="0.47826087">
+        <state line="24" column="20" selection-start="652" selection-end="652" vertical-scroll-proportion="0.5638126">
           <folding />
         </state>
       </provider>
