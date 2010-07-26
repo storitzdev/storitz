@@ -9,6 +9,7 @@
 
   <script type="text/javascript">
     //<![CDATA[
+
     google.load("jquery", "1.4.2");
 
     google.setOnLoadCallback(function() {
@@ -24,6 +25,39 @@
       AnyTime.picker("endSaturday", {format:"%h:%i%p"});
       AnyTime.picker("startSunday", {format:"%h:%i%p"});
       AnyTime.picker("endSunday", {format:"%h:%i%p"});
+    }
+
+    function checkAddItem(type) {
+      var listName = type + 'ItemList';
+      var listAdd = type + 'ItemAdd';
+      if ($(listName).childElements().length >= 10) {
+        $(listAdd).hide();
+      }
+    }
+
+    function itemAdd(type) {
+      var listName = type + 'ItemList';
+      var list = $(listName).childElements();
+      var newItem = list.length + 1;
+      if (list.length > 0) {
+         var lastItem = list[list.length - 1];
+         var lastInputName = lastItem.firstDescendant().name;
+         newItem = parseInt(lastInputName.substr(lastInputName.indexOf('_') + 1)) + 1;
+      }
+      var itemName = type + 'Item_' + newItem;
+      var liElem = new Element('li', {id:itemName});
+      var newInput = new Element('input', {
+        name: itemName,
+        type: 'text'
+      });
+      var newLink = new Element('a', {
+        href: '#',
+        onclick: '$(\'' + itemName + '\').remove();checkAddItem(' + type + ');'
+      });
+      newLink.update('delete');
+      liElem.insert({bottom: newInput});
+      liElem.insert({bottom: newLink});
+      $(listName).insert({bottom: liElem});
     }
 
     //]]>
@@ -68,6 +102,63 @@
               </td>
               <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'title', 'errors')}">
                 <g:textField name="title" value="${storageSiteInstance?.title}"/>
+              </td>
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <g:message code="storageSite.securityItems.label" default="Security/Safety Features"/>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'securityItems', 'errors')}">
+
+                <ul id="securityItemList">
+                  <g:each in="${storageSiteInstance?.securityItems}" status="i" var="c">
+                    <li id="securityItem_${i}">
+                      <input type="text" value="${c.bullet}" class="" name="securityItem_${i}"/>  <a href="#" onclick="$('securityItem_${i}').remove();checkAddItem('security');">delete</a>
+                    </li>
+                  </g:each>
+                </ul>
+                <p id="securityItemAdd">
+                  <a href="#" onclick="itemAdd('security');checkAddItem('security');">Add Item</a>
+                </p>
+              </td>
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <g:message code="storageSite.convenienceItems.label" default="Convenience Features"/>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'convenienceItems', 'errors')}">
+
+                <ul id="convenienceItemList">
+                  <g:each in="${storageSiteInstance?.convenienceItems}" status="i" var="c">
+                    <li id="convenienceItem_${i}">
+                      <input type="text" value="${c.bullet}" class="" name="convenienceItem_${i}"/>  <a href="#" onclick="$('convenienceItem_${i}').remove();checkAddItem('convenience');">delete</a>
+                    </li>
+                  </g:each>
+                </ul>
+                <p id="convenienceItemAdd">
+                  <a href="#" onclick="itemAdd('convenience');checkAddItem('convenience');">Add Item</a>
+                </p>
+              </td>
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <g:message code="storageSite.amenityItems.label" default="Amenity Features"/>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'amenityItems', 'errors')}">
+
+                <ul id="amenityItemList">
+                  <g:each in="${storageSiteInstance?.amenityItems}" status="i" var="c">
+                    <li id="amenityItem_${i}">
+                      <input type="text" value="${c.bullet}" class="" name="amenityItem_${i}"/>  <a href="#" onclick="$('amenityItem_${i}').remove();checkAddItem('amenity');">delete</a>
+                    </li>
+                  </g:each>
+                </ul>
+                <p id="amenityItemAdd">
+                  <a href="#" onclick="itemAdd('amenity');checkAddItem('amenity');">Add Item</a>
+                </p>
               </td>
             </tr>
 
@@ -275,6 +366,15 @@
               </td>
               <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isUnitAlarmed', 'errors')}">
                 <g:checkBox name="isUnitAlarmed" value="${storageSiteInstance?.isUnitAlarmed}"/>
+              </td>
+            </tr>
+
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="isManagerOnsite"><g:message code="storageSite.isManagerOnsite.label" default="Manager Onsite"/></label>
+              </td>
+              <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'isManagerOnsite', 'errors')}">
+                <g:checkBox name="isManagerOnsite" value="${storageSiteInstance?.isManagerOnsite}"/>
               </td>
             </tr>
 

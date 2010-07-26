@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact, insurances:Insurance, visits:Visit ]
+    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact, insurances:Insurance, visits:Visit, securityItems: Bullet, convenienceItems: Bullet, amenityItems: Bullet ]
     static fetchMode = []
 
     static constraints = {
@@ -62,6 +62,7 @@ class StorageSite {
     Boolean isKeypad
     Boolean isCamera
     Boolean isUnitAlarmed
+    Boolean isManagerOnsite
 
   // Fees
     BigDecimal adminFee

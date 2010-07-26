@@ -671,6 +671,13 @@
               <div class="left icon_text">Unit Alarmed</div>
               <div style="clear: both;"></div>
             </g:if>
+            <g:if test="${site.isManagerOnsite}">
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-manager32.jpg')}" alt="Manager Onsite"/>
+              </div>
+              <div class="left icon_text">Manager Onsite</div>
+              <div style="clear: both;"></div>
+            </g:if>
             <div style="height:21px;"></div>
             <div class="other_details header_text_hi">
               Featured Offers:
@@ -766,7 +773,7 @@
             <table id="price_table">
               <thead>
                 <tr class="price_options">
-                  <th style="width:200px; text-align: left; padding-left:20px;">Options</th>
+                  <th style="width:200px; text-align: left; padding-left:20px;">Details</th>
                   <th style="width:100px;">Months</th>
                   <th style="width:200px; text-align: right;">Monthly Rent</th>
                   <th style="width:166px; text-align: right;">Total Rent</th>

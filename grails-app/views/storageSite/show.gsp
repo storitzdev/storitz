@@ -59,6 +59,45 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.security.label" default="Security Items"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <ul>
+              <g:each in="${storageSiteInstance.securityItems.sort{ it.id }}" var="c">
+                <li>${c.bullet}</li>
+              </g:each>
+            </ul>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.convenience.label" default="Convenience Items"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <ul>
+              <g:each in="${storageSiteInstance.convenienceItems.sort{ it.id }}" var="c">
+                <li>${c.bullet}</li>
+              </g:each>
+            </ul>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.amenity.label" default="Amenity Items"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <ul>
+              <g:each in="${storageSiteInstance.amenityItems.sort{ it.id }}" var="c">
+                <li>${c.bullet}</li>
+              </g:each>
+            </ul>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.description.label" default="Description"/></td>
 
           <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "description").decodeHTML()}</td>
@@ -242,6 +281,13 @@
           <td valign="top" class="name"><g:message code="storageSite.isUnitAlarmed.label" default="Is Unit Alarmed"/></td>
 
           <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isUnitAlarmed}"/></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.isManagerOnsite.label" default="Is Manager Onsite"/></td>
+
+          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isManagerOnsite}"/></td>
 
         </tr>
 

@@ -27,7 +27,7 @@
     </tr>
 
     <tr style="background: #F1F8E9;">
-      <th class="width: 120px;">Options</th>
+      <th class="width: 120px;">Details</th>
       <th class="width: 60px;">Months</th>
       <th class="width: 60px;">Rent</th>
       <th class="width: 60px;">Total Rent</th>

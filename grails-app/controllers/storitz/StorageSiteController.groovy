@@ -9,6 +9,7 @@ import com.storitz.StorageSize
 import com.storitz.Visit
 import org.grails.plugins.imagetools.ImageTool
 import com.storitz.User
+import com.storitz.Bullet
 
 class StorageSiteController {
 
@@ -143,6 +144,38 @@ class StorageSiteController {
         SiteUser.unlink (storageSiteInstance, manager)
         SiteUser.link(storageSiteInstance, manager)
       }
+      // clear all items
+      for(item in storageSiteInstance.securityItems) {
+        item.delete()
+      }
+      storageSiteInstance.securityItems.clear();
+
+      for(item in storageSiteInstance.convenienceItems) {
+        item.delete()
+      }
+      storageSiteInstance.convenienceItems.clear();
+
+      for(item in storageSiteInstance.amenityItems) {
+        item.delete()
+      }
+      storageSiteInstance.amenityItems.clear()
+
+      for (param in params.keySet()) {
+        if (param.startsWith('securityItem_')) {
+          def bullet = new Bullet()
+          bullet.bullet = params[param]
+          storageSiteInstance.securityItems.add(bullet);
+        } else if (param.startsWith('convenienceItem_')) {
+          def bullet = new Bullet()
+          bullet.bullet = params[param]
+          storageSiteInstance.convenienceItems.add(bullet);
+        } else if (param.startsWith('amenityItem_')) {
+          def bullet = new Bullet()
+          bullet.bullet = params[param]
+          storageSiteInstance.amenityItems.add(bullet);
+        }
+      }
+
       // sanitize description
       //storageSiteInstance.description = storageSiteInstance.description.encodeAsSanitizedMarkup()
       def logoFile = request.getFile('logoFile')
