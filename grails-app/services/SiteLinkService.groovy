@@ -11,6 +11,7 @@ import com.storitz.SiteUser
 import com.storitz.StorageSite
 import com.storitz.SpecialOffer
 import com.storitz.StorageSize
+import storitz.constants.State
 
 class SiteLinkService {
 
@@ -278,7 +279,7 @@ class SiteLinkService {
     site.address = tab.sSiteAddr1.text()
     site.address2 = tab.sSiteAddr2.text()
     site.city = tab.sSiteCity.text()
-    site.state = tab.sSiteRegion.text()
+    site.state = State.fromText(tab.sSiteRegion.text())
     site.zipcode = tab.sSitePostalCode.text()
     site.requiresInsurance = false
     site.boxesAvailable = true
@@ -287,6 +288,8 @@ class SiteLinkService {
     site.isKeypad = false
     site.isCamera = false
     site.isUnitAlarmed = false
+    site.isManagerOnsite = false
+    site.hasElevator = false
 
     site.openWeekday = !Boolean.parseBoolean(tab.bClosedWeekdays.text())
     site.openSaturday = !Boolean.parseBoolean(tab.bClosedSaturday.text())
@@ -298,12 +301,13 @@ class SiteLinkService {
     def sSaturdayEnd = tab.dSaturdayEnd.text()
     def sSundayStart = tab.dSundayStrt.text()
     def sSundayEnd = tab.dSundayEnd.text()
-    site.startWeekday = sWeekdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sWeekdayStart) : null
-    site.endWeekday = sWeekdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sWeekdayEnd) : null
-    site.startSaturday = sSaturdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSaturdayStart) : null
-    site.endSaturday = sSaturdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSaturdayEnd) : null
-    site.startSunday = sSundayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSundayStart) : null
-    site.endSunday = sSundayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSS", sSundayEnd) : null
+    site.startGate = site.startWeekday = sWeekdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00') : null
+    site.endGate = site.endWeekday = sWeekdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayEnd.substring(0, sWeekdayEnd.length() - 3) + '00') : null
+    site.startSaturday = sSaturdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSaturdayStart.substring(0, sSaturdayStart.length() - 3) + '00') : null
+    site.endSaturday = sSaturdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSaturdayEnd.substring(0, sSaturdayEnd.length() - 3) + '00') : null
+    site.startSunday = sSundayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSundayStart.substring(0, sSundayStart.length() - 3) + '00') : null
+    site.endSunday = sSundayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSundayEnd.substring(0, sSundayEnd.length() - 3) + '00') : null
+    site.extendedHours = false
 
     site.siteLink = siteLink
     site.centerShift = null

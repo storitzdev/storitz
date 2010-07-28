@@ -48,7 +48,11 @@ class RentalTransactionController {
         } else {
           rentalTransactionInstance.isCallCenter = false          
         }
-      
+
+        // check if no promo selected
+        if (!params.promoId && site.siteLink) {
+          rentalTransactionInstance.promoId = -999;
+        }
         if (rentalTransactionInstance.save(flush: true)) {
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
               redirect(action: "payment", id: rentalTransactionInstance.id)

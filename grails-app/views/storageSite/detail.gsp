@@ -673,9 +673,16 @@
             </g:if>
             <g:if test="${site.isManagerOnsite}">
               <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-manager32.jpg')}" alt="Manager Onsite"/>
+                <img src="${createLinkTo(dir:'images', file:'icon3d-mgr32b.jpg')}" alt="Manager Onsite"/>
               </div>
               <div class="left icon_text">Manager Onsite</div>
+              <div style="clear: both;"></div>
+            </g:if>
+            <g:if test="${site.hasElevator}">
+              <div class="left">
+                <img src="${createLinkTo(dir:'images', file:'icon3d-elevator32.jpg')}" alt="Elevator Available"/>
+              </div>
+              <div class="left icon_text">Elevator Available</div>
               <div style="clear: both;"></div>
             </g:if>
             <div style="height:21px;"></div>

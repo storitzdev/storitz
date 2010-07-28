@@ -100,4 +100,9 @@ public enum State {
             Armed_Forces_Pacific
     ]
   }
+
+  public static State fromText(String key) {
+    return list().find{ it.getValue() == key }
+  }
+
 }

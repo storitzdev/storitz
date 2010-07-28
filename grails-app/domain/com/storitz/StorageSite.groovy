@@ -2,6 +2,7 @@ package com.storitz
 
 import storitz.constants.TruckType
 import java.util.regex.Pattern
+import storitz.constants.State
 
 class StorageSite {
 
@@ -30,6 +31,8 @@ class StorageSite {
       endSaturday(nullable:true)
       startSunday(nullable:true)
       endSunday(nullable:true)
+      startGate(nullable:true)
+      endGate(nullable:true)
       siteLink(nullable:true)
       centerShift(nullable:true)
       bankAccount(nullable:true)
@@ -44,7 +47,7 @@ class StorageSite {
     String address
     String address2
     String city
-    String state
+    State state
     String zipcode
     String url
     String phone
@@ -63,6 +66,7 @@ class StorageSite {
     Boolean isCamera
     Boolean isUnitAlarmed
     Boolean isManagerOnsite
+    Boolean hasElevator
 
   // Fees
     BigDecimal adminFee
@@ -78,6 +82,9 @@ class StorageSite {
     Date endSaturday
     Date startSunday
     Date endSunday
+    Date startGate
+    Date endGate
+    Boolean extendedHours
 
   // data feeds
     SiteLink siteLink

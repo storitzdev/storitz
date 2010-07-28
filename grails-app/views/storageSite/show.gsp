@@ -292,6 +292,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.hasElevator.label" default="Elevator Available"/></td>
+
+          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.hasElevator}"/></td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.isCamera.label" default="Is Camera"/></td>
 
           <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isCamera}"/></td>

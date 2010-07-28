@@ -185,7 +185,7 @@
             if (siteCount == 0) {
               return;
             } else if (siteCount > 20) {
-              $('stresults_div').update("<div class=\"siteOverage\">Too many results returned.  Zoom in to see results.</div>");
+              $('stresults_div').update("<div class=\"siteOverage\">Your search returned too many sites. Zoom in on the map to see detailed results.</div>");
             }
           }  else {
 
@@ -240,7 +240,8 @@
                     var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var gateImg   = s.isGate ? '<img id="gate' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
                     var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var managerImg  = s.isManagerOnsite ? '<img id="manager' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-manager-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var managerImg  = s.isManagerOnsite ? '<img id="manager' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-green-mgr20b.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>' : '<span style="width:20px; margin: 1px;"></span>';
+                    var elevatorImg  = s.hasElevator ? '<img id="elevator' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-green-elevator20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>' : '<span style="width:20px; margin: 1px;"></span>';
 
                     var truckImg = '<span style="width:20px; margin: 1px;"></span>';
                     switch(s.freeTruck) {
@@ -267,6 +268,9 @@
                     if (s.isManagerOnsite) {
                       tooltips.set("manager" + s.id, "tooltip_manager");
                     }
+                    if (s.hasElevator) {
+                      tooltips.set("elevator" + s.id, "tooltip_elevator");
+                    }
                     if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
                       tooltips.set("truck" + s.id, "tooltip_truck");
                     }
@@ -287,7 +291,7 @@
                       '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
                       (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
                       (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + truckImg +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
@@ -378,7 +382,7 @@
                 searchLat = results[0].geometry.location.lat();
                 searchLng = results[0].geometry.location.lng();
               } else {
-                alert("Geocode was not successful for the following reason: " + status);
+                $('stresults_div').update("<div class=\"siteOverage\">Your search was too vague - you may need to add a zip code or state to:" + $F('address') + "</div>");
               }
             });
           }
@@ -549,6 +553,9 @@
       </div>
       <div id="tooltip_manager" style="display:none" class="tooltip">
       Manager lives onsite
+      </div>
+      <div id="tooltip_elevator" style="display:none" class="tooltip">
+      Elevator to Upper Floors
       </div>
       <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
     </div>
