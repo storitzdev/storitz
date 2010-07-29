@@ -399,6 +399,11 @@ Object.extend(String.prototype, {
   },
 
   evalScripts: function() {
+    /* 
+     * Someone calls delay() on the window before these extensions are registered. 
+     * Do this check to avoid an error message showing up in the console.
+     */
+    if (this.extractScripts == undefined) return undefined;
     return this.extractScripts().map(function(script) { return eval(script) });
   },
 
