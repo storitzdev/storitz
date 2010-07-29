@@ -170,11 +170,24 @@
           <td valign="top" class="name"><g:message code="storageSite.specialOffers.label" default="Special Offers"/></td>
 
           <td valign="top" style="text-align: left;" class="value">
-            <ul>
+            <table>
+              <tr>
+                <th>Active</th>
+                <th>Featured</th>
+                <th>Waive Admin</th>
+                <th>Promo Name</th>
+                <th>Description</th>
+              </tr>
               <g:each in="${storageSiteInstance.specialOffers}" var="s">
-                <li>${s.active ? 'active' : 'inactive'} ${s.featured ? 'featured' : ''} - ${s?.promoName}</li>
+                <tr>
+                  <td>${s.active ? 'X' : '&nbsp;'}</td>
+                  <td>${s.featured ? 'X' : '&nbsp;'}</td>
+                  <td>${s.waiveAdmin ? 'X' : '&nbsp;'}</td>
+                  <td>${s?.promoName}</td>
+                  <td>${s?.description}</td>
+                </tr>
               </g:each>
-            </ul>
+            </table>
           </td>
 
         </tr>
@@ -217,6 +230,23 @@
 
         </tr>
 
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.extendedHours.label" default="Extended Hours"/></td>
+
+          <td valign="top" class="value">
+            ${storageSiteInstance.extendedHours ? "Available" : "Unavailable"}
+          </td>
+
+        </tr>
 
         <tr class="prop">
           <td colspan="2" valign="top"><h3>Fees</h3></td>
@@ -344,6 +374,7 @@
         <span class="button"><g:actionSubmit class="add" action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
         <span class="button"><g:actionSubmit class="add" action="units" value="${message(code: 'default.button.refresh.label', default: 'Reload Available Units')}" /></span>
         <span class="button"><g:actionSubmit class="table" action="report" value="${message(code: 'default.button.report.label', default: 'Activity Report')}" /></span>
+        <a href="${createLink(action:"detail", params:[id:storageSiteInstance?.id])}" target="_blank">See site detail</a>
       </g:form>
     </div>
   </div>

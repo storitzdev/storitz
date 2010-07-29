@@ -417,6 +417,11 @@
               showAddress($F('address'), $F('size'), $F('date'));
             }
           });
+          $('address').observe('click', function(event) {
+            if ($F('address').startsWith('Enter ')) {
+              $('address').value = '';
+            }
+          });
           $('size').observe('change', function() {
             showAddress($F('address'), $F('size'), $F('date'));
           });          

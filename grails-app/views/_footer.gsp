@@ -16,7 +16,7 @@
   <div style="margin: 1em;" class="right">
     <div style="margin: 1em;" class="left">
       <a href="http://twitter.com/Storitzdotcom"><img style="border: none;" src="${resource(dir:'images', file:'Twitter-icon.png')}" alt="Twitter"/></a>
-      <a href="http://www.facebook.com/"><img style="border: none;" src="${resource(dir:'images', file:'FaceBook-icon.png')}" alt="FaceBook"/></a>
+      <a href="http://www.facebook.com/storitz"><img style="border: none;" src="${resource(dir:'images', file:'FaceBook-icon.png')}" alt="FaceBook"/></a>
       <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><img style="border: none;" src="${resource(dir:'images', file:'Stumbleupon-icon.png')}" alt="StumbleUpon"/></a>
       <a href="http://www.digg.com/submit?url=http://www.storitz.com/"><img style="border: none;" src="${resource(dir:'images', file:'Digg-icon.png')}" alt="Digg"/></a>
       <a href="http://www.delicious.com/save/"><img style="border: none;" src="${resource(dir:'images', file:'delicious-icon.png')}" alt="Delicious"/></a>

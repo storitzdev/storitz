@@ -21,6 +21,7 @@
     var siteId = ${params.id};
     var rentalFormReady = false;
     var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
+    var adminFee = ${site.adminFee ? site.adminFee : 0};
     var destLatLng;
     var startDate = "${params.date}";
     var specialOfferId;
@@ -46,7 +47,7 @@
     premiums[-999] = 0;
     var defaultOffer = specialOffers[-1] = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
     <g:each var="offer" in="${site.specialOffers}">
-      specialOffers[${offer.id}] = { active: ${offer.active}, promoName: "${offer.promoName}", promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
+      specialOffers[${offer.id}] = { active: ${offer.active}, waiveAdmin:${offer.waiveAdmin}, promoName: "${offer.promoName}", promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
     </g:each>
     var premium = 0;
     var offerChosen = specialOffers[-1];
@@ -291,7 +292,9 @@
         tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text borderRight\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
       }
 
-      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"borderRight price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+      if (!offerChosen.waiveAdmin) {
+        tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"borderRight price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+      }
 
       var paidThruRow = "";
       if (typeof(startDate) !== 'undefined') {
@@ -300,7 +303,7 @@
         // can't use colspan=4 or it renders border wrong in Chrome/Safari
         paidThruRow = "<tr class=\"tableLine\"><td colspan=\"2\">Paid Through Date: <span class=\"specialOfferText\">" + paidThru.print("%o/%d/%y") + "</span></td><td></td><td></td></tr>";
       }
-      var total_movein = additionalFees + (monthlyRent + premium)*durationMonths - offerDiscount;
+      var total_movein = (offerChosen.waiveAdmin ? additionalFees - adminFee : additionalFees) + (monthlyRent + premium)*durationMonths - offerDiscount;
 
       $('price_totals_body').update(tableBody + paidThruRow);
       $('checkout_price_totals_body').update(tableBody);

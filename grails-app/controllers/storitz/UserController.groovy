@@ -91,7 +91,7 @@ class UserController {
 	def delete = {
 
 		def person = User.get(params.id)
-        if (session["username"] == 'admin' || person.manager == session["user"]) {
+        if (UserRole.userHasRole(session["user"], 'ROLE_ADMIN') || person.manager == session["user"]) {
           if (person) {
               def authPrincipal = springSecurityService.principal()
               //avoid self-delete if the logged-in user is an admin
@@ -208,8 +208,9 @@ class UserController {
         def person = new User()
         person.properties = params
         def siteList = null
-        if (session["username"] != "admin") {
-          siteList = SiteUser.findAllByUser(session["user"]).collect{ it.site }
+        def user = session["user"]
+        if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+          siteList = SiteUser.findAllByUser(user).collect{ it.site }
         }
 		[person: person, authorityList: Role.list(), siteList: siteList]
 	}

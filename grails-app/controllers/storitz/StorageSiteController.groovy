@@ -10,6 +10,8 @@ import com.storitz.Visit
 import org.grails.plugins.imagetools.ImageTool
 import com.storitz.User
 import com.storitz.Bullet
+import grails.plugins.springsecurity.Secured
+import com.storitz.UserRole
 
 class StorageSiteController {
 
@@ -25,12 +27,15 @@ class StorageSiteController {
     redirect(action: "list", params: params)
   }
 
+  @Secured(['ROLE_USER'])
   def list = {
     def username = session["username"]
+    def user = session["user"]
+
     def results
     def count
     
-    if (username == "admin") {
+    if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       if (params.sitename) {
         def q = "%${params.sitename}%"
         def max = Math.min(params.max ? params.int('max') : 10, 100)
@@ -43,7 +48,6 @@ class StorageSiteController {
         count = StorageSite.count()
       }
     } else {
-      def user = session["user"]
       def max = Math.min(params.max ? params.int('max') : 10, 100)
       def offset = params.offset ? params.int('offset') : 0
       if (params.sitename) {
@@ -115,10 +119,10 @@ class StorageSiteController {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     } else {
-      def username = session["username"]
-      if (username != "admin") {
-        if (!SiteUser.findBySiteAndUser(storageSiteInstance, session["user"])) {
-          flash.message = "${message(code: 'default.no.permission.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), username])}"
+      def user = session["user"]
+      if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+        if (!SiteUser.findBySiteAndUser(storageSiteInstance, user)) {
+          flash.message = "${message(code: 'default.no.permission.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), session["username"]])}"
           redirect(action: "list")
         }
       }
@@ -177,7 +181,8 @@ class StorageSiteController {
       }
 
       // sanitize description
-      //storageSiteInstance.description = storageSiteInstance.description.encodeAsSanitizedMarkup()
+      //storageSiteInstance.description = params.description.encodeAsSanitizedMarkup()
+      //params.remove('description')
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def fileLocation = 'logo_' + params.id + '.jpg'
@@ -248,6 +253,7 @@ class StorageSiteController {
       for(specialOffer in storageSiteInstance.specialOffers) {
         def offerString = "specialOffer_" + specialOffer.id
         def featuredOfferString = "featuredOffer_" + specialOffer.id
+        def waiveAdminString = "waiveAdmin_" + specialOffer.id
         def promoNameString = "promoName_" + specialOffer.id
         def promoDescString = "promoDesc_" + specialOffer.id
 
@@ -261,6 +267,12 @@ class StorageSiteController {
           specialOffer.featured = true;
         } else {
           specialOffer.featured = false;
+        }
+
+        if (params.getAt(waiveAdminString)) {
+          specialOffer.waiveAdmin = true;
+        } else {
+          specialOffer.waiveAdmin = false;
         }
 
         if (params.getAt(promoNameString)) {

@@ -575,6 +575,7 @@
                 <tr>
                   <th>Active</th>
                   <th>Featured</th>
+                  <th>Waive Admin Fee</th>
                   <th>Promotion Name</th>
                   <th>Description</th>
                 </tr>
@@ -582,6 +583,7 @@
                   <tr>
                     <td><g:checkBox name="specialOffer_${o.id}" value="${o.active}"/></td>
                     <td><g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/></td>
+                    <td><g:checkBox name="waiveAdmin_${o.id}" value="${o.waiveAdmin}"/></td>
                     <td><g:textField style="width:250px;" name="promoName_${o.id}" value="${o.promoName}"/> </td>
                     <td><g:textField style="width:250px;" name="promoDesc_${o.id}" value="${o.description}"/></td>
                   </tr>

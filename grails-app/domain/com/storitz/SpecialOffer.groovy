@@ -13,6 +13,7 @@ class SpecialOffer {
     concessionId(nullable: true)
     prepay(nullable: true)
     promoQty(nullable: true)
+    waiveAdmin(nullable: true)
   }
 
   String code
@@ -27,4 +28,5 @@ class SpecialOffer {
   Integer expireMonth
   Boolean active
   Boolean featured
+  Boolean waiveAdmin
 }
