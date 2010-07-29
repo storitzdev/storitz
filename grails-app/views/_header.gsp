@@ -2,6 +2,7 @@
   <meta name="DESCRIPTION" content="Find storage facilities close to you at the best price."/>
   <meta name="KEYWORDS" content="storage, personal storage, moving, click, store"/>
   <meta name="ROBOTS" content="FOLLOW"/>
+  <script src="http://www.google.com/jsapi" type="text/javascript"></script>
   <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
 
   <g:javascript src="prototype.js" />
