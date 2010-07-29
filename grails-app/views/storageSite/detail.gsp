@@ -31,6 +31,12 @@
     var priceInterior = ${params.priceInterior ? "true" : "false"};
     var priceUpper = ${params.priceUpper ? "true" : "false"};
 
+    var ajaxFormUpdateTimer;
+    var ajaxFormDirty = false;
+    var ajaxFormNewValues;
+    var ajaxFormOldValues = new Hash().toJSON();
+
+
     <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
     <g:if test="${params.searchSize}">
       searchSize = ${params.searchSize};
@@ -572,6 +578,59 @@
   function setupValidation() {
   }
 
+
+  function ajaxFormUpdate() {
+    ajaxFormUpdateTimer = setTimeout("doAjaxFormUpdate()", 5000)
+  }
+
+  function doAjaxFormUpdate() {
+    ajaxFormNewValues = $('rentalTransaction');
+
+    if (ajaxFormNewValues != undefined) {
+      ajaxFormNewValues = ajaxFormNewValues.serialize(true);
+      var jsonValues = Object.toJSON(ajaxFormNewValues);
+      var valuesUnchanged = ajaxFormOldValues == jsonValues;
+      ajaxFormOldValues = jsonValues;
+
+      if (ajaxFormDirty) {
+        if (valuesUnchanged) {
+          new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}",
+          {
+            method:'post',
+            parameters: ajaxFormNewValues,
+            onComplete:function(transport) {
+              ajaxFormDirty = false;
+              ajaxFormUpdate();
+            }
+          });
+          return;
+        }
+      } else {
+        if (!valuesUnchanged) {
+          ajaxFormDirty = true;
+        }
+      }
+    }
+    ajaxFormUpdate();
+  }
+
+  function ajaxServerPoll() {
+    ajaxServerPollTimer = setTimeout("doAjaxServerPoll()", 5000)
+  }
+
+  function doAjaxServerPoll() {
+    new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}",
+    {
+      method:'get',
+      onSuccess:function(transport) {
+        $('helpDeskStatus').update(transport.responseText);
+      },
+      onComplete:function(transport) {
+        ajaxServerPoll();
+      }
+    });
+  }
+
   Event.observe(window, 'load', function() {
     createMap();
     setupSize();
@@ -595,6 +654,8 @@
     rightArrowClick();
     leftArrowClick();
     validateRentme();
+    ajaxFormUpdate();
+    ajaxServerPoll();
   });
 
 //]]>
@@ -811,6 +872,9 @@
 
           <div id="rentalForm" style="display: none;">
             <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
+              %{--<g:submitToRemote type="hidden" url="[controller:'rentalTransaction', action: 'ajaxUpdate', id:site?.id]" id="submitAjaxFormUpdate"--}%
+                      %{--onComplete="ajaxFormUpdate()"/>--}%
+              
               <input type="hidden" name="priceDriveup" id="priceDriveup" value="" />
               <input type="hidden" name="priceInterior" id="priceInterior" value="" />
               <input type="hidden" name="priceUpper" id="priceUpper" value="" />
@@ -1248,6 +1312,7 @@
         </div>
     </div>
     <div style="clear:both; height:30px;"></div>
+    <div id="helpDeskStatus">STATUS</div>
     <g:render template="/footer" />
     <g:render template="/size_popup" />
     <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>

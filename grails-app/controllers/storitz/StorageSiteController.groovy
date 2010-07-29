@@ -363,8 +363,13 @@ class StorageSiteController {
     Visit visit = new Visit(dateCreated:new Date(), site:site, remoteAddr:remoteAddr, unitSize:unitSize, searchAddress:params.address, searchDate:searchDate)
     
     if (!visit.save()) println "Visit log save failed!"
+
+    if (!session?.shortSessionId) {
+      session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
+    }
+    println session.shortSessionId
     
-    [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"]
+    [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId]
   }
 
   def detailUnits = {

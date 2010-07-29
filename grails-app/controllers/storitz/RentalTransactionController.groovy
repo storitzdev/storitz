@@ -32,6 +32,21 @@ class RentalTransactionController {
         return [rentalTransactionInstance: rentalTransactionInstance]
     }
 
+    def ajaxPoll = {
+//      println "Polled by ${params.id}"
+      render {
+        span("${session.shortSessionId} ${new Date()}")
+      }
+    }
+
+    def ajaxUpdate = {
+      println "Update by ${params.id}: ${params.dump()}"
+      def site = StorageSite.get(params.site)
+      params.remove('site')
+      def rentalTransactionInstance = new RentalTransaction(params)
+      render(status: 200, contentType: "application/json", text: "{ 'update':false }")
+    }
+
     def save = {
         println params.dump()
         def site = StorageSite.get(params.site)
