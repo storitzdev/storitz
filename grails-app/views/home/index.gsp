@@ -87,9 +87,9 @@
         }
 
         function markerClick(feature) {
-            var url = siteLink(feature);
+            var url = siteLink(feature) + '?s=m';
             if (searchSize && searchSize > 1) {
-              url += '?searchSize=' + searchSize;
+              url += '&searchSize=' + searchSize;
             }
             if ($F('date') && !$F('date').startsWith('Click')) {
               url += '&date=' + $F('date');
