@@ -131,8 +131,7 @@
       <div style="width: 685px;" class="right">
         <div id="detailInfo">
             <div id="rentalForm">
-              <g:form action="pay" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
-                <input type="hidden" name="id" value="${params.id}" />
+              <g:form action="pay" controller="rentalTransaction" name="rentalTransaction" method="post" id="${params.id}">
 
                 <div class="vert_text">
                   <span id="step1_bullet" class="bullet" style="display: none;">&#8226</span><span id="step1" class="step_header">Primary Contact</span>
@@ -158,13 +157,13 @@
                 <div class="checkout_fields">
                   <div id="billingAddress" class="validate-one-radio value">
                       <div class="left" style="width:200px;">
-                        <input type="radio"  name="billingAddress" value="primary" checked="checked"/> Primary Contact Address
+                        <g:radio name="billingAddress" value="primary" checked="checked"/> Primary Contact Address
                       </div>
                       <div class="left" style="width:200px;">
-                        <input type="radio" name="billingAddress" value="secondary"/> Secondary Contact Address
+                        <g:radio name="billingAddress" value="secondary"/> Secondary Contact Address
                       </div>
                       <div class="left" style="width:200px;">
-                        <input type="radio" name="billingAddress" value="new"/> Enter new address
+                        <g:radio name="billingAddress" value="new"/> Enter new address
                       </div>
                       <div style="height: 10px;clear: both;"></div>
 

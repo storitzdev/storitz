@@ -15,7 +15,7 @@ class RentalTransactionController {
     def siteLinkService
     def cShiftService
 
-    static allowedMethods = [save:"POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
     def index = {
         redirect(action: "list", params: params)
@@ -109,6 +109,8 @@ class RentalTransactionController {
     }
 
     def pay = {
+//      println params.billingAddress
+//      println params
       def rentalTransactionInstance = RentalTransaction.get(params.id)
       if (params.billingAddress == 'new') {
         def billingContact = new com.storitz.Contact(params)
