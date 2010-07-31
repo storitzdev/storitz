@@ -185,12 +185,14 @@
     function sizeChange() {
       $('unitsize').observe('change', function() {
         searchSize = $F('unitsize');
+        $('SC_searchSize').value = searchSize;
         buildTable();
       })
     }
 
     function dateChange() {
       startDate = $F('date');
+      $('SC_date').value = startDate;
       showTotals();
       Validation.validate('date');
     }
@@ -875,8 +877,6 @@
 
           <div id="rentalForm" style="display: none;">
             <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
-              %{--<g:submitToRemote type="hidden" url="[controller:'rentalTransaction', action: 'ajaxUpdate', id:site?.id]" id="submitAjaxFormUpdate"--}%
-                      %{--onComplete="ajaxFormUpdate()"/>--}%
               
               <input type="hidden" name="priceDriveup" id="priceDriveup" value="" />
               <input type="hidden" name="priceInterior" id="priceInterior" value="" />
@@ -885,6 +885,10 @@
               <input type="hidden" name="promoId" id="promoId" value="" />
               <input type="hidden" name="site" value="${params.id}" />
               <input type="hidden" name="moveInDate" id="moveInDate" value="" />
+
+              <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${params.searchSize}"/>
+              <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
+              <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
 
               <div class="vert_text">
                 <span id="step1_bullet" class="bullet">&#8226</span><span id="step1" class="step_header_hi">Primary Contact</span>

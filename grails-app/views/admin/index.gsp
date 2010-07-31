@@ -34,6 +34,9 @@
         <li><g:link controller="user" action="list">Show Users</g:link> </li>
         <li><g:link controller="rentalAgreement" action="list">Upload rental agreement</g:link> </li>
         </sec:ifAnyGranted>
+        <sec:ifAnyGranted roles="ROLE_CALLCENTER">
+        <li><g:link controller="storageSite" action="findCall">Assist Caller</g:link> </li>
+        </sec:ifAnyGranted>
         <li><g:link controller="logout">Log out</g:link></li>
       </ul>
     </div>

@@ -379,8 +379,52 @@ class StorageSiteController {
       session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
     }
     println session.shortSessionId
+    println sizeList
     
     [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId]
+  }
+
+  @Secured(['ROLE_CALLCENTER'])
+  def findCall = {
+    [:]
+  }
+
+  @Secured(['ROLE_CALLCENTER'])
+  def smartCall = {
+    def callParams = RentalTransactionController.liveSessions[params.id]
+
+    println "SmartCall ${params.id} : ${callParams}"
+
+    if (!callParams) {
+//          flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
+        redirect(action:"find")
+    } else {
+      println (callParams?.rentalTransaction.dump())
+
+      StorageSite site = StorageSite.get(callParams.site)
+
+      println site
+      
+      Collection sizeList = site.units.collect { it.unitsize }.unique()
+      sizeList.add(StorageSize.get(1))
+      sizeList.sort { it.width * it.length }
+
+      callParams.rentalTransaction.site = site
+//      callParams.rentalTransaction.insuranceTerms = false
+      
+      def model = [id:site.id, sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
+         , shortSessionId:callParams.shortSessionId, searchSize:callParams.searchSize, address:callParams.address, date:callParams.date
+         , rentalTransaction:callParams.rentalTransaction]
+
+      println model
+
+      params.id = model.id
+      params.searchSize = model.searchSize
+      params.address = model.address
+      params.date = model.date
+
+      render(view:'detail', model:model)
+    }
   }
 
   def detailUnits = {

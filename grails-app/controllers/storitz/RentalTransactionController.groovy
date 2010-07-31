@@ -8,6 +8,7 @@ import com.storitz.StorageUnit
 import com.storitz.UserRole
 import com.storitz.User
 import com.storitz.Insurance
+import com.storitz.StorageSize
 
 class RentalTransactionController {
 
@@ -16,6 +17,8 @@ class RentalTransactionController {
     def cShiftService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
+
+    static liveSessions = [:]
 
     def index = {
         redirect(action: "list", params: params)
@@ -41,9 +44,18 @@ class RentalTransactionController {
 
     def ajaxUpdate = {
       println "Update by ${params.id}: ${params.dump()}"
-      def site = StorageSite.get(params.site)
+//      def site = StorageSite.get(params.site)
+      def site = params.site
       params.remove('site')
+      def searchSize = params.SC_searchSize
+      params.remove('SC_searchSize')
+      def address = params.SC_address
+      params.remove('SC_address')
+      def date = params.SC_date
+      params.remove('SC_date')
       def rentalTransactionInstance = new RentalTransaction(params)
+      println (rentalTransactionInstance.dump())
+      liveSessions[params.id] = [shortSessionId:params.id, site:site, searchSize:searchSize, address:address, date:date, rentalTransaction:rentalTransactionInstance]
       render(status: 200, contentType: "application/json", text: "{ 'update':false }")
     }
 

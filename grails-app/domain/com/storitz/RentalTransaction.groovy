@@ -23,6 +23,7 @@ class RentalTransaction {
   TransactionStatus status
   Long unitId
   Long promoId
+
   Long insuranceId
   StorageSite site
   Boolean priceDriveup
@@ -34,6 +35,10 @@ class RentalTransaction {
   Date moveInDate
   ReferralCode referralCode
   Boolean isCallCenter
+
+  Boolean insuranceTerms
+  Boolean hazardousMaterials
+  Boolean terms
 
   static constraints = {
     billingAddress(nullable:true)
