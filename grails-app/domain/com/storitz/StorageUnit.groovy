@@ -33,11 +33,17 @@ class StorageUnit {
 
     public void setUnitType(newType) {
       if (newType == "Upper") {
+        isDriveup = false
+        isInterior = false
         isUpper = true
       } else if (newType == "Interior") {
+        isDriveup = false
         isInterior = true
+        isUpper = false
       } else if (newType == "Driveup" || newType == "Drive up") {
         isDriveup = true
+        isInterior = false
+        isUpper = false
       }
     }
 }
