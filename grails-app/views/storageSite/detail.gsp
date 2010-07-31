@@ -28,9 +28,9 @@
     var monthlyRent = 0;
     var galleryImageNum = 0;
 
-    var priceDriveup = ${params.priceDriveup ? "true" : "false"};
-    var priceInterior = ${params.priceInterior ? "true" : "false"};
-    var priceUpper = ${params.priceUpper ? "true" : "false"};
+    var priceDriveup = ${rentalTransaction?.priceDriveup ? "true" : "false"};
+    var priceInterior = ${rentalTransaction?.priceInterior ? "true" : "false"};
+    var priceUpper = ${rentalTransaction?.priceUpper ? "true" : "false"};
 
     var ajaxFormUpdateTimer;
     var ajaxFormDirty = false;
@@ -232,10 +232,10 @@
         var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
         monthlyRent = prices[unitId];
         $('unitId').value = unitId;
-        priceUpper = false;
-        priceInterior = false;
-        priceDriveup = false;
-        eval(unitTypes[unitId] + "= true;");
+        priceUpper = unitTypes[unitId] == 'priceUpper';
+        priceInterior = unitTypes[unitId] == 'priceInterior';
+        priceDriveup = unitTypes[unitId] == 'priceDriveup';
+//        eval(unitTypes[unitId] + "= true;");
         $('priceDriveup').value = priceDriveup;
         $('priceUpper').value = priceUpper;
         $('priceInterior').value = priceInterior;
@@ -878,13 +878,13 @@
           <div id="rentalForm" style="display: none;">
             <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
               
-              <input type="hidden" name="priceDriveup" id="priceDriveup" value="" />
-              <input type="hidden" name="priceInterior" id="priceInterior" value="" />
-              <input type="hidden" name="priceUpper" id="priceUpper" value="" />
-              <input type="hidden" name="unitId" id="unitId" value="" />
-              <input type="hidden" name="promoId" id="promoId" value="" />
+              <input type="hidden" name="priceDriveup" id="priceDriveup" value="${rentalTransaction?.priceDriveup}" />
+              <input type="hidden" name="priceInterior" id="priceInterior" value="${rentalTransaction?.priceInterior}" />
+              <input type="hidden" name="priceUpper" id="priceUpper" value="${rentalTransaction?.priceUpper}" />
+              <input type="hidden" name="unitId" id="unitId" value="${rentalTransaction?.unitId}" />
+              <input type="hidden" name="promoId" id="promoId" value="${rentalTransaction?.promoId}" />
               <input type="hidden" name="site" value="${params.id}" />
-              <input type="hidden" name="moveInDate" id="moveInDate" value="" />
+              <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransaction?.moveInDate}" />
 
               <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${params.searchSize}"/>
               <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
