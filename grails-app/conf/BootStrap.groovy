@@ -21,8 +21,9 @@ class BootStrap {
        if (!roleManager) {
         roleManager = new Role( authority: 'ROLE_MANAGER', description: 'Site Manager').save(flush: true)
        }
-       if (!Role.findByAuthority('ROLE_CALLCENTER')) {
-         new Role( authority: 'ROLE_CALLCENTER', description: 'Call Center').save(flush: true)
+       def roleCallCenter = Role.findByAuthority('ROLE_CALLCENTER')
+       if (!roleCallCenter) {
+         roleCallCenter = new Role( authority: 'ROLE_CALLCENTER', description: 'Call Center').save(flush: true)
        }
 
        if (!User.findByUsername('admin')) {
@@ -33,6 +34,12 @@ class BootStrap {
          UserRole.create(admin, roleAdmin, true)
        }
        
+       if (!User.findByUsername('operator')) {
+         def operator = new User( username:'operator', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Operator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
+         operator.save(flush: true)
+         UserRole.create(operator, roleCallCenter, true)
+       }
+
        if (StorageSize.list().size() == 0) {
          new StorageSize( description:'Choose a storage size...', width: 0, length: 0).save();
          new StorageSize( description:'5 x 5', width: 5, length: 5).save();
