@@ -8,8 +8,11 @@
     <script type="text/javascript">
 //<![CDATA[
 
-  var offerChosen = { active: ${promo.active}, promoName: "${promo.promoName}", promoType: "${promo.promoType}", promoQty: ${promo.promoQty}, prepay: ${promo.prepay},  prepayMonths: ${promo.prepayMonths}, inMonth: ${promo.inMonth}, expireMonth: ${promo.expireMonth}};
   var defaultOffer = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
+  var offerChosen = defaultOffer;
+  <g:if test="${promo != null}">
+  offserChosen = { active: ${promo.active}, promoName: "${promo.promoName}", promoType: "${promo.promoType}", promoQty: ${promo.promoQty}, prepay: ${promo.prepay},  prepayMonths: ${promo.prepayMonths}, inMonth: ${promo.inMonth}, expireMonth: ${promo.expireMonth}}
+  </g:if> 
 
   var unit = { type: "${unit.unitType}", price: ${unit.price} };
   var premium = ${ins ? ins.premium : 0};
