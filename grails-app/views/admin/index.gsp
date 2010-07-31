@@ -21,15 +21,16 @@
         <div class="message">${flash.message}</div>
       </g:if>
       <ul>
+        <sec:ifNotGranted roles="ROLE_CALLCENTER">
         <li><g:link controller="storageSite" action="list">Manage Sites</g:link> </li>
+        </sec:ifNotGranted>
         <li><g:link controller="user" action="password">Change Password</g:link> </li>
         <sec:ifAnyGranted roles="ROLE_ADMIN">
         <li><g:link controller="storageSize" action="list">Storage Unit Size list</g:link> </li>
-        <li><g:link controller="specialOffer" action="list">Manage Special Offers</g:link> </li>
         <li><g:link controller="siteLink" action="list">Manage SiteLink</g:link> </li>
-        <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link> </li>
         </sec:ifAnyGranted>
         <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
+        <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link> </li>
         <li><g:link controller="user" action="list">Show Users</g:link> </li>
         <li><g:link controller="rentalAgreement" action="list">Upload rental agreement</g:link> </li>
         </sec:ifAnyGranted>

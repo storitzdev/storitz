@@ -229,64 +229,14 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 /* ACTION BUTTONS */
 
 .buttons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    color: #666;
     font-size: 10px;
-    margin-top: 5px;
-    overflow: hidden;
-    padding: 0;
+    display: block;
 }
 
-.buttons input {
-    background: #fff;
-    border: 0;
-    color: #333;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-    margin-left: 3px;
-    overflow: visible;
-    padding: 2px 6px;
-}
-.buttons input.delete {
-    background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-.buttons input.edit {
-    background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-.buttons input.save {
-    background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-
-.buttons input.add {
-    background: transparent url(../images/skin/database_add.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-
-.buttons input.table {
-    background: transparent url(../images/skin/database_table.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-
-.buttons a {
-    background: #fff;
-    border: 0;
-    color: #333;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: bold;
-    margin-left: 3px;
-    overflow: visible;
-    padding: 2px 6px;
+.buttons a, .buttons input {
     text-decoration: none;
-}
-.buttons a.edit {
-    background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
-    padding-left: 28px;
+    font-weight: normal;
+    font-size: 10px;
 }
 
 /*
@@ -992,4 +942,23 @@ div.rightArrowActive:hover {
 a.footer:link, a.footer:visited, a.footer:hover {
     color: #fff;
     font-weight: bold;
+}
+
+.button a, .button input {
+    background: #3fac00;
+    border: 0;
+    color: #fff;
+    padding: 10px 15px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+    display: inline-block;
+}
+
+.button a:hover, .button input:hover {
+    background: #3fac00;
+    border: 2px #006400 solid;
+    color: #fff;
+    padding: 10px 15px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
 }

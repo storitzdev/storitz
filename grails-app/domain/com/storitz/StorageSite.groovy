@@ -10,7 +10,7 @@ class StorageSite {
     static fetchMode = []
 
     static constraints = {
-      description(widget:'textarea', nullable:true, size:2..2000, markup:true)
+      description(widget:'textarea', nullable:true, size:2..2000)
       logo(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)
@@ -140,6 +140,11 @@ class StorageSite {
 
   def getStateName() {
     return stateNamesByCode[state] ?: state
+  }
+
+  def getManager() {
+    def siteUser = SiteUser.find("from SiteUser as su where su.site = :site and su.user in (select ur.user from UserRole as ur, Role as r, User as u where ur.user = su.user and u.username != 'admin' and ur.user = u and ur.role = r and r.authority = :authority)", [site: this, authority: 'ROLE_MANAGER'])
+    return siteUser?.user
   }
 
   // All of the official USPS 2-letter state (and territory) codes.

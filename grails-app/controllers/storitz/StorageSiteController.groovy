@@ -126,8 +126,7 @@ class StorageSiteController {
           redirect(action: "list")
         }
       }
-      def siteUser = SiteUser.find("from SiteUser as su where su.site = :site and su.user in (select ur.user from UserRole as ur, Role as r, User as u where ur.user = su.user and u.username != 'admin' and ur.user = u and ur.role = r and r.authority = :authority)", [site: storageSiteInstance, authority: 'ROLE_MANAGER'])
-      [storageSiteInstance: storageSiteInstance, siteUser: siteUser]
+      [storageSiteInstance: storageSiteInstance]
     }
   }
 
@@ -181,8 +180,8 @@ class StorageSiteController {
       }
 
       // sanitize description
-      //storageSiteInstance.description = params.description.encodeAsSanitizedMarkup()
-      //params.remove('description')
+      storageSiteInstance.description = params.description.encodeAsSanitizedMarkup()
+      params.remove('description')
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def fileLocation = 'logo_' + params.id + '.jpg'

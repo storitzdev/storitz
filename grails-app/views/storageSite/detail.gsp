@@ -69,7 +69,7 @@
           var tableBody = "<tr><td colspan=\"4\" style=\"padding-left:20px;\">Select from the following storage options:</td></tr>";
           var checkoutTableBody = "";
           var units = transport.responseJSON.units;
-          var unitCount = (typeof(units.driveUp) !== 'undefined' ? 1 : 0) + (typeof(units.interior) !== 'undefined' ? 1 : 0) + (typeof(units.upper) !== 'undefined' ? 1 : 0);
+          var unitCount = (typeof(units.driveup) !== 'undefined' && units.driveup ? 1 : 0) + (typeof(units.interior) !== 'undefined' && units.interior ? 1 : 0) + (typeof(units.upper) !== 'undefined' && units.upper ? 1 : 0);
           var rowCount = 0;
           var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
           $('priceDriveup').value = false;

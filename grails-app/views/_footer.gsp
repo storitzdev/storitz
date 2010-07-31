@@ -25,7 +25,7 @@
       <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=QoVAUrljyyuT8APktZx8vpTvuwdcusK1rt8fI8EFYfFvpl9nRLc"></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.godaddy.com/email/hosted-exchange.aspx" target="_blank">Hosted Exchange</a></span>
     </div>
     <div style="margin: 1em;" class="left">
-      <a href="http://www.selfstorage.org/"><img style="border:none;" src="${resource(dir:'images', file:'ssa_logo.jpg')}" alt="SSA Logo"/></a>
+      <a href="http://www.selfstorage.org/" target="_blank"><img style="border:none;" src="${resource(dir:'images', file:'ssa_logo.jpg')}" alt="SSA Logo"/></a>
     </div>
   </div>
 </div>

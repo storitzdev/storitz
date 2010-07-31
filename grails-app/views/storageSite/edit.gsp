@@ -73,13 +73,19 @@
 <div id="body">
   <g:render template="/topnav"/>
   <div id="stcontent">
-    <div class="nav">
-      <span class="menuButton"><a class="home" href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
-      <span class="menuButton"><g:link class="list" action="list">List Sites</g:link></span>
+    <g:render template="/logo_bar" />
+
+    <div style="clear: both;height: 10px"></div>
+    <div class="buttons">
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
+      <span class="button"><g:link action="list">List Sites</g:link></span>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
-        <span class="menuButton"><g:link class="create" action="create">Create new Site</g:link></span>
+        <span class="button"><g:link action="create">Create new Site</g:link></span>
       </sec:ifAnyGranted>
+  
     </div>
+    <div style="clear: both;height: 10px"></div>
+
     <div class="body">
 
       <div class="price_options checkout_header white">
@@ -445,7 +451,7 @@
 
           <div class="checkout_fields">
             <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'manager', 'errors')}">
-              <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${siteUser?.user?.id}" noSelection="['null': '']"/>
+              <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${storageSiteInstance.getManager()?.id}" noSelection="['null': '']"/>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -619,9 +625,9 @@
 
         </div>
         <div class="buttons">
-          <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
-          <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-          <span class="button"><g:actionSubmit class="table" action="show" value="${message(code: 'default.button.show.label', default: 'Show')}"/></span>
+          <span class="button"><g:actionSubmit action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
+          <span class="button"><g:actionSubmit action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+          <span class="button"><g:actionSubmit action="show" value="${message(code: 'default.button.show.label', default: 'Show')}"/></span>
         </div>
       </g:uploadForm>
     </div>

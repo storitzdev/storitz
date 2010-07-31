@@ -16,12 +16,15 @@
 <div id="body">
 <g:render template="/topnav"/>
 <div id="stcontent">
-  <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
-    <span class="menuButton"><g:link class="list" action="list">List Storage Sites</g:link></span>
+  <g:render template="/logo_bar" />
+
+  <div style="clear: both;height: 10px"></div>
+  <div class="buttons">
+    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
+    <span class="button"><g:link action="list">List Storage Sites</g:link></span>
     %{--<span class="menuButton"><g:link class="report" action="report" id="${storageSiteInstance.id}">Storage Site Report</g:link></span>--}%
     <sec:ifAnyGranted roles="ROLE_ADMIN">
-      <span class="menuButton"><g:link class="create" action="create">Create New Storage Site</g:link></span>
+      <span class="button"><g:link action="create">Create New Storage Site</g:link></span>
     </sec:ifAnyGranted>
   </div>
   <div class="body">
@@ -369,12 +372,12 @@
     <div class="buttons">
       <g:form>
         <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
-        <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-        <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        <span class="button"><g:actionSubmit class="add" action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
-        <span class="button"><g:actionSubmit class="add" action="units" value="${message(code: 'default.button.refresh.label', default: 'Reload Available Units')}" /></span>
-        <span class="button"><g:actionSubmit class="table" action="report" value="${message(code: 'default.button.report.label', default: 'Activity Report')}" /></span>
-        <a href="${createLink(action:"detail", params:[id:storageSiteInstance?.id])}" target="_blank">See site detail</a>
+        <span class="button"><g:actionSubmit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+        <span class="button"><g:actionSubmit action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+        <span class="button"><g:actionSubmit action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
+        <span class="button"><g:actionSubmit action="units" value="${message(code: 'default.button.refresh.label', default: 'Reload Available Units')}" /></span>
+        <span class="button"><g:actionSubmit action="report" value="${message(code: 'default.button.report.label', default: 'Activity Report')}" /></span>
+        <span class="button"><a href="${createLink(action:"detail", params:[id:storageSiteInstance?.id])}" target="_blank">User View</a></span>
       </g:form>
     </div>
   </div>

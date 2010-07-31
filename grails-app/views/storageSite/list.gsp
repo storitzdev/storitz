@@ -16,10 +16,13 @@
 <div id="body">
   <g:render template="/topnav"/>
   <div id="stcontent">
-    <div class="nav">
-      <span class="menuButton"><a class="home" href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
+    <g:render template="/logo_bar" />
+
+    <div style="clear: both;height: 10px"></div>
+    <div class="buttons">
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
-        <span class="menuButton"><g:link class="create" action="create">Create New Site</g:link></span>
+        <span class="button"><g:link action="create">Create New Site</g:link></span>
       </sec:ifAnyGranted>
     </div>
     <div class="body">
@@ -37,13 +40,11 @@
                           </td>
                           <td valign='top' class='value'>
                               <input type="text" id="sitename" name="sitename" value="${flash.sitename}"/>
+                              <span class="button"><input class="save" type="submit" value="Search" /></span>
                           </td>
                       </tr>
                   </tbody>
                 </table>
-            </div>
-            <div class="buttons">
-                <span class="button"><input class="save" type="submit" value="Search" /></span>
             </div>
       </g:form>
 
@@ -60,6 +61,8 @@
 
             <g:sortableColumn property="zipcode" title="${message(code: 'storageSite.zipcode.label', default: 'Zipcode')}"/>
 
+            <g:sortableColumn property="manager" title="${message(code: 'storageSite.manager.label', default: 'Manager')}"/>
+
             <th>Edit</th>
 
           </tr>
@@ -75,6 +78,8 @@
               <td>${fieldValue(bean: storageSiteInstance, field: "city")}</td>
 
               <td>${fieldValue(bean: storageSiteInstance, field: "zipcode")}</td>
+
+              <td>${storageSiteInstance.getManager()?.username}</td>
 
               <td><g:link action="edit" id="${storageSiteInstance.id}">edit</g:link></td>
 
