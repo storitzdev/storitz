@@ -495,13 +495,19 @@
             Search for Storage
           </div>
           <div style="height: 5px;"></div>
-          <div class="left15">
+          <div>
             <form id="gsearch" action="" method="post">
-              <div>
-                <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code...'}"/>
+              <div class="left" style="margin: 2px 5px 0 0;">
+                <img src="${resource(dir:'images', file:'btn-circle-1.png')}" alt="1"/>
               </div>
-              <div style="height: 10px;"></div>
+              <div class="left">
+                <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code.'}"/>
+              </div>
+              <div style="clear:both;height: 10px;"></div>
               <div>
+                <div class="left" style="margin: 2px 5px 0 0;">
+                  <img src="${resource(dir:'images', file:'btn-circle-2.png')}" alt="2"/>
+                </div>
                 <div class="left">
                   <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
                 </div>
@@ -511,11 +517,14 @@
                 <div style="clear: both;"></div>
               </div>
               <div style="height: 10px;"></div>
-              <div>
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to select move in date...'}" onchange="dateChange()"/>
+              <div class="left" style="margin: 2px 5px 0 0;">
+                <img src="${resource(dir:'images', file:'btn-circle-3.png')}" alt="3"/>
               </div>
-              <div style="height: 10px;"></div>
-              <div>
+              <div class="left">
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to select move in date.'}" onchange="dateChange()"/>
+              </div>
+              <div style="clear: both;height: 10px;"></div>
+              <div style="margin-left: 30px;">
                 <img id="gsearchBtn" src="${resource(dir:'images', file:'btn-find-it.png')}" class="noborder" alt="Search Storage"/>
               </div>
               <div style="clear: both; height: 10px;"></div>

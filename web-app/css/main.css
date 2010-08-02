@@ -916,7 +916,7 @@ div.rightArrowActive:hover {
 }
 
 .dateInput {
-    background-image: url("../images/calendar.png");
+    background-image: url("../images/icn-calendar.png");
     background-repeat: no-repeat;
     background-position: right center;
 }
