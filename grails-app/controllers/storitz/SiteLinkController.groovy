@@ -41,6 +41,16 @@ class SiteLinkController {
     }
   }
 
+  def refresh = {
+    def siteLinkInstance = SiteLink.get(params.id)
+    if (siteLinkInstance) {
+      def stats = new storitz.SiteLinkStats()
+      siteLinkService.refreshSites(siteLinkInstance, stats, geocodeService)
+      flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
+      redirect(action: "show", id: siteLinkInstance.id)
+    }
+  }
+
   def show = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (!siteLinkInstance) {

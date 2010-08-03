@@ -17,9 +17,9 @@
 <g:render template="/topnav"/>
 <div id="stcontent">
   <g:render template="/logo_bar"/>
-  <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
-    <span class="menuButton"><g:link class="create" action="create">Create New SiteLink Feed</g:link></span>
+  <div class="buttons">
+    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
+    <span class="button"><g:link action="create">Create New SiteLink Feed</g:link></span>
   </div>
   <div class="body">
     <h1>List SiteLink Feeds</h1>

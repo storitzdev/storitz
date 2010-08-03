@@ -8,8 +8,10 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3/web-app" relative="/" />
         </webroots>
         <sourceRoots />
+        <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
       </configuration>
     </facet>
   </component>
@@ -21,6 +23,7 @@
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/grails-app/taglib" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/hibernate-1.2.3" />
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/src/groovy" isTestSource="false" />
     </content>
@@ -36,6 +39,7 @@
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/grails-app/services" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3" />
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/grails-app/utils" isTestSource="false" />
@@ -56,7 +60,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="grails-1.2.3" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library">
         <CLASSES>
@@ -67,6 +70,12 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/lib" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.core/jars/org.springframework.security.core-3.0.2.RELEASE.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.web/jars/org.springframework.security.web-3.0.2.RELEASE.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.5.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/antlr/antlr/jars/antlr-2.7.6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -80,6 +89,9 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="storitz" />
+    <orderEntry type="library" scope="PROVIDED" name="grails-1.2.3" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="gdata" level="project" />
   </component>
 </module>
 

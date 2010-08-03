@@ -222,6 +222,32 @@ class SiteLinkService {
     }
   }
 
+  def refreshSites(siteLink, stats, geocodeService) {
+    def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
+      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      def newSite = false
+      if (!site) {
+        site = new StorageSite()
+        stats.createCount++
+        site.lastUpdate = 0
+        newSite = true
+        if (tab.sSitePostalCode.text().isNumber()) {
+          getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite)
+        }
+      }
+    }
+  }
+
   def corpSites(siteLink, stats, geocodeService) {
     def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(

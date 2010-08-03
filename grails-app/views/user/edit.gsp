@@ -39,8 +39,7 @@
             </div>
             </g:hasErrors>
 
-            <g:form method="post" >
-                <input type="hidden" name="id" value="${person?.id}" />
+            <g:form method="post" id="${person?.id}" >
                 <input type="hidden" name="version" value="${person?.version}" />
                 <div class="dialog">
 

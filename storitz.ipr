@@ -5,18 +5,13 @@
   </component>
   <component name="ArtifactManager">
     <artifact type="exploded-war" name="storitz:Web exploded">
-      <output-path>$PROJECT_DIR$/out/exploded/storagetechWeb</output-path>
       <root id="root">
         <element id="javaee-facet-resources" facet="storitz/web/Web" />
-        <element id="directory" name="WEB-INF">
-          <element id="directory" name="classes">
-            <element id="javaee-facet-classes" facet="storitz/web/Web" />
-          </element>
-          <element id="directory" name="lib">
-            <element id="library" level="project" name="groovyws" />
-            <element id="library" level="project" name="gdata" />
-          </element>
-        </element>
+      </root>
+    </artifact>
+    <artifact type="exploded-war" name="storitz-grailsPlugins:GrailsWeb exploded">
+      <root id="root">
+        <element id="javaee-facet-resources" facet="storitz-grailsPlugins/web/GrailsWeb" />
       </root>
     </artifact>
   </component>
@@ -48,7 +43,6 @@
   <component name="CopyrightManager" default="">
     <module2copyright />
   </component>
-  <component name="DataSourceManagerImpl" compressed="false" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>

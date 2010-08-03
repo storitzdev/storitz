@@ -22,12 +22,18 @@
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
+
         <div class="buttons">
             <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
             <span class="button"><g:link action="list">User List</g:link></span>
         </div>
+
         <div class="body">
-            <h1>Create User</h1>
+
+          <div class="price_options checkout_header white">
+            Create User
+          </div>
+
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -36,154 +42,208 @@
                 <g:renderErrors bean="${person}" as="list" />
             </div>
             </g:hasErrors>
+          
             <g:form action="save" method="post" >
-                <div class="dialog">
-                    <table>
-                        <tbody>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="username">Username:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
-                                    <input type="text" id="username" name="username" value="${fieldValue(bean:person,field:'username')}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="userRealName">User Real Name:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
-                                    <input type="text" id="userRealName" name="userRealName" value="${fieldValue(bean:person,field:'userRealName')}"/>
-                                </td>
-                            </tr> 
 
-                        <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="manager.id">Manager:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'manager','errors')}">
-                                  <g:select name="manager.id" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.username}" noSelection="['null': '']"/>
-                                </td>
-                            </tr> 
-                        </sec:ifAnyGranted>
-                        <sec:ifNotGranted roles="ROLE_ADMIN">
-                            <input type="hidden" name="manager.id" value="${session["user"].id}" />
-                        </sec:ifNotGranted>
+              <div class="formInstructions">
+                To create a user, set their user id in the system and assign an initial password and email.  The user can
+                change this password when they log in.  Assign privileges to the sites this user will manager.  Users can
+                edit the information for these assigned sites, upload and delete pictures.  They cannot edit bank information
+                or the lease agreements for their assigned sites.
+              </div>
 
-                        <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="enabled">Enabled:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
-                                    <g:checkBox name="enabled" value="${person?.enabled}" ></g:checkBox>
-                                </td>
-                            </tr> 
-                        </sec:ifAnyGranted>
-                        <sec:ifNotGranted roles="ROLE_ADMIN">
-                          <input type="hidden" name="enabled" value="true"/>
-                        </sec:ifNotGranted>
+              <div class="checkout_section_header">
+                User Name and Real Name
+              </div>
 
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="description">Description:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'description','errors')}">
-                                    <g:textArea name="description" value="${fieldValue(bean:person,field:'description')}" rows="5" cols="40" />
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="email">Email:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'email','errors')}">
-                                    <input type="text" id="email" name="email" value="${fieldValue(bean:person,field:'email')}"/>
-                                </td>
-                            </tr> 
-
-                        <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="accountExpired">Account Expired:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'accountExpired','errors')}">
-                                    <g:checkBox name="accountExpired" value="${person?.accountExpired}" ></g:checkBox>
-                                </td>
-                            </tr> 
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="accountLocked">Account Locked:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'accountLocked','errors')}">
-                                    <g:checkBox name="accountLocked" value="${person?.accountLocked}" ></g:checkBox>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="passwordExpired">Password Expired:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'passwordExpired','errors')}">
-                                    <g:checkBox name="passwordExpired" value="${person?.passwordExpired}" ></g:checkBox>
-                                </td>
-                            </tr>
-                        </sec:ifAnyGranted>
-
-                            <tr class='prop'>
-                                <td valign='top' class='name'><label for='passwd'>Password:</label></td>
-                                <td valign='top' class='value ${hasErrors(bean:person,field:'password','errors')}'>
-                                    <input type="password" id="passwd" name='passwd' value="${person?.password?.encodeAsHTML()}"/>
-                                </td>
-                            </tr>
-
-                            <tr class='prop'>
-                                <td valign='top' class='name'><label for='enabled'>Confirm Password:</label></td>
-                                <td valign='top' class='value ${hasErrors(bean:person,field:'password','errors')}'>
-                                    <input type="password" name='repasswd' value="${person?.password?.encodeAsHTML()}"/>
-                                </td>
-                            </tr>
-
-                        <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name" align="left">Assign Roles:</td>
-                            </tr>
-
-                            <g:each in="${authorityList}">
-                            <tr>
-                                <td valign="top" class="name" align="left">${it.authority.encodeAsHTML()}</td>
-                                <td align="left"><g:checkBox name="${it.authority}"/></td>
-                            </tr>
-                            </g:each>
-                        </sec:ifAnyGranted>
-                        <sec:ifNotGranted roles="ROLE_ADMIN">
-                          <input type="hidden" name="ROLE_USER" value="on"/>
-                        </sec:ifNotGranted>
-
-                        <sec:ifAnyGranted roles="ROLE_MANAGER">
-                          <sec:ifNotGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name" align="left">Assign Sites:</td>
-                            </tr>
-
-                            <g:each in="${siteList}">
-                                <td valign="top" class="name" align="left">${it.title.encodeAsHTML()}</td>
-                                <td align="left"><g:checkBox name="SITE_${it.id}"/></td>
-                            </tr>
-                            </g:each>
-                          </sec:ifNotGranted>
-                        </sec:ifAnyGranted>
-
-                        </tbody>
-                    </table>
+              <div class="checkout_fields">
+                <div style="width:200px;" class="checkout_value ${hasErrors(bean: person, field: 'username', 'errors')}">
+                  <g:textField id="username" name="username" style="width: 180px;" value="${fieldValue(bean:person,field:'username')}" />
                 </div>
-                <div class="buttons">
-                    <span class="button"><input class="save" type="submit" value="Create" /></span>
+                <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'userRealName', 'errors')}">
+                  <g:textField id="userRealName" name="userRealName" style="width: 280px;" value="${fieldValue(bean:person,field:'userRealName')}" />
                 </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_labels">
+                <div class="checkout_name" style="width:200px;">
+                  <label for="username">User Name</label>
+                </div>
+                <div class="checkout_name" style="width:300px;">
+                  <label for="userRealName">User Real Name</label>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_section_header">
+                Password
+              </div>
+
+              <div class="checkout_fields">
+                <div style="width:200px;" class="checkout_value ${hasErrors(bean: person, field: 'passwd', 'errors')}">
+                  <input type="password" id="passwd" name="passwd" style="width: 180px;" value="${fieldValue(bean:person,field:'password')}" />
+                </div>
+                <div style="width:200px;" class="checkout_value ${hasErrors(bean: person, field: 'repasswd', 'errors')}">
+                  <input type="password" id="repasswd" name="repasswd" style="width: 180px;" value="${fieldValue(bean:person,field:'password')}" />
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_labels">
+                <div class="checkout_name" style="width:200px;">
+                  <label for="passwd">Password</label>
+                </div>
+                <div class="checkout_name" style="width:200px;">
+                  <label for="repasswd">Re-enter Password</label>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <sec:ifAnyGranted roles="ROLE_ADMIN">
+
+                <div class="checkout_section_header">
+                  Manager and Enablement
+                </div>
+
+                <div class="checkout_fields">
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'manager', 'errors')}">
+                    <g:select style="width:280px;" from="${com.storitz.User.list()}" value="${person?.manager?.id}"
+                              optionKey="id" optionValue="userRealName" name="manager.id"
+                              noSelection="['null':'No manager selected']"/>
+                  </div>
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'enabled', 'errors')}">
+                    <g:checkBox name="enabled" value="${person?.enabled}" /> &nbsp; Enabled
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+
+                <div class="checkout_labels">
+                  <div class="checkout_name" style="width:300px;">
+                    <label for="manager.id">Manager</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+
+                <div class="checkout_section_header">
+                  Roles
+                </div>
+
+                <div class="formInstructions">
+                  A corporate operator should be created with both ROLE_USER and ROLE_MANAGER set.  Simple users with site editing
+                  privileges should only have ROLE_USER set and should have the Manager field set to their corporate manager.
+                  Call center users should only have ROLE_CALLCENTER privilege set. ROLE_ADMIN is only to be used for Storitz
+                  employees - it gives access to sensitive financial information.
+                </div>
+
+                <div class="checkout_fields">
+                  <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
+                    <g:each var="role" in="${authorityList}">
+                      <div style="margin: 0 1.5em;" class="left">
+                        <g:checkBox name="${role.authority}"/> &nbsp; ${role.authority.encodeAsHTML()}
+                      </div>
+                    </g:each>
+                  </div>
+                  <div style="clear:both; height:10px;"></div>
+                </div>
+
+              </sec:ifAnyGranted>
+              <sec:ifNotGranted roles="ROLE_ADMIN">
+                <input type="hidden" name="ROLE_USER" value="on"/>
+                <input type="hidden" name="enabled" value="true"/>
+              </sec:ifNotGranted>
+
+              <div class="checkout_section_header">
+                Description
+              </div>
+
+              <div class="formInstructions">
+                Describe this user - for example if they are a site manager of a particular facility, enter that
+                description here.
+              </div>
+
+              <div class="checkout_fields">
+                <div style="width:600px;" class="checkout_value ${hasErrors(bean: person, field: 'passwd', 'errors')}">
+                  <textarea id="description" name="description" rows="80" cols="5">${fieldValue(bean:person,field:'description')}</textarea>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_labels">
+                <div class="checkout_name" style="width:600px;">
+                  <label for="description">Description</label>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_section_header">
+                Email
+              </div>
+
+              <div class="checkout_fields">
+                <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'email', 'errors')}">
+                  <input type="text" id="email" name="email" style="width: 280px;" value="${fieldValue(bean:person,field:'email')}"/>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_labels">
+                <div class="checkout_name" style="width:300px;">
+                  <label for="email">Email</label>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <sec:ifAnyGranted roles="ROLE_ADMIN">
+
+                <div class="checkout_section_header">
+                  Account Attributes
+                </div>
+
+                <div class="formInstructions">
+                  These should generally stay unchecked.  Ask before setting any of these.
+                </div>
+
+                <div class="checkout_fields">
+                  <div style="width:650px;" class="checkout_value">
+                    <div class="left" style="width: 200px;">
+                      <g:checkBox name="accountExpired" value="${person?.accountExpired}" ></g:checkBox> &nbsp; Account Expired
+                    </div>
+                    <div class="left" style="width: 200px;">
+                      <g:checkBox name="accountLocked" value="${person?.accountLocked}" ></g:checkBox> &nbsp; Account Locked
+                    </div>
+                    <div class="left" style="width: 200px;">
+                      <g:checkBox name="passwordExpired" value="${person?.passwordExpired}" ></g:checkBox> &nbsp; Password Expired
+                    </div>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+
+              </sec:ifAnyGranted>
+
+              <sec:ifAnyGranted roles="ROLE_MANAGER">
+                <sec:ifNotGranted roles="ROLE_ADMIN">
+                  <div class="checkout_section_header">
+                    Site Privileges
+                  </div>
+
+                  <div class="checkout_fields">
+                    <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
+                      <g:each var="site" in="${siteMap.keySet()}">
+                        <div style="margin:0 1.5em; width: 250px;" class="left">
+                          <g:checkBox name="SITE_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
+                        </div>
+                      </g:each>
+                    </div>
+                    <div style="clear:both; height:10px;"></div>
+                  </div>
+
+                  </sec:ifNotGranted>
+              </sec:ifAnyGranted>
+
+              <div class="buttons">
+                  <span class="button"><input class="save" type="submit" value="Create" /></span>
+              </div>
             </g:form>
         </div>
       </div>
