@@ -143,8 +143,12 @@ class StorageSiteController {
         }
       }
       def manager = User.get(params.manager?.id)
+      println "manager.id sent as: ${params.manager?.id} manager=${manager}"
+
       if (manager) {
-        SiteUser.unlink (storageSiteInstance, manager)
+        UserRole.getUsersByRoleName('ROLE_MANAGER').each{
+          SiteUser.unlink (storageSiteInstance, it)
+        }
         SiteUser.link(storageSiteInstance, manager)
       }
       // clear all items

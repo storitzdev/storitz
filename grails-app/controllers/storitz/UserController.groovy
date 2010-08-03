@@ -39,29 +39,46 @@ class UserController {
 		}
 
         def results
+        def count = 0
 
-        def username = session["username"]
+        def user  = session["user"]
+
         if (params.username) {
           def query
           def criteria = User.createCriteria()
 
+          count = criteria.get {
+            projections {
+                countDistinct("id")
+            }
+            and {
+              like("username", params.username+ '%')
+              if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+                eq("manager", user)
+              }
+            }
+          }
+
           query = {
             and {
               like("username", params.username+ '%')
-              if (username != 'admin') {
-                eq("manager", session["user"])
+              if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+                eq("manager", user)
               }
             }
           }
           results = criteria.list(params, query)
+
         } else {
-          if (username == 'admin') {
+          if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
             results = User.list(params)
+            count = User.count()
           } else {
-            results = User.findAllByManager(session["user"])
+            count = User.countByManager(user)
+            results = User.findAllByManager(user, [max:params.max, sort:username, order:"asc"])
           }
         }
-		[personList: results]
+		[personList: results, personListCount: count]
 	}
 
     @Secured(['ROLE_ADMIN','ROLE_MANAGER','ROLE_USER'])

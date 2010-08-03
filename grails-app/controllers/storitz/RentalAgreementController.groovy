@@ -1,7 +1,10 @@
 package storitz
 
 import com.storitz.RentalAgreement
+import grails.plugins.springsecurity.Secured
+import com.storitz.UserRole
 
+@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class RentalAgreementController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -11,8 +14,21 @@ class RentalAgreementController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [rentalAgreementInstanceList: RentalAgreement.list(params), rentalAgreementInstanceTotal: RentalAgreement.count()]
+      def user = session["user"]
+
+      params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+      def results
+      def count = 0
+
+      if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+        results = RentalAgreement.listOrderByTitle(params)
+        count = RentalAgreement.count()
+      } else {
+        results = RentalAgreement.findAllByManager(user)
+        count = RentalAgreement.countByManager(user)
+      }
+      [rentalAgreementInstanceList: results, rentalAgreementInstanceTotal: count]
     }
 
     def create = {

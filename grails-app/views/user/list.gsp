@@ -81,7 +81,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-              <g:paginate total="${personList.count()}" params="${flash}"/>
+              <g:paginate total="${personListCount}" params="${flash}"/>
             </div>
         </div>
       </div>

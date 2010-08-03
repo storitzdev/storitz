@@ -15,7 +15,7 @@ class SiteUser {
         s.site = site
         site?.addToUsers(s)
         user?.addToSites(s)
-        s.save()
+        s.save(flush: true)
       }
       return s
     }
@@ -25,7 +25,7 @@ class SiteUser {
       if (s) {
         site?.removeFromUsers(s)
         user?.removeFromSites(s)
-        s.delete()
+        s.delete(flush: true)
       }
     }
 
