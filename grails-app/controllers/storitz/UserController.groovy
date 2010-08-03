@@ -143,7 +143,7 @@ class UserController {
 
       def encOldPassword = springSecurityService.encodePassword(params.oldPasswd)
       if (!person.password.equals(encOldPassword)) {
-        flash.message = 'The old password incorrect.'
+        flash.message = 'The old password is incorrect.'
         render view: 'changePassword'
         return
       }

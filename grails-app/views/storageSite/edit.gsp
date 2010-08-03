@@ -77,7 +77,7 @@
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
-      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="list">List Sites</g:link></span>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
         <span class="button"><g:link action="create">Create new Site</g:link></span>
@@ -100,6 +100,7 @@
           <g:renderErrors bean="${storageSiteInstance}" as="list"/>
         </div>
       </g:hasErrors>
+
       <g:uploadForm method="post">
         <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
         <g:hiddenField name="version" value="${storageSiteInstance?.version}"/>

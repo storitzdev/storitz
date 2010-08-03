@@ -17,13 +17,19 @@
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
-            <span class="menuButton"><g:link class="list" action="list">User List</g:link></span>
-            <span class="menuButton"><g:link class="create" action="create">New User</g:link></span>
+
+        <div class="buttons">
+            <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
+            <span class="button"><g:link action="list">User List</g:link></span>
+            <span class="button"><g:link action="create">New User</g:link></span>
         </div>
+
         <div class="body">
-            <h1>Edit User</h1>
+
+            <div class="price_options checkout_header white">
+              Edit User
+            </div>
+
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -32,126 +38,153 @@
                 <g:renderErrors bean="${person}" as="list" />
             </div>
             </g:hasErrors>
+
             <g:form method="post" >
                 <input type="hidden" name="id" value="${person?.id}" />
                 <input type="hidden" name="version" value="${person?.version}" />
                 <div class="dialog">
-                    <table>
-                        <tbody>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="username">Username:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
-                                    <input type="text" id="username" name="username" value="${fieldValue(bean:person,field:'username')}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="userRealName">User Real Name:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
-                                    <input type="text" id="userRealName" name="userRealName" value="${fieldValue(bean:person,field:'userRealName')}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="passwd">Password:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'password','errors')}">
-                                    <input type="password" id="passwd" name="passwd" value="${person?.password?.encodeAsHTML()}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="repasswd">Reenter Password:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'password','errors')}">
-                                    <input type="password" id="repasswd" name="repasswd" value="${person?.password?.encodeAsHTML()}"/>
-                                </td>
-                            </tr>
 
-                        <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label>Manager:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'manager','errors')}">
-                                    <g:select from="${com.storitz.User.list()}" value="${person?.manager?.id}"
-                                              optionKey="id" optionValue="userRealName" name="manager.id"
-                                              noSelection="['null':'No manager selected']"/>
-                                </td>
-                            </tr> 
+                  <div class="formInstructions">
+                    Edit the information for the user below - make sure the passwords match if you are changing that field.
+                  </div>
 
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="enabled">Enabled:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
-                                    <g:checkBox name="enabled" value="${person?.enabled}" />
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label>Assign Roles:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'authorities','errors')}">
-                                    <table><g:each var="role" in="${roleMap.keySet()}">
-                                      <tr>
-                                        <td valign="top" class="name" align="left">${role.authority.encodeAsHTML()}</td>
-                                        <td align="left"><g:checkBox name="${role.authority}" value="${roleMap[role]}"/></td>
-                                      </tr>
-                                    </g:each></table>
-                                </td>
-                            </tr> 
-                        </sec:ifAnyGranted>
-                        <sec:ifNotGranted roles="ROLE_ADMIN">
-                          <input type="hidden" name="ROLE_USER" value="on"/>
-                        </sec:ifNotGranted>
+                  <div class="checkout_section_header">
+                    User Name and Real Name
+                  </div>
 
-                        <sec:ifAnyGranted roles="ROLE_MANAGER">
-                          <sec:ifNotGranted roles="ROLE_ADMIN">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label>Assign Site Privileges:</label>
-                                </td>
-                                <td valign="top" class="value">
-                                    <table><g:each var="site" in="${siteMap.keySet()}">
-                                      <tr>
-                                        <td valign="top" class="name" align="left">${site.title.encodeAsHTML()}</td>
-                                        <td align="left"><g:checkBox name="SITE_${site.id}" value="${siteMap[site]}"/></td>
-                                      </tr>
-                                    </g:each></table>
-                                </td>
-                              </tr> 
-                            </sec:ifNotGranted>
-                        </sec:ifAnyGranted>
+                  <div class="checkout_fields">
+                    <div style="width:200px;" class="checkout_value ${hasErrors(bean: person, field: 'username', 'errors')}">
+                      <g:textField id="username" name="username" style="width: 180px;" value="${fieldValue(bean:person,field:'username')}" />
+                    </div>
+                    <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'userRealName', 'errors')}">
+                      <g:textField id="userRealName" name="userRealName" style="width: 280px;" value="${fieldValue(bean:person,field:'userRealName')}" />
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
 
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="description">Description:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'description','errors')}">
-                                    <input type="text" id="description" name="description" value="${fieldValue(bean:person,field:'description')}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="email">Email:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:person,field:'email','errors')}">
-                                    <input type="text" id="email" name="email" value="${fieldValue(bean:person,field:'email')}"/>
-                                </td>
-                            </tr> 
-                        
-                        </tbody>
-                    </table>
+                  <div class="checkout_labels">
+                    <div class="checkout_name" style="width:200px;">
+                      <label for="username">User Name</label>
+                    </div>
+                    <div class="checkout_name" style="width:300px;">
+                      <label for="userRealName">User Real Name</label>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+
+                  <div class="checkout_section_header">
+                    Password
+                  </div>
+
+                  <div class="checkout_fields">
+                    <div style="width:200px;" class="checkout_value ${hasErrors(bean: person, field: 'passwd', 'errors')}">
+                      <input type="password" id="passwd" name="passwd" style="width: 180px;" value="${fieldValue(bean:person,field:'password')}" />
+                    </div>
+                    <div style="width:200px;" class="checkout_value ${hasErrors(bean: person, field: 'repasswd', 'errors')}">
+                      <input type="password" id="repasswd" name="repasswd" style="width: 180px;" value="${fieldValue(bean:person,field:'password')}" />
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+
+                  <div class="checkout_labels">
+                    <div class="checkout_name" style="width:200px;">
+                      <label for="passwd">Password</label>
+                    </div>
+                    <div class="checkout_name" style="width:200px;">
+                      <label for="repasswd">Re-enter Password</label>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+
+                  <sec:ifAnyGranted roles="ROLE_ADMIN">
+
+                    <div class="checkout_section_header">
+                      Manager and Enablement
+                    </div>
+
+                    <div class="checkout_fields">
+                      <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'manager', 'errors')}">
+                        <g:select style="width:280px;" from="${com.storitz.User.list()}" value="${person?.manager?.id}"
+                                  optionKey="id" optionValue="userRealName" name="manager.id"
+                                  noSelection="['null':'No manager selected']"/>
+                      </div>
+                      <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'enabled', 'errors')}">
+                        <g:checkBox name="enabled" value="${person?.enabled}" /> &nbsp; Enabled
+                      </div>
+                      <div style="clear:both;"></div>
+                    </div>
+
+                    <div class="checkout_labels">
+                      <div class="checkout_name" style="width:300px;">
+                        <label for="manager.id">Manager</label>
+                      </div>
+                      <div style="clear:both;"></div>
+                    </div>
+
+                    <div class="checkout_section_header">
+                      Roles
+                    </div>
+
+                    <div class="checkout_fields">
+                      <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
+                        <g:each var="role" in="${roleMap.keySet()}">
+                          <div style="margin: 0 1.5em;" class="left">
+                            <g:checkBox name="${role.authority}" value="${roleMap[role]}"/> &nbsp; ${role.authority.encodeAsHTML()}
+                          </div>
+                        </g:each>
+                      </div>
+                      <div style="clear:both; height:10px;"></div>
+                    </div>
+
+                  </sec:ifAnyGranted>
+                  <sec:ifNotGranted roles="ROLE_ADMIN">
+                    <input type="hidden" name="ROLE_USER" value="on"/>
+                  </sec:ifNotGranted>
+
+                  <sec:ifAnyGranted roles="ROLE_MANAGER">
+                    <sec:ifNotGranted roles="ROLE_ADMIN">
+                      <div class="checkout_section_header">
+                        Site Privileges
+                      </div>
+
+                      <div class="checkout_fields">
+                        <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
+                          <g:each var="site" in="${siteMap.keySet()}">
+                            <div style="margin:0 1.5em; width: 250px;" class="left">
+                              <g:checkBox name="SITE_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
+                            </div>
+                          </g:each>
+                        </div>
+                        <div style="clear:both; height:10px;"></div>
+                      </div>
+
+                      </sec:ifNotGranted>
+                  </sec:ifAnyGranted>
+
+                  <div class="checkout_section_header">
+                    Description and Email
+                  </div>
+
+                  <div class="checkout_fields">
+                    <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'description', 'errors')}">
+                      <input type="text" id="description" name="description" style="width: 280px;" value="${fieldValue(bean:person,field:'description')}" />
+                    </div>
+                    <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'email', 'errors')}">
+                      <input type="text" id="email" name="email" style="width: 280px;" value="${fieldValue(bean:person,field:'email')}" />
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+
+                  <div class="checkout_labels">
+                    <div class="checkout_name" style="width:300px;">
+                      <label for="description">Description</label>
+                    </div>
+                    <div class="checkout_name" style="width:300px;">
+                      <label for="email">Email</label>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+
                 </div>
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" value="Update" /></span>

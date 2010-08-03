@@ -17,10 +17,10 @@
     <g:render template="/topnav" />
     <div id="stcontent">
       <g:render template="/logo_bar" />
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
-            <span class="menuButton"><g:link class="list" action="list">User List</g:link></span>
-            <span class="menuButton"><g:link class="create" action="create">New User</g:link></span>
+        <div class="buttons">
+            <span class="button"><a class="home" href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
+            <span class="button"><g:link action="list">User List</g:link></span>
+            <span class="button"><g:link action="create">New User</g:link></span>
         </div>
         <div class="body">
             <h1>Show User</h1>
@@ -112,10 +112,8 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <input type="hidden" name="id" value="${person?.id}" />
-                    <!-- <span class="button"><g:actionSubmit class="edit" value="Edit" /></span>  -->
-                    <span class="button"><g:link class="edit" action="edit" id="${person?.id}">Edit</g:link></span>                  
-                    <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
+                  <span class="button"><g:link action="edit" id="${person?.id}">Edit</g:link></span>
+                  <span class="button"><g:actionSubmit action="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
                 </g:form>
             </div>
         </div>

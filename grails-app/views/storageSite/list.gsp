@@ -20,7 +20,7 @@
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
-      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
         <span class="button"><g:link action="create">Create New Site</g:link></span>
       </sec:ifAnyGranted>

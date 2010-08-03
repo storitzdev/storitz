@@ -20,7 +20,7 @@
 
   <div style="clear: both;height: 10px"></div>
   <div class="buttons">
-    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
+    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
     <span class="button"><g:link action="list">List Storage Sites</g:link></span>
     %{--<span class="menuButton"><g:link class="report" action="report" id="${storageSiteInstance.id}">Storage Site Report</g:link></span>--}%
     <sec:ifAnyGranted roles="ROLE_ADMIN">
