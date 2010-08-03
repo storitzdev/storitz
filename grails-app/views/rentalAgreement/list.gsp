@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Create Storage Site"/>
+  <g:set var="title" value="List Rental Agreements"/>
   <g:render template="/header"/>
 
   <script type="text/javascript">
@@ -21,14 +21,15 @@
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
-      <sec:ifAnyGranted roles="ROLE_ADMIN">
-        <span class="button"><g:link action="create">Create New Site</g:link></span>
+      <sec:ifAnyGranted roles="ROLE_MANAGER">
+        <span class="button"><g:link action="create">Add Agreement</g:link></span>
       </sec:ifAnyGranted>
     </div>
+
     <div class="body">
 
       <div class="price_options checkout_header white">
-        List Storage Sites
+        List Rental/Lease Agreements
       </div>
 
       <g:if test="${flash.message}">

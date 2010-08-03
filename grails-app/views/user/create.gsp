@@ -158,7 +158,7 @@
               </div>
 
               <div class="formInstructions">
-                Describe this user - for example if they are a site manager of a particular facility, enter that
+                Describe this user - for example if he or she is a site manager of a particular facility, enter that
                 description here.
               </div>
 

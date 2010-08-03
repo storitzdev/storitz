@@ -419,7 +419,7 @@ class SiteLinkService {
       def floor = unit.iFloor.text() as Integer
       def typeName = unit.sTypeName.text()
       siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
-      siteUnit.isInterior = Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/
+      siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
       siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
       siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
       siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)

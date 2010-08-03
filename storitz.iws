@@ -18,17 +18,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.ipr" afterPath="$PROJECT_DIR$/storitz.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/siteLink/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/siteLink/create.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/edit.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/siteLink/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/siteLink/list.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/siteLink/show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/siteLink/show.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iml" afterPath="$PROJECT_DIR$/storitz.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/list.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/create.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz-grailsPlugins.iml" afterPath="$PROJECT_DIR$/storitz-grailsPlugins.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/SiteLinkController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/SiteLinkController.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_footer.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_footer.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/rentalAgreement" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -104,10 +100,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="create.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/user/create.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="237" column="0" selection-start="10779" selection-end="10779" vertical-scroll-proportion="0.21538462">
+            <state line="36" column="0" selection-start="968" selection-end="1070" vertical-scroll-proportion="-6.254902">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="26" selection-start="1100" selection-end="1100" vertical-scroll-proportion="13.666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_footer.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_footer.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="0" selection-start="1851" selection-end="1851" vertical-scroll-proportion="-9.52">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SiteLinkService.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="421" column="124" selection-start="16909" selection-end="16909" vertical-scroll-proportion="0.30237153">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/list.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="26" selection-start="942" selection-end="942" vertical-scroll-proportion="-5.9215684">
               <folding />
             </state>
           </provider>
@@ -136,22 +168,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/_footer.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/changePassword.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/UserController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/list.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/list.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/show.gsp" />
         <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/grails-app/views/siteLink/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/siteLink/list.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/SiteLinkController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/siteLink/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/create.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/storageSite/list.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/_footer.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy" />
       </list>
     </option>
   </component>
@@ -548,20 +580,30 @@
       <recent name="storitz.constants" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\rentalAgreement" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\static" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\user" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\static" />
-      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\conf" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="storitz" />
       <recent name="org.grails.plugins.imagetools" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\static" />
+      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\conf" />
+    </key>
   </component>
   <component name="RunManager" selected="Grails.storitz">
+    <configuration default="true" type="PhpRunConfigurationType" factoryName="PHP">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="ValidateXdebugSetup" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
       <module name="" />
       <setting name="vmparams" value="" />
@@ -574,6 +616,14 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="ValidateXdebugSetup" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -633,6 +683,15 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="ValidateXdebugSetup" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -804,7 +863,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="870" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32775453" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897604" sideWeight="0.21988796" order="2" side_tool="true" content_ui="tabs" />
@@ -824,7 +883,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995633" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33042213" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22594142" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22594142" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -850,7 +909,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin pages look and feel updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Admin look and feel changes&#10;Added the ability to refresh new sites on SiteLink feeds" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -863,8 +922,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Project cleanup for Grails 1.2.3" />
-    <MESSAGE value="Added missing libs&#10;" />
     <MESSAGE value="remove logs from SVN" />
     <MESSAGE value="Home page look and feel" />
     <MESSAGE value="More look and feel and form submission" />
@@ -888,6 +945,8 @@
     <MESSAGE value="Fix bug when part of a search is entered" />
     <MESSAGE value="Homepage design changes" />
     <MESSAGE value="Admin pages look and feel updates" />
+    <MESSAGE value="Completed Admin look and feel changes" />
+    <MESSAGE value="Completed Admin look and feel changes&#10;Added the ability to refresh new sites on SiteLink feeds" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -931,19 +990,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_logo_bar.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/UserController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="145" column="45" selection-start="3974" selection-end="3974" vertical-scroll-proportion="-12.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/list.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="93" selection-start="658" selection-end="658" vertical-scroll-proportion="3.3333333" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/list.gsp">
@@ -969,11 +1018,6 @@
     <entry file="file://$PROJECT_DIR$/grails-app/views/siteLink/create.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="0" selection-start="3257" selection-end="3257" vertical-scroll-proportion="-6.490196" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="256" column="0" selection-start="9978" selection-end="9978" vertical-scroll-proportion="-14.28" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/siteLink/list.gsp">
@@ -1007,7 +1051,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/create.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="0" selection-start="10779" selection-end="10779" vertical-scroll-proportion="0.21538462">
+        <state line="36" column="0" selection-start="968" selection-end="1070" vertical-scroll-proportion="-6.254902">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/list.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="26" selection-start="942" selection-end="942" vertical-scroll-proportion="-5.9215684">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="26" selection-start="1100" selection-end="1100" vertical-scroll-proportion="13.666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_footer.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="1851" selection-end="1851" vertical-scroll-proportion="-9.52">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/SiteLinkService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="421" column="124" selection-start="16909" selection-end="16909" vertical-scroll-proportion="0.30237153">
           <folding />
         </state>
       </provider>

@@ -24,8 +24,6 @@
         <a href="http://twitter.com/Storitzdotcom"><img style="border: none;" src="${resource(dir:'images', file:'icn-twitter.png')}" alt="Twitter"/></a>
         <a href="http://www.facebook.com/storitz"><img style="border: none;" src="${resource(dir:'images', file:'icn-facebook.png')}" alt="FaceBook"/></a>
         <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><img style="border: none;" src="${resource(dir:'images', file:'icn-stumbleupon.png')}" alt="StumbleUpon"/></a>
-        <a href="http://www.digg.com/submit?url=http://www.storitz.com/"><img style="border: none;" src="${resource(dir:'images', file:'icn-digg.png')}" alt="Digg"/></a>
-        <a href="http://www.delicious.com/save/"><img style="border: none;" src="${resource(dir:'images', file:'icn-delicious.png')}" alt="Delicious"/></a>
       </div>
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
