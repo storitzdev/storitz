@@ -341,7 +341,7 @@
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               }
-              markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_blue.png')}', null, null, new google.maps.Point(1, 32));
+              markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_grn.png')}', null, null, new google.maps.Point(1, 32));
               markerImageGray = new google.maps.MarkerImage('${resource(dir:'images', file:'gray-icon.png')}', null, null, new google.maps.Point(1, 32));
 
               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
@@ -408,7 +408,7 @@
         }
 
         function setupForm() {
-          $('address').activate();
+          $('address').focus();
           $('gsearchBtn').observe('click', function() {
             showAddress($F('address'), $F('size'), $F('date'));
           });
@@ -521,7 +521,7 @@
                 <img src="${resource(dir:'images', file:'btn-circle-3.png')}" alt="3"/>
               </div>
               <div class="left">
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Click to select move in date.'}" onchange="dateChange()"/>
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move in date.'}" onchange="dateChange()"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
               <div style="margin-left: 30px;">

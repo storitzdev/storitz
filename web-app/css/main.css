@@ -940,9 +940,15 @@ div.rightArrowActive:hover {
 }
 
 a.footer:link, a.footer:visited, a.footer:hover {
-    color: #fff;
+    color: #96d6ff;
+    font: 11px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     text-decoration: none;
+}
+
+p.footer {
+    margin: 0;
+    line-height: 18px;
 }
 
 .button a, .button input {

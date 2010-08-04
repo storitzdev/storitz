@@ -4,16 +4,16 @@
       <span class="small">&copy; 2010 Storitz. All rights reserved.</span>
     </div>
     <div class="left">
-      <div class="left" style="margin: 1em 5em;">
-        <p><g:link class="footer small" controller="static" action="faq">Frequently Asked Questions</g:link></p>
-        <p><g:link class="footer small" controller="static" action="aboutus">About Us</g:link></p>
-        <p><g:link class="footer small" controller="static" action="contactus">Contact Us</g:link></p>
-        <p><g:link class="footer small" controller="static" action="refund">Refund Policy</g:link></p>
+      <div class="left" style="margin: 2em 5em;">
+        <p class="footer"><g:link class="footer small" controller="static" action="faq">Frequently Asked Questions</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="static" action="aboutus">About Us</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="static" action="contactus">Contact Us</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="static" action="refund">Refund Policy</g:link></p>
       </div>
-      <div class="left" style="margin: 1em 5em;">
-        <p><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
-        <p><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
-        <p><g:link class="footer small" controller="siteMap">Site Map</g:link></p>
+      <div class="left" style="margin: 2em 5em;">
+        <p class="footer"><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="siteMap">Site Map</g:link></p>
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 1em 5em;" class="left">
@@ -27,10 +27,10 @@
       </div>
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
-      <div style="margin: 1em;">
+      <div style="margin: 2em 1em 2.5em 1em;">
         <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=QoVAUrljyyuT8APktZx8vpTvuwdcusK1rt8fI8EFYfFvpl9nRLc"></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.godaddy.com/email/hosted-exchange.aspx" target="_blank">Hosted Exchange</a></span>
       </div>
-      <div style="margin: 1em;">
+      <div style="margin: 2.5em 1em;">
         <a href="http://www.selfstorage.org/" target="_blank"><img style="border:none;" src="${resource(dir:'images', file:'logo-ssa.png')}" alt="SSA Logo"/></a>
       </div>
     </div>
