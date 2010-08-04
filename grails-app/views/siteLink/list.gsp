@@ -22,7 +22,11 @@
     <span class="button"><g:link action="create">Create New SiteLink Feed</g:link></span>
   </div>
   <div class="body">
-    <h1>List SiteLink Feeds</h1>
+
+    <div class="price_options checkout_header white">
+      List SiteLink Feeds
+    </div>
+
     <g:if test="${flash.message}">
       <div class="message">${flash.message}</div>
     </g:if>
