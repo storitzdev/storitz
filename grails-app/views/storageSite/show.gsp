@@ -338,6 +338,22 @@
 
         </tr>
 
+        <g:if test="${storageSiteInstance?.rentalAgreement}">
+          <tr class="prop">
+            <td colspan="2" valign="top"><h3>Rental/Lease Agreement</h3></td>
+
+          </tr>
+
+          <tr class="prop">
+            <td valign="top" class="name">${storageSiteInstance?.rentalAgreement?.title}</td>
+
+            <td valign="top" style="text-align: left;" class="value">
+              <a href="${resource(file:storageSiteInstance?.rentalAgreement.src())}" target="_blank"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"></a>
+            </td>
+
+          </tr>
+        </g:if>
+
         <tr class="prop">
           <td colspan="2" valign="top"><h3>Images</h3></td>
 

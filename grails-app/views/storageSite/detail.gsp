@@ -1303,7 +1303,13 @@
                 </div>
                 <div class="checkout_fields">
                   <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransaction, field: 'terms', 'errors')}">
-                      <div class="left"><g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /></div><div class="checkBoxText"> I agree to the terms and conditions of the Storage Rental Agreement</div>
+                      <div class="left">
+                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransaction?.terms}" /></div><div class="checkBoxText"> I agree to the terms and conditions of the
+                          <g:if test="${site.rentalAgreement}">
+                            <a href="${resource(file:site.rentalAgreement.src())}" target="_blank">Storage Rental Agreement</a>
+                          </g:if>
+                          <g:else>Storage Rental Agreement</g:else>
+                      </div>
                       <div style="clear:both;"></div>
                   </div>
                   <div style="clear:both;"></div>

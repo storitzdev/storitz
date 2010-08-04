@@ -1,7 +1,4 @@
 <%@ page import="com.storitz.UserRole" %>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Create Storage Site"/>
@@ -25,6 +22,8 @@
       AnyTime.picker("endSaturday", {format:"%h:%i%p"});
       AnyTime.picker("startSunday", {format:"%h:%i%p"});
       AnyTime.picker("endSunday", {format:"%h:%i%p"});
+      AnyTime.picker("startGate", {format:"%h:%i%p"});
+      AnyTime.picker("endGate", {format:"%h:%i%p"});
     }
 
     function checkAddItem(type) {
@@ -101,8 +100,7 @@
         </div>
       </g:hasErrors>
 
-      <g:uploadForm method="post">
-        <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
+      <g:uploadForm method="post" id="${storageSiteInstance?.id}">
         <g:hiddenField name="version" value="${storageSiteInstance?.version}"/>
         <div class="dialog">
 
@@ -599,6 +597,30 @@
             </div>
             <div style="clear:both;"></div>
           </div>
+
+          <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+          <div class="checkout_section_header">
+            Rental/Lease Agreement
+          </div>
+          <div class="formInstructions">
+            Please select the rental agreement that users will see when checking out through Storitz for this site.
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'rentalAgreement', 'errors')}">
+              <g:select id="rentalAgreement" name="rentalAgreement.id" style="width:250px;" from="${rentalAgreementList}" optionValue="title" optionKey="id" value="${storageSiteInstance.rentalAgreement?.id}" noSelection="['-1': '']"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:250px;">
+              <label for="rentalAgreement">Rental/Lease Agreement</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          </sec:ifAnyGranted>
 
           <div class="checkout_section_header">
             Site Images

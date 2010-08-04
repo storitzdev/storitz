@@ -8,5 +8,16 @@ class RentalAgreement {
     String basename
 
     static constraints = {
+      title(nullable:false)
+      owner(nullable:true)
+      fileLocation(nullable:true)
+      basename(nullable:true)
     }
+
+
+
+  def src() {
+    return basename +  fileLocation
+  }
+
 }

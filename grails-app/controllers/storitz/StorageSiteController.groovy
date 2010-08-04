@@ -12,6 +12,7 @@ import com.storitz.User
 import com.storitz.Bullet
 import grails.plugins.springsecurity.Secured
 import com.storitz.UserRole
+import com.storitz.RentalAgreement
 
 class StorageSiteController {
 
@@ -120,13 +121,18 @@ class StorageSiteController {
       redirect(action: "list")
     } else {
       def user = session["user"]
+      def rentalAgreementList
       if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
         if (!SiteUser.findBySiteAndUser(storageSiteInstance, user)) {
           flash.message = "${message(code: 'default.no.permission.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), session["username"]])}"
           redirect(action: "list")
+          return
         }
+        rentalAgreementList = RentalAgreement.findAllByOwner(user)
+      } else {
+        rentalAgreementList = RentalAgreement.findAll()
       }
-      [storageSiteInstance: storageSiteInstance]
+      [storageSiteInstance: storageSiteInstance, rentalAgreementList:rentalAgreementList]
     }
   }
 
@@ -143,7 +149,6 @@ class StorageSiteController {
         }
       }
       def manager = User.get(params.manager?.id)
-      println "manager.id sent as: ${params.manager?.id} manager=${manager}"
 
       if (manager) {
         UserRole.getUsersByRoleName('ROLE_MANAGER').each{
@@ -151,6 +156,20 @@ class StorageSiteController {
         }
         SiteUser.link(storageSiteInstance, manager)
       }
+
+      if (params.rentalAgreement?.id && (params.rentalAgreement.id as Long) < 0) {
+        storageSiteInstance.rentalAgreement = null
+        params.remove('rentalAgreement.id')
+      } else if (params.rentalAgreement?.id) {
+        def rentalAgreement = RentalAgreement.get(params.rentalAgreement?.id)
+
+        if (rentalAgreement) {
+          storageSiteInstance.rentalAgreement = rentalAgreement
+        } else {
+          storageSiteInstance.rentalAgreement = null
+        }
+      }
+
       // clear all items
       for(item in storageSiteInstance.securityItems) {
         item.delete()
@@ -219,12 +238,10 @@ class StorageSiteController {
       params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
         def imgFile = request.getFile(img.key)
         if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename, siteId)) {
-          println "Uploading image file:" + imgFile.originalFilename + " size: " + imgFile.size
           def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename, siteId)
           def filePath = fileUploadService.getFilePath('/images/site', imgFile.originalFilename, siteId)
           def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + imgFile.originalFilename, siteId)
           def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + imgFile.originalFilename, siteId)
-          println "Saving image to tmpPath: " + tmpPath
           def imageTool = new ImageTool()
           imageTool.load(tmpPath)
           imageTool.saveOriginal()

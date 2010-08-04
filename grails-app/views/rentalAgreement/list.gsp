@@ -41,35 +41,27 @@
           <thead>
           <tr>
 
-            <g:sortableColumn property="id" title="${message(code: 'storageSite.id.label', default: 'Id')}"/>
+            <g:sortableColumn property="id" title="${message(code: 'rentalAgreement.id.label', default: 'Id')}"/>
 
-            <g:sortableColumn property="title" title="${message(code: 'storageSite.title.label', default: 'Site Name')}"/>
+            <g:sortableColumn property="title" title="${message(code: 'rentalAgreement.title.label', default: 'Agreement')}"/>
 
-            <g:sortableColumn property="city" title="${message(code: 'storageSite.city.label', default: 'City')}"/>
+            <g:sortableColumn property="owner" title="${message(code: 'rentalAgreement.owner.label', default: 'Owner')}"/>
 
-            <g:sortableColumn property="zipcode" title="${message(code: 'storageSite.zipcode.label', default: 'Zipcode')}"/>
-
-            <g:sortableColumn property="manager" title="${message(code: 'storageSite.manager.label', default: 'Manager')}"/>
-
-            <th>Edit</th>
+            <g:sortableColumn property="file" title="${message(code: 'rentalAgreement.file.label', default: 'PDF')}"/>
 
           </tr>
           </thead>
           <tbody>
-          <g:each in="${storageSiteInstanceList}" status="i" var="storageSiteInstance">
+          <g:each in="${rentalAgreementInstanceList}" status="i" var="rentalAgreementInstance">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-              <td><g:link action="show" id="${storageSiteInstance.id}">${fieldValue(bean: storageSiteInstance, field: "id")}</g:link></td>
+              <td><g:link action="show" id="${rentalAgreementInstance.id}">${fieldValue(bean: rentalAgreementInstance, field: "id")}</g:link></td>
 
-              <td>${fieldValue(bean: storageSiteInstance, field: "title")}</td>
+              <td>${fieldValue(bean: rentalAgreementInstance, field: "title")}</td>
 
-              <td>${fieldValue(bean: storageSiteInstance, field: "city")}</td>
+              <td>${rentalAgreementInstance?.owner?.username}</td>
 
-              <td>${fieldValue(bean: storageSiteInstance, field: "zipcode")}</td>
-
-              <td>${storageSiteInstance.getManager()?.username}</td>
-
-              <td><g:link action="edit" id="${storageSiteInstance.id}">edit</g:link></td>
+              <td><a href="${resource(file:rentalAgreementInstance.src())}" target="_blank"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"/></a> </td>
 
             </tr>
           </g:each>
@@ -77,7 +69,7 @@
         </table>
       </div>
       <div class="paginateButtons">
-        <g:paginate total="${storageSiteInstanceTotal}" params="[sitename:params?.sitename]"/>
+        <g:paginate total="${rentalAgreementInstanceTotal}" params="[sitename:params?.sitename]"/>
       </div>
     </div>
   </div>
