@@ -603,7 +603,7 @@
           {
             method:'post',
             parameters: ajaxFormNewValues,
-            onComplete:function(transport) {
+            onComplete:function() {
               ajaxFormDirty = false;
               ajaxFormUpdate();
             }
@@ -630,7 +630,7 @@
       onSuccess:function(transport) {
         $('helpDeskStatus').update(transport.responseText);
       },
-      onComplete:function(transport) {
+      onComplete:function() {
         ajaxServerPoll();
       }
     });

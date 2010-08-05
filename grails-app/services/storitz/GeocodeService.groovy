@@ -1,3 +1,5 @@
+package storitz
+
 import grails.converters.JSON
 
 class GeocodeService {

@@ -1,3 +1,5 @@
+package storitz
+
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
 import static groovyx.net.http.ContentType.XML
@@ -569,6 +571,37 @@ class SiteLinkService {
     }
     println('returning fee=' + adminFee)
     return adminFee
+  }
+
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+    def durationMonths = 1
+    def offerDiscount = 0
+    def premium = ins ? ins.premium : 0
+    def additionalFees = site.adminFee ? site.adminFee : 0 + site.lockFee ? site.lockFee : 0
+    def adminFee = site.adminFee ? site.adminFee : 0
+    def waiveAdmin = false
+
+    if (promo) {
+
+      durationMonths = (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth)
+      waiveAdmin = promo.waiveAdmin
+
+      switch (promo.promoType) {
+        case "AMOUNT_OFF":
+          offerDiscount = promo.promoQty * promo.expireMonth;
+          break;
+
+        case "PERCENT_OFF":
+          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
+          break;
+
+        case "FIXED_RATE":
+          offerDiscount = (unit.price - promo.promoQty) * promo.expireMonth;
+          break;
+      }
+    }
+    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit.price + premium)*durationMonths - offerDiscount;
+
   }
 
 }

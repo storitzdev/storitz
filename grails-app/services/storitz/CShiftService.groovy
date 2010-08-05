@@ -1,3 +1,5 @@
+package storitz
+
 import groovyx.net.ws.WSClient
 
 

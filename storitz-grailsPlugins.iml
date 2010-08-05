@@ -9,6 +9,7 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
@@ -17,6 +18,9 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12">
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12/grails-app/utils" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/grails-app/services" isTestSource="false" />

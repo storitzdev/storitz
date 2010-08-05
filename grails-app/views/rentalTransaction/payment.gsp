@@ -8,15 +8,16 @@
     <script type="text/javascript">
 //<![CDATA[
 
-  var defaultOffer = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
+  var defaultOffer = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1, waiveAdmin: false };
   var offerChosen = defaultOffer;
   <g:if test="${promo != null}">
-    offerChosen = { active: ${promo.active}, promoName: "${promo.promoName}", promoType: "${promo.promoType}", promoQty: ${promo.promoQty}, prepay: ${promo.prepay},  prepayMonths: ${promo.prepayMonths}, inMonth: ${promo.inMonth}, expireMonth: ${promo.expireMonth}}
+    offerChosen = { active: ${promo.active}, promoName: "${promo.promoName}", promoType: "${promo.promoType}", promoQty: ${promo.promoQty}, prepay: ${promo.prepay},  prepayMonths: ${promo.prepayMonths}, inMonth: ${promo.inMonth}, expireMonth: ${promo.expireMonth}, waiveAdmin: ${promo.waiveAdmin}};
   </g:if> 
 
   var unit = { type: "${unit.unitType}", price: ${unit.price} };
   var premium = ${ins ? ins.premium : 0};
   var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
+  var adminFee = ${site.adminFee ? site.adminFee : 0};
 
   function drawCheckoutTable() {
     var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
@@ -39,6 +40,8 @@
   }
 
   function showTotals() {
+    // TODO -  push all calculations into Ajax/Service call
+
     var tableBody = "";
 
     var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
@@ -65,9 +68,11 @@
       tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text borderRight\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
     }
 
-    tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"borderRight price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+    if (!offerChosen.waiveAdmin) {
+      tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"borderRight price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
+    }
 
-    var total_movein = additionalFees + (unit.price + premium)*durationMonths - offerDiscount;
+    var total_movein = (offerChosen.waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit.price + premium)*durationMonths - offerDiscount;
 
     $('checkout_price_totals_body').update(tableBody);
     $('checkout_price_total').update("$" + total_movein.toFixed(2));

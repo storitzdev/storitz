@@ -1,3 +1,5 @@
+package storitz
+
 import org.springframework.context.*
 
 class FileUploadService implements ApplicationContextAware {

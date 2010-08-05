@@ -9,12 +9,12 @@ import com.storitz.UserRole
 import com.storitz.User
 import com.storitz.Insurance
 import com.storitz.StorageSize
+import com.vinomis.authnet.AuthorizeNet
 
 class RentalTransactionController {
 
     def springSecurityService
-    def siteLinkService
-    def cShiftService
+    def costService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
@@ -108,7 +108,10 @@ class RentalTransactionController {
           [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
         }
         else {
-          def promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+          def promo = null
+          if (!rentalTransactionInstance.promoId == -999) {
+            promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+          }
           def unit = StorageUnit.get(rentalTransactionInstance.unitId)
           def ins = null
           if (!rentalTransactionInstance.insuranceId == -999) {
@@ -124,31 +127,73 @@ class RentalTransactionController {
 //      println params.billingAddress
 //      println params
       def rentalTransactionInstance = RentalTransaction.get(params.id)
-      if (params.billingAddress == 'new') {
-        def billingContact = new com.storitz.Contact(params)
-        if (!billingContact.save(flush: true)) {
-          def promo = SpecialOffer.get(rentalTransactionInstance.promoId)
-          def unit = StorageUnit.get(rentalTransactionInstance.unitId)
-          def ins = null
-          if (!rentalTransactionInstance.insuranceId == -999) {
-            ins = Insurance.get(rentalTransactionInstance.insuranceId)
+
+      def promo = null
+      if (!rentalTransactionInstance.promoId == -999) {
+        promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+      }
+      def unit = StorageUnit.get(rentalTransactionInstance.unitId)
+      def ins = null
+      if (!rentalTransactionInstance.insuranceId == -999) {
+        ins = Insurance.get(rentalTransactionInstance.insuranceId)
+      }
+
+      switch(params.billingAddress) {
+
+        case "new":
+          def billingContact = new com.storitz.Contact(params)
+          if (!billingContact.save(flush: true)) {
+            flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.Contact'), params.id])}"
+            render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+            return
+          } else {
+            rentalTransactionInstance.billingAddress = billingContact
           }
-          flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.Contact'), params.id])}"
-          [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
-        } else {
-          rentalTransactionInstance.billingAddress = billingContact
-        }
-      } else if (params.billingAddress == 'primary') {
-        rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactPrimary
-      } else {
-        rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactSecondary
-      }
-      // get MoveInCosts
-      if (rentalTransactionInstance.site.siteLink) {
+          break
 
-      } else if (rentalTransactionInstance.site.centerShift) {
+        case "primary":
+          rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactPrimary
+          break
 
+        case "secondary":
+          rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactSecondary
+          break
       }
+      if (!rentalTransactionInstance.save(flush: true)) {
+        flash.message = "Could not save billing address"
+        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        return
+      }
+
+      println "RentalTransaction: ${rentalTransactionInstance.dump()}"
+
+      def ccNum = params.cc_number.replaceAll(/\D/, '') as String
+      def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
+      def moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
+      def s = new AuthorizeNet()
+      s.authorizeAndCapture {
+        custId rentalTransactionInstance.id as String
+        firstName rentalTransactionInstance.billingAddress.firstName.encodeAsURL()
+        lastName rentalTransactionInstance.billingAddress.lastName
+        address "${rentalTransactionInstance.billingAddress.streetNumber} ${rentalTransactionInstance.billingAddress.street} ${rentalTransactionInstance.billingAddress.streetType.display}"
+        city rentalTransactionInstance.billingAddress.city
+        state rentalTransactionInstance.billingAddress.state.display
+        zip rentalTransactionInstance.billingAddress.zipcode
+        ccNumber ccNum
+        cvv params.cc_cvv2
+        ccExpDate ccExpVal
+        amount moveInCost as String
+      }
+      def authResp = s.submit()
+      println "Authorize.net response: ${authResp.dump()}"
+
+      if (authResp.responseCode as Integer != 1) {
+        flash.message = "Credit card not accepted ${authResp.responseReasonText}"
+        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+        return
+      }
+
+      // TODO - move in
     }
 
     def edit = {
