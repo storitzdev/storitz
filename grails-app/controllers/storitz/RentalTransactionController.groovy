@@ -192,6 +192,9 @@ class RentalTransactionController {
         render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
         return
       }
+      rentalTransactionInstance.transactionId = authResp.transactionId
+      rentalTransactionInstance.status = TransactionStatus.PAID
+      rentalTransactionInstance.save(flush:true)
 
       // TODO - move in
     }

@@ -24,6 +24,8 @@
       AnyTime.picker("endSunday", {format:"%h:%i%p"});
       AnyTime.picker("startGate", {format:"%h:%i%p"});
       AnyTime.picker("endGate", {format:"%h:%i%p"});
+      AnyTime.picker("startSundayGate", {format:"%h:%i%p"});
+      AnyTime.picker("endSundayGate", {format:"%h:%i%p"});
     }
 
     function checkAddItem(type) {
@@ -295,10 +297,36 @@
               Gate Hours
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="openSunday">Start</label>
+              <label for="startGate">Start</label>
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="openSunday">End</label>
+              <label for="endGate">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value">
+              &nbsp;
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startSundayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startSundayGate" name="startSundayGate" value="${storageSiteInstance?.startSundayGate?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endSundayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endSundayGate" name="endSundayGate" value="${storageSiteInstance?.endSundayGate?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              Sunday Gate Hours
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startGate">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endGate">End</label>
             </div>
             <div style="clear:both;"></div>
           </div>

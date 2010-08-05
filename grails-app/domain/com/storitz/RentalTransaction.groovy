@@ -21,6 +21,7 @@ class RentalTransaction {
   Boolean activeMilitary
   RentalUse rentalUse
   TransactionStatus status
+  String transactionId
   Long unitId
   Long promoId
 

@@ -33,6 +33,8 @@ class StorageSite {
       endSunday(nullable:true)
       startGate(nullable:true)
       endGate(nullable:true)
+      startSundayGate(nullable:true)
+      endSundayGate(nullable:true)
       siteLink(nullable:true)
       centerShift(nullable:true)
       bankAccount(nullable:true)
@@ -84,6 +86,8 @@ class StorageSite {
     Date endSunday
     Date startGate
     Date endGate
+    Date startSundayGate
+    Date endSundayGate
     Boolean extendedHours
 
   // data feeds

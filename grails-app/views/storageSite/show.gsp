@@ -243,6 +243,15 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.sundayGateHours.label" default="Sunday Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startSundayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endSundayGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSiteInstance.extendedHours.label" default="Extended Hours"/></td>
 
           <td valign="top" class="value">
