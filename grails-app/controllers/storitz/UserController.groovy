@@ -75,7 +75,7 @@ class UserController {
             count = User.count()
           } else {
             count = User.countByManager(user)
-            results = User.findAllByManager(user, [max:params.max, sort:username, order:"asc"])
+            results = User.findAllByManager(user, [max:params.max, sort:"username", order:"asc"])
           }
         }
 		[personList: results, personListCount: count]

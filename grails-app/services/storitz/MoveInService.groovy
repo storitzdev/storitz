@@ -1,10 +1,22 @@
 package storitz
 
+import com.storitz.RentalTransaction
+
 class MoveInService {
 
-    boolean transactional = true
+    def siteLinkService
+    def cShiftService
 
-    def serviceMethod() {
+    boolean transactional = false
 
+    def newTenant(RentalTransaction trans) {
+      switch(trans.site.source) {
+        case "SL":
+          break
+        case "CS3":
+          break
+      }
     }
+
+
 }

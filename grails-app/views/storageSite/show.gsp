@@ -28,7 +28,11 @@
     </sec:ifAnyGranted>
   </div>
   <div class="body">
-    <h1>Storage Site Details</h1>
+
+    <div class="price_options checkout_header white">
+      Storage Site Details
+    </div>
+    
     <g:if test="${flash.message}">
       <div class="message">${flash.message}</div>
     </g:if>

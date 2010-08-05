@@ -14,6 +14,9 @@ import com.storitz.StorageSite
 import com.storitz.SpecialOffer
 import com.storitz.StorageSize
 import storitz.constants.State
+import com.storitz.RentalTransaction
+import storitz.constants.RentalUse
+import storitz.constants.IdType
 
 class SiteLinkService {
 
@@ -187,7 +190,7 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
          <!--Optional:-->
-         <cal:sLocationCode>""" + rentalTransaction.site.siteLink.sourceLoc + """</cal:sLocationCode>
+         <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
          <!--Optional:-->
          <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
          <!--Optional:-->
@@ -201,6 +204,118 @@ class SiteLinkService {
 </soapenv:Envelope>"""
 
     postAction(payload, 'MoveInCostRetrieveWithDiscount')
+  }
+
+  def newTenant(RentalTransaction rentalTransaction) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:TenantNewDetailed>
+         <!--Optional:-->
+         <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
+         <!--Optional:-->
+         <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
+         <!--Optional:-->
+         <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
+         <!--Optional:-->
+         <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
+         <!--Optional:-->
+         <cal:sWebPassword></cal:sWebPassword>
+         <!--Optional:-->
+         <cal:sMrMrs></cal:sMrMrs>
+         <!--Optional:-->
+         <cal:sFName>""" + rentalTransaction.contactPrimary.firstName + """</cal:sFName>
+         <!--Optional:-->
+         <cal:sMI></cal:sMI>
+         <!--Optional:-->
+         <cal:sLName>""" + rentalTransaction.contactPrimary.lastName + """</cal:sLName>
+         <!--Optional:-->
+         <cal:sCompany></cal:sCompany>
+         <!--Optional:-->
+         <cal:sAddr1>""" + "${rentalTransaction.contactPrimary.streetNumber} ${rentalTransaction.contactPrimary.street} ${rentalTransaction.contactPrimary.streetType.display} ${rentalTransaction.contactPrimary.unit ?  ', Apt. ' + rentalTransaction.contactPrimary.unit : ''}" + """</cal:sAddr1>
+         <!--Optional:-->
+         <cal:sAddr2></cal:sAddr2>
+         <!--Optional:-->
+         <cal:sCity>""" + rentalTransaction.contactPrimary.city + """</cal:sCity>
+         <!--Optional:-->
+         <cal:sRegion>""" + rentalTransaction.contactPrimary.state.display + """</cal:sRegion>
+         <!--Optional:-->
+         <cal:sPostalCode>""" + rentalTransaction.contactPrimary.zipcode + """</cal:sPostalCode>
+         <!--Optional:-->
+         <cal:sCountry>""" + rentalTransaction.contactPrimary.country.display + """</cal:sCountry>
+         <!--Optional:-->
+         <cal:sPhone>""" + rentalTransaction.contactPrimary.phone + """</cal:sPhone>
+         <!--Optional:-->
+         <cal:sMrMrsAlt></cal:sMrMrsAlt>
+         <!--Optional:-->
+         <cal:sFNameAlt>""" + rentalTransaction.contactSecondary.firstName + """</cal:sFNameAlt>
+         <!--Optional:-->
+         <cal:sMIAlt></cal:sMIAlt>
+         <!--Optional:-->
+         <cal:sLNameAlt>""" + rentalTransaction.contactSecondary.lastName + """</cal:sLNameAlt>
+         <!--Optional:-->
+         <cal:sAddr1Alt>""" + "${rentalTransaction.contactSecondary.streetNumber} ${rentalTransaction.contactSecondary.street} ${rentalTransaction.contactSecondary.streetType.display} ${rentalTransaction.contactSecondary.unit ?  ', Apt. ' + rentalTransaction.contactSecondary.unit : ''}" + """</cal:sAddr1Alt>
+         <!--Optional:-->
+         <cal:sAddr2Alt></cal:sAddr2Alt>
+         <!--Optional:-->
+         <cal:sCityAlt>""" + rentalTransaction.contactSecondary.city + """</cal:sCityAlt>
+         <!--Optional:-->
+         <cal:sRegionAlt>""" + rentalTransaction.contactSecondary.state.display +  """</cal:sRegionAlt>
+         <!--Optional:-->
+         <cal:sPostalCodeAlt>""" + rentalTransaction.contactSecondary.zipcode + """</cal:sPostalCodeAlt>
+         <!--Optional:-->
+         <cal:sCountryAlt>""" + rentalTransaction.contactSecondary.country.display +  """</cal:sCountryAlt>
+         <!--Optional:-->
+         <cal:sPhoneAlt>""" + rentalTransaction.contactSecondary.phone + """</cal:sPhoneAlt>
+         <!--Optional:-->
+         <cal:sMrMrsBus></cal:sMrMrsBus>
+         <!--Optional:-->
+         <cal:sFNameBus></cal:sFNameBus>
+         <!--Optional:-->
+         <cal:sMIBus></cal:sMIBus>
+         <!--Optional:-->
+         <cal:sLNameBus></cal:sLNameBus>
+         <!--Optional:-->
+         <cal:sCompanyBus></cal:sCompanyBus>
+         <!--Optional:-->
+         <cal:sAddr1Bus></cal:sAddr1Bus>
+         <!--Optional:-->
+         <cal:sAddr2Bus></cal:sAddr2Bus>
+         <!--Optional:-->
+         <cal:sCityBus></cal:sCityBus>
+         <!--Optional:-->
+         <cal:sRegionBus></cal:sRegionBus>
+         <!--Optional:-->
+         <cal:sPostalCodeBus></cal:sPostalCodeBus>
+         <!--Optional:-->
+         <cal:sCountryBus></cal:sCountryBus>
+         <!--Optional:-->
+         <cal:sPhoneBus></cal:sPhoneBus>
+         <!--Optional:-->
+         <cal:sFax></cal:sFax>
+         <!--Optional:-->
+         <cal:sEmail>""" + rentalTransaction.contactPrimary.email + """</cal:sEmail>
+         <!--Optional:-->
+         <cal:sPager></cal:sPager>
+         <!--Optional:-->
+         <cal:sMobile></cal:sMobile>
+         <cal:bCommercial>""" + (rentalTransaction.rentalUse == RentalUse.BUSINESS ? 'T' : 'F') + """</cal:bCommercial>
+         <cal:bCompanyIsTenant></cal:bCompanyIsTenant>
+         <cal:dDOB></cal:dDOB>
+         <!--Optional:-->
+         <cal:sTenNote>""" + "Storitz move-in: Transaction ID = ${rentalTransaction.id}" + """</cal:sTenNote>
+         <!--Optional:-->
+         <cal:sLicense>""" + rentalTransaction.idType == IdType.DRIVERSLICENSE ? rentalTransaction.idNumber : '' + """</cal:sLicense>
+         <!--Optional:-->
+         <cal:sLicRegion>""" + rentalTransaction.idType == IdType.DRIVERSLICENSE ? rentalTransaction.idState.display : '' + """</cal:sLicRegion>
+         <!--Optional:-->
+         <cal:sSSN></cal:sSSN>
+      </cal:TenantNewDetailed>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'TenantNewDetailed')
   }
 
   private def postAction(payload, action) {

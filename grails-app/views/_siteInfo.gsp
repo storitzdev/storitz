@@ -41,6 +41,19 @@
   </g:if>
   <g:else>Closed</g:else>
 </div>
+<div class="siteInfoText">
+  Gate Weekdays:
+  <g:formatDate format="h:mma" date="${site.startGate}"/> - <g:formatDate format="h:mma" date="${site.endGate}"/>
+</div>
+<div class="siteInfoText">
+  Gate Sunday:
+  <g:formatDate format="h:mma" date="${site.startSundayGate}"/> - <g:formatDate format="h:mma" date="${site.endSundayGate}"/>
+</div>
+<div class="siteInfoText">
+  <g:if test="${site.extendedHours}">
+    Extended Hours Available
+  </g:if>
+</div>
 <div style="height: 10px;"></div>
 <div style="width: 280px;" class="siteInfoText">
   <g:if test="${site.description && site.description.size() > 90}">

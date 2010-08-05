@@ -101,32 +101,37 @@ class RentalTransactionController {
     }
 
     def payment = {
-        def rentalTransactionInstance = RentalTransaction.get(params.id)
-        if (!rentalTransactionInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
-            // TODO - handle error of not found transaction
-          [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
-        }
-        else {
-          def promo = null
-          if (!rentalTransactionInstance.promoId == -999) {
-            promo = SpecialOffer.get(rentalTransactionInstance.promoId)
-          }
-          def unit = StorageUnit.get(rentalTransactionInstance.unitId)
-          def ins = null
-          if (!rentalTransactionInstance.insuranceId == -999) {
-            ins = Insurance.get(rentalTransactionInstance.insuranceId)
-          }
-          // TODO - validate state to make sure we are not redoing a transaction
-          println "Rental transaction - movein: ${rentalTransactionInstance.moveInDate} booking date: ${rentalTransactionInstance.bookingDate}"
-          [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
-        }
+      def rentalTransactionInstance = RentalTransaction.get(params.id)
+      if (!rentalTransactionInstance) {
+          flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
+          // TODO - handle error of not found transaction
+        [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
+        return
+      }
+      def promo = null
+      if (!rentalTransactionInstance.promoId == -999) {
+        promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+      }
+      def unit = StorageUnit.get(rentalTransactionInstance.unitId)
+      def ins = null
+      if (!rentalTransactionInstance.insuranceId == -999) {
+        ins = Insurance.get(rentalTransactionInstance.insuranceId)
+      }
+      if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
+        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        return
+      }
+      [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
     }
 
     def pay = {
 //      println params.billingAddress
 //      println params
       def rentalTransactionInstance = RentalTransaction.get(params.id)
+
+      if (!rentalTransactionInstance) {
+        // TODO - send them to an error page
+      }
 
       def promo = null
       if (!rentalTransactionInstance.promoId == -999) {
@@ -136,6 +141,11 @@ class RentalTransactionController {
       def ins = null
       if (!rentalTransactionInstance.insuranceId == -999) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
+      }
+
+      if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
+        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        return
       }
 
       switch(params.billingAddress) {
@@ -165,7 +175,7 @@ class RentalTransactionController {
         return
       }
 
-      println "RentalTransaction: ${rentalTransactionInstance.dump()}"
+      // TODO - check if unit is still available
 
       def ccNum = params.cc_number.replaceAll(/\D/, '') as String
       def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
@@ -196,6 +206,7 @@ class RentalTransactionController {
       rentalTransactionInstance.status = TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
 
+      // TODO create new tennant
       // TODO - move in
     }
 

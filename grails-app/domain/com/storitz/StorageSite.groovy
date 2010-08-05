@@ -53,6 +53,10 @@ class StorageSite {
     String zipcode
     String url
     String phone
+    // Data source -
+    //    SL - SiteLink
+    //    CS3 - CenterShift 3.x
+    //    CS4 - Centershift 4.x
     String source             // data source
     String sourceId           // id from data source
     String sourceLoc          // location name

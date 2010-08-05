@@ -16,12 +16,13 @@ class RentalTransaction {
   IdType idType
   State idState
   Country idCountry
-  String idNumber
+  String idNumber             // move in transaction identifier
+  String tenantId             // tenant identifier
   Boolean reserveTruck
   Boolean activeMilitary
   RentalUse rentalUse
   TransactionStatus status
-  String transactionId
+  String transactionId        // credit card authorization number
   Long unitId
   Long promoId
 
@@ -44,6 +45,7 @@ class RentalTransaction {
   static constraints = {
     billingAddress(nullable:true)
     referralCode(nullable:true)
+    transactionId(nullable:true)
   }
 
   static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize', 'reserveTruck',
