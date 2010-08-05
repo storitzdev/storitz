@@ -164,7 +164,7 @@
 
               <div class="checkout_fields">
                 <div style="width:600px;" class="checkout_value ${hasErrors(bean: person, field: 'passwd', 'errors')}">
-                  <textarea id="description" name="description" rows="80" cols="5">${fieldValue(bean:person,field:'description')}</textarea>
+                  <input type="text" id="description" name="description" style="width: 280px;" value="${fieldValue(bean:person,field:'description')}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -229,9 +229,9 @@
 
                   <div class="checkout_fields">
                     <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
-                      <g:each var="site" in="${siteMap.keySet()}">
+                      <g:each var="site" in="${siteList}">
                         <div style="margin:0 1.5em; width: 250px;" class="left">
-                          <g:checkBox name="SITE_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
+                          <g:checkBox name="SITE_${site.id}"/> &nbsp; ${site.title.encodeAsHTML()}
                         </div>
                       </g:each>
                     </div>

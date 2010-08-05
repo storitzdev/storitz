@@ -372,7 +372,18 @@ class StorageSiteController {
     site.removeFromImages(siteImage)
     siteImage.delete()
     site.save(flush: true)
-    redirect(action: "edit", id: params.id)
+    render (status: 200, contentType:"application/json", text:"{ siteImage: ${params.siteImageId} }")
+  }
+
+  def defaultImage = {
+    def site = StorageSite.get(params.id)
+    def imgId = params.siteImageId as Long
+
+    site.images.each {
+      it.isCover = it.id == imgId
+    }
+    site.save(flush: true)
+    render (status: 200, contentType:"application/json", text:"{ siteImage: ${params.siteImageId} }")
   }
 
   def detail = {

@@ -34,6 +34,7 @@
       if ($(listName).childElements().length >= 10) {
         $(listAdd).hide();
       }
+      return false
     }
 
     function itemAdd(type) {
@@ -48,18 +49,55 @@
       var itemName = type + 'Item_' + newItem;
       var liElem = new Element('li', {id:itemName});
       var newInput = new Element('input', {
+        id: itemName,
         name: itemName,
         type: 'text',
         style: 'width:200px;'
       });
       var newLink = new Element('a', {
         href: '#',
-        onclick: '$(\'' + itemName + '\').remove();checkAddItem(' + type + ');'
+        onclick: '$(\'' + itemName + '\').remove();checkAddItem(' + type + ');return false;'
       });
       newLink.update('delete');
       liElem.insert({bottom: newInput});
       liElem.insert({bottom: newLink});
       $(listName).insert({bottom: liElem});
+      $(itemName).focus();
+    }
+
+    function deleteImage(imgId) {
+      new Ajax.Request("${createLink(controller:'storageSite', action:'deleteImage')}",
+      {
+        method:'get',
+        parameters: {id: ${storageSiteInstance.id}, siteImageId:imgId },
+        onSuccess:function(transport) {
+          $("image_" + imgId).remove();
+        }
+      });
+    }
+
+    function defaultImage(imgId) {
+      var newDefault = 'default_' + imgId;
+      new Ajax.Request("${createLink(controller:'storageSite', action:'defaultImage')}",
+      {
+        method:'get',
+        parameters: {id: ${storageSiteInstance.id}, siteImageId:imgId },
+        onSuccess:function(transport) {
+          $$('[id^=default_]').each(function(elem) {
+            if (elem.id == newDefault) {
+              $(elem).update('Default Image');
+            } else {
+              var linkId = elem.id.substring(8)
+              var link = new Element('a', {
+                href:"#",
+                onclick:"defaultImage(" + linkId + "); return false;"
+              });
+              link.update('set as default');
+              $(elem).update(link);
+            }
+          });
+        }
+      });
     }
 
     //]]>
@@ -400,7 +438,7 @@
                 </g:each>
               </ul>
               <p id="securityItemAdd">
-                <a href="#" onclick="itemAdd('security');checkAddItem('security');">Add Item</a>
+                <a href="#" onclick="itemAdd('security');checkAddItem('security');return false;">Add Item</a>
               </p>
             </div>
             <div style="width:240px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'convenienceItems', 'errors')}">
@@ -427,7 +465,7 @@
                 </g:each>
               </ul>
               <p id="convenienceItemAdd">
-                <a href="#" onclick="itemAdd('convenience');checkAddItem('convenience');">Add Item</a>
+                <a href="#" onclick="itemAdd('convenience');checkAddItem('convenience'); return false;">Add Item</a>
               </p>
             </div>
             <div style="width:240px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'convenienceItems', 'errors')}">
@@ -448,7 +486,7 @@
                 </g:each>
               </ul>
               <p id="amenityItemAdd">
-                <a href="#" onclick="itemAdd('amenity');checkAddItem('amenity');">Add Item</a>
+                <a href="#" onclick="itemAdd('amenity');checkAddItem('amenity'); return false;">Add Item</a>
               </p>
             </div>
             <div style="clear:both;"></div>
@@ -659,11 +697,26 @@
             with this feature.
           </div>
 
-          <div class="checkout_fields">
+          <div id="siteImages" class="checkout_fields">
             <g:each in="${storageSiteInstance?.images}" var="i">
               <g:if test="${!i.isLogo}">
-                <div id="image_${i}" style="width:250px;" class="checkout_value">
-                  <img src="${resource(file: i.thumbnail())}" alt="image ${i}"/> - <g:link params="[siteImageId: i.id]" action="deleteImage" id="${storageSiteInstance?.id}" controller="storageSite">remove</g:link>
+                <div id="image_${i.id}" style="width:250px;" class="checkout_value">
+                  <div class="left" style="margin-right: 10px;">
+                    <img src="${resource(file: i.thumbnail())}" alt="image ${i.id}"/>
+                  </div>
+                  <div class="left">
+                    <div>
+                      <a href="#" onclick="deleteImage(${i.id}); return false;">remove</a>
+                    </div>
+                    <div id="default_${i.id}">
+                      <g:if test="${i.isCover}">
+                        Default Image
+                      </g:if>
+                      <g:else>
+                        <a href="#" onclick="defaultImage(${i.id}); return false;">set as default</a>
+                      </g:else>
+                    </div>
+                  </div>
                 </div>
               </g:if>
             </g:each>

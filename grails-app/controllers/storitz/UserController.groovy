@@ -261,8 +261,6 @@ class UserController {
       if (person.save()) {
           addRoles(person)
           addSites(person)
-          // TODO - send email to new user
-
           person.save(flush: true)
           redirect action: show, id: person.id
 
