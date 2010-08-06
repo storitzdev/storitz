@@ -23,6 +23,7 @@ class RentalTransaction {
   RentalUse rentalUse
   TransactionStatus status
   String transactionId        // credit card authorization number
+  String accessCode           // possible gate code
   Long unitId
   Long promoId
 
@@ -35,6 +36,7 @@ class RentalTransaction {
   Integer searchSize
   Date bookingDate
   Date moveInDate
+  Date dateOfBirth
   ReferralCode referralCode
   Boolean isCallCenter
 
@@ -46,6 +48,9 @@ class RentalTransaction {
     billingAddress(nullable:true)
     referralCode(nullable:true)
     transactionId(nullable:true)
+    dateOfBirth(nullable:true)
+    tenantId(nullable:true)
+    accessCode(nullable:true)
   }
 
   static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize', 'reserveTruck',

@@ -15,6 +15,7 @@ class RentalTransactionController {
 
     def springSecurityService
     def costService
+    def moveInService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
@@ -143,10 +144,10 @@ class RentalTransactionController {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
       }
 
-      if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
-        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
-        return
-      }
+//      if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
+//        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+//        return
+//      }
 
       switch(params.billingAddress) {
 
@@ -206,7 +207,7 @@ class RentalTransactionController {
       rentalTransactionInstance.status = TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
 
-      // TODO create new tennant
+      moveInService.newTenant(rentalTransactionInstance)
       // TODO - move in
     }
 

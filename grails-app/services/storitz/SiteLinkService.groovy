@@ -300,15 +300,15 @@ class SiteLinkService {
          <cal:sPager></cal:sPager>
          <!--Optional:-->
          <cal:sMobile></cal:sMobile>
-         <cal:bCommercial>""" + (rentalTransaction.rentalUse == RentalUse.BUSINESS ? 'T' : 'F') + """</cal:bCommercial>
-         <cal:bCompanyIsTenant></cal:bCompanyIsTenant>
-         <cal:dDOB></cal:dDOB>
+         <cal:bCommercial>""" + (rentalTransaction.rentalUse == RentalUse.BUSINESS ? 'true' : 'false') + """</cal:bCommercial>
+         <cal:bCompanyIsTenant>""" + (rentalTransaction.rentalUse == RentalUse.BUSINESS ? 'true' : 'false') + """</cal:bCompanyIsTenant>
+         <cal:dDOB>""" + (rentalTransaction.dateOfBirth ? rentalTransaction.dateOfBirth.format('yyyy-MM-dd') : '1969-01-01') + """</cal:dDOB>
          <!--Optional:-->
          <cal:sTenNote>""" + "Storitz move-in: Transaction ID = ${rentalTransaction.id}" + """</cal:sTenNote>
          <!--Optional:-->
-         <cal:sLicense>""" + rentalTransaction.idType == IdType.DRIVERSLICENSE ? rentalTransaction.idNumber : '' + """</cal:sLicense>
+         <cal:sLicense>""" + (rentalTransaction.idType == IdType.DRIVERSLICENSE ? rentalTransaction.idNumber : '') + """</cal:sLicense>
          <!--Optional:-->
-         <cal:sLicRegion>""" + rentalTransaction.idType == IdType.DRIVERSLICENSE ? rentalTransaction.idState.display : '' + """</cal:sLicRegion>
+         <cal:sLicRegion>""" + (rentalTransaction.idType == IdType.DRIVERSLICENSE ? rentalTransaction.idState.display : '') + """</cal:sLicRegion>
          <!--Optional:-->
          <cal:sSSN></cal:sSSN>
       </cal:TenantNewDetailed>
@@ -322,7 +322,7 @@ class SiteLinkService {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
     http.handler.failure = {resp, req ->
-      "Unexpected failure: ${resp.statusLine} "
+      println "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
     }
 
     http.request(Method.POST, XML) {req ->
@@ -352,14 +352,12 @@ class SiteLinkService {
 
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
-      def newSite = false
       if (!site) {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
-        newSite = true
         if (tab.sSitePostalCode.text().isNumber()) {
-          getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite)
+          getSiteDetails(siteLink, site, tab, stats, geocodeService, true)
         }
       }
     }
@@ -688,11 +686,29 @@ class SiteLinkService {
     return adminFee
   }
 
+  def createTenant(RentalTransaction rentalTransaction) {
+    def ret = newTenant(rentalTransaction)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    records.'soap:Body'.'*:TenantNewDetailedResponse'.'*:TenantNewDetailedResult'.'*:diffgram'.NewDataSet.'*:RT'.each {tab ->
+      rentalTransaction.tenantId = tab.TenantID.text()
+      rentalTransaction.accessCode = tab.AccessCode.text()
+    }
+    rentalTransaction.save(flush:true)
+  }
+
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
     def durationMonths = 1
     def offerDiscount = 0
     def premium = ins ? ins.premium : 0
-    def additionalFees = site.adminFee ? site.adminFee : 0 + site.lockFee ? site.lockFee : 0
+    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
     def waiveAdmin = false
 

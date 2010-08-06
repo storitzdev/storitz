@@ -1062,6 +1062,18 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
+                <div class="checkout_fields">
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'dateOfBirth', 'errors')}">
+                      <g:datePicker id="dateOfBirth" name="dateOfBirth" style="width:280px;" precision="day" years="${2010..1900}" value="${rentalTransaction?.dateOfBirth}" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:300px;" class="checkout_name">
+                    <label for="dateOfBirth">Date of birth</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
                 <div style="margin-top: 20px;">
                   <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
                   <div class="right"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next"></div>

@@ -87,7 +87,7 @@
             if (elem.id == newDefault) {
               $(elem).update('Default Image');
             } else {
-              var linkId = elem.id.substring(8)
+              var linkId = elem.id.substring(8);
               var link = new Element('a', {
                 href:"#",
                 onclick:"defaultImage(" + linkId + "); return false;"

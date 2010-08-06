@@ -12,6 +12,7 @@ class MoveInService {
     def newTenant(RentalTransaction trans) {
       switch(trans.site.source) {
         case "SL":
+          siteLinkService.createTenant(trans)
           break
         case "CS3":
           break
