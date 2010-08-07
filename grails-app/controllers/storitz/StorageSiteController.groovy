@@ -416,14 +416,28 @@ class StorageSiteController {
     [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId]
   }
 
+  def getSmartCallDataForId(id)
+  {
+    RentalTransactionController.liveSessions[id]
+  }
+
+  def getRecentSmartCallData()
+  {
+    def calls = RentalTransactionController.liveSessions.entrySet().sort { -it.value.timestamp }
+    if (calls.size() > 50) {
+      calls = calls[0..49]
+    }
+    calls
+  }
+
   @Secured(['ROLE_CALLCENTER'])
   def findCall = {
-    [:]
+    [calls:recentSmartCallData]
   }
 
   @Secured(['ROLE_CALLCENTER'])
   def smartCall = {
-    def callParams = RentalTransactionController.liveSessions[params.id]
+    def callParams = getSmartCallDataForId(params.id)
 
     println "SmartCall ${params.id} : ${callParams}"
 
@@ -470,11 +484,19 @@ class StorageSiteController {
 
     def zeroPrice = new BigDecimal(0)
     def unitsizeId = Long.parseLong(params.searchSize)
+
+//    println (site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId })
+
     def intResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isInterior }.min { it.price } as StorageUnit[]
     def driveupResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isDriveup }.min { it.price } as StorageUnit[]
     def upperResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isUpper }.min { it.price } as StorageUnit[]
     def tempcontrolledResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isTempControlled }.min { it.price } as StorageUnit[]
+
     render(status: 200, contentType: "application/json", text: "{ \"units\": { \"interior\": ${intResult as JSON}, \"driveup\": ${driveupResult as JSON}, \"upper\": ${upperResult as JSON}, \"tempcontrolled\": ${tempcontrolledResult as JSON} } }")
+
+//    println driveupResult
+//    println intResult
+//    println upperResult
   }
 
   def refreshInventory = {

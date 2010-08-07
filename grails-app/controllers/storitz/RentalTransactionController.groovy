@@ -55,7 +55,7 @@ class RentalTransactionController {
       params.remove('SC_date')
       def rentalTransactionInstance = new RentalTransaction(params)
       println (rentalTransactionInstance.dump())
-      liveSessions[params.id] = [shortSessionId:params.id, site:site, searchSize:searchSize, address:address, date:date, rentalTransaction:rentalTransactionInstance]
+      liveSessions[params.id] = [timestamp:System.currentTimeMillis(), shortSessionId:params.id, site:site, searchSize:searchSize, address:address, date:date, rentalTransaction:rentalTransactionInstance]
       render(status: 200, contentType: "application/json", text: "{ 'update':false }")
     }
 
