@@ -3,7 +3,7 @@ package storitz
 import grails.util.Environment
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_CALLCENTER'])
 class StopController {
 
     // Can't seem to use ctrl-c in IntelliJ.
