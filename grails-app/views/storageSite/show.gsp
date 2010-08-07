@@ -388,6 +388,24 @@
         </tr>
 
         <tr class="prop">
+          <td colspan="2" valign="top"><h3>Rentable Units</h3></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.rentable.units.label" default="Rentable Units"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <span>${storageSiteInstance.units.size()}</span>
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td colspan="2" valign="top"><h3>Visit Information</h3></td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.visits.label" default="Visit Count"/></td>
 
           <td valign="top" style="text-align: left;" class="value">

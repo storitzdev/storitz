@@ -36,7 +36,9 @@ class RentalTransaction {
   Integer searchSize
   Date bookingDate
   Date moveInDate
+  Date paidThruDate
   Date dateOfBirth
+  BigDecimal cost
   ReferralCode referralCode
   Boolean isCallCenter
 
@@ -48,6 +50,8 @@ class RentalTransaction {
     billingAddress(nullable:true)
     referralCode(nullable:true)
     transactionId(nullable:true)
+    paidThruDate(nullable:true)
+    cost(nullable:true)
     dateOfBirth(nullable:true)
     tenantId(nullable:true)
     accessCode(nullable:true)

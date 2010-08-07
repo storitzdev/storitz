@@ -23,4 +23,16 @@ class CostService {
       }
 
     }
+
+    def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
+
+      switch(site.source) {
+
+        case "SL":
+          return siteLinkService.calculatePaidThruDate(site, promo, moveInDate)
+
+        default:
+          throw new Exception("Unknown service for paid thru date")
+      }
+    }
 }

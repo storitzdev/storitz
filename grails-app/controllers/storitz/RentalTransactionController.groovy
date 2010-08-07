@@ -8,7 +8,6 @@ import com.storitz.StorageUnit
 import com.storitz.UserRole
 import com.storitz.User
 import com.storitz.Insurance
-import com.storitz.StorageSize
 import com.vinomis.authnet.AuthorizeNet
 
 class RentalTransactionController {
@@ -180,7 +179,10 @@ class RentalTransactionController {
 
       def ccNum = params.cc_number.replaceAll(/\D/, '') as String
       def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
-      def moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
+
+      rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
+      rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
+      
       def s = new AuthorizeNet()
       s.authorizeAndCapture {
         custId rentalTransactionInstance.id as String
@@ -193,10 +195,9 @@ class RentalTransactionController {
         ccNumber ccNum
         cvv params.cc_cvv2
         ccExpDate ccExpVal
-        amount moveInCost as String
+        amount rentalTransactionInstance.cost as String
       }
       def authResp = s.submit()
-      println "Authorize.net response: ${authResp.dump()}"
 
       if (authResp.responseCode as Integer != 1) {
         flash.message = "Credit card not accepted ${authResp.responseReasonText}"
@@ -207,8 +208,9 @@ class RentalTransactionController {
       rentalTransactionInstance.status = TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
 
-      moveInService.newTenant(rentalTransactionInstance)
-      // TODO - move in
+      moveInService.moveIn(rentalTransactionInstance)
+
+      // TODO - notifications
     }
 
     def edit = {

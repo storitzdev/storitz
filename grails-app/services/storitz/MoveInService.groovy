@@ -9,13 +9,21 @@ class MoveInService {
 
     boolean transactional = false
 
-    def newTenant(RentalTransaction trans) {
+    def moveIn(RentalTransaction trans) {
       switch(trans.site.source) {
         case "SL":
           siteLinkService.createTenant(trans)
+          siteLinkService.moveIn(trans)
           break
+
         case "CS3":
           break
+
+        case "CS4":
+          break
+
+        default:
+          throw new Exception("Unknown service for move in")
       }
     }
 

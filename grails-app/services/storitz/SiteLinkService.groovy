@@ -318,6 +318,50 @@ class SiteLinkService {
     postAction(payload, 'TenantNewDetailed')
   }
 
+  def doMoveIn(RentalTransaction rentalTransaction) {
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:MoveInWithDiscount>
+         <!--Optional:-->
+         <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
+         <!--Optional:-->
+         <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
+         <!--Optional:-->
+         <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
+         <!--Optional:-->
+         <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
+         <cal:TenantID>""" + rentalTransaction.tenantId + """</cal:TenantID>
+         <!--Optional:-->
+         <cal:sAccessCode>""" + rentalTransaction.accessCode + """</cal:sAccessCode>
+         <cal:UnitID>""" + rentalTransaction.unitId + """</cal:UnitID>
+         <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
+         <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
+         <cal:dcPaymentAmount>""" + rentalTransaction.cost + """</cal:dcPaymentAmount>
+         <cal:iCreditCardType>0</cal:iCreditCardType>
+         <!--Optional:-->
+         <cal:sCreditCardNumber></cal:sCreditCardNumber>
+         <!--Optional:-->
+         <cal:sCreditCardCVV></cal:sCreditCardCVV>
+         <cal:dExpirationDate>""" + new Date().format("yyyy-MM-dd")+ """</cal:dExpirationDate>
+         <!--Optional:-->
+         <cal:sBillingName></cal:sBillingName>
+         <!--Optional:-->
+         <cal:sBillingAddress></cal:sBillingAddress>
+         <!--Optional:-->
+         <cal:sBillingZipCode></cal:sBillingZipCode>
+         <cal:InsuranceCoverageID>""" + rentalTransaction.insuranceId + """</cal:InsuranceCoverageID>
+         <cal:ConcessionPlanID>""" + rentalTransaction.promoId + """</cal:ConcessionPlanID>
+         <cal:bTestMode>true</cal:bTestMode>
+      </cal:MoveInWithDiscount>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    println "MoveInWithDiscount: ${payload}"
+
+    postAction(payload, "MoveInWithDiscount")
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
@@ -704,6 +748,19 @@ class SiteLinkService {
     rentalTransaction.save(flush:true)
   }
 
+  def moveIn(RentalTransaction rentalTransaction) {
+    def ret = doMoveIn(rentalTransaction)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+  }
+
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
     def durationMonths = 1
     def offerDiscount = 0
@@ -735,4 +792,12 @@ class SiteLinkService {
 
   }
 
+  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
+    // TODO - handle prorated payments
+    def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
+    def cal = new GregorianCalendar()
+    cal.setTime(moveInDate)
+    cal.add(Calendar.MONTH, durationMonths)
+    return cal.time
+  }
 }
