@@ -13,7 +13,8 @@ class MoveInService {
       switch(trans.site.source) {
         case "SL":
           siteLinkService.createTenant(trans)
-          siteLinkService.moveIn(trans)
+          siteLinkService.moveInCostRetrieve(trans)
+          return siteLinkService.moveIn(trans)
           break
 
         case "CS3":

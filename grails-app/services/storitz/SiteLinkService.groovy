@@ -41,7 +41,7 @@ class SiteLinkService {
          <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
          <!--Optional:-->
          <cal:sPostalCode></cal:sPostalCode>
-         <cal:iCountry>0</cal:iCountry>
+         <cal:iCountry>-1</cal:iCountry>
          <cal:bMiles>true</cal:bMiles>
       </cal:SiteSearchByPostalCode>
    </soapenv:Body>
@@ -183,6 +183,20 @@ class SiteLinkService {
   }
 
   def getMoveInWithDiscount(rentalTransaction) {
+    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
+
+    def concessionId = rentalTransaction.promoId as Long
+    if (concessionId != -999) {
+      SpecialOffer specialOffer = SpecialOffer.get(rentalTransaction.promoId as Long)
+      concessionId = specialOffer.concessionId
+    }
+
+    def insuranceId = rentalTransaction.insuranceId as Long
+    if (insuranceId != -999) {
+      Insurance ins = Insurance.get(insuranceId)
+      insuranceId = ins.insuranceId
+    }
+
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
@@ -195,13 +209,15 @@ class SiteLinkService {
          <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
          <!--Optional:-->
          <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
-         <cal:iUnitID>""" + rentalTransaction.unitId + """</cal:iUnitID>
+         <cal:iUnitID>""" + unit.unitNumber + """</cal:iUnitID>
          <cal:dMoveInDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dMoveInDate>
-         <cal:InsuranceCoverageID>""" + rentalTransaction.insuranceId + """</cal:InsuranceCoverageID>
-         <cal:ConcessionPlanID>""" + rentalTransaction.promoId + """</cal:ConcessionPlanID>
+         <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
+         <cal:ConcessionPlanID>""" + concessionId + """</cal:ConcessionPlanID>
       </cal:MoveInCostRetrieveWithDiscount>
    </soapenv:Body>
 </soapenv:Envelope>"""
+
+    println "MoveInCostRetrieveWithDiscount: ${payload}"
 
     postAction(payload, 'MoveInCostRetrieveWithDiscount')
   }
@@ -319,6 +335,20 @@ class SiteLinkService {
   }
 
   def doMoveIn(RentalTransaction rentalTransaction) {
+    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
+
+    def concessionId = rentalTransaction.promoId as Long
+    if (concessionId != -999) {
+      SpecialOffer specialOffer = SpecialOffer.get(rentalTransaction.promoId as Long)
+      concessionId = specialOffer.concessionId
+    }
+
+    def insuranceId = rentalTransaction.insuranceId as Long
+    if (insuranceId != -999) {
+      Insurance ins = Insurance.get(insuranceId)
+      insuranceId = ins.insuranceId
+    }
+
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
@@ -334,7 +364,7 @@ class SiteLinkService {
          <cal:TenantID>""" + rentalTransaction.tenantId + """</cal:TenantID>
          <!--Optional:-->
          <cal:sAccessCode>""" + rentalTransaction.accessCode + """</cal:sAccessCode>
-         <cal:UnitID>""" + rentalTransaction.unitId + """</cal:UnitID>
+         <cal:UnitID>""" + unit.unitNumber + """</cal:UnitID>
          <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
          <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
          <cal:dcPaymentAmount>""" + rentalTransaction.cost + """</cal:dcPaymentAmount>
@@ -350,8 +380,8 @@ class SiteLinkService {
          <cal:sBillingAddress></cal:sBillingAddress>
          <!--Optional:-->
          <cal:sBillingZipCode></cal:sBillingZipCode>
-         <cal:InsuranceCoverageID>""" + rentalTransaction.insuranceId + """</cal:InsuranceCoverageID>
-         <cal:ConcessionPlanID>""" + rentalTransaction.promoId + """</cal:ConcessionPlanID>
+         <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
+         <cal:ConcessionPlanID>""" + concessionId + """</cal:ConcessionPlanID>
          <cal:bTestMode>true</cal:bTestMode>
       </cal:MoveInWithDiscount>
    </soapenv:Body>
@@ -360,6 +390,28 @@ class SiteLinkService {
     println "MoveInWithDiscount: ${payload}"
 
     postAction(payload, "MoveInWithDiscount")
+  }
+
+  def getUnitInfoByName(siteLink, unit) {
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:UnitsInformationByUnitName>
+         <!--Optional:-->
+         <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
+         <!--Optional:-->
+         <cal:sLocationCode>""" + siteLink. + """</cal:sLocationCode>
+         <!--Optional:-->
+         <cal:sCorpUserName>Storagetech</cal:sCorpUserName>
+         <!--Optional:-->
+         <cal:sCorpPassword>rentals</cal:sCorpPassword>
+         <!--Optional:-->
+         <cal:sUnitName>PK01</cal:sUnitName>
+      </cal:UnitsInformationByUnitName>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'UnitsInformationByUnitName')
   }
 
   private def postAction(payload, action) {
@@ -397,10 +449,11 @@ class SiteLinkService {
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
       if (!site) {
+        println "Found and creating new site: ${tab.sSiteName.text()}, postal code: ${tab.sSitePostalCode.text()}"
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
-        if (tab.sSitePostalCode.text().isNumber()) {
+        if (tab.sSitePostalCode.text().size() >= 5 && tab.sSitePostalCode.text().substring(0, 5).isNumber()) {
           getSiteDetails(siteLink, site, tab, stats, geocodeService, true)
         }
       }
@@ -505,7 +558,7 @@ class SiteLinkService {
       SiteUser.link(site, siteLink.manager)
     }
 
-    unitsAvailable(siteLink, site, stats)
+    unitsAvailable(siteLink, site, stats, newSite)
 
     site.requiresInsurance = insurance(siteLink, site)
     if (site.units.size() > 0) {
@@ -554,13 +607,13 @@ class SiteLinkService {
     }
     site.units.clear()
     site.save()
-    unitsAvailable(site.siteLink, site, stats)
+    unitsAvailable(site.siteLink, site, stats, false)
     site.save(flush: true)
   }
 
-  def unitsAvailable(siteLink, site, stats) {
+  def unitsAvailable(siteLink, site, stats, newSite) {
     println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
-    def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, site.lastUpdate)
+    def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, newSite ? 0 : site.lastUpdate)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -573,8 +626,9 @@ class SiteLinkService {
       def siteUnit = new StorageUnit()
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
-      // TODO - make the pushRate pull separately when available
-      siteUnit.price = siteUnit.pushRate = unit.dcStdRate.text() as BigDecimal
+      siteUnit.unitName = unit.sUnitName.text()
+      siteUnit.price = unit.dcStdRate.text() as BigDecimal
+      siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
       def floor = unit.iFloor.text() as Integer
       def typeName = unit.sTypeName.text()
       siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
@@ -713,6 +767,9 @@ class SiteLinkService {
 
   def moveInCostRetrieve(rentalTransaction) {
     def ret = getMoveInWithDiscount(rentalTransaction)
+
+    println "MoveInWithDiscount result: ${ret}"
+
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -750,6 +807,8 @@ class SiteLinkService {
 
   def moveIn(RentalTransaction rentalTransaction) {
     def ret = doMoveIn(rentalTransaction)
+
+    println "MoveInWithDiscount: ${ret}"
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -758,7 +817,11 @@ class SiteLinkService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-
+    def moveInResult = -1
+    records.'soap:Body'.'*:MoveInWithDiscountResponse'.'*:MoveInWithDiscountResult'.'*:diffgram'.NewDataSet.'*:RT'.each {tab ->
+      moveInResult = tab.Ret_Code.text() as Integer
+    }
+    return moveInResult > 0 
   }
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {

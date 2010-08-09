@@ -10,6 +10,7 @@ class StorageUnit {
 
     String description
     String unitNumber
+    String unitName
     Boolean isUpper
     Boolean isDriveup
     Boolean isInterior

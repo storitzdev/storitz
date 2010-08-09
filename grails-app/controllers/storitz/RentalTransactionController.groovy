@@ -208,7 +208,11 @@ class RentalTransactionController {
       rentalTransactionInstance.status = TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
 
-      moveInService.moveIn(rentalTransactionInstance)
+      if (!moveInService.moveIn(rentalTransactionInstance)) {
+        flash.message = "Problem with move-in.  Please contact technical support."
+        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+        return
+      }
 
       // TODO - notifications
     }
