@@ -368,12 +368,12 @@ class SiteLinkService {
          <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
          <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
          <cal:dcPaymentAmount>""" + rentalTransaction.cost + """</cal:dcPaymentAmount>
-         <cal:iCreditCardType>0</cal:iCreditCardType>
+         <cal:iCreditCardType>""" + rentalTransaction.cardType +  """</cal:iCreditCardType>
          <!--Optional:-->
          <cal:sCreditCardNumber></cal:sCreditCardNumber>
          <!--Optional:-->
          <cal:sCreditCardCVV></cal:sCreditCardCVV>
-         <cal:dExpirationDate>""" + new Date().format("yyyy-MM-dd")+ """</cal:dExpirationDate>
+         <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
          <!--Optional:-->
          <cal:sBillingName></cal:sBillingName>
          <!--Optional:-->
@@ -818,6 +818,9 @@ class SiteLinkService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     def rented = false
+    records.'soap:Body'.'*:UnitsInformationByUnitNameResponse'.'*:UnitsInformationByUnitNameResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
+      rented = tab.bRented.text() as Boolean
+    }
 
     return rented
   }

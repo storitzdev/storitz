@@ -38,6 +38,8 @@ class RentalTransaction {
   Date moveInDate
   Date paidThruDate
   Date dateOfBirth
+  Date ccExpDate
+  Integer cardType
   BigDecimal cost
   ReferralCode referralCode
   Boolean isCallCenter
@@ -55,6 +57,8 @@ class RentalTransaction {
     dateOfBirth(nullable:true)
     tenantId(nullable:true)
     accessCode(nullable:true)
+    cardType(nullable:true)
+    ccExpDate(nullable:true)
   }
 
   static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize', 'reserveTruck',

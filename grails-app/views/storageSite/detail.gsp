@@ -43,7 +43,7 @@
       searchSize = ${params.searchSize};
       sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
-    <g:each var="ins" in="${site.insurances}">premiums[${ins.insuranceId}] = ${ins.premium};</g:each>
+    <g:each var="ins" in="${site.insurances}">premiums[${ins.id}] = ${ins.premium};</g:each>
     premiums[-999] = 0;
     var defaultOffer = specialOffers[-1] = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
     <g:each var="offer" in="${site.specialOffers}">
@@ -1272,7 +1272,7 @@
                   <div id="insuranceChoices" class="validate-one-radio" >
                     <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
                     <g:each in="${site.insurances.sort{it.premium}}" var="ins">
-                      <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.insuranceId}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
+                      <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.id}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
                     </g:each>
                     <div style="clear:both;"></div>
                   </div>

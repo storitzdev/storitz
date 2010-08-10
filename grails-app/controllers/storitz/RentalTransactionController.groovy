@@ -175,10 +175,24 @@ class RentalTransactionController {
         return
       }
 
-      // TODO - check if unit is still available
+      if (!moveInService.checkRented(rentalTransactionInstance)) {
+        // TODO - remove unit from inventory
+        // TODO - find new unit
+        flash.message = "Unit already reserved - refresh and try again"
+        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        return
+      }
 
       def ccNum = params.cc_number.replaceAll(/\D/, '') as String
       def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
+
+      def expCal = new GregorianCalendar()
+      expCal.set(Calendar.YEAR, params.cc_year as Integer)
+      expCal.set(Calendar.MONTH, (params.cc_month as Integer) -1)
+      expCal.set(Calendar.DAY_OF_MONTH, 1)
+      expCal.set(Calendar.DAY_OF_MONTH, expCal.getActualMaximum(Calendar.DAY_OF_MONTH))
+      rentalTransactionInstance.ccExpDate = expCal.time
+      rentalTransactionInstance.cardType = ccNum.substring(0,1) as Integer
 
       rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
       rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
