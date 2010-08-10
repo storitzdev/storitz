@@ -1,7 +1,7 @@
 package storitz
 
-import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
+import com.storitz.SiteLink
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController {

@@ -392,7 +392,7 @@ class SiteLinkService {
     postAction(payload, "MoveInWithDiscount")
   }
 
-  def getUnitInfoByName(siteLink, unit) {
+  def getUnitInfoByName(siteLink, location, unit) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
@@ -400,13 +400,13 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
          <!--Optional:-->
-         <cal:sLocationCode>""" + siteLink. + """</cal:sLocationCode>
+         <cal:sLocationCode>""" + location + """</cal:sLocationCode>
          <!--Optional:-->
-         <cal:sCorpUserName>Storagetech</cal:sCorpUserName>
+         <cal:sCorpUserName>""" + siteLink.userName + """</cal:sCorpUserName>
          <!--Optional:-->
-         <cal:sCorpPassword>rentals</cal:sCorpPassword>
+         <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
          <!--Optional:-->
-         <cal:sUnitName>PK01</cal:sUnitName>
+         <cal:sUnitName>""" + unit + """</cal:sUnitName>
       </cal:UnitsInformationByUnitName>
    </soapenv:Body>
 </soapenv:Envelope>"""

@@ -48,6 +48,7 @@ public class GeoIp {
 
     public Location getLocation(String ipAddr) {
         String file = getGeoFile();
+
         Location loc = null;
 
         if (lookupService == null) {
