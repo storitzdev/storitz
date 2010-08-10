@@ -15,6 +15,7 @@ class RentalTransactionController {
     def springSecurityService
     def costService
     def moveInService
+    def creditCardService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
@@ -68,6 +69,7 @@ class RentalTransactionController {
         rentalTransactionInstance.bookingDate = new Date()
         rentalTransactionInstance.moveInDate = Date.parse('MM-dd-yyyy', params.moveInDate)
         rentalTransactionInstance.site = site
+        rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
 
         if (!springSecurityService.principal.equals('anonymousUser')) {
           def person = User.findByUsername(springSecurityService.principal.username)
@@ -143,10 +145,10 @@ class RentalTransactionController {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
       }
 
-//      if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
-//        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
-//        return
-//      }
+      if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
+        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        return
+      }
 
       switch(params.billingAddress) {
 
@@ -192,7 +194,6 @@ class RentalTransactionController {
       expCal.set(Calendar.DAY_OF_MONTH, 1)
       expCal.set(Calendar.DAY_OF_MONTH, expCal.getActualMaximum(Calendar.DAY_OF_MONTH))
       rentalTransactionInstance.ccExpDate = expCal.time
-      rentalTransactionInstance.cardType = ccNum.substring(0,1) as Integer
 
       rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
       rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
@@ -222,6 +223,11 @@ class RentalTransactionController {
       rentalTransactionInstance.status = TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
 
+      // record CC info for the services
+      rentalTransactionInstance.ccNum = ccNum
+      rentalTransactionInstance.cardType = creditCardService.getCardType(ccNum)
+      rentalTransactionInstance.cvv2 = params.cc_cvv2
+
       if (!moveInService.moveIn(rentalTransactionInstance)) {
         flash.message = "Problem with move-in.  Please contact technical support."
         render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
@@ -229,6 +235,13 @@ class RentalTransactionController {
       }
 
       // TODO - notifications
+      
+      def ccString = "XXXX XXXX XXXX "
+      if (ccNum.size() == 16) {
+        ccString += 'XXXX '
+      }
+      ccString += ccNum.substring(ccNum.size() - 4)
+      [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, ccNum: ccString]
     }
 
     def edit = {

@@ -353,33 +353,23 @@ class SiteLinkService {
    <soapenv:Header/>
    <soapenv:Body>
       <cal:MoveInWithDiscount>
-         <!--Optional:-->
          <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
-         <!--Optional:-->
          <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
-         <!--Optional:-->
          <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
-         <!--Optional:-->
          <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
          <cal:TenantID>""" + rentalTransaction.tenantId + """</cal:TenantID>
-         <!--Optional:-->
          <cal:sAccessCode>""" + rentalTransaction.accessCode + """</cal:sAccessCode>
          <cal:UnitID>""" + unit.unitNumber + """</cal:UnitID>
          <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
          <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
          <cal:dcPaymentAmount>""" + rentalTransaction.cost + """</cal:dcPaymentAmount>
-         <cal:iCreditCardType>""" + rentalTransaction.cardType +  """</cal:iCreditCardType>
-         <!--Optional:-->
-         <cal:sCreditCardNumber></cal:sCreditCardNumber>
-         <!--Optional:-->
-         <cal:sCreditCardCVV></cal:sCreditCardCVV>
+         <cal:iCreditCardType>""" + rentalTransaction.cardType.siteLinkValue +  """</cal:iCreditCardType>
+         <cal:sCreditCardNumber>""" + rentalTransaction.ccNum + """</cal:sCreditCardNumber>
+         <cal:sCreditCardCVV>""" + rentalTransaction.cvv2 + """</cal:sCreditCardCVV>
          <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
-         <!--Optional:-->
-         <cal:sBillingName></cal:sBillingName>
-         <!--Optional:-->
-         <cal:sBillingAddress></cal:sBillingAddress>
-         <!--Optional:-->
-         <cal:sBillingZipCode></cal:sBillingZipCode>
+         <cal:sBillingName>""" + "${rentalTransaction.billingAddress.firstName} ${rentalTransaction.billingAddress.lastName}" + """</cal:sBillingName>
+         <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.streetNumber} ${rentalTransaction.billingAddress.street} ${rentalTransaction.billingAddress.streetType.display}" + """</cal:sBillingAddress>
+         <cal:sBillingZipCode>""" + rentalTransaction.billingAddress.zipcode + """</cal:sBillingZipCode>
          <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
          <cal:ConcessionPlanID>""" + concessionId + """</cal:ConcessionPlanID>
          <cal:bTestMode>true</cal:bTestMode>

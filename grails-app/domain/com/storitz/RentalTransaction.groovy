@@ -5,6 +5,7 @@ import storitz.constants.State
 import storitz.constants.Country
 import storitz.constants.RentalUse
 import storitz.constants.TransactionStatus
+import storitz.constants.CreditCardType
 
 class RentalTransaction {
 
@@ -29,24 +30,27 @@ class RentalTransaction {
 
   Long insuranceId
   StorageSite site
+  Date bookingDate
+  Date moveInDate
+  Date paidThruDate
+  Date dateOfBirth
+  BigDecimal cost
+  ReferralCode referralCode
+  Boolean isCallCenter
+
+  // Transient members
   Boolean priceDriveup
   Boolean priceInterior
   Boolean priceUpper
   Boolean priceTempControlled
   Integer searchSize
-  Date bookingDate
-  Date moveInDate
-  Date paidThruDate
-  Date dateOfBirth
-  Date ccExpDate
-  Integer cardType
-  BigDecimal cost
-  ReferralCode referralCode
-  Boolean isCallCenter
-
   Boolean insuranceTerms
   Boolean hazardousMaterials
   Boolean terms
+  Date ccExpDate
+  CreditCardType cardType
+  String ccNum
+  String cvv2
 
   static constraints = {
     billingAddress(nullable:true)
@@ -57,10 +61,10 @@ class RentalTransaction {
     dateOfBirth(nullable:true)
     tenantId(nullable:true)
     accessCode(nullable:true)
-    cardType(nullable:true)
-    ccExpDate(nullable:true)
+    reserveTruck(nullable:true)
   }
 
-  static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled', 'searchSize', 'reserveTruck',
-    'terms', 'hazardousMaterials', 'insuranceTerms']  
+  static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled',
+          'searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
+          'cardType', 'cvv2']  
 }
