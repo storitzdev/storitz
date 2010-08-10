@@ -392,7 +392,9 @@ class SiteLinkService {
     postAction(payload, "MoveInWithDiscount")
   }
 
-  def getUnitInfoByName(siteLink, location, unit) {
+  def getUnitInfoByName(siteLink, location, unitId) {
+    StorageUnit unit = StorageUnit.get(unitId as Long)
+
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
@@ -406,7 +408,7 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
          <!--Optional:-->
-         <cal:sUnitName>""" + unit + """</cal:sUnitName>
+         <cal:sUnitName>""" + unit.unitName + """</cal:sUnitName>
       </cal:UnitsInformationByUnitName>
    </soapenv:Body>
 </soapenv:Envelope>"""
@@ -803,6 +805,21 @@ class SiteLinkService {
       rentalTransaction.accessCode = tab.AccessCode.text()
     }
     rentalTransaction.save(flush:true)
+  }
+
+  def checkRented(RentalTransaction rentalTransaction) {
+    def ret = getUnitInfoByName(rentalTransaction.site.siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
+
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def rented = false
+
+    return rented
   }
 
   def moveIn(RentalTransaction rentalTransaction) {
