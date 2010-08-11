@@ -19,7 +19,7 @@ class UpdateInventoryJob {
       println "----------------- Starting nightly update... ----------------------------"
       StorageSite.findAll().each{ site ->
         if (site.source == "SL") {
-          def stats = new storitz.SiteLinkStats()
+          def stats = new storitz.SiteStats()
           siteLinkService.updateUnits(site, stats)
           println "${site.title} refreshed ${stats.unitCount} units"
         }

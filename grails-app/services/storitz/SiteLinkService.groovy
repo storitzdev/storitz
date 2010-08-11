@@ -20,6 +20,8 @@ import storitz.constants.IdType
 
 class SiteLinkService {
 
+  def geocodeService
+
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
   def siteLinkWsUrl35 = "https://www.smdservers.net/CCWs_3.5/CallCenterWs.asmx"
 
@@ -427,7 +429,7 @@ class SiteLinkService {
     }
   }
 
-  def refreshSites(siteLink, stats, geocodeService) {
+  def refreshSites(siteLink, stats) {
     def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -452,7 +454,7 @@ class SiteLinkService {
     }
   }
 
-  def corpSites(siteLink, stats, geocodeService) {
+  def corpSites(siteLink, stats) {
     def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -493,7 +495,7 @@ class SiteLinkService {
     }
   }
 
-  def getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite) {
+  def getSiteDetails(siteLink, site, tab, stats, newSite) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
 
     print "Found address: ${address}"
@@ -560,7 +562,7 @@ class SiteLinkService {
     site.save(flush: true)
   }
 
-  def updateSite(site, stats, geocodeService) {
+  def updateSite(site, stats) {
     def ret = getSiteInfo(site.siteLink.corpCode, site.sourceLoc, site.siteLink.userName, site.siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',

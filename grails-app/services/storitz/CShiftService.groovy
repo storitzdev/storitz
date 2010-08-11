@@ -29,7 +29,7 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(paylaod, 'GetSiteList')
+    postAction(payload, 'GetSiteList')
   }
 
   def getSiteAddress(userName, pin, siteId) {
@@ -173,10 +173,7 @@ class CShiftService {
 
 //      unitsAvailable(siteLink, site, stats)
 
-      site.requiresInsurance = insurance(siteLink, site)
-      if (site.units.size() > 0) {
-        site.adminFee = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
-      }
+//      site.requiresInsurance = insurance(siteLink, site)
 //      getPromos(siteLink, site)
       site.save(flush: true)
   }
@@ -203,7 +200,7 @@ class CShiftService {
 
       def address = addr.STREET.text() + ' ' + ', ' + addr.CITY.text() + ', ' + addr.STATE.text() + ' ' + addr.POSTAL_CODE.text()
 
-      print "Found address: ${address}"
+      println "Found address: ${address}"
       def geoResult = geocodeService.geocode(address)
 
       site.lng = geoResult.Placemark[0].Point.coordinates[0]
@@ -231,27 +228,29 @@ class CShiftService {
       switch(day) {
         case "Mon":
           def office = hours.OFFICE.text()
-          if (office == 'Closed') {
+          if (office == 'Closed' || office.size() < 10) {
             site.openWeekday = false
           } else {
             site.openWeekday = true
-            def m = office =~ /(\d+:\d+ ?m) - (\d+:\d+ ?m)/
+            def m = office =~ /(\d+:\d+\s+[ap]m).+(\d+:\d+\s+[ap]m)/
             site.startWeekday = Date.parse("HH:mm a", m[0][1])
             site.endWeekday = Date.parse("HH:mm a", m[0][2])
           }
           def gate = hours.GATE.text()
-          def n = gate =~ /(\d+:\d+ ?m) to (\d+:\d+ ?m)/
-          site.startGate = Date.parse("HH:mm a", n[0][1])
-          site.endGate = Date.parse("HH:mm a", n[0][2])
+          if (gate.size() > 10) {
+            def n = gate =~ /(\d+:\d+\s+[ap]m).+(\d+:\d+\s+[ap]m)/
+            site.startGate = Date.parse("HH:mm a", n[0][1])
+            site.endGate = Date.parse("HH:mm a", n[0][2])
+          }
           break
 
         case "Sat":
           def office = hours.OFFICE.text()
-          if (office == 'Closed') {
+          if (office == 'Closed' || office.size() < 10) {
             site.openSaturday = false
           } else {
             site.openSaturday = true
-            def m = office =~ /(\d+:\d+ ?m) - (\d+:\d+ ?m)/
+            def m = office =~ /(\d+:\d+\s+[ap]m).+(\d+:\d+\s+[ap]m)/
             site.startSaturday = Date.parse("HH:mm a", m[0][1])
             site.endSaturday = Date.parse("HH:mm a", m[0][2])
           }
@@ -259,18 +258,21 @@ class CShiftService {
 
         case "Sun":
           def office = hours.OFFICE.text()
-          if (office == 'Closed') {
+          if (office == 'Closed' || office.size() < 10) {
             site.openSunday = false
           } else {
             site.openSunday = true
-            def m = office =~ /(\d+:\d+ ?m) - (\d+:\d+ ?m)/
+            def m = office =~ /(\d+:\d+\s+[ap]m).+(\d+:\d+\s+[ap]m)/
             site.startSunday = Date.parse("HH:mm a", m[0][1])
             site.endSunday = Date.parse("HH:mm a", m[0][2])
           }
           def gate = hours.GATE.text()
-          def n = gate =~ /(\d+:\d+ ?m) to (\d+:\d+ ?m)/
-          site.startSundayGate = Date.parse("HH:mm a", n[0][1])
-          site.endSundayGate = Date.parse("HH:mm a", n[0][2])
+          if (gate.size() > 10) {
+            def n = gate =~ /(\d+:\d+\s+[ap]m).+(\d+:\d+\s+[ap]m)/
+            println "GATE value: ${gate}"
+            site.startSundayGate = Date.parse("HH:mm a", n[0][1])
+            site.endSundayGate = Date.parse("HH:mm a", n[0][2])
+          }
           break
 
         default:
@@ -290,13 +292,27 @@ class CShiftService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-
+    def featuresSet = false
     records.'soap:Body'.'*:GetSiteFeaturesResponse'.'*:GetSiteFeaturesResult'.'*:SiteFeatures'.'*:Features'.each {features ->
+      featuresSet = true
       site.isManagerOnsite = features.ON_SITE_MANAGER.text() == 'Y'
       site.isGate = features.ELEC_GATE_ACCESS.text() == 'Y'
       site.isKeypad = features.ELEC_GATE_ACCESS.text() == 'Y'
       site.isCamera = features.VIDEO_SURVEILLANCE.text() == 'Y'
       site.isUnitAlarmed = features.ALARMED_UNITS.text() == 'Y'
+      site.adminFee = features.ADMIN_FEE.text() as BigDecimal
+      site.hasElevator = false
+      site.requiresInsurance = false
+      site.boxesAvailable = true
+      site.freeTruck = TruckType.NONE
+    }
+    if (!featuresSet) {
+      site.isManagerOnsite = false
+      site.isGate = false
+      site.isKeypad = false
+      site.isCamera = false
+      site.isUnitAlarmed = false
+      site.adminFee = 0.00 as BigDecimal
       site.hasElevator = false
       site.requiresInsurance = false
       site.boxesAvailable = true

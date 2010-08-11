@@ -7,12 +7,12 @@ package storitz
  * To change this template use File | Settings | File Templates.
  */
 
-public class SiteLinkStats {
+public class SiteStats {
   Integer createCount
   Integer updateCount
   Integer unitCount
 
-  public SiteLinkStats() {
+  public SiteStats() {
     createCount = 0;
     updateCount = 0;
     unitCount = 0;

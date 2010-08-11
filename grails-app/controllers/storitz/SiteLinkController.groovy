@@ -6,8 +6,6 @@ import com.storitz.SiteLink
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController {
 
-
-  def geocodeService
   def siteLinkService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -31,8 +29,8 @@ class SiteLinkController {
     def siteLinkInstance = new SiteLink(params)
     if (siteLinkInstance.save(flush: true)) {
       // read in sites
-      def stats = new storitz.SiteLinkStats()
-      siteLinkService.corpSites(siteLinkInstance, stats, geocodeService)
+      def stats = new storitz.SiteStats()
+      siteLinkService.corpSites(siteLinkInstance, stats)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)
     }
@@ -44,8 +42,8 @@ class SiteLinkController {
   def refresh = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (siteLinkInstance) {
-      def stats = new storitz.SiteLinkStats()
-      siteLinkService.refreshSites(siteLinkInstance, stats, geocodeService)
+      def stats = new storitz.SiteStats()
+      siteLinkService.refreshSites(siteLinkInstance, stats)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)
     }
