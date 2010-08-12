@@ -396,7 +396,7 @@
           <td valign="top" class="name"><g:message code="storageSite.rentable.units.label" default="Rentable Units"/></td>
 
           <td valign="top" style="text-align: left;" class="value">
-            <span>${storageSiteInstance.units.size()}</span>
+            <span>${storageSiteInstance.rentableUnits()}</span>
           </td>
         </tr>
 

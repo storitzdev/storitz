@@ -1,7 +1,6 @@
 package com.storitz
 
 import storitz.constants.TruckType
-import java.util.regex.Pattern
 import storitz.constants.State
 
 class StorageSite {
@@ -113,10 +112,12 @@ class StorageSite {
   }
 
   def coverImage() {
-    def imgs = images.findAll{ it.isCover }
+    def coverImg = images.find{ it.isCover }
 
-    if (imgs.size() > 0) return imgs[0]
-    else return siteImages().size() > 0 ? siteImages().getAt(0) : null
+    if (coverImg) {
+      return coverImg
+    }
+    return siteImages().size() > 0 ? siteImages().getAt(0) : null
   }
 
   def featuredOffers() {
@@ -129,6 +130,10 @@ class StorageSite {
 
   def nonFeaturedOffers() {
     return specialOffers.findAll{ it.active && !it.featured }.sort{ it.id }
+  }
+
+  def rentableUnits() {
+    return units.collect{it.unitCount}.sum()
   }
 
   def getFullAddress() {

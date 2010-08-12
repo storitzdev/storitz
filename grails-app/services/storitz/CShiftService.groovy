@@ -93,6 +93,22 @@ class CShiftService {
     postAction(payload, 'GetSiteUnitData')
   }
 
+  def getPromos(userName, pin, siteId) {
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <csc:GetCurrentPromotionListXML>
+         <csc:strUser>""" + userName + """</csc:strUser>
+         <!--Optional:-->
+         <csc:strPin>""" + pin + """</csc:strPin>
+         <csc:lngSiteID>""" + siteId + """</csc:lngSiteID>
+      </csc:GetCurrentPromotionListXML>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'GetCurrentPromotionListXML')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(centerShiftWsUrl3)
 
@@ -185,7 +201,7 @@ class CShiftService {
       unitsAvailable(cshift, site, stats)
 
 //      site.requiresInsurance = insurance(siteLink, site)
-//      getPromos(siteLink, site)
+      loadPromos(cshift, site)
       site.save(flush: true)
   }
 
@@ -386,7 +402,7 @@ class CShiftService {
 
       def vacant = unit.VACANT.text() as Integer
       def typeName = unit.VALUE.text()
-      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mailbox|slip).*/)) {
+      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mailbox|slip|apartment).*/)) {
         def dimensions = unit.DIMENSIONS.text()
         def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
         if (m.matches()) {
@@ -401,7 +417,9 @@ class CShiftService {
             siteUnit.description = typeName
             siteUnit.unitName = siteUnit.unitNumber = unit.ATTRIBUTES.text()
             siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
-            
+
+            // outside = driveup
+            // down = interior
             siteUnit.isUpper = (typeName ==~ /(?i).*\s+up\s+.*/ || typeName ==~ /(?i).*2nd.*/)
             siteUnit.isDriveup = (typeName ==~ /(?i).*drive.*/)
             siteUnit.isInterior = (!siteUnit.isUpper && !siteUnit.isDriveup && !(typeName ==~ /(?i).*outer.*/))
@@ -414,7 +432,10 @@ class CShiftService {
             siteUnit.isAvailable = true
             siteUnit.isSecure = false
             siteUnit.displaySize = width + " X " + length
+            stats.unitCount += vacant
 
+            site.addToUnits(siteUnit)
+            
           } else {
             println "Skipping due to size: length = ${length}, width = ${width}"
           }
@@ -426,10 +447,20 @@ class CShiftService {
           println "Skipped due to parking or other: ${typeName}"
         }
       }
-
-
     }
+  }
 
+  def loadPromos(cshift, site) {
+    def ret = getPromos(cshift.userName, cshift.pin, site.sourceId)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    for(promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
+    }
   }
 }
 

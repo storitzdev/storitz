@@ -14,6 +14,8 @@ class SpecialOffer {
     prepay(nullable: true)
     promoQty(nullable: true)
     waiveAdmin(nullable: true)
+    endDate(nullable:true)
+    promoSize(nullabe:true)
   }
 
   String code
@@ -29,4 +31,7 @@ class SpecialOffer {
   Boolean active
   Boolean featured
   Boolean waiveAdmin
+
+  Date endDate
+  StorageSize promoSize
 }
