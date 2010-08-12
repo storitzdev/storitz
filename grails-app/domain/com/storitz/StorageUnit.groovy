@@ -6,6 +6,8 @@ class StorageUnit {
     static constraints = {
       description(nullable:true)
       startAvail(nullable:true)
+      unitName(nullable:true)
+      unitNumber(nullable:true)
     }
 
     String description
@@ -24,6 +26,7 @@ class StorageUnit {
     StorageSize unitsize    // used for searching
     String displaySize
     Boolean isAvailable
+    Integer unitCount
 
     public String getUnitType() {
       if (isUpper) return "Upper"

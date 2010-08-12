@@ -116,7 +116,7 @@ class StorageSite {
     def imgs = images.findAll{ it.isCover }
 
     if (imgs.size() > 0) return imgs[0]
-    else return siteImages().getAt(0)
+    else return siteImages().size() > 0 ? siteImages().getAt(0) : null
   }
 
   def featuredOffers() {

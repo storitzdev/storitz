@@ -21,11 +21,10 @@ import storitz.constants.IdType
 class SiteLinkService {
 
   def geocodeService
+  def unitSizeService
 
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
   def siteLinkWsUrl35 = "https://www.smdservers.net/CCWs_3.5/CallCenterWs.asmx"
-
-  static MSDateEpoch = new Date().parse('yyyy/MM/dd', '1900/01/01') 
 
   boolean transactional = false
 
@@ -618,6 +617,7 @@ class SiteLinkService {
 
     for (unit in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table') {
       def siteUnit = new StorageUnit()
+      siteUnit.unitCount = 1
       siteUnit.description = unit.sTypeName.text()
       siteUnit.unitNumber = unit.UnitID.text()
       siteUnit.unitName = unit.sUnitName.text()
@@ -637,18 +637,7 @@ class SiteLinkService {
       Integer length = (int) Double.parseDouble(unit.dcLength.text())
       siteUnit.displaySize = width + " X " + length
 
-      def unitSize = StorageSize.findByWidthAndLength(width, length)
-      if (unitSize == null) {
-
-        def unitArea = width * length
-        def foundSize = 0
-        StorageSize.findAll().each {u ->
-          if (Math.abs(unitArea - foundSize) > Math.abs(unitArea - u.width * u.length)) {
-            unitSize = u
-            foundSize = u.width * u.length
-          }
-        }
-      }
+      def unitSize = unitSizeService.getUnitSize(width, length)
       if (unitSize) {
         siteUnit.unitsize = unitSize
         if (!siteUnit.save()) {
