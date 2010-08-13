@@ -489,7 +489,7 @@ class SiteLinkService {
         newSite = true
       }
       if (tab.sSitePostalCode.text().isNumber()) {
-        getSiteDetails(siteLink, site, tab, stats, geocodeService, newSite)
+        getSiteDetails(siteLink, site, tab, stats, newSite)
       }
     }
   }
