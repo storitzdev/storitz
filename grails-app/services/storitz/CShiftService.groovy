@@ -9,6 +9,8 @@ import storitz.constants.State
 import storitz.constants.TruckType
 import com.storitz.SiteContact
 import com.storitz.StorageUnit
+import com.storitz.SpecialOffer
+import storitz.constants.PromoType
 
 class CShiftService {
 
@@ -263,8 +265,6 @@ class CShiftService {
     for (hours in records.'soap:Body'.'*:GetSiteHoursResponse'.'*:GetSiteHoursResult'.'*:SiteHours'.'*:Hours') {
       def day = hours.WEEKDAY.text()
 
-      // HH:MM a - HH:MM a
-
       switch(day) {
         case "Mon":
           def office = hours.OFFICE.text()
@@ -460,6 +460,61 @@ class CShiftService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     for(promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
+
+      def description = promo.'promo-desc'.text()
+
+      def validGov = true
+      def promoSize = null
+
+      for(gov in promo.'promo-governors'.governor) {
+        def limitFactor = gov.'limiting-factor'.text()
+        if (limitFactor ==~ /Existing.*/) {
+          validGov = false
+        }
+        if (limitFactor == 'Unit Dimensions/Size') {
+          def govValue = gov.'governor-value'.text()
+          def m = govValue =~ /(\d+)\s*X\s*(\d+)/
+          if (m.matches()) {
+            def width = m[0][1] as Double
+            def length = m[0][2] as Double
+            promoSize = unitSizeService.getUnitSize(width, length)
+          }
+        }
+      }
+
+      if (validGov && !(description ==~ /Comp.*/)) {
+
+        SpecialOffer specialOffer = new SpecialOffer()
+        specialOffer.concessionId = promo.'promo-id'.text() as Integer
+        specialOffer.promoSize = promoSize
+        specialOffer.active = true;
+        specialOffer.featured = false;
+        specialOffer.waiveAdmin = false;
+        specialOffer.prepay = (promo.'discount-periods' as Integer) > 0
+        specialOffer.inMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
+        specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) - specialOffer.inMonth : 0
+        specialOffer.description = description
+        specialOffer.promoName = promo.'promo-name'.text()
+        specialOffer.expireMonth = 0
+        specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal
+
+        def ptype = promo.'discount-type'.text()
+        switch (ptype) {
+          case '$':
+            specialOffer.promoType = PromoType.AMOUNT_OFF
+            break
+
+          case '%':
+            specialOffer.promoType = PromoType.PERCENT_OFF
+            break
+
+          case 'O':
+            specialOffer.promoType = PromoType.FIXED_RATE
+        }
+        specialOffer.save()
+        site.addToSpecialOffers(specialOffer)
+      }
+
     }
   }
 }

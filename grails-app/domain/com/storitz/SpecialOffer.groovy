@@ -15,7 +15,7 @@ class SpecialOffer {
     promoQty(nullable: true)
     waiveAdmin(nullable: true)
     endDate(nullable:true)
-    promoSize(nullabe:true)
+    promoSize(nullable:true)
   }
 
   String code
