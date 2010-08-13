@@ -490,7 +490,7 @@ class CShiftService {
         specialOffer.active = true;
         specialOffer.featured = false;
         specialOffer.waiveAdmin = false;
-        specialOffer.prepay = (promo.'discount-periods' as Integer) > 0
+        specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
         specialOffer.inMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
         specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) - specialOffer.inMonth : 0
         specialOffer.description = description
@@ -510,6 +510,11 @@ class CShiftService {
 
           case 'O':
             specialOffer.promoType = PromoType.FIXED_RATE
+            break
+
+          default:
+            println "Unknown promoType: ${ptype}"
+            return
         }
         specialOffer.save()
         site.addToSpecialOffers(specialOffer)
