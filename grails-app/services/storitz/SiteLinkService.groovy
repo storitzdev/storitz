@@ -447,7 +447,7 @@ class SiteLinkService {
         stats.createCount++
         site.lastUpdate = 0
         if (tab.sSitePostalCode.text().size() >= 5 && tab.sSitePostalCode.text().substring(0, 5).isNumber()) {
-          getSiteDetails(siteLink, site, tab, stats, geocodeService, true)
+          getSiteDetails(siteLink, site, tab, stats, true)
         }
       }
     }
@@ -589,7 +589,7 @@ class SiteLinkService {
       site.specialOffers.clear()
       site.lastUpdate = 0
       site.save(flush: true)
-      getSiteDetails(site.siteLink, site, tab, stats, geocodeService, false)
+      getSiteDetails(site.siteLink, site, tab, stats, false)
     }
 
   }
