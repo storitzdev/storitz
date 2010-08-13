@@ -182,8 +182,12 @@ class CShiftService {
       site.source = "CS3"
       site.title = tab.SITE_NAME.text()
 
+      if (site.title ==~/(?i).*(test|training)\s?+.*/) {
+        println "Test or training site - dropping: ${site.title}"
+      }
+
       if (!addSiteAddress(cshift, site)) {
-        "Got a bad address, skipping site creation"
+        println "Got a bad address, skipping site creation: ${site.title}"
         return
       }
     
@@ -267,70 +271,161 @@ class CShiftService {
 
       switch(day) {
         case "Mon":
-          def office = hours.OFFICE.text()
-          if (office == 'Closed' || office.size() < 10) {
+          def office = hours.OFFICE.text().toLowerCase()
+          if (office == 'closed') {
             site.openWeekday = false
           } else {
             site.openWeekday = true
-            def m = office =~ /(?i)(\d+:\d+\s*[ap]\.*m\.*).+(\d+:\d+\s*[ap]\.*m\.*)/
+            def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
             if (m.matches()) {
-              site.startWeekday = Date.parse("HH:mma", m[0][1].replaceAll(/\./, "").replaceAll(" ", ""))
-              site.endWeekday = Date.parse("HH:mma", m[0][2].replaceAll(/\./, "").replaceAll(" ", ""))
+              def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+              def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+              if (start.contains(':') && start.contains('m')) {
+                site.startWeekday = Date.parse("HH:mma", start)
+              } else if (start.contains(':')) {
+                site.startWeekday = Date.parse("HH:mm", start)
+              } else if (start.contains('m')) {
+                site.startWeekday = Date.parse("HHa", start)
+              } else {
+                site.startWeekday = Date.parse("HH", start)
+              }
+              if (end.contains(':') && end.contains('m')) {
+                site.endWeekday = Date.parse("HH:mma", end)
+              } else if (end.contains(':')) {
+                site.endWeekday = Date.parse("HH:mm", end)
+              } else if (end.contains('m')) {
+                site.endWeekday = Date.parse("HHa", end)
+              } else {
+                def endPM = ((end as Integer) + 12) as String
+                site.endWeekday = Date.parse("HH", endPM)
+              }
             } else {
               println "Hours do not match: ${office}"
             }
           }
           def gate = hours.GATE.text()
-          if (gate.size() > 10) {
-            def n = gate =~ /(?i)(\d+:\d+\s*[ap]\.*m\.*).+(\d+:\d+\s*[ap]\.*m\.*)/
-            if (n.matches()) {
-              site.startGate = Date.parse("HH:mma", n[0][1].replaceAll(/\./, "").replaceAll(" ", ""))
-              site.endGate = Date.parse("HH:mma", n[0][2].replaceAll(/\./, "").replaceAll(" ", ""))
+          def n = gate =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
+          if (n.matches()) {
+            def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+            def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+            if (start.contains(':') && start.contains('m')) {
+              site.startGate = Date.parse("HH:mma", start)
+            } else if (start.contains(':')) {
+              site.startGate = Date.parse("HH:mm", start)
+            } else if (start.contains('m')) {
+              site.startGate = Date.parse("HHa", start)
             } else {
-              println "Gate does not match: ${gate}"
+              site.startGate = Date.parse("HH", start)
             }
+            if (end.contains(':') && end.contains('m')) {
+              site.endGate = Date.parse("HH:mma", end)
+            } else if (end.contains(':')) {
+              site.endGate = Date.parse("HH:mm", end)
+            } else if (end.contains('m')) {
+              site.endGate = Date.parse("HHa", end)
+            } else {
+              def endPM = ((end as Integer) + 12) as String
+              site.endGate = Date.parse("HH", endPM)
+            }
+          } else {
+            println "Gate does not match: ${gate}"
           }
           break
 
         case "Sat":
-          def office = hours.OFFICE.text()
-          if (office == 'Closed' || office.size() < 10) {
+          def office = hours.OFFICE.text().toLowerCase()
+          if (office == 'closed') {
             site.openSaturday = false
           } else {
             site.openSaturday = true
-            def m = office =~ /(?i)(\d+:\d+\s*[ap]\.*m\.*).+(\d+:\d+\s*[ap]\.*m\.*)/
+            def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
             if (m.matches()) {
-              site.startSaturday = Date.parse("HH:mma", m[0][1].replaceAll(/\./, "").replaceAll(" ", ""))
-              site.endSaturday = Date.parse("HH:mma", m[0][2].replaceAll(/\./, "").replaceAll(" ", ""))
+              def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+              def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+              if (start.contains(':') && start.contains('m')) {
+                site.startSaturday = Date.parse("HH:mma", start)
+              } else if (start.contains(':')) {
+                site.startSaturday = Date.parse("HH:mm", start)
+              } else if (start.contains('m')) {
+                site.startSaturday = Date.parse("HHa", start)
+              } else {
+                site.startSaturday = Date.parse("HH", start)
+              }
+              if (end.contains(':') && end.contains('m')) {
+                site.endSaturday = Date.parse("HH:mma", end)
+              } else if (end.contains(':')) {
+                site.endSaturday = Date.parse("HH:mm", end)
+              } else if (end.contains('m')) {
+                site.endSaturday = Date.parse("HHa", end)
+              } else {
+                def endPM = ((end as Integer) + 12) as String
+                site.endSaturday = Date.parse("HH", endPM)
+              }
             } else {
-              println "Office does not match: ${office}"
+              println "Saturday Office does not match: ${office}"
             }
           }
           break
 
         case "Sun":
-          def office = hours.OFFICE.text()
-          if (office == 'Closed' || office.size() < 10) {
+          def office = hours.OFFICE.text().toLowerCase()
+          if (office == 'closed') {
             site.openSunday = false
           } else {
             site.openSunday = true
-            def m = office =~ /(?i)(\d+:\d+\s*[ap]\.*m\.*).+(\d+:\d+\s*[ap]\.*m\.*)/
+            def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
             if (m.matches()) {
-              site.startSunday = Date.parse("HH:mma", m[0][1].replaceAll(/\./, "").replaceAll(" ", ""))
-              site.endSunday = Date.parse("HH:mma", m[0][2].replaceAll(/\./, "").replaceAll(" ", ""))
+              def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+              def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+              if (start.contains(':') && start.contains('m')) {
+                site.startSunday = Date.parse("HH:mma", start)
+              } else if (start.contains(':')) {
+                site.startSunday = Date.parse("HH:mm", start)
+              } else if (start.contains('m')) {
+                site.startSunday = Date.parse("HHa", start)
+              } else {
+                site.startSunday = Date.parse("HH", start)
+              }
+              if (end.contains(':') && end.contains('m')) {
+                site.endSunday = Date.parse("HH:mma", end)
+              } else if (end.contains(':')) {
+                site.endSunday = Date.parse("HH:mm", end)
+              } else if (end.contains('m')) {
+                site.endSunday = Date.parse("HHa", end)
+              } else {
+                def endPM = ((end as Integer) + 12) as String
+                site.endSunday = Date.parse("HH", endPM)
+              }
             } else {
-              println "Office does not match: ${office}"
+              println "Sunday Office does not match: ${office}"
             }
           }
           def gate = hours.GATE.text()
-          if (gate.size() > 10) {
-            def n = gate =~ /(?i)(\d+:\d+\s*[ap]\.*m\.*).+(\d+:\d+\s*[ap]\.*m\.*)/
-            if (n.matches()) {
-              site.startSundayGate = Date.parse("HH:mma", n[0][1].replaceAll(/\./, "").replaceAll(" ", ""))
-              site.endSundayGate = Date.parse("HH:mma", n[0][2].replaceAll(/\./, "").replaceAll(" ", ""))
+          def n = gate =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
+          if (n.matches()) {
+            def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+            def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+            if (start.contains(':') && start.contains('m')) {
+              site.startSundayGate = Date.parse("HH:mma", start)
+            } else if (start.contains(':')) {
+              site.startSundayGate = Date.parse("HH:mm", start)
+            } else if (start.contains('m')) {
+              site.startSundayGate = Date.parse("HHa", start)
             } else {
-              println "Gate does not match: ${gate}"
+              site.startSundayGate = Date.parse("HH", start)
             }
+            if (end.contains(':') && end.contains('m')) {
+              site.endSundayGate = Date.parse("HH:mma", end)
+            } else if (end.contains(':')) {
+              site.endSundayGate = Date.parse("HH:mm", end)
+            } else if (end.contains('m')) {
+              site.endSundayGate = Date.parse("HHa", end)
+            } else {
+              def endPM = ((end as Integer) + 12) as String
+              site.endSundayGate = Date.parse("HH", endPM)
+            }
+          } else {
+            println "Sunday Gate does not match: ${gate}"
           }
           break
 
@@ -402,7 +497,7 @@ class CShiftService {
 
       def vacant = unit.VACANT.text() as Integer
       def typeName = unit.VALUE.text()
-      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mailbox|slip|apartment).*/)) {
+      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mailbox|slip|apartment|office|container|portable|wine).*/)) {
         def dimensions = unit.DIMENSIONS.text()
         def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
         if (m.matches()) {
@@ -420,9 +515,9 @@ class CShiftService {
 
             // outside = driveup
             // down = interior
-            siteUnit.isUpper = (typeName ==~ /(?i).*\s+up\s+.*/ || typeName ==~ /(?i).*2nd.*/)
-            siteUnit.isDriveup = (typeName ==~ /(?i).*drive.*/)
-            siteUnit.isInterior = (!siteUnit.isUpper && !siteUnit.isDriveup && !(typeName ==~ /(?i).*outer.*/))
+            siteUnit.isUpper = ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/)
+            siteUnit.isDriveup = (typeName ==~ /(?i).*(drive|roll-up|roll up).*/)
+            siteUnit.isInterior = (!siteUnit.isUpper && !siteUnit.isDriveup && !(typeName ==~ /(?i).*outer.*/)) || (typeName ==~ /(?i).*(interior|ground|1st).*/)
             if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
               siteUnit.isUpper = true
             }
