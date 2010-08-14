@@ -344,7 +344,9 @@ class StorageSiteController {
     def storageSiteInstance = StorageSite.get(params.id)
     if (storageSiteInstance) {
       try {
+        SiteUser.removeAll(storageSiteInstance)
         storageSiteInstance.delete(flush: true)
+        // delete all siteUser
         flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
         redirect(action: "list")
       }

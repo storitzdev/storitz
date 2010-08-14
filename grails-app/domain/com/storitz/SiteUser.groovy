@@ -33,5 +33,8 @@ class SiteUser {
         executeUpdate 'DELETE FROM SiteUser WHERE user=:user', [user: user]
     }
 
+    static void removeAll(StorageSite site) {
+        executeUpdate 'DELETE FROM SiteUser WHERE site=:site', [site: site]
+    }
 
 }

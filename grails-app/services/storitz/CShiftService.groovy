@@ -11,6 +11,10 @@ import com.storitz.SiteContact
 import com.storitz.StorageUnit
 import com.storitz.SpecialOffer
 import storitz.constants.PromoType
+import com.storitz.cshiftclient.CsKiosk
+import com.storitz.cshiftclient.CsKioskLocator
+import com.storitz.cshiftclient.CsKioskSoapPort_PortType
+import com.storitz.Insurance
 
 class CShiftService {
 
@@ -206,7 +210,7 @@ class CShiftService {
 
       unitsAvailable(cshift, site, stats)
 
-//      site.requiresInsurance = insurance(siteLink, site)
+      site.requiresInsurance = loadInsurance(cshift, site)
       loadPromos(cshift, site)
       site.save(flush: true)
   }
@@ -616,6 +620,48 @@ class CShiftService {
       }
 
     }
+  }
+
+  def loadInsurance(cshift, site) {
+    CsKiosk service = new CsKioskLocator();
+
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
+    //invoke business method
+    def insOptions = port.getInsuranceOptions(cshift.userName, cshift.pin, site.sourceId)
+
+    println "insOptions = ${insOptions.dump()}"
+
+    if (insOptions instanceof Integer && insOptions < 0) {
+      return 0
+    }
+    
+    if (insOptions) {
+      def insId = insOptions[0]
+      def insProvider = insOptions[1]
+      def insAmount = insOptions[2]
+      def insRate = insOptions[3]
+      def insCoverage = insOptions[4]
+
+      def optionSize = insId.size()
+      for(i in 0..optionSize-1) {
+        def ins = new Insurance()
+        ins.insuranceId = insId[i] as Integer
+        ins.percentTheft = insCoverage[i] as BigDecimal
+        ins.provider = insProvider[i]
+        ins.premium = insRate[i] as BigDecimal
+        ins.totalCoverage = insAmount[i] as BigDecimal
+        
+        if (!ins.save()) {
+          ins.errors.allErrors.each { println it }
+        }
+        site.addToInsurances(ins)
+      }
+      return optionSize
+    } else {
+      println "Could not obtain insurance information"
+      return 0
+    }
+
   }
 }
 
