@@ -39,6 +39,8 @@ class STMapController {
 
     def jsonp = {
 
+      // println "?searchSize=${params.searchSize}&neLat=${params.neLat}&swLat=${params.swLat}&swLng=${params.swLng}&neLng=${params.neLng}"
+      
       def sites = StorageSite.createCriteria()
       def results = sites.listDistinct {
         and {
@@ -60,7 +62,7 @@ class STMapController {
       sw << "[ "
       if (results.size() < 20) {
         results.eachWithIndex { site, i ->
-          sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"specialOffers\":["
+          sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\",\"specialOffers\":["
           site.specialOffers().eachWithIndex{ offer, j ->
             sw << "{\"promoName\":\"${offer.promoName}\" }"
             if (j < site.specialOffers().size() - 1) {

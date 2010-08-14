@@ -633,6 +633,9 @@ class SiteLinkService {
       siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
       siteUnit.isAvailable = true
       siteUnit.isSecure = false
+      if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
+        siteUnit.isUpper = true
+      }
       Integer width = (int) Double.parseDouble(unit.dcWidth.text())
       Integer length = (int) Double.parseDouble(unit.dcLength.text())
       siteUnit.displaySize = width + " X " + length

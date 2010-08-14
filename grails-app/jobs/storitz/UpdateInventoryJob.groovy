@@ -5,7 +5,7 @@ import com.storitz.StorageSite
 
 class UpdateInventoryJob {
 
-    def siteLinkService
+    def feedService
 
     static triggers = {
       cron name:'nightlyUpdate', cronExpression:"0 30 1 * * ?"
@@ -18,12 +18,9 @@ class UpdateInventoryJob {
       }
       println "----------------- Starting nightly update... ----------------------------"
       StorageSite.findAll().each{ site ->
-        if (site.source == "SL") {
-          def stats = new storitz.SiteStats()
-          siteLinkService.updateUnits(site, stats)
-          println "${site.title} refreshed ${stats.unitCount} units"
-        }
-        // TODO handle centershift
+        def stats = new storitz.SiteStats()
+        feedService.updateUnits(site, stats)
+        println "${site.title} refreshed ${stats.unitCount} units"
       }
       println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
     }

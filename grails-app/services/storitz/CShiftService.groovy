@@ -197,7 +197,7 @@ class CShiftService {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
-        getSiteDetails(siteLink, site, tab, stats, true)
+        getSiteDetails(cshift, site, tab, stats, true)
       }
     }
   }
@@ -249,6 +249,7 @@ class CShiftService {
 
       if (site.title ==~/(?i).*(test|training)\s?+.*/) {
         println "Test or training site - dropping: ${site.title}"
+        return
       }
 
       if (!addSiteAddress(cshift, site)) {
@@ -357,7 +358,7 @@ class CShiftService {
               if (end.contains(':') && end.contains('m')) {
                 site.endWeekday = Date.parse("HH:mma", end)
               } else if (end.contains(':')) {
-                site.endWeekday = Date.parse("HH:mm", end)
+                site.endWeekday = Date.parse("HH:mma", end + 'PM')
               } else if (end.contains('m')) {
                 site.endWeekday = Date.parse("HHa", end)
               } else {
@@ -385,7 +386,7 @@ class CShiftService {
             if (end.contains(':') && end.contains('m')) {
               site.endGate = Date.parse("HH:mma", end)
             } else if (end.contains(':')) {
-              site.endGate = Date.parse("HH:mm", end)
+              site.endGate = Date.parse("HH:mma", end + "PM")
             } else if (end.contains('m')) {
               site.endGate = Date.parse("HHa", end)
             } else {
@@ -419,7 +420,7 @@ class CShiftService {
               if (end.contains(':') && end.contains('m')) {
                 site.endSaturday = Date.parse("HH:mma", end)
               } else if (end.contains(':')) {
-                site.endSaturday = Date.parse("HH:mm", end)
+                site.endSaturday = Date.parse("HH:mma", end + "PM")
               } else if (end.contains('m')) {
                 site.endSaturday = Date.parse("HHa", end)
               } else {
@@ -454,7 +455,7 @@ class CShiftService {
               if (end.contains(':') && end.contains('m')) {
                 site.endSunday = Date.parse("HH:mma", end)
               } else if (end.contains(':')) {
-                site.endSunday = Date.parse("HH:mm", end)
+                site.endSunday = Date.parse("HH:mma", end + "PM")
               } else if (end.contains('m')) {
                 site.endSunday = Date.parse("HHa", end)
               } else {
@@ -482,7 +483,7 @@ class CShiftService {
             if (end.contains(':') && end.contains('m')) {
               site.endSundayGate = Date.parse("HH:mma", end)
             } else if (end.contains(':')) {
-              site.endSundayGate = Date.parse("HH:mm", end)
+              site.endSundayGate = Date.parse("HH:mma", end + "PM")
             } else if (end.contains('m')) {
               site.endSundayGate = Date.parse("HHa", end)
             } else {

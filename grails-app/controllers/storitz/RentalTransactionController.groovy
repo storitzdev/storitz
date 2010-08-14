@@ -9,6 +9,7 @@ import com.storitz.UserRole
 import com.storitz.User
 import com.storitz.Insurance
 import com.vinomis.authnet.AuthorizeNet
+import com.storitz.TransactionNote
 
 class RentalTransactionController {
 
@@ -74,6 +75,14 @@ class RentalTransactionController {
         if (!springSecurityService.principal.equals('anonymousUser')) {
           def person = User.findByUsername(springSecurityService.principal.username)
           rentalTransactionInstance.isCallCenter = (UserRole.userHasRole(person, 'ROLE_CALLCENTER'))
+          if (params.operatorInitials) {
+            def transNote = new TransactionNote()
+            transNote.advisor = params.operatorInitials
+            transNote.note = params.operatorNote
+            transNote.entered = new Date()
+
+            rentalTransactionInstance.addTransactionNote(transNote)
+          }
         } else {
           rentalTransactionInstance.isCallCenter = false          
         }

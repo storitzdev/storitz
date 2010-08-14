@@ -7,7 +7,6 @@ import com.storitz.CenterShift
 class CShiftController {
 
 
-  def geocodeService
   def CShiftService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -45,7 +44,7 @@ class CShiftController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
-      CShiftService.refreshSites(cshiftInstance, stats, geocodeService)
+      CShiftService.refreshSites(cshiftInstance, stats)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }

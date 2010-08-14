@@ -1326,6 +1326,35 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
+                <sec:ifAnyGranted roles="ROLE_CALLCENTER">
+                  <div class="checkout_section_header">
+                    Call Center Notes
+                  </div>
+                  <div class="checkout_fields">
+                    <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.phone', 'errors')}">
+                        <g:textField name="operatorInitials" id="operatorInitials" style="width:80px;" value="${operatorInitials}" />
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                  <div class="checkout_labels">
+                    <div style="width:100px;" class="checkout_name">
+                      <label for="operatorInitials">Operator Initials</label>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                  <div class="checkout_fields">
+                    <div style="width:500px;" class="checkout_value">
+                        <g:textArea name="operatorNote" id="operatorNote" style="width:480px;">${operatorNote}</g:textArea>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                  <div class="checkout_labels">
+                    <div style="width:500px;" class="checkout_name">
+                      <label for="operatorNote">Operator Note</label>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
                   <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
                   <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
