@@ -17,7 +17,7 @@ import com.storitz.RentalAgreement
 class StorageSiteController {
 
   def authenticateService
-  def siteLinkService
+  def feedService
   def geocodeService
   def fileUploadService
   def markupSanitizerService
@@ -321,23 +321,19 @@ class StorageSiteController {
   def refresh = {
     def storageSiteInstance = StorageSite.get(params.id)
 
-    if (storageSiteInstance.source == "SL") {
-      def stats = new storitz.SiteStats()
-      siteLinkService.updateSite(storageSiteInstance, stats, geocodeService)
-      flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
-      redirect(action: "show", id: storageSiteInstance.id)
-    }
+    def stats = new storitz.SiteStats()
+    feedService.updateSite(storageSiteInstance, stats)
+    flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
+    redirect(action: "show", id: storageSiteInstance.id)
   }
 
   def units = {
     def storageSiteInstance = StorageSite.get(params.id)
 
-    if (storageSiteInstance.source == "SL") {
-      def stats = new storitz.SiteStats()
-      siteLinkService.updateUnits(storageSiteInstance, stats)
-      flash.message = "${message(code: 'default.units.message', args: [stats.unitCount])}"
-      redirect(action: "show", id: storageSiteInstance.id)
-    }
+    def stats = new storitz.SiteStats()
+    feedService.updateUnits(storageSiteInstance, stats)
+    flash.message = "${message(code: 'default.units.message', args: [stats.unitCount])}"
+    redirect(action: "show", id: storageSiteInstance.id)
   }
 
   def delete = {

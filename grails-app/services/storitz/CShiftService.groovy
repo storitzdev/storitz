@@ -179,6 +179,67 @@ class CShiftService {
     }
   }
 
+  def refreshSites(cshift, stats) {
+    def ret = getSites(cshift.userName, cshift.pin)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
+      StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      if (!site) {
+        println "Found and creating new site: ${tab.SITE_NAME.text()}"
+        site = new StorageSite()
+        stats.createCount++
+        site.lastUpdate = 0
+        getSiteDetails(siteLink, site, tab, stats, true)
+      }
+    }
+  }
+
+  def updateSite(site, stats) {
+    def ret = getSites(cshift.userName, cshift.pin)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
+      StorageSite foundSite = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      if (foundSite == site) {
+        site.contacts.each {contact ->
+          contact.delete()
+        }
+        site.units.each {unit ->
+          unit.delete()
+        }
+        site.insurances.each {ins ->
+          ins.delete()
+        }
+        site.specialOffers.each {offer ->
+          offer.delete()
+        }
+        site.contacts.clear()
+        site.units.clear()
+        site.insurances.clear()
+        site.specialOffers.clear()
+        site.lastUpdate = 0
+        site.save(flush: true)
+
+        getSiteDetails(site.centerShift, site, tab, stats, false)
+      }
+    }
+  }
+
   def getSiteDetails(cshift, site, tab, stats, newSite) {
 
       site.sourceId = tab.SITE_ID.text()

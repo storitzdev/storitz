@@ -10,7 +10,7 @@ class CostService {
     boolean transactional = false
 
     def siteLinkService
-    def cShiftService
+    def CShiftService
 
     def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
       switch(site.source) {
