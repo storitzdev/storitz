@@ -12,21 +12,31 @@
     var directionsDisplay;
     var storageSize = [];
     var premiums = [];
-    var prices = [];
-    var unitTypes = [];
-    var specialOffers = [];
-    var searchSize;
+    var searchSize = ${searchSize};
     var sizeDescription;
     var unitId;
     var siteId = ${params.id};
-    var rentalFormReady = false;
     var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
     var adminFee = ${site.adminFee ? site.adminFee : 0};
     var destLatLng;
-    var startDate = "${params.date}";
-    var specialOfferId;
-    var monthlyRent = 0;
+    var startDate = "${params.date && params.date != 'null' ? params.date : new Date().format('MM/dd/yy')}";
     var galleryImageNum = 0;
+
+    // vars set by callback
+    var durationMonths = 1;
+    var monthlyRent = ${monthlyRate};
+    var pushRate = ${pushRate};
+    var chosenPromo = '';
+    var chosenPromoId = -999;
+    var totalMoveInCost = additionalFees + monthlyRent;
+    var unitTypes = [];
+    <g:each var="unitType" status="i" in="${unitTypes}">
+      unitTypes[${i}] = ${unitType};
+    </g:each>
+    var discountTotal = 0;
+    var chosenUnitType = '${chosenUnitType}';
+    var insuranceId = -999;
+    var premium = 0;
 
     var priceDriveup = ${rentalTransaction?.priceDriveup ? "true" : "false"};
     var priceInterior = ${rentalTransaction?.priceInterior ? "true" : "false"};
@@ -43,14 +53,6 @@
       searchSize = ${params.searchSize};
       sizeDescription = storageSize[ ${params.searchSize} ];
     </g:if>
-    <g:each var="ins" in="${site.insurances}">premiums[${ins.id}] = ${ins.premium};</g:each>
-    premiums[-999] = 0;
-    var defaultOffer = specialOffers[-1] = { active: true, promoName: "Default", promoType: "AMOUNT_OFF", promoQty: 0, prepay: false, prepayMonths: 1, inMonth: 1, expireMonth: 1 };
-    <g:each var="offer" in="${site.specialOffers}">
-      specialOffers[${offer.id}] = { active: ${offer.active}, waiveAdmin:${offer.waiveAdmin}, promoName: "${offer.promoName}", promoType: "${offer.promoType}", promoQty: ${offer.promoQty}, prepay: ${offer.prepay},  prepayMonths: ${offer.prepayMonths}, inMonth: ${offer.inMonth}, expireMonth: ${offer.expireMonth}};
-    </g:each>
-    var premium = 0;
-    var offerChosen = specialOffers[-1];
 
     function setupSize() {
       if (searchSize && searchSize > 1) {
@@ -60,95 +62,105 @@
       }
     }
 
-    function buildTable() {
-      new Ajax.Request("${createLink(controller:'storageSite', action:'detailUnits')}",
+    function updateTransaction() {
+      // update dropdowns
+      $('unitType').childElements().each(function(elem) { elem.remove(); });
+      unitTypes.each(function (unitType) {
+         var opt = new Element("option", {
+           selected: unitType.type == chosenUnitType,
+           value: unitType.type
+         });
+         opt.update(unitType.value);
+         $('unitType').insert(opt);
+      });
+
+      // update dates
+      $('moveInDate').update(startDate);
+      var paidThru = Date.parseDate(startDate, "%m/%d/%y");
+      paidThru.setMonth( paidThru.getMonth() + durationMonths);
+      $('paidThruDate').update(paidThru.print("%o/%d/%y"))
+
+      // update prices
+      if (pushRate < monthlyRent) {
+        $('regPrice').update('$' + monthlyRent.toFixed(2));
+        $('pushPrice').update('$' + pushRate.toFixed(2));
+      } else {
+        $('regPrice').update('');
+        $('pushPrice').update('$' + monthlyRent.toFixed(2));
+      }
+
+      // update promo
+      $('selectedOffer').update(chosenPromo);
+
+      // update costs
+      $('totalMoveInCost').update('$' + totalMoveInCost.toFixed(2));
+      $('monthlyDuration').update(durationMonths);
+      $('monthlyPerMonth').update('$' + pushRate.toFixed(2));
+      $('monthlyTotal').update('$' + (pushRate * durationMonths).toFixed(2));
+      // insurance cost
+      $('insuranceDuration').update(durationMonths);
+      $('insurancePerMonth').update('$' + premium.toFixed(2));
+      $('insuranceTotal').update('$' + (premium * durationMonths).toFixed(2));
+      if (premium > 0) {
+        $('insuranceBlock').show();
+      } else {
+        $('insuranceBlock').hide();
+      }
+      // promo discount
+      $('discountTotal').update(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
+      $('adminTotal').update('$' + additionalFees.toFixed(2));
+    }
+
+    function insuranceClick() {
+      $('insuranceChoices').observe('click', function() {
+        var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
+        insuranceId = insId;
+        showTotals();
+      });
+    }
+
+    function transactionFormSetup() {
+      $('specialOffers').observe('click', function() {
+        var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
+        $('promoId').value = offerId;
+        chosenPromoId = offerId;
+        showTotals();
+      });
+
+      $('unitsize').observe('change', function() {
+        searchSize = $F('unitsize');
+        $('SC_searchSize').value = searchSize;
+        showTotals();
+      })
+
+      $('unitType').observe('change', function() {
+        chosenUnitType = $F('unitType');
+        showTotals();
+      })
+    }
+
+    function showTotals() {
+      new Ajax.Request("${createLink(controller:'storageSite', action:'detailTotals')}",
       {
         method:'get',
-        parameters: {searchSize: searchSize, id: siteId },
+        parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType },
         onSuccess:function(transport) {
-          var tableBody = "<tr><td colspan=\"4\" style=\"padding-left:20px;\">Select from the following storage options:</td></tr>";
-          var checkoutTableBody = "";
-          var units = transport.responseJSON.units;
-          var unitCount = (typeof(units.driveup) !== 'undefined' && units.driveup ? 1 : 0) + (typeof(units.interior) !== 'undefined' && units.interior ? 1 : 0) + (typeof(units.upper) !== 'undefined' && units.upper ? 1 : 0);
-          var rowCount = 0;
-          var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
-          $('priceDriveup').value = false;
-          $('priceUpper').value = false;
-          $('priceInterior').value = false;
-          if (units) {
-            if (units.driveup) {
-              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.driveup.id + "\"" + (priceDriveup || unitCount == 1 ? " checked=\"true\"" : "") + "/> Drive up</td>";
-              tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
-              tableBody += "<td class=\"price_text\" style=\"padding-right:20px;\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
-              tableBody += "</tr>";
-              prices[units.driveup.id] = units.driveup.price;
-              unitTypes[units.driveup.id] = 'priceDriveup';
-              if (priceDriveup || unitCount == 1) {
-                unitId = units.driveup.id;
-                monthlyRent = prices[unitId];
-                $('priceDriveup').value = true;
-                $('unitId').value = unitId;
-                rentalFormReady = true;
-                $('rentmeBtn').show();
-                checkoutTableBody += "<tr>";
-                checkoutTableBody += "<td style=\"padding-bottom:10px;\">Drive up</td>";
-                checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.driveup.price.toFixed(2) + "</td>";
-                checkoutTableBody += "<td class=\"price_text\">$" + (units.driveup.price*durationMonths).toFixed(2) + "</td>";
-                checkoutTableBody += "</tr>";
-              }
-            }
-            if (units.interior) {
-              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.interior.id + "\"" + (priceInterior || unitCount == 1 ? " checked=\"true\"" : "") + "/> Interior</td>";
-              tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
-              tableBody += "<td class=\"price_text\" style=\"padding-right:20px;\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
-              tableBody += "</tr>";
-              prices[units.interior.id] = units.interior.price;
-              unitTypes[units.interior.id] = 'priceInterior';
-              if (priceInterior || unitCount == 1) {
-                unitId = units.interior.id;
-                monthlyRent = prices[unitId];
-                $('priceInterior').value = true;
-                $('unitId').value = unitId;
-                rentalFormReady = true;
-                $('rentmeBtn').show();
-                checkoutTableBody += "<tr>";
-                checkoutTableBody += "<td style=\"padding-bottom:10px;\">Interior</td>";
-                checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.interior.price.toFixed(2) + "</td>";
-                checkoutTableBody += "<td class=\"price_text\">$" + (units.interior.price*durationMonths).toFixed(2) + "</td>";
-                checkoutTableBody += "</tr>";
-              }
-            }
-            if (units.upper) {
-              tableBody += "<tr class=" + (rowCount++ % 2 == 0 ? "roweven" : "rowodd") + ">";
-              tableBody += "<td style=\"padding-left:20px;\"><input type=\"radio\" name=\"unit_choice\" value=\"" + units.upper.id + "\"" + (priceUpper || unitCount == 1 ? " checked=\"true\"" : "") + "/> Upper</td>";
-              tableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
-              tableBody += "<td class=\"price_text\" style=\"padding-right:20px;\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
-              tableBody += "</tr>";
-              prices[units.upper.id] = units.upper.price;
-              unitTypes[units.upper.id] = 'priceUpper';
-              if (priceUpper || unitCount == 1) {
-                unitId = units.upper.id;
-                monthlyRent = prices[unitId];
-                $('priceUpper').value = true;
-                $('unitId').value = unitId;
-                rentalFormReady = true;
-                $('rentmeBtn').show();
-                checkoutTableBody += "<tr>";
-                checkoutTableBody += "<td style=\"padding-bottom:10px;\">Upper</td>";
-                checkoutTableBody += "<td class=\"textCenter\">" + durationMonths + "</td><td class=\"price_text\">$" + units.upper.price.toFixed(2) + "</td>";
-                checkoutTableBody += "<td class=\"price_text\">$" + (units.upper.price*durationMonths).toFixed(2) + "</td>";
-                checkoutTableBody += "</tr>";
-              }
-            }
-          }
-          $('price_body').update(tableBody);
-          $('checkout_price_body').update(checkoutTableBody);
-          showTotals();
+          var totals = transport.responseJSON.totals;
+          durationMonths = totals.durationMonths;
+          unitTypes = totals.unitTypes;
+          chosenPromo = totals.chosenPromo;
+          chosenUnitType = totals.chosenUnitType;
+          premium = totals.premium;
+          discountTotal = totals.discountTotal;
+          monthlyRent = totals.monthlyRate;
+          pushRate = totals.pushRate;
+          additionalFees = totals.additionalFees;
+          totalMoveInCost = totals.totalMoveInCost;
+          updateTransaction();
         }
       });
     }
+
     function createMap() {
       destLatLng = new google.maps.LatLng(${site.lat}, ${site.lng});
       directionsService = new google.maps.DirectionsService();
@@ -182,21 +194,6 @@
       });
     }
 
-    function sizeChange() {
-      $('unitsize').observe('change', function() {
-        searchSize = $F('unitsize');
-        $('SC_searchSize').value = searchSize;
-        buildTable();
-      })
-    }
-
-    function dateChange() {
-      startDate = $F('date');
-      $('SC_date').value = startDate;
-      showTotals();
-      Validation.validate('date');
-    }
-
     function directionTab() {
       $('direction_button').observe('click', function() {
         $('photo_button').removeClassName('tab_button_on');
@@ -227,108 +224,11 @@
       })
     }
 
-    function unitTypeClick() {
-      $('price_table').observe('click', function() {
-        var unitId =  $('price_table').select('input:checked[type=radio]').pluck('value');
-        monthlyRent = prices[unitId];
-        $('unitId').value = unitId;
-        priceUpper = unitTypes[unitId] == 'priceUpper';
-        priceInterior = unitTypes[unitId] == 'priceInterior';
-        priceDriveup = unitTypes[unitId] == 'priceDriveup';
-//        eval(unitTypes[unitId] + "= true;");
-        $('priceDriveup').value = priceDriveup;
-        $('priceUpper').value = priceUpper;
-        $('priceInterior').value = priceInterior;
-        showTotals();
-        rentalFormReady = true;
-        $('rentmeBtn').show();
-      });
-    }
-
-    function insuranceClick() {
-      $('insuranceChoices').observe('click', function() {
-        var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
-        premium = premiums[insId];
-        showTotals();
-      });
-    }
-
-    function specialOfferSelect() {
-      $('specialOffers').observe('click', function() {
-        var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
-        $('promoId').value = offerId;
-        var oldOfferMonths = offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth;
-        offerChosen = specialOffers[offerId];
-        if (oldOfferMonths != offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth - 1) + offerChosen.expireMonth)  {
-          buildTable();
-        } else {
-          showTotals();
-        }
-      });
-    }
-
-    function showTotals() {
-      var tableBody = "";
-      
-      var durationMonths = (offerChosen.prepay ? offerChosen.prepayMonths + offerChosen.expireMonth : (offerChosen.inMonth -1) + offerChosen.expireMonth);
-      if (premium > 0) {
-        tableBody += "<tr class=\"tableLine\"><td colspan=\"\">Insurance:</td><td class=\"textCenter\">" + durationMonths +"</td><td class=\"price_text\">$" + premium.toFixed(2) + "</td><td class=\"price_text borderRight\">$" + (durationMonths*premium).toFixed(2) + "</td></tr>";
-      }
-
-      var offerDiscount = 0;
-      if (offerChosen != defaultOffer) {
-
-        switch(offerChosen.promoType) {
-          case "AMOUNT_OFF":
-            offerDiscount = offerChosen.promoQty * offerChosen.expireMonth;
-            break;
-
-          case "PERCENT_OFF":
-            offerDiscount = (offerChosen.promoQty/100.0) * offerChosen.expireMonth * monthlyRent;
-            break;
-
-          case "FIXED_RATE":
-            offerDiscount = (monthlyRent - offerChosen.promoQty) * offerChosen.expireMonth;
-            break;
-        }
-        tableBody += "<tr class=\"specialOfferText tableLine\"><td  colspan=\"3\">Special Offer " + offerChosen.promoName + "<td class=\"price_text borderRight\">-$" + offerDiscount.toFixed(2) + "</td></tr>";
-      }
-
-      if (!offerChosen.waiveAdmin) {
-        tableBody += "<tr class=\"tableLine\"><td colspan=\"3\">Admin Fee (one time charge)</td><td class=\"borderRight price_text\">$" + additionalFees.toFixed(2) + "</td></tr>";
-      }
-
-      var paidThruRow = "";
-      if (typeof(startDate) !== 'undefined') {
-        var paidThru = Date.parseDate(startDate, "%m-%d-%Y");
-        paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        // can't use colspan=4 or it renders border wrong in Chrome/Safari
-        paidThruRow = "<tr class=\"tableLine\"><td colspan=\"2\">Paid Through Date: <span class=\"specialOfferText\">" + paidThru.print("%o/%d/%y") + "</span></td><td></td><td></td></tr>";
-      }
-      var total_movein = (offerChosen.waiveAdmin ? additionalFees - adminFee : additionalFees) + (monthlyRent + premium)*durationMonths - offerDiscount;
-
-      $('price_totals_body').update(tableBody + paidThruRow);
-      $('checkout_price_totals_body').update(tableBody);
-      if (typeof(paidThru) !== 'undefined') {
-        $('checkout_paid_through_date').update(paidThru.print("%o/%d/%y"));
-      }
-      $('price_total').update("$" + total_movein.toFixed(2));
-      $('checkout_price_total').update("$" + total_movein.toFixed(2));
-    }
-
     function rentmeClick() {
       $('rentme').observe('click', function() {
-        if (rentalFormReady && validateRentme()) {
-          $('sizeHelp').hide();
-          var sdate = Date.parseDate($F('date'), "%m-%d-%Y");
-          $('checkout_movein_date').update(sdate.print("%o/%d/%y"));
-          $('moveInDate').value = $F('date');
-          $('checkout_unit_size').update(storageSize[searchSize]);
-          $('left_info').hide();
-          $('left_checkout_info').show();
-          $('rentalForm').show();
-          $('detailInfo').hide();
-        }
+        $('sizeHelp').hide();
+        $('rentalForm').show();
+        $('detailInfo').hide();
       });
     }
 
@@ -434,13 +334,6 @@
       return valid;
     }
 
-    function validateRentme() {
-      var valid = true;
-      valid &= Validation.validate('unitsize');
-      valid &= Validation.validate('date');
-      return valid;
-    }
-
     function nextStep1() {
       if (validateStep1()) {
         $('step1_bullet').hide();
@@ -505,8 +398,17 @@
     function setupCalendar() {
       Calendar.setup({
           dateField     : 'date',
-          triggerElement: 'date',
-          dateFormat    : '%m-%d-%Y'
+          triggerElement: 'calendarPic',
+          dateFormat    : '%m/%d/%y',
+          selectHandler :  function(cal, dateString) {
+            this.hide();
+            startDate = dateString;
+            $('SC_date').value = startDate;
+            $('moveInDate').update(startDate);
+            var paidThru = Date.parseDate(startDate, "%m/%d/%y");
+            paidThru.setMonth( paidThru.getMonth() + durationMonths);
+            $('paidThruDate').update(paidThru.print("%o/%d/%y"))
+          }
       });
     }
 
@@ -637,19 +539,16 @@
   }
 
   Event.observe(window, 'load', function() {
-    createMap();
+    transactionFormSetup();
+    updateTransaction();
     setupSize();
-    buildTable();
     setupHelp();
-    sizeChange();
     directionTab();
     photoTab();
     getDirections();
-    unitTypeClick();
     idTypeClick();
     rentmeClick();
     setupCalendar();
-    specialOfferSelect();
     setupValidation();
     primaryCountryClick();
     secondaryCountryClick();
@@ -658,9 +557,9 @@
     </g:if>
     rightArrowClick();
     leftArrowClick();
-    validateRentme();
     ajaxFormUpdate();
     ajaxServerPoll();
+    createMap();
   });
 
 //]]>
@@ -674,122 +573,13 @@
       <g:render template="/logo_bar" />
         <div id="site_info" class="left" style="margin-top: 26px;">
           <g:render template="/siteInfo" />
-
-          <div id="left_info">
-            <div>
-              <div class="section_header">Choose a size:</div>
-              <g:if test="${params.searchSize}">
-                <g:select id="unitsize" class="validate-selection" style="width:150px;" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
-              </g:if>
-              <g:else>
-                <g:select id="unitsize" class="validate-selection" style="width:150px;" name="unitsize" from="${sizeList}" optionValue="description" value="1" optionKey="id" />
-              </g:else>
-              <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
-            </div>
-            <div style="height: 18px;"></div>
-            <div>
-              <div class="section_header">Move-in Date:</div>
-              <label for="date"></label><input type="text" class="required validate-date-us dateInput" id="date" style="width: 150px;" value="${params.date}" onchange="dateChange()"/>
-            </div>
-            <div style="padding: 18px 0 10px;" class="section_header">
-              Site Features:
-            </div>
-
-            <g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/>
-              </div>
-              <div class="left icon_text">Free Truck</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.freeTruck  == storitz.constants.TruckType.RENTAL}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/>
-              </div>
-              <div class="left icon_text">Rental Truck</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.isGate}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-gate32.jpg')}" alt="Gated"/>
-              </div>
-              <div class="left icon_text">Gated</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.isKeypad}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-keypad32.jpg')}" alt="Keypad"/>
-              </div>
-              <div class="left icon_text">Keypad Entry</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.isCamera}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-camera32.jpg')}" alt="Camera"/>
-              </div>
-              <div class="left icon_text">Camera</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.isUnitAlarmed}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-alarm32.jpg')}" alt="Alarmed"/>
-              </div>
-              <div class="left icon_text">Unit Alarmed</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.isManagerOnsite}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-mgr32b.jpg')}" alt="Manager Onsite"/>
-              </div>
-              <div class="left icon_text">Manager Onsite</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <g:if test="${site.hasElevator}">
-              <div class="left">
-                <img src="${createLinkTo(dir:'images', file:'icon3d-elevator32.jpg')}" alt="Elevator Available"/>
-              </div>
-              <div class="left icon_text">Elevator Available</div>
-              <div style="clear: both;"></div>
-            </g:if>
-            <div style="height:21px;"></div>
-            <div class="other_details header_text_hi">
-              Featured Offers:
-            </div>
-            <div class="featuredOfferText">
-              <div id="specialOffers">
-              <p class="featuredOfferHeader">Click on an offer below to see how much you can save.</p>
-              <p><input type="radio" name="specialOffer" value="-1" checked="checked" /> None</p>
-                <g:each in="${site.featuredOffers()}" var="offer">
-                  <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
-                </g:each>
-                <g:if test="${site.nonFeaturedOffers().size() > 0}">
-                  <div id="moreSpecialOffers" class="expanding">
-                    <div class="right" onclick="Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.1});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('lessSpecialOffers', 'appear', {queue:'end', duration: 0.1});return false;">
-                      <a href="#" style="text-decoration: none;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> See All Special Offers</a>
-                    </div>
-                  </div>
-                </g:if>
-                <div id="nonFeaturedOffers" style="display:none">
-                  <g:each in="${site.nonFeaturedOffers()}" var="offer">
-                    <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
-                  </g:each>
-                </div>
-                <div id="lessSpecialOffers" style="display: none;" class="expanding">
-                  <div class="right">
-                    <a href="#" style="text-decoration: none;" onclick="Effect.toggle('lessSpecialOffers', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreSpecialOffers', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> See Only Featured Offers</a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <g:render template="/orderSummary"/>
         </div>
 
-        <div style="width: 685px;" class="right">
+        <div style="width: 650px;" class="left">
+
           <div id="detailInfo">
             <div style="margin-top: -20px;">
-              <div class="returnLink right" style="padding: 0 0.5em; margin-right: 20px;">
+              <div class="returnLink right" style="padding: 0 0 0 0.5em;">
                 <g:link controller="home" action="index">
                   New Search
                 </g:link>
@@ -802,6 +592,11 @@
               </div>
             </div>
             <div style="height: 25px; clear: both;"></div>
+
+            <div id="transaction">
+              <g:render template="/transaction" />
+            </div>
+            
             <div id="map">
               <img src="http://maps.google.com/maps/api/staticmap?zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.getFullAddress().encodeAsURL()}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
             </div>

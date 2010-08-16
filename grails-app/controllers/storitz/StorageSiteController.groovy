@@ -13,6 +13,8 @@ import com.storitz.Bullet
 import grails.plugins.springsecurity.Secured
 import com.storitz.UserRole
 import com.storitz.RentalAgreement
+import com.storitz.SpecialOffer
+import com.storitz.Insurance
 
 class StorageSiteController {
 
@@ -21,6 +23,7 @@ class StorageSiteController {
   def geocodeService
   def fileUploadService
   def markupSanitizerService
+  def costService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -387,11 +390,24 @@ class StorageSiteController {
   def detail = {
 
     StorageSite site = StorageSite.get(params.id)
-    StorageSize unitSize = StorageSize.get(params.searchSize)
+    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     
     Collection sizeList = site.units.collect { it.unitsize }.unique()
-    sizeList.add(StorageSize.get(1))
+    // output JSON for types
+    Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
+
     sizeList.sort { it.width * it.length }
+
+    def bestUnit
+    // if a size was chosen, use it, else get the "best" price
+    if (params.unitType && unitSize) {
+      bestUnit = site.units.findAll{ it.getUnitTypeLower() == params.unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+    } else if (unitSize) {
+      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+    } else {
+      // TODO - decide on best price or best price for a given size
+      bestUnit = site.units.min{ it.price }
+    }
 
     def remoteAddr = request.remoteAddr
 
@@ -399,7 +415,7 @@ class StorageSiteController {
 
     // Don't try to store a non-date.
     String searchDate = params.date
-    if (searchDate?.startsWith('Click')) searchDate = null
+    if (searchDate && searchDate == '') searchDate = null
 
     Visit visit = new Visit(dateCreated:new Date(), site:site, remoteAddr:remoteAddr, unitSize:unitSize, searchAddress:params.address, searchDate:searchDate)
     
@@ -408,10 +424,8 @@ class StorageSiteController {
     if (!session?.shortSessionId) {
       session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
     }
-    println session.shortSessionId
-    println sizeList
     
-    [sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId]
+    [sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate, searchSize: bestUnit.unitsize.id]
   }
 
   def getSmartCallDataForId(id)
@@ -471,30 +485,54 @@ class StorageSiteController {
     }
   }
 
-  def detailUnits = {
+  def detailTotals = {
 
     def site = StorageSite.get(params.id)
+    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
 
-    if (!params.searchSize) {
-      render(status: 200, contentType: "application/json", text: "{ \"units\": null }")
-      return
+    Collection sizeList = site.units.collect { it.unitsize }.unique()
+    // output JSON for types
+    Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
+
+    sizeList.sort { it.width * it.length }
+
+    def bestUnit
+    // if a size was chosen, use it, else get the "best" price
+    if (params.unitType && unitSize) {
+      bestUnit = site.units.findAll{ it.getUnitTypeLower() == params.unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+    } else if (unitSize) {
+      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+    } else {
+      // TODO - decide on best price or best price for a given size
+      bestUnit = site.units.min{ it.price }
     }
 
-    def zeroPrice = new BigDecimal(0)
-    def unitsizeId = Long.parseLong(params.searchSize)
+    def additionalFees = (site.adminFee ? site.adminFee : 0 ) + (site.lockFee ? site.lockFee : 0)
+    def chosenPromo = ''
+    def specialOffer
+    if (params.chosenPromoId && (params.chosenPromoId as Long) > 0) {
+      specialOffer = SpecialOffer.get(params.chosenPromoId as Long)
+      if (specialOffer) {
+        chosenPromo = specialOffer.promoName
+        if (specialOffer.waiveAdmin) {
+          additionalFees = site.lockFee
+        }
+      }
+    }
 
-//    println (site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId })
+    def premium = 0
+    def ins
+    if (params.insuranceId && (params.insuranceId as Long) > 0) {
+      ins = Insurance.get(params.insuranceId as Long)
+      if (ins) {
+        premium = ins.premium
+      }
+    }
 
-    def intResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isInterior }.min { it.price } as StorageUnit[]
-    def driveupResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isDriveup }.min { it.price } as StorageUnit[]
-    def upperResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isUpper }.min { it.price } as StorageUnit[]
-    def tempcontrolledResult = site.units.findAll { it.price > zeroPrice && it.unitsize.id == unitsizeId && it.isTempControlled }.min { it.price } as StorageUnit[]
+    def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins)
 
-    render(status: 200, contentType: "application/json", text: "{ \"units\": { \"interior\": ${intResult as JSON}, \"driveup\": ${driveupResult as JSON}, \"upper\": ${upperResult as JSON}, \"tempcontrolled\": ${tempcontrolledResult as JSON} } }")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]} }}")
 
-//    println driveupResult
-//    println intResult
-//    println upperResult
   }
 
   def refreshInventory = {

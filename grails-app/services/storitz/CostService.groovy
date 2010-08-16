@@ -24,6 +24,18 @@ class CostService {
 
     }
 
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+    switch(site.source) {
+
+      case "SL":
+        return siteLinkService.calculateTotals(site, unit, promo, ins)
+
+      default:
+        throw new Exception("Unknown service totals calculation")
+    }
+
+  }
+
     def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
 
       switch(site.source) {

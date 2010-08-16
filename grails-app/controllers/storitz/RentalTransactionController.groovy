@@ -68,7 +68,7 @@ class RentalTransactionController {
         def rentalTransactionInstance = new RentalTransaction(params)
         rentalTransactionInstance.status = TransactionStatus.BEGUN
         rentalTransactionInstance.bookingDate = new Date()
-        rentalTransactionInstance.moveInDate = Date.parse('MM-dd-yyyy', params.moveInDate)
+        rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         rentalTransactionInstance.site = site
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
 

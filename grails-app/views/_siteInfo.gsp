@@ -54,29 +54,63 @@
     Extended Hours Available
   </g:if>
 </div>
-<div style="height: 10px;"></div>
-<div style="width: 280px;" class="siteInfoText">
-  <g:if test="${site.description && site.description.size() > 90}">
-    <div id="partialDescription" class="left">
-      ${site.description.decodeHTML().substring(0, site.description.decodeHTML().lastIndexOf(' ', 90))}
-    </div>
-    <div id="hiddenDescription" style="display: none;">
-      ${site.description.decodeHTML()}
-    </div>
-    <div style="clear: both;"></div>
-    <div id="moreDescription" class="expanding">
-      <div class="right">
-        <a href="#" style="text-decoration: none;" onclick="Effect.toggle('partialDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindDown('hiddenDescription', {queue: 'end'});Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
-      </div>
-    </div>
-    <div id="lessDescription" style="display: none;" class="expanding">
-      <div class="right">
-        <a href="#" style="text-decoration: none;" onclick="Effect.toggle('partialDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('lessDescription', 'appear', {queue: 'end', duration: 0.1}); Effect.BlindUp('hiddenDescription'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
-      </div>
-    </div>
-  </g:if>
-  <g:else>
-  ${site.description?.decodeHTML()}
-  </g:else>
+<div style="padding: 18px 0 10px;" class="section_header">
+  Site Features:
 </div>
-<div style="height: 18px;"></div>
+
+<g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/>
+  </div>
+  <div class="left icon_text">Free Truck</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.freeTruck  == storitz.constants.TruckType.RENTAL}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/>
+  </div>
+  <div class="left icon_text">Rental Truck</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.isGate}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-gate32.jpg')}" alt="Gated"/>
+  </div>
+  <div class="left icon_text">Gated</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.isKeypad}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-keypad32.jpg')}" alt="Keypad"/>
+  </div>
+  <div class="left icon_text">Keypad Entry</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.isCamera}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-camera32.jpg')}" alt="Camera"/>
+  </div>
+  <div class="left icon_text">Camera</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.isUnitAlarmed}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-alarm32.jpg')}" alt="Alarmed"/>
+  </div>
+  <div class="left icon_text">Unit Alarmed</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.isManagerOnsite}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-mgr32b.jpg')}" alt="Manager Onsite"/>
+  </div>
+  <div class="left icon_text">Manager Onsite</div>
+  <div style="clear: both;"></div>
+</g:if>
+<g:if test="${site.hasElevator}">
+  <div class="left">
+    <img src="${createLinkTo(dir:'images', file:'icon3d-elevator32.jpg')}" alt="Elevator Available"/>
+  </div>
+  <div class="left icon_text">Elevator Available</div>
+  <div style="clear: both;"></div>
+</g:if>

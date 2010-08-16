@@ -11,7 +11,7 @@ html, body {
     background: #0558a4;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
-    min-width: 1000px;
+    min-width: 950px;
     min-height: 594px;
     padding: 0;
     margin: 0;
@@ -251,7 +251,7 @@ Added styles
 #stcontent {
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
+    width: 950px;
 }
 
 #topnav {
@@ -264,7 +264,6 @@ Added styles
     color: #3fac00;
     float: right;
     margin-top: -33px;
-    margin-right: 35px;
     z-index: -10;
 }
 
@@ -387,7 +386,6 @@ div.resultsBar {
 #price_table thead, #price_totals th, table.checkout_table thead {
     color: white;
 }
-
 #price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0;
@@ -409,6 +407,15 @@ div.resultsBar {
 #checkout_price_table th, #checkout_price_table td {
     padding: 0 0.5em;
     border: 0;
+    /*white-space: nowrap;
+    overflow: hidden;*/
+}
+
+#costTotals td {
+    padding: 0;
+    border: 0;
+    display: table-cell;
+    border-collapse: collapse;
     /*white-space: nowrap;
     overflow: hidden;*/
 }
@@ -578,6 +585,10 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     font-size: 11px;
 }
 
+#site_info {
+    width: 280px;
+    margin-right: 20px;
+}
 .siteInfoText {
     line-height: 16px;
     font-size: 11px;
@@ -747,10 +758,6 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 
 .pointer {
     cursor: pointer;
-}
-
-.specialOfferText {
-    color: #3fac00;
 }
 
 .tooltip {
@@ -968,4 +975,100 @@ p.footer {
     padding: 10px 15px;
     -webkit-border-radius:5px;
     -moz-border-radius:10px;
+}
+
+.transBox {
+    width: 650px;
+    padding: 0;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 5px;
+	border:1px solid #dfdfdf;
+	background-color:#fcfcfc;
+	background-image:url("../images/bkg-features-list.jpg");
+	background-position: center bottom;
+	border-radius:8px;
+	background-repeat:repeat-x;
+	vertical-align:top;
+}
+
+.transHeader {
+    font: 11px arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.transDropdown {
+    font: 13px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #134a9a;
+    width: 140px;
+}
+
+.transStrikethru {
+    font: 15px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #cf1f1f;
+    text-decoration: line-through;
+}
+
+.transPrice {
+    font: 15px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.transPerMonth {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    margin-top: 5px;
+}
+
+.selectedOffer {
+    color: #3bad00;
+}
+
+.specialOfferText {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.transTotalMoveIn, .transTotalMoveIn a {
+    color: #134a9a;
+    font: 13px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.offerLink {
+    margin-top: 7px;
+}
+
+.offerLink a {
+    color: #3bad00;
+    font: 11px verdana, arial, helvetica, sans-serif;
+}
+
+.offerList p {
+    margin: 0 0 6px 0;
+    font: 11px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.transDate {
+    color: #134a9a;
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    text-align: right;
+}
+
+.transDateHeader {
+    font: 12px arial, verdana, helvetica, sans-serif;
+    font-weight: bold;
+    text-align: right;
+}
+
+.costMoney{
+    text-align: right;
+    width: 60px;
+}
+
+.costDuration {
+    text-align: center;
+    width: 25px;
 }

@@ -867,4 +867,43 @@ class SiteLinkService {
     cal.add(Calendar.MONTH, durationMonths)
     return cal.time
   }
+
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+    def ret = [:]
+    def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
+    def offerDiscount = 0
+    def premium = ins ? ins.premium : 0
+    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
+    def adminFee = site.adminFee ? site.adminFee : 0
+    def waiveAdmin = false
+
+    if (promo) {
+
+      durationMonths = (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth)
+      waiveAdmin = promo.waiveAdmin
+
+      switch (promo.promoType) {
+        case "AMOUNT_OFF":
+          offerDiscount = promo.promoQty * promo.expireMonth;
+          break;
+
+        case "PERCENT_OFF":
+          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
+          break;
+
+        case "FIXED_RATE":
+          offerDiscount = (unit.price - promo.promoQty) * promo.expireMonth;
+          break;
+      }
+    }
+    def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
+    def moveInTotal = feesTotal + (unit.price + premium)*durationMonths - offerDiscount;
+
+    ret["durationMonths"] = durationMonths
+    ret["discountTotal"] = offerDiscount
+    ret["feesTotal"] = feesTotal
+    ret["moveInTotal"] = moveInTotal
+
+    return ret
+  }
 }

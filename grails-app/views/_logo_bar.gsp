@@ -5,7 +5,7 @@
     </g:link>
   </div>
   <div id="tollFree">
-    <div class="left" style="margin-right: 15px;">
+    <div class="left">
       <div style="font-size: 16px;">
         (877) 456-2929
       </div>

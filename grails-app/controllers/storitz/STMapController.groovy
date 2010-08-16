@@ -58,6 +58,9 @@ class STMapController {
         fetchMode('specialOffers', FetchMode.EAGER)
       }
 
+      def unitMap = [:]
+
+
       def sw = new StringWriter()
       sw << "[ "
       if (results.size() < 20) {
@@ -77,9 +80,17 @@ class STMapController {
               }
           }
           sw << "], \"units\":["
-          site.units.eachWithIndex{ unit, j ->
-            sw << "{ \"unitsize\":{\"id\":\"${unit.unitsize.id}\"}, \"id\":\"${unit.id}\", \"price\":${unit.price}, \"isUpper\":${unit.isUpper}, \"isDriveup\":${unit.isDriveup}, \"isInterior\":${unit.isInterior} }"
-            if (j < site.units.size() - 1) {
+          unitMap.clear()
+          site.units.each { unit ->
+            def unitType = unit.getUnitTypeLower()
+            if (!unitMap[unitType] || unitMap[unitType].price > unit.price) {
+              unitMap[unitType] = unit
+            }
+          }
+          unitMap.eachWithIndex{ unitEntry, j ->
+            def unit = unitEntry.value
+            sw << "{ \"unitsize\":{\"id\":\"${unit.unitsize.id}\"}, \"id\":\"${unit.id}\", \"price\":${unit.price}, \"type\":\"${unit.getUnitTypeLower()}\" }"
+            if (j < unitMap.size() - 1) {
               sw << ","
             }
           }

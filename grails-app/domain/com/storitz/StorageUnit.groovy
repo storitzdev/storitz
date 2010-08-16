@@ -35,6 +35,13 @@ class StorageUnit {
       return "Unknown"
     }
 
+    public String getUnitTypeLower() {
+      if (isUpper) return "upper"
+      if (isDriveup) return "driveup"
+      if (isInterior) return "interior"
+      return "unknown"
+    }
+
     public void setUnitType(newType) {
       if (newType == "Upper") {
         isDriveup = false
@@ -45,6 +52,22 @@ class StorageUnit {
         isInterior = true
         isUpper = false
       } else if (newType == "Driveup" || newType == "Drive up") {
+        isDriveup = true
+        isInterior = false
+        isUpper = false
+      }
+    }
+
+    public void setUnitTypeLower(newType) {
+      if (newType == "upper") {
+        isDriveup = false
+        isInterior = false
+        isUpper = true
+      } else if (newType == "interior") {
+        isDriveup = false
+        isInterior = true
+        isUpper = false
+      } else if (newType == "driveup" || newType == "drive up") {
         isDriveup = true
         isInterior = false
         isUpper = false

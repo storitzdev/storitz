@@ -86,14 +86,19 @@
           return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id;
         }
 
+        function getDate() {
+          if ($F('date') && !$F('date').startsWith('Select')) {
+            return $F('date');
+          }
+          return null;
+        }
+
         function markerClick(feature) {
             var url = siteLink(feature) + '?s=m';
             if (searchSize && searchSize > 1) {
               url += '&searchSize=' + searchSize;
             }
-            if ($F('date') && !$F('date').startsWith('Click')) {
-              url += '&date=' + $F('date');
-            }
+            url += '&date=' + getDate();
             if ($F('address') && !$F('address').startsWith('Enter ')) {
               url += '&address=' + encodeURIComponent($F('address'));
             }
@@ -110,7 +115,7 @@
             if (feature.description) {
               c += feature.description;
             }
-            c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
+            c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + searchSize + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
           if (infoWindow) {
             infoWindow.close();
           }
@@ -213,6 +218,7 @@
                 var offers;
 
                 transport.responseJSON.features.each(function(s) {
+
                     var location = new google.maps.LatLng(s.lat, s.lng);
                     features[s.id] = s;
                     var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
@@ -230,11 +236,13 @@
                       }
                     }
                     rows++;
-
+                    var pUp = s.units.find(function(n) { return n.type == 'upper' });
+                    var pDup = s.units.find(function(n) { return n.type == 'driveup' });
+                    var pInt = s.units.find(function(n) { return n.type == 'interior' });
                     var iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
-                    var priceDriveup = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isDriveup) ? n.price : 999999; });
-                    var priceInterior = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isInterior) ? n.price : 999999; });
-                    var priceUpper = s.units.min(function(n) { return (n.unitsize.id == searchSize && n.isUpper) ? n.price : 999999; });
+                    var priceDriveup = pDup ? pDup.price : 999999;
+                    var priceInterior = pInt? pInt.price : 999999;
+                    var priceUpper = pUp ? pUp.price : 999999;
 
                     var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
                     var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
@@ -288,10 +296,10 @@
                       markerClick(s);
                     });
                     tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?priceDriveup=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?priceInterior=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?priceUpper=true&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
+                      '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
@@ -393,7 +401,12 @@
           Calendar.setup({
               dateField     : 'date',
               triggerElement: 'date',
-              dateFormat    : '%m-%d-%Y'
+              dateFormat    : '%m/%d/%y',
+              selectHandler : function(cal, dateString) {
+                $('date').value = dateString;
+                this.hide();
+                showAddress($F('address'), $F('size'), $F('date'));
+              }
           });
         }
 
@@ -410,11 +423,11 @@
         function setupForm() {
           $('address').focus();
           $('gsearchBtn').observe('click', function() {
-            showAddress($F('address'), $F('size'), $F('date'));
+            showAddress($F('address'), $F('size'), getDate());
           });
           $('address').observe('keypress', function(event) {
             if (event.keyCode == 13) {
-              showAddress($F('address'), $F('size'), $F('date'));
+              showAddress($F('address'), $F('size'), getDate());
             }
           });
           $('address').observe('click', function(event) {
@@ -423,15 +436,8 @@
             }
           });
           $('size').observe('change', function() {
-            showAddress($F('address'), $F('size'), $F('date'));
+            showAddress($F('address'), $F('size'), getDate());
           });          
-          $('date').observe('change', function() {
-            showAddress($F('address'), $F('size'), $F('date'));
-          });
-        }
-
-        function dateChange() {
-          showAddress($F('address'), $F('size'), $F('date'));
         }
 
         function checkMapSubmit() {
@@ -445,13 +451,12 @@
           var msg;
           var addrValid = !$F('address').startsWith('Enter ');
           var sizeValid = $F('size') != 1;
-          var dateValid = !$F('date').startsWith('Click');
-          var startDate = dateValid ? Date.parseDate($F('date'), "%m-%d-%Y") : '';
+          var dateValid = getDate() && getDate().length > 0;
 
           if (addrValid && sizeValid && dateValid) {
             msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
                     '</span><span class="blue"> unit near </span><span class="green"> ' + $F('address') +
-                    '</span><span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
+                    '</span><span class="blue"> starting on </span><span class="green">' + getDate() +
                     '</span>';
           } else if (sizeValid) {
             msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
@@ -460,7 +465,7 @@
               msg += '<span class="blue"> unit near </span><span class="green"> ' + $F('address') +
                     '</span><span class="blue">. Please select starting date.</span>';
             } else if (dateValid) {
-              msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
+              msg += '<span class="blue"> starting on </span><span class="green">' + getDate() +
                     '</span><span class="blue">. Please select address or zip.</span>';
             } else {
               msg += '<span class="blue">Please select address or zip and move-in date.</span>';
@@ -469,7 +474,7 @@
             msg = '<span class="blue">Searching near </span><span class="green">' + $F('address') +
                   '</span>';
             if (dateValid) {
-              msg += '<span class="blue"> starting on </span><span class="green">' + startDate.print("%o/%d/%y") +
+              msg += '<span class="blue"> starting on </span><span class="green">' + getDate() +
                     '</span><span class="blue">. Please select unit size.</span>';
             } else {
               msg += '<span class="blue">. Please select unit size and starting date.</span>';
@@ -521,7 +526,7 @@
                 <img src="${resource(dir:'images', file:'btn-circle-3.png')}" alt="3"/>
               </div>
               <div class="left">
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move in date.'}" onchange="dateChange()"/>
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move in date.'}"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
               <div style="margin-left: 30px;">
