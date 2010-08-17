@@ -610,17 +610,20 @@
               <div id="description" style="width:650px; margin-top:20px;">
                 <div class="left">
                   <g:if test="${site.coverImage()}">
-                    <img src="${resource(file: site.coverImage())}" alt="${site.title}" style="width:240px; height:160px; margin: 0 20px 20px 20px;">
+                    <div class="left">
+                      <img src="${resource(file: site.coverImage().mid())}" alt="${site.title}" style="width:240px; height:160px; margin: 0 20px 20px 20px;">
+                    </div>
                   </g:if>
-                  <div class="descriptionTitle">
+                  <p class="descriptionTitle" style="margin: 0;">
                     ${site.title}
-                  </div>
-                  <div>
+                  </p>
+                  <p style="margin: 0;">
                     ${site.address}${site.address2 && site.address2.size() > 0 ? '&nbsp;' + site.address2 : ''}, ${site.city}, ${site.state.display} ${site.zipcode}
-                  </div>
-                  <div style="margin: 15px">
+                  </p>
+                  <p style="margin: 15px">
                     ${site.description}
-                  </div>
+                  </p>
+                  <div style="clear:both;"></div>
                   <div id="featuresList">
                     <ul>
                       <li class="safety">Safety/Security</li>
