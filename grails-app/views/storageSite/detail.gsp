@@ -611,7 +611,7 @@
                 <div class="left">
                   <g:if test="${site.coverImage()}">
                     <div class="left">
-                      <img src="${resource(file: site.coverImage().mid())}" alt="${site.title}" style="width:240px; height:160px; margin: 0 20px 20px 20px;">
+                      <img src="${resource(file: site.coverImage().mid())}" alt="${site.title}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
                     </div>
                   </g:if>
                   <p class="descriptionTitle" style="margin: 0;">
@@ -657,7 +657,7 @@
                 </div>
                 <div id="leftArrow" class="left ${site.siteImages().size() > 4 ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
                 </div>
-                <div class="left" id="thumbWrapper">
+                <div style="margin: 15 auto;" id="thumbWrapper">
                   <ul id="items">
                      <g:each var="siteImg" in="${site.siteImages()}" status="i">
                          <li class="thumb">

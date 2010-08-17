@@ -1095,7 +1095,7 @@ p.footer {
 	border-top: 1px solid #fff;
 	color:#333;
 	font-family:Verdana, Geneva, sans-serif;
-	font-size:.7em;
+	font-size:11px;
 	padding:10px 0 10px 45px;
 	list-style:none;
 	margin:0;
@@ -1105,29 +1105,29 @@ p.footer {
 	border-bottom: 1px solid #dfdfdf;
 	border-top:none;
 	color:#134b98;
-	font-size:.8em;
+	font-size:12px;
 	font-weight:bold;
 	margin:0;
 	padding:10px 0 10px 45px;
 	vertical-align:middle;
 }
 #featuresList li.convenience {
-	background:url(../images/icon-convenience.png) no-repeat left center;
+	background:url(../images/icon-convenience-time.png) no-repeat left center;
 	border-bottom: 1px solid #dfdfdf;
 	border-top:none;
 	color:#134b98;
-	font-size:.8em;
+	font-size:12px;
 	font-weight:bold;
 	margin:0;
 	padding:10px 0 10px 45px;
 	vertical-align:middle;
 }
 #featuresList li.amenities {
-	background:url(../images/icon-flexible-hours.png) no-repeat left center;
+	background:url(../images/icon-amenities-snowflake.png) no-repeat left center;
 	border-bottom: 1px solid #dfdfdf;
 	border-top:none;
 	color:#134b98;
-	font-size:.8em;
+	font-size:12px;
 	font-weight:bold;
 	margin:0;
 	padding:10px 0 10px 45px;

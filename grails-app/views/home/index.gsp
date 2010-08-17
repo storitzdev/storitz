@@ -93,15 +93,20 @@
           return '';
         }
 
+        function getAddress() {
+          if ($F('address') && !$F('address').startsWith('Enter ')) {
+            return $F('address');
+          }
+          return '';
+        }
+
         function markerClick(feature) {
             var url = siteLink(feature) + '?s=m';
             if (searchSize && searchSize > 1) {
               url += '&searchSize=' + searchSize;
             }
             url += '&date=' + getDate();
-            if ($F('address') && !$F('address').startsWith('Enter ')) {
-              url += '&address=' + encodeURIComponent($F('address'));
-            }
+            url += '&address=' + encodeURIComponent(getAddress());
             window.location = url;
         }
 
@@ -115,7 +120,7 @@
             if (feature.description) {
               c += feature.description;
             }
-            c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + searchSize + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
+            c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
           if (infoWindow) {
             infoWindow.close();
           }
@@ -296,10 +301,10 @@
                       markerClick(s);
                     });
                     tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
+                      '<a href="' + siteLink(s) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '">' + s.address +'</a></div></td><td class="textCenter">' +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
@@ -390,7 +395,7 @@
                 searchLat = results[0].geometry.location.lat();
                 searchLng = results[0].geometry.location.lng();
               } else {
-                $('stresults_div').update("<div class=\"siteOverage\">Your search was too vague - you may need to add a zip code or state to:" + $F('address') + "</div>");
+                $('stresults_div').update("<div class=\"siteOverage\">Your search was too vague - you may need to add a zip code or state to:" + getAddress() + "</div>");
               }
             });
           }
@@ -405,7 +410,7 @@
               selectHandler : function(cal, dateString) {
                 $('date').value = dateString;
                 this.hide();
-                showAddress($F('address'), $F('size'), dateString);
+                showAddress(getAddress(), $F('size'), dateString);
               }
           });
         }
@@ -423,11 +428,11 @@
         function setupForm() {
           $('address').focus();
           $('gsearchBtn').observe('click', function() {
-            showAddress($F('address'), $F('size'), getDate());
+            showAddress(getAddress(), $F('size'), getDate());
           });
           $('address').observe('keypress', function(event) {
             if (event.keyCode == 13) {
-              showAddress($F('address'), $F('size'), getDate());
+              showAddress(getAddress(), $F('size'), getDate());
             }
           });
           $('address').observe('click', function(event) {
@@ -436,33 +441,33 @@
             }
           });
           $('size').observe('change', function() {
-            showAddress($F('address'), $F('size'), getDate());
+            showAddress(getAddress(), $F('size'), getDate());
           });          
         }
 
         function checkMapSubmit() {
-          if (!mapLoaded && $F('address') != '') {
-            showAddress($F('address'), $F('size'), getDate());
+          if (!mapLoaded) {
+            showAddress(getAddress(), $F('size'), getDate());
             mapLoaded = true;
           }
         }
 
         function updateSearchMsg() {
           var msg;
-          var addrValid = !$F('address').startsWith('Enter ');
+          var addrValid = getAddress() && getAddress().length > 0;
           var sizeValid = $F('size') != 1;
           var dateValid = getDate() && getDate().length > 0;
 
           if (addrValid && sizeValid && dateValid) {
             msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
-                    '</span><span class="blue"> unit near </span><span class="green"> ' + $F('address') +
+                    '</span><span class="blue"> unit near </span><span class="green"> ' + getAddress() +
                     '</span><span class="blue"> starting on </span><span class="green">' + getDate() +
                     '</span>';
           } else if (sizeValid) {
             msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
                     '</span>';
             if (addrValid) {
-              msg += '<span class="blue"> unit near </span><span class="green"> ' + $F('address') +
+              msg += '<span class="blue"> unit near </span><span class="green"> ' + getAddress() +
                     '</span><span class="blue">. Please select starting date.</span>';
             } else if (dateValid) {
               msg += '<span class="blue"> starting on </span><span class="green">' + getDate() +
@@ -471,7 +476,7 @@
               msg += '<span class="blue">Please select address or zip and move-in date.</span>';
             }
           } else if (addrValid) {
-            msg = '<span class="blue">Searching near </span><span class="green">' + $F('address') +
+            msg = '<span class="blue">Searching near </span><span class="green">' + getAddress() +
                   '</span>';
             if (dateValid) {
               msg += '<span class="blue"> starting on </span><span class="green">' + getDate() +
