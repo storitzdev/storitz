@@ -395,11 +395,12 @@
 
           <div class="checkout_fields">
             <div style="width:660px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'description', 'errors')}">
+              <fckeditor:config CustomConfigurationsPath="${resource(file:'/js/fckstoritz.js')}"/>
               <fckeditor:editor
                 name="description"
                 width="650"
                 height="300"
-                toolbar="Basic">
+                toolbar="Storitz">
                 ${storageSiteInstance?.description}
               </fckeditor:editor>
             </div>

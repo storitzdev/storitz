@@ -879,7 +879,6 @@ class SiteLinkService {
 
     if (promo) {
 
-      durationMonths = (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth)
       waiveAdmin = promo.waiveAdmin
 
       switch (promo.promoType) {

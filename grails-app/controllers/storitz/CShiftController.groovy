@@ -50,6 +50,38 @@ class CShiftController {
     }
   }
 
+  def refreshPromos = {
+    def cshiftInstance = CenterShift.get(params.id)
+    if (cshiftInstance) {
+      for(site in cshiftInstance.sites) {
+        for(promo in site.specialOffers) {
+          promo.delete()
+        }
+        site.specialOffers.clear()
+        CShiftService.loadPromos(cshiftInstance, site)
+        println "Promos refreshed for ${site.title}"
+      }
+      flash.message = "Feed promotions refreshed."
+      redirect(action: "show", id: cshiftInstance.id)
+    }
+  }
+
+  def refreshInsurance = {
+    def cshiftInstance = CenterShift.get(params.id)
+    if (cshiftInstance) {
+      for(site in cshiftInstance.sites) {
+        for(ins in site.insurances) {
+          ins.delete()
+        }
+        site.insurances.clear()
+        CShiftService.loadInsurance(cshiftInstance, site)
+        println "Insurance refreshed for ${site.title}"
+      }
+      flash.message = "Feed insurance refreshed."
+      redirect(action: "show", id: cshiftInstance.id)
+    }
+  }
+
   def show = {
     def cshiftInstance = CenterShift.get(params.id)
     if (!cshiftInstance) {

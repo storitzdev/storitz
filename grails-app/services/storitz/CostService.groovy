@@ -18,6 +18,9 @@ class CostService {
         case "SL":
           return siteLinkService.calculateMoveInCost(site, unit, promo, ins)
 
+        case "CS3":
+          return CShiftService.calculateMoveInCost(site, unit, promo, ins)
+
         default:
           throw new Exception("Unknown service for move in cost calculation")
       }
@@ -29,6 +32,9 @@ class CostService {
 
       case "SL":
         return siteLinkService.calculateTotals(site, unit, promo, ins)
+
+      case "CS3":
+        return CShiftService.calculateTotals(site, unit, promo, ins)
 
       default:
         throw new Exception("Unknown service totals calculation")
@@ -42,6 +48,9 @@ class CostService {
 
         case "SL":
           return siteLinkService.calculatePaidThruDate(site, promo, moveInDate)
+
+        case "CS3":
+          return CShiftService.calculatePaidThruDate(site, promo, moveInDate)
 
         default:
           throw new Exception("Unknown service for paid thru date")

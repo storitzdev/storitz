@@ -46,6 +46,8 @@
     var ajaxFormDirty = false;
     var ajaxFormNewValues;
     var ajaxFormOldValues = new Hash().toJSON();
+    var activeTab;
+    var allTabs;
 
 
     <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
@@ -194,38 +196,37 @@
       });
     }
 
-    function directionTab() {
-      $('direction_button').observe('click', function() {
-        $('photo_button').removeClassName('tab_button_on');
-        $('photo_button').removeClassName('button_text_hi');
-        $('photo_button').addClassName('tab_button_off');
-        $('photo_button').addClassName('button_text');
-        $('direction_button').removeClassName('tab_button_off');
-        $('direction_button').removeClassName('button_text');
-        $('direction_button').addClassName('tab_button_on');
-        $('direction_button').addClassName('button_text_hi');
-        $('photos').hide();
-        $('directions').show();
-      })
-    }
+    function setupTabs() {
+      activeTab = $('tabSet').select('[class~="tab_on"]')[0];
+      allTabs = $('tabSet').select('[class~="tab_off"]');
+      allTabs.push(activeTab);
 
-    function photoTab() {
-      $('photo_button').observe('click', function() {
-        $('direction_button').removeClassName('tab_button_on');
-        $('direction_button').removeClassName('button_text_hi');
-        $('direction_button').addClassName('tab_button_off');
-        $('direction_button').addClassName('button_text');
-        $('photo_button').removeClassName('tab_button_off');
-        $('photo_button').removeClassName('button_text');
-        $('photo_button').addClassName('tab_button_on');
-        $('photo_button').addClassName('button_text_hi');
-        $('directions').hide();
-        $('photos').show();
-      })
+      allTabs.each(function(elem) {
+         elem.observe('click', function(event) {
+           var evElem = Event.element(event);
+           if (evElem != activeTab) {
+             // remove tab_ from front of tab element id
+             var activeTabName = activeTab.id.substring(4);
+             var newTabName = evElem.id.substring(4);
+             $(activeTabName).hide();
+             activeTab.removeClassName('tab_on');
+             activeTab.removeClassName('button_text');
+             activeTab.addClassName('tab_off');
+             activeTab.addClassName('button_text_hi');
+             evElem.removeClassName('tab_off');
+             evElem.removeClassName('button_text_hi');
+             evElem.addClassName('tab_on');
+             evElem.addClassName('button_text');
+             $(newTabName).show();
+             activeTab = evElem;
+           }
+         })
+      });
     }
 
     function rentmeClick() {
       $('rentme').observe('click', function() {
+        // TODO - check if all things are cleared
         $('sizeHelp').hide();
         $('rentalForm').show();
         $('detailInfo').hide();
@@ -233,8 +234,6 @@
     }
 
     function details_return() {
-      $('left_info').show();
-      $('left_checkout_info').hide();
       $('rentalForm').hide();
       $('detailInfo').show();
     }
@@ -543,8 +542,7 @@
     updateTransaction();
     setupSize();
     setupHelp();
-    directionTab();
-    photoTab();
+    setupTabs();
     getDirections();
     idTypeClick();
     rentmeClick();
@@ -553,7 +551,10 @@
     primaryCountryClick();
     secondaryCountryClick();
     <g:if test="${site.requiresInsurance}">
-    insuranceClick();
+      insuranceClick();
+    </g:if>
+    <g:if test="${params.returnForm}">
+      details_return();
     </g:if>
     rightArrowClick();
     leftArrowClick();
@@ -596,15 +597,54 @@
             <div id="transaction">
               <g:render template="/transaction" />
             </div>
+
+            <div style="height:25px;"></div>
             
-            <div id="map">
-              <img src="http://maps.google.com/maps/api/staticmap?zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.getFullAddress().encodeAsURL()}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
-            </div>
             <div id="detail_tabs">
-              <div id="photo_button" class="left tab_button_on button_text_hi">Photos</div><div id="direction_button" class="right tab_button_off button_text">Directions</div>
-              <div style="clear: both;"></div>
-              <div id="photos">
-                <div id="imgFrame">
+              <div id="tabSet" style="width:650px;border-bottom:1px solid #dfdfdf;">
+                <div id="tab_description" class="left tab_on button_text">Description</div>
+                <div id="tab_photos" class="left tab_off button_text_hi">Photos</div>
+                <div id="tab_directions" class="left tab_off button_text_hi">Map &amp; Directions</div>
+                <div style="clear: both;"></div>
+              </div>
+              <div id="description" style="width:650px; margin-top:20px;">
+                <div class="left">
+                  <g:if test="${site.coverImage()}">
+                    <img src="${resource(file: site.coverImage())}" alt="${site.title}" style="width:240px; height:160px; margin: 0 20px 20px 20px;">
+                  </g:if>
+                  <div class="descriptionTitle">
+                    ${site.title}
+                  </div>
+                  <div>
+                    ${site.address}${site.address2 && site.address2.size() > 0 ? '&nbsp;' + site.address2 : ''}, ${site.city}, ${site.state.display} ${site.zipcode}
+                  </div>
+                  <div style="margin: 15px">
+                    ${site.description}
+                  </div>
+                  <div id="featuresList">
+                    <ul>
+                      <li class="safety">Safety/Security</li>
+                      <g:each in="${site.securityItems}" status="i" var="item">
+                        <li ${i == site.securityItems.size() -1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
+                      </g:each>
+                    </ul>
+                    <ul>
+                      <li class="convenience">Convenience</li>
+                      <g:each in="${site.convenienceItems}" status="i" var="item">
+                        <li ${i == site.convenienceItems.size() -1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
+                      </g:each>
+                    </ul>
+                    <ul>
+                      <li class="amenities">Amenities</li>
+                      <g:each in="${site.amenityItems}" status="i" var="item">
+                        <li ${i == site.amenityItems.size() -1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li> 
+                      </g:each>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div id="photos" style="width:650px;margin-top: 20px;;display:none;">
+                <div id="imgFrame" style="margin: 0 auto;">
                   <g:if test="${site.siteImages().size() > 0}">
                       <img src="${resource(file:site.coverImage().mid())}" style="display:block;margin:auto;" alt=""/>
                   </g:if>
@@ -628,6 +668,9 @@
                 <div style="clear: both;height: 5px;"></div>
               </div>
               <div id="directions" style="display:none;">
+                <div id="map">
+                  <img src="http://maps.google.com/maps/api/staticmap?zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.getFullAddress().encodeAsURL()}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+                </div>
                 <div>
                   <label for="srcAddr">Start Address:</label> <input type="text" name="srcAddr" id="srcAddr"/>
                 </div>
@@ -638,36 +681,6 @@
               </div>
             </div>
             <div style="clear:both;"></div>
-            <table id="price_table">
-              <thead>
-                <tr class="price_options">
-                  <th style="width:200px; text-align: left; padding-left:20px;">Details</th>
-                  <th style="width:100px;">Months</th>
-                  <th style="width:200px; text-align: right;">Monthly Rent</th>
-                  <th style="width:166px; text-align: right;">Total Rent</th>
-                </tr>
-              </thead>
-              <tbody id="price_body">
-              </tbody>
-            </table>
-            <div style="height: 10px;"></div>
-            <table id="price_totals">
-              <tbody id="price_totals_body">
-              </tbody>
-              <tr class="price_options">
-                <th style="width: 500px; text-align: left; padding-left:20px;">Total Move-In Cost:</th>
-                <th id="price_total" class="price_text" style="width:166px; padding-right: 20px;"></th>
-              </tr>
-            </table>
-            <div style="height:15px;"></div>
-            <div class="left">
-              <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
-                <img src="${resource(dir:'images', file:'btn-previous2.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
-              </g:link>
-            </div>
-            <div id="rentmeBtn" style="float: right; margin-right: 20px; display: none;">
-              <img id="rentme" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
-            </div>
           </div>
 
           <div id="rentalForm" style="display: none;">
@@ -870,8 +883,8 @@
                   <div style="clear:both;"></div>
                 </div>
                 <div style="margin-top: 20px;">
-                  <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
-                  <div class="right"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
+                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
@@ -1008,8 +1021,8 @@
                   <div style="clear:both;"></div>
                 </div>
                 <div style="margin-top: 20px;">
-                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
-                  <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
+                  <div class="right" style="margin-left:20px;"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep2(); return false" alt="Next"></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep2(); return false" alt="Prev"></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
@@ -1151,8 +1164,8 @@
                   </div>
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
-                  <div class="right" style="margin-left:20px;"><img src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
-                  <div class="left"><img src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
+                  <div class="right" style="margin-left:20px;"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>

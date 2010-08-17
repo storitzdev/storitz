@@ -652,12 +652,13 @@ class CShiftService {
         specialOffer.featured = false;
         specialOffer.waiveAdmin = false;
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
-        specialOffer.inMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
-        specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) - specialOffer.inMonth : 0
+        specialOffer.expireMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
+        specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) : 1
         specialOffer.description = description
         specialOffer.promoName = promo.'promo-name'.text()
-        specialOffer.expireMonth = 0
-        specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal
+        specialOffer.inMonth = 0
+        specialOffer.promoQty = promo.'discount-min'.text() as BigDecimal
+        if (specialOffer.promoQty == 0) specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal 
 
         def ptype = promo.'discount-type'.text()
         switch (ptype) {
@@ -691,9 +692,8 @@ class CShiftService {
     //invoke business method
     def insOptions = port.getInsuranceOptions(cshift.userName, cshift.pin, site.sourceId)
 
-    println "insOptions = ${insOptions.dump()}"
-
     if (insOptions instanceof Integer && insOptions < 0) {
+      println "Return for insurance < 0 : ${insOptions}"
       return 0
     }
     
@@ -716,6 +716,9 @@ class CShiftService {
         if (!ins.save()) {
           ins.errors.allErrors.each { println it }
         }
+
+        println "Adding new insurance: ${ins.dump()}"
+        
         site.addToInsurances(ins)
       }
       return optionSize
@@ -723,7 +726,90 @@ class CShiftService {
       println "Could not obtain insurance information"
       return 0
     }
+  }
+
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+    def durationMonths = 1
+    def offerDiscount = 0
+    def premium = ins ? ins.premium : 0
+    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
+    def adminFee = site.adminFee ? site.adminFee : 0
+    def waiveAdmin = false
+
+    if (promo) {
+
+      durationMonths = [promo.prepayMonths, promo.expireMonth].max()
+      def promoMonths = (promo.expireMonth > durationMonths || promo.expireMonth <= 0) ? durationMonths : promo.expireMonth
+      waiveAdmin = promo.waiveAdmin
+
+      switch (promo.promoType) {
+        case "AMOUNT_OFF":
+          offerDiscount = promo.promoQty * promoMonths;
+          break;
+
+        case "PERCENT_OFF":
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
+          if (promo.promoQty > 25 && durationMonths == 1) durationMonths++
+          break;
+
+        case "FIXED_RATE":
+          offerDiscount = (unit.price - promo.promoQty) * promoMonths;
+          break;
+      }
+    }
+    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit.price + premium)*durationMonths - offerDiscount;
 
   }
+
+  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
+    // TODO - handle prorated payments
+    def durationMonths = promo ? [promo.prepayMonths, promo.expireMonth].max() : 1;
+    if (promo && promo.promoType == "PERCENT_OFF" && promo.promoQty > 25 && durationMonths == 1) durationMonths++
+    def cal = new GregorianCalendar()
+    cal.setTime(moveInDate)
+    cal.add(Calendar.MONTH, durationMonths)
+    return cal.time
+  }
+
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+    def ret = [:]
+    def durationMonths = promo ? [promo.prepayMonths, promo.expireMonth].max() : 1;
+    def offerDiscount = 0
+    def premium = ins ? ins.premium : 0
+    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
+    def adminFee = site.adminFee ? site.adminFee : 0
+    def waiveAdmin = false
+
+    if (promo) {
+
+      waiveAdmin = promo.waiveAdmin
+      def promoMonths = promo.expireMonth > durationMonths || promo.expireMonth <= 0 ? durationMonths : promo.expireMonth
+
+      switch (promo.promoType) {
+        case "AMOUNT_OFF":
+          offerDiscount = promo.promoQty * promoMonths;
+          break;
+
+        case "PERCENT_OFF":
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
+          if (promo.promoQty > 25 && durationMonths == 1) durationMonths++
+          break;
+
+        case "FIXED_RATE":
+          offerDiscount = (unit.price - promo.promoQty) * promoMonths;
+          break;
+      }
+    }
+    def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
+    def moveInTotal = feesTotal + (unit.price + premium)*durationMonths - offerDiscount;
+
+    ret["durationMonths"] = durationMonths
+    ret["discountTotal"] = offerDiscount
+    ret["feesTotal"] = feesTotal
+    ret["moveInTotal"] = moveInTotal
+
+    return ret
+  }
+
 }
 

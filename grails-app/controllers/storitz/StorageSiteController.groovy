@@ -402,6 +402,9 @@ class StorageSiteController {
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
       bestUnit = site.units.findAll{ it.getUnitTypeLower() == params.unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+      if (!bestUnit) {
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+      }
     } else if (unitSize) {
       bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
     } else {

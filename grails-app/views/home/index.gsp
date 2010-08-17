@@ -90,7 +90,7 @@
           if ($F('date') && !$F('date').startsWith('Select')) {
             return $F('date');
           }
-          return null;
+          return '';
         }
 
         function markerClick(feature) {
@@ -297,9 +297,9 @@
                     });
                     tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
                       '<a href="' + siteLink(s) + '?searchSize=' + searchSize + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper&searchSize=' + searchSize + '&date=' + $F('date') + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
                       '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
@@ -405,7 +405,7 @@
               selectHandler : function(cal, dateString) {
                 $('date').value = dateString;
                 this.hide();
-                showAddress($F('address'), $F('size'), $F('date'));
+                showAddress($F('address'), $F('size'), dateString);
               }
           });
         }
@@ -442,7 +442,7 @@
 
         function checkMapSubmit() {
           if (!mapLoaded && $F('address') != '') {
-            showAddress($F('address'), $F('size'), $F('date'));
+            showAddress($F('address'), $F('size'), getDate());
             mapLoaded = true;
           }
         }

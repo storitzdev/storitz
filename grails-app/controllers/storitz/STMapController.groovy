@@ -60,7 +60,6 @@ class STMapController {
 
       def unitMap = [:]
 
-
       def sw = new StringWriter()
       sw << "[ "
       if (results.size() < 20) {
