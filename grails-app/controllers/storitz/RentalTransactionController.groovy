@@ -149,8 +149,8 @@ class RentalTransactionController {
       }
 
       rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
-      rentalTransactionInstance.unitId = params.unitId
-      rentalTransactionInstance.promoId = params.promoId
+      rentalTransactionInstance.unitId = params.unitId as Long
+      rentalTransactionInstance.promoId = params.promoId as Long
 
       def promo = null
       if (!rentalTransactionInstance.promoId == -999) {
@@ -251,6 +251,7 @@ class RentalTransactionController {
         return
       }
 
+      println "Dump of rental transaction: ${rentalTransactionInstance.dump()}"
       // TODO - notifications
       
       def ccString = "XXXX XXXX XXXX "

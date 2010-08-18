@@ -383,27 +383,6 @@
       }
     }
 
-    function setupCalendar() {
-      $('moveInDate').value = startDate;
-
-      Calendar.setup({
-          dateField     : 'date',
-          triggerElement: 'calendarPic',
-          dateFormat    : '%m/%d/%y',
-          selectHandler :  function(cal, dateString) {
-            this.hide();
-            startDate = dateString;
-            $('SC_date').value = startDate;
-            $('moveInDate').value = startDate;
-            $('transMoveInDate').update(startDate);
-            var paidThru = Date.parseDate(startDate, "%m/%d/%y");
-            paidThru.setMonth( paidThru.getMonth() + durationMonths);
-            $('paidThruDate').update(paidThru.print("%o/%d/%y"))
-          }
-      });
-    }
-
-
   function showImage(img, newElem) {
     $$('img.gallerySelected').each(function(elem) {
       elem.removeClassName('gallerySelected');
