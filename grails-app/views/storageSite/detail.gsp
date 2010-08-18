@@ -22,6 +22,11 @@
     var startDate = "${params.date && params.date != 'null' ? params.date : new Date().format('MM/dd/yy')}";
     var galleryImageNum = 0;
 
+    var markerImageGreen;
+    var markerImageGray;
+
+    var directionMap;
+
     // vars set by callback
     var durationMonths = 1;
     var monthlyRent = ${monthlyRate};
@@ -163,11 +168,31 @@
       });
     }
 
-    function createMap() {
+    function createMap() {}
+
+    function createDirectionMap() {
+
+      $('directionMapDestination').hide();
+      $('dirPanel').hide();
+
       destLatLng = new google.maps.LatLng(${site.lat}, ${site.lng});
+
+      directionMap = new google.maps.Map(document.getElementById("directionMapCanvas"),
+        {
+          zoom: 12,
+          center: destLatLng,
+          draggable: false,
+          mapTypeControl: false,
+          navigationControl: false,
+          scrollwheel: false,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        }
+      );
+
       directionsService = new google.maps.DirectionsService();
-      directionsDisplay = new google.maps.DirectionsRenderer();
-      directionsDisplay.setPanel($('dirPanel'));
+      // directionsDisplay = new google.maps.DirectionsRenderer();
+      // directionsDisplay.setPanel($('dirPanel'));
+      // directionsDisplay.setMap(directionMap);
     }
 
     function setupHelp() {
@@ -180,19 +205,116 @@
       });
     }
 
+    function drawDirections(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        var polyline = new google.maps.Polyline({
+					path: [],
+					strokeColor: '#3bad00',
+					strokeWeight: 3
+	    });
+        var bounds = new google.maps.LatLngBounds();
+        var route = response.routes[0];
+        var legs = route.legs;
+        var startLocation = new Object();
+        var endLocation = new Object();
+
+        $('directionsSteps').childElements().each(function(elem) { elem.remove() });
+
+        for (i=0;i<legs.length;i++) {
+          if (i == 0) { 
+            startLocation.latlng = legs[i].start_location;
+            startLocation.address = legs[i].start_address;
+            new google.maps.Marker({
+              map: directionMap,
+              clickable:false,
+              title: "Start",
+              position: startLocation.latlng,
+              icon: markerImageBlue
+            });
+            if (legs[i].distance && legs[i].duration) {
+              $('directionsDistance').update('Total distance: ' + legs[i].distance.text + ' in approximately ' + legs[i].duration.text);
+            }
+          }
+          endLocation.latlng = legs[i].end_location;
+          endLocation.address = legs[i].end_address;
+          var steps = legs[i].steps;
+          var elem;
+          for (j=0;j<steps.length;j++) {
+            var nextSegment = steps[j].path;
+            var durationText = steps[j].duration.text ? steps[j].duration.text : "&nbsp;";
+            var distanceText = steps[j].distance.text ? steps[j].distance.text : "&nbsp;";
+            elem = new Element('li', { class: "directionStep" })
+                    .insert(new Element('div', { class:"left", style: "width:400px;" }).update(steps[j].instructions))
+                    .insert(new Element('div', { class:"right", style:"width: 75px; text-align:right;"}).update(distanceText))
+                    .insert(new Element('div', { class:"right", style:"width: 75px; text-align:right;"}).update(durationText))
+                    .insert(new Element('div', { style:"clear:both; margin-left: -35px; padding-bottom: 15px; width: 650px; border-bottom: 1px solid #dfdfdf;"}));
+
+            $('directionsSteps').insert(elem);
+            for (k=0;k<nextSegment.length;k++) {
+              polyline.getPath().push(nextSegment[k]);
+              bounds.extend(nextSegment[k]);
+            }
+          }
+        }
+        polyline.setMap(directionMap);
+        directionMap.fitBounds(bounds);
+
+        new google.maps.Marker({
+          map: directionMap,
+          clickable:false,
+          title: "${site.title}",
+          position: endLocation.latlng,
+          icon: markerImageGreen
+        });
+        $('directionsStartAddr').update(startLocation.address);
+        $('directionsEndAddr').update(endLocation.address);
+        $('dirPanel').show();
+
+        $('directionMapDestination').show();
+        var directionMapDestination = new google.maps.Map(document.getElementById("directionMapDestinationCanvas"),
+          {
+            zoom: 15,
+            center: destLatLng,
+            draggable: false,
+            mapTypeControl: false,
+            navigationControl: false,
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+        );
+        var destMarker = new google.maps.Marker({
+          map: directionMapDestination,
+          title: "${site.title}",
+          position: destLatLng,
+          icon: markerImageGreen
+        });
+
+      }
+    }
+
     function getDirections() {
+      markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_grn.png')}', null, null, new google.maps.Point(1, 32));
+      markerImageBlue = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_blue.png')}', null, null, new google.maps.Point(1, 32));
+
+      $('srcAddr').observe('keypress', function(event) {
+        if (event.keyCode == 13) {
+          var request = {
+                  origin:$F('srcAddr'),
+                  destination:destLatLng,
+                  unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
+                  travelMode: google.maps.DirectionsTravelMode.DRIVING
+              };
+              directionsService.route(request,  drawDirections);
+        }
+      });
       $('get_directions').observe('click', function() {
         var request = {
                 origin:$F('srcAddr'),
                 destination:destLatLng,
+                unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
                 travelMode: google.maps.DirectionsTravelMode.DRIVING
             };
-            directionsService.route(request, function(response, status) {
-              if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-              }
-            });
-
+            directionsService.route(request,  drawDirections);
       });
     }
 
@@ -218,6 +340,9 @@
              evElem.addClassName('tab_on');
              evElem.addClassName('button_text');
              $(newTabName).show();
+             if (newTabName == 'directions') {
+               createDirectionMap();
+             }
              activeTab = evElem;
            }
          })
@@ -433,7 +558,7 @@
 
   function rightArrowClick() {
     $('rightArrow').observe('click', function() {
-      if (galleryImageNum < (${site.siteImages().size()} - 4)) {
+      if (galleryImageNum < (${site.siteImages().size()} - 8)) {
         galleryImageNum++;
         new Effect.Move('items', { x: -62, y:0, mode:'relative'});
         if (galleryImageNum >= (${site.siteImages().size()} - 4)) {
@@ -457,7 +582,7 @@
 
   function leftArrowClick() {
     $('leftArrow').observe('click', function() {
-      if ((${site.siteImages().size()}) > 4 && galleryImageNum > 0) {
+      if ((${site.siteImages().size()}) > 8 && galleryImageNum > 0) {
         galleryImageNum--;
         new Effect.Move('items', { x: 62, y:0, mode:'relative'});
         if (galleryImageNum < (${site.siteImages().size()} - 4)) {
@@ -560,7 +685,6 @@
     leftArrowClick();
     ajaxFormUpdate();
     ajaxServerPoll();
-    createMap();
   });
 
 //]]>
@@ -620,7 +744,7 @@
                   <p style="margin: 0;">
                     ${site.address}${site.address2 && site.address2.size() > 0 ? '&nbsp;' + site.address2 : ''}, ${site.city}, ${site.state.display} ${site.zipcode}
                   </p>
-                  <p style="margin: 15px">
+                  <p class="descriptionText" style="margin: 18px">
                     ${site.description}
                   </p>
                   <div style="clear:both;"></div>
@@ -671,16 +795,53 @@
                 <div style="clear: both;height: 5px;"></div>
               </div>
               <div id="directions" style="display:none;">
-                <div id="map">
-                  <img src="http://maps.google.com/maps/api/staticmap?zoom=15&size=314x265&maptype=roadmap&markers=icon:${resource(absolute: true, dir:'images', file:'icn_static.png')}|${site.getFullAddress().encodeAsURL()}&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA" alt="Map of ${site.title}"/>
+                <div id="directionMap">
+                  <div id="directionMapCanvas"></div>
                 </div>
-                <div>
-                  <label for="srcAddr">Start Address:</label> <input type="text" name="srcAddr" id="srcAddr"/>
+                <div class="price_options checkout_header white">
+                  Driving Directions
                 </div>
-                <div>
-                  <label for="get_directions"></label><input id="get_directions" type="button" name="getDirections" value="Get Directions"/>
+                <div class="formInstructions">
+                  Enter your starting address to get driving directions to this facility.
                 </div>
-                <div id="dirPanel"></div>
+                <div class="left checkout_fields">
+                  <div style="width:350px;" class="checkout_value">
+                    <g:textField id="srcAddr" name="srcAddr" style="width: 330px;" />
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div style="margin-top:0;" class="left">
+                  <input src="${resource(dir:'images', file:'btn-find-it.png')}" style="width:108px;border:none;" id="get_directions" type="image" name="getDirections" value="Get Directions"/>
+                </div>
+                <div class="checkout_labels">
+                  <div class="checkout_name" style="width:400px; margin-top: -10px;">
+                    <label for="srcAddr">Enter start address</label>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div style="clear:both;"></div>
+                <div id="dirPanel" style="display:none;">
+                  <div class="specialOfferText" id="directionsDistance" style="margin: 6px 0;"></div>
+                  <div class="transBox">
+                    <div class="left" style="margin:5px 15px;">
+                      <img src="${resource(dir:'images', file:'icn_map_blue.png')}" alt="Start">
+                    </div>
+                    <div id="directionsStartAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
+                    <div style="clear:both;"></div>
+                  </div>
+                  <ol id="directionsSteps" style="width:600px; margin: 15px 10px 15px 0;">
+                  </ol>
+                  <div class="transBox">
+                    <div class="left" style="margin:5px 15px;">
+                      <img src="${resource(dir:'images', file:'icn_map_grn.png')}" alt="End">
+                    </div>
+                    <div id="directionsEndAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
+                    <div style="clear:both;"></div>
+                  </div>
+                </div>
+                <div id="directionMapDestination" style="display:none;">
+                  <div id="directionMapDestinationCanvas"></div>
+                </div>
               </div>
             </div>
             <div style="clear:both;"></div>

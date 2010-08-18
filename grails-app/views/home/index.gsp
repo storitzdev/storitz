@@ -344,12 +344,14 @@
                 myOptions = {
                   zoom: 12,
                   center: iploc,
+                  scrollwheel: false,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };
               } else {
                 myOptions = {
                   zoom: 12,
+                  scrollwheel: false,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
                 };

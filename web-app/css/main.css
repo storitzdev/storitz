@@ -346,17 +346,10 @@ div.resultsBar {
     width: 950px;
 }
 
-#price_table, #price_totals {
-    color: #154b99;
-    font-size: 12px;
-    font-weight: bold;
-    width: 666px;
-}
-
 .checkout_header {
     font-size: 12px;
     font-weight: bold;
-    width: 666px;
+    width: 650px;
     padding-top: 8px;
     padding-left: 10px;
 }
@@ -366,7 +359,7 @@ div.resultsBar {
     color: #154b99;
     font-weight: bold;
     font: 13px verdana, arial, helvetica, sans-serif;
-    width: 646px;
+    width: 630px;
     height: 30px;
     line-height: 30px;
     padding-left: 20px;
@@ -383,10 +376,7 @@ div.resultsBar {
     color: #154A99;
 }
 
-#price_table thead, #price_totals th, table.checkout_table thead {
-    color: white;
-}
-#price_table td, #price_table th, #price_totals th, #price_totals td, #checkout_price_totals th, #checkout_price_totals td, #rentalForm td, #rentalForm th {
+#rentalForm td, #rentalForm th {
 	padding: 0.5em;
 	border: 0;
     display: table-cell;
@@ -394,21 +384,11 @@ div.resultsBar {
 	/*white-space: nowrap;
 	overflow: hidden;*/
 }
-#checkout_price_table, #checkout_price_totals {
-    color: #154b99;
-}
 
 #stresults_div td, #stresults_div th {
     border: 0;
     display: table-cell;
     border-collapse: collapse;
-}
-
-#checkout_price_table th, #checkout_price_table td {
-    padding: 0 0.5em;
-    border: 0;
-    /*white-space: nowrap;
-    overflow: hidden;*/
 }
 
 #costTotals td {
@@ -418,25 +398,6 @@ div.resultsBar {
     border-collapse: collapse;
     /*white-space: nowrap;
     overflow: hidden;*/
-}
-
-#checkout_price_totals tr {
-    border-left: #154A99 1px solid;
-}
-
-#price_totals td {
-    padding: 15px 20px;
-}
-
-#checkout_price_totals_body td.borderRight {
-    border-right: #154A99 1px solid;
-}
-
-#checkout_price_totals td {
-    border-left: 0;
-    border-right: 0;
-    padding-bottom: 10px;
-    padding-top: 10px;
 }
 
 #instructions {
@@ -569,12 +530,17 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     padding: 0.5em 0;
 }
 
-#map {
-    background: url(../images/map-frame.png) no-repeat;
-    width: 334px;
-    height: 285px;
+#directionMap, #directionMapDestination {
+    background: #fff url(../images/map-frame-650.png) no-repeat;
+    width: 650px;
+    height: 339px;
     padding: 10px;
-    float: right;    
+    margin: 20px 0;
+}
+
+#directionMapCanvas, #directionMapDestinationCanvas {
+    width: 630px;
+    height: 319px;
 }
 
 #site_address {
@@ -605,11 +571,6 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     height: 29px;
     margin: 0 5px -1px 0;
     cursor:pointer;
-}
-
-#directions {
-    padding: 0.5em;
-    width: 260px;
 }
 
 .tab_off {
@@ -703,7 +664,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     font-size: 10px;
     font-weight: normal;
     padding-bottom: 1em;
-    width: 666px;
+    width: 650px;
 }
 
 .other_details {
@@ -744,8 +705,8 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 }
 
 .price_options {
-    background: url(../images/bkg-tablehead-666x30.gif) no-repeat;
-    width: 666px;
+    background: url(../images/bkg-tablehead-650x30.gif) no-repeat;
+    width: 650px;
     height: 30px;
     line-height: 20px;
     display: block;
@@ -771,7 +732,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     color: #000;
 }
 
-#price_total {
+#price_total, .directionsAddress {
     font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
 }
@@ -815,7 +776,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 #thumbWrapper {
 	overflow:hidden;
 	padding:4px 2px;
-	width: 236px;
+	width: 472px;
 	float:left;
 	height:46px;
 	position: relative;
@@ -1030,10 +991,25 @@ p.footer {
     font-weight: bold;
 }
 
-.descriptionTitle, .transTotalMoveIn, .transTotalMoveIn a {
+.transTotalMoveIn, .transTotalMoveIn a {
     color: #134a9a;
     font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+}
+
+.descriptionTitle {
+    color: #134a9a;
+    font: 14px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.descriptionText {
+    font: 11px verdana, arial, helvetica, sans-serif;
+    line-height: 20px;
+}
+
+p.descriptionText {
+    padding-bottom: 9px;
 }
 
 .offerLink {
@@ -1112,7 +1088,7 @@ p.footer {
 	vertical-align:middle;
 }
 #featuresList li.convenience {
-	background:url(../images/icon-convenience-time.png) no-repeat left center;
+	background:url(../images/icon-convenience.png) no-repeat left center;
 	border-bottom: 1px solid #dfdfdf;
 	border-top:none;
 	color:#134b98;
@@ -1123,7 +1099,7 @@ p.footer {
 	vertical-align:middle;
 }
 #featuresList li.amenities {
-	background:url(../images/icon-amenities-snowflake.png) no-repeat left center;
+	background:url(../images/icon-checkmark.png) no-repeat left center;
 	border-bottom: 1px solid #dfdfdf;
 	border-top:none;
 	color:#134b98;
@@ -1145,4 +1121,9 @@ p.footer {
 #featuresList a:hover {
 	color:#4595df;
 	text-decoration:underline;
+}
+
+#directionsSteps li {
+    margin: 15px 0;
+    font-size: 13px;
 }
