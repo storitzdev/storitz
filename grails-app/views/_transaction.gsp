@@ -83,12 +83,12 @@
     <div id="specialOffers" class="left offerList" style="margin-left: 10px;">
       <div>
         <g:each in="${site.featuredOffers()}" var="offer">
-          <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
+          <p><input type="radio" name="specialOffer" value="${offer.id}" ${promoId == offer.id ? 'checked="checked"' : ''}/> ${offer.promoName} </p>
         </g:each>
       </div>
       <div id="nonFeaturedOffers" style="display:none">
         <g:each in="${site.nonFeaturedOffers()}" var="offer">
-          <p><input type="radio" name="specialOffer" value="${offer.id}"/> ${offer.promoName} </p>
+          <p><input type="radio" name="specialOffer" value="${offer.id}" ${promoId == offer.id ? 'checked="checked"' : ''}/> ${offer.promoName} </p>
         </g:each>
       </div>
     </div>
@@ -102,8 +102,7 @@
           Move-In Date:
         </div>
         <div style="clear:both;"></div>
-        <div class="transDate" id="moveInDate">
-          
+        <div class="transDate" id="transMoveInDate">
         </div>
       </div>
       <div class="left" style="margin-left: 25px;">
@@ -111,7 +110,6 @@
           Paid Through:
         </div>
         <div class="transDate" id="paidThruDate">
-          
         </div>
       </div>
     </div>

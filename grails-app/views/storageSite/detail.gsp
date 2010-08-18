@@ -10,161 +10,28 @@
 
     var directionsService;
     var directionsDisplay;
-    var storageSize = [];
     var premiums = [];
-    var searchSize = ${searchSize};
-    var sizeDescription;
-    var unitId;
-    var siteId = ${params.id};
-    var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
-    var adminFee = ${site.adminFee ? site.adminFee : 0};
     var destLatLng;
-    var startDate = "${params.date && params.date != 'null' ? params.date : new Date().format('MM/dd/yy')}";
     var galleryImageNum = 0;
+    var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
+    var siteId = ${params.id};
 
     var markerImageGreen;
     var markerImageGray;
 
     var directionMap;
 
-    // vars set by callback
-    var durationMonths = 1;
-    var monthlyRent = ${monthlyRate};
-    var pushRate = ${pushRate};
-    var chosenPromo = '';
-    var chosenPromoId = -999;
-    var totalMoveInCost = additionalFees + monthlyRent;
-    var unitTypes = [];
-    <g:each var="unitType" status="i" in="${unitTypes}">
-      unitTypes[${i}] = ${unitType};
-    </g:each>
-    var discountTotal = 0;
-    var chosenUnitType = '${chosenUnitType}';
-    var insuranceId = -999;
-    var premium = 0;
-
     var priceDriveup = ${rentalTransaction?.priceDriveup ? "true" : "false"};
     var priceInterior = ${rentalTransaction?.priceInterior ? "true" : "false"};
     var priceUpper = ${rentalTransaction?.priceUpper ? "true" : "false"};
 
-    var ajaxFormUpdateTimer;
-    var ajaxFormDirty = false;
-    var ajaxFormNewValues;
-    var ajaxFormOldValues = new Hash().toJSON();
-    var activeTab;
-    var allTabs;
-
-
-    <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
-    <g:if test="${params.searchSize}">
-      searchSize = ${params.searchSize};
-      sizeDescription = storageSize[ ${params.searchSize} ];
-    </g:if>
-
-    function setupSize() {
-      if (searchSize && searchSize > 1) {
-      } else if ($F('unitsize')) {
-        searchSize = $F('unitsize');
-        searchDescription = storageSize[$F('unitsize')];
-      }
-    }
-
-    function updateTransaction() {
-      // update dropdowns
-      $('unitType').childElements().each(function(elem) { elem.remove(); });
-      unitTypes.each(function (unitType) {
-         var opt = new Element("option", {
-           selected: unitType.type == chosenUnitType,
-           value: unitType.type
-         });
-         opt.update(unitType.value);
-         $('unitType').insert(opt);
-      });
-
-      // update dates
-      $('moveInDate').update(startDate);
-      var paidThru = Date.parseDate(startDate, "%m/%d/%y");
-      paidThru.setMonth( paidThru.getMonth() + durationMonths);
-      $('paidThruDate').update(paidThru.print("%o/%d/%y"))
-
-      // update prices
-      if (pushRate < monthlyRent) {
-        $('regPrice').update('$' + monthlyRent.toFixed(2));
-        $('pushPrice').update('$' + pushRate.toFixed(2));
-      } else {
-        $('regPrice').update('');
-        $('pushPrice').update('$' + monthlyRent.toFixed(2));
-      }
-
-      // update promo
-      $('selectedOffer').update(chosenPromo);
-
-      // update costs
-      $('totalMoveInCost').update('$' + totalMoveInCost.toFixed(2));
-      $('monthlyDuration').update(durationMonths);
-      $('monthlyPerMonth').update('$' + pushRate.toFixed(2));
-      $('monthlyTotal').update('$' + (pushRate * durationMonths).toFixed(2));
-      // insurance cost
-      $('insuranceDuration').update(durationMonths);
-      $('insurancePerMonth').update('$' + premium.toFixed(2));
-      $('insuranceTotal').update('$' + (premium * durationMonths).toFixed(2));
-      if (premium > 0) {
-        $('insuranceBlock').show();
-      } else {
-        $('insuranceBlock').hide();
-      }
-      // promo discount
-      $('discountTotal').update(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
-      $('adminTotal').update('$' + additionalFees.toFixed(2));
-    }
+    <g:render template="/transaction_js"/>
 
     function insuranceClick() {
       $('insuranceChoices').observe('click', function() {
         var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
         insuranceId = insId;
         showTotals();
-      });
-    }
-
-    function transactionFormSetup() {
-      $('specialOffers').observe('click', function() {
-        var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value');
-        $('promoId').value = offerId;
-        chosenPromoId = offerId;
-        showTotals();
-      });
-
-      $('unitsize').observe('change', function() {
-        searchSize = $F('unitsize');
-        $('SC_searchSize').value = searchSize;
-        showTotals();
-      })
-
-      $('unitType').observe('change', function() {
-        chosenUnitType = $F('unitType');
-        showTotals();
-      })
-    }
-
-    function showTotals() {
-      new Ajax.Request("${createLink(controller:'storageSite', action:'detailTotals')}",
-      {
-        method:'get',
-        parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType },
-        onSuccess:function(transport) {
-          var totals = transport.responseJSON.totals;
-          durationMonths = totals.durationMonths;
-          unitTypes = totals.unitTypes;
-          chosenPromo = totals.chosenPromo;
-          chosenUnitType = totals.chosenUnitType;
-          premium = totals.premium;
-          discountTotal = totals.discountTotal;
-          monthlyRent = totals.monthlyRate;
-          pushRate = totals.pushRate;
-          additionalFees = totals.additionalFees;
-          totalMoveInCost = totals.totalMoveInCost;
-          updateTransaction();
-        }
       });
     }
 
@@ -190,9 +57,6 @@
       );
 
       directionsService = new google.maps.DirectionsService();
-      // directionsDisplay = new google.maps.DirectionsRenderer();
-      // directionsDisplay.setPanel($('dirPanel'));
-      // directionsDisplay.setMap(directionMap);
     }
 
     function setupHelp() {
@@ -520,6 +384,8 @@
     }
 
     function setupCalendar() {
+      $('moveInDate').value = startDate;
+
       Calendar.setup({
           dateField     : 'date',
           triggerElement: 'calendarPic',
@@ -528,7 +394,8 @@
             this.hide();
             startDate = dateString;
             $('SC_date').value = startDate;
-            $('moveInDate').update(startDate);
+            $('moveInDate').value = startDate;
+            $('transMoveInDate').update(startDate);
             var paidThru = Date.parseDate(startDate, "%m/%d/%y");
             paidThru.setMonth( paidThru.getMonth() + durationMonths);
             $('paidThruDate').update(paidThru.print("%o/%d/%y"))
@@ -853,7 +720,7 @@
               <input type="hidden" name="priceDriveup" id="priceDriveup" value="${rentalTransaction?.priceDriveup}" />
               <input type="hidden" name="priceInterior" id="priceInterior" value="${rentalTransaction?.priceInterior}" />
               <input type="hidden" name="priceUpper" id="priceUpper" value="${rentalTransaction?.priceUpper}" />
-              <input type="hidden" name="unitId" id="unitId" value="${rentalTransaction?.unitId}" />
+              <input type="hidden" name="unitId" id="unitId" value="${rentalTransaction ? rentalTransaction.unitId : unitId}" />
               <input type="hidden" name="promoId" id="promoId" value="${rentalTransaction?.promoId}" />
               <input type="hidden" name="site" value="${params.id}" />
               <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransaction?.moveInDate}" />
@@ -863,11 +730,11 @@
               <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
 
               <div class="vert_text">
-                <span id="step1_bullet" class="bullet">&#8226</span><span id="step1" class="step_header_hi">Primary Contact</span>
-                <span id="step2_bullet" class="bullet" style="display: none;">&#8226</span><span id="step2" class="step_header">Secondary Contact</span>
-                <span id="step3_bullet" class="bullet" style="display: none;">&#8226</span><span id="step3" class="step_header">Rental Options</span>
-                <span id="step4_bullet" class="bullet" style="display: none;">&#8226</span><span id="step4" class="step_header">Payment</span>
-                <span id="step5_bullet" class="bullet" style="display: none;">&#8226</span><span id="step5" class="step_header">Order Complete</span>
+                <span id="step1_bullet" class="bullet">&#8226;</span><span id="step1" class="step_header_hi">Primary Contact</span>
+                <span id="step2_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step2" class="step_header">Secondary Contact</span>
+                <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Rental Options</span>
+                <span id="step4_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step4" class="step_header">Payment</span>
+                <span id="step5_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step5" class="step_header">Order Complete</span>
               </div>
 
               <!-- Primary Contact -->

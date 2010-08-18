@@ -14,6 +14,7 @@ class ChannelConfig {
         requestMap.put new RequestKey("/css/**"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/js/**"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/favicon.ico"), [new SecurityConfig("ANY_CHANNEL")]
+        requestMap.put new RequestKey("/storageSite/detailTotals/**"), [new SecurityConfig("ANY_CHANNEL")]
 
         // resources that must be served over https
         requestMap.put new RequestKey("/auth/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]

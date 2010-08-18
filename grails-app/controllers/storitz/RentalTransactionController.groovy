@@ -132,7 +132,11 @@ class RentalTransactionController {
         render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
         return
       }
-      [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins]
+      Collection sizeList = rentalTransactionInstance.site.units.collect { it.unitsize }.unique()
+      Collection unitTypes = rentalTransactionInstance.site.units.findAll{ it.unitsize.id == unit.unitsize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
+      def site = rentalTransactionInstance.site
+
+      [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:unit.getUnitTypeLower(), monthlyRate: unit.price, pushRate: unit.pushRate, unitId: unit.id, searchSize: unit.unitsize.id, promoId: rentalTransactionInstance.promoId]
     }
 
     def pay = {
@@ -143,6 +147,10 @@ class RentalTransactionController {
       if (!rentalTransactionInstance) {
         // TODO - send them to an error page
       }
+
+      rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+      rentalTransactionInstance.unitId = params.unitId
+      rentalTransactionInstance.promoId = params.promoId
 
       def promo = null
       if (!rentalTransactionInstance.promoId == -999) {
