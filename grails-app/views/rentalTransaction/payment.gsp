@@ -99,7 +99,7 @@
                 </div>
                 <div class="formInstructions">
                   The billing address will be used to verify your credit card payment - card holder name and address should match the billing
-                  address.  If it matches the primary or secondary contact you already entered, choose accordingly.  If not, enter a new contact.
+                  address.  If it matches the primary contact you already entered, choose accordingly.  If not, enter a new contact.
                 </div>
 
                 <div class="checkout_section_header">
@@ -109,9 +109,6 @@
                   <div id="billingAddress" class="validate-one-radio value">
                       <div class="left" style="width:200px;">
                         <g:radio name="billingAddress" value="primary" checked="checked"/> Primary Contact Address
-                      </div>
-                      <div class="left" style="width:200px;">
-                        <g:radio name="billingAddress" value="secondary"/> Secondary Contact Address
                       </div>
                       <div class="left" style="width:200px;">
                         <g:radio name="billingAddress" value="new"/> Enter new address
