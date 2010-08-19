@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:set var="title" value="User List"/>
+    <g:set var="title" value="Show User"/>
     <g:render template="/header" />
 
     <script type="text/javascript">
@@ -23,7 +23,11 @@
             <span class="button"><g:link action="create">New User</g:link></span>
         </div>
         <div class="body">
-            <h1>Show User</h1>
+
+          <div class="price_options checkout_header white">
+            Show User
+          </div>
+
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>

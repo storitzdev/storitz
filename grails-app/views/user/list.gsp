@@ -22,7 +22,11 @@
             <span class="button"><g:link action="create">New User</g:link></span>
         </div>
         <div class="body">
-            <h1>User List</h1>
+
+          <div class="price_options checkout_header white">
+            List Users
+          </div>
+
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>

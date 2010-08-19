@@ -12,7 +12,7 @@ class CommissionController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [commissionInstanceList: Commission.list(params), commissionInstanceTotal: Commission.count()]
+        [commissionInstanceList: Commission.listOrderByLowerBound(params), commissionInstanceTotal: Commission.count()]
     }
 
     def create = {

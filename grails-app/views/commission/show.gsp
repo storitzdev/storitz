@@ -1,20 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+  <head>
+    <g:set var="title" value="Show Commission Entry"/>
+    <g:render template="/header" />
 
-<%@ page import="com.storitz.Commission" %>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'commission.label', default: 'Commission')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+    <script type="text/javascript">
+//<![CDATA[
+//]]>
+  </script>
+
+  </head>
+  <body>
+    <div id="body">
+      <g:render template="/topnav" />
+      <div id="stcontent">
+        <g:render template="/logo_bar" />
+        <div class="buttons">
+            <span class="button"><a class="home" href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
+            <span class="button"><g:link action="list">Commission List</g:link></span>
+            <span class="button"><g:link action="create">New Commission Entry</g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+
+            <div class="price_options checkout_header white">
+              Show Commission Entry
+            </div>
+
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -68,5 +81,7 @@
                 </g:form>
             </div>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>
