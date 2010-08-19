@@ -10,10 +10,8 @@ class Contact {
     String firstName
     String lastName
     String suffixName
-    String streetNumber
-    String street
-    StreetType streetType
-    String unit
+    String address1
+    String address2
     String city
     State state
     String province
@@ -27,9 +25,9 @@ class Contact {
       email(email:true, nullable: true)
       zipcode(size:5..10)
       suffixName(nullable:true)
-      unit(nullable:true)
       province(nullable:true)
       country(nullable:true)
+      address2(nullable:true)
     }
 
     static belongsTo = [rental:RentalTransaction]

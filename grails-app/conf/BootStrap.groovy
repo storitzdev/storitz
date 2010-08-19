@@ -10,6 +10,8 @@ class BootStrap {
 
      def init = { servletContext ->
 
+       //org.hsqldb.util.DatabaseManager.main()
+       
        // create system ROLES
        def roleUser = Role.findByAuthority('ROLE_USER')
        if (!roleUser) {

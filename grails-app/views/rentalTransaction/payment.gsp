@@ -121,13 +121,13 @@
                         </div>
                         <div class="checkout_fields">
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactSecondary.firstName', 'errors')}">
-                              <g:textField name="firstName" id="firstName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.firstName}" />
+                              <g:textField name="firstName" id="firstName" class="required" style="width: 180px;" value="${rentalTransaction?.billingAddress?.firstName}" />
                           </div>
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'lastName', 'errors')}">
-                            <g:textField name="lastName" id="lastName" class="required" style="width: 180px;" value="${rentalTransaction?.contactSecondary?.lastName}" />
+                            <g:textField name="lastName" id="lastName" class="required" style="width: 180px;" value="${rentalTransaction?.billingAddress?.lastName}" />
                           </div>
                           <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'suffixName', 'errors')}">
-                            <g:textField name="suffixName" id="suffixName" style="width: 80px;" value="${rentalTransaction?.contactSecondary?.suffixName}" />
+                            <g:textField name="suffixName" id="suffixName" style="width: 80px;" value="${rentalTransaction?.billingAddress?.suffixName}" />
                           </div>
                           <div style="clear:both;"></div>
                         </div>
@@ -147,32 +147,26 @@
                           Address
                         </div>
                         <div class="checkout_fields">
-                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'streetNumber', 'errors')}">
-                              <g:textField name="streetNumber" id="streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.streetNumber}" />
-                          </div>
-                          <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'street', 'errors')}">
-                              <g:textField name="street" id="street" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.street}" />
-                          </div>
-                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'streetType', 'errors')}">
-                              <g:select name="streetType" id="streetType" style="width:80px;" from="${storitz.constants.StreetType.list()}" value="${rentalTransaction?.contactSecondary?.streetType}" optionValue="value"/>
-                          </div>
-                          <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'unit', 'errors')}">
-                              <g:textField name="unit" id="unit" style="width:80px;" value="${rentalTransaction?.contactSecondary?.unit}" />
+                          <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'address1', 'errors')}">
+                              <g:textField name="address1" id="address1" class="required" style="width:380px;" value="${rentalTransaction?.billingAddress?.address1}" />
                           </div>
                           <div style="clear:both;"></div>
                         </div>
                         <div class="checkout_labels">
-                          <div style="width:100px;" class="checkout_name">
-                            <label for="streetNumber">Street Number</label>
+                          <div style="width:400px;" class="checkout_name">
+                            <label for="address1">Address line 1</label>
                           </div>
-                          <div style="width:200px;" class="checkout_name">
-                            <label for="street">Street Name</label>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_fields">
+                          <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'address2', 'errors')}">
+                              <g:textField name="address2" id="address2" style="width:380px;" value="${rentalTransaction?.billingAddress?.address2}" />
                           </div>
-                          <div style="width:100px;" class="checkout_name">
-                            <label for="streetType">Street Suffix</label>
-                          </div>
-                          <div style="width:100px;" class="checkout_name">
-                            <label for="unit">Unit/Apt.</label>
+                          <div style="clear:both;"></div>
+                        </div>
+                        <div class="checkout_labels">
+                          <div style="width:400px;" class="checkout_name">
+                            <label for="address2">Address line 2</label>
                           </div>
                           <div style="clear:both;"></div>
                         </div>
@@ -230,16 +224,16 @@
                   <div class="left">
                     <div class="checkout_labels">
                       <div style="width:200px;" class="checkout_name">
-                        <label for="street">Card Number</label>
+                        <label for="cc_number">Card Number</label>
                       </div>
                       <div style="width:50px;" class="checkout_name">
-                        <label for="street">Month</label>
+                        <label for="cc_month">Month</label>
                       </div>
                       <div style="width:80px;" class="checkout_name">
-                        <label for="street">Year</label>
+                        <label for="cc_year">Year</label>
                       </div>
                       <div style="width:80px;" class="checkout_name">
-                        <label for="street">CVV2</label>
+                        <label for="cc_cvv2">CVV2</label>
                       </div>
                     </div>
                     <div class="checkout_fields">

@@ -249,9 +249,9 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sCompany></cal:sCompany>
          <!--Optional:-->
-         <cal:sAddr1>""" + "${rentalTransaction.contactPrimary.streetNumber} ${rentalTransaction.contactPrimary.street} ${rentalTransaction.contactPrimary.streetType.display} ${rentalTransaction.contactPrimary.unit ?  ', Apt. ' + rentalTransaction.contactPrimary.unit : ''}" + """</cal:sAddr1>
+         <cal:sAddr1>""" + rentalTransaction.contactPrimary.address1 + """</cal:sAddr1>
          <!--Optional:-->
-         <cal:sAddr2></cal:sAddr2>
+         <cal:sAddr2>""" + rentalTransaction.contactPrimary.address2 + """</cal:sAddr2>
          <!--Optional:-->
          <cal:sCity>""" + rentalTransaction.contactPrimary.city + """</cal:sCity>
          <!--Optional:-->
@@ -265,25 +265,25 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sMrMrsAlt></cal:sMrMrsAlt>
          <!--Optional:-->
-         <cal:sFNameAlt>""" + rentalTransaction.contactSecondary.firstName + """</cal:sFNameAlt>
+         <cal:sFNameAlt>""" + rentalTransaction.contactSecondary?.firstName + """</cal:sFNameAlt>
          <!--Optional:-->
          <cal:sMIAlt></cal:sMIAlt>
          <!--Optional:-->
-         <cal:sLNameAlt>""" + rentalTransaction.contactSecondary.lastName + """</cal:sLNameAlt>
+         <cal:sLNameAlt>""" + rentalTransaction.contactSecondary?.lastName + """</cal:sLNameAlt>
          <!--Optional:-->
-         <cal:sAddr1Alt>""" + "${rentalTransaction.contactSecondary.streetNumber} ${rentalTransaction.contactSecondary.street} ${rentalTransaction.contactSecondary.streetType.display} ${rentalTransaction.contactSecondary.unit ?  ', Apt. ' + rentalTransaction.contactSecondary.unit : ''}" + """</cal:sAddr1Alt>
+         <cal:sAddr1Alt>""" + rentalTransaction.contactSecondary?.address1 + """</cal:sAddr1Alt>
          <!--Optional:-->
-         <cal:sAddr2Alt></cal:sAddr2Alt>
+         <cal:sAddr2Alt>""" + rentalTransaction.contactSecondary?.address2 + """</cal:sAddr2Alt>
          <!--Optional:-->
-         <cal:sCityAlt>""" + rentalTransaction.contactSecondary.city + """</cal:sCityAlt>
+         <cal:sCityAlt>""" + rentalTransaction.contactSecondary?.city + """</cal:sCityAlt>
          <!--Optional:-->
-         <cal:sRegionAlt>""" + rentalTransaction.contactSecondary.state.display +  """</cal:sRegionAlt>
+         <cal:sRegionAlt>""" + rentalTransaction.contactSecondary?.state?.display +  """</cal:sRegionAlt>
          <!--Optional:-->
-         <cal:sPostalCodeAlt>""" + rentalTransaction.contactSecondary.zipcode + """</cal:sPostalCodeAlt>
+         <cal:sPostalCodeAlt>""" + rentalTransaction.contactSecondary?.zipcode + """</cal:sPostalCodeAlt>
          <!--Optional:-->
-         <cal:sCountryAlt>""" + rentalTransaction.contactSecondary.country.display +  """</cal:sCountryAlt>
+         <cal:sCountryAlt>""" + rentalTransaction.contactSecondary?.country?.display +  """</cal:sCountryAlt>
          <!--Optional:-->
-         <cal:sPhoneAlt>""" + rentalTransaction.contactSecondary.phone + """</cal:sPhoneAlt>
+         <cal:sPhoneAlt>""" + rentalTransaction.contactSecondary?.phone + """</cal:sPhoneAlt>
          <!--Optional:-->
          <cal:sMrMrsBus></cal:sMrMrsBus>
          <!--Optional:-->
@@ -368,7 +368,7 @@ class SiteLinkService {
          <cal:sCreditCardCVV>""" + rentalTransaction.cvv2 + """</cal:sCreditCardCVV>
          <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
          <cal:sBillingName>""" + "${rentalTransaction.billingAddress.firstName} ${rentalTransaction.billingAddress.lastName}" + """</cal:sBillingName>
-         <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.streetNumber} ${rentalTransaction.billingAddress.street} ${rentalTransaction.billingAddress.streetType.display}" + """</cal:sBillingAddress>
+         <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1} ${rentalTransaction.billingAddress.address2}" + """</cal:sBillingAddress>
          <cal:sBillingZipCode>""" + rentalTransaction.billingAddress.zipcode + """</cal:sBillingZipCode>
          <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
          <cal:ConcessionPlanID>""" + concessionId + """</cal:ConcessionPlanID>

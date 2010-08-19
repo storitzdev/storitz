@@ -40,10 +40,6 @@ class RentalTransaction {
   Boolean isCallCenter
 
   // Transient members
-  Boolean priceDriveup
-  Boolean priceInterior
-  Boolean priceUpper
-  Boolean priceTempControlled
   Integer searchSize
   Boolean insuranceTerms
   Boolean hazardousMaterials
@@ -72,7 +68,6 @@ class RentalTransaction {
     commission(nullable: true)
   }
 
-  static transients = ['priceDriveup', 'priceInterior', 'priceUpper', 'priceTempControlled',
-          'searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
+  static transients = ['searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
           'cardType', 'cvv2']  
 }

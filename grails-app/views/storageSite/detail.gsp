@@ -245,8 +245,7 @@
       var valid = true;
       valid &= Validation.validate('contactPrimary.firstName');
       valid &= Validation.validate('contactPrimary.lastName');
-      valid &= Validation.validate('contactPrimary.streetNumber');
-      valid &= Validation.validate('contactPrimary.street');
+      valid &= Validation.validate('contactPrimary.address1');
       valid &= Validation.validate('contactPrimary.city');
       valid &= Validation.validate('contactPrimary.state');
       valid &= Validation.validate('contactPrimary.zipcode');
@@ -670,32 +669,26 @@
                   Address
                 </div>
                 <div class="checkout_fields">
-                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetNumber', 'errors')}">
-                      <g:textField name="contactPrimary.streetNumber" id="contactPrimary.streetNumber" class="required" style="width:80px;" value="${rentalTransaction?.contactPrimary?.streetNumber}" />
-                  </div>
-                  <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.street', 'errors')}">
-                      <g:textField name="contactPrimary.street" id="contactPrimary.street" class="required" style="width:180px;" value="${rentalTransaction?.contactPrimary?.street}" />
-                  </div>
-                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.streetType', 'errors')}">
-                      <g:select name="contactPrimary.streetType" id="contactPrimary.streetType" style="width:80px;" from="${storitz.constants.StreetType.list()}" value="${rentalTransaction?.contactPrimary?.streetType}" optionValue="value"/>
-                  </div>
-                  <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.unit', 'errors')}">
-                      <g:textField name="contactPrimary.unit" id="contactPrimary.unit" style="width:80px;" value="${rentalTransaction?.contactPrimary?.unit}" />
+                  <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.address1', 'errors')}">
+                      <g:textField name="contactPrimary.address1" id="contactPrimary.address1" class="required" style="width:380px;" value="${rentalTransaction?.contactPrimary?.address1}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
                 <div class="checkout_labels">
-                  <div style="width:100px;" class="checkout_name">
-                    <label for="contactPrimary.streetNumber">Street Number</label>
+                  <div style="width:400px;" class="checkout_name">
+                    <label for="contactPrimary.address1">Address line 1</label>
                   </div>
-                  <div style="width:200px;" class="checkout_name">
-                    <label for="contactPrimary.street">Street Name</label>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'contactPrimary.address2', 'errors')}">
+                      <g:textField name="contactPrimary.address2" id="contactPrimary.address2" style="width:380px;" value="${rentalTransaction?.contactPrimary?.address2}" />
                   </div>
-                  <div style="width:100px;" class="checkout_name">
-                    <label for="contactPrimary.streetType">Street Suffix</label>
-                  </div>
-                  <div style="width:100px;" class="checkout_name">
-                    <label for="contactPrimary.unit">Unit/Apt.</label>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_labels">
+                  <div style="width:400px;" class="checkout_name">
+                    <label for="contactPrimary.address2">Address line 2</label>
                   </div>
                   <div style="clear:both;"></div>
                 </div>

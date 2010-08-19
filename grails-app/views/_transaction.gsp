@@ -27,7 +27,9 @@
       </div>
     </div>
     <div class="right" style="margin-top:5px;">
-      <input type="image" id="rentme" style="border:none;cursor:pointer;" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
+      <g:if test="${!rentalTransactionInstance}"> 
+        <input type="image" id="rentme" style="border:none;cursor:pointer;" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
+      </g:if>
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left specialOfferText">

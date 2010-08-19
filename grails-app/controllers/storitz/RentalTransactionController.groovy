@@ -220,7 +220,7 @@ class RentalTransactionController {
         custId rentalTransactionInstance.id as String
         firstName rentalTransactionInstance.billingAddress.firstName.encodeAsURL()
         lastName rentalTransactionInstance.billingAddress.lastName
-        address "${rentalTransactionInstance.billingAddress.streetNumber} ${rentalTransactionInstance.billingAddress.street} ${rentalTransactionInstance.billingAddress.streetType.display}"
+        address "${rentalTransactionInstance.billingAddress.address1} ${rentalTransactionInstance.billingAddress.address2}"
         city rentalTransactionInstance.billingAddress.city
         state rentalTransactionInstance.billingAddress.state.display
         zip rentalTransactionInstance.billingAddress.zipcode
