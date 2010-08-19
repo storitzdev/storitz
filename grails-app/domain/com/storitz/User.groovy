@@ -3,7 +3,7 @@ package com.storitz
 class User {
 
     static transients = ['pass']
-    static hasMany = [sites:SiteUser, specialOffers:SpecialOffer]
+    static hasMany = [sites:SiteUser]
 
 	String username
 	String password
@@ -25,7 +25,6 @@ class User {
         password(blank: false)
         manager(nullable: true)
         description(nullable: true, widget: 'textarea')
-        enabled()
     }
 
     def sites() {

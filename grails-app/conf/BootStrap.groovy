@@ -2,6 +2,7 @@ import com.storitz.StorageSize
 import com.storitz.User
 import com.storitz.Role
 import com.storitz.UserRole
+import com.storitz.NotificationType
 
 class BootStrap {
 
@@ -9,6 +10,7 @@ class BootStrap {
 
      def init = { servletContext ->
 
+       // create system ROLES
        def roleUser = Role.findByAuthority('ROLE_USER')
        if (!roleUser) {
          roleUser = new Role( authority: 'ROLE_USER', description: 'Authenticated User').save(flush: true)
@@ -25,6 +27,25 @@ class BootStrap {
        if (!roleCallCenter) {
          roleCallCenter = new Role( authority: 'ROLE_CALLCENTER', description: 'Call Center').save(flush: true)
        }
+
+       // create system NOTIFICATION types
+       def ntSiteManager = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
+       if (!ntSiteManager) {
+         new NotificationType(notificationType:'NOTIFICATION_SITE_MANAGER').save(flush: true)
+       }
+       def ntDistrictManager = NotificationType.findByNotificationType('NOTIFICATION_DISTRICT_MANAGER')
+       if (!ntDistrictManager) {
+         new NotificationType(notificationType:'NOTIFICATION_DISTRICT_MANAGER').save(flush: true)
+       }
+       def ntOperationsManager = NotificationType.findByNotificationType('NOTIFICATION_OPERATIONS_MANAGER')
+       if (!ntOperationsManager) {
+         new NotificationType(notificationType:'NOTIFICATION_OPERATIONS_MANAGER').save(flush: true)
+       }
+       def ntAccounting = NotificationType.findByNotificationType('NOTIFICATION_ACCOUNTING')
+       if (!ntAccounting) {
+         new NotificationType(notificationType:'NOTIFICATION_ACCOUNTING').save(flush: true)
+       }
+
 
        if (!User.findByUsername('admin')) {
          def admin = new User( username:'admin', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)

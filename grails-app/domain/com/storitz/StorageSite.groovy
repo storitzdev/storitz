@@ -5,7 +5,7 @@ import storitz.constants.State
 
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, contacts:SiteContact, insurances:Insurance, visits:Visit, securityItems: Bullet, convenienceItems: Bullet, amenityItems: Bullet ]
+    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, insurances:Insurance, visits:Visit, securityItems: Bullet, convenienceItems: Bullet, amenityItems: Bullet ]
     static fetchMode = []
 
     static constraints = {

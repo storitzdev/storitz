@@ -4,7 +4,7 @@ import com.storitz.Role
 import com.storitz.User
 import grails.plugins.springsecurity.Secured
 import com.storitz.UserRole
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
 import com.storitz.SiteUser
 import com.storitz.StorageSite
 

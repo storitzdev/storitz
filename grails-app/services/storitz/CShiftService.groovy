@@ -7,7 +7,6 @@ import com.storitz.StorageSite
 import com.storitz.SiteUser
 import storitz.constants.State
 import storitz.constants.TruckType
-import com.storitz.SiteContact
 import com.storitz.StorageUnit
 import com.storitz.SpecialOffer
 import storitz.constants.PromoType
@@ -313,8 +312,7 @@ class CShiftService {
 
       def email = addr.EMAIL.text()
       if (email.size() > 0) {
-        def contact = new SiteContact(email: email, name: site.title)
-        site.addToContacts(contact)
+        // TODO create new User - add to contact type Mgr.
       }
     }
     println "Returning good address: ${site.address}, ${site.city} ${site.state}"

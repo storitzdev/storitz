@@ -72,9 +72,6 @@
             <div id="rentalForm">
               <g:form action="pay" controller="rentalTransaction" name="rentalTransaction" method="post" id="${params.id}">
 
-                <input type="hidden" name="priceDriveup" id="priceDriveup" value="${rentalTransactionInstance?.priceDriveup}" />
-                <input type="hidden" name="priceInterior" id="priceInterior" value="${rentalTransactionInstance?.priceInterior}" />
-                <input type="hidden" name="priceUpper" id="priceUpper" value="${rentalTransactionInstance?.priceUpper}" />
                 <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance?.unitId}" />
                 <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
                 <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
@@ -82,7 +79,6 @@
     
                 <div class="vert_text">
                   <span id="step1_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step1" class="step_header">Primary Contact</span>
-                  <span id="step2_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step2" class="step_header">Secondary Contact</span>
                   <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Rental Options</span>
                   <span id="step4_bullet" class="bullet">&#8226;</span><span id="step4" class="step_header_hi">Payment</span>
                   <span id="step5_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step5" class="step_header">Order Complete</span>

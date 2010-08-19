@@ -14,9 +14,9 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/jquery-1.4.2.5/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/spring-security-ui-0.1.1/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/jquery-ui-1.8.2.4/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/jquery-1.4.2.5/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
@@ -53,10 +53,6 @@
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/domain" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/grails-app/services" isTestSource="false" />
@@ -93,14 +89,14 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/mail-0.9/lib" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.5.8.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/antlr/antlr/jars/antlr-2.7.6.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.web/jars/org.springframework.security.web-3.0.3.RELEASE.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.core/jars/org.springframework.security.core-3.0.3.RELEASE.jar!/" />
-          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/mail-0.9/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -115,14 +111,10 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="storitz" exported="" />
-    <orderEntry type="library" scope="PROVIDED" name="groovy-1.7.4" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="groovy-1.7.4" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="groovy-1.7.4" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="groovy-1.7.4" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="grails-1.2.3" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hibernate3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="gdata" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="spring-3.0.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="axis-1.4" level="project" />
   </component>
 </module>
 

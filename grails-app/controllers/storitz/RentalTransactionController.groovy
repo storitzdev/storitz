@@ -172,7 +172,7 @@ class RentalTransactionController {
         case "new":
           def billingContact = new com.storitz.Contact(params)
           if (!billingContact.save(flush: true)) {
-            flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.Contact'), params.id])}"
+            flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
             render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
             return
           } else {

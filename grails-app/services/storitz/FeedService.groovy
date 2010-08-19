@@ -2,7 +2,7 @@ package storitz
 
 import com.storitz.StorageSite
 
-class FeedServiceService {
+class FeedService {
 
   def siteLinkService
   def CShiftService

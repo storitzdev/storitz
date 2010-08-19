@@ -1,0 +1,1 @@
+Note, that the log4j jar is really 1.2.15 since 1.2.8 causes problems

@@ -251,6 +251,9 @@ Validation.addAllThese([
 	['validate-email', 'Please enter a valid email address. For example fred@domain.com .', function (v) {
 				return Validation.get('IsEmpty').test(v) || /\w{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/.test(v)
 			}],
+    ['validate-phone', 'Please enter a valid email address. For example 212-555-1234 .', function (v) {
+                return Validation.get('IsEmpty').test(v) || /^\d{3}-\d{3}-\d{4}$/.test(v)
+            }],
 	['validate-url', 'Please enter a valid URL.', function (v) {
 				return Validation.get('IsEmpty').test(v) || /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i.test(v)
 			}],

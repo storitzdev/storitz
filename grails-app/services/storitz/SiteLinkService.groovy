@@ -7,16 +7,15 @@ import static groovyx.net.http.ContentType.XML
 import storitz.constants.TruckType
 import storitz.constants.PromoType
 import com.storitz.Insurance
-import com.storitz.SiteContact
 import com.storitz.StorageUnit
 import com.storitz.SiteUser
 import com.storitz.StorageSite
 import com.storitz.SpecialOffer
-import com.storitz.StorageSize
 import storitz.constants.State
 import com.storitz.RentalTransaction
 import storitz.constants.RentalUse
 import storitz.constants.IdType
+import com.storitz.User
 
 class SiteLinkService {
 
@@ -494,6 +493,42 @@ class SiteLinkService {
     }
   }
 
+  def createSiteUsers(siteLink) {
+    def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      if (site) {
+        def email = tab.sEmailAddress.text().toLowerCase()
+        def user = User.findByUsername(email)
+        if (!user) {
+          user = new User(
+            username:email,
+            password:'',
+            description: "Site Manager for ${site.title}",
+            email: email,
+            userRealName:tab.sContactName.text(),
+            accountExpired: false,
+            accountLocked: false,
+            passwordExpired: false,
+            enabled: false
+          )
+          user.save(flush: true)
+          SiteUser.link(site, user)
+        }
+        // TODO - add notification types
+      }
+    }
+  }
+
   def getSiteDetails(siteLink, site, tab, stats, newSite) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
 
@@ -543,8 +578,9 @@ class SiteLinkService {
     site.siteLink = siteLink
     site.centerShift = null
 
-    def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
-    site.addToContacts(contact)
+    // TODO create a user and assign contact type
+    //def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
+    //site.addToContacts(contact)
 
     site.save()
     if (newSite) {
