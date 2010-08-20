@@ -599,7 +599,7 @@ class SiteLinkService {
     unitsAvailable(siteLink, site, stats, newSite)
 
     site.requiresInsurance = insurance(siteLink, site)
-    if (site.units && site.units.size() > 0) {
+    if (site.units?.size() > 0) {
       site.adminFee = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
     }
     getPromos(siteLink, site)
