@@ -468,14 +468,6 @@ class SiteLinkService {
       def newSite = false
       if (site) {
         stats.updateCount++
-        site.contacts.each {contact ->
-          contact.delete()
-        }
-        site.contacts.clear()
-        site.units.each {unit ->
-          unit.delete()
-        }
-        site.units.clear()
         site.insurances.each {ins ->
           ins.delete()
         }
@@ -521,6 +513,7 @@ class SiteLinkService {
             passwordExpired: false,
             enabled: false
           )
+          user.manager = siteLink.manager
           user.save(flush: true)
           SiteUser.link(site, user)
         }
@@ -532,7 +525,7 @@ class SiteLinkService {
   def getSiteDetails(siteLink, site, tab, stats, newSite) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
 
-    print "Found address: ${address}"
+    println "Found address: ${address}"
     def geoResult = geocodeService.geocode(address)
 
     site.lng = geoResult.Placemark[0].Point.coordinates[0]
@@ -579,8 +572,6 @@ class SiteLinkService {
     site.centerShift = null
 
     // TODO create a user and assign contact type
-    //def contact = new SiteContact(email: tab.sEmailAddress.text(), name: tab.sContactName.text())
-    //site.addToContacts(contact)
 
     site.save()
     if (newSite) {
@@ -607,20 +598,12 @@ class SiteLinkService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     records.'soap:Body'.'*:SiteInformationResponse'.'*:SiteInformationResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      site.contacts.each {contact ->
-        contact.delete()
-      }
-      site.units.each {unit ->
-        unit.delete()
-      }
       site.insurances.each {ins ->
         ins.delete()
       }
       site.specialOffers.each {offer ->
         offer.delete()
       }
-      site.contacts.clear()
-      site.units.clear()
       site.insurances.clear()
       site.specialOffers.clear()
       site.lastUpdate = 0
@@ -631,11 +614,6 @@ class SiteLinkService {
   }
 
   def updateUnits(site, stats) {
-    site.units.each {unit ->
-      unit.delete()
-    }
-    site.units.clear()
-    site.save()
     unitsAvailable(site.siteLink, site, stats, false)
     site.save(flush: true)
   }
@@ -652,41 +630,55 @@ class SiteLinkService {
     )
 
     for (unit in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table') {
-      def siteUnit = new StorageUnit()
-      siteUnit.unitCount = 1
-      siteUnit.description = unit.sTypeName.text()
-      siteUnit.unitNumber = unit.UnitID.text()
-      siteUnit.unitName = unit.sUnitName.text()
-      siteUnit.price = unit.dcStdRate.text() as BigDecimal
-      siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
-      def floor = unit.iFloor.text() as Integer
-      def typeName = unit.sTypeName.text()
-      siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
-      siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
-      siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
-      siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
-      siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
-      siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
-      siteUnit.isAvailable = true
-      siteUnit.isSecure = false
-      if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
-        siteUnit.isUpper = true
-      }
-      Integer width = (int) Double.parseDouble(unit.dcWidth.text())
-      Integer length = (int) Double.parseDouble(unit.dcLength.text())
-      siteUnit.displaySize = width + " X " + length
+      boolean rented = unit.bRented.text() as Boolean
 
-      def unitSize = unitSizeService.getUnitSize(width, length)
-      if (unitSize) {
-        siteUnit.unitsize = unitSize
-        if (!siteUnit.save()) {
-          siteUnit.errors.allErrors.each { println it }
-        }
-        stats.unitCount++;
+      if (rented) {
 
-        site.addToUnits(siteUnit)
+       def unitID = unit.UnitID.text()
+       def deletedUnit = site.units.find{ it.unitNumber == unitID }
+       if (deletedUnit) {
+         site.removeFromUnits(deletedUnit)
+         stats.removedCount++
+       }
+
       } else {
-        println "Skipping unit due to size: width=" + width + " length=" + length
+
+        def siteUnit = new StorageUnit()
+        siteUnit.unitCount = 1
+        siteUnit.description = unit.sTypeName.text()
+        siteUnit.unitNumber = unit.UnitID.text()
+        siteUnit.unitName = unit.sUnitName.text()
+        siteUnit.price = unit.dcStdRate.text() as BigDecimal
+        siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
+        def floor = unit.iFloor.text() as Integer
+        def typeName = unit.sTypeName.text()
+        siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
+        siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
+        siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
+        siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
+        siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
+        siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
+        siteUnit.isAvailable = true
+        siteUnit.isSecure = false
+        if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
+          siteUnit.isUpper = true
+        }
+        Integer width = (int) Double.parseDouble(unit.dcWidth.text())
+        Integer length = (int) Double.parseDouble(unit.dcLength.text())
+        siteUnit.displaySize = width + " X " + length
+
+        def unitSize = unitSizeService.getUnitSize(width, length)
+        if (unitSize) {
+          siteUnit.unitsize = unitSize
+          if (!siteUnit.save()) {
+            siteUnit.errors.allErrors.each { println it }
+          }
+          stats.unitCount++;
+
+          site.addToUnits(siteUnit)
+        } else {
+          println "Skipping unit due to size: width=" + width + " length=" + length
+        }
       }
     }
     for (lastupdate in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table1') {

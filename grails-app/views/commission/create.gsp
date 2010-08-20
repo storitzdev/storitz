@@ -45,8 +45,26 @@
 
           <g:form action="save" method="post" >
 
+            <div class="checkout_section_header">
+              Commission Source
+            </div>
+
+            <div class="checkout_fields">
+              <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'commissionSource', 'errors')}">
+                  <g:select id="commissionSource" style="width:200px;" name="commissionSource" from="${storitz.constants.CommissionSourceType?.list()}" value="${commissionInstance?.commissionSource}" optionValue="value"  />
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="checkout_labels">
+              <div class="checkout_name" style="width:200px;">
+                <label for="commissionType">Commission Source</label>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
             <div class="formInstructions">
-              Lower and upper bounds should not overlap with other entries.  Enter percentages as whole numbers (i.e) 25 not .25.
+              Lower and upper bounds should meet since the logic will be &gt; lower bound and &lt;=  upper bound.  Enter percentages as whole numbers (i.e) 25 not .25.
             </div>
 
             <div class="checkout_section_header">
@@ -82,7 +100,7 @@
                   <g:textField id="amount" name="amount" style="width:180px;" value="${fieldValue(bean: commissionInstance, field: 'amount')}" />
               </div>
               <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'commissionType', 'errors')}">
-                  <g:select id="commissionType" style="width:100px;" name="commissionType" from="${storitz.constants.CommissionType?.list()}" value="${commissionInstance?.commissionType}"  />
+                  <g:select id="commissionType" style="width:100px;" name="commissionType" from="${storitz.constants.CommissionType?.list()}" value="${commissionInstance?.commissionType}" optionValue="value" />
               </div>
               <div style="clear:both;"></div>
             </div>

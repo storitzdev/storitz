@@ -544,7 +544,7 @@ class CShiftService {
     }
     site.units.clear()
     site.save()
-    unitsAvailable(site.centerShift, site, stats, false)
+    unitsAvailable(site.centerShift, site, stats)
     site.save(flush: true)
   }
 

@@ -6,4 +6,5 @@ class NotificationType {
     }
 
     String notificationType
+    String description
 }

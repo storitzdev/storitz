@@ -7,4 +7,6 @@ class Bullet {
     static constraints = {
       bullet(nullable:false, size:2..100)    
     }
+
+    static belongsTo = StorageSite
 }

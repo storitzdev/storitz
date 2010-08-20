@@ -46,6 +46,8 @@
                         
                             <g:sortableColumn property="commissionType" title="${message(code: 'commission.commissionType.label', default: 'Commission Type')}" />
 
+                            <g:sortableColumn property="commissionSource" title="${message(code: 'commission.commissionSource.label', default: 'Commission Source')}" />
+
                         </tr>
                     </thead>
                     <tbody>
@@ -54,14 +56,16 @@
                         
                             <td><g:link action="show" id="${commissionInstance.id}">${fieldValue(bean: commissionInstance, field: "id")}</g:link></td>
                         
-                          <td>${fieldValue(bean: commissionInstance, field: "lowerBound")}</td>
+                            <td>${fieldValue(bean: commissionInstance, field: "lowerBound")}</td>
 
-                          <td>${fieldValue(bean: commissionInstance, field: "upperBound")}</td>
+                            <td>${fieldValue(bean: commissionInstance, field: "upperBound")}</td>
 
                             <td>${fieldValue(bean: commissionInstance, field: "amount")}</td>
                         
                             <td>${fieldValue(bean: commissionInstance, field: "commissionType")}</td>
-                        
+
+                            <td>${commissionInstance.commissionSource.display}</td>
+
                         </tr>
                     </g:each>
                     </tbody>

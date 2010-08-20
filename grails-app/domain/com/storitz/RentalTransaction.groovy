@@ -64,7 +64,6 @@ class RentalTransaction {
     idNumber(nullable: true)
     idState(nullable: true)
     idType(nullable: true)
-    idType(nullable: true)
     commission(nullable: true)
   }
 

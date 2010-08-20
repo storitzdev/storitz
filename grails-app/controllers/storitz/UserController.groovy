@@ -7,6 +7,8 @@ import com.storitz.UserRole
 
 import com.storitz.SiteUser
 import com.storitz.StorageSite
+import com.storitz.UserNotificationType
+import com.storitz.NotificationType
 
 /**
  * User controller.
@@ -96,8 +98,9 @@ class UserController {
 		roleNames.sort { n1, n2 ->
 			n1 <=> n2
 		}
+        List notificationTypes = UserNotificationType.findAllByUser(person).collect{ it.notificationType }
         def siteNames = SiteUser.findAllByUser(person).collect{ it.site.title }.sort()
-		[person: person, roleNames: roleNames, siteNames: siteNames]
+		[person: person, roleNames: roleNames, siteNames: siteNames, notificationTypes: notificationTypes]
 	}
 
 	/**
@@ -214,6 +217,7 @@ class UserController {
 			addRoles(person)
             SiteUser.removeAll(person)
             addSites(person)
+            addNotificationTypes(person)
 			redirect action: show, id: person.id
 		}
 		else {
@@ -229,7 +233,8 @@ class UserController {
         if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
           siteList = SiteUser.findAllByUser(user).collect{ it.site }
         }
-		[person: person, authorityList: Role.list(), siteList: siteList]
+        def notificationTypeList = NotificationType.list()
+		[person: person, authorityList: Role.list(), siteList: siteList, notificationTypeList: notificationTypeList]
 	}
 
 	/**
@@ -261,6 +266,7 @@ class UserController {
       if (person.save()) {
           addRoles(person)
           addSites(person)
+          addNotificationTypes(person)
           person.save(flush: true)
           redirect action: show, id: person.id
 
@@ -289,6 +295,15 @@ class UserController {
       }
     }
 
+    private void addNotificationTypes(person) {
+      for (String key in params.keySet()) {
+        if (key.contains('NOTIFICATION') && 'on' == params.get(key)) {
+          def notificationType = NotificationType.findByNotificationType(key)
+          UserNotificationType.create(person, notificationType, true)
+        }
+      }
+    }
+
 	private Map buildPersonModel(person) {
 
 		List roles = Role.list()
@@ -309,7 +324,12 @@ class UserController {
         for (site in sites) {
             siteMap[(site)] = userSites.contains(site)
         }
-		return [person: person, roleMap: roleMap, siteMap: siteMap]
+        def notificationMap = [:]
+        List userNotifications = UserNotificationType.findAllByUser(person).collect{ it.notificationType }
+        for (notificationType in NotificationType.list()) {
+          notificationMap[notificationType] = userNotifications.contains(notificationType)
+        }
+		return [person: person, roleMap: roleMap, siteMap: siteMap, notificationMap: notificationMap]
 	}
 }
 

@@ -94,9 +94,8 @@ class StorageSiteController {
     }
     else {
       def visitCount = Visit.countBySite(storageSiteInstance)
-      println "${storageSiteInstance.id} $visitCount"
-      
-      [storageSiteInstance: storageSiteInstance, visitCount:visitCount]
+      def contacts = SiteUser.findAllBySite(storageSiteInstance).collect{ it.user }.sort{ it.username }      
+      [storageSiteInstance: storageSiteInstance, visitCount:visitCount, contacts: contacts]
     }
   }
 
@@ -134,7 +133,8 @@ class StorageSiteController {
       } else {
         rentalAgreementList = RentalAgreement.findAll()
       }
-      [storageSiteInstance: storageSiteInstance, rentalAgreementList:rentalAgreementList]
+      def contacts = SiteUser.findAllBySite(storageSiteInstance).collect{ it.user }.sort{ it.username }
+      [storageSiteInstance: storageSiteInstance, rentalAgreementList:rentalAgreementList, contacts: contacts]
     }
   }
 
@@ -334,7 +334,7 @@ class StorageSiteController {
 
     def stats = new storitz.SiteStats()
     feedService.updateUnits(storageSiteInstance, stats)
-    flash.message = "${message(code: 'default.units.message', args: [stats.unitCount])}"
+    flash.message = "${message(code: 'default.units.message', args: [stats.unitCount, stats.removedCount])}"
     redirect(action: "show", id: storageSiteInstance.id)
   }
 
@@ -370,9 +370,18 @@ class StorageSiteController {
     }
 
     site.removeFromImages(siteImage)
-    siteImage.delete()
     site.save(flush: true)
     render (status: 200, contentType:"application/json", text:"{ siteImage: ${params.siteImageId} }")
+  }
+
+  def removeContact = {
+    def site = StorageSite.get(params.id)
+    def user = User.get(params.userId)
+
+    if (site && user) {
+      SiteUser.unlink (site, user)
+      render (status: 200, contentType:"application/json", text:"{ userId: ${params.userId} }")
+    }
   }
 
   def defaultImage = {

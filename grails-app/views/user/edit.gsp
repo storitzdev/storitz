@@ -98,7 +98,7 @@
                   <sec:ifAnyGranted roles="ROLE_ADMIN">
 
                     <div class="checkout_section_header">
-                      Manager and Enablement
+                      Manager
                     </div>
 
                     <div class="checkout_fields">
@@ -106,9 +106,6 @@
                         <g:select style="width:280px;" from="${com.storitz.User.list()}" value="${person?.manager?.id}"
                                   optionKey="id" optionValue="userRealName" name="manager.id"
                                   noSelection="['null':'No manager selected']"/>
-                      </div>
-                      <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'enabled', 'errors')}">
-                        <g:checkBox name="enabled" value="${person?.enabled}" /> &nbsp; Enabled
                       </div>
                       <div style="clear:both;"></div>
                     </div>
@@ -139,6 +136,47 @@
                   <sec:ifNotGranted roles="ROLE_ADMIN">
                     <input type="hidden" name="ROLE_USER" value="on"/>
                   </sec:ifNotGranted>
+
+                  <sec:ifAnyGranted roles="ROLE_ADMIN">
+
+                    <div class="checkout_section_header">
+                      Enable User
+                    </div>
+
+                    <div class="formInstructions">
+                      A user should be enabled if you wish them to log in and update content.  If they are
+                      being used merely as a notification contact, leave them disabled.
+                    </div>
+
+                    <div class="checkout_fields">
+                      <div style="width:300px;" class="checkout_value ${hasErrors(bean: person, field: 'enabled', 'errors')}">
+                        <g:checkBox name="enabled" value="${person?.enabled}" /> &nbsp; Enabled
+                      </div>
+                      <div style="clear:both;"></div>
+                    </div>
+
+                    <div class="checkout_section_header">
+                      Notification Types
+                    </div>
+
+                    <div class="formInstructions">
+                      If a user has notification types selected, then any event in our system like
+                      a new move-in or a chargeback will be sent to the appropriate set of users
+                      with the notification enabled.
+                    </div>
+
+                    <div class="checkout_fields">
+                      <div style="width:650px;" class="checkout_value">
+                        <g:each var="notificationType" in="${notificationMap.keySet()}">
+                          <div style="margin: 0 1.5em;" class="left">
+                            <g:checkBox name="${notificationType.notificationType}" value="${notificationMap[notificationType]}"/> &nbsp; ${notificationType.description}
+                          </div>
+                        </g:each>
+                      </div>
+                      <div style="clear:both; height:10px;"></div>
+                    </div>
+
+                  </sec:ifAnyGranted>
 
                   <sec:ifAnyGranted roles="ROLE_MANAGER">
                     <sec:ifNotGranted roles="ROLE_ADMIN">

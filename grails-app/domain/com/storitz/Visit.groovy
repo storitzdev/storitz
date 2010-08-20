@@ -13,6 +13,8 @@ class Visit {
        cookie(nullable:true)
     }
 
+    static belongsTo = StorageSite
+
     Date dateCreated
 
     StorageSite site

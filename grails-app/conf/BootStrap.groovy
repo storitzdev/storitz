@@ -33,19 +33,19 @@ class BootStrap {
        // create system NOTIFICATION types
        def ntSiteManager = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
        if (!ntSiteManager) {
-         new NotificationType(notificationType:'NOTIFICATION_SITE_MANAGER').save(flush: true)
+         new NotificationType(notificationType:'NOTIFICATION_SITE_MANAGER', description:'Site Manager').save(flush: true)
        }
        def ntDistrictManager = NotificationType.findByNotificationType('NOTIFICATION_DISTRICT_MANAGER')
        if (!ntDistrictManager) {
-         new NotificationType(notificationType:'NOTIFICATION_DISTRICT_MANAGER').save(flush: true)
+         new NotificationType(notificationType:'NOTIFICATION_DISTRICT_MANAGER', description:'District Manager').save(flush: true)
        }
        def ntOperationsManager = NotificationType.findByNotificationType('NOTIFICATION_OPERATIONS_MANAGER')
        if (!ntOperationsManager) {
-         new NotificationType(notificationType:'NOTIFICATION_OPERATIONS_MANAGER').save(flush: true)
+         new NotificationType(notificationType:'NOTIFICATION_OPERATIONS_MANAGER', description:'Operations Manager').save(flush: true)
        }
        def ntAccounting = NotificationType.findByNotificationType('NOTIFICATION_ACCOUNTING')
        if (!ntAccounting) {
-         new NotificationType(notificationType:'NOTIFICATION_ACCOUNTING').save(flush: true)
+         new NotificationType(notificationType:'NOTIFICATION_ACCOUNTING', description:'Accounting').save(flush: true)
        }
 
 

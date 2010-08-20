@@ -38,4 +38,8 @@ class User {
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
+
+    def showNotificationTypes() {
+      return UserNotificationType.findAllByUser(this).collect{ it.notificationType.description }.join(", ")
+    }
 }

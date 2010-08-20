@@ -7,7 +7,8 @@
   <script type="text/javascript">
     //<![CDATA[
 
-    google.load("jquery", "1.4.2");
+    google.load("jquery, 1.4.2");
+    google.load("jqueryui, 1.8.4");
 
     google.setOnLoadCallback(function() {
       jQuery.noConflict();
@@ -621,8 +622,10 @@
           <div class="checkout_fields">
             <div style="width:500px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'contacts', 'errors')}">
               <ul>
-                <g:each in="${storageSiteInstance?.contacts}" var="c">
-                  <li style="list-style:none;">${c.name} - ${c.email}</li>
+                <g:each var="contact" in="${contacts}">
+                  <li>
+                    ${contact.username} - ${contact.email} - ${contact.showNotificationTypes()}
+                  </li>
                 </g:each>
               </ul>
             </div>

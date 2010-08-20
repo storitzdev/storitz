@@ -4,6 +4,7 @@ import com.storitz.StorageSite
 import com.storitz.SpecialOffer
 import com.storitz.StorageUnit
 import com.storitz.Insurance
+import com.storitz.Commission
 
 class CostService {
 
@@ -42,18 +43,31 @@ class CostService {
 
   }
 
-    def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
+  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
 
-      switch(site.source) {
+    switch(site.source) {
 
-        case "SL":
-          return siteLinkService.calculatePaidThruDate(site, promo, moveInDate)
+      case "SL":
+        return siteLinkService.calculatePaidThruDate(site, promo, moveInDate)
 
-        case "CS3":
-          return CShiftService.calculatePaidThruDate(site, promo, moveInDate)
+      case "CS3":
+        return CShiftService.calculatePaidThruDate(site, promo, moveInDate)
 
-        default:
-          throw new Exception("Unknown service for paid thru date")
+      default:
+        throw new Exception("Unknown service for paid thru date")
+    }
+  }
+
+  def calcualteCommission(cost, commissionSource) {
+
+    def c = Commission.criteria()
+
+    return c.get {
+      and {
+        eq("commissionSournce", commissionSource)
+        gt("lowerBound", cost)
+        le("upperBound", cost)
       }
     }
+  }
 }

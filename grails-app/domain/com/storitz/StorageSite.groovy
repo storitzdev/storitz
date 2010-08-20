@@ -5,7 +5,29 @@ import storitz.constants.State
 
 class StorageSite {
 
-    static hasMany = [ units:StorageUnit, specialOffers:SpecialOffer, images:SiteImage, users:SiteUser, insurances:Insurance, visits:Visit, securityItems: Bullet, convenienceItems: Bullet, amenityItems: Bullet ]
+    static hasMany = [
+            units:StorageUnit,
+            specialOffers:SpecialOffer,
+            images:SiteImage,
+            users:SiteUser,
+            insurances:Insurance,
+            visits:Visit,
+            securityItems: Bullet,
+            convenienceItems: Bullet,
+            amenityItems: Bullet
+    ]
+  
+    static mapping = {
+      units cascade:"all,delete-orphan"
+      specialOffers cascade:"all,delete-orphan"
+      images cascade:"all,delete-orphan"
+      insurances cascade:"all,delete-orphan"
+      visits cascade:"all,delete-orphan"
+      securityItems cascade:"all,delete-orphan"
+      convenienceItems cascade:"all,delete-orphan"
+      amenityItems cascade:"all,delete-orphan"
+    }
+
     static fetchMode = []
 
     static constraints = {

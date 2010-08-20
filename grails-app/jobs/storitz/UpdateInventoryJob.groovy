@@ -20,7 +20,7 @@ class UpdateInventoryJob {
       StorageSite.findAll().each{ site ->
         def stats = new storitz.SiteStats()
         feedService.updateUnits(site, stats)
-        println "${site.title} refreshed ${stats.unitCount} units"
+        println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
       }
       println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
     }

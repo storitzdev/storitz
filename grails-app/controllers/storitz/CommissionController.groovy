@@ -11,8 +11,18 @@ class CommissionController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [commissionInstanceList: Commission.listOrderByLowerBound(params), commissionInstanceTotal: Commission.count()]
+        params.max = Math.min(params.max ? params.int('max') : 20, 100)
+        def results
+        def criteria = Commission.createCriteria()
+        def query = {
+          projections {
+            groupProperty("commissionSource")
+          }
+          order("commissionSource", "asc")
+          order("lowerBound", "asc")
+        }
+        results = criteria.list(params, query)
+        [commissionInstanceList: results, commissionInstanceTotal: Commission.count()]
     }
 
     def create = {

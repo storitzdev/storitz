@@ -43,6 +43,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="commission.commissionType.label" default="Commission Source" /></td>
+
+                            <td valign="top" class="value">${commissionInstance?.commissionSource?.display}</td>
+
+                        </tr>
+
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="commission.amount.label" default="Amount" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: commissionInstance, field: "amount")}</td>
@@ -52,7 +59,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="commission.commissionType.label" default="Commission Type" /></td>
                             
-                            <td valign="top" class="value">${commissionInstance?.commissionType?.encodeAsHTML()}</td>
+                            <td valign="top" class="value">${commissionInstance?.commissionType?.display}</td>
                             
                         </tr>
                     

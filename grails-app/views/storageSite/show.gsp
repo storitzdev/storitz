@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<%@ page import="com.storitz.UserNotificationType" %>
+
+
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Create Storage Site"/>
@@ -164,11 +165,35 @@
           <td valign="top" class="name"><g:message code="storageSite.contacts.label" default="Contacts"/></td>
 
           <td valign="top" style="text-align: left;" class="value">
-            <ul>
-              <g:each in="${storageSiteInstance.contacts}" var="c">
-                <li>${c.name} - ${c.email}</li>
+            <table>
+              <tr>
+                <th>Login</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Operational Manager</th>
+                <th>District Manager</th>
+                <th>Site Manager</th>
+                <th>Accounting</th>
+              </tr>
+              <g:each var="contact" in="${contacts}">
+                <tr>
+                  <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+                    <td>
+                      <g:link controller="user" action="edit" id="${contact.id}">${contact.username}</g:link>
+                    </td>
+                  </sec:ifAnyGranted>
+                  <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+                    <td>${contact.username}</td>
+                  </sec:ifNotGranted>
+                  <td>${contact.userRealName}</td>
+                  <td>${contact.email}</td>
+                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_OPERATIONS_MANAGER')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_DISTRICT_MANAGER')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_SITE_MANAGER')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_ACCOUNTING')? 'X' : '&nbsp;'}</td>
+                </tr>
               </g:each>
-            </ul>
+            </table>
           </td>
 
         </tr>

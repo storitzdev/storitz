@@ -10,6 +10,7 @@ import com.storitz.User
 import com.storitz.Insurance
 import com.vinomis.authnet.AuthorizeNet
 import com.storitz.TransactionNote
+import storitz.constants.CommissionSourceType
 
 class RentalTransactionController {
 
@@ -245,7 +246,7 @@ class RentalTransactionController {
       rentalTransactionInstance.cardType = creditCardService.getCardType(ccNum)
       rentalTransactionInstance.cvv2 = params.cc_cvv2
 
-      // TODO compute commission from table and record it in transaction
+      rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.cost, CommissionSourceType.WEBSITE)
 
       if (!moveInService.moveIn(rentalTransactionInstance)) {
         flash.message = "Problem with move-in.  Please contact technical support."

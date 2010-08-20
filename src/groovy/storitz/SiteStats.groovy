@@ -10,11 +10,13 @@ package storitz
 public class SiteStats {
   Integer createCount
   Integer updateCount
+  Integer removedCount
   Integer unitCount
 
   public SiteStats() {
     createCount = 0;
     updateCount = 0;
+    removedCount = 0;
     unitCount = 0;
   }
 }
