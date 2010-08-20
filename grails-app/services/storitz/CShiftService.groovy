@@ -14,6 +14,11 @@ import com.storitz.cshiftclient.CsKiosk
 import com.storitz.cshiftclient.CsKioskLocator
 import com.storitz.cshiftclient.CsKioskSoapPort_PortType
 import com.storitz.Insurance
+import com.storitz.Role
+import com.storitz.UserRole
+import com.storitz.UserNotificationType
+import com.storitz.NotificationType
+import com.storitz.User
 
 class CShiftService {
 
@@ -268,6 +273,71 @@ class CShiftService {
       site.save(flush: true)
   }
 
+  def createSiteUsers(cshift) {
+    def ret = getSites(cshift.userName, cshift.pin)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
+      StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      if (site) {
+        getSiteUserInfo(cshift, site)
+      }
+    }
+  }
+
+  def boolean getSiteUserInfo(cshift, site) {
+    def ret = getSiteAddress(cshift.userName, cshift.pin, site.sourceId)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for (addr in records.'soap:Body'.'*:GetSiteAddressResponse'.'*:GetSiteAddressResult'.'*:SiteAddress'.'*:Address') {
+      def email = addr.EMAIL.text()
+      if (email.size() > 0) {
+        createSiteUser(site, email, email, cshift.manager)
+      }
+    }
+    return true
+  }
+
+  def createSiteUser(site, email, realName, manager) {
+    def user = User.findByEmail(email)
+    if (!user) {
+      user = new User(
+        username:email,
+        password: (Math.random() * System.currentTimeMillis()) as String,
+        description: "Site Manager for ${site.title}",
+        email: email,
+        userRealName:realName,
+        accountExpired: false,
+        accountLocked: false,
+        passwordExpired: false,
+        enabled: false
+      )
+      user.manager = manager
+      user.save(flush: true)
+      SiteUser.link(site, user)
+    }
+    if (!UserNotificationType.userHasNotificationType(user, 'NOTIFICATION_SITE_MANAGER')) {
+      def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
+      UserNotificationType.create(user, notificationType, true)
+    }
+    if (!UserRole.userHasRole(user,'ROLE_USER')) {
+      UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
+    }
+  }
 
   def boolean addSiteAddress(cshift, site) {
     def ret = getSiteAddress(cshift.userName, cshift.pin, site.sourceId)
@@ -304,7 +374,7 @@ class CShiftService {
 
       def email = addr.EMAIL.text()
       if (email.size() > 0) {
-        // TODO create new User - add to contact type Mgr.
+        createSiteUser(site, email, email, cshift.manager)
       }
     }
     println "Returning good address: ${site.address}, ${site.city} ${site.state}"
