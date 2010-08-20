@@ -327,7 +327,8 @@ class UserController {
         def notificationMap = [:]
         List userNotifications = UserNotificationType.findAllByUser(person).collect{ it.notificationType }
         for (notificationType in NotificationType.list()) {
-          notificationMap[notificationType] = userNotifications.contains(notificationType)
+          notificationMap[(notificationType)] = userNotifications.contains(notificationType)
+          println "NotificationType: ${notificationType.dump()}"
         }
 		return [person: person, roleMap: roleMap, siteMap: siteMap, notificationMap: notificationMap]
 	}

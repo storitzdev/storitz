@@ -187,10 +187,10 @@
                   </sec:ifNotGranted>
                   <td>${contact.userRealName}</td>
                   <td>${contact.email}</td>
-                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_OPERATIONS_MANAGER')? 'X' : '&nbsp;'}</td>
-                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_DISTRICT_MANAGER')? 'X' : '&nbsp;'}</td>
-                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_SITE_MANAGER')? 'X' : '&nbsp;'}</td>
-                  <td>${UserNotificationType.hasNotificationType(contact, 'NOTIFICATION_ACCOUNTING')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.userHasNotificationType(contact, 'NOTIFICATION_OPERATIONS_MANAGER')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.userHasNotificationType(contact, 'NOTIFICATION_DISTRICT_MANAGER')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.userHasNotificationType(contact, 'NOTIFICATION_SITE_MANAGER')? 'X' : '&nbsp;'}</td>
+                  <td>${UserNotificationType.userHasNotificationType(contact, 'NOTIFICATION_ACCOUNTING')? 'X' : '&nbsp;'}</td>
                 </tr>
               </g:each>
             </table>

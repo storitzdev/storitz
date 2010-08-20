@@ -16,6 +16,10 @@ import com.storitz.RentalTransaction
 import storitz.constants.RentalUse
 import storitz.constants.IdType
 import com.storitz.User
+import com.storitz.UserNotificationType
+import com.storitz.NotificationType
+import com.storitz.UserRole
+import com.storitz.Role
 
 class SiteLinkService {
 
@@ -500,25 +504,36 @@ class SiteLinkService {
       StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
       if (site) {
         def email = tab.sEmailAddress.text().toLowerCase()
-        def user = User.findByUsername(email)
-        if (!user) {
-          user = new User(
-            username:email,
-            password:'',
-            description: "Site Manager for ${site.title}",
-            email: email,
-            userRealName:tab.sContactName.text(),
-            accountExpired: false,
-            accountLocked: false,
-            passwordExpired: false,
-            enabled: false
-          )
-          user.manager = siteLink.manager
-          user.save(flush: true)
-          SiteUser.link(site, user)
-        }
-        // TODO - add notification types
+        def realName = tab.sContactName.text()
+        createSiteUser(site, email, realName, siteLink.manager)
       }
+    }
+  }
+
+  def createSiteUser(site, email, realName, manager) {
+    def user = User.findByEmail(email)
+    if (!user) {
+      user = new User(
+        username:email,
+        password: (Math.random() * System.currentTimeMillis()) as String,
+        description: "Site Manager for ${site.title}",
+        email: email,
+        userRealName:realName,
+        accountExpired: false,
+        accountLocked: false,
+        passwordExpired: false,
+        enabled: false
+      )
+      user.manager = manager
+      user.save(flush: true)
+      SiteUser.link(site, user)
+    }
+    if (!UserNotificationType.userHasNotificationType(user, 'NOTIFICATION_SITE_MANAGER')) {
+      def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
+      UserNotificationType.create(user, notificationType, true)
+    }
+    if (!UserRole.userHasRole(user,'ROLE_USER')) {
+      UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
     }
   }
 
@@ -571,9 +586,12 @@ class SiteLinkService {
     site.siteLink = siteLink
     site.centerShift = null
 
-    // TODO create a user and assign contact type
-
     site.save()
+
+    def email = tab.sEmailAddress.text().toLowerCase()
+    def realName = tab.sContactName.text()
+    createSiteUser(site, email, realName, siteLink.manager)
+
     if (newSite) {
       SiteUser.link(site, siteLink.manager)
     }
@@ -581,7 +599,7 @@ class SiteLinkService {
     unitsAvailable(siteLink, site, stats, newSite)
 
     site.requiresInsurance = insurance(siteLink, site)
-    if (site.units.size() > 0) {
+    if (site.units && site.units.size() > 0) {
       site.adminFee = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
     }
     getPromos(siteLink, site)
@@ -630,7 +648,7 @@ class SiteLinkService {
     )
 
     for (unit in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table') {
-      boolean rented = unit.bRented.text() as Boolean
+      boolean rented = unit.bRented.text().toLowerCase() == 'true'
 
       if (rented) {
 

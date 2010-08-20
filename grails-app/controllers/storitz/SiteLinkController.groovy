@@ -116,4 +116,13 @@ class SiteLinkController {
       redirect(action: "list")
     }
   }
+
+  def createContacts = {
+    def siteLinkInstance = SiteLink.get(params.id)
+    if (siteLinkInstance) {
+      siteLinkService.createSiteUsers(siteLinkInstance)
+      flash.message = "Site contacts created."
+      redirect(action: "list")
+    }
+  }
 }

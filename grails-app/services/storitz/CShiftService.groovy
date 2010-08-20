@@ -154,10 +154,6 @@ class CShiftService {
         def newSite = false
         if (site) {
           stats.updateCount++
-          site.contacts.each {contact ->
-            contact.delete()
-          }
-          site.contacts.clear()
           site.units.each {unit ->
             unit.delete()
           }
@@ -215,9 +211,6 @@ class CShiftService {
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
       StorageSite foundSite = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
       if (foundSite == site) {
-        site.contacts.each {contact ->
-          contact.delete()
-        }
         site.units.each {unit ->
           unit.delete()
         }
@@ -227,7 +220,6 @@ class CShiftService {
         site.specialOffers.each {offer ->
           offer.delete()
         }
-        site.contacts.clear()
         site.units.clear()
         site.insurances.clear()
         site.specialOffers.clear()
