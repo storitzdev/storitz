@@ -24,6 +24,14 @@
 
         <h1>About Us</h1>
 
+        <p>
+          Storitz is made by people who believe there is a better way to find and rent a place to store your things. By using technology and years of experience in the self-storage industry, the Storitz team is bringing the best of two worlds together to make storing as easy as...Click.Store.Done.
+        </p>
+        <p>
+          <div>2332 Cotner Avenue, Suite 302</div>
+          <div>Los Angeles, CA 90064</div>
+          <div>Phone: 310-444-5550</div>
+        </p>
       </div>
     </div>
 
