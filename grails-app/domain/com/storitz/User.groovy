@@ -39,7 +39,7 @@ class User {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
 
-    def showNotificationTypes() {
-      return UserNotificationType.findAllByUser(this).collect{ it.notificationType.description }.join(", ")
+    static showNotificationTypes(user) {
+      return UserNotificationType.findAllByUser(user).collect{ it.notificationType.description }.join(", ")
     }
 }

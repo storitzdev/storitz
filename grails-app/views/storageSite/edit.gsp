@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.UserRole" %>
+<%@ page import="com.storitz.User; com.storitz.UserRole" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Create Storage Site"/>
@@ -278,6 +278,58 @@
             </div>
             <div style="clear:both;"></div>
           </div>
+
+          <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
+            <div class="checkout_section_header">
+              Bank Account Information
+            </div>
+
+            <div class="formInstructions">
+              Please enter the bank account information for this site.  It will be used to make ACH transfers from Storitz to this account
+              for Move-Ins.  Make sure the 9 digit ABA (Routing) code is accurate and that the account number is entered as numbers without dashes or spaces.
+            </div>
+
+            <div class="checkout_fields">
+              <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance.bankAccount, field: 'accountName', 'errors')}">
+                <input type="text" style="width: 180px;" id="bankAccount.accountName" name="bankAccount.accountName" value="${storageSiteInstance?.bankAccount?.accountName}"/>
+              </div>
+              <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance.bankAccount, field: 'bankName', 'errors')}">
+                <input type="text" style="width: 180px;" id="bankAccount.bankName" name="bankAccount.bankName" value="${storageSiteInstance?.bankAccount?.bankName}"/>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="checkout_labels">
+              <div class="checkout_name" style="width:200px;">
+                <label for="bankAccount.accountName">Name on Account</label>
+              </div>
+              <div class="checkout_name" style="width:200px;">
+                <label for="bankAccount.bankName">Bank Name</label>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="checkout_fields">
+              <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance.bankAccount, field: 'routeCode', 'errors')}">
+                <input type="text" style="width: 180px;" id="bankAccount.routeCode" name="bankAccount.routeCode" value="${storageSiteInstance?.bankAccount?.routeCode}"/>
+              </div>
+              <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance.bankAccount, field: 'acctNo', 'errors')}">
+                <input type="text" style="width: 180px;" id="bankAccount.acctNo" name="bankAccount.acctNo" value="${storageSiteInstance?.bankAccount?.acctNo}"/>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="checkout_labels">
+              <div class="checkout_name" style="width:200px;">
+                <label for="bankAccount.routeCode">ABA/Route Code (9-digit)</label>
+              </div>
+              <div class="checkout_name" style="width:200px;">
+                <label for="bankAccount.acctNo">Account Number</label>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+          </sec:ifAnyGranted>
 
           <div class="checkout_section_header">
             Hours of Operation
@@ -667,7 +719,7 @@
               <ul id="contacts">
                 <g:each var="contact" in="${contacts}">
                   <li id="contact_${contact.id}">
-                    ${contact.username} - ${contact.email} - ${contact.showNotificationTypes()}
+                    ${contact.username} - ${contact.email} - ${User.showNotificationTypes(contact)}
                     <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
                       <div class="right">
                         <a href="#" onclick="deleteContact(${contact.id}); return false;">remove</a>

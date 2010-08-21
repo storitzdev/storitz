@@ -319,7 +319,7 @@ class StorageSiteController {
         specialOffer.save();
       }
       storageSiteInstance.properties = params
-      if (!storageSiteInstance.hasErrors() && storageSiteInstance.save(flush: true)) {
+      if (storageSiteInstance.validate() && !storageSiteInstance.hasErrors() && storageSiteInstance.save(flush: true)) {
         flash.message = "${message(code: 'default.updated.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
         redirect(action: "show", id: storageSiteInstance.id)
       }
@@ -403,7 +403,7 @@ class StorageSiteController {
 
     if (site && user && !SiteUser.findBySiteAndUser(site, user)) {
       SiteUser.link (site, user)
-      render (status: 200, contentType:"application/json", text:"{ \"userId\": ${user.id}, \"username\":\"${user.username}\", \"email\":\"${user.email}\", \"notificationTypes\":\"${user.showNotificationTypes()}\" }")
+      render (status: 200, contentType:"application/json", text:"{ \"userId\": ${user.id}, \"username\":\"${user.username}\", \"email\":\"${user.email}\", \"notificationTypes\":\"${User.showNotificationTypes(user)}\" }")
       return
     }
     render (status: 200, contentType:"application/json", text:"{ \"userId\": -1 }")    

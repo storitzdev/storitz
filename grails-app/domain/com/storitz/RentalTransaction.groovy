@@ -32,6 +32,7 @@ class RentalTransaction {
   StorageSite site
   Date bookingDate
   Date moveInDate
+  Date achTransferDate
   Date paidThruDate
   Date dateOfBirth
   BigDecimal cost
@@ -65,6 +66,7 @@ class RentalTransaction {
     idState(nullable: true)
     idType(nullable: true)
     commission(nullable: true)
+    achTransferDate(nullable: true)
   }
 
   static transients = ['searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
