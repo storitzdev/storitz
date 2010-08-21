@@ -233,7 +233,7 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
     display: block;
 }
 
-.buttons a, .buttons input {
+.buttons a, .buttons input, .buttonSmall a, .buttonSmall input {
     text-decoration: none;
     font-weight: normal;
     font-size: 10px;
@@ -935,6 +935,25 @@ p.footer {
     border: 2px #006400 solid;
     color: #fff;
     padding: 10px 15px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+}
+
+.buttonSmall a, .buttonSmall input {
+    background: #3fac00;
+    border: 2px #fff solid;
+    color: #fff;
+    padding: 3px 10px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+    display: inline-block;
+}
+
+.buttonSmall a:hover, .buttonSmall input:hover {
+    background: #3fac00;
+    border: 2px #006400 solid;
+    color: #fff;
+    padding: 3px 10px;
     -webkit-border-radius:5px;
     -moz-border-radius:10px;
 }

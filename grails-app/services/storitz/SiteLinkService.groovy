@@ -660,42 +660,47 @@ class SiteLinkService {
        }
 
       } else {
+        def unitID = unit.UnitID.text()
+        def existingUnit = site.units.find{ it.unitNumber == unitID }
 
-        def siteUnit = new StorageUnit()
-        siteUnit.unitCount = 1
-        siteUnit.description = unit.sTypeName.text()
-        siteUnit.unitNumber = unit.UnitID.text()
-        siteUnit.unitName = unit.sUnitName.text()
-        siteUnit.price = unit.dcStdRate.text() as BigDecimal
-        siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
-        def floor = unit.iFloor.text() as Integer
-        def typeName = unit.sTypeName.text()
-        siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
-        siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
-        siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
-        siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
-        siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
-        siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
-        siteUnit.isAvailable = true
-        siteUnit.isSecure = false
-        if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
-          siteUnit.isUpper = true
-        }
-        Integer width = (int) Double.parseDouble(unit.dcWidth.text())
-        Integer length = (int) Double.parseDouble(unit.dcLength.text())
-        siteUnit.displaySize = width + " X " + length
+        if (!existingUnit) {
 
-        def unitSize = unitSizeService.getUnitSize(width, length)
-        if (unitSize) {
-          siteUnit.unitsize = unitSize
-          if (!siteUnit.save()) {
-            siteUnit.errors.allErrors.each { println it }
+          def siteUnit = new StorageUnit()
+          siteUnit.unitCount = 1
+          siteUnit.description = unit.sTypeName.text()
+          siteUnit.unitNumber = unit.UnitID.text()
+          siteUnit.unitName = unit.sUnitName.text()
+          siteUnit.price = unit.dcStdRate.text() as BigDecimal
+          siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
+          def floor = unit.iFloor.text() as Integer
+          def typeName = unit.sTypeName.text()
+          siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
+          siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
+          siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
+          siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
+          siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
+          siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
+          siteUnit.isAvailable = true
+          siteUnit.isSecure = false
+          if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
+            siteUnit.isUpper = true
           }
-          stats.unitCount++;
+          Integer width = (int) Double.parseDouble(unit.dcWidth.text())
+          Integer length = (int) Double.parseDouble(unit.dcLength.text())
+          siteUnit.displaySize = width + " X " + length
 
-          site.addToUnits(siteUnit)
-        } else {
-          println "Skipping unit due to size: width=" + width + " length=" + length
+          def unitSize = unitSizeService.getUnitSize(width, length)
+          if (unitSize) {
+            siteUnit.unitsize = unitSize
+            if (!siteUnit.save()) {
+              siteUnit.errors.allErrors.each { println it }
+            }
+            stats.unitCount++;
+
+            site.addToUnits(siteUnit)
+          } else {
+            println "Skipping unit due to size: width=" + width + " length=" + length
+          }
         }
       }
     }

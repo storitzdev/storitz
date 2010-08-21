@@ -4,6 +4,7 @@ import com.storitz.Role
 import com.storitz.User
 import grails.plugins.springsecurity.Secured
 import com.storitz.UserRole
+import grails.converters.JSON
 
 import com.storitz.SiteUser
 import com.storitz.StorageSite
@@ -82,6 +83,20 @@ class UserController {
         }
 		[personList: results, personListCount: count]
 	}
+
+  def autocompleteContact= {
+
+    def user = session["user"]
+
+    def results
+    if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+      results = User.findAllByUsernameLike(params.term +'%', params).collect{it.username}
+    } else {
+      results = User.findAllByManagerAndUsernameLike(user, params.term + '%', [max:100, sort:"username", order:"asc"]).collect{it.username}
+    }
+    render (status: 200, contentType:"application/json", text: results as JSON )
+  }
+
 
     @Secured(['ROLE_ADMIN','ROLE_MANAGER','ROLE_USER'])
 	def show = {
@@ -325,10 +340,9 @@ class UserController {
             siteMap[(site)] = userSites.contains(site)
         }
         def notificationMap = [:]
-        List userNotifications = UserNotificationType.findAllByUser(person).collect{ it.notificationType }
-        for (notificationType in NotificationType.list()) {
-          notificationMap[(notificationType)] = userNotifications.contains(notificationType)
-          println "NotificationType: ${notificationType.dump()}"
+        def userNotifications = UserNotificationType.findAllByUser(person).collect{ it.notificationType }
+        for (nt in NotificationType.findAll()) {
+          notificationMap[(nt)] = userNotifications.contains(nt)
         }
 		return [person: person, roleMap: roleMap, siteMap: siteMap, notificationMap: notificationMap]
 	}

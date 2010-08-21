@@ -384,6 +384,18 @@ class StorageSiteController {
     }
   }
 
+  def addContact = {
+    def site = StorageSite.get(params.id)
+    def user = User.findByEmail(params.email)
+
+    if (site && user && !SiteUser.findBySiteAndUser(site, user)) {
+      SiteUser.link (site, user)
+      render (status: 200, contentType:"application/json", text:"{ \"userId\": ${user.id}, \"username\":\"${user.username}\", \"email\":\"${user.email}\", \"notificationTypes\":\"${user.showNotificationTypes()}\" }")
+      return
+    }
+    render (status: 200, contentType:"application/json", text:"{ \"userId\": -1 }")    
+  }
+
   def defaultImage = {
     def site = StorageSite.get(params.id)
     def imgId = params.siteImageId as Long

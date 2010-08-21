@@ -252,7 +252,7 @@ class CShiftService {
         println "Got a bad address, skipping site creation: ${site.title}"
         return
       }
-    
+
       addSiteHours(cshift, site)
       addSiteFeatures(cshift, site)
 
@@ -262,8 +262,14 @@ class CShiftService {
       site.centerShift = cshift
 
       site.save()
+
       if (newSite) {
         SiteUser.link(site, cshift.manager)
+      }
+
+      def email = tab.EMAIL_ADDRESS.text()
+      if (email.size() > 0) {
+        createSiteUser(site, email, email, cshift.manager)
       }
 
       unitsAvailable(cshift, site, stats)
@@ -286,30 +292,15 @@ class CShiftService {
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
       StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      println "Create contact for site ${tab.SITE_ID.text()}"
       if (site) {
-        getSiteUserInfo(cshift, site)
+        def email = tab.EMAIL_ADDRESS.text()
+        println "Checking contact for email: ${email}"
+        if (email.size() > 0) {
+          createSiteUser(site, email, email, cshift.manager)
+        }
       }
     }
-  }
-
-  def boolean getSiteUserInfo(cshift, site) {
-    def ret = getSiteAddress(cshift.userName, cshift.pin, site.sourceId)
-    def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
-            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
-            xsd: 'http://www.w3.org/2001/XMLSchema',
-            msdata: 'urn:schemas-microsoft-com:xml-msdata',
-            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
-    )
-
-
-    for (addr in records.'soap:Body'.'*:GetSiteAddressResponse'.'*:GetSiteAddressResult'.'*:SiteAddress'.'*:Address') {
-      def email = addr.EMAIL.text()
-      if (email.size() > 0) {
-        createSiteUser(site, email, email, cshift.manager)
-      }
-    }
-    return true
   }
 
   def createSiteUser(site, email, realName, manager) {
@@ -372,10 +363,6 @@ class CShiftService {
       site.lng = geoResult.Placemark[0].Point.coordinates[0]
       site.lat = geoResult.Placemark[0].Point.coordinates[1]
 
-      def email = addr.EMAIL.text()
-      if (email.size() > 0) {
-        createSiteUser(site, email, email, cshift.manager)
-      }
     }
     println "Returning good address: ${site.address}, ${site.city} ${site.state}"
     return true

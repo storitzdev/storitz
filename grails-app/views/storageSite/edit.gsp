@@ -3,18 +3,24 @@
 <head>
   <g:set var="title" value="Create Storage Site"/>
   <g:render template="/header"/>
+  <link href="${createLinkTo(dir:'css', file:'jquery-ui-1.8.4.custom.css')}" media="screen" rel="stylesheet" type="text/css" />
 
   <script type="text/javascript">
     //<![CDATA[
 
-    google.load("jquery, 1.4.2");
-    google.load("jqueryui, 1.8.4");
+    google.load("jquery", "1.4.2");
+    google.load("jqueryui", "1.8.4");
 
     google.setOnLoadCallback(function() {
       jQuery.noConflict();
 
       setupTimePickers();
+      setupContactSelector();
     });
+
+    function setupContactSelector() {
+      jQuery("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteContact')}"});
+    }
 
     function setupTimePickers() {
       AnyTime.picker("startWeekday", {format:"%h:%i%p"});
@@ -64,6 +70,43 @@
       liElem.insert({bottom: newLink});
       $(listName).insert({bottom: liElem});
       $(itemName).focus();
+    }
+
+    function addContact() {
+      new Ajax.Request("${createLink(controller:'storageSite', action:'addContact')}",
+      {
+        method:'get',
+        parameters: {id: ${storageSiteInstance.id}, email:jQuery("#contactName").val()},
+        onSuccess:function(transport) {
+          var ret = transport.responseJSON;
+          if (ret.userId > 0) {
+              var itemId = 'contact_' + ret.userId;
+              var newItem = new Element('li', {id: itemId})
+              newItem.update(ret.username + ' - ' + ret.email + ' - ' + ret.notificationTypes)
+                        .insert(new Element('div', { class: "right" })
+                          .update(new Element('a', {
+                            href: '#',
+                            onclick: 'deleteContact(' + ret.userId + '); return false;'
+                          })
+                            .update('remove'))
+                            .insert(new Element('div', {style:'clear:both;'})
+                        ));
+              $('contacts').insert({bottom: newItem});
+
+          }
+        }
+      });
+    }
+
+    function deleteContact(contactId) {
+      new Ajax.Request("${createLink(controller:'storageSite', action:'removeContact')}",
+      {
+        method:'get',
+        parameters: {id: ${storageSiteInstance.id}, userId:contactId},
+        onSuccess:function(transport) {
+          $("contact_" + contactId).remove();
+        }
+      });
     }
 
     function deleteImage(imgId) {
@@ -621,15 +664,33 @@
 
           <div class="checkout_fields">
             <div style="width:500px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'contacts', 'errors')}">
-              <ul>
+              <ul id="contacts">
                 <g:each var="contact" in="${contacts}">
-                  <li>
+                  <li id="contact_${contact.id}">
                     ${contact.username} - ${contact.email} - ${contact.showNotificationTypes()}
+                    <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+                      <div class="right">
+                        <a href="#" onclick="deleteContact(${contact.id}); return false;">remove</a>
+                      </div>
+                      <div style="clear:both;"></div>
+                    </sec:ifAnyGranted>
                   </li>
                 </g:each>
               </ul>
             </div>
-            <!-- Add new contact/manage contact -->
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div class="checkout_labels checkout_name" style="margin: 2px 10px 0 0">
+              <label for="contactName">Search for Contact</label>
+            </div>
+            <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'rentalAgreement', 'errors')}">
+              <input type="text" style="width: 300px;" id="contactName" />
+            </div>
+            <div class="checkout_value">
+              <span class="buttonSmall"><a href="#" onclick="addContact(); return false;">Add Contact</a></span>
+            </div>
             <div style="clear:both;"></div>
           </div>
 

@@ -149,4 +149,13 @@ class CShiftController {
       redirect(action: "list")
     }
   }
+
+  def createContacts = {
+    def cshiftInstance = CenterShift.get(params.id)
+    if (cshiftInstance) {
+      CShiftService.createSiteUsers(cshiftInstance)
+      flash.message = "Site contacts created."
+      redirect(action: "list")
+    }
+  }
 }
