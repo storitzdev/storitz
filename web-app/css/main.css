@@ -390,7 +390,7 @@ div.resultsBar {
     display: table-cell;
     border-collapse: collapse;
 }
-.operatingHours td {
+.operatingHours td, .callCenterCalls td, .callCenterCalls th {
     padding: 0 0.5em;
     border: 0;
     display: table-cell;
@@ -1158,4 +1158,20 @@ p.descriptionText {
 #directionsSteps li {
     margin: 15px 0;
     font-size: 13px;
+}
+
+table.callCenterCalls  {
+    border-collapse: collapse;
+}
+
+.callCenterCalls tr:hover {
+    background: #b2d1ff;
+}
+
+tr.rowEven {
+    background: #dfdfdf;
+}
+
+tr.rowOdd {
+    background: #fff;
 }
