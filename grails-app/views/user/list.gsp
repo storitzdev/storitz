@@ -5,9 +5,25 @@
   <head>
     <g:set var="title" value="User List"/>
     <g:render template="/header" />
+    <link href="${createLinkTo(dir:'css', file:'jquery-ui-1.8.4.custom.css')}" media="screen" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
 //<![CDATA[
+
+    google.load("jquery", "1.4.2");
+    google.load("jqueryui", "1.8.4");
+
+    google.setOnLoadCallback(function() {
+      jQuery.noConflict();
+
+      setupUserSelector();
+    });
+
+    function setupUserSelector() {
+      jQuery("input#username").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
+    }
+
+
 //]]>
   </script>
 

@@ -14,6 +14,7 @@ import com.storitz.UserRole
 import com.storitz.RentalAgreement
 import com.storitz.SpecialOffer
 import com.storitz.Insurance
+import grails.converters.JSON
 
 class StorageSiteController {
 
@@ -32,7 +33,6 @@ class StorageSiteController {
 
   @Secured(['ROLE_USER'])
   def list = {
-    def username = session["username"]
     def user = session["user"]
 
     def results
@@ -62,6 +62,19 @@ class StorageSiteController {
       results = results.subList(offset, offset + max < count ? offset + max : count)
     }
     return [storageSiteInstanceList: results, storageSiteInstanceTotal: count]
+  }
+
+  def autocompleteSite = {
+    def user = session["user"]
+    def max = Math.min(params.max ? params.int('max') : 20, 100)
+    params.sort = 'title'
+    def results
+    if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+      results = StorageSite.findAllByTitleLike(params.term + '%', params).collect{it.title}
+    } else {
+      results = SiteUser.findAllByUser(user).collect{ it.site }.find{ it.title =~ /${params.term}.*/}.sort{ it.title }
+    }
+    render (status: 200, contentType:"application/json", text: results as JSON )
   }
 
   def create = {

@@ -512,6 +512,9 @@ class SiteLinkService {
 
   def createSiteUser(site, email, realName, manager) {
     def user = User.findByEmail(email)
+
+    if (realName.size() == 0) realName = email
+
     if (!user) {
       user = new User(
         username:email,

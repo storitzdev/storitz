@@ -62,7 +62,7 @@ class UserController {
             }
           }
 
-          query = {
+          results = User.createCriteria().list(params) {
             and {
               like("username", params.username+ '%')
               if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
@@ -70,7 +70,7 @@ class UserController {
               }
             }
           }
-          results = criteria.list(params, query)
+
 
         } else {
           if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
@@ -84,7 +84,7 @@ class UserController {
 		[personList: results, personListCount: count]
 	}
 
-  def autocompleteContact= {
+  def autocompleteUser = {
 
     def user = session["user"]
 

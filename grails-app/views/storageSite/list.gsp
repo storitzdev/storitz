@@ -6,8 +6,23 @@
   <g:set var="title" value="Create Storage Site"/>
   <g:render template="/header"/>
 
+  <link href="${createLinkTo(dir:'css', file:'jquery-ui-1.8.4.custom.css')}" media="screen" rel="stylesheet" type="text/css" />
+
   <script type="text/javascript">
     //<![CDATA[
+    google.load("jquery", "1.4.2");
+    google.load("jqueryui", "1.8.4");
+
+    google.setOnLoadCallback(function() {
+      jQuery.noConflict();
+
+      setupUserSelector();
+    });
+
+    function setupUserSelector() {
+      jQuery("input#sitename").autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+    }
+
     //]]>
   </script>
 
@@ -43,7 +58,7 @@
                               <label for='sitename'>Site name:</label>
                           </td>
                           <td valign='top' class='value'>
-                              <input type="text" id="sitename" name="sitename" value="${flash.sitename}"/>
+                              <input type="text" id="sitename" name="sitename" style="width:300px;" value="${flash.sitename}"/>
                               <span class="button"><input class="save" type="submit" value="Search" /></span>
                           </td>
                       </tr>

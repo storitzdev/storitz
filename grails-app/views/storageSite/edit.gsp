@@ -19,7 +19,7 @@
     });
 
     function setupContactSelector() {
-      jQuery("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteContact')}"});
+      jQuery("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
     }
 
     function setupTimePickers() {

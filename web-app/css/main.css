@@ -390,6 +390,18 @@ div.resultsBar {
     display: table-cell;
     border-collapse: collapse;
 }
+.operatingHours td {
+    padding: 0 0.5em;
+    border: 0;
+    display: table-cell;
+    border-collapse: collapse;
+    /*white-space: nowrap;
+    overflow: hidden;*/
+}
+
+.tright {
+    text-align: right;
+}
 
 #costTotals td {
     padding: 0;
@@ -399,6 +411,7 @@ div.resultsBar {
     /*white-space: nowrap;
     overflow: hidden;*/
 }
+
 
 #instructions {
     font-family: verdana, arial, helvetica, sans-serif;

@@ -36,7 +36,7 @@
       Special Offer: <span id="selectedOffer" class="selectedOffer"></span>
     </div>
     <div class="right">
-      <div id="costDetails" class="right" style="display:none;">
+      <div id="costDetails" class="right">
         <table id="costTotals">
           <tr>
             <td>Mothly rent</td>
@@ -66,7 +66,12 @@
       </div>
       <div style="clear:both;"></div>
       <div class="right transTotalMoveIn">
-        Total Move-In Cost:&nbsp;&nbsp;<a href="#" id="totalMoveInCost" onclick="Effect.toggle('costDetails', 'appear', { duration: 0.25 }); return false;"></a>
+        <div class="left" style="margin-right: 30px;">
+          Total Move-In Cost:
+        </div>
+        <div class="left">
+          <a href="#" id="totalMoveInCost" onclick="Effect.toggle('costDetails', 'appear', { duration: 0.25 }); return false;"></a>
+        </div>
       </div>
       <div style="clear:both;"></div>
     </div>

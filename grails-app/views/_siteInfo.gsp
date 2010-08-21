@@ -21,37 +21,87 @@
 </div>
 <div style="clear:both;"></div>
 <div class="siteInfoText">
-  Weekdays:
-  <g:if test="${site.openWeekday}">
-    <g:formatDate format="h:mma" date="${site.startWeekday}"/> - <g:formatDate format="h:mma" date="${site.endWeekday}"/>
-  </g:if>
-  <g:else>Closed</g:else>
-</div>
-<div class="siteInfoText">
-  Saturday:
-  <g:if test="${site.openSaturday}">
-    <g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/>
-  </g:if>
-  <g:else>Closed</g:else>
-</div>
-<div class="siteInfoText">
-  Sunday:
-  <g:if test="${site.openSunday}">
-    <g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/>
-  </g:if>
-  <g:else>Closed</g:else>
-</div>
-<div class="siteInfoText">
-  Gate Weekdays:
-  <g:formatDate format="h:mma" date="${site.startGate}"/> - <g:formatDate format="h:mma" date="${site.endGate}"/>
-</div>
-<div class="siteInfoText">
-  Gate Sunday:
-  <g:formatDate format="h:mma" date="${site.startSundayGate}"/> - <g:formatDate format="h:mma" date="${site.endSundayGate}"/>
-</div>
-<div class="siteInfoText">
+  <table class="operatingHours">
+    <tr>
+      <td class="tright">
+        Weekdays:
+      </td>
+      <g:if test="${site.openWeekday}">
+        <td class="tright">
+          <g:formatDate format="h:mma" date="${site.startWeekday}"/>
+        </td>
+        <td>-</td>
+        <td class="tright">
+          <g:formatDate format="h:mma" date="${site.endWeekday}"/>
+        </td>
+      </g:if>
+      <g:else>
+        <td colspan="3" style="text-align: center;">Closed</td>
+      </g:else>
+    </tr>
+    <tr>
+      <td class="tright">
+        Saturday:
+      </td>
+      <g:if test="${site.openSaturday}">
+        <td class="tright">
+          <g:formatDate format="h:mma" date="${site.startSaturday}"/>
+        </td>
+        <td>-</td>
+        <td class="tright">
+          <g:formatDate format="h:mma" date="${site.endSaturday}"/>
+        </td>
+      </g:if>
+      <g:else>
+        <td colspan="3" style="text-align: center;">Closed</td>
+      </g:else>
+    </tr>
+    <tr>
+      <td class="tright">
+        Sunday:
+      </td>
+      <g:if test="${site.openSunday}">
+        <td class="tright">
+          <g:formatDate format="h:mma" date="${site.startSunday}"/>
+        </td>
+        <td>-</td>
+        <td class="tright">
+          <g:formatDate format="h:mma" date="${site.endSunday}"/>
+        </td>
+      </g:if>
+      <g:else>
+        <td colspan="3" style="text-align: center;">Closed</td>
+      </g:else>
+    </tr>
+    <tr>
+      <td class="tright">
+        Gate Weekdays:
+      </td>
+      <td>
+        <g:formatDate format="h:mma" date="${site.startGate}"/>
+      </td>
+      <td>-</td>
+      <td class="tright">
+        <g:formatDate format="h:mma" date="${site.endGate}"/>
+      </td>
+    </tr>
+    <tr>
+      <td class="tright">
+        Gate Sunday:
+      </td>
+      <td>
+        <g:formatDate format="h:mma" date="${site.startSundayGate}"/>
+      </td>
+      <td>-</td>
+      <td class="tright">
+        <g:formatDate format="h:mma" date="${site.endSundayGate}"/>
+      </td>
+    </tr>
+  </table>
   <g:if test="${site.extendedHours}">
-    Extended Hours Available
+    <div class="siteInfoText" style="margin-top:6px;">
+      Extended Hours Available
+    </div>
   </g:if>
 </div>
 <div style="padding: 18px 0 10px;" class="section_header">
