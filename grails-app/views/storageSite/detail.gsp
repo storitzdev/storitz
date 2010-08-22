@@ -103,11 +103,11 @@
             var nextSegment = steps[j].path;
             var durationText = steps[j].duration.text ? steps[j].duration.text : "&nbsp;";
             var distanceText = steps[j].distance.text ? steps[j].distance.text : "&nbsp;";
-            elem = new Element('li', { class: "directionStep" })
-                    .insert(new Element('div', { class:"left", style: "width:400px;" }).update(steps[j].instructions))
-                    .insert(new Element('div', { class:"right", style:"width: 75px; text-align:right;"}).update(distanceText))
-                    .insert(new Element('div', { class:"right", style:"width: 75px; text-align:right;"}).update(durationText))
-                    .insert(new Element('div', { style:"clear:both; margin-left: -35px; padding-bottom: 15px; width: 650px; border-bottom: 1px solid #dfdfdf;"}));
+            elem = new Element('tr', { class: "directionStep" })
+                    .insert(new Element('td', { style:"width:50px;text-align:right;"}).update((j + 1) + '.'))
+                    .insert(new Element('td', { style:"width:425px;" }).update(steps[j].instructions))
+                    .insert(new Element('td', { style:"width: 75px; padding-right: 10px;text-align:right;"}).update(distanceText))
+                    .insert(new Element('td', { style:"width: 75px; padding-right: 15px;text-align:right;"}).update(durationText));
 
             $('directionsSteps').insert(elem);
             for (k=0;k<nextSegment.length;k++) {
@@ -115,6 +115,16 @@
               bounds.extend(nextSegment[k]);
             }
           }
+        }
+        if (route.copyrights) {
+          $('directionsCopyrights').update(route.copyrights);
+        }
+        if (route.warnings && route.warnings.length > 0) {
+          var warnings = new Element('ul');
+          route.warnings.each(function(warn) {
+            warnings.insernt(new Element('li').update(warn))
+          });
+          $('directionsWarnings').update(warnings);
         }
         polyline.setMap(directionMap);
         directionMap.fitBounds(bounds);
@@ -586,6 +596,7 @@
                 <div style="clear:both;"></div>
                 <div id="dirPanel" style="display:none;">
                   <div class="specialOfferText" id="directionsDistance" style="margin: 6px 0;"></div>
+                  <div id="directionsWarnings" class="directionsWarnings"></div>
                   <div class="transBox">
                     <div class="left" style="margin:5px 15px;">
                       <img src="${resource(dir:'images', file:'icn_map_blue.png')}" alt="Start">
@@ -593,8 +604,8 @@
                     <div id="directionsStartAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
                     <div style="clear:both;"></div>
                   </div>
-                  <ol id="directionsSteps" style="width:600px; margin: 15px 10px 15px 0;">
-                  </ol>
+                  <table id="directionsSteps" style="width:650px; margin: 15px 10px 15px 0;">
+                  </table>
                   <div class="transBox">
                     <div class="left" style="margin:5px 15px;">
                       <img src="${resource(dir:'images', file:'icn_map_grn.png')}" alt="End">
@@ -602,6 +613,7 @@
                     <div id="directionsEndAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
                     <div style="clear:both;"></div>
                   </div>
+                  <div id="directionsCopyrights" class="directionsCopyrights"></div>
                 </div>
                 <div id="directionMapDestination" style="display:none;">
                   <div id="directionMapDestinationCanvas"></div>

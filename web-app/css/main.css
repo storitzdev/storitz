@@ -1155,9 +1155,27 @@ p.descriptionText {
 	text-decoration:underline;
 }
 
-#directionsSteps li {
+#directionsSteps td {
     margin: 15px 0;
+    padding: 1em 0;
     font-size: 13px;
+    border: 0;
+    display: table-cell;
+    border-collapse: collapse;
+}
+
+#directionsSteps tr {
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.directionsWarnings li {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+.directionsCopyrights {
+    margin-top: 5px;
+    font-size:10px;
 }
 
 table.callCenterCalls  {
