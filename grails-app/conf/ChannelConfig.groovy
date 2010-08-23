@@ -7,7 +7,7 @@ class ChannelConfig {
     private ChannelConfig() {} // prevent instantiation
 
     static def getChannelConfig() {
-        LinkedHashMap<RequestKey,java.util.Collection<ConfigAttribute>> requestMap = new LinkedHashMap<RequestKey, Collection<ConfigAttribute>>()
+        LinkedHashMap<RequestKey,java.util.Collection<SecurityConfig>> requestMap = new LinkedHashMap<RequestKey, Collection<SecurityConfig>>()
 
         // resources that can be served over http or https (typically whatever the containing page is served as)
         requestMap.put new RequestKey("/images/**"), [new SecurityConfig("ANY_CHANNEL")]

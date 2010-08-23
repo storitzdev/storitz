@@ -8,7 +8,8 @@
 4) Install the following plugins:
 
 grails install-plugin spring-security-core
-grails install-plugin http://www.arquetipos.co.cr/blog/files/grails-image-tools-1.0.4.zip
+grails install-plugin http://storitz-files.s3.amazonaws.com/grails-image-tools-1.0.5-SNAPSHOT.zip
+#grails install-plugin http://www.arquetipos.co.cr/blog/files/grails-image-tools-1.0.4.zip
 grails install-plugin rest
 grails install-plugin ws-client
 grails install-plugin fckeditor
@@ -18,6 +19,8 @@ grails install-plugin authorize-net
 grails install plugin activemq
 grails install plugin jms
 # Choose sanitation level?  I used 3 (loose - MySpace).
+grails install-plugin activemq
+grails install-plugin jms
 
 Following a 'grails upgrade', it is not necessary to install plugins manually.  A subsequent 'run-app' or such will automatically install them.
 
