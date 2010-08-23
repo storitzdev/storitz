@@ -26,4 +26,11 @@ beans = {
     channelDecisionManager = ref("channelDecisionManager")
     securityMetadataSource = ref("securityMetadataSource")
   }
+
+  jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory){bean ->
+    bean.destroyMethod ="stop"
+    connectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+        brokerURL = "vm://localhost"
+    }
+  }
 }

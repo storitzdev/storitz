@@ -16,4 +16,6 @@ class AdminController {
       
       [ title:'Admin Pages']
     }
+
 }
+

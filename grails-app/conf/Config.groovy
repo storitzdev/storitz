@@ -85,3 +85,15 @@ grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity
 grails.plugins.springsecurity.logout.afterLogoutUrl = "/logout.gsp"
 
 grails.date.formats = ['dd-MM-yyyy', 'h:mma']
+
+// Mail configuration
+grails.mail.host = "mail.storitz.com"
+grails.mail.port = 587
+grails.mail.username = "no-reply@storitz.com"
+grails.mail.password = "ylper!0n"
+grails.mail.props = ["mail.smtp.auth":"true",
+      "mail.smtp.socketFactory.port": "587",
+      "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
+      "mail.smtp.socketFactory.fallback": "false",
+      "mail.smtp.starttls.enable": "true",
+      "mail.debug": "true"]
