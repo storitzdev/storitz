@@ -160,7 +160,7 @@ class RentalTransactionController {
 
       rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
       rentalTransactionInstance.unitId = params.unitId as Long
-      rentalTransactionInstance.promoId = params.promoId as Long
+      rentalTransactionInstance.promoId = params.promoId ? (params.promoId as Long) : -999
 
       def promo = null
       if (!rentalTransactionInstance.promoId == -999) {

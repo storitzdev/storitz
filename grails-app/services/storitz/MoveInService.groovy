@@ -5,7 +5,7 @@ import com.storitz.RentalTransaction
 class MoveInService {
 
     def siteLinkService
-    def cShiftService
+    def CShiftService
 
     boolean transactional = false
 
@@ -15,6 +15,7 @@ class MoveInService {
           return siteLinkService.checkRented(trans)
 
         case "CS3":
+          return CShiftService.checkRented(trans)
           break
 
         case "CS4":
@@ -34,6 +35,8 @@ class MoveInService {
           break
 
         case "CS3":
+          CShiftService.createTenant(trans)
+          return CShiftService.moveIn(trans)
           break
 
         case "CS4":

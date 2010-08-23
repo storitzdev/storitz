@@ -19,6 +19,8 @@ import com.storitz.UserRole
 import com.storitz.UserNotificationType
 import com.storitz.NotificationType
 import com.storitz.User
+import storitz.constants.RentalUse
+import com.storitz.RentalTransaction
 
 class CShiftService {
 
@@ -117,6 +119,35 @@ class CShiftService {
 </soapenv:Envelope>"""
 
     postAction(payload, 'GetCurrentPromotionListXML')
+  }
+
+  def newTenant(rentalTransaction) {
+
+    def rentalType = ((rentalTransaction.rentalUse && rentalTransaction.rentalUse == RentalUse.BUSINESS) ?  294 : 295)
+    def payload = """<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soap:Header/>
+   <soap:Body>
+      <csc:CreateNewAccount2>
+         <csc:strUser>""" + rentalTransaction.site.centerShift.userName + """</csc:strUser>
+         <csc:strPin>""" + rentalTransaction.site.centerShift.pin + """</csc:strPin>
+         <csc:lngSiteID>""" + rentalTransaction.site.sourceId + """</csc:lngSiteID>
+         <csc:strFirstName>""" + rentalTransaction.contactPrimary.firstName + """</csc:strFirstName>
+         <csc:strLastName>""" + rentalTransaction.contactPrimary.lastName + """</csc:strLastName>
+         <csc:strAccountName>""" + rentalTransaction.contactPrimary.email + """</csc:strAccountName>
+         <csc:strAccountClass>298</csc:strAccountClass>
+         <csc:strAccountType>""" + rentalType + """</csc:strAccountType>
+         <csc:strAddress1>""" + rentalTransaction.contactPrimary.address1 + """</csc:strAddress1>
+         <csc:strAddress2>""" + rentalTransaction.contactPrimary.address2 + """</csc:strAddress2>
+         <csc:strCity>""" + rentalTransaction.contactPrimary.city + """</csc:strCity>
+         <csc:strState>""" + rentalTransaction.contactPrimary.state.display + """</csc:strState>
+         <csc:strZip>""" + rentalTransaction.contactPrimary.zipcode + """</csc:strZip>
+         <csc:strEmail>""" + rentalTransaction.contactPrimary.email + """</csc:strEmail>
+         <csc:strHomePhone>""" + rentalTransaction.contactPrimary.phone + """</csc:strHomePhone>
+      </csc:CreateNewAccount2>
+   </soap:Body>
+</soap:Envelope>"""
+
+    postAction(payload, 'CreateNewAccount2')
   }
 
   private def postAction(payload, action) {
@@ -639,7 +670,7 @@ class CShiftService {
             siteUnit.isPowered = false
             siteUnit.isAvailable = true
             siteUnit.isSecure = false
-            siteUnit.displaySize = width + " X " + length
+            siteUnit.displaySize = dimensions
             stats.unitCount += vacant
 
             site.addToUnits(siteUnit)
@@ -773,6 +804,110 @@ class CShiftService {
       println "Could not obtain insurance information"
       return 0
     }
+  }
+
+  def checkRented(RentalTransaction rentalTransaction) {
+    def unit = StorageUnit.get(rentalTransaction.unitId)
+    def cshift = rentalTransaction.site.centerShift
+
+    if (!unit) return false
+
+    CsKiosk service = new CsKioskLocator();
+
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
+
+    def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, unit.unitName as Double, unit.displaySize)
+
+    if (unitInfo instanceof Integer && unitInfo < 0) {
+      println "Return for getAvailableUnits < 0 : ${unitInfo}"
+      return false
+    }
+
+    println "Dumping unit info: ${unitInfo.dump()}"
+
+    def unitId = unitInfo[0]
+    def dimensions = unitInfo[1]
+    def sqFt = unitInfo[2]
+    def rate = unitInfo[3]
+    def unitNumber = unitInfo[4]
+    def attrDesc = unitInfo[5]
+    def attrId = unitInfo[6]
+    def promoAvail = unitInfo[7]
+    def promoId = unitInfo[8]
+    def promoDesc = unitInfo[9]
+
+    rentalTransaction.feedUnitId = unitId[0]
+    if (promoAvail[0] == 'Y') {
+      def promoCheck = rentalTransaction.site.specialOffers.findBy{ it.concessionId == promoId[0]}
+      if (promoCheck) {
+        rentalTransaction.promoId = promoId[0]
+      }
+    }
+    rentalTransaction.save(flush: true)
+    return true
+  }
+
+  def createTenant(RentalTransaction rentalTransaction) {
+    def ret = newTenant(rentalTransaction)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    for(tab in records.'soap:Body'.'*:CreateNewAccount2Response'.'*:CreateNewAccount2Result'.'*:CreateNewAccount'.'*:Account') {
+      rentalTransaction.tenantId = tab.ACCOUNT_ID.text()
+    }
+    rentalTransaction.save(flush:true)
+  }
+
+  def moveIn(RentalTransaction rentalTransaction) {
+    def cshift = rentalTransaction.site.centerShift
+
+    def insId = -1
+    if (rentalTransaction.insuranceId > 0) {
+      def ins = Insurance.get(rentalTransaction.insuranceId)
+      insId = ins.insuranceId
+    }
+
+    CsKiosk service = new CsKioskLocator();
+
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
+
+    println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Double}, ${rentalTransaction.feedUnitId}, ${insId as String}"
+    
+    def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, rentalTransaction.feedUnitId, insId as String)
+
+    if (ret instanceof Integer && ret < 0) {
+      println "Return for getMoveInCost < 0 : ${ret}"
+      return false
+    }
+
+    println "Dumping getMoveInCost : ${ret.dump()}"
+
+    def desc = ret[0]
+    def price = ret[1]
+    def tax = ret[2]
+    def subtotal = ret[3]
+    def start = ret[4]
+    def end = ret[5]
+
+    def paymentString = end[end.size() - 1]
+
+    // Use ACH to allow Centershift to report transactions
+    ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, rentalTransaction.tenantId as Double ,rentalTransaction.feedUnitId, insId as String,
+            paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "", "", "K")
+
+    if (ret instanceof Integer && ret < 0) {
+      println "Return for doMoveIn < 0 : ${ret}"
+      return false
+    }
+    rentalTransaction.idNumber = ret
+    rentalTransaction.save(flush: true)
+
+    return true
+
   }
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {

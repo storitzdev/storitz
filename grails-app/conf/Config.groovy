@@ -72,7 +72,7 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-//    error  'org.apache.axis'
+    debug  'org.apache.axis'
 }
 
 //log4j.logger.org.springframework.security='off,stdout'

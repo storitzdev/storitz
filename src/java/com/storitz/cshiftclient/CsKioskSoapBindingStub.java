@@ -7,6 +7,16 @@
 
 package com.storitz.cshiftclient;
 
+import com.sun.xml.internal.ws.encoding.soap.SOAPConstants;
+import org.apache.axis.encoding.ser.BeanDeserializerFactory;
+import org.apache.axis.encoding.ser.BeanSerializerFactory;
+
+import javax.xml.rpc.encoding.SerializerFactory;
+import javax.xml.rpc.encoding.TypeMapping;
+import javax.xml.rpc.encoding.TypeMappingRegistry;
+
+import javax.xml.namespace.QName;
+
 public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implements com.storitz.cshiftclient.CsKioskSoapPort_PortType {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
@@ -1031,6 +1041,8 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
             java.lang.Class cls;
             javax.xml.namespace.QName qName;
             javax.xml.namespace.QName qName2;
+            TypeMappingRegistry registry = service.getTypeMappingRegistry();
+            TypeMapping typeMapping = registry.createTypeMapping();
             java.lang.Class beansf = org.apache.axis.encoding.ser.BeanSerializerFactory.class;
             java.lang.Class beandf = org.apache.axis.encoding.ser.BeanDeserializerFactory.class;
             java.lang.Class enumsf = org.apache.axis.encoding.ser.EnumSerializerFactory.class;
@@ -1042,12 +1054,16 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
             qName = new javax.xml.namespace.QName("http://tempuri.org/csKiosk/type/", "UnknownBinaryContent");
+            qName2 = new QName("http://schemas.microsoft.com/soap-toolkit/data-types", "empty");
             cachedSerQNames.add(qName);
+            cachedSerQNames.add(qName2);
             cls = byte[].class;
             cachedSerClasses.add(cls);
+            cachedSerClasses.add(cls);
             cachedSerFactories.add(arraysf);
+            cachedSerFactories.add(new EmptySerializerFactory());
             cachedDeserFactories.add(arraydf);
-
+            cachedDeserFactories.add(new EmptyDeserializerFactory());
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {

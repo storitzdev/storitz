@@ -60,7 +60,6 @@
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/antlr/antlr/jars/antlr-2.7.6.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.web/jars/org.springframework.security.web-3.0.3.RELEASE.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.core/jars/org.springframework.security.core-3.0.3.RELEASE.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.geronimo.specs/geronimo-jms_1.1_spec/jars/geronimo-jms_1.1_spec-1.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

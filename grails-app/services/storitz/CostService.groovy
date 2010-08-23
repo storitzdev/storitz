@@ -5,6 +5,7 @@ import com.storitz.SpecialOffer
 import com.storitz.StorageUnit
 import com.storitz.Insurance
 import com.storitz.Commission
+import storitz.constants.CommissionType
 
 class CostService {
 
@@ -58,16 +59,22 @@ class CostService {
     }
   }
 
-  def calcualteCommission(cost, commissionSource) {
+  def calculateCommission(cost, commissionSource) {
 
-    def c = Commission.criteria()
+    def c = Commission.createCriteria()
 
-    return c.get {
+    def ctype = c.get {
       and {
-        eq("commissionSournce", commissionSource)
+        eq("commissionSource", commissionSource)
         gt("lowerBound", cost)
         le("upperBound", cost)
       }
     }
+    if (!ctype) return cost * 0.25
+
+    if (ctype.commissionType == CommissionType.PERCENTAGE) {
+      return cost * (ctype.amount / 100)
+    }
+    return ctype.amount
   }
 }

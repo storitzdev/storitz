@@ -26,6 +26,7 @@ class RentalTransaction {
   String transactionId        // credit card authorization number
   String accessCode           // possible gate code
   Long unitId
+  String feedUnitId           // for centershift to identify specific unit
   Long promoId
 
   Long insuranceId
@@ -68,6 +69,8 @@ class RentalTransaction {
     idType(nullable: true)
     commission(nullable: true)
     achTransferDate(nullable: true)
+    feedUnitId(nullable: true)
+    promoId(nullable:true)
     searchEngineReferral(nullable: true)
   }
 
