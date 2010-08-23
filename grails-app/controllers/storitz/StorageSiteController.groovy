@@ -426,6 +426,10 @@ class StorageSiteController {
     StorageSite site = StorageSite.get(params.id)
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     
+    //////////////////////////////////////////
+    // >>> BEGIN match smartCall action code <<<
+    // TODO: refactor
+
     Collection sizeList = site.units.collect { it.unitsize }.unique()
     // output JSON for types
     Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
@@ -446,6 +450,9 @@ class StorageSiteController {
       bestUnit = site.units.min{ it.price }
     }
 
+    // >>> END match smartCall action code <<<
+    //////////////////////////////////////////
+
     def remoteAddr = request.remoteAddr
 
     println "Detail visit by $remoteAddr for $site ${site.title} - ${site.zipcode} on search ${params.address} ${params.searchSize} ${params.date}"
@@ -461,7 +468,8 @@ class StorageSiteController {
     if (!session?.shortSessionId) {
       session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
     }
-    
+
+    // If you change this, don't forget the smartCall action also uses this view!
     [sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate, unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:null]
   }
 
@@ -500,15 +508,45 @@ class StorageSiteController {
 
       println site
       
-      Collection sizeList = site.units.collect { it.unitsize }.unique()
-      sizeList.add(StorageSize.get(1))
-      sizeList.sort { it.width * it.length }
-
       callParams.rentalTransaction.site = site
 //      callParams.rentalTransaction.insuranceTerms = false
       
-      def model = [id:site.id, sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
-         , shortSessionId:callParams.shortSessionId, searchSize:callParams.searchSize, address:callParams.address, date:callParams.date
+      StorageSize unitSize = callParams.searchSize ? StorageSize.get(callParams.searchSize) : null
+
+      //////////////////////////////////////////
+      // >>> BEGIN match detail action code <<<
+
+      Collection sizeList = site.units.collect { it.unitsize }.unique()
+      // output JSON for types
+      Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
+
+      sizeList.sort { it.width * it.length }
+
+      def bestUnit
+      // if a size was chosen, use it, else get the "best" price
+      if (callParams.unitType && unitSize) {
+        bestUnit = site.units.findAll{ it.getUnitTypeLower() == callParams.unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+        if (!bestUnit) {
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+        }
+      } else if (unitSize) {
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+      } else {
+        // TODO - decide on best price or best price for a given size
+        bestUnit = site.units.min{ it.price }
+      }
+
+      // >>> END match detail action code <<<
+      //////////////////////////////////////////
+
+//      def model = [id:site.id, sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
+//         , shortSessionId:callParams.shortSessionId, searchSize:callParams.searchSize, address:callParams.address, date:callParams.date
+//         , rentalTransaction:callParams.rentalTransaction]
+
+      def model = [id:site.id
+         , sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
+         , shortSessionId:callParams.shortSessionId, chosenUnitType:callParams.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate
+         , unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:callParams.rentalTransaction?.promoId
          , rentalTransaction:callParams.rentalTransaction]
 
       println model
