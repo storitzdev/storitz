@@ -3,9 +3,35 @@ package storitz
 import org.bouncycastle.util.encoders.UrlBase64
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import javax.servlet.http.Cookie
+import javax.servlet.http.HttpServletRequest
 
-class CookieCodec
+public class CookieCodec
 {
+
+  public static String LANDING_COOKIE_NAME = 'LANDING'
+
+  public static Integer LANDING_COOKIE_TTL = 604800   // A week in seconds
+
+  public static  Cookie bakeLandingCookie(Map ingredients)
+  {
+    bakeLandingCookie(CookieCodec.encodeCookieValue(ingredients))
+  }
+
+  public static  Cookie bakeLandingCookie(String value)
+  {
+    Cookie landingCookie = new Cookie(LANDING_COOKIE_NAME, value)
+    landingCookie.path = '/'
+    landingCookie.maxAge = LANDING_COOKIE_TTL
+
+    landingCookie
+  }
+
+  public static Cookie getCookie(HttpServletRequest request, String name)
+  {
+    def cookieJar = request.cookies.grep { it.name == name }
+    cookieJar ? (Cookie) cookieJar[0] : null
+  }
 
   public static String encodeCookieValue(Map m)
   {

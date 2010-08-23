@@ -15,6 +15,7 @@ import com.storitz.RentalAgreement
 import com.storitz.SpecialOffer
 import com.storitz.Insurance
 import grails.converters.JSON
+import javax.servlet.http.Cookie
 
 class StorageSiteController {
 
@@ -511,6 +512,15 @@ class StorageSiteController {
          , rentalTransaction:callParams.rentalTransaction]
 
       println model
+
+      // We set the landing cookie so the operator looks like the renter would when the transaction is paid. 
+      println "Setting cookie ${callParams.landingCookie}"
+
+      params.landingCookie = callParams.landingCookie
+
+      Cookie landingCookie = CookieCodec.bakeLandingCookie(params.landingCookie)
+
+      response.addCookie(landingCookie)
 
       params.id = model.id
       params.searchSize = model.searchSize

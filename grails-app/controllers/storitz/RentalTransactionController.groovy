@@ -11,6 +11,7 @@ import com.storitz.Insurance
 import com.vinomis.authnet.AuthorizeNet
 import com.storitz.TransactionNote
 import storitz.constants.CommissionSourceType
+import com.storitz.SearchEngineReferral
 
 class RentalTransactionController {
 
@@ -21,7 +22,7 @@ class RentalTransactionController {
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
-    static liveSessions = [:]
+    static Map liveSessions = [:]
 
     def index = {
         redirect(action: "list", params: params)
@@ -47,6 +48,7 @@ class RentalTransactionController {
 
     def ajaxUpdate = {
       println "Update by ${params.id}: ${params.dump()}"
+
 //      def site = StorageSite.get(params.site)
       def site = params.site
       params.remove('site')
@@ -56,9 +58,16 @@ class RentalTransactionController {
       params.remove('SC_address')
       def date = params.SC_date
       params.remove('SC_date')
+
       def rentalTransactionInstance = new RentalTransaction(params)
       println (rentalTransactionInstance.dump())
-      liveSessions[params.id] = [timestamp:System.currentTimeMillis(), shortSessionId:params.id, site:site, searchSize:searchSize, address:address, date:date, rentalTransaction:rentalTransactionInstance]
+
+      def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: params.id
+              , site: site, searchSize: searchSize, address: address, date: date
+              , rentalTransaction: rentalTransactionInstance, landingCookie:params.landingCookie]
+
+      liveSessions[params.id] = callParams
+
       render(status: 200, contentType: "application/json", text: "{ 'update':false }")
     }
 
@@ -215,7 +224,7 @@ class RentalTransactionController {
 
       rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
       rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
-      
+
       def s = new AuthorizeNet()
       s.authorizeAndCapture {
         custId rentalTransactionInstance.id as String
@@ -247,6 +256,16 @@ class RentalTransactionController {
       rentalTransactionInstance.cvv2 = params.cc_cvv2
 
       rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.cost, CommissionSourceType.WEBSITE)
+
+      if (params.landingCookie) {
+        def landing = CookieCodec.decodeCookieValue(params.landingCookie)
+
+        if (landing.sem_id) {
+          rentalTransactionInstance.searchEngineReferral = new SearchEngineReferral(sem_id:landing.sem_id, ts_code:landing.ts_code, match_type:landing.match_type
+            , location_id:landing.location_id, ad_id:landing.ad_id, keyword:landing.keyword
+            , landingDate:landing.time, bookingDate:rentalTransactionInstance.bookingDate, commission:rentalTransactionInstance.commission)
+        }
+      }
 
       if (!moveInService.moveIn(rentalTransactionInstance)) {
         flash.message = "Problem with move-in.  Please contact technical support."

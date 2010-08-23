@@ -38,6 +38,7 @@ class RentalTransaction {
   BigDecimal cost
   BigDecimal commission
   ReferralCode referralCode
+  SearchEngineReferral searchEngineReferral
   Boolean isCallCenter
 
   // Transient members
@@ -67,6 +68,7 @@ class RentalTransaction {
     idType(nullable: true)
     commission(nullable: true)
     achTransferDate(nullable: true)
+    searchEngineReferral(nullable: true)
   }
 
   static transients = ['searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
