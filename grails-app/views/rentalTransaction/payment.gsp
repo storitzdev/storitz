@@ -46,6 +46,10 @@
     }
   }
 
+  function prevStep() {
+    window.location = "${createLink(controller:'storageSite', action:'detail', params:[id:rentalTransactionInstance?.site.id, searchSize:searchSize, unitType: chosenUnitType])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
+  }
+
   function createMap() {}
 
   Event.observe(window, 'load', function() {
@@ -261,7 +265,7 @@
                     <img src="${resource(dir:'images', file:'btn-previous2.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
                   </g:link>
                   -->
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"/></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep(); return false" alt="Prev"/></div>
                   <div style="clear:both;"></div>
                 </div>
               </g:form>
@@ -273,7 +277,6 @@
     <div style="clear:both; height:30px;"></div>
     <g:render template="/footer" />
     <g:render template="/size_popup" />
-    <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
     </div>
   </body>
 </html>

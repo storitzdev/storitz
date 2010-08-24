@@ -218,7 +218,7 @@
                   return;                    
                 }
                 var randId = Math.floor(Math.random() * 100001);
-                var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Drive Up</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Upper</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
+                var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Upper</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Drive Up</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
                 var offers;
 
@@ -302,10 +302,10 @@
                     });
                     tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
                       '<a href="' + siteLink(s) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td><td class="textCenter">' +
+                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
                       (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +
-                      '</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
+                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td>' +
+                      '<td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +'</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
                 $('stresults_div').update(tableContents);

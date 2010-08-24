@@ -142,7 +142,8 @@ class RentalTransactionController {
         render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
         return
       }
-      Collection sizeList = rentalTransactionInstance.site.units.collect { it.unitsize }.unique()
+      Collection sizeList = rentalTransactionInstance.site.units.collect { it.unitsize }.unique().sort { it.width * it.length }
+
       Collection unitTypes = rentalTransactionInstance.site.units.findAll{ it.unitsize.id == unit.unitsize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
       def site = rentalTransactionInstance.site
 

@@ -50,7 +50,7 @@
             <td class="costMoney" id="insurancePerMonth"></td>
             <td class="costMoney" id="insuranceTotal"></td>
           </tr>
-          <tr>
+          <tr id="specialOfferBlock">
             <td>Special Offer</td>
             <td></td>
             <td></td>

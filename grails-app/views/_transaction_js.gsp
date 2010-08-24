@@ -92,6 +92,11 @@ function updateTransaction() {
   }
   // promo discount
   $('discountTotal').update(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
+  if (discountTotal > 0) {
+    $('specialOfferBlock').show();
+  } else {
+    $('specialOfferBlock').hide();
+  }
   $('adminTotal').update('$' + additionalFees.toFixed(2));
 }
 
