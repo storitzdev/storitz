@@ -25,7 +25,7 @@
         <h1>About Us</h1>
 
         <p>
-          Storitz is made by people who believe there is a better way to find and rent a place to store your things. By using technology and years of experience in the self-storage industry, the Storitz team is bringing the best of two worlds together to make storing as easy as...Click.Store.Done.
+          At Storitz, we are committed to proving there is a better way to find and rent self-storage. We believe that customers should be able to find and rent the perfect storage unit without ever having to leave the comfort of their computer. Our team has years of experience in both self-storage and technology, and our vision incorporates the best of both worlds into a smart process that is as easy as Click.Store.Done.
         </p>
         <p>
           <div>2332 Cotner Avenue, Suite 302</div>

@@ -473,6 +473,15 @@ class StorageSiteController {
     [sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate, unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:null]
   }
 
+  def directions = {
+    StorageSite site = StorageSite.get(params.id)
+
+    if (!site) {
+      // TODO - handle missing site
+    }
+    [site: site]
+  }
+
   def getSmartCallDataForId(id)
   {
     RentalTransactionController.liveSessions[id]
