@@ -379,7 +379,7 @@
           
           var validAddr = address.length > 4 && !address.startsWith('Enter ');
 
-          if (address) {
+          if (validAddr) {
             searchAddr = address;
           }
           searchSize = size;

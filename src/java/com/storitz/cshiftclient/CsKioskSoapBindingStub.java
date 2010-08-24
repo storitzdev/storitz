@@ -7,11 +7,6 @@
 
 package com.storitz.cshiftclient;
 
-import com.sun.xml.internal.ws.encoding.soap.SOAPConstants;
-import org.apache.axis.encoding.ser.BeanDeserializerFactory;
-import org.apache.axis.encoding.ser.BeanSerializerFactory;
-
-import javax.xml.rpc.encoding.SerializerFactory;
 import javax.xml.rpc.encoding.TypeMapping;
 import javax.xml.rpc.encoding.TypeMappingRegistry;
 
@@ -1058,12 +1053,15 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
             cachedSerQNames.add(qName);
             cachedSerQNames.add(qName2);
             cls = byte[].class;
+            Class cls2 = Object.class;
             cachedSerClasses.add(cls);
-            cachedSerClasses.add(cls);
+            cachedSerClasses.add(cls2);
             cachedSerFactories.add(arraysf);
             cachedSerFactories.add(new EmptySerializerFactory());
             cachedDeserFactories.add(arraydf);
             cachedDeserFactories.add(new EmptyDeserializerFactory());
+
+            System.out.println("EmptyDeserializer registered");
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
@@ -1437,9 +1435,9 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
-    }
+      throw axisFaultException;
+  }
+ }
 
     public java.lang.Object getMoveInCost(java.lang.String pUser, java.lang.String pPIN, double pSiteID, java.lang.String pUnitIDs, java.lang.String pInsuranceIDs) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {

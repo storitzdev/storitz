@@ -174,7 +174,7 @@ class CShiftService {
   def loadSites(cshift, stats) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -213,7 +213,7 @@ class CShiftService {
   def refreshSites(cshift, stats) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -236,7 +236,7 @@ class CShiftService {
   def updateSite(site, stats) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -313,7 +313,7 @@ class CShiftService {
   def createSiteUsers(cshift) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -364,7 +364,7 @@ class CShiftService {
   def boolean addSiteAddress(cshift, site) {
     def ret = getSiteAddress(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -402,7 +402,7 @@ class CShiftService {
   def addSiteHours(cshift, site) {
     def ret = getSiteHours(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -583,7 +583,7 @@ class CShiftService {
   def addSiteFeatures(cshift, site) {
     def ret = getSiteFeatures(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -631,7 +631,7 @@ class CShiftService {
   def unitsAvailable(cshift, site, stats) {
     def ret = getSiteUnits(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -692,7 +692,7 @@ class CShiftService {
   def loadPromos(cshift, site) {
     def ret = getPromos(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -849,15 +849,19 @@ class CShiftService {
 
   def createTenant(RentalTransaction rentalTransaction) {
     def ret = newTenant(rentalTransaction)
+
+    println "newTenant returned: ${ret}"
+
     def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    for(tab in records.'soap:Body'.'*:CreateNewAccount2Response'.'*:CreateNewAccount2Result'.'*:CreateNewAccount'.'*:Account') {
-      rentalTransaction.tenantId = tab.ACCOUNT_ID.text()
+    for(acct in records.'soap:Body'.'*:CreateNewAccount2Response'.'*:CreateNewAccount2Result'.'*:CreateNewAccount'.'*:Account') {
+
+      rentalTransaction.tenantId = acct.ACCOUNT_ID.text()
     }
     rentalTransaction.save(flush:true)
   }
@@ -893,11 +897,12 @@ class CShiftService {
     def start = ret[4]
     def end = ret[5]
 
-    def paymentString = end[end.size() - 1]
+    def paymentString = end[end.size() - 1] as String
 
+    println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Double}, ${rentalTransaction.tenantId as Double}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
-    ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, rentalTransaction.tenantId as Double ,rentalTransaction.feedUnitId, insId as String,
-            paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "", "", "K")
+    ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, rentalTransaction.tenantId as Double, rentalTransaction.feedUnitId, insId as String,
+            paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
 
     if (ret instanceof Integer && ret < 0) {
       println "Return for doMoveIn < 0 : ${ret}"
