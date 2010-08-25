@@ -12,6 +12,8 @@ import com.vinomis.authnet.AuthorizeNet
 import com.storitz.TransactionNote
 import storitz.constants.CommissionSourceType
 import com.storitz.SearchEngineReferral
+import com.storitz.NotificationType
+import com.storitz.SiteUser
 
 class RentalTransactionController {
 
@@ -282,7 +284,18 @@ class RentalTransactionController {
         ccString += 'XXXX '
       }
       ccString += ccNum.substring(ccNum.size() - 4)
-      [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, ccNum: ccString]
+
+      def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
+      def siteManager = User.withCriteria {
+        sites {
+          eq("site.id", rentalTransactionInstance.site.id)
+        }
+        notificationTypes {
+          eq("notificationType.id", siteManagerNotification.id)
+        }
+        maxResults(1)
+      }
+      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, ccNum: ccString, siteManager:siteManager])
     }
 
     def edit = {

@@ -3,7 +3,7 @@ package com.storitz
 class User {
 
     static transients = ['pass']
-    static hasMany = [sites:SiteUser]
+    static hasMany = [sites: SiteUser, notificationTypes: UserNotificationType]
 
 	String username
 	String password
@@ -25,10 +25,6 @@ class User {
         password(blank: false)
         manager(nullable: true)
         description(nullable: true, widget: 'textarea')
-    }
-
-    def sites() {
-        return sites.collect{it.site}
     }
 
 	static mapping = {

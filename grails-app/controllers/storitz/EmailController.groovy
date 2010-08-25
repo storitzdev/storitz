@@ -1,10 +1,25 @@
 package storitz
 
+import com.storitz.User
+
 class EmailController {
 
   def emailService
 
   def email = {
+
+
+    def siteManager = User.withCriteria {
+      sites {
+        eq("site.id", 1l)
+      }
+      notificationTypes {
+        eq("notificationType.id", 1l)
+      }
+      maxResults(1)
+    }
+    println "Result = ${siteManager}"
+    
     println "Sending email..."
     
         try {

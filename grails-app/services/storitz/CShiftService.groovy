@@ -90,6 +90,21 @@ class CShiftService {
     postAction(payload, 'GetSiteFeatures')
   }
 
+  def getSitePhones(userName, pin, siteId) {
+    def payload = """<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soap:Header/>
+   <soap:Body>
+      <csc:GetSitePhones>
+         <csc:strUser>""" + userName + """</csc:strUser>
+         <csc:strPin>""" + pin + """</csc:strPin>
+         <csc:lngSiteID>""" + siteId + """</csc:lngSiteID>
+      </csc:GetSitePhones>
+   </soap:Body>
+</soap:Envelope>"""
+
+    postAction(payload, 'GetSitePhones')
+  }
+
   def getSiteUnits(userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
@@ -285,6 +300,7 @@ class CShiftService {
       }
 
       addSiteHours(cshift, site)
+      addSitePhone(cshift, site)
       addSiteFeatures(cshift, site)
 
       site.extendedHours = false
@@ -330,6 +346,26 @@ class CShiftService {
         if (email.size() > 0) {
           createSiteUser(site, email, email, cshift.manager)
         }
+      }
+    }
+  }
+
+  def createSitePhones(cshift) {
+    def ret = getSites(cshift.userName, cshift.pin)
+    def records = ret.declareNamespace(
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
+      StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      println "Create phone for site ${tab.SITE_ID.text()}"
+      if (site) {
+        addSitePhone(cshift, site)
       }
     }
   }
@@ -397,6 +433,25 @@ class CShiftService {
     }
     println "Returning good address: ${site.address}, ${site.city} ${site.state}"
     return true
+  }
+
+  def addSitePhone(cshift, site) {
+    def ret = getSitePhones(cshift.userName, cshift.pin, site.sourceId)
+    def records = ret.declareNamespace(
+            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    int count = 0;
+    for (phone in records.'soap:Body'.'*:GetSitePhonesResponse'.'*:GetSitePhonesResult'.'*:SitePhones'.'*:Phone') {
+      def phoneNumber = phone.PHONE_NUMBER.text()
+      def value = phone.VALUE.text().toLowerCase()
+      if (count++ == 0 || (value == 'site' || value == 'office')) {
+        site.phone = phoneNumber
+      }
+    }
   }
 
   def addSiteHours(cshift, site) {

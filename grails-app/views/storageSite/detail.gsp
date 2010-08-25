@@ -367,9 +367,9 @@
                   <p style="margin: 0;">
                     ${site.address}${site.address2 && site.address2.size() > 0 ? '&nbsp;' + site.address2 : ''}, ${site.city}, ${site.state.display} ${site.zipcode}
                   </p>
-                  <p class="descriptionText" style="margin: 18px">
+                  <div class="descriptionText" style="margin: 18px">
                     ${site.description}
-                  </p>
+                  </div>
                   <div style="clear:both;"></div>
                   <div id="featuresList">
                     <ul>

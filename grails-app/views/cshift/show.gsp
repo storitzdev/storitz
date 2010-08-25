@@ -81,7 +81,8 @@
         <span class="button"><g:actionSubmit action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Sites')}"/></span>
         <span class="button"><g:actionSubmit action="refreshPromos" value="${message(code: 'default.button.refresh.promos.label', default: 'Refresh Promos')}"/></span>
         <span class="button"><g:actionSubmit action="refreshInsurance" value="${message(code: 'default.button.refresh.insurance.label', default: 'Refresh Insurance')}"/></span>
-        <span class="button"><g:actionSubmit action="createContacts" value="${message(code: 'default.button.refresh.insurance.label', default: 'Create Contacts')}"/></span>
+        <span class="button"><g:actionSubmit action="createContacts" value="${message(code: 'default.button.create.contacts.label', default: 'Create Contacts')}"/></span>
+        <span class="button"><g:actionSubmit action="refreshPhones" value="${message(code: 'default.button.refresh.phones.label', default: 'Refresh Phones')}"/></span>
       </g:form>
     </div>
   </div>
