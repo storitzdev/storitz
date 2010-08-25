@@ -52,7 +52,7 @@ function drawDirections(response, status) {
 
     $('directionsSteps').childElements().each(function(elem) { elem.remove() });
 
-    for (i=0;i<legs.length;i++) {
+    for (i=0;i<legs.length; i++) {
       if (i == 0) {
         startLocation.latlng = legs[i].start_location;
         startLocation.address = legs[i].start_address;
@@ -75,7 +75,7 @@ function drawDirections(response, status) {
         var nextSegment = steps[j].path;
         var durationText = steps[j].duration.text ? steps[j].duration.text : "&nbsp;";
         var distanceText = steps[j].distance.text ? steps[j].distance.text : "&nbsp;";
-        elem = new Element('tr', { class: "directionStep" })
+        elem = new Element('tr', { "class": "directionStep" })
                 .insert(new Element('td', { style:"width:50px;text-align:right;"}).update((j + 1) + '.'))
                 .insert(new Element('td', { style:"width:425px;" }).update(steps[j].instructions))
                 .insert(new Element('td', { style:"width: 75px; padding-right: 10px;text-align:right;"}).update(distanceText))

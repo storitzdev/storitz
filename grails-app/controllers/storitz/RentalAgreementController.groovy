@@ -43,7 +43,7 @@ class RentalAgreementController {
     def save = {
         def rentalAgreementInstance = new RentalAgreement(params)
 
-        if (params.manager?.id) {
+        if (params?.manager?.id) {
 
           def user = params.manager.id != 'null' ? User.get(params.manager.id as Long) : null
 

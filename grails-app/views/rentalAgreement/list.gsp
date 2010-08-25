@@ -21,7 +21,7 @@
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
-      <sec:ifAnyGranted roles="ROLE_MANAGER">
+      <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
         <span class="button"><g:link action="create">Add Agreement</g:link></span>
       </sec:ifAnyGranted>
     </div>

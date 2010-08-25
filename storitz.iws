@@ -18,15 +18,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/CShift/show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/CShift/show.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalAgreementController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalAgreementController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/com/storitz/User.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/com/storitz/User.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/EmailController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/EmailController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_directions_js.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_directions_js.gsp" />
     </list>
     <ignored path="$USER_HOME_GRIFFON$/" />
     <ignored path=".idea/workspace.xml" />
@@ -102,10 +98,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="371" column="23" selection-start="12842" selection-end="12842" vertical-scroll-proportion="0.68711656">
+            <state line="662" column="114" selection-start="33229" selection-end="33229" vertical-scroll-proportion="-2.4078948">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RentalAgreementController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalAgreementController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="18" selection-start="1241" selection-end="1241" vertical-scroll-proportion="-7.1153846">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="42" selection-start="715" selection-end="715" vertical-scroll-proportion="0.5283364">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="920" column="14" selection-start="15599" selection-end="15599" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="114" column="53" selection-start="4697" selection-end="4711" vertical-scroll-proportion="-2.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_directions_js.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_directions_js.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="41" selection-start="2350" selection-end="2355" vertical-scroll-proportion="-3.64">
               <folding />
             </state>
           </provider>
@@ -115,15 +156,6 @@
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="293" column="62" selection-start="13494" selection-end="13494" vertical-scroll-proportion="-6.3333335">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="email.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/email/email.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -150,51 +182,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserRole.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/UserRole.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="6" selection-start="83" selection-end="83" vertical-scroll-proportion="-1.4782609">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserNotificationType.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/UserNotificationType.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="37" selection-start="160" selection-end="176" vertical-scroll-proportion="-2.5869565">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NotificationType.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/NotificationType.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="27" selection-start="114" selection-end="130" vertical-scroll-proportion="-2.2173913">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="STMapController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/STMapController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="6" selection-start="184" selection-end="184" vertical-scroll-proportion="1.3076923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -209,14 +196,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalAgreementController.groovy" />
-        <option value="$PROJECT_DIR$/src/groovy/storitz/constants/NotificationEventType.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/NotificationService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/_directions.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/directions.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/_directions_js.gsp" />
-        <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/CShift/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/User.groovy" />
@@ -225,6 +208,10 @@
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/_directions_js.gsp" />
+        <option value="$PROJECT_DIR$/web-app/css/main.css" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalAgreementController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp" />
       </list>
     </option>
   </component>
@@ -1212,41 +1199,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_directions.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="30" selection-start="1532" selection-end="1547" vertical-scroll-proportion="-12.24">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1169" column="17" selection-start="20615" selection-end="20615" vertical-scroll-proportion="-16.12">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="889" column="129" selection-start="38148" selection-end="38148" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="367" column="33" selection-start="13222" selection-end="13222" vertical-scroll-proportion="-14.84">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/CShift/show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="154" selection-start="3892" selection-end="3892" vertical-scroll-proportion="-9.09804">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy">
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
@@ -1332,9 +1284,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_directions_js.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="41" selection-start="2350" selection-end="2355" vertical-scroll-proportion="-3.64">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="53" selection-start="4697" selection-end="4711" vertical-scroll-proportion="-2.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="920" column="14" selection-start="15599" selection-end="15599" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="371" column="23" selection-start="12842" selection-end="12842" vertical-scroll-proportion="0.68711656">
+        <state line="662" column="114" selection-start="33229" selection-end="33229" vertical-scroll-proportion="-2.4078948">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalAgreementController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="18" selection-start="1241" selection-end="1241" vertical-scroll-proportion="-7.1153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/rentalAgreement/list.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="42" selection-start="715" selection-end="715" vertical-scroll-proportion="0.5283364">
           <folding />
         </state>
       </provider>
