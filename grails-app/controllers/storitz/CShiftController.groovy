@@ -82,6 +82,15 @@ class CShiftController {
     }
   }
 
+  def refreshPhones = {
+    def cshiftInstance = CenterShift.get(params.id)
+    if (cshiftInstance) {
+      CShiftService.createSitePhones(cshiftInstance)
+      flash.message = "Feed phones refreshed."
+      redirect(action: "show", id: cshiftInstance.id)
+    }
+  }
+
   def show = {
     def cshiftInstance = CenterShift.get(params.id)
     if (!cshiftInstance) {

@@ -91,16 +91,16 @@ class CShiftService {
   }
 
   def getSitePhones(userName, pin, siteId) {
-    def payload = """<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
-   <soap:Header/>
-   <soap:Body>
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soapenv:Header/>
+   <soapenv:Body>
       <csc:GetSitePhones>
          <csc:strUser>""" + userName + """</csc:strUser>
          <csc:strPin>""" + pin + """</csc:strPin>
          <csc:lngSiteID>""" + siteId + """</csc:lngSiteID>
       </csc:GetSitePhones>
-   </soap:Body>
-</soap:Envelope>"""
+   </soapenv:Body>
+</soapenv:Envelope>"""
 
     postAction(payload, 'GetSitePhones')
   }
@@ -139,9 +139,9 @@ class CShiftService {
   def newTenant(rentalTransaction) {
 
     def rentalType = ((rentalTransaction.rentalUse && rentalTransaction.rentalUse == RentalUse.BUSINESS) ?  294 : 295)
-    def payload = """<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
-   <soap:Header/>
-   <soap:Body>
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soapenv:Header/>
+   <soapenv:Body>
       <csc:CreateNewAccount2>
          <csc:strUser>""" + rentalTransaction.site.centerShift.userName + """</csc:strUser>
          <csc:strPin>""" + rentalTransaction.site.centerShift.pin + """</csc:strPin>
@@ -159,8 +159,8 @@ class CShiftService {
          <csc:strEmail>""" + rentalTransaction.contactPrimary.email + """</csc:strEmail>
          <csc:strHomePhone>""" + rentalTransaction.contactPrimary.phone + """</csc:strHomePhone>
       </csc:CreateNewAccount2>
-   </soap:Body>
-</soap:Envelope>"""
+   </soapenv:Body>
+</soapenv:Envelope>"""
 
     postAction(payload, 'CreateNewAccount2')
   }
@@ -189,7 +189,7 @@ class CShiftService {
   def loadSites(cshift, stats) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -228,7 +228,7 @@ class CShiftService {
   def refreshSites(cshift, stats) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -251,7 +251,7 @@ class CShiftService {
   def updateSite(site, stats) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -329,7 +329,7 @@ class CShiftService {
   def createSiteUsers(cshift) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -353,7 +353,7 @@ class CShiftService {
   def createSitePhones(cshift) {
     def ret = getSites(cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -400,7 +400,7 @@ class CShiftService {
   def boolean addSiteAddress(cshift, site) {
     def ret = getSiteAddress(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -437,8 +437,11 @@ class CShiftService {
 
   def addSitePhone(cshift, site) {
     def ret = getSitePhones(cshift.userName, cshift.pin, site.sourceId)
+
+    if (!ret) return
+    
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -457,7 +460,7 @@ class CShiftService {
   def addSiteHours(cshift, site) {
     def ret = getSiteHours(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -638,7 +641,7 @@ class CShiftService {
   def addSiteFeatures(cshift, site) {
     def ret = getSiteFeatures(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -686,7 +689,7 @@ class CShiftService {
   def unitsAvailable(cshift, site, stats) {
     def ret = getSiteUnits(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -747,7 +750,7 @@ class CShiftService {
   def loadPromos(cshift, site) {
     def ret = getPromos(cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
@@ -908,7 +911,7 @@ class CShiftService {
     println "newTenant returned: ${ret}"
 
     def records = ret.declareNamespace(
-            soap: 'http://www.w3.org/2003/05/soap-envelope',
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
             xsd: 'http://www.w3.org/2001/XMLSchema',
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
