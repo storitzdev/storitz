@@ -30,7 +30,7 @@
           By using our website, you are accepting the practices we describe here.
         </p>
         <p>
-          If you have any questions, please <g:link action="contactus">click here</g:link> for information on how to contact us.
+          If you have any questions, please <g:link controller="contactUs" action="create">click here</g:link> for information on how to contact us.
         </p>
         <p>
           Storitz complies with the privacy laws and regulations of the United States of America. Storitz makes no representation that this Site is governed by or operated in accordance with the laws of other nations, or that the Site or any part thereof is appropriate or available for use in any particular jurisdiction. Those who choose to access the Site do so on their own initiative and at their own risk, and are responsible for complying with all local laws, rules and regulations. By using this Site, visitors from outside of the United States of America acknowledge this Site is subject to the laws and regulations of the United States of America, and waive any claims that may arise under their own national laws.
@@ -172,7 +172,7 @@
         <p>
           <span class="legalHeader">9. Offline vs. Online practices.</span> Please note that this Privacy Policy applies solely to our online information gathering and dissemination practices in connection with the Site, and does not apply to any of our practices conducted offline.
         </p>
-
+        <p>
           <span class="legalHeader">10. Contacting Storitz Regarding this Site.</span> If you have any questions concerning this Policy, you may send them by email to our Privacy Officer at privacy@storitz.com. Please note that email communications will not necessarily be secure; accordingly you should not include credit card information or other sensitive information in your email correspondence with us. You must send any official correspondence via postal mail to:
         </p>
         <p>

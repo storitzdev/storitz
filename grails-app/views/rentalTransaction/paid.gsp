@@ -43,7 +43,7 @@
                 </div>
                 <div class="formInstructions">
                   Your payment for this unit has already been processed.  If you believe you have reached this page by
-                  mistake, please <g:link controller="static" action="contactus">Contact Us</g:link>.
+                  mistake, please <g:link controller="contactUs" action="create">Contact Us</g:link>.
                 </div>
 
               </g:form>
