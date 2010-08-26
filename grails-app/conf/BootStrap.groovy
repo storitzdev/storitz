@@ -29,6 +29,10 @@ class BootStrap {
        if (!roleCallCenter) {
          roleCallCenter = new Role( authority: 'ROLE_CALLCENTER', description: 'Call Center').save(flush: true)
        }
+       def roleCallCenterAdmin = Role.findByAuthority('ROLE_CALLCENTER_ADMIN')
+       if (!roleCallCenterAdmin) {
+         roleCallCenterAdmin = new Role( authority: 'ROLE_CALLCENTER_ADMIN', description: 'Call Center Administrator').save(flush: true)
+       }
 
        // create system NOTIFICATION types
        def ntSiteManager = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')

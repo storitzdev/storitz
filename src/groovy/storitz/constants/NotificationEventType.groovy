@@ -11,15 +11,17 @@ public enum NotificationEventType {
   NEW_TENANT("New Tenant"),
   PRE_MOVE_IN_PROPERTY("Pre Move-In - Property"),
   PRE_MOVE_IN_TENANT("Pre Move-In - Tenant"),
-  POST_MOVE_IN("Post Move In")
+  POST_MOVE_IN("Post Move In");
 
-  public display
+  final String display
 
-  public NotificationType(display) {
+  NotificationEventType(String display) {
     this.display = display;
   }
 
-  public static list() {
+  String getValue() { return this.display }
+
+  static list() {
     [NEW_TENANT, PRE_MOVE_IN_PROPERTY, PRE_MOVE_IN_TENANT, POST_MOVE_IN]
   }
   

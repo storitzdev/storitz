@@ -895,6 +895,7 @@ class CShiftService {
     def promoDesc = unitInfo[9]
 
     rentalTransaction.feedUnitId = unitId[0]
+    rentalTransaction.feedUnitNumber = unitNumber[0]
     if (promoAvail[0] == 'Y') {
       def promoCheck = rentalTransaction.site.specialOffers.findBy{ it.concessionId == promoId[0]}
       if (promoCheck) {

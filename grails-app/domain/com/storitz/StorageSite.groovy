@@ -159,7 +159,7 @@ class StorageSite {
   }
 
   def getFullAddress() {
-    return "${address}, ${city}, ${state} ${zipcode}"
+    return "${address}${address2 ? ' ' + address2 : ''}, ${city}, ${state.display} ${zipcode}"
   }
 
   def getSiteTitle() {

@@ -13,7 +13,8 @@ import com.storitz.TransactionNote
 import storitz.constants.CommissionSourceType
 import com.storitz.SearchEngineReferral
 import com.storitz.NotificationType
-import com.storitz.SiteUser
+import org.hibernate.FetchMode as FM
+import storitz.constants.NotificationEventType
 
 class RentalTransactionController {
 
@@ -21,6 +22,7 @@ class RentalTransactionController {
     def costService
     def moveInService
     def creditCardService
+    def notificationService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
@@ -42,16 +44,13 @@ class RentalTransactionController {
     }
 
     def ajaxPoll = {
-//      println "Polled by ${params.id}"
       render {
         span("${session.shortSessionId} ${new Date()}")
       }
     }
 
     def ajaxUpdate = {
-      println "Update by ${params.id}: ${params.dump()}"
 
-//      def site = StorageSite.get(params.site)
       def site = params.site
       params.remove('site')
       def searchSize = params.SC_searchSize
@@ -60,12 +59,23 @@ class RentalTransactionController {
       params.remove('SC_address')
       def date = params.SC_date
       params.remove('SC_date')
+      def page = params.SC_page
+      params.remove('SC_page')
 
-      def rentalTransactionInstance = new RentalTransaction(params)
-      println (rentalTransactionInstance.dump())
+      def rentalTransactionInstance
+      if (page == 'payment') {
+        def c = RentalTransaction.createCriteria()
+        rentalTransactionInstance = c.get {
+          eq("id", params.rentalTransactionId as Long)
+          fetchMode('contactPrimary', FM.EAGER)
+          fetchMode('site', FM.EAGER)
+        }
+      } else {
+        rentalTransactionInstance = new RentalTransaction(params)
+      }
 
       def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: params.id
-              , site: site, searchSize: searchSize, address: address, date: date
+              , site: site, searchSize: searchSize, address: address, date: date, page: page
               , rentalTransaction: rentalTransactionInstance, landingCookie:params.landingCookie]
 
       liveSessions[params.id] = callParams
@@ -74,7 +84,6 @@ class RentalTransactionController {
     }
 
     def save = {
-        println params.dump()
         def site = StorageSite.get(params.site)
         params.remove('site')
         def rentalTransactionInstance = new RentalTransaction(params)
@@ -93,7 +102,7 @@ class RentalTransactionController {
             transNote.note = params.operatorNote
             transNote.entered = new Date()
 
-            rentalTransactionInstance.addTransactionNote(transNote)
+            rentalTransactionInstance.addToNotes(transNote)
           }
         } else {
           rentalTransactionInstance.isCallCenter = false          
@@ -153,8 +162,6 @@ class RentalTransactionController {
     }
 
     def pay = {
-//      println params.billingAddress
-//      println params
       def rentalTransactionInstance = RentalTransaction.get(params.id)
 
       if (!rentalTransactionInstance) {
@@ -231,7 +238,7 @@ class RentalTransactionController {
       def s = new AuthorizeNet()
       s.authorizeAndCapture {
         custId rentalTransactionInstance.id as String
-        firstName rentalTransactionInstance.billingAddress.firstName.encodeAsURL()
+        firstName rentalTransactionInstance.billingAddress.firstName
         lastName rentalTransactionInstance.billingAddress.lastName
         address "${rentalTransactionInstance.billingAddress.address1} ${rentalTransactionInstance.billingAddress.address2}"
         city rentalTransactionInstance.billingAddress.city
@@ -260,6 +267,13 @@ class RentalTransactionController {
 
       rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.cost, CommissionSourceType.WEBSITE)
 
+      def ccString = "XXXX XXXX XXXX "
+      if (ccNum.size() == 16) {
+        ccString += 'XXXX '
+      }
+      ccString += ccNum.substring(ccNum.size() - 4)
+      rentalTransactionInstance.cleanCCNum = ccString
+
       if (params.landingCookie) {
         def landing = CookieCodec.decodeCookieValue(params.landingCookie)
 
@@ -276,14 +290,7 @@ class RentalTransactionController {
         return
       }
 
-      println "Dump of rental transaction: ${rentalTransactionInstance.dump()}"
-      // TODO - notifications
-      
-      def ccString = "XXXX XXXX XXXX "
-      if (ccNum.size() == 16) {
-        ccString += 'XXXX '
-      }
-      ccString += ccNum.substring(ccNum.size() - 4)
+      notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
 
       def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
       def siteManager = User.withCriteria {
@@ -295,7 +302,8 @@ class RentalTransactionController {
         }
         maxResults(1)
       }
-      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, ccNum: ccString, siteManager:siteManager])
+      
+      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, siteManager:siteManager])
     }
 
     def edit = {

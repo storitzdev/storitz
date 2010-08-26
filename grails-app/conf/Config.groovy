@@ -95,5 +95,4 @@ grails.mail.props = ["mail.smtp.auth":"true",
       "mail.smtp.socketFactory.port": "587",
       "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
       "mail.smtp.socketFactory.fallback": "false",
-      "mail.smtp.starttls.enable": "true",
-      "mail.debug": "true"]
+      "mail.smtp.starttls.enable": "true"]

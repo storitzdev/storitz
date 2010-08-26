@@ -9,6 +9,10 @@
 //<![CDATA[
   var startDate = "${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}";
   var siteId = ${rentalTransactionInstance.site.id};
+  var ajaxFormOldValues;
+  var ajaxFormDirty = true;
+  var ajaxServerPollTimer;
+  var ajaxFormUpdateTimer;
 
   <g:render template="/transaction_js"/>
 
@@ -47,16 +51,73 @@
   }
 
   function prevStep() {
-    window.location = "${createLink(controller:'storageSite', action:'detail', params:[id:rentalTransactionInstance?.site.id, searchSize:searchSize, unitType: chosenUnitType])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
+    window.location = "${createLink(controller:'storageSite', action:'detail', params:[id:rentalTransactionInstance?.site.id, searchSize:searchSize, unitType: chosenUnitType, returnForm: true, rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
   }
 
   function createMap() {}
+
+  function ajaxServerPoll() {
+    ajaxServerPollTimer = setTimeout("doAjaxServerPoll()", 5000)
+  }
+
+  function ajaxFormUpdate() {
+    ajaxFormUpdateTimer = setTimeout("doAjaxFormUpdate()", 5000)
+  }
+
+  function doAjaxFormUpdate() {
+    var ajaxFormNewValues = $('paymentTransaction');
+
+    if (ajaxFormNewValues != undefined) {
+      ajaxFormNewValues = ajaxFormNewValues.serialize(true);
+      var jsonValues = Object.toJSON(ajaxFormNewValues);
+      var valuesUnchanged = ajaxFormOldValues == jsonValues;
+      ajaxFormOldValues = jsonValues;
+
+      if (ajaxFormDirty) {
+        if (valuesUnchanged) {
+          new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}",
+          {
+            method:'post',
+            parameters: ajaxFormNewValues,
+            onComplete:function(transport) {
+              ajaxFormDirty = false;
+              ajaxFormUpdate();
+            },
+            onFailure:function(transport) {
+              alert("Something went wrong " + transport.responseText);
+            }
+          });
+          return;
+        }
+      } else {
+        if (!valuesUnchanged) {
+          ajaxFormDirty = true;
+        }
+      }
+    }
+    ajaxFormUpdate();
+  }
+
+  function doAjaxServerPoll() {
+    new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}",
+    {
+      method:'get',
+      onSuccess:function(transport) {
+        $('helpDeskStatus').update(transport.responseText);
+      },
+      onComplete:function() {
+        ajaxServerPoll();
+      }
+    });
+  }
 
   Event.observe(window, 'load', function() {
     contactChange();
     setupCalendar();
     transactionFormSetup();
     updateTransaction();
+    ajaxFormUpdate();
+    ajaxServerPoll();
   });
 //]]>
   </script>
@@ -74,13 +135,15 @@
       <div style="width: 650px;" class="right">
         <div id="detailInfo">
             <div id="rentalForm">
-              <g:form action="pay" controller="rentalTransaction" name="rentalTransaction" method="post" id="${params.id}">
+              <g:form action="pay" controller="rentalTransaction" name="paymentTransaction" method="post">
 
+                <input type="hidden" name="rentalTransactionId" id="rentalTransactionId" value="${rentalTransactionInstance?.id}" />
                 <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance?.unitId}" />
                 <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
                 <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
                 <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
-    
+                <input style="display:none" type="text" name="SC_page" id="SC_page" value="payment"/>
+
                 <div class="vert_text">
                   <span id="step1_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step1" class="step_header">Primary Contact</span>
                   <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Rental Options</span>
@@ -275,6 +338,7 @@
     </div>
 
     <div style="clear:both; height:30px;"></div>
+    <div id="helpDeskStatus">STATUS</div>
     <g:render template="/footer" />
     <g:render template="/size_popup" />
     </div>

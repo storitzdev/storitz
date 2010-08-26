@@ -339,8 +339,6 @@ class SiteLinkService {
   }
 
   def doMoveIn(RentalTransaction rentalTransaction) {
-    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
-
     def concessionId = rentalTransaction.promoId as Long
     if (concessionId != -999) {
       SpecialOffer specialOffer = SpecialOffer.get(rentalTransaction.promoId as Long)
@@ -363,7 +361,7 @@ class SiteLinkService {
          <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
          <cal:TenantID>""" + rentalTransaction.tenantId + """</cal:TenantID>
          <cal:sAccessCode>""" + rentalTransaction.accessCode + """</cal:sAccessCode>
-         <cal:UnitID>""" + unit.unitNumber + """</cal:UnitID>
+         <cal:UnitID>""" + rentalTransaction.feedUnitId + """</cal:UnitID>
          <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
          <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
          <cal:dcPaymentAmount>""" + rentalTransaction.cost + """</cal:dcPaymentAmount>
@@ -371,7 +369,7 @@ class SiteLinkService {
          <cal:sCreditCardNumber>""" + rentalTransaction.ccNum + """</cal:sCreditCardNumber>
          <cal:sCreditCardCVV>""" + rentalTransaction.cvv2 + """</cal:sCreditCardCVV>
          <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
-         <cal:sBillingName>""" + "${rentalTransaction.billingAddress.firstName} ${rentalTransaction.billingAddress.lastName}" + """</cal:sBillingName>
+         <cal:sBillingName>""" + rentalTransaction.billingAddress.fullName() + """</cal:sBillingName>
          <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1} ${rentalTransaction.billingAddress.address2}" + """</cal:sBillingAddress>
          <cal:sBillingZipCode>""" + rentalTransaction.billingAddress.zipcode + """</cal:sBillingZipCode>
          <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
@@ -864,6 +862,10 @@ class SiteLinkService {
   }
 
   def moveIn(RentalTransaction rentalTransaction) {
+    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
+    rentalTransaction.feedUnitId = unit.unitNumber
+    rentalTransaction.feedUnitNumber = unit.unitName
+
     def ret = doMoveIn(rentalTransaction)
 
     println "MoveInWithDiscount: ${ret}"
@@ -879,7 +881,11 @@ class SiteLinkService {
     records.'soap:Body'.'*:MoveInWithDiscountResponse'.'*:MoveInWithDiscountResult'.'*:diffgram'.NewDataSet.'*:RT'.each {tab ->
       moveInResult = tab.Ret_Code.text() as Integer
     }
-    return moveInResult > 0 
+    if (moveInResult > 3) {
+      rentalTransaction.idNumber = moveInResult
+      rentalTransaction.save(flush:true)
+    }
+    return moveInResult > 3
   }
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {

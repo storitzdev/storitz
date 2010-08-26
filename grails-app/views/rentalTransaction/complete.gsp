@@ -49,46 +49,46 @@
             <div>
               <table class="checkoutComplete">
                 <tr>
-                  <td class="tright">Tenant Name:</td>
+                  <td style="width:200px;">Tenant Name:</td>
                   <td>${rentalTransactionInstance.contactPrimary.firstName} ${rentalTransactionInstance.contactPrimary.lastName}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Confirmation #:</td>
+                  <td style="width:200px;">Confirmation #:</td>
                   <td></td>
                 <tr>
-                  <td class="tright">Order Date:</td>
+                  <td style="width:200px;">Order Date:</td>
                   <td>${rentalTransactionInstance.bookingDate.format('MM/dd/yy')}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Move-in Date:</td>
+                  <td style="width:200px;">Move-in Date:</td>
                   <td>${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Property Name:</td>
+                  <td style="width:200px;">Property Name:</td>
                   <td>${rentalTransactionInstance.site.title}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Address:</td>
+                  <td style="width:200px;">Address:</td>
                   <td>
-                    ${rentalTransactionInstance.site.address1} ${rentalTransactionInstance.site.address2},
-                    ${rentalTransactionInstance.site.city},
-                    ${rentalTransactionInstance.site.state.display} ${rentalTransactionInstance.site.zipcode}
+                    ${rentalTransactionInstance.site.getFullAddress()}
                   </td>
                 </tr>
                 <g:if test="${rentalTransactionInstance.accessCode}">
                   <tr>
-                    <td class="tright">Gate Access Code:</td>
+                    <td style="width:200px;">Gate Access Code:</td>
                     <td>${rentalTransactionInstance.accessCode}</td>
                   </tr>
                 </g:if>
                 <tr>
-                  <td class="tright">Phone:</td>
+                  <td style="width:200px;">Phone:</td>
                   <td>${rentalTransactionInstance.site.phone}</td>
                 </tr>
-                <tr>
-                  <td class="tright">Manager:</td>
-                  <td>${siteManager?.userRealName}</td>
-                </tr>
+                <g:if test="${siteManager?.userRealName}">
+                  <tr>
+                    <td style="width:200px;">Manager:</td>
+                    <td>${siteManager.userRealName}</td>
+                  </tr>
+                </g:if>
               </table>
             </div>
             <div style="height: 20px;"></div>
@@ -101,42 +101,42 @@
               <table class="checkoutComplete">
                 <g:if test="${rentalTransactionInstance.idNumber}"> 
                   <tr>
-                    <td class="tright">Transaction #:</td>
+                    <td style="width:200px;">Transaction #:</td>
                     <td>${rentalTransactionInstance.idNumber}</td>
                   </tr>
                 </g:if>
                 <tr>
-                  <td class="tright">Name:</td>
-                  <td>${rentalTransactionInstance.billingAddress.firstName} ${rentalTransactionInstance.billingAddress.lastName}</td>
+                  <td style="width:200px;">Name:</td>
+                  <td>${rentalTransactionInstance.billingAddress.fullName()}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Address:</td>
-                  <td>${rentalTransactionInstance.billingAddress.address1} ${rentalTransactionInstance.billingAddress.address2}, ${rentalTransactionInstance.billingAddress.city}, ${rentalTransactionInstance.billingAddress.state.display} ${rentalTransactionInstance.billingAddress.zipcode}</td>
+                  <td style="width:200px;">Address:</td>
+                  <td>${rentalTransactionInstance.billingAddress.fullAddress()}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Payment Method:</td>
+                  <td style="width:200px;">Payment Method:</td>
                   <td>Credit Card</td>
                 </tr>
                 <tr>
-                  <td class="tright">Credit Card #:</td>
-                  <td>${ccNum}</td>
+                  <td style="width:200px;">Credit Card #:</td>
+                  <td>${rentalTransactionInstance.cleanCCNum}</td>
                 </tr>
                 <tr>
-                  <td class="tright">Rental Rate:</td>
+                  <td style="width:200px;">Rental Rate:</td>
                   <td><g:formatNumber number="${unit?.pushRate}" type="currency" currencyCode="USD"/></td>
                 </tr>
                 <tr>
-                  <td class="tright">Rent is Paid Through:</td>
+                  <td style="width:200px;">Rent is Paid Through:</td>
                   <td>${rentalTransactionInstance.paidThruDate.format('MM/dd/yy')}</td>
                 </tr>
                 <g:if test="${promo}">
                   <tr>
-                    <td class="tright">Promotion Discount(s):</td>
+                    <td class="tright" style="width:200px;">Promotion Discount(s):</td>
                     <td>${promo.promoName}</td>
                   </tr>
                 </g:if>
                 <tr>
-                  <td class="tright">Move-In Cost:</td>
+                  <td style="width:200px;">Move-In Cost:</td>
                   <td><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></td>
                 </tr>
               </table>

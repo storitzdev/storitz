@@ -27,6 +27,7 @@ class RentalTransaction {
   String accessCode           // possible gate code
   Long unitId
   String feedUnitId           // for centershift to identify specific unit
+  String feedUnitNumber       // for email, etc.
   Long promoId
 
   Long insuranceId
@@ -41,6 +42,7 @@ class RentalTransaction {
   ReferralCode referralCode
   SearchEngineReferral searchEngineReferral
   Boolean isCallCenter
+  String cleanCCNum
 
   // Transient members
   Integer searchSize
@@ -72,6 +74,9 @@ class RentalTransaction {
     feedUnitId(nullable: true)
     promoId(nullable:true)
     searchEngineReferral(nullable: true)
+    cleanCCNum(nullable:true)
+    feedUnitId(nullable:true)
+    feedUnitNumber(nullable:true)
   }
 
   static transients = ['searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',

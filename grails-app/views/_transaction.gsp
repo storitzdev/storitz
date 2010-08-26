@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="right" style="margin-top:5px;">
-      <g:if test="${!rentalTransactionInstance}"> 
+      <g:if test="${params.action != 'payment'}"> 
         <input type="image" id="rentme" style="border:none;cursor:pointer;" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
       </g:if>
     </div>

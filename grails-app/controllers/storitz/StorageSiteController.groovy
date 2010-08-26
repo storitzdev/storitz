@@ -16,6 +16,7 @@ import com.storitz.SpecialOffer
 import com.storitz.Insurance
 import grails.converters.JSON
 import javax.servlet.http.Cookie
+import com.storitz.RentalTransaction
 
 class StorageSiteController {
 
@@ -114,7 +115,6 @@ class StorageSiteController {
   }
 
   def report = {
-    println "Report params:" + params.inspect()
     def storageSiteInstance = StorageSite.get(params.id)
     if (!storageSiteInstance) {
       println "Failed to get site in report"
@@ -123,7 +123,6 @@ class StorageSiteController {
     }
     else {
       def visits = Visit.findAllBySite(storageSiteInstance)
-      println "${storageSiteInstance.id} ${visits.size()}"
 
       [storageSiteInstance: storageSiteInstance, visits: visits]
     }
@@ -227,7 +226,6 @@ class StorageSiteController {
       if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', fileLocation, siteId)) {
         def tmpPath = fileUploadService.getFilePath('/images/upload', fileLocation, siteId)
         def filePath = fileUploadService.getFilePath('/images/site', fileLocation, siteId)
-        println "Saving image to tmpPath: " + tmpPath
         def imageTool = new ImageTool()
         imageTool.load(tmpPath)
         imageTool.thumbnailSpecial(250, 100, 2, 1)
@@ -423,6 +421,10 @@ class StorageSiteController {
 
   def detail = {
 
+    def rentalTransactionInstance
+    if (params.rentalTransactionId) {
+      rentalTransactionInstance = RentalTransaction.get(params.rentalTransactionId as Long)
+    }
     StorageSite site = StorageSite.get(params.id)
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     
@@ -455,8 +457,6 @@ class StorageSiteController {
 
     def remoteAddr = request.remoteAddr
 
-    println "Detail visit by $remoteAddr for $site ${site.title} - ${site.zipcode} on search ${params.address} ${params.searchSize} ${params.date}"
-
     // Don't try to store a non-date.
     String searchDate = params.date
     if (searchDate && searchDate == '') searchDate = null
@@ -470,7 +470,7 @@ class StorageSiteController {
     }
 
     // If you change this, don't forget the smartCall action also uses this view!
-    [sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate, unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:null]
+    [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price, pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize.id, promoId:null]
   }
 
   def directions = {
@@ -505,21 +505,22 @@ class StorageSiteController {
   def smartCall = {
     def callParams = getSmartCallDataForId(params.id)
 
-    println "SmartCall ${params.id} : ${callParams}"
-
     if (!callParams) {
 //          flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
-        redirect(action:"find")
+        redirect(action:"findCall")
     } else {
-      println (callParams?.rentalTransaction.dump())
 
-      StorageSite site = StorageSite.get(callParams.site)
+      def site
+      def rentalTransaction
+      if (callParams.page != 'payment') {
+        site = StorageSite.get(callParams.site)
+        callParams.rentalTransaction.site = site
+        rentalTransaction = callParams.rentalTransaction
+      } else {
+        site = StorageSite.get(callParams.rentalTransaction.site.id)
+        rentalTransaction = RentalTransaction.get(callParams.rentalTransaction.id)
+      }
 
-      println site
-      
-      callParams.rentalTransaction.site = site
-//      callParams.rentalTransaction.insuranceTerms = false
-      
       StorageSize unitSize = callParams.searchSize ? StorageSize.get(callParams.searchSize) : null
 
       //////////////////////////////////////////
@@ -548,21 +549,13 @@ class StorageSiteController {
       // >>> END match detail action code <<<
       //////////////////////////////////////////
 
-//      def model = [id:site.id, sizeList: sizeList, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
-//         , shortSessionId:callParams.shortSessionId, searchSize:callParams.searchSize, address:callParams.address, date:callParams.date
-//         , rentalTransaction:callParams.rentalTransaction]
-
       def model = [id:site.id
          , sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
          , shortSessionId:callParams.shortSessionId, chosenUnitType:callParams.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate
          , unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:callParams.rentalTransaction?.promoId
-         , rentalTransaction:callParams.rentalTransaction]
+         , rentalTransactionInstance:rentalTransaction]
 
-      println model
-
-      // We set the landing cookie so the operator looks like the renter would when the transaction is paid. 
-      println "Setting cookie ${callParams.landingCookie}"
-
+      // We set the landing cookie so the operator looks like the renter would when the transaction is paid.
       params.landingCookie = callParams.landingCookie
 
       Cookie landingCookie = CookieCodec.bakeLandingCookie(params.landingCookie)
@@ -574,7 +567,7 @@ class StorageSiteController {
       params.address = model.address
       params.date = model.date
 
-      render(view:'detail', model:model)
+      render(view: (callParams.page == 'detail' ? '/storageSite/' : '/rentalTransaction/') + callParams.page, model:model)
     }
   }
 
