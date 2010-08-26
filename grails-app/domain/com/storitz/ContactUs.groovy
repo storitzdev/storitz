@@ -13,7 +13,7 @@ class ContactUs {
   Boolean serviced
 
   static constraints = {
-    message(nullable:false, size:2..2000)
-    userEmail(nullable:false, email:true)
+    message(blank:false, size:2..2000)
+    userEmail(blank:false, email:true)
   }
 }

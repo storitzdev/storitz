@@ -12,14 +12,21 @@ class SendMailService {
   def mailService
 
   def onMessage(emailMessage) {
-      println "Got queued message - sending via mail service"
       try {
-          mailService.sendMail {
-              to emailMessage.to
-              from emailMessage.from
-              subject emailMessage.subject
-              body(view: emailMessage.view, model: emailMessage.model)
-
+          if (emailMessage.body) {
+            mailService.sendMail {
+                to emailMessage.to
+                from emailMessage.from
+                subject emailMessage.subject
+                body emailMessage.body
+            }
+          } else {
+            mailService.sendMail {
+                to emailMessage.to
+                from emailMessage.from
+                subject emailMessage.subject
+                body(view: emailMessage.view, model: emailMessage.model)
+            }
           }
       } catch (Exception e) {
           log.error("Failed to send email ${emailMessage}", e)

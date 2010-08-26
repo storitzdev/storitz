@@ -924,7 +924,6 @@ div.rightArrowActive:hover {
 a.footer:link, a.footer:visited, a.footer:hover {
     color: #96d6ff;
     font: 11px verdana, arial, helvetica, sans-serif;
-    font-weight: bold;
     text-decoration: none;
 }
 

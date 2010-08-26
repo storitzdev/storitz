@@ -1,15 +1,19 @@
 package storitz
 
 import com.storitz.ContactUs
+import grails.plugins.springsecurity.Secured
 
 class ContactUsController {
 
+    def emailService
+  
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
         redirect(action: "list", params: params)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [contactUsInstanceList: ContactUs.list(params), contactUsInstanceTotal: ContactUs.count()]
@@ -23,15 +27,36 @@ class ContactUsController {
 
     def save = {
         def contactUsInstance = new ContactUs(params)
-        if (contactUsInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'contactUs.label', default: 'ContactUs'), contactUsInstance.id])}"
-            redirect(action: "show", id: contactUsInstance.id)
+
+        contactUsInstance.entered = new Date()
+        contactUsInstance.serviced = false
+
+        if (contactUsInstance.validate() && contactUsInstance.save(flush: true)) {
+
+            String subj = contactUsInstance.contactType.display
+            String toField = contactUsInstance.contactType.email
+            String message = contactUsInstance.message
+            String fromField = contactUsInstance.userEmail
+
+            try {
+                emailService.sendTextEmail(
+                    to: toField,
+                    from: fromField,
+                    subject: subj,
+                    body: message)
+
+            } catch (Exception e) {
+                log.error("${e}", e)
+            }
+
+            render(view: "complete")
         }
         else {
             render(view: "create", model: [contactUsInstance: contactUsInstance])
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def show = {
         def contactUsInstance = ContactUs.get(params.id)
         if (!contactUsInstance) {
@@ -43,6 +68,7 @@ class ContactUsController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def contactUsInstance = ContactUs.get(params.id)
         if (!contactUsInstance) {
@@ -54,6 +80,7 @@ class ContactUsController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def contactUsInstance = ContactUs.get(params.id)
         if (contactUsInstance) {
@@ -81,6 +108,7 @@ class ContactUsController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def contactUsInstance = ContactUs.get(params.id)
         if (contactUsInstance) {

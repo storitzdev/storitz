@@ -8,9 +8,9 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum ContactType {
-  SUPPORT("General Support question", "support@storitz.com"),
+  SUPPORT("General support question", "support@storitz.com"),
   POLICY("Privacy, terms of use or refund policy question", "privacy@storitz.com"),
-  TECH("Technical or site problems question", "tech@stortiz.com"),
+  TECH("Technical or site problems question", "tech@storitz.com"),
   OPERATOR("I am an storage operator and I want to be listed by Storitz", "sales@storitz.com"),
   BUSINESS("Business opportunities to partner with Storitz", "info@storitz.com");
 
