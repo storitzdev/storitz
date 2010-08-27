@@ -68,6 +68,7 @@ class NotificationService {
       String directionsLink = g.createLink(controller:"storageSite", action:"directions", id:rentalTransaction.site.id)
       String billingName = rentalTransaction.billingAddress.fullName()
       String billingAddress = rentalTransaction.billingAddress.fullAddress()
+      String storitzId = rentalTransaction.bookingDate.format('yyyyddMM') + sprintf('%08d', rentalTransaction.id)
 
       def model = [
         tenantName: rentalTransaction.contactPrimary.fullName(),
@@ -81,7 +82,7 @@ class NotificationService {
         phone: rentalTransaction.site.phone,
         manager: siteManager.userRealName,
         bookingDate: rentalTransaction.bookingDate.format('yyyyMMdd'),
-        storitzId: printf('%08d', rentalTransaction.id),
+        storitzId: storitzId,
         billingName: billingName,
         billingAddress: billingAddress,
         ccNum: rentalTransaction.cleanCCNum,
@@ -89,8 +90,9 @@ class NotificationService {
         promoName: promoName,
         paymentTotal: nf.format(rentalTransaction.cost),
         rentalAgreementLink: rentalAgreementLink,
-        unitNumber: rentalTransaction.feedUnitName,
+        unitNumber: rentalTransaction.feedUnitNumber,
         commission: nf.format(rentalTransaction.commission),
+        gateAccessCode: rentalTransaction.accessCode,
         phone: rentalTransaction.contactPrimary.phone,
         email: rentalTransaction.contactPrimary.email,
         siteId: rentalTransaction.site.id

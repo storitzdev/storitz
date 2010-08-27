@@ -135,7 +135,7 @@
       <div style="width: 650px;" class="right">
         <div id="detailInfo">
             <div id="rentalForm">
-              <g:form action="pay" controller="rentalTransaction" name="paymentTransaction" method="post">
+              <g:form action="pay" controller="rentalTransaction" name="paymentTransaction" method="post" id="${params.id}">
 
                 <input type="hidden" name="rentalTransactionId" id="rentalTransactionId" value="${rentalTransactionInstance?.id}" />
                 <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance?.unitId}" />

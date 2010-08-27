@@ -30,7 +30,8 @@
     Rental Summary:
   </p>
   <ul>
-    <li>Transaction #: ${transactionId}</li>
+    <li>Storitz ID#: ${storitzId}</li>
+    <li>Transaction #: ${idNumber}</li>
     <li>Property Name: ${siteName}</li>
     <li>Unit #: ${unitNumber}</li>
     <li>Move-in Date: ${moveInDate}</li>

@@ -789,7 +789,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 #thumbWrapper {
 	overflow:hidden;
 	padding:4px 2px;
-	width: 472px;
+	width: 528px;
 	float:left;
 	height:46px;
 	position: relative;
@@ -806,13 +806,14 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 #items li{
 	float:left;
 	list-style:none;
-	margin-right:2px;
+	margin: 0;
+    padding: 0;
 }
 #items .thumb{
 	width:60px;
 	height:40px;
 	cursor:pointer;
-	margin: 0;
+	margin: 0 3px;
 	padding: 0;
 }
 #items .large{

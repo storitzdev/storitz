@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                   <td style="width:200px;">Confirmation #:</td>
-                  <td></td>
+                  <td>${rentalTransactionInstance.bookingDate.format('yyyyMMdd')}${sprintf('%08d', rentalTransactionInstance.id)}</td>
                 <tr>
                   <td style="width:200px;">Order Date:</td>
                   <td>${rentalTransactionInstance.bookingDate.format('MM/dd/yy')}</td>
@@ -87,6 +87,12 @@
                   <tr>
                     <td style="width:200px;">Manager:</td>
                     <td>${siteManager.userRealName}</td>
+                  </tr>
+                </g:if>
+                <g:if test="${rentalTransactionInstance.accessCode}">
+                  <tr>
+                    <td style="width:200px;">Gate Access Code:</td>
+                    <td>${rentalTransactionInstance.accessCode}</td>
                   </tr>
                 </g:if>
               </table>

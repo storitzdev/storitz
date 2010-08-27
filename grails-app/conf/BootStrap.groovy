@@ -68,7 +68,7 @@ class BootStrap {
        }
 
        if (StorageSize.list().size() == 0) {
-         new StorageSize( description:'Choose a storage size.', width: 0, length: 0).save();
+         new StorageSize( description:'Chose the size you need', width: 0, length: 0).save();
          new StorageSize( description:'5 x 5', width: 5, length: 5).save();
          new StorageSize( description:'5 x 10', width: 5, length: 10).save();
          new StorageSize( description:'7 x 10', width: 7, length: 10).save();

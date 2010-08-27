@@ -137,7 +137,7 @@
                     <input type="hidden" name="ROLE_USER" value="on"/>
                   </sec:ifNotGranted>
 
-                  <sec:ifAnyGranted roles="ROLE_ADMIN">
+                  <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
 
                     <div class="checkout_section_header">
                       Enable User

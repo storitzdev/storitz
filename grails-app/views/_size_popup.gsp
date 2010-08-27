@@ -86,7 +86,7 @@
           10x20 (Large)
         </div>
         <div class="helpBoxTextBody">
-          For 3+ bedroom house, business equipment or car/SUV
+          For 3-bedroom house, business equipment, or car/SUV
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@
           10x25 (Large)
         </div>
         <div class="helpBoxTextBody">
-          For 4 bedroom house or mini-warehouse
+          For 4-bedroom house or mini-warehouse
         </div>
       </div>
     </div>

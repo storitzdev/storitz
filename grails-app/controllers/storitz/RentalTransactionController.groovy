@@ -301,7 +301,7 @@ class RentalTransactionController {
       }
 
       def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
-      def siteManager = User.withCriteria {
+      def siteManager = User.createCriteria().get {
         sites {
           eq("site.id", rentalTransactionInstance.site.id)
         }
@@ -310,7 +310,7 @@ class RentalTransactionController {
         }
         maxResults(1)
       }
-      
+
       render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, siteManager:siteManager])
     }
 

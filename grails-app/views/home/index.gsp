@@ -513,7 +513,7 @@
                 <img src="${resource(dir:'images', file:'btn-circle-1.png')}" alt="1"/>
               </div>
               <div class="left">
-                <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code.'}"/>
+                <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
               </div>
               <div style="clear:both;height: 10px;"></div>
               <div>
@@ -533,7 +533,7 @@
                 <img src="${resource(dir:'images', file:'btn-circle-3.png')}" alt="3"/>
               </div>
               <div class="left">
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move in date.'}"/>
+                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
               <div style="margin-left: 30px;">

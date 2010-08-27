@@ -182,12 +182,17 @@
     );
   }
 
-  function rightArrowClick() {
+  function setupImageGallery() {
+
+    // resize thumbgallery by images
+    var thumbWidth = ${(site.siteImages().size() > 8 ? 8 : site.siteImages().size()) * 66};
+    $('thumbWrapper').setStyle({width: thumbWidth  +'px'});
+    $('galleryBottom').setStyle({width: (thumbWidth + 96) + 'px'});
     $('rightArrow').observe('click', function() {
       if (galleryImageNum < (${site.siteImages().size()} - 8)) {
         galleryImageNum++;
-        new Effect.Move('items', { x: -62, y:0, mode:'relative'});
-        if (galleryImageNum >= (${site.siteImages().size()} - 4)) {
+        new Effect.Move('items', { x: -66, y:0, mode:'relative'});
+        if (galleryImageNum >= (${site.siteImages().size()} - 8)) {
           if($('rightArrow').hasClassName('rightArrowActive')) {
             $('rightArrow').removeClassName('rightArrowActive');
             $('rightArrow').addClassName('rightArrowNull');
@@ -204,13 +209,11 @@
         }
       }
     });
-  }
 
-  function leftArrowClick() {
     $('leftArrow').observe('click', function() {
       if ((${site.siteImages().size()}) > 8 && galleryImageNum > 0) {
         galleryImageNum--;
-        new Effect.Move('items', { x: 62, y:0, mode:'relative'});
+        new Effect.Move('items', { x: 66, y:0, mode:'relative'});
         if (galleryImageNum < (${site.siteImages().size()} - 4)) {
           if($('rightArrow').hasClassName('rightArrowNull')) {
             $('rightArrow').removeClassName('rightArrowNull');
@@ -305,8 +308,7 @@
     <g:if test="${params.returnForm}">
       details_return();
     </g:if>
-    rightArrowClick();
-    leftArrowClick();
+    setupImageGallery();
     ajaxFormUpdate();
     ajaxServerPoll();
   });
@@ -404,20 +406,22 @@
                     <img src="${resource(dir: 'images', file:'placeholder.jpg')}" alt="place holder"/>
                   </g:else>
                 </div>
-                <div id="leftArrow" class="left ${site.siteImages().size() > 4 ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
+                <div id="galleryBottom" style="margin: 10px auto;">
+                  <div id="leftArrow" class="left ${site.siteImages().size() > 8 ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
+                  </div>
+                  <div style="margin: 20 auto;" id="thumbWrapper">
+                    <ul id="items">
+                       <g:each var="siteImg" in="${site.siteImages()}" status="i">
+                           <li class="thumb">
+                             <img id="img${siteImg.imgOrder}" class="${i == 0 ? 'gallerySelected' : 'galleryNormal'}" src="${resource(file:siteImg.thumbnail())}" alt="" onclick="showImage('${resource(file:siteImg.mid())}', 'img${siteImg.imgOrder}')"/>
+                           </li>
+                       </g:each>
+                    </ul>
+                  </div>
+                  <div id="rightArrow" class="left ${site.siteImages().size() > 4 ? 'rightArrowActive' : 'arrowEmpty'}" style="margin-top: 8px;">
+                  </div>
+                  <div style="clear: both;"></div>
                 </div>
-                <div style="margin: 15 auto;" id="thumbWrapper">
-                  <ul id="items">
-                     <g:each var="siteImg" in="${site.siteImages()}" status="i">
-                         <li class="thumb">
-                           <img id="img${siteImg.imgOrder}" class="${i == 0 ? 'gallerySelected' : 'galleryNormal'}" src="${resource(file:siteImg.thumbnail())}" alt="" onclick="showImage('${resource(file:siteImg.mid())}', 'img${siteImg.imgOrder}')"/>
-                         </li>
-                     </g:each>
-                  </ul>
-                </div>
-                <div id="rightArrow" class="left ${site.siteImages().size() > 4 ? 'rightArrowActive' : 'arrowEmpty'}" style="margin-top: 8px;">
-                </div>
-                <div style="clear: both;height: 5px;"></div>
               </div>
               <div id="directions" style="display:none;">
                 <g:render template="/directions" />

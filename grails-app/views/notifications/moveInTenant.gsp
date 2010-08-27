@@ -31,7 +31,7 @@
   </p>
   <ul>
     <li>Tenant name: ${tenantName}</li>
-    <li>Confirmation #: ${idNumber}</li>
+    <li>Confirmation #: ${storitzId}</li>
     <li>Order Date: ${bookingDate}</li>
     <li>Move-in Date: ${moveInDate}</li>
     <li>Property Name: ${siteName}</li>
@@ -39,12 +39,15 @@
     <li>Directions: <a href="${directionsLink}">click here</a></li>
     <li>Phone: ${phone}</li>
     <li>Manager: ${manager}</li>
+    <g:if test="${gateAccessCode}">
+      <li>Gate Access Code: ${gateAccessCode}</li>
+    </g:if>
   </ul>
   <p style="font-weight:bold;">
     Billing Summary:
   </p>
   <ul>
-    <li>Storitz ID#: ${bookingDate}${storitzId}</li>
+    <li>Storitz ID#: ${storitzId}</li>
     <li>Name: ${billingName}</li>
     <li>Address: ${billingAddress}</li>
     <li>Payment type: Credit Card</li>

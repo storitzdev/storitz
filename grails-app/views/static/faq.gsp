@@ -25,10 +25,10 @@
         <h1>Frequently Asked Questions</h1>
 
         <p>
-          <span class="legalHeader">How do I get started?</span>  First, enter the zipcode or address of the area where you want to find storage. Next, select the size of unit that you are looking for. Then select your desired move-in date and click the Find It button!
+          <span class="legalHeader">How do I get started?</span> First, enter the zip code or address of the area where you want to find storage. Second, select the unit size you’re looking for. Third, select your desired move-in date and click the Find It button.
         </p>
         <p>
-          <span class="legalHeader">What sizes of units do you have?</span>  The facilities on Storitz offer standard sizes ranging from 5’x5’ to 20’x30’ and about 8’ high (all dimensions are approximate), but many facilities also offer smaller and larger spaces, from storage lockers to extra-large units. Use our SIZE GUIDE [add link to our size guide] to find the right amount of space for you; you can always measure your unit at the facility for suitability.
+          <span class="legalHeader">What are my size options?</span>  The facilities on Storitz offer standard sizes ranging from 5’x5’ to 20’x30’ and about 8’ high (all dimensions are approximate), but many facilities also offer smaller and larger spaces, from storage lockers to extra-large units. Use our SIZE GUIDE [add link to our size guide] to find the right amount of space for you; you can always measure your unit at the facility for suitability.
         </p>
         <p>
           <span class="legalHeader">Do you have climate-controlled units?</span>  Yes. Climate-controlled units, which are designed to maintain a set temperature range, are available at many storage facilities listed on Storitz.
@@ -55,7 +55,7 @@
           <span class="legalHeader">Do you rent space month-to-month or do I have to sign a lease?</span>  Our affiliates’ rental contracts are month-to-month agreements – no long-term lease is required.
         </p>
         <p>
-          <span class="legalHeader">What is the difference between a reservation and a move-in?</span> A reservation is a non-binding hold you can place on a unit, usually requiring a nominal fee. A reservation is not a rental, and there is no commitment from either party to rent or lease the unit. A move-in constitutes a lease agreement with the facility, and allows you to show up on the day of your move-in, hand over your signed lease agreement, get your access code, and move in! While many websites offer reservations, Storitz is the only website that offers move-ins! Click. Store. Done.
+          <span class="legalHeader">What is the difference between a reservation and a move-in?</span> A reservation is a non-binding hold you can place on a unit, usually requiring a nominal fee. A reservation is not a rental, and there is no commitment from either party to rent or lease the unit. A move-in constitutes a lease agreement with the facility, and allows you to show up on the day of your move-in, hand over your signed lease agreement, get your access code, and move in. <span style="font-weight: bold;">While many websites offer reservations, Storitz is the only website that offers move-ins.</span>
         </p>
         <p>
           <span class="legalHeader">Do I need to give advance notice when I move out?</span>  Typically, yes.  Please consult your Lease Agreement  to ensure that you do not incur unnecessary charges; however, the more advance notice you can provide the better.

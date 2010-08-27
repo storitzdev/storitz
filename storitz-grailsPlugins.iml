@@ -62,10 +62,6 @@
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/domain" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/grails-app/services" isTestSource="false" />

@@ -967,6 +967,9 @@ class CShiftService {
       println "Return for doMoveIn < 0 : ${ret}"
       return false
     }
+
+    println "Return from doMoveIn: ${ret}"
+
     rentalTransaction.idNumber = ret
     rentalTransaction.save(flush: true)
 
