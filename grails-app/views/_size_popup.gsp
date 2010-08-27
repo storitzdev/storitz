@@ -44,7 +44,7 @@
           7x10 (Medium)
         </div>
         <div class="helpBoxTextBody">
-          For a small bedroom &amp; livingroom, tools &amp; equipment
+          For a small bedroom &amp; living room, tools &amp; equipment
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
           10x10 (Medium-Large)
         </div>
         <div class="helpBoxTextBody">
-          For a 1 br apartment
+          For a 1 bedroom apartment
         </div>
       </div>
     </div>

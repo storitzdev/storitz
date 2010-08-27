@@ -10,6 +10,7 @@
 
     var premiums = [];
     var galleryImageNum = 0;
+    var galleryImgWidth = 8;
     var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
     var siteId = ${params.id};
     var ajaxFormOldValues;
@@ -185,14 +186,14 @@
   function setupImageGallery() {
 
     // resize thumbgallery by images
-    var thumbWidth = ${(site.siteImages().size() > 8 ? 8 : site.siteImages().size()) * 66};
+    var thumbWidth = ${(site.siteImages().size() > galleryImgWidth ? galleryImgWidth : site.siteImages().size()) * 66};
     $('thumbWrapper').setStyle({width: thumbWidth  +'px'});
     $('galleryBottom').setStyle({width: (thumbWidth + 96) + 'px'});
     $('rightArrow').observe('click', function() {
-      if (galleryImageNum < (${site.siteImages().size()} - 8)) {
+      if (galleryImageNum < (${site.siteImages().size()} - galleryImgWidth)) {
         galleryImageNum++;
         new Effect.Move('items', { x: -66, y:0, mode:'relative'});
-        if (galleryImageNum >= (${site.siteImages().size()} - 8)) {
+        if (galleryImageNum >= (${site.siteImages().size()} - galleryImgWidth)) {
           if($('rightArrow').hasClassName('rightArrowActive')) {
             $('rightArrow').removeClassName('rightArrowActive');
             $('rightArrow').addClassName('rightArrowNull');
@@ -211,10 +212,10 @@
     });
 
     $('leftArrow').observe('click', function() {
-      if ((${site.siteImages().size()}) > 8 && galleryImageNum > 0) {
+      if ((${site.siteImages().size()}) > galleryImgWidth && galleryImageNum > 0) {
         galleryImageNum--;
         new Effect.Move('items', { x: 66, y:0, mode:'relative'});
-        if (galleryImageNum < (${site.siteImages().size()} - 4)) {
+        if (galleryImageNum < (${site.siteImages().size()} - galleryImgWidth)) {
           if($('rightArrow').hasClassName('rightArrowNull')) {
             $('rightArrow').removeClassName('rightArrowNull');
             $('rightArrow').addClassName('rightArrowActive');
@@ -407,7 +408,7 @@
                   </g:else>
                 </div>
                 <div id="galleryBottom" style="margin: 10px auto;">
-                  <div id="leftArrow" class="left ${site.siteImages().size() > 8 ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
+                  <div id="leftArrow" class="left ${site.siteImages().size() > galleryImgWidth ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
                   </div>
                   <div style="margin: 20 auto;" id="thumbWrapper">
                     <ul id="items">
@@ -418,7 +419,7 @@
                        </g:each>
                     </ul>
                   </div>
-                  <div id="rightArrow" class="left ${site.siteImages().size() > 4 ? 'rightArrowActive' : 'arrowEmpty'}" style="margin-top: 8px;">
+                  <div id="rightArrow" class="left ${site.siteImages().size() > galleryImgWidth ? 'rightArrowActive' : 'arrowEmpty'}" style="margin-top: 8px;">
                   </div>
                   <div style="clear: both;"></div>
                 </div>
