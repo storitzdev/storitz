@@ -30,9 +30,9 @@
         <li><g:link controller="siteLink" action="list">Manage SiteLink</g:link> </li>
         <li><g:link controller="CShift" action="list">Manage CenterShift</g:link> </li>
         <li><g:link controller="commission" action="list">Manage Commission Table</g:link></li>
+        <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link> </li>
         </sec:ifAnyGranted>
         <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
-        <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link> </li>
         <li><g:link controller="user" action="list">Show Users</g:link> </li>
         <li><g:link controller="rentalAgreement" action="list">Upload rental agreement</g:link> </li>
         </sec:ifAnyGranted>
