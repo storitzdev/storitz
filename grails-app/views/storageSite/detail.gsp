@@ -10,11 +10,12 @@
 
     var premiums = [];
     var galleryImageNum = 0;
-    var galleryImgWidth = 8;
     var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
     var siteId = ${params.id};
     var ajaxFormOldValues;
     var ajaxFormDirty = false;
+
+    <g:set var="galleryImgWidth" value="8" />
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>
@@ -190,10 +191,10 @@
     $('thumbWrapper').setStyle({width: thumbWidth  +'px'});
     $('galleryBottom').setStyle({width: (thumbWidth + 96) + 'px'});
     $('rightArrow').observe('click', function() {
-      if (galleryImageNum < (${site.siteImages().size()} - galleryImgWidth)) {
+      if (galleryImageNum < (${site.siteImages().size() - galleryImgWidth})) {
         galleryImageNum++;
         new Effect.Move('items', { x: -66, y:0, mode:'relative'});
-        if (galleryImageNum >= (${site.siteImages().size()} - galleryImgWidth)) {
+        if (galleryImageNum >= (${site.siteImages().size() - galleryImgWidth})) {
           if($('rightArrow').hasClassName('rightArrowActive')) {
             $('rightArrow').removeClassName('rightArrowActive');
             $('rightArrow').addClassName('rightArrowNull');
@@ -212,10 +213,10 @@
     });
 
     $('leftArrow').observe('click', function() {
-      if ((${site.siteImages().size()}) > galleryImgWidth && galleryImageNum > 0) {
+      if (${site.siteImages().size() > galleryImgWidth && galleryImageNum > 0}) {
         galleryImageNum--;
         new Effect.Move('items', { x: 66, y:0, mode:'relative'});
-        if (galleryImageNum < (${site.siteImages().size()} - galleryImgWidth)) {
+        if (galleryImageNum < (${site.siteImages().size() - galleryImgWidth})) {
           if($('rightArrow').hasClassName('rightArrowNull')) {
             $('rightArrow').removeClassName('rightArrowNull');
             $('rightArrow').addClassName('rightArrowActive');
