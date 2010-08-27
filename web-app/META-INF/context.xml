@@ -1,5 +1,4 @@
-<Context path="/someApp" docBase="someApp"
-   crossContext="true" reloadable="true" debug="1">
+<Context path="/storitz" crossContext="true" reloadable="true" debug="1">
 
 <Resource name="jdbc/storitz"
           auth="Container"
