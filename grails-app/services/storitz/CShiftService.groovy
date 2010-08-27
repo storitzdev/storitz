@@ -874,7 +874,7 @@ class CShiftService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
-    def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, unit.unitName as Double, unit.displaySize)
+    def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.displaySize)
 
     if (unitInfo instanceof Integer && unitInfo < 0) {
       println "Return for getAvailableUnits < 0 : ${unitInfo}"
@@ -938,9 +938,9 @@ class CShiftService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
-    println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Double}, ${rentalTransaction.feedUnitId}, ${insId as String}"
+    println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String}"
     
-    def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, rentalTransaction.feedUnitId, insId as String)
+    def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
 
     if (ret instanceof Integer && ret < 0) {
       println "Return for getMoveInCost < 0 : ${ret}"
@@ -958,9 +958,9 @@ class CShiftService {
 
     def paymentString = end[end.size() - 1] as String
 
-    println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Double}, ${rentalTransaction.tenantId as Double}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
+    println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
-    ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Double, rentalTransaction.tenantId as Double, rentalTransaction.feedUnitId, insId as String,
+    ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,
             paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
 
     if (ret instanceof Integer && ret < 0) {

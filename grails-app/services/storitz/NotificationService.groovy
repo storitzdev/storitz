@@ -161,7 +161,7 @@ class NotificationService {
 
       try {
           emailService.sendEmail(
-              to: "notifcations@storitz.com",
+              to: "notifications@storitz.com",
               from: "no-response@storitz.com",
               subject: subj,
               model: model,
