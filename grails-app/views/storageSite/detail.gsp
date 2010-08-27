@@ -15,7 +15,7 @@
     var ajaxFormOldValues;
     var ajaxFormDirty = false;
 
-    <g:set var="galleryImgWidth" value="8" />
+    <g:set var="galleryImgWidth" value="${8 as Integer}" />
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>
