@@ -519,7 +519,7 @@ class SiteLinkService {
         password: (Math.random() * System.currentTimeMillis()) as String,
         description: "Site Manager for ${site.title}",
         email: email,
-        userRealName:realName,
+        userRealName: (realName ? realName : email),
         accountExpired: false,
         accountLocked: false,
         passwordExpired: false,
