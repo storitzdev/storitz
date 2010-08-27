@@ -213,7 +213,7 @@
     });
 
     $('leftArrow').observe('click', function() {
-      if (${site.siteImages().size() > galleryImgWidth && galleryImageNum > 0}) {
+      if (${(site.siteImages().size() > galleryImgWidth) && galleryImageNum > 0}) {
         galleryImageNum--;
         new Effect.Move('items', { x: 66, y:0, mode:'relative'});
         if (galleryImageNum < (${site.siteImages().size() - galleryImgWidth})) {
