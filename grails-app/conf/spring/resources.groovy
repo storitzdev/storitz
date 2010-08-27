@@ -6,6 +6,11 @@ import org.springframework.security.web.access.channel.InsecureChannelProcessor
 import org.springframework.security.web.access.channel.ChannelProcessingFilter
 import org.springframework.security.web.access.channel.ChannelDecisionManagerImpl
 import grails.util.*
+import org.apache.activemq.xbean.XBeanBrokerService
+import org.apache.activemq.broker.TransportConnector
+import org.apache.activemq.spring.ActiveMQConnectionFactory
+import org.springframework.jms.core.JmsTemplate
+import org.springframework.jms.connection.SingleConnectionFactory
 
 // Place your Spring DSL code here
 beans = {
@@ -31,9 +36,27 @@ beans = {
   switch(GrailsUtil.environment) {
     case "production":
       println "Starting production ActiveMQ 61619"
-      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory){bean ->
-        bean.destroyMethod ="stop"
-        connectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+      jmsBroker(XBeanBrokerService) {
+			useJmx = 'false'
+			persistent = 'false'
+			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61619'))]
+      }
+
+      connectionFactory(ActiveMQConnectionFactory) {
+			brokerURL = 'vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false'
+      }
+
+      jmsTemplate(JmsTemplate) {
+          connectionFactory =  { SingleConnectionFactory cf ->
+              targetConnectionFactory = ref('connectionFactory')
+          }
+      }
+      jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+         brokerURL = 'vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false'
+      }
+      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+        bean.destroyMethod = "stop"
+        connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
             brokerURL = "vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false"
         }
       }
@@ -41,20 +64,56 @@ beans = {
 
     case "development":
       println "Starting development ActiveMQ 61617"
-      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory){bean ->
-        bean.destroyMethod ="stop"
-        connectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-            brokerURL = "vm:(development:(tcp://localhost:61617)?persistent=false)?marshal=false"
+      jmsBroker(XBeanBrokerService) {
+			useJmx = 'false'
+			persistent = 'false'
+			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61617'))]
+      }
+
+      connectionFactory(ActiveMQConnectionFactory) {
+			brokerURL = 'vm:(production:(tcp://localhost:61617)?persistent=false)?marshal=false'
+      }
+
+      jmsTemplate(JmsTemplate) {
+          connectionFactory =  { SingleConnectionFactory cf ->
+              targetConnectionFactory = ref('connectionFactory')
+          }
+      }
+      jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+         brokerURL = 'vm:(production:(tcp://localhost:61617)?persistent=false)?marshal=false'
+      }
+      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+        bean.destroyMethod = "stop"
+        connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+            brokerURL = "vm:(production:(tcp://localhost:61617)?persistent=false)?marshal=false"
         }
       }
       break
 
     case "test":
       println "Starting test ActiveMQ 61618"
-      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory){bean ->
-        bean.destroyMethod ="stop"
-        connectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-            brokerURL = "vm:(test:(tcp://localhost:61618)?persistent=false)?marshal=false"
+      jmsBroker(XBeanBrokerService) {
+            useJmx = 'false'
+            persistent = 'false'
+            transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61618'))]
+      }
+
+      connectionFactory(ActiveMQConnectionFactory) {
+            brokerURL = 'vm:(production:(tcp://localhost:61618)?persistent=false)?marshal=false'
+      }
+
+      jmsTemplate(JmsTemplate) {
+          connectionFactory =  { SingleConnectionFactory cf ->
+              targetConnectionFactory = ref('connectionFactory')
+          }
+      }
+      jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+         brokerURL = 'vm:(production:(tcp://localhost:61618)?persistent=false)?marshal=false'
+      }
+      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+        bean.destroyMethod = "stop"
+        connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+            brokerURL = "vm:(production:(tcp://localhost:61618)?persistent=false)?marshal=false"
         }
       }
       break
