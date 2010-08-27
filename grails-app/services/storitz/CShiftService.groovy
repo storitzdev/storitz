@@ -894,12 +894,12 @@ class CShiftService {
     def promoId = unitInfo[8]
     def promoDesc = unitInfo[9]
 
-    rentalTransaction.feedUnitId = unitId[0]
+    rentalTransaction.feedUnitId = unitId[0] as Long
     rentalTransaction.feedUnitNumber = unitNumber[0]
     if (promoAvail[0] == 'Y') {
-      def promoCheck = rentalTransaction.site.specialOffers.findBy{ it.concessionId == promoId[0]}
+      def promoCheck = rentalTransaction.site.specialOffers.findBy{ it.concessionId == (promoId[0] as Long)}
       if (promoCheck) {
-        rentalTransaction.promoId = promoId[0]
+        rentalTransaction.promoId = promoId[0] as Long
       }
     }
     rentalTransaction.save(flush: true)
