@@ -70,6 +70,7 @@
     <orderEntry type="library" exported="" name="gdata" level="project" />
     <orderEntry type="module" module-name="storitz-grailsPlugins" exported="" />
     <orderEntry type="library" name="axis-1.4" level="project" />
+    <orderEntry type="library" name="activemq" level="project" />
   </component>
 </module>
 
