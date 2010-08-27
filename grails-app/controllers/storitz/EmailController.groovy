@@ -1,6 +1,8 @@
 package storitz
 
 import com.storitz.User
+import com.storitz.Commission
+import storitz.constants.CommissionSourceType
 
 class EmailController {
 
@@ -9,16 +11,17 @@ class EmailController {
   def email = {
 
 
-    def siteManager = User.withCriteria {
-      sites {
-        eq("site.id", 1l)
+    def cost = 64 as BigDecimal
+
+    def c = Commission.createCriteria()
+    def ctype = c.get {
+      and {
+        eq("commissionSource", CommissionSourceType.WEBSITE)
+        lt("lowerBound", cost)
+        ge("upperBound", cost)
       }
-      notificationTypes {
-        eq("notificationType.id", 1l)
-      }
-      maxResults(1)
     }
-    println "Result = ${siteManager}"
+    println "Cost = ${cost} Result = ${ctype}"
     
     println "Sending email..."
     

@@ -54,7 +54,7 @@
 
             <div class="checkout_fields">
               <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'commissionSource', 'errors')}">
-                  <g:select id="commissionSource" style="width:200px;" name="commissionSource" from="${storitz.constants.CommissionSourceType?.list()}" value="${commissionInstance?.commissionSource}"  optionValue="value"/>
+                  <g:select id="commissionSource" style="width:200px;" name="commissionSource" from="${storitz.constants.CommissionSourceType?.list()}" value="${commissionInstance?.commissionSource}"  optionValue="display"/>
               </div>
               <div style="clear:both;"></div>
             </div>

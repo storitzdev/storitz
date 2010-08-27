@@ -66,8 +66,8 @@ class CostService {
     def ctype = c.get {
       and {
         eq("commissionSource", commissionSource)
-        gt("lowerBound", cost)
-        le("upperBound", cost)
+        lt("lowerBound", cost)
+        ge("upperBound", cost)
       }
     }
     if (!ctype) return cost * 0.25

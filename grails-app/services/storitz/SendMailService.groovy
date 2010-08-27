@@ -12,6 +12,9 @@ class SendMailService {
   def mailService
 
   def onMessage(emailMessage) {
+
+      if (!emailMessage.to) return null
+    
       try {
           if (emailMessage.body) {
             mailService.sendMail {

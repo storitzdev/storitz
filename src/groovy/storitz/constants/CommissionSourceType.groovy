@@ -17,7 +17,7 @@ public enum CommissionSourceType {
     this.display = display
   }
 
-  def getValue() { return display }
+  def getDisplay() { return display }
 
   static list() { [WEBSITE, WHITE_LABEL] }
 }
