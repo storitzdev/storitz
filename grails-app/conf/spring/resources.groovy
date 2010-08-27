@@ -30,11 +30,11 @@ beans = {
 
   switch(GrailsUtil.environment) {
     case "production":
-      println "Starting production ActiveMQ 61616"
+      println "Starting production ActiveMQ 61619"
       jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory){bean ->
         bean.destroyMethod ="stop"
         connectionFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-            brokerURL = "vm:(production:(tcp://localhost:61616)?persistent=false)?marshal=false"
+            brokerURL = "vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false"
         }
       }
       break
