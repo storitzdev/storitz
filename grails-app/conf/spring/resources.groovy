@@ -43,7 +43,7 @@ beans = {
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
-			brokerURL = 'vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false'
+        brokerURL = "vm://localhost:61617"
       }
 
       jmsTemplate(JmsTemplate) {
@@ -52,12 +52,12 @@ beans = {
           }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-         brokerURL = 'vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false'
+        brokerURL = "vm://localhost:61619"
       }
       jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
         bean.destroyMethod = "stop"
         connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-            brokerURL = "vm:(production:(tcp://localhost:61619)?persistent=false)?marshal=false"
+          brokerURL = "vm://localhost:61619"
         }
       }
       break
@@ -71,7 +71,7 @@ beans = {
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
-			brokerURL = 'vm:(production:(tcp://localhost:61617)?persistent=false)?marshal=false'
+        brokerURL = "vm://localhost:61617"
       }
 
       jmsTemplate(JmsTemplate) {
@@ -80,12 +80,12 @@ beans = {
           }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-         brokerURL = 'vm:(production:(tcp://localhost:61617)?persistent=false)?marshal=false'
+        brokerURL = "vm://localhost:61617"
       }
       jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
         bean.destroyMethod = "stop"
         connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-            brokerURL = "vm:(production:(tcp://localhost:61617)?persistent=false)?marshal=false"
+          brokerURL = "vm://localhost:61617"
         }
       }
       break
@@ -99,7 +99,7 @@ beans = {
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
-            brokerURL = 'vm:(production:(tcp://localhost:61618)?persistent=false)?marshal=false'
+        brokerURL = "vm://localhost:61618"
       }
 
       jmsTemplate(JmsTemplate) {
@@ -108,12 +108,12 @@ beans = {
           }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-         brokerURL = 'vm:(production:(tcp://localhost:61618)?persistent=false)?marshal=false'
+        brokerURL = "vm://localhost:61618"
       }
       jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
         bean.destroyMethod = "stop"
         connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-            brokerURL = "vm:(production:(tcp://localhost:61618)?persistent=false)?marshal=false"
+            brokerURL = "vm://localhost:61618"
         }
       }
       break
