@@ -292,6 +292,14 @@ class RentalTransactionController {
 
       notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
 
+      // remove unit from inventory
+      if (--unit.unitCount <= 0) {
+        rentalTransactionInstance.site.removeFromUnits(unit)
+        rentalTransactionInstance.save(flush: true)
+      }  else {
+        unit.save(flush: true)
+      }
+
       def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
       def siteManager = User.withCriteria {
         sites {
