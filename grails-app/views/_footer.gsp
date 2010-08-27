@@ -22,7 +22,7 @@
       <div style="clear: both;"></div>
       <div style="margin: 0 5em;" class="left">
         <a href="http://twitter.com/Storitzdotcom"><img style="border: none;" src="${resource(dir:'images', file:'icn-twitter.png')}" alt="Twitter"/></a>
-        <a href="http://www.facebook.com/storitz"><img style="border: none;" src="${resource(dir:'images', file:'icn-facebook.png')}" alt="FaceBook"/></a>
+        <a href="http://www.facebook.com/pages/Storitz/133958569979777"><img style="border: none;" src="${resource(dir:'images', file:'icn-facebook.png')}" alt="FaceBook"/></a>
         <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><img style="border: none;" src="${resource(dir:'images', file:'icn-stumbleupon.png')}" alt="StumbleUpon"/></a>
       </div>
     </div>

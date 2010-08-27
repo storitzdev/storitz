@@ -151,7 +151,19 @@ class NotificationService {
               from: "no-response@storitz.com",
               subject: subj,
               model: model,
-              view: "/notifications/moveInSiteMgr")
+              view: "/notifications/moveInOperMgr")
+
+      } catch (Exception e) {
+          log.error("${e}", e)
+      }
+
+      try {
+          emailService.sendEmail(
+              to: "notifcations@storitz.com",
+              from: "no-response@storitz.com",
+              subject: subj,
+              model: model,
+              view: "/notifications/moveInOperMgr")
 
       } catch (Exception e) {
           log.error("${e}", e)
