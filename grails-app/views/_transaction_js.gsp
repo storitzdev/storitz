@@ -1,14 +1,14 @@
 var storageSize = [];
-var searchSize = ${searchSize};
+var searchSize = ${searchSize ? searchSize : 0};
 var sizeDescription;
-var unitId = ${unitId};
+var unitId = ${unitId ? unitId : -1};
 var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
 var adminFee = ${site.adminFee ? site.adminFee : 0};
 
 // vars set by callback
 var durationMonths = 1;
-var monthlyRent = ${monthlyRate};
-var pushRate = ${pushRate};
+var monthlyRent = ${monthlyRate ? monthlyRate : 0};
+var pushRate = ${pushRate ? pushRate : 0};
 var chosenPromo = '';
 var chosenPromoId = -999;
 var totalMoveInCost = additionalFees + monthlyRent;
