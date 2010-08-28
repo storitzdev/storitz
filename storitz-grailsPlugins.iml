@@ -19,6 +19,7 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/jquery-1.4.2.5/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
@@ -27,6 +28,7 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/activemq-0.1" />
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12/grails-app/utils" isTestSource="false" />
     </content>
@@ -61,6 +63,10 @@
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/grails-app/services" isTestSource="false" />
@@ -106,9 +112,11 @@
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.web/jars/org.springframework.security.web-3.0.3.RELEASE.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.core/jars/org.springframework.security.core-3.0.3.RELEASE.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.geronimo.specs/geronimo-jms_1.1_spec/jars/geronimo-jms_1.1_spec-1.1.1.jar!/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/activemq-0.1/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/activemq-0.1/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/mail-0.9/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/lib" recursive="false" />

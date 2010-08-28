@@ -1,4 +1,8 @@
 <div id="directions">
+  <div class="right" style="display:none;margin: -30px 10px 0 0;" id="printThisTop">
+    <a href="#" onclick="window.print(); return false;">print</a>
+  </div>
+  <div style="height: 10px;"></div>
   <div id="directionMap">
     <div id="directionMapCanvas"></div>
   </div>
@@ -47,5 +51,8 @@
   </div>
   <div id="directionMapDestination" style="display:none;">
     <div id="directionMapDestinationCanvas"></div>
+  </div>
+  <div id="printThis" class="right" style="display:none; margin: 10px;">
+    <a href="#" onclick="window.print(); return false;">print</a>
   </div>
 </div>

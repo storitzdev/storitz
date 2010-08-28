@@ -11,6 +11,8 @@ var directionMap;
 function createDirectionMap() {
 
   $('directionMapDestination').hide();
+  $('printThis').hide();
+  $('printThisTop').hide();
   $('dirPanel').hide();
 
   destLatLng = new google.maps.LatLng(${site.lat}, ${site.lng});
@@ -52,7 +54,7 @@ function drawDirections(response, status) {
 
     $('directionsSteps').childElements().each(function(elem) { elem.remove() });
 
-    for (i=0;i<legs.length; i++) {
+    for (i=0; i < legs.length; i++) {
       if (i == 0) {
         startLocation.latlng = legs[i].start_location;
         startLocation.address = legs[i].start_address;
@@ -71,7 +73,7 @@ function drawDirections(response, status) {
       endLocation.address = legs[i].end_address;
       var steps = legs[i].steps;
       var elem;
-      for (j=0;j<steps.length;j++) {
+      for (j=0; j < steps.length; j++) {
         var nextSegment = steps[j].path;
         var durationText = steps[j].duration.text ? steps[j].duration.text : "&nbsp;";
         var distanceText = steps[j].distance.text ? steps[j].distance.text : "&nbsp;";
@@ -82,7 +84,7 @@ function drawDirections(response, status) {
                 .insert(new Element('td', { style:"width: 75px; padding-right: 15px;text-align:right;"}).update(durationText));
 
         $('directionsSteps').insert(elem);
-        for (k=0;k<nextSegment.length;k++) {
+        for (k=0; k < nextSegment.length; k++) {
           polyline.getPath().push(nextSegment[k]);
           bounds.extend(nextSegment[k]);
         }
@@ -130,7 +132,8 @@ function drawDirections(response, status) {
       position: destLatLng,
       icon: markerImageGreen
     });
-
+    $('printThis').show();
+    $('printThisTop').show();
   }
 }
 

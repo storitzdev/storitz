@@ -33,6 +33,9 @@
             </div>
 
             <div style="height:25px;"></div>
+            <div class="right" style="margin: 0 10px 20px 0;">
+              <a href="#" onclick="window.print(); return false;">print</a>
+            </div>
 
             <div class="price_options checkout_header white">
               Checkout Confirmation
@@ -168,6 +171,10 @@
               Sincerely,
               Storitz, Inc.
             </p>
+
+            <div class="right" style="margin: 20px 10px 0 0;">
+              <a href="#" onclick="window.print(); return false;">print</a>
+            </div>
 
           </div>
         </div>

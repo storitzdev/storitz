@@ -8,7 +8,7 @@
   </div>
   <div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-5x5.gif')}" alt="5x5 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-5x5.gif')}" alt="5x5 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -22,7 +22,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-5x10.gif')}" alt="5x10 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-5x10.gif')}" alt="5x10 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -36,7 +36,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-7x10.gif')}" alt="7x10 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-7x10.gif')}" alt="7x10 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -50,7 +50,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-10x10.gif')}" alt="10x10 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-10x10.gif')}" alt="10x10 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -64,7 +64,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-10x15.gif')}" alt="10x15 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-10x15.gif')}" alt="10x15 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -78,7 +78,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-10x20.gif')}" alt="10x20 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-10x20.gif')}" alt="10x20 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -92,7 +92,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-10x25.gif')}" alt="10x25 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-10x25.gif')}" alt="10x25 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -106,7 +106,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'storage-sizes-10x30.gif')}" alt="10x30 unit"/>
+      <img src="${resource(dir: 'images', file: 'unit-size-10x30.gif')}" alt="10x30 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
