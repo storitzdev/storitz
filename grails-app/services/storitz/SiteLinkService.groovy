@@ -805,7 +805,7 @@ class SiteLinkService {
     }
   }
 
-  def moveInCostRetrieve(rentalTransaction) {
+  def getAdminFee(rentalTransaction) {
     def ret = getMoveInWithDiscount(rentalTransaction)
 
     println "MoveInWithDiscount result: ${ret}"

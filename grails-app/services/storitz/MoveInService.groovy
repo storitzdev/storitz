@@ -25,11 +25,26 @@ class MoveInService {
       }
     }
 
+    def moveInDetail(RentalTransaction trans) {
+      switch(trans.site.source) {
+        case "SL":
+          break
+
+        case "CS3":
+          break
+
+        case "CS4":
+          break
+
+        default:
+          throw new Exception("Unknown service for move in detail")
+      }
+    }
+
     def moveIn(RentalTransaction trans) {
       switch(trans.site.source) {
         case "SL":
           siteLinkService.createTenant(trans)
-          siteLinkService.moveInCostRetrieve(trans)
           return siteLinkService.moveIn(trans)
           break
 
