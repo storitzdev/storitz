@@ -141,6 +141,7 @@
                 <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance?.unitId}" />
                 <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
                 <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
+                <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${searchSize}"/>
                 <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
                 <input style="display:none" type="text" name="SC_page" id="SC_page" value="payment"/>
 
