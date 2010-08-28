@@ -112,13 +112,12 @@ class RentalTransactionController {
         if (!params.promoId && site.siteLink) {
           rentalTransactionInstance.promoId = -999;
         }
-        if (!rentalTransactionInstance.validate() || !rentalTransactionInstance.save(flush: true)) {
+        if (rentalTransactionInstance.validate() && rentalTransactionInstance.save(flush: true)) {
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
               redirect(action: "payment", id: rentalTransactionInstance.id)
-          }
-          else {
-              render(view: "create", model: [rentalTransactionInstance: rentalTransactionInstance])
-          }
+        } else {
+              render(controller:"storageSite", view: "detail", model: [rentalTransactionInstance: rentalTransactionInstance])
+        }
     }
 
     def show = {
