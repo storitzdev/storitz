@@ -998,7 +998,7 @@ class CShiftService {
 
         case "PERCENT_OFF":
           offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
-          if (promo.promoQty > 25 && durationMonths == 1) durationMonths++
+          if (promo.promoQty > 50 && durationMonths == 1) durationMonths++
           break;
 
         case "FIXED_RATE":
@@ -1041,7 +1041,7 @@ class CShiftService {
 
         case "PERCENT_OFF":
           offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
-          if (promo.promoQty > 25 && durationMonths == 1) durationMonths++
+          if (promo.promoQty > 50 && durationMonths == 1) durationMonths++
           break;
 
         case "FIXED_RATE":

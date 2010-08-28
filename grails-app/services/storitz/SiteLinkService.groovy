@@ -934,6 +934,7 @@ class SiteLinkService {
     def ret = [:]
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
+    def rate = unit ? unit.pushRate : 0
     def premium = ins ? ins.premium : 0
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
@@ -953,12 +954,12 @@ class SiteLinkService {
           break;
 
         case "FIXED_RATE":
-          offerDiscount = (unit.price - promo.promoQty) * promo.expireMonth;
+          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promo.expireMonth;
           break;
       }
     }
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def moveInTotal = feesTotal + (unit.price + premium)*durationMonths - offerDiscount;
+    def moveInTotal = feesTotal + (rate + premium)*durationMonths - offerDiscount;
 
     ret["durationMonths"] = durationMonths
     ret["discountTotal"] = offerDiscount
