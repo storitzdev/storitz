@@ -113,7 +113,7 @@
         function markerOver(feature) {
           var c = '<div style="width: 300px;"><h3>' + feature.title + '</h3>';
             if (feature.coverImg.length > 0) {
-              c += '<div style="float: left;"><img src="${resource(dir:'/')}' + feature.coverImg + '" alt="' + feature.title + '"/></div>';
+              c += '<div style="float: left;"><img src="${resource(dir:'/') != '/' ? resource(dir:'/') : ''}' + feature.coverImg + '" alt="' + feature.title + '"/></div>';
             }
             c += '<div style="float: left;padding: .5em">' + feature.address + '<br/>' +
               feature.city + ', ' + feature.state + ' ' + feature.zipcode + '</div><div style="clear: both;"></div>';
