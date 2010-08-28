@@ -215,10 +215,26 @@ class RentalTransactionController {
       }
 
       if (!moveInService.checkRented(rentalTransactionInstance)) {
-        // TODO - find new unit
-        flash.message = "Unit already reserved - refresh and try again"
-        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
-        return
+        def found = false
+        for (i in 0..3) {
+          def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == unit.getUnitTypeLower() && it.unitsize.id == unit.unitsize.id && it.id != unit.id }.min{ it.price }
+          if (bestUnit) {
+            rentalTransactionInstance.unitId = bestUnit.id
+            if (!moveInService.checkRented(rentalTransactionInstance)) {
+              flash.message = "Unit already reserved - refresh and try again"
+              render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+              return
+            } else {
+              found = true
+              break
+            }
+          }
+        }
+        if (!found) {
+          flash.message = "Unit already reserved - refresh and try again"
+          render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+          return
+        }
       }
 
       def ccNum = params.cc_number.replaceAll(/\D/, '') as String
