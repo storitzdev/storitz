@@ -511,7 +511,9 @@ class SiteLinkService {
   def createSiteUser(site, email, realName, manager) {
     def user = User.findByEmail(email)
 
-    if (realName.size() == 0) realName = email
+    if (!email || email.size() == 0) return
+    
+    if (!realName || realName.size() == 0) realName = email
 
     if (!user) {
       user = new User(
@@ -519,7 +521,7 @@ class SiteLinkService {
         password: (Math.random() * System.currentTimeMillis()) as String,
         description: "Site Manager for ${site.title}",
         email: email,
-        userRealName: (realName ? realName : email),
+        userRealName: realName,
         accountExpired: false,
         accountLocked: false,
         passwordExpired: false,
