@@ -470,7 +470,7 @@ class StorageSiteController {
     }
 
     // If you change this, don't forget the smartCall action also uses this view!
-    [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price, pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize.id, promoId:null]
+    [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price, pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, promoId:null]
   }
 
   def directions = {
