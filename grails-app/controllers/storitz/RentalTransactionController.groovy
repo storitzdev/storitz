@@ -208,7 +208,7 @@ class RentalTransactionController {
           rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactSecondary
           break
       }
-      if (!rentalTransactionInstance.save(flush: true)) {
+      if (!rentalTransactionInstance.validate() || !rentalTransactionInstance.save(flush: true)) {
         flash.message = "Could not save billing address"
         render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
         return
