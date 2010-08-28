@@ -91,6 +91,8 @@ class RentalTransactionController {
         rentalTransactionInstance.bookingDate = new Date()
         rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         rentalTransactionInstance.site = site
+        rentalTransactionInstance.unitType = params.chosenType
+        rentalTransactionInstance.searchSize = params.searchSize
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
 
         if (!springSecurityService.principal.equals('anonymousUser')) {
@@ -116,7 +118,7 @@ class RentalTransactionController {
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
               redirect(action: "payment", id: rentalTransactionInstance.id)
         } else {
-              render(controller:"storageSite", view: "detail", model: [rentalTransactionInstance: rentalTransactionInstance])
+              redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
         }
     }
 
@@ -176,6 +178,11 @@ class RentalTransactionController {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
       def unit = StorageUnit.get(rentalTransactionInstance.unitId)
+      if (unit) {
+        rentalTransactionInstance.unitType = unit.getUnitTypeLower()
+      } else {
+        rentalTransactionInstance.unitType = params.chosenType
+      }
       def ins = null
       if (!rentalTransactionInstance.insuranceId == -999) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
@@ -217,14 +224,10 @@ class RentalTransactionController {
       if (!moveInService.checkRented(rentalTransactionInstance)) {
         def found = false
         for (i in 0..3) {
-          def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == unit.getUnitTypeLower() && it.unitsize.id == unit.unitsize.id && it.id != unit.id }.min{ it.price }
+          def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize && it.id != unit.id }.min{ it.price }
           if (bestUnit) {
             rentalTransactionInstance.unitId = bestUnit.id
-            if (!moveInService.checkRented(rentalTransactionInstance)) {
-              flash.message = "Unit already reserved - refresh and try again"
-              render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
-              return
-            } else {
+            if (moveInService.checkRented(rentalTransactionInstance)) {
               found = true
               break
             }
@@ -232,7 +235,7 @@ class RentalTransactionController {
         }
         if (!found) {
           flash.message = "Unit already reserved - refresh and try again"
-          render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+          render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
           return
         }
       }

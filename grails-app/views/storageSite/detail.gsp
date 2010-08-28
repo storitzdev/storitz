@@ -435,10 +435,12 @@
           <div id="rentalForm" style="display: none;">
             <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
               
-              <input type="hidden" name="unitId" id="unitId" value="${rentalTransaction ? rentalTransaction.unitId : unitId}" />
-              <input type="hidden" name="promoId" id="promoId" value="${rentalTransaction?.promoId}" />
+              <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance ? rentalTransactionInstance.unitId : unitId}" />
+              <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
               <input type="hidden" name="site" value="${params.id}" />
-              <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransaction?.moveInDate}" />
+              <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
+              <input type="hidden" name="chosenType" id="chosenType" value="${rentalTransactionInstance?.unitType}" />
+              <input type="hidden" name="searchSize" id="searchSize" value="${searchSize ? searchSize : rentalTransactionInstance?.searchSize}" />
 
               <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${params.searchSize}"/>
               <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
@@ -681,7 +683,7 @@
                 <div class="checkout_fields">
                   <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
                       <div class="left">
-                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action='terms')}">Terms of Use</a>
+                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" target="_new">Terms of Use</a>
                           <g:if test="${site.rentalAgreement}">
                             and the <a href="${resource(file:site.rentalAgreement.src())}" target="_blank">Storage Rental Agreement</a>
                           </g:if>

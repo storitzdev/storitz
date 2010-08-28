@@ -35,19 +35,12 @@
     if (contactType == 'new') {
       valid &= Validation.validate('firstName');
       valid &= Validation.validate('lastName');
-      valid &= Validation.validate('streetNumber');
-      valid &= Validation.validate('street');
+      valid &= Validation.validate('address1');
       valid &= Validation.validate('city');
       valid &= Validation.validate('state');
       valid &= Validation.validate('zipcode');
     }
     return valid;
-  }
-
-  function nextStep() {
-    if (validateForm()) {
-      $('rentalTransaction').submit();
-    }
   }
 
   function prevStep() {
@@ -111,9 +104,18 @@
     });
   }
 
+  function setupForm() {
+    Event.observe('paymentTransaction', 'submit', function(event) {
+      if (!validateForm()) {
+        Event.stop(event);
+      }
+    });
+  }
+
   Event.observe(window, 'load', function() {
     contactChange();
     setupCalendar();
+    setupForm();
     transactionFormSetup();
     updateTransaction();
     ajaxFormUpdate();
@@ -141,6 +143,8 @@
                 <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance?.unitId}" />
                 <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
                 <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
+                <input type="hidden" name="chosenType" id="chosenType" value="${rentalTransactionInstance?.unitType}" />
+                <input type="hidden" name="searchSize" id="searchSize" value="${rentalTransactionInstance?.searchSize}" />
                 <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${searchSize}"/>
                 <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
                 <input style="display:none" type="text" name="SC_page" id="SC_page" value="payment"/>
@@ -322,7 +326,7 @@
                   </div>
                 </div>
                 <div style="clear:both; margin-top: 20px;">
-                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-pay-now.png')}" onclick="nextStep()" alt="Pay Now"/></div>
+                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-pay-now.png')}" alt="Pay Now"/></div>
                   <!--
                   //TODO - make working back link
                   <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">

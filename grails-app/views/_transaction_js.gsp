@@ -117,11 +117,13 @@ function transactionFormSetup() {
   $('unitsize').observe('change', function() {
     searchSize = $F('unitsize');
     $('SC_searchSize').value = searchSize;
+    $('searchSize').value = searchSize;
     showTotals();
   })
 
   $('unitType').observe('change', function() {
     chosenUnitType = $F('unitType');
+    $('chosenType').value = chosenUnitType;
     showTotals();
   })
 }

@@ -43,9 +43,10 @@ class RentalTransaction {
   SearchEngineReferral searchEngineReferral
   Boolean isCallCenter
   String cleanCCNum
+  Integer searchSize
+  String unitType
 
   // Transient members
-  Integer searchSize
   Boolean insuranceTerms
   Boolean hazardousMaterials
   Boolean terms
@@ -79,6 +80,6 @@ class RentalTransaction {
     feedUnitNumber(nullable:true)
   }
 
-  static transients = ['searchSize', 'terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
+  static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
           'cardType', 'cvv2']  
 }
