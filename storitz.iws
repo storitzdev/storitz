@@ -19,7 +19,7 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy" afterPath="$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -86,15 +86,6 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="resources.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/spring/resources.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
@@ -104,10 +95,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CShiftService.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CShiftService.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="899" column="107" selection-start="34490" selection-end="34490" vertical-scroll-proportion="0.26190478">
+            <state line="899" column="107" selection-start="34490" selection-end="34490" vertical-scroll-proportion="-5.72">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RentalTransactionController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="277" column="51" selection-start="12370" selection-end="12387" vertical-scroll-proportion="-6.9615383">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CookieCodec.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="160" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.18771331">
               <folding />
             </state>
           </provider>
@@ -169,15 +178,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_size_popup.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/_size_popup.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="25" selection-start="2191" selection-end="2191" vertical-scroll-proportion="-24.48">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -192,7 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/commission/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/commission/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/EmailController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/CostService.groovy" />
@@ -208,6 +207,7 @@
         <option value="$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskSoapPort_PortType.java" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/NotificationService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
+        <option value="$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy" />
       </list>
     </option>
   </component>
@@ -1170,7 +1170,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20982382" sideWeight="0.6892342" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32768363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1191,7 +1191,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995633" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.6982183" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2918979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2918979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1216,7 +1216,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change to web service to use long instead of double" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removal of one last Double cast" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1229,7 +1229,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Finished notification framework on the UI side" />
     <MESSAGE value="Autocomplete for user and site&#10;Operating hours clean up" />
     <MESSAGE value="Fixes to map and directions" />
     <MESSAGE value="CenterShift API for MoveIn" />
@@ -1254,6 +1253,7 @@
     <MESSAGE value="Fix order of precedence" />
     <MESSAGE value="JS and groovy var mixup" />
     <MESSAGE value="Change to web service to use long instead of double" />
+    <MESSAGE value="Removal of one last Double cast" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1297,18 +1297,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/EmailService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/CommissionSourceType.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="16" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/commission/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="221" selection-start="2196" selection-end="2196" vertical-scroll-proportion="0.0" />
@@ -1399,7 +1387,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="899" column="107" selection-start="34490" selection-end="34490" vertical-scroll-proportion="0.26190478">
+        <state line="899" column="107" selection-start="34490" selection-end="34490" vertical-scroll-proportion="-5.72">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="277" column="51" selection-start="12370" selection-end="12387" vertical-scroll-proportion="-6.9615383">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="160" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.18771331">
           <folding />
         </state>
       </provider>
