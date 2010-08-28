@@ -112,7 +112,7 @@ class RentalTransactionController {
         if (!params.promoId && site.siteLink) {
           rentalTransactionInstance.promoId = -999;
         }
-        if (rentalTransactionInstance.save(flush: true)) {
+        if (!rentalTransactionInstance.validate() || !rentalTransactionInstance.save(flush: true)) {
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
               redirect(action: "payment", id: rentalTransactionInstance.id)
           }
@@ -191,7 +191,8 @@ class RentalTransactionController {
 
         case "new":
           def billingContact = new com.storitz.Contact(params)
-          if (!billingContact.save(flush: true)) {
+          billingContact.rental = rentalTransactionInstance
+          if (!billingContact.validate() || !billingContact.save(flush: true)) {
             flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
             render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
             return
