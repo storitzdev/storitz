@@ -27,7 +27,7 @@
         <p>
           There's an easier way to find a place to store your stuff. That revelation led us to create Storitz,
           a company combining years of experience in the self-storage industry with innovative web technology.
-          At Storitz we're experts from both worlds&mdash;people who believe that storage should be simple as
+          At Storitz we're experts from both worlds&mdash;people who believe that storage should be as simple as
           Click. Store. Done.
         </p>
         <p>

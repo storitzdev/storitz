@@ -15,7 +15,7 @@
       ${site.address2}
     </div>
     <div>
-      ${site.city}, ${site.state} ${site.zipcode}
+      ${site.city}, ${site.state.display} ${site.zipcode}
     </div>
   </div>
 </div>

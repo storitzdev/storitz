@@ -285,6 +285,9 @@ Validation.addAllThese([
     ['validate-credit-card', 'Please enter a valid credit card number', function(v) {
                 return Validation.get('IsEmpty').test(v) || isValidCardNumber(v);
             }],
+    ['validate-zipcode', 'Please enter a zipcode', function(v) {
+                return Validation.get('IsEmpty').test(v) || (v.length >= 5 && v.length < 11);
+            }],
 	['validate-selection', 'Please make a selection', function(v,elm){
 				return elm.options ? elm.selectedIndex > 0 : !Validation.get('IsEmpty').test(v);
 			}],

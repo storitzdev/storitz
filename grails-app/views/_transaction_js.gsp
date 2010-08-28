@@ -133,8 +133,8 @@ function setupCalendar() {
       dateField     : 'date',
       triggerElement: 'calendarPic',
       dateFormat    : '%m/%d/%y',
+      shouldClose   :  false,
       selectHandler :  function(cal, dateString) {
-        this.hide();
         startDate = dateString;
         $('SC_date').value = startDate;
         $('moveInDate').value = startDate;

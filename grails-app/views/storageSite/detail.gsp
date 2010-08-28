@@ -525,7 +525,7 @@
                     <g:textField name="contactPrimary.province" id="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransactionInstance?.contactPrimary?.province}" />
                   </div>
                   <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.zipcode', 'errors')}">
-                      <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required" style="width:80px;" value="${rentalTransactionInstance?.contactPrimary?.zipcode}" />
+                      <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required validate-zipcode" style="width:80px;" value="${rentalTransactionInstance?.contactPrimary?.zipcode}" />
                   </div>
                   <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.country', 'errors')}">
                     <g:select name="contactPrimary.country" id="contactPrimary.country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.contactPrimary?.country?.key}" optionKey="key" optionValue="display"/>
@@ -681,11 +681,10 @@
                 <div class="checkout_fields">
                   <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
                       <div class="left">
-                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the terms and conditions of the
+                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action='terms')}">Terms of Use</a>
                           <g:if test="${site.rentalAgreement}">
-                            <a href="${resource(file:site.rentalAgreement.src())}" target="_blank">Storage Rental Agreement</a>
+                            and the <a href="${resource(file:site.rentalAgreement.src())}" target="_blank">Storage Rental Agreement</a>
                           </g:if>
-                          <g:else>Storage Rental Agreement</g:else>
                       </div>
                       <div style="clear:both;"></div>
                   </div>

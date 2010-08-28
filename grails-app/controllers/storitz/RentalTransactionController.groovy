@@ -285,7 +285,7 @@ class RentalTransactionController {
       }
 
       if (!moveInService.moveIn(rentalTransactionInstance)) {
-        flash.message = "Problem with move-in.  Please contact technical support."
+        flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
         render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
         return
       }

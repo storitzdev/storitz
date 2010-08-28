@@ -19,7 +19,14 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="Inverted error logic">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_siteInfo.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_siteInfo.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_transaction.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/static/aboutus.gsp" afterPath="$PROJECT_DIR$/grails-app/views/static/aboutus.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/js/validation.js" afterPath="$PROJECT_DIR$/web-app/js/validation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/AuthorizeNetConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/AuthorizeNetConfig.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -86,34 +93,82 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Contact.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/Contact.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="74" selection-start="296" selection-end="296" vertical-scroll-proportion="-2.633803">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SiteLinkService.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
+      <file leaf-file-name="AuthorizeNetConfig.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/AuthorizeNetConfig.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="514" column="4" selection-start="21838" selection-end="21838" vertical-scroll-proportion="0.20877193">
+            <state line="23" column="33" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RentalTransaction.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="6" selection-start="242" selection-end="242" vertical-scroll-proportion="-1.4782609">
+            <state line="527" column="109" selection-start="23784" selection-end="23784" vertical-scroll-proportion="4.3157897">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="calendarview.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/js/calendarview.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="102" column="48" selection-start="3320" selection-end="3331" vertical-scroll-proportion="25.68">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_transaction.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="85" selection-start="1969" selection-end="1969" vertical-scroll-proportion="1.7">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_transaction_js.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction_js.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="137" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="-6.3">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="aboutus.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/static/aboutus.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="103" selection-start="996" selection-end="996" vertical-scroll-proportion="-6.6666665">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_siteInfo.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_siteInfo.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="40" selection-start="420" selection-end="420" vertical-scroll-proportion="0.49913645">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="validation.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/js/validation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="288" column="72" selection-start="11268" selection-end="11268" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -122,64 +177,7 @@
       <file leaf-file-name="RentalTransactionController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="47" selection-start="4432" selection-end="4432" vertical-scroll-proportion="-13.076923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="messages.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
-          <provider editor-type-id="ResourceBundle">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="65" selection-start="3758" selection-end="3758" vertical-scroll-proportion="-22.95">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StorageSiteController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="477" column="99" selection-start="19477" selection-end="19477" vertical-scroll-proportion="-37.923077">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CsKioskSoapBindingStub.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskSoapBindingStub.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="239" column="22" selection-start="21964" selection-end="21964" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CsKioskSoapPort_PortType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskSoapPort_PortType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="141" selection-start="10330" selection-end="10330" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CsKioskLocator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskLocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="30" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NotificationService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/NotificationService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="67" selection-start="5664" selection-end="5664" vertical-scroll-proportion="0.0">
+            <state line="118" column="54" selection-start="4439" selection-end="4440" vertical-scroll-proportion="-5.1372547">
               <folding />
             </state>
           </provider>
@@ -199,22 +197,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/_size_popup.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/admin/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
-        <option value="$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskSoapBindingStub.java" />
-        <option value="$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskSoapPort_PortType.java" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/NotificationService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
         <option value="$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/Contact.groovy" />
         <option value="$PROJECT_DIR$/grails-app/i18n/messages.properties" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/AuthorizeNetConfig.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/web-app/js/validation.js" />
+        <option value="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/static/aboutus.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/_siteInfo.gsp" />
       </list>
     </option>
   </component>
@@ -555,17 +553,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="174" />
-    <property name="project.structure.last.edited" value="Libraries" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="134" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="34" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="165" />
     <property name="OverrideImplement.combined" value="true" />
-    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="165" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="132" />
     <property name="recentsLimit" value="5" />
@@ -588,12 +586,12 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1072,7 +1070,7 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31403118" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21764706" sideWeight="0.701559" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21764706" sideWeight="0.7026726" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741398" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3163152" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1082,7 +1080,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995633" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328877" sideWeight="0.6982183" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29064587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2895323" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1188,46 +1186,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="442" column="73" selection-start="17013" selection-end="17023" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="899" column="107" selection-start="34490" selection-end="34490" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="105" selection-start="4873" selection-end="4873" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction_js.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="44" selection-start="4369" selection-end="4369" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="52" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/CookieCodec.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="160" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/storitz/cshiftclient/CsKioskSoapBindingStub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="239" column="22" selection-start="21964" selection-end="21964" vertical-scroll-proportion="0.0">
@@ -1256,12 +1214,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="6" selection-start="242" selection-end="242" vertical-scroll-proportion="-1.4782609">
+        <state line="514" column="4" selection-start="21838" selection-end="21838" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/AuthorizeNetConfig.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="33" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1271,38 +1240,63 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="65" selection-start="3758" selection-end="3758" vertical-scroll-proportion="-22.95">
+        <state line="35" column="114" selection-start="2442" selection-end="2442" vertical-scroll-proportion="0.2244898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/js/calendarview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="48" selection-start="3320" selection-end="3331" vertical-scroll-proportion="25.68">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="85" selection-start="1969" selection-end="1969" vertical-scroll-proportion="1.7">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="47" selection-start="4432" selection-end="4432" vertical-scroll-proportion="-13.076923">
+        <state line="118" column="54" selection-start="4439" selection-end="4440" vertical-scroll-proportion="-5.1372547">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="477" column="99" selection-start="19477" selection-end="19477" vertical-scroll-proportion="-37.923077">
+        <state line="527" column="109" selection-start="23784" selection-end="23784" vertical-scroll-proportion="4.3157897">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/Contact.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/web-app/js/validation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="74" selection-start="296" selection-end="296" vertical-scroll-proportion="-2.633803">
+        <state line="288" column="72" selection-start="11268" selection-end="11268" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction_js.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="514" column="4" selection-start="21838" selection-end="21838" vertical-scroll-proportion="0.20877193">
+        <state line="137" column="0" selection-start="4019" selection-end="4019" vertical-scroll-proportion="-6.3">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/static/aboutus.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="103" selection-start="996" selection-end="996" vertical-scroll-proportion="-6.6666665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_siteInfo.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="40" selection-start="420" selection-end="420" vertical-scroll-proportion="0.49913645">
           <folding />
         </state>
       </provider>

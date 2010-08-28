@@ -42,7 +42,7 @@
       <div id="costDetails" class="right">
         <table id="costTotals">
           <tr>
-            <td>Mothly rent</td>
+            <td>Monthly rent</td>
             <td class="costDuration" id="monthlyDuration"></td>
             <td class="costMoney" id="monthlyPerMonth"></td>
             <td class="costMoney" id="monthlyTotal"></td>
