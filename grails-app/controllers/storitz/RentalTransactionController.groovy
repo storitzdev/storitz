@@ -215,7 +215,6 @@ class RentalTransactionController {
       }
 
       if (!moveInService.checkRented(rentalTransactionInstance)) {
-        // TODO - remove unit from inventory
         // TODO - find new unit
         flash.message = "Unit already reserved - refresh and try again"
         render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])

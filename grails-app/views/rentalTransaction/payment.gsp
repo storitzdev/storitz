@@ -249,7 +249,7 @@
                             <g:textField name="province" id="province" class="required" style="width:180px;" value="${rentalTransaction?.contactSecondary?.province}" />
                           </div>
                           <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'zipcode', 'errors')}">
-                              <g:textField name="zipcode" id="zipcode" class="required" style="width:80px;" value="${rentalTransaction?.contactSecondary?.zipcode}" />
+                              <g:textField name="zipcode" id="zipcode" class="required validate-zipcode" style="width:80px;" value="${rentalTransaction?.contactSecondary?.zipcode}" />
                           </div>
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransaction, field: 'country', 'errors')}">
                             <g:select name="country" id="country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransaction?.contactSecondary?.country?.key}" optionKey="key" optionValue="display"/>
