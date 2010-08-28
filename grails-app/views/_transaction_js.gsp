@@ -98,6 +98,11 @@ function updateTransaction() {
     $('specialOfferBlock').hide();
   }
   $('adminTotal').update('$' + additionalFees.toFixed(2));
+  if (totalMoveInCost == 0) {
+    $('rentme').hide();
+  } else {
+    $('rentme').show();
+  }
 }
 
 function transactionFormSetup() {

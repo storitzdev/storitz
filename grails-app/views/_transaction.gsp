@@ -30,6 +30,9 @@
       <g:if test="${params.action != 'payment'}"> 
         <input type="image" id="rentme" style="border:none;cursor:pointer;" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
       </g:if>
+      <g:else>
+        <div id="rentme" style="display:none"></div>
+      </g:else>
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left specialOfferText">
