@@ -846,6 +846,7 @@ class SiteLinkService {
   }
 
   def checkRented(RentalTransaction rentalTransaction) {
+    println "Check rented  - ${rentalTransaction.dump()}"
     def ret = getUnitInfoByName(rentalTransaction.site.siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
     def records = ret.declareNamespace(

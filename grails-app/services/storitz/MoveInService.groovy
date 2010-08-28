@@ -16,7 +16,6 @@ class MoveInService {
 
         case "CS3":
           return CShiftService.checkRented(trans)
-          break
 
         case "CS4":
           break
