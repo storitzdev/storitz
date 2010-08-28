@@ -137,6 +137,7 @@
         $('step3').addClassName('step_header_hi');
         $('primary_contact').hide();
         $('rental_info').show();
+        Form.getInputs('rentalTransaction','radio','rentalUse')[0].focus();
       }
     }
 

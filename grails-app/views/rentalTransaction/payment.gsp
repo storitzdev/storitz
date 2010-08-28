@@ -110,6 +110,7 @@
         Event.stop(event);
       }
     });
+    
   }
 
   Event.observe(window, 'load', function() {
