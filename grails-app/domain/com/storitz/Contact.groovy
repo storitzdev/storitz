@@ -28,6 +28,8 @@ class Contact {
       province(nullable:true)
       country(nullable:true)
       address2(nullable:true)
+      phoneType(nullable:true)
+      phone(nullable:true)
     }
 
     static belongsTo = [rental:RentalTransaction]
