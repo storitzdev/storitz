@@ -409,7 +409,7 @@ class SiteLinkService {
   }
 
   def getTaxRate(corpCode, locationCode, userName, password) {
-    payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
       <cal:RentTaxRatesRetrieve>
