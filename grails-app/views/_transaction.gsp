@@ -43,10 +43,10 @@
       <div class="specialOfferText">
         Insurance: <span id="selectedInsurance" class="selectedOffer"></span>
       </div>
-      <div id="moreInsurance" class="offerLink left" style="margin-left:35px;">
+      <div id="moreInsurance" class="offerLink left" style="margin-left:15px;">
         <a href="#" onclick="Effect.toggle('moreInsurance', 'appear', {queue: 'end', duration: 0.1});Effect.BlindDown('insurances'); Effect.toggle('fewerInsurance', 'appear', {queue:'end', duration: 0.1});return false;">Show Insurance</a>
       </div>
-      <div id="fewerInsurance" class="offerLink left" style="margin-left:35px;display:none;">
+      <div id="fewerInsurance" class="offerLink left" style="margin-left:15px;display:none;">
         <a href="#" onclick="Effect.toggle('fewerInsurance', 'appear', {queue: 'end', duration: 0.1});Effect.BlindUp('insurances'); Effect.toggle('moreInsurance', 'appear', {queue:'end', duration: 0.1});return false;">Hide Insurance</a>
       </div>
     </div>
