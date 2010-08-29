@@ -1027,7 +1027,7 @@ class CShiftService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit?.pushRate;
           if (promo.promoQty > 50 && durationMonths == 1) durationMonths++
           break;
 
@@ -1036,7 +1036,7 @@ class CShiftService {
           break;
       }
     }
-    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit.price + premium)*durationMonths - offerDiscount;
+    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit?.pushRate + premium)*durationMonths - offerDiscount;
 
   }
 
@@ -1070,7 +1070,7 @@ class CShiftService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit?.pushRate;
           if (promo.promoQty > 50 && durationMonths == 1) durationMonths++
           break;
 
