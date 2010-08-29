@@ -1080,13 +1080,16 @@ class CShiftService {
         ret["extended"] = false;
       }
     }
-    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/30)
 
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
     def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     // TODO handle AZ insurance tax
     def tax = ((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
+
+    println "CShift tax rate on unit is ${unit.taxRate} and taxable amount is ${premium*durationMonths}"
+    
     def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths
