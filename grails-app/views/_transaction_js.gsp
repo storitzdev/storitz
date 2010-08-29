@@ -81,11 +81,11 @@ function updateTransaction() {
 
   // update costs
   $('totalMoveInCost').update('$' + totalMoveInCost.toFixed(2));
-  $('monthlyDuration').update(durationMonths);
+  $('monthlyDuration').update(durationMonths.toFixed(2));
   $('monthlyPerMonth').update('$' + pushRate.toFixed(2));
   $('monthlyTotal').update('$' + (pushRate * durationMonths).toFixed(2));
   // insurance cost
-  $('insuranceDuration').update(durationMonths);
+  $('insuranceDuration').update(durationMonths.toFixed(2));
   $('insurancePerMonth').update('$' + premium.toFixed(2));
   $('insuranceTotal').update('$' + (premium * durationMonths).toFixed(2));
   if (premium > 0) {
@@ -93,6 +93,7 @@ function updateTransaction() {
   } else {
     $('insuranceBlock').hide();
   }
+  $('taxTotal').update('$' + tax.toFixed(2));
   if (tax > 0) {
     $('taxBlock').show();
   } else {
@@ -157,7 +158,8 @@ function setupCalendar() {
         $('transMoveInDate').update(startDate);
         var paidThru = Date.parseDate(startDate, "%m/%d/%y");
         paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        $('paidThruDate').update(paidThru.print("%o/%d/%y"))
+        $('paidThruDate').update(paidThru.print("%o/%d/%y"));
+        showTotals();
       }
   });
 }
@@ -166,7 +168,7 @@ function showTotals() {
   new Ajax.Request("${createLink(controller:'storageSite', action:'detailTotals')}",
   {
     method:'get',
-    parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType },
+    parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType, moveInDate:startDate },
     onSuccess:function(transport) {
       var totals = transport.responseJSON.totals;
       durationMonths = totals.durationMonths;
@@ -179,6 +181,7 @@ function showTotals() {
       monthlyRent = totals.monthlyRate;
       pushRate = totals.pushRate;
       additionalFees = totals.additionalFees;
+      tax = totals.tax
       totalMoveInCost = totals.totalMoveInCost;
       unitId = totals.unitId;
       updateTransaction();

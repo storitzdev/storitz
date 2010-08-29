@@ -577,7 +577,7 @@ class StorageSiteController {
   }
 
   def detailTotals = {
-
+    def moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
     def site = StorageSite.get(params.id)
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
 
@@ -625,9 +625,9 @@ class StorageSiteController {
       }
     }
 
-    def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins)
+    def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]} }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]} }}")
 
   }
 

@@ -912,7 +912,9 @@ class SiteLinkService {
     )
     def details = new MoveInDetails()
     for (item in records.'soap:Body'.'*:MoveInCostRetrieveWithDiscountResponse'.'*:MoveInCostRetrieveWithDiscountResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      details.items.add(new LineItem(tax: item.TaxAmount.text() as BigDecimal, amount: item.dcTotal.text() as BigDecimal, description: item.ChargeDescription.text()))
+      def tax = item.TaxAmount.text() as BigDecimal
+      def total = item.dcTotal.text() as BigDecimal
+      details.items.add(new LineItem(tax: tax, amount: (total-tax), description: item.ChargeDescription.text()))
     }
     return details
 
@@ -945,7 +947,7 @@ class SiteLinkService {
     return moveInResult > 3
   }
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
     def durationMonths = 1
     def offerDiscount = 0
     def premium = ins ? ins.premium : 0
@@ -964,7 +966,7 @@ class SiteLinkService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.pushRate;
           break;
 
         case "FIXED_RATE":
@@ -972,20 +974,35 @@ class SiteLinkService {
           break;
       }
     }
-    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit.price + premium)*durationMonths - offerDiscount;
+
+    def cal = new GregorianCalendar()
+    cal.setTime(moveInDate)
+    def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+    def moveInDay = ca.get(Calendar.DAY_OF_MONTH)
+
+    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+    
+    def subTotal = (unit.pushRate + premium) * durationMonths
+    def tax = premium * durationMonths * site.taxRateInsurance + unit.pushRate * durationMonths * site.taxRateRental
+    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + subTotal + tax - offerDiscount;
 
   }
 
   def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
-    // TODO - handle prorated payments
+    // TODO - handle anniversary date sites (most are first of the month)
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
+
+    // algo - subtract 1 from duration month and then get up to end of month
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
-    cal.add(Calendar.MONTH, durationMonths)
+    if (duration - 1 > 0) {
+      cal.add(Calendar.MONTH, durationMonths - 1)
+    }
+    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     return cal.time
   }
 
-  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
     def ret = [:]
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
@@ -1013,12 +1030,24 @@ class SiteLinkService {
           break;
       }
     }
+
+    def cal = new GregorianCalendar()
+    cal.setTime(moveInDate)
+    def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+    def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
+
+    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+
+
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def moveInTotal = feesTotal + (rate + premium)*durationMonths - offerDiscount;
+    def subTotal = (rate + premium)*durationMonths
+    def tax = premium * durationMonths * site.taxRateInsurance + unit.pushRate * durationMonths * site.taxRateRental
+    def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
+    ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
 
     return ret
