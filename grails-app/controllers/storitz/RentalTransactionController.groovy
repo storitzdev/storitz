@@ -118,7 +118,7 @@ class RentalTransactionController {
         }
 
         // check if no promo selected
-        if (!params.promoId && site.siteLink) {
+        if (!params.promoId) {
           rentalTransactionInstance.promoId = -999;
         }
         if (rentalTransactionInstance.validate() && rentalTransactionInstance.save(flush: true)) {
