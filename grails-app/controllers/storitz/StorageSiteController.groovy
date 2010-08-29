@@ -613,7 +613,7 @@ class StorageSiteController {
 
     def premium = 0
     def ins
-    def chosenInsurance
+    def chosenInsurance = ''
     if (params.insuranceId && (params.insuranceId as Long) > 0) {
       ins = Insurance.get(params.insuranceId as Long)
       if (ins) {
@@ -621,7 +621,7 @@ class StorageSiteController {
         NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US)
         NumberFormat pf = NumberFormat.getPercentInstance(Locale.US)
 
-        chosenInsurance = "${nf.format(ins.premium)}/mo. Coverage: ${nf.format(ins.totalCoverage)} Theft: ${pf.format(ins.percentTheft)}"
+        chosenInsurance = "${nf.format(ins.premium)}/mo. Coverage: ${nf.format(ins.totalCoverage)} Theft: ${pf.format(ins.percentTheft / 100)}"
       }
     }
 
