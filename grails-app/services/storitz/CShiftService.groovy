@@ -896,7 +896,7 @@ class CShiftService {
 
     rentalTransaction.feedUnitId = unitId[0] as Long
     rentalTransaction.feedUnitNumber = unitNumber[0]
-    if (promoAvail[0] == 'Y') {
+    if (promoAvail[0] == 'Y' && rentalTransaction?.promoId > 0) {
       def promoCheck = rentalTransaction.site.specialOffers.findBy{ it.concessionId == (promoId[0] as Long)}
       if (promoCheck) {
         rentalTransaction.promoId = promoId[0] as Long
