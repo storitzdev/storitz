@@ -1027,7 +1027,7 @@ class SiteLinkService {
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
-    ret["moveInTotal"] = moveInTotalsetScale(2, RoundingMode.HALF_UP)
+    ret["moveInTotal"] = moveInTotal.setScale(2, RoundingMode.HALF_UP)
     ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
 
     return ret
