@@ -20,6 +20,7 @@ import com.storitz.UserNotificationType
 import com.storitz.NotificationType
 import com.storitz.UserRole
 import com.storitz.Role
+import java.math.RoundingMode
 
 class SiteLinkService {
 
@@ -1026,7 +1027,7 @@ class SiteLinkService {
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
-    ret["moveInTotal"] = moveInTotal
+    ret["moveInTotal"] = moveInTotalsetScale(2, RoundingMode.HALF_UP)
     ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
 
     return ret
