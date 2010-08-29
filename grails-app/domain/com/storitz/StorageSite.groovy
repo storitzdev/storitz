@@ -60,6 +60,8 @@ class StorageSite {
       centerShift(nullable:true)
       bankAccount(nullable:true)
       rentalAgreement(nullable:true)
+      taxRateRental(nullable:true)
+      taxRateInsurance(nullable:true)
     }
   
     String title
@@ -114,6 +116,9 @@ class StorageSite {
     Date startSundayGate
     Date endSundayGate
     Boolean extendedHours
+
+    BigDecimal taxRateRental
+    BigDecimal taxRateInsurance
 
   // data feeds
     SiteLink siteLink

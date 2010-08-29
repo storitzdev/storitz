@@ -925,7 +925,12 @@ class CShiftService {
     rentalTransaction.save(flush:true)
   }
 
-  def moveIn(RentalTransaction rentalTransaction) {
+  def moveInDetail(RentalTransaction rentalTransaction) {
+
+    if (!checkRented(rentalTransaction)) {
+      return null
+    }
+
     def cshift = rentalTransaction.site.centerShift
 
     def insId = -1
@@ -939,12 +944,12 @@ class CShiftService {
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
     println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String}"
-    
+
     def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
 
     if (ret instanceof Integer && ret < 0) {
       println "Return for getMoveInCost < 0 : ${ret}"
-      return false
+      return null
     }
 
     println "Dumping getMoveInCost : ${ret.dump()}"
@@ -956,12 +961,35 @@ class CShiftService {
     def start = ret[4]
     def end = ret[5]
 
-    def paymentString = end[end.size() - 1] as String
+    def itemLength = end.size() - 1
+    rentalTransaction.paymentString = end[itemLength] as String
+    rentalTransaction.save(flush: true)
+
+    def moveInDetails = new MoveInDetails()
+    for(i in 0..itemLength - 1) {
+      moveInDetails.items.add(new LineItem(description:desc[i], tax:tax[i] as BigDecimal, amount: price[i] as BigDecimal))
+    }
+    
+    return moveInDetails
+  }
+
+  def moveIn(RentalTransaction rentalTransaction) {
+    def cshift = rentalTransaction.site.centerShift
+
+    def insId = -1
+    if (rentalTransaction.insuranceId > 0) {
+      def ins = Insurance.get(rentalTransaction.insuranceId)
+      insId = ins.insuranceId
+    }
+
+    CsKiosk service = new CsKioskLocator();
+
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
     println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
     ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,
-            paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
+            rentalTransaction.paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
 
     if (ret instanceof Integer && ret < 0) {
       println "Return for doMoveIn < 0 : ${ret}"

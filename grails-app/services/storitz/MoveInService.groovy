@@ -28,10 +28,10 @@ class MoveInService {
     def moveInDetail(RentalTransaction trans) {
       switch(trans.site.source) {
         case "SL":
-          break
+          return siteLinkService.moveInDetail(trans)
 
         case "CS3":
-          break
+          return CShiftService.moveInDetail(trans)
 
         case "CS4":
           break

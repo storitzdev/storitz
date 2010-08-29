@@ -6,6 +6,7 @@ import com.storitz.StorageUnit
 import com.storitz.Insurance
 import com.storitz.Commission
 import storitz.constants.CommissionType
+import com.storitz.RentalTransaction
 
 class CostService {
 
@@ -14,20 +15,20 @@ class CostService {
     def siteLinkService
     def CShiftService
 
-    def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
-      switch(site.source) {
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+    switch(site.source) {
 
-        case "SL":
-          return siteLinkService.calculateMoveInCost(site, unit, promo, ins)
+      case "SL":
+        return siteLinkService.calculateMoveInCost(site, unit, promo, ins)
 
-        case "CS3":
-          return CShiftService.calculateMoveInCost(site, unit, promo, ins)
+      case "CS3":
+        return CShiftService.calculateMoveInCost(site, unit, promo, ins)
 
-        default:
-          throw new Exception("Unknown service for move in cost calculation")
-      }
-
+      default:
+        throw new Exception("Unknown service for move in cost calculation")
     }
+
+  }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
     switch(site.source) {

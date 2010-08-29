@@ -7,14 +7,10 @@
 
     <script type="text/javascript">
 //<![CDATA[
-  var startDate = "${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}";
-  var siteId = ${rentalTransactionInstance.site.id};
   var ajaxFormOldValues;
   var ajaxFormDirty = true;
   var ajaxServerPollTimer;
   var ajaxFormUpdateTimer;
-
-  <g:render template="/transaction_js"/>
 
   function contactChange() {
     $('billingAddress').observe('click', function() {
@@ -115,10 +111,7 @@
 
   Event.observe(window, 'load', function() {
     contactChange();
-    setupCalendar();
     setupForm();
-    transactionFormSetup();
-    updateTransaction();
     ajaxFormUpdate();
     ajaxServerPoll();
   });
@@ -140,14 +133,6 @@
             <div id="rentalForm">
               <g:form action="pay" controller="rentalTransaction" name="paymentTransaction" method="post" id="${params.id}">
 
-                <input type="hidden" name="rentalTransactionId" id="rentalTransactionId" value="${rentalTransactionInstance?.id}" />
-                <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance?.unitId}" />
-                <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
-                <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
-                <input type="hidden" name="chosenType" id="chosenType" value="${rentalTransactionInstance?.unitType}" />
-                <input type="hidden" name="searchSize" id="searchSize" value="${rentalTransactionInstance?.searchSize}" />
-                <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${searchSize}"/>
-                <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
                 <input style="display:none" type="text" name="SC_page" id="SC_page" value="payment"/>
 
                 <div class="vert_text">
@@ -157,11 +142,16 @@
                   <span id="step5_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step5" class="step_header">Order Complete</span>
                 </div>
 
-                <div id="transaction">
-                  <g:render template="/transaction" />
-                </div>
-
                 <div style="height:25px;"></div>
+
+                <div class="paymentTotal">
+                  <ul>
+                  <g:each var="item" in="${moveInDetails.items}">
+                    <li>${item.description} - tax=${item.tax} amount=${item.amount}</li>
+                  </g:each>
+                  </ul>
+                  Total = ${moveInDetails.total()}
+                </div>
 
                 <g:if test="${flash.message}">
                   <div class="message">${flash.message}</div>
@@ -330,7 +320,7 @@
                   <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-pay-now.png')}" alt="Pay Now"/></div>
                   <!--
                   //TODO - make working back link
-                  <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
+                  <g:link controller="home" action="index" params="[size: params.searchSize, date: rentalTransactionInstance.moveInDate.format('MM/dd/yy'), address: params.address, unitType: params.unitType]">
                     <img src="${resource(dir:'images', file:'btn-previous2.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
                   </g:link>
                   -->

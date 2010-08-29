@@ -86,14 +86,21 @@ class RentalTransactionController {
     def save = {
         def site = StorageSite.get(params.site)
         params.remove('site')
-        def rentalTransactionInstance = new RentalTransaction(params)
+
+        def rentalTransactionInstance
+        if (params.id) {
+          rentalTransactionInstance = RentalTransaction.get(params.id as Long)
+          rentalTransactionInstance.properties = params
+        } else {
+          rentalTransactionInstance = new RentalTransaction(params)
+        }
         rentalTransactionInstance.status = TransactionStatus.BEGUN
         rentalTransactionInstance.bookingDate = new Date()
         rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         rentalTransactionInstance.site = site
         rentalTransactionInstance.unitType = params.chosenType
-        rentalTransactionInstance.searchSize = params.searchSize
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
+        rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 
         if (!springSecurityService.principal.equals('anonymousUser')) {
           def person = User.findByUsername(springSecurityService.principal.username)
@@ -107,7 +114,7 @@ class RentalTransactionController {
             rentalTransactionInstance.addToNotes(transNote)
           }
         } else {
-          rentalTransactionInstance.isCallCenter = false          
+          rentalTransactionInstance.isCallCenter = false
         }
 
         // check if no promo selected
@@ -115,10 +122,10 @@ class RentalTransactionController {
           rentalTransactionInstance.promoId = -999;
         }
         if (rentalTransactionInstance.validate() && rentalTransactionInstance.save(flush: true)) {
-              flash.message = "${message(code: 'default.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), rentalTransactionInstance.id])}"
-              redirect(action: "payment", id: rentalTransactionInstance.id)
+            println("Transaction move in save date is ${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}")
+            redirect(action: "payment", id: rentalTransactionInstance.id)
         } else {
-              redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
+            redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
         }
     }
 
@@ -151,15 +158,16 @@ class RentalTransactionController {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
       }
       if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
-        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site])
         return
       }
-      Collection sizeList = rentalTransactionInstance.site.units.collect { it.unitsize }.unique().sort { it.width * it.length }
 
-      Collection unitTypes = rentalTransactionInstance.site.units.findAll{ it.unitsize.id == unit.unitsize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
-      def site = rentalTransactionInstance.site
-
-      [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:unit.getUnitTypeLower(), monthlyRate: unit.price, pushRate: unit.pushRate, unitId: unit.id, searchSize: unit.unitsize.id, promoId: rentalTransactionInstance.promoId]
+      println("Transaction move in payment date is ${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}")
+      def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
+      
+      [rentalTransactionInstance: rentalTransactionInstance,
+              title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state} ${rentalTransactionInstance.site.zipcode}",
+              site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails]
     }
 
     def pay = {
@@ -168,10 +176,6 @@ class RentalTransactionController {
       if (!rentalTransactionInstance) {
         // TODO - send them to an error page
       }
-
-      rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
-      rentalTransactionInstance.unitId = params.unitId as Long
-      rentalTransactionInstance.promoId = params.promoId ? (params.promoId as Long) : -999
 
       def promo = null
       if (!rentalTransactionInstance.promoId == -999) {
@@ -189,7 +193,7 @@ class RentalTransactionController {
       }
 
       if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
-        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance])
         return
       }
 
@@ -200,7 +204,7 @@ class RentalTransactionController {
           billingContact.rental = rentalTransactionInstance
           if (!billingContact.validate() || !billingContact.save(flush: true)) {
             flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
-            render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+            redirect (action:'payment')
             return
           } else {
             rentalTransactionInstance.billingAddress = billingContact
@@ -217,25 +221,23 @@ class RentalTransactionController {
       }
       if (!rentalTransactionInstance.validate() || !rentalTransactionInstance.save(flush: true)) {
         flash.message = "Could not save billing address"
-        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins])
+        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance])
         return
       }
 
       if (!moveInService.checkRented(rentalTransactionInstance)) {
         def found = false
-        for (i in 0..3) {
-          def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize && it.id != unit.id }.min{ it.price }
-          if (bestUnit) {
-            rentalTransactionInstance.unitId = bestUnit.id
-            if (moveInService.checkRented(rentalTransactionInstance)) {
-              found = true
-              break
-            }
+        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize && it.id != unit?.id }.min{ it.price }
+        for(myUnit in bestUnit) {
+          rentalTransactionInstance.unitId = myUnit.id
+          if (moveInService.checkRented(rentalTransactionInstance)) {
+            found = true
+            break
           }
         }
         if (!found) {
           flash.message = "Unit already reserved - refresh and try again"
-          render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+          render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
           return
         }
       }
@@ -250,6 +252,7 @@ class RentalTransactionController {
       expCal.set(Calendar.DAY_OF_MONTH, expCal.getActualMaximum(Calendar.DAY_OF_MONTH))
       rentalTransactionInstance.ccExpDate = expCal.time
 
+      // TODO - compare calculated cost to our cost
       rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
       rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
 
@@ -274,6 +277,8 @@ class RentalTransactionController {
         render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
         return
       }
+      println "Logged transaction = ${authResp.dump()}"
+      
       rentalTransactionInstance.transactionId = authResp.transactionId
       rentalTransactionInstance.status = TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
@@ -304,7 +309,8 @@ class RentalTransactionController {
 
       if (!moveInService.moveIn(rentalTransactionInstance)) {
         flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
-        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+        // TODO - notify with email to admin
+        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
         return
       }
 
@@ -329,7 +335,7 @@ class RentalTransactionController {
         maxResults(1)
       }
 
-      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, siteManager:siteManager])
+      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
     }
 
     def edit = {

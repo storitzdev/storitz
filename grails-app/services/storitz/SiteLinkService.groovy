@@ -370,7 +370,7 @@ class SiteLinkService {
          <cal:sCreditCardCVV>""" + rentalTransaction.cvv2 + """</cal:sCreditCardCVV>
          <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
          <cal:sBillingName>""" + rentalTransaction.billingAddress.fullName() + """</cal:sBillingName>
-         <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1} ${rentalTransaction.billingAddress.address2}" + """</cal:sBillingAddress>
+         <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1}${rentalTransaction.billingAddress.address2 ? ' ' + rentalTransaction.billingAddress.address2 : ''}" + """</cal:sBillingAddress>
          <cal:sBillingZipCode>""" + rentalTransaction.billingAddress.zipcode + """</cal:sBillingZipCode>
          <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
          <cal:ConcessionPlanID>""" + concessionId + """</cal:ConcessionPlanID>
@@ -406,6 +406,22 @@ class SiteLinkService {
 </soapenv:Envelope>"""
 
     postAction(payload, 'UnitsInformationByUnitName')
+  }
+
+  def getTaxRate(corpCode, locationCode, userName, password) {
+    payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:RentTaxRatesRetrieve>
+         <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+         <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+         <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+      </cal:RentTaxRatesRetrieve>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'RentTaxRatesRetrieve')
   }
 
   private def postAction(payload, action) {
@@ -508,6 +524,26 @@ class SiteLinkService {
     }
   }
 
+  def createSiteTaxes(siteLink) {
+    def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      if (site) {
+        getTaxes(siteLink, site)
+        site.save()
+      }
+    }
+  }
+
   def createSiteUser(site, email, realName, manager) {
     def user = User.findByEmail(email)
 
@@ -606,6 +642,7 @@ class SiteLinkService {
       site.adminFee = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
     }
     getPromos(siteLink, site)
+    getTaxes(siteLink, site)
     site.save(flush: true)
   }
 
@@ -805,11 +842,8 @@ class SiteLinkService {
     }
   }
 
-  def getAdminFee(rentalTransaction) {
-    def ret = getMoveInWithDiscount(rentalTransaction)
-
-    println "MoveInWithDiscount result: ${ret}"
-
+  def getTaxes(siteLink, site) {
+    def ret = getTaxRate(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -817,14 +851,11 @@ class SiteLinkService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    def adminFee = new BigDecimal(0)
-    for (fee in records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      if (fee.ChargeDescription.text() == 'Administrative Fee') {
-        adminFee = new BigDecimal(fee.dcTenantRate.text() as String)
-      }
+
+    for(rateSet in records.'soap:Body'.'*:RentTaxRatesRetrieveResponse'.'*:RentTaxRatesRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      site.taxRateRental = rateSet.dcTax1Rate.text() as BigDecimal
+      site.taxRateInsurance = rateSet.dcTax2Rate.text() as BigDecimal
     }
-    println('returning fee=' + adminFee)
-    return adminFee
   }
 
   def createTenant(RentalTransaction rentalTransaction) {
@@ -846,7 +877,6 @@ class SiteLinkService {
   }
 
   def checkRented(RentalTransaction rentalTransaction) {
-    println "Check rented  - ${rentalTransaction.dump()}"
     def ret = getUnitInfoByName(rentalTransaction.site.siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
     def records = ret.declareNamespace(
@@ -862,6 +892,25 @@ class SiteLinkService {
     }
 
     return rented
+  }
+
+  def moveInDetail(RentalTransaction rentalTransaction) {
+    def ret = getMoveInWithDiscount(rentalTransaction)
+
+    println "moveInDetail ret =${ret}"
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def details = new MoveInDetails()
+    for (item in records.'soap:Body'.'*:MoveInCostRetrieveWithDiscountResponse'.'*:MoveInCostRetrieveWithDiscountResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      details.items.add(new LineItem(tax: item.TaxAmount.text() as BigDecimal, amount: item.dcTotal.text() as BigDecimal, description: item.ChargeDescription.text()))
+    }
+    return details
+
   }
 
   def moveIn(RentalTransaction rentalTransaction) {

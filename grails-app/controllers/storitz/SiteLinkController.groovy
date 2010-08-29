@@ -125,4 +125,13 @@ class SiteLinkController {
       redirect(action: "list")
     }
   }
+
+  def updateTax = {
+    def siteLinkInstance = SiteLink.get(params.id)
+    if (siteLinkInstance) {
+      siteLinkService.createSiteTaxes(siteLinkInstance)
+      flash.message = "Site taxes updated."
+      redirect(action: "list")
+    }
+  }
 }

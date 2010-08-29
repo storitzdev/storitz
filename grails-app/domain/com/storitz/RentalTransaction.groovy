@@ -43,7 +43,7 @@ class RentalTransaction {
   SearchEngineReferral searchEngineReferral
   Boolean isCallCenter
   String cleanCCNum
-  Integer searchSize
+  String paymentString
   String unitType
 
   // Transient members
@@ -72,7 +72,7 @@ class RentalTransaction {
     idType(nullable: true)
     commission(nullable: true)
     achTransferDate(nullable: true)
-    feedUnitId(nullable: true)
+    unitType(nullable: true)
     promoId(nullable:true)
     searchEngineReferral(nullable: true)
     cleanCCNum(nullable:true)
@@ -81,5 +81,5 @@ class RentalTransaction {
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
-          'cardType', 'cvv2']  
+          'cardType', 'cvv2', 'paymentString']
 }

@@ -86,6 +86,11 @@
       $('detailInfo').hide();
     }
 
+    function leave_form() {
+      $('rentalForm').hide();
+      $('detailInfo').show();
+    }
+
     function primaryCountryClick() {
       $('contactPrimary.country').observe('change', function() {
         var country = $F('contactPrimary.country');
@@ -434,11 +439,11 @@
           </div>
 
           <div id="rentalForm" style="display: none;">
-            <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true">
+            <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true" id="${rentalTransactionInstance?.id}">
               
               <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance ? rentalTransactionInstance.unitId : unitId}" />
               <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
-              <input type="hidden" name="site" value="${params.id}" />
+              <input type="hidden" name="site" value="${rentalTransactionInstance ? rentalTransactionInstance.site.id : params.id}" />
               <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
               <input type="hidden" name="chosenType" id="chosenType" value="${rentalTransactionInstance?.unitType}" />
               <input type="hidden" name="searchSize" id="searchSize" value="${searchSize ? searchSize : rentalTransactionInstance?.searchSize}" />
@@ -581,7 +586,7 @@
                   <div style="clear:both;"></div>
                 </div>
                 <div style="margin-top: 20px;">
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="details_return(); return false" alt="Back"></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="leave_form(); return false" alt="Back"></div>
                   <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
                   <div style="clear:both;"></div>
                 </div>
