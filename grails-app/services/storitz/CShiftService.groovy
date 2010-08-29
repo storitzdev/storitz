@@ -874,9 +874,11 @@ class CShiftService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
+    println "checkRented (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+    
     def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.displaySize)
 
-    if (unitInfo instanceof Integer && unitInfo < 0) {
+    if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
       println "Return for getAvailableUnits < 0 : ${unitInfo}"
       return false
     }
