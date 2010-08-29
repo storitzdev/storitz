@@ -167,7 +167,8 @@ class RentalTransactionController {
       
       [rentalTransactionInstance: rentalTransactionInstance,
               title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state} ${rentalTransactionInstance.site.zipcode}",
-              site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails]
+              site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails,
+              unit: unit]
     }
 
     def pay = {

@@ -10,7 +10,7 @@ var durationMonths = 1;
 var monthlyRent = ${monthlyRate ? monthlyRate : 0};
 var pushRate = ${pushRate ? pushRate : 0};
 var chosenPromo = '';
-var chosenPromoId = -999;
+var chosenPromoId = ${promoId ? promoId : -999};
 var totalMoveInCost = additionalFees + monthlyRent;
 var unitTypes = [];
 <g:each var="unitType" status="i" in="${unitTypes}">
@@ -18,8 +18,10 @@ var unitTypes = [];
 </g:each>
 var discountTotal = 0;
 var chosenUnitType = '${chosenUnitType}';
-var insuranceId = -999;
+var chosenInsurance = '';
+var insuranceId = ${insuranceId ? insuranceId : -999};
 var premium = 0;
+var tax = 0;
 
 var ajaxFormUpdateTimer;
 var ajaxFormDirty = false;
@@ -75,6 +77,7 @@ function updateTransaction() {
 
   // update promo
   $('selectedOffer').update(chosenPromo);
+  $('selectedInsurance').update(chosenInsurance);
 
   // update costs
   $('totalMoveInCost').update('$' + totalMoveInCost.toFixed(2));
@@ -89,6 +92,11 @@ function updateTransaction() {
     $('insuranceBlock').show();
   } else {
     $('insuranceBlock').hide();
+  }
+  if (tax > 0) {
+    $('taxBlock').show();
+  } else {
+    $('taxBlock').hide();
   }
   // promo discount
   $('discountTotal').update(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
@@ -111,6 +119,12 @@ function transactionFormSetup() {
     var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value')[0];
     $('promoId').value = offerId;
     chosenPromoId = offerId;
+    showTotals();
+  });
+  
+  $('insurances').observe('click', function() {
+    insuranceId =  $('insurances').select('input:checked[type=radio]').pluck('value')[0];
+    $('insuranceId').value = insuranceId;
     showTotals();
   });
 
@@ -158,6 +172,7 @@ function showTotals() {
       durationMonths = totals.durationMonths;
       unitTypes = totals.unitTypes;
       chosenPromo = totals.chosenPromo;
+      chosenInsurance = totals.chosenInsurance;
       chosenUnitType = totals.chosenUnitType;
       premium = totals.premium;
       discountTotal = totals.discountTotal;

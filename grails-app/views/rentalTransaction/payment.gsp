@@ -40,7 +40,11 @@
   }
 
   function prevStep() {
-    window.location = "${createLink(controller:'storageSite', action:'detail', params:[id:rentalTransactionInstance?.site.id, searchSize:searchSize, unitType: chosenUnitType, returnForm: true, rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
+    window.location = "${createLink(controller:'storageSite', action:'detail',
+      params:[id:rentalTransactionInstance?.site.id, searchSize:unit?.unitsize?.id, unitType:unit?.getUnitTypeLower(),
+      promoId:rentalTransactionInstance?.promoId, returnForm: true,
+      insuranceId:rentalTransactionInstance?.insuranceId,
+      rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
   }
 
   function createMap() {}
@@ -318,12 +322,6 @@
                 </div>
                 <div style="clear:both; margin-top: 20px;">
                   <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-pay-now.png')}" alt="Pay Now"/></div>
-                  <!--
-                  //TODO - make working back link
-                  <g:link controller="home" action="index" params="[size: params.searchSize, date: rentalTransactionInstance.moveInDate.format('MM/dd/yy'), address: params.address, unitType: params.unitType]">
-                    <img src="${resource(dir:'images', file:'btn-previous2.png')}" style="border: 0; cursor: pointer;" alt="back home"/>
-                  </g:link>
-                  -->
                   <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep(); return false" alt="Prev"/></div>
                   <div style="clear:both;"></div>
                 </div>

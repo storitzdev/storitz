@@ -8,7 +8,6 @@
     <script type="text/javascript">
 //<![CDATA[
 
-    var premiums = [];
     var galleryImageNum = 0;
     var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
     var siteId = ${params.id};
@@ -19,14 +18,6 @@
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>
-
-    function insuranceClick() {
-      $('insuranceChoices').observe('click', function() {
-        var insId =  $('insuranceChoices').select('input:checked[type=radio]').pluck('value');
-        insuranceId = insId;
-        showTotals();
-      });
-    }
 
     function createMap() {}
 
@@ -124,7 +115,6 @@
     function validateStep3() {
       var valid = true;
       valid &= Validation.validate('rentalUse');
-      valid &= Validation.validate('insuranceChoices');
       valid &= Validation.validate('insuranceTermsHolder');
       valid &= Validation.validate('hazardousMaterialsHolder');
       valid &= Validation.validate('termsHolder');
@@ -301,7 +291,6 @@
 
   Event.observe(window, 'load', function() {
     transactionFormSetup();
-    updateTransaction();
     setupSize();
     setupHelp();
     setupTabs();
@@ -310,13 +299,11 @@
     setupCalendar();
     setupValidation();
     primaryCountryClick();
-    <g:if test="${site.requiresInsurance}">
-      insuranceClick();
-    </g:if>
     <g:if test="${params.returnForm}">
       details_return();
     </g:if>
     setupImageGallery();
+    showTotals();
     ajaxFormUpdate();
     ajaxServerPoll();
   });
@@ -443,6 +430,7 @@
               
               <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance ? rentalTransactionInstance.unitId : unitId}" />
               <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
+              <input type="hidden" name="insuranceId" id="insuranceId" value="${rentalTransactionInstance?.insuranceId}" />
               <input type="hidden" name="site" value="${rentalTransactionInstance ? rentalTransactionInstance.site.id : params.id}" />
               <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}" />
               <input type="hidden" name="chosenType" id="chosenType" value="${rentalTransactionInstance?.unitType}" />
@@ -640,15 +628,6 @@
                 </div>
                 <div class="formInstructions">
                   Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
-                </div>
-                <div class="checkout_fields" style="width:646px;">
-                  <div id="insuranceChoices" class="validate-one-radio" >
-                    <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="-999" checked="checked" /> Waive insurance - use my renters/home policy coverage</div>
-                    <g:each in="${site.insurances.sort{it.premium}}" var="ins">
-                      <div class="left" style="width: 320px;"><input type="radio" name="insuranceId" value="${ins.id}"/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></div>
-                    </g:each>
-                    <div style="clear:both;"></div>
-                  </div>
                 </div>
                 <div class="checkout_fields">
                   <div id="insuranceTermsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'insuranceTerms', 'errors')}">

@@ -17,6 +17,7 @@ import com.storitz.Insurance
 import grails.converters.JSON
 import javax.servlet.http.Cookie
 import com.storitz.RentalTransaction
+import java.text.NumberFormat
 
 class StorageSiteController {
 
@@ -470,7 +471,11 @@ class StorageSiteController {
     }
 
     // If you change this, don't forget the smartCall action also uses this view!
-    [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}", shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price, pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, promoId:null]
+    [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
+            title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}",
+            shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price,
+            pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
+            promoId:params.promoId, insuranceId:params.insuranceId]
   }
 
   def directions = {
@@ -608,16 +613,21 @@ class StorageSiteController {
 
     def premium = 0
     def ins
+    def chosenInsurance
     if (params.insuranceId && (params.insuranceId as Long) > 0) {
       ins = Insurance.get(params.insuranceId as Long)
       if (ins) {
         premium = ins.premium
+        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US)
+        NumberFormat pf = NumberFormat.getPercentInstance(Locale.US)
+
+        chosenInsurance = "${nf.format(ins.premium)}/mo. Coverage: ${nf.format(ins.totalCoverage)} Theft: ${pf.format(ins.percentTheft)}"
       }
     }
 
     def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]} }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]} }}")
 
   }
 
