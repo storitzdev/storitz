@@ -977,6 +977,7 @@ class SiteLinkService {
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
     def waiveAdmin = false
+    def taxableDuration = durationMonths - (promo && promo.prepay ? promo.expireMonth : 0)
 
     if (promo) {
 
@@ -1018,7 +1019,7 @@ class SiteLinkService {
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
     def subTotal = (rate + premium)*durationMonths
-    def tax = premium * durationMonths * site.taxRateInsurance + unit.pushRate * durationMonths * site.taxRateRental
+    def tax = premium * durationMonths * site.taxRateInsurance + unit.pushRate * taxableDuration * site.taxRateRental
     def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths
