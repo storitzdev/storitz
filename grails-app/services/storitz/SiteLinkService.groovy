@@ -1019,15 +1019,15 @@ class SiteLinkService {
 
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def subTotal = (rate + premium)*durationMonths
-    def tax = premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)
+    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+    def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
-    ret["moveInTotal"] = moveInTotal.setScale(2, RoundingMode.HALF_UP)
+    ret["moveInTotal"] = moveInTotal
     ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
 
     return ret
