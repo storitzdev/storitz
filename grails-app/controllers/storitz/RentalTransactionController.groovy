@@ -125,7 +125,11 @@ class RentalTransactionController {
             println("Transaction move in save date is ${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}")
             redirect(action: "payment", id: rentalTransactionInstance.id)
         } else {
-            redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
+            println "RentalTransaction errors:"
+            rentalTransactionInstance.errors.allErrors.each {
+              println it
+            }
+            redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: site.id])
         }
     }
 
