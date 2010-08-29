@@ -741,6 +741,11 @@ class SiteLinkService {
           } else {
             println "Skipping unit due to size: width=" + width + " length=" + length
           }
+        } else {
+          // update pricing
+          existingUnit.price = unit.dcStdRate.text() as BigDecimal
+          existingUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
+          existingUnit.save()
         }
       }
     }
