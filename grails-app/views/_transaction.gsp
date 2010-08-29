@@ -54,7 +54,7 @@
       <div>
         <p><input type="radio" name="insuranceId" value="-999" ${ (insuranceId as Integer) < 0 ? 'checked="checked"' : '' } /> Waive insurance - use my renters/home policy coverage</p>
         <g:each in="${site.insurances.sort{it.premium}}" var="ins">
-          <p><input type="radio" name="insuranceId" value="${ins.id}" ${ins.id == (insuranceId as Integer) ? 'checked="checked"' : '' } /> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></p>
+          <p><input type="radio" name="insuranceId" value="${ins.id}" ${ins.id == (insuranceId as Integer) ? 'checked="checked"' : '' } /> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft / 100}" type="percent" /></p>
         </g:each>
       </div>
     </div>
