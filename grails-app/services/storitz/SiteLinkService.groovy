@@ -948,44 +948,8 @@ class SiteLinkService {
   }
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    def durationMonths = 1
-    def offerDiscount = 0
-    def premium = ins ? ins.premium : 0
-    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
-    def adminFee = site.adminFee ? site.adminFee : 0
-    def waiveAdmin = false
-
-    if (promo) {
-
-      durationMonths = (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth)
-      waiveAdmin = promo.waiveAdmin
-
-      switch (promo.promoType) {
-        case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promo.expireMonth;
-          break;
-
-        case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.pushRate;
-          break;
-
-        case "FIXED_RATE":
-          offerDiscount = (unit.price - promo.promoQty) * promo.expireMonth;
-          break;
-      }
-    }
-
-    def cal = new GregorianCalendar()
-    cal.setTime(moveInDate)
-    def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-    def moveInDay = ca.get(Calendar.DAY_OF_MONTH)
-
-    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
-    
-    def subTotal = (unit.pushRate + premium) * durationMonths
-    def tax = premium * durationMonths * site.taxRateInsurance + unit.pushRate * durationMonths * site.taxRateRental
-    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + subTotal + tax - offerDiscount;
-
+    def ret = calculateTotals(site, unit, promo, ins, moveInDate)
+    return ret["moveInTotal"]
   }
 
   def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
@@ -995,7 +959,9 @@ class SiteLinkService {
     // algo - subtract 1 from duration month and then get up to end of month
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
-    if (duration - 1 > 0) {
+    // force a bump for people who rent after the 15th
+    if (cal.get(Calendar.DAY_OF_MONTH) > 15) durationMonths++;
+    if (durationMonths - 1 > 0) {
       cal.add(Calendar.MONTH, durationMonths - 1)
     }
     cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
@@ -1036,6 +1002,17 @@ class SiteLinkService {
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
+    if (durationMonths - 1 > 0) {
+      cal.add(Calendar.MONTH, durationMonths - 1)
+    }
+    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+
+    if (moveInDay > 15) {
+      // durationMonths++;
+      ret["extended"] = true;
+    } else {
+      ret["extended"] = false;
+    }
     durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
 
 
@@ -1049,6 +1026,7 @@ class SiteLinkService {
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
+    ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
 
     return ret
   }
