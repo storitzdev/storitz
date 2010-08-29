@@ -7,6 +7,7 @@ var adminFee = ${site.adminFee ? site.adminFee : 0};
 
 // vars set by callback
 var durationMonths = 1;
+var paidThruDate;
 var monthlyRent = ${monthlyRate ? monthlyRate : 0};
 var pushRate = ${pushRate ? pushRate : 0};
 var chosenPromo = '';
@@ -22,14 +23,6 @@ var chosenInsurance = '';
 var insuranceId = ${insuranceId ? insuranceId : -999};
 var premium = 0;
 var tax = 0;
-
-var ajaxFormUpdateTimer;
-var ajaxFormDirty = false;
-var ajaxFormNewValues;
-var ajaxFormOldValues = new Hash().toJSON();
-var activeTab;
-var allTabs;
-
 
 <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
 <g:if test="${params.searchSize}">
@@ -62,9 +55,7 @@ function updateTransaction() {
 
   // update dates
   $('transMoveInDate').update(startDate);
-  var paidThru = Date.parseDate(startDate, "%m/%d/%y");
-  paidThru.setMonth( paidThru.getMonth() + durationMonths);
-  $('paidThruDate').update(paidThru.print("%o/%d/%y"))
+  $('paidThruDate').update(paidThruDate);
 
   // update prices
   if (pushRate < monthlyRent) {
@@ -156,9 +147,6 @@ function setupCalendar() {
         $('SC_date').value = startDate;
         $('moveInDate').value = startDate;
         $('transMoveInDate').update(startDate);
-        var paidThru = Date.parseDate(startDate, "%m/%d/%y");
-        paidThru.setMonth( paidThru.getMonth() + durationMonths);
-        $('paidThruDate').update(paidThru.print("%o/%d/%y"));
         showTotals();
       }
   });
@@ -184,6 +172,7 @@ function showTotals() {
       tax = totals.tax
       totalMoveInCost = totals.totalMoveInCost;
       unitId = totals.unitId;
+      paidThruDate = totals.paidThruDate;
       updateTransaction();
     }
   });

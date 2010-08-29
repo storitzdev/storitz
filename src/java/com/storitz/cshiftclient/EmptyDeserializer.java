@@ -30,7 +30,6 @@ public class EmptyDeserializer extends DeserializerImpl {
          public void onStartElement(java.lang.String namespace, java.lang.String localName, java.lang.String prefix, org.xml.sax.Attributes attributes, org.apache.axis.encoding.DeserializationContext context)
                  throws org.xml.sax.SAXException {
 
-             System.out.println("Called with namespace=" + namespace + " localName=" + localName + " prefix=" + prefix);
              setValue("");
          }
 }

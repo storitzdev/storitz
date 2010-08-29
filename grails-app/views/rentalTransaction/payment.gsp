@@ -7,10 +7,11 @@
 
     <script type="text/javascript">
 //<![CDATA[
-  var ajaxFormOldValues;
   var ajaxFormDirty = true;
   var ajaxServerPollTimer;
   var ajaxFormUpdateTimer;
+  var ajaxFormNewValues;
+  var ajaxFormOldValues = new Hash().toJSON();
 
   function contactChange() {
     $('billingAddress').observe('click', function() {

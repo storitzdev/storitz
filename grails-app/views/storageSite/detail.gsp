@@ -11,8 +11,13 @@
     var galleryImageNum = 0;
     var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
     var siteId = ${params.id};
-    var ajaxFormOldValues;
     var ajaxFormDirty = false;
+    var ajaxServerPollTimer;
+    var ajaxFormUpdateTimer;
+    var ajaxFormNewValues;
+    var ajaxFormOldValues = new Hash().toJSON();
+    var activeTab;
+    var allTabs;
 
     <g:set var="galleryImgWidth" value="${8 as Integer}" />
 

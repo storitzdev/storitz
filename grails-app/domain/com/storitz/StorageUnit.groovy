@@ -8,6 +8,7 @@ class StorageUnit {
       startAvail(nullable:true)
       unitName(nullable:true)
       unitNumber(nullable:true)
+      taxRate(nullable:true)
     }
 
     String description
@@ -27,6 +28,7 @@ class StorageUnit {
     String displaySize
     Boolean isAvailable
     Integer unitCount
+    BigDecimal taxRate
 
     public String getUnitType() {
       if (isUpper) return "Upper"
