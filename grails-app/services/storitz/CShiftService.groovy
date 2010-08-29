@@ -21,6 +21,7 @@ import com.storitz.NotificationType
 import com.storitz.User
 import storitz.constants.RentalUse
 import com.storitz.RentalTransaction
+import java.math.RoundingMode
 
 class CShiftService {
 
@@ -714,6 +715,7 @@ class CShiftService {
             siteUnit.description = typeName
             siteUnit.unitName = siteUnit.unitNumber = unit.ATTRIBUTES.text()
             siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
+            siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
 
             // outside = driveup
             // down = interior
@@ -844,7 +846,7 @@ class CShiftService {
       for(i in 0..optionSize-1) {
         def ins = new Insurance()
         ins.insuranceId = insId[i] as Integer
-        ins.percentTheft = insCoverage[i] as BigDecimal
+        ins.percentTheft = (insCoverage[i] as BigDecimal) / 100.0
         ins.provider = insProvider[i]
         ins.premium = insRate[i] as BigDecimal
         ins.totalCoverage = insAmount[i] as BigDecimal
@@ -1007,53 +1009,35 @@ class CShiftService {
 
   }
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
-    def durationMonths = 1
-    def offerDiscount = 0
-    def premium = ins ? ins.premium : 0
-    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
-    def adminFee = site.adminFee ? site.adminFee : 0
-    def waiveAdmin = false
-
-    if (promo) {
-
-      durationMonths = [promo.prepayMonths, promo.expireMonth].max()
-      def promoMonths = (promo.expireMonth > durationMonths || promo.expireMonth <= 0) ? durationMonths : promo.expireMonth
-      waiveAdmin = promo.waiveAdmin
-
-      switch (promo.promoType) {
-        case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promoMonths;
-          break;
-
-        case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit?.pushRate;
-          if (promo.promoQty > 50 && durationMonths == 1) durationMonths++
-          break;
-
-        case "FIXED_RATE":
-          offerDiscount = (unit.price - promo.promoQty) * promoMonths;
-          break;
-      }
-    }
-    return (waiveAdmin ? additionalFees - adminFee : additionalFees) + (unit?.pushRate + premium)*durationMonths - offerDiscount;
-
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
+    def ret = calculateTotals(site, unit, promo, ins, moveInDate)
+    return ret["moveInTotal"]
   }
 
   def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
     // TODO - handle prorated payments
     def durationMonths = promo ? [promo.prepayMonths, promo.expireMonth].max() : 1;
-    if (promo && promo.promoType == "PERCENT_OFF" && promo.promoQty > 25 && durationMonths == 1) durationMonths++
+
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
-    cal.add(Calendar.MONTH, durationMonths)
+    // force a bump for people who rent after the 15th
+    if (cal.get(Calendar.DAY_OF_MONTH) > 15) durationMonths++;
+    if (durationMonths - 1 > 0) {
+      cal.add(Calendar.MONTH, durationMonths - 1)
+    }
+    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     return cal.time
   }
 
-  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins) {
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
+    calculateTotals(site, unit, promo, ins, moveInDate, true)
+  }
+
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
     def ret = [:]
-    def durationMonths = promo ? [promo.prepayMonths, promo.expireMonth].max() : 1;
+    def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
+    def rate = unit ? unit.pushRate : 0
     def premium = ins ? ins.premium : 0
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
@@ -1062,33 +1046,57 @@ class CShiftService {
     if (promo) {
 
       waiveAdmin = promo.waiveAdmin
-      def promoMonths = promo.expireMonth > durationMonths || promo.expireMonth <= 0 ? durationMonths : promo.expireMonth
 
       switch (promo.promoType) {
         case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promoMonths;
+          offerDiscount = promo.promoQty * promo.expireMonth;
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit?.pushRate;
-          if (promo.promoQty > 50 && durationMonths == 1) durationMonths++
+          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
           break;
 
         case "FIXED_RATE":
-          offerDiscount = (unit.price - promo.promoQty) * promoMonths;
+          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promo.expireMonth;
           break;
       }
     }
+
+    def cal = new GregorianCalendar()
+    cal.setTime(moveInDate)
+    def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+    def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
+
+    if (durationMonths - 1 > 0) {
+      cal.add(Calendar.MONTH, durationMonths - 1)
+    }
+    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+
+    if (allowExtension) {
+      if (moveInDay > 15) {
+       durationMonths++;
+        ret["extended"] = true;
+      } else {
+        ret["extended"] = false;
+      }
+    }
+    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+
+
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def moveInTotal = feesTotal + (unit.price + premium)*durationMonths - offerDiscount;
+    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+    // TODO handle AZ insurance tax
+    def tax = ((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
+    def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
+    ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
+    ret["paidThruDate"] = cal.time.format('MM/dd/yy')
 
     return ret
   }
-
 }
 
