@@ -744,9 +744,13 @@ class SiteLinkService {
           }
         } else {
           // update pricing
-          existingUnit.price = unit.dcStdRate.text() as BigDecimal
-          existingUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
-          existingUnit.save()
+          def price =  unit.dcStdRate.text() as BigDecimal
+          def pushRate = unit.dcBoardRate.text() as BigDecimal
+          if (existingUnit.price != price || existingUnit.pushRate != pushRate) {
+            existingUnit.price = unit.dcStdRate.text() as BigDecimal
+            existingUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
+            existingUnit.save()
+          }
         }
       }
     }
