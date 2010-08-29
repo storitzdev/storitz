@@ -970,6 +970,10 @@ class SiteLinkService {
   }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
+    calculateTotals(site, unit, promo, ins, moveInDate, false)  
+  }
+
+  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
     def ret = [:]
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
@@ -978,7 +982,6 @@ class SiteLinkService {
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
     def waiveAdmin = false
-    def taxableDuration = (promo && promo.prepay ? promo.expireMonth : 0)
 
     if (promo) {
 
@@ -1009,11 +1012,13 @@ class SiteLinkService {
     }
     cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
 
-    if (moveInDay > 15) {
-      // durationMonths++;
-      ret["extended"] = true;
-    } else {
-      ret["extended"] = false;
+    if (allowExtension) {
+      if (moveInDay > 15) {
+       durationMonths++;
+        ret["extended"] = true;
+      } else {
+        ret["extended"] = false;
+      }
     }
     durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
 
