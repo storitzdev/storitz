@@ -121,6 +121,9 @@ class RentalTransactionController {
         if (!params.promoId) {
           rentalTransactionInstance.promoId = -999;
         }
+        if (!params.insuranceId) {
+          rentalTransactionInstance.insuranceId = -999
+        }
         if (rentalTransactionInstance.validate() && rentalTransactionInstance.save(flush: true)) {
             println("Transaction move in save date is ${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}")
             redirect(action: "payment", id: rentalTransactionInstance.id)
