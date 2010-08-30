@@ -1084,7 +1084,7 @@ class CShiftService {
     }
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+    def subTotal = (rate*durationMonths) + (premium*durationMonths)
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
 
