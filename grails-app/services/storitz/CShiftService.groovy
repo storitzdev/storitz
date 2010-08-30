@@ -1009,8 +1009,8 @@ class CShiftService {
 
   }
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    def ret = calculateTotals(site, unit, promo, ins, moveInDate)
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
+    def ret = calculateTotals(site, unit, promo, ins, moveInDate, extended)
     return ret["moveInTotal"]
   }
 
@@ -1034,6 +1034,9 @@ class CShiftService {
   }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
+
+    // TODO
+
     def ret = [:]
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
@@ -1080,7 +1083,7 @@ class CShiftService {
         ret["extended"] = false;
       }
     }
-    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/30)
+    //durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/30)
 
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)

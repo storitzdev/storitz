@@ -952,8 +952,8 @@ class SiteLinkService {
     return moveInResult > 3
   }
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    def ret = calculateTotals(site, unit, promo, ins, moveInDate)
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
+    def ret = calculateTotals(site, unit, promo, ins, moveInDate, extended)
     return ret["moveInTotal"]
   }
 
@@ -974,7 +974,7 @@ class SiteLinkService {
   }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    calculateTotals(site, unit, promo, ins, moveInDate, false)  
+    calculateTotals(site, unit, promo, ins, moveInDate, true)  
   }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
@@ -1011,19 +1011,20 @@ class SiteLinkService {
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
-    if (durationMonths - 1 > 0) {
-      cal.add(Calendar.MONTH, durationMonths - 1)
-    }
-    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
-
     if (allowExtension) {
       if (moveInDay > 15) {
-       durationMonths++;
+        durationMonths++;
         ret["extended"] = true;
       } else {
         ret["extended"] = false;
       }
     }
+
+    if (durationMonths - 1 > 0) {
+      cal.add(Calendar.MONTH, durationMonths - 1)
+    }
+    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+
     durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
 
 

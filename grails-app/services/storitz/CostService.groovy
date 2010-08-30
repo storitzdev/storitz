@@ -15,14 +15,14 @@ class CostService {
     def siteLinkService
     def CShiftService
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
+  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
     switch(site.source) {
 
       case "SL":
-        return siteLinkService.calculateMoveInCost(site, unit, promo, ins, moveInDate)
+        return siteLinkService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
 
       case "CS3":
-        return CShiftService.calculateMoveInCost(site, unit, promo, ins, moveInDate)
+        return CShiftService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
 
       default:
         throw new Exception("Unknown service for move in cost calculation")

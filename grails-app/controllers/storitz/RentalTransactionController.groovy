@@ -15,6 +15,7 @@ import com.storitz.SearchEngineReferral
 import com.storitz.NotificationType
 import org.hibernate.FetchMode as FM
 import storitz.constants.NotificationEventType
+import java.math.RoundingMode
 
 class RentalTransactionController {
 
@@ -185,8 +186,8 @@ class RentalTransactionController {
         // TODO - send them to an error page
       }
 
-      def promo = null
-      if (!rentalTransactionInstance.promoId == -999) {
+      SpecialOffer promo = null
+      if (rentalTransactionInstance.promoId > 0) {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
       def unit = StorageUnit.get(rentalTransactionInstance.unitId)
@@ -195,8 +196,8 @@ class RentalTransactionController {
       } else {
         rentalTransactionInstance.unitType = params.chosenType
       }
-      def ins = null
-      if (!rentalTransactionInstance.insuranceId == -999) {
+      Insurance ins = null
+      if (rentalTransactionInstance.insuranceId > 0) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
       }
 
@@ -212,7 +213,7 @@ class RentalTransactionController {
           billingContact.rental = rentalTransactionInstance
           if (!billingContact.validate() || !billingContact.save(flush: true)) {
             flash.message = "${message(code: 'default.not.created.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
-            redirect (action:'payment')
+            redirect (action:'payment', params:["id":rentalTransactionInstance.id])
             return
           } else {
             rentalTransactionInstance.billingAddress = billingContact
@@ -229,7 +230,7 @@ class RentalTransactionController {
       }
       if (!rentalTransactionInstance.validate() || !rentalTransactionInstance.save(flush: true)) {
         flash.message = "Could not save billing address"
-        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance])
+        redirect (action:'payment', params:["id":rentalTransactionInstance.id])
         return
       }
 
@@ -245,7 +246,7 @@ class RentalTransactionController {
         }
         if (!found) {
           flash.message = "Unit already reserved - refresh and try again"
-          render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+          redirect (action:'payment', params:["id":rentalTransactionInstance.id])
           return
         }
       }
@@ -261,7 +262,8 @@ class RentalTransactionController {
       rentalTransactionInstance.ccExpDate = expCal.time
 
       // TODO - compare calculated cost to our cost
-      rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins)
+      rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, true)
+      rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
       rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
 
       def s = new AuthorizeNet()
@@ -269,20 +271,22 @@ class RentalTransactionController {
         custId rentalTransactionInstance.id as String
         firstName rentalTransactionInstance.billingAddress.firstName
         lastName rentalTransactionInstance.billingAddress.lastName
-        address "${rentalTransactionInstance.billingAddress.address1} ${rentalTransactionInstance.billingAddress.address2}"
+        address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
         city rentalTransactionInstance.billingAddress.city
         state rentalTransactionInstance.billingAddress.state.display
         zip rentalTransactionInstance.billingAddress.zipcode
         ccNumber ccNum
         cvv params.cc_cvv2
         ccExpDate ccExpVal
-        amount rentalTransactionInstance.cost as String
+        amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
       }
       def authResp = s.submit()
 
+      println "Credit card response: ${authResp.dump()}"
+
       if (authResp.responseCode as Integer != 1) {
         flash.message = "Credit card not accepted ${authResp.responseReasonText}"
-        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, ins: ins, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+        redirect (action:'payment', params:["id":rentalTransactionInstance.id])
         return
       }
       println "Logged transaction = ${authResp.dump()}"
@@ -318,7 +322,7 @@ class RentalTransactionController {
       if (!moveInService.moveIn(rentalTransactionInstance)) {
         flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
         // TODO - notify with email to admin
-        render(view:"payment", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, cc_month:params.cc_month, cc_year:params.cc_year, cc_number:params.cc_number, cc_cvv2:params.cc_cvv2])
+        redirect (action:'payment', params:["id":rentalTransactionInstance.id])
         return
       }
 

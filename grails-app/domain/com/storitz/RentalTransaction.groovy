@@ -38,6 +38,7 @@ class RentalTransaction {
   Date paidThruDate
   Date dateOfBirth
   BigDecimal cost
+  BigDecimal moveInCost
   BigDecimal commission
   ReferralCode referralCode
   SearchEngineReferral searchEngineReferral
@@ -78,6 +79,7 @@ class RentalTransaction {
     cleanCCNum(nullable:true)
     feedUnitId(nullable:true)
     feedUnitNumber(nullable:true)
+    moveInCost(nullable:true)
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
