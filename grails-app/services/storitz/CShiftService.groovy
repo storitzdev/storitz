@@ -1074,14 +1074,8 @@ class CShiftService {
     }
     cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
 
-    if (allowExtension) {
-      if (moveInDay > 15) {
-       durationMonths++;
-        ret["extended"] = true;
-      } else {
-        ret["extended"] = false;
-      }
-    }
+    // TODO this will change if it is pro-rated
+    ret["extended"] = false;
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
     def subTotal = (rate*durationMonths) + (premium*durationMonths)
