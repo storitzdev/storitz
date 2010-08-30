@@ -157,12 +157,12 @@ class RentalTransactionController {
         return
       }
       def promo = null
-      if (!rentalTransactionInstance.promoId == -999) {
+      if (rentalTransactionInstance.promoId > 0) {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
       def unit = StorageUnit.get(rentalTransactionInstance.unitId)
       def ins = null
-      if (!rentalTransactionInstance.insuranceId == -999) {
+      if (rentalTransactionInstance.insuranceId > 0) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
       }
       if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
@@ -175,7 +175,7 @@ class RentalTransactionController {
       [rentalTransactionInstance: rentalTransactionInstance,
               title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state} ${rentalTransactionInstance.site.zipcode}",
               site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails,
-              unit: unit]
+              unit: unit, promo:promo, ins:ins, paidThruDate:costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, true)]
     }
 
     def pay = {
