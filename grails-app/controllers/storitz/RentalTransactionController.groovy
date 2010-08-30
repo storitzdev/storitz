@@ -171,6 +171,8 @@ class RentalTransactionController {
       }
 
       def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
+      rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
+      rentalTransactionInstance
 
       [rentalTransactionInstance: rentalTransactionInstance,
               title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state} ${rentalTransactionInstance.site.zipcode}",

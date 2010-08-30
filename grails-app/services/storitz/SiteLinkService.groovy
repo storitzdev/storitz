@@ -365,7 +365,7 @@ class SiteLinkService {
          <cal:UnitID>""" + rentalTransaction.feedUnitId + """</cal:UnitID>
          <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
          <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
-         <cal:dcPaymentAmount>""" + rentalTransaction.cost + """</cal:dcPaymentAmount>
+         <cal:dcPaymentAmount>""" + rentalTransaction.feedMoveInCost + """</cal:dcPaymentAmount>
          <cal:iCreditCardType>""" + rentalTransaction.cardType.siteLinkValue +  """</cal:iCreditCardType>
          <cal:sCreditCardNumber>""" + rentalTransaction.ccNum + """</cal:sCreditCardNumber>
          <cal:sCreditCardCVV>""" + rentalTransaction.cvv2 + """</cal:sCreditCardCVV>
@@ -640,7 +640,9 @@ class SiteLinkService {
 
     site.requiresInsurance = insurance(siteLink, site)
     if (site.units?.size() > 0) {
-      site.adminFee = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
+      def fees = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
+      site.adminFee = fees["admin"] ? fees["admin"] : 0
+      site.deposit = fees["deposit"] ? fees["deposit"] : 0 
     }
     getPromos(siteLink, site)
     getTaxes(siteLink, site)
@@ -688,12 +690,13 @@ class SiteLinkService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
+    def unitID
     for (unit in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table') {
       boolean rented = unit.bRented.text().toLowerCase() == 'true'
 
       if (rented) {
 
-       def unitID = unit.UnitID.text()
+       unitID = unit.UnitID.text()
        def deletedUnit = site.units.find{ it.unitNumber == unitID }
        if (deletedUnit) {
          site.removeFromUnits(deletedUnit)
@@ -701,7 +704,7 @@ class SiteLinkService {
        }
 
       } else {
-        def unitID = unit.UnitID.text()
+        unitID = unit.UnitID.text()
         def existingUnit = site.units.find{ it.unitNumber == unitID }
 
         if (!existingUnit) {
@@ -757,7 +760,15 @@ class SiteLinkService {
     for (lastupdate in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table1') {
       site.lastUpdate = lastupdate.lngLastTimePolled.text() as Long
     }
-
+    // check admin fees
+    if (!unitID && site.units.size() > 0) {
+      unitID = site.units.asList().get(0).unitNumber
+    }
+    if (unitID) {
+      def fees = adminFees(siteLink, unitID, site)
+      site.adminFee = fees["admin"]
+      site.deposit = fees["deposit"]
+    }
   }
 
   def insurance(siteLink, site) {
@@ -796,14 +807,22 @@ class SiteLinkService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    def adminFee = new BigDecimal(0)
+    def adminFee = 0 as BigDecimal
+    def deposit = 0 as BigDecimal
     for (fee in records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      if (fee.ChargeDescription.text() == 'Administrative Fee') {
-        adminFee = new BigDecimal(fee.dcTenantRate.text() as String)
+      def chargeDescription =  fee.ChargeDescription.text().toLowerCase()
+      if (chargeDescription.contains('administrative fee')) {
+        adminFee = fee.dcTenantRate.text() as BigDecimal
+      }
+      if (chargeDescription.contains('deposit')) {
+        deposit = fee.dcTenantRate.text() as BigDecimal
       }
     }
-    println('returning fee=' + adminFee)
-    return adminFee
+    def fees = [:]
+    fees["admin"] = adminFee
+    fees["deposit"] = deposit
+
+    return fees
   }
 
   def getPromos(siteLink, site) {
@@ -950,6 +969,14 @@ class SiteLinkService {
       rentalTransaction.save(flush:true)
     }
     return moveInResult > 3
+  }
+
+  def postMoveInCredit(RentalTransaction rentalTransaction) {
+    if (rentalTransaction.feedMoveInCost < rentalTransaction.cost) {
+
+      // TODO - create the delta payment for the transaction here
+      // post to the account after move-in
+    }
   }
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {

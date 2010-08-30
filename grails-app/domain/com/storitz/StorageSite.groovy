@@ -86,8 +86,9 @@ class StorageSite {
     String sourceLoc          // location name
 
   // site offers
-    Boolean requiresInsurance
-    Boolean boxesAvailable
+    Boolean requiresInsurance  = false
+    Boolean noInsuranceWaiver  = false
+    Boolean boxesAvailable     = true
     TruckType freeTruck
 
   // site security
@@ -99,8 +100,9 @@ class StorageSite {
     Boolean hasElevator
 
   // Fees
-    BigDecimal adminFee
-    BigDecimal lockFee
+    BigDecimal adminFee     = 0
+    BigDecimal lockFee      = 0
+    BigDecimal deposit      = 0
 
   // Operation Hours
     Boolean openWeekday

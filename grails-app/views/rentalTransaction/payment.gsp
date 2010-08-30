@@ -191,45 +191,29 @@
                     <div class="right">
                       <div id="costDetails" class="right">
                         <table id="costTotals">
-                          <tr>
-                            <td>Monthly rent</td>
-                            <td class="costDuration" id="monthlyDuration"></td>
-                            <td class="costMoneyPerMonth" id="monthlyPerMonth"></td>
-                            <td class="costMoney" id="monthlyTotal"></td>
-                          </tr>
-                          <tr id="specialOfferBlock">
-                            <td>Selected Offer</td>
-                            <td></td>
-                            <td></td>
-                            <td class="costMoney" id="discountTotal"></td>
-                          </tr>
-                          <tr id="insuranceBlock">
-                            <td>Insurance</td>
-                            <td class="costDuration" id="insuranceDuration"></td>
-                            <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
-                            <td class="costMoney" id="insuranceTotal"></td>
-                          </tr>
-                          <tr>
-                            <td>Admin Fees</td>
-                            <td></td>
-                            <td></td>
-                            <td class="costMoney" id="adminTotal"></td>
-                          </tr>
+                          <g:each var="item" in="${moveInDetails.items}">
+                            <tr>
+                              <td>${item.description}</td>
+                              <td class="costMoney"><g:formatNumber number="${item.amount}" type="currency" currencyCode="USD" /></td>
+                            </tr>
+                          </g:each>
+                          <g:if test="${moveInDetails.taxTotal() > 0}">
                           <tr id="taxBlock">
                             <td>Tax</td>
                             <td></td>
                             <td></td>
-                            <td class="costMoney" id="taxTotal"></td>
+                            <td class="costMoney" id="taxTotal"><g:formatNumber number="${moveInDetails.taxTotal()}" type="currency" currencyCode="USD" /></td>
                           </tr>
+                          </g:if>
                         </table>
                       </div>
                       <div style="clear:both;"></div>
                       <div class="right transTotalMoveIn">
-                        <div class="left" style="margin-right: 30px;">
+                        <div class="left" style="margin-right: 120px;">
                           Total Move-In Cost:
                         </div>
                         <div class="left">
-                          <a href="#" id="totalMoveInCost" onclick="Effect.toggle('costDetails', 'appear', { duration: 0.25 }); return false;"></a>
+                          <a href="#" id="totalMoveInCost" onclick="Effect.toggle('costDetails', 'appear', { duration: 0.25 }); return false;"><g:formatNumber number="${moveInDetails.total()}" type="currency" currencyCode="USD" /></a>
                         </div>
                       </div>
                       <div style="clear:both;"></div>

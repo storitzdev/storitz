@@ -11,6 +11,7 @@ class MoveInDetails {
   def items = []
   boolean reservation
   String message
+  String paymentString
 
   def subTotal() {
     def subtotal = 0 as BigDecimal

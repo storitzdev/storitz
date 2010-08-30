@@ -652,20 +652,26 @@
           </div>
 
           <div class="checkout_fields">
-            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'adminFee', 'errors')}">
-              <g:textField name="adminFee" value="${storageSiteInstance?.adminFee}"/>
+            <div style="width:210px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'adminFee', 'errors')}">
+              <g:textField name="adminFee" style="width:190px;" value="${storageSiteInstance?.adminFee}"/>
             </div>
-            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'lockFee', 'errors')}">
-              <g:textField name="lockFee" value="${storageSiteInstance?.lockFee}"/>
+            <div style="width:210px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'deposit', 'errors')}">
+              <g:textField name="deposit" style="width:190px;" value="${storageSiteInstance?.deposit}"/>
+            </div>
+            <div style="width:210px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'lockFee', 'errors')}">
+              <g:textField name="lockFee" style="width:190px;" value="${storageSiteInstance?.lockFee}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
 
           <div class="checkout_labels">
-            <div class="checkout_name" style="width:250px;">
+            <div class="checkout_name" style="width:210px;">
               <label for="adminFee">Admin Fee</label>
             </div>
-            <div class="checkout_name" style="width:250px;">
+            <div class="checkout_name" style="width:210px;">
+              <label for="deposit">Deposit</label>
+            </div>
+            <div class="checkout_name" style="width:210px;">
               <label for="lockFee">Lock Fee</label>
             </div>
             <div style="clear:both;"></div>

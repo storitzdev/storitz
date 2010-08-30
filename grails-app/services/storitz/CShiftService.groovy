@@ -729,6 +729,9 @@ class CShiftService {
     site.units.clear()
     site.save()
     unitsAvailable(site.centerShift, site, stats)
+    if (site.units.size() > 0) {
+      def unit = site.units.asList().get(0)
+    }
     site.save(flush: true)
   }
 
@@ -1007,13 +1010,20 @@ class CShiftService {
       insId = ins.insuranceId
     }
 
+    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
+    rentalTransaction.paymentString = moveInDetails.paymentString
+
+    return moveInDetails
+  }
+
+  def getCostDetails(userName, pin, sourceId, unitId, insId) {
     CsKiosk service = new CsKioskLocator();
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
-    println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String}"
+    println "getMoveInCost params: ${userName}, ${pin}, ${sourceId as Long}, ${unitId}, ${insId as String}"
 
-    def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
+    def ret = port.getMoveInCost(userName, pin, sourceId as Long, unitId, insId as String)
 
     if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
       println "Return for getMoveInCost < 0 : ${ret}"
@@ -1028,13 +1038,14 @@ class CShiftService {
     def end = ret[5]
 
     def itemLength = end.size() - 1
-    rentalTransaction.paymentString = (end[itemLength] as String)
 
     def moveInDetails = new MoveInDetails()
+    moveInDetails.paymentString = (end[itemLength] as String)
+
     for(i in 0..itemLength - 1) {
       moveInDetails.items.add(new LineItem(description:desc[i], tax:tax[i] as BigDecimal, amount: price[i] as BigDecimal))
     }
-    
+
     return moveInDetails
   }
 
