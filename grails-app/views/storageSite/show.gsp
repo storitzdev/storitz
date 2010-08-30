@@ -157,7 +157,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.url.label" default="Url"/></td>
 
-          <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "url")}</td>
+          <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "kioskUrl")}</td>
 
         </tr>
 

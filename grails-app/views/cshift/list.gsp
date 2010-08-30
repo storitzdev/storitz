@@ -43,6 +43,8 @@
 
           <g:sortableColumn property="pin" title="${message(code: 'cshift.pin.label', default: 'PIN')}"/>
 
+          <g:sortableColumn property="location" title="${message(code: 'cshift.location.label', default: 'Location')}"/>
+
         </tr>
         </thead>
         <tbody>
@@ -56,6 +58,8 @@
             <td>${fieldValue(bean: cshiftInstance, field: "userName")}</td>
 
             <td>${fieldValue(bean: cshiftInstance, field: "pin")}</td>
+
+            <td>${cshiftInstance.location?.display}</td>
 
           </tr>
         </g:each>

@@ -89,6 +89,12 @@
             <td></td>
             <td class="costMoney" id="adminTotal"></td>
           </tr>
+          <tr id="depositBlock">
+            <td>Refundable Deposit</td>
+            <td></td>
+            <td></td>
+            <td class="costMoney" id="deposit"></td>
+          </tr>
           <tr id="taxBlock">
             <td>Tax</td>
             <td></td>

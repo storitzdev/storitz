@@ -30,9 +30,7 @@ class CShiftService {
 
   boolean transactional = false
 
-  def centerShiftWsUrl3 = "https://host05slc.centershift.com/DoD_CallCenter/csCallCenterService.asmx"
-
-  def getSites(userName, pin) {
+  def getSites(url, userName, pin) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -43,10 +41,10 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetSiteList')
+    postAction(url, payload, 'GetSiteList')
   }
 
-  def getSiteAddress(userName, pin, siteId) {
+  def getSiteAddress(url, userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -58,7 +56,7 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetSiteAddress')
+    postAction(url, payload, 'GetSiteAddress')
   }
 
   def getSiteHours(userName, pin, siteId) {
@@ -73,10 +71,10 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetSiteHours')
+    postAction(url, payload, 'GetSiteHours')
   }
 
-  def getSiteFeatures(userName, pin, siteId) {
+  def getSiteFeatures(url, userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -88,10 +86,10 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetSiteFeatures')
+    postAction(url, payload, 'GetSiteFeatures')
   }
 
-  def getSitePhones(userName, pin, siteId) {
+  def getSitePhones(url, userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -103,10 +101,10 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetSitePhones')
+    postAction(url, payload, 'GetSitePhones')
   }
 
-  def getSiteUnits(userName, pin, siteId) {
+  def getSiteUnits(url, userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -118,10 +116,10 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetSiteUnitData')
+    postAction(url, payload, 'GetSiteUnitData')
   }
 
-  def getPromos(userName, pin, siteId) {
+  def getPromos(url, userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -134,7 +132,7 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'GetCurrentPromotionListXML')
+    postAction(url, payload, 'GetCurrentPromotionListXML')
   }
 
   def newTenant(rentalTransaction) {
@@ -163,10 +161,10 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(payload, 'CreateNewAccount2')
+    postAction(rentalTransaction.site.centerShift.location.webUrl, payload, 'CreateNewAccount2')
   }
 
-  def getReservationUnitData(userName, pin, siteId, dimension, attribute) {
+  def getReservationUnitData(url, userName, pin, siteId, dimension, attribute) {
 
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
@@ -183,7 +181,7 @@ class CShiftService {
 
     println "GetReservationUnitDate: ${payload}"
     
-    postAction(payload, 'GetReservationUnitData')
+    postAction(url, payload, 'GetReservationUnitData')
   }
 
   def makeReservation(RentalTransaction rentalTransaction) {
@@ -208,11 +206,11 @@ class CShiftService {
 
     println "makeReservation: ${payload}"
     
-    postAction(payload, 'MakeReservationNonCCPayment')
+    postAction(rentalTransaction.site.centerShift.location.webUrl, payload, 'MakeReservationNonCCPayment')
   }
 
-  private def postAction(payload, action) {
-    def http = new HTTPBuilder(centerShiftWsUrl3)
+  private def postAction(url, payload, action) {
+    def http = new HTTPBuilder(url)
 
     http.handler.failure = {resp, req ->
       println "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
@@ -233,7 +231,7 @@ class CShiftService {
   }
 
   def loadSites(cshift, stats) {
-    def ret = getSites(cshift.userName, cshift.pin)
+    def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -272,7 +270,7 @@ class CShiftService {
   }
 
   def refreshSites(cshift, stats) {
-    def ret = getSites(cshift.userName, cshift.pin)
+    def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -295,7 +293,7 @@ class CShiftService {
   }
 
   def updateSite(site, stats) {
-    def ret = getSites(cshift.userName, cshift.pin)
+    def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -373,7 +371,7 @@ class CShiftService {
   }
 
   def createSiteUsers(cshift) {
-    def ret = getSites(cshift.userName, cshift.pin)
+    def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -397,7 +395,7 @@ class CShiftService {
   }
 
   def createSitePhones(cshift) {
-    def ret = getSites(cshift.userName, cshift.pin)
+    def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -444,7 +442,7 @@ class CShiftService {
   }
 
   def boolean addSiteAddress(cshift, site) {
-    def ret = getSiteAddress(cshift.userName, cshift.pin, site.sourceId)
+    def ret = getSiteAddress(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -482,7 +480,7 @@ class CShiftService {
   }
 
   def addSitePhone(cshift, site) {
-    def ret = getSitePhones(cshift.userName, cshift.pin, site.sourceId)
+    def ret = getSitePhones(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
 
     if (!ret) return
     
@@ -504,7 +502,7 @@ class CShiftService {
   }
 
   def addSiteHours(cshift, site) {
-    def ret = getSiteHours(cshift.userName, cshift.pin, site.sourceId)
+    def ret = getSiteHours(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -685,7 +683,7 @@ class CShiftService {
   }
 
   def addSiteFeatures(cshift, site) {
-    def ret = getSiteFeatures(cshift.userName, cshift.pin, site.sourceId)
+    def ret = getSiteFeatures(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -731,12 +729,48 @@ class CShiftService {
     unitsAvailable(site.centerShift, site, stats)
     if (site.units.size() > 0) {
       def unit = site.units.asList().get(0)
+
+      URL endPoint = new URL(site.centerShift.location.kioskUrl)
+      CsKiosk service = new CsKioskLocator();
+
+      CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
+
+      println "checkRented (${site.centerShift.userName}, ${site.centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+
+      def unitInfo = port.getAvailableUnits(site.centerShift.userName, site.centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.displaySize)
+
+      if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
+        println "Return for getAvailableUnits < 0 : ${unitInfo}"
+        return false
+      }
+
+      def unitId = unitInfo[0]
+      def dimensions = unitInfo[1]
+      def sqFt = unitInfo[2]
+      def rate = unitInfo[3]
+      def unitNumber = unitInfo[4]
+      def attrDesc = unitInfo[5]
+      def attrId = unitInfo[6]
+      def promoAvail = unitInfo[7]
+      def promoId = unitInfo[8]
+      def promoDesc = unitInfo[9]
+
+      def feedUnitId = unitId[0] as Long
+      def feedUnitNumber = unitNumber[0]
+
+      def moveInDetails = getCostDetails(site.centerShift.userName, site.centerShift.pin, site.sourceId, feedUnitId, "-1")
+
+      def depositLine = moveInDetails.items.find{ it.description =~ /(?i).*deposit.*/ }
+      if (depositLine) {
+        site.deposit = depositLine.amount
+        println "Found deposit ${site.deposit}"
+      }
     }
     site.save(flush: true)
   }
 
   def unitsAvailable(cshift, site, stats) {
-    def ret = getSiteUnits(cshift.userName, cshift.pin, site.sourceId)
+    def ret = getSiteUnits(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -798,7 +832,7 @@ class CShiftService {
   }
 
   def loadPromos(cshift, site) {
-    def ret = getPromos(cshift.userName, cshift.pin, site.sourceId)
+    def ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -872,9 +906,12 @@ class CShiftService {
   }
 
   def loadInsurance(cshift, site) {
+
+    URL endPoint = new URL(cshift.location.kioskUrl)
+
     CsKiosk service = new CsKioskLocator();
 
-    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
     //invoke business method
     def insOptions = port.getInsuranceOptions(cshift.userName, cshift.pin, site.sourceId)
 
@@ -921,7 +958,7 @@ class CShiftService {
     if (!unit) return false
 
     // get the number of reservation days
-    def ret = getReservationUnitData(cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.displaySize, unit.unitName)
+    def ret = getReservationUnitData(cshift.location.webUrl, cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.displaySize, unit.unitName)
     
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -938,9 +975,11 @@ class CShiftService {
     }
     if (!found) return false
 
+    URL endPoint = new URL(cshift.location.kioskUrl)
+
     CsKiosk service = new CsKioskLocator();
 
-    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
     println "checkRented (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
     
@@ -1010,20 +1049,21 @@ class CShiftService {
       insId = ins.insuranceId
     }
 
-    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
+    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String)
     rentalTransaction.paymentString = moveInDetails.paymentString
 
     return moveInDetails
   }
 
-  def getCostDetails(userName, pin, sourceId, unitId, insId) {
+  def getCostDetails(userName, pin, sourceId, url, unitId, insId) {
+    URL endPoint = new URL(url)
     CsKiosk service = new CsKioskLocator();
 
-    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
     println "getMoveInCost params: ${userName}, ${pin}, ${sourceId as Long}, ${unitId}, ${insId as String}"
 
-    def ret = port.getMoveInCost(userName, pin, sourceId as Long, unitId, insId as String)
+    def ret = port.getMoveInCost(userName, pin, sourceId as Long, unitId as String, insId as String)
 
     if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
       println "Return for getMoveInCost < 0 : ${ret}"
@@ -1097,33 +1137,12 @@ class CShiftService {
       insId = ins.insuranceId
     }
 
-    CsKiosk service = new CsKioskLocator();
-
-    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
-
-    // paymentString is transient so we need to get it again before the moveIn
-    println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String}"
-
-    def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
-
-    if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
-      println "Return for getMoveInCost < 0 : ${ret}"
-      return null
-    }
-
-    def desc = ret[0]
-    def price = ret[1]
-    def tax = ret[2]
-    def subtotal = ret[3]
-    def start = ret[4]
-    def end = ret[5]
-
-    def itemLength = end.size() - 1
-    rentalTransaction.paymentString = end[itemLength] as String
+    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String)
+    rentalTransaction.paymentString = moveInDetails.paymentString
 
     println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${rentalTransaction.paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
-    ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,
+    def ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,
             rentalTransaction.paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
 
     if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
@@ -1189,6 +1208,7 @@ class CShiftService {
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
     def waiveAdmin = false
+    def deposit = site.deposit ? site.deposit : 0
 
     if (promo) {
 
@@ -1242,13 +1262,14 @@ class CShiftService {
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
 
-    def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
+    def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
+    ret["deposit"] = deposit
     ret["paidThruDate"] = cal.time.format('MM/dd/yy')
 
     return ret

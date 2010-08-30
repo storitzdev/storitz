@@ -52,7 +52,7 @@
 
       <div class="checkout_fields">
         <div style="width:300px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'manager', 'errors')}">
-          <g:select name="manager.id" style="width:280px;" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${cshiftInstance?.manager?.username}" noSelection="['null': '']"/>
+          <g:select name="manager.id" style="width:280px;" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${cshiftInstance?.manager?.id}" noSelection="['null': '']"/>
         </div>
         <div style="clear:both;"></div>
       </div>
@@ -79,6 +79,9 @@
         <div style="width:200px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'pin', 'errors')}">
           <g:textField name="pin" style="width:180px;" value="${cshiftInstance?.pin}"/>
         </div>
+        <div style="width:200px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'location', 'errors')}">
+          <g:select id="location" style="width:200px;" name="location" from="${storitz.constants.CenterShiftLocation?.list()}" value="${cshiftInstance?.location}" optionValue="display"  />
+        </div>
         <div style="clear:both;"></div>
       </div>
 
@@ -88,6 +91,9 @@
         </div>
         <div class="checkout_name" style="width:200px;">
           <label for="pin">PIN</label>
+        </div>
+        <div class="checkout_name" style="width:200px;">
+          <label for="location">Location</label>
         </div>
         <div style="clear:both;"></div>
       </div>

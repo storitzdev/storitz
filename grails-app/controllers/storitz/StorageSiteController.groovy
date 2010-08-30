@@ -75,7 +75,8 @@ class StorageSiteController {
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       results = StorageSite.findAllByTitleLike(params.term + '%', params).collect{it.title}
     } else {
-      results = SiteUser.findAllByUser(user).collect{ it.site }.find{ it.title =~ /${params.term}.*/}.sort{ it.title }
+      results = SiteUser.findAllByUser(user).collect{ it.site }.find{ it.title =~ /(?i).*${params.term}.*/}.sort{ it.title }
+      println "autocomplete result: ${results.dump()}"
     }
     render (status: 200, contentType:"application/json", text: results as JSON )
   }
@@ -627,7 +628,7 @@ class StorageSiteController {
 
     def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\" }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.getUnitTypeLower()}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
 
   }
 

@@ -74,7 +74,7 @@
             <td valign="top" class="name">
               <label for="url"><g:message code="storageSite.url.label" default="Url"/></label>
             </td>
-            <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'url', 'errors')}">
+            <td valign="top" class="value ${hasErrors(bean: storageSiteInstance, field: 'kioskUrl', 'errors')}">
               <g:textField name="url" value="${storageSiteInstance?.url}"/>
             </td>
           </tr>

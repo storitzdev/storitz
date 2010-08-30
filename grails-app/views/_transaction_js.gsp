@@ -23,6 +23,7 @@ var chosenInsurance = '';
 var insuranceId = ${insuranceId ? insuranceId : -999};
 var premium = 0;
 var tax = 0;
+var deposit = 0;
 
 <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
 <g:if test="${params.searchSize}">
@@ -89,6 +90,12 @@ function updateTransaction() {
     $('taxBlock').show();
   } else {
     $('taxBlock').hide();
+  }
+  $('deposit').update('$' + deposit.toFixed(2));
+  if (deposit > 0) {
+    $('depositBlock').show();
+  } else {
+    $('depositBlock').hide();
   }
   // promo discount
   $('discountTotal').update(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
@@ -175,7 +182,8 @@ function showTotals() {
       monthlyRent = totals.monthlyRate;
       pushRate = totals.pushRate;
       additionalFees = totals.additionalFees;
-      tax = totals.tax
+      tax = totals.tax;
+      deposit = totals.deposit;
       totalMoveInCost = totals.totalMoveInCost;
       unitId = totals.unitId;
       paidThruDate = totals.paidThruDate;
