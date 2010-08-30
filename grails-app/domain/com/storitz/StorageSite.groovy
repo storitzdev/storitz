@@ -62,6 +62,7 @@ class StorageSite {
       rentalAgreement(nullable:true)
       taxRateRental(nullable:true)
       taxRateInsurance(nullable:true)
+      useProrating(nullable:true)
     }
   
     String title
@@ -119,6 +120,7 @@ class StorageSite {
 
     BigDecimal taxRateRental
     BigDecimal taxRateInsurance
+    Boolean useProrating
 
   // data feeds
     SiteLink siteLink

@@ -69,10 +69,11 @@ class NotificationService {
       String billingName = rentalTransaction.billingAddress.fullName()
       String billingAddress = rentalTransaction.billingAddress.fullAddress()
       String storitzId = rentalTransaction.bookingDate.format('yyyyddMM') + sprintf('%08d', rentalTransaction.id)
+      String idNumber = (rentalTransaction.reserved ? 'R'+rentalTransaction.reservationId : rentalTransaction.idNumber)
 
       def model = [
         tenantName: rentalTransaction.contactPrimary.fullName(),
-        idNumber: rentalTransaction.idNumber,
+        idNumber: idNumber,
         bookingDate: rentalTransaction.bookingDate.format('MM/dd/yy'),
         moveInDate: rentalTransaction.moveInDate.format('MM/dd/yy'),
         paidThruDate: rentalTransaction.paidThruDate.format('MM/dd/yy'),
@@ -151,7 +152,7 @@ class NotificationService {
           emailService.sendEmail(
               to: operAcctEmails,
               from: "no-response@storitz.com",
-              subject: subj,
+              subject: "EVENT - NEW TENANT " + subj,
               model: model,
               view: "/notifications/moveInOperMgr")
 

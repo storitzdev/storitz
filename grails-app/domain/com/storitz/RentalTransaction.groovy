@@ -46,6 +46,11 @@ class RentalTransaction {
   String cleanCCNum
   String paymentString
   String unitType
+  Integer reservationPeriod
+  String reservationId
+  BigDecimal reservationCost
+  Boolean reserved
+  String contactId // used for Centershift
 
   // Transient members
   Boolean insuranceTerms
@@ -80,6 +85,11 @@ class RentalTransaction {
     feedUnitId(nullable:true)
     feedUnitNumber(nullable:true)
     moveInCost(nullable:true)
+    reservationPeriod(nullable:true)
+    reserved(nullable:true)
+    reservationId(nullable:true)
+    reservationCost(nullable:true)
+    contactId(nullable:true)
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',

@@ -69,6 +69,12 @@
 
     function rentmeClick() {
       $('rentme').observe('click', function() {
+        // check date and turn red if bad
+        if (Date.parseDate(startDate, "%m/%d/%y").getTime() < new Date().getTime()) {
+          $('transMoveInDate').addClassName('validation-failed');
+          return;
+        }
+        $('transMoveInDate').removeClassName('validation-failed');
         // TODO - check if all things are cleared
         $('sizeHelp').hide();
         $('rentalForm').show();

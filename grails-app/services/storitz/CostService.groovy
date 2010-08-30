@@ -45,15 +45,15 @@ class CostService {
 
   }
 
-  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
+  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
 
     switch(site.source) {
 
       case "SL":
-        return siteLinkService.calculatePaidThruDate(site, promo, moveInDate)
+        return siteLinkService.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
 
       case "CS3":
-        return CShiftService.calculatePaidThruDate(site, promo, moveInDate)
+        return CShiftService.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
 
       default:
         throw new Exception("Unknown service for paid thru date")

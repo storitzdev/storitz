@@ -9,6 +9,8 @@ package storitz
  */
 class MoveInDetails {
   def items = []
+  boolean reservation
+  String message
 
   def subTotal() {
     def subtotal = 0 as BigDecimal

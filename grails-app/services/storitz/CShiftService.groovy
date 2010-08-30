@@ -166,6 +166,51 @@ class CShiftService {
     postAction(payload, 'CreateNewAccount2')
   }
 
+  def getReservationUnitData(userName, pin, siteId, dimension, attribute) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <csc:GetReservationUnitData>
+         <csc:strUser>""" + userName + """</csc:strUser>
+         <csc:strPin>""" + pin + """</csc:strPin>
+         <csc:lngSiteID>""" + siteId + """</csc:lngSiteID>
+         <csc:strDimension>""" + dimension + """</csc:strDimension>
+         <csc:lngAttributes>""" + attribute + """</csc:lngAttributes>
+      </csc:GetReservationUnitData>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    println "GetReservationUnitDate: ${payload}"
+    
+    postAction(payload, 'GetReservationUnitData')
+  }
+
+  def makeReservation(RentalTransaction rentalTransaction) {
+     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <csc:MakeReservationNonCCPayment>
+         <csc:strUser>""" + rentalTransaction.site.centerShift.userName + """</csc:strUser>
+         <csc:strPIN>""" + rentalTransaction.site.centerShift.pin + """</csc:strPIN>
+         <csc:lngSiteID>""" + rentalTransaction.site.sourceId + """</csc:lngSiteID>
+         <csc:lngContactID>""" + rentalTransaction.contactId + """</csc:lngContactID>
+         <csc:strReservationStartDate>""" + rentalTransaction.moveInDate.format('MM/dd/yyyy') + """</csc:strReservationStartDate>
+         <csc:lngUnitID>""" + rentalTransaction.feedUnitId + """</csc:lngUnitID>
+         <csc:sngNewRate>-1</csc:sngNewRate>
+         <csc:sngAmount>""" + rentalTransaction.reservationCost + """</csc:sngAmount>
+         <csc:strPayMethod>K</csc:strPayMethod>
+         <csc:strCheckNumber>0123456789</csc:strCheckNumber>
+         <csc:strCheckAcct>Storitz Acct.</csc:strCheckAcct>
+      </csc:MakeReservationNonCCPayment>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    println "makeReservation: ${payload}"
+    
+    postAction(payload, 'MakeReservationNonCCPayment')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(centerShiftWsUrl3)
 
@@ -872,6 +917,24 @@ class CShiftService {
 
     if (!unit) return false
 
+    // get the number of reservation days
+    def ret = getReservationUnitData(cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.displaySize, unit.unitName)
+    
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def found = false
+    for(resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:UnitData') {
+      rentalTransaction.reservationPeriod = resData.Reservation_Days.text() as Integer
+      rentalTransaction.reservationCost = resData.Reservation_Cost.text() as BigDecimal
+      found = true
+    }
+    if (!found) return false
+
     CsKiosk service = new CsKioskLocator();
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
@@ -925,6 +988,7 @@ class CShiftService {
     for(acct in records.'soap:Body'.'*:CreateNewAccount2Response'.'*:CreateNewAccount2Result'.'*:CreateNewAccount'.'*:Account') {
 
       rentalTransaction.tenantId = acct.ACCOUNT_ID.text()
+      rentalTransaction.contactId = acct.CONTACT_ID.text()
     }
     rentalTransaction.save(flush:true)
   }
@@ -951,12 +1015,10 @@ class CShiftService {
 
     def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
 
-    if (ret instanceof Integer && ret < 0) {
+    if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
       println "Return for getMoveInCost < 0 : ${ret}"
       return null
     }
-
-    println "Dumping getMoveInCost : ${ret.dump()}"
 
     def desc = ret[0]
     def price = ret[1]
@@ -966,8 +1028,7 @@ class CShiftService {
     def end = ret[5]
 
     def itemLength = end.size() - 1
-    rentalTransaction.paymentString = end[itemLength] as String
-    rentalTransaction.save(flush: true)
+    rentalTransaction.paymentString = (end[itemLength] as String)
 
     def moveInDetails = new MoveInDetails()
     for(i in 0..itemLength - 1) {
@@ -975,6 +1036,45 @@ class CShiftService {
     }
     
     return moveInDetails
+  }
+
+  def reserve(RentalTransaction rentalTransaction) {
+    def ret = makeReservation(rentalTransaction)
+
+    println "MakeReservation return ${ret}"
+    
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def errorCode = -1
+    def message
+    for(res in records.'soap:Body'.'*:MakeReservationNonCCPaymentResponse'.'*:MakeReservationNonCCPaymentResult'.'*:MakeReservationNonCCPayment'.'*:Completed') {
+      errorCode = res.ErrorCode.text() as Integer
+      message = res.Message.text()
+    }
+    if (!message) {
+      for(res in records.'soap:Body'.'*:MakeReservationNonCCPaymentResponse'.'*:MakeReservationNonCCPaymentResult'.'*:MakeReservationNonCCPayment'.'*:Error') {
+        errorCode = res.ErrorCode.text() as Integer
+        message = res.Message.text()
+      }
+    }
+    rentalTransaction.reserved = true
+
+    println "errorCode = ${errorCode} and message = ${message}"
+    // parse the message to get the reservation ID - Reservation Payment Successful. RentalID: 6225002, UnitID: 2528340
+    def m = message =~ /.+RentalID:\s+(\d+),.+/
+    if (m.matches()) {
+      rentalTransaction.reservationId = m[0][1]
+    }
+    println "Reservation ID = ${rentalTransaction.reservationId}"
+    rentalTransaction.save()
+
+    return errorCode == 0
+
   }
 
   def moveIn(RentalTransaction rentalTransaction) {
@@ -990,12 +1090,32 @@ class CShiftService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort()
 
-    println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
+    // paymentString is transient so we need to get it again before the moveIn
+    println "getMoveInCost params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String}"
+
+    def ret = port.getMoveInCost(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.feedUnitId, insId as String)
+
+    if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
+      println "Return for getMoveInCost < 0 : ${ret}"
+      return null
+    }
+
+    def desc = ret[0]
+    def price = ret[1]
+    def tax = ret[2]
+    def subtotal = ret[3]
+    def start = ret[4]
+    def end = ret[5]
+
+    def itemLength = end.size() - 1
+    rentalTransaction.paymentString = end[itemLength] as String
+
+    println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${rentalTransaction.paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
     ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,
             rentalTransaction.paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
 
-    if (ret instanceof Integer && ret < 0) {
+    if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
       println "Return for doMoveIn < 0 : ${ret}"
       return false
     }
@@ -1014,18 +1134,33 @@ class CShiftService {
     return ret["moveInTotal"]
   }
 
-  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
-    // TODO - handle prorated payments
-    def durationMonths = promo ? [promo.prepayMonths, promo.expireMonth].max() : 1;
+  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
+    BigDecimal durationMonths = promo ? [promo.prepayMonths, promo.expireMonth].max() : 1;
 
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
-    // force a bump for people who rent after the 15th
-    if (cal.get(Calendar.DAY_OF_MONTH) > 15) durationMonths++;
-    if (durationMonths - 1 > 0) {
-      cal.add(Calendar.MONTH, durationMonths - 1)
+    def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+    def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
+
+    if (site.useProrating) {
+      if (allowExtension) {
+        if (moveInDay > 15) {
+          durationMonths++;
+          ret["extended"] = true;
+        } else {
+          ret["extended"] = false;
+        }
+      }
+      if (durationMonths - 1 > 0) {
+        cal.add(Calendar.MONTH, ((durationMonths - 1) as Integer))
+      }
+    } else {
+      cal.add(Calendar.MONTH, (durationMonths as Integer))
     }
-    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+
+    if (site.useProrating) {
+      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+    }
     return cal.time
   }
 
@@ -1035,10 +1170,8 @@ class CShiftService {
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
 
-    // TODO
-
     def ret = [:]
-    def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
+    BigDecimal durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
     def rate = unit ? unit.pushRate : 0
     def premium = ins ? ins.premium : 0
@@ -1067,23 +1200,37 @@ class CShiftService {
 
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
+    def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
-    if (durationMonths - 1 > 0) {
-      cal.add(Calendar.MONTH, durationMonths - 1)
+    if (site.useProrating) {
+      if (allowExtension) {
+        if (moveInDay > 15) {
+          durationMonths++;
+          ret["extended"] = true;
+        } else {
+          ret["extended"] = false;
+        }
+      }
+      if (durationMonths - 1 > 0) {
+        cal.add(Calendar.MONTH, ((durationMonths - 1) as Integer))
+      }
+    } else {
+      cal.add(Calendar.MONTH, (durationMonths as Integer))
     }
-    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
 
-    // TODO this will change if it is pro-rated
-    ret["extended"] = false;
+    if (site.useProrating) {
+      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+
+      durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+    }
+
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def subTotal = (rate*durationMonths) + (premium*durationMonths)
+    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
 
-    println "CShift tax rate on unit is ${unit.taxRate} and taxable amount is ${premium*durationMonths}"
-    
     def moveInTotal = feesTotal + subTotal + tax - offerDiscount;
 
     ret["durationMonths"] = durationMonths

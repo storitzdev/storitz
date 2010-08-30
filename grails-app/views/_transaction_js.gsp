@@ -144,6 +144,12 @@ function setupCalendar() {
       shouldClose   :  false,
       selectHandler :  function(cal, dateString) {
         startDate = dateString;
+        if (cal.date.getTime() < new Date().getTime()) {
+          $('transMoveInDate').addClassName('validation-failed');
+          return;
+        } else {
+          $('transMoveInDate').removeClassName('validation-failed');
+        }
         $('SC_date').value = startDate;
         $('moveInDate').value = startDate;
         $('transMoveInDate').update(startDate);

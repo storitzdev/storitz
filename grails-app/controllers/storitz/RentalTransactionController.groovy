@@ -170,9 +170,8 @@ class RentalTransactionController {
         return
       }
 
-      println("Transaction move in payment date is ${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}")
       def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
-      
+
       [rentalTransactionInstance: rentalTransactionInstance,
               title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state} ${rentalTransactionInstance.site.zipcode}",
               site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails,
@@ -202,7 +201,7 @@ class RentalTransactionController {
       }
 
       if (rentalTransactionInstance.status != TransactionStatus.BEGUN) {
-        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance])
+        render(view:"paid", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site])
         return
       }
 
@@ -264,7 +263,7 @@ class RentalTransactionController {
       // TODO - compare calculated cost to our cost
       rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, true)
       rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
-      rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate)
+      rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, false)
 
       def s = new AuthorizeNet()
       s.authorizeAndCapture {
@@ -406,4 +405,11 @@ class RentalTransactionController {
             redirect(action: "list")
         }
     }
+
+  def processReservations = {
+      storitz.ReservationMoveInJob.triggerNow([from:'Admin', target:params.target]);
+      flash.message = "Processed reservations with target date of ${params.target}"
+      redirect(controller:"admin", action:"index")
+  }
+
 }

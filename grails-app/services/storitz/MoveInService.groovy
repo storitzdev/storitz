@@ -50,7 +50,11 @@ class MoveInService {
 
         case "CS3":
           CShiftService.createTenant(trans)
-          return CShiftService.moveIn(trans)
+          def today = new Date()
+          if(trans.moveInDate - today <= 1) {
+            return CShiftService.moveIn(trans)
+          }
+          return CShiftService.reserve(trans)
           break
 
         case "CS4":

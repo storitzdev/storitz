@@ -957,7 +957,7 @@ class SiteLinkService {
     return ret["moveInTotal"]
   }
 
-  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate) {
+  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
     // TODO - handle anniversary date sites (most are first of the month)
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
 

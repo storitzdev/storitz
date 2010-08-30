@@ -114,6 +114,12 @@
                     <td>${rentalTransactionInstance.idNumber}</td>
                   </tr>
                 </g:if>
+                <g:elseif test="${rentalTransactionInstance.reserved}">
+                  <tr>
+                    <td style="width:200px;">Transaction #:</td>
+                    <td>R${rentalTransactionInstance.reservationId}</td>
+                  </tr>
+                </g:elseif>
                 <tr>
                   <td style="width:200px;">Name:</td>
                   <td>${rentalTransactionInstance.billingAddress.fullName()}</td>
