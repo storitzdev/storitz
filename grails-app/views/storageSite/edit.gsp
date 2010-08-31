@@ -809,6 +809,20 @@
             <div style="clear:both;"></div>
           </div>
 
+            <div class="checkout_section_header">
+              Disable Site
+            </div>
+            <div class="formInstructions">
+              Check this box if you want the site disabled from listings.
+            </div>
+
+            <div class="checkout_fields">
+              <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'disabled', 'errors')}">
+                <g:checkBox name="disabled" value="${storageSiteInstance?.disabled}"/>&nbsp;Disabled
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
           </sec:ifAnyGranted>
 
           <div class="checkout_section_header">

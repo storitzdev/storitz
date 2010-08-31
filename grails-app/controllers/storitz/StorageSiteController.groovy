@@ -427,6 +427,12 @@ class StorageSiteController {
       rentalTransactionInstance = RentalTransaction.get(params.rentalTransactionId as Long)
     }
     StorageSite site = StorageSite.get(params.id)
+
+    if (site.disabled) {
+      redirect(controller:"home", action:"index")
+      return;
+    }
+
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     
     //////////////////////////////////////////
