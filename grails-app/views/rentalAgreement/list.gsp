@@ -45,7 +45,7 @@
 
             <g:sortableColumn property="title" title="${message(code: 'rentalAgreement.title.label', default: 'Agreement')}"/>
 
-            <g:sortableColumn property="owner" title="${message(code: 'rentalAgreement.owner.label', default: 'Owner')}"/>
+            <g:sortableColumn property="owner" title="${message(code: 'rentalAgreement.agreementOwner.label', default: 'Owner')}"/>
 
             <g:sortableColumn property="file" title="${message(code: 'rentalAgreement.file.label', default: 'PDF')}"/>
 
@@ -59,7 +59,7 @@
 
               <td>${fieldValue(bean: rentalAgreementInstance, field: "title")}</td>
 
-              <td>${rentalAgreementInstance?.owner?.username}</td>
+              <td>${rentalAgreementInstance?.agreementOwner?.username}</td>
 
               <td><a href="${resource(file:rentalAgreementInstance.src())}" target="_blank"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"/></a> </td>
 

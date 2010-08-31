@@ -58,7 +58,7 @@
           <td valign="top" class="name"><g:message code="rentalAgreement.owner.label" default="Owner/Manager"/></td>
 
           <td valign="top" style="text-align: left;" class="value">
-            ${rentalAgreementInstance?.owner?.username}
+            ${rentalAgreementInstance?.agreementOwner?.username}
           </td>
 
         </tr>

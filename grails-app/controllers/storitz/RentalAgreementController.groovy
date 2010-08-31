@@ -48,16 +48,16 @@ class RentalAgreementController {
           def user = params.manager.id != 'null' ? User.get(params.manager.id as Long) : null
 
           if (user) {
-            rentalAgreementInstance.owner = user
+            rentalAgreementInstance.agreementOwner = user
           } else {
-            flash.message = "Unable to assign owner to selected user"
+            flash.message = "Unable to assign agreementOwner to selected user"
             render(view: "create", model: [rentalAgreementInstance: rentalAgreementInstance])
             return
           }
         } else {
-          rentalAgreementInstance.owner = session["user"]
+          rentalAgreementInstance.agreementOwner = session["user"]
         }
-        def userId = rentalAgreementInstance.owner.id
+        def userId = rentalAgreementInstance.agreementOwner.id
         def pdfFile = request.getFile("pdfFile_0")
         if (pdfFile.size > 0 && fileUploadService.moveFile(pdfFile, '/pdfs/agreements', pdfFile.originalFilename, userId)) {
           rentalAgreementInstance.fileLocation = pdfFile.originalFilename
@@ -116,14 +116,14 @@ class RentalAgreementController {
             def user = params.manager.id != 'null' ? User.get(params.manager.id as Long) : null
 
             if (user) {
-              rentalAgreementInstance.owner = user
+              rentalAgreementInstance.agreementOwner = user
             } else {
-              flash.message = "Unable to assign owner to selected user"
+              flash.message = "Unable to assign agreementOwner to selected user"
               render(view: "edit", model: [rentalAgreementInstance: rentalAgreementInstance])
               return
             }
           } else {
-            rentalAgreementInstance.owner = session["user"]
+            rentalAgreementInstance.agreementOwner = session["user"]
           }
           if (!rentalAgreementInstance.hasErrors() && rentalAgreementInstance.save(flush: true)) {
               flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rentalAgreement.label', default: 'RentalAgreement'), rentalAgreementInstance.id])}"
@@ -143,7 +143,7 @@ class RentalAgreementController {
         def rentalAgreementInstance = RentalAgreement.get(params.id)
         if (rentalAgreementInstance) {
 
-          def file = new File(fileUploadService.getFilePath('/pdfs/agreements', rentalAgreementInstance.fileLocation, rentalAgreementInstance.owner.id))
+          def file = new File(fileUploadService.getFilePath('/pdfs/agreements', rentalAgreementInstance.fileLocation, rentalAgreementInstance.agreementOwner.id))
           file.delete()
           try {
               rentalAgreementInstance.delete(flush: true)

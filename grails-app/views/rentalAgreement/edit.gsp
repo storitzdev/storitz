@@ -92,7 +92,7 @@
 
         <div class="checkout_fields">
           <div style="width:250px;" class="checkout_value ${hasErrors(bean: rentalAgreementInstance, field: 'manager', 'errors')}">
-            <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${rentalAgreementInstance.owner?.id}" noSelection="['null': '']"/>
+            <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${rentalAgreementInstance.agreementOwner?.id}" noSelection="['null': '']"/>
           </div>
           <div style="clear:both;"></div>
         </div>

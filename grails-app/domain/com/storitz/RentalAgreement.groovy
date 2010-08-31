@@ -2,14 +2,14 @@ package com.storitz
 
 class RentalAgreement {
 
-    User owner
+    User agreementOwner
     String title
     String fileLocation
     String basename
 
     static constraints = {
       title(nullable:false)
-      owner(nullable:true)
+      agreementOwner(nullable:true)
       fileLocation(nullable:true)
       basename(nullable:true)
     }
