@@ -12,14 +12,14 @@ hibernate {
 }
 // environment specific settings
 environments {
-  development {
+  xdevelopment {
     dataSource {
       dbCreate = "create-drop" // one of 'create', 'create-drop','update'
       url = "jdbc:hsqldb:mem:devDB"
       //loggingSql = true
     }
   }
-  xdevelopment {
+  development {
     dataSource {
       dbCreate = "update" // one of 'create', 'create-drop','update'
       url = "jdbc:hsqldb:file:devDB"
