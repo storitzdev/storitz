@@ -78,7 +78,7 @@
             <td class="costMoney" id="discountTotal"></td>
           </tr>
           <tr id="insuranceBlock">
-            <td>Insurance</td>
+            <td>Property Protection</td>
             <td class="costDuration" id="insuranceDuration"></td>
             <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
             <td class="costMoney" id="insuranceTotal"></td>
