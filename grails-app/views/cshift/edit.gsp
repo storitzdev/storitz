@@ -80,7 +80,7 @@
           <g:textField name="pin" style="width:180px;" value="${cshiftInstance?.pin}"/>
         </div>
         <div style="width:200px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'location', 'errors')}">
-          <g:select id="location" style="width:200px;" name="location" from="${storitz.constants.CenterShiftLocation?.list()}" value="${cshiftInstance?.location}" optionValue="display"  />
+          <g:select id="location" style="width:200px;" name="location" from="${storitz.constants.CenterShiftLocations?.list()}" value="${cshiftInstance?.location}" optionValue="display"  />
         </div>
         <div style="clear:both;"></div>
       </div>

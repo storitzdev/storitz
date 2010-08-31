@@ -117,11 +117,11 @@
     <div style="height: 10px;clear:both;width: 626px; border-bottom:1px solid #dfdfdf;margin: 0 0 10px -3px;"></div>
     <div class="left">
       <div class="specialOfferText" style="width:400px;">
-        Insurance: <span id="selectedInsurance" class="selectedOffer"></span>
+        Property Protection: <span id="selectedInsurance" class="selectedOffer"></span>
       </div>
       <div>
-        <div id="moreInsurance" class="offerLink left" style="margin-left:5px;">
-          <a href="#" onclick="Effect.toggle('moreInsurance', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('fewerInsurance', 'appear', {queue:'end', duration: 0.1}); Effect.BlindDown('insurances'); return false;">Show Insurance</a>
+        <div id="moreInsurance" class="offerLink left">
+          <a href="#" onclick="Effect.toggle('moreInsurance', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('fewerInsurance', 'appear', {queue:'end', duration: 0.1}); Effect.BlindDown('insurances'); return false;">Show Property Protection</a>
         </div>
         <div id="fewerInsurance" class="offerLink left" style="margin-left:25px;display:none;width:40px;">
           <a href="#" onclick="Effect.BlindUp('insurances'); Effect.toggle('fewerInsurance', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('moreInsurance', 'appear', {queue:'end', duration: 0.1});return false;">Hide</a>

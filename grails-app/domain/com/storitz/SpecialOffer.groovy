@@ -7,7 +7,6 @@ class SpecialOffer {
 
   static belongsTo = StorageSite
 
-  // TODO - make this work for demo
   static constraints = {
     code(nullable: true)
     concessionId(nullable: true)

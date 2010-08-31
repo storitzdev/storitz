@@ -1,7 +1,5 @@
 package com.storitz
 
-import org.apache.commons.lang.builder.HashCodeBuilder
-
 class NotificationType {
 
     String notificationType

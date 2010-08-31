@@ -1,6 +1,6 @@
 package com.storitz
 
-import storitz.constants.CenterShiftLocation
+import storitz.constants.CenterShiftLocations
 
 class CenterShift {
 
@@ -16,6 +16,6 @@ class CenterShift {
   User manager
   String userName
   String pin
-  CenterShiftLocation location = CenterShiftLocation.SLC
+  CenterShiftLocations location = CenterShiftLocations.SLC
   String cshiftVersion
 }

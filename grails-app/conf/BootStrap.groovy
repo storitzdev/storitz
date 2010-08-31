@@ -3,6 +3,7 @@ import com.storitz.User
 import com.storitz.Role
 import com.storitz.UserRole
 import com.storitz.NotificationType
+import com.storitz.StorageSite
 
 class BootStrap {
 
@@ -78,6 +79,8 @@ class BootStrap {
          new StorageSize( description:'10 x 25', width: 10, length: 25).save();
          new StorageSize( description:'10 x 30', width: 10, length: 30).save();
        }
+
+       StorageSite.executeUpdate("update StorageSite s set s.disabled = false where s.disabled = null")
      }
 
      def destroy = {
