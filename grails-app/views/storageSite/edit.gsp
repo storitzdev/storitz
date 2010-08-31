@@ -820,7 +820,7 @@
               <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'disabled', 'errors')}">
                 <g:checkBox name="disabled" value="${storageSiteInstance?.disabled}"/>&nbsp;Disabled
               </div>
-              <div style="clear:both;"></div>
+              <div style="clear:both;height: 15px;"></div>
             </div>
 
           </sec:ifAnyGranted>
