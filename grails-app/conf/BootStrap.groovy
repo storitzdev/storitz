@@ -81,6 +81,7 @@ class BootStrap {
        }
 
        StorageSite.executeUpdate("update StorageSite s set s.disabled = false where s.disabled is null")
+       StorageSite.executeUpdate("update StorageSite s set s.noInsuranceWaiver = false where s.noInsuranceWaiver is null")
        StorageSite.executeUpdate("update StorageSite s set s.deposit = 0 where s.deposit is null")
      }
 
