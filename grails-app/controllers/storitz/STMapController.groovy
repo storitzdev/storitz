@@ -23,6 +23,7 @@ class STMapController {
         and {
           between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
           between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
+          eq("disabled", false)
         }
         if (params.searchSize && params.int('searchSize') != 1) {
           fetchMode('units', FetchMode.EAGER)
@@ -46,6 +47,7 @@ class STMapController {
         and {
           between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
           between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
+          eq("disabled", false)
         }
         if (params.searchSize && params.int('searchSize') != 1) {
           fetchMode('units', FetchMode.EAGER)

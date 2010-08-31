@@ -128,6 +128,7 @@ class StorageSite {
     SiteLink siteLink
     CenterShift centerShift
     Long lastUpdate
+    Boolean disabled = false
 
   // bank account
     BankAccount bankAccount

@@ -758,7 +758,7 @@ class CShiftService {
       def feedUnitId = unitId[0] as Long
       def feedUnitNumber = unitNumber[0]
 
-      def moveInDetails = getCostDetails(site.centerShift.userName, site.centerShift.pin, site.sourceId, feedUnitId, "-1")
+      def moveInDetails = getCostDetails(site.centerShift.userName, site.centerShift.pin, site.sourceId, site.centerShift.location.kioskUrl, feedUnitId, "-1")
 
       def depositLine = moveInDetails.items.find{ it.description =~ /(?i).*deposit.*/ }
       if (depositLine) {
