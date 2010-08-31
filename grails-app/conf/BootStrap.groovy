@@ -80,8 +80,8 @@ class BootStrap {
          new StorageSize( description:'10 x 30', width: 10, length: 30).save();
        }
 
-       StorageSite.executeUpdate("update StorageSite s set s.disabled = false where s.disabled = :param", null)
-       StorageSite.executeUpdate("update StorageSite s set s.deposit = 0 where s.deposit = :param", null)
+       StorageSite.executeUpdate("update StorageSite s set s.disabled = false where s.disabled is null")
+       StorageSite.executeUpdate("update StorageSite s set s.deposit = 0 where s.deposit is null")
      }
 
      def destroy = {
