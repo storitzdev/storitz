@@ -1083,7 +1083,7 @@ class CShiftService {
     moveInDetails.paymentString = (end[itemLength] as String)
 
     for(i in 0..itemLength - 1) {
-      moveInDetails.items.add(new LineItem(description:desc[i], tax:tax[i] as BigDecimal, amount: price[i] as BigDecimal))
+      moveInDetails.items.add(new LineItem(description:desc[i], tax:(tax[i] ? tax[i] : 0) as BigDecimal, amount: (price[i] ? price[i] : 0) as BigDecimal))
     }
 
     return moveInDetails
