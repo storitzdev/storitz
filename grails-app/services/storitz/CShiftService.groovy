@@ -59,7 +59,7 @@ class CShiftService {
     postAction(url, payload, 'GetSiteAddress')
   }
 
-  def getSiteHours(userName, pin, siteId) {
+  def getSiteHours(url, userName, pin, siteId) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
