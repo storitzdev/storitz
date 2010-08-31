@@ -75,7 +75,7 @@ class StorageSiteController {
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       results = StorageSite.findAllByTitleLike(params.term + '%', params).collect{it.title}
     } else {
-      results = SiteUser.findAllByUser(user).collect{ it.site }.find{ it.title ==~ /(?i).*${params.term}.*/ }.sort{ it.title }
+      results = SiteUser.findAllByUser(user).collect{ it.site }.findAll{ it.title ==~ /(?i).*${params.term}.*/ }.collect{it.title}.sort()
     }
     render (status: 200, contentType:"application/json", text: results as JSON )
   }
