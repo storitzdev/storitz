@@ -5,16 +5,16 @@
 <g:each in="${siteList}" var="${site}">
   <url>
      <loc><g:createLink absolute="true" controller="storageSite" action="kml" id="${site.id}" /></loc>
-     &lt;geo:geo>
-         &lt;geo:format>kml&lt/geo:format>
-     &lt;/geo:geo>
+     <geo:geo>
+         <geo:format>kml</geo:format>
+     </geo:geo>
   </url>
   <url>
       <loc><g:createLink absolute="true" controller="storageSite" action="detail" id="${site.id}" /></loc>
-      &lt;image:image>
-         &lt;image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/>&lt;/image:loc>
-         &lt;image:title>${site.title.encodeAsXML()}&lt;/image:title>
-      &lt;/image:image>
+      <image:image>
+         <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
+         <image:title>${site.title.encodeAsXML()}</image:title>
+      </image:image>
       <changefreq>weekly</changefreq>
   </url>
 </g:each>
