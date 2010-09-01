@@ -36,7 +36,7 @@
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left specialOfferText">
-      Selected Offer: <span id="selectedOffer" class="selectedOffer"></span>
+      Selected Offer: <span id="selectedOffer" class="selectedOffer"></span><span
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left">
@@ -44,10 +44,10 @@
         Featured Offers
       </div>
       <div id="moreOffers" class="offerLink right">
-        <a href="#" onclick="Effect.toggle('moreOffers', 'appear', {queue: 'end', duration: 0.1});Effect.BlindDown('nonFeaturedOffers'); Effect.toggle('fewerOffers', 'appear', {queue:'end', duration: 0.1});return false;">More Offers</a>
+        <span>More Offers</span>
       </div>
       <div id="fewerOffers" class="offerLink right" style="display:none;">
-        <a href="#" onclick="Effect.toggle('fewerOffers', 'appear', {queue: 'end', duration: 0.1});Effect.BlindUp('nonFeaturedOffers'); Effect.toggle('moreOffers', 'appear', {queue:'end', duration: 0.1});return false;">Fewer Offers</a>
+        <span>Fewer Offers</span>
       </div>
     </div>
     <div id="specialOffers" class="left offerList" style="margin-left: 10px;">
@@ -109,7 +109,7 @@
           Total Move-In Cost:
         </div>
         <div class="left">
-          <a href="#" id="totalMoveInCost" onclick="Effect.toggle('costDetails', 'appear', { duration: 0.25 }); return false;"></a>
+          <span id="totalMoveInCost"></span>
         </div>
       </div>
       <div style="clear:both;"></div>
@@ -121,10 +121,10 @@
       </div>
       <div>
         <div id="moreInsurance" class="offerLink left">
-          <a href="#" onclick="Effect.toggle('moreInsurance', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('fewerInsurance', 'appear', {queue:'end', duration: 0.1}); Effect.BlindDown('insurances'); return false;">Show Property Protection</a>
+          <span>Show Property Protection</span>
         </div>
         <div id="fewerInsurance" class="offerLink left" style="margin-left:25px;display:none;width:40px;">
-          <a href="#" onclick="Effect.BlindUp('insurances'); Effect.toggle('fewerInsurance', 'appear', {queue: 'end', duration: 0.1}); Effect.toggle('moreInsurance', 'appear', {queue:'end', duration: 0.1});return false;">Hide</a>
+          <span>Hide</span>
         </div>
       </div>
       <div id="insurances" class="left offerList" style="display:none;margin-left: 10px;width: 325px;">

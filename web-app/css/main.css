@@ -1022,10 +1022,15 @@ p.footer {
     font-weight: bold;
 }
 
-.transTotalMoveIn, .transTotalMoveIn a {
+.transTotalMoveIn  {
     color: #134a9a;
     font: 13px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+}
+
+.transTotalMoveIn span {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .descriptionTitle {
@@ -1047,9 +1052,11 @@ p.descriptionText {
     margin-top: 7px;
 }
 
-.offerLink a {
+.offerLink span {
     color: #3bad00;
     font: 11px verdana, arial, helvetica, sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .offerList p {

@@ -127,6 +127,34 @@ function transactionFormSetup() {
     showTotals();
   });
 
+  $('moreOffers').observe('click', function() {
+      Effect.toggle('moreOffers', 'appear', {queue: 'end', duration: 0.1});
+      Effect.BlindDown('nonFeaturedOffers');
+      Effect.toggle('fewerOffers', 'appear', {queue:'end', duration: 0.1});
+  });
+
+  $('fewerOffers').observe('click', function() {
+      Effect.toggle('fewerOffers', 'appear', {queue: 'end', duration: 0.1});
+      Effect.BlindUp('nonFeaturedOffers');
+      Effect.toggle('moreOffers', 'appear', {queue:'end', duration: 0.1});
+  });
+
+  $('moreInsurance').observe('click', function() {
+      Effect.toggle('moreInsurance', 'appear', {queue: 'end', duration: 0.1});
+      Effect.toggle('fewerInsurance', 'appear', {queue:'end', duration: 0.1});
+      Effect.BlindDown('insurances');
+  });
+
+  $('fewerInsurance').observe('click', function() {
+      Effect.BlindUp('insurances');
+      Effect.toggle('fewerInsurance', 'appear', {queue: 'end', duration: 0.1});
+      Effect.toggle('moreInsurance', 'appear', {queue:'end', duration: 0.1});
+  });
+
+  $('totalMoveInCost').observe('click', function() {
+      Effect.toggle('costDetails', 'appear', { duration: 0.25 });
+  });
+
   $('unitsize').observe('change', function() {
     searchSize = $F('unitsize');
     $('SC_searchSize').value = searchSize;
