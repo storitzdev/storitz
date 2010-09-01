@@ -32,7 +32,7 @@ grails.enable.native2ascii = true
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://www.storitz.com/"
+        grails.serverURL = "http://www.storitz.com"
         security.httpsPort = 443
     }
     development {
