@@ -128,7 +128,7 @@
         </div>
       </div>
       <div id="insurances" class="left offerList" style="display:none;margin-left: 10px;width: 325px;">
-        <g:if test="${site.noInsuranceWaiver}">
+        <g:if test="${!site.noInsuranceWaiver}">
           <p><input type="radio" name="insuranceId" value="-999" ${ (insuranceId as Integer) < 0 ? 'checked="checked"' : '' } /> Waive insurance - use my renters/home policy coverage</p>
         </g:if>
         <g:each in="${site.insurances.sort{it.premium}}" var="ins" status="i">
