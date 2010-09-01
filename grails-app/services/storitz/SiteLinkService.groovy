@@ -26,6 +26,7 @@ class SiteLinkService {
 
   def geocodeService
   def unitSizeService
+  def emailService
 
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
   def siteLinkWsUrl35 = "https://www.smdservers.net/CCWs_3.5/CallCenterWs.asmx"
@@ -339,7 +340,8 @@ class SiteLinkService {
     postAction(payload, 'TenantNewDetailed')
   }
 
-  def doMoveIn(RentalTransaction rentalTransaction) {
+  def getMoveInPayload(RentalTransaction rentalTransaction) {
+
     def concessionId = rentalTransaction.promoId as Long
     if (concessionId != -999) {
       SpecialOffer specialOffer = SpecialOffer.get(rentalTransaction.promoId as Long)
@@ -379,6 +381,13 @@ class SiteLinkService {
       </cal:MoveInWithDiscount>
    </soapenv:Body>
 </soapenv:Envelope>"""
+
+    return payload
+  }
+
+  def doMoveIn(RentalTransaction rentalTransaction) {
+
+    def payload = getMoveInPayload(rentalTransaction)
 
     println "MoveInWithDiscount: ${payload}"
 
@@ -967,8 +976,26 @@ class SiteLinkService {
     if (moveInResult > 3) {
       rentalTransaction.idNumber = moveInResult
       rentalTransaction.save(flush:true)
+    } else {
+      def body = getMoveInPayload(rentalTransaction)
+      moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
+      rentalTransaction.idNumber = moveInResult
+      rentalTransaction.save(flush:true)
+
+      try {
+        emailService.sendTextEmail(
+                to: "notifications@storitz.com",
+                from: "no-reply@storitz.com",
+                subject: "SITELINK - failed move-in",
+                body: body)
+
+        } catch (Exception e) {
+            log.error("${e}", e)
+        }
     }
-    return moveInResult > 3
+
+    // TODO - fix when Sitelink corrects issue
+    return true
   }
 
   def postMoveInCredit(RentalTransaction rentalTransaction) {
