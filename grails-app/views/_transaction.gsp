@@ -117,7 +117,7 @@
     <div style="height: 10px;clear:both;width: 626px; border-bottom:1px solid #dfdfdf;margin: 0 0 10px -3px;"></div>
     <div class="left">
       <div class="specialOfferText" style="width:400px;">
-        Property Protection: <span id="selectedInsurance" class="selectedOffer"></span>
+        <div>Property</div> Protection: <span id="selectedInsurance" class="selectedOffer"></span>
       </div>
       <div>
         <div id="moreInsurance" class="offerLink left">

@@ -221,7 +221,7 @@
                     <div style="height: 10px;clear:both;width: 626px; border-bottom:1px solid #dfdfdf;margin: 0 0 10px -3px;"></div>
                     <div class="left">
                       <div class="specialOfferText" style="width:400px;">
-                        Property Protection: <span id="selectedInsurance" class="selectedOffer">
+                        <div>Property</div> Protection: <span id="selectedInsurance" class="selectedOffer">
                           <g:if test="${ins}"> 
                             <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" />
                           </g:if>
