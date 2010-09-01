@@ -643,4 +643,9 @@ class StorageSiteController {
       redirect(controller:"admin", action:"index")
   }
 
+  def kml = {
+    def site = StorageSite.get(params.id)
+    [site:site]
+  }
+
 }
