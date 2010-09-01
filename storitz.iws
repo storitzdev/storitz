@@ -20,7 +20,6 @@
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/siteMap/sitemap.gsp" afterPath="$PROJECT_DIR$/grails-app/views/siteMap/sitemap.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/kml.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/kml.gsp" />
     </list>
     <list id="bdf1a25a-b9ec-40ba-9be8-d6bbb8c0a2d2" name="Rejected commit: Default" comment="findAll not find" />
     <ignored path="$USER_HOME_GRAILS$/" />
@@ -135,7 +134,7 @@
       <file leaf-file-name="sitemap.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/siteMap/sitemap.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="47" selection-start="812" selection-end="812" vertical-scroll-proportion="0.63432837">
+            <state line="14" column="115" selection-start="763" selection-end="763" vertical-scroll-proportion="0.6149871">
               <folding />
             </state>
           </provider>
@@ -1285,7 +1284,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/siteMap/sitemap.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="47" selection-start="812" selection-end="812" vertical-scroll-proportion="0.63432837">
+        <state line="14" column="115" selection-start="763" selection-end="763" vertical-scroll-proportion="0.6149871">
           <folding />
         </state>
       </provider>
