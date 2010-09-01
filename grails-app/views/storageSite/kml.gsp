@@ -14,7 +14,7 @@
     </Pair>
   </StyleMap>
   <Placemark>
-    <name>${site.title.encodeAsHtml()}</name>
+    <name>${site.title.encodeAsHTML()}</name>
     <styleUrl>#exampleStyleMap</styleUrl>
     <Point>
       <coordinates>${site.lat},${site.lng},0</coordinates>

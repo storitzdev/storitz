@@ -13,7 +13,7 @@
       <loc><g:createLink absolute="true" controller="storageSite" action="detail" id="${site.id}" /></loc>
       <image:image>
          <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
-         <image:title>${site.title.encodeAsHtml()}</image:title>
+         <image:title>${site.title.encodeAsHTML()}</image:title>
       </image:image>
       <changefreq>weekly</changefreq>
   </url>
