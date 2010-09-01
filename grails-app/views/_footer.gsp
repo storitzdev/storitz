@@ -28,7 +28,7 @@
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
       <div style="margin: 2em 1em 2.5em 1em;">
-        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=QoVAUrljyyuT8APktZx8vpTvuwdcusK1rt8fI8EFYfFvpl9nRLc"></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.godaddy.com/email/hosted-exchange.aspx" target="_blank">Hosted Exchange</a></span>
+        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=QoVAUrljyyuT8APktZx8vpTvuwdcusK1rt8fI8EFYfFvpl9nRLc"></script><br/></span>
       </div>
       <div style="margin: 2.5em 1em;">
         <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript" language="javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="http://www.authorize.net/" id="AuthorizeNetText" target="_blank">Online Payments</a> </div>
