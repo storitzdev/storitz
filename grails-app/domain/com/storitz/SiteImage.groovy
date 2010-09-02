@@ -16,14 +16,14 @@ class SiteImage {
   String basename
 
   def thumbnail() {
-    return basename + "thumb_" + fileLocation.replace(" ", "%20").encodeAsURL()
+    return basename + "thumb_" + fileLocation.encodeAsURL().replace("+", "%20")
   }
 
   def mid() {
-    return basename + "mid_" + fileLocation.replace(" ", "%20").encodeAsURL()
+    return basename + "mid_" + fileLocation.encodeAsURL().replace("+", "%20")
   }
 
   def src() {
-    return basename +  fileLocation.replace(" ", "%20").encodeAsURL()
+    return basename +  fileLocation.encodeAsURL().replace("+", "%20")
   }
 }
