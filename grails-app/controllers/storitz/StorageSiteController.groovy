@@ -252,11 +252,11 @@ class StorageSiteController {
       
       params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
         def imgFile = request.getFile(img.key)
-        if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename, siteId)) {
-          def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename, siteId)
-          def filePath = fileUploadService.getFilePath('/images/site', imgFile.originalFilename, siteId)
-          def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + imgFile.originalFilename, siteId)
-          def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + imgFile.originalFilename, siteId)
+        if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)) {
+          def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
+          def filePath = fileUploadService.getFilePath('/images/site', imgFile.originalFilename.encodeAsURL(), siteId)
+          def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + imgFile.originalFilename.encodeAsURL(), siteId)
+          def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + imgFile.originalFilename.encodeAsURL(), siteId)
           def imageTool = new ImageTool()
           imageTool.load(tmpPath)
           imageTool.saveOriginal()

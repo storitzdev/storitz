@@ -5,14 +5,7 @@
   <script src="http://www.google.com/jsapi" type="text/javascript"></script>
   <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
 
-  <g:javascript src="prototype.js" />
-  %{--<g:javascript src="scriptaculous/scriptaculous.js" />--}%
-  <script type="text/javascript">
-//<![CDATA[
-//    google.load("prototype", "1.6.3.0");
-    google.load("scriptaculous", "1.8.3");
-//]]>
-  </script>
+  <g:javascript src="scriptaculous183.js" />
 
   <g:javascript src="fastinit.js" />
   <g:javascript src="tablekit.js" />

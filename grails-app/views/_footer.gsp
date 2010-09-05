@@ -31,10 +31,10 @@
         <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=QoVAUrljyyuT8APktZx8vpTvuwdcusK1rt8fI8EFYfFvpl9nRLc"></script><br/></span>
       </div>
       <div style="margin: 2.5em 1em;">
-        <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript" language="javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="http://www.authorize.net/" id="AuthorizeNetText" target="_blank">Online Payments</a> </div>
+        <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="http://www.authorize.net/" id="AuthorizeNetText" onclick="window.open(this.href,'_blank');return false;">Online Payments</a> </div>
       </div>
       <div style="margin: 2.5em 1em;">
-        <a href="http://www.selfstorage.org/" target="_blank"><img style="border:none;" src="${resource(dir:'images', file:'logo-ssa.png')}" alt="SSA Logo"/></a>
+        <a href="http://www.selfstorage.org/" onclick="window.open(this.href,'_blank');return false;"><img style="border:none;" src="${resource(dir:'images', file:'logo-ssa.png')}" alt="SSA Logo"/></a>
       </div>
     </div>
   </div>

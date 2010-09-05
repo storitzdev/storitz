@@ -4,7 +4,7 @@
       <div class="transHeader">Unit Type</div>
       <div>
         <select id="unitType" name="unitType" class="transDropdown">
-          
+          <option value=""/>
         </select>
       </div>
     </div>
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="right" style="margin-top:5px;">
-      <g:if test="${params.action != 'payment'}"> 
+      <g:if test="${params.action != 'payment'}">
         <input type="image" id="rentme" style="border:none;cursor:pointer;" src="${createLinkTo(dir:'images', file:'btn-rent-me.png')}" alt="Rent Me"/>
       </g:if>
       <g:else>
@@ -36,7 +36,7 @@
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left specialOfferText">
-      Selected Offer: <span id="selectedOffer" class="selectedOffer"></span><span
+      Selected Offer: <span id="selectedOffer" class="selectedOffer"></span>
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left">
@@ -139,7 +139,7 @@
     <div class="right">
       <input type="hidden" id="date" name="date" />
       <div class="left">
-        <img id="calendarPic" style="cursor: pointer;" src="${resource(dir:'images', file:'icn-calendar.png')}" alt="calendar">
+        <img id="calendarPic" style="cursor: pointer;" src="${resource(dir:'images', file:'icn-calendar.png')}" alt="calendar" />
       </div>
       <div class="left">
         <div class="transDateHeader left">

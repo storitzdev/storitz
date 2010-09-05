@@ -8,10 +8,6 @@
     <g:render template="/header" />
 
     <script type="text/javascript">
-//<![CDATA[
-    google.load("prototype", "1.6.1.0");
-    google.load("scriptaculous", "1.8.3");
-//]]>
 
     FastInit.addOnLoad(setupAutocomplete);
   </script>

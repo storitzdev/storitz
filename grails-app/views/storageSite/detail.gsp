@@ -15,7 +15,7 @@
     var ajaxServerPollTimer;
     var ajaxFormUpdateTimer;
     var ajaxFormNewValues;
-    var ajaxFormOldValues = new Hash().toJSON();
+    var ajaxFormOldValues;
     var activeTab;
     var allTabs;
 
@@ -321,7 +321,7 @@
 
 //]]>
   </script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&amp;sensor=false&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
 
   </head>
   <body>
@@ -437,8 +437,9 @@
           </div>
 
           <div id="rentalForm" style="display: none;">
-            <g:form action="save" controller="rentalTransaction" name="rentalTransaction" method="post" useToken="true" id="${rentalTransactionInstance?.id}">
-              
+            <g:form action="save" controller="rentalTransaction" method="post" useToken="true" id="${rentalTransactionInstance?.id}">
+
+              <div>
               <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance ? rentalTransactionInstance.unitId : unitId}" />
               <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}" />
               <input type="hidden" name="insuranceId" id="insuranceId" value="${rentalTransactionInstance?.insuranceId}" />
@@ -451,6 +452,7 @@
               <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
               <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
               <input style="display:none" type="text" name="SC_page" id="SC_page" value="detail"/>
+              </div>
 
               <div class="vert_text">
                 <span id="step1_bullet" class="bullet">&#8226;</span><span id="step1" class="step_header_hi">Primary Contact</span>
@@ -465,7 +467,7 @@
                   Contact Information
                 </div>
                 <div class="formInstructions">
-                  Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our <a href="${createLink(controller:'static', action:'privacy')}" target="_new">Privacy Policy</a>
+                  Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our <a href="${createLink(controller:'static', action:'privacy')}" onclick="window.open(this.href,'_blank');return false;">Privacy Policy</a>
                 </div>
                 <div class="checkout_section_header">
                   Name
@@ -585,8 +587,8 @@
                   <div style="clear:both;"></div>
                 </div>
                 <div style="margin-top: 20px;">
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="leave_form(); return false" alt="Back"></div>
-                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next"></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="leave_form(); return false" alt="Back" /></div>
+                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next" /></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
@@ -679,9 +681,9 @@
                 <div class="checkout_fields">
                   <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
                       <div class="left">
-                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" target="_new">Terms of Use</a>
+                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" onclick="window.open(this.href,'_blank');return false;">Terms of Use</a>
                           <g:if test="${site.rentalAgreement}">
-                            and the <a href="${resource(file:site.rentalAgreement.src())}" target="_blank">Storage Rental Agreement</a>
+                            and the <a href="${resource(file:site.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;">Storage Rental Agreement</a>
                           </g:if>
                       </div>
                       <div style="clear:both;"></div>
@@ -718,8 +720,8 @@
                   </div>
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
-                  <div class="right" style="margin-left:20px;"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next"></div>
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev"></div>
+                  <div class="right" style="margin-left:20px;"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next" /></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev" /></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>

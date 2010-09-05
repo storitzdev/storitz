@@ -386,7 +386,7 @@
             <td valign="top" class="name">${storageSiteInstance?.rentalAgreement?.title}</td>
 
             <td valign="top" style="text-align: left;" class="value">
-              <a href="${resource(file:storageSiteInstance?.rentalAgreement.src())}" target="_blank"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"></a>
+              <a href="${resource(file:storageSiteInstance?.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"></a>
             </td>
 
           </tr>
@@ -449,7 +449,7 @@
         <span class="button"><g:actionSubmit action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}" /></span>
         <span class="button"><g:actionSubmit action="units" value="${message(code: 'default.button.refresh.label', default: 'Reload Available Units')}" /></span>
         <span class="button"><g:actionSubmit action="report" value="${message(code: 'default.button.report.label', default: 'Activity Report')}" /></span>
-        <span class="button"><a href="${createLink(action:"detail", params:[id:storageSiteInstance?.id])}" target="_blank">User View</a></span>
+        <span class="button"><a href="${createLink(action:"detail", params:[id:storageSiteInstance?.id])}" onclick="window.open(this.href,'_blank');return false;">User View</a></span>
       </g:form>
     </div>
   </div>

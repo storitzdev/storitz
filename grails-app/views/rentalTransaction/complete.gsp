@@ -160,7 +160,7 @@
             <div style="height: 30px;"></div>
             <g:if test="${site.rentalAgreement}">
               <p>
-                Before move-in, please review and print out a copy of your <a href="${resource(file:site.rentalAgreement.src())}" target="_blank">lease agreement</a>.
+                Before move-in, please review and print out a copy of your <a href="${resource(file:site.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;">lease agreement</a>.
               </p>
             </g:if>
             <p>

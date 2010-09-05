@@ -61,7 +61,7 @@
 
               <td>${rentalAgreementInstance?.agreementOwner?.username}</td>
 
-              <td><a href="${resource(file:rentalAgreementInstance.src())}" target="_blank"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"/></a> </td>
+              <td><a href="${resource(file:rentalAgreementInstance.src())}" onclick="window.open(this.href,'_blank');return false;"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"/></a> </td>
 
             </tr>
           </g:each>

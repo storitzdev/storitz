@@ -1,4 +1,3 @@
-<div id="directions">
   <div class="right" style="display:none;margin: -30px 10px 0 0;" id="printThisTop">
     <a href="#" onclick="window.print(); return false;">print</a>
   </div>
@@ -33,7 +32,7 @@
     <div id="directionsWarnings" class="directionsWarnings"></div>
     <div class="transBox">
       <div class="left" style="margin:5px 15px;">
-        <img src="${resource(dir:'images', file:'icn_map_blue.png')}" alt="Start">
+        <img src="${resource(dir:'images', file:'icn_map_blue.png')}" alt="Start" />
       </div>
       <div id="directionsStartAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
       <div style="clear:both;"></div>
@@ -42,7 +41,7 @@
     </table>
     <div class="transBox">
       <div class="left" style="margin:5px 15px;">
-        <img src="${resource(dir:'images', file:'icn_map_grn.png')}" alt="End">
+        <img src="${resource(dir:'images', file:'icn_map_grn.png')}" alt="End" />
       </div>
       <div id="directionsEndAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
       <div style="clear:both;"></div>
@@ -55,4 +54,3 @@
   <div id="printThis" class="right" style="display:none; margin: 10px;">
     <a href="#" onclick="window.print(); return false;">print</a>
   </div>
-</div>
