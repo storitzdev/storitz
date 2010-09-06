@@ -143,7 +143,7 @@ class StorageSiteController {
           redirect(action: "list")
           return
         }
-        rentalAgreementList = RentalAgreement.findAllByOwner(user)
+        rentalAgreementList = RentalAgreement.findAllByAgreementOwner(user)
       } else {
         rentalAgreementList = RentalAgreement.findAll()
       }
