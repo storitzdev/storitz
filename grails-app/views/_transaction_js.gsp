@@ -179,7 +179,11 @@ function setupCalendar() {
       shouldClose   :  false,
       selectHandler :  function(cal, dateString) {
         startDate = dateString;
-        if (cal.date.getTime() < new Date().getTime()) {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        var cutoff = new Date(today.getTime());
+        cutoff.setMonth(cutoff.getMonth() + 2);
+        if (cal.date.getTime() < today.getTime() || cal.date.getTime() > cutoff.getTime()) {
           $('transMoveInDate').addClassName('validation-failed');
           return;
         } else {

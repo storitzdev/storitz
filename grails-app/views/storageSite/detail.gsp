@@ -70,7 +70,12 @@
     function rentmeClick() {
       $('rentme').observe('click', function() {
         // check date and turn red if bad
-        if (Date.parseDate(startDate, "%m/%d/%y").getTime() < new Date().getTime()) {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        var cutoff = new Date(today.getTime());
+        cutoff.setMonth(cutoff.getMonth() + 2);
+        var chosenDate = Date.parseDate(startDate, "%m/%d/%y");
+        if (chosenDate < today || chosenDate > cutoff) {
           $('transMoveInDate').addClassName('validation-failed');
           return;
         }
