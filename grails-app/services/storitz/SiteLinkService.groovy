@@ -1092,7 +1092,7 @@ class SiteLinkService {
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
-    ret["deposit"] = tax
+    ret["deposit"] = deposit
     ret["moveInTotal"] = moveInTotal
     ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
 
