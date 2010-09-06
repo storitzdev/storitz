@@ -19,7 +19,7 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/domain/com/storitz/SEMLocation.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy" />
     </list>
     <list id="bdf1a25a-b9ec-40ba-9be8-d6bbb8c0a2d2" name="Rejected commit: Default" comment="findAll not find" />
@@ -150,10 +150,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GlobalFilters.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GlobalFilters.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="18" selection-start="1742" selection-end="1742" vertical-scroll-proportion="0.0">
+            <state line="40" column="0" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.58146065">
               <folding />
             </state>
           </provider>
@@ -177,16 +177,16 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="164" selection-end="212" vertical-scroll-proportion="-5.5434785">
+            <state line="8" column="34" selection-start="128" selection-end="128" vertical-scroll-proportion="-2.9565217">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BootStrap.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BootStrap.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="68" selection-start="4744" selection-end="4744" vertical-scroll-proportion="0.34269664">
+            <state line="90" column="68" selection-start="4744" selection-end="4744" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -228,9 +228,9 @@
         <option value="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
         <option value="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/SEMLocation.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy" />
       </list>
     </option>
   </component>
@@ -1103,7 +1103,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed CVV2 for CallCenter" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added reverse lookup for SEM" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1116,7 +1116,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Formatted output for payment page" />
     <MESSAGE value="Support for SLC/DEN Web interface" />
     <MESSAGE value="Fixed missing url in params" />
     <MESSAGE value="Remove AXIS servlets&#10;Rename Insurance to Property Protection" />
@@ -1141,6 +1140,7 @@
     <MESSAGE value="Corrected IE8 issues" />
     <MESSAGE value="Lots of validation cleanup" />
     <MESSAGE value="Fixed CVV2 for CallCenter" />
+    <MESSAGE value="Added reverse lookup for SEM" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1274,13 +1274,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="18" selection-start="1742" selection-end="1742" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/Role.groovy">
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
@@ -1296,14 +1289,21 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="164" selection-end="212" vertical-scroll-proportion="-5.5434785">
+        <state line="8" column="34" selection-start="128" selection-end="128" vertical-scroll-proportion="-2.9565217">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="68" selection-start="4744" selection-end="4744" vertical-scroll-proportion="0.34269664">
+        <state line="90" column="68" selection-start="4744" selection-end="4744" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/GlobalFilters.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.58146065">
           <folding />
         </state>
       </provider>

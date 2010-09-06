@@ -33,11 +33,11 @@ class GlobalFilters {
                if (params.sem_id) {
                  def locationId = SEMLocation.get(params.sem_id as Long)
                  def address = ''
-                 println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
                  if (locationId) {
                    address = "${locationId.city}, ${locationId.state.display}"
                    // Search for "location_id" which will be something like "city, ST" or a zip code.
                  }
+                 println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
                  redirect(controller:'home', action:'index', params:[address:address])
 
                  return false
