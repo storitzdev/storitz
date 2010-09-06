@@ -437,7 +437,7 @@
           </div>
 
           <div id="rentalForm" style="display: none;">
-            <g:form action="save" controller="rentalTransaction" method="post" useToken="true" id="${rentalTransactionInstance?.id}">
+            <g:form action="save" controller="rentalTransaction" method="post" useToken="true" name="rentalTransaction" id="${rentalTransactionInstance?.id}">
 
               <div>
               <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance ? rentalTransactionInstance.unitId : unitId}" />

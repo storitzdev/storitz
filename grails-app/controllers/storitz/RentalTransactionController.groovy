@@ -267,19 +267,39 @@ class RentalTransactionController {
       rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
       rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, false)
 
+
       def s = new AuthorizeNet()
-      s.authorizeAndCapture {
-        custId rentalTransactionInstance.id as String
-        firstName rentalTransactionInstance.billingAddress.firstName
-        lastName rentalTransactionInstance.billingAddress.lastName
-        address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
-        city rentalTransactionInstance.billingAddress.city
-        state rentalTransactionInstance.billingAddress.state.display
-        zip rentalTransactionInstance.billingAddress.zipcode
-        ccNumber ccNum
-        cvv params.cc_cvv2
-        ccExpDate ccExpVal
-        amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+
+      def user  = session["user"]
+      if (!springSecurityService.principal.equals('anonymousUser') && user && UserRole.userHasRole(user, 'ROLE_CALLCENTER')) {
+
+        s.authorizeAndCapture {
+          custId rentalTransactionInstance.id as String
+          firstName rentalTransactionInstance.billingAddress.firstName
+          lastName rentalTransactionInstance.billingAddress.lastName
+          address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
+          city rentalTransactionInstance.billingAddress.city
+          state rentalTransactionInstance.billingAddress.state.display
+          zip rentalTransactionInstance.billingAddress.zipcode
+          ccNumber ccNum
+          ccExpDate ccExpVal
+          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+        }
+      } else {
+
+        s.authorizeAndCapture {
+          custId rentalTransactionInstance.id as String
+          firstName rentalTransactionInstance.billingAddress.firstName
+          lastName rentalTransactionInstance.billingAddress.lastName
+          address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
+          city rentalTransactionInstance.billingAddress.city
+          state rentalTransactionInstance.billingAddress.state.display
+          zip rentalTransactionInstance.billingAddress.zipcode
+          ccNumber ccNum
+          cvv params.cc_cvv2
+          ccExpDate ccExpVal
+          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+        }
       }
       def authResp = s.submit()
 

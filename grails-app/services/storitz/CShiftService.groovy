@@ -1144,6 +1144,10 @@ class CShiftService {
     def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String)
     rentalTransaction.paymentString = moveInDetails.paymentString
 
+    URL endPoint = new URL(rentalTransaction.site.centerShift.location.kioskUrl)
+    CsKiosk service = new CsKioskLocator();
+
+    CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
     println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${rentalTransaction.paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
     def ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,

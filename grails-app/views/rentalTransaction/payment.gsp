@@ -27,7 +27,9 @@
   function validateForm() {
     var valid = true;
     valid &= Validation.validate('cc_number');
+    <sec:ifNotGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
     valid &= Validation.validate('cc_cvv2');
+    </sec:ifNotGranted>
     var contactType =  $('billingAddress').select('input:checked[type=radio]').pluck('value');
     if (contactType == 'new') {
       valid &= Validation.validate('firstName');
@@ -396,9 +398,11 @@
                       <div style="width:80px;" class="checkout_name">
                         <label for="cc_year">Year</label>
                       </div>
-                      <div style="width:80px;" class="checkout_name">
-                        <label for="cc_cvv2">CVV2</label>
-                      </div>
+                      <sec:ifNotGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
+                        <div style="width:80px;" class="checkout_name">
+                          <label for="cc_cvv2">CVV2</label>
+                        </div>
+                      </sec:ifNotGranted>
                     </div>
                     <div class="checkout_fields">
                       <div style="width:200px;" class="checkout_value">
@@ -410,9 +414,11 @@
                       <div style="width:80px;" class="checkout_value">
                         <g:select name="cc_year" from="${2010..2020}" value="${cc_year}"/>
                       </div>
-                      <div style="width:80px;" class="checkout_value">
-                        <g:textField name="cc_cvv2" id="cc_cvv2" class="required validate-cvv2" style="width:80px;" value="${cc_cvv2}" />
-                      </div>
+                      <sec:ifNotGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
+                        <div style="width:80px;" class="checkout_value">
+                          <g:textField name="cc_cvv2" id="cc_cvv2" class="required validate-cvv2" style="width:80px;" value="${cc_cvv2}" />
+                        </div>
+                      </sec:ifNotGranted>
                     </div>
                     <div style="clear:both;"></div>
                   </div>
