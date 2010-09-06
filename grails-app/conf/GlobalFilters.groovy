@@ -31,7 +31,7 @@ class GlobalFilters {
                params.landingCookie = landingCookie.value
 
                if (params.sem_id) {
-                 def locationId = SEMLocation.get(params.sem_id as Long)
+                 def locationId = SEMLocation.get(params.location_id as Long)
                  def address = ''
                  if (locationId) {
                    address = "${locationId.city}, ${locationId.state.display}"
