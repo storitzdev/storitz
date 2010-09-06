@@ -28,8 +28,8 @@ class RentalAgreementController {
         results = RentalAgreement.listOrderByTitle(params)
         count = RentalAgreement.count()
       } else {
-        results = RentalAgreement.findAllByOwner(user)
-        count = RentalAgreement.countByOwner(user)
+        results = RentalAgreement.findAllByAgreementOwner(user)
+        count = RentalAgreement.countByAgreementOwner(user)
       }
       [rentalAgreementInstanceList: results, rentalAgreementInstanceTotal: count]
     }
