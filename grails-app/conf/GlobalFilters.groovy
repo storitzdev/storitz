@@ -1,6 +1,7 @@
 import javax.servlet.http.Cookie
 
 import storitz.CookieCodec
+import com.storitz.SEMLocation
 
 class GlobalFilters {
 
@@ -30,10 +31,14 @@ class GlobalFilters {
                params.landingCookie = landingCookie.value
 
                if (params.sem_id) {
-                 // Search for "location_id" which will be something like "city, ST" or a zip code.
-                 println "Have SEM parameters supplied.  Redirecting to home..."
-
-                 redirect(controller:'home', action:'index', params:[address:params.location_id])
+                 def locationId = SEMLocation.get(params.sem_id as Long)
+                 def address = ''
+                 println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
+                 if (locationId) {
+                   address = "${locationId.city}, ${locationId.state.display}"
+                   // Search for "location_id" which will be something like "city, ST" or a zip code.
+                 }
+                 redirect(controller:'home', action:'index', params:[address:address])
 
                  return false
                }
