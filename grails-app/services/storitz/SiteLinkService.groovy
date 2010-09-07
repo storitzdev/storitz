@@ -892,7 +892,7 @@ class SiteLinkService {
     }
     for (promo in site.specialOffers) {
       if (!concessionIds.contains(promo.concessionId)) {
-        println "Removing stale concession: ${unit.concessionId}"
+        println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
         site.removeFromSpecialOffers(promo)
       }
     }
