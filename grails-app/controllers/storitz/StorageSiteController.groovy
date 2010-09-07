@@ -639,7 +639,13 @@ class StorageSiteController {
 
   def refreshInventory = {
       storitz.UpdateInventoryJob.triggerNow([from:'Admin']);
-      flash.message = "${message(code: 'default.refreshInventory.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
+      flash.message = "Inventory/units refreshing now"
+      redirect(controller:"admin", action:"index")
+  }
+
+  def refreshPromos = {
+      storitz.RefreshPromosJob.triggerNow([from:'Admin']);
+      flash.message = "Special Offers/Promotions refreshing now"
       redirect(controller:"admin", action:"index")
   }
 

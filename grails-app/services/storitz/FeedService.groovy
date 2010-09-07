@@ -43,4 +43,20 @@ class FeedService {
     }
   }
 
+  def refreshPromos(StorageSite storageSiteInstance) {
+
+    switch(storageSiteInstance.source) {
+
+      case "SL":
+        siteLinkService.getPromos(storageSiteInstance.siteLink, storageSiteInstance)
+        break
+
+      case "CS3":
+        CShiftService.loadPromos(storageSiteInstance.centerShift, storageSiteInstance)
+        break
+
+      default:
+        throw new Exception("Unknown service for site update")
+    }
+  }
 }

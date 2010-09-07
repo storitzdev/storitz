@@ -840,6 +840,8 @@ class CShiftService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
+    def concessionIds = []
+    
     for(promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
 
       def description = promo.'promo-desc'.text()
@@ -865,17 +867,26 @@ class CShiftService {
 
       if (validGov && !(description ==~ /Comp.*/)) {
 
-        SpecialOffer specialOffer = new SpecialOffer()
-        specialOffer.concessionId = promo.'promo-id'.text() as Integer
+        def concessionId = promo.'promo-id'.text() as Integer
+        concessionIds.add(concessionId)
+        SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == concessionId }
+        boolean newOffer = false
+        if (!specialOffer)  {
+          specialOffer = new SpecialOffer()
+          specialOffer.concessionId = concessionId
+          specialOffer.active = true;
+          specialOffer.featured = false;
+          specialOffer.waiveAdmin = false;
+          specialOffer.description = promo.sDescription.text()
+          specialOffer.concessionId = concessionId
+          specialOffer.promoName = promo.'promo-name'.text()
+          newOffer = true
+        }
         specialOffer.promoSize = promoSize
-        specialOffer.active = true;
-        specialOffer.featured = false;
-        specialOffer.waiveAdmin = false;
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
         specialOffer.expireMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
         specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) : 1
         specialOffer.description = description
-        specialOffer.promoName = promo.'promo-name'.text()
         specialOffer.inMonth = 0
         specialOffer.promoQty = promo.'discount-min'.text() as BigDecimal
         if (specialOffer.promoQty == 0) specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal 
@@ -899,10 +910,19 @@ class CShiftService {
             return
         }
         specialOffer.save()
-        site.addToSpecialOffers(specialOffer)
+        if (newOffer) {
+          site.addToSpecialOffers(specialOffer)
+        }
       }
 
     }
+    for (promo in site.specialOffers) {
+      if (!concessionIds.contains(promo.concessionId)) {
+        println "Removing stale concession: ${unit.concessionId}"
+        site.removeFromSpecialOffers(promo)
+      }
+    }
+
   }
 
   def loadInsurance(cshift, site) {

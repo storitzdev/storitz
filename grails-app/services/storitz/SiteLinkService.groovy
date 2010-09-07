@@ -843,17 +843,27 @@ class SiteLinkService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans'.each {promo ->
+
+    def concessionIds = []
+    for (promo in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans') {
       def showOn = Integer.parseInt(promo.iShowOn.text())
       def promoName = promo.sPlanName
       if ((showOn == 0 || showOn == 1) && promoName != 'Manual') {
-        SpecialOffer specialOffer = new SpecialOffer()
-        specialOffer.concessionId = Integer.parseInt(promo.ConcessionID.text())
-        specialOffer.active = true;
-        specialOffer.featured = false;
-        specialOffer.waiveAdmin = false;
-        specialOffer.prepayMonths = Integer.parseInt(promo.iPrePaidMonths.text())
-        specialOffer.description = promo.sDescription
+
+        def concessionId = promo.ConcessionID.text() as Integer
+        concessionIds.add(concessionId)
+        SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == concessionId }
+        boolean newOffer = false
+        if (!specialOffer)  {
+          specialOffer = new SpecialOffer()
+          specialOffer.concessionId = concessionId
+          specialOffer.active = true;
+          specialOffer.featured = false;
+          specialOffer.waiveAdmin = false;
+          specialOffer.description = promo.sDescription.text()
+          newOffer = true
+        }
+        specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
         specialOffer.promoName = promoName
         specialOffer.expireMonth = Integer.parseInt(promo.iExpirMonths.text())
         specialOffer.prepay = Boolean.parseBoolean(promo.bPrepay.text())
@@ -875,9 +885,18 @@ class SiteLinkService {
             specialOffer.promoQty = promo.dcChgAmt.text() as BigDecimal
         }
         specialOffer.save()
-        site.addToSpecialOffers(specialOffer)
+        if (newOffer) {
+          site.addToSpecialOffers(specialOffer)
+        }
       }
     }
+    for (promo in site.specialOffers) {
+      if (!concessionIds.contains(promo.concessionId)) {
+        println "Removing stale concession: ${unit.concessionId}"
+        site.removeFromSpecialOffers(promo)
+      }
+    }
+
   }
 
   def getTaxes(siteLink, site) {
