@@ -36,6 +36,8 @@ class GlobalFilters {
                  if (locationId) {
                    address = "${locationId.city}, ${locationId.state.display}"
                    // Search for "location_id" which will be something like "city, ST" or a zip code.
+                 } else if (params.location_id.size() == 5) {
+                   address = params.location_id
                  }
                  println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
                  redirect(controller:'home', action:'index', params:[address:address])
