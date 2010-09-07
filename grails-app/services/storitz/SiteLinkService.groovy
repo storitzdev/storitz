@@ -370,7 +370,7 @@ class SiteLinkService {
          <cal:dcPaymentAmount>""" + rentalTransaction.feedMoveInCost + """</cal:dcPaymentAmount>
          <cal:iCreditCardType>""" + rentalTransaction.cardType.siteLinkValue +  """</cal:iCreditCardType>
          <cal:sCreditCardNumber>""" + rentalTransaction.ccNum + """</cal:sCreditCardNumber>
-         <cal:sCreditCardCVV>""" + (rentalTransaction.cvv2 ? rentalTransaction : '000') + """</cal:sCreditCardCVV>
+         <cal:sCreditCardCVV>""" + (rentalTransaction.cvv2 ? rentalTransaction.cvv2 : '000') + """</cal:sCreditCardCVV>
          <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
          <cal:sBillingName>""" + rentalTransaction.billingAddress.fullName() + """</cal:sBillingName>
          <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1}${rentalTransaction.billingAddress.address2 ? ' ' + rentalTransaction.billingAddress.address2 : ''}" + """</cal:sBillingAddress>

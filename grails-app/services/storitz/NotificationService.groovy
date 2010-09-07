@@ -70,9 +70,10 @@ class NotificationService {
       String billingAddress = rentalTransaction.billingAddress.fullAddress()
       String storitzId = rentalTransaction.bookingDate.format('yyyyddMM') + sprintf('%08d', rentalTransaction.id)
       String idNumber = (rentalTransaction.reserved ? 'R'+rentalTransaction.reservationId : rentalTransaction.idNumber)
+      String tenantName  = rentalTransaction.contactPrimary.fullName()
 
       def model = [
-        tenantName: rentalTransaction.contactPrimary.fullName(),
+        tenantName: tenantName,
         idNumber: idNumber,
         bookingDate: rentalTransaction.bookingDate.format('MM/dd/yy'),
         moveInDate: rentalTransaction.moveInDate.format('MM/dd/yy'),

@@ -35,7 +35,7 @@ class Contact {
     static belongsTo = [rental:RentalTransaction]
 
     def fullName() {
-      [firstName, lastName, (suffixName ? suffixName : '')].join(" ")
+      "${firstName} ${lastName}${suffixName ? ' ' + suffixName : ''}"
     }
 
     def fullAddress() {
