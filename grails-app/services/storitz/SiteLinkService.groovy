@@ -890,11 +890,15 @@ class SiteLinkService {
         }
       }
     }
+    def deleteList = []
     for (promo in site.specialOffers) {
       if (!concessionIds.contains(promo.concessionId)) {
-        println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
-        site.removeFromSpecialOffers(promo)
+        deleteList.add(promo)
       }
+    }
+    for (promo in deleteList) {
+      println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
+      site.removeFromSpecialOffers(promo)
     }
 
   }
