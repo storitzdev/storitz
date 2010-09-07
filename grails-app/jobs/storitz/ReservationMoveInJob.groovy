@@ -6,12 +6,21 @@ import com.storitz.RentalTransaction
 class ReservationMoveInJob {
 
     def CShiftService
+    def emailService
 
     static triggers = {
       cron name:'reservationMoveIn', cronExpression:"0 01 1 * * ?"
     }
 
     def execute(context) {
+
+      def buf = new ByteArrayOutputStream()
+      def newOut = new PrintStream(buf)
+      def saveOut = System.out
+
+      System.out  = newOut
+
+
       def startTime = System.currentTimeMillis()
       if (context.mergedJobDataMap.get('from')) {
         println "Called from ${context.mergedJobDataMap.get('from')}"
@@ -43,5 +52,14 @@ class ReservationMoveInJob {
         }
       }
       println "----------------- Complete ${results.size()} reservations ${System.currentTimeMillis() - startTime} millis ----------------------------"
+
+      System.out = saveOut
+
+      String subject = "Centershift reservation to movein ${new Date().format('yyyy-MM-dd')}"
+
+      emailService.sendTextEmail(to: 'tech@storitz.com',
+        from: 'no-reply@storitz.com',
+        subject: subject,
+        body: buf.toString())
     }
 }
