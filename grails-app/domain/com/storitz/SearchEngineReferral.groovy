@@ -5,7 +5,7 @@ class SearchEngineReferral {
     String sem_id
     String ts_code
     String match_type
-    String location_id
+    Integer location_id
     String ad_id
     String keyword
 
@@ -14,5 +14,6 @@ class SearchEngineReferral {
     BigDecimal commission
 
     static constraints = {
+      location_id(nullable:true)
     }
 }
