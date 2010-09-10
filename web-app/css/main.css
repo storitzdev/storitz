@@ -1025,6 +1025,7 @@ p.footer {
 .clearOffer {
     font: 10px verdana, arial, helvetica, sans-serif;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .transTotalMoveIn  {
