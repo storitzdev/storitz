@@ -1213,3 +1213,7 @@ tr.rowEven {
 tr.rowOdd {
     background: #fff;
 }
+
+#gsearchBtn {
+    cursor: pointer;
+}
