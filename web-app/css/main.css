@@ -1022,6 +1022,11 @@ p.footer {
     font-weight: bold;
 }
 
+.clearOffer {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    text-decoration: underline;
+}
+
 .transTotalMoveIn  {
     color: #134a9a;
     font: 13px verdana, arial, helvetica, sans-serif;

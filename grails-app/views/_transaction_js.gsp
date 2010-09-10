@@ -69,6 +69,9 @@ function updateTransaction() {
 
   // update promo
   $('selectedOffer').update(chosenPromo);
+  if (chosenPromo != '') {
+    $('clearOffer').update('clear');
+  }
   $('selectedInsurance').update(chosenInsurance);
 
   // update costs
@@ -149,6 +152,13 @@ function transactionFormSetup() {
       Effect.BlindUp('insurances');
       Effect.toggle('fewerInsurance', 'appear', {queue: 'end', duration: 0.1});
       Effect.toggle('moreInsurance', 'appear', {queue:'end', duration: 0.1});
+  });
+  $('clearOffer').observe('click', function() {
+    chosenPromo = '';
+    chosenPromoId = -999;
+    $('clearOffer').update('');
+    $('selectedOffer').update('');
+    $('specialOffers').select('input:checked[type=radio]')[0].checked = false;
   });
 
   $('totalMoveInCost').observe('click', function() {

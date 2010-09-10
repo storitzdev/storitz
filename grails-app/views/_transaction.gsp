@@ -36,7 +36,7 @@
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left specialOfferText">
-      Selected Offer: <span id="selectedOffer" class="selectedOffer"></span>
+      Selected Offer: <span id="selectedOffer" class="selectedOffer"></span>&nbsp;<span id="clearOffer" class="clearOffer"></span>
     </div>
     <div style="height: 10px;clear:both;"></div>
     <div class="left">
