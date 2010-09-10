@@ -497,6 +497,7 @@ class CShiftService {
       def value = phone.VALUE.text().toLowerCase()
       if (count++ == 0 || (value == 'site' || value == 'office')) {
         site.phone = phoneNumber
+        println "Updated site ${site.title } phone ${site.phone}"
       }
     }
   }

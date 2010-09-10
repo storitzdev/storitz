@@ -7,6 +7,8 @@ class UrlMappings {
 //           site_title(validator: { true })
 //         }
 //      }
+    "500"(view:'/error')
+    "404"(view:'/notfound')
 
      name siteLink: "/self-storage/$city/$site_title/$id" {
         controller = "storageSite"
@@ -50,8 +52,5 @@ class UrlMappings {
 
       "/" (controller:"home", action:"index")
 
-	  "500" (view:'/error')
-
-      "404" (view:'/notfound')
 	}
 }

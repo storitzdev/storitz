@@ -654,6 +654,12 @@ class StorageSiteController {
       redirect(controller:"admin", action:"index")
   }
 
+  def refreshPhones = {
+    storitz.RefreshPhoneJob.triggerNow([from:'Admin']);
+    flash.message = "Site Phone refreshing now"
+    redirect(controller:"admin", action:"index")
+  }
+
   def kml = {
     def site = StorageSite.get(params.id)
     [site:site]

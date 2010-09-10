@@ -59,4 +59,21 @@ class FeedService {
         throw new Exception("Unknown service for site update")
     }
   }
+
+  def refreshPhones(StorageSite storageSiteInstance) {
+
+    switch(storageSiteInstance.source) {
+
+      case "SL":
+        siteLinkService.addPhones(storageSiteInstance.siteLink, storageSiteInstance)
+        break
+
+      case "CS3":
+        CShiftService.addSitePhone(storageSiteInstance.centerShift, storageSiteInstance)
+        break
+
+      default:
+        throw new Exception("Unknown service for site update")
+    }
+  }
 }

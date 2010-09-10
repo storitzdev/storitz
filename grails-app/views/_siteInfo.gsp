@@ -17,6 +17,11 @@
     <div>
       ${site.city}, ${site.state.display} ${site.zipcode}
     </div>
+    <sec:ifAnyGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
+      <div>
+        Phone: ${site.phone}
+      </div>
+    </sec:ifAnyGranted>
   </div>
 </div>
 <div style="clear:both;"></div>

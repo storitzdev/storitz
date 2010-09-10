@@ -604,6 +604,7 @@ class SiteLinkService {
     site.city = tab.sSiteCity.text()
     site.state = State.fromText(tab.sSiteRegion.text())
     site.zipcode = tab.sSitePostalCode.text()
+    site.phone = tab.sSitePhone.text()
     site.requiresInsurance = false
     site.boxesAvailable = true
     site.freeTruck = TruckType.NONE
@@ -679,6 +680,25 @@ class SiteLinkService {
       site.lastUpdate = 0
       site.save(flush: true)
       getSiteDetails(site.siteLink, site, tab, stats, false)
+    }
+
+  }
+
+  def addPhones(siteLink, site) {
+    def ret = getSiteInfo(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    for (tab in records.'soap:Body'.'*:SiteInformationResponse'.'*:SiteInformationResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      if (!site.phone) {
+        site.phone = tab.sSitePhone.text()
+        println "Updated site ${site.title } phone ${site.phone}"
+        site.save()
+      }
     }
 
   }
