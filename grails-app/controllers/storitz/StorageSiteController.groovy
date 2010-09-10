@@ -28,6 +28,7 @@ class StorageSiteController {
   def markupSanitizerService
   def costService
   def springSecurityService
+  def imageService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -257,35 +258,34 @@ class StorageSiteController {
       
       params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
         def imgFile = request.getFile(img.key)
-        if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)) {
+
+        if (imgFile.size > 0 && imgFile.originalFilename.endsWith('zip')) {
+          def tmpDir = File.createTempFile("imgzip", "dir")
+          tmpDir.delete()
+          tmpDir.mkdir()
+          fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
           def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
-          def filePath = fileUploadService.getFilePath('/images/site', imgFile.originalFilename.encodeAsURL(), siteId)
-          def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + imgFile.originalFilename.encodeAsURL(), siteId)
-          def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + imgFile.originalFilename.encodeAsURL(), siteId)
-          def imageTool = new ImageTool()
-          imageTool.load(tmpPath)
-          imageTool.saveOriginal()
-          imageTool.thumbnailSpecial(600, 400, 2, 1)
-          def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
-          dstFile.mkdirs()
-          imageTool.writeResult(filePath, "JPEG")
-          imageTool.restoreOriginal()
-          imageTool.thumbnailSpecial (320, 240, 2, 1)
-          imageTool.writeResult(filePathMid, "JPEG")
-          imageTool.restoreOriginal()
-          imageTool.thumbnailSpecial (60, 40, 2, 2)
-          imageTool.writeResult(filePathThumb, "JPEG")
-          def tmpFile = new File(tmpPath)
-          tmpFile.delete()
-          def siteImg = new SiteImage()
-          siteImg.isLogo = false
-          siteImg.hasThumbnail = true
-          siteImg.isCover = false
-          siteImg.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
-          siteImg.fileLocation = imgFile.originalFilename
-          siteImg.site = storageSiteInstance
-          siteImg.imgOrder = ++imgOrder
-          storageSiteInstance.addToImages(siteImg)          
+          def ant = new AntBuilder();
+          ant.unzip(  src: tmpPath, dest:tmpDir,  overwrite:"true"){ mapper(type:"flatten")};
+          println("unzipped into temp dir: ${tmpDir.canonicalPath}")
+          tmpDir.eachFileMatch ~/(?i).*\.(png|jpg|gif|jpeg)/, { File file ->
+            println "Processing file ${file.canonicalFile}"
+            def filePath = fileUploadService.getFilePath('/images/site', file.name, siteId)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + file.name.encodeAsURL(), siteId)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + file.name.encodeAsURL(), siteId)
+            imageService.scaleImages(file, siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
+            ++imgOrder
+          }
+          tmpDir.deleteDir()
+        } else {
+          if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)) {
+            def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
+            def filePath = fileUploadService.getFilePath('/images/site', imgFile.originalFilename.encodeAsURL(), siteId)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + imgFile.originalFilename.encodeAsURL(), siteId)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + imgFile.originalFilename.encodeAsURL(), siteId)
+            imageService.scaleImages(new File(tmpPath), siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
+            ++imgOrder
+          }
         }
       }
 

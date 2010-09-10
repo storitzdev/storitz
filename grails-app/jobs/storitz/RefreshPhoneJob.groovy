@@ -27,6 +27,7 @@ class RefreshPhoneJob {
     println "----------------- Starting Phone refresh update... ----------------------------"
     StorageSite.findAll().each{ site ->
       feedService.refreshPhones(site)
+      site.save(flush:true)
     }
     println "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
 

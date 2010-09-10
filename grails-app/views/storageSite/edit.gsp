@@ -828,7 +828,7 @@
 
           <div class="formInstructions">
             Add as many images in JPG, PNG, or GIF format that you like.  You can upload more than one at a time
-            with this feature.
+            with this feature.  You can also load a zip archive of image files and it will process all of them.
           </div>
 
           <div id="siteImages" class="checkout_fields">
@@ -856,7 +856,7 @@
             </g:each>
             <div style="clear:both;height: 15px;"></div>
             <div style="width:250px;" class="checkout_value">
-              <input type="file" style="width:250px;" name="imageFile" class="multi" accept="gif|jpg|png|jpeg"/>
+              <input type="file" style="width:250px;" name="imageFile" class="multi" accept="gif|jpg|png|jpeg|zip"/>
             </div>
             <div style="clear:both;height: 15px;"></div>
           </div>
