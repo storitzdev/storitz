@@ -27,6 +27,7 @@ class StorageSiteController {
   def fileUploadService
   def markupSanitizerService
   def costService
+  def springSecurityService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -36,7 +37,8 @@ class StorageSiteController {
 
   @Secured(['ROLE_USER'])
   def list = {
-    def user = session["user"]
+    def username  = springSecurityService.principal.username
+    def user = User.findByUsername(username as String)
 
     def results
     def count
@@ -68,7 +70,8 @@ class StorageSiteController {
   }
 
   def autocompleteSite = {
-    def user = session["user"]
+    def username  = springSecurityService.principal.username
+    def user = User.findByUsername(username as String)
     def max = Math.min(params.max ? params.int('max') : 20, 100)
     params.sort = 'title'
     def results
@@ -129,17 +132,19 @@ class StorageSiteController {
     }
   }
 
+  @Secured(['ROLE_USER','ROLE_ADMIN','ROLE_MANAGER'])
   def edit = {
     def storageSiteInstance = StorageSite.get(params.id)
     if (!storageSiteInstance) {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     } else {
-      def user = session["user"]
+      def username  = springSecurityService.principal.username
+      def user = User.findByUsername(username as String)
       def rentalAgreementList
       if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
         if (!SiteUser.findBySiteAndUser(storageSiteInstance, user)) {
-          flash.message = "${message(code: 'default.no.permission.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), session["username"]])}"
+          flash.message = "${message(code: 'default.no.permission.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), username])}"
           redirect(action: "list")
           return
         }

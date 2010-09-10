@@ -270,7 +270,11 @@ class RentalTransactionController {
 
       def s = new AuthorizeNet()
 
-      def user  = session["user"]
+      def user  = null
+      if (!springSecurityService.principal.equals('anonymousUser')) {
+        def username  = springSecurityService.principal.username
+        user = User.findByUsername(username as String)
+      }
       if (!springSecurityService.principal.equals('anonymousUser') && user && UserRole.userHasRole(user, 'ROLE_CALLCENTER')) {
 
         s.authorizeAndCapture {

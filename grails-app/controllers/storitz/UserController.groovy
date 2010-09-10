@@ -44,7 +44,8 @@ class UserController {
         def results
         def count = 0
 
-        def user  = session["user"]
+        def username  = springSecurityService.principal.username
+        def user = User.findByUsername(username as String)
 
         if (params.username) {
           def query
@@ -86,7 +87,8 @@ class UserController {
 
   def autocompleteUser = {
 
-    def user = session["user"]
+    def username  = springSecurityService.principal.username
+    def user = User.findByUsername(username as String)
 
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
@@ -125,8 +127,10 @@ class UserController {
 
 	def delete = {
 
+        def username  = springSecurityService.principal.username
+        def user = User.findByUsername(username as String)
 		def person = User.get(params.id)
-        if (UserRole.userHasRole(session["user"], 'ROLE_ADMIN') || person.manager == session["user"]) {
+        if (UserRole.userHasRole(user, 'ROLE_ADMIN') || person.manager == user) {
           if (person) {
               def authPrincipal = springSecurityService.principal()
               //avoid self-delete if the logged-in user is an admin
@@ -244,7 +248,8 @@ class UserController {
         def person = new User()
         person.properties = params
         def siteList = null
-        def user = session["user"]
+        def username  = springSecurityService.principal.username
+        def user = User.findByUsername(username as String)
         if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
           siteList = SiteUser.findAllByUser(user).collect{ it.site }
         }
@@ -333,7 +338,9 @@ class UserController {
 		for (role in roles) {
 			roleMap[(role)] = userRoleNames.contains(role.authority)
 		}
-        List sites = SiteUser.findAllByUser(session["user"]).collect{ it.site }
+        def username  = springSecurityService.principal.username
+        def user = User.findByUsername(username as String)
+        List sites = SiteUser.findAllByUser(user).collect{ it.site }
         List userSites = SiteUser.findAllByUser(person).collect{ it.site}
         def siteMap = [:] as Map  //map of site -> boolean
         for (site in sites) {

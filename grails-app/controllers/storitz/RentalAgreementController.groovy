@@ -9,6 +9,7 @@ import com.storitz.User
 class RentalAgreementController {
 
     def fileUploadService
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -17,7 +18,8 @@ class RentalAgreementController {
     }
 
     def list = {
-      def user = session["user"]
+      def username  = springSecurityService.principal.username
+      def user = User.findByUsername(username as String)
 
       params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
@@ -41,6 +43,7 @@ class RentalAgreementController {
     }
 
     def save = {
+
         def rentalAgreementInstance = new RentalAgreement(params)
 
         if (params?.manager?.id) {
@@ -55,7 +58,9 @@ class RentalAgreementController {
             return
           }
         } else {
-          rentalAgreementInstance.agreementOwner = session["user"]
+          def username  = springSecurityService.principal.username
+          def user = User.findByUsername(username as String)
+          rentalAgreementInstance.agreementOwner = user
         }
         def userId = rentalAgreementInstance.agreementOwner.id
         def pdfFile = request.getFile("pdfFile_0")
@@ -123,7 +128,9 @@ class RentalAgreementController {
               return
             }
           } else {
-            rentalAgreementInstance.agreementOwner = session["user"]
+            def username  = springSecurityService.principal.username
+            def user = User.findByUsername(username as String)
+            rentalAgreementInstance.agreementOwner = user
           }
           if (!rentalAgreementInstance.hasErrors() && rentalAgreementInstance.save(flush: true)) {
               flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rentalAgreement.label', default: 'RentalAgreement'), rentalAgreementInstance.id])}"
