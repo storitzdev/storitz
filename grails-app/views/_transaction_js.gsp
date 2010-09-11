@@ -70,7 +70,7 @@ function updateTransaction() {
   // update promo
   $('selectedOffer').update(chosenPromo);
   if (chosenPromo != '') {
-    $('clearOffer').update('clear');
+    $('clearOffer').update('remove');
   }
   $('selectedInsurance').update(chosenInsurance);
 
@@ -121,13 +121,13 @@ function transactionFormSetup() {
     var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value')[0];
     $('promoId').value = offerId;
     chosenPromoId = offerId;
-    showTotals();
+    showTotals('promo');
   });
   
   $('insurances').observe('click', function() {
     insuranceId =  $('insurances').select('input:checked[type=radio]').pluck('value')[0];
     $('insuranceId').value = insuranceId;
-    showTotals();
+    showTotals('insurance');
   });
 
   $('moreOffers').observe('click', function() {
@@ -169,13 +169,13 @@ function transactionFormSetup() {
     searchSize = $F('unitsize');
     $('SC_searchSize').value = searchSize;
     $('searchSize').value = searchSize;
-    showTotals();
+    showTotals('size');
   })
 
   $('unitType').observe('change', function() {
     chosenUnitType = $F('unitType');
     $('chosenType').value = chosenUnitType;
-    showTotals();
+    showTotals('unitType');
   })
 }
 
@@ -202,16 +202,16 @@ function setupCalendar() {
         $('SC_date').value = startDate;
         $('moveInDate').value = startDate;
         $('transMoveInDate').update(startDate);
-        showTotals();
+        showTotals('date');
       }
   });
 }
 
-function showTotals() {
+function showTotals(action) {
   new Ajax.Request("${createLink(controller:'storageSite', action:'detailTotals')}",
   {
     method:'get',
-    parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType, moveInDate:startDate },
+    parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType, moveInDate:startDate, action:action },
     onSuccess:function(transport) {
       var totals = transport.responseJSON.totals;
       durationMonths = totals.durationMonths;

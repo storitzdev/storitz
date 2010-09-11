@@ -335,6 +335,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.noInsuranceWaiver.label" default="Must buy insurance with rental"/></td>
+
+          <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.noInsuranceWaiver}"/></td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.isGate.label" default="Is Gate"/></td>
 
           <td valign="top" class="value"><g:formatBoolean boolean="${storageSiteInstance?.isGate}"/></td>

@@ -481,12 +481,18 @@ class StorageSiteController {
       session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
     }
 
+    // preload required insurance
+    def insuranceId = params.insuranceId
+    if (site.noInsuranceWaiver && (!insuranceId || insuranceId < 0)) {
+      insuranceId = site.insurances.min{ it.premium }.id
+    }
+
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}",
             shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price,
             pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
-            promoId:params.promoId, insuranceId:params.insuranceId]
+            promoId:params.promoId, insuranceId:insuranceId]
   }
 
   def directions = {
@@ -590,11 +596,19 @@ class StorageSiteController {
   def detailTotals = {
     def moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
     def site = StorageSite.get(params.id)
-    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
 
-    Collection sizeList = site.units.collect { it.unitsize }.unique()
+    Collection unitTypes
+    Collection sizeList
+    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
+    if (params.action == 'unitType') {
+      unitTypes = site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
+      sizeList = site.units.findAll{ it.getUnitTypeLower() == params.unitType }.collect{ it.unitsize }.unique()
+    } else {
+      unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
+      sizeList = site.units.collect { it.unitsize }.unique()
+    }
+
     // output JSON for types
-    Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.getUnitTypeLower()}\",\"value\":\"${it.getUnitType()}\"}" }.unique()
 
     sizeList.sort { it.width * it.length }
 
@@ -602,6 +616,15 @@ class StorageSiteController {
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
       bestUnit = site.units.findAll{ it.getUnitTypeLower() == params.unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+      if (!bestUnit) {
+        if (params.action == 'unitType') {
+          // find closest size
+          def bestSize =  site.units.findAll{ it.getUnitTypeLower() == params.unitType }.min{ abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
+          bestUnit = site.units.findAll{ it.getUnitTypeLower() == params.unitType && it.unitsize.id == bestSize }.min{ it.price }
+        } else {
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+        }
+      }
     } else if (unitSize) {
       bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
     } else {

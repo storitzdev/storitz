@@ -92,10 +92,10 @@
                     <td>${siteManager.userRealName}</td>
                   </tr>
                 </g:if>
-                <g:if test="${rentalTransactionInstance.accessCode}">
+                <g:if test="${rentalTransactionInstance.site.phone}">
                   <tr>
-                    <td style="width:200px;">Gate Access Code:</td>
-                    <td>${rentalTransactionInstance.accessCode}</td>
+                    <td style="width:200px;">Phone:</td>
+                    <td>${rentalTransactionInstance.site.phone}</td>
                   </tr>
                 </g:if>
               </table>

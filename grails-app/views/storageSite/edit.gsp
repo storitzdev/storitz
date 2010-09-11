@@ -781,30 +781,43 @@
                 </g:each>
               </table>
             </div>
-            <div style="clear:both;"></div>
+            <div style="clear:both;height: 15px;"></div>
           </div>
 
           <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
-          <div class="checkout_section_header">
-            Rental/Lease Agreement
-          </div>
-          <div class="formInstructions">
-            Please select the rental agreement that users will see when checking out through Storitz for this site.
-          </div>
-
-          <div class="checkout_fields">
-            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'rentalAgreement', 'errors')}">
-              <g:select id="rentalAgreement" name="rentalAgreement.id" style="width:250px;" from="${rentalAgreementList}" optionValue="title" optionKey="id" value="${storageSiteInstance.rentalAgreement?.id}" noSelection="['-1': '']"/>
+            <div class="checkout_section_header">
+              Disable Rental Insurance Waiver
             </div>
-            <div style="clear:both;"></div>
-          </div>
-
-          <div class="checkout_labels">
-            <div class="checkout_name" style="width:250px;">
-              <label for="rentalAgreement">Rental/Lease Agreement</label>
+            <div class="formInstructions">
+              Check this box if your site requires that a user purchase one of the insurance options provided.
             </div>
-            <div style="clear:both;"></div>
-          </div>
+            <div class="checkout_fields">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'noInsuranceWaiver', 'errors')}">
+                <g:checkBox name="noInsuranceWaiver" value="${storageSiteInstance?.noInsuranceWaiver}"/>&nbsp;Require Insurance Purchase with rental
+              </div>
+              <div style="clear:both;height: 15px;"></div>
+            </div>
+
+            <div class="checkout_section_header">
+              Rental/Lease Agreement
+            </div>
+            <div class="formInstructions">
+              Please select the rental agreement that users will see when checking out through Storitz for this site.
+            </div>
+
+            <div class="checkout_fields">
+              <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'rentalAgreement', 'errors')}">
+                <g:select id="rentalAgreement" name="rentalAgreement.id" style="width:250px;" from="${rentalAgreementList}" optionValue="title" optionKey="id" value="${storageSiteInstance.rentalAgreement?.id}" noSelection="['-1': '']"/>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="checkout_labels">
+              <div class="checkout_name" style="width:250px;">
+                <label for="rentalAgreement">Rental/Lease Agreement</label>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
 
             <div class="checkout_section_header">
               Disable Site
