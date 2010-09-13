@@ -2,12 +2,14 @@ package storitz
 
 import grails.plugins.springsecurity.Secured
 import com.storitz.CenterShift
+import storitz.constants.CenterShiftVersion
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CShiftController {
 
 
   def CShiftService
+  def CShift4Service
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -31,7 +33,11 @@ class CShiftController {
     if (cshiftInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()
-      CShiftService.loadSites(cshiftInstance, stats)
+      if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
+        CShiftService.loadSites(cshiftInstance, stats)
+      } else {
+        CShift4Service.loadSites(cshiftInstance, stats)
+      }
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
@@ -44,7 +50,11 @@ class CShiftController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
-      CShiftService.refreshSites(cshiftInstance, stats)
+      if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
+        CShiftService.refreshSites(cshiftInstance, stats)
+      } else {
+        CShiftService4.refreshShites(cshiftInstance, stats)
+      }
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
