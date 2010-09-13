@@ -433,7 +433,7 @@ class StorageSiteController {
     }
     StorageSite site = StorageSite.get(params.id)
 
-    if (site.disabled) {
+    if (site.disabled && !params.adminView) {
       redirect(controller:"home", action:"index")
       return;
     }

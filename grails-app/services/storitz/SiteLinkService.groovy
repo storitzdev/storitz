@@ -614,6 +614,7 @@ class SiteLinkService {
     site.isUnitAlarmed = false
     site.isManagerOnsite = false
     site.hasElevator = false
+    site.disabled = true // start sites as disabled
 
     site.openWeekday = !Boolean.parseBoolean(tab.bClosedWeekdays.text())
     site.openSaturday = !Boolean.parseBoolean(tab.bClosedSaturday.text())

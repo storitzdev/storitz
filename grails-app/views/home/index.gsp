@@ -34,6 +34,7 @@
         var bounds = null;
         var markerImageGreen = null;
         var markerImageGray = null;
+        var mapMarker = null;
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
@@ -390,7 +391,10 @@
             geocoder.geocode( { 'address': address}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
-                new google.maps.Marker({
+                if (mapMarker) {
+                  mapMarker.setMap(null);
+                }
+                mapMarker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });

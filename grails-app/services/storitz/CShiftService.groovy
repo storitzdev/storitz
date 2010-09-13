@@ -209,6 +209,25 @@ class CShiftService {
     postAction(rentalTransaction.site.centerShift.location.webUrl, payload, 'MakeReservationNonCCPayment')
   }
 
+  def insertAccountNote(url, userName, pin, siteId, note) {
+    def payload = """"<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+   <soap:Header/>
+   <soap:Body>
+      <csc:InsertAccountNote>
+         <csc:strUser>""" + userName + """</csc:strUser>
+         <csc:strPIN>""" + pin + """</csc:strPIN>
+         <csc:lngAccountID>""" + siteId + """</csc:lngAccountID>
+         <csc:strNote>""" + note + """</csc:strNote>
+         <csc:blnPriority>false</csc:blnPriority>
+         <csc:dteExpireDate>""" + new Date().format('yyyy-MM-dd') + """</csc:dteExpireDate>
+      </csc:InsertAccountNote>
+   </soap:Body>
+</soap:Envelope>"""
+
+    postAction(url, payload, "InsertAccountNote")
+
+  }
+
   private def postAction(url, payload, action) {
     def http = new HTTPBuilder(url)
 
@@ -356,6 +375,7 @@ class CShiftService {
 
       if (newSite) {
         SiteUser.link(site, cshift.manager)
+        site.disabled = true
       }
 
       def email = tab.EMAIL_ADDRESS.text()
@@ -1043,7 +1063,6 @@ class CShiftService {
   def createTenant(RentalTransaction rentalTransaction) {
     def ret = newTenant(rentalTransaction)
 
-    println "newTenant returned: ${ret}"
 
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1056,6 +1075,14 @@ class CShiftService {
 
       rentalTransaction.tenantId = acct.ACCOUNT_ID.text()
       rentalTransaction.contactId = acct.CONTACT_ID.text()
+    }
+    // memo as a new Storitz tenant
+    if (rentalTransaction.tenantId) {
+      insertAccountNote(rentalTransaction.site.centerShift.location.webUrl,
+              rentalTransaction.site.centerShift.userName,
+              rentalTransaction.site.centerShift.pin,
+              rentalTransaction.site.sourceId,
+              "Storitz tenant")
     }
     rentalTransaction.save(flush:true)
   }
