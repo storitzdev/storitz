@@ -10,7 +10,7 @@
      </geo:geo>
   </url>
   <url>
-      <loc><g:createLink absolute="true" controller="storageSite" action="detail" id="${site.id}" /></loc>
+      <loc><g:createLink absolute="true" mapping="siteLink" controller="storageSite" action="detail" id="${site.id}" /></loc>
       <image:image>
          <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
          <image:title>${site.title.encodeAsHTML()}</image:title>
