@@ -433,6 +433,7 @@ class RentalTransactionController {
       if (rentalTransactionInstance.promoId > 0) {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
+      def unit = StorageUnit.get(rentalTransactionInstance.unitId)
       Insurance ins = null
       if (rentalTransactionInstance.insuranceId > 0) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
@@ -442,10 +443,10 @@ class RentalTransactionController {
       notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
 
       // remove unit from inventory
-      if (--unit.unitCount <= 0) {
+      if (unit && --unit.unitCount <= 0) {
         rentalTransactionInstance.site.removeFromUnits(unit)
         rentalTransactionInstance.save(flush: true)
-      }  else {
+      }  else if (unit) {
         unit.save(flush: true)
       }
 
