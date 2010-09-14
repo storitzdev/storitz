@@ -210,7 +210,7 @@ class CShiftService {
   }
 
   def insertAccountNote(url, userName, pin, siteId, note) {
-    def payload = """"<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+    def payload = """<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soap:Header/>
    <soap:Body>
       <csc:InsertAccountNote>
@@ -219,10 +219,12 @@ class CShiftService {
          <csc:lngAccountID>""" + siteId + """</csc:lngAccountID>
          <csc:strNote>""" + note + """</csc:strNote>
          <csc:blnPriority>false</csc:blnPriority>
-         <csc:dteExpireDate>""" + new Date().format('yyyy-MM-dd') + """</csc:dteExpireDate>
+         <csc:dteExpireDate>""" + (new Date().format('yyyy-MM-dd')) + """</csc:dteExpireDate>
       </csc:InsertAccountNote>
    </soap:Body>
 </soap:Envelope>"""
+
+    println "account note: ${payload}"
 
     postAction(url, payload, "InsertAccountNote")
 

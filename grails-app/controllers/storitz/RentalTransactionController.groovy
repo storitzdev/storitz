@@ -16,6 +16,7 @@ import com.storitz.NotificationType
 import org.hibernate.FetchMode as FM
 import storitz.constants.NotificationEventType
 import java.math.RoundingMode
+import grails.plugins.springsecurity.Secured
 
 class RentalTransactionController {
 
@@ -373,6 +374,61 @@ class RentalTransactionController {
       }
 
       render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def forceBook = {
+      def rentalTransactionInstance = RentalTransaction.get(params.id)
+
+      if (!rentalTransactionInstance) {
+        // TODO - send them to an error page
+      }
+
+      SpecialOffer promo = null
+      if (rentalTransactionInstance.promoId > 0) {
+        promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+      }
+      def unit = StorageUnit.get(rentalTransactionInstance.unitId)
+      if (unit) {
+        rentalTransactionInstance.unitType = unit.getUnitTypeLower()
+      } else {
+        rentalTransactionInstance.unitType = params.chosenType
+      }
+      Insurance ins = null
+      if (rentalTransactionInstance.insuranceId > 0) {
+        ins = Insurance.get(rentalTransactionInstance.insuranceId)
+      }
+      
+      if (!moveInService.moveIn(rentalTransactionInstance)) {
+        flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+        // TODO - notify with email to admin
+        redirect (action:'payment', params:["id":rentalTransactionInstance.id])
+        return
+      }
+
+      notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
+
+      // remove unit from inventory
+      if (--unit.unitCount <= 0) {
+        rentalTransactionInstance.site.removeFromUnits(unit)
+        rentalTransactionInstance.save(flush: true)
+      }  else {
+        unit.save(flush: true)
+      }
+
+      def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
+      def siteManager = User.createCriteria().get {
+        sites {
+          eq("site.id", rentalTransactionInstance.site.id)
+        }
+        notificationTypes {
+          eq("notificationType.id", siteManagerNotification.id)
+        }
+        maxResults(1)
+      }
+
+      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
+
     }
 
     def edit = {
