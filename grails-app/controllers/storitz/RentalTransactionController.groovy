@@ -238,6 +238,7 @@ class RentalTransactionController {
           rentalTransactionInstance.unitId = myUnit.id
           if (moveInService.checkRented(rentalTransactionInstance)) {
             found = true
+            unit = myUnit
             break
           }
         }
@@ -247,6 +248,8 @@ class RentalTransactionController {
           return
         }
       }
+      rentalTransactionInstance.monthlyRate = unit.pushRate
+
 
       def ccNum = params.cc_number.replaceAll(/\D/, '') as String
       def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
