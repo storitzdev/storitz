@@ -456,6 +456,7 @@ class SiteLinkService {
   }
 
   def refreshSites(siteLink, stats) {
+    def writer = new PrintWriter(System.out)
     def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -474,13 +475,15 @@ class SiteLinkService {
         stats.createCount++
         site.lastUpdate = 0
         if (tab.sSitePostalCode.text().size() >= 5 && tab.sSitePostalCode.text().substring(0, 5).isNumber()) {
-          getSiteDetails(siteLink, site, tab, stats, true)
+          getSiteDetails(siteLink, site, tab, stats, true, writer)
         }
       }
     }
+    writer.close()
   }
 
   def corpSites(siteLink, stats) {
+    def writer = new PrintWriter(System.out)
     def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -508,9 +511,10 @@ class SiteLinkService {
         newSite = true
       }
       if (tab.sSitePostalCode.text().isNumber()) {
-        getSiteDetails(siteLink, site, tab, stats, newSite)
+        getSiteDetails(siteLink, site, tab, stats, newSite, writer)
       }
     }
+    writer.close()
   }
 
   def createSiteUsers(siteLink) {
@@ -586,10 +590,10 @@ class SiteLinkService {
     }
   }
 
-  def getSiteDetails(siteLink, site, tab, stats, newSite) {
+  def getSiteDetails(siteLink, site, tab, stats, newSite, writer) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
 
-    println "Found address: ${address}"
+    writer << "Found address: ${address}"
     def geoResult = geocodeService.geocode(address)
 
     site.lng = geoResult.Placemark[0].Point.coordinates[0]
@@ -649,18 +653,18 @@ class SiteLinkService {
 
     unitsAvailable(siteLink, site, stats, newSite)
 
-    site.requiresInsurance = insurance(siteLink, site)
+    site.requiresInsurance = insurance(siteLink, site, writer)
     if (site.units?.size() > 0) {
       def fees = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
       site.adminFee = fees["admin"] ? fees["admin"] : 0
       site.deposit = fees["deposit"] ? fees["deposit"] : 0 
     }
-    getPromos(siteLink, site)
+    getPromos(siteLink, site, writer)
     getTaxes(siteLink, site)
     site.save(flush: true)
   }
 
-  def updateSite(site, stats) {
+  def updateSite(site, stats, writer) {
     def ret = getSiteInfo(site.siteLink.corpCode, site.sourceLoc, site.siteLink.userName, site.siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -680,12 +684,12 @@ class SiteLinkService {
       site.specialOffers.clear()
       site.lastUpdate = 0
       site.save(flush: true)
-      getSiteDetails(site.siteLink, site, tab, stats, false)
+      getSiteDetails(site.siteLink, site, tab, stats, false, writer)
     }
 
   }
 
-  def addPhones(siteLink, site) {
+  def addPhones(siteLink, site, writer) {
     def ret = getSiteInfo(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -697,20 +701,20 @@ class SiteLinkService {
     for (tab in records.'soap:Body'.'*:SiteInformationResponse'.'*:SiteInformationResult'.'*:diffgram'.NewDataSet.'*:Table') {
       if (!site.phone) {
         site.phone = tab.sSitePhone.text()
-        println "Updated site ${site.title } phone ${site.phone}"
+        writer.println "Updated site ${site.title } phone ${site.phone}"
         site.save()
       }
     }
 
   }
 
-  def updateUnits(site, stats) {
-    unitsAvailable(site.siteLink, site, stats, false)
+  def updateUnits(site, stats, writer) {
+    unitsAvailable(site.siteLink, site, stats, false, writer)
     site.save(flush: true)
   }
 
-  def unitsAvailable(siteLink, site, stats, newSite) {
-    println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
+  def unitsAvailable(siteLink, site, stats, newSite, writer) {
+    writer.println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
     def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, newSite ? 0 : site.lastUpdate)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -767,13 +771,13 @@ class SiteLinkService {
           if (unitSize) {
             siteUnit.unitsize = unitSize
             if (!siteUnit.save()) {
-              siteUnit.errors.allErrors.each { println it }
+              siteUnit.errors.allErrors.each { writer.println it }
             }
             stats.unitCount++;
 
             site.addToUnits(siteUnit)
           } else {
-            println "Skipping unit due to size: width=" + width + " length=" + length
+            writer.println "Skipping unit due to size: width=" + width + " length=" + length
           }
         } else {
           // update pricing
@@ -801,7 +805,7 @@ class SiteLinkService {
     }
   }
 
-  def insurance(siteLink, site) {
+  def insurance(siteLink, site, writer) {
     def ret = getInsurance(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -821,7 +825,7 @@ class SiteLinkService {
       count++;
 
       if (!insurance.save()) {
-        insurance.errors.allErrors.each { println it }
+        insurance.errors.allErrors.each { writer.println it }
       }
       site.addToInsurances(insurance)
     }
@@ -855,7 +859,7 @@ class SiteLinkService {
     return fees
   }
 
-  def getPromos(siteLink, site) {
+  def getPromos(siteLink, site, writer) {
     def ret = getPromos(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -918,7 +922,7 @@ class SiteLinkService {
       }
     }
     for (promo in deleteList) {
-      println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
+      writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
       site.removeFromSpecialOffers(promo)
     }
 

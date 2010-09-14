@@ -9,16 +9,16 @@ class FeedService {
   
   boolean transactional = false
 
-  def updateSite(StorageSite storageSiteInstance, SiteStats stats) {
+  def updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
 
     switch(storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.updateSite(storageSiteInstance, stats)
+        siteLinkService.updateSite(storageSiteInstance, stats, writer)
         break
 
       case "CS3":
-        CShiftService.updateSite(storageSiteInstance, stats)
+        CShiftService.updateSite(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -26,16 +26,16 @@ class FeedService {
     }
   }
 
-  def updateUnits(StorageSite storageSiteInstance, SiteStats stats) {
+  def updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
 
     switch(storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.updateUnits(storageSiteInstance, stats)
+        siteLinkService.updateUnits(storageSiteInstance, stats, writer)
         break
 
       case "CS3":
-        CShiftService.updateUnits(storageSiteInstance, stats)
+        CShiftService.updateUnits(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -43,16 +43,16 @@ class FeedService {
     }
   }
 
-  def refreshPromos(StorageSite storageSiteInstance) {
+  def refreshPromos(StorageSite storageSiteInstance, PrintWriter writer) {
 
     switch(storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.getPromos(storageSiteInstance.siteLink, storageSiteInstance)
+        siteLinkService.getPromos(storageSiteInstance.siteLink, storageSiteInstance, writer)
         break
 
       case "CS3":
-        CShiftService.loadPromos(storageSiteInstance.centerShift, storageSiteInstance)
+        CShiftService.loadPromos(storageSiteInstance.centerShift, storageSiteInstance, writer)
         break
 
       default:
@@ -60,16 +60,16 @@ class FeedService {
     }
   }
 
-  def refreshPhones(StorageSite storageSiteInstance) {
+  def refreshPhones(StorageSite storageSiteInstance, PrintWriter writer) {
 
     switch(storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.addPhones(storageSiteInstance.siteLink, storageSiteInstance)
+        siteLinkService.addPhones(storageSiteInstance.siteLink, storageSiteInstance, writer)
         break
 
       case "CS3":
-        CShiftService.addSitePhone(storageSiteInstance.centerShift, storageSiteInstance)
+        CShiftService.addSitePhone(storageSiteInstance.centerShift, storageSiteInstance, writer)
         break
 
       default:

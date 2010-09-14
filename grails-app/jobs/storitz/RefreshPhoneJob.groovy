@@ -4,6 +4,8 @@ import com.storitz.StorageSite
 
 
 class RefreshPhoneJob {
+  private static final boolean AUTOMATIC_FLUSH = true;
+  private static final String DEFAULT_CHARSET = "utf8";
 
   def feedService
   def emailService
@@ -15,25 +17,23 @@ class RefreshPhoneJob {
   def execute(context) {
 
     def buf = new ByteArrayOutputStream()
-    def newOut = new PrintStream(buf)
-    def saveOut = System.out
-
-    System.out  = newOut
+    PrintWriter writer = new PrintWriter(new OutputStreamWriter(buf, DEFAULT_CHARSET), AUTOMATIC_FLUSH);
 
     def startTime = System.currentTimeMillis()
     if (context.mergedJobDataMap.get('from')) {
-      println "Called from ${context.mergedJobDataMap.get('from')}"
+      writer.println "Called from ${context.mergedJobDataMap.get('from')}"
     }
-    println "----------------- Starting Phone refresh update... ----------------------------"
+    writer.println  "----------------- Starting Phone refresh update... ----------------------------"
     StorageSite.findAll().each{ site ->
-      feedService.refreshPhones(site)
+      feedService.refreshPhones(site, writer)
       site.save(flush:true)
     }
-    println "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
-
-    System.out = saveOut
+    writer.println  "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
     String subject = "Refresh phones ${new Date().format('yyyy-MM-dd')}"
+
+    writer.flush()
+    writer.close()
 
     emailService.sendTextEmail(to: 'tech@storitz.com',
       from: 'no-reply@storitz.com',

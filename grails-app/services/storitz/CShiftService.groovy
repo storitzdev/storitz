@@ -290,7 +290,7 @@ class CShiftService {
     }
   }
 
-  def refreshSites(cshift, stats) {
+  def refreshSites(cshift, stats, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -304,16 +304,16 @@ class CShiftService {
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
       StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
       if (!site) {
-        println "Found and creating new site: ${tab.SITE_NAME.text()}"
+        writer.println "Found and creating new site: ${tab.SITE_NAME.text()}"
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
-        getSiteDetails(cshift, site, tab, stats, true)
+        getSiteDetails(cshift, site, tab, stats, true, writer)
       }
     }
   }
 
-  def updateSite(site, stats) {
+  def updateSite(site, stats, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -342,12 +342,12 @@ class CShiftService {
         site.lastUpdate = 0
         site.save(flush: true)
 
-        getSiteDetails(site.centerShift, site, tab, stats, false)
+        getSiteDetails(site.centerShift, site, tab, stats, false, writer)
       }
     }
   }
 
-  def getSiteDetails(cshift, site, tab, stats, newSite) {
+  def getSiteDetails(cshift, site, tab, stats, newSite, writer) {
 
       site.sourceId = tab.SITE_ID.text()
       site.sourceLoc = tab.SITE_NUMBER.text()
@@ -355,17 +355,17 @@ class CShiftService {
       site.title = tab.SITE_NAME.text()
 
       if (site.title ==~/(?i).*(test|training)\s?+.*/) {
-        println "Test or training site - dropping: ${site.title}"
+        writer.println "Test or training site - dropping: ${site.title}"
         return
       }
 
-      if (!addSiteAddress(cshift, site)) {
-        println "Got a bad address, skipping site creation: ${site.title}"
+      if (!addSiteAddress(cshift, site, writer)) {
+        writer.println "Got a bad address, skipping site creation: ${site.title}"
         return
       }
 
       addSiteHours(cshift, site)
-      addSitePhone(cshift, site)
+      addSitePhone(cshift, site, writer)
       addSiteFeatures(cshift, site)
 
       site.extendedHours = false
@@ -385,7 +385,7 @@ class CShiftService {
         createSiteUser(site, email, email, cshift.manager)
       }
 
-      unitsAvailable(cshift, site, stats)
+      unitsAvailable(cshift, site, stats, writer)
 
       site.requiresInsurance = loadInsurance(cshift, site)
       loadPromos(cshift, site)
@@ -416,7 +416,7 @@ class CShiftService {
     }
   }
 
-  def createSitePhones(cshift) {
+  def createSitePhones(cshift, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -429,9 +429,9 @@ class CShiftService {
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
       StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
-      println "Create phone for site ${tab.SITE_ID.text()}"
+      writer.println "Create phone for site ${tab.SITE_ID.text()}"
       if (site) {
-        addSitePhone(cshift, site)
+        addSitePhone(cshift, site, writer)
       }
     }
   }
@@ -463,7 +463,7 @@ class CShiftService {
     }
   }
 
-  def boolean addSiteAddress(cshift, site) {
+  def boolean addSiteAddress(cshift, site, writer) {
     def ret = getSiteAddress(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -482,7 +482,7 @@ class CShiftService {
       site.state = State.fromText(addr.STATE.text())
 
       if (!site.state) {
-        println "Bad state: ${addr.STATE.text()}"
+        writer.println "Bad state: ${addr.STATE.text()}"
         return false
       }
 
@@ -490,18 +490,18 @@ class CShiftService {
 
       def address = addr.STREET.text() + ' ' + ', ' + addr.CITY.text() + ', ' + addr.STATE.text() + ' ' + addr.POSTAL_CODE.text()
 
-      println "Found address: ${address}"
+      writer.println "Found address: ${address}"
       def geoResult = geocodeService.geocode(address)
 
       site.lng = geoResult.Placemark[0].Point.coordinates[0]
       site.lat = geoResult.Placemark[0].Point.coordinates[1]
 
     }
-    println "Returning good address: ${site.address}, ${site.city} ${site.state}"
+    writer.println "Returning good address: ${site.address}, ${site.city} ${site.state}"
     return true
   }
 
-  def addSitePhone(cshift, site) {
+  def addSitePhone(cshift, site, writer) {
     def ret = getSitePhones(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
 
     if (!ret) return
@@ -519,7 +519,7 @@ class CShiftService {
       def value = phone.VALUE.text().toLowerCase()
       if (count++ == 0 || (value == 'site' || value == 'office')) {
         site.phone = phoneNumber
-        println "Updated site ${site.title } phone ${site.phone}"
+        writer.println "Updated site ${site.title } phone ${site.phone}"
       }
     }
   }
@@ -743,13 +743,13 @@ class CShiftService {
     }
   }
 
-  def updateUnits(site, stats) {
+  def updateUnits(site, stats, writer) {
     site.units.each {unit ->
       unit.delete()
     }
     site.units.clear()
     site.save()
-    unitsAvailable(site.centerShift, site, stats)
+    unitsAvailable(site.centerShift, site, stats, writer)
     if (site.units.size() > 0) {
       def unit = site.units.asList().get(0)
 
@@ -758,12 +758,12 @@ class CShiftService {
 
       CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-      println "checkRented (${site.centerShift.userName}, ${site.centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+      writer.println "checkRented (${site.centerShift.userName}, ${site.centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
       def unitInfo = port.getAvailableUnits(site.centerShift.userName, site.centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.displaySize)
 
       if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
-        println "Return for getAvailableUnits < 0 : ${unitInfo}"
+        writer.println "Return for getAvailableUnits < 0 : ${unitInfo}"
         return false
       }
 
@@ -781,18 +781,18 @@ class CShiftService {
       def feedUnitId = unitId[0] as Long
       def feedUnitNumber = unitNumber[0]
 
-      def moveInDetails = getCostDetails(site.centerShift.userName, site.centerShift.pin, site.sourceId, site.centerShift.location.kioskUrl, feedUnitId, "-1")
+      def moveInDetails = getCostDetails(site.centerShift.userName, site.centerShift.pin, site.sourceId, site.centerShift.location.kioskUrl, feedUnitId, "-1", writer)
 
       def depositLine = moveInDetails.items.find{ it.description =~ /(?i).*deposit.*/ }
       if (depositLine) {
         site.deposit = depositLine.amount
-        println "Found deposit ${site.deposit}"
+        writer.println "Found deposit ${site.deposit}"
       }
     }
     site.save(flush: true)
   }
 
-  def unitsAvailable(cshift, site, stats) {
+  def unitsAvailable(cshift, site, stats, writer) {
     def ret = getSiteUnits(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -841,20 +841,20 @@ class CShiftService {
             site.addToUnits(siteUnit)
             
           } else {
-            println "Skipping due to size: length = ${length}, width = ${width}"
+            writer.println "Skipping due to size: length = ${length}, width = ${width}"
           }
         }
       } else {
         if (vacant == 0) {
-          println "Skipped due to full occupancy: ${typeName}"
+          writer.println "Skipped due to full occupancy: ${typeName}"
         } else {
-          println "Skipped due to parking or other: ${typeName}"
+          writer.println "Skipped due to parking or other: ${typeName}"
         }
       }
     }
   }
 
-  def loadPromos(cshift, site) {
+  def loadPromos(cshift, site, writer) {
     def ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -929,7 +929,7 @@ class CShiftService {
             break
 
           default:
-            println "Unknown promoType: ${ptype}"
+            writer.println "Unknown promoType: ${ptype}"
             return
         }
         specialOffer.save()
@@ -946,7 +946,7 @@ class CShiftService {
       }
     }
     for (promo in deleteList) {
-      println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
+      writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
       site.removeFromSpecialOffers(promo)
     }
 
@@ -1089,7 +1089,7 @@ class CShiftService {
     rentalTransaction.save(flush:true)
   }
 
-  def moveInDetail(RentalTransaction rentalTransaction) {
+  def moveInDetail(RentalTransaction rentalTransaction, writer) {
 
     if (!checkRented(rentalTransaction)) {
       return null
@@ -1103,24 +1103,24 @@ class CShiftService {
       insId = ins.insuranceId
     }
 
-    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String)
+    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String, writer)
     rentalTransaction.paymentString = moveInDetails.paymentString
 
     return moveInDetails
   }
 
-  def getCostDetails(userName, pin, sourceId, url, unitId, insId) {
+  def getCostDetails(userName, pin, sourceId, url, unitId, insId, writer) {
     URL endPoint = new URL(url)
     CsKiosk service = new CsKioskLocator();
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-    println "getMoveInCost params: ${userName}, ${pin}, ${sourceId as Long}, ${unitId}, ${insId as String}"
+    writer.println "getMoveInCost params: ${userName}, ${pin}, ${sourceId as Long}, ${unitId}, ${insId as String}"
 
     def ret = port.getMoveInCost(userName, pin, sourceId as Long, unitId as String, insId as String)
 
     if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
-      println "Return for getMoveInCost < 0 : ${ret}"
+      writer.println "Return for getMoveInCost < 0 : ${ret}"
       return null
     }
 
@@ -1140,7 +1140,7 @@ class CShiftService {
       try {
         moveInDetails.items.add(new LineItem(description:desc[i], tax:(tax[i] ? tax[i] : 0) as BigDecimal, amount: (price[i] ? price[i] : 0) as BigDecimal))
       } catch (NumberFormatException nfe) {
-        println "Bad format for tax: ${tax[i]} or price: ${price[i]}"
+        writer.println "Bad format for tax: ${tax[i]} or price: ${price[i]}"
       }
     }
 
@@ -1178,6 +1178,7 @@ class CShiftService {
     def m = message =~ /.+RentalID:\s+(\d+),.+/
     if (m.matches()) {
       rentalTransaction.reservationId = m[0][1]
+      rentalTransaction.idNumber = "R${rentalTransaction.reservationId}"
     }
     println "Reservation ID = ${rentalTransaction.reservationId}"
     rentalTransaction.save()
@@ -1186,7 +1187,7 @@ class CShiftService {
 
   }
 
-  def moveIn(RentalTransaction rentalTransaction) {
+  def moveIn(RentalTransaction rentalTransaction, PrintWriter writer) {
     def cshift = rentalTransaction.site.centerShift
 
     def insId = -1
@@ -1195,24 +1196,24 @@ class CShiftService {
       insId = ins.insuranceId
     }
 
-    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String)
+    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String, writer)
     rentalTransaction.paymentString = moveInDetails.paymentString
 
     URL endPoint = new URL(rentalTransaction.site.centerShift.location.kioskUrl)
     CsKiosk service = new CsKioskLocator();
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
-    println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${rentalTransaction.paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
+    writer.println "doMoveIn params: ${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${rentalTransaction.tenantId as Long}, ${rentalTransaction.feedUnitId}, ${insId as String},  ${rentalTransaction.paymentString}, \"Storitz  \", \"0123456789\", \"Storitz Acct.\", \"10\", \"\", \"K\" "
     // Use ACH to allow Centershift to report transactions
     def ret = port.doMoveIn(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, rentalTransaction.tenantId as Long, rentalTransaction.feedUnitId, insId as String,
             rentalTransaction.paymentString, "Storitz  ", "0123456789", "Storitz Acct.", "10", "00000", "K")
 
     if ((ret instanceof Integer || ret instanceof String) && (ret as Integer) < 0) {
-      println "Return for doMoveIn < 0 : ${ret}"
+      writer.println "Return for doMoveIn < 0 : ${ret}"
       return false
     }
 
-    println "Return from doMoveIn: ${ret}"
+    writer.println "Return from doMoveIn: ${ret}"
 
     rentalTransaction.idNumber = ret
     rentalTransaction.save(flush: true)

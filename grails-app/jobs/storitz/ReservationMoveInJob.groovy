@@ -4,6 +4,8 @@ import com.storitz.RentalTransaction
 
 
 class ReservationMoveInJob {
+    private static final boolean AUTOMATIC_FLUSH = true;
+    private static final String DEFAULT_CHARSET = "utf8";
 
     def CShiftService
     def emailService
@@ -15,23 +17,19 @@ class ReservationMoveInJob {
     def execute(context) {
 
       def buf = new ByteArrayOutputStream()
-      def newOut = new PrintStream(buf)
-      def saveOut = System.out
-
-      System.out  = newOut
-
+      PrintWriter writer = new PrintWriter(new OutputStreamWriter(buf, DEFAULT_CHARSET), AUTOMATIC_FLUSH);
 
       def startTime = System.currentTimeMillis()
       if (context.mergedJobDataMap.get('from')) {
-        println "Called from ${context.mergedJobDataMap.get('from')}"
+        writer.println "Called from ${context.mergedJobDataMap.get('from')}"
       }
       def target = new Date()
       if (context.mergedJobDataMap.get('target')) {
         target = Date.parse("MM/dd/yy", context.mergedJobDataMap.get('target'))
       }
-      println "----------------- Starting reservation to move-in... ----------------------------"
+      writer.println "----------------- Starting reservation to move-in... ----------------------------"
 
-      println "Target date ${target.format('MM/dd/yy')}"
+      writer.println "Target date ${target.format('MM/dd/yy')}"
       
       def c = RentalTransaction.createCriteria()
       def results = c.list {
@@ -41,25 +39,27 @@ class ReservationMoveInJob {
         }
       }
       for(rt in results) {
-        println "Processing reservation id: ${rt.id} moveInDate: ${rt.moveInDate.format('MM/dd/yy')}"
+        writer.println "Processing reservation id: ${rt.id} moveInDate: ${rt.moveInDate.format('MM/dd/yy')}"
         if (rt.site.source.startsWith('CS')) {
-          if (CShiftService.moveIn(rt)) {
+          if (CShiftService.moveIn(rt, writer)) {
             rt.reserved = false
             rt.save()
           } else {
-            println "Error performing MoveIn for Transaction: ${rt.id} - reservation = ${rt.reservationId} accountId = ${rt.tenantId} contactId = ${rt.contactId}"
+            writer.println "Error performing MoveIn for Transaction: ${rt.id} - reservation = ${rt.reservationId} accountId = ${rt.tenantId} contactId = ${rt.contactId}"
           }
         }
       }
-      println "----------------- Complete ${results.size()} reservations ${System.currentTimeMillis() - startTime} millis ----------------------------"
-
-      System.out = saveOut
+      writer.println "----------------- Complete ${results.size()} reservations ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
       String subject = "Centershift reservation to movein ${new Date().format('yyyy-MM-dd')}"
+
+      writer.flush()
+      writer.close()
 
       emailService.sendTextEmail(to: 'tech@storitz.com',
         from: 'no-reply@storitz.com',
         subject: subject,
         body: buf.toString())
+
     }
 }

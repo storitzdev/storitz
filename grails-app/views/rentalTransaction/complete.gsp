@@ -138,7 +138,7 @@
                 </tr>
                 <tr>
                   <td style="width:200px;">Rental Rate:</td>
-                  <td><g:formatNumber number="${unit?.pushRate}" type="currency" currencyCode="USD"/></td>
+                  <td><g:formatNumber number="${rentalTransactionInstance.monthlyRate}" type="currency" currencyCode="USD"/></td>
                 </tr>
                 <tr>
                   <td style="width:200px;">Rent is Paid Through:</td>

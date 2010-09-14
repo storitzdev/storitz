@@ -31,7 +31,8 @@ class MoveInService {
           return siteLinkService.moveInDetail(trans)
 
         case "CS3":
-          return CShiftService.moveInDetail(trans)
+          PrintWriter writer = new PrintWriter(System.out)
+          return CShiftService.moveInDetail(trans, writer)
 
         case "CS4":
           break
@@ -52,7 +53,8 @@ class MoveInService {
           CShiftService.createTenant(trans)
           def today = new Date()
           if(trans.moveInDate - today <= 1) {
-            return CShiftService.moveIn(trans)
+            PrintWriter writer = new PrintWriter(System.out)
+            return CShiftService.moveIn(trans, writer)
           }
           return CShiftService.reserve(trans)
           break

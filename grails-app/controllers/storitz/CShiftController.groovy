@@ -50,11 +50,13 @@ class CShiftController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
+      def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftService.refreshSites(cshiftInstance, stats)
+        CShiftService.refreshSites(cshiftInstance, stats, writer)
       } else {
-        CShiftService4.refreshShites(cshiftInstance, stats)
+        CShiftService4.refreshSites(cshiftInstance, stats)
       }
+      writer.close()
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
@@ -68,7 +70,9 @@ class CShiftController {
           promo.delete()
         }
         site.specialOffers.clear()
-        CShiftService.loadPromos(cshiftInstance, site)
+        def writer = new PrintWriter(System.out)
+        CShiftService.loadPromos(cshiftInstance, site, writer)
+        writer.close()
         println "Promos refreshed for ${site.title}"
       }
       flash.message = "Feed promotions refreshed."
@@ -95,7 +99,9 @@ class CShiftController {
   def refreshPhones = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      CShiftService.createSitePhones(cshiftInstance)
+      def writer = new PrintWriter(System.out)
+      CShiftService.createSitePhones(cshiftInstance, writer)
+      writer.close()
       flash.message = "Feed phones refreshed."
       redirect(action: "show", id: cshiftInstance.id)
     }

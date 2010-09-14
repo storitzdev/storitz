@@ -248,7 +248,7 @@ class RentalTransactionController {
           return
         }
       }
-      rentalTransactionInstance.monthlyRate = unit.pushRate
+      rentalTransactionInstance.monthlyRate = unit.pushRate ? unit.pushRate : unit.price
 
 
       def ccNum = params.cc_number.replaceAll(/\D/, '') as String

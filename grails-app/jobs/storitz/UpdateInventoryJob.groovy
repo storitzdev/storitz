@@ -4,6 +4,8 @@ import com.storitz.StorageSite
 
 
 class UpdateInventoryJob {
+    private static final boolean AUTOMATIC_FLUSH = true;
+    private static final String DEFAULT_CHARSET = "utf8";
 
     def feedService
     def emailService
@@ -15,30 +17,29 @@ class UpdateInventoryJob {
     def execute(context) {
 
       def buf = new ByteArrayOutputStream()
-      def newOut = new PrintStream(buf)
-      def saveOut = System.out
-
-      System.out  = newOut
+      PrintWriter writer = new PrintWriter(new OutputStreamWriter(buf, DEFAULT_CHARSET), AUTOMATIC_FLUSH);
 
       def startTime = System.currentTimeMillis()
       if (context.mergedJobDataMap.get('from')) {
-        println "Called from ${context.mergedJobDataMap.get('from')}"
+        writer.println "Called from ${context.mergedJobDataMap.get('from')}"
       }
-      println "----------------- Starting nightly update... ----------------------------"
+      writer.println  "----------------- Starting nightly update... ----------------------------"
       StorageSite.findAll().each{ site ->
         def stats = new storitz.SiteStats()
-        feedService.updateUnits(site, stats)
-        println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
+        feedService.updateUnits(site, stats, writer)
+        writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
       }
-      println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
-
-      System.out = saveOut
+      writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
       String subject = "Inventory refresh ${new Date().format('yyyy-MM-dd')}"
 
+      writer.flush()
+      writer.close()
+      
       emailService.sendTextEmail(to: 'tech@storitz.com',
         from: 'no-reply@storitz.com',
         subject: subject,
         body: buf.toString())
+
     }
 }

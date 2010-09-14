@@ -341,8 +341,9 @@ class StorageSiteController {
   def refresh = {
     def storageSiteInstance = StorageSite.get(params.id)
 
+    def writer = new PrintWriter(System.out)
     def stats = new storitz.SiteStats()
-    feedService.updateSite(storageSiteInstance, stats)
+    feedService.updateSite(storageSiteInstance, stats, writer)
     flash.message = "${message(code: 'default.refreshed.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
     redirect(action: "show", id: storageSiteInstance.id)
   }
@@ -350,8 +351,9 @@ class StorageSiteController {
   def units = {
     def storageSiteInstance = StorageSite.get(params.id)
 
+    def writer = new PrintWriter(System.out)
     def stats = new storitz.SiteStats()
-    feedService.updateUnits(storageSiteInstance, stats)
+    feedService.updateUnits(storageSiteInstance, stats, writer)
     flash.message = "${message(code: 'default.units.message', args: [stats.unitCount, stats.removedCount])}"
     redirect(action: "show", id: storageSiteInstance.id)
   }

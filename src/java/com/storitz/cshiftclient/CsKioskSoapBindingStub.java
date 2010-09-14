@@ -1061,7 +1061,6 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
             cachedDeserFactories.add(arraydf);
             cachedDeserFactories.add(new EmptyDeserializerFactory());
 
-            System.out.println("EmptyDeserializer registered");
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
