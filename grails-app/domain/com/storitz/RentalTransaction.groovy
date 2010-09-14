@@ -41,12 +41,14 @@ class RentalTransaction {
   BigDecimal moveInCost
   BigDecimal feedMoveInCost
   BigDecimal commission
+  BigDecimal monthlyRate
   ReferralCode referralCode
   SearchEngineReferral searchEngineReferral
   Boolean isCallCenter
   String cleanCCNum
   String paymentString
   String unitType
+  Long searchSize
   Integer reservationPeriod
   String reservationId
   BigDecimal reservationCost
@@ -79,7 +81,6 @@ class RentalTransaction {
     idType(nullable: true)
     commission(nullable: true)
     achTransferDate(nullable: true)
-    unitType(nullable: true)
     promoId(nullable:true)
     searchEngineReferral(nullable: true)
     cleanCCNum(nullable:true)
@@ -92,6 +93,7 @@ class RentalTransaction {
     reservationCost(nullable:true)
     contactId(nullable:true)
     feedMoveInCost(nullable:true)
+    monthlyRate(nullable:true)
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',

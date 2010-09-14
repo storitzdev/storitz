@@ -52,7 +52,6 @@ class NotificationService {
         maxResults(1)
       }
 
-      def unit = StorageUnit.get(rentalTransaction.unitId)
       def promo = null
       if (!(rentalTransaction.promoId < 0)) {
         promo = SpecialOffer.get(rentalTransaction.promoId)
@@ -88,7 +87,7 @@ class NotificationService {
         billingName: billingName,
         billingAddress: billingAddress,
         ccNum: rentalTransaction.cleanCCNum,
-        rentalRate: nf.format(unit.pushRate),
+        rentalRate: nf.format(rentalTransaction.monthlyRate),
         promoName: promoName,
         paymentTotal: nf.format(rentalTransaction.cost),
         rentalAgreementLink: rentalAgreementLink,

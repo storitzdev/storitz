@@ -101,6 +101,7 @@ class RentalTransactionController {
         rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         rentalTransactionInstance.site = site
         rentalTransactionInstance.unitType = params.chosenType
+        rentalTransactionInstance.searchSize = params.searchSize
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
         rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 
@@ -173,7 +174,6 @@ class RentalTransactionController {
 
       def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
       rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
-      rentalTransactionInstance
 
       [rentalTransactionInstance: rentalTransactionInstance,
               title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state} ${rentalTransactionInstance.site.zipcode}",
@@ -193,11 +193,6 @@ class RentalTransactionController {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
       def unit = StorageUnit.get(rentalTransactionInstance.unitId)
-      if (unit) {
-        rentalTransactionInstance.unitType = unit.getUnitTypeLower()
-      } else {
-        rentalTransactionInstance.unitType = params.chosenType
-      }
       Insurance ins = null
       if (rentalTransactionInstance.insuranceId > 0) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
@@ -389,11 +384,6 @@ class RentalTransactionController {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
       def unit = StorageUnit.get(rentalTransactionInstance.unitId)
-      if (unit) {
-        rentalTransactionInstance.unitType = unit.getUnitTypeLower()
-      } else {
-        rentalTransactionInstance.unitType = params.chosenType
-      }
       Insurance ins = null
       if (rentalTransactionInstance.insuranceId > 0) {
         ins = Insurance.get(rentalTransactionInstance.insuranceId)
@@ -405,6 +395,49 @@ class RentalTransactionController {
         redirect (action:'payment', params:["id":rentalTransactionInstance.id])
         return
       }
+
+      notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
+
+      // remove unit from inventory
+      if (unit && --unit.unitCount <= 0) {
+        rentalTransactionInstance.site.removeFromUnits(unit)
+        rentalTransactionInstance.save(flush: true)
+      }  else if (unit) {
+        unit.save(flush: true)
+      }
+
+      def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
+      def siteManager = User.createCriteria().get {
+        sites {
+          eq("site.id", rentalTransactionInstance.site.id)
+        }
+        notificationTypes {
+          eq("notificationType.id", siteManagerNotification.id)
+        }
+        maxResults(1)
+      }
+
+      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
+
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def forceNotify = {
+      def rentalTransactionInstance = RentalTransaction.get(params.id)
+
+      if (!rentalTransactionInstance) {
+        // TODO - send them to an error page
+      }
+
+      SpecialOffer promo = null
+      if (rentalTransactionInstance.promoId > 0) {
+        promo = SpecialOffer.get(rentalTransactionInstance.promoId)
+      }
+      Insurance ins = null
+      if (rentalTransactionInstance.insuranceId > 0) {
+        ins = Insurance.get(rentalTransactionInstance.insuranceId)
+      }
+
 
       notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
 
@@ -430,7 +463,7 @@ class RentalTransactionController {
       render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
 
     }
-
+  
     def edit = {
         def rentalTransactionInstance = RentalTransaction.get(params.id)
         if (!rentalTransactionInstance) {
