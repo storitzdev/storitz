@@ -9,6 +9,16 @@
 
   <script type="text/javascript">
     //<![CDATA[
+    function setupForm() {
+      $('cshiftVersion').observe('change', function(event) {
+        Effect.toggle('orgId_label', 'appear', {duration: 0.25});
+        Effect.toggle('orgId', 'appear', {queue: 'end', duration: 0.1});
+      });
+    }
+
+    Event.observe(window, 'load', function() {
+      setupForm();
+    });
     //]]>
   </script>
 
@@ -70,6 +80,26 @@
 
       <div class="formInstructions">
         This information should come from CenterShift and the operator
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:200px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'cshiftVersion', 'errors')}">
+          <g:select id="cshiftVersion" style="width:150px;" name="cshiftVersion" from="${storitz.constants.CenterShiftVersion?.list()}" value="${cshiftInstance?.cshiftVersion}" optionValue="display"  />
+        </div>
+        <div id="orgId" style="width:200px;display:none;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'orgId', 'errors')}">
+          <g:textField name="orgId" style="width:180px;" value="${cshiftInstance?.orgId}"/>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:200px;">
+          <label for="cshiftVersion">CenterShift Version</label>
+        </div>
+        <div id="orgId_label" class="checkout_name" style="width:200px;display:none;">
+          <label for="orgId">Organization ID</label>
+        </div>
+        <div style="clear:both;"></div>
       </div>
 
       <div class="checkout_fields">

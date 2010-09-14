@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<%@ page import="storitz.constants.CenterShiftVersion" %>
+
+
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Show CenterShift Feed"/>
@@ -53,11 +54,27 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="cshift.pin.label" default="PIN"/></td>
+          <td valign="top" class="name"><g:message code="cshift.pin.label" default="Password/PIN"/></td>
 
           <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "pin")}</td>
 
         </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.pin.label" default="Version"/></td>
+
+          <td valign="top" class="value">${cshiftInstance.cshiftVersion.display}</td>
+
+        </tr>
+
+        <g:if test="${cshiftInstance.cshiftVersion == CenterShiftVersion.CS4}">
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="cshift.pin.label" default="Organization ID"/></td>
+
+            <td valign="top" class="value">${cshiftInstance.orgId}</td>
+
+          </tr>
+        </g:if>
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="cshift.sites.label" default="Sites"/></td>
