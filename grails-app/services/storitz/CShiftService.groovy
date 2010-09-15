@@ -805,7 +805,7 @@ class CShiftService {
 
       def vacant = unit.VACANT.text() as Integer
       def typeName = unit.VALUE.text()
-      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mailbox|slip|apartment|office|container|portable|wine).*/)) {
+      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/)) {
         def dimensions = unit.DIMENSIONS.text()
         def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
         if (m.matches()) {

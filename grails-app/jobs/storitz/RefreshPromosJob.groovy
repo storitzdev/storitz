@@ -26,6 +26,7 @@ class RefreshPromosJob {
     writer.println "----------------- Starting Promo refresh update... ----------------------------"
     StorageSite.findAll().each{ site ->
       feedService.refreshPromos(site, writer)
+      site.save(flush: true)
     }
     writer.println  "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
 

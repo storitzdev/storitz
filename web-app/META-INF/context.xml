@@ -1,4 +1,4 @@
-<Context crossContext="true" reloadable="false" debug="1">
+<Context crossContext="true" reloadable="false" allowLinking="true" debug="1">
 
 <Resource name="jdbc/storitz"
           auth="Container"
