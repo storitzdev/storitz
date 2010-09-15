@@ -26,6 +26,13 @@ environments {
       //loggingSql = true
     }
   }
+  preview{
+    dataSource {
+      dbCreate = "update" // one of 'create', 'create-drop','update'
+      url = "jdbc:hsqldb:file:previewDB"
+      //loggingSql = true
+    }
+  }
   test {
     dataSource {
       dbCreate = "update"

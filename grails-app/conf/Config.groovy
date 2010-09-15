@@ -35,6 +35,13 @@ environments {
         grails.serverURL = "http://www.storitz.com"
         security.httpsPort = 443
     }
+    preview {
+        grails.serverURL = "http://preview.storitz.com"
+        security.httpsPort = 8443
+        grails.plugins.springsecurity.interceptUrlMap = [
+           '/**':    ['ROLE_USER']
+        ]
+    }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
         security.httpsPort = 8443
@@ -83,6 +90,9 @@ grails.plugins.springsecurity.authority.className = 'com.storitz.Role'
 grails.plugins.springsecurity.requestMap.className = 'com.storitz.RequestMap'
 grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity.SecurityConfigType.Annotation
 grails.plugins.springsecurity.logout.afterLogoutUrl = "/logout.gsp"
+grails.plugins.springsecurity.interceptUrlMap = [
+   '/weblog/**':    ['ROLE_ADMIN']
+]
 
 grails.date.formats = ['dd-MM-yyyy', 'h:mma']
 

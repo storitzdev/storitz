@@ -62,6 +62,34 @@ beans = {
       }
       break
 
+    case "preview":
+      println "Starting production ActiveMQ 61610"
+      jmsBroker(XBeanBrokerService) {
+			useJmx = 'false'
+			persistent = 'false'
+			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61610'))]
+      }
+
+      connectionFactory(ActiveMQConnectionFactory) {
+        brokerURL = "vm://localhost:61617"
+      }
+
+      jmsTemplate(JmsTemplate) {
+          connectionFactory =  { SingleConnectionFactory cf ->
+              targetConnectionFactory = ref('connectionFactory')
+          }
+      }
+      jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+        brokerURL = "vm://localhost:61610"
+      }
+      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+        bean.destroyMethod = "stop"
+        connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+          brokerURL = "vm://localhost:61610"
+        }
+      }
+      break
+
     case "development":
       println "Starting development ActiveMQ 61617"
       jmsBroker(XBeanBrokerService) {
