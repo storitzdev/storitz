@@ -34,14 +34,14 @@ environments {
     production {
         grails.serverURL = "http://www.storitz.com"
         security.httpsPort = 443
-        grails.plugins.springsecurity.interceptUrlMap = [
-           '/weblog/**':    ['ROLE_ADMIN']
+        grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+           '/weblog/**': ['ROLE_USER'],
         ]
     }
     preview {
         grails.serverURL = "http://preview.storitz.com"
         security.httpsPort = 8443
-        grails.plugins.springsecurity.interceptUrlMap = [
+        grails.plugins.springsecurity.controllerAnnotations.staticRules = [
            '/**':    ['ROLE_USER']
         ]
     }
