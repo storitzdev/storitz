@@ -42,7 +42,10 @@ environments {
         grails.serverURL = "http://preview.storitz.com"
         security.httpsPort = 8443
         grails.plugins.springsecurity.controllerAnnotations.staticRules = [
-           '/**':    ['ROLE_USER']
+          '/home/**':    ['ROLE_USER', 'ROLE_ADMIN'],
+          '/STMap/**':   ['ROLE_USER', 'ROLE_ADMIN'],
+          '/images/**':  ['ROLE_USER', 'ROLE_ADMIN'],
+          '/storageSite/**':  ['ROLE_USER', 'ROLE_ADMIN']
         ]
     }
     development {
