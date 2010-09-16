@@ -21,7 +21,7 @@ class GlobalFilters {
                         , location_id:params.location_id, ad_id:params.ad_id, keyword:params.keyword]
                    }
 
-                   println "Setting cookie ${ingredients}"
+                   // println "Setting cookie ${ingredients}"
                  
                    landingCookie = CookieCodec.bakeLandingCookie(ingredients)
 
@@ -39,7 +39,7 @@ class GlobalFilters {
                  } else if (params.location_id?.size() == 5) {
                    address = params.location_id
                  }
-                 println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
+                 // println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
                  redirect(controller:'home', action:'index', params:[address:address])
 
                  return false

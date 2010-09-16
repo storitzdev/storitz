@@ -596,7 +596,7 @@ class StorageSiteController {
   }
 
   def detailTotals = {
-    def moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+    def moveInDate = Date.parse('MM/dd/yy', params.moveInDate ? params.moveInDate : new Date())
     def site = StorageSite.get(params.id)
 
     Collection unitTypes
