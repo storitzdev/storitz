@@ -159,6 +159,7 @@ function transactionFormSetup() {
     $('clearOffer').update('');
     $('selectedOffer').update('');
     $('specialOffers').select('input:checked[type=radio]')[0].checked = false;
+    showTotals('promo');
   });
 
   $('totalMoveInCost').observe('click', function() {
