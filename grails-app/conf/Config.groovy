@@ -17,6 +17,10 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       css: 'text/css',
                       csv: 'text/csv',
                       all: '*/*',
+                      pdf: 'application/pdf',
+                      rtf: 'application/rtf',
+                      excel: 'application/vnd.ms-excel',
+                      ods: 'application/vnd.oasis.opendocument.spreadsheet',
                       json: ['application/json','text/json'],
                       form: 'application/x-www-form-urlencoded',
                       multipartForm: 'multipart/form-data'
@@ -44,7 +48,6 @@ environments {
         grails.plugins.springsecurity.controllerAnnotations.staticRules = [
           '/home/**':    ['ROLE_USER', 'ROLE_ADMIN'],
           '/STMap/**':   ['ROLE_USER', 'ROLE_ADMIN'],
-          '/images/**':  ['ROLE_USER', 'ROLE_ADMIN'],
           '/storageSite/**':  ['ROLE_USER', 'ROLE_ADMIN']
         ]
     }
