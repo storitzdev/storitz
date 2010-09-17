@@ -33,10 +33,11 @@ class CshiftController {
     if (cshiftInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()
+      def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftService.loadSites(cshiftInstance, stats)
+        CShiftService.loadSites(cshiftInstance, stats, writer)
       } else {
-        CShift4Service.loadSites(cshiftInstance, stats)
+        CShift4Service.loadSites(cshiftInstance, stats, writer)
       }
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)

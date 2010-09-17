@@ -286,7 +286,7 @@ class CShiftService {
           site.lastUpdate = 0
           newSite = true
         }
-        getSiteDetails(cshift, site, tab, stats, newSite)
+        getSiteDetails(cshift, site, tab, stats, newSite, writer)
       }
     }
   }
