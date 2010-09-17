@@ -12,12 +12,8 @@ class UnitSizeService {
 
         def unitArea = width * length
         def foundSize = 0
-        StorageSize.findAll().each {u ->
-          if (Math.abs(unitArea - foundSize) > Math.abs(unitArea - u.width * u.length)) {
-            unitSize = u
-            foundSize = u.width * u.length
-          }
-        }
+
+        unitSize = StorageSize.findAll().findAll { it.length * it.width >= unitArea}?.min{ it.width * it.length - unitArea }
       }
       return unitSize
     }
