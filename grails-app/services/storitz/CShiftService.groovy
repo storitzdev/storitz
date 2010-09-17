@@ -389,7 +389,7 @@ class CShiftService {
       unitsAvailable(cshift, site, stats, writer)
 
       site.requiresInsurance = loadInsurance(cshift, site)
-      loadPromos(cshift, site)
+      loadPromos(cshift, site, writer)
       site.save(flush: true)
   }
 
