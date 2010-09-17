@@ -252,7 +252,7 @@ class CShiftService {
     }
   }
 
-  def loadSites(cshift, stats) {
+  def loadSites(cshift, stats, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
