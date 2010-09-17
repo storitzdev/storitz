@@ -21,6 +21,7 @@ import com.storitz.NotificationType
 import com.storitz.UserRole
 import com.storitz.Role
 import java.math.RoundingMode
+import com.storitz.UnitTypeLookup
 
 class SiteLinkService {
 
