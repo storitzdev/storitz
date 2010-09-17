@@ -11,7 +11,7 @@ class CshiftController {
   def CShiftService
   def CShift4Service
 
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+  static allowedMethods = [save: "POST", update: "POST"]
 
   def index = {
     redirect(action: "list", params: params)
