@@ -76,7 +76,7 @@
                   <g:textField style="width:180px;" id="lowerBound" name="lowerBound" value="${fieldValue(bean: commissionInstance, field: 'lowerBound')}" />
               </div>
               <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'upperBound', 'errors')}">
-                  <g:textField style="width:180px;" id="upperBound" name="upperBound" value="${fieldValue(bean: commissionInstance, field: 'lowerBound')}" />
+                  <g:textField style="width:180px;" id="upperBound" name="upperBound" value="${fieldValue(bean: commissionInstance, field: 'upperBound')}" />
               </div>
               <div style="clear:both;"></div>
             </div>
