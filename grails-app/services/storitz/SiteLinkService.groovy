@@ -651,7 +651,7 @@ class SiteLinkService {
       SiteUser.link(site, siteLink.manager)
     }
 
-    unitsAvailable(siteLink, site, stats, newSite)
+    unitsAvailable(siteLink, site, stats, newSite, writer)
 
     site.requiresInsurance = insurance(siteLink, site, writer)
     if (site.units?.size() > 0) {
@@ -752,16 +752,23 @@ class SiteLinkService {
           siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
           def floor = unit.iFloor.text() as Integer
           def typeName = unit.sTypeName.text()
-          siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
-          siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
-          siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
-          siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
-          siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
           siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
           siteUnit.isAvailable = true
           siteUnit.isSecure = false
-          if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
-            siteUnit.isUpper = true
+          siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
+
+          def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+          if (unitTypeLookup) {
+            siteUnit.setUnitTypeLower(unitTypeLookup.unitType)
+            siteUnit.isTempControlled = unitTypeLookup.tempControlled
+          } else {
+            siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
+            siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
+            siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
+            siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
+            if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
+              siteUnit.isUpper = true
+            }
           }
           Integer width = (int) Double.parseDouble(unit.dcWidth.text())
           Integer length = (int) Double.parseDouble(unit.dcLength.text())

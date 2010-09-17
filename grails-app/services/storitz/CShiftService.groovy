@@ -22,6 +22,7 @@ import com.storitz.User
 import storitz.constants.RentalUse
 import com.storitz.RentalTransaction
 import java.math.RoundingMode
+import com.storitz.UnitTypeLookup
 
 class CShiftService {
 
@@ -824,14 +825,20 @@ class CShiftService {
 
             // outside = driveup
             // down = interior
-            siteUnit.isUpper = ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/)
-            siteUnit.isDriveup = (typeName ==~ /(?i).*(drive|roll-up|roll up).*/)
-            siteUnit.isInterior = (!siteUnit.isUpper && !siteUnit.isDriveup && !(typeName ==~ /(?i).*outer.*/)) || (typeName ==~ /(?i).*(interior|ground|1st).*/)
-            if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
-              siteUnit.isUpper = true
+            def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+            if (unitTypeLookup) {
+              siteUnit.setUnitTypeLower(unitTypeLookup.unitType)
+              siteUnit.isTempControlled = unitTypeLookup.tempControlled
+            } else {
+              siteUnit.isUpper = ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/)
+              siteUnit.isDriveup = (typeName ==~ /(?i).*(drive|roll-up|roll up).*/)
+              siteUnit.isInterior = (!siteUnit.isUpper && !siteUnit.isDriveup && !(typeName ==~ /(?i).*outer.*/)) || (typeName ==~ /(?i).*(interior|ground|1st).*/)
+              if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
+                siteUnit.isUpper = true
+              }
+              siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
             }
             siteUnit.isAlarm = false
-            siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
             siteUnit.isPowered = false
             siteUnit.isAvailable = true
             siteUnit.isSecure = false

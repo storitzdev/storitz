@@ -28,7 +28,7 @@
         <sec:ifAnyGranted roles="ROLE_ADMIN">
         <li><g:link controller="storageSize" action="list">Storage Unit Size list</g:link> </li>
         <li><g:link controller="siteLink" action="list">Manage SiteLink</g:link> </li>
-        <li><g:link controller="CShift" action="list">Manage CenterShift</g:link> </li>
+        <li><g:link controller="cshift" action="list">Manage CenterShift</g:link> </li>
         <li><g:link controller="commission" action="list">Manage Commission Table</g:link></li>
         <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link> </li>
           <li><g:link controller="storageSite" action="refreshPromos">Refresh Promos</g:link> </li>

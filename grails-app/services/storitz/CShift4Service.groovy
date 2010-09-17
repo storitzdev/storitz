@@ -9,6 +9,7 @@ import com.storitz.UserNotificationType
 import com.storitz.NotificationType
 import com.storitz.SiteUser
 import com.storitz.User
+import com.storitz.Insurance
 
 class CShift4Service {
 
@@ -61,7 +62,7 @@ class CShift4Service {
       }
     }
 
-    def loadSites(cshift, stats) {
+    def loadSites(cshift, stats, writer) {
       getProxy()
       def siteListRequest = proxy.create("com.centershift.store40.GetSiteListRequest")
       siteListRequest.orgID = cshift.orgId
@@ -98,6 +99,9 @@ class CShift4Service {
             }
 
             // TODO - promos, insurance, hours, site features
+            // hours may be free form
+            loadInsurance(site)
+            loadUnits(site)
 
             site.save(flush:true)
 
@@ -106,6 +110,27 @@ class CShift4Service {
           }
         }
 
+      }
+    }
+
+    def loadInsurance(site) {
+      getProxy()
+      def insuranceRequest = proxy.create("com.centershift.store40.GetInsuranceProvidersRequest")
+      insuranceRequest.siteID = site.siteid
+      insuranceRequest.orgID = site.orgid
+      def insuranceProviders = proxy.GetInsuranceProviders(lookupUser, insuranceRequest)
+      for (ins in insuranceProviders.details.ORGINSSITEOFFERINGS) {
+        def siteIns = site.insurances.find{ it.insuranceId == ins.siteinsid }
+        if (!siteIns) {
+          siteIns = new Insurance()
+          siteIns.insuranceId = ins.siteinsid
+        }
+        siteIns.percentTheft = ins.coverageperc
+        siteIns.provider = ins.providername
+        siteIns.premium = ins.rate
+        siteIns.totalCoverage = ins.coverageamount
+
+        siteIns.save(flush:true)
       }
     }
 

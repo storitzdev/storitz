@@ -491,7 +491,7 @@ class StorageSiteController {
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
-            title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}",
+            title: "Storitz self-storage rental for ${site.title} - ${site.city}, ${site.state} ${site.zipcode}",
             shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price,
             pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
             promoId:params.promoId, insuranceId:insuranceId]
@@ -574,7 +574,7 @@ class StorageSiteController {
       //////////////////////////////////////////
 
       def model = [id:site.id
-         , sizeList: sizeList, unitTypes: unitTypes, site: site, title: "${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
+         , sizeList: sizeList, unitTypes: unitTypes, site: site, title: "Storage self-storage rental for ${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
          , shortSessionId:callParams.shortSessionId, chosenUnitType:callParams.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate
          , unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:callParams.rentalTransaction?.promoId
          , rentalTransactionInstance:rentalTransaction]
