@@ -13,6 +13,7 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/jquery-1.4.2.5/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.4/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
@@ -98,9 +99,9 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
