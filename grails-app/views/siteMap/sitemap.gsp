@@ -10,12 +10,11 @@
      </geo:geo>
   </url>
   <url>
-      <loc><g:createLink absolute="true" mapping="siteLink" controller="storageSite" action="detail" id="${site.id}" params="[city:site.city, site_title:site.title]"/></loc>
-      <image:image>
-         <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
-         <image:title>${site.title.encodeAsHTML()}</image:title>
-      </image:image>
-      <changefreq>weekly</changefreq>
+    <loc><g:createLink absolute="true" mapping="siteLink" controller="storageSite" action="detail" id="${site.id}" params="[city:site.city, site_title:site.title]"/></loc>
+    <image:image>
+       <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
+       <image:title>${site.title.encodeAsHTML()}</image:title>
+    </image:image>
   </url>
 </g:each>
 </urlset>
