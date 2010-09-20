@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <g:render template="/header" />
+    <meta name="DESCRIPTION" content="Find out more about Storitz the company on our about us page."/>
 
     <script type="text/javascript">
 //<![CDATA[

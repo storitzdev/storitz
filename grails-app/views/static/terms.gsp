@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <g:render template="/header" />
+    <meta name="DESCRIPTION" content="Storitz terms of use agreement."/>
 
     <script type="text/javascript">
 //<![CDATA[

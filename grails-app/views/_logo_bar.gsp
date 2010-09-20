@@ -7,7 +7,7 @@
   <div id="tollFree">
     <div class="left">
       <div style="font-size: 16px;">
-        (877) 456-2929
+        Search thousands of storage units.  All from one place.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(877) 456-2929
       </div>
     </div>
   </div>

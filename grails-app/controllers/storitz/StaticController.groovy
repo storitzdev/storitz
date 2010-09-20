@@ -2,15 +2,23 @@ package storitz
 
 class StaticController {
 
-    def privacy = { }
+    def privacy = {
+      [title:'Privacy Policy']
+    }
 
-    def terms = { }
+    def terms = {
+      [title:'Terms of Use']
+    }
 
-    def faq = { }
+    def faq = {
+      [title:'Frequently Asked Questions']
+    }
 
-    def contactus = { }
+    def aboutus = {
+      [title:'About Us']
+    }
 
-    def aboutus = { }
-
-    def refund = { }
+    def refund = {
+      [title:'Refund Policy']
+    }
 }

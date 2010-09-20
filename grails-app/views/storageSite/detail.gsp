@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <meta name="Description" content="Storitz self-storage in ${site.city}, ${site.state.display} - ${site.title} - ${site.description}"/>
+    <meta name="Description" content="Storitz self-storage in ${site.city}, ${site.state.display} - ${site.title}"/>
     <g:render template="/header" />
 
     <script type="text/javascript">
