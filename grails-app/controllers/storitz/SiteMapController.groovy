@@ -17,7 +17,7 @@ class SiteMapController
       }
 
       xml {
-        def siteList = StorageSite.findAll()
+        def siteList = StorageSite.findAllByDisabled(false)
         render(view:"sitemap", model:[siteList:siteList])
       }
     }
