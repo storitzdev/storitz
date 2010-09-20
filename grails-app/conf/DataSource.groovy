@@ -29,7 +29,7 @@ environments {
   preview{
     dataSource {
       dbCreate = "update" // one of 'create', 'create-drop','update'
-      url = "jdbc:hsqldb:file:previewDB"
+      jndiName = "java:comp/env/jdbc/storitz_preview"
       //loggingSql = true
     }
   }
