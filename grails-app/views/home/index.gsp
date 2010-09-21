@@ -543,7 +543,7 @@
               <div style="margin-left: 30px;">
                 <img id="gsearchBtn" src="${resource(dir:'images', file:'btn-find-it.png')}" class="noborder" alt="Search Storage"/>
               </div>
-              <div style="clear: both; height: 10px;"></div>
+              <div style="clear: both;"></div>
             </form>
           </div>
         </div>
@@ -561,6 +561,26 @@
         <div style="height: 20px;"></div>
 
         <div id="stresults_div">
+        </div>
+        <div style="margin:1em 0;">
+          <p>
+            You need someplace to store your stuff. And
+            you’re pretty sure the perfect space is out there.
+            Somewhere. So how do you find that 10 by 10
+            that’s two miles away and currently offering the
+            first month free? Storitz. We help you search
+            thousands of self-storage units from hundreds of
+            partners all from one website. Shop anytime,
+            24/7—on your terms. Compare prices, size, amenities, locations.
+            Check out deals. Then rent your unit and complete the transaction
+            right on the spot. Storitz takes the hassle and headache out of
+            finding storage, saving you tons of time and money in the process.
+            Storitz. Click. Store. Done.
+          </p>
+          <p>
+            Find, compare and book storage for: climate controlled and air-conditioned storage,
+            wine storage, mini storage, self storage, RV parking, boat storage and more.
+          </p>
         </div>
       </div>
       <div style="height:100px;"></div>
