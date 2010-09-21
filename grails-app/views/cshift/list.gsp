@@ -37,6 +37,8 @@
 
           <g:sortableColumn property="id" title="${message(code: 'cshift.id.label', default: 'Id')}"/>
 
+          <g:sortableColumn property="operatorName" title="${message(code: 'cshift.operatorName.label', default: 'Operator Name')}"/>
+
           <th><g:message code="cshift.manager.label" default="Manager"/></th>
 
           <g:sortableColumn property="userName" title="${message(code: 'cshift.userName.label', default: 'User Name')}"/>
@@ -53,6 +55,8 @@
           <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
             <td><g:link action="show" id="${cshiftInstance.id}">${fieldValue(bean: cshiftInstance, field: "id")}</g:link></td>
+
+            <td>${fieldValue(bean: cshiftInstance, field: "operatorName")}</td>
 
             <td>${cshiftInstance?.manager?.username}</td>
 

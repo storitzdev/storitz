@@ -39,6 +39,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="siteLink.operatorName.label" default="Operator Name"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "operatorName")}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="siteLink.manager.label" default="Manager"/></td>
 
           <td valign="top" class="value"><g:link controller="user" action="show" id="${siteLinkInstance?.manager?.id}">${siteLinkInstance?.manager?.username?.encodeAsHTML()}</g:link></td>

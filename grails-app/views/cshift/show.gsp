@@ -40,6 +40,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.operatorName.label" default="Operator Name"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "operatorName")}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="cshift.manager.label" default="Manager"/></td>
 
           <td valign="top" class="value"><g:link controller="user" action="show" id="${cshiftInstance?.manager?.id}">${cshiftInstance?.manager?.username?.encodeAsHTML()}</g:link></td>

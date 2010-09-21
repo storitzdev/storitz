@@ -37,6 +37,8 @@
 
           <g:sortableColumn property="id" title="${message(code: 'siteLink.id.label', default: 'Id')}"/>
 
+          <g:sortableColumn property="operatorName" title="${message(code: 'siteLink.operatorName.label', default: 'Operator Name')}"/>
+
           <th><g:message code="siteLink.manager.label" default="Manager"/></th>
 
           <g:sortableColumn property="corpCode" title="${message(code: 'siteLink.corpCode.label', default: 'Corp Code')}"/>
@@ -52,6 +54,8 @@
           <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
             <td><g:link action="show" id="${siteLinkInstance.id}">${fieldValue(bean: siteLinkInstance, field: "id")}</g:link></td>
+
+            <td>${fieldValue(bean: siteLinkInstance, field: "operatorName")}</td>
 
             <td>${siteLinkInstance?.manager?.username}</td>
 

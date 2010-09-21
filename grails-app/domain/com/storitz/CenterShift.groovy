@@ -13,6 +13,7 @@ class CenterShift {
     pin(blank:false)
     cshiftVersion(nullable:true)
     orgId(nullable:true)
+    operatorName(nullable:true)
   }
 
   User manager
@@ -21,4 +22,5 @@ class CenterShift {
   CenterShiftLocations location = CenterShiftLocations.SLC
   Long orgId
   CenterShiftVersion cshiftVersion
+  String operatorName
 }

@@ -52,7 +52,7 @@
 
       <div class="checkout_fields">
         <div style="width:300px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'manager', 'errors')}">
-          <g:select name="manager.id" style="width:280px;" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.username}" noSelection="['null': '']"/>
+          <g:select name="manager.id" style="width:280px;" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${siteLinkInstance?.manager?.id}" noSelection="['null': '']"/>
         </div>
         <div style="clear:both;"></div>
       </div>
@@ -94,6 +94,24 @@
         </div>
         <div class="checkout_name" style="width:200px;">
           <label for="corpCode">Password</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_section_header">
+        Operator Information
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:400px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'operatorName', 'errors')}">
+          <g:textField name="operatorName" id="operatorName" style="width:380px;" value="${siteLinkInstance?.operatorName}"/>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:400px;">
+          <label for="operatorName">Operator Name</label>
         </div>
         <div style="clear:both;"></div>
       </div>
