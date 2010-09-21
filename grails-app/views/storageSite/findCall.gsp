@@ -38,7 +38,7 @@
                 <g:set var="site" value="${e.value.rentalTransaction.site ? e.value.rentalTransaction.site : StorageSite.get(e.value.site)}"/>
                 <tr class="${i % 2 == 0 ? 'rowEven' : 'rowOdd'}">
                   <td><g:link action="smartCall" id="${e.key}">${e.key}</g:link></td>
-                  <td>${rt.contactPrimary.firstName} ${rt.contactPrimary.lastName} ${rt.contactPrimary.suffixName}</td>
+                  <td>${rt.contactPrimary?.firstName} ${rt.contactPrimary?.lastName} ${rt.contactPrimary?.suffixName}</td>
                   <td>${site.title}</td><td>${site.city}</td><td>${site.state.display}</td>
                   <td>${e.value.address}</td>
                   <td>${e.value.page}</td>
