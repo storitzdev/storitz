@@ -10,7 +10,7 @@ class SiteMapController
   def index = {
     withFormat {
       html {
-        def sites = StorageSite.listOrderByCity().groupBy { StorageSite site -> site.stateName }
+        def sites = StorageSite.findAllByDisabled(false, [sort:"city"]).groupBy { StorageSite site -> site.stateName }
 
         // Converting to TreeMap so keys (state names) will iterate in alphabetical order.
         [storageSiteStateMap: sites as TreeMap]
