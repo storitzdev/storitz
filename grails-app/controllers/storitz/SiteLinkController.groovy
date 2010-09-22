@@ -2,6 +2,7 @@ package storitz
 
 import grails.plugins.springsecurity.Secured
 import com.storitz.SiteLink
+import storitz.constants.FeedType
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController {
@@ -27,6 +28,7 @@ class SiteLinkController {
 
   def save = {
     def siteLinkInstance = new SiteLink(params)
+    siteLinkInstance.feedType = FeedType.SITELINK
     if (siteLinkInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()

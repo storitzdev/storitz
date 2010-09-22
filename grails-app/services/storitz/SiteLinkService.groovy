@@ -22,6 +22,7 @@ import com.storitz.UserRole
 import com.storitz.Role
 import java.math.RoundingMode
 import com.storitz.UnitTypeLookup
+import com.storitz.SiteLink
 
 class SiteLinkService {
 
@@ -204,18 +205,19 @@ class SiteLinkService {
       insuranceId = ins.insuranceId
     }
 
+    def siteLink = (SiteLink)rentalTransaction.site.feed
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
       <cal:MoveInCostRetrieveWithDiscount>
          <!--Optional:-->
-         <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
+         <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
          <!--Optional:-->
          <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
          <!--Optional:-->
-         <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
+         <cal:sCorpUserName>""" + siteLink.userName + """</cal:sCorpUserName>
          <!--Optional:-->
-         <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
+         <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
          <cal:iUnitID>""" + unit.unitNumber + """</cal:iUnitID>
          <cal:dMoveInDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dMoveInDate>
          <cal:InsuranceCoverageID>""" + insuranceId + """</cal:InsuranceCoverageID>
@@ -231,18 +233,20 @@ class SiteLinkService {
 
   def newTenant(RentalTransaction rentalTransaction) {
 
+    def siteLink = (SiteLink)rentalTransaction.site.feed
+
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
       <cal:TenantNewDetailed>
          <!--Optional:-->
-         <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
+         <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
          <!--Optional:-->
          <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
          <!--Optional:-->
-         <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
+         <cal:sCorpUserName>""" + siteLink.userName + """</cal:sCorpUserName>
          <!--Optional:-->
-         <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
+         <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
          <!--Optional:-->
          <cal:sWebPassword></cal:sWebPassword>
          <!--Optional:-->
@@ -355,14 +359,15 @@ class SiteLinkService {
       insuranceId = ins.insuranceId
     }
 
+    def siteLink = (SiteLink)rentalTransaction.site.feed
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
       <cal:MoveInWithDiscount>
-         <cal:sCorpCode>""" + rentalTransaction.site.siteLink.corpCode + """</cal:sCorpCode>
+         <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
          <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
-         <cal:sCorpUserName>""" + rentalTransaction.site.siteLink.userName + """</cal:sCorpUserName>
-         <cal:sCorpPassword>""" + rentalTransaction.site.siteLink.password + """</cal:sCorpPassword>
+         <cal:sCorpUserName>""" + siteLink.userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
          <cal:TenantID>""" + rentalTransaction.tenantId + """</cal:TenantID>
          <cal:sAccessCode>""" + rentalTransaction.accessCode + """</cal:sAccessCode>
          <cal:UnitID>""" + rentalTransaction.feedUnitId + """</cal:UnitID>
@@ -509,6 +514,7 @@ class SiteLinkService {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
+        site.lastChange = new Date()
         newSite = true
       }
       if (tab.sSitePostalCode.text().isNumber()) {
@@ -639,8 +645,7 @@ class SiteLinkService {
     site.endSunday = sSundayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSundayEnd.substring(0, sSundayEnd.length() - 3) + '00') : null
     site.extendedHours = false
 
-    site.siteLink = siteLink
-    site.centerShift = null
+    site.feed = siteLink
 
     site.save()
 
@@ -666,7 +671,8 @@ class SiteLinkService {
   }
 
   def updateSite(site, stats, writer) {
-    def ret = getSiteInfo(site.siteLink.corpCode, site.sourceLoc, site.siteLink.userName, site.siteLink.password)
+    def siteLink = (SiteLink)site.feed
+    def ret = getSiteInfo(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -685,7 +691,7 @@ class SiteLinkService {
       site.specialOffers.clear()
       site.lastUpdate = 0
       site.save(flush: true)
-      getSiteDetails(site.siteLink, site, tab, stats, false, writer)
+      getSiteDetails(siteLink, site, tab, stats, false, writer)
     }
 
   }
@@ -710,7 +716,8 @@ class SiteLinkService {
   }
 
   def updateUnits(site, stats, writer) {
-    unitsAvailable(site.siteLink, site, stats, false, writer)
+    def siteLink = (SiteLink)site.feed
+    unitsAvailable(siteLink, site, stats, false, writer)
     site.save(flush: true)
   }
 
@@ -973,7 +980,8 @@ class SiteLinkService {
   }
 
   def checkRented(RentalTransaction rentalTransaction) {
-    def ret = getUnitInfoByName(rentalTransaction.site.siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
+    def siteLink = (SiteLink)rentalTransaction.site.feed
+    def ret = getUnitInfoByName(siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',

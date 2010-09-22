@@ -40,6 +40,7 @@
         <sec:ifAnyGranted roles="ROLE_CALLCENTER">
         <li><g:link controller="storageSite" action="findCall">Assist Caller</g:link> </li>
         </sec:ifAnyGranted>
+        <li><g:link controller="reports">Reporting menu</g:link> </li>
         <li><g:link controller="logout">Log out</g:link></li>
       </ul>
     </div>

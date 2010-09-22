@@ -23,6 +23,7 @@ import storitz.constants.RentalUse
 import com.storitz.RentalTransaction
 import java.math.RoundingMode
 import com.storitz.UnitTypeLookup
+import com.storitz.CenterShift
 
 class CShiftService {
 
@@ -139,12 +140,13 @@ class CShiftService {
   def newTenant(rentalTransaction) {
 
     def rentalType = ((rentalTransaction.rentalUse && rentalTransaction.rentalUse == RentalUse.BUSINESS) ?  294 : 295)
+    def centerShift = (CenterShift)rentalTransaction.site.feed
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
       <csc:CreateNewAccount2>
-         <csc:strUser>""" + rentalTransaction.site.centerShift.userName + """</csc:strUser>
-         <csc:strPin>""" + rentalTransaction.site.centerShift.pin + """</csc:strPin>
+         <csc:strUser>""" + centerShift.userName + """</csc:strUser>
+         <csc:strPin>""" + centerShift.pin + """</csc:strPin>
          <csc:lngSiteID>""" + rentalTransaction.site.sourceId + """</csc:lngSiteID>
          <csc:strFirstName>""" + rentalTransaction.contactPrimary.firstName + """</csc:strFirstName>
          <csc:strLastName>""" + rentalTransaction.contactPrimary.lastName + """</csc:strLastName>
@@ -162,7 +164,7 @@ class CShiftService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    postAction(rentalTransaction.site.centerShift.location.webUrl, payload, 'CreateNewAccount2')
+    postAction(centerShift.location.webUrl, payload, 'CreateNewAccount2')
   }
 
   def getReservationUnitData(url, userName, pin, siteId, dimension, attribute) {
@@ -186,12 +188,13 @@ class CShiftService {
   }
 
   def makeReservation(RentalTransaction rentalTransaction) {
+     def centerShift = (CenterShift)rentalTransaction.site.feed
      def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
       <csc:MakeReservationNonCCPayment>
-         <csc:strUser>""" + rentalTransaction.site.centerShift.userName + """</csc:strUser>
-         <csc:strPIN>""" + rentalTransaction.site.centerShift.pin + """</csc:strPIN>
+         <csc:strUser>""" + centerShift.userName + """</csc:strUser>
+         <csc:strPIN>""" + centerShift.pin + """</csc:strPIN>
          <csc:lngSiteID>""" + rentalTransaction.site.sourceId + """</csc:lngSiteID>
          <csc:lngContactID>""" + rentalTransaction.contactId + """</csc:lngContactID>
          <csc:strReservationStartDate>""" + rentalTransaction.moveInDate.format('MM/dd/yyyy') + """</csc:strReservationStartDate>
@@ -207,7 +210,7 @@ class CShiftService {
 
     println "makeReservation: ${payload}"
     
-    postAction(rentalTransaction.site.centerShift.location.webUrl, payload, 'MakeReservationNonCCPayment')
+    postAction(centerShift.location.webUrl, payload, 'MakeReservationNonCCPayment')
   }
 
   def insertAccountNote(url, userName, pin, siteId, note) {
@@ -343,7 +346,8 @@ class CShiftService {
         site.lastUpdate = 0
         site.save(flush: true)
 
-        getSiteDetails(site.centerShift, site, tab, stats, false, writer)
+        def centerShift = (CenterShift)site.feed
+        getSiteDetails(centerShift, site, tab, stats, false, writer)
       }
     }
   }
@@ -371,14 +375,14 @@ class CShiftService {
 
       site.extendedHours = false
 
-      site.siteLink = null
-      site.centerShift = cshift
+      site.feed  = cshift
 
       site.save()
 
       if (newSite) {
         SiteUser.link(site, cshift.manager)
         site.disabled = true
+        site.lastChange = new Date()
       }
 
       def email = tab.EMAIL_ADDRESS.text()
@@ -750,18 +754,19 @@ class CShiftService {
     }
     site.units.clear()
     site.save()
-    unitsAvailable(site.centerShift, site, stats, writer)
+    def centerShift = (CenterShift)site.feed
+    unitsAvailable(centerShift, site, stats, writer)
     if (site.units.size() > 0) {
       def unit = site.units.asList().get(0)
 
-      URL endPoint = new URL(site.centerShift.location.kioskUrl)
+      URL endPoint = new URL(centerShift.location.kioskUrl)
       CsKiosk service = new CsKioskLocator();
 
       CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-      writer.println "checkRented (${site.centerShift.userName}, ${site.centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+      writer.println "checkRented (${centerShift.userName}, ${centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
-      def unitInfo = port.getAvailableUnits(site.centerShift.userName, site.centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.displaySize)
+      def unitInfo = port.getAvailableUnits(centerShift.userName, centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.displaySize)
 
       if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
         writer.println "Return for getAvailableUnits < 0 : ${unitInfo}"
@@ -782,7 +787,7 @@ class CShiftService {
       def feedUnitId = unitId[0] as Long
       def feedUnitNumber = unitNumber[0]
 
-      def moveInDetails = getCostDetails(site.centerShift.userName, site.centerShift.pin, site.sourceId, site.centerShift.location.kioskUrl, feedUnitId, "-1", writer)
+      def moveInDetails = getCostDetails(centerShift.userName, centerShift.pin, site.sourceId, centerShift.location.kioskUrl, feedUnitId, "-1", writer)
 
       def depositLine = moveInDetails.items.find{ it.description =~ /(?i).*deposit.*/ }
       if (depositLine) {
@@ -1007,7 +1012,7 @@ class CShiftService {
 
   def checkRented(RentalTransaction rentalTransaction) {
     def unit = StorageUnit.get(rentalTransaction.unitId)
-    def cshift = rentalTransaction.site.centerShift
+    def cshift = (CenterShift)rentalTransaction.site.feed
 
     if (!unit) return false
 
@@ -1086,10 +1091,11 @@ class CShiftService {
       rentalTransaction.contactId = acct.CONTACT_ID.text()
     }
     // memo as a new Storitz tenant
+    def centerShift = (CenterShift)rentalTransaction.site.feed
     if (rentalTransaction.tenantId) {
-      insertAccountNote(rentalTransaction.site.centerShift.location.webUrl,
-              rentalTransaction.site.centerShift.userName,
-              rentalTransaction.site.centerShift.pin,
+      insertAccountNote(centerShift.location.webUrl,
+              centerShift.userName,
+              centerShift.pin,
               rentalTransaction.site.sourceId,
               "Storitz tenant")
     }
@@ -1102,7 +1108,7 @@ class CShiftService {
       return null
     }
 
-    def cshift = rentalTransaction.site.centerShift
+    def cshift = (CenterShift)rentalTransaction.site.feed
 
     def insId = -1
     if (rentalTransaction.insuranceId > 0) {
@@ -1195,7 +1201,7 @@ class CShiftService {
   }
 
   def moveIn(RentalTransaction rentalTransaction, PrintWriter writer) {
-    def cshift = rentalTransaction.site.centerShift
+    def cshift = (CenterShift)rentalTransaction.site.feed
 
     def insId = -1
     if (rentalTransaction.insuranceId > 0) {
@@ -1206,7 +1212,7 @@ class CShiftService {
     def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String, writer)
     rentalTransaction.paymentString = moveInDetails.paymentString
 
-    URL endPoint = new URL(rentalTransaction.site.centerShift.location.kioskUrl)
+    URL endPoint = new URL(cshift.location.kioskUrl)
     CsKiosk service = new CsKioskLocator();
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)

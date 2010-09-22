@@ -324,6 +324,7 @@ class StorageSiteController {
         specialOffer.save();
       }
       storageSiteInstance.properties = params
+      storageSiteInstance.lastUpdate = new Date()
       if (storageSiteInstance.validate() && !storageSiteInstance.hasErrors() && storageSiteInstance.save(flush: true)) {
         flash.message = "${message(code: 'default.updated.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
         redirect(action: "show", id: storageSiteInstance.id)

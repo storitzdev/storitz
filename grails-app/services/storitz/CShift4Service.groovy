@@ -82,8 +82,7 @@ class CShift4Service {
             csite.sourceLoc = site.sitenumber
             csite.title = site.displayname
             csite.disabled = true
-            csite.centerShift = cshift
-            csite.siteLink = null
+            csite.feed = cshift
 
             csite.phone = site.phone
             csite.address = site.line1

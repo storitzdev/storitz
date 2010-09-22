@@ -3,6 +3,7 @@ package storitz
 import grails.plugins.springsecurity.Secured
 import com.storitz.CenterShift
 import storitz.constants.CenterShiftVersion
+import storitz.constants.FeedType
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CshiftController {
@@ -30,6 +31,7 @@ class CshiftController {
 
   def save = {
     def cshiftInstance = new CenterShift(params)
+    cshiftInstance.feedType = FeedType.CENTERSHIFT
     if (cshiftInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()

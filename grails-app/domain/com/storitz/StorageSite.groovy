@@ -32,6 +32,7 @@ class StorageSite {
 
     static constraints = {
       description(widget:'textarea', nullable:true, size:2..2000)
+      feed(nullable:true)
       logo(nullable:true)
       zipcode(nullable:true)
       phone(nullable:true)
@@ -56,13 +57,12 @@ class StorageSite {
       endGate(nullable:true)
       startSundayGate(nullable:true)
       endSundayGate(nullable:true)
-      siteLink(nullable:true)
-      centerShift(nullable:true)
       bankAccount(nullable:true)
       rentalAgreement(nullable:true)
       taxRateRental(nullable:true)
       taxRateInsurance(nullable:true)
       useProrating(nullable:true)
+      lastChange(nullable:true)
     }
   
     String title
@@ -125,8 +125,7 @@ class StorageSite {
     Boolean useProrating
 
   // data feeds
-    SiteLink siteLink
-    CenterShift centerShift
+    Feed feed
     Long lastUpdate
     Boolean disabled = false
 
@@ -134,6 +133,8 @@ class StorageSite {
     BankAccount bankAccount
 
     RentalAgreement rentalAgreement
+
+    Date lastChange
 
   def users() {
       return users.collect{it.user}

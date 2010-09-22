@@ -1,6 +1,8 @@
 package storitz
 
 import com.storitz.StorageSite
+import com.storitz.SiteLink
+import com.storitz.CenterShift
 
 class FeedService {
 
@@ -48,11 +50,13 @@ class FeedService {
     switch(storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.getPromos(storageSiteInstance.siteLink, storageSiteInstance, writer)
+        def siteLink = (SiteLink)storageSiteInstance.feed
+        siteLinkService.getPromos(siteLink, storageSiteInstance, writer)
         break
 
       case "CS3":
-        CShiftService.loadPromos(storageSiteInstance.centerShift, storageSiteInstance, writer)
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        CShiftService.loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       default:
@@ -65,11 +69,13 @@ class FeedService {
     switch(storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.addPhones(storageSiteInstance.siteLink, storageSiteInstance, writer)
+        def siteLink = (SiteLink)storageSiteInstance.feed
+        siteLinkService.addPhones(siteLink, storageSiteInstance, writer)
         break
 
       case "CS3":
-        CShiftService.addSitePhone(storageSiteInstance.centerShift, storageSiteInstance, writer)
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        CShiftService.addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       default:
