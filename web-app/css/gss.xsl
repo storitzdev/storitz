@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Google Sitemaps Stylesheets (GSStylesheets)
      Project Home: http://sourceforge.net/projects/gstoolbox
