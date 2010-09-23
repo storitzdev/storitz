@@ -691,4 +691,20 @@ class StorageSiteController {
     [site:site]
   }
 
+  @Secured(['ROLE_ADMIN'])
+  def updateGeo = {
+    for(site in StorageSite.findAll()) {
+      def address = site.getFullAddress()
+      def geoResult = geocodeService.geocode(address)
+
+      site.lng = geoResult.Placemark[0].Point.coordinates[0]
+      site.lat = geoResult.Placemark[0].Point.coordinates[1]
+
+      println "Updated site ${site.title} lat=${site.lat},lng=${site.lng}"
+      site.save(flush:true)
+    }
+    flash.message = "Updated lat/lng."
+    redirect(controller:"admin", action:"index")
+  }
+
 }
