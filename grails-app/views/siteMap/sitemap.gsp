@@ -17,6 +17,7 @@
       <image:image>
          <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
          <image:title>${site.title.encodeAsHTML()}</image:title>
+         <image:geo_location>${site.getFullAddress()}</image:geo_location>
       </image:image>
     </url>
   </g:if>

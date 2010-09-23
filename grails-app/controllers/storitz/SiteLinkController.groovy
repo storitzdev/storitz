@@ -136,4 +136,13 @@ class SiteLinkController {
       redirect(action: "list")
     }
   }
+
+  def updateProration = {
+    def siteLinkInstance = SiteLink.get(params.id)
+    if (siteLinkInstance) {
+      siteLinkService.createProration(siteLinkInstance)
+      flash.message = "Site proration updated."
+      redirect(action: "list")
+    }
+  }
 }

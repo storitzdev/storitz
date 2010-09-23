@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <meta name="Description" content="Storitz self-storage in ${site.city}, ${site.state.display} - ${site.title}"/>
+    <meta name="Description" content="Storitz - ${site.title} located in ${site.city}, ${site.state.fullName} : ${site.description ? site.getTextDescription() : '' }"/>
     <g:render template="/header" />
 
     <script type="text/javascript">
@@ -126,14 +126,8 @@
       valid &= Validation.validate('contactPrimary.zipcode');
       valid &= Validation.validate('contactPrimary.phone');
       valid &= Validation.validate('contactPrimary.email');
-      return valid;
-    }
-
-    function validateStep3() {
-      var valid = true;
+      valid &= Validation.validate('contactPrimary.emailRepeat');
       valid &= Validation.validate('rentalUse');
-      valid &= Validation.validate('insuranceTermsHolder');
-      valid &= Validation.validate('hazardousMaterialsHolder');
       valid &= Validation.validate('termsHolder');
       return valid;
     }
@@ -141,39 +135,11 @@
     function nextStep1() {
       if (validateStep1()) {
         $('step1_bullet').hide();
-        $('step3_bullet').show();
+        $('step2_bullet').show();
         $('step1').removeClassName('step_header_hi');
         $('step1').addClassName('step_header');
-        <!-- skip step2 -->
-        $('step3').removeClassName('step_header');
-        $('step3').addClassName('step_header_hi');
-        $('primary_contact').hide();
-        $('rental_info').show();
-        Form.getInputs('rentalTransaction','radio','rentalUse')[0].focus();
-      }
-    }
-
-    function prevStep3() {
-      $('step3_bullet').hide();
-      $('step1_bullet').show();
-      $('step3').removeClassName('step_header_hi');
-      $('step3').addClassName('step_header');
-      $('step1').removeClassName('step_header');
-      $('step1').addClassName('step_header_hi');
-      $('rental_info').hide();
-      $('primary_contact').show();
-      $('contacyPrimary.firstName').focus();
-    }
-
-    function nextStep3() {
-      if (validateStep3()) {
-        $('step3_bullet').hide();
-        $('step4_bullet').show();
-        $('step3').removeClassName('step_header_hi');
-        $('step3').addClassName('step_header');
-        $('step4').removeClassName('step_header');
-        $('step4').addClassName('step_header_hi');
-        $('rental_info').hide();
+        $('step2').removeClassName('step_header');
+        $('step2').addClassName('step_header_hi');
         $('rentalTransaction').submit();
       }
     }
@@ -251,6 +217,7 @@
   }
 
   function setupValidation() {
+    Validation.add('validate-emailMatch', 'Emails do not match', {equalToField: 'contactPrimary.email'})
   }
 
 
@@ -374,7 +341,7 @@
                 <div class="left">
                   <g:if test="${site.coverImage()}">
                     <div class="left">
-                      <img src="${resource(file: site.coverImage().mid())}" alt="${site.title}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
+                      <img src="${resource(file: site.coverImage().mid())}" width="320" height="240" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
                     </div>
                   </g:if>
                   <p class="descriptionTitle" style="margin: 0;">
@@ -412,7 +379,7 @@
               <div id="photos" style="width:650px;margin-top: 20px;;display:none;">
                 <div id="imgFrame" style="margin: 0 auto;">
                   <g:if test="${site.siteImages().size() > 0}">
-                      <img src="${resource(file:site.coverImage().mid())}" style="display:block;margin:auto;" alt=""/>
+                      <img src="${resource(file:site.coverImage().mid())}" width="320" height="240" style="display:block;margin:auto;" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
                   </g:if>
                   <g:else>
                     <img src="${resource(dir: 'images', file:'placeholder.jpg')}" alt="place holder"/>
@@ -425,7 +392,7 @@
                     <ul id="items">
                        <g:each var="siteImg" in="${site.siteImages()}" status="i">
                            <li class="thumb">
-                             <img id="img${siteImg.imgOrder}" class="${i == 0 ? 'gallerySelected' : 'galleryNormal'}" src="${resource(file:siteImg.thumbnail())}" alt="" onclick="showImage('${resource(file:siteImg.mid())}', 'img${siteImg.imgOrder}')"/>
+                             <img id="img${siteImg.imgOrder}" width="60" height="40" class="${i == 0 ? 'gallerySelected' : 'galleryNormal'}" src="${resource(file:siteImg.thumbnail())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" onclick="showImage('${resource(file:siteImg.mid())}', 'img${siteImg.imgOrder}')"/>
                            </li>
                        </g:each>
                     </ul>
@@ -461,16 +428,15 @@
               </div>
 
               <div class="vert_text">
-                <span id="step1_bullet" class="bullet">&#8226;</span><span id="step1" class="step_header_hi">Primary Contact</span>
-                <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Rental Options</span>
-                <span id="step4_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step4" class="step_header">Payment</span>
-                <span id="step5_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step5" class="step_header">Order Complete</span>
+                <span id="step1_bullet" class="bullet">&#8226;</span><span id="step1" class="step_header_hi">Renter Information</span>
+                <span id="step2_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step2" class="step_header">Payment</span>
+                <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Order Complete</span>
               </div>
 
-              <!-- Primary Contact -->
+              <!-- Renter Information -->
               <div id="primary_contact">
                 <div class="price_options checkout_header white">
-                  Contact Information
+                  Renter Information
                 </div>
                 <div class="formInstructions">
                   Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our <a href="${createLink(controller:'static', action:'privacy')}" onclick="window.open(this.href,'_blank');return false;">Privacy Policy</a>
@@ -506,25 +472,19 @@
                   Address
                 </div>
                 <div class="checkout_fields">
-                  <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address1', 'errors')}">
-                      <g:textField name="contactPrimary.address1" id="contactPrimary.address1" class="required" style="width:380px;" value="${rentalTransactionInstance?.contactPrimary?.address1}" />
+                  <div style="width:315px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address1', 'errors')}">
+                      <g:textField name="contactPrimary.address1" id="contactPrimary.address1" class="required" style="width:295px;" value="${rentalTransactionInstance?.contactPrimary?.address1}" />
+                  </div>
+                  <div style="width:315px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address2', 'errors')}">
+                      <g:textField name="contactPrimary.address2" id="contactPrimary.address2" style="width:295px;" value="${rentalTransactionInstance?.contactPrimary?.address2}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
                 <div class="checkout_labels">
-                  <div style="width:400px;" class="checkout_name">
+                  <div style="width:315px;" class="checkout_name">
                     <label for="contactPrimary.address1">Address line 1</label>
                   </div>
-                  <div style="clear:both;"></div>
-                </div>
-                <div class="checkout_fields">
-                  <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address2', 'errors')}">
-                      <g:textField name="contactPrimary.address2" id="contactPrimary.address2" style="width:380px;" value="${rentalTransactionInstance?.contactPrimary?.address2}" />
-                  </div>
-                  <div style="clear:both;"></div>
-                </div>
-                <div class="checkout_labels">
-                  <div style="width:400px;" class="checkout_name">
+                  <div style="width:315px;" class="checkout_name">
                     <label for="contactPrimary.address2">Address line 2</label>
                   </div>
                   <div style="clear:both;"></div>
@@ -565,6 +525,7 @@
                   </div>
                   <div style="clear:both;"></div>
                 </div>
+                <div style="height: 10px;"></div>
                 <div class="checkout_section_header">
                   Phone / Email
                 </div>
@@ -575,9 +536,6 @@
                   <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.phone', 'errors')}">
                       <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required validate-phone" style="width:180px;" value="${rentalTransactionInstance?.contactPrimary?.phone}" />
                   </div>
-                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
-                      <g:textField name="contactPrimary.email" id="contactPrimary.email" class="required validate-email" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
-                  </div>
                   <div style="clear:both;"></div>
                 </div>
                 <div class="checkout_labels">
@@ -587,23 +545,27 @@
                   <div style="width:200px;" class="checkout_name">
                     <label for="contactPrimary.phone">Phone Number (XXX-XXX-XXXX)</label>
                   </div>
-                  <div style="width:300px;" class="checkout_name">
-                    <label for="contactPrimary.email">Email</label>
+                  <div style="clear:both;"></div>
+                </div>
+                <div class="checkout_fields">
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
+                      <g:textField name="contactPrimary.email" id="contactPrimary.email" class="required validate-email" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
+                  </div>
+                  <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
+                      <g:textField name="contactPrimary.emailRepeat" id="contactPrimary.emailRepeat" class="required validate-emailMatch" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
-                <div style="margin-top: 20px;">
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="leave_form(); return false" alt="Back" /></div>
-                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next" /></div>
+                <div class="checkout_labels">
+                  <div style="width:300px;" class="checkout_name">
+                    <label for="contactPrimary.email">Email</label>
+                  </div>
+                  <div style="width:300px;" class="checkout_name">
+                    <label for="contactPrimary.emailRepeat">Confirm Email</label>
+                  </div>
                   <div style="clear:both;"></div>
                 </div>
-              </div>
-
-              <!-- Rental Info -->
-              <div id="rental_info" style="display:none;">
-                <div class="price_options checkout_header white">
-                  Rental Options
-                </div>
+                <div style="height: 10px;"></div>
                 <div class="checkout_section_header">
                   Rental Use
                 </div>
@@ -615,7 +577,21 @@
                       <div style="clear:both;"></div>
                   </div>
                 </div>
-                <div style="height: 20px;"></div>
+                <div style="height: 10px;"></div>
+                <div class="checkout_section_header">
+                  Active Military
+                </div>
+                <div class="formInstructions">
+                  Active US Military renters are not eligible for lien auctions. This protects your items while you are on duty.
+                </div>
+                <div class="checkout_fields">
+                  <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'activeMilitary', 'errors')}">
+                      <div class="left"><g:checkBox name="activeMilitary" value="${rentalTransactionInstance?.activeMilitary}" /></div><div class="checkBoxText"> I am a member of the US Armed Forces and on active duty</div>
+                      <div style="clear:both;"></div>
+                  </div>
+                  <div style="clear:both;"></div>
+                </div>
+                <div style="height: 10px;"></div>
                 <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}">
                   <div class="checkout_section_header">
                     Free Truck
@@ -627,7 +603,7 @@
                     </div>
                     <div style="clear:both;"></div>
                   </div>
-                  <div style="height: 20px;"></div>
+                  <div style="height: 10px;"></div>
                 </g:if>
                 <g:elseif test="${site.freeTruck == storitz.constants.TruckType.RENTAL}">
                   <div class="checkout_section_header">
@@ -643,49 +619,15 @@
                   <div style="height: 20px;"></div>
                 </g:elseif>
                 <div class="checkout_section_header">
-                  Insurance
-                </div>
-                <div class="formInstructions">
-                  Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
-                </div>
-                <div class="checkout_fields">
-                  <div id="insuranceTermsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'insuranceTerms', 'errors')}">
-                      <div class="left"><g:checkBox name="insuranceTerms" id="insuranceTerms" class="required" value="${rentalTransactionInstance?.insuranceTerms}" /></div><div class="checkBoxText"> By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property</div>
-                      <div style="clear:both;"></div>
-                  </div>
-                  <div style="clear:both;"></div>
-                </div>
-                <div style="height: 20px;"></div>
-                <div class="checkout_section_header">
-                  Active Military
-                </div>
-                <div class="formInstructions">
-                  Active US Military renters are not eligible for lien auctions. This protects your items while you are on duty.
-                </div>
-                <div class="checkout_fields">
-                  <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'activeMilitary', 'errors')}">
-                      <div class="left"><g:checkBox name="activeMilitary" value="${rentalTransactionInstance?.activeMilitary}" /></div><div class="checkBoxText"> Are you a member of the US Armed Forces and on active duty?</div>
-                      <div style="clear:both;"></div>
-                  </div>
-                  <div style="clear:both;"></div>
-                </div>
-                <div style="height: 20px;"></div>
-                <div class="checkout_section_header">
-                  Hazardous Materials
-                </div>
-                <div class="checkout_fields">
-                  <div id="hazardousMaterialsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'hazardousMaterials', 'errors')}">
-                      <div class="left"><g:checkBox name="hazardousMaterials" id="hazardousMaterials" class="required" value="${rentalTransactionInstance?.hazardousMaterials}" /></div><div class="checkBoxText"> By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.</div>
-                      <div style="clear:both;"></div>
-                  </div>
-                  <div style="clear:both;"></div>
-                </div>
-                <div style="height: 20px;"></div>
-                <div class="checkout_section_header">
                   Terms
                 </div>
                 <div class="checkout_fields">
-                  <div id="termsHolder" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
+                  <textarea style="width:610px; height: 50px;">
+  Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
+  By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
+  By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
+                  </textarea>
+                  <div id="termsHolder" style="margin-top:7px;" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
                       <div class="left">
                         <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" onclick="window.open(this.href,'_blank');return false;">Terms of Use</a>
                           <g:if test="${site.rentalAgreement}">
@@ -726,11 +668,12 @@
                   </div>
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
-                  <div class="right" style="margin-left:20px;"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep3(); return false" alt="Next" /></div>
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep3(); return false" alt="Prev" /></div>
+                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="leave_form(); return false" alt="Back" /></div>
+                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next" /></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
+
             </g:form>
           </div>
         </div>

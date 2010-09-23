@@ -324,7 +324,7 @@ class StorageSiteController {
         specialOffer.save();
       }
       storageSiteInstance.properties = params
-      storageSiteInstance.lastUpdate = new Date()
+      storageSiteInstance.lastChange = new Date()
       if (storageSiteInstance.validate() && !storageSiteInstance.hasErrors() && storageSiteInstance.save(flush: true)) {
         flash.message = "${message(code: 'default.updated.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
         redirect(action: "show", id: storageSiteInstance.id)
@@ -492,7 +492,7 @@ class StorageSiteController {
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
-            title: "Storitz self-storage rental for ${site.title} - ${site.city}, ${site.state.fullName} ${site.zipcode}",
+            title: "Storitz self-storage for ${site.title} - located in ${site.city}, ${site.state.fullName} ${site.zipcode}",
             shortSessionId:session.shortSessionId, chosenUnitType:params.unitType, monthlyRate: bestUnit?.price,
             pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
             promoId:params.promoId, insuranceId:insuranceId]

@@ -63,6 +63,9 @@ class StorageSite {
       taxRateInsurance(nullable:true)
       useProrating(nullable:true)
       lastChange(nullable:true)
+      prorateStart(nullable:true)
+      prorateCutoff(nullable:true)
+      prorateSecondMonth(nullable:true)
     }
   
     String title
@@ -103,6 +106,11 @@ class StorageSite {
     BigDecimal adminFee     = 0
     BigDecimal lockFee      = 0
     BigDecimal deposit      = 0
+
+  // Proration cutoff (SiteLink)
+    Integer prorateStart    = 5
+    Integer prorateCutoff   = 24
+    Boolean prorateSecondMonth = false
 
   // Operation Hours
     Boolean openWeekday
@@ -182,6 +190,10 @@ class StorageSite {
 
     // This should match what is in home/index.gsp and really that should get this value via JSON.
     return title.replaceFirst(/(?i) ?[-\/]? ?${city} ?[-\/]? ?/, '')
+  }
+
+  def getTextDescription() {
+    return description.replaceAll(/<!--.*?-->/, '').replaceAll(/<.*?>/, '')
   }
 
   def getStateName() {

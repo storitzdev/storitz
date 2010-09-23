@@ -143,10 +143,9 @@
                 <input style="display:none" type="text" name="SC_page" id="SC_page" value="payment"/>
 
                 <div class="vert_text">
-                  <span id="step1_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step1" class="step_header">Primary Contact</span>
-                  <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Rental Options</span>
-                  <span id="step4_bullet" class="bullet">&#8226;</span><span id="step4" class="step_header_hi">Payment</span>
-                  <span id="step5_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step5" class="step_header">Order Complete</span>
+                  <span id="step1_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step1" class="step_header">Renter Information</span>
+                  <span id="step2_bullet" class="bullet">&#8226;</span><span id="step2" class="step_header_hi">Payment</span>
+                  <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Order Complete</span>
                 </div>
 
                 <div style="height:25px;"></div>
@@ -264,8 +263,7 @@
                   Payment Info
                 </div>
                 <div class="formInstructions">
-                  The billing address will be used to verify your credit card payment - card holder name and address should match the billing
-                  address.  If it matches the primary contact you already entered, choose accordingly.  If not, enter a new contact.
+                  All transactions are subject to credit card approval and billing address verification
                 </div>
 
                 <div class="checkout_section_header">
@@ -274,7 +272,7 @@
                 <div class="checkout_fields">
                   <div id="billingAddress" class="validate-one-radio value">
                       <div class="left" style="width:200px;">
-                        <g:radio name="billingAddress" value="primary" checked="checked"/> Primary Contact Address
+                        <g:radio name="billingAddress" value="primary" checked="checked"/> Use Renter Information
                       </div>
                       <div class="left" style="width:200px;">
                         <g:radio name="billingAddress" value="new"/> Enter new address

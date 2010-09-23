@@ -440,6 +440,23 @@ class SiteLinkService {
     postAction(payload, 'RentTaxRatesRetrieve')
   }
 
+  def getProrationInformation(corpCode, locationCode, userName, password) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:ProrationInformationRetrieve>
+         <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+         <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+         <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+      </cal:ProrationInformationRetrieve>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'ProrationInformationRetrieve')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
@@ -565,6 +582,27 @@ class SiteLinkService {
     }
   }
 
+  def createProration(siteLink) {
+    def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+
+    for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      if (site) {
+        def writer = new PrintWriter(System.out)
+        addProration(siteLink, site, writer)
+        site.save()
+      }
+    }
+  }
+
   def createSiteUser(site, email, realName, manager) {
     def user = User.findByEmail(email)
 
@@ -666,6 +704,7 @@ class SiteLinkService {
       site.deposit = fees["deposit"] ? fees["deposit"] : 0 
     }
     getPromos(siteLink, site, writer)
+    addProration(siteLink, site, writer)
     getTaxes(siteLink, site)
     site.save(flush: true)
   }
@@ -712,7 +751,24 @@ class SiteLinkService {
         site.save()
       }
     }
+  }
 
+  def addProration(siteLink, site, writer) {
+    def ret = getProrationInformation(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    for (prorate in records.'soap:Body'.'*:ProrationInformationRetrieveResponse'.'*:ProrationInformationRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      site.prorateSecondMonth = prorate.b2ndMonthProrate.text().toLowerCase() == 'true'
+      site.prorateStart = prorate.iDayStrtProrating.text() as Integer
+      site.prorateCutoff = prorate.iDayStrtProratePlusNext.text() as Integer
+
+      writer.println "Added proration 2nd Month = ${site.prorateSecondMonth}, start = ${site.prorateStart}, cutoff = ${site.prorateCutoff}"
+    }
   }
 
   def updateUnits(site, stats, writer) {
@@ -738,8 +794,8 @@ class SiteLinkService {
       def typeName = unit.sTypeName.text()
 
       if (rented) {
-
        unitID = unit.UnitID.text()
+       writer.println "Rented unit ${unitID} checking for deletion"
        def deletedUnit = site.units.find{ it.unitNumber == unitID }
        if (deletedUnit) {
          site.removeFromUnits(deletedUnit)
@@ -1085,7 +1141,10 @@ class SiteLinkService {
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
     // force a bump for people who rent after the 15th
-    if (cal.get(Calendar.DAY_OF_MONTH) > 15) durationMonths++;
+    if (!site.prorateSecondMonth) {
+      def cutoff = site.prorateCutoff ? site.prorateCutoff : 24
+      if (cal.get(Calendar.DAY_OF_MONTH) > cutoff) durationMonths++;
+    }
     if (durationMonths - 1 > 0) {
       cal.add(Calendar.MONTH, durationMonths - 1)
     }
@@ -1132,8 +1191,8 @@ class SiteLinkService {
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
-    if (allowExtension) {
-      if (moveInDay > 15) {
+    if (allowExtension && !site.prorateSecondMonth) {
+      if (moveInDay > site.prorateCutoff) {
         durationMonths++;
         ret["extended"] = true;
       } else {
@@ -1146,11 +1205,16 @@ class SiteLinkService {
     }
     cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
 
-    durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+    def subTotal
+    if (!site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
+        durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+        subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+    } else {
+      subTotal = (rate*durationMonths) + (premium*durationMonths)
+    }
 
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 

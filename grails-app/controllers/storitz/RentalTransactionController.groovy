@@ -176,7 +176,7 @@ class RentalTransactionController {
       rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
 
       [rentalTransactionInstance: rentalTransactionInstance,
-              title: "${rentalTransactionInstance.site.title} - ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state.fullName} ${rentalTransactionInstance.site.zipcode}",
+              title: "Storitz self-storage for ${rentalTransactionInstance.site.title} - located in ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state.fullName} ${rentalTransactionInstance.site.zipcode}",
               site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails,
               unit: unit, promo:promo, ins:ins, paidThruDate:costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, true)]
     }
