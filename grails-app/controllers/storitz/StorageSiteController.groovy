@@ -697,8 +697,12 @@ class StorageSiteController {
       def address = site.getFullAddress()
       def geoResult = geocodeService.geocode(address)
 
-      site.lng = geoResult.Placemark[0].Point.coordinates[0]
-      site.lat = geoResult.Placemark[0].Point.coordinates[1]
+      if (geoResult.Placemark) {
+        site.lng = geoResult.Placemark[0].Point.coordinates[0]
+        site.lat = geoResult.Placemark[0].Point.coordinates[1]
+      } else {
+        println "Could not find address ${address} for site: ${site.title}"
+      }
 
       println "Updated site ${site.title} lat=${site.lat},lng=${site.lng}"
       site.save(flush:true)
