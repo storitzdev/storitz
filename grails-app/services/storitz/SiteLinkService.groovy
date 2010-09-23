@@ -1192,7 +1192,7 @@ class SiteLinkService {
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
     if (allowExtension && !site.prorateSecondMonth) {
-      if (moveInDay > site.prorateCutoff) {
+      if (moveInDay > site.prorateCutoff && (!promo || promo && durationMonths == 1)) {
         durationMonths++;
         ret["extended"] = true;
       } else {
