@@ -24,7 +24,7 @@
         <a href="http://twitter.com/Storitzdotcom"><img style="border: none;" src="${resource(dir:'images', file:'icn-twitter.png')}" alt="Storitz on Twitter"/></a>
         <a href="http://www.facebook.com/storitz"><img style="border: none;" src="${resource(dir:'images', file:'icn-facebook.png')}" alt="Storitz on FaceBook"/></a>
         <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><img style="border: none;" src="${resource(dir:'images', file:'icn-stumbleupon.png')}" alt="Storitz on StumbleUpon"/></a>
-        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><img src="${resource(dir:'images', file:'icn-linkedin.png')}" alt="Storitz on LinkedIn"></a>
+        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><img style="border: none;" src="${resource(dir:'images', file:'icn-linkedin.png')}" alt="Storitz on LinkedIn"></a>
       </div>
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
