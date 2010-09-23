@@ -16,9 +16,9 @@
       <lastmod>${site.lastChange ? site.lastChange.format('yyyy-MM-dd') : new Date().format('yyyy-MM-dd')}</lastmod>
       <image:image>
           <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
-          <image:caption>Image of ${site.title}</image:caption>
-          <image:geo_location>${site.getFullAddress()}</image:geo_location>
-          <image:title>${site.title.encodeAsHTML()}</image:title>
+          <image:caption>Image of ${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:caption>
+          <image:geo_location>${site.getFullAddress().replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:geo_location>
+          <image:title>${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:title>
       </image:image>
     </url>
   </g:if>
