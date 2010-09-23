@@ -41,6 +41,9 @@ environments {
         grails.plugins.springsecurity.controllerAnnotations.staticRules = [
            '/weblog/**': ['ROLE_USER'],
         ]
+        storitz.nacha.dir = '/usr/share/tomcat6/nacha'
+        storitz.nacha.fileId = '1234567890'
+        storitz.nacha.companyId = '0123456789'
     }
     preview {
         grails.serverURL = "http://preview.storitz.com"
@@ -54,6 +57,9 @@ environments {
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
         security.httpsPort = 8443
+        storitz.nacha.dir = 'c:/temp/nacha'
+        storitz.nacha.fileId = '1234567890'
+        storitz.nacha.companyId = '0123456789'
     }
     test {
         grails.serverURL = "http://localhost:8080/${appName}"

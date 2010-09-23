@@ -29,8 +29,7 @@
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
       <div style="margin: 2em 1em 2.5em 1em;">
-        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=QoVAUrljyyuT8APktZx8vpTvuwdcusK1rt8fI8EFYfFvpl9nRLc"></script><br/></span>
-      </div>
+        <span id="siteseal"><script type="text/javascript" src="https://seal.starfieldtech.com/getSeal?sealID=4GPUFa2QNzQrd6vGDkVGVQuPb8epKRwk1rH51Cnle8We0usacEm"></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.starfieldtech.com" target="_blank">EV SSL Certificates</a></span>      </div>
       <div style="margin: 2.5em 1em;">
         <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="http://www.authorize.net/" id="AuthorizeNetText" onclick="window.open(this.href,'_blank');return false;">Online Payments</a> </div>
       </div>
