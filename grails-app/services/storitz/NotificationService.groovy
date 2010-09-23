@@ -90,6 +90,7 @@ class NotificationService {
         rentalRate: nf.format(rentalTransaction.monthlyRate),
         promoName: promoName,
         paymentTotal: nf.format(rentalTransaction.cost),
+        moveInCost: nf.format(rentalTransaction.feedMoveInCost),
         rentalAgreementLink: rentalAgreementLink,
         unitNumber: rentalTransaction.feedUnitNumber,
         commission: nf.format(rentalTransaction.commission),

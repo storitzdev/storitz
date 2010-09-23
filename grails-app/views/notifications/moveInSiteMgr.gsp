@@ -38,7 +38,7 @@
     <li>Rental Rate: ${rentalRate}</li>
     <li>Rent is Paid Through: ${paidThruDate}</li>
     <li>Promotion(s): ${promoName}</li>
-    <li>Payment Received: ${paymentTotal}</li>
+    <li>Payment Received: ${moveInCost}</li>
   </ul>
   <p style="font-weight:bold;">
     Tenant Information:
