@@ -15,9 +15,10 @@
       <priority>0.75</priority>
       <lastmod>${site.lastChange ? site.lastChange.format('yyyy-MM-dd') : new Date().format('yyyy-MM-dd')}</lastmod>
       <image:image>
-         <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
-         <image:title>${site.title.encodeAsHTML()}</image:title>
-         <image:geo_location>${site.getFullAddress()}</image:geo_location>
+          <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
+          <image:caption>Image of ${site.title}</image:caption>
+          <image:geo_location>${site.getFullAddress()}</image:geo_location>
+          <image:title>${site.title.encodeAsHTML()}</image:title>
       </image:image>
     </url>
   </g:if>
