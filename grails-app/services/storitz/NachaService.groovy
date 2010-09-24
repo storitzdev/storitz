@@ -45,7 +45,7 @@ class NachaService {
       def nacha = new Nacha(daySent:daySent, seq:dayCount, filePath: file.canonicalPath).save(flush: true)
       def writer = new FileWriter(file)
 
-      bodyWriter.println "NACHA File Date:${settlementDate} Sequence:${dayCount} File:${file.canonicalPath}\n\n"
+      bodyWriter.println "NACHA File Date:${settlementDate} Sequence:${dayCount} File: ${file.canonicalPath}\n\n"
 
       // ONE Record
       writer << sprintf("101 091000019%10s%s%c094101WELLS FARGO            STORITZ INC.           %8d", fileId, now.format('yyMMddHHmm'), (dayCount > 10 ? ('A' as Character) + (dayCount - 10) : dayCount + ('0' as Character)), nacha.id)
