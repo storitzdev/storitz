@@ -17,6 +17,7 @@ grails install-plugin sanitizer
 grails install-plugin quartz
 grails install-plugin authorize-net
 grails install plugin jms
+grails install-plugins dynamic-jasper
 # Choose sanitation level?  I used 3 (loose - MySpace).
 
 Following a 'grails upgrade', it is not necessary to install plugins manually.  A subsequent 'run-app' or such will automatically install them.
