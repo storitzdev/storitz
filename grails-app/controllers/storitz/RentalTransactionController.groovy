@@ -25,6 +25,7 @@ class RentalTransactionController {
     def moveInService
     def creditCardService
     def notificationService
+    def nachaService
 
     static allowedMethods = [save:"POST", update: "POST", delete: "POST", pay:["POST", "GET"]]
 
@@ -531,4 +532,18 @@ class RentalTransactionController {
       redirect(controller:"admin", action:"index")
   }
 
+  @Secured(['ROLE_ADMIN'])
+  def processNacha = {
+    def c = RentalTransaction.createCriteria()
+    def results = c.list(params) {
+      or {
+        eq('status', TransactionStatus.PAID)
+        eq('status', TransactionStatus.COMPLETE)
+      }
+      isNull('achTransferDate')
+    }
+    nachaService.buildFile(results)
+    flash.message = "NACHA processing complete"
+    redirect(controller:"admin", action: "index")
+  }
 }
