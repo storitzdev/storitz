@@ -31,17 +31,6 @@ class UrlMappings {
 
       "/sitemap" (controller:"siteMap")
 
-// Don't really need to use constraints to sort out city vs zip.
-// Let search logic on home page deal with it.
-//      "/self-storage/$address" {
-//         controller = "home"
-//         action = "index"
-//
-//         constraints {
-//           address(matches : /\d+/)
-//         }
-//      }
-
       "/$controller/$action?/$id?"{
 	      constraints {
 			 // apply constraints here
