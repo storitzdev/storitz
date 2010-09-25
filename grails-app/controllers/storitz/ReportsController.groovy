@@ -4,8 +4,10 @@ import ar.com.fdvs.dj.domain.builders.FastReportBuilder
 import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn
-import ar.com.fdvs.dj.domain.CustomExpression
 import storitz.reports.NameExpression
+import storitz.constants.State
+import storitz.constants.Country
+import storitz.constants.PhoneType
 import ar.com.fdvs.dj.domain.DynamicReport
 import com.storitz.RentalTransaction
 import storitz.constants.TransactionStatus
@@ -21,7 +23,6 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import ar.com.fdvs.dj.domain.Style
 import grails.plugins.springsecurity.Secured
 import ar.com.fdvs.dj.domain.ImageBanner
-import ar.com.fdvs.dj.domain.constants.ImageScaleMode
 import ar.com.fdvs.dj.domain.AutoText
 
 class ReportsController {
