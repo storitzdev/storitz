@@ -7,6 +7,12 @@
     <priority>1.0</priority>
     <lastmod>${new Date().format('yyyy-MM-dd')}</lastmod>
   </url>
+  <url>
+    <loc>http://www.storitz.com/sitemap</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>${new Date().format('yyyy-MM-dd')}</lastmod>
+  </url>
 <g:each in="${siteList}" var="${site}">
   <g:if test="${site.city && site.state}">
     <url>

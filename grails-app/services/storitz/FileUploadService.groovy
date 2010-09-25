@@ -20,7 +20,7 @@ class FileUploadService implements ApplicationContextAware {
         return false
   }
 
-  private String getAbsolutePath(folderPath, fileName){
+  public String getAbsolutePath(folderPath, fileName){
         "${applicationContext.getResource(folderPath).getFile()}${File.separatorChar}${fileName}"
   }
 

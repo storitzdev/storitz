@@ -10,6 +10,7 @@ import storitz.constants.CreditCardType
 class RentalTransaction {
 
   static hasMany = [notes: TransactionNote]
+  def static reportable = [:]
   
   Contact contactPrimary
   Contact contactSecondary
@@ -48,7 +49,7 @@ class RentalTransaction {
   String cleanCCNum
   String paymentString
   String unitType
-  Long searchSize
+  StorageSize searchSize
   Integer reservationPeriod
   String reservationId
   BigDecimal reservationCost

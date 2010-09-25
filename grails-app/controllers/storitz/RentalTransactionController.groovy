@@ -17,6 +17,7 @@ import org.hibernate.FetchMode as FM
 import storitz.constants.NotificationEventType
 import java.math.RoundingMode
 import grails.plugins.springsecurity.Secured
+import com.storitz.StorageSize
 
 class RentalTransactionController {
 
@@ -102,7 +103,7 @@ class RentalTransactionController {
         rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         rentalTransactionInstance.site = site
         rentalTransactionInstance.unitType = params.chosenType
-        rentalTransactionInstance.searchSize = params.searchSize
+        rentalTransactionInstance.searchSize = StorageSize.get(params.searchSize as Long)
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
         rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 
@@ -234,7 +235,7 @@ class RentalTransactionController {
 
       if (!moveInService.checkRented(rentalTransactionInstance)) {
         def found = false
-        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize && it.id != unit?.id }.min{ it.price }
+        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.min{ it.price }
         for(myUnit in bestUnit) {
           rentalTransactionInstance.unitId = myUnit.id
           if (moveInService.checkRented(rentalTransactionInstance)) {

@@ -14,6 +14,7 @@
         <p class="footer"><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
         <p class="footer"><g:link class="footer small" controller="siteMap">Site Map</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="admin" action="index">Owner Admin</g:link></p>
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 1em 5em;" class="left">

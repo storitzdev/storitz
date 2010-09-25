@@ -27,7 +27,7 @@
       </g:if>
       <ul>
         <sec:ifAnyGranted roles="ROLE_ADMIN">
-          <li><g:link action="occupancy">Occupancy report</g:link></li>
+          <li><g:link action="balk">Balk report</g:link></li>
         </sec:ifAnyGranted>
       </ul>
     </div>

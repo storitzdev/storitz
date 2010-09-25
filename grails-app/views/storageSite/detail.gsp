@@ -582,11 +582,11 @@
                   Active Military
                 </div>
                 <div class="formInstructions">
-                  Active US Military renters are not eligible for lien auctions. This protects your items while you are on duty.
+                  Section 307 of the Servicemembers Civil Relief Act protects servicemembers currently serving or 90 days removed from a period of active duty against lien auctions on their property. Checking this box will protect your rights as a servicemember.
                 </div>
                 <div class="checkout_fields">
                   <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'activeMilitary', 'errors')}">
-                      <div class="left"><g:checkBox name="activeMilitary" value="${rentalTransactionInstance?.activeMilitary}" /></div><div class="checkBoxText"> I am a member of the US Armed Forces and on active duty</div>
+                      <div class="left"><g:checkBox name="activeMilitary" value="${rentalTransactionInstance?.activeMilitary}" /></div><div class="checkBoxText">  I am servicemember in the US Armed Forces and on a period of active duty</div>
                       <div style="clear:both;"></div>
                   </div>
                   <div style="clear:both;"></div>
