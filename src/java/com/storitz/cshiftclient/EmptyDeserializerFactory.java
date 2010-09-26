@@ -10,12 +10,12 @@ public class EmptyDeserializerFactory implements javax.xml.rpc.encoding.Deserial
 
     Vector mechanisms;
     
-    @Override
+//    @Override
     public Deserializer getDeserializerAs(String s) {
         return new EmptyDeserializer();
     }
 
-    @Override
+//    @Override
     public Iterator getSupportedMechanismTypes() {
         if (mechanisms == null) {
             mechanisms = new Vector(1);

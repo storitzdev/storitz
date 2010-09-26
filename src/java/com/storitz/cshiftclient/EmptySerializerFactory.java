@@ -14,12 +14,12 @@ import java.util.Iterator;
  */
 public class EmptySerializerFactory implements javax.xml.rpc.encoding.SerializerFactory, SerializerFactory {
 
-    @Override
+//    @Override
     public Serializer getSerializerAs(String s) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+//    @Override
     public Iterator getSupportedMechanismTypes() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
