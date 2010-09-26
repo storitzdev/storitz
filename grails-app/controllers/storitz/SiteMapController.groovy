@@ -9,9 +9,6 @@ class SiteMapController
 
   def index = {
 
-    println request.getHeader("accept")
-    println request.getFormat()
-
     withFormat {
       html {
         def sites = StorageSite.findAllByDisabled(false, [sort:"city"]).groupBy { StorageSite site -> site.stateName }
