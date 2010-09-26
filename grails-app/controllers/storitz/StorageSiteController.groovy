@@ -170,10 +170,14 @@ class StorageSiteController {
           return
         }
       }
-      def manager = User.get(params.manager?.id)
 
-      if (manager) {
-        UserRole.getUsersByRoleName('ROLE_MANAGER').each{
+      // FIXME? We're getting the string "null" (the "noSelection" g:select key) as the drop down list choice.
+      // Perhaps the list should be populated differently.
+      if (params.manager?.id && (params.manager.id != 'null')) {
+        def manager = User.get(params.manager.id as Long)
+
+        // JPW? Shouldn't this just consider the manager(s?) that is currently linked? 
+        UserRole.getUsersByRoleName('ROLE_MANAGER').each {
           SiteUser.unlink (storageSiteInstance, it)
         }
         SiteUser.link(storageSiteInstance, manager)
