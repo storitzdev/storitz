@@ -61,6 +61,7 @@ class BootStrap {
 
     if (!User.findByUsername('admin')) {
       def admin = new User( username:'admin', password:springSecurityService.encodePassword('WWCharter'), userRealName:'Administrator', enabled:true, email:'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
+      admin.manager = admin;
       admin.save(flush: true)
       UserRole.create(admin, roleUser, true)
       UserRole.create(admin, roleManager, true)
