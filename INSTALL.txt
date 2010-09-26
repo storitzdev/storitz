@@ -13,12 +13,17 @@ grails install-plugin http://storitz-files.s3.amazonaws.com/grails-image-tools-1
 grails install-plugin rest
 grails install-plugin ws-client
 grails install-plugin fckeditor
-grails install-plugin sanitizer
 grails install-plugin quartz
 grails install-plugin authorize-net
 grails install plugin jms
-grails install-plugins dynamic-jasper
+grails install-plugin dynamic-jasper
+grails install-plugin sanitizer
 # Choose sanitation level?  I used 3 (loose - MySpace).
+
+I (JPW) had a problem with Grails 1.2.4 failing to run-app with compilation errors complaining about JQuery classes.  Appears to be related to <http://jira.codehaus.org/browse/GRAILSPLUGINS-2513>.  I downgraded JQuery thusly:
+
+grails install-plugin jquery 1.4.2.5
+grails install-jquery
 
 Following a 'grails upgrade', it is not necessary to install plugins manually.  A subsequent 'run-app' or such will automatically install them.
 
