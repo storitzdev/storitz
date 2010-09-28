@@ -35,26 +35,29 @@
       <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
       </g:if>
+      <g:hasErrors bean="${reportPeriod}">
+        <div class="errors">
+          <g:renderErrors bean="${reportPeriod}" as="list"/>
+        </div>
+      </g:hasErrors>
+
 
       <g:form>
         <div>
-          Start Date: <input id="startDate" name="startDate" value="${reportPeriod?.startDate}" />
-          End Date: <input id="endDate" name="endDate" value="${reportPeriod?.endDate}" />
+          Start Date: <input type="text" id="startDate" name="startDate" value="${reportPeriod?.startDate}" />
+          End Date: <input type="text" id="endDate" name="endDate" value="${reportPeriod?.endDate}" />
         </div>
         <div>
           Pick your output type:
-          <g:select id="outputType" style="width:250px;" name="outputType" from="${storitz.constants.ReportOutputType?.list()}" value="${reportPeriod?.outputType}" optionValue="display"  />
+          <g:select id="outputType" style="width:250px;" name="outputType" from="${storitz.constants.ReportOutputType?.list()}" value="${reportPeriod?.outputType}" optionValue="display" optionKey="value" />
         </div>
 
         <div class="buttons">
-          <span class="button"><g:actionSubmit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+          <sec:ifAnyGranted roles="ROLE_ADMIN">
+            <span class="button"><g:actionSubmit action="balk" value="${message(code: 'default.button.balk.label', default: 'Balk Report')}"/></span>
+          </sec:ifAnyGranted>
         </div>
       </g:form>
-      <ul>
-        <sec:ifAnyGranted roles="ROLE_ADMIN">
-          <li><g:link action="balk">Balk report</g:link></li>
-        </sec:ifAnyGranted>
-      </ul>
     </div>
     <div style="height:30px;"></div>
     <g:render template="/footer" />

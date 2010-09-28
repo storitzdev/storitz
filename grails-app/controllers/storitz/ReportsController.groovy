@@ -24,15 +24,27 @@ import ar.com.fdvs.dj.domain.Style
 import grails.plugins.springsecurity.Secured
 import ar.com.fdvs.dj.domain.ImageBanner
 import ar.com.fdvs.dj.domain.AutoText
+import com.storitz.ReportPeriod
 
 class ReportsController {
 
     def fileUploadService
 
+    static allowedMethods = [balk: "POST"]
+
+
     def index = { }
 
     @Secured(['ROLE_ADMIN'])
     def balk = {
+
+      ReportPeriod period = new ReportPeriod(params)
+      
+      if (!period.validate()) {
+        flash.message = "Bad report parameters - please re-enter dates and output type."
+        redirect(action: "index", model: [reportPeriod: period])
+      }
+
       FastReportBuilder drb = new FastReportBuilder();
       def config = loadConfig()
 
@@ -101,7 +113,7 @@ class ReportsController {
 
       JRDataSource ds = new JRBeanCollectionDataSource(results);   
       JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-      ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, 'PDF', [:]);
+      ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.getValue(), [:]);
       reportWriter.writeTo(response);
     }
 

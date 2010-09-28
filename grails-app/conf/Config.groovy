@@ -106,7 +106,7 @@ grails.plugins.springsecurity.requestMap.className = 'com.storitz.RequestMap'
 grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity.SecurityConfigType.Annotation
 grails.plugins.springsecurity.logout.afterLogoutUrl = "/logout.gsp"
 
-grails.date.formats = ['dd-MM-yyyy', 'h:mma']
+grails.date.formats = ['dd-MM-yyyy', 'h:mma', 'MM/dd/yyyy']
 
 // Mail configuration
 grails.mail.host = "mail.storitz.com"

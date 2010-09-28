@@ -22,6 +22,8 @@ public enum ReportOutputType {
 
   public getValue() { return outputType }
 
+  public getDisplay() { return display }
+
   static list() {
     [XLS, PDF, HTML]
   }
