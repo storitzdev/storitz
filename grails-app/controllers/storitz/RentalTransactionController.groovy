@@ -90,6 +90,8 @@ class RentalTransactionController {
     def save = {
         def site = StorageSite.get(params.site)
         params.remove('site')
+        def storageSize = StorageSize.get(params.searchSize as Long)
+        params.remove('searchSize')
 
         def rentalTransactionInstance
         if (params.id) {
@@ -103,8 +105,7 @@ class RentalTransactionController {
         rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         rentalTransactionInstance.site = site
         rentalTransactionInstance.unitType = params.chosenType
-        rentalTransactionInstance.searchSize = StorageSize.get(params.searchSize as Long)
-        params.remove('searchSize')
+        rentalTransactionInstance.searchSize = storageSize
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
         rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 
