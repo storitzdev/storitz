@@ -1,6 +1,5 @@
 package com.storitz
 
-import storitz.constants.StreetType;
 import storitz.constants.PhoneType;
 import storitz.constants.State;
 import storitz.constants.Country;

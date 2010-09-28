@@ -582,7 +582,7 @@
                   Active Military
                 </div>
                 <div class="formInstructions">
-                  Section 307 of the Servicemembers Civil Relief Act protects servicemembers currently serving or 90 days removed from a period of active duty against lien auctions on their property. Checking this box will protect your rights as a servicemember.
+                  Section 307 of the <a href="${resource(file:'/SCRA Section 307.pdf')}" onclick="window.open(this.href,'_blank');return false;">Servicemembers Civil Relief Act</a> protects servicemembers currently serving or 90 days removed from a period of active duty against lien auctions on their property. Checking this box will protect your rights as a servicemember.
                 </div>
                 <div class="checkout_fields">
                   <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'activeMilitary', 'errors')}">
