@@ -104,6 +104,7 @@ class RentalTransactionController {
         rentalTransactionInstance.site = site
         rentalTransactionInstance.unitType = params.chosenType
         rentalTransactionInstance.searchSize = StorageSize.get(params.searchSize as Long)
+        params.remove('searchSize')
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
         rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 
