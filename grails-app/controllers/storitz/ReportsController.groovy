@@ -25,6 +25,7 @@ import grails.plugins.springsecurity.Secured
 import ar.com.fdvs.dj.domain.ImageBanner
 import ar.com.fdvs.dj.domain.AutoText
 import com.storitz.ReportPeriod
+import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder
 
 class ReportsController {
 
@@ -34,6 +35,9 @@ class ReportsController {
 
 
     def index = { }
+
+    GregorianCalendar startDate = new GregorianCalendar()
+    GregorianCalendar endDate = new GregorianCalendar()
 
     @Secured(['ROLE_ADMIN'])
     def balk = {
@@ -45,6 +49,12 @@ class ReportsController {
         redirect(action: "index", model: [reportPeriod: period])
       }
 
+      startDate.setTime(Date.parse('MM/dd/yyyy', params.startDate))
+      startDate.clearTime()
+      endDate.setTime(Date.parse('MM/dd/yyyy', params.endDate) + 1)
+      endDate.clearTime()
+
+
       FastReportBuilder drb = new FastReportBuilder();
       def config = loadConfig()
 
@@ -53,20 +63,22 @@ class ReportsController {
       Style headerStyle = getStyle(config.headerStyle)
       Style detailStyle = getStyle(config.detailStyle)
 
+      String subtitle = "From ${params.startDate} to ${params.endDate}"
+
        drb.setTitle("Customer Balk Report")                                      //defines the title of the report
-                .setSubtitle("Customers who fill out the form but leave before making payment")
-                .setDetailHeight(15)                                            //defines the height for each record of the report
-                .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
-                .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
-                .setColumnsPerPage(1)
-                .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
-                .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
-                .setPrintBackgroundOnOddRows(true)
-                .setUseFullPageWidth(true)
+         .setSubtitle(subtitle)
+         .setDetailHeight(15)                                            //defines the height for each record of the report
+         .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
+         .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
+         .setColumnsPerPage(1)
+         .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
+         .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
+         .setPrintBackgroundOnOddRows(true)
+         .setUseFullPageWidth(true)
 
       // Footer definition
-      drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY)
-      drb.addAutoText(AutoText.AUTOTEXT_PAGE_X, AutoText.POSITION_FOOTER, AutoText.ALIGMENT_RIGHT)
+      drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
+      drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
 
       SimpleColumn columnDate = ColumnBuilder.getInstance().
         setColumnProperty("bookingDate", Date.class.getName()).
@@ -108,6 +120,7 @@ class ReportsController {
 
       def results = c.list() {
         eq('status', TransactionStatus.BEGUN)
+        between('bookingDate', startDate.time, endDate.time)
         order('bookingDate', 'desc')
       }
 

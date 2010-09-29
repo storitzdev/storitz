@@ -9,5 +9,7 @@ class ReportPeriod {
     ReportOutputType outputType
 
     static constraints = {
+      startDate(blank:false)
+      endDate(blank:false)
     }
 }
