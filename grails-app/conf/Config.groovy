@@ -28,8 +28,14 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 // The default codec used to encode data with ${}
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
+
+
 grails.converters.encoding="UTF-8"
-grails.converters.default.circular.reference.behaviour = INSERT_NULL
+grails.converters.xml.pretty.print = true
+grails.converters.json.pretty.print = true
+grails.converters.json.default.deep = true
+grails.converters.xml.default.deep = true
+grails.converters.default.circular.reference.behaviour="INSERT_NULL"
 
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
