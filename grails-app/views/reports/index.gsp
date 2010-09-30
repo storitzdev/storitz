@@ -19,16 +19,18 @@
 
 
       // do stuff when DOM is ready
-       $('#startDate').datepicker();
-       $('#endDate').datepicker();
+      $('#startDate').datepicker();
+      $('#endDate').datepicker();
+      $('input#sitename').autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
 
-       $('#today').click(function(event) {
-         event.preventDefault();
-         var now = new Date();
-         var dateStr = now.print(dateFormat);
-         $('#startDate').val(dateStr);
-         $('#endDate').val(dateStr);
-       });
+
+      $('#today').click(function(event) {
+        event.preventDefault();
+        var now = new Date();
+        var dateStr = now.print(dateFormat);
+        $('#startDate').val(dateStr);
+        $('#endDate').val(dateStr);
+      });
 
        $('#thisWeek').click(function(event) {
          event.preventDefault();
@@ -60,6 +62,7 @@
         now.setMonth(0);
         $('#startDate').val(now.print(dateFormat));
       });
+
     });
 //]]>
   </script>
@@ -120,15 +123,21 @@
         </div>
 
         <div class="checkout_fields">
-          <div style="width:200px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'outputType', 'errors')}">
-            <g:select id="outputType" style="width:250px;" name="outputType" from="${storitz.constants.ReportOutputType?.list()}" value="${reportPeriod?.outputType}" optionValue="display" optionKey="value" />
+          <div style="width:250px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'outputType', 'errors')}">
+            <g:select id="outputType" style="width:230px;" name="outputType" from="${storitz.constants.ReportOutputType?.list()}" value="${reportPeriod?.outputType}" optionValue="display" optionKey="value" />
+          </div>
+          <div style="width:250px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'site', 'errors')}">
+            <input name="sitename" id="sitename" value="${reportPeriod?.site?.title}" style="width:230px;" />
           </div>
           <div style="clear:both;"></div>
         </div>
 
         <div class="checkout_labels">
-          <div class="checkout_name" style="width:200px;">
+          <div class="checkout_name" style="width:250px;">
             <label for="outputType">Output Type</label>
+          </div>
+          <div class="checkout_name" style="width:250px;">
+            <label for="sitename">Site</label>
           </div>
           <div style="clear:both;"></div>
         </div>
@@ -137,6 +146,7 @@
           <sec:ifAnyGranted roles="ROLE_ADMIN">
             <span class="button"><g:actionSubmit action="balk" value="${message(code: 'default.button.balk.label', default: 'Balk Report')}"/></span>
           </sec:ifAnyGranted>
+          <span class="button"><g:actionSubmit action="site" value="${message(code: 'default.button.site.label', default: 'Site Transactions')}"/></span>
         </div>
       </g:form>
     </div>

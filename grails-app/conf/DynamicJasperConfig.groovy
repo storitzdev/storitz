@@ -40,22 +40,8 @@ dynamicJasper {
     }
 
     subtitleStyle {
-        font = new Font(14, Font._FONT_VERDANA, false)
-        textColor = Color.white
-        border = Border.NO_BORDER
-        borderColor = new Color(5, 109, 186)
-        horizontalAlign = HorizontalAlign.LEFT
-        verticalAlign = VerticalAlign.MIDDLE
-        backgroundColor = new Color(5, 109, 186)
-        transparency = Transparency.OPAQUE
-        transparent = false
-        blankWhenNull = true
-        padding = 2
-        pattern = ''
-        radius = 1
-        rotation = Rotation.NONE
-        stretching = Stretching.NO_STRETCH
-        stretchWithOverflow = false
+        textColor = new Color(5, 109, 186)
+        backgroundColor = Color.white
     }
 
     headerStyle {

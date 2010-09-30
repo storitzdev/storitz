@@ -26,10 +26,17 @@ import ar.com.fdvs.dj.domain.ImageBanner
 import ar.com.fdvs.dj.domain.AutoText
 import com.storitz.ReportPeriod
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder
+import java.awt.Color
+import ar.com.fdvs.dj.domain.constants.HorizontalAlign
+import com.storitz.User
+import com.storitz.UserRole
+import com.storitz.StorageSite
+import com.storitz.SiteUser
 
 class ReportsController {
 
     def fileUploadService
+    def springSecurityService
 
     static allowedMethods = [balk: "POST"]
 
@@ -59,7 +66,11 @@ class ReportsController {
       def config = loadConfig()
 
       Style titleStyle = getStyle(config.titleStyle)
-      Style subtitleStyle = getStyle(config.subtitleStyle)
+      // MMA - there is something broken about subtitle background text and about getting the style from the config file
+      Style subtitleStyle = new Style()
+      subtitleStyle.setTextColor(new Color(5, 109, 186))
+      subtitleStyle.setBackgroundColor(Color.white)
+      subtitleStyle.setHorizontalAlign(HorizontalAlign.RIGHT)
       Style headerStyle = getStyle(config.headerStyle)
       Style detailStyle = getStyle(config.detailStyle)
 
@@ -67,9 +78,9 @@ class ReportsController {
 
        drb.setTitle("Customer Balk Report")                                      //defines the title of the report
          .setSubtitle(subtitle)
+         .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
          .setDetailHeight(15)                                            //defines the height for each record of the report
          .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
-         .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
          .setColumnsPerPage(1)
          .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
          .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
@@ -130,6 +141,52 @@ class ReportsController {
       reportWriter.writeTo(response);
     }
 
+  def site = {
+
+    ReportPeriod period = new ReportPeriod(params)
+
+    if (!period.validate()) {
+      flash.message = "Bad report parameters - please re-enter dates and output type."
+      redirect(action: "index", model: [reportPeriod: period])
+    }
+
+    startDate.setTime(Date.parse('MM/dd/yyyy', params.startDate))
+    startDate.clearTime()
+    endDate.setTime(Date.parse('MM/dd/yyyy', params.endDate) + 1)
+    endDate.clearTime()
+
+
+    FastReportBuilder drb = new FastReportBuilder();
+    def config = loadConfig()
+
+    Style titleStyle = getStyle(config.titleStyle)
+    // MMA - there is something broken about subtitle background text and about getting the style from the config file
+    Style subtitleStyle = new Style()
+    subtitleStyle.setTextColor(new Color(5, 109, 186))
+    subtitleStyle.setBackgroundColor(Color.white)
+    subtitleStyle.setHorizontalAlign(HorizontalAlign.RIGHT)
+    Style headerStyle = getStyle(config.headerStyle)
+    Style detailStyle = getStyle(config.detailStyle)
+
+    String subtitle = "From ${params.startDate} to ${params.endDate}"
+
+     drb.setTitle("Customer Balk Report")                                      //defines the title of the report
+       .setSubtitle(subtitle)
+       .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
+       .setDetailHeight(15)                                            //defines the height for each record of the report
+       .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
+       .setColumnsPerPage(1)
+       .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
+       .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
+       .setPrintBackgroundOnOddRows(true)
+       .setUseFullPageWidth(true)
+
+    // Footer definition
+    drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
+    drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
+
+  }
+
   /*
       Below method pulled from the DjReportController
       They allow this controller to use the styles defined in:
@@ -160,7 +217,6 @@ class ReportsController {
       }
       style.backgroundColor = styleConfig.backgroundColor
       style.transparency = styleConfig.transparency
-      //style.transparent = styleConfig.transparent
       style.textColor = styleConfig.textColor
       style.horizontalAlign = styleConfig.horizontalAlign
       style.verticalAlign = styleConfig.verticalAlign

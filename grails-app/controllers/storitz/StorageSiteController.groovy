@@ -71,9 +71,9 @@ class StorageSiteController {
   }
 
   def autocompleteSite = {
+
     def username  = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
-    def max = Math.min(params.max ? params.int('max') : 20, 100)
     params.sort = 'title'
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
