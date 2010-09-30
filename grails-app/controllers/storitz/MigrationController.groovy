@@ -18,7 +18,7 @@ class MigrationController {
   }
 
   def consume = {
-    def urlString = 'http://preview.storitz.com/migrate/owner/' + params.id
+    def urlString = 'http://preview.storitz.com/migration/owner/' + params.id
     if (params.url) {
       urlString = params.url
     }
