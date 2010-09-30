@@ -12,9 +12,15 @@ class MigrationController {
     def myFeed = Feed.get(params.id as Long)
 
     if (myFeed) {
-      def sites = StorageSite.findAllByFeed(myFeed)
+      // MMA - change to one for debug reasons
+      def sites = StorageSite.findAllByFeed(myFeed).collect{ it.id }
       render(status: 200, contentType: "application/json", text: "{ \"sites\": ${sites as JSON} }")
     }
+  }
+
+  def site = {
+    def site = StorageSite.get(params.id as Long)
+    render(status: 200, contentType: "application/json", text: "{ \"site\": ${site as JSON} }")
   }
 
   def consume = {
