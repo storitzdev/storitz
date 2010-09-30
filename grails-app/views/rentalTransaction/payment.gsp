@@ -153,11 +153,11 @@
 
                 <div class="paymentTotal" style="display:none;">
                   <ul>
-                  <g:each var="item" in="${moveInDetails.items}">
+                  <g:each var="item" in="${moveInDetails?.items}">
                     <li>${item.description} - tax=${item.tax} amount=${item.amount}</li>
                   </g:each>
                   </ul>
-                  Total = ${moveInDetails.total()}
+                  Total = ${moveInDetails?.total()}
                 </div>
 
                 <div class="transBox">
@@ -193,13 +193,13 @@
                     <div class="right">
                       <div id="costDetails" class="right">
                         <table id="costTotals">
-                          <g:each var="item" in="${moveInDetails.items}">
+                          <g:each var="item" in="${moveInDetails?.items}">
                             <tr>
                               <td>${item.description}</td>
                               <td class="costMoney"><g:formatNumber number="${item.amount}" type="currency" currencyCode="USD" /></td>
                             </tr>
                           </g:each>
-                          <g:if test="${moveInDetails.taxTotal() > 0}">
+                          <g:if test="${moveInDetails?.taxTotal() > 0}">
                           <tr id="taxBlock">
                             <td>Tax</td>
                             <td></td>

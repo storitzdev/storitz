@@ -177,6 +177,24 @@ class RentalTransactionController {
       }
 
       def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
+      if (!moveInDetails) {
+        def found = false
+        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.getUnitTypeLower() == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.min{ it.price }
+        for(myUnit in bestUnit) {
+          rentalTransactionInstance.unitId = myUnit.id
+          if (moveInService.checkRented(rentalTransactionInstance)) {
+            found = true
+            unit = myUnit
+            break
+          }
+        }
+        if (!found) {
+          flash.message = "Unit already reserved - refresh and try again"
+          redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
+          return
+        }
+        moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
+      }
       rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
 
       [rentalTransactionInstance: rentalTransactionInstance,

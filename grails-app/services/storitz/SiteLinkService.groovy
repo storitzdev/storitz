@@ -1058,6 +1058,7 @@ class SiteLinkService {
     def ret = getMoveInWithDiscount(rentalTransaction)
 
     println "moveInDetail ret =${ret}"
+    
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',

@@ -1018,6 +1018,8 @@ class CShiftService {
 
     // get the number of reservation days
     def ret = getReservationUnitData(cshift.location.webUrl, cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.displaySize, unit.unitName)
+
+    println "Reservation data: ${ret as String}"
     
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1032,7 +1034,16 @@ class CShiftService {
       rentalTransaction.reservationCost = resData.Reservation_Cost.text() as BigDecimal
       found = true
     }
-    if (!found) return false
+    if (!found) {
+      def errCode
+      for(resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:Error')  {
+        errCode = resData.ErrorCode.text() as Integer
+      }
+      if (errCode == 100) {
+        rentalTransaction.site.removeFromUnits(unit)
+      }
+      return false
+    }
 
     URL endPoint = new URL(cshift.location.kioskUrl)
 
