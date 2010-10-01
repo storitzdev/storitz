@@ -15,6 +15,7 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
@@ -26,9 +27,9 @@
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12/grails-app/utils" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6/grails-app/controllers" isTestSource="false" />
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7">
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/grails-app/controllers" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/fckeditor-0.9.5/src/groovy" isTestSource="false" />
@@ -107,11 +108,11 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/mail-0.9/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/quartz-0.4.2/lib" recursive="false" />

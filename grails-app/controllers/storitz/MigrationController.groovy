@@ -6,6 +6,7 @@ import com.storitz.Feed
 import storitz.constants.FeedType
 import com.storitz.SiteLink
 import com.storitz.CenterShift
+import com.storitz.User
 
 class MigrationController {
 
@@ -15,20 +16,26 @@ class MigrationController {
     def myFeed = Feed.get(params.id as Long)
 
     if (myFeed) {
-      def sites = StorageSite.findAllByFeed(myFeed)
+      def users = User.findAllByManager(myFeed.manager)
+      def siteUsers = []
+      for (user in users) {
+        for (site in users.sites) {
+          siteUsers.add(site)
+        }
+      }
+      for (site in myFeed.manager.sites) {
+        siteUsers.add(site)
+      }
+      JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
-        render(status: 200, contentType: "application/json", text: "{ \"sites\": ${sites as JSON} }")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON}")
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
-        render(status: 200, contentType: "application/json", text: "{ \"sites\": ${sites as JSON} }")
+        println "Beginning output"
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"siteUsers\": ${siteUsers as JSON}")
       }
     }
-  }
-
-  def site = {
-    def site = StorageSite.get(params.id as Long)
-    render(status: 200, contentType: "application/json", text: "{ \"site\": ${site as JSON} }")
   }
 
   def consume = {
@@ -53,71 +60,4 @@ class MigrationController {
     render(status: 200, text: "Done!")
   }
 
-  private getSite(StorageSite it) {
-    def returnArray = [:]
-    returnArray['units'] = it.units
-    returnArray['specialOffers'] = it.specialOffers
-    returnArray['images'] = it.images
-    // skip site users
-    returnArray['insurances'] = it.insurances
-    // skip visits
-    returnArray['securityItems'] = it.securityItems
-    returnArray['convenienceItems'] = it.convenienceItems
-    returnArray['amenityItems'] = it.amenityItems
-    returnArray['title'] = it.title
-    returnArray['description'] = it.description
-    returnArray['logo'] = it.logo
-    returnArray['lat'] = it.lat
-    returnArray['lng'] = it.specialOffers
-    returnArray['address'] = it.address
-    returnArray['address2'] = it.address2
-    returnArray['city'] = it.city
-    returnArray['state'] = it.state
-    returnArray['zipcode'] = it.url
-    returnArray['url'] = it.url
-    returnArray['phone'] = it.phone
-    returnArray['source'] = it.source
-    returnArray['sourceId'] = it.sourceId
-    returnArray['sourceLoc'] = it.sourceLoc
-    returnArray['requiresInsurance'] = it.requiresInsurance
-    returnArray['noInsuranceWaiver'] = it.noInsuranceWaiver
-    returnArray['boxesAvailable'] = it.boxesAvailable
-    returnArray['freeTruck'] = it.freeTruck
-    returnArray['isGate'] = it.isGate
-    returnArray['isKeypad'] = it.isKeypad
-    returnArray['isCamera'] = it.isCamera
-    returnArray['isUnitAlarmed'] = it.isManagerOnsite
-    returnArray['hasElevator'] = it.hasElevator
-    returnArray['adminFee'] = it.adminFee
-    returnArray['lockFee'] = it.lockFee
-    returnArray['deposit'] = it.deposit
-    returnArray['prorateStart'] = it.prorateStart
-    returnArray['prorateCutoff'] = it.prorateCutoff
-    returnArray['prorateSecondMonth'] = it.prorateSecondMonth
-    returnArray['openWeekday'] = it.openWeekday
-    returnArray['openSaturday'] = it.openSaturday
-    returnArray['openSunday'] = it.openSunday
-    returnArray['startWeekday'] = it.startWeekday
-    returnArray['endWeekday'] = it.endWeekday
-    returnArray['startSaturday'] = it.startSaturday
-    returnArray['endSaturday'] = it.endSaturday
-    returnArray['startSunday'] = it.startSunday
-    returnArray['endSunday'] = it.endSunday
-    returnArray['startGate'] = it.startGate
-    returnArray['endGate'] = it.endGate
-    returnArray['startSundayGate'] = it.startSundayGate
-    returnArray['endSundayGate'] = it.endSundayGate
-    returnArray['taxRateRental'] = it.taxRateRental
-    returnArray['taxRateInsurance'] = it.taxRateInsurance
-    returnArray['useProrating'] = it.useProrating
-    // skip feed
-    returnArray['lastUpdate'] = it.lastUpdate
-    returnArray['disabled'] = it.disabled
-    returnArray['bankAccount'] = it.bankAccount
-    returnArray['rentalAgreement'] = it.rentalAgreement
-    returnArray['lastChange'] = it.lastChange
-
-    return returnArray
-
-  }
 }

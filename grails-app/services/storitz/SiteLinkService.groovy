@@ -893,7 +893,8 @@ class SiteLinkService {
       insurance.insuranceId = Integer.parseInt(ins.InsurCoverageID.text())
       insurance.totalCoverage = ins.dcCoverage.text() as BigDecimal
       insurance.premium = ins.dcPremium.text() as BigDecimal
-      insurance.percentTheft = ins.dcPCTheft.text() as BigDecimal
+      def pctTheft = ins.dcPCTheft.text()
+      insurance.percentTheft = (pctTheft != "" ? pctTheft as BigDecimal : 0) 
       insurance.provider = ins.sProvidor.text()
       count++;
 

@@ -11,6 +11,10 @@ import storitz.constants.CommissionSourceType
 import storitz.constants.CommissionType
 import grails.converters.JSON
 import com.storitz.Feed
+import com.storitz.SiteLink
+import com.storitz.SiteUser
+import com.storitz.CenterShift
+import storitz.CustomDomainMarshaller
 
 class BootStrap {
 
@@ -23,13 +27,14 @@ class BootStrap {
     println "Registering Marshallers"
     // Custom marshallers
 
+    JSON.registerObjectMarshaller(new CustomDomainMarshaller())
 
     JSON.registerObjectMarshaller StorageSite, {
 
       println "Using the registered StorageSite Marshaller"
 
       def returnArray = [:]
-      returnArray['units'] = it.units
+      // skip units - refresh will get those
       returnArray['specialOffers'] = it.specialOffers
       returnArray['images'] = it.images
       // skip site users
@@ -42,7 +47,7 @@ class BootStrap {
       returnArray['description'] = it.description
       returnArray['logo'] = it.logo
       returnArray['lat'] = it.lat
-      returnArray['lng'] = it.specialOffers
+      returnArray['lng'] = it.lng
       returnArray['address'] = it.address
       returnArray['address2'] = it.address2
       returnArray['city'] = it.city
@@ -85,7 +90,6 @@ class BootStrap {
       returnArray['taxRateInsurance'] = it.taxRateInsurance
       returnArray['useProrating'] = it.useProrating
       // skip feed
-      returnArray['lastUpdate'] = it.lastUpdate
       returnArray['disabled'] = it.disabled
       returnArray['bankAccount'] = it.bankAccount
       returnArray['rentalAgreement'] = it.rentalAgreement
@@ -94,15 +98,38 @@ class BootStrap {
       return returnArray
     }
 
-    JSON.registerObjectMarshaller Feed, {
-      println "Using the registered Feed Marshaller"
+    JSON.registerObjectMarshaller SiteLink, {
+      println "Using the registered SiteLink Marshaller"
 
       def returnArray = [:]
+      returnArray['corpCode'] = it.feedType
+      returnArray['userName'] = it.userName
+      returnArray['password'] = it.operatorName
       returnArray['feedType'] = it.feedType
       returnArray['manager'] = it.manager
       returnArray['operatorName'] = it.operatorName
+      returnArray['sites'] = it.sites
 
       return returnArray
+
+    }
+
+    JSON.registerObjectMarshaller CenterShift, {
+      println "Using the registered CenterShift Marshaller"
+
+      def returnArray = [:]
+      returnArray['cshiftVersion'] = it.cshiftVersion
+      returnArray['userName'] = it.userName
+      returnArray['pin'] = it.pin
+      returnArray['location'] = it.location
+      returnArray['orgId'] = it.orgId
+      returnArray['feedType'] = it.feedType
+      returnArray['manager'] = it.manager
+      returnArray['operatorName'] = it.operatorName
+      returnArray['sites'] = it.sites
+
+      return returnArray
+
     }
 
     JSON.registerObjectMarshaller User, {
@@ -123,6 +150,17 @@ class BootStrap {
       returnArray['manager'] = it.manager
 
       return returnArray
+    }
+
+    JSON.registerObjectMarshaller SiteUser, {
+      println "Using the registered SiteUser Marshaller"
+
+      def returnArray = [:]
+      returnArray['user'] = it.user.username
+      returnArray['site'] = it.site.title
+
+      return returnArray
+      
     }
 
     // create system ROLES
