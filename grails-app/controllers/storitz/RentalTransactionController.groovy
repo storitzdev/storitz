@@ -102,7 +102,11 @@ class RentalTransactionController {
         }
         rentalTransactionInstance.status = TransactionStatus.BEGUN
         rentalTransactionInstance.bookingDate = new Date()
-        rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+        if (params.moveInDate && params.moveInDate instanceof Date) {
+          rentalTransactionInstance.moveInDate = params.moveInDate
+        } else {
+          rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+        }
         rentalTransactionInstance.site = site
         rentalTransactionInstance.unitType = params.chosenType
         rentalTransactionInstance.searchSize = storageSize
