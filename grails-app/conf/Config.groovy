@@ -54,7 +54,7 @@ environments {
     }
     preview {
         grails.serverURL = "http://preview.storitz.com"
-        security.httpsPort = 8443
+        security.httpsPort = 443
         grails.plugins.springsecurity.controllerAnnotations.staticRules = [
           '/home/**':    ['ROLE_USER', 'ROLE_ADMIN'],
           '/STMap/**':   ['ROLE_USER', 'ROLE_ADMIN'],
