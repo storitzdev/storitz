@@ -1,4 +1,4 @@
-  <title>::Storitz - ${title}::</title>
+  <title>${title}</title>
   <meta name="KEYWORDS" content="storage, personal storage, moving, click, store"/>
   <meta name="ROBOTS" content="FOLLOW"/>
   <script src="http://www.google.com/jsapi" type="text/javascript"></script>

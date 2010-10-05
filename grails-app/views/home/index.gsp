@@ -14,23 +14,20 @@
         var map;
         var geocoder;
         var R = 3958.761; // mi
-        var searchLat;
-        var searchLng;
+        var searchLat = ${lat};
+        var searchLng = ${lng};
         var infoWindow;
         var features = [];
         var storageSize = [];
         var tooltips = new Hash();
         var searchAddr;
-        var searchSize;
+        var searchSize = ${searchSize};
         var searchSizeDesc;
         var searchDate;
         var helpFadeout = null;
         var baseURL = '${request.contextPath}/self-storage/';
         var inDrag = false;
-        var mapLoaded = false;
-        var pendingResize = false;
         var savedFeature;
-        var siteCount = 0;
         var bounds = null;
         var markerImageGreen = null;
         var markerImageGray = null;
@@ -60,15 +57,9 @@
         function redrawMap() {
 
           bounds = map.getBounds();
-          if (pendingResize) {
-            getMarkers(true);
-            return;
-          }
-
           if (!inDrag) {
-             getMarkers(false);
+             getMarkers();
           }
-
         }
 
         function dragStart() {
@@ -77,7 +68,7 @@
 
         function dragEnd() {
           inDrag = false;
-          getMarkers(false);
+          getMarkers();
         }
 
         function siteLink(s)
@@ -152,7 +143,7 @@
           markerOver(features[markerId]);
         }
 
-        function getMarkers(resizeable) {
+        function getMarkers() {
 
           tooltips.each(function(t) {
             if (typeof t.value.destroy == 'function') {
@@ -165,46 +156,7 @@
             return;
           }
 
-          if (resizeable) {
-
-            new Ajax.Request("${createLink(controller:'STMap', action:'countSites')}",
-            {
-              method:'get',
-              parameters: {searchSize: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
-              onSuccess:function(transport) {
-                siteCount = transport.responseJSON.siteCount;
-                if (siteCount < 2) {
-                  if (map.getZoom() > 1) {
-                    pendingResize = true;
-                    map.setZoom(map.getZoom() - 1);
-                  }
-                } else if (siteCount > 20) {
-                  pendingResize = true;
-                  map.setZoom(map.getZoom() + 1);
-                } else {
-                  pendingResize = false;
-                  drawMarkers();
-                }
-              },
-              onFailure:function(transport) {
-                alert("Something went wrong " + transport.responseText);
-              }
-            });
-            if (map.getZoom() <= 1 || map.getZoom() >= 16) {
-              pendingResize = false;
-            }
-            if (siteCount == 0) {
-              return;
-            } else if (siteCount > 20) {
-              $('stresults_div').update("<div class=\"siteOverage\">Your search returned too many sites. Zoom in on the map to see detailed results.</div>");
-            }
-          }  else {
-
-            pendingResize = false;
-            if (siteCount > 0) {
-              drawMarkers();
-            }
-          }
+          drawMarkers();
         }
 
         function drawMarkers() {
@@ -225,88 +177,10 @@
 
                 transport.responseJSON.features.each(function(s) {
 
-                    var location = new google.maps.LatLng(s.lat, s.lng);
-                    features[s.id] = s;
-                    var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
-                    var featuredArr = $A(s.featuredOffers.pluck('promoName'));
-                    if (featuredArr.size() > 1 ) {
-                      offers = '<div id="offers' + s.id + '" class=\"pointer\">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-                      tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
-                    } else {
-                      var offersArr = $A(s.specialOffers.pluck('promoName'));
-                      if (offersArr.size() > 1 ) {
-                        offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-                        tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
-                      } else {
-                        offers = offersArr[0];
-                      }
-                    }
+                    createMarker(s);
                     rows++;
-                    var pUp = s.units.find(function(n) { return n.type == 'upper' });
-                    var pDup = s.units.find(function(n) { return n.type == 'driveup' });
-                    var pInt = s.units.find(function(n) { return n.type == 'interior' });
-                    var iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
-                    var priceDriveup = pDup ? pDup.price : 999999;
-                    var priceInterior = pInt? pInt.price : 999999;
-                    var priceUpper = pUp ? pUp.price : 999999;
+                    tableContents += createTableRow(s);
 
-                    var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
-                    var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var gateImg   = s.isGate ? '<img id="gate' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var managerImg  = s.isManagerOnsite ? '<img id="manager' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-green-mgr20b.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>' : '<span style="width:20px; margin: 1px;"></span>';
-                    var elevatorImg  = s.hasElevator ? '<img id="elevator' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-green-elevator20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>' : '<span style="width:20px; margin: 1px;"></span>';
-
-                    var truckImg = '<span style="width:20px; margin: 1px;"></span>';
-                    switch(s.freeTruck) {
-                      case "FREE":
-                        truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
-                        break;
-                      case "RENTAL":
-                        truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
-                        break;
-                    }
-
-                    if (s.isKeypad) {
-                      tooltips.set("keypad" + s.id, "tooltip_keypad");
-                    }
-                    if (s.isCamera) {
-                      tooltips.set("camera" + s.id, "tooltip_camera");
-                    }
-                    if (s.isGate) {
-                      tooltips.set("gate" + s.id, "tooltip_gate");
-                    }
-                    if (s.isUnitAlarmed) {
-                      tooltips.set("alarm" + s.id, "tooltip_alarm");
-                    }
-                    if (s.isManagerOnsite) {
-                      tooltips.set("manager" + s.id, "tooltip_manager");
-                    }
-                    if (s.hasElevator) {
-                      tooltips.set("elevator" + s.id, "tooltip_elevator");
-                    }
-                    if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
-                      tooltips.set("truck" + s.id, "tooltip_truck");
-                    }
-
-                    s.marker = new google.maps.Marker({
-                      map: map,
-                      title: s.title,
-                      position: location,
-                      icon: iconMarker
-                    });
-                    google.maps.event.addListener(s.marker, 'mouseover', function() {
-                      markerOver(s);
-                    });
-                    google.maps.event.addListener(s.marker, 'click', function() {
-                      markerClick(s);
-                    });
-                    tableContents += '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-                      '<a href="' + siteLink(s) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-                      (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-                      (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td>' +
-                      '<td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +'</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
                 });
                 tableContents += '</tbody></table>';
                 $('stresults_div').update(tableContents);
@@ -323,55 +197,131 @@
           });
         }
 
-        function createMap() {
-          var iploc;
-          var req = new Ajax.Request("${createLink(controller:'STMap', action:'iplocate')}",
-          {
-            method:'get',
-            onSuccess:function(transport) {
-              var res = transport.responseJSON;
-              iploc = new google.maps.LatLng(res.latitude, res.longitude);
-              searchAddr = res.postalCode;
-            },
-            onFailure:function(transport) {
-              alert("Something went wrong " + transport.responseText);
-            },
-            onException:function(req, err) {
-              alert("Exception: " + err);
-            },
-            onComplete:function() {
-              var myOptions;
-              if (iploc) {
-                myOptions = {
-                  zoom: 12,
-                  center: iploc,
-                  scrollwheel: false,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP,
-                  navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
-                };
-              } else {
-                myOptions = {
-                  zoom: 12,
-                  scrollwheel: false,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP,
-                  navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
-                };
-              }
-              markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_grn.png')}', null, null, new google.maps.Point(1, 32));
-              markerImageGray = new google.maps.MarkerImage('${resource(dir:'images', file:'gray-icon.png')}', null, null, new google.maps.Point(1, 32));
+        function createMarker(s) {
+          var location = new google.maps.LatLng(s.lat, s.lng);
+          var iconMarker;
 
-              map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
-
-              searchLat = iploc.lat();
-              searchLng = iploc.lng();
-              TableKit.Sortable.init($('stresults'), {editable:false, stripe:true});
-              google.maps.event.addListener(map, 'bounds_changed', redrawMap);
-              google.maps.event.addListener(map, 'tilesloaded', checkMapSubmit);
-              google.maps.event.addListener(map, 'dragstart', dragStart);
-              google.maps.event.addListener(map, 'dragend', dragEnd);
-              geocoder = new google.maps.Geocoder();
-            }
+          if (s.unitCount) {
+            iconMarker = s.unitCount == 0 ? markerImageGray : markerImageGreen;
+          } else {
+            iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
+          }
+          
+          features[s.id] = s;
+          s.marker = new google.maps.Marker({
+            map: map,
+            title: s.title,
+            position: location,
+            icon: iconMarker
           });
+          google.maps.event.addListener(s.marker, 'mouseover', function() {
+            markerOver(s);
+          });
+          google.maps.event.addListener(s.marker, 'click', function() {
+            markerClick(s);
+          });
+        }
+
+        function createTableRow(s) {
+          var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
+          var featuredArr = $A(s.featuredOffers.pluck('promoName'));
+          if (featuredArr.size() > 1 ) {
+            offers = '<div id="offers' + s.id + '" class=\"pointer\">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
+            tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
+          } else {
+            var offersArr = $A(s.specialOffers.pluck('promoName'));
+            if (offersArr.size() > 1 ) {
+              offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
+              tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
+            } else {
+              offers = offersArr[0];
+            }
+          }
+          var pUp = s.units.find(function(n) { return n.type == 'upper' });
+          var pDup = s.units.find(function(n) { return n.type == 'driveup' });
+          var pInt = s.units.find(function(n) { return n.type == 'interior' });
+          var priceDriveup = pDup ? pDup.price : 999999;
+          var priceInterior = pInt? pInt.price : 999999;
+          var priceUpper = pUp ? pUp.price : 999999;
+
+          var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
+          var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
+          var gateImg   = s.isGate ? '<img id="gate' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
+          var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
+          var managerImg  = s.isManagerOnsite ? '<img id="manager' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-green-mgr20b.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>' : '<span style="width:20px; margin: 1px;"></span>';
+          var elevatorImg  = s.hasElevator ? '<img id="elevator' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-green-elevator20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>' : '<span style="width:20px; margin: 1px;"></span>';
+
+          var truckImg = '<span style="width:20px; margin: 1px;"></span>';
+          switch(s.freeTruck) {
+            case "FREE":
+              truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+              break;
+            case "RENTAL":
+              truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+              break;
+          }
+
+          if (s.isKeypad) {
+            tooltips.set("keypad" + s.id, "tooltip_keypad");
+          }
+          if (s.isCamera) {
+            tooltips.set("camera" + s.id, "tooltip_camera");
+          }
+          if (s.isGate) {
+            tooltips.set("gate" + s.id, "tooltip_gate");
+          }
+          if (s.isUnitAlarmed) {
+            tooltips.set("alarm" + s.id, "tooltip_alarm");
+          }
+          if (s.isManagerOnsite) {
+            tooltips.set("manager" + s.id, "tooltip_manager");
+          }
+          if (s.hasElevator) {
+            tooltips.set("elevator" + s.id, "tooltip_elevator");
+          }
+          if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
+            tooltips.set("truck" + s.id, "tooltip_truck");
+          }
+
+          return '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
+            '<a href="' + siteLink(s) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '">' + s.address +'</a></div></td><td class="textCenter">' +
+            (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+            (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+            (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td>' +
+            '<td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +'</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
+
+        }
+
+        function createMap() {
+          var iploc  = new google.maps.LatLng(${lat}, ${lng});
+          var myOptions = {
+            zoom: ${zoom},
+            center: iploc,
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
+          };
+          markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_grn.png')}', null, null, new google.maps.Point(1, 32));
+          markerImageGray = new google.maps.MarkerImage('${resource(dir:'images', file:'gray-icon.png')}', null, null, new google.maps.Point(1, 32));
+
+          map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
+
+          TableKit.Sortable.init($('stresults'), {editable:false, stripe:true});
+          google.maps.event.addListener(map, 'bounds_changed', redrawMap);
+          google.maps.event.addListener(map, 'dragstart', dragStart);
+          google.maps.event.addListener(map, 'dragend', dragEnd);
+          geocoder = new google.maps.Geocoder();
+
+          var site = new Object();
+          <g:each var="site" in="${sites}">
+            // site = ${site.id}
+            site.lat = ${site.lat};
+            site.lng = ${site.lng};
+            site.title = '${site.title}';
+            site.id = ${site.id};
+            site.unitCount = ${site.units.size()};
+            createMarker(site);
+          </g:each>
         }
 
         function showAddress(address, size, date) {
@@ -405,7 +355,7 @@
               }
             });
           }
-          getMarkers(true);
+          getMarkers();
         }
 
         function setupCalendar() {
@@ -451,12 +401,6 @@
           });          
         }
 
-        function checkMapSubmit() {
-          if (!mapLoaded) {
-            showAddress(getAddress(), $F('size'), getDate());
-            mapLoaded = true;
-          }
-        }
 
         function updateSearchMsg() {
           var msg;

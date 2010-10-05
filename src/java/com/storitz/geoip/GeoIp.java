@@ -32,7 +32,7 @@ public class GeoIp {
             String propertyName = "geodb." + os;
             try {
                 // Get the property as stream.
-                stream = servletContext.getResourceAsStream(propertyFile );
+                stream = servletContext.getResourceAsStream(propertyFile);
 
                 //load the stream to Property object.
                 prop.load(stream );

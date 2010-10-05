@@ -3,37 +3,20 @@ package storitz
 import com.storitz.StorageSite
 import com.storitz.geoip.GeoIp
 import grails.converters.JSON
-import org.hibernate.FetchMode as FM
 import org.hibernate.FetchMode
 
 class STMapController {
 
     def webUtilService
-    def geoIp;
+    def mapService
 
     def index = { }
 
     def countSites = {
-      
-      def sites = StorageSite.createCriteria()
-      def siteCount = sites.get {
-        projections {
-            countDistinct("id")
-        }
-        and {
-          between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
-          between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
-          eq("disabled", false)
-        }
-        if (params.searchSize && params.int('searchSize') != 1) {
-          fetchMode('units', FetchMode.EAGER)
-          units {
-            unitsize {
-              eq("id", Long.parseLong(params.searchSize))
-            }
-          }
-        }
-      }
+
+      println "zoom = ${params.zoom}, center lat: ${params.lat}, center lng: ${params.lng}, swLat: ${params.swLat}, swLng: ${params.swLng}, neLat: ${params.neLat}, neLng: ${params.neLng}, diff lat: ${(params.lat as BigDecimal) - (params.swLat as BigDecimal)}, diff lng: ${(params.lng as BigDecimal) - (params.swLng as BigDecimal)}"
+
+      def siteCount = mapService.countSites(params.searchSize as Integer, params.swLat as BigDecimal, params.swLng as BigDecimal, params.neLat as BigDecimal, params.neLng as BigDecimal)
       webUtilService.nocache(response)
       render (status: 200, contentType:"application/json", text:"{ siteCount: ${siteCount} }")
     }
@@ -42,23 +25,7 @@ class STMapController {
 
       // println "?searchSize=${params.searchSize}&neLat=${params.neLat}&swLat=${params.swLat}&swLng=${params.swLng}&neLng=${params.neLng}"
       
-      def sites = StorageSite.createCriteria()
-      def results = sites.listDistinct {
-        and {
-          between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
-          between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
-          eq("disabled", false)
-        }
-        if (params.searchSize && params.int('searchSize') != 1) {
-          fetchMode('units', FetchMode.EAGER)
-          units {
-            unitsize {
-              eq("id", Long.parseLong(params.searchSize))
-            }
-          }
-        }
-        fetchMode('specialOffers', FetchMode.EAGER)
-      }
+      def results = mapService.getSites(params.searchSize as Integer, params.swLat as BigDecimal, params.swLng as BigDecimal, params.neLat as BigDecimal, params.neLng as BigDecimal)
 
       def unitMap = [:]
 
@@ -108,13 +75,7 @@ class STMapController {
 
   def iplocate = {
 
-    def geoLoc
-
-    if (!geoIp) {
-      geoIp = new GeoIp(servletContext)
-    }
-
-    def loc = geoIp.getLocation(request.getRemoteAddr())
+    def loc = mapService.getGeoIp(servletContext, request)
 
     JSON.use("deep")
     render (status:200, contentType:"application/json", text:"${loc as JSON}")
