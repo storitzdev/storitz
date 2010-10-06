@@ -6,6 +6,7 @@
     <head>
       <meta name="Description" content="Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
       <g:render template="/header" />
+      <p:dependantJavascript >
       <script type="text/javascript">
 //<![CDATA[
       /*
@@ -492,6 +493,7 @@
         FastInit.addOnLoad(setupCalendar, setupHelp, setupForm, setupAnalytics);
 //]]>
       </script>
+      </p:dependantJavascript>
     </head>
     <body>
     <div id="body">
@@ -507,7 +509,7 @@
           <div>
             <form id="gsearch" action="" method="post">
               <div class="left" style="margin: 2px 5px 0 0;">
-                <img src="${resource(dir:'images', file:'btn-circle-1.png')}" alt="1"/>
+                <p:image src="btn-circle-1.png" alt="1"/>
               </div>
               <div class="left">
                 <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
@@ -515,26 +517,26 @@
               <div style="clear:both;height: 10px;"></div>
               <div>
                 <div class="left" style="margin: 2px 5px 0 0;">
-                  <img src="${resource(dir:'images', file:'btn-circle-2.png')}" alt="2"/>
+                  <p:image src="btn-circle-2.png" alt="2"/>
                 </div>
                 <div class="left">
                   <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
                 </div>
                 <div class="left" style="padding: 4px 7px;">
-                  <img id="sizeInfo" src="${resource(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
+                  <p:image id="sizeInfo" src="icn_info_circle.png" alt="info"/>
                 </div>
                 <div style="clear: both;"></div>
               </div>
               <div style="height: 10px;"></div>
               <div class="left" style="margin: 2px 5px 0 0;">
-                <img src="${resource(dir:'images', file:'btn-circle-3.png')}" alt="3"/>
+                <p:image src="btn-circle-3.png" alt="3"/>
               </div>
               <div class="left">
                 <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
               <div style="margin-left: 30px;">
-                <img id="gsearchBtn" src="${resource(dir:'images', file:'btn-find-it.png')}" class="noborder" alt="Search Storage"/>
+                <p:image id="gsearchBtn" src="btn-find-it.png" class="noborder" alt="Search Storage"/>
               </div>
               <div style="clear: both;"></div>
             </form>
@@ -604,37 +606,37 @@
                   <td>
                     <div style="float:right;">
                       <g:if test="${site.isKeypad}">
-                        <img id="keypad${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>
+                        <p:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin:1px;"></span>
                       </g:else>
                       <g:if test="${site.isCamera}">
-                        <img id="camera${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>
+                        <p:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Camera"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isGate}">
-                        <img id="gate${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>
+                        <p:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Gate"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isUnitAlarmed}">
-                        <img id="alarm${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>
+                        <p:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isManagerOnsite}">
-                        <img id="manager${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-green-mgr20b.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>
+                        <p:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.hasElevator}">
-                        <img id="elevator${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-green-elevator20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>
+                        <p:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
@@ -710,7 +712,10 @@
       <div id="tooltip_elevator" style="display:none" class="tooltip">
       Elevator to Upper Floors
       </div>
-      <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
+      <p:dependantJavascript>
+        <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
+      </p:dependantJavascript>
     </div>
     </body>
+    <p:renderDependantJavascript />
 </html>

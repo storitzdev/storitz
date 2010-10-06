@@ -6,6 +6,7 @@
     <meta name="DESCRIPTION" content="Storitz self storage partner - ${site.title} located in ${site.city}, ${site.state.fullName} : ${site.description ? site.getTextDescription() : '' }"/>
     <g:render template="/header" />
 
+  <p:dependantJavascript>
     <script type="text/javascript">
 //<![CDATA[
 
@@ -295,7 +296,7 @@
 //]]>
   </script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&amp;sensor=false&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
-
+ </p:dependantJavascript>
   </head>
   <body>
     <div id="body">
@@ -684,4 +685,5 @@
     <g:render template="/size_popup" />
     </div>
   </body>
+  <p:renderDependantJavascript />
 </html>

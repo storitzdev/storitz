@@ -4,7 +4,7 @@
       <div class="transHeader">Unit Type</div>
       <div>
         <select id="unitType" name="unitType" class="transDropdown">
-          <option value=""/>
+          <option value=""></option>
         </select>
       </div>
     </div>

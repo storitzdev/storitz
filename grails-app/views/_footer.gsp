@@ -41,6 +41,7 @@
     </div>
   </div>
 </div>
+<p:dependantJavascript>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -55,3 +56,4 @@
   })();
 
 </script>
+</p:dependantJavascript>

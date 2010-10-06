@@ -67,6 +67,7 @@ environments {
         storitz.nacha.dir = 'c:/temp/nacha'
         storitz.nacha.fileId = '1234567890'
         storitz.nacha.companyId = '0123456789'
+        uiperformance.enabled = false
     }
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -125,3 +126,20 @@ grails.mail.props = ["mail.smtp.auth":"true",
       "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
       "mail.smtp.socketFactory.fallback": "false",
       "mail.smtp.starttls.enable": "true"]
+
+// UI-performance configuration
+uiperformance.bundles = [
+   [type: 'js',
+    name: 'header_all',
+    files: ["scriptaculous183",
+            "fastinit",
+            "tablekit",
+            "calendarview",
+            "tooltip",
+            "validation"]],
+   [type: 'css',
+    name: 'header_bundled',
+    files: ['main',
+            'tablekit',
+            'calendarview']]
+]
