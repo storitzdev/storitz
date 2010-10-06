@@ -129,6 +129,7 @@ class MapService {
         // grow up to a couple of notches
         def targetZoom = zoom - 3
         while(zoom > targetZoom && count == 1) {
+          zoom--
           dim = getDimensions(zoom, lat, lng, width, height)
           count = countSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
         }
