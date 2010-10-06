@@ -20,7 +20,7 @@
         var infoWindow;
         var features = [];
         var storageSize = [];
-        var tooltips = new Hash();
+        var tooltips = [];
         var searchAddr;
         var searchSize = ${searchSize};
         var searchSizeDesc;
@@ -131,7 +131,9 @@
             delete infoWindow;
           });
           infoWindow.open(map, feature.marker);
-          $('row'+feature.id).addClassName('rowhighlight');
+          if ($('row'+feature.id)) {
+            $('row'+feature.id).addClassName('rowhighlight');
+          }
           savedFeature = feature;
         }
 
@@ -176,10 +178,9 @@
                 var offers;
 
                 tooltips.each(function(t) {
-                  if (typeof t.value.destroy == 'function') {
-                    t.value.destroy();
+                  if (typeof t.destroy == 'function') {
+                    t.destroy();
                   }
-                  tooltips.unset(t.name);
                 });
 
                 transport.responseJSON.features.each(function(s) {
@@ -193,9 +194,6 @@
                 $('stresults_div').update(tableContents);
                 if (rows > 0) {
                   new TableKit('stresults' + randId, { editable:false, stripe:true });
-                  tooltips.each(function(pair) {
-                     tooltips.set(pair.key, new Tooltip(pair.key, pair.value));
-                  });
                 }
               },
               onFailure:function(transport) {
@@ -234,12 +232,12 @@
           var featuredArr = $A(s.featuredOffers.pluck('promoName'));
           if (featuredArr.size() > 1 ) {
             offers = '<div id="offers' + s.id + '" class=\"pointer\">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-            tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
+            tooltips.push(new Tooltip("offers" + s.id, "tooltip_offers" + s.id));
           } else {
             var offersArr = $A(s.specialOffers.pluck('promoName'));
             if (offersArr.size() > 1 ) {
               offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-              tooltips.set(("offers" + s.id), ("tooltip_offers" + s.id));
+              tooltips.push(new Tooltip("offers" + s.id, "tooltip_offers" + s.id));
             } else {
               offers = offersArr[0];
             }
@@ -269,25 +267,25 @@
           }
 
           if (s.isKeypad) {
-            tooltips.set("keypad" + s.id, "tooltip_keypad");
+            tooltips.push(new Tooltip("keypad" + s.id, "tooltip_keypad"));
           }
           if (s.isCamera) {
-            tooltips.set("camera" + s.id, "tooltip_camera");
+            tooltips.push(new Tooltip("camera" + s.id, "tooltip_camera"));
           }
           if (s.isGate) {
-            tooltips.set("gate" + s.id, "tooltip_gate");
+            tooltips.push(new Tooltip("gate" + s.id, "tooltip_gate"));
           }
           if (s.isUnitAlarmed) {
-            tooltips.set("alarm" + s.id, "tooltip_alarm");
+            tooltips.push(new Tooltip("alarm" + s.id, "tooltip_alarm"));
           }
           if (s.isManagerOnsite) {
-            tooltips.set("manager" + s.id, "tooltip_manager");
+            tooltips.push(new Tooltip("manager" + s.id, "tooltip_manager"));
           }
           if (s.hasElevator) {
-            tooltips.set("elevator" + s.id, "tooltip_elevator");
+            tooltips.push(new Tooltip("elevator" + s.id, "tooltip_elevator"));
           }
           if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
-            tooltips.set("truck" + s.id, "tooltip_truck");
+            tooltips.push(new Tooltip("truck" + s.id, "tooltip_truck"));
           }
 
           return '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
@@ -330,31 +328,28 @@
             site.coverImg = '${site.coverImage() ? site.coverImage().thumbnail() : ""}';
             createMarker(site);
             <g:if test="${site.isKeypad}">
-              tooltips.set("keypad${site.id}", "tooltip_keypad");
+              tooltips.push(new Tooltip("keypad${site.id}", "tooltip_keypad"));
             </g:if>
             <g:if test="${site.isCamera}">
-              tooltips.set("camera${site.id}", "tooltip_camera");
+              tooltips.push(new Tooltip("camera${site.id}", "tooltip_camera"));
             </g:if>
             <g:if test="${site.isGate}">
-              tooltips.set("gate${site.id}", "tooltip_gate");
+              tooltips.push(new Tooltip("gate${site.id}", "tooltip_gate"));
             </g:if>
             <g:if test="${site.isUnitAlarmed}">
-              tooltips.set("alarm${site.id}", "tooltip_alarm");
+              tooltips.push(new Tooltip("alarm${site.id}", "tooltip_alarm"));
             </g:if>
             <g:if test="${site.isManagerOnsite}">
-              tooltips.set("manager${site.id}", "tooltip_manager");
+              tooltips.push(new Tooltip("manager${site.id}", "tooltip_manager"));
             </g:if>
             <g:if test="${site.hasElevator}">
-              tooltips.set("elevator${site.id}", "tooltip_elevator");
+              tooltips.push(new Tooltip("elevator${site.id}", "tooltip_elevator"));
             </g:if>
             <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
-              tooltips.set("truck${site.id}", "tooltip_truck");
+              tooltips.push(new Tooltip("truck${site.id}", "tooltip_truck"));
             </g:if>
-            tooltips.set(("offers${site.id}"), ("tooltip_offers${site.id}"));
+            tooltips.push(new Tooltip("offers${site.id}", "tooltip_offers${site.id}"));
           </g:each>
-          tooltips.each(function(pair) {
-             tooltips.set(pair.key, new Tooltip(pair.key, pair.value));
-          });
           
         }
 
