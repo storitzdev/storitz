@@ -138,8 +138,8 @@ function drawDirections(response, status) {
 }
 
 function getDirections() {
-  markerImageGreen = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_grn.png')}', null, null, new google.maps.Point(1, 32));
-  markerImageBlue = new google.maps.MarkerImage('${resource(dir:'images', file:'icn_map_blue.png')}', null, null, new google.maps.Point(1, 32));
+  markerImageGreen = new google.maps.MarkerImage(${p.imageLink(src:'icn_map_grn.png')}, null, null, new google.maps.Point(1, 32));
+  markerImageBlue = new google.maps.MarkerImage('${p.imageLink(src:'icn_map_blue.png')}', null, null, new google.maps.Point(1, 32));
 
   $('srcAddr').observe('keypress', function(event) {
     if (event.keyCode == 13) {
