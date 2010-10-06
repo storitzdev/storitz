@@ -650,9 +650,12 @@
                       <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}<BR/>${site.specialOffers()[1].promoName}</div>
                       <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
                     </g:elseif>
-                    <g:else>
+                    <g:elseif test="${site.specialOffers().size() == 1}">
                       <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}</div>
                       <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip">${site.specialOffers()[0].promoName}</div>
+                    </g:elseif>
+                    <g:else>
+                      &#8212;
                     </g:else>
                   </td>
                 </tr>
