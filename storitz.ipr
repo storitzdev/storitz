@@ -304,7 +304,6 @@
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/gdata-maps-2.0.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/jsr305.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/google-collect-1.0-rc1.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/gdata-maps-meta-2.0.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/gdata-client-meta-1.0.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/gdata-core-1.0.jar!/" />

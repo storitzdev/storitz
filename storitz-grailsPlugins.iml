@@ -16,6 +16,7 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/paypal-pro-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.6/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
         <context-artifact name="storitz-grailsPlugins:GrailsWeb exploded" />
@@ -81,6 +82,11 @@
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3/src/groovy" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2">
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/grails-app/taglib" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/grails-app/services" isTestSource="false" />
     </content>
@@ -109,6 +115,7 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -119,6 +126,7 @@
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/rest-0.3/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/sanitizer-0.3/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/tomcat-1.2.3/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" recursive="false" />
       </library>
     </orderEntry>
