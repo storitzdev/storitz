@@ -23,8 +23,6 @@ class STMapController {
 
     def jsonp = {
 
-      // println "?searchSize=${params.searchSize}&neLat=${params.neLat}&swLat=${params.swLat}&swLng=${params.swLng}&neLng=${params.neLng}"
-      
       def results = mapService.getSites(params.searchSize as Integer, params.swLat as BigDecimal, params.swLng as BigDecimal, params.neLat as BigDecimal, params.neLng as BigDecimal)
 
       def unitMap = [:]

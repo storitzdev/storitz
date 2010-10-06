@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.TruckType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -32,6 +33,7 @@
         var markerImageGreen = null;
         var markerImageGray = null;
         var mapMarker = null;
+        var firstDraw = false;
 
         TableKit.Sortable.addSortType(
             new TableKit.Sortable.Type('stprice', {
@@ -55,6 +57,11 @@
         }
 
         function redrawMap() {
+
+          if (!firstDraw) {
+            firstDraw = true;
+            return;
+          }
 
           bounds = map.getBounds();
           if (!inDrag) {
@@ -240,8 +247,8 @@
           var pUp = s.units.find(function(n) { return n.type == 'upper' });
           var pDup = s.units.find(function(n) { return n.type == 'driveup' });
           var pInt = s.units.find(function(n) { return n.type == 'interior' });
-          var priceDriveup = pDup ? pDup.price : 999999;
-          var priceInterior = pInt? pInt.price : 999999;
+          var priceDriveup = pDup ? pDup.price  : 999999;
+          var priceInterior = pInt ? pInt.price : 999999;
           var priceUpper = pUp ? pUp.price : 999999;
 
           var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" class=\"pointer\" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
@@ -312,16 +319,43 @@
           google.maps.event.addListener(map, 'dragend', dragEnd);
           geocoder = new google.maps.Geocoder();
 
-          var site = new Object();
+          var site;
           <g:each var="site" in="${sites}">
-            // site = ${site.id}
+            site = new Object();          
             site.lat = ${site.lat};
             site.lng = ${site.lng};
             site.title = '${site.title}';
             site.id = ${site.id};
             site.unitCount = ${site.units.size()};
+            site.coverImg = '${site.coverImage() ? site.coverImage().thumbnail() : ""}';
             createMarker(site);
+            <g:if test="${site.isKeypad}">
+              tooltips.set("keypad${site.id}", "tooltip_keypad");
+            </g:if>
+            <g:if test="${site.isCamera}">
+              tooltips.set("camera${site.id}", "tooltip_camera");
+            </g:if>
+            <g:if test="${site.isGate}">
+              tooltips.set("gate${site.id}", "tooltip_gate");
+            </g:if>
+            <g:if test="${site.isUnitAlarmed}">
+              tooltips.set("alarm${site.id}", "tooltip_alarm");
+            </g:if>
+            <g:if test="${site.isManagerOnsite}">
+              tooltips.set("manager${site.id}", "tooltip_manager");
+            </g:if>
+            <g:if test="${site.hasElevator}">
+              tooltips.set("elevator${site.id}", "tooltip_elevator");
+            </g:if>
+            <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
+              tooltips.set("truck${site.id}", "tooltip_truck");
+            </g:if>
+            tooltips.set(("offers${site.id}"), ("tooltip_offers${site.id}"));
           </g:each>
+          tooltips.each(function(pair) {
+             tooltips.set(pair.key, new Tooltip(pair.key, pair.value));
+          });
+          
         }
 
         function showAddress(address, size, date) {
@@ -440,7 +474,22 @@
           $('searchMsg').update(msg);
         }
 
-        FastInit.addOnLoad(setupCalendar, setupHelp, setupForm);
+        function setupAnalytics() {
+          window.setTimeout(doAnalytics, 1);
+        }
+
+        function doAnalytics() {
+          // Called a few ms after the page has loaded.
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-16012579-1']);
+        _gaq.push(['_trackPageview']);
+
+        FastInit.addOnLoad(setupCalendar, setupHelp, setupForm, setupAnalytics);
 //]]>
       </script>
     </head>
@@ -505,6 +554,113 @@
         <div style="height: 20px;"></div>
 
         <div id="stresults_div">
+          <g:if test="${sites.size() > 0}">
+            <table class="sortable" id="stresults">
+              <thead>
+                <tr>
+                  <th class="sortfirstasc distwidth" id="distance">Distance</th>
+                  <th class="addrwidth" id="title">Location</th>
+                  <th class="stprice pricewidth">Upper</th>
+                  <th class="stprice pricewidth">Interior</th>
+                  <th class="stprice pricewidth">Drive Up</th>
+                  <th>Features</th>
+                  <th>Special Offers</th>
+                </tr>
+              </thead>
+              <tbody>
+              <g:each var="site" in="${sites}">
+                <tr id="row${site.id}" class="strow">
+                  <td class="textCenter distance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> mi</td>
+                  <td class="stVert">
+                    <div style="float:left;">
+                      <a href="#" class="no_underline siteTitle" onclick="panTo(${site.id});return false">${site.title}</a><br>
+                      <g:link action="storageSite" controller="detail" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id]">${site.address}</g:link>
+                    </div>
+                  </td>
+                  <td class="textCenter">
+                    <g:if test="${site.units.findAll{ it.unitTypeLower == 'upper'}.size() > 0}">
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:'upper']" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitTypeLower == 'upper'} }" member="price" format="0.00"/></g:link>
+                    </g:if>
+                    <g:else>
+                      &#8212;
+                    </g:else>
+                   </td>
+                  <td class="textCenter">
+                    <g:if test="${site.units.findAll{ it.unitTypeLower == 'interior'}.size() > 0}">
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:'interior']" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitTypeLower == 'interior'} }" member="price" format="0.00"/></g:link>
+                    </g:if>
+                    <g:else>
+                      &#8212;
+                    </g:else>
+                  </td>
+                  <td class="textCenter">
+                    <g:if test="${site.units.findAll{ it.unitTypeLower == 'driveup'}.size() > 0}">
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:'driveup']" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitTypeLower == 'driveup'} }" member="price" format="0.00"/></g:link>
+                    </g:if>
+                    <g:else>
+                      &#8212;
+                    </g:else>
+                  </td>
+                  <td>
+                    <div style="float:right;">
+                      <g:if test="${site.isKeypad}">
+                        <img id="keypad${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>
+                      </g:if>
+                      <g:else>
+                        <span style="width:20px; margin:1px;"></span>
+                      </g:else>
+                      <g:if test="${site.isCamera}">
+                        <img id="camera${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>
+                      </g:if>
+                      <g:else>
+                        <span style="width:20px; margin: 1px;"></span>
+                      </g:else>
+                      <g:if test="${site.isGate}">
+                        <img id="gate${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>
+                      </g:if>
+                      <g:else>
+                        <span style="width:20px; margin: 1px;"></span>
+                      </g:else>
+                      <g:if test="${site.isUnitAlarmed}">
+                        <img id="alarm${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>
+                      </g:if>
+                      <g:else>
+                        <span style="width:20px; margin: 1px;"></span>
+                      </g:else>
+                      <g:if test="${site.isManagerOnsite}">
+                        <img id="manager${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-green-mgr20b.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>
+                      </g:if>
+                      <g:else>
+                        <span style="width:20px; margin: 1px;"></span>
+                      </g:else>
+                      <g:if test="${site.hasElevator}">
+                        <img id="elevator${site.id}" class="pointer" src="${resource(dir:'images', file:'icon-green-elevator20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>
+                      </g:if>
+                      <g:else>
+                        <span style="width:20px; margin: 1px;"></span>
+                      </g:else>
+                    </div>
+                  </td>
+                  <td class="specialOfferText">
+                    <g:if test="${site.featuredOffers().size() > 0}">
+                      <div id="offers${site.id}" class="pointer"><storitz:joinMember set="${site.featuredOffers()}" member="promoName"/></div>
+                      <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
+                    </g:if>
+                    <g:elseif test="${site.specialOffers().size() >1}">
+                      <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}<BR/>${site.specialOffers()[1].promoName}</div>
+                      <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
+                    </g:elseif>
+                    <g:else>
+                      <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}</div>
+                      <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip">${site.specialOffers()[0].promoName}</div>
+                    </g:else>
+                  </td>
+                </tr>
+              </g:each>
+
+              </tbody>
+            </table>
+          </g:if>
         </div>
         <div style="margin:1em 0;">
           <p>
@@ -528,7 +684,7 @@
         </div>
       </div>
       <div style="height:100px;"></div>
-      <g:render template="/footer" />
+      <g:render template="/footer_no_analytics" />
       <g:render template="/size_popup" />
       <div id="tooltip_keypad" style="display:none" class="tooltip">
       Keypad Entry

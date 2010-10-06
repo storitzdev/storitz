@@ -15,9 +15,20 @@ class MapService {
   // use the following for the default zoom level on a Google map
     def defaultZoom = 12
 
+
   // this is the number of degrees of latitude per pixel at zoom 12
-    def constLatPerPixel = 3.4332275390624615384615384615385e-4
-    def constLngPerPixel = 2.8456457721952647975077881619938e-4
+    final BigDecimal constLatPerPixel = 5.992112452678278E-6
+    final BigDecimal constLngPerPixel = 0.0003433227539063
+
+    def gundInv(BigDecimal latitude) {
+      def radPerDeg = Math.PI / 180.0
+      double sin = Math.sin(latitude * radPerDeg)
+      return (Math.log((1.0 + sin) / (1.0 - sin)) / 2.0)
+    }
+
+    def gund(BigDecimal posy) {
+        return Math.atan(Math.sinh(posy)) * (180.0 / Math.PI)
+    }
 
     def getDimensions(Integer zoom, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
         def swLat
@@ -26,10 +37,11 @@ class MapService {
         def neLng
 
         def scale = Math.pow(2, defaultZoom - zoom)
-        swLat = lat - (width / 2)*scale*constLatPerPixel
-        swLng = lng - (height / 2)*scale*constLngPerPixel
-        neLat = lat + (width / 2)*scale*constLatPerPixel
-        neLng = lng + (height / 2)*scale*constLngPerPixel
+        def latInv = gundInv(lat)
+        swLat = gund(latInv - (height/2)*scale*constLatPerPixel)
+        swLng = lng - (width / 2)*scale*constLngPerPixel
+        neLat = gund(latInv + (height / 2)*scale*constLatPerPixel)
+        neLng = lng + (width / 2)*scale*constLngPerPixel
 
         return [swLat:swLat, swLng:swLng, neLat:neLat, neLng:neLng]
     }
@@ -126,4 +138,5 @@ class MapService {
       }
       return zoom
     }
+
 }

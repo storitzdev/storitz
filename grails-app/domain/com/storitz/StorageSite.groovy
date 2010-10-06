@@ -166,7 +166,7 @@ class StorageSite {
   }
 
   def specialOffers() {
-    return specialOffers.findAll{ it.active }.sort{ it.id }
+    return (specialOffers.findAll{ it.active }.sort{ it.id } as List)
   }
 
   def nonFeaturedOffers() {
