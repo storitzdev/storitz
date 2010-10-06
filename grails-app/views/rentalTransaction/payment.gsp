@@ -423,8 +423,8 @@
                   </div>
                 </div>
                 <div style="clear:both; margin-top: 20px;">
-                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-pay-now.png')}" alt="Pay Now"/></div>
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="prevStep(); return false" alt="Prev"/></div>
+                  <div class="right"><p:inputImage style="border:none;" src="btn-pay-now.png" alt="Pay Now"/></div>
+                  <div class="left"><p:inputImage style="border:none;" src="btn-previous2.png" onclick="prevStep(); return false" alt="Prev"/></div>
                   <div style="clear:both;"></div>
                 </div>
               </g:form>

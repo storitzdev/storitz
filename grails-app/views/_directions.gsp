@@ -18,7 +18,7 @@
     <div style="clear:both;"></div>
   </div>
   <div style="margin-top:0;" class="left">
-    <input src="${resource(dir:'images', file:'btn-find-it.png')}" style="width:108px;border:none;" id="get_directions" type="image" name="getDirections" value="Get Directions"/>
+    <p:inputImage src="btn-find-it.png" style="width:108px;border:none;" id="get_directions" name="getDirections" value="Get Directions"/>
   </div>
   <div class="checkout_labels">
     <div class="checkout_name" style="width:400px; margin-top: -10px;">

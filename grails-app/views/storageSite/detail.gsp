@@ -669,8 +669,8 @@
                   </div>
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
-                  <div class="left"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-previous2.png')}" onclick="leave_form(); return false" alt="Back" /></div>
-                  <div class="right"><input type="image" style="border:none;" src="${resource(dir:'images', file:'btn-next2.png')}" onclick="nextStep1(); return false" alt="Next" /></div>
+                  <div class="left"><p:inputImage style="border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back" /></div>
+                  <div class="right"><p:inputImage style="border:none;" src="btn-next2.png" onclick="nextStep1(); return false" alt="Next" /></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
