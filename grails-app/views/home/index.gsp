@@ -152,13 +152,6 @@
 
         function getMarkers() {
 
-          tooltips.each(function(t) {
-            if (typeof t.value.destroy == 'function') {
-              t.value.destroy();
-            }
-            tooltips.unset(t.name);
-          });
-
           if (!bounds || typeof(bounds) == 'undefined') {
             return;
           }
@@ -181,6 +174,13 @@
                 var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Upper</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Drive Up</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
                 var rows = 0;
                 var offers;
+
+                tooltips.each(function(t) {
+                  if (typeof t.value.destroy == 'function') {
+                    t.value.destroy();
+                  }
+                  tooltips.unset(t.name);
+                });
 
                 transport.responseJSON.features.each(function(s) {
 
