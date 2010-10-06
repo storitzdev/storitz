@@ -21,6 +21,7 @@
         var features = [];
         var storageSize = [];
         var tooltips = [];
+        var tipBuilder = [];
         var searchAddr;
         var searchSize = ${searchSize};
         var searchSizeDesc;
@@ -182,6 +183,7 @@
                     t.destroy();
                   }
                 });
+                tipBuilder.clear();
 
                 transport.responseJSON.features.each(function(s) {
 
@@ -194,6 +196,9 @@
                 $('stresults_div').update(tableContents);
                 if (rows > 0) {
                   new TableKit('stresults' + randId, { editable:false, stripe:true });
+                  tipBuilder.each(function(t) {
+                     tooltips.push(new Tooltip(t.elementId, t.content));
+                  });
                 }
               },
               onFailure:function(transport) {
@@ -232,19 +237,19 @@
           var featuredArr = $A(s.featuredOffers.pluck('promoName'));
           if (featuredArr.size() > 1 ) {
             offers = '<div id="offers' + s.id + '" class=\"pointer\">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-            tooltips.push(new Tooltip("offers" + s.id, "tooltip_offers" + s.id));
+            tipBuilder.push({elementId:"offers" + s.id, content:"tooltip_offers" + s.id});
           } else {
             var offersArr = $A(s.specialOffers.pluck('promoName'));
             if (offersArr.size() > 1 ) {
               offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-              tooltips.push(new Tooltip("offers" + s.id, "tooltip_offers" + s.id));
+              tipBuilder.push({elementId:"offers" + s.id, content:"tooltip_offers" + s.id});
             } else {
               offers = offersArr[0];
             }
           }
-          var pUp = s.units.find(function(n) { return n.type == 'upper' });
-          var pDup = s.units.find(function(n) { return n.type == 'driveup' });
-          var pInt = s.units.find(function(n) { return n.type == 'interior' });
+          var pUp = s.units.find(function(n) { return n.unitType == 'upper' });
+          var pDup = s.units.find(function(n) { return n.unitType == 'driveup' });
+          var pInt = s.units.find(function(n) { return n.unitType == 'interior' });
           var priceDriveup = pDup ? pDup.price  : 999999;
           var priceInterior = pInt ? pInt.price : 999999;
           var priceUpper = pUp ? pUp.price : 999999;
@@ -267,25 +272,25 @@
           }
 
           if (s.isKeypad) {
-            tooltips.push(new Tooltip("keypad" + s.id, "tooltip_keypad"));
+            tipBuilder.push({elementId:"keypad" + s.id, content:"tooltip_keypad"});
           }
           if (s.isCamera) {
-            tooltips.push(new Tooltip("camera" + s.id, "tooltip_camera"));
+            tipBuilder.push({elementId:"camera" + s.id, content:"tooltip_camera"});
           }
           if (s.isGate) {
-            tooltips.push(new Tooltip("gate" + s.id, "tooltip_gate"));
+            tipBuilder.push({elementId:"gate" + s.id, content:"tooltip_gate"});
           }
           if (s.isUnitAlarmed) {
-            tooltips.push(new Tooltip("alarm" + s.id, "tooltip_alarm"));
+            tipBuilder.push({elementId:"alarm" + s.id, content:"tooltip_alarm"});
           }
           if (s.isManagerOnsite) {
-            tooltips.push(new Tooltip("manager" + s.id, "tooltip_manager"));
+            tipBuilder.push({elementId:"manager" + s.id, content:"tooltip_manager"});
           }
           if (s.hasElevator) {
-            tooltips.push(new Tooltip("elevator" + s.id, "tooltip_elevator"));
+            tipBuilder.push({elementId:"elevator" + s.id, content:"tooltip_elevator"});
           }
           if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
-            tooltips.push(new Tooltip("truck" + s.id, "tooltip_truck"));
+            tipBuilder.push({elementId:"truck" + s.id, content:"tooltip_truck"});
           }
 
           return '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +

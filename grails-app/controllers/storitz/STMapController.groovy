@@ -55,7 +55,7 @@ class STMapController {
           }
           unitMap.eachWithIndex{ unitEntry, j ->
             def unit = unitEntry.value
-            sw << "{ \"unitsize\":{\"id\":\"${unit.unitsize.id}\"}, \"id\":\"${unit.id}\", \"price\":${unit.price}, \"type\":\"${unit.getUnitTypeLower()}\" }"
+            sw << "{ \"unitsize\":{\"id\":\"${unit.unitsize.id}\"}, \"id\":\"${unit.id}\", \"price\":${unit.price}, \"unitType\":\"${unit.getUnitTypeLower()}\" }"
             if (j < unitMap.size() - 1) {
               sw << ","
             }
