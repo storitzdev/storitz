@@ -255,20 +255,20 @@
           var priceInterior = pInt ? pInt.price : 999999;
           var priceUpper = pUp ? pUp.price : 999999;
 
-          var keypadImg = s.isKeypad ? '<img id="keypad' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-keypad-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>' : '<span style="width:20px; margin:1px;"></span>';
-          var cameraImg = s.isCamera ? '<img id="camera' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-camera-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Camera"/>' : '<span style="width:20px; margin: 1px;"></span>';
-          var gateImg   = s.isGate ? '<img id="gate' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-gate-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Gate"/>' : '<span style="width:20px; margin: 1px;"></span>';
-          var alarmImg  = s.isUnitAlarmed ? '<img id="alarm' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-alarm-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>' : '<span style="width:20px; margin: 1px;"></span>';
-          var managerImg  = s.isManagerOnsite ? '<img id="manager' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-green-mgr20b.gif')}" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>' : '<span style="width:20px; margin: 1px;"></span>';
-          var elevatorImg  = s.hasElevator ? '<img id="elevator' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-green-elevator20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>' : '<span style="width:20px; margin: 1px;"></span>';
+          var keypadImg = s.isKeypad ? "<img id=\"keypad" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-keypad-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Keypad\"/>" : '<span style="width:20px; margin:1px;"></span>';
+          var cameraImg = s.isCamera ? "<img id=\"camera" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-camera-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Camera\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var gateImg   = s.isGate ? "<img id=\"gate" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-gate-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Gate\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var alarmImg  = s.isUnitAlarmed ? "<img id=\"alarm" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-alarm-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Alarm\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var managerImg  = s.isManagerOnsite ? "<img id=\"manager" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-mgr20b.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Manager Onsite\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var elevatorImg  = s.hasElevator ? "<img id=\"elevator" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-elevator20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Elevator\"/>" : '<span style="width:20px; margin: 1px;"></span>';
 
           var truckImg = '<span style="width:20px; margin: 1px;"></span>';
           switch(s.freeTruck) {
             case "FREE":
-              truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Rental Truck\"/>";
               break;
             case "RENTAL":
-              truckImg =  '<img id="truck' + s.id +'" class=\"pointer\" src="${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')}" style="vertical-align: middle; margin: 1px;" alt="Rental Truck"/>';
+              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Rental Truck\"/>";
               break;
           }
 
