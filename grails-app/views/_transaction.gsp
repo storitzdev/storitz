@@ -15,7 +15,7 @@
           <g:select id="unitsize" class="transDropdown" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
         </div>
         <div class="left" style="margin: 5px 0 0 5px;">
-          <img id="sizeInfo" style="vertical-align: middle;" src="${createLinkTo(dir:'images', file:'icn_info_circle.png')}" alt="info"/>
+          <p:image id="sizeInfo" style="vertical-align: middle;" src="icn_info_circle.png" alt="info"/>
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@
     <div class="right">
       <input type="hidden" id="date" name="date" />
       <div class="left">
-        <img id="calendarPic" style="cursor: pointer;" src="${resource(dir:'images', file:'icn-calendar.png')}" alt="calendar" />
+        <p:image id="calendarPic" style="cursor: pointer;" src="icn-calendar.png" alt="calendar" />
       </div>
       <div class="left">
         <div class="transDateHeader left">

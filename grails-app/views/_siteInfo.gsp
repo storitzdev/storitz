@@ -115,56 +115,56 @@
 
 <g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32f.gif')}" alt="Free Truck"/>
+    <p:image src="icon3d-rentaltruck32f.gif" alt="Free Truck"/>
   </div>
   <div class="left icon_text">Free Truck</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.freeTruck  == storitz.constants.TruckType.RENTAL}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-rentaltruck32r.gif')}" alt="Rental Truck"/>
+    <p:image src="icon3d-rentaltruck32r.gif" alt="Rental Truck"/>
   </div>
   <div class="left icon_text">Rental Truck</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isGate}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-gate32.jpg')}" alt="Gated"/>
+    <p:image src="icon3d-gate32.jpg" alt="Gated"/>
   </div>
   <div class="left icon_text">Gated</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isKeypad}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-keypad32.jpg')}" alt="Keypad"/>
+    <p:image src="icon3d-keypad32.jpg" alt="Keypad"/>
   </div>
   <div class="left icon_text">Keypad Entry</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isCamera}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-camera32.jpg')}" alt="Camera"/>
+    <p:image src="icon3d-camera32.jpg" alt="Camera"/>
   </div>
   <div class="left icon_text">Camera</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isUnitAlarmed}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-alarm32.jpg')}" alt="Alarmed"/>
+    <p:image src="icon3d-alarm32.jpg" alt="Alarmed"/>
   </div>
   <div class="left icon_text">Unit Alarmed</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isManagerOnsite}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-mgr32b.jpg')}" alt="Manager Onsite"/>
+    <p:image src="icon3d-mgr32b.jpg" alt="Manager Onsite"/>
   </div>
   <div class="left icon_text">Manager Onsite</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.hasElevator}">
   <div class="left">
-    <img src="${createLinkTo(dir:'images', file:'icon3d-elevator32.jpg')}" alt="Elevator Available"/>
+    <p:image src="icon3d-elevator32.jpg" alt="Elevator Available"/>
   </div>
   <div class="left icon_text">Elevator Available</div>
   <div style="clear: both;"></div>

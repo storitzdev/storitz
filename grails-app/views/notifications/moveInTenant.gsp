@@ -7,13 +7,13 @@
   <div>
     <div style="z-index: 100; float: left; margin-top: 22px;">
       <g:link controller="home" action="index">
-        <img src="${createLinkTo(dir:'images', file:'logo_storitz.gif', absolute: true)}" style="border-style: none;" alt="Storitz Logo"/>
+        <p:image src="logo_storitz.gif" absolute="true" style="border-style: none;" alt="Storitz Logo"/>
       </g:link>
     </div>
     <div style="clear: both;"></div>
   </div>
   <div style="margin-left: 50px;">
-    <img src="${createLinkTo(dir:'images', file:'tagline_clickstoredone.gif', absolute:true)}" style="border-style: none;" alt="Click. Store. Done."/>
+    <p:image src="tagline_clickstoredone.gif" absolute="true" style="border-style: none;" alt="Click. Store. Done."/>
   </div>
   <div style="height: 3em;"></div>
 

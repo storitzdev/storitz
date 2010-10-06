@@ -8,9 +8,9 @@
     </head>
     <body>
         <div id="spinner" class="spinner" style="display:none;">
-            <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Spinner" />
+            <p:image src="spinner.gif" alt="Spinner" />
         </div>	
-        <div class="logo"><img src="${resource(dir:'images',file:'grails_logo.jpg')}" alt="Grails" /></div>
+        <div class="logo"><p:image src="grails_logo.jpg" alt="Grails" /></div>
         <g:layoutBody />		
     </body>	
 </html>

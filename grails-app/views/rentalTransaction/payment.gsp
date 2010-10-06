@@ -384,7 +384,7 @@
                 <div style="height: 10px;"></div>
                 <div>
                   <div class="left">
-                    <img src="${resource(dir:'images', file:'credit-cards.gif')}" alt="Credit Cards" />
+                    <p:image src="credit-cards.gif" alt="Credit Cards" />
                   </div>
                   <div class="left">
                     <div class="checkout_labels">

@@ -71,11 +71,11 @@
               </div>
           </g:if>
           <div id="lessDescription" class="expanding">
-            <a href="#" style="text-decoration: none;" onclick="Effect.BlindUp('errContent'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-minus.png')}" style="border: none;" alt="minus icon"/> Less</a>
+            <a href="#" style="text-decoration: none;" onclick="Effect.BlindUp('errContent'); Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><p:image src="icon-minus.png" style="border: none;" alt="minus icon"/> Less</a>
           </div>
         </div>
         <div id="moreDescription" class="expanding">
-          <a href="#" style="text-decoration: none;" onclick="Effect.BlindDown('errContent', {queue: 'end'});Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><img src="${resource(dir:'images', file:'icon-plus.png')}" style="border: none;" alt="plus icon"/> More</a>
+          <a href="#" style="text-decoration: none;" onclick="Effect.BlindDown('errContent', {queue: 'end'});Effect.toggle('moreDescription', 'appear', {queue: 'end', duration: 0.1});return false;"><p:image src="icon-plus.png" style="border: none;" alt="plus icon"/> More</a>
         </div>
       </div>
     </div>

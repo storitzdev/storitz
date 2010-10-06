@@ -3,12 +3,12 @@
     <div id="helpHeaderText">How much storage do you need?</div>
     <div id="helpClose" style="cursor: pointer;">
       <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
-      <div class="left"><img style="vertical-align: middle;" src="${resource(dir:'images', file:'popup-checkbox.png')}" alt="close box"/></div>
+      <div class="left"><p:image style="vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
     </div>
   </div>
   <div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-5x5.gif')}" alt="5x5 unit"/>
+      <p:image src="unit-size-5x5.gif" alt="5x5 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -22,7 +22,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-5x10.gif')}" alt="5x10 unit"/>
+      <p:image src="unit-size-5x10.gif" alt="5x10 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -36,7 +36,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-7x10.gif')}" alt="7x10 unit"/>
+      <p:image src="unit-size-7x10.gif" alt="7x10 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -50,7 +50,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-10x10.gif')}" alt="10x10 unit"/>
+      <p:image src="unit-size-10x10.gif" alt="10x10 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -64,7 +64,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-10x15.gif')}" alt="10x15 unit"/>
+      <p:image src="unit-size-10x15.gif" alt="10x15 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -78,7 +78,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-10x20.gif')}" alt="10x20 unit"/>
+      <p:image src="unit-size-10x20.gif" alt="10x20 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -92,7 +92,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-10x25.gif')}" alt="10x25 unit"/>
+      <p:image src="unit-size-10x25.gif" alt="10x25 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">
@@ -106,7 +106,7 @@
     </div>
     <div class="helpBoxSeparator"></div>
     <div class="helpBox">
-      <img src="${resource(dir: 'images', file: 'unit-size-10x30.gif')}" alt="10x30 unit"/>
+      <p:image src="unit-size-10x30.gif" alt="10x30 unit"/>
     </div>
     <div class="helpBoxText">
       <div class="helpBoxTextHolder">

@@ -393,7 +393,7 @@
             <td valign="top" class="name">${storageSiteInstance?.rentalAgreement?.title}</td>
 
             <td valign="top" style="text-align: left;" class="value">
-              <a href="${resource(file:storageSiteInstance?.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;"><img src="${resource(dir:'images', file:'icn_pdf.jpg')}" alt="PDF"></a>
+              <a href="${resource(file:storageSiteInstance?.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;"><p:image src="icn_pdf.jpg" alt="PDF"/></a>
             </td>
 
           </tr>
