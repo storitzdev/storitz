@@ -3,70 +3,73 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
+
     <g:render template="/header_admin" />
-    <link href="${createLinkTo(dir:'css', file:'jquery-ui-1.8.4.custom.css')}" media="screen" rel="stylesheet" type="text/css" />
-    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-    <g:javascript src="jquery.string.1.0.js"/>
-    <g:javascript src="date.js"/>
-    <script type="text/javascript">
+    <p:css name="jquery-ui-1.8.4.custom" />
+
+    <p:dependantJavascript>
+      <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+      <p:javascript src="jquery.string.1.0"/>
+      <p:javascript src="date"/>
+      <script type="text/javascript">
 //<![CDATA[
 
-    google.load("jqueryui", "1.8.5");
+      google.load("jqueryui", "1.8.5");
 
-    google.setOnLoadCallback(function() {
-      var dateFormat = '%m/%d/%Y';
-
-
-      // do stuff when DOM is ready
-      $('#startDate').datepicker();
-      $('#endDate').datepicker();
-      $('input#sitename').autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+      google.setOnLoadCallback(function() {
+        var dateFormat = '%m/%d/%Y';
 
 
-      $('#today').click(function(event) {
-        event.preventDefault();
-        var now = new Date();
-        var dateStr = now.print(dateFormat);
-        $('#startDate').val(dateStr);
-        $('#endDate').val(dateStr);
+        // do stuff when DOM is ready
+        $('#startDate').datepicker();
+        $('#endDate').datepicker();
+        $('input#sitename').autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+
+
+        $('#today').click(function(event) {
+          event.preventDefault();
+          var now = new Date();
+          var dateStr = now.print(dateFormat);
+          $('#startDate').val(dateStr);
+          $('#endDate').val(dateStr);
+        });
+
+         $('#thisWeek').click(function(event) {
+           event.preventDefault();
+           var now = new Date();
+           var dateStr = now.print(dateFormat);
+           $('#endDate').val(dateStr);
+           // find the sunday of this week
+           now.setDate(now.getDate()-now.getDay());
+           $('#startDate').val(now.print(dateFormat));
+         });
+
+        $('#thisMonth').click(function(event) {
+          event.preventDefault();
+          var now = new Date();
+          var dateStr = now.print(dateFormat);
+          $('#endDate').val(dateStr);
+          // find the sunday of this week
+          now.setDate(1);
+          $('#startDate').val(now.print(dateFormat));
+        });
+
+        $('#thisYear').click(function(event) {
+          event.preventDefault();
+          var now = new Date();
+          var dateStr = now.print(dateFormat);
+          $('#endDate').val(dateStr);
+          // find the sunday of this week
+          now.setDate(1);
+          now.setMonth(0);
+          $('#startDate').val(now.print(dateFormat));
+        });
+
       });
-
-       $('#thisWeek').click(function(event) {
-         event.preventDefault();
-         var now = new Date();
-         var dateStr = now.print(dateFormat);
-         $('#endDate').val(dateStr);
-         // find the sunday of this week
-         now.setDate(now.getDate()-now.getDay());
-         $('#startDate').val(now.print(dateFormat));
-       });
-
-      $('#thisMonth').click(function(event) {
-        event.preventDefault();
-        var now = new Date();
-        var dateStr = now.print(dateFormat);
-        $('#endDate').val(dateStr);
-        // find the sunday of this week
-        now.setDate(1);
-        $('#startDate').val(now.print(dateFormat));
-      });
-
-      $('#thisYear').click(function(event) {
-        event.preventDefault();
-        var now = new Date();
-        var dateStr = now.print(dateFormat);
-        $('#endDate').val(dateStr);
-        // find the sunday of this week
-        now.setDate(1);
-        now.setMonth(0);
-        $('#startDate').val(now.print(dateFormat));
-      });
-
-    });
 //]]>
-  </script>
-
+    </script>
+  </p:dependantJavascript>
   </head>
   <body>
     <div id="body">
@@ -154,4 +157,5 @@
     <g:render template="/footer_admin" />
     </div>
   </body>
+  <p:renderDependantJavascript/>
 </html>

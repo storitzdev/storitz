@@ -3,5 +3,5 @@
   <meta name="ROBOTS" content="FOLLOW"/>
   <p:favicon src="images/favicon" />
 
-  <p:css name="main.css" />
+  <p:css name="main" />
   
