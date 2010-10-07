@@ -152,7 +152,7 @@ function getDirections() {
           directionsService.route(request,  drawDirections);
     }
   });
-  $('get_directions').observe('click', function() {
+  $('getDirections').observe('click', function() {
     var request = {
             origin:$F('srcAddr'),
             destination:destLatLng,
