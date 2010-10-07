@@ -14,5 +14,5 @@
   <div style="clear: both;"></div>
 </div>
 <div style="margin-left: 50px;">
-  <p:image src="tagline_clickstoredone.gif" class="noborder" width="170" height="61" alt="Click. Store. Done."/>
+  <p:image src="tagline_clickstoredone.gif" class="noborder" width="170" height="21" alt="Click. Store. Done."/>
 </div>

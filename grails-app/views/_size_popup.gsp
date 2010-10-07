@@ -3,7 +3,7 @@
     <div id="helpHeaderText">How much storage do you need?</div>
     <div id="helpClose" style="cursor: pointer;">
       <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
-      <div class="left"><p:image style="vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
+      <div class="left"><p:image style="width:17px;height:16px;vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
     </div>
   </div>
   <div>
