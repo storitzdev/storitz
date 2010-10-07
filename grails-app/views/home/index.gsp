@@ -400,7 +400,6 @@
               dateFormat    : '%m/%d/%y',
               selectHandler : function(cal, dateString) {
                 $('date').value = dateString;
-                this.hide();
                 showAddress(getAddress(), $F('size'), dateString);
               }
           });
