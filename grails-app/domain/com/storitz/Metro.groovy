@@ -10,6 +10,7 @@ class Metro {
 
   String note
   String city
+  String metro
   State state
 
 }

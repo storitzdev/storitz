@@ -605,7 +605,11 @@ class StorageSiteController {
     if (params.moveInDate && params.moveInDate instanceof Date) {
       moveInDate = params.moveInDate
     } else {
-      moveInDate = Date.parse('MM/dd/yy', (params.moveInDate ? params.moveInDate : new Date()))
+      if (params.moveInDate) {
+        moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+      } else {
+        moveInDate = new Date()
+      }
     }
     def site = StorageSite.get(params.id)
 
