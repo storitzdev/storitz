@@ -27,6 +27,7 @@
         <a href="http://www.facebook.com/storitz"><p:image style="border: none;" src="icn-facebook.png" alt="Storitz on FaceBook"/></a>
         <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><p:image style="border: none;" src="icn-stumbleupon.png" alt="Storitz on StumbleUpon"/></a>
         <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><p:image style="border: none;" src="icn-linkedin.png" alt="Storitz on LinkedIn"/></a>
+        <a href="http://www.youtube.com/user/Storitzdotcom"><p:image style="border: none;" src="icn-youtube.png" width="33" height="33" alt="Storitz Youtube Channel"/></a>
       </div>
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
