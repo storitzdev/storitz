@@ -384,7 +384,7 @@
                 <div style="height: 10px;"></div>
                 <div>
                   <div class="left">
-                    <p:image src="credit-cards.gif" alt="Credit Cards" />
+                    <p:image src="credit-cards.gif" width="96" height="97" alt="Credit Cards" />
                   </div>
                   <div class="left">
                     <div class="checkout_labels">
@@ -423,8 +423,8 @@
                   </div>
                 </div>
                 <div style="clear:both; margin-top: 20px;">
-                  <div class="right"><p:inputImage style="border:none;" src="btn-pay-now.png" alt="Pay Now"/></div>
-                  <div class="left"><p:inputImage style="border:none;" src="btn-previous2.png" onclick="prevStep(); return false" alt="Prev"/></div>
+                  <div class="right"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-pay-now.png" alt="Pay Now"/></div>
+                  <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="prevStep(); return false" alt="Prev"/></div>
                   <div style="clear:both;"></div>
                 </div>
               </g:form>

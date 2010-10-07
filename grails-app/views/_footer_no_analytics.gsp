@@ -18,7 +18,7 @@
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 1em 5em;" class="left">
-        <p:image src="sub-find-us.png" alt="Find Us"/>
+        <p:image src="sub-find-us.png" width="45" height="12" alt="Find Us"/>
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 0 5em;" class="left">

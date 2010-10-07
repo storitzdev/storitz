@@ -15,7 +15,7 @@
           <g:select id="unitsize" class="transDropdown" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
         </div>
         <div class="left" style="margin: 5px 0 0 5px;">
-          <p:image id="sizeInfo" style="vertical-align: middle;" src="icn_info_circle.png" alt="info"/>
+          <p:image id="sizeInfo" style="vertical-align: middle;" src="icn_info_circle.png" width="19" height="18" alt="info"/>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="right" style="margin-top:5px;">
       <g:if test="${params.action != 'payment'}">
-        <p:inputImage id="rentme" style="border:none;cursor:pointer;" src="btn-rent-me.png" alt="Rent Me"/>
+        <p:inputImage id="rentme" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-rent-me.png" alt="Rent Me"/>
       </g:if>
       <g:else>
         <div id="rentme" style="display:none"></div>
@@ -139,7 +139,7 @@
     <div class="right">
       <input type="hidden" id="date" name="date" />
       <div class="left">
-        <p:image id="calendarPic" style="cursor: pointer;" src="icn-calendar.png" alt="calendar" />
+        <p:image id="calendarPic" style="cursor: pointer;" src="icn-calendar.png" width="23" height="19" alt="calendar" />
       </div>
       <div class="left">
         <div class="transDateHeader left">

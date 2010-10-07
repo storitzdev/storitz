@@ -255,20 +255,20 @@
           var priceInterior = pInt ? pInt.price : 999999;
           var priceUpper = pUp ? pUp.price : 999999;
 
-          var keypadImg = s.isKeypad ? "<img id=\"keypad" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-keypad-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Keypad\"/>" : '<span style="width:20px; margin:1px;"></span>';
-          var cameraImg = s.isCamera ? "<img id=\"camera" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-camera-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Camera\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var gateImg   = s.isGate ? "<img id=\"gate" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-gate-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Gate\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var alarmImg  = s.isUnitAlarmed ? "<img id=\"alarm" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-alarm-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Alarm\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var managerImg  = s.isManagerOnsite ? "<img id=\"manager" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-mgr20b.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Manager Onsite\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var elevatorImg  = s.hasElevator ? "<img id=\"elevator" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-elevator20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Elevator\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var keypadImg = s.isKeypad ? "<img id=\"keypad" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-keypad-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Keypad\"/>" : '<span style="width:20px; margin:1px;"></span>';
+          var cameraImg = s.isCamera ? "<img id=\"camera" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-camera-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Camera\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var gateImg   = s.isGate ? "<img id=\"gate" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-gate-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Gate\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var alarmImg  = s.isUnitAlarmed ? "<img id=\"alarm" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-alarm-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Alarm\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var managerImg  = s.isManagerOnsite ? "<img id=\"manager" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-mgr20b.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Manager Onsite\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var elevatorImg  = s.hasElevator ? "<img id=\"elevator" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-elevator20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Elevator\"/>" : '<span style="width:20px; margin: 1px;"></span>';
 
           var truckImg = '<span style="width:20px; margin: 1px;"></span>';
           switch(s.freeTruck) {
             case "FREE":
-              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Rental Truck\"/>";
+              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
               break;
             case "RENTAL":
-              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px;\" alt=\"Rental Truck\"/>";
+              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
               break;
           }
 
@@ -509,7 +509,7 @@
           <div>
             <form id="gsearch" action="" method="post">
               <div class="left" style="margin: 2px 5px 0 0;">
-                <p:image src="btn-circle-1.png" alt="1"/>
+                <p:image src="btn-circle-1.png" width="26" height="26" alt="1"/>
               </div>
               <div class="left">
                 <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
@@ -517,26 +517,26 @@
               <div style="clear:both;height: 10px;"></div>
               <div>
                 <div class="left" style="margin: 2px 5px 0 0;">
-                  <p:image src="btn-circle-2.png" alt="2"/>
+                  <p:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
                 </div>
                 <div class="left">
                   <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
                 </div>
                 <div class="left" style="padding: 4px 7px;">
-                  <p:image id="sizeInfo" src="icn_info_circle.png" alt="info"/>
+                  <p:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
                 </div>
                 <div style="clear: both;"></div>
               </div>
               <div style="height: 10px;"></div>
               <div class="left" style="margin: 2px 5px 0 0;">
-                <p:image src="btn-circle-3.png" alt="3"/>
+                <p:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
               </div>
               <div class="left">
                 <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
               <div style="margin-left: 30px;">
-                <p:image id="gsearchBtn" src="btn-find-it.png" class="noborder" alt="Search Storage"/>
+                <p:image id="gsearchBtn" src="btn-find-it.png" class="noborder" width="108" height="36" alt="Search Storage"/>
               </div>
               <div style="clear: both;"></div>
             </form>
@@ -606,37 +606,37 @@
                   <td>
                     <div style="float:right;">
                       <g:if test="${site.isKeypad}">
-                        <p:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Keypad"/>
+                        <p:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin:1px;"></span>
                       </g:else>
                       <g:if test="${site.isCamera}">
-                        <p:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Camera"/>
+                        <p:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isGate}">
-                        <p:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Gate"/>
+                        <p:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isUnitAlarmed}">
-                        <p:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px;" alt="Alarm"/>
+                        <p:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isManagerOnsite}">
-                        <p:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px;" alt="Manager Onsite"/>
+                        <p:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.hasElevator}">
-                        <p:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px;" alt="Elevator"/>
+                        <p:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>

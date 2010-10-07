@@ -18,14 +18,14 @@
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 1em 5em;" class="left">
-        <p:image src="sub-find-us.png" alt="Find Us"/>
+        <p:image src="sub-find-us.png" width="45" height="12" alt="Find Us"/>
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 0 5em;" class="left">
-        <a href="http://twitter.com/Storitzdotcom"><p:image style="border: none;" src="icn-twitter.png" alt="Storitz on Twitter"/></a>
-        <a href="http://www.facebook.com/storitz"><p:image style="border: none;" src="icn-facebook.png" alt="Storitz on FaceBook"/></a>
-        <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><p:image style="border: none;" src="icn-stumbleupon.png" alt="Storitz on StumbleUpon"/></a>
-        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><p:image style="border: none;" src="icn-linkedin.png" alt="Storitz on LinkedIn"/></a>
+        <a href="http://twitter.com/Storitzdotcom"><p:image style="border: none;" src="icn-twitter.png" width="33" height="33" alt="Storitz on Twitter"/></a>
+        <a href="http://www.facebook.com/storitz"><p:image style="border: none;" src="icn-facebook.png" width="33" height="33" alt="Storitz on FaceBook"/></a>
+        <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><p:image style="border: none;" src="icn-stumbleupon.png" width="33" height="33" alt="Storitz on StumbleUpon"/></a>
+        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><p:image style="border: none;" src="icn-linkedin.png" width="33" height="33" alt="Storitz on LinkedIn"/></a>
       </div>
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
@@ -36,7 +36,7 @@
         <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="http://www.authorize.net/" id="AuthorizeNetText" onclick="window.open(this.href,'_blank');return false;">Online Payments</a> </div>
       </div>
       <div style="margin: 2.5em 1em;">
-        <a href="http://www.selfstorage.org/" onclick="window.open(this.href,'_blank');return false;"><p:image style="border:none;" src="logo-ssa.png" alt="SSA Logo"/></a>
+        <a href="http://www.selfstorage.org/" onclick="window.open(this.href,'_blank');return false;"><p:image style="border:none;" src="logo-ssa.png" width="111" height="58" alt="SSA Logo"/></a>
       </div>
     </div>
   </div>

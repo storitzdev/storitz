@@ -383,7 +383,7 @@
                       <img src="${resource(file:site.coverImage().mid())}" width="320" height="240" style="display:block;margin:auto;" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
                   </g:if>
                   <g:else>
-                    <p:image src="placeholder.jpg" alt="place holder"/>
+                    <p:image src="placeholder.jpg" width="320" height="240" alt="place holder"/>
                   </g:else>
                 </div>
                 <div id="galleryBottom" style="margin: 10px auto;">
@@ -669,8 +669,8 @@
                   </div>
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
-                  <div class="left"><p:inputImage style="border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back" /></div>
-                  <div class="right"><p:inputImage style="border:none;" src="btn-next2.png" onclick="nextStep1(); return false" alt="Next" /></div>
+                  <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back" /></div>
+                  <div class="right"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-next2.png" onclick="nextStep1(); return false" alt="Next" /></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>

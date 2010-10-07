@@ -18,7 +18,7 @@
     <div style="clear:both;"></div>
   </div>
   <div style="margin-top:0;" class="left">
-    <p:inputImage src="btn-find-it.png" style="width:108px;border:none;" name="getDirections" value="Get Directions"/>
+    <p:inputImage src="btn-find-it.png" style="width:108px;height:36px;border:none;" name="getDirections" value="Get Directions"/>
   </div>
   <div class="checkout_labels">
     <div class="checkout_name" style="width:400px; margin-top: -10px;">
@@ -32,7 +32,7 @@
     <div id="directionsWarnings" class="directionsWarnings"></div>
     <div class="transBox">
       <div class="left" style="margin:5px 15px;">
-        <p:image src="icn_map_blue.png" alt="Start" />
+        <p:image src="icn_map_blue.png" width="27" height="35" alt="Start" />
       </div>
       <div id="directionsStartAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
       <div style="clear:both;"></div>
@@ -41,7 +41,7 @@
     </table>
     <div class="transBox">
       <div class="left" style="margin:5px 15px;">
-        <p:image src="icn_map_grn.png" alt="End" />
+        <p:image src="icn_map_grn.png" width="27" height="35" alt="End" />
       </div>
       <div id="directionsEndAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
       <div style="clear:both;"></div>

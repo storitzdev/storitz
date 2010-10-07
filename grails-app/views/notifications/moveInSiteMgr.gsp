@@ -7,13 +7,13 @@
   <div>
     <div style="z-index: 100; float: left; margin-top: 22px;">
       <g:link controller="home" action="index">
-        <p:image src="logo_storitz.gif" absolute="true" style="border-style: none;" alt="Storitz Logo"/>
+        <p:image src="logo_storitz.gif" absolute="true" style="border-style: none;" width="950" height="61" alt="Storitz Logo"/>
       </g:link>
     </div>
     <div style="clear: both;"></div>
   </div>
   <div style="margin-left: 50px;">
-    <p:image src="tagline_clickstoredone.gif" absolute="true" style="border-style: none;" alt="Click. Store. Done."/>
+    <p:image src="tagline_clickstoredone.gif" absolute="true" style="border-style: none;" width="170" height="21" alt="Click. Store. Done."/>
   </div>
   <div style="height: 3em;"></div>
 

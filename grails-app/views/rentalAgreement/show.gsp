@@ -66,7 +66,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="rentalAgreement.file.label" default="Agreement PDF"/></td>
 
-          <td valign="top" class="value"><a href="${resource(file:rentalAgreementInstance.src())}" onclick="window.open(this.href,'_blank');return false;"><p:image src="icn_pdf.jpg" alt="PDF"/></a></td>
+          <td valign="top" class="value"><a href="${resource(file:rentalAgreementInstance.src())}" onclick="window.open(this.href,'_blank');return false;"><p:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a></td>
 
         </tr>
       </table>
