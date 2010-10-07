@@ -11,6 +11,7 @@
         <p class="footer"><g:link class="footer small" controller="static" action="refund">Refund Policy</g:link></p>
       </div>
       <div class="left" style="margin: 2em 5em;">
+        <p class="footer"><a href="http://blog.storitz.com" class="footer small" onclick="window.open(this.href,'_blank');return false;">Storitz Blog</a></p>
         <p class="footer"><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
         <p class="footer"><g:link class="footer small" controller="siteMap">Site Map</g:link></p>
