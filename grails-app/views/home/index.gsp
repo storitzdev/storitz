@@ -60,12 +60,13 @@
 
         function redrawMap() {
 
+          bounds = map.getBounds();
+
           if (!firstDraw) {
             firstDraw = true;
             return;
           }
 
-          bounds = map.getBounds();
           if (!inDrag) {
              getMarkers();
           }

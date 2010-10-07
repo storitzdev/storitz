@@ -170,7 +170,7 @@ class ReportsController {
 
     String subtitle = "From ${params.startDate} to ${params.endDate}"
 
-     drb.setTitle("Customer Balk Report")                                      //defines the title of the report
+     drb.setTitle("Site Activity Report")                                      //defines the title of the report
        .setSubtitle(subtitle)
        .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
        .setDetailHeight(15)                                            //defines the height for each record of the report
