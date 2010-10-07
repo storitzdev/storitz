@@ -3,28 +3,31 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Create Storage Site"/>
-  <g:render template="/header"/>
+  <g:set var="title" value="List Storage Sites"/>
+  <g:render template="/header_admin"/>
 
-  <link href="${createLinkTo(dir:'css', file:'jquery-ui-1.8.4.custom.css')}" media="screen" rel="stylesheet" type="text/css" />
+  <p:css name="jquery-ui-1.8.4.custom" />
 
-  <script type="text/javascript">
-    //<![CDATA[
-    google.load("jquery", "1.4.2");
-    google.load("jqueryui", "1.8.4");
+  <p:dependantJavascript>
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      google.load("jqueryui", "1.8.5");
 
-    google.setOnLoadCallback(function() {
-      jQuery.noConflict();
+      google.setOnLoadCallback(function() {
+        jQuery.noConflict();
 
-      setupUserSelector();
-    });
+        setupUserSelector();
+      });
 
-    function setupUserSelector() {
-      jQuery("input#sitename").autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
-    }
+      function setupUserSelector() {
+        jQuery("input#sitename").autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+      }
 
-    //]]>
-  </script>
+      //]]>
+    </script>
+  </p:dependantJavascript>
 
 </head>
 <body>
@@ -114,4 +117,5 @@
   </div>
 </div>
 </body>
+<p:renderDependantJavascript />
 </html>

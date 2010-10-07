@@ -2,23 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Create Storage Site"/>
-  <g:render template="/header"/>
+  <g:render template="/header_admin"/>
 
-  <script type="text/javascript">
-    //<![CDATA[
+  <p:dependantJavascript>
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      //<![CDATA[
 
-    google.load("jquery", "1.4.2");
+      google.setOnLoadCallback(function() {
+        jQuery.noConflict();
 
-    google.setOnLoadCallback(function() {
-      jQuery.noConflict();
+      });
 
-      setupTimePickers();
-    });
-
-    //]]>
-  </script>
-  <g:javascript src="jquery.MetaDeta.js"/>
-  <g:javascript src="jquery.MultiFile.js"/>
+      //]]>
+    </script>
+    <p:javascript src="jquery.MetaDeta"/>
+    <p:javascript src="jquery.MultiFile"/>
+  </p:dependantJavascript>
 
 </head>
 <body>
@@ -109,3 +110,11 @@
           <span class="button"><g:actionSubmit action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
         </div>
       </g:uploadForm>
+    </div>
+  </div>
+  <div style="height:30px;"></div>
+  <g:render template="/footer_admin" />
+  </div>
+  </body>
+  <p:renderDependantJavascript/>
+</html>

@@ -3,8 +3,8 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:render template="/header" />
-    <link href="${createLinkTo(dir:'css', file:'login.css')}" media="screen" rel="stylesheet" type="text/css" />
+    <p:css name="login" />
+    <p:css name="main" />
 
     <script type="text/javascript">
 //<![CDATA[

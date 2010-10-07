@@ -4,29 +4,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <g:set var="title" value="User List"/>
-    <g:render template="/header" />
-    <link href="${createLinkTo(dir:'css', file:'jquery-ui-1.8.4.custom.css')}" media="screen" rel="stylesheet" type="text/css" />
+    <g:render template="/header_admin"/>
 
-    <script type="text/javascript">
+    <p:css name="jquery-ui-1.8.4.custom" />
+
+    <p:dependantJavascript>
+      <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+      <script type="text/javascript">
 //<![CDATA[
 
-    google.load("jquery", "1.4.2");
-    google.load("jqueryui", "1.8.4");
+      google.load("jquery", "1.4.2");
+      google.load("jqueryui", "1.8.4");
 
-    google.setOnLoadCallback(function() {
-      jQuery.noConflict();
+      google.setOnLoadCallback(function() {
+        jQuery.noConflict();
 
-      setupUserSelector();
-    });
+        setupUserSelector();
+      });
 
-    function setupUserSelector() {
-      jQuery("input#username").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
-    }
-
+      function setupUserSelector() {
+        jQuery("input#username").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
+      }
 
 //]]>
-  </script>
-
+    </script>
+  </p:dependantJavascript>
   </head>
   <body>
     <div id="body">
@@ -107,4 +110,5 @@
       </div>
     </div>
   </body>
+  <p:renderDependantJavascript/>
 </html>
