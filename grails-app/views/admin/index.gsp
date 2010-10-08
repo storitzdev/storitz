@@ -45,7 +45,7 @@
       </ul>
     </div>
     <div style="height:30px;"></div>
-    <g:render template="/footer" />
+    <g:render template="/footer_no_analytics" />
     </div>
   </body>
 </html>

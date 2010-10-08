@@ -32,6 +32,8 @@ import com.storitz.User
 import com.storitz.UserRole
 import com.storitz.StorageSite
 import com.storitz.SiteUser
+import storitz.reports.ReservationIdExpression
+import storitz.reports.NetCostExpression
 
 class ReportsController {
 
@@ -184,6 +186,71 @@ class ReportsController {
     // Footer definition
     drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
     drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
+
+    SimpleColumn columnDate = ColumnBuilder.getInstance().
+      setColumnProperty("bookingDate", Date.class.getName()).
+      setTitle("Date").setWidth(20).setPattern("MM/dd/yy").build()
+
+    SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
+      setColumnProperty("feedUnitNumber", String.class.getName()).
+      setTitle("Unit #").setWidth(15).build()
+
+    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
+            .setTitle("Res #").setHeaderStyle(headerStyle).setWidth(15).build();
+
+    drb.addField("contactPrimary.firstName", String.class.getName())
+    drb.addField("contactPrimary.lastName", String.class.getName())
+    drb.addField("contactPrimary.suffixName", String.class.getName())
+
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
+            .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
+
+    SimpleColumn columnEmail = ColumnBuilder.getInstance().
+      setColumnProperty("contactPrimary.email", String.class.getName()).
+      setTitle("Email").setWidth(45).build()
+
+    SimpleColumn columnPhone = ColumnBuilder.getInstance().
+      setColumnProperty("contactPrimary.phone", String.class.getName()).
+      setTitle("Phone").setWidth(25).build()
+
+    SimpleColumn columnGross = ColumnBuilder.getInstance().
+      setColumnProperty("cost", BigDecimal.class.getName()).
+      setTitle("Gross").setPattern("\$ 0.00").setWidth(18).build()
+
+    SimpleColumn columnCommission = ColumnBuilder.getInstance().
+      setColumnProperty("commission", BigDecimal.class.getName()).
+      setTitle("Commission").setPattern("\$ 0.00").setWidth(18).build()
+
+    AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
+            .setTitle("Net").setHeaderStyle(headerStyle).setWidth(18).setPattern("\$ 0.00").build();
+
+    drb.addColumn(columnDate)
+      .addColumn(columnUnitNumber)
+      .addColumn(columnReservationId)
+      .addColumn(columnName)
+      .addColumn(columnEmail)
+      .addColumn(columnPhone)
+      .addColumn(columnGross)
+      .addColumn(columnCommission)
+      .addColumn(columnNet)
+
+    DynamicReport dr = drb.build()
+
+    def c = RentalTransaction.createCriteria()
+
+    def results = c.list() {
+      or {
+        eq('status', TransactionStatus.COMPLETE)
+        eq('status', TransactionStatus.PAID)
+      }
+      between('bookingDate', startDate.time, endDate.time)
+      order('bookingDate', 'desc')
+    }
+
+    JRDataSource ds = new JRBeanCollectionDataSource(results);
+    JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.getValue(), [:]);
+    reportWriter.writeTo(response);
 
   }
 
