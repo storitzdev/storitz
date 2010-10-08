@@ -45,7 +45,7 @@
 
   function prevStep() {
     window.location = "${createLink(controller:'storageSite', action:'detail',
-      params:[id:rentalTransactionInstance?.site.id, searchSize:unit?.unitsize?.id, unitType:unit?.getUnitTypeLower(),
+      params:[id:rentalTransactionInstance?.site.id, searchSize:unit?.unitsize?.id, unitType:unit?.unitType,
       promoId:rentalTransactionInstance?.promoId, returnForm: true,
       insuranceId:rentalTransactionInstance?.insuranceId,
       rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
@@ -165,7 +165,7 @@
                     <div class="left">
                       <div class="transHeader">Unit Type</div>
                       <div class="specialOfferText selectedOffer">
-                        ${unit.getUnitType()}
+                        ${unit.unitType.display}
                       </div>
                     </div>
                     <div class="left" style="margin-left:15px">

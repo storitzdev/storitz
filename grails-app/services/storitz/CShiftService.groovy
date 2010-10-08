@@ -24,6 +24,7 @@ import com.storitz.RentalTransaction
 import java.math.RoundingMode
 import com.storitz.UnitTypeLookup
 import com.storitz.CenterShift
+import storitz.constants.UnitType
 
 class CShiftService {
 
@@ -807,7 +808,7 @@ class CShiftService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    for(unit in records.'soap:Body'.'*:GetSiteUnitDataResponse'.'*:GetSiteUnitDataResult'.'*:SiteUnitData'.'*:Unit') {
+    for (unit in records.'soap:Body'.'*:GetSiteUnitDataResponse'.'*:GetSiteUnitDataResult'.'*:SiteUnitData'.'*:Unit') {
 
       def vacant = unit.VACANT.text() as Integer
       def typeName = unit.VALUE.text()
@@ -832,14 +833,25 @@ class CShiftService {
             // down = interior
             def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
             if (unitTypeLookup) {
-              siteUnit.setUnitTypeLower(unitTypeLookup.unitType)
-              siteUnit.isTempControlled = unitTypeLookup.tempControlled
+              if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
+                siteUnit.unitType = unitTypeLookup.unitType
+                siteUnit.isTempControlled = unitTypeLookup.tempControlled
+              } else {
+                writer.println "Skipping illegal type ${typeName}"
+                continue
+              }
             } else {
-              siteUnit.isUpper = ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/)
-              siteUnit.isDriveup = (typeName ==~ /(?i).*(drive|roll-up|roll up).*/)
-              siteUnit.isInterior = (!siteUnit.isUpper && !siteUnit.isDriveup && !(typeName ==~ /(?i).*outer.*/)) || (typeName ==~ /(?i).*(interior|ground|1st).*/)
-              if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
-                siteUnit.isUpper = true
+              writer.println "Unknown unit type description ${typeName}"
+
+              if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
+                siteUnit.unitType = UnitType.UPPER
+              } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
+                siteUnit.unitType = UnitType.DRIVEUP
+              } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
+                siteUnit.unitType = UnitType.INTERIOR
+              }
+              if (!siteUnit.unitType) {
+                siteUnit.unitType = UnitType.UPPER
               }
               siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
             }
@@ -851,17 +863,15 @@ class CShiftService {
             stats.unitCount += vacant
 
             site.addToUnits(siteUnit)
-            
+
           } else {
             writer.println "Skipping due to size: length = ${length}, width = ${width}"
           }
         }
+      } else if (vacant == 0) {
+        writer.println "Skipped due to full occupancy: ${typeName}"
       } else {
-        if (vacant == 0) {
-          writer.println "Skipped due to full occupancy: ${typeName}"
-        } else {
-          writer.println "Skipped due to parking or other: ${typeName}"
-        }
+        writer.println "Skipped due to parking or other: ${typeName}"
       }
     }
   }

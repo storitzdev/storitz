@@ -24,9 +24,6 @@ class BootStrap {
 
     //org.hsqldb.util.DatabaseManager.main()
 
-    println "Registering Marshallers"
-    // Custom marshallers
-
     JSON.registerObjectMarshaller(new CustomDomainMarshaller())
 
     JSON.registerObjectMarshaller StorageSite, {

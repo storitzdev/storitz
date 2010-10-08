@@ -14,11 +14,9 @@ var chosenPromo = '';
 var chosenPromoId = ${promoId ? promoId : -999};
 var totalMoveInCost = additionalFees + monthlyRent;
 var unitTypes = [];
-<g:each var="unitType" status="i" in="${unitTypes}">
-  unitTypes[${i}] = ${unitType};
-</g:each>
 var discountTotal = 0;
 var chosenUnitType = '${chosenUnitType}';
+var chosenUnitTypeDisplay = '${chosenUnitType.display}'
 var chosenInsurance = '';
 var insuranceId = ${insuranceId ? insuranceId : -999};
 var premium = 0;
@@ -220,6 +218,7 @@ function showTotals(action) {
       chosenPromo = totals.chosenPromo;
       chosenInsurance = totals.chosenInsurance;
       chosenUnitType = totals.chosenUnitType;
+      chosenUnitTypeDisplay = totals.chosenUnitTypeDisplay;
       premium = totals.premium;
       discountTotal = totals.discountTotal;
       monthlyRent = totals.monthlyRate;

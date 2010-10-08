@@ -117,7 +117,7 @@ class ReportsController {
         setTitle("Unit Size").setWidth(15).build()
 
       SimpleColumn columnUnitType = ColumnBuilder.getInstance().
-        setColumnProperty("unitType", String.class.getName()).
+        setColumnProperty("unitType.display", String.class.getName()).
         setTitle("Unit Type").setWidth(15).build()
 
       drb.addColumn(columnDate)

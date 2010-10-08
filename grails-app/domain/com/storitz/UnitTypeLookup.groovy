@@ -1,9 +1,11 @@
 package com.storitz
 
+import storitz.constants.UnitType
+
 class UnitTypeLookup {
 
   String description
-  String unitType
+  UnitType unitType
   Boolean tempControlled
   
     static constraints = {

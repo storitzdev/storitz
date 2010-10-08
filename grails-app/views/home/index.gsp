@@ -1,4 +1,4 @@
-<%@ page import="storitz.constants.TruckType" %>
+<%@ page import="storitz.constants.UnitType; storitz.constants.TruckType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -297,9 +297,9 @@
 
           return '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
             '<a href="' + siteLink(s) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-            (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=upper' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-            (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=interior' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-            (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=driveup' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td>' +
+            (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=UPPER' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+            (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=INTERIOR' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
+            (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=DRIVEUP' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td>' +
             '<td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +'</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
 
         }
@@ -580,24 +580,24 @@
                     </div>
                   </td>
                   <td class="textCenter">
-                    <g:if test="${site.units.findAll{ it.unitTypeLower == 'upper'}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:'upper']" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitTypeLower == 'upper'} }" member="price" format="0.00"/></g:link>
+                    <g:if test="${site.units.findAll{ it.unitType == UnitType.UPPER}.size() > 0}">
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:UnitType.UPPER]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.UPPER} }" member="price" format="0.00"/></g:link>
                     </g:if>
                     <g:else>
                       &#8212;
                     </g:else>
                    </td>
                   <td class="textCenter">
-                    <g:if test="${site.units.findAll{ it.unitTypeLower == 'interior'}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:'interior']" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitTypeLower == 'interior'} }" member="price" format="0.00"/></g:link>
+                    <g:if test="${site.units.findAll{ it.unitType == UnitType.INTERIOR}.size() > 0}">
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:UnitType.INTERIOR]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.INTERIOR} }" member="price" format="0.00"/></g:link>
                     </g:if>
                     <g:else>
                       &#8212;
                     </g:else>
                   </td>
                   <td class="textCenter">
-                    <g:if test="${site.units.findAll{ it.unitTypeLower == 'driveup'}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:'driveup']" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitTypeLower == 'driveup'} }" member="price" format="0.00"/></g:link>
+                    <g:if test="${site.units.findAll{ it.unitType == UnitType.DRIVEUP}.size() > 0}">
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:UnitType.DRIVEUP]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.DRIVEUP} }" member="price" format="0.00"/></g:link>
                     </g:if>
                     <g:else>
                       &#8212;

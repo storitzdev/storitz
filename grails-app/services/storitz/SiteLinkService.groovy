@@ -23,6 +23,7 @@ import com.storitz.Role
 import java.math.RoundingMode
 import com.storitz.UnitTypeLookup
 import com.storitz.SiteLink
+import storitz.constants.UnitType
 
 class SiteLinkService {
 
@@ -665,9 +666,9 @@ class SiteLinkService {
     site.hasElevator = false
     site.disabled = true // start sites as disabled
 
-    site.openWeekday = !Boolean.parseBoolean(tab.bClosedWeekdays.text())
-    site.openSaturday = !Boolean.parseBoolean(tab.bClosedSaturday.text())
-    site.openSunday = !Boolean.parseBoolean(tab.bClosedSunday.text())
+    site.openWeekday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
+    site.openSaturday = !(tab.bClosedSaturday.text().toLowerCase() == 'true')
+    site.openSunday = !(tab.bClosedSunday.text().toLowerCase() == 'true')
 
     def sWeekdayStart = tab.dWeekdayStrt.text()
     def sWeekdayEnd = tab.dWeekdayEnd.text()
@@ -817,22 +818,33 @@ class SiteLinkService {
             siteUnit.price = unit.dcStdRate.text() as BigDecimal
             siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
             def floor = unit.iFloor.text() as Integer
-            siteUnit.isPowered = Boolean.parseBoolean(unit.bPower.text())
+            siteUnit.isPowered = unit.bPower.text().toLowerCase() == 'true'
             siteUnit.isAvailable = true
             siteUnit.isSecure = false
-            siteUnit.isAlarm = Boolean.parseBoolean(unit.bAlarm.text())
+            siteUnit.isAlarm = unit.bAlarm.text().toLowerCase() == 'true'
 
             def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
             if (unitTypeLookup) {
-              siteUnit.setUnitTypeLower(unitTypeLookup.unitType)
-              siteUnit.isTempControlled = unitTypeLookup.tempControlled
+              if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
+                siteUnit.unitType = unitTypeLookup.unitType
+                siteUnit.isTempControlled = unitTypeLookup.tempControlled
+              } else {
+                writer.println "Skipping illegal type ${typeName}"
+                continue
+              }
             } else {
-              siteUnit.isUpper = (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/)
-              siteUnit.isInterior = (!siteUnit.isUpper && (Boolean.parseBoolean(unit.bInside.text()) || typeName ==~ /MAIN FLOOR*/))
-              siteUnit.isTempControlled = Boolean.parseBoolean(unit.bClimate.text())
-              siteUnit.isDriveup = ((!siteUnit.isUpper && !siteUnit.isInterior) || typeName ==~ /DRIVE UP*/)
-              if (!siteUnit.isUpper && !siteUnit.isInterior && !siteUnit.isDriveup) {
-                siteUnit.isUpper = true
+              writer.println "Unknown unit type description ${typeName}"
+
+              if (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/) {
+                siteUnit.unitType = UnitType.UPPER
+              } else if ((unit.bInside.text().toLowerCase() != 'false') || typeName ==~ /MAIN FLOOR*/) {
+                siteUnit.unitType = UnitType.INTERIOR
+              } else if (typeName ==~ /(?i)*drive*/) {
+                siteUnit.unitType = UnitType.DRIVEUP
+              }
+              siteUnit.isTempControlled = (unit.bClimate.text().toLowerCase() == 'true')
+              if (!siteUnit.unitType) {
+                siteUnit.unitType = UnitType.UPPER
               }
             }
             Integer width = (int) Double.parseDouble(unit.dcWidth.text())
@@ -965,7 +977,7 @@ class SiteLinkService {
         specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
         specialOffer.promoName = promoName
         specialOffer.expireMonth = Integer.parseInt(promo.iExpirMonths.text())
-        specialOffer.prepay = Boolean.parseBoolean(promo.bPrepay.text())
+        specialOffer.prepay = promo.bPrepay.text().toLowerCase() == 'true'
         specialOffer.inMonth = Integer.parseInt(promo.iInMonth.text())
         def ptype = Integer.parseInt(promo.iAmtType.text())
         switch (ptype) {

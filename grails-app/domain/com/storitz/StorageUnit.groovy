@@ -1,4 +1,7 @@
 package com.storitz
+
+import storitz.constants.UnitType
+
 class StorageUnit {
 
     static belongsTo = StorageSite
@@ -14,9 +17,7 @@ class StorageUnit {
     String description
     String unitNumber
     String unitName
-    Boolean isUpper
-    Boolean isDriveup
-    Boolean isInterior
+    UnitType unitType
     Boolean isSecure
     Boolean isTempControlled
     Boolean isAlarm
@@ -30,49 +31,4 @@ class StorageUnit {
     Integer unitCount
     BigDecimal taxRate
 
-    public String getUnitType() {
-      if (isUpper) return "Upper"
-      if (isDriveup) return "Drive up"
-      if (isInterior) return "Interior"
-      return "Unknown"
-    }
-
-    public String getUnitTypeLower() {
-      if (isUpper) return "upper"
-      if (isDriveup) return "driveup"
-      if (isInterior) return "interior"
-      return "unknown"
-    }
-
-    public void setUnitType(newType) {
-      if (newType == "Upper") {
-        isDriveup = false
-        isInterior = false
-        isUpper = true
-      } else if (newType == "Interior") {
-        isDriveup = false
-        isInterior = true
-        isUpper = false
-      } else if (newType == "Driveup" || newType == "Drive up") {
-        isDriveup = true
-        isInterior = false
-        isUpper = false
-      }
-    }
-
-    public void setUnitTypeLower(newType) {
-      if (newType == "upper") {
-        isDriveup = false
-        isInterior = false
-        isUpper = true
-      } else if (newType == "interior") {
-        isDriveup = false
-        isInterior = true
-        isUpper = false
-      } else if (newType == "driveup" || newType == "drive up") {
-        isDriveup = true
-        isInterior = false
-        isUpper = false
-      }
-    }
 }

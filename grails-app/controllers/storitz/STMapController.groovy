@@ -48,14 +48,14 @@ class STMapController {
           sw << "], \"units\":["
           unitMap.clear()
           site.units.each { unit ->
-            def unitType = unit.getUnitTypeLower()
+            def unitType = unit.unitType
             if (!unitMap[unitType] || unitMap[unitType].price > unit.price) {
               unitMap[unitType] = unit
             }
           }
           unitMap.eachWithIndex{ unitEntry, j ->
             def unit = unitEntry.value
-            sw << "{ \"unitsize\":{\"id\":\"${unit.unitsize.id}\"}, \"id\":\"${unit.id}\", \"price\":${unit.price}, \"unitType\":\"${unit.getUnitTypeLower()}\" }"
+            sw << "{ \"unitsize\":{\"id\":\"${unit.unitsize.id}\"}, \"id\":\"${unit.id}\", \"price\":${unit.price}, \"unitType\":\"${unit.unitType}\", \"unitTypeDisplay\":\"${unit.unitType.display}\" }"
             if (j < unitMap.size() - 1) {
               sw << ","
             }
