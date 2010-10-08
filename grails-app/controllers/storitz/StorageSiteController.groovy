@@ -612,6 +612,10 @@ class StorageSiteController {
       }
     }
     def site = StorageSite.get(params.id)
+    if (!site) {
+      render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[  ], \"chosenInsurance\":\"\", \"chosenPromo\":\"\", \"monthlyRate\":0, \"pushRate\":0, \"unitId\":-1, \"chosenUnitType\":\"\", \"additionalFees\":0, \"premium\":0, \"durationMonths\":0, \"discountTotal\":0, \"totalMoveInCost\":0, \"tax\":0, \"extended\":0, \"paidThruDate\":\"\", \"deposit\":0} }}")
+      return
+    }
 
     Collection unitTypes
     Collection sizeList
