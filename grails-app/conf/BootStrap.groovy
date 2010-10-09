@@ -896,6 +896,9 @@ class BootStrap {
     new UnitTypeLookup(id:524, description:"SS-10X25-2Door", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:525, description:"Triangle Outside", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:526, description:"Interior Self St", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:527, description:"1st Floor-Inside", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:528, description:"Shelving Units", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:529, description:"Triangle  Inside", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
 
   }
 }
