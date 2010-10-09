@@ -495,7 +495,7 @@ class StorageSiteController {
       insuranceId = site.insurances.min{ it.premium }.id
     }
 
-    UnitType chosenUnitType = UnitType.valueOf(params.unitType)
+    UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : null
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,

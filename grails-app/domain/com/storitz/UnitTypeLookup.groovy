@@ -9,5 +9,6 @@ class UnitTypeLookup {
   Boolean tempControlled
   
     static constraints = {
+      
     }
 }

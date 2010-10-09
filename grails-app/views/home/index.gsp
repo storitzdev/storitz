@@ -249,9 +249,9 @@
               offers = offersArr[0];
             }
           }
-          var pUp = s.units.find(function(n) { return n.unitType == 'upper' });
-          var pDup = s.units.find(function(n) { return n.unitType == 'driveup' });
-          var pInt = s.units.find(function(n) { return n.unitType == 'interior' });
+          var pUp = s.units.find(function(n) { return n.unitType == '${UnitType.UPPER}' });
+          var pDup = s.units.find(function(n) { return n.unitType == '${UnitType.DRIVEUP}' });
+          var pInt = s.units.find(function(n) { return n.unitType == '${UnitType.INTERIOR}' });
           var priceDriveup = pDup ? pDup.price  : 999999;
           var priceInterior = pInt ? pInt.price : 999999;
           var priceUpper = pUp ? pUp.price : 999999;

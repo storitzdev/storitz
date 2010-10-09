@@ -812,7 +812,8 @@ class CShiftService {
 
       def vacant = unit.VACANT.text() as Integer
       def typeName = unit.VALUE.text()
-      if (vacant > 0 && !(typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/)) {
+
+      if (vacant > 0) {
         def dimensions = unit.DIMENSIONS.text()
         def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
         if (m.matches()) {
@@ -822,15 +823,7 @@ class CShiftService {
           def unitSize = unitSizeService.getUnitSize(width, length)
           if (unitSize) {
             def siteUnit = new StorageUnit()
-            siteUnit.unitsize = unitSize
-            siteUnit.unitCount = vacant
-            siteUnit.description = typeName
-            siteUnit.unitName = siteUnit.unitNumber = unit.ATTRIBUTES.text()
-            siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
-            siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
 
-            // outside = driveup
-            // down = interior
             def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
             if (unitTypeLookup) {
               if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
@@ -842,6 +835,8 @@ class CShiftService {
               }
             } else {
               writer.println "Unknown unit type description ${typeName}"
+
+              if (typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/) continue
 
               if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
                 siteUnit.unitType = UnitType.UPPER
@@ -855,6 +850,12 @@ class CShiftService {
               }
               siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
             }
+            siteUnit.unitsize = unitSize
+            siteUnit.unitCount = vacant
+            siteUnit.description = typeName
+            siteUnit.unitName = siteUnit.unitNumber = unit.ATTRIBUTES.text()
+            siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
+            siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
             siteUnit.isAlarm = false
             siteUnit.isPowered = false
             siteUnit.isAvailable = true
