@@ -362,6 +362,14 @@ class BootStrap {
 
     // Unit Description types from vendors
     println "Starting unit type lookup creation"
+    setupUnitTypes()
+    println "All Unit type lookups are done"
+  }
+     
+  def destroy = {
+  }
+
+  def setupUnitTypes() {
     new UnitTypeLookup(id:1, description:"Climate Controlled Ground Level", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:2, description:"Lower Level Climate Controlled", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:3, description:"Upper", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
@@ -857,9 +865,8 @@ class BootStrap {
     new UnitTypeLookup(id:493, description:"First Floor Bldg B", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:494, description:"EZ Wet Slip", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:495, description:"15x30", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
-    println "All Unit type lookups are done"
-  }
-     
-  def destroy = {
+    new UnitTypeLookup(id:496, description:"Climate Controlled Upper Premium", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:497, description:"Climate Controlled - Premium", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
+
   }
 }
