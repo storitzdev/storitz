@@ -959,5 +959,7 @@ class BootStrap {
     new UnitTypeLookup(id:587, description:"Interior CC DU", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:588, description:"Refrigerated", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:589, description:"Mailbox (lg)", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:590, description:"PAE-Parking", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:591, description:"CDNV-Climate Down Normal", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
   }
 }
