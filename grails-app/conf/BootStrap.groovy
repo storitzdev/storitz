@@ -362,14 +362,15 @@ class BootStrap {
 
     // Unit Description types from vendors
     println "Starting unit type lookup creation"
-    setupUnitTypes()
+    setupUnitTypes1()
+    setupUnitTypes2()
     println "All Unit type lookups are done"
   }
      
   def destroy = {
   }
 
-  def setupUnitTypes() {
+  def setupUnitTypes1() {
     new UnitTypeLookup(id:1, description:"Climate Controlled Ground Level", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:2, description:"Lower Level Climate Controlled", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:3, description:"Upper", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
@@ -870,6 +871,10 @@ class BootStrap {
     new UnitTypeLookup(id:498, description:"Outside SSO", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:499, description:"RV Space - REG", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:500, description:"RV Space - LGE", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+  }
+
+
+  def setupUnitTypes2() {
     new UnitTypeLookup(id:501, description:"Drive-up 24hr", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:502, description:"Outside SSO", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:503, description:"Small Door", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
@@ -962,4 +967,6 @@ class BootStrap {
     new UnitTypeLookup(id:590, description:"PAE-Parking", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:591, description:"CDNV-Climate Down Normal", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
   }
+
+
 }
