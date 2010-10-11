@@ -180,7 +180,7 @@ class BootStrap {
 
       def returnArray = [:]
       returnArray['user'] = it.user.username
-      returnArray['notificationType'] = it.notificationType as String
+      returnArray['notificationType'] = it.notificationType.id
 
       return returnArray
 
