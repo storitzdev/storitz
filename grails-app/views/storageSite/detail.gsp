@@ -383,7 +383,7 @@
                       <img src="${resource(file:site.coverImage().mid())}" width="320" height="240" style="display:block;margin:auto;" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
                   </g:if>
                   <g:else>
-                    <p:image src="placeholder.jpg" width="320" height="240" alt="place holder"/>
+                    <storitz:image src="placeholder.jpg" width="320" height="240" alt="place holder"/>
                   </g:else>
                 </div>
                 <div id="galleryBottom" style="margin: 10px auto;">

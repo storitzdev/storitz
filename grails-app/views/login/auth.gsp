@@ -26,7 +26,7 @@
             <div class='login_message'>${flash.message}</div>
             </g:if>
             <div class='fheader'>Please Login..</div>
-            <form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
+            <form action='${postUrl}' method='post' id='loginForm' class='cssform'>
                 <p>
                     <label for='username'>Login ID</label>
                     <input type='text' class='inputBox' name='j_username' id='username' />

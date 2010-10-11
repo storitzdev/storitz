@@ -512,7 +512,7 @@
           <div>
             <form id="gsearch" action="" method="post">
               <div class="left" style="margin: 2px 5px 0 0;">
-                <p:image src="btn-circle-1.png" width="26" height="26" alt="1"/>
+                <storitz:image src="btn-circle-1.png" width="26" height="26" alt="1"/>
               </div>
               <div class="left">
                 <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
@@ -520,26 +520,26 @@
               <div style="clear:both;height: 10px;"></div>
               <div>
                 <div class="left" style="margin: 2px 5px 0 0;">
-                  <p:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
+                  <storitz:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
                 </div>
                 <div class="left">
                   <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
                 </div>
                 <div class="left" style="padding: 4px 7px;">
-                  <p:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
+                  <storitz:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
                 </div>
                 <div style="clear: both;"></div>
               </div>
               <div style="height: 10px;"></div>
               <div class="left" style="margin: 2px 5px 0 0;">
-                <p:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
+                <storitz:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
               </div>
               <div class="left">
                 <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
               <div style="margin-left: 30px;">
-                <p:image id="gsearchBtn" src="btn-find-it.png" class="noborder" width="108" height="36" alt="Search Storage"/>
+                <storitz:image id="gsearchBtn" src="btn-find-it.png" class="noborder" width="108" height="36" alt="Search Storage"/>
               </div>
               <div style="clear: both;"></div>
             </form>
@@ -609,37 +609,37 @@
                   <td>
                     <div style="float:right;">
                       <g:if test="${site.isKeypad}">
-                        <p:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
+                        <storitz:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin:1px;"></span>
                       </g:else>
                       <g:if test="${site.isCamera}">
-                        <p:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
+                        <storitz:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isGate}">
-                        <p:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
+                        <storitz:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isUnitAlarmed}">
-                        <p:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
+                        <storitz:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.isManagerOnsite}">
-                        <p:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
+                        <storitz:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>
                       </g:else>
                       <g:if test="${site.hasElevator}">
-                        <p:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                        <storitz:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
                       </g:if>
                       <g:else>
                         <span style="width:20px; margin: 1px;"></span>

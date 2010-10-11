@@ -115,56 +115,56 @@
 
 <g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">
   <div class="left">
-    <p:image src="icon3d-rentaltruck32f.gif" width="32" height="32" alt="Free Truck"/>
+    <storitz:image src="icon3d-rentaltruck32f.gif" width="32" height="32" alt="Free Truck"/>
   </div>
   <div class="left icon_text">Free Truck</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.freeTruck  == storitz.constants.TruckType.RENTAL}">
   <div class="left">
-    <p:image src="icon3d-rentaltruck32r.gif" width="32" height="32" alt="Rental Truck"/>
+    <storitz:image src="icon3d-rentaltruck32r.gif" width="32" height="32" alt="Rental Truck"/>
   </div>
   <div class="left icon_text">Rental Truck</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isGate}">
   <div class="left">
-    <p:image src="icon3d-gate32.jpg" width="32" height="32" alt="Gated"/>
+    <storitz:image src="icon3d-gate32.jpg" width="32" height="32" alt="Gated"/>
   </div>
   <div class="left icon_text">Gated</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isKeypad}">
   <div class="left">
-    <p:image src="icon3d-keypad32.jpg" width="32" height="32" alt="Keypad"/>
+    <storitz:image src="icon3d-keypad32.jpg" width="32" height="32" alt="Keypad"/>
   </div>
   <div class="left icon_text">Keypad Entry</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isCamera}">
   <div class="left">
-    <p:image src="icon3d-camera32.jpg" width="32" height="32" alt="Camera"/>
+    <storitz:image src="icon3d-camera32.jpg" width="32" height="32" alt="Camera"/>
   </div>
   <div class="left icon_text">Camera</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isUnitAlarmed}">
   <div class="left">
-    <p:image src="icon3d-alarm32.jpg" width="32" height="32" alt="Alarmed"/>
+    <storitz:image src="icon3d-alarm32.jpg" width="32" height="32" alt="Alarmed"/>
   </div>
   <div class="left icon_text">Unit Alarmed</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.isManagerOnsite}">
   <div class="left">
-    <p:image src="icon3d-mgr32b.jpg" width="32" height="32" alt="Manager Onsite"/>
+    <storitz:image src="icon3d-mgr32b.jpg" width="32" height="32" alt="Manager Onsite"/>
   </div>
   <div class="left icon_text">Manager Onsite</div>
   <div style="clear: both;"></div>
 </g:if>
 <g:if test="${site.hasElevator}">
   <div class="left">
-    <p:image src="icon3d-elevator32.jpg" width="32" height="32" alt="Elevator Available"/>
+    <storitz:image src="icon3d-elevator32.jpg" width="32" height="32" alt="Elevator Available"/>
   </div>
   <div class="left icon_text">Elevator Available</div>
   <div style="clear: both;"></div>

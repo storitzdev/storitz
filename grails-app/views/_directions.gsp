@@ -32,7 +32,7 @@
     <div id="directionsWarnings" class="directionsWarnings"></div>
     <div class="transBox">
       <div class="left" style="margin:5px 15px;">
-        <p:image src="icn_map_blue.png" width="27" height="35" alt="Start" />
+        <storitz:image src="icn_map_blue.png" width="27" height="35" alt="Start" />
       </div>
       <div id="directionsStartAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
       <div style="clear:both;"></div>
@@ -41,7 +41,7 @@
     </table>
     <div class="transBox">
       <div class="left" style="margin:5px 15px;">
-        <p:image src="icn_map_grn.png" width="27" height="35" alt="End" />
+        <storitz:image src="icn_map_grn.png" width="27" height="35" alt="End" />
       </div>
       <div id="directionsEndAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
       <div style="clear:both;"></div>

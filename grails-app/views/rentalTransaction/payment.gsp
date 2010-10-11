@@ -384,7 +384,7 @@
                 <div style="height: 10px;"></div>
                 <div>
                   <div class="left">
-                    <p:image src="credit-cards.gif" width="96" height="97" alt="Credit Cards" />
+                    <storitz:image src="credit-cards.gif" width="96" height="97" alt="Credit Cards" />
                   </div>
                   <div class="left">
                     <div class="checkout_labels">
