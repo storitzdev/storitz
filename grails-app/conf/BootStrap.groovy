@@ -107,7 +107,7 @@ class BootStrap {
       println "Using the registered SiteLink Marshaller"
 
       def returnArray = [:]
-      returnArray['corpCode'] = it.feedType
+      returnArray['corpCode'] = it.corpCode
       returnArray['userName'] = it.userName
       returnArray['password'] = it.operatorName
       returnArray['feedType'] = it.feedType

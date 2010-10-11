@@ -49,10 +49,14 @@ class MigrationController {
     def url = new URL(urlString)
     def conn = url.openConnection()
     if (conn.responseCode == 200) {
-      def sites = JSON.parse(conn.content.text)
-      for (s in sites) {
-        def  site = new StorageSite(s)
-        println "Retrieved site: ${site.title} id = ${site.id}"
+      println "Response was 200"
+      def respText = conn.content.text
+      def resp = JSON.parse(respText)
+      def feed
+      if (resp.feed.feedType.name == 'SITELINK') {
+        feed = new SiteLink()
+        feed.properties = resp.feed
+        feed.save(flush: true)
       }
     } else {
       println "Bad connection got response ${conn.responseCode}"
