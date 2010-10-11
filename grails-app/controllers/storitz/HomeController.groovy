@@ -39,7 +39,7 @@ class HomeController {
 
       def dim = mapService.getDimensions(zoom, lat, lng, 650, 321)
 
-      def sites = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+      def sites = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
       [ sizeList: StorageSize.list(params), title:"Storitz self-storage search results${params.address ? ' in ' + params.address : ''}", zoom:zoom, lat:lat, lng:lng, searchSize: (params.searchSize ? params.searchSize : 1), sites: sites]
     }

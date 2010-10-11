@@ -216,7 +216,11 @@
           if (s.unitCount) {
             iconMarker = s.unitCount == 0 ? markerImageGray : markerImageGreen;
           } else {
-            iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
+            if (s.units) {
+              iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
+            } else {
+              iconMarker = markerImageGray;
+            }
           }
           
           features[s.id] = s;
@@ -318,7 +322,6 @@
 
           map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
 
-          TableKit.Sortable.init($('stresults'), {editable:false, stripe:true});
           google.maps.event.addListener(map, 'bounds_changed', redrawMap);
           google.maps.event.addListener(map, 'dragstart', dragStart);
           google.maps.event.addListener(map, 'dragend', dragEnd);

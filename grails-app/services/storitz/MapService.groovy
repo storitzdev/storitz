@@ -9,11 +9,12 @@ import javax.servlet.ServletContext
 class MapService {
     def geoIp;
 
-
     boolean transactional = false
 
   // use the following for the default zoom level on a Google map
     def defaultZoom = 12
+    final double R = 3958.761; // mi
+
 
 
   // this is the number of degrees of latitude per pixel at zoom 12
@@ -28,6 +29,13 @@ class MapService {
 
     def gund(BigDecimal posy) {
         return Math.atan(Math.sinh(posy)) * (180.0 / Math.PI)
+    }
+
+    def calcDistance(lat1, lat2, lng1, lng2) {
+      def d = Math.acos(Math.sin(lat1/57.2958)*Math.sin(lat2/57.2958) +
+                  Math.cos(lat1/57.2958)*Math.cos(lat2/57.2958) *
+                  Math.cos(lng2/57.2958-lng1/57.2958)) * R;
+      return Math.round(100 * d) / 100;
     }
 
     def getDimensions(Integer zoom, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {

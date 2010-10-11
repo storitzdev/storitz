@@ -164,10 +164,14 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 
 .list table {
     border-collapse: collapse;
+    width: 100%;
+    border: 1px solid;
 }
-.list th, .list td {
-    border-left: 1px solid #ddd;
+
+.list th {
+    background: #ccc;
 }
+
 .list th:hover, .list tr:hover {
     background: #b2d1ff;
 }
