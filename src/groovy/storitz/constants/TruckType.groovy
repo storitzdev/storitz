@@ -22,6 +22,8 @@ public enum TruckType {
   }
 
   static public TruckType getEnumFromId(String value) {
-        list().find {it.display == value }
+        def ret = list().find {it.display == value }
+        if (!ret) return TruckType.valueOf(value)
+        return ret
     }
 }

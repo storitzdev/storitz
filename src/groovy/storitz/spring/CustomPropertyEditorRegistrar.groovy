@@ -39,7 +39,7 @@ public class CustomPropertyEditorRegistrar implements PropertyEditorRegistrar {
   private static final String REQUIRED_METHOD_NAME = 'getEnumFromId'
   
   private static final BINDABLE_ENUMS = [CenterShiftLocations, CenterShiftVersion, CommissionSourceType, CommissionType, ContactType, CreditCardType, FeedType, IdType, NotificationEventType,
-    PhoneType, PromoType, RentalUse, ReportOutputType, StreetType, TransactionStatus, TruckType, UnitType]
+    PhoneType, PromoType, RentalUse, ReportOutputType, StreetType, State, TransactionStatus, TruckType, UnitType]
 
   public void registerCustomEditors(PropertyEditorRegistry registry) {
     registry.registerCustomEditor(Date.class, new CustomDateClassPropertyEditor(GrailsConfig.get("grails.date.formats", List.class)));

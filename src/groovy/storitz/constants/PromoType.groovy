@@ -9,8 +9,8 @@ public enum PromoType {
     [AMOUNT_OFF, PERCENT_OFF, FIXED_RATE]
   }
 
-  static public TruckType getEnumFromId(String value) {
-        list().find {it.value == value }
+  static public PromoType getEnumFromId(String value) {
+        return PromoType.valueOf(value)
     }
 
 }

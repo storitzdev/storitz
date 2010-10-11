@@ -50,6 +50,7 @@ class BootStrap {
       returnArray['securityItems'] = it.securityItems
       returnArray['convenienceItems'] = it.convenienceItems
       returnArray['amenityItems'] = it.amenityItems
+      
       returnArray['title'] = it.title
       returnArray['description'] = it.description
       returnArray['logo'] = it.logo

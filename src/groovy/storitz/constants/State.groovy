@@ -106,11 +106,15 @@ public enum State {
   }
 
   public static State fromText(String key) {
-    return list().find{ it.getValue() == key }
+    def ret = list().find {it.display == key }
+    if (!ret) return State.valueOf(key)
+    return ret
   }
 
-  static public State getEnumFromId(String value) {
-        list().find {it.display == value }
-    }
+  public static State getEnumFromId(String value) {
+      def ret = list().find {it.display == value }
+      if (!ret) return State.valueOf(value)
+      return ret
+  }
 
 }
