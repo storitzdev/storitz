@@ -40,10 +40,10 @@ class MigrationController {
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":\"${myFeed.manager}\", \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":${myFeed.manager}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":\"${myFeed.manager}\", \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":${myFeed.manager}, \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
       }
     }
   }
