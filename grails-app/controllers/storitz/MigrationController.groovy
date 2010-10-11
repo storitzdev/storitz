@@ -15,6 +15,7 @@ import com.storitz.SpecialOffer
 import com.storitz.SiteUser
 import com.storitz.RentalAgreement
 import com.storitz.BankAccount
+import com.storitz.UserNotificationType
 
 class MigrationController {
 
@@ -77,8 +78,16 @@ class MigrationController {
       def users = []
       for (u in resp.users) {
         def user = new User()
+        def notificationTypes = []
+        for (n in u.notificationTypes) {
+          notificationTypes.add(n.notificationType)
+        }
+        u.notificationTypes.clear()
         bindData(user, u)
         user.save(flush: true)
+        for (n in notificationTypes) {
+          UserNotificationType.create(user, n)
+        }
         users.add(user)
       }
       def manager = User.findByUsername(resp.manager)

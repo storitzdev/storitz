@@ -19,6 +19,7 @@ import com.storitz.UnitTypeLookup
 import grails.util.Environment
 import com.storitz.SpecialOffer
 import storitz.constants.PromoType
+import com.storitz.UserNotificationType
 
 class BootStrap {
 
@@ -148,7 +149,7 @@ class BootStrap {
       println "Using the registered User Marshaller"
 
       def returnArray = [:]
-      returnArray['notificationTypes'] = it.notificationTypes as String
+      returnArray['notificationTypes'] = it.notificationTypes
       returnArray['username'] = it.username
       returnArray['password'] = it.password
       returnArray['email'] = it.email
@@ -172,6 +173,17 @@ class BootStrap {
 
       return returnArray
       
+    }
+
+    JSON.registerObjectMarshaller UserNotificationType, {
+      println "Using the registered UserNotificationType Marshaller"
+
+      def returnArray = [:]
+      returnArray['user'] = it.user.username
+      returnArray['notificationType'] = it.notificationType as String
+
+      return returnArray
+
     }
 
     JSON.registerObjectMarshaller SpecialOffer, {
