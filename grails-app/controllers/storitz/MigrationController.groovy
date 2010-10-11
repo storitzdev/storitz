@@ -54,10 +54,22 @@ class MigrationController {
       def resp = JSON.parse(respText)
       def feed
       if (resp.feed.feedType.name == 'SITELINK') {
-        feed = new SiteLink()
+        feed = new SiteLink(params['feed'])
         feed.properties = resp.feed
-        feed.save(flush: true)
+        feed.feedType = FeedType.SITELINK
+
+      } else if (resp.feedType.name == 'CENTERSHIFT') {
+        feed = new CenterShift(params['feed'])
+        feed.properties = resp.feed
+        feed.feedType = FeedType.CENTERSHIFT
+
       }
+      for (s in feed.sites) {
+        def site = new StorageSite()
+        bindData(site, s)
+        site.save(flush:true)
+      }
+      feed.save(flush: true)
     } else {
       println "Bad connection got response ${conn.responseCode}"
     }
