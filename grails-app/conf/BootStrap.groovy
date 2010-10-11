@@ -187,7 +187,7 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller SpecialOffer, {
-      println "Using the registered SiteUser Marshaller"
+      println "Using the registered SpecialOffer Marshaller"
 
       def returnArray = [:]
 

@@ -30,7 +30,7 @@ class MigrationController {
       def rentalAgreements = RentalAgreement.findAllByAgreementOwner(myFeed.manager)
       def siteUsers = []
       for (user in users) {
-        for (site in users.sites) {
+        for (site in user.sites) {
           siteUsers.add(site)
         }
       }
@@ -88,7 +88,7 @@ class MigrationController {
         bindData(user, u)
         user.save(flush: true)
         for (n in notificationTypes) {
-          UserNotificationType.create(user, )
+          UserNotificationType.create(user, n)
         }
         users.add(user)
       }
@@ -149,7 +149,11 @@ class MigrationController {
         s.images.clear()
         s.insurances.clear()
         s.specialOffers.clear()
-        def rentalAgreement = RentalAgreement.findByAgreementOwnerAndTitle(manager, s.rentalAgreement.title)
+
+        def rentalAgreement
+        if (s.rentalAgreement) {
+          rentalAgreement = RentalAgreement.findByAgreementOwnerAndTitle(manager, s.rentalAgreement.title)
+        }
         if (s.bankAccount) {
           def bankAccount = new BankAccount()
           bindData(bankAccount, s.bankAccount)
