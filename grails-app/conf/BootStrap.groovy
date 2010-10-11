@@ -72,7 +72,8 @@ class BootStrap {
       returnArray['isGate'] = it.isGate
       returnArray['isKeypad'] = it.isKeypad
       returnArray['isCamera'] = it.isCamera
-      returnArray['isUnitAlarmed'] = it.isManagerOnsite
+      returnArray['isManagerOnsite'] = it.isManagerOnsite
+      returnArray['isUnitAlarmed'] = it.isUnitAlarmed
       returnArray['hasElevator'] = it.hasElevator
       returnArray['adminFee'] = it.adminFee
       returnArray['lockFee'] = it.lockFee
@@ -93,6 +94,7 @@ class BootStrap {
       returnArray['endGate'] = it.endGate
       returnArray['startSundayGate'] = it.startSundayGate
       returnArray['endSundayGate'] = it.endSundayGate
+      returnArray['extendedHours'] = it.extendedHours
       returnArray['taxRateRental'] = it.taxRateRental
       returnArray['taxRateInsurance'] = it.taxRateInsurance
       returnArray['useProrating'] = it.useProrating
@@ -101,6 +103,7 @@ class BootStrap {
       returnArray['bankAccount'] = it.bankAccount
       returnArray['rentalAgreement'] = it.rentalAgreement
       returnArray['lastChange'] = it.lastChange
+      returnArray['lastUpdate'] = 0
 
       return returnArray
     }

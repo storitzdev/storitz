@@ -7,6 +7,7 @@ import storitz.constants.FeedType
 import com.storitz.SiteLink
 import com.storitz.CenterShift
 import com.storitz.User
+import org.codehaus.groovy.grails.web.json.JSONObject
 
 class MigrationController {
 
@@ -52,21 +53,41 @@ class MigrationController {
       println "Response was 200"
       def respText = conn.content.text
       def resp = JSON.parse(respText)
-      println "Response is ${resp.dump()}"
       def feed
-      if (resp.feed.feedType.name == 'SITELINK') {
+      if (resp.feed.feedType == 'SITELINK') {
         feed = new SiteLink(params['feed'])
+        for (es in resp.feed.entrySet()) {
+          println "Examining key=${es.key} value=${es.value}"
+          if (es.value == JSONObject.NULL) {
+            println "Changing null for ${es.key}"
+            es.value = null
+          }
+        }
         feed.properties = resp.feed
         feed.feedType = FeedType.SITELINK
 
-      } else if (resp.feedType.name == 'CENTERSHIFT') {
+      } else if (resp.feedType == 'CENTERSHIFT') {
         feed = new CenterShift(params['feed'])
+        for (es in resp.feed.entrySet()) {
+          println "Examining key=${es.key} value=${es.value}"
+          if (es.value == JSONObject.NULL) {
+            println "Changing null for ${es.key}"
+            es.value = null
+          }
+        }
         feed.properties = resp.feed
         feed.feedType = FeedType.CENTERSHIFT
 
       }
       for (s in feed.sites) {
         def site = new StorageSite()
+        for (es in s.entrySet()) {
+          println "Examining key=${es.key} value=${es.value}"
+          if (es.value == JSONObject.NULL) {
+            println "Changing null for ${es.key}"
+            es.value = null
+          }
+        }
         bindData(site, s)
         site.save(flush:true)
       }

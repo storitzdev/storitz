@@ -109,4 +109,8 @@ public enum State {
     return list().find{ it.getValue() == key }
   }
 
+  static public State getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }
