@@ -40,10 +40,10 @@ class MigrationController {
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":\"${myFeed.manager.username}\", \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":\"${myFeed.manager}\", \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":\"${myFeed.manager.username}\", \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":\"${myFeed.manager}\", \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
       }
     }
   }
@@ -75,11 +75,24 @@ class MigrationController {
         feed.feedType = FeedType.CENTERSHIFT
 
       }
+      // create the manager first
       // handle users
       def users = []
+      def manager = new User()
+      def notificationTypes = []
+      for (n in resp.manager.notificationTypes) {
+        def notificationType = NotificationType.get(n.notificationType)
+        notificationTypes.add(notificationType)
+      }
+      resp.manager.notificationTypes.clear()
+      bindData(manager, resp.manager)
+      manager.save(flush: true)
+      for (n in notificationTypes) {
+        UserNotificationType.create(user, n)
+      }
       for (u in resp.users) {
         def user = new User()
-        def notificationTypes = []
+        notificationTypes = []
         for (n in u.notificationTypes) {
           def notificationType = NotificationType.get(n.notificationType)
           notificationTypes.add(notificationType)
@@ -92,7 +105,6 @@ class MigrationController {
         }
         users.add(user)
       }
-      def manager = User.findByUsername(resp.manager)
       for (u in users) {
         u.manager = manager
       }
