@@ -22,4 +22,8 @@ public enum UnitType {
   static list() {
     [UNDEFINED, INTERIOR, UPPER, DRIVEUP]
   }
+
+  static public UnitType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
 }

@@ -25,4 +25,9 @@ public enum CenterShiftVersion {
     static list() {
       [CS3, CS4]
     }
+
+  static public CenterShiftVersion getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

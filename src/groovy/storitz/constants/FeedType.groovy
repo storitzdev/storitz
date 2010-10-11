@@ -21,4 +21,9 @@ public enum FeedType {
   static list() {
     [SITELINK, CENTERSHIFT, QUIKSTOR]
   }
+
+  static public FeedType getEnumFromId(String value) {
+    list().find {it.display == value }
+  }
+
 }

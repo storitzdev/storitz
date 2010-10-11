@@ -21,4 +21,8 @@ public enum TransactionStatus {
       [BEGUN, PAID, COMPLETE]
   }
 
+  static public TransactionStatus getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

@@ -27,4 +27,9 @@ public enum ContactType {
   static list() {
     [SUPPORT, POLICY, TECH, OPERATOR, BUSINESS]
   }
+
+  static public ContactType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

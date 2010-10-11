@@ -27,4 +27,9 @@ public enum ReportOutputType {
   static list() {
     [XLS, PDF, HTML]
   }
+
+  static public ReportOutputType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

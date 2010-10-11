@@ -24,4 +24,8 @@ public enum RentalUse {
   static labels() {
     [PERSONAL.display, BUSINESS.display]
   }
+
+  static public RentalUse getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
 }

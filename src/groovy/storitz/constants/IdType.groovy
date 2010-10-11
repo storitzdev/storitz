@@ -20,4 +20,9 @@ public enum IdType {
   static list() {
     [DRIVERSLICENSE, PASSPORT]
   }
+
+  static public IdType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

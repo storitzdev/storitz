@@ -34,4 +34,8 @@ public enum CreditCardType {
     return list().find{ it.getKey() == key }
   }
 
+  static public CreditCardType getEnumFromId(String value) {
+        list().find {it.display == value }
+  }
+
 }

@@ -26,4 +26,9 @@ public enum CenterShiftLocations {
   static list() {
     [SLC, DEN]
   }
+
+  static public CenterShiftLocations getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

@@ -39,4 +39,9 @@ public enum StreetType {
   static list() {
     [STREET, AVENUE, BOULEVARD, DRIVE, ROAD, PLACE, LANE, PARKWAY, ROUTE, JUNCTION, HIGHWAY, EXPRESSWAY, MOTORWAY, PARKWAY, TERRACE, HEIGHTS, WAY]
   }
+
+  static public StreetType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

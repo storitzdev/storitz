@@ -21,4 +21,7 @@ public enum TruckType {
       [FREE, RENTAL, NONE]
   }
 
+  static public TruckType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
 }

@@ -24,5 +24,9 @@ public enum NotificationEventType {
   static list() {
     [NEW_TENANT, PRE_MOVE_IN_PROPERTY, PRE_MOVE_IN_TENANT, POST_MOVE_IN]
   }
-  
+
+  static public NotificationEventType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

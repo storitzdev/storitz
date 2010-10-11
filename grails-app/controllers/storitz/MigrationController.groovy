@@ -52,6 +52,7 @@ class MigrationController {
       println "Response was 200"
       def respText = conn.content.text
       def resp = JSON.parse(respText)
+      println "Response is ${resp.dump()}"
       def feed
       if (resp.feed.feedType.name == 'SITELINK') {
         feed = new SiteLink(params['feed'])

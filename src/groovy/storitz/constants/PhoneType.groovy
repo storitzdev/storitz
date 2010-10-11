@@ -21,4 +21,9 @@ public enum PhoneType {
   static list() {
     [HOME, MOBILE, OFFICE]
   }
+
+  static public PhoneType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }

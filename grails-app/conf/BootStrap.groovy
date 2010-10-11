@@ -17,6 +17,8 @@ import storitz.CustomDomainMarshaller
 import storitz.constants.UnitType
 import com.storitz.UnitTypeLookup
 import grails.util.Environment
+import com.storitz.SpecialOffer
+import storitz.constants.PromoType
 
 class BootStrap {
 
@@ -56,7 +58,7 @@ class BootStrap {
       returnArray['address'] = it.address
       returnArray['address2'] = it.address2
       returnArray['city'] = it.city
-      returnArray['state'] = it.state
+      returnArray['state'] = it.state as String
       returnArray['zipcode'] = it.url
       returnArray['url'] = it.url
       returnArray['phone'] = it.phone
@@ -66,7 +68,7 @@ class BootStrap {
       returnArray['requiresInsurance'] = it.requiresInsurance
       returnArray['noInsuranceWaiver'] = it.noInsuranceWaiver
       returnArray['boxesAvailable'] = it.boxesAvailable
-      returnArray['freeTruck'] = it.freeTruck
+      returnArray['freeTruck'] = it.freeTruck as String
       returnArray['isGate'] = it.isGate
       returnArray['isKeypad'] = it.isKeypad
       returnArray['isCamera'] = it.isCamera
@@ -110,7 +112,7 @@ class BootStrap {
       returnArray['corpCode'] = it.corpCode
       returnArray['userName'] = it.userName
       returnArray['password'] = it.operatorName
-      returnArray['feedType'] = it.feedType
+      returnArray['feedType'] = it.feedType as String
       returnArray['manager'] = it.manager
       returnArray['operatorName'] = it.operatorName
       returnArray['sites'] = it.sites
@@ -123,12 +125,12 @@ class BootStrap {
       println "Using the registered CenterShift Marshaller"
 
       def returnArray = [:]
-      returnArray['cshiftVersion'] = it.cshiftVersion
+      returnArray['cshiftVersion'] = it.cshiftVersion as String
       returnArray['userName'] = it.userName
       returnArray['pin'] = it.pin
       returnArray['location'] = it.location
       returnArray['orgId'] = it.orgId
-      returnArray['feedType'] = it.feedType
+      returnArray['feedType'] = it.feedType as String
       returnArray['manager'] = it.manager
       returnArray['operatorName'] = it.operatorName
       returnArray['sites'] = it.sites
@@ -142,7 +144,7 @@ class BootStrap {
       println "Using the registered User Marshaller"
 
       def returnArray = [:]
-      returnArray['notificationTypes'] = it.notificationTypes
+      returnArray['notificationTypes'] = it.notificationTypes as String
       returnArray['username'] = it.username
       returnArray['password'] = it.password
       returnArray['email'] = it.email
@@ -166,6 +168,30 @@ class BootStrap {
 
       return returnArray
       
+    }
+
+    JSON.registerObjectMarshaller SpecialOffer, {
+      println "Using the registered SiteUser Marshaller"
+
+      def returnArray = [:]
+
+      returnArray['code'] = it.code
+      returnArray['concessionId'] = it.concessionId
+      returnArray['promoName'] = it.promoName
+      returnArray['description'] = it.description
+      returnArray['prepay'] = it.prepay
+      returnArray['promoQty'] = it.promoQty
+      returnArray['promoType'] = it.promoType as String
+      returnArray['prepayMonths'] = it.prepayMonths
+      returnArray['inMonth'] = it.inMonth
+      returnArray['expireMonth'] = it.expireMonth
+      returnArray['active'] = it.active
+      returnArray['featured'] = it.featured
+      returnArray['waiveAdmin'] = it.waiveAdmin
+      returnArray['endDate'] = it.endDate
+      returnArray['promoSize'] = it.promoSize
+
+      return returnArray
     }
 
     // create system ROLES

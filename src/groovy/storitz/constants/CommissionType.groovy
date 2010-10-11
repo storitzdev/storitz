@@ -20,4 +20,9 @@ public enum CommissionType {
     def getValue() { return display }
 
     static list() { [FIXED, PERCENTAGE] }
+
+  static public CommissionType getEnumFromId(String value) {
+        list().find {it.display == value }
+    }
+
 }
