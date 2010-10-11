@@ -13,6 +13,8 @@ import com.storitz.SiteImage
 import com.storitz.Insurance
 import com.storitz.SpecialOffer
 import com.storitz.SiteUser
+import com.storitz.RentalAgreement
+import com.storitz.BankAccount
 
 class MigrationController {
 
@@ -23,6 +25,7 @@ class MigrationController {
 
     if (myFeed) {
       def users = User.findAllByManager(myFeed.manager)
+      def rentalAgreements = RentalAgreement.findAllByAgreementOwner(myFeed.manager)
       def siteUsers = []
       for (user in users) {
         for (site in users.sites) {
@@ -35,11 +38,10 @@ class MigrationController {
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":\"${myFeed.manager.username}\", \"siteUsers\": ${siteUsers as JSON} }")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":\"${myFeed.manager.username}\", \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
-        println "Beginning output"
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":\"${myFeed.manager.username}\", \"siteUsers\": ${siteUsers as JSON} }")
+        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":\"${myFeed.manager.username}\", \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
       }
     }
   }
@@ -71,7 +73,26 @@ class MigrationController {
         feed.feedType = FeedType.CENTERSHIFT
 
       }
+      // handle users
+      def users = []
+      for (u in resp.users) {
+        def user = new User()
+        bindData(user, u)
+        user.save(flush: true)
+        users.add(user)
+      }
+      def manager = User.findByUsername(resp.manager)
+      for (u in users) {
+        u.manager = manager
+      }
       def sites = []
+      for (ra in resp.rentalAgreements) {
+        def rentalAgreement = new RentalAgreement()
+        ra.agreementOwner = null
+        rentalAgreement.agreementOwner = manager
+        bindData(rentalAgreement, ra)
+        rentalAgreement.save(flush: true)
+      }
       for (s in feed.sites) {
         def site = new StorageSite()
         for (i in s.securityItems) {
@@ -117,7 +138,16 @@ class MigrationController {
         s.images.clear()
         s.insurances.clear()
         s.specialOffers.clear()
+        def rentalAgreement = RentalAgreement.findByAgreementOwnerAndTitle(manager, s.rentalAgreement.title)
+        if (s.bankAccount) {
+          def bankAccount = new BankAccount()
+          bindData(bankAccount, s.bankAccount)
+          s.bankAccount = null
+          site.bankAccount = bankAccount
+        }
+        s.rentalAgreement = null
         bindData(site, s)
+        site.rentalAgreement = rentalAgreement
         site.save(flush:true)
         for (image in images) {
           image.site = site
@@ -132,22 +162,10 @@ class MigrationController {
         feed.addToSites(site)
       }
 
-      // handle users
-      def users = []
-      for (u in resp.users) {
-        def user = new User()
-        bindData(user, u)
-        user.save(flush: true)
-        users.add(user)
-      }
-      def manager = User.findByUsername(resp.manager)
-      for (u in users) {
-        u.manager = manager
-      }
       for (su in resp.siteUsers) {
         def site = StorageSite.findByTitle(su.site)
         def user = User.findByUsername(su.user)
-        def siteUser = SiteUser.link(site, user)
+        SiteUser.link(site, user)
       }
     } else {
       println "Bad connection got response ${conn.responseCode}"
