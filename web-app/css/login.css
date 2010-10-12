@@ -19,8 +19,7 @@
 #login .inner .cssform p {
 	clear: left;
 	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 105px;
+	padding: 5px 0 8px 105px;
 	border-top: 1px dashed gray;
 	margin-bottom: 10px;
 	height: 1%;
@@ -31,6 +30,6 @@
 	margin-left: -105px;
 	width: 100px;
 }
-#login .inner .login_message {color:red;}
+#login .inner .login_message {color:red; background-color:white;}
 #login .inner .text_ {width:120px;}
 #login .inner .chk {height:12px;}

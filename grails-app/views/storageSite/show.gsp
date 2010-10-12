@@ -136,7 +136,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.state.label" default="State"/></td>
 
-          <td valign="top" class="value">${fieldValue(bean: storageSiteInstance, field: "state")}</td>
+          <td valign="top" class="value">${storageSiteInstance.state.display}</td>
 
         </tr>
 
@@ -323,7 +323,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSite.freeTruck.label" default="Free Truck"/></td>
 
-          <td valign="top" class="value">${storageSiteInstance?.freeTruck}</td>
+          <td valign="top" class="value">${storageSiteInstance?.freeTruck?.display}</td>
 
         </tr>
 
