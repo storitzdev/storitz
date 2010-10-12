@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:set var="title" value="Storitz 500 Error"/>
+    <g:set var="title" value="Storitz 404 Error"  scope="request"/>
     <g:render template="/header" />
 
     <script type="text/javascript">

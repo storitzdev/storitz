@@ -4,13 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Create Storage Site"/>
-  <g:render template="/header"/>
-
-  <script type="text/javascript">
-    //<![CDATA[
-    //]]>
-  </script>
+  <g:set var="title" value="Show Storage Site" scope="request"/>
+  <g:render template="/header_admin"/>
 
 </head>
 <body>
@@ -23,7 +18,6 @@
   <div class="buttons">
     <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
     <span class="button"><g:link action="list">List Storage Sites</g:link></span>
-    %{--<span class="menuButton"><g:link class="report" action="report" id="${storageSiteInstance.id}">Storage Site Report</g:link></span>--}%
     <sec:ifAnyGranted roles="ROLE_ADMIN">
       <span class="button"><g:link action="create">Create New Storage Site</g:link></span>
     </sec:ifAnyGranted>

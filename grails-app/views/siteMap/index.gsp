@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Storitz Site Map"/>
+  <g:set var="title" value="Storitz Site Map" scope="request"/>
   <g:render template="/header"/>
 
 </head>

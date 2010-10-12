@@ -21,7 +21,7 @@
     var activeTab;
     var allTabs;
 
-    <g:set var="galleryImgWidth" value="${8 as Integer}" />
+    <g:set var="galleryImgWidth" value="${8 as Integer}" scope="request" />
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>

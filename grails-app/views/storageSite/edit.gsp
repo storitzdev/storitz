@@ -1,7 +1,7 @@
 <%@ page import="com.storitz.User; com.storitz.UserRole" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Edit Storage Site"/>
+  <g:set var="title" value="Edit Storage Site" scope="request"/>
   <g:render template="/header_admin"/>
   <p:css name="jquery-ui-1.8.4.custom" />
   <p:css name="anytimec" />

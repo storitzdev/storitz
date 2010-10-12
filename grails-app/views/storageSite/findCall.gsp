@@ -1,7 +1,7 @@
 <%@ page import="com.storitz.RentalTransaction; com.storitz.StorageSite" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <g:set var="title" value="Create Storage Site"/>
+    <g:set var="title" value="Create Storage Site" scope="request"/>
     <g:render template="/header"/>
 
     <script type="text/javascript">

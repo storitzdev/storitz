@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-    <g:set var="title" value="Create Commission Entry"/>
+    <g:set var="title" value="Create Commission Entry" scope="request" />
     <g:render template="/header" />
 
     <script type="text/javascript">
