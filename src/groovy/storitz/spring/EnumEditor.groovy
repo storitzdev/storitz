@@ -11,7 +11,7 @@ public class EnumEditor extends PropertyEditorSupport {
     }
 
     public String getAsText() {
-        return value?.id
+        return value?.display
     }
 
     public void setAsText(String text) {
