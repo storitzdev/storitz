@@ -24,6 +24,10 @@ public enum UnitType {
   }
 
   static public UnitType getEnumFromId(String value) {
-        list().find {it.display == value }
+        def ret = list().find {it.display == value }
+        if (!ret) {
+          return UnitType.valueOf(value)
+        }
+        return ret
     }
 }

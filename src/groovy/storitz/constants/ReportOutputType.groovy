@@ -29,7 +29,9 @@ public enum ReportOutputType {
   }
 
   static public ReportOutputType getEnumFromId(String value) {
-        list().find {it.display == value }
+        def ret = list().find {it.display == value }
+        if (!ret) return ReportOutputType.valueOf(value)
+        return value
     }
 
 }

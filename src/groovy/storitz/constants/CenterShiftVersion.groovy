@@ -27,7 +27,9 @@ public enum CenterShiftVersion {
     }
 
   static public CenterShiftVersion getEnumFromId(String value) {
-        list().find {it.display == value }
+        def ret = list().find {it.display == value }
+        if (!ret) return CenterShiftVersion.valueOf(value)
+        return ret
     }
 
 }

@@ -34,6 +34,11 @@ import com.storitz.StorageSite
 import com.storitz.SiteUser
 import storitz.reports.ReservationIdExpression
 import storitz.reports.NetCostExpression
+import ar.com.fdvs.dj.domain.builders.GroupBuilder
+import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
+import ar.com.fdvs.dj.domain.constants.GroupLayout
+import ar.com.fdvs.dj.domain.entities.DJGroup
+import ar.com.fdvs.dj.domain.DJCalculation
 
 class ReportsController {
 
@@ -224,6 +229,15 @@ class ReportsController {
     AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
             .setTitle("Net").setHeaderStyle(headerStyle).setWidth(18).setPattern("\$ 0.00").build();
 
+    GroupBuilder gb1 = new GroupBuilder();
+
+    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
+                .addFooterVariable(columnGross, DJCalculation.SUM, headerStyle)
+                .addFooterVariable(columnCommission, DJCalculation.SUM, headerStyle)
+                .addFooterVariable(columnNet, DJCalculation.SUM, headerStyle)
+                .setGroupLayout(GroupLayout.DEFAULT)
+                .build();
+
     drb.addColumn(columnDate)
       .addColumn(columnUnitNumber)
       .addColumn(columnReservationId)
@@ -233,6 +247,7 @@ class ReportsController {
       .addColumn(columnGross)
       .addColumn(columnCommission)
       .addColumn(columnNet)
+      .addGroup(g1)
 
     DynamicReport dr = drb.build()
 

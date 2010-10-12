@@ -29,7 +29,9 @@ public enum ContactType {
   }
 
   static public ContactType getEnumFromId(String value) {
-        list().find {it.display == value }
+        def ret = list().find {it.display == value }
+        if (!ret) return ContactType.valueOf(value)
+        return ret
     }
 
 }

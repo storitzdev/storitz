@@ -41,7 +41,9 @@ public enum StreetType {
   }
 
   static public StreetType getEnumFromId(String value) {
-        list().find {it.display == value }
+        def ret = list().find {it.display == value }
+        if (!ret) return StreetType.valueOf(value)
+        return ret
     }
 
 }

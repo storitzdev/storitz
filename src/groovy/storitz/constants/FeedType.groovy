@@ -23,7 +23,9 @@ public enum FeedType {
   }
 
   static public FeedType getEnumFromId(String value) {
-    list().find {it.display == value }
+    def ret = list().find {it.display == value }
+    if (!ret) return FeedType.valueOf(value)
+    return ret
   }
 
 }

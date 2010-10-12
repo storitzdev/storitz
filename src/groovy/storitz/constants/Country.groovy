@@ -309,7 +309,9 @@ public enum Country {
   }
 
   public static Country fromText(String key) {
-    return list().find{ it.getKey() == key }
+    def ret = list().find{ it.getKey() == key }
+    if (!ret) return Country.valueOf(key)
+    return ret
   }
 
 }
