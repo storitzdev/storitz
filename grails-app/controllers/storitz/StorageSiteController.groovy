@@ -492,7 +492,11 @@ class StorageSiteController {
     // preload required insurance
     def insuranceId = params.insuranceId
     if (site.noInsuranceWaiver && (!insuranceId || insuranceId < 0)) {
-      insuranceId = site.insurances.min{ it.premium }.id
+      if (site.insurances.size() > 0) {
+        insuranceId = site.insurances.min{ it.premium }.id
+      } else {
+        insuranceId = -999
+      }
     }
 
     UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : null
