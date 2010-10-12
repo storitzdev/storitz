@@ -7,6 +7,7 @@
   <p:css name="anytimec" />
 
   <p:dependantJavascript>
+  <p:javascript src="scriptaculous183"/>
   <script src="https://www.google.com/jsapi" type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
@@ -57,7 +58,7 @@
          newItem = parseInt(lastInputName.substr(lastInputName.indexOf('_') + 1)) + 1;
       }
       var itemName = type + 'Item_' + newItem;
-      var liElem = new Element('li', {id:itemName});
+      var liElem = new Element('li');
       var newInput = new Element('input', {
         id: itemName,
         name: itemName,
@@ -494,7 +495,7 @@
 
           <div class="checkout_fields">
             <div style="width:660px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'description', 'errors')}">
-              <fckeditor:config CustomConfigurationsPath="${resource(file:'/js/fckstoritz.js')}"/>
+              <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
               <fckeditor:editor
                 name="description"
                 width="650"
