@@ -13,7 +13,7 @@
     <div style="clear: both;"></div>
   </div>
   <div style="margin-left: 50px;">
-    <storitz:image src="tagline_clickstoredone.gif" absolute="true" style="border-style: none;" width="170" height="21" alt="Click. Store. Done."/>
+    <storitz:image src="${createLinkTo(dir:'images', file:'tagline_clickstoredone.gif', absolute: true)}" absolute="true" style="border-style: none;" width="170" height="21" alt="Click. Store. Done."/>
   </div>
   <div style="height: 3em;"></div>
 

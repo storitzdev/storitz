@@ -146,5 +146,6 @@ uiperformance.bundles = [
 
 uiperformance.exclusions = [
    "**/logo_storitz.gif",
+   "**/tagline_clickstoredone.gif",
    "**/plugins/**"
 ]
