@@ -1182,25 +1182,6 @@ class SiteLinkService {
     def waiveAdmin = false
     def deposit = site.deposit ? site.deposit : 0
 
-    if (promo) {
-
-      waiveAdmin = promo.waiveAdmin
-
-      switch (promo.promoType) {
-        case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promo.expireMonth;
-          break;
-
-        case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
-          break;
-
-        case "FIXED_RATE":
-          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promo.expireMonth;
-          break;
-      }
-    }
-
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -1221,11 +1202,33 @@ class SiteLinkService {
     cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
 
     def subTotal
+    def firstMonthRate
     if (!site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
-        durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
-        subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+      subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      firstMonthRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     } else {
       subTotal = (rate*durationMonths) + (premium*durationMonths)
+      firstMonthRate = rate
+    }
+
+    if (promo) {
+
+      waiveAdmin = promo.waiveAdmin
+
+      switch (promo.promoType) {
+        case "AMOUNT_OFF":
+          offerDiscount = promo.promoQty * promo.expireMonth;
+          break;
+
+        case "PERCENT_OFF":
+          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
+          break;
+
+        case "FIXED_RATE":
+          offerDiscount = ((firstMonthRate - promo.promoQty) > 0 ? (firstMonthRate - promo.promoQty): 0) * promo.expireMonth;
+          break;
+      }
     }
 
 
