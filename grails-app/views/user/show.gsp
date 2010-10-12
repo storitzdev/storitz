@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <g:set var="title" value="Show User" scope="request"/>
-    <g:render template="/header" />
+    <g:render template="/header_admin" />
 
     <script type="text/javascript">
 //<![CDATA[

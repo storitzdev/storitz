@@ -144,7 +144,11 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
     border: 1px solid;
 }
 
-.list th {
+.list tr {
+    border: 1px solid;
+}
+
+.list th, .dialog th {
     background: #ccc;
 }
 
@@ -180,6 +184,13 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 
 .dialog table {
     padding: 5px 0;
+}
+
+.dialog td {
+	padding: 0.5em;
+	border: 1px solid #CCC;
+	/*white-space: nowrap;
+	overflow: hidden;*/
 }
 
 .prop {
