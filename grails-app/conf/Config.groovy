@@ -143,3 +143,8 @@ uiperformance.bundles = [
             'tablekit',
             'calendarview']]
 ]
+
+uiperformance.exclusions = [
+   "**/logo_storitz.gif",
+   "**/plugins/**"
+]
