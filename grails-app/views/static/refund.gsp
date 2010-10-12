@@ -25,7 +25,7 @@
 
         <h1>Refund Policy</h1>
         <p>
-          Storitz provides a service for processing and fulfilling your transaction to obtain storage space from our clients, the providers of storage space (“Providers”).  Storitz facilitates the rental process for you, and collects the first month’s rent and other fees due to the Provider with respect to the Rental Space.  Your contract with respect to the Rental Space will be entered into between you and the applicable Provider.  Your Transaction is also subject to the terms and conditions that your Provider may have as detailed in your Lease Agreement. In the event that you notify Storitz that you desire to cancel your Lease Agreement with your Provider, the following policies shall apply:
+          In the event that you wish to cancel a rental that you made via Storitz, the following policies will apply:
         </p>
         <p>
           <span class="legalHeader">Cancellation Prior to Move-In Date:</span>  Provided you have never occupied your Rental Space and you request a refund from Storitz prior to your Move-In Date, Storitz will refund you the full Transaction Amount, less a $15.00 processing fee which shall be retained by Storitz.
