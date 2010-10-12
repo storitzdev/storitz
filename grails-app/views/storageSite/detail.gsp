@@ -21,7 +21,7 @@
     var activeTab;
     var allTabs;
 
-    <g:set var="galleryImgWidth" value="${8 as Integer}" scope="request" />
+    <g:set var="galleryImgWidth" value="${8 as Integer}" />
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>
@@ -296,7 +296,7 @@
 //]]>
   </script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&amp;sensor=false&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
- </p:dependantJavascript>
+  </p:dependantJavascript>
   </head>
   <body>
     <div id="body">
