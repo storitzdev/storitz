@@ -27,8 +27,8 @@ class BootStrap {
 
   def init = { servletContext ->
 
-    println "Starting hsqldb"
     if(Environment.current == Environment.DEVELOPMENT){
+      println "Starting hsqldb"
       String[] databaseManagerOptions = ['--url', 'jdbc:hsqldb:mem:devDB', '--noexit'];
       org.hsqldb.util.DatabaseManagerSwing.main(databaseManagerOptions)
     }
@@ -1008,6 +1008,8 @@ class BootStrap {
     new UnitTypeLookup(id:589, description:"Mailbox (lg)", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:590, description:"PAE-Parking", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:591, description:"CDNV-Climate Down Normal", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:592, description:"Upstairs Slanted Ceiling", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:593, description:"Canopy Pull Thru", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
   }
 
 

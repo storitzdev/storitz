@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="body">
-    <g:render template="/topnav" />
+      <g:render template="/topnav" />
       <div id="stcontent">
         <g:render template="/logo_bar" />
         <div id="site_info" class="left" style="margin-top: 26px;">
@@ -108,7 +108,7 @@
             <div style="height: 10px;"></div>
             <div>
               <table class="checkoutComplete">
-                <g:if test="${rentalTransactionInstance.idNumber}"> 
+                <g:if test="${rentalTransactionInstance.idNumber}">
                   <tr>
                     <td style="width:200px;">Transaction #:</td>
                     <td>${rentalTransactionInstance.idNumber}</td>
@@ -185,11 +185,11 @@
           </div>
         </div>
 
-        <div style="clear:both; height:30px;"></div>
-        <g:render template="/footer" />
-        <g:render template="/size_popup" />
       </div>
     </div>
+    <div style="clear:both; height:30px;"></div>
+    <g:render template="/footer" />
+    <g:render template="/size_popup" />
     <!-- Google Code for Bookings Conversion Page -->
     <script type="text/javascript">
     /* <![CDATA[ */
@@ -205,7 +205,7 @@
     </script>
     <noscript>
     <div style="display:inline;">
-    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1017239961/?label=bz-3CLei_QEQmbOH5QM&amp;guid=ON&amp;script=0"/>
+      <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1017239961/?label=bz-3CLei_QEQmbOH5QM&amp;guid=ON&amp;script=0"/>
     </div>
     </noscript>
   </body>
