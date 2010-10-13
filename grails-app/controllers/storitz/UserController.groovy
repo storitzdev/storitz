@@ -283,6 +283,11 @@ class UserController {
       def pass = springSecurityService.encodePassword(params.passwd)
       person.password = pass
       person.enabled = true
+      if (!person.validate()) {
+        flash.message = 'There is a problem with the User entered.'
+        render view: 'create', model: [person: person, authorityList: Role.list() ]
+        return
+      }
       if (person.save()) {
           addRoles(person)
           addSites(person)

@@ -35,6 +35,7 @@ import storitz.reports.UnitTypeExpression
 import storitz.constants.UnitType
 import ar.com.fdvs.dj.domain.constants.Border
 import ar.com.fdvs.dj.domain.constants.LabelPosition
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter
 
 class ReportsController {
 
@@ -290,7 +291,8 @@ class ReportsController {
 
     JRDataSource ds = new JRBeanCollectionDataSource(results);
     JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, 'HTML', [:]);
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, 'HTML',
+            [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/djReport/image?image=".toString()]);
     reportWriter.writeTo(response);
 
   }
