@@ -608,7 +608,9 @@ class StorageSiteController {
   }
 
   def detailTotals = {
+
     def moveInDate
+    def unitType = UnitType.valueOf(params.unitType)
     if (params.moveInDate && params.moveInDate instanceof Date) {
       moveInDate = params.moveInDate
     } else {
@@ -629,7 +631,7 @@ class StorageSiteController {
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     if (params.action == 'unitType') {
       unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitType == params.unitType }.collect{ it.unitsize }.unique()
+      sizeList = site.units.findAll{ it.unitType == unitType }.collect{ it.unitsize }.unique()
     } else {
       unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
       sizeList = site.units.collect { it.unitsize }.unique()
@@ -642,12 +644,12 @@ class StorageSiteController {
     def bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
       if (!bestUnit) {
         if (params.action == 'unitType') {
           // find closest size
-          def bestSize =  site.units.findAll{ it.unitType == params.unitType }.min{ abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
-          bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == bestSize }.min{ it.price }
+          def bestSize =  site.units.findAll{ it.unitType == unitType }.min{ abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
+          bestUnit = site.units.findAll{ it.unitType == unitType && it.unitsize.id == bestSize }.min{ it.price }
         } else {
           bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
         }

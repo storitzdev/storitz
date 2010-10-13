@@ -15,6 +15,7 @@ import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
 import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
 import ar.com.fdvs.dj.output.ReportWriter
 import ar.com.fdvs.dj.output.ReportWriterFactory
+import ar.com.fdvs.dj.domain.builders.StyleBuilder
 import com.storitz.RentalTransaction
 import com.storitz.ReportPeriod
 import grails.plugins.springsecurity.Secured
@@ -32,6 +33,8 @@ import storitz.reports.ReservationIdExpression
 import ar.com.fdvs.dj.domain.*
 import storitz.reports.UnitTypeExpression
 import storitz.constants.UnitType
+import ar.com.fdvs.dj.domain.constants.Border
+import ar.com.fdvs.dj.domain.constants.LabelPosition
 
 class ReportsController {
 
@@ -236,9 +239,25 @@ class ReportsController {
     AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
             .setTitle("Net").setHeaderStyle(headerStyle).setWidth(18).setPattern("\$ 0.00").build();
 
+    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM,headerVariables);
+	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM,headerVariables);
+	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM,headerVariables);
+	drb.setGlobalFooterVariableHeight(new Integer(25));
+
     GroupBuilder gb1 = new GroupBuilder();
 
+    Style dailyFooterStyle = new StyleBuilder(false).setFont(Font.ARIAL_SMALL)
+ 			.setHorizontalAlign(HorizontalAlign.RIGHT)
+ 			.setVerticalAlign(VerticalAlign.MIDDLE)
+ 			.setPadding(new Integer(0))
+ 			.setStretchWithOverflow(false)
+ 			.build();
+
+    DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", dailyFooterStyle, LabelPosition.LEFT);
+
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
+                .setFooterLabel(dailySubLabel)
+                .setFooterVariablesHeight(new Integer(30))
                 .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
                 .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
                 .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
@@ -271,7 +290,7 @@ class ReportsController {
 
     JRDataSource ds = new JRBeanCollectionDataSource(results);
     JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.getValue(), [:]);
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, 'HTML', [:]);
     reportWriter.writeTo(response);
 
   }

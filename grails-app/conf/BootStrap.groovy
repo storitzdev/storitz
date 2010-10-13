@@ -27,11 +27,11 @@ class BootStrap {
 
   def init = { servletContext ->
 
-    if(Environment.current == Environment.DEVELOPMENT){
-      println "Starting hsqldb"
-      String[] databaseManagerOptions = ['--url', 'jdbc:hsqldb:mem:devDB', '--noexit'];
-      org.hsqldb.util.DatabaseManagerSwing.main(databaseManagerOptions)
-    }
+//    if(Environment.current == Environment.DEVELOPMENT){
+//      println "Starting hsqldb"
+//      String[] databaseManagerOptions = ['--url', 'jdbc:hsqldb:mem:devDB', '--noexit'];
+//      org.hsqldb.util.DatabaseManagerSwing.main(databaseManagerOptions)
+//    }
 
     JSON.registerObjectMarshaller(new CustomDomainMarshaller())
 
