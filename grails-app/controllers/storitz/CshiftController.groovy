@@ -32,7 +32,7 @@ class CshiftController {
   def save = {
     def cshiftInstance = new CenterShift(params)
     cshiftInstance.feedType = FeedType.CENTERSHIFT
-    if (cshiftInstance.save(flush: true)) {
+    if (cshiftInstance.validate() && cshiftInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)

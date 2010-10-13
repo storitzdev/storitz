@@ -29,7 +29,7 @@ class SiteLinkController {
   def save = {
     def siteLinkInstance = new SiteLink(params)
     siteLinkInstance.feedType = FeedType.SITELINK
-    if (siteLinkInstance.save(flush: true)) {
+    if (siteLinkInstance.validate() && siteLinkInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()
       siteLinkService.corpSites(siteLinkInstance, stats)
