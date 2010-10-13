@@ -89,6 +89,7 @@ class RentalTransactionController {
     }
 
     def save = {
+      
         def site = StorageSite.get(params.site)
         params.remove('site')
         def storageSize = StorageSize.get(params.searchSize as Long)

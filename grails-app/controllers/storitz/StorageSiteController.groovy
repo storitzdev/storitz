@@ -658,6 +658,9 @@ class StorageSiteController {
       // TODO - decide on best price or best price for a given size
       bestUnit = site.units.min{ it.price }
     }
+    if (!bestUnit) {
+      println "Best Unit not found for site:${site.id} unitType:${params.unitType} unitSize:${unitSize}"
+    }
 
     def additionalFees = (site.adminFee ? site.adminFee : 0 ) + (site.lockFee ? site.lockFee : 0)
     def chosenPromo = ''
@@ -688,7 +691,7 @@ class StorageSiteController {
 
     def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit.price}, \"pushRate\":${bestUnit.pushRate}, \"unitId\":${bestUnit.id}, \"chosenUnitType\":\"${bestUnit.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit.unitType.display}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${bestUnit?.pushRate}, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType.display}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
 
   }
 
