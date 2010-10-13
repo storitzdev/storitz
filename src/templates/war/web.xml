@@ -74,6 +74,17 @@
         <servlet-class>org.codehaus.groovy.grails.web.pages.GroovyPagesServlet</servlet-class>
     </servlet>
 
+    <!-- Jasper Reports Image servlet -->
+    <servlet>
+        <servlet-name>image</servlet-name>
+        <servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>image</servlet-name>
+      <url-pattern>/reports/image/*</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>gsp</servlet-name>
         <url-pattern>*.gsp</url-pattern>

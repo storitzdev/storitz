@@ -36,6 +36,10 @@ import storitz.constants.UnitType
 import ar.com.fdvs.dj.domain.constants.Border
 import ar.com.fdvs.dj.domain.constants.LabelPosition
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter
+import storitz.constants.ReportOutputType
+import net.sf.jasperreports.engine.JRExporter
+import net.sf.jasperreports.j2ee.servlets.ImageServlet
+import net.sf.jasperreports.engine.JRExporterParameter
 
 class ReportsController {
 
@@ -154,8 +158,6 @@ class ReportsController {
       flash.message = "Bad report parameters - please re-enter dates and output type."
       redirect(action: "index", model: [reportPeriod: period])
     }
-
-    println "Report output type: ${period.outputType}"
 
     startDate.setTime(Date.parse('MM/dd/yyyy', params.startDate))
     startDate.clearTime()
@@ -291,8 +293,19 @@ class ReportsController {
 
     JRDataSource ds = new JRBeanCollectionDataSource(results);
     JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, 'HTML',
-            [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/djReport/image?image=".toString()]);
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value,
+            [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
+
+    def imagesMap = new HashMap()
+    JRExporter exporter = reportWriter.getExporter();
+    exporter.setParameters([(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
+    exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP, imagesMap);
+    exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, request.getContextPath() + "/reports/image/?image=");
+    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+
+    session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
+    session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
+    
     reportWriter.writeTo(response);
 
   }
