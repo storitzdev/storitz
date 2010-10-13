@@ -18,6 +18,7 @@ import storitz.constants.NotificationEventType
 import java.math.RoundingMode
 import grails.plugins.springsecurity.Secured
 import com.storitz.StorageSize
+import storitz.constants.UnitType
 
 class RentalTransactionController {
 
@@ -108,8 +109,8 @@ class RentalTransactionController {
           rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
         }
         rentalTransactionInstance.site = site
-        rentalTransactionInstance.unitType = params.chosenType
         rentalTransactionInstance.searchSize = storageSize
+        rentalTransactionInstance.unitType = params.chosenType
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
         rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 

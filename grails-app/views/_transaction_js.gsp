@@ -51,7 +51,10 @@ function updateTransaction() {
      opt.update(unitType.value);
      $('unitType').insert(opt);
   });
-
+  $('chosenType').value = chosenUnitType;
+  $('SC_searchSize').value = searchSize;
+  $('searchSize').value = searchSize;
+  
   // update dates
   $('transMoveInDate').update(startDate);
   $('paidThruDate').update(paidThruDate);

@@ -127,7 +127,7 @@
 
         <div class="checkout_fields">
           <div style="width:250px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'outputType', 'errors')}">
-            <g:select id="outputType" style="width:230px;" name="outputType" from="${storitz.constants.ReportOutputType?.list()}" value="${reportPeriod?.outputType}" optionValue="display" optionKey="value" />
+            <g:select id="outputType" style="width:230px;" name="outputType" from="${storitz.constants.ReportOutputType?.list()}" value="${reportPeriod?.outputType}" optionValue="display" />
           </div>
           <div style="width:250px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'site', 'errors')}">
             <input name="sitename" id="sitename" value="${reportPeriod?.site?.title}" style="width:230px;" />

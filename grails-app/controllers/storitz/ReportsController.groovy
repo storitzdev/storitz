@@ -1,44 +1,37 @@
 package storitz
 
-import ar.com.fdvs.dj.domain.builders.FastReportBuilder
-import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
-import ar.com.fdvs.dj.domain.builders.ColumnBuilder
-import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn
-import storitz.reports.NameExpression
-import storitz.constants.State
-import storitz.constants.Country
-import storitz.constants.PhoneType
-import ar.com.fdvs.dj.domain.DynamicReport
-import com.storitz.RentalTransaction
-import storitz.constants.TransactionStatus
-import ar.com.fdvs.dj.output.ReportWriterFactory
-import ar.com.fdvs.dj.output.ReportWriter
-import ar.com.fdvs.dj.core.layout.ClassicLayoutManager
 import ar.com.fdvs.dj.core.DynamicJasperHelper
+import ar.com.fdvs.dj.core.layout.ClassicLayoutManager
+import ar.com.fdvs.dj.domain.builders.ColumnBuilder
+import ar.com.fdvs.dj.domain.builders.FastReportBuilder
+import ar.com.fdvs.dj.domain.builders.GroupBuilder
+import ar.com.fdvs.dj.domain.constants.Font
+import ar.com.fdvs.dj.domain.constants.GroupLayout
+import ar.com.fdvs.dj.domain.constants.HorizontalAlign
+import ar.com.fdvs.dj.domain.constants.VerticalAlign
+import ar.com.fdvs.dj.domain.entities.DJGroup
+import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn
+import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
+import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
+import ar.com.fdvs.dj.output.ReportWriter
+import ar.com.fdvs.dj.output.ReportWriterFactory
+import com.storitz.RentalTransaction
+import com.storitz.ReportPeriod
+import grails.plugins.springsecurity.Secured
+import grails.util.GrailsUtil
+import java.awt.Color
+import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import net.sf.jasperreports.engine.JRDataSource
-import grails.util.GrailsUtil
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import ar.com.fdvs.dj.domain.Style
-import grails.plugins.springsecurity.Secured
-import ar.com.fdvs.dj.domain.ImageBanner
-import ar.com.fdvs.dj.domain.AutoText
-import com.storitz.ReportPeriod
-import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder
-import java.awt.Color
-import ar.com.fdvs.dj.domain.constants.HorizontalAlign
-import com.storitz.User
-import com.storitz.UserRole
-import com.storitz.StorageSite
-import com.storitz.SiteUser
-import storitz.reports.ReservationIdExpression
+import storitz.constants.TransactionStatus
+import storitz.reports.DateExpression
+import storitz.reports.NameExpression
 import storitz.reports.NetCostExpression
-import ar.com.fdvs.dj.domain.builders.GroupBuilder
-import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
-import ar.com.fdvs.dj.domain.constants.GroupLayout
-import ar.com.fdvs.dj.domain.entities.DJGroup
-import ar.com.fdvs.dj.domain.DJCalculation
+import storitz.reports.ReservationIdExpression
+import ar.com.fdvs.dj.domain.*
+import storitz.reports.UnitTypeExpression
+import storitz.constants.UnitType
 
 class ReportsController {
 
@@ -98,6 +91,11 @@ class ReportsController {
       drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
       drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
 
+      drb.addField("contactPrimary.firstName", String.class.getName())
+      drb.addField("contactPrimary.lastName", String.class.getName())
+      drb.addField("contactPrimary.suffixName", String.class.getName())
+      drb.addField("unitType", UnitType.class.getName())      
+
       SimpleColumn columnDate = ColumnBuilder.getInstance().
         setColumnProperty("bookingDate", Date.class.getName()).
         setTitle("Date").setWidth(30).build()
@@ -105,10 +103,6 @@ class ReportsController {
       SimpleColumn columnSite = ColumnBuilder.getInstance().
         setColumnProperty("site.title", String.class.getName()).
         setTitle("Site").setWidth(35).build()
-
-      drb.addField("contactPrimary.firstName", String.class.getName())
-      drb.addField("contactPrimary.lastName", String.class.getName())
-      drb.addField("contactPrimary.suffixName", String.class.getName())      
 
       AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
               .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
@@ -118,12 +112,11 @@ class ReportsController {
         setTitle("Email").setWidth(45).build()
 
       SimpleColumn columnSize = ColumnBuilder.getInstance().
-        setColumnProperty("searchSize.display", String.class.getName()).
+        setColumnProperty("searchSize.description", String.class.getName()).
         setTitle("Unit Size").setWidth(15).build()
 
-      SimpleColumn columnUnitType = ColumnBuilder.getInstance().
-        setColumnProperty("unitType.display", String.class.getName()).
-        setTitle("Unit Type").setWidth(15).build()
+      AbstractColumn columnUnitType = ColumnBuilder.getInstance().setCustomExpression(new UnitTypeExpression())
+              .setTitle("Unit Type").setHeaderStyle(headerStyle).setWidth(15).build();
 
       drb.addColumn(columnDate)
         .addColumn(columnSite)
@@ -148,6 +141,7 @@ class ReportsController {
       reportWriter.writeTo(response);
     }
 
+  @Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
   def site = {
 
     ReportPeriod period = new ReportPeriod(params)
@@ -156,6 +150,8 @@ class ReportsController {
       flash.message = "Bad report parameters - please re-enter dates and output type."
       redirect(action: "index", model: [reportPeriod: period])
     }
+
+    println "Report output type: ${period.outputType}"
 
     startDate.setTime(Date.parse('MM/dd/yyyy', params.startDate))
     startDate.clearTime()
@@ -175,37 +171,48 @@ class ReportsController {
     Style headerStyle = getStyle(config.headerStyle)
     Style detailStyle = getStyle(config.detailStyle)
 
+    Style headerVariables = new Style();
+  	headerVariables.setFont(Font.ARIAL_MEDIUM_BOLD);
+  	headerVariables.setHorizontalAlign(HorizontalAlign.RIGHT);
+  	headerVariables.setVerticalAlign(VerticalAlign.MIDDLE);
+
     String subtitle = "From ${params.startDate} to ${params.endDate}"
 
      drb.setTitle("Site Activity Report")                                      //defines the title of the report
-       .setSubtitle(subtitle)
-       .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
-       .setDetailHeight(15)                                            //defines the height for each record of the report
-       .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
-       .setColumnsPerPage(1)
-       .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
-       .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
-       .setPrintBackgroundOnOddRows(true)
-       .setUseFullPageWidth(true)
+      .setSubtitle(subtitle)
+      .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
+      .setDetailHeight(15)                                            //defines the height for each record of the report
+      .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
+      .setColumnsPerPage(1)
+      .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
+      .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
+      .setGrandTotalLegend("Grand Total")
+      .setGrandTotalLegendStyle(headerVariables)
+      .setPrintBackgroundOnOddRows(true)
+      .setUseFullPageWidth(true)
 
     // Footer definition
     drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
     drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
 
-    SimpleColumn columnDate = ColumnBuilder.getInstance().
-      setColumnProperty("bookingDate", Date.class.getName()).
-      setTitle("Date").setWidth(20).setPattern("MM/dd/yy").build()
+    drb.addField("contactPrimary.firstName", String.class.getName())
+    drb.addField("contactPrimary.lastName", String.class.getName())
+    drb.addField("contactPrimary.suffixName", String.class.getName())
+    drb.addField("bookingDate", Date.class.getName())
+    drb.addField("reserved", Boolean.class.getName())
+    drb.addField("reservationId", String.class.getName())
+    drb.addField("idNumber", String.class.getName())
+
+
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression())
+            .setTitle("Date").setHeaderStyle(headerStyle).setWidth(18).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
       setColumnProperty("feedUnitNumber", String.class.getName()).
       setTitle("Unit #").setWidth(15).build()
 
     AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
-            .setTitle("Res #").setHeaderStyle(headerStyle).setWidth(15).build();
-
-    drb.addField("contactPrimary.firstName", String.class.getName())
-    drb.addField("contactPrimary.lastName", String.class.getName())
-    drb.addField("contactPrimary.suffixName", String.class.getName())
+            .setTitle("Res #").setHeaderStyle(headerStyle).setWidth(22).build();
 
     AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
             .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
@@ -232,9 +239,9 @@ class ReportsController {
     GroupBuilder gb1 = new GroupBuilder();
 
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
-                .addFooterVariable(columnGross, DJCalculation.SUM, headerStyle)
-                .addFooterVariable(columnCommission, DJCalculation.SUM, headerStyle)
-                .addFooterVariable(columnNet, DJCalculation.SUM, headerStyle)
+                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
                 .setGroupLayout(GroupLayout.DEFAULT)
                 .build();
 

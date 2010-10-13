@@ -7,7 +7,7 @@
   <div>
     <div style="z-index: 100; float: left; margin-top: 22px;">
       <g:link controller="home" action="index">
-        <storitz:image src="${createLinkTo(dir:'images', file:'tagline_clickstoredone.gif', absolute: true)}" absolute="true" style="border-style: none;" width="950" height="61" alt="Storitz Logo"/>
+        <storitz:image src="${createLinkTo(dir:'images', file:'logo_storitz.gif', absolute: true)}" absolute="true" style="border-style: none;" width="950" height="61" alt="Storitz Logo"/>
       </g:link>
     </div>
     <div style="clear: both;"></div>
