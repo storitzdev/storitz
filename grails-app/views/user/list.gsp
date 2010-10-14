@@ -6,18 +6,11 @@
     <g:set var="title" value="User List" scope="request"/>
     <g:render template="/header_admin"/>
 
-    <p:css name="jquery-ui-1.8.4.custom" />
-
     <p:dependantJavascript>
-      <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
       <script type="text/javascript">
 //<![CDATA[
 
-      google.load("jquery", "1.4.2");
-      google.load("jqueryui", "1.8.4");
-
-      google.setOnLoadCallback(function() {
+      $(document).ready(function() {
         jQuery.noConflict();
 
         setupUserSelector();

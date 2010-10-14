@@ -5,20 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Edit CenterShift Feed" scope="request"/>
-  <g:render template="/header"/>
-
+  <g:render template="/header_admin"/>
   <script type="text/javascript">
     //<![CDATA[
-    function setupForm() {
-      $('cshiftVersion').observe('change', function(event) {
-        Effect.toggle('orgId_label', 'appear', {duration: 0.25});
-        Effect.toggle('orgId', 'appear', {queue: 'end', duration: 0.1});
-      });
-    }
+    $(document).ready(function() {
+      jQuery.noConflict();
 
-    Event.observe(window, 'load', function() {
       setupForm();
     });
+
+    function setupForm() {
+      jQuery('#cshiftVersion').change(function(event) {
+        jQuery('#orgId_label').toggle('blind', {}, 500);
+        jQuery('#orgId').toggle('blind', {}, 500);
+      });
+    }
     //]]>
   </script>
 

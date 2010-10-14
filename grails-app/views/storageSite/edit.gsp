@@ -2,19 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Edit Storage Site" scope="request"/>
-  <g:render template="/header_admin"/>
-  <p:css name="jquery-ui-1.8.4.custom" />
   <p:css name="anytimec" />
+  <g:render template="/header_admin"/>
 
   <p:dependantJavascript>
-  <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
     //<![CDATA[
 
-    google.load("jqueryui", "1.8.5");
-
-    google.setOnLoadCallback(function() {
+    $(document).ready(function() {
       jQuery.noConflict();
 
       setupTimePickers();
@@ -562,7 +557,7 @@
               <ul id="securityItemList">
                 <g:each in="${storageSiteInstance?.securityItems}" status="i" var="c">
                   <li id="securityItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="securityItem_${i}"/>  <a href="#" onclick="$('securityItem_${i}').remove();checkAddItem('security');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="securityItem_${i}"/>  <a href="#" onclick="jQuery('#securityItem_${i}').remove();checkAddItem('security');">delete</a>
                   </li>
                 </g:each>
               </ul>
@@ -589,7 +584,7 @@
               <ul id="convenienceItemList">
                 <g:each in="${storageSiteInstance?.convenienceItems}" status="i" var="c">
                   <li id="convenienceItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="convenienceItem_${i}"/>  <a href="#" onclick="$('convenienceItem_${i}').remove();checkAddItem('convenience');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="convenienceItem_${i}"/>  <a href="#" onclick="jQuery('#convenienceItem_${i}').remove();checkAddItem('convenience');">delete</a>
                   </li>
                 </g:each>
               </ul>
@@ -610,7 +605,7 @@
               <ul id="amenityItemList">
                 <g:each in="${storageSiteInstance?.amenityItems}" status="i" var="c">
                   <li id="amenityItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="amenityItem_${i}"/>  <a href="#" onclick="$('amenityItem_${i}').remove();checkAddItem('amenity');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="amenityItem_${i}"/>  <a href="#" onclick="jQuery('#amenityItem_${i}').remove();checkAddItem('amenity');">delete</a>
                   </li>
                 </g:each>
               </ul>

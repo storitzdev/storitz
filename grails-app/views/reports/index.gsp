@@ -5,19 +5,14 @@
   <head>
 
     <g:render template="/header_admin" />
-    <p:css name="jquery-ui-1.8.4.custom" />
 
     <p:dependantJavascript>
-      <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
       <p:javascript src="jquery.string.1.0"/>
       <p:javascript src="date"/>
       <script type="text/javascript">
 //<![CDATA[
 
-      google.load("jqueryui", "1.8.5");
-
-      google.setOnLoadCallback(function() {
+      $(document).ready(function() {
         var dateFormat = '%m/%d/%Y';
 
 

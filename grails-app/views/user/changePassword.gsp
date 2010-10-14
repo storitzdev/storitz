@@ -3,8 +3,20 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:render template="/header_admin" />
     <p:css name="login.css" />
+    <g:render template="/header_admin"/>
+
+    <script type="text/javascript">
+      //<![CDATA[
+
+      $(document).ready(function() {
+        jQuery.noConflict();
+
+        jQuery('#oldPasswd').focus();
+      });
+
+      //]]>
+    </script>
 
   </head>
   <body>
@@ -87,13 +99,6 @@
         </g:form>
 	</div>
   </div>
-<script type='text/javascript'>
-<!--
-(function(){
-	$('oldPasswd').focus();
-})();
-// -->
-</script>
 </div>
 </body>
 </html>

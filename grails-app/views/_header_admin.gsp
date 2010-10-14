@@ -3,5 +3,5 @@
   <meta name="ROBOTS" content="FOLLOW"/>
   <p:favicon src="images/favicon" />
 
-  <p:css name="main" />
-  
+  <p:css name="admin_bundled"/>
+  <p:javascript src='admin_all'/>
