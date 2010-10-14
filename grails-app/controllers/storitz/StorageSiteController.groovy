@@ -397,7 +397,7 @@ class StorageSiteController {
 
     site.removeFromImages(siteImage)
     site.save(flush: true)
-    render (status: 200, contentType:"application/json", text:"{ siteImage: ${params.siteImageId} }")
+    render (status: 200, contentType:"application/json", text:"{ \"siteImage\": ${params.siteImageId} }")
   }
 
   def removeContact = {
@@ -406,7 +406,7 @@ class StorageSiteController {
 
     if (site && user) {
       SiteUser.unlink (site, user)
-      render (status: 200, contentType:"application/json", text:"{ userId: ${params.userId} }")
+      render (status: 200, contentType:"application/json", text:"{ \"userId\": ${params.userId} }")
     }
   }
 
@@ -430,7 +430,7 @@ class StorageSiteController {
       it.isCover = it.id == imgId
     }
     site.save(flush: true)
-    render (status: 200, contentType:"application/json", text:"{ siteImage: ${params.siteImageId} }")
+    render (status: 200, contentType:"application/json", text:"{ \"siteImage\": ${params.siteImageId} }")
   }
 
   def detail = {

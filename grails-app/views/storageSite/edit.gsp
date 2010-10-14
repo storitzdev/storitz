@@ -7,7 +7,6 @@
   <p:css name="anytimec" />
 
   <p:dependantJavascript>
-  <p:javascript src="scriptaculous183"/>
   <script src="https://www.google.com/jsapi" type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
@@ -42,106 +41,135 @@
     function checkAddItem(type) {
       var listName = type + 'ItemList';
       var listAdd = type + 'ItemAdd';
-      if ($(listName).childElements().length >= 10) {
-        $(listAdd).hide();
+      if (jQuery('#' + listName).children().length >= 10) {
+        jQuery('#' + listAdd).hide();
       }
       return false
     }
 
     function itemAdd(type) {
       var listName = type + 'ItemList';
-      var list = $(listName).childElements();
-      var newItem = list.length + 1;
-      if (list.length > 0) {
-         var lastItem = list[list.length - 1];
-         var lastInputName = lastItem.firstDescendant().name;
-         newItem = parseInt(lastInputName.substr(lastInputName.indexOf('_') + 1)) + 1;
+      var lastInput = jQuery('#' + listName + '> li:last > input');
+      var lastInputName = lastInput.attr('name');
+      var newItem = 1
+      if (lastInputName) {
+        if (lastInput.val().length == 0) {
+          return
+        }
+        newItem = parseInt(lastInputName.substr(lastInputName.indexOf('_') + 1)) + 1;
       }
       var itemName = type + 'Item_' + newItem;
-      var liElem = new Element('li');
-      var newInput = new Element('input', {
-        id: itemName,
-        name: itemName,
-        type: 'text',
-        style: 'width:200px;'
-      });
-      var newLink = new Element('a', {
-        href: '#',
-        onclick: '$(\'' + itemName + '\').remove();checkAddItem(' + type + ');return false;'
-      });
-      newLink.update('delete');
-      liElem.insert({bottom: newInput});
-      liElem.insert({bottom: newLink});
-      $(listName).insert({bottom: liElem});
-      $(itemName).focus();
+      var bulletId = type + 'BulletItem_' + newItem;
+      var liElem = jQuery('<li>', {
+        id: bulletId
+      })
+      .append(
+        jQuery('<input>', {
+          id: itemName,
+          name: itemName,
+          type: 'text',
+          style: 'width:200px;'
+        }))
+      .append(
+        jQuery('<a>', {
+          href: '#',
+          text: 'delete',
+          click: function() {
+            jQuery('#' + bulletId).remove();
+            checkAddItem(type);
+            return false;
+          }
+        })
+      );
+      jQuery('#' + listName).append(liElem);
+      jQuery('#' + itemName).focus();
     }
-
+    
     function addContact() {
-      new Ajax.Request("${createLink(controller:'storageSite', action:'addContact')}",
+      jQuery.ajax(
       {
+        url: "${createLink(controller:'storageSite', action:'addContact')}",
         method:'get',
-        parameters: {id: ${storageSiteInstance.id}, email:jQuery("#contactName").val()},
-        onSuccess:function(transport) {
-          var ret = transport.responseJSON;
+        dataType: 'json',
+        data: {
+          id: ${storageSiteInstance.id},
+          email:jQuery("#contactName").val()
+        },
+        success:function(ret) {
           if (ret.userId > 0) {
               var itemId = 'contact_' + ret.userId;
-              var newItem = new Element('li', {id: itemId})
-              newItem.update(ret.username + ' - ' + ret.email + ' - ' + ret.notificationTypes)
-                        .insert(new Element('div', { class: "right" })
-                          .update(new Element('a', {
-                            href: '#',
-                            onclick: 'deleteContact(' + ret.userId + '); return false;'
-                          })
-                            .update('remove'))
-                            .insert(new Element('div', {style:'clear:both;'})
-                        ));
-              $('contacts').insert({bottom: newItem});
-
+              var newItem = jQuery('<li>', {id: itemId}).text(ret.username + ' - ' + ret.email + ' - ' + ret.notificationTypes)
+                .append(jQuery('<div>', { 'class': "right" })
+                .append(jQuery('<a>',
+                  {
+                    href: '#',
+                    click: function() {
+                      deleteContact(ret.userId);
+                      return false;
+                    }
+                  })
+                  .text('remove')).append(jQuery('<div>', {style:'clear:both;'})
+              ));
+              jQuery('#contacts').append(newItem);
           }
         }
       });
     }
 
     function deleteContact(contactId) {
-      new Ajax.Request("${createLink(controller:'storageSite', action:'removeContact')}",
+      jQuery.ajax(
       {
+        url:"${createLink(controller:'storageSite', action:'removeContact')}",
         method:'get',
-        parameters: {id: ${storageSiteInstance.id}, userId:contactId},
-        onSuccess:function(transport) {
-          $("contact_" + contactId).remove();
+        dataType: 'json',
+        data: {
+          id: ${storageSiteInstance.id},
+          userId:contactId
+        },
+        success: function(ret) {
+          jQuery("#contact_" + contactId).remove();
         }
       });
     }
 
     function deleteImage(imgId) {
-      new Ajax.Request("${createLink(controller:'storageSite', action:'deleteImage')}",
+      jQuery.ajax(
       {
-        method:'get',
-        parameters: {id: ${storageSiteInstance.id}, siteImageId:imgId },
-        onSuccess:function(transport) {
-          $("image_" + imgId).remove();
+        url: "${createLink(controller:'storageSite', action:'deleteImage')}",
+        method: 'get',
+        dataType: 'json',
+        data: {
+          id: ${storageSiteInstance.id},
+          siteImageId:imgId
+        },
+        success: function(ret) {
+          jQuery("#image_" + imgId).remove();
         }
       });
     }
 
     function defaultImage(imgId) {
       var newDefault = 'default_' + imgId;
-      new Ajax.Request("${createLink(controller:'storageSite', action:'defaultImage')}",
+      jQuery.ajax(
       {
+        url: "${createLink(controller:'storageSite', action:'defaultImage')}",
         method:'get',
-        parameters: {id: ${storageSiteInstance.id}, siteImageId:imgId },
-        onSuccess:function(transport) {
-          $$('[id^=default_]').each(function(elem) {
-            if (elem.id == newDefault) {
-              $(elem).update('Default Image');
+        dataType: 'json',
+        data: {id: ${storageSiteInstance.id}, siteImageId:imgId },
+        success:function(ret) {
+          jQuery('div[id^=default_]').each(function(elem) {
+            if (jQuery(this).attr('id') == newDefault) {
+              jQuery(this).text('Default Image');
             } else {
-              var linkId = elem.id.substring(8);
-              var link = new Element('a', {
+              var linkId = jQuery(this).attr('id').substring(8);
+              var link = jQuery('<a>', {
                 href:"#",
-                onclick:"defaultImage(" + linkId + "); return false;"
-              });
-              link.update('set as default');
-              $(elem).update(link);
+                click: function() {
+                  defaultImage(linkId);
+                  return false;
+                }
+              }).text('set as default');
+              jQuery(this).html(link);
             }
           });
         }
