@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.ReportName" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -14,79 +15,88 @@
       <script type="text/javascript">
 //<![CDATA[
 
-      $(document).ready(function() {
-        var dateFormat = '%m/%d/%Y';
+    $(document).ready(function() {
+      var dateFormat = '%m/%d/%Y';
 
-
-        // do stuff when DOM is ready
-        $('#startDate').datepicker({
-            showOn: "button",
-			buttonImage: ${storitz.imageLink(src:"calendar.png")},
-            onSelect: function(dateText, inst) {
-              $('#startDateDisplay').html(dateText);
-            },
-			buttonImageOnly: true
-        });
-        $('#endDate').datepicker({
-            showOn: "button",
-			buttonImage: ${storitz.imageLink(src:"calendar.png")},
-            onSelect: function(dateText, inst) {
-              $('#endDateDisplay').html(dateText);
-            },
-			buttonImageOnly: true
-        });
-        $('input#sitename').autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
-
-
-        $('#today').click(function(event) {
-          event.preventDefault();
-          var now = new Date();
-          var dateStr = now.print(dateFormat);
-          $('#startDate').val(dateStr);
-          $('#startDateDisplay').html(dateStr);
-          $('#endDate').val(dateStr);
-          $('#endDateDisplay').html(dateStr);
-        });
-
-         $('#thisWeek').click(function(event) {
-           event.preventDefault();
-           var now = new Date();
-           var dateStr = now.print(dateFormat);
-           $('#endDate').val(dateStr);
-           $('#endDateDisplay').html(dateStr);
-           // find the sunday of this week
-           now.setDate(now.getDate()-now.getDay());
-           $('#startDate').val(now.print(dateFormat));
-           $('#startDateDisplay').html(now.print(dateFormat));
-         });
-
-        $('#thisMonth').click(function(event) {
-          event.preventDefault();
-          var now = new Date();
-          var dateStr = now.print(dateFormat);
-          $('#endDate').val(dateStr);
-          $('#endDateDisplay').html(dateStr);
-          // find the sunday of this week
-          now.setDate(1);
-          $('#startDate').val(now.print(dateFormat));
-          $('#startDateDisplay').html(now.print(dateFormat));
-        });
-
-        $('#thisYear').click(function(event) {
-          event.preventDefault();
-          var now = new Date();
-          var dateStr = now.print(dateFormat);
-          $('#endDate').val(dateStr);
-          $('#endDateDisplay').html(dateStr);
-          // find the sunday of this week
-          now.setDate(1);
-          now.setMonth(0);
-          $('#startDate').val(now.print(dateFormat));
-          $('#startDateDisplay').html(now.print(dateFormat));
-        });
-
+      // do stuff when DOM is ready
+      $('#startDate').datepicker({
+          showOn: "button",
+          buttonImage: ${storitz.imageLink(src:"calendar.png")},
+          onSelect: function(dateText, inst) {
+            $('#startDateDisplay').html(dateText);
+          },
+          buttonImageOnly: true
       });
+      $('#endDate').datepicker({
+          showOn: "button",
+          buttonImage: ${storitz.imageLink(src:"calendar.png")},
+          onSelect: function(dateText, inst) {
+            $('#endDateDisplay').html(dateText);
+          },
+          buttonImageOnly: true
+      });
+      $('input#sitename').autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+
+
+      $('#today').click(function(event) {
+        event.preventDefault();
+        var now = new Date();
+        var dateStr = now.print(dateFormat);
+        $('#startDate').val(dateStr);
+        $('#startDateDisplay').html(dateStr);
+        $('#endDate').val(dateStr);
+        $('#endDateDisplay').html(dateStr);
+      });
+
+       $('#thisWeek').click(function(event) {
+         event.preventDefault();
+         var now = new Date();
+         var dateStr = now.print(dateFormat);
+         $('#endDate').val(dateStr);
+         $('#endDateDisplay').html(dateStr);
+         // find the sunday of this week
+         now.setDate(now.getDate()-now.getDay());
+         $('#startDate').val(now.print(dateFormat));
+         $('#startDateDisplay').html(now.print(dateFormat));
+       });
+
+      $('#thisMonth').click(function(event) {
+        event.preventDefault();
+        var now = new Date();
+        var dateStr = now.print(dateFormat);
+        $('#endDate').val(dateStr);
+        $('#endDateDisplay').html(dateStr);
+        // find the sunday of this week
+        now.setDate(1);
+        $('#startDate').val(now.print(dateFormat));
+        $('#startDateDisplay').html(now.print(dateFormat));
+      });
+
+      $('#thisYear').click(function(event) {
+        event.preventDefault();
+        var now = new Date();
+        var dateStr = now.print(dateFormat);
+        $('#endDate').val(dateStr);
+        $('#endDateDisplay').html(dateStr);
+        // find the sunday of this week
+        now.setDate(1);
+        now.setMonth(0);
+        $('#startDate').val(now.print(dateFormat));
+        $('#startDateDisplay').html(now.print(dateFormat));
+      });
+
+      $('#reportName').change(function(event) {
+        if ($(this).val() == '${ReportName.MOVEIN}' ||
+                $(this).val() == '${ReportName.PENDING}' ||
+                $(this).val() == '${ReportName.ACTIVITY}') {
+          $('#optionalParams').show();
+        } else $('#optionalParams').hide();
+      });
+
+        
+    });
 //]]>
+        
     </script>
   </p:dependantJavascript>
   </head>
@@ -126,10 +136,10 @@
 
         <div class="checkout_fields">
           <div class="checkout_value ${hasErrors(bean: reportPeriod, field: 'startDate', 'errors')}">
-            <span id="startDateDisplay" style="font-size:16px;">${reportPeriod?.startDate ? reportPeriod?.startDate : new Date().format('MM/dd/yyyy')}</span><input type="hidden" id="startDate" name="startDate"/>&nbsp;-&nbsp;
+            <span id="startDateDisplay" style="font-size:16px;">${reportPeriod?.startDate ? reportPeriod?.startDate : new Date().format('MM/dd/yyyy')}</span><input type="hidden" id="startDate" name="startDate" value="${reportPeriod?.startDate}"/>&nbsp;-&nbsp;
           </div>
           <div class="checkout_value ${hasErrors(bean: reportPeriod, field: 'endDate', 'errors')}">
-            <span id="endDateDisplay" style="font-size:16px;">${reportPeriod?.endDate ? reportPeriod?.endDate : new Date().format('MM/dd/yyyy')}</span><input type="hidden" id="endDate" name="endDate"/>
+            <span id="endDateDisplay" style="font-size:16px;">${reportPeriod?.endDate ? reportPeriod?.endDate : new Date().format('MM/dd/yyyy')}</span><input type="hidden" id="endDate" name="endDate" value="${reportPeriod?.endDate}"/>
           </div>
           <div style="height:10px;clear:both;"></div>
           <div class="buttons">
@@ -161,12 +171,31 @@
         </div>
 
         <div class="price_options checkout_header white">
-          Pick a your report
+          Pick your report
+        </div>
+
+        <div class="checkout_fields">
+          <div style="width:250px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'outputType', 'errors')}">
+            <select id="reportName" style="width:230px;" name="reportName">
+              <option ${!reportPeriod ? 'selected="selected"' : ''} value="">Choose a report</option>
+              <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <option ${reportPeriod?.reportName == ReportName.BALK ? 'selected="selected"' : ''} value="${ReportName.BALK}">${ReportName.BALK.display}</option>
+              </sec:ifAnyGranted>
+              <option ${reportPeriod?.reportName == ReportName.MOVEIN ? 'selected="selected"' : ''} value="${ReportName.MOVEIN}">${ReportName.MOVEIN.display}</option>
+              <option ${reportPeriod?.reportName == ReportName.PENDING ? 'selected="selected"' : ''} value="${ReportName.PENDING}">${ReportName.PENDING.display}</option>
+              <option ${reportPeriod?.reportName == ReportName.ACTIVITY ? 'selected="selected"' : ''} value="${ReportName.ACTIVITY}">${ReportName.ACTIVITY.display}</option>
+            </select>
+          </div>
+          <div style="height:20px;clear:both;"></div>
         </div>
 
         <div id="optionalParams" style="display:none;">
           <div class="price_options checkout_header white">
-            Pick a your report
+            Choose report parameters
+          </div>
+
+          <div class="formInstructions">
+            You have picked a report that requires your to select a specifice storage location.  Start by typing the name - the list of matching sites will appear below.  Choose the one upon which you wish to report.
           </div>
 
           <div class="checkout_fields">

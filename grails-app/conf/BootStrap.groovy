@@ -1010,6 +1010,13 @@ class BootStrap {
     new UnitTypeLookup(id:591, description:"CDNV-Climate Down Normal", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:592, description:"Upstairs Slanted Ceiling", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:593, description:"Canopy Pull Thru", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:594, description:"Self Stor-2dr", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:595, description:"Non  Climate", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:596, description:"Corridor Units", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:597, description:"Heated", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:598, description:"Dover 1", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:598, description:"Dover 2", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:598, description:"Dover2- In", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
   }
 
 

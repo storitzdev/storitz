@@ -2,44 +2,38 @@ package storitz
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager
+import ar.com.fdvs.dj.domain.DJCalculation
+import ar.com.fdvs.dj.domain.DJGroupLabel
+import ar.com.fdvs.dj.domain.DynamicReport
+import ar.com.fdvs.dj.domain.Style
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder
 import ar.com.fdvs.dj.domain.builders.GroupBuilder
-import ar.com.fdvs.dj.domain.constants.Font
-import ar.com.fdvs.dj.domain.constants.GroupLayout
-import ar.com.fdvs.dj.domain.constants.HorizontalAlign
-import ar.com.fdvs.dj.domain.constants.VerticalAlign
+import ar.com.fdvs.dj.domain.builders.StyleBuilder
 import ar.com.fdvs.dj.domain.entities.DJGroup
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn
 import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
 import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
 import ar.com.fdvs.dj.output.ReportWriter
 import ar.com.fdvs.dj.output.ReportWriterFactory
-import ar.com.fdvs.dj.domain.builders.StyleBuilder
 import com.storitz.RentalTransaction
 import com.storitz.ReportPeriod
 import grails.plugins.springsecurity.Secured
 import grails.util.GrailsUtil
-import java.awt.Color
 import net.sf.jasperreports.engine.JRDataSource
+import net.sf.jasperreports.engine.JRExporter
+import net.sf.jasperreports.engine.JRExporterParameter
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import storitz.constants.TransactionStatus
-import storitz.reports.DateExpression
-import storitz.reports.NameExpression
-import storitz.reports.NetCostExpression
-import storitz.reports.ReservationIdExpression
-import ar.com.fdvs.dj.domain.*
-import storitz.reports.UnitTypeExpression
-import storitz.constants.UnitType
-import ar.com.fdvs.dj.domain.constants.Border
-import ar.com.fdvs.dj.domain.constants.LabelPosition
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter
-import storitz.constants.ReportOutputType
-import net.sf.jasperreports.engine.JRExporter
 import net.sf.jasperreports.j2ee.servlets.ImageServlet
-import net.sf.jasperreports.engine.JRExporterParameter
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import storitz.constants.ReportName
+import storitz.constants.TransactionStatus
+import storitz.constants.UnitType
+import ar.com.fdvs.dj.domain.constants.*
+import storitz.reports.*
+import com.storitz.StorageSite
 
 class ReportsController {
 
@@ -51,103 +45,14 @@ class ReportsController {
 
     def index = { }
 
-    GregorianCalendar startDate = new GregorianCalendar()
-    GregorianCalendar endDate = new GregorianCalendar()
+  GregorianCalendar startDate = new GregorianCalendar()
+  GregorianCalendar endDate = new GregorianCalendar()
 
-    @Secured(['ROLE_ADMIN'])
-    def balk = {
-
-      ReportPeriod period = new ReportPeriod(params)
-      
-      if (!period.validate()) {
-        flash.message = "Bad report parameters - please re-enter dates and output type."
-        redirect(action: "index", model: [reportPeriod: period])
-      }
-
-      startDate.setTime(Date.parse('MM/dd/yyyy', params.startDate))
-      startDate.clearTime()
-      endDate.setTime(Date.parse('MM/dd/yyyy', params.endDate) + 1)
-      endDate.clearTime()
-
-
-      FastReportBuilder drb = new FastReportBuilder();
-      def config = loadConfig()
-
-      Style titleStyle = getStyle(config.titleStyle)
-      // MMA - there is something broken about subtitle background text and about getting the style from the config file
-      Style subtitleStyle = new Style()
-      subtitleStyle.setTextColor(new Color(5, 109, 186))
-      subtitleStyle.setBackgroundColor(Color.white)
-      subtitleStyle.setHorizontalAlign(HorizontalAlign.RIGHT)
-      Style headerStyle = getStyle(config.headerStyle)
-      Style detailStyle = getStyle(config.detailStyle)
-
-      String subtitle = "From ${params.startDate} to ${params.endDate}"
-
-       drb.setTitle("Customer Balk Report")                                      //defines the title of the report
-         .setSubtitle(subtitle)
-         .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
-         .setDetailHeight(15)                                            //defines the height for each record of the report
-         .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
-         .setColumnsPerPage(1)
-         .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
-         .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
-         .setPrintBackgroundOnOddRows(true)
-         .setUseFullPageWidth(true)
-
-      // Footer definition
-      drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
-      drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
-
-      drb.addField("contactPrimary.firstName", String.class.getName())
-      drb.addField("contactPrimary.lastName", String.class.getName())
-      drb.addField("contactPrimary.suffixName", String.class.getName())
-      drb.addField("unitType", UnitType.class.getName())      
-
-      SimpleColumn columnDate = ColumnBuilder.getInstance().
-        setColumnProperty("bookingDate", Date.class.getName()).
-        setTitle("Date").setWidth(30).build()
-
-      SimpleColumn columnSite = ColumnBuilder.getInstance().
-        setColumnProperty("site.title", String.class.getName()).
-        setTitle("Site").setWidth(35).build()
-
-      AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-              .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
-
-      SimpleColumn columnEmail = ColumnBuilder.getInstance().
-        setColumnProperty("contactPrimary.email", String.class.getName()).
-        setTitle("Email").setWidth(45).build()
-
-      SimpleColumn columnSize = ColumnBuilder.getInstance().
-        setColumnProperty("searchSize.description", String.class.getName()).
-        setTitle("Unit Size").setWidth(15).build()
-
-      AbstractColumn columnUnitType = ColumnBuilder.getInstance().setCustomExpression(new UnitTypeExpression())
-              .setTitle("Unit Type").setHeaderStyle(headerStyle).setWidth(15).build();
-
-      drb.addColumn(columnDate)
-        .addColumn(columnSite)
-        .addColumn(columnName)
-        .addColumn(columnEmail)
-        .addColumn(columnSize)
-        .addColumn(columnUnitType)
-
-      DynamicReport dr = drb.build()
-
-      def c = RentalTransaction.createCriteria()
-
-      def results = c.list() {
-        eq('status', TransactionStatus.BEGUN)
-        between('bookingDate', startDate.time, endDate.time)
-        order('bookingDate', 'desc')
-      }
-
-      JRDataSource ds = new JRBeanCollectionDataSource(results);   
-      JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-      ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.getValue(), [:]);
-      reportWriter.writeTo(response);
-    }
+  Style titleStyle
+  Style headerStyle
+  Style detailStyle
+  Style headerVariables
+  Style groupHeaderStyle
 
   @Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
   def site = {
@@ -157,6 +62,7 @@ class ReportsController {
     if (!period.validate()) {
       flash.message = "Bad report parameters - please re-enter dates and output type."
       redirect(action: "index", model: [reportPeriod: period])
+      return
     }
 
     startDate.setTime(Date.parse('MM/dd/yyyy', params.startDate))
@@ -168,42 +74,211 @@ class ReportsController {
     FastReportBuilder drb = new FastReportBuilder();
     def config = loadConfig()
 
-    Style titleStyle = getStyle(config.titleStyle)
-    Style headerStyle = getStyle(config.headerStyle)
-    Style detailStyle = getStyle(config.detailStyle)
+    titleStyle = getStyle(config.titleStyle)
+    headerStyle = getStyle(config.headerStyle)
+    detailStyle = getStyle(config.detailStyle)
 
-    Style groupHeaderStyle = new Style();
-	groupHeaderStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
-    groupHeaderStyle.setVerticalAlign(VerticalAlign.MIDDLE);
+    groupHeaderStyle = new Style()
+	groupHeaderStyle.setFont(Font.ARIAL_MEDIUM_BOLD)
+    groupHeaderStyle.setVerticalAlign(VerticalAlign.MIDDLE)
 
-    Style headerVariables = new Style();
-  	headerVariables.setFont(Font.ARIAL_MEDIUM_BOLD);
-  	headerVariables.setHorizontalAlign(HorizontalAlign.RIGHT);
-  	headerVariables.setVerticalAlign(VerticalAlign.MIDDLE);
-
-     drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle)
-      .setDetailHeight(15)                                            //defines the height for each record of the report
-      .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
-      .setColumnsPerPage(1)
-      .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(headerVariables)
-      .setPrintBackgroundOnOddRows(true)
-      .setUseFullPageWidth(true)
-      .setPrintColumnNames(false)
+    headerVariables = new Style()
+  	headerVariables.setFont(Font.ARIAL_MEDIUM_BOLD)
+  	headerVariables.setHorizontalAlign(HorizontalAlign.RIGHT)
+  	headerVariables.setVerticalAlign(VerticalAlign.MIDDLE)
 
     // Footer definition
     drb.setTemplateFile(request.getRealPath('/WEB-INF/reports/storitz_template.jrxml'))
+
+    def reportParams = [
+      logo_header: request.getRealPath("/images/logo_storitz_small.gif"),
+      logo_footer: request.getRealPath("/images/storitz-footer-logo-grayscale-small.png"),
+      date_range: "- ${params.startDate} thru ${params.endDate}"
+    ]
+
+    drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle)
+      .setDetailHeight(15)                                            //defines the height for each record of the report
+      .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
+      .setColumnsPerPage(1)
+      .setPrintBackgroundOnOddRows(true)
+      .setUseFullPageWidth(true)
+
+    def results
+    switch (period.reportName) {
+      case ReportName.BALK:
+        results = buildBalkReport(drb, reportParams, startDate, endDate)
+        break;
+
+      case ReportName.ACTIVITY:
+      case ReportName.PENDING:
+      case ReportName.MOVEIN:
+        period.site = StorageSite.findByTitle(params.sitename)
+        if (!period.site) {
+          flash.message = "Bad report parameters - missing site for report."
+          redirect(action: "index", model: [reportPeriod: period])
+          return
+        }
+        results = buildSiteReport(drb, reportParams, startDate, endDate, period)
+        break;
+    }
+
+    JRDataSource ds = new JRBeanCollectionDataSource(results);
+
+    DynamicReport dr = drb.build()
+
+    JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds, reportParams);
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value, [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false,
+            (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
+
+    
+    def imagesMap = new HashMap()
+    JRExporter exporter = reportWriter.getExporter();
+    exporter.setParameters([(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
+    exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP, imagesMap);
+    exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, request.getContextPath() + "/reports/image/?image=");
+    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+
+    session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
+    session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
+
+    reportWriter.writeTo(response);
+
+  }
+
+  private buildBalkReport(drb, reportParams, startDate, endDate) {
+
+    reportParams["report_name"] = "Storitz Weekly Balk Report"
+    reportParams["footer_text"] = "User Balk Report ${reportParams['date_range']}"
+
+    drb.addField("contactPrimary.firstName", String.class.getName())
+    drb.addField("contactPrimary.lastName", String.class.getName())
+    drb.addField("contactPrimary.suffixName", String.class.getName())
+    drb.addField("unitType", UnitType.class.getName())
+
+    SimpleColumn columnDate = ColumnBuilder.getInstance().
+      setColumnProperty("bookingDate", Date.class.getName()).
+      setTitle("Date").setWidth(30).build()
+
+    SimpleColumn columnSite = ColumnBuilder.getInstance().
+      setColumnProperty("site.title", String.class.getName()).
+      setTitle("Site").setWidth(35).build()
+
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
+      .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
+
+    SimpleColumn columnEmail = ColumnBuilder.getInstance().
+      setColumnProperty("contactPrimary.email", String.class.getName()).
+      setTitle("Email").setWidth(45).build()
+
+    SimpleColumn columnSize = ColumnBuilder.getInstance().
+      setColumnProperty("searchSize.description", String.class.getName()).
+      setTitle("Unit Size").setWidth(15).build()
+
+    AbstractColumn columnUnitType = ColumnBuilder.getInstance().setCustomExpression(new UnitTypeExpression())
+      .setTitle("Unit Type").setHeaderStyle(headerStyle).setWidth(15).build();
+
+    drb.addColumn(columnDate)
+      .addColumn(columnSite)
+      .addColumn(columnName)
+      .addColumn(columnEmail)
+      .addColumn(columnSize)
+      .addColumn(columnUnitType)
+
+    def c = RentalTransaction.createCriteria()
+
+    def results = c.list() {
+      eq('status', TransactionStatus.BEGUN)
+      between('bookingDate', startDate.time, endDate.time)
+      order('bookingDate', 'desc')
+    }
+    return results
+  }
+
+  private buildSiteReport(drb, reportParams, startDate, endDate, period) {
+
+    def dateField
+    def transTitle
+    def results
+
+    def c = RentalTransaction.createCriteria()
+
+    switch(period.reportName) {
+      case ReportName.ACTIVITY:
+        reportParams["report_name"] = "Storitz Activity Report - ${period.site.title}"
+        reportParams["footer_text"] = "Activity Report - ${period.site.title} ${reportParams['date_range']}"
+        dateField = "bookingDate"
+        transTitle = "Trans #"
+
+        results = c.list() {
+          or {
+            eq('status', TransactionStatus.COMPLETE)
+            eq('status', TransactionStatus.PAID)
+          }
+          site{
+            eq('id', period.site.id)
+          }
+          between('bookingDate', startDate.time, endDate.time)
+          order('bookingDate', 'desc')
+        }
+        break
+
+      case ReportName.PENDING:
+        reportParams["report_name"] = "Storitz Pending Move In Report - ${period.site.title}"
+        reportParams["footer_text"] = "Pending Move In Report - ${period.site.title} ${reportParams['date_range']}"
+        dateField = "moveInDate"
+        transTitle = "Res #"
+
+        results = c.list() {
+          or {
+            eq('status', TransactionStatus.COMPLETE)
+            eq('status', TransactionStatus.PAID)
+          }
+          site{
+            eq('id', period.site.id)
+          }
+          between('bookingDate', startDate.time, endDate.time)
+          gt('moveInDate', new Date())
+          order('moveInDate', 'desc')
+        }
+        break
+
+      case ReportName.MOVEIN:
+        reportParams["report_name"] = "Storitz Move In Report - ${period.site.title}"
+        reportParams["footer_text"] = "Move In Report - ${period.site.title} ${reportParams['date_range']}"
+        dateField = "moveInDate"
+        transTitle = "Trans #"
+
+        results = c.list() {
+          or {
+            eq('status', TransactionStatus.COMPLETE)
+            eq('status', TransactionStatus.PAID)
+          }
+          site{
+            eq('id', period.site.id)
+          }
+          between('moveInDate', startDate.time, endDate.time)
+          order('moveInDate', 'desc')
+        }
+        break
+
+    }
+
+    drb
+      .setGrandTotalLegend("Grand Total")
+      .setGrandTotalLegendStyle(headerVariables)
+      .setPrintColumnNames(false)
 
     drb.addField("contactPrimary.firstName", String.class.getName())
     drb.addField("contactPrimary.lastName", String.class.getName())
     drb.addField("contactPrimary.suffixName", String.class.getName())
     drb.addField("bookingDate", Date.class.getName())
+    drb.addField("moveInDate", Date.class.getName())
     drb.addField("reserved", Boolean.class.getName())
     drb.addField("reservationId", String.class.getName())
     drb.addField("idNumber", String.class.getName())
 
 
-    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression("bookingDate"))
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
             .setTitle("Date").setHeaderStyle(groupHeaderStyle).setWidth(18).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
@@ -211,7 +286,7 @@ class ReportsController {
       setTitle("Unit #").setWidth(15).build()
 
     AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
-            .setTitle("Res #").setHeaderStyle(headerStyle).setWidth(22).build();
+            .setTitle(transTitle).setHeaderStyle(headerStyle).setWidth(22).build();
 
     AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
             .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
@@ -271,44 +346,7 @@ class ReportsController {
       .addColumn(columnNet)
       .addGroup(g1)
 
-    DynamicReport dr = drb.build()
-
-    def c = RentalTransaction.createCriteria()
-
-    def results = c.list() {
-      or {
-        eq('status', TransactionStatus.COMPLETE)
-        eq('status', TransactionStatus.PAID)
-      }
-      between('bookingDate', startDate.time, endDate.time)
-      order('bookingDate', 'desc')
-    }
-
-    JRDataSource ds = new JRBeanCollectionDataSource(results);
-    def params = [
-      logo_header: request.getRealPath("/images/logo_storitz_small.gif"),
-      logo_footer: request.getRealPath("/images/storitz-footer-logo-grayscale-small.png"),
-      report_name:"Storitz Weekly Activity & Batch Funding Report", 
-      footer_text:"Weekly Activity & Batch Funding Report - 9/19/10 thru 9/25/10"
-    ]
-    
-    JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds, params);
-    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value, [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false,
-            (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
-
-    
-    def imagesMap = new HashMap()
-    JRExporter exporter = reportWriter.getExporter();
-    exporter.setParameters([(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
-    exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP, imagesMap);
-    exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, request.getContextPath() + "/reports/image/?image=");
-    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-
-    session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
-    session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
-
-    reportWriter.writeTo(response);
-
+    return results
   }
 
   /*

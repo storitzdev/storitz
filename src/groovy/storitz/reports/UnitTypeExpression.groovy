@@ -13,7 +13,9 @@ import storitz.constants.UnitType
 class UnitTypeExpression implements CustomExpression {
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          UnitType unitType = (UnitType) fields.get("unitType");
+          String unitTypeName = (String) fields.get("unitType")
+          if (!unitTypeName || unitTypeName == "") return ""
+          UnitType unitType = UnitType.valueOf(unitTypeName)
           return unitType.display
   }
 

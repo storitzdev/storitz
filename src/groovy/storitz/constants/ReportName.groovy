@@ -8,6 +8,7 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum ReportName {
+  BALK("Balk"),
   MOVEIN("Move Ins"),
   PENDING("Pending Move Ins"),
   ACTIVITY("All New Activity")
@@ -22,7 +23,7 @@ public enum ReportName {
   public getDisplay() { return display }
 
   static list() {
-    [MOVEIN, PENDING, ACTIVITY]
+    [BALK, MOVEIN, PENDING, ACTIVITY]
   }
 
   static public ReportName getEnumFromId(String value) {
