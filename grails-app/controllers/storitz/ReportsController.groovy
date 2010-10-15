@@ -169,37 +169,30 @@ class ReportsController {
     def config = loadConfig()
 
     Style titleStyle = getStyle(config.titleStyle)
-    // MMA - there is something broken about subtitle background text and about getting the style from the config file
-    Style subtitleStyle = new Style()
-    subtitleStyle.setTextColor(new Color(5, 109, 186))
-    subtitleStyle.setBackgroundColor(Color.white)
-    subtitleStyle.setHorizontalAlign(HorizontalAlign.RIGHT)
     Style headerStyle = getStyle(config.headerStyle)
     Style detailStyle = getStyle(config.detailStyle)
+
+    Style groupHeaderStyle = new Style();
+	groupHeaderStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
+    groupHeaderStyle.setVerticalAlign(VerticalAlign.MIDDLE);
 
     Style headerVariables = new Style();
   	headerVariables.setFont(Font.ARIAL_MEDIUM_BOLD);
   	headerVariables.setHorizontalAlign(HorizontalAlign.RIGHT);
   	headerVariables.setVerticalAlign(VerticalAlign.MIDDLE);
 
-    String subtitle = "From ${params.startDate} to ${params.endDate}"
-
-     drb.setTitle("Site Activity Report")                                      //defines the title of the report
-      .setSubtitle(subtitle)
-      .setDefaultStyles(titleStyle, subtitleStyle, headerStyle, detailStyle)
+     drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle)
       .setDetailHeight(15)                                            //defines the height for each record of the report
       .setMargins(30, 20, 30, 15)                                                     //define the margin space for each side (top, bottom, left and right)
       .setColumnsPerPage(1)
-      .addFirstPageImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(200), new Integer(50), ImageBanner.ALIGN_LEFT)
-      .addImageBanner(fileUploadService.getAbsolutePath("/images", "logo_storitz_small.gif"), new Integer(100), new Integer(25), ImageBanner.ALIGN_LEFT)
       .setGrandTotalLegend("Grand Total")
       .setGrandTotalLegendStyle(headerVariables)
       .setPrintBackgroundOnOddRows(true)
       .setUseFullPageWidth(true)
+      .setPrintColumnNames(false)
 
     // Footer definition
-    drb.addAutoText(AutoText.AUTOTEXT_CREATED_ON, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_LEFT, AutoText.PATTERN_DATE_DATE_ONLY, 120, 30)
-    drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT)
+    drb.setTemplateFile(request.getRealPath('/WEB-INF/reports/storitz_template.jrxml'))
 
     drb.addField("contactPrimary.firstName", String.class.getName())
     drb.addField("contactPrimary.lastName", String.class.getName())
@@ -210,8 +203,8 @@ class ReportsController {
     drb.addField("idNumber", String.class.getName())
 
 
-    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression())
-            .setTitle("Date").setHeaderStyle(headerStyle).setWidth(18).build();
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression("bookingDate"))
+            .setTitle("Date").setHeaderStyle(groupHeaderStyle).setWidth(18).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
       setColumnProperty("feedUnitNumber", String.class.getName()).
@@ -242,9 +235,9 @@ class ReportsController {
     AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
             .setTitle("Net").setHeaderStyle(headerStyle).setWidth(18).setPattern("\$ 0.00").build();
 
-    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM,headerVariables);
-	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM,headerVariables);
-	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM,headerVariables);
+    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, headerVariables);
+	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, headerVariables);
+	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, headerVariables);
 	drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
@@ -264,7 +257,7 @@ class ReportsController {
                 .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
                 .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
                 .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
-                .setGroupLayout(GroupLayout.DEFAULT)
+                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
                 .build();
 
     drb.addColumn(columnDate)
@@ -292,10 +285,18 @@ class ReportsController {
     }
 
     JRDataSource ds = new JRBeanCollectionDataSource(results);
-    JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value,
-            [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
+    def params = [
+      logo_header: request.getRealPath("/images/logo_storitz_small.gif"),
+      logo_footer: request.getRealPath("/images/storitz-footer-logo-grayscale-small.png"),
+      report_name:"Storitz Weekly Activity & Batch Funding Report", 
+      footer_text:"Weekly Activity & Batch Funding Report - 9/19/10 thru 9/25/10"
+    ]
+    
+    JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds, params);
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value, [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false,
+            (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
 
+    
     def imagesMap = new HashMap()
     JRExporter exporter = reportWriter.getExporter();
     exporter.setParameters([(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
@@ -305,7 +306,7 @@ class ReportsController {
 
     session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
     session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
-    
+
     reportWriter.writeTo(response);
 
   }

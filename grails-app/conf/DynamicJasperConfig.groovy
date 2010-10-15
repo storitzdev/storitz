@@ -48,10 +48,10 @@ dynamicJasper {
         font = Font.ARIAL_MEDIUM_BOLD
         textColor = Color.white
         border = Border.NO_BORDER
-        borderColor = new Color(5, 109, 186)
+        borderColor = new Color(21, 74, 153)
         horizontalAlign = HorizontalAlign.CENTER
         verticalAlign = VerticalAlign.MIDDLE
-        backgroundColor = new Color(5, 109, 186)
+        backgroundColor = new Color(21, 74, 153)
         transparency = Transparency.OPAQUE
         transparent = false
         blankWhenNull = true

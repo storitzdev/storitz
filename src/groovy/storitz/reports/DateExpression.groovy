@@ -11,8 +11,14 @@ import ar.com.fdvs.dj.domain.CustomExpression
  */
 class DateExpression implements CustomExpression {
 
+  String fieldName = null
+
+  public DateExpression(String fieldName) {
+    this.fieldName = fieldName
+  }
+
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          Date date = (Date) fields.get("bookingDate");
+          Date date = (Date) fields.get(fieldName);
           return date.format("MM/dd/yy")
   }
 
