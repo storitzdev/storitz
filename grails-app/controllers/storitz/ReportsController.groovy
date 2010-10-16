@@ -61,7 +61,7 @@ class ReportsController {
 
     if (!period.validate()) {
       flash.message = "Bad report parameters - please re-enter dates and output type."
-      redirect(action: "index", model: [reportPeriod: period])
+      render view: "index", model: [reportPeriod: period]
       return
     }
 
@@ -115,7 +115,7 @@ class ReportsController {
         period.site = StorageSite.findByTitle(params.sitename)
         if (!period.site) {
           flash.message = "Bad report parameters - missing site for report."
-          redirect(action: "index", model: [reportPeriod: period])
+          render view: "index", model: [reportPeriod: period]
           return
         }
         results = buildSiteReport(drb, reportParams, startDate, endDate, period)
@@ -204,7 +204,7 @@ class ReportsController {
 
     switch(period.reportName) {
       case ReportName.ACTIVITY:
-        reportParams["report_name"] = "Storitz Activity Report - ${period.site.title}"
+        reportParams["report_name"] = "Activity Report - ${period.site.title}"
         reportParams["footer_text"] = "Activity Report - ${period.site.title} ${reportParams['date_range']}"
         dateField = "bookingDate"
         transTitle = "Trans #"
@@ -223,7 +223,7 @@ class ReportsController {
         break
 
       case ReportName.PENDING:
-        reportParams["report_name"] = "Storitz Pending Move In Report - ${period.site.title}"
+        reportParams["report_name"] = "Pending Move In Report - ${period.site.title}"
         reportParams["footer_text"] = "Pending Move In Report - ${period.site.title} ${reportParams['date_range']}"
         dateField = "moveInDate"
         transTitle = "Res #"
@@ -243,7 +243,7 @@ class ReportsController {
         break
 
       case ReportName.MOVEIN:
-        reportParams["report_name"] = "Storitz Move In Report - ${period.site.title}"
+        reportParams["report_name"] = "Move In Report - ${period.site.title}"
         reportParams["footer_text"] = "Move In Report - ${period.site.title} ${reportParams['date_range']}"
         dateField = "moveInDate"
         transTitle = "Trans #"

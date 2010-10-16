@@ -136,10 +136,10 @@
 
         <div class="checkout_fields">
           <div class="checkout_value ${hasErrors(bean: reportPeriod, field: 'startDate', 'errors')}">
-            <span id="startDateDisplay" style="font-size:16px;">${reportPeriod?.startDate ? reportPeriod?.startDate : new Date().format('MM/dd/yyyy')}</span><input type="hidden" id="startDate" name="startDate" value="${reportPeriod?.startDate}"/>&nbsp;-&nbsp;
+            <span id="startDateDisplay" style="font-size:16px;">${(reportPeriod?.startDate ? reportPeriod?.startDate : new Date()).format('MM/dd/yyyy')}</span><input type="hidden" id="startDate" name="startDate" value="${reportPeriod?.startDate?.format('MM/dd/yyyy')}"/>&nbsp;-&nbsp;
           </div>
           <div class="checkout_value ${hasErrors(bean: reportPeriod, field: 'endDate', 'errors')}">
-            <span id="endDateDisplay" style="font-size:16px;">${reportPeriod?.endDate ? reportPeriod?.endDate : new Date().format('MM/dd/yyyy')}</span><input type="hidden" id="endDate" name="endDate" value="${reportPeriod?.endDate}"/>
+            <span id="endDateDisplay" style="font-size:16px;">${(reportPeriod?.endDate ? reportPeriod?.endDate : new Date()).format('MM/dd/yyyy')}</span><input type="hidden" id="endDate" name="endDate" value="${reportPeriod?.endDate?.format('MM/dd/yyyy')}"/>
           </div>
           <div style="height:10px;clear:both;"></div>
           <div class="buttons">
