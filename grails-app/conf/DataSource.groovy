@@ -35,8 +35,9 @@ environments {
   }
   test {
     dataSource {
-      dbCreate = "update"
-      url = "jdbc:hsqldb:mem:testDb"
+      dbCreate = "update" // one of 'create', 'create-drop','update'
+      jndiName = "java:comp/env/jdbc/storitz_test"
+      //loggingSql = true
     }
   }
   production {

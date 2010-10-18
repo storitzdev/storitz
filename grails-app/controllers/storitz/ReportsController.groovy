@@ -281,6 +281,9 @@ class ReportsController {
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
             .setTitle("Date").setHeaderStyle(groupHeaderStyle).setWidth(18).build();
 
+    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
+            .setTitle("MoveIn Date").setHeaderStyle(headerStyle).setWidth(18).build();
+
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
       setColumnProperty("feedUnitNumber", String.class.getName()).
       setTitle("Unit #").setWidth(15).build()
@@ -338,6 +341,12 @@ class ReportsController {
     drb.addColumn(columnDate)
       .addColumn(columnUnitNumber)
       .addColumn(columnReservationId)
+
+    if (period.reportName == ReportName.ACTIVITY) {
+      drb.addColumn(columnMoveInDate)
+    }
+
+    drb
       .addColumn(columnName)
       .addColumn(columnEmail)
       .addColumn(columnPhone)

@@ -336,6 +336,10 @@
             site.id = ${site.id};
             site.unitCount = ${site.units.size()};
             site.coverImg = '${site.coverImage() ? site.coverImage().thumbnail() : ""}';
+            site.address = '${site.address}';
+            site.zipcode = '${site.zipcode}';
+            site.state = '${site.state.display}';
+            site.city = '${site.city}';
             createMarker(site);
             <g:if test="${site.isKeypad}">
               tooltips.push(new Tooltip("keypad${site.id}", "tooltip_keypad"));

@@ -72,6 +72,10 @@ environments {
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
         security.httpsPort = 8443
+        storitz.nacha.dir = 'c:/temp/nacha'
+        storitz.nacha.fileId = '1234567890'
+        storitz.nacha.companyId = '0123456789'
+        uiperformance.enabled = false
     }
 
 }
