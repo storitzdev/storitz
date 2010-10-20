@@ -610,7 +610,10 @@ class StorageSiteController {
   def detailTotals = {
 
     def moveInDate
-    def unitType = (params.unitType instanceof UnitType ? params.unitType : UnitType.valueOf(params.unitType))
+    def unitType 
+    if(params.unitType) {
+      unitType = (params.unitType instanceof UnitType ? params.unitType : UnitType.valueOf(params.unitType as String))
+    }
     if (params.moveInDate && params.moveInDate instanceof Date) {
       moveInDate = params.moveInDate
     } else {
