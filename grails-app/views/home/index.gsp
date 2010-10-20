@@ -315,7 +315,7 @@
             center: iploc,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}
+            navigationControlOptions: {style: google.maps.NavigationControlStyle.DEFAULT}
           };
           markerImageGreen = new google.maps.MarkerImage(${p.imageLink(src:'icn_map_grn.png')}, null, null, new google.maps.Point(1, 32));
           markerImageGray = new google.maps.MarkerImage(${p.imageLink(src:'gray-icon.png')}, null, null, new google.maps.Point(1, 32));
