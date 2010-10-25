@@ -8,6 +8,7 @@
         <p class="footer"><g:link class="footer small" controller="static" action="faq">Frequently Asked Questions</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="aboutus">About Us</g:link></p>
         <p class="footer"><g:link class="footer small" controller="contactUs" action="create">Contact Us</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="static" action="jobs">Jobs</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="refund">Refund Policy</g:link></p>
       </div>
       <div class="left" style="margin: 2em 5em;">
