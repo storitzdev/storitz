@@ -21,4 +21,8 @@ class StaticController {
     def refund = {
       [title:'Refund Policy']
     }
+
+    def jobs = {
+      [title:'Jobs at Storitz']
+    }
 }
