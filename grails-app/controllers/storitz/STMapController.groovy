@@ -14,8 +14,6 @@ class STMapController {
 
     def countSites = {
 
-      println "zoom = ${params.zoom}, center lat: ${params.lat}, center lng: ${params.lng}, swLat: ${params.swLat}, swLng: ${params.swLng}, neLat: ${params.neLat}, neLng: ${params.neLng}, diff lat: ${(params.lat as BigDecimal) - (params.swLat as BigDecimal)}, diff lng: ${(params.lng as BigDecimal) - (params.swLng as BigDecimal)}"
-
       def siteCount = mapService.countSites(params.searchSize as Integer, params.swLat as BigDecimal, params.swLng as BigDecimal, params.neLat as BigDecimal, params.neLng as BigDecimal)
       webUtilService.nocache(response)
       render (status: 200, contentType:"application/json", text:"{ siteCount: ${siteCount} }")
