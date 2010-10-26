@@ -1155,15 +1155,20 @@ class SiteLinkService {
     // algo - subtract 1 from duration month and then get up to end of month
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
-    // force a bump for people who rent after the 15th
-    if (!site.prorateSecondMonth) {
-      def cutoff = site.prorateCutoff ? site.prorateCutoff : 24
-      if (cal.get(Calendar.DAY_OF_MONTH) > cutoff) durationMonths++;
+    def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
+    if (site.useProrating && !site.prorateSecondMonth) {
+      if (moveInDay > site.prorateCutoff && (!promo || promo && durationMonths == 1)) {
+        durationMonths++;
+      }
     }
-    if (durationMonths - 1 > 0) {
-      cal.add(Calendar.MONTH, durationMonths - 1)
+    if (site.useProrating) {
+      if (durationMonths - 1 > 0) {
+        cal.add(Calendar.MONTH, durationMonths - 1)
+      }
+      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+    } else {
+      cal.add(Calendar.MONTH, durationMonths)
     }
-    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     return cal.time
   }
 
@@ -1187,7 +1192,7 @@ class SiteLinkService {
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
-    if (allowExtension && !site.prorateSecondMonth) {
+    if (allowExtension && site.useProrating && !site.prorateSecondMonth) {
       if (moveInDay > site.prorateCutoff && (!promo || promo && durationMonths == 1)) {
         durationMonths++;
         ret["extended"] = true;
@@ -1196,14 +1201,18 @@ class SiteLinkService {
       }
     }
 
-    if (durationMonths - 1 > 0) {
-      cal.add(Calendar.MONTH, durationMonths - 1)
+    if (site.useProrating) {
+      if (durationMonths - 1 > 0) {
+        cal.add(Calendar.MONTH, durationMonths - 1)
+      }
+      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+    } else {
+      cal.add(Calendar.MONTH, durationMonths)
     }
-    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
 
     def subTotal
     def firstMonthRate
-    if (!site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
+    if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
       subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
       firstMonthRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)

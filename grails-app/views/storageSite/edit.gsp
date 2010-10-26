@@ -826,6 +826,19 @@
             </div>
 
             <div class="checkout_section_header">
+              Use Prorated Calculations
+            </div>
+            <div class="formInstructions">
+              Check this box if your site uses prorating in the rental calculations.  Uncheck if you use anniversary calculations.
+            </div>
+            <div class="checkout_fields">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'useProrating', 'errors')}">
+                <g:checkBox name="useProrating" value="${storageSiteInstance?.useProrating}"/>&nbsp;Use Prorating for Rental Calculations
+              </div>
+              <div style="clear:both;height: 15px;"></div>
+            </div>
+
+            <div class="checkout_section_header">
               Rental/Lease Agreement
             </div>
             <div class="formInstructions">
