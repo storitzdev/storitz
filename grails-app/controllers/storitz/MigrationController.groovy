@@ -235,6 +235,7 @@ class MigrationController {
       feed.save(flush: true)
       for(site in sites) {
         feed.addToSites(site)
+        SiteUser.link(site, manager)
       }
 
       for (su in resp.siteUsers) {
