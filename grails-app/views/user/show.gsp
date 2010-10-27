@@ -130,7 +130,7 @@
             <div class="buttons">
                 <g:form>
                   <span class="button"><g:link action="edit" id="${person?.id}">Edit</g:link></span>
-                  <span class="button"><g:actionSubmit action="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
+                  <span class="button"><g:actionSubmit action="delete" id="${person?.id}" onclick="return confirm('Are you sure?');" value="Delete" /></span>
                 </g:form>
             </div>
         </div>

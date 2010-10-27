@@ -132,7 +132,7 @@ class UserController {
 		def person = User.get(params.id)
         if (UserRole.userHasRole(user, 'ROLE_ADMIN') || person.manager == user) {
           if (person) {
-              def authPrincipal = springSecurityService.principal()
+              def authPrincipal = springSecurityService.principal
               //avoid self-delete if the logged-in user is an admin
               if (!(authPrincipal instanceof String) && authPrincipal.username == person.username) {
                   flash.message = "You can not delete yourself, please login as another admin and try again"

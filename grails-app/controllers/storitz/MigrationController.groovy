@@ -45,6 +45,9 @@ class MigrationController {
           fileList.add("**${img.basename}/mid_${img.fileLocation}")
           fileList.add("**${img.basename}/${img.fileLocation}")
         }
+        if (site.logo) {
+          fileList.add("**${site.logo.basename}/${site.logo.fileLocation}")
+        }
       }
       // add PDFs
       for(ra in rentalAgreements) {
@@ -135,23 +138,26 @@ class MigrationController {
       }
       for (s in feed.sites) {
         def site = new StorageSite()
+        def securityItems = []
         for (i in s.securityItems) {
           def si = new Bullet()
           bindData(si, i)
           si.save(flush:true)
-          site.addToSecurityItems(si)
+          securityItems.add(si)
         }
+        def convenienceItems = []
         for (i in s.convenienceItems) {
           def si = new Bullet()
           bindData(si, i)
           si.save(flush:true)
-          site.addToConvenienceItems(si)
+          convenienceItems.add(si)
         }
+        def amenities = []
         for (i in s.amenityItems) {
           def si = new Bullet()
           bindData(si, i)
           si.save(flush:true)
-          site.addToAmenityItems(si)
+          amenities.add(si)
         }
         def images = []
         for (i in s.images) {
@@ -160,17 +166,19 @@ class MigrationController {
           si.site = site
           images.add(si)
         }
+        def insurances = []
         for (i in s.insurances) {
           def si = new Insurance()
           bindData(si, i)
           si.save(flush:true)
-          site.addToInsurances(si)
+          insurances.add(si)
         }
+        def specialOffers = []
         for (i in s.specialOffers) {
           def si = new SpecialOffer()
           bindData(si, i)
           si.save(flush:true)
-          site.addToSpecialOffers(si)
+          specialOffers.add(si)
         }
         s.amenityItems.clear()
         s.securityItems.clear()
@@ -189,6 +197,12 @@ class MigrationController {
           s.bankAccount = null
           site.bankAccount = bankAccount
         }
+        if (s.logo) {
+          def logo = new SiteImage()
+          bindData(logo, s.logo)
+          s.logo = null
+          site.logo = logo
+        }
         s.rentalAgreement = null
         bindData(site, s)
         site.rentalAgreement = rentalAgreement
@@ -198,7 +212,24 @@ class MigrationController {
           site.addToImages(image)
           image.save(flush:true)
         }
+        for (so in specialOffers) {
+          site.addToSpecialOffers(so)
+        }
+        for (i in insurances) {
+          site.addToInsurances(i)
+        }
+        for (si in securityItems) {
+          site.addToSecurityItems(si)
+        }
+        for (ci in convenienceItems) {
+          site.addToConvenienceItems(ci)
+        }
+        for (a in amenities) {
+          site.addToAmenityItems(a)
+        }
+        site.save(flush:true)
         sites.add(site)
+
       }
       feed.sites.clear()
       feed.save(flush: true)
