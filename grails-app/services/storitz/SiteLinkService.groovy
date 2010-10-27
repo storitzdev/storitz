@@ -24,6 +24,7 @@ import java.math.RoundingMode
 import com.storitz.UnitTypeLookup
 import com.storitz.SiteLink
 import storitz.constants.UnitType
+import com.storitz.Feed
 
 class SiteLinkService {
 
@@ -492,7 +493,7 @@ class SiteLinkService {
 
 
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (!site) {
         println "Found and creating new site: ${tab.sSiteName.text()}, postal code: ${tab.sSitePostalCode.text()}"
         site = new StorageSite()
@@ -519,7 +520,7 @@ class SiteLinkService {
 
 
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       def newSite = false
       if (site) {
         stats.updateCount++
@@ -554,7 +555,7 @@ class SiteLinkService {
 
 
     for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (site) {
         def email = tab.sEmailAddress.text().toLowerCase()
         def realName = tab.sContactName.text()
@@ -575,7 +576,7 @@ class SiteLinkService {
 
 
     for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (site) {
         getTaxes(siteLink, site)
         site.save()
@@ -595,7 +596,7 @@ class SiteLinkService {
 
 
     for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      StorageSite site = StorageSite.findBySourceAndSourceId("SL", tab.SiteID.text())
+      StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (site) {
         def writer = new PrintWriter(System.out)
         addProration(siteLink, site, writer)
@@ -1211,14 +1212,14 @@ class SiteLinkService {
     }
 
     def subTotal
-    def firstMonthRate
+    def discountRate
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
       subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
-      firstMonthRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+      discountRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     } else {
       subTotal = (rate*durationMonths) + (premium*durationMonths)
-      firstMonthRate = rate
+      discountRate = rate
     }
 
     if (promo) {
@@ -1235,7 +1236,11 @@ class SiteLinkService {
           break;
 
         case "FIXED_RATE":
-          offerDiscount = ((firstMonthRate - promo.promoQty) > 0 ? (firstMonthRate - promo.promoQty): 0) * promo.expireMonth;
+          if (promo.inMonth == 1) {
+            offerDiscount = ((discountRate - promo.promoQty) > 0 ? (discountRate - promo.promoQty): 0) * promo.expireMonth;
+          } else {
+            offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promo.expireMonth;
+          }
           break;
       }
     }
