@@ -211,10 +211,10 @@ class MigrationController {
         def user = User.findByUsername(su.user)
         SiteUser.link(site, user)
       }
+      render(status: 200, text: "Done! Grab ${resp.assetFile} and unzip locally")
     } else {
-      println "Bad connection got response ${conn.responseCode}"
+      render(status: 200, text: "Error during migration - check logs")
     }
-    render(status: 200, text: "Done! Grab ${resp.assetFile} and unzip locally")
   }
 
   private clearNulls(Object obj) {
