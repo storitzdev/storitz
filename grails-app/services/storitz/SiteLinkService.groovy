@@ -1236,7 +1236,7 @@ class SiteLinkService {
           break;
 
         case "FIXED_RATE":
-          if (promo.inMonth == 1) {
+          if (promo.inMonth == 1 && promo.prepayMonths == 1) {
             offerDiscount = ((discountRate - promo.promoQty) > 0 ? (discountRate - promo.promoQty): 0) * promo.expireMonth;
           } else {
             offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promo.expireMonth;
