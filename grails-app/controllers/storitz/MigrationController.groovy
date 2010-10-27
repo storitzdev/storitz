@@ -105,7 +105,7 @@ class MigrationController {
       bindData(manager, resp.manager)
       manager.save(flush: true)
       for (n in notificationTypes) {
-        UserNotificationType.create(user, n)
+        UserNotificationType.create(manager, n)
       }
       for (u in resp.users) {
         def user = new User()
