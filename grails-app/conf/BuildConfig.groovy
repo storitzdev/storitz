@@ -4,7 +4,7 @@ grails.project.dependency.resolution = {
   repositories {
     grailsPlugins()
     grailsHome()
-    grailsCentral()
+    // grailsCentral()
   }
   dependencies {
     runtime "org.apache.ant:ant:1.7.1"
