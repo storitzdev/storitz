@@ -37,13 +37,32 @@ class MigrationController {
       for (site in myFeed.manager.sites) {
         siteUsers.add(site)
       }
+      // compile the assets into a file
+      def fileList = []
+      for(site in myFeed.sites) {
+        for(img in site.images) {
+          fileList.add("**${img.basename}/thumb_${img.fileLocation}")
+          fileList.add("**${img.basename}/mid_${img.fileLocation}")
+          fileList.add("**${img.basename}/${img.fileLocation}")
+        }
+      }
+      // add PDFs
+      for(ra in rentalAgreements) {
+        fileList.add("**${ra.src()}")
+      }
+      // build bundle
+      def tmpFile = File.createTempFile("migration", ".zip")
+      tmpFile.delete()
+      def ant = new AntBuilder();
+      println "Files for bundle:${tmpFile.canonicalFile} basedir: ${request.getRealPath("/")} - ${fileList.dump()}"
+      ant.zip(destfile:tmpFile.canonicalFile, basedir:request.getRealPath("/"), includes:fileList)
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":${myFeed.manager}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":${myFeed.manager}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON}")
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
-        render(status: 200, contentType: "application/json", text: "{ \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":${myFeed.manager}, \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":${myFeed.manager}, \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON }")
       }
     }
   }
@@ -53,8 +72,6 @@ class MigrationController {
     if (params.url) {
       urlString = params.url
     }
-
-    println "URL = ${urlString}"
 
     def url = new URL(urlString)
     def conn = url.openConnection()
@@ -197,7 +214,7 @@ class MigrationController {
     } else {
       println "Bad connection got response ${conn.responseCode}"
     }
-    render(status: 200, text: "Done!")
+    render(status: 200, text: "Done! Grab ${resp.assetFile} and unzip locally")
   }
 
   private clearNulls(Object obj) {
