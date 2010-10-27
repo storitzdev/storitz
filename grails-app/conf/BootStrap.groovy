@@ -210,6 +210,17 @@ class BootStrap {
       return returnArray
     }
 
+    JSON.registerObjectMarshaller UserRole, {
+      println "Using the registered UserRole Marshaller"
+
+      def returnArray = [:]
+
+      returnArray['user'] = it.user.username
+      returnArray['role'] = it.role.authority
+
+      return returnArray
+    }
+
     // create system ROLES
     def roleUser = Role.findByAuthority('ROLE_USER')
     if (!roleUser) {

@@ -17,6 +17,8 @@ import com.storitz.RentalAgreement
 import com.storitz.BankAccount
 import com.storitz.UserNotificationType
 import com.storitz.NotificationType
+import com.storitz.UserRole
+import com.storitz.Role
 
 class MigrationController {
 
@@ -110,6 +112,8 @@ class MigrationController {
       for (n in notificationTypes) {
         UserNotificationType.create(manager, n)
       }
+      UserRole.create(manager, Role.findByAuthority('ROLE_MANAGER'))
+      UserRole.create(manager, Role.findByAuthority('ROLE_USER'))
       for (u in resp.users) {
         def user = new User()
         notificationTypes = []
@@ -191,22 +195,24 @@ class MigrationController {
         if (s.rentalAgreement) {
           rentalAgreement = RentalAgreement.findByAgreementOwnerAndTitle(manager, s.rentalAgreement.title)
         }
+        def bankAccount
         if (s.bankAccount) {
-          def bankAccount = new BankAccount()
+          bankAccount = new BankAccount()
           bindData(bankAccount, s.bankAccount)
           s.bankAccount = null
-          site.bankAccount = bankAccount
         }
+        def logo
         if (s.logo) {
-          def logo = new SiteImage()
+          logo = new SiteImage()
           bindData(logo, s.logo)
           s.logo = null
-          site.logo = logo
         }
         s.rentalAgreement = null
         bindData(site, s)
-        site.rentalAgreement = rentalAgreement
         site.save(flush:true)
+        site.rentalAgreement = rentalAgreement
+        site.bankAccount = bankAccount
+        site.logo = logo
         for (image in images) {
           image.site = site
           site.addToImages(image)
@@ -242,6 +248,7 @@ class MigrationController {
         def site = StorageSite.findByTitle(su.site)
         def user = User.findByUsername(su.user)
         SiteUser.link(site, user)
+        UserRole.create(user, Role.findByAuthority('ROLE_USER'))
       }
       render(status: 200, text: "Done! Grab ${resp.assetFile} and unzip locally")
     } else {
