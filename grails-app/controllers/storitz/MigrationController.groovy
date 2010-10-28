@@ -215,16 +215,36 @@ class MigrationController {
         site.bankAccount = bankAccount
         site.save(flush:true)
         // adjust times by our timezone
-        site.startWeekday = DateUtils.addHours(site.startWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.endWeekday = DateUtils.addHours(site.endWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.startSaturday = DateUtils.addHours(site.startSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.endSaturday = DateUtils.addHours(site.endSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.startSunday = DateUtils.addHours(site.startSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.endSunday = DateUtils.addHours(site.endSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.startGate = DateUtils.addHours(site.startGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.endGate = DateUtils.addHours(site.endGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.startSundayGate = DateUtils.addHours(site.startSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
-        site.endSundayGate = DateUtils.addHours(site.endSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        if (site.startWeekday) {
+          site.startWeekday = DateUtils.addHours(site.startWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endWeekday) {
+          site.endWeekday = DateUtils.addHours(site.endWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startSaturday) {
+          site.startSaturday = DateUtils.addHours(site.startSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endSaturday) {
+          site.endSaturday = DateUtils.addHours(site.endSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startSunday) {
+          site.startSunday = DateUtils.addHours(site.startSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endSunday) {
+          site.endSunday = DateUtils.addHours(site.endSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startGate) {
+          site.startGate = DateUtils.addHours(site.startGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endGate) {
+          site.endGate = DateUtils.addHours(site.endGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startSundayGate) {
+          site.startSundayGate = DateUtils.addHours(site.startSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endSundayGate) {
+          site.endSundayGate = DateUtils.addHours(site.endSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
         for (image in images) {
           image.site = site
           site.addToImages(image)
