@@ -53,13 +53,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">Manager:</td>
-                            
-                            <td valign="top" class="value">${metroInstance?.manager?.username}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name">Neighborhood:</td>
                             
                             <td valign="top" class="value">${fieldValue(bean:metroInstance, field:'isNeighborhood')}</td>
@@ -70,7 +63,7 @@
                         <tr class="prop">
                             <td valign="top" class="name">Description:</td>
                             
-                            <td valign="top" class="value">${fieldValue(bean:metroInstance, field:'description')}</td>
+                            <td valign="top" class="value">${fieldValue(bean:metroInstance, field:'note')}</td>
                             
                         </tr>
                     
@@ -79,8 +72,9 @@
             </div>
             <div class="buttons">
                 <g:form>
+                  <input type="hidden" name="id" value="${metroInstance?.id}" />
                   <span class="button"><g:link action="edit" id="${metroInstance?.id}">Edit</g:link></span>
-                  <span class="button"><g:actionSubmit action="delete" id="${metroInstance?.id}" onclick="return confirm('Are you sure?');" value="Delete" /></span>
+                  <span class="button"><g:actionSubmit action="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
                 </g:form>
             </div>
         </div>

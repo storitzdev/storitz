@@ -87,8 +87,8 @@
               </div>
 
               <div class="checkout_fields">
-                <div style="width:300px;" class="checkout_value ${hasErrors(bean: metroInstance, field: 'enabled', 'errors')}">
-                  <g:checkBox name="enabled" value="${metroInstance?.isNeighborhood}" /> &nbsp; Neighborhood
+                <div style="width:300px;" class="checkout_value ${hasErrors(bean: metroInstance, field: 'isNeighborhood', 'errors')}">
+                  <g:checkBox name="isNeighborhood" value="${metroInstance?.isNeighborhood}" /> &nbsp; Neighborhood
                 </div>
                 <div style="clear:both; height:10px;"></div>
               </div>

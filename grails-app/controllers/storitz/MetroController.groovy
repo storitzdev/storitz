@@ -2,6 +2,7 @@ package storitz
 
 import com.storitz.Metro
 import grails.plugins.springsecurity.Secured
+import grails.converters.JSON
 
 @Secured(['ROLE_ADMIN'])
 class MetroController {
@@ -47,6 +48,13 @@ class MetroController {
       }
       [metroList: results, metroListCount: count]
     }
+
+    def autocompleteMetro = {
+
+      def results = Metro.findAllByCityIlike(params.term +'%', params).collect{it.city}
+      render (status: 200, contentType:"application/json", text: results as JSON )
+    }
+
 
     def create = {
         def metroInstance = new Metro()

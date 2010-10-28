@@ -34,7 +34,7 @@
             </div>
             </g:hasErrors>
 
-            <g:form action="save" method="post" >
+            <g:form action="save" method="post">
 
               <div class="formInstructions">
                 Create the metro name and choose the state.  Mark whether this is a metro landing page or a neighborhood landing page with the checkmark.
@@ -75,7 +75,7 @@
                     name="note"
                     width="650"
                     height="300"
-                    toolbar="Stortiz">
+                    toolbar="Storitz">
                     ${metroInstance?.note}
                   </fckeditor:editor>
                 </div>
@@ -87,8 +87,8 @@
               </div>
 
               <div class="checkout_fields">
-                <div style="width:300px;" class="checkout_value ${hasErrors(bean: metroInstance, field: 'enabled', 'errors')}">
-                  <g:checkBox name="enabled" value="${metroInstance?.isNeighborhood}" /> &nbsp; Neighborhood
+                <div style="width:300px;" class="checkout_value ${hasErrors(bean: metroInstance, field: 'isNeighborhood', 'errors')}">
+                  <g:checkBox name="isNeighborhood" value="${metroInstance?.isNeighborhood}" /> &nbsp; Neighborhood
                 </div>
                 <div style="clear:both; height:10px;"></div>
               </div>
@@ -96,7 +96,7 @@
               <div class="buttons">
                   <span class="button"><g:actionSubmit class="save" value="Update" /></span>
                   <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
-                  <span class="button"><g:link class="edit" action="show" id="${person?.id}">Cancel</g:link></span>
+                  <span class="button"><g:link class="edit" action="show" id="${metroInstance?.id}">Cancel</g:link></span>
               </div>
             </g:form>
         </div>
