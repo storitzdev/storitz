@@ -7,13 +7,6 @@
     <g:set var="title" value="Create User" scope="request"/>
     <g:render template="/header" />
 
-    <script type="text/javascript">
-//<![CDATA[
-      FastInit.addOnLoad(setupAutocomplete);
-//]]>
-
-    </script>
-
   </head>
   <body>
     <div id="body">

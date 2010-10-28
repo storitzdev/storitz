@@ -1,7 +1,9 @@
 package storitz
 
 import com.storitz.Metro
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class MetroController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -11,8 +13,39 @@ class MetroController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [metroInstanceList: Metro.list(params), metroInstanceTotal: Metro.count()]
+
+      if (!params.max) {
+          params.max = 10
+      }
+
+      def results
+      def count
+
+      if (params.city) {
+        def query
+        def criteria = Metro.createCriteria()
+
+        count = criteria.get {
+          projections {
+              countDistinct("id")
+          }
+          and {
+            ilike("city", params.city + '%')
+          }
+        }
+
+        results = Metro.createCriteria().list(params) {
+          and {
+            ilike("city", params.city + '%')
+          }
+        }
+
+
+      } else {
+          results = Metro.list(params)
+          count = Metro.count()
+      }
+      [metroList: results, metroListCount: count]
     }
 
     def create = {
@@ -25,7 +58,7 @@ class MetroController {
         def metroInstance = new Metro(params)
         if (metroInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'metro.label', default: 'Metro'), metroInstance.id])}"
-            redirect(action: "show", id: metroInstance.id)
+            redirect(action: "list")
         }
         else {
             render(view: "create", model: [metroInstance: metroInstance])
