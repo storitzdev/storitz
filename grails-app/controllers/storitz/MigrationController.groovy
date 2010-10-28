@@ -19,6 +19,7 @@ import com.storitz.UserNotificationType
 import com.storitz.NotificationType
 import com.storitz.UserRole
 import com.storitz.Role
+import org.apache.commons.lang.time.DateUtils
 
 class MigrationController {
 
@@ -127,6 +128,7 @@ class MigrationController {
         for (n in notificationTypes) {
           UserNotificationType.create(user, n)
         }
+        UserRole.create(user, Role.findByAuthority('ROLE_USER'))
         users.add(user)
       }
       for (u in users) {
@@ -209,14 +211,30 @@ class MigrationController {
         }
         s.rentalAgreement = null
         bindData(site, s)
-        site.save(flush:true)
         site.rentalAgreement = rentalAgreement
         site.bankAccount = bankAccount
-        site.logo = logo
+        site.save(flush:true)
+        // adjust times by our timezone
+        site.startWeekday = DateUtils.addHours(site.startWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.endWeekday = DateUtils.addHours(site.endWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.startSaturday = DateUtils.addHours(site.startSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.endSaturday = DateUtils.addHours(site.endSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.startSunday = DateUtils.addHours(site.startSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.endSunday = DateUtils.addHours(site.endSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.startGate = DateUtils.addHours(site.startGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.endGate = DateUtils.addHours(site.endGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.startSundayGate = DateUtils.addHours(site.startSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        site.endSundayGate = DateUtils.addHours(site.endSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
         for (image in images) {
           image.site = site
           site.addToImages(image)
           image.save(flush:true)
+        }
+        if (logo) {
+          logo.site = site
+          site.logo = logo
+          logo.save(flush:true)
+          site.save(flush:true)
         }
         for (so in specialOffers) {
           site.addToSpecialOffers(so)
@@ -248,7 +266,6 @@ class MigrationController {
         def site = StorageSite.findByTitle(su.site)
         def user = User.findByUsername(su.user)
         SiteUser.link(site, user)
-        UserRole.create(user, Role.findByAuthority('ROLE_USER'))
       }
       render(status: 200, text: "Done! Grab ${resp.assetFile} and unzip locally")
     } else {
