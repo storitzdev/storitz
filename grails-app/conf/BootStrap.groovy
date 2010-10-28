@@ -116,7 +116,7 @@ class BootStrap {
       def returnArray = [:]
       returnArray['corpCode'] = it.corpCode
       returnArray['userName'] = it.userName
-      returnArray['password'] = it.operatorName
+      returnArray['password'] = it.password
       returnArray['feedType'] = it.feedType as String
       returnArray['manager'] = it.manager
       returnArray['operatorName'] = it.operatorName
