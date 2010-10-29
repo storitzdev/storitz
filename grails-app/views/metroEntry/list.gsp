@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:set var="title" value="Metro List" scope="request"/>
+    <g:set var="title" value="Metro Entry List" scope="request"/>
     <g:render template="/header_admin"/>
 
     <p:dependantJavascript>
@@ -17,7 +17,7 @@
       });
 
       function setupUserSelector() {
-        jQuery("input#city").autocomplete({source:"${createLink(controller:'metro', action:'autocompleteMetro')}"});
+        jQuery("input#city").autocomplete({source:"${createLink(controller:'metroEntry', action:'autocompleteMetroEntry')}"});
       }
 
 //]]>
@@ -31,7 +31,7 @@
       <g:render template="/logo_bar" />
         <div class="buttons">
             <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-            <span class="button"><g:link action="create">New Metro</g:link></span>
+            <span class="button"><g:link action="create">New Metro Entry</g:link></span>
         </div>
         <div class="body">
 
@@ -48,7 +48,7 @@
                         <tbody>
                           <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='city'>Metro:</label>
+                                    <label for='city'>Metro Entry:</label>
                                 </td>
                                 <td valign='top' class='value'>
                                   <input type="text" id="city" name="city" value="${flash.city}"/>
@@ -67,25 +67,33 @@
                         
                    	        <g:sortableColumn property="id" title="Id" params="${flash}" />
                         
-                   	        <g:sortableColumn property="city" title="Metro" params="${flash}" />
+                            <g:sortableColumn property="zipcode" title="Zip Code" params="${flash}" />
+                        
+                   	        <g:sortableColumn property="city" title="Neighborhood" params="${flash}" />
                         
                    	        <g:sortableColumn property="state" title="State" params="${flash}"/>
                         
+                            <g:sortableColumn property="metro.city" title="Metro" params="${flash}"/>
+                          
                             <th>Edit</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${metroList}" status="i" var="metroInstance">
+                    <g:each in="${metroEntryList}" status="i" var="metroEntryInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${metroInstance.id}">${fieldValue(bean:metroInstance, field:'id')}</g:link></td>
+                            <td><g:link action="show" id="${metroEntryInstance.id}">${fieldValue(bean:metroEntryInstance, field:'id')}</g:link></td>
                         
-                            <td>${fieldValue(bean:metroInstance, field:'city')}</td>
+                            <td>${fieldValue(bean:metroEntryInstance, field:'zipcode')}</td>
+
+                            <td>${fieldValue(bean:metroEntryInstance, field:'city')}</td>
                         
-                            <td>${metroInstance?.state?.display}</td>
+                            <td>${metroEntryInstance?.state?.display}</td>
                         
-                            <td><g:link action="edit" id="${metroInstance.id}">edit</g:link></td>
+                            <td>${metroEntryInstance?.metro?.city}, ${metroEntryInstance?.metro?.state?.display}</td>
+
+                            <td><g:link action="edit" id="${metroEntryInstance.id}">edit</g:link></td>
 
                         </tr>
                     </g:each>
@@ -93,7 +101,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-              <g:paginate total="${metroListCount ? metroListCount : 0}" params="[city:params?.city]"/>
+              <g:paginate total="${metroEntryListCount ? metroEntryListCount : 0}" params="[city:params?.city]"/>
             </div>
         </div>
       </div>

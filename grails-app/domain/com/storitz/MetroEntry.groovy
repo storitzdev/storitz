@@ -6,10 +6,13 @@ class MetroEntry {
 
   static constraints = {
     metro(nullable:true)
+    zipcode(blank:false)
+    city(blank:false)
+    state(blank:false)
   }
 
   Metro metro
-  String zip
+  String zipcode
   String city
   State state
 

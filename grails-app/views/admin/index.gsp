@@ -33,6 +33,7 @@
           <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link> </li>
           <li><g:link controller="storageSite" action="refreshPromos">Refresh Promos</g:link> </li>
           <li><g:link controller="metro" action="list">Manage Metro Descriptions</g:link> </li>
+          <li><g:link controller="metroEntry" action="list">Manage Metro Neighborhoods/Zips</g:link> </li>
         </sec:ifAnyGranted>
         <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
         <li><g:link controller="user" action="list">Show Users</g:link> </li>
