@@ -719,7 +719,7 @@ class StorageSiteController {
   }
 
   def kml = {
-    def site = StorageSite.get(params.id)
+    def site = StorageSite.get(params.id as Long)
     [site:site]
   }
 

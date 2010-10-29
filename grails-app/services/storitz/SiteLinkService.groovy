@@ -1232,7 +1232,7 @@ class SiteLinkService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * durationMonths * unit.price;
           break;
 
         case "FIXED_RATE":

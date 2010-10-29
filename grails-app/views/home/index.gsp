@@ -583,12 +583,12 @@
                   <td class="stVert">
                     <div style="float:left;">
                       <a href="#" class="no_underline siteTitle" onclick="panTo(${site.id});return false">${site.title}</a><br>
-                      <g:link action="storageSite" controller="detail" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id]">${site.address}</g:link>
+                      <g:link action="storageSite" controller="detail" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display]">${site.address}</g:link>
                     </div>
                   </td>
                   <td class="textCenter">
                     <g:if test="${site.units.findAll{ it.unitType == UnitType.UPPER}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:UnitType.UPPER]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.UPPER} }" member="price" format="0.00"/></g:link>
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.UPPER]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.UPPER} }" member="price" format="0.00"/></g:link>
                     </g:if>
                     <g:else>
                       &#8212;
@@ -596,7 +596,7 @@
                    </td>
                   <td class="textCenter">
                     <g:if test="${site.units.findAll{ it.unitType == UnitType.INTERIOR}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:UnitType.INTERIOR]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.INTERIOR} }" member="price" format="0.00"/></g:link>
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.INTERIOR]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.INTERIOR} }" member="price" format="0.00"/></g:link>
                     </g:if>
                     <g:else>
                       &#8212;
@@ -604,7 +604,7 @@
                   </td>
                   <td class="textCenter">
                     <g:if test="${site.units.findAll{ it.unitType == UnitType.DRIVEUP}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, unitType:UnitType.DRIVEUP]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.DRIVEUP} }" member="price" format="0.00"/></g:link>
+                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.DRIVEUP]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.DRIVEUP} }" member="price" format="0.00"/></g:link>
                     </g:if>
                     <g:else>
                       &#8212;

@@ -44,10 +44,10 @@
   }
 
   function prevStep() {
-    window.location = "${createLink(controller:'storageSite', action:'detail',
+    window.location = "${createLink(mapping:'siteLink', controller:'storageSite', action:'detail',
       params:[id:rentalTransactionInstance?.site.id, searchSize:unit?.unitsize?.id, unitType:unit?.unitType,
-      promoId:rentalTransactionInstance?.promoId, returnForm: true,
-      insuranceId:rentalTransactionInstance?.insuranceId,
+      promoId:rentalTransactionInstance?.promoId, city:rentalTransactionInstance?.site.city, site_title:rentalTransactionInstance?.site.title, returnForm: true,
+      state:rentalTransactionInstance?.site.state.display, insuranceId:rentalTransactionInstance?.insuranceId,
       rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
   }
 

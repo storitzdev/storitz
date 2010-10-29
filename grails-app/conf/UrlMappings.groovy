@@ -1,16 +1,10 @@
 class UrlMappings {
     static mappings = {
-//      name siteLink: "/self-storage/$city/$site_title/$id" {
-//         controller = "storagesite"
-//         action = "detail"
-//         constraints {
-//           site_title(validator: { true })
-//         }
-//      }
+
     "500"(view:'/error')
     "404"(view:'/notfound')
 
-     name siteLink: "/self-storage/$city/$site_title/$id" {
+     name siteLink: "/self-storage/$city/$state/$site_title/$id" {
         controller = "storageSite"
         action = "detail"
      }

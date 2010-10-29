@@ -1,5 +1,7 @@
 package com.storitz
 
+import storitz.constants.ReferrerType
+
 class SearchEngineReferral {
 
     String sem_id
@@ -8,6 +10,8 @@ class SearchEngineReferral {
     Integer location_id
     String ad_id
     String keyword
+    Boolean isPaid
+    ReferrerType referrer
 
     Date landingDate
     Date bookingDate
@@ -15,5 +19,11 @@ class SearchEngineReferral {
 
     static constraints = {
       location_id(nullable:true)
+      sem_id(nullable:true)
+      match_type(nullable:true)
+      ts_code(nullable:true)
+      ad_id(nullable:true)
+      commission(nullable:true)
+      bookingDate(nullable:true)
     }
 }

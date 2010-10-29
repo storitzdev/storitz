@@ -24,7 +24,7 @@
               <div class="site">
                 %{--If we were to use "absolute:true" here then session url rewriting is disabled. --}%
                 <g:link controller="storageSite" action="detail" id="${storageSiteInstance.id}"
-                        params="${[city:storageSiteInstance.city, site_title:storageSiteInstance.siteTitle]}">${fieldValue(bean: storageSiteInstance, field: "title")}</g:link>
+                        params="${[city:storageSiteInstance.city, site_title:storageSiteInstance.siteTitle, state:storageSiteInstance.state.display]}">${fieldValue(bean: storageSiteInstance, field: "title")}</g:link>
                 <span>${fieldValue(bean: storageSiteInstance, field: "city")}</span>
               </div>
             </g:each>
