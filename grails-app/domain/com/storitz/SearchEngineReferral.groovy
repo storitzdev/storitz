@@ -12,6 +12,7 @@ class SearchEngineReferral {
     String keyword
     Boolean isPaid
     ReferrerType referrer
+    String referrerUrl
 
     Date landingDate
     Date bookingDate
@@ -25,5 +26,8 @@ class SearchEngineReferral {
       ad_id(nullable:true)
       commission(nullable:true)
       bookingDate(nullable:true)
+      referrerUrl(nullable:true)
+      referrer(nullable:true)
+      keyword(nullable:true)
     }
 }

@@ -361,14 +361,18 @@ class RentalTransactionController {
       ccString += ccNum.substring(ccNum.size() - 4)
       rentalTransactionInstance.cleanCCNum = ccString
 
-      if (params.landingCookie) {
-        def landing = CookieCodec.decodeCookieValue(params.landingCookie)
+      def landing = CookieCodec.decodeCookieValue(CookieCodec.getCookie(request, CookieCodec.LANDING_COOKIE_NAME).getValue())
 
-        if (landing.sem_id) {
-          rentalTransactionInstance.searchEngineReferral = new SearchEngineReferral(sem_id:landing.sem_id, ts_code:landing.ts_code, match_type:landing.match_type
-            , location_id:landing.location_id, ad_id:landing.ad_id, keyword:landing.keyword
-            , landingDate:landing.time, bookingDate:rentalTransactionInstance.bookingDate, commission:rentalTransactionInstance.commission)
-        }
+      def ser
+      if (landing?.serId) {
+        ser = SearchEngineReferral.get(landing.serId as Long)
+      }
+      if (ser) {
+        // TODO - handle possible multiple rentals
+
+        // record transaction
+        ser.bookingDate = new Date()
+        ser.commission = rentalTransactionInstance.commission
       }
 
       if (!moveInService.moveIn(rentalTransactionInstance)) {

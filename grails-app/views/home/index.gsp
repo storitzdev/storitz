@@ -85,7 +85,7 @@
         {
           var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
 
-          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id;
+          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id;
         }
 
         function getDate() {

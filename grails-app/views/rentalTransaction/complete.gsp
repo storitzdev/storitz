@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:render template="/header" />
+    <g:render template="/header_ssl" />
 
     <script type="text/javascript">
 //<![CDATA[
@@ -169,10 +169,8 @@
             <p>
               If you have any questions or concerns regarding your experience with Storitz, please contact us.
             </p>
-            <p>
-              <div>Phone: (877) 456-2929</div>
-              <div>Email: <a href="mailto:info@storitz.com">info@storitz.com</a></div>
-            </p>
+            <div>Phone: (877) 456-2929</div>
+            <div>Email: <a href="mailto:info@storitz.com">info@storitz.com</a></div>
             <p>
               Sincerely,
               Storitz, Inc.
@@ -184,9 +182,7 @@
 
           </div>
         </div>
-
       </div>
-    </div>
     <div style="clear:both; height:30px;"></div>
     <g:render template="/footer" />
     <g:render template="/size_popup" />
@@ -201,12 +197,13 @@
     var google_conversion_value = 0;
     /* ]]> */
     </script>
-    <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+    <script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
     </script>
     <noscript>
     <div style="display:inline;">
       <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1017239961/?label=bz-3CLei_QEQmbOH5QM&amp;guid=ON&amp;script=0"/>
     </div>
     </noscript>
+    </div>
   </body>
 </html>

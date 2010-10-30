@@ -57,10 +57,8 @@ public class CookieCodec
     Map result = [:]
     Matcher m = cookieCutter.matcher(s)
 
-    if (m.matches()) {
-      while (m.find()) {
-        result[m.group(1)] = new String(UrlBase64.decode(m.group(2).getBytes('UTF-8')), 'ISO-8859-1')
-      }
+    while (m.find()) {
+      result[(m.group(1))] = new String(UrlBase64.decode(m.group(2).getBytes('UTF-8')), 'ISO-8859-1')
     }
     
     result
