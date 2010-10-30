@@ -90,6 +90,8 @@ class UserController {
     def username  = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
 
+    println "username = ${username} params = ${params.term} user= ${user?.dump()}"
+
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       results = User.findAllByUsernameIlike(params.term +'%', params).collect{it.username}
