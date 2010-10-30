@@ -249,7 +249,7 @@
             if (offersArr.size() > 1 ) {
               offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
               tipBuilder.push({elementId:"offers" + s.id, content:"tooltip_offers" + s.id});
-            } else {
+            } else if (offersArr.size() > 0) {
               offers = offersArr[0];
             }
           }
