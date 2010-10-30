@@ -90,16 +90,12 @@ class UserController {
     def username  = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
 
-    println "username = ${username} params = ${params.term} user= ${user?.dump()}"
-
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       results = User.findAllByUsernameIlike(params.term +'%', params).collect{it.username}
     } else {
       results = User.findAllByManagerAndUsernameIlike(user, params.term + '%', [max:100, sort:"username", order:"asc"]).collect{it.username}
 
-      println "all by manager ${User.findAllByManager(user, [max: 100, sort:"username", order:"asc"]).collect{it.username}}"
-      
     }
     render (status: 200, contentType:"application/json", text: results as JSON )
   }
