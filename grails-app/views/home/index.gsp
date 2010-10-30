@@ -362,7 +362,9 @@
             <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
               tooltips.push(new Tooltip("truck${site.id}", "tooltip_truck"));
             </g:if>
-            tooltips.push(new Tooltip("offers${site.id}", "tooltip_offers${site.id}"));
+            <g:if test="${site.specialOffers.size() > 0}">
+              tooltips.push(new Tooltip("offers${site.id}", "tooltip_offers${site.id}"));
+            </g:if>
           </g:each>
           
         }
