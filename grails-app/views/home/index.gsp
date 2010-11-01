@@ -686,7 +686,7 @@
           </g:if>
         </div>
         <div style="margin:1em 0;">
-          <a name="bestprice"><span style="font-size: .83em;vertical-align:super">*</span>Best Price Guarantee: If you find a better deal on the storage unit type and size that you rented at the property you selected, on the day that you rented, we will pay the difference, AND give you $20.</a>
+          <a name="bestprice"><span style="font-size: .83em;vertical-align:super">*</span>Best Price Committment:  Storitz updates its pricing and availability of storage units every day and always presents the best price and the most economical move-in promotions.</a>
         </div>
       </div>
       <div style="height:100px;"></div>
