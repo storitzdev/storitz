@@ -1044,6 +1044,10 @@ class BootStrap {
     new UnitTypeLookup(id:614, description:"Company Use", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:615, description:"Inside Storage", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:616, description:"Office Space", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:617, description:"Exterior Drive-Up", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:618, description:"Interior Climate Control", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:619, description:"Interior Hallway", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:620, description:"Interior Climate Multi Door", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
   }
 
 
