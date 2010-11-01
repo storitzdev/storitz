@@ -418,18 +418,22 @@
         function setupHelp() {
           $('sizeInfo').observe('click', function(event) {
             $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
-            Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
+            Effect.toggle('sizeHelp', 'appear', {duration: 0.5});
           });
-          $('helpClose').observe('click', function() {
-            Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
+          $('sizeHelpClose').observe('click', function() {
+            Effect.toggle('sizeHelp', 'appear', {duration: 0.5});
+          });
+          $('resultInfo').observe('click', function(event) {
+            $('resultHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
+            Effect.toggle('resultHelp', 'appear', {duration: 0.5});
+          });
+          $('resultHelpClose').observe('click', function() {
+            Effect.toggle('resultHelp', 'appear', {duration: 0.5});
           });
         }
 
         function setupForm() {
           $('address').focus();
-          $('gsearchBtn').observe('click', function() {
-            showAddress(getAddress(), $F('size'), getDate());
-          });
           $('address').observe('keypress', function(event) {
             if (event.keyCode == 13) {
               showAddress(getAddress(), $F('size'), getDate());
@@ -531,7 +535,7 @@
                 <div class="left">
                   <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
                 </div>
-                <div class="left" style="padding: 4px 7px;">
+                <div class="left" style="padding: 4px 7px;cursor:pointer;">
                   <storitz:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
                 </div>
                 <div style="clear: both;"></div>
@@ -544,14 +548,16 @@
                 <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
               </div>
               <div style="clear: both;height: 10px;"></div>
-              <div style="margin-left: 30px;">
-                <storitz:image id="gsearchBtn" src="btn-find-it.png" class="noborder" width="108" height="36" alt="Search Storage"/>
-              </div>
               <div style="clear: both;"></div>
             </form>
           </div>
         </div>
         <!-- highlight offers here -->
+        <div class="storitzMessage">
+          <div>Needing storage is a bummer.  Finding storage is even more of a bummer. That’s where we come in.</div>
+          <div style="height: 10px;"></div>
+          <div>Storitz is the only Website that allows you to find and <span style="font-weight:bold;">RENT</span> your self storage unit online.  Find the <span style="font-weight:bold;"><a href="#bestprice">BEST PRICE<span style="font-size: .83em;vertical-align:super">*</span></a></span> in the most convenient location to you by comparing thousands of storage units in your area, on Storitz!</div>
+        </div>
         <div id="gmap">
           <div id="map_canvas"></div>
         </div>
@@ -560,7 +566,10 @@
         <div id="searchMsg" class="section_header"></div>
         <div style="height: 20px;clear: both;"></div>
         <div class="resultsBar">
-          Search Results
+          <div style="float:left;">Search Results</div>
+          <div class="left" style="padding: 4px 7px;cursor:pointer;">
+              <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
+          </div>
         </div>
         <div style="height: 20px;"></div>
 
@@ -677,29 +686,69 @@
           </g:if>
         </div>
         <div style="margin:1em 0;">
-          <p>
-            You need someplace to store your stuff. And
-            you’re pretty sure the perfect space is out there.
-            Somewhere. So how do you find that 10 by 10
-            that’s two miles away and currently offering the
-            first month free? Storitz. We help you search
-            thousands of self-storage units from hundreds of
-            partners all from one website. Shop anytime,
-            24/7—on your terms. Compare prices, size, amenities, locations.
-            Check out deals. Then rent your unit and complete the transaction
-            right on the spot. Storitz takes the hassle and headache out of
-            finding storage, saving you tons of time and money in the process.
-            Storitz. Click. Store. Done.
-          </p>
-          <p>
-            Find, compare and book storage for: climate controlled and air-conditioned storage,
-            wine storage, mini storage, self storage, RV parking, boat storage and more.
-          </p>
+          <a name="bestprice"><span style="font-size: .83em;vertical-align:super">*</span>Best Price Guarantee: If you find a better deal on the storage unit type and size that you rented at the property you selected, on the day that you rented, we will pay the difference, AND give you $20.</a>
         </div>
       </div>
       <div style="height:100px;"></div>
       <g:render template="/footer_no_analytics" />
       <g:render template="/size_popup" />
+
+      <div id="resultHelp" style="display:none;">
+        <div class="resultHelpHeader">
+          <div class="helpHeaderText">What do the results columns mean?</div>
+          <div class="helpClose" id="resultHelpClose">
+            <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
+            <div class="left"><storitz:image style="width:17px;height:16px;vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
+          </div>
+        </div>
+        <div>
+          <div class="resultHelpBoxText">
+            <div class="helpBoxTextHolder">
+              <div class="helpBoxTextTitle">
+                Drive-Up
+              </div>
+              <div class="helpBoxTextBody">
+                Means the storage unit door is accessed from a drive aisle.  You park your vehicle in front of the unit and load your stuff. Some large warehouse facilities have indoor drive aisles, so a Drive-Up can be outdoors or indoors.
+              </div>
+            </div>
+          </div>
+          <div class="resultHelpBoxSeparator"></div>
+          <div class="resultHelpBoxText">
+            <div class="helpBoxTextHolder">
+              <div class="helpBoxTextTitle">
+                Upper
+              </div>
+              <div class="helpBoxTextBody">
+                Many storage facilities have multiple floors. An “Upper” type of unit is on any floor other than the ground floor, which typically means it is on an upper floor and is accessed by a cargo lift or elevator. In some cases, this type of unit may be in a basement.
+              </div>
+            </div>
+          </div>
+          <div class="resultHelpBoxSeparator"></div>
+          <div class="resultHelpBoxText">
+            <div class="helpBoxTextHolder">
+              <div class="helpBoxTextTitle">
+                Interior
+              </div>
+              <div class="helpBoxTextBody">
+                Larger and urban storage facilities are typically housed in a large warehouse building. An Interior storage unit is on the Ground floor and accessed from inside a building.  Often times, there is a central loading area from the street and into building doors, and then your Interior unit is a short walk from those building doors.
+              </div>
+            </div>
+          </div>
+          <div class="resultHelpBoxSeparator"></div>
+          <div class="resultHelpBoxText">
+            <div class="helpBoxTextHolder">
+              <div class="helpBoxTextTitle">
+                Climate Control
+              </div>
+              <div class="helpBoxTextBody">
+                Some storage properties offer climate controlled storage unit areas.  The climate controls vary from simple ventilation, to evaporative cooling, all the way to full air conditioning and heating. For inclement locales, Climate Control is useful.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="clear:both;height:5px;"></div>
+      </div>
+
       <div id="tooltip_keypad" style="display:none" class="tooltip">
       Keypad Entry
       </div>

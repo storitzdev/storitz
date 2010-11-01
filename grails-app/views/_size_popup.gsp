@@ -1,7 +1,7 @@
 <div id="sizeHelp" style="display: none;">
-  <div id="helpHeader">
-    <div id="helpHeaderText">How much storage do you need?</div>
-    <div id="helpClose" style="cursor: pointer;">
+  <div class="helpHeader">
+    <div class="helpHeaderText">How much storage do you need?</div>
+    <div class="helpClose" id="sizeHelpClose">
       <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
       <div class="left"><storitz:image style="width:17px;height:16px;vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
     </div>

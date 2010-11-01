@@ -17,7 +17,7 @@ html, body {
     margin: 0;
 }
 
-a:link, a:visited, a:hover {
+a:link, a:visited {
     color: #666;
     font-weight: bold;
 } 
@@ -326,6 +326,7 @@ input.inputBox:focus {
 div.resultsBar {
     background: #fff url("../images/bar-search-results-wide-950.gif") no-repeat;
     width: 920px;
+    float: left;
     padding-left: 30px;
     color: white;
     font: 12px verdana, arial, helvetica, sans-serif;
@@ -418,29 +419,44 @@ div.resultsBar {
     width: 524px;
 }
 
+#resultHelp {
+    position: absolute;
+    background-color: white;
+    border: 4px solid #0971C2;
+    width: 460px;
+}
+
 #sizeHelpContents {
     font-size: 10px;
 }
 
-#helpHeader {
+.helpHeader {
     background: url(../images/bkg-storage-sizes-header2.jpg) no-repeat;
     width: 524px;
     height: 59px;
     color: white;
 }
 
-#helpHeaderText {
+.resultHelpHeader {
+    background: url(../images/bkg-storage-sizes-header2.jpg) no-repeat;
+    width: 460px;
+    height: 59px;
+    color: white;
+}
+
+.helpHeaderText {
     font: 18px verdana;
     margin-left: 55px;
     line-height: 59px;
     float: left;
 }
 
-#helpClose {
+.helpClose {
     font: 10px verdana;
     color: #a3d2f2;
     float: right;
     margin: 10px;
+    cursor: pointer;
 }
 
 div.helpBox {
@@ -456,11 +472,27 @@ div.helpBox {
     display: table;
 }
 
+.resultHelpBoxText {
+    float: left;
+    padding: 2px 5px 1px 5px;
+    height: 60px;
+    width: 425px;
+    display: table;
+}
+
 div.helpBoxSeparator {
     clear: both;
     width: 504px;
     height: 1px;
     margin: 0 10px;    
+    border-bottom: #9f9f9f dotted thin;
+}
+
+div.resultHelpBoxSeparator {
+    clear: both;
+    width: 440px;
+    height: 1px;
+    margin: 0 10px;
     border-bottom: #9f9f9f dotted thin;
 }
 
@@ -1212,4 +1244,16 @@ tr.rowOdd {
 
 #gsearchBtn {
     cursor: pointer;
+}
+
+div.storitzMessage {
+    width: 655px;
+    margin-top: -45px;
+    margin-bottom: 10px;
+    float:left;
+    font-size: 12px;
+    padding:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+    border:1px solid #dfdfdf;
 }
