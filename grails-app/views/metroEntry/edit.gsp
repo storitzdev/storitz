@@ -99,7 +99,7 @@
               </div>
               <div class="checkout_fields">
                 <div style="width:250px;" class="checkout_value ${hasErrors(bean: metroEntryInstance, field: 'metro', 'errors')}">
-                  <input type="text" name="metro" id="metro" />
+                  <input type="text" name="metro" id="metro" value="${metroEntryInstance?.metro?.city}, ${metroEntryInstance?.metro?.state.display}"/>
                   <input type="hidden" name="metro_id" id="metro_id" value="${metroEntryInstance?.metro?.id}" />
                 </div>
                 <div style="clear:both;"></div>
@@ -112,11 +112,11 @@
                 <div style="clear:both;"></div>
               </div>
 
-              <input type="hidden" name="id" value="${metroInstance?.id}" />
+              <input type="hidden" name="id" value="${metroEntryInstance?.id}" />
               <div class="buttons">
                   <span class="button"><g:actionSubmit class="save" value="Update" /></span>
                   <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
-                  <span class="button"><g:link class="edit" action="show" id="${metroInstance?.id}">Cancel</g:link></span>
+                  <span class="button"><g:link class="edit" action="show" id="${metroEntryInstance?.id}">Cancel</g:link></span>
               </div>
             </g:form>
         </div>

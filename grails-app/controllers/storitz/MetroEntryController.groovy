@@ -109,6 +109,10 @@ class MetroEntryController {
 
     def update = {
         def metroEntryInstance = MetroEntry.get(params.id)
+        params.remove("metro")
+        if (params.metro_id && params.metro_id.size() > 0) {
+          metroEntryInstance.metro = Metro.get(params.metro_id as Long)
+        }
         if (metroEntryInstance) {
             if (params.version) {
                 def version = params.version.toLong()
