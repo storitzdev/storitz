@@ -30,16 +30,18 @@ class GlobalFilters {
 
                      def uri = new URI(request.getHeader('Referer'))
                      def myMap = [:]
-                     uri.getQuery().split('&').each{ qp ->
-                         def arr = qp.split("=")
-                         if (arr.size() > 1) {
-                           myMap[(arr[0])] =  arr[1]
-                         }
-                     }
-                     if (uri.getHost().contains('yahoo')) {
-                      ser.keyword = myMap['p']
-                     } else {
-                      ser.keyword = myMap['q']
+                     if (uri.getQuery()) {
+                       uri.getQuery().split('&').each{ qp ->
+                           def arr = qp.split("=")
+                           if (arr.size() > 1) {
+                             myMap[(arr[0])] =  arr[1]
+                           }
+                       }
+                       if (uri.getHost().contains('yahoo')) {
+                        ser.keyword = myMap['p']
+                       } else {
+                        ser.keyword = myMap['q']
+                       }
                      }
                    }
                    ser.referrerUrl = request.getHeader('Referer')

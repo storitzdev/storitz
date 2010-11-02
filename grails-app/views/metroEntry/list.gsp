@@ -103,6 +103,24 @@
             <div class="paginateButtons">
               <g:paginate total="${metroEntryListCount ? metroEntryListCount : 0}" params="[city:params?.city]"/>
             </div>
+            <g:uploadForm action="upload" method="post" >
+                <div class="dialog">
+                    <table>
+                        <tbody>
+                          <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <label for='city'>File with entries:</label>
+                                </td>
+                                <td valign='top' class='value'>
+                                  <input type="file" name="uploadFile" />
+                                  <span class="button"><input class="save" type="submit" value="Upload" /></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                      </table>
+                  </div>
+            </g:uploadForm>
+
         </div>
       </div>
     </div>

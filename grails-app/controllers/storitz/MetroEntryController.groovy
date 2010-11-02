@@ -4,6 +4,7 @@ import com.storitz.MetroEntry
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import com.storitz.Metro
+import storitz.constants.State
 
 @Secured(['ROLE_ADMIN'])
 class MetroEntryController {
@@ -156,4 +157,37 @@ class MetroEntryController {
             redirect(action: "list")
         }
     }
+
+    def upload = {
+      def updated = 0
+      def newEntries = 0
+      request.getFile('uploadFile').inputStream.eachCsvLine { tokens ->
+        def state = State.getEnumFromId(tokens[0])
+        def metroCity = tokens[1]
+        def metro = Metro.findByCityAndState(metroCity, state)
+        if (metro) {
+          def city = tokens[2]
+          def zip = tokens[3]
+          if (zip?.size() > 0) {
+            def metroEntry = MetroEntry.findByZipcodeAndCity(zip, city)
+            if (!metroEntry) {
+              metroEntry = new MetroEntry()
+              newEntries++;
+            } else {
+              updated++;
+            }
+            metroEntry.city = city
+            metroEntry.state = state
+            metroEntry.metro = metro
+            metroEntry.zipcode = zip
+            metroEntry.save()
+          }
+        } else {
+          println "Skipping missing metro: ${metroCity}, ${state.display}"
+        }
+      }
+      flash.message = "Uploaded CSV processed new=${newEntries} updated=${updated}"
+      redirect(action: "list")
+    }
+
 }

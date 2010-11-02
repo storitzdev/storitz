@@ -9,6 +9,11 @@ class UrlMappings {
         action = "detail"
      }
 
+     name geo: "/self-storage/$city/$state/$zip" {
+       controller = "home"
+       action = "index"
+     }
+
      "/xxx/$id" {
         controller = "storageSite"
         action = "detail"

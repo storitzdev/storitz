@@ -19,6 +19,7 @@ grails install plugin jms
 grails install-plugin http://mamster.wnx.com/grails-dynamic-jasper-0.7.zip
 grails install-plugin sanitizer
 # Choose sanitation level?  I used 3 (loose - MySpace).
+grails install-plugin csv
 
 I (JPW) had a problem with Grails 1.2.4 failing to run-app with compilation errors complaining about JQuery classes.  Appears to be related to <http://jira.codehaus.org/browse/GRAILSPLUGINS-2513>.  I downgraded JQuery thusly:
 
