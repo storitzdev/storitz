@@ -176,7 +176,7 @@
                   return;                    
                 }
                 var randId = Math.floor(Math.random() * 100001);
-                var tableContents = '<table class="sortable" id="stresults' + randId + '"><thead><tr><th class="sortfirstasc distwidth" id="distance">Distance</th><th class="addrwidth" id="title">Location</th><th class="stprice pricewidth">Upper</th><th class="stprice pricewidth">Interior</th><th class="stprice pricewidth">Drive Up</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>';
+                var tableContents = '<table class="sortable" id="stresults' + randId + "\"><thead><tr><th class=\"sortfirstasc distwidth\" id=\"distance\">Distance</th><th class=\"addrwidth\" id=\"title\">Location</th><th class=\"pricewidthplus\"><div class=\"left\" style=\"padding: 0 5px;cursor:pointer;\"><img id='resultInfo' src=${p.imageLink(src:'icn_info_circle.png')} width='19' height='18' alt='results info'/></div><div class=\"left\" style=\"margin-top:2px;\">Upper</div></th><th class=\"pricewidth\">Interior</th><th class=\"pricewidth\">Drive Up</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>";
                 var rows = 0;
                 var offers;
 
@@ -577,14 +577,14 @@
                 <tr>
                   <th class="sortfirstasc distwidth" id="distance">Distance</th>
                   <th class="addrwidth" id="title">Location</th>
-                  <th class="stprice pricewidth">
-                    <div class="left" style="padding: 4px 7px;cursor:pointer;">
+                  <th class="pricewidthplus">
+                    <div class="left" style="padding: 0 5px;cursor:pointer;">
                         <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
                     </div>
-                    Upper
+                    <div class="left" style="margin-top:2px;">Upper</div>
                   </th>
-                  <th class="stprice pricewidth">Interior</th>
-                  <th class="stprice pricewidth">Drive Up</th>
+                  <th class="pricewidth">Interior</th>
+                  <th class="pricewidth">Drive Up</th>
                   <th>Features</th>
                   <th>Special Offers</th>
                 </tr>

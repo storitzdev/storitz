@@ -546,6 +546,10 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     width: 9%;
 }
 
+.pricewidthplus {
+    width: 11%;
+}
+
 .white {
     color: white;
 }
