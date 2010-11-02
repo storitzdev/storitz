@@ -554,9 +554,9 @@
         </div>
         <!-- highlight offers here -->
         <div class="storitzMessage">
-          <div>Needing storage is a bummer.  Finding storage is even more of a bummer. That’s where we come in.</div>
+          <div>You need storage. And, in addition to planning, packing and moving, you have to find the right storage unit. That's where we come in.</div>
           <div style="height: 10px;"></div>
-          <div>Storitz is the only Website that allows you to find and <span style="font-weight:bold;">RENT</span> your self storage unit online.  Find the <span style="font-weight:bold;"><a href="#bestprice">BEST PRICE<span style="font-size: .83em;vertical-align:super">*</span></a></span> in the most convenient location to you by comparing thousands of storage units in your area, on Storitz!</div>
+          <div>Storitz is the only Website that allows you to find and <span style="font-weight:bold;">RENT</span> your mini storage space, all online.  We help you find the <span style="font-weight:bold;"><a href="#bestprice">BEST PRICE<span style="font-size: .83em;vertical-align:super">*</span></a></span> in the most convenient location to you, by comparing thousands of storage units in your area, on Storitz!</div>
         </div>
         <div id="gmap">
           <div id="map_canvas"></div>
@@ -567,9 +567,6 @@
         <div style="height: 20px;clear: both;"></div>
         <div class="resultsBar">
           <div style="float:left;">Search Results</div>
-          <div class="left" style="padding: 4px 7px;cursor:pointer;">
-              <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
-          </div>
         </div>
         <div style="height: 20px;"></div>
 
@@ -580,7 +577,12 @@
                 <tr>
                   <th class="sortfirstasc distwidth" id="distance">Distance</th>
                   <th class="addrwidth" id="title">Location</th>
-                  <th class="stprice pricewidth">Upper</th>
+                  <th class="stprice pricewidth">
+                    <div class="left" style="padding: 4px 7px;cursor:pointer;">
+                        <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
+                    </div>
+                    Upper
+                  </th>
                   <th class="stprice pricewidth">Interior</th>
                   <th class="stprice pricewidth">Drive Up</th>
                   <th>Features</th>
@@ -695,7 +697,6 @@
 
       <div id="resultHelp" style="display:none;">
         <div class="resultHelpHeader">
-          <div class="helpHeaderText">What do the results columns mean?</div>
           <div class="helpClose" id="resultHelpClose">
             <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
             <div class="left"><storitz:image style="width:17px;height:16px;vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
