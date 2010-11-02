@@ -28,6 +28,9 @@
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/authorize-net-0.12/grails-app/utils" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/csv-0.1">
+      <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/csv-0.1/src/groovy" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7">
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/grails-app/controllers" isTestSource="false" />
@@ -116,9 +119,11 @@
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ws-client-1.0/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/lib" />
+          <root url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/csv-0.1/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/csv-0.1/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/dynamic-jasper-0.7/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/image-tools-1.0.5-SNAPSHOT/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/mail-0.9/lib" recursive="false" />

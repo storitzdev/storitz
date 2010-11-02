@@ -169,7 +169,10 @@ class MetroEntryController {
           if (metro) {
             def city = tokens[2]
             String zip = tokens[3]
-            if (zip?.size() > 0) {
+            if (zip?.size() >= 4) {
+              if (zip.size() == 4) {
+                zip = '0'+zip
+              }
               def metroEntry = MetroEntry.findByZipcodeAndCity(zip, city)
               if (!metroEntry) {
                 metroEntry = new MetroEntry()
@@ -180,9 +183,6 @@ class MetroEntryController {
               metroEntry.city = city
               metroEntry.state = state
               metroEntry.metro = metro
-              if (zip.size() == 4) {
-                zip = '0'+zip
-              }
               metroEntry.zipcode = zip
               metroEntry.save()
             }
