@@ -2,6 +2,7 @@ package storitz
 
 import com.storitz.StorageSize
 import com.storitz.MetroEntry
+import com.storitz.Metro
 
 class HomeController {
 
@@ -88,6 +89,11 @@ class HomeController {
       if (!state) state = metroEntry.state.display
       metro = metroEntry.metro
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+    } else {
+      if (city && state) {
+        metro = Metro.findByCityAndState(city, storitz.constants.State.getEnumFromId(state))
+        neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+      }
     }
 
     // optimize zoom level
