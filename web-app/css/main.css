@@ -1266,3 +1266,14 @@ div.storitzMessage {
     -moz-border-radius:10px;
     border:1px solid #dfdfdf;
 }
+
+div.wideTextbox {
+    width: 940px;
+    margin: 10px 0;
+    float:left;
+    font-size: 10px;
+    padding:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+    border:1px solid #dfdfdf;
+}

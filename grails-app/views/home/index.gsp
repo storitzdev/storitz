@@ -4,7 +4,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
     <head>
-      <meta name="Description" content="Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
+      <meta name="Description" content="Storitz Self-Storage search results in ${city}, ${state}. Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
       <g:render template="/header" />
       <p:dependantJavascript >
       <script type="text/javascript">
@@ -686,6 +686,36 @@
               </tbody>
             </table>
           </g:if>
+        </div>
+        <g:if test="${metro}">
+          <div class="wideTextbox">
+            <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
+            <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
+            <g:each in="${neighborhoodList}" var="n">
+              <div class="left" style="width:150px;">${n.city}</div>
+            </g:each>
+          </div>
+        </g:if>
+        <div class="wideTextbox">
+          <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
+          <div class="left" style="width:150px;">
+            <g:link mapping="metro" params="[city:'Los Angeles', state:'CA']">Los Angeles, CA</g:link>
+          </div>
+          <div class="left" style="width:150px;">
+            <g:link mapping="metro" params="[city:'Orange County', state:'CA']">Orange County, CA</g:link>
+          </div>
+          <div class="left" style="width:150px;">
+            <g:link mapping="metro" params="[city:'San Diego', state:'CA']">San Diego, CA</g:link>
+          </div>
+          <div class="left" style="width:150px;">
+            <g:link mapping="metro" params="[city:'Miami', state:'FL']">Miami, FL</g:link>
+          </div>
+          <div class="left" style="width:150px;">
+            <g:link mapping="metro" params="[city:'Houston', state:'TX']">Houston, TX</g:link>
+          </div>
+          <div class="left" style="width:150px;">
+            <g:link mapping="metro" params="[city:'San Jose', state:'CA']">San Jose, CA</g:link>
+          </div>
         </div>
         <div style="margin:1em 0;">
           <a name="bestprice"><span style="font-size: .83em;vertical-align:super">*</span>Best Price Committment:  Storitz updates its pricing and availability of storage units every day and always presents the best price and the most economical move-in promotions.</a>

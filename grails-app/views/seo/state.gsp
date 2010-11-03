@@ -16,7 +16,7 @@
     <div class="body">
       <h1>Self Storage results for ${state.fullName}</h1>
       <h2>Metro Areas</h2>
-      <div class="list">
+      <div style="width:650px;">
         <g:each in="${metroList}" var="metro">
           <div class="site">
             <g:link mapping="metro" params="${[city:metro.city, state:metro.state.display]}">${metro.city}, ${metro.state.display}</g:link>
@@ -24,7 +24,7 @@
         </g:each>
       </div>
       <h2>Cities and Neighborhoods</h2>
-      <div class="list">
+      <div class="left" style="width:300px;">
         <g:each in="${metroEntryList}" var="metroEntry">
           <div class="site">
             <g:link mapping="geo" params="${[city:metroEntry.city, state:metroEntry.state.display, zip:metroEntry.zipcode]}">${metroEntry.city}</g:link>

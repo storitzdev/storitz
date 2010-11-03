@@ -27,10 +27,10 @@ public enum ReferrerType {
     [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP]
   }
 
-  static public RentalUse getEnumFromId(String value) {
+  static public ReferrerType getEnumFromId(String value) {
       def ret = list().find {it.display == value }
       if (!ret) {
-        return RentalUse.valueOf(value)
+        return ReferrerType.valueOf(value)
       }
       return ret
   }
