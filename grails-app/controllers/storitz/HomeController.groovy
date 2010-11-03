@@ -28,21 +28,21 @@ class HomeController {
           geoResult = geocodeService.geocode(params.address)
         } else {
           geoResult = geocodeService.geocode("${params.city}, ${params.state}")
+          city = params.city
+          state = params.state
         }
 
         if (geoResult.Placemark) {
           lng = geoResult.Placemark[0].Point.coordinates[0]
           lat = geoResult.Placemark[0].Point.coordinates[1]
-          if (!zip) {
-            if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality) {
-              zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.PostalCode.PostalCodeNumber
-              state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
-              city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.DependentLocalityName
-            } else if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality) {
-              state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
-              city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
-              zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality?.PostalCode?.PostalCodeNumber
-            }
+          if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality) {
+            if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.PostalCode.PostalCodeNumber
+            if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
+            if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.DependentLocalityName
+          } else if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality) {
+            if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
+            if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
+            if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality?.PostalCode?.PostalCodeNumber
           }
 
         } else {
@@ -51,8 +51,8 @@ class HomeController {
           lat = loc.latitude
           lng = loc.longitude
           zip = loc.postalCode
-          city = loc.city
-          state = loc.region
+          if (!city) city = loc.city
+          if (!state) state = loc.region
         }
 
     } else {
@@ -84,8 +84,8 @@ class HomeController {
       metroEntry = MetroEntry.findByCityAndState(city, storitz.constants.State.getEnumFromId(state))
     }
     if (metroEntry) {
-      city = metroEntry.city
-      state = metroEntry.state.display
+      if (!city) city = metroEntry.city
+      if (!state) state = metroEntry.state.display
       metro = metroEntry.metro
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
     }
