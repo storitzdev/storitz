@@ -18,8 +18,34 @@ class SiteMapController
       }
 
       xml {
+        render(view:"sitemapIndex", contentType:'text/html; charset=utf-8', model:[])
+      }
+    }
+  }
+
+  def url = {
+    withFormat {
+      xml {
         def siteList = StorageSite.findAllByDisabled(false)
-        render(view:"sitemap", contentType:'text/html; charset=utf-8', model:[siteList:siteList])
+        render(view:"sitemapGeo", contentType:'text/html; charset=utf-8', model:[siteList:siteList])
+      }
+    }
+  }
+
+  def geo = {
+    withFormat {
+      xml {
+        def siteList = StorageSite.findAllByDisabled(false)
+        render(view:"sitemapGeo", contentType:'text/html; charset=utf-8', model:[siteList:siteList])
+      }
+    }
+  }
+
+  def image = {
+    withFormat {
+      xml {
+        def siteList = StorageSite.findAllByDisabled(false)
+        render(view:"sitemapImage", contentType:'text/html; charset=utf-8', model:[siteList:siteList])
       }
     }
   }

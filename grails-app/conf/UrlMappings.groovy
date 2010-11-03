@@ -14,6 +14,16 @@ class UrlMappings {
        action = "index"
      }
 
+     name state: "/self-storage/state/$state" {
+       controller = "seo"
+       action = "state"
+     }
+
+     name metro: "/self-storage/metro/$city/$state" {
+       controller = "home"
+       action = "index"
+     }
+
      "/xxx/$id" {
         controller = "storageSite"
         action = "detail"
@@ -29,6 +39,12 @@ class UrlMappings {
       }
 
       "/sitemap" (controller:"siteMap")
+
+      "/sitemapGeo" (controller:"siteMap", action:"geo")
+
+      "/sitemapImages" (controller:"siteMap", action:"image")
+
+      "/sitemapUrls" (controller:"siteMap", action:"url")
 
       "/$controller/$action?/$id?"{
 	      constraints {
