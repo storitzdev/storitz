@@ -692,29 +692,31 @@
             <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
             <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
             <g:each in="${neighborhoodList}" var="n">
-              <div class="left" style="width:150px;">${n.city}</div>
+              <div class="left" style="width:150px;">
+                <g:link mapping="geo" params="[city:n.city, state:n.state.display, zip:n.zipcode]">${n.city}</g:link>
+              </div>
             </g:each>
           </div>
         </g:if>
         <div class="wideTextbox">
           <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
           <div class="left" style="width:150px;">
-            <g:link mapping="metro" params="[city:'Los Angeles', state:'CA']">Los Angeles, CA</g:link>
+            <g:link mapping="metro" params="[city:'Los Angeles - Hollywood', state:'CA']">Los Angeles - Hollywood, CA</g:link>
           </div>
           <div class="left" style="width:150px;">
             <g:link mapping="metro" params="[city:'Orange County', state:'CA']">Orange County, CA</g:link>
           </div>
           <div class="left" style="width:150px;">
-            <g:link mapping="metro" params="[city:'San Diego', state:'CA']">San Diego, CA</g:link>
+            <g:link mapping="metro" params="[city:'East Bay', state:'CA']">East Bay, CA</g:link>
           </div>
           <div class="left" style="width:150px;">
-            <g:link mapping="metro" params="[city:'Miami', state:'FL']">Miami, FL</g:link>
+            <g:link mapping="metro" params="[city:'Philadelphia', state:'PA']">Philadelphia, PA</g:link>
           </div>
           <div class="left" style="width:150px;">
-            <g:link mapping="metro" params="[city:'Houston', state:'TX']">Houston, TX</g:link>
+            <g:link mapping="metro" params="[city:'Los Angeles - South Bay', state:'CA']">Los Angeles - South Bay, CA</g:link>
           </div>
           <div class="left" style="width:150px;">
-            <g:link mapping="metro" params="[city:'San Jose', state:'CA']">San Jose, CA</g:link>
+            <g:link mapping="metro" params="[city:'Phoenix', state:'AZ']">Phoenix, AZ</g:link>
           </div>
         </div>
         <div style="margin:1em 0;">
