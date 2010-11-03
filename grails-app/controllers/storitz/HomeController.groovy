@@ -30,8 +30,10 @@ class HomeController {
         // get IP to geo
         def loc = mapService.getGeoIp(servletContext, request)
 
-        lat = loc.latitude
-        lng = loc.longitude
+        if (loc) {
+          lat = loc.latitude
+          lng = loc.longitude
+        }
       }
       
       // optimize zoom level

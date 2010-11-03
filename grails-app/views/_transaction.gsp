@@ -1,5 +1,5 @@
 <div class="transBox">
-  <div style="margin: 5px 15px 20px 15px;">
+  <div style="width:620px;margin: 5px 15px 20px 15px;">
     <div class="left">
       <div class="transHeader">Unit Type</div>
       <div>
@@ -39,7 +39,7 @@
       Selected Offer: <span id="selectedOffer" class="selectedOffer"></span>&nbsp;<span id="clearOffer" class="clearOffer"></span>
     </div>
     <div style="height: 10px;clear:both;"></div>
-    <div class="left">
+    <div class="left" style="width:105px;">
       <div class="specialOfferText">
         Featured Offers
       </div>
@@ -66,39 +66,39 @@
       <div id="costDetails" class="right">
         <table id="costTotals">
           <tr>
-            <td>Monthly rent</td>
+            <td class="transLineDesc">Monthly rent</td>
             <td class="costDuration" id="monthlyDuration"></td>
             <td class="costMoneyPerMonth" id="monthlyPerMonth"></td>
             <td class="costMoney" id="monthlyTotal"></td>
           </tr>
           <tr id="specialOfferBlock">
-            <td>Selected Offer</td>
-            <td></td>
-            <td></td>
+            <td class="transLineDesc">Selected Offer</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
             <td class="costMoney" id="discountTotal"></td>
           </tr>
           <tr id="insuranceBlock">
-            <td>Property Protection</td>
+            <td class="transLineDesc">Property Protection</td>
             <td class="costDuration" id="insuranceDuration"></td>
             <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
             <td class="costMoney" id="insuranceTotal"></td>
           </tr>
           <tr>
-            <td>Admin Fees</td>
-            <td></td>
-            <td></td>
+            <td class="transLineDesc">Admin Fees</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
             <td class="costMoney" id="adminTotal"></td>
           </tr>
           <tr id="depositBlock">
-            <td>Refundable Deposit</td>
-            <td></td>
-            <td></td>
+            <td class="transLineDesc">Refundable Deposit</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
             <td class="costMoney" id="deposit"></td>
           </tr>
           <tr id="taxBlock">
-            <td>Tax</td>
-            <td></td>
-            <td></td>
+            <td class="transLineDesc">Tax</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
             <td class="costMoney" id="taxTotal"></td>
           </tr>
         </table>

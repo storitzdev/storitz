@@ -1125,6 +1125,11 @@ p.descriptionText {
     width: 40px;
 }
 
+.transLineDesc {
+    width: 120px;
+    text-align:right;
+}
+
 #featuresList ul {
 	-moz-border-radius:8px 8px 8px 8px;
 	border:1px solid #dfdfdf;

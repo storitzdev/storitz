@@ -333,12 +333,12 @@
             
             <div id="detail_tabs">
               <div id="tabSet" style="width:650px;border-bottom:1px solid #dfdfdf;">
-                <div id="tab_description" class="left tab_on button_text">Description</div>
+                <div id="tab_summary" class="left tab_on button_text">Description</div>
                 <div id="tab_photos" class="left tab_off button_text_hi">Photos</div>
                 <div id="tab_directions" class="left tab_off button_text_hi">Map &amp; Directions</div>
                 <div style="clear: both;"></div>
               </div>
-              <div id="description" style="width:650px; margin-top:20px;">
+              <div id="summary" style="width:650px; margin-top:20px;">
                 <div class="left">
                   <g:if test="${site.coverImage()}">
                     <div class="left">

@@ -59,7 +59,7 @@ public class GeoIp {
             }
         }
         if (lookupService != null) {
-            if (ipAddr.equals("127.0.0.1")) {
+            if (ipAddr.equals("127.0.0.1") || ipAddr.startsWith("192.168") || ipAddr.startsWith("10.")) {
                 ipAddr = "71.118.52.85";
             }
             loc = lookupService.getLocation(ipAddr);

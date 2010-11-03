@@ -28,7 +28,7 @@
 <div class="siteInfoText">
   <table class="operatingHours">
     <tr>
-      <td class="tright">
+      <td class="tright" style="width:120px;">
         Weekdays:
       </td>
       <g:if test="${site.openWeekday}">
@@ -45,7 +45,7 @@
       </g:else>
     </tr>
     <tr>
-      <td class="tright">
+      <td class="tright" style="width:120px;">
         Saturday:
       </td>
       <g:if test="${site.openSaturday}">
@@ -62,7 +62,7 @@
       </g:else>
     </tr>
     <tr>
-      <td class="tright">
+      <td class="tright" style="width:120px;">
         Sunday:
       </td>
       <g:if test="${site.openSunday}">
@@ -79,7 +79,7 @@
       </g:else>
     </tr>
     <tr>
-      <td class="tright">
+      <td class="tright" style="width:120px;">
         Gate Weekdays:
       </td>
       <td>
@@ -91,7 +91,7 @@
       </td>
     </tr>
     <tr>
-      <td class="tright">
+      <td class="tright" style="width:120px;">
         Gate Sunday:
       </td>
       <td>
