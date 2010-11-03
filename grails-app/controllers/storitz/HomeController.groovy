@@ -35,6 +35,10 @@ class HomeController {
           lng = loc.longitude
         }
       }
+      if (!lat || !lng) {
+        lat = 39.8333333
+        lng = -98.5833333
+      }
       
       // optimize zoom level
       def zoom = mapService.optimizeZoom(params.searchSize as Integer, lat, lng, 650, 321)
