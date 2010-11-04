@@ -701,22 +701,73 @@
         <div class="wideTextbox">
           <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
           <div class="left" style="width:175px;">
-            <g:link mapping="metro" params="[city:'Los Angeles - Hollywood', state:'CA']">Los Angeles - Hollywood, CA</g:link>
+            <g:link mapping="geo" params="[city:'Santa Monica', state:'CA', zip:'90404']">Santa Monica, CA</g:link>
           </div>
           <div class="left" style="width:175px;">
-            <g:link mapping="metro" params="[city:'Orange County', state:'CA']">Orange County, CA</g:link>
+            <g:link mapping="geo" params="[city:'Los Angeles', state:'CA', zip:'90001']">Los Angeles, CA</g:link>
           </div>
           <div class="left" style="width:175px;">
-            <g:link mapping="metro" params="[city:'East Bay', state:'CA']">East Bay, CA</g:link>
+            <g:link mapping="geo" params="[city:'Irvine', state:'CA', zip:'92612']">Irvine, CA</g:link>
           </div>
           <div class="left" style="width:175px;">
-            <g:link mapping="metro" params="[city:'Philadelphia', state:'PA']">Philadelphia, PA</g:link>
+            <g:link mapping="geo" params="[city:'Long Beach', state:'CA', zip:'90806']">Long Beach, CA</g:link>
           </div>
           <div class="left" style="width:175px;">
-            <g:link mapping="metro" params="[city:'Los Angeles - South Bay', state:'CA']">Los Angeles - South Bay, CA</g:link>
+            <g:link mapping="geo" params="[city:'West Hollywood', state:'CA', zip:'90069']">West Hollywood, CA</g:link>
           </div>
           <div class="left" style="width:175px;">
-            <g:link mapping="metro" params="[city:'Phoenix', state:'AZ']">Phoenix, AZ</g:link>
+            <g:link mapping="geo" params="[city:'Van Nuys', state:'CA', zip:'91406']">Van Nuys, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Torrance', state:'CA', zip:'90505']">Torrance, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Newport Beach', state:'CA', zip:'92660']">Newport Beach, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'El Segundo', state:'CA', zip:'90245']">El Segundo, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Burbank', state:'CA', zip:'91505']">Burbank, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Palm Desert', state:'CA', zip:'92260']">Palm Desert, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Anaheim', state:'CA', zip:'92805']">Anaheim, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Lancaster', state:'CA', zip:'93535']">Lancaster, CA</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Austin', state:'TX', zip:'73301']">Austin, TX</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Dallas', state:'TX', zip:'75201']">Dallas, TX</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Houston', state:'TX', zip:'77001']">Houston, TX</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Jacksonville', state:'FL', zip:'32099']">Jacksonville, FL</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Miami', state:'FL', zip:'33010']">Miami, FL</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Clearwater', state:'FL', zip:'33755']">Clearwater, FL</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'New York', state:'NY', zip:'10001']">New York, NY</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Phoenix', state:'AZ', zip:'85001']">Phoenix, AZ</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Denver', state:'CO', zip:'80201']">Denver, CO</g:link>
+          </div>
+          <div class="left" style="width:175px;">
+            <g:link mapping="geo" params="[city:'Seattle', state:'WA', zip:'98101']">Seattle, WA</g:link>
           </div>
         </div>
         <div style="margin:1em 0;">
