@@ -10,6 +10,7 @@ package storitz.constants
 public enum TransactionStatus {
   BEGUN("Begun"),
   PAID("Paid"),
+  CANCELED("Canceled"),
   COMPLETE("Complete");
 
   final String display;
