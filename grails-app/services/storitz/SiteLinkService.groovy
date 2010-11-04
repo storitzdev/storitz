@@ -1063,10 +1063,10 @@ class SiteLinkService {
     )
     def rented = false
     records.'soap:Body'.'*:UnitsInformationByUnitNameResponse'.'*:UnitsInformationByUnitNameResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      rented = tab.bRented.text() as Boolean
+      rented = (tab.bRented.text().toLowerCase() == 'true')
     }
 
-    return rented
+    return !rented
   }
 
   def moveInDetail(RentalTransaction rentalTransaction) {
