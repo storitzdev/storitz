@@ -22,6 +22,7 @@ class StorageUnit {
     Boolean isTempControlled
     Boolean isAlarm
     Boolean isPowered
+    Boolean isIrregular
     Date startAvail
     BigDecimal price
     BigDecimal pushRate

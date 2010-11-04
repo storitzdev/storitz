@@ -1299,7 +1299,8 @@ class CShiftService {
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
 
     def ret = [:]
-    BigDecimal durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
+    BigDecimal durationMonths = promo ? promo.prepayMonths : 1
+    BigDecimal promoMonths = promo ? (promo.prepay ? (promo.expireMonth >= durationMonths ? durationMonths : promo.expireMonth) : promo.prepayMonths) : 0
     def offerDiscount = 0
     def rate = unit ? unit.pushRate : 0
     def premium = ins ? ins.premium : 0
@@ -1308,21 +1309,24 @@ class CShiftService {
     def waiveAdmin = false
     def deposit = site.deposit ? site.deposit : 0
 
+
+    println "Duration months: ${durationMonths} prepay: ${promo?.prepay} prepay months: ${promo?.prepayMonths} expire month: ${promo?.expireMonth}"
+
     if (promo) {
 
       waiveAdmin = promo.waiveAdmin
 
       switch (promo.promoType) {
         case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promo.expireMonth;
+          offerDiscount = promo.promoQty * promoMonths;
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promo.expireMonth * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
           break;
 
         case "FIXED_RATE":
-          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promo.expireMonth;
+          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promoMonths;
           break;
       }
     }
