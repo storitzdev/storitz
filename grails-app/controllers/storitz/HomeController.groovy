@@ -26,7 +26,11 @@ class HomeController {
           geoResult = geocodeService.geocode(params.zip)
           zip = params.zip
         } else if (params.address) {
-          geoResult = geocodeService.geocode(params.address)
+          def address = params.address
+          if (params.address.class.isArray()) {
+            address = params.address.join(' ');
+          }
+          geoResult = geocodeService.geocode(address)
         } else {
           geoResult = geocodeService.geocode("${params.city}, ${params.state}")
           city = params.city
@@ -83,7 +87,11 @@ class HomeController {
     if (zip) {
       metroEntry = MetroEntry.findByZipcode(zip)
     } else if (city && state) {
-      metroEntry = MetroEntry.findByCityAndState(city, storitz.constants.State.getEnumFromId(state))
+      def myState
+      try {
+        myState = storitz.constants.State.getEnumFromId(state)
+        metroEntry = MetroEntry.findByCityAndState(city, myState)
+      } catch (Exception e) {}
     }
     if (metroEntry) {
       if (!city) city = metroEntry.city
