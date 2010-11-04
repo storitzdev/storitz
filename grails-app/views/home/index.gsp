@@ -700,22 +700,22 @@
         </g:if>
         <div class="wideTextbox">
           <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
-          <div class="left" style="width:150px;">
+          <div class="left" style="width:175px;">
             <g:link mapping="metro" params="[city:'Los Angeles - Hollywood', state:'CA']">Los Angeles - Hollywood, CA</g:link>
           </div>
-          <div class="left" style="width:150px;">
+          <div class="left" style="width:175px;">
             <g:link mapping="metro" params="[city:'Orange County', state:'CA']">Orange County, CA</g:link>
           </div>
-          <div class="left" style="width:150px;">
+          <div class="left" style="width:175px;">
             <g:link mapping="metro" params="[city:'East Bay', state:'CA']">East Bay, CA</g:link>
           </div>
-          <div class="left" style="width:150px;">
+          <div class="left" style="width:175px;">
             <g:link mapping="metro" params="[city:'Philadelphia', state:'PA']">Philadelphia, PA</g:link>
           </div>
-          <div class="left" style="width:150px;">
+          <div class="left" style="width:175px;">
             <g:link mapping="metro" params="[city:'Los Angeles - South Bay', state:'CA']">Los Angeles - South Bay, CA</g:link>
           </div>
-          <div class="left" style="width:150px;">
+          <div class="left" style="width:175px;">
             <g:link mapping="metro" params="[city:'Phoenix', state:'AZ']">Phoenix, AZ</g:link>
           </div>
         </div>

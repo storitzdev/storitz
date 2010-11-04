@@ -36,11 +36,11 @@ class HomeController {
         if (geoResult.Placemark) {
           lng = geoResult.Placemark[0].Point.coordinates[0]
           lat = geoResult.Placemark[0].Point.coordinates[1]
-          if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality) {
-            if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.PostalCode.PostalCodeNumber
+          if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea?.Locality?.DependentLocality) {
+            if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality?.PostalCode?.PostalCodeNumber
             if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
             if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.DependentLocalityName
-          } else if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality) {
+          } else if (geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea?.SubAdministrativeArea?.Locality) {
             if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
             if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
             if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality?.PostalCode?.PostalCodeNumber
