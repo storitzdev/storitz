@@ -1299,7 +1299,7 @@ class CShiftService {
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
 
     def ret = [:]
-    BigDecimal durationMonths = promo ? promo.prepayMonths : 1
+    BigDecimal durationMonths = promo ? (promo.prepay ? promo.expireMonth : promo.prepayMonths) : 1
     BigDecimal promoMonths = promo ? (promo.prepay ? (promo.expireMonth >= durationMonths ? durationMonths : promo.expireMonth) : promo.prepayMonths) : 0
     def offerDiscount = 0
     def rate = unit ? unit.pushRate : 0
@@ -1318,7 +1318,7 @@ class CShiftService {
 
       switch (promo.promoType) {
         case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promoMonths;
+          offerDiscount = promo.promoQty;
           break;
 
         case "PERCENT_OFF":
