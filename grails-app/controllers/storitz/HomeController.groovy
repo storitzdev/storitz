@@ -31,6 +31,7 @@ class HomeController {
           geoResult = geocodeService.geocode("${params.city}, ${params.state}")
           city = params.city
           state = params.state
+
         }
 
         if (geoResult.Placemark) {
