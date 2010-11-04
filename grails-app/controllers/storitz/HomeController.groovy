@@ -82,7 +82,7 @@ class HomeController {
     def metroEntry
     if (zip) {
       metroEntry = MetroEntry.findByZipcode(zip)
-    } else {
+    } else if (city && state) {
       metroEntry = MetroEntry.findByCityAndState(city, storitz.constants.State.getEnumFromId(state))
     }
     if (metroEntry) {
