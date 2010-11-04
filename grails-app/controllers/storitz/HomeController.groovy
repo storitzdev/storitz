@@ -80,7 +80,7 @@ class HomeController {
 
     def title = "Storitz self-storage search results in ${params.address ? params.address : city + ', ' + state}"
 
-    def neighborhoodList
+    def neighborhoodList = null
     def metro
 
     def metroEntry
@@ -91,7 +91,12 @@ class HomeController {
       try {
         myState = storitz.constants.State.getEnumFromId(state)
         metroEntry = MetroEntry.findByCityAndState(city, myState)
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        try {
+          myState = storitz.constants.Province.getEnumFromId(state)
+          metroEntry = MetroEntry.findByCityAndState(city, myState)
+        } catch (Exception e2) {}
+      }
     }
     if (metroEntry) {
       if (!city) city = metroEntry.city
@@ -100,8 +105,16 @@ class HomeController {
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
     } else {
       if (city && state) {
-        metro = Metro.findByCityAndState(city, storitz.constants.State.getEnumFromId(state))
-        neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+        def myState
+        try {
+          myState = storitz.constants.State.getEnumFromId(state)
+          metro = Metro.findByCityAndState(city, myState)
+        } catch (Exception e) {
+          try {
+            myState = storitz.constants.Province.getEnumFromId(state)
+            metro = Metro.findByCityAndState(city, myState)
+          } catch (Exception e2) {}
+        }
       }
     }
 
@@ -114,4 +127,5 @@ class HomeController {
 
     [ sizeList: StorageSize.list(params), title:title, city:city, state:state, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: (params.searchSize ? params.searchSize : 1), sites: sites]
   }
+
 }

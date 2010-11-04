@@ -696,7 +696,7 @@ class StorageSiteController {
 
     def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${bestUnit?.pushRate}, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType.display}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${bestUnit?.pushRate}, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"additionalFees\":${additionalFees}, \"premium\":${premium}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
 
   }
 
