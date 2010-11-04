@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <p:css name="login.css" />
+    <g:set var="title" value="Change Password" scope="request"/>
     <g:render template="/header_admin"/>
 
     <script type="text/javascript">
