@@ -1228,7 +1228,7 @@ class SiteLinkService {
 
       switch (promo.promoType) {
         case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty * promo.expireMonth;
+          offerDiscount = promo.promoQty;
           break;
 
         case "PERCENT_OFF":
