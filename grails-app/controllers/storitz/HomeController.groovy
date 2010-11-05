@@ -25,6 +25,12 @@ class HomeController {
         if (params.zip) {
           geoResult = geocodeService.geocode(params.zip)
           zip = params.zip
+          if (params.city) {
+            city = params.city
+          }
+          if (params.state) {
+            state = params.state
+          }
         } else if (params.address) {
           def address = params.address
           if (params.address.class.isArray()) {
