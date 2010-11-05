@@ -15,7 +15,6 @@
         <p class="footer"><a href="http://blog.storitz.com" class="footer small" onclick="window.open(this.href,'_blank');return false;">Storitz Blog</a></p>
         <p class="footer"><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
-        <p class="footer"><g:link class="footer small" controller="siteMap">Site Map</g:link></p>
         <p class="footer"><g:link class="footer small" controller="admin" action="index">Owner Admin</g:link></p>
       </div>
       <div style="clear: both;"></div>

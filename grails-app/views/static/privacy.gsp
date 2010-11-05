@@ -3,8 +3,9 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
+    <g:set var="title" scope="request" value="Storitz Privacy Policy"/>
     <g:render template="/header" />
-    <meta name="DESCRIPTION" content="Storitz privacy policy."/>
+    <meta name="DESCRIPTION" content="Storitz privacy policy. What you should know about your personally identifiably information and Storitz."/>
 
     <script type="text/javascript">
 //<![CDATA[

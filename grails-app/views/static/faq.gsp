@@ -3,6 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
+    <g:set var="title" scope="request" value="Storitz Frequently Asked Questions"/> 
     <g:render template="/header" />
     <meta name="DESCRIPTION" content="Frequently asked questions about self storage, Storitz and the rental process."/>
 
