@@ -117,7 +117,7 @@ class HomeController {
       }
     }
 
-    def title = "Storitz self-storage search results in ${params.address ? params.address : city + ', ' + state}${zip ? ' postal code' + zip : ''}"
+    def title = "Storitz self-storage search results in ${params.address ? params.address : city + ', ' + state}${zip ? ' postal code ' + zip : ''}"
     // optimize zoom level
     def zoom = mapService.optimizeZoom(params.searchSize as Integer, lat, lng, 650, 321)
 
