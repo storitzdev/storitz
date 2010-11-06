@@ -18,7 +18,7 @@
   <body>
     <div id="body">
     <g:render template="/topnav" />
-    <div id="stcontent">
+    <div class="stcontent">
       <g:render template="/logo_bar" />
       <div id="site_info" class="left" style="margin-top: 26px;">
         <g:render template="/siteInfo" />

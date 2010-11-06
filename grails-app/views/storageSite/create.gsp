@@ -14,7 +14,7 @@
 </head>
 <body>
 <g:render template="/topnav"/>
-<div id="stcontent">
+<div class="stcontent">
   <div class="nav">
     <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
     <span class="menuButton"><g:link class="list" action="list">Storage Site List</g:link></span>

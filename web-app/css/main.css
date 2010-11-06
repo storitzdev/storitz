@@ -239,7 +239,7 @@ Added styles
     border-style: none;
 }
 
-#stcontent {
+.stcontent {
     margin-left: auto;
     margin-right: auto;
     width: 950px;
@@ -250,12 +250,64 @@ Added styles
     background-image: url("../images/bkg_topbar.gif");
 }
 
-#tollFree {
+div.bannerMasthead {
+    width: 349px;
+    height: 67px;
+    margin-right: 3px;
+    background: #fff url("../images/banner-masthead.gif") no-repeat;
+}
+
+div.mastheadCenter {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    width: 349px;
+}
+
+div.mastheadTop {
+    margin: 13px 0 0 20px;
+    color: #00529b;
+    font: 15px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
-    color: #3fac00;
-    float: right;
-    margin-top: -33px;
-    z-index: -10;
+}
+
+div.mastheadBottom {
+    margin: 0 0 0 20px;
+    color: #0f93e7;
+    font: 15px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+div.topnavText {
+    margin-left: auto;
+    margin-right: auto;
+    width: 950px;
+    color: #a1d3f3;
+    line-height: 26px;
+    text-align: right;
+}
+
+a.whiteLink:link, a.whiteLink:hover, a.whiteLink:visited {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    color: #fff;
+}
+
+a.navMenu:link, a.navMenu:hover, a.navMenu:visited {
+    color: #00529b;
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+div.tollFree {
+    font-weight: bold;
+    color: #7ac142;
+    height: 40px;
+    margin: 15px 0 0 7px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    border-left: #ccc solid 2px;
 }
 
 #footer {
@@ -284,10 +336,21 @@ Added styles
     color: #3fac00;
 }
 
-#search {
-    width: 280px;
-    height: 339px;
+.leftColumn {
+    width: 300px;
     float: left;
+    margin-left: 15px;
+}
+
+div.leftSection {
+    padding-bottom: 15px;
+    margin: 0 20px 15px 15px;
+    border-bottom: #9f9f9f dashed thin;
+}
+
+.rightColumn {
+    float: left;
+    width: 635px;
 }
 
 .inputBox {
@@ -311,16 +374,16 @@ input.inputBox:focus {
 }
 
 #gmap {
-    background: #fff url("../images/map-frame-wide.png") no-repeat;
-    width: 650px;
-    height: 321px;
+    background: #fff url("../images/map-frame-635.png") no-repeat;
+    width: 635px;
+    height: 302px;
     padding: 9px;
     float: left;
 }
 
 #map_canvas {
-    width: 650px;
-    height: 321px;
+    width: 617px;
+    height: 284px;
 }
 
 div.resultsBar {
@@ -335,7 +398,7 @@ div.resultsBar {
 }
 
 #stresults_div table {
-    width: 950px;
+    width: 635px;
 }
 
 .checkout_header {
@@ -404,12 +467,11 @@ div.resultsBar {
 }
 
 
-#instructions {
+div.leftSectionHeader {
     font-family: verdana, arial, helvetica, sans-serif;
-    font-weight: bolder;
-    color: #154A99;
+    font-weight: bold;
+    color: #00529b;
     font-size: 14px;
-    padding-left: 15px;
 }
 
 #sizeHelp {
@@ -1255,22 +1317,9 @@ tr.rowOdd {
     cursor: pointer;
 }
 
-div.storitzMessage {
-    width: 655px;
-    margin-top: -45px;
-    margin-bottom: 10px;
-    float:left;
-    font-size: 12px;
-    padding:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:10px;
-    border:1px solid #dfdfdf;
-}
-
 div.wideTextbox {
-    width: 940px;
+    width: 625px;
     margin: 10px 0;
-    float:left;
     font-size: 10px;
     padding:5px;
     -webkit-border-radius:5px;

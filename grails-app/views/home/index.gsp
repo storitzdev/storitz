@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
     <head>
       <meta name="Description" content="Storitz Self-Storage search results in ${city}, ${state} ${zip ? 'postal code:' + zip : zip}. Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
-      <g:render template="/header" />
+      <g:render template="/header_home" />
       <p:dependantJavascript >
       <script type="text/javascript">
 //<![CDATA[
@@ -503,7 +503,14 @@
         _gaq.push(['_setAccount', 'UA-16012579-1']);
         _gaq.push(['_trackPageview']);
 
-        FastInit.addOnLoad(setupCalendar, setupHelp, setupForm, setupAnalytics);
+        $(document).ready(function() {
+
+          setupCalendar();
+          setupHelp();
+          setupForm();
+          setupAnalytics();
+        });
+
 //]]>
       </script>
       </p:dependantJavascript>
@@ -511,268 +518,264 @@
     <body>
     <div id="body">
       <g:render template="/topnav" />
-      <div id="stcontent">
-        <g:render template="/logo_bar" />
-        <div style="height: 25px;"></div>
-        <div id="search">
-          <div id="instructions">
-            Search for Storage
-          </div>
-          <div style="height: 5px;"></div>
-          <div>
-            <form id="gsearch" action="" method="post">
-              <div class="left" style="margin: 2px 5px 0 0;">
-                <storitz:image src="btn-circle-1.png" width="26" height="26" alt="1"/>
-              </div>
-              <div class="left">
-                <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
-              </div>
-              <div style="clear:both;height: 10px;"></div>
-              <div>
+      <g:render template="/logo_bar" />
+      <div class="stcontent">
+        <div style="height: 10px;"></div>
+        <div class="leftColumn">
+          <div class="leftSection">
+            <div class="leftSectionHeader">
+              Search for Self-Storage
+            </div>
+            <div style="height: 5px;"></div>
+            <div>
+              <form id="gsearch" action="" method="post">
                 <div class="left" style="margin: 2px 5px 0 0;">
-                  <storitz:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
+                  <storitz:image src="btn-circle-1.png" width="26" height="26" alt="1"/>
                 </div>
                 <div class="left">
-                  <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
+                  <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
                 </div>
-                <div class="left" style="padding: 4px 7px;cursor:pointer;">
-                  <storitz:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
+                <div style="clear:both;height: 10px;"></div>
+                <div>
+                  <div class="left" style="margin: 2px 5px 0 0;">
+                    <storitz:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
+                  </div>
+                  <div class="left">
+                    <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
+                  </div>
+                  <div class="left" style="padding: 4px 7px;cursor:pointer;">
+                    <storitz:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
+                  </div>
+                  <div style="clear: both;"></div>
                 </div>
+                <div style="height: 10px;"></div>
+                <div class="left" style="margin: 2px 5px 0 0;">
+                  <storitz:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
+                </div>
+                <div class="left">
+                  <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
+                </div>
+                <div style="clear: both;height: 10px;"></div>
                 <div style="clear: both;"></div>
-              </div>
-              <div style="height: 10px;"></div>
-              <div class="left" style="margin: 2px 5px 0 0;">
-                <storitz:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
-              </div>
-              <div class="left">
-                <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
-              </div>
-              <div style="clear: both;height: 10px;"></div>
-              <div style="clear: both;"></div>
-            </form>
+              </form>
+            </div>
+          </div>
+          <div class="leftSection">
+            <div class="leftSectionHeader">
+              Video
+            </div>
+            <object width="280" height="182"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="280" height="182"></embed></object>            
           </div>
         </div>
-        <!-- highlight offers here -->
-        <div class="storitzMessage">
-          <div>You need storage. And, in addition to planning, packing and moving, you have to find the right storage unit. That's where we come in.</div>
-          <div style="height: 10px;"></div>
-          <div>Storitz is the only Website that allows you to find and <span style="font-weight:bold;">RENT</span> your mini storage space, all online.  We help you find the <span style="font-weight:bold;"><a href="#bestprice">BEST PRICE<span style="font-size: .83em;vertical-align:super">*</span></a></span> in the most convenient location to you, by comparing thousands of storage units in your area, on Storitz!</div>
-        </div>
-        <div id="gmap">
-          <div id="map_canvas"></div>
-        </div>
+        <div class="rightColumn">
+          <div id="gmap">
+            <div id="map_canvas"></div>
+          </div>
 
-        <div style="height: 20px;clear: both;"></div>
-        <div id="searchMsg" class="section_header"></div>
-        <div style="height: 20px;clear: both;"></div>
-        <div class="resultsBar">
-          <div style="float:left;">Search Results</div>
-        </div>
-        <div style="height: 20px;"></div>
+          <div id="stresults_div">
+            <g:if test="${sites.size() > 0}">
+              <table class="sortable" id="stresults">
+                <thead>
+                  <tr>
+                    <th class="sortfirstasc distwidth" id="distance">Distance</th>
+                    <th class="addrwidth" id="title">Location</th>
+                    <th class="pricewidthplus">
+                      <div class="left" style="padding: 0 5px;cursor:pointer;">
+                          <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
+                      </div>
+                      <div class="left" style="margin-top:2px;">Upper</div>
+                    </th>
+                    <th class="pricewidth">Interior</th>
+                    <th class="pricewidth">Drive Up</th>
+                    <th>Features</th>
+                    <th>Special Offers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <g:each var="site" in="${sites}">
+                  <tr id="row${site.id}" class="strow">
+                    <td class="textCenter distance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> mi</td>
+                    <td class="stVert">
+                      <div style="float:left;">
+                        <a href="#" class="no_underline siteTitle" onclick="panTo(${site.id});return false">${site.title}</a><br>
+                        <g:link action="storageSite" controller="detail" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display]">${site.address}</g:link>
+                      </div>
+                    </td>
+                    <td class="textCenter">
+                      <g:if test="${site.units.findAll{ it.unitType == UnitType.UPPER}.size() > 0}">
+                        <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.UPPER]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.UPPER} }" member="price" format="0.00"/></g:link>
+                      </g:if>
+                      <g:else>
+                        &#8212;
+                      </g:else>
+                     </td>
+                    <td class="textCenter">
+                      <g:if test="${site.units.findAll{ it.unitType == UnitType.INTERIOR}.size() > 0}">
+                        <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.INTERIOR]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.INTERIOR} }" member="price" format="0.00"/></g:link>
+                      </g:if>
+                      <g:else>
+                        &#8212;
+                      </g:else>
+                    </td>
+                    <td class="textCenter">
+                      <g:if test="${site.units.findAll{ it.unitType == UnitType.DRIVEUP}.size() > 0}">
+                        <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.DRIVEUP]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.DRIVEUP} }" member="price" format="0.00"/></g:link>
+                      </g:if>
+                      <g:else>
+                        &#8212;
+                      </g:else>
+                    </td>
+                    <td>
+                      <div style="float:right;">
+                        <g:if test="${site.isKeypad}">
+                          <storitz:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
+                        </g:if>
+                        <g:else>
+                          <span style="width:20px; margin:1px;"></span>
+                        </g:else>
+                        <g:if test="${site.isCamera}">
+                          <storitz:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
+                        </g:if>
+                        <g:else>
+                          <span style="width:20px; margin: 1px;"></span>
+                        </g:else>
+                        <g:if test="${site.isGate}">
+                          <storitz:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
+                        </g:if>
+                        <g:else>
+                          <span style="width:20px; margin: 1px;"></span>
+                        </g:else>
+                        <g:if test="${site.isUnitAlarmed}">
+                          <storitz:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
+                        </g:if>
+                        <g:else>
+                          <span style="width:20px; margin: 1px;"></span>
+                        </g:else>
+                        <g:if test="${site.isManagerOnsite}">
+                          <storitz:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
+                        </g:if>
+                        <g:else>
+                          <span style="width:20px; margin: 1px;"></span>
+                        </g:else>
+                        <g:if test="${site.hasElevator}">
+                          <storitz:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                        </g:if>
+                        <g:else>
+                          <span style="width:20px; margin: 1px;"></span>
+                        </g:else>
+                      </div>
+                    </td>
+                    <td class="specialOfferText">
+                      <g:if test="${site.featuredOffers().size() > 0}">
+                        <div id="offers${site.id}" class="pointer"><storitz:joinMember set="${site.featuredOffers()}" member="promoName"/></div>
+                        <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
+                      </g:if>
+                      <g:elseif test="${site.specialOffers().size() >1}">
+                        <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}<BR/>${site.specialOffers()[1].promoName}</div>
+                        <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
+                      </g:elseif>
+                      <g:elseif test="${site.specialOffers().size() == 1}">
+                        <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}</div>
+                        <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip">${site.specialOffers()[0].promoName}</div>
+                      </g:elseif>
+                      <g:else>
+                        &#8212;
+                      </g:else>
+                    </td>
+                  </tr>
+                </g:each>
 
-        <div id="stresults_div">
-          <g:if test="${sites.size() > 0}">
-            <table class="sortable" id="stresults">
-              <thead>
-                <tr>
-                  <th class="sortfirstasc distwidth" id="distance">Distance</th>
-                  <th class="addrwidth" id="title">Location</th>
-                  <th class="pricewidthplus">
-                    <div class="left" style="padding: 0 5px;cursor:pointer;">
-                        <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
-                    </div>
-                    <div class="left" style="margin-top:2px;">Upper</div>
-                  </th>
-                  <th class="pricewidth">Interior</th>
-                  <th class="pricewidth">Drive Up</th>
-                  <th>Features</th>
-                  <th>Special Offers</th>
-                </tr>
-              </thead>
-              <tbody>
-              <g:each var="site" in="${sites}">
-                <tr id="row${site.id}" class="strow">
-                  <td class="textCenter distance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> mi</td>
-                  <td class="stVert">
-                    <div style="float:left;">
-                      <a href="#" class="no_underline siteTitle" onclick="panTo(${site.id});return false">${site.title}</a><br>
-                      <g:link action="storageSite" controller="detail" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display]">${site.address}</g:link>
-                    </div>
-                  </td>
-                  <td class="textCenter">
-                    <g:if test="${site.units.findAll{ it.unitType == UnitType.UPPER}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.UPPER]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.UPPER} }" member="price" format="0.00"/></g:link>
-                    </g:if>
-                    <g:else>
-                      &#8212;
-                    </g:else>
-                   </td>
-                  <td class="textCenter">
-                    <g:if test="${site.units.findAll{ it.unitType == UnitType.INTERIOR}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.INTERIOR]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.INTERIOR} }" member="price" format="0.00"/></g:link>
-                    </g:if>
-                    <g:else>
-                      &#8212;
-                    </g:else>
-                  </td>
-                  <td class="textCenter">
-                    <g:if test="${site.units.findAll{ it.unitType == UnitType.DRIVEUP}.size() > 0}">
-                      <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.DRIVEUP]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.DRIVEUP} }" member="price" format="0.00"/></g:link>
-                    </g:if>
-                    <g:else>
-                      &#8212;
-                    </g:else>
-                  </td>
-                  <td>
-                    <div style="float:right;">
-                      <g:if test="${site.isKeypad}">
-                        <storitz:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
-                      </g:if>
-                      <g:else>
-                        <span style="width:20px; margin:1px;"></span>
-                      </g:else>
-                      <g:if test="${site.isCamera}">
-                        <storitz:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
-                      </g:if>
-                      <g:else>
-                        <span style="width:20px; margin: 1px;"></span>
-                      </g:else>
-                      <g:if test="${site.isGate}">
-                        <storitz:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
-                      </g:if>
-                      <g:else>
-                        <span style="width:20px; margin: 1px;"></span>
-                      </g:else>
-                      <g:if test="${site.isUnitAlarmed}">
-                        <storitz:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
-                      </g:if>
-                      <g:else>
-                        <span style="width:20px; margin: 1px;"></span>
-                      </g:else>
-                      <g:if test="${site.isManagerOnsite}">
-                        <storitz:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
-                      </g:if>
-                      <g:else>
-                        <span style="width:20px; margin: 1px;"></span>
-                      </g:else>
-                      <g:if test="${site.hasElevator}">
-                        <storitz:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
-                      </g:if>
-                      <g:else>
-                        <span style="width:20px; margin: 1px;"></span>
-                      </g:else>
-                    </div>
-                  </td>
-                  <td class="specialOfferText">
-                    <g:if test="${site.featuredOffers().size() > 0}">
-                      <div id="offers${site.id}" class="pointer"><storitz:joinMember set="${site.featuredOffers()}" member="promoName"/></div>
-                      <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
-                    </g:if>
-                    <g:elseif test="${site.specialOffers().size() >1}">
-                      <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}<BR/>${site.specialOffers()[1].promoName}</div>
-                      <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
-                    </g:elseif>
-                    <g:elseif test="${site.specialOffers().size() == 1}">
-                      <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}</div>
-                      <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip">${site.specialOffers()[0].promoName}</div>
-                    </g:elseif>
-                    <g:else>
-                      &#8212;
-                    </g:else>
-                  </td>
-                </tr>
+                </tbody>
+              </table>
+            </g:if>
+          </div>
+          <g:if test="${metro}">
+            <div class="wideTextbox">
+              <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
+              <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
+              <g:each in="${neighborhoodList}" var="n">
+                <div class="left" style="width:150px;">
+                  <g:link mapping="geo" params="[city:n.city, state:n.state.display, zip:n.zipcode]">${n.city}</g:link>
+                </div>
               </g:each>
-
-              </tbody>
-            </table>
+              <div style="clear:both;"></div>
+            </div>
           </g:if>
-        </div>
-        <g:if test="${metro}">
           <div class="wideTextbox">
-            <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
-            <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
-            <g:each in="${neighborhoodList}" var="n">
-              <div class="left" style="width:150px;">
-                <g:link mapping="geo" params="[city:n.city, state:n.state.display, zip:n.zipcode]">${n.city}</g:link>
-              </div>
-            </g:each>
-          </div>
-        </g:if>
-        <div class="wideTextbox">
-          <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Santa Monica', state:'CA', zip:'90404']">Santa Monica, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Los Angeles', state:'CA', zip:'90001']">Los Angeles, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Irvine', state:'CA', zip:'92612']">Irvine, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Long Beach', state:'CA', zip:'90806']">Long Beach, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'West Hollywood', state:'CA', zip:'90069']">West Hollywood, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Van Nuys', state:'CA', zip:'91406']">Van Nuys, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Torrance', state:'CA', zip:'90505']">Torrance, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Newport Beach', state:'CA', zip:'92660']">Newport Beach, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'El Segundo', state:'CA', zip:'90245']">El Segundo, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Burbank', state:'CA', zip:'91505']">Burbank, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Palm Desert', state:'CA', zip:'92260']">Palm Desert, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Anaheim', state:'CA', zip:'92805']">Anaheim, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Lancaster', state:'CA', zip:'93535']">Lancaster, CA</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Austin', state:'TX', zip:'73301']">Austin, TX</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Dallas', state:'TX', zip:'75201']">Dallas, TX</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Houston', state:'TX', zip:'77001']">Houston, TX</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Jacksonville', state:'FL', zip:'32099']">Jacksonville, FL</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Miami', state:'FL', zip:'33010']">Miami, FL</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Clearwater', state:'FL', zip:'33755']">Clearwater, FL</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'New York', state:'NY', zip:'10001']">New York, NY</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Phoenix', state:'AZ', zip:'85001']">Phoenix, AZ</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Denver', state:'CO', zip:'80201']">Denver, CO</g:link>
-          </div>
-          <div class="left" style="width:175px;">
-            <g:link mapping="geo" params="[city:'Seattle', state:'WA', zip:'98101']">Seattle, WA</g:link>
+            <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Santa Monica', state:'CA', zip:'90404']">Santa Monica, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Los Angeles', state:'CA', zip:'90001']">Los Angeles, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Irvine', state:'CA', zip:'92612']">Irvine, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Long Beach', state:'CA', zip:'90806']">Long Beach, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'West Hollywood', state:'CA', zip:'90069']">West Hollywood, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Van Nuys', state:'CA', zip:'91406']">Van Nuys, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Torrance', state:'CA', zip:'90505']">Torrance, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Newport Beach', state:'CA', zip:'92660']">Newport Beach, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'El Segundo', state:'CA', zip:'90245']">El Segundo, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Burbank', state:'CA', zip:'91505']">Burbank, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Palm Desert', state:'CA', zip:'92260']">Palm Desert, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Anaheim', state:'CA', zip:'92805']">Anaheim, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Lancaster', state:'CA', zip:'93535']">Lancaster, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Austin', state:'TX', zip:'73301']">Austin, TX</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Dallas', state:'TX', zip:'75201']">Dallas, TX</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Houston', state:'TX', zip:'77001']">Houston, TX</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Jacksonville', state:'FL', zip:'32099']">Jacksonville, FL</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Miami', state:'FL', zip:'33010']">Miami, FL</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Clearwater', state:'FL', zip:'33755']">Clearwater, FL</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'New York', state:'NY', zip:'10001']">New York, NY</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Phoenix', state:'AZ', zip:'85001']">Phoenix, AZ</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Denver', state:'CO', zip:'80201']">Denver, CO</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="geo" params="[city:'Seattle', state:'WA', zip:'98101']">Seattle, WA</g:link>
+            </div>
+            <div style="clear:both;"></div>
           </div>
         </div>
-        <div style="margin:1em 0;">
-          <a name="bestprice"><span style="font-size: .83em;vertical-align:super">*</span>Best Price Committment:  Storitz updates its pricing and availability of storage units every day and always presents the best price and the most economical move-in promotions.</a>
-        </div>
+        <div style="clear:both;"></div>
       </div>
       <div style="height:100px;"></div>
       <g:render template="/footer_no_analytics" />

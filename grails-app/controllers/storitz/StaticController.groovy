@@ -25,4 +25,8 @@ class StaticController {
     def jobs = {
       [title:'Jobs at Storitz']
     }
+
+    def operatorsignup = {
+      [title: 'Operator Signup and Information']
+    }
 }

@@ -15,7 +15,7 @@
   <body>
     <div id="body">
     <g:render template="/topnav" />
-    <div id="stcontent">
+    <div class="stcontent">
       <g:render template="/logo_bar" />
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
