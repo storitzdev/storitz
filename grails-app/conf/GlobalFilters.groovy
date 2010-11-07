@@ -28,21 +28,24 @@ class GlobalFilters {
                    } else if (request.getHeader('Referer')) {
                      // handle organic referrer
 
-                     def uri = new URI(request.getHeader('Referer'))
-                     def myMap = [:]
-                     if (uri.getQuery()) {
-                       uri.getQuery().split('&').each{ qp ->
-                           def arr = qp.split("=")
-                           if (arr.size() > 1) {
-                             myMap[(arr[0])] =  arr[1]
-                           }
+                     def uri
+                     try {
+                       uri = new URI(request.getHeader('Referer'))
+                       def myMap = [:]
+                       if (uri.getQuery()) {
+                         uri.getQuery().split('&').each{ qp ->
+                             def arr = qp.split("=")
+                             if (arr.size() > 1) {
+                               myMap[(arr[0])] =  arr[1]
+                             }
+                         }
+                         if (uri.getHost().contains('yahoo')) {
+                          ser.keyword = myMap['p']
+                         } else {
+                          ser.keyword = myMap['q']
+                         }
                        }
-                       if (uri.getHost().contains('yahoo')) {
-                        ser.keyword = myMap['p']
-                       } else {
-                        ser.keyword = myMap['q']
-                       }
-                     }
+                     } catch (Exception e) {}
                    }
                    ser.referrerUrl = request.getHeader('Referer')
                    ser.save()
