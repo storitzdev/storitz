@@ -564,7 +564,18 @@
             <div class="leftSectionHeader">
               Video
             </div>
-            <object width="280" height="182"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="280" height="182"></embed></object>            
+            <object width="300" height="193"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="193"></embed></object>            
+          </div>
+          <div>
+            <div class="leftSectionHeader">
+              Storitz Supports
+            </div>
+            <a href="http://www.pancreatic.org/" target="_blank">
+              <storitz:image src='hirshberg-banner.gif' width="148" height="57" border="0"/>
+            </a>
+            <a href="http://www.kureit.org/" target="_blank">
+              <storitz:image src='kure-it-banner.gif' width="148" height="57"/>
+            </a>
           </div>
         </div>
         <div class="rightColumn">
