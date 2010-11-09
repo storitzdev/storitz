@@ -1135,6 +1135,21 @@ class BootStrap {
     new UnitTypeLookup(id:704, description:"InUpLift", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:705, description:"UL- EL- Upper Level", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:706, description:"DU -  Drive Up Access", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:707, description:"Office Front War", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:708, description:"Post Office Boxe", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:709, description:"R.V. (pull thru)", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:710, description:"RV Slabs", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:711, description:"R.V. Canopy", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:712, description:"R.V. (back in)", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:713, description:"Indoor RV (leaking units)", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:714, description:"2 Door Drive Up", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:715, description:"Converted", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:716, description:"AC UNIT", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:717, description:"Somersworth", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:718, description:"Climate Control-downstairs", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:719, description:"C/C Upstairs", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:720, description:"C/C Downstairs", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:721, description:"Vault", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
   }
 
 
