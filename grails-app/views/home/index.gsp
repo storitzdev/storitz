@@ -32,22 +32,10 @@
         var inDrag = false;
         var savedFeature;
         var bounds = null;
-        var markerImageGreen = null;
-        var markerImageGray = null;
+        var markersGreen = [];
+        var markersBlue = [];
         var mapMarker = null;
         var firstDraw = false;
-
-        TableKit.Sortable.addSortType(
-            new TableKit.Sortable.Type('stprice', {
-                pattern : /^\uFFFD|<[aA].+\$(\d+)<\/[aA]>/,
-                normal : function(v) {
-                    // This will grab the first thing that looks like a number from a string, so you can use it to order a column of various strings containing numbers.
-                    if (v == '\uFFFD') return -1;
-                    v = parseFloat(v.replace(/^\$(\d+)/,"$1"));
-                    return isNaN(v) ? 0 : v;
-                }
-            })
-        );
 
         <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
 
@@ -213,15 +201,7 @@
           var location = new google.maps.LatLng(s.lat, s.lng);
           var iconMarker;
 
-          if (s.unitCount) {
-            iconMarker = s.unitCount == 0 ? markerImageGray : markerImageGreen;
-          } else {
-            if (s.units) {
-              iconMarker = s.units.size() == 0 ? markerImageGray : markerImageGreen;
-            } else {
-              iconMarker = markerImageGray;
-            }
-          }
+          iconMarker = markersGreen[s.id];
           
           features[s.id] = s;
           s.marker = new google.maps.Marker({
@@ -317,9 +297,11 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             navigationControlOptions: {style: google.maps.NavigationControlStyle.DEFAULT}
           };
-          markerImageGreen = new google.maps.MarkerImage(${p.imageLink(src:'icn_map_grn.png')}, null, null, new google.maps.Point(1, 32));
-          markerImageGray = new google.maps.MarkerImage(${p.imageLink(src:'gray-icon.png')}, null, null, new google.maps.Point(1, 32));
-
+          <g:each var="i" in="${ (0..25) }">
+            markersGreen[${i}] = new google.maps.MarkerImage(${p.imageLink(src:'map_icons/green-loc' + i + '.png')}, null, null, new google.maps.Point(1, 35));
+            markersBlue[${i}] = new google.maps.MarkerImage(${p.imageLink(src:'map_icons/blue-loc' + i + '.png')}, null, null, new google.maps.Point(1, 35));
+          </g:each>
+          
           map = new google.maps.Map(document.getElementById("map_canvas"), myOptions );
 
           google.maps.event.addListener(map, 'bounds_changed', redrawMap);
@@ -328,7 +310,7 @@
           geocoder = new google.maps.Geocoder();
 
           var site;
-          <g:each var="site" in="${sites}">
+          <g:each var="site" in="${sites}" status="c">
             site = new Object();          
             site.lat = ${site.lat};
             site.lng = ${site.lng};
@@ -371,8 +353,6 @@
 
         function showAddress(address, size, date) {
 
-          updateSearchMsg();
-          
           var validAddr = address.length > 4 && !address.startsWith('Enter ');
 
           if (validAddr) {
@@ -447,45 +427,6 @@
           $('size').observe('change', function() {
             showAddress(getAddress(), $F('size'), getDate());
           });          
-        }
-
-
-        function updateSearchMsg() {
-          var msg;
-          var addrValid = getAddress() && getAddress().length > 0;
-          var sizeValid = $F('size') != 1;
-          var dateValid = getDate() && getDate().length > 0;
-
-          if (addrValid && sizeValid && dateValid) {
-            msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
-                    '</span><span class="blue"> unit near </span><span class="green"> ' + getAddress() +
-                    '</span><span class="blue"> starting on </span><span class="green">' + getDate() +
-                    '</span>';
-          } else if (sizeValid) {
-            msg = '<span class="blue">Searching for a </span><span class="green">' + storageSize[$F('size')] +
-                    '</span>';
-            if (addrValid) {
-              msg += '<span class="blue"> unit near </span><span class="green"> ' + getAddress() +
-                    '</span><span class="blue">. Please select starting date.</span>';
-            } else if (dateValid) {
-              msg += '<span class="blue"> starting on </span><span class="green">' + getDate() +
-                    '</span><span class="blue">. Please select address or zip.</span>';
-            } else {
-              msg += '<span class="blue">Please select address or zip and move-in date.</span>';
-            }
-          } else if (addrValid) {
-            msg = '<span class="blue">Searching near </span><span class="green">' + getAddress() +
-                  '</span>';
-            if (dateValid) {
-              msg += '<span class="blue"> starting on </span><span class="green">' + getDate() +
-                    '</span><span class="blue">. Please select unit size.</span>';
-            } else {
-              msg += '<span class="blue">. Please select unit size and starting date.</span>';
-            }
-          } else {
-            msg = '';
-          }
-          $('searchMsg').update(msg);
         }
 
         function setupAnalytics() {
@@ -564,7 +505,7 @@
             <div class="leftSectionHeader">
               Video
             </div>
-            <object width="300" height="193"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="193"></embed></object>            
+            <object width="300" height="193"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"/><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="193"></embed></object>
           </div>
           <div>
             <div class="leftSectionHeader">
@@ -585,114 +526,101 @@
 
           <div id="stresults_div">
             <g:if test="${sites.size() > 0}">
-              <table class="sortable" id="stresults">
+              <table id="stresults">
                 <thead>
+                  <tr class="stresultsHeader">
+                    <th style="width:80px;">Distance</th>
+                    <th style="width:250px;">Facility</th>
+                    <th style="width:200px;">Special Offers</th>
+                    <th style="width:105px;">Move-In Cost From</th>
+                  </tr>
                   <tr>
-                    <th class="sortfirstasc distwidth" id="distance">Distance</th>
-                    <th class="addrwidth" id="title">Location</th>
-                    <th class="pricewidthplus">
-                      <div class="left" style="padding: 0 5px;cursor:pointer;">
-                          <storitz:image id="resultInfo" src="icn_info_circle.png" width="19" height="18" alt="results info"/>
-                      </div>
-                      <div class="left" style="margin-top:2px;">Upper</div>
-                    </th>
-                    <th class="pricewidth">Interior</th>
-                    <th class="pricewidth">Drive Up</th>
-                    <th>Features</th>
-                    <th>Special Offers</th>
+                    <td colspan="4" style="border-bottom:1px black solid;"></td>
                   </tr>
                 </thead>
                 <tbody>
-                <g:each var="site" in="${sites}">
-                  <tr id="row${site.id}" class="strow">
-                    <td class="textCenter distance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> mi</td>
-                    <td class="stVert">
-                      <div style="float:left;">
-                        <a href="#" class="no_underline siteTitle" onclick="panTo(${site.id});return false">${site.title}</a><br>
-                        <g:link action="storageSite" controller="detail" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display]">${site.address}</g:link>
+                <g:each var="site" in="${sites}" status="c">
+                  <tr id="row${site.id}">
+                    <td class="textCenter">
+                      <div class="stDistanceLine"></div>
+                      <div class="left" style="margin-left:10px;">
+                        <div id="map_icon${site.id}">
+                          <storitz:image src="${'map_icons/green-loc' + (c  + 1) + '.png'}" width="28" height="35"/>
+                        </div>
+                        <div class="stDistance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/></div>
+                        <div class="stMiles">miles</div>
                       </div>
                     </td>
-                    <td class="textCenter">
-                      <g:if test="${site.units.findAll{ it.unitType == UnitType.UPPER}.size() > 0}">
-                        <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.UPPER]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.UPPER} }" member="price" format="0.00"/></g:link>
-                      </g:if>
-                      <g:else>
-                        &#8212;
-                      </g:else>
-                     </td>
-                    <td class="textCenter">
-                      <g:if test="${site.units.findAll{ it.unitType == UnitType.INTERIOR}.size() > 0}">
-                        <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.INTERIOR]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.INTERIOR} }" member="price" format="0.00"/></g:link>
-                      </g:if>
-                      <g:else>
-                        &#8212;
-                      </g:else>
+                    <td class="stVert">
+                      <div class="left">
+                        <g:if test="${site?.logo}">
+                          <img src="${resource(file:site.logo.src())}" width="100" height="40" alt="${site.title} Logo"/>
+                        </g:if>
+                      </div>
+                      <div class="left" style="margin-left: 5px;">
+                        <div class="stTitle">${site.title}</div>
+                        <div class="stAddress">${site.address}</div>
+                      </div>
+                      <div style="clear:both;"></div>
+                      <div>
+                        <g:if test="${site.isKeypad}">
+                          <storitz:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
+                        </g:if>
+                        <g:if test="${site.isCamera}">
+                          <storitz:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
+                        </g:if>
+                        <g:if test="${site.isGate}">
+                          <storitz:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
+                        </g:if>
+                        <g:if test="${site.isUnitAlarmed}">
+                          <storitz:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
+                        </g:if>
+                        <g:if test="${site.isManagerOnsite}">
+                          <storitz:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
+                        </g:if>
+                        <g:if test="${site.hasElevator}">
+                          <storitz:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                        </g:if>
+                      </div>
                     </td>
-                    <td class="textCenter">
-                      <g:if test="${site.units.findAll{ it.unitType == UnitType.DRIVEUP}.size() > 0}">
-                        <g:link action="detail" controller="storageSite" mapping="siteLink" id="${site.id}" params="[date:params.date, searchSize:params.searchSize, address:params.address, city:site.city, site_title:site.title, id:site.id, state:site.state.display, unitType:UnitType.DRIVEUP]" class="unitPrice">$<storitz:printMin set="${site.units.findAll{it.unitType == UnitType.DRIVEUP} }" member="price" format="0.00"/></g:link>
+                    <td class="stSpecialOffers">
+                      <g:if test="${site.featuredOffers().size() > 0}">
+                        <g:each var="promo" in="${site.featuredOffers()}">
+                          <div class="left">
+                            <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
+                          </div>
+                          <div class="left" style="margin: 2px 0 0 10px;">
+                            ${promo.promoName}
+                          </div>
+                          <div style="clear:both;"></div>
+                        </g:each>
                       </g:if>
+                      <g:elseif test="${site.specialOffers().size() > 0}">
+                        <g:each var="promo" in="${site.specialOffers()}">
+                          <div>
+                            <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
+                          </div>
+                        </g:each>
+                        <div class="left" style="margin: 2px 0 0 10px;">
+                          ${promo.promoName}
+                        </div>
+                      </g:elseif>
                       <g:else>
                         &#8212;
                       </g:else>
                     </td>
                     <td>
-                      <div style="float:right;">
-                        <g:if test="${site.isKeypad}">
-                          <storitz:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
-                        </g:if>
-                        <g:else>
-                          <span style="width:20px; margin:1px;"></span>
-                        </g:else>
-                        <g:if test="${site.isCamera}">
-                          <storitz:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
-                        </g:if>
-                        <g:else>
-                          <span style="width:20px; margin: 1px;"></span>
-                        </g:else>
-                        <g:if test="${site.isGate}">
-                          <storitz:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
-                        </g:if>
-                        <g:else>
-                          <span style="width:20px; margin: 1px;"></span>
-                        </g:else>
-                        <g:if test="${site.isUnitAlarmed}">
-                          <storitz:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
-                        </g:if>
-                        <g:else>
-                          <span style="width:20px; margin: 1px;"></span>
-                        </g:else>
-                        <g:if test="${site.isManagerOnsite}">
-                          <storitz:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
-                        </g:if>
-                        <g:else>
-                          <span style="width:20px; margin: 1px;"></span>
-                        </g:else>
-                        <g:if test="${site.hasElevator}">
-                          <storitz:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
-                        </g:if>
-                        <g:else>
-                          <span style="width:20px; margin: 1px;"></span>
-                        </g:else>
+                      <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
+                      <div class="stPriceSub textCenter">MOVES YOU IN</div>
+                      <div style="width:87px;margin-left: auto; margin-right: auto;">
+                        <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                          <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                        </g:link>
                       </div>
                     </td>
-                    <td class="specialOfferText">
-                      <g:if test="${site.featuredOffers().size() > 0}">
-                        <div id="offers${site.id}" class="pointer"><storitz:joinMember set="${site.featuredOffers()}" member="promoName"/></div>
-                        <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
-                      </g:if>
-                      <g:elseif test="${site.specialOffers().size() >1}">
-                        <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}<BR/>${site.specialOffers()[1].promoName}</div>
-                        <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip"><storitz:joinMember set="${site.specialOffers()}" member="promoName"/></div>
-                      </g:elseif>
-                      <g:elseif test="${site.specialOffers().size() == 1}">
-                        <div id="offers${site.id}" class="pointer">${site.specialOffers()[0].promoName}</div>
-                        <div id="tooltip_offers${site.id}" style="display:none;" class="tooltip">${site.specialOffers()[0].promoName}</div>
-                      </g:elseif>
-                      <g:else>
-                        &#8212;
-                      </g:else>
-                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" style="border-bottom:1px #ccc dotted;"></td>
                   </tr>
                 </g:each>
 

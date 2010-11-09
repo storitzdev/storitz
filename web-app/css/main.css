@@ -444,6 +444,53 @@ div.resultsBar {
     display: table-cell;
     border-collapse: collapse;
 }
+
+.stresultsHeader th {
+    font: 11px verdana, arial, helvetica, sans-serif;
+    color: #154a99;
+    font-weight: bold;
+}
+
+.stDistance {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    color: #666;
+    font-weight: bold;
+}
+
+.stMiles {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    color: #379c00;
+}
+
+.stTitle {
+    font: 13px verdana, arial, helvetica, sans-serif;
+    color: #3fac00;
+    font-weight: bold;
+}
+
+.stAddress {
+    font: 11px verdana, arial, helvetica, sans-serif;
+    color: #333;
+}
+
+.stSpecialOffers {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    color: #3fac00;
+    font-weight: bold;
+}
+
+.stPrice {
+    font: 14px verdana, arial, helvetica, sans-serif;
+    color: #00529b;
+    font-weight: bold;
+}
+
+.stPriceSub {
+    font: 9px verdana, arial, helvetica, sans-serif;
+    color: #00529b;
+    font-weight: bold;
+}
+
 .operatingHours td, .callCenterCalls td, .callCenterCalls th {
     padding: 0 0.5em;
     border: 0;
@@ -591,26 +638,6 @@ a.siteTitle:link, a.siteTitle:visited, a.siteTitle:hover {
 a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     color: #3fac00;
     font-weight: bold;
-}
-
-.no_underline {
-    text-decoration: none;
-}
-
-.addrwidth {
-    width: 25%;
-}
-
-.distwidth {
-    width: 9%;
-}
-
-.pricewidth {
-    width: 9%;
-}
-
-.pricewidthplus {
-    width: 11%;
 }
 
 .white {
@@ -838,9 +865,11 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     font-weight: bold;
 }
 
-.distance {
-    font: 11px verdana, arial, helvetica, sans-serif;
-    font-weight: bold;
+div.stDistanceLine {
+    float: right;
+    margin-right: 8px;
+    height: 65px;
+    border-right: 1px #ccc solid;
 }
 
 .returnLink {

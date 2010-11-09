@@ -310,7 +310,7 @@
         <div style="width: 650px;" class="left">
 
           <div id="detailInfo">
-            <div style="margin-top: -20px;">
+            <div>
               <div class="returnLink right" style="padding: 0 0 0 0.5em;">
                 <g:link controller="home" action="index">
                   New Search
@@ -318,7 +318,7 @@
               </div>
               <div class="returnLink right">|</div>
               <div class="returnLink right" style="padding: 0 0.5em;">
-                <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
+                <g:link controller="home" action="index" params="[size: params.size, date: params.date, address: params.address]">
                  Back to Seach Results
                 </g:link>
               </div>
@@ -422,7 +422,7 @@
               <input type="hidden" name="chosenType" id="chosenType" value="${unitType ? unitType : rentalTransactionInstance?.unitType}" />
               <input type="hidden" name="searchSize" id="searchSize" value="${searchSize ? searchSize : rentalTransactionInstance?.searchSize}" />
 
-              <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${params.searchSize}"/>
+              <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${params.size}"/>
               <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
               <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
               <input style="display:none" type="text" name="SC_page" id="SC_page" value="detail"/>

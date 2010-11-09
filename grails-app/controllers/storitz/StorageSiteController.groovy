@@ -446,7 +446,7 @@ class StorageSiteController {
       return;
     }
 
-    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
+    StorageSize unitSize = params.size ? StorageSize.get(params.size) : null
     
     //////////////////////////////////////////
     // >>> BEGIN match smartCall action code <<<
@@ -599,7 +599,7 @@ class StorageSiteController {
       response.addCookie(landingCookie)
 
       params.id = model.id
-      params.searchSize = model.searchSize
+      params.size = model.searchSize
       params.address = model.address
       params.date = model.date
 
@@ -631,7 +631,7 @@ class StorageSiteController {
 
     Collection unitTypes
     Collection sizeList
-    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
+    StorageSize unitSize = params.size ? StorageSize.get(params.size) : null
     if (params.action == 'unitType') {
       unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
       sizeList = site.units.findAll{ it.unitType == unitType }.collect{ it.unitsize }.unique()

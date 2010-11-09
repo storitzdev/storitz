@@ -24,9 +24,9 @@ var tax = 0;
 var deposit = 0;
 
 <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
-<g:if test="${params.searchSize}">
-  searchSize = ${params.searchSize};
-  sizeDescription = storageSize[ ${params.searchSize} ];
+<g:if test="${params.size}">
+  searchSize = ${params.size};
+  sizeDescription = storageSize[ ${params.size} ];
 </g:if>
 
 function setupSize() {

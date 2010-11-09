@@ -12,7 +12,7 @@
       <div class="transHeader">Unit Size</div>
       <div>
         <div class="left">
-          <g:select id="unitsize" class="transDropdown" name="unitsize" from="${sizeList}" optionValue="description" value="${params.searchSize}" optionKey="id" />
+          <g:select id="unitsize" class="transDropdown" name="unitsize" from="${sizeList}" optionValue="description" value="${params.size}" optionKey="id" />
         </div>
         <div class="left" style="margin: 5px 0 0 5px;">
           <storitz:image id="sizeInfo" style="vertical-align: middle;" src="icn_info_circle.png" width="19" height="18" alt="info"/>

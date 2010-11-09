@@ -6,9 +6,9 @@ import com.storitz.Metro
 
 class HomeController {
 
-    def mapService
-    def geocodeService
-
+  def mapService
+  def geocodeService
+  def costService
 
   def index = {
 
@@ -131,7 +131,45 @@ class HomeController {
 
     def sites = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
-    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: (params.searchSize ? params.searchSize : 1), sites: sites]
+    def siteMoveInPrice = [:]
+
+    def unitSize
+    if (params?.size != 1) {
+      unitSize = StorageSize.get(params.size)
+    }
+    Date  moveInDate
+    if (params.date && params.date instanceof Date) {
+      moveInDate = params.date
+    } else {
+      if (params.date) {
+        moveInDate = Date.parse('MM/dd/yy', params.date)
+      } else {
+        moveInDate = new Date()
+      }
+    }
+    for (site in sites) {
+      def bestUnit
+      if (unitSize) {
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+      } else {
+        bestUnit = site.units.min{ it.price }
+      }
+      if (site.featuredOffers().size() == 0) {
+        def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
+        siteMoveInPrice[site.id] = [cost:cost, promo:null]
+      } else {
+        for (promo in site.featuredOffers()) {
+          def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
+          if (!siteMoveInPrice[site.id] || siteMoveInPrice[site.id].cost > cost) {
+            siteMoveInPrice[site.id] = [cost:cost, promo:promo.id]
+          }
+        }
+      }
+    }
+
+    println "Dump siteMoveInPrice ${siteMoveInPrice.dump()}"
+
+    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: (params.size? params.size: 1), sites: sites, siteMoveInPrice:siteMoveInPrice]
   }
 
 }

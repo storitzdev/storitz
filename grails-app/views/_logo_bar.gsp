@@ -27,11 +27,11 @@
         <g:link controller="static" action="help" class="navMenu">Help</g:link>
       </div>
       <div class="right">
-        <a href="http://twitter.com/Storitzdotcom"><storitz:image style="border: none;" src="twitter-icon-page.gif" width="32" height="33" alt="Storitz on Twitter"/></a>
-        <a href="http://www.facebook.com/storitz"><storitz:image style="border: none;" src="facebook-icon-page.gif" width="32" height="33" alt="Storitz on FaceBook"/></a>
-        <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><storitz:image style="border: none;" src="stumbleupon-icon-page.gif" width="32" height="33" alt="Storitz on StumbleUpon"/></a>
-        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><storitz:image style="border: none;" src="linkedin-icon-page.gif" width="32" height="33" alt="Storitz on LinkedIn"/></a>
-        <a href="http://www.youtube.com/user/Storitzdotcom"><storitz:image style="border: none;" src="youtube-icon-page.gif" width="32" height="33" alt="Storitz Youtube Channel"/></a>
+        <a href="http://twitter.com/Storitzdotcom"><storitz:image style="border: none;" src="twitter-icon-page.gif" width="20" height="20" alt="Storitz on Twitter"/></a>
+        <a href="http://www.facebook.com/storitz"><storitz:image style="border: none;" src="facebook-icon-page.gif" width="20" height="20" alt="Storitz on FaceBook"/></a>
+        <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><storitz:image style="border: none;" src="stumbleupon-icon-page.gif" width="20" height="20" alt="Storitz on StumbleUpon"/></a>
+        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><storitz:image style="border: none;" src="linkedin-icon-page.gif" width="20" height="20" alt="Storitz on LinkedIn"/></a>
+        <a href="http://www.youtube.com/user/Storitzdotcom"><storitz:image style="border: none;" src="youtube-icon-page.gif" width="20" height="20" alt="Storitz Youtube Channel"/></a>
       </div>
       <div style="clear:both;"></div>
     </div>

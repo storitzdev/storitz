@@ -196,76 +196,9 @@ class StorageSite {
     return description.replaceAll(/<!--.*?-->/, '').replaceAll(/<.*?>/, '')
   }
 
-  def getStateName() {
-    return stateNamesByCode[state] ?: state
-  }
-
   def getManager() {
     def siteUser = SiteUser.find("from SiteUser as su where su.site = :site and su.user in (select ur.user from UserRole as ur, Role as r, User as u where ur.user = su.user and u.username != 'admin' and ur.user = u and ur.role = r and r.authority = :authority)", [site: this, authority: 'ROLE_MANAGER'])
     return siteUser?.user
   }
-
-  // All of the official USPS 2-letter state (and territory) codes.
-  static def stateNamesByCode = [
-          AL:"Alabama",
-          AK:"Alaska",
-          AZ:"Arizona",
-          AR:"Arkansas",
-          CA:"California",
-          CO:"Colorado",
-          CT:"Connecticut",
-          DE:"Delaware",
-          DC:"District of Columbia",
-          FL:"Florida",
-          GA:"Georgia",
-          HI:"Hawaii",
-          ID:"Idaho",
-          IL:"Illinois",
-          IN:"Indiana",
-          IA:"Iowa",
-          KS:"Kansas",
-          KY:"Kentucky",
-          LA:"Louisiana",
-          ME:"Maine",
-          MD:"Maryland",
-          MA:"Massachusetts",
-          MI:"Michigan",
-          MN:"Minnesota",
-          MS:"Mississippi",
-          MO:"Missouri",
-          MT:"Montana",
-          NE:"Nebraska",
-          NV:"Nevada",
-          NH:"New Hampshire",
-          NJ:"New Jersey",
-          NM:"New Mexico",
-          NY:"New York",
-          NC:"North Carolina",
-          ND:"North Dakota",
-          OH:"Ohio",
-          OK:"Oklahoma",
-          OR:"Oregon",
-          PA:"Pennsylvania",
-          RI:"Rhode Island",
-          SC:"South Carolina",
-          SD:"South Dakota",
-          TN:"Tennessee",
-          TX:"Texas",
-          UT:"Utah",
-          VT:"Vermont",
-          VA:"Virginia",
-          WA:"Washington",
-          WV:"West Virginia",
-          WI:"Wisconsin",
-          WY:"Wyoming",
-          AS:"American Samoa",
-          GU:"Guam",
-          MP:"Northern Mariana Islands",
-          PR:"Puerto Rico",
-          VI:"Virgin Islands",
-          FM:"Federated States of Micronesia",
-          MH:"Marshall Islands",
-          PW:"Palau",
-  ]
 
 }
