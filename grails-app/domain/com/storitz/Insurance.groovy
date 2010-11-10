@@ -1,4 +1,5 @@
 package com.storitz
+
 class Insurance {
 
     Integer insuranceId

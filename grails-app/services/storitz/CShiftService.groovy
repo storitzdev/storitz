@@ -1,30 +1,14 @@
 package storitz
 
-import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.Method
-import static groovyx.net.http.ContentType.XML
-import com.storitz.StorageSite
-import com.storitz.SiteUser
-import storitz.constants.State
-import storitz.constants.TruckType
-import com.storitz.StorageUnit
-import com.storitz.SpecialOffer
-import storitz.constants.PromoType
 import com.storitz.cshiftclient.CsKiosk
 import com.storitz.cshiftclient.CsKioskLocator
 import com.storitz.cshiftclient.CsKioskSoapPort_PortType
-import com.storitz.Insurance
-import com.storitz.Role
-import com.storitz.UserRole
-import com.storitz.UserNotificationType
-import com.storitz.NotificationType
-import com.storitz.User
-import storitz.constants.RentalUse
-import com.storitz.RentalTransaction
+import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.Method
 import java.math.RoundingMode
-import com.storitz.UnitTypeLookup
-import com.storitz.CenterShift
-import storitz.constants.UnitType
+import com.storitz.*
+import static groovyx.net.http.ContentType.XML
+import storitz.constants.*
 
 class CShiftService {
 
@@ -857,6 +841,7 @@ class CShiftService {
             siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
             siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
             siteUnit.isAlarm = false
+            siteUnit.isIrregular = false
             siteUnit.isPowered = false
             siteUnit.isAvailable = true
             siteUnit.isSecure = false
@@ -1309,8 +1294,6 @@ class CShiftService {
     def waiveAdmin = false
     def deposit = site.deposit ? site.deposit : 0
 
-
-    println "Duration months: ${durationMonths} prepay: ${promo?.prepay} prepay months: ${promo?.prepayMonths} expire month: ${promo?.expireMonth}"
 
     if (promo) {
 

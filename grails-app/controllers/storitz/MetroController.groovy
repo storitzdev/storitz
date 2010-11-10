@@ -1,8 +1,8 @@
 package storitz
 
 import com.storitz.Metro
-import grails.plugins.springsecurity.Secured
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_ADMIN'])
 class MetroController {

@@ -1,8 +1,8 @@
 package storitz
 
-import com.storitz.StorageSize
-import com.storitz.MetroEntry
 import com.storitz.Metro
+import com.storitz.MetroEntry
+import com.storitz.StorageSize
 
 class HomeController {
 

@@ -1,8 +1,8 @@
 package storitz
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import com.storitz.Nacha
 import java.math.RoundingMode
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class NachaService {
 

@@ -1,7 +1,6 @@
 package com.storitz
 
 import storitz.constants.PromoType
-import com.storitz.StorageSite
 
 class SpecialOffer {
 

@@ -1,10 +1,10 @@
 package storitz
 
 import com.storitz.StorageSite
-import org.hibernate.FetchMode
 import com.storitz.geoip.GeoIp
-import javax.servlet.http.HttpServletRequest
 import javax.servlet.ServletContext
+import javax.servlet.http.HttpServletRequest
+import org.hibernate.FetchMode
 
 class MapService {
     def geoIp;

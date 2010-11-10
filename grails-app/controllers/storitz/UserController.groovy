@@ -1,15 +1,8 @@
 package storitz
 
-import com.storitz.Role
-import com.storitz.User
-import grails.plugins.springsecurity.Secured
-import com.storitz.UserRole
 import grails.converters.JSON
-
-import com.storitz.SiteUser
-import com.storitz.StorageSite
-import com.storitz.UserNotificationType
-import com.storitz.NotificationType
+import grails.plugins.springsecurity.Secured
+import com.storitz.*
 
 /**
  * User controller.

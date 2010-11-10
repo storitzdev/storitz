@@ -1,15 +1,8 @@
 package storitz
+
 import groovyx.net.ws.WSClient
-import com.storitz.CenterShift
-import com.storitz.StorageSite
 import storitz.constants.State
-import com.storitz.Role
-import com.storitz.UserRole
-import com.storitz.UserNotificationType
-import com.storitz.NotificationType
-import com.storitz.SiteUser
-import com.storitz.User
-import com.storitz.Insurance
+import com.storitz.*
 
 class CShift4Service {
 

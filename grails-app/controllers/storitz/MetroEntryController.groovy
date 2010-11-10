@@ -1,9 +1,9 @@
 package storitz
 
+import com.storitz.Metro
 import com.storitz.MetroEntry
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
-import com.storitz.Metro
 import storitz.constants.State
 
 @Secured(['ROLE_ADMIN'])

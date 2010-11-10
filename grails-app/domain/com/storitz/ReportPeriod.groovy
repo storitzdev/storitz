@@ -1,7 +1,7 @@
 package com.storitz
 
-import storitz.constants.ReportOutputType
 import storitz.constants.ReportName
+import storitz.constants.ReportOutputType
 
 class ReportPeriod {
 

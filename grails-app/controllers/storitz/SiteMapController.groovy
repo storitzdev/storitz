@@ -1,10 +1,8 @@
 package storitz
 
-import com.storitz.StorageSite
-
-import groovy.xml.StreamingMarkupBuilder
 import com.storitz.Metro
-import com.storitz.MetroEntry;
+import com.storitz.MetroEntry
+import com.storitz.StorageSite
 
 class SiteMapController
 {

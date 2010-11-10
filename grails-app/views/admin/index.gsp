@@ -5,11 +5,6 @@
   <head>
     <g:render template="/header_admin" />
 
-    <script type="text/javascript">
-//<![CDATA[
-//]]>
-  </script>
-
   </head>
   <body>
     <div id="body">

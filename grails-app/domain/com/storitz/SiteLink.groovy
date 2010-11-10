@@ -1,4 +1,5 @@
 package com.storitz
+
 class SiteLink extends Feed {
 
   static constraints = {

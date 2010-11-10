@@ -1,7 +1,7 @@
 package storitz
 
-import grails.plugins.springsecurity.Secured
 import com.storitz.SiteLink
+import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])

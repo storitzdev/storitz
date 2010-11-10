@@ -1,5 +1,4 @@
-import grails.test.*
-
+import grails.test.GrailsUnitTestCase
 import storitz.CookieCodec
 
 class CookieTests extends GrailsUnitTestCase

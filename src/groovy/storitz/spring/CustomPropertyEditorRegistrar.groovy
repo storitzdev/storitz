@@ -1,8 +1,5 @@
 package storitz.spring
 
-import storitz.constants.Country
-import grails.util.GrailsConfig;
-
 /**
  * Created by IntelliJ IDEA.
  * User: mamster
@@ -10,30 +7,11 @@ import grails.util.GrailsConfig;
  * Time: 11:29:02 AM
  * To change this template use File | Settings | File Templates.
  */
-import java.util.Date
-import java.text.SimpleDateFormat
-import org.springframework.beans.propertyeditors.CustomDateEditor
+
+import grails.util.GrailsConfig
 import org.springframework.beans.PropertyEditorRegistrar
 import org.springframework.beans.PropertyEditorRegistry
-import storitz.constants.State
-import storitz.constants.CenterShiftVersion
-import storitz.constants.CenterShiftLocations
-import storitz.constants.CommissionSourceType
-import storitz.constants.IdType
-import storitz.constants.NotificationEventType
-import storitz.constants.FeedType
-import storitz.constants.CreditCardType
-import storitz.constants.ContactType
-import storitz.constants.CommissionType
-import storitz.constants.UnitType
-import storitz.constants.TruckType
-import storitz.constants.TransactionStatus
-import storitz.constants.StreetType
-import storitz.constants.ReportOutputType
-import storitz.constants.RentalUse
-import storitz.constants.PromoType
-import storitz.constants.PhoneType
-import storitz.constants.ReferrerType
+import storitz.constants.*
 
 public class CustomPropertyEditorRegistrar implements PropertyEditorRegistrar {
 

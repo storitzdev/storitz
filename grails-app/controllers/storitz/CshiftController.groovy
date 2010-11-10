@@ -1,7 +1,7 @@
 package storitz
 
-import grails.plugins.springsecurity.Secured
 import com.storitz.CenterShift
+import grails.plugins.springsecurity.Secured
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
 

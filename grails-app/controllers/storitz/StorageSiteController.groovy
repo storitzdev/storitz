@@ -1,24 +1,12 @@
 package storitz
 
-import com.storitz.SiteImage
-
-import com.storitz.SiteUser
-import com.storitz.StorageSite
-import com.storitz.StorageSize
-import com.storitz.Visit
-import org.grails.plugins.imagetools.ImageTool
-import com.storitz.User
-import com.storitz.Bullet
-import grails.plugins.springsecurity.Secured
-import com.storitz.UserRole
-import com.storitz.RentalAgreement
-import com.storitz.SpecialOffer
-import com.storitz.Insurance
 import grails.converters.JSON
-import javax.servlet.http.Cookie
-import com.storitz.RentalTransaction
+import grails.plugins.springsecurity.Secured
 import java.text.NumberFormat
+import javax.servlet.http.Cookie
+import org.grails.plugins.imagetools.ImageTool
 import storitz.constants.UnitType
+import com.storitz.*
 
 class StorageSiteController {
 

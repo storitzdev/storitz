@@ -1,15 +1,11 @@
 package storitz
 
-import storitz.constants.NotificationEventType
-import com.storitz.RentalTransaction
 import com.storitz.NotificationType
-import com.storitz.User
-import com.storitz.StorageUnit
+import com.storitz.RentalTransaction
 import com.storitz.SpecialOffer
+import com.storitz.User
 import java.text.NumberFormat
-import grails.util.GrailsWebUtil
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
-import org.codehaus.groovy.grails.web.context.ServletContextHolder
+import storitz.constants.NotificationEventType
 
 class NotificationService {
 

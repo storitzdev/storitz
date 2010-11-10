@@ -7,10 +7,9 @@
 
 package com.storitz.cshiftclient;
 
+import javax.xml.namespace.QName;
 import javax.xml.rpc.encoding.TypeMapping;
 import javax.xml.rpc.encoding.TypeMappingRegistry;
-
-import javax.xml.namespace.QName;
 
 public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implements com.storitz.cshiftclient.CsKioskSoapPort_PortType {
     private java.util.Vector cachedSerClasses = new java.util.Vector();

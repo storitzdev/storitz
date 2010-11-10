@@ -1,9 +1,9 @@
 package storitz
 
 import com.storitz.RentalAgreement
-import grails.plugins.springsecurity.Secured
-import com.storitz.UserRole
 import com.storitz.User
+import com.storitz.UserRole
+import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class RentalAgreementController {

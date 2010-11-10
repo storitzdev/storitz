@@ -1,9 +1,7 @@
 package storitz
 
 import com.storitz.StorageSite
-import com.storitz.geoip.GeoIp
 import grails.converters.JSON
-import org.hibernate.FetchMode
 import com.storitz.StorageSize
 
 class STMapController {
@@ -75,6 +73,11 @@ class STMapController {
 
       def results = mapService.getSites(params.searchSize as Integer, params.swLat as BigDecimal, params.swLng as BigDecimal, params.neLat as BigDecimal, params.neLng as BigDecimal)
 
+      double lat = params.lat as double
+      double lng = params.lng as double
+
+      results.sort( {a,b -> mapService.calcDistance(lat, a.lat as double, lng, a.lng as double) <=> mapService.calcDistance(lat, b.lat as double, lng, b.lng as double) } as Comparator)
+
       def unitMap = [:]
 
       def unitSize
@@ -94,55 +97,56 @@ class STMapController {
 
       def sw = new StringWriter()
       sw << "[ "
-      if (results.size() < 20) {
-        results.eachWithIndex { site, i ->
-          sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\",\"specialOffers\":["
-          site.specialOffers().eachWithIndex{ offer, j ->
-            sw << "{\"promoName\":\"${offer.promoName}\" }"
-            if (j < site.specialOffers().size() - 1) {
-              sw << ","
-            }
-          }
-          sw << "], \"featuredOffers\":["
-            site.featuredOffers().eachWithIndex{ offer, j ->
-              sw << "{\"promoName\":\"${offer.promoName}\" }"
-              if (j < site.featuredOffers().size() - 1) {
-                sw << ","
-              }
-          }
-
-          def bestUnit
-          def unitSiz
-          def monthly
-          def moveInCost
-          def promoId
-
-          if (unitSize) {
-            bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
-          } else {
-            bestUnit = site.units.min{ it.price }
-          }
-          if (site.featuredOffers().size() == 0) {
-            def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
-            monthly = bestUnit.pushRate
-            promoId = null
-            moveInCost = cost
-          } else {
-            for (promo in site.featuredOffers()) {
-              def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
-              if (moveInCost > cost) {
-                monthly = bestUnit.pushRate
-                promoId = promo.id
-                moveInCost = cost
-              }
-            }
-          }
-          sw << "], \"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId} }"
-
-          if (i < results.size() - 1) {
+      def row = 0
+      for (site in results) {
+        row++;
+        sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\",\"specialOffers\":["
+        site.specialOffers().eachWithIndex{ offer, j ->
+          sw << "{\"promoName\":\"${offer.promoName}\" }"
+          if (j < site.specialOffers().size() - 1) {
             sw << ","
           }
         }
+        sw << "], \"featuredOffers\":["
+          site.featuredOffers().eachWithIndex{ offer, j ->
+            sw << "{\"promoName\":\"${offer.promoName}\" }"
+            if (j < site.featuredOffers().size() - 1) {
+              sw << ","
+            }
+        }
+
+        def bestUnit
+        def unitSiz
+        def monthly
+        def moveInCost
+        def promoId
+
+        if (unitSize) {
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+        } else {
+          bestUnit = site.units.min{ it.price }
+        }
+        if (site.featuredOffers().size() == 0) {
+          def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
+          monthly = bestUnit.pushRate
+          promoId = null
+          moveInCost = cost
+        } else {
+          for (promo in site.featuredOffers()) {
+            def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
+            if (moveInCost > cost) {
+              monthly = bestUnit.pushRate
+              promoId = promo.id
+              moveInCost = cost
+            }
+          }
+        }
+        sw << "], \"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId} }"
+
+        if (row < results.size() && row < 20) {
+          sw << ","
+        }
+        if (row >= 20) break
       }
       sw << "]"
       webUtilService.nocache(response)

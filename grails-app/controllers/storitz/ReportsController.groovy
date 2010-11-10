@@ -18,6 +18,7 @@ import ar.com.fdvs.dj.output.ReportWriter
 import ar.com.fdvs.dj.output.ReportWriterFactory
 import com.storitz.RentalTransaction
 import com.storitz.ReportPeriod
+import com.storitz.StorageSite
 import grails.plugins.springsecurity.Secured
 import grails.util.GrailsUtil
 import net.sf.jasperreports.engine.JRDataSource
@@ -33,7 +34,6 @@ import storitz.constants.TransactionStatus
 import storitz.constants.UnitType
 import ar.com.fdvs.dj.domain.constants.*
 import storitz.reports.*
-import com.storitz.StorageSite
 
 class ReportsController {
 

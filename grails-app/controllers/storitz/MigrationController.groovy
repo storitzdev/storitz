@@ -1,25 +1,10 @@
 package storitz
 
 import grails.converters.JSON
-import com.storitz.StorageSite
-import com.storitz.Feed
-import storitz.constants.FeedType
-import com.storitz.SiteLink
-import com.storitz.CenterShift
-import com.storitz.User
-import org.codehaus.groovy.grails.web.json.JSONObject
-import com.storitz.Bullet
-import com.storitz.SiteImage
-import com.storitz.Insurance
-import com.storitz.SpecialOffer
-import com.storitz.SiteUser
-import com.storitz.RentalAgreement
-import com.storitz.BankAccount
-import com.storitz.UserNotificationType
-import com.storitz.NotificationType
-import com.storitz.UserRole
-import com.storitz.Role
 import org.apache.commons.lang.time.DateUtils
+import org.codehaus.groovy.grails.web.json.JSONObject
+import storitz.constants.FeedType
+import com.storitz.*
 
 class MigrationController {
 

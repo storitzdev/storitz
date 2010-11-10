@@ -1,6 +1,5 @@
 package storitz
 
-import com.storitz.User
 import com.storitz.Commission
 import storitz.constants.CommissionSourceType
 

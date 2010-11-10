@@ -1,8 +1,8 @@
 package storitz
 
-import com.storitz.StorageSite
-import com.storitz.SiteLink
 import com.storitz.CenterShift
+import com.storitz.SiteLink
+import com.storitz.StorageSite
 
 class FeedService {
 

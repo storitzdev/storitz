@@ -1,7 +1,7 @@
 package storitz
 
-import grails.util.Environment
 import grails.plugins.springsecurity.Secured
+import grails.util.Environment
 
 @Secured(['ROLE_ADMIN', 'ROLE_CALLCENTER'])
 class StopController {

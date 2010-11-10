@@ -1,12 +1,7 @@
 package storitz
 
-import com.storitz.StorageSite
-import com.storitz.SpecialOffer
-import com.storitz.StorageUnit
-import com.storitz.Insurance
-import com.storitz.Commission
 import storitz.constants.CommissionType
-import com.storitz.RentalTransaction
+import com.storitz.*
 
 class CostService {
 

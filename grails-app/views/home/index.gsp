@@ -152,6 +152,8 @@
             data: {
               searchSize: searchSize,
               date: getDate(),
+              lat: searchLat,
+              lng: searchLng,        
               swLat: bounds.getSouthWest().lat(),
               swLng: bounds.getSouthWest().lng(),
               neLat: bounds.getNorthEast().lat(),
@@ -551,7 +553,7 @@
                             <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
                           </div>
                           <div class="left" style="margin: 2px 0 0 10px;">
-                            ${promo.promoName}
+                            ${promo?.promoName}
                           </div>
                           <div style="clear:both;"></div>
                         </g:each>
@@ -563,7 +565,7 @@
                           </div>
                         </g:each>
                         <div class="left" style="margin: 2px 0 0 10px;">
-                          ${promo.promoName}
+                          ${promo?.promoName}
                         </div>
                       </g:elseif>
                       <g:else>

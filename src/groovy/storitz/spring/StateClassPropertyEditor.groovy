@@ -1,7 +1,6 @@
 package storitz.spring
 
 import java.beans.PropertyEditorSupport
-import storitz.constants.Country
 import storitz.constants.State
 
 /**

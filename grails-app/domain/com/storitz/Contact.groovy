@@ -1,8 +1,8 @@
 package com.storitz
 
-import storitz.constants.PhoneType;
-import storitz.constants.State;
-import storitz.constants.Country;
+import storitz.constants.Country
+import storitz.constants.PhoneType
+import storitz.constants.State
 
 class Contact {
 

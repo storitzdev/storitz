@@ -1,7 +1,7 @@
 package com.storitz
 
-import storitz.constants.TruckType
 import storitz.constants.State
+import storitz.constants.TruckType
 
 class StorageSite {
 

@@ -1,10 +1,10 @@
 package storitz
 
-import org.bouncycastle.util.encoders.UrlBase64
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
+import org.bouncycastle.util.encoders.UrlBase64
 
 public class CookieCodec
 {

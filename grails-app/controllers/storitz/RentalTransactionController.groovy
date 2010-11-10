@@ -1,24 +1,14 @@
 package storitz
 
-import storitz.constants.TransactionStatus
-import com.storitz.RentalTransaction
-import com.storitz.StorageSite
-import com.storitz.SpecialOffer
-import com.storitz.StorageUnit
-import com.storitz.UserRole
-import com.storitz.User
-import com.storitz.Insurance
-import com.vinomis.authnet.AuthorizeNet
-import com.storitz.TransactionNote
-import storitz.constants.CommissionSourceType
-import com.storitz.SearchEngineReferral
-import com.storitz.NotificationType
 import org.hibernate.FetchMode as FM
-import storitz.constants.NotificationEventType
-import java.math.RoundingMode
+
+import com.vinomis.authnet.AuthorizeNet
 import grails.plugins.springsecurity.Secured
-import com.storitz.StorageSize
-import storitz.constants.UnitType
+import java.math.RoundingMode
+import storitz.constants.CommissionSourceType
+import storitz.constants.NotificationEventType
+import storitz.constants.TransactionStatus
+import com.storitz.*
 
 class RentalTransactionController {
 

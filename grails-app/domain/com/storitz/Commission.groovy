@@ -1,7 +1,7 @@
 package com.storitz
 
-import storitz.constants.CommissionType
 import storitz.constants.CommissionSourceType
+import storitz.constants.CommissionType
 
 class Commission {
 

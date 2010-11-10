@@ -1,18 +1,20 @@
 package storitz
 
 // CustomDomainMarshaller.groovy in src/groovy:
-import grails.converters.JSON;
-import org.codehaus.groovy.grails.web.converters.ConverterUtil;
-import org.codehaus.groovy.grails.web.converters.exceptions.ConverterException;
-import org.codehaus.groovy.grails.web.converters.marshaller.json.DeepDomainClassMarshaller
-import org.codehaus.groovy.grails.web.json.JSONWriter;
+
+
+import grails.converters.JSON
+import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.springframework.beans.BeanWrapper
-import org.springframework.beans.BeanWrapperImpl
 import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
 import org.codehaus.groovy.grails.support.proxy.DefaultProxyHandler
 import org.codehaus.groovy.grails.support.proxy.ProxyHandler
-import org.codehaus.groovy.grails.commons.GrailsClassUtils;
+import org.codehaus.groovy.grails.web.converters.ConverterUtil
+import org.codehaus.groovy.grails.web.converters.exceptions.ConverterException
+import org.codehaus.groovy.grails.web.converters.marshaller.json.DeepDomainClassMarshaller
+import org.codehaus.groovy.grails.web.json.JSONWriter
+import org.springframework.beans.BeanWrapper
+import org.springframework.beans.BeanWrapperImpl
 
 public class CustomDomainMarshaller extends DeepDomainClassMarshaller {
 

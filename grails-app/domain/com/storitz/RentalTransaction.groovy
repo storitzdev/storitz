@@ -1,11 +1,6 @@
 package com.storitz
 
-import storitz.constants.IdType
-import storitz.constants.State
-import storitz.constants.Country
-import storitz.constants.RentalUse
-import storitz.constants.TransactionStatus
-import storitz.constants.CreditCardType
+import storitz.constants.*
 
 class RentalTransaction {
 

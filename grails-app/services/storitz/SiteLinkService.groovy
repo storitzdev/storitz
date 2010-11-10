@@ -2,29 +2,10 @@ package storitz
 
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
-import static groovyx.net.http.ContentType.XML
-
-import storitz.constants.TruckType
-import storitz.constants.PromoType
-import com.storitz.Insurance
-import com.storitz.StorageUnit
-import com.storitz.SiteUser
-import com.storitz.StorageSite
-import com.storitz.SpecialOffer
-import storitz.constants.State
-import com.storitz.RentalTransaction
-import storitz.constants.RentalUse
-import storitz.constants.IdType
-import com.storitz.User
-import com.storitz.UserNotificationType
-import com.storitz.NotificationType
-import com.storitz.UserRole
-import com.storitz.Role
 import java.math.RoundingMode
-import com.storitz.UnitTypeLookup
-import com.storitz.SiteLink
-import storitz.constants.UnitType
-import com.storitz.Feed
+import com.storitz.*
+import static groovyx.net.http.ContentType.XML
+import storitz.constants.*
 
 class SiteLinkService {
 
@@ -850,6 +831,7 @@ class SiteLinkService {
           siteUnit.isAvailable = true
           siteUnit.isSecure = false
           siteUnit.isAlarm = unit.bAlarm.text().toLowerCase() == 'true'
+          siteUnit.isIrregular = false
           Integer width = (int) Double.parseDouble(unit.dcWidth.text())
           Integer length = (int) Double.parseDouble(unit.dcLength.text())
           siteUnit.displaySize = width + " X " + length
