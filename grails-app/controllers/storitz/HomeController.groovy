@@ -125,9 +125,9 @@ class HomeController {
 
     def title = "Storitz self-storage search results in ${params.address ? params.address : city + ', ' + state}${zip ? ' postal code ' + zip : ''}"
     // optimize zoom level
-    def zoom = mapService.optimizeZoom((params.searchSize ? params.searchSize as Integer : 1), lat, lng, 650, 321)
+    def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
 
-    def dim = mapService.getDimensions(zoom, lat, lng, 650, 321)
+    def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
 
     def sites = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
@@ -161,13 +161,11 @@ class HomeController {
         for (promo in site.featuredOffers()) {
           def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
           if (!siteMoveInPrice[site.id] || siteMoveInPrice[site.id].cost > cost) {
-            siteMoveInPrice[site.id] = [cost:cost, promo:promo.id]
+            siteMoveInPrice[site.id] = [cost:cost, promo:promo.id, monthly:bestUnit.pushRate]
           }
         }
       }
     }
-
-    println "Dump siteMoveInPrice ${siteMoveInPrice.dump()}"
 
     [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: (params.size? params.size: 1), sites: sites, siteMoveInPrice:siteMoveInPrice]
   }

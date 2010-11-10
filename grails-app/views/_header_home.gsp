@@ -4,4 +4,4 @@
   <p:favicon src="images/favicon" />
   <p:css name='admin_bundled'/>
   <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-  <p:javascript src='admin_all'/>
+  <p:javascript src='jquery_all'/>

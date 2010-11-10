@@ -21,7 +21,6 @@
         var infoWindow;
         var features = [];
         var storageSize = [];
-        var tooltips = [];
         var tipBuilder = [];
         var searchAddr;
         var searchSize = ${searchSize};
@@ -77,54 +76,47 @@
         }
 
         function getDate() {
-          if ($F('date') && !$F('date').startsWith('Select')) {
-            return $F('date');
+          if ($('#date').val() && !/^Select/.test($('#date').val())) {
+            return $('#date').val();
           }
           return '';
         }
 
         function getAddress() {
-          if ($F('address') && !$F('address').startsWith('Enter ')) {
-            return $F('address');
+          if ($('#address').val() && !/^Enter /.test($('#address').val())) {
+            return $('#address').val();
           }
           return '';
         }
 
         function markerClick(feature) {
-            var url = siteLink(feature) + '?s=m';
-            if (searchSize && searchSize > 1) {
-              url += '&searchSize=' + searchSize;
-            }
-            url += '&date=' + getDate();
-            url += '&address=' + encodeURIComponent(getAddress());
-            window.location = url;
-        }
-
-        function markerOver(feature) {
-          var c = '<div style="width: 200px;"><h3>' + feature.title + '</h3>';
+          c = $('<div>', { style: 'width:200px;' }).append(
+                  $('<div>', { 'class': 'infoWindowTitle' } ).text(feature.title));
             if (feature.coverImg.length > 0) {
-              c += '<div style="float: left;"><img src="${resource(dir:'/') != '/' ? resource(dir:'/') : ''}' + feature.coverImg + '" alt="' + feature.title + '"/></div>';
+              c.append($('<img>', { src:"${resource(dir:'/') != '/' ? resource(dir:'/') : ''}" + feature.coverImg,  alt:feature.title, 'class': 'left'}).css('margin-right', '5px'));
             }
-            c += '<div style="float: left;padding: .5em">' + feature.address + '<br/>' +
-              feature.city + ', ' + feature.state + ' ' + feature.zipcode + '</div><div style="clear: both;"></div>';
-            if (feature.description) {
-              c += feature.description;
-            }
-            c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($F('address')) + '">details</a></div></div>';
+            c.append($('<div>', { 'class':'infoWindowText' })
+                    .append($('<div>').text(feature.address))
+                    .append($('<div>').text(feature.city + ', ' + feature.state + ' ' + feature.zipcode))
+                    .append($('<div>', {'class':'left'}).css('margin-top','5px').append($('<a>', { href: siteLink(feature) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($('#address').val()) })
+                    .append($('<img>', { src: ${p.imageLink(src:'details-button.gif')}, width:'55', height:'20'  })))));
+            //c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($('#address').val()) + '">details</a></div></div>';
+          feature.marker.setIcon(markersBlue[feature.index]);
           if (infoWindow) {
             infoWindow.close();
           }
           if (savedFeature && $('row'+savedFeature.id)) {
             $('row'+savedFeature.id).removeClassName('rowhighlight');
           }
-          infoWindow = new google.maps.InfoWindow({content: c, maxWidth: 300, disableAutoPan: true});
+          if (savedFeature) {
+            savedFeature.marker.setIcon(markersGreen[savedFeature.index]);
+          }
+          infoWindow = new google.maps.InfoWindow({content: c.html(), maxWidth: 200});
           google.maps.event.addListener(infoWindow, 'mouseout', function() {
             delete infoWindow;
           });
           infoWindow.open(map, feature.marker);
-          if ($('row'+feature.id)) {
-            $('row'+feature.id).addClassName('rowhighlight');
-          }
+          // TODO - highlight row
           savedFeature = feature;
         }
 
@@ -153,47 +145,35 @@
         }
 
         function drawMarkers() {
-          new Ajax.Request("${createLink(controller:'STMap', action:'jsonp')}",
-          {
-              method:'get',
-              parameters: {searchSize: searchSize, swLat: bounds.getSouthWest().lat(), swLng: bounds.getSouthWest().lng(), neLat: bounds.getNorthEast().lat(), neLng: bounds.getNorthEast().lng() },
-              onSuccess:function(transport) {
+          $.ajax({
+            url: "${createLink(controller:'STMap', action:'mapresults')}",
+            method:'get',
+            dataType:'json',
+            data: {
+              searchSize: searchSize,
+              date: getDate(),
+              swLat: bounds.getSouthWest().lat(),
+              swLng: bounds.getSouthWest().lng(),
+              neLat: bounds.getNorthEast().lat(),
+              neLng: bounds.getNorthEast().lng()
+            },
+            success:function(ret) {
 
-                if (transport.responseJSON.siteCount >= 20) {
-                  $('stresults_div').update("<div class=\"siteOverage\">Too many results returned.  Zoom in to see results.</div>");
-                  return;                    
-                }
-                var randId = Math.floor(Math.random() * 100001);
-                var tableContents = '<table class="sortable" id="stresults' + randId + "\"><thead><tr><th class=\"sortfirstasc distwidth\" id=\"distance\">Distance</th><th class=\"addrwidth\" id=\"title\">Location</th><th class=\"pricewidthplus\"><div class=\"left\" style=\"padding: 0 5px;cursor:pointer;\"><img id='resultInfo' src=${p.imageLink(src:'icn_info_circle.png')} width='19' height='18' alt='results info'/></div><div class=\"left\" style=\"margin-top:2px;\">Upper</div></th><th class=\"pricewidth\">Interior</th><th class=\"pricewidth\">Drive Up</th><th>Features</th><th>Special Offers</th></tr></thead><tbody>";
-                var rows = 0;
-                var offers;
-
-                tooltips.each(function(t) {
-                  if (typeof t.destroy == 'function') {
-                    t.destroy();
-                  }
-                });
-                tipBuilder.clear();
-
-                transport.responseJSON.features.each(function(s) {
-
-                    createMarker(s);
-                    rows++;
-                    tableContents += createTableRow(s);
-
-                });
-                tableContents += '</tbody></table>';
-                $('stresults_div').update(tableContents);
-                if (rows > 0) {
-                  new TableKit('stresults' + randId, { editable:false, stripe:true });
-                  tipBuilder.each(function(t) {
-                     tooltips.push(new Tooltip(t.elementId, t.content));
-                  });
-                }
-              },
-              onFailure:function(transport) {
-                alert("Something went wrong " + transport.responseText);
+              if (ret.siteCount >= 20) {
+                $('#stresults_div').html("<div class=\"siteOverage\">Too many results returned.  Zoom in to see results.</div>");
+                return;
               }
+              var rows = 0;
+
+              $.each(ret.features, function(i, s) {
+
+                  s.index = ++rows;
+                  createMarker(s);
+              });
+            },
+            error:function(ret) {
+              alert("Something went wrong " + ret);
+            }
           });
         }
 
@@ -201,8 +181,8 @@
           var location = new google.maps.LatLng(s.lat, s.lng);
           var iconMarker;
 
-          iconMarker = markersGreen[s.id];
-          
+          iconMarker = markersGreen[s.index];
+
           features[s.id] = s;
           s.marker = new google.maps.Marker({
             map: map,
@@ -210,29 +190,12 @@
             position: location,
             icon: iconMarker
           });
-          google.maps.event.addListener(s.marker, 'mouseover', function() {
-            markerOver(s);
-          });
           google.maps.event.addListener(s.marker, 'click', function() {
             markerClick(s);
           });
         }
 
         function createTableRow(s) {
-          var offersTip = s.specialOffers.pluck('promoName').join('<BR/>');
-          var featuredArr = $A(s.featuredOffers.pluck('promoName'));
-          if (featuredArr.size() > 1 ) {
-            offers = '<div id="offers' + s.id + '" class=\"pointer\">' + s.featuredOffers.pluck('promoName').join('<BR/>') + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-            tipBuilder.push({elementId:"offers" + s.id, content:"tooltip_offers" + s.id});
-          } else {
-            var offersArr = $A(s.specialOffers.pluck('promoName'));
-            if (offersArr.size() > 1 ) {
-              offers = '<div id="offers' + s.id + '" class=\"pointer\">' + offersArr[0] + '<BR/>' + offersArr[1] + '</div><div id="tooltip_offers' + s.id + '" style="display:none;" class="tooltip">' + offersTip + '</div>';
-              tipBuilder.push({elementId:"offers" + s.id, content:"tooltip_offers" + s.id});
-            } else if (offersArr.size() > 0) {
-              offers = offersArr[0];
-            }
-          }
           var pUp = s.units.find(function(n) { return n.unitType == '${UnitType.UPPER}' });
           var pDup = s.units.find(function(n) { return n.unitType == '${UnitType.DRIVEUP}' });
           var pInt = s.units.find(function(n) { return n.unitType == '${UnitType.INTERIOR}' });
@@ -240,43 +203,21 @@
           var priceInterior = pInt ? pInt.price : 999999;
           var priceUpper = pUp ? pUp.price : 999999;
 
-          var keypadImg = s.isKeypad ? "<img id=\"keypad" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-keypad-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Keypad\"/>" : '<span style="width:20px; margin:1px;"></span>';
-          var cameraImg = s.isCamera ? "<img id=\"camera" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-camera-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Camera\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var gateImg   = s.isGate ? "<img id=\"gate" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-gate-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Gate\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var alarmImg  = s.isUnitAlarmed ? "<img id=\"alarm" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-alarm-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Alarm\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var managerImg  = s.isManagerOnsite ? "<img id=\"manager" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-mgr20b.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Manager Onsite\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var elevatorImg  = s.hasElevator ? "<img id=\"elevator" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-green-elevator20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Elevator\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var keypadImg = s.isKeypad ? "<img class=\"pointer tooltip_keypad\" src=${p.imageLink(src:'icon-keypad-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Keypad\"/>" : '<span style="width:20px; margin:1px;"></span>';
+          var cameraImg = s.isCamera ? "<img class=\"pointer tooltip_camera\" src=${p.imageLink(src:'icon-camera-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Camera\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var gateImg   = s.isGate ? "<img class=\"pointer tooltip_gate\" src=${p.imageLink(src:'icon-gate-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Gate\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var alarmImg  = s.isUnitAlarmed ? "<img class=\"pointer tooltip_alarm\" src=${p.imageLink(src:'icon-alarm-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Alarm\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var managerImg  = s.isManagerOnsite ? "<img class=\"pointer tooltip_manager\" src=${p.imageLink(src:'icon-green-mgr20b.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Manager Onsite\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var elevatorImg  = s.hasElevator ? "<img class=\"pointer tooltip_elevator\" src=${p.imageLink(src:'icon-green-elevator20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Elevator\"/>" : '<span style="width:20px; margin: 1px;"></span>';
 
           var truckImg = '<span style="width:20px; margin: 1px;"></span>';
           switch(s.freeTruck) {
             case "FREE":
-              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
+              truckImg =  "<img class=\"pointer tooltip_truck\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
               break;
             case "RENTAL":
-              truckImg =  "<img id=\"truck" + s.id +"\" class=\"pointer\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
+              truckImg =  "<img class=\"pointer tooltip_truck\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
               break;
-          }
-
-          if (s.isKeypad) {
-            tipBuilder.push({elementId:"keypad" + s.id, content:"tooltip_keypad"});
-          }
-          if (s.isCamera) {
-            tipBuilder.push({elementId:"camera" + s.id, content:"tooltip_camera"});
-          }
-          if (s.isGate) {
-            tipBuilder.push({elementId:"gate" + s.id, content:"tooltip_gate"});
-          }
-          if (s.isUnitAlarmed) {
-            tipBuilder.push({elementId:"alarm" + s.id, content:"tooltip_alarm"});
-          }
-          if (s.isManagerOnsite) {
-            tipBuilder.push({elementId:"manager" + s.id, content:"tooltip_manager"});
-          }
-          if (s.hasElevator) {
-            tipBuilder.push({elementId:"elevator" + s.id, content:"tooltip_elevator"});
-          }
-          if (s.freeTruck == "RENTAL" || s.freeTruck == "FREE") {
-            tipBuilder.push({elementId:"truck" + s.id, content:"tooltip_truck"});
           }
 
           return '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
@@ -316,6 +257,7 @@
             site.lng = ${site.lng};
             site.title = '${site.title}';
             site.id = ${site.id};
+            site.index = ${c + 1};
             site.unitCount = ${site.units.size()};
             site.coverImg = '${site.coverImage() ? site.coverImage().thumbnail() : ""}';
             site.address = '${site.address}';
@@ -323,37 +265,13 @@
             site.state = '${site.state.display}';
             site.city = '${site.city}';
             createMarker(site);
-            <g:if test="${site.isKeypad}">
-              tooltips.push(new Tooltip("keypad${site.id}", "tooltip_keypad"));
-            </g:if>
-            <g:if test="${site.isCamera}">
-              tooltips.push(new Tooltip("camera${site.id}", "tooltip_camera"));
-            </g:if>
-            <g:if test="${site.isGate}">
-              tooltips.push(new Tooltip("gate${site.id}", "tooltip_gate"));
-            </g:if>
-            <g:if test="${site.isUnitAlarmed}">
-              tooltips.push(new Tooltip("alarm${site.id}", "tooltip_alarm"));
-            </g:if>
-            <g:if test="${site.isManagerOnsite}">
-              tooltips.push(new Tooltip("manager${site.id}", "tooltip_manager"));
-            </g:if>
-            <g:if test="${site.hasElevator}">
-              tooltips.push(new Tooltip("elevator${site.id}", "tooltip_elevator"));
-            </g:if>
-            <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
-              tooltips.push(new Tooltip("truck${site.id}", "tooltip_truck"));
-            </g:if>
-            <g:if test="${site.specialOffers().size() > 0}">
-              tooltips.push(new Tooltip("offers${site.id}", "tooltip_offers${site.id}"));
-            </g:if>
           </g:each>
           
         }
 
         function showAddress(address, size, date) {
 
-          var validAddr = address.length > 4 && !address.startsWith('Enter ');
+          var validAddr = address.length > 4 && !/^Enter /.test(address);
 
           if (validAddr) {
             searchAddr = address;
@@ -384,48 +302,38 @@
         }
 
         function setupCalendar() {
-          Calendar.setup({
-              dateField     : 'date',
-              triggerElement: 'date',
-              dateFormat    : '%m/%d/%y',
-              selectHandler : function(cal, dateString) {
-                $('date').value = dateString;
-                showAddress(getAddress(), $F('size'), dateString);
-              }
-          });
+          $('#date').datepicker(
+                    { dateFormat: 'mm/dd/y',
+                      minDate: 0,
+                      maxDate: "+2M"
+                    });
         }
 
         function setupHelp() {
-          $('sizeInfo').observe('click', function(event) {
-            $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
-            Effect.toggle('sizeHelp', 'appear', {duration: 0.5});
+          $('#sizeHelp').dialog({
+            autoOpen: false,
+            resizable: false,
+            width: 440
           });
-          $('sizeHelpClose').observe('click', function() {
-            Effect.toggle('sizeHelp', 'appear', {duration: 0.5});
-          });
-          $('resultInfo').observe('click', function(event) {
-            $('resultHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
-            Effect.toggle('resultHelp', 'appear', {duration: 0.5});
-          });
-          $('resultHelpClose').observe('click', function() {
-            Effect.toggle('resultHelp', 'appear', {duration: 0.5});
+          $('.sizeGuide').click(function(event) {
+            $('#sizeHelp').dialog('open');
           });
         }
 
         function setupForm() {
-          $('address').focus();
-          $('address').observe('keypress', function(event) {
+          $('#address').focus();
+          $('#address').keypress(function(event) {
             if (event.keyCode == 13) {
-              showAddress(getAddress(), $F('size'), getDate());
+              showAddress(getAddress(), $('#size').val(), getDate());
             }
           });
-          $('address').observe('click', function(event) {
-            if ($F('address').startsWith('Enter ')) {
-              $('address').value = '';
+          $('#address').click(function(event) {
+            if (/^Enter /.test($('#address').val())) {
+              $('#address').val('');
             }
           });
-          $('size').observe('change', function() {
-            showAddress(getAddress(), $F('size'), getDate());
+          $('#size').change(function(event) {
+            showAddress(getAddress(), $('#size').val(), getDate());
           });          
         }
 
@@ -440,17 +348,67 @@
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         }
 
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-16012579-1']);
-        _gaq.push(['_trackPageview']);
+      function setupQtipThemeroller() {
+        $.fn.qtip.styles.themeroller = {
+          background: null,
+          color: null,
+          tip: {
+            corner: true,
+            background: null
+          },
+          border: {
+            width: 5,
+            radius: 3
+          },
+          title: {
+            'background': null,
+            'fontWeight': null
+          },
+          classes: {
+            tooltip: 'ui-widget',
+            tip: 'ui-widget',
+            title: 'ui-widget-header',
+            content: 'ui-widget-content'
+          }
+        };
 
-        $(document).ready(function() {
-
-          setupCalendar();
-          setupHelp();
-          setupForm();
-          setupAnalytics();
+        $('a[title]').qtip({
+          position: {
+            corner: {
+              target: 'rightTop',
+              tooltip: 'leftBottom'
+            }
+          },
+          style: {
+            name: 'themeroller',
+            tip: true
+          }
         });
+      }
+
+      function setupTooltips() {
+        $(".tooltip_keypad").qtip({ content: "Keypad Entry",  position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } },   show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+        $(".tooltip_camera").qtip({ content: "Video Camera Security", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+        $(".tooltip_gate").qtip({ content: "Security Gate", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+        $(".tooltip_alarm").qtip({ content: "Unit level alarms", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+        $(".tooltip_truck").qtip({ content: "Move-In Truck Available", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+        $(".tooltip_manager").qtip({ content: "Manager Onsite", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+        $(".tooltip_elevator").qtip({ content: "Elevator to upper floors", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
+      }
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-16012579-1']);
+      _gaq.push(['_trackPageview']);
+
+      $(document).ready(function() {
+
+        setupCalendar();
+        setupHelp();
+        setupForm();
+        setupQtipThemeroller();
+        setupTooltips();
+        setupAnalytics();
+      });
 
 //]]>
       </script>
@@ -484,8 +442,8 @@
                   <div class="left">
                     <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
                   </div>
-                  <div class="left" style="padding: 4px 7px;cursor:pointer;">
-                    <storitz:image id="sizeInfo" src="icn_info_circle.png" width="19" height="18" alt="info"/>
+                  <div class="left sizeGuide">
+                    size guide
                   </div>
                   <div style="clear: both;"></div>
                 </div>
@@ -505,7 +463,7 @@
             <div class="leftSectionHeader">
               Video
             </div>
-            <object width="300" height="193"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"/><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="193"></embed></object>
+            <object width="300" height="193"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"/><param name="wmode" value="transparent" /><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="300" height="193"></embed></object>
           </div>
           <div>
             <div class="leftSectionHeader">
@@ -532,7 +490,7 @@
                     <th style="width:80px;">Distance</th>
                     <th style="width:250px;">Facility</th>
                     <th style="width:200px;">Special Offers</th>
-                    <th style="width:105px;">Move-In Cost From</th>
+                    <th style="width:105px;">Move-In Cost</th>
                   </tr>
                   <tr>
                     <td colspan="4" style="border-bottom:1px black solid;"></td>
@@ -564,22 +522,25 @@
                       <div style="clear:both;"></div>
                       <div>
                         <g:if test="${site.isKeypad}">
-                          <storitz:image id="keypad${site.id}" class="pointer" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
+                          <storitz:image class="pointer tooltip_keypad" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
                         </g:if>
                         <g:if test="${site.isCamera}">
-                          <storitz:image id="camera${site.id}" class="pointer" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
+                          <storitz:image class="pointer tooltip_camera" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
                         </g:if>
                         <g:if test="${site.isGate}">
-                          <storitz:image id="gate${site.id}" class="pointer" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
+                          <storitz:image class="pointer tooltip_gate" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
                         </g:if>
                         <g:if test="${site.isUnitAlarmed}">
-                          <storitz:image id="alarm${site.id}" class="pointer" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
+                          <storitz:image class="pointer tooltip_alarm" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
                         </g:if>
                         <g:if test="${site.isManagerOnsite}">
-                          <storitz:image id="manager${site.id}" class="pointer" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
+                          <storitz:image class="pointer tooltip_manager" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
                         </g:if>
                         <g:if test="${site.hasElevator}">
-                          <storitz:image id="elevator${site.id}" class="pointer" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                          <storitz:image class="pointer tooltip_elevator" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                        </g:if>
+                        <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
+                          <storitz:image class="pointer tooltip_truck" src="icon-rentaltruck-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
                         </g:if>
                       </div>
                     </td>
@@ -612,6 +573,7 @@
                     <td>
                       <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
                       <div class="stPriceSub textCenter">MOVES YOU IN</div>
+                      <div class="stPriceSub textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
                       <div style="width:87px;margin-left: auto; margin-right: auto;">
                         <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
                           <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
@@ -718,84 +680,8 @@
       </div>
       <div style="height:100px;"></div>
       <g:render template="/footer_no_analytics" />
-      <g:render template="/size_popup" />
+      <g:render template="/size_popup_jquery" />
 
-      <div id="resultHelp" style="display:none;">
-        <div class="resultHelpHeader">
-          <div class="helpClose" id="resultHelpClose">
-            <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
-            <div class="left"><storitz:image style="width:17px;height:16px;vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
-          </div>
-        </div>
-        <div>
-          <div class="resultHelpBoxText">
-            <div class="helpBoxTextHolder">
-              <div class="helpBoxTextTitle">
-                Drive-Up
-              </div>
-              <div class="helpBoxTextBody">
-                Means the storage unit door is accessed from a drive aisle.  You park your vehicle in front of the unit and load your stuff. Some large warehouse facilities have indoor drive aisles, so a Drive-Up can be outdoors or indoors.
-              </div>
-            </div>
-          </div>
-          <div class="resultHelpBoxSeparator"></div>
-          <div class="resultHelpBoxText">
-            <div class="helpBoxTextHolder">
-              <div class="helpBoxTextTitle">
-                Upper
-              </div>
-              <div class="helpBoxTextBody">
-                Many storage facilities have multiple floors. An “Upper” type of unit is on any floor other than the ground floor, which typically means it is on an upper floor and is accessed by a cargo lift or elevator. In some cases, this type of unit may be in a basement.
-              </div>
-            </div>
-          </div>
-          <div class="resultHelpBoxSeparator"></div>
-          <div class="resultHelpBoxText">
-            <div class="helpBoxTextHolder">
-              <div class="helpBoxTextTitle">
-                Interior
-              </div>
-              <div class="helpBoxTextBody">
-                Larger and urban storage facilities are typically housed in a large warehouse building. An Interior storage unit is on the Ground floor and accessed from inside a building.  Often times, there is a central loading area from the street and into building doors, and then your Interior unit is a short walk from those building doors.
-              </div>
-            </div>
-          </div>
-          <div class="resultHelpBoxSeparator"></div>
-          <div class="resultHelpBoxText">
-            <div class="helpBoxTextHolder">
-              <div class="helpBoxTextTitle">
-                Climate Control
-              </div>
-              <div class="helpBoxTextBody">
-                Some storage properties offer climate controlled storage unit areas.  The climate controls vary from simple ventilation, to evaporative cooling, all the way to full air conditioning and heating. For inclement locales, Climate Control is useful.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="clear:both;height:5px;"></div>
-      </div>
-
-      <div id="tooltip_keypad" style="display:none" class="tooltip">
-      Keypad Entry
-      </div>
-      <div id="tooltip_camera" style="display:none" class="tooltip">
-      Video Camera Security
-      </div>
-      <div id="tooltip_gate" style="display:none" class="tooltip">
-      Security Gate
-      </div>
-      <div id="tooltip_alarm" style="display:none" class="tooltip">
-      Unit level alarms
-      </div>
-      <div id="tooltip_truck" style="display:none" class="tooltip">
-      Free Move-In Truck Available
-      </div>
-      <div id="tooltip_manager" style="display:none" class="tooltip">
-      Manager lives onsite
-      </div>
-      <div id="tooltip_elevator" style="display:none" class="tooltip">
-      Elevator to Upper Floors
-      </div>
       <p:dependantJavascript>
         <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
       </p:dependantJavascript>

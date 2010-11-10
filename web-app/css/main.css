@@ -468,6 +468,20 @@ div.resultsBar {
     font-weight: bold;
 }
 
+.infoWindowTitle {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    color: #3fac00;
+    font-weight: bold;
+    width: 185px;
+    text-align: center;
+}
+
+.infoWindowText {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    color: #333;
+    float: left;
+}
+
 .stAddress {
     font: 11px verdana, arial, helvetica, sans-serif;
     color: #333;
@@ -483,6 +497,16 @@ div.resultsBar {
     font: 14px verdana, arial, helvetica, sans-serif;
     color: #00529b;
     font-weight: bold;
+}
+
+.sizeGuide {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    color: #00529b;
+    font-weight: bold;
+    text-decoration:underline;
+    margin-left: 5px;
+    width: 40px;
+    cursor: pointer;
 }
 
 .stPriceSub {
@@ -523,10 +547,8 @@ div.leftSectionHeader {
 }
 
 #sizeHelp {
-    position: absolute;
     background-color: white;
-    border: 4px solid #0971C2;
-    width: 524px;
+    width: 540px;
 }
 
 #resultHelp {
@@ -577,48 +599,34 @@ div.helpBox {
 .helpBoxText {
     float: left;
     padding: 2px 5px 1px 5px;
-    height: 60px;
-    width: 335px;
-    display: table;
+    width: 230px;
 }
 
 .resultHelpBoxText {
     float: left;
     padding: 2px 5px 1px 5px;
     height: 60px;
-    width: 425px;
+    width: 325px;
     display: table;
 }
 
 div.helpBoxSeparator {
     clear: both;
-    width: 504px;
+    width: 404px;
     height: 1px;
     margin: 0 10px;    
-    border-bottom: #9f9f9f dotted thin;
-}
-
-div.resultHelpBoxSeparator {
-    clear: both;
-    width: 440px;
-    height: 1px;
-    margin: 0 10px;
     border-bottom: #9f9f9f dotted thin;
 }
 
 .helpBoxTextTitle {
     font: bold 11px verdana;
     color: #0867b5;
+    margin-top: 10px;
 }
 
 .helpBoxTextBody {
     font: 11px verdana;
     color: #333;
-}
-
-.helpBoxTextHolder {
-    display: table-cell;
-    vertical-align: middle;
 }
 
 .srText {

@@ -4,11 +4,13 @@ import com.storitz.StorageSite
 import com.storitz.geoip.GeoIp
 import grails.converters.JSON
 import org.hibernate.FetchMode
+import com.storitz.StorageSize
 
 class STMapController {
 
     def webUtilService
     def mapService
+    def costService
 
     def index = { }
 
@@ -69,30 +71,108 @@ class STMapController {
       render (status: 200, contentType:"application/json", text:"{ siteCount: ${results.size()}, features: ${sw.toString()} }")
     }
 
-  def iplocate = {
+    def mapresults = {
 
-    def loc = mapService.getGeoIp(servletContext, request)
+      def results = mapService.getSites(params.searchSize as Integer, params.swLat as BigDecimal, params.swLng as BigDecimal, params.neLat as BigDecimal, params.neLng as BigDecimal)
 
-    JSON.use("deep")
-    render (status:200, contentType:"application/json", text:"${loc as JSON}")
-  }
+      def unitMap = [:]
 
-  def nomatchjsonp = {
-
-    def sites = StorageSite.createCriteria()
-    def results = sites.listDistinct {
-      and {
-        between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
-        between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
+      def unitSize
+      if (params?.searchSize != 1) {
+        unitSize = StorageSize.get(params.size)
       }
-      units {
-        size {
-          ne("id", params.sizeId as Long)
+      Date  moveInDate
+      if (params.date && params.date instanceof Date) {
+        moveInDate = params.date
+      } else {
+        if (params.date) {
+          moveInDate = Date.parse('MM/dd/yy', params.date)
+        } else {
+          moveInDate = new Date()
         }
       }
+
+      def sw = new StringWriter()
+      sw << "[ "
+      if (results.size() < 20) {
+        results.eachWithIndex { site, i ->
+          sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\",\"specialOffers\":["
+          site.specialOffers().eachWithIndex{ offer, j ->
+            sw << "{\"promoName\":\"${offer.promoName}\" }"
+            if (j < site.specialOffers().size() - 1) {
+              sw << ","
+            }
+          }
+          sw << "], \"featuredOffers\":["
+            site.featuredOffers().eachWithIndex{ offer, j ->
+              sw << "{\"promoName\":\"${offer.promoName}\" }"
+              if (j < site.featuredOffers().size() - 1) {
+                sw << ","
+              }
+          }
+
+          def bestUnit
+          def unitSiz
+          def monthly
+          def moveInCost
+          def promoId
+
+          if (unitSize) {
+            bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+          } else {
+            bestUnit = site.units.min{ it.price }
+          }
+          if (site.featuredOffers().size() == 0) {
+            def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
+            monthly = bestUnit.pushRate
+            promoId = null
+            moveInCost = cost
+          } else {
+            for (promo in site.featuredOffers()) {
+              def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
+              if (moveInCost > cost) {
+                monthly = bestUnit.pushRate
+                promoId = promo.id
+                moveInCost = cost
+              }
+            }
+          }
+          sw << "], \"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId} }"
+
+          if (i < results.size() - 1) {
+            sw << ","
+          }
+        }
+      }
+      sw << "]"
+      webUtilService.nocache(response)
+      render (status: 200, contentType:"application/json", text:"{ \"siteCount\": ${results.size()}, \"features\": ${sw.toString()} }")
     }
-    JSON.use("deep")
-    render (status: 200, contentType:"application/json", text:"{ features: ${results as JSON} }")
-  }
+
+    def iplocate = {
+
+      def loc = mapService.getGeoIp(servletContext, request)
+
+      JSON.use("deep")
+      render (status:200, contentType:"application/json", text:"${loc as JSON}")
+    }
+
+    def nomatchjsonp = {
+
+      def sites = StorageSite.createCriteria()
+      def results = sites.listDistinct {
+        and {
+          between("lat", params.swLat as BigDecimal, params.neLat as BigDecimal)
+          between("lng", params.swLng as BigDecimal, params.neLng as BigDecimal)
+        }
+        units {
+          size {
+            ne("id", params.sizeId as Long)
+          }
+        }
+      }
+      JSON.use("deep")
+      render (status: 200, contentType:"application/json", text:"{ features: ${results as JSON} }")
+    }
 
 }
