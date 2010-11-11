@@ -1150,6 +1150,8 @@ class BootStrap {
     new UnitTypeLookup(id:719, description:"C/C Upstairs", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:720, description:"C/C Downstairs", unitType:UnitType.INTERIOR, tempControlled:true).save(validate:false)
     new UnitTypeLookup(id:721, description:"Vault", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:722, description:"Drive Up Access, High Door", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:723, description:"Boat/RV Parking", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
   }
 
 

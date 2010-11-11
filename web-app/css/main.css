@@ -381,6 +381,20 @@ input.inputBox:focus {
     float: left;
 }
 
+.mapStatus {
+    width: 300px;
+    margin: 100px 0 0 150px;
+    padding: .5em 1em;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 5px;
+    color: #00529b;
+    background-color: white;
+    border: #00529b solid 1px;
+    display: block;
+    position: absolute;
+    z-index: 1000;
+}
+
 #map_canvas {
     width: 617px;
     height: 284px;
@@ -497,6 +511,14 @@ div.resultsBar {
     font: 14px verdana, arial, helvetica, sans-serif;
     color: #00529b;
     font-weight: bold;
+}
+
+.stFeatureIcon {
+    vertical-align: middle;
+    margin: 1px;
+    width:20px;
+    height:20px;
+    cursor: pointer;
 }
 
 .sizeGuide {

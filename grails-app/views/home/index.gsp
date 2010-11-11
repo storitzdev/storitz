@@ -33,10 +33,16 @@
         var bounds = null;
         var markersGreen = [];
         var markersBlue = [];
+        var srcMarkersGreen = [];
+        var srcMarkersBlue = [];
         var mapMarker = null;
         var firstDraw = false;
 
         <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
+        <g:each in="${0..25}" var="i">
+          srcMarkersGreen[${i}] = ${p.imageLink(src:'map_icons/green-loc' + i + '.png')};
+          srcMarkersBlue[${i}] = ${p.imageLink(src:'map_icons/blue-loc' + i + '.png')};
+        </g:each>
 
         function calcDistance(lat1, lat2, lng1, lng2) {
           var d = Math.acos(Math.sin(lat1/57.2958)*Math.sin(lat2/57.2958) +
@@ -71,8 +77,7 @@
         function siteLink(s)
         {
           var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
-
-          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id;
+          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress());
         }
 
         function getDate() {
@@ -98,16 +103,15 @@
             c.append($('<div>', { 'class':'infoWindowText' })
                     .append($('<div>').text(feature.address))
                     .append($('<div>').text(feature.city + ', ' + feature.state + ' ' + feature.zipcode))
-                    .append($('<div>', {'class':'left'}).css('margin-top','5px').append($('<a>', { href: siteLink(feature) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($('#address').val()) })
+                    .append($('<div>', {'class':'left'}).css('margin-top','5px').append($('<a>', { href: siteLink(feature) })
                     .append($('<img>', { src: ${p.imageLink(src:'details-button.gif')}, width:'55', height:'20'  })))));
-            //c += '<div style="text-align: center;"><a href="' + siteLink(feature) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent($('#address').val()) + '">details</a></div></div>';
+
           feature.marker.setIcon(markersBlue[feature.index]);
           if (infoWindow) {
             infoWindow.close();
           }
-          if (savedFeature && $('row'+savedFeature.id)) {
-            $('row'+savedFeature.id).removeClassName('rowhighlight');
-          }
+
+          //TODO - erase highlighted row
           if (savedFeature) {
             savedFeature.marker.setIcon(markersGreen[savedFeature.index]);
           }
@@ -116,16 +120,8 @@
             delete infoWindow;
           });
           infoWindow.open(map, feature.marker);
-          // TODO - highlight row
+          // TODO - highlight row of new item
           savedFeature = feature;
-        }
-
-        function markerOut(feature) {
-          $('row'+feature.id).removeClassName('rowhighlight');
-          savedFeature = null;
-          if (infoWindow) {
-            infoWindow.close();
-          }
         }
 
         function panTo(markerId) {
@@ -162,15 +158,25 @@
             success:function(ret) {
 
               if (ret.siteCount >= 20) {
-                $('#stresults_div').html("<div class=\"siteOverage\">Too many results returned.  Zoom in to see results.</div>");
-                return;
+                // TODO - pop up saying too many results found, showing first 20
               }
               var rows = 0;
+              var statusText
+              if (ret.siteCount > 1) {
+                statusText = 'Your search found ' + ret.siteCount + ' results';
+              } else if (ret.siteCount == 1) {
+                statusText = 'Your search found ' + ret.siteCount + ' result';
+              } else {
+                statusText = 'Your search found no results';
+              }
+              $('#mapStatus').html(statusText).fadeIn().idle(2500).fadeOut('slow');
 
               $.each(ret.features, function(i, s) {
 
                   s.index = ++rows;
                   createMarker(s);
+                  // TODO - add row to table
+                  createTableRow(s);
               });
             },
             error:function(ret) {
@@ -198,37 +204,90 @@
         }
 
         function createTableRow(s) {
-          var pUp = s.units.find(function(n) { return n.unitType == '${UnitType.UPPER}' });
-          var pDup = s.units.find(function(n) { return n.unitType == '${UnitType.DRIVEUP}' });
-          var pInt = s.units.find(function(n) { return n.unitType == '${UnitType.INTERIOR}' });
-          var priceDriveup = pDup ? pDup.price  : 999999;
-          var priceInterior = pInt ? pInt.price : 999999;
-          var priceUpper = pUp ? pUp.price : 999999;
 
-          var keypadImg = s.isKeypad ? "<img class=\"pointer tooltip_keypad\" src=${p.imageLink(src:'icon-keypad-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Keypad\"/>" : '<span style="width:20px; margin:1px;"></span>';
-          var cameraImg = s.isCamera ? "<img class=\"pointer tooltip_camera\" src=${p.imageLink(src:'icon-camera-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Camera\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var gateImg   = s.isGate ? "<img class=\"pointer tooltip_gate\" src=${p.imageLink(src:'icon-gate-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Gate\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var alarmImg  = s.isUnitAlarmed ? "<img class=\"pointer tooltip_alarm\" src=${p.imageLink(src:'icon-alarm-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Alarm\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var managerImg  = s.isManagerOnsite ? "<img class=\"pointer tooltip_manager\" src=${p.imageLink(src:'icon-green-mgr20b.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Manager Onsite\"/>" : '<span style="width:20px; margin: 1px;"></span>';
-          var elevatorImg  = s.hasElevator ? "<img class=\"pointer tooltip_elevator\" src=${p.imageLink(src:'icon-green-elevator20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Elevator\"/>" : '<span style="width:20px; margin: 1px;"></span>';
+          var logo
+          if (s.logo.toString().length > 0) {
+            logo = $('<div>', { 'class': 'left' } ).append($('<img>', { src: s.logo, width:100, height:40, border:0, alt: s.title + ' Logo'}));
+          } else {
+            logo = $('<div>', { 'class': 'left' } )
+          }
+          var features = $('<div>');
+          if (s.isKeypad) {
+            features.append($('<img>', { 'class': 'stFeatureIcon tooltip_keypad', src:${p.imageLink(src:'icon-keypad-green-20x20.gif')}, alt:"Keypad", width:20, height:20 }));
+          }
+          if (s.isCamera) {
+            features.append($('<img>', { 'class': 'stFeatureIcon tooltip_camera', src:${p.imageLink(src:'icon-camera-green-20x20.gif')}, alt:"Video Camera", width:20, height:20 }));
+          }
+          if (s.isGate) {
+            features.append($('<img>', { 'class': 'stFeatureIcon tooltip_gate', src:${p.imageLink(src:'icon-gate-green-20x20.gif')}, alt:"Gate", width:20, height:20 }));
+          }
+          if (s.isUnitAlarmed) {
+            features.append($('<img>', { 'class': 'stFeatureIcon tooltip_alarm', src:${p.imageLink(src:'icon-alarm-green-20x20.gif')}, alt:"Unit Alarms", width:20, height:20 }));
+          }
+          if (s.isManagerOnsite) {
+            features.append($('<img>', { 'class': 'stFeatureIcon tooltip_manager', src:${p.imageLink(src:'icon-green-mgr20b.gif')}, alt:"Manager Onsite", width:20, height:20 }));
+          }
+          if (s.isGate) {
+            features.append($('<img>', { 'class': 'stFeatureIcon tooltip_elevator', src:${p.imageLink(src:'icon-green-elevator20.gif')}, alt:"Elevator", width:20, height:20 }));
+          }
 
-          var truckImg = '<span style="width:20px; margin: 1px;"></span>';
           switch(s.freeTruck) {
             case "FREE":
-              truckImg =  "<img class=\"pointer tooltip_truck\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
+              features.append($('<img>', { 'class': 'stFeatureIcon tooltip_truck', src:${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')}, alt:"Free Truck", width:20, height:20 }));
               break;
             case "RENTAL":
-              truckImg =  "<img class=\"pointer tooltip_truck\" src=${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')} style=\"vertical-align: middle; margin: 1px; width:20px; height:20px;\" alt=\"Rental Truck\"/>";
+              features.append($('<img>', { 'class': 'stFeatureIcon tooltip_truck', src:${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')}, alt:"Rental Truck", width:20, height:20 }));
               break;
           }
 
-          return '<tr id="row' + s.id + '" class="strow"><td class="textCenter distance">' + calcDistance(searchLat, s.lat, searchLng, s.lng) + 'mi </td><td class="stVert"><div style="float:left;"><a href="#" class="no_underline siteTitle" onclick="panTo(' + s.id + ');return false">' + s.title + '</a><br> ' +
-            '<a href="' + siteLink(s) + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '">' + s.address +'</a></div></td><td class="textCenter">' +
-            (priceUpper && priceUpper < 999999 ? '<a href="' + siteLink(s) + '?unitType=UPPER' + (pUp ? '&searchSize=' + pUp.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceUpper.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-            (priceInterior && priceInterior < 999999 ? '<a href="' + siteLink(s) + '?unitType=INTERIOR' + (pInt ? '&searchSize=' + pInt.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceInterior.toFixed(2) + '</a>' : "&#8212;") + '</td><td class="textCenter">' +
-            (priceDriveup && priceDriveup < 999999 ? '<a href="' + siteLink(s) + '?unitType=DRIVEUP' + (pDup ? '&searchSize=' + pDup.unitsize.id : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress()) + '" class="unitPrice">$' + priceDriveup.toFixed(2) + '</a>' : "&#8212;")  + '</td>' +
-            '<td><div style="float:right;">' + keypadImg + cameraImg + alarmImg + managerImg + gateImg + elevatorImg + truckImg +'</div></td><td class="specialOfferText">' + (offers ? offers : "&#8212;") + '</td></tr>';
+          var offers = $('<td>', { 'class':'stSpecialOffers' });
 
+          if (s.featuredOffers.length > 0) {
+            $.each(s.featuredOffers, function(i, promo) {
+              offers.append($('<div>', { 'class':'left'})
+                      .append($('<img>', { src: ${p.imageLink(src:'special-offer-icon.gif')}, width:20, height:20 })))
+                      .append($('<div>', { 'class':'left' }).css('margin', '2px 0 0 10px').text(promo.promoName))
+                      .append($('<div>').css('clear', 'both'));
+            });
+          } else if (s.specialOffers.length > 0) {
+            $.each(s.specialOffers, function(i, promo) {
+              offers.append($('<div>', { 'class':'left'})
+                      .append($('<img>', { src: ${p.imageLink(src:'special-offer-icon.gif')}, width:20, height:20 })))
+                      .append($('<div>', { 'class':'left' }).css('margin', '2px 0 0 10px').text(promo.promoName))
+                      .append($('<div>').css('clear', 'both'));
+            });
+          } else {
+            offers.text('&#8212;')
+          }
+
+          var row = $('<tr>', { id: 'row' + s.id })
+                  .append($('<td>', { 'class':'textCenter'})
+                    .append($('<div>', { 'class': 'stDistanceLine' }))
+                    .append($('<div>', { 'class': 'left' }).css('margin-left', '10px')
+                      .append($('<div>', { id: 'map_icon'+s.id, 'class':'map_icon'})
+                        .append($('<img>', { src: srcMarkersGreen[s.index], width: 28, height: 35 })))
+                      .append($('<div>', { 'class':'stDistance' }).text(calcDistance(searchLat, s.lat, searchLng, s.lng)))
+                      .append($('<div>', { 'class':'stMiles' }).text('miles'))))
+                  .append($('<td>', { 'class': 'stVert' })
+                    .append($('<a>', { src: siteLink(s) } ).css('text-decoration', 'none')
+                      .append(logo)
+                      .append($('<div>', { 'class': 'left' }).css('margin-left', '5px')
+                        .append($('<div>', { 'class':'stTitle' }).text(s.title))
+                        .append($('<div>', { 'class':'stAddress' }).text(s.address))))
+                    .append($('<div>').css('clear','both'))
+                    .append(features))
+                  .append(offers)
+                  .append($('<td>')
+                    .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + s.moveInCost.toFixed(2)))
+                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('MOVES YOU IN'))
+                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + s.monthly.toFixed(2) + ' / MO'))
+                    .append($('<div>').css( { width:'87px', 'margin-left':'auto', 'margin-right':'auto' })
+                      .append($('<a>', { src: siteLink(s) })
+                        .append($('<img>', { src: ${p.imageLink(src:'special-offer-icon.gif')}, width:87, height: 31, border: 0 } )))))
+          .append($('<tr>')
+                  .append($('<td>', { colspan:4 }).css('border-bottom','1px #ccc dotted')));
+
+          return row;
         }
 
         function createMap() {
@@ -269,6 +328,18 @@
             createMarker(site);
           </g:each>
           
+          <g:if test="${sites.size() > 1}">
+            var statusText = 'Your search found ${sites.size()} results';
+          </g:if>
+          <g:elseif test="${sites.size() == 1}">
+            var statusText = 'Your search found 1 result';
+          </g:elseif>
+          <g:else>
+            var statusText = 'Your search found no results';
+          </g:else>
+          setupIdle();
+          $('#mapStatus').html(statusText).fadeIn().idle(2500).fadeOut('slow');
+
         }
 
         function showAddress(address, size, date) {
@@ -296,7 +367,8 @@
                 searchLat = results[0].geometry.location.lat();
                 searchLng = results[0].geometry.location.lng();
               } else {
-                $('stresults_div').update("<div class=\"siteOverage\">Your search was too vague - you may need to add a zip code or state to:" + getAddress() + "</div>");
+                // TODO - update map div with message
+                
               }
             });
           }
@@ -398,6 +470,19 @@
         $(".tooltip_elevator").qtip({ content: "Elevator to upper floors", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
       }
 
+      function setupIdle() {
+        $.fn.idle = function(time){
+      	  return this.each(function(){
+            var i = $(this);
+            i.queue(function(){
+              setTimeout(function(){
+                i.dequeue();
+              }, time);
+            });
+          });
+        };
+      }
+
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-16012579-1']);
       _gaq.push(['_trackPageview']);
@@ -408,6 +493,7 @@
         setupHelp();
         setupForm();
         setupQtipThemeroller();
+        setupIdle();
         setupTooltips();
         setupAnalytics();
       });
@@ -481,7 +567,9 @@
         </div>
         <div class="rightColumn">
           <div id="gmap">
-            <div id="map_canvas"></div>
+            <div id="mapStatus" class="mapStatus" style="display:none"></div>
+            <div id="map_canvas">
+            </div>
           </div>
 
           <div id="stresults_div">
@@ -504,7 +592,7 @@
                     <td class="textCenter">
                       <div class="stDistanceLine"></div>
                       <div class="left" style="margin-left:10px;">
-                        <div id="map_icon${site.id}">
+                        <div id="map_icon${site.id}" class="map_icon">
                           <storitz:image src="${'map_icons/green-loc' + (c  + 1) + '.png'}" width="28" height="35"/>
                         </div>
                         <div class="stDistance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/></div>
@@ -512,15 +600,17 @@
                       </div>
                     </td>
                     <td class="stVert">
-                      <div class="left">
-                        <g:if test="${site?.logo}">
-                          <img src="${resource(file:site.logo.src())}" width="100" height="40" alt="${site.title} Logo"/>
-                        </g:if>
-                      </div>
-                      <div class="left" style="margin-left: 5px;">
-                        <div class="stTitle">${site.title}</div>
-                        <div class="stAddress">${site.address}</div>
-                      </div>
+                      <g:link mapping="siteLink" style="text-decoration:none;" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                        <div class="left">
+                          <g:if test="${site?.logo}">
+                            <img src="${resource(file:site.logo.src())}" width="100" height="40" border="0" alt="${site.title} Logo"/>
+                          </g:if>
+                        </div>
+                        <div class="left" style="margin-left: 5px;">
+                          <div class="stTitle">${site.title}</div>
+                          <div class="stAddress">${site.address}</div>
+                        </div>
+                      </g:link>
                       <div style="clear:both;"></div>
                       <div>
                         <g:if test="${site.isKeypad}">
@@ -559,10 +649,12 @@
                         </g:each>
                       </g:if>
                       <g:elseif test="${site.specialOffers().size() > 0}">
-                        <g:each var="promo" in="${site.specialOffers()}">
-                          <div>
-                            <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
-                          </div>
+                        <g:each var="promo" in="${site.specialOffers()}" status="p">
+                          <g:if test="${p < 2 }">
+                            <div>
+                              <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
+                            </div>
+                          </g:if>
                         </g:each>
                         <div class="left" style="margin: 2px 0 0 10px;">
                           ${promo?.promoName}
@@ -684,10 +776,10 @@
       <g:render template="/footer_no_analytics" />
       <g:render template="/size_popup_jquery" />
 
-      <p:dependantJavascript>
-        <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
-      </p:dependantJavascript>
     </div>
     </body>
+    <p:dependantJavascript>
+      <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
+    </p:dependantJavascript>
     <p:renderDependantJavascript />
 </html>
