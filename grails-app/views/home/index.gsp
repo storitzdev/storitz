@@ -106,7 +106,7 @@
                     .append($('<div>').text(feature.address))
                     .append($('<div>').text(feature.city + ', ' + feature.state + ' ' + feature.zipcode))
                     .append($('<div>', {'class':'left'}).css('margin-top','5px').append($('<a>', { href: siteLink(feature) })
-                    .append($('<img>', { src: ${p.imageLink(src:'details-button.gif')}, width:'55', height:'20'  })))));
+                    .append($('<img>', { src: ${p.imageLink(src:'details-button.gif')}, width:'55', height:'20', border:'0'  })))));
 
           feature.marker.setIcon(markersBlue[feature.index]);
           $('#map_icon'+feature.id).html($('<img>', { src:srcMarkersBlue[feature.index], width: 28, height: 35}));
