@@ -145,7 +145,8 @@ uiperformance.bundles = [
     name: 'jquery_all',
     files: ["jquery-1.4.2.min",
             "jquery-ui-1.8.6.custom.min",
-            "jquery.qtip-1.0.min"
+            "jquery.qtip-1.0.min",
+            "jquery.dataTables.min"
             ]],
   [type: 'js',
     name: 'admin_all',
@@ -155,6 +156,10 @@ uiperformance.bundles = [
     name: 'admin_bundled',
     files: ["main",
             "jquery-ui-1.8.6.custom"]],
+  [type: 'css',
+    name: 'jquery_bundled',
+    files: ['main',
+            'datatables']],
   [type: 'css',
     name: 'header_bundled',
     files: ['main',

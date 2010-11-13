@@ -100,7 +100,7 @@ class STMapController {
       def row = 0
       for (site in results) {
         row++;
-        sw << "{ \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\", \"logo\":\"${site.logo ? site.logo.src() : ""}\", \"specialOffers\":["
+        sw << "{ \"index\":${row}, \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\", \"logo\":\"${site.logo ? resource(file:site.logo.src()) : ""}\", \"specialOffers\":["
         site.specialOffers().eachWithIndex{ offer, j ->
           sw << "{\"promoName\":\"${offer.promoName}\" }"
           if (j < site.specialOffers().size() - 1) {
@@ -132,18 +132,15 @@ class STMapController {
           promoId = null
           moveInCost = cost
 
-          println "Calculate moveInCost site: ${site.id} , bestUnit: ${bestUnit?.dump()}, moveInDate: ${moveInDate.format('MM/dd/yy')}, monthly: ${bestUnit?.pushRate}, moveInCost: ${cost}"
         } else {
           for (promo in site.featuredOffers()) {
             def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
-            println "calling calculateMoveInCost site: ${site.id} , bestUnit: ${bestUnit?.dump()}, promo: ${promo?.dump()}, moveInDate: ${moveInDate.format('MM/dd/yy')},  cost: ${cost} moveInCost: ${moveInCost}"
             if (moveInCost > cost) {
               monthly = bestUnit.pushRate
               promoId = promo.id
               moveInCost = cost
             }
           }
-          println "Calculate moveInCost site: ${site.id} , bestUnit: ${bestUnit?.dump()}, moveInDate: ${moveInDate.format('MM/dd/yy')}, promo.id: ${promoId}, monthly: ${bestUnit?.pushRate}, moveInCost: ${moveInCost}"
         }
         sw << "], \"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId} }"
 

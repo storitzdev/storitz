@@ -487,7 +487,7 @@ class StorageSiteController {
       }
     }
 
-    UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : null
+    UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : bestUnit?.unitType
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
@@ -619,7 +619,7 @@ class StorageSiteController {
 
     Collection unitTypes
     Collection sizeList
-    StorageSize unitSize = params.size ? StorageSize.get(params.size) : null
+    StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     if (params.action == 'unitType') {
       unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
       sizeList = site.units.findAll{ it.unitType == unitType }.collect{ it.unitsize }.unique()

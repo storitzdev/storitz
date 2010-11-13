@@ -37,6 +37,8 @@
         var srcMarkersBlue = [];
         var mapMarker = null;
         var firstDraw = false;
+        var resultTable;
+        var savedTableId;
 
         <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
         <g:each in="${0..25}" var="i">
@@ -77,7 +79,7 @@
         function siteLink(s)
         {
           var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
-          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id + '?searchSize=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress());
+          return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id + '?size=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress());
         }
 
         function getDate() {
@@ -107,21 +109,23 @@
                     .append($('<img>', { src: ${p.imageLink(src:'details-button.gif')}, width:'55', height:'20'  })))));
 
           feature.marker.setIcon(markersBlue[feature.index]);
+          $('#map_icon'+feature.id).html($('<img>', { src:srcMarkersBlue[feature.index], width: 28, height: 35}));
+          savedTableId = feature.id;
           if (infoWindow) {
             infoWindow.close();
           }
-
-          //TODO - erase highlighted row
           if (savedFeature) {
-            savedFeature.marker.setIcon(markersGreen[savedFeature.index]);
+            features[savedFeature].marker.setIcon(markersGreen[features[savedFeature].index]);
           }
+          savedFeature = feature.id;
           infoWindow = new google.maps.InfoWindow({content: c.html(), maxWidth: 200});
-          google.maps.event.addListener(infoWindow, 'mouseout', function() {
-            delete infoWindow;
+          google.maps.event.addListener(infoWindow, 'closeclick', function() {
+            features[savedFeature].marker.setIcon(markersGreen[features[savedFeature].index]);
+            if (savedTableId) {
+              $('#map_icon'+savedTableId).html($('<img>', { src:srcMarkersGreen[features[savedTableId].index], width: 28, height: 35}));
+            }
           });
           infoWindow.open(map, feature.marker);
-          // TODO - highlight row of new item
-          savedFeature = feature;
         }
 
         function panTo(markerId) {
@@ -157,12 +161,11 @@
             },
             success:function(ret) {
 
-              if (ret.siteCount >= 20) {
-                // TODO - pop up saying too many results found, showing first 20
-              }
               var rows = 0;
               var statusText
-              if (ret.siteCount > 1) {
+              if (ret.siteCount >= 20) {
+                statusText = 'Your search found more than 20 results.  Here are the top 20';
+              } else if (ret.siteCount > 1) {
                 statusText = 'Your search found ' + ret.siteCount + ' results';
               } else if (ret.siteCount == 1) {
                 statusText = 'Your search found ' + ret.siteCount + ' result';
@@ -171,13 +174,20 @@
               }
               $('#mapStatus').html(statusText).fadeIn().idle(2500).fadeOut('slow');
 
-              $.each(ret.features, function(i, s) {
+              resultTable.fnClearTable();
 
-                  s.index = ++rows;
+              $.each(features, function(i, f) {
+                if (f && f.marker) {
+                  f.marker.setMap(null);
+                }
+              });
+
+              $.each(ret.features, function(i, s) {
                   createMarker(s);
-                  // TODO - add row to table
                   createTableRow(s);
               });
+
+              setupMap();
             },
             error:function(ret) {
               alert("Something went wrong " + ret);
@@ -187,16 +197,13 @@
 
         function createMarker(s) {
           var location = new google.maps.LatLng(s.lat, s.lng);
-          var iconMarker;
-
-          iconMarker = markersGreen[s.index];
 
           features[s.id] = s;
           s.marker = new google.maps.Marker({
             map: map,
             title: s.title,
             position: location,
-            icon: iconMarker
+            icon: savedFeature && savedFeature == s.id ? markersBlue[s.index] : markersGreen[s.index]
           });
           google.maps.event.addListener(s.marker, 'click', function() {
             markerClick(s);
@@ -211,6 +218,7 @@
           } else {
             logo = $('<div>', { 'class': 'left' } )
           }
+
           var features = $('<div>');
           if (s.isKeypad) {
             features.append($('<img>', { 'class': 'stFeatureIcon tooltip_keypad', src:${p.imageLink(src:'icon-keypad-green-20x20.gif')}, alt:"Keypad", width:20, height:20 }));
@@ -240,54 +248,55 @@
               break;
           }
 
-          var offers = $('<td>', { 'class':'stSpecialOffers' });
+          var offersCol = $('<div>');
 
           if (s.featuredOffers.length > 0) {
             $.each(s.featuredOffers, function(i, promo) {
-              offers.append($('<div>', { 'class':'left'})
-                      .append($('<img>', { src: ${p.imageLink(src:'special-offer-icon.gif')}, width:20, height:20 })))
-                      .append($('<div>', { 'class':'left' }).css('margin', '2px 0 0 10px').text(promo.promoName))
+              offersCol.append($('<div>', { 'class':'left'})
+                      .append($('<img>', { src: ${p.imageLink(src:'checkmark.png')}, width:20, height:20 })))
+                      .append($('<div>', { 'class':'left' }).css({'margin':'2px 0 0 10px', "width":"154px" }).text(promo.promoName))
                       .append($('<div>').css('clear', 'both'));
             });
           } else if (s.specialOffers.length > 0) {
             $.each(s.specialOffers, function(i, promo) {
-              offers.append($('<div>', { 'class':'left'})
-                      .append($('<img>', { src: ${p.imageLink(src:'special-offer-icon.gif')}, width:20, height:20 })))
-                      .append($('<div>', { 'class':'left' }).css('margin', '2px 0 0 10px').text(promo.promoName))
+              offersCol.append($('<div>', { 'class':'left'})
+                      .append($('<img>', { src: ${p.imageLink(src:'checkmark.png')}, width:20, height:20 })))
+                      .append($('<div>', { 'class':'left' }).css({'margin':'2px 0 0 10px', "width":"154px" }).text(promo.promoName))
                       .append($('<div>').css('clear', 'both'));
             });
           } else {
-            offers.text('&#8212;')
+            offersCol.text('&#8212;')
           }
 
-          var row = $('<tr>', { id: 'row' + s.id })
-                  .append($('<td>', { 'class':'textCenter'})
-                    .append($('<div>', { 'class': 'stDistanceLine' }))
+          var distanceCol = $('<div>').append($('<div>', { 'class': 'stDistanceLine' }))
                     .append($('<div>', { 'class': 'left' }).css('margin-left', '10px')
                       .append($('<div>', { id: 'map_icon'+s.id, 'class':'map_icon'})
-                        .append($('<img>', { src: srcMarkersGreen[s.index], width: 28, height: 35 })))
+                        .append($('<img>', { src: savedTableId && savedTableId == s.id ? srcMarkersBlue[s.index] : srcMarkersGreen[s.index], width: 28, height: 35 })))
                       .append($('<div>', { 'class':'stDistance' }).text(calcDistance(searchLat, s.lat, searchLng, s.lng)))
-                      .append($('<div>', { 'class':'stMiles' }).text('miles'))))
-                  .append($('<td>', { 'class': 'stVert' })
-                    .append($('<a>', { src: siteLink(s) } ).css('text-decoration', 'none')
+                      .append($('<div>', { 'class':'stMiles' }).text('miles')));
+
+          var facilityCol = $('<div>').append($('<a>', { href: siteLink(s) + (s.promoId ? '&promoId=' + s.promoId : '')} ).css('text-decoration', 'none')
+                      .append($('<div>', { 'class':'stTitle' }).text(s.title))
                       .append(logo)
                       .append($('<div>', { 'class': 'left' }).css('margin-left', '5px')
-                        .append($('<div>', { 'class':'stTitle' }).text(s.title))
                         .append($('<div>', { 'class':'stAddress' }).text(s.address))))
                     .append($('<div>').css('clear','both'))
-                    .append(features))
-                  .append(offers)
-                  .append($('<td>')
+                    .append(features);
+
+          var priceCol = $('<div>')
                     .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + s.moveInCost.toFixed(2)))
                     .append($('<div>', { 'class':'stPriceSub textCenter'}).text('MOVES YOU IN'))
                     .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + s.monthly.toFixed(2) + ' / MO'))
                     .append($('<div>').css( { width:'87px', 'margin-left':'auto', 'margin-right':'auto' })
-                      .append($('<a>', { src: siteLink(s) })
-                        .append($('<img>', { src: ${p.imageLink(src:'special-offer-icon.gif')}, width:87, height: 31, border: 0 } )))))
-          .append($('<tr>')
-                  .append($('<td>', { colspan:4 }).css('border-bottom','1px #ccc dotted')));
+                      .append($('<a>', { href: siteLink(s)  + (s.promoId ? '&promoId=' + s.promoId : '') })
+                        .append($('<img>', { src: ${p.imageLink(src:'rent-me-button.png')}, width:87, height: 31, border: 0 } ))));
 
-          return row;
+          resultTable.fnAddData([
+            distanceCol.html(),
+            facilityCol.html(),
+            offersCol.html(),
+            priceCol.html()
+          ]);
         }
 
         function createMap() {
@@ -339,6 +348,20 @@
           </g:else>
           setupIdle();
           $('#mapStatus').html(statusText).fadeIn().idle(2500).fadeOut('slow');
+
+          resultTable = $('#stresults').dataTable({
+            "aoColumns": [
+			  { "sSortDataType": "distance", "sType": "numeric", "sWidth":"90px" },
+			  { "sSortDataType": "facility", "sType": "string", "sWidth":"240px" },
+              { "bSortable":false, "sWidth":"185px", "sType":"html" },
+			  { "sSortDataType": "moveincost", "sType":"numeric", "sWidth":"120px" }
+		    ],
+            "bAutoWidth":false,
+            "bFilter":false,
+            "bInfo":false,
+            "bJQueryUI":false,
+            "bPaginate":false
+          });
 
         }
 
@@ -483,6 +506,55 @@
         };
       }
 
+      function setupTable() {
+        /* Create an array with the values of all the input boxes in a column */
+        $.fn.dataTableExt.afnSortData['distance'] = function  ( oSettings, iColumn ) {
+	      var aData = [];
+	      $( 'td:eq('+iColumn+') div.stDistance', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+		    aData.push( $(this).text() );
+	      } );
+	      return aData;
+        }
+        $.fn.dataTableExt.afnSortData['facility'] = function  ( oSettings, iColumn ) {
+          var aData = [];
+          $( 'td:eq('+iColumn+') div.stTitle', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+            aData.push( $(this).text() );
+          } );
+          return aData;
+        }
+        $.fn.dataTableExt.afnSortData['moveincost'] = function  ( oSettings, iColumn ) {
+          var aData = [];
+          $( 'td:eq('+iColumn+') div.stPrice', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+            aData.push( $(this).text().substring(1) );
+          } );
+          return aData;
+        }
+      }
+
+      function setupMap() {
+        $('.map_icon').click(function(event) {
+          var mapId = $(this).attr('id').substring(8);
+          $('#map_icon'+mapId).html($('<img>', { src:srcMarkersBlue[features[mapId].index], width: 28, height: 35}));
+          if (savedTableId) {
+            $('#map_icon'+savedTableId).html($('<img>', { src:srcMarkersGreen[features[savedTableId].index], width: 28, height: 35}));
+          }
+          markerClick(features[mapId]);
+          savedTableId = mapId;
+        });
+        $('#stresults > tbody > tr').mouseover(function(event) {
+          var mapDiv = $(this).find('.map_icon');
+          var mapId = mapDiv.attr('id').substring(8);
+          features[mapId].marker.setIcon(markersBlue[features[mapId].index]);
+        });
+        $('#stresults > tbody > tr').mouseout(function(event) {
+          var mapDiv = $(this).find('.map_icon');
+          var mapId = mapDiv.attr('id').substring(8);
+          if (!savedTableId || savedTableId != mapId) {
+            features[mapId].marker.setIcon(markersGreen[features[mapId].index]);
+          }
+        });
+      }
+
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-16012579-1']);
       _gaq.push(['_trackPageview']);
@@ -495,6 +567,8 @@
         setupQtipThemeroller();
         setupIdle();
         setupTooltips();
+        setupTable();
+        setupMap();
         setupAnalytics();
       });
 
@@ -577,10 +651,10 @@
               <table id="stresults">
                 <thead>
                   <tr class="stresultsHeader">
-                    <th style="width:80px;">Distance</th>
-                    <th style="width:250px;">Facility</th>
-                    <th style="width:200px;">Special Offers</th>
-                    <th style="width:105px;">Move-In Cost</th>
+                    <th style="width:90px;">Distance</th>
+                    <th style="width:240px;">Facility</th>
+                    <th style="width:185px;">Special Offers</th>
+                    <th style="width:120px;">Move-In Cost</th>
                   </tr>
                   <tr>
                     <td colspan="4" style="border-bottom:1px black solid;"></td>
@@ -601,13 +675,13 @@
                     </td>
                     <td class="stVert">
                       <g:link mapping="siteLink" style="text-decoration:none;" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                        <div class="stTitle">${site.title}</div>
                         <div class="left">
                           <g:if test="${site?.logo}">
                             <img src="${resource(file:site.logo.src())}" width="100" height="40" border="0" alt="${site.title} Logo"/>
                           </g:if>
                         </div>
                         <div class="left" style="margin-left: 5px;">
-                          <div class="stTitle">${site.title}</div>
                           <div class="stAddress">${site.address}</div>
                         </div>
                       </g:link>
@@ -640,9 +714,9 @@
                       <g:if test="${site.featuredOffers().size() > 0}">
                         <g:each var="promo" in="${site.featuredOffers()}">
                           <div class="left">
-                            <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
+                            <storitz:image src="checkmark.png" width="20" height="20"/>
                           </div>
-                          <div class="left" style="margin: 2px 0 0 10px;">
+                          <div class="left" style="width:154px; margin: 2px 0 0 10px;">
                             ${promo?.promoName}
                           </div>
                           <div style="clear:both;"></div>
@@ -652,11 +726,11 @@
                         <g:each var="promo" in="${site.specialOffers()}" status="p">
                           <g:if test="${p < 2 }">
                             <div>
-                              <storitz:image src="special-offer-icon.gif" width="20" height="20"/>
+                              <storitz:image src="checkmark.png" width="20" height="20"/>
                             </div>
                           </g:if>
                         </g:each>
-                        <div class="left" style="margin: 2px 0 0 10px;">
+                        <div class="left" style="width: 154px;margin: 2px 0 0 10px;">
                           ${promo?.promoName}
                         </div>
                       </g:elseif>
@@ -674,9 +748,6 @@
                         </g:link>
                       </div>
                     </td>
-                  </tr>
-                  <tr>
-                    <td colspan="4" style="border-bottom:1px #ccc dotted;"></td>
                   </tr>
                 </g:each>
 

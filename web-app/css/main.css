@@ -411,8 +411,22 @@ div.resultsBar {
     line-height: 30px;
 }
 
+#stresults_div {
+    clear: both;
+}
+
 #stresults_div table {
     width: 635px;
+}
+
+#stresults_div table tbody tr:hover {
+    background: #b2d1ff;
+}
+
+#stresults_div table tbody td {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: #ccc dotted thin;
 }
 
 .checkout_header {
@@ -453,10 +467,15 @@ div.resultsBar {
 	overflow: hidden;*/
 }
 
-#stresults_div td, #stresults_div th {
-    border: 0;
-    display: table-cell;
+#stresults {
     border-collapse: collapse;
+}
+
+#stresults td, #stresults th {
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+    display: table-cell;
 }
 
 .stresultsHeader th {
@@ -765,7 +784,6 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 
 .vert_text {
     line-height: 25px;
-    margin-top: -20px;
     margin-bottom: 20px;
 }
 
