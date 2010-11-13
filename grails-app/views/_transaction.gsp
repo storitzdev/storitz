@@ -53,12 +53,12 @@
     <div id="specialOffers" class="left offerList" style="margin-left: 10px;">
       <div>
         <g:each in="${site.featuredOffers()}" var="offer">
-          <p><input type="radio" name="specialOffer" value="${offer.id}" ${(promoId as Integer) == offer.id ? 'checked="checked"' : ''}/> ${offer.promoName} </p>
+          <p><input type="radio" name="specialOffer" value="${offer.id}" ${promoId && (promoId as Integer) == offer.id ? 'checked="checked"' : ''}/> ${offer.promoName} </p>
         </g:each>
       </div>
       <div id="nonFeaturedOffers" style="display:none">
         <g:each in="${site.nonFeaturedOffers()}" var="offer">
-          <p><input type="radio" name="specialOffer" value="${offer.id}" ${(promoId as Integer)== offer.id ? 'checked="checked"' : ''}/> ${offer.promoName} </p>
+          <p><input type="radio" name="specialOffer" value="${offer.id}" ${promoId && (promoId as Integer)== offer.id ? 'checked="checked"' : ''}/> ${offer.promoName} </p>
         </g:each>
       </div>
     </div>

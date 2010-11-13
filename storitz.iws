@@ -18,66 +18,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="Progress on home page">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc19.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc23.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc13.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc13.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc19.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc23.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc12.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc14.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/contactUs/complete.gsp" afterPath="$PROJECT_DIR$/grails-app/views/contactUs/complete.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc21.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc8.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/home/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc22.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc12.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc20.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc18.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc17.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc25.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc25.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/contactUs/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/contactUs/create.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc14.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc21.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc22.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/blue-loc18.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc17.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/STMapController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/STMapController.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/map_icons/green-loc20.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_transaction.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -144,30 +86,39 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="628" column="95" selection-start="27896" selection-end="27896" vertical-scroll-proportion="0.3327645">
+            <state line="288" column="129" selection-start="12559" selection-end="12559" vertical-scroll-proportion="-5.236842">
               <folding>
-                <marker date="1289437664844" expanded="true" signature="3414:3417" placeholder="..." />
+                <marker date="1289614581418" expanded="true" signature="3459:3462" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DependantJavascriptTagLib.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/grails-app/taglib/com/studentsonly/grails/plugins/uiperformance/taglib/DependantJavascriptTagLib.groovy">
+      <file leaf-file-name="_transaction.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
+            <state line="60" column="86" selection-start="2656" selection-end="2656" vertical-scroll-proportion="-0.20125785">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SiteLinkService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
+      <file leaf-file-name="DataSource.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1128" column="6" selection-start="47663" selection-end="47663" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="context.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/META-INF/context.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="86" selection-start="1228" selection-end="1228" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -176,34 +127,16 @@
       <file leaf-file-name="CShiftService.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="822" column="107" selection-start="32972" selection-end="32976" vertical-scroll-proportion="-8.48">
+            <state line="447" column="50" selection-start="16916" selection-end="16916" vertical-scroll-proportion="-18.68">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BootStrap.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
+      <file leaf-file-name="edit.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1153" column="59" selection-start="122740" selection-end="122740" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/contactUs/create.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="56" selection-start="265" selection-end="265" vertical-scroll-proportion="3.3333333">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="complete.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/contactUs/complete.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="209" selection-end="275" vertical-scroll-proportion="-2.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="44.0">
               <folding />
             </state>
           </provider>
@@ -212,16 +145,28 @@
       <file leaf-file-name="STMapController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/STMapController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="58" selection-start="5895" selection-end="5895" vertical-scroll-proportion="-78.07692">
+            <state line="140" column="0" selection-start="6294" selection-end="6294" vertical-scroll-proportion="-12.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CostService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CostService.groovy">
+      <file leaf-file-name="StorageUnit.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/StorageUnit.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="50" selection-start="391" selection-end="410" vertical-scroll-proportion="0.0">
+            <state line="4" column="6" selection-start="62" selection-end="62" vertical-scroll-proportion="-1.4782609">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapService.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/MapService.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="81" column="8" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -230,7 +175,7 @@
       <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="385" column="22" selection-start="6440" selection-end="6440" vertical-scroll-proportion="-3.4">
+            <state line="421" column="0" selection-start="7087" selection-end="7116" vertical-scroll-proportion="-4.76">
               <folding />
             </state>
           </provider>
@@ -250,22 +195,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/StorageSite.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/_size_popup.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/_size_popup_jquery.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/_header_home.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/web-app/robots.txt" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/contactUs/complete.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/contactUs/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+        <option value="$PROJECT_DIR$/web-app/css/datatables.css" />
+        <option value="$PROJECT_DIR$/grails-app/views/_header_home.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy" />
         <option value="$PROJECT_DIR$/web-app/css/main.css" />
+        <option value="$PROJECT_DIR$/web-app/META-INF/context.xml" />
+        <option value="$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/STMapController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
       </list>
     </option>
   </component>
@@ -604,7 +549,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -623,56 +567,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storitz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storitz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storitz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storitz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="298" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="258" />
     <property name="project.structure.last.edited" value="Modules" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="258" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="34" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="290" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="290" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="231" />
     <property name="recentsLimit" value="5" />
@@ -697,12 +610,12 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
-    <property name="options.searchVisible" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -729,167 +642,6 @@
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\static" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\conf" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="11/10/10 10:14 AM" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\conf\Config.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\StorageSite.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\ReferralCode.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\StorageSize.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\Insurance.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\Contact.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\RentalTransaction.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\SpecialOffer.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\SiteUser.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\ReportPeriod.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\Commission.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\domain\com\storitz\SiteLink.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\HomeController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\STMapController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\StorageSiteController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\EmailController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\AdminController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\MigrationController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\RentalTransactionController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\ReportsController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\SiteMapController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\MetroEntryController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\LoginController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\RentalAgreementController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\UserController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\CshiftController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\SiteLinkController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\StopController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\controllers\storitz\MetroController.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\views\home\index.gsp</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\views\admin\index.gsp</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\NachaService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\WebUtilService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\MapService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\CShiftService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\SiteLinkService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\FileUploadService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\NotificationService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\FeedService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\CShift4Service.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\grails-app\services\storitz\CostService.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\test\unit\CookieTests.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\java\com\storitz\cshiftclient\EmptyDeserializer.java</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\java\com\storitz\cshiftclient\CsKioskSoapBindingStub.java</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\java\com\storitz\cshiftclient\EmptyDeserializerFactory.java</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\groovy\storitz\CustomDomainMarshaller.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\groovy\storitz\spring\StateClassPropertyEditor.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\groovy\storitz\spring\CustomPropertyEditorRegistrar.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\groovy\storitz\SiteStats.groovy</PATH>
-            <PATH vcs="svn" revision="622">C:\Users\mamster\IdeaProjects\storitz\src\groovy\storitz\CookieCodec.groovy</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
   </component>
   <component name="RunManager" selected="Grails.storitz">
     <configuration default="false" name="CShift.testEmpty" type="GrailsRunConfigurationType" factoryName="Grails" temporary="true">
@@ -1343,13 +1095,12 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1171123" sideWeight="0.2008879" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31853497" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3973363" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30846325" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.118716575" sideWeight="0.78135407" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.118716575" sideWeight="0.7828508" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31853497" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3107658" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741398" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1358,8 +1109,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995633" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834226" sideWeight="0.78135407" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21087681" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834226" sideWeight="0.7828508" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20935412" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1367,6 +1118,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31853497" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915967" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1384,7 +1136,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Progress on home page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Handle null pricing" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1397,14 +1149,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Fixed null city" />
-    <MESSAGE value="Handle metro entry directly" />
-    <MESSAGE value="New popular searches" />
-    <MESSAGE value="Fixing empty/broken links" />
-    <MESSAGE value="Fix for East Bay, CA" />
-    <MESSAGE value="More Fix for East Bay, CA" />
-    <MESSAGE value="Sitemap work" />
-    <MESSAGE value="Prevent null state error" />
     <MESSAGE value="New top searches" />
     <MESSAGE value="Added support for Canadian provinces" />
     <MESSAGE value="Added a cancel status for transactions&#10;Added more unit type descriptions" />
@@ -1422,6 +1166,14 @@
     <MESSAGE value="Home page updates" />
     <MESSAGE value="New unit types" />
     <MESSAGE value="Progress on home page" />
+    <MESSAGE value="Home page ready for testing" />
+    <MESSAGE value="Updated context" />
+    <MESSAGE value="Catch bad states" />
+    <MESSAGE value="Trap bad errors" />
+    <MESSAGE value="Limit featured offers" />
+    <MESSAGE value="Handle empty inventory case" />
+    <MESSAGE value="Handle null pushRate" />
+    <MESSAGE value="Handle null pricing" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1465,117 +1217,120 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/web-app/css/datatables.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="565" selection-end="565" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_header_home.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="21" selection-start="229" selection-end="229" vertical-scroll-proportion="-2.72">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="43" selection-start="5974" selection-end="5974" vertical-scroll-proportion="0.0">
+        <state line="148" column="34" selection-start="6010" selection-end="6010" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/robots.txt">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
+        <state line="430" column="35" selection-start="17876" selection-end="17885" vertical-scroll-proportion="-22.62745">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/MapService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction_js.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="1.16">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="621" column="77" selection-start="25792" selection-end="25792" vertical-scroll-proportion="-3.2941177">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="34.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="0" selection-start="4762" selection-end="5024" vertical-scroll-proportion="-15.307693">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/ContactUsController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="6" selection-start="98" selection-end="98" vertical-scroll-proportion="-0.65384614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/contactUs/complete.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="209" selection-end="275" vertical-scroll-proportion="-2.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/contactUs/create.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="56" selection-start="265" selection-end="265" vertical-scroll-proportion="3.3333333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1153" column="59" selection-start="122740" selection-end="122740" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="822" column="107" selection-start="32972" selection-end="32976" vertical-scroll-proportion="-8.48">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="44.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="385" column="22" selection-start="6440" selection-end="6440" vertical-scroll-proportion="-3.4">
+        <state line="421" column="0" selection-start="7087" selection-end="7116" vertical-scroll-proportion="-4.76">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME_GRAILS$/1.2.3/projects/storitz/plugins/ui-performance-1.2.2/grails-app/taglib/com/studentsonly/grails/plugins/uiperformance/taglib/DependantJavascriptTagLib.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CostService.groovy">
+    <entry file="file://$PROJECT_DIR$/web-app/META-INF/context.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="50" selection-start="391" selection-end="410" vertical-scroll-proportion="0.0">
+        <state line="34" column="86" selection-start="1228" selection-end="1228" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1128" column="6" selection-start="47663" selection-end="47663" vertical-scroll-proportion="0.0">
+        <state line="447" column="50" selection-start="16916" selection-end="16916" vertical-scroll-proportion="-18.68">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/MapService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="8" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/StorageUnit.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="6" selection-start="62" selection-end="62" vertical-scroll-proportion="-1.4782609">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/STMapController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="58" selection-start="5895" selection-end="5895" vertical-scroll-proportion="-78.07692">
+        <state line="140" column="0" selection-start="6294" selection-end="6294" vertical-scroll-proportion="-12.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="628" column="95" selection-start="27896" selection-end="27896" vertical-scroll-proportion="0.3327645">
+        <state line="288" column="129" selection-start="12559" selection-end="12559" vertical-scroll-proportion="-5.236842">
           <folding>
-            <marker date="1289437664844" expanded="true" signature="3414:3417" placeholder="..." />
+            <marker date="1289614581418" expanded="true" signature="3459:3462" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_transaction.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="86" selection-start="2656" selection-end="2656" vertical-scroll-proportion="-0.20125785">
+          <folding />
         </state>
       </provider>
     </entry>
