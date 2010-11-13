@@ -129,7 +129,7 @@ class STMapController {
         if (bestUnit) {
           if (site.featuredOffers().size() == 0) {
             def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
-            monthly = bestUnit.pushRate
+            monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
             promoId = null
             moveInCost = cost
 
@@ -137,7 +137,7 @@ class STMapController {
             for (promo in site.featuredOffers()) {
               def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
               if (moveInCost > cost) {
-                monthly = bestUnit.pushRate
+                monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
                 promoId = promo.id
                 moveInCost = cost
               }

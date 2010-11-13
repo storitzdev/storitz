@@ -286,7 +286,7 @@
                     .append(features);
 
           var priceCol = $('<div>')
-                    .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + s.moveInCost.toFixed(2)))
+                    .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost.toFixed(2)))
                     .append($('<div>', { 'class':'stPriceSub textCenter'}).text('MOVES YOU IN'))
                     .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + s.monthly.toFixed(2) + ' / MO'))
                     .append($('<div>').css( { width:'87px', 'margin-left':'auto', 'margin-right':'auto' })
