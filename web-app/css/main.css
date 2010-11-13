@@ -519,6 +519,7 @@ div.resultsBar {
 .stAddress {
     font: 11px verdana, arial, helvetica, sans-serif;
     color: #333;
+    width: 135px;
 }
 
 .stSpecialOffers {
