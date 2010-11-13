@@ -469,7 +469,10 @@ class CShiftService {
       site.address = addr.STREET.text()
       site.address2 = ''
       site.city = addr.CITY.text()
-      site.state = State.fromText(addr.STATE.text())
+      try {
+        site.state = State.fromText(addr.STATE.text().toUpperCase())
+      } catch (Exception e) {
+      }
 
       if (!site.state) {
         writer.println "Bad state: ${addr.STATE.text()}"
