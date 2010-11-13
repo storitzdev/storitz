@@ -333,7 +333,6 @@ class CShiftService {
         site.lastUpdate = 0
         site.save(flush: true)
 
-        def centerShift = (CenterShift)site.feed
         getSiteDetails(centerShift, site, tab, stats, false, writer)
       }
     }
