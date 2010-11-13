@@ -24,4 +24,16 @@
           maxIdle="10"
           maxWait="-1"/>
 
+<Resource name="jdbc/storitz_test"
+          auth="Container"
+          type="javax.sql.DataSource"
+          driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://127.0.0.1:3306/storitz_test?autoReconnect=true"
+          username="storitz_test"
+          password="st5ch@m"
+          validationQuery="select 1"
+          maxActive="20"
+          maxIdle="10"
+          maxWait="-1"/>
+
 </Context>
