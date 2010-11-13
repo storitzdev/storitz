@@ -286,9 +286,9 @@
                     .append(features);
 
           var priceCol = $('<div>')
-                    .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost.toFixed(2)))
+                    .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost ? s.moveInCost.toFixed(2) : '')))
                     .append($('<div>', { 'class':'stPriceSub textCenter'}).text('MOVES YOU IN'))
-                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + s.monthly.toFixed(2) + ' / MO'))
+                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'))
                     .append($('<div>').css( { width:'87px', 'margin-left':'auto', 'margin-right':'auto' })
                       .append($('<a>', { href: siteLink(s)  + (s.promoId ? '&promoId=' + s.promoId : '') })
                         .append($('<img>', { src: ${p.imageLink(src:'rent-me-button.png')}, width:87, height: 31, border: 0 } ))));
