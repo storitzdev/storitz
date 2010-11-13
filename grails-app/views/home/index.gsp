@@ -259,10 +259,12 @@
             });
           } else if (s.specialOffers.length > 0) {
             $.each(s.specialOffers, function(i, promo) {
-              offersCol.append($('<div>', { 'class':'left'})
-                      .append($('<img>', { src: ${p.imageLink(src:'checkmark.png')}, width:20, height:20 })))
-                      .append($('<div>', { 'class':'left' }).css({'margin':'2px 0 0 10px', "width":"154px" }).text(promo.promoName))
-                      .append($('<div>').css('clear', 'both'));
+              if (i < 2) {
+                offersCol.append($('<div>', { 'class':'left'})
+                        .append($('<img>', { src: ${p.imageLink(src:'checkmark.png')}, width:20, height:20 })))
+                        .append($('<div>', { 'class':'left' }).css({'margin':'2px 0 0 10px', "width":"154px" }).text(promo.promoName))
+                        .append($('<div>').css('clear', 'both'));
+              }
             });
           } else {
             offersCol.text('&#8212;')
