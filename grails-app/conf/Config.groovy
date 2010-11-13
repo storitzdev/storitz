@@ -159,7 +159,7 @@ uiperformance.bundles = [
   [type: 'css',
     name: 'jquery_bundled',
     files: ['main',
-            'jquery-ui-1.8.6.custom'
+            'jquery-ui-1.8.6.custom',
             'datatables']],
   [type: 'css',
     name: 'header_bundled',
