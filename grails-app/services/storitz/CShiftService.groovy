@@ -441,8 +441,16 @@ class CShiftService {
         enabled: false
       )
       user.manager = manager
-      user.save(flush: true)
-      SiteUser.link(site, user)
+      if (user.validate()) {
+        user.save(flush: true)
+        SiteUser.link(site, user)
+      } else {
+        println "Bad user from feed - errors below: "
+        user.errors.allErrors.each {
+          println it
+        }
+        return;
+      }
     }
     if (!UserNotificationType.userHasNotificationType(user, 'NOTIFICATION_SITE_MANAGER')) {
       def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
