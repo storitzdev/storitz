@@ -303,7 +303,9 @@ class CShiftService {
   }
 
   def updateSite(site, stats, writer) {
-    def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
+    def centerShift = (CenterShift)site.feed
+
+    def ret = getSites(centerShift.location.webUrl, centerShift.userName, centerShift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',

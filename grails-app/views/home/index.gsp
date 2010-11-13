@@ -267,7 +267,7 @@
               }
             });
           } else {
-            offersCol.text('&#8212;')
+            offersCol.html('&#8212;')
           }
 
           var distanceCol = $('<div>').append($('<div>', { 'class': 'stDistanceLine' }))
