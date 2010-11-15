@@ -405,7 +405,7 @@
                     { dateFormat: 'mm/dd/y',
                       minDate: 0,
                       maxDate: "+2M"
-                    });
+                    }).addTouch();
         }
 
         function setupHelp() {
@@ -413,7 +413,7 @@
             autoOpen: false,
             resizable: false,
             width: 440
-          });
+          }).addTouch();
           $('.sizeGuide').click(function(event) {
             $('#sizeHelp').dialog('open');
           });
