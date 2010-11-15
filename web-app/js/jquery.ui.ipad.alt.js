@@ -9,7 +9,7 @@
 */
 
 
-$(function() {
+(function() {
 	//
 	// Extend jQuery feature detection
 	//
@@ -28,12 +28,12 @@ $(function() {
 				el.addEventListener("touchmove", iPadTouchHandler, false);
 				el.addEventListener("touchend", iPadTouchHandler, false);
 				el.addEventListener("touchcancel", iPadTouchHandler, false);
-			}
+			});
 		}
 
 		return this;
 	}
-});
+})(jQuery);
 
 
 var lastTap = null;			// Holds last tapped element (so we can compare for double tap)
@@ -180,7 +180,7 @@ function iPadTouchHandler(event) {
 
 	switch (event.type) {
 		case "touchstart":
-			if ($(event.changedTouches[0].target).is("select")) {
+			if (jQuery(event.changedTouches[0].target).is("select")) {
 				return;
 			}
 			iPadTouchStart(event); /*We need to trigger two events here to support one touch drag and drop*/
