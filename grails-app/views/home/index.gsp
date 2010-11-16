@@ -637,7 +637,7 @@
               <storitz:image src='hirshberg-banner.gif' width="148" height="57" border="0"/>
             </a>
             <a href="http://www.kureit.org/" target="_blank">
-              <storitz:image src='kure-it-banner.gif' width="148" height="57"/>
+              <storitz:image src='kure-it-banner.gif' width="148" height="57" border="0"/>
             </a>
           </div>
         </div>

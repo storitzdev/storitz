@@ -402,6 +402,7 @@
                           <label for="cc_cvv2">CVV2</label>
                         </div>
                       </sec:ifNotGranted>
+                      <div style="clear:both;"></div>
                     </div>
                     <div class="checkout_fields">
                       <div style="width:200px;" class="checkout_value">

@@ -86,6 +86,7 @@
         $('sizeHelp').hide();
         $('rentalForm').show();
         $('detailInfo').hide();
+        $('moveInDate').value = startDate;
         $('contactPrimary.firstName').focus();
       });
     }

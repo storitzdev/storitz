@@ -346,7 +346,7 @@ div.tollFree {
 div.leftSection {
     padding-bottom: 15px;
     margin-bottom: 15px;
-    border-bottom: #9f9f9f dashed thin;
+    border-bottom: #ccc solid thin;
 }
 
 .rightColumn {
