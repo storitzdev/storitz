@@ -627,7 +627,15 @@
             <div class="leftSectionHeader">
               Video
             </div>
-            <object width="300" height="193"><param name="movie" value="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6"/><param name="wmode" value="transparent" /><param name="allowFullScreen" value="true"/><param name="allowscriptaccess" value="always"/><embed src="http://www.youtube.com/v/w815nn8ypt0?fs=1&amp;hl=en_US&amp;rel=0&amp;color1=0x006699&amp;color2=0x54abd6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="300" height="193"></embed></object>
+            <div id="videoContainer"></div>
+            <script type="text/javascript">
+                jwplayer("videoContainer").setup({
+                    flashplayer: "${resource(file:'/jwplayer/player.swf')}",
+                    file: "http://www.youtube.com/watch?v=w815nn8ypt0",
+                    height: 166,
+                    width: 300
+                });
+            </script>
           </div>
           <div>
             <div class="leftSectionHeader">
