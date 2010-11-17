@@ -159,7 +159,6 @@ class BootStrap {
       returnArray['accountExpired'] = it.accountExpired
       returnArray['accountLocked'] = it.accountLocked
       returnArray['passwordExpired'] = it.passwordExpired
-      returnArray['manager'] = it.manager
 
       return returnArray
     }

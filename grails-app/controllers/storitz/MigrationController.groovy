@@ -94,6 +94,7 @@ class MigrationController {
       }
       resp.manager.notificationTypes.clear()
       bindData(manager, resp.manager)
+      manager.manager = User.findByUsername('admin')
       manager.save(flush: true)
       for (n in notificationTypes) {
         UserNotificationType.create(manager, n)
