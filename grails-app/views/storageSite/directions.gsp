@@ -3,14 +3,14 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <g:render template="/header" />
+    <g:render template="/header_home" />
 
     <script type="text/javascript">
 //<![CDATA[
 
   <g:render template="/directions_js" />
 
-  Event.observe(window, 'load', function() {
+  $(document).ready(function() {
     getDirections();
     createDirectionMap();
   });

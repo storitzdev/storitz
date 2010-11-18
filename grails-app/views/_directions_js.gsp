@@ -4,16 +4,16 @@ var premiums = [];
 var destLatLng;
 
 var markerImageGreen;
-var markerImageGray;
+var markerImageBlue;
 
 var directionMap;
 
 function createDirectionMap() {
 
-  $('directionMapDestination').hide();
-  $('printThis').hide();
-  $('printThisTop').hide();
-  $('dirPanel').hide();
+  $('#directionMapDestination').hide();
+  $('#printThis').hide();
+  $('#printThisTop').hide();
+  $('#dirPanel').hide();
 
   destLatLng = new google.maps.LatLng(${site.lat}, ${site.lng});
 
@@ -28,6 +28,7 @@ function createDirectionMap() {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
   );
+
   new google.maps.Marker({
     map: directionMap,
     clickable:false,
@@ -37,6 +38,11 @@ function createDirectionMap() {
   });
 
   directionsService = new google.maps.DirectionsService();
+}
+
+function refreshMap() {
+   google.maps.event.trigger(directionMap, 'resize');
+   createDirectionMap();
 }
 
 function drawDirections(response, status) {
@@ -52,7 +58,7 @@ function drawDirections(response, status) {
     var startLocation = new Object();
     var endLocation = new Object();
 
-    $('directionsSteps').childElements().each(function(elem) { elem.remove() });
+    $('#directionsSteps').children().each(function(index) { $(this).remove() });
 
     for (i=0; i < legs.length; i++) {
       if (i == 0) {
@@ -65,8 +71,9 @@ function drawDirections(response, status) {
           position: startLocation.latlng,
           icon: markerImageBlue
         });
+
         if (legs[i].distance && legs[i].duration) {
-          $('directionsDistance').update('Total distance: ' + legs[i].distance.text + ' in approximately ' + legs[i].duration.text);
+          $('#directionsDistance').html('Total distance: ' + legs[i].distance.text + ' in approximately ' + legs[i].duration.text);
         }
       }
       endLocation.latlng = legs[i].end_location;
@@ -77,13 +84,13 @@ function drawDirections(response, status) {
         var nextSegment = steps[j].path;
         var durationText = steps[j].duration.text ? steps[j].duration.text : "&nbsp;";
         var distanceText = steps[j].distance.text ? steps[j].distance.text : "&nbsp;";
-        elem = new Element('tr', { "class": "directionStep" })
-                .insert(new Element('td', { style:"width:50px;text-align:right;"}).update((j + 1) + '.'))
-                .insert(new Element('td', { style:"width:425px;" }).update(steps[j].instructions))
-                .insert(new Element('td', { style:"width: 75px; padding-right: 10px;text-align:right;"}).update(distanceText))
-                .insert(new Element('td', { style:"width: 75px; padding-right: 15px;text-align:right;"}).update(durationText));
+        elem = $('<tr>', { "class": "directionStep" })
+                .append($('<td>', { style:"width:50px;text-align:right;"}).html((j + 1) + '.'))
+                .append($('<td>', { style:"width:425px;" }).html(steps[j].instructions))
+                .append($('<td>', { style:"width: 75px; padding-right: 10px;text-align:right;"}).html(distanceText))
+                .append($('<td>', { style:"width: 75px; padding-right: 15px;text-align:right;"}).html(durationText));
 
-        $('directionsSteps').insert(elem);
+        $('#directionsSteps').html(elem);
         for (k=0; k < nextSegment.length; k++) {
           polyline.getPath().push(nextSegment[k]);
           bounds.extend(nextSegment[k]);
@@ -91,14 +98,14 @@ function drawDirections(response, status) {
       }
     }
     if (route.copyrights) {
-      $('directionsCopyrights').update(route.copyrights);
+      $('#directionsCopyrights').html(route.copyrights);
     }
     if (route.warnings && route.warnings.length > 0) {
-      var warnings = new Element('ul');
-      route.warnings.each(function(warn) {
-        warnings.insernt(new Element('li').update(warn))
+      var warnings = $('<ul>');
+      $.each(route.warnings, function(index, warn) {
+        warnings.append($('<li>').text(warn))
       });
-      $('directionsWarnings').update(warnings);
+      $('#directionsWarnings').html(warnings);
     }
     polyline.setMap(directionMap);
     directionMap.fitBounds(bounds);
@@ -110,11 +117,11 @@ function drawDirections(response, status) {
       position: endLocation.latlng,
       icon: markerImageGreen
     });
-    $('directionsStartAddr').update(startLocation.address);
-    $('directionsEndAddr').update(endLocation.address);
-    $('dirPanel').show();
+    $('#directionsStartAddr').html(startLocation.address);
+    $('#directionsEndAddr').html(endLocation.address);
+    $('#dirPanel').show();
 
-    $('directionMapDestination').show();
+    $('#directionMapDestination').show();
     var directionMapDestination = new google.maps.Map(document.getElementById("directionMapDestinationCanvas"),
       {
         zoom: 15,
@@ -126,14 +133,15 @@ function drawDirections(response, status) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
     );
+
     var destMarker = new google.maps.Marker({
       map: directionMapDestination,
       title: "${site.title}",
       position: destLatLng,
       icon: markerImageGreen
     });
-    $('printThis').show();
-    $('printThisTop').show();
+    $('#printThis').show();
+    $('#printThisTop').show();
   }
 }
 
@@ -141,10 +149,10 @@ function getDirections() {
   markerImageGreen = new google.maps.MarkerImage(${p.imageLink(src:'icn_map_grn.png')}, null, null, new google.maps.Point(1, 32));
   markerImageBlue = new google.maps.MarkerImage(${p.imageLink(src:'icn_map_blue.png')}, null, null, new google.maps.Point(1, 32));
 
-  $('srcAddr').observe('keypress', function(event) {
+  $('#srcAddr').keypress(function(event) {
     if (event.keyCode == 13) {
       var request = {
-              origin:$F('srcAddr'),
+              origin:$('#srcAddr').val(),
               destination:destLatLng,
               unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
               travelMode: google.maps.DirectionsTravelMode.DRIVING
@@ -152,9 +160,10 @@ function getDirections() {
           directionsService.route(request,  drawDirections);
     }
   });
-  $('getDirections').observe('click', function() {
+
+  $('#getDirections').click(function(event) {
     var request = {
-            origin:$F('srcAddr'),
+            origin:$('#srcAddr').val(),
             destination:destLatLng,
             unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
             travelMode: google.maps.DirectionsTravelMode.DRIVING
@@ -162,4 +171,3 @@ function getDirections() {
         directionsService.route(request,  drawDirections);
   });
 }
-

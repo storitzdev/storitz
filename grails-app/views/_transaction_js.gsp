@@ -31,207 +31,209 @@ var deposit = 0;
 
 function setupSize() {
   if (searchSize && searchSize > 1) {
-  } else if ($F('unitsize')) {
-    searchSize = $F('unitsize');
-    searchDescription = storageSize[$F('unitsize')];
+  } else if ($('#unitsize').val()) {
+    searchSize = $('#unitsize').val();
+    searchDescription = storageSize[$('#unitsize').val()];
   }
 }
 
 function updateTransaction() {
   // update form
-  $('unitId').value = unitId;
+  $('#unitId').val(unitId);
   
   // update dropdowns
-  $('unitType').childElements().each(function(elem) { elem.remove(); });
-  unitTypes.each(function (unitType) {
-     var opt = new Element("option", {
+  $('#unitType').children().each(function(index) { $(this).remove(); });
+
+  $.each(unitTypes, function (index, unitType) {
+     var opt = $("<option>", {
        selected: unitType.type == chosenUnitType,
        value: unitType.type
-     });
-     opt.update(unitType.value);
-     $('unitType').insert(opt);
+     }).text(unitType.value);
+     $('#unitType').append(opt);
   });
-  $('chosenType').value = chosenUnitType;
-  $('SC_searchSize').value = searchSize;
-  $('searchSize').value = searchSize;
+  $('#chosenType').val(chosenUnitType);
+  $('#SC_searchSize').val(searchSize);
+  $('#searchSize').val(searchSize);
   
   // update dates
-  $('transMoveInDate').update(startDate);
-  $('paidThruDate').update(paidThruDate);
+  $('#transMoveInDate').html(startDate);
+  $('#paidThruDate').html(paidThruDate);
 
   // update prices
   if (pushRate < monthlyRent) {
-    $('regPrice').update('$' + monthlyRent.toFixed(2));
-    $('pushPrice').update('$' + pushRate.toFixed(2));
+    $('#regPrice').html('$' + monthlyRent.toFixed(2));
+    $('#pushPrice').html('$' + pushRate.toFixed(2));
   } else {
-    $('regPrice').update('');
-    $('pushPrice').update('$' + monthlyRent.toFixed(2));
+    $('#regPrice').html('');
+    $('#pushPrice').html('$' + monthlyRent.toFixed(2));
   }
 
   // update promo
-  $('selectedOffer').update(chosenPromo);
+  $('#selectedOffer').html(chosenPromo);
   if (chosenPromo != '') {
-    $('clearOffer').update('remove');
+    $('#clearOffer').html('remove');
   }
-  $('selectedInsurance').update(chosenInsurance);
+  $('#selectedInsurance').html(chosenInsurance);
 
   // update costs
-  $('totalMoveInCost').update('$' + totalMoveInCost.toFixed(2));
-  $('monthlyDuration').update(durationMonths.toFixed(2));
-  $('monthlyPerMonth').update('$' + pushRate.toFixed(2));
-  $('monthlyTotal').update('$' + (pushRate * durationMonths).toFixed(2));
+  $('#totalMoveInCost').html('$' + totalMoveInCost.toFixed(2));
+  $('#monthlyDuration').html(durationMonths.toFixed(2));
+  $('#monthlyPerMonth').html('$' + pushRate.toFixed(2));
+  $('#monthlyTotal').html('$' + (pushRate * durationMonths).toFixed(2));
   // insurance cost
-  $('insuranceDuration').update(durationMonths.toFixed(2));
-  $('insurancePerMonth').update('$' + premium.toFixed(2));
-  $('insuranceTotal').update('$' + (premium * durationMonths).toFixed(2));
+  $('#insuranceDuration').html(durationMonths.toFixed(2));
+  $('#insurancePerMonth').html('$' + premium.toFixed(2));
+  $('#insuranceTotal').html('$' + (premium * durationMonths).toFixed(2));
   if (premium > 0) {
-    $('insuranceBlock').show();
+    $('#insuranceBlock').show();
   } else {
-    $('insuranceBlock').hide();
+    $('#insuranceBlock').hide();
   }
-  $('taxTotal').update('$' + tax.toFixed(2));
+  $('#taxTotal').html('$' + tax.toFixed(2));
   if (tax > 0) {
-    $('taxBlock').show();
+    $('#taxBlock').show();
   } else {
-    $('taxBlock').hide();
+    $('#taxBlock').hide();
   }
-  $('deposit').update('$' + deposit.toFixed(2));
+  $('#deposit').html('$' + deposit.toFixed(2));
   if (deposit > 0) {
-    $('depositBlock').show();
+    $('#depositBlock').show();
   } else {
-    $('depositBlock').hide();
+    $('#depositBlock').hide();
   }
   // promo discount
-  $('discountTotal').update(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
+  $('#discountTotal').html(discountTotal > 0 ? ('-$' + discountTotal.toFixed(2)) : '$0.00');
   if (discountTotal > 0) {
-    $('specialOfferBlock').show();
+    $('#specialOfferBlock').show();
   } else {
-    $('specialOfferBlock').hide();
+    $('#specialOfferBlock').hide();
   }
-  $('adminTotal').update('$' + additionalFees.toFixed(2));
+  $('#adminTotal').html('$' + additionalFees.toFixed(2));
   if (totalMoveInCost == 0) {
-    $('rentme').hide();
+    $('#rentme').hide();
   } else {
-    $('rentme').show();
+    $('#rentme').show();
   }
 }
 
 function transactionFormSetup() {
 
-  $('specialOffers').observe('click', function() {
-    var offerId =  $('specialOffers').select('input:checked[type=radio]').pluck('value')[0];
-    $('promoId').value = offerId;
+  $("input[name='specialOffer']").change(function(event) {
+    var offerId =  $("input:[name='specialOffer']:checked").val();
+    $('#promoId').val(offerId);
     chosenPromoId = offerId;
     showTotals('promo');
   });
   
-  $('insurances').observe('click', function() {
-    insuranceId =  $('insurances').select('input:checked[type=radio]').pluck('value')[0];
-    $('insuranceId').value = insuranceId;
+  $("input[name='insuranceId']").change(function(event) {
+    insuranceId =  $("input[name='insuranceId']:checked").val();
+    $('#insuranceId').val(insuranceId);
     showTotals('insurance');
   });
 
-  $('moreOffers').observe('click', function() {
-      Effect.toggle('moreOffers', 'appear', {queue: 'end', duration: 0.1});
-      Effect.BlindDown('nonFeaturedOffers');
-      Effect.toggle('fewerOffers', 'appear', {queue:'end', duration: 0.1});
+  $('#moreOffers').click(function(event) {
+      $('#moreOffers').toggle('fade');
+      $('#nonFeaturedOffers').show("blind");
+      $('#fewerOffers').toggle('fade');
   });
 
-  $('fewerOffers').observe('click', function() {
-      Effect.toggle('fewerOffers', 'appear', {queue: 'end', duration: 0.1});
-      Effect.BlindUp('nonFeaturedOffers');
-      Effect.toggle('moreOffers', 'appear', {queue:'end', duration: 0.1});
+  $('#fewerOffers').click(function(event) {
+      $('#fewerOffers').toggle('fade');
+      $('#nonFeaturedOffers').hide("blind");
+      $('#moreOffers').toggle('fade');
   });
 
-  $('moreInsurance').observe('click', function() {
-      Effect.toggle('moreInsurance', 'appear', {queue: 'end', duration: 0.1});
-      Effect.toggle('fewerInsurance', 'appear', {queue:'end', duration: 0.1});
-      Effect.BlindDown('insurances');
+  $('#moreInsurance').click(function() {
+      $('#moreInsurance').toggle('fade');
+      $('#fewerInsurance').toggle('fade');
+      $('#insurances').show("blind");
   });
 
-  $('fewerInsurance').observe('click', function() {
-      Effect.BlindUp('insurances');
-      Effect.toggle('fewerInsurance', 'appear', {queue: 'end', duration: 0.1});
-      Effect.toggle('moreInsurance', 'appear', {queue:'end', duration: 0.1});
+  $('#fewerInsurance').click(function(event) {
+      $('#insurances').hide("blind");
+      $('#fewerInsurance').toggle('fade');
+      $('#moreInsurance').toggle('fade');
   });
-  $('clearOffer').observe('click', function() {
+
+  $('#clearOffer').click(function(event) {
     chosenPromo = '';
     chosenPromoId = -999;
-    $('clearOffer').update('');
-    $('selectedOffer').update('');
-    $('specialOffers').select('input:checked[type=radio]')[0].checked = false;
+    $('#clearOffer').html('');
+    $('#selectedOffer').html('');
+    $("input[name='specialOffer']:checked").attr('checked', false);
     showTotals('promo');
   });
 
-  $('totalMoveInCost').observe('click', function() {
-      Effect.toggle('costDetails', 'appear', { duration: 0.25 });
+  $('#totalMoveInCost').click(function(event) {
+      $('#costDetails').toggle('fade');
   });
 
-  $('unitsize').observe('change', function() {
-    searchSize = $F('unitsize');
-    $('SC_searchSize').value = searchSize;
-    $('searchSize').value = searchSize;
+  $('#unitsize').change(function(event) {
+    searchSize = $('#unitsize').val();
+    $('#SC_searchSize').val(searchSize);
+    $('#searchSize').val(searchSize);
     showTotals('size');
   })
 
-  $('unitType').observe('change', function() {
-    chosenUnitType = $F('unitType');
-    $('chosenType').value = chosenUnitType;
+  $('#unitType').change(function(event) {
+    chosenUnitType = $('#unitType').val();
+    $('#chosenType').val(chosenUnitType);
     showTotals('unitType');
   })
 }
 
 function setupCalendar() {
-  $('moveInDate').value = startDate;
+  $('#moveInDate').val(startDate);
 
-  Calendar.setup({
-      dateField     : 'date',
-      triggerElement: 'calendarPic',
-      dateFormat    : '%m/%d/%y',
-      shouldClose   :  false,
-      selectHandler :  function(cal, dateString) {
-        startDate = dateString;
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-        var cutoff = new Date(today.getTime());
-        cutoff.setMonth(cutoff.getMonth() + 2);
-        if (cal.date.getTime() < today.getTime() || cal.date.getTime() > cutoff.getTime()) {
-          $('transMoveInDate').addClassName('validation-failed');
-          return;
-        } else {
-          $('transMoveInDate').removeClassName('validation-failed');
-        }
-        $('SC_date').value = startDate;
-        $('moveInDate').value = startDate;
-        $('transMoveInDate').update(startDate);
-        showTotals('date');
-      }
+  var datePicker = $('#date').datepicker(
+            { dateFormat: 'mm/dd/y',
+              minDate: 0,
+              maxDate: "+2M",
+              onSelect: function(dateText, inst) {
+                startDate = dateText;
+                $('#SC_date').val(startDate);
+                $('#moveInDate').val(startDate);
+                $('#transMoveInDate').html(startDate);
+                showTotals('date');
+              }
+            }).addTouch();
+
+  $('#calendarPic').click(function(event) {
+    $('#date').datepicker('show');
   });
+
 }
 
 function showTotals(action) {
-  new Ajax.Request("${createLink(controller:'storageSite', action:'detailTotals')}",
-  {
+  $.ajax({
+    url: "${createLink(controller:'storageSite', action:'detailTotals')}",
     method:'get',
-    parameters: {searchSize: searchSize, id: siteId, chosenPromoId: chosenPromoId, insuranceId: insuranceId, unitType: chosenUnitType, moveInDate:startDate, action:action },
-    onSuccess:function(transport) {
-      var totals = transport.responseJSON.totals;
-      durationMonths = totals.durationMonths;
-      unitTypes = totals.unitTypes;
-      chosenPromo = totals.chosenPromo;
-      chosenInsurance = totals.chosenInsurance;
-      chosenUnitType = totals.chosenUnitType;
-      chosenUnitTypeDisplay = totals.chosenUnitTypeDisplay;
-      premium = totals.premium;
-      discountTotal = totals.discountTotal;
-      monthlyRent = totals.monthlyRate;
-      pushRate = totals.pushRate;
-      additionalFees = totals.additionalFees;
-      tax = totals.tax;
-      deposit = totals.deposit;
-      totalMoveInCost = totals.totalMoveInCost;
-      unitId = totals.unitId;
-      paidThruDate = totals.paidThruDate;
+    dataType: 'json',
+    data: {
+      searchSize: searchSize,
+      id: siteId,
+      chosenPromoId: chosenPromoId,
+      insuranceId: insuranceId,
+      unitType: chosenUnitType,
+      moveInDate:startDate, action:action
+    },
+    success:function(ret) {
+      durationMonths = ret.totals.durationMonths;
+      unitTypes = ret.totals.unitTypes;
+      chosenPromo = ret.totals.chosenPromo;
+      chosenInsurance = ret.totals.chosenInsurance;
+      chosenUnitType = ret.totals.chosenUnitType;
+      chosenUnitTypeDisplay = ret.totals.chosenUnitTypeDisplay;
+      premium = ret.totals.premium;
+      discountTotal = ret.totals.discountTotal;
+      monthlyRent = ret.totals.monthlyRate;
+      pushRate = ret.totals.pushRate;
+      additionalFees = ret.totals.additionalFees;
+      tax = ret.totals.tax;
+      deposit = ret.totals.deposit;
+      totalMoveInCost = ret.totals.totalMoveInCost;
+      unitId = ret.totals.unitId;
+      paidThruDate = ret.totals.paidThruDate;
       updateTransaction();
     }
   });

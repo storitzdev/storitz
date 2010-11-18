@@ -224,16 +224,56 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSiteInstance.openWeekday.label" default="Weekdays"/></td>
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openMonday.label" default="Mondays"/></td>
 
-          <td valign="top" class="value">${storageSiteInstance.openWeekday ? "Open" : "Closed"}
-            <g:if test="${storageSiteInstance.openWeekday}">
-              Start: <g:formatDate date="${storageSiteInstance.startWeekday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endWeekday}" format="h:mma" />
+          <td valign="top" class="value">${storageSiteInstance.openMonday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openMonday}">
+              Start: <g:formatDate date="${storageSiteInstance.startMonday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endMonday}" format="h:mma" />
             </g:if>
           </td>
 
         </tr>
 
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openTuesday.label" default="Tuesdays"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openTuesday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openTuesday}">
+              Start: <g:formatDate date="${storageSiteInstance.startTuesday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endTuesday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openWednesday.label" default="Wednesdays"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openWednesday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openWednesday}">
+              Start: <g:formatDate date="${storageSiteInstance.startWednesday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endWednesday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openThursday.label" default="Thursdays"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openThursday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openThursday}">
+              Start: <g:formatDate date="${storageSiteInstance.startThursday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endThursday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.openFriday.label" default="Fridays"/></td>
+
+          <td valign="top" class="value">${storageSiteInstance.openFriday ? "Open" : "Closed"}
+            <g:if test="${storageSiteInstance.openFriday}">
+              Start: <g:formatDate date="${storageSiteInstance.startFriday}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endFriday}" format="h:mma" />
+            </g:if>
+          </td>
+
+        </tr>
         <tr class="prop">
           <td valign="top" class="name"><g:message code="storageSiteInstance.openSaturday.label" default="Saturday"/></td>
 
@@ -257,10 +297,55 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Gate Hours"/></td>
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Monday Gate Hours"/></td>
 
           <td valign="top" class="value">
-              Start: <g:formatDate date="${storageSiteInstance.startGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endGate}" format="h:mma" />
+              Start: <g:formatDate date="${storageSiteInstance.startMondayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endMondayGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Tuesday Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startTuesdayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endTuesdayGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Wednesday Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startWednesdayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endWednesdayGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Thursday Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startThursdayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endThursdayGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Friday Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startFridayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endFridayGate}" format="h:mma" />
+          </td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSiteInstance.gateHours.label" default="Saturday Gate Hours"/></td>
+
+          <td valign="top" class="value">
+              Start: <g:formatDate date="${storageSiteInstance.startSaturdayGate}" format="h:mma" /> End: <g:formatDate date="${storageSiteInstance.endSaturdayGate}" format="h:mma" />
           </td>
 
         </tr>

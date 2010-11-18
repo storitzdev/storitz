@@ -2,49 +2,70 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Edit Storage Site" scope="request"/>
-  <p:css name="anytimec" />
+  <p:css name="timepicker" />
   <g:render template="/header_admin"/>
 
   <p:dependantJavascript>
+  <p:javascript src="jquery.MetaData"/>
+  <p:javascript src="jquery.MultiFile"/>
+  <p:javascript src="jquery-ui-timepicker-addon.min"/>
   <script type="text/javascript">
     //<![CDATA[
 
     $(document).ready(function() {
-      jQuery.noConflict();
 
       setupTimePickers();
       setupContactSelector();
     });
 
     function setupContactSelector() {
-      jQuery("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
+      $("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
     }
 
     function setupTimePickers() {
-      AnyTime.picker("startWeekday", {format:"%h:%i%p"});
-      AnyTime.picker("endWeekday", {format:"%h:%i%p"});
-      AnyTime.picker("startSaturday", {format:"%h:%i%p"});
-      AnyTime.picker("endSaturday", {format:"%h:%i%p"});
-      AnyTime.picker("startSunday", {format:"%h:%i%p"});
-      AnyTime.picker("endSunday", {format:"%h:%i%p"});
-      AnyTime.picker("startGate", {format:"%h:%i%p"});
-      AnyTime.picker("endGate", {format:"%h:%i%p"});
-      AnyTime.picker("startSundayGate", {format:"%h:%i%p"});
-      AnyTime.picker("endSundayGate", {format:"%h:%i%p"});
+      $("input#startMonday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endMonday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startTuesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endTuesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startWednesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endWednesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startThursday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endThursday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startFriday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endFriday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startSaturday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endSaturday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startSunday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endSunday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+
+      $("input#startMondayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endMondayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startTuesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endTuesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startWednesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endWednesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startThursdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endThursdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startFridayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endFridayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startSaturdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endSaturdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      $("input#startSundayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+      $("input#endSundayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
     }
 
     function checkAddItem(type) {
       var listName = type + 'ItemList';
       var listAdd = type + 'ItemAdd';
-      if (jQuery('#' + listName).children().length >= 10) {
-        jQuery('#' + listAdd).hide();
+      if ($('#' + listName).children().length >= 10) {
+        $('#' + listAdd).hide();
       }
       return false
     }
 
     function itemAdd(type) {
       var listName = type + 'ItemList';
-      var lastInput = jQuery('#' + listName + '> li:last > input');
+      var lastInput = $('#' + listName + '> li:last > input');
       var lastInputName = lastInput.attr('name');
       var newItem = 1
       if (lastInputName) {
@@ -55,47 +76,47 @@
       }
       var itemName = type + 'Item_' + newItem;
       var bulletId = type + 'BulletItem_' + newItem;
-      var liElem = jQuery('<li>', {
+      var liElem = $('<li>', {
         id: bulletId
       })
       .append(
-        jQuery('<input>', {
+        $('<input>', {
           id: itemName,
           name: itemName,
           type: 'text',
           style: 'width:200px;'
         }))
       .append(
-        jQuery('<a>', {
+        $('<a>', {
           href: '#',
           text: 'delete',
           click: function() {
-            jQuery('#' + bulletId).remove();
+            $('#' + bulletId).remove();
             checkAddItem(type);
             return false;
           }
         })
       );
-      jQuery('#' + listName).append(liElem);
-      jQuery('#' + itemName).focus();
+      $('#' + listName).append(liElem);
+      $('#' + itemName).focus();
     }
     
     function addContact() {
-      jQuery.ajax(
+      $.ajax(
       {
         url: "${createLink(controller:'storageSite', action:'addContact')}",
         method:'get',
         dataType: 'json',
         data: {
           id: ${storageSiteInstance.id},
-          email:jQuery("#contactName").val()
+          email:$("#contactName").val()
         },
         success:function(ret) {
           if (ret.userId > 0) {
               var itemId = 'contact_' + ret.userId;
-              var newItem = jQuery('<li>', {id: itemId}).text(ret.username + ' - ' + ret.email + ' - ' + ret.notificationTypes)
-                .append(jQuery('<div>', { 'class': "right" })
-                .append(jQuery('<a>',
+              var newItem = $('<li>', {id: itemId}).text(ret.username + ' - ' + ret.email + ' - ' + ret.notificationTypes)
+                .append($('<div>', { 'class': "right" })
+                .append($('<a>',
                   {
                     href: '#',
                     click: function() {
@@ -103,16 +124,16 @@
                       return false;
                     }
                   })
-                  .text('remove')).append(jQuery('<div>', {style:'clear:both;'})
+                  .text('remove')).append($('<div>', {style:'clear:both;'})
               ));
-              jQuery('#contacts').append(newItem);
+              $('#contacts').append(newItem);
           }
         }
       });
     }
 
     function deleteContact(contactId) {
-      jQuery.ajax(
+      $.ajax(
       {
         url:"${createLink(controller:'storageSite', action:'removeContact')}",
         method:'get',
@@ -122,13 +143,13 @@
           userId:contactId
         },
         success: function(ret) {
-          jQuery("#contact_" + contactId).remove();
+          $("#contact_" + contactId).remove();
         }
       });
     }
 
     function deleteImage(imgId) {
-      jQuery.ajax(
+      $.ajax(
       {
         url: "${createLink(controller:'storageSite', action:'deleteImage')}",
         method: 'get',
@@ -138,33 +159,33 @@
           siteImageId:imgId
         },
         success: function(ret) {
-          jQuery("#image_" + imgId).remove();
+          $("#image_" + imgId).remove();
         }
       });
     }
 
     function defaultImage(imgId) {
       var newDefault = 'default_' + imgId;
-      jQuery.ajax(
+      $.ajax(
       {
         url: "${createLink(controller:'storageSite', action:'defaultImage')}",
         method:'get',
         dataType: 'json',
         data: {id: ${storageSiteInstance.id}, siteImageId:imgId },
         success:function(ret) {
-          jQuery('div[id^=default_]').each(function(elem) {
-            if (jQuery(this).attr('id') == newDefault) {
-              jQuery(this).text('Default Image');
+          $('div[id^=default_]').each(function(elem) {
+            if ($(this).attr('id') == newDefault) {
+              $(this).text('Default Image');
             } else {
-              var linkId = jQuery(this).attr('id').substring(8);
-              var link = jQuery('<a>', {
+              var linkId = $(this).attr('id').substring(8);
+              var link = $('<a>', {
                 href:"#",
                 click: function() {
                   defaultImage(linkId);
                   return false;
                 }
               }).text('set as default');
-              jQuery(this).html(link);
+              $(this).html(link);
             }
           });
         }
@@ -173,9 +194,6 @@
 
     //]]>
   </script>
-  <p:javascript src="jquery.MetaData"/>
-  <p:javascript src="jquery.MultiFile"/>
-  <p:javascript src="anytimec"/>
   </p:dependantJavascript>
 
 </head>
@@ -353,7 +371,7 @@
               <div class="checkout_name" style="width:200px;">
                 <label for="bankAccount.acctNo">Account Number</label>
               </div>
-              <div style="clear:both;"></div>
+              <div style="clear:both;height:10px"></div>
             </div>
 
           </sec:ifAnyGranted>
@@ -363,27 +381,131 @@
           </div>
 
           <div class="checkout_fields">
-            <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'openWeekday', 'errors')}">
-              <g:checkBox name="openWeekday" value="${storageSiteInstance?.openWeekday}"/>
+            <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'openMonday', 'errors')}">
+              <g:checkBox name="openMonday" value="${storageSiteInstance?.openMonday}"/>
             </div>
-            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startWeekday', 'errors')}">
-              <input type="text" class="timeInput" style="width: 180px;" id="startWeekday" name="startWeekday" value="${storageSiteInstance?.startWeekday?.format("h:mma")}"/>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startMonday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startMonday" name="startMonday" value="${storageSiteInstance?.startMonday?.format("h:mma")}"/>
             </div>
-            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endWeekday', 'errors')}">
-              <input type="text" class="timeInput" style="width: 180px;" id="endWeekday" name="endWeekday" value="${storageSiteInstance?.endWeekday?.format("h:mma")}"/>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endMonday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endMonday" name="endMonday" value="${storageSiteInstance?.endMonday?.format("h:mma")}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
 
           <div class="checkout_labels">
             <div class="checkout_name" style="width:150px;">
-              <label for="openWeekday">Open Weekdays</label>
+              <label for="openMonday">Open Monday</label>
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="openWeekday">Start</label>
+              <label for="startMonday">Start</label>
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="openWeekday">End</label>
+              <label for="endMonday">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'openTuesday', 'errors')}">
+              <g:checkBox name="openTuesday" value="${storageSiteInstance?.openTuesday}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startTuesday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startTuesday" name="startTuesday" value="${storageSiteInstance?.startTuesday?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endTuesday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endTuesday" name="endTuesday" value="${storageSiteInstance?.endTuesday?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              <label for="openTuesday">Open Tuesday</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startTuesday">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endTuesday">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'openWednesday', 'errors')}">
+              <g:checkBox name="openWednesday" value="${storageSiteInstance?.openWednesday}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startWednesday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startWednesday" name="startWednesday" value="${storageSiteInstance?.startWednesday?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endWednesday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endWednesday" name="endWednesday" value="${storageSiteInstance?.endWednesday?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              <label for="openWednesday">Open Wednesday</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startWednesday">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endWednesday">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'openThursday', 'errors')}">
+              <g:checkBox name="openThursday" value="${storageSiteInstance?.openThursday}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startThursday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startThursday" name="startThursday" value="${storageSiteInstance?.startThursday?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endThursday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endThursday" name="endThursday" value="${storageSiteInstance?.endThursday?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              <label for="openThursday">Open Thursday</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startThursday">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endThursday">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'openFriday', 'errors')}">
+              <g:checkBox name="openFriday" value="${storageSiteInstance?.openFriday}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startFriday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startFriday" name="startFriday" value="${storageSiteInstance?.startFriday?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endFriday', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endFriday" name="endFriday" value="${storageSiteInstance?.endFriday?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              <label for="openFriday">Open Friday</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startFriday">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endFriday">End</label>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -444,24 +566,154 @@
             <div style="width:150px;" class="checkout_value">
               &nbsp;
             </div>
-            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startGate', 'errors')}">
-              <input type="text" class="timeInput" style="width: 180px;" id="startGate" name="startGate" value="${storageSiteInstance?.startGate?.format("h:mma")}"/>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startMondayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startMondayGate" name="startMondayGate" value="${storageSiteInstance?.startMondayGate?.format("h:mma")}"/>
             </div>
-            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endGate', 'errors')}">
-              <input type="text" class="timeInput" style="width: 180px;" id="endGate" name="endGate" value="${storageSiteInstance?.endGate?.format("h:mma")}"/>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endMondayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endMondayGate" name="endMondayGate" value="${storageSiteInstance?.endMondayGate?.format("h:mma")}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
 
           <div class="checkout_labels">
             <div class="checkout_name" style="width:150px;">
-              Gate Hours
+              Monday Gate Hours
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="startGate">Start</label>
+              <label for="startMondayGate">Start</label>
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="endGate">End</label>
+              <label for="endMondayGate">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value">
+              &nbsp;
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startTuesdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startTuesdayGate" name="startTuesdayGate" value="${storageSiteInstance?.startTuesdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endTuesdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endTuesdayGate" name="endTuesdayGate" value="${storageSiteInstance?.endTuesdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              Tuesday Gate Hours
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startTuesdayGate">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endTuesdayGate">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value">
+              &nbsp;
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startWednesdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startWednesdayGate" name="startWednesdayGate" value="${storageSiteInstance?.startWednesdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endWednesdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endWednesdayGate" name="endWednesdayGate" value="${storageSiteInstance?.endWednesdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              Wednesday Gate Hours
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startWednesdayGate">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endWednesdayGate">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value">
+              &nbsp;
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startThursdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startThursdayGate" name="startThursdayGate" value="${storageSiteInstance?.startThursdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endThursdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endThursdayGate" name="endThursdayGate" value="${storageSiteInstance?.endThursdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              Thursday Gate Hours
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startThursdayGate">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endThursdayGate">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value">
+              &nbsp;
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startFridayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startFridayGate" name="startFridayGate" value="${storageSiteInstance?.startFridayGate?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endFridayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endFridayGate" name="endFridayGate" value="${storageSiteInstance?.endFridayGate?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              Friday Gate Hours
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startFridayGate">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endFridayGate">End</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:150px;" class="checkout_value">
+              &nbsp;
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'startSaturdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="startSaturdayGate" name="startSaturdayGate" value="${storageSiteInstance?.startSaturdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'endSaturdayGate', 'errors')}">
+              <input type="text" class="timeInput" style="width: 180px;" id="endSaturdayGate" name="endSaturdayGate" value="${storageSiteInstance?.endSaturdayGate?.format("h:mma")}"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:150px;">
+              Saturday Gate Hours
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="startSaturdayGate">Start</label>
+            </div>
+            <div class="checkout_name" style="width:200px;">
+              <label for="endSaturdayGate">End</label>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -484,10 +736,10 @@
               Sunday Gate Hours
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="startGate">Start</label>
+              <label for="startSundayGate">Start</label>
             </div>
             <div class="checkout_name" style="width:200px;">
-              <label for="endGate">End</label>
+              <label for="endSundayGate">End</label>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -503,7 +755,7 @@
             <div class="checkout_name" style="width:200px;">
               <label for="extendedHours">Extended Hours Available</label>
             </div>
-            <div style="clear:both;"></div>
+            <div style="clear:both;height:10px;"></div>
           </div>
 
           <div class="checkout_section_header">
@@ -557,7 +809,7 @@
               <ul id="securityItemList">
                 <g:each in="${storageSiteInstance?.securityItems}" status="i" var="c">
                   <li id="securityItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="securityItem_${i}"/>  <a href="#" onclick="jQuery('#securityItem_${i}').remove();checkAddItem('security');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="securityItem_${i}"/>  <a href="#" onclick="$('#securityItem_${i}').remove();checkAddItem('security');">delete</a>
                   </li>
                 </g:each>
               </ul>
@@ -584,7 +836,7 @@
               <ul id="convenienceItemList">
                 <g:each in="${storageSiteInstance?.convenienceItems}" status="i" var="c">
                   <li id="convenienceItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="convenienceItem_${i}"/>  <a href="#" onclick="jQuery('#convenienceItem_${i}').remove();checkAddItem('convenience');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="convenienceItem_${i}"/>  <a href="#" onclick="$('#convenienceItem_${i}').remove();checkAddItem('convenience');">delete</a>
                   </li>
                 </g:each>
               </ul>
@@ -605,7 +857,7 @@
               <ul id="amenityItemList">
                 <g:each in="${storageSiteInstance?.amenityItems}" status="i" var="c">
                   <li id="amenityItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="amenityItem_${i}"/>  <a href="#" onclick="jQuery('#amenityItem_${i}').remove();checkAddItem('amenity');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="amenityItem_${i}"/>  <a href="#" onclick="$('#amenityItem_${i}').remove();checkAddItem('amenity');">delete</a>
                   </li>
                 </g:each>
               </ul>

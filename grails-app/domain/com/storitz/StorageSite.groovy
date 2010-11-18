@@ -44,17 +44,39 @@ class StorageSite {
       adminFee(nullable:true)
       lockFee(nullable:true)
       freeTruck(nullable:false)
-      openWeekday(nullable:true)
+      openMonday(nullable:true)
+      openTuesday(nullable:true)
+      openWednesday(nullable:true)
+      openThursday(nullable:true)
+      openFriday(nullable:true)
       openSaturday(nullable:true)
       openSunday(nullable:true)
-      startWeekday(nullable:true)
-      endWeekday(nullable:true)
+      startMonday(nullable:true)
+      endMonday(nullable:true)
+      startTuesday(nullable:true)
+      endTuesday(nullable:true)
+      startWednesday(nullable:true)
+      endWednesday(nullable:true)
+      startThursday(nullable:true)
+      endThursday(nullable:true)
+      startFriday(nullable:true)
+      endFriday(nullable:true)
       startSaturday(nullable:true)
       endSaturday(nullable:true)
       startSunday(nullable:true)
       endSunday(nullable:true)
-      startGate(nullable:true)
-      endGate(nullable:true)
+      startMondayGate(nullable:true)
+      endMondayGate(nullable:true)
+      startTuesdayGate(nullable:true)
+      endTuesdayGate(nullable:true)
+      startWednesdayGate(nullable:true)
+      endWednesdayGate(nullable:true)
+      startThursdayGate(nullable:true)
+      endThursdayGate(nullable:true)
+      startFridayGate(nullable:true)
+      endFridayGate(nullable:true)
+      startSaturdayGate(nullable:true)
+      endSaturdayGate(nullable:true)
       startSundayGate(nullable:true)
       endSundayGate(nullable:true)
       bankAccount(nullable:true)
@@ -113,17 +135,39 @@ class StorageSite {
     Boolean prorateSecondMonth = false
 
   // Operation Hours
-    Boolean openWeekday
+    Boolean openMonday
+    Boolean openTuesday
+    Boolean openWednesday
+    Boolean openThursday
+    Boolean openFriday
     Boolean openSaturday
     Boolean openSunday
-    Date startWeekday
-    Date endWeekday
+    Date startMonday
+    Date endMonday
+    Date startTuesday
+    Date endTuesday
+    Date startWednesday
+    Date endWednesday
+    Date startThursday
+    Date endThursday
+    Date startFriday
+    Date endFriday
     Date startSaturday
     Date endSaturday
     Date startSunday
     Date endSunday
-    Date startGate
-    Date endGate
+    Date startMondayGate
+    Date endMondayGate
+    Date startTuesdayGate
+    Date endTuesdayGate
+    Date startWednesdayGate
+    Date endWednesdayGate
+    Date startThursdayGate
+    Date endThursdayGate
+    Date startFridayGate
+    Date endFridayGate
+    Date startSaturdayGate
+    Date endSaturdayGate
     Date startSundayGate
     Date endSundayGate
     Boolean extendedHours

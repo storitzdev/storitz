@@ -4,13 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <meta name="DESCRIPTION" content="Storitz self storage partner - ${site.title} located in ${site.city}, ${site.state.fullName} postal code ${site.zipcode} : ${site.description ? site.getTextDescription() : '' }"/>
-    <g:render template="/header" />
+    <g:render template="/header_home" />
 
   <p:dependantJavascript>
     <script type="text/javascript">
 //<![CDATA[
 
-    var galleryImageNum = 0;
+    var gallerySetup = false;
     var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
     var siteId = ${params.id};
     var ajaxFormDirty = false;
@@ -18,102 +18,57 @@
     var ajaxFormUpdateTimer;
     var ajaxFormNewValues;
     var ajaxFormOldValues;
-    var activeTab;
-    var allTabs;
-
-    <g:set var="galleryImgWidth" value="${8 as Integer}" />
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>
 
     function createMap() {}
 
-    function setupHelp() {
-      $('sizeInfo').observe('click', function(event) {
-        $('sizeHelp').setStyle({ top: Event.pointerY(event) - 10 + "px", left: Event.pointerX(event) + 10 + "px" });
-        Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
-      });
-      $('sizeHelpClose').observe('click', function() {
-        Effect.toggle('sizeHelp', 'appear', {duration: 0.8});
-      });
-    }
-
-    function setupTabs() {
-      activeTab = $('tabSet').select('[class~="tab_on"]')[0];
-      allTabs = $('tabSet').select('[class~="tab_off"]');
-      allTabs.push(activeTab);
-
-      allTabs.each(function(elem) {
-         elem.observe('click', function(event) {
-           var evElem = Event.element(event);
-           if (evElem != activeTab) {
-             // remove tab_ from front of tab element id
-             var activeTabName = activeTab.id.substring(4);
-             var newTabName = evElem.id.substring(4);
-             $(activeTabName).hide();
-             activeTab.removeClassName('tab_on');
-             activeTab.removeClassName('button_text');
-             activeTab.addClassName('tab_off');
-             activeTab.addClassName('button_text_hi');
-             evElem.removeClassName('tab_off');
-             evElem.removeClassName('button_text_hi');
-             evElem.addClassName('tab_on');
-             evElem.addClassName('button_text');
-             $(newTabName).show();
-             if (newTabName == 'directions') {
-               createDirectionMap();
-             }
-             activeTab = evElem;
-           }
-         })
-      });
-    }
-
     function rentmeClick() {
-      $('rentme').observe('click', function() {
+      $('#rentme').click(function() {
         // check date and turn red if bad
         var today = new Date();
         today.setHours(0, 0, 0, 0);
         var cutoff = new Date(today.getTime());
         cutoff.setMonth(cutoff.getMonth() + 2);
-        var chosenDate = Date.parseDate(startDate, "%m/%d/%y");
+        var chosenDate = $.datepicker.parseDate('mm/dd/y', startDate);
         if (chosenDate < today || chosenDate > cutoff) {
-          $('transMoveInDate').addClassName('validation-failed');
+          $('#transMoveInDate').addClass('validation-failed');
           return;
         }
-        $('transMoveInDate').removeClassName('validation-failed');
+        $('#transMoveInDate').removeClass('validation-failed');
         // TODO - check if all things are cleared
-        $('sizeHelp').hide();
-        $('rentalForm').show();
-        $('detailInfo').hide();
-        $('moveInDate').value = startDate;
-        $('contactPrimary.firstName').focus();
+        $('#sizeHelp').hide();
+        $('#rentalForm').show();
+        $('#detailInfo').hide();
+        $('#moveInDate').val(startDate);
+        $('#contactPrimary.firstName').focus();
       });
     }
 
     function details_return() {
-      $('rentalForm').show();
-      $('detailInfo').hide();
+      $('#rentalForm').show();
+      $('#detailInfo').hide();
     }
 
     function leave_form() {
-      $('rentalForm').hide();
-      $('detailInfo').show();
+      $('#rentalForm').hide();
+      $('#detailInfo').show();
     }
 
     function primaryCountryClick() {
-      $('contactPrimary.country').observe('change', function() {
-        var country = $F('contactPrimary.country');
+      $('#contactPrimary.country').change(function() {
+        var country = $('#contactPrimary.country').val();
         if (country == "US") {
-          $('primaryProvinceField').hide();
-          $('primaryStateField').show();
-          $('primaryProvinceLabel').hide();
-          $('primaryStateLabel').show();
+          $('#primaryProvinceField').hide();
+          $('#primaryStateField').show();
+          $('#primaryProvinceLabel').hide();
+          $('#primaryStateLabel').show();
         } else {
-          $('primaryProvinceField').show();
-          $('primaryStateField').hide();
-          $('primaryProvinceLabel').show();
-          $('primaryStateLabel').hide();
+          $('#primaryProvinceField').show();
+          $('#primaryStateField').hide();
+          $('#primaryProvinceLabel').show();
+          $('#primaryStateLabel').hide();
         }
       });
     }
@@ -146,75 +101,16 @@
       }
     }
 
-  function showImage(img, newElem) {
-    $$('img.gallerySelected').each(function(elem) {
-      elem.removeClassName('gallerySelected');
-      elem.addClassName('galleryNormal');
-    });
-    $(newElem).removeClassName('galleryNormal');
-    $(newElem).addClassName('gallerySelected');
-    var imgElem = new Element("img", {src:img, alt:"", visibility:"hidden", style:"display:block;margin:auto;"});
-    $('imgFrame').update(imgElem);
-    new Effect.Opacity(
-     'imgFrame', {
-        from: 0.0,
-        to: 1.0,
-        duration: 0.5,
-        queue: 'end'
-     }
-    );
-  }
-
   function setupImageGallery() {
 
-    // resize thumbgallery by images
-    var thumbWidth = ${(site.siteImages().size() > galleryImgWidth ? galleryImgWidth : site.siteImages().size()) * 66};
-    $('thumbWrapper').setStyle({width: thumbWidth  +'px'});
-    $('galleryBottom').setStyle({width: (thumbWidth + 96) + 'px'});
-    $('rightArrow').observe('click', function() {
-      if (galleryImageNum < (${site.siteImages().size() - galleryImgWidth})) {
-        galleryImageNum++;
-        new Effect.Move('items', { x: -66, y:0, mode:'relative'});
-        if (galleryImageNum >= (${site.siteImages().size() - galleryImgWidth})) {
-          if($('rightArrow').hasClassName('rightArrowActive')) {
-            $('rightArrow').removeClassName('rightArrowActive');
-            $('rightArrow').addClassName('rightArrowNull');
-          }
-        }
-        if ($('leftArrow').hasClassName('leftArrowNull')) {
-          $('leftArrow').addClassName('leftArrowActive');
-          $('leftArrow').removeClassName('leftArrowNull');
-        }
-      } else {
-        if($('rightArrow').hasClassName('rightArrowActive')) {
-          $('rightArrow').removeClassName('rightArrowActive');
-          $('rightArrow').addClassName('rightArrowNull');
-        }
-      }
-    });
-
-    $('leftArrow').observe('click', function() {
-      if ((${site.siteImages().size() > galleryImgWidth}) && galleryImageNum > 0) {
-        galleryImageNum--;
-        new Effect.Move('items', { x: 66, y:0, mode:'relative'});
-        if (galleryImageNum < (${site.siteImages().size() - galleryImgWidth})) {
-          if($('rightArrow').hasClassName('rightArrowNull')) {
-            $('rightArrow').removeClassName('rightArrowNull');
-            $('rightArrow').addClassName('rightArrowActive');
-          }
-        }
-        if (galleryImageNum == 0) {
-          if($('leftArrow').hasClassName('leftArrowActive')) {
-            $('leftArrow').removeClassName('leftArrowActive');
-            $('leftArrow').addClassName('leftArrowNull');
-          }
-        }
-      } else {
-        if($('leftArrow').hasClassName('leftArrowActive')) {
-          $('leftArrow').removeClassName('leftArrowActive');
-          $('leftArrow').addClassName('leftArrowNull');
-        }
-      }
+    $('#galleryView').galleryView({
+        gallery_width: 630,
+        gallery_height: 400,
+        frame_width: 60,
+        frame_height: 40,
+        pause_on_hover: true,
+        filmstrip_position: 'right',
+        theme_path: "${resource(dir:'/images/themes/')}",
     });
   }
 
@@ -228,21 +124,21 @@
   }
 
   function doAjaxFormUpdate() {
-    var ajaxFormNewValues = $('rentalTransaction');
+    var ajaxFormNewValues = $('#rentalTransaction');
 
     if (ajaxFormNewValues != undefined) {
       ajaxFormNewValues = ajaxFormNewValues.serialize(true);
-      var jsonValues = Object.toJSON(ajaxFormNewValues);
+      var jsonValues = JSON.stringify(ajaxFormNewValues);
       var valuesUnchanged = ajaxFormOldValues == jsonValues;
       ajaxFormOldValues = jsonValues;
 
       if (ajaxFormDirty) {
         if (valuesUnchanged) {
-          new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}",
-          {
-            method:'post',
-            parameters: ajaxFormNewValues,
-            onComplete:function() {
+          $.ajax({
+            url: "${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}",
+            type:'post',
+            data: ajaxFormNewValues,
+            complete:function() {
               ajaxFormDirty = false;
               ajaxFormUpdate();
             }
@@ -263,36 +159,77 @@
   }
 
   function doAjaxServerPoll() {
-    new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}",
-    {
-      method:'get',
-      onSuccess:function(transport) {
-        $('helpDeskStatus').update(transport.responseText);
+    $.ajax({
+      url: "${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}",
+      type:'get',
+      dataType:'html',
+      success:function(ret) {
+        $('#helpDeskStatus').html(ret);
       },
-      onComplete:function() {
+      complete:function() {
         ajaxServerPoll();
       }
     });
   }
 
-  Event.observe(window, 'load', function() {
-    transactionFormSetup();
-    setupSize();
-    setupHelp();
-    setupTabs();
-    getDirections();
-    rentmeClick();
-    setupCalendar();
-    setupValidation();
-    primaryCountryClick();
-    <g:if test="${params.returnForm}">
-      details_return();
-    </g:if>
+  function setupAnalytics() {
+    window.setTimeout(doAnalytics, 1);
+  }
+
+  function setupHelp() {
+    $('#sizeHelp').dialog({
+      autoOpen: false,
+      resizable: false,
+      width: 440
+    }).addTouch();
+    $('.sizeGuide').click(function(event) {
+      $('#sizeHelp').dialog('open');
+    });
+  }
+
+  function doAnalytics() {
+    // Called a few ms after the page has loaded.
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  }
+
+  function setupJQueryTabs() {
+    $("#operatingHours").tabs();
+    $('#detail_tabs').tabs();
+
+    $('#detail_tabs').bind('tabsshow', function(event, ui) {
+        if (ui.panel.id == "tab_directions") {
+          refreshMap();
+        }
+    });
+  }
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16012579-1']);
+  _gaq.push(['_trackPageview']);
+
+  $(document).ready(function() {
+
     setupImageGallery();
-    showTotals();
+    setupJQueryTabs();
+    setupSize();
+    rentmeClick();
+    transactionFormSetup();
+    setupCalendar();
+    getDirections();
+    createDirectionMap();
+    setupHelp();
+    primaryCountryClick();
+  <g:if test="${params.returnForm}">
+    details_return();
+  </g:if>
     ajaxFormUpdate();
     ajaxServerPoll();
+    showTotals();
+    setupAnalytics();
   });
+
 
 //]]>
   </script>
@@ -332,14 +269,13 @@
 
             <div style="height:25px;"></div>
             
-            <div id="detail_tabs">
-              <div id="tabSet" style="width:650px;border-bottom:1px solid #dfdfdf;">
-                <div id="tab_summary" class="left tab_on button_text">Description</div>
-                <div id="tab_photos" class="left tab_off button_text_hi">Photos</div>
-                <div id="tab_directions" class="left tab_off button_text_hi">Map &amp; Directions</div>
-                <div style="clear: both;"></div>
-              </div>
-              <div id="summary" style="width:650px; margin-top:20px;">
+            <div id="detail_tabs" style="width:650px;">
+              <ul>
+                <li><a href="#tab_summary">Description</a></li>
+                <li><a href="#tab_photos">Photos</a></li>
+                <li><a href="#tab_directions">Map &amp; Directions</a></li>
+              </ul>
+              <div id="tab_summary">
                 <div class="left">
                   <g:if test="${site.coverImage()}">
                     <div class="left">
@@ -378,33 +314,26 @@
                   </div>
                 </div>
               </div>
-              <div id="photos" style="width:650px;margin-top: 20px;;display:none;">
-                <div id="imgFrame" style="margin: 0 auto;">
+              <div id="tab_photos" style="width:650px;">
+                <div style="margin:auto;">
                   <g:if test="${site.siteImages().size() > 0}">
-                      <img src="${resource(file:site.coverImage().mid())}" width="320" height="240" style="display:block;margin:auto;" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
+                    <ul id="galleryView">
+                    <g:each var="siteImg" in="${site.siteImages()}" status="i">
+                        <li>
+                          <img width="60" height="40" src="${resource(file:siteImg.thumbnail())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
+                          <div class="panel-content">
+                            <img src="${resource(file:siteImg.src())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" />
+                          </div>
+                        </li>
+                    </g:each>
+                    </ul>
                   </g:if>
                   <g:else>
-                    <storitz:image src="placeholder.jpg" width="320" height="240" alt="place holder"/>
+                    <storitz:image src="placeholder.jpg" width="320" height="240" style="margin-left:155px;" alt="place holder"/>
                   </g:else>
                 </div>
-                <div id="galleryBottom" style="margin: 10px auto;">
-                  <div id="leftArrow" class="left ${site.siteImages().size() > galleryImgWidth ? 'leftArrowNull' : 'arrowEmpty'}" style="margin-top: 8px;">
-                  </div>
-                  <div style="margin: 20 auto;" id="thumbWrapper">
-                    <ul id="items">
-                       <g:each var="siteImg" in="${site.siteImages()}" status="i">
-                           <li class="thumb">
-                             <img id="img${siteImg.imgOrder}" width="60" height="40" class="${i == 0 ? 'gallerySelected' : 'galleryNormal'}" src="${resource(file:siteImg.thumbnail())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" onclick="showImage('${resource(file:siteImg.mid())}', 'img${siteImg.imgOrder}')"/>
-                           </li>
-                       </g:each>
-                    </ul>
-                  </div>
-                  <div id="rightArrow" class="left ${site.siteImages().size() > galleryImgWidth ? 'rightArrowActive' : 'arrowEmpty'}" style="margin-top: 8px;">
-                  </div>
-                  <div style="clear: both;"></div>
-                </div>
               </div>
-              <div id="directions" style="display:none;">
+              <div id="tab_directions">
                 <g:render template="/directions" />
               </div>
             </div>
@@ -682,8 +611,8 @@
     </div>
     <div style="clear:both; height:30px;"></div>
     <div id="helpDeskStatus">STATUS</div>
-    <g:render template="/footer" />
-    <g:render template="/size_popup" />
+    <g:render template="/footer_no_analytics" />
+    <g:render template="/size_popup_jquery" />
     </div>
   </body>
   <p:renderDependantJavascript />

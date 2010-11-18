@@ -1406,3 +1406,14 @@ div.wideTextbox {
     -moz-border-radius:10px;
     border:1px solid #dfdfdf;
 }
+
+div#detail_tabs.ui-widget-content {
+   border: none; 
+}
+
+div#tab_directions.ui-tabs-panel, div#tab_summary.ui-tabs-panel, div#tab_photos.ui-tabs-panel {
+    background: none;
+    border-width: 0;
+    display: block;
+    padding: 1em 0;
+}

@@ -135,12 +135,14 @@ grails.mail.props = ["mail.smtp.auth":"true",
 uiperformance.bundles = [
   [type: 'js',
     name: 'header_all',
-    files: ["scriptaculous183",
-            "fastinit",
-            "tablekit",
+    files: [
+            "scriptaculous183",
             "calendarview",
             "tooltip",
-            "validation"]],
+            "validation",
+            "jquery-1.4.2.min",
+            "jquery-ui-1.8.6.custom.min"
+    ]],
   [type: 'js',
     name: 'jquery_all',
     files: ["jquery-1.4.2.min",
@@ -148,6 +150,10 @@ uiperformance.bundles = [
             "jquery.qtip-1.0.min",
             "jquery.ui.ipad.alt",
             "jquery.dataTables.min",
+            "jquery.timers-1.2",
+            "jquery.easing.1.3",
+            "jquery.galleryview-2.1.1",
+            "json2",
             "jwplayer"
             ]],
   [type: 'js',
@@ -162,10 +168,12 @@ uiperformance.bundles = [
     name: 'jquery_bundled',
     files: ['main',
             'jquery-ui-1.8.6.custom',
+            'galleryview',
             'datatables']],
   [type: 'css',
     name: 'header_bundled',
-    files: ['main',
+    files: ['jquery-ui-1.8.6.custom',
+            'main',
             'tablekit',
             'calendarview']]
 ]
@@ -176,5 +184,6 @@ uiperformance.exclusions = [
    "**/storitz_logo*",
    "**/storitz-logo*",
    "**/tagline_clickstoredone.gif",
-   "**/plugins/**"
+   "**/plugins/**",
+   "**/images/themes/**"
 ]
