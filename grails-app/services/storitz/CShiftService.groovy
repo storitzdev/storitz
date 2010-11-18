@@ -540,168 +540,130 @@ class CShiftService {
     for (hours in records.'soap:Body'.'*:GetSiteHoursResponse'.'*:GetSiteHoursResult'.'*:SiteHours'.'*:Hours') {
       def day = hours.WEEKDAY.text()
 
+      def openField
+      def startField
+      def endField
+      def startGateField
+      def endGateField
+
       switch(day) {
         case "Mon":
-          def office = hours.OFFICE.text().toLowerCase()
-          if (office == 'closed') {
-            site.openMonday = false
-          } else {
-            site.openMonday = true
-            def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
-            if (m.matches()) {
-              def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-              def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-              if (start.contains(':') && start.contains('m')) {
-                site.startMonday = Date.parse("HH:mma", start)
-              } else if (start.contains(':')) {
-                site.startMonday = Date.parse("HH:mm", start)
-              } else if (start.contains('m')) {
-                site.startMonday = Date.parse("HHa", start)
-              } else {
-                site.startMonday = Date.parse("HH", start)
-              }
-              if (end.contains(':') && end.contains('m')) {
-                site.endMonday = Date.parse("HH:mma", end)
-              } else if (end.contains(':')) {
-                site.endMonday = Date.parse("HH:mma", end + 'PM')
-              } else if (end.contains('m')) {
-                site.endMonday = Date.parse("HHa", end)
-              } else {
-                def endPM = ((end as Integer) + 12) as String
-                site.endMonday = Date.parse("HH", endPM)
-              }
-            } else {
-              println "Hours do not match: ${office}"
-            }
-          }
-          def gate = hours.GATE.text()
-          def n = gate =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
-          if (n.matches()) {
-            def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-            def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-            if (start.contains(':') && start.contains('m')) {
-              site.startMondayGate = Date.parse("HH:mma", start)
-            } else if (start.contains(':')) {
-              site.startMondayGate = Date.parse("HH:mm", start)
-            } else if (start.contains('m')) {
-              site.startMondayGate = Date.parse("HHa", start)
-            } else {
-              site.startMondayGate = Date.parse("HH", start)
-            }
-            if (end.contains(':') && end.contains('m')) {
-              site.endMondayGate = Date.parse("HH:mma", end)
-            } else if (end.contains(':')) {
-              site.endMondayGate = Date.parse("HH:mma", end + "PM")
-            } else if (end.contains('m')) {
-              site.endMondayGate = Date.parse("HHa", end)
-            } else {
-              def endPM = ((end as Integer) + 12) as String
-              site.endMondayGate = Date.parse("HH", endPM)
-            }
-          } else {
-            println "Gate does not match: ${gate}"
-          }
+          openField = "openMonday"
+          startField = "startMonday"
+          endField = "endMonday"
+          startGateField = "startMondayGate"
+          endGateField = "endMondayGate"
+          break
+
+        case "Tue":
+          openField = "openTuesday"
+          startField = "startTuesday"
+          endField = "endTuesday"
+          startGateField = "startTuesdayGate"
+          endGateField = "endTuesdayGate"
+          break
+
+        case "Wed":
+          openField = "openWednesday"
+          startField = "startWednesday"
+          endField = "endWednesday"
+          startGateField = "startWednesdayGate"
+          endGateField = "endWednesdayGate"
+          break
+
+        case "Thu":
+          openField = "openThursday"
+          startField = "startThursday"
+          endField = "endThursday"
+          startGateField = "startThursdayGate"
+          endGateField = "endThursdayGate"
+          break
+
+        case "Fri":
+          openField = "openFriday"
+          startField = "startFriday"
+          endField = "endFriday"
+          startGateField = "startFridayGate"
+          endGateField = "endFridayGate"
           break
 
         case "Sat":
-          def office = hours.OFFICE.text().toLowerCase()
-          if (office == 'closed') {
-            site.openSaturday = false
-          } else {
-            site.openSaturday = true
-            def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
-            if (m.matches()) {
-              def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-              def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-              if (start.contains(':') && start.contains('m')) {
-                site.startSaturday = Date.parse("HH:mma", start)
-              } else if (start.contains(':')) {
-                site.startSaturday = Date.parse("HH:mm", start)
-              } else if (start.contains('m')) {
-                site.startSaturday = Date.parse("HHa", start)
-              } else {
-                site.startSaturday = Date.parse("HH", start)
-              }
-              if (end.contains(':') && end.contains('m')) {
-                site.endSaturday = Date.parse("HH:mma", end)
-              } else if (end.contains(':')) {
-                site.endSaturday = Date.parse("HH:mma", end + "PM")
-              } else if (end.contains('m')) {
-                site.endSaturday = Date.parse("HHa", end)
-              } else {
-                def endPM = ((end as Integer) + 12) as String
-                site.endSaturday = Date.parse("HH", endPM)
-              }
-            } else {
-              println "Saturday Office does not match: ${office}"
-            }
-          }
+          openField = "openSaturday"
+          startField = "startSaturday"
+          endField = "endSaturday"
+          startGateField = "startSaturdayGate"
+          endGateField = "endSaturdayGate"
           break
 
         case "Sun":
-          def office = hours.OFFICE.text().toLowerCase()
-          if (office == 'closed') {
-            site.openSunday = false
-          } else {
-            site.openSunday = true
-            def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
-            if (m.matches()) {
-              def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-              def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-              if (start.contains(':') && start.contains('m')) {
-                site.startSunday = Date.parse("HH:mma", start)
-              } else if (start.contains(':')) {
-                site.startSunday = Date.parse("HH:mm", start)
-              } else if (start.contains('m')) {
-                site.startSunday = Date.parse("HHa", start)
-              } else {
-                site.startSunday = Date.parse("HH", start)
-              }
-              if (end.contains(':') && end.contains('m')) {
-                site.endSunday = Date.parse("HH:mma", end)
-              } else if (end.contains(':')) {
-                site.endSunday = Date.parse("HH:mma", end + "PM")
-              } else if (end.contains('m')) {
-                site.endSunday = Date.parse("HHa", end)
-              } else {
-                def endPM = ((end as Integer) + 12) as String
-                site.endSunday = Date.parse("HH", endPM)
-              }
-            } else {
-              println "Sunday Office does not match: ${office}"
-            }
-          }
-          def gate = hours.GATE.text()
-          def n = gate =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
-          if (n.matches()) {
-            def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-            def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
-            if (start.contains(':') && start.contains('m')) {
-              site.startSundayGate = Date.parse("HH:mma", start)
-            } else if (start.contains(':')) {
-              site.startSundayGate = Date.parse("HH:mm", start)
-            } else if (start.contains('m')) {
-              site.startSundayGate = Date.parse("HHa", start)
-            } else {
-              site.startSundayGate = Date.parse("HH", start)
-            }
-            if (end.contains(':') && end.contains('m')) {
-              site.endSundayGate = Date.parse("HH:mma", end)
-            } else if (end.contains(':')) {
-              site.endSundayGate = Date.parse("HH:mma", end + "PM")
-            } else if (end.contains('m')) {
-              site.endSundayGate = Date.parse("HHa", end)
-            } else {
-              def endPM = ((end as Integer) + 12) as String
-              site.endSundayGate = Date.parse("HH", endPM)
-            }
-          } else {
-            println "Sunday Gate does not match: ${gate}"
-          }
+          openField = "openSunday"
+          startField = "startSunday"
+          endField = "endSunday"
+          startGateField = "startSundayGate"
+          endGateField = "endSundayGate"
           break
 
         default:
           break
+      }
+      def office = hours.OFFICE.text().toLowerCase()
+      if (office == 'closed') {
+        site."$openField" = false
+      } else {
+        site."$openField" = true
+        def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
+        if (m.matches()) {
+          def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+          def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+          if (start.contains(':') && start.contains('m')) {
+            site."$startField" = Date.parse("HH:mma", start)
+          } else if (start.contains(':')) {
+            site."$startField" = Date.parse("HH:mm", start)
+          } else if (start.contains('m')) {
+            site."$startField" = Date.parse("HHa", start)
+          } else {
+            site."$startField" = Date.parse("HH", start)
+          }
+          if (end.contains(':') && end.contains('m')) {
+            site."$endField" = Date.parse("HH:mma", end)
+          } else if (end.contains(':')) {
+            site."$endField" = Date.parse("HH:mma", end + 'PM')
+          } else if (end.contains('m')) {
+            site."$endField" = Date.parse("HHa", end)
+          } else {
+            def endPM = ((end as Integer) + 12) as String
+            site."$endField" = Date.parse("HH", endPM)
+          }
+        } else {
+          println "Hours do not match: ${office}"
+        }
+      }
+      def gate = hours.GATE.text()
+      def n = gate =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
+      if (n.matches()) {
+        def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+        def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
+        if (start.contains(':') && start.contains('m')) {
+          site."$startGateField" = Date.parse("HH:mma", start)
+        } else if (start.contains(':')) {
+          site."$startGateField" = Date.parse("HH:mm", start)
+        } else if (start.contains('m')) {
+          site."$startGateField" = Date.parse("HHa", start)
+        } else {
+          site."$startGateField" = Date.parse("HH", start)
+        }
+        if (end.contains(':') && end.contains('m')) {
+          site."$endGateField" = Date.parse("HH:mma", end)
+        } else if (end.contains(':')) {
+          site."$endGateField" = Date.parse("HH:mma", end + "PM")
+        } else if (end.contains('m')) {
+          site."$endGateField" = Date.parse("HHa", end)
+        } else {
+          def endPM = ((end as Integer) + 12) as String
+          site."$endGateField" = Date.parse("HH", endPM)
+        }
+      } else {
+        println "Gate does not match: ${gate}"
       }
 
     }

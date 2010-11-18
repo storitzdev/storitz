@@ -29,4 +29,8 @@ class StaticController {
     def operatorsignup = {
       [title: 'Operator Signup and Information']
     }
+
+    def media = {
+      [title: 'Storitz in the Media']
+    }
 }
