@@ -648,7 +648,7 @@ class SiteLinkService {
     site.hasElevator = false
     site.disabled = true // start sites as disabled
 
-    site.openWeekday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
+    site.openMonday =  site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
     site.openSaturday = !(tab.bClosedSaturday.text().toLowerCase() == 'true')
     site.openSunday = !(tab.bClosedSunday.text().toLowerCase() == 'true')
 
@@ -658,7 +658,7 @@ class SiteLinkService {
     def sSaturdayEnd = tab.dSaturdayEnd.text()
     def sSundayStart = tab.dSundayStrt.text()
     def sSundayEnd = tab.dSundayEnd.text()
-    site.startSundayGate = site.startGate = site.startWeekday = sWeekdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00') : null
+    site.startSundayGate = site.startMondayGate = site.startTuesdayGate = site.startWednesdayGate = site.startThursdayGate = site.startFridayGate = site.startSaturdayGate = site.startMonday = site.startTuesday = site.startWednesday = site.startThursday = site.startFriday = sWeekdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00') : null
     site.endSundayGate = site.endGate = site.endWeekday = sWeekdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayEnd.substring(0, sWeekdayEnd.length() - 3) + '00') : null
     site.startSaturday = sSaturdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSaturdayStart.substring(0, sSaturdayStart.length() - 3) + '00') : null
     site.endSaturday = sSaturdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSaturdayEnd.substring(0, sSaturdayEnd.length() - 3) + '00') : null

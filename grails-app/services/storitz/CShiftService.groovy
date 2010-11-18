@@ -544,31 +544,31 @@ class CShiftService {
         case "Mon":
           def office = hours.OFFICE.text().toLowerCase()
           if (office == 'closed') {
-            site.openWeekday = false
+            site.openMonday = false
           } else {
-            site.openWeekday = true
+            site.openMonday = true
             def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
             if (m.matches()) {
               def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
               def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
               if (start.contains(':') && start.contains('m')) {
-                site.startWeekday = Date.parse("HH:mma", start)
+                site.startMonday = Date.parse("HH:mma", start)
               } else if (start.contains(':')) {
-                site.startWeekday = Date.parse("HH:mm", start)
+                site.startMonday = Date.parse("HH:mm", start)
               } else if (start.contains('m')) {
-                site.startWeekday = Date.parse("HHa", start)
+                site.startMonday = Date.parse("HHa", start)
               } else {
-                site.startWeekday = Date.parse("HH", start)
+                site.startMonday = Date.parse("HH", start)
               }
               if (end.contains(':') && end.contains('m')) {
-                site.endWeekday = Date.parse("HH:mma", end)
+                site.endMonday = Date.parse("HH:mma", end)
               } else if (end.contains(':')) {
-                site.endWeekday = Date.parse("HH:mma", end + 'PM')
+                site.endMonday = Date.parse("HH:mma", end + 'PM')
               } else if (end.contains('m')) {
-                site.endWeekday = Date.parse("HHa", end)
+                site.endMonday = Date.parse("HHa", end)
               } else {
                 def endPM = ((end as Integer) + 12) as String
-                site.endWeekday = Date.parse("HH", endPM)
+                site.endMonday = Date.parse("HH", endPM)
               }
             } else {
               println "Hours do not match: ${office}"
@@ -580,23 +580,23 @@ class CShiftService {
             def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
             def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
             if (start.contains(':') && start.contains('m')) {
-              site.startGate = Date.parse("HH:mma", start)
+              site.startMondayGate = Date.parse("HH:mma", start)
             } else if (start.contains(':')) {
-              site.startGate = Date.parse("HH:mm", start)
+              site.startMondayGate = Date.parse("HH:mm", start)
             } else if (start.contains('m')) {
-              site.startGate = Date.parse("HHa", start)
+              site.startMondayGate = Date.parse("HHa", start)
             } else {
-              site.startGate = Date.parse("HH", start)
+              site.startMondayGate = Date.parse("HH", start)
             }
             if (end.contains(':') && end.contains('m')) {
-              site.endGate = Date.parse("HH:mma", end)
+              site.endMondayGate = Date.parse("HH:mma", end)
             } else if (end.contains(':')) {
-              site.endGate = Date.parse("HH:mma", end + "PM")
+              site.endMondayGate = Date.parse("HH:mma", end + "PM")
             } else if (end.contains('m')) {
-              site.endGate = Date.parse("HHa", end)
+              site.endMondayGate = Date.parse("HHa", end)
             } else {
               def endPM = ((end as Integer) + 12) as String
-              site.endGate = Date.parse("HH", endPM)
+              site.endMondayGate = Date.parse("HH", endPM)
             }
           } else {
             println "Gate does not match: ${gate}"
