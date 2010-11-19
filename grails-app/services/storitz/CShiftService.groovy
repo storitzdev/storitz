@@ -367,7 +367,7 @@ class CShiftService {
 
       if (newSite) {
         SiteUser.link(site, cshift.manager)
-        site.disabled = true
+        site.disabled = false
         site.lastChange = new Date()
       }
 
@@ -879,7 +879,7 @@ class CShiftService {
         if (!specialOffer)  {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
-          specialOffer.active = true;
+          specialOffer.active = false;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()

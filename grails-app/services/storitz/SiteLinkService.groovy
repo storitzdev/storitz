@@ -646,7 +646,7 @@ class SiteLinkService {
     site.isUnitAlarmed = false
     site.isManagerOnsite = false
     site.hasElevator = false
-    site.disabled = true // start sites as disabled
+    site.disabled = false
 
     site.openMonday =  site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
     site.openSaturday = !(tab.bClosedSaturday.text().toLowerCase() == 'true')
@@ -952,7 +952,7 @@ class SiteLinkService {
         if (!specialOffer)  {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
-          specialOffer.active = true;
+          specialOffer.active = false;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()

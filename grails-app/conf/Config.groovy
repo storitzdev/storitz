@@ -153,6 +153,9 @@ uiperformance.bundles = [
             "jquery.timers-1.2",
             "jquery.easing.1.3",
             "jquery.galleryview-2.1.1",
+            "jquery.maskedinput",
+            "jquery.validate.min",
+            "additional-methods",
             "json2",
             "jwplayer"
             ]],

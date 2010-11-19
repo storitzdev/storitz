@@ -6,6 +6,8 @@ class SiteImage {
 
   static constraints = {
     imgOrder(nullable:true)
+    caption(nullable:true, size:2..1000)
+    tags(nullable:true, size:2..1000)
   }
 
   Integer imgOrder
@@ -14,6 +16,8 @@ class SiteImage {
   Boolean hasThumbnail
   String fileLocation
   String basename
+  String caption
+  String tags
 
   def thumbnail() {
     return basename + "thumb_" + fileLocation.encodeAsURL().replace("+", "%20")

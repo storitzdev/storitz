@@ -57,55 +57,29 @@
     }
 
     function primaryCountryClick() {
-      $('#contactPrimary.country').change(function() {
-        var country = $('#contactPrimary.country').val();
+      $('.country').change(function() {
+        var country = $('#contactPrimary-country').val();
         if (country == "US") {
           $('#primaryProvinceField').hide();
           $('#primaryStateField').show();
           $('#primaryProvinceLabel').hide();
           $('#primaryStateLabel').show();
+          $("input.zipcode").mask('99999');
         } else {
           $('#primaryProvinceField').show();
           $('#primaryStateField').hide();
           $('#primaryProvinceLabel').show();
           $('#primaryStateLabel').hide();
+          $("input.zipcode").unmask();
         }
       });
-    }
-
-    function validateStep1() {
-      var valid = true;
-      valid &= Validation.validate('contactPrimary.firstName');
-      valid &= Validation.validate('contactPrimary.lastName');
-      valid &= Validation.validate('contactPrimary.address1');
-      valid &= Validation.validate('contactPrimary.city');
-      valid &= Validation.validate('contactPrimary.state');
-      valid &= Validation.validate('contactPrimary.zipcode');
-      valid &= Validation.validate('contactPrimary.phone');
-      valid &= Validation.validate('contactPrimary.email');
-      valid &= Validation.validate('contactPrimary.emailRepeat');
-      valid &= Validation.validate('rentalUse');
-      valid &= Validation.validate('termsHolder');
-      return valid;
-    }
-
-    function nextStep1() {
-      if (validateStep1()) {
-        $('step1_bullet').hide();
-        $('step2_bullet').show();
-        $('step1').removeClassName('step_header_hi');
-        $('step1').addClassName('step_header');
-        $('step2').removeClassName('step_header');
-        $('step2').addClassName('step_header_hi');
-        $('rentalTransaction').submit();
-      }
     }
 
   function setupImageGallery() {
 
     $('#galleryView').galleryView({
-        gallery_width: 630,
-        gallery_height: 400,
+        panel_width: 570,
+        panel_height: 360,
         frame_width: 60,
         frame_height: 40,
         pause_on_hover: true,
@@ -115,9 +89,73 @@
   }
 
   function setupValidation() {
-    Validation.add('validate-emailMatch', 'Emails do not match', {equalToField: 'contactPrimary.email'})
-  }
 
+    $("input.phone").mask('999-999-9999');
+    $("input.zipcode").mask('99999');
+    $('#errorMessage').hide();
+
+    $.validator.addMethod("state", function(value, element) {
+      if ($('#contactPrimary-country').val() == 'US') {
+        return value != 'NONE';
+      }
+      return true;
+    }, "Missing state");
+
+    $.validator.addMethod("province", function(value, element) {
+      if ($('#contactPrimary-country').val() != 'US') {
+        return value != '';
+      }
+      return true;
+    }, "Missing state or province");
+
+    var validator = $('#rentalTransaction')
+      .validate({
+        submitHandler: function(form) {
+          $('#step1_bullet').hide();
+          $('#step2_bullet').show();
+          $('#step1').removeClass('step_header_hi').addClass('step_header');
+          $('#step2').removeClass('step_header').addClass('step_header_hi');
+          $('#errorMessage').hide();
+          // TODO - put up a processing image picture
+          form.submit();
+        },
+        rules: {
+          rentalUse: "required",
+          "contactPrimary.emailRepeat": {
+            equalTo: "#contactPrimary-email"
+          }
+        },
+        messages: {
+          "contactPrimary.firstName": "Missing first name",
+          "contactPrimary.lastName": "Missing last name",
+          "contactPrimary.address1": "Missing address",
+          "contactPrimary.city": "Missing city",
+          "contactPrimary.phone": "Missing phone",
+          "contactPrimary.country": "Please select your country",
+          "contactPrimary.email": {
+            required: "Missing email",
+            email: "Incorrect email"
+          },
+          "contactPrimary.emailRepeat":"Repeated email does not match",
+          "contactPrimary.zipcode":"Missing postal code",
+          rentalUse: "Missing rental use: personal or business",
+          terms:"Please accept the terms of agreement"
+        },
+        errorContainer: $("#errorMessage"),
+        errorLabelContainer: $("#errorList"),
+        errorClass: "validation-failed",
+        wrapper: "li",
+        ignore: ".ignore",
+        invalidHandler: function(form, validator) {
+          $('#errorMessage').show();
+        },
+        showErrors: function(errorMap, errorList) {
+          $("#errorInfo").html("Please correct the " + this.numberOfInvalids() + " issue" + (this.numberOfInvalids() > 1 ? 's' : '') + " below and continue:");
+		  this.defaultShowErrors();
+        }
+    });
+
+  }
 
   function ajaxFormUpdate() {
     ajaxFormUpdateTimer = setTimeout("doAjaxFormUpdate()", 5000)
@@ -224,9 +262,10 @@
   <g:if test="${params.returnForm}">
     details_return();
   </g:if>
+    showTotals();
+    setupValidation();
     ajaxFormUpdate();
     ajaxServerPoll();
-    showTotals();
     setupAnalytics();
   });
 
@@ -369,6 +408,10 @@
                 <div class="price_options checkout_header white">
                   Renter Information
                 </div>
+                <div id="errorMessage" class="formErrors">
+                  <div id="errorInfo" class="errorInfo"></div>
+                  <div id="errorList" class="errorList"></div>
+                </div>
                 <div class="formInstructions">
                   Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our <a href="${createLink(controller:'static', action:'privacy')}" onclick="window.open(this.href,'_blank');return false;">Privacy Policy</a>
                 </div>
@@ -383,7 +426,7 @@
                     <g:textField id="contactPrimary.lastName" name="contactPrimary.lastName" style="width: 180px;" class="required" value="${rentalTransactionInstance?.contactPrimary?.lastName}" />
                   </div>
                   <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.suffixName', 'errors')}">
-                    <g:textField id="contactPrimary.suffixName" name="contactPrimary.suffixName" style="width: 80px;" value="${rentalTransactionInstance?.contactPrimary?.suffixName}" />
+                    <g:textField id="contactPrimary.suffixName" name="contactPrimary.suffixName" style="width: 80px;" class="ignore" value="${rentalTransactionInstance?.contactPrimary?.suffixName}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -407,7 +450,7 @@
                       <g:textField name="contactPrimary.address1" id="contactPrimary.address1" class="required" style="width:295px;" value="${rentalTransactionInstance?.contactPrimary?.address1}" />
                   </div>
                   <div style="width:315px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address2', 'errors')}">
-                      <g:textField name="contactPrimary.address2" id="contactPrimary.address2" style="width:295px;" value="${rentalTransactionInstance?.contactPrimary?.address2}" />
+                      <g:textField name="contactPrimary.address2" id="contactPrimary.address2" style="width:295px;" class="ignore" value="${rentalTransactionInstance?.contactPrimary?.address2}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -425,16 +468,16 @@
                       <g:textField name="contactPrimary.city" id="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransactionInstance?.contactPrimary?.city}" />
                   </div>
                   <div id="primaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.state', 'errors')}">
-                    <g:select name="contactPrimary.state" id="contactPrimary.state" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransactionInstance?.contactPrimary?.state}" optionValue="value"/>
+                    <g:select name="contactPrimary.state" id="contactPrimary.state" class="state" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransactionInstance?.contactPrimary?.state}" optionValue="value"/>
                   </div>
-                  <div id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.province', 'errors')}" style="width: 150px;display: none;">
-                    <g:textField name="contactPrimary.province" id="contactPrimary.province" class="required" style="width:130px;" value="${rentalTransactionInstance?.contactPrimary?.province}" />
+                  <div style="width: 120px;display: none;" id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.province', 'errors')}" >
+                    <g:textField name="contactPrimary.province" id="contactPrimary.province" class="province" style="width:100px;" value="${rentalTransactionInstance?.contactPrimary?.province}" />
                   </div>
                   <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.zipcode', 'errors')}">
-                      <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required validate-zipcode" style="width:80px;" value="${rentalTransactionInstance?.contactPrimary?.zipcode}" />
+                      <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required zipcode" style="width:80px;" value="${rentalTransactionInstance?.contactPrimary?.zipcode}" />
                   </div>
                   <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.country', 'errors')}">
-                    <g:select name="contactPrimary.country" id="contactPrimary.country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.contactPrimary?.country?.key}" optionKey="key" optionValue="display"/>
+                    <g:select name="contactPrimary.country" id="contactPrimary-country" style="width:180px;" class="country" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.contactPrimary?.country?.key}" optionKey="key" optionValue="display"/>
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -445,7 +488,7 @@
                   <div style="width:100px;" id="primaryStateLabel" class="checkout_name">
                     <label for="contactPrimary.state">State</label>
                   </div>
-                  <div style="width: 150px;display: none;" id="primaryProvinceLabel" class="checkout_name">
+                  <div style="width: 120px;display: none;" id="primaryProvinceLabel" class="checkout_name">
                     <label for="contactPrimary.province">Province</label>
                   </div>
                   <div style="width:100px;" class="checkout_name">
@@ -465,7 +508,7 @@
                       <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storitz.constants.PhoneType.list()}" value="${rentalTransactionInstance?.contactPrimary?.phoneType}" optionValue="value"/>
                   </div>
                   <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.phone', 'errors')}">
-                      <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required validate-phone" style="width:180px;" value="${rentalTransactionInstance?.contactPrimary?.phone}" />
+                      <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required phone" style="width:180px;" value="${rentalTransactionInstance?.contactPrimary?.phone}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
@@ -480,16 +523,16 @@
                 </div>
                 <div class="checkout_fields">
                   <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
-                      <g:textField name="contactPrimary.email" id="contactPrimary.email" class="required validate-email" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
+                      <g:textField name="contactPrimary.email" id="contactPrimary-email" class="required email" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
                   </div>
                   <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
-                      <g:textField name="contactPrimary.emailRepeat" id="contactPrimary.emailRepeat" class="required validate-emailMatch" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
+                      <g:textField name="contactPrimary.emailRepeat" id="contactPrimary.emailRepeat" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}" />
                   </div>
                   <div style="clear:both;"></div>
                 </div>
                 <div class="checkout_labels">
                   <div style="width:300px;" class="checkout_name">
-                    <label for="contactPrimary.email">Email</label>
+                    <label for="contactPrimary-email">Email</label>
                   </div>
                   <div style="width:300px;" class="checkout_name">
                     <label for="contactPrimary.emailRepeat">Confirm Email</label>
@@ -553,12 +596,12 @@
                   Terms
                 </div>
                 <div class="checkout_fields">
-                  <textarea style="width:610px; height: 50px;">
+                  <textarea style="width:610px; height: 50px;" name="termText">
   Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
   By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
   By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
                   </textarea>
-                  <div id="termsHolder" style="margin-top:7px;" class="validate-one-checkbox value ${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
+                  <div id="termsHolder" style="margin-top:7px;" class="${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
                       <div class="left">
                         <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" onclick="window.open(this.href,'_blank');return false;">Terms of Use</a>
                           <g:if test="${site.rentalAgreement}">
@@ -600,7 +643,7 @@
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
                   <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back" /></div>
-                  <div class="right"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-next2.png" onclick="nextStep1(); return false" alt="Next" /></div>
+                  <div class="right"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-next2.png" alt="Next" /></div>
                   <div style="clear:both;"></div>
                 </div>
               </div>
