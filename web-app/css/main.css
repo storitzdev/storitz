@@ -571,15 +571,24 @@ div.resultsBar {
     text-align: right;
 }
 
-#costTotals td {
-    padding: 0;
-    border: 0;
+.costTotals td, .costTotals th {
+    padding: 2px;
+    border: none;
     display: table-cell;
-    border-collapse: collapse;
     /*white-space: nowrap;
     overflow: hidden;*/
 }
 
+table.costTotals {
+    border: 1px #ccc solid;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+}
+
+table.costTotals th {
+    color: #2f4f4f;
+    border-bottom: 1px #ccc solid;
+}
 
 div.leftSectionHeader {
     font-family: verdana, arial, helvetica, sans-serif;

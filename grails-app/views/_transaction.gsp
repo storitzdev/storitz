@@ -64,12 +64,14 @@
     </div>
     <div class="right">
       <div id="costDetails" class="right">
-        <table id="costTotals">
+        <table class="costTotals" cellspacing="0">
           <thead>
-            <th>Item</th>
-            <th>Paid Through</th>
-            <th>Monthly Rate</th>
-            <th>Total</th>
+            <tr>
+              <th>Item</th>
+              <th>Initial Period</th>
+              <th>Monthly Rate</th>
+              <th>Total</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
