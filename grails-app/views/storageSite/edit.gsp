@@ -1127,6 +1127,22 @@
 
           </sec:ifAnyGranted>
 
+          <sec:ifAnyGranted roles="ROLE_ADMIN">
+            <div class="checkout_section_header">
+              Use Net Commission
+            </div>
+            <div class="formInstructions">
+              Check this box if this site will be paid net commission every month.  Default is to pay gross and invoice for commission.
+            </div>
+            <div class="checkout_fields">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'netCommission', 'errors')}">
+                <g:checkBox name="netCommission" value="${storageSiteInstance?.netCommission}"/>&nbsp;Use Net Commission Payments for ACH
+              </div>
+              <div style="clear:both;height: 15px;"></div>
+            </div>
+          </sec:ifAnyGranted>
+
+
           <div class="checkout_section_header">
             Site Images
           </div>

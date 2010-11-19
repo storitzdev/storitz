@@ -6,7 +6,9 @@ var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? sit
 var adminFee = ${site.adminFee ? site.adminFee : 0};
 
 // vars set by callback
+var duration = 1;
 var durationMonths = 1;
+var durationDays = 0;
 var paidThruDate;
 var monthlyRent = ${monthlyRate ? monthlyRate : 0};
 var pushRate = ${pushRate ? pushRate : 0};
@@ -76,14 +78,21 @@ function updateTransaction() {
   $('#selectedInsurance').html(chosenInsurance);
 
   // update costs
+  var durationText = '';
+  if (durationMonths > 0) {
+    durationText += (durationMonths + ' mo ');
+  }
+  if (durationDays > 0) {
+    durationText += (durationDays + ' days');
+  }
   $('#totalMoveInCost').html('$' + totalMoveInCost.toFixed(2));
-  $('#monthlyDuration').html(durationMonths.toFixed(2));
+  $('#monthlyDuration').html(durationText);
   $('#monthlyPerMonth').html('$' + pushRate.toFixed(2));
-  $('#monthlyTotal').html('$' + (pushRate * durationMonths).toFixed(2));
+  $('#monthlyTotal').html('$' + (pushRate * duration).toFixed(2));
   // insurance cost
-  $('#insuranceDuration').html(durationMonths.toFixed(2));
+  $('#insuranceDuration').html(durationText);
   $('#insurancePerMonth').html('$' + premium.toFixed(2));
-  $('#insuranceTotal').html('$' + (premium * durationMonths).toFixed(2));
+  $('#insuranceTotal').html('$' + (premium * duration).toFixed(2));
   if (premium > 0) {
     $('#insuranceBlock').show();
   } else {
@@ -218,6 +227,8 @@ function showTotals(action) {
       moveInDate:startDate, action:action
     },
     success:function(ret) {
+      duration = ret.totals.duration;
+      durationDays = ret.totals.durationDays;
       durationMonths = ret.totals.durationMonths;
       unitTypes = ret.totals.unitTypes;
       chosenPromo = ret.totals.chosenPromo;

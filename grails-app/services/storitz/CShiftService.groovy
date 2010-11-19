@@ -368,6 +368,7 @@ class CShiftService {
       if (newSite) {
         SiteUser.link(site, cshift.manager)
         site.disabled = false
+        site.netCommission = false
         site.lastChange = new Date()
       }
 
@@ -1309,9 +1310,10 @@ class CShiftService {
       cal.add(Calendar.MONTH, (durationMonths as Integer))
     }
 
+    def durationDays = 0
     if (site.useProrating) {
       cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
-
+      durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     }
 
@@ -1323,13 +1325,15 @@ class CShiftService {
 
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
-    ret["durationMonths"] = durationMonths
+    ret["duration"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
     ret["deposit"] = deposit
     ret["paidThruDate"] = cal.time.format('MM/dd/yy')
+    ret["durationMonths"] =  (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
+    ret["durationDays"] = durationDays
 
     return ret
   }

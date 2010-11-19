@@ -65,42 +65,50 @@
     <div class="right">
       <div id="costDetails" class="right">
         <table id="costTotals">
-          <tr>
-            <td class="transLineDesc">Monthly rent</td>
-            <td class="costDuration" id="monthlyDuration"></td>
-            <td class="costMoneyPerMonth" id="monthlyPerMonth"></td>
-            <td class="costMoney" id="monthlyTotal"></td>
-          </tr>
-          <tr id="specialOfferBlock">
-            <td class="transLineDesc">Selected Offer</td>
-            <td class="costDuration"></td>
-            <td class="costMoneyPerMonth"></td>
-            <td class="costMoney" id="discountTotal"></td>
-          </tr>
-          <tr id="insuranceBlock">
-            <td class="transLineDesc">Property Protection</td>
-            <td class="costDuration" id="insuranceDuration"></td>
-            <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
-            <td class="costMoney" id="insuranceTotal"></td>
-          </tr>
-          <tr>
-            <td class="transLineDesc">Admin Fees</td>
-            <td class="costDuration"></td>
-            <td class="costMoneyPerMonth"></td>
-            <td class="costMoney" id="adminTotal"></td>
-          </tr>
-          <tr id="depositBlock">
-            <td class="transLineDesc">Refundable Deposit</td>
-            <td class="costDuration"></td>
-            <td class="costMoneyPerMonth"></td>
-            <td class="costMoney" id="deposit"></td>
-          </tr>
-          <tr id="taxBlock">
-            <td class="transLineDesc">Tax</td>
-            <td class="costDuration"></td>
-            <td class="costMoneyPerMonth"></td>
-            <td class="costMoney" id="taxTotal"></td>
-          </tr>
+          <thead>
+            <th>Item</th>
+            <th>Paid Through</th>
+            <th>Monthly Rate</th>
+            <th>Total</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="transLineDesc">Rent</td>
+              <td class="costDuration" id="monthlyDuration"></td>
+              <td class="costMoneyPerMonth" id="monthlyPerMonth"></td>
+              <td class="costMoney" id="monthlyTotal"></td>
+            </tr>
+            <tr id="specialOfferBlock">
+              <td class="transLineDesc">Selected Offer</td>
+              <td class="costDuration"></td>
+              <td class="costMoneyPerMonth"></td>
+              <td class="costMoney" id="discountTotal"></td>
+            </tr>
+            <tr id="insuranceBlock">
+              <td class="transLineDesc">Property Protection</td>
+              <td class="costDuration" id="insuranceDuration"></td>
+              <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
+              <td class="costMoney" id="insuranceTotal"></td>
+            </tr>
+            <tr>
+              <td class="transLineDesc">Admin Fees</td>
+              <td class="costDuration"></td>
+              <td class="costMoneyPerMonth"></td>
+              <td class="costMoney" id="adminTotal"></td>
+            </tr>
+            <tr id="depositBlock">
+              <td class="transLineDesc">Refundable Deposit</td>
+              <td class="costDuration"></td>
+              <td class="costMoneyPerMonth"></td>
+              <td class="costMoney" id="deposit"></td>
+            </tr>
+            <tr id="taxBlock">
+              <td class="transLineDesc">Tax</td>
+              <td class="costDuration"></td>
+              <td class="costMoneyPerMonth"></td>
+              <td class="costMoney" id="taxTotal"></td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div style="clear:both;"></div>

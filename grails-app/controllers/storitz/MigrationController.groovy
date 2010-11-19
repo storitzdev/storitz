@@ -86,36 +86,43 @@ class MigrationController {
       // create the manager first
       // handle users
       def users = []
-      def manager = new User()
-      def notificationTypes = []
-      for (n in resp.manager.notificationTypes) {
-        def notificationType = NotificationType.get(n.notificationType)
-        notificationTypes.add(notificationType)
-      }
-      resp.manager.notificationTypes.clear()
-      bindData(manager, resp.manager)
-      manager.manager = User.findByUsername('admin')
-      manager.save(flush: true)
-      for (n in notificationTypes) {
-        UserNotificationType.create(manager, n)
-      }
-      UserRole.create(manager, Role.findByAuthority('ROLE_MANAGER'))
-      UserRole.create(manager, Role.findByAuthority('ROLE_USER'))
-      for (u in resp.users) {
-        def user = new User()
-        notificationTypes = []
-        for (n in u.notificationTypes) {
+
+      def manager = User.findByUsername(resp.manager.username)
+      if (!manager) {
+        manager = new User()
+        def notificationTypes = []
+        for (n in resp.manager.notificationTypes) {
           def notificationType = NotificationType.get(n.notificationType)
           notificationTypes.add(notificationType)
         }
-        u.notificationTypes.clear()
-        bindData(user, u)
-        user.save(flush: true)
+        resp.manager.notificationTypes.clear()
+        bindData(manager, resp.manager)
+        manager.manager = User.findByUsername('admin')
+        manager.save(flush: true)
         for (n in notificationTypes) {
-          UserNotificationType.create(user, n)
+          UserNotificationType.create(manager, n)
         }
-        UserRole.create(user, Role.findByAuthority('ROLE_USER'))
-        users.add(user)
+        UserRole.create(manager, Role.findByAuthority('ROLE_MANAGER'))
+        UserRole.create(manager, Role.findByAuthority('ROLE_USER'))
+      }
+      for (u in resp.users) {
+        def user = User.findByUsername(u.username)
+        if (!user) {
+          user = new User()
+          notificationTypes = []
+          for (n in u.notificationTypes) {
+            def notificationType = NotificationType.get(n.notificationType)
+            notificationTypes.add(notificationType)
+          }
+          u.notificationTypes.clear()
+          bindData(user, u)
+          user.save(flush: true)
+          for (n in notificationTypes) {
+            UserNotificationType.create(user, n)
+          }
+          UserRole.create(user, Role.findByAuthority('ROLE_USER'))
+          users.add(user)
+        }
       }
       for (u in users) {
         u.manager = manager
@@ -201,11 +208,35 @@ class MigrationController {
         site.bankAccount = bankAccount
         site.save(flush:true)
         // adjust times by our timezone
-        if (site.startWeekday) {
-          site.startWeekday = DateUtils.addHours(site.startWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        if (site.startMonday) {
+          site.startMonday = DateUtils.addHours(site.startMonday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
         }
-        if (site.endWeekday) {
-          site.endWeekday = DateUtils.addHours(site.endWeekday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        if (site.endMonday) {
+          site.endMonday = DateUtils.addHours(site.endMonday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startTuesday) {
+          site.startTuesday = DateUtils.addHours(site.startTuesday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endTuesday) {
+          site.endTuesday = DateUtils.addHours(site.endTuesday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startWednesday) {
+          site.startWednesday = DateUtils.addHours(site.startWednesday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endWednesday) {
+          site.endWednesday = DateUtils.addHours(site.endWednesday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startThursday) {
+          site.startThursday = DateUtils.addHours(site.startThursday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endThursday) {
+          site.endThursday = DateUtils.addHours(site.endThursday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startFriday) {
+          site.startFriday = DateUtils.addHours(site.startFriday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endFriday) {
+          site.endFriday = DateUtils.addHours(site.endFriday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
         }
         if (site.startSaturday) {
           site.startSaturday = DateUtils.addHours(site.startSaturday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
@@ -219,11 +250,41 @@ class MigrationController {
         if (site.endSunday) {
           site.endSunday = DateUtils.addHours(site.endSunday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
         }
-        if (site.startGate) {
-          site.startGate = DateUtils.addHours(site.startGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        if (site.startMondayGate) {
+          site.startMondayGate = DateUtils.addHours(site.startMondayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
         }
-        if (site.endGate) {
-          site.endGate = DateUtils.addHours(site.endGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        if (site.endMondayGate) {
+          site.endMondayGate = DateUtils.addHours(site.endMondayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startTuesdayGate) {
+          site.startTuesdayGate = DateUtils.addHours(site.startTuesdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endTuesdayGate) {
+          site.endTuesdayGate = DateUtils.addHours(site.endTuesdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startWednesdayGate) {
+          site.startWednesdayGate = DateUtils.addHours(site.startWednesdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endWednesdayGate) {
+          site.endWednesdayGate = DateUtils.addHours(site.endWednesdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startThursdayGate) {
+          site.startThursdayGate = DateUtils.addHours(site.startThursdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endThursdayGate) {
+          site.endThursdayGate = DateUtils.addHours(site.endThursdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startFridayGate) {
+          site.startFridayGate = DateUtils.addHours(site.startFridayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endFridayGate) {
+          site.endFridayGate = DateUtils.addHours(site.endFridayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.startSaturdayGate) {
+          site.startSaturdayGate = DateUtils.addHours(site.startSaturdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
+        }
+        if (site.endSaturdayGate) {
+          site.endSaturdayGate = DateUtils.addHours(site.endSaturdayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
         }
         if (site.startSundayGate) {
           site.startSundayGate = DateUtils.addHours(site.startSundayGate, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)

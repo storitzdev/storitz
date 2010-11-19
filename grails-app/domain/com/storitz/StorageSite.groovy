@@ -181,6 +181,8 @@ class StorageSite {
     Long lastUpdate
     Boolean disabled = false
 
+    Boolean netCommission = true
+
   // bank account
     BankAccount bankAccount
 

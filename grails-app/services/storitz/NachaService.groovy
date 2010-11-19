@@ -63,7 +63,7 @@ class NachaService {
           def routeCode = bankInfo.routeCode.substring(0,8) as Long
           def routeChkSum = bankInfo.routeCode.substring(8)
           routeNumberSum += routeCode
-          def debit = (trans.moveInCost - (trans.commission ? trans.commission : 0))
+          def debit = (trans.moveInCost - (trans.site.netCommission && trans.commission ? trans.commission : 0))
           if (debit > 0) {
             debitSum += debit
             itemCount++
@@ -90,7 +90,7 @@ class NachaService {
       // assuming all went well, mark the transactions
       for (trans in transactions) {
         if (trans.moveInCost) {
-          def debit = (trans.moveInCost - (trans.commission ? trans.commission : 0))
+          def debit = (trans.moveInCost - (trans.site.netCommission && trans.commission ? trans.commission : 0))
           if (debit > 0) {
             nacha.addToTransactions(trans)
             trans.achTransferDate = now

@@ -1264,12 +1264,11 @@ p.descriptionText {
 
 .costDuration {
     text-align: center;
-    width: 40px;
+    width: 80px;
 }
 
 .transLineDesc {
     width: 120px;
-    text-align:right;
 }
 
 #featuresList ul {

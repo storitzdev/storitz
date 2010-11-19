@@ -647,6 +647,7 @@ class SiteLinkService {
     site.isManagerOnsite = false
     site.hasElevator = false
     site.disabled = false
+    site.netCommission = false
 
     site.openMonday =  site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
     site.openSaturday = !(tab.bClosedSaturday.text().toLowerCase() == 'true')
@@ -1195,13 +1196,16 @@ class SiteLinkService {
 
     def subTotal
     def discountRate
+    def durationDays
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
-      durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+      durationDays = (lastDayInMonth - moveInDay) + 1
+      durationMonths -= (1 - (durationDays)/lastDayInMonth)
       subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     } else {
       subTotal = (rate*durationMonths) + (premium*durationMonths)
       discountRate = rate
+      durationDays = 0
     }
 
     if (promo) {
@@ -1232,13 +1236,15 @@ class SiteLinkService {
     def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
-    ret["durationMonths"] = durationMonths
+    ret["duration"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
     ret["tax"] = tax
     ret["deposit"] = deposit
     ret["moveInTotal"] = moveInTotal
     ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
+    ret["durationMonths"] =  (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
+    ret["durationDays"] = durationDays
 
     return ret
   }
