@@ -104,14 +104,16 @@
     $('#errorMessage').hide();
 
     $.validator.addMethod("state", function(value, element) {
-      if ($('#country').val() == 'US') {
+      var contactType =  $('input[name="billingAddress"]:checked').val();
+      if (contactType == 'new' && $('#country').val() == 'US') {
         return value != 'NONE';
       }
       return true;
     }, "Missing state");
 
     $.validator.addMethod("province", function(value, element) {
-      if ($('#country').val() != 'US') {
+      var contactType =  $('input[name="billingAddress"]:checked').val();
+      if (contactType == 'new' && $('#country').val() != 'US') {
         return value != '';
       }
       return true;
@@ -120,6 +122,14 @@
     $.validator.addMethod("ccnumber", function(value, element) {
       return isValidCardNumber(value)
     }, "Invalid credit card number");
+
+    $.validator.addMethod("contactRequired", function(value, element) {
+      var contactType =  $('input[name="billingAddress"]:checked').val();
+      if (contactType == 'new') {
+        return value && value.length > 0
+      }
+      return true;
+    }, "This field is required");
 
     var validator = $('#paymentTransaction')
       .validate({
@@ -334,10 +344,10 @@
                         </div>
                         <div class="checkout_fields">
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactSecondary.firstName', 'errors')}">
-                              <g:textField name="firstName" id="firstName" class="required" style="width: 180px;" value="${rentalTransactionInstance?.billingAddress?.firstName}" />
+                              <g:textField name="firstName" id="firstName" class="contactRequired" style="width: 180px;" value="${rentalTransactionInstance?.billingAddress?.firstName}" />
                           </div>
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'lastName', 'errors')}">
-                            <g:textField name="lastName" id="lastName" class="required" style="width: 180px;" value="${rentalTransactionInstance?.billingAddress?.lastName}" />
+                            <g:textField name="lastName" id="lastName" class="contactRequired" style="width: 180px;" value="${rentalTransactionInstance?.billingAddress?.lastName}" />
                           </div>
                           <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'suffixName', 'errors')}">
                             <g:textField name="suffixName" id="suffixName" style="width: 80px;" value="${rentalTransactionInstance?.billingAddress?.suffixName}" />
@@ -361,7 +371,7 @@
                         </div>
                         <div class="checkout_fields">
                           <div style="width:400px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'address1', 'errors')}">
-                              <g:textField name="address1" id="address1" class="required" style="width:380px;" value="${rentalTransactionInstance?.billingAddress?.address1}" />
+                              <g:textField name="address1" id="address1" class="contactRequired" style="width:380px;" value="${rentalTransactionInstance?.billingAddress?.address1}" />
                           </div>
                           <div style="clear:both;"></div>
                         </div>
@@ -385,7 +395,7 @@
                         </div>
                         <div class="checkout_fields">
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'city', 'errors')}">
-                              <g:textField name="city" id="city" class="required" style="width:180px;" value="${rentalTransactionInstance?.billingAddress?.city}" />
+                              <g:textField name="city" id="city" class="contactRequired" style="width:180px;" value="${rentalTransactionInstance?.billingAddress?.city}" />
                           </div>
                           <div id="secondaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'state', 'errors')}">
                             <g:select name="state" id="state" class="state" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransactionInstance?.billingAddress?.state}" optionValue="value"/>
@@ -394,7 +404,7 @@
                             <g:textField name="province" id="province" class="province" style="width:100px;" value="${rentalTransactionInstance?.billingAddress?.province}" />
                           </div>
                           <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'zipcode', 'errors')}">
-                              <g:textField name="zipcode" id="zipcode" class="required zipcode" style="width:80px;" value="${rentalTransactionInstance?.billingAddress?.zipcode}" />
+                              <g:textField name="zipcode" id="zipcode" class="contactRequired zipcode" style="width:80px;" value="${rentalTransactionInstance?.billingAddress?.zipcode}" />
                           </div>
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'country', 'errors')}">
                             <g:select name="country" id="country" style="width:180px;" class="country" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.billingAddress?.country?.key}" optionKey="key" optionValue="display"/>

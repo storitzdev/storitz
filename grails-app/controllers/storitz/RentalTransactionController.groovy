@@ -186,7 +186,7 @@ class RentalTransactionController {
         }
         if (!found) {
           flash.message = "Unit already reserved - refresh and try again"
-          redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
+          redirect(controller:"storageSite", action: "detail", params:[rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
           return
         }
         moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
