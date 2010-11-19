@@ -12,15 +12,36 @@
   var ajaxServerPollTimer;
   var ajaxFormUpdateTimer;
   var ajaxFormNewValues;
-  var ajaxFormOldValues = new Hash().toJSON();
+  var ajaxFormOldValues;
+
+  <g:render template="/callCenterPolling_js"/>
 
   function contactChange() {
-    $('billingAddress').observe('click', function() {
-      var contactType =  $('billingAddress').select('input:checked[type=radio]').pluck('value');
+    $('#billingAddress').click(function(event) {
+      var contactType =  $('input[name="billingAddress"]:checked').val();
       if (contactType == 'new') {
-        $('newContact').show();
+        $('#newContact').show();
       } else {
-        $('newContact').hide();
+        $('#newContact').hide();
+      }
+    });
+  }
+
+  function primaryCountryClick() {
+    $('.country').change(function() {
+      var country = $('#country').val();
+      if (country == "US") {
+        $('#secondaryProvinceField').hide();
+        $('#secondaryStateField').show();
+        $('#secondaryProvinceLabel').hide();
+        $('#secondaryStateLabel').show();
+        $("input.zipcode").mask('99999');
+      } else {
+        $('#secondaryProvinceField').show();
+        $('#secondaryStateField').hide();
+        $('#secondaryProvinceLabel').show();
+        $('#secondaryStateLabel').hide();
+        $("input.zipcode").unmask();
       }
     });
   }
@@ -28,9 +49,7 @@
   function validateForm() {
     var valid = true;
     valid &= Validation.validate('cc_number');
-    <sec:ifNotGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
     valid &= Validation.validate('cc_cvv2');
-    </sec:ifNotGranted>
     var contactType =  $('billingAddress').select('input:checked[type=radio]').pluck('value');
     if (contactType == 'new') {
       valid &= Validation.validate('firstName');
@@ -51,75 +70,98 @@
       rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
   }
 
+  function isValidCardNumber (strNum) {
+     var nCheck = 0;
+     var nDigit = 0;
+     var bEven = false;
+
+     for (n = strNum.length - 1; n >= 0; n--) {
+        var cDigit = strNum.charAt (n);
+        if (isDigit (cDigit)) {
+           var nDigit = parseInt(cDigit, 10);
+           if (bEven) {
+              if ((nDigit *= 2) > 9)
+                 nDigit -= 9;
+           }
+           nCheck += nDigit;
+           bEven = ! bEven;
+        } else if (cDigit != ' ' && cDigit != '.' && cDigit != '-') {
+           return false;
+        }
+     }
+     return (nCheck % 10) == 0;
+  }
+
+  function isDigit (c) {
+     var strAllowed = "1234567890";
+     return (strAllowed.indexOf (c) != -1);
+  }
+
   function createMap() {}
 
-  function ajaxServerPoll() {
-    ajaxServerPollTimer = setTimeout("doAjaxServerPoll()", 5000)
-  }
-
-  function ajaxFormUpdate() {
-    ajaxFormUpdateTimer = setTimeout("doAjaxFormUpdate()", 5000)
-  }
-
-  function doAjaxFormUpdate() {
-    var ajaxFormNewValues = $('paymentTransaction');
-
-    if (ajaxFormNewValues != undefined) {
-      ajaxFormNewValues = ajaxFormNewValues.serialize(true);
-      var jsonValues = Object.toJSON(ajaxFormNewValues);
-      var valuesUnchanged = ajaxFormOldValues == jsonValues;
-      ajaxFormOldValues = jsonValues;
-
-      if (ajaxFormDirty) {
-        if (valuesUnchanged) {
-          new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}",
-          {
-            method:'post',
-            parameters: ajaxFormNewValues,
-            onComplete:function(transport) {
-              ajaxFormDirty = false;
-              ajaxFormUpdate();
-            },
-            onFailure:function(transport) {
-              alert("Something went wrong " + transport.responseText);
-            }
-          });
-          return;
-        }
-      } else {
-        if (!valuesUnchanged) {
-          ajaxFormDirty = true;
-        }
-      }
-    }
-    ajaxFormUpdate();
-  }
-
-  function doAjaxServerPoll() {
-    new Ajax.Request("${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}",
-    {
-      method:'get',
-      onSuccess:function(transport) {
-        $('helpDeskStatus').update(transport.responseText);
-      },
-      onComplete:function() {
-        ajaxServerPoll();
-      }
-    });
-  }
-
   function setupForm() {
-    Event.observe('paymentTransaction', 'submit', function(event) {
-      if (!validateForm()) {
-        Event.stop(event);
+    $("input.zipcode").mask('99999');
+    $('#errorMessage').hide();
+
+    $.validator.addMethod("state", function(value, element) {
+      if ($('#country').val() == 'US') {
+        return value != 'NONE';
       }
+      return true;
+    }, "Missing state");
+
+    $.validator.addMethod("province", function(value, element) {
+      if ($('#country').val() != 'US') {
+        return value != '';
+      }
+      return true;
+    }, "Missing state or province");
+
+    $.validator.addMethod("ccnumber", function(value, element) {
+      return isValidCardNumber(value)
+    }, "Invalid credit card number");
+
+    var validator = $('#paymentTransaction')
+      .validate({
+        rules: {
+        },
+        messages: {
+          "firstName": "Missing first name",
+          "lastName": "Missing last name",
+          "address1": "Missing address",
+          "city": "Missing city",
+          "country": "Please select your country",
+          "zipcode":"Missing postal code",
+          "cc_number": {
+            required: "Missing credit card number",
+            creditcard: "Incorrect credit card number"
+          },
+          cc_cvv2: {
+            required: "Missing credit card security code",
+            digits: "Credit card security code must be 3 or 4 digits"
+          }
+        },
+        errorContainer: $("#errorMessage"),
+        errorLabelContainer: $("#errorList"),
+        errorClass: "validation-failed",
+        wrapper: "li",
+        ignore: ".ignore",
+        invalidHandler: function(form, validator) {
+          $('#errorMessage').show();
+        },
+        showErrors: function(errorMap, errorList) {
+          $("#errorInfo").html("Please correct the " + this.numberOfInvalids() + " issue" + (this.numberOfInvalids() > 1 ? 's' : '') + " below and continue:");
+		  this.defaultShowErrors();
+        }
     });
-    
+
   }
 
-  Event.observe(window, 'load', function() {
+  $(document).ready(function() {
+
     contactChange();
     setupForm();
+    primaryCountryClick();
     ajaxFormUpdate();
     ajaxServerPoll();
   });
@@ -263,6 +305,12 @@
                 <div class="price_options checkout_header white">
                   Payment Info
                 </div>
+
+                <div id="errorMessage" class="formErrors">
+                  <div id="errorInfo" class="errorInfo"></div>
+                  <div id="errorList" class="errorList"></div>
+                </div>
+
                 <div class="formInstructions">
                   All transactions are subject to credit card approval and billing address verification
                 </div>
@@ -340,16 +388,16 @@
                               <g:textField name="city" id="city" class="required" style="width:180px;" value="${rentalTransactionInstance?.billingAddress?.city}" />
                           </div>
                           <div id="secondaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'state', 'errors')}">
-                            <g:select name="state" id="state" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransactionInstance?.billingAddress?.state}" optionValue="value"/>
+                            <g:select name="state" id="state" class="state" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransactionInstance?.billingAddress?.state}" optionValue="value"/>
                           </div>
-                          <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'province', 'errors')}" style="width: 200px;display: none;">
-                            <g:textField name="province" id="province" class="required" style="width:180px;" value="${rentalTransactionInstance?.billingAddress?.province}" />
+                          <div id="secondaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'province', 'errors')}" style="width: 120px;display: none;">
+                            <g:textField name="province" id="province" class="province" style="width:100px;" value="${rentalTransactionInstance?.billingAddress?.province}" />
                           </div>
                           <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'zipcode', 'errors')}">
-                              <g:textField name="zipcode" id="zipcode" class="required validate-zipcode" style="width:80px;" value="${rentalTransactionInstance?.billingAddress?.zipcode}" />
+                              <g:textField name="zipcode" id="zipcode" class="required zipcode" style="width:80px;" value="${rentalTransactionInstance?.billingAddress?.zipcode}" />
                           </div>
                           <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'country', 'errors')}">
-                            <g:select name="country" id="country" style="width:180px;" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.billingAddress?.country?.key}" optionKey="key" optionValue="display"/>
+                            <g:select name="country" id="country" style="width:180px;" class="country" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.billingAddress?.country?.key}" optionKey="key" optionValue="display"/>
                           </div>
                           <div style="clear:both;"></div>
                         </div>
@@ -360,7 +408,7 @@
                           <div style="width:100px;" id="secondaryStateLabel" class="checkout_name">
                             <label for="state">State</label>
                           </div>
-                          <div style="width: 200px;display: none;" id="secondaryProvinceLabel" class="checkout_name">
+                          <div style="width: 120px;display: none;" id="secondaryProvinceLabel" class="checkout_name">
                             <label for="province">Province</label>
                           </div>
                           <div style="width:100px;" class="checkout_name">
@@ -406,7 +454,7 @@
                     </div>
                     <div class="checkout_fields">
                       <div style="width:200px;" class="checkout_value">
-                          <g:textField name="cc_number" id="cc_number" class="required validate-credit-card" style="width:180px;" value="${cc_number}" />
+                          <g:textField name="cc_number" id="cc_number" class="required ccnumber" style="width:180px;" value="${cc_number}" />
                       </div>
                       <div style="width:50px;" class="checkout_value">
                         <g:select name="cc_month" from="${1..12}" value="${cc_month}"/>
@@ -416,7 +464,7 @@
                       </div>
                       <sec:ifNotGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
                         <div style="width:80px;" class="checkout_value">
-                          <g:textField name="cc_cvv2" id="cc_cvv2" class="required validate-cvv2" style="width:80px;" value="${cc_cvv2}" />
+                          <g:textField name="cc_cvv2" id="cc_cvv2" class="required digits" style="width:80px;" value="${cc_cvv2}" />
                         </div>
                       </sec:ifNotGranted>
                     </div>

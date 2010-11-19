@@ -3,6 +3,6 @@
   <meta name="ROBOTS" content="FOLLOW"/>
   <p:favicon src="images/favicon" />
 
-  <p:css name='header_bundled'/>
-  <p:javascript src='header_all'/>
+  <p:css name='jquery_bundled'/>
+  <p:javascript src='jquery_all'/>
   
