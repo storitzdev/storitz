@@ -19,7 +19,7 @@ class StorageSiteController {
   def springSecurityService
   def imageService
 
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST", addCaptionAndTag: "POST"]
 
   def index = {
     redirect(action: "list", params: params)
@@ -214,7 +214,20 @@ class StorageSiteController {
           def bullet = new Bullet()
           bullet.bullet = params[param]
           storageSiteInstance.amenityItems.add(bullet);
+        } else if (param.startsWith('caption_')) {
+          def imgId = param.substring(8);
+          def siteImage = SiteImage.get(imgId as Long)
+          if (siteImage) {
+            siteImage.caption = params[param]
+          }
+        } else if (param.startsWith('tags_')) {
+          def imgId = param.substring(5);
+          def siteImage = SiteImage.get(imgId as Long)
+          if (siteImage) {
+            siteImage.tags = params[param]
+          }
         }
+
       }
 
       // sanitize description

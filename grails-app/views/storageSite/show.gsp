@@ -490,7 +490,12 @@
             <ul>
               <g:each in="${storageSiteInstance?.images}" var="i">
                   <g:if test="${!i.isLogo}">
-                    <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/></li>
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                      <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/> Caption: ${i.caption}, Tags: ${i.tags}</li>
+                    </sec:ifAnyGranted>
+                    <sec:ifNotGranted roles="ROLE_ADMIN">
+                      <li><img src="${resource(file:i.thumbnail())}" alt="image ${i}"/></li>
+                    </sec:ifNotGranted>
                   </g:if>
               </g:each>
             </ul>

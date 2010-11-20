@@ -132,6 +132,21 @@
       });
     }
 
+    function addCaption(form, imgId) {
+      var data = form.serialize();
+      $.ajax(
+      {
+        url: "${createLink(controller:'storageSite', action:'addCaptionAndTag')}",
+        method:'post',
+        dataType: 'json',
+        data: data,
+        success:function(ret) {
+          alert('submitted');
+        }
+      });
+      return false;
+    }
+
     function deleteContact(contactId) {
       $.ajax(
       {
@@ -1155,7 +1170,7 @@
           <div id="siteImages" class="checkout_fields">
             <g:each in="${storageSiteInstance?.images}" var="i">
               <g:if test="${!i.isLogo}">
-                <div id="image_${i.id}" style="width:250px;" class="checkout_value">
+                <div id="image_${i.id}" style="width:300px;" class="checkout_value">
                   <div class="left" style="margin-right: 10px;">
                     <img src="${resource(file: i.thumbnail())}" alt="image ${i.id}"/>
                   </div>
@@ -1172,6 +1187,13 @@
                       </g:else>
                     </div>
                   </div>
+                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                  <div style="clear:both;">
+                      <div style="clear:both;"><div class="left" style="width:60px;">Caption:</div><div class="left"><input name="caption_${i.id}" style="width: 200px;" value="${i.caption}"></div></div>
+                      <div style="clear:both;"><div class="left" style="width:60px;">Tags:</div><div class="left"><input name="tags_${i.id}" style="width: 200px;" value="${i.tags}"></div></div>
+                      <div id="captionResult_${i.id}" style="clear:both;"></div>
+                  </div>
+                </sec:ifAnyGranted>
                 </div>
               </g:if>
             </g:each>
