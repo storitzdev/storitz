@@ -302,10 +302,11 @@
                     .append($('<div>', { 'class':'stRentMe' })
                       .append($('<a>', { href: siteLink(s)  + (s.promoId ? '&promoId=' + s.promoId : '') })
                         .append($('<img>', { src: ${p.imageLink(src:'rent-me-button.png')}, width:87, height: 31, border: 0 } ))))
-                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'));
+                    .append($('<div>', { 'class':'stPriceSub textCenter monthly'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'));
 
           resultTable.fnAddData([
             priceCol.html(),
+            (s.monthly ? s.monthly.toFixed(2) : 10000),
             distanceCol.html(),
             logoCol.html(),
             facilityCol.html(),
@@ -337,6 +338,7 @@
           resultTable = $('#stresults').dataTable({
             "aoColumns": [
 			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft" },
+              { "sType": "numeric", "bVisible":false },
               { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter" },
               { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert" },
 			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert" },
@@ -347,7 +349,13 @@
             "bInfo":false,
             "bJQueryUI":false,
             "bPaginate":false,
-            "bSort":false
+            "bSort":false,
+            "oLanguage": {
+              "sZeroRecords": "Your search did not find any results.  Please change your unit size or resize the map to find new results."
+            },
+            "oClasses": {
+              "sRowEmpty": "stNoResults"
+            }
           });
           $('table#stresults thead').children().remove();
 
@@ -446,9 +454,40 @@
               $('#address').val('');
             }
           });
-          $('#size').change(function(event) {
+          $('select#size').change(function(event) {
             showAddress(getAddress(), $('#size').val(), getDate());
           });          
+          $('select#sbUnitsize').change(function(event) {
+            showAddress(getAddress(), $('select#sbUnitsize').val(), getDate());
+          });
+          $('select#sbSortSelect').change(function(event) {
+             switch($(this).val()) {
+               case '0':
+                 resultTable.fnSort([[2, 'asc']]);
+                 break;
+               case '1':
+                 resultTable.fnSort([[2, 'desc']]);
+                 break;
+               case '2':
+                 resultTable.fnSort([[0, 'asc']]);
+                 break;
+               case '3':
+                 resultTable.fnSort([[0, 'desc']]);
+                 break;
+               case '4':
+                 resultTable.fnSort([[1, 'asc']]);
+                 break;
+               case '5':
+                 resultTable.fnSort([[1, 'desc']]);
+                 break;
+               case '6':
+                 resultTable.fnSort([[4, 'asc']]);
+                 break;
+               case '7':
+                 resultTable.fnSort([[4, 'desc']]);
+                 break;
+             }
+          });
         }
 
         function setupAnalytics() {
@@ -525,23 +564,23 @@
 
       function setupTable() {
         /* Create an array with the values of all the input boxes in a column */
-        $.fn.dataTableExt.afnSortData['distance'] = function  ( oSettings, iColumn ) {
+        $.fn.dataTableExt.afnSortData['distance'] = function  ( oSettings, iColumn, vColumn ) {
 	      var aData = [];
-	      $( 'td:eq('+iColumn+') div.stDistance', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+	      $( 'td:eq('+vColumn+') div.stDistance', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
 		    aData.push( $(this).text() );
 	      } );
 	      return aData;
         }
-        $.fn.dataTableExt.afnSortData['facility'] = function  ( oSettings, iColumn ) {
+        $.fn.dataTableExt.afnSortData['facility'] = function  ( oSettings, iColumn, vColumn ) {
           var aData = [];
-          $( 'td:eq('+iColumn+') div.stTitle', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+          $( 'td:eq('+vColumn+') div.stTitle', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
             aData.push( $(this).text() );
           } );
           return aData;
         }
-        $.fn.dataTableExt.afnSortData['moveincost'] = function  ( oSettings, iColumn ) {
+        $.fn.dataTableExt.afnSortData['moveincost'] = function  ( oSettings, iColumn, vColumn ) {
           var aData = [];
-          $( 'td:eq('+iColumn+') div.stPrice', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+          $( 'td:eq('+vColumn+') div.stPrice', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
             aData.push( $(this).text().substring(1) );
           } );
           return aData;
@@ -687,7 +726,7 @@
             <div class="sbResults">Search Results</div>
             <div class="sbText">Sort By:</div>
             <div class="sbSortSelect">
-              <select id="sbSortSelect" name="sbSortSelect" class="white">
+              <select id="sbSortSelect" name="sbSortSelect">
                 <option value="0" selected="true">Distance (shortest)</option>
                 <option value="1">Distance (farthest)</option>
                 <option value="2">Move In Cost (least expensive)</option>
@@ -723,8 +762,9 @@
                           <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
                         </g:link>
                       </div>
-                      <div class="stPriceSub textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
+                      <div class="stPriceSub textCenter monthly"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
                     </td>
+                    <td><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" format="0.00"/></td>
                     <td class="curvedCenter textCenter">
                       <div class="left" style="margin-left:10px;">
                         <div id="map_icon${site.id}" class="map_icon">
