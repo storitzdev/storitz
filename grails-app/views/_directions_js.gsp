@@ -90,7 +90,7 @@ function drawDirections(response, status) {
                 .append($('<td>', { style:"width: 75px; padding-right: 10px;text-align:right;"}).html(distanceText))
                 .append($('<td>', { style:"width: 75px; padding-right: 15px;text-align:right;"}).html(durationText));
 
-        $('#directionsSteps').html(elem);
+        $('#directionsSteps').append(elem);
         for (k=0; k < nextSegment.length; k++) {
           polyline.getPath().push(nextSegment[k]);
           bounds.extend(nextSegment[k]);
@@ -151,6 +151,7 @@ function getDirections() {
 
   $('#srcAddr').keypress(function(event) {
     if (event.keyCode == 13) {
+      event.preventDefault();
       var request = {
               origin:$('#srcAddr').val(),
               destination:destLatLng,
