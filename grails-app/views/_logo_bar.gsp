@@ -18,11 +18,26 @@
     </div>
     <div  style="margin-top: 15px;">
       <div class="left" style="margin-top: 5px;">
-        <g:link controller="home" action="index" class="navMenu">Home</g:link>
-        <g:link controller="static" action="faq" target="_blank" class="navMenu">Self Storage FAQs</g:link>
-        <a href="http://blog.storitz.com" target="_blank" class="navMenu">Blog</a>
+        <g:if test="${params.controller =='home'}">
+          <g:link controller="home" action="index" class="navHighlight">Home</g:link>
+        </g:if>
+        <g:else>
+          <g:link controller="home" action="index" class="navMenu">Home</g:link>
+        </g:else>
+        <g:if test="${params.controller =='static' && params.action == 'faq'}">
+          <g:link controller="static" action="faq" class="navHighlight">Self Storage FAQs</g:link>
+        </g:if>
+        <g:else>
+          <g:link controller="static" action="faq" class="navMenu">Self Storage FAQs</g:link>
+        </g:else>
+        <a href="http://blog.storitz.com" class="navMenu">Blog</a>
         <g:link controller="static" action="help" class="navMenu">Storitz Help</g:link>
-        <g:link controller="static" action="operatorsignup" target="_blank" class="navMenu">Add Your Facility</g:link> 
+        <g:if test="${params.controller =='static' && params.action == 'operatorsignup'}">
+          <g:link controller="static" action="operatorsignup" class="navHighlight">Add Your Facility</g:link>
+        </g:if>
+        <g:else>
+          <g:link controller="static" action="operatorsignup" class="navMenu">Add Your Facility</g:link>
+        </g:else>
       </div>
       <div class="right">
         <a href="http://twitter.com/Storitzdotcom" target="_blank"><storitz:image style="border: none;" src="twitter-icon-page.gif" width="20" height="20" alt="Storitz on Twitter"/></a>
