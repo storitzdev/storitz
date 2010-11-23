@@ -309,7 +309,7 @@
             distanceCol.html(),
             logoCol.html(),
             facilityCol.html(),
-            offersCol.html(),
+            offersCol.html()
           ]);
         }
 
@@ -333,6 +333,23 @@
           google.maps.event.addListener(map, 'dragstart', dragStart);
           google.maps.event.addListener(map, 'dragend', dragEnd);
           geocoder = new google.maps.Geocoder();
+
+          resultTable = $('#stresults').dataTable({
+            "aoColumns": [
+			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft" },
+              { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter" },
+              { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert" },
+			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert" },
+              { "bSortable":false, "sWidth":"150px", "sType":"html", "sClass":"curvedRight stVert" }
+		    ],
+            "bAutoWidth":false,
+            "bFilter":false,
+            "bInfo":false,
+            "bJQueryUI":false,
+            "bPaginate":false,
+            "bSort":false
+          });
+          $('table#stresults thead').children().remove();
 
           var site;
           <g:each var="site" in="${sites}" status="c">
@@ -363,23 +380,6 @@
           setupIdle();
           $('#mapStatus').html(statusText).fadeIn();
 
-          resultTable = $('#stresults').dataTable({
-            "aoColumns": [
-			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft" },
-              { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter" },
-              { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert" },
-			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert" },
-              { "bSortable":false, "sWidth":"150px", "sType":"html", "sClass":"curvedRight stVert" },
-		    ],
-            "bAutoWidth":false,
-            "bFilter":false,
-            "bInfo":false,
-            "bJQueryUI":false,
-            "bPaginate":false,
-            "bSort":false
-          });
-          $('table#stresults thead').children().remove();
-          
         }
 
         function showAddress(address, size, date) {
@@ -574,7 +574,7 @@
 
       function setupResults() {
         $('select#sbSortSelect').selectmenu({style:'dropdown', menuWidth:250});
-        $('select#sbUnitsize').selectmenu({style:'dropdown', width:130});
+        $('select#sbUnitsize').selectmenu({style:'dropdown', width:125});
       }
 
       var _gaq = _gaq || [];
@@ -708,6 +708,8 @@
             <g:if test="${sites.size() > 0}">
               <table id="stresults">
                 <thead>
+                  <tr>
+                  </tr>
                 </thead>
                 <tbody>
                 <g:each var="site" in="${sites}" status="c">
