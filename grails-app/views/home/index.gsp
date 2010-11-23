@@ -616,7 +616,7 @@
       }
 
       function setupResults() {
-        $('select#sbSortSelect').selectmenu({style:'dropdown', menuWidth:250});
+        $('select#sbSortSelect').selectmenu({style:'dropdown', width: 210, menuWidth:250});
         $('select#sbUnitsize').selectmenu({style:'dropdown', width:125});
       }
 

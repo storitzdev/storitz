@@ -436,23 +436,29 @@ div.sbText {
 
 div.sbSortSelect {
     float: left;
-    width: 170px;
+    width: 195px;
     color: white;
-    line-height: 16px;
-    margin-top: 2px;
+    line-height: 14px;
+    margin-top: 4px;
+}
+
+a.ui-selectmenu {
+    color: white;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 div.sbUnitSelect {
     float: left;
     width: 100px;
     color: white;
-    line-height: 16px;
-    margin-top: 2px;
+    line-height: 14px;
+    margin-top: 4px;
 }
 
 div.sbSpacer {
     float: left;
-    width: 80px;
+    width: 40px;
 }
 
 #stresults_div {
