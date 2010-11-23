@@ -100,26 +100,17 @@ class STMapController {
       def row = 0
       for (site in results) {
         row++;
-        sw << "{ \"index\":${row}, \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\", \"logo\":\"${site.logo ? resource(file:site.logo.src()) : ""}\", \"specialOffers\":["
-        site.specialOffers().eachWithIndex{ offer, j ->
-          sw << "{\"promoName\":\"${offer.promoName}\" }"
-          if (j < site.specialOffers().size() - 1) {
-            sw << ","
-          }
-        }
-        sw << "], \"featuredOffers\":["
-          site.featuredOffers().eachWithIndex{ offer, j ->
-            sw << "{\"promoName\":\"${offer.promoName}\" }"
-            if (j < site.featuredOffers().size() - 1) {
-              sw << ","
-            }
-        }
+        sw << "{ \"index\":${row}, \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\", \"logo\":\"${site.logo ? resource(file:site.logo.src()) : ""}\", "
 
         def bestUnit
         def unitSiz
         def monthly
         def moveInCost = 100000
         def promoId
+        def promoName
+        def paidThruDate
+        def sizeDescription
+        def unitType
 
         if (unitSize) {
           bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
@@ -128,23 +119,31 @@ class STMapController {
         }
         if (bestUnit) {
           if (site.featuredOffers().size() == 0) {
-            def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
+            def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
             monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
+            unitType = bestUnit?.unitType.display
+            sizeDescription = bestUnit?.unitsize.description
             promoId = null
-            moveInCost = cost
+            promoName = null
+            moveInCost = totals['moveInTotal']
+            paidThruDate = totals['paidThruDate']
 
           } else {
             for (promo in site.featuredOffers()) {
-              def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
-              if (moveInCost > cost) {
+              def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+              if (moveInCost > totals['moveInCost']) {
                 monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
+                unitType = bestUnit?.unitType.display
+                sizeDescription = bestUnit?.unitsize.description
                 promoId = promo.id
-                moveInCost = cost
+                promoName = promo.promoName
+                moveInCost = totals['moveInTotal']
+                paidThruDate = totals['paidThruDate']
               }
             }
           }
         }
-        sw << "], \"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId} }"
+        sw << "\"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId}, \"promoName\":\"${promoName}\", \"paidThruDate\":\"${paidThruDate}\", \"unitType\":\"${unitType}\", \"sizeDescription\":\"${sizeDescription}\" }"
 
         if (row < results.size() && row < 20) {
           sw << ","

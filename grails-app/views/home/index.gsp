@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
     <head>
       <meta name="Description" content="Storitz Self-Storage search results in ${city}, ${state} ${zip ? 'postal code:' + zip : zip}. Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
+      <META name="y_key" content="b6e5ae8512caefa9" />
       <g:render template="/header_home" />
       <p:dependantJavascript >
       <script type="text/javascript">
@@ -145,6 +146,8 @@
         }
 
         function drawMarkers() {
+          $('#mapSpinner').fadeIn();
+
           $.ajax({
             url: "${createLink(controller:'STMap', action:'mapresults')}",
             method:'get',
@@ -172,7 +175,7 @@
               } else {
                 statusText = 'Your search found no results';
               }
-              $('#mapStatus').html(statusText).fadeIn().idle(2500).fadeOut('slow');
+              $('#mapStatus').html(statusText).effect("highlight", {}, 1000);
 
               resultTable.fnClearTable();
 
@@ -186,6 +189,7 @@
                   createMarker(s);
                   createTableRow(s);
               });
+              $('table#stresults thead').children().remove();
 
               setupMap();
             },
@@ -193,6 +197,7 @@
               alert("Something went wrong " + ret);
             }
           });
+          $('#mapSpinner').idle(500).fadeOut('slow')
         }
 
         function createMarker(s) {
@@ -208,15 +213,27 @@
           google.maps.event.addListener(s.marker, 'click', function() {
             markerClick(s);
           });
+          google.maps.event.addListener(s.marker, 'mouseover', function() {
+            var foundRow = $(resultTable.fnGetNodes(s.index - 1));
+            if (foundRow) {
+              foundRow.addClass('highlightRow');
+            }
+          });
+          google.maps.event.addListener(s.marker, 'mouseout', function() {
+            var foundRow = $(resultTable.fnGetNodes(s.index - 1));
+            if (foundRow) {
+              foundRow.removeClass('highlightRow');
+            }
+          });
         }
 
         function createTableRow(s) {
 
-          var logo
+          var logoCol
           if (s.logo.toString().length > 0) {
-            logo = $('<div>', { 'class': 'left' } ).append($('<img>', { src: s.logo, width:100, height:40, border:0, alt: s.title + ' Logo'}));
+            logoCol = $('<div>', { 'class': 'left' } ).append($('<img>', { src: s.logo, width:100, height:40, border:0, alt: s.title + ' Logo'}));
           } else {
-            logo = $('<div>', { 'class': 'left' } )
+            logoCol = $('<div>', { 'class': 'left' } )
           }
 
           var features = $('<div>');
@@ -250,54 +267,49 @@
 
           var offersCol = $('<div>');
 
-          if (s.featuredOffers.length > 0) {
-            $.each(s.featuredOffers, function(i, promo) {
-              offersCol.append($('<div>', { 'class':'left'})
-                      .append($('<img>', { src: ${p.imageLink(src:'checkmark.png')}, width:20, height:20 })))
-                      .append($('<div>', { 'class':'left' }).css({'margin':'2px 0 0 10px', "width":"154px" }).text(promo.promoName))
-                      .append($('<div>').css('clear', 'both'));
-            });
-          } else if (s.specialOffers.length > 0) {
-            $.each(s.specialOffers, function(i, promo) {
-              if (i < 2) {
-                offersCol.append($('<div>', { 'class':'left'})
-                        .append($('<img>', { src: ${p.imageLink(src:'checkmark.png')}, width:20, height:20 })))
-                        .append($('<div>', { 'class':'left' }).css({'margin':'2px 0 0 10px', "width":"154px" }).text(promo.promoName))
-                        .append($('<div>').css('clear', 'both'));
-              }
-            });
+          if (s.promoId) {
+            offersCol
+              .append($('<div>', {'class':'left'}).css('width','22px')
+                .append($('<img>', { src: ${p.imageLink(src:'special-offer-16px.png')}, alt:'Special Offer checkmark', width:16, height:16})))
+              .append($('<div>', {'class':'left'}).css('width','120px')
+                .append($('<div>', { 'class': 'stSpecialOffers'}).text(s.promoName ? s.promoName : ''))
+                .append($('<div>', { 'class': 'stSpecialOffersSeeMore'}).text('See more offers'))
+                .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
           } else {
-            offersCol.html('&#8212;')
+            offersCol
+              .append($('<div>', {'class':'left'}).css('width','22px').html('&nbsp;'))
+              .append($('<div>', {'class':'left'}).css('width','120px')
+                .append($('<div>', { 'class': 'stSpecialOffersSeeMore'}).text('See more offers'))
+                .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
           }
 
-          var distanceCol = $('<div>').append($('<div>', { 'class': 'stDistanceLine' }))
-                    .append($('<div>', { 'class': 'left' }).css('margin-left', '10px')
+          var distanceCol = $('<div>').append($('<div>', { 'class': 'left' }).css('margin-left', '10px')
                       .append($('<div>', { id: 'map_icon'+s.id, 'class':'map_icon'})
                         .append($('<img>', { src: savedTableId && savedTableId == s.id ? srcMarkersBlue[s.index] : srcMarkersGreen[s.index], width: 28, height: 35 })))
                       .append($('<div>', { 'class':'stDistance' }).text(calcDistance(searchLat, s.lat, searchLng, s.lng)))
                       .append($('<div>', { 'class':'stMiles' }).text('miles')));
 
-          var facilityCol = $('<div>').append($('<a>', { href: siteLink(s) + (s.promoId ? '&promoId=' + s.promoId : '')} ).css('text-decoration', 'none')
-                      .append($('<div>', { 'class':'stTitle' }).text(s.title))
-                      .append(logo)
+          var facilityCol = $('<div>').append($('<div>', { 'class':'stTitle' }).text(s.title))
                       .append($('<div>', { 'class': 'left' }).css('margin-left', '5px')
-                        .append($('<div>', { 'class':'stAddress' }).text(s.address))))
+                        .append($('<div>', { 'class':'stAddress' }).text(s.address)))
                     .append($('<div>').css('clear','both'))
                     .append(features);
 
           var priceCol = $('<div>')
                     .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost ? s.moveInCost.toFixed(2) : '')))
-                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('MOVES YOU IN'))
-                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'))
-                    .append($('<div>').css( { width:'87px', 'margin-left':'auto', 'margin-right':'auto' })
+                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('Paid thru ' + (s.paidThruDate ? s.paidThruDate : '')))
+                    .append($('<div>', { 'class':'stPriceSub textCenter'}).html('Taxes &amp; fees included'))
+                    .append($('<div>', { 'class':'stRentMe' })
                       .append($('<a>', { href: siteLink(s)  + (s.promoId ? '&promoId=' + s.promoId : '') })
-                        .append($('<img>', { src: ${p.imageLink(src:'rent-me-button.png')}, width:87, height: 31, border: 0 } ))));
+                        .append($('<img>', { src: ${p.imageLink(src:'rent-me-button.png')}, width:87, height: 31, border: 0 } ))))
+                    .append($('<div>', { 'class':'stPriceSub textCenter'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'));
 
           resultTable.fnAddData([
+            priceCol.html(),
             distanceCol.html(),
+            logoCol.html(),
             facilityCol.html(),
             offersCol.html(),
-            priceCol.html()
           ]);
         }
 
@@ -349,22 +361,25 @@
             var statusText = 'Your search found no results';
           </g:else>
           setupIdle();
-          $('#mapStatus').html(statusText).fadeIn().idle(2500).fadeOut('slow');
+          $('#mapStatus').html(statusText).fadeIn();
 
           resultTable = $('#stresults').dataTable({
             "aoColumns": [
-			  { "sSortDataType": "distance", "sType": "numeric", "sWidth":"90px" },
-			  { "sSortDataType": "facility", "sType": "string", "sWidth":"240px" },
-              { "bSortable":false, "sWidth":"185px", "sType":"html" },
-			  { "sSortDataType": "moveincost", "sType":"numeric", "sWidth":"120px" }
+			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft" },
+              { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter" },
+              { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert" },
+			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert" },
+              { "bSortable":false, "sWidth":"150px", "sType":"html", "sClass":"curvedRight stVert" },
 		    ],
             "bAutoWidth":false,
             "bFilter":false,
             "bInfo":false,
             "bJQueryUI":false,
-            "bPaginate":false
+            "bPaginate":false,
+            "bSort":false
           });
-
+          $('table#stresults thead').children().remove();
+          
         }
 
         function showAddress(address, size, date) {
@@ -543,12 +558,12 @@
           markerClick(features[mapId]);
           savedTableId = mapId;
         });
-        $('#stresults > tbody > tr').mouseover(function(event) {
+        $('#stresults > tbody > tr').mouseenter(function(event) {
           var mapDiv = $(this).find('.map_icon');
           var mapId = mapDiv.attr('id').substring(8);
           features[mapId].marker.setIcon(markersBlue[features[mapId].index]);
         });
-        $('#stresults > tbody > tr').mouseout(function(event) {
+        $('#stresults > tbody > tr').mouseleave(function(event) {
           var mapDiv = $(this).find('.map_icon');
           var mapId = mapDiv.attr('id').substring(8);
           if (!savedTableId || savedTableId != mapId) {
@@ -587,12 +602,12 @@
         <div class="leftColumn">
           <div class="leftSection">
             <div class="leftSectionHeader">
-              Search for Self-Storage
+              Find the best prices and locations for self storage right here.
             </div>
             <div style="height: 5px;"></div>
             <div>
               <form id="gsearch" action="" method="post">
-                <div class="left" style="margin: 2px 5px 0 0;">
+                <div class="left" style="margin: 2px 9px 0 0;">
                   <storitz:image src="btn-circle-1.png" width="26" height="26" alt="1"/>
                 </div>
                 <div class="left">
@@ -600,7 +615,7 @@
                 </div>
                 <div style="clear:both;height: 10px;"></div>
                 <div>
-                  <div class="left" style="margin: 2px 5px 0 0;">
+                  <div class="left" style="margin: 2px 9px 0 0;">
                     <storitz:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
                   </div>
                   <div class="left">
@@ -612,13 +627,16 @@
                   <div style="clear: both;"></div>
                 </div>
                 <div style="height: 10px;"></div>
-                <div class="left" style="margin: 2px 5px 0 0;">
+                <div class="left" style="margin: 2px 9px 0 0;">
                   <storitz:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
                 </div>
                 <div class="left">
                   <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
                 </div>
-                <div style="clear: both;height: 10px;"></div>
+                <div style="clear: both;height: 15px;"></div>
+                <div style="margin-left:35px;">
+                  <storitz:image src="best-price-guarantee.png" width="230" height="70" alt="Best Price and AnyTime refund guaranteed"/>
+                </div>
                 <div style="clear: both;"></div>
               </form>
             </div>
@@ -651,30 +669,33 @@
         </div>
         <div class="rightColumn">
           <div id="gmap">
+            <div id="mapSpinner" class="mapSpinner" style="display:none;"><storitz:image src="ajax-loader.gif" width="32" height="32" border="0"/></div>
             <div id="mapStatus" class="mapStatus" style="display:none"></div>
             <div id="map_canvas">
             </div>
           </div>
 
+          <div class="resultsBar"></div>
           <div id="stresults_div">
             <g:if test="${sites.size() > 0}">
               <table id="stresults">
                 <thead>
-                  <tr class="stresultsHeader">
-                    <th style="width:90px;">Distance</th>
-                    <th style="width:240px;">Facility</th>
-                    <th style="width:185px;">Special Offers</th>
-                    <th style="width:120px;">Move-In Cost</th>
-                  </tr>
-                  <tr>
-                    <td colspan="4" style="border-bottom:1px black solid;"></td>
-                  </tr>
                 </thead>
                 <tbody>
                 <g:each var="site" in="${sites}" status="c">
-                  <tr id="row${site.id}">
-                    <td class="textCenter">
-                      <div class="stDistanceLine"></div>
+                  <tr>
+                    <td class="curvedLeft">
+                      <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
+                      <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
+                      <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
+                      <div class="stRentMe">
+                        <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                          <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                        </g:link>
+                      </div>
+                      <div class="stPriceSub textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
+                    </td>
+                    <td class="curvedCenter textCenter">
                       <div class="left" style="margin-left:10px;">
                         <div id="map_icon${site.id}" class="map_icon">
                           <storitz:image src="${'map_icons/green-loc' + (c  + 1) + '.png'}" width="28" height="35"/>
@@ -683,18 +704,16 @@
                         <div class="stMiles">miles</div>
                       </div>
                     </td>
-                    <td class="stVert">
-                      <g:link mapping="siteLink" style="text-decoration:none;" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
-                        <div class="stTitle">${site.title}</div>
-                        <div class="left">
-                          <g:if test="${site?.logo}">
-                            <img src="${resource(file:site.logo.src())}" width="100" height="40" border="0" alt="${site.title} Logo"/>
-                          </g:if>
-                        </div>
-                        <div class="left" style="margin-left: 5px;">
-                          <div class="stAddress">${site.address}</div>
-                        </div>
-                      </g:link>
+                    <td class="curvedCenter stVert">
+                      <g:if test="${site?.logo}">
+                        <img src="${resource(file:site.logo.src())}" width="100" height="40" border="0" alt="${site.title} Logo"/>
+                      </g:if>
+                    </td>
+                    <td class="curvedCenter stVert">
+                      <div class="stTitle">${site.title}</div>
+                      <div class="left" style="margin-left: 5px;">
+                        <div class="stAddress">${site.address}</div>
+                      </div>
                       <div style="clear:both;"></div>
                       <div>
                         <g:if test="${site.isKeypad}">
@@ -720,43 +739,25 @@
                         </g:if>
                       </div>
                     </td>
-                    <td class="stSpecialOffers">
-                      <g:if test="${site.featuredOffers().size() > 0}">
-                        <g:each var="promo" in="${site.featuredOffers()}">
-                          <div class="left">
-                            <storitz:image src="checkmark.png" width="20" height="20"/>
-                          </div>
-                          <div class="left" style="width:154px; margin: 2px 0 0 10px;">
-                            ${promo?.promoName}
-                          </div>
-                          <div style="clear:both;"></div>
-                        </g:each>
-                      </g:if>
-                      <g:elseif test="${site.specialOffers().size() > 0}">
-                        <g:each var="promo" in="${site.specialOffers()}" status="p">
-                          <g:if test="${p < 2 }">
-                            <div>
-                              <storitz:image src="checkmark.png" width="20" height="20"/>
-                            </div>
-                          </g:if>
-                        </g:each>
-                        <div class="left" style="width: 154px;margin: 2px 0 0 10px;">
-                          ${promo?.promoName}
+                    <td class="curvedRight stVert">
+                      <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                        <div class="left" style="width:22px;">
+                          <storitz:image src="special-offer-16px.png" width="16" height="16px" border="0"/>
                         </div>
-                      </g:elseif>
+                        <div class="left" style="width:120px;">
+                          <div class="stSpecialOffers">
+                            ${siteMoveInPrice[site.id]?.promoName}
+                          </div>
+                          <div class="stSpecialOffersSeeMore">See more offers</div>
+                          <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
+                        </div>
+                      </g:if>
                       <g:else>
-                        &#8212;
-                      </g:else>
-                    </td>
-                    <td>
-                      <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
-                      <div class="stPriceSub textCenter">MOVES YOU IN</div>
-                      <div class="stPriceSub textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
-                      <div style="width:87px;margin-left: auto; margin-right: auto;">
-                        <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
-                          <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                        </g:link>
-                      </div>
+                        <div class="left" style="width:22px;"></div>
+                        <div class="left" style="width:120px;">
+                          <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
+                        </div>
+                      </g:else> 
                     </td>
                   </tr>
                 </g:each>

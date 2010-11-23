@@ -155,13 +155,13 @@ class HomeController {
         bestUnit = site.units.min{ it.price }
       }
       if (site.featuredOffers().size() == 0) {
-        def cost = costService.calculateMoveInCost(site, bestUnit, null, null, moveInDate, true)
-        siteMoveInPrice[site.id] = [cost:cost, promo:null]
+        def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+        siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.unitsize.description, unitType:bestUnit?.unitType.display]
       } else {
         for (promo in site.featuredOffers()) {
-          def cost = costService.calculateMoveInCost(site, bestUnit, promo, null, moveInDate, true)
-          if (!siteMoveInPrice[site.id] || siteMoveInPrice[site.id].cost > cost) {
-            siteMoveInPrice[site.id] = [cost:cost, promo:promo.id, monthly:bestUnit.pushRate]
+          def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+          if (!siteMoveInPrice[site.id] || siteMoveInPrice[site.id].cost > totals['cost']) {
+            siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit.unitsize.description, unitType:bestUnit?.unitType.display]
           }
         }
       }
