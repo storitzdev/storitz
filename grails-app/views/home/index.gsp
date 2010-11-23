@@ -271,14 +271,14 @@
             offersCol
               .append($('<div>', {'class':'left'}).css('width','22px')
                 .append($('<img>', { src: ${p.imageLink(src:'special-offer-16px.png')}, alt:'Special Offer checkmark', width:16, height:16})))
-              .append($('<div>', {'class':'left'}).css('width','120px')
+              .append($('<div>', {'class':'left'}).css('width','125px')
                 .append($('<div>', { 'class': 'stSpecialOffers'}).text(s.promoName ? s.promoName : ''))
                 .append($('<div>', { 'class': 'stSpecialOffersSeeMore'}).text('See more offers'))
                 .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
           } else {
             offersCol
               .append($('<div>', {'class':'left'}).css('width','22px').html('&nbsp;'))
-              .append($('<div>', {'class':'left'}).css('width','120px')
+              .append($('<div>', {'class':'left'}).css('width','125px')
                 .append($('<div>', { 'class': 'stSpecialOffersSeeMore'}).text('See more offers'))
                 .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
           }
@@ -572,6 +572,11 @@
         });
       }
 
+      function setupResults() {
+        $('select#sbSortSelect').selectmenu({style:'dropdown', menuWidth:250});
+        $('select#sbUnitsize').selectmenu({style:'dropdown', width:130});
+      }
+
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-16012579-1']);
       _gaq.push(['_trackPageview']);
@@ -585,6 +590,7 @@
         setupIdle();
         setupTooltips();
         setupTable();
+        setupResults();
         setupMap();
         setupAnalytics();
       });
@@ -645,13 +651,15 @@
             <div class="leftSectionHeader">
               Video
             </div>
-            <div id="videoContainer"></div>
+            <div class="videoContainer">
+              <div id="videoContainer"></div>
+            </div>
             <script type="text/javascript">
                 jwplayer("videoContainer").setup({
                     flashplayer: "${resource(file:'/jwplayer/player.swf')}",
                     file: "http://www.youtube.com/watch?v=w815nn8ypt0",
-                    height: 166,
-                    width: 300
+                    height: 160,
+                    width: 282
                 });
             </script>
           </div>
@@ -675,7 +683,27 @@
             </div>
           </div>
 
-          <div class="resultsBar"></div>
+          <div class="resultsBar">
+            <div class="sbResults">Search Results</div>
+            <div class="sbText">Sort By:</div>
+            <div class="sbSortSelect">
+              <select id="sbSortSelect" name="sbSortSelect" class="white">
+                <option value="0" selected="true">Distance (shortest)</option>
+                <option value="1">Distance (farthest)</option>
+                <option value="2">Move In Cost (least expensive)</option>
+                <option value="3">Move In Cost (most expensive)</option>
+                <option value="4">Monthly Rate(least expensive)</option>
+                <option value="5">Monthly Rate (most expensive)</option>
+                <option value="6">Facility Name (ascending)</option>
+                <option value="7">Facility Name (descending)</option>
+              </select>
+            </div>
+            <div class="sbSpacer">&nbsp;</div>
+            <div class="sbText">Unit Size:</div>
+            <div class="sbUnitSelect">
+              <g:select name="sbUnitsize" id="sbUnitsize" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
+            </div>
+          </div>
           <div id="stresults_div">
             <g:if test="${sites.size() > 0}">
               <table id="stresults">
@@ -754,7 +782,7 @@
                       </g:if>
                       <g:else>
                         <div class="left" style="width:22px;"></div>
-                        <div class="left" style="width:120px;">
+                        <div class="left" style="width:125px;">
                           <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
                         </div>
                       </g:else> 

@@ -155,6 +155,7 @@ uiperformance.bundles = [
             "jquery.galleryview-2.1.1",
             "jquery.maskedinput",
             "jquery.validate.min",
+            "jquery.ui.selectmenu",
             "additional-methods",
             "json2",
             "jwplayer"
@@ -171,6 +172,7 @@ uiperformance.bundles = [
     name: 'jquery_bundled',
     files: ['main',
             'jquery-ui-1.8.6.custom',
+            'jquery.ui.selectmenu',
             'galleryview',
             'datatables']],
   [type: 'css',

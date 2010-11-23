@@ -411,14 +411,48 @@ input.inputBox:focus {
 }
 
 div.resultsBar {
-    background: #fff url("../images/search-results-bar-menus-no-compare.gif") no-repeat;
+    background: #fff url("../images/search-results-bar-clean.gif") no-repeat;
     width: 634px;
     height: 32px;
     color: white;
+    clear: both;
+}
+
+div.sbResults {
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+    margin-left: 20px;
     line-height: 32px;
-    clear: both;
+    float:left;
+    width: 110px;
+}
+
+div.sbText {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    line-height: 32px;
+    float:left;
+    width: 60px;
+}
+
+div.sbSortSelect {
+    float: left;
+    width: 170px;
+    color: white;
+    line-height: 16px;
+    margin-top: 2px;
+}
+
+div.sbUnitSelect {
+    float: left;
+    width: 100px;
+    color: white;
+    line-height: 16px;
+    margin-top: 2px;
+}
+
+div.sbSpacer {
+    float: left;
+    width: 80px;
 }
 
 #stresults_div {
@@ -1444,4 +1478,11 @@ div#tab_directions.ui-tabs-panel, div#tab_summary.ui-tabs-panel, div#tab_photos.
     border-width: 0;
     display: block;
     padding: 1em 0;
+}
+
+div.videoContainer {
+    background:url(../images/video-frame-300.png) no-repeat;
+    width: 300px;
+    height: 178px;
+    padding: 9px;
 }
