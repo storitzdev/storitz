@@ -827,7 +827,7 @@
                         </div>
                       </g:if>
                       <g:else>
-                        <div class="left" style="width:22px;"></div>
+                        <div class="left" style="width:22px;">&nbsp;</div>
                         <div class="left" style="width:125px;">
                           <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
                         </div>
