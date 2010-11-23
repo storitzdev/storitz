@@ -279,7 +279,6 @@
             offersCol
               .append($('<div>', {'class':'left'}).css('width','22px').html('&nbsp;'))
               .append($('<div>', {'class':'left'}).css('width','125px')
-                .append($('<div>', { 'class': 'stSpecialOffersSeeMore'}).text('See more offers'))
                 .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
           }
 
