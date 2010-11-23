@@ -337,12 +337,12 @@
 
           resultTable = $('#stresults').dataTable({
             "aoColumns": [
-			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft" },
+			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft stClickable" },
               { "sType": "numeric", "bVisible":false },
               { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter" },
-              { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert" },
-			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert" },
-              { "bSortable":false, "sWidth":"150px", "sType":"html", "sClass":"curvedRight stVert" }
+              { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert stClickable" },
+			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert stClickable" },
+              { "bSortable":false, "sWidth":"150px", "sType":"html", "sClass":"curvedRight stVert stClickable" }
 		    ],
             "bAutoWidth":false,
             "bFilter":false,
@@ -597,12 +597,17 @@
           markerClick(features[mapId]);
           savedTableId = mapId;
         });
-        $('#stresults > tbody > tr').mouseenter(function(event) {
+        $("table#stresults tbody tr td.stClickable").click(function(event) {
+          var mapDiv = $(this).parent().find('.map_icon');
+          var mapId = mapDiv.attr('id').substring(8);
+          window.location = siteLink(features[mapId]) + (features[mapId].promoId ? '&promoId=' + features[mapId].promoId : '');
+        });
+        $('#stresults tbody tr').mouseenter(function(event) {
           var mapDiv = $(this).find('.map_icon');
           var mapId = mapDiv.attr('id').substring(8);
           features[mapId].marker.setIcon(markersBlue[features[mapId].index]);
         });
-        $('#stresults > tbody > tr').mouseleave(function(event) {
+        $('#stresults tbody tr').mouseleave(function(event) {
           var mapDiv = $(this).find('.map_icon');
           var mapId = mapDiv.attr('id').substring(8);
           if (!savedTableId || savedTableId != mapId) {
@@ -753,7 +758,7 @@
                 <tbody>
                 <g:each var="site" in="${sites}" status="c">
                   <tr>
-                    <td class="curvedLeft">
+                    <td class="curvedLeft stClickable">
                       <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
                       <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
                       <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
@@ -774,12 +779,12 @@
                         <div class="stMiles">miles</div>
                       </div>
                     </td>
-                    <td class="curvedCenter stVert">
+                    <td class="curvedCenter stVert stClickable">
                       <g:if test="${site?.logo}">
                         <img src="${resource(file:site.logo.src())}" width="100" height="40" border="0" alt="${site.title} Logo"/>
                       </g:if>
                     </td>
-                    <td class="curvedCenter stVert">
+                    <td class="curvedCenter stVert stClickable">
                       <div class="stTitle">${site.title}</div>
                       <div class="left" style="margin-left: 5px;">
                         <div class="stAddress">${site.address}</div>
@@ -809,7 +814,7 @@
                         </g:if>
                       </div>
                     </td>
-                    <td class="curvedRight stVert">
+                    <td class="curvedRight stVert stClickable">
                       <g:if test="${siteMoveInPrice[site.id]?.promo}">
                         <div class="left" style="width:22px;">
                           <storitz:image src="special-offer-16px.png" width="16" height="16px" border="0"/>
