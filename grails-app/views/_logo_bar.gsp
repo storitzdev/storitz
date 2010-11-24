@@ -12,7 +12,7 @@
       </div>
       <div class="left tollFree">
         <div style="font-size:8px;">NEED BOOKING ASSISTANCE?</div>
-        <div style="font-size:16px;">(877) 456-2929</div>
+        <div style="font-size:16px;margin-top:2px;">(877) 456-2929</div>
       </div>
       <div style="clear:both;"></div>
     </div>

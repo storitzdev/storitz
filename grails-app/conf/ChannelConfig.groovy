@@ -12,6 +12,7 @@ class ChannelConfig {
         requestMap.put new RequestKey("/images/**"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/css/**"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/js/**"), [new SecurityConfig("ANY_CHANNEL")]
+        requestMap.put new RequestKey("/help"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/favicon.ico"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/storageSite/detailTotals/**"), [new SecurityConfig("ANY_CHANNEL")]
         requestMap.put new RequestKey("/storageSite/autocompleteSite/**"), [new SecurityConfig("ANY_CHANNEL")]

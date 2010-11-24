@@ -68,7 +68,7 @@
         <div style="width: 650px;" class="left">
 
           <div id="detailInfo">
-            <div>
+            <div style="margin-top:10px;">
               <div class="returnLink right" style="padding: 0 0 0 0.5em;">
                 <g:link controller="home" action="index">
                   New Search
@@ -87,7 +87,7 @@
               <g:render template="/transaction" />
             </div>
 
-            <div style="height:25px;"></div>
+            <div style="height:15px;"></div>
             
             <div id="detail_tabs" style="width:650px;">
               <ul>
@@ -178,7 +178,7 @@
               <input style="display:none" type="text" name="SC_page" id="SC_page" value="detail"/>
               </div>
 
-              <div class="vert_text">
+              <div class="vert_text" style="margin-top:10px;">
                 <span id="step1_bullet" class="bullet">&#8226;</span><span id="step1" class="step_header_hi">Renter Information</span>
                 <span id="step2_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step2" class="step_header">Payment</span>
                 <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Order Complete</span>

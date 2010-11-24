@@ -6,6 +6,7 @@
     <meta name="DESCRIPTION" content="Storitz self storage partner - ${site.title} located in ${site.city}, ${site.state.fullName} : ${site.description ? site.getTextDescription() : '' }"/>
     <g:render template="/header_ssl" />
 
+<p:dependantJavascript>
     <script type="text/javascript">
 //<![CDATA[
   var ajaxFormDirty = true;
@@ -13,38 +14,8 @@
   var ajaxFormUpdateTimer;
   var ajaxFormNewValues;
   var ajaxFormOldValues;
-
-  <g:render template="/callCenterPolling_js"/>
-
-  function contactChange() {
-    $('#billingAddress').click(function(event) {
-      var contactType =  $('input[name="billingAddress"]:checked').val();
-      if (contactType == 'new') {
-        $('#newContact').show();
-      } else {
-        $('#newContact').hide();
-      }
-    });
-  }
-
-  function primaryCountryClick() {
-    $('.country').change(function() {
-      var country = $('#country').val();
-      if (country == "US") {
-        $('#secondaryProvinceField').hide();
-        $('#secondaryStateField').show();
-        $('#secondaryProvinceLabel').hide();
-        $('#secondaryStateLabel').show();
-        $("input.zipcode").mask('99999');
-      } else {
-        $('#secondaryProvinceField').show();
-        $('#secondaryStateField').hide();
-        $('#secondaryProvinceLabel').show();
-        $('#secondaryStateLabel').hide();
-        $("input.zipcode").unmask();
-      }
-    });
-  }
+  var urlAjaxUpdate = "${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}";
+  var urlAjaxPoll = "${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}";
 
   function prevStep() {
     window.location = "${createLink(mapping:'siteLink', controller:'storageSite', action:'detail',
@@ -54,119 +25,12 @@
       rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
   }
 
-  function isValidCardNumber (strNum) {
-     var nCheck = 0;
-     var nDigit = 0;
-     var bEven = false;
 
-     for (n = strNum.length - 1; n >= 0; n--) {
-        var cDigit = strNum.charAt (n);
-        if (isDigit (cDigit)) {
-           var nDigit = parseInt(cDigit, 10);
-           if (bEven) {
-              if ((nDigit *= 2) > 9)
-                 nDigit -= 9;
-           }
-           nCheck += nDigit;
-           bEven = ! bEven;
-        } else if (cDigit != ' ' && cDigit != '.' && cDigit != '-') {
-           return false;
-        }
-     }
-     return (nCheck % 10) == 0;
-  }
-
-  function isDigit (c) {
-     var strAllowed = "1234567890";
-     return (strAllowed.indexOf (c) != -1);
-  }
-
-  function createMap() {}
-
-  function setupForm() {
-    $("input.zipcode").mask('99999');
-    $('#errorMessage').hide();
-
-    $.validator.addMethod("state", function(value, element) {
-      var contactType =  $('input[name="billingAddress"]:checked').val();
-      if (contactType == 'new' && $('#country').val() == 'US') {
-        return value != 'NONE';
-      }
-      return true;
-    }, "Missing state");
-
-    $.validator.addMethod("province", function(value, element) {
-      var contactType =  $('input[name="billingAddress"]:checked').val();
-      if (contactType == 'new' && $('#country').val() != 'US') {
-        return value != '';
-      }
-      return true;
-    }, "Missing state or province");
-
-    $.validator.addMethod("ccnumber", function(value, element) {
-      return isValidCardNumber(value)
-    }, "Invalid credit card number");
-
-    $.validator.addMethod("contactRequired", function(value, element) {
-      var contactType =  $('input[name="billingAddress"]:checked').val();
-      if (contactType == 'new') {
-        return value && value.length > 0
-      }
-      return true;
-    }, "This field is required");
-
-    var validator = $('#paymentTransaction')
-      .validate({
-        rules: {
-        },
-        messages: {
-          "firstName": "Missing first name",
-          "lastName": "Missing last name",
-          "address1": "Missing address",
-          "city": "Missing city",
-          "country": "Please select your country",
-          "zipcode":"Missing postal code",
-          "cc_number": {
-            required: "Missing credit card number",
-            creditcard: "Incorrect credit card number"
-          },
-          cc_cvv2: {
-            required: "Missing credit card security code",
-            digits: "Credit card security code must be 3 or 4 digits"
-          }
-        },
-        errorContainer: $("#errorMessage"),
-        errorLabelContainer: $("#errorList"),
-        errorClass: "validation-failed",
-        wrapper: "li",
-        ignore: ".ignore",
-        invalidHandler: function(form, validator) {
-          $('#errorMessage').show();
-        },
-        showErrors: function(errorMap, errorList) {
-          $("#errorInfo").html("Please correct the " + this.numberOfInvalids() + " issue" + (this.numberOfInvalids() > 1 ? 's' : '') + " below and continue:");
-		  this.defaultShowErrors();
-        }
-    });
-
-  }
-
-  function setupJQueryTabs() {
-    $("#operatingHours").tabs();
-  }
-
-
-  $(document).ready(function() {
-
-    contactChange();
-    setupForm();
-    setupJQueryTabs();
-    primaryCountryClick();
-    ajaxFormUpdate();
-    ajaxServerPoll();
-  });
 //]]>
   </script>
+  <p:javascript src="callCenterPolling"/>
+  <p:javascript src="payment"/>
+</p:dependantJavascript>
 
   </head>
   <body>
@@ -185,13 +49,11 @@
 
                 <input style="display:none" type="text" name="SC_page" id="SC_page" value="payment"/>
 
-                <div class="vert_text">
+                <div class="vert_text" style="margin-top:10px;">
                   <span id="step1_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step1" class="step_header">Renter Information</span>
                   <span id="step2_bullet" class="bullet">&#8226;</span><span id="step2" class="step_header_hi">Payment</span>
                   <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Order Complete</span>
                 </div>
-
-                <div style="height:25px;"></div>
 
                 <div class="paymentTotal" style="display:none;">
                   <ul>

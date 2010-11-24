@@ -1,0 +1,141 @@
+function contactChange() {
+  $('#billingAddress').click(function(event) {
+    var contactType =  $('input[name="billingAddress"]:checked').val();
+    if (contactType == 'new') {
+      $('#newContact').show();
+    } else {
+      $('#newContact').hide();
+    }
+  });
+}
+
+function primaryCountryClick() {
+  $('.country').change(function() {
+    var country = $('#country').val();
+    if (country == "US") {
+      $('#secondaryProvinceField').hide();
+      $('#secondaryStateField').show();
+      $('#secondaryProvinceLabel').hide();
+      $('#secondaryStateLabel').show();
+      $("input.zipcode").mask('99999');
+    } else {
+      $('#secondaryProvinceField').show();
+      $('#secondaryStateField').hide();
+      $('#secondaryProvinceLabel').show();
+      $('#secondaryStateLabel').hide();
+      $("input.zipcode").unmask();
+    }
+  });
+}
+
+function isValidCardNumber (strNum) {
+   var nCheck = 0;
+   var nDigit = 0;
+   var bEven = false;
+
+   for (n = strNum.length - 1; n >= 0; n--) {
+      var cDigit = strNum.charAt (n);
+      if (isDigit (cDigit)) {
+         var nDigit = parseInt(cDigit, 10);
+         if (bEven) {
+            if ((nDigit *= 2) > 9)
+               nDigit -= 9;
+         }
+         nCheck += nDigit;
+         bEven = ! bEven;
+      } else if (cDigit != ' ' && cDigit != '.' && cDigit != '-') {
+         return false;
+      }
+   }
+   return (nCheck % 10) == 0;
+}
+
+function isDigit (c) {
+   var strAllowed = "1234567890";
+   return (strAllowed.indexOf (c) != -1);
+}
+
+function createMap() {}
+
+function setupForm() {
+  $("input.zipcode").mask('99999');
+  $('#errorMessage').hide();
+
+  $.validator.addMethod("state", function(value, element) {
+    var contactType =  $('input[name="billingAddress"]:checked').val();
+    if (contactType == 'new' && $('#country').val() == 'US') {
+      return value != 'NONE';
+    }
+    return true;
+  }, "Missing state");
+
+  $.validator.addMethod("province", function(value, element) {
+    var contactType =  $('input[name="billingAddress"]:checked').val();
+    if (contactType == 'new' && $('#country').val() != 'US') {
+      return value != '';
+    }
+    return true;
+  }, "Missing state or province");
+
+  $.validator.addMethod("ccnumber", function(value, element) {
+    return isValidCardNumber(value)
+  }, "Invalid credit card number");
+
+  $.validator.addMethod("contactRequired", function(value, element) {
+    var contactType =  $('input[name="billingAddress"]:checked').val();
+    if (contactType == 'new') {
+      return value && value.length > 0
+    }
+    return true;
+  }, "This field is required");
+
+  var validator = $('#paymentTransaction')
+    .validate({
+      rules: {
+      },
+      messages: {
+        "firstName": "Missing first name",
+        "lastName": "Missing last name",
+        "address1": "Missing address",
+        "city": "Missing city",
+        "country": "Please select your country",
+        "zipcode":"Missing postal code",
+        "cc_number": {
+          required: "Missing credit card number",
+          creditcard: "Incorrect credit card number"
+        },
+        cc_cvv2: {
+          required: "Missing credit card security code",
+          digits: "Credit card security code must be 3 or 4 digits"
+        }
+      },
+      errorContainer: $("#errorMessage"),
+      errorLabelContainer: $("#errorList"),
+      errorClass: "validation-failed",
+      wrapper: "li",
+      ignore: ".ignore",
+      invalidHandler: function(form, validator) {
+        $('#errorMessage').show();
+      },
+      showErrors: function(errorMap, errorList) {
+        $("#errorInfo").html("Please correct the " + this.numberOfInvalids() + " issue" + (this.numberOfInvalids() > 1 ? 's' : '') + " below and continue:");
+        this.defaultShowErrors();
+      }
+  });
+
+}
+
+function setupJQueryTabs() {
+  $("#operatingHours").tabs();
+}
+
+
+$(document).ready(function() {
+
+  contactChange();
+  setupForm();
+  setupJQueryTabs();
+  primaryCountryClick();
+  ajaxFormUpdate();
+  ajaxServerPoll();
+});

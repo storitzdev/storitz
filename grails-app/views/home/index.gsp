@@ -237,7 +237,7 @@
             <div class="sbSortSelect">
               <select id="sbSortSelect" name="sbSortSelect">
                 <option value="0" selected="true">Distance (shortest)</option>
-                <option value="1">Distance (farthest)</option>
+                <option value="1">Distance (longest)</option>
                 <option value="2">Move In Cost (least expensive)</option>
                 <option value="3">Move In Cost (most expensive)</option>
                 <option value="4">Monthly Rate(least expensive)</option>

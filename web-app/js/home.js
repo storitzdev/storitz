@@ -78,11 +78,23 @@ function createMarker(s) {
         if (foundRow) {
             foundRow.addClass('highlightRow');
         }
+        if (!savedFeature || savedFeature != s.id) {
+            s.marker.setIcon(markersBlue[s.index]);
+        }
+        if (!savedTableId || savedTableId != s.id) {
+            $('#map_icon' + s.id).html($('<img>', { src:srcMarkersBlue[s.index], width: 28, height: 35}));
+        }
     });
     google.maps.event.addListener(s.marker, 'mouseout', function() {
         var foundRow = $(resultTable.fnGetNodes(s.index - 1));
         if (foundRow) {
             foundRow.removeClass('highlightRow');
+        }
+        if (!savedFeature || savedFeature != s.id) {
+            s.marker.setIcon(markersGreen[s.index]);
+        }
+        if (!savedTableId || savedTableId != s.id) {
+            $('#map_icon' + s.id).html($('<img>', { src:srcMarkersGreen[s.index], width: 28, height: 35}));
         }
     });
 }
@@ -464,6 +476,8 @@ function markerClick(feature) {
         if (savedTableId) {
             $('#map_icon' + savedTableId).html($('<img>', { src:srcMarkersGreen[features[savedTableId].index], width: 28, height: 35}));
         }
+        savedTableId = null;
+        savedFeature = null;
     });
     infoWindow.open(map, feature.marker);
 }

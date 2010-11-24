@@ -332,9 +332,9 @@ a.navMenu:hover {
 div.tollFree {
     font-weight: bold;
     color: #7ac142;
-    height: 48px;
+    height: 42px;
     width: 158px;
-    padding-top: 10px;
+    padding-top: 15px;
     margin-left: 10px;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
