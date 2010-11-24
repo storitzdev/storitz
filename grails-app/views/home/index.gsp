@@ -699,6 +699,7 @@
             <div class="videoContainer">
               <div id="videoContainer"></div>
             </div>
+            <p:dependantJavascript>
             <script type="text/javascript">
                 jwplayer("videoContainer").setup({
                     flashplayer: "${resource(file:'/jwplayer/player.swf')}",
@@ -707,6 +708,7 @@
                     width: 282
                 });
             </script>
+            </p:dependantJavascript>
           </div>
           <div>
             <div class="leftSectionHeader">
