@@ -31,6 +31,10 @@ class StaticController {
     }
 
     def media = {
-      [title: 'Storitz in the Media']
+      [title: 'Press Room']
+    }
+
+    def guarantee = {
+      [title: 'The Storitz Guarantee']
     }
 }

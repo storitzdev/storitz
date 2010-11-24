@@ -85,7 +85,7 @@
         frame_height: 40,
         pause_on_hover: true,
         filmstrip_position: 'right',
-        theme_path: "${resource(dir:'/images/themes/')}",
+        theme_path: "${resource(dir:'/images/themes/')}"
     });
   }
 

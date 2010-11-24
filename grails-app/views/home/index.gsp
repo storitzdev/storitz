@@ -651,7 +651,7 @@
         <div class="leftColumn">
           <div class="leftSection">
             <div class="leftSectionHeader">
-              Find the best prices and locations for self storage right here.
+              Find the best prices and locations for self storage, right here.
             </div>
             <div style="height: 5px;"></div>
             <div>
@@ -684,7 +684,9 @@
                 </div>
                 <div style="clear: both;height: 15px;"></div>
                 <div style="margin-left:35px;">
-                  <storitz:image src="best-price-guarantee.png" width="230" height="70" alt="Best Price and AnyTime refund guaranteed"/>
+                  <g:link controller="static" action="guarantee" target="_blank">
+                    <storitz:image src="best-price-guarantee.png" width="230" height="70" border="0" alt="Best Price and AnyTime refund guaranteed"/>
+                  </g:link>
                 </div>
                 <div style="clear: both;"></div>
               </form>
