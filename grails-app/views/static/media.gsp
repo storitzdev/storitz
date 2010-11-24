@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
     <g:render template="/header" />
-    <meta name="DESCRIPTION" content="Storitz in the media - press announcements, links and other mentions.."/>
+    <meta name="DESCRIPTION" content="Press Room. Storitz in the media - press announcements, links and other mentions.."/>
 
     <script type="text/javascript">
 //<![CDATA[
@@ -23,7 +23,7 @@
       </div>
       <div style="width: 650px;margin-right: 35px;" class="right">
 
-        <h1>Storitz in the Media</h1>
+        <h1>Press Room</h1>
 
         <h2>October 27, 2010</h2>
         <p>

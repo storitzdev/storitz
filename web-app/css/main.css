@@ -1528,3 +1528,13 @@ div.videoContainer {
     height: 178px;
     padding: 9px;
 }
+
+div.faqQuestion {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+div.faqAnswer {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    margin-bottom: 1em;    
+}
