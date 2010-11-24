@@ -2,12 +2,13 @@ package storitz
 
 import com.storitz.ContactUs
 import grails.plugins.springsecurity.Secured
+import storitz.constants.SoftwareType
 
 class ContactUsController {
 
     def emailService
   
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", operatorsignup: "POST"]
 
     def index = {
         redirect(action: "list", params: params)
@@ -126,5 +127,28 @@ class ContactUsController {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'contactUs.label', default: 'ContactUs'), params.id])}"
             redirect(action: "list")
         }
+    }
+
+    def operatorSignup = {
+
+      SoftwareType softwareType = SoftwareType.getEnumFromId(params.softwareType)
+
+      String subj = "Add Your Facility Signup"
+      String toField = "sales@storitz.com"
+      String message = "New Customer via add your facility.\n\nFirst Name: ${params.firstName}\nLast Name: ${params.lastName}\nCompany: ${params.companyName}\nEmail: ${params.email}\nPhone: ${params.phone}\nSoftware: ${softwareType.display} ${params.otherSoftware ? params.otherSoftware : ''}" 
+      String fromField = "${params.email}"
+
+      try {
+          emailService.sendTextEmail(
+              to: toField,
+              from: fromField,
+              subject: subj,
+              body: message)
+
+      } catch (Exception e) {
+          log.error("${e}", e)
+      }
+
+      render(view: "operatorcomplete")
     }
 }

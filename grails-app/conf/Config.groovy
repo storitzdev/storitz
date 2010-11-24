@@ -135,13 +135,8 @@ grails.mail.props = ["mail.smtp.auth":"true",
 uiperformance.bundles = [
   [type: 'js',
     name: 'header_all',
-    files: [
-            "scriptaculous183",
-            "calendarview",
-            "tooltip",
-            "validation",
-            "jquery-1.4.2.min",
-            "jquery-ui-1.8.6.custom.min"
+          files: ["jquery-1.4.2.min",
+                  "jquery-ui-1.8.6.custom.min"
     ]],
   [type: 'js',
     name: 'jquery_all',
@@ -178,9 +173,9 @@ uiperformance.bundles = [
   [type: 'css',
     name: 'header_bundled',
     files: ['jquery-ui-1.8.6.custom',
-            'main',
-            'tablekit',
-            'calendarview']]
+            'jquery.ui.selectmenu',
+            'main'
+    ]]
 ]
 
 uiperformance.exclusions = [

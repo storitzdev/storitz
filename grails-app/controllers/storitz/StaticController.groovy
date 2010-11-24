@@ -23,7 +23,7 @@ class StaticController {
     }
 
     def jobs = {
-      [title:'Jobs at Storitz']
+      [title:'Jobs and Careers at Storitz']
     }
 
     def operatorsignup = {

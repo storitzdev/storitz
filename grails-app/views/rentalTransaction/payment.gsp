@@ -46,22 +46,6 @@
     });
   }
 
-  function validateForm() {
-    var valid = true;
-    valid &= Validation.validate('cc_number');
-    valid &= Validation.validate('cc_cvv2');
-    var contactType =  $('billingAddress').select('input:checked[type=radio]').pluck('value');
-    if (contactType == 'new') {
-      valid &= Validation.validate('firstName');
-      valid &= Validation.validate('lastName');
-      valid &= Validation.validate('address1');
-      valid &= Validation.validate('city');
-      valid &= Validation.validate('state');
-      valid &= Validation.validate('zipcode');
-    }
-    return valid;
-  }
-
   function prevStep() {
     window.location = "${createLink(mapping:'siteLink', controller:'storageSite', action:'detail',
       params:[id:rentalTransactionInstance?.site.id, searchSize:unit?.unitsize?.id, unitType:unit?.unitType,
@@ -167,10 +151,16 @@
 
   }
 
+  function setupJQueryTabs() {
+    $("#operatingHours").tabs();
+  }
+
+
   $(document).ready(function() {
 
     contactChange();
     setupForm();
+    setupJQueryTabs();
     primaryCountryClick();
     ajaxFormUpdate();
     ajaxServerPoll();

@@ -8,9 +8,13 @@
     <script type="text/javascript">
 //<![CDATA[
 
-  Event.observe(window, 'load', function() {
-  });
+  function setupJQueryTabs() {
+    $("#operatingHours").tabs();
+  }
 
+  $(document).ready(function() {
+    setupJQueryTabs();
+  });
 //]]>
   </script>
 
