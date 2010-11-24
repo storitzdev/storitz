@@ -86,6 +86,19 @@
             getMarkers();
         }
 
+        function setupIdle() {
+            $.fn.idle = function(time) {
+                return this.each(function() {
+                    var i = $(this);
+                    i.queue(function() {
+                        setTimeout(function() {
+                            i.dequeue();
+                        }, time);
+                    });
+                });
+            };
+        }
+
         function createMarker(s) {
             var location = new google.maps.LatLng(s.lat, s.lng);
 

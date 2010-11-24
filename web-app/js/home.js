@@ -263,19 +263,6 @@ function setupTooltips() {
     $(".tooltip_elevator").qtip({ content: "Elevator to upper floors", position: { corner: { target: 'bottomMiddle', tooltip: 'topMiddle' } }, show: 'mouseover', hide: 'mouseout', style: { name: 'themeroller', tip: true } });
 }
 
-function setupIdle() {
-    $.fn.idle = function(time) {
-        return this.each(function() {
-            var i = $(this);
-            i.queue(function() {
-                setTimeout(function() {
-                    i.dequeue();
-                }, time);
-            });
-        });
-    };
-}
-
 function createTableRow(s) {
 
   var logoCol
