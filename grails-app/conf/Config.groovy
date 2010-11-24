@@ -140,15 +140,11 @@ uiperformance.bundles = [
                   "jquery.ui.ipad.alt"
     ]],
   [type: 'js',
-    name: 'jquery_basic',
+    name: 'jquery_all',
     files: ["jquery-1.4.2.min",
             "jquery-ui-1.8.6.custom.min",
             "jquery.ui.ipad.alt",
-            "jquery.qtip-1.0.min"
-            ]],
-  [type: 'js',
-    name: 'jquery_extended',
-    files: [
+            "jquery.qtip-1.0.min",
             "jquery.dataTables",
             "jquery.timers-1.2",
             "jquery.easing.1.3",
