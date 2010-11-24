@@ -8,7 +8,7 @@
   <meta name="ROBOTS" content="FOLLOW"/>
 
   <p:css name="login" />
-  <p:css name="main" />
+  <g:render template="/header" />
 </head>
   <body>
     <div id="body">
