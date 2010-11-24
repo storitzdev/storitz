@@ -204,7 +204,7 @@
             <script type="text/javascript">
                 jwplayer("videoContainer").setup({
                     flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-                    file: "http://www.youtube.com/watch?v=w815nn8ypt0",
+                    file: "http://www.youtube.com/watch?v=gtlgDTNRL50",
                     height: 160,
                     width: 282
                 });
