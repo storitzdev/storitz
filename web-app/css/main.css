@@ -1538,3 +1538,7 @@ div.faqAnswer {
     font: 12px verdana, arial, helvetica, sans-serif;
     margin-bottom: 1em;    
 }
+
+div#storitzHelp p {
+    margin-bottom: 0.5em;
+}

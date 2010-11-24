@@ -136,7 +136,8 @@ uiperformance.bundles = [
   [type: 'js',
     name: 'header_all',
           files: ["jquery-1.4.2.min",
-                  "jquery-ui-1.8.6.custom.min"
+                  "jquery-ui-1.8.6.custom.min",
+                  "jquery.ui.ipad.alt"
     ]],
   [type: 'js',
     name: 'jquery_all',
@@ -158,7 +159,9 @@ uiperformance.bundles = [
   [type: 'js',
     name: 'admin_all',
     files: ["jquery-1.4.2.min",
-           "jquery-ui-1.8.6.custom.min"]],
+            "jquery-ui-1.8.6.custom.min",
+            "jquery.ui.ipad.alt"
+    ]],
   [type: 'css',
     name: 'admin_bundled',
     files: ["main",
@@ -168,6 +171,7 @@ uiperformance.bundles = [
     files: ['main',
             'jquery-ui-1.8.6.custom',
             'jquery.ui.selectmenu',
+            "jquery.ui.ipad.alt",
             'galleryview',
             'datatables']],
   [type: 'css',
