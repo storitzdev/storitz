@@ -36,4 +36,5 @@
       <g:render template="/footer" />
     </div>
   </body>
+  <p:renderDependantJavascript />
 </html>

@@ -57,7 +57,6 @@
 
     <div style="clear:both; height:30px;"></div>
     <g:render template="/footer" />
-    <g:render template="/size_popup" />
     </div>
   </body>
 </html>

@@ -95,4 +95,5 @@
             </g:form>
         </div>
     </body>
+    <p:renderDependantJavascript />
 </html>

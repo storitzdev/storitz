@@ -77,4 +77,5 @@
 </div>
 </div>
 </body>
+<p:renderDependantJavascript />
 </html>

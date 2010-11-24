@@ -48,6 +48,12 @@
       </div>
       <div style="clear:both;"></div>
     </div>
+    <div id="helpContent">
+
+    </div>
+    <p:dependantJavascript>
+      
+    </p:dependantJavascript>
   </div>
   <div style="clear:both;"></div>
 </div>

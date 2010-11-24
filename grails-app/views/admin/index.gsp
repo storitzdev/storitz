@@ -45,4 +45,5 @@
     <g:render template="/footer_no_analytics" />
     </div>
   </body>
+  <p:renderDependantJavascript />
 </html>

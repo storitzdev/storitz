@@ -24,8 +24,7 @@
       <div style="width: 650px;margin-right: 35px;" class="right">
 
         <h1>Terms of Use</h1>
-        <p>
-          Thank you for choosing Storitz, the smart and easy way to find and rent storage. The following are the Terms of Use ("Terms")
+        <p>Thank you for choosing Storitz, the smart and easy way to find and rent storage. The following are the Terms of Use ("Terms")
           that govern the use of storitz.com (the "Site"). These Terms, including Storitz's Privacy Policy, the terms of any Storage
           Rental Agreement and any other policies that may be applicable to particular features of the Site ("Additional Terms") are
           hereby incorporated into these Terms. By using or visiting the Site, you expressly agree to be bound by these Terms and to
@@ -204,7 +203,7 @@
 
     <div style="clear:both; height:30px;"></div>
       <g:render template="/footer" />
-      <g:render template="/size_popup" />
     </div>
   </body>
+  <p:renderDependantJavascript />
 </html>

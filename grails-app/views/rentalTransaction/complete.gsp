@@ -192,7 +192,6 @@
       </div>
     <div style="clear:both; height:30px;"></div>
     <g:render template="/footer" />
-    <g:render template="/size_popup" />
     <!-- Google Code for Bookings Conversion Page -->
     <script type="text/javascript">
     /* <![CDATA[ */
@@ -213,4 +212,5 @@
     </noscript>
     </div>
   </body>
+  <p:renderDependantJavascript />
 </html>

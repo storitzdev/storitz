@@ -52,4 +52,5 @@
   })();
   // -->
   </script>
+  <p:renderDependantJavascript />
 </html>
