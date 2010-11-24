@@ -24,6 +24,68 @@ function getAddress() {
     return '';
 }
 
+function redrawMap() {
+
+    bounds = map.getBounds();
+
+    if (!firstDraw) {
+        firstDraw = true;
+        return;
+    }
+
+    if (!inDrag) {
+        getMarkers();
+    }
+}
+
+function dragStart() {
+    inDrag = true;
+}
+
+function dragEnd() {
+    inDrag = false;
+    getMarkers();
+}
+
+function setupIdle() {
+    $.fn.idle = function(time) {
+        return this.each(function() {
+            var i = $(this);
+            i.queue(function() {
+                setTimeout(function() {
+                    i.dequeue();
+                }, time);
+            });
+        });
+    };
+}
+
+function createMarker(s) {
+    var location = new google.maps.LatLng(s.lat, s.lng);
+
+    features[s.id] = s;
+    s.marker = new google.maps.Marker({
+        map: map,
+        title: s.title,
+        position: location,
+        icon: savedFeature && savedFeature == s.id ? markersBlue[s.index] : markersGreen[s.index]
+    });
+    google.maps.event.addListener(s.marker, 'click', function() {
+        markerClick(s);
+    });
+    google.maps.event.addListener(s.marker, 'mouseover', function() {
+        var foundRow = $(resultTable.fnGetNodes(s.index - 1));
+        if (foundRow) {
+            foundRow.addClass('highlightRow');
+        }
+    });
+    google.maps.event.addListener(s.marker, 'mouseout', function() {
+        var foundRow = $(resultTable.fnGetNodes(s.index - 1));
+        if (foundRow) {
+            foundRow.removeClass('highlightRow');
+        }
+    });
+}
 
 function panTo(markerId) {
     window.setTimeout(function() {
