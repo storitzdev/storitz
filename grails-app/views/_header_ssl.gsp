@@ -4,5 +4,6 @@
   <p:favicon src="images/favicon" />
 
   <p:css name='jquery_bundled'/>
-  <p:javascript src='jquery_all'/>
+  <p:javascript src='jquery_basic'/>
+  <p:javascript src='jquery_extended'/>
   
