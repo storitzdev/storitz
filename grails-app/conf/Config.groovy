@@ -165,6 +165,13 @@ uiperformance.bundles = [
             "jquery-ui-1.8.6.custom.min",
             "jquery.ui.ipad.alt"
     ]],
+  [type: 'js',
+    name: 'detail_bundle',
+    files: ["transaction",
+            "directions",
+            "callCenterPolling",
+            "detail"
+    ]],  
   [type: 'css',
     name: 'admin_bundled',
     files: ["main",

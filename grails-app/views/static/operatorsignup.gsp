@@ -95,16 +95,15 @@
           </ul>
         </p>
         <div id="videoContainer"></div>
-        <!--
         <script type="text/javascript">
             jwplayer("videoContainer").setup({
                 flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-                file: "${resource(file:'/video/storitz-client-video-v2-640x360.mov')}",
+                file: "${resource(file:'/video/Storitz Presents The Smart And Easy Way To Get Tenants.flv')}",
+                autostart: true,
                 height: 360,
                 width: 640
             });
         </script>
-        -->
         <p>
           <div style="font-weight:bold;">Why?</div>
           <div>

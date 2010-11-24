@@ -3,6 +3,7 @@ class UrlMappings {
 
     "500"(view:'/error')
     "404"(view:'/notfound')
+    "/help"(view:'/help')
 
      name siteLink: "/self-storage/$city/$state/$site_title/$id" {
         controller = "storageSite"

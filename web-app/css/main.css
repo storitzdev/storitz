@@ -313,7 +313,7 @@ a.navHighlight:link, a.navHighlight:visited {
 }
 
 a.navMenu:hover {
-    background: #fff url("../images/bkg-table-fade.jpg") repeat-x;
+    background: #fff url("../images/btn-background-fade.jpg") repeat-x;
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     border: 1px #ccc solid;
@@ -321,9 +321,10 @@ a.navMenu:hover {
     padding: 6px 12px;
     -webkit-border-radius:5px;
     -moz-border-radius:10px;
-    display: inline-block;
+    display: inline;
     text-decoration: none;
-    margin-right: 10px;
+    margin-right: 2px;
+    margin-left: -13px;
 }
 
 
@@ -1047,11 +1048,15 @@ div.stDistanceLine {
     border-right: 1px #ccc solid;
 }
 
-.returnLink {
+img.stLogo {
+    margin: 0 10px;
+}
+
+div.returnLink {
     color: #3fac00;
 }
 
-.returnLink a:link, .returnLink a:visited, .returnLink a:hover {
+div.returnLink a:link, div.returnLink a:visited, div.returnLink a:hover {
     color: #3fac00;
     text-decoration: none;
 }

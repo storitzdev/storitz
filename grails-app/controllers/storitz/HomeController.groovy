@@ -129,7 +129,9 @@ class HomeController {
 
     def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
 
-    def sites = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
+    def searchSize = (params.searchSize && params.searchSize.isNumber() ? params.searchSize as Integer : 1)
+
+    def sites = mapService.getSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
     def siteMoveInPrice = [:]
 
@@ -154,14 +156,16 @@ class HomeController {
       } else {
         bestUnit = site.units.min{ it.price }
       }
-      if (site.featuredOffers().size() == 0) {
-        def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
-        siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.unitsize?.description, unitType:bestUnit?.unitType?.display]
-      } else {
-        for (promo in site.featuredOffers()) {
-          def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
-          if (!siteMoveInPrice[site.id] || siteMoveInPrice[site.id].cost > totals['cost']) {
-            siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.unitsize?.description, unitType:bestUnit?.unitType?.display]
+      if (bestUnit) {
+        if (site.featuredOffers().size() == 0) {
+          def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+          siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.unitsize?.description, unitType:bestUnit?.unitType?.display]
+        } else {
+          for (promo in site.featuredOffers()) {
+            def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+            if (!siteMoveInPrice[site.id] || siteMoveInPrice[site.id].cost > totals['cost']) {
+              siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.unitsize?.description, unitType:bestUnit?.unitType?.display]
+            }
           }
         }
       }
