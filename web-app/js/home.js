@@ -97,33 +97,6 @@ function drawMarkers() {
     $('#mapSpinner').idle(500).fadeOut('slow')
 }
 
-function createMarker(s) {
-    var location = new google.maps.LatLng(s.lat, s.lng);
-
-    features[s.id] = s;
-    s.marker = new google.maps.Marker({
-        map: map,
-        title: s.title,
-        position: location,
-        icon: savedFeature && savedFeature == s.id ? markersBlue[s.index] : markersGreen[s.index]
-    });
-    google.maps.event.addListener(s.marker, 'click', function() {
-        markerClick(s);
-    });
-    google.maps.event.addListener(s.marker, 'mouseover', function() {
-        var foundRow = $(resultTable.fnGetNodes(s.index - 1));
-        if (foundRow) {
-            foundRow.addClass('highlightRow');
-        }
-    });
-    google.maps.event.addListener(s.marker, 'mouseout', function() {
-        var foundRow = $(resultTable.fnGetNodes(s.index - 1));
-        if (foundRow) {
-            foundRow.removeClass('highlightRow');
-        }
-    });
-}
-
 function showAddress(address, size, date) {
 
     var validAddr = address.length > 4 && !/^Enter /.test(address);

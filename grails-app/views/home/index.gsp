@@ -86,6 +86,33 @@
             getMarkers();
         }
 
+        function createMarker(s) {
+            var location = new google.maps.LatLng(s.lat, s.lng);
+
+            features[s.id] = s;
+            s.marker = new google.maps.Marker({
+                map: map,
+                title: s.title,
+                position: location,
+                icon: savedFeature && savedFeature == s.id ? markersBlue[s.index] : markersGreen[s.index]
+            });
+            google.maps.event.addListener(s.marker, 'click', function() {
+                markerClick(s);
+            });
+            google.maps.event.addListener(s.marker, 'mouseover', function() {
+                var foundRow = $(resultTable.fnGetNodes(s.index - 1));
+                if (foundRow) {
+                    foundRow.addClass('highlightRow');
+                }
+            });
+            google.maps.event.addListener(s.marker, 'mouseout', function() {
+                var foundRow = $(resultTable.fnGetNodes(s.index - 1));
+                if (foundRow) {
+                    foundRow.removeClass('highlightRow');
+                }
+            });
+        }
+
         function createMap() {
           var iploc  = new google.maps.LatLng(${lat}, ${lng});
           var myOptions = {
