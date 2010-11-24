@@ -171,7 +171,6 @@ uiperformance.bundles = [
     files: ['main',
             'jquery-ui-1.8.6.custom',
             'jquery.ui.selectmenu',
-            "jquery.ui.ipad.alt",
             'galleryview',
             'datatables']],
   [type: 'css',
