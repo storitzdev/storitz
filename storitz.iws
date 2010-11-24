@@ -18,26 +18,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_directions_js.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_directions_js.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/js/home.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/js/directions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/js/detail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/video/Storitz Presents The Smart And Easy Way To Get Tenants.flv" />
-      <change type="DELETED" beforePath="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\_callCenterPolling_js.gsp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/Config.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/help.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/js/callCenterPolling.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/js/home.js" afterPath="$PROJECT_DIR$/web-app/js/home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/home/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" />
-      <change type="DELETED" beforePath="C:\Users\mamster\IdeaProjects\storitz\web-app\video\storitz-client-video-v2-640x360.mov" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/static/operatorsignup.gsp" afterPath="$PROJECT_DIR$/grails-app/views/static/operatorsignup.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/js/transaction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" afterPath="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -104,19 +87,28 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="2142" selection-end="2142" vertical-scroll-proportion="17.671053">
+            <state line="79" column="0" selection-start="3176" selection-end="3176" vertical-scroll-proportion="0.65163934">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="home.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/js/home.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="0" selection-start="299" selection-end="299" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="60" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.68615985">
+            <state line="22" column="60" selection-start="1147" selection-end="1147" vertical-scroll-proportion="-7.3333335">
               <folding />
             </state>
           </provider>
@@ -204,8 +196,6 @@
         <option value="$PROJECT_DIR$/grails-app/views/help.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/_logo_bar.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
-        <option value="$PROJECT_DIR$/web-app/js/home.js" />
         <option value="$PROJECT_DIR$/grails-app/views/static/operatorsignup.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" />
         <option value="$PROJECT_DIR$/web-app/js/transaction.js" />
@@ -215,6 +205,8 @@
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/web-app/js/detail.js" />
         <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/web-app/js/home.js" />
+        <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
       </list>
     </option>
   </component>
@@ -1095,13 +1087,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20962566" sideWeight="0.718091" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1171123" sideWeight="0.2008879" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31737193" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31737193" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3973363" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
@@ -1142,7 +1134,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Missing CSS images" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move function references" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1155,8 +1147,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Home page redesign table rows&#10;Highlighting from map" />
-    <MESSAGE value="Fixed IE8 bugs&#10;New video player without viral plugin" />
     <MESSAGE value="Sorting on home page&#10;Empty table message" />
     <MESSAGE value="Clickable row is done" />
     <MESSAGE value="Remove see more offers" />
@@ -1180,6 +1170,8 @@
     <MESSAGE value="Back to jQuery_all bundle" />
     <MESSAGE value="Split the bundle" />
     <MESSAGE value="Missing CSS images" />
+    <MESSAGE value="Moved help to separate file&#10;Consolidated JS in home and detail pages&#10;Created detail bundle&#10;Fixed nav menu&#10;Added video to Add Facilities&#10;" />
+    <MESSAGE value="Move function references" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1251,23 +1243,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/js/home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="84" selection-start="2870" selection-end="2870" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/static/operatorsignup.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="101" column="32" selection-start="3333" selection-end="3333" vertical-scroll-proportion="-6.6666665">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="2142" selection-end="2142" vertical-scroll-proportion="17.671053">
           <folding />
         </state>
       </provider>
@@ -1330,7 +1308,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="60" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.68615985">
+        <state line="22" column="60" selection-start="1147" selection-end="1147" vertical-scroll-proportion="-7.3333335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/js/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="299" selection-end="299" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="0" selection-start="3176" selection-end="3176" vertical-scroll-proportion="0.65163934">
           <folding />
         </state>
       </provider>

@@ -5,29 +5,6 @@ function calcDistance(lat1, lat2, lng1, lng2) {
     return Math.round(100 * d) / 100;
 }
 
-function redrawMap() {
-
-    bounds = map.getBounds();
-
-    if (!firstDraw) {
-        firstDraw = true;
-        return;
-    }
-
-    if (!inDrag) {
-        getMarkers();
-    }
-}
-
-function dragStart() {
-    inDrag = true;
-}
-
-function dragEnd() {
-    inDrag = false;
-    getMarkers();
-}
-
 function siteLink(s) {
     var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
     return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id + '?size=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress());

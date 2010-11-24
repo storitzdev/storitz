@@ -63,6 +63,28 @@
           srcMarkersBlue[${i}] = ${p.imageLink(src:'map_icons/blue-loc' + i + '.png')};
         </g:each>
 
+        function redrawMap() {
+
+            bounds = map.getBounds();
+
+            if (!firstDraw) {
+                firstDraw = true;
+                return;
+            }
+
+            if (!inDrag) {
+                getMarkers();
+            }
+        }
+
+        function dragStart() {
+            inDrag = true;
+        }
+
+        function dragEnd() {
+            inDrag = false;
+            getMarkers();
+        }
 
         function createMap() {
           var iploc  = new google.maps.LatLng(${lat}, ${lng});
