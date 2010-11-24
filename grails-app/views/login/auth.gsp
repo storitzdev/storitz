@@ -3,11 +3,11 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 <head>
-  <title>Storitz Login</title>
   <meta name="KEYWORDS" content="self-storage, personal storage, moving, storage units, click, store"/>
   <meta name="ROBOTS" content="FOLLOW"/>
 
   <p:css name="login" />
+  <g:set scope="request" var="title" value="Storitz Login"/> 
   <g:render template="/header" />
 </head>
   <body>
