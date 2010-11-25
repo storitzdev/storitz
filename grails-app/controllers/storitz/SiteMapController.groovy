@@ -11,7 +11,7 @@ class SiteMapController
 
     withFormat {
       html {
-        def sites = StorageSite.findAllByDisabled(false, [sort:"city"]).groupBy { StorageSite site -> site.stateName }
+        def sites = StorageSite.findAllByDisabled(false, [sort:"city"]).groupBy { StorageSite site -> site.state.display }
 
         // Converting to TreeMap so keys (state names) will iterate in alphabetical order.
         [storageSiteStateMap: sites as TreeMap]
