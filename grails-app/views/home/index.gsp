@@ -263,80 +263,90 @@
                 <g:each var="site" in="${sites}" status="c">
                   <tr>
                     <td class="curvedLeft stClickable">
-                      <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
-                      <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
-                      <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
-                      <div class="stRentMe">
-                        <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
-                          <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                        </g:link>
+                      <div style="width: 120px;">
+                        <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
+                        <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
+                        <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
+                        <div class="stRentMe">
+                          <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                            <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                          </g:link>
+                        </div>
+                        <div class="stPriceSub textCenter monthly"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
                       </div>
-                      <div class="stPriceSub textCenter monthly"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
                     </td>
                     <td><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" format="0.00"/></td>
                     <td class="curvedCenter textCenter">
-                      <div class="left" style="margin-left:10px;">
-                        <div id="map_icon${site.id}" class="map_icon">
-                          <storitz:image src="${'map_icons/green-loc' + (c  + 1) + '.png'}" width="28" height="35"/>
+                      <div style="width:55px;">
+                        <div class="left" style="margin-left:10px;">
+                          <div id="map_icon${site.id}" class="map_icon">
+                            <storitz:image src="${'map_icons/green-loc' + (c  + 1) + '.png'}" width="28" height="35"/>
+                          </div>
+                          <div class="stDistance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/></div>
+                          <div class="stMiles">miles</div>
                         </div>
-                        <div class="stDistance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/></div>
-                        <div class="stMiles">miles</div>
                       </div>
                     </td>
                     <td class="curvedCenter stVert stClickable">
-                      <g:if test="${site?.logo}">
-                        <img src="${resource(file:site.logo.src())}" class="stLogo" width="100" height="40" border="0" alt="${site.title} Logo"/>
-                      </g:if>
+                      <div style="width:120px;">
+                        <g:if test="${site?.logo}">
+                          <img src="${resource(file:site.logo.src())}" class="stLogo" width="100" height="40" border="0" alt="${site.title} Logo"/>
+                        </g:if>
+                      </div>
                     </td>
                     <td class="curvedCenter stVert stClickable">
-                      <div class="stTitle">${site.title}</div>
-                      <div class="left" style="margin-left: 5px;">
-                        <div class="stAddress">${site.address}</div>
-                      </div>
-                      <div style="clear:both;"></div>
-                      <div>
-                        <g:if test="${site.isKeypad}">
-                          <storitz:image class="pointer tooltip_keypad" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
-                        </g:if>
-                        <g:if test="${site.isCamera}">
-                          <storitz:image class="pointer tooltip_camera" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
-                        </g:if>
-                        <g:if test="${site.isGate}">
-                          <storitz:image class="pointer tooltip_gate" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
-                        </g:if>
-                        <g:if test="${site.isUnitAlarmed}">
-                          <storitz:image class="pointer tooltip_alarm" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
-                        </g:if>
-                        <g:if test="${site.isManagerOnsite}">
-                          <storitz:image class="pointer tooltip_manager" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
-                        </g:if>
-                        <g:if test="${site.hasElevator}">
-                          <storitz:image class="pointer tooltip_elevator" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
-                        </g:if>
-                        <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
-                          <storitz:image class="pointer tooltip_truck" src="icon-rentaltruck-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
-                        </g:if>
+                      <div style="width:190px;">
+                        <div class="stTitle">${site.title}</div>
+                        <div class="left" style="margin-left: 5px;">
+                          <div class="stAddress">${site.address}</div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div>
+                          <g:if test="${site.isKeypad}">
+                            <storitz:image class="pointer tooltip_keypad" src="icon-keypad-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Keypad"/>
+                          </g:if>
+                          <g:if test="${site.isCamera}">
+                            <storitz:image class="pointer tooltip_camera" src="icon-camera-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Camera"/>
+                          </g:if>
+                          <g:if test="${site.isGate}">
+                            <storitz:image class="pointer tooltip_gate" src="icon-gate-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Gate"/>
+                          </g:if>
+                          <g:if test="${site.isUnitAlarmed}">
+                            <storitz:image class="pointer tooltip_alarm" src="icon-alarm-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Alarm"/>
+                          </g:if>
+                          <g:if test="${site.isManagerOnsite}">
+                            <storitz:image class="pointer tooltip_manager" src="icon-green-mgr20b.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Manager Onsite"/>
+                          </g:if>
+                          <g:if test="${site.hasElevator}">
+                            <storitz:image class="pointer tooltip_elevator" src="icon-green-elevator20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                          </g:if>
+                          <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}">
+                            <storitz:image class="pointer tooltip_truck" src="icon-rentaltruck-green-20x20.gif" style="vertical-align: middle; margin: 1px; width:20px; height:20px;" alt="Elevator"/>
+                          </g:if>
+                        </div>
                       </div>
                     </td>
                     <td class="curvedRight stVert stClickable">
-                      <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                        <div class="left" style="width:22px;">
-                          <storitz:image src="special-offer-16px.png" width="16" height="16px" border="0"/>
-                        </div>
-                        <div class="left" style="width:120px;">
-                          <div class="stSpecialOffers">
-                            ${siteMoveInPrice[site.id]?.promoName}
+                      <div style="width:150px;">
+                        <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                          <div class="left" style="width:22px;">
+                            <storitz:image src="special-offer-16px.png" width="16" height="16px" border="0"/>
                           </div>
-                          <div class="stSpecialOffersSeeMore">See more offers</div>
-                          <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
-                        </div>
-                      </g:if>
-                      <g:else>
-                        <div class="left" style="width:22px;">&nbsp;</div>
-                        <div class="left" style="width:125px;">
-                          <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
-                        </div>
-                      </g:else> 
+                          <div class="left" style="width:120px;">
+                            <div class="stSpecialOffers">
+                              ${siteMoveInPrice[site.id]?.promoName}
+                            </div>
+                            <div class="stSpecialOffersSeeMore">See more offers</div>
+                            <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
+                          </div>
+                        </g:if>
+                        <g:else>
+                          <div class="left" style="width:22px;">&nbsp;</div>
+                          <div class="left" style="width:125px;">
+                            <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
+                          </div>
+                        </g:else>
+                      </div>
                     </td>
                   </tr>
                 </g:each>

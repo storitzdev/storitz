@@ -21,6 +21,7 @@
     var urlAjaxUpdate = "${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}";
     var urlAjaxPoll = "${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}";
     var urlThemePath = "${resource(dir:'/images/themes/')}";
+    var srcSpinner = ${p.imageLink(src:'ajax-loader.gif')};
 
     <g:render template="/transaction_js"/>
     <g:render template="/directions_js"/>

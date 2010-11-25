@@ -90,7 +90,14 @@ function setupValidation() {
             $('#step1').removeClass('step_header_hi').addClass('step_header');
             $('#step2').removeClass('step_header').addClass('step_header_hi');
             $('#errorMessage').hide();
-            // TODO - put up a processing image picture
+            $('<div>').css({'text-align':'center', 'display':'block', 'line-height':'150px'}).append($('<img>', { 'src': srcSpinner, 'width':32, 'height':32, 'border':0})).dialog({
+                      modal: true,
+                      height: 180,
+                      title: 'Processing. Please wait...',
+                      autoOpen: true,
+                      draggable: false,
+                      resizable: false
+                    });
             form.submit();
         },
         rules: {

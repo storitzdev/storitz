@@ -341,9 +341,9 @@ function createTableRow(s) {
 
   var logoCol
   if (s.logo.toString().length > 0) {
-    logoCol = $('<div>', { 'class': 'left' } ).append($('<img>', { 'class':'stLogo', src: s.logo, width:100, height:40, border:0, alt: s.title + ' Logo'}));
+    logoCol = $('<div>', { 'class': 'left' } ).css('width','120px').append($('<img>', { 'class':'stLogo', src: s.logo, width:100, height:40, border:0, alt: s.title + ' Logo'}));
   } else {
-    logoCol = $('<div>', { 'class': 'left' } )
+    logoCol = $('<div>', { 'class': 'left' } ).css('width', '120px');
   }
 
   var features = $('<div>');
@@ -375,7 +375,7 @@ function createTableRow(s) {
       break;
   }
 
-  var offersCol = $('<div>');
+  var offersCol = $('<div>').css('width', '150px');
 
   if (s.promoId) {
     offersCol
@@ -392,19 +392,19 @@ function createTableRow(s) {
         .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
   }
 
-  var distanceCol = $('<div>').append($('<div>', { 'class': 'left' }).css('margin-left', '10px')
+  var distanceCol = $('<div>').css('width', '55px').append($('<div>', { 'class': 'left' }).css('margin-left', '10px')
               .append($('<div>', { id: 'map_icon'+s.id, 'class':'map_icon'})
                 .append($('<img>', { src: savedTableId && savedTableId == s.id ? srcMarkersBlue[s.index] : srcMarkersGreen[s.index], width: 28, height: 35 })))
               .append($('<div>', { 'class':'stDistance' }).text(calcDistance(searchLat, s.lat, searchLng, s.lng)))
               .append($('<div>', { 'class':'stMiles' }).text('miles')));
 
-  var facilityCol = $('<div>').append($('<div>', { 'class':'stTitle' }).text(s.title))
+  var facilityCol = $('<div>').css('width', '190px').append($('<div>', { 'class':'stTitle' }).text(s.title))
               .append($('<div>', { 'class': 'left' }).css('margin-left', '5px')
                 .append($('<div>', { 'class':'stAddress' }).text(s.address)))
             .append($('<div>').css('clear','both'))
             .append(features);
 
-  var priceCol = $('<div>')
+  var priceCol = $('<div>').css('width', '120px')
             .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost ? s.moveInCost.toFixed(2) : '')))
             .append($('<div>', { 'class':'stPriceSub textCenter'}).text('Paid thru ' + (s.paidThruDate ? s.paidThruDate : '')))
             .append($('<div>', { 'class':'stPriceSub textCenter'}).html('Taxes &amp; fees included'))

@@ -91,7 +91,16 @@ function setupForm() {
 
   var validator = $('#paymentTransaction')
     .validate({
-      rules: {
+      submitHandler: function(form) {
+          $('<div>').css({'text-align':'center', 'display':'block', 'line-height':'150px'}).append($('<img>', { 'src': srcSpinner, 'width':32, 'height':32, 'border':0})).dialog({
+                    modal: true,
+                    height: 180,
+                    title: 'Processing. Please wait...',
+                    autoOpen: true,
+                    draggable: false,
+                    resizable: false
+                  });
+          form.submit();
       },
       messages: {
         "firstName": "Missing first name",

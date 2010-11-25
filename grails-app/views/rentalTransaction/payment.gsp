@@ -16,6 +16,8 @@
   var ajaxFormOldValues;
   var urlAjaxUpdate = "${createLink(controller:'rentalTransaction', action: 'ajaxUpdate', id:shortSessionId)}";
   var urlAjaxPoll = "${createLink(controller:'rentalTransaction', action: 'ajaxPoll', id:shortSessionId)}";
+  var srcSpinner = ${p.imageLink(src:'ajax-loader.gif')};
+
 
   function prevStep() {
     window.location = "${createLink(mapping:'siteLink', controller:'storageSite', action:'detail',
