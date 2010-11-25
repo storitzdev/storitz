@@ -297,7 +297,7 @@ class UserController {
 
 	private void addRoles(person) {
 		for (String key in params.keySet()) {
-			if (key.contains('ROLE') && 'on' == params.get(key)) {
+			if (key.contains('ROLE_') && 'on' == params.get(key)) {
 				def role = Role.findByAuthority(key)
                 if (role) UserRole.create(person, role, true)
 			}
@@ -306,8 +306,8 @@ class UserController {
 
     private void addSites(person) {
       for (String key in params.keySet()) {
-        if (key.contains('SITE') && 'on' == params.get(key)) {
-          def siteId = key.substring(5) as Long
+        if (key.contains('SITE:_') && 'on' == params.get(key)) {
+          def siteId = key.substring(6) as Long
           def site = StorageSite.get(siteId)
           SiteUser.link(site, person)
         }
@@ -316,7 +316,7 @@ class UserController {
 
     private void addNotificationTypes(person) {
       for (String key in params.keySet()) {
-        if (key.contains('NOTIFICATION') && 'on' == params.get(key)) {
+        if (key.contains('NOTIFICATION_') && 'on' == params.get(key)) {
           def notificationType = NotificationType.findByNotificationType(key)
           UserNotificationType.create(person, notificationType, true)
         }

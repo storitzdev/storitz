@@ -188,7 +188,7 @@
                         <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
                           <g:each var="site" in="${siteMap.keySet()}">
                             <div style="margin:0 1.5em; width: 250px;" class="left">
-                              <g:checkBox name="SITE_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
+                              <g:checkBox name="SITE:_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
                             </div>
                           </g:each>
                         </div>
