@@ -329,7 +329,7 @@
                     <td class="curvedRight stVert stClickable">
                       <div style="width:150px;">
                         <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                          <div class="left" style="width:22px;">
+                          <div class="left" style="width:22px;height:100%;">
                             <storitz:image src="special-offer-16px.png" width="16" height="16px" border="0"/>
                           </div>
                           <div class="left" style="width:120px;">
