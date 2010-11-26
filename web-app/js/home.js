@@ -452,7 +452,7 @@ function markerClick(feature) {
     c = $('<div>', { style: 'width:200px;' }).append(
             $('<div>', { 'class': 'infoWindowTitle' }).text(feature.title));
     if (feature.coverImg.length > 0) {
-        c.append($('<img>', { src:"${resource(dir:'/') != '/' ? resource(dir:'/') : ''}" + feature.coverImg,  alt:feature.title, 'class': 'left'}).css('margin-right', '5px'));
+        c.append($('<img>', { src: srcHome + feature.coverImg,  alt:feature.title, 'class': 'left'}).css('margin-right', '5px'));
     }
     c.append($('<div>', { 'class':'infoWindowText' })
             .append($('<div>').text(feature.address))

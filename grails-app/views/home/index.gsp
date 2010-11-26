@@ -21,6 +21,7 @@
         var srcIconManager = ${p.imageLink(src:'icon-green-mgr20b.gif')};
         var srcIconElevator = ${p.imageLink(src:'icon-green-elevator20.gif')};
         var srcIconTruck = ${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')};
+        var srcHome = "${resource(dir:'/') != '/' ? resource(dir:'/') : ''}";
 //]]>
       </script>
       <p:javascript src="home"/>
