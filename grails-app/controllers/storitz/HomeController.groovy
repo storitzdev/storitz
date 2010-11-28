@@ -135,7 +135,7 @@ class HomeController {
 
     def siteMoveInPrice = [:]
 
-    def unitSize
+    def unitSize = null
     if (searchSize != 1) {
       unitSize = StorageSize.get(searchSize)
     }
@@ -151,7 +151,7 @@ class HomeController {
     }
     for (site in sites) {
       def bestUnit
-      if (unitSize) {
+      if (searchSize != 1 && unitSize) {
         bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
       } else {
         bestUnit = site.units.min{ it.price }
