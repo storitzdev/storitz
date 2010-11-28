@@ -227,7 +227,9 @@ function setupForm() {
     $('#address').focus();
     $('#address').keypress(function(event) {
         if (event.keyCode == 13) {
+            event.preventDefault();
             showAddress(getAddress(), $('#size').val(), getDate());
+            return false;
         }
     });
     $('#address').click(function(event) {
