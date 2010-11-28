@@ -51,7 +51,6 @@ environments {
         storitz.nacha.dir = '/usr/share/tomcat6/nacha'
         storitz.nacha.fileId = '1234567890'
         storitz.nacha.companyId = '0123456789'
-        uiperformance.enabled = false
     }
     preview {
         grails.serverURL = "http://preview.storitz.com"
