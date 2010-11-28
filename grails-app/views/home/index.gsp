@@ -41,6 +41,7 @@
         var storageSize = [];
         var tipBuilder = [];
         var searchAddr;
+        var oldSearchAddr;
         var searchSize = ${searchSize};
         var searchSizeDesc;
         var searchDate;

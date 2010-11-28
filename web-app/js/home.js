@@ -176,6 +176,7 @@ function showAddress(address, size, date) {
     var validAddr = address.length > 4 && !/^Enter /.test(address);
 
     if (validAddr) {
+        oldSearchAddr = searchAddr
         searchAddr = address;
     }
     searchSize = size;
@@ -201,7 +202,10 @@ function showAddress(address, size, date) {
             }
         });
     }
-    getMarkers();
+    // only redraw markers if date or size changed
+    if (oldSearchAddr == searchAddr) {
+        getMarkers();
+    }
 }
 
 function setupCalendar() {
