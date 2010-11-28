@@ -129,15 +129,15 @@ class HomeController {
 
     def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
 
-    def searchSize = (params.searchSize && params.searchSize.isNumber() ? params.searchSize as Integer : 1)
+    Integer searchSize = (params.size && params.size.isNumber() ? params.size as Integer : 1)
 
     def sites = mapService.getSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
     def siteMoveInPrice = [:]
 
     def unitSize
-    if (params?.size != 1) {
-      unitSize = StorageSize.get(params.size)
+    if (searchSize != 1) {
+      unitSize = StorageSize.get(searchSize)
     }
     Date  moveInDate
     if (params.date && params.date instanceof Date) {
@@ -171,7 +171,7 @@ class HomeController {
       }
     }
 
-    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: (params.size? params.size: 1), sites: sites, siteMoveInPrice:siteMoveInPrice]
+    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice]
   }
 
 }
