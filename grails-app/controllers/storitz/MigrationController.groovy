@@ -5,6 +5,7 @@ import org.apache.commons.lang.time.DateUtils
 import org.codehaus.groovy.grails.web.json.JSONObject
 import storitz.constants.FeedType
 import com.storitz.*
+import storitz.constants.CenterShiftVersion
 
 class MigrationController {
 
@@ -72,15 +73,19 @@ class MigrationController {
       clearNulls(resp)
       def feed
       if (resp.feed.feedType == 'SITELINK') {
-        feed = new SiteLink(params['feed'])
-        feed.properties = resp.feed
+        feed = new SiteLink()
         feed.feedType = FeedType.SITELINK
-
+        feed.corpCode = resp.feed.corpCode
+        feed.userName = resp.feed.userName
+        feed.password = resp.feed.password
+        feed.operatorName = resp.feed.operatorName
       } else if (resp.feed.feedType == 'CENTERSHIFT') {
-        feed = new CenterShift(params['feed'])
-        feed.properties = resp.feed
+        feed = new CenterShift()
+        feed.userName = resp.feed.userName
+        feed.pin = resp.feed.pin
+        feed.orgId = resp.feed?.orgId
+        feed.cshiftVersion = CenterShiftVersion.getEnumFromId(resp.feed.cshiftVersion)
         feed.feedType = FeedType.CENTERSHIFT
-
       }
       // create the manager first
       // handle users
@@ -321,9 +326,8 @@ class MigrationController {
         sites.add(site)
 
       }
-      feed.sites.clear()
       feed.manager = manager
-      feed.save(flush: true)
+      feed.save(flush:true)
       for(site in sites) {
         feed.addToSites(site)
         SiteUser.link(site, manager)
