@@ -322,6 +322,7 @@ class MigrationController {
 
       }
       feed.sites.clear()
+      feed.manager = manager
       feed.save(flush: true)
       for(site in sites) {
         feed.addToSites(site)
@@ -344,7 +345,6 @@ class MigrationController {
     if (obj instanceof Map) {
       def map = (Map)obj
       for (r in map.entrySet()) {
-        println "Examining map key=${r.key} value=${r.value}"
         if (r.value == JSONObject.NULL) {
           r.value = null
         } else if (r.value instanceof Map || r.value instanceof List) {
