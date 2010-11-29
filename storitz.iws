@@ -89,7 +89,7 @@
       <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="333" column="74" selection-start="17253" selection-end="17253" vertical-scroll-proportion="-59.94737">
+            <state line="229" column="109" selection-start="10354" selection-end="10369" vertical-scroll-proportion="-6.013158">
               <folding />
             </state>
           </provider>
@@ -107,7 +107,16 @@
       <file leaf-file-name="detail.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="8" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.9011628">
+            <state line="23" column="55" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.3003876">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/js/detail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="160" column="77" selection-start="5419" selection-end="5421" vertical-scroll-proportion="-20.92">
               <folding />
             </state>
           </provider>
@@ -126,15 +135,6 @@
         <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
             <state line="597" column="1" selection-start="10204" selection-end="10207" vertical-scroll-proportion="-4.76">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="payment.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="38" selection-start="902" selection-end="902" vertical-scroll-proportion="-4.0">
               <folding />
             </state>
           </provider>
@@ -1351,13 +1351,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/js/detail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="0" selection-start="2555" selection-end="3359" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/ChannelConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="44" selection-start="805" selection-end="805" vertical-scroll-proportion="0.0">
@@ -1407,13 +1400,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="333" column="74" selection-start="17253" selection-end="17253" vertical-scroll-proportion="-59.94737">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/ECMAScript.js2">
       <provider selected="true" editor-type-id="text-editor">
         <state line="194" column="13" selection-start="8321" selection-end="8321" vertical-scroll-proportion="0.3328446">
@@ -1435,9 +1421,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="229" column="109" selection-start="10354" selection-end="10369" vertical-scroll-proportion="-6.013158">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/js/detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="77" selection-start="5419" selection-end="5421" vertical-scroll-proportion="-20.92">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="8" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.9011628">
+        <state line="23" column="55" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.3003876">
           <folding />
         </state>
       </provider>
