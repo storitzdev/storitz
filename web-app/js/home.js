@@ -112,10 +112,6 @@ function getMarkers() {
         return;
     }
 
-    drawMarkers();
-}
-
-function drawMarkers() {
     $('#mapSpinner').fadeIn();
 
     $.ajax({
