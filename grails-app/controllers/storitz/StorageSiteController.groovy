@@ -84,8 +84,6 @@ class StorageSiteController {
     if (storageSiteInstance.description) {
       storageSiteInstance.description = storageSiteInstance.description.encodeAsSanitizedMarkup()
     }
-    // TODO handle logo
-
     if (storageSiteInstance.save(flush: true)) {
       flash.message = "${message(code: 'default.created.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), storageSiteInstance.id])}"
       redirect(action: "show", id: storageSiteInstance.id)
@@ -235,7 +233,8 @@ class StorageSiteController {
       params.remove('description')
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
-      def fileLocation = 'logo_' + params.id + '.jpg'
+      def random = new Random()
+      def fileLocation = 'logo_' + random.nextInt(100000) + '.jpg'
       if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', fileLocation, siteId)) {
         def tmpPath = fileUploadService.getFilePath('/images/upload', fileLocation, siteId)
         def filePath = fileUploadService.getFilePath('/images/site', fileLocation, siteId)

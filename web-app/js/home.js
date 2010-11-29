@@ -120,6 +120,7 @@ function getMarkers() {
         dataType:'json',
         data: {
             searchSize: searchSize,
+            addressChange: (searchAddr == oldSearchAddr),
             date: getDate(),
             lat: searchLat,
             lng: searchLng,
@@ -193,8 +194,7 @@ function showAddress(address, size, date) {
                 searchLat = results[0].geometry.location.lat();
                 searchLng = results[0].geometry.location.lng();
             } else {
-                // TODO - update map div with message
-
+                $('#mapStatus').html('Could not find address - please check search.').effect("highlight", {}, 1000);
             }
         });
     }
