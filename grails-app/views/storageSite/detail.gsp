@@ -27,7 +27,13 @@
     <g:render template="/directions_js"/>
 
     function createMap() {}
+//]]>
+    </script>
+    </p:dependantJavascript>
+    <p:addJavascript src="detail_bundle"/>
 
+    <script type="text/javascript">
+//<![CDATA[
   $(document).ready(function() {
 
     setupImageGallery();
@@ -54,7 +60,6 @@
 //]]>
   </script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&amp;sensor=false&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
-    <p:addJavascript src="detail_bundle"/>
   </p:dependantJavascript>
   </head>
   <body>
