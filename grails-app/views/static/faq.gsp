@@ -36,7 +36,7 @@
           <li><a href="#q8">What about Upper/Lower/Basement?</a></li>
           <li><a href="#q9">“Roll-up”?  Like fruit roll-up?</a></li>
           <li><a href="#q10">What’s the deal with Wine Storage?</a></li>
-          <li><a href="#q11">What if I need to stare an RV Vehicle, Trailer or Boat?  Can I do that?</a></li>
+          <li><a href="#q11">What if I need to store an RV Vehicle, Trailer or Boat?  Can I do that?</a></li>
           <li><a href="#q12">What size unit do I need?</a></li>
           <li><a href="#q13">What features should I look for in a self storage facility?</a></li>
           <li><a href="#q14">Do you have any tips for packing my storage unit?</a></li>

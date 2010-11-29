@@ -50,10 +50,10 @@ class MigrationController {
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
-        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"manager\":${myFeed.manager as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
-        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON} }, \"manager\":${myFeed.manager as JSON}, \"siteUsers\": ${siteUsers as JSON}, \"rentalAgreements\":${rentalAgreements as JSON } }")
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
       }
     }
   }
@@ -67,7 +67,6 @@ class MigrationController {
     def url = new URL(urlString)
     def conn = url.openConnection()
     if (conn.responseCode == 200) {
-      println "Response was 200"
       def respText = conn.content.text
       def resp = JSON.parse(respText)
       clearNulls(resp)
@@ -77,7 +76,7 @@ class MigrationController {
         feed.properties = resp.feed
         feed.feedType = FeedType.SITELINK
 
-      } else if (resp.feedType == 'CENTERSHIFT') {
+      } else if (resp.feed.feedType == 'CENTERSHIFT') {
         feed = new CenterShift(params['feed'])
         feed.properties = resp.feed
         feed.feedType = FeedType.CENTERSHIFT
@@ -87,16 +86,16 @@ class MigrationController {
       // handle users
       def users = []
 
-      def manager = User.findByUsername(resp.manager.username)
+      def manager = User.findByUsername(resp.feed.manager.username)
       if (!manager) {
         manager = new User()
         def notificationTypes = []
-        for (n in resp.manager.notificationTypes) {
+        for (n in resp.feed.manager.notificationTypes) {
           def notificationType = NotificationType.get(n.notificationType)
           notificationTypes.add(notificationType)
         }
-        resp.manager.notificationTypes.clear()
-        bindData(manager, resp.manager)
+        resp.feed.manager.notificationTypes.clear()
+        bindData(manager, resp.feed.manager)
         manager.manager = User.findByUsername('admin')
         manager.save(flush: true)
         for (n in notificationTypes) {
@@ -109,7 +108,7 @@ class MigrationController {
         def user = User.findByUsername(u.username)
         if (!user) {
           user = new User()
-          notificationTypes = []
+          def notificationTypes = []
           for (n in u.notificationTypes) {
             def notificationType = NotificationType.get(n.notificationType)
             notificationTypes.add(notificationType)
@@ -135,7 +134,7 @@ class MigrationController {
         bindData(rentalAgreement, ra)
         rentalAgreement.save(flush: true)
       }
-      for (s in feed.sites) {
+      for (s in resp.feed.sites) {
         def site = new StorageSite()
         def securityItems = []
         for (i in s.securityItems) {

@@ -152,7 +152,7 @@
           <div style="font-weight:bold;">What else do I get?</div>
           <div>
             <ul>
-              <li>See how you are stacking up against your competition on Storitz? Full reporting and analytics related to your locations and performance on Storitz.</li>
+              <li>Want to see how you are stacking up against your competition on Storitz? Full reporting and analytics related to your locations and performance on Storitz.</li>
               <li>You control all email notifications, reporting and analytics access for your employees</li>
             </ul>
           </div>
