@@ -120,10 +120,10 @@ function getMarkers() {
         dataType:'json',
         data: {
             searchSize: searchSize,
-            addressChange: (searchAddr == oldSearchAddr),
+            addressChange: addressChange,
             date: getDate(),
-            lat: searchLat,
-            lng: searchLng,
+            lat: map.getCenter().lat(),
+            lng: map.getCenter().lng(),
             swLat: bounds.getSouthWest().lat(),
             swLng: bounds.getSouthWest().lng(),
             neLat: bounds.getNorthEast().lat(),
@@ -131,6 +131,9 @@ function getMarkers() {
         },
         success:function(ret) {
 
+            if (ret.zoom > 0) {
+                map.setZoom(ret.zoom);
+            }
             var rows = 0;
             var statusText
             if (ret.siteCount >= 20) {
@@ -165,6 +168,7 @@ function getMarkers() {
             alert("Something went wrong " + ret);
         }
     });
+    addressChange = false;
     $('#mapSpinner').idle(500).fadeOut('slow')
 }
 
@@ -175,6 +179,7 @@ function showAddress(address, size, date) {
     if (validAddr) {
         oldSearchAddr = searchAddr
         searchAddr = address;
+        if (searchAddr != oldSearchAddr) addressChange = true;        
     }
     searchSize = size;
     searchDate = date;
@@ -451,7 +456,7 @@ function setupTable() {
 }
 
 function markerClick(feature) {
-    c = $('<div>', { style: 'width:200px;' }).append(
+    var c = $('<div>', {'id':'mapInfoWin'}).css({'width':'200', 'overflow':'hidden'}).append(
             $('<div>', { 'class': 'infoWindowTitle' }).text(feature.title));
     if (feature.coverImg.length > 0) {
         c.append($('<img>', { src: srcHome + feature.coverImg,  alt:feature.title, 'class': 'left'}).css('margin-right', '5px'));
@@ -461,7 +466,7 @@ function markerClick(feature) {
             .append($('<div>').text(feature.city + ', ' + feature.state + ' ' + feature.zipcode))
             .append($('<div>', {'class':'left'}).css('margin-top', '5px').append($('<a>', { href: siteLink(feature) })
             .append($('<img>', { src: srcDetailButton, width:'55', height:'20', border:'0'  })))));
-
+    var holder = $('<div>').append(c);
     feature.marker.setIcon(markersBlue[feature.index]);
     $('#map_icon' + feature.id).html($('<img>', { src:srcMarkersBlue[feature.index], width: 28, height: 35}));
     savedTableId = feature.id;
@@ -472,7 +477,7 @@ function markerClick(feature) {
         features[savedFeature].marker.setIcon(markersGreen[features[savedFeature].index]);
     }
     savedFeature = feature.id;
-    infoWindow = new google.maps.InfoWindow({content: c.html(), maxWidth: 200});
+    infoWindow = new google.maps.InfoWindow({content: holder.html(), maxWidth: 200});
     google.maps.event.addListener(infoWindow, 'closeclick', function() {
         features[savedFeature].marker.setIcon(markersGreen[features[savedFeature].index]);
         if (savedTableId) {
@@ -482,6 +487,7 @@ function markerClick(feature) {
         savedFeature = null;
     });
     infoWindow.open(map, feature.marker);
+    $('div#mapInfoWin').parent().css('overflow', 'hidden');
 }
 
 function setupMap() {

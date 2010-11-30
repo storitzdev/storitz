@@ -42,6 +42,7 @@
         var tipBuilder = [];
         var searchAddr;
         var oldSearchAddr;
+        var addressChange = false;
         var searchSize = ${searchSize};
         var searchSizeDesc;
         var searchDate;
@@ -186,6 +187,12 @@
                   <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>
                 </div>
                 <div style="clear: both;height: 15px;"></div>
+                <div style="margin-left: 35px;">
+                  <a href="#results">
+                    <storitz:image src="btn-find-it.png" width="108" height="36" border="0" alt="Find Results"/>
+                  </a>
+                </div>
+                <div style="clear: both;height: 15px;"></div>
                 <div style="margin-left:35px;">
                   <g:link controller="static" action="guarantee" target="_blank">
                     <storitz:image src="best-price-guarantee.png" width="230" height="70" border="0" alt="Best Price and AnyTime refund guaranteed"/>
@@ -250,6 +257,7 @@
             </div>
             <div class="sbSpacer">&nbsp;</div>
             <div class="sbText">Unit Size:</div>
+            <a name="results"></a>
             <div class="sbUnitSelect">
               <g:select name="sbUnitsize" id="sbUnitsize" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
             </div>

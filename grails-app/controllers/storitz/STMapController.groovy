@@ -72,18 +72,20 @@ class STMapController {
     def mapresults = {
 
       def dim
+      def zoom = -1
       double lat = params.lat as double
       double lng = params.lng as double
 
-      if (params.addressChange) {
-        def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
+      if (params.boolean('addressChange')) {
+        println "Address change is true"
+        zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
 
         dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
       } else {
+        println "Address change is false"
         dim = [swLat: params.swLat as BigDecimal, swLng: params.swLng as BigDecimal, neLat: params.neLat as BigDecimal, neLng: params.neLng as BigDecimal]
       }
       def results = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
-
 
       results.sort( {a,b -> mapService.calcDistance(lat, a.lat as double, lng, a.lng as double) <=> mapService.calcDistance(lat, b.lat as double, lng, b.lng as double) } as Comparator)
 
@@ -161,7 +163,7 @@ class STMapController {
       }
       sw << "]"
       webUtilService.nocache(response)
-      render (status: 200, contentType:"application/json", text:"{ \"siteCount\": ${results.size()}, \"features\": ${sw.toString()} }")
+      render (status: 200, contentType:"application/json", text:"{ \"siteCount\": ${results.size()}, \"zoom\": ${zoom}, \"features\": ${sw.toString()} }")
     }
 
     def iplocate = {
