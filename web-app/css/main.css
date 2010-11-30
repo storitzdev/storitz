@@ -581,6 +581,7 @@ table#stresults thead {
     font-weight: bold;
     width: 185px;
     text-align: center;
+    margin-bottom: 5px;
 }
 
 .infoWindowText {

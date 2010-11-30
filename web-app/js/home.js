@@ -509,12 +509,14 @@ function setupMap() {
         var mapDiv = $(this).find('.map_icon');
         var mapId = mapDiv.attr('id').substring(8);
         features[mapId].marker.setIcon(markersBlue[features[mapId].index]);
+        $('#map_icon' + mapId).html($('<img>', { src:srcMarkersBlue[features[mapId].index], width: 28, height: 35}));
     });
     $('#stresults tbody tr').mouseleave(function(event) {
         var mapDiv = $(this).find('.map_icon');
         var mapId = mapDiv.attr('id').substring(8);
         if (!savedTableId || savedTableId != mapId) {
             features[mapId].marker.setIcon(markersGreen[features[mapId].index]);
+            $('#map_icon' + mapId).html($('<img>', { src:srcMarkersGreen[features[mapId].index], width: 28, height: 35}));
         }
     });
 }
