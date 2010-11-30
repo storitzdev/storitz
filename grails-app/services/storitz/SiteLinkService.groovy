@@ -838,7 +838,8 @@ class SiteLinkService {
           siteUnit.displaySize = width + " X " + length
 
           def unitSize = unitSizeService.getUnitSize(width, length)
-          if (unitSize) {
+
+          if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
             siteUnit.unitsize = unitSize
             if (!siteUnit.save()) {
               siteUnit.errors.allErrors.each { writer.println it }
