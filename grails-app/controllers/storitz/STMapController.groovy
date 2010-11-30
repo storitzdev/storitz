@@ -127,19 +127,17 @@ class STMapController {
           bestUnit = site.units.min{ it.price }
         }
         if (bestUnit) {
-          if (site.featuredOffers().size() == 0) {
-            def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
-            monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
-            unitType = bestUnit?.unitType.display
-            sizeDescription = bestUnit?.unitsize.description
-            promoId = null
-            promoName = null
-            moveInCost = totals['moveInTotal']
-            paidThruDate = totals['paidThruDate']
-
-          } else {
+          def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+          monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
+          unitType = bestUnit?.unitType.display
+          sizeDescription = bestUnit?.unitsize.description
+          promoId = null
+          promoName = null
+          moveInCost = totals['moveInTotal']
+          paidThruDate = totals['paidThruDate']
+          if (site.featuredOffers().size() > 0) {
             for (promo in site.featuredOffers()) {
-              def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+              totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
               if (moveInCost > totals['moveInCost']) {
                 monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
                 unitType = bestUnit?.unitType.display

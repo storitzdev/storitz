@@ -11,6 +11,7 @@
       <script type="text/javascript">
 //<![CDATA[
         var urlMapResults = "${createLink(controller:'STMap', action:'mapresults')}";
+        var urlUpdateMetro = "${createLink(controller:'home', action:'updateMetro')}";
         var srcDetailButton = ${p.imageLink(src:'details-button.gif')};
         var srcSpecialOffer = ${p.imageLink(src:'special-offer-16px.png')};
         var srcRentMeButton = ${p.imageLink(src:'rent-me-button.png')};
@@ -365,22 +366,24 @@
               </table>
             </g:if>
           </div>
-          <g:if test="${metro}">
-            <div class="wideTextbox">
-              <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
-              <g:if test="${neighborhood}">
-                <div style="height:10px;"></div>
-                <span style="font-weight:bold;">${neighborhood.city}, ${neighborhood.state.display}:</span> ${neighborhood.note}
-              </g:if>
-              <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
-              <g:each in="${neighborhoodList}" var="n">
-                <div class="left" style="width:150px;">
-                  <g:link mapping="geo" params="[city:n.city, state:n.state.display, zip:n.zipcode]">${n.city}</g:link>
-                </div>
-              </g:each>
-              <div style="clear:both;"></div>
-            </div>
-          </g:if>
+          <div id="metroBox">
+            <g:if test="${metro}">
+              <div class="wideTextbox">
+                <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
+                <g:if test="${neighborhood}">
+                  <div style="height:10px;"></div>
+                  <span style="font-weight:bold;">${neighborhood.city}, ${neighborhood.state.display}:</span> ${neighborhood.note}
+                </g:if>
+                <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
+                <g:each in="${neighborhoodList}" var="n">
+                  <div class="left" style="width:150px;">
+                    <g:link mapping="geo" params="[city:n.city, state:n.state.display, zip:n.zipcode]">${n.city}</g:link>
+                  </div>
+                </g:each>
+                <div style="clear:both;"></div>
+              </div>
+            </g:if>
+          </div>
           <div class="wideTextbox">
             <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
             <div class="left" style="width:175px;">

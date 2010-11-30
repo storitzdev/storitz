@@ -242,6 +242,17 @@ class BootStrap {
       return returnArray
     }
 
+    JSON.registerObjectMarshaller storitz.constants.State, {
+      println "Using the registered State Marshaller"
+
+      def returnArray = [:]
+      returnArray['name'] = it.toString()
+      returnArray['display'] = it.display
+
+      return returnArray
+
+    }
+
     // create system ROLES
     def roleUser = Role.findByAuthority('ROLE_USER')
     if (!roleUser) {

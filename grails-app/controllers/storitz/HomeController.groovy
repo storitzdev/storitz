@@ -3,6 +3,7 @@ package storitz
 import com.storitz.Metro
 import com.storitz.MetroEntry
 import com.storitz.StorageSize
+import grails.converters.JSON
 
 class HomeController {
 
@@ -182,6 +183,93 @@ class HomeController {
     }
 
     [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice]
+  }
+
+  def updateMetro = {
+    def lat
+    def lng
+    def zip
+    def city
+    def state
+
+    def geoResult
+
+
+    def address = params.address
+    if (params.address && params.address.class.isArray()) {
+      address = params.address.join(' ');
+    }
+
+    println "Got address = ${address}"
+    
+    geoResult = geocodeService.geocode(address)
+
+    if (geoResult.Placemark) {
+      lng = geoResult.Placemark[0].Point.coordinates[0]
+      lat = geoResult.Placemark[0].Point.coordinates[1]
+      if (geoResult.Placemark[0].AddressDetails?.Country?.AdministrativeArea?.Locality?.DependentLocality) {
+        if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality?.PostalCode?.PostalCodeNumber
+        if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
+        if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.DependentLocalityName
+      } else if (geoResult.Placemark[0].AddressDetails?.Country?.AdministrativeArea?.SubAdministrativeArea?.Locality) {
+        if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
+        if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
+        if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality?.PostalCode?.PostalCodeNumber
+      }
+
+    } else {
+      // TODO - return without results
+    }
+    def neighborhoodList = null
+    def metro
+
+    def metroEntry
+    def neighborhood
+    if (zip) {
+      metroEntry = MetroEntry.findByZipcode(zip)
+    } else if (city && state) {
+      def myState
+      try {
+        myState = storitz.constants.State.getEnumFromId(state)
+        metroEntry = MetroEntry.findByCityAndState(city, myState)
+      } catch (Exception e) {
+        try {
+          myState = storitz.constants.Province.getEnumFromId(state)
+          metroEntry = MetroEntry.findByCityAndState(city, myState)
+        } catch (Exception e2) {}
+      }
+    }
+    if (metroEntry) {
+      if (!city) city = metroEntry.city
+      if (!state) state = metroEntry.state.display
+      metro = metroEntry.metro
+      neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+
+      neighborhood = Metro.createCriteria().get() {
+        and {
+          eq('isNeighborhood', true)
+          eq('city', metroEntry.city)
+          eq('state', metroEntry.state)
+        }
+      }
+
+    } else {
+      if (city && state) {
+        def myState
+        try {
+          myState = storitz.constants.State.getEnumFromId(state)
+          metro = Metro.findByCityAndState(city, myState)
+        } catch (Exception e) {
+          try {
+            myState = storitz.constants.Province.getEnumFromId(state)
+            metro = Metro.findByCityAndState(city, myState)
+          } catch (Exception e2) {}
+        }
+      }
+    }
+    JSON.use("default")
+    render (status: 200, contentType:"application/json", text:"{ \"metro\":${metro as JSON}, \"neighborhoodList\": ${neighborhoodList as JSON}, \"neighborhood\":${neighborhood as JSON} }")
+
   }
 
 }

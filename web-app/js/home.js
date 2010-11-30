@@ -10,6 +10,11 @@ function siteLink(s) {
     return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id + '?size=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress());
 }
 
+function metroLink(city, state, zip) {
+    return baseURL + encodeURIComponent(city) + '/' + state + '/' + zip;
+}
+
+
 function getDate() {
     if ($('#date').val() && !/^Select/.test($('#date').val())) {
         return $('#date').val();
@@ -179,7 +184,10 @@ function showAddress(address, size, date) {
     if (validAddr) {
         oldSearchAddr = searchAddr
         searchAddr = address;
-        if (searchAddr != oldSearchAddr) addressChange = true;        
+        if (searchAddr != oldSearchAddr) {
+            addressChange = true;
+            updateMetroBox(searchAddr);
+        }
     }
     searchSize = size;
     searchDate = date;
@@ -524,6 +532,31 @@ function setupMap() {
 function setupResults() {
     $('select#sbSortSelect').selectmenu({style:'dropdown', width: 210, menuWidth:250});
     $('select#sbUnitsize').selectmenu({style:'dropdown', width:125});
+}
+
+function updateMetroBox(address) {
+    $.ajax({
+            url: urlUpdateMetro,
+            method:'get',
+            dataType:'json',
+            data: { address:address},
+            success:function(ret) {
+                if (ret.metro) {
+                    var m = $('<div>', {'class':'wideTextbox' }).append($('<span>', {'class':'bold'}).text(ret.metro.city + ', ' + ret.metro.state.display + ':')).append(ret.metro.note);
+                    if (ret.neighborhood) {
+                        m.append($('<div>').css('height','10px')).append($('<span>', {'class':'bold'}).text(ret.neighborhood.city + ', ' + ret.neighborhood.state.display + ':')).append(ret.neighborhood.note);
+                    }
+                    m.append($('<div>').css({'font-weight':'bold', 'margin':'10px 0'}).text('Neighborhoods and Towns'));
+                    $.each(ret.neighborhoodList, function(i, n) {
+                        m.append($('<div>', {'class':'left'}).css('width','150px').append($('<a>', {href: metroLink(n.city, n.state.display, n.zipcode)}).text(n.city)));
+                    });
+                    m.append($('<div>').css('clear','both'));
+                    $("div#metroBox").html(m);
+                } else {
+                    $("div#metroBox").html('&nbsp;');
+                }
+            }
+    });
 }
 
 $(document).ready(function() {
