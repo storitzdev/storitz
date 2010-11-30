@@ -780,7 +780,7 @@ class CShiftService {
           def width = m[0][1] as Double
           def length = m[0][2] as Double
           def unitSize = unitSizeService.getUnitSize(width, length)
-          if (unitSize) {
+          if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
             def siteUnit = new StorageUnit()
 
             def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
