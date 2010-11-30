@@ -368,6 +368,10 @@
           <g:if test="${metro}">
             <div class="wideTextbox">
               <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
+              <g:if test="${neighborhood}">
+                <div style="height:10px;"></div>
+                <span style="font-weight:bold;">${neighborhood.city}, ${neighborhood.state.display}:</span> ${neighborhood.note}
+              </g:if>
               <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
               <g:each in="${neighborhoodList}" var="n">
                 <div class="left" style="width:150px;">

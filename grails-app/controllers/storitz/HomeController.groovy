@@ -89,6 +89,7 @@ class HomeController {
     def metro
 
     def metroEntry
+    def neighborhood
     if (zip) {
       metroEntry = MetroEntry.findByZipcode(zip)
     } else if (city && state) {
@@ -108,6 +109,15 @@ class HomeController {
       if (!state) state = metroEntry.state.display
       metro = metroEntry.metro
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+
+      neighborhood = Metro.createCriteria().get() {
+        and {
+          eq('isNeighborhood', true)
+          eq('city', metroEntry.city)
+          eq('state', metroEntry.state)
+        }
+      }
+
     } else {
       if (city && state) {
         def myState
@@ -171,7 +181,7 @@ class HomeController {
       }
     }
 
-    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice]
+    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice]
   }
 
 }

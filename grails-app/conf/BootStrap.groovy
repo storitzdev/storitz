@@ -436,6 +436,7 @@ class BootStrap {
 
     // Unit Description types from vendors
     println "Starting unit type lookup creation"
+    UnitTypeLookup.executeUpdate('delete from UnitTypeLookup')
     setupUnitTypes1()
     setupUnitTypes2()
     println "All Unit type lookups are done"
