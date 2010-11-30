@@ -179,21 +179,23 @@
                   </sec:ifAnyGranted>
 
                   <sec:ifAnyGranted roles="ROLE_MANAGER">
-                    <div class="checkout_section_header">
-                      Site Privileges
-                    </div>
-
-                    <div class="checkout_fields">
-                      <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
-                        <g:each var="site" in="${siteMap.keySet()}">
-                          <div style="margin:0 1.5em; width: 250px;" class="left">
-                            <g:checkBox name="SITE:_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
-                          </div>
-                        </g:each>
+                    <sec:ifNotGranted roles="ROLE_ADMIN">
+                      <div class="checkout_section_header">
+                        Site Privileges
                       </div>
-                      <div style="clear:both; height:10px;"></div>
-                    </div>
 
+                      <div class="checkout_fields">
+                        <div style="width:650px;" class="checkout_value ${hasErrors(bean: person, field: 'authorities', 'errors')}">
+                          <g:each var="site" in="${siteMap.keySet()}">
+                            <div style="margin:0 1.5em; width: 250px;" class="left">
+                              <g:checkBox name="SITE:_${site.id}" value="${siteMap[site]}"/> &nbsp; ${site.title.encodeAsHTML()}
+                            </div>
+                          </g:each>
+                        </div>
+                        <div style="clear:both; height:10px;"></div>
+                      </div>
+
+                      </sec:ifNotGranted>
                   </sec:ifAnyGranted>
 
                   <div class="checkout_section_header">

@@ -228,8 +228,11 @@ class UserController {
 		if (person.save()) {
 			UserRole.removeAll(person)
 			addRoles(person)
-            SiteUser.removeAll(person)
-            addSites(person)
+
+            if (!UserRole.userHasRole(person, 'ROLE_ADMIN')) {
+              SiteUser.removeAll(person)
+              addSites(person)
+            }
             addNotificationTypes(person)
 			redirect action: show, id: person.id
 		}
