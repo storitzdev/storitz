@@ -659,12 +659,18 @@ class SiteLinkService {
     def sSaturdayEnd = tab.dSaturdayEnd.text()
     def sSundayStart = tab.dSundayStrt.text()
     def sSundayEnd = tab.dSundayEnd.text()
-    site.startSundayGate = site.startMondayGate = site.startTuesdayGate = site.startWednesdayGate = site.startThursdayGate = site.startFridayGate = site.startSaturdayGate = site.startMonday = site.startTuesday = site.startWednesday = site.startThursday = site.startFriday = sWeekdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00') : null
-    site.endSundayGate = site.endMondayGate = site.endTuesdayGate = site.endWednesdayGate = site.endThursdayGate = site.endFridayGate = site.endSaturdayGate = site.endMonday = site.endTuesday = site.endWednesday = site.endThursday = site.endFriday = sWeekdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sWeekdayEnd.substring(0, sWeekdayEnd.length() - 3) + '00') : null
-    site.startSaturday = sSaturdayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSaturdayStart.substring(0, sSaturdayStart.length() - 3) + '00') : null
-    site.endSaturday = sSaturdayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSaturdayEnd.substring(0, sSaturdayEnd.length() - 3) + '00') : null
-    site.startSunday = sSundayStart.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSundayStart.substring(0, sSundayStart.length() - 3) + '00') : null
-    site.endSunday = sSundayEnd.length() > 0 ? Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", sSundayEnd.substring(0, sSundayEnd.length() - 3) + '00') : null
+    
+    def dateString = sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00'
+    def formatString = "yyyy-MM-dd'T'HH:mm:ssZ"
+    if (dateString ==~ /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}-\d{4}/) {
+      formatString = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    }
+    site.startSundayGate = site.startMondayGate = site.startTuesdayGate = site.startWednesdayGate = site.startThursdayGate = site.startFridayGate = site.startSaturdayGate = site.startMonday = site.startTuesday = site.startWednesday = site.startThursday = site.startFriday = sWeekdayStart.length() > 0 ? Date.parse(formatString, sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00') : null
+    site.endSundayGate = site.endMondayGate = site.endTuesdayGate = site.endWednesdayGate = site.endThursdayGate = site.endFridayGate = site.endSaturdayGate = site.endMonday = site.endTuesday = site.endWednesday = site.endThursday = site.endFriday = sWeekdayEnd.length() > 0 ? Date.parse(formatString, sWeekdayEnd.substring(0, sWeekdayEnd.length() - 3) + '00') : null
+    site.startSaturday = sSaturdayStart.length() > 0 ? Date.parse(formatString, sSaturdayStart.substring(0, sSaturdayStart.length() - 3) + '00') : null
+    site.endSaturday = sSaturdayEnd.length() > 0 ? Date.parse(formatString, sSaturdayEnd.substring(0, sSaturdayEnd.length() - 3) + '00') : null
+    site.startSunday = sSundayStart.length() > 0 ? Date.parse(formatString, sSundayStart.substring(0, sSundayStart.length() - 3) + '00') : null
+    site.endSunday = sSundayEnd.length() > 0 ? Date.parse(formatString, sSundayEnd.substring(0, sSundayEnd.length() - 3) + '00') : null
     site.extendedHours = false
 
     site.feed = siteLink
