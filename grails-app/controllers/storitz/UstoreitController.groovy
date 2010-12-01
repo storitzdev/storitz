@@ -4,6 +4,8 @@ import grails.converters.XML
 import com.storitz.CenterShift
 import com.storitz.StorageSize
 import com.storitz.StorageSite
+import com.storitz.Feed
+import com.storitz.User
 
 class UstoreitController {
 
@@ -13,7 +15,8 @@ class UstoreitController {
     def index = { }
 
     def images = {
-      def ustoreitFeed = CenterShift.get(16)
+      def ustoreitManager = User.findByUsername('ustoreit')
+      def ustoreitFeed = (CenterShift)Feed.findByManager(ustoreitManager)
       def random = new Random()
       def sitemapXml = new URL("http://www.ustoreit.com/sitemap.xml").text
       def matcher = sitemapXml =~ /<loc>(http:\/\/.+?(\d+)\.html)<\/loc>/
