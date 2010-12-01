@@ -997,7 +997,7 @@
             <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'hasElevator', 'errors')}">
               <g:checkBox name="hasElevator" value="${storageSiteInstance?.hasElevator}"/> <label for="hasElevator"><g:message code="storageSite.hasElevator.label" default="Elevator Available"/></label>
             </div>
-            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'isElevator', 'errors')}">
+            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'isCamera', 'errors')}">
               <g:checkBox name="isCamera" value="${storageSiteInstance?.isCamera}"/> <label for="isCamera"><g:message code="storageSite.isCamera.label" default="Video Security"/></label>
             </div>
             <div style="clear:both;height:15px;"></div>
