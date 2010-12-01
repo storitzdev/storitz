@@ -11,7 +11,7 @@
 //<![CDATA[
 
     var gallerySetup = false;
-    var startDate = "${params.date && params.date != 'null' ? params.date : (new Date() + 1).format('MM/dd/yy')}";
+    var startDate = "${params.date && params.date != 'null' ? params.date : (new Date()).format('MM/dd/yy')}";
     var siteId = ${params.id};
     var ajaxFormDirty = false;
     var ajaxServerPollTimer;

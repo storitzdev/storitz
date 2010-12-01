@@ -126,6 +126,7 @@
             site.zipcode = '${site.zipcode}';
             site.state = '${site.state.display}';
             site.city = '${site.city}';
+            site.promoId = ${siteMoveInPrice[site.id]?.promo ? siteMoveInPrice[site.id].promo : 'null' };
             createMarker(site);
           </g:each>
           

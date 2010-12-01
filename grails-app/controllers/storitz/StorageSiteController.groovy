@@ -389,15 +389,7 @@ class StorageSiteController {
   def deleteImage = {
     def site = StorageSite.get(params.id)
     def siteImage = SiteImage.get(params.siteImageId)
-    def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid_' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb_' + siteImage.fileLocation, site.id) ]
-
-    deleteList.each{
-      def file = new File(it)
-      file.delete()
-    }
-
-    site.removeFromImages(siteImage)
-    site.save(flush: true)
+    imageService.deleteImage(site, siteImage)
     render (status: 200, contentType:"application/json", text:"{ \"siteImage\": ${params.siteImageId} }")
   }
 

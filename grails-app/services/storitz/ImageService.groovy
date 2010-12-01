@@ -2,6 +2,7 @@ package storitz
 
 import com.storitz.SiteImage
 import org.grails.plugins.imagetools.ImageTool
+import com.storitz.StorageSite
 
 class ImageService {
 
@@ -35,5 +36,18 @@ class ImageService {
       storageSiteInstance.addToImages(siteImg)
 
 
+    }
+
+    def deleteImage(StorageSite site, SiteImage siteImage) {
+      def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid_' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb_' + siteImage.fileLocation, site.id) ]
+
+      deleteList.each{
+        def file = new File(it)
+        file.delete()
+      }
+
+      site.removeFromImages(siteImage)
+      site.save(flush: true)
+      
     }
 }

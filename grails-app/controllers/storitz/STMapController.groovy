@@ -130,7 +130,7 @@ class STMapController {
           def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
           monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
           unitType = bestUnit?.unitType.display
-          sizeDescription = bestUnit?.unitsize.description
+          sizeDescription = bestUnit?.displaySize
           promoId = null
           promoName = null
           moveInCost = totals['moveInTotal']
@@ -141,7 +141,7 @@ class STMapController {
               if (moveInCost > totals['moveInCost']) {
                 monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
                 unitType = bestUnit?.unitType.display
-                sizeDescription = bestUnit?.unitsize.description
+                sizeDescription = bestUnit?.displaySize
                 promoId = promo.id
                 promoName = promo.promoName
                 moveInCost = totals['moveInTotal']

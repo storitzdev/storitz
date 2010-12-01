@@ -709,11 +709,6 @@ class CShiftService {
   }
 
   def updateUnits(site, stats, writer) {
-    site.units.each {unit ->
-      unit.delete()
-    }
-    site.units.clear()
-    site.save()
     def centerShift = (CenterShift)site.feed
     unitsAvailable(centerShift, site, stats, writer)
     if (site.units.size() > 0) {
@@ -771,6 +766,7 @@ class CShiftService {
 
       def vacant = unit.VACANT.text() as Integer
       def typeName = unit.VALUE.text()
+      def attributes = unit.ATTRIBUTES.text()
 
       if (vacant > 0) {
         def dimensions = unit.DIMENSIONS.text()
@@ -781,49 +777,62 @@ class CShiftService {
           def length = m[0][2] as Double
           def unitSize = unitSizeService.getUnitSize(width, length)
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
-            def siteUnit = new StorageUnit()
 
-            def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
-            if (unitTypeLookup) {
-              if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
-                siteUnit.unitType = unitTypeLookup.unitType
-                siteUnit.isTempControlled = unitTypeLookup.tempControlled
+            def newUnit = false
+            def siteUnit = site.units.find{ it.unitName == attributes }
+
+            if (!siteUnit) {
+              siteUnit = new StorageUnit()
+              newUnit = true
+
+              def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+              if (unitTypeLookup) {
+                if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
+                  siteUnit.unitType = unitTypeLookup.unitType
+                  siteUnit.isTempControlled = unitTypeLookup.tempControlled
+                } else {
+                  writer.println "Skipping illegal type ${typeName}"
+                  continue
+                }
               } else {
-                writer.println "Skipping illegal type ${typeName}"
-                continue
+                writer.println "Unknown unit type description ${typeName}"
+
+                if (typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/) continue
+
+                if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
+                  siteUnit.unitType = UnitType.UPPER
+                } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
+                  siteUnit.unitType = UnitType.DRIVEUP
+                } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
+                  siteUnit.unitType = UnitType.INTERIOR
+                }
+                if (!siteUnit.unitType) {
+                  siteUnit.unitType = UnitType.UPPER
+                }
+                siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
               }
+              siteUnit.unitsize = unitSize
+              siteUnit.unitCount = vacant
+              siteUnit.description = typeName
+              siteUnit.unitName = siteUnit.unitNumber = attributes
+              siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
+              siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
+              siteUnit.isAlarm = false
+              siteUnit.isIrregular = false
+              siteUnit.isPowered = false
+              siteUnit.isAvailable = true
+              siteUnit.isSecure = false
+              siteUnit.displaySize = dimensions
+              stats.unitCount += vacant
+
+              site.addToUnits(siteUnit)
             } else {
-              writer.println "Unknown unit type description ${typeName}"
-
-              if (typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/) continue
-
-              if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
-                siteUnit.unitType = UnitType.UPPER
-              } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
-                siteUnit.unitType = UnitType.DRIVEUP
-              } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
-                siteUnit.unitType = UnitType.INTERIOR
-              }
-              if (!siteUnit.unitType) {
-                siteUnit.unitType = UnitType.UPPER
-              }
-              siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
+              siteUnit.unitCount = vacant
+              siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
+              siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
+              stats.unitCount += vacant
+              siteUnit.save(flush:true)
             }
-            siteUnit.unitsize = unitSize
-            siteUnit.unitCount = vacant
-            siteUnit.description = typeName
-            siteUnit.unitName = siteUnit.unitNumber = unit.ATTRIBUTES.text()
-            siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
-            siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
-            siteUnit.isAlarm = false
-            siteUnit.isIrregular = false
-            siteUnit.isPowered = false
-            siteUnit.isAvailable = true
-            siteUnit.isSecure = false
-            siteUnit.displaySize = dimensions
-            stats.unitCount += vacant
-
-            site.addToUnits(siteUnit)
 
           } else {
             writer.println "Skipping due to size: length = ${length}, width = ${width}"

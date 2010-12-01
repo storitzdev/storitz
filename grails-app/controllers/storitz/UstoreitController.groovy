@@ -34,6 +34,13 @@ class UstoreitController {
             }
             def site = StorageSite.findByFeedAndTitleLike(ustoreitFeed, usiNum + '%')
             if (site) {
+              def imageList = []
+              for (siteImage in site.images) {
+                imageList.add(siteImage)
+              }
+              for (siteImage in imageList) {
+                imageService.deleteImage(site, siteImage)
+              }
               println "Page URL: ${pageUrl} pageId: ${idNum} usiId: ${usiNum} - found site: ${site.title}"
               def xmlUrl = "http://www.ustoreit.com/find-storage-and-rates/xml.ashx?facID=${idNum}|1?cachebuster=${random.nextInt(1000000)}&timestamp=${System.currentTimeMillis()}"
               def gallery = new XmlSlurper().parseText(new URL(xmlUrl).text)
