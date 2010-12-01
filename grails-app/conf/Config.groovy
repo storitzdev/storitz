@@ -92,7 +92,10 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
-
+    appender.stdout = "org.apache.log4j.ConsoleAppender"
+    appender.'stdout.layout'="org.apache.log4j.PatternLayout"
+    appender.'stdout.layout.ConversionPattern'='[%r] %c{2} %m%n'
+  
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
 	       'org.codehaus.groovy.grails.web.pages', //  GSP
 	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
