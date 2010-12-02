@@ -35,9 +35,10 @@ class UstoreitController {
             def site = StorageSite.findByFeedAndTitleLike(ustoreitFeed, usiNum + '%')
             if (site) {
               def imageList = []
-              for (siteImage in site.images) {
+              for (siteImage in site.siteImages()) {
                 imageList.add(siteImage)
               }
+              println "Getting ready to delete ${imageList.size()}"
               for (siteImage in imageList) {
                 imageService.deleteImage(site, siteImage)
               }
