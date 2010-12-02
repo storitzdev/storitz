@@ -145,4 +145,15 @@ class SiteLinkController {
       redirect(action: "list")
     }
   }
+
+  def uploadLogo = {
+
+    def logoFile = request.getFile('logoFile')
+    Long feedId = params.long('id')
+
+    imageService.feedLogo(logoFile, feedId)
+
+    flash.message = "Logo uploaded."
+    redirect(action: "list")
+  }
 }
