@@ -108,6 +108,8 @@ class HomeController {
     if (metroEntry) {
       if (!city) city = metroEntry.city
       if (!state) state = metroEntry.state.display
+      if (!zip) zip = metroEntry.zipcode
+      
       metro = metroEntry.metro
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
 
@@ -134,7 +136,7 @@ class HomeController {
       }
     }
 
-    def title = "Storitz self-storage search results in ${params.address ? params.address : city + ', ' + state}${zip ? ' postal code ' + zip : ''}"
+    def title = "Self storage units, mini storage in ${params.address ? params.address : city + ', ' + state}${zip ? ' postal code ' + zip : ''} - Storitz"
     // optimize zoom level
     def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
 
