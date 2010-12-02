@@ -4,6 +4,9 @@ import com.storitz.CenterShift
 import grails.plugins.springsecurity.Secured
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
+import org.grails.plugins.imagetools.ImageTool
+import com.storitz.SiteImage
+import com.storitz.Feed
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CshiftController {
@@ -11,6 +14,7 @@ class CshiftController {
 
   def CShiftService
   def CShift4Service
+  def imageService
 
   static allowedMethods = [save: "POST", update: "POST"]
 
@@ -185,5 +189,16 @@ class CshiftController {
       flash.message = "Site contacts created."
       redirect(action: "list")
     }
+  }
+
+  def uploadLogo = {
+
+    def logoFile = request.getFile('logoFile')
+    Long feedId = params.long('id')
+
+    imageService.feedLogo(logoFile, feedId)
+    
+    flash.message = "Logo uploaded."
+    redirect(action: "list")
   }
 }

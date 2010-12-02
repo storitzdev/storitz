@@ -121,6 +121,32 @@
         <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
       </div>
     </g:form>
+
+    <g:uploadForm action="uploadLogo" method="post" id="${cshiftInstance?.id}">
+      <div class="checkout_section_header">
+        Upload Logo
+      </div>
+      <div class="formInstructions">
+        Uploading a logo here will apply it to all the sites that belong to this feed.  Be careful with feeds that may have more than one brand.
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:400px;" class="checkout_value">
+          <input type="file" name="logoFile" id="logo"/>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:400px;">
+          <label for="logo">Logo</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="buttons">
+        <span class="button"><input class="save" type="submit" value="Upload" /></span>
+      </div>
+    </g:uploadForm>
+
   </div>
 </div>
 </div>

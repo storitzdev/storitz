@@ -240,10 +240,14 @@ class StorageSiteController {
         def filePath = fileUploadService.getFilePath('/images/site', fileLocation, siteId)
         def imageTool = new ImageTool()
         imageTool.load(tmpPath)
-        imageTool.thumbnailSpecial(250, 100, 2, 1)
         def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
         dstFile.mkdirs()
-        imageTool.writeResult(filePath, "JPEG")
+        if (imageTool.getWidth() != 250 || imageTool.getHeight() != 100) {
+          imageTool.thumbnailSpecial(250, 100, 3, 1)
+          imageTool.writeResult(filePath, "JPEG")
+        } else {
+          org.apache.commons.io.FileUtils.copyFile(new File(tmpPath), new File(filePath))
+        }
         def tmpFile = new File(tmpPath)
         tmpFile.delete()
         if (storageSiteInstance.logo == null) {
