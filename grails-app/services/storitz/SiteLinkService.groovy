@@ -662,7 +662,7 @@ class SiteLinkService {
     
     def dateString = sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00'
     def formatString = "yyyy-MM-dd'T'HH:mm:ssZ"
-    if (dateString ==~ /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}-\d{4}/) {
+    if (dateString ==~ /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,3}-\d{4}/) {
       formatString = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     }
     site.startSundayGate = site.startMondayGate = site.startTuesdayGate = site.startWednesdayGate = site.startThursdayGate = site.startFridayGate = site.startSaturdayGate = site.startMonday = site.startTuesday = site.startWednesday = site.startThursday = site.startFriday = sWeekdayStart.length() > 0 ? Date.parse(formatString, sWeekdayStart.substring(0, sWeekdayStart.length() - 3) + '00') : null
