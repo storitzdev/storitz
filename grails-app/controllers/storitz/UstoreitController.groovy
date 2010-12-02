@@ -71,4 +71,21 @@ class UstoreitController {
       }
       render(status: 200, text: "Done processing images")
     }
+
+    def titles = {
+      def ustoreitManager = User.findByUsername('ustoreit')
+      def ustoreitFeed = (CenterShift)Feed.findByManager(ustoreitManager)
+      for(site in ustoreitFeed.sites) {
+        def title
+        if (site.title.contains("/")) {
+          title = 'U-Store-It ' + site.title.tokenize("/")[-1]
+        } else {
+          def titleArr = site.title.tokenize(" ")
+          title = "U-Store-It " + titleArr[1..titleArr.size()-1].join(' ')
+        }
+        site.title = title
+        site.save(flush: true)
+      }
+      render(status: 200, text: "Done processing titles")
+    }
 }
