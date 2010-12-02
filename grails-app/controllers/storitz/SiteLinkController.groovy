@@ -9,7 +9,7 @@ class SiteLinkController {
 
   def siteLinkService
 
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST"]
 
   def index = {
     redirect(action: "list", params: params)
