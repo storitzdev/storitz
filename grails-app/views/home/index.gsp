@@ -410,13 +410,22 @@
               <g:link mapping="metro" params="[city:'Torrance', state:'CA']">Torrance, CA</g:link>
             </div>
             <div class="left" style="width:175px;">
+              <g:link mapping="metro" params="[city:'Carson', state:'CA']">Carson, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
               <g:link mapping="metro" params="[city:'Newport Beach', state:'CA']">Newport Beach, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="metro" params="[city:'Oxnard', state:'CA']">Oxnard, CA</g:link>
             </div>
             <div class="left" style="width:175px;">
               <g:link mapping="metro" params="[city:'El Segundo', state:'CA']">El Segundo, CA</g:link>
             </div>
             <div class="left" style="width:175px;">
               <g:link mapping="metro" params="[city:'Burbank', state:'CA']">Burbank, CA</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="metro" params="[city:'San Francisco', state:'CA']">San Francisco, CA</g:link>
             </div>
             <div class="left" style="width:175px;">
               <g:link mapping="metro" params="[city:'Palm Desert', state:'CA']">Palm Desert, CA</g:link>
@@ -429,6 +438,9 @@
             </div>
             <div class="left" style="width:175px;">
               <g:link mapping="metro" params="[city:'Austin', state:'TX']">Austin, TX</g:link>
+            </div>
+            <div class="left" style="width:175px;">
+              <g:link mapping="metro" params="[city:'San Diego', state:'CA']">San Diego</g:link>
             </div>
             <div class="left" style="width:175px;">
               <g:link mapping="metro" params="[city:'Dallas', state:'TX']">Dallas, TX</g:link>
