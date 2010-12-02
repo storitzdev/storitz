@@ -122,7 +122,7 @@
       </div>
     </g:form>
 
-    <g:uploadForm action="uploadLogo" method="post" id="${cshiftInstance?.id}">
+    <g:uploadForm action="uploadLogo" method="post" id="${siteLinkInstance?.id}">
       <div class="checkout_section_header">
         Upload Logo
       </div>
