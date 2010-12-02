@@ -8,6 +8,7 @@ import storitz.constants.FeedType
 class SiteLinkController {
 
   def siteLinkService
+  def imageService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST"]
 
