@@ -40,6 +40,7 @@ function redrawMap() {
     }
 
     if (!inDrag) {
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'bounds change']);
         getMarkers();
     }
 }
@@ -50,6 +51,7 @@ function dragStart() {
 
 function dragEnd() {
     inDrag = false;
+    _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'drag']);
     getMarkers();
 }
 
@@ -222,7 +224,11 @@ function setupCalendar() {
     $('#date').datepicker(
     { dateFormat: 'mm/dd/y',
         minDate: 0,
-        maxDate: "+2M"
+        maxDate: "+2M",
+        onSelect: function(dateText, inst) {
+            _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 3 date']);
+            showAddress(getAddress(), $('#size').val(), dateText);
+        }
     }).addTouch();
 }
 
@@ -242,6 +248,7 @@ function setupForm() {
     $('#address').keypress(function(event) {
         if (event.keyCode == 13) {
             event.preventDefault();
+            _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 1 address']);
             showAddress(getAddress(), $('#size').val(), getDate());
             return false;
         }
@@ -252,13 +259,19 @@ function setupForm() {
         }
     });
     $('select#size').change(function(event) {
-        showAddress(getAddress(), $('#size').val(), getDate());
+        var searchUnitSize = $('#size').val();
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 2 unit size', searchUnitSize]);
+        showAddress(getAddress(), searchUnitSize, getDate());
     });
     $('select#sbUnitsize').change(function(event) {
-        showAddress(getAddress(), $('select#sbUnitsize').val(), getDate());
+        var searchUnitSize = $('select#sbUnitsize').val();
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'results table unit size', searchUnitSize]);
+        showAddress(getAddress(), searchUnitSize, getDate());
     });
     $('select#sbSortSelect').change(function(event) {
-        switch ($(this).val()) {
+        var sortType = $(this).val();
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'sort', 'results', sortType]);
+        switch (sortType) {
             case '0':
                 resultTable.fnSort([
                     [2, 'asc']
@@ -575,9 +588,9 @@ $(document).ready(function() {
 });
 
 // setup for google analytics
-var pageTracker = _gat._getTracker("UA-16012579-1");
-pageTracker._trackPageview("/home");
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-16012579-1']);
-_gaq.push(['_trackPageview']);
+_gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
+            ['pageTracker._trackPageview'],
+            ['funnelTracker._setAccount', 'UA-16012579-1'],
+            ['funnelTracker._trackPageview', '/home']);
 

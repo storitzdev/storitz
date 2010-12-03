@@ -164,8 +164,7 @@ $(document).ready(function() {
 });
 
 
-var pageTracker = _gat._getTracker("UA-16012579-1");
-pageTracker._trackPageview("/payment"); 
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-16012579-1']);
-_gaq.push(['_trackPageview']);
+_gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
+            ['pageTracker._trackPageview'],
+            ['funnelTracker._setAccount', 'UA-16012579-1'],
+            ['funnelTracker._trackPageview', '/payment']);
