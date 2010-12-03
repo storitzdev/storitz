@@ -279,7 +279,7 @@ div.mastheadBottom {
 div.topnavText {
     margin-left: auto;
     margin-right: auto;
-    width: 950px;
+    width: 940px;
     color: #a1d3f3;
     line-height: 26px;
     text-align: right;
@@ -504,6 +504,7 @@ table#stresults {
 
 table#stresults tbody tr:hover {
     background: #b2d1ff;
+    cursor: pointer;
 }
 
 table#stresults thead {
@@ -563,7 +564,6 @@ table#stresults thead {
     font: 13px verdana, arial, helvetica, sans-serif;
     color: #3fac00;
     font-weight: bold;
-    width:
 }
 
 .stRentMe {

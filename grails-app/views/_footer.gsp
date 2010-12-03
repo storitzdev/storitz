@@ -9,7 +9,7 @@
         <p class="footer"><g:link class="footer small" controller="static" action="aboutus">About Us</g:link></p>
         <p class="footer"><g:link class="footer small" controller="contactUs" action="create">Contact Us</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="jobs">Jobs</g:link></p>
-        <p class="footer"><g:link class="footer small" controller="static" action="refund">Refund Policy</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="static" action="guarantee">Storitz Guarantee</g:link></p>
       </div>
       <div class="left" style="margin: 2em 5em;">
         <p class="footer"><a href="http://blog.storitz.com" class="footer small" onclick="window.open(this.href,'_blank');return false;">Storitz Blog</a></p>
