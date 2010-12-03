@@ -23,6 +23,7 @@ function updateTransaction() {
   $('#chosenType').val(chosenUnitType);
   $('#SC_searchSize').val(searchSize);
   $('#searchSize').val(searchSize);
+  $('#actualSize').html(actualSize);
 
   // update dates
   $('#transMoveInDate').html(startDate);
@@ -222,6 +223,7 @@ function showTotals(action) {
       totalMoveInCost = ret.totals.totalMoveInCost;
       unitId = ret.totals.unitId;
       paidThruDate = ret.totals.paidThruDate;
+      actualSize = ret.totals.actualSize;
       updateTransaction();
     }
   });

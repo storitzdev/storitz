@@ -1,6 +1,5 @@
 var storageSize = [];
 var searchSize = ${searchSize ? searchSize : 0};
-var sizeDescription;
 var unitId = ${unitId ? unitId : -1};
 var additionalFees = ${site.adminFee ? site.adminFee : 0} + ${site.lockFee ? site.lockFee : 0};
 var adminFee = ${site.adminFee ? site.adminFee : 0};
@@ -24,11 +23,11 @@ var insuranceId = ${insuranceId ? insuranceId : -999};
 var premium = 0;
 var tax = 0;
 var deposit = 0;
+var actualSize = '';
 var urlDetailTotals = "${createLink(controller:'storageSite', action:'detailTotals')}";
 
 <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
 <g:if test="${params.size}">
   searchSize = ${params.size};
-  sizeDescription = storageSize[ ${params.size} ];
 </g:if>
 

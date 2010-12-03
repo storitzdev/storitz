@@ -25,6 +25,10 @@
         <div id="pushPrice" class="transPrice left"></div>
         <div class="transPerMonth left"> /Per Month</div>
       </div>
+      <div class="transPerMonth">
+        <div class="left">Actual Size:</div>
+        <div class="left" id="actualSize"></div>
+      </div>
     </div>
     <div class="right" style="margin-top:5px;">
       <g:if test="${params.action != 'payment'}">
