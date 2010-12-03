@@ -136,13 +136,13 @@ class HomeController {
       }
     }
 
-    def title = "Self storage units, mini storage in ${params.address ? params.address : city + ', ' + state}${zip ? ' postal code ' + zip : ''} - Storitz"
+    def title = "Self storage units, mini storage in ${params.address ? params.address : city + ', ' + state}${metroEntry && zip ? ' ' + zip : ''} - Storitz"
     // optimize zoom level
     def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
 
     def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
 
-    Integer searchSize = (params.size && params.size.isNumber() ? params.size as Integer : 1)
+    Long searchSize = (params.size && params.size.isNumber() ? params.size as Long : 1)
 
     def sites = mapService.getSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 

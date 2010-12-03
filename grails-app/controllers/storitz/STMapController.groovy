@@ -83,15 +83,17 @@ class STMapController {
       } else {
         dim = [swLat: params.swLat as BigDecimal, swLng: params.swLng as BigDecimal, neLat: params.neLat as BigDecimal, neLng: params.neLng as BigDecimal]
       }
-      def results = mapService.getSites(params.searchSize as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+      Long searchSize = (params.searchSize && params.searchSize.isNumber() ? params.searchSize as Long : 1)
+
+      def results = mapService.getSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
 
       results.sort( {a,b -> mapService.calcDistance(lat, a.lat as double, lng, a.lng as double) <=> mapService.calcDistance(lat, b.lat as double, lng, b.lng as double) } as Comparator)
 
       def unitMap = [:]
 
-      def unitSize
-      if (params?.searchSize != 1) {
-        unitSize = StorageSize.get(params.searchSize)
+      def unitSize = null
+      if (searchSize != 1) {
+        unitSize = StorageSize.get(searchSize)
       }
       Date  moveInDate
       if (params.date && params.date instanceof Date) {
