@@ -1,3 +1,4 @@
+
 function calcDistance(lat1, lat2, lng1, lng2) {
     var d = Math.acos(Math.sin(lat1 / 57.2958) * Math.sin(lat2 / 57.2958) +
             Math.cos(lat1 / 57.2958) * Math.cos(lat2 / 57.2958) *
@@ -574,6 +575,8 @@ $(document).ready(function() {
 });
 
 // setup for google analytics
+var pageTracker = _gat._getTracker("UA-16012579-1");
+pageTracker._trackPageview("/home");
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-16012579-1']);
 _gaq.push(['_trackPageview']);

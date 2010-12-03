@@ -11,7 +11,8 @@ public enum ReportName {
   BALK("Balk"),
   MOVEIN("Move Ins"),
   PENDING("Pending Move Ins"),
-  ACTIVITY("All New Activity")
+  ACTIVITY("All New Activity"),
+  CORP_TRANSACTION("")
 
   final String display
   final String outputType

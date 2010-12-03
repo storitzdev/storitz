@@ -46,6 +46,6 @@ class EmailController {
             flash.message = "Mail not sent: ${e}"
             return
         }
-        flash.message = "Mail sent"
+        flash.message = "Mail sent Test format ${g.formatNumber(number:99.00, type:'currency', currencyCode:'USD')} Theft: ${g.formatNumber(number:0.50, type:'percent')}"
     }
 }

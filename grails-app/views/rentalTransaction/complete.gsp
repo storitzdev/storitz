@@ -12,9 +12,29 @@
     $("#operatingHours").tabs();
   }
 
+  function setupAnalytics() {
+      window.setTimeout(doAnalytics, 1);
+  }
+
+  function doAnalytics() {
+      // Called a few ms after the page has loaded.
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  }
+
   $(document).ready(function() {
     setupJQueryTabs();
   });
+
+  var pageTracker = _gat._getTracker("UA-16012579-1");
+  pageTracker._trackPageview("/complete"); 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16012579-1']);
+  _gaq.push(['_trackPageview']);
 
 //]]>
   </script>
@@ -191,7 +211,7 @@
         </div>
       </div>
     <div style="clear:both; height:30px;"></div>
-    <g:render template="/footer" />
+    <g:render template="/footer_no_analytics" />
     <!-- Google Code for Bookings Conversion Page -->
     <script type="text/javascript">
     /* <![CDATA[ */

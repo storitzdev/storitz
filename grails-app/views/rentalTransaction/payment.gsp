@@ -348,7 +348,7 @@
 
     <div style="clear:both; height:30px;"></div>
     <div id="helpDeskStatus">STATUS</div>
-    <g:render template="/footer" />
+    <g:render template="/footer_no_analytics" />
     </div>
   </body>
   <p:renderDependantJavascript />
