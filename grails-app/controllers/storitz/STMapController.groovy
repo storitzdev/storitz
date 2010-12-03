@@ -91,7 +91,7 @@ class STMapController {
 
       def unitSize
       if (params?.searchSize != 1) {
-        unitSize = StorageSize.get(params.size)
+        unitSize = StorageSize.get(params.searchSize)
       }
       Date  moveInDate
       if (params.date && params.date instanceof Date) {
