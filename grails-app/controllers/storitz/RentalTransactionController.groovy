@@ -280,10 +280,24 @@ class RentalTransactionController {
       rentalTransactionInstance.ccExpDate = expCal.time
 
       // TODO - compare calculated cost to our cost
-      rentalTransactionInstance.cost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, true)
       rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
-      rentalTransactionInstance.paidThruDate = costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, false)
-
+      def costTotals = costService.calculateTotals(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate)
+      rentalTransactionInstance.cost = costTotals["moveInTotal"]
+      rentalTransactionInstance.duration = costTotals["duration"]
+      rentalTransactionInstance.discount = costTotals["discountTotal"]
+      rentalTransactionInstance.fees = costTotals["feesTotal"]
+      rentalTransactionInstance.insuranceCost = costTotals["insuranceCost"]
+      rentalTransactionInstance.tax = costTotals["tax"]
+      rentalTransactionInstance.deposit = costTotals["deposit"]
+      rentalTransactionInstance.durationDays = costTotals["durationDays"]
+      rentalTransactionInstance.durationMonths = costTotals["durationMonths"]
+      rentalTransactionInstance.paidThruDate = costTotals["paidThruDateMillis"]
+      if (promo) {
+        rentalTransactionInstance.promoName = promo.promoName
+      }
+      if (ins) {
+        rentalTransactionInstance.insuranceName = "Total Coverage: ${g.formatNumber(number:ins.totalCoverage, type:'currency', currencyCode:'USD')} Theft: ${g.formatNumber(number:ins.percentTheft, type:'percent')}"
+      }
 
       def s = new AuthorizeNet()
 

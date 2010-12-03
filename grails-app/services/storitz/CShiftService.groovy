@@ -1326,9 +1326,9 @@ class CShiftService {
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     }
 
-
+    BigDecimal insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + insuranceCost
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
 
@@ -1337,10 +1337,12 @@ class CShiftService {
     ret["duration"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
+    ret["insuranceCost"] = insuranceCost
     ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
     ret["deposit"] = deposit
     ret["paidThruDate"] = cal.time.format('MM/dd/yy')
+    ret["paidThruDateMillis"] = cal.time
     ret["durationMonths"] =  (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret["durationDays"] = durationDays
 

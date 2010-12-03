@@ -1204,13 +1204,16 @@ class SiteLinkService {
     def subTotal
     def discountRate
     def durationDays
+    BigDecimal insuranceCost  = 0
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - (durationDays)/lastDayInMonth)
-      subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + insuranceCost
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     } else {
-      subTotal = (rate*durationMonths) + (premium*durationMonths)
+      insuranceCost = (premium*durationMonths)
+      subTotal = (rate*durationMonths) + insuranceCost
       discountRate = rate
       durationDays = 0
     }
@@ -1246,10 +1249,12 @@ class SiteLinkService {
     ret["duration"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
+    ret["insuranceCost"] = insuranceCost
     ret["tax"] = tax
     ret["deposit"] = deposit
     ret["moveInTotal"] = moveInTotal
     ret["paidThruDate"] = cal.time.format('MM/dd/yy') 
+    ret["paidThruDateMillis"] = cal.time
     ret["durationMonths"] =  (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret["durationDays"] = durationDays
 

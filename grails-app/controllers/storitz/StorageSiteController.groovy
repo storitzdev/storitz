@@ -59,6 +59,7 @@ class StorageSiteController {
     return [storageSiteInstanceList: results, storageSiteInstanceTotal: count]
   }
 
+  @Secured(['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'])
   def autocompleteSite = {
 
     def username  = springSecurityService.principal.username

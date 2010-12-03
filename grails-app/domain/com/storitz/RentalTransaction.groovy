@@ -25,8 +25,10 @@ class RentalTransaction {
   String feedUnitId           // for centershift to identify specific unit
   String feedUnitNumber       // for email, etc.
   Long promoId
+  String promoName
 
   Long insuranceId
+  String insuranceName
   StorageSite site
   Date bookingDate
   Date moveInDate
@@ -35,9 +37,17 @@ class RentalTransaction {
   Date dateOfBirth
   BigDecimal cost
   BigDecimal moveInCost
+  BigDecimal discount
+  BigDecimal insuranceCost
   BigDecimal feedMoveInCost
   BigDecimal commission
   BigDecimal monthlyRate
+  BigDecimal duration
+  Integer durationDays
+  Integer durationMonths
+  BigDecimal fees
+  BigDecimal tax
+  BigDecimal deposit
   ReferralCode referralCode
   SearchEngineReferral searchEngineReferral
   Boolean isCallCenter
@@ -90,6 +100,16 @@ class RentalTransaction {
     contactId(nullable:true)
     feedMoveInCost(nullable:true)
     monthlyRate(nullable:true)
+    discount(nullable:true)
+    duration(nullable:true)
+    insuranceCost(nullable:true)
+    promoName(nullable:true)
+    insuranceName(nullable:true)
+    fees(nullable:true)
+    tax(nullable:true)
+    deposit(nullable:true)
+    durationDays(nullable:true)
+    durationMonths(nullable:true)
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
