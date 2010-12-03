@@ -79,7 +79,7 @@ class MapService {
 
     }
 
-    def getSites(Integer searchSize, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
+    def getSites(Long searchSize, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
       def sites = StorageSite.createCriteria()
       return sites.listDistinct {
         and {
@@ -91,7 +91,7 @@ class MapService {
           fetchMode('units', FetchMode.EAGER)
           units {
             unitsize {
-              eq("id", new Long(searchSize))
+              eq("id", searchSize)
             }
           }
         }
