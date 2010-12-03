@@ -3,4 +3,5 @@ Disallow: /admin/
 Disallow: /xxx/
 Disallow: /zzz/
 Disallow: /rentalTransaction/
+Disallow: /updateMetro
 Sitemap: http://www.storitz.com/sitemap.xml

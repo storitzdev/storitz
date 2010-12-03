@@ -10,6 +10,7 @@ function rentmeClick() {
             $('#transMoveInDate').addClass('validation-failed');
             return;
         }
+        _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentme']);
         $('#transMoveInDate').removeClass('validation-failed');
         // TODO - check if all things are cleared
         $('#sizeHelp').hide();
@@ -149,6 +150,7 @@ function setupHelp() {
         width: 440
     }).addTouch();
     $('.sizeGuide').click(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'detail', 'size guide']);
         $('#sizeHelp').dialog('open');
     });
 }
@@ -168,6 +170,7 @@ function setupJQueryTabs() {
     $('#detail_tabs').tabs();
 
     $('#detail_tabs').bind('tabsshow', function(event, ui) {
+        _gaq.push(['funnelTracker._trackEvent', 'detail', 'tab', ui.panel.id]);
         if (ui.panel.id == "tab_directions") {
             refreshMap();
         }

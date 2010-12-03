@@ -239,6 +239,7 @@ function setupHelp() {
         width: 440
     }).addTouch();
     $('.sizeGuide').click(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'size guide']);
         $('#sizeHelp').dialog('open');
     });
 }
