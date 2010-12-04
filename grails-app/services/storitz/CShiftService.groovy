@@ -1272,6 +1272,25 @@ class CShiftService {
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
 
     def ret = [:]
+
+    if (!unit) {
+      def cal = new GregorianCalendar()
+      cal.setTime(moveInDate)
+
+      ret["duration"] = 1
+      ret["discountTotal"] = 0
+      ret["feesTotal"] = 0
+      ret["insuranceCost"] = 0
+      ret["tax"] = 0
+      ret["moveInTotal"] = 0
+      ret["deposit"] = 0
+      ret["paidThruDate"] = cal.time.format('MM/dd/yy')
+      ret["paidThruDateMillis"] = cal.time
+      ret["durationMonths"] =  1
+      ret["durationDays"] = 0
+      return ret
+    }
+
     BigDecimal durationMonths = promo ? (promo.prepay ? promo.expireMonth : promo.prepayMonths) : 1
     BigDecimal promoMonths = promo ? (promo.prepay ? (promo.expireMonth >= durationMonths ? durationMonths : promo.expireMonth) : promo.prepayMonths) : 0
     def offerDiscount = 0
