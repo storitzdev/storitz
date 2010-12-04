@@ -854,7 +854,7 @@ class SiteLinkService {
 
           Double width = unit.dcWidth.text() as Double
           Double length = unit.dcLength.text() as Double
-          if (unit.dcWidth.text().isInteger() && unit.dcLength.text().isInteger()) {
+          if ((width - (int)width == 0) && (length - (int)length == 0)) {
             siteUnit.displaySize = (width as Integer) + " X " + (length as Integer)
           } else {
             siteUnit.displaySize = width + " X " + length
