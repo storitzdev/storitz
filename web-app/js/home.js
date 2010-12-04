@@ -510,6 +510,7 @@ function markerClick(feature) {
         savedFeature = null;
     });
     infoWindow.open(map, feature.marker);
+    _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker click', feature.id]);
     $('div#mapInfoWin').parent().css('overflow', 'hidden');
 }
 
@@ -520,12 +521,14 @@ function setupMap() {
         if (savedTableId) {
             $('#map_icon' + savedTableId).html($('<img>', { src:srcMarkersGreen[features[savedTableId].index], width: 28, height: 35}));
         }
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'results', 'icon click', mapId]);
         markerClick(features[mapId]);
         savedTableId = mapId;
     });
     $("table#stresults tbody tr td.stClickable").click(function(event) {
         var mapDiv = $(this).parent().find('.map_icon');
         var mapId = mapDiv.attr('id').substring(8);
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'results', 'table click', mapId]);
         window.location = siteLink(features[mapId]) + (features[mapId].promoId ? '&promoId=' + features[mapId].promoId : '');
     });
     $('#stresults tbody tr').mouseenter(function(event) {
