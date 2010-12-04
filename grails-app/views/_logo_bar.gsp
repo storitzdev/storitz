@@ -63,6 +63,7 @@
           link.click(function(event) {
             event.preventDefault();
             dialog.dialog('open');
+            _gaq.push(['funnelTracker._trackEvent', 'help', 'open']);
             return false;
           });
         });
