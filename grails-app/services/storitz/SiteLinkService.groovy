@@ -245,7 +245,7 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sAddr1>""" + rentalTransaction.contactPrimary.address1 + """</cal:sAddr1>
          <!--Optional:-->
-         <cal:sAddr2>""" + rentalTransaction.contactPrimary.address2 + """</cal:sAddr2>
+         <cal:sAddr2>""" + (rentalTransaction.contactPrimary?.address2 ? rentalTransaction.contactPrimary.address2 : '') + """</cal:sAddr2>
          <!--Optional:-->
          <cal:sCity>""" + rentalTransaction.contactPrimary.city + """</cal:sCity>
          <!--Optional:-->
@@ -259,25 +259,25 @@ class SiteLinkService {
          <!--Optional:-->
          <cal:sMrMrsAlt></cal:sMrMrsAlt>
          <!--Optional:-->
-         <cal:sFNameAlt>""" + rentalTransaction.contactSecondary?.firstName + """</cal:sFNameAlt>
+         <cal:sFNameAlt>""" + (rentalTransaction.contactSecondary?.firstName ? rentalTransaction.contactSecondary.firstName : '') + """</cal:sFNameAlt>
          <!--Optional:-->
          <cal:sMIAlt></cal:sMIAlt>
          <!--Optional:-->
-         <cal:sLNameAlt>""" + rentalTransaction.contactSecondary?.lastName + """</cal:sLNameAlt>
+         <cal:sLNameAlt>""" + (rentalTransaction.contactSecondary?.lastName ? rentalTransaction.contactSecondary.lastName : '' )+ """</cal:sLNameAlt>
          <!--Optional:-->
-         <cal:sAddr1Alt>""" + rentalTransaction.contactSecondary?.address1 + """</cal:sAddr1Alt>
+         <cal:sAddr1Alt>""" + (rentalTransaction.contactSecondary?.address1 ? rentalTransaction.contactSecondary.address1 : '')+ """</cal:sAddr1Alt>
          <!--Optional:-->
-         <cal:sAddr2Alt>""" + rentalTransaction.contactSecondary?.address2 + """</cal:sAddr2Alt>
+         <cal:sAddr2Alt>""" + (rentalTransaction.contactSecondary?.address2 ? rentalTransaction.contactSecondary.address2 : '' )+ """</cal:sAddr2Alt>
          <!--Optional:-->
-         <cal:sCityAlt>""" + rentalTransaction.contactSecondary?.city + """</cal:sCityAlt>
+         <cal:sCityAlt>""" + (rentalTransaction.contactSecondary?.city ? rentalTransaction.contactSecondary.city : '' ) + """</cal:sCityAlt>
          <!--Optional:-->
-         <cal:sRegionAlt>""" + rentalTransaction.contactSecondary?.state?.display +  """</cal:sRegionAlt>
+         <cal:sRegionAlt>""" + (rentalTransaction.contactSecondary?.state?.display ? rentalTransaction.contactSecondary?.state.display : '' ) +  """</cal:sRegionAlt>
          <!--Optional:-->
-         <cal:sPostalCodeAlt>""" + rentalTransaction.contactSecondary?.zipcode + """</cal:sPostalCodeAlt>
+         <cal:sPostalCodeAlt>""" + (rentalTransaction.contactSecondary?.zipcode ? rentalTransaction.contactSecondary.zipcode : '' )+ """</cal:sPostalCodeAlt>
          <!--Optional:-->
-         <cal:sCountryAlt>""" + rentalTransaction.contactSecondary?.country?.display +  """</cal:sCountryAlt>
+         <cal:sCountryAlt>""" + (rentalTransaction.contactSecondary?.country?.display ? rentalTransaction.contactSecondary.country.display  : '' ) +  """</cal:sCountryAlt>
          <!--Optional:-->
-         <cal:sPhoneAlt>""" + rentalTransaction.contactSecondary?.phone + """</cal:sPhoneAlt>
+         <cal:sPhoneAlt>""" + (rentalTransaction.contactSecondary?.phone ? rentalTransaction.contactSecondary.phone : '' ) + """</cal:sPhoneAlt>
          <!--Optional:-->
          <cal:sMrMrsBus></cal:sMrMrsBus>
          <!--Optional:-->
