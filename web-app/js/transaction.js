@@ -164,7 +164,7 @@ function transactionFormSetup() {
     chosenUnitType = $('#unitType').val();
     $('#chosenType').val(chosenUnitType);
     showTotals('unitType');
-    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'unit type' + chosenUnitType]);
+    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'unit type ' + chosenUnitType]);
   });
 }
 
