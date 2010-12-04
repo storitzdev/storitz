@@ -822,7 +822,11 @@ class CShiftService {
               siteUnit.isPowered = false
               siteUnit.isAvailable = true
               siteUnit.isSecure = false
-              siteUnit.displaySize = dimensions
+              if (m[0][1].isInteger() && m[0][2].isInteger()) {
+                siteUnit.displaySize = "${width as Integer} X ${length as Integer}"
+              } else {
+                siteUnit.displaySize = "${width} X ${length}"
+              }
               stats.unitCount += vacant
 
               site.addToUnits(siteUnit)

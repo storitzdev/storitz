@@ -851,9 +851,14 @@ class SiteLinkService {
           siteUnit.isSecure = false
           siteUnit.isAlarm = unit.bAlarm.text().toLowerCase() == 'true'
           siteUnit.isIrregular = false
-          Integer width = (int) Double.parseDouble(unit.dcWidth.text())
-          Integer length = (int) Double.parseDouble(unit.dcLength.text())
-          siteUnit.displaySize = width + " X " + length
+
+          Double width = unit.dcWidth.text() as Double
+          Double length = unit.dcLength.text() as Double
+          if (unit.dcWidth.text().isInteger() && unit.dcLength.text().isInteger()) {
+            siteUnit.displaySize = (width as Integer) + " X " + (length as Integer)
+          } else {
+            siteUnit.displaySize = width + " X " + length
+          }
 
           def unitSize = unitSizeService.getUnitSize(width, length)
 
