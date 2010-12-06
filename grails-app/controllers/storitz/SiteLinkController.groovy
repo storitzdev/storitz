@@ -5,7 +5,7 @@ import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
-class SiteLinkController {
+class SiteLinkController extends FeedController {
 
   def siteLinkService
   def imageService
@@ -147,14 +147,4 @@ class SiteLinkController {
     }
   }
 
-  def uploadLogo = {
-
-    def logoFile = request.getFile('logoFile')
-    Long feedId = params.long('id')
-
-    imageService.feedLogo(logoFile, feedId)
-
-    flash.message = "Logo uploaded."
-    redirect(action: "list")
-  }
 }

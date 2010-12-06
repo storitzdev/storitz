@@ -9,7 +9,7 @@ import com.storitz.SiteImage
 import com.storitz.Feed
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
-class CshiftController {
+class CshiftController extends FeedController {
 
 
   def CShiftService
@@ -191,14 +191,4 @@ class CshiftController {
     }
   }
 
-  def uploadLogo = {
-
-    def logoFile = request.getFile('logoFile')
-    Long feedId = params.long('id')
-
-    imageService.feedLogo(logoFile, feedId)
-    
-    flash.message = "Logo uploaded."
-    redirect(action: "list")
-  }
 }
