@@ -249,7 +249,7 @@
         </div>
         </g:if>
         <g:else>
-          <input type="hidden" name="feed" value='${feedList[0]}'
+          <input type="hidden" name="feed" value='${feedList ? feedList.asList()[0] : ""}'
         </g:else>
 
         <div class="buttons">

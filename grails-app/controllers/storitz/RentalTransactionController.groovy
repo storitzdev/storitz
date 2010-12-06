@@ -196,6 +196,8 @@ class RentalTransactionController {
           flash.message = "Unit already reserved - refresh and try again"
           redirect(controller:"storageSite", action: "detail", params:[rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
           return
+        } else {
+          flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
         }
         moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
       }
@@ -272,6 +274,7 @@ class RentalTransactionController {
           if (moveInService.checkRented(rentalTransactionInstance)) {
             found = true
             unit = myUnit
+            flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
             break
           } else {
             if (--myUnit.unitCount <= 0) {
