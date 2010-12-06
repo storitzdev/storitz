@@ -250,17 +250,24 @@ class RentalTransactionController {
       }
 
       if (!moveInService.checkRented(rentalTransactionInstance)) {
+        if (--unit.unitCount <= 0) {
+          println "Removing unit from inventory ${unit.id}"
+          rentalTransactionInstance.site.removeFromUnits(unit)
+          rentalTransactionInstance.site.save(flush: true)
+        }
         def found = false
-        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != rentalTransactionInstance.unitId }.sort{ it.price }
-        for(myUnit in bestUnit) {
+        def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id}.sort{ it.price }
+        println "BestUnit size = ${bestUnitList.size()}"
+        for(myUnit in bestUnitList) {
+          println "Check unit for availability ${myUnit.id}"
           rentalTransactionInstance.unitId = myUnit.id
           if (moveInService.checkRented(rentalTransactionInstance)) {
             found = true
             unit = myUnit
-            rentalTransactionInstance.unitId = myUnit.id
             break
           } else {
             if (--myUnit.unitCount <= 0) {
+              println "Removing unit from inventory ${myUnit.id}"
               rentalTransactionInstance.site.removeFromUnits(myUnit)
               rentalTransactionInstance.site.save(flush: true)
             }
