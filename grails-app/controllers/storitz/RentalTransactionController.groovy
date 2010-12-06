@@ -259,6 +259,11 @@ class RentalTransactionController {
             unit = myUnit
             rentalTransactionInstance.unitId = myUnit.id
             break
+          } else {
+            if (--myUnit.unitCount <= 0) {
+              rentalTransactionInstance.site.removeFromUnits(myUnit)
+              rentalTransactionInstance.site.save(flush: true)
+            }
           }
         }
         if (!found) {
