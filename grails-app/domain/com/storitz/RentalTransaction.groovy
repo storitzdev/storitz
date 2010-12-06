@@ -53,7 +53,7 @@ class RentalTransaction {
   Boolean isCallCenter
   String cleanCCNum
   String paymentString
-  String unitType
+  UnitType unitType
   StorageSize searchSize
   Integer reservationPeriod
   String reservationId

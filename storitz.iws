@@ -18,8 +18,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/js/payment.js" afterPath="$PROJECT_DIR$/web-app/js/payment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -89,7 +91,7 @@
       <file leaf-file-name="SiteLinkService.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="385" column="6" selection-start="17376" selection-end="17376" vertical-scroll-proportion="-7.2">
+            <state line="1082" column="26" selection-start="46922" selection-end="46922" vertical-scroll-proportion="-3.12">
               <folding />
             </state>
           </provider>
@@ -107,19 +109,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/reports/index.gsp">
+      <file leaf-file-name="RentalTransactionController.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="81" selection-start="6810" selection-end="6810" vertical-scroll-proportion="-2.3333333">
+            <state line="178" column="74" selection-start="7047" selection-end="7047" vertical-scroll-proportion="-1.023301">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RentalTransactionController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
+      <file leaf-file-name="UnitType.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/UnitType.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="55" selection-start="11059" selection-end="11059" vertical-scroll-proportion="-6.4313726">
+            <state line="25" column="38" selection-start="484" selection-end="497" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -134,10 +136,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="complete.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="complete.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="69" selection-start="885" selection-end="885" vertical-scroll-proportion="0.3207547">
+            <state line="28" column="69" selection-start="885" selection-end="885" vertical-scroll-proportion="-3.3333333">
               <folding />
             </state>
           </provider>
@@ -170,7 +172,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="18" selection-start="1413" selection-end="1413" vertical-scroll-proportion="-8.5">
+            <state line="55" column="19" selection-start="1396" selection-end="1396" vertical-scroll-proportion="-8.130435">
               <folding />
             </state>
           </provider>
@@ -199,7 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/EmailController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/_transaction.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/_transaction_js.gsp" />
@@ -211,10 +212,11 @@
         <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/ReportPeriod.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/reports/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/ReportsController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" />
         <option value="$PROJECT_DIR$/web-app/js/payment.js" />
+        <option value="$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy" />
       </list>
     </option>
   </component>
@@ -1326,13 +1328,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/UserController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="1591" selection-end="1649" vertical-scroll-proportion="-18.961538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/Feed.groovy">
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
@@ -1381,36 +1376,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="18" selection-start="1413" selection-end="1413" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/MoveInService.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="44" selection-start="293" selection-end="304" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="385" column="6" selection-start="17376" selection-end="17376" vertical-scroll-proportion="-7.2">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/StorageUnit.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="21" selection-start="383" selection-end="391" vertical-scroll-proportion="-6.826087">
           <folding />
         </state>
       </provider>
@@ -1421,13 +1389,6 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="32.152172">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="259" column="55" selection-start="11059" selection-end="11059" vertical-scroll-proportion="-6.4313726">
           <folding />
         </state>
       </provider>
@@ -1448,7 +1409,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="69" selection-start="885" selection-end="885" vertical-scroll-proportion="0.3207547">
+        <state line="28" column="69" selection-start="885" selection-end="885" vertical-scroll-proportion="-3.3333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/SiteLinkService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1082" column="26" selection-start="46922" selection-end="46922" vertical-scroll-proportion="-3.12">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/StorageUnit.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="21" selection-start="383" selection-end="391" vertical-scroll-proportion="-6.826087">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/RentalTransaction.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="19" selection-start="1396" selection-end="1396" vertical-scroll-proportion="-8.130435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/storitz/constants/UnitType.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="38" selection-start="484" selection-end="497" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/RentalTransactionController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="178" column="74" selection-start="7047" selection-end="7047" vertical-scroll-proportion="-1.023301">
           <folding />
         </state>
       </provider>

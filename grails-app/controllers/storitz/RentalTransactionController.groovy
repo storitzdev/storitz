@@ -9,6 +9,7 @@ import storitz.constants.CommissionSourceType
 import storitz.constants.NotificationEventType
 import storitz.constants.TransactionStatus
 import com.storitz.*
+import storitz.constants.UnitType
 
 class RentalTransactionController {
 
@@ -101,7 +102,7 @@ class RentalTransactionController {
         }
         rentalTransactionInstance.site = site
         rentalTransactionInstance.searchSize = storageSize
-        rentalTransactionInstance.unitType = params.chosenType
+        rentalTransactionInstance.unitType = UnitType.getEnumFromId(params.chosenType)
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
         rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
 
@@ -175,13 +176,20 @@ class RentalTransactionController {
       def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
       if (!moveInDetails) {
         def found = false
-        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.min{ it.price }
-        for(myUnit in bestUnit) {
+        def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.min{ it.price }
+        println "BestUnit size = ${bestUnitList.size()}"
+        for(myUnit in bestUnitList) {
           rentalTransactionInstance.unitId = myUnit.id
           if (moveInService.checkRented(rentalTransactionInstance)) {
             found = true
             unit = myUnit
             break
+          } else {
+            if (--myUnit.unitCount <= 0) {
+              println "Removing unit from inventory ${myUnit.id}"
+              rentalTransactionInstance.site.removeFromUnits(myUnit)
+              rentalTransactionInstance.site.save(flush: true)
+            }
           }
         }
         if (!found) {

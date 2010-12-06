@@ -173,8 +173,7 @@ class SiteLinkService {
     postAction(payload, 'PromotionsRetrieve')
   }
 
-  def getMoveInWithDiscount(rentalTransaction) {
-    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
+  def getMoveInWithDiscount(rentalTransaction, unit) {
 
     def concessionId = rentalTransaction.promoId as Long
     if (concessionId != -999) {
@@ -1079,7 +1078,11 @@ class SiteLinkService {
   }
 
   def moveInDetail(RentalTransaction rentalTransaction) {
-    def ret = getMoveInWithDiscount(rentalTransaction)
+    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
+
+    if (!unit) return null
+
+    def ret = getMoveInWithDiscount(rentalTransaction, unit)
 
     println "moveInDetail ret =${ret}"
     
