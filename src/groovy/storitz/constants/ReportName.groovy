@@ -12,7 +12,8 @@ public enum ReportName {
   MOVEIN("Move Ins"),
   PENDING("Pending Move Ins"),
   ACTIVITY("All New Activity"),
-  CORP_TRANSACTION("")
+  CORP_TRANSACTION("Corporate Commission"),
+  CORP_PAYMENT("Corporate Payment")
 
   final String display
   final String outputType

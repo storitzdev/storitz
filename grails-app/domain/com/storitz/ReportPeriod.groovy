@@ -10,10 +10,12 @@ class ReportPeriod {
     ReportOutputType outputType
     ReportName reportName
     StorageSite site
+    Feed feed
 
     static constraints = {
       startDate(blank:false)
       endDate(blank:false)
       site(nullable:true)
+      feed(nullable:true)
     }
 }

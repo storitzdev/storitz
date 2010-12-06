@@ -48,17 +48,13 @@ class NotificationService {
         maxResults(1)
       }
 
-      def promo = null
-      if (!(rentalTransaction.promoId < 0)) {
-        promo = SpecialOffer.get(rentalTransaction.promoId)
-      }
       NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US)
 
       String rentalAgreementLink = null
       if (rentalTransaction.site.rentalAgreement) {
         rentalAgreementLink = g.resource(file: rentalTransaction.site.rentalAgreement.src())
       }
-      String promoName = promo?.promoName
+      String promoName = rentalTransaction.promoName
       String siteAddress = rentalTransaction.site.getFullAddress()
       String directionsLink = g.createLink(controller:"storageSite", action:"directions", id:rentalTransaction.site.id)
       String billingName = rentalTransaction.billingAddress.fullName()

@@ -34,7 +34,11 @@ import storitz.constants.TransactionStatus
 import storitz.constants.UnitType
 import ar.com.fdvs.dj.domain.constants.*
 import storitz.reports.*
+import com.storitz.User
+import com.storitz.UserRole
+import com.storitz.Feed
 
+@Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
 class ReportsController {
 
     def fileUploadService
@@ -43,7 +47,17 @@ class ReportsController {
     static allowedMethods = [balk: "POST"]
 
 
-    def index = { }
+    def index = {
+      def feedList = []
+      def username  = springSecurityService.principal.username
+      def user = User.findByUsername(username as String)
+      if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+        feedList = Feed.list()
+      } else {
+        feedList = Feed.findAllByManager(user.manager)
+      }
+      [feedList:feedList]
+    }
 
   GregorianCalendar startDate = new GregorianCalendar()
   GregorianCalendar endDate = new GregorianCalendar()
@@ -54,7 +68,6 @@ class ReportsController {
   Style headerVariables
   Style groupHeaderStyle
 
-  @Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
   def site = {
 
     ReportPeriod period = new ReportPeriod(params)
@@ -107,7 +120,7 @@ class ReportsController {
     switch (period.reportName) {
       case ReportName.BALK:
         results = buildBalkReport(drb, reportParams, startDate, endDate)
-        break;
+        break
 
       case ReportName.ACTIVITY:
       case ReportName.PENDING:
@@ -119,7 +132,11 @@ class ReportsController {
           return
         }
         results = buildSiteReport(drb, reportParams, startDate, endDate, period)
-        break;
+        break
+
+      case ReportName.CORP_TRANSACTION:
+        results = buildCorpReport(drb, reportParams, startDate, endDate, period)
+        break
     }
 
     JRDataSource ds = new JRBeanCollectionDataSource(results);
@@ -354,6 +371,172 @@ class ReportsController {
       .addColumn(columnCommission)
       .addColumn(columnNet)
       .addGroup(g1)
+
+    return results
+  }
+
+  private buildCorpReport(drb, reportParams, startDate, endDate, period) {
+
+    def dateField
+    def transTitle
+    def results
+
+    def c = RentalTransaction.createCriteria()
+
+    switch(period.reportName) {
+      case ReportName.CORP_TRANSACTION:
+        reportParams["report_name"] = "Transaction Report - ${period.feed.operatorName}"
+        reportParams["footer_text"] = "Transaction Report - ${period.feed.operatorName} ${reportParams['date_range']}"
+        dateField = "bookingDate"
+        transTitle = "Trans #"
+
+        results = c.list() {
+          or {
+            eq('status', TransactionStatus.COMPLETE)
+            eq('status', TransactionStatus.PAID)
+          }
+          site{
+            feed {
+              eq('id', period.feed.id)
+            }
+          }
+          between('bookingDate', startDate.time, endDate.time)
+          order('bookingDate', 'desc')
+        }
+        break
+
+      case ReportName.CORP_PAYMENT:
+        reportParams["report_name"] = "Payment Report - ${period.feed.operatorName}"
+        reportParams["footer_text"] = "Payment Report - ${period.site.operatorName} ${reportParams['date_range']}"
+        dateField = "moveInDate"
+        transTitle = "Res #"
+
+        results = c.list() {
+          or {
+            eq('status', TransactionStatus.COMPLETE)
+            eq('status', TransactionStatus.PAID)
+          }
+          site{
+            feed {
+              eq('id', period.feed.id)
+            }
+          }
+          between('bookingDate', startDate.time, endDate.time)
+          gt('moveInDate', new Date())
+          order('moveInDate', 'desc')
+        }
+        break
+
+    }
+
+    drb
+      .setGrandTotalLegend("Grand Total")
+      .setGrandTotalLegendStyle(headerVariables)
+      .setPrintColumnNames(false)
+
+    drb.addField("contactPrimary.firstName", String.class.getName())
+    drb.addField("contactPrimary.lastName", String.class.getName())
+    drb.addField("contactPrimary.suffixName", String.class.getName())
+    drb.addField("bookingDate", Date.class.getName())
+    drb.addField("moveInDate", Date.class.getName())
+    drb.addField("reserved", Boolean.class.getName())
+    drb.addField("reservationId", String.class.getName())
+    drb.addField("idNumber", String.class.getName())
+
+
+    SimpleColumn columnSite = ColumnBuilder.getInstance().
+      setColumnProperty("site.title", String.class.getName()).
+      setTitle("Facility").setWidth(100).build()
+
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
+            .setTitle("Date").setHeaderStyle(groupHeaderStyle).setWidth(18).build();
+
+    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
+            .setTitle("MoveIn Date").setHeaderStyle(headerStyle).setWidth(18).build();
+
+    SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
+      setColumnProperty("feedUnitNumber", String.class.getName()).
+      setTitle("Unit #").setWidth(15).build()
+
+    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
+            .setTitle(transTitle).setHeaderStyle(headerStyle).setWidth(22).build();
+
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
+            .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
+
+    SimpleColumn columnEmail = ColumnBuilder.getInstance().
+      setColumnProperty("contactPrimary.email", String.class.getName()).
+      setTitle("Email").setWidth(45).build()
+
+    SimpleColumn columnPhone = ColumnBuilder.getInstance().
+      setColumnProperty("contactPrimary.phone", String.class.getName()).
+      setTitle("Phone").setWidth(25).build()
+
+    SimpleColumn columnGross = ColumnBuilder.getInstance().
+      setColumnProperty("cost", BigDecimal.class.getName()).
+      setTitle("Gross").setPattern("\$ 0.00").setWidth(18).build()
+
+    SimpleColumn columnCommission = ColumnBuilder.getInstance().
+      setColumnProperty("commission", BigDecimal.class.getName()).
+      setTitle("Commission").setPattern("\$ 0.00").setWidth(18).build()
+
+    AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
+            .setTitle("Net").setHeaderStyle(headerStyle).setWidth(18).setPattern("\$ 0.00").build();
+
+    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, headerVariables);
+	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, headerVariables);
+	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, headerVariables);
+	drb.setGlobalFooterVariableHeight(new Integer(25));
+
+    GroupBuilder gb1 = new GroupBuilder();
+
+    Style dailyFooterStyle = new StyleBuilder(false).setFont(Font.ARIAL_SMALL)
+ 			.setHorizontalAlign(HorizontalAlign.RIGHT)
+ 			.setVerticalAlign(VerticalAlign.MIDDLE)
+ 			.setPadding(new Integer(0))
+ 			.setStretchWithOverflow(false)
+ 			.build();
+
+    DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", dailyFooterStyle, LabelPosition.LEFT);
+    DJGroupLabel facilitySubLabel = new DJGroupLabel("Facility Subtotal", dailyFooterStyle, LabelPosition.LEFT);
+
+    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
+                .setFooterLabel(dailySubLabel)
+                .setFooterVariablesHeight(new Integer(30))
+                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
+                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
+                .build();
+
+    GroupBuilder gb2 = new GroupBuilder();
+
+    DJGroup g2 = gb1.setCriteriaColumn((PropertyColumn) columnSite)
+                .setFooterLabel(facilitySubLabel)
+                .setFooterVariablesHeight(new Integer(30))
+                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
+                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
+                .build();
+
+    drb.addColumn(columnDate)
+      .addColumn(columnUnitNumber)
+      .addColumn(columnReservationId)
+
+    if (period.reportName == ReportName.ACTIVITY) {
+      drb.addColumn(columnMoveInDate)
+    }
+
+    drb
+      .addColumn(columnName)
+      .addColumn(columnEmail)
+      .addColumn(columnPhone)
+      .addColumn(columnGross)
+      .addColumn(columnCommission)
+      .addColumn(columnNet)
+      .addGroup(g1)
+      .addGroup(g2)
 
     return results
   }

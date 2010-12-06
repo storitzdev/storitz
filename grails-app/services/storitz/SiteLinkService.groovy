@@ -1061,6 +1061,8 @@ class SiteLinkService {
     def siteLink = (SiteLink)rentalTransaction.site.feed
     def ret = getUnitInfoByName(siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
+    println "checkRented ret =${ret}"
+
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',

@@ -251,12 +251,13 @@ class RentalTransactionController {
 
       if (!moveInService.checkRented(rentalTransactionInstance)) {
         def found = false
-        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.min{ it.price }
+        def bestUnit = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != rentalTransactionInstance.unitId }.min{ it.price }
         for(myUnit in bestUnit) {
           rentalTransactionInstance.unitId = myUnit.id
           if (moveInService.checkRented(rentalTransactionInstance)) {
             found = true
             unit = myUnit
+            rentalTransactionInstance.unitId = myUnit.id
             break
           }
         }

@@ -90,7 +90,11 @@
                 $(this).val() == '${ReportName.PENDING}' ||
                 $(this).val() == '${ReportName.ACTIVITY}') {
           $('#optionalParams').show();
-        } else $('#optionalParams').hide();
+          $('#feedParams').hide();
+        } else if ($(this).val() == '${ReportName.CORP_TRANSACTION}' || $(this).val() == '${ReportName.CORP_PAYMENT}') {
+          $('#optionalParams').hide();
+          $('#feedParams').show();
+        }
       });
 
         
@@ -184,6 +188,8 @@
               <option ${reportPeriod?.reportName == ReportName.MOVEIN ? 'selected="selected"' : ''} value="${ReportName.MOVEIN}">${ReportName.MOVEIN.display}</option>
               <option ${reportPeriod?.reportName == ReportName.PENDING ? 'selected="selected"' : ''} value="${ReportName.PENDING}">${ReportName.PENDING.display}</option>
               <option ${reportPeriod?.reportName == ReportName.ACTIVITY ? 'selected="selected"' : ''} value="${ReportName.ACTIVITY}">${ReportName.ACTIVITY.display}</option>
+              <option ${reportPeriod?.reportName == ReportName.CORP_TRANSACTION ? 'selected="selected"' : ''} value="${ReportName.CORP_TRANSACTION}">${ReportName.CORP_TRANSACTION.display}</option>
+              <option ${reportPeriod?.reportName == ReportName.CORP_PAYMENT ? 'selected="selected"' : ''} value="${ReportName.CORP_PAYMENT}">${ReportName.CORP_PAYMENT.display}</option>
             </select>
           </div>
           <div style="height:20px;clear:both;"></div>
@@ -213,6 +219,38 @@
           </div>
 
         </div>
+
+        <g:if test="${feedList?.size() > 0}">
+        <div id="feedParams" style="display:none;">
+          <div class="price_options checkout_header white">
+            Choose Corporation
+          </div>
+
+          <div class="formInstructions">
+            Pick the correct corporation for the report
+          </div>
+
+          <div class="checkout_fields">
+            <div style="width:400px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'feed', 'errors')}">
+              <g:select style="width:400px;" from="${feedList}" value="${reportPeriod?.feed?.id}"
+                      optionKey="id" optionValue="operatorName" name="feed.id"
+                      noSelection="['null':'No feed selected']"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:400px;">
+              <label for="feed.id">Site</label>
+            </div>
+            <div style="height:20px;clear:both;"></div>
+          </div>
+
+        </div>
+        </g:if>
+        <g:else>
+          <input type="hidden" name="feed" value='${feedList[0]}'
+        </g:else>
 
         <div class="buttons">
           <span class="button"><g:actionSubmit action="site" value="Generate Report"/></span>
