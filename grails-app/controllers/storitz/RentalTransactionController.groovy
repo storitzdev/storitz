@@ -176,7 +176,7 @@ class RentalTransactionController {
       def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
       if (!moveInDetails) {
         def found = false
-        def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.min{ it.price }
+        def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.sort{ it.price }
         println "BestUnit size = ${bestUnitList.size()}"
         for(myUnit in bestUnitList) {
           rentalTransactionInstance.unitId = myUnit.id
