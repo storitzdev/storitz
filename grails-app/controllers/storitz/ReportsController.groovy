@@ -508,13 +508,13 @@ class ReportsController {
                 .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
                 .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
                 .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
-                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
+                .setGroupLayout(GroupLayout.DEFAULT)
                 .build();
 
     GroupBuilder gb2 = new GroupBuilder();
 
     DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite)
-                .setGroupLayout(GroupLayout.VALUE_IN_HEADER)
+                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
                 .build();
 
     drb

@@ -261,17 +261,17 @@ function setupForm() {
     });
     $('select#size').change(function(event) {
         var searchUnitSize = $('#size').val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 2 unit size', searchUnitSize]);
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 2 unitsize ' + searchUnitSize]);
         showAddress(getAddress(), searchUnitSize, getDate());
     });
     $('select#sbUnitsize').change(function(event) {
         var searchUnitSize = $('select#sbUnitsize').val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'results table unit size', searchUnitSize]);
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'results unitsize ' + searchUnitSize]);
         showAddress(getAddress(), searchUnitSize, getDate());
     });
     $('select#sbSortSelect').change(function(event) {
         var sortType = $(this).val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'sort', 'results', sortType]);
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'sort', 'results table ' + sortType]);
         switch (sortType) {
             case '0':
                 resultTable.fnSort([
