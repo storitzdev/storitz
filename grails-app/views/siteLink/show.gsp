@@ -99,7 +99,7 @@
         <span class="button"><g:actionSubmit action="updateProration" value="${message(code: 'default.button.create.contacts.label', default: 'Refresh proration')}"/></span>
       </g:form>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
-        <span class="button"><g:link controller="feed" action="seoLinks" id="${cshiftInstance?.id}">SEO Links</g:link> </span>
+        <span class="button"><g:link controller="feed" action="seoLinks" id="${siteLinkInstance?.id}">SEO Links</g:link> </span>
       </sec:ifAnyGranted>
       
     </div>
