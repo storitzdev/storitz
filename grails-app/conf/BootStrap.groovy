@@ -35,11 +35,9 @@ class BootStrap {
 
     JSON.registerObjectMarshaller(new CustomDomainMarshaller())
 
-    println "Regitstering Custom Marshallers"
+    println "Registering Custom Marshallers"
 
     JSON.registerObjectMarshaller StorageSite, {
-
-      println "Using the registered StorageSite Marshaller"
 
       def returnArray = [:]
       // skip units - refresh will get those
@@ -133,7 +131,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller SiteLink, {
-      println "Using the registered SiteLink Marshaller"
 
       def returnArray = [:]
       returnArray['corpCode'] = it.corpCode
@@ -149,7 +146,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller CenterShift, {
-      println "Using the registered CenterShift Marshaller"
 
       def returnArray = [:]
       returnArray['cshiftVersion'] = it.cshiftVersion as String
@@ -168,8 +164,6 @@ class BootStrap {
 
     JSON.registerObjectMarshaller User, {
 
-      println "Using the registered User Marshaller"
-
       def returnArray = [:]
       returnArray['notificationTypes'] = it.notificationTypes
       returnArray['username'] = it.username
@@ -186,7 +180,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller SiteUser, {
-      println "Using the registered SiteUser Marshaller"
 
       def returnArray = [:]
       returnArray['user'] = it.user.username
@@ -197,7 +190,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller UserNotificationType, {
-      println "Using the registered UserNotificationType Marshaller"
 
       def returnArray = [:]
       returnArray['user'] = it.user.username
@@ -208,7 +200,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller SpecialOffer, {
-      println "Using the registered SpecialOffer Marshaller"
 
       def returnArray = [:]
 
@@ -232,7 +223,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller UserRole, {
-      println "Using the registered UserRole Marshaller"
 
       def returnArray = [:]
 
@@ -243,7 +233,6 @@ class BootStrap {
     }
 
     JSON.registerObjectMarshaller storitz.constants.State, {
-      println "Using the registered State Marshaller"
 
       def returnArray = [:]
       returnArray['name'] = it.toString()

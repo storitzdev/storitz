@@ -202,8 +202,6 @@ class HomeController {
       address = params.address.join(' ');
     }
 
-    println "Got address = ${address}"
-    
     geoResult = geocodeService.geocode(address)
 
     if (geoResult.Placemark) {
