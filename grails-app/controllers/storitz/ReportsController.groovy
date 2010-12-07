@@ -73,6 +73,9 @@ class ReportsController {
     ReportPeriod period = new ReportPeriod(params)
 
     if (!period.validate()) {
+      period.errors.allErrors.each {
+        println "Error in report validation: ${it}"
+      }
       flash.message = "Bad report parameters - please re-enter dates and output type."
       render view: "index", model: [reportPeriod: period]
       return
@@ -446,7 +449,7 @@ class ReportsController {
 
     SimpleColumn columnSite = ColumnBuilder.getInstance().
       setColumnProperty("site.title", String.class.getName()).
-      setTitle("Facility").setWidth(100).build()
+      setTitle("Facility").setWidth(35).build()
 
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
             .setTitle("Date").setHeaderStyle(groupHeaderStyle).setWidth(18).build();
@@ -498,7 +501,6 @@ class ReportsController {
  			.build();
 
     DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", dailyFooterStyle, LabelPosition.LEFT);
-    DJGroupLabel facilitySubLabel = new DJGroupLabel("Facility Subtotal", dailyFooterStyle, LabelPosition.LEFT);
 
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
                 .setFooterLabel(dailySubLabel)
@@ -511,32 +513,23 @@ class ReportsController {
 
     GroupBuilder gb2 = new GroupBuilder();
 
-    DJGroup g2 = gb1.setCriteriaColumn((PropertyColumn) columnSite)
-                .setFooterLabel(facilitySubLabel)
-                .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
-                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
+    DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite)
+                .setGroupLayout(GroupLayout.VALUE_IN_HEADER)
                 .build();
 
-    drb.addColumn(columnDate)
+    drb
+      .addColumn(columnSite)
+      .addColumn(columnDate)
       .addColumn(columnUnitNumber)
       .addColumn(columnReservationId)
-
-    if (period.reportName == ReportName.ACTIVITY) {
-      drb.addColumn(columnMoveInDate)
-    }
-
-    drb
       .addColumn(columnName)
       .addColumn(columnEmail)
       .addColumn(columnPhone)
       .addColumn(columnGross)
       .addColumn(columnCommission)
       .addColumn(columnNet)
-      .addGroup(g1)
       .addGroup(g2)
+      .addGroup(g1)
 
     return results
   }
