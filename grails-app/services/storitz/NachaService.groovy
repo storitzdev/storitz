@@ -50,7 +50,7 @@ class NachaService {
       // ONE Record
       writer << sprintf("101 091000019%10s%s%c094101WELLS FARGO            STORITZ INC.           %8d", fileId, now.format('yyMMddHHmm'), (dayCount > 10 ? ('A' as Character) + (dayCount - 10) : dayCount + ('0' as Character)), nacha.id)
       // FIVE Record - note used for debits only (225)
-      writer << sprintf("5225STORITZ INC.    OPERATOR DEBITS     %10sPPDRENTALS   %s%s   1091000010000001", companyId, daySent, settlementDate)
+      writer << sprintf("5220STORITZ INC.    OPERATOR CREDITS    %10sCCDRENTALS   %s%s   1091000010000001", companyId, daySent, settlementDate)
 
       def routeNumberSum = 0
       def debitSum = 0
@@ -68,9 +68,9 @@ class NachaService {
             debitSum += debit
             itemCount++
 
-            bodyWriter.println "${itemCount} Debit for site ${trans.site.title} Amount ${debit}"
+            bodyWriter.println "${itemCount} Creidt for site ${trans.site.title} Amount ${debit}"
 
-            writer << sprintf("627%08d%s%17s%010d%-15s%-22s000091000010000001", routeCode, routeChkSum, bankInfo.acctNo, (debit * 100) as Long, trans.site.id as String, bankInfo.accountName)
+            writer << sprintf("622%08d%s%17s%010d%-15s%-22s000091000010000001", routeCode, routeChkSum, bankInfo.acctNo, (debit * 100) as Long, trans.site.id as String, bankInfo.accountName)
           } else {
             bodyWriter.println "Bad debit for rentalTransaction id = ${trans.id} amount ${debit} site: ${trans.site.title}"
           }
@@ -80,7 +80,7 @@ class NachaService {
       }
 
       // EIGHT Record
-      writer << sprintf("8225%06d%010d%012d000000000000%10s                         091000010000001", itemCount, routeNumberSum, (debitSum * 100) as Long, companyId)
+      writer << sprintf("8220%06d%010d%012d000000000000%10s                         091000010000001", itemCount, routeNumberSum, (debitSum * 100) as Long, companyId)
 
       // NINE Record
       writer << sprintf("9000001%06d%08d%010d%012d000000000000                                       ", (((itemCount + 4) as BigDecimal) /10.0).setScale(0, RoundingMode.HALF_UP).longValue(), itemCount as Long, routeNumberSum as Long, (debitSum * 100) as Long)

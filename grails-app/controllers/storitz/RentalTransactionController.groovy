@@ -599,6 +599,10 @@ class RentalTransactionController {
         eq('status', TransactionStatus.PAID)
         eq('status', TransactionStatus.COMPLETE)
       }
+      or {
+        ne('checkIssued', true)
+        isNull('checkIssued')
+      }
       isNull('achTransferDate')
     }
     nachaService.buildFile(results)
