@@ -68,7 +68,7 @@
       </table>
     </div>
     <div class="paginateButtons">
-      <g:paginate total="${feed.sites.size()}"/>
+      <g:paginate total="${feed.sites.size()}" id="${feed.id}"/>
     </div>
   </div>
 </div>

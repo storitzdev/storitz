@@ -225,11 +225,12 @@ class UserController {
             }
 			person.password = springSecurityService.encodePassword(params.passwd)
 		}
-		if (person.save()) {
+        def editor = User.findByUsername(springSecurityService.principal.username)
+  		if (person.save()) {
 			UserRole.removeAll(person)
 			addRoles(person)
 
-            if (!UserRole.userHasRole(person, 'ROLE_ADMIN')) {
+            if (!UserRole.userHasRole(editor, 'ROLE_ADMIN')) {
               SiteUser.removeAll(person)
               addSites(person)
             }
