@@ -1174,6 +1174,13 @@ class BootStrap {
     new UnitTypeLookup(id:721, description:"Vault", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:722, description:"Drive Up Access, High Door", unitType:UnitType.DRIVEUP, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:723, description:"Boat/RV Parking", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:724, description:"Climate Controlled Upper Premium", unitType:UnitType.UPPER, tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:725, description:"Surfboard Storage", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:726, description:"ELEC", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:727, description:"Non-Climate Controlled", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:728, description:"InUpPrem", unitType:UnitType.UPPER, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:729, description:"IN - Inside", unitType:UnitType.INTERIOR, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:730, description:"RV Boat Storage", unitType:UnitType.UNDEFINED, tempControlled:false).save(validate:false)
   }
 
 

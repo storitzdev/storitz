@@ -487,7 +487,7 @@ function markerClick(feature) {
     c.append($('<div>', { 'class':'infoWindowText' })
             .append($('<div>').text(feature.address))
             .append($('<div>').text(feature.city + ', ' + feature.state + ' ' + feature.zipcode))
-            .append($('<div>', {'class':'left'}).css('margin-top', '5px').append($('<a>', { href: siteLink(feature) })
+            .append($('<div>', {'class':'left'}).css('margin-top', '5px').append($('<a>', { 'class':'mapIcon', href: siteLink(feature) + (feature.promoId ? '&promoId=' + feature.promoId : '') })
             .append($('<img>', { src: srcDetailButton, width:'55', height:'20', border:'0'  })))));
     var holder = $('<div>').append(c);
     feature.marker.setIcon(markersBlue[feature.index]);
@@ -510,8 +510,11 @@ function markerClick(feature) {
         savedFeature = null;
     });
     infoWindow.open(map, feature.marker);
-    _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker click', feature.id]);
+    _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker click']);
     $('div#mapInfoWin').parent().css('overflow', 'hidden');
+    $('a.mapIcon').click(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker detail']);
+    });
 }
 
 function setupMap() {
