@@ -1208,9 +1208,9 @@ class SiteLinkService {
     def offerDiscount = 0
     def rate = unit ? unit.pushRate : 0
     def premium = ins ? ins.premium : 0
-    def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def lockFee = site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
+    def additionalFees = adminFee + lockFee
     def waiveAdmin = false
     def deposit = site.deposit ? site.deposit : 0
 
