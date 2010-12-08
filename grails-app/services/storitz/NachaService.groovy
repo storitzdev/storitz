@@ -68,7 +68,7 @@ class NachaService {
             debitSum += debit
             itemCount++
 
-            bodyWriter.println "${itemCount} Creidt for site ${trans.site.title} Amount ${debit}"
+            bodyWriter.println "${itemCount} Credit for site ${trans.site.title} Amount ${debit}"
 
             writer << sprintf("622%08d%s%17s%010d%-15s%-22s000091000010000001", routeCode, routeChkSum, bankInfo.acctNo, (debit * 100) as Long, trans.site.id as String, bankInfo.accountName)
           } else {
@@ -94,6 +94,7 @@ class NachaService {
           if (debit > 0) {
             nacha.addToTransactions(trans)
             trans.achTransferDate = now
+            trans.save()
           }
         }
       }

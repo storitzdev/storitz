@@ -595,15 +595,17 @@ class RentalTransactionController {
   def processNacha = {
     def c = RentalTransaction.createCriteria()
     def results = c.list(params) {
-      or {
-        eq('status', TransactionStatus.PAID)
-        eq('status', TransactionStatus.COMPLETE)
+      and {
+        or {
+          eq('status', TransactionStatus.PAID)
+          eq('status', TransactionStatus.COMPLETE)
+        }
+        or {
+          ne('checkIssued', true)
+          isNull('checkIssued')
+        }
+        isNull('achTransferDate')
       }
-      or {
-        ne('checkIssued', true)
-        isNull('checkIssued')
-      }
-      isNull('achTransferDate')
     }
     nachaService.buildFile(results)
     flash.message = "NACHA processing complete"
