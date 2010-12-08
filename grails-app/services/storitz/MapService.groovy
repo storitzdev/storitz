@@ -39,10 +39,10 @@ class MapService {
     }
 
     def getDimensions(Integer zoom, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
-        def swLat
-        def swLng
-        def neLat
-        def neLng
+        BigDecimal swLat
+        BigDecimal swLng
+        BigDecimal neLat
+        BigDecimal neLng
 
         def scale = Math.pow(2, defaultZoom - zoom)
         def latInv = gundInv(lat)
