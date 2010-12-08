@@ -779,7 +779,7 @@ class CShiftService {
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
 
             def newUnit = false
-            def siteUnit = site.units.find{ it.unitName == attributes }
+            def siteUnit = site.units.find{ it.unitName == attributes && it.unitsize == unitSize }
 
             if (!siteUnit) {
               siteUnit = new StorageUnit()
