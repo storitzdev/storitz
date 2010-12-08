@@ -83,7 +83,7 @@ class NachaService {
       writer << sprintf("8220%06d%010d%012d000000000000%10s                         091000010000001", itemCount, routeNumberSum, (debitSum * 100) as Long, companyId)
 
       // NINE Record
-      writer << sprintf("9000001%06d%08d%010d%012d000000000000                                       ", (((itemCount + 4) as BigDecimal) /10.0).setScale(0, RoundingMode.HALF_UP).longValue(), itemCount as Long, routeNumberSum as Long, (debitSum * 100) as Long)
+      writer << sprintf("9000001%06d%08d%010d000000000000%012d                                       ", (((itemCount + 4) as BigDecimal) /10.0).setScale(0, RoundingMode.HALF_UP).longValue(), itemCount as Long, routeNumberSum as Long, (debitSum * 100) as Long)
 
       writer.close()
 
