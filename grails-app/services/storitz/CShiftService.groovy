@@ -829,13 +829,15 @@ class CShiftService {
               }
               stats.unitCount += vacant
 
-              site.addToUnits(siteUnit)
             } else {
               siteUnit.unitCount = vacant
               siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
               siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
               stats.unitCount += vacant
-              siteUnit.save(flush:true)
+            }
+            siteUnit.save(flush:true)
+            if (newUnit) {
+              site.addToUnits(siteUnit)
             }
 
           } else {
