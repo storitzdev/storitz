@@ -49,8 +49,8 @@ environments {
            '/weblog/**': ['ROLE_USER'],
         ]
         storitz.nacha.dir = '/usr/share/tomcat6/nacha'
-        storitz.nacha.fileId = '6989091787'
-        storitz.nacha.companyId = '6989091787'
+        storitz.nacha.fileId = '7878782339'
+        storitz.nacha.companyId = '1272912549'
     }
     preview {
         grails.serverURL = "http://preview.storitz.com"
