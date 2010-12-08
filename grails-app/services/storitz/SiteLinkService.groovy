@@ -844,7 +844,11 @@ class SiteLinkService {
           siteUnit.unitNumber = unit.UnitID.text()
           siteUnit.unitName = unit.sUnitName.text()
           siteUnit.price = unit.dcStdRate.text() as BigDecimal
-          siteUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
+          if (unit.dcPushRate) {
+            siteUnit.pushRate = unit.dcPushRate.text() as BigDecimal
+          } else {
+            siteUnit.pushRate = siteUnit.price
+          }
           siteUnit.isPowered = unit.bPower.text().toLowerCase() == 'true'
           siteUnit.isAvailable = true
           siteUnit.isSecure = false
@@ -875,7 +879,11 @@ class SiteLinkService {
         } else {
           // update pricing
           def price =  unit.dcStdRate.text() as BigDecimal
-          def pushRate = unit.dcBoardRate.text() as BigDecimal
+          if (unit.dcPushRate) {
+            existingUnit.pushRate = unit.dcPushRate.text() as BigDecimal
+          } else {
+            existingUnit.pushRate = siteUnit.price
+          }
           if (existingUnit.price != price || existingUnit.pushRate != pushRate) {
             existingUnit.price = unit.dcStdRate.text() as BigDecimal
             existingUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
