@@ -137,7 +137,7 @@
       <file leaf-file-name="NachaService.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/NachaService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="118" selection-start="3986" selection-end="3986" vertical-scroll-proportion="0.5954466">
+            <state line="88" column="19" selection-start="3883" selection-end="3883" vertical-scroll-proportion="0.5954466">
               <folding />
             </state>
           </provider>
@@ -1239,7 +1239,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="More fixes to NACHA record" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct number of filler records" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1252,8 +1252,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Add actual size on detail page&#10;Fix time parsing for SiteLink" />
-    <MESSAGE value="Fix nulls in move ins" />
     <MESSAGE value="Instrument map clicks" />
     <MESSAGE value="Better looking display information" />
     <MESSAGE value="Fix for unit search mechanism" />
@@ -1277,6 +1275,8 @@
     <MESSAGE value="NACHA file changes" />
     <MESSAGE value="Added line termination to NACHA records" />
     <MESSAGE value="More fixes to NACHA record" />
+    <MESSAGE value="Add filler records to the end of the file" />
+    <MESSAGE value="Correct number of filler records" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1436,7 +1436,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/NachaService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="118" selection-start="3986" selection-end="3986" vertical-scroll-proportion="0.5954466">
+        <state line="88" column="19" selection-start="3883" selection-end="3883" vertical-scroll-proportion="0.5954466">
           <folding />
         </state>
       </provider>

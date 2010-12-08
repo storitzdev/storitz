@@ -86,7 +86,7 @@ class NachaService {
       writer << sprintf("9000001%06d%08d%010d000000000000%012d                                       \r\n", (((itemCount + 4) as BigDecimal) /10.0).setScale(0, RoundingMode.HALF_UP).longValue(), itemCount as Long, routeNumberSum as Long, (creditSum * 100) as Long)
 
       if ((itemCount + 4)%10 != 0) {
-        for (i in 0..(10 - ((itemCount + 4)%10))) {
+        for (i in 1..(10 - ((itemCount + 4)%10))) {
           writer << "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\r\n"
         }
       }
