@@ -16,7 +16,7 @@ class CshiftController extends FeedController {
   def CShift4Service
   def imageService
 
-  static allowedMethods = [save: "POST", update: "POST", uploadLogo: "POST"]
+  static allowedMethods = [save: "POST", update: "POST", uploadLogo: "POST", updateInventory:"POST"]
 
   def index = {
     redirect(action: "list", params: params)

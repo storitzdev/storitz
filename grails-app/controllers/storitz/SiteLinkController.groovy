@@ -10,7 +10,7 @@ class SiteLinkController extends FeedController {
   def siteLinkService
   def imageService
 
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST"]
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory:"POST"]
 
   def index = {
     redirect(action: "list", params: params)
