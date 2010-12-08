@@ -116,6 +116,7 @@ class STMapController {
         def bestUnit
         def unitSiz
         def monthly
+        def pushRate
         def moveInCost = 100000
         def promoId
         def promoName
@@ -124,13 +125,14 @@ class STMapController {
         def unitType
 
         if (unitSize) {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.pushRate }
         } else {
-          bestUnit = site.units.min{ it.price }
+          bestUnit = site.units.min{ it.pushRate }
         }
         if (bestUnit) {
           def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
-          monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
+          monthly = bestUnit?.price
+          pushRate = bestUnit?.pushRate
           unitType = bestUnit?.unitType.display
           sizeDescription = bestUnit?.displaySize
           promoId = null
@@ -140,9 +142,10 @@ class STMapController {
           if (site.featuredOffers().size() > 0) {
             for (promo in site.featuredOffers()) {
               totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
-              if (moveInCost > totals['moveInCost']) {
-                monthly = bestUnit.pushRate ? bestUnit.pushRate : bestUnit.price
+              if (moveInCost < totals['moveInCost']) {
+                monthly = bestUnit?.price
                 unitType = bestUnit?.unitType.display
+                pushRate = bestUnit?.pushRate
                 sizeDescription = bestUnit?.displaySize
                 promoId = promo.id
                 promoName = promo.promoName
@@ -152,7 +155,7 @@ class STMapController {
             }
           }
         }
-        sw << "\"monthly\": ${monthly}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId}, \"promoName\":\"${promoName}\", \"paidThruDate\":\"${paidThruDate}\", \"unitType\":\"${unitType}\", \"sizeDescription\":\"${sizeDescription}\" }"
+        sw << "\"monthly\": ${monthly}, \"pushRate\": ${pushRate}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId}, \"promoName\":\"${promoName}\", \"paidThruDate\":\"${paidThruDate}\", \"unitType\":\"${unitType}\", \"sizeDescription\":\"${sizeDescription}\" }"
 
         if (row < results.size() && row < 20) {
           sw << ","
