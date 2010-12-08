@@ -1279,7 +1279,7 @@ class SiteLinkService {
 
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (site.taxRateRental/100)).setScale(2, RoundingMode.HALF_UP)
+    def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (site.taxRateMerchandise / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
     ret["duration"] = durationMonths

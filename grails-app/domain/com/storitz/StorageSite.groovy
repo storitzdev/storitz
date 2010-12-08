@@ -83,6 +83,7 @@ class StorageSite {
       rentalAgreement(nullable:true)
       taxRateRental(nullable:true)
       taxRateInsurance(nullable:true)
+      taxRateMerchandise(nullable:true)
       useProrating(nullable:true)
       lastChange(nullable:true)
       prorateStart(nullable:true)
@@ -174,6 +175,7 @@ class StorageSite {
 
     BigDecimal taxRateRental
     BigDecimal taxRateInsurance
+    BigDecimal taxRateMerchandise
     Boolean useProrating
 
   // data feeds
