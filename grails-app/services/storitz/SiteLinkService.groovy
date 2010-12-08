@@ -841,7 +841,7 @@ class SiteLinkService {
           }
           siteUnit.unitCount = 1
           siteUnit.description = typeName
-          siteUnit.unitNumber = unit.UnitID.text()
+          siteUnit.unitNumber = unitID
           siteUnit.unitName = unit.sUnitName.text()
           siteUnit.price = unit.dcStdRate.text() as BigDecimal
           if (unit.dcPushRate) {
@@ -865,7 +865,7 @@ class SiteLinkService {
 
           def unitSize = unitSizeService.getUnitSize(width, length)
 
-          if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
+          if (unitSize && unitSize.id != 1 && (width != 0 && length != 0) && siteUnit.price > 0) {
             siteUnit.unitsize = unitSize
             if (!siteUnit.save()) {
               siteUnit.errors.allErrors.each { writer.println it }
@@ -874,19 +874,24 @@ class SiteLinkService {
 
             site.addToUnits(siteUnit)
           } else {
-            writer.println "Skipping unit due to size: width=" + width + " length=" + length
+            if (siteUnit.price <= 0 ) {
+              writer.println "Skipping unit due to price=" + siteUnit.price
+            } else {
+              writer.println "Skipping unit due to size: width=" + width + " length=" + length
+            }
           }
         } else {
           // update pricing
           def price =  unit.dcStdRate.text() as BigDecimal
-          if (unit.dcPushRate) {
-            existingUnit.pushRate = unit.dcPushRate.text() as BigDecimal
+          def pushRate
+          if (unit.dcPushRate.text()) {
+            pushRate = unit.dcPushRate.text() as BigDecimal
           } else {
-            existingUnit.pushRate = siteUnit.price
+            pushRate = price
           }
           if (existingUnit.price != price || existingUnit.pushRate != pushRate) {
             existingUnit.price = unit.dcStdRate.text() as BigDecimal
-            existingUnit.pushRate = unit.dcBoardRate.text() as BigDecimal
+            existingUnit.pushRate = unit.dcPushRate.text() as BigDecimal
             existingUnit.save()
           }
         }
@@ -1204,6 +1209,7 @@ class SiteLinkService {
     def rate = unit ? unit.pushRate : 0
     def premium = ins ? ins.premium : 0
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
+    def lockFee = site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
     def waiveAdmin = false
     def deposit = site.deposit ? site.deposit : 0
@@ -1258,7 +1264,7 @@ class SiteLinkService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * durationMonths * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * durationMonths * rate;
           break;
 
         case "FIXED_RATE":
@@ -1273,7 +1279,7 @@ class SiteLinkService {
 
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP)
+    def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount + lockFee) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
     ret["duration"] = durationMonths

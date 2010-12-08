@@ -97,7 +97,7 @@
               <td class="costMoney" id="insuranceTotal"></td>
             </tr>
             <tr>
-              <td class="transLineDesc">Admin Fees</td>
+              <td class="transLineDesc">Property Fees</td>
               <td class="costDuration"></td>
               <td class="costMoneyPerMonth"></td>
               <td class="costMoney" id="adminTotal"></td>

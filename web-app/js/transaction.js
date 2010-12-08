@@ -33,9 +33,11 @@ function updateTransaction() {
   if (pushRate < monthlyRent) {
     $('#regPrice').html('$' + monthlyRent.toFixed(2));
     $('#pushPrice').html('$' + pushRate.toFixed(2));
+    $('#pushPrice').addClass('red');
   } else {
     $('#regPrice').html('');
     $('#pushPrice').html('$' + monthlyRent.toFixed(2));
+    $('#pushPrice').removeClass('red');
   }
 
   // update promo
