@@ -53,37 +53,37 @@ class NachaService {
       writer << sprintf("5220STORITZ INC.    OPERATOR CREDITS    %10sCCDRENTALS   %s%s   1091000010000001\r\n", companyId, daySent, settlementDate)
 
       def routeNumberSum = 0
-      def debitSum = 0
+      def creditSum = 0
       def itemCount = 0
       // SIX Record loop
       for(trans in transactions) {
         // use the 8 digit route number and sum
         def bankInfo = trans.site.bankAccount
-        def debit = (trans.cost - (trans.site.netCommission && trans.commission ? trans.commission : 0))
+        def credit = (trans.cost - (trans.site.netCommission && trans.commission ? trans.commission : 0))
         if (bankInfo) {
           def routeCode = bankInfo.routeCode.substring(0,8) as Long
           def routeChkSum = bankInfo.routeCode.substring(8)
           routeNumberSum += routeCode
-          if (debit > 0) {
-            debitSum += debit
+          if (credit > 0) {
+            creditSum += credit
             itemCount++
 
-            bodyWriter.println "${itemCount} Credit for site ${trans.site.title} Amount ${debit}"
+            bodyWriter.println "${itemCount} Credit for site ${trans.site.title} Amount ${credit}"
 
-            writer << sprintf("622%08d%s%17s%010d%-15s%-22s000091000010000001\r\n", routeCode, routeChkSum, bankInfo.acctNo, (debit * 100) as Long, trans.site.id as String, bankInfo.accountName)
+            writer << sprintf("622%08d%s%17s%010d%-15s%-22s00009100001%07d\r\n", routeCode, routeChkSum, bankInfo.acctNo, (credit * 100) as Long, trans.site.id as String, bankInfo.accountName, itemCount)
           } else {
-            bodyWriter.println "Bad debit for rentalTransaction id = ${trans.id} amount ${debit} site: ${trans.site.title}"
+            bodyWriter.println "Bad debit for rentalTransaction id = ${trans.id} amount ${credit} site: ${trans.site.title}"
           }
         } else {
-          bodyWriter.println "Missing bank info for transation id: ${trans.id} - site: ${trans.site.title} - Amount ${debit}"
+          bodyWriter.println "Missing bank info for transation id: ${trans.id} - site: ${trans.site.title} - Amount ${credit}"
         }
       }
 
       // EIGHT Record
-      writer << sprintf("8220%06d%010d%012d000000000000%10s                         091000010000001\r\n", itemCount, routeNumberSum, (debitSum * 100) as Long, companyId)
+      writer << sprintf("8220%06d%010d000000000000%012d%10s                         091000010000001\r\n", itemCount, routeNumberSum, (creditSum * 100) as Long, companyId)
 
       // NINE Record
-      writer << sprintf("9000001%06d%08d%010d000000000000%012d                                       \r\n", (((itemCount + 4) as BigDecimal) /10.0).setScale(0, RoundingMode.HALF_UP).longValue(), itemCount as Long, routeNumberSum as Long, (debitSum * 100) as Long)
+      writer << sprintf("9000001%06d%08d%010d000000000000%012d                                       \r\n", (((itemCount + 4) as BigDecimal) /10.0).setScale(0, RoundingMode.HALF_UP).longValue(), itemCount as Long, routeNumberSum as Long, (creditSum * 100) as Long)
 
       writer.close()
 
@@ -99,7 +99,7 @@ class NachaService {
         }
       }
 
-      bodyWriter.println "Total number of transactions: ${itemCount} - total debit ${debitSum}"
+      bodyWriter.println "Total number of transactions: ${itemCount} - total debit ${creditSum}"
 
       bodyWriter.close()
 
