@@ -6,7 +6,6 @@
     <head>
       <meta name="description" content="Storitz has self storage units, mini storage in ${city}, ${state} ${zip ? 'zip code:' + zip : '' }. Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
       <META name="y_key" content="9a7a338eec8978fd" />
-      <g:meta name="keywords" content="Storage unit, self storage units, storage units, moving, storage units for rent, cheap storage units, storage unit rental, self storage, self storage facility, self storage facilities, air conditioned storage units, self storage rental, public self storage, security self storage, find self storage, self storage companies, Mini storage, mini self storage"/> 
       <g:render template="/header_home" />
       <p:dependantJavascript >
       <script type="text/javascript">
@@ -388,86 +387,86 @@
           </div>
           <div class="wideTextbox">
             <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Santa Monica', state:'CA']">Santa Monica, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Santa Monica', state:'CA']">Santa Monica, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Los Angeles', state:'CA']">Los Angeles, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Los Angeles', state:'CA']">Los Angeles, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Irvine', state:'CA']">Irvine, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Irvine', state:'CA']">Irvine, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Long Beach', state:'CA']">Long Beach, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Long Beach', state:'CA']">Long Beach, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'West Hollywood', state:'CA']">West Hollywood, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'West Hollywood', state:'CA']">West Hollywood, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Van Nuys', state:'CA']">Van Nuys, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Van Nuys', state:'CA']">Van Nuys, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Torrance', state:'CA']">Torrance, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Torrance', state:'CA']">Torrance, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Carson', state:'CA']">Carson, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Carson', state:'CA']">Carson, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Newport Beach', state:'CA']">Newport Beach, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Newport Beach', state:'CA']">Newport Beach, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Oxnard', state:'CA']">Oxnard, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Oxnard', state:'CA']">Oxnard, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'El Segundo', state:'CA']">El Segundo, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'El Segundo', state:'CA']">El Segundo, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Burbank', state:'CA']">Burbank, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Burbank', state:'CA']">Burbank, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'San Francisco', state:'CA']">San Francisco, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'San Francisco', state:'CA']">San Francisco, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Palm Desert', state:'CA']">Palm Desert, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Palm Desert', state:'CA']">Palm Desert, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Anaheim', state:'CA']">Anaheim, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Anaheim', state:'CA']">Anaheim, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Lancaster', state:'CA']">Lancaster, CA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Lancaster', state:'CA']">Lancaster, CA Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Austin', state:'TX']">Austin, TX</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Austin', state:'TX']">Austin, TX Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'San Diego', state:'CA']">San Diego</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'San Diego', state:'CA']">San Diego Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Dallas', state:'TX']">Dallas, TX</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Dallas', state:'TX']">Dallas, TX Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Houston', state:'TX']">Houston, TX</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Houston', state:'TX']">Houston, TX Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Jacksonville', state:'FL']">Jacksonville, FL</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Jacksonville', state:'FL']">Jacksonville, FL Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Miami', state:'FL']">Miami, FL</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Miami', state:'FL']">Miami, FL Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Clearwater', state:'FL']">Clearwater, FL</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Clearwater', state:'FL']">Clearwater, FL Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'New York', state:'NY']">New York, NY</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'New York', state:'NY']">New York, NY Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Phoenix', state:'AZ']">Phoenix, AZ</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Phoenix', state:'AZ']">Phoenix, AZ Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Denver', state:'CO']">Denver, CO</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Denver', state:'CO']">Denver, CO Storage Units</g:link>
             </div>
-            <div class="left" style="width:175px;">
-              <g:link mapping="metro" params="[city:'Seattle', state:'WA']">Seattle, WA</g:link>
+            <div class="left" style="width:310px;">
+              <g:link mapping="metro" params="[city:'Seattle', state:'WA']">Seattle, WA Storage Units</g:link>
             </div>
             <div style="clear:both;"></div>
           </div>
