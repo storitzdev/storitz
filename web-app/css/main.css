@@ -1549,3 +1549,7 @@ div.faqAnswer {
 div#storitzHelp p {
     margin-bottom: 0.5em;
 }
+
+.red {
+    color: red;
+}

@@ -92,7 +92,7 @@
             "aoColumns": [
 			  { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft stClickable" },
               { "sType": "numeric", "bVisible":false },
-              { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter" },
+              { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter textCenter" },
               { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert stClickable" },
 			  { "sSortDataType": "facility", "sType": "string", "sWidth":"190px", "sClass":"curvedCenter stVert stClickable" },
               { "bSortable":false, "sWidth":"150px", "sType":"html", "sClass":"curvedRight stVert stClickable" }
@@ -284,11 +284,20 @@
                             <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
                           </g:link>
                         </div>
-                        <div class="stPriceSub textCenter monthly"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO </div>
+                        <div class="stPriceSub textCenter monthly">
+                          <g:if test="${siteMoveInPrice[site.id]?.monthly > siteMoveInPrice[site.id]?.pushRate}">
+                            <span style="text-decoration:line-through;"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/></span>&nbsp;<span class="red"><g:formatNumber number="${siteMoveInPrice[site.id]?.pushRate}" class="red" type="currency" currencyCode="USD"/></span> / MO
+                          </g:if>
+                          <g:else>
+                            <g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO
+                          </g:else>
+                        </div>
                       </div>
                     </td>
-                    <td><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" format="0.00"/></td>
-                    <td class="curvedCenter textCenter">
+                    <td>
+                      <g:formatNumber number="${siteMoveInPrice[site.id]?.pushRate}" format="0.00"/>
+                    </td>
+                    <td>
                       <div style="width:55px;">
                         <div class="left" style="margin-left:10px;">
                           <div id="map_icon${site.id}" class="map_icon">
@@ -299,14 +308,14 @@
                         </div>
                       </div>
                     </td>
-                    <td class="curvedCenter stVert stClickable">
+                    <td>
                       <div style="width:120px;">
                         <g:if test="${site?.logo}">
                           <img src="${resource(file:site.logo.src())}" class="stLogo" width="100" height="40" border="0" alt="${site.title} Logo"/>
                         </g:if>
                       </div>
                     </td>
-                    <td class="curvedCenter stVert stClickable">
+                    <td>
                       <div style="width:190px;">
                         <div class="stTitle">${site.title}</div>
                         <div class="left" style="margin-left: 5px;">
@@ -338,7 +347,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="curvedRight stVert stClickable">
+                    <td>
                       <div style="width:150px;">
                         <g:if test="${siteMoveInPrice[site.id]?.promo}">
                           <div class="left" style="width:22px;height:100%;">

@@ -441,7 +441,12 @@ function createTableRow(s) {
             .append($('<div>', { 'class':'stRentMe' })
               .append($('<a>', { href: siteLink(s)  + (s.promoId ? '&promoId=' + s.promoId : '') })
                 .append($('<img>', { src: srcRentMeButton, width:87, height: 31, border: 0 } ))))
-            .append($('<div>', { 'class':'stPriceSub textCenter monthly'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'));
+
+            if (s.monthly > s.pushRate) {
+                priceCol.append($('<div>', { 'class':'stPriceSub textCenter monthly'}).append($('<span>').css('text-decoration','line-through').html('$' + (s.monthly ? s.monthly.toFixed(2) : ''))).append('&nbsp;').append($('<span>', {'class':'red'}).text('$' + (s.pushRate ? s.pushRate.toFixed(2) : ''))).append(' / MO'));
+            } else {
+                priceCol.append($('<div>', { 'class':'stPriceSub textCenter monthly'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'));                
+            }
 
   resultTable.fnAddData([
     priceCol.html(),
