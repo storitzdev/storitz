@@ -777,9 +777,15 @@ class CShiftService {
           def length = m[0][2] as Double
           def unitSize = unitSizeService.getUnitSize(width, length)
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
+            def displaySize
+            if (m[0][1].isInteger() && m[0][2].isInteger()) {
+              displaySize = "${width as Integer} X ${length as Integer}"
+            } else {
+              displaySize = "${width} X ${length}"
+            }
 
             def newUnit = false
-            def siteUnit = site.units.find{ it.unitName == attributes && it.unitsize == unitSize }
+            def siteUnit = site.units.find{ it.unitName == attributes && it.displaySize == displaySize}
 
             if (!siteUnit) {
               siteUnit = new StorageUnit()
@@ -822,11 +828,7 @@ class CShiftService {
               siteUnit.isPowered = false
               siteUnit.isAvailable = true
               siteUnit.isSecure = false
-              if (m[0][1].isInteger() && m[0][2].isInteger()) {
-                siteUnit.displaySize = "${width as Integer} X ${length as Integer}"
-              } else {
-                siteUnit.displaySize = "${width} X ${length}"
-              }
+              siteUnit.displaySize = displaySize
               stats.unitCount += vacant
 
             } else {
