@@ -142,7 +142,7 @@ class STMapController {
           if (site.featuredOffers().size() > 0) {
             for (promo in site.featuredOffers()) {
               totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
-              if (moveInCost > totals['moveInCost']) {
+              if (moveInCost > totals['moveInTotal']) {
                 monthly = bestUnit?.price
                 unitType = bestUnit?.unitType.display
                 pushRate = bestUnit?.pushRate
