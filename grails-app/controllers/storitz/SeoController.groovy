@@ -24,10 +24,10 @@ class SeoController {
           def file = new File(request.getRealPath(img.src()))
           file.renameTo(new File(request.getRealPath(img.basename + newName)))
           println "Source mid: ${request.getRealPath(img.midOld())} Destination: ${img.basename + 'mid-' + newName}"
-          file = new File(request.getRealPath(img.mid()))
+          file = new File(request.getRealPath(img.midOld()))
           file.renameTo(new File(request.getRealPath(img.basename + 'mid-' + newName)))
           println "Source thumbnail: ${request.getRealPath(img.thumbnailOld())} Destination: ${img.basename + 'thumb-'  + newName}"
-          file = new File(request.getRealPath(img.thumbnail()))
+          file = new File(request.getRealPath(img.thumbnailOld()))
           file.renameTo(new File(request.getRealPath(img.basename + 'thumb-' + newName)))
         } else {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
