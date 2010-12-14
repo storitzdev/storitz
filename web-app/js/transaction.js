@@ -57,7 +57,11 @@ function updateTransaction() {
   }
   $('#totalMoveInCost').html('$' + totalMoveInCost.toFixed(2));
   $('#monthlyDuration').html(durationText);
-  $('#monthlyPerMonth').html('$' + pushRate.toFixed(2));
+    if (pushRate < monthlyRent) {
+      $('#monthlyPerMonth').html('$' + pushRate.toFixed(2));
+    } else {
+        $('#monthlyPerMonth').html('$' + monthlyRent.toFixed(2));
+    }
   $('#monthlyTotal').html('$' + (pushRate * duration).toFixed(2));
   // insurance cost
   $('#insuranceDuration').html(durationText);

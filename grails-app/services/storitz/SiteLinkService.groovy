@@ -1048,6 +1048,7 @@ class SiteLinkService {
     for(rateSet in records.'soap:Body'.'*:RentTaxRatesRetrieveResponse'.'*:RentTaxRatesRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
       site.taxRateRental = rateSet.dcTax1Rate.text() as BigDecimal
       site.taxRateInsurance = rateSet.dcTax2Rate.text() as BigDecimal
+      site.taxRateMerchandise = 0;
     }
   }
 
@@ -1194,6 +1195,7 @@ class SiteLinkService {
       cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     } else {
       cal.add(Calendar.MONTH, durationMonths)
+      cal.add(Calendar.DAY_OF_MONTH, -1)
     }
     return cal.time
   }
@@ -1206,7 +1208,7 @@ class SiteLinkService {
     def ret = [:]
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
-    def rate = unit ? unit.pushRate : 0
+    def rate = unit ? (unit.pushRate < unit.price ? unit.pushRate : unit.price) : 0
     def premium = ins ? ins.premium : 0
     def lockFee = site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0
@@ -1235,6 +1237,7 @@ class SiteLinkService {
       cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     } else {
       cal.add(Calendar.MONTH, durationMonths)
+      cal.add(Calendar.DAY_OF_MONTH, -1)
     }
 
     def subTotal

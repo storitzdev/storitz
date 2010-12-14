@@ -42,7 +42,7 @@ class NachaService {
         dirFile.mkdirs()
       }
       def file = new File(nachaDir, "nacha-${suffix}.txt")
-      def nacha = new Nacha(daySent:daySent, seq:dayCount, filePath: file.canonicalPath).save(flush: true)
+      def nacha = new Nacha(daySent:daySent, seq:dayCount, filePath: file.canonicalPath, generatedDate: new Date()).save(flush: true)
       def writer = new FileWriter(file)
 
       bodyWriter.println "NACHA File Date:${settlementDate} Sequence:${dayCount} File: ${file.canonicalPath}\n\n"

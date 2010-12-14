@@ -119,6 +119,7 @@ class BootStrap {
       returnArray['extendedHours'] = it.extendedHours
       returnArray['taxRateRental'] = it.taxRateRental
       returnArray['taxRateInsurance'] = it.taxRateInsurance
+      returnArray['taxMerchandise'] = it.taxRateMerchandise
       returnArray['useProrating'] = it.useProrating
       // skip feed
       returnArray['disabled'] = it.disabled

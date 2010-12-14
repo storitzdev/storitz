@@ -8,6 +8,7 @@ class Nacha {
     String daySent
     Integer seq
     String filePath
+    Date generatedDate
 
     static constraints = {
     }

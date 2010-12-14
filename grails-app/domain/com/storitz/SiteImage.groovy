@@ -20,10 +20,18 @@ class SiteImage {
   String tags
 
   def thumbnail() {
+    return basename + "thumb-" + fileLocation.encodeAsURL().replace("+", "%20")
+  }
+
+  def thumbnailOld() {
     return basename + "thumb_" + fileLocation.encodeAsURL().replace("+", "%20")
   }
 
   def mid() {
+    return basename + "mid-" + fileLocation.encodeAsURL().replace("+", "%20")
+  }
+
+  def midOld() {
     return basename + "mid_" + fileLocation.encodeAsURL().replace("+", "%20")
   }
 
