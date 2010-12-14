@@ -41,7 +41,7 @@ class ImageService {
   }
 
   def deleteImage(StorageSite site, SiteImage siteImage) {
-    def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid_' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb_' + siteImage.fileLocation, site.id) ]
+    def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid-' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb-' + siteImage.fileLocation, site.id) ]
 
     deleteList.each{
       def file = new File(it)
@@ -61,6 +61,8 @@ class ImageService {
     def random = new Random()
     def srcFile
     def fileLocation = 'logo_' + random.nextInt(100000) + '.jpg'
+    def ext = '.' + logoFile.originalFilename.tokenize('.')[-1]
+
     if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', 'tmp_' + fileLocation, feedId)) {
       def filePath = fileUploadService.getFilePath('/images/upload', fileLocation, feedId)
       def tmpPath = fileUploadService.getFilePath('/images/upload', 'tmp_' + fileLocation, feedId)
@@ -83,12 +85,12 @@ class ImageService {
           site.logo = new SiteImage()
         }
 
-        def logoLocation = 'logo_' + random.nextInt(100000) + '.jpg'
+        def newName = "logo-Storitz-${site.city}-${site.state.display}-${site.title}-self storage units-0${ext}"
         site.logo.isLogo = true
         site.logo.hasThumbnail = false
         site.logo.isCover = false
         site.logo.basename = '/images/site' + fileUploadService.getWebIdPath(site.id)
-        site.logo.fileLocation = logoLocation
+        site.logo.fileLocation = newName
         site.logo.site = site
         site.logo.imgOrder = 0;
         def targetDir = new File(site.logo.basename)

@@ -235,10 +235,11 @@ class StorageSiteController {
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def random = new Random()
-      def fileLocation = 'logo_' + random.nextInt(100000) + '.jpg'
-      if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', fileLocation, siteId)) {
-        def tmpPath = fileUploadService.getFilePath('/images/upload', fileLocation, siteId)
-        def filePath = fileUploadService.getFilePath('/images/site', fileLocation, siteId)
+      def ext = '.' + logoFile.originalFilename.tokenize('.')[-1]
+      def newName = "logo-Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-0${ext}"
+      if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', newName, siteId)) {
+        def tmpPath = fileUploadService.getFilePath('/images/upload', newName, siteId)
+        def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
         def imageTool = new ImageTool()
         imageTool.load(tmpPath)
         def dstFile = new File(fileUploadService.getFilePath('/images/site', '', siteId))
@@ -258,7 +259,7 @@ class StorageSiteController {
         storageSiteInstance.logo.hasThumbnail = false
         storageSiteInstance.logo.isCover = false
         storageSiteInstance.logo.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
-        storageSiteInstance.logo.fileLocation = fileLocation
+        storageSiteInstance.logo.fileLocation = newName
         storageSiteInstance.logo.site = storageSiteInstance
         storageSiteInstance.logo.imgOrder = 0;
       }
@@ -280,20 +281,24 @@ class StorageSiteController {
           println("unzipped into temp dir: ${tmpDir.canonicalPath}")
           tmpDir.eachFileMatch ~/(?i).*\.(png|jpg|gif|jpeg)/, { File file ->
             println "Processing file ${file.canonicalFile}"
-            file.renameTo(new File(siteId + '_' + file.name))
-            def filePath = fileUploadService.getFilePath('/images/site', siteId + '_' + file.name, siteId)
-            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + siteId + '_' + file.name.encodeAsURL(), siteId)
-            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + siteId + '_' + file.name.encodeAsURL(), siteId)
+            ext = '.' + file.canonicalFile.tokenize('.')[-1]
+            newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
+            file.renameTo(new File(newName))
+            def filePath = fileUploadService.getFilePath('/images/site', newName.encodeAsURL(), siteId)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName.encodeAsURL(), siteId)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName.encodeAsURL(), siteId)
             imageService.scaleImages(file, siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
             ++imgOrder
           }
           tmpDir.deleteDir()
         } else {
-          if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', siteId + '_' + imgFile.originalFilename.encodeAsURL(), siteId)) {
-            def tmpPath = fileUploadService.getFilePath('/images/upload', siteId + '_' + imgFile.originalFilename.encodeAsURL(), siteId)
-            def filePath = fileUploadService.getFilePath('/images/site', siteId + '_' + imgFile.originalFilename.encodeAsURL(), siteId)
-            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + siteId + '_' + imgFile.originalFilename.encodeAsURL(), siteId)
-            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + siteId + '_' + imgFile.originalFilename.encodeAsURL(), siteId)
+          ext = '.' + imgFile.originalFilename.tokenize('.')[-1]
+          newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
+          if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', newName.encodeAsURL(), siteId)) {
+            def tmpPath = fileUploadService.getFilePath('/images/upload',newName.encodeAsURL(), siteId)
+            def filePath = fileUploadService.getFilePath('/images/site', newName.encodeAsURL(), siteId)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName.encodeAsURL(), siteId)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName.encodeAsURL(), siteId)
             imageService.scaleImages(new File(tmpPath), siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
             ++imgOrder
           }
