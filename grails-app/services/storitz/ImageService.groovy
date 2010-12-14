@@ -16,6 +16,22 @@ class ImageService {
     if (!file.exists()) {
       return
     }
+    scaleExistingImages(file, siteId, filePath, filePathMid, filePathThumb)
+    def siteImg = new SiteImage()
+    siteImg.isLogo = false
+    siteImg.hasThumbnail = true
+    siteImg.isCover = imgOrder == 0
+    siteImg.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
+    siteImg.fileLocation = file.name
+    siteImg.site = storageSiteInstance
+    siteImg.imgOrder = imgOrder
+    storageSiteInstance.addToImages(siteImg)
+  }
+
+  def scaleExistingImages(file, siteId, filePath, filePathMid, filePathThumb) {
+    if (!file.exists()) {
+      return
+    }
     def imageTool = new ImageTool()
     imageTool.load(file.canonicalPath)
     imageTool.saveOriginal()
@@ -30,17 +46,6 @@ class ImageService {
     imageTool.thumbnailSpecial (60, 40, 2, 2)
     imageTool.writeResult(filePathThumb, "JPEG")
     file.delete()
-    def siteImg = new SiteImage()
-    siteImg.isLogo = false
-    siteImg.hasThumbnail = true
-    siteImg.isCover = imgOrder == 0
-    siteImg.basename = '/images/site' + fileUploadService.getWebIdPath(siteId)
-    siteImg.fileLocation = file.name
-    siteImg.site = storageSiteInstance
-    siteImg.imgOrder = ++imgOrder
-    storageSiteInstance.addToImages(siteImg)
-
-
   }
 
   def deleteImage(StorageSite site, SiteImage siteImage) {

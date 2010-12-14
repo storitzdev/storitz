@@ -112,7 +112,7 @@ class ReportsController {
       date_range: "- ${params.startDate} thru ${params.endDate}"
     ]
 
-    Page page = new Page(1008, 612, false)
+    Page page = Page.Page_Legal_Landscape()
     
     drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle)
       .setDetailHeight(15)                                            //defines the height for each record of the report

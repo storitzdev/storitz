@@ -49,13 +49,14 @@ class SeoController {
           def file = new File(request.getRealPath(img.basename + img.fileLocation))
 
           if (file.exists() && file.length() > 0) {
-            file.renameTo(File.createTempFile("imageRescale", "tmp"))
+            def tempFile = File.createTempFile("imageRescale", ".tmp")
+            org.apache.commons.io.FileUtils.copyFile(file, tempFile)
 
             def filePath = fileUploadService.getFilePath('/images/site', img.fileLocation, img.site.id)
             def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + img.fileLocation, img.site.id)
             def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + img.fileLocation, img.site.id)
 
-            imageService.scaleImages(file, img.site.id, img.imgOrder, filePath, filePathMid, filePathThumb, img.site)
+            imageService.scaleExistingImages(tempFile, img.site.id, filePath, filePathMid, filePathThumb)
           }
         }
       }
