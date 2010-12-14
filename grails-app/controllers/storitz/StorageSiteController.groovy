@@ -235,8 +235,12 @@ class StorageSiteController {
       def logoFile = request.getFile('logoFile')
       Integer siteId = Integer.parseInt(params.id)
       def random = new Random()
-      def ext = '.' + logoFile.originalFilename.tokenize('.')[-1]
-      def newName = "logo-Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-0${ext}"
+      def ext
+      def newName
+      if (logoFile.size > 0) {
+        ext = '.' + logoFile.originalFilename.tokenize('.')[-1]
+        newName = "logo-Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-0${ext}"
+      }
       if (logoFile.size > 0 && fileUploadService.moveFile(logoFile, '/images/upload', newName, siteId)) {
         def tmpPath = fileUploadService.getFilePath('/images/upload', newName, siteId)
         def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
@@ -265,7 +269,11 @@ class StorageSiteController {
       }
 
       def imgOrder = storageSiteInstance.images.collect{ it.imgOrder }.max()
-      if (!imgOrder) imgOrder = 0;
+      if (!imgOrder) {
+        imgOrder = 0;
+      } else {
+        imgOrder++
+      }
       
       params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
         def imgFile = request.getFile(img.key)
@@ -284,21 +292,23 @@ class StorageSiteController {
             ext = '.' + file.canonicalFile.tokenize('.')[-1]
             newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
             file.renameTo(new File(newName))
-            def filePath = fileUploadService.getFilePath('/images/site', newName.encodeAsURL(), siteId)
-            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName.encodeAsURL(), siteId)
-            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName.encodeAsURL(), siteId)
+            def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
             imageService.scaleImages(file, siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
             ++imgOrder
           }
           tmpDir.deleteDir()
         } else {
-          ext = '.' + imgFile.originalFilename.tokenize('.')[-1]
-          newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
-          if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', newName.encodeAsURL(), siteId)) {
-            def tmpPath = fileUploadService.getFilePath('/images/upload',newName.encodeAsURL(), siteId)
-            def filePath = fileUploadService.getFilePath('/images/site', newName.encodeAsURL(), siteId)
-            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName.encodeAsURL(), siteId)
-            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName.encodeAsURL(), siteId)
+          if (imgFile.size > 0) {
+            ext = '.' + imgFile.originalFilename.tokenize('.')[-1]
+            newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
+          }
+          if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', newName, siteId)) {
+            def tmpPath = fileUploadService.getFilePath('/images/upload',newName, siteId)
+            def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
             imageService.scaleImages(new File(tmpPath), siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
             ++imgOrder
           }
