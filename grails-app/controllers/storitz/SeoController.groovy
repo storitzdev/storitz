@@ -6,6 +6,9 @@ import com.storitz.SiteImage
 
 class SeoController {
 
+    def imageService
+    def fileUploadService
+
     def state = {
       def searchState = storitz.constants.State.getEnumFromId(params.state)
 
@@ -29,13 +32,32 @@ class SeoController {
           println "Source thumbnail: ${request.getRealPath(img.thumbnailOld())} Destination: ${img.basename + 'thumb-'  + newName}"
           file = new File(request.getRealPath(img.thumbnailOld()))
           file.renameTo(new File(request.getRealPath(img.basename + 'thumb-' + newName)))
+          img.fileLocation = newName
         } else {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
           def file = new File(request.getRealPath(img.src()))
           file.renameTo(new File(request.getRealPath(img.basename + 'logo-' + newName)))
+          img.fileLocation = 'logo-' + newName
         }
-        img.fileLocation = newName
         img.save(flush:true)
+      }
+    }
+
+    def imageRescale = {
+      for(img in SiteImage.list()) {
+        if (!img.isLogo) {
+          def file = new File(request.getRealPath(img.basename + img.fileLocation))
+
+          if (file.exists()) {
+            file.renameTo(File.createTempFile("imageRescale", "tmp"))
+
+            def filePath = fileUploadService.getFilePath('/images/site', img.fileLocation, img.site.id)
+            def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + img.fileLocation, img.site.id)
+            def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + img.fileLocation, img.site.id)
+
+            imageService.scaleImages(file, img.site.id, img.imgOrder, filePath, filePathMid, filePathThumb, img.site)
+          }
+        }
       }
     }
 }
