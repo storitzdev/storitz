@@ -48,7 +48,7 @@ class SeoController {
         if (!img.isLogo) {
           def file = new File(request.getRealPath(img.basename + img.fileLocation))
 
-          if (file.exists()) {
+          if (file.exists() && file.length() > 0) {
             file.renameTo(File.createTempFile("imageRescale", "tmp"))
 
             def filePath = fileUploadService.getFilePath('/images/site', img.fileLocation, img.site.id)

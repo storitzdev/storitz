@@ -13,6 +13,9 @@ class ImageService {
   boolean transactional = false
 
   def scaleImages(file, siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance) {
+    if (!file.exists()) {
+      return
+    }
     def imageTool = new ImageTool()
     imageTool.load(file.canonicalPath)
     imageTool.saveOriginal()
