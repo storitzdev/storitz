@@ -33,14 +33,14 @@ class SeoController {
         def ext = '.' + img.src().tokenize('.')[-1]
         def newName = "Storitz-${img.site.city}-${img.site.state.display}-${img.site.title}-self storage units-${img.imgOrder}${ext}"
         if (!img.isLogo) {
-          println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + newName}"
-          def file = new File(request.getRealPath(img.src()))
+          println "Source: ${request.getRealPath(img.basename + img.fileLocation)} Destination: ${img.basename + newName}"
+          def file = new File(request.getRealPath(img.basename + img.fileLocation))
           FileUtils.moveFile(file, new File(request.getRealPath(img.basename + newName)))
-          println "Source mid: ${request.getRealPath(img.midOld())} Destination: ${img.basename + 'mid-' + newName}"
-          file = new File(request.getRealPath(img.midOld()))
+          println "Source mid: ${request.getRealPath(img.basename + 'mid_' + img.fileLocation)} Destination: ${img.basename + 'mid-' + newName}"
+          file = new File(request.getRealPath(img.basename + 'mid_' + img.fileLocation))
           FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'mid-' + newName)))
-          println "Source thumbnail: ${request.getRealPath(img.thumbnailOld())} Destination: ${img.basename + 'thumb-'  + newName}"
-          file = new File(request.getRealPath(img.thumbnailOld()))
+          println "Source thumbnail: ${request.getRealPath(img.basename + 'thumb_' + img.fileLocation)} Destination: ${img.basename + 'thumb-'  + newName}"
+          file = new File(request.getRealPath(img.basename + 'thumb_' + img.fileLocation))
           FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'thumb-' + newName)))
           img.fileLocation = newName
         } else {
