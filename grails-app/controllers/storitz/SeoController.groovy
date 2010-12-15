@@ -36,19 +36,19 @@ class SeoController {
           println "Source: ${request.getRealPath(img.basename + img.fileLocation)} Destination: ${img.basename + newName}"
           def file = new File(request.getRealPath(img.basename + img.fileLocation))
           def destFile = new File(request.getRealPath(img.basename + newName))
-          if (!destFile.exists()) {
+          if (file.exists() && !destFile.exists()) {
             FileUtils.moveFile(file, destFile)
           }
           println "Source mid: ${request.getRealPath(img.basename + 'mid_' + img.fileLocation)} Destination: ${img.basename + 'mid-' + newName}"
           file = new File(request.getRealPath(img.basename + 'mid_' + img.fileLocation))
           destFile = new File(request.getRealPath(img.basename + 'mid-' + newName))
-          if (!destFile.exists()) {
+          if (file.exists() && !destFile.exists()) {
             FileUtils.moveFile(file, destFile)
           }
           println "Source thumbnail: ${request.getRealPath(img.basename + 'thumb_' + img.fileLocation)} Destination: ${img.basename + 'thumb-'  + newName}"
           file = new File(request.getRealPath(img.basename + 'thumb_' + img.fileLocation))
           destFile = new File(request.getRealPath(img.basename + 'thumb-' + newName))
-          if (!destFile.exists()) {
+          if (file.exists() && !destFile.exists()) {
             FileUtils.moveFile(file, destFile)
           }
           img.fileLocation = newName
@@ -56,7 +56,7 @@ class SeoController {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
           def file = new File(request.getRealPath(img.src()))
           def destFile = new File(request.getRealPath(img.basename + 'logo-' + newName))
-          if (!destFile.exists()) {
+          if (file.exists() && !destFile.exists()) {
             FileUtils.moveFile(file, destFile)
           }
           img.fileLocation = 'logo-' + newName
