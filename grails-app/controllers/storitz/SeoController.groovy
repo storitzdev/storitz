@@ -35,18 +35,18 @@ class SeoController {
         if (!img.isLogo) {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + newName}"
           def file = new File(request.getRealPath(img.src()))
-          file.renameTo(new File(request.getRealPath(img.basename + newName)))
+          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + newName)))
           println "Source mid: ${request.getRealPath(img.midOld())} Destination: ${img.basename + 'mid-' + newName}"
           file = new File(request.getRealPath(img.midOld()))
-          file.renameTo(new File(request.getRealPath(img.basename + 'mid-' + newName)))
+          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'mid-' + newName)))
           println "Source thumbnail: ${request.getRealPath(img.thumbnailOld())} Destination: ${img.basename + 'thumb-'  + newName}"
           file = new File(request.getRealPath(img.thumbnailOld()))
-          file.renameTo(new File(request.getRealPath(img.basename + 'thumb-' + newName)))
+          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'thumb-' + newName)))
           img.fileLocation = newName
         } else {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
           def file = new File(request.getRealPath(img.src()))
-          file.renameTo(new File(request.getRealPath(img.basename + 'logo-' + newName)))
+          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'logo-' + newName)))
           img.fileLocation = 'logo-' + newName
         }
         img.save(flush:true)
