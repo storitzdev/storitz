@@ -3,6 +3,16 @@ package storitz
 import com.storitz.Metro
 import com.storitz.MetroEntry
 import com.storitz.SiteImage
+import org.apache.sanselan.common.byteSources.ByteSourceFile
+import org.apache.sanselan.common.byteSources.ByteSource
+import org.apache.sanselan.formats.jpeg.JpegPhotoshopMetadata
+import org.apache.sanselan.formats.jpeg.JpegImageParser
+import org.apache.sanselan.formats.jpeg.iptc.JpegIptcRewriter
+import org.apache.sanselan.formats.jpeg.iptc.IPTCRecord
+import org.apache.sanselan.formats.jpeg.iptc.IPTCConstants
+import org.apache.sanselan.formats.jpeg.iptc.PhotoshopApp13Data
+import org.apache.sanselan.SanselanConstants
+import org.apache.commons.io.FileUtils
 
 class SeoController {
 
@@ -58,6 +68,22 @@ class SeoController {
 
             imageService.scaleExistingImages(tempFile, img.site.id, filePath, filePathMid, filePathThumb)
           }
+        }
+      }
+    }
+
+    def imageTag = {
+      for (img in SiteImage.list()) {
+        if (!img.isLogo) {
+          def imageFile = new File(request.getRealPath(img.basename + img.fileLocation))
+          imageService.iptcTagImage(imageFile, img.site, img.imgOrder, 'FULL')
+          def imageMidFile = new File(request.getRealPath(img.basename + 'mid-' + img.fileLocation))
+          imageService.iptcTagImage(imageMidFile, img.site, img.imgOrder, 'MID')
+          def imageThumbFile = new File(request.getRealPath(img.basename + 'thumb-' + img.fileLocation))
+          imageService.iptcTagImage(imageThumbFile, img.site, img.imgOrder, 'THUMB')
+        } else {
+          def imageFile = new File(request.getRealPath(img.basename + img.fileLocation))
+          imageService.iptcTagImage(imageFile, img.site, 0, 'LOGO')
         }
       }
     }

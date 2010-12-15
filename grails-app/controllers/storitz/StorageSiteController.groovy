@@ -256,6 +256,7 @@ class StorageSiteController {
         }
         def tmpFile = new File(tmpPath)
         tmpFile.delete()
+        imageService.iptcTagImage(new File(filePath), storageSiteInstance, 0, 'LOGO')
         if (storageSiteInstance.logo == null) {
           storageSiteInstance.logo = new SiteImage()
         }
@@ -296,6 +297,9 @@ class StorageSiteController {
             def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
             def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
             imageService.scaleImages(file, siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
+            imageService.iptcTagImage(new File(filePath), storageSiteInstance, imgOrder, 'FULL')
+            imageService.iptcTagImage(new File(filePathMid), storageSiteInstance, imgOrder, 'MID')
+            imageService.iptcTagImage(new File(filePathThumb), storageSiteInstance, imgOrder, 'THUMB')
             ++imgOrder
           }
           tmpDir.deleteDir()
@@ -310,6 +314,9 @@ class StorageSiteController {
             def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
             def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
             imageService.scaleImages(new File(tmpPath), siteId, imgOrder, filePath, filePathMid, filePathThumb, storageSiteInstance)
+            imageService.iptcTagImage(new File(filePath), storageSiteInstance, imgOrder, 'FULL')
+            imageService.iptcTagImage(new File(filePathMid), storageSiteInstance, imgOrder, 'MID')
+            imageService.iptcTagImage(new File(filePathThumb), storageSiteInstance, imgOrder, 'THUMB')
             ++imgOrder
           }
         }

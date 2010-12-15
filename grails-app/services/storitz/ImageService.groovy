@@ -5,6 +5,16 @@ import org.grails.plugins.imagetools.ImageTool
 import com.storitz.StorageSite
 import com.storitz.Feed
 import org.springframework.web.multipart.commons.CommonsMultipartFile
+import org.apache.commons.io.FileUtils
+import org.apache.sanselan.formats.jpeg.iptc.JpegIptcRewriter
+import org.apache.sanselan.formats.jpeg.iptc.PhotoshopApp13Data
+import org.apache.sanselan.formats.jpeg.iptc.IPTCConstants
+import org.apache.sanselan.formats.jpeg.iptc.IPTCRecord
+import org.apache.sanselan.common.byteSources.ByteSource
+import org.apache.sanselan.common.byteSources.ByteSourceFile
+import org.apache.sanselan.SanselanConstants
+import org.apache.sanselan.formats.jpeg.JpegPhotoshopMetadata
+import org.apache.sanselan.formats.jpeg.JpegImageParser
 
 class ImageService {
 
@@ -112,6 +122,77 @@ class ImageService {
       if (tmpFile) {
         tmpFile.delete()
       }
+    }
+  }
+
+  def iptcTagImage(imageFile, site, imgOrder, imgType) {
+
+    if (imageFile.exists()) {
+      ByteSource byteSource = new ByteSourceFile(imageFile);
+      Map params = new HashMap();
+      params.put(SanselanConstants.PARAM_KEY_READ_THUMBNAILS, Boolean.TRUE);
+      JpegPhotoshopMetadata metadata = new JpegImageParser().getPhotoshopMetadata(byteSource, params);
+      List newBlocks = new ArrayList()
+      List newRecords = new ArrayList()
+
+      newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_CAPTION_ABSTRACT, "Find, compare and rent self storage units and mini storage near you.  Storitz guarantees that you will get the best deal.  It's the smartest way to shop for self storage anywhere in the U.S. http://storitz.com"))
+      newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_WRITER_EDITOR, "Storitz"))
+      newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_BYLINE, "Storitz"))
+      newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_CITY, "${site.city}, ${site.state.display}" as String))
+      switch(imgType) {
+        case 'LOGO':
+          newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_OBJECT_NAME, "Logo for ${site.title}" as String))
+          break
+
+        case 'MID':
+          newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_OBJECT_NAME, "Storitz ${site.title} mid size image ${imgOrder}" as String))
+          break
+
+        case 'THUMB':
+          newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_OBJECT_NAME, "Storitz ${site.title} thumbnail image ${imgOrder}" as String))
+          break
+
+        case 'FULL':
+          newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_OBJECT_NAME, "Storitz ${site.title} image ${imgOrder}" as String))
+          break
+      }
+      newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_KEYWORDS, "${site.city}, ${site.state.display} Self Storage Storage unit self storage units storage units moving storage units for rent cheap storage units storage unit rental self storage self storage facility self storage facilities air conditioned storage units self storage rental public self storage security self storage find selfstorage self storage companies Mini storage mini self storage" as String))
+      newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_COPYRIGHT_NOTICE, "Storitz"))
+
+      if (metadata) {
+        boolean keepOldIptcNonTextValues = true;
+        if (keepOldIptcNonTextValues) {
+            newBlocks.addAll(metadata.photoshopApp13Data.getNonIptcBlocks());
+        }
+        boolean keepOldIptcTextValues = true;
+        if (keepOldIptcTextValues) {
+            List oldRecords = metadata.photoshopApp13Data.getRecords();
+
+            for (int j = 0; j < oldRecords.size(); j++) {
+                IPTCRecord record = (IPTCRecord) oldRecords.get(j);
+                if (record.iptcType.type != IPTCConstants.IPTC_TYPE_CITY.type
+                  && record.iptcType.type != IPTCConstants.IPTC_TYPE_CAPTION_ABSTRACT.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_WRITER_EDITOR.type
+                  && record.iptcType.type != IPTCConstants.IPTC_TYPE_BYLINE.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_OBJECT_NAME.type
+                  && record.iptcType.type != IPTCConstants.IPTC_TYPE_KEYWORDS.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_COPYRIGHT_NOTICE.type)
+                    newRecords.add(record);
+            }
+        }
+      }
+      PhotoshopApp13Data newData = new PhotoshopApp13Data(newRecords, newBlocks);
+
+      File updated = File.createTempFile(imageFile.getName() + ".iptc.update.", ".jpg");
+      OutputStream os = null;
+      try {
+        os = new FileOutputStream(updated);
+        os = new BufferedOutputStream(os);
+        new JpegIptcRewriter().writeIPTC(byteSource, os, newData);
+      } finally	{
+        os.close();
+        os = null;
+      }
+      imageFile.delete()
+      FileUtils.copyFile(updated, imageFile)
+      updated.delete()
     }
   }
 }
