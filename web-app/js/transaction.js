@@ -59,10 +59,11 @@ function updateTransaction() {
   $('#monthlyDuration').html(durationText);
     if (pushRate < monthlyRent) {
       $('#monthlyPerMonth').html('$' + pushRate.toFixed(2));
+      $('#monthlyTotal').html('$' + (pushRate * duration).toFixed(2));
     } else {
-        $('#monthlyPerMonth').html('$' + monthlyRent.toFixed(2));
+      $('#monthlyPerMonth').html('$' + monthlyRent.toFixed(2));
+      $('#monthlyTotal').html('$' + (monthlyRent * duration).toFixed(2));
     }
-  $('#monthlyTotal').html('$' + (pushRate * duration).toFixed(2));
   // insurance cost
   $('#insuranceDuration').html(durationText);
   $('#insurancePerMonth').html('$' + premium.toFixed(2));
