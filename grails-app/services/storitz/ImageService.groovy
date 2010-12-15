@@ -131,7 +131,13 @@ class ImageService {
       ByteSource byteSource = new ByteSourceFile(imageFile);
       Map params = new HashMap();
       params.put(SanselanConstants.PARAM_KEY_READ_THUMBNAILS, Boolean.TRUE);
-      JpegPhotoshopMetadata metadata = new JpegImageParser().getPhotoshopMetadata(byteSource, params);
+      JpegPhotoshopMetadata metadata
+      try {
+        metadata = new JpegImageParser().getPhotoshopMetadata(byteSource, params);
+      } catch(Exception E) {
+        println "This file ${imageFile.canonicalPath} is not a JPEG"
+        return
+      }
       List newBlocks = new ArrayList()
       List newRecords = new ArrayList()
 
