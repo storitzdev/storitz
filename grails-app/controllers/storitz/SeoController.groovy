@@ -56,7 +56,9 @@ class SeoController {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
           def file = new File(request.getRealPath(img.src()))
           def destFile = new File(request.getRealPath(img.basename + 'logo-' + newName))
-          FileUtils.moveFile(file, destFile)
+          if (!destFile.exists()) {
+            FileUtils.moveFile(file, destFile)
+          }
           img.fileLocation = 'logo-' + newName
         }
         img.save(flush:true)
