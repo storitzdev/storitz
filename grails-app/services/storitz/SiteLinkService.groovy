@@ -1275,7 +1275,11 @@ class SiteLinkService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * durationMonths * rate;
+          if (promo.inMonth == 1 && promo.prepayMonths == 1) {
+            offerDiscount = (promo.promoQty/100.0) * durationMonths * rate;
+          } else {
+            offerDiscount = (promo.promoQty/100.0) * (durationMonths - promo.inMonth + 1) * rate;
+          }
           break;
 
         case "FIXED_RATE":
