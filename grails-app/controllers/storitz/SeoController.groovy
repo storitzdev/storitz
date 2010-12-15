@@ -35,18 +35,30 @@ class SeoController {
         if (!img.isLogo) {
           println "Source: ${request.getRealPath(img.basename + img.fileLocation)} Destination: ${img.basename + newName}"
           def file = new File(request.getRealPath(img.basename + img.fileLocation))
-          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + newName)))
+          def destFile = new File(request.getRealPath(img.basename + newName))
+          if (!destFile.exists()) {
+            FileUtils.moveFile(file, destFile)
+          }
           println "Source mid: ${request.getRealPath(img.basename + 'mid_' + img.fileLocation)} Destination: ${img.basename + 'mid-' + newName}"
           file = new File(request.getRealPath(img.basename + 'mid_' + img.fileLocation))
-          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'mid-' + newName)))
+          destFile = new File(request.getRealPath(img.basename + 'mid-' + newName))
+          if (!destFile.exists()) {
+            FileUtils.moveFile(file, destFile)
+          }
           println "Source thumbnail: ${request.getRealPath(img.basename + 'thumb_' + img.fileLocation)} Destination: ${img.basename + 'thumb-'  + newName}"
           file = new File(request.getRealPath(img.basename + 'thumb_' + img.fileLocation))
-          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'thumb-' + newName)))
+          destFile = new File(request.getRealPath(img.basename + 'thumb-' + newName))
+          if (!destFile.exists()) {
+            FileUtils.moveFile(file, destFile)
+          }
           img.fileLocation = newName
         } else {
           println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
           def file = new File(request.getRealPath(img.src()))
-          FileUtils.moveFile(file, new File(request.getRealPath(img.basename + 'logo-' + newName)))
+          def destFile = destFile
+          if (!destFile.exists()) {
+            FileUtils.moveFile(file, destFile)
+          }
           img.fileLocation = 'logo-' + newName
         }
         img.save(flush:true)
