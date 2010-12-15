@@ -595,7 +595,6 @@ $(document).ready(function() {
   setupTooltips();
   setupTable();
   setupResults();
-  setupMap();
   setupAnalytics();
 });
 

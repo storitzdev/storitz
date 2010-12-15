@@ -141,6 +141,7 @@
           </g:else>
           setupIdle();
           $('#mapStatus').html(statusText).fadeIn();
+          setupMap();
 
         }
 
