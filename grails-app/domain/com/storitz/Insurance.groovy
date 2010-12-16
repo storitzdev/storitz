@@ -7,6 +7,7 @@ class Insurance {
     BigDecimal premium
     BigDecimal percentTheft
     String provider
+    Boolean active
 
     static constraints = {
     }

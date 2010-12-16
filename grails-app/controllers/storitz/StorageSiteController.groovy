@@ -331,21 +331,21 @@ class StorageSiteController {
         def promoDescString = "promoDesc_" + specialOffer.id
 
         if (params.getAt(offerString)) {
-          specialOffer.active = true;
+          specialOffer.active = true
         } else {
-          specialOffer.active = false;
+          specialOffer.active = false
         }
 
         if (params.getAt(featuredOfferString)) {
-          specialOffer.featured = true;
+          specialOffer.featured = true
         } else {
-          specialOffer.featured = false;
+          specialOffer.featured = false
         }
 
         if (params.getAt(waiveAdminString)) {
-          specialOffer.waiveAdmin = true;
+          specialOffer.waiveAdmin = true
         } else {
-          specialOffer.waiveAdmin = false;
+          specialOffer.waiveAdmin = false
         }
 
         if (params.getAt(promoNameString)) {
@@ -354,7 +354,16 @@ class StorageSiteController {
         if (params.getAt(promoDescString)) {
           specialOffer.description = params.getAt(promoDescString)
         }
-        specialOffer.save();
+        specialOffer.save()
+      }
+      for (ins in storageSiteInstance.insurances) {
+        def insString = "insurance_" + ins.id
+        if (params.getAt(insString)) {
+          ins.active = true
+        } else {
+          ins.active = false
+        }
+        ins.save()
       }
       storageSiteInstance.properties = params
       storageSiteInstance.lastChange = new Date()

@@ -1048,7 +1048,7 @@
           </div>
 
           <div class="formInstructions">
-            Check the special offers that you wish to allow on the Storitz site as Active.  You should pick 2-3 as featured offers that
+            Check the special offers that you wish to allow on the Storitz site as active.  You should pick 2-3 as featured offers that
             will be shown with search results and be more prominently displayed with the site information. Edit the name and description
             of the offer so that users understand the promotion.
           </div>
@@ -1071,6 +1071,33 @@
                     <td><g:checkBox name="waiveAdmin_${o.id}" value="${o.waiveAdmin}"/></td>
                     <td><g:textField style="width:250px;" name="promoName_${o.id}" value="${o.promoName}"/> </td>
                     <td><g:textField style="width:250px;" name="promoDesc_${o.id}" value="${o.description}"/></td>
+                  </tr>
+                </g:each>
+              </table>
+            </div>
+            <div style="clear:both;height: 15px;"></div>
+          </div>
+
+          <div class="checkout_section_header">
+            Property Protection
+          </div>
+
+          <div class="formInstructions">
+            Check the property protection that you wish to allow on the Storitz site as active.
+          </div>
+
+
+          <div class="checkout_fields">
+            <div style="width:600px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'contacts', 'errors')}">
+              <table>
+                <tr>
+                  <th>Active</th>
+                  <th>Description</th>
+                </tr>
+                <g:each in="${storageSiteInstance?.insurances.sort{it.id}}" var="ins">
+                  <tr>
+                    <td><g:checkBox name="insurance_${ins.id}" value="${ins.active}"/></td>
+                    <td><g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></td>
                   </tr>
                 </g:each>
               </table>

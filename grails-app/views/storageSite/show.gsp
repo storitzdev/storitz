@@ -219,6 +219,26 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.insurances.label" default="Property Protection"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <table>
+              <tr>
+                <th>Active</th>
+                <th>Description</th>
+              </tr>
+              <g:each in="${storageSiteInstance.insurances.sort{it.id}}" var="ins">
+                <tr>
+                  <td>${ins.active ? 'X' : '&nbsp;'}</td>
+                  <td><g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></td>
+                </tr>
+              </g:each>
+            </table>
+          </td>
+
+        </tr>
+
+        <tr class="prop">
           <td colspan="2" valign="top"><h3>Hours of Operation</h3></td>
 
         </tr>

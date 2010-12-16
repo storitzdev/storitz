@@ -937,6 +937,7 @@ class SiteLinkService {
       def pctTheft = ins.dcPCTheft.text()
       insurance.percentTheft = (pctTheft != "" ? pctTheft as BigDecimal : 0) 
       insurance.provider = ins.sProvidor.text()
+      insurance.active = true
       count++;
 
       if (!insurance.save()) {

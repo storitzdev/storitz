@@ -977,6 +977,7 @@ class CShiftService {
       def optionSize = insId.size()
       for(i in 0..optionSize-1) {
         def ins = new Insurance()
+        ins.active = true
         ins.insuranceId = insId[i] as Integer
         ins.percentTheft = (insCoverage[i] as BigDecimal) / 100.0
         ins.provider = insProvider[i]
