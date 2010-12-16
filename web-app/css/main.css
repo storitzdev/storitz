@@ -258,11 +258,8 @@ div.bannerMasthead {
 }
 
 div#headerImage {
-    margin-left: auto;
-    margin-right: auto;
-    width: 1152px;
     height: 75px;
-    background-image: url("../images/snowflakes-bg.gif");
+    background: #fff url("../images/snowflakes-bg.gif") repeat-x;
     overflow: visible;
 }
 
@@ -277,6 +274,13 @@ div.mastheadTop {
     margin: 13px 0 0 20px;
     color: #000;
     font: 15px verdana, arial, helvetica, sans-serif;
+}
+
+div#snowman {
+    background-image: url("../images/storitz-snowman-with-more-boxes.png");
+    margin: 40px 0 0 -420px;
+    width: 386px;
+    height: 104px;
 }
 
 div.mastheadBottom {

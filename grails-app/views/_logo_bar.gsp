@@ -5,6 +5,7 @@
       <storitz:image src="storitz-logo.png" width="241" height="77" class="noborder"/>
     </g:link> 
   </div>
+  <div class="left" id="snowman"></div>
   <div class="left" style="width:635px;">
     <div>
       <div class="left bannerMasthead">
