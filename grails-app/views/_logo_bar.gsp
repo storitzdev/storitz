@@ -32,7 +32,7 @@
         <g:else>
           <g:link controller="static" action="faq" class="navMenu">Self Storage FAQs</g:link>
         </g:else>
-        <a href="http://blog.storitz.com" class="navMenu">Blog</a>
+        <a href="http://blog.storitz.com" class="navMenu" target="_blank">Blog</a>
         <a href="${resource(dir:'/help')}" title="Storitz Help" class="navMenu dialogContent">Storitz Help</a>
         <g:if test="${params.controller =='static' && params.action == 'operatorsignup'}">
           <g:link controller="static" action="operatorsignup" class="navHighlight">Add Your Facility</g:link>
