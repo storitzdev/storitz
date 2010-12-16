@@ -1,4 +1,5 @@
-<div class="stcontent" style="margin-top:15px;">
+<div id="headerImage"></div>
+<div class="stcontent" style="margin-top:-60px;">
   <div class="left" style="width:300px;margin-right:15px;">
     <g:link controller="home" action="index">
       <storitz:image src="storitz-logo.png" width="241" height="77" class="noborder"/>
@@ -11,8 +12,8 @@
         <div class="mastheadCenter mastheadBottom">Let's find self storage that's right for you.</div>
       </div>
       <div class="left tollFree">
-        <div style="font-size:8px;">NEED BOOKING ASSISTANCE?</div>
-        <div style="font-size:16px;margin-top:2px;">(877) 456-2929</div>
+        <div style="font-family:verdana;font-size:9px;text-transform:capitalize;color:#266e00;line-height:15px;margin: 10px 0 0 34px;">NEED ASSISTANCE?</div>
+        <div style="font-family:verdana; font-weight: bold; font-size:13px;color:#fff;margin-left: 34px;">(877) 456-2929</div>
       </div>
       <div style="clear:both;"></div>
     </div>

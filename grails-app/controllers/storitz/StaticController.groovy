@@ -3,23 +3,23 @@ package storitz
 class StaticController {
 
     def privacy = {
-      [title:'Privacy Policy']
+      [title:'Storitz Privacy Policy']
     }
 
     def terms = {
-      [title:'Terms of Use']
+      [title:'Storitz Terms of Use']
     }
 
     def faq = {
-      [title:'Frequently Asked Questions']
+      [title:'Storitz Frequently Asked Questions']
     }
 
     def aboutus = {
-      [title:'About Us']
+      [title:'Storitz About Us']
     }
 
     def refund = {
-      [title:'Refund Policy']
+      [title:'Storitz Refund Policy']
     }
 
     def jobs = {
@@ -27,14 +27,14 @@ class StaticController {
     }
 
     def operatorsignup = {
-      [title: 'Operator Signup and Information']
+      [title: 'Storitz Operator Signup and Information']
     }
 
     def media = {
-      [title: 'Press Room']
+      [title: 'Storitz Press Room']
     }
 
     def guarantee = {
-      [title: 'The Storitz Guarantee']
+      [title: 'Storitz Guarantee']
     }
 }
