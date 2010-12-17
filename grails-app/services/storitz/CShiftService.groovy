@@ -343,7 +343,7 @@ class CShiftService {
       site.sourceId = tab.SITE_ID.text()
       site.sourceLoc = tab.SITE_NUMBER.text()
       site.source = "CS3"
-      site.title = tab.SITE_NAME.text()
+      site.title = tab.SITE_NAME.text().replace('/', '-')
 
       if (site.title ==~/(?i).*(test|training)\s?+.*/) {
         writer.println "Test or training site - dropping: ${site.title}"

@@ -99,6 +99,7 @@ class NachaService {
           if (debit > 0) {
             nacha.addToTransactions(trans)
             trans.achTransferDate = now
+            trans.achAmount = debit
             trans.save()
           }
         }

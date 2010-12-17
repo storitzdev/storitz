@@ -629,7 +629,7 @@ class SiteLinkService {
     site.sourceId = tab.SiteID.text()
     site.sourceLoc = tab.sLocationCode.text()
     site.source = "SL"
-    site.title = tab.sSiteName.text()
+    site.title = tab.sSiteName.text().replace('/', '-')
     site.address = tab.sSiteAddr1.text()
     site.address2 = tab.sSiteAddr2.text()
     site.city = tab.sSiteCity.text()

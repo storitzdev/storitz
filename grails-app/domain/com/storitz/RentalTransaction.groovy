@@ -33,6 +33,7 @@ class RentalTransaction {
   Date bookingDate
   Date moveInDate
   Date achTransferDate
+  Invoice invoice
   Date paidThruDate
   Date dateOfBirth
   BigDecimal cost
@@ -43,6 +44,7 @@ class RentalTransaction {
   BigDecimal commission
   BigDecimal monthlyRate
   BigDecimal duration
+  BigDecimal achAmount
   Integer durationDays
   Integer durationMonths
   BigDecimal fees
@@ -114,6 +116,8 @@ class RentalTransaction {
     durationMonths(nullable:true)
     checkIssued(nullable:true)
     invoiced(nullable:true)
+    invoice(nullable:true)
+    achAmount(nullable:true)
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',

@@ -38,6 +38,9 @@ import com.storitz.User
 import com.storitz.UserRole
 import com.storitz.Feed
 
+import storitz.constants.FeedType
+import java.awt.Color
+
 @Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
 class ReportsController {
 
@@ -54,7 +57,11 @@ class ReportsController {
       if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
         feedList = Feed.list()
       } else {
-        feedList = Feed.findAllByManager(user.manager)
+        if (UserRole.userHasRole(user, 'ROLE_MANAGER')) {
+          feedList = Feed.findAllByManager(user)
+        } else {
+          feedList = Feed.findAllByManager(user.manager)
+        }
       }
       [feedList:feedList]
     }
@@ -62,11 +69,17 @@ class ReportsController {
   GregorianCalendar startDate = new GregorianCalendar()
   GregorianCalendar endDate = new GregorianCalendar()
 
-  Style titleStyle
-  Style headerStyle
-  Style detailStyle
-  Style headerVariables
-  Style groupHeaderStyle
+  Style titleStyle = new Style("titleStyle")
+  Style headerStyle = new Style("headerStyle")
+  Style detailStyle = new Style("detailStyle")
+  Style headerVariableStyle = new Style("headerVariableStyle")
+  Style groupHeaderStyle = new Style("groupHeaderStyle")
+  Style subtotalStyle = new Style("subtotalStyle")
+  Style moneyStyle = new Style("moneyStyle")
+  Style moneyTotalStyle = new Style("moneyTotalStyle")
+  Style facilityHeaderStyle = new Style("facilityHeaderStyle")
+  Style detailCenterStyle = new Style("detailCenterStyle")
+  Style dateHeaderStyle = new Style("dateHeaderStyle")
 
   def site = {
 
@@ -90,26 +103,13 @@ class ReportsController {
     FastReportBuilder drb = new FastReportBuilder();
     def config = loadConfig()
 
-    titleStyle = getStyle(config.titleStyle)
-    headerStyle = getStyle(config.headerStyle)
-    detailStyle = getStyle(config.detailStyle)
-
-    groupHeaderStyle = new Style()
-	groupHeaderStyle.setFont(Font.ARIAL_MEDIUM_BOLD)
-    groupHeaderStyle.setVerticalAlign(VerticalAlign.MIDDLE)
-
-    headerVariables = new Style()
-  	headerVariables.setFont(Font.ARIAL_MEDIUM_BOLD)
-  	headerVariables.setHorizontalAlign(HorizontalAlign.RIGHT)
-  	headerVariables.setVerticalAlign(VerticalAlign.MIDDLE)
-
     // Footer definition
     drb.setTemplateFile(request.getRealPath('/WEB-INF/reports/storitz_template.jrxml'))
 
     def reportParams = [
       logo_header: request.getRealPath("/images/logo_storitz_small.gif"),
       logo_footer: request.getRealPath("/images/storitz-footer-logo-grayscale-small.png"),
-      date_range: "- ${params.startDate} thru ${params.endDate}"
+      date_range: "${params.startDate} to ${params.endDate}"
     ]
 
     Page page = Page.Page_Legal_Landscape()
@@ -122,9 +122,11 @@ class ReportsController {
       .setPrintBackgroundOnOddRows(true)
       .setUseFullPageWidth(true)
 
+
     def results
     switch (period.reportName) {
       case ReportName.BALK:
+
         results = buildBalkReport(drb, reportParams, startDate, endDate)
         break
 
@@ -174,8 +176,9 @@ class ReportsController {
 
   private buildBalkReport(drb, reportParams, startDate, endDate) {
 
-    reportParams["report_name"] = "Storitz Weekly Balk Report"
-    reportParams["footer_text"] = "User Balk Report ${reportParams['date_range']}"
+    reportParams["report_name"] = "Storitz Balk Report"
+    reportParams["footer_text"] = "User Balk Report"
+    reportParams["report_dates"] = "${reportParams['date_range']}"
 
     drb.addField("contactPrimary.firstName", String.class.getName())
     drb.addField("contactPrimary.lastName", String.class.getName())
@@ -232,7 +235,8 @@ class ReportsController {
     switch(period.reportName) {
       case ReportName.ACTIVITY:
         reportParams["report_name"] = "Activity Report - ${period.site.title}"
-        reportParams["footer_text"] = "Activity Report - ${period.site.title} ${reportParams['date_range']}"
+        reportParams["footer_text"] = "Activity Report - ${period.site.title}"
+        reportParams["report_dates"] = "${reportParams['date_range']}"
         dateField = "bookingDate"
         transTitle = "Trans #"
 
@@ -251,7 +255,8 @@ class ReportsController {
 
       case ReportName.PENDING:
         reportParams["report_name"] = "Pending Move In Report - ${period.site.title}"
-        reportParams["footer_text"] = "Pending Move In Report - ${period.site.title} ${reportParams['date_range']}"
+        reportParams["footer_text"] = "Pending Move In Report - ${period.site.title}"
+        reportParams["report_dates"] = "${reportParams['date_range']}"
         dateField = "moveInDate"
         transTitle = "Res #"
 
@@ -271,7 +276,8 @@ class ReportsController {
 
       case ReportName.MOVEIN:
         reportParams["report_name"] = "Move In Report - ${period.site.title}"
-        reportParams["footer_text"] = "Move In Report - ${period.site.title} ${reportParams['date_range']}"
+        reportParams["footer_text"] = "Move In Report"
+        reportParams["report_dates"] = "${reportParams['date_range']}"
         dateField = "moveInDate"
         transTitle = "Trans #"
 
@@ -292,7 +298,7 @@ class ReportsController {
 
     drb
       .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(headerVariables)
+      .setGrandTotalLegendStyle(subtotalStyle)
       .setPrintColumnNames(false)
 
     drb.addField("contactPrimary.firstName", String.class.getName())
@@ -331,23 +337,23 @@ class ReportsController {
 
     SimpleColumn columnGross = ColumnBuilder.getInstance().
       setColumnProperty("cost", BigDecimal.class.getName()).
-      setTitle("Gross").setPattern("\$0.00").setWidth(18).build()
+      setTitle("Gross").setStyle(moneyStyle).setPattern("\$0.00").setWidth(18).build()
 
     SimpleColumn columnCommission = ColumnBuilder.getInstance().
       setColumnProperty("commission", BigDecimal.class.getName()).
-      setTitle("Commission").setPattern("\$0.00").setWidth(18).build()
+      setTitle("Commission").setStyle(moneyStyle).setPattern("\$0.00").setWidth(18).build()
 
     AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
-            .setTitle("Net").setHeaderStyle(headerStyle).setWidth(18).setPattern("\$0.00").build();
+            .setTitle("Net").setStyle(moneyStyle).setHeaderStyle(headerStyle).setWidth(18).setPattern("\$0.00").build();
 
-    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, headerVariables);
-	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, headerVariables);
-	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, headerVariables);
+    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle);
+	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle);
+	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle);
 	drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
 
-    Style dailyFooterStyle = new StyleBuilder(false).setFont(Font.ARIAL_SMALL)
+    Style dailyFooterStyle = new StyleBuilder(false).setFont(new Font(9, Font._FONT_ARIAL, true))
  			.setHorizontalAlign(HorizontalAlign.RIGHT)
  			.setVerticalAlign(VerticalAlign.MIDDLE)
  			.setPadding(new Integer(0))
@@ -359,9 +365,9 @@ class ReportsController {
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
                 .setFooterLabel(dailySubLabel)
                 .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle)
                 .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
                 .build();
 
@@ -393,10 +399,24 @@ class ReportsController {
 
     def c = RentalTransaction.createCriteria()
 
-    reportParams["report_name"] = "Transaction Report - ${period.feed.operatorName}"
-    reportParams["footer_text"] = "Transaction Report - ${period.feed.operatorName} ${reportParams['date_range']}"
+    reportParams["report_name"] = "Transaction History Report - ${period.feed.operatorName}"
+    reportParams["footer_text"] = ""
+    reportParams["report_dates"] = "${reportParams['date_range']}"
     dateField = "bookingDate"
-    transTitle = "Trans #"
+
+    Feed reportFeed = Feed.get(period.feed.id)
+    switch(reportFeed.feedType) {
+      case FeedType.CENTERSHIFT:
+        transTitle = "Centershift Trans #"
+        break
+
+      case FeedType.SITELINK:
+        transTitle = "SiteLink Trans #"
+        break
+
+      default:
+        transTitle = "Trans #"
+    }
 
     results = c.list() {
       or {
@@ -414,7 +434,7 @@ class ReportsController {
 
     drb
       .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(headerVariables)
+      .setGrandTotalLegendStyle(subtotalStyle)
       .setPrintColumnNames(false)
 
     drb.addField("contactPrimary.firstName", String.class.getName())
@@ -431,40 +451,25 @@ class ReportsController {
 
     SimpleColumn columnSite = ColumnBuilder.getInstance().
       setColumnProperty("site.title", String.class.getName()).
-      setTitle("Facility").setHeaderStyle(groupHeaderStyle).build()
+      setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
 
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle("Date").setHeaderStyle(headerStyle).build();
+            .setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
-            .setTitle("MoveIn Date").setHeaderStyle(headerStyle).build();
+            .setTitle("Move-In Date").setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnPaidThruDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('paidThruDate'))
-            .setTitle("Paid Thru").setHeaderStyle(headerStyle).build();
-
-    AbstractColumn columnAchDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('achTransferDate'))
-            .setTitle("ACH Date").setHeaderStyle(headerStyle).build();
-
-    AbstractColumn columnAchAccount = ColumnBuilder.getInstance().setCustomExpression(new AccountExpression('site.bankAccount.acctNo'))
-            .setTitle("ACH Account").setHeaderStyle(headerStyle).build();
+            .setTitle("Paid Through").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
-      setColumnProperty("feedUnitNumber", String.class.getName()).
-      setTitle("Unit #").build()
+      setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
 
     AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
             .setTitle(transTitle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-            .setTitle("Customer").setHeaderStyle(headerStyle).build();
-
-    SimpleColumn columnEmail = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.email", String.class.getName()).
-      setTitle("Email").build()
-
-    SimpleColumn columnPhone = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.phone", String.class.getName()).
-      setTitle("Phone").build()
+            .setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnPromo = ColumnBuilder.getInstance().
       setColumnProperty("promoName", String.class.getName()).
@@ -472,57 +477,44 @@ class ReportsController {
 
     SimpleColumn columnMonthly = ColumnBuilder.getInstance().
       setColumnProperty("monthlyRate", BigDecimal.class.getName()).
-      setTitle("Monthly Rent").setPattern("\$0.00").build()
+      setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnGross = ColumnBuilder.getInstance().
       setColumnProperty("cost", BigDecimal.class.getName()).
-      setTitle("Move In Cost").setPattern("\$0.00").build()
+      setTitle("Move-In Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnInsurance = ColumnBuilder.getInstance().
       setColumnProperty("insuranceCost", BigDecimal.class.getName()).
-      setTitle("Insurance").setPattern("\$0.00").build()
+      setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnFees = ColumnBuilder.getInstance().
       setColumnProperty("fees", BigDecimal.class.getName()).
-      setTitle("Fees").setPattern("\$0.00").build()
+      setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnTax = ColumnBuilder.getInstance().
       setColumnProperty("tax", BigDecimal.class.getName()).
-      setTitle("Tax").setPattern("\$0.00").build()
+      setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
 
-    SimpleColumn columnDiscount = ColumnBuilder.getInstance().
-      setColumnProperty("discount", BigDecimal.class.getName()).
-      setTitle("Discount").setPattern("\$0.00").build()
+    drb
+            .addGlobalFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+            .addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
+            .addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
+            .addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
 
-    SimpleColumn columnCommission = ColumnBuilder.getInstance().
-      setColumnProperty("commission", BigDecimal.class.getName()).
-      setTitle("Commission").setPattern("\$0.00").build()
-
-    AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
-            .setTitle("Net").setHeaderStyle(headerStyle).setPattern("\$0.00").build();
-
-    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, headerVariables);
-	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, headerVariables);
-	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, headerVariables);
-	drb.setGlobalFooterVariableHeight(new Integer(25));
+  	drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
 
-    Style dailyFooterStyle = new StyleBuilder(false).setFont(Font.ARIAL_SMALL)
- 			.setHorizontalAlign(HorizontalAlign.RIGHT)
- 			.setVerticalAlign(VerticalAlign.MIDDLE)
- 			.setPadding(new Integer(0))
- 			.setStretchWithOverflow(false)
- 			.build();
-
-    DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", dailyFooterStyle, LabelPosition.LEFT);
+    DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
 
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
                 .setFooterLabel(dailySubLabel)
+                .setDefaultFooterVariableStyle(moneyTotalStyle)
                 .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
                 .setGroupLayout(GroupLayout.DEFAULT)
                 .build();
 
@@ -530,6 +522,7 @@ class ReportsController {
 
     DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite)
                 .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
+                .setHeaderHeight(new Integer(30))
                 .build();
 
     drb
@@ -539,20 +532,13 @@ class ReportsController {
       .addColumn(columnMonthly)
       .addColumn(columnReservationId)
       .addColumn(columnName)
-      .addColumn(columnEmail)
-      .addColumn(columnPhone)
       .addColumn(columnMoveInDate)
       .addColumn(columnPaidThruDate)
       .addColumn(columnGross)
       .addColumn(columnInsurance)
       .addColumn(columnFees)
       .addColumn(columnTax)
-      .addColumn(columnDiscount)
       .addColumn(columnPromo)
-      .addColumn(columnCommission)
-      .addColumn(columnNet)
-      .addColumn(columnAchDate)
-      .addColumn(columnAchAccount)
       .addGroup(g2)
       .addGroup(g1)
 
@@ -565,10 +551,26 @@ class ReportsController {
     def transTitle
     def results
 
-    def c = Nacha.createCriteria()
+    def c = RentalTransaction.createCriteria()
 
-    reportParams["report_name"] = "Payment Report - ${period.feed.operatorName}"
-    reportParams["footer_text"] = "Payment Report - ${period.site.operatorName} ${reportParams['date_range']}"
+    reportParams["report_name"] = "Commission Report - ${period.feed.operatorName}"
+    reportParams["footer_text"] = ""
+    reportParams["report_dates"] = "${reportParams['date_range']}"
+    dateField = "bookingDate"
+
+    Feed reportFeed = Feed.get(period.feed.id)
+    switch(reportFeed.feedType) {
+      case FeedType.CENTERSHIFT:
+        transTitle = "Centershift Trans #"
+        break
+
+      case FeedType.SITELINK:
+        transTitle = "SiteLink Trans #"
+        break
+
+      default:
+        transTitle = "Trans #"
+    }
 
     results = c.list() {
       or {
@@ -581,39 +583,30 @@ class ReportsController {
         }
       }
       between('bookingDate', startDate.time, endDate.time)
-      gt('moveInDate', new Date())
-      order('moveInDate', 'desc')
+      order('bookingDate', 'desc')
     }
 
     drb
       .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(headerVariables)
+      .setGrandTotalLegendStyle(subtotalStyle)
       .setPrintColumnNames(false)
 
-    drb.addField("contactPrimary.firstName", String.class.getName())
-    drb.addField("contactPrimary.lastName", String.class.getName())
-    drb.addField("contactPrimary.suffixName", String.class.getName())
     drb.addField("site.bankAccount.acctNo", String.class.getName())
     drb.addField("bookingDate", Date.class.getName())
-    drb.addField("moveInDate", Date.class.getName())
-    drb.addField("paidThruDate", Date.class.getName())
+    drb.addField("achTransferDate", Date.class.getName())
     drb.addField("reserved", Boolean.class.getName())
     drb.addField("reservationId", String.class.getName())
     drb.addField("idNumber", String.class.getName())
+    drb.addField("invoice.invoiceId", String.class.getName())
+    drb.addField("site.netCommission", Boolean.class.getName())
 
 
     SimpleColumn columnSite = ColumnBuilder.getInstance().
       setColumnProperty("site.title", String.class.getName()).
-      setTitle("Facility").setHeaderStyle(groupHeaderStyle).build()
+      setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
 
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle("Date").setHeaderStyle(headerStyle).build();
-
-    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
-            .setTitle("MoveIn Date").setHeaderStyle(headerStyle).build();
-
-    AbstractColumn columnPaidThruDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('paidThruDate'))
-            .setTitle("Paid Thru").setHeaderStyle(headerStyle).build();
+            .setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnAchDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('achTransferDate'))
             .setTitle("ACH Date").setHeaderStyle(headerStyle).build();
@@ -622,80 +615,51 @@ class ReportsController {
             .setTitle("ACH Account").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
-      setColumnProperty("feedUnitNumber", String.class.getName()).
-      setTitle("Unit #").build()
+      setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
 
     AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
             .setTitle(transTitle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-            .setTitle("Customer").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnPaymentType = ColumnBuilder.getInstance().setCustomExpression(new PaymentTypeExpression())
+            .setTitle("Net/Gross Transfer").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
-    SimpleColumn columnEmail = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.email", String.class.getName()).
-      setTitle("Email").build()
+    AbstractColumn columnInvoiceNumber = ColumnBuilder.getInstance().setCustomExpression(new InvoiceNumberExpression())
+            .setTitle("Storitz Invoice #").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
-    SimpleColumn columnPhone = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.phone", String.class.getName()).
-      setTitle("Phone").build()
-
-    SimpleColumn columnPromo = ColumnBuilder.getInstance().
-      setColumnProperty("promoName", String.class.getName()).
-      setTitle("Promo Name").build()
-
-    SimpleColumn columnMonthly = ColumnBuilder.getInstance().
-      setColumnProperty("monthlyRate", BigDecimal.class.getName()).
-      setTitle("Monthly Rent").setPattern("\$0.00").build()
+    SimpleColumn columnStoritzId = ColumnBuilder.getInstance().
+      setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans#").build()
 
     SimpleColumn columnGross = ColumnBuilder.getInstance().
       setColumnProperty("cost", BigDecimal.class.getName()).
-      setTitle("Move In Cost").setPattern("\$0.00").build()
-
-    SimpleColumn columnInsurance = ColumnBuilder.getInstance().
-      setColumnProperty("insuranceCost", BigDecimal.class.getName()).
-      setTitle("Insurance").setPattern("\$0.00").build()
-
-    SimpleColumn columnFees = ColumnBuilder.getInstance().
-      setColumnProperty("fees", BigDecimal.class.getName()).
-      setTitle("Fees").setPattern("\$0.00").build()
-
-    SimpleColumn columnTax = ColumnBuilder.getInstance().
-      setColumnProperty("tax", BigDecimal.class.getName()).
-      setTitle("Tax").setPattern("\$0.00").build()
-
-    SimpleColumn columnDiscount = ColumnBuilder.getInstance().
-      setColumnProperty("discount", BigDecimal.class.getName()).
-      setTitle("Discount").setPattern("\$0.00").build()
+      setTitle("Move-In Cost").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnCommission = ColumnBuilder.getInstance().
       setColumnProperty("commission", BigDecimal.class.getName()).
-      setTitle("Commission").setPattern("\$0.00").build()
+      setTitle("Commission").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+    SimpleColumn columnAchAmount = ColumnBuilder.getInstance().
+      setColumnProperty("achAmount", BigDecimal.class.getName()).
+      setTitle("ACH Amount (if applicable)").setWidth(new Integer(55)).setStyle(moneyStyle).setPattern("\$0.00").build()
 
     AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
-            .setTitle("Net").setHeaderStyle(headerStyle).setPattern("\$0.00").build();
+            .setTitle("Net").setStyle(moneyStyle).setHeaderStyle(headerStyle).setPattern("\$0.00").build();
 
-    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, headerVariables);
-	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, headerVariables);
-	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, headerVariables);
+    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle);
+	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle);
+	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle);
+    drb.addGlobalFooterVariable(columnAchAmount, DJCalculation.SUM, moneyTotalStyle);
 	drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
 
-    Style dailyFooterStyle = new StyleBuilder(false).setFont(Font.ARIAL_SMALL)
- 			.setHorizontalAlign(HorizontalAlign.RIGHT)
- 			.setVerticalAlign(VerticalAlign.MIDDLE)
- 			.setPadding(new Integer(0))
- 			.setStretchWithOverflow(false)
- 			.build();
-
-    DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", dailyFooterStyle, LabelPosition.LEFT);
+    DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
 
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
                 .setFooterLabel(dailySubLabel)
                 .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnCommission, DJCalculation.SUM, headerVariables)
-                .addFooterVariable(columnNet, DJCalculation.SUM, headerVariables)
+                .addFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle)
                 .setGroupLayout(GroupLayout.DEFAULT)
                 .build();
 
@@ -709,21 +673,14 @@ class ReportsController {
       .addColumn(columnSite)
       .addColumn(columnDate)
       .addColumn(columnUnitNumber)
-      .addColumn(columnMonthly)
+      .addColumn(columnStoritzId)
       .addColumn(columnReservationId)
-      .addColumn(columnName)
-      .addColumn(columnEmail)
-      .addColumn(columnPhone)
-      .addColumn(columnMoveInDate)
-      .addColumn(columnPaidThruDate)
       .addColumn(columnGross)
-      .addColumn(columnInsurance)
-      .addColumn(columnFees)
-      .addColumn(columnTax)
-      .addColumn(columnDiscount)
-      .addColumn(columnPromo)
       .addColumn(columnCommission)
       .addColumn(columnNet)
+      .addColumn(columnPaymentType)
+      .addColumn(columnInvoiceNumber)
+      .addColumn(columnAchAmount)
       .addColumn(columnAchDate)
       .addColumn(columnAchAccount)
       .addGroup(g2)
@@ -747,41 +704,6 @@ class ReportsController {
           // ignore, just use the defaults
       }
       return new ConfigSlurper(GrailsUtil.environment).parse(new Properties()).merge(config.dynamicJasper)
-  }
-
-  def getStyle(def styleConfig) {
-      def style = new Style()
-      style.font = styleConfig.font
-      if (styleConfig.border) {
-          style.border = styleConfig.border
-      } else {
-          style.borderTop = styleConfig.borderTop
-          style.borderBottom = styleConfig.borderBottom
-          style.borderLeft = styleConfig.borderLeft
-          style.borderRight = styleConfig.borderRight
-      }
-      style.backgroundColor = styleConfig.backgroundColor
-      style.transparency = styleConfig.transparency
-      style.textColor = styleConfig.textColor
-      style.horizontalAlign = styleConfig.horizontalAlign
-      style.verticalAlign = styleConfig.verticalAlign
-      style.blankWhenNull = styleConfig.blankWhenNull
-      style.borderColor = styleConfig.borderColor
-      if (style.padding) {
-          style.padding = styleConfig.padding
-      } else {
-          style.paddingTop = styleConfig.paddingTop
-          style.paddingBotton = styleConfig.paddingBotton
-          style.paddingLeft = styleConfig.paddingLeft
-          style.paddingRight = styleConfig.paddingRight
-      }
-      //style.pattern = styleConfig.pattern
-      style.radius = styleConfig.radius
-      style.rotation = styleConfig.rotation
-      //FIXME typo in DJ API
-      //style.streching = styleConfig.stretching
-      //style.stretchWithOverflow = styleConfig.stretchWithOverflow
-      style
   }
 
 }

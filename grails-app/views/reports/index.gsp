@@ -220,7 +220,7 @@
 
         </div>
 
-        <g:if test="${feedList?.size() > 0}">
+        <g:if test="${feedList?.size() > 1}">
         <div id="feedParams" style="display:none;">
           <div class="price_options checkout_header white">
             Choose Corporation
@@ -249,7 +249,7 @@
         </div>
         </g:if>
         <g:else>
-          <input type="hidden" name="feed" value='${feedList ? feedList.asList()[0] : ""}'
+          <input type="hidden" name="feed.id" value='${feedList ? feedList.asList()[0].id : ""}'/>
         </g:else>
 
         <div class="buttons">
