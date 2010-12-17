@@ -132,7 +132,7 @@
         </div>
       </g:hasErrors>
 
-      <g:form>
+      <g:form target="_blank">
         <div style="height:20px;clear:both;"></div>
         <div class="price_options checkout_header white">
           Pick a date range
