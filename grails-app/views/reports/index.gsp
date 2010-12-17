@@ -188,8 +188,10 @@
               <option ${reportPeriod?.reportName == ReportName.MOVEIN ? 'selected="selected"' : ''} value="${ReportName.MOVEIN}">${ReportName.MOVEIN.display}</option>
               <option ${reportPeriod?.reportName == ReportName.PENDING ? 'selected="selected"' : ''} value="${ReportName.PENDING}">${ReportName.PENDING.display}</option>
               <option ${reportPeriod?.reportName == ReportName.ACTIVITY ? 'selected="selected"' : ''} value="${ReportName.ACTIVITY}">${ReportName.ACTIVITY.display}</option>
-              <option ${reportPeriod?.reportName == ReportName.CORP_TRANSACTION ? 'selected="selected"' : ''} value="${ReportName.CORP_TRANSACTION}">${ReportName.CORP_TRANSACTION.display}</option>
-              <option ${reportPeriod?.reportName == ReportName.CORP_PAYMENT ? 'selected="selected"' : ''} value="${ReportName.CORP_PAYMENT}">${ReportName.CORP_PAYMENT.display}</option>
+              <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+                <option ${reportPeriod?.reportName == ReportName.CORP_TRANSACTION ? 'selected="selected"' : ''} value="${ReportName.CORP_TRANSACTION}">${ReportName.CORP_TRANSACTION.display}</option>
+                <option ${reportPeriod?.reportName == ReportName.CORP_PAYMENT ? 'selected="selected"' : ''} value="${ReportName.CORP_PAYMENT}">${ReportName.CORP_PAYMENT.display}</option>
+              </sec:ifAnyGranted>
             </select>
           </div>
           <div style="height:20px;clear:both;"></div>

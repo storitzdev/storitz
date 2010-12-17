@@ -40,7 +40,7 @@
 				<imageExpression class="java.lang.String"><![CDATA[$P{logo_header}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="493" y="2" width="259" height="22"/>
+				<reportElement x="219" y="2" width="533" height="22"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="14"/>
 				</textElement>
@@ -61,7 +61,7 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="615" y="46" width="92" height="20"/>
+				<reportElement x="615" y="46" width="88" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
