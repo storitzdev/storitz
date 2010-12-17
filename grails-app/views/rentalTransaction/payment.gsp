@@ -83,11 +83,19 @@
                       </div>
                     </div>
                     <div class="left" style="vertical-align: bottom; margin: 8px 0 0 15px;">
-                      <div id="regPrice" class="transStrikethru">${unit.price > unit.pushRate ? unit.price : ''}</div>
-                      <div>
-                        <div id="pushPrice" class="transPrice left"><g:formatNumber number="${unit.pushRate}" currencyCode="USD" type="currency" /> </div>
-                        <div class="transPerMonth left"> /Per Month</div>
-                      </div>
+                      <g:if test="${unit.price > unit.pushRate}">
+                        <div id="regPrice" class="transStrikethru"><g:formatNumber number="${unit.price}" currencyCode="USD" type="currency" /></div>
+                        <div>
+                          <div id="pushPrice" class="transPrice left red"><g:formatNumber number="${unit.pushRate}" currencyCode="USD" type="currency" /> </div>
+                          <div class="transPerMonth left"> /Per Month</div>
+                        </div>
+                      </g:if>
+                      <g:else>
+                        <div>
+                          <div id="pushPrice" class="transPrice left"><g:formatNumber number="${unit.pushRate}" currencyCode="USD" type="currency" /> </div>
+                          <div class="transPerMonth left"> /Per Month</div>
+                        </div>
+                      </g:else>
                     </div>
                     <div class="right" style="margin-top:5px;">
                     </div>

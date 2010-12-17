@@ -620,7 +620,7 @@ class ReportsController {
             .setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnAchDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('achTransferDate'))
-            .setTitle("ACH Date").setHeaderStyle(headerStyle).build();
+            .setTitle("ACH Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnAchAccount = ColumnBuilder.getInstance().setCustomExpression(new AccountExpression('site.bankAccount.acctNo'))
             .setTitle("ACH Account").setHeaderStyle(headerStyle).build();
