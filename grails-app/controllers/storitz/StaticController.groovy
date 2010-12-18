@@ -37,4 +37,8 @@ class StaticController {
     def guarantee = {
       [title: 'Storitz Guarantee']
     }
+
+    def supports = {
+      [title: 'Storitz Supports']
+    }
 }
