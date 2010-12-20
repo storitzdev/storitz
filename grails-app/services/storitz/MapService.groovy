@@ -93,6 +93,7 @@ class MapService {
             unitsize {
               eq("id", searchSize)
             }
+            gt("unitCount", 0)
           }
         }
         fetchMode('specialOffers', FetchMode.EAGER)

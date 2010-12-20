@@ -165,9 +165,9 @@ class HomeController {
     for (site in sites) {
       def bestUnit
       if (searchSize != 1 && unitSize) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
       } else {
-        bestUnit = site.units.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitCount > 0 }.min{ it.price }
       }
       if (bestUnit) {
         if (site.featuredOffers().size() == 0) {

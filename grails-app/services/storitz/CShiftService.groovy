@@ -754,6 +754,13 @@ class CShiftService {
   }
 
   def unitsAvailable(cshift, site, stats, writer) {
+
+    // set all the unit counts to zero
+    for (unit in site.units) {
+      unit.unitCount = 0
+      unit.save(flush:true)
+    }
+
     def ret = getSiteUnits(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
