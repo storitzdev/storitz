@@ -3,20 +3,7 @@
 <head>
   <g:set var="title" value="Create Rental Agreement" scope="request"/>
   <g:render template="/header_admin"/>
-
   <p:dependantJavascript>
-    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      //<![CDATA[
-
-      google.setOnLoadCallback(function() {
-        jQuery.noConflict();
-
-      });
-
-      //]]>
-    </script>
     <p:javascript src="jquery.MetaDeta"/>
     <p:javascript src="jquery.MultiFile"/>
   </p:dependantJavascript>

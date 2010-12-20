@@ -39,6 +39,11 @@ class UrlMappings {
 //         address = { println ([params.city, params.state]) ; params.state ? (params.city + ', ' + params.state) : params.city }
       }
 
+      name release: "/press-release/$date/$title/$id" {
+        controller = "pressRelease"
+        action = "release"
+      }
+
       "/sitemap" (controller:"siteMap")
 
       "/sitemapGeo" (controller:"siteMap", action:"geo")

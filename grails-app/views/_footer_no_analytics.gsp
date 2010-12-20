@@ -13,7 +13,7 @@
       </div>
       <div class="left" style="margin: 2em 5em;">
         <p class="footer"><a href="http://blog.storitz.com" class="footer small" onclick="window.open(this.href,'_blank');return false;">Storitz Blog</a></p>
-        <p class="footer"><g:link class="footer small" controller="static" action="media">Storitz in the Media</g:link></p>
+        <p class="footer"><g:link class="footer small" controller="pressRelease" action="pressRoom">Press Room</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
         <p class="footer"><g:link class="footer small" controller="admin" action="index">Owner Admin</g:link></p>
@@ -36,10 +36,10 @@
         <span id="siteseal"><script type="text/javascript" src="https://seal.starfieldtech.com/getSeal?sealID=4GPUFa2QNzQrd6vGDkVGVQuPb8epKRwk1rH51Cnle8We0usacEm"></script></span>
       </div>
       <div style="margin: 2.5em 1em;">
-        <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="http://www.authorize.net/" id="AuthorizeNetText" onclick="window.open(this.href,'_blank');return false;">Online Payments</a> </div>
+        <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="#" id="AuthorizeNetText" onclick="window.open('http://www.authorize.net/','_blank');return false;">Online Payments</a> </div>
       </div>
       <div style="margin: 2.5em 1em;">
-        <a href="http://www.selfstorage.org/" onclick="window.open(this.href,'_blank');return false;"><storitz:image style="border:none;" src="logo-ssa.png" alt="SSA Logo"/></a>
+        <a href='#' onclick="window.open('http://www.selfstorage.org/','_blank');return false;"><storitz:image style="border:none;" src="logo-ssa.png" width="111" height="58" alt="SSA Logo"/></a>
       </div>
     </div>
   </div>

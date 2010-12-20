@@ -123,6 +123,16 @@ FCKConfig.ToolbarSets["Storitz"] = [
 	['Style','FontFormat','FontName','FontSize']
 ] ;
 
+FCKConfig.ToolbarSets["StoritzPress"] = [
+    ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
+    ['OrderedList','UnorderedList','-','Outdent','Indent','Blockquote'],
+    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+    ['TextColor','BGColor'],
+    '/',
+	['Style','FontFormat','FontName','FontSize'],
+    ['Link','Unlink','Anchor']
+] ;
+
 FCKConfig.EnterMode = 'p' ;			// p | div | br
 FCKConfig.ShiftEnterMode = 'br' ;	// p | div | br
 
