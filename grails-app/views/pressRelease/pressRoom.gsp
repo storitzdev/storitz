@@ -27,10 +27,10 @@
         <h1>Press Room</h1>
 
         <g:each in="${pressReleaseInstanceList}" var="release">
-          <h2>${release.release.format('MM-dd-yyyy')}</h2>
-          <h3>
+          <h2>
             <g:link mapping="release" params="[title:release.title, date:release.release.format('MM-dd-yyyy'), id:release.id]" id="${release.id}">${release.title}</g:link>
-          </h3>
+          </h2>
+          <h3>${release.release.format('MM-dd-yyyy')}</h3>
           <p>
             ${release.blurb}
           </p>

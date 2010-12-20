@@ -24,9 +24,8 @@
       </div>
       <div style="width: 650px;margin-right: 35px;" class="right">
 
-        <h2>${pressReleaseInstance.release.format('MM-dd-yyyy')}</h2>
-
         <h1>${pressReleaseInstance.title}</h1>
+        <h3>${pressReleaseInstance.release.format('MM-dd-yyyy')}</h3>
 
         <p>
           ${pressReleaseInstance.body}
