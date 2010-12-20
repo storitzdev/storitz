@@ -721,7 +721,7 @@ class CShiftService {
 
       writer.println "checkRented (${centerShift.userName}, ${centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
-      def unitInfo = port.getAvailableUnits(centerShift.userName, centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.displaySize)
+      def unitInfo = port.getAvailableUnits(centerShift.userName, centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
       if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
         writer.println "Return for getAvailableUnits < 0 : ${unitInfo}"
@@ -796,6 +796,7 @@ class CShiftService {
 
             if (!siteUnit) {
               siteUnit = new StorageUnit()
+              siteUnit.unitInfo = dimensions
               newUnit = true
 
               def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
@@ -1013,7 +1014,7 @@ class CShiftService {
     if (!unit) return false
 
     // get the number of reservation days
-    def ret = getReservationUnitData(cshift.location.webUrl, cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.displaySize, unit.unitName)
+    def ret = getReservationUnitData(cshift.location.webUrl, cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.unitInfo, unit.unitName)
 
     println "Reservation data: ${ret as String}"
     
@@ -1049,7 +1050,7 @@ class CShiftService {
 
     println "checkRented (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
     
-    def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.displaySize)
+    def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
     if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
       println "Return for getAvailableUnits < 0 : ${unitInfo}"
