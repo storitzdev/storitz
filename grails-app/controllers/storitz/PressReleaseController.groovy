@@ -17,13 +17,13 @@ class PressReleaseController {
     @Secured(['ROLE_ADMIN'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        params.sort = 'release'
+        params.sort = 'releaseDate'
         params.order = 'desc'
         [pressReleaseInstanceList: PressRelease.list(params), pressReleaseInstanceTotal: PressRelease.count()]
     }
 
     def pressRoom = {
-        [pressReleaseInstanceList: PressRelease.list(sort:'release', order:'desc'), pressReleaseInstanceTotal: PressRelease.count()]
+        [pressReleaseInstanceList: PressRelease.list(sort:'releaseDate', order:'desc'), pressReleaseInstanceTotal: PressRelease.count()]
     }
 
     def release = {

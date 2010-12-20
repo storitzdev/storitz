@@ -14,7 +14,7 @@
           var dateFormat = '%m/%d/%Y';
 
           // do stuff when DOM is ready
-          $('#release').datepicker({
+          $('#releaseDate').datepicker({
               showOn: "button",
               buttonImage: ${storitz.imageLink(src:"calendar.png")},
               buttonImageOnly: true
@@ -73,8 +73,8 @@
                 <div style="width:400px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'title', 'errors')}">
                   <g:textField id="title" name="title" style="width: 380px;" value="${fieldValue(bean:pressReleaseInstance,field:'title')}" />
                 </div>
-                <div style="width:150px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'release', 'errors')}">
-                  <g:textField id="release" name="release" style="width: 100px;" value="${fieldValue(bean:pressReleaseInstance,field:'release')}" />
+                <div style="width:150px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'releaseDate', 'errors')}">
+                  <g:textField id="releaseDate" name="releaseDate" style="width: 100px;" value="${fieldValue(bean:pressReleaseInstance,field:'releaseDate')}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>

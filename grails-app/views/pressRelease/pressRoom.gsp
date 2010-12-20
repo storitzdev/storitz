@@ -30,12 +30,12 @@
           <h2>
             <g:link mapping="release" params="[title:release.title, date:release.release.format('MM-dd-yyyy'), id:release.id]" id="${release.id}">${release.title}</g:link>
           </h2>
-          <h3>${release.release.format('MM-dd-yyyy')}</h3>
+          <h3>${release.releaseDate.format('MM-dd-yyyy')}</h3>
           <p>
             ${release.blurb}
           </p>
           <p>
-            <g:link mapping="release" params="[title:release.title, date:release.release.format('MM-dd-yyyy'), id:release.id]" id="${release.id}">Details</g:link>
+            <g:link mapping="release" params="[title:release.title, date:release.releaseDate.format('MM-dd-yyyy'), id:release.id]" id="${release.id}">Details</g:link>
           </p>
           <div style="height:20px;width:650px; border-bottom: #333 dotted 1px;"></div>
         </g:each>

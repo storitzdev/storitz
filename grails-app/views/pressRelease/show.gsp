@@ -55,6 +55,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="pressRelease.releaseDate.label" default="Release Date"/></td>
+
+          <td valign="top" class="value">${pressReleaseInstance.releaseDate.format('MM-dd-yyyy')}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="pressRelease.blurb.label" default="Blurb"/></td>
 
           <td valign="top" class="value">${pressReleaseInstance.blurb}</td>

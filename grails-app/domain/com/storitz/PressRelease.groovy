@@ -10,7 +10,7 @@ class PressRelease {
       pdfLocation(nullable:true)
     }
 
-    Date release
+    Date releaseDate
     String title
     String blurb
     String body

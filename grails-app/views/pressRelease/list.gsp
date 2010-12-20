@@ -39,7 +39,7 @@
 
           <g:sortableColumn property="title" title="${message(code: 'pressRelease.title.label', default: 'Title')}"/>
 
-          <g:sortableColumn property="release" title="${message(code: 'cshift.release.label', default: 'Release Date')}"/>
+          <g:sortableColumn property="release" title="${message(code: 'cshift.releaseDate.label', default: 'Release Date')}"/>
         </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
 
             <td>${fieldValue(bean: pressReleaseInstance, field: "title")}</td>
 
-            <td>${pressReleaseInstance?.release?.format('MM-dd-yyyy')}</td>
+            <td>${pressReleaseInstance?.releaseDate?.format('MM-dd-yyyy')}</td>
 
           </tr>
         </g:each>
