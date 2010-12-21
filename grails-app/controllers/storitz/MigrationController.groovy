@@ -30,12 +30,12 @@ class MigrationController {
       def fileList = []
       for(site in myFeed.sites) {
         for(img in site.images) {
-          fileList.add("**${img.basename}/thumb_${img.fileLocation}")
-          fileList.add("**${img.basename}/mid_${img.fileLocation}")
-          fileList.add("**${img.basename}/${img.fileLocation}")
+          fileList.add("**${img.basename}thumb-${img.fileLocation}")
+          fileList.add("**${img.basename}mid-${img.fileLocation}")
+          fileList.add("**${img.basename}${img.fileLocation}")
         }
         if (site.logo) {
-          fileList.add("**${site.logo.basename}/${site.logo.fileLocation}")
+          fileList.add("**${site.logo.basename}/logo-${site.logo.fileLocation}")
         }
       }
       // add PDFs
