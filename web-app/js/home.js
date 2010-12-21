@@ -188,6 +188,7 @@ function showAddress(address, size, date) {
         oldSearchAddr = searchAddr
         searchAddr = address;
         if (searchAddr != oldSearchAddr) {
+            document.title = "Self storage units, mini storage in " + address + " - Storitz";
             addressChange = true;
             updateMetroBox(searchAddr);
         }
