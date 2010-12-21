@@ -28,7 +28,7 @@
 
         <g:each in="${pressReleaseInstanceList}" var="release">
           <h2>
-            <g:link mapping="release" params="[title:release.title, date:release.release.format('MM-dd-yyyy'), id:release.id]" id="${release.id}">${release.title}</g:link>
+            <g:link mapping="release" params="[title:release.title, date:release.releaseDate.format('MM-dd-yyyy'), id:release.id]" id="${release.id}">${release.title}</g:link>
           </h2>
           <h3>${release.releaseDate.format('MM-dd-yyyy')}</h3>
           <p>
