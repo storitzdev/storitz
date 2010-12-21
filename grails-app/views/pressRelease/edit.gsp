@@ -156,7 +156,7 @@
 
                 </div>
               <div class="buttons">
-                  <span class="button"><input class="save" type="submit" value="Create" /></span>
+                <span class="button"><g:actionSubmit action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
               </div>
             </g:uploadForm>
       </div>
