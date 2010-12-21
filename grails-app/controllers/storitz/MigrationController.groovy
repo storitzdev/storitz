@@ -30,17 +30,17 @@ class MigrationController {
       def fileList = []
       for(site in myFeed.sites) {
         for(img in site.images) {
-          fileList.add("**${img.basename}thumb-${img.fileLocation}")
-          fileList.add("**${img.basename}mid-${img.fileLocation}")
-          fileList.add("**${img.basename}${img.fileLocation}")
+          fileList.add("**${img.basename}${img.fileLocation.replace(' ','*')}")
+          fileList.add("**${img.basename}mid-${img.fileLocation.replace(' ','*')}")
+          fileList.add("**${img.basename}${img.fileLocation.replace(' ','*')}")
         }
         if (site.logo) {
-          fileList.add("**${site.logo.basename}/logo-${site.logo.fileLocation}")
+          fileList.add("**${site.logo.basename}logo-${site.logo.fileLocation.replace(' ','*')}")
         }
       }
       // add PDFs
       for(ra in rentalAgreements) {
-        fileList.add("**${ra.src()}")
+        fileList.add("**${ra.src().replace(' ','*')}")
       }
       // build bundle
       def tmpFile = File.createTempFile("migration", ".zip")
