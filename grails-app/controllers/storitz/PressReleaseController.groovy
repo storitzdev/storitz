@@ -132,7 +132,7 @@ class PressReleaseController {
         if (pressReleaseInstance) {
             try {
                 File pdfFile = request.getRealPath(pressReleaseInstance.pdfLocation)
-                pdfFile.delete()
+                new File(pdfFile).delete()
                 pressReleaseInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'pressRelease.label', default: 'PressRelease'), params.id])}"
                 redirect(action: "list")
