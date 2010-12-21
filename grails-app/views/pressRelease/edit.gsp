@@ -74,7 +74,7 @@
                   <g:textField id="title" name="title" style="width: 380px;" value="${fieldValue(bean:pressReleaseInstance,field:'title')}" />
                 </div>
                 <div style="width:150px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'releaseDate', 'errors')}">
-                  <g:textField id="releaseDate" name="releaseDate" style="width: 100px;" value="${fieldValue(bean:pressReleaseInstance,field:'releaseDate')}" />
+                  <g:textField id="releaseDate" name="releaseDate" style="width: 100px;" value="${pressReleaseInstance?.releaseDate?.format('MM/dd/yyyy')}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
