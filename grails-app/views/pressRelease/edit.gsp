@@ -94,14 +94,14 @@
               </div>
 
               <div class="checkout_fields">
-                <div style="width:660px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'blurb', 'errors')}">
+                <div style="width:660px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'blurb', 'errors')}">
                   <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
                   <fckeditor:editor
                     name="blurb"
                     width="650"
                     height="300"
                     toolbar="StoritzPress">
-                    ${storageSiteInstance?.blurb}
+                    ${pressReleaseInstance?.blurb}
                   </fckeditor:editor>
                 </div>
                 <div style="height:10px;clear:both;"></div>
@@ -112,14 +112,14 @@
               </div>
 
               <div class="checkout_fields">
-                <div style="width:660px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'body', 'errors')}">
+                <div style="width:660px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'body', 'errors')}">
                   <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
                   <fckeditor:editor
                     name="body"
                     width="650"
                     height="400"
                     toolbar="StoritzPress">
-                    ${storageSiteInstance?.body}
+                    ${pressReleaseInstance?.body}
                   </fckeditor:editor>
                 </div>
                 <div style="height:10px;clear:both;"></div>
