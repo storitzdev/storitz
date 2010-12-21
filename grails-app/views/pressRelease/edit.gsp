@@ -60,7 +60,7 @@
             </div>
             </g:hasErrors>
 
-            <g:uploadForm action="save" id="${pressReleaseInstance}">
+            <g:uploadForm action="save" id="${pressReleaseInstance.id}">
               <div class="formInstructions">
                 To create the press release, edit the format for the long release, then create the blurb - this will be used on the main press release page for the list of releases.  Attach the file (PDF preferred)
               </div>
