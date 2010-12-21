@@ -32,7 +32,7 @@ class MigrationController {
         for(img in site.images) {
           fileList.add("**${img.basename}${img.fileLocation.replace(' ','*')}")
           fileList.add("**${img.basename}mid-${img.fileLocation.replace(' ','*')}")
-          fileList.add("**${img.basename}${img.fileLocation.replace(' ','*')}")
+          fileList.add("**${img.basename}thumb-${img.fileLocation.replace(' ','*')}")
         }
         if (site.logo) {
           fileList.add("**${site.logo.basename}logo-${site.logo.fileLocation.replace(' ','*')}")
