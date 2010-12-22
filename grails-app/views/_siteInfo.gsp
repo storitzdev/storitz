@@ -322,7 +322,7 @@
         jwplayer("videoContainer").setup({
             flashplayer: "${resource(file:'/jwplayer/player.swf')}",
             file: "${resource(file:video.fileLocation)}",
-            image: "${resournce(file:video.stillImage)}",
+            image: "${resource(file:video.stillImage)}",
             height: 160,
             width: 282
         });
@@ -330,4 +330,3 @@
     </p:dependantJavascript>
   </div>
 </g:if>
-</div>
