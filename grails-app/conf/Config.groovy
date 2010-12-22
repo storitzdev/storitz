@@ -195,6 +195,7 @@ uiperformance.bundles = [
 ]
 
 uiperformance.exclusions = [
+   "**/jwplayer/*",
    "**/logo_storitz.gif",
    "**/logo_storitz_small.gif",
    "**/storitz_logo*",

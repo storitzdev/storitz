@@ -69,7 +69,7 @@ class VideoController {
         }
         def imageFile = request.getFile("imageFile_0")
         if (imageFile.size > 0 ) {
-          def ext = imageFile.originalFilename.tokenize('.')[-1]
+          def ext = '.' + imageFile.originalFilename.tokenize('.')[-1]
           if (site) {
             fileUploadService.moveFile(videoFile, '/video', imageFile.originalFilename, site.id)
             videoInstance.stillImage = '/video' + fileUploadService.getWebIdPath(site.id) + 'still-' + videoFile.originalFilename + ext

@@ -9,6 +9,12 @@
 
     <script type="text/javascript">
 //<![CDATA[
+    $(document).ready(function() {
+      $("a.embed").click(function(event) {
+        $("div#embed").toggle("fade");
+        return false;
+      });
+    });
 
 //]]>
   </script>
@@ -50,6 +56,13 @@
         </div>
         <div>
           ${videoInstance.caption}
+        </div>
+        <div class="buttons" style="margin-bottom: 0.5em;">
+          <span class="button"><a href="#" class="embed">Embed</a></span>
+          <div id="embed" style="display:none;margin:10px 0;">
+            To embed this video, cut and paste the code from the box and place it in your page:
+            <textarea style="width:600px; height:75px;"><video id="storitzvid" width="640" height="480" src="${resource(absolute:true, file:videoInstance.fileLocation)}" poster="${resource(absolute:true, file:videoInstance.stillImage)}" controls="controls"></video><script type="text/javascript" src="${resource(absolute:true, file:'/jwplayer/jwplayer.js')}"></script><script type="text/javascript">jwplayer("storitzvid").setup({flashplayer: "${resource(absolute:true, file:'/jwplayer/player.swf')}"});</script> </textarea>
+          </div>
         </div>
         <!-- AddThis Button BEGIN -->
         <div class="addthis_toolbox addthis_default_style ">

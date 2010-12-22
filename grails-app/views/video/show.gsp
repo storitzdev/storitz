@@ -123,6 +123,7 @@
         <g:hiddenField name="id" value="${videoInstance?.id}"/>
         <span class="button"><g:actionSubmit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
         <span class="button"><g:actionSubmit action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+        <span class="button"><g:link mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]">View as User</g:link></span>
       </g:form>
     </div>
   </div>
