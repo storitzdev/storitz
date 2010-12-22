@@ -9,6 +9,7 @@ class CostService {
 
     def siteLinkService
     def CShiftService
+    def quikStorService
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
     switch(site.source) {
@@ -18,6 +19,9 @@ class CostService {
 
       case "CS3":
         return CShiftService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
+
+      case "QS":
+        return quikStorService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
 
       default:
         throw new Exception("Unknown service for move in cost calculation")
@@ -34,6 +38,9 @@ class CostService {
       case "CS3":
         return CShiftService.calculateTotals(site, unit, promo, ins, moveInDate)
 
+      case "QS":
+        return quikStorService.calculateTotals(site, unit, promo, ins, moveInDate)
+
       default:
         throw new Exception("Unknown service totals calculation")
     }
@@ -49,6 +56,9 @@ class CostService {
 
       case "CS3":
         return CShiftService.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
+
+      case "QS":
+        return quikStorService.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
 
       default:
         throw new Exception("Unknown service for paid thru date")

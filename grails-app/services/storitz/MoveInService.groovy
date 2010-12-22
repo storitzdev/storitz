@@ -6,6 +6,7 @@ class MoveInService {
 
     def siteLinkService
     def CShiftService
+    def quikStorService
 
     boolean transactional = false
 
@@ -19,6 +20,9 @@ class MoveInService {
 
         case "CS4":
           break
+
+        case "QS":
+          return quikStorService.checkRented(trans)
 
         default:
           throw new Exception("Unknown service for move in")
@@ -36,6 +40,9 @@ class MoveInService {
 
         case "CS4":
           break
+
+        case "CS3":
+          return quikStorService.moveInDetail(trans)
 
         default:
           throw new Exception("Unknown service for move in detail")
@@ -60,6 +67,11 @@ class MoveInService {
           break
 
         case "CS4":
+          break
+
+        case "QS":
+          quikStorService.createTenant(trans)
+          return quikStorService.moveIn(trans)
           break
 
         default:

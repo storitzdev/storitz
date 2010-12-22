@@ -3,11 +3,13 @@ package storitz
 import com.storitz.CenterShift
 import com.storitz.SiteLink
 import com.storitz.StorageSite
+import com.storitz.QuikStor
 
 class FeedService {
 
   def siteLinkService
   def CShiftService
+  def quikStorService
   
   boolean transactional = false
 
@@ -21,6 +23,10 @@ class FeedService {
 
       case "CS3":
         CShiftService.updateSite(storageSiteInstance, stats, writer)
+        break
+
+      case "QS":
+        quikStorService.updateSite(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -38,6 +44,10 @@ class FeedService {
 
       case "CS3":
         CShiftService.updateUnits(storageSiteInstance, stats, writer)
+        break
+
+      case "QS":
+        quikStorService.updateUnits(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -59,6 +69,11 @@ class FeedService {
         CShiftService.loadPromos(centerShift, storageSiteInstance, writer)
         break
 
+      case "QS":
+        def quickStor = (QuikStor)storageSiteInstance.feed
+        quikStorService.loadPromos(quickStor, storageSiteInstance, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -76,6 +91,11 @@ class FeedService {
       case "CS3":
         def centerShift = (CenterShift)storageSiteInstance.feed
         CShiftService.addSitePhone(centerShift, storageSiteInstance, writer)
+        break
+
+      case "QS":
+        def quickStor = (QuikStor)storageSiteInstance.feed
+        quikStorService.addSitePhone(quikStor, storageSiteInstance, writer)
         break
 
       default:

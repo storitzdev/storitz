@@ -316,7 +316,7 @@ class ReportsController {
 
 
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle(dateName).setStyle(groupHeaderStyle).setHeaderStyle(groupHeaderStyle).build();
+            .setTitle(dateName).setWidth(85).setStyle(groupHeaderStyle).setHeaderStyle(groupHeaderStyle).build();
 
     AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
             .setTitle("Move-In Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
@@ -332,11 +332,11 @@ class ReportsController {
 
     SimpleColumn columnEmail = ColumnBuilder.getInstance().
       setColumnProperty("contactPrimary.email", String.class.getName()).
-      setTitle("Email").setWidth(45).build()
+      setTitle("Email").setWidth(85).build()
 
     SimpleColumn columnPhone = ColumnBuilder.getInstance().
       setColumnProperty("contactPrimary.phone", String.class.getName()).
-      setTitle("Phone").setWidth(25).build()
+      setTitle("Phone").setWidth(60).build()
 
     SimpleColumn columnMonthly = ColumnBuilder.getInstance().
       setColumnProperty("monthlyRate", BigDecimal.class.getName()).

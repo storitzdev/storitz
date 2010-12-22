@@ -26,29 +26,48 @@
         <h1>Storitz Supports</h1>
 
         <p>
-          Here at Storitz we are involved with and support two charity organizations, the Hirshberg Foundation for Pancreatic Cancer Research and Kure It Cancer Research.
-        </p>
-        <p>
+          Storitz knows that there is more to running a business than an awesome looking website and a blank space for your credit card number.  We want to do good in every sense of the phrase.
+          That’s why it’s important to us and to our company to give back to our community.  This community includes our clients, our customers and our employees.
+          In this spirit, Storitz has teamed with local and national organizations to contribute to causes we believe in.
+          We continue to seek new organizations to support both as a company and as individuals.  For more information about Storitz as a corporate sponsor,
+          send us an <g:link controller="contactUs" action="create">email</g:link>.
         </p>
         <h2>Hirshberg Foundation for Pancreatic Cancer Research</h2>
         <p>
-          With no cure and the worst survival rate of all cancers, Pancreatic Cancer has taken the lives of loved ones all around us. In an effort to help raise awareness for Pancreatic Cancer Research,
-          Storitz employees joined the cause this past October by supporting the <a href="http://blog.storitz.com/2010/11/storitz-supports/">13th Annual L.A. Cancer Challenge</a> with a
-          sponsored booth and some employees even running in the race.
+          The Hirshberg Foundation for Pancreatic Cancer Research was founded in 1997 in memory of Ronald Hirshberg who died of pancreatic cancer at the age of 54.
+          In his honor, and that of the thousands of people who are diagnosed with the disease each year, the Foundation aims to find a cure for pancreatic cancer.
+          The Foundation is also dedicated to creating a premier Pancreatic Cancer Center where all the needs of pancreatic cancer patients can be met; to funding
+          projects and programs designed to improve patient care, treatment, and survival rates; to be recognized as a patient support reference for pancreatic
+          cancer patients and their families and to integrate and unite generations through physical fitness participation which creating public awareness and
+          raising money to find a cure for pancreatic cancer.  
         </p>
         <p>
-          At Storitz we are proud to help contribute to foundations such as the Hirshberg Foundation for Pancreatic Cancer Research in their search for a cure.
+          For more information, visit <a href="pancreatic.org" target="_blank">pancreatic.org</a>. 
         </p>
+        <p>
+          For our part, Storitz employees joined the cause this past October by supporting the <a href="http://blog.storitz.com/2010/11/storitz-supports/">13th Annual L.A. Cancer Challenge</a>
+          with a sponsored booth and some employees even running in the race. 
+        </p>
+        <div>
+          <div style="margin-right:auto;margin-left:auto;">
+            <storitz:image src='supports/LACancerChallenge-small.jpg' width='300' height='402' border='0'/>
+            <storitz:image src='supports/LACancerChlngIndianaandBettleJuice-small.jpg' width='300' height='402' border='0'/>
+          </div>
+          <div style="margin-right:auto;margin-left:auto;">
+            <storitz:image src='supports/StoritzBoothatLACancerChlng_10_31_2010-small.jpg' width='600' height='448' border='0'/>
+          </div>
+        </div>
         <h2>Kure It Kidney Cancer Research</h2>
         <p>
-          Though not highly publicized, Kidney Cancer is one of the most common cancers in both men and women.  That’s why Storitz believes it is important to
-          contribute to the cause by providing more funding for kidney research. Kure It has teamed with the California Self Storage Association to establish an
-          <a href="http://blog.storitz.com/2010/12/doing-good-self-storage-kure-it/">initiative that will give $.50</a> from every rental directly to storage Kure It.
-          This is a great way to help support the cause, one rental at a time. 
+          Kure it was founded by Barry Hoeven in 1998 when he himself was diagnosed with the disease.  Since that time, Kure it has partnered with many organizations,
+          including the California Self Storage Association and US Storage Centers to provide direct funding for innovative research for a cure.  The money raised
+          by Kure It directly supports researchers who are committed to finding a cure for kidney and other types of cancers.
         </p>
         <p>
-          Storitz is pleased to support our clients efforts in conjunction with Kure It, including <a href="http://www.storitz.com/self-storage/metro/Carson/CA">US Storage Centers</a>,
-          who have donated generously to the Foundation. 
+          Storitz is a proud member of the California Self Storage Association and supporter of Kure it in its endeavors.
+        </p>
+        <p>
+          For more information, visit <a href="kureit.org" target="_blank">kureit.org</a>
         </p>
       </div>
     </div>

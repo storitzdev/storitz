@@ -227,12 +227,12 @@
             <div class="leftSectionHeader">
               Storitz Supports
             </div>
-            <a href="http://www.pancreatic.org/" target="_blank">
+            <g:link controller="static" action="supports">
               <storitz:image src='hirshberg-banner.gif' width="148" height="57" border="0"/>
-            </a>
-            <a href="http://www.kureit.org/" target="_blank">
+            </g:link>
+            <g:link controller="static" action="supports">
               <storitz:image src='kure-it-banner.gif' width="148" height="57" border="0"/>
-            </a>
+            </g:link>
           </div>
         </div>
         <div class="rightColumn">
