@@ -44,6 +44,11 @@ class UrlMappings {
         action = "release"
       }
 
+      name video: "/video/$date/$title/$id" {
+        controller = "video"
+        action = "video"
+      }
+
       "/sitemap" (controller:"siteMap")
 
       "/sitemapGeo" (controller:"siteMap", action:"geo")

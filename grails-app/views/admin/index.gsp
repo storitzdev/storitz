@@ -30,6 +30,7 @@
           <li><g:link controller="metro" action="list">Manage Metro Descriptions</g:link> </li>
           <li><g:link controller="metroEntry" action="list">Manage Metro Neighborhoods/Zips</g:link> </li>
           <li><g:link controller="pressRelease" action="list">Manage Press Releases</g:link> </li>
+          <li><g:link controller="video" action="list">Manage Videos</g:link> </li>
         </sec:ifAnyGranted>
         <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
         <li><g:link controller="user" action="list">Show Users</g:link> </li>

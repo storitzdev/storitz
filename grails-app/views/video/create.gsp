@@ -10,6 +10,10 @@
       <script type="text/javascript">
 //<![CDATA[
 
+        function setupSiteSelector() {
+          jQuery("input#sitename").autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+        }
+
         $(document).ready(function() {
           var dateFormat = '%m/%d/%Y';
 
@@ -20,7 +24,8 @@
               buttonImageOnly: true
           });
 
-
+          setupSiteSelector();
+          
         });
         //]]>
 
@@ -42,27 +47,27 @@
 
         <div class="buttons">
             <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-            <span class="button"><g:link action="list">Press Release List</g:link></span>
+            <span class="button"><g:link action="list">Video List</g:link></span>
         </div>
 
         <div class="body">
 
           <div class="price_options checkout_header white">
-            Create Press Release
+            Create Video
           </div>
 
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${pressReleaseInstance}">
+            <g:hasErrors bean="${videoInstance}">
             <div class="errors">
-                <g:renderErrors bean="${pressReleaseInstance}" as="list" />
+                <g:renderErrors bean="${videoInstance}" as="list" />
             </div>
             </g:hasErrors>
 
             <g:uploadForm action="save" >
               <div class="formInstructions">
-                To create the press release, edit the format for the long release, then create the blurb - this will be used on the main press release page for the list of releases.  Attach the file (PDF preferred)
+                To create the video page, make sure to have the video and the still image handy.  Enter a caption and title and choose a release date
               </div>
 
               <div class="checkout_section_header">
@@ -70,18 +75,18 @@
               </div>
 
               <div class="checkout_fields">
-                <div style="width:400px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'title', 'errors')}">
-                  <g:textField id="title" name="title" style="width: 380px;" value="${fieldValue(bean:pressReleaseInstance,field:'title')}" />
+                <div style="width:400px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'title', 'errors')}">
+                  <g:textField id="title" name="title" style="width: 380px;" value="${fieldValue(bean:videoInstance,field:'title')}" />
                 </div>
-                <div style="width:150px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'releaseDate', 'errors')}">
-                  <g:textField id="releaseDate" name="releaseDate" style="width: 100px;" value="${pressReleaseInstance?.releaseDate?.format('MM/dd/yyyy')}" />
+                <div style="width:150px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'releaseDate', 'errors')}">
+                  <g:textField id="releaseDate" name="releaseDate" style="width: 100px;" value="${videoInstance?.releaseDate?.format('MM/dd/yyyy')}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
 
               <div class="checkout_labels">
                 <div class="checkout_name" style="width:400px;">
-                  <label for="title">Press Release Title</label>
+                  <label for="title">Video Title</label>
                 </div>
                 <div class="checkout_name" style="width:400px;">
                   <label for="title">Release Date</label>
@@ -90,48 +95,41 @@
               </div>
 
               <div class="checkout_section_header">
-                Blurb (first paragraph or so...)
+                Video Caption
               </div>
 
               <div class="checkout_fields">
-                <div style="width:660px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'blurb', 'errors')}">
+                <div style="width:660px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'caption', 'errors')}">
                   <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
                   <fckeditor:editor
-                    name="blurb"
-                    width="650"
-                    height="300"
-                    toolbar="StoritzPress">
-                    ${pressReleaseInstance?.blurb}
-                  </fckeditor:editor>
-                </div>
-                <div style="height:10px;clear:both;"></div>
-              </div>
-
-              <div class="checkout_section_header">
-                Press Release Body
-              </div>
-
-              <div class="checkout_fields">
-                <div style="width:660px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'body', 'errors')}">
-                  <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
-                  <fckeditor:editor
-                    name="body"
+                    name="caption"
                     width="650"
                     height="400"
                     toolbar="StoritzPress">
-                    ${pressReleaseInstance?.body}
+                    ${videoInstance?.caption}
                   </fckeditor:editor>
                 </div>
                 <div style="height:10px;clear:both;"></div>
               </div>
 
               <div class="checkout_section_header">
-                PDF file
+                Video file
               </div>
 
               <div class="checkout_labels">
                 <div class="checkout_name" style="width:400px;">
-                  <input type="file" style="width:250px;" name="pdfFile" class="multi" maxlength="1" accept="pdf"/>
+                  <input type="file" style="width:250px;" name="videoFile" class="multi" maxlength="1" accept="mp4|mov"/>
+                </div>
+                <div style="height:10px;clear:both;"></div>
+              </div>
+
+              <div class="checkout_section_header">
+                Still Image
+              </div>
+
+              <div class="checkout_labels">
+                <div class="checkout_name" style="width:400px;">
+                  <input type="file" style="width:250px;" name="imageFile" class="multi" maxlength="1" accept="jpg|jpeg"/>
                 </div>
                 <div style="height:10px;clear:both;"></div>
               </div>
@@ -141,8 +139,8 @@
               </div>
 
               <div class="checkout_fields">
-                <div style="width:400px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'tags', 'errors')}">
-                  <g:textField id="tags" name="tags" style="width: 400px;" value="${fieldValue(bean:pressReleaseInstance,field:'tags')}" />
+                <div style="width:400px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'tags', 'errors')}">
+                  <g:textField id="tags" name="tags" style="width: 400px;" value="${fieldValue(bean:videoInstance,field:'tags')}" />
                 </div>
                 <div style="clear:both;"></div>
               </div>
@@ -154,11 +152,29 @@
                 <div style="height:10px;clear:both;"></div>
               </div>
 
-                </div>
-              <div class="buttons">
-                  <span class="button"><input class="save" type="submit" value="Save" /></span>
+              <div class="checkout_section_header">
+                Storage Site
               </div>
-            </g:uploadForm>
+
+              <div class="checkout_fields">
+                <div style="width:400px;" class="checkout_value">
+                  <g:textField id="sitename" name="sitename" style="width: 400px;" value="${videoInstance?.site?.title}" />
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div class="checkout_labels">
+                <div class="checkout_name" style="width:400px;">
+                  <label for="title">Related Storage Facility</label>
+                </div>
+                <div style="height:10px;clear:both;"></div>
+              </div>
+
+            <div class="buttons">
+                <span class="button"><input class="save" type="submit" value="Save" /></span>
+            </div>
+          </g:uploadForm>
+        </div>
       </div>
     </div>
   </body>

@@ -64,6 +64,7 @@ class StorageSiteController {
 
     def username  = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
+    println "Username ${username} hasrole admin: ${UserRole.userHasRole(user, 'ROLE_ADMIN')}"
     params.sort = 'title'
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
