@@ -46,6 +46,7 @@
   </g:if>
     showTotals();
     setupValidation();
+    setupEmbed();
     ajaxFormUpdate();
     ajaxServerPoll();
     setupAnalytics();
@@ -96,6 +97,9 @@
                 <li><a href="#tab_summary">Description</a></li>
                 <li><a href="#tab_photos">Photos</a></li>
                 <li><a href="#tab_directions">Map &amp; Directions</a></li>
+                <g:if test="${video}">
+                  <li><a href="#tab_video">Video</a></li>
+                </g:if>
               </ul>
               <div id="tab_summary">
                 <div class="left">
@@ -158,6 +162,54 @@
               <div id="tab_directions">
                 <g:render template="/directions" />
               </div>
+              <g:if test="${video}">
+                <div id="tab_video">
+                  <h1>${video.title}</h1>
+                  <h3>${video.releaseDate.format('MM-dd-yyyy')}</h3>
+
+                  <p>
+                    <div>
+                      <div id="videoContainer"></div>
+                    </div>
+                    <p:dependantJavascript>
+                    <script type="text/javascript">
+                        jwplayer("videoContainer").setup({
+                            flashplayer: "${resource(file:'/jwplayer/player.swf')}",
+                            file: "${resource(file:video.fileLocation)}",
+                            image: "${resource(file:video.stillImage)}",
+                            height: 480,
+                            width: 640
+                        });
+                    </script>
+                    </p:dependantJavascript>
+                  </p>
+                  <div>
+                    ${video.caption}
+                  </div>
+                  <div class="buttons" style="margin-bottom: 0.5em;">
+                    <span class="button"><a href="#" class="embed">Embed</a></span>
+                    <div id="embed" style="display:none;margin:10px 0;">
+                      To embed this video, cut and paste the code from the box and place it in your page:
+                      <textarea style="width:600px; height:75px;"><video id="storitzvid" width="640" height="480" src="${resource(absolute:true, file:video.fileLocation)}" poster="${resource(absolute:true, file:video.stillImage)}" controls="controls"></video><script type="text/javascript" src="${resource(absolute:true, file:'/jwplayer/jwplayer.js')}"></script><script type="text/javascript">jwplayer("storitzvid").setup({flashplayer: "${resource(absolute:true, file:'/jwplayer/player.swf')}"});</script> </textarea>
+                    </div>
+                  </div>
+                  <!-- AddThis Button BEGIN -->
+                  <div class="addthis_toolbox addthis_default_style ">
+                  <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4d11385a59ec26da" class="addthis_button_compact">Share</a>
+                  <span class="addthis_separator">|</span>
+                  <a class="addthis_button_preferred_1"></a>
+                  <a class="addthis_button_preferred_2"></a>
+                  <a class="addthis_button_preferred_3"></a>
+                  <a class="addthis_button_preferred_4"></a>
+                  </div>
+                  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4d11385a59ec26da"></script>
+                  <!-- AddThis Button END -->
+                  <p>
+                    <span style="font-weight:bold;">Tags:</span>${video.tags}
+                  </p>
+                  
+              </div>
+              </g:if>
             </div>
             <div style="clear:both;"></div>
           </div>

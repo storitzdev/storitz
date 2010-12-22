@@ -309,24 +309,3 @@
   <div class="left icon_text">Elevator Available</div>
   <div style="clear: both;"></div>
 </g:if>
-<g:if test="${video}">
-  <div class="leftSection">
-    <div class="leftSectionHeader">
-      Video
-    </div>
-    <div class="videoContainer">
-      <div id="videoContainer"></div>
-    </div>
-    <p:dependantJavascript>
-    <script type="text/javascript">
-        jwplayer("videoContainer").setup({
-            flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-            file: "${resource(file:video.fileLocation)}",
-            image: "${resource(file:video.stillImage)}",
-            height: 160,
-            width: 282
-        });
-    </script>
-    </p:dependantJavascript>
-  </div>
-</g:if>

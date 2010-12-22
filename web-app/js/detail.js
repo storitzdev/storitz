@@ -165,6 +165,13 @@ function doAnalytics() {
     s.parentNode.insertBefore(ga, s);
 }
 
+function setupEmbed() {
+    $("a.embed").click(function(event) {
+      $("div#embed").toggle("fade");
+      return false;
+    });
+}
+
 function setupJQueryTabs() {
     $("#operatingHours").tabs();
     $('#detail_tabs').tabs();
