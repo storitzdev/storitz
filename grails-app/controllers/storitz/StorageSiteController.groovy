@@ -531,12 +531,14 @@ class StorageSiteController {
 
     UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : bestUnit?.unitType
 
+    def video = Video.findBySite(site)
+
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: "Storitz self-storage for ${site.title} - located in ${site.city}, ${site.state.fullName} ${site.zipcode}",
             shortSessionId:session.shortSessionId, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
-            promoId:params.promoId, insuranceId:insuranceId]
+            promoId:params.promoId, insuranceId:insuranceId, video:video]
   }
 
   def directions = {
