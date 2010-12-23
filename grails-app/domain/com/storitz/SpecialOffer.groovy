@@ -14,6 +14,7 @@ class SpecialOffer {
     waiveAdmin(nullable: true)
     endDate(nullable:true)
     promoSize(nullable:true)
+    unitType(nullable:true)
   }
 
   String code
@@ -32,4 +33,5 @@ class SpecialOffer {
 
   Date endDate
   StorageSize promoSize
+  String unitType        // this helps associate a given offer with a particular unit type
 }

@@ -45,7 +45,6 @@
         var oldSearchAddr;
         var addressChange = false;
         var searchSize = ${searchSize};
-        var searchSizeDesc;
         var searchDate;
         var helpFadeout = null;
         var baseURL = '${request.contextPath}/self-storage/';
@@ -60,6 +59,8 @@
         var firstDraw = false;
         var resultTable;
         var savedTableId;
+        var zoom = ${zoom};
+        var redraw = false;
 
         <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>
         <g:each in="${0..25}" var="i">
@@ -68,9 +69,9 @@
         </g:each>
 
         function createMap() {
-          var iploc  = new google.maps.LatLng(${lat}, ${lng});
+          var iploc  = new google.maps.LatLng(searchLat, searchLng);
           var myOptions = {
-            zoom: ${zoom},
+            zoom: zoom,
             center: iploc,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -143,7 +144,15 @@
           $('#mapStatus').html(statusText).fadeIn();
           setupMap();
 
+          if (redraw) {
+            redrawMap();
+            redraw = false;
+          }
+
         }
+
+
+$(window).trigger( 'hashchange' );
 
 //]]>
       </script>

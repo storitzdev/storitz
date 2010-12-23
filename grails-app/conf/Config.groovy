@@ -159,6 +159,7 @@ uiperformance.bundles = [
             "jquery.maskedinput",
             "jquery.validate.min",
             "jquery.ui.selectmenu",
+            "jquery.ba-bbq",
             "json2",
             "jwplayer"
             ]],

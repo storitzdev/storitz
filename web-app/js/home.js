@@ -195,7 +195,6 @@ function showAddress(address, size, date) {
     }
     searchSize = size;
     searchDate = date;
-    searchSizeDesc = storageSize[size];
 
     if (geocoder && validAddr) {
         geocoder.geocode({ 'address': address}, function(results, status) {
@@ -519,6 +518,7 @@ function markerClick(feature) {
     _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker click']);
     $('div#mapInfoWin').parent().css('overflow', 'hidden');
     $('a.mapIcon').click(function(event) {
+        buildState();
         _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker detail']);
     });
 }
@@ -538,7 +538,12 @@ function setupMap() {
         var mapDiv = $(this).parent().find('.map_icon');
         var mapId = mapDiv.attr('id').substring(8);
         _gaq.push(['funnelTracker._trackEvent', 'home', 'results', 'table click', mapId]);
+        buildState();
         window.location = siteLink(features[mapId]) + (features[mapId].promoId ? '&promoId=' + features[mapId].promoId : '');
+    });
+    $("div.stRentMe a").click(function(event){
+      buildState();
+      return true;  
     });
     $('#stresults tbody tr').mouseenter(function(event) {
         var mapDiv = $(this).find('.map_icon');
@@ -586,6 +591,22 @@ function updateMetroBox(address) {
     });
 }
 
+function buildState() {
+    var params = new Object();
+    if (getAddress() != '') {
+        params.address = getAddress();
+    }
+    if (getDate() != '') {
+        params.date = getDate();
+    }
+    params.searchSize = $('#size').val();
+    params.zoom = map.getZoom();
+    params.lat = map.getCenter().lat();
+    params.lng = map.getCenter().lng();
+    params.redraw = true;
+    $.bbq.pushState(params, 0);
+}
+
 $(document).ready(function() {
 
   setupCalendar();
@@ -597,6 +618,30 @@ $(document).ready(function() {
   setupTable();
   setupResults();
   setupAnalytics();
+});
+
+$(window).bind('hashchange', function(e) {
+    var url = e.fragment;
+    var params = $.deparam.fragment(url);
+    if (params.zoom && params.lat && params.lng) {
+        searchLat = params.lat;
+        searchLng = params.lng;
+        zoom = parseInt(params.zoom);
+        redraw = params.redraw;
+    }
+    if (params.searchSize) {
+        searchSize = parseInt(params.searchSize);
+        $("select#size").val(searchSize);
+    }
+    if (params.date) {
+        searchDate = params.date;
+        $('input#date').val(searchDate);
+    }
+    if (params.address) {
+        searchAddr = params.address;
+        $('input#address').val(params.address);
+    }
+    // TODO - set sort order for table
 });
 
 // setup for google analytics

@@ -79,9 +79,9 @@
               </div>
               <div class="returnLink right">|</div>
               <div class="returnLink right" style="padding: 0 0.5em;">
-                <g:link controller="home" action="index" params="[size: params.size, date: params.date, address: params.address]">
+                <a href="#" onClick="window.history.back();return false;">
                  Back to Seach Results
-                </g:link>
+                </a>
               </div>
             </div>
             <div style="height: 25px; clear: both;"></div>
