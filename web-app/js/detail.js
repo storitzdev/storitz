@@ -10,6 +10,9 @@ function rentmeClick() {
             $('#transMoveInDate').addClass('validation-failed');
             return;
         }
+        var params = new Object();
+        params.fs = true;
+        $.bbq.pushState(params, 0);
         _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentme']);
         $('#transMoveInDate').removeClass('validation-failed');
         // TODO - check if all things are cleared
@@ -183,6 +186,21 @@ function setupJQueryTabs() {
         }
     });
 }
+
+$(window).bind('hashchange', function(e) {
+  var url = e.fragment;
+  var params = $.deparam.fragment(url);
+  if (params.fs) {
+    $('#rentalForm').show();
+    $('#detailInfo').hide();
+  } else {
+    $('#rentalForm').hide();
+    $('#detailInfo').show();
+  }
+
+});
+
+$(window).trigger( 'hashchange' );
 
 var _gaq = _gaq || [];
 _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],

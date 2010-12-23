@@ -19,15 +19,6 @@
   var srcSpinner = ${p.imageLink(src:'ajax-loader.gif')};
 
 
-  function prevStep() {
-    window.location = "${createLink(mapping:'siteLink', controller:'storageSite', action:'detail',
-      params:[id:rentalTransactionInstance?.site.id, searchSize:unit?.unitsize?.id, unitType:unit?.unitType,
-      promoId:rentalTransactionInstance?.promoId, city:rentalTransactionInstance?.site.city, site_title:rentalTransactionInstance?.site.title, returnForm: true,
-      state:rentalTransactionInstance?.site.state.display, insuranceId:rentalTransactionInstance?.insuranceId,
-      rentalTransactionId:rentalTransactionInstance?.id])}" + "&date=${rentalTransactionInstance?.moveInDate.format('MM/dd/yy')}";
-  }
-
-
 //]]>
   </script>
   <p:javascript src="callCenterPolling"/>
@@ -345,7 +336,7 @@
                 </div>
                 <div style="clear:both; margin-top: 20px;">
                   <div class="right"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-pay-now.png" alt="Pay Now"/></div>
-                  <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="prevStep(); return false" alt="Prev"/></div>
+                  <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onClick="window.history.back();" alt="Prev"/></div>
                   <div style="clear:both;"></div>
                 </div>
               </g:form>
