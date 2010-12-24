@@ -11,6 +11,18 @@ class QuikStorService {
 
     static transactional = false
 
+    def processLocations(QuikStor quikStor) {
+
+    }
+  
+    def createSiteUsers(QuikStor quikStor) {
+
+    }
+
+    def createSiteTaxes(QuikStor quikStor) {
+
+    }
+
     def updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
 
     }
