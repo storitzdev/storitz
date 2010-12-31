@@ -53,12 +53,12 @@
             <td>${fieldValue(bean: site, field: "title")}</td>
 
             <td>
-              <g:link mapping="metro" absolut="true" params="[city:site.city, state:site.state.display]">${createLink(mapping:'metro', absolute:true, params:[city:site.city, state:site.state.display])}</g:link>
+              <g:link mapping="metro2" absolut="true" params="[city:site.city, state:site.state.display]">${createLink(mapping:'metro2', absolute:true, params:[city:site.city, state:site.state.display])}</g:link>
             </td>
 
             <td>
               <g:link mapping="siteLink" absolute="true" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id]">
-                ${createLink(mapping:'siteLink', absolute:true, params:[city:site.city, state:site.state.display, site_title:site.title, id:site.id])}
+                ${createLink(mapping:'siteLink2', absolute:true, params:[site_title:site.title, id:site.id])}
               </g:link>
             </td>
 

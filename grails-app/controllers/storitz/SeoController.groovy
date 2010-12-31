@@ -99,4 +99,12 @@ class SeoController {
         }
       }
     }
+
+    def redirectState = {
+      response.status = 301
+      response.setHeader("Location", g.createLink(mapping:'state2', params:[state:params.state]) as String)
+      render("")
+      return false
+    }
+
 }

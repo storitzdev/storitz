@@ -9,8 +9,13 @@
   <div class="left" style="width:635px;">
     <div>
       <div class="left bannerMasthead">
-        <div class="mastheadCenter mastheadTop">Welcome to Storitz</div>
-        <div class="mastheadCenter mastheadBottom">Let's find self storage that's right for you.</div>
+        <div class="mastheadCenter mastheadTop"><h2 class="mastheadTop">The Storitz Advantage:</h2></div>
+        <g:if test="${params.controller =='home'}">
+          <div class="mastheadCenter mastheadBottom"><h1 class="mastheadBottom">Find and rent self storage right here, right now.</h1></div>
+        </g:if>
+        <g:else>
+          <div class="mastheadCenter mastheadBottom"><h2 class="mastheadBottom">Find and rent self storage right here, right now.</h2></div>
+        </g:else>
       </div>
       <div class="left tollFree">
         <div style="font-family:verdana;font-size:9px;text-transform:capitalize;color:#266e00;line-height:15px;margin: 10px 0 0 34px;">NEED ASSISTANCE?</div>

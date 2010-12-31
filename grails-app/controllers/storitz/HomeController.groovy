@@ -10,24 +10,26 @@ class HomeController {
   def mapService
   def geocodeService
   def costService
+  def lat
+  def lng
+  def zip
+  def city
+  def state
 
   def index = {
 
-    def lat
-    def lng
-    def zip
-    def city
-    def state
 
     def geoResult
+    def zipSearch = (params.zip || params.zipSearch)
 
+    println "Params are : ${params.dump()}"
     if (params.zip || params.address || (params.city && params.state)) {
 
         if (params.zip) {
           geoResult = geocodeService.geocode(params.zip)
           zip = params.zip
           if (params.city) {
-            city = params.city
+            city = params.city.replaceAll('-', ' ')
           }
           if (params.state) {
             state = params.state
@@ -40,33 +42,11 @@ class HomeController {
           geoResult = geocodeService.geocode(address)
         } else {
           geoResult = geocodeService.geocode("${params.city}, ${params.state}")
-          city = params.city
+          city = params.city.replaceAll('-', ' ')
           state = params.state
 
         }
-
-        if (geoResult.Placemark) {
-          lng = geoResult.Placemark[0].Point.coordinates[0]
-          lat = geoResult.Placemark[0].Point.coordinates[1]
-          if (geoResult.Placemark[0].AddressDetails?.Country?.AdministrativeArea?.Locality?.DependentLocality) {
-            if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality?.PostalCode?.PostalCodeNumber
-            if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
-            if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.DependentLocalityName
-          } else if (geoResult.Placemark[0].AddressDetails?.Country?.AdministrativeArea?.SubAdministrativeArea?.Locality) {
-            if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
-            if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
-            if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality?.PostalCode?.PostalCodeNumber
-          }
-
-        } else {
-          def loc = mapService.getGeoIp(servletContext, request)
-
-          lat = loc.latitude
-          lng = loc.longitude
-          zip = loc.postalCode
-          if (!city) city = loc.city
-          if (!state) state = loc.region
-        }
+        handleGeocode(geoResult)
 
     } else {
       // get IP to geo
@@ -78,6 +58,11 @@ class HomeController {
         zip = loc.postalCode
         city = loc.city
         state = loc.region
+
+        if (!zip) {
+          geoResult = geocodeService.geocode(lat as double,lng as double)
+          handleGeocode(geoResult)
+        }
       }
     }
     if (!lat || !lng) {
@@ -136,7 +121,7 @@ class HomeController {
       }
     }
 
-    def title = "Self storage units, mini storage in ${params.address ? params.address : city + ', ' + state}${metroEntry && zip ? ' ' + zip : ''} - Storitz"
+    def title = "${params.address ? params.address : city + ', ' + state} Rent Best Price Guaranteed Self Storage - Storitz"
     // optimize zoom level
     def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
 
@@ -186,15 +171,10 @@ class HomeController {
       }
     }
 
-    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice]
+    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice, zipSearch:zipSearch]
   }
 
   def updateMetro = {
-    def lat
-    def lng
-    def zip
-    def city
-    def state
 
     def geoResult
 
@@ -206,22 +186,8 @@ class HomeController {
 
     geoResult = geocodeService.geocode(address)
 
-    if (geoResult.Placemark) {
-      lng = geoResult.Placemark[0].Point.coordinates[0]
-      lat = geoResult.Placemark[0].Point.coordinates[1]
-      if (geoResult.Placemark[0].AddressDetails?.Country?.AdministrativeArea?.Locality?.DependentLocality) {
-        if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality?.PostalCode?.PostalCodeNumber
-        if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
-        if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.DependentLocalityName
-      } else if (geoResult.Placemark[0].AddressDetails?.Country?.AdministrativeArea?.SubAdministrativeArea?.Locality) {
-        if (!state) state = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
-        if (!city) city = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
-        if (!zip) zip = geoResult.Placemark[0].AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality?.PostalCode?.PostalCodeNumber
-      }
+    handleGeocode(geoResult)
 
-    } else {
-      // TODO - return without results
-    }
     def neighborhoodList = null
     def metro
 
@@ -272,6 +238,50 @@ class HomeController {
     JSON.use("default")
     render (status: 200, contentType:"application/json", text:"{ \"metro\":${metro as JSON}, \"neighborhoodList\": ${neighborhoodList as JSON}, \"neighborhood\":${neighborhood as JSON} }")
 
+  }
+
+  private handleGeocode(geoResult) {
+    if (geoResult.results) {
+      lng = geoResult.results[0].geometry.location.lng
+      lat = geoResult.results[0].geometry.location.lat
+      for(comp in geoResult.results[0].address_components) {
+        switch(comp.types[0]) {
+          case "locality":
+            city = comp.long_name
+            break
+          case "administrative_area_level_1":
+            state = comp.short_name
+            break
+          case "postal_code":
+            zip = comp.long_name
+            break
+        }
+      }
+    } else {
+      def loc = mapService.getGeoIp(servletContext, request)
+
+      lat = loc.latitude
+      lng = loc.longitude
+      zip = loc.postalCode
+      if (!city) city = loc.city
+      if (!state) state = loc.region
+    }
+  }
+
+  def redirectGeo = {
+    // /self-storage-$zip-$city-$state
+    response.status = 301
+    response.setHeader("Location", g.createLink(mapping:'geo2', params:[zip:params.zip]) as String)
+    render("")
+    return false
+  }
+
+  def redirectMetro = {
+    // /self-storage-$city-$state
+    response.status = 301
+    response.setHeader("Location", g.createLink(mapping:'metro2', params:[state:params.state, city:params.city.replaceAll(' ','-')]) as String)
+    render("")
+    return false
   }
 
 }

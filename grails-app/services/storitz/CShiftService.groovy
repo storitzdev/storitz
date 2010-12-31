@@ -1101,11 +1101,12 @@ class CShiftService {
     // memo as a new Storitz tenant
     def centerShift = (CenterShift)rentalTransaction.site.feed
     if (rentalTransaction.tenantId) {
+      def noteText = "Storitz tenant: (Storitz transaction id: ${rentalTransaction.id})\n\tTotal Move-In: ${rentalTransaction.cost}\n\tPromotion: ${rentalTransaction.promoName ? rentalTransaction.promoName : 'none'}\n\tInsurance: ${rentalTransaction.insuranceCost}\n\tCall 877-456-2929 if you have any questions"
       insertAccountNote(centerShift.location.webUrl,
               centerShift.userName,
               centerShift.pin,
-              rentalTransaction.site.sourceId,
-              "Storitz tenant")
+              rentalTransaction.tenantId,
+              noteText)
     }
     rentalTransaction.save(flush:true)
   }

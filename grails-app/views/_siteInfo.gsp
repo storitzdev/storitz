@@ -5,8 +5,8 @@
     </g:if>
   </div>
   <div id="site_address">
-    <div class="title">
-      ${site.title}
+    <div>
+      <h1 class="title">${site.title}</h1>
     </div>
     <div>
       ${site.address}
@@ -26,6 +26,7 @@
 </div>
 <div style="clear:both;"></div>
 <div class="siteInfoText">
+  <h2 class="section_header">Hours of Operation:</h2>
   <div id="operatingHours">
     <ul>
       <li><a href="#officeHours">Office</a></li>
@@ -249,8 +250,8 @@
     </div>
   </g:if>
 </div>
-<div style="padding: 18px 0 10px;" class="section_header">
-  Site Features:
+<div style="padding: 18px 0 10px;">
+  <h2 class="section_header">Site Features:</h2>
 </div>
 
 <g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">

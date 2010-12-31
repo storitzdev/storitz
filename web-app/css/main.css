@@ -29,6 +29,16 @@ h1 {
     margin: .8em 0 .3em 0;
 }
 
+h3.metro {
+    font: bold 10px verdana, arial, helvetica, sans-serif;
+    margin: .25em 0;
+}
+
+h4 {
+    font-weight:bold;
+    margin: .25em 0;
+}
+
 ul {
     padding-left: 15px;	
 }
@@ -272,21 +282,30 @@ div.mastheadCenter {
 
 div.mastheadTop {
     margin: 13px 0 0 20px;
+}
+
+h2.mastheadTop {
     color: #000;
     font: 15px verdana, arial, helvetica, sans-serif;
+    margin:0;
 }
 
 div#snowman {
     background-image: url("../images/storitz-snowman-with-more-boxes.png");
-    margin: 40px 0 0 -420px;
+    margin: 40px 0 0 -100px;
     width: 386px;
     height: 104px;
+    position: absolute;
 }
 
 div.mastheadBottom {
     margin: 0 0 0 20px;
+}
+
+h1.mastheadBottom,h2.mastheadBottom {
     color: #0f93e7;
     font: 15px verdana, arial, helvetica, sans-serif;
+    margin:0;
 }
 
 div.topnavText {
@@ -456,12 +475,16 @@ div.resultsBar {
 }
 
 div.sbResults {
-    font: 12px verdana, arial, helvetica, sans-serif;
-    font-weight: bold;
     margin-left: 20px;
-    line-height: 32px;
     float:left;
     width: 110px;
+}
+
+h2.sbResults {
+    font: 12px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 32px;
+    margin: 0;
 }
 
 div.sbText {
@@ -716,12 +739,27 @@ table.costTotals th {
     border-bottom: 1px #ccc solid;
 }
 
-div.leftSectionHeader {
+.leftSectionHeader {
     font-family: verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     color: #00529b;
     font-size: 14px;
     margin-bottom: 10px;
+}
+
+.inputSectionHeader {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+    color: #00529b;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.inputSectionText {
+    font-family: verdana, arial, helvetica, sans-serif;
+    color: #00529b;
+    font-size: 10px;
+    margin: 10px 0;
 }
 
 #sizeHelp {
@@ -842,6 +880,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
     font-weight: bold;
     font-size: 15px;
     padding: 0.5em 0;
+    color: black;
 }
 
 #directionMap, #directionMapDestination {
@@ -941,6 +980,7 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 .section_header {
     font: 12px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+    margin: 0;
 }
 
 .left15 {
@@ -1306,6 +1346,7 @@ p.footer {
     color: #134a9a;
     font: 14px verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+    margin: 0;
 }
 
 .descriptionText {
@@ -1396,13 +1437,18 @@ p.descriptionText {
 	background:url(../images/icon-safety-security.png) no-repeat left center;
 	border-bottom: 1px solid #dfdfdf;
 	border-top:none;
-	color:#134b98;
-	font-size:12px;
-	font-weight:bold;
 	margin:0;
 	padding:10px 0 10px 45px;
 	vertical-align:middle;
 }
+
+.listHeader {
+    color:#134b98;
+    font-size:12px;
+    font-weight:bold;
+    margin: 0;
+}
+
 #featuresList li.convenience {
 	background:url(../images/icon-convenience.png) no-repeat left center;
 	border-bottom: 1px solid #dfdfdf;

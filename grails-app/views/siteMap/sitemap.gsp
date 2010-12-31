@@ -15,21 +15,21 @@
   </url>
 <g:each in="${storitz.constants.State.listSeo()}" var="state">
   <url>
-    <loc><g:createLink absolute="true" mapping="state" params="[state:state.display]"/></loc>
+    <loc><g:createLink absolute="true" mapping="state2" params="[state:state.display]"/></loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 </g:each>
 <g:each in="${metroList}" var="metro">
   <url>
-    <loc><g:createLink absolute="true" mapping="metro" params="[city:metro.city, state:metro.state.display]"/></loc>
+    <loc><g:createLink absolute="true" mapping="metro2" params="[city:metro.city, state:metro.state.display]"/></loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 </g:each>
 <g:each in="${metroEntryList}" var="metroEntry">
   <url>
-    <loc><g:createLink absolute="true" mapping="geo" params="[city:metroEntry.city, state:metroEntry.state.display, zip:metroEntry.zipcode]"/></loc>
+    <loc><g:createLink absolute="true" mapping="geo2" params="[zip:metroEntry.zipcode]"/></loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -37,7 +37,7 @@
 <g:each in="${siteList}" var="${site}">
   <g:if test="${site.city && site.state}">
     <url>
-      <loc><g:createLink absolute="true" mapping="siteLink" controller="storageSite" action="detail" id="${site.id}" params="[city:site.city, site_title:site.title, state:site.state.display]"/></loc>
+      <loc><g:createLink absolute="true" mapping="siteLink2" controller="storageSite" action="detail" id="${site.id}" params="[site_title:site.title]"/></loc>
       <changefreq>weekly</changefreq>
       <priority>0.75</priority>
       <lastmod>${site.lastChange ? site.lastChange.format('yyyy-MM-dd') : new Date().format('yyyy-MM-dd')}</lastmod>

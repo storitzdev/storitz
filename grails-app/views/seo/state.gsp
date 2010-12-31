@@ -19,7 +19,7 @@
       <div style="width:650px;">
         <g:each in="${metroList}" var="metro">
           <div class="site">
-            <g:link mapping="metro" params="${[city:metro.city, state:metro.state.display]}">${metro.city}, ${metro.state.display}</g:link>
+            <g:link mapping="metro2" params="${[city:metro.city, state:metro.state.display]}">${metro.city}, ${metro.state.display}</g:link>
           </div>
         </g:each>
       </div>
@@ -27,7 +27,7 @@
       <div class="left" style="width:300px;">
         <g:each in="${metroEntryList}" var="metroEntry">
           <div class="site">
-            <g:link mapping="geo" params="${[city:metroEntry.city, state:metroEntry.state.display, zip:metroEntry.zipcode]}">${metroEntry.city}</g:link>
+            <g:link mapping="geo2" params="${[city:metroEntry.city, state:metroEntry.state.display, zip:metroEntry.zipcode]}">${metroEntry.city} self storage</g:link>
           </div>
         </g:each>
       </div>

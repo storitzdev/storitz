@@ -4,7 +4,7 @@
 <g:each in="${siteList}" var="${site}">
   <g:if test="${site.city && site.state}">
     <url>
-      <loc><g:createLink absolute="true" mapping="siteLink" controller="storageSite" action="detail" id="${site.id}" params="[city:site.city, site_title:site.title, state:site.state.display]"/></loc>
+      <loc><g:createLink absolute="true" mapping="siteLink2" controller="storageSite" action="detail" params="[site_title:site.title, id:site.id]"/></loc>
       <changefreq>weekly</changefreq>
       <priority>0.75</priority>
       <lastmod>${site.lastChange ? site.lastChange.format('yyyy-MM-dd') : new Date().format('yyyy-MM-dd')}</lastmod>

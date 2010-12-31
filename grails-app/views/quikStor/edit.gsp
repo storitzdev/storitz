@@ -17,7 +17,21 @@
           parentDiv.remove();
         } else {
           parentDiv = $(this).parent(".location");
-          // TODO - delete from database
+          if (parentDiv.length > 0) {
+            var locId = parentDiv[0].id.substring(5);
+            $.ajax(
+            {
+              url: "${createLink(controller:'quikStor', action:'removeLocation')}",
+              method:'get',
+              dataType: 'json',
+              data: {
+                locId: locId,
+              },
+              success:function(ret) {
+                parentDiv.remove();
+              }
+            });
+          }
         }
         return false;
       });
@@ -141,7 +155,7 @@
           <g:textField name="sitename:_${loc.id}" value="${loc.sitename}" stlye="width:150; margin-right:20px;"/>
           <g:textField name="username:_${loc.id}" value="${loc.username}" stlye="width:150; margin-right:20px;"/>
           <g:textField name="password:_${loc.id}" value="${loc.password}" stlye="width:150; margin-right:20px;"/>
-          <a href="#" class="removeLocation, red">remove</a>
+          <a href="#" class="removeLocation red">remove</a>
         </div>
       </g:each>
       </div>
@@ -149,7 +163,7 @@
         <span class="button"><a href="#" class="addLocation">Add Location</a></span>
       </div>
 
-      <div style="clear:both;height: 30px;"></div>
+      <div style="clear:both;height: 20px;"></div>
       <div class="buttons">
         <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
         <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>

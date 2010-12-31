@@ -4,7 +4,12 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
     <head>
-      <meta name="description" content="Storitz has self storage units, mini storage in ${city}, ${state} ${zip ? 'zip code:' + zip : '' }. Storitz is the smart and easy way to find and rent self-storage, mini-storage, RV storage, wine storage.  Compare and save on your storage rentals." />
+      <g:if test="${zipSearch}">
+        <meta name="description" content="Search, compare and rent self storage units in zip code $zip. Move-in today with the best prices and no Storitz fees. Thousands of units to choose from" />
+      </g:if>
+      <g:else>
+        <meta name="description" content="Search, compare and rent self storage units in ${city}, ${state}. Move-in today with the best prices and no Storitz fees. Thousands of units to choose" />
+      </g:else>
       <META name="y_key" content="9a7a338eec8978fd" />
       <g:render template="/header_home" />
       <p:dependantJavascript >
@@ -47,7 +52,7 @@
         var searchSize = ${searchSize};
         var searchDate;
         var helpFadeout = null;
-        var baseURL = '${request.contextPath}/self-storage/';
+        var baseURL = '${request.contextPath}';
         var inDrag = false;
         var savedFeature;
         var bounds = null;
@@ -166,8 +171,8 @@ $(window).trigger( 'hashchange' );
         <div style="height: 10px;"></div>
         <div class="leftColumn">
           <div class="leftSection">
-            <div class="leftSectionHeader">
-              Find the best prices and locations for self storage, right here.
+            <div>
+              <h2 class="inputSectionHeader">Tens of thousands of storage units are available at your fingertips. Find the best size, type and location. Browse self-storage photos, videos, and descriptions:</h2>
             </div>
             <div style="height: 5px;"></div>
             <div>
@@ -204,6 +209,9 @@ $(window).trigger( 'hashchange' );
                     <storitz:image src="btn-find-it.png" width="108" height="36" border="0" alt="Find Results"/>
                   </a>
                 </div>
+                <div class="inputSectionText">
+                  Don't hassle with a salesperson and follow-up phone calls, just find and rent your self storage unit right here, right now. Lock-in your best price and low-cost move-in. Print out your receipt and gate code, and show-up with your stuff. Click.Store.Done.
+                </div>
                 <div style="clear: both;height: 15px;"></div>
                 <div style="margin-left:35px;">
                   <g:link controller="static" action="guarantee" target="_blank">
@@ -215,8 +223,8 @@ $(window).trigger( 'hashchange' );
             </div>
           </div>
           <div class="leftSection">
-            <div class="leftSectionHeader">
-              Video
+            <div>
+              <h2 class="leftSectionHeader">Video</h2>
             </div>
             <div class="videoContainer">
               <div id="videoContainer"></div>
@@ -253,7 +261,7 @@ $(window).trigger( 'hashchange' );
           </div>
 
           <div class="resultsBar">
-            <div class="sbResults">Search Results</div>
+            <div class="sbResults"><h2 class="sbResults">Search Results</h2></div>
             <div class="sbText">Sort By:</div>
             <div class="sbSortSelect">
               <select id="sbSortSelect" name="sbSortSelect">
@@ -290,9 +298,30 @@ $(window).trigger( 'hashchange' );
                         <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
                         <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
                         <div class="stRentMe">
-                          <g:link mapping="siteLink" params="[city:site.city, state:site.state.display, site_title:site.title, id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
-                            <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                          </g:link>
+                          <g:if test="${params.size || params.date}">
+                            <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:link>
+                            </g:if>
+                            <g:else>
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:link>
+                            </g:else>
+                          </g:if>
+                          <g:else>
+                            <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:link>
+                            </g:if>
+                            <g:else>
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id]">
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:link>
+                            </g:else>
+                          </g:else>
                         </div>
                         <div class="stPriceSub textCenter monthly">
                           <g:if test="${siteMoveInPrice[site.id]?.monthly > siteMoveInPrice[site.id]?.pushRate}">
@@ -389,106 +418,22 @@ $(window).trigger( 'hashchange' );
           <div id="metroBox">
             <g:if test="${metro}">
               <div class="wideTextbox">
-                <span style="font-weight:bold;">${metro.city}, ${metro.state.display}:</span> ${metro.note}
+                <span style="font-weight:bold;"><h3 class="metro">${metro.city}, ${metro.state.display}:</h3></span> ${metro.note}
                 <g:if test="${neighborhood}">
                   <div style="height:10px;"></div>
-                  <span style="font-weight:bold;">${neighborhood.city}, ${neighborhood.state.display}:</span> ${neighborhood.note}
+                  <span style="font-weight:bold;"><h3 class="metro">${neighborhood.city}, ${neighborhood.state.display}:</h3></span> ${neighborhood.note}
                 </g:if>
-                <div style="font-weight:bold;margin:10px 0;">Neighborhoods and Towns:</div>
+                <div style="font-weight:bold;margin:10px 0;"><h3 class="metro">Neighborhoods and Towns:</h3></div>
                 <g:each in="${neighborhoodList}" var="n">
                   <div class="left" style="width:150px;">
-                    <g:link mapping="geo" params="[city:n.city, state:n.state.display, zip:n.zipcode]">${n.city}</g:link>
+                    <g:link mapping="metro2" params="[city:n.city.replace(' ','-'), state:n.state.display]">${n.city} self storage</g:link>
                   </div>
                 </g:each>
                 <div style="clear:both;"></div>
               </div>
             </g:if>
           </div>
-          <div class="wideTextbox">
-            <div style="font-weight:bold;margin-bottom:10px;">Popular searches:</div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Santa Monica', state:'CA']">Santa Monica, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Los Angeles', state:'CA']">Los Angeles, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Irvine', state:'CA']">Irvine, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Long Beach', state:'CA']">Long Beach, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'West Hollywood', state:'CA']">West Hollywood, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Van Nuys', state:'CA']">Van Nuys, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Torrance', state:'CA']">Torrance, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Carson', state:'CA']">Carson, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Newport Beach', state:'CA']">Newport Beach, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Oxnard', state:'CA']">Oxnard, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'El Segundo', state:'CA']">El Segundo, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Burbank', state:'CA']">Burbank, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'San Francisco', state:'CA']">San Francisco, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Palm Desert', state:'CA']">Palm Desert, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Anaheim', state:'CA']">Anaheim, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Lancaster', state:'CA']">Lancaster, CA Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Austin', state:'TX']">Austin, TX Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'San Diego', state:'CA']">San Diego Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Dallas', state:'TX']">Dallas, TX Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Houston', state:'TX']">Houston, TX Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Jacksonville', state:'FL']">Jacksonville, FL Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Miami', state:'FL']">Miami, FL Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Clearwater', state:'FL']">Clearwater, FL Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'New York', state:'NY']">New York, NY Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Phoenix', state:'AZ']">Phoenix, AZ Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Denver', state:'CO']">Denver, CO Storage Units</g:link>
-            </div>
-            <div class="left" style="width:310px;">
-              <g:link mapping="metro" params="[city:'Seattle', state:'WA']">Seattle, WA Storage Units</g:link>
-            </div>
-            <div style="clear:both;"></div>
-          </div>
+          <g:render template="/popularSearches" />
         </div>
         <div style="clear:both;"></div>
       </div>

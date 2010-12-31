@@ -5,25 +5,56 @@ class UrlMappings {
     "404"(view:'/notfound')
     "/help"(view:'/help')
 
+      name state: "/self-storage/state/$state" {
+        controller = "seo"
+        action = "redirectState"
+      }
+
+      name state2: "/$state-self-storage" {
+        controller = "seo"
+        action = "state"
+        constraints {
+          state(matches:/[A-Z]{2}/)
+        }
+      }
+
      name siteLink: "/self-storage/$city/$state/$site_title/$id" {
         controller = "storageSite"
-        action = "detail"
+        action = "redirectSiteLink"
      }
+
+      name siteLink2: "/self-storage-$site_title/$id" {
+         controller = "storageSite"
+         action = "detail"
+      }
 
      name geo: "/self-storage/$city/$state/$zip" {
        controller = "home"
-       action = "index"
+       action = "redirectGeo"
      }
 
-     name state: "/self-storage/state/$state" {
-       controller = "seo"
-       action = "state"
+     name geo2: "/$zip-self-storage" {
+       controller = "home"
+       action = "index"
+       zipSearch = true
+       constraints {
+         zip(matches:/\d{5}/)
+       }
      }
 
      name metro: "/self-storage/metro/$city/$state" {
        controller = "home"
-       action = "index"
+       action = "redirectMetro"
      }
+
+      name metro2: "/$city-$state-self-storage" {
+        controller = "home"
+        action = "index"
+        constraints {
+          city(validator: { return (it != 'state' && !(it ==~ /\d{5}-.+/))})
+          state(matches:/[A-Z]{2}/)
+        }
+      }
 
      "/xxx/$id" {
         controller = "storageSite"

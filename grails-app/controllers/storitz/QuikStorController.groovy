@@ -4,6 +4,8 @@ import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
 import com.storitz.QuikStor
+import com.storitz.QuikStorLocation
+import grails.converters.JSON
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class QuikStorController extends FeedController {
@@ -84,6 +86,41 @@ class QuikStorController extends FeedController {
         }
       }
       quikStorInstance.properties = params
+      for (param in params.keySet()) {
+        if (param.startsWith('newSitename:_')) {
+          def idx = param.substring(13)
+          def loc = new QuikStorLocation()
+          loc.sitename = params['newSitename:_' + idx]
+          loc.username = params['newUsername:_' + idx]
+          loc.password = params['newPassword:_' + idx]
+          loc.quikStor = quikStorInstance
+          loc.save(flush:true)
+          quikStorInstance.addToLocations(loc)
+        }
+      }
+      for(loc in quikStorInstance.locations) {
+        def sitenameString = "sitename:_" + loc.id
+        def usernameString = "username:_" + loc.id
+        def passwordString = "password:_" + loc.id
+
+        def changed = false
+        if (params[sitenameString]) {
+          loc.sitename = sitenameString
+          changed = true
+        }
+        if (params[usernameString]) {
+          loc.username = usernameString
+          changed = true
+        }
+        if (params[passwordString]) {
+          loc.password = passwordString
+          changed = true
+        }
+        if (changed) {
+          loc.save(flush:true)
+        }
+      }
+
       if (!quikStorInstance.hasErrors() && quikStorInstance.save(flush: true)) {
         flash.message = "${message(code: 'default.updated.message', args: [message(code: 'quikStor.label', default: 'com.storitz.QuikStor'), quikStorInstance.id])}"
         redirect(action: "show", id: quikStorInstance.id)
@@ -117,10 +154,23 @@ class QuikStorController extends FeedController {
     }
   }
 
+  def removeLocation = {
+    def loc = QuikStorLocation.get(params.locId as Long)
+    if (loc) {
+      def quikStor = loc.quikStor
+      quikStor.removeFromLocations(loc)
+      quikStor.save(flush:true)
+      // TODO remove the site from the system - cascade everything
+    }
+    render (status: 200, contentType:"application/json", text: "{ 'locId': ${loc?.id} }" )
+  }
+
   def processLocations = {
     def quikStorInstance = QuikStor.get(params.id)
     if (quikStorInstance) {
-      quikStorService.processLocations(quikStorInstance)
+      def writer = new PrintWriter(System.out)
+      def stats = new storitz.SiteStats()
+      quikStorService.processLocations(quikStorInstance, stats, writer)
       flash.message = "Locations processed."
       redirect(action: "list")
     }

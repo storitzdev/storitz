@@ -18,6 +18,7 @@ class StorageSiteController {
   def costService
   def springSecurityService
   def imageService
+  def mapService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", addCaptionAndTag: "POST"]
 
@@ -532,13 +533,18 @@ class StorageSiteController {
     UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : bestUnit?.unitType
 
     def video = Video.findBySite(site)
+    def propertyOperatorList = StorageSite.findAllByFeed(site.feed)
+
+    def zoom = 12 // may try tighter
+    def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
+    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
-            title: "Storitz self-storage for ${site.title} - located in ${site.city}, ${site.state.fullName} ${site.zipcode}",
+            title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
             shortSessionId:session.shortSessionId, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
-            promoId:params.promoId, insuranceId:insuranceId, video:video]
+            promoId:params.promoId, insuranceId:insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
   }
 
   def directions = {
@@ -617,6 +623,7 @@ class StorageSiteController {
       // >>> END match detail action code <<<
       //////////////////////////////////////////
 
+      // TODO - pass new model params to this view
       def model = [id:site.id
          , sizeList: sizeList, unitTypes: unitTypes, site: site, title: "Storage self-storage rental for ${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
          , shortSessionId:callParams.shortSessionId, chosenUnitType:callParams.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate
@@ -769,6 +776,13 @@ class StorageSiteController {
     }
     flash.message = "Updated lat/lng."
     redirect(controller:"admin", action:"index")
+  }
+
+  def redirectSiteLink = {
+    response.status = 301
+    response.setHeader("Location", g.createLink(mapping:'siteLink2', params:[site_title:params.site_title.replaceAll(' ', '-'), id:params.id]) as String)
+    render("")
+    return false
   }
 
 }

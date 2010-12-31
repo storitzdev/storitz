@@ -51,7 +51,7 @@
         </p>
         <div style="margin-top: 10px;">
           <g:if test="${videoInstance.site}">
-            <span style="font-weight:bold;">Related Storage Facility:</span>&nbsp;<g:link mapping="siteLink" params="[city:videoInstance.site.city, state:videoInstance.site.state.display, site_title:videoInstance.site.title, id:videoInstance.site.id]">${videoInstance.site?.title}</g:link>
+            <span style="font-weight:bold;">Related Storage Facility:</span>&nbsp;<g:link mapping="siteLink2" params="[site_title:videoInstance.site.title, id:videoInstance.site.id]">${videoInstance.site?.title}</g:link>
           </g:if>
         </div>
         <div>

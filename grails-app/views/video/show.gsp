@@ -101,7 +101,7 @@
 
           <td valign="top" class="value">
             <g:if test="${videoInstance.site}">
-              <g:link mapping="siteLink" params="[city:videoInstance.site.city, state:videoInstance.site.state.display, site_title:videoInstance.site.title, id:videoInstance.site.id]">${videoInstance.site?.title}</g:link>
+              <g:link mapping="siteLink2" params="[site_title:videoInstance.site.title, id:videoInstance.site.id]">${videoInstance.site?.title}</g:link>
             </g:if>
           </td>
 

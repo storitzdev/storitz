@@ -8,11 +8,23 @@ function calcDistance(lat1, lat2, lng1, lng2) {
 
 function siteLink(s) {
     var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
-    return baseURL + encodeURIComponent(s.city) + '/' + encodeURIComponent(s.state) + '/' + encodeURIComponent(s.title.replace(city_pat, '')) + '/' + s.id + '?size=' + (searchSize > 1 ? searchSize : '') + '&date=' + getDate() + '&address=' + encodeURIComponent(getAddress());
+    var queryStr = '';
+    var paramAdded = false;
+    if (searchSize > 1 || getDate() != '' || getAddress() != '') {
+        if (searchSize >1) {
+            paramAdded = true;
+            queryStr += ('?size=' + searchSize);
+        }
+        if (getDate() != '') {
+            queryStr += ((paramAdded ? '&' : '?') + 'date=' + getDate());
+            paramAdded = true;
+        }
+    }
+    return baseURL + '/self-storage-' + s.title.replace(city_pat, '').replace(/ /g,'-') + '/' + s.id + queryStr;
 }
 
-function metroLink(city, state, zip) {
-    return baseURL + encodeURIComponent(city) + '/' + state + '/' + zip;
+function metroLink(city, state) {
+    return baseURL + '/' + city.replace(/ /g, '-') + '-' + state + '-self-storage';
 }
 
 
@@ -259,6 +271,11 @@ function setupForm() {
             $('#address').val('');
         }
     });
+    $('#address').focusout(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 1 address']);
+        showAddress(getAddress(), $('#size').val(), getDate());
+        return false;
+    });
     $('select#size').change(function(event) {
         var searchUnitSize = $('#size').val();
         _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 2 unitsize ' + searchUnitSize]);
@@ -434,12 +451,14 @@ function createTableRow(s) {
             .append($('<div>').css('clear','both'))
             .append(features);
 
+    var linkUrl = siteLink(s);
+
   var priceCol = $('<div>').append($('<div>').css('width', '120px'))
             .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost ? s.moveInCost.toFixed(2) : '')))
             .append($('<div>', { 'class':'stPriceSub textCenter'}).text('Paid thru ' + (s.paidThruDate ? s.paidThruDate : '')))
             .append($('<div>', { 'class':'stPriceSub textCenter'}).html('Taxes &amp; fees included'))
             .append($('<div>', { 'class':'stRentMe' })
-              .append($('<a>', { href: siteLink(s)  + (s.promoId ? '&promoId=' + s.promoId : '') })
+              .append($('<a>', { href: linkUrl + (s.promoId ? (linkUrl.indexOf('?') != -1 ? '&' : '?') + 'promoId=' + s.promoId : '') })
                 .append($('<img>', { src: srcRentMeButton, width:87, height: 31, border: 0 } ))))
 
             if (s.monthly > s.pushRate) {
@@ -489,10 +508,11 @@ function markerClick(feature) {
     if (feature.coverImg.length > 0) {
         c.append($('<img>', { src: srcHome + feature.coverImg,  alt:feature.title, 'class': 'left'}).css('margin-right', '5px'));
     }
+    var linkUrl = siteLink(feature);
     c.append($('<div>', { 'class':'infoWindowText' })
             .append($('<div>').text(feature.address))
             .append($('<div>').text(feature.city + ', ' + feature.state + ' ' + feature.zipcode))
-            .append($('<div>', {'class':'left'}).css('margin-top', '5px').append($('<a>', { 'class':'mapIcon', href: siteLink(feature) + (feature.promoId ? '&promoId=' + feature.promoId : '') })
+            .append($('<div>', {'class':'left'}).css('margin-top', '5px').append($('<a>', { 'class':'mapIcon', href: linkUrl + (feature.promoId ? (linkUrl.indexOf('?') != -1 ? '&' : '?') + 'promoId=' + feature.promoId : '') })
             .append($('<img>', { src: srcDetailButton, width:'55', height:'20', border:'0'  })))));
     var holder = $('<div>').append(c);
     feature.marker.setIcon(markersBlue[feature.index]);
@@ -537,9 +557,10 @@ function setupMap() {
     $("table#stresults tbody tr td.stClickable").click(function(event) {
         var mapDiv = $(this).parent().find('.map_icon');
         var mapId = mapDiv.attr('id').substring(8);
+        var linkUrl = siteLink(features[mapId]);
         _gaq.push(['funnelTracker._trackEvent', 'home', 'results', 'table click', mapId]);
         buildState();
-        window.location = siteLink(features[mapId]) + (features[mapId].promoId ? '&promoId=' + features[mapId].promoId : '');
+        window.location = linkUrl + (features[mapId].promoId ? (linkUrl.indexOf('?') != -1 ? '&' : '?') + 'promoId=' + features[mapId].promoId : '');
     });
     $("div.stRentMe a").click(function(event){
       buildState();
@@ -574,13 +595,13 @@ function updateMetroBox(address) {
             data: { address:address},
             success:function(ret) {
                 if (ret.metro) {
-                    var m = $('<div>', {'class':'wideTextbox' }).append($('<span>', {'class':'bold'}).text(ret.metro.city + ', ' + ret.metro.state.display + ':')).append(ret.metro.note);
+                    var m = $('<div>', {'class':'wideTextbox' }).append($('<span>', {'class':'bold'}).append('<h3>', {'class':'metro'}).text(ret.metro.city + ', ' + ret.metro.state.display + ':')).append(ret.metro.note);
                     if (ret.neighborhood) {
-                        m.append($('<div>').css('height','10px')).append($('<span>', {'class':'bold'}).text(ret.neighborhood.city + ', ' + ret.neighborhood.state.display + ':')).append(ret.neighborhood.note);
+                        m.append($('<div>').css('height','10px')).append($('<span>', {'class':'bold'}).append('<h3>', {'class':'metro'}).text(ret.neighborhood.city + ', ' + ret.neighborhood.state.display + ':')).append(ret.neighborhood.note);
                     }
-                    m.append($('<div>').css({'font-weight':'bold', 'margin':'10px 0'}).text('Neighborhoods and Towns'));
+                    m.append($('<div>').css({'font-weight':'bold', 'margin':'10px 0'}).append('<h3>', {'class':'metro'}).text('Neighborhoods and Towns'));
                     $.each(ret.neighborhoodList, function(i, n) {
-                        m.append($('<div>', {'class':'left'}).css('width','150px').append($('<a>', {href: metroLink(n.city, n.state.display, n.zipcode)}).text(n.city)));
+                        m.append($('<div>', {'class':'left'}).css('width','150px').append($('<a>', {href: metroLink(n.city, n.state.display)}).text(n.city + 'self-storage')));
                     });
                     m.append($('<div>').css('clear','both'));
                     $("div#metroBox").html(m);

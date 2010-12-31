@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
   <head>
-    <meta name="DESCRIPTION" content="Storitz self storage partner - ${site.title} located in ${site.city}, ${site.state.fullName} postal code ${site.zipcode} : ${site.description ? site.getTextDescription() : '' }"/>
+    <meta name="DESCRIPTION" content="Storitz guarantees you the best deal on storage at ${site.title} in ${site.city}, ${site.state.display}.  Get photos, descriptions, driving directions and move-in today. "/>
     <g:meta name="keywords" content="Storage unit, self storage units, storage units, moving, storage units for rent, cheap storage units, storage unit rental, self storage, self storage facility, self storage facilities, air conditioned storage units, self storage rental, public self storage, security self storage, find self storage, self storage companies, Mini storage, mini self storage"/> 
     <g:render template="/header_home" />
 
@@ -107,8 +107,8 @@
                       <img src="${resource(file: site.coverImage().mid())}" width="320" height="240" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
                     </div>
                   </g:if>
-                  <p class="descriptionTitle" style="margin: 0;">
-                    ${site.title}
+                  <p style="margin: 0;">
+                    <h2 class="descriptionTitle">${site.title}</h2>
                   </p>
                   <p style="margin: 0;">
                     ${site.address}${site.address2 && site.address2.size() > 0 ? '&nbsp;' + site.address2 : ''}, ${site.city}, ${site.state.display} ${site.zipcode}
@@ -119,19 +119,19 @@
                   <div style="clear:both;"></div>
                   <div id="featuresList">
                     <ul>
-                      <li class="safety">Safety/Security</li>
+                      <li class="safety"><h3 class="listHeader">Safety/Security</h3></li>
                       <g:each in="${site.securityItems}" status="i" var="item">
                         <li ${i == site.securityItems.size() -1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
                       </g:each>
                     </ul>
                     <ul>
-                      <li class="convenience">Convenience</li>
+                      <li class="convenience"><h3 class="listHeader">Convenience</h3></li>
                       <g:each in="${site.convenienceItems}" status="i" var="item">
                         <li ${i == site.convenienceItems.size() -1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
                       </g:each>
                     </ul>
                     <ul>
-                      <li class="amenities">Amenities</li>
+                      <li class="amenities"><h3 class="listHeader">Amenities</h3></li>
                       <g:each in="${site.amenityItems}" status="i" var="item">
                         <li ${i == site.amenityItems.size() -1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li> 
                       </g:each>
@@ -140,14 +140,17 @@
                 </div>
               </div>
               <div id="tab_photos" style="width:650px;">
+                <div style="margin-bottom:7px;">
+                  <h2 class="section_header">Images for ${site.title}</h2>
+                </div>
                 <div style="margin:auto;">
                   <g:if test="${site.siteImages().size() > 0}">
                     <ul id="galleryView">
                     <g:each var="siteImg" in="${site.siteImages()}" status="i">
                         <li>
-                          <img width="60" height="40" src="${resource(file:siteImg.thumbnail())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
+                          <img width="60" height="40" src="${resource(file:siteImg.thumbnail())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.display}"/>
                           <div class="panel-content">
-                            <img src="${resource(file:siteImg.src())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" />
+                            <img src="${resource(file:siteImg.src())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.display}" />
                           </div>
                         </li>
                     </g:each>
@@ -159,11 +162,14 @@
                 </div>
               </div>
               <div id="tab_directions">
+                <div style="margin-bottom:7px;">
+                  <h2 class="section_header">Map and Directions for ${site.title}</h2>
+                </div>
                 <g:render template="/directions" />
               </div>
               <g:if test="${video}">
                 <div id="tab_video">
-                  <h1>${video.title}</h1>
+                  <h2 class="section_header">${video.title}</h2>
                   <h3>${video.releaseDate.format('MM-dd-yyyy')}</h3>
 
                   <p>
@@ -210,7 +216,30 @@
               </div>
               </g:if>
             </div>
-            <div style="clear:both;"></div>
+            <div style="clear:both;height:20px;"></div>
+            <g:if test="${propertyOperatorList?.size()>0}">
+              <div class="wideTextbox">
+                <div><h3>Facilities from the same property operator:</h3></div>
+                  <g:each var="psite" in="${propertyOperatorList}">
+                    <div class="left" style="width:310px;">
+                      <g:link mapping="siteLink2" params="[site_title:psite.title, id:psite.id]">${psite.title}</g:link>
+                    </div>
+                  </g:each>
+                <div style="clear:both;"></div>
+              </div>
+            </g:if>
+            <g:if test="${nearbyList?.size()>0}">
+              <div class="wideTextbox">
+                <div><h3>Facilities nearby:</h3></div>
+                  <g:each var="nsite" in="${nearbyList}">
+                    <div class="left" style="width:310px;">
+                      <g:link mapping="siteLink2" params="[site_title:nsite.title, id:nsite.id]">${nsite.title}</g:link>
+                    </div>
+                  </g:each>
+                <div style="clear:both;"></div>
+              </div>
+            </g:if>
+            <g:render template="/popularSearches" />
           </div>
 
           <div id="rentalForm" style="display: none;">
