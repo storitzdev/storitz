@@ -22,7 +22,7 @@
 </g:each>
 <g:each in="${metroList}" var="metro">
   <url>
-    <loc><g:createLink absolute="true" mapping="metro2" params="[city:metro.city, state:metro.state.display]"/></loc>
+    <loc><g:createLink absolute="true" mapping="metro2" params="[city:metro.city.replace(' ', '-'), state:metro.state.display]"/></loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
