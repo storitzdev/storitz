@@ -22,7 +22,6 @@ class HomeController {
     def geoResult
     def zipSearch = (params.zip || params.zipSearch)
 
-    println "Params are : ${params.dump()}"
     if (params.zip || params.address || (params.city && params.state)) {
 
         if (params.zip) {
