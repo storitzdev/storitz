@@ -8,15 +8,14 @@
   <script type="text/javascript">
     //<![CDATA[
     $(document).ready(function() {
-      jQuery.noConflict();
 
       setupForm();
     });
 
     function setupForm() {
-      jQuery('#cshiftVersion').change(function(event) {
-        jQuery('#orgId_label').toggle('blind', {}, 500);
-        jQuery('#orgId').toggle('blind', {}, 500);
+      $('#cshiftVersion').change(function(event) {
+        $('#orgId_label').toggle('blind', {}, 500);
+        $('#orgId').toggle('blind', {}, 500);
       });
     }
     //]]>

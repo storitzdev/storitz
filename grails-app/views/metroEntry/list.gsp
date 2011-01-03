@@ -11,13 +11,12 @@
 //<![CDATA[
 
       $(document).ready(function() {
-        jQuery.noConflict();
 
         setupUserSelector();
       });
 
       function setupUserSelector() {
-        jQuery("input#city").autocomplete({source:"${createLink(controller:'metroEntry', action:'autocompleteMetroEntry')}"});
+        $("input#city").autocomplete({source:"${createLink(controller:'metroEntry', action:'autocompleteMetroEntry')}"});
       }
 
 //]]>

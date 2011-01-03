@@ -11,6 +11,6 @@ class Metro {
   String note
   String city
   State state
-  Boolean isNeighborhood
+  Boolean isNeighborhood = false
 
 }

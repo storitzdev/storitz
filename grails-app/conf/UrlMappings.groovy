@@ -33,12 +33,13 @@ class UrlMappings {
        action = "redirectGeo"
      }
 
-     name geo2: "/$zip-self-storage" {
+     name geo2: "/$city-$state-zip-code-$zip-self-storage" {
        controller = "home"
        action = "index"
        zipSearch = true
        constraints {
          zip(matches:/\d{5}/)
+         state(matches:/[A-Z]{2}/)
        }
      }
 

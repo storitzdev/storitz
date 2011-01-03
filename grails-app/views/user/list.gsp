@@ -11,13 +11,12 @@
 //<![CDATA[
 
       $(document).ready(function() {
-        jQuery.noConflict();
 
         setupUserSelector();
       });
 
       function setupUserSelector() {
-        jQuery("input#username").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
+        $("input#username").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
       }
 
 //]]>

@@ -22,14 +22,14 @@
 </g:each>
 <g:each in="${metroList}" var="metro">
   <url>
-    <loc><g:createLink absolute="true" mapping="metro2" params="[city:metro.city.replace(' ', '-'), state:metro.state.display]"/></loc>
+    <loc><g:createLink absolute="true" mapping="metro2" params="[city:metro.city.replaceAll(' ', '-'), state:metro.state.display]"/></loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 </g:each>
 <g:each in="${metroEntryList}" var="metroEntry">
   <url>
-    <loc><g:createLink absolute="true" mapping="geo2" params="[zip:metroEntry.zipcode]"/></loc>
+    <loc><g:createLink absolute="true" mapping="geo2" params="[city:zip.metroEntry.replaceAll(' ', '-'), state:metroEntry.state.display, zip:metroEntry.zipcode]"/></loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

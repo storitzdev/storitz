@@ -10,13 +10,11 @@
     <script type="text/javascript">
       //<![CDATA[
       $(document).ready(function() {
-        jQuery.noConflict();
-
         setupUserSelector();
       });
 
       function setupUserSelector() {
-        jQuery("input#sitename").autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
+        $("input#sitename").autocomplete({source:"${createLink(controller:'storageSite', action:'autocompleteSite')}"});
       }
 
       //]]>

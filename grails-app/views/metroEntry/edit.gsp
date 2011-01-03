@@ -12,17 +12,16 @@
 //<![CDATA[
 
       $(document).ready(function() {
-        jQuery.noConflict();
 
         setupUserSelector();
       });
 
       function setupUserSelector() {
-        jQuery("input#metro").autocomplete(
+        $("input#metro").autocomplete(
           {
             source:"${createLink(controller:'metroEntry', action:'autocompleteMetro')}",
             select:function(event, ui) {
-              jQuery("input#metro_id").val(ui.item.id);
+              $("input#metro_id").val(ui.item.id);
             }
           });
       }

@@ -11,9 +11,8 @@
       //<![CDATA[
 
       $(document).ready(function() {
-        jQuery.noConflict();
 
-        jQuery('#oldPasswd').focus();
+        $('#oldPasswd').focus();
       });
 
       //]]>

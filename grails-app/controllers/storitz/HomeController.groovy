@@ -270,7 +270,7 @@ class HomeController {
   def redirectGeo = {
     // /self-storage-$zip-$city-$state
     response.status = 301
-    response.setHeader("Location", g.createLink(mapping:'geo2', params:[zip:params.zip]) as String)
+    response.setHeader("Location", g.createLink(mapping:'geo2', params:[city:params.city.replaceAll(' ','-'), state:params.state, zip:params.zip]) as String)
     render("")
     return false
   }
