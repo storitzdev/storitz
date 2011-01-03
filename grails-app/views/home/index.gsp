@@ -300,24 +300,24 @@ $(window).trigger( 'hashchange' );
                         <div class="stRentMe">
                           <g:if test="${params.size || params.date}">
                             <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
                                 <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
                               </g:link>
                             </g:if>
                             <g:else>
-                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
                                 <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
                               </g:link>
                             </g:else>
                           </g:if>
                           <g:else>
                             <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
                                 <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
                               </g:link>
                             </g:if>
                             <g:else>
-                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' ','-'), id:site.id]">
+                              <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id]">
                                 <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
                               </g:link>
                             </g:else>

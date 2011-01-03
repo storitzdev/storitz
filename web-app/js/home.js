@@ -20,7 +20,7 @@ function siteLink(s) {
             paramAdded = true;
         }
     }
-    return baseURL + '/self-storage-' + s.title.replace(city_pat, '').replace(/ /g,'-') + '/' + s.id + queryStr;
+    return baseURL + '/self-storage-' + s.title.replace(city_pat, '').replace(/ - /g,'-').replace(/ /g,'-') + '/' + s.id + queryStr;
 }
 
 function metroLink(city, state) {
