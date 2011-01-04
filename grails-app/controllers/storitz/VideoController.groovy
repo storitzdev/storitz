@@ -137,7 +137,7 @@ class VideoController {
             videoInstance.properties = params
             site = videoInstance.site
             def videoFile = request.getFile("videoFile_0")
-            if (videoFile.size > 0 ) {
+            if (videoFile?.size > 0 ) {
               File oldVideoFile = request.getRealPath(videoInstance.fileLocation)
               if (oldVideoFile.exists()) {
                 oldVideoFile.delete()
@@ -153,7 +153,7 @@ class VideoController {
 
             }
             def imageFile = request.getFile("imageFile_0")
-            if (imageFile.size > 0 ) {
+            if (imageFile?.size > 0 ) {
               def ext = imageFile.originalFilename.tokenize('.')[-1]
               File oldImageFile = request.getRealPath(videoInstance.stillImage)
               if (oldImageFile.exists()) {

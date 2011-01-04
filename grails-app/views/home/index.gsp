@@ -8,7 +8,12 @@
         <meta name="description" content="Search, compare and rent self storage units in zip code $zip. Move-in today with the best prices and no Storitz fees. Thousands of units to choose from" />
       </g:if>
       <g:else>
-        <meta name="description" content="Search, compare and rent self storage units in ${city}, ${state}. Move-in today with the best prices and no Storitz fees. Thousands of units to choose" />
+        <g:if test="${searchCity && searchCity != city}">
+          <meta name="description" content="Search, compare and rent self storage units in ${searchCity} near ${city}, ${state}. Move-in today with the best prices and no Storitz fees. Thousands of units to choose" />
+        </g:if>
+        <g:else>
+          <meta name="description" content="Search, compare and rent self storage units in ${city}, ${state}. Move-in today with the best prices and no Storitz fees. Thousands of units to choose" />
+        </g:else>
       </g:else>
       <META name="y_key" content="9a7a338eec8978fd" />
       <g:render template="/header_home" />

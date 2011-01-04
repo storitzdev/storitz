@@ -17,9 +17,13 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="Added way to edit property protection options per site">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_siteInfo.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_siteInfo.gsp" />
+    <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="Differentiate when search city is different that result city">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/home/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz-grailsPlugins.iml" afterPath="$PROJECT_DIR$/storitz-grailsPlugins.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iml" afterPath="$PROJECT_DIR$/storitz.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy" />
     </list>
     <ignored path="$USER_HOME_GRAILS$/" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -86,44 +90,71 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="QuikStorService.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/QuikStorService.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="162" column="78" selection-start="5800" selection-end="5800" vertical-scroll-proportion="-17.04">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/js/payment.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="151" column="0" selection-start="4432" selection-end="4432" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="0" selection-start="1786" selection-end="1786" vertical-scroll-proportion="-7.098039">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="complete.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="368" selection-end="368" vertical-scroll-proportion="-3.6666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="173" column="84" selection-start="5884" selection-end="5884" vertical-scroll-proportion="-15.923077">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="225" column="0" selection-start="9622" selection-end="10287" vertical-scroll-proportion="-2.6447368">
+            <state line="22" column="96" selection-start="1354" selection-end="1354" vertical-scroll-proportion="-7.3333335">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
+      <file leaf-file-name="VideoController.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="193" column="30" selection-start="9722" selection-end="9722" vertical-scroll-proportion="-31.092106">
+            <state line="155" column="26" selection-start="6019" selection-end="6019" vertical-scroll-proportion="0.92">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_siteInfo.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/_siteInfo.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="332" column="0" selection-start="10208" selection-end="10208" vertical-scroll-proportion="0.81654674">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StorageSiteController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="540" column="72" selection-start="23104" selection-end="23104" vertical-scroll-proportion="13.730769">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/js/home.js">
+      <file leaf-file-name="UrlMappings.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -131,46 +162,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+      <file leaf-file-name="detail.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/js/detail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="59" selection-start="2885" selection-end="2892" vertical-scroll-proportion="0.0">
+            <state line="164" column="44" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application.properties">
+      <file leaf-file-name="CShift4Service.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShift4Service.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="14" selection-start="91" selection-end="91" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="video.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/video/video.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="51" selection-start="2438" selection-end="2438" vertical-scroll-proportion="-21.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="135" selection-start="2658" selection-end="2661" vertical-scroll-proportion="-3.3529413">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/video/show.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="353" selection-end="353" vertical-scroll-proportion="-3.3333333">
+            <state line="6" column="6" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -190,22 +194,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/services/storitz/MoveInService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/QuikStor.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/storitz/FeedService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/storitz/QuikStorService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/static/supports.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/ReportsController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/video/show.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy" />
-        <option value="$PROJECT_DIR$/web-app/jwplayer/jwplayer.js" />
-        <option value="$PROJECT_DIR$/grails-app/views/video/video.gsp" />
-        <option value="$PROJECT_DIR$/web-app/test.html" />
-        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/_siteInfo.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/com/storitz/QuikStor.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/quikStor/create.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/quikStor/show.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/QuikStorController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/quikStor/edit.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/services/storitz/QuikStorService.groovy" />
+        <option value="$PROJECT_DIR$/web-app/js/payment.js" />
+        <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy" />
       </list>
     </option>
   </component>
@@ -531,7 +535,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -542,21 +546,69 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Favorites" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storitz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storitz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storitz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storitz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storitz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storitz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="296" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="256" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="34" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="288" />
     <property name="OverrideImplement.combined" value="true" />
-    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="288" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="229" />
     <property name="recentsLimit" value="5" />
@@ -581,12 +633,12 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -597,16 +649,11 @@
       <recent name="storitz.spring" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mamster\IdeaProjects\storitz\web-app\jwplayer" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views" />
+      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\siteLink" />
+      <recent name="C:\Users\mamster\IdeaProjects\storitz\web-app\jwplayer" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\pressRelease" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\static" />
-      <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\feed" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="storitz" />
-      <recent name="com.storitz" />
-      <recent name="org.grails.plugins.imagetools" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mamster\IdeaProjects\storitz\web-app\js" />
@@ -615,6 +662,123 @@
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\views\static" />
       <recent name="C:\Users\mamster\IdeaProjects\storitz\grails-app\conf" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="storitz" />
+      <recent name="com.storitz" />
+      <recent name="org.grails.plugins.imagetools" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="1/4/11 9:21 AM" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+            <PATH vcs="svn" revision="867">C:\Users\mamster\IdeaProjects\storitz\web-app\js\detail.js</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with tree conflicts" />
+          <option name="myStatusName" value="Merged with tree conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with property conflicts" />
+          <option name="myStatusName" value="Will be merged with property conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
   </component>
   <component name="RunManager" selected="Grails.storitz">
     <configuration default="false" name="CShiftTest.testEmpty" type="JUnit" factoryName="JUnit" temporary="true">
@@ -1083,13 +1247,13 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1171123" sideWeight="0.2008879" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31514478" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31409544" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3973363" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3051225" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30410653" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.118716575" sideWeight="0.6770601" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.118716575" sideWeight="0.68590456" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31742507" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30854607" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32741398" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1098,8 +1262,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995633" sideWeight="0.6680614" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834226" sideWeight="0.6825749" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30734965" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834226" sideWeight="0.67480576" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3063263" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1124,7 +1288,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add video to sites with videos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Differentiate when search city is different that result city&#10;Fix NPE for video uploader" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1137,16 +1301,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Lots of fixes for reporting" />
-    <MESSAGE value="More fine tuning of individual site reports" />
-    <MESSAGE value="Target new page" />
-    <MESSAGE value="Exclusion for footer logo" />
-    <MESSAGE value="Press release object" />
-    <MESSAGE value="Added way to edit property protection options per site" />
-    <MESSAGE value="Logic for Centershift inventory" />
-    <MESSAGE value="Fixes for Centershift inventory issue" />
-    <MESSAGE value="New Press Release functionality" />
-    <MESSAGE value="Some minor formatting changes" />
     <MESSAGE value="Fixed table member - changed name from release to releaseDate since release is a reserved word in mysql" />
     <MESSAGE value="Fixed delete function" />
     <MESSAGE value="Fixed edit of the body/blurb" />
@@ -1162,6 +1316,16 @@
     <MESSAGE value="Storitz supports page complete&#10;Fixes to reports for spacing&#10;First cut at QuikStor feed" />
     <MESSAGE value="Embed tag for video on player page" />
     <MESSAGE value="Add video to sites with videos" />
+    <MESSAGE value="Added video tab for sites with video" />
+    <MESSAGE value="Support for back button between home / detail" />
+    <MESSAGE value="Added back button from payment page to the form" />
+    <MESSAGE value="Check in on the quikStor feed" />
+    <MESSAGE value="Tons of SEO work&#10;Home and detail page h1-h4 tags&#10;Rewrite of links for sitemap, etc.&#10;Links on detail for nearby units and units from same operator" />
+    <MESSAGE value="Added dependency on spring-test for MockHttpServletRequest&#10;" />
+    <MESSAGE value="More work on QuikStor&#10;Fixes for tracking on payment and complete pages" />
+    <MESSAGE value="Change google analytics on payment page and complete" />
+    <MESSAGE value="Differentiate when search city is different that result city" />
+    <MESSAGE value="Differentiate when search city is different that result city&#10;Fix NPE for video uploader" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1205,30 +1369,92 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/QuikStorLocation.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="27" selection-end="27" vertical-scroll-proportion="-0.73913044">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/quikStor/create.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="196" selection-start="1907" selection-end="1982" vertical-scroll-proportion="-4.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/quikStor/show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="69" selection-start="3382" selection-end="3382" vertical-scroll-proportion="-1.2941177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/quikStor/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="177" column="78" selection-start="6678" selection-end="6678" vertical-scroll-proportion="-7.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/storitz/QuikStor.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="93" selection-start="121" selection-end="196" vertical-scroll-proportion="-2.2173913">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/QuikStorController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="172" column="38" selection-start="6168" selection-end="6184" vertical-scroll-proportion="-53.615383">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShift4Service.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="6" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/QuikStorService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="85" selection-start="651" selection-end="651" vertical-scroll-proportion="0.0">
+        <state line="162" column="78" selection-start="5800" selection-end="5800" vertical-scroll-proportion="-17.04">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/static/supports.gsp">
+    <entry file="file://$PROJECT_DIR$/web-app/js/detail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="54" selection-start="3512" selection-end="3512" vertical-scroll-proportion="-6.8627453">
+        <state line="164" column="44" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/ReportsController.groovy">
+    <entry file="file://$PROJECT_DIR$/web-app/js/payment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+        <state line="151" column="0" selection-start="4432" selection-end="4432" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/pressRelease/release.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/payment.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1345" selection-end="1508" vertical-scroll-proportion="-5.8627453">
+        <state line="45" column="0" selection-start="1786" selection-end="1786" vertical-scroll-proportion="-7.098039">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="368" selection-end="368" vertical-scroll-proportion="-3.6666667">
           <folding />
         </state>
       </provider>
@@ -1240,79 +1466,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/js/home.js">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/video/show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="353" selection-end="353" vertical-scroll-proportion="-3.3333333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="14" selection-start="91" selection-end="91" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="135" selection-start="2658" selection-end="2661" vertical-scroll-proportion="-3.3529413">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/jwplayer/jwplayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="914" column="55" selection-start="30333" selection-end="30336" vertical-scroll-proportion="-0.12569316">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/video/video.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="51" selection-start="2438" selection-end="2438" vertical-scroll-proportion="-21.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="59" selection-start="2885" selection-end="2892" vertical-scroll-proportion="0.0">
+        <state line="173" column="84" selection-start="5884" selection-end="5884" vertical-scroll-proportion="-15.923077">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="0" selection-start="9622" selection-end="10287" vertical-scroll-proportion="-2.6447368">
+        <state line="22" column="96" selection-start="1354" selection-end="1354" vertical-scroll-proportion="-7.3333335">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/storageSite/detail.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/VideoController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="30" selection-start="9722" selection-end="9722" vertical-scroll-proportion="-31.092106">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/StorageSiteController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="540" column="72" selection-start="23104" selection-end="23104" vertical-scroll-proportion="13.730769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_siteInfo.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="332" column="0" selection-start="10208" selection-end="10208" vertical-scroll-proportion="0.81654674">
+        <state line="155" column="26" selection-start="6019" selection-end="6019" vertical-scroll-proportion="0.92">
           <folding />
         </state>
       </provider>
@@ -1324,7 +1494,7 @@
         <entry key="storitz">
           <value>
             <GrailsSettings>
-              <option name="buildConfigCrc" value="-307468670" />
+              <option name="buildConfigCrc" value="-1406895216" />
               <option name="pluginDependenciesCrc" value="1892762369" />
             </GrailsSettings>
           </value>

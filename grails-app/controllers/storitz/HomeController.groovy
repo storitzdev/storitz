@@ -13,6 +13,7 @@ class HomeController {
   def lat
   def lng
   def zip
+  def searchCity
   def city
   def state
 
@@ -41,7 +42,7 @@ class HomeController {
           geoResult = geocodeService.geocode(address)
         } else {
           geoResult = geocodeService.geocode("${params.city}, ${params.state}")
-          city = params.city.replaceAll('-', ' ')
+          searchCity = city = params.city.replaceAll('-', ' ')
           state = params.state
 
         }
@@ -170,7 +171,7 @@ class HomeController {
       }
     }
 
-    [ sizeList: StorageSize.list(params), title:title, city:city, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice, zipSearch:zipSearch]
+    [ sizeList: StorageSize.list(params), title:title, city:city, searchCity:searchCity, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice, zipSearch:zipSearch]
   }
 
   def updateMetro = {
