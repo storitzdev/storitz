@@ -5,7 +5,7 @@ function rentmeClick() {
         today.setHours(0, 0, 0, 0);
         var cutoff = new Date(today.getTime());
         cutoff.setMonth(cutoff.getMonth() + 2);
-        var chosenDate = $.datepicker.parseDate('mm/dd/y', startDate);
+        var chosenDate = $.datepicker.parseDate('mm/dd/y', startDate, {shortYearCutoff:99});
         if (chosenDate < today || chosenDate > cutoff) {
             $('#transMoveInDate').addClass('validation-failed');
             return;
