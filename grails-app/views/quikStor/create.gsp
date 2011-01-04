@@ -43,6 +43,28 @@
       </div>
 
       <div class="checkout_section_header">
+        URL
+      </div>
+
+      <div class="formInstructions">
+        This should be the URL for the WSDL service from QuikStor. Most sites use the default
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:400px;" class="checkout_value ${hasErrors(bean: quikStorInstance, field: 'manager', 'errors')}">
+          <g:textField name="url" id="url" style="width:380px;" value="${quikStorInstance?.url ? quikStorInstance.url : 'https://ecom.quikstor.com:443/eCom3ServiceSS/QuikStorWebServiceSS.asmx?WSDL' }"/>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:300px;">
+          <label for="url">WSDL Url</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_section_header">
         Manager
       </div>
 

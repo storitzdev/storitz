@@ -105,15 +105,15 @@ class QuikStorController extends FeedController {
 
         def changed = false
         if (params[sitenameString]) {
-          loc.sitename = sitenameString
+          loc.sitename = params[sitenameString]
           changed = true
         }
         if (params[usernameString]) {
-          loc.username = usernameString
+          loc.username = params[usernameString]
           changed = true
         }
         if (params[passwordString]) {
-          loc.password = passwordString
+          loc.password = params[passwordString]
           changed = true
         }
         if (changed) {

@@ -39,6 +39,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="quikStor.url.label" default="WSDL Url"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "url")}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="quikStor.operatorName.label" default="Operator Name"/></td>
 
           <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "operatorName")}</td>

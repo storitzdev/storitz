@@ -17,24 +17,26 @@ import com.storitz.NotificationType
 import com.storitz.User
 import storitz.constants.TruckType
 import storitz.constants.UnitType
+import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.datatype.DatatypeFactory
 
 class QuikStorService {
 
     static transactional = false
-    def proxy
+    def proxy = [:]
     def geocodeService
     def unitSizeService
 
-    private getProxy() {
-      if (!proxy) {
-        proxy = new WSClient("https://ecom.quikstor.com:443/eCom3ServiceSS/QuikStorWebServiceSS.asmx?WSDL", this.class.classLoader)
-        proxy.initialize()
+    private getProxy(url) {
+      if (!proxy[url]) {
+        proxy[url] = new WSClient(url, this.class.classLoader)
+        proxy[url].initialize()
       }
-      return proxy
+      return proxy[url]
     }
 
     private getFacilityInfo(QuikStorLocation loc) {
-      def myProxy = getProxy()
+      def myProxy = getProxy(loc.quikStor.url)
       def facilityInfo = myProxy.create("org.tempuri.FacilityInfo")
       facilityInfo.setCsSiteName(loc.sitename)
       facilityInfo.setCsUser(loc.username)
@@ -54,6 +56,7 @@ class QuikStorService {
           SiteUser.link(site, quikStor.manager)
           loc.site = site
           quikStor.addToSites(site)
+          def facInfo = getFacilityInfo(loc)
           createSiteUser(site, facInfo.csSiteEmail, facInfo.csSiteEmail, quikStor.manager)
           loadInsurance(site, loc)
         }
@@ -97,14 +100,16 @@ class QuikStorService {
     }
 
     def loadInsurance(StorageSite site, QuikStorLocation loc) {
-      def myProxy = getProxy()
-      def availIns = proxy.create("org.tempuri.AvailableInsurance")
+      def myProxy = getProxy(loc.quikStor.url)
+      def availIns = myProxy.create("org.tempuri.AvailableInsurance")
       availIns.setCsSiteName(loc.sitename)
       availIns.setCsUser(loc.username)
       availIns.setCsPassword(loc.password)
       def insurances = myProxy.AvailableInsurance(availIns.csUser, availIns.csPassword, availIns.csSiteName)
 
-      for(ins in insurances.availableInsuranceST) {
+      println "Insurances - ${insurances?.dump()}"
+      
+      for(ins in insurances?.availableInsuranceST) {
         def myIns = site.insurances.find{ it.totalCoverage == ins.dCoverageAmount && it.percentTheft == ins.dCoveragePercentage }
         if (myIns) {
           myIns.premium = ins.dMonthlyFee
@@ -139,7 +144,13 @@ class QuikStorService {
     def updateSite(StorageSite site, SiteStats stats, PrintWriter writer) {
       def quikStor = (QuikStor)site.feed
       def loc = quikStor.locations.find{it.site = site}
-      def facInfo = getFacilityInfo(loc)
+
+      def myProxy = getProxy(loc.quikStor.url)
+      def facilityInfo = myProxy.create("org.tempuri.FacilityInfo")
+      facilityInfo.setCsSiteName(loc.sitename)
+      facilityInfo.setCsUser(loc.username)
+      facilityInfo.setCsPassword(loc.password)
+      def facInfo = myProxy.FacilityInfo(facilityInfo.csUser, facilityInfo.csPassword, facilityInfo.csSiteName)
 
       if (facInfo.success) {
         site.title = facInfo.csSiteName
@@ -154,8 +165,8 @@ class QuikStorService {
         println "Found address: ${address}"
         def geoResult = geocodeService.geocode(address)
 
-        site.lng = geoResult.Placemark[0].Point.coordinates[0]
-        site.lat = geoResult.Placemark[0].Point.coordinates[1]
+        site.lng = geoResult.results[0].geometry.location.lng
+        site.lat = geoResult.results[0].geometry.location.lat
 
         site.feed = quikStor
         site.sourceId = loc.password
@@ -182,20 +193,64 @@ class QuikStorService {
         site.extendedHours = false
 
         site.save(flush:true)
+
+        // Determine prorated or anniversary billing
+        def facilityInfo2 = myProxy.create("org.tempuri.FacilityInfo2")
+        facilityInfo2.setCsSiteName(loc.sitename)
+        facilityInfo2.setCsUser(loc.username)
+        facilityInfo2.setCsPassword(loc.password)
+        def facInfo2 = myProxy.FacilityInfo2(facilityInfo2.csUser, facilityInfo2.csPassword, facilityInfo2.csSiteName)
+
+        for(item in facInfo2.anyType) {
+          def found = false
+          if (item.csKey == 'ECommForceProRate') {
+            site.useProrating = (item.obValue == 1)
+            found = true
+          }
+          if (found) {
+            site.save(flush:true)
+          }
+        }
+
+        // Determine admin fee
+        def availUnits = myProxy.create("org.tempuri.AvailableUnitTypes")
+        availUnits.setCsSiteName(loc.sitename)
+        availUnits.setCsUser(loc.username)
+        availUnits.setCsPassword(loc.password)
+        def unitTypes = myProxy.AvailableUnitTypes(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
+        println "Available move in types: ${unitTypes.dump()}"
+        if (unitTypes?.availableUnitTypesST[0]) {
+          def myUnitType = unitTypes.availableUnitTypesST[0]
+
+          def moveInReq = myProxy.create("org.tempuri.MoveInCost")
+          moveInReq.setCsSiteName(loc.sitename)
+          moveInReq.setCsUser(loc.username)
+          moveInReq.setCsPassword(loc.password)
+          moveInReq.setIUnitTypeId(myUnitType.iTypeId)
+          GregorianCalendar gcal = new GregorianCalendar();
+          XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+          moveInReq.setTMoveInDate(xgcal)
+          def moveInCost = myProxy.MoveInCost(moveInReq.csUser, moveInReq.csPassword, moveInReq.csSiteName, moveInReq.iUnitTypeId, moveInReq.tMoveInDate)
+          for(item in moveInCost.chargeST) {
+            if (item.itemDesc == 'Setup Charge') {
+              site.adminFee = item.dItemAmount
+              site.save(flush:true)
+            }
+          }
+        }
       }
     }
 
     def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
       def quikStor = (QuikStor)site.feed
       def loc = quikStor.locations.find{it.site = site}
-      def myProxy = getProxy()
+      def myProxy = getProxy(quikStor.url)
       def availUnits = myProxy.create("org.tempuri.JustAvailableUnitTypesSpecial")
       availUnits.setCsSiteName(loc.sitename)
       availUnits.setCsUser(loc.username)
       availUnits.setCsPassword(loc.password)
       def unitTypes = myProxy.JustAvailableUnitTypesSpecial(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
       for(unitType in unitTypes.availableUnitTypesSpecialST) {
-        writer.println "Found unitType: ${unitType.dump()}"
         def unit = site.units.find{it.unitNumber == unitType.iTypeId }
         if (unit) {
           if (unitType.availability > unit.unitCount) {
@@ -262,7 +317,7 @@ class QuikStorService {
     }
 
     def addSitePhone(QuikStor quikStor, StorageSite storageSiteInstance, PrintWriter writer) {
-
+        // Do nothing
     }
 
     def checkRented(RentalTransaction trans) {

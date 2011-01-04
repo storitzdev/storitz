@@ -100,6 +100,27 @@
       <g:hiddenField name="version" value="${quikStorInstance?.version}"/>
 
       <div class="checkout_section_header">
+        URL
+      </div>
+
+      <div class="formInstructions">
+        This should be the URL for the WSDL service from QuikStor. Most sites use the default
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:400px;" class="checkout_value ${hasErrors(bean: quikStorInstance, field: 'manager', 'errors')}">
+          <g:textField name="url" id="url" style="width:380px;" value="${quikStorInstance?.url}"/>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:300px;">
+          <label for="url">WSDL Url</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="checkout_section_header">
         Manager
       </div>
 
@@ -152,9 +173,9 @@
       <div id="locationList">
       <g:each in="${quikStorInstance.locations}" status="i" var="loc">
         <div id="loc:_${loc.id}" class="location">
-          <g:textField name="sitename:_${loc.id}" value="${loc.sitename}" stlye="width:150; margin-right:20px;"/>
-          <g:textField name="username:_${loc.id}" value="${loc.username}" stlye="width:150; margin-right:20px;"/>
-          <g:textField name="password:_${loc.id}" value="${loc.password}" stlye="width:150; margin-right:20px;"/>
+          <g:textField name="sitename:_${loc.id}" value="${loc.sitename}" style="width:150; margin-right:20px;"/>
+          <g:textField name="username:_${loc.id}" value="${loc.username}" style="width:150; margin-right:20px;"/>
+          <g:textField name="password:_${loc.id}" value="${loc.password}" style="width:150; margin-right:20px;"/>
           <a href="#" class="removeLocation red">remove</a>
         </div>
       </g:each>
