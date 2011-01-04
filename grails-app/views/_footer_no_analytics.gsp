@@ -1,7 +1,7 @@
 <div id="footer">
   <div style="width: 1000px; margin-left: auto; margin-right: auto;">
     <div class="left" style="padding: 2em 0;">
-      <span class="small">&copy; 2010 Storitz Inc. All rights reserved.</span>
+      <span class="small">&copy; 2010-2011 Storitz Inc. All rights reserved.</span>
     </div>
     <div class="left">
       <div class="left" style="margin: 2em 5em;">
