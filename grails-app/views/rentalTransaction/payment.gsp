@@ -25,6 +25,24 @@
   <p:javascript src="payment"/>
 </p:dependantJavascript>
 
+  <script type="text/javascript">
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
+                ['pageTracker._trackPageview'],
+                ['funnelTracker._setAccount', 'UA-16012579-1'],
+                ['funnelTracker._trackPageview', '/payment']);
+    // Called a few ms after the page has loaded.
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s); })();
+  //]]>
+  </script>
+
   </head>
   <body>
     <div id="body">
