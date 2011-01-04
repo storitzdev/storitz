@@ -79,6 +79,10 @@ class UrlMappings {
       name video: "/video/$date/$title/$id" {
         controller = "video"
         action = "video"
+        constraints {
+          date(validator: { return !(it ==~ /\d/)})
+          title(validator: { return !(it ==~ /\d/)})
+        }
       }
 
       "/sitemap" (controller:"siteMap")

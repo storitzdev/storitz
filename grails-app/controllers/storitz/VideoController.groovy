@@ -56,7 +56,7 @@ class VideoController {
         if (videoFile.size > 0 ) {
           if (site) {
             fileUploadService.moveFile(videoFile, '/video', videoFile.originalFilename, site.id)
-            videoInstance.stillImage = '/video' + fileUploadService.getWebIdPath(site.id) + videoFile.originalFilename
+            videoInstance.fileLocation = '/video' + fileUploadService.getWebIdPath(site.id) + videoFile.originalFilename
           } else {
             videoInstance.fileLocation = '/video/' + videoFile.originalFilename
             def destFile = new File(request.getRealPath(videoInstance.fileLocation))
@@ -144,13 +144,12 @@ class VideoController {
               }
               if (site) {
                 fileUploadService.moveFile(videoFile, '/video', videoFile.originalFilename, site.id)
-                videoInstance.fileLocation = fileUploadService.getFilePath('/video', videoFile.originalFilename, site.id)
+                videoInstance.fileLocation = '/video' + fileUploadService.getWebIdPath(site.id) + videoFile.originalFilename
               } else {
                 videoInstance.fileLocation = '/video/' + videoFile.originalFilename
                 def destFile = new File(request.getRealPath(videoInstance.fileLocation))
                 videoFile.transferTo(destFile)
               }
-
             }
             def imageFile = request.getFile("imageFile_0")
             if (imageFile?.size > 0 ) {
