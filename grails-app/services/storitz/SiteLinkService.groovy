@@ -621,8 +621,8 @@ class SiteLinkService extends BaseProviderService {
     writer << "Found address: ${address}"
     def geoResult = geocodeService.geocode(address)
 
-    site.lng = geoResult.Placemark[0].Point.coordinates[0]
-    site.lat = geoResult.Placemark[0].Point.coordinates[1]
+    site.lng = geoResult.results[0].geometry.location.lng
+    site.lat = geoResult.results[0].geometry.location.lat
 
     site.sourceId = tab.SiteID.text()
     site.sourceLoc = tab.sLocationCode.text()
