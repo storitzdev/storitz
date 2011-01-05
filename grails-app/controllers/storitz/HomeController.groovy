@@ -121,7 +121,7 @@ class HomeController {
       }
     }
 
-    def title = "${params.address ? params.address : city + ', ' + state} Rent Best Price Guaranteed Self Storage - Storitz"
+    def title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state} Rent Best Price Guaranteed Self Storage - Storitz"
     // optimize zoom level
     def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
 
