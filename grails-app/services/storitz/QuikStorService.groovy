@@ -20,9 +20,8 @@ import storitz.constants.UnitType
 import javax.xml.datatype.XMLGregorianCalendar
 import javax.xml.datatype.DatatypeFactory
 
-class QuikStorService {
+class QuikStorService extends BaseProviderService {
 
-    static transactional = false
     def proxy = [:]
     def geocodeService
     def unitSizeService
@@ -30,6 +29,8 @@ class QuikStorService {
     private getProxy(url) {
       if (!proxy[url]) {
         proxy[url] = new WSClient(url, this.class.classLoader)
+        java.util.logging.Logger logger = proxy[url].getLogger()
+        logger.setLevel(java.util.logging.Level.WARNING)
         proxy[url].initialize()
       }
       return proxy[url]
@@ -52,9 +53,9 @@ class QuikStorService {
         } else {
           def site = new StorageSite()
           site.feed = quikStor
+          loc.site = site
           updateSite(site, stats, writer)
           SiteUser.link(site, quikStor.manager)
-          loc.site = site
           quikStor.addToSites(site)
           def facInfo = getFacilityInfo(loc)
           createSiteUser(site, facInfo.csSiteEmail, facInfo.csSiteEmail, quikStor.manager)
@@ -134,16 +135,18 @@ class QuikStorService {
 
   
     def createSiteUsers(QuikStor quikStor) {
+      // do nothing
 
     }
 
     def createSiteTaxes(QuikStor quikStor) {
+      // do nothing
 
     }
 
     def updateSite(StorageSite site, SiteStats stats, PrintWriter writer) {
       def quikStor = (QuikStor)site.feed
-      def loc = quikStor.locations.find{it.site = site}
+      def loc = quikStor.locations.find{it.site == site}
 
       def myProxy = getProxy(loc.quikStor.url)
       def facilityInfo = myProxy.create("org.tempuri.FacilityInfo")
@@ -242,8 +245,10 @@ class QuikStorService {
     }
 
     def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+      def siteUnitTypes = [:]
+      site.units.each{ siteUnitTypes[it.unitNumber as Integer] = false }
       def quikStor = (QuikStor)site.feed
-      def loc = quikStor.locations.find{it.site = site}
+      def loc = quikStor.locations.find{it.site == site}
       def myProxy = getProxy(quikStor.url)
       def availUnits = myProxy.create("org.tempuri.JustAvailableUnitTypesSpecial")
       availUnits.setCsSiteName(loc.sitename)
@@ -252,6 +257,7 @@ class QuikStorService {
       def unitTypes = myProxy.JustAvailableUnitTypesSpecial(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
       for(unitType in unitTypes.availableUnitTypesSpecialST) {
         def unit = site.units.find{it.unitNumber == unitType.iTypeId }
+        siteUnitTypes[unitType.iTypeId as Integer] = true
         if (unit) {
           if (unitType.availability > unit.unitCount) {
             stats.updateCount += (unitType.availability - unit.unitCount)
@@ -310,6 +316,16 @@ class QuikStorService {
           }
         }
       }
+      // clean up
+      println "Site type entries: ${siteUnitTypes.dump()}"
+      for(entry in siteUnitTypes.entrySet()) {
+        if (!entry.value) {
+          def unit = site.units.find{(it.unitNumber as Integer) == entry.key}
+          println "Cleanup found deleted type: ${entry.key} - removing ${unit.unitCount} units"
+          stats.removedCount += unit.unitCount
+          site.removeFromUnits(unit)
+        }
+      }
     }
 
     def loadPromos(QuikStor quickStor, StorageSite storageSiteInstance, PrintWriter writer) {
@@ -335,18 +351,5 @@ class QuikStorService {
     def moveIn(RentalTransaction trans) {
       
     }
-
-    def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, Boolean extended) {
-
-    }
-
-    def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-
-    }
-
-    def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, Boolean allowExtension) {
-
-    }
-
 
 }

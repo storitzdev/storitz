@@ -105,7 +105,8 @@ log4j = {
 	       'org.codehaus.groovy.grails.plugins', // plugins
 	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
 	       'org.springframework',
-	       'org.hibernate'
+	       'org.hibernate',
+           'org.apache.cxf'
 
     warn   'org.mortbay.log'
 
