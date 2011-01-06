@@ -36,4 +36,11 @@ class FeedController {
       Feed feed = Feed.get(params.id as Long)
       render(view: "seoLinks", model: [feed: feed])
     }
+
+    def refreshInsurance = {
+      Feed feed = Feed.get(params.id as Long)
+      feedService.refreshInsurance(feed)
+      flash.message = "Insurance Updated."
+      redirect(action: "list")
+    }
 }

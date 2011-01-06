@@ -222,7 +222,7 @@
                 <div><h3>Facilities from the same property operator:</h3></div>
                   <g:each var="psite" in="${propertyOperatorList}">
                     <div class="left" style="width:310px;">
-                      <g:link mapping="siteLink2" params="[site_title:psite.title, id:psite.id]">${psite.title}</g:link>
+                      <g:link mapping="siteLink2" params="[site_title:psite.title.replaceAll(' - ','-').replaceAll(' ','-'), id:psite.id]">${psite.title}</g:link>
                     </div>
                   </g:each>
                 <div style="clear:both;"></div>
@@ -233,7 +233,7 @@
                 <div><h3>Facilities nearby:</h3></div>
                   <g:each var="nsite" in="${nearbyList}">
                     <div class="left" style="width:310px;">
-                      <g:link mapping="siteLink2" params="[site_title:nsite.title, id:nsite.id]">${nsite.title}</g:link>
+                      <g:link mapping="siteLink2" params="[site_title:nsite.title.replaceAll(' - ','-').replaceAll(' ','-'), id:nsite.id]">${nsite.title}</g:link>
                     </div>
                   </g:each>
                 <div style="clear:both;"></div>

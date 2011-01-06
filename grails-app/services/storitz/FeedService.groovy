@@ -4,6 +4,8 @@ import com.storitz.CenterShift
 import com.storitz.SiteLink
 import com.storitz.StorageSite
 import com.storitz.QuikStor
+import com.storitz.Feed
+import storitz.constants.FeedType
 
 class FeedService {
 
@@ -100,6 +102,26 @@ class FeedService {
 
       default:
         throw new Exception("Unknown service for site update")
+    }
+  }
+
+  def refreshInsurance(Feed feed) {
+    switch(feed.feedType) {
+
+      case FeedType.SITELINK:
+        siteLinkService.refreshInsurance(feed)
+        break
+
+      case FeedType.CENTERSHIFT:
+        CShiftService.refreshInsurance(feed)
+        break
+
+      case FeedType.QUIKSTOR:
+        quikStorService.refreshInsurance(feed)
+        break
+
+      default:
+        throw new Exception("Unknown service for insurance refresh")
     }
   }
 }

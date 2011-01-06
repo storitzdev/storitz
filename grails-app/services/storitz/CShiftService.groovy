@@ -10,12 +10,10 @@ import com.storitz.*
 import static groovyx.net.http.ContentType.XML
 import storitz.constants.*
 
-class CShiftService {
+class CShiftService extends BaseProviderService {
 
   def geocodeService
   def unitSizeService
-
-  boolean transactional = false
 
   def getSites(url, userName, pin) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
@@ -960,7 +958,12 @@ class CShiftService {
 
   }
 
-  def loadInsurance(cshift, site) {
+  def loadInsurance(Feed feed, StorageSite site) {
+
+    CenterShift cshift = (CenterShift)feed
+
+    def siteInsurances = [:]
+    site.insurances.each{ siteInsurances[it.provider] = false }
 
     URL endPoint = new URL(cshift.location.kioskUrl)
 

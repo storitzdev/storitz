@@ -502,10 +502,6 @@ class SiteLinkService extends BaseProviderService {
       def newSite = false
       if (site) {
         stats.updateCount++
-        site.insurances.each {ins ->
-          ins.delete()
-        }
-        site.insurances.clear()
         site.save(flush:true)
       } else {
         site = new StorageSite()
@@ -704,7 +700,7 @@ class SiteLinkService extends BaseProviderService {
 
     unitsAvailable(siteLink, site, stats, newSite, writer)
 
-    site.requiresInsurance = insurance(siteLink, site, writer)
+    site.requiresInsurance = loadInsurance(siteLink, site)
     if (site.units?.size() > 0) {
       def fees = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
       site.adminFee = fees["admin"] ? fees["admin"] : 0
@@ -727,13 +723,9 @@ class SiteLinkService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     records.'soap:Body'.'*:SiteInformationResponse'.'*:SiteInformationResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      site.insurances.each {ins ->
-        ins.delete()
-      }
       site.specialOffers.each {offer ->
         offer.delete()
       }
-      site.insurances.clear()
       site.specialOffers.clear()
       site.lastUpdate = 0
       site.save(flush: true)
@@ -917,7 +909,8 @@ class SiteLinkService extends BaseProviderService {
     }
   }
 
-  def insurance(siteLink, site, writer) {
+  def loadInsurance(Feed feed, StorageSite site) {
+    SiteLink siteLink = (SiteLink)feed
     def ret = getInsurance(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -927,21 +920,37 @@ class SiteLinkService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     def count = 0;
+    def siteInsurances = [:]
+    site.insurances.each{ siteInsurances[it.insuranceId as Integer] = false }
     for (ins in records.'soap:Body'.'*:InsuranceCoverageRetrieveResponse'.'*:InsuranceCoverageRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      def insurance = new Insurance()
-      insurance.insuranceId = Integer.parseInt(ins.InsurCoverageID.text())
+      def insuranceId = ins.InsurCoverageID.text() as Integer
+      siteInsurances[insuranceId] = true
+      def insurance = site.insurances.find{it.insuranceId == insuranceId}
+      def newInsurance = false
+      if (!insurance) {
+        newInsurance = true
+        insurance = new Insurance()
+        insurance.insuranceId = insuranceId
+        count++;
+      }
       insurance.totalCoverage = ins.dcCoverage.text() as BigDecimal
       insurance.premium = ins.dcPremium.text() as BigDecimal
       def pctTheft = ins.dcPCTheft.text()
-      insurance.percentTheft = (pctTheft != "" ? pctTheft as BigDecimal : 0) 
+      insurance.percentTheft = (pctTheft != "" ? pctTheft as BigDecimal : 0)
       insurance.provider = ins.sProvidor.text()
       insurance.active = true
-      count++;
+      insurance.save()
 
-      if (!insurance.save()) {
-        insurance.errors.allErrors.each { writer.println it }
+      if (newInsurance) {
+        site.addToInsurances(insurance)
       }
-      site.addToInsurances(insurance)
+    }
+    for(entry in siteInsurances.entrySet()) {
+      if (!entry.value) {
+        def ins = site.insurances.find{(it.insuranceId as Integer) == entry.key}
+        println "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
+        site.removeFromInsurances(ins)
+      }
     }
     return count > 0
   }

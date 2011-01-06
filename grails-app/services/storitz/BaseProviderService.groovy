@@ -5,10 +5,19 @@ import com.storitz.StorageUnit
 import com.storitz.SpecialOffer
 import com.storitz.Insurance
 import com.storitz.StorageSite
+import com.storitz.Feed
 
-class BaseProviderService {
+abstract class BaseProviderService {
 
-    static transactional = false
+  static transactional = false
+
+  def refreshInsurance(Feed feed) {
+    for(site in feed.sites) {
+      loadInsurance(feed, site)
+    }
+  }
+
+  abstract loadInsurance(Feed feed, StorageSite site)
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
     def ret = calculateTotals(site, unit, promo, ins, moveInDate, extended)

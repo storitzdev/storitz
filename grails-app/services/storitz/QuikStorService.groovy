@@ -19,6 +19,7 @@ import storitz.constants.TruckType
 import storitz.constants.UnitType
 import javax.xml.datatype.XMLGregorianCalendar
 import javax.xml.datatype.DatatypeFactory
+import com.storitz.Feed
 
 class QuikStorService extends BaseProviderService {
 
@@ -100,6 +101,18 @@ class QuikStorService extends BaseProviderService {
       }
     }
 
+    def refreshInsurance(Feed feed) {
+      QuikStor quikStor = (QuikStor)feed
+
+      for (loc in quikStor.locations) {
+        loadInsurance(loc.site, loc)
+      }
+    }
+
+    def loadInsurance(Feed feed, StorageSite site) {
+      
+    }
+
     def loadInsurance(StorageSite site, QuikStorLocation loc) {
       def myProxy = getProxy(loc.quikStor.url)
       def availIns = myProxy.create("org.tempuri.AvailableInsurance")
@@ -108,10 +121,12 @@ class QuikStorService extends BaseProviderService {
       availIns.setCsPassword(loc.password)
       def insurances = myProxy.AvailableInsurance(availIns.csUser, availIns.csPassword, availIns.csSiteName)
 
-      println "Insurances - ${insurances?.dump()}"
-      
+      def siteInsurances = [:]
+      site.insurances.each{ siteInsurances[it.provider] = false }
+
       for(ins in insurances?.availableInsuranceST) {
         def myIns = site.insurances.find{ it.totalCoverage == ins.dCoverageAmount && it.percentTheft == ins.dCoveragePercentage }
+        siteInsurances[ins.typeDesc] = true
         if (myIns) {
           myIns.premium = ins.dMonthlyFee
           println "Updating insurance Coverage:${myIns.totalCoverage} percentTheft: ${myIns.percentTheft} Monthly: ${myIns.premium}"
@@ -131,6 +146,14 @@ class QuikStorService extends BaseProviderService {
           }
         }
       }
+      for(entry in siteInsurances.entrySet()) {
+        if (!entry.value) {
+          def ins = site.insurances.find{it.provider == entry.key}
+          println "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
+          site.removeFromInsurances(ins)
+        }
+      }
+
     }
 
   
