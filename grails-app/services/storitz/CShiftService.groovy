@@ -496,8 +496,8 @@ class CShiftService {
       writer.println "Found address: ${address}"
       def geoResult = geocodeService.geocode(address)
 
-      site.lng = geoResult.Placemark[0].Point.coordinates[0]
-      site.lat = geoResult.Placemark[0].Point.coordinates[1]
+      site.lng = geoResult.results[0].geometry.location.lng
+      site.lat = geoResult.results[0].geometry.location.lat
 
     }
     writer.println "Returning good address: ${site.address}, ${site.city} ${site.state}"
