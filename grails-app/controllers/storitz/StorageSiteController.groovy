@@ -533,11 +533,11 @@ class StorageSiteController {
     UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : bestUnit?.unitType
 
     def video = Video.findBySite(site)
-    def propertyOperatorList = StorageSite.findAllByFeed(site.feed)
+    def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id }
 
     def zoom = 12 // may try tighter
     def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
-    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
+    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,

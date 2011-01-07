@@ -55,6 +55,9 @@ class MigrationController {
       } else if (myFeed.feedType == FeedType.CENTERSHIFT) {
         CenterShift f = myFeed as CenterShift
         render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
+      } else if (myFeed.feedType == FeedType.QUIKSTOR) {
+        QuikStor f = myFeed as QuikStor
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
       }
     }
   }
@@ -86,6 +89,11 @@ class MigrationController {
         feed.orgId = resp.feed?.orgId
         feed.cshiftVersion = CenterShiftVersion.getEnumFromId(resp.feed.cshiftVersion)
         feed.feedType = FeedType.CENTERSHIFT
+        feed.operatorName = resp.feed.operatorName
+      } else if (resp.feed.feedType == 'QUIKSTOR') {
+        feed = new QuikStor()
+        feed.feedType = FeedType.QUIKSTOR
+        // TODO - cycle through and build the QuikStorLocations
       }
       // create the manager first
       // handle users

@@ -360,7 +360,7 @@ class QuikStorService extends BaseProviderService {
     }
 
     def checkRented(RentalTransaction trans) {
-
+       // TODO - check the JustAvailUnitTypes agains this one to see if the unit is available
     }
 
     def moveInDetail(RentalTransaction trans) {

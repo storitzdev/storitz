@@ -931,6 +931,7 @@ class SiteLinkService extends BaseProviderService {
         newInsurance = true
         insurance = new Insurance()
         insurance.insuranceId = insuranceId
+        insurance.active = true
         count++;
       }
       insurance.totalCoverage = ins.dcCoverage.text() as BigDecimal
@@ -938,7 +939,6 @@ class SiteLinkService extends BaseProviderService {
       def pctTheft = ins.dcPCTheft.text()
       insurance.percentTheft = (pctTheft != "" ? pctTheft as BigDecimal : 0)
       insurance.provider = ins.sProvidor.text()
-      insurance.active = true
       insurance.save()
 
       if (newInsurance) {
