@@ -807,9 +807,11 @@ class SiteLinkService extends BaseProviderService {
 
         if (!existingUnit) {
 
+          def searchType
           def siteUnit = new StorageUnit()
           def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
           if (unitTypeLookup) {
+            searchType = unitTypeLookup.searchType
             if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
               siteUnit.unitType = unitTypeLookup.unitType
               siteUnit.isTempControlled = unitTypeLookup.tempControlled
@@ -821,7 +823,13 @@ class SiteLinkService extends BaseProviderService {
 
             writer.println "Unknown unit type description ${typeName}"
 
-            if ((typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/)) continue
+            if ((typeName ==~ /(?i).*(cell|mail|slip|apartment|office|container|portable|wine|locker).*/)) continue
+
+            if ((typeName ==~ /(?i).*(parking|rv).*/)) {
+              searchType = SearchType.PARKING
+            } else {
+              searchType = SearchType.STORAGE
+            }
 
             def floor = unit.iFloor.text() as Integer
 
@@ -861,7 +869,7 @@ class SiteLinkService extends BaseProviderService {
             siteUnit.displaySize = width + " X " + length
           }
 
-          def unitSize = unitSizeService.getUnitSize(width, length)
+          def unitSize = unitSizeService.getUnitSize(width, length, searchType)
 
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0) && siteUnit.price > 0) {
             siteUnit.unitsize = unitSize

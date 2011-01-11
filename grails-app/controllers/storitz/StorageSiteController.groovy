@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie
 import org.grails.plugins.imagetools.ImageTool
 import storitz.constants.UnitType
 import com.storitz.*
+import storitz.constants.SearchType
 
 class StorageSiteController {
 
@@ -477,15 +478,22 @@ class StorageSiteController {
       return;
     }
 
-    StorageSize unitSize = params.size ? StorageSize.get(params.size) : null
-    
+
     //////////////////////////////////////////
     // >>> BEGIN match smartCall action code <<<
     // TODO: refactor
 
-    Collection sizeList = site.units.collect { it.unitsize }.unique()
+    SearchType searchType
+    StorageSize unitSize = params.size ? StorageSize.get(params.size) : null
+    if (unitSize) {
+      searchType = unitSize.searchType
+    } else {
+      searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE
+    }
+
+    Collection sizeList = site.units.findAll{ it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
     // output JSON for types
-    Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+    Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitsize.searchType == searchType}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
 
     sizeList.sort { it.width * it.length }
 
@@ -500,7 +508,7 @@ class StorageSiteController {
       bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
     } else {
       // TODO - decide on best price or best price for a given size
-      bestUnit = site.units.findAll{ it.unitCount > 0 }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > 0 }.min{ it.price }
     }
 
     // >>> END match smartCall action code <<<
@@ -537,13 +545,13 @@ class StorageSiteController {
 
     def zoom = 12 // may try tighter
     def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
-    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
+    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
             shortSessionId:session.shortSessionId, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
-            pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
+            pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
             promoId:params.promoId, insuranceId:insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
   }
 
@@ -595,29 +603,36 @@ class StorageSiteController {
         rentalTransaction = RentalTransaction.get(callParams.rentalTransaction.id)
       }
 
-      StorageSize unitSize = callParams.searchSize ? StorageSize.get(callParams.searchSize) : null
 
       //////////////////////////////////////////
       // >>> BEGIN match detail action code <<<
 
-      Collection sizeList = site.units.collect { it.unitsize }.unique()
+      SearchType searchType
+      StorageSize unitSize = callParams.searchSize ? StorageSize.get(callParams.searchSize) : null
+      if (unitSize) {
+        searchType = unitSize.searchType
+      } else {
+        searchType = callParams.searchType ? SearchType.getEnumFromId(callParams.searchType) : SearchType.STORAGE
+      }
+
+      Collection sizeList = site.units.findAll{ it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
       // output JSON for types
-      Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+      Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitsize.searchType == searchType}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
 
       sizeList.sort { it.width * it.length }
 
       def bestUnit
       // if a size was chosen, use it, else get the "best" price
-      if (callParams.unitType && unitSize) {
-        bestUnit = site.units.findAll{ it.unitType == callParams.unitType && it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
+      if (params.unitType && unitSize) {
+        bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
         if (!bestUnit) {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
         }
       } else if (unitSize) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
       } else {
         // TODO - decide on best price or best price for a given size
-        bestUnit = site.units.findAll{ it.unitCount > 0 }.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > 0 }.min{ it.price }
       }
 
       // >>> END match detail action code <<<
@@ -668,6 +683,7 @@ class StorageSiteController {
       return
     }
 
+    SearchType searchType = SearchType.getEnumFromId(params.searchType)
     Collection unitTypes
     Collection sizeList
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
@@ -675,8 +691,8 @@ class StorageSiteController {
       unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
       sizeList = site.units.findAll{ it.unitType == unitType }.collect{ it.unitsize }.unique()
     } else {
-      unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.collect { it.unitsize }.unique()
+      unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitsize.searchType == searchType }.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+      sizeList = site.units.findAll{ it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
     }
 
     // output JSON for types
@@ -736,6 +752,7 @@ class StorageSiteController {
   }
 
   def refreshInventory = {
+      println "Refreshing inventory"
       storitz.UpdateInventoryJob.triggerNow([from:'Admin']);
       flash.message = "Inventory/units refreshing now"
       redirect(controller:"admin", action:"index")

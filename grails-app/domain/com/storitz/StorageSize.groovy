@@ -1,5 +1,7 @@
 package com.storitz
 
+import storitz.constants.SearchType
+
 class StorageSize {
 
     static constraints = {
@@ -10,4 +12,6 @@ class StorageSize {
     BigDecimal width
     BigDecimal length
     BigDecimal height
+
+    SearchType searchType
 }

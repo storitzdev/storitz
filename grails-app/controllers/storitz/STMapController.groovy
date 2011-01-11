@@ -3,6 +3,7 @@ package storitz
 import com.storitz.StorageSite
 import grails.converters.JSON
 import com.storitz.StorageSize
+import storitz.constants.SearchType
 
 class STMapController {
 
@@ -76,16 +77,18 @@ class STMapController {
       double lat = params.lat as double
       double lng = params.lng as double
 
+      Long searchSize = (params.searchSize && params.searchSize.isNumber() ? params.searchSize as Long : 1)
+      SearchType searchType = SearchType.getEnumFromId(params.searchType)
+
       if (params.boolean('addressChange')) {
-        zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
+        zoom = mapService.optimizeZoom(searchSize, searchType, lat, lng, 617, 284)
 
         dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
       } else {
         dim = [swLat: params.swLat as BigDecimal, swLng: params.swLng as BigDecimal, neLat: params.neLat as BigDecimal, neLng: params.neLng as BigDecimal]
       }
-      Long searchSize = (params.searchSize && params.searchSize.isNumber() ? params.searchSize as Long : 1)
 
-      def results = mapService.getSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+      def results = mapService.getSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
 
       results.sort( {a,b -> mapService.calcDistance(lat, a.lat as double, lng, a.lng as double) <=> mapService.calcDistance(lat, b.lat as double, lng, b.lng as double) } as Comparator)
 

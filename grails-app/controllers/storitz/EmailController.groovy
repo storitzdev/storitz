@@ -49,20 +49,4 @@ class EmailController {
         }
         flash.message = "Mail sent Test format ${g.formatNumber(number:99.00, type:'currency', currencyCode:'USD')} Theft: ${g.formatNumber(number:0.50, type:'percent')}"
     }
-
-    def sizeTest = {
-      def dimensions = params.dimensions
-      def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
-      if (m.matches()) {
-        def width = m[0][1] as Double
-        def length = m[0][2] as Double
-
-        def unitSize = unitSizeService.getUnitSize(width, length)
-
-        flash.message = "Unitsize id=${unitSize?.id} width:${unitSize?.width} length:${unitSize?.length} dimension area: ${width * length} "
-      } else {
-        flash.message = "No match for dimensions ${dimensions}"
-      }
-      render view:"email"
-    }
 }

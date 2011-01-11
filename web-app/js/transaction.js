@@ -205,6 +205,7 @@ function showTotals(action) {
     dataType: 'json',
     data: {
       searchSize: searchSize,
+      searchType: searchType,
       id: siteId,
       chosenPromoId: chosenPromoId,
       insuranceId: insuranceId,

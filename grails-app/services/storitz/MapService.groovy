@@ -5,6 +5,7 @@ import com.storitz.geoip.GeoIp
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import org.hibernate.FetchMode
+import storitz.constants.SearchType
 
 class MapService {
     def geoIp;
@@ -54,7 +55,7 @@ class MapService {
         return [swLat:swLat, swLng:swLng, neLat:neLat, neLng:neLng]
     }
 
-    def countSites(Integer searchSize, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
+    def countSites(Integer searchSize, SearchType searchType, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
 
         def sites = StorageSite.createCriteria()
       
@@ -74,12 +75,19 @@ class MapService {
                 eq("id", new Long(searchSize))
               }
             }
+          } else {
+            fetchMode('units', FetchMode.EAGER)
+            units {
+              unitsize {
+                eq("searchType", searchType)
+              }
+            }
           }
         }
 
     }
 
-    def getSites(Long searchSize, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
+    def getSites(Long searchSize, SearchType searchType, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
       def sites = StorageSite.createCriteria()
       return sites.listDistinct {
         and {
@@ -92,6 +100,14 @@ class MapService {
           units {
             unitsize {
               eq("id", searchSize)
+            }
+            gt("unitCount", 0)
+          }
+        } else {
+          fetchMode('units', FetchMode.EAGER)
+          units {
+            unitsize {
+              eq("searchType", searchType)
             }
             gt("unitCount", 0)
           }
@@ -112,24 +128,24 @@ class MapService {
 
     }
 
-    def optimizeZoom(Integer searchSize, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
+    def optimizeZoom(Integer searchSize, SearchType searchType, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
       def zoom = 12
 
       def dim = getDimensions(zoom, lat, lng, width, height)
-      def count = countSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+      def count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
       if (count > 20) {
         // loop and shrink
         while (count > 20) {
           zoom++
           dim = getDimensions(zoom, lat, lng, width, height)
-          count = countSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+          count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
         }
       } else if (count == 0) {
         // grow
         while (zoom > 3 && count == 0) {
           zoom--
           dim = getDimensions(zoom, lat, lng, width, height)
-          count = countSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+          count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
         }
         if (count == 0) {
           zoom = 12
@@ -140,7 +156,7 @@ class MapService {
         while(zoom > targetZoom && count == 1) {
           zoom--
           dim = getDimensions(zoom, lat, lng, width, height)
-          count = countSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
+          count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
         }
         if (count == 1) {
           zoom = 12

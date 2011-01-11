@@ -8,19 +8,27 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum UnitType {
-  UNDEFINED("Undefined"),
-  INTERIOR("Interior"),
-  UPPER("Upper"),
-  DRIVEUP("Drive Up")
+  UNDEFINED("Undefined", null),
+  INTERIOR("Interior", SearchType.STORAGE),
+  UPPER("Upper", SearchType.STORAGE),
+  DRIVEUP("Drive Up", SearchType.STORAGE),
+  COVERED("Covered", SearchType.PARKING),
+  UNCOVERED("Uncovered", SearchType.PARKING)
 
   final String display
+  final SearchType searchType
 
-  public UnitType(String display) {
+  public UnitType(String display, SearchType searchType) {
     this.display = display
+    this.searchType = searchType
   }
 
   static list() {
-    [UNDEFINED, INTERIOR, UPPER, DRIVEUP]
+    [UNDEFINED, INTERIOR, UPPER, DRIVEUP, COVERED, UNCOVERED]
+  }
+
+  static public List getUnitTypeBySearchType(SearchType searchType) {
+    return list().findAll{ it.searchType == searchType }
   }
 
   static public UnitType getEnumFromId(String value) {

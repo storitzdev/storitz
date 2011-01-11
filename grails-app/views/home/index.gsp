@@ -1,4 +1,4 @@
-<%@ page import="storitz.constants.UnitType; storitz.constants.TruckType" %>
+<%@ page import="storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -22,6 +22,7 @@
 //<![CDATA[
         var urlMapResults = "${createLink(controller:'STMap', action:'mapresults')}";
         var urlUpdateMetro = "${createLink(controller:'home', action:'updateMetro')}";
+        var urlChangeSearchType = "${createLink(controller:'home', action:'changeSearchType')}";
         var srcDetailButton = ${p.imageLink(src:'details-button.gif')};
         var srcSpecialOffer = ${p.imageLink(src:'special-offer-16px.png')};
         var srcRentMeButton = ${p.imageLink(src:'rent-me-button.png')};
@@ -55,6 +56,7 @@
         var oldSearchAddr;
         var addressChange = false;
         var searchSize = ${searchSize};
+        var searchType = '${SearchType.STORAGE}';
         var searchDate;
         var helpFadeout = null;
         var baseURL = '${request.contextPath}';
@@ -189,9 +191,18 @@ $(window).trigger( 'hashchange' );
                   <input type="text" name="address" id="address" class="inputBox" value="${params.address ? params.address : 'Enter address or zip code'}"/>
                 </div>
                 <div style="clear:both;height: 10px;"></div>
+                <div class="left" style="margin: 2px 9px 0 0;">
+                  <storitz:image src="btn-circle-2.png" width="26" height="26" alt="1"/>
+                </div>
+                <div class="left">
+                  <input type="radio" name="searchType" checked="checked" value="${SearchType.STORAGE}"/> Storage
+                  &nbsp;
+                  <input type="radio" name="searchType" value="${SearchType.PARKING}"/> Parking/RV
+                </div>
+                <div style="clear:both;height: 10px;"></div>
                 <div>
                   <div class="left" style="margin: 2px 9px 0 0;">
-                    <storitz:image src="btn-circle-2.png" width="26" height="26" alt="2"/>
+                    <storitz:image src="btn-circle-3.png" width="26" height="26" alt="2"/>
                   </div>
                   <div class="left">
                     <g:select name="size" id="size" from="${sizeList}" class="inputSelect" value="${params.size}" optionKey="id" optionValue="description"/>
@@ -203,7 +214,7 @@ $(window).trigger( 'hashchange' );
                 </div>
                 <div style="height: 10px;"></div>
                 <div class="left" style="margin: 2px 9px 0 0;">
-                  <storitz:image src="btn-circle-3.png" width="26" height="26" alt="3"/>
+                  <storitz:image src="btn-circle-4.png" width="26" height="26" alt="3"/>
                 </div>
                 <div class="left">
                   <input type="text" id="date" class="inputBox dateInput" value="${params.date ? params.date : 'Select move-in date'}"/>

@@ -777,10 +777,35 @@ class CShiftService extends BaseProviderService {
         def dimensions = unit.DIMENSIONS.text()
         def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
         if (m.matches()) {
+
           // legal dimensions
           def width = m[0][1] as Double
           def length = m[0][2] as Double
-          def unitSize = unitSizeService.getUnitSize(width, length)
+
+          def searchType
+          def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+          if (unitTypeLookup) {
+            println "Unit type found for description: ${typeName} - searchType: ${unitTypeLookup.searchType}"
+            if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
+              searchType = unitTypeLookup.searchType
+            } else {
+              writer.println "Skipping illegal type ${typeName}"
+              continue
+            }
+          } else {
+            writer.println "Unknown unit type description ${typeName}"
+
+            if (typeName ==~ /(?i).*(cell|mail|slip|apartment|office|container|portable|wine|locker).*/) continue
+
+            if (typeName ==~ /(?i).*(parking|rv).*/) {
+              searchType = SearchType.PARKING
+            } else {
+              searchType = SearchType.STORAGE
+            }
+
+          }
+
+          def unitSize = unitSizeService.getUnitSize(width, length, searchType)
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
             def displaySize
             if (m[0][1].isInteger() && m[0][2].isInteger()) {
@@ -797,7 +822,6 @@ class CShiftService extends BaseProviderService {
               siteUnit.unitInfo = dimensions
               newUnit = true
 
-              def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
               if (unitTypeLookup) {
                 if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
                   siteUnit.unitType = unitTypeLookup.unitType
@@ -808,8 +832,6 @@ class CShiftService extends BaseProviderService {
                 }
               } else {
                 writer.println "Unknown unit type description ${typeName}"
-
-                if (typeName ==~ /(?i).*(parking|cell|mail|slip|apartment|office|container|portable|wine|locker|rv).*/) continue
 
                 if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
                   siteUnit.unitType = UnitType.UPPER
@@ -885,11 +907,12 @@ class CShiftService extends BaseProviderService {
         }
         if (limitFactor == 'Unit Dimensions/Size') {
           def govValue = gov.'governor-value'.text()
-          def m = govValue =~ /(\d+)\s*X\s*(\d+)/
+          def m = govValue =~ /(\d+)\s*X\s*(\d+)/                                   
           if (m.matches()) {
             def width = m[0][1] as Double
             def length = m[0][2] as Double
-            promoSize = unitSizeService.getUnitSize(width, length)
+            // TODO - may need to filter parking from storage here
+            promoSize = unitSizeService.getUnitSize(width, length, SearchType.STORAGE)
           }
         }
       }

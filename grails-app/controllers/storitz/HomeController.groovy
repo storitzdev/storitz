@@ -4,6 +4,7 @@ import com.storitz.Metro
 import com.storitz.MetroEntry
 import com.storitz.StorageSize
 import grails.converters.JSON
+import storitz.constants.SearchType
 
 class HomeController {
 
@@ -122,14 +123,27 @@ class HomeController {
     }
 
     def title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state} Rent Best Price Guaranteed Self Storage - Storitz"
+
+    def sizeList
+    def searchType = SearchType.STORAGE
+    if (params.searchType) {
+      searchType = SearchType.getEnumFromId(params.searchType)
+    }
+    sizeList = StorageSize.createCriteria().list(params) {
+      or {
+        eq("id", 1L)
+        eq("searchType",searchType)
+      }
+    }
+
     // optimize zoom level
-    def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), lat, lng, 617, 284)
+    def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), searchType, lat, lng, 617, 284)
 
     def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
 
     Long searchSize = (params.size && params.size.isNumber() ? params.size as Long : 1)
 
-    def sites = mapService.getSites(searchSize, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
+    def sites = mapService.getSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
     def siteMoveInPrice = [:]
 
@@ -147,6 +161,7 @@ class HomeController {
         moveInDate = new Date()
       }
     }
+
     for (site in sites) {
       def bestUnit
       if (searchSize != 1 && unitSize) {
@@ -171,7 +186,7 @@ class HomeController {
       }
     }
 
-    [ sizeList: StorageSize.list(params), title:title, city:city, searchCity:searchCity, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice, zipSearch:zipSearch]
+    [ sizeList: sizeList, title:title, city:city, searchCity:searchCity, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice, zipSearch:zipSearch]
   }
 
   def updateMetro = {
@@ -238,6 +253,19 @@ class HomeController {
     JSON.use("default")
     render (status: 200, contentType:"application/json", text:"{ \"metro\":${metro as JSON}, \"neighborhoodList\": ${neighborhoodList as JSON}, \"neighborhood\":${neighborhood as JSON} }")
 
+  }
+
+  def changeSearchType = {
+    def searchType = SearchType.getEnumFromId(params.searchType)
+    def sizeList = StorageSize.createCriteria().list(params) {
+      or {
+        eq("id", 1L)
+        eq("searchType",searchType)
+      }
+    }
+
+    JSON.use("default")
+    render (status: 200, contentType:"application/json", text: sizeList as JSON )
   }
 
   private handleGeocode(geoResult) {

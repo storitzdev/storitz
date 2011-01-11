@@ -24,6 +24,7 @@ var premium = 0;
 var tax = 0;
 var deposit = 0;
 var actualSize = '';
+var searchType = "${searchType}";
 var urlDetailTotals = "${createLink(controller:'storageSite', action:'detailTotals')}";
 
 <g:each var="size" in="${sizeList}">storageSize[${size.id}] = "${size.description}";</g:each>

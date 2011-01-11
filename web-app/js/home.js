@@ -10,13 +10,17 @@ function siteLink(s) {
     var city_pat = RegExp(' ?[-/]? ?' + s.city + ' ?[-/]? ?', 'i');
     var queryStr = '';
     var paramAdded = false;
-    if (searchSize > 1 || getDate() != '' || getAddress() != '') {
+    if (searchSize > 1 || getDate() != '' || getAddress() != '' || searchType != "STORAGE") {
         if (searchSize >1) {
             paramAdded = true;
             queryStr += ('?size=' + searchSize);
         }
         if (getDate() != '') {
             queryStr += ((paramAdded ? '&' : '?') + 'date=' + getDate());
+            paramAdded = true;
+        }
+        if (searchType != 'STORAGE') {
+            queryStr += ((paramAdded ? '&' : '?') + 'searchType=' + searchType);
             paramAdded = true;
         }
     }
@@ -141,6 +145,7 @@ function getMarkers() {
         data: {
             searchSize: searchSize,
             addressChange: addressChange,
+            searchType: searchType,
             date: getDate(),
             lat: map.getCenter().lat(),
             lng: map.getCenter().lng(),
@@ -192,7 +197,7 @@ function getMarkers() {
     $('#mapSpinner').idle(500).fadeOut('slow')
 }
 
-function showAddress(address, size, date) {
+function showAddress(address, size, date, searchType) {
 
     var validAddr = address.length > 4 && !/^Enter /.test(address);
 
@@ -239,7 +244,7 @@ function setupCalendar() {
         maxDate: "+2M",
         onSelect: function(dateText, inst) {
             _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 3 date']);
-            showAddress(getAddress(), $('#size').val(), dateText);
+            showAddress(getAddress(), $('#size').val(), dateText, searchType);
         }
     }).addTouch();
 }
@@ -262,7 +267,7 @@ function setupForm() {
         if (event.keyCode == 13) {
             event.preventDefault();
             _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 1 address']);
-            showAddress(getAddress(), $('#size').val(), getDate());
+            showAddress(getAddress(), $('#size').val(), getDate(), searchType);
             return false;
         }
     });
@@ -273,18 +278,18 @@ function setupForm() {
     });
     $('#address').focusout(function(event) {
         _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 1 address']);
-        showAddress(getAddress(), $('#size').val(), getDate());
+        showAddress(getAddress(), $('#size').val(), getDate(), searchType);
         return false;
     });
     $('select#size').change(function(event) {
         var searchUnitSize = $('#size').val();
         _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 2 unitsize ' + searchUnitSize]);
-        showAddress(getAddress(), searchUnitSize, getDate());
+        showAddress(getAddress(), searchUnitSize, getDate(), searchType);
     });
     $('select#sbUnitsize').change(function(event) {
         var searchUnitSize = $('select#sbUnitsize').val();
         _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'results unitsize ' + searchUnitSize]);
-        showAddress(getAddress(), searchUnitSize, getDate());
+        showAddress(getAddress(), searchUnitSize, getDate(), searchType);
     });
     $('select#sbSortSelect').change(function(event) {
         var sortType = $(this).val();
@@ -331,6 +336,27 @@ function setupForm() {
                 ]);
                 break;
         }
+    });
+    $('input[name="searchType"]').change(function(event) {
+        // update the dropdown here
+        $('#size').children().each(function(index) { $(this).remove(); });
+        searchType = $('input[name="searchType"]:checked').val();
+        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'searchType ' + searchType]);
+        $.ajax({
+            url: urlChangeSearchType,
+            method:'get',
+            dataType:'json',
+            data: { searchType: searchType },
+            success:function(data) {
+                $.each(data, function (index, sizeEntry) {
+                   var opt = $("<option>", {
+                     value: sizeEntry.id
+                   }).text(sizeEntry.description);
+                   $('#size').append(opt);
+                });
+            }
+        });
+        showAddress(getAddress(), $('#size').val(), getDate(), searchType);
     });
 }
 
@@ -621,6 +647,7 @@ function buildState() {
         params.date = getDate();
     }
     params.searchSize = $('#size').val();
+    params.searchType = $('input[name="searchType"]:checked').val();
     params.zoom = map.getZoom();
     params.lat = map.getCenter().lat();
     params.lng = map.getCenter().lng();
@@ -653,6 +680,10 @@ $(window).bind('hashchange', function(e) {
     if (params.searchSize) {
         searchSize = parseInt(params.searchSize);
         $("select#size").val(searchSize);
+    }
+    if (params.searchType) {
+        searchType = params.searchType;
+        $('input[name="searchType]').val(searchType);
     }
     if (params.date) {
         searchDate = params.date;

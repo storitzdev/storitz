@@ -20,6 +20,7 @@ import storitz.constants.UnitType
 import javax.xml.datatype.XMLGregorianCalendar
 import javax.xml.datatype.DatatypeFactory
 import com.storitz.Feed
+import storitz.constants.SearchType
 
 class QuikStorService extends BaseProviderService {
 
@@ -301,41 +302,41 @@ class QuikStorService extends BaseProviderService {
           unitInfoReq.setItypeId(unitType.iTypeId)
           def unitInfo = myProxy.UnitTypeInfo(unitInfoReq.csUser, unitInfoReq.csPassword, unitInfoReq.csSiteName, unitInfoReq.itypeId)
           writer.println ("retrieved unitInfo ${unitInfo.dump()}")
-          if (unitInfo.csUnitType != 'Parking') {
-            def unitsize = unitSizeService.getUnitSize(unitInfo.dWidth, unitInfo.dLength)
-            if (unitsize) {
-              unit = new StorageUnit()
-              unit.unitNumber = unitType.iTypeId
-              unit.price = unit.pushRate = unitType.dPrice
-              unit.displaySize = unitType.sTypeDescription.tokenize(',')[0]
-              unit.unitsize = unitsize
-              unit.isAvailable = true
-              unit.isSecure = false
-              unit.isTempControlled = unitInfo.csUnitType == 'Climate'
-              unit.isAlarm = false
-              unit.isPowered = false
-              unit.isIrregular = false
-              unit.description = unitType.sTypeDescription
-              unit.unitCount = unitType.availability
-              stats.createCount += unit.unitCount
-              if (unitInfo.iFloor > 1) {
-                unit.unitType = UnitType.UPPER
-              } else {
-                if (unitInfo.csInside == 'Inside') {
-                  // TODO - determine how to distinguish INTERIOR from DRIVEUP
-                  unit.unitType = UnitType.INTERIOR
-                } else {
-                  unit.unitType = UnitType.DRIVEUP
-                }
-              }
-              unit.save(flush:true)
-              site.addToUnits(unit)
-              writer.println "Created new unit ${unit.dump()}"
+          def searchType = SearchType.STORAGE
+          if (unitInfo.csUnitType == 'Parking') {
+            searchType = SearchType.PARKING
+          }
+          def unitsize = unitSizeService.getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
+          if (unitsize) {
+            unit = new StorageUnit()
+            unit.unitNumber = unitType.iTypeId
+            unit.price = unit.pushRate = unitType.dPrice
+            unit.displaySize = unitType.sTypeDescription.tokenize(',')[0]
+            unit.unitsize = unitsize
+            unit.isAvailable = true
+            unit.isSecure = false
+            unit.isTempControlled = unitInfo.csUnitType == 'Climate'
+            unit.isAlarm = false
+            unit.isPowered = false
+            unit.isIrregular = false
+            unit.description = unitType.sTypeDescription
+            unit.unitCount = unitType.availability
+            stats.createCount += unit.unitCount
+            if (unitInfo.iFloor > 1) {
+              unit.unitType = UnitType.UPPER
             } else {
-              writer.println "Skipped due to unit size: ${unitInfo.dWidth} X ${unitInfo.dLength}"
+              if (unitInfo.csInside == 'Inside') {
+                // TODO - determine how to distinguish INTERIOR from DRIVEUP
+                unit.unitType = UnitType.INTERIOR
+              } else {
+                unit.unitType = UnitType.DRIVEUP
+              }
             }
+            unit.save(flush:true)
+            site.addToUnits(unit)
+            writer.println "Created new unit ${unit.dump()}"
           } else {
-            writer.println "Skipped due to unsupported type: ${unitInfo.csUnitType}"
+            writer.println "Skipped due to unit size: ${unitInfo.dWidth} X ${unitInfo.dLength}"
           }
         }
       }
@@ -360,11 +361,20 @@ class QuikStorService extends BaseProviderService {
     }
 
     def checkRented(RentalTransaction trans) {
-       // TODO - check the JustAvailUnitTypes agains this one to see if the unit is available
+      def unit = StorageUnit.get(trans.unitId)
+      def availUnits = myProxy.create("org.tempuri.JustAvailableUnitTypesSpecial")
+      availUnits.setCsSiteName(loc.sitename)
+      availUnits.setCsUser(loc.username)
+      availUnits.setCsPassword(loc.password)
+      def unitTypes = myProxy.JustAvailableUnitTypesSpecial(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
+      if (unit && unitType.find{it.iTypeId == unit.unitNumber}.size() > 0) {
+        return true
+      }
+      return false
     }
 
     def moveInDetail(RentalTransaction trans) {
-      
+      // TODO - call moveInCost with special information      
     }
 
     def createTenant(RentalTransaction trans) {
