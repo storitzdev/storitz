@@ -833,15 +833,19 @@ class CShiftService extends BaseProviderService {
               } else {
                 writer.println "Unknown unit type description ${typeName}"
 
-                if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
-                  siteUnit.unitType = UnitType.UPPER
-                } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
-                  siteUnit.unitType = UnitType.DRIVEUP
-                } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
-                  siteUnit.unitType = UnitType.INTERIOR
-                }
-                if (!siteUnit.unitType) {
-                  siteUnit.unitType = UnitType.UPPER
+                if (searchType == SearchType.PARKING) {
+                  siteUnit.unitType = UnitType.UNCOVERED
+                } else {
+                  if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
+                    siteUnit.unitType = UnitType.UPPER
+                  } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
+                    siteUnit.unitType = UnitType.DRIVEUP
+                  } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
+                    siteUnit.unitType = UnitType.INTERIOR
+                  }
+                  if (!siteUnit.unitType) {
+                    siteUnit.unitType = UnitType.UPPER
+                  }
                 }
                 siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
               }

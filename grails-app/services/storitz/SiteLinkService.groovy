@@ -825,24 +825,23 @@ class SiteLinkService extends BaseProviderService {
 
             if ((typeName ==~ /(?i).*(cell|mail|slip|apartment|office|container|portable|wine|locker).*/)) continue
 
+            def floor = unit.iFloor.text() as Integer
             if ((typeName ==~ /(?i).*(parking|rv).*/)) {
               searchType = SearchType.PARKING
+              siteUnit.unitType = UnitType.UNCOVERED
             } else {
               searchType = SearchType.STORAGE
-            }
-
-            def floor = unit.iFloor.text() as Integer
-
-            if (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/) {
-              siteUnit.unitType = UnitType.UPPER
-            } else if ((unit.bInside.text().toLowerCase() != 'false') || typeName ==~ /(?i)main floor.*/) {
-              siteUnit.unitType = UnitType.INTERIOR
-            } else if (typeName ==~ /(?i).*drive.*/) {
-              siteUnit.unitType = UnitType.DRIVEUP
-            }
-            siteUnit.isTempControlled = (unit.bClimate.text().toLowerCase() == 'true')
-            if (!siteUnit.unitType) {
-              siteUnit.unitType = UnitType.UPPER
+              if (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/) {
+                siteUnit.unitType = UnitType.UPPER
+              } else if ((unit.bInside.text().toLowerCase() != 'false') || typeName ==~ /(?i)main floor.*/) {
+                siteUnit.unitType = UnitType.INTERIOR
+              } else if (typeName ==~ /(?i).*drive.*/) {
+                siteUnit.unitType = UnitType.DRIVEUP
+              }
+              siteUnit.isTempControlled = (unit.bClimate.text().toLowerCase() == 'true')
+              if (!siteUnit.unitType) {
+                siteUnit.unitType = UnitType.UPPER
+              }
             }
           }
           siteUnit.unitCount = 1
