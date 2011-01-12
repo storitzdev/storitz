@@ -195,7 +195,7 @@ $(window).trigger( 'hashchange' );
                   <storitz:image src="btn-circle-2.png" width="26" height="26" alt="1"/>
                 </div>
                 <div class="left">
-                  <input type="radio" name="searchType" checked="checked" value="${SearchType.STORAGE}"/> Storage
+                  <input type="radio" name="searchType" checked="checked" value="${SearchType.STORAGE}"/> Self Storage
                   &nbsp;
                   <input type="radio" name="searchType" value="${SearchType.PARKING}"/> Parking/RV
                 </div>

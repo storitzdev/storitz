@@ -5,6 +5,7 @@ import com.storitz.MetroEntry
 import com.storitz.StorageSize
 import grails.converters.JSON
 import storitz.constants.SearchType
+import com.storitz.GeoLookup
 
 class HomeController {
 
@@ -41,13 +42,23 @@ class HomeController {
             address = params.address.join(' ');
           }
           geoResult = geocodeService.geocode(address)
+          handleGeocode(geoResult)
         } else {
-          geoResult = geocodeService.geocode("${params.city}, ${params.state}")
+
           searchCity = city = params.city.replaceAll('-', ' ')
           state = params.state
 
+          def geoLookup = GeoLookup.findByCityAndState(params.city, params.state)
+          if (geoLookup) {
+            city = geoLookup.city
+            state = geoLookup.state
+            zip = geoLookup.zip
+          } else {
+            geoResult = geocodeService.geocode("${params.city}, ${params.state}")
+            handleGeocode(geoResult)
+            new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+          }
         }
-        handleGeocode(geoResult)
 
     } else {
       // get IP to geo
@@ -61,8 +72,14 @@ class HomeController {
         state = loc.region
 
         if (!zip) {
-          geoResult = geocodeService.geocode(lat as double,lng as double)
-          handleGeocode(geoResult)
+          def geoLookup = GeoLookup.findByLatAndLng(lat, lng)
+          if (geoLookup) {
+            zip = geoLookup.zip
+          } else {
+            geoResult = geocodeService.geocode(lat as double,lng as double)
+            handleGeocode(geoResult)
+            new GeoLookup(lat:lat, lng:lng, city:city, state:state, zip:zip).save(flush: true)
+          }
         }
       }
     }
@@ -269,7 +286,7 @@ class HomeController {
   }
 
   private handleGeocode(geoResult) {
-    if (geoResult.results) {
+    if (geoResult.status == "OK") {
       lng = geoResult.results[0].geometry.location.lng
       lat = geoResult.results[0].geometry.location.lat
       for(comp in geoResult.results[0].address_components) {
@@ -294,6 +311,7 @@ class HomeController {
       if (!city) city = loc.city
       if (!state) state = loc.region
     }
+    println "Geocode results: ${city}, ${state}, ${zip}"
   }
 
   def redirectGeo = {
