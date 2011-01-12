@@ -28,13 +28,22 @@ class HomeController {
     if (params.zip || params.address || (params.city && params.state)) {
 
         if (params.zip) {
-          geoResult = geocodeService.geocode(params.zip)
-          zip = params.zip
-          if (params.city) {
-            city = params.city.replaceAll('-', ' ')
-          }
-          if (params.state) {
-            state = params.state
+          def geoLookup = GeoLookup.findByZip(params.zip)
+          if (geoLookup) {
+            city = geoLookup.city.replaceAll('-', ' ')
+            state = geoLookup.state
+            zip = params.zip
+          } else {
+            geoResult = geocodeService.geocode(params.zip)
+            zip = params.zip
+            if (params.city) {
+              city = params.city.replaceAll('-', ' ')
+            }
+            if (params.state) {
+              state = params.state
+            }
+            handleGeocode(geoResult)
+            new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
           }
         } else if (params.address) {
           def address = params.address
@@ -302,6 +311,7 @@ class HomeController {
             break
         }
       }
+
     } else {
       def loc = mapService.getGeoIp(servletContext, request)
 
@@ -311,7 +321,6 @@ class HomeController {
       if (!city) city = loc.city
       if (!state) state = loc.region
     }
-    println "Geocode results: ${city}, ${state}, ${zip}"
   }
 
   def redirectGeo = {
