@@ -356,6 +356,7 @@ function setupForm() {
                 });
             }
         });
+        addressChange = true;
         showAddress(getAddress(), $('#size').val(), getDate(), searchType);
     });
 }
