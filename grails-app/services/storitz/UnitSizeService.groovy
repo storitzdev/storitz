@@ -19,7 +19,7 @@ class UnitSizeService {
         if (searchType == SearchType.STORAGE) {
           unitSize = StorageSize.findAllBySearchType(searchType).findAll { it.length * it.width <= unitArea}?.min{ unitArea - it.width * it.length }
         } else if (searchType == SearchType.PARKING) {
-          unitSize = StorageSize.findAllBySearchType(searchType).findAll { it.length >= length }.min{ it.length - length }
+          unitSize = StorageSize.findAllBySearchType(searchType).findAll { it.length <= length }.min{ length - it.length }
         }
       }
       return unitSize
