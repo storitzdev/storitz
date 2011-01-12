@@ -55,7 +55,7 @@ class MapService {
         return [swLat:swLat, swLng:swLng, neLat:neLat, neLng:neLng]
     }
 
-    def countSites(Integer searchSize, SearchType searchType, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
+    def countSites(Long searchSize, SearchType searchType, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
 
         def sites = StorageSite.createCriteria()
       
@@ -128,7 +128,7 @@ class MapService {
 
     }
 
-    def optimizeZoom(Integer searchSize, SearchType searchType, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
+    def optimizeZoom(Long searchSize, SearchType searchType, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
       def zoom = 12
 
       def dim = getDimensions(zoom, lat, lng, width, height)

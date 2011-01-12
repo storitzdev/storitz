@@ -163,11 +163,11 @@ class HomeController {
     }
 
     // optimize zoom level
-    def zoom = mapService.optimizeZoom((params.size ? params.size as Integer : 1), searchType, lat, lng, 617, 284)
+    Long searchSize = (params.size && params.size.isNumber() ? params.size as Long : 1)
+
+    def zoom = mapService.optimizeZoom(searchSize, searchType, lat, lng, 617, 284)
 
     def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
-
-    Long searchSize = (params.size && params.size.isNumber() ? params.size as Long : 1)
 
     def sites = mapService.getSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
