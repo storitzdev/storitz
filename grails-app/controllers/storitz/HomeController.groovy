@@ -42,8 +42,9 @@ class HomeController {
             if (params.state) {
               state = params.state
             }
-            handleGeocode(geoResult)
-            new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+            if(handleGeocode(geoResult)) {
+              new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+            }
           }
         } else if (params.address) {
           def address = params.address
@@ -64,8 +65,9 @@ class HomeController {
             zip = geoLookup.zip
           } else {
             geoResult = geocodeService.geocode("${params.city}, ${params.state}")
-            handleGeocode(geoResult)
-            new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+            if(handleGeocode(geoResult)) {
+              new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+            }
           }
         }
 
@@ -86,8 +88,9 @@ class HomeController {
             zip = geoLookup.zip
           } else {
             geoResult = geocodeService.geocode(lat as double,lng as double)
-            handleGeocode(geoResult)
-            new GeoLookup(lat:lat, lng:lng, city:city, state:state, zip:zip).save(flush: true)
+            if (handleGeocode(geoResult)) {
+              new GeoLookup(lat:lat, lng:lng, city:city, state:state, zip:zip).save(flush: true)
+            }
           }
         }
       }
@@ -294,7 +297,7 @@ class HomeController {
     render (status: 200, contentType:"application/json", text: sizeList as JSON )
   }
 
-  private handleGeocode(geoResult) {
+  private boolean handleGeocode(geoResult) {
     if (geoResult.status == "OK") {
       lng = geoResult.results[0].geometry.location.lng
       lat = geoResult.results[0].geometry.location.lat
@@ -311,7 +314,7 @@ class HomeController {
             break
         }
       }
-
+      return true
     } else {
       def loc = mapService.getGeoIp(servletContext, request)
 
@@ -321,6 +324,7 @@ class HomeController {
       if (!city) city = loc.city
       if (!state) state = loc.region
     }
+    return false
   }
 
   def redirectGeo = {
