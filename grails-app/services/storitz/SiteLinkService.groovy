@@ -838,12 +838,12 @@ class SiteLinkService extends BaseProviderService {
               } else if (typeName ==~ /(?i).*drive.*/) {
                 siteUnit.unitType = UnitType.DRIVEUP
               }
-              siteUnit.isTempControlled = (unit.bClimate.text().toLowerCase() == 'true')
               if (!siteUnit.unitType) {
                 siteUnit.unitType = UnitType.UPPER
               }
             }
           }
+          siteUnit.isTempControlled = (unit.bClimate.text().toLowerCase() == 'true')
           siteUnit.unitCount = 1
           siteUnit.description = typeName
           siteUnit.unitNumber = unitID
