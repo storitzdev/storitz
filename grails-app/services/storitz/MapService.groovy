@@ -150,10 +150,10 @@ class MapService {
         if (count == 0) {
           zoom = 12
         }
-      } else if (count == 1) {
+      } else if (count <= 3) {
         // grow up to a couple of notches
         def targetZoom = zoom - 3
-        while(zoom > targetZoom && count == 1) {
+        while(zoom > targetZoom && count <= 3) {
           zoom--
           dim = getDimensions(zoom, lat, lng, width, height)
           count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
