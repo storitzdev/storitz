@@ -129,7 +129,7 @@ class MapService {
     }
 
     def optimizeZoom(Long searchSize, SearchType searchType, BigDecimal lat, BigDecimal lng, Integer width, Integer height) {
-      def zoom = 12
+      def zoom = 11
 
       def dim = getDimensions(zoom, lat, lng, width, height)
       def count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
@@ -148,7 +148,7 @@ class MapService {
           count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
         }
         if (count == 0) {
-          zoom = 12
+          zoom = 11
         }
       } else if (count <= 3) {
         // grow up to a couple of notches
@@ -159,7 +159,7 @@ class MapService {
           count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
         }
         if (count == 1) {
-          zoom = 12
+          zoom = 11
         }
       }
       return zoom
