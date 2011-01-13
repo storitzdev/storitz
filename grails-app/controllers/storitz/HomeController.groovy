@@ -45,7 +45,7 @@ class HomeController {
               state = params.state
             }
             if(handleGeocode(geoResult)) {
-              new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+              new GeoLookup(lat:lat, lng:lng, city:city, state:params.state, zip:zip).save(flush: true)
             }
           }
         } else if (params.address) {
@@ -60,7 +60,7 @@ class HomeController {
           searchCity = city = params.city.replaceAll('-', ' ')
           state = params.state
 
-          def geoLookup = GeoLookup.findByCityAndState(params.city, params.state)
+          def geoLookup = GeoLookup.findByCityAndState(city, state)
           if (geoLookup) {
             city = geoLookup.city
             state = geoLookup.state
@@ -69,9 +69,9 @@ class HomeController {
             lng = geoLookup.lng
 
           } else {
-            geoResult = geocodeService.geocode("${params.city}, ${params.state}")
+            geoResult = geocodeService.geocode("${city}, ${state}")
             if(handleGeocode(geoResult)) {
-              new GeoLookup(lat:lat, lng:lng, city:params.city, state:params.state, zip:zip).save(flush: true)
+              new GeoLookup(lat:lat, lng:lng, city:searchCity, state:state, zip:zip).save(flush: true)
             }
           }
         }
@@ -89,6 +89,7 @@ class HomeController {
 
         if (!zip) {
           def geoLookup = GeoLookup.findByLatAndLng(lat, lng)
+          println "GeoLookup found ${geoLookup?.dump()} for lat:${lat}, ln:${lng}"
           if (geoLookup) {
             zip = geoLookup.zip
           } else {
