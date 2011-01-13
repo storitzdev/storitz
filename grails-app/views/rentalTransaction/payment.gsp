@@ -29,8 +29,10 @@
   //<![CDATA[
     var _gaq = _gaq || [];
     _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
+                ['pageTracker._setDomain', '.storitz.com'],
                 ['pageTracker._trackPageview'],
                 ['funnelTracker._setAccount', 'UA-16012579-1'],
+                ['funnelTracker._setDomain', '.storitz.com'],
                 ['funnelTracker._trackPageview', '/payment']);
     // Called a few ms after the page has loaded.
     (function() {

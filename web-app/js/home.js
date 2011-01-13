@@ -700,7 +700,9 @@ $(window).bind('hashchange', function(e) {
 // setup for google analytics
 var _gaq = _gaq || [];
 _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
+            ['pageTracker._setDomain', '.storitz.com'],
             ['pageTracker._trackPageview'],
             ['funnelTracker._setAccount', 'UA-16012579-1'],
+            ['funnelTracker._setDomain', '.storitz.com'],
             ['funnelTracker._trackPageview', '/home']);
 
