@@ -33,6 +33,8 @@ class HomeController {
             city = geoLookup.city.replaceAll('-', ' ')
             state = geoLookup.state
             zip = params.zip
+            lat = geoLookup.lat
+            lng = geoLookup.lng
           } else {
             geoResult = geocodeService.geocode(params.zip)
             zip = params.zip
@@ -63,6 +65,9 @@ class HomeController {
             city = geoLookup.city
             state = geoLookup.state
             zip = geoLookup.zip
+            lat = geoLookup.lat
+            lng = geoLookup.lng
+
           } else {
             geoResult = geocodeService.geocode("${params.city}, ${params.state}")
             if(handleGeocode(geoResult)) {
