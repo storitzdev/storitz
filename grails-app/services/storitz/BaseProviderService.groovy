@@ -117,7 +117,7 @@ abstract class BaseProviderService {
 
         case "PERCENT_OFF":
           if (promo.inMonth == 1) {
-            offerDiscount = (promo.promoQty/100.0) * discountRate;
+            offerDiscount = (promo.promoQty/100.0) * (discountRate + (promo.expireMonth - 1) * rate);
           } else {
             offerDiscount = (promo.promoQty/100.0) * (promo.expireMonth) * rate;
           }
