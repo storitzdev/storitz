@@ -17,7 +17,7 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
+    <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="Make geolookup work with doubles - remove dupes from database">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
     </list>
@@ -89,7 +89,7 @@
       <file leaf-file-name="CShiftService.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="878" column="8" selection-start="33594" selection-end="33594" vertical-scroll-proportion="-54.4">
+            <state line="1396" column="74" selection-start="52810" selection-end="52844" vertical-scroll-proportion="-7.12">
               <folding />
             </state>
           </provider>
@@ -173,7 +173,7 @@
       <file leaf-file-name="HomeController.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="50" selection-start="2901" selection-end="2901" vertical-scroll-proportion="0.65589356">
+            <state line="93" column="0" selection-start="2660" selection-end="2660" vertical-scroll-proportion="0.45553538">
               <folding />
             </state>
           </provider>
@@ -1366,13 +1366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="878" column="8" selection-start="33594" selection-end="33594" vertical-scroll-proportion="-54.4">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/FeedService.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="127" column="0" selection-start="3234" selection-end="3234" vertical-scroll-proportion="0.0">
@@ -1432,9 +1425,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/storitz/CShiftService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1396" column="74" selection-start="52810" selection-end="52844" vertical-scroll-proportion="-7.12">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/storitz/HomeController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="50" selection-start="2901" selection-end="2901" vertical-scroll-proportion="0.65589356">
+        <state line="93" column="0" selection-start="2660" selection-end="2660" vertical-scroll-proportion="0.45553538">
           <folding />
         </state>
       </provider>

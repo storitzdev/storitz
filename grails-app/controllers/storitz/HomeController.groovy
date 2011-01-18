@@ -6,6 +6,7 @@ import com.storitz.StorageSize
 import grails.converters.JSON
 import storitz.constants.SearchType
 import com.storitz.GeoLookup
+import java.math.RoundingMode
 
 class HomeController {
 
@@ -88,16 +89,15 @@ class HomeController {
         state = loc.region
 
         if (!zip) {
-          def geoLookup = GeoLookup.findByLatAndLng(lat, lng)
-          println "GeoLookup found ${geoLookup?.dump()} for lat:${lat}, ln:${lng}"
+          BigDecimal qLat = new BigDecimal(lat).setScale(10, RoundingMode.HALF_UP)
+          BigDecimal qLng = new BigDecimal(lng).setScale(10, RoundingMode.HALF_UP)
+          def geoLookup = GeoLookup.findByLatAndLng(qLat, qLng)
           if (geoLookup) {
             zip = geoLookup.zip
           } else {
-            double oldLat = lat
-            double oldLng = lng
             geoResult = geocodeService.geocode(lat,lng)
             if (handleGeocode(geoResult)) {
-              new GeoLookup(lat:oldLat, lng:oldLng, city:city, state:state, zip:zip).save(flush: true)
+              new GeoLookup(lat:qLat, lng:qLng, city:city, state:state, zip:zip).save(flush: true)
             }
           }
         }
