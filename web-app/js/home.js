@@ -27,8 +27,9 @@ function siteLink(s) {
     return baseURL + '/self-storage-' + s.title.replace(city_pat, '').replace(/ - /g,'-').replace(/ /g,'-') + '/' + s.id + queryStr;
 }
 
-function metroLink(city, state) {
-    return baseURL + '/' + city.replace(/ /g, '-') + '-' + state + '-self-storage';
+function metroLink(city, state, zip) {
+    // /$city-$state-zip-code-$zip-self-storage
+    return baseURL + '/' + city.replace(/ /g, '-') + '-' + state + '-zip-code-' + zip + '-self-storage';
 }
 
 
@@ -651,7 +652,7 @@ function updateMetroBox(address) {
                     }
                     m.append($('<div>').css({'font-weight':'bold', 'margin':'10px 0'}).append('<h3>', {'class':'metro'}).text('Neighborhoods and Towns'));
                     $.each(ret.neighborhoodList, function(i, n) {
-                        m.append($('<div>', {'class':'left'}).css('width','150px').append($('<a>', {href: metroLink(n.city, n.state.display)}).text(n.city + 'self-storage')));
+                        m.append($('<div>', {'class':'left'}).css('width','150px').append($('<a>', {href: metroLink(n.city, n.state.display, n.zipcode)}).text(n.city + 'self-storage')));
                     });
                     m.append($('<div>').css('clear','both'));
                     $("div#metroBox").html(m);

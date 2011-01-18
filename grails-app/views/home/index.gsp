@@ -442,7 +442,7 @@ $(window).trigger( 'hashchange' );
                 <div style="font-weight:bold;margin:10px 0;"><h3 class="metro">Neighborhoods and Towns:</h3></div>
                 <g:each in="${neighborhoodList}" var="n">
                   <div class="left" style="width:150px;">
-                    <g:link mapping="metro2" params="[city:n.city.replace(' ','-'), state:n.state.display]">${n.city} self storage</g:link>
+                    <g:link mapping="geo2" params="[city:n.city.replace(' ','-'), state:n.state.display, zip:n.zipcode]">${n.city} self storage</g:link>
                   </div>
                 </g:each>
                 <div style="clear:both;"></div>
