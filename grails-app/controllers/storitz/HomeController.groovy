@@ -12,8 +12,8 @@ class HomeController {
   def mapService
   def geocodeService
   def costService
-  def lat
-  def lng
+  double lat
+  double lng
   def zip
   def searchCity
   def city
@@ -93,9 +93,11 @@ class HomeController {
           if (geoLookup) {
             zip = geoLookup.zip
           } else {
-            geoResult = geocodeService.geocode(lat as double,lng as double)
+            double oldLat = lat
+            double oldLng = lng
+            geoResult = geocodeService.geocode(lat,lng)
             if (handleGeocode(geoResult)) {
-              new GeoLookup(lat:lat, lng:lng, city:city, state:state, zip:zip).save(flush: true)
+              new GeoLookup(lat:oldLat, lng:oldLng, city:city, state:state, zip:zip).save(flush: true)
             }
           }
         }
