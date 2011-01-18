@@ -471,7 +471,7 @@ class StorageSiteController {
     if (params.rentalTransactionId) {
       rentalTransactionInstance = RentalTransaction.get(params.rentalTransactionId as Long)
     }
-    StorageSite site = StorageSite.get(params.id)
+    StorageSite site = StorageSite.get(params.id as Long)
 
     if (site.disabled && !params.adminView) {
       redirect(controller:"home", action:"index")

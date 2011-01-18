@@ -22,6 +22,7 @@
 //<![CDATA[
         var urlMapResults = "${createLink(controller:'STMap', action:'mapresults')}";
         var urlUpdateMetro = "${createLink(controller:'home', action:'updateMetro')}";
+        var urlGeocode = "${createLink(controller:'home', action:'geoCode')}";
         var urlChangeSearchType = "${createLink(controller:'home', action:'changeSearchType')}";
         var srcDetailButton = ${p.imageLink(src:'details-button.gif')};
         var srcSpecialOffer = ${p.imageLink(src:'special-offer-16px.png')};
@@ -44,7 +45,6 @@
       */
 
         var map;
-        var geocoder;
         var R = 3958.761; // mi
         var searchLat = ${lat};
         var searchLng = ${lng};
@@ -99,7 +99,6 @@
           google.maps.event.addListener(map, 'bounds_changed', redrawMap);
           google.maps.event.addListener(map, 'dragstart', dragStart);
           google.maps.event.addListener(map, 'dragend', dragEnd);
-          geocoder = new google.maps.Geocoder();
 
           resultTable = $('#stresults').dataTable({
             "aoColumns": [
@@ -168,6 +167,7 @@ $(window).trigger( 'hashchange' );
 
 //]]>
       </script>
+      <script src="http://maps.google.com/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></script>
       </p:dependantJavascript>
     </head>
     <body>
@@ -459,8 +459,5 @@ $(window).trigger( 'hashchange' );
 
     </div>
     </body>
-    <p:dependantJavascript>
-      <script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22maps%22%2C%22version%22%3A%223.x%22%2Cother_params%3A%22sensor%3Dfalse%22%2C%22callback%22%3A%22createMap%22%7D%2C%7B%22name%22%3A%22gdata%22%2C%22version%22%3A%222.x%22%2C%22packages%22%3A%5B%22maps%22%5D%7D%5D%7D&amp;key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
-    </p:dependantJavascript>
     <p:renderDependantJavascript />
 </html>

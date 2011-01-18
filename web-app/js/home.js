@@ -213,7 +213,30 @@ function showAddress(address, size, date, searchType) {
     searchSize = size;
     searchDate = date;
 
-    if (geocoder && validAddr) {
+    if (validAddr) {
+        $.ajax({
+            url: urlGeocode,
+            method:'get',
+            dataType:'json',
+            data: { address: address},
+            success:function(geoResult) {
+                if (geoResult.status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(geoResult.results[0].geometry.location);
+                    if (mapMarker) {
+                        mapMarker.setMap(null);
+                    }
+                    mapMarker = new google.maps.Marker({
+                        map: map,
+                        position: geoResult.results[0].geometry.location
+                    });
+                    searchLat = geoResult.results[0].geometry.location.lat();
+                    searchLng = geoResult.results[0].geometry.location.lng();
+                } else {
+                    $('#mapStatus').html('Could not find address - please check search.').effect("highlight", {}, 1000);
+                }
+            }
+        });
+
         geocoder.geocode({ 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
@@ -663,6 +686,7 @@ $(document).ready(function() {
   setupForm();
   setupQtipThemeroller();
   setupIdle();
+  createMap();
   setupTooltips();
   setupTable();
   setupResults();

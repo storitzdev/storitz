@@ -895,9 +895,17 @@ class SiteLinkService extends BaseProviderService {
             pushRate = price
           }
           if (existingUnit.price != price || existingUnit.pushRate != pushRate) {
-            existingUnit.price = unit.dcStdRate.text() as BigDecimal
-            existingUnit.pushRate = unit.dcPushRate.text() as BigDecimal
-            existingUnit.save()
+            def newPrice = unit.dcStdRate.text() as BigDecimal
+            def newPushRate = unit.dcPushRate.text() as BigDecimal
+            if (newPrice == 0 || newPushRate == 0) {
+              // remove unit from inventory
+              site.removeFromUnits(existingUnit)
+              writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
+            } else {
+              existingUnit.price = newPrice
+              existingUnit.pushRate = newPushRate 
+              existingUnit.save()
+            }
           }
         }
       }

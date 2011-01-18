@@ -785,7 +785,6 @@ class CShiftService extends BaseProviderService {
           def searchType
           def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
           if (unitTypeLookup) {
-            println "Unit type found for description: ${typeName} - searchType: ${unitTypeLookup.searchType}"
             if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
               searchType = unitTypeLookup.searchType
             } else {

@@ -303,6 +303,15 @@ class HomeController {
     render (status: 200, contentType:"application/json", text: sizeList as JSON )
   }
 
+  def geoCode = {
+    if (params.address) {
+      render (status: 200, contentType:"application/json", text: geocodeService.geocode(params.address)  )
+    } else if (params.lat && params.lng) {
+      render (status: 200, contentType:"application/json", text: geocodeService.geocode(params.lat as double, params.lng as double) )
+    }
+    render (status: 200, contentType:"application/json", text: '' )
+  }
+
   private boolean handleGeocode(geoResult) {
     if (geoResult.status == "OK") {
       lng = geoResult.results[0].geometry.location.lng

@@ -51,6 +51,7 @@ environments {
         storitz.nacha.dir = '/usr/share/tomcat6/nacha'
         storitz.nacha.fileId = '7878782339'
         storitz.nacha.companyId = '1272912549'
+        storitz.google.signatureRequired = true
     }
     preview {
         grails.serverURL = "http://preview.storitz.com"
@@ -60,6 +61,7 @@ environments {
           '/STMap/**':   ['ROLE_USER', 'ROLE_ADMIN'],
           '/storageSite/**':  ['ROLE_USER', 'ROLE_ADMIN']
         ]
+        storitz.google.signatureRequired = true
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -68,6 +70,7 @@ environments {
         storitz.nacha.fileId = '1234567890'
         storitz.nacha.companyId = '0123456789'
         uiperformance.enabled = false
+        storitz.google.signatureRequired = false
     }
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -76,6 +79,7 @@ environments {
         storitz.nacha.fileId = '1234567890'
         storitz.nacha.companyId = '0123456789'
         uiperformance.enabled = false
+        storitz.google.signatureRequired = true
     }
 
 }

@@ -78,7 +78,7 @@ class STMapController {
       double lng = params.lng as double
 
       Long searchSize = (params.searchSize && params.searchSize.isNumber() ? params.searchSize as Long : 1)
-      SearchType searchType = SearchType.getEnumFromId(params.searchType)
+      SearchType searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE
 
       if (params.boolean('addressChange')) {
         zoom = mapService.optimizeZoom(searchSize, searchType, lat, lng, 617, 284)
