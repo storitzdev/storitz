@@ -639,11 +639,21 @@ class StorageSiteController {
       //////////////////////////////////////////
 
       // TODO - pass new model params to this view
-      def model = [id:site.id
-         , sizeList: sizeList, unitTypes: unitTypes, site: site, title: "Storage self-storage rental for ${site.title} - ${site.city}, ${site.state} ${site.zipcode}"
-         , shortSessionId:callParams.shortSessionId, chosenUnitType:callParams.unitType, monthlyRate: bestUnit.price, pushRate: bestUnit.pushRate
-         , unitId: bestUnit.id, searchSize: bestUnit.unitsize.id, promoId:callParams.rentalTransaction?.promoId
-         , rentalTransactionInstance:rentalTransaction]
+
+      UnitType chosenUnitType = callParams.unitType ? UnitType.valueOf(callParams.unitType) : bestUnit?.unitType
+
+      def video = Video.findBySite(site)
+      def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id }
+
+      def zoom = 12 // may try tighter
+      def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
+      def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
+
+      def model = [rentalTransactionInstance:rentalTransaction, sizeList: sizeList, unitTypes: unitTypes, site: site,
+              title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
+              shortSessionId:session.shortSessionId, id: site.id, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
+              pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: callParams.searchType,
+              promoId:callParams.rentalTransaction?.promoId, insuranceId:callParams.rentalTransaction?.insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
 
       // We set the landing cookie so the operator looks like the renter would when the transaction is paid.
       params.landingCookie = callParams.landingCookie
@@ -683,7 +693,7 @@ class StorageSiteController {
       return
     }
 
-    SearchType searchType = SearchType.getEnumFromId(params.searchType)
+    SearchType searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE
     Collection unitTypes
     Collection sizeList
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null

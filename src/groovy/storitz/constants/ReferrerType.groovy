@@ -13,7 +13,8 @@ public enum ReferrerType {
   GOOGLECN("googlecn", "Google Content Network"),
   YAHOO("yahoo.com", "yahoo.com"),
   BING("bing.com", "bing.com"),
-  YELP("yelp.com", "yelp.com")
+  YELP("yelp.com", "yelp.com"),
+  WESTSIDE_RENTALS("westsiderentals.com", "westsiderentals.com")
 
   final String display
   final String id
@@ -24,7 +25,7 @@ public enum ReferrerType {
   }
 
   static list() {
-    [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP]
+    [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP, WESTSIDE_RENTALS]
   }
 
   static public ReferrerType getEnumFromId(String value) {

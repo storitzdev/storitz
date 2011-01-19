@@ -256,6 +256,7 @@
               <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
               <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
               <input style="display:none" type="text" name="SC_page" id="SC_page" value="detail"/>
+              <input style="display:none" type="text" name="SC_searchType" id="SC_searchType" value="${params.searchType}"/>
               </div>
 
               <div class="vert_text" style="margin-top:10px;">

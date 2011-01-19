@@ -10,6 +10,7 @@ import storitz.constants.NotificationEventType
 import storitz.constants.TransactionStatus
 import com.storitz.*
 import storitz.constants.UnitType
+import storitz.constants.SearchType
 
 class RentalTransactionController {
 
@@ -57,6 +58,12 @@ class RentalTransactionController {
       params.remove('SC_date')
       def page = params.SC_page
       params.remove('SC_page')
+      def searchType = params.SC_searchType
+      params.remove('SC_searchType')
+      if (!searchType) {
+        searchType = SearchType.STORAGE
+      }
+      def unitType = params.chosenUnitType
 
       def rentalTransactionInstance
       if (page == 'payment') {
@@ -70,9 +77,9 @@ class RentalTransactionController {
         rentalTransactionInstance = new RentalTransaction(params)
       }
 
-      def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: params.id
-              , site: site, searchSize: searchSize, address: address, date: date, page: page
-              , rentalTransaction: rentalTransactionInstance, landingCookie:params.landingCookie]
+      def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: params.id, unitType:unitType, site: site,
+              searchSize: searchSize, address: address, date: date, page: page, searchType: searchType,
+              rentalTransaction: rentalTransactionInstance, landingCookie:params.landingCookie]
 
       liveSessions[params.id] = callParams
 
