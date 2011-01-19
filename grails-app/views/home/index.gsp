@@ -413,13 +413,13 @@ $(window).trigger( 'hashchange' );
                               ${siteMoveInPrice[site.id]?.promoName}
                             </div>
                             <div class="stSpecialOffersSeeMore">See more offers</div>
-                            <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
+                            <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} ${searchType == SearchType.PARKING ? 'space' : 'unit'}</div>
                           </div>
                         </g:if>
                         <g:else>
                           <div class="left" style="width:22px;">&nbsp;</div>
                           <div class="left" style="width:125px;">
-                            <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} unit</div>
+                            <div>${siteMoveInPrice[site.id]?.sizeDescription} ${siteMoveInPrice[site.id]?.unitType} ${searchType == SearchType.PARKING ? 'space' : 'unit'}</div>
                           </div>
                         </g:else>
                       </div>

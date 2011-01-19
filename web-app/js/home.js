@@ -482,12 +482,12 @@ function createTableRow(s) {
       .append($('<div>', {'class':'left'}).css('width','125px')
         .append($('<div>', { 'class': 'stSpecialOffers'}).text(s.promoName ? s.promoName : ''))
         .append($('<div>', { 'class': 'stSpecialOffersSeeMore'}).text('See more offers'))
-        .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
+        .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + (searchType == 'PARKING' ? ' space' : ' unit') )));
   } else {
     offersCol
       .append($('<div>', {'class':'left'}).css({'width':'22px', 'height':'100%'}).html('&nbsp;'))
       .append($('<div>', {'class':'left'}).css('width','120px')
-        .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + ' unit')));
+        .append($('<div>').text((s.sizeDescription ? s.sizeDescription: '') + (s.unitType ? ' ' + s.unitType : '') + (searchType == 'PARKING' ? ' space' : ' unit') )));
   }
 
   var distanceCol = $('<div>').append($('<div>').css('width', '55px').append($('<div>', { 'class': 'left' }).css('margin-left', '10px'))
