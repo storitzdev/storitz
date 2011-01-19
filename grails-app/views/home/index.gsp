@@ -179,7 +179,7 @@ $(window).trigger( 'hashchange' );
         <div class="leftColumn">
           <div class="leftSection">
             <div>
-              <h2 class="inputSectionHeader">Tens of thousands of storage units are available at your fingertips. Find the best size, type and location. Browse self-storage photos, videos, and descriptions:</h2>
+              <h2 class="inputSectionHeader">Compare storage units. Get the best price. Rent yours today:</h2>
             </div>
             <div style="height: 5px;"></div>
             <div>
@@ -226,7 +226,7 @@ $(window).trigger( 'hashchange' );
                   </a>
                 </div>
                 <div class="inputSectionText">
-                  Don't hassle with a salesperson and follow-up phone calls, just find and rent your self storage unit right here, right now. Lock-in your best price and low-cost move-in. Print out your receipt and gate code, and show-up with your stuff. Click.Store.Done.
+                  Why hassle with phone calls and email when you can rent storage right now? Only Storitz lets you search, select, pay, and then print your receipt, contract, and gate code.
                 </div>
                 <div style="clear: both;height: 15px;"></div>
                 <div style="margin-left:35px;">
