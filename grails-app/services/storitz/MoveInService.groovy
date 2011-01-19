@@ -58,11 +58,6 @@ class MoveInService {
 
         case "CS3":
           CShiftService.createTenant(trans)
-          def today = new Date()
-          if(trans.moveInDate - today <= 1) {
-            PrintWriter writer = new PrintWriter(System.out)
-            return CShiftService.moveIn(trans, writer)
-          }
           return CShiftService.reserve(trans)
           break
 

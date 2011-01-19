@@ -90,6 +90,7 @@ abstract class BaseProviderService {
     }
 
     def subTotal
+    def rentTotal
     def discountRate
     def durationDays
     BigDecimal insuranceCost  = 0
@@ -97,11 +98,13 @@ abstract class BaseProviderService {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - (durationDays)/lastDayInMonth)
       insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
-      subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + insuranceCost
+      rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      subTotal = rentTotal + insuranceCost
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
     } else {
       insuranceCost = (premium*durationMonths)
-      subTotal = (rate*durationMonths) + insuranceCost
+      rentTotal = (rate*durationMonths)
+      subTotal = rentTotal + insuranceCost
       discountRate = rate
       durationDays = 0
     }
@@ -141,6 +144,7 @@ abstract class BaseProviderService {
     ret["duration"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
+    ret["rentTotal"] = rentTotal
     ret["insuranceCost"] = insuranceCost
     ret["tax"] = tax
     ret["deposit"] = deposit

@@ -1149,13 +1149,34 @@ class CShiftService extends BaseProviderService {
     def cshift = (CenterShift)rentalTransaction.site.feed
 
     def insId = -1
+    def ins
     if (rentalTransaction.insuranceId > 0) {
-      def ins = Insurance.get(rentalTransaction.insuranceId)
+      ins = Insurance.get(rentalTransaction.insuranceId)
       insId = ins.insuranceId
     }
+    def unit = StorageUnit.get(rentalTransaction.unitId)
+    def promo = rentalTransaction.promoId > 0 ? SpecialOffer.get(rentalTransaction.promoId) : null
 
-    def moveInDetails = getCostDetails(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, cshift.location.kioskUrl, rentalTransaction.feedUnitId, insId as String, writer)
-    rentalTransaction.paymentString = moveInDetails.paymentString
+    def detailList = calculateTotals(rentalTransaction.site, unit, promo, ins, rentalTransaction.moveInDate)
+    def moveInDetails = new MoveInDetails()
+    if (detailList["rentTotal"] && detailList["rentTotal"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Rent", tax:0 as BigDecimal, amount: detailList["rentTotal"] as BigDecimal))
+    }
+    if (detailList["feesTotal"] && detailList["feesTotal"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Fees", tax:0 as BigDecimal, amount: detailList["feesTotal"] as BigDecimal))
+    }
+    if (detailList["insuranceCost"] && detailList["insuranceCost"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Insurance", tax:0 as BigDecimal, amount: detailList["insuranceCost"] as BigDecimal))
+    }
+    if (detailList["deposit"] && detailList["deposit"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Refundable Deposit", tax:0 as BigDecimal, amount: detailList["deposit"] as BigDecimal))
+    }
+    if (detailList["discountTotal"] && detailList["discountTotal"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Selected Promotion", tax:0 as BigDecimal, amount: -detailList["discountTotal"] as BigDecimal))
+    }
+    if (detailList["tax"] && detailList["tax"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Tax", tax:detailList["tax"] as BigDecimal, amount: 0 as BigDecimal))
+    }
 
     return moveInDetails
   }
@@ -1323,6 +1344,7 @@ class CShiftService extends BaseProviderService {
       ret["duration"] = 1
       ret["discountTotal"] = 0
       ret["feesTotal"] = 0
+      ret["rentTotal"] = 0
       ret["insuranceCost"] = 0
       ret["tax"] = 0
       ret["moveInTotal"] = 0
@@ -1394,7 +1416,8 @@ class CShiftService extends BaseProviderService {
 
     BigDecimal insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def subTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) + insuranceCost
+    def rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) 
+    def subTotal =  rentTotal + insuranceCost
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
 
@@ -1403,6 +1426,7 @@ class CShiftService extends BaseProviderService {
     ret["duration"] = durationMonths
     ret["discountTotal"] = offerDiscount
     ret["feesTotal"] = feesTotal
+    ret["rentTotal"] = rentTotal
     ret["insuranceCost"] = insuranceCost
     ret["tax"] = tax
     ret["moveInTotal"] = moveInTotal
