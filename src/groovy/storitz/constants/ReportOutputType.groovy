@@ -8,21 +8,25 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum ReportOutputType {
-  XLS("Excel", "XLS"),
-  PDF("Adobe PDF", "PDF"),
-  HTML("HTML", "HTML")
+  XLS("Excel", "XLS", "application/vnd.ms-excel"),
+  PDF("Adobe PDF", "PDF", "application/pdf"),
+  HTML("HTML", "HTML", "text/html")
 
   final String display
   final String outputType
+  final String contentType
 
-  ReportOutputType(display, outputType) {
+  ReportOutputType(display, outputType, contentType) {
     this.display = display
     this.outputType = outputType
+    this.contentType = contentType
   }
 
   public getValue() { return outputType }
 
   public getDisplay() { return display }
+
+  public getContentType() { return contentType }
 
   static list() {
     [XLS, PDF, HTML]

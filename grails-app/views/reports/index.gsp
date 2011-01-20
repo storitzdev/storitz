@@ -97,6 +97,11 @@
         }
       });
 
+      $('#outputType').change(function(event) {
+        var actArr = $('#reportForm').attr('action').split('.');
+        var action = actArr[0] + '.' + $(this).val().toLowerCase();
+        $('#reportForm').attr('action', action);
+      });
         
     });
 //]]>
@@ -132,7 +137,7 @@
         </div>
       </g:hasErrors>
 
-      <g:form target="_blank">
+      <g:form name="reportForm" action="report.xls" target="_blank">
         <div style="height:20px;clear:both;"></div>
         <div class="price_options checkout_header white">
           Pick a date range
