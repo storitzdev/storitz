@@ -57,7 +57,7 @@ abstract class BaseProviderService {
     def ret = [:]
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth -1) + promo.expireMonth) : 1;
     def offerDiscount = 0
-    def rate = unit ? (unit.pushRate < unit.price ? unit.pushRate : unit.price) : 0
+    def rate = unit ? (site.allowPushPrice ? (unit.pushRate < unit.price ? unit.pushRate : unit.price) : unit.price) : 0
     def premium = ins ? ins.premium : 0
     def lockFee = site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0

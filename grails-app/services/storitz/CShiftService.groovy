@@ -1359,7 +1359,7 @@ class CShiftService extends BaseProviderService {
     BigDecimal durationMonths = promo ? (promo.prepay ? promo.expireMonth : promo.prepayMonths) : 1
     BigDecimal promoMonths = promo ? (promo.prepay ? (promo.expireMonth >= durationMonths ? durationMonths : promo.expireMonth) : promo.prepayMonths) : 0
     def offerDiscount = 0
-    def rate = unit ? unit.pushRate : 0
+    def rate = unit ? (site.allowPushPrice ? (unit.pushRate < unit.price ? unit.pushRate : unit.price) : unit.price) : 0
     def premium = ins ? ins.premium : 0
     def additionalFees = site.adminFee ? site.adminFee : site.lockFee ? site.lockFee : 0
     def adminFee = site.adminFee ? site.adminFee : 0

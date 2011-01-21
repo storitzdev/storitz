@@ -209,14 +209,14 @@ class HomeController {
       if (bestUnit) {
         if (site.featuredOffers().size() == 0) {
           def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
-          siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+          siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
         } else {
           def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
-          siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+          siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
           for (promo in site.featuredOffers()) {
             totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
             if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
-              siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:bestUnit?.pushRate, paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+              siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
             }
           }
         }

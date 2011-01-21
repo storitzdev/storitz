@@ -184,6 +184,7 @@ class StorageSite {
     Boolean disabled = false
 
     Boolean netCommission = true
+    Boolean allowPushPrice = true
 
   // bank account
     BankAccount bankAccount

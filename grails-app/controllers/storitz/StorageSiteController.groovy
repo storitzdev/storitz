@@ -551,7 +551,7 @@ class StorageSiteController {
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
             shortSessionId:session.shortSessionId, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
-            pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
+            pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
             promoId:params.promoId, insuranceId:insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
   }
 
@@ -652,7 +652,7 @@ class StorageSiteController {
       def model = [rentalTransactionInstance:rentalTransaction, sizeList: sizeList, unitTypes: unitTypes, site: site,
               title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
               shortSessionId:session.shortSessionId, id: site.id, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
-              pushRate: bestUnit?.pushRate, unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: callParams.searchType,
+              pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: callParams.searchType,
               promoId:callParams.rentalTransaction?.promoId, insuranceId:callParams.rentalTransaction?.insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
 
       // We set the landing cookie so the operator looks like the renter would when the transaction is paid.
@@ -757,7 +757,7 @@ class StorageSiteController {
 
     def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${bestUnit?.pushRate}, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"actualSize\":\"${bestUnit?.displaySize}\", \"additionalFees\":${totals["feesTotal"]}, \"premium\":${premium}, \"duration\":${totals["duration"]}, \"durationDays\":${totals["durationDays"]}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price }, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"actualSize\":\"${bestUnit?.displaySize}\", \"additionalFees\":${totals["feesTotal"]}, \"premium\":${premium}, \"duration\":${totals["duration"]}, \"durationDays\":${totals["durationDays"]}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
 
   }
 
