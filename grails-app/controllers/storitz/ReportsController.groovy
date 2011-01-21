@@ -170,7 +170,6 @@ class ReportsController {
     session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
     session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
 
-    println "Setting content type to: ${period.outputType.contentType}"
     response.setContentType(period.outputType.contentType)
     reportWriter.writeTo(response);
 
