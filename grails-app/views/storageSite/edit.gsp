@@ -1184,6 +1184,8 @@
             </div>
 
 
+          </sec:ifAnyGranted>
+          <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
             <div class="checkout_section_header">
               Allow Push Pricing
             </div>
