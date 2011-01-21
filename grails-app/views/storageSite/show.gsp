@@ -549,19 +549,12 @@
           </td>
         </tr>
 
-        <sec:ifAnyGranted roles="ROLE_ADMIN">
+        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
           <tr class="prop">
             <td colspan="2" valign="top"><h3>Admin Settings</h3></td>
 
           </tr>
 
-          <tr class="prop">
-            <td valign="top" class="name"><g:message code="storageSite.netCommission.label" default="Type of Commission"/></td>
-
-            <td valign="top" style="text-align: left;" class="value">
-              <span>${storageSiteInstance.netCommission ? 'Net' : 'Gross'}</span>
-            </td>
-          </tr>
           <tr class="prop">
             <td valign="top" class="name"><g:message code="storageSite.disabled.label" default="Site enabled/disabled"/></td>
 
@@ -576,6 +569,15 @@
               <span>${storageSiteInstance.allowPushPrice ? 'Allow' : 'Disallow'}</span>
             </td>
           </tr>
+      </sec:ifAnyGranted>
+      <sec:ifAnyGranted roles="ROLE_ADMIN">
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.netCommission.label" default="Type of Commission"/></td>
+
+          <td valign="top" style="text-align: left;" class="value">
+            <span>${storageSiteInstance.netCommission ? 'Net' : 'Gross'}</span>
+          </td>
+        </tr>
       </sec:ifAnyGranted>
 
         </tbody>

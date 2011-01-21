@@ -1194,7 +1194,7 @@
             </div>
             <div class="checkout_fields">
               <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'allowPushPrice', 'errors')}">
-                <g:checkBox name="netCommission" value="${storageSiteInstance?.allowPushPrice}"/>&nbsp;Allow Push Pricing
+                <g:checkBox name="allowPushPrice" value="${storageSiteInstance?.allowPushPrice}"/>&nbsp;Allow Push Pricing
               </div>
               <div style="clear:both;height: 15px;"></div>
             </div>
