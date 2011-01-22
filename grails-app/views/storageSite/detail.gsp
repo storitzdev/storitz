@@ -237,7 +237,6 @@
                 <div style="clear:both;"></div>
               </div>
             </g:if>
-            <g:render template="/popularSearches" />
           </div>
 
           <div id="rentalForm" style="display: none;">
