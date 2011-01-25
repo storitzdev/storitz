@@ -98,6 +98,9 @@ function updateTransaction() {
   } else {
     $('#rentme').show();
   }
+  // set the insuranceId and promoId
+  $('#insuranceId').val(insuranceId);
+  $('#promoId').val(chosenPromoId);
 }
 
 function transactionFormSetup() {

@@ -532,7 +532,7 @@ class StorageSiteController {
     def insuranceId = params.insuranceId as Integer
     if (site.noInsuranceWaiver && (!insuranceId || insuranceId < 0)) {
       if (site.insurances.size() > 0) {
-        insuranceId = site.insurances.min{ it.premium }.id
+        insuranceId = site.insurances.findAll{ it.active }.min{ it.premium }.id
       } else {
         insuranceId = -999
       }

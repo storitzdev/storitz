@@ -145,6 +145,7 @@ class RentalTransactionController {
             }
             redirect(controller:"storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: site.id])
         }
+      println "Params: ${params.dump()} rentalTransaction: ${rentalTransactionInstance.dump()}"
     }
 
     def show = {
