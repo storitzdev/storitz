@@ -11,7 +11,8 @@ public enum NotificationEventType {
   NEW_TENANT("New Tenant"),
   PRE_MOVE_IN_PROPERTY("Pre Move-In - Property"),
   PRE_MOVE_IN_TENANT("Pre Move-In - Tenant"),
-  POST_MOVE_IN("Post Move In");
+  POST_MOVE_IN("Post Move In"),
+  ACH_TRANSFER("ACH Transfer");
 
   final String display
 
@@ -22,7 +23,7 @@ public enum NotificationEventType {
   String getValue() { return this.display }
 
   static list() {
-    [NEW_TENANT, PRE_MOVE_IN_PROPERTY, PRE_MOVE_IN_TENANT, POST_MOVE_IN]
+    [NEW_TENANT, PRE_MOVE_IN_PROPERTY, PRE_MOVE_IN_TENANT, POST_MOVE_IN, ACH_TRANSFER]
   }
 
   static public NotificationEventType getEnumFromId(String value) {

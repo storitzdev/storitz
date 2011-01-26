@@ -25,6 +25,10 @@ class NotificationService {
 
         case NotificationEventType.PRE_MOVE_IN_PROPERTY:
           break
+
+        case NotificationEventType.ACH_TRANSFER:
+          handleAchTransfer(rentalTransaction)
+          break
       }
 
     }
@@ -165,4 +169,37 @@ class NotificationService {
           log.error("${e}", e)
       }
     }
+
+  def handleAchTransfer(rentalTransaction) {
+    def operationsManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_OPERATIONS_MANAGER')
+    def accountingNotification = NotificationType.findByNotificationType('NOTIFICATION_ACCOUNTING') 
+
+    def model = []
+
+    def operAcctEmails = User.withCriteria {
+      sites {
+        eq("site.id", rentalTransaction.site.id)
+      }
+      notificationTypes {
+        or{
+          eq("notificationType.id", operationsManagerNotification.id)
+          eq("notificationType.id", accountingNotification.id)
+        }
+      }
+    }.collect{ "\"${it.email}\""}.join(",")
+
+    try {
+        emailService.sendEmail(
+            to: operAcctEmails,
+            from: "no-response@storitz.com",
+            subject: "EVENT - ACH Transfer ",
+            model: model,
+            view: "/notifications/achOperMgr")
+
+    } catch (Exception e) {
+        log.error("${e}", e)
+    }
+
+
+  }
 }

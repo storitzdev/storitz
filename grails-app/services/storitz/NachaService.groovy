@@ -3,10 +3,12 @@ package storitz
 import com.storitz.Nacha
 import java.math.RoundingMode
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import storitz.constants.NotificationEventType
 
 class NachaService {
 
   def emailService
+  def notificationService
 
     boolean transactional = false
     String nachaDir = ConfigurationHolder.config?.storitz?.nacha?.dir
@@ -103,6 +105,7 @@ class NachaService {
             trans.save()
           }
         }
+        notificationService.notify(NotificationEventType.ACH_TRANSFER, trans)
       }
 
       bodyWriter.println "Total number of transactions: ${itemCount} - total debit ${creditSum}"
