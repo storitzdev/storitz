@@ -6,6 +6,7 @@ import com.storitz.SpecialOffer
 import com.storitz.Insurance
 import com.storitz.StorageSite
 import com.storitz.Feed
+import com.storitz.RentalTransaction
 
 abstract class BaseProviderService {
 
@@ -47,6 +48,45 @@ abstract class BaseProviderService {
       cal.add(Calendar.DAY_OF_MONTH, -1)
     }
     return cal.time
+  }
+
+  def moveInDetail(RentalTransaction rentalTransaction, writer) {
+
+    if (!checkRented(rentalTransaction)) {
+      return null
+    }
+
+    def insId = -1
+    def ins
+    if (rentalTransaction.insuranceId > 0) {
+      ins = Insurance.get(rentalTransaction.insuranceId)
+      insId = ins.insuranceId
+    }
+    def unit = StorageUnit.get(rentalTransaction.unitId)
+    def promo = rentalTransaction.promoId > 0 ? SpecialOffer.get(rentalTransaction.promoId) : null
+
+    def detailList = calculateTotals(rentalTransaction.site, unit, promo, ins, rentalTransaction.moveInDate)
+    def moveInDetails = new MoveInDetails()
+    if (detailList["rentTotal"] && detailList["rentTotal"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Rent", tax:0 as BigDecimal, amount: detailList["rentTotal"] as BigDecimal))
+    }
+    if (detailList["feesTotal"] && detailList["feesTotal"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Fees", tax:0 as BigDecimal, amount: detailList["feesTotal"] as BigDecimal))
+    }
+    if (detailList["insuranceCost"] && detailList["insuranceCost"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Insurance", tax:0 as BigDecimal, amount: detailList["insuranceCost"] as BigDecimal))
+    }
+    if (detailList["deposit"] && detailList["deposit"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Refundable Deposit", tax:0 as BigDecimal, amount: detailList["deposit"] as BigDecimal))
+    }
+    if (detailList["discountTotal"] && detailList["discountTotal"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Selected Promotion", tax:0 as BigDecimal, amount: -detailList["discountTotal"] as BigDecimal))
+    }
+    if (detailList["tax"] && detailList["tax"] > 0) {
+      moveInDetails.items.add(new LineItem(description:"Tax", tax:detailList["tax"] as BigDecimal, amount: 0 as BigDecimal))
+    }
+
+    return moveInDetails
   }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {

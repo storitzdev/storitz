@@ -1122,6 +1122,10 @@ class SiteLinkService extends BaseProviderService {
     return !rented
   }
 
+/*
+
+TODO - evaluate whether we need this going forward
+
   def moveInDetail(RentalTransaction rentalTransaction) {
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
 
@@ -1147,6 +1151,7 @@ class SiteLinkService extends BaseProviderService {
     return details
 
   }
+*/
 
   def moveIn(RentalTransaction rentalTransaction) {
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
