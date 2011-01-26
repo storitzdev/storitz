@@ -782,6 +782,10 @@ class StorageSiteController {
 
   def kml = {
     def site = StorageSite.get(params.id as Long)
+    if (!site) {
+      render(view: 'kmlEmpty')
+      return
+    }
     [site:site]
   }
 
