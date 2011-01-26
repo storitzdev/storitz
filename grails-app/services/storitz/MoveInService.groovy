@@ -35,8 +35,7 @@ class MoveInService {
           return siteLinkService.moveInDetail(trans)
 
         case "CS3":
-          PrintWriter writer = new PrintWriter(System.out)
-          return CShiftService.moveInDetail(trans, writer)
+          return CShiftService.moveInDetail(trans)
 
         case "CS4":
           break

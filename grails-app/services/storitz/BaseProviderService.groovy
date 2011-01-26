@@ -50,7 +50,7 @@ abstract class BaseProviderService {
     return cal.time
   }
 
-  def moveInDetail(RentalTransaction rentalTransaction, writer) {
+  def moveInDetail(RentalTransaction rentalTransaction) {
 
     if (!checkRented(rentalTransaction)) {
       return null
