@@ -96,7 +96,7 @@ class NotificationService {
         siteId: rentalTransaction.site.id
       ]
 
-      String[] siteManagerEmails = User.withCriteria {
+      List<String> siteManagerEmails = User.withCriteria {
         sites {
           eq("site.id", rentalTransaction.site.id)
         }
@@ -106,9 +106,9 @@ class NotificationService {
             eq("notificationType.id", districtManagerNotification.id)
           }
         }
-      }.collect{ it.email as String}.toArray()
+      }.collect{ it.email as String}
 
-      String[] operAcctEmails = User.withCriteria {
+      List<String> operAcctEmails = User.withCriteria {
         sites {
           eq("site.id", rentalTransaction.site.id)
         }
@@ -118,7 +118,7 @@ class NotificationService {
             eq("notificationType.id", accountingNotification.id)
           }
         }
-      }.collect{ it.email as String}.toArray()
+      }.collect{ it.email as String}
 
       String subj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} move-in"
       try {
@@ -176,7 +176,7 @@ class NotificationService {
 
     def model = []
 
-    String[] operAcctEmails = User.withCriteria {
+    List<String> operAcctEmails = User.withCriteria {
       sites {
         eq("site.id", rentalTransaction.site.id)
       }
@@ -186,7 +186,7 @@ class NotificationService {
           eq("notificationType.id", accountingNotification.id)
         }
       }
-    }.collect{ it.email as String}.toArray()
+    }.collect{ it.email as String}
 
     try {
         emailService.sendEmail(

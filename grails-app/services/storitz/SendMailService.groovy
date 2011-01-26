@@ -18,14 +18,14 @@ class SendMailService {
       try {
           if (emailMessage.body) {
             mailService.sendMail {
-                to emailMessage.to
+                to (emailMessage.to instanceof List ? emailMessage.to.toArray() : emailMessage.to)
                 from emailMessage.from
                 subject emailMessage.subject
                 body emailMessage.body
             }
           } else {
             mailService.sendMail {
-                to emailMessage.to
+                to (emailMessage.to instanceof List ? emailMessage.to.toArray() : emailMessage.to)
                 from emailMessage.from
                 subject emailMessage.subject
                 body(view: emailMessage.view, model: emailMessage.model)
