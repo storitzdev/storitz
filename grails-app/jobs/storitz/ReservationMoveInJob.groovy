@@ -16,6 +16,10 @@ class ReservationMoveInJob {
 
     def execute(context) {
 
+/*
+
+  TODO - Centershift 3.x no longer requires move-in at night
+  
       def buf = new ByteArrayOutputStream()
       PrintWriter writer = new PrintWriter(new OutputStreamWriter(buf, DEFAULT_CHARSET), AUTOMATIC_FLUSH);
 
@@ -61,5 +65,6 @@ class ReservationMoveInJob {
         subject: subject,
         body: buf.toString())
 
+*/
     }
 }
