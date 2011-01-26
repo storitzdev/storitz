@@ -108,6 +108,10 @@ class NotificationService {
         }
       }.collect{ "\"${it.email}\""}.join(",")
 
+      if (siteManagerEmails.endsWith(",")) {
+        siteManagerEmails = siteManagerEmails[0..-2]
+      }
+
       def operAcctEmails = User.withCriteria {
         sites {
           eq("site.id", rentalTransaction.site.id)
@@ -119,6 +123,10 @@ class NotificationService {
           }
         }
       }.collect{ "\"${it.email}\""}.join(",")
+
+      if (operAcctEmails.endsWith(",")) {
+        operAcctEmails = operAcctEmails[0..-2]
+      }
 
       String subj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} move-in"
       try {
@@ -187,6 +195,10 @@ class NotificationService {
         }
       }
     }.collect{ "\"${it.email}\""}.join(",")
+
+    if (operAcctEmails.endsWith(",")) {
+      operAcctEmails = operAcctEmails[0..-2]
+    }
 
     try {
         emailService.sendEmail(
