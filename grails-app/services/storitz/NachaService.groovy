@@ -103,9 +103,9 @@ class NachaService {
             trans.achTransferDate = now
             trans.achAmount = debit
             trans.save()
+            notificationService.notify(NotificationEventType.ACH_TRANSFER, trans)
           }
         }
-        notificationService.notify(NotificationEventType.ACH_TRANSFER, trans)
       }
 
       bodyWriter.println "Total number of transactions: ${itemCount} - total debit ${creditSum}"
