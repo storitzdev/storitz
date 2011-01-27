@@ -54,6 +54,9 @@
   </script>
     <script src="http://maps.google.com/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></script>
     <p:javascript src="detail_bundle"/>
+    <script type="text/javascript">
+    document.write(unescape("%3Cscript src='" + document.location.protocol + "//zopim.com/?OnxU61sHAyKJAixaCrj9vqqwCQ1JzaPN' charset='utf-8' type='text/javascript'%3E%3C/script%3E"));
+    </script>
   </p:dependantJavascript>
   </head>
   <body>
