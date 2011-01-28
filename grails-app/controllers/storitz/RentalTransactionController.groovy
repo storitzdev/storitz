@@ -11,6 +11,7 @@ import storitz.constants.TransactionStatus
 import com.storitz.*
 import storitz.constants.UnitType
 import storitz.constants.SearchType
+import storitz.constants.CreditCardType
 
 class RentalTransactionController {
 
@@ -443,7 +444,11 @@ class RentalTransactionController {
 
     @Secured(['ROLE_ADMIN'])
     def forceBook = {
-      def rentalTransactionInstance = RentalTransaction.get(params.id)
+      RentalTransaction rentalTransactionInstance = RentalTransaction.get(params.id)
+      rentalTransactionInstance.cardType = params.cardType ? CreditCardType.getEnumFromId(params.cardType) : CreditCardType.VISA
+      rentalTransactionInstance.ccNum = params.ccNum
+      rentalTransactionInstance.ccExpDate = Date.parse('yyyy-MM-dd',params.ccExpDate)
+      rentalTransactionInstance.cvv2 = params.cvv2
 
       if (!rentalTransactionInstance) {
         // TODO - send them to an error page
