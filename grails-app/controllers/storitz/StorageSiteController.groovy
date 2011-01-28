@@ -768,6 +768,16 @@ class StorageSiteController {
       redirect(controller:"admin", action:"index")
   }
 
+  def refreshPromo = {
+      def writer = new PrintWriter(System.out)
+      def site = StorageSite.get(params.id as Long)
+      if (site) {
+        feedService.refreshPromos(site, writer)
+      }
+      flash.message = "Promos refreshed"
+      redirect(action: "show", id: site.id)
+  }
+
   def refreshPromos = {
       storitz.RefreshPromosJob.triggerNow([from:'Admin']);
       flash.message = "Special Offers/Promotions refreshing now"

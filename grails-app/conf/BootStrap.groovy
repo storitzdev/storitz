@@ -1289,6 +1289,18 @@ class BootStrap {
     new UnitTypeLookup(id:814, description:"NOEU-Non-Climate Outside Economy",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:815, description:"Standard Access",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:816, description:"EZ Access",  unitType:UnitType.INTERIOR,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:817, description:"PrkgCovElec",  unitType:UnitType.COVERED,  searchType:SearchType.PARKING,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:818, description:"Climate Controled",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:819, description:"Off Drive Storage",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:820, description:"Climate Control 2nd Floor",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:821, description:"Humidity Controlled Upper Unit",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:822, description:"Humidity Controlled - Locker",  unitType:UnitType.UPPER,  searchType:SearchType.LOCKER,  tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:823, description:"Self Storage Roll Up",  unitType:UnitType.INTERIOR,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:824, description:"Drive Up Access Regular Storage w/ High Door",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:825, description:"Office Suite A",  unitType:UnitType.UNDEFINED,  searchType:SearchType.UNDEFINED,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:826, description:"Commercial office",  unitType:UnitType.UNDEFINED,  searchType:SearchType.UNDEFINED,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:827, description:"Storage Swing Door",  unitType:UnitType.INTERIOR,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:828, description:"Non-Climate",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
   }
 
 
