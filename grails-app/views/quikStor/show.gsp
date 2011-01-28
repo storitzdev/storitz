@@ -109,6 +109,7 @@
         <span class="button"><g:actionSubmit action="createContacts" value="${message(code: 'default.button.create.contacts.label', default: 'Create Contacts')}"/></span>
         <span class="button"><g:actionSubmit action="updateTax" value="${message(code: 'default.button.create.contacts.label', default: 'Refresh tax')}"/></span>
         <span class="button"><g:actionSubmit action="refreshInsurance" value="${message(code: 'default.button.refresh.insurance.label', default: 'Refresh Insurance')}"/></span>
+        <span class="button"><g:actionSubmit action="refreshPromos" value="${message(code: 'default.button.refresh.promos.label', default: 'Refresh Promos')}"/></span>
       </g:form>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
         <span class="button"><g:link controller="feed" action="seoLinks" id="${quikStorInstance?.id}">SEO Links</g:link> </span>

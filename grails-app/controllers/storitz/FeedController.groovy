@@ -43,4 +43,14 @@ class FeedController {
       flash.message = "Insurance Updated."
       redirect(action: "list")
     }
+
+    def refreshPromos = {
+      Feed feed = Feed.get(params.id as Long)
+      def writer = new PrintWriter(System.out)
+      for(site in feed.sites) {
+        feedService.refreshPromos(site, writer)
+      }
+      flash.message = "Promos Updated."
+      redirect(action: "list")
+    }
 }
