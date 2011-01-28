@@ -30,9 +30,8 @@ class UserController {
       
         flash.username = params.username
 
-		if (!params.max) {
-			params.max = 10
-		}
+        def max = Math.min(params.max ? params.int('max') : 10, 100)
+        def offset = params.offset ? params.int('offset') : 0
 
         def results
         def count = 0
@@ -72,7 +71,7 @@ class UserController {
             count = User.count()
           } else {
             count = User.countByManager(user)
-            results = User.findAllByManager(user, [max:params.max, sort:"username", order:"asc"])
+            results = User.findAllByManager(user, [offset:offset, max:max, sort:"username", order:"asc"])
           }
         }
 		[personList: results, personListCount: count]
