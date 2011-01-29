@@ -541,7 +541,7 @@ class StorageSiteController {
     UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : bestUnit?.unitType
 
     def video = Video.findBySite(site)
-    def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id }
+    def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id && it.state == site.state}
 
     def zoom = 12 // may try tighter
     def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
@@ -643,7 +643,7 @@ class StorageSiteController {
       UnitType chosenUnitType = callParams.unitType ? UnitType.valueOf(callParams.unitType) : bestUnit?.unitType
 
       def video = Video.findBySite(site)
-      def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id }
+      def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id && it.state == site.state}
 
       def zoom = 12 // may try tighter
       def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
