@@ -159,7 +159,7 @@ class HomeController {
       }
     }
 
-    def title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state} Rent Best Price Guaranteed Self Storage - Storitz"
+    def title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Rent Best Price Guaranteed Self Storage - Storitz"
 
     def sizeList
     def searchType = SearchType.STORAGE
