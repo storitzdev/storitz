@@ -547,9 +547,14 @@ class StorageSiteController {
     def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
     def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
+    def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
+    if (title.size() > 70) {
+      title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
+    }
+
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
-            title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
+            title: title,
             shortSessionId:session.shortSessionId, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
             promoId:params.promoId, insuranceId:insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
@@ -649,8 +654,13 @@ class StorageSiteController {
       def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
       def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
+      def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
+      if (title.size() > 70) {
+        title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
+      }
+
       def model = [rentalTransactionInstance:rentalTransaction, sizeList: sizeList, unitTypes: unitTypes, site: site,
-              title: "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz",
+              title: title,
               shortSessionId:session.shortSessionId, id: site.id, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
               pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: callParams.searchType,
               promoId:callParams.rentalTransaction?.promoId, insuranceId:callParams.rentalTransaction?.insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
