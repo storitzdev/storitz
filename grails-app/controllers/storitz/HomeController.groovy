@@ -136,13 +136,14 @@ class HomeController {
       metro = metroEntry.metro
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
 
-      neighborhood = Metro.createCriteria().get() {
+      List resList = Metro.createCriteria().list() {
         and {
           eq('isNeighborhood', true)
           eq('city', metroEntry.city)
           eq('state', metroEntry.state)
         }
       }
+      neighborhood = resList.get(0)
 
     } else {
       if (city && state) {
@@ -265,13 +266,14 @@ class HomeController {
       metro = metroEntry.metro
       neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
 
-      neighborhood = Metro.createCriteria().get() {
+      List resList = Metro.createCriteria().list() {
         and {
           eq('isNeighborhood', true)
           eq('city', metroEntry.city)
           eq('state', metroEntry.state)
         }
       }
+      neighborhood = resList.get(0)
 
     } else {
       if (city && state) {

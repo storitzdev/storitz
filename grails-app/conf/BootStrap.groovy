@@ -1301,6 +1301,12 @@ class BootStrap {
     new UnitTypeLookup(id:826, description:"Commercial office",  unitType:UnitType.UNDEFINED,  searchType:SearchType.UNDEFINED,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:827, description:"Storage Swing Door",  unitType:UnitType.INTERIOR,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:828, description:"Non-Climate",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:829, description:"DU - Drive Up Access",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:830, description:"MSS - Maintenance Unit",  unitType:UnitType.UNDEFINED,  searchType:SearchType.UNDEFINED,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:831, description:"DU- Drive Up Access- AL",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:832, description:"Front Lot Parking",  unitType:UnitType.UNCOVERED,  searchType:SearchType.PARKING,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:833, description:"Drive Up 24H",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:834, description:"Climate Control Upper",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:true).save(validate:false)
   }
 
 
