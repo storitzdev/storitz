@@ -143,7 +143,9 @@ class HomeController {
           eq('state', metroEntry.state)
         }
       }
-      neighborhood = resList.get(0)
+      if (resList.size() > 0) {
+        neighborhood = resList.get(0)
+      }
 
     } else {
       if (city && state) {
@@ -273,7 +275,9 @@ class HomeController {
           eq('state', metroEntry.state)
         }
       }
-      neighborhood = resList.get(0)
+      if (resList.size() > 0) {
+        neighborhood = resList.get(0)
+      }
 
     } else {
       if (city && state) {
