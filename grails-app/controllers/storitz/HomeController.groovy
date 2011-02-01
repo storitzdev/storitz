@@ -7,6 +7,7 @@ import grails.converters.JSON
 import storitz.constants.SearchType
 import com.storitz.GeoLookup
 import java.math.RoundingMode
+import com.storitz.Insurance
 
 class HomeController {
 
@@ -207,6 +208,10 @@ class HomeController {
 
     for (site in sites) {
       def bestUnit
+      Insurance ins = null
+      if (site.noInsuranceWaiver) {
+        ins = site.insurances.findAll{ it.active }.min{ it.premium }
+      }
       if (searchSize != 1 && unitSize) {
         bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
       } else {
@@ -214,13 +219,13 @@ class HomeController {
       }
       if (bestUnit) {
         if (site.featuredOffers().size() == 0) {
-          def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+          def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
           siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
         } else {
-          def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+          def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
           siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
           for (promo in site.featuredOffers()) {
-            totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+            totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
             if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
               siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
             }
