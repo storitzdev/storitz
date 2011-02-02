@@ -14,6 +14,8 @@ class HomeController {
   def mapService
   def geocodeService
   def costService
+  def offerFilterService
+  
   double lat
   double lng
   def zip
@@ -218,16 +220,19 @@ class HomeController {
         bestUnit = site.units.findAll{ it.unitCount > 0 }.min{ it.price }
       }
       if (bestUnit) {
-        if (site.featuredOffers().size() == 0) {
+        def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
+        if (featuredOffers.size() == 0) {
           def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
           siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
         } else {
           def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
           siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
-          for (promo in site.featuredOffers()) {
-            totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
-            if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
-              siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+          for (promo in featuredOffers) {
+            if (!(promo.promoName ==~ /(?i).*military.*/)) {
+              totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
+              if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
+                siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+              }
             }
           }
         }
