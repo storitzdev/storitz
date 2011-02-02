@@ -115,6 +115,60 @@
         </div>
         <div style="clear:both;"></div>
       </div>
+      
+      <div class="checkout_fields">
+        <div style="width:300px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'address1', 'errors')}">
+          <g:textField id="address1" name="address1" style="width: 280px;" value="${siteLinkInstance?.address1}" />
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:300px;">
+          <label for="address1">Address Line 1</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:300px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'address2', 'errors')}">
+          <g:textField id="address2" name="address2" style="width: 280px;" value="${siteLinkInstance?.address2}" />
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:300px;">
+          <label for="address2">Address Line 2</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:300px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'city', 'errors')}">
+          <g:textField id="city" name="city" style="width: 280px;" value="${siteLinkInstance?.city}" />
+        </div>
+        <div style="width:100px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'state', 'errors')}">
+          <g:select name="state" id="state" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${siteLinkInstance?.state}" optionValue="value"/>
+        </div>
+        <div style="width:120px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'zipcode', 'errors')}">
+          <g:textField id="zipcode" name="zipcode" style="width: 100px;" value="${siteLinkInstance?.zipcode}" />
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_labels">
+        <div class="checkout_name" style="width:300px;">
+          <label for="city">City</label>
+        </div>
+        <div class="checkout_name" style="width:100px;">
+          <label for="state">State</label>
+        </div>
+        <div class="checkout_name" style="width:120px;">
+          <label for="zipcode">Zip Code</label>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
 
       <div class="buttons">
         <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>

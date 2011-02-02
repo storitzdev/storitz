@@ -267,12 +267,6 @@ div.bannerMasthead {
     background: #fff url("../images/top-banner.gif") no-repeat;
 }
 
-div#headerImage {
-    height: 75px;
-    background: #fff url("../images/snowflakes-bg.gif") repeat-x;
-    overflow: visible;
-}
-
 div.mastheadCenter {
     margin-left: auto;
     margin-right: auto;

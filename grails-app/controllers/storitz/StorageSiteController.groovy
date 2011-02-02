@@ -20,6 +20,7 @@ class StorageSiteController {
   def springSecurityService
   def imageService
   def mapService
+  def offerFilterService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", addCaptionAndTag: "POST"]
 
@@ -750,6 +751,8 @@ class StorageSiteController {
         chosenPromo = specialOffer.promoName
       }
     }
+    def specialOffers = offerFilterService.getValidNonFeaturedOffers(site, bestUnit)
+    def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
 
     def premium = 0
     def ins
@@ -767,7 +770,7 @@ class StorageSiteController {
 
     def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price }, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"actualSize\":\"${bestUnit?.displaySize}\", \"additionalFees\":${totals["feesTotal"]}, \"premium\":${premium}, \"duration\":${totals["duration"]}, \"durationDays\":${totals["durationDays"]}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]} }}")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price }, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"actualSize\":\"${bestUnit?.displaySize}\", \"additionalFees\":${totals["feesTotal"]}, \"premium\":${premium}, \"duration\":${totals["duration"]}, \"durationDays\":${totals["durationDays"]}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]}, \"featuredOffers\": ${featuredOffers as JSON}, \"specialOffers\": ${specialOffers as JSON } }")
 
   }
 

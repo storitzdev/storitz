@@ -47,6 +47,41 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.address.label" default="Address1"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "address1")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.address2.label" default="Address2"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "address2")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.city.label" default="City"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "city")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.state.label" default="State"/></td>
+
+          <td valign="top" class="value">${cshiftInstance.state?.display}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.zipcode.label" default="Zipcode"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "zipcode")}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="cshift.manager.label" default="Manager"/></td>
 
           <td valign="top" class="value"><g:link controller="user" action="show" id="${cshiftInstance?.manager?.id}">${cshiftInstance?.manager?.username?.encodeAsHTML()}</g:link></td>

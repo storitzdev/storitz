@@ -91,17 +91,18 @@
                 $(this).val() == '${ReportName.ACTIVITY}') {
           $('#optionalParams').show();
           $('#feedParams').hide();
-        } else if ($(this).val() == '${ReportName.CORP_TRANSACTION}' || $(this).val() == '${ReportName.CORP_PAYMENT}') {
+        } else if ($(this).val() == '${ReportName.CORP_TRANSACTION}' || $(this).val() == '${ReportName.CORP_PAYMENT}' || $(this).val() == '${ReportName.INVOICE}') {
           $('#optionalParams').hide();
           $('#feedParams').show();
         }
       });
 
-      $('#outputType').change(function(event) {
-        var actArr = $('#reportForm').attr('action').split('.');
-        var action = actArr[0] + '.' + $(this).val().toLowerCase();
-        $('#reportForm').attr('action', action);
-      });
+//      $('#outputType').change(function(event) {
+//        var actArr = $('#reportForm').attr('action').split('.');
+//        var suffix = $(this).val().toLowerCase();
+//        var action = actArr[0] + '.' + $(this).val().toLowerCase();
+//        $('#reportForm').attr('action', action);
+//      });
         
     });
 //]]>
@@ -137,7 +138,7 @@
         </div>
       </g:hasErrors>
 
-      <g:form name="reportForm" action="report.xls" target="_blank">
+      <g:form name="reportForm" target="_blank">
         <div style="height:20px;clear:both;"></div>
         <div class="price_options checkout_header white">
           Pick a date range
@@ -196,6 +197,9 @@
               <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
                 <option ${reportPeriod?.reportName == ReportName.CORP_TRANSACTION ? 'selected="selected"' : ''} value="${ReportName.CORP_TRANSACTION}">${ReportName.CORP_TRANSACTION.display}</option>
                 <option ${reportPeriod?.reportName == ReportName.CORP_PAYMENT ? 'selected="selected"' : ''} value="${ReportName.CORP_PAYMENT}">${ReportName.CORP_PAYMENT.display}</option>
+              </sec:ifAnyGranted>
+              <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <option ${reportPeriod?.reportName == ReportName.INVOICE? 'selected="selected"' : ''} value="${ReportName.INVOICE}">${ReportName.INVOICE.display}</option>
               </sec:ifAnyGranted>
             </select>
           </div>

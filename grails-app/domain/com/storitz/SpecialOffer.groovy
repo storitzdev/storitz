@@ -6,6 +6,10 @@ class SpecialOffer {
 
   static belongsTo = StorageSite
 
+  static hasMany = [
+          restrictions:SpecialOfferRestriction
+  ]
+
   static constraints = {
     code(nullable: true)
     concessionId(nullable: true)
@@ -15,6 +19,10 @@ class SpecialOffer {
     endDate(nullable:true)
     promoSize(nullable:true)
     unitType(nullable:true)
+  }
+
+  static mapping = {
+    restrictions cascade:"all,delete-orphan"
   }
 
   String code

@@ -40,6 +40,7 @@ import com.storitz.Feed
 
 import storitz.constants.FeedType
 import java.awt.Color
+import storitz.constants.ReportOutputType
 
 @Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
 class ReportsController {
@@ -149,6 +150,10 @@ class ReportsController {
       case ReportName.CORP_PAYMENT:
         results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
         break
+
+      case ReportName.INVOICE:
+        results = buildInvoice(drb, reportParams, startDate, endDate, period)
+        break
     }
 
     JRDataSource ds = new JRBeanCollectionDataSource(results);
@@ -170,7 +175,9 @@ class ReportsController {
     session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
     session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
 
-    response.setContentType(period.outputType.contentType)
+    if (period.outputType != ReportOutputType.HTML) {
+      response.setContentType(period.outputType.contentType)
+    }
     reportWriter.writeTo(response);
 
   }
@@ -697,6 +704,21 @@ class ReportsController {
       .addColumn(columnAchAccount)
       .addGroup(g2)
       .addGroup(g1)
+
+    return results
+  }
+
+  private buildInvoice(drb, reportParams, startDate, endDate, period) {
+    def results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
+
+    reportParams["report_name"] = "Storitz Invoice - ${period.feed.operatorName}"
+    reportParams["invoice_num"] = "${startDate.format('MM-yyyy')}-${period.feed.id}"
+    reportParams["addr1"] = "${period.feed.operatorName}"
+    reportParams["addr2"] = "${period.feed.address1}"
+    reportParams["addr3"] = "${period.feed.city}, ${period.feed.state?.display} ${period.feed.zipcode}"
+    reportParams["invoice_total"] = "${g.formatNumber(number:results.sum{ it.commission }, type:'currency', currencyCode:'USD')}"
+    reportParams
+    drb.setTemplateFile(request.getRealPath('/WEB-INF/reports/storitz_invoice_template.jrxml'))
 
     return results
   }

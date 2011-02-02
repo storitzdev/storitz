@@ -46,6 +46,41 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.address.label" default="Address1"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "address1")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.address2.label" default="Address2"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "address2")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.city.label" default="City"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "city")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.state.label" default="State"/></td>
+
+          <td valign="top" class="value">${siteLinkInstance.state?.display}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.zipcode.label" default="Zipcode"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "zipcode")}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="siteLink.manager.label" default="Manager"/></td>
 
           <td valign="top" class="value"><g:link controller="user" action="show" id="${siteLinkInstance?.manager?.id}">${siteLinkInstance?.manager?.username?.encodeAsHTML()}</g:link></td>

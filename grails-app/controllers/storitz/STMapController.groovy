@@ -10,6 +10,7 @@ class STMapController {
     def webUtilService
     def mapService
     def costService
+    def offerFilterService
 
     def index = { }
 
@@ -150,8 +151,11 @@ class STMapController {
           promoName = null
           moveInCost = totals['moveInTotal']
           paidThruDate = totals['paidThruDate']
-          if (site.featuredOffers().size() > 0) {
-            for (promo in site.featuredOffers()) {
+          def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
+          if (featuredOffers.size() > 0) {
+            def oldMoveInCost = moveInCost
+            moveInCost = 100000
+            for (promo in featuredOffers) {
               totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
               if (moveInCost > totals['moveInTotal']) {
                 monthly = bestUnit?.price
@@ -163,6 +167,9 @@ class STMapController {
                 moveInCost = totals['moveInTotal']
                 paidThruDate = totals['paidThruDate']
               }
+            }
+            if (moveInCost == 10000) {
+              moveInCost = oldMoveInCost
             }
           }
         }

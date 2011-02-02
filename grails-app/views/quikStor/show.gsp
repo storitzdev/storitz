@@ -53,6 +53,41 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.address.label" default="Address1"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "address1")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.address2.label" default="Address2"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "address2")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.city.label" default="City"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "city")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.state.label" default="State"/></td>
+
+          <td valign="top" class="value">${quikStorInstance.state?.display}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="storageSite.zipcode.label" default="Zipcode"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "zipcode")}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="quikStor.manager.label" default="Manager"/></td>
 
           <td valign="top" class="value"><g:link controller="user" action="show" id="${quikStorInstance?.manager?.id}">${quikStorInstance?.manager?.username?.encodeAsHTML()}</g:link></td>

@@ -1,5 +1,4 @@
-<div id="headerImage"></div>
-<div class="stcontent" style="margin-top:-60px;">
+<div class="stcontent" style="margin-top:15px;">
   <div class="left" style="width:300px;margin-right:15px;">
     <g:link controller="home" action="index">
       <storitz:image src="storitz-logo.png" width="241" height="77" class="noborder"/>
