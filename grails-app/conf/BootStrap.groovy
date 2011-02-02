@@ -152,6 +152,11 @@ class BootStrap {
       returnArray['feedType'] = it.feedType as String
       returnArray['manager'] = it.manager
       returnArray['operatorName'] = it.operatorName
+      returnArray['address1'] = it.address1
+      returnArray['address2'] = it.address2
+      returnArray['city'] = it.city
+      returnArray['state'] = it.state
+      returnArray['zipcode'] = it.zipcode
       returnArray['sites'] = it.sites
 
       return returnArray
@@ -169,6 +174,11 @@ class BootStrap {
       returnArray['feedType'] = it.feedType as String
       returnArray['manager'] = it.manager
       returnArray['operatorName'] = it.operatorName
+      returnArray['address1'] = it.address1
+      returnArray['address2'] = it.address2
+      returnArray['city'] = it.city
+      returnArray['state'] = it.state
+      returnArray['zipcode'] = it.zipcode
       returnArray['sites'] = it.sites
 
       return returnArray

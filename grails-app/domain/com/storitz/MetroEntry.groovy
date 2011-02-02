@@ -11,6 +11,10 @@ class MetroEntry {
     state(blank:false)
   }
 
+  static mapping = {
+    metro lazy: false
+  }
+
   Metro metro
   String zipcode
   String city
