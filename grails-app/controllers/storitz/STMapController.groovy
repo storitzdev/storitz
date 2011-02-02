@@ -156,16 +156,18 @@ class STMapController {
             def oldMoveInCost = moveInCost
             moveInCost = 100000
             for (promo in featuredOffers) {
-              totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
-              if (moveInCost > totals['moveInTotal']) {
-                monthly = bestUnit?.price
-                unitType = bestUnit?.unitType.display
-                pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
-                sizeDescription = bestUnit?.displaySize
-                promoId = promo.id
-                promoName = promo.promoName
-                moveInCost = totals['moveInTotal']
-                paidThruDate = totals['paidThruDate']
+              if (!(promo.promoName ==~ /(?i).*military.*/)) {
+                totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+                if (moveInCost > totals['moveInTotal']) {
+                  monthly = bestUnit?.price
+                  unitType = bestUnit?.unitType.display
+                  pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
+                  sizeDescription = bestUnit?.displaySize
+                  promoId = promo.id
+                  promoName = promo.promoName
+                  moveInCost = totals['moveInTotal']
+                  paidThruDate = totals['paidThruDate']
+                }
               }
             }
             if (moveInCost == 10000) {
