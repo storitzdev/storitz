@@ -44,7 +44,7 @@ function updateTransaction() {
   // update featured offers
   $('#featuredOffers').empty();
   $.each(featuredOffers, function(index, offer) {
-    $('#featuredOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).text(offer.promoName));
+    $('#featuredOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).append(offer.promoName));
     if (chosenPromoId == offer.promoId) {
         chosenOfferFound = true;
     }
