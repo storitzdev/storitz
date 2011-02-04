@@ -227,6 +227,7 @@ class BootStrap {
       def returnArray = [:]
 
       returnArray['code'] = it.code
+      returnArray['promoId'] = it.id
       returnArray['concessionId'] = it.concessionId
       returnArray['promoName'] = it.promoName
       returnArray['description'] = it.description

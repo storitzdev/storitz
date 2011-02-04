@@ -402,6 +402,7 @@ class StorageSiteController {
     def stats = new storitz.SiteStats()
     feedService.updateUnits(storageSiteInstance, stats, writer)
     flash.message = "${message(code: 'default.units.message', args: [stats.unitCount, stats.removedCount])}"
+    writer.flush()
     redirect(action: "show", id: storageSiteInstance.id)
   }
 
@@ -743,16 +744,18 @@ class StorageSiteController {
       println "Best Unit not found for site:${site.id} unitType:${params.unitType} unitSize:${unitSize}"
     }
 
+    def specialOffers = offerFilterService.getValidNonFeaturedOffers(site, bestUnit)
+    def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
+
     def chosenPromo = ''
     def specialOffer
-    if (params.chosenPromoId && (params.chosenPromoId as Long) > 0) {
-      specialOffer = SpecialOffer.get(params.chosenPromoId as Long)
-      if (specialOffer) {
+    Long chosenPromoId = (params.chosenPromoId ? params.long('chosenPromoId') : -999l)
+    if (chosenPromoId > 0) {
+      if (specialOffers.find{it.id == chosenPromoId} || featuredOffers.find{it.id == chosenPromoId}) {
+        specialOffer = SpecialOffer.get(chosenPromoId)
         chosenPromo = specialOffer.promoName
       }
     }
-    def specialOffers = offerFilterService.getValidNonFeaturedOffers(site, bestUnit)
-    def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
 
     def premium = 0
     def ins

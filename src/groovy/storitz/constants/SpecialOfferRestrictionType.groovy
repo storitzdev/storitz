@@ -2,6 +2,7 @@ package storitz.constants
 
 public enum SpecialOfferRestrictionType {
   UNIT_TYPE("Unit Type"),
+  UNIT_SIZE("Unit Size"),
   OCCUPANCY_RATE("Occupancy Rate"),
   MINIMUM_AVAILABLE("Minimum Available")
 
@@ -11,7 +12,7 @@ public enum SpecialOfferRestrictionType {
 
 
   static list() {
-      [UNIT_TYPE, OCCUPANCY_RATE, MINIMUM_AVAILABLE]
+      [UNIT_TYPE, UNIT_SIZE, OCCUPANCY_RATE, MINIMUM_AVAILABLE]
   }
 
   static public SpecialOfferRestrictionType getEnumFromId(String value) {

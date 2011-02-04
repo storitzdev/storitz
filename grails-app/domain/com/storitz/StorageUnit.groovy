@@ -13,6 +13,7 @@ class StorageUnit {
       unitNumber(nullable:true)
       taxRate(nullable:true)
       unitInfo(nullable:true)
+      totalUnits(nullable:true)
     }
 
     String description
@@ -31,6 +32,9 @@ class StorageUnit {
     String displaySize
     Boolean isAvailable
     Integer unitCount
+    Integer totalUnits
     BigDecimal taxRate
-    String unitInfo   // centershift original size 
+    String unitInfo   // centershift original size
+    String unitSizeInfo // used by special offer filter
+    String unitTypeInfo // used by special offer filter
 }

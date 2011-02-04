@@ -40,12 +40,46 @@ function updateTransaction() {
     $('#pushPrice').removeClass('red');
   }
 
+  var chosenOfferFound = false;
+  // update featured offers
+  $('#featuredOffers').empty();
+  $.each(featuredOffers, function(index, offer) {
+    $('#featuredOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).text(offer.promoName));
+    if (chosenPromoId == offer.promoId) {
+        chosenOfferFound = true;
+    }
+  });
+
+  // update non-featured offers
+  $('#nonFeaturedOffers').empty();
+  $.each(specialOffers, function(index, offer) {
+    $('#nonFeaturedOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).append(offer.promoName));
+    if (chosenPromoId == offer.promoId) {
+      chosenOfferFound = true;
+    }
+  });
+
+  if (!chosenOfferFound) {
+    chosenPromoId = -999;
+    chosenPromo = '';
+  }
+
   // update promo
   $('#selectedOffer').html(chosenPromo);
   if (chosenPromo != '') {
     $('#clearOffer').html('remove');
+  } else {
+    $('#clearOffer').html('');
   }
   $('#selectedInsurance').html(chosenInsurance);
+
+  $("input[name='specialOffer']").change(function(event) {
+    var offerId =  $("input:[name='specialOffer']:checked").val();
+    $('#promoId').val(offerId);
+    chosenPromoId = offerId;
+    showTotals('promo');
+    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
+  });
 
   // update costs
   var durationText = '';
@@ -235,6 +269,8 @@ function showTotals(action) {
       unitId = ret.totals.unitId;
       paidThruDate = ret.totals.paidThruDate;
       actualSize = ret.totals.actualSize;
+      featuredOffers = ret.totals.featuredOffers;
+      specialOffers = ret.totals.specialOffers;
       updateTransaction();
     }
   });

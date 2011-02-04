@@ -12,6 +12,7 @@ import com.storitz.*
 import storitz.constants.UnitType
 import storitz.constants.SearchType
 import storitz.constants.CreditCardType
+import java.text.ParseException
 
 class RentalTransactionController {
 
@@ -106,7 +107,11 @@ class RentalTransactionController {
         if (params.moveInDate && params.moveInDate instanceof Date) {
           rentalTransactionInstance.moveInDate = params.moveInDate
         } else {
-          rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+          try {
+            rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
+          } catch(ParseException e) {
+            rentalTransactionInstance.moveInDate = new Date()
+          }
         }
         rentalTransactionInstance.site = site
         rentalTransactionInstance.searchSize = storageSize

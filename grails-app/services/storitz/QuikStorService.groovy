@@ -310,8 +310,10 @@ class QuikStorService extends BaseProviderService {
           if (unitsize) {
             unit = new StorageUnit()
             unit.unitNumber = unitType.iTypeId
+            unit.unitTypeInfo = unitType.iTypeId
             unit.price = unit.pushRate = unitType.dPrice
             unit.displaySize = unitType.sTypeDescription.tokenize(',')[0]
+            unit.unitSizeInfo = unit.displaySize
             unit.unitsize = unitsize
             unit.isAvailable = true
             unit.isSecure = false

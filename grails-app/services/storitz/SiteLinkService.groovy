@@ -437,6 +437,23 @@ class SiteLinkService extends BaseProviderService {
     postAction(payload, 'ProrationInformationRetrieve')
   }
 
+  def getUnitTypePriceList(corpCode, locationCode, userName, password) {
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:UnitTypePriceList>
+         <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+         <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+         <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+      </cal:UnitTypePriceList>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'UnitTypePriceList')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
@@ -776,8 +793,32 @@ class SiteLinkService extends BaseProviderService {
     site.save(flush: true)
   }
 
+  def getUnitTypeCounts(siteLink, site, writer) {
+    def unitTypeLookup = [:]
+
+    def ret = getUnitTypePriceList(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+    for (unitType in records.'soap:Body'.'*:UnitTypePriceListResponse'.'*:UnitTypePriceListResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      String key = "${unitType.UnitTypeID.text()}:${unitType.dcWidth.text()}X${unitType.dcLength.text()}${unitType.bClimate.text()}"
+      unitTypeLookup[key] = unitType.iTotalUnits.text() as Integer
+      writer.println "Unit Type: ${key} has ${unitType.iTotalUnits.text()} units"
+    }
+    return unitTypeLookup
+  }
+
   def unitsAvailable(siteLink, site, stats, newSite, writer) {
     writer.println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
+
+    def unitTypeTotalLookup = getUnitTypeCounts(siteLink, site, writer)
+
     def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, newSite ? 0 : site.lastUpdate)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -803,12 +844,20 @@ class SiteLinkService extends BaseProviderService {
 
       } else {
         unitID = unit.UnitID.text()
-        def existingUnit = site.units.find{ it.unitNumber == unitID }
+        StorageUnit existingUnit = site.units.find{ it.unitNumber == unitID }
 
         if (!existingUnit) {
 
+          Double width = unit.dcWidth.text() as Double
+          Double length = unit.dcLength.text() as Double
+
           def searchType
           def siteUnit = new StorageUnit()
+          Integer unitTypeID = unit.UnitTypeID.text() as Integer
+          String key = "${unitTypeID}:${unit.dcWidth.text()}X${unit.dcLength.text()}${unit.bClimate.text()}"
+          siteUnit.unitTypeInfo = "${unitTypeID}:${unit.dcWidth.text()}X${unit.dcLength.text()}"
+          siteUnit.totalUnits = unitTypeTotalLookup[key]
+          siteUnit.unitSizeInfo = "${unit.dcWidth.text()}X${unit.dcLength.text()}"
           def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
           if (unitTypeLookup) {
             searchType = unitTypeLookup.searchType
@@ -860,8 +909,6 @@ class SiteLinkService extends BaseProviderService {
           siteUnit.isAlarm = unit.bAlarm.text().toLowerCase() == 'true'
           siteUnit.isIrregular = false
 
-          Double width = unit.dcWidth.text() as Double
-          Double length = unit.dcLength.text() as Double
           if ((width - (int)width == 0) && (length - (int)length == 0)) {
             siteUnit.displaySize = (width as Integer) + " X " + (length as Integer)
           } else {
@@ -1025,6 +1072,9 @@ class SiteLinkService extends BaseProviderService {
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
           newOffer = true
+        } else {
+          specialOffer.restrictions.clear()
+          specialOffer.save(flush:true)
         }
         specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
         specialOffer.promoName = promoName
@@ -1051,6 +1101,31 @@ class SiteLinkService extends BaseProviderService {
         if (newOffer) {
           site.addToSpecialOffers(specialOffer)
         }
+        // check restrictions
+        if (promo.dcMaxOccPct && promo.dcMaxOccPct.text().isNumber()) {
+          BigDecimal maxRange =  (promo.dcMaxOccPct.text() as BigDecimal)
+          if (maxRange > 0) {
+            SpecialOfferRestriction restriction = new SpecialOfferRestriction()
+            restriction.restrictive = false
+            restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
+            restriction.minRange = 0
+            restriction.maxRange = maxRange
+            restriction.save(flush:true)
+            specialOffer.addToRestrictions(restriction)
+          }
+        }
+        if (promo.iExcludeIfLessThanUnitsTotal && promo.iExcludeIfLessThanUnitsTotal.text().isNumber()) {
+          Integer minRange = promo.iExcludeIfLessThanUnitsTotal.text() as Integer
+          if (minRange > 0) {
+            SpecialOfferRestriction restriction = new SpecialOfferRestriction()
+            restriction.restrictive = false
+            restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
+            restriction.minRange = minRange
+            restriction.maxRange = 1000
+            restriction.save(flush:true)
+            specialOffer.addToRestrictions(restriction)
+          }
+        }
       }
     }
     def deleteList = []
@@ -1063,7 +1138,25 @@ class SiteLinkService extends BaseProviderService {
       writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
       site.removeFromSpecialOffers(promo)
     }
-
+    for (unitRestriction in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionUnitTypes') {
+      SpecialOffer specialOffer = SpecialOffer.findByConcessionId(unitRestriction.ConcessionID.text() as Integer)
+      if (specialOffer) {
+        // add unit type
+        def restriction = new SpecialOfferRestriction()
+        restriction.restrictive = false
+        restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+        restriction.restrictionInfo = "${unitRestriction.UnitTypeID.text()}:${unitRestriction.dcWidth.text()}X${unitRestriction.dcLength.text()}"
+        restriction.save(flush:true)
+        specialOffer.addToRestrictions(restriction)
+        // add size type
+        restriction = new SpecialOfferRestriction()
+        restriction.restrictive = false
+        restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
+        restriction.restrictionInfo = unitRestriction.dcWidth.text() + "X" + unitRestriction.dcLength.text()
+        restriction.save(flush:true)
+        specialOffer.addToRestrictions(restriction)
+      }
+    }    
   }
 
   def getTaxes(siteLink, site) {

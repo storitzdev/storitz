@@ -9,8 +9,9 @@ class SpecialOfferRestriction {
     SpecialOfferRestrictionType type
     Date startDate
     Date endDate
-    Integer occupancyPercentage
-    Integer occupancyUnits
+    BigDecimal minRange
+    BigDecimal maxRange
+    Boolean restrictive
     Integer sizeType
     String restrictionInfo
     String description
@@ -18,8 +19,9 @@ class SpecialOfferRestriction {
     static constraints = {
       startDate(nullable:true)
       endDate(nullable:true)
-      occupancyPercentage(nullable:true)
-      occupancyUnits(nullable:true)
+      minRange(nullable:true)
+      maxRange(nullable:true)
+      restrictive(nullable:true)
       sizeType(nullable:true)
       restrictionInfo(nullable:true)
       description(nullable:true)

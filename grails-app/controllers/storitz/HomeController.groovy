@@ -317,7 +317,7 @@ class HomeController {
   }
 
   def changeSearchType = {
-    def searchType = SearchType.getEnumFromId(params.searchType)
+    def searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE
     def sizeList = StorageSize.createCriteria().list(params) {
       or {
         eq("id", 1L)

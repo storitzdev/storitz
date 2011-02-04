@@ -770,6 +770,7 @@ class CShiftService extends BaseProviderService {
     for (unit in records.'soap:Body'.'*:GetSiteUnitDataResponse'.'*:GetSiteUnitDataResult'.'*:SiteUnitData'.'*:Unit') {
 
       def vacant = unit.VACANT.text() as Integer
+      def totalUnits = unit.TOTAL.text () as Integer
       def typeName = unit.VALUE.text()
       def attributes = unit.ATTRIBUTES.text()
 
@@ -819,6 +820,8 @@ class CShiftService extends BaseProviderService {
             if (!siteUnit) {
               siteUnit = new StorageUnit()
               siteUnit.unitInfo = dimensions
+              siteUnit.unitSizeInfo = dimensions
+              siteUnit.unitTypeInfo = typeName
               newUnit = true
 
               if (unitTypeLookup) {
@@ -849,6 +852,7 @@ class CShiftService extends BaseProviderService {
                 siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
               }
               siteUnit.unitsize = unitSize
+              siteUnit.totalUnits = totalUnits
               siteUnit.unitCount = vacant
               siteUnit.description = typeName
               siteUnit.unitName = siteUnit.unitNumber = attributes
@@ -864,6 +868,7 @@ class CShiftService extends BaseProviderService {
 
             } else {
               siteUnit.unitCount = vacant
+              siteUnit.totalUnits = totalUnits
               siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
               siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
               stats.unitCount += vacant
@@ -908,16 +913,6 @@ class CShiftService extends BaseProviderService {
         if (limitFactor ==~ /Existing.*/) {
           validGov = false
         }
-        if (limitFactor == 'Unit Dimensions/Size') {
-          def govValue = gov.'governor-value'.text()
-          def m = govValue =~ /(\d+)\s*X\s*(\d+)/                                   
-          if (m.matches()) {
-            def width = m[0][1] as Double
-            def length = m[0][2] as Double
-            // TODO - may need to filter parking from storage here
-            promoSize = unitSizeService.getUnitSize(width, length, SearchType.STORAGE)
-          }
-        }
       }
 
       if (validGov && !(description ==~ /Comp.*/)) {
@@ -936,6 +931,9 @@ class CShiftService extends BaseProviderService {
           specialOffer.concessionId = concessionId
           specialOffer.promoName = promo.'promo-name'.text()
           newOffer = true
+        } else {
+          specialOffer.restrictions.clear()
+          specialOffer.save(flush:true)
         }
         specialOffer.promoSize = promoSize
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
@@ -964,9 +962,97 @@ class CShiftService extends BaseProviderService {
             writer.println "Unknown promoType: ${ptype}"
             return
         }
-        specialOffer.save()
+        specialOffer.save(flush:true)
         if (newOffer) {
           site.addToSpecialOffers(specialOffer)
+        }
+        def saveFlag = false
+        for(gov in promo.'promo-governors'.governor) {
+          def limitFactor = gov.'limiting-factor'.text()
+          switch (limitFactor) {
+            case '# Vacant':
+              def restriction = new SpecialOfferRestriction()
+              restriction.restrictive = false
+              restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
+              restriction.minRange = gov.'range-low'.text() as BigDecimal
+              restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+              restriction.save(flush:true)
+              specialOffer.addToRestrictions(restriction)
+              saveFlag = true
+              break
+            case '# Vacant (Restrictive)':
+              def restriction = new SpecialOfferRestriction()
+              restriction.restrictive = true
+              restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
+              restriction.minRange = gov.'range-low'.text() as BigDecimal
+              restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+              restriction.save(flush:true)
+              specialOffer.addToRestrictions(restriction)
+              saveFlag = true
+              break
+            case '% Vacant':
+              def restriction = new SpecialOfferRestriction()
+              restriction.restrictive = false
+              restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
+              restriction.minRange = gov.'range-low'.text() as BigDecimal
+              restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+              restriction.save(flush:true)
+              specialOffer.addToRestrictions(restriction)
+              saveFlag = true
+              break
+            case '% Vacant (Restrictive)':
+              def restriction = new SpecialOfferRestriction()
+              restriction.restrictive = true
+              restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
+              restriction.minRange = gov.'range-low'.text() as BigDecimal
+              restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+              restriction.save(flush:true)
+              specialOffer.addToRestrictions(restriction)
+              saveFlag = true
+              break
+            case 'At Move-In Only':
+              // ignore
+              break
+            case 'Existing Tenants Only':
+              // this should be filtered above and never happen here
+              break
+            case 'Insurance':
+              // ignore
+              break
+            case 'New Customers Only':
+              // ignore
+              break
+            case 'Non-Delinquent Rentals Only (less than Step 1)':
+              // ignore
+              break
+            case 'Rental Rate':
+              // ignore
+              break
+            case 'Rental Square Feet':
+              // ignore
+              break
+            case 'Unit Attributes':
+              def restriction = new SpecialOfferRestriction()
+              restriction.restrictive = false
+              restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+              restriction.restrictionInfo = gov.'governor-value'.text()
+              restriction.save(flush:true)
+              specialOffer.addToRestrictions(restriction)
+              saveFlag = true
+              break
+            case 'Unit Dimensions/Size':
+              def restriction = new SpecialOfferRestriction()
+              restriction.restrictive = false
+              restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
+              restriction.restrictionInfo = gov.'governor-value'.text()
+              restriction.save(flush:true)
+              specialOffer.addToRestrictions(restriction)
+              saveFlag = true
+              break
+          }
+        }
+        if (saveFlag) {
+          specialOffer.save(flush:true)
         }
       }
 
