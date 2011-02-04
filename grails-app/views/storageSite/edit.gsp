@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.User; com.storitz.UserRole" %>
+<%@ page import="storitz.constants.SpecialOfferRestrictionType; com.storitz.User; com.storitz.UserRole" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Edit Storage Site" scope="request"/>
@@ -1063,6 +1063,7 @@
                   <th>Waive Admin Fee</th>
                   <th>Promotion Name</th>
                   <th>Description</th>
+                  <th>Restrictions</th>
                 </tr>
                 <g:each in="${storageSiteInstance?.specialOffers.sort{it.id}}" var="o">
                   <tr>
@@ -1071,6 +1072,11 @@
                     <td><g:checkBox name="waiveAdmin_${o.id}" value="${o.waiveAdmin}"/></td>
                     <td><g:textField style="width:250px;" name="promoName_${o.id}" value="${o.promoName}"/> </td>
                     <td><g:textField style="width:250px;" name="promoDesc_${o.id}" value="${o.description}"/></td>
+                    <td>
+                      <g:each in="${o.restrictions}" var="r">
+                        <div>${r.type.display}:${r.type == SpecialOfferRestrictionType.OCCUPANCY_RATE || r.type == SpecialOfferRestrictionType.MINIMUM_AVAILABLE ? r.minRange + ' <= x <=' + r.maxRange : r.restrictionInfo}</div>
+                      </g:each>
+                    </td>
                   </tr>
                 </g:each>
               </table>

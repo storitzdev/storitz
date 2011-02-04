@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.UserNotificationType" %>
+<%@ page import="storitz.constants.SpecialOfferRestrictionType; com.storitz.UserNotificationType" %>
 
 
 
@@ -203,6 +203,7 @@
                 <th>Waive Admin</th>
                 <th>Promo Name</th>
                 <th>Description</th>
+                <th>Restrictions</th>
               </tr>
               <g:each in="${storageSiteInstance.specialOffers}" var="s">
                 <tr>
@@ -211,6 +212,11 @@
                   <td>${s.waiveAdmin ? 'X' : '&nbsp;'}</td>
                   <td>${s?.promoName}</td>
                   <td>${s?.description}</td>
+                  <td>
+                    <g:each in="${s.restrictions}" var="r">
+                      <div>${r.type.display}:${r.type == SpecialOfferRestrictionType.OCCUPANCY_RATE || r.type == SpecialOfferRestrictionType.MINIMUM_AVAILABLE ? r.minRange + ' <= x <=' + r.maxRange : r.restrictionInfo}</div>
+                    </g:each>
+                  </td>
                 </tr>
               </g:each>
             </table>
