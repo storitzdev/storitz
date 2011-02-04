@@ -230,7 +230,7 @@ class HomeController {
           def oldMoveInCost = siteMoveInPrice[site.id].cost
           siteMoveInPrice[site.id].cost = 100000
           for (promo in featuredOffers) {
-            if (!(promo.promoName ==~ /(?i).*military.*/)) {
+            if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
               totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
               if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
                 siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]

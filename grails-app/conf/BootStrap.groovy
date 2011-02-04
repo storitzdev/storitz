@@ -1318,6 +1318,7 @@ class BootStrap {
     new UnitTypeLookup(id:832, description:"Front Lot Parking",  unitType:UnitType.UNCOVERED,  searchType:SearchType.PARKING,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:833, description:"Drive Up 24H",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:834, description:"Climate Control Upper",  unitType:UnitType.UPPER,  searchType:SearchType.STORAGE,  tempControlled:true).save(validate:false)
+    new UnitTypeLookup(id:835, description:"RV Side Lot",  unitType:UnitType.UNCOVERED,  searchType:SearchType.PARKING,  tempControlled:false).save(validate:false)
   }
 
 

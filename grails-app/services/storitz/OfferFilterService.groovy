@@ -36,7 +36,7 @@ class OfferFilterService {
           def validUnitType = (offer.restrictions.findAll{it.type == SpecialOfferRestrictionType.UNIT_TYPE}.size() == 0)
           def validUnitSize = (offer.restrictions.findAll{it.type == SpecialOfferRestrictionType.UNIT_SIZE}.size() == 0)
           def validOccupancyRate = (offer.restrictions.findAll{it.type == SpecialOfferRestrictionType.OCCUPANCY_RATE}.size() == 0)
-          def validMinimumAvailable = (offer.restrictions.findAll{it.type == SpecialOfferRestrictionType.OCCUPANCY_RATE}.size() == 0)
+          def validMinimumAvailable = (offer.restrictions.findAll{it.type == SpecialOfferRestrictionType.MINIMUM_AVAILABLE}.size() == 0)
           println "In offer filter validUnitType=${validUnitType}, validUnitSize=${validUnitSize}, validOccupancyRate=${validOccupancyRate}, validMinimumAvailable=${validMinimumAvailable}"
           for(restriction in offer.restrictions) {
             switch(restriction.type) {

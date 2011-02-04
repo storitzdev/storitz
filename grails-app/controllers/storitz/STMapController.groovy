@@ -156,7 +156,7 @@ class STMapController {
             def oldMoveInCost = moveInCost
             moveInCost = 100000
             for (promo in featuredOffers) {
-              if (!(promo.promoName ==~ /(?i).*military.*/)) {
+              if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                 totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
                 if (moveInCost > totals['moveInTotal']) {
                   monthly = bestUnit?.price
