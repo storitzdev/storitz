@@ -51,6 +51,10 @@ function updateTransaction() {
   });
 
   // update non-featured offers
+  var offersHidden = $('#nonFeaturedOffers').is(':hidden');
+  if (offersHidden) {
+      $('#nonFeaturedOffers').show();
+  }
   $('#nonFeaturedOffers').empty();
   $.each(specialOffers, function(index, offer) {
     $('#nonFeaturedOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).append(offer.promoName));
@@ -58,6 +62,9 @@ function updateTransaction() {
       chosenOfferFound = true;
     }
   });
+  if (offersHidden) {
+    $('#nonFeaturedOffers').hide();
+  }
 
   if (!chosenOfferFound) {
     chosenPromoId = -999;
@@ -206,10 +213,6 @@ function setupPromoHandler() {
       showTotals('promo');
       _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
     });
-}
-
-function hideNonFeaturedPromos() {
-    $('#nonFeaturedOffers').hide();
 }
 
 function setupCalendar() {

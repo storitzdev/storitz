@@ -170,7 +170,7 @@ class STMapController {
                 }
               }
             }
-            if (moveInCost == 10000) {
+            if (moveInCost == 100000) {
               moveInCost = oldMoveInCost
             }
           }
