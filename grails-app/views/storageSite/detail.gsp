@@ -43,6 +43,7 @@
     details_return();
   </g:if>
     showTotals();
+    setupPromoHandler();
     setupValidation();
     setupEmbed();
     ajaxFormUpdate();

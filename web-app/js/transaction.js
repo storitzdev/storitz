@@ -73,14 +73,6 @@ function updateTransaction() {
   }
   $('#selectedInsurance').html(chosenInsurance);
 
-  $("input[name='specialOffer']").change(function(event) {
-    var offerId =  $("input:[name='specialOffer']:checked").val();
-    $('#promoId').val(offerId);
-    chosenPromoId = offerId;
-    showTotals('promo');
-    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
-  });
-
   // update costs
   var durationText = '';
   if (durationMonths > 0) {
@@ -202,6 +194,16 @@ function transactionFormSetup() {
     showTotals('unitType');
     _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'unit type ' + chosenUnitType]);
   });
+}
+
+function setupPromoHandler() {
+    $("input[name='specialOffer']").change(function(event) {
+      var offerId =  $("input:[name='specialOffer']:checked").val();
+      $('#promoId').val(offerId);
+      chosenPromoId = offerId;
+      showTotals('promo');
+      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
+    });
 }
 
 function setupCalendar() {
