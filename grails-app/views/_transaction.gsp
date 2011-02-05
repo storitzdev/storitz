@@ -57,7 +57,7 @@
     <div id="specialOffers" class="left offerList" style="margin-left: 10px;">
       <div id="featuredOffers">
       </div>
-      <div id="nonFeaturedOffers" style="display:none">
+      <div id="nonFeaturedOffers">
       </div>
     </div>
     <div class="right">
