@@ -206,6 +206,9 @@ function setupPromoHandler() {
       showTotals('promo');
       _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
     });
+}
+
+function hideNonFeaturedPromos() {
     $('#nonFeaturedOffers').hide();
 }
 

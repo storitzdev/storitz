@@ -44,6 +44,7 @@
   </g:if>
     showTotals();
     setupPromoHandler();
+    hideNonFeaturedPromos();
     setupValidation();
     setupEmbed();
     ajaxFormUpdate();
