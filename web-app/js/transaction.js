@@ -139,14 +139,6 @@ function updateTransaction() {
 
 function transactionFormSetup() {
 
-  $("input[name='specialOffer']").change(function(event) {
-    var offerId =  $("input:[name='specialOffer']:checked").val();
-    $('#promoId').val(offerId);
-    chosenPromoId = offerId;
-    showTotals('promo');
-    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
-  });
-
   $("input[name='insuranceId']").change(function(event) {
     insuranceId =  $("input[name='insuranceId']:checked").val();
     $('#insuranceId').val(insuranceId);
