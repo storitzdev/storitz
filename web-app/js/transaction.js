@@ -73,6 +73,8 @@ function updateTransaction() {
   }
   $('#selectedInsurance').html(chosenInsurance);
 
+  setupPromoHandler();
+    
   // update costs
   var durationText = '';
   if (durationMonths > 0) {
