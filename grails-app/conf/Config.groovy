@@ -143,13 +143,13 @@ grails.mail.props = ["mail.smtp.auth":"true",
 uiperformance.bundles = [
   [type: 'js',
     name: 'header_all',
-          files: ["jquery-1.4.2.min",
+          files: ["jquery-1.5.min",
                   "jquery-ui-1.8.6.custom.min",
                   "jquery.ui.ipad.alt"
     ]],
   [type: 'js',
     name: 'jquery_basic',
-    files: ["jquery-1.4.2.min",
+    files: ["jquery-1.5.min",
             "jquery-ui-1.8.6.custom.min",
             "jquery.ui.ipad.alt",
             "jquery.qtip-1.0.min"
@@ -162,7 +162,7 @@ uiperformance.bundles = [
             "jquery.easing.1.3",
             "jquery.galleryview-2.1.1",
             "jquery.maskedinput",
-            "jquery.validate.min",
+            "jquery.validate",
             "jquery.ui.selectmenu",
             "jquery.ba-bbq",
             "json2",
@@ -170,7 +170,7 @@ uiperformance.bundles = [
             ]],
   [type: 'js',
     name: 'admin_all',
-    files: ["jquery-1.4.2.min",
+    files: ["jquery-1.5.min",
             "jquery-ui-1.8.6.custom.min",
             "jquery.ui.ipad.alt"
     ]],
