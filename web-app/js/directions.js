@@ -37,7 +37,9 @@ function createDirectionMap() {
 }
 
 function refreshMap() {
-   google.maps.event.trigger(directionMap, 'resize');
+   if (directionMap) {
+     google.maps.event.trigger(directionMap, 'resize');
+   }
    createDirectionMap();
 }
 
@@ -167,4 +169,5 @@ function getDirections() {
         };
         directionsService.route(request,  drawDirections);
   });
+
 }
