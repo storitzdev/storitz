@@ -36,7 +36,6 @@
     transactionFormSetup();
     setupCalendar();
     getDirections();
-    createDirectionMap();
     setupHelp();
     primaryCountryClick();
   <g:if test="${params.returnForm}">
