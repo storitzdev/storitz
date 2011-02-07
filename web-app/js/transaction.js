@@ -44,7 +44,8 @@ function updateTransaction() {
   // update featured offers
   $('#featuredOffers').empty();
   $.each(featuredOffers, function(index, offer) {
-    $('#featuredOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).append(offer.promoName));
+    var radioButton = $('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId)})
+    $('#featuredOffers').append($('<p>').append(radioButton).append(offer.promoName));
     if (chosenPromoId == offer.promoId) {
         chosenOfferFound = true;
     }
@@ -57,10 +58,14 @@ function updateTransaction() {
   }
   $('#nonFeaturedOffers').empty();
   $.each(specialOffers, function(index, offer) {
-    $('#nonFeaturedOffers').append($('<p>').append($('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId ? 'checked' : '')})).append(offer.promoName));
+    var radioButton = $('<input>', {'type':'radio', 'name':'specialOffer', 'value':offer.promoId, 'checked':(chosenPromoId == offer.promoId)})
+    $('#nonFeaturedOffers').append($('<p>').append(radioButton).append(offer.promoName));
     if (chosenPromoId == offer.promoId) {
       chosenOfferFound = true;
     }
+  });
+  $("input[name='specialOffer']").each(function() {
+    $(this).attr('checked', $(this).attr('value') == chosenPromoId); 
   });
   if (offersHidden) {
     $('#nonFeaturedOffers').hide();
