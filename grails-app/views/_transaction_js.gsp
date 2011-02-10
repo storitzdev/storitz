@@ -44,5 +44,9 @@ function setupRentVsReserve() {
         _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentvsreserve']);
         $('#rentVsReserveText').dialog('open');
     });
+    $('#rentmeDisbled').click(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentme']);
+        $('#rentVsReserveText').dialog('open');
+    });
 }
 
