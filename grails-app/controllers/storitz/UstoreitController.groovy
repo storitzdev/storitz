@@ -33,7 +33,7 @@ class UstoreitController {
               usiNum = '0' + usiNum
             }
             def site = StorageSite.findByFeedAndTitleLike(ustoreitFeed, usiNum + '%')
-            println "Searching for feed id = ${ustoreitFeed.id} and title starting with ${usiNum} found = ${site != null}"
+            println "Searching for feed id = ${ustoreitFeed.id} and title starting with ${usiNum} found = ${site != null} page url= ${pageUrl}"
             if (site) {
               def imageList = []
               for (siteImage in site.siteImages()) {
