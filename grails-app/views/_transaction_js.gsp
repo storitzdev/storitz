@@ -38,7 +38,7 @@ function setupRentVsReserve() {
     $('#rentVsReserveText').dialog({
         autoOpen: false,
         resizable: false,
-        width: 200
+        width: 250
     }).addTouch();
     $('#rentVsReserve').click(function(event) {
         _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentvsreserve']);

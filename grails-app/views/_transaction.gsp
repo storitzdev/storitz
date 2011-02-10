@@ -199,5 +199,5 @@
   </div>
 </div>
 <div id="rentVsReserveText" style="display:none">
-  This Storitz facility enables you to <b>reserve</b> not <b>rent</b> a unit. This means that you can have a low obligation way to hold a unit.  Final details and paperwork is required at the storage property office on the day of your move-in.
+  This Storitz facility does not allow you to <b>rent</b> a unit.  Instead, you can make a <b>reservation</b> which means less obligation but also finalizing details and paperwork upon your arrival at the storage facility.
 </div>
