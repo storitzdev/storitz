@@ -150,7 +150,7 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
                 </tr>
                 <g:if test="${promo}">
                   <tr>
-                    <td class="tright" style="width:200px;">Promotion Discount(s):</td>
+                    <td style="width:200px;">Promotion Discount(s):</td>
                     <td>${promo.promoName}</td>
                   </tr>
                 </g:if>
