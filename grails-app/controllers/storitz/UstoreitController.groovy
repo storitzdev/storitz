@@ -61,10 +61,8 @@ class UstoreitController {
                 out.close()
                 def ext
                 def newName
-                if (fileName.size > 0) {
-                  ext = '.' + fileName.tokenize('.')[-1]
-                  newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
-                }
+                ext = '.' + fileName.tokenize('.')[-1]
+                newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
                 def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
                 def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
                 def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
