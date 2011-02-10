@@ -59,12 +59,23 @@ class UstoreitController {
                 def out = new BufferedOutputStream(file)
                 out << new URL(address).openStream()
                 out.close()
-                def filePath = fileUploadService.getFilePath('/images/site', site.id + '_' + fileName, site.id)
-                def filePathMid = fileUploadService.getFilePath('/images/site', 'mid_' + site.id + '_' + fileName, site.id)
-                def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb_' + site.id + '_' + fileName, site.id)
-                imageService.scaleImages(new File(tmpPath), site.id, imgOrder, filePath, filePathMid, filePathThumb, site)
-                println "\tProcessed to ${filePath}"
+                def ext
+                def newName
+                if (fileName.size > 0) {
+                  ext = '.' + fileName.tokenize('.')[-1]
+                  newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
+                }
+                def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
+                def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
+                def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
                 ++imgOrder
+                imageService.scaleImages(new File(tmpPath), site.id, imgOrder, filePath, filePathMid, filePathThumb, site)
+                imageService.iptcTagImage(new File(filePath), site, imgOrder, 'FULL')
+                imageService.iptcTagImage(new File(filePathMid), site, imgOrder, 'MID')
+                imageService.iptcTagImage(new File(filePathThumb), site, imgOrder, 'THUMB')
+
+                println "\tProcessed to ${filePath}"
+                site.save(flush:true)
               }
             }
           }

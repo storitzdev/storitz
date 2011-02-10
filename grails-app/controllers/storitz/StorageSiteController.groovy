@@ -310,7 +310,7 @@ class StorageSiteController {
         } else {
           if (imgFile.size > 0) {
             ext = '.' + imgFile.originalFilename.tokenize('.')[-1]
-            newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
+            newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self-storage-units-${imgOrder}${ext}"
           }
           if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', newName, siteId)) {
             def tmpPath = fileUploadService.getFilePath('/images/upload',newName, siteId)
