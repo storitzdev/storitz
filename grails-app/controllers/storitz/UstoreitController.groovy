@@ -52,17 +52,15 @@ class UstoreitController {
                 println "\tImage: ${item.img}"
                 def address = "http://www.ustoreit.com${basePath}${(item.img as String).replaceAll(' ','%20')}"
                 def fileName = address.tokenize("/")[-1]
-                def tmpPath = fileUploadService.getFilePath('/images/upload', site.id + '_' + fileName, site.id)
+                def ext = '.' + fileName.tokenize('.')[-1]
+                def newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
+                def tmpPath = fileUploadService.getFilePath('/images/upload', newName, site.id)
                 def dirPath = new File(fileUploadService.getFilePath('/images/upload', '', site.id))
                 dirPath.mkdirs()
                 def file = new FileOutputStream(tmpPath)
                 def out = new BufferedOutputStream(file)
                 out << new URL(address).openStream()
                 out.close()
-                def ext
-                def newName
-                ext = '.' + fileName.tokenize('.')[-1]
-                newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
                 def filePath = fileUploadService.getFilePath('/images/site', newName, site.id)
                 def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, site.id)
                 def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, site.id)
