@@ -23,6 +23,7 @@ class UstoreitController {
       matcher.each {
         def pageUrl = it[1]
         def idMatch = pageUrl  =~ /(\d+)/
+        println "checking page url = ${pageUrl}"
         if (idMatch.size() > 0) {
           def idNum = idMatch[0][1]
           def siteHtml = new URL(pageUrl).text
