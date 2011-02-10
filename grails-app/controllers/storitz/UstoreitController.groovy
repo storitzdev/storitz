@@ -63,9 +63,9 @@ class UstoreitController {
                 def newName
                 ext = '.' + fileName.tokenize('.')[-1]
                 newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
-                def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
-                def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
-                def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
+                def filePath = fileUploadService.getFilePath('/images/site', newName, site.id)
+                def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, site.id)
+                def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, site.id)
                 ++imgOrder
                 imageService.scaleImages(new File(tmpPath), site.id, imgOrder, filePath, filePathMid, filePathThumb, site)
                 imageService.iptcTagImage(new File(filePath), site, imgOrder, 'FULL')
