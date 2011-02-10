@@ -24,11 +24,11 @@ class UstoreitController {
         def pageUrl = it[1]
         def idMatch = pageUrl  =~ /(\d+)/
         println "checking page url = ${pageUrl}"
-        if (idMatch.size() > 0) {
+        if (idMatch.getCount()) {
           def idNum = idMatch[0][1]
           def siteHtml = new URL(pageUrl).text
           def usiMatch = siteHtml =~ /usi(\d+)-/
-          if (usiMatch.size() > 0) {
+          if (usiMatch.getCount()) {
             def usiNum = usiMatch[0][1]
             if (usiNum.size() < 4) {
               usiNum = '0' + usiNum
