@@ -33,6 +33,7 @@
     <li>Transaction #: ${idNumber}</li>
     <li>Property Name: ${siteName}</li>
     <li>Unit #: ${unitNumber}</li>
+    <li>Unit Size: ${displaySize}</li>
     <li>Move-In Date: ${moveInDate}</li>
     <li>Rental Rate: ${rentalRate}</li>
     <li>Rent is Paid Through: ${paidThruDate}</li>
