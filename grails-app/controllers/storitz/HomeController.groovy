@@ -1,13 +1,9 @@
 package storitz
 
-import com.storitz.Metro
-import com.storitz.MetroEntry
-import com.storitz.StorageSize
 import grails.converters.JSON
-import storitz.constants.SearchType
-import com.storitz.GeoLookup
 import java.math.RoundingMode
-import com.storitz.Insurance
+import storitz.constants.SearchType
+import com.storitz.*
 
 class HomeController {
 

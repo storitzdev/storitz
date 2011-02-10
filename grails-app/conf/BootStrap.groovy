@@ -129,6 +129,10 @@ class BootStrap {
       returnArray['lastChange'] = it.lastChange
       returnArray['lastUpdate'] = 0
 
+      returnArray['netCommission'] = it.netCommision
+      returnArray['allowPushPrice'] = it.allowPushPrice
+      returnArray['transactionType'] = it.transactionType
+
       return returnArray
     }
 

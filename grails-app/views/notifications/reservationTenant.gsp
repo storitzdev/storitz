@@ -7,13 +7,13 @@
   <div>
     <div style="z-index: 100; float: left; margin-top: 22px;">
       <g:link controller="home" action="index">
-        <storitz:image src="${createLinkTo(dir:'images', file:'logo_storitz.gif', absolute: true)}" absolute="true" style="border-style: none;" width="950" height="61" alt="Storitz Logo"/>
+        <storitz:image src="${createLinkTo(dir:'images/email', file:'logo_storitz.gif', absolute: true)}" absolute="true" style="border-style: none;" width="950" height="61" alt="Storitz Logo"/>
       </g:link>
     </div>
     <div style="clear: both;"></div>
   </div>
   <div style="margin-left: 50px;">
-    <storitz:image src="${createLinkTo(dir:'images', file:'tagline_clickstoredone.gif', absolute: true)}" absolute="true" style="border-style: none;" width="170" height="21" alt="Click. Store. Done."/>
+    <storitz:image src="${createLinkTo(dir:'images/email', file:'tagline_clickstoredone.gif', absolute: true)}" absolute="true" style="border-style: none;" width="170" height="21" alt="Click. Store. Done."/>
   </div>
   <div style="height: 3em;"></div>
 
@@ -47,6 +47,7 @@
     <li>Address: ${billingAddress}</li>
     <li>Rental Rate: ${rentalRate}</li>
     <li>Rent is Paid Through: ${paidThruDate}</li>
+    <li>Unit Size: ${displaySize}</li>
     <li>Promotion(s): ${promoName}</li>
     <li>Amount due at Move-In: ${paymentTotal}</li>
   </ul>
@@ -70,5 +71,13 @@
     Sincerely,
     Storitz, Inc.
   </p>
+  <div style="height: 30px;"></div>
+  <div>
+    <a href="http://twitter.com/Storitzdotcom" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'twitter-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on Twitter"/></a>
+    <a href="http://www.facebook.com/storitz" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'facebook-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on FaceBook"/></a>
+    <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'stumbleupon-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on StumbleUpon"/></a>
+    <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'linkedin-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on LinkedIn"/></a>
+    <a href="http://www.youtube.com/user/Storitzdotcom" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'youtube-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz Youtube Channel"/></a>
+  </div>
   </body>
 </html>

@@ -1189,6 +1189,18 @@
               <div style="clear:both;height: 15px;"></div>
             </div>
 
+            <div class="checkout_section_header">
+              Transaction Type
+            </div>
+            <div class="formInstructions">
+              Pick the correct transaction type for this site.  Most sites should use rental - some will be reservation only.
+            </div>
+            <div class="checkout_fields">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'transactionType', 'errors')}">
+                <g:select name="transactionType" id="transactionType" class="validate-selection" style="width:150px;" from="${storitz.constants.TransactionType.list()}" value="${storageSiteInstance?.transactionType}" optionValue="value"/>
+              </div>
+              <div style="clear:both;height: 15px;"></div>
+            </div>
 
           </sec:ifAnyGranted>
           <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">

@@ -34,3 +34,15 @@ var specialOffers;
   searchSize = ${params.size};
 </g:if>
 
+function setupRentVsReserve() {
+    $('#rentVsReserveText').dialog({
+        autoOpen: false,
+        resizable: false,
+        width: 200
+    }).addTouch();
+    $('#rentVsReserve').click(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentvsreserve']);
+        $('#rentVsReserveText').dialog('open');
+    });
+}
+

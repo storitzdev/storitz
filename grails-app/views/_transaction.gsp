@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.TransactionType" %>
 <div class="transBox">
   <div style="width:620px;margin: 5px 15px 20px 15px;">
     <div class="left">
@@ -32,7 +33,15 @@
     </div>
     <div class="right" style="margin-top:5px;">
       <g:if test="${params.action != 'payment'}">
-        <p:inputImage id="rentme" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-rent-me.png" alt="Rent Me"/>
+        <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+          <p:inputImage style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-rent-me-grey-108x36.png" alt="Rent Me"/>
+          <div></div>
+          <p:inputImage id="rentme" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-reserve-108x36.png" alt="Reserve"/>
+          <div id="rentVsReserve" class="rentVsReserve textCenter">Rent vs. Reserve</div>
+        </g:if>
+        <g:else>
+          <p:inputImage id="rentme" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-rent-me.png" alt="Rent Me"/>
+        </g:else>
       </g:if>
       <g:else>
         <div id="rentme" style="display:none"></div>
@@ -61,6 +70,16 @@
       </div>
     </div>
     <div class="right">
+      <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+        <div class="left" style="margin-right:25px;">
+          <p>Reservation Details</p>
+          <ul>
+            <li>Hold your unit until Move-In date</li>
+            <li>Take Advantage of Special Offer</li>
+            <li>Get this Rent rate when you Move-In</li>
+          </ul>
+        </div>
+      </g:if>
       <div id="costDetails" class="right">
         <table class="costTotals" cellspacing="0">
           <thead>
@@ -116,9 +135,18 @@
         <div class="left" style="margin-right: 30px;">
           Total Move-In Cost:
         </div>
-        <div class="left">
+        <div class="right">
           <span id="totalMoveInCost"></span>
         </div>
+        <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+          <div style="clear:both;"></div>
+          <div class="left" style="margin-right: 30px;">
+            Reserve Today:
+          </div>
+          <div class="right">
+            <span>$0.00</span>
+          </div>
+        </g:if>
       </div>
       <div style="clear:both;"></div>
     </div>
@@ -169,4 +197,7 @@
     </div>
     <div style="height: 10px;clear:both;"></div>
   </div>
+</div>
+<div id="rentVsReserveText" style="display:none">
+  This Storitz facility enables you to <b>reserve</b> not <b>rent</b> a unit. This means that you can have a low obligation way to hold a unit.  Final details and paperwork is required at the storage property office on the day of your move-in.
 </div>

@@ -68,7 +68,7 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
             </div>
 
             <div class="checkout_section_header">
-              Rental Summary
+              Reservation Summary
             </div>
             <div style="height: 10px;"></div>
             <div>
@@ -120,16 +120,6 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
                     <td>${rentalTransactionInstance.site.phone}</td>
                   </tr>
                 </g:if>
-              </table>
-            </div>
-            <div style="height: 20px;"></div>
-
-            <div class="checkout_section_header">
-              Billing Summary
-            </div>
-            <div style="height: 10px;"></div>
-            <div>
-              <table class="checkoutComplete">
                 <g:if test="${rentalTransactionInstance.idNumber}">
                   <tr>
                     <td style="width:200px;">Transaction #:</td>
@@ -143,27 +133,15 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
                   </tr>
                 </g:elseif>
                 <tr>
-                  <td style="width:200px;">Name:</td>
-                  <td>${rentalTransactionInstance.billingAddress.fullName()}</td>
-                </tr>
-                <tr>
                   <td style="width:200px;">Address:</td>
                   <td>${rentalTransactionInstance.billingAddress.fullAddress()}</td>
-                </tr>
-                <tr>
-                  <td style="width:200px;">Payment Method:</td>
-                  <td>Credit Card</td>
-                </tr>
-                <tr>
-                  <td style="width:200px;">Credit Card #:</td>
-                  <td>${rentalTransactionInstance.cleanCCNum}</td>
                 </tr>
                 <tr>
                   <td style="width:200px;">Rental Rate:</td>
                   <td><g:formatNumber number="${rentalTransactionInstance.monthlyRate}" type="currency" currencyCode="USD"/></td>
                 </tr>
                 <tr>
-                  <td style="width:200px;">Rent is Paid Through:</td>
+                  <td style="width:200px;">Rent Period through:</td>
                   <td>${rentalTransactionInstance.paidThruDate.format('MM/dd/yy')}</td>
                 </tr>
                 <tr>
@@ -177,7 +155,7 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
                   </tr>
                 </g:if>
                 <tr>
-                  <td style="width:200px;">Move-In Cost:</td>
+                  <td style="width:200px;">Amount Due at Move-In:</td>
                   <td><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></td>
                 </tr>
               </table>

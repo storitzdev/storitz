@@ -57,6 +57,7 @@ class RentalTransaction {
   String paymentString
   UnitType unitType
   StorageSize searchSize
+  String displaySize
   Integer reservationPeriod
   String reservationId
   BigDecimal reservationCost
@@ -73,6 +74,8 @@ class RentalTransaction {
   CreditCardType cardType
   String ccNum
   String cvv2
+
+  TransactionType transactionType
 
   static constraints = {
     billingAddress(nullable:true)
@@ -118,6 +121,7 @@ class RentalTransaction {
     invoiced(nullable:true)
     invoice(nullable:true)
     achAmount(nullable:true)
+    displaySize(nullable:true)
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',

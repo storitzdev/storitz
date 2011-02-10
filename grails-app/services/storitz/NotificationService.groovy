@@ -6,6 +6,7 @@ import com.storitz.SpecialOffer
 import com.storitz.User
 import java.text.NumberFormat
 import storitz.constants.NotificationEventType
+import storitz.constants.TransactionType
 
 class NotificationService {
 
@@ -66,6 +67,7 @@ class NotificationService {
       String storitzId = rentalTransaction.bookingDate.format('yyyyddMM') + sprintf('%08d', rentalTransaction.id)
       String idNumber = (rentalTransaction.reserved ? 'R'+rentalTransaction.reservationId : rentalTransaction.idNumber)
       String tenantName  = rentalTransaction.contactPrimary.fullName()
+      String displaySize = rentalTransaction.displaySize
 
       def model = [
         tenantName: tenantName,
@@ -93,6 +95,7 @@ class NotificationService {
         gateAccessCode: rentalTransaction.accessCode,
         phone: rentalTransaction.contactPrimary.phone,
         email: rentalTransaction.contactPrimary.email,
+        displaySize: rentalTransaction.displaySize,
         siteId: rentalTransaction.site.id
       ]
 
@@ -120,26 +123,45 @@ class NotificationService {
         }
       }.collect{ it.email as String}
 
-      String subj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} move-in"
+      String operView
+      String tenantView
+      String mgrView
+      String operSubj
+      String tenantSubj
+      switch(rentalTransaction.site.transactionType) {
+        case TransactionType.RENTAL:
+          operView = "/notifications/moveInOperMgr"
+          tenantView = "/notifications/moveInTenant"
+          mgrView = "/notifications/moveInSiteMgr"
+          operSubj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} move-in"
+          tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant move-in at ${rentalTransaction.site.title} - (Confirmation # ${rentalTransaction.idNumber} )"
+          break
+        case TransactionType.RESERVATION:
+          operView = "/notifications/reservationOperMgr"
+          tenantView = "/notifications/reservationTenant"
+          mgrView = "/notifications/reservationOperMgr"
+          operSubj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} reservation"
+          tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant reservation at ${rentalTransaction.site.title} - (Confirmation # ${rentalTransaction.idNumber} )"
+          break
+      }
       try {
           emailService.sendEmail(to: rentalTransaction.contactPrimary.email,
               from: "no-response@storitz.com",
-              subject: subj,
+              subject: operSubj,
               model: model,
-              view: "/notifications/moveInTenant")
+              view: tenantView)
 
       } catch (Exception e) {
           log.error("${e}", e)
       }
 
-      subj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant move-in at ${rentalTransaction.site.title} - (Confirmation # ${rentalTransaction.idNumber} )"
       try {
           emailService.sendEmail(
               to: siteManagerEmails,
               from: "no-response@storitz.com",
-              subject: subj,
+              subject: tenantSubj,
               model: model,
-              view: "/notifications/moveInSiteMgr")
+              view: mgrView)
 
       } catch (Exception e) {
           log.error("${e}", e)
@@ -149,9 +171,9 @@ class NotificationService {
           emailService.sendEmail(
               to: operAcctEmails,
               from: "no-response@storitz.com",
-              subject: "EVENT - NEW TENANT " + subj,
+              subject: "EVENT - NEW TENANT " + tenantSubj,
               model: model,
-              view: "/notifications/moveInOperMgr")
+              view: operView)
 
       } catch (Exception e) {
           log.error("${e}", e)
@@ -161,9 +183,9 @@ class NotificationService {
           emailService.sendEmail(
               to: "notifications@storitz.com",
               from: "no-response@storitz.com",
-              subject: subj,
+              subject: tenantSubj,
               model: model,
-              view: "/notifications/moveInOperMgr")
+              view: operView)
 
       } catch (Exception e) {
           log.error("${e}", e)

@@ -1356,7 +1356,7 @@ p.descriptionText {
     margin-top: 7px;
 }
 
-.offerLink span {
+.rentVsReserve, .offerLink span {
     color: #3bad00;
     font: 11px verdana, arial, helvetica, sans-serif;
     text-decoration: underline;

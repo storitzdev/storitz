@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.TransactionType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -40,6 +41,9 @@
     primaryCountryClick();
   <g:if test="${params.returnForm}">
     details_return();
+  </g:if>
+  <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+    setupRentVsReserve();
   </g:if>
     showTotals();
     setupPromoHandler();
@@ -507,7 +511,14 @@
                 </sec:ifAnyGranted>
                 <div style="margin-top: 20px;">
                   <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back" /></div>
-                  <div class="right"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-next2.png" alt="Next" /></div>
+                  <div class="right">
+                    <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                      <p:inputImage style="width:108px;height:36px;border:none;" src="btn-reserve-108x36.png" alt="Reserve" />
+                    </g:if>
+                    <g:else>
+                      <p:inputImage style="width:108px;height:36px;border:none;" src="btn-next2.png" alt="Next" />
+                    </g:else>
+                  </div>
                   <div style="clear:both;"></div>
                 </div>
               </div>

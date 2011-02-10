@@ -8,6 +8,7 @@ import java.math.RoundingMode
 import storitz.constants.CommissionSourceType
 import storitz.constants.NotificationEventType
 import storitz.constants.TransactionStatus
+import storitz.constants.TransactionType
 import com.storitz.*
 import storitz.constants.UnitType
 import storitz.constants.SearchType
@@ -117,7 +118,7 @@ class RentalTransactionController {
         rentalTransactionInstance.searchSize = storageSize
         rentalTransactionInstance.unitType = UnitType.getEnumFromId(params.chosenType)
         rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
-        rentalTransactionInstance.contactPrimary.rental = rentalTransactionInstance
+        rentalTransactionInstance.transactionType = rentalTransactionInstance.site.transactionType
 
         if (!springSecurityService.principal.equals('anonymousUser')) {
           def person = User.findByUsername(springSecurityService.principal.username)
@@ -216,19 +217,18 @@ class RentalTransactionController {
       }
       rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
 
+      if (rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION) {
+        performTransaction(rentalTransactionInstance, true)
+        return
+      }
+
       [rentalTransactionInstance: rentalTransactionInstance,
               title: "Storitz self-storage for ${rentalTransactionInstance.site.title} - located in ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state.fullName} ${rentalTransactionInstance.site.zipcode}",
               site: rentalTransactionInstance.site, shortSessionId:session.shortSessionId, moveInDetails: moveInDetails,
               unit: unit, promo:promo, ins:ins, paidThruDate:costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, true)]
     }
 
-    def pay = {
-      def rentalTransactionInstance = RentalTransaction.get(params.id)
-
-      if (!rentalTransactionInstance) {
-        // TODO - send them to an error page
-      }
-
+    private performTransaction(RentalTransaction rentalTransactionInstance, boolean isReservation) {
       SpecialOffer promo = null
       if (rentalTransactionInstance.promoId > 0) {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
@@ -258,63 +258,29 @@ class RentalTransactionController {
           }
           break
 
-        case "primary":
-          rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactPrimary
-          break
-
         case "secondary":
           rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactSecondary
           break
+
+        default:
+          rentalTransactionInstance.billingAddress = rentalTransactionInstance.contactPrimary
+          break
       }
+
       if (!rentalTransactionInstance.validate() || !rentalTransactionInstance.save(flush: true)) {
         flash.message = "Could not save billing address"
         redirect (action:'payment', params:["id":rentalTransactionInstance.id])
         return
       }
 
-      if (!moveInService.checkRented(rentalTransactionInstance)) {
-        if (--unit.unitCount <= 0) {
-          println "Removing unit from inventory ${unit.id}"
-          rentalTransactionInstance.site.removeFromUnits(unit)
-          rentalTransactionInstance.site.save(flush: true)
-        }
-        def found = false
-        def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id}.sort{ it.price }
-        println "BestUnit size = ${bestUnitList.size()}"
-        for(myUnit in bestUnitList) {
-          println "Check unit for availability ${myUnit.id}"
-          rentalTransactionInstance.unitId = myUnit.id
-          if (moveInService.checkRented(rentalTransactionInstance)) {
-            found = true
-            unit = myUnit
-            flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
-            break
-          } else {
-            if (--myUnit.unitCount <= 0) {
-              println "Removing unit from inventory ${myUnit.id}"
-              rentalTransactionInstance.site.removeFromUnits(myUnit)
-              rentalTransactionInstance.site.save(flush: true)
-            }
-          }
-        }
-        if (!found) {
-          flash.message = "Unit already reserved - refresh and try again"
-          redirect (action:'payment', params:["id":rentalTransactionInstance.id])
-          return
-        }
+      unit = checkUnit(unit, rentalTransactionInstance)
+      if (!unit) {
+        flash.message = "Unit already reserved - refresh and try again"
+        redirect (action:'payment', params:["id":rentalTransactionInstance.id])
+        return
       }
       rentalTransactionInstance.monthlyRate = rentalTransactionInstance.site.allowPushPrice ? (unit.pushRate ? unit.pushRate : unit.price) : unit.price
 
-
-      def ccNum = params.cc_number.replaceAll(/\D/, '') as String
-      def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
-
-      def expCal = new GregorianCalendar()
-      expCal.set(Calendar.YEAR, params.cc_year as Integer)
-      expCal.set(Calendar.MONTH, (params.cc_month as Integer) -1)
-      expCal.set(Calendar.DAY_OF_MONTH, 1)
-      expCal.set(Calendar.DAY_OF_MONTH, expCal.getActualMaximum(Calendar.DAY_OF_MONTH))
-      rentalTransactionInstance.ccExpDate = expCal.time
 
       // TODO - compare calculated cost to our cost
       rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
@@ -329,6 +295,8 @@ class RentalTransactionController {
       rentalTransactionInstance.durationDays = costTotals["durationDays"]
       rentalTransactionInstance.durationMonths = costTotals["durationMonths"]
       rentalTransactionInstance.paidThruDate = costTotals["paidThruDateMillis"]
+      rentalTransactionInstance.displaySize = unit?.displaySize
+
       if (promo) {
         rentalTransactionInstance.promoName = promo.promoName
       }
@@ -336,71 +304,83 @@ class RentalTransactionController {
         rentalTransactionInstance.insuranceName = "Total Coverage: ${g.formatNumber(number:ins.totalCoverage, type:'currency', currencyCode:'USD')} Theft: ${g.formatNumber(number:ins.percentTheft, type:'percent')}"
       }
 
-      def s = new AuthorizeNet()
+      if (!isReservation) {
+        def ccNum = params.cc_number.replaceAll(/\D/, '') as String
+        def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
 
-      def user  = null
-      if (!springSecurityService.principal.equals('anonymousUser')) {
-        def username  = springSecurityService.principal.username
-        user = User.findByUsername(username as String)
-      }
-      if (!springSecurityService.principal.equals('anonymousUser') && user && UserRole.userHasRole(user, 'ROLE_CALLCENTER')) {
+        def expCal = new GregorianCalendar()
+        expCal.set(Calendar.YEAR, params.cc_year as Integer)
+        expCal.set(Calendar.MONTH, (params.cc_month as Integer) -1)
+        expCal.set(Calendar.DAY_OF_MONTH, 1)
+        expCal.set(Calendar.DAY_OF_MONTH, expCal.getActualMaximum(Calendar.DAY_OF_MONTH))
+        rentalTransactionInstance.ccExpDate = expCal.time
 
-        s.authorizeAndCapture {
-          custId rentalTransactionInstance.id as String
-          firstName rentalTransactionInstance.billingAddress.firstName
-          lastName rentalTransactionInstance.billingAddress.lastName
-          address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
-          city rentalTransactionInstance.billingAddress.city
-          state rentalTransactionInstance.billingAddress.state.display
-          zip rentalTransactionInstance.billingAddress.zipcode
-          ccNumber ccNum
-          ccExpDate ccExpVal
-          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+        def s = new AuthorizeNet()
+
+        def user  = null
+        if (!springSecurityService.principal.equals('anonymousUser')) {
+          def username  = springSecurityService.principal.username
+          user = User.findByUsername(username as String)
         }
-      } else {
+        if (!springSecurityService.principal.equals('anonymousUser') && user && UserRole.userHasRole(user, 'ROLE_CALLCENTER')) {
 
-        s.authorizeAndCapture {
-          custId rentalTransactionInstance.id as String
-          firstName rentalTransactionInstance.billingAddress.firstName
-          lastName rentalTransactionInstance.billingAddress.lastName
-          address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
-          city rentalTransactionInstance.billingAddress.city
-          state rentalTransactionInstance.billingAddress.state.display
-          zip rentalTransactionInstance.billingAddress.zipcode
-          ccNumber ccNum
-          cvv params.cc_cvv2
-          ccExpDate ccExpVal
-          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          s.authorizeAndCapture {
+            custId rentalTransactionInstance.id as String
+            firstName rentalTransactionInstance.billingAddress.firstName
+            lastName rentalTransactionInstance.billingAddress.lastName
+            address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
+            city rentalTransactionInstance.billingAddress.city
+            state rentalTransactionInstance.billingAddress.state.display
+            zip rentalTransactionInstance.billingAddress.zipcode
+            ccNumber ccNum
+            ccExpDate ccExpVal
+            amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          }
+        } else {
+
+          s.authorizeAndCapture {
+            custId rentalTransactionInstance.id as String
+            firstName rentalTransactionInstance.billingAddress.firstName
+            lastName rentalTransactionInstance.billingAddress.lastName
+            address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
+            city rentalTransactionInstance.billingAddress.city
+            state rentalTransactionInstance.billingAddress.state.display
+            zip rentalTransactionInstance.billingAddress.zipcode
+            ccNumber ccNum
+            cvv params.cc_cvv2
+            ccExpDate ccExpVal
+            amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          }
         }
+        def authResp = s.submit()
+
+        println "Credit card response: ${authResp.dump()}"
+
+        if (authResp.responseCode as Integer != 1) {
+          flash.message = "Credit card not accepted ${authResp.responseReasonText}"
+          redirect (action:'payment', params:["id":rentalTransactionInstance.id])
+          return
+        }
+        println "Logged transaction = ${authResp.dump()}"
+
+        rentalTransactionInstance.transactionId = authResp.transactionId
+
+        def ccString = "XXXX XXXX XXXX "
+        if (ccNum.size() == 16) {
+          ccString += 'XXXX '
+        }
+        ccString += ccNum.substring(ccNum.size() - 4)
+        rentalTransactionInstance.cleanCCNum = ccString
+        // record CC info for the services
+        rentalTransactionInstance.ccNum = ccNum
+        rentalTransactionInstance.cardType = creditCardService.getCardType(ccNum)
+        rentalTransactionInstance.cvv2 = params.cc_cvv2
+
       }
-      def authResp = s.submit()
-
-      println "Credit card response: ${authResp.dump()}"
-
-      if (authResp.responseCode as Integer != 1) {
-        flash.message = "Credit card not accepted ${authResp.responseReasonText}"
-        redirect (action:'payment', params:["id":rentalTransactionInstance.id])
-        return
-      }
-      println "Logged transaction = ${authResp.dump()}"
-      
-      rentalTransactionInstance.transactionId = authResp.transactionId
-      rentalTransactionInstance.status = TransactionStatus.PAID
-      rentalTransactionInstance.save(flush:true)
-
-      // record CC info for the services
-      rentalTransactionInstance.ccNum = ccNum
-      rentalTransactionInstance.cardType = creditCardService.getCardType(ccNum)
-      rentalTransactionInstance.cvv2 = params.cc_cvv2
 
       rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.cost, CommissionSourceType.WEBSITE)
-
-      def ccString = "XXXX XXXX XXXX "
-      if (ccNum.size() == 16) {
-        ccString += 'XXXX '
-      }
-      ccString += ccNum.substring(ccNum.size() - 4)
-      rentalTransactionInstance.cleanCCNum = ccString
+      rentalTransactionInstance.status = isReservation ? TransactionStatus.RESERVED : TransactionStatus.PAID
+      rentalTransactionInstance.save(flush:true)
 
       def landing = CookieCodec.decodeCookieValue(CookieCodec.getCookie(request, CookieCodec.LANDING_COOKIE_NAME).getValue())
 
@@ -444,7 +424,54 @@ class RentalTransactionController {
         maxResults(1)
       }
 
-      render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
+      if (isReservation) {
+        render(view:"completeReservation", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
+      } else {
+        render(view:"complete", model:[rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager:siteManager])
+      }
+    }
+
+    def pay = {
+      def rentalTransactionInstance = RentalTransaction.get(params.id)
+
+      if (!rentalTransactionInstance) {
+        // TODO - send them to an error page
+      }
+
+      performTransaction(rentalTransactionInstance, false)
+    }
+
+    private StorageUnit checkUnit(StorageUnit unit, RentalTransaction rentalTransactionInstance) {
+      if (!moveInService.checkRented(rentalTransactionInstance)) {
+        if (--unit.unitCount <= 0) {
+          println "Removing unit from inventory ${unit.id}"
+          rentalTransactionInstance.site.removeFromUnits(unit)
+          rentalTransactionInstance.site.save(flush: true)
+        }
+        def found = false
+        def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id}.sort{ it.price }
+        println "BestUnit size = ${bestUnitList.size()}"
+        for(myUnit in bestUnitList) {
+          println "Check unit for availability ${myUnit.id}"
+          rentalTransactionInstance.unitId = myUnit.id
+          if (moveInService.checkRented(rentalTransactionInstance)) {
+            found = true
+            unit = myUnit
+            flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
+            break
+          } else {
+            if (--myUnit.unitCount <= 0) {
+              println "Removing unit from inventory ${myUnit.id}"
+              rentalTransactionInstance.site.removeFromUnits(myUnit)
+              rentalTransactionInstance.site.save(flush: true)
+            }
+          }
+        }
+        if (!found) {
+          return null
+        }
+      }
+      return unit
     }
 
     @Secured(['ROLE_ADMIN'])

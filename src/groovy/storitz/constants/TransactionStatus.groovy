@@ -10,6 +10,7 @@ package storitz.constants
 public enum TransactionStatus {
   BEGUN("Begun"),
   PAID("Paid"),
+  RESERVED("Reserved"),
   CANCELED("Canceled"),
   COMPLETE("Complete");
 
@@ -19,7 +20,7 @@ public enum TransactionStatus {
 
 
   static list() {
-      [BEGUN, PAID, COMPLETE]
+      [BEGUN, PAID, RESERVED, CANCELED, COMPLETE]
   }
 
   static public TransactionStatus getEnumFromId(String value) {

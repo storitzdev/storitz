@@ -209,5 +209,6 @@ uiperformance.exclusions = [
    "**/storitz-footer*",
    "**/tagline_clickstoredone.gif",
    "**/plugins/**",
+   "**/images/email/**",
    "**/images/themes/**"
 ]

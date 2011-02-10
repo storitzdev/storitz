@@ -110,6 +110,10 @@
                           <div class="transPerMonth left"> /Per Month</div>
                         </div>
                       </g:else>
+                      <div class="transPerMonth">
+                        <div class="left">Actual Size:</div>
+                        <div class="left" id="actualSize">${unit.displaySize}</div>
+                      </div>
                     </div>
                     <div class="right" style="margin-top:5px;">
                     </div>

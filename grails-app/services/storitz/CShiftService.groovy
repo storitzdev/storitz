@@ -367,6 +367,7 @@ class CShiftService extends BaseProviderService {
         SiteUser.link(site, cshift.manager)
         site.disabled = false
         site.netCommission = false
+        site.transactionType = TransactionType.RENTAL
         site.lastChange = new Date()
       }
 

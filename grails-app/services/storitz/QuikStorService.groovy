@@ -21,6 +21,7 @@ import javax.xml.datatype.XMLGregorianCalendar
 import javax.xml.datatype.DatatypeFactory
 import com.storitz.Feed
 import storitz.constants.SearchType
+import storitz.constants.TransactionType
 
 class QuikStorService extends BaseProviderService {
 
@@ -55,6 +56,7 @@ class QuikStorService extends BaseProviderService {
         } else {
           def site = new StorageSite()
           site.feed = quikStor
+          site.transactionType = TransactionType.RENTAL
           loc.site = site
           updateSite(site, stats, writer)
           SiteUser.link(site, quikStor.manager)

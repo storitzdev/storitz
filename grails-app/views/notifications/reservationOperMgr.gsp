@@ -24,25 +24,26 @@
     Dear Storitz Partner,
   </p>
   <p>
-    Congratulations! We are pleased to inform you that another new tenant has reserved a unit at ${siteName}. Your property management software should already show this reservation. To move-in the customer, simply select the reservation and take payment
+    Congratulations! We are pleased to inform you that another new tenant has reserved a unit at ${siteName}. Your property management software should already show this reservation. To move-in the customer, simply select the reservation and take payment.
   </p>
   <p style="font-weight:bold;">
     Rental Summary:
   </p>
   <ul>
-    <li>Storitz ID#: ${storitzId}</li>
     <li>Transaction #: ${idNumber}</li>
     <li>Property Name: ${siteName}</li>
     <li>Unit #: ${unitNumber}</li>
-    <li>Move-in Date: ${moveInDate}</li>
+    <li>Move-In Date: ${moveInDate}</li>
     <li>Rental Rate: ${rentalRate}</li>
     <li>Rent is Paid Through: ${paidThruDate}</li>
     <li>Promotion(s): ${promoName}</li>
+    <li>Total to be paid at Move-In: ${paymentTotal}</li>
   </ul>
   <p style="font-weight:bold;">
     Tenant Information:
   </p>
   <ul>
+    <li>Storitz ID#: ${storitzId}</li>
     <li>Tenant Name: ${tenantName}</li>
     <li>Phone: ${phone}</li>
     <li>Email: ${email}</li>
@@ -55,5 +56,13 @@
     <div>Phone: (310) 444-5550 x 104</div>
     <div>Email: info@storitz.com</div>
   </p>
+  <div style="height: 30px;"></div>
+  <div>
+    <a href="http://twitter.com/Storitzdotcom" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'twitter-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on Twitter"/></a>
+    <a href="http://www.facebook.com/storitz" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'facebook-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on FaceBook"/></a>
+    <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'stumbleupon-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on StumbleUpon"/></a>
+    <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'linkedin-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on LinkedIn"/></a>
+    <a href="http://www.youtube.com/user/Storitzdotcom" target="_blank"><storitz:image style="border: none;" absolute="true" src="${createLinkTo(dir:'images/email', file:'youtube-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz Youtube Channel"/></a>
+  </div>
   </body>
 </html>

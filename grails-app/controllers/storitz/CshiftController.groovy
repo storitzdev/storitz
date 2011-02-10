@@ -4,9 +4,6 @@ import com.storitz.CenterShift
 import grails.plugins.springsecurity.Secured
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
-import org.grails.plugins.imagetools.ImageTool
-import com.storitz.SiteImage
-import com.storitz.Feed
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CshiftController extends FeedController {

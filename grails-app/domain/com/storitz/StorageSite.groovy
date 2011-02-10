@@ -2,6 +2,7 @@ package com.storitz
 
 import storitz.constants.State
 import storitz.constants.TruckType
+import storitz.constants.TransactionType
 
 class StorageSite {
 
@@ -177,6 +178,8 @@ class StorageSite {
     BigDecimal taxRateInsurance
     BigDecimal taxRateMerchandise
     Boolean useProrating
+
+    TransactionType transactionType
 
   // data feeds
     Feed feed
