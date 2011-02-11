@@ -21,6 +21,7 @@ import com.storitz.SpecialOffer
 import storitz.constants.PromoType
 import com.storitz.UserNotificationType
 import storitz.constants.SearchType
+import com.storitz.SpecialOfferRestriction
 
 class BootStrap {
 
@@ -131,7 +132,7 @@ class BootStrap {
 
       returnArray['netCommission'] = it.netCommission
       returnArray['allowPushPrice'] = it.allowPushPrice
-      returnArray['transactionType'] = it.transactionType
+      returnArray['transactionType'] = it.transactionType as String
 
       return returnArray
     }
@@ -250,6 +251,25 @@ class BootStrap {
 
       return returnArray
     }
+
+    JSON.registerObjectMarshaller SpecialOfferRestriction, {
+
+      def returnArray = [:]
+
+      returnArray['type'] = it.type as String
+      returnArray['startDate'] = it.startDate
+      returnArray['endDate'] = it.endDate
+      returnArray['minRange'] = it.minRange
+      returnArray['maxRange'] = it.maxRange
+      returnArray['restrictive'] = it.restrictive
+      returnArray['siteType'] = it.sizeType
+      returnArray['restrictionInfo'] = it.restrictionInfo
+      returnArray['description'] = it.description
+
+      return returnArray
+    }
+
+
 
     JSON.registerObjectMarshaller UserRole, {
 
