@@ -246,6 +246,7 @@ class BootStrap {
       returnArray['waiveAdmin'] = it.waiveAdmin
       returnArray['endDate'] = it.endDate
       returnArray['promoSize'] = it.promoSize
+      returnArray['restrictions'] = it.restrictions
 
       return returnArray
     }

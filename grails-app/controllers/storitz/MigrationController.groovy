@@ -187,8 +187,18 @@ class MigrationController {
         def specialOffers = []
         for (i in s.specialOffers) {
           def si = new SpecialOffer()
+          def restrictions = []
+          for (j in i.restrictions) {
+            def sor = new SpecialOfferRestriction()
+            bindData(sor, j)
+            restrictions.add(sor)
+          }
+          i.restrictions.clear()
           bindData(si, i)
           si.save(flush:true)
+          for (sor in restrictions) {
+            si.addToRestrictions(sor)
+          }
           specialOffers.add(si)
         }
         s.amenityItems.clear()
