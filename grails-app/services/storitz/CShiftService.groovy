@@ -369,6 +369,8 @@ class CShiftService extends BaseProviderService {
         site.netCommission = false
         site.transactionType = TransactionType.RENTAL
         site.lastChange = new Date()
+      } else if (!site.transactionType) {
+        site.transactionType = TransactionType.RENTAL
       }
 
       def email = tab.EMAIL_ADDRESS.text()
