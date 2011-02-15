@@ -14,7 +14,16 @@ public enum ReferrerType {
   YAHOO("yahoo.com", "yahoo.com"),
   BING("bing.com", "bing.com"),
   YELP("yelp.com", "yelp.com"),
-  WESTSIDE_RENTALS("westsiderentals.com", "westsiderentals.com")
+  WESTSIDE_RENTALS("westsiderentals.com", "westsiderentals.com"),
+  HOTPADS("hotpads.com", "hotpads.com"),
+  APARTMENTGUIDE("apartmentguide.com", "apartmentguide.com"),
+  RENTALS("rentals.com", "rentals.com"),
+  RETIREMENTHOMES("retirementhomes.com", "retirementhomes.com"),
+  FORRENT("forrent.com", "forrent.com"),
+  HOMES("homes.com", "homes.com"),
+  SENIOROUTLOOK("senioroutlook.com", "senioroutlook.com"),
+  CORPORATE_HOUSING("corporatehousing.com", "corporatehousing.com"),
+  RENT("rent.com", "rent.com")
 
   final String display
   final String id
@@ -25,7 +34,8 @@ public enum ReferrerType {
   }
 
   static list() {
-    [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP, WESTSIDE_RENTALS]
+    [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP, WESTSIDE_RENTALS, HOTPADS, APARTMENTGUIDE, RENTALS,
+    RETIREMENTHOMES, FORRENT, HOMES, SENIOROUTLOOK, CORPORATE_HOUSING, RENT]
   }
 
   static public ReferrerType getEnumFromId(String value) {

@@ -361,6 +361,9 @@ class CShiftService extends BaseProviderService {
 
       site.feed  = cshift
 
+      if (newSite) {
+        site.transactionType = TransactionType.RENTAL
+      }
       site.save()
 
       if (newSite) {
@@ -369,8 +372,6 @@ class CShiftService extends BaseProviderService {
         site.netCommission = false
         site.transactionType = TransactionType.RENTAL
         site.lastChange = new Date()
-      } else if (!site.transactionType) {
-        site.transactionType = TransactionType.RENTAL
       }
 
       def email = tab.EMAIL_ADDRESS.text()
@@ -497,8 +498,14 @@ class CShiftService extends BaseProviderService {
       writer.println "Found address: ${address}"
       def geoResult = geocodeService.geocode(address)
 
-      site.lng = geoResult.results[0].geometry.location.lng
-      site.lat = geoResult.results[0].geometry.location.lat
+      if (geoResult.status == 'OK') {
+        site.lng = geoResult.results[0].geometry.location.lng
+        site.lat = geoResult.results[0].geometry.location.lat
+      } else {
+        println "GEOCODE problem for address: ${address}"
+        site.lat = 0
+        site.lng = 0
+      }
 
     }
     writer.println "Returning good address: ${site.address}, ${site.city} ${site.state}"
