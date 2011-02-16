@@ -502,15 +502,15 @@ class StorageSiteController {
     def bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
       if (!bestUnit) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
       }
     } else if (unitSize) {
-      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
     } else {
       // TODO - decide on best price or best price for a given size
-      bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > 0 }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min{ it.price }
     }
 
     // >>> END match smartCall action code <<<
@@ -631,15 +631,15 @@ class StorageSiteController {
       def bestUnit
       // if a size was chosen, use it, else get the "best" price
       if (params.unitType && unitSize) {
-        bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
         if (!bestUnit) {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
         }
       } else if (unitSize) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0}.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
       } else {
         // TODO - decide on best price or best price for a given size
-        bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > 0 }.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min{ it.price }
       }
 
       // >>> END match detail action code <<<
@@ -711,10 +711,10 @@ class StorageSiteController {
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     if (params.action == 'unitType') {
       unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitCount > 0 && it.unitType == unitType }.collect{ it.unitsize }.unique()
+      sizeList = site.units.findAll{ it.unitCount > site.minInventory && it.unitType == unitType }.collect{ it.unitsize }.unique()
     } else {
       unitTypes = unitSize ? site.units.findAll{ it.unitCount > 0 && it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitCount > 0 && it.unitsize.searchType == searchType }.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitCount > 0 && it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
+      sizeList = site.units.findAll{ it.unitCount > site.minInventory && it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
     }
 
     // output JSON for types
@@ -724,21 +724,21 @@ class StorageSiteController {
     def bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll{ it.unitCount > 0 && it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitCount > site.minInventory && it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
       if (!bestUnit) {
         if (params.action == 'unitType') {
           // find closest size
-          def bestSize =  site.units.findAll{ it.unitType == unitType  && it.unitCount > 0 }.min{ abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
-          bestUnit = site.units.findAll{ it.unitType == unitType && it.unitsize.id == bestSize && it.unitCount > 0 }.min{ it.price }
+          def bestSize =  site.units.findAll{ it.unitType == unitType  && it.unitCount > site.minInventory }.min{ abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
+          bestUnit = site.units.findAll{ it.unitType == unitType && it.unitsize.id == bestSize && it.unitCount > site.minInventory }.min{ it.price }
         } else {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
+          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
         }
       }
     } else if (unitSize) {
-      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id  && it.unitCount > 0 }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id  && it.unitCount > site.minInventory }.min{ it.price }
     } else {
       // TODO - decide on best price or best price for a given size
-      bestUnit = site.units.findAll{ it.unitCount > 0 }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitCount > site.minInventory }.min{ it.price }
     }
     if (!bestUnit) {
       println "Best Unit not found for site:${site.id} unitType:${params.unitType} unitSize:${unitSize}"

@@ -211,9 +211,9 @@ class HomeController {
         ins = site.insurances.findAll{ it.active }.min{ it.premium }
       }
       if (searchSize != 1 && unitSize) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > 0 }.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
       } else {
-        bestUnit = site.units.findAll{ it.unitCount > 0 }.min{ it.price }
+        bestUnit = site.units.findAll{ it.unitCount > site.minInventory }.min{ it.price }
       }
       if (bestUnit) {
         def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)

@@ -1216,8 +1216,20 @@
               </div>
               <div style="clear:both;height: 15px;"></div>
             </div>
-          </sec:ifAnyGranted>
 
+            <div class="checkout_section_header">
+              Minimum Inventory Required
+            </div>
+            <div class="formInstructions">
+              If you require that Storitz does not rent out the last unit of a given type, enter the reserve quantity here.
+            </div>
+            <div class="checkout_fields">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'minInventory', 'errors')}">
+                <g:textField name="minInventory" style="width:190px;" value="${storageSiteInstance?.minInventory}"/>
+              </div>
+              <div style="clear:both;height: 15px;"></div>
+            </div>
+          </sec:ifAnyGranted>
 
           <div class="checkout_section_header">
             Site Images

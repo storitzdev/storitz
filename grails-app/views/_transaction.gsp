@@ -34,9 +34,9 @@
     <div class="right" style="margin-top:5px;">
       <g:if test="${params.action != 'payment'}">
         <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-          <p:inputImage id="rentmeDisbled" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-rent-me-grey-108x36.png" alt="Rent Me"/>
-          <div></div>
           <p:inputImage id="rentme" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-reserve-108x36.png" alt="Reserve"/>
+          <div></div>
+          <p:inputImage id="rentmeDisbled" style="width:108px;height:36px;border:none;cursor:pointer;" src="btn-rent-me-grey-108x36.png" alt="Rent Me"/>
           <div id="rentVsReserve" class="rentVsReserve textCenter">Rent vs. Reserve</div>
         </g:if>
         <g:else>

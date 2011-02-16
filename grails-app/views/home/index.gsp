@@ -1,4 +1,4 @@
-<%@ page import="storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
+<%@ page import="storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -320,24 +320,44 @@ $(window).trigger( 'hashchange' );
                           <g:if test="${params.size || params.date}">
                             <g:if test="${siteMoveInPrice[site.id]?.promo}">
                               <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
-                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                  <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                                </g:if>
+                                <g:else>
+                                  <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                </g:else>
                               </g:link>
                             </g:if>
                             <g:else>
                               <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
-                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                  <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                                </g:if>
+                                <g:else>
+                                  <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                </g:else>
                               </g:link>
                             </g:else>
                           </g:if>
                           <g:else>
                             <g:if test="${siteMoveInPrice[site.id]?.promo}">
                               <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
-                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                  <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                                </g:if>
+                                <g:else>
+                                  <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                </g:else>
                               </g:link>
                             </g:if>
                             <g:else>
                               <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id]">
-                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                  <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                                </g:if>
+                                <g:else>
+                                  <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                                </g:else>
                               </g:link>
                             </g:else>
                           </g:else>

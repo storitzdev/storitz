@@ -185,6 +185,7 @@ class StorageSite {
     Feed feed
     Long lastUpdate
     Boolean disabled = false
+    Integer minInventory = 0
 
     Boolean netCommission = true
     Boolean allowPushPrice = true
