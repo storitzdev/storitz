@@ -784,118 +784,112 @@ class CShiftService extends BaseProviderService {
       def typeName = unit.VALUE.text()
       def attributes = unit.ATTRIBUTES.text()
 
-      if (vacant > 0) {
-        def dimensions = unit.DIMENSIONS.text()
-        def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
-        if (m.matches()) {
+      def dimensions = unit.DIMENSIONS.text()
+      def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
+      if (m.matches()) {
 
-          // legal dimensions
-          def width = m[0][1] as Double
-          def length = m[0][2] as Double
+        // legal dimensions
+        def width = m[0][1] as Double
+        def length = m[0][2] as Double
 
-          def searchType
-          def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
-          if (unitTypeLookup) {
-            if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
-              searchType = unitTypeLookup.searchType
-            } else {
-              writer.println "Skipping illegal type ${typeName}"
-              continue
-            }
+        def searchType
+        def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+        if (unitTypeLookup) {
+          if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
+            searchType = unitTypeLookup.searchType
           } else {
-            writer.println "Unknown unit type description ${typeName}"
+            writer.println "Skipping illegal type ${typeName}"
+            continue
+          }
+        } else {
+          writer.println "Unknown unit type description ${typeName}"
 
-            if (typeName ==~ /(?i).*(cell|mail|slip|apartment|office|container|portable|wine|locker).*/) continue
+          if (typeName ==~ /(?i).*(cell|mail|slip|apartment|office|container|portable|wine|locker).*/) continue
 
-            if (typeName ==~ /(?i).*(parking|rv).*/) {
-              searchType = SearchType.PARKING
-            } else {
-              searchType = SearchType.STORAGE
-            }
-
+          if (typeName ==~ /(?i).*(parking|rv).*/) {
+            searchType = SearchType.PARKING
+          } else {
+            searchType = SearchType.STORAGE
           }
 
-          def unitSize = unitSizeService.getUnitSize(width, length, searchType)
-          if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
-            def displaySize
-            if (m[0][1].isInteger() && m[0][2].isInteger()) {
-              displaySize = "${width as Integer} X ${length as Integer}"
-            } else {
-              displaySize = "${width} X ${length}"
-            }
-
-            def newUnit = false
-            def siteUnit = site.units.find{ it.unitName == attributes && it.displaySize == displaySize}
-
-            if (!siteUnit) {
-              siteUnit = new StorageUnit()
-              siteUnit.unitInfo = dimensions
-              siteUnit.unitSizeInfo = dimensions
-              siteUnit.unitTypeInfo = typeName
-              newUnit = true
-
-              if (unitTypeLookup) {
-                if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
-                  siteUnit.unitType = unitTypeLookup.unitType
-                  siteUnit.isTempControlled = unitTypeLookup.tempControlled
-                } else {
-                  writer.println "Skipping illegal type ${typeName}"
-                  continue
-                }
-              } else {
-                writer.println "Unknown unit type description ${typeName}"
-
-                if (searchType == SearchType.PARKING) {
-                  siteUnit.unitType = UnitType.UNCOVERED
-                } else {
-                  if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
-                    siteUnit.unitType = UnitType.UPPER
-                  } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
-                    siteUnit.unitType = UnitType.DRIVEUP
-                  } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
-                    siteUnit.unitType = UnitType.INTERIOR
-                  }
-                  if (!siteUnit.unitType) {
-                    siteUnit.unitType = UnitType.UPPER
-                  }
-                }
-                siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
-              }
-              siteUnit.unitsize = unitSize
-              siteUnit.totalUnits = totalUnits
-              siteUnit.unitCount = vacant
-              siteUnit.description = typeName
-              siteUnit.unitName = siteUnit.unitNumber = attributes
-              siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
-              siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
-              siteUnit.isAlarm = false
-              siteUnit.isIrregular = false
-              siteUnit.isPowered = false
-              siteUnit.isAvailable = true
-              siteUnit.isSecure = false
-              siteUnit.displaySize = displaySize
-              stats.unitCount += vacant
-
-            } else {
-              siteUnit.unitCount = vacant
-              siteUnit.totalUnits = totalUnits
-              siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
-              siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
-              stats.unitCount += vacant
-            }
-            siteUnit.save(flush:true)
-            if (newUnit) {
-              site.addToUnits(siteUnit)
-            }
-
-          } else {
-            writer.println "Skipping due to size: length = ${length}, width = ${width}"
-          }
         }
-      } else if (vacant == 0) {
-        writer.println "Skipped due to full occupancy: ${typeName}"
-      } else {
-        writer.println "Skipped due to parking or other: ${typeName}"
+
+        def unitSize = unitSizeService.getUnitSize(width, length, searchType)
+        if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
+          def displaySize
+          if (m[0][1].isInteger() && m[0][2].isInteger()) {
+            displaySize = "${width as Integer} X ${length as Integer}"
+          } else {
+            displaySize = "${width} X ${length}"
+          }
+
+          def newUnit = false
+          def siteUnit = site.units.find{ it.unitName == attributes && it.displaySize == displaySize}
+
+          if (!siteUnit) {
+            siteUnit = new StorageUnit()
+            siteUnit.unitInfo = dimensions
+            siteUnit.unitSizeInfo = dimensions
+            siteUnit.unitTypeInfo = typeName
+            newUnit = true
+
+            if (unitTypeLookup) {
+              if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
+                siteUnit.unitType = unitTypeLookup.unitType
+                siteUnit.isTempControlled = unitTypeLookup.tempControlled
+              } else {
+                writer.println "Skipping illegal type ${typeName}"
+                continue
+              }
+            } else {
+              writer.println "Unknown unit type description ${typeName}"
+
+              if (searchType == SearchType.PARKING) {
+                siteUnit.unitType = UnitType.UNCOVERED
+              } else {
+                if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
+                  siteUnit.unitType = UnitType.UPPER
+                } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
+                  siteUnit.unitType = UnitType.DRIVEUP
+                } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
+                  siteUnit.unitType = UnitType.INTERIOR
+                }
+                if (!siteUnit.unitType) {
+                  siteUnit.unitType = UnitType.UPPER
+                }
+              }
+              siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
+            }
+            siteUnit.unitsize = unitSize
+            siteUnit.totalUnits = totalUnits
+            siteUnit.unitCount = vacant
+            siteUnit.description = typeName
+            siteUnit.unitName = siteUnit.unitNumber = attributes
+            siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
+            siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
+            siteUnit.isAlarm = false
+            siteUnit.isIrregular = false
+            siteUnit.isPowered = false
+            siteUnit.isAvailable = true
+            siteUnit.isSecure = false
+            siteUnit.displaySize = displaySize
+            stats.unitCount += vacant
+
+          } else {
+            siteUnit.unitCount = vacant
+            siteUnit.totalUnits = totalUnits
+            siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
+            siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
+            stats.unitCount += vacant
+          }
+          siteUnit.save(flush:true)
+          if (newUnit) {
+            site.addToUnits(siteUnit)
+          }
+
+        } else {
+          writer.println "Skipping due to size: length = ${length}, width = ${width}"
+        }
       }
     }
   }
@@ -1432,7 +1426,7 @@ class CShiftService extends BaseProviderService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * unit.price;
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * rate
           break;
 
         case "FIXED_RATE":
@@ -1471,7 +1465,7 @@ class CShiftService extends BaseProviderService {
 
     BigDecimal insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP) 
+    def rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP)
     def subTotal =  rentTotal + insuranceCost
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)

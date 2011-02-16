@@ -4,15 +4,39 @@ import com.storitz.CenterShift
 import com.storitz.Feed
 import com.storitz.StorageSite
 import com.storitz.User
+import storitz.constants.CenterShiftVersion
 
-class ExrController {
+class ExrsController extends CshiftController {
 
     def fileUploadService
     def imageService
 
     static String baseUrl = "http://selfstorage.extraspace.com"
 
-    def index = { }
+    def list = {
+      def exrsManager = User.findByUsername('exrs')
+      def exrsFeed = (CenterShift)Feed.findByManager(exrsManager)
+      def feedList = [exrsFeed]
+      [cshiftInstanceList: feedList, cshiftInstanceTotal: feedList.size()]
+    }
+
+    def refreshPromos = {
+      def cshiftInstance = CenterShift.get(params.id)
+      if (cshiftInstance) {
+        for(site in cshiftInstance.sites) {
+          for(promo in site.specialOffers) {
+            promo.delete()
+          }
+          site.specialOffers.clear()
+          def writer = new PrintWriter(System.out)
+          ExrsService.loadPromos(cshiftInstance, site, writer)
+          writer.close()
+          println "Promos refreshed for ${site.title}"
+        }
+        flash.message = "Feed promotions refreshed."
+        redirect(action: "show", id: cshiftInstance.id)
+      }
+    }
 
     def images = {
       def exrsManager = User.findByUsername('exrs')
@@ -108,4 +132,57 @@ class ExrController {
       render(status: 200, text: "Done processing images")
     }
 
+    def urls = {
+      def exrsManager = User.findByUsername('exrs')
+      def exrsFeed = (CenterShift)Feed.findByManager(exrsManager)
+      def random = new Random()
+      for (i in 1..6) {
+        def sitemapXml = new URL("http://selfstorage.extraspace.com/SiteMap-${i}.aspx").text
+        // /Storage/Facilities/US/Arizona/Phoenix/501590/Facility.aspx
+        def matcher = sitemapXml =~ /(\/Storage\/Facilities\/US\/.+?(\d+)\/Facility.aspx)/
+        matcher.each {
+          def pageUrl = it[1]
+          println "Opening page: ${baseUrl}${pageUrl}"
+          def siteHtml = new URL(baseUrl + pageUrl).text
+          def addrMatch = siteHtml =~ /<div class="street-address">(.+?)<\/div>/
+          def addr
+          if (addrMatch.getCount()) {
+            addr = addrMatch[0][1]
+          }
+          def cityMatch = siteHtml =~ /<span class="locality">(.+?)<\/span>/
+          def city
+          if (cityMatch.getCount()) {
+            city = cityMatch[0][1]
+          }
+          def stateMatch = siteHtml =~ /<span class="region">(.+?)<\/span>/
+          def state
+          if (stateMatch.getCount()) {
+            state = stateMatch[0][1]
+          }
+          def zipMatch = siteHtml =~ /<span class="postal-code">(.+?)<\/span>/
+          def zip
+          if (zipMatch.getCount()) {
+            zip = zipMatch[0][1]
+          }
+
+          def c = StorageSite.createCriteria()
+          StorageSite site = c.get {
+            and {
+              ilike("address", addr + '%')
+              eq("zipcode", zip)
+              eq("feed.id", exrsFeed.id)
+            }
+            maxResults(1)
+          }
+          if (site) {
+            println "Found EXRS facility ${site.title} at addr=${addr} city=${city} state=${state} zip=${zip} saving URL"
+            site.url = pageUrl
+            site.save(flush:true)
+          } else {
+            println "Could not locate storage facility for address |${addr}| and zip |${zip}| and feed id = ${exrsFeed.id}"
+          }
+        }
+      }
+      render(status: 200, text: "Done processing images")
+    }
 }

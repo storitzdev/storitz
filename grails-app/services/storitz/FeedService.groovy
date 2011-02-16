@@ -12,6 +12,7 @@ class FeedService {
   def siteLinkService
   def CShiftService
   def quikStorService
+  def exrsService
   
   boolean transactional = false
 
@@ -29,6 +30,10 @@ class FeedService {
 
       case "QS":
         quikStorService.updateSite(storageSiteInstance, stats, writer)
+        break
+
+      case "EX":
+        CShiftService.updateSite(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -50,6 +55,10 @@ class FeedService {
 
       case "QS":
         quikStorService.updateUnits(storageSiteInstance, stats, writer)
+        break
+
+      case "EX":
+        exrsService.updateUnits(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -76,6 +85,11 @@ class FeedService {
         quikStorService.loadPromos(quickStor, storageSiteInstance, writer)
         break
 
+      case "EX":
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        exrsService.loadPromos(centerShift, storageSiteInstance, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -98,6 +112,11 @@ class FeedService {
       case "QS":
         def quickStor = (QuikStor)storageSiteInstance.feed
         quikStorService.addSitePhone(quikStor, storageSiteInstance, writer)
+        break
+
+      case "EX":
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        exrsService.addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       default:

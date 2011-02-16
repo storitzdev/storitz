@@ -30,6 +30,7 @@
               <li><g:link controller="siteLink" action="list">Manage SiteLink</g:link> </li>
               <li><g:link controller="cshift" action="list">Manage CenterShift</g:link> </li>
               <li><g:link controller="quikStor" action="list">Manage QuikStor</g:link> </li>
+              <li><g:link controller="exrs" action="list">Manage Extraspace</g:link> </li>
           </ul>
           <li>Reference Data</li>
           <ul>

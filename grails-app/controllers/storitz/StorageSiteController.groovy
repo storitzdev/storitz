@@ -711,10 +711,10 @@ class StorageSiteController {
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     if (params.action == 'unitType') {
       unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitType == unitType }.collect{ it.unitsize }.unique()
+      sizeList = site.units.findAll{ it.unitCount > 0 && it.unitType == unitType }.collect{ it.unitsize }.unique()
     } else {
-      unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitsize.searchType == searchType }.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
+      unitTypes = unitSize ? site.units.findAll{ it.unitCount > 0 && it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitCount > 0 && it.unitsize.searchType == searchType }.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+      sizeList = site.units.findAll{ it.unitCount > 0 && it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
     }
 
     // output JSON for types
@@ -724,7 +724,7 @@ class StorageSiteController {
     def bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll{ it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+      bestUnit = site.units.findAll{ it.unitCount > 0 && it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
       if (!bestUnit) {
         if (params.action == 'unitType') {
           // find closest size
