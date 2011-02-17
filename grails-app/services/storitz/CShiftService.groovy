@@ -133,7 +133,7 @@ class CShiftService extends BaseProviderService {
          <csc:lngSiteID>""" + rentalTransaction.site.sourceId + """</csc:lngSiteID>
          <csc:strFirstName>""" + rentalTransaction.contactPrimary.firstName + """</csc:strFirstName>
          <csc:strLastName>""" + rentalTransaction.contactPrimary.lastName + """</csc:strLastName>
-         <csc:strAccountName>""" + rentalTransaction.constactPrimary.fullName() + """</csc:strAccountName>
+         <csc:strAccountName>""" + rentalTransaction.contactPrimary.fullName() + """</csc:strAccountName>
          <csc:strAccountClass>298</csc:strAccountClass>
          <csc:strAccountType>""" + rentalType + """</csc:strAccountType>
          <csc:strAddress1>""" + rentalTransaction.contactPrimary.address1 + """</csc:strAddress1>

@@ -5,8 +5,10 @@ import storitz.constants.CommissionType
 
 class Commission {
 
-    static constraints = {
-    }
+  static belongsTo = CommissionSchedule
+
+  static constraints = {
+  }
 
   CommissionSourceType commissionSource
   CommissionType commissionType
