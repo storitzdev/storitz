@@ -224,7 +224,7 @@
             <div style="clear:both;height:20px;"></div>
             <g:if test="${propertyOperatorList?.size()>0}">
               <div class="wideTextbox">
-                <div><h3>Facilities from the same property operator:</h3></div>
+                <div><h3>Facilities from the same property operator in this state:</h3></div>
                   <g:each var="psite" in="${propertyOperatorList}">
                     <div class="left" style="width:310px;">
                       <g:link mapping="siteLink2" params="[site_title:psite.title.replaceAll(' - ','-').replaceAll(' ','-'), id:psite.id]">${psite.title}</g:link>
