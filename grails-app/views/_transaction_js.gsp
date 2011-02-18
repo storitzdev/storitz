@@ -42,11 +42,11 @@ function setupRentVsReserve() {
     }).addTouch();
     $('#rentVsReserve').click(function(event) {
         _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentvsreserve']);
-        $('#rentVsReserveText').dialog('open');
+        $('#rentVsReserveText').dialog({position:[event.pageX-100,event.pageY]}).dialog('open');
     });
-    $('#rentmeDisbled').click(function(event) {
+    $('#rentmeDisabled').click(function(event) {
         _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentme']);
-        $('#rentVsReserveText').dialog('open');
+        $('#rentVsReserveText').dialog({position:[event.pageX-100,event.pageY]}).dialog('open');
     });
 }
 
