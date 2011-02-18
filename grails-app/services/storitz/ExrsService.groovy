@@ -311,19 +311,34 @@ class ExrsService extends CShiftService {
   // check rented
   def checkRented(RentalTransaction rentalTransaction) {
     StorageSite site = rentalTransaction.site
+    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
+
+    if (!unit) {
+      return false
+    }
     
-    println "Opening page: ${baseUrl + site.url}"
+    println "Check rented Opening page: ${baseUrl + site.url}"
     def siteHtml = new URL(baseUrl + site.url).text
     // build list of valid ids
     def idList = []
-    def idMatcher = siteHtml =~ /ctl00_mContent_UnitList_ctl(\d+)_Dimensions/
+    def idMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl(\d+)_Dimensions" value="${unit.unitSizeInfo}"/
     if (idMatcher.getCount()) {
       idMatcher.each {
-        idList.add(it[1])
+        def unitId = it[1]
+        def attributeMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_UnitAttributesCode" value="${unit.unitTypeInfo}"/
+        if (attributeMatcher.getCount()) {
+          def reservationMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+          if (reservationMatcher.getCount()) {
+            Integer reservationDeposit = Integer.parseInt(reservationMatcher[0][1])
+            if (reservationDeposit >= 0) return true
+          }
+        }
       }
     }
-
+    return false
   }
+
+  private get
 
   // reserve/move-in
 }

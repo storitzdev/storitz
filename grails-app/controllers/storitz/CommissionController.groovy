@@ -1,6 +1,7 @@
 package storitz
 
 import com.storitz.Commission
+import com.storitz.CommissionSchedule
 
 class CommissionController {
 
@@ -12,15 +13,20 @@ class CommissionController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 20, 100)
-        def criteria = Commission.createCriteria()
-        def results = criteria.list(params) {
-          projections {
-            groupProperty("commissionSource")
-          }
-          order("commissionSource", "asc")
-          order("lowerBound", "asc")
-        }
-        [commissionInstanceList: results, commissionInstanceTotal: Commission.count()]
+        [commissionScheduleInstanceList: CommissionSchedule.list(params), commissionScheduleInstanceTotal: (CommissionSchedule.count() ? CommissionSchedule.count() : 0)]
+    }
+
+    def createSchedule = {
+
+      def commissionScheduleInstance = new CommissionSchedule(params)
+      if (commissionScheduleInstance.save(flush: true)) {
+          flash.message = "${message(code: 'default.created.message', args: [message(code: 'commissionSchedule.label', default: 'Commission Schedule'), commissionScheduleInstance.id])}"
+          redirect(action: "list", id: commissionScheduleInstance.id)
+      }
+      else {
+          flash.message = "Error creating new Commission Schedule"
+          render(view: "list")
+      }
     }
 
     def create = {

@@ -25,46 +25,52 @@
         <div class="body">
 
             <div class="price_options checkout_header white">
-              List Commission Entries
+              List Commission Schedules
             </div>
 
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
+
+          <g:form action="createSchedule" method="post" >
+              <div class="dialog">
+                  <table>
+                      <tbody>
+                        <tr class='prop'>
+                              <td valign='top' class='name'>
+                                  <label for='scheduleName'>New Schedule Name:</label>
+                              </td>
+                              <td valign='top' class='value'>
+                                  <input type="text" id="scheduleName" name="scheduleName" style="width:300px;" value="${flash.scheduleName}"/>
+                                  <span class="button"><input class="save" type="submit" value="Create" /></span>
+                              </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+          </g:form>
+
             <div class="list">
                 <table>
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'commission.id.label', default: 'Id')}" />
+                            <g:sortableColumn property="id" title="${message(code: 'commissionSchedule.id.label', default: 'Id')}" />
 
-                            <g:sortableColumn property="lowerBound" title="${message(code: 'commission.lowerBound.label', default: 'Lower Bound')}" />
+                            <g:sortableColumn property="scheduleName" title="${message(code: 'commissionSchedule.scheduleName.label', default: 'Schedule Name')}" />
 
-                            <g:sortableColumn property="upperBound" title="${message(code: 'commission.upperBound.label', default: 'Upper Bound')}" />
-
-                            <g:sortableColumn property="amount" title="${message(code: 'commission.amount.label', default: 'Amount')}" />
-                        
-                            <g:sortableColumn property="commissionType" title="${message(code: 'commission.commissionType.label', default: 'Commission Type')}" />
-
-                            <g:sortableColumn property="commissionSource" title="${message(code: 'commission.commissionSource.label', default: 'Commission Source')}" />
-
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${commissionInstanceList}" status="i" var="commissionInstance">
+                    <g:each in="${commissionScheduleInstanceList}" status="i" var="commissionSchedule">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${commissionInstance.id}">${fieldValue(bean: commissionInstance, field: "id")}</g:link></td>
+                            <td><g:link action="show" id="${commissionSchedule.id}">${fieldValue(bean: commissionSchedule, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: commissionInstance, field: "lowerBound")}</td>
+                            <td>${fieldValue(bean: commissionSchedule, field: "scheduleName")}</td>
 
-                            <td>${fieldValue(bean: commissionInstance, field: "upperBound")}</td>
-
-                            <td>${fieldValue(bean: commissionInstance, field: "amount")}</td>
-                        
-                            <td>${fieldValue(bean: commissionInstance, field: "commissionType")}</td>
-
-                            <td>${commissionInstance.commissionSource.display}</td>
+                            <td><g:link action="edit" id="${commissionSchedule.id}">edit</g:link></td>
 
                         </tr>
                     </g:each>
@@ -72,7 +78,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${commissionInstanceTotal}" />
+                <g:paginate total="${commissionScheduleInstanceTotal}" />
             </div>
         </div>
       </div>

@@ -75,21 +75,15 @@ class CostService {
     }
   }
 
-  def calculateCommission(cost, commissionSource) {
+  def calculateCommission(BigDecimal monthly, Feed feed) {
 
-    def c = Commission.createCriteria()
+    CommissionSchedule schedule = feed.commissionSchedule
+    Commission ctype = schedule.entries.find{ it.lowerBound < monthly && it.upperBound >= monthly}
 
-    def ctype = c.get {
-      and {
-        eq("commissionSource", commissionSource)
-        lt("lowerBound", cost)
-        ge("upperBound", cost)
-      }
-    }
-    if (!ctype) return cost * 0.25
+    if (!ctype) return monthly * 0.25
 
     if (ctype.commissionType == CommissionType.PERCENTAGE) {
-      return cost * (ctype.amount / 100)
+      return monthly * (ctype.amount / 100)
     }
     return ctype.amount
   }

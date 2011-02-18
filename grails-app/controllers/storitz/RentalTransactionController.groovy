@@ -378,7 +378,7 @@ class RentalTransactionController {
 
       }
 
-      rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.cost, CommissionSourceType.WEBSITE)
+      rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.monthlyRate, rentalTransactionInstance.site.feed)
       rentalTransactionInstance.status = isReservation ? TransactionStatus.RESERVED : TransactionStatus.PAID
       rentalTransactionInstance.save(flush:true)
 

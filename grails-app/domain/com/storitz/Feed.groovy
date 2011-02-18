@@ -26,4 +26,6 @@ class Feed {
   State state
   String zipcode
 
+  CommissionSchedule commissionSchedule
+
 }

@@ -199,5 +199,5 @@
   </div>
 </div>
 <div id="rentVsReserveText" style="display:none">
-  This Storitz facility does not allow you to <b>rent</b> a unit.  Instead, you can make a <b>reservation</b> which means less obligation but also finalizing details and paperwork upon your arrival at the storage facility.
+  Reserve a unit now to hold a specific space and its price up until your move-in date.  You'll need to finalize paperwork, payment and other details when you arrive at the property.
 </div>

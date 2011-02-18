@@ -27,6 +27,7 @@
         var srcDetailButton = ${p.imageLink(src:'details-button.gif')};
         var srcSpecialOffer = ${p.imageLink(src:'special-offer-16px.png')};
         var srcRentMeButton = ${p.imageLink(src:'rent-me-button.png')};
+        var srcReserveButton = ${p.imageLink(src:'reserve-button-87x31.png')};
         var srcIconKeypad = ${p.imageLink(src:'icon-keypad-green-20x20.gif')};
         var srcIconCamera = ${p.imageLink(src:'icon-camera-green-20x20.gif')};
         var srcIconGate = ${p.imageLink(src:'icon-gate-green-20x20.gif')};
@@ -139,6 +140,7 @@
             site.state = '${site.state.display}';
             site.city = '${site.city}';
             site.promoId = ${siteMoveInPrice[site.id]?.promo ? siteMoveInPrice[site.id].promo : 'null' };
+            site.transactionType = '${site.transactionType}'
             createMarker(site);
           </g:each>
           

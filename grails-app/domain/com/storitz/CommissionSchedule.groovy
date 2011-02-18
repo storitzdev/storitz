@@ -4,6 +4,8 @@ class CommissionSchedule {
 
     static hasMany = [entries:Commission]
 
+    static fetchMode = [entries:'eager']
+  
     static constraints = {
     }
 

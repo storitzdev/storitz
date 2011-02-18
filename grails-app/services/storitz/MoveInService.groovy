@@ -7,6 +7,7 @@ class MoveInService {
     def siteLinkService
     def CShiftService
     def quikStorService
+    def exrsService
 
     boolean transactional = false
 
@@ -23,6 +24,9 @@ class MoveInService {
 
         case "QS":
           return quikStorService.checkRented(trans)
+
+        case "EX":
+          return exrsService.checkRented(trans)  
 
         default:
           throw new Exception("Unknown service for move in")

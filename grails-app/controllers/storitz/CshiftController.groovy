@@ -4,6 +4,7 @@ import com.storitz.CenterShift
 import grails.plugins.springsecurity.Secured
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
+import com.storitz.CommissionSchedule
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CshiftController extends FeedController {
@@ -27,7 +28,7 @@ class CshiftController extends FeedController {
   def create = {
     def cshiftInstance = new CenterShift()
     cshiftInstance.properties = params
-    return [cshiftInstance: cshiftInstance]
+    return [cshiftInstance: cshiftInstance, commissionScheduleList: CommissionSchedule.list()]
   }
 
   def save = {
@@ -129,7 +130,7 @@ class CshiftController extends FeedController {
       redirect(action: "list")
     }
     else {
-      return [cshiftInstance: cshiftInstance]
+      return [cshiftInstance: cshiftInstance, commissionScheduleList: CommissionSchedule.list()]
     }
   }
 
