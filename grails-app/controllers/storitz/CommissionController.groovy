@@ -97,10 +97,10 @@ class CommissionController {
           for (param in params.keySet()) {
             if (param.startsWith('new_lowerBound_')) {
               Long entryId = param.substring(15) as Long
-              def lowerBoundString = "new_lowerBound_" + commission.id
-              def upperBoundString = "new_upperBound_" + commission.id
-              def amountString = "new_amount_" + commission.id
-              def commissionTypeString = "new_commissionType_" + commission.id
+              def lowerBoundString = "new_lowerBound_" + entryId
+              def upperBoundString = "new_upperBound_" + entryId
+              def amountString = "new_amount_" + entryId
+              def commissionTypeString = "new_commissionType_" + entryId
               def entry = new Commission()
               entry.lowerBound = params.getAt(lowerBoundString) as BigDecimal
               entry.upperBound = params.getAt(upperBoundString) as BigDecimal
