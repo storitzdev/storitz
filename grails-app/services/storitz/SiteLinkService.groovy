@@ -659,6 +659,7 @@ class SiteLinkService extends BaseProviderService {
     site.disabled = false
     site.netCommission = false
     site.transactionType = TransactionType.RENTAL
+    site.minInventory = 0
 
     site.openMonday =  site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
     site.openSaturday = !(tab.bClosedSaturday.text().toLowerCase() == 'true')

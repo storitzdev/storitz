@@ -138,9 +138,13 @@ class RentalTransactionController {
         // check if no promo selected
         if (!params.promoId) {
           rentalTransactionInstance.promoId = -999;
+        } else if (!rentalTransactionInstance.promoId) {
+          rentalTransactionInstance.promoId = params.long('promoId')
         }
         if (!params.insuranceId) {
           rentalTransactionInstance.insuranceId = -999
+        } else if (!rentalTransactionInstance.insuranceId) {
+          rentalTransactionInstance.insuranceId = params.long('insuranceId')
         }
         if (rentalTransactionInstance.validate() && rentalTransactionInstance.save(flush: true)) {
             println("Transaction move in save date is ${rentalTransactionInstance.moveInDate.format('MM/dd/yy')}")
@@ -537,7 +541,7 @@ class RentalTransactionController {
       }
 
       SpecialOffer promo = null
-      if (rentalTransactionInstance.promoId > 0) {
+      if (rentalTransactionInstance.promoId && rentalTransactionInstance.promoId > 0) {
         promo = SpecialOffer.get(rentalTransactionInstance.promoId)
       }
       def unit = StorageUnit.get(rentalTransactionInstance.unitId)

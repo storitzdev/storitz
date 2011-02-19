@@ -5,11 +5,64 @@
   <head>
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
     <g:set var="title" value="Edit Commission Entry" scope="request"/>
-    <g:render template="/header" />
+    <g:render template="/header_admin" />
 
     <script type="text/javascript">
 //<![CDATA[
-      FastInit.addOnLoad(setupAutocomplete);
+  $(document).ready(function() {
+  });
+
+  function deleteEntry(entryId) {
+    $.ajax(
+    {
+      url:"${createLink(controller:'commission', action:'removeEntry')}",
+      method:'get',
+      dataType: 'json',
+      data: {
+        id: ${commissionScheduleInstance.id},
+        entryId:entryId
+      },
+      success: function(ret) {
+        $("#row_" + entryId).remove();
+      }
+    });
+
+  }
+
+  function addEntry() {
+    var lastRow = $('#commissionEntries > tr.newEntry:last');
+    var lastRowId = lastRow.attr('id');
+    var newItem = 1
+    if (lastRowId) {
+      if (lastRowId.val().length == 0) {
+        return
+      }
+      newItem = parseInt(lastRowId.substr(lastRowId.indexOf('_') + 1)) + 1;
+    }
+    var selectCol = $('<select>', {'name':'new_commissionType_'+newItem}).css({width:100});
+    <g:each var="type" in="${storitz.constants.CommissionType?.list()}">
+      selectCol.append($('<option>', {'value':'${type}'}).append('${type.value}'));
+    </g:each>
+    var newRow = $('<tr>', {'class':'newEntry'})
+            .append($('<td>').append($('<input>', {'type':'text', 'name':'new_lowerBound_'+newItem}).css({width:180})))
+            .append($('<td>').append($('<input>', {'type':'text', 'name':'new_upperBound_'+newItem}).css({width:180})))
+            .append($('<td>').append($('<input>', {'type':'text', 'name':'new_amount_'+newItem}).css({width:180})))
+            .append($('<td>').append(selectCol))
+            .append($('<td>').append($('<a>',
+              {
+                href: '#',
+                text: 'delete',
+                click: function() {
+                  $(this).parents('tr.newEntry').remove();
+                  return false;
+              }
+            })));
+    $('#commissionEntries').append(newRow);
+    $('input[name="new_lowerBound_'+newItem+'"]').focus();
+
+  }
+
+
 //]]>
     </script>
 
@@ -22,102 +75,71 @@
 
       <div class="buttons">
           <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-          <span class="button"><g:link action="list">Commission List</g:link></span>
-          <span class="button"><g:link action="create">New Commission Entry</g:link></span>
+          <span class="button"><g:link action="list">Commission Schedule List</g:link></span>
       </div>
 
         <div class="body">
 
           <div class="price_options checkout_header white">
-            Edit Commission Entry
+            Edit Commission Schedule ${commissionScheduleInstance.scheduleName}
           </div>
 
           <g:if test="${flash.message}">
           <div class="message">${flash.message}</div>
           </g:if>
-          <g:hasErrors bean="${commissionInstance}">
-          <div class="errors">
-              <g:renderErrors bean="${commissionInstance}" as="list" />
+
+          <div class="formInstructions">
+            Lower and upper bounds should not overlap with other entries.  Enter percentages as whole numbers (i.e) 25 not .25.
           </div>
-          </g:hasErrors>
 
-          <g:form method="post" >
-              <g:hiddenField name="id" value="${commissionInstance?.id}" />
-              <g:hiddenField name="version" value="${commissionInstance?.version}" />
+          <g:form method="post" id="${commissionScheduleInstance?.id}">
+            
+            <table id="commissionEntries">
+              <tr>
+                <th style="width:180px;">
+                  Lower Bound
+                </th>
+                <th style="width:180px;">
+                  Upper Bound
+                </th>
+                <th style="width:180px;">
+                  Amount
+                </th>
+                <th style="width:100px;">
+                  Commission Type
+                </th>
+                <th>
+                  Delete
+                </th>
+              </tr>
+              <g:each var="entry" in="${entries}" status="c">
+                <tr id="row_${entry.id}" >
+                  <td>
+                    <g:textField style="width:180px;" id="lowerBound_${entry.id}" name="lowerBound_${entry.id}" value="${entry.lowerBound}" />
+                  </td>
+                  <td>
+                    <g:textField style="width:180px;" id="upperBound_${entry.id}" name="upperBound_${entry.id}" value="${entry.upperBound}" />
+                  </td>
+                  <td>
+                    <g:textField id="amount_${entry.id}" name="amount_${entry.id}" style="width:180px;" value="${entry.amount}" />
+                  </td>
+                  <td>
+                    <g:select id="commissionType_${entry.id}" style="width:100px;" name="commissionType_${entry.id}" from="${storitz.constants.CommissionType?.list()}" value="${entry.commissionType}" optionValue="value" />
+                  </td>
+                  <td>
+                    <a href="#" onclick="deleteEntry(${entry.id}); return false;">delete</a>
+                  </td>
+                </tr>
+              </g:each>
+            </table>
 
-            <div class="checkout_section_header">
-              Commission Source
+            <div class="checkout_value">
+              <span class="buttonSmall"><a href="#" onclick="addEntry(); return false;">Add Entry</a></span>
             </div>
-
-            <div class="checkout_fields">
-              <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'commissionSource', 'errors')}">
-                  <g:select id="commissionSource" style="width:200px;" name="commissionSource" from="${storitz.constants.CommissionSourceType?.list()}" value="${commissionInstance?.commissionSource}"  optionValue="display"/>
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
-            <div class="checkout_labels">
-              <div class="checkout_name" style="width:200px;">
-                <label for="commissionType">Commission Source</label>
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
-            <div class="formInstructions">
-              Lower and upper bounds should not overlap with other entries.  Enter percentages as whole numbers (i.e) 25 not .25.
-            </div>
-
-            <div class="checkout_section_header">
-              Bounds
-            </div>
-
-            <div class="checkout_fields">
-              <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'lowerBound', 'errors')}">
-                  <g:textField style="width:180px;" id="lowerBound" name="lowerBound" value="${fieldValue(bean: commissionInstance, field: 'lowerBound')}" />
-              </div>
-              <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'upperBound', 'errors')}">
-                  <g:textField style="width:180px;" id="upperBound" name="upperBound" value="${fieldValue(bean: commissionInstance, field: 'upperBound')}" />
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
-            <div class="checkout_labels">
-              <div class="checkout_name" style="width:200px;">
-                <label for="lowerBound">Lower Bound</label>
-              </div>
-              <div class="checkout_name" style="width:200px;">
-                <label for="upperBound">Upper Bound</label>
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
-            <div class="checkout_section_header">
-              Commission
-            </div>
-
-            <div class="checkout_fields">
-              <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'amount', 'errors')}">
-                  <g:textField id="amount" name="amount" style="width:180px;" value="${fieldValue(bean: commissionInstance, field: 'amount')}" />
-              </div>
-              <div style="width:200px;" class="checkout_value ${hasErrors(bean: commissionInstance, field: 'commissionType', 'errors')}">
-                  <g:select id="commissionType" style="width:100px;" name="commissionType" from="${storitz.constants.CommissionType?.list()}" value="${commissionInstance?.commissionType}" optionValue="value" />
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
-            <div class="checkout_labels">
-              <div class="checkout_name" style="width:200px;">
-                <label for="amount">Commission</label>
-              </div>
-              <div class="checkout_name" style="width:100px;">
-                <label for="commissionType">Type</label>
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
+            <div style="clear:both;height:30px;"></div>
             <div class="buttons">
-                <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-                <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+              <span class="button"><g:actionSubmit action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
+              <span class="button"><g:actionSubmit action="show" value="${message(code: 'default.button.show.label', default: 'Show')}"/></span>
             </div>
           </g:form>
         </div>

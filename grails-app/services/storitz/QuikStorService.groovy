@@ -57,6 +57,7 @@ class QuikStorService extends BaseProviderService {
           def site = new StorageSite()
           site.feed = quikStor
           site.transactionType = TransactionType.RENTAL
+          site.minInventory = 0
           loc.site = site
           updateSite(site, stats, writer)
           SiteUser.link(site, quikStor.manager)
