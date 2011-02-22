@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.CommissionType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -19,72 +20,61 @@
         <g:render template="/logo_bar" />
         <div class="buttons">
             <span class="button"><a class="home" href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-            <span class="button"><g:link action="list">Commission List</g:link></span>
-            <span class="button"><g:link action="create">New Commission Entry</g:link></span>
+            <span class="button"><g:link action="list">Commission Schedule List</g:link></span>
         </div>
         <div class="body">
 
             <div class="price_options checkout_header white">
-              Show Commission Entry
+              Show Commission Schedule for ${commissionScheduleInstance.scheduleName}
             </div>
 
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
             <div class="dialog">
-                <table>
-                    <tbody>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="commission.id.label" default="Id" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: commissionInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="commission.commissionType.label" default="Commission Source" /></td>
+              <table id="commissionEntries">
+                <tr>
+                  <th style="width:180px;">
+                    Lower Bound
+                  </th>
+                  <th style="width:180px;">
+                    Upper Bound
+                  </th>
+                  <th style="width:180px;">
+                    Amount
+                  </th>
+                  <th style="width:100px;">
+                    Commission Type
+                  </th>
+                </tr>
+                <g:each var="entry" in="${entries}" status="c">
+                  <tr id="row_${entry.id}" >
+                    <td>
+                      <g:formatNumber number="${entry.lowerBound}" type="currency" currencyCode="USD"/>
+                    </td>
+                    <td>
+                      <g:formatNumber number="${entry.upperBound}" type="currency" currencyCode="USD"/>
+                    </td>
+                    <td>
+                      <g:if test="${entry.commissionType == CommissionType.FIXED}">
+                        <g:formatNumber number="${entry.amount}" type="currency" currencyCode="USD"/>
+                      </g:if>
+                      <g:else>
+                        <g:formatNumber number="${entry.amount / 100G}" type="percent"/>
+                      </g:else>
+                    </td>
+                    <td>
+                      ${entry.commissionType.display}
+                    </td>
+                  </tr>
+                </g:each>
+              </table>
 
-                            <td valign="top" class="value">${commissionInstance?.commissionSource?.display}</td>
-
-                        </tr>
-
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="commission.amount.label" default="Amount" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: commissionInstance, field: "amount")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="commission.commissionType.label" default="Commission Type" /></td>
-                            
-                            <td valign="top" class="value">${commissionInstance?.commissionType?.display}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="commission.lowerBound.label" default="Lower Bound" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: commissionInstance, field: "lowerBound")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="commission.upperBound.label" default="Upper Bound" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: commissionInstance, field: "upperBound")}</td>
-                            
-                        </tr>
-                    
-                    </tbody>
-                </table>
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${commissionInstance?.id}" />
+                    <g:hiddenField name="id" value="${commissionScheduleInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>
         </div>

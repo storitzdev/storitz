@@ -217,6 +217,17 @@
       </div>
 
       <div class="checkout_section_header">
+        Commission Schedule
+      </div>
+
+      <div class="checkout_fields">
+        <div style="width:400px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'commissionSchedule', 'errors')}">
+          <g:select name="commissionSchedule.id" id="commissionSchedule" class="validate-selection" style="width:200px;" from="${commissionScheduleList}" value="${quikStorInstance?.commissionSchedule}" optionKey="id" optionValue="scheduleName"/>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+
+      <div class="checkout_section_header">
         Add/Edit Locations
       </div>
       <div style="margin-top:10px;">

@@ -119,6 +119,13 @@
         </g:if>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.commissionSchedule.label" default="Commission Schedule"/></td>
+
+          <td valign="top" class="value">${cshiftInstance.commissionSchedule?.scheduleName}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="cshift.sites.label" default="Sites"/></td>
 
           <td valign="top" style="text-align: left;" class="value">

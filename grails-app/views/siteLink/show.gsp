@@ -109,6 +109,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="siteLink.commissionSchedule.label" default="Commission Schedule"/></td>
+
+          <td valign="top" class="value">${siteLinkInstance.commissionSchedule?.scheduleName}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="siteLink.sites.label" default="Sites"/></td>
 
           <td valign="top" style="text-align: left;" class="value">

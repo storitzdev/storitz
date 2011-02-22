@@ -30,11 +30,11 @@
   }
 
   function addEntry() {
-    var lastRow = $('#commissionEntries > tr.newEntry:last');
+    var lastRow = $('#commissionEntries > tbody > tr.newEntry:last');
     var lastRowId = lastRow.attr('id');
     var newItem = 1
     if (lastRowId) {
-      if (lastRowId.val().length == 0) {
+      if (lastRowId.length == 0) {
         return
       }
       newItem = parseInt(lastRowId.substr(lastRowId.indexOf('_') + 1)) + 1;
@@ -43,7 +43,7 @@
     <g:each var="type" in="${storitz.constants.CommissionType?.list()}">
       selectCol.append($('<option>', {'value':'${type}'}).append('${type.value}'));
     </g:each>
-    var newRow = $('<tr>', {'class':'newEntry'})
+    var newRow = $('<tr>', {'class':'newEntry', 'id':'newRow_'+newItem})
             .append($('<td>').append($('<input>', {'type':'text', 'name':'new_lowerBound_'+newItem}).css({width:180})))
             .append($('<td>').append($('<input>', {'type':'text', 'name':'new_upperBound_'+newItem}).css({width:180})))
             .append($('<td>').append($('<input>', {'type':'text', 'name':'new_amount_'+newItem}).css({width:180})))
@@ -95,42 +95,46 @@
           <g:form method="post" id="${commissionScheduleInstance?.id}">
             
             <table id="commissionEntries">
-              <tr>
-                <th style="width:180px;">
-                  Lower Bound
-                </th>
-                <th style="width:180px;">
-                  Upper Bound
-                </th>
-                <th style="width:180px;">
-                  Amount
-                </th>
-                <th style="width:100px;">
-                  Commission Type
-                </th>
-                <th>
-                  Delete
-                </th>
-              </tr>
-              <g:each var="entry" in="${entries}" status="c">
-                <tr id="row_${entry.id}" >
-                  <td>
-                    <g:textField style="width:180px;" id="lowerBound_${entry.id}" name="lowerBound_${entry.id}" value="${entry.lowerBound}" />
-                  </td>
-                  <td>
-                    <g:textField style="width:180px;" id="upperBound_${entry.id}" name="upperBound_${entry.id}" value="${entry.upperBound}" />
-                  </td>
-                  <td>
-                    <g:textField id="amount_${entry.id}" name="amount_${entry.id}" style="width:180px;" value="${entry.amount}" />
-                  </td>
-                  <td>
-                    <g:select id="commissionType_${entry.id}" style="width:100px;" name="commissionType_${entry.id}" from="${storitz.constants.CommissionType?.list()}" value="${entry.commissionType}" optionValue="value" />
-                  </td>
-                  <td>
-                    <a href="#" onclick="deleteEntry(${entry.id}); return false;">delete</a>
-                  </td>
+              <thead>
+                <tr>
+                  <th style="width:180px;">
+                    Lower Bound
+                  </th>
+                  <th style="width:180px;">
+                    Upper Bound
+                  </th>
+                  <th style="width:180px;">
+                    Amount
+                  </th>
+                  <th style="width:100px;">
+                    Commission Type
+                  </th>
+                  <th>
+                    Delete
+                  </th>
                 </tr>
-              </g:each>
+              </thead>
+              <tbody>
+                <g:each var="entry" in="${entries}" status="c">
+                  <tr id="row_${entry.id}" >
+                    <td>
+                      <g:textField style="width:180px;" id="lowerBound_${entry.id}" name="lowerBound_${entry.id}" value="${entry.lowerBound}" />
+                    </td>
+                    <td>
+                      <g:textField style="width:180px;" id="upperBound_${entry.id}" name="upperBound_${entry.id}" value="${entry.upperBound}" />
+                    </td>
+                    <td>
+                      <g:textField id="amount_${entry.id}" name="amount_${entry.id}" style="width:180px;" value="${entry.amount}" />
+                    </td>
+                    <td>
+                      <g:select id="commissionType_${entry.id}" style="width:100px;" name="commissionType_${entry.id}" from="${storitz.constants.CommissionType?.list()}" value="${entry.commissionType}" optionValue="value" />
+                    </td>
+                    <td>
+                      <a href="#" onclick="deleteEntry(${entry.id}); return false;">delete</a>
+                    </td>
+                  </tr>
+                </g:each>
+              </tbody>
             </table>
 
             <div class="checkout_value">

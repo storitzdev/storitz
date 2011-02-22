@@ -3,6 +3,7 @@ package storitz
 import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
+import com.storitz.CommissionSchedule
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController extends FeedController {
@@ -70,7 +71,7 @@ class SiteLinkController extends FeedController {
       redirect(action: "list")
     }
     else {
-      return [siteLinkInstance: siteLinkInstance]
+      return [siteLinkInstance: siteLinkInstance, commissionScheduleList: CommissionSchedule.list()]
     }
   }
 

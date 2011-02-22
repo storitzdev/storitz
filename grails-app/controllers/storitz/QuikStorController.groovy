@@ -6,6 +6,7 @@ import storitz.constants.FeedType
 import com.storitz.QuikStor
 import com.storitz.QuikStorLocation
 import grails.converters.JSON
+import com.storitz.CommissionSchedule
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class QuikStorController extends FeedController {
@@ -69,7 +70,7 @@ class QuikStorController extends FeedController {
       redirect(action: "list")
     }
     else {
-      return [quikStorInstance: quikStorInstance]
+      return [quikStorInstance: quikStorInstance, commissionScheduleList: CommissionSchedule.list()]
     }
   }
 

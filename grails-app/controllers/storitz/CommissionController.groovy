@@ -49,13 +49,13 @@ class CommissionController {
     }
 
     def show = {
-        def commissionInstance = Commission.get(params.id)
-        if (!commissionInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'commission.label', default: 'Commission'), params.id])}"
+        def commissionScheduleInstance = CommissionSchedule.get(params.id)
+        if (!commissionScheduleInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'commission.label', default: 'Commission Schedule'), params.id])}"
             redirect(action: "list")
         }
         else {
-            [commissionInstance: commissionInstance]
+            [commissionScheduleInstance: commissionScheduleInstance, entries: commissionScheduleInstance.entries.sort{ it.lowerBound }]
         }
     }
 
@@ -97,6 +97,7 @@ class CommissionController {
           for (param in params.keySet()) {
             if (param.startsWith('new_lowerBound_')) {
               Long entryId = param.substring(15) as Long
+              println "EntryId = ${entryId}"
               def lowerBoundString = "new_lowerBound_" + entryId
               def upperBoundString = "new_upperBound_" + entryId
               def amountString = "new_amount_" + entryId

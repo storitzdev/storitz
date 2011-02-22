@@ -1034,7 +1034,7 @@
             <div class="checkout_labels checkout_name" style="margin: 2px 10px 0 0">
               <label for="contactName">Search for Contact</label>
             </div>
-            <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'rentalAgreement', 'errors')}">
+            <div style="width:300px;" class="checkout_value">
               <input type="text" style="width: 300px;" id="contactName" />
             </div>
             <div class="checkout_value">

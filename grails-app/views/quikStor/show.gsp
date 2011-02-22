@@ -95,6 +95,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="quikStor.commissionSchedule.label" default="Commission Schedule"/></td>
+
+          <td valign="top" class="value">${quikStorInstance.commissionSchedule?.scheduleName}</td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="quikStor.sites.label" default="Sites"/></td>
 
           <td valign="top" style="text-align: left;" class="value">

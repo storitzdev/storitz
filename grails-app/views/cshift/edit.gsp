@@ -208,7 +208,7 @@
 
       <div class="checkout_fields">
         <div style="width:400px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'commissionSchedule', 'errors')}">
-          <g:select name="commissionSchedule" id="commissionSchedule" class="validate-selection" style="width:200px;" from="${commissionScheduleList}" value="${cshiftInstance?.commissionSchedule}" optionValue="id"/>
+          <g:select name="commissionSchedule.id" id="commissionSchedule" class="validate-selection" style="width:200px;" from="${commissionScheduleList}" value="${cshiftInstance?.commissionSchedule}" optionKey="id" optionValue="scheduleName"/>
         </div>
         <div style="clear:both;"></div>
       </div>
