@@ -25,7 +25,7 @@ class SiteLinkController extends FeedController {
   def create = {
     def siteLinkInstance = new SiteLink()
     siteLinkInstance.properties = params
-    return [siteLinkInstance: siteLinkInstance]
+    return [siteLinkInstance: siteLinkInstance, commissionScheduleList: CommissionSchedule.list()]
   }
 
   def save = {

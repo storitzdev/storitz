@@ -28,7 +28,7 @@ class QuikStorController extends FeedController {
   def create = {
     def quikStorInstance = new QuikStor()
     quikStorInstance.properties = params
-    return [quikStorInstance: quikStorInstance]
+    return [quikStorInstance: quikStorInstance, commissionScheduleList: CommissionSchedule.list()]
   }
 
   def save = {

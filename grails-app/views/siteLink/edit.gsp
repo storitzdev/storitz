@@ -171,7 +171,7 @@
       </div>
 
       <div class="checkout_fields">
-        <div style="width:400px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'commissionSchedule', 'errors')}">
+        <div style="width:400px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'commissionSchedule', 'errors')}">
           <g:select name="commissionSchedule.id" id="commissionSchedule" class="validate-selection" style="width:200px;" from="${commissionScheduleList}" value="${siteLinkInstance?.commissionSchedule}" optionKey="id" optionValue="scheduleName"/>
         </div>
         <div style="clear:both;"></div>
