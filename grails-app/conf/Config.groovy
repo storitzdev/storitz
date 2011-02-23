@@ -165,6 +165,7 @@ uiperformance.bundles = [
             "jquery.validate.min",
             "jquery.ui.selectmenu",
             "jquery.ba-bbq",
+            "jwplayer/jwplayer",
             "json2"
             ]],
   [type: 'js',
