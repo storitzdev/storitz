@@ -784,7 +784,7 @@ class SiteLinkService extends BaseProviderService {
       site.prorateSecondMonth = prorate.b2ndMonthProrate.text().toLowerCase() == 'true'
       site.prorateStart = prorate.iDayStrtProrating.text() as Integer
       site.prorateCutoff = prorate.iDayStrtProratePlusNext.text() as Integer
-
+      site.save(flush:true)
       writer.println "Added proration 2nd Month = ${site.prorateSecondMonth}, start = ${site.prorateStart}, cutoff = ${site.prorateCutoff}"
     }
   }
