@@ -10,6 +10,7 @@ class ExrsController extends CshiftController {
 
     def fileUploadService
     def imageService
+    def exrsService
 
     static String baseUrl = "http://selfstorage.extraspace.com"
 
@@ -21,6 +22,7 @@ class ExrsController extends CshiftController {
     }
 
     def refreshPromos = {
+      def writer = new PrintWriter(System.out)
       def cshiftInstance = CenterShift.get(params.id)
       if (cshiftInstance) {
         for(site in cshiftInstance.sites) {
@@ -28,9 +30,7 @@ class ExrsController extends CshiftController {
             promo.delete()
           }
           site.specialOffers.clear()
-          def writer = new PrintWriter(System.out)
-          ExrsService.loadPromos(cshiftInstance, site, writer)
-          writer.close()
+          exrsService.loadPromos(cshiftInstance, site, writer)
           println "Promos refreshed for ${site.title}"
         }
         flash.message = "Feed promotions refreshed."
