@@ -576,23 +576,9 @@ class SiteLinkService extends BaseProviderService {
   }
 
   def createProration(siteLink) {
-    def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
-    def records = ret.declareNamespace(
-            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
-            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
-            xsd: 'http://www.w3.org/2001/XMLSchema',
-            msdata: 'urn:schemas-microsoft-com:xml-msdata',
-            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
-    )
-
-
-    for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
-      if (site) {
-        def writer = new PrintWriter(System.out)
-        addProration(siteLink, site, writer)
-        site.save()
-      }
+    PrintWriter writer = new PrintWriter(System.out)
+    for (site in siteLink.sites) {
+      addProration(siteLink, site, writer)
     }
   }
 
