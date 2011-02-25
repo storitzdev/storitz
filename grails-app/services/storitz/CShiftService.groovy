@@ -894,9 +894,9 @@ class CShiftService extends BaseProviderService {
           writer.println "Skipping due to size: length = ${length}, width = ${width}"
         }
       }
-      if (!site.adminFee) {
-        site.adminFee = adminFee
-      }
+    }
+    if (!site.adminFee) {
+      site.adminFee = adminFee
     }
   }
 
