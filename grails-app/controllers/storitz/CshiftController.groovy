@@ -39,7 +39,7 @@ class CshiftController extends FeedController {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftService.loadSites(cshiftInstance, stats, writer)
+        CShiftService.loadSites(cshiftInstance, "CS3", stats, writer)
       } else {
         CShift4Service.loadSites(cshiftInstance, stats, writer)
       }
@@ -57,7 +57,7 @@ class CshiftController extends FeedController {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftService.refreshSites(cshiftInstance, stats, writer)
+        CShiftService.refreshSites(cshiftInstance, 'CS3', stats, writer)
       } else {
         CShift4Service.refreshSites(cshiftInstance, stats)
       }
@@ -105,7 +105,7 @@ class CshiftController extends FeedController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def writer = new PrintWriter(System.out)
-      CShiftService.createSitePhones(cshiftInstance, writer)
+      CShiftService.createSitePhones(cshiftInstance, "CS3", writer)
       writer.close()
       flash.message = "Feed phones refreshed."
       redirect(action: "show", id: cshiftInstance.id)
@@ -183,7 +183,7 @@ class CshiftController extends FeedController {
   def createContacts = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      CShiftService.createSiteUsers(cshiftInstance)
+      CShiftService.createSiteUsers(cshiftInstance, "CS3")
       flash.message = "Site contacts created."
       redirect(action: "list")
     }

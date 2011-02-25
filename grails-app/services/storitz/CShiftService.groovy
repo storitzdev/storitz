@@ -238,7 +238,7 @@ class CShiftService extends BaseProviderService {
     }
   }
 
-  def loadSites(cshift, stats, writer) {
+  def loadSites(cshift, feedType, stats, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -253,7 +253,7 @@ class CShiftService extends BaseProviderService {
       def publishable = tab.PUBLISH_WWW.text() == 'Y'
 
       if (publishable) {
-        StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+        StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
         def newSite = false
         if (site) {
           stats.updateCount++
@@ -273,12 +273,12 @@ class CShiftService extends BaseProviderService {
           site.minInventory = 0
           newSite = true
         }
-        getSiteDetails(cshift, site, tab, stats, newSite, writer)
+        getSiteDetails(cshift, site, feedType, tab, stats, newSite, writer)
       }
     }
   }
 
-  def refreshSites(cshift, stats, writer) {
+  def refreshSites(cshift, feedType, stats, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -290,13 +290,13 @@ class CShiftService extends BaseProviderService {
 
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
-      StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
       if (!site) {
         writer.println "Found and creating new site: ${tab.SITE_NAME.text()}"
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
-        getSiteDetails(cshift, site, tab, stats, true, writer)
+        getSiteDetails(cshift, site, feedType, tab, stats, true, writer)
       }
     }
   }
@@ -315,7 +315,7 @@ class CShiftService extends BaseProviderService {
 
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
-      StorageSite foundSite = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      StorageSite foundSite = StorageSite.findBySourceAndSourceId(site.source, tab.SITE_ID.text())
       if (foundSite == site) {
         site.units.each {unit ->
           unit.delete()
@@ -332,16 +332,16 @@ class CShiftService extends BaseProviderService {
         site.lastUpdate = 0
         site.save(flush: true)
 
-        getSiteDetails(centerShift, site, tab, stats, false, writer)
+        getSiteDetails(centerShift, site, site.source, tab, stats, false, writer)
       }
     }
   }
 
-  def getSiteDetails(cshift, site, tab, stats, newSite, writer) {
+  def getSiteDetails(cshift, site, siteSource, tab, stats, newSite, writer) {
 
       site.sourceId = tab.SITE_ID.text()
       site.sourceLoc = tab.SITE_NUMBER.text()
-      site.source = "CS3"
+      site.source = siteSource
       site.title = tab.SITE_NAME.text().replace('/', '-')
 
       if (site.title ==~/(?i).*(test|training)\s?+.*/) {
@@ -387,7 +387,7 @@ class CShiftService extends BaseProviderService {
       site.save(flush: true)
   }
 
-  def createSiteUsers(cshift) {
+  def createSiteUsers(cshift, feedType) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -399,7 +399,7 @@ class CShiftService extends BaseProviderService {
 
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
-      StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
       println "Create contact for site ${tab.SITE_ID.text()}"
       if (site) {
         def email = tab.EMAIL_ADDRESS.text()
@@ -411,7 +411,7 @@ class CShiftService extends BaseProviderService {
     }
   }
 
-  def createSitePhones(cshift, writer) {
+  def createSitePhones(cshift, feedType, writer) {
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -423,7 +423,7 @@ class CShiftService extends BaseProviderService {
 
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
-      StorageSite site = StorageSite.findBySourceAndSourceId("CS3", tab.SITE_ID.text())
+      StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
       writer.println "Create phone for site ${tab.SITE_ID.text()}"
       if (site) {
         addSitePhone(cshift, site, writer)

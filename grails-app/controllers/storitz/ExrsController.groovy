@@ -5,6 +5,7 @@ import com.storitz.Feed
 import com.storitz.StorageSite
 import com.storitz.User
 import storitz.constants.CenterShiftVersion
+import storitz.constants.FeedType
 
 class ExrsController extends CshiftController {
 
@@ -21,6 +22,22 @@ class ExrsController extends CshiftController {
       [cshiftInstanceList: feedList, cshiftInstanceTotal: feedList.size()]
     }
 
+    def save = {
+      def cshiftInstance = new CenterShift(params)
+      cshiftInstance.feedType = FeedType.CENTERSHIFT
+      if (cshiftInstance.validate() && cshiftInstance.save(flush: true)) {
+        // read in sites
+        def stats = new storitz.SiteStats()
+        def writer = new PrintWriter(System.out)
+        exrsService.loadSites(cshiftInstance, "EX", stats, writer)
+        flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
+        redirect(action: "show", id: cshiftInstance.id)
+      }
+      else {
+        render(view: "create", model: [cshiftInstance: cshiftInstance])
+      }
+    }
+
     def refreshPromos = {
       def writer = new PrintWriter(System.out)
       def cshiftInstance = CenterShift.get(params.id)
@@ -34,6 +51,37 @@ class ExrsController extends CshiftController {
           println "Promos refreshed for ${site.title}"
         }
         flash.message = "Feed promotions refreshed."
+        redirect(action: "show", id: cshiftInstance.id)
+      }
+    }
+
+    def refresh = {
+      def cshiftInstance = CenterShift.get(params.id)
+      if (cshiftInstance) {
+        def stats = new storitz.SiteStats()
+        def writer = new PrintWriter(System.out)
+        exrsService.refreshSites(cshiftInstance, 'EX', stats, writer)
+        flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
+        redirect(action: "show", id: cshiftInstance.id)
+      }
+    }
+
+    def createContacts = {
+      def cshiftInstance = CenterShift.get(params.id)
+      if (cshiftInstance) {
+        CShiftService.createSiteUsers(cshiftInstance, "EX")
+        flash.message = "Site contacts created."
+        redirect(action: "list")
+      }
+    }
+
+    def refreshPhones = {
+      def cshiftInstance = CenterShift.get(params.id)
+      if (cshiftInstance) {
+        def writer = new PrintWriter(System.out)
+        CShiftService.createSitePhones(cshiftInstance, "EX", writer)
+        writer.close()
+        flash.message = "Feed phones refreshed."
         redirect(action: "show", id: cshiftInstance.id)
       }
     }

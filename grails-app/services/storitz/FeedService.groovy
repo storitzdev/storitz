@@ -33,7 +33,7 @@ class FeedService {
         break
 
       case "EX":
-        CShiftService.updateSite(storageSiteInstance, stats, writer)
+        exrsService.updateSite(storageSiteInstance, stats, writer)
         break
 
       default:
