@@ -882,7 +882,7 @@ class BootStrap {
     new UnitTypeLookup(id:374, description:"(rv) Parking",  unitType:UnitType.UNCOVERED,  searchType:SearchType.PARKING, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:375, description:"Breezeway",  unitType:UnitType.UNDEFINED,  searchType:SearchType.STORAGE, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:376, description:"Ground Climate Controlled",  unitType:UnitType.INTERIOR,  searchType:SearchType.STORAGE, tempControlled:true).save(validate:false)
-    new UnitTypeLookup(id:377, description:"OUT",  unitType:UnitType.UNDEFINED,  searchType:SearchType.STORAGE, tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:377, description:"OUT",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:378, description:"IN",  unitType:UnitType.UNDEFINED,  searchType:SearchType.STORAGE, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:379, description:"MAIL BOX",  unitType:UnitType.UNDEFINED,  searchType:SearchType.STORAGE, tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:380, description:"IN REPAIR",  unitType:UnitType.UNDEFINED,  searchType:SearchType.STORAGE, tempControlled:false).save(validate:false)
