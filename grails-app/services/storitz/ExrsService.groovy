@@ -285,7 +285,7 @@ class ExrsService extends CShiftService {
             break
 
           default:
-            writer.println "Unknown promoType: ${ptype}"
+            writer.println "Unknown promoType: ${discountType}"
             return
         }
         specialOffer.save(flush:true)
