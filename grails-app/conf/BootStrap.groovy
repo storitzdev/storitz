@@ -1448,5 +1448,6 @@ class BootStrap {
     new UnitTypeLookup(id:932, description:"PON",  unitType:UnitType.UNCOVERED,  searchType:SearchType.PARKING,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:933, description:"RAA",  unitType:UnitType.UNDEFINED,  searchType:SearchType.UNDEFINED,  tempControlled:false).save(validate:false)
     new UnitTypeLookup(id:934, description:"WAA",  unitType:UnitType.UNDEFINED,  searchType:SearchType.UNDEFINED,  tempControlled:false).save(validate:false)
+    new UnitTypeLookup(id:935, description:"Out",  unitType:UnitType.DRIVEUP,  searchType:SearchType.STORAGE,  tempControlled:false).save(validate:false)
   }
 }
