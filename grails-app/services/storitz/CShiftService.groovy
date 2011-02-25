@@ -778,12 +778,14 @@ class CShiftService extends BaseProviderService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
+    def adminFee
     for (unit in records.'soap:Body'.'*:GetSiteUnitDataResponse'.'*:GetSiteUnitDataResult'.'*:SiteUnitData'.'*:Unit') {
 
       def vacant = unit.VACANT.text() as Integer
       def totalUnits = unit.TOTAL.text () as Integer
       def typeName = unit.VALUE.text()
       def attributes = unit.ATTRIBUTES.text()
+      adminFee = unit.ADMIN_FEE.text() as BigDecimal
 
       def dimensions = unit.DIMENSIONS.text()
       def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
@@ -891,6 +893,9 @@ class CShiftService extends BaseProviderService {
         } else {
           writer.println "Skipping due to size: length = ${length}, width = ${width}"
         }
+      }
+      if (!site.adminFee) {
+        site.adminFee = adminFee
       }
     }
   }
