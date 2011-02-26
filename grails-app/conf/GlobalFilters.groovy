@@ -58,21 +58,6 @@ class GlobalFilters {
                    response.addCookie(landingCookie)
                }
 
-               if (params.sem_id) {
-                 def locationId = SEMLocation.get(params.location_id as Long)
-                 def address = ''
-                 if (locationId) {
-                   address = "${locationId.city}, ${locationId.state.display}"
-                   // Search for "location_id" which will be something like "city, ST" or a zip code.
-                 } else if (params.location_id?.size() == 5) {
-                   address = params.location_id
-                 }
-                 // println "Have SEM parameters supplied.  Redirecting to home... address = ${address}"
-                 redirect(controller:'home', action:'index', params:[address:address])
-
-                 return false
-               }
-
                return true
            }
        }

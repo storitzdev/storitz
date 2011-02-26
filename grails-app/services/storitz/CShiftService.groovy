@@ -1421,26 +1421,6 @@ class CShiftService extends BaseProviderService {
     def waiveAdmin = false
     def deposit = site.deposit ? site.deposit : 0
 
-
-    if (promo) {
-
-      waiveAdmin = promo.waiveAdmin
-
-      switch (promo.promoType) {
-        case "AMOUNT_OFF":
-          offerDiscount = promo.promoQty;
-          break;
-
-        case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * rate
-          break;
-
-        case "FIXED_RATE":
-          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promoMonths;
-          break;
-      }
-    }
-
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -1467,6 +1447,25 @@ class CShiftService extends BaseProviderService {
       cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+    }
+
+    if (promo) {
+
+      waiveAdmin = promo.waiveAdmin
+
+      switch (promo.promoType) {
+        case "AMOUNT_OFF":
+          offerDiscount = promo.promoQty;
+          break;
+
+        case "PERCENT_OFF":
+          offerDiscount = (promo.promoQty/100.0) * promoMonths * rate
+          break;
+
+        case "FIXED_RATE":
+          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promoMonths;
+          break;
+      }
     }
 
     BigDecimal insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
