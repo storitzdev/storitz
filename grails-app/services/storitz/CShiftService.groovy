@@ -1438,15 +1438,29 @@ class CShiftService extends BaseProviderService {
       if (durationMonths - 1 > 0) {
         cal.add(Calendar.MONTH, ((durationMonths - 1) as Integer))
       }
+      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     } else {
       cal.add(Calendar.MONTH, (durationMonths as Integer))
     }
 
-    def durationDays = 0
+    def subTotal
+    def rentTotal
+    def discountRate
+    def durationDays
+    BigDecimal insuranceCost  = 0
     if (site.useProrating) {
-      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+      insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      subTotal = rentTotal + insuranceCost
+      discountRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+    } else {
+      insuranceCost = (premium*durationMonths)
+      rentTotal = (rate*durationMonths)
+      subTotal = rentTotal + insuranceCost
+      discountRate = rate
+      durationDays = 0
     }
 
     if (promo) {
@@ -1459,19 +1473,16 @@ class CShiftService extends BaseProviderService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * promoMonths * rate
+          offerDiscount = (promo.promoQty/100.0) * (discountRate + (promoMonths - 1) * rate);
           break;
 
         case "FIXED_RATE":
-          offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty): 0) * promoMonths;
+          offerDiscount = ((discountRate - promo.promoQty) > 0 ? (discountRate - promo.promoQty): 0) * promoMonths;
           break;
       }
     }
 
-    BigDecimal insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP)
-    def subTotal =  rentTotal + insuranceCost
     // TODO handle AZ insurance tax
     def tax = 0 //((premium * durationMonths) * (unit.taxRate)).setScale(2, RoundingMode.HALF_UP)
 
@@ -1483,8 +1494,8 @@ class CShiftService extends BaseProviderService {
     ret["rentTotal"] = rentTotal
     ret["insuranceCost"] = insuranceCost
     ret["tax"] = tax
-    ret["moveInTotal"] = moveInTotal
     ret["deposit"] = deposit
+    ret["moveInTotal"] = moveInTotal
     ret["paidThruDate"] = cal.time.format('MM/dd/yy')
     ret["paidThruDateMillis"] = cal.time
     ret["durationMonths"] =  (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
