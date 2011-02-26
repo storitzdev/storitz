@@ -95,6 +95,7 @@ class MigrationController {
         feed.feedType = FeedType.QUIKSTOR
         // TODO - cycle through and build the QuikStorLocations
       }
+      CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)
       // create the manager first
       // handle users
       def users = []
@@ -345,7 +346,7 @@ class MigrationController {
 
       }
       feed.manager = manager
-      feed.commissionSchedule = 1
+      feed.commissionSchedule = commissionSchedule
       feed.save(flush:true)
       for(site in sites) {
         feed.addToSites(site)
