@@ -345,6 +345,7 @@ class MigrationController {
 
       }
       feed.manager = manager
+      feed.commissionSchedule = 1
       feed.save(flush:true)
       for(site in sites) {
         feed.addToSites(site)
