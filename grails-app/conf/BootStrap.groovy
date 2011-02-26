@@ -163,6 +163,7 @@ class BootStrap {
       returnArray['city'] = it.city
       returnArray['state'] = it.state
       returnArray['zipcode'] = it.zipcode
+      returnArray['commissionSchedule'] = 1
       returnArray['sites'] = it.sites
 
       return returnArray
@@ -185,6 +186,7 @@ class BootStrap {
       returnArray['city'] = it.city
       returnArray['state'] = it.state
       returnArray['zipcode'] = it.zipcode
+      returnArray['commissionSchedule'] = 1
       returnArray['sites'] = it.sites
 
       return returnArray
