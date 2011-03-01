@@ -271,6 +271,7 @@ class CShiftService extends BaseProviderService {
           stats.createCount++
           site.lastUpdate = 0
           site.minInventory = 0
+          site.rentalFee = 0
           newSite = true
         }
         getSiteDetails(cshift, site, feedType, tab, stats, newSite, writer)
@@ -296,6 +297,8 @@ class CShiftService extends BaseProviderService {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
+        site.minInventory = 0
+        site.rentalFee = 0
         getSiteDetails(cshift, site, feedType, tab, stats, true, writer)
       }
     }

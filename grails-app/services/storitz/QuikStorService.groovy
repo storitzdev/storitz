@@ -58,6 +58,7 @@ class QuikStorService extends BaseProviderService {
           site.feed = quikStor
           site.transactionType = TransactionType.RENTAL
           site.minInventory = 0
+          site.rentalFee = 0
           loc.site = site
           updateSite(site, stats, writer)
           SiteUser.link(site, quikStor.manager)
@@ -376,10 +377,6 @@ class QuikStorService extends BaseProviderService {
         return true
       }
       return false
-    }
-
-    def moveInDetail(RentalTransaction trans) {
-      // TODO - call moveInCost with special information      
     }
 
     def createTenant(RentalTransaction trans) {

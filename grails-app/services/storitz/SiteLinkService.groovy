@@ -494,6 +494,8 @@ class SiteLinkService extends BaseProviderService {
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
+        site.minInventory = 0
+        site.rentalFee = 0
         if (tab.sSitePostalCode.text().size() >= 5 && tab.sSitePostalCode.text().substring(0, 5).isNumber()) {
           getSiteDetails(siteLink, site, tab, stats, true, writer)
         }
@@ -525,6 +527,8 @@ class SiteLinkService extends BaseProviderService {
         stats.createCount++
         site.lastUpdate = 0
         site.lastChange = new Date()
+        site.minInventory = 0
+        site.rentalFee = 0
         newSite = true
       }
       if (tab.sSitePostalCode.text().isNumber()) {

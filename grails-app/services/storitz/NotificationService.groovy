@@ -60,6 +60,7 @@ class NotificationService {
         rentalAgreementLink = g.resource(file: rentalTransaction.site.rentalAgreement.src())
       }
       String promoName = rentalTransaction.promoName
+      String insuranceName = rentalTransaction.insuranceName
       String siteAddress = rentalTransaction.site.getFullAddress()
       String directionsLink = g.createLink(controller:"storageSite", action:"directions", id:rentalTransaction.site.id)
       String billingName = rentalTransaction.billingAddress.fullName()
@@ -87,8 +88,10 @@ class NotificationService {
         ccNum: rentalTransaction.cleanCCNum,
         rentalRate: nf.format(rentalTransaction.monthlyRate),
         promoName: promoName,
-        paymentTotal: nf.format(rentalTransaction.cost),
-        moveInCost: nf.format(rentalTransaction.feedMoveInCost),
+        insuranceName: insuranceName,
+        paymentTotal: nf.format(rentalTransaction.moveInCost),
+        moveInCost: nf.format(rentalTransaction.moveInCost),
+        rentalFee: nf.format(rentalTransaction.cost),
         rentalAgreementLink: rentalAgreementLink,
         unitNumber: rentalTransaction.feedUnitNumber,
         commission: nf.format(rentalTransaction.commission),

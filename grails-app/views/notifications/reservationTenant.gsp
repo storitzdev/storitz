@@ -49,7 +49,9 @@
     <li>Rent is Paid Through: ${paidThruDate}</li>
     <li>Unit Size: ${displaySize}</li>
     <li>Promotion(s): ${promoName}</li>
-    <li>Amount due at Move-In: ${paymentTotal}</li>
+    <li>Property Protection: ${insuranceName}</li>
+    <li>Amount due at Move-In: ${moveInCost}</li>
+    <li>Reservation Fee billed to your credit card: ${rentalFee}</li>
   </ul>
   <div style="height: 30px;"></div>
   <g:if test="${rentalAgreementLink}">

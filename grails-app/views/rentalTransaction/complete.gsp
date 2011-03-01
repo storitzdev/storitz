@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.TransactionType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -62,11 +63,18 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
             <div class="price_options checkout_header white">
               Checkout Confirmation
             </div>
-            <div class="formInstructions">
-              Congratulations, you have successfully rented a self-storage unit. We thank you for choosing Storitz and making your experience as easy as Click. Store. Done.
-              Below is a summary of your transaction.
-            </div>
-
+            <g:if test="${rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION}">
+              <div class="formInstructions">
+                Congratulations, you have successfully reserved a self-storage unit. We thank you for choosing Storitz and making your experience as easy as Click. Store. Done.
+                Below is a summary of your transaction.
+              </div>
+            </g:if>
+            <g:else>
+              <div class="formInstructions">
+                Congratulations, you have successfully rented a self-storage unit. We thank you for choosing Storitz and making your experience as easy as Click. Store. Done.
+                Below is a summary of your transaction.
+              </div>
+            </g:else>
             <div class="checkout_section_header">
               Rental Summary
             </div>
@@ -176,12 +184,31 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
                     <td>${promo.promoName}</td>
                   </tr>
                 </g:if>
-                <tr>
-                  <td style="width:200px;">Move-In Cost:</td>
-                  <td><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></td>
-                </tr>
+                <g:if test="${rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION}">
+                  <tr>
+                    <td style="width:200px;">Reservation Fee:</td>
+                    <td><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></td>
+                  </tr>
+                  <tr>
+                    <td style="width:200px;">Total Due at Move In:</td>
+                    <td><g:formatNumber number="${rentalTransactionInstance.moveInCost}" type="currency" currencyCode="USD"/></td>
+                  </tr>
+                </g:if>
+                <g:else>
+                  <tr>
+                    <td style="width:200px;">Move-In Cost:</td>
+                    <td><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></td>
+                  </tr>
+                </g:else>
               </table>
             </div>
+
+            <g:if test="${rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION}">
+              <div style="height: 30px;"></div>
+              <p>
+                Your reservation fee will be credited to your move-in cost on the day of your move-in.
+              </p>
+            </g:if>
 
             <div style="height: 30px;"></div>
             <g:if test="${site.rentalAgreement}">

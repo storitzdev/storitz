@@ -44,8 +44,11 @@ class MoveInService {
         case "CS4":
           break
 
-        case "CS3":
+        case "QS":
           return quikStorService.moveInDetail(trans)
+
+        case "EX":
+          return exrsService.moveInDetail(trans)
 
         default:
           throw new Exception("Unknown service for move in detail")
@@ -70,6 +73,11 @@ class MoveInService {
         case "QS":
           quikStorService.createTenant(trans)
           return quikStorService.moveIn(trans)
+          break
+
+        case "EX":
+          // TODO - create email notification to fill in form
+          return exrsService.moveIn(trans)
           break
 
         default:

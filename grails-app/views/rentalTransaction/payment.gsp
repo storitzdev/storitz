@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.TransactionType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -123,6 +124,19 @@
                     </div>
                     <div style="height: 10px;clear:both;"></div>
                     <div class="right">
+                      <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                        <div class="left" style="margin-right:25px;">
+                          <p>Reservation Details</p>
+                          <ul>
+                            <li>Hold your unit until Move-In date</li>
+                            <li>Take Advantage of Special Offer</li>
+                            <li>Get this Rent rate when you Move-In</li>
+                            <g:if test="${site.rentalFee}">
+                              <li>Refundable until Move-In date</li>
+                            </g:if>
+                          </ul>
+                        </div>
+                      </g:if>
                       <div id="costDetails" class="right">
                         <table id="costTotals">
                           <g:each var="item" in="${moveInDetails?.items}">
@@ -149,6 +163,15 @@
                         <div class="left">
                           <a href="#" id="totalMoveInCost" onclick="Effect.toggle('costDetails', 'appear', { duration: 0.25 }); return false;"><g:formatNumber number="${moveInDetails.total()}" type="currency" currencyCode="USD" /></a>
                         </div>
+                        <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                          <div style="clear:both;"></div>
+                          <div class="left" style="margin-right: 30px;">
+                            Reserve Today:
+                          </div>
+                          <div class="right">
+                            <span><g:formatNumber number="${site.rentalFee}" currencyCode="USD" type="currency"/></span>
+                          </div>
+                        </g:if>
                       </div>
                       <div style="clear:both;"></div>
                     </div>

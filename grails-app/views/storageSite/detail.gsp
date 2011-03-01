@@ -287,6 +287,7 @@
                   Name
                 </div>
                 <div class="checkout_fields">
+                  <input type="hidden" name="contactPrimary.id" value="${rentalTransactionInstance?.contactPrimary?.id}"/> 
                   <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.firstName', 'errors')}">
                       <g:textField id="contactPrimary.firstName" name="contactPrimary.firstName" style="width: 180px;" class="required" value="${rentalTransactionInstance?.contactPrimary?.firstName}" />
                   </div>

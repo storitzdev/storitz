@@ -174,6 +174,7 @@ class RentalTransactionController {
       if (!rentalTransactionInstance) {
           flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
           // TODO - handle error of not found transaction
+        println "Could not find rental transaction"
         [rentalTransactionInstance: rentalTransactionInstance, storageSite: rentalTransactionInstance.site]
         return
       }
@@ -191,11 +192,10 @@ class RentalTransactionController {
         return
       }
 
-      def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
-      if (!moveInDetails) {
+      if (!moveInService.checkRented(rentalTransactionInstance)) {
         def found = false
         def bestUnitList = rentalTransactionInstance.site.units.findAll{ it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.sort{ it.price }
-        println "BestUnit size = ${bestUnitList.size()}"
+        println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
         for(myUnit in bestUnitList) {
           rentalTransactionInstance.unitId = myUnit.id
           if (moveInService.checkRented(rentalTransactionInstance)) {
@@ -217,11 +217,11 @@ class RentalTransactionController {
         } else {
           flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
         }
-        moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
       }
+      def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
       rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
 
-      if (rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION) {
+      if (rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION && rentalTransactionInstance.site.rentalFee == 0) {
         performTransaction(rentalTransactionInstance, true)
         return
       }
@@ -289,7 +289,12 @@ class RentalTransactionController {
       // TODO - compare calculated cost to our cost
       rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
       def costTotals = costService.calculateTotals(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate)
-      rentalTransactionInstance.cost = costTotals["moveInTotal"]
+      if (rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION) {
+        rentalTransactionInstance.cost = rentalTransactionInstance.site.rentalFee
+      } else {
+        rentalTransactionInstance.cost = costTotals["moveInTotal"]
+      }
+      rentalTransactionInstance.moveInCost = costTotals["moveInTotal"]
       rentalTransactionInstance.duration = costTotals["duration"]
       rentalTransactionInstance.discount = costTotals["discountTotal"]
       rentalTransactionInstance.fees = costTotals["feesTotal"]
@@ -306,6 +311,8 @@ class RentalTransactionController {
       }
       if (ins) {
         rentalTransactionInstance.insuranceName = "Total Coverage: ${g.formatNumber(number:ins.totalCoverage, type:'currency', currencyCode:'USD')} Theft: ${g.formatNumber(number:ins.percentTheft, type:'percent')}"
+      } else {
+        rentalTransactionInstance.insuranceName = "None purchased"
       }
 
       if (!isReservation) {
@@ -340,8 +347,21 @@ class RentalTransactionController {
             ccExpDate ccExpVal
             amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
           }
+        } else if (rentalTransactionInstance.site.source == "EX") {
+          s.authorizeOnly {
+            custId rentalTransactionInstance.id as String
+            firstName rentalTransactionInstance.billingAddress.firstName
+            lastName rentalTransactionInstance.billingAddress.lastName
+            address "${rentalTransactionInstance.billingAddress.address1}${rentalTransactionInstance.billingAddress.address2 ? ' ' + rentalTransactionInstance.billingAddress.address2 : ''}"
+            city rentalTransactionInstance.billingAddress.city
+            state rentalTransactionInstance.billingAddress.state.display
+            zip rentalTransactionInstance.billingAddress.zipcode
+            ccNumber ccNum
+            cvv params.cc_cvv2
+            ccExpDate ccExpVal
+            amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          }
         } else {
-
           s.authorizeAndCapture {
             custId rentalTransactionInstance.id as String
             firstName rentalTransactionInstance.billingAddress.firstName

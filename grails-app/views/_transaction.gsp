@@ -77,6 +77,9 @@
             <li>Hold your unit until Move-In date</li>
             <li>Take Advantage of Special Offer</li>
             <li>Get this Rent rate when you Move-In</li>
+            <g:if test="${site.rentalFee}">
+              <li>Refundable until Move-In date</li>
+            </g:if>
           </ul>
         </div>
       </g:if>
@@ -144,7 +147,7 @@
             Reserve Today:
           </div>
           <div class="right">
-            <span>$0.00</span>
+            <span><g:formatNumber number="${site.rentalFee}" currencyCode="USD" type="currency"/></span>
           </div>
         </g:if>
       </div>

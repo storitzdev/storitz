@@ -39,7 +39,8 @@
     <li>Rental Rate: ${rentalRate}</li>
     <li>Rent is Paid Through: ${paidThruDate}</li>
     <li>Promotion(s): ${promoName}</li>
-    <li>Payment Received: ${paymentTotal}</li>
+    <li>Property Protection: ${insuranceName}</li>
+    <li>Payment Received: ${moveInCost}</li>
     <li>Storitz Commission: ${commission}</li>
   </ul>
   <p style="font-weight:bold;">

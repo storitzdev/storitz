@@ -130,6 +130,7 @@ class StorageSite {
     BigDecimal adminFee     = 0
     BigDecimal lockFee      = 0
     BigDecimal deposit      = 0
+    BigDecimal rentalFee    = 0
 
   // Proration cutoff (SiteLink)
     Integer prorateStart    = 5

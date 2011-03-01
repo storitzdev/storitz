@@ -52,10 +52,6 @@ abstract class BaseProviderService {
 
   def moveInDetail(RentalTransaction rentalTransaction) {
 
-    if (!checkRented(rentalTransaction)) {
-      return null
-    }
-
     def insId = -1
     def ins
     if (rentalTransaction.insuranceId > 0) {
@@ -66,6 +62,7 @@ abstract class BaseProviderService {
     def promo = rentalTransaction.promoId > 0 ? SpecialOffer.get(rentalTransaction.promoId) : null
 
     def detailList = calculateTotals(rentalTransaction.site, unit, promo, ins, rentalTransaction.moveInDate)
+
     def moveInDetails = new MoveInDetails()
     if (detailList["rentTotal"] && detailList["rentTotal"] > 0) {
       moveInDetails.items.add(new LineItem(description:"Rent", tax:0 as BigDecimal, amount: detailList["rentTotal"] as BigDecimal))

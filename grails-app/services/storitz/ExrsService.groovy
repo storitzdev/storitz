@@ -15,6 +15,8 @@ import com.storitz.RentalTransaction
 
 class ExrsService extends CShiftService {
 
+  def emailService
+
   static String baseUrl = "http://selfstorage.extraspace.com"
 
   // unit availability
@@ -166,6 +168,8 @@ class ExrsService extends CShiftService {
               siteUnit.pushRate = pushRate
               siteUnit.price = price
               siteUnit.taxRate = 0
+              siteUnit.unitSizeInfo = dimensions
+              siteUnit.unitTypeInfo = attributes
               stats.unitCount += 1
             }
             siteUnit.save(flush:true)
@@ -310,6 +314,7 @@ class ExrsService extends CShiftService {
 
   // check rented
   def checkRented(RentalTransaction rentalTransaction) {
+
     StorageSite site = rentalTransaction.site
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
 
@@ -317,20 +322,19 @@ class ExrsService extends CShiftService {
       return false
     }
     
-    println "Check rented Opening page: ${baseUrl + site.url}"
     def siteHtml = new URL(baseUrl + site.url).text
     // build list of valid ids
     def idList = []
     def idMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl(\d+)_Dimensions" value="${unit.unitSizeInfo}"/
     if (idMatcher.getCount()) {
-      idMatcher.each {
-        def unitId = it[1]
+      for (idMatch in idMatcher) {
+        def unitId = idMatch[1]
         def attributeMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_UnitAttributesCode" value="${unit.unitTypeInfo}"/
         if (attributeMatcher.getCount()) {
           def reservationMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
           if (reservationMatcher.getCount()) {
             Integer reservationDeposit = Integer.parseInt(reservationMatcher[0][1])
-            if (reservationDeposit >= 0) return true
+            return (reservationDeposit >= 0)
           }
         }
       }
@@ -338,7 +342,44 @@ class ExrsService extends CShiftService {
     return false
   }
 
-  private get
-
   // reserve/move-in
+  def moveIn(RentalTransaction trans) {
+
+    trans.idNumber = trans.bookingDate.format('yyyyddMM') + sprintf('%08d', trans.id)
+
+    def buf = new ByteArrayOutputStream()
+    PrintWriter bodyWriter = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
+
+    bodyWriter.println "New EXRS Reservation Info\n"
+    bodyWriter.println "First Name: ${trans.contactPrimary.firstName}"
+    bodyWriter.println "Last Name: ${trans.contactPrimary.lastName}"
+    bodyWriter.println "Email: ${trans.contactPrimary.email}"
+    bodyWriter.println "Phone: ${trans.contactPrimary.phone}"
+    bodyWriter.println "Address: ${trans.contactPrimary.address1}"
+    bodyWriter.println "City: ${trans.contactPrimary.city}"
+    bodyWriter.println "State: ${trans.contactPrimary.state.display}"
+    bodyWriter.println "Zip code: ${trans.contactPrimary.zipcode}"
+    bodyWriter.println "\n------------------------------------------\n"
+    bodyWriter.println "Move In Date: ${trans.moveInDate.format("MM/dd/yyyy")}"
+    bodyWriter.println "Primary User: ${trans.rentalUse.display}"
+    bodyWriter.println "\n------------------------------------------\n"
+    bodyWriter.println "Card Type: ${trans.cardType.display}"
+    bodyWriter.println "Card Number: ${trans.ccNum}"
+    bodyWriter.println "Expiration: ${trans.ccExpDate.format("MM/yyyy")}"
+    bodyWriter.println "CVV2 / Verification: ${trans.cvv2}"
+
+    def body = buf.toString()
+    String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"
+
+    emailService.sendTextEmail(
+            to: 'exrs@storitz.com',
+            from: 'no-reply@storitz.com',
+            subject: title,
+            body: body
+    )
+
+    trans.save(flush:true)
+    
+    return true
+  }
 }
