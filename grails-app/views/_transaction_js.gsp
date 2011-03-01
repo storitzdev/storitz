@@ -15,6 +15,7 @@ var chosenPromo = '';
 var chosenPromoId = ${promoId ? promoId : -999};
 var totalMoveInCost = additionalFees + monthlyRent;
 var unitTypes = [];
+var sizeList = [];
 var discountTotal = 0;
 var chosenUnitType = '${chosenUnitType}';
 var chosenUnitTypeDisplay = '${chosenUnitType?.display}'

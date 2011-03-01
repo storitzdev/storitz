@@ -12,13 +12,21 @@ function updateTransaction() {
 
   // update dropdowns
   $('#unitType').children().each(function(index) { $(this).remove(); });
-
   $.each(unitTypes, function (index, unitType) {
      var opt = $("<option>", {
        selected: unitType.type == chosenUnitType,
        value: unitType.type
      }).text(unitType.value);
      $('#unitType').append(opt);
+  });
+
+  $('#unitsize').children().each(function(index) { $(this).remove(); });
+  $.each(sizeList, function (index, unitsize) {
+    var opt = $("<option>", {
+      selected: unitsize.id == searchSize,
+      value: unitsize.id
+    }).text(unitsize.description);
+    $('#unitsize').append(opt);
   });
   $('#chosenType').val(chosenUnitType);
   $('#SC_searchSize').val(searchSize);
@@ -262,6 +270,7 @@ function showTotals(action) {
       durationDays = ret.totals.durationDays;
       durationMonths = ret.totals.durationMonths;
       unitTypes = ret.totals.unitTypes;
+      sizeList = ret.totals.sizeList;
       chosenPromo = ret.totals.chosenPromo;
       chosenInsurance = ret.totals.chosenInsurance;
       chosenUnitType = ret.totals.chosenUnitType;

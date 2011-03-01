@@ -13,7 +13,9 @@
       <div class="transHeader">Unit Size</div>
       <div>
         <div class="left">
-          <g:select id="unitsize" class="transDropdown" name="unitsize" from="${sizeList}" optionValue="description" value="${params.size}" optionKey="id" />
+          <select id="unitsize" name="unitsize" class="transDropdown">
+            <option value=""></option>
+          </select>
         </div>
         <div class="left sizeGuide">
           size guide
