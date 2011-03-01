@@ -367,6 +367,11 @@ class ExrsService extends CShiftService {
     bodyWriter.println "Card Number: ${trans.ccNum}"
     bodyWriter.println "Expiration: ${trans.ccExpDate.format("MM/yyyy")}"
     bodyWriter.println "CVV2 / Verification: ${trans.cvv2}"
+    bodyWriter.println "\n------------------------------------------\n"
+    bodyWriter.println "Site Name: ${trans.site.title}"
+    bodyWriter.println "Site Address: ${trans.site.address}"
+    bodyWriter.println "Site City: ${trans.site.city}"
+    bodyWriter.println "Site State: ${trans.site.state.display}"
 
     def body = buf.toString()
     String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"

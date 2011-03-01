@@ -206,7 +206,8 @@ _gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
             <g:if test="${rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION}">
               <div style="height: 30px;"></div>
               <p>
-                Your reservation fee will be credited to your move-in cost on the day of your move-in.
+                Your reservation fee will be credited to your move-in cost on the day of your move-in.  Some facilities may require that you purchase insurance on the day of your move-in at an additional charge.  If you have
+                renter's insurance, bring proof to the facility on your move-in date.
               </p>
             </g:if>
 

@@ -130,6 +130,7 @@ class BootStrap {
       returnArray['lastChange'] = it.lastChange
       returnArray['lastUpdate'] = 0
       returnArray['minInventory'] = it.minInventory
+      returnArray['rentalFee'] = it.rentalFee
 
       returnArray['netCommission'] = it.netCommission
       returnArray['allowPushPrice'] = it.allowPushPrice
