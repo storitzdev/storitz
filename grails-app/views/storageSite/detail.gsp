@@ -513,7 +513,7 @@
                 <div style="margin-top: 20px;">
                   <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back" /></div>
                   <div class="right">
-                    <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                    <g:if test="${site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0}">
                       <p:inputImage style="width:108px;height:36px;border:none;" src="btn-reserve-108x36.png" alt="Reserve" />
                     </g:if>
                     <g:else>

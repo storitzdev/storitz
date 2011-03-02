@@ -127,26 +127,31 @@
 
           var site;
           <g:each var="site" in="${sites}" status="c">
-            site = new Object();          
-            site.lat = ${site.lat};
-            site.lng = ${site.lng};
-            site.title = '${site.title}';
-            site.id = ${site.id};
-            site.index = ${c + 1};
-            site.unitCount = ${site.units.size()};
-            site.coverImg = '${site.coverImage() ? site.coverImage().thumbnail() : ""}';
-            site.address = '${site.address}';
-            site.zipcode = '${site.zipcode}';
-            site.state = '${site.state.display}';
-            site.city = '${site.city}';
-            site.promoId = ${siteMoveInPrice[site.id]?.promo ? siteMoveInPrice[site.id].promo : 'null' };
-            site.transactionType = '${site.transactionType}'
-            createMarker(site);
+            <g:if test="${c < 20}">
+              site = new Object();
+              site.lat = ${site.lat};
+              site.lng = ${site.lng};
+              site.title = '${site.title}';
+              site.id = ${site.id};
+              site.index = ${c + 1};
+              site.unitCount = ${site.units.size()};
+              site.coverImg = '${site.coverImage() ? site.coverImage().thumbnail() : ""}';
+              site.address = '${site.address}';
+              site.zipcode = '${site.zipcode}';
+              site.state = '${site.state.display}';
+              site.city = '${site.city}';
+              site.promoId = ${siteMoveInPrice[site.id]?.promo ? siteMoveInPrice[site.id].promo : 'null' };
+              site.transactionType = '${site.transactionType}'
+              createMarker(site);
+            </g:if>
           </g:each>
           
-          <g:if test="${sites.size() > 1}">
-            var statusText = 'Your search found ${sites.size()} results';
+          <g:if test="${sites.size() > 20}">
+            var statusText = 'Your search found more than 20 results.  Here are the top 20';
           </g:if>
+          <g:elseif test="${sites.size() > 1}">
+            var statusText = 'Your search found ${sites.size()} results';
+          </g:elseif>
           <g:elseif test="${sites.size() == 1}">
             var statusText = 'Your search found 1 result';
           </g:elseif>
