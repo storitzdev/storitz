@@ -41,6 +41,7 @@ import com.storitz.Feed
 import storitz.constants.FeedType
 import java.awt.Color
 import storitz.constants.ReportOutputType
+import storitz.constants.TransactionType
 
 @Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
 class ReportsController {
@@ -243,7 +244,11 @@ class ReportsController {
 
     switch(period.reportName) {
       case ReportName.ACTIVITY:
-        reportParams["report_name"] = "Activity Report - ${period.site.title}"
+        if (period.site.transactionType == TransactionType.RESERVATION) {
+          reportParams["report_name"] = "Reservation Activity Report - ${period.site.title}"
+        } else {
+          reportParams["report_name"] = "Activity Report - ${period.site.title}"
+        }
         reportParams["footer_text"] = ""
         reportParams["report_dates"] = "${reportParams['date_range']}"
         dateField = "bookingDate"
@@ -264,7 +269,11 @@ class ReportsController {
         break
 
       case ReportName.PENDING:
-        reportParams["report_name"] = "Pending Move In Report - ${period.site.title}"
+        if (period.site.transactionType == TransactionType.RESERVATION) {
+          reportParams["report_name"] = "Pending Reservations Report - ${period.site.title}"
+        } else {
+          reportParams["report_name"] = "Pending Move In Report - ${period.site.title}"
+        }
         reportParams["footer_text"] = ""
         reportParams["report_dates"] = "${reportParams['date_range']}"
         dateField = "moveInDate"
@@ -286,7 +295,11 @@ class ReportsController {
         break
 
       case ReportName.MOVEIN:
-        reportParams["report_name"] = "Move In Report - ${period.site.title}"
+        if (period.site.transactionType == TransactionType.RESERVATION) {
+          reportParams["report_name"] = "Reservations Report - ${period.site.title}"
+        } else {
+          reportParams["report_name"] = "Move In Report - ${period.site.title}"
+        }
         reportParams["footer_text"] = ""
         reportParams["report_dates"] = "${reportParams['date_range']}"
         dateField = "moveInDate"
@@ -327,7 +340,7 @@ class ReportsController {
             .setTitle(dateName).setWidth(85).setStyle(groupHeaderStyle).setHeaderStyle(groupHeaderStyle).build();
 
     AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
-            .setTitle("Move-In Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+            .setTitle(period.site.transactionType == TransactionType.RESERVATION ? "Reserved Move-In Date": "Move-In Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
       setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
@@ -351,7 +364,7 @@ class ReportsController {
       setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnGross = ColumnBuilder.getInstance().
-      setColumnProperty("cost", BigDecimal.class.getName()).
+      setColumnProperty("moveInCost", BigDecimal.class.getName()).
       setTitle("Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnInsurance = ColumnBuilder.getInstance().
@@ -418,7 +431,11 @@ class ReportsController {
 
     def c = RentalTransaction.createCriteria()
 
-    reportParams["report_name"] = "Transaction History Report - ${period.feed.operatorName}"
+    if (period.site.transactionType == TransactionType.RESERVATION) {
+      reportParams["report_name"] = "Reservation Transaction History Report - ${period.feed.operatorName}"
+    } else {
+      reportParams["report_name"] = "Transaction History Report - ${period.feed.operatorName}"
+    }
     reportParams["footer_text"] = ""
     reportParams["report_dates"] = "${reportParams['date_range']}"
     dateField = "bookingDate"
@@ -473,7 +490,7 @@ class ReportsController {
       setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
 
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
+            .setTitle(period.site.transactionType == TransactionType.RESERVATION ? "Reservation Date" : "Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
             .setTitle("Move-In Date").setHeaderStyle(headerStyle).build();

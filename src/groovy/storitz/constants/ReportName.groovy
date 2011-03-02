@@ -14,6 +14,7 @@ public enum ReportName {
   ACTIVITY("All New Activity"),
   CORP_TRANSACTION("Corporate Commission"),
   CORP_PAYMENT("Corporate Payment"),
+  GLOBAL_ACTIVITY("Global Activity"),
   INVOICE("Storitz Invoice")
 
   final String display
@@ -26,7 +27,7 @@ public enum ReportName {
   public getDisplay() { return display }
 
   static list() {
-    [BALK, MOVEIN, PENDING, ACTIVITY, CORP_TRANSACTION, CORP_PAYMENT, INVOICE]
+    [BALK, MOVEIN, PENDING, ACTIVITY, CORP_TRANSACTION, CORP_PAYMENT, GLOBAL_ACTIVITY, INVOICE]
   }
 
   static public ReportName getEnumFromId(String value) {

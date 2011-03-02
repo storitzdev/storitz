@@ -97,13 +97,6 @@
         }
       });
 
-//      $('#outputType').change(function(event) {
-//        var actArr = $('#reportForm').attr('action').split('.');
-//        var suffix = $(this).val().toLowerCase();
-//        var action = actArr[0] + '.' + $(this).val().toLowerCase();
-//        $('#reportForm').attr('action', action);
-//      });
-        
     });
 //]]>
         
