@@ -530,7 +530,9 @@ class RentalTransactionController {
         return
       }
 
-      notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
+      if (params.notify) {
+        notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
+      }
 
       // remove unit from inventory
       if (unit && --unit.unitCount <= 0) {
