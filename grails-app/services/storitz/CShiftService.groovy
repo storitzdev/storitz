@@ -1431,7 +1431,7 @@ class CShiftService extends BaseProviderService {
 
     if (site.useProrating) {
       if (allowExtension) {
-        if (moveInDay > site.prorateCutoff) {
+        if (promo && moveInDay > site.prorateCutoff) {
           durationMonths++;
           ret["extended"] = true;
         } else {

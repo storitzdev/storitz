@@ -431,7 +431,9 @@ class ReportsController {
 
     def c = RentalTransaction.createCriteria()
 
-    if (period.site.transactionType == TransactionType.RESERVATION) {
+    TransactionType transactionType = period.feed.sites.collect{it.transactionType}[0];
+
+    if (transactionType == TransactionType.RESERVATION) {
       reportParams["report_name"] = "Reservation Transaction History Report - ${period.feed.operatorName}"
     } else {
       reportParams["report_name"] = "Transaction History Report - ${period.feed.operatorName}"
@@ -490,10 +492,10 @@ class ReportsController {
       setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
 
     AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle(period.site.transactionType == TransactionType.RESERVATION ? "Reservation Date" : "Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
+            .setTitle(transactionType == TransactionType.RESERVATION ? "Reservation Date" : "Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
-            .setTitle("Move-In Date").setHeaderStyle(headerStyle).build();
+            .setTitle(transactionType == TransactionType.RESERVATION ? "Reserved Move-In Date" : "Move-In Date").setHeaderStyle(headerStyle).build();
 
     AbstractColumn columnPaidThruDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('paidThruDate'))
             .setTitle("Paid Through").setHeaderStyle(headerStyle).build();
@@ -516,7 +518,7 @@ class ReportsController {
       setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnGross = ColumnBuilder.getInstance().
-      setColumnProperty("cost", BigDecimal.class.getName()).
+      setColumnProperty("moveInCost", BigDecimal.class.getName()).
       setTitle("Move-In Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnInsurance = ColumnBuilder.getInstance().
@@ -666,7 +668,7 @@ class ReportsController {
       setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans#").build()
 
     SimpleColumn columnGross = ColumnBuilder.getInstance().
-      setColumnProperty("cost", BigDecimal.class.getName()).
+      setColumnProperty("moveInCost", BigDecimal.class.getName()).
       setTitle("Move-In Cost").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnCommission = ColumnBuilder.getInstance().

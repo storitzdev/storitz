@@ -418,6 +418,9 @@ class RentalTransactionController {
         // record transaction
         ser.bookingDate = new Date()
         ser.commission = rentalTransactionInstance.commission
+        ser.save(flush:true)
+        rentalTransactionInstance.searchEngineReferral = ser
+        rentalTransactionInstance.save(flush:true)
       }
 
       if (!moveInService.moveIn(rentalTransactionInstance)) {
