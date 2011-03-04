@@ -39,6 +39,14 @@ class QuikStorService extends BaseProviderService {
         logger.setLevel(java.util.logging.Level.WARNING)
         proxy[url].initialize()
       }
+      try {
+        proxy[url].HelloWorld()
+      } catch (Exception e) {
+        proxy[url] = new WSClient(url, this.class.classLoader)
+        java.util.logging.Logger logger = proxy[url].getLogger()
+        logger.setLevel(java.util.logging.Level.WARNING)
+        proxy[url].initialize()
+      }
       return proxy[url]
     }
 
@@ -374,6 +382,13 @@ class QuikStorService extends BaseProviderService {
     }
 
     def loadPromos(QuikStor quikStor, StorageSite storageSiteInstance, PrintWriter writer) {
+
+      // clear old restrictions
+      for(specialOffer in storageSiteInstance.specialOffers) {
+        specialOffer?.restrictions.clear()
+        specialOffer.save(flush:true)
+      }
+
       def loc = quikStor.locations.find{it.site == storageSiteInstance}
       
       def myProxy = getProxy(loc.quikStor.url)
@@ -394,7 +409,6 @@ class QuikStorService extends BaseProviderService {
         def unitSpecials  = myProxy.GetUnitActiveSpecials(activeSpecials.csUser, activeSpecials.csPassword, activeSpecials.csSiteName, activeSpecials.iTypeId)
         def specialsXml = new XmlSlurper().parseText(unitSpecials)
         for (specialOffer in specialsXml.SL.SpecialNode) {
-          println "Found offer title = ${specialOffer.Title} id = ${specialOffer.SpecialID}"
           String specialId = specialOffer.SpecialID.text()
           idList.add(specialId)
           SpecialOffer so = storageSiteInstance.specialOffers.find{ it.code == specialId }
@@ -410,7 +424,6 @@ class QuikStorService extends BaseProviderService {
             writer.println "Found existing special id = ${specialId}"
           }
           so.promoName = specialOffer.Title.text()
-          so.restrictions?.clear()
           so.inMonth = 1
           so.prepayMonths = 0
           def periods = new XmlSlurper().parseText(specialOffer.SpecialXml.text().replaceAll('&lt;', '<').replaceAll('&gt;', '>'))
