@@ -424,20 +424,39 @@ class QuikStorService extends BaseProviderService {
             writer.println "Found existing special id = ${specialId}"
           }
           so.promoName = specialOffer.Title.text()
+          println "Special offer id = ${specialId} - Title = ${so.promoName}"
           so.inMonth = 1
           so.prepayMonths = 0
           def periods = new XmlSlurper().parseText(specialOffer.SpecialXml.text().replaceAll('&lt;', '<').replaceAll('&gt;', '>'))
           for (period in periods.Periods.Period) {
-            writer.println "Period name ${period.Name} active = ${period.Active}, duration = ${period.Duration}, type = ${period.DiscountType}, amount = ${period.Amount}"
+            println "Period name ${period.Name} active = ${period.Active}, duration = ${period.Duration}, type = ${period.DiscountType}, amount = ${period.Amount}"
             if (Boolean.parseBoolean(period.Active.text())) {
               String periodType = period.DiscountType.text()
               Integer duration = period.Duration.text() as Integer
               BigDecimal amount = period.Amount.text() as BigDecimal
               switch(period.Name.text()) {
                 case "ProRate":
-                  if (storageSiteInstance.useProrating) {
-                    if (periodType != "FixedDiscount" || amount != 0) {
-                      // TODO - see if this impacts promo
+                  if (periodType != "FixedDiscount" || amount != 0) {
+                    switch(periodType) {
+                      case "FixedDiscount":
+                        if (storageSiteInstance.useProrating) {
+                          if (amount != 0) {
+                            so.promoType = PromoType.AMOUNT_OFF
+                            so.promoQty = amount
+                            so.expireMonth = duration
+                          }
+                        }
+                        break
+                      case "PercentageDiscount":
+                        so.promoType = PromoType.PERCENT_OFF
+                        so.promoQty = amount
+                        so.expireMonth = duration
+                        break
+                      case "FixedRate":
+                        so.promoType = PromoType.FIXED_RATE
+                        so.promoQty = amount
+                        so.expireMonth = duration
+                        break
                     }
                   }
                   break
@@ -448,7 +467,31 @@ class QuikStorService extends BaseProviderService {
                         so.promoType = PromoType.AMOUNT_OFF
                         so.promoQty = amount
                         so.expireMonth = duration
-                      } else {
+                      } else if (so.promoType != PromoType.FIXED_RATE) {
+                        so.prepay = true
+                        so.prepayMonths = duration
+                      }
+                      break
+                    case "PercentageDiscount":
+                      so.promoType = PromoType.PERCENT_OFF
+                      so.promoQty = amount
+                      so.expireMonth = duration
+                      break
+                    case "FixedRate":
+                      so.promoType = PromoType.FIXED_RATE
+                      so.promoQty = amount
+                      so.expireMonth = duration
+                      break
+                  }
+                  break
+                case "Period2":
+                  switch(periodType) {
+                    case "FixedDiscount":
+                      if (amount != 0) {
+                        so.promoType = PromoType.AMOUNT_OFF
+                        so.promoQty = amount
+                        so.expireMonth = duration
+                      } else if (so.promoType != PromoType.FIXED_RATE) {
                         so.prepay = true
                         so.prepayMonths = duration
                       }
