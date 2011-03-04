@@ -22,6 +22,9 @@ import javax.xml.datatype.DatatypeFactory
 import com.storitz.Feed
 import storitz.constants.SearchType
 import storitz.constants.TransactionType
+import com.storitz.SpecialOfferRestriction
+import storitz.constants.SpecialOfferRestrictionType
+import storitz.constants.PromoType
 
 class QuikStorService extends BaseProviderService {
 
@@ -66,6 +69,7 @@ class QuikStorService extends BaseProviderService {
           def facInfo = getFacilityInfo(loc)
           createSiteUser(site, facInfo.csSiteEmail, facInfo.csSiteEmail, quikStor.manager)
           loadInsurance(site, loc)
+          loadPromos(quikStor, site, writer)
         }
       }
 
@@ -172,6 +176,10 @@ class QuikStorService extends BaseProviderService {
 
     }
 
+    def refreshSites(QuikStor, SiteStats stats) {
+      
+    }
+
     def updateSite(StorageSite site, SiteStats stats, PrintWriter writer) {
       def quikStor = (QuikStor)site.feed
       def loc = quikStor.locations.find{it.site == site}
@@ -191,7 +199,7 @@ class QuikStorService extends BaseProviderService {
         site.zipcode = facInfo.csSiteZip
         site.phone = facInfo.csSitePhone
 
-        def address = site.address  + ' ' + ', ' + site.city + ', ' + site.state.display + ' ' + site.zipcode
+        def address = site.address  + ', ' + site.city + ', ' + site.state.display + ' ' + site.zipcode
 
         println "Found address: ${address}"
         def geoResult = geocodeService.geocode(address)
@@ -205,7 +213,6 @@ class QuikStorService extends BaseProviderService {
         site.source = "QS"
 
         site.disabled = false
-        site.netCommission = false
         site.lastChange = new Date()
         site.lastUpdate = 0
 
@@ -221,6 +228,11 @@ class QuikStorService extends BaseProviderService {
         site.isUnitAlarmed = false
         site.hasElevator = false
 
+        site.minInventory = 0
+        site.transactionType = TransactionType.RENTAL
+        site.netCommission = false
+        site.allowPushPrice = true
+
         site.extendedHours = false
 
         site.save(flush:true)
@@ -232,16 +244,18 @@ class QuikStorService extends BaseProviderService {
         facilityInfo2.setCsPassword(loc.password)
         def facInfo2 = myProxy.FacilityInfo2(facilityInfo2.csUser, facilityInfo2.csPassword, facilityInfo2.csSiteName)
 
+        def found = false
         for(item in facInfo2.anyType) {
-          def found = false
           if (item.csKey == 'ECommForceProRate') {
             site.useProrating = (item.obValue == 1)
+            println "Setting prorating based on value ${item.obValue}"
             found = true
           }
-          if (found) {
-            site.save(flush:true)
-          }
         }
+        if (!found) {
+          site.useProrating = false
+        }
+        site.save(flush:true)
 
         // Determine admin fee
         def availUnits = myProxy.create("org.tempuri.AvailableUnitTypes")
@@ -263,6 +277,7 @@ class QuikStorService extends BaseProviderService {
           moveInReq.setTMoveInDate(xgcal)
           def moveInCost = myProxy.MoveInCost(moveInReq.csUser, moveInReq.csPassword, moveInReq.csSiteName, moveInReq.iUnitTypeId, moveInReq.tMoveInDate)
           for(item in moveInCost.chargeST) {
+            println "Move In cost item: ${item.itemDesc} amount = ${item.dItemAmount}"
             if (item.itemDesc == 'Setup Charge') {
               site.adminFee = item.dItemAmount
               site.save(flush:true)
@@ -358,8 +373,135 @@ class QuikStorService extends BaseProviderService {
       }
     }
 
-    def loadPromos(QuikStor quickStor, StorageSite storageSiteInstance, PrintWriter writer) {
-
+    def loadPromos(QuikStor quikStor, StorageSite storageSiteInstance, PrintWriter writer) {
+      def loc = quikStor.locations.find{it.site == storageSiteInstance}
+      
+      def myProxy = getProxy(loc.quikStor.url)
+      def availUnits = myProxy.create("org.tempuri.AvailableUnitTypes")
+      availUnits.setCsSiteName(loc.sitename)
+      availUnits.setCsUser(loc.username)
+      availUnits.setCsPassword(loc.password)
+      def unitTypes = myProxy.AvailableUnitTypes(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
+      def idList = []
+      for(unitType in unitTypes.availableUnitTypesST) {
+        Integer iTypeId = unitType.iTypeId as Integer
+        writer.println "About to retrieve specials for type ${iTypeId}"
+        def activeSpecials = myProxy.create("org.tempuri.GetUnitActiveSpecials")
+        activeSpecials.setCsSiteName(loc.sitename)
+        activeSpecials.setCsUser(loc.username)
+        activeSpecials.setCsPassword(loc.password)
+        activeSpecials.setITypeId(iTypeId)
+        def unitSpecials  = myProxy.GetUnitActiveSpecials(activeSpecials.csUser, activeSpecials.csPassword, activeSpecials.csSiteName, activeSpecials.iTypeId)
+        def specialsXml = new XmlSlurper().parseText(unitSpecials)
+        for (specialOffer in specialsXml.SL.SpecialNode) {
+          println "Found offer title = ${specialOffer.Title} id = ${specialOffer.SpecialID}"
+          String specialId = specialOffer.SpecialID.text()
+          idList.add(specialId)
+          SpecialOffer so = storageSiteInstance.specialOffers.find{ it.code == specialId }
+          if (!so) {
+            so = new SpecialOffer()
+            so.code = specialId
+            so.active = false
+            so.concessionId = 0
+            so.waiveAdmin = false
+            so.featured= false
+            so.description = specialOffer.Title.text()
+          }  else {
+            writer.println "Found existing special id = ${specialId}"
+          }
+          so.promoName = specialOffer.Title.text()
+          so.restrictions?.clear()
+          so.inMonth = 1
+          so.prepayMonths = 0
+          def periods = new XmlSlurper().parseText(specialOffer.SpecialXml.text().replaceAll('&lt;', '<').replaceAll('&gt;', '>'))
+          for (period in periods.Periods.Period) {
+            writer.println "Period name ${period.Name} active = ${period.Active}, duration = ${period.Duration}, type = ${period.DiscountType}, amount = ${period.Amount}"
+            if (Boolean.parseBoolean(period.Active.text())) {
+              String periodType = period.DiscountType.text()
+              Integer duration = period.Duration.text() as Integer
+              BigDecimal amount = period.Amount.text() as BigDecimal
+              switch(period.Name.text()) {
+                case "ProRate":
+                  if (storageSiteInstance.useProrating) {
+                    if (periodType != "FixedDiscount" || amount != 0) {
+                      // TODO - see if this impacts promo
+                    }
+                  }
+                  break
+                case "Period1":
+                  switch(periodType) {
+                    case "FixedDiscount":
+                      if (amount != 0) {
+                        so.promoType = PromoType.AMOUNT_OFF
+                        so.promoQty = amount
+                        so.expireMonth = duration
+                      } else {
+                        so.prepay = true
+                        so.prepayMonths = duration
+                      }
+                      break
+                    case "PercentageDiscount":
+                      so.promoType = PromoType.PERCENT_OFF
+                      so.promoQty = amount
+                      so.expireMonth = duration
+                      break
+                    case "FixedRate":
+                      so.promoType = PromoType.FIXED_RATE
+                      so.promoQty = amount
+                      so.expireMonth = duration
+                      break
+                  }
+                  break
+                case "RentRaise1":
+                  switch(periodType) {
+                    case "FixedDiscount":
+                      if (amount != 0) {
+                        so.promoType = PromoType.AMOUNT_OFF
+                        so.promoQty = amount
+                      }
+                      break
+                    case "PercentageDiscount":
+                      if (!so.promoType || so.promoType == PromoType.PERCENT_OFF) {
+                        so.promoType = PromoType.PERCENT_OFF
+                        so.promoQty = amount
+                        so.expireMonth = duration
+                      }
+                      break
+                    case "FixedRate":
+                      if (!so.promoType || so.promoType == PromoType.FIXED_RATE) {
+                        so.promoType = PromoType.FIXED_RATE
+                        so.promoQty = amount
+                        so.expireMonth = duration
+                      }
+                      break
+                  }
+                  break
+              }
+            }
+          }
+          // add restriction for type
+          SpecialOfferRestriction restriction = new SpecialOfferRestriction()
+          restriction.restrictionInfo = false
+          restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+          restriction.restrictionInfo = iTypeId as String
+          restriction.save(flush:true)
+          so.addToRestrictions(restriction)
+          so.save(flush:true)
+          storageSiteInstance.addToSpecialOffers(so)
+        }
+      }
+      // clean up
+      def deleteList = []
+      for (offer in storageSiteInstance.specialOffers) {
+        if (!(offer.code in idList)) {
+          writer.println "Found old promo - deleting specialId = ${offer.code}"
+          deleteList.add(offer)
+        }
+      }
+      for (offer in deleteList) {
+        storageSiteInstance.removeFromSpecialOffers(offer)
+      }
+      storageSiteInstance.save(flush:true)
     }
 
     def addSitePhone(QuikStor quikStor, StorageSite storageSiteInstance, PrintWriter writer) {

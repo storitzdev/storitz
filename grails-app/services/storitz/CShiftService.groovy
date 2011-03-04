@@ -941,7 +941,6 @@ class CShiftService extends BaseProviderService {
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
-          specialOffer.concessionId = concessionId
           specialOffer.promoName = promo.'promo-name'.text()
           newOffer = true
         } else {

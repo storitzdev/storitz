@@ -188,7 +188,7 @@ class StorageSite {
     Boolean disabled = false
     Integer minInventory = 0
 
-    Boolean netCommission = true
+    Boolean netCommission = false
     Boolean allowPushPrice = true
 
   // bank account
