@@ -472,9 +472,9 @@
                   </textarea>
                   <div id="termsHolder" style="margin-top:7px;" class="${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
                       <div class="left">
-                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" onclick="window.open(this.href,'_blank');return false;">Terms of Use</a>
+                        <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}" /></div><div class="checkBoxText"> I agree to the <a href="${createLink(controller:'static', action:'terms')}" onclick="window.open(this.href,'_blank');return false;">Storitz Inc. Terms of Use</a>
                           <g:if test="${site.rentalAgreement}">
-                            and the <a href="${resource(file:site.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;">Storage Rental Agreement</a>
+                            and the <a href="${resource(file:site.rentalAgreement.src())}" onclick="window.open(this.href,'_blank');return false;">${site.feed.operatorName} Terms and Conditions</a>
                           </g:if>
                       </div>
                       <div style="clear:both;"></div>
