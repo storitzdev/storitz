@@ -114,7 +114,11 @@ class HomeController {
     def metroEntry
     def neighborhood
     if (zip) {
-      metroEntry = MetroEntry.findByZipcode(zip)
+      def entryList = MetroEntry.findAllByZipcode(zip)
+      metroEntry = entryList.find{ it.city == city }
+      if (!metroEntry) {
+        metroEntry = entryList.size() > 0 ? entryList[0] : null
+      }
     } else if (city && state) {
       def myState
       try {
@@ -263,7 +267,11 @@ class HomeController {
     def metroEntry
     def neighborhood
     if (zip) {
-      metroEntry = MetroEntry.findByZipcode(zip)
+      def entryList = MetroEntry.findAllByZipcode(zip)
+      metroEntry = entryList.find{ it.city == city }
+      if (!metroEntry) {
+        metroEntry = entryList.size() > 0 ? entryList[0] : null
+      }
     } else if (city && state) {
       def myState
       try {
