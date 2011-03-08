@@ -1147,6 +1147,7 @@ class SiteLinkService extends BaseProviderService {
         restriction.restrictionInfo = unitRestriction.dcWidth.text() + "X" + unitRestriction.dcLength.text()
         restriction.save(flush:true)
         specialOffer.addToRestrictions(restriction)
+        specialOffer.save(flush:true)
       }
     }    
   }
