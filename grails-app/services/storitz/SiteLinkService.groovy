@@ -1131,7 +1131,7 @@ class SiteLinkService extends BaseProviderService {
       site.removeFromSpecialOffers(promo)
     }
     for (unitRestriction in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionUnitTypes') {
-      SpecialOffer specialOffer = SpecialOffer.findByConcessionId(unitRestriction.ConcessionID.text() as Integer)
+      SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == (unitRestriction.ConcessionID.text() as Integer)}
       if (specialOffer) {
         // add unit type
         def restriction = new SpecialOfferRestriction()
