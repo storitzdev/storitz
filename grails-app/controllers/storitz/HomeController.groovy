@@ -33,6 +33,9 @@ class HomeController {
             if (!params.city || !params.state) {
               city = geoLookup.city.replaceAll('-', ' ')
               state = geoLooup.state
+            } else {
+              city = params.city.replaceAll('-', ' ')
+              state = params.state
             }
             zip = params.zip
             lat = geoLookup.lat
