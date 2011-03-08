@@ -262,6 +262,12 @@ class UserController {
       def person = new User()
       person.properties = params
 
+      def username  = springSecurityService.principal.username
+      def manager = User.findByUsername(username as String)
+      if (!UserRole.userHasRole(manager, 'ROLE_ADMIN')) {
+        person.manager = manager
+      }
+
       def roleCount = params.findAll{ it.key.contains('ROLE') }.size()
       if (roleCount == 0) {
           person.password = ''
