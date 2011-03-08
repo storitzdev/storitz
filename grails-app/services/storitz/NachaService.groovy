@@ -70,7 +70,7 @@ class NachaService {
             creditSum += credit
             itemCount++
 
-            bodyWriter.println "${itemCount} Credit for site ${trans.site.title} Amount ${credit}"
+            bodyWriter.println "${itemCount} Credit for site ${trans.site.title} id = ${trans.id} Amount ${credit}"
 
             writer << sprintf("622%08d%s%17s%010d%-15s%-22s00009100001%07d\r\n", routeCode, routeChkSum, bankInfo.acctNo, (credit * 100) as Long, trans.site.id as String, bankInfo.accountName, itemCount)
           } else {

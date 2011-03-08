@@ -213,6 +213,8 @@ class NotificationService {
       }
     }.collect{ it.email as String}
 
+    operAcctEmails.add("achnotify@storitz.com")
+
     try {
         emailService.sendEmail(
             to: operAcctEmails,
