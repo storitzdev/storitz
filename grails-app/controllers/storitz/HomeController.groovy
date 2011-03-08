@@ -30,8 +30,10 @@ class HomeController {
         if (params.zip) {
           def geoLookup = GeoLookup.findByZip(params.zip)
           if (geoLookup) {
-            city = geoLookup.city.replaceAll('-', ' ')
-            state = geoLookup.state
+            if (!params.city || !params.state) {
+              city = geoLookup.city.replaceAll('-', ' ')
+              state = geoLooup.state
+            }
             zip = params.zip
             lat = geoLookup.lat
             lng = geoLookup.lng
