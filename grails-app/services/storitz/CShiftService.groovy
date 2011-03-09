@@ -1373,13 +1373,11 @@ class CShiftService extends BaseProviderService {
       if (durationMonths - 1 > 0) {
         cal.add(Calendar.MONTH, ((durationMonths - 1) as Integer))
       }
+      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
     } else {
       cal.add(Calendar.MONTH, (durationMonths as Integer))
     }
 
-    if (site.useProrating) {
-      cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
-    }
     return cal.time
   }
 
