@@ -1357,7 +1357,7 @@ class CShiftService extends BaseProviderService {
   }
 
   def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
-    BigDecimal promoMonths = promo ? (promo.prepay ? (promo.expireMonth >= durationMonths ? durationMonths : promo.expireMonth) : promo.prepayMonths) : 0
+    BigDecimal durationMonths = promo ? (promo.prepay ? promo.expireMonth : promo.prepayMonths) : 1
 
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)
