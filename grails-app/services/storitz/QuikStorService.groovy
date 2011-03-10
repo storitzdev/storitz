@@ -286,7 +286,7 @@ class QuikStorService extends BaseProviderService {
           }
         }
 
-        def unit = site.units.find{it.unitNumber == unitType.iTypeId }
+        def unit = site.units.find{(it.unitNumber as Integer) == unitType.iTypeId }
         siteUnitTypes[unitType.iTypeId as Integer] = true
         if (unit) {
           if (unitType.availability > unit.unitCount) {
