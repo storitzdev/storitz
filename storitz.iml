@@ -60,6 +60,30 @@
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework.security/org.springframework.security.core/jars/org.springframework.security.core-3.0.3.RELEASE.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.geronimo.specs/geronimo-jms_1.1_spec/jars/geronimo-jms_1.1_spec-1.1.1.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.springframework/org.springframework.test/jars/org.springframework.test-3.0.5.RELEASE.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.codehaus.jettison/jettison/bundles/jettison-1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-databinding-aegis/jars/cxf-rt-databinding-aegis-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/javax.ws.rs/jsr311-api/jars/jsr311-api-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-frontend-jaxrs/jars/cxf-rt-frontend-jaxrs-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-ws-addr/jars/cxf-rt-ws-addr-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-transports-http/jars/cxf-rt-transports-http-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-frontend-simple/jars/cxf-rt-frontend-simple-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-bindings-xml/jars/cxf-rt-bindings-xml-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-databinding-jaxb/jars/cxf-rt-databinding-jaxb-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-tools-common/jars/cxf-tools-common-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-bindings-soap/jars/cxf-rt-bindings-soap-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.geronimo.specs/geronimo-javamail_1.4_spec/bundles/geronimo-javamail_1.4_spec-1.7.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/com.sun.xml.bind/jaxb-impl/jars/jaxb-impl-2.1.13.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-core/jars/cxf-rt-core-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.codehaus.woodstox/stax2-api/jars/stax2-api-3.0.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.codehaus.woodstox/woodstox-core-asl/jars/woodstox-core-asl-4.0.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-common-schemas/jars/cxf-common-schemas-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/wsdl4j/wsdl4j/jars/wsdl4j-1.6.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.neethi/neethi/jars/neethi-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.ws.commons.schema/XmlSchema/bundles/XmlSchema-1.4.7.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-common-utilities/jars/cxf-common-utilities-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-api/jars/cxf-api-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/asm/asm/jars/asm-3.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-frontend-jaxws/jars/cxf-rt-frontend-jaxws-2.3.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

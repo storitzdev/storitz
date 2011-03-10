@@ -14,6 +14,7 @@ class StorageUnit {
       taxRate(nullable:true)
       unitInfo(nullable:true)
       totalUnits(nullable:true)
+      deposit(nullable:true)
     }
 
     String description
@@ -34,6 +35,7 @@ class StorageUnit {
     Integer unitCount
     Integer totalUnits
     BigDecimal taxRate
+    BigDecimal deposit
     String unitInfo   // centershift original size
     String unitSizeInfo // used by special offer filter
     String unitTypeInfo // used by special offer filter

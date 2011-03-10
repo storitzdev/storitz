@@ -59,9 +59,8 @@ class CshiftController extends FeedController {
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
         CShiftService.refreshSites(cshiftInstance, 'CS3', stats, writer)
       } else {
-        CShift4Service.refreshSites(cshiftInstance, stats)
+        CShift4Service.refreshSites(cshiftInstance, stats, writer)
       }
-      writer.close()
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }

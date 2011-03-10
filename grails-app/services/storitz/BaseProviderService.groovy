@@ -100,7 +100,7 @@ abstract class BaseProviderService {
     def adminFee = site.adminFee ? site.adminFee : 0
     def additionalFees = adminFee + lockFee
     def waiveAdmin = false
-    def deposit = site.deposit ? site.deposit : 0
+    def deposit = unit?.deposit ? unit.deposit : (site.deposit ? site.deposit : 0)
 
     def cal = new GregorianCalendar()
     cal.setTime(moveInDate)

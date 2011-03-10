@@ -6,7 +6,6 @@ import com.storitz.StorageUnit
 import com.storitz.StorageSite
 import com.storitz.RentalTransaction
 import com.storitz.QuikStor
-import groovyx.net.ws.WSClient
 import com.storitz.QuikStorLocation
 import storitz.constants.State
 import com.storitz.SiteUser
@@ -25,38 +24,32 @@ import storitz.constants.TransactionType
 import com.storitz.SpecialOfferRestriction
 import storitz.constants.SpecialOfferRestrictionType
 import storitz.constants.PromoType
+import groovy.xml.MarkupBuilder
+import org.tempuri.Service1
+import org.tempuri.Service1Soap
+import org.tempuri.PaymentST
+import org.tempuri.UserAccountST
+import storitz.constants.PhoneType
 
 class QuikStorService extends BaseProviderService {
 
-    def proxy = [:]
+    def port = [:]
     def geocodeService
+    def emailService
     def unitSizeService
 
-    private getProxy(url) {
-      if (!proxy[url]) {
-        proxy[url] = new WSClient(url, this.class.classLoader)
-        java.util.logging.Logger logger = proxy[url].getLogger()
-        logger.setLevel(java.util.logging.Level.WARNING)
-        proxy[url].initialize()
+    private getPort(url) {
+      if (!port[url]) {
+        URL wsUrl = new URL(url)
+        def qsService = new Service1(wsUrl)
+        port[url] = qsService.getService1Soap()
       }
-      try {
-        proxy[url].HelloWorld()
-      } catch (Exception e) {
-        proxy[url] = new WSClient(url, this.class.classLoader)
-        java.util.logging.Logger logger = proxy[url].getLogger()
-        logger.setLevel(java.util.logging.Level.WARNING)
-        proxy[url].initialize()
-      }
-      return proxy[url]
+      return port[url]
     }
 
     private getFacilityInfo(QuikStorLocation loc) {
-      def myProxy = getProxy(loc.quikStor.url)
-      def facilityInfo = myProxy.create("org.tempuri.FacilityInfo")
-      facilityInfo.setCsSiteName(loc.sitename)
-      facilityInfo.setCsUser(loc.username)
-      facilityInfo.setCsPassword(loc.password)
-      return myProxy.FacilityInfo(facilityInfo.csUser, facilityInfo.csPassword, facilityInfo.csSiteName)
+      Service1Soap myProxy = getPort(loc.quikStor.url)
+      return myProxy.facilityInfo(loc.username, loc.password, loc.sitename)
     }
 
     def processLocations(QuikStor quikStor, SiteStats stats, PrintWriter writer) {
@@ -131,12 +124,8 @@ class QuikStorService extends BaseProviderService {
     }
 
     def loadInsurance(StorageSite site, QuikStorLocation loc) {
-      def myProxy = getProxy(loc.quikStor.url)
-      def availIns = myProxy.create("org.tempuri.AvailableInsurance")
-      availIns.setCsSiteName(loc.sitename)
-      availIns.setCsUser(loc.username)
-      availIns.setCsPassword(loc.password)
-      def insurances = myProxy.AvailableInsurance(availIns.csUser, availIns.csPassword, availIns.csSiteName)
+      Service1Soap myProxy = getPort(loc.quikStor.url)
+      def insurances = myProxy.availableInsurance(loc.username, loc.password, loc.sitename)
 
       def siteInsurances = [:]
       site.insurances.each{ siteInsurances[it.provider] = false }
@@ -192,12 +181,8 @@ class QuikStorService extends BaseProviderService {
       def quikStor = (QuikStor)site.feed
       def loc = quikStor.locations.find{it.site == site}
 
-      def myProxy = getProxy(loc.quikStor.url)
-      def facilityInfo = myProxy.create("org.tempuri.FacilityInfo")
-      facilityInfo.setCsSiteName(loc.sitename)
-      facilityInfo.setCsUser(loc.username)
-      facilityInfo.setCsPassword(loc.password)
-      def facInfo = myProxy.FacilityInfo(facilityInfo.csUser, facilityInfo.csPassword, facilityInfo.csSiteName)
+      Service1Soap myProxy = getPort(loc.quikStor.url)
+      def facInfo = myProxy.facilityInfo(loc.username, loc.password, loc.sitename)
 
       if (facInfo.success) {
         site.title = facInfo.csSiteName
@@ -246,11 +231,7 @@ class QuikStorService extends BaseProviderService {
         site.save(flush:true)
 
         // Determine prorated or anniversary billing
-        def facilityInfo2 = myProxy.create("org.tempuri.FacilityInfo2")
-        facilityInfo2.setCsSiteName(loc.sitename)
-        facilityInfo2.setCsUser(loc.username)
-        facilityInfo2.setCsPassword(loc.password)
-        def facInfo2 = myProxy.FacilityInfo2(facilityInfo2.csUser, facilityInfo2.csPassword, facilityInfo2.csSiteName)
+        def facInfo2 = myProxy.facilityInfo2(loc.username, loc.password, loc.sitename)
 
         def found = false
         for(item in facInfo2.anyType) {
@@ -266,28 +247,22 @@ class QuikStorService extends BaseProviderService {
         site.save(flush:true)
 
         // Determine admin fee
-        def availUnits = myProxy.create("org.tempuri.AvailableUnitTypes")
-        availUnits.setCsSiteName(loc.sitename)
-        availUnits.setCsUser(loc.username)
-        availUnits.setCsPassword(loc.password)
-        def unitTypes = myProxy.AvailableUnitTypes(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
+        def unitTypes = myProxy.availableUnitTypes(loc.username, loc.password, loc.sitename)
         println "Available move in types: ${unitTypes.dump()}"
         if (unitTypes?.availableUnitTypesST[0]) {
           def myUnitType = unitTypes.availableUnitTypesST[0]
 
-          def moveInReq = myProxy.create("org.tempuri.MoveInCost")
-          moveInReq.setCsSiteName(loc.sitename)
-          moveInReq.setCsUser(loc.username)
-          moveInReq.setCsPassword(loc.password)
-          moveInReq.setIUnitTypeId(myUnitType.iTypeId)
           GregorianCalendar gcal = new GregorianCalendar();
           XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
-          moveInReq.setTMoveInDate(xgcal)
-          def moveInCost = myProxy.MoveInCost(moveInReq.csUser, moveInReq.csPassword, moveInReq.csSiteName, moveInReq.iUnitTypeId, moveInReq.tMoveInDate)
+          def moveInCost = myProxy.moveInCost(loc.username, loc.password, loc.sitename, myUnitType.iTypeId, xgcal)
           for(item in moveInCost.chargeST) {
             println "Move In cost item: ${item.itemDesc} amount = ${item.dItemAmount}"
-            if (item.itemDesc == 'Setup Charge') {
+            if (item.itemDesc.toLowerCase() == 'setup charge') {
               site.adminFee = item.dItemAmount
+              site.save(flush:true)
+            }
+            if (item.itemDesc.toLowerCase() == 'security deposit') {
+              site.deposit = item.dItemAmount
               site.save(flush:true)
             }
           }
@@ -300,13 +275,20 @@ class QuikStorService extends BaseProviderService {
       site.units.each{ siteUnitTypes[it.unitNumber as Integer] = false }
       def quikStor = (QuikStor)site.feed
       def loc = quikStor.locations.find{it.site == site}
-      def myProxy = getProxy(quikStor.url)
-      def availUnits = myProxy.create("org.tempuri.JustAvailableUnitTypesSpecial")
-      availUnits.setCsSiteName(loc.sitename)
-      availUnits.setCsUser(loc.username)
-      availUnits.setCsPassword(loc.password)
-      def unitTypes = myProxy.JustAvailableUnitTypesSpecial(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
+      Service1Soap myProxy = getPort(quikStor.url)
+      def unitTypes = myProxy.justAvailableUnitTypesSpecial(loc.username, loc.password, loc.sitename)
       for(unitType in unitTypes.availableUnitTypesSpecialST) {
+
+        def unitDeposit
+        GregorianCalendar gcal = new GregorianCalendar();
+        XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+        def moveInCost = myProxy.moveInCost(loc.username, loc.password, loc.sitename, unitType.iTypeId, xgcal)
+        for(item in moveInCost.chargeST) {
+          if (item.itemDesc.toLowerCase() == 'security deposit') {
+            unitDeposit = item.dItemAmount
+          }
+        }
+
         def unit = site.units.find{it.unitNumber == unitType.iTypeId }
         siteUnitTypes[unitType.iTypeId as Integer] = true
         if (unit) {
@@ -314,20 +296,17 @@ class QuikStorService extends BaseProviderService {
             stats.updateCount += (unitType.availability - unit.unitCount)
             unit.unitCount = unitType.availability
             unit.price = unit.pushRate = unitType.dPrice
+            unit.deposit = unitDeposit
             unit.save(flush:true)
           } else if (unitType.availability < unit.unitCount) {
             stats.removedCount += (unit.unitCount - unitType.availability)
             unit.unitCount = unitType.availability
             unit.price = unit.pushRate = unitType.dPrice
+            unit.deposit = unitDeposit
             unit.save(flush:true)
           }
         } else {
-          def unitInfoReq = myProxy.create("org.tempuri.UnitTypeInfo")
-          unitInfoReq.setCsSiteName(loc.sitename)
-          unitInfoReq.setCsUser(loc.username)
-          unitInfoReq.setCsPassword(loc.password)
-          unitInfoReq.setItypeId(unitType.iTypeId)
-          def unitInfo = myProxy.UnitTypeInfo(unitInfoReq.csUser, unitInfoReq.csPassword, unitInfoReq.csSiteName, unitInfoReq.itypeId)
+          def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
           writer.println ("retrieved unitInfo ${unitInfo.dump()}")
           def searchType = SearchType.STORAGE
           if (unitInfo.csUnitType == 'Parking') {
@@ -350,6 +329,7 @@ class QuikStorService extends BaseProviderService {
             unit.isIrregular = false
             unit.description = unitType.sTypeDescription
             unit.unitCount = unitType.availability
+            unit.deposit = unitDeposit
             stats.createCount += unit.unitCount
             if (unitInfo.iFloor > 1) {
               unit.unitType = UnitType.UPPER
@@ -391,22 +371,13 @@ class QuikStorService extends BaseProviderService {
 
       def loc = quikStor.locations.find{it.site == storageSiteInstance}
       
-      def myProxy = getProxy(loc.quikStor.url)
-      def availUnits = myProxy.create("org.tempuri.AvailableUnitTypes")
-      availUnits.setCsSiteName(loc.sitename)
-      availUnits.setCsUser(loc.username)
-      availUnits.setCsPassword(loc.password)
-      def unitTypes = myProxy.AvailableUnitTypes(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
+      Service1Soap myProxy = getPort(loc.quikStor.url)
+      def unitTypes = myProxy.availableUnitTypes(loc.username, loc.password, loc.sitename)
       def idList = []
       for(unitType in unitTypes.availableUnitTypesST) {
         Integer iTypeId = unitType.iTypeId as Integer
         writer.println "About to retrieve specials for type ${iTypeId}"
-        def activeSpecials = myProxy.create("org.tempuri.GetUnitActiveSpecials")
-        activeSpecials.setCsSiteName(loc.sitename)
-        activeSpecials.setCsUser(loc.username)
-        activeSpecials.setCsPassword(loc.password)
-        activeSpecials.setITypeId(iTypeId)
-        def unitSpecials  = myProxy.GetUnitActiveSpecials(activeSpecials.csUser, activeSpecials.csPassword, activeSpecials.csSiteName, activeSpecials.iTypeId)
+        def unitSpecials  = myProxy.getUnitActiveSpecials(loc.username, loc.password, loc.sitename, iTypeId)
         def specialsXml = new XmlSlurper().parseText(unitSpecials)
         for (specialOffer in specialsXml.SL.SpecialNode) {
           String specialId = specialOffer.SpecialID.text()
@@ -566,13 +537,19 @@ class QuikStorService extends BaseProviderService {
 
     def checkRented(RentalTransaction trans) {
       def unit = StorageUnit.get(trans.unitId)
-      def availUnits = myProxy.create("org.tempuri.JustAvailableUnitTypesSpecial")
-      availUnits.setCsSiteName(loc.sitename)
-      availUnits.setCsUser(loc.username)
-      availUnits.setCsPassword(loc.password)
-      def unitTypes = myProxy.JustAvailableUnitTypesSpecial(availUnits.csUser, availUnits.csPassword, availUnits.csSiteName)
-      if (unit && unitType.find{it.iTypeId == unit.unitNumber}.size() > 0) {
-        return true
+
+      QuikStor quikStor = (QuikStor)trans.site.feed
+      def loc = quikStor.locations.find{it.site == trans.site}
+
+      Service1Soap myProxy = getPort(loc.quikStor.url)
+      def unitTypes = myProxy.justAvailableUnitTypesSpecial(loc.username, loc.password, loc.sitename)
+      if (unit) {
+        Long unitTypeId = unit.unitTypeInfo as Long
+        for (availUnitType in unitTypes.availableUnitTypesSpecialST) {
+          if (availUnitType.iTypeId == unitTypeId) {
+            return true
+          }
+        }
       }
       return false
     }
@@ -582,7 +559,204 @@ class QuikStorService extends BaseProviderService {
     }
 
     def moveIn(RentalTransaction trans) {
-      
+      def unit = StorageUnit.get(trans.unitId)
+      String specialId = null
+      if (trans.promoId != -999) {
+        SpecialOffer specialOffer = SpecialOffer.get(trans.promoId)
+        specialId = specialOffer.code
+      }
+
+      QuikStor quikStor = (QuikStor)trans.site.feed
+      def loc = quikStor.locations.find{it.site == trans.site}
+
+      Service1Soap myProxy = getPort(loc.quikStor.url)
+
+      def retVal = false
+      def errorMessage = ''
+
+      def unitTypes = myProxy.justAvailableUnitTypesSpecial(loc.username, loc.password, loc.sitename)
+      def sUnitID
+      def specialXml
+      BigDecimal totalMoveInCost = 0G
+      if (unit) {
+        Long unitTypeId = unit.unitTypeInfo as Long
+        for (availUnitType in unitTypes.availableUnitTypesSpecialST) {
+          if (availUnitType.iTypeId == unitTypeId) {
+            sUnitID = availUnitType.sLastUnit
+          }
+        }
+        if (specialId) {
+          // grab the XML for the special
+          def availUnitSpecials = myProxy.getUnitActiveSpecials(loc.username, loc.password, loc.sitename, unitTypeId)
+          def specialsXml = new XmlSlurper().parseText(availUnitSpecials)
+          for (specialOffer in specialsXml.SL.SpecialNode) {
+            if (specialOffer.SpecialID.text() == specialId) {
+              specialXml = specialOffer.SpecialXml.text()
+            }
+          }
+          String moveInParams = buildMoveInParams(trans, sUnitID)
+          def moveInCostResult = myProxy.getMoveIncostSpecial(loc.username, loc.password, loc.sitename, specialXml, moveInParams)
+          println "MoveInCostSpecial specialId = ${specialId} returns ${moveInCostResult}"
+          def moveInXml = new XmlSlurper().parseText(moveInCostResult)
+          totalMoveInCost = moveInXml.TotalAmount.text() as BigDecimal
+
+          String paymentST = buildPaymentST(trans)
+          String tenantInfo = buildTenantParams(trans)
+
+          println "params: moveInResult - ${moveInCostResult}\npaymentInfo - ${paymentST}\ntenantInfo - ${tenantInfo}"
+
+          def moveInResults = myProxy.addAccountMoveInSpecial(loc.username, loc.password, loc.sitename, moveInCostResult, paymentST, tenantInfo, moveInParams)
+
+          println "MoveInResults = ${moveInResults}"
+          def moveInResultsXml = new XmlSlurper().parseText(moveInResults)
+          retVal = moveInResultsXml.bResult.text().toLowerCase() == 'true'
+          if (retVal) {
+            trans.tenantId = moveInResultsXml.iCustomerID.text()
+            trans.accessCode = moveInResultsXml.sAccessCode.text()
+            trans.idNumber = moveInResultsXml.sOrderID.text()
+            trans.save(flush:true)
+          }
+          errorMessage = moveInResultsXml.sReturnMessage.text()
+        } else {
+          GregorianCalendar gcal = new GregorianCalendar();
+          gcal.setTime(trans.moveInDate)
+          XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+          def moveInCostResult = myProxy.moveInCost(loc.username, loc.password, loc.sitename, unitTypeId, xgcal)
+          println "MoveInCost returns ${moveInCostResult}"
+
+          for(charge in moveInCostResult.chargeST) {
+            println "Charge: ${charge.dump()}"
+            totalMoveInCost += charge.dItemAmount
+          }
+
+          def pst = new PaymentST()
+          pst.csCCFName = trans.billingAddress.firstName
+          pst.csCCLName = trans.billingAddress.lastName
+          pst.csCCNumber = trans.ccNum
+          pst.csCCStreetAddress = trans.billingAddress.address1
+          pst.csCCType = trans.cardType.display
+          pst.csCCZip = trans.billingAddress.zipcode
+          pst.csCity = trans.billingAddress.city
+          pst.csCountry = trans.billingAddress.country.display
+          pst.csCVV = trans.cvv2
+          pst.csExpirationDate = trans.ccExpDate.format("MM-yyyyy")
+          pst.csPaymentMethod = "CREDITCARD"
+          pst.dPaymentAmount = trans.moveInCost
+
+          def ust = new UserAccountST()
+          ust.iCustomerID = 0
+          ust.csLastname = trans.contactPrimary.lastName
+          ust.csFirstName = trans.contactPrimary.firstName
+          ust.csAddress = trans.contactPrimary.address1
+          ust.csAddress2 = trans.contactPrimary.address2
+          ust.csCity = trans.contactPrimary.city
+          ust.csState = trans.contactPrimary.state.display
+          ust.csZip = trans.contactPrimary.zipcode
+          switch(trans.contactPrimary.phoneType) {
+            case PhoneType.HOME:
+              ust.csHomePhone = trans.contactPrimary.phone
+              break
+            case PhoneType.OFFICE:
+              ust.csWorkPhone = trans.contactPrimary.phone
+              break
+            case PhoneType.MOBILE:
+              ust.csCellphone = trans.contactPrimary.phone
+              break
+          }
+          ust.csBillingFName = trans.billingAddress.firstName
+          ust.csBillingLName = trans.billingAddress.lastName
+          ust.csBillingAddress = trans.billingAddress.address1
+          ust.csBillingCity = trans.billingAddress.city
+          ust.csBillingState = trans.billingAddress.state.display
+          ust.csBillingZip = trans.billingAddress.zipcode
+          ust.csEmail = trans.contactPrimary.email
+
+          def moveInResult = myProxy.addAccountMoveIn(loc.username, loc.password. loc.sitename, pst, ust, sUnitID, 0l)
+        }
+
+        // compare calculated cost vs. feed cost - send discrepancies
+        if (!retVal || totalMoveInCost != trans.moveInCost) {
+          try {
+
+            def body = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\n\nError Message: ${errorMessage}"
+            emailService.sendTextEmail(
+                    to: "notifications@storitz.com",
+                    from: "no-reply@storitz.com",
+                    subject: "QUIKSTOR - failed move-in",
+                    body: body)
+
+            } catch (Exception e) {
+                log.error("${e}", e)
+            }
+
+        }
+        return retVal
+      }
+
+    }
+
+    private String buildMoveInParams(RentalTransaction trans, String unitID) {
+      def unit = StorageUnit.get(trans.unitId)
+
+      def writer = new StringWriter()
+      def xml = new MarkupBuilder(writer)
+      // build sMoveInParams
+      xml.MoveInCostParams('xmlns:xsi':"http://www.w3.org/2001/XMLSchema-instance", 'xmlns:xsd':"http://www.w3.org/2001/XMLSchema") {
+        tMoveingDate(trans.moveInDate.format('yyyy-MM-dd'))
+        sUnitType(unit.unitTypeInfo)
+        SetupFee(-1)
+        SecDep(-1)
+        MCH_LIST()
+        INACC_LIST()
+        INVENTORY_LIST()
+        sUnitID(unitID)
+      }
+      println "Generated MoveInParams ${writer.toString()}"
+      return writer.toString()
+    }
+
+    private String buildPaymentST(RentalTransaction trans) {
+      def writer = new StringWriter()
+      def xml = new MarkupBuilder(writer)
+      // build sPaymentST
+      xml.PaymentInfo('xmlns:xsi':"http://www.w3.org/2001/XMLSchema-instance", 'xmlns:xsd':"http://www.w3.org/2001/XMLSchema") {
+        dPaymentAmount(trans.moveInCost)
+        sCCType(trans.cardType.display)
+        sCCNumber(trans.ccNum)
+        sExpirationDate(trans.ccExpDate.format("MM-yyyy"))
+        sCCstreetAddress(trans.billingAddress.address1)
+        sCCZip(trans.billingAddress.zipcode)
+        iCheckNo(0)
+        sCity(trans.billingAddress.city)
+        sState(trans.billingAddress.state.display)
+        sCCFName(trans.billingAddress.firstName)
+        sCCLName(trans.billingAddress.lastName)
+        sProcessor("Storitz")
+        sPaymentMethod("CREDITCARD")
+        bSaveToken(true)
+      }
+      return writer.toString()
+    }
+
+    private String buildTenantParams(RentalTransaction trans) {
+      def writer = new StringWriter()
+      def xml = new MarkupBuilder(writer)
+      // build sTenantParams
+      xml.TenantInfo4MoveIn('xmlns:xsi':"http://www.w3.org/2001/XMLSchema-instance", 'xmlns:xsd':"http://www.w3.org/2001/XMLSchema") {
+        dIndividualLateFee(0)
+        dtExpectedMoveOut("0001-01-01T00:00:00")
+        dtCreditCardExpDate(trans.ccExpDate.format("yyyy-MM-dd"))
+        dsMoveInDate(trans.moveInDate.format("yyyy-MM-dd"))
+        iCustomerID(0)
+        sLastname(trans.contactPrimary.lastName)
+        sFirstName(trans.contactPrimary.firstName)
+        sAddress(trans.contactPrimary.address1)
+        sCity(trans.contactPrimary.city)
+        sState(trans.contactPrimary.state.display)
+        sZip(trans.contactPrimary.zipcode)
+        sHomePhone(trans.contactPrimary.phone)
+      }
+      return writer.toString()
     }
 
 }
