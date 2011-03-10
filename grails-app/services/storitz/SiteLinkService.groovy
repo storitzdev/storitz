@@ -454,6 +454,24 @@ class SiteLinkService extends BaseProviderService {
     postAction(payload, 'UnitTypePriceList')
   }
 
+  def bulletinBoardInsert(corpCode, locationCode, userName, password, subject, body) {
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:BulletinBoardInsert>
+         <cal:sCorpCode>""" + corpCode + """</cal:sCorpCode>
+         <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
+         <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
+         <cal:sSubject>""" + subject  + """</cal:sSubject>
+         <cal:sBody>""" + body + """</cal:sBody>
+      </cal:BulletinBoardInsert>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'BulletinBoardInsert')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
@@ -1262,6 +1280,14 @@ TODO - evaluate whether we need this going forward
     if (moveInResult > 3) {
       rentalTransaction.idNumber = moveInResult
       rentalTransaction.save(flush:true)
+
+      def siteLink = (SiteLink)rentalTransaction.site.feed
+      def subject = "New Storitz Move-In: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
+      def body = "You have a new Storitz prepaid Move-in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")} for Unit ${rentalTransaction.feedUnitNumber}.  When the customer, ${rentalTransaction.contactPrimary.fullName()} arrives on their move-in date, just search for them in the tenant list to pull up their account info and complete the move-in process."
+      // insert into bulletin board
+      bulletinBoardInsert(siteLink.corpCode, rentalTransaction.site.sourceLoc, siteLink.userName,
+              siteLink.password, subject, body)
+
     } else {
       def body = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
