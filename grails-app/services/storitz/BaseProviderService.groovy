@@ -156,7 +156,7 @@ abstract class BaseProviderService {
           break;
 
         case "PERCENT_OFF":
-          if (promo.inMonth == 1) {
+          if (promo.inMonth == 1 && !promo.prepay) {
             offerDiscount = (promo.promoQty/100.0) * (discountRate + (promo.expireMonth - 1) * rate);
           } else {
             offerDiscount = (promo.promoQty/100.0) * (promo.expireMonth) * rate;
