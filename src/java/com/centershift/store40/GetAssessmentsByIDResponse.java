@@ -1,0 +1,64 @@
+
+package com.centershift.store40;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="GetAssessmentsByIDResult" type="{http://www.centershift.com/STORE40/}GetAssessmentsByID_Response"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "getAssessmentsByIDResult"
+})
+@XmlRootElement(name = "GetAssessmentsByIDResponse")
+public class GetAssessmentsByIDResponse {
+
+    @XmlElement(name = "GetAssessmentsByIDResult", required = true)
+    protected GetAssessmentsByIDResponse2 getAssessmentsByIDResult;
+
+    /**
+     * Gets the value of the getAssessmentsByIDResult property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link GetAssessmentsByIDResponse2 }
+     *     
+     */
+    public GetAssessmentsByIDResponse2 getGetAssessmentsByIDResult() {
+        return getAssessmentsByIDResult;
+    }
+
+    /**
+     * Sets the value of the getAssessmentsByIDResult property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link GetAssessmentsByIDResponse2 }
+     *     
+     */
+    public void setGetAssessmentsByIDResult(GetAssessmentsByIDResponse2 value) {
+        this.getAssessmentsByIDResult = value;
+    }
+
+}

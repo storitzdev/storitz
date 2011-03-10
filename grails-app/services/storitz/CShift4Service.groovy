@@ -1,27 +1,37 @@
 package storitz
 
-import groovyx.net.ws.WSClient
 import storitz.constants.State
 import com.storitz.*
+import com.centershift.store40.WSSoap
+import com.centershift.store40.WS
+import com.centershift.store40.LookupUserRequest
+import com.centershift.store40.GetSiteListRequest
+import com.centershift.store40.GetInsuranceProvidersRequest
+import com.centershift.store40.GetSiteListResponse
+import storitz.constants.TransactionType
+import com.centershift.store40.GetSiteDetailsRequest
+import com.centershift.store40.ArrayOfLong
+import com.centershift.store40.GetBaseFeesRequest
 
 class CShift4Service {
 
-    def cshiftUrl = "https://slc.centershift.com:443/Sandbox40/SWS.asmx?WSDL"
-    def proxy
+    def geocodeService
+  
+    def cshiftUrl = "https://slc.centershift.com:443/Store40/SWS.asmx?WSDL"
+    WSSoap proxy
   
     boolean transactional = false
 
-    def getProxy() {
+    def getProxy(CenterShift cshift) {
       if (!proxy) {
-        proxy = new WSClient(cshiftUrl, this.class.classLoader)
-        proxy.initialize() // from 0.5.0
+        def cshiftWS = new WS()
+        proxy = cshiftWS.getWSSoap()
       }
       return proxy
     }
 
     def getLookupUser(CenterShift cshift) {
-      getProxy()
-      def lookupUser = proxy.create("com.centershift.store40.LookupUserRequest")
+      def lookupUser = new LookupUserRequest()
       lookupUser.username = cshift.userName
       lookupUser.password = cshift.pin
       lookupUser.channel = 0
@@ -33,7 +43,7 @@ class CShift4Service {
       if (!user) {
         user = new User(
           username:email,
-          password: (Math.random() * System.currentTimeMillis()) as String,
+          password: ((Math.random() * System.currentTimeMillis()) as String),
           description: "Site Manager for ${site.title}",
           email: email,
           userRealName:realName,
@@ -55,20 +65,24 @@ class CShift4Service {
       }
     }
 
+    def refreshSites(cshift, stats, writer) {
+      loadSites(cshift, stats, writer)
+    }
+
     def loadSites(cshift, stats, writer) {
-      getProxy()
-      def siteListRequest = proxy.create("com.centershift.store40.GetSiteListRequest")
+      WSSoap myProxy = getProxy(cshift)
+      def siteListRequest = new GetSiteListRequest()
       siteListRequest.orgID = cshift.orgId
 
       def lookupUser = getLookupUser(cshift)
-      def siteList = proxy.GetSiteList(lookupUser, siteListRequest)
+      def siteList = myProxy.getSiteList(lookupUser, siteListRequest)
 
       for (site in siteList.details.soagetsitelist) {
         StorageSite foundSite = StorageSite.findBySourceAndSourceId("CS4", site.siteid)
         if (foundSite) {
           // TODO - handle update case
         } else {
-          if (site.propertytype == 1 && (site.sitestatus == 1 | site.sitestatus == 2)) {
+          if (site.propertytype == 1 && (site.sitestauts == 1 | site.sitestauts == 2)) {
 
             def csite = new StorageSite()
             csite.sourceId = site.siteid
@@ -84,18 +98,72 @@ class CShift4Service {
             csite.state = State.fromText(site.state)
             csite.zipcode = site.postalcode
 
-            site.save()
+            def address = csite.address  + ', ' + csite.city + ', ' + csite.state.display + ' ' + csite.zipcode
+
+            println "Found address: ${address}"
+            def geoResult = geocodeService.geocode(address)
+
+            csite.lng = geoResult.results[0].geometry.location.lng
+            csite.lat = geoResult.results[0].geometry.location.lat
+
+            csite.transactionType = TransactionType.RENTAL
+            csite.lastUpdate = 0
+
+            // grab site details
+            GetSiteDetailsRequest detailsReq = new GetSiteDetailsRequest()
+            detailsReq.setSiteID(new ArrayOfLong())
+            detailsReq.siteID.getLong().add(site.siteid)
+            def siteDetails = myProxy.getSiteDetails(lookupUser, detailsReq)
+
+            def siteDetail = siteDetails.details.soasiteattributes[0]
+
+            def sitehours = siteDetail.sitehours
+            def gatehours = siteDetail.gatehours
+
+            println "Site hours = ${sitehours}"
+            def hm = sitehours =~ /Monday:\s*(.+?)\s*Tuesday:\s(.+?)\s*Wednesday:\s*(.+?)\s*Thursday:\s*(.+?)\s*Friday:\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+?)/
+            if (hm.getCount()) {
+              println "Site hours match"
+              def hrsMon = hm[0][1].toLowerCase()
+              def hrsTues = hm[0][2].toLowerCase()
+              def hrsWed = hm[0][3].toLowerCase()
+              def hrsThurs = hm[0][4].toLowerCase()
+              def hrsFri = hm[0][5].toLowerCase()
+              def hrsSat = hm[0][6].toLowerCase()
+
+              if (hrsMon == "closed") {
+                csite.openMonday = false
+              } else {
+                csite.openMonday = true
+                csite.startMonday = getStartTime(hrsMon)
+                csite.endMonday = getEndTime(hrsMon)
+              }
+            }
+            println "Gate hours = ${gatehours}"
+
+            GetBaseFeesRequest siteFeesRequest = new GetBaseFeesRequest()
+            siteFeesRequest.siteID = site.siteid
+            def siteFees = myProxy.getBaseFees(lookupUser, siteFeesRequest)
+
+            for (siteFee in siteFees.details.orgfeesiteall) {
+              if (siteFee.feename == "Admin Fee") {
+                csite.adminFee = siteFee.feeamt
+                println "Found admin fee = ${csite.adminFee}"
+              }
+            }
+
+            // csite.save(flush:true)
             SiteUser.link(csite, cshift.manager)
             if (site.email?.size() > 0) {
-              createSiteUser(site, site.email, site.email, cshift.manager)
+              createSiteUser(csite, site.email, site.email, cshift.manager)
             }
 
             // TODO - promos, insurance, hours, site features
             // hours may be free form
-            loadInsurance(site)
-            loadUnits(site)
+            loadInsurance(cshift, csite)
+            // loadUnits(csite)
 
-            site.save(flush:true)
+            // csite.save(flush:true)
 
           } else {
             println "Skipped site ${site.displayname} due to status ${site.sitestatus} or property type ${site.propertytype}"
@@ -105,12 +173,13 @@ class CShift4Service {
       }
     }
 
-    def loadInsurance(site) {
-      getProxy()
-      def insuranceRequest = proxy.create("com.centershift.store40.GetInsuranceProvidersRequest")
+    def loadInsurance(cshift, site) {
+      def myProxy = getProxy(cshift)
+      def insuranceRequest = new GetInsuranceProvidersRequest()
       insuranceRequest.siteID = site.siteid
       insuranceRequest.orgID = site.orgid
-      def insuranceProviders = proxy.GetInsuranceProviders(lookupUser, insuranceRequest)
+      def lookupUser = getLookupUser(cshift)
+      def insuranceProviders = myProxy.getInsuranceProviders(lookupUser, insuranceRequest)
       for (ins in insuranceProviders.details.ORGINSSITEOFFERINGS) {
         def siteIns = site.insurances.find{ it.insuranceId == ins.siteinsid }
         if (!siteIns) {
@@ -124,6 +193,14 @@ class CShift4Service {
 
         siteIns.save(flush:true)
       }
+    }
+
+    private Date getStartTime(String hrs) {
+      def start = hrs.split("-")[0].trim()
+    }
+
+    private Date getEndTime(String hrs) {
+      def end = hrs.split("-")[-1].trim()
     }
 
 }
