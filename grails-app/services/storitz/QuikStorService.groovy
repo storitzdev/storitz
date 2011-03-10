@@ -237,7 +237,6 @@ class QuikStorService extends BaseProviderService {
         for(item in facInfo2.anyType) {
           if (item.csKey == 'ECommForceProRate') {
             site.useProrating = (item.obValue == 1)
-            println "Setting prorating based on value ${item.obValue}"
             found = true
           }
         }
@@ -248,7 +247,6 @@ class QuikStorService extends BaseProviderService {
 
         // Determine admin fee
         def unitTypes = myProxy.availableUnitTypes(loc.username, loc.password, loc.sitename)
-        println "Available move in types: ${unitTypes.dump()}"
         if (unitTypes?.availableUnitTypesST[0]) {
           def myUnitType = unitTypes.availableUnitTypesST[0]
 
@@ -256,7 +254,6 @@ class QuikStorService extends BaseProviderService {
           XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
           def moveInCost = myProxy.moveInCost(loc.username, loc.password, loc.sitename, myUnitType.iTypeId, xgcal)
           for(item in moveInCost.chargeST) {
-            println "Move In cost item: ${item.itemDesc} amount = ${item.dItemAmount}"
             if (item.itemDesc.toLowerCase() == 'setup charge') {
               site.adminFee = item.dItemAmount
               site.save(flush:true)
@@ -350,11 +347,10 @@ class QuikStorService extends BaseProviderService {
         }
       }
       // clean up
-      println "Site type entries: ${siteUnitTypes.dump()}"
       for(entry in siteUnitTypes.entrySet()) {
         if (!entry.value) {
           def unit = site.units.find{(it.unitNumber as Integer) == entry.key}
-          println "Cleanup found deleted type: ${entry.key} - removing ${unit.unitCount} units"
+          writer.println "Cleanup found deleted type: ${entry.key} - removing ${unit.unitCount} units"
           stats.removedCount += unit.unitCount
           site.removeFromUnits(unit)
         }
@@ -395,12 +391,12 @@ class QuikStorService extends BaseProviderService {
             writer.println "Found existing special id = ${specialId}"
           }
           so.promoName = specialOffer.Title.text()
-          println "Special offer id = ${specialId} - Title = ${so.promoName}"
+          writer.println "Special offer id = ${specialId} - Title = ${so.promoName}"
           so.inMonth = 1
           so.prepayMonths = 0
           def periods = new XmlSlurper().parseText(specialOffer.SpecialXml.text().replaceAll('&lt;', '<').replaceAll('&gt;', '>'))
           for (period in periods.Periods.Period) {
-            println "Period name ${period.Name} active = ${period.Active}, duration = ${period.Duration}, type = ${period.DiscountType}, amount = ${period.Amount}"
+            writer.println "Period name ${period.Name} active = ${period.Active}, duration = ${period.Duration}, type = ${period.DiscountType}, amount = ${period.Amount}"
             if (Boolean.parseBoolean(period.Active.text())) {
               String periodType = period.DiscountType.text()
               Integer duration = period.Duration.text() as Integer

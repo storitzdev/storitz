@@ -82,6 +82,11 @@ class MigrationController {
         feed.userName = resp.feed.userName
         feed.password = resp.feed.password
         feed.operatorName = resp.feed.operatorName
+        feed.address1 = resp.feed.address1
+        feed.address2 = resp.feed.address2
+        feed.city = resp.feed.city
+        feed.state = resp.feed.state
+        feed.zipcode = resp.feed.zipcode
       } else if (resp.feed.feedType == 'CENTERSHIFT') {
         feed = new CenterShift()
         feed.userName = resp.feed.userName
@@ -90,9 +95,21 @@ class MigrationController {
         feed.cshiftVersion = CenterShiftVersion.getEnumFromId(resp.feed.cshiftVersion)
         feed.feedType = FeedType.CENTERSHIFT
         feed.operatorName = resp.feed.operatorName
+        feed.address1 = resp.feed.address1
+        feed.address2 = resp.feed.address2
+        feed.city = resp.feed.city
+        feed.state = resp.feed.state
+        feed.zipcode = resp.feed.zipcode
       } else if (resp.feed.feedType == 'QUIKSTOR') {
         feed = new QuikStor()
         feed.feedType = FeedType.QUIKSTOR
+        feed.operatorName = resp.feed.operatorName
+        feed.url = url
+        feed.address1 = resp.feed.address1
+        feed.address2 = resp.feed.address2
+        feed.city = resp.feed.city
+        feed.state = resp.feed.state
+        feed.zipcode = resp.feed.zipcode
         // TODO - cycle through and build the QuikStorLocations
       }
       CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)
@@ -351,6 +368,19 @@ class MigrationController {
       for(site in sites) {
         feed.addToSites(site)
         SiteUser.link(site, manager)
+      }
+      feed.save(flush:true)
+      if (resp.feed.feedType == 'QUIKSTOR') {
+        for(loc in resp.feed.locations) {
+          def qloc = new QuikStorLocation()
+          qloc.username = loc.username
+          qloc.password = loc.password
+          qloc.sitename = loc.sitename
+          qloc.site = feed.sites.find{it.title = loc.site}
+          qloc.save(flush:true)
+          feed.addToLocations(qloc)
+        }
+        feed.save(flush:true)
       }
 
       for (su in resp.siteUsers) {

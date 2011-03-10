@@ -22,6 +22,8 @@ import storitz.constants.PromoType
 import com.storitz.UserNotificationType
 import storitz.constants.SearchType
 import com.storitz.SpecialOfferRestriction
+import com.storitz.QuikStor
+import com.storitz.QuikStorLocation
 
 class BootStrap {
 
@@ -162,7 +164,7 @@ class BootStrap {
       returnArray['address1'] = it.address1
       returnArray['address2'] = it.address2
       returnArray['city'] = it.city
-      returnArray['state'] = it.state
+      returnArray['state'] = it.state as String
       returnArray['zipcode'] = it.zipcode
       returnArray['commissionSchedule'] = 1
       returnArray['sites'] = it.sites
@@ -185,13 +187,43 @@ class BootStrap {
       returnArray['address1'] = it.address1
       returnArray['address2'] = it.address2
       returnArray['city'] = it.city
-      returnArray['state'] = it.state
+      returnArray['state'] = it.state as String
       returnArray['zipcode'] = it.zipcode
       returnArray['commissionSchedule'] = 1
       returnArray['sites'] = it.sites
 
       return returnArray
 
+    }
+
+    JSON.registerObjectMarshaller QuikStor, {
+
+      def returnArray = [:]
+      returnArray['url'] = it.url
+      returnArray['feedType'] = it.feedType as String
+      returnArray['manager'] = it.manager
+      returnArray['operatorName'] = it.operatorName
+      returnArray['address1'] = it.address1
+      returnArray['address2'] = it.address2
+      returnArray['city'] = it.city
+      returnArray['state'] = it.state as String
+      returnArray['zipcode'] = it.zipcode
+      returnArray['commissionSchedule'] = 1
+      returnArray['sites'] = it.sites
+      returnArray['locations'] = it.locations
+
+      return returnArray
+
+    }
+
+    JSON.registerObjectMarshaller  QuikStorLocation, {
+      def returnArray = [:]
+      returnArray['username'] = it.username
+      returnArray['password'] = it.password
+      returnArray['sitename'] = it.sitename
+      returnArray['site'] = it.site.title
+
+      return returnArray
     }
 
     JSON.registerObjectMarshaller User, {
