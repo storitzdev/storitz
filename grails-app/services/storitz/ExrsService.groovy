@@ -109,7 +109,7 @@ class ExrsService extends CShiftService {
             }
 
             def newUnit = false
-            def siteUnit = site.units.find{ it.unitName == attributes && it.displaySize == displaySize}
+            StorageUnit siteUnit = site.units.find{ it.unitName == attributes && it.displaySize == displaySize}
 
             if (!siteUnit) {
               siteUnit = new StorageUnit()
@@ -172,10 +172,14 @@ class ExrsService extends CShiftService {
               siteUnit.unitTypeInfo = attributes
               stats.unitCount += 1
             }
-            siteUnit.save(flush:true)
-            if (newUnit) {
-              site.addToUnits(siteUnit)
-              needSave = true
+            if (siteUnit.validate()) {
+              siteUnit.save(flush:true)
+              if (newUnit) {
+                site.addToUnits(siteUnit)
+                needSave = true
+              }
+            } else {
+              writer.println "Found bad Extraspace unit: ${siteUnit.dump()}"
             }
 
           } else {
