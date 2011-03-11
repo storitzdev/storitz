@@ -8,6 +8,7 @@ class MoveInService {
     def CShiftService
     def quikStorService
     def exrsService
+    def usiService
 
     boolean transactional = false
 
@@ -27,6 +28,9 @@ class MoveInService {
 
         case "EX":
           return exrsService.checkRented(trans)  
+
+        case "USI":
+          return usiService.checkRented(trans)
 
         default:
           throw new Exception("Unknown service for move in")
@@ -49,6 +53,9 @@ class MoveInService {
 
         case "EX":
           return exrsService.moveInDetail(trans)
+
+        case "USI":
+          return usiService.moveInDetail(trans)
 
         default:
           throw new Exception("Unknown service for move in detail")
@@ -78,6 +85,11 @@ class MoveInService {
         case "EX":
           // TODO - create email notification to fill in form
           return exrsService.moveIn(trans)
+          break
+
+        case "USI":
+          usiService.createTenant(trans)
+          return usiService.reserve(trans)
           break
 
         default:

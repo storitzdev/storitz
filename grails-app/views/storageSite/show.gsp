@@ -214,7 +214,7 @@
                   <td>${s?.description}</td>
                   <td>
                     <g:each in="${s.restrictions}" var="r">
-                      <div>${r.type.display}:${r.type == SpecialOfferRestrictionType.OCCUPANCY_RATE || r.type == SpecialOfferRestrictionType.MINIMUM_AVAILABLE ? r.minRange + ' <= x <=' + r.maxRange : r.restrictionInfo}</div>
+                      <div>${r.type.display}:${r.type == SpecialOfferRestrictionType.OCCUPANCY_RATE || r.type == SpecialOfferRestrictionType.MINIMUM_AVAILABLE || r.type == SpecialOfferRestrictionType.UNIT_AREA ? r.minRange + ' <= x <=' + r.maxRange : r.restrictionInfo}</div>
                     </g:each>
                   </td>
                 </tr>

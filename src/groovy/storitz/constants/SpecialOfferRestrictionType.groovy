@@ -4,6 +4,7 @@ public enum SpecialOfferRestrictionType {
   UNIT_TYPE("Unit Type"),
   UNIT_SIZE("Unit Size"),
   OCCUPANCY_RATE("Occupancy Rate"),
+  UNIT_AREA("Square Footage"),
   MINIMUM_AVAILABLE("Minimum Available")
 
   final String display;
@@ -12,7 +13,7 @@ public enum SpecialOfferRestrictionType {
 
 
   static list() {
-      [UNIT_TYPE, UNIT_SIZE, OCCUPANCY_RATE, MINIMUM_AVAILABLE]
+      [UNIT_TYPE, UNIT_SIZE, OCCUPANCY_RATE, UNIT_AREA, MINIMUM_AVAILABLE]
   }
 
   static public SpecialOfferRestrictionType getEnumFromId(String value) {

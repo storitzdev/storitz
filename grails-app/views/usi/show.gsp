@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Show Extraspace Feed" scope="request"/>
+  <g:set var="title" value="Show U-Store-It Feed" scope="request"/>
   <g:render template="/header"/>
 
   <script type="text/javascript">
@@ -20,7 +20,7 @@
   <g:render template="/logo_bar"/>
   <div class="buttons">
     <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-    <span class="button"><g:link action="list">List Extraspace Feeds</g:link></span>
+    <span class="button"><g:link action="list">List U-Store-It Feed</g:link></span>
   </div>
   <div class="body">
     <h1>Show CenterShift Feed</h1>

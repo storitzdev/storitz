@@ -1,0 +1,154 @@
+package storitz
+
+import com.storitz.SpecialOffer
+import storitz.constants.PromoType
+
+class UsiService extends CShiftService {
+
+  def offerFilterService
+
+  static transactional = false
+
+  def loadPromos(cshift, site, writer) {
+    def ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def concessionIds = []
+
+    for(promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
+
+      def description = promo.'promo-desc'.text()
+
+      def validPromo = true
+      def promoSize = null
+
+      for(gov in promo.'promo-governors'.governor) {
+        def limitFactor = gov.'limiting-factor'.text()
+        if (limitFactor ==~ /Existing.*/) {
+          validPromo = false
+        }
+      }
+
+      if (!description.startsWith('WX')) {
+        println "Invalid promotion ${description}"
+        validPromo = false
+      }
+
+      if (validPromo && !(description ==~ /Comp.*/)) {
+
+        def concessionId = promo.'promo-id'.text() as Integer
+        concessionIds.add(concessionId)
+        SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == concessionId }
+        boolean newOffer = false
+        if (!specialOffer)  {
+          specialOffer = new SpecialOffer()
+          specialOffer.concessionId = concessionId
+          specialOffer.active = false;
+          specialOffer.featured = false;
+          specialOffer.waiveAdmin = false;
+          specialOffer.description = promo.sDescription.text()
+          specialOffer.promoName = promo.'promo-name'.text()
+          newOffer = true
+        } else {
+          specialOffer.restrictions.clear()
+          specialOffer.save(flush:true)
+        }
+        specialOffer.promoSize = promoSize
+        specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
+        specialOffer.expireMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
+        specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) : 1
+        specialOffer.description = description
+        specialOffer.inMonth = 0
+        specialOffer.promoQty = promo.'discount-min'.text() as BigDecimal
+        if (specialOffer.promoQty == 0) specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal
+
+        def ptype = promo.'discount-type'.text()
+        switch (ptype) {
+          case '$':
+            specialOffer.promoType = PromoType.AMOUNT_OFF
+            break
+
+          case '%':
+            specialOffer.promoType = PromoType.PERCENT_OFF
+            break
+
+          case 'O':
+            specialOffer.promoType = PromoType.FIXED_RATE
+            break
+
+          default:
+            writer.println "Unknown promoType: ${ptype}"
+            return
+        }
+        specialOffer.save(flush:true)
+        if (newOffer) {
+          site.addToSpecialOffers(specialOffer)
+        }
+        handleGovernors(specialOffer, promo)
+      }
+    }
+    def deleteList = []
+    for (promo in site.specialOffers) {
+      if (!concessionIds.contains(promo.concessionId)) {
+        deleteList.add(promo)
+      }
+    }
+    for (promo in deleteList) {
+      writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
+      site.removeFromSpecialOffers(promo)
+    }
+
+    // clear all push prices
+    for (unit in site.units) {
+      unit.pushRate = unit.price
+    }
+
+    List rateOffers = []
+    for (promo in site.specialOffers) {
+      if (promo.description.startsWith('WXR')) {
+        def pm = promo.description =~ /WXRX\dX-(\d+)\%/
+        if (pm.getCount()) {
+          promo.promoQty = pm[0][1] as BigDecimal
+        }
+        rateOffers.add(promo)
+      }
+    }
+
+    for (unit in site.units) {
+      def rList = rateOffers.clone()
+      offerFilterService.filterOffer(rList, site, unit)
+      if (rList.size() > 0) {
+        def rOffer = rList.max{ it.promoQty }
+        unit.pushRate = (1 - (rOffer.promoQty/100G))*unit.price
+        if (unit.pushRate != unit.price) {
+          unit.save()
+        }
+      }
+    }
+
+    // remove rate promos and rename other promos
+    deleteList.clear()
+    for (promo in site.specialOffers) {
+      if (promo.description.startsWith('WXR')) {
+        deleteList.add(promo)
+      } else {
+        if (promo.description.startsWith('WXD')) {
+          promo.featured = true
+        }
+        promo.active = true
+        promo.description = promo.promoName = promo.description.split('-')[1]
+        promo.save(flush:true)
+      }
+    }
+    for (promo in deleteList) {
+      site.removeFromSpecialOffers(promo)
+    }
+
+  }
+
+}

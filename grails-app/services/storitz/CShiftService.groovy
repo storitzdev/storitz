@@ -172,6 +172,8 @@ class CShiftService extends BaseProviderService {
 
   def makeReservation(RentalTransaction rentalTransaction) {
      def centerShift = (CenterShift)rentalTransaction.site.feed
+     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
+
      def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -182,7 +184,7 @@ class CShiftService extends BaseProviderService {
          <csc:lngContactID>""" + rentalTransaction.contactId + """</csc:lngContactID>
          <csc:strReservationStartDate>""" + rentalTransaction.moveInDate.format('MM/dd/yyyy') + """</csc:strReservationStartDate>
          <csc:lngUnitID>""" + rentalTransaction.feedUnitId + """</csc:lngUnitID>
-         <csc:sngNewRate>-1</csc:sngNewRate>
+         <csc:sngNewRate>""" + (rentalTransaction.site.allowPushPrice ? unit.pushRate : unit.price) + """</csc:sngNewRate>
          <csc:sngAmount>""" + rentalTransaction.reservationCost + """</csc:sngAmount>
          <csc:strPayMethod>K</csc:strPayMethod>
          <csc:strCheckNumber>0123456789</csc:strCheckNumber>
@@ -629,23 +631,23 @@ class CShiftService extends BaseProviderService {
           def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
           def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
           if (start.contains(':') && start.contains('m')) {
-            site."$startField" = Date.parse("HH:mma", start)
+            site."$startField" = Date.parse("hh:mma", start)
           } else if (start.contains(':')) {
-            site."$startField" = Date.parse("HH:mm", start)
+            site."$startField" = Date.parse("hh:mm", start)
           } else if (start.contains('m')) {
-            site."$startField" = Date.parse("HHa", start)
+            site."$startField" = Date.parse("hha", start)
           } else {
-            site."$startField" = Date.parse("HH", start)
+            site."$startField" = Date.parse("hh", start)
           }
           if (end.contains(':') && end.contains('m')) {
-            site."$endField" = Date.parse("HH:mma", end)
+            site."$endField" = Date.parse("hh:mma", end)
           } else if (end.contains(':')) {
-            site."$endField" = Date.parse("HH:mma", end + 'PM')
+            site."$endField" = Date.parse("hh:mma", end + 'PM')
           } else if (end.contains('m')) {
-            site."$endField" = Date.parse("HHa", end)
+            site."$endField" = Date.parse("hha", end)
           } else {
             def endPM = ((end as Integer) + 12) as String
-            site."$endField" = Date.parse("HH", endPM)
+            site."$endField" = Date.parse("hh", endPM)
           }
         } else {
           println "Hours do not match: ${office}"
@@ -978,96 +980,8 @@ class CShiftService extends BaseProviderService {
         if (newOffer) {
           site.addToSpecialOffers(specialOffer)
         }
-        def saveFlag = false
-        for(gov in promo.'promo-governors'.governor) {
-          def limitFactor = gov.'limiting-factor'.text()
-          switch (limitFactor) {
-            case '# Vacant':
-              def restriction = new SpecialOfferRestriction()
-              restriction.restrictive = false
-              restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
-              restriction.minRange = gov.'range-low'.text() as BigDecimal
-              restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-              restriction.save(flush:true)
-              specialOffer.addToRestrictions(restriction)
-              saveFlag = true
-              break
-            case '# Vacant (Restrictive)':
-              def restriction = new SpecialOfferRestriction()
-              restriction.restrictive = true
-              restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
-              restriction.minRange = gov.'range-low'.text() as BigDecimal
-              restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-              restriction.save(flush:true)
-              specialOffer.addToRestrictions(restriction)
-              saveFlag = true
-              break
-            case '% Vacant':
-              def restriction = new SpecialOfferRestriction()
-              restriction.restrictive = false
-              restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
-              restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
-              restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
-              restriction.save(flush:true)
-              specialOffer.addToRestrictions(restriction)
-              saveFlag = true
-              break
-            case '% Vacant (Restrictive)':
-              def restriction = new SpecialOfferRestriction()
-              restriction.restrictive = true
-              restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
-              restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
-              restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
-              restriction.save(flush:true)
-              specialOffer.addToRestrictions(restriction)
-              saveFlag = true
-              break
-            case 'At Move-In Only':
-              // ignore
-              break
-            case 'Existing Tenants Only':
-              // this should be filtered above and never happen here
-              break
-            case 'Insurance':
-              // ignore
-              break
-            case 'New Customers Only':
-              // ignore
-              break
-            case 'Non-Delinquent Rentals Only (less than Step 1)':
-              // ignore
-              break
-            case 'Rental Rate':
-              // ignore
-              break
-            case 'Rental Square Feet':
-              // ignore
-              break
-            case 'Unit Attributes':
-              def restriction = new SpecialOfferRestriction()
-              restriction.restrictive = false
-              restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-              restriction.restrictionInfo = gov.'governor-value'.text()
-              restriction.save(flush:true)
-              specialOffer.addToRestrictions(restriction)
-              saveFlag = true
-              break
-            case 'Unit Dimensions/Size':
-              def restriction = new SpecialOfferRestriction()
-              restriction.restrictive = false
-              restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
-              restriction.restrictionInfo = gov.'governor-value'.text()
-              restriction.save(flush:true)
-              specialOffer.addToRestrictions(restriction)
-              saveFlag = true
-              break
-          }
-        }
-        if (saveFlag) {
-          specialOffer.save(flush:true)
-        }
+        handleGovernors(specialOffer, promo)
       }
-
     }
     def deleteList = []
     for (promo in site.specialOffers) {
@@ -1078,6 +992,105 @@ class CShiftService extends BaseProviderService {
     for (promo in deleteList) {
       writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
       site.removeFromSpecialOffers(promo)
+    }
+
+  }
+
+  protected handleGovernors(SpecialOffer specialOffer, promo) {
+    def saveFlag = false
+    for(gov in promo.'promo-governors'.governor) {
+      def limitFactor = gov.'limiting-factor'.text()
+      switch (limitFactor) {
+        case '# Vacant':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = false
+          restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
+          restriction.minRange = gov.'range-low'.text() as BigDecimal
+          restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+        case '# Vacant (Restrictive)':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = true
+          restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
+          restriction.minRange = gov.'range-low'.text() as BigDecimal
+          restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+        case '% Vacant':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = false
+          restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
+          restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
+          restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+        case '% Vacant (Restrictive)':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = true
+          restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
+          restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
+          restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+        case 'At Move-In Only':
+          // ignore
+          break
+        case 'Existing Tenants Only':
+          // this should be filtered above and never happen here
+          break
+        case 'Insurance':
+          // ignore
+          break
+        case 'New Customers Only':
+          // ignore
+          break
+        case 'Non-Delinquent Rentals Only (less than Step 1)':
+          // ignore
+          break
+        case 'Rental Rate':
+          // ignore
+          break
+        case 'Rental Square Feet':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = true
+          restriction.type = SpecialOfferRestrictionType.UNIT_AREA
+          restriction.minRange = gov.'range-low'.text() as BigDecimal
+          restriction.maxRange = gov.'range-hi'.text() as BigDecimal
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+        case 'Unit Attributes':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = false
+          restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+          restriction.restrictionInfo = gov.'governor-value'.text()
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+        case 'Unit Dimensions/Size':
+          def restriction = new SpecialOfferRestriction()
+          restriction.restrictive = false
+          restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
+          restriction.restrictionInfo = gov.'governor-value'.text()
+          restriction.save(flush:true)
+          specialOffer.addToRestrictions(restriction)
+          saveFlag = true
+          break
+      }
+    }
+    if (saveFlag) {
+      specialOffer.save(flush:true)
     }
 
   }

@@ -13,6 +13,7 @@ class FeedService {
   def CShiftService
   def quikStorService
   def exrsService
+  def usiService
   
   boolean transactional = false
 
@@ -34,6 +35,10 @@ class FeedService {
 
       case "EX":
         exrsService.updateSite(storageSiteInstance, stats, writer)
+        break
+
+      case "USI":
+        usiService.updateSite(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -61,6 +66,10 @@ class FeedService {
         exrsService.updateUnits(storageSiteInstance, stats, writer)
         break
 
+      case "USI":
+        usiService.updateUnits(storageSiteInstance, stats, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -81,13 +90,18 @@ class FeedService {
         break
 
       case "QS":
-        def quickStor = (QuikStor)storageSiteInstance.feed
-        quikStorService.loadPromos(quickStor, storageSiteInstance, writer)
+        def quikStor = (QuikStor)storageSiteInstance.feed
+        quikStorService.loadPromos(quikStor, storageSiteInstance, writer)
         break
 
       case "EX":
         def centerShift = (CenterShift)storageSiteInstance.feed
         exrsService.loadPromos(centerShift, storageSiteInstance, writer)
+        break
+
+      case "USI":
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        usiService.loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       default:
@@ -110,13 +124,18 @@ class FeedService {
         break
 
       case "QS":
-        def quickStor = (QuikStor)storageSiteInstance.feed
+        def quikStor = (QuikStor)storageSiteInstance.feed
         quikStorService.addSitePhone(quikStor, storageSiteInstance, writer)
         break
 
       case "EX":
         def centerShift = (CenterShift)storageSiteInstance.feed
         exrsService.addSitePhone(centerShift, storageSiteInstance, writer)
+        break
+
+      case "USI":
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        usiService.addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       default:

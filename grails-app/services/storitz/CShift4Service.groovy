@@ -12,6 +12,9 @@ import storitz.constants.TransactionType
 import com.centershift.store40.GetSiteDetailsRequest
 import com.centershift.store40.ArrayOfLong
 import com.centershift.store40.GetBaseFeesRequest
+import com.centershift.store40.GetAvailableServices
+import com.centershift.store40.GetAvailableServicesRequest
+import storitz.constants.TruckType
 
 class CShift4Service {
 
@@ -118,28 +121,68 @@ class CShift4Service {
             def siteDetail = siteDetails.details.soasiteattributes[0]
 
             def sitehours = siteDetail.sitehours
-            def gatehours = siteDetail.gatehours
+            def gatehours = siteDetail.gatehours.toLowerCase()
 
             println "Site hours = ${sitehours}"
-            def hm = sitehours =~ /Monday:\s*(.+?)\s*Tuesday:\s(.+?)\s*Wednesday:\s*(.+?)\s*Thursday:\s*(.+?)\s*Friday:\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+?)/
+            println "Gate hours = ${gatehours}"
+
+            def hm = sitehours =~ /Monday:\s*(.+?)\s*Tuesday:\s*(.+?)\s*Wednesday:\s*(.+?)\s*Thursday:\s*(.+?)\s*Friday:\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
             if (hm.getCount()) {
               println "Site hours match"
-              def hrsMon = hm[0][1].toLowerCase()
-              def hrsTues = hm[0][2].toLowerCase()
-              def hrsWed = hm[0][3].toLowerCase()
-              def hrsThurs = hm[0][4].toLowerCase()
-              def hrsFri = hm[0][5].toLowerCase()
-              def hrsSat = hm[0][6].toLowerCase()
 
-              if (hrsMon == "closed") {
-                csite.openMonday = false
-              } else {
-                csite.openMonday = true
-                csite.startMonday = getStartTime(hrsMon)
-                csite.endMonday = getEndTime(hrsMon)
+              ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].eachWithIndex{
+                day, i ->
+                def hrs = hm[0][i+1].toUpperCase()
+                def open = "open${day}"
+                def start = "start${day}"
+                def end = "end${day}"
+                if (hrs == "CLOSED") {
+                  csite."$open" = false
+                } else {
+                  csite."$open" = true
+                  csite."$start" = getStartTime(hrs)
+                  csite."$end" = getEndTime(hrs)
+                }
+              }
+            } else {
+              hm = sitehours =~ /Monday\s*\w+?\s*Friday\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
+              if (hm.getCount()) {
+                println "Monday - Friday match"
+                ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each{ day ->
+                  def hrs = hm[0][1].toUpperCase()
+                  def open = "open${day}"
+                  def start = "start${day}"
+                  def end = "end${day}"
+                  csite."$open" = true
+                  csite."$start" = getStartTime(hrs)
+                  csite."$end" = getEndTime(hrs)
+                }
+                ["Saturday", "Sunday"].eachWithIndex{ day, i ->
+                  def hrs = hm[0][i+2].toUpperCase()
+                  def open = "open${day}"
+                  def start = "start${day}"
+                  def end = "end${day}"
+                  if (hrs == "CLOSED") {
+                    csite."$open" = false
+                  } else {
+                    csite."$open" = true
+                    csite."$start" = getStartTime(hrs)
+                    csite."$end" = getEndTime(hrs)
+                  }
+                }
               }
             }
-            println "Gate hours = ${gatehours}"
+            if (gatehours == "24 hours") {
+              def start = Date.parse("hh:mma","12:00am")
+              def end = Date.parse("hh:mma", "11:59pm")
+              csite.startMondayGate = csite.startTuesdayGate = csite.startWednesdayGate = csite.startThursdayGate = csite.startFridayGate = csite.startSaturdayGate = csite.startSundayGate = start
+              csite.endMondayGate = csite.endTuesdayGate = csite.endWednesdayGate = csite.endThursdayGate = csite.endFridayGate = csite.endSaturdayGate = csite.endSundayGate = end
+            } else {
+              def gm = gatehours =~ /(.+?)\s*\w+?\s*(.+)/
+              if (gm.getCount()) {
+                
+              }
+            }
 
             GetBaseFeesRequest siteFeesRequest = new GetBaseFeesRequest()
             siteFeesRequest.siteID = site.siteid
@@ -152,10 +195,33 @@ class CShift4Service {
               }
             }
 
-            // csite.save(flush:true)
+            // set attributes
+            csite.extendedHours = false
+            csite.isManagerOnsite = false
+            csite.isGate = true
+            csite.isKeypad = true
+            csite.isCamera = false
+            csite.hasElevator = false
+            csite.requiresInsurance = false
+            csite.boxesAvailable = false
+            csite.freeTruck = TruckType.NONE
+            csite.isUnitAlarmed = false
+
+            GetAvailableServicesRequest availSvcReq = new GetAvailableServicesRequest()
+            availSvcReq.siteID = site.siteid
+            def availSvcs = myProxy.getAvailableServices(lookupUser, availSvcReq)
+            for (svc in availSvcs.details.orgservicesiteofferings) {
+              if (svc.servicetypeval == "24 Hour Access") {
+                // TODO mark 24 access
+                csite.extendedHours = true
+                println "Found 24 hr access"
+              }
+            }
+
+            csite.save(flush:true)
             SiteUser.link(csite, cshift.manager)
-            if (site.email?.size() > 0) {
-              createSiteUser(csite, site.email, site.email, cshift.manager)
+            if (site.emailaddress?.size() > 0) {
+              createSiteUser(csite, site.emailaddress, site.emailaddress, cshift.manager)
             }
 
             // TODO - promos, insurance, hours, site features
@@ -163,7 +229,7 @@ class CShift4Service {
             loadInsurance(cshift, csite)
             // loadUnits(csite)
 
-            // csite.save(flush:true)
+            csite.save(flush:true)
 
           } else {
             println "Skipped site ${site.displayname} due to status ${site.sitestatus} or property type ${site.propertytype}"
@@ -173,34 +239,41 @@ class CShift4Service {
       }
     }
 
-    def loadInsurance(cshift, site) {
+    def loadInsurance(CenterShift cshift, StorageSite site) {
       def myProxy = getProxy(cshift)
-      def insuranceRequest = new GetInsuranceProvidersRequest()
-      insuranceRequest.siteID = site.siteid
-      insuranceRequest.orgID = site.orgid
+      GetInsuranceProvidersRequest insuranceRequest = new GetInsuranceProvidersRequest()
+      insuranceRequest.siteID = site.sourceId as Long
+      insuranceRequest.orgID = cshift.orgId
       def lookupUser = getLookupUser(cshift)
       def insuranceProviders = myProxy.getInsuranceProviders(lookupUser, insuranceRequest)
       for (ins in insuranceProviders.details.ORGINSSITEOFFERINGS) {
-        def siteIns = site.insurances.find{ it.insuranceId == ins.siteinsid }
+        Insurance siteIns = site.insurances.find{ it.insuranceId == ins.siteinsid }
+        boolean newIns = false
         if (!siteIns) {
           siteIns = new Insurance()
           siteIns.insuranceId = ins.siteinsid
+          siteIns.active = true
+          newIns = true
         }
         siteIns.percentTheft = ins.coverageperc
         siteIns.provider = ins.providername
         siteIns.premium = ins.rate
         siteIns.totalCoverage = ins.coverageamount
-
         siteIns.save(flush:true)
+        if (newIns) {
+          site.addToInsurances(siteIns)
+        }
       }
     }
 
     private Date getStartTime(String hrs) {
       def start = hrs.split("-")[0].trim()
+      return Date.parse("hh:mma", start)
     }
 
     private Date getEndTime(String hrs) {
       def end = hrs.split("-")[-1].trim()
+      return Date.parse("hh:mma", end)
     }
 
 }
