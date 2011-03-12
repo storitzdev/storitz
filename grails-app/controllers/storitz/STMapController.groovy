@@ -109,78 +109,82 @@ class STMapController {
           moveInDate = new Date()
         }
       }
+      def today = new Date()
+      def moveInDays = moveInDate - today
 
       def sw = new StringWriter()
       sw << "[ "
       def row = 0
       for (site in results) {
-        row++;
-        sw << "{ \"index\":${row}, \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"transactionType\":\"${site.transactionType}\",\"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\", \"logo\":\"${site.logo ? resource(file:site.logo.src()) : ""}\", "
+        if (site.maxReserveDays >= moveInDays) {
+          row++;
+          sw << "{ \"index\":${row}, \"id\": \"${site.id}\", \"address\":\"${site.address}\", \"address2\":\"${site.address2}\", \"city\":\"${site.city}\", \"state\":\"${site.state.display}\", \"zipcode\":\"${site.zipcode}\", \"lat\":${site.lat}, \"lng\":${site.lng}, \"title\":\"${site.title}\", \"requiresInsurance\":${site.requiresInsurance}, \"boxesAvailable\":${site.boxesAvailable}, \"freeTruck\":\"${site.freeTruck}\", \"isGate\":${site.isGate}, \"isCamera\":${site.isCamera}, \"isKeypad\":${site.isKeypad}, \"isUnitAlarmed\":${site.isUnitAlarmed}, \"isManagerOnsite\":${site.isManagerOnsite}, \"hasElevator\":${site.hasElevator}, \"transactionType\":\"${site.transactionType}\",\"coverImg\":\"${site.coverImage() ? site.coverImage().thumbnail() : ""}\", \"logo\":\"${site.logo ? resource(file:site.logo.src()) : ""}\", "
 
-        def bestUnit
-        def unitSiz
-        def monthly
-        def pushRate
-        def moveInCost = 100000
-        def promoId
-        def promoName
-        def paidThruDate
-        def sizeDescription
-        def unitType
+          def bestUnit
+          def unitSiz
+          def monthly
+          def pushRate
+          def moveInCost = 100000
+          def promoId
+          def promoName
+          def paidThruDate
+          def sizeDescription
+          def unitType
 
-        if (site.allowPushPrice) {
-          if (unitSize) {
-            bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.pushRate }
+          if (site.allowPushPrice) {
+            if (unitSize) {
+              bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.pushRate }
+            } else {
+              bestUnit = site.units.min{ it.pushRate }
+            }
           } else {
-            bestUnit = site.units.min{ it.pushRate }
+            if (unitSize) {
+              bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
+            } else {
+              bestUnit = site.units.min{ it.price }
+            }
           }
-        } else {
-          if (unitSize) {
-            bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id }.min{ it.price }
-          } else {
-            bestUnit = site.units.min{ it.price }
-          }
-        }
-        if (bestUnit) {
-          def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
-          monthly = bestUnit?.price
-          pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
-          unitType = bestUnit?.unitType.display
-          sizeDescription = bestUnit?.displaySize
-          promoId = null
-          promoName = null
-          moveInCost = totals['moveInTotal']
-          paidThruDate = totals['paidThruDate']
-          def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
-          if (featuredOffers.size() > 0) {
-            def oldMoveInCost = moveInCost
-            moveInCost = 100000
-            for (promo in featuredOffers) {
-              if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
-                totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
-                if (moveInCost > totals['moveInTotal']) {
-                  monthly = bestUnit?.price
-                  unitType = bestUnit?.unitType.display
-                  pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
-                  sizeDescription = bestUnit?.displaySize
-                  promoId = promo.id
-                  promoName = promo.promoName
-                  moveInCost = totals['moveInTotal']
-                  paidThruDate = totals['paidThruDate']
+          if (bestUnit) {
+            def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+            monthly = bestUnit?.price
+            pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
+            unitType = bestUnit?.unitType.display
+            sizeDescription = bestUnit?.displaySize
+            promoId = null
+            promoName = null
+            moveInCost = totals['moveInTotal']
+            paidThruDate = totals['paidThruDate']
+            def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
+            if (featuredOffers.size() > 0) {
+              def oldMoveInCost = moveInCost
+              moveInCost = 100000
+              for (promo in featuredOffers) {
+                if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
+                  totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+                  if (moveInCost > totals['moveInTotal']) {
+                    monthly = bestUnit?.price
+                    unitType = bestUnit?.unitType.display
+                    pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
+                    sizeDescription = bestUnit?.displaySize
+                    promoId = promo.id
+                    promoName = promo.promoName
+                    moveInCost = totals['moveInTotal']
+                    paidThruDate = totals['paidThruDate']
+                  }
                 }
               }
-            }
-            if (moveInCost == 100000) {
-              moveInCost = oldMoveInCost
+              if (moveInCost == 100000) {
+                moveInCost = oldMoveInCost
+              }
             }
           }
-        }
-        sw << "\"monthly\": ${monthly}, \"pushRate\": ${pushRate}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId}, \"promoName\":\"${promoName}\", \"paidThruDate\":\"${paidThruDate}\", \"unitType\":\"${unitType}\", \"sizeDescription\":\"${sizeDescription}\" }"
+          sw << "\"monthly\": ${monthly}, \"pushRate\": ${pushRate}, \"moveInCost\": ${moveInCost}, \"promoId\": ${promoId}, \"promoName\":\"${promoName}\", \"paidThruDate\":\"${paidThruDate}\", \"unitType\":\"${unitType}\", \"sizeDescription\":\"${sizeDescription}\" }"
 
-        if (row < results.size() && row < 20) {
-          sw << ","
+          if (row < results.size() && row < 20) {
+            sw << ","
+          }
+          if (row >= 20) break
         }
-        if (row >= 20) break
       }
       sw << "]"
       webUtilService.nocache(response)
