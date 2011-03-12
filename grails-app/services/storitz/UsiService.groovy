@@ -35,7 +35,6 @@ class UsiService extends CShiftService {
       }
 
       if (!description.startsWith('WX')) {
-        println "Invalid promotion ${description}"
         validPromo = false
       }
 
@@ -126,7 +125,7 @@ class UsiService extends CShiftService {
         def rOffer = rList.max{ it.promoQty }
         unit.pushRate = (1 - (rOffer.promoQty/100G))*unit.price
         if (unit.pushRate != unit.price) {
-          unit.save()
+          unit.save(flush:true)
         }
       }
     }
@@ -134,7 +133,7 @@ class UsiService extends CShiftService {
     // remove rate promos and rename other promos
     deleteList.clear()
     for (promo in site.specialOffers) {
-      if (promo.description.startsWith('WXR')) {
+      if (promo.description.startsWith('WXR') || promo.description.startsWith('WXA')) {
         deleteList.add(promo)
       } else {
         if (promo.description.startsWith('WXD')) {

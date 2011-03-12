@@ -25,8 +25,12 @@ class RefreshPromosJob {
     }
     writer.println "----------------- Starting Promo refresh update... ----------------------------"
     StorageSite.findAll().each{ site ->
-      feedService.refreshPromos(site, writer)
-      site.save(flush: true)
+      try {
+        feedService.refreshPromos(site, writer)
+        site.save(flush: true)
+      } catch (Exception e) {
+        writer.println "Error processing site id=${site.id} Error: ${e} Stacktrace: ${e.stackTrace}"
+      }
     }
     writer.println  "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
 

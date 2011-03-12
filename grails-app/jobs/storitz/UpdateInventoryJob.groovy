@@ -25,9 +25,13 @@ class UpdateInventoryJob {
       }
       writer.println  "----------------- Starting nightly update... ----------------------------"
       StorageSite.findAll().each{ site ->
-        def stats = new storitz.SiteStats()
-        feedService.updateUnits(site, stats, writer)
-        writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
+        try {
+          def stats = new storitz.SiteStats()
+          feedService.updateUnits(site, stats, writer)
+          writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
+        } catch (Exception e) {
+          writer.println "Error processing site id=${site.id} Error: ${e} Stacktrace: ${e.stackTrace}"
+        }
       }
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
