@@ -575,6 +575,13 @@
               <span>${storageSiteInstance.allowPushPrice ? 'Allow' : 'Disallow'}</span>
             </td>
           </tr>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="storageSite.maxReserveDays.label" default="Maximum Days in Future to Rent/Reserve"/></td>
+
+            <td valign="top" style="text-align: left;" class="value">
+              ${storageSiteInstance.maxReserveDays}
+            </td>
+          </tr>
       </sec:ifAnyGranted>
       <sec:ifAnyGranted roles="ROLE_ADMIN">
         <tr class="prop">

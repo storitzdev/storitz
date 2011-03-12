@@ -234,7 +234,7 @@ function setupCalendar() {
   var datePicker = $('#date').datepicker(
             { dateFormat: 'mm/dd/y',
               minDate: 0,
-              maxDate: "+2M",
+              maxDate: maxReserveDays,
               onSelect: function(dateText, inst) {
                 startDate = dateText;
                 $('#SC_date').val(startDate);

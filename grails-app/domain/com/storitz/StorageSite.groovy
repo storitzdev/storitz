@@ -187,6 +187,7 @@ class StorageSite {
     Long lastUpdate
     Boolean disabled = false
     Integer minInventory = 0
+    Integer maxReserveDays = 60
 
     Boolean netCommission = false
     Boolean allowPushPrice = true

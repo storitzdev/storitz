@@ -1229,6 +1229,19 @@
               </div>
               <div style="clear:both;height: 15px;"></div>
             </div>
+
+            <div class="checkout_section_header">
+              Maximum Days in Future to Allow Reservations/Rentals
+            </div>
+            <div class="formInstructions">
+              Set the number of days from the current date to allow customers to make a reservation or rental.
+            </div>
+            <div class="checkout_fields">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'maxReserveDays', 'errors')}">
+                <g:textField name="maxReserveDays" style="width:190px;" value="${storageSiteInstance?.maxReserveDays}"/>
+              </div>
+              <div style="clear:both;height: 15px;"></div>
+            </div>
           </sec:ifAnyGranted>
 
           <div class="checkout_section_header">
