@@ -13,6 +13,7 @@ public enum SoftwareType {
   SELF_STORAGE_MANAGER("Self Storage Manager"),
   DOMICO("Domico"),
   QUIKSTOR("QuikStor"),
+  STORMAN("Storman"),
   OTHER("Other")
 
   final String display;
@@ -21,7 +22,7 @@ public enum SoftwareType {
 
 
   static list() {
-      [CENTERSHIFT, SITELINK, SELF_STORAGE_MANAGER, DOMICO, QUIKSTOR, OTHER]
+      [CENTERSHIFT, SITELINK, SELF_STORAGE_MANAGER, DOMICO, QUIKSTOR, STORMAN, OTHER]
   }
 
   static public SoftwareType getEnumFromId(String value) {

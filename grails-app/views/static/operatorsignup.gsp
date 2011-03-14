@@ -90,7 +90,7 @@
             <li>$0 up-front investment</li>
             <li>$0 subscription fees</li>
             <li>Lowest Commissions - <span style="font-style:italic;">Guaranteed</span></li>
-            <li>No Contract</li>
+            <li>Month-to-Month Agreement</li>
             <li>Easy to get started</li>
           </ul>
         </p>
@@ -136,7 +136,7 @@
           <div style="font-weight:bold;">How much does it cost me?</div>
           <div>
             <ul>
-              <li>We have the lowest commissions in the industry, starting at $20 per move-in. No subscriptions, no exceptions. No hidden fees.</li>
+              <li>We have the lowest commissions in the industry, starting at $40 per move-in. No subscriptions, no exceptions. No hidden fees.</li>
             </ul>
           </div>
         </p>
