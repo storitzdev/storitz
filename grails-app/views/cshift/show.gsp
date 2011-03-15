@@ -119,6 +119,21 @@
         </g:if>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.transactionBoxLink" default="Transaction Box Link"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "transactionBoxLink")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.transactionBoxBody" default="Transaction Box Body"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "transactionBoxBody")}</td>
+
+        </tr>
+
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="cshift.commissionSchedule.label" default="Commission Schedule"/></td>
 
           <td valign="top" class="value">${cshiftInstance.commissionSchedule?.scheduleName}</td>

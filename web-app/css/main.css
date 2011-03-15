@@ -1363,6 +1363,14 @@ p.descriptionText {
     cursor: pointer;
 }
 
+.transactionBoxLink, .offerLink span {
+    color: #3bad00;
+    font: 11px verdana, arial, helvetica, sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
 .offerList p {
     margin: 0 0 6px 0;
     font: 11px verdana, arial, helvetica, sans-serif;

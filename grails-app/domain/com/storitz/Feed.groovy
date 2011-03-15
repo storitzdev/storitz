@@ -15,6 +15,8 @@ class Feed {
     city(nullable:true)
     state(nullable:true)
     zipcode(nullable:true)
+    transactionBoxLink(size:1..255,nullable:true)
+    transactionBoxBody(size:1..2000,nullable:true)
   }
 
   FeedType feedType
@@ -25,6 +27,8 @@ class Feed {
   String city
   State state
   String zipcode
+  String transactionBoxLink
+  String transactionBoxBody
 
   CommissionSchedule commissionSchedule
 

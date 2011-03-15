@@ -23,7 +23,7 @@
   <div class="body">
 
     <div class="price_options checkout_header white">
-      List Extraspace Feed
+      List U-Store-It Feed
     </div>
 
     <g:if test="${flash.message}">

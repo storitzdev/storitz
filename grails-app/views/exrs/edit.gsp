@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:set var="title" value="Edit CenterShift Feed" scope="request"/>
+  <g:set var="title" value="Edit Extraspace Feed" scope="request"/>
   <g:render template="/header_admin"/>
   <script type="text/javascript">
     //<![CDATA[
@@ -75,11 +75,11 @@
       </div>
 
       <div class="checkout_section_header">
-        CenterShift Account Information
+        Extraspace Account Information
       </div>
 
       <div class="formInstructions">
-        This information should come from CenterShift and the operator
+        This information should come from Extraspace and the operator
       </div>
 
       <div class="checkout_fields">
@@ -94,7 +94,7 @@
 
       <div class="checkout_labels">
         <div class="checkout_name" style="width:200px;">
-          <label for="cshiftVersion">CenterShift Version</label>
+          <label for="cshiftVersion">Extraspace Version</label>
         </div>
         <div id="orgId_label" class="checkout_name" style="width:200px;display:none;">
           <label for="orgId">Organization ID</label>
@@ -200,6 +200,35 @@
         </div>
         <div style="clear:both;height:10px;"></div>
       </div>
+
+        <div class="checkout_fields">
+           <div style="width:300px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'transactionBoxLink', 'errors')}">
+              <g:textField id="transactionBoxLink" name="transactionBoxLink" style="width: 280px;" value="${cshiftInstance?.transactionBoxLink}" />
+           </div>
+           <div style="clear:both;"></div>
+        </div>
+
+        <div class="checkout_labels">
+           <div class="checkout_name" stype="width:300px">
+               <label for="transactionBoxLink">Transaction Box Link</label>
+           </div>
+           <div style="clear:both;"></div>
+        </div>
+
+        <div class="checkout_fields">
+            <div style="width:300px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'transactionBoxBody', 'errors')}">
+              <g:textArea rows="5" cols="50" id="transactionBoxBody" name="transactionBoxBody" style="width: 280px;" value="${cshiftInstance?.transactionBoxBody}" />
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+
+        <div class="checkout_labels">
+            <div class="checkout_name" stype="width:300px">
+                <label for="transactionBoxBody">Transaction Box Body</label>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+
 
       <div class="checkout_fields">
         <div style="width:400px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'commissionSchedule', 'errors')}">

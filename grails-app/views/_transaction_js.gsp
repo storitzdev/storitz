@@ -52,3 +52,14 @@ function setupRentVsReserve() {
     });
 }
 
+function setupTransactionBoxLink() {
+    $('#transactionBoxLinkBody').dialog({
+        autoOpen: false,
+        resizable: false,
+        width: 250
+    }).addTouch();
+    $('#transactionBoxLink').click(function(event) {
+        _gaq.push(['funnelTracker._trackEvent', 'detail', 'transactionboxlink']);
+        $('#transactionBoxLinkBody').dialog({position:[event.pageX-100,event.pageY]}).dialog('open');
+    });
+}

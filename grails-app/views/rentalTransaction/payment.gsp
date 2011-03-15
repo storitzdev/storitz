@@ -135,6 +135,9 @@
                               <li>Refundable until Move-In date</li>
                             </g:if>
                           </ul>
+                          <g:if test="${site.feed.transactionBoxLink}">
+                           <span id="transactionBoxLink" class="transactionBoxLink textCenter">${site.feed.transactionBoxLink}</span>
+                          </g:if>
                         </div>
                       </g:if>
                       <div id="costDetails" class="right">
@@ -394,7 +397,9 @@
         </div>
       </div>
     </div>
-
+    <div id="transactionBoxLinkBody" style="display:none">
+          ${ site.feed.transactionBoxBody}
+    </div>
     <div style="clear:both; height:30px;"></div>
     <div id="helpDeskStatus">STATUS</div>
     <g:render template="/footer_no_analytics" />

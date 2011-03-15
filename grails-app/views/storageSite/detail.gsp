@@ -44,6 +44,7 @@
   </g:if>
   <g:if test="${site.transactionType == TransactionType.RESERVATION}">
     setupRentVsReserve();
+    setupTransactionBoxLink();
   </g:if>
     showTotals();
     setupPromoHandler();

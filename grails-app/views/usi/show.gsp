@@ -23,7 +23,7 @@
     <span class="button"><g:link action="list">List U-Store-It Feed</g:link></span>
   </div>
   <div class="body">
-    <h1>Show CenterShift Feed</h1>
+    <h1>Show U-Store-It Feed</h1>
     <g:if test="${flash.message}">
       <div class="message">${flash.message}</div>
     </g:if>
@@ -116,6 +116,22 @@
 
           </tr>
         </g:if>
+
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.transactionBoxLink" default="Transaction Box Link"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "transactionBoxLink")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="cshift.transactionBoxBody" default="Transaction Box Body"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "transactionBoxBody")}</td>
+
+        </tr>
+
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="cshift.commissionSchedule.label" default="Commission Schedule"/></td>

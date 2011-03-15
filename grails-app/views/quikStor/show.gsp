@@ -95,6 +95,21 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="siteLink.transactionBoxLink" default="Transaction Box Link"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "transactionBoxLink")}</td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="siteLink.transactionBoxBody" default="Transaction Box Body"/></td>
+
+          <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "transactionBoxBody")}</td>
+
+        </tr>
+
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="quikStor.commissionSchedule.label" default="Commission Schedule"/></td>
 
           <td valign="top" class="value">${quikStorInstance.commissionSchedule?.scheduleName}</td>

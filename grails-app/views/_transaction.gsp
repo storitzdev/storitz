@@ -82,8 +82,11 @@
             <g:if test="${site.rentalFee}">
               <li>Refundable until Move-In date</li>
             </g:if>
-          </ul>
-        </div>
+           </ul>
+           <g:if test="${site.feed.transactionBoxLink}">
+             <span id="transactionBoxLink" class="transactionBoxLink textCenter">${site.feed.transactionBoxLink}</span>
+          </g:if>
+         </div>
       </g:if>
       <div id="costDetails" class="right">
         <table class="costTotals" cellspacing="0">
@@ -205,4 +208,7 @@
 </div>
 <div id="rentVsReserveText" style="display:none">
   Reserve a unit now to hold a specific space and its price up until your move-in date.  You'll need to finalize paperwork, payment and other details when you arrive at the property.
+</div>
+<div id="transactionBoxLinkBody" style="display:none">
+      ${ site.feed.transactionBoxBody}
 </div>

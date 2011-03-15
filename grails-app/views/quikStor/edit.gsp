@@ -216,6 +216,35 @@
         <div style="clear:both;height:10px"></div>
       </div>
 
+        <div class="checkout_fields">
+           <div style="width:300px;" class="checkout_value ${hasErrors(bean: quikStorInstance, field: 'transactionBoxLink', 'errors')}">
+              <g:textField id="transactionBoxLink" name="transactionBoxLink" style="width: 280px;" value="${quikStorInstance?.transactionBoxLink}" />
+           </div>
+           <div style="clear:both;"></div>
+        </div>
+
+        <div class="checkout_labels">
+           <div class="checkout_name" stype="width:300px">
+               <label for="transactionBoxLink">Transaction Box Link</label>
+           </div>
+           <div style="clear:both;"></div>
+        </div>
+
+          <div class="checkout_fields">
+              <div style="width:300px;" class="checkout_value ${hasErrors(bean: quikStorInstance, field: 'transactionBoxBody', 'errors')}">
+                <g:textArea rows="5" cols="50" id="transactionBoxBody" name="transactionBoxBody" style="width: 280px;" value="${quikStorInstance?.transactionBoxBody}" />
+              </div>
+              <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+              <div class="checkout_name" stype="width:300px">
+                  <label for="transactionBoxBody">Transaction Box Body</label>
+              </div>
+              <div style="clear:both;"></div>
+          </div>
+
+
       <div class="checkout_section_header">
         Commission Schedule
       </div>
