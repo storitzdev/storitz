@@ -72,7 +72,7 @@ class CShift4Service {
       loadSites(cshift, stats, writer)
     }
 
-    def loadSites(cshift, stats, writer) {
+    def loadSites(CenterShift cshift, SiteStats stats, PrintWriter writer) {
       WSSoap myProxy = getProxy(cshift)
       def siteListRequest = new GetSiteListRequest()
       siteListRequest.orgID = cshift.orgId
@@ -121,14 +121,10 @@ class CShift4Service {
             def siteDetail = siteDetails.details.soasiteattributes[0]
 
             def sitehours = siteDetail.sitehours
-            def gatehours = siteDetail.gatehours.toLowerCase()
-
-            println "Site hours = ${sitehours}"
-            println "Gate hours = ${gatehours}"
+            def gatehours = siteDetail.gatehours?.toLowerCase()
 
             def hm = sitehours =~ /Monday:\s*(.+?)\s*Tuesday:\s*(.+?)\s*Wednesday:\s*(.+?)\s*Thursday:\s*(.+?)\s*Friday:\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
             if (hm.getCount()) {
-              println "Site hours match"
 
               ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].eachWithIndex{
                 day, i ->
@@ -178,9 +174,12 @@ class CShift4Service {
               csite.startMondayGate = csite.startTuesdayGate = csite.startWednesdayGate = csite.startThursdayGate = csite.startFridayGate = csite.startSaturdayGate = csite.startSundayGate = start
               csite.endMondayGate = csite.endTuesdayGate = csite.endWednesdayGate = csite.endThursdayGate = csite.endFridayGate = csite.endSaturdayGate = csite.endSundayGate = end
             } else {
-              def gm = gatehours =~ /(.+?)\s*\w+?\s*(.+)/
+              def gm = gatehours =~ /(.+?)\s+\w+?\s+(.+)/
               if (gm.getCount()) {
-                
+                def start = Date.parse("hh:mma",gm[0][1].toUpperCase())
+                def end = Date.parse("hh:mma",gm[0][2].toUpperCase())
+                csite.startMondayGate = csite.startTuesdayGate = csite.startWednesdayGate = csite.startThursdayGate = csite.startFridayGate = csite.startSaturdayGate = csite.startSundayGate = start
+                csite.endMondayGate = csite.endTuesdayGate = csite.endWednesdayGate = csite.endThursdayGate = csite.endFridayGate = csite.endSaturdayGate = csite.endSundayGate = end
               }
             }
 
@@ -231,6 +230,8 @@ class CShift4Service {
 
             csite.save(flush:true)
 
+            stats.createCount++
+            
           } else {
             println "Skipped site ${site.displayname} due to status ${site.sitestatus} or property type ${site.propertytype}"
           }

@@ -2,6 +2,8 @@ package storitz
 
 import com.storitz.SpecialOffer
 import storitz.constants.PromoType
+import com.storitz.StorageSite
+import com.storitz.CenterShift
 
 class UsiService extends CShiftService {
 
@@ -148,6 +150,12 @@ class UsiService extends CShiftService {
       site.removeFromSpecialOffers(promo)
     }
 
+  }
+
+  // USI will not use online insurance
+  def loadInsurance(CenterShift cshift, StorageSite site) {
+    // do nothing here
+    return false
   }
 
 }
