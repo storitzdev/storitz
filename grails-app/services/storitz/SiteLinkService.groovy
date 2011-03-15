@@ -978,6 +978,8 @@ class SiteLinkService extends BaseProviderService {
       def fees = adminFees(siteLink, unitID, site)
       site.adminFee = fees["admin"]
       site.deposit = fees["deposit"]
+
+      site.useProrating = checkProrating(siteLink, unitID, site)
     }
   }
 
@@ -1052,6 +1054,26 @@ class SiteLinkService extends BaseProviderService {
     fees["deposit"] = deposit
 
     return fees
+  }
+
+  def checkProrating(siteLink, unitId, site) {
+    def ret = getMoveinCost(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, unitId)
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+    def useProrating = true
+
+    for (fee in records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
+      if (fee.bAnnivDateLeasing) {
+        useProrating = fee.bAnnivDateLeasing.text().toLowerCase() != 'true'
+      }
+    }
+
+    return useProrating
   }
 
   def getPromos(siteLink, site, writer) {
