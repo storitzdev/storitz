@@ -18,21 +18,31 @@ import storitz.constants.TruckType
 import com.centershift.store40.GetSiteUnitDataRequest
 import storitz.constants.SearchType
 import storitz.constants.UnitType
+import com.centershift.store40.GetAvailableDiscountsRequest
+import com.centershift.store40.GetAvailableDepositsRequest
+import storitz.constants.PromoType
 
-class CShift4Service {
+class CShift4Service extends BaseProviderService {
 
     def geocodeService
     def unitSizeService
   
     def cshiftUrl = "https://slc.centershift.com:443/Store40/SWS.asmx?WSDL"
+    def cshiftSandboxUrl = "https://slc.centershift.com/Sandbox40/SWS.asmx?WSDL"
+  
     WSSoap proxy
   
     boolean transactional = false
 
     def getProxy(CenterShift cshift) {
       if (!proxy) {
-        def cshiftWS = new WS()
-        proxy = cshiftWS.getWSSoap()
+        if (cshift.location) {
+          def cshiftWS = new WS(new URL(cshift.location.webUrl))
+          proxy = cshiftWS.getWSSoap()
+        } else {
+          def cshiftWS = new WS()
+          proxy = cshiftWS.getWSSoap()
+        }
       }
       return proxy
     }
@@ -199,6 +209,19 @@ class CShift4Service {
               }
             }
 
+            // check deposits
+            GetAvailableDepositsRequest depositRequest = new GetAvailableDepositsRequest()
+            depositRequest.orgID = cshift.orgId
+            def depositFees = myProxy.getAvailableDeposits(lookupUser, depositRequest)
+
+            csite.deposit = 0
+            for(depositFee in depositFees.details.orgsecuritydeposits) {
+              if (depositFee.deptypeval == "Security" && depositFee.active && depositFee.depfix) {
+                csite.deposit = depositFee.depfix
+                println "Found deposit fee = ${csite.deposit}"
+              }
+            }
+
             // set attributes
             csite.extendedHours = false
             csite.isManagerOnsite = false
@@ -238,30 +261,32 @@ class CShift4Service {
             stats.createCount++
             
           } else {
-            println "Skipped site ${site.displayname} due to status ${site.sitestatus} or property type ${site.propertytype}"
+            println "Skipped site ${site.displayname} due to status ${site.sitestauts} or property type ${site.propertytype}"
           }
         }
 
       }
     }
 
-    def loadInsurance(CenterShift cshift, StorageSite site) {
+    def loadInsurance(Feed feed, StorageSite site) {
+      CenterShift cshift = (CenterShift)feed
       def myProxy = getProxy(cshift)
       GetInsuranceProvidersRequest insuranceRequest = new GetInsuranceProvidersRequest()
       insuranceRequest.siteID = site.sourceId as Long
       insuranceRequest.orgID = cshift.orgId
       def lookupUser = getLookupUser(cshift)
       def insuranceProviders = myProxy.getInsuranceProviders(lookupUser, insuranceRequest)
-      for (ins in insuranceProviders.details.ORGINSSITEOFFERINGS) {
-        Insurance siteIns = site.insurances.find{ it.insuranceId == ins.siteinsid }
+      for (ins in insuranceProviders.details.orginssiteofferings) {
+        println "Found insurance ${ins.dump()}"
+        Insurance siteIns = site.insurances.find{ it.insuranceId == ins.insoptionid }
         boolean newIns = false
         if (!siteIns) {
           siteIns = new Insurance()
-          siteIns.insuranceId = ins.siteinsid
+          siteIns.insuranceId = ins.insoptionid
           siteIns.active = true
           newIns = true
         }
-        siteIns.percentTheft = ins.coverageperc
+        siteIns.percentTheft = ins.coverageperc / 100
         siteIns.provider = ins.providername
         siteIns.premium = ins.rate
         siteIns.totalCoverage = ins.coverageamount
@@ -269,6 +294,16 @@ class CShift4Service {
         if (newIns) {
           site.addToInsurances(siteIns)
         }
+      }
+      def deleteList = []
+      for(ins in site.insurances) {
+        if (!insuranceProviders.details.orginssiteofferings.find{ it.insoptionid == ins.insuranceId }) {
+          deleteList.add(ins)
+        }
+      }
+      for (ins in deleteList) {
+        println("Removing stale insurance from site ${site.title}: ${ins.dump()}")
+        site.removeFromInsurances(ins)
       }
     }
 
@@ -361,6 +396,56 @@ class CShift4Service {
           println "Skipping unit due to size width: ${width}, length: ${length}"
         }
       }
+    }
+
+    def loadPromos(CenterShift cshift, StorageSite site, PrintWriter writer) {
+      def myProxy = getProxy(cshift)
+
+      Long siteID = site.sourceId as Long
+      for (unit in site.units) {
+        GetAvailableDiscountsRequest discReq = new GetAvailableDiscountsRequest()
+        discReq.orgID = cshift.orgId
+        discReq.siteID = siteID
+        discReq.unitID = unit.unitNumber as Long
+        def lookupUser = getLookupUser(cshift)
+        def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
+        for (discount in discountList.details.applbestpcd) {
+          def offer = site.specialOffers.find{discount.pcdid == it.concessionId}
+          if (!offer) {
+            offer = new SpecialOffer()
+            offer.concessionId = discount.pcdid
+            offer.promoName = discount.pcdname
+            offer.description = discount.pcddesc
+            offer.startDate = discount.starts
+            offer.endDate = discount.expires
+
+            switch(discount.amttype) {
+              case 1:
+                offer.promoType = PromoType.AMOUNT_OFF
+                offer.promoQty =  discount.pcdamtdefault
+                break
+
+              case 2:
+                offer.promoType = PromoType.PERCENT_OFF
+                offer.promoQty =  discount.pcdamtmax
+                offer.expireMonth = discount.pcdperiods
+                offer.prepay = (discount.paymentrequired == 'Y')
+                offer.inMonth = discount.losreq - discount.pcdperiods
+                break
+
+              case 3:
+                offer.promoType = PromoType.FIXED_RATE
+                offer.promoQty = discount.pcdamtmax
+                offer.expireMonth = discount.pcdperiods
+                offer.prepay = (discount.paymentrequired == 'Y')
+                offer.inMonth = discount.losreq - discount.pcdperiods
+                break
+            }
+            
+          }
+        }
+      }
+
     }
 
     private Date getStartTime(String hrs) {

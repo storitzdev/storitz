@@ -17,6 +17,7 @@ class SpecialOffer {
     promoQty(nullable: true)
     waiveAdmin(nullable: true)
     endDate(nullable:true)
+    startDate(nullable:true)
     promoSize(nullable:true)
     unitType(nullable:true)
   }
@@ -26,7 +27,7 @@ class SpecialOffer {
   }
 
   String code
-  Integer concessionId
+  Long concessionId
   String promoName
   String description
   Boolean prepay
@@ -39,6 +40,7 @@ class SpecialOffer {
   Boolean featured
   Boolean waiveAdmin
 
+  Date startDate
   Date endDate
   StorageSize promoSize
   String unitType        // this helps associate a given offer with a particular unit type

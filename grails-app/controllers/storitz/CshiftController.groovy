@@ -75,7 +75,11 @@ class CshiftController extends FeedController {
         }
         site.specialOffers.clear()
         def writer = new PrintWriter(System.out)
-        CShiftService.loadPromos(cshiftInstance, site, writer)
+        if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
+          CShiftService.loadPromos(cshiftInstance, site, writer)
+        } else {
+          CShift4Service.loadPromos(cshiftInstance, site, writer)
+        }
         writer.close()
         println "Promos refreshed for ${site.title}"
       }
@@ -88,11 +92,15 @@ class CshiftController extends FeedController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       for(site in cshiftInstance.sites) {
-        for(ins in site.insurances) {
-          ins.delete()
+        if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
+          for(ins in site.insurances) {
+            ins.delete()
+          }
+          site.insurances.clear()
+          CShiftService.loadInsurance(cshiftInstance, site)
+        } else {
+          CShift4Service.loadInsurance(cshiftInstance, site)
         }
-        site.insurances.clear()
-        CShiftService.loadInsurance(cshiftInstance, site)
         println "Insurance refreshed for ${site.title}"
       }
       flash.message = "Feed insurance refreshed."
