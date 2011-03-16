@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Create SiteLink Feed" scope="request"/>
-  <g:render template="/header"/>
+  <g:render template="/header_admin"/>
 
   <script type="text/javascript">
     //<![CDATA[
@@ -188,8 +188,15 @@
 
         <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'transactionBoxBody', 'errors')}">
-              <g:textArea rows="5" cols="50" id="transactionBoxBody" name="transactionBoxBody" style="width: 280px;" value="${siteLinkInstance?.transactionBoxBody}" />
-            </div>
+                <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
+                <fckeditor:editor
+                    name="transactionBoxBody"
+                    width="650"
+                    height="300"
+                    toolbar="Storitz">
+                    ${siteLinkInstance?.transactionBoxBody}
+                </fckeditor:editor>
+           </div>
             <div style="clear:both;"></div>
         </div>
 

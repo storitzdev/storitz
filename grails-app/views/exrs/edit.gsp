@@ -217,7 +217,14 @@
 
         <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: cshiftInstance, field: 'transactionBoxBody', 'errors')}">
-              <g:textArea rows="5" cols="50" id="transactionBoxBody" name="transactionBoxBody" style="width: 280px;" value="${cshiftInstance?.transactionBoxBody}" />
+                <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
+                 <fckeditor:editor
+                     name="transactionBoxBody"
+                     width="650"
+                     height="300"
+                     toolbar="Storitz">
+                     ${cshiftInstance?.transactionBoxBody}
+                 </fckeditor:editor>
             </div>
             <div style="clear:both;"></div>
         </div>
