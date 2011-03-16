@@ -100,7 +100,7 @@ class HomeController {
             zip = geoLookup.zip
           } else {
             geoResult = geocodeService.geocode(lat,lng)
-            if (handleGeocode(geoResult)) {
+            if (handleGeocode(geoResult) && city && state) {
               new GeoLookup(lat:qLat, lng:qLng, city:city, state:state, zip:zip).save(flush: true)
             }
           }

@@ -15,10 +15,14 @@ import com.centershift.store40.GetBaseFeesRequest
 import com.centershift.store40.GetAvailableServices
 import com.centershift.store40.GetAvailableServicesRequest
 import storitz.constants.TruckType
+import com.centershift.store40.GetSiteUnitDataRequest
+import storitz.constants.SearchType
+import storitz.constants.UnitType
 
 class CShift4Service {
 
     def geocodeService
+    def unitSizeService
   
     def cshiftUrl = "https://slc.centershift.com:443/Store40/SWS.asmx?WSDL"
     WSSoap proxy
@@ -88,6 +92,7 @@ class CShift4Service {
           if (site.propertytype == 1 && (site.sitestauts == 1 | site.sitestauts == 2)) {
 
             def csite = new StorageSite()
+            csite.source = "CS4"
             csite.sourceId = site.siteid
             csite.sourceLoc = site.sitenumber
             csite.title = site.displayname
@@ -263,6 +268,97 @@ class CShift4Service {
         siteIns.save(flush:true)
         if (newIns) {
           site.addToInsurances(siteIns)
+        }
+      }
+    }
+
+    def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+
+      CenterShift cshift = (CenterShift)site.feed
+      def myProxy = getProxy(cshift)
+
+      GetSiteUnitDataRequest siteUnitDataReq = new GetSiteUnitDataRequest()
+      siteUnitDataReq.siteID = site.sourceId as Long
+      siteUnitDataReq.getPromoData = false
+      def lookupUser = getLookupUser(cshift)
+      def siteUnitData = myProxy.getSiteUnitData(lookupUser, siteUnitDataReq)
+      for(unit in siteUnitData.details.siteUnitData) {
+        println "Got new unit: ${unit.dump()}"
+
+        // check unit size for valid
+        BigDecimal width = unit.width
+        BigDecimal length = unit.depth
+        SearchType searchType = SearchType.STORAGE
+        def isTempControlled = false
+        def unitType = UnitType.UPPER
+
+        if (unit.featuresval) {
+          def features = unit.featuresval.split(',')
+          for (feature in features) {
+            switch(feature.toLowerCase()) {
+              case 'parking':
+                searchType = SearchType.PARKING
+                unitType = UnitType.UNCOVERED
+                break
+
+              case 'a/c':
+                isTempControlled = true
+                break
+
+              case 'indoor':
+                unitType = UnitType.INTERIOR
+                break
+
+              case 'exterior':
+                unitType = UnitType.DRIVEUP
+                break
+            }
+          }
+        }
+        StorageSize storageSize = unitSizeService.getUnitSize(width, length, searchType)
+        if (storageSize) {
+          StorageUnit myUnit = site.units.find{(it.unitNumber as BigDecimal) == unit.unitid}
+          def newUnit = false
+          if (!myUnit) {
+            myUnit = new StorageUnit()
+            myUnit.unitName = unit.unitnumber
+            myUnit.unitNumber = unit.unitid
+            myUnit.price = unit.maxrentrate
+            myUnit.pushRate = unit.currentrate
+            myUnit.displaySize = myUnit.unitSizeInfo = "${width} X ${length}"
+            myUnit.unitInfo = ""    // TODO understand promo governors
+            myUnit.unitTypeInfo = ""
+            myUnit.unitsize = storageSize
+            myUnit.unitType = unitType
+            myUnit.totalUnits = unit.quantity
+            myUnit.unitCount = unit.available
+
+            // TODO grab attributes
+            myUnit.isAlarm = false
+            myUnit.isIrregular = false
+            myUnit.isPowered = false
+            myUnit.isAvailable = true
+            myUnit.isSecure = false
+            myUnit.isTempControlled = isTempControlled
+
+            stats.unitCount += unit.available
+            stats.createCount++
+
+            newUnit = true
+          } else {
+            myUnit.totalUnits = unit.quantity
+            myUnit.unitCount = unit.available
+            myUnit.price = unit.maxrentrate
+            myUnit.pushRate = unit.currentrate
+            stats.unitCount += unit.available
+            stats.updateCount++
+          }
+          myUnit.save(flush:true)
+          if (newUnit) {
+            site.addToUnits(myUnit)
+          }
+        } else {
+          println "Skipping unit due to size width: ${width}, length: ${length}"
         }
       }
     }

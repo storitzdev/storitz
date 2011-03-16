@@ -6,11 +6,13 @@ import com.storitz.StorageSite
 import com.storitz.QuikStor
 import com.storitz.Feed
 import storitz.constants.FeedType
+import storitz.constants.CenterShiftVersion
 
 class FeedService {
 
   def siteLinkService
   def CShiftService
+  def CShift4Service
   def quikStorService
   def exrsService
   def usiService
@@ -41,6 +43,10 @@ class FeedService {
         usiService.updateSite(storageSiteInstance, stats, writer)
         break
 
+      case "CS4":
+        CShift4Service.updateSite(storageSiteInstance, stats, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -69,6 +75,11 @@ class FeedService {
       case "USI":
         usiService.updateUnits(storageSiteInstance, stats, writer)
         break
+
+      case "CS4":
+        CShift4Service.updateUnits(storageSiteInstance, stats, writer)
+        break
+
 
       default:
         throw new Exception("Unknown service for site update")
@@ -102,6 +113,11 @@ class FeedService {
       case "USI":
         def centerShift = (CenterShift)storageSiteInstance.feed
         usiService.loadPromos(centerShift, storageSiteInstance, writer)
+        break
+
+      case "CS4":
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        CShift4Service.loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       default:
@@ -138,6 +154,11 @@ class FeedService {
         usiService.addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
+      case "CS4":
+        def centerShift = (CenterShift)storageSiteInstance.feed
+        CShift4Service.addSitePhone(centerShift, storageSiteInstance, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -151,7 +172,12 @@ class FeedService {
         break
 
       case FeedType.CENTERSHIFT:
-        CShiftService.refreshInsurance(feed)
+        CenterShift cshift = (CenterShift)feed
+        if (cshift.cshiftVersion == CenterShiftVersion.CS3) {
+          CShiftService.refreshInsurance(feed)
+        } else {
+          CShift4Service.refreshInsurance(feed)
+        }
         break
 
       case FeedType.QUIKSTOR:
