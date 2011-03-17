@@ -176,6 +176,7 @@ class ReportsController {
     session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
 
     if (period.outputType != ReportOutputType.HTML) {
+      response.setHeader "Content-disposition", "attachment; filename=Storitz.${period.outputType}" ;
       response.setContentType(period.outputType.contentType)
     }
     reportWriter.writeTo(response);
