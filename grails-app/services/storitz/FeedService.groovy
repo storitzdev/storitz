@@ -28,6 +28,7 @@ class FeedService {
         break
 
       case "CS3":
+        CShiftService.updateSite(storageSiteInstance, stats, writer)
         break
 
       case "QS":
