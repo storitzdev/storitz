@@ -117,9 +117,9 @@ class ReportsController {
     Page page = Page.Page_Legal_Landscape()
     
     drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle)
-      .setDetailHeight(15)                                            //defines the height for each record of the report
+      .setDetailHeight(15)                //defines the height for each record of the report
       .setPageSizeAndOrientation(page)
-      .setMargins(20, 20, 15, 15)                                                     //define the margin space for each side (top, bottom, left and right)
+      .setMargins(20, 20, 15, 15)         //define the margin space for each side (top, bottom, left and right)
       .setColumnsPerPage(1)
       .setPrintBackgroundOnOddRows(true)
       .setUseFullPageWidth(true)
@@ -128,7 +128,6 @@ class ReportsController {
     def results
     switch (period.reportName) {
       case ReportName.BALK:
-
         results = buildBalkReport(drb, reportParams, startDate, endDate)
         break
 
@@ -144,11 +143,11 @@ class ReportsController {
         results = buildSiteReport(drb, reportParams, startDate, endDate, period)
         break
 
-      case ReportName.CORP_TRANSACTION:
+      case ReportName.TRANSACTION_HISTORY:
         results = buildCorpTransactionReport(drb, reportParams, startDate, endDate, period)
         break
 
-      case ReportName.CORP_PAYMENT:
+      case ReportName.ACH_TRANSFERS:
         results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
         break
 
@@ -363,10 +362,6 @@ class ReportsController {
       setColumnProperty("monthlyRate", BigDecimal.class.getName()).
       setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
-    SimpleColumn columnGross = ColumnBuilder.getInstance().
-      setColumnProperty("moveInCost", BigDecimal.class.getName()).
-      setTitle("Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
-
     SimpleColumn columnInsurance = ColumnBuilder.getInstance().
       setColumnProperty("insuranceCost", BigDecimal.class.getName()).
       setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
@@ -379,11 +374,15 @@ class ReportsController {
       setColumnProperty("tax", BigDecimal.class.getName()).
       setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
 
+    SimpleColumn columnTotalPaidByTenant = ColumnBuilder.getInstance().
+      setColumnProperty("moveInCost", BigDecimal.class.getName()).          // TODO: change moveInCost property?
+      setTitle("Total Paid by Tenant").setStyle(moneyStyle).setPattern("\$0.00").build()
+
     drb
-            .addGlobalFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
             .addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
             .addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
             .addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
+            .addGlobalFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle)
 
 	drb.setGlobalFooterVariableHeight(new Integer(25));
 
@@ -394,10 +393,10 @@ class ReportsController {
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
                 .setFooterLabel(dailySubLabel)
                 .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle)
                 .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
                 .build();
 
@@ -414,10 +413,10 @@ class ReportsController {
       .addColumn(columnEmail)
       .addColumn(columnPhone)
       .addColumn(columnMonthly)
-      .addColumn(columnGross)
       .addColumn(columnInsurance)
       .addColumn(columnFees)
       .addColumn(columnTax)
+      .addColumn(columnTotalPaidByTenant)
       .addGroup(g1)
 
     return results
@@ -517,7 +516,7 @@ class ReportsController {
       setColumnProperty("monthlyRate", BigDecimal.class.getName()).
       setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
-    SimpleColumn columnGross = ColumnBuilder.getInstance().
+    SimpleColumn columnMoveInCost = ColumnBuilder.getInstance().
       setColumnProperty("moveInCost", BigDecimal.class.getName()).
       setTitle("Move-In Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
 
@@ -534,7 +533,7 @@ class ReportsController {
       setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     drb
-            .addGlobalFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+            .addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle)
             .addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
             .addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
             .addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
@@ -549,7 +548,7 @@ class ReportsController {
                 .setFooterLabel(dailySubLabel)
                 .setDefaultFooterVariableStyle(moneyTotalStyle)
                 .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
@@ -572,7 +571,7 @@ class ReportsController {
       .addColumn(columnName)
       .addColumn(columnMoveInDate)
       .addColumn(columnPaidThruDate)
-      .addColumn(columnGross)
+      .addColumn(columnMoveInCost)
       .addColumn(columnInsurance)
       .addColumn(columnFees)
       .addColumn(columnTax)
@@ -591,7 +590,7 @@ class ReportsController {
 
     def c = RentalTransaction.createCriteria()
 
-    reportParams["report_name"] = "Commission Report - ${period.feed.operatorName}"
+    reportParams["report_name"] = "ACH Transfer Report - ${period.feed.operatorName}"
     reportParams["footer_text"] = ""
     reportParams["report_dates"] = "${reportParams['date_range']}"
     dateField = "bookingDate"
@@ -621,6 +620,7 @@ class ReportsController {
         }
       }
       between('bookingDate', startDate.time, endDate.time)
+      order('site', 'asc')
       order('bookingDate', 'desc')
     }
 
@@ -629,6 +629,9 @@ class ReportsController {
       .setGrandTotalLegendStyle(subtotalStyle)
       .setPrintColumnNames(false)
 
+    drb.addField("contactPrimary.firstName", String.class.getName())
+    drb.addField("contactPrimary.lastName", String.class.getName())
+    drb.addField("contactPrimary.suffixName", String.class.getName())
     drb.addField("site.bankAccount.acctNo", String.class.getName())
     drb.addField("bookingDate", Date.class.getName())
     drb.addField("achTransferDate", Date.class.getName())
@@ -658,6 +661,9 @@ class ReportsController {
     AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
             .setTitle(transTitle).setHeaderStyle(headerStyle).build();
 
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
+            .setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
+
     AbstractColumn columnPaymentType = ColumnBuilder.getInstance().setCustomExpression(new PaymentTypeExpression())
             .setTitle("Net/Gross Transfer").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
@@ -665,9 +671,9 @@ class ReportsController {
             .setTitle("Storitz Invoice #").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnStoritzId = ColumnBuilder.getInstance().
-      setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans#").build()
+      setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans #").build()
 
-    SimpleColumn columnGross = ColumnBuilder.getInstance().
+    SimpleColumn columnMoveInCost = ColumnBuilder.getInstance().
       setColumnProperty("moveInCost", BigDecimal.class.getName()).
       setTitle("Move-In Cost").setStyle(moneyStyle).setPattern("\$0.00").build()
 
@@ -682,7 +688,7 @@ class ReportsController {
     AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
             .setTitle("Net").setStyle(moneyStyle).setHeaderStyle(headerStyle).setPattern("\$0.00").build();
 
-    drb.addGlobalFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle);
+    drb.addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle);
 	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle);
 	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle);
     drb.addGlobalFooterVariable(columnAchAmount, DJCalculation.SUM, moneyTotalStyle);
@@ -695,7 +701,7 @@ class ReportsController {
     DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
                 .setFooterLabel(dailySubLabel)
                 .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnGross, DJCalculation.SUM, moneyTotalStyle)
+                .addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle)
                 .addFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle)
                 .setGroupLayout(GroupLayout.DEFAULT)
@@ -713,7 +719,8 @@ class ReportsController {
       .addColumn(columnUnitNumber)
       .addColumn(columnStoritzId)
       .addColumn(columnReservationId)
-      .addColumn(columnGross)
+      .addColumn(columnName)
+      .addColumn(columnMoveInCost)
       .addColumn(columnCommission)
       .addColumn(columnNet)
       .addColumn(columnPaymentType)

@@ -91,7 +91,7 @@
                 $(this).val() == '${ReportName.ACTIVITY}') {
           $('#optionalParams').show();
           $('#feedParams').hide();
-        } else if ($(this).val() == '${ReportName.CORP_TRANSACTION}' || $(this).val() == '${ReportName.CORP_PAYMENT}' || $(this).val() == '${ReportName.INVOICE}') {
+        } else if ($(this).val() == '${ReportName.TRANSACTION_HISTORY}' || $(this).val() == '${ReportName.ACH_TRANSFERS}' || $(this).val() == '${ReportName.INVOICE}') {
           $('#optionalParams').hide();
           $('#feedParams').show();
         }
@@ -188,8 +188,8 @@
               <option ${reportPeriod?.reportName == ReportName.PENDING ? 'selected="selected"' : ''} value="${ReportName.PENDING}">${ReportName.PENDING.display}</option>
               <option ${reportPeriod?.reportName == ReportName.ACTIVITY ? 'selected="selected"' : ''} value="${ReportName.ACTIVITY}">${ReportName.ACTIVITY.display}</option>
               <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
-                <option ${reportPeriod?.reportName == ReportName.CORP_TRANSACTION ? 'selected="selected"' : ''} value="${ReportName.CORP_TRANSACTION}">${ReportName.CORP_TRANSACTION.display}</option>
-                <option ${reportPeriod?.reportName == ReportName.CORP_PAYMENT ? 'selected="selected"' : ''} value="${ReportName.CORP_PAYMENT}">${ReportName.CORP_PAYMENT.display}</option>
+                <option ${reportPeriod?.reportName == ReportName.TRANSACTION_HISTORY ? 'selected="selected"' : ''} value="${ReportName.TRANSACTION_HISTORY}">${ReportName.TRANSACTION_HISTORY.display}</option>
+                <option ${reportPeriod?.reportName == ReportName.ACH_TRANSFERS ? 'selected="selected"' : ''} value="${ReportName.ACH_TRANSFERS}">${ReportName.ACH_TRANSFERS.display}</option>
               </sec:ifAnyGranted>
               <sec:ifAnyGranted roles="ROLE_ADMIN">
                 <option ${reportPeriod?.reportName == ReportName.INVOICE? 'selected="selected"' : ''} value="${ReportName.INVOICE}">${ReportName.INVOICE.display}</option>
