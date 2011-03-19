@@ -504,7 +504,7 @@ class QuikStorService extends BaseProviderService {
           }
           // add restriction for type
           SpecialOfferRestriction restriction = new SpecialOfferRestriction()
-          restriction.restrictionInfo = false
+          restriction.restrictive = false
           restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
           restriction.restrictionInfo = iTypeId as String
           restriction.save(flush:true)

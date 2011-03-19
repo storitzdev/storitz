@@ -21,6 +21,12 @@ import storitz.constants.UnitType
 import com.centershift.store40.GetAvailableDiscountsRequest
 import com.centershift.store40.GetAvailableDepositsRequest
 import storitz.constants.PromoType
+import storitz.constants.SpecialOfferRestrictionType
+import com.centershift.store40.GetQuoteDataRequest
+import com.centershift.store40.CreateNewAccountRequest
+import com.centershift.store40.AccountClass
+import storitz.constants.RentalUse
+import com.centershift.store40.ContactType
 
 class CShift4Service extends BaseProviderService {
 
@@ -30,21 +36,19 @@ class CShift4Service extends BaseProviderService {
     def cshiftUrl = "https://slc.centershift.com:443/Store40/SWS.asmx?WSDL"
     def cshiftSandboxUrl = "https://slc.centershift.com/Sandbox40/SWS.asmx?WSDL"
   
-    WSSoap proxy
+    def proxy = [:]
   
-    boolean transactional = false
-
-    def getProxy(CenterShift cshift) {
-      if (!proxy) {
+    private WSSoap getProxy(CenterShift cshift) {
+      if (!proxy[cshift.location?.webUrl]) {
         if (cshift.location) {
           def cshiftWS = new WS(new URL(cshift.location.webUrl))
-          proxy = cshiftWS.getWSSoap()
+          proxy[cshift.location.webUrl] = cshiftWS.getWSSoap()
         } else {
           def cshiftWS = new WS()
-          proxy = cshiftWS.getWSSoap()
+          return cshiftWS.getWSSoap()
         }
       }
-      return proxy
+      return proxy[cshift.location?.webUrl]
     }
 
     def getLookupUser(CenterShift cshift) {
@@ -216,7 +220,7 @@ class CShift4Service extends BaseProviderService {
 
             csite.deposit = 0
             for(depositFee in depositFees.details.orgsecuritydeposits) {
-              if (depositFee.deptypeval == "Security" && depositFee.active && depositFee.depfix) {
+              if (depositFee.deptypeval == "Security" && depositFee.active && depositFee.depfix && depositFee.deptype == 1 && csite.deposit == 0) {
                 csite.deposit = depositFee.depfix
                 println "Found deposit fee = ${csite.deposit}"
               }
@@ -233,6 +237,11 @@ class CShift4Service extends BaseProviderService {
             csite.boxesAvailable = false
             csite.freeTruck = TruckType.NONE
             csite.isUnitAlarmed = false
+
+            // TODO get taxes
+            csite.taxRateInsurance = 0
+            csite.taxRateRental = 0
+            csite.taxRateMerchandise = 0
 
             GetAvailableServicesRequest availSvcReq = new GetAvailableServicesRequest()
             availSvcReq.siteID = site.siteid
@@ -251,10 +260,9 @@ class CShift4Service extends BaseProviderService {
               createSiteUser(csite, site.emailaddress, site.emailaddress, cshift.manager)
             }
 
-            // TODO - promos, insurance, hours, site features
-            // hours may be free form
             loadInsurance(cshift, csite)
-            // loadUnits(csite)
+            updateUnits(csite, stats, writer)
+            loadPromos(cshift, csite, writer)
 
             csite.save(flush:true)
 
@@ -309,6 +317,8 @@ class CShift4Service extends BaseProviderService {
 
     def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
 
+      def unitList = []
+
       CenterShift cshift = (CenterShift)site.feed
       def myProxy = getProxy(cshift)
 
@@ -318,7 +328,6 @@ class CShift4Service extends BaseProviderService {
       def lookupUser = getLookupUser(cshift)
       def siteUnitData = myProxy.getSiteUnitData(lookupUser, siteUnitDataReq)
       for(unit in siteUnitData.details.siteUnitData) {
-        println "Got new unit: ${unit.dump()}"
 
         // check unit size for valid
         BigDecimal width = unit.width
@@ -327,6 +336,15 @@ class CShift4Service extends BaseProviderService {
         def isTempControlled = false
         def unitType = UnitType.UPPER
 
+        if (width == 0 && length > 10) {
+          searchType = SearchType.PARKING
+          width = 10
+        }
+        if (length == 0 && width > 10) {
+          searchType = SearchType.PARKING
+          length = width
+          width = 10
+        }
         if (unit.featuresval) {
           def features = unit.featuresval.split(',')
           for (feature in features) {
@@ -352,6 +370,7 @@ class CShift4Service extends BaseProviderService {
         }
         StorageSize storageSize = unitSizeService.getUnitSize(width, length, searchType)
         if (storageSize) {
+          unitList.add(unit.unitid)
           StorageUnit myUnit = site.units.find{(it.unitNumber as BigDecimal) == unit.unitid}
           def newUnit = false
           if (!myUnit) {
@@ -362,7 +381,7 @@ class CShift4Service extends BaseProviderService {
             myUnit.pushRate = unit.currentrate
             myUnit.displaySize = myUnit.unitSizeInfo = "${width} X ${length}"
             myUnit.unitInfo = ""    // TODO understand promo governors
-            myUnit.unitTypeInfo = ""
+            myUnit.unitTypeInfo = unit.unitid
             myUnit.unitsize = storageSize
             myUnit.unitType = unitType
             myUnit.totalUnits = unit.quantity
@@ -393,8 +412,24 @@ class CShift4Service extends BaseProviderService {
             site.addToUnits(myUnit)
           }
         } else {
-          println "Skipping unit due to size width: ${width}, length: ${length}"
+          println "Skipping unit due to size width: ${width}, length: ${length} features: ${unit.featuresval}"
         }
+      }
+      // Loop through and remove old units
+      def deleteList = []
+      for(unit in site.units) {
+        if (!(unitList.contains(unit.unitNumber as BigDecimal))) {
+          println "Added unit for deletion: ${unit.unitNumber}"
+          deleteList.add(unit)
+        }
+      }
+
+      for (unit in deleteList) {
+        stats.removedCount++
+        site.removeFromUnits(unit)
+      }
+      if (deleteList.size() > 0) {
+        site.save(flush:true)
       }
     }
 
@@ -410,42 +445,137 @@ class CShift4Service extends BaseProviderService {
         def lookupUser = getLookupUser(cshift)
         def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
         for (discount in discountList.details.applbestpcd) {
+          println "Processing discount: ${discount.dump()}"
+
           def offer = site.specialOffers.find{discount.pcdid == it.concessionId}
           if (!offer) {
             offer = new SpecialOffer()
             offer.concessionId = discount.pcdid
             offer.promoName = discount.pcdname
             offer.description = discount.pcddesc
-            offer.startDate = discount.starts
-            offer.endDate = discount.expires
+            offer.active = offer.featured = false
+          }
+          offer.startDate = discount.starts?.toGregorianCalendar()?.getTime()
+          offer.endDate = discount.expires?.toGregorianCalendar()?.getTime()
+          println "Processing offer: ${discount.dump()}"
+          switch(discount.amttype) {
+            case 1:
+              offer.promoType = PromoType.AMOUNT_OFF
+              offer.promoQty =  discount.pcdamtdefault
+              offer.prepayMonths = 0
+              offer.inMonth = 1
+              offer.expireMonth = 1
+              break
 
-            switch(discount.amttype) {
-              case 1:
-                offer.promoType = PromoType.AMOUNT_OFF
-                offer.promoQty =  discount.pcdamtdefault
-                break
-
-              case 2:
-                offer.promoType = PromoType.PERCENT_OFF
-                offer.promoQty =  discount.pcdamtmax
+            case 2:
+              offer.promoType = PromoType.PERCENT_OFF
+              offer.promoQty =  discount.pcdamtmax
+              offer.prepay = (discount.paymentrequired == 'Y')
+              if (offer.prepay) {
+                offer.prepayMonths = 0
                 offer.expireMonth = discount.pcdperiods
-                offer.prepay = (discount.paymentrequired == 'Y')
-                offer.inMonth = discount.losreq - discount.pcdperiods
-                break
+                offer.inMonth = 0
+              } else {
+                offer.inMonth = discount.losreq ? discount.losreq : 1
+                offer.prepayMonths = 0
+                offer.expireMonth = 1
+              }
+              break
 
-              case 3:
-                offer.promoType = PromoType.FIXED_RATE
-                offer.promoQty = discount.pcdamtmax
-                offer.expireMonth = discount.pcdperiods
-                offer.prepay = (discount.paymentrequired == 'Y')
-                offer.inMonth = discount.losreq - discount.pcdperiods
-                break
-            }
-            
+            case 3:
+              offer.promoType = PromoType.FIXED_RATE
+              offer.promoQty = discount.pcdamtmax
+              offer.expireMonth = discount.pcdperiods
+              offer.prepay = (discount.paymentrequired == 'Y')
+              if (offer.prepay) {
+                offer.prepayMonths = discount.losprepaid ? discount.losprepaid : 0
+              } else {
+                offer.prepayMonths = 0
+              }
+              offer.inMonth = discount.losreq ? ((discount.losreq + 1) - discount.pcdperiods) : 1
+              break
+
+            default:
+              println "Unexpected amttype: ${discount.dump()}"
+              break
+          }
+          if (offer.validate()) {
+            offer.save(flush:true)
+            site.addToSpecialOffers(offer)
+            println "Created offer: ${offer.dump()}"
+          } else {
+            println "offer did not validate ${offer.dump()}"
+          }
+          def restriction = offer.restrictions.find{ (it.restrictionInfo as Long) == discReq.unitID }
+          if (!restriction && offer.validate()) {
+            restriction = new SpecialOfferRestriction()
+            restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+            restriction.restrictionInfo = discReq.unitID
+            restriction.restrictive = false
+            restriction.save(flush:true)
+            offer.addToRestrictions(restriction)
+            offer.save(flush:true)
           }
         }
       }
 
+    }
+
+    def checkRented(RentalTransaction trans) {
+
+      StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
+      BigDecimal unitId = transUnit.unitNumber as BigDecimal
+
+      CenterShift cshift = (CenterShift)trans.site.feed
+      def myProxy = getProxy(cshift)
+
+      GetSiteUnitDataRequest siteUnitDataReq = new GetSiteUnitDataRequest()
+      siteUnitDataReq.siteID = trans.site.sourceId as Long
+      siteUnitDataReq.getPromoData = false
+      def lookupUser = getLookupUser(cshift)
+      def siteUnitData = myProxy.getSiteUnitData(lookupUser, siteUnitDataReq)
+
+      // TODO remove getquote
+      GetQuoteDataRequest quoteReq = new GetQuoteDataRequest()
+      quoteReq.orgID = cshift.orgId
+      quoteReq.siteID = trans.site.sourceId as Long
+      quoteReq.unitID = transUnit.unitNumber as BigDecimal
+      if (trans.promoId > 0) {
+        SpecialOffer promo = SpecialOffer.get(trans.promoId as Long)
+        quoteReq.promoID = promo.concessionId
+      }
+      quoteReq.rentRate = trans.site.allowPushPrice ? transUnit.pushRate : transUnit.price
+      def quotes = myProxy.getQuoteData(lookupUser, quoteReq)
+
+      println "Quote information = ${quotes.details.dump()}"
+
+      for(unit in siteUnitData.details.siteUnitData) {
+        if (unit.unitid == unitId && unit.available > trans.site.minInventory) {
+          return true
+        }
+      }
+      return false
+    }
+
+    def createTenant(RentalTransaction trans) {
+
+      CenterShift cshift = (CenterShift)trans.site.feed
+      def myProxy = getProxy(cshift)
+
+      CreateNewAccountRequest acctReq = new CreateNewAccountRequest()
+      acctReq.orgID = cshift.orgId
+      acctReq.siteID = trans.site.sourceId as Long
+      acctReq.firstName = trans.contactPrimary.firstName
+      acctReq.lastName = trans.contactPrimary.lastName
+      acctReq.email = trans.contactPrimary.email
+      acctReq.accountClass = (trans.rentalUse == RentalUse.BUSINESS ? AccountClass.BUSINESS : AccountClass.PERSONAL)
+      acctReq.contactType = ContactType.ACCOUNT_USER
+
+    }
+
+    def moveIn(RentalTransaction trans) {
+      StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
+       
     }
 
     private Date getStartTime(String hrs) {

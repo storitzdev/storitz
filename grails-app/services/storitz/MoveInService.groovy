@@ -6,6 +6,7 @@ class MoveInService {
 
     def siteLinkService
     def CShiftService
+    def CShift4Service
     def quikStorService
     def exrsService
     def usiService
@@ -21,7 +22,7 @@ class MoveInService {
           return CShiftService.checkRented(trans)
 
         case "CS4":
-          break
+          return CShift4Service.checkRented(trans)
 
         case "QS":
           return quikStorService.checkRented(trans)
@@ -46,7 +47,7 @@ class MoveInService {
           return CShiftService.moveInDetail(trans)
 
         case "CS4":
-          break
+          return CShift4Service.moveInDetail(trans)
 
         case "QS":
           return quikStorService.moveInDetail(trans)
@@ -67,30 +68,26 @@ class MoveInService {
         case "SL":
           siteLinkService.createTenant(trans)
           return siteLinkService.moveIn(trans)
-          break
 
         case "CS3":
           CShiftService.createTenant(trans)
           return CShiftService.reserve(trans)
-          break
 
         case "CS4":
-          break
+          CShift4Service.createTenant(trans)
+          return CShift4Service.reserve(trans)
 
         case "QS":
           quikStorService.createTenant(trans)
           return quikStorService.moveIn(trans)
-          break
 
         case "EX":
           // TODO - create email notification to fill in form
           return exrsService.moveIn(trans)
-          break
 
         case "USI":
           usiService.createTenant(trans)
           return usiService.reserve(trans)
-          break
 
         default:
           throw new Exception("Unknown service for move in")

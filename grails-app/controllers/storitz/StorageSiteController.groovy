@@ -721,7 +721,7 @@ class StorageSiteController {
 
     sizeList.sort { it.width * it.length }
 
-    def bestUnit
+    StorageUnit bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
       bestUnit = site.units.findAll{ it.unitCount > site.minInventory && it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
@@ -748,7 +748,7 @@ class StorageSiteController {
     def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
 
     def chosenPromo = ''
-    def specialOffer
+    SpecialOffer specialOffer
     Long chosenPromoId = (params.chosenPromoId ? params.long('chosenPromoId') : -999l)
     if (chosenPromoId > 0) {
       if (specialOffers.find{it.id == chosenPromoId} || featuredOffers.find{it.id == chosenPromoId}) {
@@ -758,7 +758,7 @@ class StorageSiteController {
     }
 
     def premium = 0
-    def ins
+    Insurance ins
     def chosenInsurance = ''
     if (params.insuranceId && (params.insuranceId as Long) > 0) {
       ins = Insurance.get(params.insuranceId as Long)

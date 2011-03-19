@@ -505,7 +505,7 @@ function createTableRow(s) {
 
   resultTable.fnAddData([
     priceCol.html(),
-    (s.monthly ? s.monthly.toFixed(2) : 10000),
+    (s.pushRate ? s.pushRate.toFixed(2) : 10000),
     distanceCol.html(),
     logoCol.html(),
     facilityCol.html(),
