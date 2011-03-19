@@ -53,19 +53,23 @@ class ReportsController {
 
 
     def index = {
-      def feedList = []
-      def username  = springSecurityService.principal.username
-      def user = User.findByUsername(username as String)
-      if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
-        feedList = Feed.list()
-      } else {
-        if (UserRole.userHasRole(user, 'ROLE_MANAGER')) {
-          feedList = Feed.findAllByManager(user)
+      [feedList: getFeedList()]
+    }
+
+    def getFeedList () {
+        def feedList = []
+        def username  = springSecurityService.principal.username
+        def user = User.findByUsername(username as String)
+        if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+          feedList = Feed.list()
         } else {
-          feedList = Feed.findAllByManager(user.manager)
+          if (UserRole.userHasRole(user, 'ROLE_MANAGER')) {
+            feedList = Feed.findAllByManager(user)
+          } else {
+            feedList = Feed.findAllByManager(user.manager)
+          }
         }
-      }
-      [feedList:feedList]
+        return feedList
     }
 
   GregorianCalendar startDate = new GregorianCalendar()
@@ -92,7 +96,7 @@ class ReportsController {
         println "Error in report validation: ${it}"
       }
       flash.message = "Bad report parameters - please re-enter dates and output type."
-      render view: "index", model: [reportPeriod: period]
+      render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
       return
     }
 
@@ -137,7 +141,8 @@ class ReportsController {
         period.site = StorageSite.findByTitle(params.sitename)
         if (!period.site) {
           flash.message = "Bad report parameters - missing site for report."
-          render view: "index", model: [reportPeriod: period]
+          period.reportName = null
+          render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
           return
         }
         results = buildSiteReport(drb, reportParams, startDate, endDate, period)
@@ -148,6 +153,12 @@ class ReportsController {
         break
 
       case ReportName.ACH_TRANSFERS:
+        if (!period.feed) {
+            flash.message = "Bad report parameters - missing feed for report."
+            period.reportName = null
+            render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+            return
+        }
         results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
         break
 
