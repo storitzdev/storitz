@@ -65,6 +65,9 @@ class ReportsController {
         } else {
           if (UserRole.userHasRole(user, 'ROLE_MANAGER')) {
             feedList = Feed.findAllByManager(user)
+            if (!feedList || feedList.size() == 0) {
+              feedList = Feed.findAllByManager(user.manager)
+            }
           } else {
             feedList = Feed.findAllByManager(user.manager)
           }
