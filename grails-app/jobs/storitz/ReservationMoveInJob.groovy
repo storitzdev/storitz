@@ -1,20 +1,17 @@
 package storitz
 
-import com.storitz.RentalTransaction
-
-
 class ReservationMoveInJob {
-    private static final boolean AUTOMATIC_FLUSH = true;
-    private static final String DEFAULT_CHARSET = "utf8";
+  private static final boolean AUTOMATIC_FLUSH = true;
+  private static final String DEFAULT_CHARSET = "utf8";
 
-    def CShiftService
-    def emailService
+  def CShiftService
+  def emailService
 
-    static triggers = {
-      cron name:'reservationMoveIn', cronExpression:"0 01 1 * * ?"
-    }
+  static triggers = {
+    cron name: 'reservationMoveIn', cronExpression: "0 01 1 * * ?"
+  }
 
-    def execute(context) {
+  def execute(context) {
 
 /*
 
@@ -66,5 +63,5 @@ class ReservationMoveInJob {
         body: buf.toString())
 
 */
-    }
+  }
 }

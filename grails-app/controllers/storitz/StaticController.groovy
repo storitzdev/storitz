@@ -2,43 +2,43 @@ package storitz
 
 class StaticController {
 
-    def privacy = {
-      [title:'Storitz Privacy Policy']
-    }
+  def privacy = {
+    [title: 'Storitz Privacy Policy']
+  }
 
-    def terms = {
-      [title:'Storitz Terms of Use']
-    }
+  def terms = {
+    [title: 'Storitz Terms of Use']
+  }
 
-    def faq = {
-      [title:'Storitz Frequently Asked Questions']
-    }
+  def faq = {
+    [title: 'Storitz Frequently Asked Questions']
+  }
 
-    def aboutus = {
-      [title:'Storitz About Us']
-    }
+  def aboutus = {
+    [title: 'Storitz About Us']
+  }
 
-    def refund = {
-      [title:'Storitz Refund Policy']
-    }
+  def refund = {
+    [title: 'Storitz Refund Policy']
+  }
 
-    def jobs = {
-      [title:'Jobs and Careers at Storitz']
-    }
+  def jobs = {
+    [title: 'Jobs and Careers at Storitz']
+  }
 
-    def operatorsignup = {
-      [title: 'Storitz Operator Signup and Information']
-    }
+  def operatorsignup = {
+    [title: 'Storitz Operator Signup and Information']
+  }
 
-    def media = {
-      [title: 'Storitz Press Room']
-    }
+  def media = {
+    [title: 'Storitz Press Room']
+  }
 
-    def guarantee = {
-      [title: 'Storitz Guarantee']
-    }
+  def guarantee = {
+    [title: 'Storitz Guarantee']
+  }
 
-    def supports = {
-      [title: 'Storitz Supports']
-    }
+  def supports = {
+    [title: 'Storitz Supports']
+  }
 }

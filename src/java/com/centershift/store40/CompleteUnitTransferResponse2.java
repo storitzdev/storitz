@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CompleteUnitTransfer_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CompleteUnitTransfer_Response">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CompleteUnitTransfer_Response", propOrder = {
-    "succeeded",
-    "transferReturn",
-    "paymentResponse"
+        "succeeded",
+        "transferReturn",
+        "paymentResponse"
 })
 public class CompleteUnitTransferResponse2 {
 
@@ -45,7 +42,6 @@ public class CompleteUnitTransferResponse2 {
 
     /**
      * Gets the value of the succeeded property.
-     * 
      */
     public boolean isSucceeded() {
         return succeeded;
@@ -53,7 +49,6 @@ public class CompleteUnitTransferResponse2 {
 
     /**
      * Sets the value of the succeeded property.
-     * 
      */
     public void setSucceeded(boolean value) {
         this.succeeded = value;
@@ -61,11 +56,9 @@ public class CompleteUnitTransferResponse2 {
 
     /**
      * Gets the value of the transferReturn property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TransferReturn }
-     *     
+     *
+     * @return possible object is
+     *         {@link TransferReturn }
      */
     public TransferReturn getTransferReturn() {
         return transferReturn;
@@ -73,11 +66,9 @@ public class CompleteUnitTransferResponse2 {
 
     /**
      * Sets the value of the transferReturn property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TransferReturn }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TransferReturn }
      */
     public void setTransferReturn(TransferReturn value) {
         this.transferReturn = value;
@@ -85,11 +76,9 @@ public class CompleteUnitTransferResponse2 {
 
     /**
      * Gets the value of the paymentResponse property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentResponse }
      */
     public MakePaymentResponse getPaymentResponse() {
         return paymentResponse;
@@ -97,11 +86,9 @@ public class CompleteUnitTransferResponse2 {
 
     /**
      * Sets the value of the paymentResponse property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentResponse }
      */
     public void setPaymentResponse(MakePaymentResponse value) {
         this.paymentResponse = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ORG_CHANNELS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_CHANNELS">
  *   &lt;complexContent>
@@ -28,21 +27,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_CHANNELS", propOrder = {
-    "orgid",
-    "channel",
-    "channeldesc",
-    "active",
-    "createdby",
-    "updatedby"
+        "orgid",
+        "channel",
+        "channeldesc",
+        "active",
+        "createdby",
+        "updatedby"
 })
 public class ORGCHANNELS
-    extends BaseEntityOfCollectionORGCHANNELSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGCHANNELSColumnIndexes {
 
     @XmlElement(name = "ORG_ID")
     protected long orgid;
@@ -59,7 +55,6 @@ public class ORGCHANNELS
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -67,7 +62,6 @@ public class ORGCHANNELS
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -75,7 +69,6 @@ public class ORGCHANNELS
 
     /**
      * Gets the value of the channel property.
-     * 
      */
     public int getCHANNEL() {
         return channel;
@@ -83,7 +76,6 @@ public class ORGCHANNELS
 
     /**
      * Sets the value of the channel property.
-     * 
      */
     public void setCHANNEL(int value) {
         this.channel = value;
@@ -91,11 +83,9 @@ public class ORGCHANNELS
 
     /**
      * Gets the value of the channeldesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCHANNELDESC() {
         return channeldesc;
@@ -103,11 +93,9 @@ public class ORGCHANNELS
 
     /**
      * Sets the value of the channeldesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCHANNELDESC(String value) {
         this.channeldesc = value;
@@ -115,7 +103,6 @@ public class ORGCHANNELS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -123,7 +110,6 @@ public class ORGCHANNELS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -131,7 +117,6 @@ public class ORGCHANNELS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -139,7 +124,6 @@ public class ORGCHANNELS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -147,7 +131,6 @@ public class ORGCHANNELS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -155,7 +138,6 @@ public class ORGCHANNELS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

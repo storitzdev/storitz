@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for VoidFee_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="VoidFee_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VoidFee_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "acctID",
-    "assessmentID"
+        "orgID",
+        "siteID",
+        "acctID",
+        "assessmentID"
 })
 public class VoidFeeRequest {
 
@@ -49,7 +46,6 @@ public class VoidFeeRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -57,7 +53,6 @@ public class VoidFeeRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -65,7 +60,6 @@ public class VoidFeeRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -73,7 +67,6 @@ public class VoidFeeRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -81,7 +74,6 @@ public class VoidFeeRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -89,7 +81,6 @@ public class VoidFeeRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -97,7 +88,6 @@ public class VoidFeeRequest {
 
     /**
      * Gets the value of the assessmentID property.
-     * 
      */
     public long getAssessmentID() {
         return assessmentID;
@@ -105,7 +95,6 @@ public class VoidFeeRequest {
 
     /**
      * Sets the value of the assessmentID property.
-     * 
      */
     public void setAssessmentID(long value) {
         this.assessmentID = value;

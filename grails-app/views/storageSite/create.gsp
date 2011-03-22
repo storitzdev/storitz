@@ -16,7 +16,7 @@
 <g:render template="/topnav"/>
 <div class="stcontent">
   <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(controller:'admin', action:'index')}">Admin</a></span>
+    <span class="menuButton"><a class="home" href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
     <span class="menuButton"><g:link class="list" action="list">Storage Site List</g:link></span>
   </div>
   <div class="body">
@@ -242,5 +242,5 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

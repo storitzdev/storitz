@@ -2,213 +2,213 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Edit Storage Site" scope="request"/>
-  <p:css name="timepicker" />
+  <p:css name="timepicker"/>
   <g:render template="/header_admin"/>
 
   <p:dependantJavascript>
-  <p:javascript src="jquery.MetaData"/>
-  <p:javascript src="jquery.MultiFile"/>
-  <p:javascript src="jquery-ui-timepicker-addon.min"/>
-  <script type="text/javascript">
-    //<![CDATA[
+    <p:javascript src="jquery.MetaData"/>
+    <p:javascript src="jquery.MultiFile"/>
+    <p:javascript src="jquery-ui-timepicker-addon.min"/>
+    <script type="text/javascript">
+      //<![CDATA[
 
-    $(document).ready(function() {
+      $(document).ready(function() {
 
-      setupTimePickers();
-      setupContactSelector();
-    });
+        setupTimePickers();
+        setupContactSelector();
+      });
 
-    function setupContactSelector() {
-      $("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
-    }
-
-    function setupTimePickers() {
-      $("input#startMonday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endMonday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startTuesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endTuesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startWednesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endWednesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startThursday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endThursday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startFriday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endFriday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startSaturday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endSaturday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startSunday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endSunday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-
-      $("input#startMondayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endMondayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startTuesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endTuesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startWednesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endWednesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startThursdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endThursdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startFridayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endFridayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startSaturdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endSaturdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-      $("input#startSundayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
-      $("input#endSundayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
-    }
-
-    function checkAddItem(type) {
-      var listName = type + 'ItemList';
-      var listAdd = type + 'ItemAdd';
-      if ($('#' + listName).children().length >= 10) {
-        $('#' + listAdd).hide();
+      function setupContactSelector() {
+        $("input#contactName").autocomplete({source:"${createLink(controller:'user', action:'autocompleteUser')}"});
       }
-      return false
-    }
 
-    function itemAdd(type) {
-      var listName = type + 'ItemList';
-      var lastInput = $('#' + listName + '> li:last > input');
-      var lastInputName = lastInput.attr('name');
-      var newItem = 1
-      if (lastInputName) {
-        if (lastInput.val().length == 0) {
-          return
+      function setupTimePickers() {
+        $("input#startMonday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endMonday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startTuesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endTuesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startWednesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endWednesday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startThursday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endThursday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startFriday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endFriday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startSaturday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endSaturday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startSunday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endSunday").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+
+        $("input#startMondayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endMondayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startTuesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endTuesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startWednesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endWednesdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startThursdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endThursdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startFridayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endFridayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startSaturdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endSaturdayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+        $("input#startSundayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:8, minuteGrid:15});
+        $("input#endSundayGate").timepicker({timeFormat:"hh:mmTT", ampm:true, hour:18,minuteGrid:15});
+      }
+
+      function checkAddItem(type) {
+        var listName = type + 'ItemList';
+        var listAdd = type + 'ItemAdd';
+        if ($('#' + listName).children().length >= 10) {
+          $('#' + listAdd).hide();
         }
-        newItem = parseInt(lastInputName.substr(lastInputName.indexOf('_') + 1)) + 1;
+        return false
       }
-      var itemName = type + 'Item_' + newItem;
-      var bulletId = type + 'BulletItem_' + newItem;
-      var liElem = $('<li>', {
-        id: bulletId
-      })
-      .append(
-        $('<input>', {
-          id: itemName,
-          name: itemName,
-          type: 'text',
-          style: 'width:200px;'
-        }))
-      .append(
-        $('<a>', {
-          href: '#',
-          text: 'delete',
-          click: function() {
-            $('#' + bulletId).remove();
-            checkAddItem(type);
-            return false;
+
+      function itemAdd(type) {
+        var listName = type + 'ItemList';
+        var lastInput = $('#' + listName + '> li:last > input');
+        var lastInputName = lastInput.attr('name');
+        var newItem = 1
+        if (lastInputName) {
+          if (lastInput.val().length == 0) {
+            return
           }
+          newItem = parseInt(lastInputName.substr(lastInputName.indexOf('_') + 1)) + 1;
+        }
+        var itemName = type + 'Item_' + newItem;
+        var bulletId = type + 'BulletItem_' + newItem;
+        var liElem = $('<li>', {
+          id: bulletId
         })
-      );
-      $('#' + listName).append(liElem);
-      $('#' + itemName).focus();
-    }
-    
-    function addContact() {
-      $.ajax(
-      {
-        url: "${createLink(controller:'storageSite', action:'addContact')}",
-        method:'get',
-        dataType: 'json',
-        data: {
-          id: ${storageSiteInstance.id},
-          email:$("#contactName").val()
-        },
-        success:function(ret) {
-          if (ret.userId > 0) {
+                .append(
+                $('<input>', {
+                  id: itemName,
+                  name: itemName,
+                  type: 'text',
+                  style: 'width:200px;'
+                }))
+                .append(
+                $('<a>', {
+                  href: '#',
+                  text: 'delete',
+                  click: function() {
+                    $('#' + bulletId).remove();
+                    checkAddItem(type);
+                    return false;
+                  }
+                })
+                );
+        $('#' + listName).append(liElem);
+        $('#' + itemName).focus();
+      }
+
+      function addContact() {
+        $.ajax(
+        {
+          url: "${createLink(controller:'storageSite', action:'addContact')}",
+          method:'get',
+          dataType: 'json',
+          data: {
+            id: ${storageSiteInstance.id},
+            email:$("#contactName").val()
+          },
+          success:function(ret) {
+            if (ret.userId > 0) {
               var itemId = 'contact_' + ret.userId;
               var newItem = $('<li>', {id: itemId}).text(ret.username + ' - ' + ret.email + ' - ' + ret.notificationTypes)
-                .append($('<div>', { 'class': "right" })
-                .append($('<a>',
-                  {
-                    href: '#',
-                    click: function() {
-                      deleteContact(ret.userId);
-                      return false;
-                    }
-                  })
-                  .text('remove')).append($('<div>', {style:'clear:both;'})
-              ));
-              $('#contacts').append(newItem);
-          }
-        }
-      });
-    }
-
-    function addCaption(form, imgId) {
-      var data = form.serialize();
-      $.ajax(
-      {
-        url: "${createLink(controller:'storageSite', action:'addCaptionAndTag')}",
-        method:'post',
-        dataType: 'json',
-        data: data,
-        success:function(ret) {
-          alert('submitted');
-        }
-      });
-      return false;
-    }
-
-    function deleteContact(contactId) {
-      $.ajax(
-      {
-        url:"${createLink(controller:'storageSite', action:'removeContact')}",
-        method:'get',
-        dataType: 'json',
-        data: {
-          id: ${storageSiteInstance.id},
-          userId:contactId
-        },
-        success: function(ret) {
-          $("#contact_" + contactId).remove();
-        }
-      });
-    }
-
-    function deleteImage(imgId) {
-      $.ajax(
-      {
-        url: "${createLink(controller:'storageSite', action:'deleteImage')}",
-        method: 'get',
-        dataType: 'json',
-        data: {
-          id: ${storageSiteInstance.id},
-          siteImageId:imgId
-        },
-        success: function(ret) {
-          $("#image_" + imgId).remove();
-        }
-      });
-    }
-
-    function defaultImage(imgId) {
-      var newDefault = 'default_' + imgId;
-      $.ajax(
-      {
-        url: "${createLink(controller:'storageSite', action:'defaultImage')}",
-        method:'get',
-        dataType: 'json',
-        data: {id: ${storageSiteInstance.id}, siteImageId:imgId },
-        success:function(ret) {
-          $('div[id^=default_]').each(function(elem) {
-            if ($(this).attr('id') == newDefault) {
-              $(this).text('Default Image');
-            } else {
-              var linkId = $(this).attr('id').substring(8);
-              var link = $('<a>', {
-                href:"#",
+                      .append($('<div>', { 'class': "right" })
+                      .append($('<a>',
+              {
+                href: '#',
                 click: function() {
-                  defaultImage(linkId);
+                  deleteContact(ret.userId);
                   return false;
                 }
-              }).text('set as default');
-              $(this).html(link);
+              })
+                      .text('remove')).append($('<div>', {style:'clear:both;'})
+                      ));
+              $('#contacts').append(newItem);
             }
-          });
-        }
-      });
-    }
+          }
+        });
+      }
 
-    //]]>
-  </script>
+      function addCaption(form, imgId) {
+        var data = form.serialize();
+        $.ajax(
+        {
+          url: "${createLink(controller:'storageSite', action:'addCaptionAndTag')}",
+          method:'post',
+          dataType: 'json',
+          data: data,
+          success:function(ret) {
+            alert('submitted');
+          }
+        });
+        return false;
+      }
+
+      function deleteContact(contactId) {
+        $.ajax(
+        {
+          url:"${createLink(controller:'storageSite', action:'removeContact')}",
+          method:'get',
+          dataType: 'json',
+          data: {
+            id: ${storageSiteInstance.id},
+            userId:contactId
+          },
+          success: function(ret) {
+            $("#contact_" + contactId).remove();
+          }
+        });
+      }
+
+      function deleteImage(imgId) {
+        $.ajax(
+        {
+          url: "${createLink(controller:'storageSite', action:'deleteImage')}",
+          method: 'get',
+          dataType: 'json',
+          data: {
+            id: ${storageSiteInstance.id},
+            siteImageId:imgId
+          },
+          success: function(ret) {
+            $("#image_" + imgId).remove();
+          }
+        });
+      }
+
+      function defaultImage(imgId) {
+        var newDefault = 'default_' + imgId;
+        $.ajax(
+        {
+          url: "${createLink(controller:'storageSite', action:'defaultImage')}",
+          method:'get',
+          dataType: 'json',
+          data: {id: ${storageSiteInstance.id}, siteImageId:imgId },
+          success:function(ret) {
+            $('div[id^=default_]').each(function(elem) {
+              if ($(this).attr('id') == newDefault) {
+                $(this).text('Default Image');
+              } else {
+                var linkId = $(this).attr('id').substring(8);
+                var link = $('<a>', {
+                  href:"#",
+                  click: function() {
+                    defaultImage(linkId);
+                    return false;
+                  }
+                }).text('set as default');
+                $(this).html(link);
+              }
+            });
+          }
+        });
+      }
+
+      //]]>
+    </script>
   </p:dependantJavascript>
 
 </head>
@@ -216,7 +216,7 @@
 <div id="body">
   <g:render template="/topnav"/>
   <div class="stcontent">
-    <g:render template="/logo_bar" />
+    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -260,7 +260,7 @@
 
           <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'title', 'errors')}">
-              <g:textField id="title" name="title" style="width: 280px;" value="${storageSiteInstance?.title}" />
+              <g:textField id="title" name="title" style="width: 280px;" value="${storageSiteInstance?.title}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -274,7 +274,7 @@
 
           <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'address', 'errors')}">
-              <g:textField id="address" name="address" style="width: 280px;" value="${storageSiteInstance?.address}" />
+              <g:textField id="address" name="address" style="width: 280px;" value="${storageSiteInstance?.address}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -288,7 +288,7 @@
 
           <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'address2', 'errors')}">
-              <g:textField id="address2" name="address2" style="width: 280px;" value="${storageSiteInstance?.address2}" />
+              <g:textField id="address2" name="address2" style="width: 280px;" value="${storageSiteInstance?.address2}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -302,13 +302,13 @@
 
           <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'city', 'errors')}">
-              <g:textField id="city" name="city" style="width: 280px;" value="${storageSiteInstance?.city}" />
+              <g:textField id="city" name="city" style="width: 280px;" value="${storageSiteInstance?.city}"/>
             </div>
             <div style="width:100px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'state', 'errors')}">
               <g:select name="state" id="state" class="validate-selection" style="width:80px;" from="${storitz.constants.State.list()}" value="${storageSiteInstance?.state}" optionValue="value"/>
             </div>
             <div style="width:120px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'zipcode', 'errors')}">
-              <g:textField id="zipcode" name="zipcode" style="width: 100px;" value="${storageSiteInstance?.zipcode}" />
+              <g:textField id="zipcode" name="zipcode" style="width: 100px;" value="${storageSiteInstance?.zipcode}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -328,7 +328,7 @@
 
           <div class="checkout_fields">
             <div style="width:200px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'phone', 'errors')}">
-              <g:textField id="phone" name="phone" style="width: 180px;" value="${storageSiteInstance?.phone}" />
+              <g:textField id="phone" name="phone" style="width: 180px;" value="${storageSiteInstance?.phone}"/>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -778,7 +778,7 @@
             Site Features and Property Overview
           </div>
           <div class="formInstructions">
-             Use this one paragraph description to sum-up your property's location, unique attributes and any other important information, such as:
+            Use this one paragraph description to sum-up your property's location, unique attributes and any other important information, such as:
             <p>
               "Bob-Jane's Self Storage is the newest self-storage that is located in the heart of the Smithtown Market District, accessible from the 85 Freeway. We have a clean, well-lighted, pest-free 3-story property with everything from walk-in closets to roll-up garages. "
             </p>
@@ -786,12 +786,12 @@
 
           <div class="checkout_fields">
             <div style="width:660px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'description', 'errors')}">
-              <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}" />
+              <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>
               <fckeditor:editor
-                name="description"
-                width="650"
-                height="300"
-                toolbar="Storitz">
+                      name="description"
+                      width="650"
+                      height="300"
+                      toolbar="Storitz">
                 ${storageSiteInstance?.description}
               </fckeditor:editor>
             </div>
@@ -825,12 +825,15 @@
               <ul id="securityItemList">
                 <g:each in="${storageSiteInstance?.securityItems}" status="i" var="c">
                   <li id="securityItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="securityItem_${i}"/>  <a href="#" onclick="$('#securityItem_${i}').remove();checkAddItem('security');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="securityItem_${i}"/>  <a href="#" onclick="$('#securityItem_${i}').remove();
+                  checkAddItem('security');">delete</a>
                   </li>
                 </g:each>
               </ul>
               <p id="securityItemAdd">
-                <a href="#" onclick="itemAdd('security');checkAddItem('security');return false;">Add Item</a>
+                <a href="#" onclick="itemAdd('security');
+                checkAddItem('security');
+                return false;">Add Item</a>
               </p>
             </div>
             <div style="width:240px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'convenienceItems', 'errors')}">
@@ -852,12 +855,15 @@
               <ul id="convenienceItemList">
                 <g:each in="${storageSiteInstance?.convenienceItems}" status="i" var="c">
                   <li id="convenienceItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="convenienceItem_${i}"/>  <a href="#" onclick="$('#convenienceItem_${i}').remove();checkAddItem('convenience');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="convenienceItem_${i}"/>  <a href="#" onclick="$('#convenienceItem_${i}').remove();
+                  checkAddItem('convenience');">delete</a>
                   </li>
                 </g:each>
               </ul>
               <p id="convenienceItemAdd">
-                <a href="#" onclick="itemAdd('convenience');checkAddItem('convenience'); return false;">Add Item</a>
+                <a href="#" onclick="itemAdd('convenience');
+                checkAddItem('convenience');
+                return false;">Add Item</a>
               </p>
             </div>
             <div style="width:240px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'convenienceItems', 'errors')}">
@@ -873,12 +879,15 @@
               <ul id="amenityItemList">
                 <g:each in="${storageSiteInstance?.amenityItems}" status="i" var="c">
                   <li id="amenityItem_${i}">
-                    <input type="text" value="${c.bullet}" style="width:200px;" name="amenityItem_${i}"/>  <a href="#" onclick="$('#amenityItem_${i}').remove();checkAddItem('amenity');">delete</a>
+                    <input type="text" value="${c.bullet}" style="width:200px;" name="amenityItem_${i}"/>  <a href="#" onclick="$('#amenityItem_${i}').remove();
+                  checkAddItem('amenity');">delete</a>
                   </li>
                 </g:each>
               </ul>
               <p id="amenityItemAdd">
-                <a href="#" onclick="itemAdd('amenity');checkAddItem('amenity'); return false;">Add Item</a>
+                <a href="#" onclick="itemAdd('amenity');
+                checkAddItem('amenity');
+                return false;">Add Item</a>
               </p>
             </div>
             <div style="clear:both;"></div>
@@ -898,27 +907,27 @@
           </div>
 
           <sec:ifAnyGranted roles="ROLE_ADMIN">
-          <div class="checkout_section_header">
-            Site Owner/Manager
-          </div>
-          <div class="formInstructions">
-            This ADMIN only feature allows Storitz to reassign the managerial owner of a site.  This can be used if a site is purchase
-            and is now managed by a different operator.
-          </div>
-
-          <div class="checkout_fields">
-            <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'manager', 'errors')}">
-              <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${storageSiteInstance.getManager()?.id}" noSelection="['null': '']"/>
+            <div class="checkout_section_header">
+              Site Owner/Manager
             </div>
-            <div style="clear:both;"></div>
-          </div>
-
-          <div class="checkout_labels">
-            <div class="checkout_name" style="width:250px;">
-              <label for="manager">Manager User</label>
+            <div class="formInstructions">
+              This ADMIN only feature allows Storitz to reassign the managerial owner of a site.  This can be used if a site is purchase
+              and is now managed by a different operator.
             </div>
-            <div style="clear:both;"></div>
-          </div>
+
+            <div class="checkout_fields">
+              <div style="width:250px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'manager', 'errors')}">
+                <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${storageSiteInstance.getManager()?.id}" noSelection="['null': '']"/>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="checkout_labels">
+              <div class="checkout_name" style="width:250px;">
+                <label for="manager">Manager User</label>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
           </sec:ifAnyGranted>
 
           <div class="checkout_section_header">
@@ -1020,7 +1029,8 @@
                     ${contact.username} - ${contact.email} - ${User.showNotificationTypes(contact)}
                     <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
                       <div class="right">
-                        <a href="#" onclick="deleteContact(${contact.id}); return false;">remove</a>
+                        <a href="#" onclick="deleteContact(${contact.id});
+                        return false;">remove</a>
                       </div>
                       <div style="clear:both;"></div>
                     </sec:ifAnyGranted>
@@ -1036,10 +1046,11 @@
               <label for="contactName">Search for Contact</label>
             </div>
             <div style="width:300px;" class="checkout_value">
-              <input type="text" style="width: 300px;" id="contactName" />
+              <input type="text" style="width: 300px;" id="contactName"/>
             </div>
             <div class="checkout_value">
-              <span class="buttonSmall"><a href="#" onclick="addContact(); return false;">Add Contact</a></span>
+              <span class="buttonSmall"><a href="#" onclick="addContact();
+              return false;">Add Contact</a></span>
             </div>
             <div style="clear:both;"></div>
           </div>
@@ -1071,7 +1082,7 @@
                     <td><g:checkBox name="specialOffer_${o.id}" value="${o.active}"/></td>
                     <td><g:checkBox name="featuredOffer_${o.id}" value="${o.featured}"/></td>
                     <td><g:checkBox name="waiveAdmin_${o.id}" value="${o.waiveAdmin}"/></td>
-                    <td><g:textField style="width:250px;" name="promoName_${o.id}" value="${o.promoName}"/> </td>
+                    <td><g:textField style="width:250px;" name="promoName_${o.id}" value="${o.promoName}"/></td>
                     <td><g:textField style="width:250px;" name="promoDesc_${o.id}" value="${o.description}"/></td>
                     <td>
                       <g:each in="${o.restrictions}" var="r">
@@ -1104,7 +1115,7 @@
                 <g:each in="${storageSiteInstance?.insurances.sort{it.id}}" var="ins">
                   <tr>
                     <td><g:checkBox name="insurance_${ins.id}" value="${ins.active}"/></td>
-                    <td><g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></td>
+                    <td><g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD"/>/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD"/> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent"/></td>
                   </tr>
                 </g:each>
               </table>
@@ -1263,24 +1274,26 @@
                   </div>
                   <div class="left">
                     <div>
-                      <a href="#" onclick="deleteImage(${i.id}); return false;">remove</a>
+                      <a href="#" onclick="deleteImage(${i.id});
+                      return false;">remove</a>
                     </div>
                     <div id="default_${i.id}">
                       <g:if test="${i.isCover}">
                         Default Image
                       </g:if>
                       <g:else>
-                        <a href="#" onclick="defaultImage(${i.id}); return false;">set as default</a>
+                        <a href="#" onclick="defaultImage(${i.id});
+                        return false;">set as default</a>
                       </g:else>
                     </div>
                   </div>
-                <sec:ifAnyGranted roles="ROLE_ADMIN">
-                  <div style="clear:both;">
+                  <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <div style="clear:both;">
                       <div style="clear:both;"><div class="left" style="width:60px;">Caption:</div><div class="left"><input name="caption_${i.id}" style="width: 200px;" value="${i.caption}"></div></div>
                       <div style="clear:both;"><div class="left" style="width:60px;">Tags:</div><div class="left"><input name="tags_${i.id}" style="width: 200px;" value="${i.tags}"></div></div>
                       <div id="captionResult_${i.id}" style="clear:both;"></div>
-                  </div>
-                </sec:ifAnyGranted>
+                    </div>
+                  </sec:ifAnyGranted>
                 </div>
               </g:if>
             </g:each>
@@ -1302,5 +1315,5 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

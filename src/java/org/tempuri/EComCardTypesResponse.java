@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "eComCardTypesResult"
+        "eComCardTypesResult"
 })
 @XmlRootElement(name = "eComCardTypesResponse")
 public class EComCardTypesResponse {
@@ -37,11 +34,9 @@ public class EComCardTypesResponse {
 
     /**
      * Gets the value of the eComCardTypesResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAnyType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAnyType }
      */
     public ArrayOfAnyType getEComCardTypesResult() {
         return eComCardTypesResult;
@@ -49,11 +44,9 @@ public class EComCardTypesResponse {
 
     /**
      * Sets the value of the eComCardTypesResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAnyType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAnyType }
      */
     public void setEComCardTypesResult(ArrayOfAnyType value) {
         this.eComCardTypesResult = value;

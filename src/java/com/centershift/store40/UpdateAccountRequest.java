@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateAccount_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateAccount_Request">
  *   &lt;complexContent>
@@ -31,20 +30,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateAccount_Request", propOrder = {
-    "acctId",
-    "acctName",
-    "acctType",
-    "acctClass",
-    "cflex01",
-    "cflex02",
-    "cflex03",
-    "cflex04",
-    "cflex05"
+        "acctId",
+        "acctName",
+        "acctType",
+        "acctClass",
+        "cflex01",
+        "cflex02",
+        "cflex03",
+        "cflex04",
+        "cflex05"
 })
 public class UpdateAccountRequest {
 
@@ -69,7 +66,6 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the acctId property.
-     * 
      */
     public long getAcctId() {
         return acctId;
@@ -77,7 +73,6 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the acctId property.
-     * 
      */
     public void setAcctId(long value) {
         this.acctId = value;
@@ -85,11 +80,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the acctName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAcctName() {
         return acctName;
@@ -97,11 +90,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the acctName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAcctName(String value) {
         this.acctName = value;
@@ -109,11 +100,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the acctType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountType }
-     *     
+     *
+     * @return possible object is
+     *         {@link AccountType }
      */
     public AccountType getAcctType() {
         return acctType;
@@ -121,11 +110,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the acctType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AccountType }
      */
     public void setAcctType(AccountType value) {
         this.acctType = value;
@@ -133,11 +120,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the acctClass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountClass }
-     *     
+     *
+     * @return possible object is
+     *         {@link AccountClass }
      */
     public AccountClass getAcctClass() {
         return acctClass;
@@ -145,11 +130,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the acctClass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountClass }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AccountClass }
      */
     public void setAcctClass(AccountClass value) {
         this.acctClass = value;
@@ -157,11 +140,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the cflex01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex01() {
         return cflex01;
@@ -169,11 +150,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the cflex01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex01(String value) {
         this.cflex01 = value;
@@ -181,11 +160,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the cflex02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex02() {
         return cflex02;
@@ -193,11 +170,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the cflex02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex02(String value) {
         this.cflex02 = value;
@@ -205,11 +180,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the cflex03 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex03() {
         return cflex03;
@@ -217,11 +190,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the cflex03 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex03(String value) {
         this.cflex03 = value;
@@ -229,11 +200,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the cflex04 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex04() {
         return cflex04;
@@ -241,11 +210,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the cflex04 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex04(String value) {
         this.cflex04 = value;
@@ -253,11 +220,9 @@ public class UpdateAccountRequest {
 
     /**
      * Gets the value of the cflex05 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex05() {
         return cflex05;
@@ -265,11 +230,9 @@ public class UpdateAccountRequest {
 
     /**
      * Sets the value of the cflex05 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex05(String value) {
         this.cflex05 = value;

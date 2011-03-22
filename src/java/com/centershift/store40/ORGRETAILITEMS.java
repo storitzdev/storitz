@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_RETAIL_ITEMS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_RETAIL_ITEMS">
  *   &lt;complexContent>
@@ -50,42 +49,39 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_RETAIL_ITEMS", propOrder = {
-    "orgclassid",
-    "vendorid",
-    "color",
-    "costofgoods",
-    "description",
-    "minprice",
-    "maxprice",
-    "suggestedprice",
-    "packagetype",
-    "partnumber",
-    "itemtype",
-    "qtyper",
-    "uom",
-    "itemsize",
-    "weight",
-    "barcode",
-    "sku",
-    "active",
-    "createdby",
-    "updatedby",
-    "itemname",
-    "minorderqty",
-    "categoryid",
-    "orgretailbulk",
-    "orgretailbom",
-    "orgretailpodetail",
-    "orgsiteretailobjects"
+        "orgclassid",
+        "vendorid",
+        "color",
+        "costofgoods",
+        "description",
+        "minprice",
+        "maxprice",
+        "suggestedprice",
+        "packagetype",
+        "partnumber",
+        "itemtype",
+        "qtyper",
+        "uom",
+        "itemsize",
+        "weight",
+        "barcode",
+        "sku",
+        "active",
+        "createdby",
+        "updatedby",
+        "itemname",
+        "minorderqty",
+        "categoryid",
+        "orgretailbulk",
+        "orgretailbom",
+        "orgretailpodetail",
+        "orgsiteretailobjects"
 })
 public class ORGRETAILITEMS
-    extends BaseEntityOfCollectionORGRETAILITEMSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGRETAILITEMSColumnIndexes {
 
     @XmlElement(name = "ORG_CLASS_ID", required = true, type = Long.class, nillable = true)
     protected Long orgclassid;
@@ -144,11 +140,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the orgclassid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getORGCLASSID() {
         return orgclassid;
@@ -156,11 +150,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the orgclassid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setORGCLASSID(Long value) {
         this.orgclassid = value;
@@ -168,7 +160,6 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the vendorid property.
-     * 
      */
     public long getVENDORID() {
         return vendorid;
@@ -176,7 +167,6 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the vendorid property.
-     * 
      */
     public void setVENDORID(long value) {
         this.vendorid = value;
@@ -184,11 +174,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the color property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOLOR() {
         return color;
@@ -196,11 +184,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the color property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOLOR(String value) {
         this.color = value;
@@ -208,11 +194,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the costofgoods property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCOSTOFGOODS() {
         return costofgoods;
@@ -220,11 +204,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the costofgoods property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCOSTOFGOODS(BigDecimal value) {
         this.costofgoods = value;
@@ -232,11 +214,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIPTION() {
         return description;
@@ -244,11 +224,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIPTION(String value) {
         this.description = value;
@@ -256,11 +234,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the minprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMINPRICE() {
         return minprice;
@@ -268,11 +244,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the minprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMINPRICE(BigDecimal value) {
         this.minprice = value;
@@ -280,11 +254,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the maxprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMAXPRICE() {
         return maxprice;
@@ -292,11 +264,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the maxprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMAXPRICE(BigDecimal value) {
         this.maxprice = value;
@@ -304,11 +274,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the suggestedprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSUGGESTEDPRICE() {
         return suggestedprice;
@@ -316,11 +284,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the suggestedprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSUGGESTEDPRICE(BigDecimal value) {
         this.suggestedprice = value;
@@ -328,11 +294,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the packagetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPACKAGETYPE() {
         return packagetype;
@@ -340,11 +304,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the packagetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPACKAGETYPE(Integer value) {
         this.packagetype = value;
@@ -352,11 +314,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the partnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPARTNUMBER() {
         return partnumber;
@@ -364,11 +324,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the partnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPARTNUMBER(String value) {
         this.partnumber = value;
@@ -376,7 +334,6 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the itemtype property.
-     * 
      */
     public int getITEMTYPE() {
         return itemtype;
@@ -384,7 +341,6 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the itemtype property.
-     * 
      */
     public void setITEMTYPE(int value) {
         this.itemtype = value;
@@ -392,11 +348,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the qtyper property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getQTYPER() {
         return qtyper;
@@ -404,11 +358,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the qtyper property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setQTYPER(Integer value) {
         this.qtyper = value;
@@ -416,11 +368,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the uom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUOM() {
         return uom;
@@ -428,11 +378,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the uom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUOM(String value) {
         this.uom = value;
@@ -440,11 +388,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the itemsize property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getITEMSIZE() {
         return itemsize;
@@ -452,11 +398,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the itemsize property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setITEMSIZE(String value) {
         this.itemsize = value;
@@ -464,11 +408,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the weight property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getWEIGHT() {
         return weight;
@@ -476,11 +418,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the weight property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWEIGHT(String value) {
         this.weight = value;
@@ -488,11 +428,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the barcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBARCODE() {
         return barcode;
@@ -500,11 +438,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the barcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBARCODE(String value) {
         this.barcode = value;
@@ -512,11 +448,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the sku property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSKU() {
         return sku;
@@ -524,11 +458,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the sku property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSKU(String value) {
         this.sku = value;
@@ -536,7 +468,6 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -544,7 +475,6 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -552,7 +482,6 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -560,7 +489,6 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -568,7 +496,6 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -576,7 +503,6 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -584,11 +510,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the itemname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getITEMNAME() {
         return itemname;
@@ -596,11 +520,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the itemname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setITEMNAME(String value) {
         this.itemname = value;
@@ -608,11 +530,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the minorderqty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getMINORDERQTY() {
         return minorderqty;
@@ -620,11 +540,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the minorderqty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setMINORDERQTY(Integer value) {
         this.minorderqty = value;
@@ -632,7 +550,6 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the categoryid property.
-     * 
      */
     public int getCATEGORYID() {
         return categoryid;
@@ -640,7 +557,6 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the categoryid property.
-     * 
      */
     public void setCATEGORYID(int value) {
         this.categoryid = value;
@@ -648,11 +564,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the orgretailbulk property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGRETAILBULK }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGRETAILBULK }
      */
     public ArrayOfORGRETAILBULK getORGRETAILBULK() {
         return orgretailbulk;
@@ -660,11 +574,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the orgretailbulk property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGRETAILBULK }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGRETAILBULK }
      */
     public void setORGRETAILBULK(ArrayOfORGRETAILBULK value) {
         this.orgretailbulk = value;
@@ -672,11 +584,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the orgretailbom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGRETAILBOM }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGRETAILBOM }
      */
     public ArrayOfORGRETAILBOM getORGRETAILBOM() {
         return orgretailbom;
@@ -684,11 +594,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the orgretailbom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGRETAILBOM }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGRETAILBOM }
      */
     public void setORGRETAILBOM(ArrayOfORGRETAILBOM value) {
         this.orgretailbom = value;
@@ -696,11 +604,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the orgretailpodetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGRETAILPODETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGRETAILPODETAIL }
      */
     public ArrayOfORGRETAILPODETAIL getORGRETAILPODETAIL() {
         return orgretailpodetail;
@@ -708,11 +614,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the orgretailpodetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGRETAILPODETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGRETAILPODETAIL }
      */
     public void setORGRETAILPODETAIL(ArrayOfORGRETAILPODETAIL value) {
         this.orgretailpodetail = value;
@@ -720,11 +624,9 @@ public class ORGRETAILITEMS
 
     /**
      * Gets the value of the orgsiteretailobjects property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGSITERETAILOBJECTS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGSITERETAILOBJECTS }
      */
     public ArrayOfORGSITERETAILOBJECTS getORGSITERETAILOBJECTS() {
         return orgsiteretailobjects;
@@ -732,11 +634,9 @@ public class ORGRETAILITEMS
 
     /**
      * Sets the value of the orgsiteretailobjects property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGSITERETAILOBJECTS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGSITERETAILOBJECTS }
      */
     public void setORGSITERETAILOBJECTS(ArrayOfORGSITERETAILOBJECTS value) {
         this.orgsiteretailobjects = value;

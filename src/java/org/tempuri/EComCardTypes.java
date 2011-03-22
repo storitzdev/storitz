@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName"
+        "csUser",
+        "csPassword",
+        "csSiteName"
 })
 @XmlRootElement(name = "eComCardTypes")
 public class EComCardTypes {
@@ -43,11 +40,9 @@ public class EComCardTypes {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -55,11 +50,9 @@ public class EComCardTypes {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -67,11 +60,9 @@ public class EComCardTypes {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -79,11 +70,9 @@ public class EComCardTypes {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -91,11 +80,9 @@ public class EComCardTypes {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -103,11 +90,9 @@ public class EComCardTypes {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;

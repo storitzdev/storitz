@@ -2,15 +2,15 @@ package com.storitz
 
 class NotificationType {
 
-    String notificationType
-    String description
+  String notificationType
+  String description
 
   boolean equals(other) {
-      if (!(other instanceof NotificationType)) {
-          return false
-      }
+    if (!(other instanceof NotificationType)) {
+      return false
+    }
 
-      other.id == id
+    other.id == id
   }
 
   int hashCode() {
@@ -19,7 +19,7 @@ class NotificationType {
 
   static constraints = {
     notificationType blank: false, unique: true
-    description(blank:false)
+    description(blank: false)
   }
 
 }

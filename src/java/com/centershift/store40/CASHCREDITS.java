@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for CASH_CREDITS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CASH_CREDITS">
  *   &lt;complexContent>
@@ -35,27 +34,24 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CASH_CREDITS", propOrder = {
-    "amt",
-    "balance",
-    "credittype",
-    "credittypeval",
-    "reftype",
-    "reftypeval",
-    "escrowid",
-    "refid",
-    "tnxid",
-    "version",
-    "siteid",
-    "acctid"
+        "amt",
+        "balance",
+        "credittype",
+        "credittypeval",
+        "reftype",
+        "reftypeval",
+        "escrowid",
+        "refid",
+        "tnxid",
+        "version",
+        "siteid",
+        "acctid"
 })
 public class CASHCREDITS
-    extends BaseEntityOfCollectionCASHCREDITSColumnIndexes
-{
+        extends BaseEntityOfCollectionCASHCREDITSColumnIndexes {
 
     @XmlElement(name = "AMT", required = true)
     protected BigDecimal amt;
@@ -84,11 +80,9 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the amt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAMT() {
         return amt;
@@ -96,11 +90,9 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the amt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAMT(BigDecimal value) {
         this.amt = value;
@@ -108,11 +100,9 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the balance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getBALANCE() {
         return balance;
@@ -120,11 +110,9 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the balance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setBALANCE(BigDecimal value) {
         this.balance = value;
@@ -132,7 +120,6 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the credittype property.
-     * 
      */
     public int getCREDITTYPE() {
         return credittype;
@@ -140,7 +127,6 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the credittype property.
-     * 
      */
     public void setCREDITTYPE(int value) {
         this.credittype = value;
@@ -148,11 +134,9 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the credittypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREDITTYPEVAL() {
         return credittypeval;
@@ -160,11 +144,9 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the credittypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREDITTYPEVAL(String value) {
         this.credittypeval = value;
@@ -172,7 +154,6 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the reftype property.
-     * 
      */
     public int getREFTYPE() {
         return reftype;
@@ -180,7 +161,6 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the reftype property.
-     * 
      */
     public void setREFTYPE(int value) {
         this.reftype = value;
@@ -188,11 +168,9 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the reftypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getREFTYPEVAL() {
         return reftypeval;
@@ -200,11 +178,9 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the reftypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setREFTYPEVAL(String value) {
         this.reftypeval = value;
@@ -212,7 +188,6 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the escrowid property.
-     * 
      */
     public long getESCROWID() {
         return escrowid;
@@ -220,7 +195,6 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the escrowid property.
-     * 
      */
     public void setESCROWID(long value) {
         this.escrowid = value;
@@ -228,7 +202,6 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the refid property.
-     * 
      */
     public long getREFID() {
         return refid;
@@ -236,7 +209,6 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the refid property.
-     * 
      */
     public void setREFID(long value) {
         this.refid = value;
@@ -244,11 +216,9 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the tnxid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTNXID() {
         return tnxid;
@@ -256,11 +226,9 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the tnxid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTNXID(Long value) {
         this.tnxid = value;
@@ -268,7 +236,6 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the version property.
-     * 
      */
     public int getVERSION() {
         return version;
@@ -276,7 +243,6 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the version property.
-     * 
      */
     public void setVERSION(int value) {
         this.version = value;
@@ -284,7 +250,6 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -292,7 +257,6 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -300,11 +264,9 @@ public class CASHCREDITS
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -312,11 +274,9 @@ public class CASHCREDITS
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;

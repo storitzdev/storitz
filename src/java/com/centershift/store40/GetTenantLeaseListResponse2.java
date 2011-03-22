@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for getTenantLeaseList_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="getTenantLeaseList_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getTenantLeaseList_Response", propOrder = {
-    "tntLeaseCol"
+        "tntLeaseCol"
 })
 public class GetTenantLeaseListResponse2 {
 
@@ -37,11 +34,9 @@ public class GetTenantLeaseListResponse2 {
 
     /**
      * Gets the value of the tntLeaseCol property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfPOSTLEASETNTINFO }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfPOSTLEASETNTINFO }
      */
     public ArrayOfPOSTLEASETNTINFO getTntLeaseCol() {
         return tntLeaseCol;
@@ -49,11 +44,9 @@ public class GetTenantLeaseListResponse2 {
 
     /**
      * Sets the value of the tntLeaseCol property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfPOSTLEASETNTINFO }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfPOSTLEASETNTINFO }
      */
     public void setTntLeaseCol(ArrayOfPOSTLEASETNTINFO value) {
         this.tntLeaseCol = value;

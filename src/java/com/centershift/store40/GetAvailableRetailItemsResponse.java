@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getAvailableRetailItemsResult"
+        "getAvailableRetailItemsResult"
 })
 @XmlRootElement(name = "GetAvailableRetailItemsResponse")
 public class GetAvailableRetailItemsResponse {
@@ -39,11 +32,9 @@ public class GetAvailableRetailItemsResponse {
 
     /**
      * Gets the value of the getAvailableRetailItemsResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetAvailableRetailItemsResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetAvailableRetailItemsResponse2 }
      */
     public GetAvailableRetailItemsResponse2 getGetAvailableRetailItemsResult() {
         return getAvailableRetailItemsResult;
@@ -51,11 +42,9 @@ public class GetAvailableRetailItemsResponse {
 
     /**
      * Sets the value of the getAvailableRetailItemsResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetAvailableRetailItemsResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetAvailableRetailItemsResponse2 }
      */
     public void setGetAvailableRetailItemsResult(GetAvailableRetailItemsResponse2 value) {
         this.getAvailableRetailItemsResult = value;

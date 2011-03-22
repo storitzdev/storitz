@@ -9,6 +9,6 @@ class GeoLookup {
   String zip
 
   static constraints = {
-    zip(nullable:true)
+    zip(nullable: true)
   }
 }

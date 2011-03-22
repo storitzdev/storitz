@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AuctionEndRentalSummary complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionEndRentalSummary">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionEndRentalSummary", propOrder = {
-    "auctionID",
-    "completionDetail"
+        "auctionID",
+        "completionDetail"
 })
 public class AuctionEndRentalSummary {
 
@@ -41,7 +38,6 @@ public class AuctionEndRentalSummary {
 
     /**
      * Gets the value of the auctionID property.
-     * 
      */
     public long getAuctionID() {
         return auctionID;
@@ -49,7 +45,6 @@ public class AuctionEndRentalSummary {
 
     /**
      * Sets the value of the auctionID property.
-     * 
      */
     public void setAuctionID(long value) {
         this.auctionID = value;
@@ -57,11 +52,9 @@ public class AuctionEndRentalSummary {
 
     /**
      * Gets the value of the completionDetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionEndRentalComplete1 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionEndRentalComplete1 }
      */
     public ArrayOfAuctionEndRentalComplete1 getCompletionDetail() {
         return completionDetail;
@@ -69,11 +62,9 @@ public class AuctionEndRentalSummary {
 
     /**
      * Sets the value of the completionDetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionEndRentalComplete1 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionEndRentalComplete1 }
      */
     public void setCompletionDetail(ArrayOfAuctionEndRentalComplete1 value) {
         this.completionDetail = value;

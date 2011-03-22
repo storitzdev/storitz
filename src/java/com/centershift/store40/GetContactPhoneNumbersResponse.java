@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getContactPhoneNumbersResult"
+        "getContactPhoneNumbersResult"
 })
 @XmlRootElement(name = "GetContactPhoneNumbersResponse")
 public class GetContactPhoneNumbersResponse {
@@ -39,11 +32,9 @@ public class GetContactPhoneNumbersResponse {
 
     /**
      * Gets the value of the getContactPhoneNumbersResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetContactPhoneNumbersResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetContactPhoneNumbersResponse2 }
      */
     public GetContactPhoneNumbersResponse2 getGetContactPhoneNumbersResult() {
         return getContactPhoneNumbersResult;
@@ -51,11 +42,9 @@ public class GetContactPhoneNumbersResponse {
 
     /**
      * Sets the value of the getContactPhoneNumbersResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetContactPhoneNumbersResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetContactPhoneNumbersResponse2 }
      */
     public void setGetContactPhoneNumbersResult(GetContactPhoneNumbersResponse2 value) {
         this.getContactPhoneNumbersResult = value;

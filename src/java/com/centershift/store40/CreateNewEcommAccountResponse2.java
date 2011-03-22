@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CreateNewEcommAccount_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateNewEcommAccount_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateNewEcommAccount_Response", propOrder = {
-    "ecommID",
-    "acctDetails"
+        "ecommID",
+        "acctDetails"
 })
 public class CreateNewEcommAccountResponse2 {
 
@@ -41,7 +38,6 @@ public class CreateNewEcommAccountResponse2 {
 
     /**
      * Gets the value of the ecommID property.
-     * 
      */
     public long getEcommID() {
         return ecommID;
@@ -49,7 +45,6 @@ public class CreateNewEcommAccountResponse2 {
 
     /**
      * Sets the value of the ecommID property.
-     * 
      */
     public void setEcommID(long value) {
         this.ecommID = value;
@@ -57,11 +52,9 @@ public class CreateNewEcommAccountResponse2 {
 
     /**
      * Gets the value of the acctDetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StructCreateAccount }
-     *     
+     *
+     * @return possible object is
+     *         {@link StructCreateAccount }
      */
     public StructCreateAccount getAcctDetails() {
         return acctDetails;
@@ -69,11 +62,9 @@ public class CreateNewEcommAccountResponse2 {
 
     /**
      * Sets the value of the acctDetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StructCreateAccount }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link StructCreateAccount }
      */
     public void setAcctDetails(StructCreateAccount value) {
         this.acctDetails = value;

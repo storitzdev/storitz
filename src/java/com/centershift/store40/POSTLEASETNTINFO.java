@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for POST_LEASE_TNT_INFO complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="POST_LEASE_TNT_INFO">
  *   &lt;complexContent>
@@ -32,23 +27,20 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "POST_LEASE_TNT_INFO", propOrder = {
-    "leaseid",
-    "siteid",
-    "acctid",
-    "rentalid",
-    "leasedefid",
-    "leaseversion",
-    "whocreated",
-    "created"
+        "leaseid",
+        "siteid",
+        "acctid",
+        "rentalid",
+        "leasedefid",
+        "leaseversion",
+        "whocreated",
+        "created"
 })
 public class POSTLEASETNTINFO
-    extends BaseEntityOfCollectionPOSTLEASETNTINFOColumnIndexes
-{
+        extends BaseEntityOfCollectionPOSTLEASETNTINFOColumnIndexes {
 
     @XmlElement(name = "LEASE_ID")
     protected long leaseid;
@@ -70,7 +62,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the leaseid property.
-     * 
      */
     public long getLEASEID() {
         return leaseid;
@@ -78,7 +69,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the leaseid property.
-     * 
      */
     public void setLEASEID(long value) {
         this.leaseid = value;
@@ -86,11 +76,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -98,11 +86,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -110,11 +96,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -122,11 +106,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -134,7 +116,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the rentalid property.
-     * 
      */
     public long getRENTALID() {
         return rentalid;
@@ -142,7 +123,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the rentalid property.
-     * 
      */
     public void setRENTALID(long value) {
         this.rentalid = value;
@@ -150,7 +130,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the leasedefid property.
-     * 
      */
     public long getLEASEDEFID() {
         return leasedefid;
@@ -158,7 +137,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the leasedefid property.
-     * 
      */
     public void setLEASEDEFID(long value) {
         this.leasedefid = value;
@@ -166,7 +144,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the leaseversion property.
-     * 
      */
     public int getLEASEVERSION() {
         return leaseversion;
@@ -174,7 +151,6 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the leaseversion property.
-     * 
      */
     public void setLEASEVERSION(int value) {
         this.leaseversion = value;
@@ -182,11 +158,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the whocreated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getWHOCREATED() {
         return whocreated;
@@ -194,11 +168,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the whocreated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWHOCREATED(String value) {
         this.whocreated = value;
@@ -206,11 +178,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -218,11 +188,9 @@ public class POSTLEASETNTINFO
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;

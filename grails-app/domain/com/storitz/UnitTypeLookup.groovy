@@ -1,7 +1,7 @@
 package com.storitz
 
-import storitz.constants.UnitType
 import storitz.constants.SearchType
+import storitz.constants.UnitType
 
 class UnitTypeLookup {
 
@@ -9,8 +9,8 @@ class UnitTypeLookup {
   UnitType unitType
   SearchType searchType
   Boolean tempControlled
-  
-    static constraints = {
-      
-    }
+
+  static constraints = {
+
+  }
 }

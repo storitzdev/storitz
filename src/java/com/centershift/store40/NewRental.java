@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for NewRental complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="NewRental">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NewRental", propOrder = {
-    "unitID",
-    "unitVersion",
-    "rentalID",
-    "rentalVersion",
-    "quoteID"
+        "unitID",
+        "unitVersion",
+        "rentalID",
+        "rentalVersion",
+        "quoteID"
 })
 public class NewRental {
 
@@ -53,7 +50,6 @@ public class NewRental {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -61,7 +57,6 @@ public class NewRental {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -69,7 +64,6 @@ public class NewRental {
 
     /**
      * Gets the value of the unitVersion property.
-     * 
      */
     public int getUnitVersion() {
         return unitVersion;
@@ -77,7 +71,6 @@ public class NewRental {
 
     /**
      * Sets the value of the unitVersion property.
-     * 
      */
     public void setUnitVersion(int value) {
         this.unitVersion = value;
@@ -85,7 +78,6 @@ public class NewRental {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -93,7 +85,6 @@ public class NewRental {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -101,7 +92,6 @@ public class NewRental {
 
     /**
      * Gets the value of the rentalVersion property.
-     * 
      */
     public int getRentalVersion() {
         return rentalVersion;
@@ -109,7 +99,6 @@ public class NewRental {
 
     /**
      * Sets the value of the rentalVersion property.
-     * 
      */
     public void setRentalVersion(int value) {
         this.rentalVersion = value;
@@ -117,7 +106,6 @@ public class NewRental {
 
     /**
      * Gets the value of the quoteID property.
-     * 
      */
     public long getQuoteID() {
         return quoteID;
@@ -125,7 +113,6 @@ public class NewRental {
 
     /**
      * Sets the value of the quoteID property.
-     * 
      */
     public void setQuoteID(long value) {
         this.quoteID = value;

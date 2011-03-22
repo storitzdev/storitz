@@ -27,22 +27,22 @@ import java.util.Date;
 /**
  * Encapsulates metadata about the GeoIP database. The database has a date, is a premium or
  * standard version, and is one of the following types:
- *
+ * <p/>
  * <ul>
- *      <li>Country edition -- this is the most common version of the database. It includes
- *          the name of the country and it's ISO country code given an IP address.
- *      <li>Region edition -- includes the country information as well as
- *          what U.S. state or Canadian province the IP address is from if the IP address
- *          is from the U.S. or Canada.
- *      <li>City edition --  includes country, region, city, postal code, latitude, and
- *          longitude information.
- *      <li>Org edition -- includes country and netblock owner.
- *      <li>ISP edition -- includes country, region, city, postal code, latitude, longitude,
- *          ISP, and organization information.
+ * <li>Country edition -- this is the most common version of the database. It includes
+ * the name of the country and it's ISO country code given an IP address.
+ * <li>Region edition -- includes the country information as well as
+ * what U.S. state or Canadian province the IP address is from if the IP address
+ * is from the U.S. or Canada.
+ * <li>City edition --  includes country, region, city, postal code, latitude, and
+ * longitude information.
+ * <li>Org edition -- includes country and netblock owner.
+ * <li>ISP edition -- includes country, region, city, postal code, latitude, longitude,
+ * ISP, and organization information.
  * </ul>
  *
- * @see com.maxmind.geoip.LookupService#getDatabaseInfo()
  * @author Matt Tucker
+ * @see com.maxmind.geoip.LookupService#getDatabaseInfo()
  */
 public class DatabaseInfo {
 
@@ -62,6 +62,7 @@ public class DatabaseInfo {
 
     /**
      * Creates a new DatabaseInfo object given the database info String.
+     *
      * @param info
      */
     public DatabaseInfo(String info) {
@@ -71,8 +72,7 @@ public class DatabaseInfo {
     public int getType() {
         if (info == null || info.equals("")) {
             return COUNTRY_EDITION;
-        }
-        else {
+        } else {
             // Get the type code from the database info string and then
             // subtract 105 from the value to preserve compatability with
             // databases from April 2003 and earlier.
@@ -95,15 +95,16 @@ public class DatabaseInfo {
      * @return the date of the database.
      */
     public Date getDate() {
-        for (int i=0; i<info.length()-9; i++) {
+        for (int i = 0; i < info.length() - 9; i++) {
             if (Character.isWhitespace(info.charAt(i))) {
-                String dateString = info.substring(i+1, i+9);
+                String dateString = info.substring(i + 1, i + 9);
                 try {
                     synchronized (formatter) {
                         return formatter.parse(dateString);
                     }
                 }
-                catch (ParseException pe) {  }
+                catch (ParseException pe) {
+                }
                 break;
             }
         }

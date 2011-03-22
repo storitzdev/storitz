@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "rollbackUnitTransferResult"
+        "rollbackUnitTransferResult"
 })
 @XmlRootElement(name = "RollbackUnitTransferResponse")
 public class RollbackUnitTransferResponse {
@@ -39,11 +32,9 @@ public class RollbackUnitTransferResponse {
 
     /**
      * Gets the value of the rollbackUnitTransferResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RollbackUnitTransferResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link RollbackUnitTransferResponse2 }
      */
     public RollbackUnitTransferResponse2 getRollbackUnitTransferResult() {
         return rollbackUnitTransferResult;
@@ -51,11 +42,9 @@ public class RollbackUnitTransferResponse {
 
     /**
      * Sets the value of the rollbackUnitTransferResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RollbackUnitTransferResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RollbackUnitTransferResponse2 }
      */
     public void setRollbackUnitTransferResult(RollbackUnitTransferResponse2 value) {
         this.rollbackUnitTransferResult = value;

@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for RefundData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RefundData">
  *   &lt;complexContent>
@@ -30,18 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RefundData", propOrder = {
-    "tranID",
-    "refundType",
-    "refundAmount",
-    "isDenied",
-    "denialReason",
-    "isRentalTerminated",
-    "applyRefundRentalID"
+        "tranID",
+        "refundType",
+        "refundAmount",
+        "isDenied",
+        "denialReason",
+        "isRentalTerminated",
+        "applyRefundRentalID"
 })
 public class RefundData {
 
@@ -62,7 +59,6 @@ public class RefundData {
 
     /**
      * Gets the value of the tranID property.
-     * 
      */
     public long getTranID() {
         return tranID;
@@ -70,7 +66,6 @@ public class RefundData {
 
     /**
      * Sets the value of the tranID property.
-     * 
      */
     public void setTranID(long value) {
         this.tranID = value;
@@ -78,11 +73,9 @@ public class RefundData {
 
     /**
      * Gets the value of the refundType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefundTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link RefundTypes }
      */
     public RefundTypes getRefundType() {
         return refundType;
@@ -90,11 +83,9 @@ public class RefundData {
 
     /**
      * Sets the value of the refundType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefundTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RefundTypes }
      */
     public void setRefundType(RefundTypes value) {
         this.refundType = value;
@@ -102,11 +93,9 @@ public class RefundData {
 
     /**
      * Gets the value of the refundAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRefundAmount() {
         return refundAmount;
@@ -114,11 +103,9 @@ public class RefundData {
 
     /**
      * Sets the value of the refundAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRefundAmount(BigDecimal value) {
         this.refundAmount = value;
@@ -126,7 +113,6 @@ public class RefundData {
 
     /**
      * Gets the value of the isDenied property.
-     * 
      */
     public boolean isIsDenied() {
         return isDenied;
@@ -134,7 +120,6 @@ public class RefundData {
 
     /**
      * Sets the value of the isDenied property.
-     * 
      */
     public void setIsDenied(boolean value) {
         this.isDenied = value;
@@ -142,11 +127,9 @@ public class RefundData {
 
     /**
      * Gets the value of the denialReason property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDenialReason() {
         return denialReason;
@@ -154,11 +137,9 @@ public class RefundData {
 
     /**
      * Sets the value of the denialReason property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDenialReason(String value) {
         this.denialReason = value;
@@ -166,7 +147,6 @@ public class RefundData {
 
     /**
      * Gets the value of the isRentalTerminated property.
-     * 
      */
     public boolean isIsRentalTerminated() {
         return isRentalTerminated;
@@ -174,7 +154,6 @@ public class RefundData {
 
     /**
      * Sets the value of the isRentalTerminated property.
-     * 
      */
     public void setIsRentalTerminated(boolean value) {
         this.isRentalTerminated = value;
@@ -182,11 +161,9 @@ public class RefundData {
 
     /**
      * Gets the value of the applyRefundRentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getApplyRefundRentalID() {
         return applyRefundRentalID;
@@ -194,11 +171,9 @@ public class RefundData {
 
     /**
      * Sets the value of the applyRefundRentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setApplyRefundRentalID(Long value) {
         this.applyRefundRentalID = value;

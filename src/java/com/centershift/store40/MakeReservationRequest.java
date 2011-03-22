@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for MakeReservation_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakeReservation_Request">
  *   &lt;complexContent>
@@ -38,24 +33,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakeReservation_Request", propOrder = {
-    "siteID",
-    "acctID",
-    "unitID",
-    "version",
-    "quoteID",
-    "quoteType",
-    "rentNow",
-    "price",
-    "quoteStartDate",
-    "inquirySource",
-    "contacts",
-    "pcds",
-    "overrideReservationAmount"
+        "siteID",
+        "acctID",
+        "unitID",
+        "version",
+        "quoteID",
+        "quoteType",
+        "rentNow",
+        "price",
+        "quoteStartDate",
+        "inquirySource",
+        "contacts",
+        "pcds",
+        "overrideReservationAmount"
 })
 public class MakeReservationRequest {
 
@@ -89,7 +82,6 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -97,7 +89,6 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -105,7 +96,6 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -113,7 +103,6 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -121,7 +110,6 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -129,7 +117,6 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -137,11 +124,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVersion() {
         return version;
@@ -149,11 +134,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVersion(BigDecimal value) {
         this.version = value;
@@ -161,11 +144,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the quoteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getQuoteID() {
         return quoteID;
@@ -173,11 +154,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the quoteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setQuoteID(Long value) {
         this.quoteID = value;
@@ -185,11 +164,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the quoteType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link QuoteTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link QuoteTypes }
      */
     public QuoteTypes getQuoteType() {
         return quoteType;
@@ -197,11 +174,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the quoteType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link QuoteTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link QuoteTypes }
      */
     public void setQuoteType(QuoteTypes value) {
         this.quoteType = value;
@@ -209,7 +184,6 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the rentNow property.
-     * 
      */
     public boolean isRentNow() {
         return rentNow;
@@ -217,7 +191,6 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the rentNow property.
-     * 
      */
     public void setRentNow(boolean value) {
         this.rentNow = value;
@@ -225,11 +198,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the price property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPrice() {
         return price;
@@ -237,11 +208,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the price property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPrice(BigDecimal value) {
         this.price = value;
@@ -249,11 +218,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the quoteStartDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getQuoteStartDate() {
         return quoteStartDate;
@@ -261,11 +228,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the quoteStartDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setQuoteStartDate(XMLGregorianCalendar value) {
         this.quoteStartDate = value;
@@ -273,11 +238,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the inquirySource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getInquirySource() {
         return inquirySource;
@@ -285,11 +248,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the inquirySource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setInquirySource(Integer value) {
         this.inquirySource = value;
@@ -297,11 +258,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the contacts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentalContact }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentalContact }
      */
     public ArrayOfRentalContact getContacts() {
         return contacts;
@@ -309,11 +268,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the contacts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentalContact }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentalContact }
      */
     public void setContacts(ArrayOfRentalContact value) {
         this.contacts = value;
@@ -321,11 +278,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the pcds property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANQUOTEPCDDETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANQUOTEPCDDETAIL }
      */
     public ArrayOfTRANQUOTEPCDDETAIL getPcds() {
         return pcds;
@@ -333,11 +288,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the pcds property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANQUOTEPCDDETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANQUOTEPCDDETAIL }
      */
     public void setPcds(ArrayOfTRANQUOTEPCDDETAIL value) {
         this.pcds = value;
@@ -345,11 +298,9 @@ public class MakeReservationRequest {
 
     /**
      * Gets the value of the overrideReservationAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOverrideReservationAmount() {
         return overrideReservationAmount;
@@ -357,11 +308,9 @@ public class MakeReservationRequest {
 
     /**
      * Sets the value of the overrideReservationAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOverrideReservationAmount(BigDecimal value) {
         this.overrideReservationAmount = value;

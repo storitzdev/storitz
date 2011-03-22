@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_QUOTE_PCD_DETAIL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_QUOTE_PCD_DETAIL">
  *   &lt;complexContent>
@@ -38,30 +37,27 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_QUOTE_PCD_DETAIL", propOrder = {
-    "quotepcdid",
-    "quoteid",
-    "pcdid",
-    "active",
-    "pcdname",
-    "pcddesc",
-    "pcdclass",
-    "amttype",
-    "pcdamtdefault",
-    "pcdamtmax",
-    "pcdamtmin",
-    "discamt",
-    "pcdperiods",
-    "createdby",
-    "updatedby"
+        "quotepcdid",
+        "quoteid",
+        "pcdid",
+        "active",
+        "pcdname",
+        "pcddesc",
+        "pcdclass",
+        "amttype",
+        "pcdamtdefault",
+        "pcdamtmax",
+        "pcdamtmin",
+        "discamt",
+        "pcdperiods",
+        "createdby",
+        "updatedby"
 })
 public class TRANQUOTEPCDDETAIL
-    extends BaseEntityOfCollectionTRANQUOTEPCDDETAILColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANQUOTEPCDDETAILColumnIndexes {
 
     @XmlElement(name = "QUOTE_PCD_ID")
     protected long quotepcdid;
@@ -96,7 +92,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the quotepcdid property.
-     * 
      */
     public long getQUOTEPCDID() {
         return quotepcdid;
@@ -104,7 +99,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the quotepcdid property.
-     * 
      */
     public void setQUOTEPCDID(long value) {
         this.quotepcdid = value;
@@ -112,7 +106,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the quoteid property.
-     * 
      */
     public long getQUOTEID() {
         return quoteid;
@@ -120,7 +113,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the quoteid property.
-     * 
      */
     public void setQUOTEID(long value) {
         this.quoteid = value;
@@ -128,7 +120,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdid property.
-     * 
      */
     public long getPCDID() {
         return pcdid;
@@ -136,7 +127,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdid property.
-     * 
      */
     public void setPCDID(long value) {
         this.pcdid = value;
@@ -144,7 +134,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -152,7 +141,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -160,11 +148,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDNAME() {
         return pcdname;
@@ -172,11 +158,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDNAME(String value) {
         this.pcdname = value;
@@ -184,11 +168,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcddesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDDESC() {
         return pcddesc;
@@ -196,11 +178,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcddesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDDESC(String value) {
         this.pcddesc = value;
@@ -208,11 +188,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDCLASS() {
         return pcdclass;
@@ -220,11 +198,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDCLASS(Integer value) {
         this.pcdclass = value;
@@ -232,7 +208,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the amttype property.
-     * 
      */
     public int getAMTTYPE() {
         return amttype;
@@ -240,7 +215,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the amttype property.
-     * 
      */
     public void setAMTTYPE(int value) {
         this.amttype = value;
@@ -248,11 +222,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdamtdefault property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTDEFAULT() {
         return pcdamtdefault;
@@ -260,11 +232,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdamtdefault property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTDEFAULT(BigDecimal value) {
         this.pcdamtdefault = value;
@@ -272,11 +242,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdamtmax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMAX() {
         return pcdamtmax;
@@ -284,11 +252,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdamtmax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMAX(BigDecimal value) {
         this.pcdamtmax = value;
@@ -296,11 +262,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdamtmin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMIN() {
         return pcdamtmin;
@@ -308,11 +272,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdamtmin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMIN(BigDecimal value) {
         this.pcdamtmin = value;
@@ -320,11 +282,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the discamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDISCAMT() {
         return discamt;
@@ -332,11 +292,9 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the discamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDISCAMT(BigDecimal value) {
         this.discamt = value;
@@ -344,7 +302,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the pcdperiods property.
-     * 
      */
     public int getPCDPERIODS() {
         return pcdperiods;
@@ -352,7 +309,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the pcdperiods property.
-     * 
      */
     public void setPCDPERIODS(int value) {
         this.pcdperiods = value;
@@ -360,7 +316,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -368,7 +323,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -376,7 +330,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -384,7 +337,6 @@ public class TRANQUOTEPCDDETAIL
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

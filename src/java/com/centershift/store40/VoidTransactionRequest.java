@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for VoidTransaction_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="VoidTransaction_Request">
  *   &lt;complexContent>
@@ -33,19 +28,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VoidTransaction_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "transactionID",
-    "transactionDate",
-    "accountID",
-    "accountName",
-    "amount",
-    "ledger"
+        "orgID",
+        "siteID",
+        "transactionID",
+        "transactionDate",
+        "accountID",
+        "accountName",
+        "amount",
+        "ledger"
 })
 public class VoidTransactionRequest {
 
@@ -69,7 +62,6 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -77,7 +69,6 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -85,7 +76,6 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -93,7 +83,6 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -101,7 +90,6 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -109,7 +97,6 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;
@@ -117,11 +104,9 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the transactionDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTransactionDate() {
         return transactionDate;
@@ -129,11 +114,9 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the transactionDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTransactionDate(XMLGregorianCalendar value) {
         this.transactionDate = value;
@@ -141,7 +124,6 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
      */
     public long getAccountID() {
         return accountID;
@@ -149,7 +131,6 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
      */
     public void setAccountID(long value) {
         this.accountID = value;
@@ -157,11 +138,9 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the accountName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountName() {
         return accountName;
@@ -169,11 +148,9 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the accountName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountName(String value) {
         this.accountName = value;
@@ -181,11 +158,9 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmount() {
         return amount;
@@ -193,11 +168,9 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmount(BigDecimal value) {
         this.amount = value;
@@ -205,11 +178,9 @@ public class VoidTransactionRequest {
 
     /**
      * Gets the value of the ledger property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LedgerType }
-     *     
+     *
+     * @return possible object is
+     *         {@link LedgerType }
      */
     public LedgerType getLedger() {
         return ledger;
@@ -217,11 +188,9 @@ public class VoidTransactionRequest {
 
     /**
      * Sets the value of the ledger property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LedgerType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link LedgerType }
      */
     public void setLedger(LedgerType value) {
         this.ledger = value;

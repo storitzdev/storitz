@@ -11,7 +11,7 @@ class HomeController {
   def geocodeService
   def costService
   def offerFilterService
-  
+
   double lat
   double lng
   def zip
@@ -27,59 +27,59 @@ class HomeController {
 
     if (params.zip || params.address || (params.city && params.state)) {
 
-        if (params.zip) {
-          def geoLookup = GeoLookup.findByZip(params.zip)
-          if (geoLookup) {
-            if (!params.city || !params.state) {
-              city = geoLookup.city.replaceAll('-', ' ')
-              state = geoLooup.state
-            } else {
-              city = params.city.replaceAll('-', ' ')
-              state = params.state
-            }
-            zip = params.zip
-            lat = geoLookup.lat
-            lng = geoLookup.lng
+      if (params.zip) {
+        def geoLookup = GeoLookup.findByZip(params.zip)
+        if (geoLookup) {
+          if (!params.city || !params.state) {
+            city = geoLookup.city.replaceAll('-', ' ')
+            state = geoLooup.state
           } else {
-            geoResult = geocodeService.geocode(params.zip)
-            zip = params.zip
-            if (params.city) {
-              city = params.city.replaceAll('-', ' ')
-            }
-            if (params.state) {
-              state = params.state
-            }
-            if(handleGeocode(geoResult)) {
-              new GeoLookup(lat:lat, lng:lng, city:city, state:params.state, zip:zip).save(flush: true)
-            }
+            city = params.city.replaceAll('-', ' ')
+            state = params.state
           }
-        } else if (params.address) {
-          def address = params.address
-          if (params.address.class.isArray()) {
-            address = params.address.join(' ');
-          }
-          geoResult = geocodeService.geocode(address)
-          handleGeocode(geoResult)
+          zip = params.zip
+          lat = geoLookup.lat
+          lng = geoLookup.lng
         } else {
-
-          searchCity = city = params.city.replaceAll('-', ' ')
-          state = params.state
-
-          def geoLookup = GeoLookup.findByCityAndState(city, state)
-          if (geoLookup) {
-            city = geoLookup.city
-            state = geoLookup.state
-            zip = geoLookup.zip
-            lat = geoLookup.lat
-            lng = geoLookup.lng
-
-          } else {
-            geoResult = geocodeService.geocode("${city}, ${state}")
-            if(handleGeocode(geoResult)) {
-              new GeoLookup(lat:lat, lng:lng, city:searchCity, state:state, zip:zip).save(flush: true)
-            }
+          geoResult = geocodeService.geocode(params.zip)
+          zip = params.zip
+          if (params.city) {
+            city = params.city.replaceAll('-', ' ')
+          }
+          if (params.state) {
+            state = params.state
+          }
+          if (handleGeocode(geoResult)) {
+            new GeoLookup(lat: lat, lng: lng, city: city, state: params.state, zip: zip).save(flush: true)
           }
         }
+      } else if (params.address) {
+        def address = params.address
+        if (params.address.class.isArray()) {
+          address = params.address.join(' ');
+        }
+        geoResult = geocodeService.geocode(address)
+        handleGeocode(geoResult)
+      } else {
+
+        searchCity = city = params.city.replaceAll('-', ' ')
+        state = params.state
+
+        def geoLookup = GeoLookup.findByCityAndState(city, state)
+        if (geoLookup) {
+          city = geoLookup.city
+          state = geoLookup.state
+          zip = geoLookup.zip
+          lat = geoLookup.lat
+          lng = geoLookup.lng
+
+        } else {
+          geoResult = geocodeService.geocode("${city}, ${state}")
+          if (handleGeocode(geoResult)) {
+            new GeoLookup(lat: lat, lng: lng, city: searchCity, state: state, zip: zip).save(flush: true)
+          }
+        }
+      }
 
     } else {
       // get IP to geo
@@ -99,9 +99,9 @@ class HomeController {
           if (geoLookup) {
             zip = geoLookup.zip
           } else {
-            geoResult = geocodeService.geocode(lat,lng)
+            geoResult = geocodeService.geocode(lat, lng)
             if (handleGeocode(geoResult) && city && state) {
-              new GeoLookup(lat:qLat, lng:qLng, city:city, state:state, zip:zip).save(flush: true)
+              new GeoLookup(lat: qLat, lng: qLng, city: city, state: state, zip: zip).save(flush: true)
             }
           }
         }
@@ -120,7 +120,7 @@ class HomeController {
     def neighborhood
     if (zip) {
       def entryList = MetroEntry.findAllByZipcode(zip)
-      metroEntry = entryList.find{ it.city == city }
+      metroEntry = entryList.find { it.city == city }
       if (!metroEntry) {
         metroEntry = entryList.size() > 0 ? entryList[0] : null
       }
@@ -140,9 +140,9 @@ class HomeController {
       if (!city) city = metroEntry.city
       if (!state) state = metroEntry.state.display
       if (!zip) zip = metroEntry.zipcode
-      
+
       metro = metroEntry.metro
-      neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+      neighborhoodList = MetroEntry.findAllByMetro(metro, [sort: "city", order: "asc"]).unique(new MetroEntryComparator())
 
       List resList = Metro.createCriteria().list() {
         and {
@@ -172,7 +172,7 @@ class HomeController {
 
     def title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Rent Best Price Guaranteed Self Storage - Storitz"
     if (title.size() > 70) {
-      title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Self Storage - Storitz"  
+      title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Self Storage - Storitz"
     }
 
     def sizeList
@@ -183,7 +183,7 @@ class HomeController {
     sizeList = StorageSize.createCriteria().list(params) {
       or {
         eq("id", 1L)
-        eq("searchType",searchType)
+        eq("searchType", searchType)
       }
     }
 
@@ -194,7 +194,7 @@ class HomeController {
 
     def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
 
-    def sites = mapService.getSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort{ mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
+    def sites = mapService.getSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort { mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
 
     def siteMoveInPrice = [:]
 
@@ -202,7 +202,7 @@ class HomeController {
     if (searchSize != 1) {
       unitSize = StorageSize.get(searchSize)
     }
-    Date  moveInDate
+    Date moveInDate
     if (params.date && params.date instanceof Date) {
       moveInDate = params.date
     } else {
@@ -221,28 +221,28 @@ class HomeController {
         def bestUnit
         Insurance ins = null
         if (site.noInsuranceWaiver) {
-          ins = site.insurances.findAll{ it.active }.min{ it.premium }
+          ins = site.insurances.findAll { it.active }.min { it.premium }
         }
         if (searchSize != 1 && unitSize) {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+          bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
         } else {
-          bestUnit = site.units.findAll{ it.unitCount > site.minInventory }.min{ it.price }
+          bestUnit = site.units.findAll { it.unitCount > site.minInventory }.min { it.price }
         }
         if (bestUnit) {
           def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
           if (featuredOffers.size() == 0) {
             def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-            siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+            siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
           } else {
             def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-            siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:null, promoName:null, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+            siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
             def oldMoveInCost = siteMoveInPrice[site.id].cost
             siteMoveInPrice[site.id].cost = 100000
             for (promo in featuredOffers) {
               if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                 totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
                 if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
-                  siteMoveInPrice[site.id] = [cost:totals['moveInTotal'], promo:promo.id, promoName:promo.promoName, monthly:bestUnit?.price, pushRate:(site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate:totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType:bestUnit?.unitType?.display]
+                  siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: promo.id, promoName: promo.promoName, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
                 }
               }
             }
@@ -254,7 +254,7 @@ class HomeController {
       }
     }
 
-    [ sizeList: sizeList, title:title, city:city, searchCity:searchCity, state:state, zip:zip, neighborhoodList:neighborhoodList, metro:metro, neighborhood:neighborhood, zoom:zoom, lat:lat, lng:lng, searchSize: searchSize, sites: sites, siteMoveInPrice:siteMoveInPrice, zipSearch:zipSearch]
+    [sizeList: sizeList, title: title, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch]
   }
 
   def updateMetro = {
@@ -278,7 +278,7 @@ class HomeController {
     def neighborhood
     if (zip) {
       def entryList = MetroEntry.findAllByZipcode(zip)
-      metroEntry = entryList.find{ it.city == city }
+      metroEntry = entryList.find { it.city == city }
       if (!metroEntry) {
         metroEntry = entryList.size() > 0 ? entryList[0] : null
       }
@@ -298,7 +298,7 @@ class HomeController {
       if (!city) city = metroEntry.city
       if (!state) state = metroEntry.state.display
       metro = metroEntry.metro
-      neighborhoodList = MetroEntry.findAllByMetro(metro, [sort:"city", order:"asc"]).unique (new MetroEntryComparator())
+      neighborhoodList = MetroEntry.findAllByMetro(metro, [sort: "city", order: "asc"]).unique(new MetroEntryComparator())
 
       List resList = Metro.createCriteria().list() {
         and {
@@ -326,7 +326,7 @@ class HomeController {
       }
     }
     JSON.use("default")
-    render (status: 200, contentType:"application/json", text:"{ \"metro\":${metro as JSON}, \"neighborhoodList\": ${neighborhoodList as JSON}, \"neighborhood\":${neighborhood as JSON} }")
+    render(status: 200, contentType: "application/json", text: "{ \"metro\":${metro as JSON}, \"neighborhoodList\": ${neighborhoodList as JSON}, \"neighborhood\":${neighborhood as JSON} }")
 
   }
 
@@ -335,29 +335,29 @@ class HomeController {
     def sizeList = StorageSize.createCriteria().list(params) {
       or {
         eq("id", 1L)
-        eq("searchType",searchType)
+        eq("searchType", searchType)
       }
     }
 
     JSON.use("default")
-    render (status: 200, contentType:"application/json", text: sizeList as JSON )
+    render(status: 200, contentType: "application/json", text: sizeList as JSON)
   }
 
   def geoCode = {
     if (params.address) {
-      render (status: 200, contentType:"application/json", text: geocodeService.geocode(params.address)  )
+      render(status: 200, contentType: "application/json", text: geocodeService.geocode(params.address))
     } else if (params.lat && params.lng) {
-      render (status: 200, contentType:"application/json", text: geocodeService.geocode(params.lat as double, params.lng as double) )
+      render(status: 200, contentType: "application/json", text: geocodeService.geocode(params.lat as double, params.lng as double))
     }
-    render (status: 200, contentType:"application/json", text: '' )
+    render(status: 200, contentType: "application/json", text: '')
   }
 
   private boolean handleGeocode(geoResult) {
     if (geoResult.status == "OK") {
       lng = geoResult.results[0].geometry.location.lng
       lat = geoResult.results[0].geometry.location.lat
-      for(comp in geoResult.results[0].address_components) {
-        switch(comp.types[0]) {
+      for (comp in geoResult.results[0].address_components) {
+        switch (comp.types[0]) {
           case "locality":
             city = comp.long_name
             break
@@ -385,7 +385,7 @@ class HomeController {
   def redirectGeo = {
     // /self-storage-$zip-$city-$state
     response.status = 301
-    response.setHeader("Location", g.createLink(mapping:'geo2', params:[city:params.city.replaceAll(' ','-'), state:params.state, zip:params.zip]) as String)
+    response.setHeader("Location", g.createLink(mapping: 'geo2', params: [city: params.city.replaceAll(' ', '-'), state: params.state, zip: params.zip]) as String)
     render("")
     return false
   }
@@ -393,7 +393,7 @@ class HomeController {
   def redirectMetro = {
     // /self-storage-$city-$state
     response.status = 301
-    response.setHeader("Location", g.createLink(mapping:'metro2', params:[state:params.state, city:params.city.replaceAll(' ','-')]) as String)
+    response.setHeader("Location", g.createLink(mapping: 'metro2', params: [state: params.state, city: params.city.replaceAll(' ', '-')]) as String)
     render("")
     return false
   }

@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for UpdateLeasePeriod_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateLeasePeriod_Response">
  *   &lt;complexContent>
@@ -25,12 +20,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateLeasePeriod_Response", propOrder = {
-    "newLeaseThruDate"
+        "newLeaseThruDate"
 })
 public class UpdateLeasePeriodResponse2 {
 
@@ -40,11 +33,9 @@ public class UpdateLeasePeriodResponse2 {
 
     /**
      * Gets the value of the newLeaseThruDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getNewLeaseThruDate() {
         return newLeaseThruDate;
@@ -52,11 +43,9 @@ public class UpdateLeasePeriodResponse2 {
 
     /**
      * Sets the value of the newLeaseThruDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setNewLeaseThruDate(XMLGregorianCalendar value) {
         this.newLeaseThruDate = value;

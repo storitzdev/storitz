@@ -1,22 +1,17 @@
-
 package com.centershift.store40;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for TransactionData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransactionData">
  *   &lt;complexContent>
@@ -35,19 +30,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransactionData", propOrder = {
-    "vacateDate",
-    "transactionNumber",
-    "units",
-    "totalRefundAmount",
-    "refundType",
-    "sitePerson",
-    "regionalApprovedBy",
-    "todaysDate"
+        "vacateDate",
+        "transactionNumber",
+        "units",
+        "totalRefundAmount",
+        "refundType",
+        "sitePerson",
+        "regionalApprovedBy",
+        "todaysDate"
 })
 public class TransactionData {
 
@@ -72,11 +65,9 @@ public class TransactionData {
 
     /**
      * Gets the value of the vacateDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getVacateDate() {
         return vacateDate;
@@ -84,11 +75,9 @@ public class TransactionData {
 
     /**
      * Sets the value of the vacateDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setVacateDate(XMLGregorianCalendar value) {
         this.vacateDate = value;
@@ -96,7 +85,6 @@ public class TransactionData {
 
     /**
      * Gets the value of the transactionNumber property.
-     * 
      */
     public long getTransactionNumber() {
         return transactionNumber;
@@ -104,7 +92,6 @@ public class TransactionData {
 
     /**
      * Sets the value of the transactionNumber property.
-     * 
      */
     public void setTransactionNumber(long value) {
         this.transactionNumber = value;
@@ -112,25 +99,23 @@ public class TransactionData {
 
     /**
      * Gets the value of the units property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the units property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getUnits().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Unit }
-     * 
-     * 
      */
     public List<Unit> getUnits() {
         if (units == null) {
@@ -141,11 +126,9 @@ public class TransactionData {
 
     /**
      * Gets the value of the totalRefundAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalRefundAmount() {
         return totalRefundAmount;
@@ -153,11 +136,9 @@ public class TransactionData {
 
     /**
      * Sets the value of the totalRefundAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalRefundAmount(BigDecimal value) {
         this.totalRefundAmount = value;
@@ -165,11 +146,9 @@ public class TransactionData {
 
     /**
      * Gets the value of the refundType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRefundType() {
         return refundType;
@@ -177,11 +156,9 @@ public class TransactionData {
 
     /**
      * Sets the value of the refundType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRefundType(String value) {
         this.refundType = value;
@@ -189,11 +166,9 @@ public class TransactionData {
 
     /**
      * Gets the value of the sitePerson property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSitePerson() {
         return sitePerson;
@@ -201,11 +176,9 @@ public class TransactionData {
 
     /**
      * Sets the value of the sitePerson property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSitePerson(String value) {
         this.sitePerson = value;
@@ -213,11 +186,9 @@ public class TransactionData {
 
     /**
      * Gets the value of the regionalApprovedBy property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRegionalApprovedBy() {
         return regionalApprovedBy;
@@ -225,11 +196,9 @@ public class TransactionData {
 
     /**
      * Sets the value of the regionalApprovedBy property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRegionalApprovedBy(String value) {
         this.regionalApprovedBy = value;
@@ -237,11 +206,9 @@ public class TransactionData {
 
     /**
      * Gets the value of the todaysDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTodaysDate() {
         return todaysDate;
@@ -249,11 +216,9 @@ public class TransactionData {
 
     /**
      * Sets the value of the todaysDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTodaysDate(XMLGregorianCalendar value) {
         this.todaysDate = value;

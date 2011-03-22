@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for RemoveRentalFromAuction_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RemoveRentalFromAuction_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RemoveRentalFromAuction_Request", propOrder = {
-    "siteID",
-    "rentalIDs"
+        "siteID",
+        "rentalIDs"
 })
 public class RemoveRentalFromAuctionRequest {
 
@@ -41,7 +38,6 @@ public class RemoveRentalFromAuctionRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class RemoveRentalFromAuctionRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class RemoveRentalFromAuctionRequest {
 
     /**
      * Gets the value of the rentalIDs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfLong3 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfLong3 }
      */
     public ArrayOfLong3 getRentalIDs() {
         return rentalIDs;
@@ -69,11 +62,9 @@ public class RemoveRentalFromAuctionRequest {
 
     /**
      * Sets the value of the rentalIDs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfLong3 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfLong3 }
      */
     public void setRentalIDs(ArrayOfLong3 value) {
         this.rentalIDs = value;

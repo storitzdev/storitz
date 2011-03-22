@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "updateUnitStatusExpandedResult"
+        "updateUnitStatusExpandedResult"
 })
 @XmlRootElement(name = "UpdateUnitStatusExpandedResponse")
 public class UpdateUnitStatusExpandedResponse {
@@ -39,11 +32,9 @@ public class UpdateUnitStatusExpandedResponse {
 
     /**
      * Gets the value of the updateUnitStatusExpandedResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UpdateUnitStatusExpandedResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link UpdateUnitStatusExpandedResponse2 }
      */
     public UpdateUnitStatusExpandedResponse2 getUpdateUnitStatusExpandedResult() {
         return updateUnitStatusExpandedResult;
@@ -51,11 +42,9 @@ public class UpdateUnitStatusExpandedResponse {
 
     /**
      * Sets the value of the updateUnitStatusExpandedResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UpdateUnitStatusExpandedResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link UpdateUnitStatusExpandedResponse2 }
      */
     public void setUpdateUnitStatusExpandedResult(UpdateUnitStatusExpandedResponse2 value) {
         this.updateUnitStatusExpandedResult = value;

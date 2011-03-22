@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for DelinquencySchedule complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="DelinquencySchedule">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DelinquencySchedule", propOrder = {
-    "delScheduleID",
-    "delScheduleName",
-    "delScheduleDesc"
+        "delScheduleID",
+        "delScheduleName",
+        "delScheduleDesc"
 })
 public class DelinquencySchedule {
 
@@ -45,7 +42,6 @@ public class DelinquencySchedule {
 
     /**
      * Gets the value of the delScheduleID property.
-     * 
      */
     public long getDelScheduleID() {
         return delScheduleID;
@@ -53,7 +49,6 @@ public class DelinquencySchedule {
 
     /**
      * Sets the value of the delScheduleID property.
-     * 
      */
     public void setDelScheduleID(long value) {
         this.delScheduleID = value;
@@ -61,11 +56,9 @@ public class DelinquencySchedule {
 
     /**
      * Gets the value of the delScheduleName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDelScheduleName() {
         return delScheduleName;
@@ -73,11 +66,9 @@ public class DelinquencySchedule {
 
     /**
      * Sets the value of the delScheduleName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDelScheduleName(String value) {
         this.delScheduleName = value;
@@ -85,11 +76,9 @@ public class DelinquencySchedule {
 
     /**
      * Gets the value of the delScheduleDesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDelScheduleDesc() {
         return delScheduleDesc;
@@ -97,11 +86,9 @@ public class DelinquencySchedule {
 
     /**
      * Sets the value of the delScheduleDesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDelScheduleDesc(String value) {
         this.delScheduleDesc = value;

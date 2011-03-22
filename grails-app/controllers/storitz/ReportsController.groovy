@@ -9,16 +9,15 @@ import ar.com.fdvs.dj.domain.Style
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder
 import ar.com.fdvs.dj.domain.builders.GroupBuilder
-import ar.com.fdvs.dj.domain.builders.StyleBuilder
+import ar.com.fdvs.dj.domain.constants.GroupLayout
+import ar.com.fdvs.dj.domain.constants.LabelPosition
+import ar.com.fdvs.dj.domain.constants.Page
 import ar.com.fdvs.dj.domain.entities.DJGroup
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn
 import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
 import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
 import ar.com.fdvs.dj.output.ReportWriter
 import ar.com.fdvs.dj.output.ReportWriterFactory
-import com.storitz.RentalTransaction
-import com.storitz.ReportPeriod
-import com.storitz.StorageSite
 import grails.plugins.springsecurity.Secured
 import grails.util.GrailsUtil
 import net.sf.jasperreports.engine.JRDataSource
@@ -29,51 +28,41 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter
 import net.sf.jasperreports.j2ee.servlets.ImageServlet
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import storitz.constants.ReportName
-import storitz.constants.TransactionStatus
-import storitz.constants.UnitType
-import ar.com.fdvs.dj.domain.constants.*
+import com.storitz.*
+import storitz.constants.*
 import storitz.reports.*
-import com.storitz.User
-import com.storitz.UserRole
-import com.storitz.Feed
 
-import storitz.constants.FeedType
-import java.awt.Color
-import storitz.constants.ReportOutputType
-import storitz.constants.TransactionType
-
-@Secured(['ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'])
+@Secured(['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'])
 class ReportsController {
 
-    def fileUploadService
-    def springSecurityService
+  def fileUploadService
+  def springSecurityService
 
-    static allowedMethods = [balk: "POST"]
+  static allowedMethods = [balk: "POST"]
 
 
-    def index = {
-      [feedList: getFeedList()]
-    }
+  def index = {
+    [feedList: getFeedList()]
+  }
 
-    def getFeedList () {
-        def feedList = []
-        def username  = springSecurityService.principal.username
-        def user = User.findByUsername(username as String)
-        if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
-          feedList = Feed.list()
-        } else {
-          if (UserRole.userHasRole(user, 'ROLE_MANAGER')) {
-            feedList = Feed.findAllByManager(user)
-            if (!feedList || feedList.size() == 0) {
-              feedList = Feed.findAllByManager(user.manager)
-            }
-          } else {
-            feedList = Feed.findAllByManager(user.manager)
-          }
+  def getFeedList() {
+    def feedList = []
+    def username = springSecurityService.principal.username
+    def user = User.findByUsername(username as String)
+    if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
+      feedList = Feed.list()
+    } else {
+      if (UserRole.userHasRole(user, 'ROLE_MANAGER')) {
+        feedList = Feed.findAllByManager(user)
+        if (!feedList || feedList.size() == 0) {
+          feedList = Feed.findAllByManager(user.manager)
         }
-        return feedList
+      } else {
+        feedList = Feed.findAllByManager(user.manager)
+      }
     }
+    return feedList
+  }
 
   GregorianCalendar startDate = new GregorianCalendar()
   GregorianCalendar endDate = new GregorianCalendar()
@@ -116,20 +105,16 @@ class ReportsController {
     drb.setTemplateFile(request.getRealPath('/WEB-INF/reports/storitz_template.jrxml'))
 
     def reportParams = [
-      logo_header: request.getRealPath("/images/logo_storitz_small.gif"),
-      logo_footer: request.getRealPath("/images/storitz-footer-logo-grayscale-small.png"),
-      date_range: "${params.startDate} to ${params.endDate}"
+            logo_header: request.getRealPath("/images/logo_storitz_small.gif"),
+            logo_footer: request.getRealPath("/images/storitz-footer-logo-grayscale-small.png"),
+            date_range: "${params.startDate} to ${params.endDate}"
     ]
 
     Page page = Page.Page_Legal_Landscape()
-    
-    drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle)
-      .setDetailHeight(15)                //defines the height for each record of the report
-      .setPageSizeAndOrientation(page)
-      .setMargins(20, 20, 15, 15)         //define the margin space for each side (top, bottom, left and right)
-      .setColumnsPerPage(1)
-      .setPrintBackgroundOnOddRows(true)
-      .setUseFullPageWidth(true)
+
+    drb.setDefaultStyles(titleStyle, null, headerStyle, detailStyle).setDetailHeight(15)                //defines the height for each record of the report
+            .setPageSizeAndOrientation(page).setMargins(20, 20, 15, 15)         //define the margin space for each side (top, bottom, left and right)
+            .setColumnsPerPage(1).setPrintBackgroundOnOddRows(true).setUseFullPageWidth(true)
 
 
     def results
@@ -157,10 +142,10 @@ class ReportsController {
 
       case ReportName.ACH_TRANSFERS:
         if (!period.feed) {
-            flash.message = "Bad report parameters - missing feed for report."
-            period.reportName = null
-            render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
-            return
+          flash.message = "Bad report parameters - missing feed for report."
+          period.reportName = null
+          render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+          return
         }
         results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
         break
@@ -175,13 +160,13 @@ class ReportsController {
     DynamicReport dr = drb.build()
 
     JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds, reportParams);
-    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value, [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false,
+    ReportWriter reportWriter = ReportWriterFactory.getInstance().getReportWriter(jp, period.outputType.value, [(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN): false,
             (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
 
-    
+
     def imagesMap = new HashMap()
     JRExporter exporter = reportWriter.getExporter();
-    exporter.setParameters([(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN):false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
+    exporter.setParameters([(net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN): false, (JRHtmlExporterParameter.IMAGES_URI): "${request.contextPath}/reports/image/"]);
     exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP, imagesMap);
     exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, request.getContextPath() + "/reports/image/?image=");
     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
@@ -190,7 +175,7 @@ class ReportsController {
     session.setAttribute("net.sf.jasperreports.j2ee.jasper_print", jp);
 
     if (period.outputType != ReportOutputType.HTML) {
-      response.setHeader "Content-disposition", "attachment; filename=Storitz.${period.outputType}" ;
+      response.setHeader "Content-disposition", "attachment; filename=Storitz.${period.outputType}";
       response.setContentType(period.outputType.contentType)
     }
     reportWriter.writeTo(response);
@@ -209,33 +194,26 @@ class ReportsController {
     drb.addField("unitType", UnitType.class.getName())
 
     SimpleColumn columnDate = ColumnBuilder.getInstance().
-      setColumnProperty("bookingDate", Date.class.getName()).
-      setTitle("Date").setWidth(30).build()
+            setColumnProperty("bookingDate", Date.class.getName()).
+            setTitle("Date").setWidth(30).build()
 
     SimpleColumn columnSite = ColumnBuilder.getInstance().
-      setColumnProperty("site.title", String.class.getName()).
-      setTitle("Site").setWidth(35).build()
+            setColumnProperty("site.title", String.class.getName()).
+            setTitle("Site").setWidth(35).build()
 
-    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-      .setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Customer").setHeaderStyle(headerStyle).setWidth(32).build();
 
     SimpleColumn columnEmail = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.email", String.class.getName()).
-      setTitle("Email").setWidth(45).build()
+            setColumnProperty("contactPrimary.email", String.class.getName()).
+            setTitle("Email").setWidth(45).build()
 
     SimpleColumn columnSize = ColumnBuilder.getInstance().
-      setColumnProperty("searchSize.description", String.class.getName()).
-      setTitle("Unit Size").setWidth(15).build()
+            setColumnProperty("searchSize.description", String.class.getName()).
+            setTitle("Unit Size").setWidth(15).build()
 
-    AbstractColumn columnUnitType = ColumnBuilder.getInstance().setCustomExpression(new UnitTypeExpression())
-      .setTitle("Unit Type").setHeaderStyle(headerStyle).setWidth(15).build();
+    AbstractColumn columnUnitType = ColumnBuilder.getInstance().setCustomExpression(new UnitTypeExpression()).setTitle("Unit Type").setHeaderStyle(headerStyle).setWidth(15).build();
 
-    drb.addColumn(columnDate)
-      .addColumn(columnSite)
-      .addColumn(columnName)
-      .addColumn(columnEmail)
-      .addColumn(columnSize)
-      .addColumn(columnUnitType)
+    drb.addColumn(columnDate).addColumn(columnSite).addColumn(columnName).addColumn(columnEmail).addColumn(columnSize).addColumn(columnUnitType)
 
     def c = RentalTransaction.createCriteria()
 
@@ -256,7 +234,7 @@ class ReportsController {
 
     def c = RentalTransaction.createCriteria()
 
-    switch(period.reportName) {
+    switch (period.reportName) {
       case ReportName.ACTIVITY:
         if (period.site.transactionType == TransactionType.RESERVATION) {
           reportParams["report_name"] = "Reservation Activity Report - ${period.site.title}"
@@ -274,7 +252,7 @@ class ReportsController {
             eq('status', TransactionStatus.COMPLETE)
             eq('status', TransactionStatus.PAID)
           }
-          site{
+          site {
             eq('id', period.site.id)
           }
           between('bookingDate', startDate.time, endDate.time)
@@ -299,7 +277,7 @@ class ReportsController {
             eq('status', TransactionStatus.COMPLETE)
             eq('status', TransactionStatus.PAID)
           }
-          site{
+          site {
             eq('id', period.site.id)
           }
           between('bookingDate', startDate.time, endDate.time)
@@ -325,7 +303,7 @@ class ReportsController {
             eq('status', TransactionStatus.COMPLETE)
             eq('status', TransactionStatus.PAID)
           }
-          site{
+          site {
             eq('id', period.site.id)
           }
           between('moveInDate', startDate.time, endDate.time)
@@ -335,10 +313,7 @@ class ReportsController {
 
     }
 
-    drb
-      .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(subtotalStyle)
-      .setPrintColumnNames(false)
+    drb.setGrandTotalLegend("Grand Total").setGrandTotalLegendStyle(subtotalStyle).setPrintColumnNames(false)
 
     drb.addField("contactPrimary.firstName", String.class.getName())
     drb.addField("contactPrimary.lastName", String.class.getName())
@@ -350,89 +325,62 @@ class ReportsController {
     drb.addField("idNumber", String.class.getName())
 
 
-    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle(dateName).setWidth(85).setStyle(groupHeaderStyle).setHeaderStyle(groupHeaderStyle).build();
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField)).setTitle(dateName).setWidth(85).setStyle(groupHeaderStyle).setHeaderStyle(groupHeaderStyle).build();
 
-    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
-            .setTitle(period.site.transactionType == TransactionType.RESERVATION ? "Reserved Move-In Date": "Move-In Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate')).setTitle(period.site.transactionType == TransactionType.RESERVATION ? "Reserved Move-In Date" : "Move-In Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
-      setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
+            setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
 
-    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
-            .setTitle(transTitle).setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression()).setTitle(transTitle).setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-            .setTitle("Customer").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Customer").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnEmail = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.email", String.class.getName()).
-      setTitle("Email").setWidth(85).build()
+            setColumnProperty("contactPrimary.email", String.class.getName()).
+            setTitle("Email").setWidth(85).build()
 
     SimpleColumn columnPhone = ColumnBuilder.getInstance().
-      setColumnProperty("contactPrimary.phone", String.class.getName()).
-      setTitle("Phone").setWidth(60).build()
+            setColumnProperty("contactPrimary.phone", String.class.getName()).
+            setTitle("Phone").setWidth(60).build()
 
     SimpleColumn columnMonthly = ColumnBuilder.getInstance().
-      setColumnProperty("monthlyRate", BigDecimal.class.getName()).
-      setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("monthlyRate", BigDecimal.class.getName()).
+            setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnInsurance = ColumnBuilder.getInstance().
-      setColumnProperty("insuranceCost", BigDecimal.class.getName()).
-      setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("insuranceCost", BigDecimal.class.getName()).
+            setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnFees = ColumnBuilder.getInstance().
-      setColumnProperty("fees", BigDecimal.class.getName()).
-      setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("fees", BigDecimal.class.getName()).
+            setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnTax = ColumnBuilder.getInstance().
-      setColumnProperty("tax", BigDecimal.class.getName()).
-      setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("tax", BigDecimal.class.getName()).
+            setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnTotalPaidByTenant = ColumnBuilder.getInstance().
-      setColumnProperty("moveInCost", BigDecimal.class.getName()).          // TODO: change moveInCost property?
-      setTitle("Total Paid by Tenant").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("moveInCost", BigDecimal.class.getName()).          // TODO: change moveInCost property?
+            setTitle("Total Paid by Tenant").setStyle(moneyStyle).setPattern("\$0.00").build()
 
-    drb
-            .addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
-            .addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
-            .addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
-            .addGlobalFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle)
+    drb.addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle)
 
-	drb.setGlobalFooterVariableHeight(new Integer(25));
+    drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
 
     DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
 
-    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
-                .setFooterLabel(dailySubLabel)
-                .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle)
-                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
-                .build();
+    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate).setFooterLabel(dailySubLabel).setFooterVariablesHeight(new Integer(30)).addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).build();
 
-    drb.addColumn(columnDate)
-      .addColumn(columnUnitNumber)
-      .addColumn(columnReservationId)
+    drb.addColumn(columnDate).addColumn(columnUnitNumber).addColumn(columnReservationId)
 
     if (period.reportName == ReportName.ACTIVITY) {
       drb.addColumn(columnMoveInDate)
     }
 
-    drb
-      .addColumn(columnName)
-      .addColumn(columnEmail)
-      .addColumn(columnPhone)
-      .addColumn(columnMonthly)
-      .addColumn(columnInsurance)
-      .addColumn(columnFees)
-      .addColumn(columnTax)
-      .addColumn(columnTotalPaidByTenant)
-      .addGroup(g1)
+    drb.addColumn(columnName).addColumn(columnEmail).addColumn(columnPhone).addColumn(columnMonthly).addColumn(columnInsurance).addColumn(columnFees).addColumn(columnTax).addColumn(columnTotalPaidByTenant).addGroup(g1)
 
     return results
   }
@@ -445,7 +393,7 @@ class ReportsController {
 
     def c = RentalTransaction.createCriteria()
 
-    TransactionType transactionType = period.feed.sites.collect{it.transactionType}[0];
+    TransactionType transactionType = period.feed.sites.collect {it.transactionType}[0];
 
     if (transactionType == TransactionType.RESERVATION) {
       reportParams["report_name"] = "Reservation Transaction History Report - ${period.feed.operatorName}"
@@ -457,7 +405,7 @@ class ReportsController {
     dateField = "bookingDate"
 
     Feed reportFeed = Feed.get(period.feed.id)
-    switch(reportFeed.feedType) {
+    switch (reportFeed.feedType) {
       case FeedType.CENTERSHIFT:
         transTitle = "Centershift Trans #"
         break
@@ -475,7 +423,7 @@ class ReportsController {
         eq('status', TransactionStatus.COMPLETE)
         eq('status', TransactionStatus.PAID)
       }
-      site{
+      site {
         feed {
           eq('id', period.feed.id)
         }
@@ -484,10 +432,7 @@ class ReportsController {
       order('bookingDate', 'desc')
     }
 
-    drb
-      .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(subtotalStyle)
-      .setPrintColumnNames(false)
+    drb.setGrandTotalLegend("Grand Total").setGrandTotalLegendStyle(subtotalStyle).setPrintColumnNames(false)
 
     drb.addField("contactPrimary.firstName", String.class.getName())
     drb.addField("contactPrimary.lastName", String.class.getName())
@@ -502,97 +447,61 @@ class ReportsController {
 
 
     SimpleColumn columnSite = ColumnBuilder.getInstance().
-      setColumnProperty("site.title", String.class.getName()).
-      setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
+            setColumnProperty("site.title", String.class.getName()).
+            setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
 
-    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle(transactionType == TransactionType.RESERVATION ? "Reservation Date" : "Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField)).setTitle(transactionType == TransactionType.RESERVATION ? "Reservation Date" : "Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate'))
-            .setTitle(transactionType == TransactionType.RESERVATION ? "Reserved Move-In Date" : "Move-In Date").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate')).setTitle(transactionType == TransactionType.RESERVATION ? "Reserved Move-In Date" : "Move-In Date").setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnPaidThruDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('paidThruDate'))
-            .setTitle("Paid Through").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnPaidThruDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('paidThruDate')).setTitle("Paid Through").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
-      setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
+            setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
 
-    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
-            .setTitle(transTitle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression()).setTitle(transTitle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-            .setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnPromo = ColumnBuilder.getInstance().
-      setColumnProperty("promoName", String.class.getName()).
-      setTitle("Promo Name").build()
+            setColumnProperty("promoName", String.class.getName()).
+            setTitle("Promo Name").build()
 
     SimpleColumn columnMonthly = ColumnBuilder.getInstance().
-      setColumnProperty("monthlyRate", BigDecimal.class.getName()).
-      setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("monthlyRate", BigDecimal.class.getName()).
+            setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnMoveInCost = ColumnBuilder.getInstance().
-      setColumnProperty("moveInCost", BigDecimal.class.getName()).
-      setTitle("Move-In Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("moveInCost", BigDecimal.class.getName()).
+            setTitle("Move-In Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnInsurance = ColumnBuilder.getInstance().
-      setColumnProperty("insuranceCost", BigDecimal.class.getName()).
-      setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("insuranceCost", BigDecimal.class.getName()).
+            setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnFees = ColumnBuilder.getInstance().
-      setColumnProperty("fees", BigDecimal.class.getName()).
-      setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("fees", BigDecimal.class.getName()).
+            setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnTax = ColumnBuilder.getInstance().
-      setColumnProperty("tax", BigDecimal.class.getName()).
-      setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("tax", BigDecimal.class.getName()).
+            setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
 
-    drb
-            .addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle)
-            .addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
-            .addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
-            .addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
+    drb.addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
 
-  	drb.setGlobalFooterVariableHeight(new Integer(25));
+    drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
 
     DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
 
-    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
-                .setFooterLabel(dailySubLabel)
-                .setDefaultFooterVariableStyle(moneyTotalStyle)
-                .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
-                .setGroupLayout(GroupLayout.DEFAULT)
-                .build();
+    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate).setFooterLabel(dailySubLabel).setDefaultFooterVariableStyle(moneyTotalStyle).setFooterVariablesHeight(new Integer(30)).addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle).setGroupLayout(GroupLayout.DEFAULT).build();
 
     GroupBuilder gb2 = new GroupBuilder();
 
-    DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite)
-                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
-                .setHeaderHeight(new Integer(30))
-                .build();
+    DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).setHeaderHeight(new Integer(30)).build();
 
-    drb
-      .addColumn(columnSite)
-      .addColumn(columnDate)
-      .addColumn(columnUnitNumber)
-      .addColumn(columnMonthly)
-      .addColumn(columnReservationId)
-      .addColumn(columnName)
-      .addColumn(columnMoveInDate)
-      .addColumn(columnPaidThruDate)
-      .addColumn(columnMoveInCost)
-      .addColumn(columnInsurance)
-      .addColumn(columnFees)
-      .addColumn(columnTax)
-      .addColumn(columnPromo)
-      .addGroup(g2)
-      .addGroup(g1)
+    drb.addColumn(columnSite).addColumn(columnDate).addColumn(columnUnitNumber).addColumn(columnMonthly).addColumn(columnReservationId).addColumn(columnName).addColumn(columnMoveInDate).addColumn(columnPaidThruDate).addColumn(columnMoveInCost).addColumn(columnInsurance).addColumn(columnFees).addColumn(columnTax).addColumn(columnPromo).addGroup(g2).addGroup(g1)
 
     return results
   }
@@ -611,7 +520,7 @@ class ReportsController {
     dateField = "bookingDate"
 
     Feed reportFeed = Feed.get(period.feed.id)
-    switch(reportFeed.feedType) {
+    switch (reportFeed.feedType) {
       case FeedType.CENTERSHIFT:
         transTitle = "Centershift Trans #"
         break
@@ -629,7 +538,7 @@ class ReportsController {
         eq('status', TransactionStatus.COMPLETE)
         eq('status', TransactionStatus.PAID)
       }
-      site{
+      site {
         feed {
           eq('id', period.feed.id)
         }
@@ -639,10 +548,7 @@ class ReportsController {
       order('bookingDate', 'desc')
     }
 
-    drb
-      .setGrandTotalLegend("Grand Total")
-      .setGrandTotalLegendStyle(subtotalStyle)
-      .setPrintColumnNames(false)
+    drb.setGrandTotalLegend("Grand Total").setGrandTotalLegendStyle(subtotalStyle).setPrintColumnNames(false)
 
     drb.addField("contactPrimary.firstName", String.class.getName())
     drb.addField("contactPrimary.lastName", String.class.getName())
@@ -658,93 +564,60 @@ class ReportsController {
 
 
     SimpleColumn columnSite = ColumnBuilder.getInstance().
-      setColumnProperty("site.title", String.class.getName()).
-      setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
+            setColumnProperty("site.title", String.class.getName()).
+            setTitle("Facility Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
 
-    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField))
-            .setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField)).setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnAchDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('achTransferDate'))
-            .setTitle("ACH Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnAchDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('achTransferDate')).setTitle("ACH Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnAchAccount = ColumnBuilder.getInstance().setCustomExpression(new AccountExpression('site.bankAccount.acctNo'))
-            .setTitle("ACH Account").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnAchAccount = ColumnBuilder.getInstance().setCustomExpression(new AccountExpression('site.bankAccount.acctNo')).setTitle("ACH Account").setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
-      setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
+            setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
 
-    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression())
-            .setTitle(transTitle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression()).setTitle(transTitle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression())
-            .setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
+    AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnPaymentType = ColumnBuilder.getInstance().setCustomExpression(new PaymentTypeExpression())
-            .setTitle("Net/Gross Transfer").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnPaymentType = ColumnBuilder.getInstance().setCustomExpression(new PaymentTypeExpression()).setTitle("Net/Gross Transfer").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
-    AbstractColumn columnInvoiceNumber = ColumnBuilder.getInstance().setCustomExpression(new InvoiceNumberExpression())
-            .setTitle("Storitz Invoice #").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+    AbstractColumn columnInvoiceNumber = ColumnBuilder.getInstance().setCustomExpression(new InvoiceNumberExpression()).setTitle("Storitz Invoice #").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
 
     SimpleColumn columnStoritzId = ColumnBuilder.getInstance().
-      setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans #").build()
+            setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans #").build()
 
     SimpleColumn columnMoveInCost = ColumnBuilder.getInstance().
-      setColumnProperty("moveInCost", BigDecimal.class.getName()).
-      setTitle("Move-In Cost").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("moveInCost", BigDecimal.class.getName()).
+            setTitle("Move-In Cost").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnCommission = ColumnBuilder.getInstance().
-      setColumnProperty("commission", BigDecimal.class.getName()).
-      setTitle("Commission").setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("commission", BigDecimal.class.getName()).
+            setTitle("Commission").setStyle(moneyStyle).setPattern("\$0.00").build()
 
     SimpleColumn columnAchAmount = ColumnBuilder.getInstance().
-      setColumnProperty("achAmount", BigDecimal.class.getName()).
-      setTitle("ACH Amount (if applicable)").setWidth(new Integer(55)).setStyle(moneyStyle).setPattern("\$0.00").build()
+            setColumnProperty("achAmount", BigDecimal.class.getName()).
+            setTitle("ACH Amount (if applicable)").setWidth(new Integer(55)).setStyle(moneyStyle).setPattern("\$0.00").build()
 
-    AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression())
-            .setTitle("Net").setStyle(moneyStyle).setHeaderStyle(headerStyle).setPattern("\$0.00").build();
+    AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression()).setTitle("Net").setStyle(moneyStyle).setHeaderStyle(headerStyle).setPattern("\$0.00").build();
 
     drb.addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle);
-	drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle);
-	drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle);
+    drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle);
+    drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle);
     drb.addGlobalFooterVariable(columnAchAmount, DJCalculation.SUM, moneyTotalStyle);
-	drb.setGlobalFooterVariableHeight(new Integer(25));
+    drb.setGlobalFooterVariableHeight(new Integer(25));
 
     GroupBuilder gb1 = new GroupBuilder();
 
     DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
 
-    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate)
-                .setFooterLabel(dailySubLabel)
-                .setFooterVariablesHeight(new Integer(30))
-                .addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle)
-                .addFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle)
-                .setGroupLayout(GroupLayout.DEFAULT)
-                .build();
+    DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate).setFooterLabel(dailySubLabel).setFooterVariablesHeight(new Integer(30)).addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle).setGroupLayout(GroupLayout.DEFAULT).build();
 
     GroupBuilder gb2 = new GroupBuilder();
 
-    DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite)
-                .setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME)
-                .build();
+    DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).build();
 
-    drb
-      .addColumn(columnSite)
-      .addColumn(columnDate)
-      .addColumn(columnUnitNumber)
-      .addColumn(columnStoritzId)
-      .addColumn(columnReservationId)
-      .addColumn(columnName)
-      .addColumn(columnMoveInCost)
-      .addColumn(columnCommission)
-      .addColumn(columnNet)
-      .addColumn(columnPaymentType)
-      .addColumn(columnInvoiceNumber)
-      .addColumn(columnAchAmount)
-      .addColumn(columnAchDate)
-      .addColumn(columnAchAccount)
-      .addGroup(g2)
-      .addGroup(g1)
+    drb.addColumn(columnSite).addColumn(columnDate).addColumn(columnUnitNumber).addColumn(columnStoritzId).addColumn(columnReservationId).addColumn(columnName).addColumn(columnMoveInCost).addColumn(columnCommission).addColumn(columnNet).addColumn(columnPaymentType).addColumn(columnInvoiceNumber).addColumn(columnAchAmount).addColumn(columnAchDate).addColumn(columnAchAccount).addGroup(g2).addGroup(g1)
 
     return results
   }
@@ -757,7 +630,7 @@ class ReportsController {
     reportParams["addr1"] = "${period.feed.operatorName}"
     reportParams["addr2"] = "${period.feed.address1}"
     reportParams["addr3"] = "${period.feed.city}, ${period.feed.state?.display} ${period.feed.zipcode}"
-    reportParams["invoice_total"] = "${g.formatNumber(number:results.sum{ it.commission }, type:'currency', currencyCode:'USD')}"
+    reportParams["invoice_total"] = "${g.formatNumber(number: results.sum { it.commission }, type: 'currency', currencyCode: 'USD')}"
     reportParams
     drb.setTemplateFile(request.getRealPath('/WEB-INF/reports/storitz_invoice_template.jrxml'))
 
@@ -769,16 +642,17 @@ class ReportsController {
       They allow this controller to use the styles defined in:
       DynamicJasperConfig.groovy
    */
+
   private ConfigObject loadConfig() {
-      def config = ConfigurationHolder.config
-      GroovyClassLoader classLoader = new GroovyClassLoader(getClass().classLoader)
-      config.merge(new ConfigSlurper(GrailsUtil.environment).parse(classLoader.loadClass('DefaultDynamicJasperConfig')))
-      try {
-          config.merge(new ConfigSlurper(GrailsUtil.environment).parse(classLoader.loadClass('DynamicJasperConfig')))
-      } catch (Exception ignored) {
-          // ignore, just use the defaults
-      }
-      return new ConfigSlurper(GrailsUtil.environment).parse(new Properties()).merge(config.dynamicJasper)
+    def config = ConfigurationHolder.config
+    GroovyClassLoader classLoader = new GroovyClassLoader(getClass().classLoader)
+    config.merge(new ConfigSlurper(GrailsUtil.environment).parse(classLoader.loadClass('DefaultDynamicJasperConfig')))
+    try {
+      config.merge(new ConfigSlurper(GrailsUtil.environment).parse(classLoader.loadClass('DynamicJasperConfig')))
+    } catch (Exception ignored) {
+      // ignore, just use the defaults
+    }
+    return new ConfigSlurper(GrailsUtil.environment).parse(new Properties()).merge(config.dynamicJasper)
   }
 
 }

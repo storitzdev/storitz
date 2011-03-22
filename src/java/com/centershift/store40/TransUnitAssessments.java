@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TransUnitAssessments complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransUnitAssessments">
  *   &lt;complexContent>
@@ -32,20 +31,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransUnitAssessments", propOrder = {
-    "assessID",
-    "rentalID",
-    "description",
-    "itemPrice",
-    "quantity",
-    "extendedPrice",
-    "amountFulFilled",
-    "tax",
-    "taxFulFilled"
+        "assessID",
+        "rentalID",
+        "description",
+        "itemPrice",
+        "quantity",
+        "extendedPrice",
+        "amountFulFilled",
+        "tax",
+        "taxFulFilled"
 })
 public class TransUnitAssessments {
 
@@ -70,7 +67,6 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the assessID property.
-     * 
      */
     public long getAssessID() {
         return assessID;
@@ -78,7 +74,6 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the assessID property.
-     * 
      */
     public void setAssessID(long value) {
         this.assessID = value;
@@ -86,7 +81,6 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -94,7 +88,6 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -102,11 +95,9 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDescription() {
         return description;
@@ -114,11 +105,9 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDescription(String value) {
         this.description = value;
@@ -126,11 +115,9 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the itemPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getItemPrice() {
         return itemPrice;
@@ -138,11 +125,9 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the itemPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setItemPrice(BigDecimal value) {
         this.itemPrice = value;
@@ -150,7 +135,6 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the quantity property.
-     * 
      */
     public int getQuantity() {
         return quantity;
@@ -158,7 +142,6 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the quantity property.
-     * 
      */
     public void setQuantity(int value) {
         this.quantity = value;
@@ -166,11 +149,9 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the extendedPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getExtendedPrice() {
         return extendedPrice;
@@ -178,11 +159,9 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the extendedPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setExtendedPrice(BigDecimal value) {
         this.extendedPrice = value;
@@ -190,11 +169,9 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the amountFulFilled property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmountFulFilled() {
         return amountFulFilled;
@@ -202,11 +179,9 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the amountFulFilled property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmountFulFilled(BigDecimal value) {
         this.amountFulFilled = value;
@@ -214,11 +189,9 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the tax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTax() {
         return tax;
@@ -226,11 +199,9 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the tax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTax(BigDecimal value) {
         this.tax = value;
@@ -238,11 +209,9 @@ public class TransUnitAssessments {
 
     /**
      * Gets the value of the taxFulFilled property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTaxFulFilled() {
         return taxFulFilled;
@@ -250,11 +219,9 @@ public class TransUnitAssessments {
 
     /**
      * Sets the value of the taxFulFilled property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTaxFulFilled(BigDecimal value) {
         this.taxFulFilled = value;

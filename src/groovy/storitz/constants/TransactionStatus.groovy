@@ -20,11 +20,11 @@ public enum TransactionStatus {
 
 
   static list() {
-      [BEGUN, PAID, RESERVED, CANCELED, COMPLETE]
+    [BEGUN, PAID, RESERVED, CANCELED, COMPLETE]
   }
 
   static public TransactionStatus getEnumFromId(String value) {
-        list().find {it.display == value }
-    }
+    list().find {it.display == value }
+  }
 
 }

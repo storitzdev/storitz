@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for APPL_ORG_FLEX_FIELDS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APPL_ORG_FLEX_FIELDS">
  *   &lt;complexContent>
@@ -31,24 +30,21 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APPL_ORG_FLEX_FIELDS", propOrder = {
-    "tablename",
-    "columnname",
-    "active",
-    "orgdefid",
-    "orgid",
-    "custlabel",
-    "custrequired",
-    "custlookupset",
-    "display"
+        "tablename",
+        "columnname",
+        "active",
+        "orgdefid",
+        "orgid",
+        "custlabel",
+        "custrequired",
+        "custlookupset",
+        "display"
 })
 public class APPLORGFLEXFIELDS
-    extends BaseEntityOfCollectionAPPLORGFLEXFIELDSColumnIndexes
-{
+        extends BaseEntityOfCollectionAPPLORGFLEXFIELDSColumnIndexes {
 
     @XmlElement(name = "TABLE_NAME")
     protected String tablename;
@@ -71,11 +67,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the tablename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTABLENAME() {
         return tablename;
@@ -83,11 +77,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the tablename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTABLENAME(String value) {
         this.tablename = value;
@@ -95,11 +87,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the columnname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOLUMNNAME() {
         return columnname;
@@ -107,11 +97,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the columnname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOLUMNNAME(String value) {
         this.columnname = value;
@@ -119,11 +107,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -131,11 +117,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;
@@ -143,7 +127,6 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the orgdefid property.
-     * 
      */
     public long getORGDEFID() {
         return orgdefid;
@@ -151,7 +134,6 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the orgdefid property.
-     * 
      */
     public void setORGDEFID(long value) {
         this.orgdefid = value;
@@ -159,7 +141,6 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -167,7 +148,6 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -175,11 +155,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the custlabel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCUSTLABEL() {
         return custlabel;
@@ -187,11 +165,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the custlabel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCUSTLABEL(String value) {
         this.custlabel = value;
@@ -199,7 +175,6 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the custrequired property.
-     * 
      */
     public boolean isCUSTREQUIRED() {
         return custrequired;
@@ -207,7 +182,6 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the custrequired property.
-     * 
      */
     public void setCUSTREQUIRED(boolean value) {
         this.custrequired = value;
@@ -215,11 +189,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the custlookupset property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCUSTLOOKUPSET() {
         return custlookupset;
@@ -227,11 +199,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the custlookupset property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setCUSTLOOKUPSET(Long value) {
         this.custlookupset = value;
@@ -239,11 +209,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Gets the value of the display property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDISPLAY() {
         return display;
@@ -251,11 +219,9 @@ public class APPLORGFLEXFIELDS
 
     /**
      * Sets the value of the display property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDISPLAY(String value) {
         this.display = value;

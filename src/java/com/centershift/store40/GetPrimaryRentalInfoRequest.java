@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetPrimaryRentalInfo_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetPrimaryRentalInfo_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetPrimaryRentalInfo_Request", propOrder = {
-    "rentalID",
-    "contactID",
-    "accountID",
-    "siteID"
+        "rentalID",
+        "contactID",
+        "accountID",
+        "siteID"
 })
 public class GetPrimaryRentalInfoRequest {
 
@@ -49,11 +46,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalID() {
         return rentalID;
@@ -61,11 +56,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalID(Long value) {
         this.rentalID = value;
@@ -73,11 +66,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Gets the value of the contactID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getContactID() {
         return contactID;
@@ -85,11 +76,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Sets the value of the contactID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setContactID(Long value) {
         this.contactID = value;
@@ -97,11 +86,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -109,11 +96,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -121,11 +106,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -133,11 +116,9 @@ public class GetPrimaryRentalInfoRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;

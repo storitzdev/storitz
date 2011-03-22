@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AddUpdateMerchandiseItemsData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddUpdateMerchandiseItemsData">
  *   &lt;complexContent>
@@ -32,20 +31,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddUpdateMerchandiseItemsData", propOrder = {
-    "retailID",
-    "vendorID",
-    "itemName",
-    "costOfGoods",
-    "retailPrice",
-    "minPrice",
-    "maxPrice",
-    "partNumber",
-    "sku"
+        "retailID",
+        "vendorID",
+        "itemName",
+        "costOfGoods",
+        "retailPrice",
+        "minPrice",
+        "maxPrice",
+        "partNumber",
+        "sku"
 })
 public class AddUpdateMerchandiseItemsData {
 
@@ -70,11 +67,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the retailID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRetailID() {
         return retailID;
@@ -82,11 +77,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the retailID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRetailID(Long value) {
         this.retailID = value;
@@ -94,11 +87,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the vendorID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getVendorID() {
         return vendorID;
@@ -106,11 +97,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the vendorID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setVendorID(Long value) {
         this.vendorID = value;
@@ -118,11 +107,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the itemName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getItemName() {
         return itemName;
@@ -130,11 +117,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the itemName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setItemName(String value) {
         this.itemName = value;
@@ -142,11 +127,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the costOfGoods property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCostOfGoods() {
         return costOfGoods;
@@ -154,11 +137,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the costOfGoods property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCostOfGoods(BigDecimal value) {
         this.costOfGoods = value;
@@ -166,11 +147,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the retailPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRetailPrice() {
         return retailPrice;
@@ -178,11 +157,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the retailPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRetailPrice(BigDecimal value) {
         this.retailPrice = value;
@@ -190,11 +167,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the minPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMinPrice() {
         return minPrice;
@@ -202,11 +177,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the minPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMinPrice(BigDecimal value) {
         this.minPrice = value;
@@ -214,11 +187,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the maxPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMaxPrice() {
         return maxPrice;
@@ -226,11 +197,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the maxPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMaxPrice(BigDecimal value) {
         this.maxPrice = value;
@@ -238,11 +207,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the partNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPartNumber() {
         return partNumber;
@@ -250,11 +217,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the partNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPartNumber(String value) {
         this.partNumber = value;
@@ -262,11 +227,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Gets the value of the sku property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSKU() {
         return sku;
@@ -274,11 +237,9 @@ public class AddUpdateMerchandiseItemsData {
 
     /**
      * Sets the value of the sku property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSKU(String value) {
         this.sku = value;

@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for SOA_GET_SITE_TASKS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_GET_SITE_TASKS">
  *   &lt;complexContent>
@@ -39,30 +34,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_GET_SITE_TASKS", propOrder = {
-    "msgid",
-    "siteid",
-    "msgrecurid",
-    "msgtype",
-    "msgtypeval",
-    "msgheader",
-    "msgbody",
-    "status",
-    "priority",
-    "startday",
-    "refid",
-    "reftype",
-    "reftypeval",
-    "createdby",
-    "updatedby"
+        "msgid",
+        "siteid",
+        "msgrecurid",
+        "msgtype",
+        "msgtypeval",
+        "msgheader",
+        "msgbody",
+        "status",
+        "priority",
+        "startday",
+        "refid",
+        "reftype",
+        "reftypeval",
+        "createdby",
+        "updatedby"
 })
 public class SOAGETSITETASKS
-    extends BaseEntityOfCollectionSOAGETSITETASKSColumnIndexes
-{
+        extends BaseEntityOfCollectionSOAGETSITETASKSColumnIndexes {
 
     @XmlElement(name = "MSG_ID")
     protected long msgid;
@@ -98,7 +90,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the msgid property.
-     * 
      */
     public long getMSGID() {
         return msgid;
@@ -106,7 +97,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the msgid property.
-     * 
      */
     public void setMSGID(long value) {
         this.msgid = value;
@@ -114,7 +104,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -122,7 +111,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -130,11 +118,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the msgrecurid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getMSGRECURID() {
         return msgrecurid;
@@ -142,11 +128,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the msgrecurid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setMSGRECURID(Long value) {
         this.msgrecurid = value;
@@ -154,7 +138,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the msgtype property.
-     * 
      */
     public int getMSGTYPE() {
         return msgtype;
@@ -162,7 +145,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the msgtype property.
-     * 
      */
     public void setMSGTYPE(int value) {
         this.msgtype = value;
@@ -170,11 +152,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the msgtypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMSGTYPEVAL() {
         return msgtypeval;
@@ -182,11 +162,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the msgtypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMSGTYPEVAL(String value) {
         this.msgtypeval = value;
@@ -194,11 +172,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the msgheader property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMSGHEADER() {
         return msgheader;
@@ -206,11 +182,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the msgheader property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMSGHEADER(String value) {
         this.msgheader = value;
@@ -218,11 +192,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the msgbody property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMSGBODY() {
         return msgbody;
@@ -230,11 +202,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the msgbody property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMSGBODY(String value) {
         this.msgbody = value;
@@ -242,7 +212,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -250,7 +219,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -258,7 +226,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the priority property.
-     * 
      */
     public int getPRIORITY() {
         return priority;
@@ -266,7 +233,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the priority property.
-     * 
      */
     public void setPRIORITY(int value) {
         this.priority = value;
@@ -274,11 +240,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the startday property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTDAY() {
         return startday;
@@ -286,11 +250,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the startday property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTDAY(XMLGregorianCalendar value) {
         this.startday = value;
@@ -298,11 +260,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the refid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getREFID() {
         return refid;
@@ -310,11 +270,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the refid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setREFID(Long value) {
         this.refid = value;
@@ -322,11 +280,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the reftype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getREFTYPE() {
         return reftype;
@@ -334,11 +290,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the reftype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setREFTYPE(Integer value) {
         this.reftype = value;
@@ -346,11 +300,9 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the reftypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getREFTYPEVAL() {
         return reftypeval;
@@ -358,11 +310,9 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the reftypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setREFTYPEVAL(String value) {
         this.reftypeval = value;
@@ -370,7 +320,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -378,7 +327,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -386,7 +334,6 @@ public class SOAGETSITETASKS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -394,7 +341,6 @@ public class SOAGETSITETASKS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

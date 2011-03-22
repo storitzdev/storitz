@@ -18,12 +18,12 @@ class DateExpression implements CustomExpression {
   }
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          Date date = (Date) fields.get(fieldName);
-          return date.format("MM/dd/yy")
+    Date date = (Date) fields.get(fieldName);
+    return date.format("MM/dd/yy")
   }
 
   public String getClassName() {
-          return String.class.getName();
+    return String.class.getName();
   }
 
 }

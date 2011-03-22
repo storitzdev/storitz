@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for BaseEntityOfCollectionACCT_CONTACT_PHONESColumnIndexes complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="BaseEntityOfCollectionACCT_CONTACT_PHONESColumnIndexes">
  *   &lt;complexContent>
@@ -24,15 +19,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BaseEntityOfCollectionACCT_CONTACT_PHONESColumnIndexes", propOrder = {
-    "transaction"
+        "transaction"
 })
 @XmlSeeAlso({
-    ACCTCONTACTPHONES.class
+        ACCTCONTACTPHONES.class
 })
 public abstract class BaseEntityOfCollectionACCTCONTACTPHONESColumnIndexes {
 
@@ -41,11 +34,9 @@ public abstract class BaseEntityOfCollectionACCTCONTACTPHONESColumnIndexes {
 
     /**
      * Gets the value of the transaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FrameworkTransaction }
-     *     
+     *
+     * @return possible object is
+     *         {@link FrameworkTransaction }
      */
     public FrameworkTransaction getTransaction() {
         return transaction;
@@ -53,11 +44,9 @@ public abstract class BaseEntityOfCollectionACCTCONTACTPHONESColumnIndexes {
 
     /**
      * Sets the value of the transaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FrameworkTransaction }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link FrameworkTransaction }
      */
     public void setTransaction(FrameworkTransaction value) {
         this.transaction = value;

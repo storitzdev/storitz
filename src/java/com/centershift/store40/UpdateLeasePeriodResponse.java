@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "updateLeasePeriodResult"
+        "updateLeasePeriodResult"
 })
 @XmlRootElement(name = "UpdateLeasePeriodResponse")
 public class UpdateLeasePeriodResponse {
@@ -39,11 +32,9 @@ public class UpdateLeasePeriodResponse {
 
     /**
      * Gets the value of the updateLeasePeriodResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UpdateLeasePeriodResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link UpdateLeasePeriodResponse2 }
      */
     public UpdateLeasePeriodResponse2 getUpdateLeasePeriodResult() {
         return updateLeasePeriodResult;
@@ -51,11 +42,9 @@ public class UpdateLeasePeriodResponse {
 
     /**
      * Sets the value of the updateLeasePeriodResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UpdateLeasePeriodResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link UpdateLeasePeriodResponse2 }
      */
     public void setUpdateLeasePeriodResult(UpdateLeasePeriodResponse2 value) {
         this.updateLeasePeriodResult = value;

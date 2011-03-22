@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetRefundTypes_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetRefundTypes_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetRefundTypes_Request", propOrder = {
-    "siteID",
-    "refundData"
+        "siteID",
+        "refundData"
 })
 public class GetRefundTypesRequest {
 
@@ -41,7 +38,6 @@ public class GetRefundTypesRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class GetRefundTypesRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class GetRefundTypesRequest {
 
     /**
      * Gets the value of the refundData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfGetRefundTypesRequestData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfGetRefundTypesRequestData }
      */
     public ArrayOfGetRefundTypesRequestData getRefundData() {
         return refundData;
@@ -69,11 +62,9 @@ public class GetRefundTypesRequest {
 
     /**
      * Sets the value of the refundData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfGetRefundTypesRequestData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfGetRefundTypesRequestData }
      */
     public void setRefundData(ArrayOfGetRefundTypesRequestData value) {
         this.refundData = value;

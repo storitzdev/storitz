@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for RentalContact complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RentalContact">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RentalContact", propOrder = {
-    "contactId",
-    "addressId",
-    "phoneId",
-    "gateCode",
-    "primaryFlag"
+        "contactId",
+        "addressId",
+        "phoneId",
+        "gateCode",
+        "primaryFlag"
 })
 public class RentalContact {
 
@@ -53,7 +50,6 @@ public class RentalContact {
 
     /**
      * Gets the value of the contactId property.
-     * 
      */
     public long getContactId() {
         return contactId;
@@ -61,7 +57,6 @@ public class RentalContact {
 
     /**
      * Sets the value of the contactId property.
-     * 
      */
     public void setContactId(long value) {
         this.contactId = value;
@@ -69,7 +64,6 @@ public class RentalContact {
 
     /**
      * Gets the value of the addressId property.
-     * 
      */
     public long getAddressId() {
         return addressId;
@@ -77,7 +71,6 @@ public class RentalContact {
 
     /**
      * Sets the value of the addressId property.
-     * 
      */
     public void setAddressId(long value) {
         this.addressId = value;
@@ -85,7 +78,6 @@ public class RentalContact {
 
     /**
      * Gets the value of the phoneId property.
-     * 
      */
     public long getPhoneId() {
         return phoneId;
@@ -93,7 +85,6 @@ public class RentalContact {
 
     /**
      * Sets the value of the phoneId property.
-     * 
      */
     public void setPhoneId(long value) {
         this.phoneId = value;
@@ -101,11 +92,9 @@ public class RentalContact {
 
     /**
      * Gets the value of the gateCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGateCode() {
         return gateCode;
@@ -113,11 +102,9 @@ public class RentalContact {
 
     /**
      * Sets the value of the gateCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGateCode(String value) {
         this.gateCode = value;
@@ -125,11 +112,9 @@ public class RentalContact {
 
     /**
      * Gets the value of the primaryFlag property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isPrimaryFlag() {
         return primaryFlag;
@@ -137,11 +122,9 @@ public class RentalContact {
 
     /**
      * Sets the value of the primaryFlag property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setPrimaryFlag(Boolean value) {
         this.primaryFlag = value;

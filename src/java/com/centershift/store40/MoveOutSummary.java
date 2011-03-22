@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for MoveOutSummary complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MoveOutSummary">
  *   &lt;complexContent>
@@ -32,20 +31,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MoveOutSummary", propOrder = {
-    "grossAmount",
-    "grossTax",
-    "grossTotal",
-    "withheldAmount",
-    "withheldTax",
-    "withheldTotal",
-    "dueAmount",
-    "dueTax",
-    "dueTotal"
+        "grossAmount",
+        "grossTax",
+        "grossTotal",
+        "withheldAmount",
+        "withheldTax",
+        "withheldTotal",
+        "dueAmount",
+        "dueTax",
+        "dueTotal"
 })
 public class MoveOutSummary {
 
@@ -70,11 +67,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the grossAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossAmount() {
         return grossAmount;
@@ -82,11 +77,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the grossAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossAmount(BigDecimal value) {
         this.grossAmount = value;
@@ -94,11 +87,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the grossTax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossTax() {
         return grossTax;
@@ -106,11 +97,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the grossTax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossTax(BigDecimal value) {
         this.grossTax = value;
@@ -118,11 +107,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the grossTotal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossTotal() {
         return grossTotal;
@@ -130,11 +117,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the grossTotal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossTotal(BigDecimal value) {
         this.grossTotal = value;
@@ -142,11 +127,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the withheldAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWithheldAmount() {
         return withheldAmount;
@@ -154,11 +137,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the withheldAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWithheldAmount(BigDecimal value) {
         this.withheldAmount = value;
@@ -166,11 +147,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the withheldTax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWithheldTax() {
         return withheldTax;
@@ -178,11 +157,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the withheldTax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWithheldTax(BigDecimal value) {
         this.withheldTax = value;
@@ -190,11 +167,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the withheldTotal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWithheldTotal() {
         return withheldTotal;
@@ -202,11 +177,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the withheldTotal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWithheldTotal(BigDecimal value) {
         this.withheldTotal = value;
@@ -214,11 +187,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the dueAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDueAmount() {
         return dueAmount;
@@ -226,11 +197,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the dueAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDueAmount(BigDecimal value) {
         this.dueAmount = value;
@@ -238,11 +207,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the dueTax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDueTax() {
         return dueTax;
@@ -250,11 +217,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the dueTax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDueTax(BigDecimal value) {
         this.dueTax = value;
@@ -262,11 +227,9 @@ public class MoveOutSummary {
 
     /**
      * Gets the value of the dueTotal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDueTotal() {
         return dueTotal;
@@ -274,11 +237,9 @@ public class MoveOutSummary {
 
     /**
      * Sets the value of the dueTotal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDueTotal(BigDecimal value) {
         this.dueTotal = value;

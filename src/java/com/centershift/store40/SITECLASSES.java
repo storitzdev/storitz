@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SITE_CLASSES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SITE_CLASSES">
  *   &lt;complexContent>
@@ -30,23 +29,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SITE_CLASSES", propOrder = {
-    "siteid",
-    "classdesc",
-    "icon",
-    "siteclassid",
-    "classtype",
-    "acctcategory",
-    "applrentalobjectsdetailOccupiable",
-    "applrentalobjectsdetailNonOccupiable"
+        "siteid",
+        "classdesc",
+        "icon",
+        "siteclassid",
+        "classtype",
+        "acctcategory",
+        "applrentalobjectsdetailOccupiable",
+        "applrentalobjectsdetailNonOccupiable"
 })
 public class SITECLASSES
-    extends BaseEntityOfCollectionSITECLASSESColumnIndexes
-{
+        extends BaseEntityOfCollectionSITECLASSESColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -67,7 +63,6 @@ public class SITECLASSES
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -75,7 +70,6 @@ public class SITECLASSES
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -83,11 +77,9 @@ public class SITECLASSES
 
     /**
      * Gets the value of the classdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLASSDESC() {
         return classdesc;
@@ -95,11 +87,9 @@ public class SITECLASSES
 
     /**
      * Sets the value of the classdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLASSDESC(String value) {
         this.classdesc = value;
@@ -107,11 +97,9 @@ public class SITECLASSES
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -119,11 +107,9 @@ public class SITECLASSES
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -131,7 +117,6 @@ public class SITECLASSES
 
     /**
      * Gets the value of the siteclassid property.
-     * 
      */
     public long getSITECLASSID() {
         return siteclassid;
@@ -139,7 +124,6 @@ public class SITECLASSES
 
     /**
      * Sets the value of the siteclassid property.
-     * 
      */
     public void setSITECLASSID(long value) {
         this.siteclassid = value;
@@ -147,7 +131,6 @@ public class SITECLASSES
 
     /**
      * Gets the value of the classtype property.
-     * 
      */
     public int getCLASSTYPE() {
         return classtype;
@@ -155,7 +138,6 @@ public class SITECLASSES
 
     /**
      * Sets the value of the classtype property.
-     * 
      */
     public void setCLASSTYPE(int value) {
         this.classtype = value;
@@ -163,11 +145,9 @@ public class SITECLASSES
 
     /**
      * Gets the value of the acctcategory property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTCATEGORY() {
         return acctcategory;
@@ -175,11 +155,9 @@ public class SITECLASSES
 
     /**
      * Sets the value of the acctcategory property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTCATEGORY(String value) {
         this.acctcategory = value;
@@ -187,11 +165,9 @@ public class SITECLASSES
 
     /**
      * Gets the value of the applrentalobjectsdetailOccupiable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
      */
     public ArrayOfAPPLRENTALOBJECTSDETAIL getAPPLRENTALOBJECTSDETAILOccupiable() {
         return applrentalobjectsdetailOccupiable;
@@ -199,11 +175,9 @@ public class SITECLASSES
 
     /**
      * Sets the value of the applrentalobjectsdetailOccupiable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
      */
     public void setAPPLRENTALOBJECTSDETAILOccupiable(ArrayOfAPPLRENTALOBJECTSDETAIL value) {
         this.applrentalobjectsdetailOccupiable = value;
@@ -211,11 +185,9 @@ public class SITECLASSES
 
     /**
      * Gets the value of the applrentalobjectsdetailNonOccupiable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
      */
     public ArrayOfAPPLRENTALOBJECTSDETAIL getAPPLRENTALOBJECTSDETAILNonOccupiable() {
         return applrentalobjectsdetailNonOccupiable;
@@ -223,11 +195,9 @@ public class SITECLASSES
 
     /**
      * Sets the value of the applrentalobjectsdetailNonOccupiable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
      */
     public void setAPPLRENTALOBJECTSDETAILNonOccupiable(ArrayOfAPPLRENTALOBJECTSDETAIL value) {
         this.applrentalobjectsdetailNonOccupiable = value;

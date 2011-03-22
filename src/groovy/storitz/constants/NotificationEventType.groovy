@@ -27,9 +27,9 @@ public enum NotificationEventType {
   }
 
   static public NotificationEventType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return NotificationEventType.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return NotificationEventType.valueOf(value)
+    return ret
+  }
 
 }

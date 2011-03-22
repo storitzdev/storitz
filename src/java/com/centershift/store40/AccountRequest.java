@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Account_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Account_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Account_Request", propOrder = {
-    "contactID",
-    "acctID"
+        "contactID",
+        "acctID"
 })
 public class AccountRequest {
 
@@ -41,11 +38,9 @@ public class AccountRequest {
 
     /**
      * Gets the value of the contactID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getContactID() {
         return contactID;
@@ -53,11 +48,9 @@ public class AccountRequest {
 
     /**
      * Sets the value of the contactID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setContactID(Long value) {
         this.contactID = value;
@@ -65,11 +58,9 @@ public class AccountRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAcctID() {
         return acctID;
@@ -77,11 +68,9 @@ public class AccountRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAcctID(Long value) {
         this.acctID = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for APACHData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APACHData">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APACHData", propOrder = {
-    "accountNumber",
-    "routingNumber"
+        "accountNumber",
+        "routingNumber"
 })
 public class APACHData {
 
@@ -41,11 +38,9 @@ public class APACHData {
 
     /**
      * Gets the value of the accountNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountNumber() {
         return accountNumber;
@@ -53,11 +48,9 @@ public class APACHData {
 
     /**
      * Sets the value of the accountNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountNumber(String value) {
         this.accountNumber = value;
@@ -65,11 +58,9 @@ public class APACHData {
 
     /**
      * Gets the value of the routingNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRoutingNumber() {
         return routingNumber;
@@ -77,11 +68,9 @@ public class APACHData {
 
     /**
      * Sets the value of the routingNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRoutingNumber(String value) {
         this.routingNumber = value;

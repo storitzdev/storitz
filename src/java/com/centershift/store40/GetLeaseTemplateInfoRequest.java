@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for getLeaseTemplateInfo_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="getLeaseTemplateInfo_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getLeaseTemplateInfo_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "templateLevel"
+        "orgID",
+        "siteID",
+        "templateLevel"
 })
 public class GetLeaseTemplateInfoRequest {
 
@@ -45,7 +42,6 @@ public class GetLeaseTemplateInfoRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -53,7 +49,6 @@ public class GetLeaseTemplateInfoRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -61,7 +56,6 @@ public class GetLeaseTemplateInfoRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -69,7 +63,6 @@ public class GetLeaseTemplateInfoRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -77,11 +70,9 @@ public class GetLeaseTemplateInfoRequest {
 
     /**
      * Gets the value of the templateLevel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TemplateLevelVals }
-     *     
+     *
+     * @return possible object is
+     *         {@link TemplateLevelVals }
      */
     public TemplateLevelVals getTemplateLevel() {
         return templateLevel;
@@ -89,11 +80,9 @@ public class GetLeaseTemplateInfoRequest {
 
     /**
      * Sets the value of the templateLevel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TemplateLevelVals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TemplateLevelVals }
      */
     public void setTemplateLevel(TemplateLevelVals value) {
         this.templateLevel = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for TerminateService_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TerminateService_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TerminateService_Response", propOrder = {
-    "succeeded"
+        "succeeded"
 })
 public class TerminateServiceResponse2 {
 
@@ -37,7 +34,6 @@ public class TerminateServiceResponse2 {
 
     /**
      * Gets the value of the succeeded property.
-     * 
      */
     public boolean isSucceeded() {
         return succeeded;
@@ -45,7 +41,6 @@ public class TerminateServiceResponse2 {
 
     /**
      * Sets the value of the succeeded property.
-     * 
      */
     public void setSucceeded(boolean value) {
         this.succeeded = value;

@@ -13,7 +13,7 @@ import storitz.constants.Country
 class CountryClassPropertyEditor extends PropertyEditorSupport {
 
   String getAsText() {
-    return ((Country)value).key
+    return ((Country) value).key
   }
 
   void setAsText(String text) {

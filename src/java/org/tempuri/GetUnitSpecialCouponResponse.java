@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getUnitSpecialCouponResult"
+        "getUnitSpecialCouponResult"
 })
 @XmlRootElement(name = "GetUnitSpecialCouponResponse")
 public class GetUnitSpecialCouponResponse {
@@ -39,11 +32,9 @@ public class GetUnitSpecialCouponResponse {
 
     /**
      * Gets the value of the getUnitSpecialCouponResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAnyType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAnyType }
      */
     public ArrayOfAnyType getGetUnitSpecialCouponResult() {
         return getUnitSpecialCouponResult;
@@ -51,11 +42,9 @@ public class GetUnitSpecialCouponResponse {
 
     /**
      * Sets the value of the getUnitSpecialCouponResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAnyType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAnyType }
      */
     public void setGetUnitSpecialCouponResult(ArrayOfAnyType value) {
         this.getUnitSpecialCouponResult = value;

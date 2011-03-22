@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for RentalOverlockData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RentalOverlockData">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RentalOverlockData", propOrder = {
-    "rentalID",
-    "status"
+        "rentalID",
+        "status"
 })
 public class RentalOverlockData {
 
@@ -41,7 +38,6 @@ public class RentalOverlockData {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -49,7 +45,6 @@ public class RentalOverlockData {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -57,11 +52,9 @@ public class RentalOverlockData {
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OverlockStatus }
-     *     
+     *
+     * @return possible object is
+     *         {@link OverlockStatus }
      */
     public OverlockStatus getStatus() {
         return status;
@@ -69,11 +62,9 @@ public class RentalOverlockData {
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OverlockStatus }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link OverlockStatus }
      */
     public void setStatus(OverlockStatus value) {
         this.status = value;

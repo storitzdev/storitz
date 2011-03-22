@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AuctionEndRentalComplete complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionEndRentalComplete">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionEndRentalComplete", propOrder = {
-    "rentalID",
-    "tranID",
-    "errorMessage"
+        "rentalID",
+        "tranID",
+        "errorMessage"
 })
 public class AuctionEndRentalComplete {
 
@@ -45,7 +42,6 @@ public class AuctionEndRentalComplete {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -53,7 +49,6 @@ public class AuctionEndRentalComplete {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -61,11 +56,9 @@ public class AuctionEndRentalComplete {
 
     /**
      * Gets the value of the tranID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTranID() {
         return tranID;
@@ -73,11 +66,9 @@ public class AuctionEndRentalComplete {
 
     /**
      * Sets the value of the tranID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTranID(String value) {
         this.tranID = value;
@@ -85,11 +76,9 @@ public class AuctionEndRentalComplete {
 
     /**
      * Gets the value of the errorMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMessage() {
         return errorMessage;
@@ -97,11 +86,9 @@ public class AuctionEndRentalComplete {
 
     /**
      * Sets the value of the errorMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMessage(String value) {
         this.errorMessage = value;

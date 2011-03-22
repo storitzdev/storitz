@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for SDS_WALK_THRU_LIST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SDS_WALK_THRU_LIST">
  *   &lt;complexContent>
@@ -45,35 +40,32 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SDS_WALK_THRU_LIST", propOrder = {
-    "siteid",
-    "sitename",
-    "walkthruorder",
-    "unitid",
-    "status",
-    "unitstatusval",
-    "rentalid",
-    "acctname",
-    "unitnumber",
-    "rentalstartdate",
-    "ptd",
-    "overlockstatusval",
-    "delstep",
-    "dim",
-    "attribute01",
-    "rentrate",
-    "dayslate",
-    "orgnumberxref",
-    "sumdayslate",
-    "unitnumsort"
+        "siteid",
+        "sitename",
+        "walkthruorder",
+        "unitid",
+        "status",
+        "unitstatusval",
+        "rentalid",
+        "acctname",
+        "unitnumber",
+        "rentalstartdate",
+        "ptd",
+        "overlockstatusval",
+        "delstep",
+        "dim",
+        "attribute01",
+        "rentrate",
+        "dayslate",
+        "orgnumberxref",
+        "sumdayslate",
+        "unitnumsort"
 })
 public class SDSWALKTHRULIST
-    extends BaseEntityOfCollectionSDSWALKTHRULISTColumnIndexes
-{
+        extends BaseEntityOfCollectionSDSWALKTHRULISTColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -120,7 +112,6 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -128,7 +119,6 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -136,11 +126,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the sitename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENAME() {
         return sitename;
@@ -148,11 +136,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the sitename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENAME(String value) {
         this.sitename = value;
@@ -160,11 +146,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the walkthruorder property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getWALKTHRUORDER() {
         return walkthruorder;
@@ -172,11 +156,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the walkthruorder property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setWALKTHRUORDER(Integer value) {
         this.walkthruorder = value;
@@ -184,7 +166,6 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the unitid property.
-     * 
      */
     public long getUNITID() {
         return unitid;
@@ -192,7 +173,6 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the unitid property.
-     * 
      */
     public void setUNITID(long value) {
         this.unitid = value;
@@ -200,11 +180,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSTATUS() {
         return status;
@@ -212,11 +190,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSTATUS(Integer value) {
         this.status = value;
@@ -224,11 +200,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the unitstatusval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITSTATUSVAL() {
         return unitstatusval;
@@ -236,11 +210,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the unitstatusval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITSTATUSVAL(String value) {
         this.unitstatusval = value;
@@ -248,11 +220,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -260,11 +230,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -272,11 +240,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -284,11 +250,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -296,11 +260,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -308,11 +270,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -320,11 +280,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the rentalstartdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getRENTALSTARTDATE() {
         return rentalstartdate;
@@ -332,11 +290,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the rentalstartdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setRENTALSTARTDATE(XMLGregorianCalendar value) {
         this.rentalstartdate = value;
@@ -344,11 +300,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -356,11 +310,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -368,11 +320,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the overlockstatusval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOVERLOCKSTATUSVAL() {
         return overlockstatusval;
@@ -380,11 +330,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the overlockstatusval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOVERLOCKSTATUSVAL(String value) {
         this.overlockstatusval = value;
@@ -392,11 +340,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the delstep property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDELSTEP() {
         return delstep;
@@ -404,11 +350,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the delstep property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDELSTEP(BigDecimal value) {
         this.delstep = value;
@@ -416,11 +360,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the dim property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDIM() {
         return dim;
@@ -428,11 +370,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the dim property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDIM(String value) {
         this.dim = value;
@@ -440,11 +380,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the attribute01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE01() {
         return attribute01;
@@ -452,11 +390,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the attribute01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE01(String value) {
         this.attribute01 = value;
@@ -464,11 +400,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the rentrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTRATE() {
         return rentrate;
@@ -476,11 +410,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the rentrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTRATE(BigDecimal value) {
         this.rentrate = value;
@@ -488,11 +420,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the dayslate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDAYSLATE() {
         return dayslate;
@@ -500,11 +430,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the dayslate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDAYSLATE(String value) {
         this.dayslate = value;
@@ -512,11 +440,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the orgnumberxref property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getORGNUMBERXREF() {
         return orgnumberxref;
@@ -524,11 +450,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the orgnumberxref property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setORGNUMBERXREF(String value) {
         this.orgnumberxref = value;
@@ -536,11 +460,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the sumdayslate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSUMDAYSLATE() {
         return sumdayslate;
@@ -548,11 +470,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the sumdayslate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSUMDAYSLATE(BigDecimal value) {
         this.sumdayslate = value;
@@ -560,11 +480,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Gets the value of the unitnumsort property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMSORT() {
         return unitnumsort;
@@ -572,11 +490,9 @@ public class SDSWALKTHRULIST
 
     /**
      * Sets the value of the unitnumsort property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMSORT(String value) {
         this.unitnumsort = value;

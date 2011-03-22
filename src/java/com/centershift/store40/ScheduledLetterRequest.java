@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for scheduledLetter_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="scheduledLetter_Request">
  *   &lt;complexContent>
@@ -33,20 +28,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "scheduledLetter_Request", propOrder = {
-    "siteID",
-    "acctID",
-    "rentalID",
-    "pdfTemplateID",
-    "scheduledDate",
-    "sendTo",
-    "mailLocal",
-    "certifiedType",
-    "certificateOfMail"
+        "siteID",
+        "acctID",
+        "rentalID",
+        "pdfTemplateID",
+        "scheduledDate",
+        "sendTo",
+        "mailLocal",
+        "certifiedType",
+        "certificateOfMail"
 })
 public class ScheduledLetterRequest {
 
@@ -72,7 +65,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -80,7 +72,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -88,7 +79,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -96,7 +86,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -104,7 +93,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -112,7 +100,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -120,7 +107,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the pdfTemplateID property.
-     * 
      */
     public long getPdfTemplateID() {
         return pdfTemplateID;
@@ -128,7 +114,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the pdfTemplateID property.
-     * 
      */
     public void setPdfTemplateID(long value) {
         this.pdfTemplateID = value;
@@ -136,11 +121,9 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the scheduledDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getScheduledDate() {
         return scheduledDate;
@@ -148,11 +131,9 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the scheduledDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setScheduledDate(XMLGregorianCalendar value) {
         this.scheduledDate = value;
@@ -160,11 +141,9 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the sendTo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LTRCONTACTTYPES }
-     *     
+     *
+     * @return possible object is
+     *         {@link LTRCONTACTTYPES }
      */
     public LTRCONTACTTYPES getSendTo() {
         return sendTo;
@@ -172,11 +151,9 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the sendTo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LTRCONTACTTYPES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link LTRCONTACTTYPES }
      */
     public void setSendTo(LTRCONTACTTYPES value) {
         this.sendTo = value;
@@ -184,7 +161,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the mailLocal property.
-     * 
      */
     public boolean isMailLocal() {
         return mailLocal;
@@ -192,7 +168,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the mailLocal property.
-     * 
      */
     public void setMailLocal(boolean value) {
         this.mailLocal = value;
@@ -200,11 +175,9 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the certifiedType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CertifiedVals }
-     *     
+     *
+     * @return possible object is
+     *         {@link CertifiedVals }
      */
     public CertifiedVals getCertifiedType() {
         return certifiedType;
@@ -212,11 +185,9 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the certifiedType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CertifiedVals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CertifiedVals }
      */
     public void setCertifiedType(CertifiedVals value) {
         this.certifiedType = value;
@@ -224,7 +195,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Gets the value of the certificateOfMail property.
-     * 
      */
     public boolean isCertificateOfMail() {
         return certificateOfMail;
@@ -232,7 +202,6 @@ public class ScheduledLetterRequest {
 
     /**
      * Sets the value of the certificateOfMail property.
-     * 
      */
     public void setCertificateOfMail(boolean value) {
         this.certificateOfMail = value;

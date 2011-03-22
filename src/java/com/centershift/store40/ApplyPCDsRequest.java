@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ApplyPCDs_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ApplyPCDs_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ApplyPCDs_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "rentalID",
-    "pcdItem"
+        "orgID",
+        "siteID",
+        "rentalID",
+        "pcdItem"
 })
 public class ApplyPCDsRequest {
 
@@ -49,7 +46,6 @@ public class ApplyPCDsRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -57,7 +53,6 @@ public class ApplyPCDsRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -65,7 +60,6 @@ public class ApplyPCDsRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -73,7 +67,6 @@ public class ApplyPCDsRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -81,7 +74,6 @@ public class ApplyPCDsRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -89,7 +81,6 @@ public class ApplyPCDsRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -97,11 +88,9 @@ public class ApplyPCDsRequest {
 
     /**
      * Gets the value of the pcdItem property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link NewPCDItem }
-     *     
+     *
+     * @return possible object is
+     *         {@link NewPCDItem }
      */
     public NewPCDItem getPCDItem() {
         return pcdItem;
@@ -109,11 +98,9 @@ public class ApplyPCDsRequest {
 
     /**
      * Sets the value of the pcdItem property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link NewPCDItem }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link NewPCDItem }
      */
     public void setPCDItem(NewPCDItem value) {
         this.pcdItem = value;

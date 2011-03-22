@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AuctionProceeds complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionProceeds">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionProceeds", propOrder = {
-    "siteID",
-    "auctionProceedsAmount"
+        "siteID",
+        "auctionProceedsAmount"
 })
 public class AuctionProceeds {
 
@@ -41,7 +38,6 @@ public class AuctionProceeds {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class AuctionProceeds {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class AuctionProceeds {
 
     /**
      * Gets the value of the auctionProceedsAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfDecimal }
      */
     public ArrayOfDecimal getAuctionProceedsAmount() {
         return auctionProceedsAmount;
@@ -69,11 +62,9 @@ public class AuctionProceeds {
 
     /**
      * Sets the value of the auctionProceedsAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfDecimal }
      */
     public void setAuctionProceedsAmount(ArrayOfDecimal value) {
         this.auctionProceedsAmount = value;

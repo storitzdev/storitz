@@ -1,4 +1,4 @@
- <div class="wideTextbox">
+<div class="wideTextbox">
   <div><h4>Popular searches:</h4></div>
   <div class="left" style="width:310px;">
     <g:link mapping="metro2" params="[city:'Santa-Monica', state:'CA']">Santa Monica self storage</g:link>

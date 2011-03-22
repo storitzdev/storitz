@@ -1,20 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for RecurringTask complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RecurringTask">
  *   &lt;complexContent>
@@ -37,26 +31,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RecurringTask", propOrder = {
-    "patternType",
-    "dailyOption",
-    "numberOfDays",
-    "numberOfWeeks",
-    "dayOfWeek",
-    "dayOfMonth",
-    "numOfMonths",
-    "monthOfYear",
-    "dayOfMonthOfYear",
-    "rangeOfRecur",
-    "endNumRecur",
-    "endDate"
+        "patternType",
+        "dailyOption",
+        "numberOfDays",
+        "numberOfWeeks",
+        "dayOfWeek",
+        "dayOfMonth",
+        "numOfMonths",
+        "monthOfYear",
+        "dayOfMonthOfYear",
+        "rangeOfRecur",
+        "endNumRecur",
+        "endDate"
 })
 @XmlSeeAlso({
-    RecurTaskData.class
+        RecurTaskData.class
 })
 public class RecurringTask {
 
@@ -88,11 +80,9 @@ public class RecurringTask {
 
     /**
      * Gets the value of the patternType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RecurPattern }
-     *     
+     *
+     * @return possible object is
+     *         {@link RecurPattern }
      */
     public RecurPattern getPatternType() {
         return patternType;
@@ -100,11 +90,9 @@ public class RecurringTask {
 
     /**
      * Sets the value of the patternType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RecurPattern }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RecurPattern }
      */
     public void setPatternType(RecurPattern value) {
         this.patternType = value;
@@ -112,11 +100,9 @@ public class RecurringTask {
 
     /**
      * Gets the value of the dailyOption property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DailyOptions }
-     *     
+     *
+     * @return possible object is
+     *         {@link DailyOptions }
      */
     public DailyOptions getDailyOption() {
         return dailyOption;
@@ -124,11 +110,9 @@ public class RecurringTask {
 
     /**
      * Sets the value of the dailyOption property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DailyOptions }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link DailyOptions }
      */
     public void setDailyOption(DailyOptions value) {
         this.dailyOption = value;
@@ -136,7 +120,6 @@ public class RecurringTask {
 
     /**
      * Gets the value of the numberOfDays property.
-     * 
      */
     public int getNumberOfDays() {
         return numberOfDays;
@@ -144,7 +127,6 @@ public class RecurringTask {
 
     /**
      * Sets the value of the numberOfDays property.
-     * 
      */
     public void setNumberOfDays(int value) {
         this.numberOfDays = value;
@@ -152,7 +134,6 @@ public class RecurringTask {
 
     /**
      * Gets the value of the numberOfWeeks property.
-     * 
      */
     public int getNumberOfWeeks() {
         return numberOfWeeks;
@@ -160,7 +141,6 @@ public class RecurringTask {
 
     /**
      * Sets the value of the numberOfWeeks property.
-     * 
      */
     public void setNumberOfWeeks(int value) {
         this.numberOfWeeks = value;
@@ -168,11 +148,9 @@ public class RecurringTask {
 
     /**
      * Gets the value of the dayOfWeek property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfDaysOfWeek }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfDaysOfWeek }
      */
     public ArrayOfDaysOfWeek getDayOfWeek() {
         return dayOfWeek;
@@ -180,11 +158,9 @@ public class RecurringTask {
 
     /**
      * Sets the value of the dayOfWeek property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfDaysOfWeek }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfDaysOfWeek }
      */
     public void setDayOfWeek(ArrayOfDaysOfWeek value) {
         this.dayOfWeek = value;
@@ -192,7 +168,6 @@ public class RecurringTask {
 
     /**
      * Gets the value of the dayOfMonth property.
-     * 
      */
     public int getDayOfMonth() {
         return dayOfMonth;
@@ -200,7 +175,6 @@ public class RecurringTask {
 
     /**
      * Sets the value of the dayOfMonth property.
-     * 
      */
     public void setDayOfMonth(int value) {
         this.dayOfMonth = value;
@@ -208,7 +182,6 @@ public class RecurringTask {
 
     /**
      * Gets the value of the numOfMonths property.
-     * 
      */
     public int getNumOfMonths() {
         return numOfMonths;
@@ -216,7 +189,6 @@ public class RecurringTask {
 
     /**
      * Sets the value of the numOfMonths property.
-     * 
      */
     public void setNumOfMonths(int value) {
         this.numOfMonths = value;
@@ -224,11 +196,9 @@ public class RecurringTask {
 
     /**
      * Gets the value of the monthOfYear property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MonthsOfYear }
-     *     
+     *
+     * @return possible object is
+     *         {@link MonthsOfYear }
      */
     public MonthsOfYear getMonthOfYear() {
         return monthOfYear;
@@ -236,11 +206,9 @@ public class RecurringTask {
 
     /**
      * Sets the value of the monthOfYear property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MonthsOfYear }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MonthsOfYear }
      */
     public void setMonthOfYear(MonthsOfYear value) {
         this.monthOfYear = value;
@@ -248,7 +216,6 @@ public class RecurringTask {
 
     /**
      * Gets the value of the dayOfMonthOfYear property.
-     * 
      */
     public int getDayOfMonthOfYear() {
         return dayOfMonthOfYear;
@@ -256,7 +223,6 @@ public class RecurringTask {
 
     /**
      * Sets the value of the dayOfMonthOfYear property.
-     * 
      */
     public void setDayOfMonthOfYear(int value) {
         this.dayOfMonthOfYear = value;
@@ -264,11 +230,9 @@ public class RecurringTask {
 
     /**
      * Gets the value of the rangeOfRecur property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RecurRange }
-     *     
+     *
+     * @return possible object is
+     *         {@link RecurRange }
      */
     public RecurRange getRangeOfRecur() {
         return rangeOfRecur;
@@ -276,11 +240,9 @@ public class RecurringTask {
 
     /**
      * Sets the value of the rangeOfRecur property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RecurRange }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RecurRange }
      */
     public void setRangeOfRecur(RecurRange value) {
         this.rangeOfRecur = value;
@@ -288,7 +250,6 @@ public class RecurringTask {
 
     /**
      * Gets the value of the endNumRecur property.
-     * 
      */
     public int getEndNumRecur() {
         return endNumRecur;
@@ -296,7 +257,6 @@ public class RecurringTask {
 
     /**
      * Sets the value of the endNumRecur property.
-     * 
      */
     public void setEndNumRecur(int value) {
         this.endNumRecur = value;
@@ -304,11 +264,9 @@ public class RecurringTask {
 
     /**
      * Gets the value of the endDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEndDate() {
         return endDate;
@@ -316,11 +274,9 @@ public class RecurringTask {
 
     /**
      * Sets the value of the endDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEndDate(XMLGregorianCalendar value) {
         this.endDate = value;

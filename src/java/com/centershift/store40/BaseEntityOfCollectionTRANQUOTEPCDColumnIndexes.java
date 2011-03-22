@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for BaseEntityOfCollectionTRAN_QUOTE_PCDColumnIndexes complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="BaseEntityOfCollectionTRAN_QUOTE_PCDColumnIndexes">
  *   &lt;complexContent>
@@ -24,15 +19,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BaseEntityOfCollectionTRAN_QUOTE_PCDColumnIndexes", propOrder = {
-    "transaction"
+        "transaction"
 })
 @XmlSeeAlso({
-    TRANQUOTEPCD.class
+        TRANQUOTEPCD.class
 })
 public abstract class BaseEntityOfCollectionTRANQUOTEPCDColumnIndexes {
 
@@ -41,11 +34,9 @@ public abstract class BaseEntityOfCollectionTRANQUOTEPCDColumnIndexes {
 
     /**
      * Gets the value of the transaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FrameworkTransaction }
-     *     
+     *
+     * @return possible object is
+     *         {@link FrameworkTransaction }
      */
     public FrameworkTransaction getTransaction() {
         return transaction;
@@ -53,11 +44,9 @@ public abstract class BaseEntityOfCollectionTRANQUOTEPCDColumnIndexes {
 
     /**
      * Sets the value of the transaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FrameworkTransaction }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link FrameworkTransaction }
      */
     public void setTransaction(FrameworkTransaction value) {
         this.transaction = value;

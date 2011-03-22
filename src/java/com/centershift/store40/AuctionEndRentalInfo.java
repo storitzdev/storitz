@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AuctionEndRentalInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionEndRentalInfo">
  *   &lt;complexContent>
@@ -35,23 +34,21 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionEndRentalInfo", propOrder = {
-    "acctID",
-    "rentalID",
-    "status",
-    "soldAmount",
-    "tax",
-    "taxExempt",
-    "taxExemptInfo",
-    "buyerName",
-    "buyerAddress",
-    "buyerPhone",
-    "notes",
-    "paymentData"
+        "acctID",
+        "rentalID",
+        "status",
+        "soldAmount",
+        "tax",
+        "taxExempt",
+        "taxExemptInfo",
+        "buyerName",
+        "buyerAddress",
+        "buyerPhone",
+        "notes",
+        "paymentData"
 })
 public class AuctionEndRentalInfo {
 
@@ -82,7 +79,6 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -90,7 +86,6 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -98,7 +93,6 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -106,7 +100,6 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -114,11 +107,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AuctionObjsStatusValues }
-     *     
+     *
+     * @return possible object is
+     *         {@link AuctionObjsStatusValues }
      */
     public AuctionObjsStatusValues getStatus() {
         return status;
@@ -126,11 +117,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AuctionObjsStatusValues }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AuctionObjsStatusValues }
      */
     public void setStatus(AuctionObjsStatusValues value) {
         this.status = value;
@@ -138,11 +127,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the soldAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSoldAmount() {
         return soldAmount;
@@ -150,11 +137,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the soldAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSoldAmount(BigDecimal value) {
         this.soldAmount = value;
@@ -162,11 +147,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the tax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTax() {
         return tax;
@@ -174,11 +157,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the tax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTax(BigDecimal value) {
         this.tax = value;
@@ -186,7 +167,6 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the taxExempt property.
-     * 
      */
     public boolean isTaxExempt() {
         return taxExempt;
@@ -194,7 +174,6 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the taxExempt property.
-     * 
      */
     public void setTaxExempt(boolean value) {
         this.taxExempt = value;
@@ -202,11 +181,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the taxExemptInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTaxExemptInfo() {
         return taxExemptInfo;
@@ -214,11 +191,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the taxExemptInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTaxExemptInfo(String value) {
         this.taxExemptInfo = value;
@@ -226,11 +201,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the buyerName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBuyerName() {
         return buyerName;
@@ -238,11 +211,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the buyerName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBuyerName(String value) {
         this.buyerName = value;
@@ -250,11 +221,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the buyerAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBuyerAddress() {
         return buyerAddress;
@@ -262,11 +231,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the buyerAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBuyerAddress(String value) {
         this.buyerAddress = value;
@@ -274,11 +241,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the buyerPhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBuyerPhone() {
         return buyerPhone;
@@ -286,11 +251,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the buyerPhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBuyerPhone(String value) {
         this.buyerPhone = value;
@@ -298,11 +261,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNotes() {
         return notes;
@@ -310,11 +271,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNotes(String value) {
         this.notes = value;
@@ -322,11 +281,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Gets the value of the paymentData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentRequest }
      */
     public MakePaymentRequest getPaymentData() {
         return paymentData;
@@ -334,11 +291,9 @@ public class AuctionEndRentalInfo {
 
     /**
      * Sets the value of the paymentData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentRequest }
      */
     public void setPaymentData(MakePaymentRequest value) {
         this.paymentData = value;

@@ -6,6 +6,7 @@ import org.codehaus.groovy.grails.web.json.JSONObject
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
 import com.storitz.*
+import storitz.constants.State 
 
 class MigrationController {
 
@@ -28,26 +29,26 @@ class MigrationController {
       }
       // compile the assets into a file
       def fileList = []
-      for(site in myFeed.sites) {
-        for(img in site.images) {
-          fileList.add("**${img.basename}${img.fileLocation.replace(' ','*')}")
-          fileList.add("**${img.basename}mid-${img.fileLocation.replace(' ','*')}")
-          fileList.add("**${img.basename}thumb-${img.fileLocation.replace(' ','*')}")
+      for (site in myFeed.sites) {
+        for (img in site.images) {
+          fileList.add("**${img.basename}${img.fileLocation.replace(' ', '*')}")
+          fileList.add("**${img.basename}mid-${img.fileLocation.replace(' ', '*')}")
+          fileList.add("**${img.basename}thumb-${img.fileLocation.replace(' ', '*')}")
         }
         if (site.logo) {
-          fileList.add("**${site.logo.basename}logo-${site.logo.fileLocation.replace(' ','*')}")
+          fileList.add("**${site.logo.basename}logo-${site.logo.fileLocation.replace(' ', '*')}")
         }
       }
       // add PDFs
-      for(ra in rentalAgreements) {
-        fileList.add("**${ra.src().replace(' ','*')}")
+      for (ra in rentalAgreements) {
+        fileList.add("**${ra.src().replace(' ', '*')}")
       }
       // build bundle
       def tmpFile = File.createTempFile("migration", ".zip")
       tmpFile.delete()
       def ant = new AntBuilder();
       println "Files for bundle:${tmpFile.canonicalFile} basedir: ${request.getRealPath("/")} - ${fileList.dump()}"
-      ant.zip(destfile:tmpFile.canonicalFile, basedir:request.getRealPath("/"), includes:fileList)
+      ant.zip(destfile: tmpFile.canonicalFile, basedir: request.getRealPath("/"), includes: fileList)
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {
         SiteLink f = myFeed as SiteLink
@@ -85,8 +86,11 @@ class MigrationController {
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = resp.feed.state
+        feed.state = State.getEnumFromId(resp.feed.state)
         feed.zipcode = resp.feed.zipcode
+        feed.transactionBoxLink = resp.feed.transactionBoxLink
+        feed.transactionBoxBody = resp.feed.transactionBoxBody
+
       } else if (resp.feed.feedType == 'CENTERSHIFT') {
         feed = new CenterShift()
         feed.userName = resp.feed.userName
@@ -98,7 +102,7 @@ class MigrationController {
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = resp.feed.state
+        feed.state = State.getEnumFromId(resp.feed.state)
         feed.zipcode = resp.feed.zipcode
       } else if (resp.feed.feedType == 'QUIKSTOR') {
         feed = new QuikStor()
@@ -108,8 +112,10 @@ class MigrationController {
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = resp.feed.state
+        feed.state = State.getEnumFromId(resp.feed.state)
         feed.zipcode = resp.feed.zipcode
+        feed.transactionBoxLink = resp.feed.transactionBoxLink
+        feed.transactionBoxBody = resp.feed.transactionBoxBody
         // TODO - cycle through and build the QuikStorLocations
       }
       CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)
@@ -171,21 +177,21 @@ class MigrationController {
         for (i in s.securityItems) {
           def si = new Bullet()
           bindData(si, i)
-          si.save(flush:true)
+          si.save(flush: true)
           securityItems.add(si)
         }
         def convenienceItems = []
         for (i in s.convenienceItems) {
           def si = new Bullet()
           bindData(si, i)
-          si.save(flush:true)
+          si.save(flush: true)
           convenienceItems.add(si)
         }
         def amenities = []
         for (i in s.amenityItems) {
           def si = new Bullet()
           bindData(si, i)
-          si.save(flush:true)
+          si.save(flush: true)
           amenities.add(si)
         }
         def images = []
@@ -199,7 +205,7 @@ class MigrationController {
         for (i in s.insurances) {
           def si = new Insurance()
           bindData(si, i)
-          si.save(flush:true)
+          si.save(flush: true)
           insurances.add(si)
         }
         def specialOffers = []
@@ -213,7 +219,7 @@ class MigrationController {
           }
           i.restrictions.clear()
           bindData(si, i)
-          si.save(flush:true)
+          si.save(flush: true)
           for (sor in restrictions) {
             si.addToRestrictions(sor)
           }
@@ -246,7 +252,7 @@ class MigrationController {
         bindData(site, s)
         site.rentalAgreement = rentalAgreement
         site.bankAccount = bankAccount
-        site.save(flush:true)
+        site.save(flush: true)
         // adjust times by our timezone
         if (site.startMonday) {
           site.startMonday = DateUtils.addHours(site.startMonday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
@@ -335,13 +341,13 @@ class MigrationController {
         for (image in images) {
           image.site = site
           site.addToImages(image)
-          image.save(flush:true)
+          image.save(flush: true)
         }
         if (logo) {
           logo.site = site
           site.logo = logo
-          logo.save(flush:true)
-          site.save(flush:true)
+          logo.save(flush: true)
+          site.save(flush: true)
         }
         for (so in specialOffers) {
           site.addToSpecialOffers(so)
@@ -358,29 +364,29 @@ class MigrationController {
         for (a in amenities) {
           site.addToAmenityItems(a)
         }
-        site.save(flush:true)
+        site.save(flush: true)
         sites.add(site)
 
       }
       feed.manager = manager
       feed.commissionSchedule = commissionSchedule
-      feed.save(flush:true)
-      for(site in sites) {
+      feed.save(flush: true)
+      for (site in sites) {
         feed.addToSites(site)
         SiteUser.link(site, manager)
       }
-      feed.save(flush:true)
+      feed.save(flush: true)
       if (resp.feed.feedType == 'QUIKSTOR') {
-        for(loc in resp.feed.locations) {
+        for (loc in resp.feed.locations) {
           def qloc = new QuikStorLocation()
           qloc.username = loc.username
           qloc.password = loc.password
           qloc.sitename = loc.sitename
-          qloc.site = feed.sites.find{it.title = loc.site}
-          qloc.save(flush:true)
+          qloc.site = feed.sites.find {it.title = loc.site}
+          qloc.save(flush: true)
           feed.addToLocations(qloc)
         }
-        feed.save(flush:true)
+        feed.save(flush: true)
       }
 
       for (su in resp.siteUsers) {
@@ -397,7 +403,7 @@ class MigrationController {
   private clearNulls(Object obj) {
 
     if (obj instanceof Map) {
-      def map = (Map)obj
+      def map = (Map) obj
       for (r in map.entrySet()) {
         if (r.value == JSONObject.NULL) {
           r.value = null
@@ -406,7 +412,7 @@ class MigrationController {
         }
       }
     } else if (obj instanceof List) {
-      def list = (List)obj
+      def list = (List) obj
       for (l in list) {
         if (l == JSONObject.NULL) {
           l = null

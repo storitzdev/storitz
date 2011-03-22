@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for SiteUnitData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SiteUnitData">
  *   &lt;complexContent>
@@ -45,33 +44,31 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SiteUnitData", propOrder = {
-    "unitnumber",
-    "unitid",
-    "version",
-    "promoid",
-    "promodesc",
-    "promodet",
-    "promoname",
-    "softreservation",
-    "hardreservation",
-    "resamount",
-    "classdesc",
-    "objperioduomval",
-    "minrentrate",
-    "maxrentrate",
-    "quantity",
-    "available",
-    "siteclassid",
-    "depth",
-    "width",
-    "siteid",
-    "featuresval",
-    "currentrate"
+        "unitnumber",
+        "unitid",
+        "version",
+        "promoid",
+        "promodesc",
+        "promodet",
+        "promoname",
+        "softreservation",
+        "hardreservation",
+        "resamount",
+        "classdesc",
+        "objperioduomval",
+        "minrentrate",
+        "maxrentrate",
+        "quantity",
+        "available",
+        "siteclassid",
+        "depth",
+        "width",
+        "siteid",
+        "featuresval",
+        "currentrate"
 })
 public class SiteUnitData {
 
@@ -122,11 +119,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -134,11 +129,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -146,11 +139,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the unitid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getUNITID() {
         return unitid;
@@ -158,11 +149,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the unitid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setUNITID(BigDecimal value) {
         this.unitid = value;
@@ -170,11 +159,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVERSION() {
         return version;
@@ -182,11 +169,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVERSION(BigDecimal value) {
         this.version = value;
@@ -194,11 +179,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the promoid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPROMOID() {
         return promoid;
@@ -206,11 +189,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the promoid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPROMOID(BigDecimal value) {
         this.promoid = value;
@@ -218,11 +199,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the promodesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROMODESC() {
         return promodesc;
@@ -230,11 +209,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the promodesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROMODESC(String value) {
         this.promodesc = value;
@@ -242,11 +219,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the promodet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROMODET() {
         return promodet;
@@ -254,11 +229,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the promodet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROMODET(String value) {
         this.promodet = value;
@@ -266,11 +239,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the promoname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROMONAME() {
         return promoname;
@@ -278,11 +249,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the promoname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROMONAME(String value) {
         this.promoname = value;
@@ -290,11 +259,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the softreservation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSOFTRESERVATION() {
         return softreservation;
@@ -302,11 +269,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the softreservation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSOFTRESERVATION(String value) {
         this.softreservation = value;
@@ -314,11 +279,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the hardreservation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getHARDRESERVATION() {
         return hardreservation;
@@ -326,11 +289,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the hardreservation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setHARDRESERVATION(String value) {
         this.hardreservation = value;
@@ -338,11 +299,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the resamount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRESAMOUNT() {
         return resamount;
@@ -350,11 +309,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the resamount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRESAMOUNT(BigDecimal value) {
         this.resamount = value;
@@ -362,11 +319,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the classdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLASSDESC() {
         return classdesc;
@@ -374,11 +329,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the classdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLASSDESC(String value) {
         this.classdesc = value;
@@ -386,11 +339,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the objperioduomval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOBJPERIODUOMVAL() {
         return objperioduomval;
@@ -398,11 +349,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the objperioduomval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOBJPERIODUOMVAL(String value) {
         this.objperioduomval = value;
@@ -410,11 +359,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the minrentrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMINRENTRATE() {
         return minrentrate;
@@ -422,11 +369,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the minrentrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMINRENTRATE(BigDecimal value) {
         this.minrentrate = value;
@@ -434,11 +379,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the maxrentrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMAXRENTRATE() {
         return maxrentrate;
@@ -446,11 +389,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the maxrentrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMAXRENTRATE(BigDecimal value) {
         this.maxrentrate = value;
@@ -458,11 +399,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the quantity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getQUANTITY() {
         return quantity;
@@ -470,11 +409,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the quantity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setQUANTITY(BigDecimal value) {
         this.quantity = value;
@@ -482,11 +419,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the available property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAVAILABLE() {
         return available;
@@ -494,11 +429,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the available property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAVAILABLE(BigDecimal value) {
         this.available = value;
@@ -506,11 +439,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the siteclassid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITECLASSID() {
         return siteclassid;
@@ -518,11 +449,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the siteclassid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITECLASSID(Long value) {
         this.siteclassid = value;
@@ -530,11 +459,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPTH() {
         return depth;
@@ -542,11 +469,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPTH(BigDecimal value) {
         this.depth = value;
@@ -554,11 +479,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWIDTH() {
         return width;
@@ -566,11 +489,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWIDTH(BigDecimal value) {
         this.width = value;
@@ -578,11 +499,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -590,11 +509,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -602,11 +519,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the featuresval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEATURESVAL() {
         return featuresval;
@@ -614,11 +529,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the featuresval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEATURESVAL(String value) {
         this.featuresval = value;
@@ -626,11 +539,9 @@ public class SiteUnitData {
 
     /**
      * Gets the value of the currentrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCURRENTRATE() {
         return currentrate;
@@ -638,11 +549,9 @@ public class SiteUnitData {
 
     /**
      * Sets the value of the currentrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCURRENTRATE(BigDecimal value) {
         this.currentrate = value;

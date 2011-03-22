@@ -1,18 +1,17 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AvailableInventory complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AvailableInventory">
  *   &lt;complexContent>
@@ -27,15 +26,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AvailableInventory", propOrder = {
-    "itemId",
-    "csItem",
-    "iStock",
-    "dPrice"
+        "itemId",
+        "csItem",
+        "iStock",
+        "dPrice"
 })
 public class AvailableInventory {
 
@@ -47,7 +44,6 @@ public class AvailableInventory {
 
     /**
      * Gets the value of the itemId property.
-     * 
      */
     public int getItemId() {
         return itemId;
@@ -55,7 +51,6 @@ public class AvailableInventory {
 
     /**
      * Sets the value of the itemId property.
-     * 
      */
     public void setItemId(int value) {
         this.itemId = value;
@@ -63,11 +58,9 @@ public class AvailableInventory {
 
     /**
      * Gets the value of the csItem property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsItem() {
         return csItem;
@@ -75,11 +68,9 @@ public class AvailableInventory {
 
     /**
      * Sets the value of the csItem property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsItem(String value) {
         this.csItem = value;
@@ -87,7 +78,6 @@ public class AvailableInventory {
 
     /**
      * Gets the value of the iStock property.
-     * 
      */
     public int getIStock() {
         return iStock;
@@ -95,7 +85,6 @@ public class AvailableInventory {
 
     /**
      * Sets the value of the iStock property.
-     * 
      */
     public void setIStock(int value) {
         this.iStock = value;
@@ -103,11 +92,9 @@ public class AvailableInventory {
 
     /**
      * Gets the value of the dPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDPrice() {
         return dPrice;
@@ -115,11 +102,9 @@ public class AvailableInventory {
 
     /**
      * Sets the value of the dPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDPrice(BigDecimal value) {
         this.dPrice = value;

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sendEmailWithUnitResult"
+        "sendEmailWithUnitResult"
 })
 @XmlRootElement(name = "SendEmailWithUnitResponse")
 public class SendEmailWithUnitResponse {
@@ -39,11 +32,9 @@ public class SendEmailWithUnitResponse {
 
     /**
      * Gets the value of the sendEmailWithUnitResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SendEmailResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link SendEmailResponse }
      */
     public SendEmailResponse getSendEmailWithUnitResult() {
         return sendEmailWithUnitResult;
@@ -51,11 +42,9 @@ public class SendEmailWithUnitResponse {
 
     /**
      * Sets the value of the sendEmailWithUnitResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SendEmailResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SendEmailResponse }
      */
     public void setSendEmailWithUnitResult(SendEmailResponse value) {
         this.sendEmailWithUnitResult = value;

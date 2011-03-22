@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "addInsuranceResult"
+        "addInsuranceResult"
 })
 @XmlRootElement(name = "AddInsuranceResponse")
 public class AddInsuranceResponse {
@@ -39,11 +32,9 @@ public class AddInsuranceResponse {
 
     /**
      * Gets the value of the addInsuranceResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddInsuranceResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddInsuranceResponse2 }
      */
     public AddInsuranceResponse2 getAddInsuranceResult() {
         return addInsuranceResult;
@@ -51,11 +42,9 @@ public class AddInsuranceResponse {
 
     /**
      * Sets the value of the addInsuranceResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddInsuranceResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddInsuranceResponse2 }
      */
     public void setAddInsuranceResult(AddInsuranceResponse2 value) {
         this.addInsuranceResult = value;

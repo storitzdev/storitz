@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for APCreditCardData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APCreditCardData">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APCreditCardData", propOrder = {
-    "cardNumber",
-    "cardHolderName",
-    "exp",
-    "cvv2"
+        "cardNumber",
+        "cardHolderName",
+        "exp",
+        "cvv2"
 })
 public class APCreditCardData {
 
@@ -49,11 +46,9 @@ public class APCreditCardData {
 
     /**
      * Gets the value of the cardNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCardNumber() {
         return cardNumber;
@@ -61,11 +56,9 @@ public class APCreditCardData {
 
     /**
      * Sets the value of the cardNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCardNumber(String value) {
         this.cardNumber = value;
@@ -73,11 +66,9 @@ public class APCreditCardData {
 
     /**
      * Gets the value of the cardHolderName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCardHolderName() {
         return cardHolderName;
@@ -85,11 +76,9 @@ public class APCreditCardData {
 
     /**
      * Sets the value of the cardHolderName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCardHolderName(String value) {
         this.cardHolderName = value;
@@ -97,11 +86,9 @@ public class APCreditCardData {
 
     /**
      * Gets the value of the exp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getExp() {
         return exp;
@@ -109,11 +96,9 @@ public class APCreditCardData {
 
     /**
      * Sets the value of the exp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setExp(String value) {
         this.exp = value;
@@ -121,7 +106,6 @@ public class APCreditCardData {
 
     /**
      * Gets the value of the cvv2 property.
-     * 
      */
     public int getCVV2() {
         return cvv2;
@@ -129,7 +113,6 @@ public class APCreditCardData {
 
     /**
      * Sets the value of the cvv2 property.
-     * 
      */
     public void setCVV2(int value) {
         this.cvv2 = value;

@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for RentRateReqData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RentRateReqData">
  *   &lt;complexContent>
@@ -35,21 +30,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RentRateReqData", propOrder = {
-    "orgID",
-    "siteID",
-    "unitID",
-    "unitVersion",
-    "newRate",
-    "effectiveDate",
-    "sendLetter",
-    "letterDate",
-    "acctId",
-    "rentalId"
+        "orgID",
+        "siteID",
+        "unitID",
+        "unitVersion",
+        "newRate",
+        "effectiveDate",
+        "sendLetter",
+        "letterDate",
+        "acctId",
+        "rentalId"
 })
 public class RentRateReqData {
 
@@ -78,7 +71,6 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -86,7 +78,6 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -94,7 +85,6 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -102,7 +92,6 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -110,7 +99,6 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -118,7 +106,6 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -126,11 +113,9 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the unitVersion property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getUnitVersion() {
         return unitVersion;
@@ -138,11 +123,9 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the unitVersion property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setUnitVersion(BigDecimal value) {
         this.unitVersion = value;
@@ -150,11 +133,9 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the newRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getNewRate() {
         return newRate;
@@ -162,11 +143,9 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the newRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setNewRate(BigDecimal value) {
         this.newRate = value;
@@ -174,11 +153,9 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the effectiveDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEffectiveDate() {
         return effectiveDate;
@@ -186,11 +163,9 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the effectiveDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEffectiveDate(XMLGregorianCalendar value) {
         this.effectiveDate = value;
@@ -198,7 +173,6 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the sendLetter property.
-     * 
      */
     public boolean isSendLetter() {
         return sendLetter;
@@ -206,7 +180,6 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the sendLetter property.
-     * 
      */
     public void setSendLetter(boolean value) {
         this.sendLetter = value;
@@ -214,11 +187,9 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the letterDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLetterDate() {
         return letterDate;
@@ -226,11 +197,9 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the letterDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLetterDate(XMLGregorianCalendar value) {
         this.letterDate = value;
@@ -238,7 +207,6 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the acctId property.
-     * 
      */
     public long getAcctId() {
         return acctId;
@@ -246,7 +214,6 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the acctId property.
-     * 
      */
     public void setAcctId(long value) {
         this.acctId = value;
@@ -254,7 +221,6 @@ public class RentRateReqData {
 
     /**
      * Gets the value of the rentalId property.
-     * 
      */
     public long getRentalId() {
         return rentalId;
@@ -262,7 +228,6 @@ public class RentRateReqData {
 
     /**
      * Sets the value of the rentalId property.
-     * 
      */
     public void setRentalId(long value) {
         this.rentalId = value;

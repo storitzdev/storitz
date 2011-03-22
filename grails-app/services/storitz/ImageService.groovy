@@ -1,20 +1,19 @@
 package storitz
 
-import com.storitz.SiteImage
-import org.grails.plugins.imagetools.ImageTool
-import com.storitz.StorageSite
 import com.storitz.Feed
-import org.springframework.web.multipart.commons.CommonsMultipartFile
+import com.storitz.SiteImage
+import com.storitz.StorageSite
 import org.apache.commons.io.FileUtils
-import org.apache.sanselan.formats.jpeg.iptc.JpegIptcRewriter
-import org.apache.sanselan.formats.jpeg.iptc.PhotoshopApp13Data
-import org.apache.sanselan.formats.jpeg.iptc.IPTCConstants
-import org.apache.sanselan.formats.jpeg.iptc.IPTCRecord
+import org.apache.sanselan.SanselanConstants
 import org.apache.sanselan.common.byteSources.ByteSource
 import org.apache.sanselan.common.byteSources.ByteSourceFile
-import org.apache.sanselan.SanselanConstants
-import org.apache.sanselan.formats.jpeg.JpegPhotoshopMetadata
 import org.apache.sanselan.formats.jpeg.JpegImageParser
+import org.apache.sanselan.formats.jpeg.JpegPhotoshopMetadata
+import org.apache.sanselan.formats.jpeg.iptc.IPTCConstants
+import org.apache.sanselan.formats.jpeg.iptc.IPTCRecord
+import org.apache.sanselan.formats.jpeg.iptc.JpegIptcRewriter
+import org.apache.sanselan.formats.jpeg.iptc.PhotoshopApp13Data
+import org.grails.plugins.imagetools.ImageTool
 
 class ImageService {
 
@@ -50,18 +49,18 @@ class ImageService {
     dstFile.mkdirs()
     imageTool.writeResult(filePath, "JPEG")
     imageTool.restoreOriginal()
-    imageTool.thumbnailSpecial (320, 240, 2, 1)
+    imageTool.thumbnailSpecial(320, 240, 2, 1)
     imageTool.writeResult(filePathMid, "JPEG")
     imageTool.restoreOriginal()
-    imageTool.thumbnailSpecial (60, 40, 2, 2)
+    imageTool.thumbnailSpecial(60, 40, 2, 2)
     imageTool.writeResult(filePathThumb, "JPEG")
     file.delete()
   }
 
   def deleteImage(StorageSite site, SiteImage siteImage) {
-    def deleteList = [ fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid-' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb-' + siteImage.fileLocation, site.id) ]
+    def deleteList = [fileUploadService.getFilePath('/images/site', siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'mid-' + siteImage.fileLocation, site.id), fileUploadService.getFilePath('/images/site', 'thumb-' + siteImage.fileLocation, site.id)]
 
-    deleteList.each{
+    deleteList.each {
       def file = new File(it)
       println "Delete image ${it}"
       file.delete()
@@ -113,7 +112,7 @@ class ImageService {
         site.logo.imgOrder = 0;
         def targetDir = new File(site.logo.basename)
         targetDir.mkdirs()
-        println "Copying logo for site ${site.title} - ${srcFile} to ${fileUploadService.getAbsolutePath(site.logo.basename,site.logo.fileLocation)}"
+        println "Copying logo for site ${site.title} - ${srcFile} to ${fileUploadService.getAbsolutePath(site.logo.basename, site.logo.fileLocation)}"
         org.apache.commons.io.FileUtils.copyFile(srcFile, new File(fileUploadService.getAbsolutePath(site.logo.basename, site.logo.fileLocation)))
       }
       if (srcFile) {
@@ -134,7 +133,7 @@ class ImageService {
       JpegPhotoshopMetadata metadata
       try {
         metadata = new JpegImageParser().getPhotoshopMetadata(byteSource, params);
-      } catch(Exception E) {
+      } catch (Exception E) {
         println "This file ${imageFile.canonicalPath} is not a JPEG"
         return
       }
@@ -145,7 +144,7 @@ class ImageService {
       newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_WRITER_EDITOR, "Storitz"))
       newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_BYLINE, "Storitz"))
       newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_CITY, "${site.city}, ${site.state.display}" as String))
-      switch(imgType) {
+      switch (imgType) {
         case 'LOGO':
           newRecords.add(new IPTCRecord(IPTCConstants.IPTC_TYPE_OBJECT_NAME, "Logo for ${site.title}" as String))
           break
@@ -168,20 +167,20 @@ class ImageService {
       if (metadata) {
         boolean keepOldIptcNonTextValues = true;
         if (keepOldIptcNonTextValues) {
-            newBlocks.addAll(metadata.photoshopApp13Data.getNonIptcBlocks());
+          newBlocks.addAll(metadata.photoshopApp13Data.getNonIptcBlocks());
         }
         boolean keepOldIptcTextValues = true;
         if (keepOldIptcTextValues) {
-            List oldRecords = metadata.photoshopApp13Data.getRecords();
+          List oldRecords = metadata.photoshopApp13Data.getRecords();
 
-            for (int j = 0; j < oldRecords.size(); j++) {
-                IPTCRecord record = (IPTCRecord) oldRecords.get(j);
-                if (record.iptcType.type != IPTCConstants.IPTC_TYPE_CITY.type
-                  && record.iptcType.type != IPTCConstants.IPTC_TYPE_CAPTION_ABSTRACT.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_WRITER_EDITOR.type
-                  && record.iptcType.type != IPTCConstants.IPTC_TYPE_BYLINE.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_OBJECT_NAME.type
-                  && record.iptcType.type != IPTCConstants.IPTC_TYPE_KEYWORDS.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_COPYRIGHT_NOTICE.type)
-                    newRecords.add(record);
-            }
+          for (int j = 0; j < oldRecords.size(); j++) {
+            IPTCRecord record = (IPTCRecord) oldRecords.get(j);
+            if (record.iptcType.type != IPTCConstants.IPTC_TYPE_CITY.type
+                    && record.iptcType.type != IPTCConstants.IPTC_TYPE_CAPTION_ABSTRACT.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_WRITER_EDITOR.type
+                    && record.iptcType.type != IPTCConstants.IPTC_TYPE_BYLINE.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_OBJECT_NAME.type
+                    && record.iptcType.type != IPTCConstants.IPTC_TYPE_KEYWORDS.type && record.iptcType.type != IPTCConstants.IPTC_TYPE_COPYRIGHT_NOTICE.type)
+              newRecords.add(record);
+          }
         }
       }
       PhotoshopApp13Data newData = new PhotoshopApp13Data(newRecords, newBlocks);
@@ -192,7 +191,7 @@ class ImageService {
         os = new FileOutputStream(updated);
         os = new BufferedOutputStream(os);
         new JpegIptcRewriter().writeIPTC(byteSource, os, newData);
-      } finally	{
+      } finally {
         os.close();
         os = null;
       }

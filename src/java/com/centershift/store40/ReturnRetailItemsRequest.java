@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ReturnRetailItems_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ReturnRetailItems_Request">
  *   &lt;complexContent>
@@ -28,17 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReturnRetailItems_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "transactionID",
-    "returnRetailData",
-    "refundType",
-    "contactData"
+        "orgID",
+        "siteID",
+        "transactionID",
+        "returnRetailData",
+        "refundType",
+        "contactData"
 })
 public class ReturnRetailItemsRequest {
 
@@ -57,7 +54,6 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -65,7 +61,6 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -73,7 +68,6 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -81,7 +75,6 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -89,11 +82,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Gets the value of the transactionID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTransactionID() {
         return transactionID;
@@ -101,11 +92,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Sets the value of the transactionID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTransactionID(Long value) {
         this.transactionID = value;
@@ -113,11 +102,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Gets the value of the returnRetailData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfReturnRetailItem }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfReturnRetailItem }
      */
     public ArrayOfReturnRetailItem getReturnRetailData() {
         return returnRetailData;
@@ -125,11 +112,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Sets the value of the returnRetailData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfReturnRetailItem }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfReturnRetailItem }
      */
     public void setReturnRetailData(ArrayOfReturnRetailItem value) {
         this.returnRetailData = value;
@@ -137,11 +122,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Gets the value of the refundType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefundTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link RefundTypes }
      */
     public RefundTypes getRefundType() {
         return refundType;
@@ -149,11 +132,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Sets the value of the refundType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefundTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RefundTypes }
      */
     public void setRefundType(RefundTypes value) {
         this.refundType = value;
@@ -161,11 +142,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Gets the value of the contactData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ContactInfo }
      */
     public ContactInfo getContactData() {
         return contactData;
@@ -173,11 +152,9 @@ public class ReturnRetailItemsRequest {
 
     /**
      * Sets the value of the contactData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ContactInfo }
      */
     public void setContactData(ContactInfo value) {
         this.contactData = value;

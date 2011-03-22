@@ -1,19 +1,14 @@
-
 package org.tempuri;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for AvailableUnitTypes_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AvailableUnitTypes_ST">
  *   &lt;complexContent>
@@ -29,16 +24,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AvailableUnitTypes_ST", propOrder = {
-    "iTypeId",
-    "csTypeDescription",
-    "dPrice",
-    "availability",
-    "csLastUnit"
+        "iTypeId",
+        "csTypeDescription",
+        "dPrice",
+        "availability",
+        "csLastUnit"
 })
 public class AvailableUnitTypesST {
 
@@ -54,7 +47,6 @@ public class AvailableUnitTypesST {
 
     /**
      * Gets the value of the iTypeId property.
-     * 
      */
     public long getITypeId() {
         return iTypeId;
@@ -62,7 +54,6 @@ public class AvailableUnitTypesST {
 
     /**
      * Sets the value of the iTypeId property.
-     * 
      */
     public void setITypeId(long value) {
         this.iTypeId = value;
@@ -70,11 +61,9 @@ public class AvailableUnitTypesST {
 
     /**
      * Gets the value of the csTypeDescription property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsTypeDescription() {
         return csTypeDescription;
@@ -82,11 +71,9 @@ public class AvailableUnitTypesST {
 
     /**
      * Sets the value of the csTypeDescription property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsTypeDescription(String value) {
         this.csTypeDescription = value;
@@ -94,11 +81,9 @@ public class AvailableUnitTypesST {
 
     /**
      * Gets the value of the dPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDPrice() {
         return dPrice;
@@ -106,11 +91,9 @@ public class AvailableUnitTypesST {
 
     /**
      * Sets the value of the dPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDPrice(BigDecimal value) {
         this.dPrice = value;
@@ -118,7 +101,6 @@ public class AvailableUnitTypesST {
 
     /**
      * Gets the value of the availability property.
-     * 
      */
     public long getAvailability() {
         return availability;
@@ -126,7 +108,6 @@ public class AvailableUnitTypesST {
 
     /**
      * Sets the value of the availability property.
-     * 
      */
     public void setAvailability(long value) {
         this.availability = value;
@@ -134,11 +115,9 @@ public class AvailableUnitTypesST {
 
     /**
      * Gets the value of the csLastUnit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsLastUnit() {
         return csLastUnit;
@@ -146,11 +125,9 @@ public class AvailableUnitTypesST {
 
     /**
      * Sets the value of the csLastUnit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsLastUnit(String value) {
         this.csLastUnit = value;

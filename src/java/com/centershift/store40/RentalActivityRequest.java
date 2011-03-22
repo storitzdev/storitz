@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for RentalActivity_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RentalActivity_Request">
  *   &lt;complexContent>
@@ -28,15 +23,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RentalActivity_Request", propOrder = {
-    "orgID",
-    "siteIDs",
-    "startDate",
-    "endDate"
+        "orgID",
+        "siteIDs",
+        "startDate",
+        "endDate"
 })
 public class RentalActivityRequest {
 
@@ -53,7 +46,6 @@ public class RentalActivityRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -61,7 +53,6 @@ public class RentalActivityRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -69,11 +60,9 @@ public class RentalActivityRequest {
 
     /**
      * Gets the value of the siteIDs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfLong }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfLong }
      */
     public ArrayOfLong getSiteIDs() {
         return siteIDs;
@@ -81,11 +70,9 @@ public class RentalActivityRequest {
 
     /**
      * Sets the value of the siteIDs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfLong }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfLong }
      */
     public void setSiteIDs(ArrayOfLong value) {
         this.siteIDs = value;
@@ -93,11 +80,9 @@ public class RentalActivityRequest {
 
     /**
      * Gets the value of the startDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getStartDate() {
         return startDate;
@@ -105,11 +90,9 @@ public class RentalActivityRequest {
 
     /**
      * Sets the value of the startDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setStartDate(XMLGregorianCalendar value) {
         this.startDate = value;
@@ -117,11 +100,9 @@ public class RentalActivityRequest {
 
     /**
      * Gets the value of the endDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEndDate() {
         return endDate;
@@ -129,11 +110,9 @@ public class RentalActivityRequest {
 
     /**
      * Sets the value of the endDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEndDate(XMLGregorianCalendar value) {
         this.endDate = value;

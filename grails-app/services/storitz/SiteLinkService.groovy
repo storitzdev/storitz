@@ -2,7 +2,6 @@ package storitz
 
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
-import java.math.RoundingMode
 import com.storitz.*
 import static groovyx.net.http.ContentType.XML
 import storitz.constants.*
@@ -185,7 +184,7 @@ class SiteLinkService extends BaseProviderService {
       insuranceId = ins.insuranceId
     }
 
-    def siteLink = (SiteLink)rentalTransaction.site.feed
+    def siteLink = (SiteLink) rentalTransaction.site.feed
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
@@ -213,7 +212,7 @@ class SiteLinkService extends BaseProviderService {
 
   def newTenant(RentalTransaction rentalTransaction) {
 
-    def siteLink = (SiteLink)rentalTransaction.site.feed
+    def siteLink = (SiteLink) rentalTransaction.site.feed
 
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
@@ -260,21 +259,21 @@ class SiteLinkService extends BaseProviderService {
          <!--Optional:-->
          <cal:sMIAlt></cal:sMIAlt>
          <!--Optional:-->
-         <cal:sLNameAlt>""" + (rentalTransaction.contactSecondary?.lastName ? rentalTransaction.contactSecondary.lastName : '' )+ """</cal:sLNameAlt>
+         <cal:sLNameAlt>""" + (rentalTransaction.contactSecondary?.lastName ? rentalTransaction.contactSecondary.lastName : '') + """</cal:sLNameAlt>
          <!--Optional:-->
-         <cal:sAddr1Alt>""" + (rentalTransaction.contactSecondary?.address1 ? rentalTransaction.contactSecondary.address1 : '')+ """</cal:sAddr1Alt>
+         <cal:sAddr1Alt>""" + (rentalTransaction.contactSecondary?.address1 ? rentalTransaction.contactSecondary.address1 : '') + """</cal:sAddr1Alt>
          <!--Optional:-->
-         <cal:sAddr2Alt>""" + (rentalTransaction.contactSecondary?.address2 ? rentalTransaction.contactSecondary.address2 : '' )+ """</cal:sAddr2Alt>
+         <cal:sAddr2Alt>""" + (rentalTransaction.contactSecondary?.address2 ? rentalTransaction.contactSecondary.address2 : '') + """</cal:sAddr2Alt>
          <!--Optional:-->
-         <cal:sCityAlt>""" + (rentalTransaction.contactSecondary?.city ? rentalTransaction.contactSecondary.city : '' ) + """</cal:sCityAlt>
+         <cal:sCityAlt>""" + (rentalTransaction.contactSecondary?.city ? rentalTransaction.contactSecondary.city : '') + """</cal:sCityAlt>
          <!--Optional:-->
-         <cal:sRegionAlt>""" + (rentalTransaction.contactSecondary?.state?.display ? rentalTransaction.contactSecondary?.state.display : '' ) +  """</cal:sRegionAlt>
+         <cal:sRegionAlt>""" + (rentalTransaction.contactSecondary?.state?.display ? rentalTransaction.contactSecondary?.state.display : '') + """</cal:sRegionAlt>
          <!--Optional:-->
-         <cal:sPostalCodeAlt>""" + (rentalTransaction.contactSecondary?.zipcode ? rentalTransaction.contactSecondary.zipcode : '' )+ """</cal:sPostalCodeAlt>
+         <cal:sPostalCodeAlt>""" + (rentalTransaction.contactSecondary?.zipcode ? rentalTransaction.contactSecondary.zipcode : '') + """</cal:sPostalCodeAlt>
          <!--Optional:-->
-         <cal:sCountryAlt>""" + (rentalTransaction.contactSecondary?.country?.display ? rentalTransaction.contactSecondary.country.display  : '' ) +  """</cal:sCountryAlt>
+         <cal:sCountryAlt>""" + (rentalTransaction.contactSecondary?.country?.display ? rentalTransaction.contactSecondary.country.display : '') + """</cal:sCountryAlt>
          <!--Optional:-->
-         <cal:sPhoneAlt>""" + (rentalTransaction.contactSecondary?.phone ? rentalTransaction.contactSecondary.phone : '' ) + """</cal:sPhoneAlt>
+         <cal:sPhoneAlt>""" + (rentalTransaction.contactSecondary?.phone ? rentalTransaction.contactSecondary.phone : '') + """</cal:sPhoneAlt>
          <!--Optional:-->
          <cal:sMrMrsBus></cal:sMrMrsBus>
          <!--Optional:-->
@@ -339,7 +338,7 @@ class SiteLinkService extends BaseProviderService {
       insuranceId = ins.insuranceId
     }
 
-    def siteLink = (SiteLink)rentalTransaction.site.feed
+    def siteLink = (SiteLink) rentalTransaction.site.feed
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
    <soapenv:Header/>
    <soapenv:Body>
@@ -354,10 +353,10 @@ class SiteLinkService extends BaseProviderService {
          <cal:dStartDate>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dStartDate>
          <cal:dEndDate>""" + rentalTransaction.paidThruDate.format("yyyy-MM-dd") + """</cal:dEndDate>
          <cal:dcPaymentAmount>""" + rentalTransaction.feedMoveInCost + """</cal:dcPaymentAmount>
-         <cal:iCreditCardType>""" + rentalTransaction.cardType.siteLinkValue +  """</cal:iCreditCardType>
+         <cal:iCreditCardType>""" + rentalTransaction.cardType.siteLinkValue + """</cal:iCreditCardType>
          <cal:sCreditCardNumber>""" + rentalTransaction.ccNum + """</cal:sCreditCardNumber>
          <cal:sCreditCardCVV>""" + (rentalTransaction.cvv2 ? rentalTransaction.cvv2 : '000') + """</cal:sCreditCardCVV>
-         <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd")+ """</cal:dExpirationDate>
+         <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd") + """</cal:dExpirationDate>
          <cal:sBillingName>""" + rentalTransaction.billingAddress.fullName() + """</cal:sBillingName>
          <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1}${rentalTransaction.billingAddress.address2 ? ' ' + rentalTransaction.billingAddress.address2 : ''}" + """</cal:sBillingAddress>
          <cal:sBillingZipCode>""" + rentalTransaction.billingAddress.zipcode + """</cal:sBillingZipCode>
@@ -463,7 +462,7 @@ class SiteLinkService extends BaseProviderService {
          <cal:sLocationCode>""" + locationCode + """</cal:sLocationCode>
          <cal:sCorpUserName>""" + userName + """</cal:sCorpUserName>
          <cal:sCorpPassword>""" + password + """</cal:sCorpPassword>
-         <cal:sSubject>""" + subject  + """</cal:sSubject>
+         <cal:sSubject>""" + subject + """</cal:sSubject>
          <cal:sBody>""" + body + """</cal:sBody>
       </cal:BulletinBoardInsert>
    </soapenv:Body>
@@ -539,7 +538,7 @@ class SiteLinkService extends BaseProviderService {
       def newSite = false
       if (site) {
         stats.updateCount++
-        site.save(flush:true)
+        site.save(flush: true)
       } else {
         site = new StorageSite()
         stats.createCount++
@@ -567,7 +566,7 @@ class SiteLinkService extends BaseProviderService {
     )
 
 
-    for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
+    for (tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
       StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (site) {
         def email = tab.sEmailAddress.text().toLowerCase()
@@ -588,7 +587,7 @@ class SiteLinkService extends BaseProviderService {
     )
 
 
-    for(tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
+    for (tab in records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table') {
       StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (site) {
         getTaxes(siteLink, site)
@@ -608,20 +607,20 @@ class SiteLinkService extends BaseProviderService {
     def user = User.findByEmail(email)
 
     if (!email || email.size() == 0) return
-    
+
     if (!realName || realName.size() == 0) realName = email
 
     if (!user) {
       user = new User(
-        username:email,
-        password: (Math.random() * System.currentTimeMillis()) as String,
-        description: "Site Manager for ${site.title}",
-        email: email,
-        userRealName: realName,
-        accountExpired: false,
-        accountLocked: false,
-        passwordExpired: false,
-        enabled: false
+              username: email,
+              password: (Math.random() * System.currentTimeMillis()) as String,
+              description: "Site Manager for ${site.title}",
+              email: email,
+              userRealName: realName,
+              accountExpired: false,
+              accountLocked: false,
+              passwordExpired: false,
+              enabled: false
       )
       user.manager = manager
       user.save(flush: true)
@@ -631,7 +630,7 @@ class SiteLinkService extends BaseProviderService {
       def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
       UserNotificationType.create(user, notificationType, true)
     }
-    if (!UserRole.userHasRole(user,'ROLE_USER')) {
+    if (!UserRole.userHasRole(user, 'ROLE_USER')) {
       UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
     }
   }
@@ -669,7 +668,7 @@ class SiteLinkService extends BaseProviderService {
     site.transactionType = TransactionType.RENTAL
     site.minInventory = 0
 
-    site.openMonday =  site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
+    site.openMonday = site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = !(tab.bClosedWeekdays.text().toLowerCase() == 'true')
     site.openSaturday = !(tab.bClosedSaturday.text().toLowerCase() == 'true')
     site.openSunday = !(tab.bClosedSunday.text().toLowerCase() == 'true')
 
@@ -731,7 +730,7 @@ class SiteLinkService extends BaseProviderService {
     if (site.units?.size() > 0) {
       def fees = adminFees(siteLink, site.units.asList().get(0).unitNumber, site)
       site.adminFee = fees["admin"] ? fees["admin"] : 0
-      site.deposit = fees["deposit"] ? fees["deposit"] : 0 
+      site.deposit = fees["deposit"] ? fees["deposit"] : 0
     }
     getPromos(siteLink, site, writer)
     addProration(siteLink, site, writer)
@@ -740,7 +739,7 @@ class SiteLinkService extends BaseProviderService {
   }
 
   def updateSite(site, stats, writer) {
-    def siteLink = (SiteLink)site.feed
+    def siteLink = (SiteLink) site.feed
     def ret = getSiteInfo(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -792,13 +791,13 @@ class SiteLinkService extends BaseProviderService {
       site.prorateSecondMonth = prorate.b2ndMonthProrate.text().toLowerCase() == 'true'
       site.prorateStart = prorate.iDayStrtProrating.text() as Integer
       site.prorateCutoff = prorate.iDayStrtProratePlusNext.text() as Integer
-      site.save(flush:true)
+      site.save(flush: true)
       writer.println "Added proration 2nd Month = ${site.prorateSecondMonth}, start = ${site.prorateStart}, cutoff = ${site.prorateCutoff}"
     }
   }
 
   def updateUnits(site, stats, writer) {
-    def siteLink = (SiteLink)site.feed
+    def siteLink = (SiteLink) site.feed
     unitsAvailable(siteLink, site, stats, false, writer)
     site.save(flush: true)
   }
@@ -844,17 +843,17 @@ class SiteLinkService extends BaseProviderService {
       def typeName = unit.sTypeName.text()
 
       if (rented) {
-       unitID = unit.UnitID.text()
-       writer.println "Rented unit ${unitID} checking for deletion"
-       def deletedUnit = site.units.find{ it.unitNumber == unitID }
-       if (deletedUnit) {
-         site.removeFromUnits(deletedUnit)
-         stats.removedCount++
-       }
+        unitID = unit.UnitID.text()
+        writer.println "Rented unit ${unitID} checking for deletion"
+        def deletedUnit = site.units.find { it.unitNumber == unitID }
+        if (deletedUnit) {
+          site.removeFromUnits(deletedUnit)
+          stats.removedCount++
+        }
 
       } else {
         unitID = unit.UnitID.text()
-        StorageUnit existingUnit = site.units.find{ it.unitNumber == unitID }
+        StorageUnit existingUnit = site.units.find { it.unitNumber == unitID }
 
         if (!existingUnit) {
 
@@ -919,7 +918,7 @@ class SiteLinkService extends BaseProviderService {
           siteUnit.isAlarm = unit.bAlarm.text().toLowerCase() == 'true'
           siteUnit.isIrregular = false
 
-          if ((width - (int)width == 0) && (length - (int)length == 0)) {
+          if ((width - (int) width == 0) && (length - (int) length == 0)) {
             siteUnit.displaySize = (width as Integer) + " X " + (length as Integer)
           } else {
             siteUnit.displaySize = width + " X " + length
@@ -936,7 +935,7 @@ class SiteLinkService extends BaseProviderService {
 
             site.addToUnits(siteUnit)
           } else {
-            if (siteUnit.price <= 0 ) {
+            if (siteUnit.price <= 0) {
               writer.println "Skipping unit due to price=" + siteUnit.price
             } else {
               writer.println "Skipping unit due to size: width=" + width + " length=" + length
@@ -944,7 +943,7 @@ class SiteLinkService extends BaseProviderService {
           }
         } else {
           // update pricing
-          def price =  unit.dcStdRate.text() as BigDecimal
+          def price = unit.dcStdRate.text() as BigDecimal
           def pushRate
           if (unit.dcPushRate.text()) {
             pushRate = unit.dcPushRate.text() as BigDecimal
@@ -960,7 +959,7 @@ class SiteLinkService extends BaseProviderService {
               writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
             } else {
               existingUnit.price = newPrice
-              existingUnit.pushRate = newPushRate 
+              existingUnit.pushRate = newPushRate
               existingUnit.save()
             }
           }
@@ -984,7 +983,7 @@ class SiteLinkService extends BaseProviderService {
   }
 
   def loadInsurance(Feed feed, StorageSite site) {
-    SiteLink siteLink = (SiteLink)feed
+    SiteLink siteLink = (SiteLink) feed
     def ret = getInsurance(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -995,11 +994,11 @@ class SiteLinkService extends BaseProviderService {
     )
     def count = 0;
     def siteInsurances = [:]
-    site.insurances.each{ siteInsurances[it.insuranceId as Integer] = false }
+    site.insurances.each { siteInsurances[it.insuranceId as Integer] = false }
     for (ins in records.'soap:Body'.'*:InsuranceCoverageRetrieveResponse'.'*:InsuranceCoverageRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
       def insuranceId = ins.InsurCoverageID.text() as Integer
       siteInsurances[insuranceId] = true
-      def insurance = site.insurances.find{it.insuranceId == insuranceId}
+      def insurance = site.insurances.find {it.insuranceId == insuranceId}
       def newInsurance = false
       if (!insurance) {
         newInsurance = true
@@ -1019,9 +1018,9 @@ class SiteLinkService extends BaseProviderService {
         site.addToInsurances(insurance)
       }
     }
-    for(entry in siteInsurances.entrySet()) {
+    for (entry in siteInsurances.entrySet()) {
       if (!entry.value) {
-        def ins = site.insurances.find{(it.insuranceId as Integer) == entry.key}
+        def ins = site.insurances.find {(it.insuranceId as Integer) == entry.key}
         println "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
         site.removeFromInsurances(ins)
       }
@@ -1041,7 +1040,7 @@ class SiteLinkService extends BaseProviderService {
     def adminFee = 0 as BigDecimal
     def deposit = 0 as BigDecimal
     for (fee in records.'soap:Body'.'*:MoveInCostRetrieveResponse'.'*:MoveInCostRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
-      def chargeDescription =  fee.ChargeDescription.text().toLowerCase()
+      def chargeDescription = fee.ChargeDescription.text().toLowerCase()
       if (chargeDescription.contains('administrative fee')) {
         adminFee = fee.dcTenantRate.text() as BigDecimal
       }
@@ -1094,9 +1093,9 @@ class SiteLinkService extends BaseProviderService {
 
         def concessionId = promo.ConcessionID.text() as Integer
         concessionIds.add(concessionId)
-        SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == concessionId }
+        SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         boolean newOffer = false
-        if (!specialOffer)  {
+        if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
           specialOffer.active = false;
@@ -1106,7 +1105,7 @@ class SiteLinkService extends BaseProviderService {
           newOffer = true
         } else {
           specialOffer.restrictions.clear()
-          specialOffer.save(flush:true)
+          specialOffer.save(flush: true)
         }
         specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
         specialOffer.promoName = promoName
@@ -1135,14 +1134,14 @@ class SiteLinkService extends BaseProviderService {
         }
         // check restrictions
         if (promo.dcMaxOccPct && promo.dcMaxOccPct.text().isNumber()) {
-          BigDecimal maxRange =  (promo.dcMaxOccPct.text() as BigDecimal)
+          BigDecimal maxRange = (promo.dcMaxOccPct.text() as BigDecimal)
           if (maxRange > 0) {
             SpecialOfferRestriction restriction = new SpecialOfferRestriction()
             restriction.restrictive = false
             restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
             restriction.minRange = 0
             restriction.maxRange = maxRange
-            restriction.save(flush:true)
+            restriction.save(flush: true)
             specialOffer.addToRestrictions(restriction)
           }
         }
@@ -1154,7 +1153,7 @@ class SiteLinkService extends BaseProviderService {
             restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
             restriction.minRange = minRange
             restriction.maxRange = 1000
-            restriction.save(flush:true)
+            restriction.save(flush: true)
             specialOffer.addToRestrictions(restriction)
           }
         }
@@ -1171,25 +1170,25 @@ class SiteLinkService extends BaseProviderService {
       site.removeFromSpecialOffers(promo)
     }
     for (unitRestriction in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionUnitTypes') {
-      SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == (unitRestriction.ConcessionID.text() as Integer)}
+      SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == (unitRestriction.ConcessionID.text() as Integer)}
       if (specialOffer) {
         // add unit type
         def restriction = new SpecialOfferRestriction()
         restriction.restrictive = false
         restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
         restriction.restrictionInfo = "${unitRestriction.UnitTypeID.text()}:${unitRestriction.dcWidth.text()}X${unitRestriction.dcLength.text()}"
-        restriction.save(flush:true)
+        restriction.save(flush: true)
         specialOffer.addToRestrictions(restriction)
         // add size type
         restriction = new SpecialOfferRestriction()
         restriction.restrictive = false
         restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
         restriction.restrictionInfo = unitRestriction.dcWidth.text() + "X" + unitRestriction.dcLength.text()
-        restriction.save(flush:true)
+        restriction.save(flush: true)
         specialOffer.addToRestrictions(restriction)
-        specialOffer.save(flush:true)
+        specialOffer.save(flush: true)
       }
-    }    
+    }
   }
 
   def getTaxes(siteLink, site) {
@@ -1202,7 +1201,7 @@ class SiteLinkService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-    for(rateSet in records.'soap:Body'.'*:RentTaxRatesRetrieveResponse'.'*:RentTaxRatesRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
+    for (rateSet in records.'soap:Body'.'*:RentTaxRatesRetrieveResponse'.'*:RentTaxRatesRetrieveResult'.'*:diffgram'.NewDataSet.'*:Table') {
       site.taxRateRental = rateSet.dcTax1Rate.text() as BigDecimal
       site.taxRateInsurance = rateSet.dcTax2Rate.text() as BigDecimal
       site.taxRateMerchandise = 0;
@@ -1224,11 +1223,11 @@ class SiteLinkService extends BaseProviderService {
       rentalTransaction.tenantId = tab.TenantID.text()
       rentalTransaction.accessCode = tab.AccessCode.text()
     }
-    rentalTransaction.save(flush:true)
+    rentalTransaction.save(flush: true)
   }
 
   def checkRented(RentalTransaction rentalTransaction) {
-    def siteLink = (SiteLink)rentalTransaction.site.feed
+    def siteLink = (SiteLink) rentalTransaction.site.feed
     def ret = getUnitInfoByName(siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
     println "checkRented ret =${ret}"
@@ -1301,9 +1300,9 @@ TODO - evaluate whether we need this going forward
     }
     if (moveInResult > 3) {
       rentalTransaction.idNumber = moveInResult
-      rentalTransaction.save(flush:true)
+      rentalTransaction.save(flush: true)
 
-      def siteLink = (SiteLink)rentalTransaction.site.feed
+      def siteLink = (SiteLink) rentalTransaction.site.feed
       def subject = "New Storitz Move-In: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
       def body = "You have a new Storitz prepaid Move-in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")} for Unit ${rentalTransaction.feedUnitNumber}.  When the customer, ${rentalTransaction.contactPrimary.fullName()} arrives on their move-in date, just search for them in the tenant list to pull up their account info and complete the move-in process."
       // insert into bulletin board
@@ -1314,7 +1313,7 @@ TODO - evaluate whether we need this going forward
       def body = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
       rentalTransaction.idNumber = moveInResult
-      rentalTransaction.save(flush:true)
+      rentalTransaction.save(flush: true)
 
       try {
         emailService.sendTextEmail(
@@ -1323,9 +1322,9 @@ TODO - evaluate whether we need this going forward
                 subject: "SITELINK - failed move-in",
                 body: body)
 
-        } catch (Exception e) {
-            log.error("${e}", e)
-        }
+      } catch (Exception e) {
+        log.error("${e}", e)
+      }
     }
 
     // TODO - fix when Sitelink corrects issue

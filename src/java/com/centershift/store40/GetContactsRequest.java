@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetContacts_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetContacts_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetContacts_Request", propOrder = {
-    "siteID",
-    "acctID",
-    "contactId"
+        "siteID",
+        "acctID",
+        "contactId"
 })
 public class GetContactsRequest {
 
@@ -45,7 +42,6 @@ public class GetContactsRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -53,7 +49,6 @@ public class GetContactsRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -61,11 +56,9 @@ public class GetContactsRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAcctID() {
         return acctID;
@@ -73,11 +66,9 @@ public class GetContactsRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAcctID(Long value) {
         this.acctID = value;
@@ -85,11 +76,9 @@ public class GetContactsRequest {
 
     /**
      * Gets the value of the contactId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getContactId() {
         return contactId;
@@ -97,11 +86,9 @@ public class GetContactsRequest {
 
     /**
      * Sets the value of the contactId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setContactId(Long value) {
         this.contactId = value;

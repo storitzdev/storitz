@@ -13,7 +13,7 @@ public enum SpecialOfferRestrictionType {
 
 
   static list() {
-      [UNIT_TYPE, UNIT_SIZE, OCCUPANCY_RATE, UNIT_AREA, MINIMUM_AVAILABLE]
+    [UNIT_TYPE, UNIT_SIZE, OCCUPANCY_RATE, UNIT_AREA, MINIMUM_AVAILABLE]
   }
 
   static public SpecialOfferRestrictionType getEnumFromId(String value) {

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "updatePhoneResult"
+        "updatePhoneResult"
 })
 @XmlRootElement(name = "UpdatePhoneResponse")
 public class UpdatePhoneResponse {
@@ -39,11 +32,9 @@ public class UpdatePhoneResponse {
 
     /**
      * Gets the value of the updatePhoneResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PhoneResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link PhoneResponse }
      */
     public PhoneResponse getUpdatePhoneResult() {
         return updatePhoneResult;
@@ -51,11 +42,9 @@ public class UpdatePhoneResponse {
 
     /**
      * Sets the value of the updatePhoneResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PhoneResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PhoneResponse }
      */
     public void setUpdatePhoneResult(PhoneResponse value) {
         this.updatePhoneResult = value;

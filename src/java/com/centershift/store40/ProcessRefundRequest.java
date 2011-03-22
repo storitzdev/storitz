@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ProcessRefund_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ProcessRefund_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProcessRefund_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "refundInfo",
-    "contactData"
+        "orgID",
+        "siteID",
+        "refundInfo",
+        "contactData"
 })
 public class ProcessRefundRequest {
 
@@ -49,7 +46,6 @@ public class ProcessRefundRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -57,7 +53,6 @@ public class ProcessRefundRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -65,7 +60,6 @@ public class ProcessRefundRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -73,7 +67,6 @@ public class ProcessRefundRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -81,11 +74,9 @@ public class ProcessRefundRequest {
 
     /**
      * Gets the value of the refundInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefundData }
-     *     
+     *
+     * @return possible object is
+     *         {@link RefundData }
      */
     public RefundData getRefundInfo() {
         return refundInfo;
@@ -93,11 +84,9 @@ public class ProcessRefundRequest {
 
     /**
      * Sets the value of the refundInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefundData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RefundData }
      */
     public void setRefundInfo(RefundData value) {
         this.refundInfo = value;
@@ -105,11 +94,9 @@ public class ProcessRefundRequest {
 
     /**
      * Gets the value of the contactData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ContactInfo }
      */
     public ContactInfo getContactData() {
         return contactData;
@@ -117,11 +104,9 @@ public class ProcessRefundRequest {
 
     /**
      * Sets the value of the contactData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ContactInfo }
      */
     public void setContactData(ContactInfo value) {
         this.contactData = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for EXRFIU_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="EXRFIU_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EXRFIU_Response", propOrder = {
-    "details"
+        "details"
 })
 public class EXRFIUResponse {
 
@@ -37,11 +34,9 @@ public class EXRFIUResponse {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfEXRFinData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfEXRFinData }
      */
     public ArrayOfEXRFinData getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class EXRFIUResponse {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfEXRFinData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfEXRFinData }
      */
     public void setDetails(ArrayOfEXRFinData value) {
         this.details = value;

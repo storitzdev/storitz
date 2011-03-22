@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SWS_LOGIN complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SWS_LOGIN">
  *   &lt;complexContent>
@@ -27,20 +26,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SWS_LOGIN", propOrder = {
-    "ecommid",
-    "orgid",
-    "username",
-    "password",
-    "active"
+        "ecommid",
+        "orgid",
+        "username",
+        "password",
+        "active"
 })
 public class SWSLOGIN
-    extends BaseEntityOfCollectionSWSLOGINColumnIndexes
-{
+        extends BaseEntityOfCollectionSWSLOGINColumnIndexes {
 
     @XmlElement(name = "ECOMM_ID")
     protected long ecommid;
@@ -55,7 +51,6 @@ public class SWSLOGIN
 
     /**
      * Gets the value of the ecommid property.
-     * 
      */
     public long getECOMMID() {
         return ecommid;
@@ -63,7 +58,6 @@ public class SWSLOGIN
 
     /**
      * Sets the value of the ecommid property.
-     * 
      */
     public void setECOMMID(long value) {
         this.ecommid = value;
@@ -71,7 +65,6 @@ public class SWSLOGIN
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -79,7 +72,6 @@ public class SWSLOGIN
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -87,11 +79,9 @@ public class SWSLOGIN
 
     /**
      * Gets the value of the username property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUSERNAME() {
         return username;
@@ -99,11 +89,9 @@ public class SWSLOGIN
 
     /**
      * Sets the value of the username property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUSERNAME(String value) {
         this.username = value;
@@ -111,11 +99,9 @@ public class SWSLOGIN
 
     /**
      * Gets the value of the password property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPASSWORD() {
         return password;
@@ -123,11 +109,9 @@ public class SWSLOGIN
 
     /**
      * Sets the value of the password property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPASSWORD(String value) {
         this.password = value;
@@ -135,11 +119,9 @@ public class SWSLOGIN
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -147,11 +129,9 @@ public class SWSLOGIN
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;

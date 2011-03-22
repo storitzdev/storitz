@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ReassignRental_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ReassignRental_Request">
  *   &lt;complexContent>
@@ -31,20 +30,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReassignRental_Request", propOrder = {
-    "siteID",
-    "oldAccountID",
-    "oldRentalID",
-    "oldContactID",
-    "newAccountID",
-    "newContactID",
-    "newAddressID",
-    "newPhoneID",
-    "deactiveOldEcommContact"
+        "siteID",
+        "oldAccountID",
+        "oldRentalID",
+        "oldContactID",
+        "newAccountID",
+        "newContactID",
+        "newAddressID",
+        "newPhoneID",
+        "deactiveOldEcommContact"
 })
 public class ReassignRentalRequest {
 
@@ -69,7 +66,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -77,7 +73,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -85,7 +80,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the oldAccountID property.
-     * 
      */
     public long getOldAccountID() {
         return oldAccountID;
@@ -93,7 +87,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the oldAccountID property.
-     * 
      */
     public void setOldAccountID(long value) {
         this.oldAccountID = value;
@@ -101,7 +94,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the oldRentalID property.
-     * 
      */
     public long getOldRentalID() {
         return oldRentalID;
@@ -109,7 +101,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the oldRentalID property.
-     * 
      */
     public void setOldRentalID(long value) {
         this.oldRentalID = value;
@@ -117,7 +108,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the oldContactID property.
-     * 
      */
     public long getOldContactID() {
         return oldContactID;
@@ -125,7 +115,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the oldContactID property.
-     * 
      */
     public void setOldContactID(long value) {
         this.oldContactID = value;
@@ -133,7 +122,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the newAccountID property.
-     * 
      */
     public long getNewAccountID() {
         return newAccountID;
@@ -141,7 +129,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the newAccountID property.
-     * 
      */
     public void setNewAccountID(long value) {
         this.newAccountID = value;
@@ -149,7 +136,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the newContactID property.
-     * 
      */
     public long getNewContactID() {
         return newContactID;
@@ -157,7 +143,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the newContactID property.
-     * 
      */
     public void setNewContactID(long value) {
         this.newContactID = value;
@@ -165,7 +150,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the newAddressID property.
-     * 
      */
     public long getNewAddressID() {
         return newAddressID;
@@ -173,7 +157,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the newAddressID property.
-     * 
      */
     public void setNewAddressID(long value) {
         this.newAddressID = value;
@@ -181,7 +164,6 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the newPhoneID property.
-     * 
      */
     public long getNewPhoneID() {
         return newPhoneID;
@@ -189,7 +171,6 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the newPhoneID property.
-     * 
      */
     public void setNewPhoneID(long value) {
         this.newPhoneID = value;
@@ -197,11 +178,9 @@ public class ReassignRentalRequest {
 
     /**
      * Gets the value of the deactiveOldEcommContact property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isDeactiveOldEcommContact() {
         return deactiveOldEcommContact;
@@ -209,11 +188,9 @@ public class ReassignRentalRequest {
 
     /**
      * Sets the value of the deactiveOldEcommContact property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setDeactiveOldEcommContact(Boolean value) {
         this.deactiveOldEcommContact = value;

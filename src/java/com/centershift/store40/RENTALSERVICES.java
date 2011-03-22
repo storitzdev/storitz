@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for RENTAL_SERVICES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RENTAL_SERVICES">
  *   &lt;complexContent>
@@ -41,31 +36,28 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RENTAL_SERVICES", propOrder = {
-    "icon",
-    "objtype",
-    "objectid",
-    "rentalid",
-    "parentrentalid",
-    "servicetype",
-    "itemname",
-    "amount",
-    "emailcc",
-    "startdate",
-    "enddate",
-    "ptd",
-    "ltd",
-    "status",
-    "updatedby",
-    "createdby"
+        "icon",
+        "objtype",
+        "objectid",
+        "rentalid",
+        "parentrentalid",
+        "servicetype",
+        "itemname",
+        "amount",
+        "emailcc",
+        "startdate",
+        "enddate",
+        "ptd",
+        "ltd",
+        "status",
+        "updatedby",
+        "createdby"
 })
 public class RENTALSERVICES
-    extends BaseEntityOfCollectionRENTALSERVICESColumnIndexes
-{
+        extends BaseEntityOfCollectionRENTALSERVICESColumnIndexes {
 
     @XmlElement(name = "ICON")
     protected String icon;
@@ -106,11 +98,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -118,11 +108,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -130,11 +118,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the objtype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOBJTYPE() {
         return objtype;
@@ -142,11 +128,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the objtype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOBJTYPE(String value) {
         this.objtype = value;
@@ -154,11 +138,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the objectid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOBJECTID() {
         return objectid;
@@ -166,11 +148,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the objectid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOBJECTID(Long value) {
         this.objectid = value;
@@ -178,11 +158,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -190,11 +168,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -202,11 +178,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the parentrentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPARENTRENTALID() {
         return parentrentalid;
@@ -214,11 +188,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the parentrentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPARENTRENTALID(Long value) {
         this.parentrentalid = value;
@@ -226,11 +198,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the servicetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSERVICETYPE() {
         return servicetype;
@@ -238,11 +208,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the servicetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSERVICETYPE(BigDecimal value) {
         this.servicetype = value;
@@ -250,11 +218,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the itemname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getITEMNAME() {
         return itemname;
@@ -262,11 +228,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the itemname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setITEMNAME(String value) {
         this.itemname = value;
@@ -274,11 +238,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAMOUNT() {
         return amount;
@@ -286,11 +248,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAMOUNT(BigDecimal value) {
         this.amount = value;
@@ -298,11 +258,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the emailcc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isEMAILCC() {
         return emailcc;
@@ -310,11 +268,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the emailcc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setEMAILCC(Boolean value) {
         this.emailcc = value;
@@ -322,11 +278,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the startdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTDATE() {
         return startdate;
@@ -334,11 +288,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the startdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTDATE(XMLGregorianCalendar value) {
         this.startdate = value;
@@ -346,11 +298,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the enddate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getENDDATE() {
         return enddate;
@@ -358,11 +308,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the enddate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setENDDATE(XMLGregorianCalendar value) {
         this.enddate = value;
@@ -370,11 +318,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -382,11 +328,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -394,11 +338,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the ltd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLTD() {
         return ltd;
@@ -406,11 +348,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the ltd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLTD(XMLGregorianCalendar value) {
         this.ltd = value;
@@ -418,11 +358,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSTATUS() {
         return status;
@@ -430,11 +368,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSTATUS(Integer value) {
         this.status = value;
@@ -442,11 +378,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the updatedby property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getUPDATEDBY() {
         return updatedby;
@@ -454,11 +388,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the updatedby property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setUPDATEDBY(Long value) {
         this.updatedby = value;
@@ -466,11 +398,9 @@ public class RENTALSERVICES
 
     /**
      * Gets the value of the createdby property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCREATEDBY() {
         return createdby;
@@ -478,11 +408,9 @@ public class RENTALSERVICES
 
     /**
      * Sets the value of the createdby property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setCREATEDBY(Long value) {
         this.createdby = value;

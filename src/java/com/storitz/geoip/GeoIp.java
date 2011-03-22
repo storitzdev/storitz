@@ -35,11 +35,11 @@ public class GeoIp {
                 stream = servletContext.getResourceAsStream(propertyFile);
 
                 //load the stream to Property object.
-                prop.load(stream );
+                prop.load(stream);
 
                 // Now get the value from properties file.
                 geoFile = prop.getProperty(propertyName);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

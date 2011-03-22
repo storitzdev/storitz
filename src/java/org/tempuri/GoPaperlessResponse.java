@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "goPaperlessResult"
+        "goPaperlessResult"
 })
 @XmlRootElement(name = "GoPaperlessResponse")
 public class GoPaperlessResponse {
@@ -39,7 +32,6 @@ public class GoPaperlessResponse {
 
     /**
      * Gets the value of the goPaperlessResult property.
-     * 
      */
     public boolean isGoPaperlessResult() {
         return goPaperlessResult;
@@ -47,7 +39,6 @@ public class GoPaperlessResponse {
 
     /**
      * Sets the value of the goPaperlessResult property.
-     * 
      */
     public void setGoPaperlessResult(boolean value) {
         this.goPaperlessResult = value;

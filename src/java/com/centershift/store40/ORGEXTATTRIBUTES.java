@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ORG_EXT_ATTRIBUTES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_EXT_ATTRIBUTES">
  *   &lt;complexContent>
@@ -27,20 +26,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_EXT_ATTRIBUTES", propOrder = {
-    "siteid",
-    "attname",
-    "attdetails",
-    "createdby",
-    "updatedby"
+        "siteid",
+        "attname",
+        "attdetails",
+        "createdby",
+        "updatedby"
 })
 public class ORGEXTATTRIBUTES
-    extends BaseEntityOfCollectionORGEXTATTRIBUTESColumnIndexes
-{
+        extends BaseEntityOfCollectionORGEXTATTRIBUTESColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -55,7 +51,6 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -63,7 +58,6 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -71,11 +65,9 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Gets the value of the attname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTNAME() {
         return attname;
@@ -83,11 +75,9 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Sets the value of the attname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTNAME(String value) {
         this.attname = value;
@@ -95,11 +85,9 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Gets the value of the attdetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTDETAILS() {
         return attdetails;
@@ -107,11 +95,9 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Sets the value of the attdetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTDETAILS(String value) {
         this.attdetails = value;
@@ -119,7 +105,6 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -127,7 +112,6 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -135,7 +119,6 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -143,7 +126,6 @@ public class ORGEXTATTRIBUTES
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

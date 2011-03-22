@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Contact_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Contact_Request">
  *   &lt;complexContent>
@@ -43,32 +42,30 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Contact_Request", propOrder = {
-    "acctID",
-    "contactId",
-    "firstName",
-    "lastName",
-    "knownAs",
-    "contactType",
-    "employer",
-    "active",
-    "email",
-    "dlNumber",
-    "dlState",
-    "dob",
-    "ssn",
-    "ecommCode",
-    "cflex01",
-    "cflex02",
-    "cflex03",
-    "cflex04",
-    "cflex05",
-    "addresses",
-    "phones"
+        "acctID",
+        "contactId",
+        "firstName",
+        "lastName",
+        "knownAs",
+        "contactType",
+        "employer",
+        "active",
+        "email",
+        "dlNumber",
+        "dlState",
+        "dob",
+        "ssn",
+        "ecommCode",
+        "cflex01",
+        "cflex02",
+        "cflex03",
+        "cflex04",
+        "cflex05",
+        "addresses",
+        "phones"
 })
 public class ContactRequest {
 
@@ -117,11 +114,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAcctID() {
         return acctID;
@@ -129,11 +124,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAcctID(Long value) {
         this.acctID = value;
@@ -141,11 +134,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the contactId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getContactId() {
         return contactId;
@@ -153,11 +144,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the contactId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setContactId(Long value) {
         this.contactId = value;
@@ -165,11 +154,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the firstName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFirstName() {
         return firstName;
@@ -177,11 +164,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the firstName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFirstName(String value) {
         this.firstName = value;
@@ -189,11 +174,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the lastName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLastName() {
         return lastName;
@@ -201,11 +184,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the lastName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLastName(String value) {
         this.lastName = value;
@@ -213,11 +194,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the knownAs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getKnownAs() {
         return knownAs;
@@ -225,11 +204,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the knownAs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setKnownAs(String value) {
         this.knownAs = value;
@@ -237,11 +214,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the contactType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ContactType }
      */
     public ContactType getContactType() {
         return contactType;
@@ -249,11 +224,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the contactType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ContactType }
      */
     public void setContactType(ContactType value) {
         this.contactType = value;
@@ -261,11 +234,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the employer property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmployer() {
         return employer;
@@ -273,11 +244,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the employer property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmployer(String value) {
         this.employer = value;
@@ -285,11 +254,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isActive() {
         return active;
@@ -297,11 +264,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setActive(Boolean value) {
         this.active = value;
@@ -309,11 +274,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmail() {
         return email;
@@ -321,11 +284,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -333,11 +294,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the dlNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDLNumber() {
         return dlNumber;
@@ -345,11 +304,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the dlNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDLNumber(String value) {
         this.dlNumber = value;
@@ -357,11 +314,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the dlState property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDLState() {
         return dlState;
@@ -369,11 +324,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the dlState property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDLState(String value) {
         this.dlState = value;
@@ -381,11 +334,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the dob property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDOB() {
         return dob;
@@ -393,11 +344,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the dob property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDOB(String value) {
         this.dob = value;
@@ -405,11 +354,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the ssn property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSSN() {
         return ssn;
@@ -417,11 +364,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the ssn property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSSN(String value) {
         this.ssn = value;
@@ -429,11 +374,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the ecommCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEcommCode() {
         return ecommCode;
@@ -441,11 +384,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the ecommCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEcommCode(String value) {
         this.ecommCode = value;
@@ -453,11 +394,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the cflex01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex01() {
         return cflex01;
@@ -465,11 +404,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the cflex01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex01(String value) {
         this.cflex01 = value;
@@ -477,11 +414,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the cflex02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex02() {
         return cflex02;
@@ -489,11 +424,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the cflex02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex02(String value) {
         this.cflex02 = value;
@@ -501,11 +434,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the cflex03 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex03() {
         return cflex03;
@@ -513,11 +444,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the cflex03 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex03(String value) {
         this.cflex03 = value;
@@ -525,11 +454,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the cflex04 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex04() {
         return cflex04;
@@ -537,11 +464,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the cflex04 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex04(String value) {
         this.cflex04 = value;
@@ -549,11 +474,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the cflex05 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCflex05() {
         return cflex05;
@@ -561,11 +484,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the cflex05 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCflex05(String value) {
         this.cflex05 = value;
@@ -573,11 +494,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the addresses property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfContactAddress }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfContactAddress }
      */
     public ArrayOfContactAddress getAddresses() {
         return addresses;
@@ -585,11 +504,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the addresses property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfContactAddress }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfContactAddress }
      */
     public void setAddresses(ArrayOfContactAddress value) {
         this.addresses = value;
@@ -597,11 +514,9 @@ public class ContactRequest {
 
     /**
      * Gets the value of the phones property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfContactPhone }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfContactPhone }
      */
     public ArrayOfContactPhone getPhones() {
         return phones;
@@ -609,11 +524,9 @@ public class ContactRequest {
 
     /**
      * Sets the value of the phones property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfContactPhone }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfContactPhone }
      */
     public void setPhones(ArrayOfContactPhone value) {
         this.phones = value;

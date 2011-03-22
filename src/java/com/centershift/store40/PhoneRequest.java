@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Phone_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Phone_Request">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Phone_Request", propOrder = {
-    "phoneId",
-    "contactId",
-    "phoneType",
-    "phone",
-    "active"
+        "phoneId",
+        "contactId",
+        "phoneType",
+        "phone",
+        "active"
 })
 public class PhoneRequest {
 
@@ -53,11 +50,9 @@ public class PhoneRequest {
 
     /**
      * Gets the value of the phoneId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPhoneId() {
         return phoneId;
@@ -65,11 +60,9 @@ public class PhoneRequest {
 
     /**
      * Sets the value of the phoneId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPhoneId(Long value) {
         this.phoneId = value;
@@ -77,11 +70,9 @@ public class PhoneRequest {
 
     /**
      * Gets the value of the contactId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getContactId() {
         return contactId;
@@ -89,11 +80,9 @@ public class PhoneRequest {
 
     /**
      * Sets the value of the contactId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setContactId(Long value) {
         this.contactId = value;
@@ -101,11 +90,9 @@ public class PhoneRequest {
 
     /**
      * Gets the value of the phoneType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PhoneType }
-     *     
+     *
+     * @return possible object is
+     *         {@link PhoneType }
      */
     public PhoneType getPhoneType() {
         return phoneType;
@@ -113,11 +100,9 @@ public class PhoneRequest {
 
     /**
      * Sets the value of the phoneType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PhoneType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PhoneType }
      */
     public void setPhoneType(PhoneType value) {
         this.phoneType = value;
@@ -125,11 +110,9 @@ public class PhoneRequest {
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPhone() {
         return phone;
@@ -137,11 +120,9 @@ public class PhoneRequest {
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPhone(String value) {
         this.phone = value;
@@ -149,11 +130,9 @@ public class PhoneRequest {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isActive() {
         return active;
@@ -161,11 +140,9 @@ public class PhoneRequest {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setActive(Boolean value) {
         this.active = value;

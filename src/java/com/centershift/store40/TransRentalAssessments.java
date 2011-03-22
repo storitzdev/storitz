@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TransRentalAssessments complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransRentalAssessments">
  *   &lt;complexContent>
@@ -31,19 +30,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransRentalAssessments", propOrder = {
-    "assessID",
-    "description",
-    "rate",
-    "rateTax",
-    "netPrePaid",
-    "prePaidTax",
-    "credit",
-    "isTransferrable"
+        "assessID",
+        "description",
+        "rate",
+        "rateTax",
+        "netPrePaid",
+        "prePaidTax",
+        "credit",
+        "isTransferrable"
 })
 public class TransRentalAssessments {
 
@@ -66,7 +63,6 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the assessID property.
-     * 
      */
     public long getAssessID() {
         return assessID;
@@ -74,7 +70,6 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the assessID property.
-     * 
      */
     public void setAssessID(long value) {
         this.assessID = value;
@@ -82,11 +77,9 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDescription() {
         return description;
@@ -94,11 +87,9 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDescription(String value) {
         this.description = value;
@@ -106,11 +97,9 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the rate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRate() {
         return rate;
@@ -118,11 +107,9 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the rate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRate(BigDecimal value) {
         this.rate = value;
@@ -130,11 +117,9 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the rateTax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRateTax() {
         return rateTax;
@@ -142,11 +127,9 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the rateTax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRateTax(BigDecimal value) {
         this.rateTax = value;
@@ -154,11 +137,9 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the netPrePaid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getNetPrePaid() {
         return netPrePaid;
@@ -166,11 +147,9 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the netPrePaid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setNetPrePaid(BigDecimal value) {
         this.netPrePaid = value;
@@ -178,11 +157,9 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the prePaidTax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPrePaidTax() {
         return prePaidTax;
@@ -190,11 +167,9 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the prePaidTax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPrePaidTax(BigDecimal value) {
         this.prePaidTax = value;
@@ -202,11 +177,9 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the credit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCredit() {
         return credit;
@@ -214,11 +187,9 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the credit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCredit(BigDecimal value) {
         this.credit = value;
@@ -226,7 +197,6 @@ public class TransRentalAssessments {
 
     /**
      * Gets the value of the isTransferrable property.
-     * 
      */
     public boolean isIsTransferrable() {
         return isTransferrable;
@@ -234,7 +204,6 @@ public class TransRentalAssessments {
 
     /**
      * Sets the value of the isTransferrable property.
-     * 
      */
     public void setIsTransferrable(boolean value) {
         this.isTransferrable = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetContacts_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetContacts_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetContacts_Response", propOrder = {
-    "details",
-    "primaryContactRentals"
+        "details",
+        "primaryContactRentals"
 })
 public class GetContactsResponse2 {
 
@@ -41,11 +38,9 @@ public class GetContactsResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACTCONTACTS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACTCONTACTS }
      */
     public ArrayOfACTCONTACTS getDetails() {
         return details;
@@ -53,11 +48,9 @@ public class GetContactsResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACTCONTACTS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACTCONTACTS }
      */
     public void setDetails(ArrayOfACTCONTACTS value) {
         this.details = value;
@@ -65,11 +58,9 @@ public class GetContactsResponse2 {
 
     /**
      * Gets the value of the primaryContactRentals property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfPrimaryContactRentals }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfPrimaryContactRentals }
      */
     public ArrayOfPrimaryContactRentals getPrimaryContactRentals() {
         return primaryContactRentals;
@@ -77,11 +68,9 @@ public class GetContactsResponse2 {
 
     /**
      * Sets the value of the primaryContactRentals property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfPrimaryContactRentals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfPrimaryContactRentals }
      */
     public void setPrimaryContactRentals(ArrayOfPrimaryContactRentals value) {
         this.primaryContactRentals = value;

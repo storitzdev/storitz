@@ -1,7 +1,6 @@
 package storitz.reports
 
 import ar.com.fdvs.dj.domain.CustomExpression
-import com.storitz.Invoice
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,13 +12,13 @@ import com.storitz.Invoice
 class InvoiceNumberExpression implements CustomExpression {
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          String invoice = (String) fields.get("invoice.invoiceId")
-          if (!invoice) return "---"
-          return invoice
+    String invoice = (String) fields.get("invoice.invoiceId")
+    if (!invoice) return "---"
+    return invoice
   }
 
   public String getClassName() {
-          return String.class.getName();
+    return String.class.getName();
   }
 
 }

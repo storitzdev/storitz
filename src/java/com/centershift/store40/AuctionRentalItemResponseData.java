@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AuctionRentalItemResponseData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionRentalItemResponseData">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionRentalItemResponseData", propOrder = {
-    "rentalID",
-    "succeeded",
-    "errorMsg"
+        "rentalID",
+        "succeeded",
+        "errorMsg"
 })
 public class AuctionRentalItemResponseData {
 
@@ -45,7 +42,6 @@ public class AuctionRentalItemResponseData {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -53,7 +49,6 @@ public class AuctionRentalItemResponseData {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -61,7 +56,6 @@ public class AuctionRentalItemResponseData {
 
     /**
      * Gets the value of the succeeded property.
-     * 
      */
     public boolean isSucceeded() {
         return succeeded;
@@ -69,7 +63,6 @@ public class AuctionRentalItemResponseData {
 
     /**
      * Sets the value of the succeeded property.
-     * 
      */
     public void setSucceeded(boolean value) {
         this.succeeded = value;
@@ -77,11 +70,9 @@ public class AuctionRentalItemResponseData {
 
     /**
      * Gets the value of the errorMsg property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMsg() {
         return errorMsg;
@@ -89,11 +80,9 @@ public class AuctionRentalItemResponseData {
 
     /**
      * Sets the value of the errorMsg property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMsg(String value) {
         this.errorMsg = value;

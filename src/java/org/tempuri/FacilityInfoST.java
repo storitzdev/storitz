@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for FacilityInfo_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="FacilityInfo_ST">
  *   &lt;complexContent>
@@ -41,30 +40,28 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FacilityInfo_ST", propOrder = {
-    "success",
-    "csSiteName",
-    "csSiteAddress",
-    "csSiteCity",
-    "csSiteState",
-    "csSiteZip",
-    "csSitePhone",
-    "csSiteEmail",
-    "csSMTPName",
-    "csSMTPUser",
-    "csSMTPPassword",
-    "csSMTPNeedAuth",
-    "csAllowPaymentOneWeekBeforeAuction",
-    "csAllowRentUnit",
-    "csAllowReserve",
-    "csAllowEditTenantInfo",
-    "csAdvertising",
-    "iAdvertisingDays",
-    "stProcessorInfo"
+        "success",
+        "csSiteName",
+        "csSiteAddress",
+        "csSiteCity",
+        "csSiteState",
+        "csSiteZip",
+        "csSitePhone",
+        "csSiteEmail",
+        "csSMTPName",
+        "csSMTPUser",
+        "csSMTPPassword",
+        "csSMTPNeedAuth",
+        "csAllowPaymentOneWeekBeforeAuction",
+        "csAllowRentUnit",
+        "csAllowReserve",
+        "csAllowEditTenantInfo",
+        "csAdvertising",
+        "iAdvertisingDays",
+        "stProcessorInfo"
 })
 public class FacilityInfoST {
 
@@ -92,7 +89,6 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the success property.
-     * 
      */
     public boolean isSuccess() {
         return success;
@@ -100,7 +96,6 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the success property.
-     * 
      */
     public void setSuccess(boolean value) {
         this.success = value;
@@ -108,11 +103,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -120,11 +113,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -132,11 +123,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSiteAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteAddress() {
         return csSiteAddress;
@@ -144,11 +133,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSiteAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteAddress(String value) {
         this.csSiteAddress = value;
@@ -156,11 +143,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSiteCity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteCity() {
         return csSiteCity;
@@ -168,11 +153,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSiteCity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteCity(String value) {
         this.csSiteCity = value;
@@ -180,11 +163,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSiteState property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteState() {
         return csSiteState;
@@ -192,11 +173,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSiteState property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteState(String value) {
         this.csSiteState = value;
@@ -204,11 +183,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSiteZip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteZip() {
         return csSiteZip;
@@ -216,11 +193,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSiteZip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteZip(String value) {
         this.csSiteZip = value;
@@ -228,11 +203,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSitePhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSitePhone() {
         return csSitePhone;
@@ -240,11 +213,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSitePhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSitePhone(String value) {
         this.csSitePhone = value;
@@ -252,11 +223,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSiteEmail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteEmail() {
         return csSiteEmail;
@@ -264,11 +233,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSiteEmail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteEmail(String value) {
         this.csSiteEmail = value;
@@ -276,11 +243,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSMTPName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSMTPName() {
         return csSMTPName;
@@ -288,11 +253,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSMTPName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSMTPName(String value) {
         this.csSMTPName = value;
@@ -300,11 +263,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSMTPUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSMTPUser() {
         return csSMTPUser;
@@ -312,11 +273,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSMTPUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSMTPUser(String value) {
         this.csSMTPUser = value;
@@ -324,11 +283,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSMTPPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSMTPPassword() {
         return csSMTPPassword;
@@ -336,11 +293,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSMTPPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSMTPPassword(String value) {
         this.csSMTPPassword = value;
@@ -348,11 +303,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csSMTPNeedAuth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSMTPNeedAuth() {
         return csSMTPNeedAuth;
@@ -360,11 +313,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csSMTPNeedAuth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSMTPNeedAuth(String value) {
         this.csSMTPNeedAuth = value;
@@ -372,11 +323,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csAllowPaymentOneWeekBeforeAuction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAllowPaymentOneWeekBeforeAuction() {
         return csAllowPaymentOneWeekBeforeAuction;
@@ -384,11 +333,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csAllowPaymentOneWeekBeforeAuction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAllowPaymentOneWeekBeforeAuction(String value) {
         this.csAllowPaymentOneWeekBeforeAuction = value;
@@ -396,11 +343,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csAllowRentUnit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAllowRentUnit() {
         return csAllowRentUnit;
@@ -408,11 +353,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csAllowRentUnit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAllowRentUnit(String value) {
         this.csAllowRentUnit = value;
@@ -420,11 +363,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csAllowReserve property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAllowReserve() {
         return csAllowReserve;
@@ -432,11 +373,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csAllowReserve property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAllowReserve(String value) {
         this.csAllowReserve = value;
@@ -444,11 +383,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csAllowEditTenantInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAllowEditTenantInfo() {
         return csAllowEditTenantInfo;
@@ -456,11 +393,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csAllowEditTenantInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAllowEditTenantInfo(String value) {
         this.csAllowEditTenantInfo = value;
@@ -468,11 +403,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the csAdvertising property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAdvertising() {
         return csAdvertising;
@@ -480,11 +413,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the csAdvertising property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAdvertising(String value) {
         this.csAdvertising = value;
@@ -492,7 +423,6 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the iAdvertisingDays property.
-     * 
      */
     public int getIAdvertisingDays() {
         return iAdvertisingDays;
@@ -500,7 +430,6 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the iAdvertisingDays property.
-     * 
      */
     public void setIAdvertisingDays(int value) {
         this.iAdvertisingDays = value;
@@ -508,11 +437,9 @@ public class FacilityInfoST {
 
     /**
      * Gets the value of the stProcessorInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ProcessorInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ProcessorInfo }
      */
     public ProcessorInfo getSTProcessorInfo() {
         return stProcessorInfo;
@@ -520,11 +447,9 @@ public class FacilityInfoST {
 
     /**
      * Sets the value of the stProcessorInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ProcessorInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ProcessorInfo }
      */
     public void setSTProcessorInfo(ProcessorInfo value) {
         this.stProcessorInfo = value;

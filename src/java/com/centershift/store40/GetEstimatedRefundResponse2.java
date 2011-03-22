@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for GetEstimatedRefund_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetEstimatedRefund_Response">
  *   &lt;complexContent>
@@ -24,12 +23,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetEstimatedRefund_Response", propOrder = {
-    "estimatedRefundAmount"
+        "estimatedRefundAmount"
 })
 public class GetEstimatedRefundResponse2 {
 
@@ -38,11 +35,9 @@ public class GetEstimatedRefundResponse2 {
 
     /**
      * Gets the value of the estimatedRefundAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEstimatedRefundAmount() {
         return estimatedRefundAmount;
@@ -50,11 +45,9 @@ public class GetEstimatedRefundResponse2 {
 
     /**
      * Sets the value of the estimatedRefundAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEstimatedRefundAmount(BigDecimal value) {
         this.estimatedRefundAmount = value;

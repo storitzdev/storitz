@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_QUOTE_PCD complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_QUOTE_PCD">
  *   &lt;complexContent>
@@ -34,24 +29,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_QUOTE_PCD", propOrder = {
-    "quotepcdid",
-    "quoteid",
-    "pcdid",
-    "active",
-    "created",
-    "updated",
-    "createdby",
-    "updatedby",
-    "discamt"
+        "quotepcdid",
+        "quoteid",
+        "pcdid",
+        "active",
+        "created",
+        "updated",
+        "createdby",
+        "updatedby",
+        "discamt"
 })
 public class TRANQUOTEPCD
-    extends BaseEntityOfCollectionTRANQUOTEPCDColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANQUOTEPCDColumnIndexes {
 
     @XmlElement(name = "QUOTE_PCD_ID")
     protected long quotepcdid;
@@ -76,7 +68,6 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the quotepcdid property.
-     * 
      */
     public long getQUOTEPCDID() {
         return quotepcdid;
@@ -84,7 +75,6 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the quotepcdid property.
-     * 
      */
     public void setQUOTEPCDID(long value) {
         this.quotepcdid = value;
@@ -92,7 +82,6 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the quoteid property.
-     * 
      */
     public long getQUOTEID() {
         return quoteid;
@@ -100,7 +89,6 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the quoteid property.
-     * 
      */
     public void setQUOTEID(long value) {
         this.quoteid = value;
@@ -108,7 +96,6 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the pcdid property.
-     * 
      */
     public long getPCDID() {
         return pcdid;
@@ -116,7 +103,6 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the pcdid property.
-     * 
      */
     public void setPCDID(long value) {
         this.pcdid = value;
@@ -124,7 +110,6 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -132,7 +117,6 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -140,11 +124,9 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -152,11 +134,9 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -164,11 +144,9 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -176,11 +154,9 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;
@@ -188,7 +164,6 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -196,7 +171,6 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -204,7 +178,6 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -212,7 +185,6 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -220,11 +192,9 @@ public class TRANQUOTEPCD
 
     /**
      * Gets the value of the discamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDISCAMT() {
         return discamt;
@@ -232,11 +202,9 @@ public class TRANQUOTEPCD
 
     /**
      * Sets the value of the discamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDISCAMT(BigDecimal value) {
         this.discamt = value;

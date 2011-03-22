@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PcdClass.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="PcdClass">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -21,7 +20,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "PcdClass")
 @XmlEnum
@@ -46,7 +44,7 @@ public enum PcdClass {
     }
 
     public static PcdClass fromValue(String v) {
-        for (PcdClass c: PcdClass.values()) {
+        for (PcdClass c : PcdClass.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

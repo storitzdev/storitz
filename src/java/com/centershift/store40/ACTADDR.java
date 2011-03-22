@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for ACT_ADDR complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACT_ADDR">
  *   &lt;complexContent>
@@ -39,30 +34,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACT_ADDR", propOrder = {
-    "addrid",
-    "contactid",
-    "addrtype",
-    "addr1",
-    "addr2",
-    "addr3",
-    "city",
-    "state",
-    "postalcode",
-    "country",
-    "active",
-    "created",
-    "updated",
-    "createdby",
-    "updatedby"
+        "addrid",
+        "contactid",
+        "addrtype",
+        "addr1",
+        "addr2",
+        "addr3",
+        "city",
+        "state",
+        "postalcode",
+        "country",
+        "active",
+        "created",
+        "updated",
+        "createdby",
+        "updatedby"
 })
 public class ACTADDR
-    extends BaseEntityOfCollectionACTADDRColumnIndexes
-{
+        extends BaseEntityOfCollectionACTADDRColumnIndexes {
 
     @XmlElement(name = "ADDR_ID")
     protected long addrid;
@@ -99,7 +91,6 @@ public class ACTADDR
 
     /**
      * Gets the value of the addrid property.
-     * 
      */
     public long getADDRID() {
         return addrid;
@@ -107,7 +98,6 @@ public class ACTADDR
 
     /**
      * Sets the value of the addrid property.
-     * 
      */
     public void setADDRID(long value) {
         this.addrid = value;
@@ -115,7 +105,6 @@ public class ACTADDR
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -123,7 +112,6 @@ public class ACTADDR
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -131,7 +119,6 @@ public class ACTADDR
 
     /**
      * Gets the value of the addrtype property.
-     * 
      */
     public int getADDRTYPE() {
         return addrtype;
@@ -139,7 +126,6 @@ public class ACTADDR
 
     /**
      * Sets the value of the addrtype property.
-     * 
      */
     public void setADDRTYPE(int value) {
         this.addrtype = value;
@@ -147,11 +133,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the addr1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR1() {
         return addr1;
@@ -159,11 +143,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the addr1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR1(String value) {
         this.addr1 = value;
@@ -171,11 +153,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the addr2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR2() {
         return addr2;
@@ -183,11 +163,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the addr2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR2(String value) {
         this.addr2 = value;
@@ -195,11 +173,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the addr3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR3() {
         return addr3;
@@ -207,11 +183,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the addr3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR3(String value) {
         this.addr3 = value;
@@ -219,11 +193,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCITY() {
         return city;
@@ -231,11 +203,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCITY(String value) {
         this.city = value;
@@ -243,11 +213,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATE() {
         return state;
@@ -255,11 +223,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATE(String value) {
         this.state = value;
@@ -267,11 +233,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the postalcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPOSTALCODE() {
         return postalcode;
@@ -279,11 +243,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the postalcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPOSTALCODE(String value) {
         this.postalcode = value;
@@ -291,11 +253,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the country property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOUNTRY() {
         return country;
@@ -303,11 +263,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the country property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOUNTRY(String value) {
         this.country = value;
@@ -315,7 +273,6 @@ public class ACTADDR
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -323,7 +280,6 @@ public class ACTADDR
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -331,11 +287,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -343,11 +297,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -355,11 +307,9 @@ public class ACTADDR
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -367,11 +317,9 @@ public class ACTADDR
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;
@@ -379,7 +327,6 @@ public class ACTADDR
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -387,7 +334,6 @@ public class ACTADDR
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -395,7 +341,6 @@ public class ACTADDR
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -403,7 +348,6 @@ public class ACTADDR
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

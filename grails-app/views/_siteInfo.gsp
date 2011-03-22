@@ -1,7 +1,7 @@
 <div class="left" style="margin-bottom: 10px;">
   <div id="site_logo">
     <g:if test="${site?.logo}">
-      <img src="${resource(file:site.logo.src())}" width="250" height="100" alt="${site.title} Logo"/>
+      <img src="${resource(file: site.logo.src())}" width="250" height="100" alt="${site.title} Logo"/>
     </g:if>
   </div>
   <div id="site_address">

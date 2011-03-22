@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for tntLtrNum_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="tntLtrNum_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tntLtrNum_Response", propOrder = {
-    "ltrNum"
+        "ltrNum"
 })
 public class TntLtrNumResponse {
 
@@ -37,7 +34,6 @@ public class TntLtrNumResponse {
 
     /**
      * Gets the value of the ltrNum property.
-     * 
      */
     public long getLtrNum() {
         return ltrNum;
@@ -45,7 +41,6 @@ public class TntLtrNumResponse {
 
     /**
      * Sets the value of the ltrNum property.
-     * 
      */
     public void setLtrNum(long value) {
         this.ltrNum = value;

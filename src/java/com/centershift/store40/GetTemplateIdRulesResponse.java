@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getTemplateIdRulesResult"
+        "getTemplateIdRulesResult"
 })
 @XmlRootElement(name = "getTemplateIdRulesResponse")
 public class GetTemplateIdRulesResponse {
@@ -39,11 +32,9 @@ public class GetTemplateIdRulesResponse {
 
     /**
      * Gets the value of the getTemplateIdRulesResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetRulesResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetRulesResponse }
      */
     public GetRulesResponse getGetTemplateIdRulesResult() {
         return getTemplateIdRulesResult;
@@ -51,11 +42,9 @@ public class GetTemplateIdRulesResponse {
 
     /**
      * Sets the value of the getTemplateIdRulesResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetRulesResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetRulesResponse }
      */
     public void setGetTemplateIdRulesResult(GetRulesResponse value) {
         this.getTemplateIdRulesResult = value;

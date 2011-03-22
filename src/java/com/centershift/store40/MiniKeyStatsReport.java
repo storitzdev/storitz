@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for MiniKeyStatsReport complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MiniKeyStatsReport">
  *   &lt;complexContent>
@@ -52,40 +51,38 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MiniKeyStatsReport", propOrder = {
-    "siteID",
-    "occupancy",
-    "vacancy",
-    "other",
-    "grossPotential",
-    "grossPotentialDifference",
-    "projectedRent",
-    "projectedRentDifference",
-    "grossScheduled",
-    "grossScheduledDifference",
-    "economicOccupancy",
-    "economicOccupancyDifference",
-    "occupiedSquareFeet",
-    "vacantSquareFeet",
-    "otherSquareFeet",
-    "totalSquareFeet",
-    "occupiedSquareFeetPercentage",
-    "vacantSquareFeetPercentage",
-    "otherSquareFeetPercentage",
-    "occupiedPercentage",
-    "vacantPercentage",
-    "activeAutoPay",
-    "arTotal",
-    "arDifference",
-    "prepaidRent",
-    "prepaidRentDifference",
-    "prospects",
-    "netYTD",
-    "miniKeyStatsCollection"
+        "siteID",
+        "occupancy",
+        "vacancy",
+        "other",
+        "grossPotential",
+        "grossPotentialDifference",
+        "projectedRent",
+        "projectedRentDifference",
+        "grossScheduled",
+        "grossScheduledDifference",
+        "economicOccupancy",
+        "economicOccupancyDifference",
+        "occupiedSquareFeet",
+        "vacantSquareFeet",
+        "otherSquareFeet",
+        "totalSquareFeet",
+        "occupiedSquareFeetPercentage",
+        "vacantSquareFeetPercentage",
+        "otherSquareFeetPercentage",
+        "occupiedPercentage",
+        "vacantPercentage",
+        "activeAutoPay",
+        "arTotal",
+        "arDifference",
+        "prepaidRent",
+        "prepaidRentDifference",
+        "prospects",
+        "netYTD",
+        "miniKeyStatsCollection"
 })
 public class MiniKeyStatsReport {
 
@@ -150,7 +147,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -158,7 +154,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -166,7 +161,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the occupancy property.
-     * 
      */
     public int getOccupancy() {
         return occupancy;
@@ -174,7 +168,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the occupancy property.
-     * 
      */
     public void setOccupancy(int value) {
         this.occupancy = value;
@@ -182,7 +175,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the vacancy property.
-     * 
      */
     public int getVacancy() {
         return vacancy;
@@ -190,7 +182,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the vacancy property.
-     * 
      */
     public void setVacancy(int value) {
         this.vacancy = value;
@@ -198,7 +189,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the other property.
-     * 
      */
     public int getOther() {
         return other;
@@ -206,7 +196,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the other property.
-     * 
      */
     public void setOther(int value) {
         this.other = value;
@@ -214,11 +203,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the grossPotential property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossPotential() {
         return grossPotential;
@@ -226,11 +213,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the grossPotential property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossPotential(BigDecimal value) {
         this.grossPotential = value;
@@ -238,11 +223,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the grossPotentialDifference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossPotentialDifference() {
         return grossPotentialDifference;
@@ -250,11 +233,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the grossPotentialDifference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossPotentialDifference(BigDecimal value) {
         this.grossPotentialDifference = value;
@@ -262,11 +243,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the projectedRent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getProjectedRent() {
         return projectedRent;
@@ -274,11 +253,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the projectedRent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setProjectedRent(BigDecimal value) {
         this.projectedRent = value;
@@ -286,11 +263,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the projectedRentDifference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getProjectedRentDifference() {
         return projectedRentDifference;
@@ -298,11 +273,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the projectedRentDifference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setProjectedRentDifference(BigDecimal value) {
         this.projectedRentDifference = value;
@@ -310,11 +283,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the grossScheduled property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossScheduled() {
         return grossScheduled;
@@ -322,11 +293,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the grossScheduled property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossScheduled(BigDecimal value) {
         this.grossScheduled = value;
@@ -334,11 +303,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the grossScheduledDifference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGrossScheduledDifference() {
         return grossScheduledDifference;
@@ -346,11 +313,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the grossScheduledDifference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGrossScheduledDifference(BigDecimal value) {
         this.grossScheduledDifference = value;
@@ -358,11 +323,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the economicOccupancy property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEconomicOccupancy() {
         return economicOccupancy;
@@ -370,11 +333,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the economicOccupancy property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEconomicOccupancy(BigDecimal value) {
         this.economicOccupancy = value;
@@ -382,11 +343,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the economicOccupancyDifference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEconomicOccupancyDifference() {
         return economicOccupancyDifference;
@@ -394,11 +353,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the economicOccupancyDifference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEconomicOccupancyDifference(BigDecimal value) {
         this.economicOccupancyDifference = value;
@@ -406,11 +363,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the occupiedSquareFeet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOccupiedSquareFeet() {
         return occupiedSquareFeet;
@@ -418,11 +373,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the occupiedSquareFeet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOccupiedSquareFeet(BigDecimal value) {
         this.occupiedSquareFeet = value;
@@ -430,11 +383,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the vacantSquareFeet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVacantSquareFeet() {
         return vacantSquareFeet;
@@ -442,11 +393,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the vacantSquareFeet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVacantSquareFeet(BigDecimal value) {
         this.vacantSquareFeet = value;
@@ -454,11 +403,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the otherSquareFeet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOtherSquareFeet() {
         return otherSquareFeet;
@@ -466,11 +413,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the otherSquareFeet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOtherSquareFeet(BigDecimal value) {
         this.otherSquareFeet = value;
@@ -478,11 +423,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the totalSquareFeet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalSquareFeet() {
         return totalSquareFeet;
@@ -490,11 +433,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the totalSquareFeet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalSquareFeet(BigDecimal value) {
         this.totalSquareFeet = value;
@@ -502,11 +443,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the occupiedSquareFeetPercentage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOccupiedSquareFeetPercentage() {
         return occupiedSquareFeetPercentage;
@@ -514,11 +453,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the occupiedSquareFeetPercentage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOccupiedSquareFeetPercentage(BigDecimal value) {
         this.occupiedSquareFeetPercentage = value;
@@ -526,11 +463,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the vacantSquareFeetPercentage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVacantSquareFeetPercentage() {
         return vacantSquareFeetPercentage;
@@ -538,11 +473,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the vacantSquareFeetPercentage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVacantSquareFeetPercentage(BigDecimal value) {
         this.vacantSquareFeetPercentage = value;
@@ -550,11 +483,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the otherSquareFeetPercentage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOtherSquareFeetPercentage() {
         return otherSquareFeetPercentage;
@@ -562,11 +493,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the otherSquareFeetPercentage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOtherSquareFeetPercentage(BigDecimal value) {
         this.otherSquareFeetPercentage = value;
@@ -574,11 +503,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the occupiedPercentage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOccupiedPercentage() {
         return occupiedPercentage;
@@ -586,11 +513,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the occupiedPercentage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOccupiedPercentage(BigDecimal value) {
         this.occupiedPercentage = value;
@@ -598,11 +523,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the vacantPercentage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVacantPercentage() {
         return vacantPercentage;
@@ -610,11 +533,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the vacantPercentage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVacantPercentage(BigDecimal value) {
         this.vacantPercentage = value;
@@ -622,11 +543,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the activeAutoPay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getActiveAutoPay() {
         return activeAutoPay;
@@ -634,11 +553,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the activeAutoPay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setActiveAutoPay(BigDecimal value) {
         this.activeAutoPay = value;
@@ -646,11 +563,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the arTotal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getARTotal() {
         return arTotal;
@@ -658,11 +573,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the arTotal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setARTotal(BigDecimal value) {
         this.arTotal = value;
@@ -670,11 +583,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the arDifference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getArDifference() {
         return arDifference;
@@ -682,11 +593,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the arDifference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setArDifference(BigDecimal value) {
         this.arDifference = value;
@@ -694,11 +603,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the prepaidRent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPrepaidRent() {
         return prepaidRent;
@@ -706,11 +613,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the prepaidRent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPrepaidRent(BigDecimal value) {
         this.prepaidRent = value;
@@ -718,11 +623,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the prepaidRentDifference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPrepaidRentDifference() {
         return prepaidRentDifference;
@@ -730,11 +633,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the prepaidRentDifference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPrepaidRentDifference(BigDecimal value) {
         this.prepaidRentDifference = value;
@@ -742,7 +643,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the prospects property.
-     * 
      */
     public int getProspects() {
         return prospects;
@@ -750,7 +650,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the prospects property.
-     * 
      */
     public void setProspects(int value) {
         this.prospects = value;
@@ -758,7 +657,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the netYTD property.
-     * 
      */
     public int getNetYTD() {
         return netYTD;
@@ -766,7 +664,6 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the netYTD property.
-     * 
      */
     public void setNetYTD(int value) {
         this.netYTD = value;
@@ -774,11 +671,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Gets the value of the miniKeyStatsCollection property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfMiniKeyStatsReport }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfMiniKeyStatsReport }
      */
     public ArrayOfMiniKeyStatsReport getMiniKeyStatsCollection() {
         return miniKeyStatsCollection;
@@ -786,11 +681,9 @@ public class MiniKeyStatsReport {
 
     /**
      * Sets the value of the miniKeyStatsCollection property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfMiniKeyStatsReport }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfMiniKeyStatsReport }
      */
     public void setMiniKeyStatsCollection(ArrayOfMiniKeyStatsReport value) {
         this.miniKeyStatsCollection = value;

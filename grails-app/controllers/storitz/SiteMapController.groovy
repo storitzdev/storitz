@@ -4,21 +4,20 @@ import com.storitz.Metro
 import com.storitz.MetroEntry
 import com.storitz.StorageSite
 
-class SiteMapController
-{
+class SiteMapController {
 
   def index = {
 
     withFormat {
       html {
-        def sites = StorageSite.findAllByDisabled(false, [sort:"city"]).groupBy { StorageSite site -> site.state.display }
+        def sites = StorageSite.findAllByDisabled(false, [sort: "city"]).groupBy { StorageSite site -> site.state.display }
 
         // Converting to TreeMap so keys (state names) will iterate in alphabetical order.
         [storageSiteStateMap: sites as TreeMap]
       }
 
       xml {
-        render(view:"sitemapIndex", contentType:'text/html; charset=utf-8', model:[])
+        render(view: "sitemapIndex", contentType: 'text/html; charset=utf-8', model: [])
       }
     }
   }
@@ -29,7 +28,7 @@ class SiteMapController
         def siteList = StorageSite.findAllByDisabled(false)
         def metroList = Metro.list().unique(new MetroComparator())
         def metroEntryList = MetroEntry.list()
-        render(view:"sitemap", contentType:'text/html; charset=utf-8', model:[siteList:siteList, metroList:metroList, metroEntryList:metroEntryList])
+        render(view: "sitemap", contentType: 'text/html; charset=utf-8', model: [siteList: siteList, metroList: metroList, metroEntryList: metroEntryList])
       }
     }
   }
@@ -38,7 +37,7 @@ class SiteMapController
     withFormat {
       xml {
         def siteList = StorageSite.findAllByDisabled(false)
-        render(view:"sitemapGeo", contentType:'text/html; charset=utf-8', model:[siteList:siteList])
+        render(view: "sitemapGeo", contentType: 'text/html; charset=utf-8', model: [siteList: siteList])
       }
     }
   }
@@ -47,7 +46,7 @@ class SiteMapController
     withFormat {
       xml {
         def siteList = StorageSite.findAllByDisabled(false)
-        render(view:"sitemapImage", contentType:'text/html; charset=utf-8', model:[siteList:siteList])
+        render(view: "sitemapImage", contentType: 'text/html; charset=utf-8', model: [siteList: siteList])
       }
     }
   }

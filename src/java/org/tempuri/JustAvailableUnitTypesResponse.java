@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "justAvailableUnitTypesResult"
+        "justAvailableUnitTypesResult"
 })
 @XmlRootElement(name = "JustAvailableUnitTypesResponse")
 public class JustAvailableUnitTypesResponse {
@@ -39,11 +32,9 @@ public class JustAvailableUnitTypesResponse {
 
     /**
      * Gets the value of the justAvailableUnitTypesResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAvailableUnitTypesST }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAvailableUnitTypesST }
      */
     public ArrayOfAvailableUnitTypesST getJustAvailableUnitTypesResult() {
         return justAvailableUnitTypesResult;
@@ -51,11 +42,9 @@ public class JustAvailableUnitTypesResponse {
 
     /**
      * Sets the value of the justAvailableUnitTypesResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAvailableUnitTypesST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAvailableUnitTypesST }
      */
     public void setJustAvailableUnitTypesResult(ArrayOfAvailableUnitTypesST value) {
         this.justAvailableUnitTypesResult = value;

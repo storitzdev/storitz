@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for POST_SCHEDULE_LTR_TNT_INFO complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="POST_SCHEDULE_LTR_TNT_INFO">
  *   &lt;complexContent>
@@ -37,28 +32,25 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "POST_SCHEDULE_LTR_TNT_INFO", propOrder = {
-    "schedid",
-    "rentalid",
-    "acctid",
-    "siteid",
-    "ltrtypeid",
-    "ltrname",
-    "certflag",
-    "maillocal",
-    "processedflag",
-    "scheduleddate",
-    "active",
-    "whocreated",
-    "notes"
+        "schedid",
+        "rentalid",
+        "acctid",
+        "siteid",
+        "ltrtypeid",
+        "ltrname",
+        "certflag",
+        "maillocal",
+        "processedflag",
+        "scheduleddate",
+        "active",
+        "whocreated",
+        "notes"
 })
 public class POSTSCHEDULELTRTNTINFO
-    extends BaseEntityOfCollectionPOSTSCHEDULELTRTNTINFOColumnIndexes
-{
+        extends BaseEntityOfCollectionPOSTSCHEDULELTRTNTINFOColumnIndexes {
 
     @XmlElement(name = "SCHED_ID")
     protected long schedid;
@@ -90,7 +82,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the schedid property.
-     * 
      */
     public long getSCHEDID() {
         return schedid;
@@ -98,7 +89,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the schedid property.
-     * 
      */
     public void setSCHEDID(long value) {
         this.schedid = value;
@@ -106,11 +96,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -118,11 +106,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -130,11 +116,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -142,11 +126,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -154,7 +136,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -162,7 +143,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -170,7 +150,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the ltrtypeid property.
-     * 
      */
     public long getLTRTYPEID() {
         return ltrtypeid;
@@ -178,7 +157,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the ltrtypeid property.
-     * 
      */
     public void setLTRTYPEID(long value) {
         this.ltrtypeid = value;
@@ -186,11 +164,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the ltrname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLTRNAME() {
         return ltrname;
@@ -198,11 +174,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the ltrname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLTRNAME(String value) {
         this.ltrname = value;
@@ -210,7 +184,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the certflag property.
-     * 
      */
     public boolean isCERTFLAG() {
         return certflag;
@@ -218,7 +191,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the certflag property.
-     * 
      */
     public void setCERTFLAG(boolean value) {
         this.certflag = value;
@@ -226,11 +198,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the maillocal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isMAILLOCAL() {
         return maillocal;
@@ -238,11 +208,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the maillocal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setMAILLOCAL(Boolean value) {
         this.maillocal = value;
@@ -250,7 +218,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the processedflag property.
-     * 
      */
     public boolean isPROCESSEDFLAG() {
         return processedflag;
@@ -258,7 +225,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the processedflag property.
-     * 
      */
     public void setPROCESSEDFLAG(boolean value) {
         this.processedflag = value;
@@ -266,11 +232,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the scheduleddate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSCHEDULEDDATE() {
         return scheduleddate;
@@ -278,11 +242,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the scheduleddate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSCHEDULEDDATE(XMLGregorianCalendar value) {
         this.scheduleddate = value;
@@ -290,7 +252,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -298,7 +259,6 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -306,11 +266,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the whocreated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getWHOCREATED() {
         return whocreated;
@@ -318,11 +276,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the whocreated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWHOCREATED(String value) {
         this.whocreated = value;
@@ -330,11 +286,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTES() {
         return notes;
@@ -342,11 +296,9 @@ public class POSTSCHEDULELTRTNTINFO
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTES(String value) {
         this.notes = value;

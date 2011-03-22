@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ORG_RETAIL_BOM complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_RETAIL_BOM">
  *   &lt;complexContent>
@@ -28,21 +27,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_RETAIL_BOM", propOrder = {
-    "updatedby",
-    "bomretailid",
-    "retailid",
-    "itemqty",
-    "active",
-    "createdby"
+        "updatedby",
+        "bomretailid",
+        "retailid",
+        "itemqty",
+        "active",
+        "createdby"
 })
 public class ORGRETAILBOM
-    extends BaseEntityOfCollectionORGRETAILBOMColumnIndexes
-{
+        extends BaseEntityOfCollectionORGRETAILBOMColumnIndexes {
 
     @XmlElement(name = "UPDATED_BY")
     protected long updatedby;
@@ -59,7 +55,6 @@ public class ORGRETAILBOM
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -67,7 +62,6 @@ public class ORGRETAILBOM
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -75,7 +69,6 @@ public class ORGRETAILBOM
 
     /**
      * Gets the value of the bomretailid property.
-     * 
      */
     public long getBOMRETAILID() {
         return bomretailid;
@@ -83,7 +76,6 @@ public class ORGRETAILBOM
 
     /**
      * Sets the value of the bomretailid property.
-     * 
      */
     public void setBOMRETAILID(long value) {
         this.bomretailid = value;
@@ -91,7 +83,6 @@ public class ORGRETAILBOM
 
     /**
      * Gets the value of the retailid property.
-     * 
      */
     public long getRETAILID() {
         return retailid;
@@ -99,7 +90,6 @@ public class ORGRETAILBOM
 
     /**
      * Sets the value of the retailid property.
-     * 
      */
     public void setRETAILID(long value) {
         this.retailid = value;
@@ -107,7 +97,6 @@ public class ORGRETAILBOM
 
     /**
      * Gets the value of the itemqty property.
-     * 
      */
     public int getITEMQTY() {
         return itemqty;
@@ -115,7 +104,6 @@ public class ORGRETAILBOM
 
     /**
      * Sets the value of the itemqty property.
-     * 
      */
     public void setITEMQTY(int value) {
         this.itemqty = value;
@@ -123,11 +111,9 @@ public class ORGRETAILBOM
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -135,11 +121,9 @@ public class ORGRETAILBOM
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;
@@ -147,7 +131,6 @@ public class ORGRETAILBOM
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -155,7 +138,6 @@ public class ORGRETAILBOM
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;

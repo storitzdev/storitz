@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for TerminateService_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TerminateService_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TerminateService_Request", propOrder = {
-    "siteID",
-    "serviceRentalID",
-    "serviceType"
+        "siteID",
+        "serviceRentalID",
+        "serviceType"
 })
 public class TerminateServiceRequest {
 
@@ -45,7 +42,6 @@ public class TerminateServiceRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -53,7 +49,6 @@ public class TerminateServiceRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -61,7 +56,6 @@ public class TerminateServiceRequest {
 
     /**
      * Gets the value of the serviceRentalID property.
-     * 
      */
     public long getServiceRentalID() {
         return serviceRentalID;
@@ -69,7 +63,6 @@ public class TerminateServiceRequest {
 
     /**
      * Sets the value of the serviceRentalID property.
-     * 
      */
     public void setServiceRentalID(long value) {
         this.serviceRentalID = value;
@@ -77,11 +70,9 @@ public class TerminateServiceRequest {
 
     /**
      * Gets the value of the serviceType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ServiceTypeVals }
-     *     
+     *
+     * @return possible object is
+     *         {@link ServiceTypeVals }
      */
     public ServiceTypeVals getServiceType() {
         return serviceType;
@@ -89,11 +80,9 @@ public class TerminateServiceRequest {
 
     /**
      * Sets the value of the serviceType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ServiceTypeVals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ServiceTypeVals }
      */
     public void setServiceType(ServiceTypeVals value) {
         this.serviceType = value;

@@ -1,18 +1,17 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for Payment_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Payment_ST">
  *   &lt;complexContent>
@@ -33,31 +32,31 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="csCountry" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="csCCFName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="csCCLName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="sProcessor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Payment_ST", propOrder = {
-    "dPaymentAmount",
-    "csPaymentMethod",
-    "csCCType",
-    "csCCNumber",
-    "csRoutingNumber",
-    "csExpirationDate",
-    "csCCStreetAddress",
-    "csCCZip",
-    "csCVV",
-    "csTrack1Data",
-    "csCity",
-    "csState",
-    "csCountry",
-    "csCCFName",
-    "csCCLName"
+        "dPaymentAmount",
+        "csPaymentMethod",
+        "csCCType",
+        "csCCNumber",
+        "csRoutingNumber",
+        "csExpirationDate",
+        "csCCStreetAddress",
+        "csCCZip",
+        "csCVV",
+        "csTrack1Data",
+        "csCity",
+        "csState",
+        "csCountry",
+        "csCCFName",
+        "csCCLName",
+        "sProcessor"
 })
 public class PaymentST {
 
@@ -77,14 +76,13 @@ public class PaymentST {
     protected String csCountry;
     protected String csCCFName;
     protected String csCCLName;
+    protected String sProcessor;
 
     /**
      * Gets the value of the dPaymentAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDPaymentAmount() {
         return dPaymentAmount;
@@ -92,11 +90,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the dPaymentAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDPaymentAmount(BigDecimal value) {
         this.dPaymentAmount = value;
@@ -104,11 +100,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csPaymentMethod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPaymentMethod() {
         return csPaymentMethod;
@@ -116,11 +110,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csPaymentMethod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPaymentMethod(String value) {
         this.csPaymentMethod = value;
@@ -128,11 +120,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCCType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCType() {
         return csCCType;
@@ -140,11 +130,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCCType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCType(String value) {
         this.csCCType = value;
@@ -152,11 +140,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCCNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCNumber() {
         return csCCNumber;
@@ -164,11 +150,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCCNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCNumber(String value) {
         this.csCCNumber = value;
@@ -176,11 +160,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csRoutingNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsRoutingNumber() {
         return csRoutingNumber;
@@ -188,11 +170,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csRoutingNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsRoutingNumber(String value) {
         this.csRoutingNumber = value;
@@ -200,11 +180,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csExpirationDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsExpirationDate() {
         return csExpirationDate;
@@ -212,11 +190,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csExpirationDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsExpirationDate(String value) {
         this.csExpirationDate = value;
@@ -224,11 +200,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCCStreetAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCStreetAddress() {
         return csCCStreetAddress;
@@ -236,11 +210,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCCStreetAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCStreetAddress(String value) {
         this.csCCStreetAddress = value;
@@ -248,11 +220,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCCZip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCZip() {
         return csCCZip;
@@ -260,11 +230,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCCZip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCZip(String value) {
         this.csCCZip = value;
@@ -272,11 +240,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCVV property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCVV() {
         return csCVV;
@@ -284,11 +250,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCVV property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCVV(String value) {
         this.csCVV = value;
@@ -296,11 +260,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csTrack1Data property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsTrack1Data() {
         return csTrack1Data;
@@ -308,11 +270,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csTrack1Data property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsTrack1Data(String value) {
         this.csTrack1Data = value;
@@ -320,11 +280,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCity() {
         return csCity;
@@ -332,11 +290,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCity(String value) {
         this.csCity = value;
@@ -344,11 +300,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csState property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsState() {
         return csState;
@@ -356,11 +310,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csState property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsState(String value) {
         this.csState = value;
@@ -368,11 +320,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCountry property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCountry() {
         return csCountry;
@@ -380,11 +330,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCountry property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCountry(String value) {
         this.csCountry = value;
@@ -392,11 +340,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCCFName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCFName() {
         return csCCFName;
@@ -404,11 +350,9 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCCFName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCFName(String value) {
         this.csCCFName = value;
@@ -416,11 +360,9 @@ public class PaymentST {
 
     /**
      * Gets the value of the csCCLName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCLName() {
         return csCCLName;
@@ -428,14 +370,32 @@ public class PaymentST {
 
     /**
      * Sets the value of the csCCLName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCLName(String value) {
         this.csCCLName = value;
+    }
+
+    /**
+     * Gets the value of the sProcessor property.
+     *
+     * @return possible object is
+     *         {@link String }
+     */
+    public String getSProcessor() {
+        return sProcessor;
+    }
+
+    /**
+     * Sets the value of the sProcessor property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setSProcessor(String value) {
+        this.sProcessor = value;
     }
 
 }

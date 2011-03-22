@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SellRetailWithAccountMultiple_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SellRetailWithAccountMultiple_Request">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SellRetailWithAccountMultiple_Request", propOrder = {
-    "retailItems"
+        "retailItems"
 })
 public class SellRetailWithAccountMultipleRequest {
 
@@ -37,11 +34,9 @@ public class SellRetailWithAccountMultipleRequest {
 
     /**
      * Gets the value of the retailItems property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfSellRetailWithAccountRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfSellRetailWithAccountRequest }
      */
     public ArrayOfSellRetailWithAccountRequest getRetailItems() {
         return retailItems;
@@ -49,11 +44,9 @@ public class SellRetailWithAccountMultipleRequest {
 
     /**
      * Sets the value of the retailItems property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfSellRetailWithAccountRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfSellRetailWithAccountRequest }
      */
     public void setRetailItems(ArrayOfSellRetailWithAccountRequest value) {
         this.retailItems = value;

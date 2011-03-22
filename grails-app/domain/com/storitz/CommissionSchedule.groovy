@@ -2,16 +2,16 @@ package com.storitz
 
 class CommissionSchedule {
 
-    static hasMany = [entries:Commission]
+  static hasMany = [entries: Commission]
 
-    static fetchMode = [entries:'eager']
-  
-    static constraints = {
-    }
+  static fetchMode = [entries: 'eager']
 
-    static mapping = {
-        entries cascade:"all,delete-orphan"
-    }
+  static constraints = {
+  }
 
-    String scheduleName
+  static mapping = {
+    entries cascade: "all,delete-orphan"
+  }
+
+  String scheduleName
 }

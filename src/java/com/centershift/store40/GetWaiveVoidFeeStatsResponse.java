@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getWaiveVoidFeeStatsResult"
+        "getWaiveVoidFeeStatsResult"
 })
 @XmlRootElement(name = "GetWaiveVoidFeeStatsResponse")
 public class GetWaiveVoidFeeStatsResponse {
@@ -39,11 +32,9 @@ public class GetWaiveVoidFeeStatsResponse {
 
     /**
      * Gets the value of the getWaiveVoidFeeStatsResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetWaiveVoidFeeStatsResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetWaiveVoidFeeStatsResponse2 }
      */
     public GetWaiveVoidFeeStatsResponse2 getGetWaiveVoidFeeStatsResult() {
         return getWaiveVoidFeeStatsResult;
@@ -51,11 +42,9 @@ public class GetWaiveVoidFeeStatsResponse {
 
     /**
      * Sets the value of the getWaiveVoidFeeStatsResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetWaiveVoidFeeStatsResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetWaiveVoidFeeStatsResponse2 }
      */
     public void setGetWaiveVoidFeeStatsResult(GetWaiveVoidFeeStatsResponse2 value) {
         this.getWaiveVoidFeeStatsResult = value;

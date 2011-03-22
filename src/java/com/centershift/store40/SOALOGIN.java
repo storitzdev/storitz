@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SOA_LOGIN complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_LOGIN">
  *   &lt;complexContent>
@@ -37,30 +36,27 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_LOGIN", propOrder = {
-    "orgid",
-    "contactid",
-    "acctid",
-    "firstname",
-    "lastname",
-    "knownas",
-    "contacttype",
-    "active",
-    "email",
-    "ecommcode",
-    "cflex01",
-    "cflex02",
-    "cflex03",
-    "cflex04",
-    "cflex05"
+        "orgid",
+        "contactid",
+        "acctid",
+        "firstname",
+        "lastname",
+        "knownas",
+        "contacttype",
+        "active",
+        "email",
+        "ecommcode",
+        "cflex01",
+        "cflex02",
+        "cflex03",
+        "cflex04",
+        "cflex05"
 })
 public class SOALOGIN
-    extends BaseEntityOfCollectionSOALOGINColumnIndexes
-{
+        extends BaseEntityOfCollectionSOALOGINColumnIndexes {
 
     @XmlElement(name = "ORG_ID")
     protected long orgid;
@@ -95,7 +91,6 @@ public class SOALOGIN
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -103,7 +98,6 @@ public class SOALOGIN
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -111,7 +105,6 @@ public class SOALOGIN
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -119,7 +112,6 @@ public class SOALOGIN
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -127,7 +119,6 @@ public class SOALOGIN
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -135,7 +126,6 @@ public class SOALOGIN
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -143,11 +133,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFIRSTNAME() {
         return firstname;
@@ -155,11 +143,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFIRSTNAME(String value) {
         this.firstname = value;
@@ -167,11 +153,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTNAME() {
         return lastname;
@@ -179,11 +163,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTNAME(String value) {
         this.lastname = value;
@@ -191,11 +173,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the knownas property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getKNOWNAS() {
         return knownas;
@@ -203,11 +183,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the knownas property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setKNOWNAS(String value) {
         this.knownas = value;
@@ -215,7 +193,6 @@ public class SOALOGIN
 
     /**
      * Gets the value of the contacttype property.
-     * 
      */
     public int getCONTACTTYPE() {
         return contacttype;
@@ -223,7 +200,6 @@ public class SOALOGIN
 
     /**
      * Sets the value of the contacttype property.
-     * 
      */
     public void setCONTACTTYPE(int value) {
         this.contacttype = value;
@@ -231,11 +207,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -243,11 +217,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;
@@ -255,11 +227,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEMAIL() {
         return email;
@@ -267,11 +237,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEMAIL(String value) {
         this.email = value;
@@ -279,11 +247,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the ecommcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getECOMMCODE() {
         return ecommcode;
@@ -291,11 +257,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the ecommcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setECOMMCODE(String value) {
         this.ecommcode = value;
@@ -303,11 +267,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the cflex01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX01() {
         return cflex01;
@@ -315,11 +277,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the cflex01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX01(String value) {
         this.cflex01 = value;
@@ -327,11 +287,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the cflex02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX02() {
         return cflex02;
@@ -339,11 +297,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the cflex02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX02(String value) {
         this.cflex02 = value;
@@ -351,11 +307,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the cflex03 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX03() {
         return cflex03;
@@ -363,11 +317,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the cflex03 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX03(String value) {
         this.cflex03 = value;
@@ -375,11 +327,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the cflex04 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX04() {
         return cflex04;
@@ -387,11 +337,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the cflex04 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX04(String value) {
         this.cflex04 = value;
@@ -399,11 +347,9 @@ public class SOALOGIN
 
     /**
      * Gets the value of the cflex05 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX05() {
         return cflex05;
@@ -411,11 +357,9 @@ public class SOALOGIN
 
     /**
      * Sets the value of the cflex05 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX05(String value) {
         this.cflex05 = value;

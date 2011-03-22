@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "csUnitID",
-    "csSource"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "csUnitID",
+        "csSource"
 })
 @XmlRootElement(name = "MoveInSource")
 public class MoveInSource {
@@ -49,11 +46,9 @@ public class MoveInSource {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -61,11 +56,9 @@ public class MoveInSource {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -73,11 +66,9 @@ public class MoveInSource {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -85,11 +76,9 @@ public class MoveInSource {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -97,11 +86,9 @@ public class MoveInSource {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -109,11 +96,9 @@ public class MoveInSource {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -121,11 +106,9 @@ public class MoveInSource {
 
     /**
      * Gets the value of the csUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnitID() {
         return csUnitID;
@@ -133,11 +116,9 @@ public class MoveInSource {
 
     /**
      * Sets the value of the csUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnitID(String value) {
         this.csUnitID = value;
@@ -145,11 +126,9 @@ public class MoveInSource {
 
     /**
      * Gets the value of the csSource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSource() {
         return csSource;
@@ -157,11 +136,9 @@ public class MoveInSource {
 
     /**
      * Sets the value of the csSource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSource(String value) {
         this.csSource = value;

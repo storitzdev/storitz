@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetLetterInfo_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetLetterInfo_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetLetterInfo_Request", propOrder = {
-    "accountID",
-    "rentalID"
+        "accountID",
+        "rentalID"
 })
 public class GetLetterInfoRequest {
 
@@ -41,11 +38,9 @@ public class GetLetterInfoRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -53,11 +48,9 @@ public class GetLetterInfoRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -65,11 +58,9 @@ public class GetLetterInfoRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalID() {
         return rentalID;
@@ -77,11 +68,9 @@ public class GetLetterInfoRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalID(Long value) {
         this.rentalID = value;

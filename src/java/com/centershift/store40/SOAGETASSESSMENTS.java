@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for SOA_GET_ASSESSMENTS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_GET_ASSESSMENTS">
  *   &lt;complexContent>
@@ -45,35 +40,32 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_GET_ASSESSMENTS", propOrder = {
-    "assessid",
-    "acctid",
-    "siteid",
-    "rentalid",
-    "assessdate",
-    "reftype",
-    "version",
-    "roversion",
-    "classref",
-    "taxgroupid",
-    "qty",
-    "extended",
-    "taxdue",
-    "reftypeval",
-    "assessstart",
-    "assessend",
-    "descrip",
-    "itemprice",
-    "fulfill",
-    "parentassessid"
+        "assessid",
+        "acctid",
+        "siteid",
+        "rentalid",
+        "assessdate",
+        "reftype",
+        "version",
+        "roversion",
+        "classref",
+        "taxgroupid",
+        "qty",
+        "extended",
+        "taxdue",
+        "reftypeval",
+        "assessstart",
+        "assessend",
+        "descrip",
+        "itemprice",
+        "fulfill",
+        "parentassessid"
 })
 public class SOAGETASSESSMENTS
-    extends BaseEntityOfCollectionSOAGETASSESSMENTSColumnIndexes
-{
+        extends BaseEntityOfCollectionSOAGETASSESSMENTSColumnIndexes {
 
     @XmlElement(name = "ASSESS_ID", required = true, type = Long.class, nillable = true)
     protected Long assessid;
@@ -121,11 +113,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the assessid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getASSESSID() {
         return assessid;
@@ -133,11 +123,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the assessid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setASSESSID(Long value) {
         this.assessid = value;
@@ -145,11 +133,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -157,11 +143,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -169,11 +153,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -181,11 +163,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -193,11 +173,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTALID() {
         return rentalid;
@@ -205,11 +183,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTALID(BigDecimal value) {
         this.rentalid = value;
@@ -217,11 +193,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the assessdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getASSESSDATE() {
         return assessdate;
@@ -229,11 +203,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the assessdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setASSESSDATE(XMLGregorianCalendar value) {
         this.assessdate = value;
@@ -241,11 +213,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the reftype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getREFTYPE() {
         return reftype;
@@ -253,11 +223,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the reftype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setREFTYPE(Integer value) {
         this.reftype = value;
@@ -265,11 +233,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getVERSION() {
         return version;
@@ -277,11 +243,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setVERSION(Integer value) {
         this.version = value;
@@ -289,11 +253,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the roversion property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getROVERSION() {
         return roversion;
@@ -301,11 +263,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the roversion property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setROVERSION(BigDecimal value) {
         this.roversion = value;
@@ -313,11 +273,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the classref property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCLASSREF() {
         return classref;
@@ -325,11 +283,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the classref property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCLASSREF(Integer value) {
         this.classref = value;
@@ -337,11 +293,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAXGROUPID() {
         return taxgroupid;
@@ -349,11 +303,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAXGROUPID(BigDecimal value) {
         this.taxgroupid = value;
@@ -361,11 +313,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the qty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getQTY() {
         return qty;
@@ -373,11 +323,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the qty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setQTY(BigDecimal value) {
         this.qty = value;
@@ -385,11 +333,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the extended property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEXTENDED() {
         return extended;
@@ -397,11 +343,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the extended property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEXTENDED(BigDecimal value) {
         this.extended = value;
@@ -409,11 +353,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the taxdue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAXDUE() {
         return taxdue;
@@ -421,11 +363,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the taxdue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAXDUE(BigDecimal value) {
         this.taxdue = value;
@@ -433,11 +373,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the reftypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getREFTYPEVAL() {
         return reftypeval;
@@ -445,11 +383,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the reftypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setREFTYPEVAL(String value) {
         this.reftypeval = value;
@@ -457,11 +393,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the assessstart property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getASSESSSTART() {
         return assessstart;
@@ -469,11 +403,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the assessstart property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setASSESSSTART(XMLGregorianCalendar value) {
         this.assessstart = value;
@@ -481,11 +413,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the assessend property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getASSESSEND() {
         return assessend;
@@ -493,11 +423,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the assessend property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setASSESSEND(XMLGregorianCalendar value) {
         this.assessend = value;
@@ -505,11 +433,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the descrip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIP() {
         return descrip;
@@ -517,11 +443,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the descrip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIP(String value) {
         this.descrip = value;
@@ -529,11 +453,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the itemprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getITEMPRICE() {
         return itemprice;
@@ -541,11 +463,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the itemprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setITEMPRICE(BigDecimal value) {
         this.itemprice = value;
@@ -553,11 +473,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the fulfill property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFULFILL() {
         return fulfill;
@@ -565,11 +483,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the fulfill property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFULFILL(BigDecimal value) {
         this.fulfill = value;
@@ -577,11 +493,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Gets the value of the parentassessid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPARENTASSESSID() {
         return parentassessid;
@@ -589,11 +503,9 @@ public class SOAGETASSESSMENTS
 
     /**
      * Sets the value of the parentassessid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPARENTASSESSID(Long value) {
         this.parentassessid = value;

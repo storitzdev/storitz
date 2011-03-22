@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "addRentalsToAuctionResult"
+        "addRentalsToAuctionResult"
 })
 @XmlRootElement(name = "AddRentalsToAuctionResponse")
 public class AddRentalsToAuctionResponse {
@@ -39,11 +32,9 @@ public class AddRentalsToAuctionResponse {
 
     /**
      * Gets the value of the addRentalsToAuctionResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddRentalToAuctionResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddRentalToAuctionResponse }
      */
     public AddRentalToAuctionResponse getAddRentalsToAuctionResult() {
         return addRentalsToAuctionResult;
@@ -51,11 +42,9 @@ public class AddRentalsToAuctionResponse {
 
     /**
      * Sets the value of the addRentalsToAuctionResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddRentalToAuctionResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddRentalToAuctionResponse }
      */
     public void setAddRentalsToAuctionResult(AddRentalToAuctionResponse value) {
         this.addRentalsToAuctionResult = value;

@@ -26,7 +26,7 @@
       <div id="regPrice" class="transStrikethru"></div>
       <div>
         <div id="pushPrice" class="transPrice left"></div>
-        <div class="transPerMonth left"> /Per Month</div>
+        <div class="transPerMonth left">/Per Month</div>
       </div>
       <div class="transPerMonth">
         <div class="left">Actual Size:</div>
@@ -82,59 +82,59 @@
             <g:if test="${site.rentalFee}">
               <li>Refundable until Move-In date</li>
             </g:if>
-           </ul>
-           <g:if test="${site.feed.transactionBoxLink}">
-             <span id="transactionBoxLink" class="transactionBoxLink textCenter">${site.feed.transactionBoxLink}</span>
+          </ul>
+          <g:if test="${site.feed.transactionBoxLink}">
+            <span id="transactionBoxLink" class="transactionBoxLink textCenter">${site.feed.transactionBoxLink}</span>
           </g:if>
-         </div>
+        </div>
       </g:if>
       <div id="costDetails" class="right">
         <table class="costTotals" cellspacing="0">
           <thead>
-            <tr>
-              <th>Item</th>
-              <th>Initial Period</th>
-              <th>Monthly Rate</th>
-              <th>Total</th>
-            </tr>
+          <tr>
+            <th>Item</th>
+            <th>Initial Period</th>
+            <th>Monthly Rate</th>
+            <th>Total</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="transLineDesc">Rent</td>
-              <td class="costDuration" id="monthlyDuration"></td>
-              <td class="costMoneyPerMonth" id="monthlyPerMonth"></td>
-              <td class="costMoney" id="monthlyTotal"></td>
-            </tr>
-            <tr id="specialOfferBlock">
-              <td class="transLineDesc">Selected Offer</td>
-              <td class="costDuration"></td>
-              <td class="costMoneyPerMonth"></td>
-              <td class="costMoney" id="discountTotal"></td>
-            </tr>
-            <tr id="insuranceBlock">
-              <td class="transLineDesc">Property Protection</td>
-              <td class="costDuration" id="insuranceDuration"></td>
-              <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
-              <td class="costMoney" id="insuranceTotal"></td>
-            </tr>
-            <tr>
-              <td class="transLineDesc">Property Fees</td>
-              <td class="costDuration"></td>
-              <td class="costMoneyPerMonth"></td>
-              <td class="costMoney" id="adminTotal"></td>
-            </tr>
-            <tr id="depositBlock">
-              <td class="transLineDesc">Refundable Deposit</td>
-              <td class="costDuration"></td>
-              <td class="costMoneyPerMonth"></td>
-              <td class="costMoney" id="deposit"></td>
-            </tr>
-            <tr id="taxBlock">
-              <td class="transLineDesc">Tax</td>
-              <td class="costDuration"></td>
-              <td class="costMoneyPerMonth"></td>
-              <td class="costMoney" id="taxTotal"></td>
-            </tr>
+          <tr>
+            <td class="transLineDesc">Rent</td>
+            <td class="costDuration" id="monthlyDuration"></td>
+            <td class="costMoneyPerMonth" id="monthlyPerMonth"></td>
+            <td class="costMoney" id="monthlyTotal"></td>
+          </tr>
+          <tr id="specialOfferBlock">
+            <td class="transLineDesc">Selected Offer</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
+            <td class="costMoney" id="discountTotal"></td>
+          </tr>
+          <tr id="insuranceBlock">
+            <td class="transLineDesc">Property Protection</td>
+            <td class="costDuration" id="insuranceDuration"></td>
+            <td class="costMoneyPerMonth" id="insurancePerMonth"></td>
+            <td class="costMoney" id="insuranceTotal"></td>
+          </tr>
+          <tr>
+            <td class="transLineDesc">Property Fees</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
+            <td class="costMoney" id="adminTotal"></td>
+          </tr>
+          <tr id="depositBlock">
+            <td class="transLineDesc">Refundable Deposit</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
+            <td class="costMoney" id="deposit"></td>
+          </tr>
+          <tr id="taxBlock">
+            <td class="transLineDesc">Tax</td>
+            <td class="costDuration"></td>
+            <td class="costMoneyPerMonth"></td>
+            <td class="costMoney" id="taxTotal"></td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -173,19 +173,19 @@
       </div>
       <div id="insurances" class="left offerList" style="display:none;margin-left: 10px;width: 325px;">
         <g:if test="${!site.noInsuranceWaiver}">
-          <p><input type="radio" name="insuranceId" value="-999" ${ (insuranceId as Integer) < 0 ? 'checked="checked"' : '' } /> Waive insurance - use my renters/home policy coverage</p>
+          <p><input type="radio" name="insuranceId" value="-999" ${(insuranceId as Integer) < 0 ? 'checked="checked"' : ''}/> Waive insurance - use my renters/home policy coverage</p>
         </g:if>
         <g:each in="${site.insurances.sort{it.premium}}" var="ins" status="i">
           <g:if test="${ins.active}">
-            <p><input type="radio" name="insuranceId" value="${ins.id}" ${(site.noInsuranceWaiver && i == 0) || (ins.id == (insuranceId as Integer)) ? 'checked="checked"' : '' } /> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD" />/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD" /> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent" /></p>
+            <p><input type="radio" name="insuranceId" value="${ins.id}" ${(site.noInsuranceWaiver && i == 0) || (ins.id == (insuranceId as Integer)) ? 'checked="checked"' : ''}/> <g:formatNumber number="${ins.premium}" type="currency" currencyCode="USD"/>/mo. Coverage: <g:formatNumber number="${ins.totalCoverage}" type="currency" currencyCode="USD"/> Theft: <g:formatNumber number="${ins.percentTheft}" type="percent"/></p>
           </g:if>
         </g:each>
       </div>
     </div>
     <div class="right">
-      <input type="hidden" id="date" name="date" />
+      <input type="hidden" id="date" name="date"/>
       <div class="left">
-        <storitz:image id="calendarPic" style="cursor: pointer;" src="icn-calendar.png" width="23" height="19" alt="calendar" />
+        <storitz:image id="calendarPic" style="cursor: pointer;" src="icn-calendar.png" width="23" height="19" alt="calendar"/>
       </div>
       <div class="left">
         <div class="transDateHeader left">
@@ -210,5 +210,5 @@
   Reserve a unit now to hold a specific space and its price up until your move-in date.  You'll need to finalize paperwork, payment and other details when you arrive at the property.
 </div>
 <div id="transactionBoxLinkBody" style="display:none">
-      ${ site.feed.transactionBoxBody}
+  ${site.feed.transactionBoxBody}
 </div>

@@ -26,10 +26,10 @@ public enum RentalUse {
   }
 
   static public RentalUse getEnumFromId(String value) {
-      def ret = list().find {it.display == value }
-      if (!ret) {
-        return RentalUse.valueOf(value)
-      }
-      return ret
+    def ret = list().find {it.display == value }
+    if (!ret) {
+      return RentalUse.valueOf(value)
+    }
+    return ret
   }
 }

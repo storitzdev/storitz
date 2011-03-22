@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_AUCTION_RENTALS_PROCESS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_AUCTION_RENTALS_PROCESS">
  *   &lt;complexContent>
@@ -45,35 +40,32 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_AUCTION_RENTALS_PROCESS", propOrder = {
-    "siteid",
-    "acctid",
-    "rentalid",
-    "auctionid",
-    "auctiondate",
-    "auctiontime",
-    "acctname",
-    "unitnumber",
-    "icon",
-    "notes",
-    "unitcontents",
-    "ltd",
-    "ptd",
-    "delrentalid",
-    "lienstate",
-    "lastpaymentdate",
-    "totaldue",
-    "lastpaymentamount",
-    "auctionobjid",
-    "unitstatus"
+        "siteid",
+        "acctid",
+        "rentalid",
+        "auctionid",
+        "auctiondate",
+        "auctiontime",
+        "acctname",
+        "unitnumber",
+        "icon",
+        "notes",
+        "unitcontents",
+        "ltd",
+        "ptd",
+        "delrentalid",
+        "lienstate",
+        "lastpaymentdate",
+        "totaldue",
+        "lastpaymentamount",
+        "auctionobjid",
+        "unitstatus"
 })
 public class TRANAUCTIONRENTALSPROCESS
-    extends BaseEntityOfCollectionTRANAUCTIONRENTALSPROCESSColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANAUCTIONRENTALSPROCESSColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -121,7 +113,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -129,7 +120,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -137,11 +127,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -149,11 +137,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -161,7 +147,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the rentalid property.
-     * 
      */
     public long getRENTALID() {
         return rentalid;
@@ -169,7 +154,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the rentalid property.
-     * 
      */
     public void setRENTALID(long value) {
         this.rentalid = value;
@@ -177,7 +161,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the auctionid property.
-     * 
      */
     public long getAUCTIONID() {
         return auctionid;
@@ -185,7 +168,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the auctionid property.
-     * 
      */
     public void setAUCTIONID(long value) {
         this.auctionid = value;
@@ -193,11 +175,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the auctiondate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAUCTIONDATE() {
         return auctiondate;
@@ -205,11 +185,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the auctiondate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAUCTIONDATE(String value) {
         this.auctiondate = value;
@@ -217,11 +195,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the auctiontime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAUCTIONTIME() {
         return auctiontime;
@@ -229,11 +205,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the auctiontime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAUCTIONTIME(String value) {
         this.auctiontime = value;
@@ -241,11 +215,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -253,11 +225,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -265,11 +235,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -277,11 +245,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -289,11 +255,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -301,11 +265,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -313,11 +275,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTES() {
         return notes;
@@ -325,11 +285,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTES(String value) {
         this.notes = value;
@@ -337,11 +295,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the unitcontents property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITCONTENTS() {
         return unitcontents;
@@ -349,11 +305,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the unitcontents property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITCONTENTS(String value) {
         this.unitcontents = value;
@@ -361,11 +315,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the ltd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLTD() {
         return ltd;
@@ -373,11 +325,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the ltd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLTD(XMLGregorianCalendar value) {
         this.ltd = value;
@@ -385,11 +335,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -397,11 +345,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -409,7 +355,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the delrentalid property.
-     * 
      */
     public long getDELRENTALID() {
         return delrentalid;
@@ -417,7 +362,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the delrentalid property.
-     * 
      */
     public void setDELRENTALID(long value) {
         this.delrentalid = value;
@@ -425,7 +369,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the lienstate property.
-     * 
      */
     public int getLIENSTATE() {
         return lienstate;
@@ -433,7 +376,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the lienstate property.
-     * 
      */
     public void setLIENSTATE(int value) {
         this.lienstate = value;
@@ -441,11 +383,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the lastpaymentdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLASTPAYMENTDATE() {
         return lastpaymentdate;
@@ -453,11 +393,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the lastpaymentdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLASTPAYMENTDATE(XMLGregorianCalendar value) {
         this.lastpaymentdate = value;
@@ -465,11 +403,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the totaldue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTOTALDUE() {
         return totaldue;
@@ -477,11 +413,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the totaldue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTOTALDUE(BigDecimal value) {
         this.totaldue = value;
@@ -489,11 +423,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the lastpaymentamount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLASTPAYMENTAMOUNT() {
         return lastpaymentamount;
@@ -501,11 +433,9 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the lastpaymentamount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLASTPAYMENTAMOUNT(BigDecimal value) {
         this.lastpaymentamount = value;
@@ -513,7 +443,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the auctionobjid property.
-     * 
      */
     public long getAUCTIONOBJID() {
         return auctionobjid;
@@ -521,7 +450,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the auctionobjid property.
-     * 
      */
     public void setAUCTIONOBJID(long value) {
         this.auctionobjid = value;
@@ -529,7 +457,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Gets the value of the unitstatus property.
-     * 
      */
     public int getUNITSTATUS() {
         return unitstatus;
@@ -537,7 +464,6 @@ public class TRANAUCTIONRENTALSPROCESS
 
     /**
      * Sets the value of the unitstatus property.
-     * 
      */
     public void setUNITSTATUS(int value) {
         this.unitstatus = value;

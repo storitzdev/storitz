@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetPartialPayRules_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetPartialPayRules_Response">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetPartialPayRules_Response", propOrder = {
-    "priorityList",
-    "allowsPartialPay",
-    "allowsPartialRentPay"
+        "priorityList",
+        "allowsPartialPay",
+        "allowsPartialRentPay"
 })
 public class GetPartialPayRulesResponse2 {
 
@@ -45,11 +42,9 @@ public class GetPartialPayRulesResponse2 {
 
     /**
      * Gets the value of the priorityList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfString }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfString }
      */
     public ArrayOfString getPriorityList() {
         return priorityList;
@@ -57,11 +52,9 @@ public class GetPartialPayRulesResponse2 {
 
     /**
      * Sets the value of the priorityList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfString }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfString }
      */
     public void setPriorityList(ArrayOfString value) {
         this.priorityList = value;
@@ -69,11 +62,9 @@ public class GetPartialPayRulesResponse2 {
 
     /**
      * Gets the value of the allowsPartialPay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAllowsPartialPay() {
         return allowsPartialPay;
@@ -81,11 +72,9 @@ public class GetPartialPayRulesResponse2 {
 
     /**
      * Sets the value of the allowsPartialPay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAllowsPartialPay(String value) {
         this.allowsPartialPay = value;
@@ -93,11 +82,9 @@ public class GetPartialPayRulesResponse2 {
 
     /**
      * Gets the value of the allowsPartialRentPay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAllowsPartialRentPay() {
         return allowsPartialRentPay;
@@ -105,11 +92,9 @@ public class GetPartialPayRulesResponse2 {
 
     /**
      * Sets the value of the allowsPartialRentPay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAllowsPartialRentPay(String value) {
         this.allowsPartialRentPay = value;

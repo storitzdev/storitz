@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetBaseFees_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetBaseFees_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetBaseFees_Response", propOrder = {
-    "details"
+        "details"
 })
 public class GetBaseFeesResponse2 {
 
@@ -37,11 +34,9 @@ public class GetBaseFeesResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGFEESITEALL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGFEESITEALL }
      */
     public ArrayOfORGFEESITEALL getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class GetBaseFeesResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGFEESITEALL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGFEESITEALL }
      */
     public void setDetails(ArrayOfORGFEESITEALL value) {
         this.details = value;

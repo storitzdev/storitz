@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for FrameworkTransaction complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="FrameworkTransaction">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FrameworkTransaction", propOrder = {
-    "instance"
+        "instance"
 })
 public class FrameworkTransaction {
 
@@ -37,7 +34,6 @@ public class FrameworkTransaction {
 
     /**
      * Gets the value of the instance property.
-     * 
      */
     public int getInstance() {
         return instance;
@@ -45,7 +41,6 @@ public class FrameworkTransaction {
 
     /**
      * Sets the value of the instance property.
-     * 
      */
     public void setInstance(int value) {
         this.instance = value;

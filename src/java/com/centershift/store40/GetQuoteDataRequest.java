@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for GetQuoteData_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetQuoteData_Request">
  *   &lt;complexContent>
@@ -28,16 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetQuoteData_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "unitID",
-    "rentRate",
-    "promoID"
+        "orgID",
+        "siteID",
+        "unitID",
+        "rentRate",
+        "promoID"
 })
 public class GetQuoteDataRequest {
 
@@ -54,7 +51,6 @@ public class GetQuoteDataRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -62,7 +58,6 @@ public class GetQuoteDataRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -70,7 +65,6 @@ public class GetQuoteDataRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -78,7 +72,6 @@ public class GetQuoteDataRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -86,7 +79,6 @@ public class GetQuoteDataRequest {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -94,7 +86,6 @@ public class GetQuoteDataRequest {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -102,11 +93,9 @@ public class GetQuoteDataRequest {
 
     /**
      * Gets the value of the rentRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRentRate() {
         return rentRate;
@@ -114,11 +103,9 @@ public class GetQuoteDataRequest {
 
     /**
      * Sets the value of the rentRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRentRate(BigDecimal value) {
         this.rentRate = value;
@@ -126,11 +113,9 @@ public class GetQuoteDataRequest {
 
     /**
      * Gets the value of the promoID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPromoID() {
         return promoID;
@@ -138,11 +123,9 @@ public class GetQuoteDataRequest {
 
     /**
      * Sets the value of the promoID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPromoID(Long value) {
         this.promoID = value;

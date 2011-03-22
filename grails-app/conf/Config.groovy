@@ -8,79 +8,79 @@
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
-                      xml: ['text/xml', 'application/xml'],
-                      text: 'text/plain',
-                      js: 'text/javascript',
-                      rss: 'application/rss+xml',
-                      atom: 'application/atom+xml',
-                      css: 'text/css',
-                      csv: 'text/csv',
-                      all: '*/*',
-                      pdf: 'application/pdf',
-                      rtf: 'application/rtf',
-                      excel: 'application/vnd.ms-excel',
-                      ods: 'application/vnd.oasis.opendocument.spreadsheet',
-                      json: ['application/json','text/json'],
-                      form: 'application/x-www-form-urlencoded',
-                      multipartForm: 'multipart/form-data'
-                    ]
+grails.mime.types = [html: ['text/html', 'application/xhtml+xml'],
+        xml: ['text/xml', 'application/xml'],
+        text: 'text/plain',
+        js: 'text/javascript',
+        rss: 'application/rss+xml',
+        atom: 'application/atom+xml',
+        css: 'text/css',
+        csv: 'text/csv',
+        all: '*/*',
+        pdf: 'application/pdf',
+        rtf: 'application/rtf',
+        excel: 'application/vnd.ms-excel',
+        ods: 'application/vnd.oasis.opendocument.spreadsheet',
+        json: ['application/json', 'text/json'],
+        form: 'application/x-www-form-urlencoded',
+        multipartForm: 'multipart/form-data'
+]
 // The default codec used to encode data with ${}
-grails.views.default.codec="none" // none, html, base64
-grails.views.gsp.encoding="UTF-8"
+grails.views.default.codec = "none" // none, html, base64
+grails.views.gsp.encoding = "UTF-8"
 
 
-grails.converters.encoding="UTF-8"
+grails.converters.encoding = "UTF-8"
 grails.converters.xml.pretty.print = true
 grails.converters.json.pretty.print = true
 grails.converters.json.default.deep = true
 grails.converters.xml.default.deep = true
-grails.converters.default.circular.reference.behaviour="INSERT_NULL"
+grails.converters.default.circular.reference.behaviour = "INSERT_NULL"
 
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
 // set per-environment serverURL stem for creating absolute links
 environments {
-    production {
-        grails.serverURL = "http://www.storitz.com"
-        security.httpsPort = 443
-        grails.plugins.springsecurity.controllerAnnotations.staticRules = [
-           '/weblog/**': ['ROLE_USER'],
-        ]
-        storitz.nacha.dir = '/usr/share/tomcat6/nacha'
-        storitz.nacha.fileId = '7878782339'
-        storitz.nacha.companyId = '1272912549'
-        storitz.google.signatureRequired = true
-    }
-    preview {
-        grails.serverURL = "http://preview.storitz.com"
-        security.httpsPort = 443
-        grails.plugins.springsecurity.controllerAnnotations.staticRules = [
-          '/home/**':    ['ROLE_USER', 'ROLE_ADMIN'],
-          '/STMap/**':   ['ROLE_USER', 'ROLE_ADMIN'],
-          '/storageSite/**':  ['ROLE_USER', 'ROLE_ADMIN']
-        ]
-        storitz.google.signatureRequired = true
-    }
-    development {
-        grails.serverURL = "http://localhost:8080/${appName}"
-        security.httpsPort = 8443
-        storitz.nacha.dir = 'c:/temp/nacha'
-        storitz.nacha.fileId = '1234567890'
-        storitz.nacha.companyId = '0123456789'
-        uiperformance.enabled = false
-        storitz.google.signatureRequired = false
-    }
-    test {
-        grails.serverURL = "http://localhost:8080/${appName}"
-        security.httpsPort = 8443
-        storitz.nacha.dir = 'c:/temp/nacha'
-        storitz.nacha.fileId = '1234567890'
-        storitz.nacha.companyId = '0123456789'
-        uiperformance.enabled = false
-        storitz.google.signatureRequired = true
-    }
+  production {
+    grails.serverURL = "http://www.storitz.com"
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.nacha.dir = '/usr/share/tomcat6/nacha'
+    storitz.nacha.fileId = '7878782339'
+    storitz.nacha.companyId = '1272912549'
+    storitz.google.signatureRequired = true
+  }
+  preview {
+    grails.serverURL = "http://preview.storitz.com"
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],
+            '/STMap/**': ['ROLE_USER', 'ROLE_ADMIN'],
+            '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
+    ]
+    storitz.google.signatureRequired = true
+  }
+  development {
+    grails.serverURL = "http://localhost:8080/${appName}"
+    security.httpsPort = 8443
+    storitz.nacha.dir = 'c:/temp/nacha'
+    storitz.nacha.fileId = '1234567890'
+    storitz.nacha.companyId = '0123456789'
+    uiperformance.enabled = false
+    storitz.google.signatureRequired = false
+  }
+  test {
+    grails.serverURL = "http://localhost:8080/${appName}"
+    security.httpsPort = 8443
+    storitz.nacha.dir = 'c:/temp/nacha'
+    storitz.nacha.fileId = '1234567890'
+    storitz.nacha.companyId = '0123456789'
+    uiperformance.enabled = false
+    storitz.google.signatureRequired = true
+  }
 
 }
 
@@ -90,31 +90,31 @@ grails.gorm.failOnError = true
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-    appender.stdout = "org.apache.log4j.ConsoleAppender"
-    appender.'stdout.layout'="org.apache.log4j.PatternLayout"
-    appender.'stdout.layout.ConversionPattern'='[%r] %c{2} %m%n'
-  
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-	       'org.codehaus.groovy.grails.web.pages', //  GSP
-	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-	       'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-	       'org.codehaus.groovy.grails.web.mapping', // URL mapping
-	       'org.codehaus.groovy.grails.commons', // core / classloading
-	       'org.codehaus.groovy.grails.plugins', // plugins
-	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-	       'org.springframework',
-	       'org.hibernate',
-           'org.apache.cxf'
+  // Example of changing the log pattern for the default console
+  // appender:
+  //
+  //appenders {
+  //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+  //}
+  appender.stdout = "org.apache.log4j.ConsoleAppender"
+  appender.'stdout.layout' = "org.apache.log4j.PatternLayout"
+  appender.'stdout.layout.ConversionPattern' = '[%r] %c{2} %m%n'
 
-    warn   'org.mortbay.log'
+  error 'org.codehaus.groovy.grails.web.servlet',  //  controllers
+          'org.codehaus.groovy.grails.web.pages', //  GSP
+          'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+          'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+          'org.codehaus.groovy.grails.web.mapping', // URL mapping
+          'org.codehaus.groovy.grails.commons', // core / classloading
+          'org.codehaus.groovy.grails.plugins', // plugins
+          'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+          'org.springframework',
+          'org.hibernate',
+          'org.apache.cxf'
 
-    // debug  'org.apache.axis'
+  warn 'org.mortbay.log'
+
+  // debug  'org.apache.axis'
 }
 
 //log4j.logger.org.springframework.security='off,stdout'
@@ -133,82 +133,82 @@ grails.mail.host = "mail.storitz.com"
 grails.mail.port = 587
 grails.mail.username = "no-reply@storitz.com"
 grails.mail.password = "ylper!0n"
-grails.mail.props = ["mail.smtp.auth":"true",
-      "mail.smtp.socketFactory.port": "587",
-      "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
-      "mail.smtp.socketFactory.fallback": "false",
-      "mail.smtp.starttls.enable": "true"]
+grails.mail.props = ["mail.smtp.auth": "true",
+        "mail.smtp.socketFactory.port": "587",
+        "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
+        "mail.smtp.socketFactory.fallback": "false",
+        "mail.smtp.starttls.enable": "true"]
 
 // UI-performance configuration
 uiperformance.bundles = [
-  [type: 'js',
-    name: 'header_all',
-          files: ["jquery-1.4.2.min",
-                  "jquery-ui-1.8.6.custom.min",
-                  "jquery.ui.ipad.alt"
-    ]],
-  [type: 'js',
-    name: 'jquery_basic',
-    files: ["jquery-1.4.2.min",
-            "jquery-ui-1.8.6.custom.min",
-            "jquery.ui.ipad.alt",
-            "jquery.qtip-1.0.min"
-            ]],
-  [type: 'js',
-    name: 'jquery_extended',
-    files: [
-            "jquery.dataTables",
-            "jquery.timers-1.2",
-            "jquery.easing.1.3",
-            "jquery.galleryview-2.1.1",
-            "jquery.maskedinput",
-            "jquery.validate.min",
-            "jquery.ui.selectmenu",
-            "jquery.ba-bbq",
-            "jwplayer",
-            "json2"
-            ]],
-  [type: 'js',
-    name: 'admin_all',
-    files: ["jquery-1.4.2.min",
-            "jquery-ui-1.8.6.custom.min",
-            "jquery.ui.ipad.alt"
-    ]],
-  [type: 'js',
-    name: 'detail_bundle',
-    files: ["transaction",
-            "directions",
-            "callCenterPolling",
-            "detail"
-    ]],  
-  [type: 'css',
-    name: 'admin_bundled',
-    files: ["main",
-            "jquery-ui-1.8.6.custom"]],
-  [type: 'css',
-    name: 'jquery_bundled',
-    files: ['main',
-            'jquery-ui-1.8.6.custom',
-            'jquery.ui.selectmenu',
-            'galleryview',
-            'datatables']],
-  [type: 'css',
-    name: 'header_bundled',
-    files: ['jquery-ui-1.8.6.custom',
-            'jquery.ui.selectmenu',
-            'main'
-    ]]
+        [type: 'js',
+                name: 'header_all',
+                files: ["jquery-1.4.2.min",
+                        "jquery-ui-1.8.6.custom.min",
+                        "jquery.ui.ipad.alt"
+                ]],
+        [type: 'js',
+                name: 'jquery_basic',
+                files: ["jquery-1.4.2.min",
+                        "jquery-ui-1.8.6.custom.min",
+                        "jquery.ui.ipad.alt",
+                        "jquery.qtip-1.0.min"
+                ]],
+        [type: 'js',
+                name: 'jquery_extended',
+                files: [
+                        "jquery.dataTables",
+                        "jquery.timers-1.2",
+                        "jquery.easing.1.3",
+                        "jquery.galleryview-2.1.1",
+                        "jquery.maskedinput",
+                        "jquery.validate.min",
+                        "jquery.ui.selectmenu",
+                        "jquery.ba-bbq",
+                        "jwplayer",
+                        "json2"
+                ]],
+        [type: 'js',
+                name: 'admin_all',
+                files: ["jquery-1.4.2.min",
+                        "jquery-ui-1.8.6.custom.min",
+                        "jquery.ui.ipad.alt"
+                ]],
+        [type: 'js',
+                name: 'detail_bundle',
+                files: ["transaction",
+                        "directions",
+                        "callCenterPolling",
+                        "detail"
+                ]],
+        [type: 'css',
+                name: 'admin_bundled',
+                files: ["main",
+                        "jquery-ui-1.8.6.custom"]],
+        [type: 'css',
+                name: 'jquery_bundled',
+                files: ['main',
+                        'jquery-ui-1.8.6.custom',
+                        'jquery.ui.selectmenu',
+                        'galleryview',
+                        'datatables']],
+        [type: 'css',
+                name: 'header_bundled',
+                files: ['jquery-ui-1.8.6.custom',
+                        'jquery.ui.selectmenu',
+                        'main'
+                ]]
 ]
 
 uiperformance.exclusions = [
-   "**/jwplayer/*",
-   "**/logo_storitz.gif",
-   "**/logo_storitz_small.gif",
-   "**/storitz_logo*",
-   "**/storitz-logo*",
-   "**/storitz-footer*",
-   "**/tagline_clickstoredone.gif",
-   "**/plugins/**",
-   "**/images/email/**",
-   "**/images/themes/**"
+        "**/jwplayer/*",
+        "**/logo_storitz.gif",
+        "**/logo_storitz_small.gif",
+        "**/storitz_logo*",
+        "**/storitz-logo*",
+        "**/storitz-footer*",
+        "**/tagline_clickstoredone.gif",
+        "**/plugins/**",
+        "**/images/email/**",
+        "**/images/themes/**"
 ]

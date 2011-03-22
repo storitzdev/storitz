@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getUnitFeaturesResult"
+        "getUnitFeaturesResult"
 })
 @XmlRootElement(name = "GetUnitFeaturesResponse")
 public class GetUnitFeaturesResponse {
@@ -39,11 +32,9 @@ public class GetUnitFeaturesResponse {
 
     /**
      * Gets the value of the getUnitFeaturesResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetUnitFeaturesResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetUnitFeaturesResponse2 }
      */
     public GetUnitFeaturesResponse2 getGetUnitFeaturesResult() {
         return getUnitFeaturesResult;
@@ -51,11 +42,9 @@ public class GetUnitFeaturesResponse {
 
     /**
      * Sets the value of the getUnitFeaturesResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetUnitFeaturesResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetUnitFeaturesResponse2 }
      */
     public void setGetUnitFeaturesResult(GetUnitFeaturesResponse2 value) {
         this.getUnitFeaturesResult = value;

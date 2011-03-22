@@ -2,11 +2,11 @@ package com.storitz
 
 class Bullet {
 
-    String bullet
+  String bullet
 
-    static constraints = {
-      bullet(nullable:false, size:2..100)    
-    }
+  static constraints = {
+    bullet(nullable: false, size: 2..100)
+  }
 
-    static belongsTo = StorageSite
+  static belongsTo = StorageSite
 }

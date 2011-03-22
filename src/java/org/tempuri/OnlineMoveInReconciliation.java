@@ -1,19 +1,14 @@
-
 package org.tempuri;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -31,18 +26,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "sProcessor",
-    "sUnitID",
-    "dAmount",
-    "dfee"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "sProcessor",
+        "sUnitID",
+        "dAmount",
+        "dfee"
 })
 @XmlRootElement(name = "OnlineMoveInReconciliation")
 public class OnlineMoveInReconciliation {
@@ -59,11 +52,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -71,11 +62,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -83,11 +72,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -95,11 +82,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -107,11 +92,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -119,11 +102,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -131,11 +112,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the sProcessor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSProcessor() {
         return sProcessor;
@@ -143,11 +122,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the sProcessor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSProcessor(String value) {
         this.sProcessor = value;
@@ -155,11 +132,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the sUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSUnitID() {
         return sUnitID;
@@ -167,11 +142,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the sUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSUnitID(String value) {
         this.sUnitID = value;
@@ -179,11 +152,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the dAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDAmount() {
         return dAmount;
@@ -191,11 +162,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the dAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDAmount(BigDecimal value) {
         this.dAmount = value;
@@ -203,11 +172,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Gets the value of the dfee property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDfee() {
         return dfee;
@@ -215,11 +182,9 @@ public class OnlineMoveInReconciliation {
 
     /**
      * Sets the value of the dfee property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDfee(BigDecimal value) {
         this.dfee = value;

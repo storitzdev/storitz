@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PaymentReceiptBundle_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="PaymentReceiptBundle_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PaymentReceiptBundle_Response", propOrder = {
-    "makePaymentResponse",
-    "pdfFilePathResponse"
+        "makePaymentResponse",
+        "pdfFilePathResponse"
 })
 public class PaymentReceiptBundleResponse2 {
 
@@ -41,11 +38,9 @@ public class PaymentReceiptBundleResponse2 {
 
     /**
      * Gets the value of the makePaymentResponse property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentResponse }
      */
     public MakePaymentResponse getMakePaymentResponse() {
         return makePaymentResponse;
@@ -53,11 +48,9 @@ public class PaymentReceiptBundleResponse2 {
 
     /**
      * Sets the value of the makePaymentResponse property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentResponse }
      */
     public void setMakePaymentResponse(MakePaymentResponse value) {
         this.makePaymentResponse = value;
@@ -65,11 +58,9 @@ public class PaymentReceiptBundleResponse2 {
 
     /**
      * Gets the value of the pdfFilePathResponse property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PdfFilePathResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link PdfFilePathResponse }
      */
     public PdfFilePathResponse getPdfFilePathResponse() {
         return pdfFilePathResponse;
@@ -77,11 +68,9 @@ public class PaymentReceiptBundleResponse2 {
 
     /**
      * Sets the value of the pdfFilePathResponse property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PdfFilePathResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PdfFilePathResponse }
      */
     public void setPdfFilePathResponse(PdfFilePathResponse value) {
         this.pdfFilePathResponse = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetUnitStatus_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetUnitStatus_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetUnitStatus_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "filter"
+        "orgID",
+        "siteID",
+        "filter"
 })
 public class GetUnitStatusRequest {
 
@@ -45,7 +42,6 @@ public class GetUnitStatusRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -53,7 +49,6 @@ public class GetUnitStatusRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -61,7 +56,6 @@ public class GetUnitStatusRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -69,7 +63,6 @@ public class GetUnitStatusRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -77,11 +70,9 @@ public class GetUnitStatusRequest {
 
     /**
      * Gets the value of the filter property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getFilter() {
         return filter;
@@ -89,11 +80,9 @@ public class GetUnitStatusRequest {
 
     /**
      * Sets the value of the filter property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setFilter(Integer value) {
         this.filter = value;

@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_INS_SITE_OFFERINGS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_INS_SITE_OFFERINGS">
  *   &lt;complexContent>
@@ -45,37 +44,34 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_INS_SITE_OFFERINGS", propOrder = {
-    "orgid",
-    "insproviderid",
-    "providername",
-    "providernotes",
-    "groupname",
-    "siteid",
-    "siteinsid",
-    "siterefid",
-    "insoptionid",
-    "coverageamount",
-    "coverageperc",
-    "rate",
-    "cancelafter",
-    "comments",
-    "desc1",
-    "desc2",
-    "defaultoption",
-    "provideractive",
-    "groupactive",
-    "optionactive",
-    "siteactive",
-    "dispactive"
+        "orgid",
+        "insproviderid",
+        "providername",
+        "providernotes",
+        "groupname",
+        "siteid",
+        "siteinsid",
+        "siterefid",
+        "insoptionid",
+        "coverageamount",
+        "coverageperc",
+        "rate",
+        "cancelafter",
+        "comments",
+        "desc1",
+        "desc2",
+        "defaultoption",
+        "provideractive",
+        "groupactive",
+        "optionactive",
+        "siteactive",
+        "dispactive"
 })
 public class ORGINSSITEOFFERINGS
-    extends BaseEntityOfCollectionORGINSSITEOFFERINGSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGINSSITEOFFERINGSColumnIndexes {
 
     @XmlElement(name = "ORG_ID")
     protected long orgid;
@@ -124,7 +120,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -132,7 +127,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -140,7 +134,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the insproviderid property.
-     * 
      */
     public long getINSPROVIDERID() {
         return insproviderid;
@@ -148,7 +141,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the insproviderid property.
-     * 
      */
     public void setINSPROVIDERID(long value) {
         this.insproviderid = value;
@@ -156,11 +148,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the providername property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROVIDERNAME() {
         return providername;
@@ -168,11 +158,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the providername property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROVIDERNAME(String value) {
         this.providername = value;
@@ -180,11 +168,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the providernotes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROVIDERNOTES() {
         return providernotes;
@@ -192,11 +178,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the providernotes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROVIDERNOTES(String value) {
         this.providernotes = value;
@@ -204,11 +188,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the groupname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGROUPNAME() {
         return groupname;
@@ -216,11 +198,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the groupname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGROUPNAME(String value) {
         this.groupname = value;
@@ -228,7 +208,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -236,7 +215,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -244,7 +222,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the siteinsid property.
-     * 
      */
     public long getSITEINSID() {
         return siteinsid;
@@ -252,7 +229,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the siteinsid property.
-     * 
      */
     public void setSITEINSID(long value) {
         this.siteinsid = value;
@@ -260,11 +236,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the siterefid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITEREFID() {
         return siterefid;
@@ -272,11 +246,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the siterefid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITEREFID(String value) {
         this.siterefid = value;
@@ -284,7 +256,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the insoptionid property.
-     * 
      */
     public long getINSOPTIONID() {
         return insoptionid;
@@ -292,7 +263,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the insoptionid property.
-     * 
      */
     public void setINSOPTIONID(long value) {
         this.insoptionid = value;
@@ -300,7 +270,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the coverageamount property.
-     * 
      */
     public int getCOVERAGEAMOUNT() {
         return coverageamount;
@@ -308,7 +277,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the coverageamount property.
-     * 
      */
     public void setCOVERAGEAMOUNT(int value) {
         this.coverageamount = value;
@@ -316,7 +284,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the coverageperc property.
-     * 
      */
     public int getCOVERAGEPERC() {
         return coverageperc;
@@ -324,7 +291,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the coverageperc property.
-     * 
      */
     public void setCOVERAGEPERC(int value) {
         this.coverageperc = value;
@@ -332,11 +298,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the rate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRATE() {
         return rate;
@@ -344,11 +308,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the rate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRATE(BigDecimal value) {
         this.rate = value;
@@ -356,7 +318,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the cancelafter property.
-     * 
      */
     public int getCANCELAFTER() {
         return cancelafter;
@@ -364,7 +325,6 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the cancelafter property.
-     * 
      */
     public void setCANCELAFTER(int value) {
         this.cancelafter = value;
@@ -372,11 +332,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the comments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOMMENTS() {
         return comments;
@@ -384,11 +342,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the comments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOMMENTS(String value) {
         this.comments = value;
@@ -396,11 +352,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the desc1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESC1() {
         return desc1;
@@ -408,11 +362,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the desc1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESC1(String value) {
         this.desc1 = value;
@@ -420,11 +372,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the desc2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESC2() {
         return desc2;
@@ -432,11 +382,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the desc2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESC2(String value) {
         this.desc2 = value;
@@ -444,11 +392,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the defaultoption property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEFAULTOPTION() {
         return defaultoption;
@@ -456,11 +402,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the defaultoption property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEFAULTOPTION(String value) {
         this.defaultoption = value;
@@ -468,11 +412,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the provideractive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROVIDERACTIVE() {
         return provideractive;
@@ -480,11 +422,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the provideractive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROVIDERACTIVE(String value) {
         this.provideractive = value;
@@ -492,11 +432,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the groupactive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGROUPACTIVE() {
         return groupactive;
@@ -504,11 +442,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the groupactive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGROUPACTIVE(String value) {
         this.groupactive = value;
@@ -516,11 +452,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the optionactive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOPTIONACTIVE() {
         return optionactive;
@@ -528,11 +462,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the optionactive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOPTIONACTIVE(String value) {
         this.optionactive = value;
@@ -540,11 +472,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the siteactive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITEACTIVE() {
         return siteactive;
@@ -552,11 +482,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the siteactive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITEACTIVE(String value) {
         this.siteactive = value;
@@ -564,11 +492,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Gets the value of the dispactive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDISPACTIVE() {
         return dispactive;
@@ -576,11 +502,9 @@ public class ORGINSSITEOFFERINGS
 
     /**
      * Sets the value of the dispactive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDISPACTIVE(String value) {
         this.dispactive = value;

@@ -1,20 +1,19 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for MakePaymentByAssessment_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakePaymentByAssessment_Request">
  *   &lt;complexContent>
@@ -36,22 +35,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakePaymentByAssessment_Request", propOrder = {
-    "siteID",
-    "acctID",
-    "assessmentIDs",
-    "totalAmtDue",
-    "totalAmtPaid",
-    "creditCardInfo",
-    "checkInfo",
-    "cashInfo",
-    "cashCreditID",
-    "isRetail",
-    "isRetailAndRental"
+        "siteID",
+        "acctID",
+        "assessmentIDs",
+        "totalAmtDue",
+        "totalAmtPaid",
+        "creditCardInfo",
+        "checkInfo",
+        "cashInfo",
+        "cashCreditID",
+        "isRetail",
+        "isRetailAndRental"
 })
 public class MakePaymentByAssessmentRequest {
 
@@ -80,7 +77,6 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -88,7 +84,6 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -96,7 +91,6 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -104,7 +98,6 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -112,25 +105,23 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the assessmentIDs property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the assessmentIDs property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getAssessmentIDs().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Long }
-     * 
-     * 
      */
     public List<Long> getAssessmentIDs() {
         if (assessmentIDs == null) {
@@ -141,11 +132,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the totalAmtDue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalAmtDue() {
         return totalAmtDue;
@@ -153,11 +142,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the totalAmtDue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalAmtDue(BigDecimal value) {
         this.totalAmtDue = value;
@@ -165,11 +152,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the totalAmtPaid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalAmtPaid() {
         return totalAmtPaid;
@@ -177,11 +162,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the totalAmtPaid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalAmtPaid(BigDecimal value) {
         this.totalAmtPaid = value;
@@ -189,25 +172,23 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the creditCardInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the creditCardInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCreditCardInfo().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link CreditCardData }
-     * 
-     * 
      */
     public List<CreditCardData> getCreditCardInfo() {
         if (creditCardInfo == null) {
@@ -218,25 +199,23 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the checkInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the checkInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCheckInfo().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link CheckData }
-     * 
-     * 
      */
     public List<CheckData> getCheckInfo() {
         if (checkInfo == null) {
@@ -247,11 +226,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the cashInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCashInfo() {
         return cashInfo;
@@ -259,11 +236,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the cashInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCashInfo(BigDecimal value) {
         this.cashInfo = value;
@@ -271,7 +246,6 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the cashCreditID property.
-     * 
      */
     public long getCashCreditID() {
         return cashCreditID;
@@ -279,7 +253,6 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the cashCreditID property.
-     * 
      */
     public void setCashCreditID(long value) {
         this.cashCreditID = value;
@@ -287,11 +260,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the isRetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isIsRetail() {
         return isRetail;
@@ -299,11 +270,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the isRetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsRetail(Boolean value) {
         this.isRetail = value;
@@ -311,11 +280,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Gets the value of the isRetailAndRental property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isIsRetailAndRental() {
         return isRetailAndRental;
@@ -323,11 +290,9 @@ public class MakePaymentByAssessmentRequest {
 
     /**
      * Sets the value of the isRetailAndRental property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsRetailAndRental(Boolean value) {
         this.isRetailAndRental = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAccountInfo_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAccountInfo_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAccountInfo_Response", propOrder = {
-    "details"
+        "details"
 })
 public class GetAccountInfoResponse2 {
 
@@ -37,11 +34,9 @@ public class GetAccountInfoResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfSOAACTINFO }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfSOAACTINFO }
      */
     public ArrayOfSOAACTINFO getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class GetAccountInfoResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfSOAACTINFO }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfSOAACTINFO }
      */
     public void setDetails(ArrayOfSOAACTINFO value) {
         this.details = value;

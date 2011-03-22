@@ -18,12 +18,12 @@ public enum TruckType {
 
 
   static list() {
-      [FREE, RENTAL, NONE]
+    [FREE, RENTAL, NONE]
   }
 
   static public TruckType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return TruckType.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return TruckType.valueOf(value)
+    return ret
+  }
 }

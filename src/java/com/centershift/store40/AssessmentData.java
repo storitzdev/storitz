@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AssessmentData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AssessmentData">
  *   &lt;complexContent>
@@ -25,13 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AssessmentData", propOrder = {
-    "assessmentID",
-    "amountPayingForAssessment"
+        "assessmentID",
+        "amountPayingForAssessment"
 })
 public class AssessmentData {
 
@@ -42,7 +39,6 @@ public class AssessmentData {
 
     /**
      * Gets the value of the assessmentID property.
-     * 
      */
     public long getAssessmentID() {
         return assessmentID;
@@ -50,7 +46,6 @@ public class AssessmentData {
 
     /**
      * Sets the value of the assessmentID property.
-     * 
      */
     public void setAssessmentID(long value) {
         this.assessmentID = value;
@@ -58,11 +53,9 @@ public class AssessmentData {
 
     /**
      * Gets the value of the amountPayingForAssessment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmountPayingForAssessment() {
         return amountPayingForAssessment;
@@ -70,11 +63,9 @@ public class AssessmentData {
 
     /**
      * Sets the value of the amountPayingForAssessment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmountPayingForAssessment(BigDecimal value) {
         this.amountPayingForAssessment = value;

@@ -26,7 +26,7 @@ var tax = 0;
 var deposit = 0;
 var actualSize = '';
 var searchType = "${searchType}";
-var urlDetailTotals = "${createLink(controller:'storageSite', action:'detailTotals')}";
+var urlDetailTotals = "${createLink(controller: 'storageSite', action: 'detailTotals')}";
 var featuredOffers;
 var specialOffers;
 var maxReserveDays = "+${site.maxReserveDays}";

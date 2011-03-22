@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for CreateSiteTask_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateSiteTask_Request">
  *   &lt;complexContent>
@@ -34,21 +29,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateSiteTask_Request", propOrder = {
-    "header",
-    "body",
-    "siteID",
-    "dueDate",
-    "type",
-    "source",
-    "priority",
-    "refType",
-    "ref",
-    "recurTask"
+        "header",
+        "body",
+        "siteID",
+        "dueDate",
+        "type",
+        "source",
+        "priority",
+        "refType",
+        "ref",
+        "recurTask"
 })
 public class CreateSiteTaskRequest {
 
@@ -76,11 +69,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the header property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getHeader() {
         return header;
@@ -88,11 +79,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the header property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setHeader(String value) {
         this.header = value;
@@ -100,11 +89,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the body property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBody() {
         return body;
@@ -112,11 +99,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the body property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBody(String value) {
         this.body = value;
@@ -124,11 +109,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -136,11 +119,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -148,11 +129,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the dueDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDueDate() {
         return dueDate;
@@ -160,11 +139,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the dueDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDueDate(XMLGregorianCalendar value) {
         this.dueDate = value;
@@ -172,11 +149,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ETaskType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ETaskType }
      */
     public ETaskType getType() {
         return type;
@@ -184,11 +159,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ETaskType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ETaskType }
      */
     public void setType(ETaskType value) {
         this.type = value;
@@ -196,11 +169,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the source property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ETaskSource }
-     *     
+     *
+     * @return possible object is
+     *         {@link ETaskSource }
      */
     public ETaskSource getSource() {
         return source;
@@ -208,11 +179,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the source property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ETaskSource }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ETaskSource }
      */
     public void setSource(ETaskSource value) {
         this.source = value;
@@ -220,11 +189,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the priority property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ETaskPriority }
-     *     
+     *
+     * @return possible object is
+     *         {@link ETaskPriority }
      */
     public ETaskPriority getPriority() {
         return priority;
@@ -232,11 +199,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the priority property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ETaskPriority }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ETaskPriority }
      */
     public void setPriority(ETaskPriority value) {
         this.priority = value;
@@ -244,11 +209,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the refType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ETaskRefType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ETaskRefType }
      */
     public ETaskRefType getRefType() {
         return refType;
@@ -256,11 +219,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the refType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ETaskRefType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ETaskRefType }
      */
     public void setRefType(ETaskRefType value) {
         this.refType = value;
@@ -268,11 +229,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the ref property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRef() {
         return ref;
@@ -280,11 +239,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the ref property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRef(Long value) {
         this.ref = value;
@@ -292,11 +249,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Gets the value of the recurTask property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RecurTaskData }
-     *     
+     *
+     * @return possible object is
+     *         {@link RecurTaskData }
      */
     public RecurTaskData getRecurTask() {
         return recurTask;
@@ -304,11 +259,9 @@ public class CreateSiteTaskRequest {
 
     /**
      * Sets the value of the recurTask property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RecurTaskData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RecurTaskData }
      */
     public void setRecurTask(RecurTaskData value) {
         this.recurTask = value;

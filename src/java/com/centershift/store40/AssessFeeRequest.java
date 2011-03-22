@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AssessFee_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AssessFee_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AssessFee_Request", propOrder = {
-    "siteID",
-    "rentalID",
-    "baseFeeObj",
-    "schedFeeObj"
+        "siteID",
+        "rentalID",
+        "baseFeeObj",
+        "schedFeeObj"
 })
 public class AssessFeeRequest {
 
@@ -49,7 +46,6 @@ public class AssessFeeRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -57,7 +53,6 @@ public class AssessFeeRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -65,7 +60,6 @@ public class AssessFeeRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -73,7 +67,6 @@ public class AssessFeeRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -81,11 +74,9 @@ public class AssessFeeRequest {
 
     /**
      * Gets the value of the baseFeeObj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ORGFEESITEALL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ORGFEESITEALL }
      */
     public ORGFEESITEALL getBaseFeeObj() {
         return baseFeeObj;
@@ -93,11 +84,9 @@ public class AssessFeeRequest {
 
     /**
      * Sets the value of the baseFeeObj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ORGFEESITEALL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ORGFEESITEALL }
      */
     public void setBaseFeeObj(ORGFEESITEALL value) {
         this.baseFeeObj = value;
@@ -105,11 +94,9 @@ public class AssessFeeRequest {
 
     /**
      * Gets the value of the schedFeeObj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ScheduledFee }
-     *     
+     *
+     * @return possible object is
+     *         {@link ScheduledFee }
      */
     public ScheduledFee getSchedFeeObj() {
         return schedFeeObj;
@@ -117,11 +104,9 @@ public class AssessFeeRequest {
 
     /**
      * Sets the value of the schedFeeObj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ScheduledFee }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ScheduledFee }
      */
     public void setSchedFeeObj(ScheduledFee value) {
         this.schedFeeObj = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Phone complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Phone">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Phone", propOrder = {
-    "phoneNumber",
-    "phoneType"
+        "phoneNumber",
+        "phoneType"
 })
 public class Phone {
 
@@ -41,11 +38,9 @@ public class Phone {
 
     /**
      * Gets the value of the phoneNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -53,11 +48,9 @@ public class Phone {
 
     /**
      * Sets the value of the phoneNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPhoneNumber(String value) {
         this.phoneNumber = value;
@@ -65,11 +58,9 @@ public class Phone {
 
     /**
      * Gets the value of the phoneType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPhoneType() {
         return phoneType;
@@ -77,11 +68,9 @@ public class Phone {
 
     /**
      * Sets the value of the phoneType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPhoneType(String value) {
         this.phoneType = value;

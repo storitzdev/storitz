@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for MakeEcommReservation_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakeEcommReservation_Request">
  *   &lt;complexContent>
@@ -33,21 +32,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakeEcommReservation_Request", propOrder = {
-    "siteID",
-    "ecommID",
-    "unitID",
-    "version",
-    "quoteID",
-    "quoteType",
-    "rentNow",
-    "price",
-    "inquirySource",
-    "pcds"
+        "siteID",
+        "ecommID",
+        "unitID",
+        "version",
+        "quoteID",
+        "quoteType",
+        "rentNow",
+        "price",
+        "inquirySource",
+        "pcds"
 })
 public class MakeEcommReservationRequest {
 
@@ -74,7 +71,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -82,7 +78,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -90,7 +85,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the ecommID property.
-     * 
      */
     public long getEcommID() {
         return ecommID;
@@ -98,7 +92,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the ecommID property.
-     * 
      */
     public void setEcommID(long value) {
         this.ecommID = value;
@@ -106,7 +99,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -114,7 +106,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -122,11 +113,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVersion() {
         return version;
@@ -134,11 +123,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVersion(BigDecimal value) {
         this.version = value;
@@ -146,11 +133,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the quoteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getQuoteID() {
         return quoteID;
@@ -158,11 +143,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the quoteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setQuoteID(Long value) {
         this.quoteID = value;
@@ -170,11 +153,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the quoteType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link QuoteTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link QuoteTypes }
      */
     public QuoteTypes getQuoteType() {
         return quoteType;
@@ -182,11 +163,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the quoteType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link QuoteTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link QuoteTypes }
      */
     public void setQuoteType(QuoteTypes value) {
         this.quoteType = value;
@@ -194,7 +173,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the rentNow property.
-     * 
      */
     public boolean isRentNow() {
         return rentNow;
@@ -202,7 +180,6 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the rentNow property.
-     * 
      */
     public void setRentNow(boolean value) {
         this.rentNow = value;
@@ -210,11 +187,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the price property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPrice() {
         return price;
@@ -222,11 +197,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the price property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPrice(BigDecimal value) {
         this.price = value;
@@ -234,11 +207,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the inquirySource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getInquirySource() {
         return inquirySource;
@@ -246,11 +217,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the inquirySource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setInquirySource(Integer value) {
         this.inquirySource = value;
@@ -258,11 +227,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Gets the value of the pcds property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANQUOTEPCDDETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANQUOTEPCDDETAIL }
      */
     public ArrayOfTRANQUOTEPCDDETAIL getPcds() {
         return pcds;
@@ -270,11 +237,9 @@ public class MakeEcommReservationRequest {
 
     /**
      * Sets the value of the pcds property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANQUOTEPCDDETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANQUOTEPCDDETAIL }
      */
     public void setPcds(ArrayOfTRANQUOTEPCDDETAIL value) {
         this.pcds = value;

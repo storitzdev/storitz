@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -31,19 +26,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "iCustomerID",
-    "csUnit",
-    "csOldAccessCode",
-    "csNewAccessCode",
-    "st"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "iCustomerID",
+        "csUnit",
+        "csOldAccessCode",
+        "csNewAccessCode",
+        "st"
 })
 @XmlRootElement(name = "UpdateAccount")
 public class UpdateAccount {
@@ -60,11 +53,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -72,11 +63,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -84,11 +73,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -96,11 +83,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -108,11 +93,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -120,11 +103,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -132,7 +113,6 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the iCustomerID property.
-     * 
      */
     public int getICustomerID() {
         return iCustomerID;
@@ -140,7 +120,6 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the iCustomerID property.
-     * 
      */
     public void setICustomerID(int value) {
         this.iCustomerID = value;
@@ -148,11 +127,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the csUnit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnit() {
         return csUnit;
@@ -160,11 +137,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the csUnit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnit(String value) {
         this.csUnit = value;
@@ -172,11 +147,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the csOldAccessCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsOldAccessCode() {
         return csOldAccessCode;
@@ -184,11 +157,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the csOldAccessCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsOldAccessCode(String value) {
         this.csOldAccessCode = value;
@@ -196,11 +167,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the csNewAccessCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsNewAccessCode() {
         return csNewAccessCode;
@@ -208,11 +177,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the csNewAccessCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsNewAccessCode(String value) {
         this.csNewAccessCode = value;
@@ -220,11 +187,9 @@ public class UpdateAccount {
 
     /**
      * Gets the value of the st property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UserAccountST }
-     *     
+     *
+     * @return possible object is
+     *         {@link UserAccountST }
      */
     public UserAccountST getST() {
         return st;
@@ -232,11 +197,9 @@ public class UpdateAccount {
 
     /**
      * Sets the value of the st property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UserAccountST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link UserAccountST }
      */
     public void setST(UserAccountST value) {
         this.st = value;

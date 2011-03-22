@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -33,22 +32,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "csUnit",
-    "csAddress",
-    "csZip",
-    "csCity",
-    "csEmail",
-    "csWorkPhone",
-    "csHomePhone",
-    "csCellPhone"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "csUnit",
+        "csAddress",
+        "csZip",
+        "csCity",
+        "csEmail",
+        "csWorkPhone",
+        "csHomePhone",
+        "csCellPhone"
 })
 @XmlRootElement(name = "SetTenantInfo")
 public class SetTenantInfo {
@@ -67,11 +64,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -79,11 +74,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -91,11 +84,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -103,11 +94,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -115,11 +104,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -127,11 +114,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -139,11 +124,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csUnit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnit() {
         return csUnit;
@@ -151,11 +134,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csUnit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnit(String value) {
         this.csUnit = value;
@@ -163,11 +144,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAddress() {
         return csAddress;
@@ -175,11 +154,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAddress(String value) {
         this.csAddress = value;
@@ -187,11 +164,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csZip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsZip() {
         return csZip;
@@ -199,11 +174,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csZip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsZip(String value) {
         this.csZip = value;
@@ -211,11 +184,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csCity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCity() {
         return csCity;
@@ -223,11 +194,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csCity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCity(String value) {
         this.csCity = value;
@@ -235,11 +204,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csEmail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsEmail() {
         return csEmail;
@@ -247,11 +214,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csEmail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsEmail(String value) {
         this.csEmail = value;
@@ -259,11 +224,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csWorkPhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsWorkPhone() {
         return csWorkPhone;
@@ -271,11 +234,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csWorkPhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsWorkPhone(String value) {
         this.csWorkPhone = value;
@@ -283,11 +244,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csHomePhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsHomePhone() {
         return csHomePhone;
@@ -295,11 +254,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csHomePhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsHomePhone(String value) {
         this.csHomePhone = value;
@@ -307,11 +264,9 @@ public class SetTenantInfo {
 
     /**
      * Gets the value of the csCellPhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCellPhone() {
         return csCellPhone;
@@ -319,11 +274,9 @@ public class SetTenantInfo {
 
     /**
      * Sets the value of the csCellPhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCellPhone(String value) {
         this.csCellPhone = value;

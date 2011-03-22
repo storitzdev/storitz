@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getReceiptTemplateInfoResult"
+        "getReceiptTemplateInfoResult"
 })
 @XmlRootElement(name = "getReceiptTemplateInfoResponse")
 public class GetReceiptTemplateInfoResponse {
@@ -39,11 +32,9 @@ public class GetReceiptTemplateInfoResponse {
 
     /**
      * Gets the value of the getReceiptTemplateInfoResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetLtrTemplateInfoResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetLtrTemplateInfoResponse }
      */
     public GetLtrTemplateInfoResponse getGetReceiptTemplateInfoResult() {
         return getReceiptTemplateInfoResult;
@@ -51,11 +42,9 @@ public class GetReceiptTemplateInfoResponse {
 
     /**
      * Sets the value of the getReceiptTemplateInfoResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetLtrTemplateInfoResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetLtrTemplateInfoResponse }
      */
     public void setGetReceiptTemplateInfoResult(GetLtrTemplateInfoResponse value) {
         this.getReceiptTemplateInfoResult = value;

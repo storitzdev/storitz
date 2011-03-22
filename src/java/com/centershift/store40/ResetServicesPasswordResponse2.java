@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ResetServicesPassword_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ResetServicesPassword_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResetServicesPassword_Response", propOrder = {
-    "newPassword"
+        "newPassword"
 })
 public class ResetServicesPasswordResponse2 {
 
@@ -37,11 +34,9 @@ public class ResetServicesPasswordResponse2 {
 
     /**
      * Gets the value of the newPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNewPassword() {
         return newPassword;
@@ -49,11 +44,9 @@ public class ResetServicesPasswordResponse2 {
 
     /**
      * Sets the value of the newPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNewPassword(String value) {
         this.newPassword = value;

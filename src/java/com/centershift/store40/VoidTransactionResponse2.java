@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for VoidTransaction_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="VoidTransaction_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VoidTransaction_Response", propOrder = {
-    "successful"
+        "successful"
 })
 public class VoidTransactionResponse2 {
 
@@ -37,7 +34,6 @@ public class VoidTransactionResponse2 {
 
     /**
      * Gets the value of the successful property.
-     * 
      */
     public boolean isSuccessful() {
         return successful;
@@ -45,7 +41,6 @@ public class VoidTransactionResponse2 {
 
     /**
      * Sets the value of the successful property.
-     * 
      */
     public void setSuccessful(boolean value) {
         this.successful = value;

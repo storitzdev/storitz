@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for UpdateInsurance_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateInsurance_Response">
  *   &lt;complexContent>
@@ -27,15 +26,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateInsurance_Response", propOrder = {
-    "creditsReturned",
-    "amountDueAfterUpdate",
-    "transactionID",
-    "insuranceRentalID"
+        "creditsReturned",
+        "amountDueAfterUpdate",
+        "transactionID",
+        "insuranceRentalID"
 })
 public class UpdateInsuranceResponse2 {
 
@@ -50,11 +47,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Gets the value of the creditsReturned property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCreditsReturned() {
         return creditsReturned;
@@ -62,11 +57,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Sets the value of the creditsReturned property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCreditsReturned(BigDecimal value) {
         this.creditsReturned = value;
@@ -74,11 +67,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Gets the value of the amountDueAfterUpdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmountDueAfterUpdate() {
         return amountDueAfterUpdate;
@@ -86,11 +77,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Sets the value of the amountDueAfterUpdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmountDueAfterUpdate(BigDecimal value) {
         this.amountDueAfterUpdate = value;
@@ -98,11 +87,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Gets the value of the transactionID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTransactionID() {
         return transactionID;
@@ -110,11 +97,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Sets the value of the transactionID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTransactionID(Long value) {
         this.transactionID = value;
@@ -122,11 +107,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Gets the value of the insuranceRentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getInsuranceRentalID() {
         return insuranceRentalID;
@@ -134,11 +117,9 @@ public class UpdateInsuranceResponse2 {
 
     /**
      * Sets the value of the insuranceRentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setInsuranceRentalID(Long value) {
         this.insuranceRentalID = value;

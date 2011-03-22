@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "voidRetailAssessmentsResult"
+        "voidRetailAssessmentsResult"
 })
 @XmlRootElement(name = "VoidRetailAssessmentsResponse")
 public class VoidRetailAssessmentsResponse {
@@ -39,11 +32,9 @@ public class VoidRetailAssessmentsResponse {
 
     /**
      * Gets the value of the voidRetailAssessmentsResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link VoidRetailAssessmentResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link VoidRetailAssessmentResponse }
      */
     public VoidRetailAssessmentResponse getVoidRetailAssessmentsResult() {
         return voidRetailAssessmentsResult;
@@ -51,11 +42,9 @@ public class VoidRetailAssessmentsResponse {
 
     /**
      * Sets the value of the voidRetailAssessmentsResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link VoidRetailAssessmentResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link VoidRetailAssessmentResponse }
      */
     public void setVoidRetailAssessmentsResult(VoidRetailAssessmentResponse value) {
         this.voidRetailAssessmentsResult = value;

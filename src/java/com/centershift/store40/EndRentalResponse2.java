@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for EndRental_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="EndRental_Response">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EndRental_Response", propOrder = {
-    "transactionID",
-    "appliedCashCredit",
-    "refundMessage",
-    "errorMessage"
+        "transactionID",
+        "appliedCashCredit",
+        "refundMessage",
+        "errorMessage"
 })
 public class EndRentalResponse2 {
 
@@ -49,7 +46,6 @@ public class EndRentalResponse2 {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -57,7 +53,6 @@ public class EndRentalResponse2 {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;
@@ -65,7 +60,6 @@ public class EndRentalResponse2 {
 
     /**
      * Gets the value of the appliedCashCredit property.
-     * 
      */
     public boolean isAppliedCashCredit() {
         return appliedCashCredit;
@@ -73,7 +67,6 @@ public class EndRentalResponse2 {
 
     /**
      * Sets the value of the appliedCashCredit property.
-     * 
      */
     public void setAppliedCashCredit(boolean value) {
         this.appliedCashCredit = value;
@@ -81,11 +74,9 @@ public class EndRentalResponse2 {
 
     /**
      * Gets the value of the refundMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRefundMessage() {
         return refundMessage;
@@ -93,11 +84,9 @@ public class EndRentalResponse2 {
 
     /**
      * Sets the value of the refundMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRefundMessage(String value) {
         this.refundMessage = value;
@@ -105,11 +94,9 @@ public class EndRentalResponse2 {
 
     /**
      * Gets the value of the errorMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMessage() {
         return errorMessage;
@@ -117,11 +104,9 @@ public class EndRentalResponse2 {
 
     /**
      * Sets the value of the errorMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMessage(String value) {
         this.errorMessage = value;

@@ -2,7 +2,7 @@
   <div class="left" style="width:300px;margin-right:15px;">
     <g:link controller="home" action="index">
       <storitz:image src="storitz-logo.png" width="241" height="77" class="noborder"/>
-    </g:link> 
+    </g:link>
   </div>
   <div class="left" style="width:635px;">
     <div>
@@ -21,7 +21,7 @@
       </div>
       <div style="clear:both;"></div>
     </div>
-    <div  style="margin-top: 15px;">
+    <div style="margin-top: 15px;">
       <div class="left" style="margin-top: 5px;">
         <g:if test="${params.controller =='home'}">
           <g:link controller="home" action="index" class="navHighlight">Home</g:link>
@@ -36,7 +36,7 @@
           <g:link controller="static" action="faq" class="navMenu">Self Storage FAQs</g:link>
         </g:else>
         <a href="http://blog.storitz.com" class="navMenu" target="_blank">Blog</a>
-        <a href="${resource(dir:'/help')}" title="Storitz Help" class="navMenu dialogContent">Storitz Help</a>
+        <a href="${resource(dir: '/help')}" title="Storitz Help" class="navMenu dialogContent">Storitz Help</a>
         <g:if test="${params.controller =='static' && params.action == 'operatorsignup'}">
           <g:link controller="static" action="operatorsignup" class="navHighlight">Add Your Facility</g:link>
         </g:if>
@@ -54,27 +54,27 @@
       <div style="clear:both;"></div>
     </div>
     <p:dependantJavascript>
-    <script type="text/javascript">
-//<![CDATA[
-      $(document).ready(function() {
-        $('a.dialogContent').each(function() {
-          var link = $(this)
-          var dialog = $('<div>').load(link.attr('href'))
-                  .dialog({
-                    title: link.attr('title'),
-                    width: 500,
-                    autoOpen: false
-                  });
-          link.click(function(event) {
-            event.preventDefault();
-            dialog.dialog('open');
-            _gaq.push(['funnelTracker._trackEvent', 'help', 'open']);
-            return false;
+      <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function() {
+          $('a.dialogContent').each(function() {
+            var link = $(this)
+            var dialog = $('<div>').load(link.attr('href'))
+                    .dialog({
+              title: link.attr('title'),
+              width: 500,
+              autoOpen: false
+            });
+            link.click(function(event) {
+              event.preventDefault();
+              dialog.dialog('open');
+              _gaq.push(['funnelTracker._trackEvent', 'help', 'open']);
+              return false;
+            });
           });
         });
-      });
-//]]>
-    </script>
+        //]]>
+      </script>
     </p:dependantJavascript>
   </div>
   <div style="clear:both;"></div>

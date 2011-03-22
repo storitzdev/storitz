@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateStreetRespData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateStreetRespData">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateStreetRespData", propOrder = {
-    "countPassed",
-    "countFailed",
-    "countRentUpdated",
-    "errorMessage"
+        "countPassed",
+        "countFailed",
+        "countRentUpdated",
+        "errorMessage"
 })
 public class UpdateStreetRespData {
 
@@ -49,7 +46,6 @@ public class UpdateStreetRespData {
 
     /**
      * Gets the value of the countPassed property.
-     * 
      */
     public int getCountPassed() {
         return countPassed;
@@ -57,7 +53,6 @@ public class UpdateStreetRespData {
 
     /**
      * Sets the value of the countPassed property.
-     * 
      */
     public void setCountPassed(int value) {
         this.countPassed = value;
@@ -65,7 +60,6 @@ public class UpdateStreetRespData {
 
     /**
      * Gets the value of the countFailed property.
-     * 
      */
     public int getCountFailed() {
         return countFailed;
@@ -73,7 +67,6 @@ public class UpdateStreetRespData {
 
     /**
      * Sets the value of the countFailed property.
-     * 
      */
     public void setCountFailed(int value) {
         this.countFailed = value;
@@ -81,7 +74,6 @@ public class UpdateStreetRespData {
 
     /**
      * Gets the value of the countRentUpdated property.
-     * 
      */
     public int getCountRentUpdated() {
         return countRentUpdated;
@@ -89,7 +81,6 @@ public class UpdateStreetRespData {
 
     /**
      * Sets the value of the countRentUpdated property.
-     * 
      */
     public void setCountRentUpdated(int value) {
         this.countRentUpdated = value;
@@ -97,11 +88,9 @@ public class UpdateStreetRespData {
 
     /**
      * Gets the value of the errorMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMessage() {
         return errorMessage;
@@ -109,11 +98,9 @@ public class UpdateStreetRespData {
 
     /**
      * Sets the value of the errorMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMessage(String value) {
         this.errorMessage = value;

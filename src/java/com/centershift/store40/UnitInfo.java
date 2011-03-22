@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UnitInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UnitInfo">
  *   &lt;complexContent>
@@ -28,17 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UnitInfo", propOrder = {
-    "unitID",
-    "version",
-    "newInsurance",
-    "emailInvoice",
-    "mailInvoice",
-    "perEndDay"
+        "unitID",
+        "version",
+        "newInsurance",
+        "emailInvoice",
+        "mailInvoice",
+        "perEndDay"
 })
 public class UnitInfo {
 
@@ -57,7 +54,6 @@ public class UnitInfo {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -65,7 +61,6 @@ public class UnitInfo {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -73,7 +68,6 @@ public class UnitInfo {
 
     /**
      * Gets the value of the version property.
-     * 
      */
     public int getVersion() {
         return version;
@@ -81,7 +75,6 @@ public class UnitInfo {
 
     /**
      * Sets the value of the version property.
-     * 
      */
     public void setVersion(int value) {
         this.version = value;
@@ -89,11 +82,9 @@ public class UnitInfo {
 
     /**
      * Gets the value of the newInsurance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getNewInsurance() {
         return newInsurance;
@@ -101,11 +92,9 @@ public class UnitInfo {
 
     /**
      * Sets the value of the newInsurance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setNewInsurance(Integer value) {
         this.newInsurance = value;
@@ -113,11 +102,9 @@ public class UnitInfo {
 
     /**
      * Gets the value of the emailInvoice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getEmailInvoice() {
         return emailInvoice;
@@ -125,11 +112,9 @@ public class UnitInfo {
 
     /**
      * Sets the value of the emailInvoice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setEmailInvoice(Integer value) {
         this.emailInvoice = value;
@@ -137,11 +122,9 @@ public class UnitInfo {
 
     /**
      * Gets the value of the mailInvoice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getMailInvoice() {
         return mailInvoice;
@@ -149,11 +132,9 @@ public class UnitInfo {
 
     /**
      * Sets the value of the mailInvoice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setMailInvoice(Integer value) {
         this.mailInvoice = value;
@@ -161,11 +142,9 @@ public class UnitInfo {
 
     /**
      * Gets the value of the perEndDay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPerEndDay() {
         return perEndDay;
@@ -173,11 +152,9 @@ public class UnitInfo {
 
     /**
      * Sets the value of the perEndDay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPerEndDay(Integer value) {
         this.perEndDay = value;

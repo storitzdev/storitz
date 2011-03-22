@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddUpdateAutoPaySettings_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddUpdateAutoPaySettings_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddUpdateAutoPaySettings_Response", propOrder = {
-    "transactionID"
+        "transactionID"
 })
 public class AddUpdateAutoPaySettingsResponse2 {
 
@@ -37,7 +34,6 @@ public class AddUpdateAutoPaySettingsResponse2 {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -45,7 +41,6 @@ public class AddUpdateAutoPaySettingsResponse2 {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;

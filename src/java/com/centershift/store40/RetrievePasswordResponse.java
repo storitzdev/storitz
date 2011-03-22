@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "retrievePasswordResult"
+        "retrievePasswordResult"
 })
 @XmlRootElement(name = "RetrievePasswordResponse")
 public class RetrievePasswordResponse {
@@ -39,11 +32,9 @@ public class RetrievePasswordResponse {
 
     /**
      * Gets the value of the retrievePasswordResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PasswordResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link PasswordResponse }
      */
     public PasswordResponse getRetrievePasswordResult() {
         return retrievePasswordResult;
@@ -51,11 +42,9 @@ public class RetrievePasswordResponse {
 
     /**
      * Sets the value of the retrievePasswordResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PasswordResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PasswordResponse }
      */
     public void setRetrievePasswordResult(PasswordResponse value) {
         this.retrievePasswordResult = value;

@@ -8,23 +8,23 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum CommissionType {
-    FIXED("Fixed"),
-    PERCENTAGE("Percentage");
+  FIXED("Fixed"),
+  PERCENTAGE("Percentage");
 
-    final String display
+  final String display
 
-    CommissionType(display) {
-      this.display = display
-    }
+  CommissionType(display) {
+    this.display = display
+  }
 
-    def getValue() { return display }
+  def getValue() { return display }
 
-    static list() { [FIXED, PERCENTAGE] }
+  static list() { [FIXED, PERCENTAGE] }
 
   static public CommissionType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return CommissionType.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return CommissionType.valueOf(value)
+    return ret
+  }
 
 }

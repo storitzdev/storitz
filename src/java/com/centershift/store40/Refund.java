@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Refund complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Refund">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Refund", propOrder = {
-    "siteNumber",
-    "transactionData",
-    "tenantData"
+        "siteNumber",
+        "transactionData",
+        "tenantData"
 })
 public class Refund {
 
@@ -45,11 +42,9 @@ public class Refund {
 
     /**
      * Gets the value of the siteNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSiteNumber() {
         return siteNumber;
@@ -57,11 +52,9 @@ public class Refund {
 
     /**
      * Sets the value of the siteNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSiteNumber(String value) {
         this.siteNumber = value;
@@ -69,11 +62,9 @@ public class Refund {
 
     /**
      * Gets the value of the transactionData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TransactionData }
-     *     
+     *
+     * @return possible object is
+     *         {@link TransactionData }
      */
     public TransactionData getTransactionData() {
         return transactionData;
@@ -81,11 +72,9 @@ public class Refund {
 
     /**
      * Sets the value of the transactionData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TransactionData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TransactionData }
      */
     public void setTransactionData(TransactionData value) {
         this.transactionData = value;
@@ -93,11 +82,9 @@ public class Refund {
 
     /**
      * Gets the value of the tenantData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TenantData }
-     *     
+     *
+     * @return possible object is
+     *         {@link TenantData }
      */
     public TenantData getTenantData() {
         return tenantData;
@@ -105,11 +92,9 @@ public class Refund {
 
     /**
      * Sets the value of the tenantData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TenantData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TenantData }
      */
     public void setTenantData(TenantData value) {
         this.tenantData = value;

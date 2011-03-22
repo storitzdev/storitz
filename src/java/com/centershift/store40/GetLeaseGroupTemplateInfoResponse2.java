@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for getLeaseGroupTemplateInfo_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="getLeaseGroupTemplateInfo_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getLeaseGroupTemplateInfo_Response", propOrder = {
-    "leaseGrpCol"
+        "leaseGrpCol"
 })
 public class GetLeaseGroupTemplateInfoResponse2 {
 
@@ -37,11 +34,9 @@ public class GetLeaseGroupTemplateInfoResponse2 {
 
     /**
      * Gets the value of the leaseGrpCol property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfPRINTLEASEDOCS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfPRINTLEASEDOCS }
      */
     public ArrayOfPRINTLEASEDOCS getLeaseGrpCol() {
         return leaseGrpCol;
@@ -49,11 +44,9 @@ public class GetLeaseGroupTemplateInfoResponse2 {
 
     /**
      * Sets the value of the leaseGrpCol property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfPRINTLEASEDOCS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfPRINTLEASEDOCS }
      */
     public void setLeaseGrpCol(ArrayOfPRINTLEASEDOCS value) {
         this.leaseGrpCol = value;

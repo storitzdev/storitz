@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateGatePIN_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateGatePIN_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateGatePIN_Request", propOrder = {
-    "contactID",
-    "rentalID",
-    "pin"
+        "contactID",
+        "rentalID",
+        "pin"
 })
 public class UpdateGatePINRequest {
 
@@ -45,7 +42,6 @@ public class UpdateGatePINRequest {
 
     /**
      * Gets the value of the contactID property.
-     * 
      */
     public long getContactID() {
         return contactID;
@@ -53,7 +49,6 @@ public class UpdateGatePINRequest {
 
     /**
      * Sets the value of the contactID property.
-     * 
      */
     public void setContactID(long value) {
         this.contactID = value;
@@ -61,7 +56,6 @@ public class UpdateGatePINRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -69,7 +63,6 @@ public class UpdateGatePINRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -77,11 +70,9 @@ public class UpdateGatePINRequest {
 
     /**
      * Gets the value of the pin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPIN() {
         return pin;
@@ -89,11 +80,9 @@ public class UpdateGatePINRequest {
 
     /**
      * Sets the value of the pin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPIN(String value) {
         this.pin = value;

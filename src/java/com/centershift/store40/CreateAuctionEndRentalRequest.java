@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for CreateAuctionEndRental_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateAuctionEndRental_Request">
  *   &lt;complexContent>
@@ -27,14 +22,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateAuctionEndRental_Request", propOrder = {
-    "siteID",
-    "auctionDate",
-    "auctionRentalsPayInfo"
+        "siteID",
+        "auctionDate",
+        "auctionRentalsPayInfo"
 })
 public class CreateAuctionEndRentalRequest {
 
@@ -48,7 +41,6 @@ public class CreateAuctionEndRentalRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -56,7 +48,6 @@ public class CreateAuctionEndRentalRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -64,11 +55,9 @@ public class CreateAuctionEndRentalRequest {
 
     /**
      * Gets the value of the auctionDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getAuctionDate() {
         return auctionDate;
@@ -76,11 +65,9 @@ public class CreateAuctionEndRentalRequest {
 
     /**
      * Sets the value of the auctionDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setAuctionDate(XMLGregorianCalendar value) {
         this.auctionDate = value;
@@ -88,11 +75,9 @@ public class CreateAuctionEndRentalRequest {
 
     /**
      * Gets the value of the auctionRentalsPayInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionEndRentalInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionEndRentalInfo }
      */
     public ArrayOfAuctionEndRentalInfo getAuctionRentalsPayInfo() {
         return auctionRentalsPayInfo;
@@ -100,11 +85,9 @@ public class CreateAuctionEndRentalRequest {
 
     /**
      * Sets the value of the auctionRentalsPayInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionEndRentalInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionEndRentalInfo }
      */
     public void setAuctionRentalsPayInfo(ArrayOfAuctionEndRentalInfo value) {
         this.auctionRentalsPayInfo = value;

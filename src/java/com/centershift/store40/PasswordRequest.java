@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Password_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Password_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Password_Request", propOrder = {
-    "emailAddress",
-    "password",
-    "orgID"
+        "emailAddress",
+        "password",
+        "orgID"
 })
 public class PasswordRequest {
 
@@ -45,11 +42,9 @@ public class PasswordRequest {
 
     /**
      * Gets the value of the emailAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmailAddress() {
         return emailAddress;
@@ -57,11 +52,9 @@ public class PasswordRequest {
 
     /**
      * Sets the value of the emailAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmailAddress(String value) {
         this.emailAddress = value;
@@ -69,11 +62,9 @@ public class PasswordRequest {
 
     /**
      * Gets the value of the password property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPassword() {
         return password;
@@ -81,11 +72,9 @@ public class PasswordRequest {
 
     /**
      * Sets the value of the password property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPassword(String value) {
         this.password = value;
@@ -93,11 +82,9 @@ public class PasswordRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -105,11 +92,9 @@ public class PasswordRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;

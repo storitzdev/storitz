@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAuctionRentals_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAuctionRentals_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAuctionRentals_Response", propOrder = {
-    "details"
+        "details"
 })
 public class GetAuctionRentalsResponse2 {
 
@@ -37,11 +34,9 @@ public class GetAuctionRentalsResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANAUCTIONRENTALSPROCESS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANAUCTIONRENTALSPROCESS }
      */
     public ArrayOfTRANAUCTIONRENTALSPROCESS getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class GetAuctionRentalsResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANAUCTIONRENTALSPROCESS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANAUCTIONRENTALSPROCESS }
      */
     public void setDetails(ArrayOfTRANAUCTIONRENTALSPROCESS value) {
         this.details = value;

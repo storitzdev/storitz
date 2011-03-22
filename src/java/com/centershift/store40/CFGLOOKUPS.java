@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for CFG_LOOKUPS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CFG_LOOKUPS">
  *   &lt;complexContent>
@@ -38,28 +33,25 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CFG_LOOKUPS", propOrder = {
-    "valuekeyid",
-    "valueid",
-    "lookupid",
-    "lookupvalue",
-    "meaning",
-    "othervalue",
-    "active",
-    "orgid",
-    "siteid",
-    "created",
-    "updated",
-    "createdby",
-    "updatedby"
+        "valuekeyid",
+        "valueid",
+        "lookupid",
+        "lookupvalue",
+        "meaning",
+        "othervalue",
+        "active",
+        "orgid",
+        "siteid",
+        "created",
+        "updated",
+        "createdby",
+        "updatedby"
 })
 public class CFGLOOKUPS
-    extends BaseEntityOfCollectionCFGLOOKUPSColumnIndexes
-{
+        extends BaseEntityOfCollectionCFGLOOKUPSColumnIndexes {
 
     @XmlElement(name = "VALUE_KEY_ID")
     protected long valuekeyid;
@@ -92,7 +84,6 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the valuekeyid property.
-     * 
      */
     public long getVALUEKEYID() {
         return valuekeyid;
@@ -100,7 +91,6 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the valuekeyid property.
-     * 
      */
     public void setVALUEKEYID(long value) {
         this.valuekeyid = value;
@@ -108,7 +98,6 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the valueid property.
-     * 
      */
     public int getVALUEID() {
         return valueid;
@@ -116,7 +105,6 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the valueid property.
-     * 
      */
     public void setVALUEID(int value) {
         this.valueid = value;
@@ -124,7 +112,6 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the lookupid property.
-     * 
      */
     public long getLOOKUPID() {
         return lookupid;
@@ -132,7 +119,6 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the lookupid property.
-     * 
      */
     public void setLOOKUPID(long value) {
         this.lookupid = value;
@@ -140,11 +126,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the lookupvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLOOKUPVALUE() {
         return lookupvalue;
@@ -152,11 +136,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the lookupvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLOOKUPVALUE(String value) {
         this.lookupvalue = value;
@@ -164,11 +146,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the meaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMEANING() {
         return meaning;
@@ -176,11 +156,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the meaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMEANING(String value) {
         this.meaning = value;
@@ -188,11 +166,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the othervalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOTHERVALUE() {
         return othervalue;
@@ -200,11 +176,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the othervalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOTHERVALUE(BigDecimal value) {
         this.othervalue = value;
@@ -212,7 +186,6 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -220,7 +193,6 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -228,11 +200,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the orgid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getORGID() {
         return orgid;
@@ -240,11 +210,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the orgid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setORGID(Long value) {
         this.orgid = value;
@@ -252,11 +220,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -264,11 +230,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -276,11 +240,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -288,11 +250,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -300,11 +260,9 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -312,11 +270,9 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;
@@ -324,7 +280,6 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -332,7 +287,6 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -340,7 +294,6 @@ public class CFGLOOKUPS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -348,7 +301,6 @@ public class CFGLOOKUPS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

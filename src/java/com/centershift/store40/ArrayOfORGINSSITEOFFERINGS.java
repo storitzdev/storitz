@@ -1,19 +1,18 @@
-
 package com.centershift.store40;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for ArrayOfORG_INS_SITE_OFFERINGS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ArrayOfORG_INS_SITE_OFFERINGS">
  *   &lt;complexContent>
@@ -25,12 +24,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ArrayOfORG_INS_SITE_OFFERINGS", propOrder = {
-    "orginssiteofferings"
+        "orginssiteofferings"
 })
 public class ArrayOfORGINSSITEOFFERINGS {
 
@@ -39,25 +36,23 @@ public class ArrayOfORGINSSITEOFFERINGS {
 
     /**
      * Gets the value of the orginssiteofferings property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the orginssiteofferings property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getORGINSSITEOFFERINGS().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link ORGINSSITEOFFERINGS }
-     * 
-     * 
      */
     public List<ORGINSSITEOFFERINGS> getORGINSSITEOFFERINGS() {
         if (orginssiteofferings == null) {

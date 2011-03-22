@@ -2,14 +2,14 @@ package com.storitz
 
 class QuikStorLocation {
 
-    static belongsTo = [ quikStor: QuikStor]
-  
-    static constraints = {
-      site(nullable:true)
-    }
+  static belongsTo = [quikStor: QuikStor]
 
-    String username
-    String password
-    String sitename
-    StorageSite site
+  static constraints = {
+    site(nullable: true)
+  }
+
+  String username
+  String password
+  String sitename
+  StorageSite site
 }

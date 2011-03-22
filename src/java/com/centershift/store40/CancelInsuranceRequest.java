@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CancelInsurance_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CancelInsurance_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CancelInsurance_Request", propOrder = {
-    "parentRentalID",
-    "insuranceRentalID"
+        "parentRentalID",
+        "insuranceRentalID"
 })
 public class CancelInsuranceRequest {
 
@@ -41,7 +38,6 @@ public class CancelInsuranceRequest {
 
     /**
      * Gets the value of the parentRentalID property.
-     * 
      */
     public long getParentRentalID() {
         return parentRentalID;
@@ -49,7 +45,6 @@ public class CancelInsuranceRequest {
 
     /**
      * Sets the value of the parentRentalID property.
-     * 
      */
     public void setParentRentalID(long value) {
         this.parentRentalID = value;
@@ -57,7 +52,6 @@ public class CancelInsuranceRequest {
 
     /**
      * Gets the value of the insuranceRentalID property.
-     * 
      */
     public long getInsuranceRentalID() {
         return insuranceRentalID;
@@ -65,7 +59,6 @@ public class CancelInsuranceRequest {
 
     /**
      * Sets the value of the insuranceRentalID property.
-     * 
      */
     public void setInsuranceRentalID(long value) {
         this.insuranceRentalID = value;

@@ -26,7 +26,7 @@
 <div id="body">
   <g:render template="/topnav"/>
   <div class="stcontent">
-    <g:render template="/logo_bar" />
+    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -46,22 +46,22 @@
       <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
       </g:if>
-      <g:form action="list" method="post" >
-          <div class="dialog">
-              <table>
-                  <tbody>
-                    <tr class='prop'>
-                          <td valign='top' class='name'>
-                              <label for='sitename'>Site name:</label>
-                          </td>
-                          <td valign='top' class='value'>
-                              <input type="text" id="sitename" name="sitename" style="width:300px;" value="${flash.sitename}"/>
-                              <span class="button"><input class="save" type="submit" value="Search" /></span>
-                          </td>
-                      </tr>
-                  </tbody>
-                </table>
-            </div>
+      <g:form action="list" method="post">
+        <div class="dialog">
+          <table>
+            <tbody>
+            <tr class='prop'>
+              <td valign='top' class='name'>
+                <label for='sitename'>Site name:</label>
+              </td>
+              <td valign='top' class='value'>
+                <input type="text" id="sitename" name="sitename" style="width:300px;" value="${flash.sitename}"/>
+                <span class="button"><input class="save" type="submit" value="Search"/></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </g:form>
 
       <div class="list">
@@ -111,5 +111,5 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

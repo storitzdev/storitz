@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for CreateAuction_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateAuction_Request">
  *   &lt;complexContent>
@@ -28,15 +23,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateAuction_Request", propOrder = {
-    "siteID",
-    "auctionDateTime",
-    "auctioneerName",
-    "auctionNotes"
+        "siteID",
+        "auctionDateTime",
+        "auctioneerName",
+        "auctionNotes"
 })
 public class CreateAuctionRequest {
 
@@ -52,7 +45,6 @@ public class CreateAuctionRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -60,7 +52,6 @@ public class CreateAuctionRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -68,11 +59,9 @@ public class CreateAuctionRequest {
 
     /**
      * Gets the value of the auctionDateTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getAuctionDateTime() {
         return auctionDateTime;
@@ -80,11 +69,9 @@ public class CreateAuctionRequest {
 
     /**
      * Sets the value of the auctionDateTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setAuctionDateTime(XMLGregorianCalendar value) {
         this.auctionDateTime = value;
@@ -92,11 +79,9 @@ public class CreateAuctionRequest {
 
     /**
      * Gets the value of the auctioneerName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAuctioneerName() {
         return auctioneerName;
@@ -104,11 +89,9 @@ public class CreateAuctionRequest {
 
     /**
      * Sets the value of the auctioneerName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAuctioneerName(String value) {
         this.auctioneerName = value;
@@ -116,11 +99,9 @@ public class CreateAuctionRequest {
 
     /**
      * Gets the value of the auctionNotes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAuctionNotes() {
         return auctionNotes;
@@ -128,11 +109,9 @@ public class CreateAuctionRequest {
 
     /**
      * Sets the value of the auctionNotes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAuctionNotes(String value) {
         this.auctionNotes = value;

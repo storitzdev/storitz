@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CreateNewAccount_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateNewAccount_Request">
  *   &lt;complexContent>
@@ -33,22 +32,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateNewAccount_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "firstName",
-    "lastName",
-    "accountName",
-    "accountClass",
-    "contactType",
-    "email",
-    "contactAddress",
-    "contactPhone",
-    "ecommCode"
+        "orgID",
+        "siteID",
+        "firstName",
+        "lastName",
+        "accountName",
+        "accountClass",
+        "contactType",
+        "email",
+        "contactAddress",
+        "contactPhone",
+        "ecommCode"
 })
 public class CreateNewAccountRequest {
 
@@ -77,7 +74,6 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -85,7 +81,6 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -93,7 +88,6 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -101,7 +95,6 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -109,11 +102,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the firstName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFirstName() {
         return firstName;
@@ -121,11 +112,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the firstName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFirstName(String value) {
         this.firstName = value;
@@ -133,11 +122,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the lastName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLastName() {
         return lastName;
@@ -145,11 +132,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the lastName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLastName(String value) {
         this.lastName = value;
@@ -157,11 +142,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the accountName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountName() {
         return accountName;
@@ -169,11 +152,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the accountName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountName(String value) {
         this.accountName = value;
@@ -181,11 +162,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the accountClass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountClass }
-     *     
+     *
+     * @return possible object is
+     *         {@link AccountClass }
      */
     public AccountClass getAccountClass() {
         return accountClass;
@@ -193,11 +172,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the accountClass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountClass }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AccountClass }
      */
     public void setAccountClass(AccountClass value) {
         this.accountClass = value;
@@ -205,11 +182,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the contactType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ContactType }
      */
     public ContactType getContactType() {
         return contactType;
@@ -217,11 +192,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the contactType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ContactType }
      */
     public void setContactType(ContactType value) {
         this.contactType = value;
@@ -229,11 +202,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmail() {
         return email;
@@ -241,11 +212,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -253,11 +222,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the contactAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfContactAddress }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfContactAddress }
      */
     public ArrayOfContactAddress getContactAddress() {
         return contactAddress;
@@ -265,11 +232,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the contactAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfContactAddress }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfContactAddress }
      */
     public void setContactAddress(ArrayOfContactAddress value) {
         this.contactAddress = value;
@@ -277,11 +242,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the contactPhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACCTCONTACTPHONES }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACCTCONTACTPHONES }
      */
     public ArrayOfACCTCONTACTPHONES getContactPhone() {
         return contactPhone;
@@ -289,11 +252,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the contactPhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACCTCONTACTPHONES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACCTCONTACTPHONES }
      */
     public void setContactPhone(ArrayOfACCTCONTACTPHONES value) {
         this.contactPhone = value;
@@ -301,11 +262,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Gets the value of the ecommCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEcommCode() {
         return ecommCode;
@@ -313,11 +272,9 @@ public class CreateNewAccountRequest {
 
     /**
      * Sets the value of the ecommCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEcommCode(String value) {
         this.ecommCode = value;

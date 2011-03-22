@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for GetSiteUnitData_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetSiteUnitData_Request">
  *   &lt;complexContent>
@@ -32,20 +31,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetSiteUnitData_Request", propOrder = {
-    "siteID",
-    "width",
-    "depth",
-    "minAvailable",
-    "minRentRate",
-    "maxRentRate",
-    "softReservable",
-    "hardReservable",
-    "getPromoData"
+        "siteID",
+        "width",
+        "depth",
+        "minAvailable",
+        "minRentRate",
+        "maxRentRate",
+        "softReservable",
+        "hardReservable",
+        "getPromoData"
 })
 public class GetSiteUnitDataRequest {
 
@@ -70,7 +67,6 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -78,7 +74,6 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -86,11 +81,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWidth() {
         return width;
@@ -98,11 +91,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWidth(BigDecimal value) {
         this.width = value;
@@ -110,11 +101,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDepth() {
         return depth;
@@ -122,11 +111,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDepth(BigDecimal value) {
         this.depth = value;
@@ -134,11 +121,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the minAvailable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getMinAvailable() {
         return minAvailable;
@@ -146,11 +131,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the minAvailable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setMinAvailable(Integer value) {
         this.minAvailable = value;
@@ -158,11 +141,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the minRentRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMinRentRate() {
         return minRentRate;
@@ -170,11 +151,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the minRentRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMinRentRate(BigDecimal value) {
         this.minRentRate = value;
@@ -182,11 +161,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the maxRentRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMaxRentRate() {
         return maxRentRate;
@@ -194,11 +171,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the maxRentRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMaxRentRate(BigDecimal value) {
         this.maxRentRate = value;
@@ -206,11 +181,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the softReservable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSoftReservable() {
         return softReservable;
@@ -218,11 +191,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the softReservable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSoftReservable(String value) {
         this.softReservable = value;
@@ -230,11 +201,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the hardReservable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getHardReservable() {
         return hardReservable;
@@ -242,11 +211,9 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the hardReservable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setHardReservable(String value) {
         this.hardReservable = value;
@@ -254,7 +221,6 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Gets the value of the getPromoData property.
-     * 
      */
     public boolean isGetPromoData() {
         return getPromoData;
@@ -262,7 +228,6 @@ public class GetSiteUnitDataRequest {
 
     /**
      * Sets the value of the getPromoData property.
-     * 
      */
     public void setGetPromoData(boolean value) {
         this.getPromoData = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ViewLease_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ViewLease_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ViewLease_Request", propOrder = {
-    "siteID",
-    "leaseId",
-    "rentalId"
+        "siteID",
+        "leaseId",
+        "rentalId"
 })
 public class ViewLeaseRequest {
 
@@ -45,7 +42,6 @@ public class ViewLeaseRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -53,7 +49,6 @@ public class ViewLeaseRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -61,7 +56,6 @@ public class ViewLeaseRequest {
 
     /**
      * Gets the value of the leaseId property.
-     * 
      */
     public long getLeaseId() {
         return leaseId;
@@ -69,7 +63,6 @@ public class ViewLeaseRequest {
 
     /**
      * Sets the value of the leaseId property.
-     * 
      */
     public void setLeaseId(long value) {
         this.leaseId = value;
@@ -77,7 +70,6 @@ public class ViewLeaseRequest {
 
     /**
      * Gets the value of the rentalId property.
-     * 
      */
     public long getRentalId() {
         return rentalId;
@@ -85,7 +77,6 @@ public class ViewLeaseRequest {
 
     /**
      * Sets the value of the rentalId property.
-     * 
      */
     public void setRentalId(long value) {
         this.rentalId = value;

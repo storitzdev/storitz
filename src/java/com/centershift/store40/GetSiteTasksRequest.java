@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for GetSiteTasks_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetSiteTasks_Request">
  *   &lt;complexContent>
@@ -29,16 +24,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetSiteTasks_Request", propOrder = {
-    "taskID",
-    "type",
-    "source",
-    "siteID",
-    "taskDate"
+        "taskID",
+        "type",
+        "source",
+        "siteID",
+        "taskDate"
 })
 public class GetSiteTasksRequest {
 
@@ -56,11 +49,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Gets the value of the taskID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTaskID() {
         return taskID;
@@ -68,11 +59,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Sets the value of the taskID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTaskID(Long value) {
         this.taskID = value;
@@ -80,11 +69,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ETaskType }
-     *     
+     *
+     * @return possible object is
+     *         {@link ETaskType }
      */
     public ETaskType getType() {
         return type;
@@ -92,11 +79,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ETaskType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ETaskType }
      */
     public void setType(ETaskType value) {
         this.type = value;
@@ -104,11 +89,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Gets the value of the source property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ETaskSource }
-     *     
+     *
+     * @return possible object is
+     *         {@link ETaskSource }
      */
     public ETaskSource getSource() {
         return source;
@@ -116,11 +99,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Sets the value of the source property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ETaskSource }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ETaskSource }
      */
     public void setSource(ETaskSource value) {
         this.source = value;
@@ -128,11 +109,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -140,11 +119,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -152,11 +129,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Gets the value of the taskDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTaskDate() {
         return taskDate;
@@ -164,11 +139,9 @@ public class GetSiteTasksRequest {
 
     /**
      * Sets the value of the taskDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTaskDate(XMLGregorianCalendar value) {
         this.taskDate = value;

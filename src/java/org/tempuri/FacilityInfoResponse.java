@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "facilityInfoResult"
+        "facilityInfoResult"
 })
 @XmlRootElement(name = "FacilityInfoResponse")
 public class FacilityInfoResponse {
@@ -39,11 +32,9 @@ public class FacilityInfoResponse {
 
     /**
      * Gets the value of the facilityInfoResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FacilityInfoST }
-     *     
+     *
+     * @return possible object is
+     *         {@link FacilityInfoST }
      */
     public FacilityInfoST getFacilityInfoResult() {
         return facilityInfoResult;
@@ -51,11 +42,9 @@ public class FacilityInfoResponse {
 
     /**
      * Sets the value of the facilityInfoResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FacilityInfoST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link FacilityInfoST }
      */
     public void setFacilityInfoResult(FacilityInfoST value) {
         this.facilityInfoResult = value;

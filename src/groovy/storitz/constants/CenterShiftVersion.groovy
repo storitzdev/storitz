@@ -8,28 +8,29 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum CenterShiftVersion {
-    CS3(3, "3.x"),
-    CS4(4, "4.x");
+  CS3(3, "3.x"),
+  CS4(4, "4.x");
 
-    private final int value
-    private final String description
+  private final int value
+  private final String description
 
-    public CenterShiftVersion(value, description) {
-      this.value = value
-      this.description = description
-    }
+  public CenterShiftVersion(value, description) {
+    this.value = value
+    this.description = description
+  }
 
-    String getDisplay() { return description }
-    String getValue() { return value }
+  String getDisplay() { return description }
 
-    static list() {
-      [CS3, CS4]
-    }
+  String getValue() { return value }
+
+  static list() {
+    [CS3, CS4]
+  }
 
   static public CenterShiftVersion getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return CenterShiftVersion.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return CenterShiftVersion.valueOf(value)
+    return ret
+  }
 
 }

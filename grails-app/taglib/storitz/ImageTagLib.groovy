@@ -24,116 +24,116 @@ import com.studentsonly.grails.plugins.uiperformance.taglib.AbstractTaglib
  */
 class ImageTagLib extends AbstractTaglib {
 
-	static namespace = 'storitz'
+  static namespace = 'storitz'
 
-	// dependency injection
-	def imageTagPostProcessor
+  // dependency injection
+  def imageTagPostProcessor
 
-	/**
-	 * Generates an &lt;img&gt; tag.
-	 */
-	def image = { attrs ->
-		doImage attrs, 'img'
-	}
+  /**
+   * Generates an &lt;img&gt; tag.
+   */
+  def image = { attrs ->
+    doImage attrs, 'img'
+  }
 
-	/**
-	 * Generates an &lt;input type="image"&gt; tag.
-	 */
-	def inputImage = { attrs ->
-		doImage attrs, "input type='image'"
-	}
+  /**
+   * Generates an &lt;input type="image"&gt; tag.
+   */
+  def inputImage = { attrs ->
+    doImage attrs, "input type='image'"
+  }
 
-	def imageLink = { attrs ->
+  def imageLink = { attrs ->
 
-		if (!attrs.src) {
-			throwTagError('Tag [imageLink] is missing required attribute [src]')
-		}
+    if (!attrs.src) {
+      throwTagError('Tag [imageLink] is missing required attribute [src]')
+    }
 
-		String link = generateRelativePath('images', attrs.remove('src'), '',
-				attrs.remove('plugin'), attrs.remove('absolute'))
+    String link = generateRelativePath('images', attrs.remove('src'), '',
+            attrs.remove('plugin'), attrs.remove('absolute'))
 
-		link = "'$link'"
-		if (imageTagPostProcessor) {
-			link = imageTagPostProcessor.process(link, request)
-		}
+    link = "'$link'"
+    if (imageTagPostProcessor) {
+      link = imageTagPostProcessor.process(link, request)
+    }
 
-		out << link
-	}
+    out << link
+  }
 
-	def favicon = { attrs ->
-		String src = attrs.remove('src')
+  def favicon = { attrs ->
+    String src = attrs.remove('src')
 
-		String ext = 'ico'
-		if (src) {
-			int index = src.lastIndexOf('.')
-			if (index > -1) {
-				ext = src.substring(index + 1)
-			}
-			else {
-				src += '.ico'
-			}
-		}
-		else {
-			src = '/favicon.ico'
-		}
-		src = generateRelativePath(null, src, null, attrs.remove('plugin'), attrs.remove('absolute'))
+    String ext = 'ico'
+    if (src) {
+      int index = src.lastIndexOf('.')
+      if (index > -1) {
+        ext = src.substring(index + 1)
+      }
+      else {
+        src += '.ico'
+      }
+    }
+    else {
+      src = '/favicon.ico'
+    }
+    src = generateRelativePath(null, src, null, attrs.remove('plugin'), attrs.remove('absolute'))
 
-		String rel = attrs.remove('rel') ?: 'icon'
-		String type = ext == 'ico' ? 'vnd.microsoft.icon' : ext
-		String html = "<link rel='$rel' href='${src}' type='image/$type'${generateExtraAttributes(attrs)}/>"
+    String rel = attrs.remove('rel') ?: 'icon'
+    String type = ext == 'ico' ? 'vnd.microsoft.icon' : ext
+    String html = "<link rel='$rel' href='${src}' type='image/$type'${generateExtraAttributes(attrs)}/>"
 
-		if (imageTagPostProcessor) {
-			html = imageTagPostProcessor.process(html, request)
-		}
-		out << html
-	}
+    if (imageTagPostProcessor) {
+      html = imageTagPostProcessor.process(html, request)
+    }
+    out << html
+  }
 
-	private doImage = { attrs, tag ->
+  private doImage = { attrs, tag ->
 
-		if (!attrs.src) {
-			throwTagError("Tag [$tag] is missing required attribute [src]")
-		}
+    if (!attrs.src) {
+      throwTagError("Tag [$tag] is missing required attribute [src]")
+    }
 
-		String link = attrs.remove('src')
+    String link = attrs.remove('src')
 
-		// check if it's spriteable, and modify attrs if so
-		// TODO  this should be done in the post processor
-		String spriteClass = getSpriteClass(link)
-		if (spriteClass) {
-			link = generateRelativePath('images', 'spacer.gif', '', true, false)
+    // check if it's spriteable, and modify attrs if so
+    // TODO  this should be done in the post processor
+    String spriteClass = getSpriteClass(link)
+    if (spriteClass) {
+      link = generateRelativePath('images', 'spacer.gif', '', true, false)
 
-			if (attrs.'class') {
-				attrs.'class' += " $spriteClass"
-			}
-			else {
-				attrs.'class' = spriteClass
-			}
-		}
-		else {
-			link = generateRelativePath('images', link, '', attrs.remove('plugin'), attrs.remove('absolute'))
-		}
+      if (attrs.'class') {
+        attrs.'class' += " $spriteClass"
+      }
+      else {
+        attrs.'class' = spriteClass
+      }
+    }
+    else {
+      link = generateRelativePath('images', link, '', attrs.remove('plugin'), attrs.remove('absolute'))
+    }
 
-		String name = attrs.remove('name')
-		String nameAndId = name ? "name='${name}' id='${name}' " : ''
+    String name = attrs.remove('name')
+    String nameAndId = name ? "name='${name}' id='${name}' " : ''
 
-		String html = "<$tag src='${link}' ${nameAndId}${generateExtraAttributes(attrs)}/>"
-		if (imageTagPostProcessor) {
-			html = imageTagPostProcessor.process(html, request)
-		}
-		out << html
-	}
+    String html = "<$tag src='${link}' ${nameAndId}${generateExtraAttributes(attrs)}/>"
+    if (imageTagPostProcessor) {
+      html = imageTagPostProcessor.process(html, request)
+    }
+    out << html
+  }
 
-	/**
-	 * If the images is included in a sprite bundle, get the
-	 * appropriate sprite class.
-	 * @param src  the image src
-	 * @return the class or null
-	 */
-	private String getSpriteClass(String src) {
-		 if (Utils.isEnabled() && Utils.isIncludedInSprite(src)) {
-			 return src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.')) + '_sprite'
-		 }
+  /**
+   * If the images is included in a sprite bundle, get the
+   * appropriate sprite class.
+   * @param src the image src
+   * @return the class or null
+   */
+  private String getSpriteClass(String src) {
+    if (Utils.isEnabled() && Utils.isIncludedInSprite(src)) {
+      return src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.')) + '_sprite'
+    }
 
-		 return null
-	}
+    return null
+  }
 }

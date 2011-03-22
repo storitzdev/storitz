@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_SITE_PCD_AVAIL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_SITE_PCD_AVAIL">
  *   &lt;complexContent>
@@ -49,39 +44,36 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_SITE_PCD_AVAIL", propOrder = {
-    "paylogic",
-    "orgid",
-    "siteid",
-    "pcdid",
-    "pcdrevcat",
-    "pcdclass",
-    "pcdname",
-    "pcddesc",
-    "pcdamtmax",
-    "pcdamtmin",
-    "pcdamtdefault",
-    "dispamt",
-    "amttype",
-    "active",
-    "starts",
-    "expires",
-    "creditlevel",
-    "limitaction",
-    "limittype",
-    "reasonprompt",
-    "delinquencylimit",
-    "paymentrequired",
-    "pcdperiods",
-    "losreq"
+        "paylogic",
+        "orgid",
+        "siteid",
+        "pcdid",
+        "pcdrevcat",
+        "pcdclass",
+        "pcdname",
+        "pcddesc",
+        "pcdamtmax",
+        "pcdamtmin",
+        "pcdamtdefault",
+        "dispamt",
+        "amttype",
+        "active",
+        "starts",
+        "expires",
+        "creditlevel",
+        "limitaction",
+        "limittype",
+        "reasonprompt",
+        "delinquencylimit",
+        "paymentrequired",
+        "pcdperiods",
+        "losreq"
 })
 public class ORGSITEPCDAVAIL
-    extends BaseEntityOfCollectionORGSITEPCDAVAILColumnIndexes
-{
+        extends BaseEntityOfCollectionORGSITEPCDAVAILColumnIndexes {
 
     @XmlElement(name = "PAY_LOGIC")
     protected String paylogic;
@@ -136,11 +128,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the paylogic property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPAYLOGIC() {
         return paylogic;
@@ -148,11 +138,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the paylogic property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPAYLOGIC(String value) {
         this.paylogic = value;
@@ -160,11 +148,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the orgid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getORGID() {
         return orgid;
@@ -172,11 +158,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the orgid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setORGID(Long value) {
         this.orgid = value;
@@ -184,11 +168,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSITEID() {
         return siteid;
@@ -196,11 +178,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSITEID(BigDecimal value) {
         this.siteid = value;
@@ -208,11 +188,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPCDID() {
         return pcdid;
@@ -220,11 +198,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPCDID(Long value) {
         this.pcdid = value;
@@ -232,11 +208,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdrevcat property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDREVCAT() {
         return pcdrevcat;
@@ -244,11 +218,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdrevcat property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDREVCAT(Integer value) {
         this.pcdrevcat = value;
@@ -256,11 +228,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDCLASS() {
         return pcdclass;
@@ -268,11 +238,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDCLASS(Integer value) {
         this.pcdclass = value;
@@ -280,11 +248,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDNAME() {
         return pcdname;
@@ -292,11 +258,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDNAME(String value) {
         this.pcdname = value;
@@ -304,11 +268,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcddesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDDESC() {
         return pcddesc;
@@ -316,11 +278,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcddesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDDESC(String value) {
         this.pcddesc = value;
@@ -328,11 +288,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdamtmax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMAX() {
         return pcdamtmax;
@@ -340,11 +298,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdamtmax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMAX(BigDecimal value) {
         this.pcdamtmax = value;
@@ -352,11 +308,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdamtmin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMIN() {
         return pcdamtmin;
@@ -364,11 +318,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdamtmin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMIN(BigDecimal value) {
         this.pcdamtmin = value;
@@ -376,11 +328,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdamtdefault property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTDEFAULT() {
         return pcdamtdefault;
@@ -388,11 +338,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdamtdefault property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTDEFAULT(BigDecimal value) {
         this.pcdamtdefault = value;
@@ -400,11 +348,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the dispamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDISPAMT() {
         return dispamt;
@@ -412,11 +358,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the dispamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDISPAMT(String value) {
         this.dispamt = value;
@@ -424,11 +368,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the amttype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getAMTTYPE() {
         return amttype;
@@ -436,11 +378,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the amttype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setAMTTYPE(Integer value) {
         this.amttype = value;
@@ -448,11 +388,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isACTIVE() {
         return active;
@@ -460,11 +398,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setACTIVE(Boolean value) {
         this.active = value;
@@ -472,11 +408,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the starts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTS() {
         return starts;
@@ -484,11 +418,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the starts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTS(XMLGregorianCalendar value) {
         this.starts = value;
@@ -496,11 +428,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the expires property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEXPIRES() {
         return expires;
@@ -508,11 +438,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the expires property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEXPIRES(XMLGregorianCalendar value) {
         this.expires = value;
@@ -520,11 +448,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the creditlevel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCREDITLEVEL() {
         return creditlevel;
@@ -532,11 +458,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the creditlevel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCREDITLEVEL(Integer value) {
         this.creditlevel = value;
@@ -544,11 +468,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the limitaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getLIMITACTION() {
         return limitaction;
@@ -556,11 +478,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the limitaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setLIMITACTION(Integer value) {
         this.limitaction = value;
@@ -568,11 +488,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the limittype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getLIMITTYPE() {
         return limittype;
@@ -580,11 +498,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the limittype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setLIMITTYPE(Integer value) {
         this.limittype = value;
@@ -592,11 +508,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the reasonprompt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getREASONPROMPT() {
         return reasonprompt;
@@ -604,11 +518,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the reasonprompt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setREASONPROMPT(Integer value) {
         this.reasonprompt = value;
@@ -616,11 +528,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the delinquencylimit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDELINQUENCYLIMIT() {
         return delinquencylimit;
@@ -628,11 +538,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the delinquencylimit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDELINQUENCYLIMIT(Integer value) {
         this.delinquencylimit = value;
@@ -640,11 +548,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the paymentrequired property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isPAYMENTREQUIRED() {
         return paymentrequired;
@@ -652,11 +558,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the paymentrequired property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setPAYMENTREQUIRED(Boolean value) {
         this.paymentrequired = value;
@@ -664,11 +568,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the pcdperiods property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDPERIODS() {
         return pcdperiods;
@@ -676,11 +578,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the pcdperiods property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDPERIODS(Integer value) {
         this.pcdperiods = value;
@@ -688,11 +588,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Gets the value of the losreq property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLOSREQ() {
         return losreq;
@@ -700,11 +598,9 @@ public class ORGSITEPCDAVAIL
 
     /**
      * Sets the value of the losreq property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLOSREQ(BigDecimal value) {
         this.losreq = value;

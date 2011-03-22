@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AuctionInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionInfo">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionInfo", propOrder = {
-    "auctionID",
-    "auctionRentalsPayInfo"
+        "auctionID",
+        "auctionRentalsPayInfo"
 })
 public class AuctionInfo {
 
@@ -41,7 +38,6 @@ public class AuctionInfo {
 
     /**
      * Gets the value of the auctionID property.
-     * 
      */
     public long getAuctionID() {
         return auctionID;
@@ -49,7 +45,6 @@ public class AuctionInfo {
 
     /**
      * Sets the value of the auctionID property.
-     * 
      */
     public void setAuctionID(long value) {
         this.auctionID = value;
@@ -57,11 +52,9 @@ public class AuctionInfo {
 
     /**
      * Gets the value of the auctionRentalsPayInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionEndRentalInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionEndRentalInfo }
      */
     public ArrayOfAuctionEndRentalInfo getAuctionRentalsPayInfo() {
         return auctionRentalsPayInfo;
@@ -69,11 +62,9 @@ public class AuctionInfo {
 
     /**
      * Sets the value of the auctionRentalsPayInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionEndRentalInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionEndRentalInfo }
      */
     public void setAuctionRentalsPayInfo(ArrayOfAuctionEndRentalInfo value) {
         this.auctionRentalsPayInfo = value;

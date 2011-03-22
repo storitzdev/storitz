@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for SOA_GET_PRIMARY_RENTAL_INFO complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_GET_PRIMARY_RENTAL_INFO">
  *   &lt;complexContent>
@@ -65,55 +60,52 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_GET_PRIMARY_RENTAL_INFO", propOrder = {
-    "objperioduom",
-    "objperiod",
-    "rentrate",
-    "addresstype",
-    "addr1",
-    "addr2",
-    "addr3",
-    "city",
-    "state",
-    "postalcode",
-    "country",
-    "phonetype",
-    "phone",
-    "contacttype",
-    "email",
-    "knownas",
-    "firstname",
-    "lastname",
-    "acctclass",
-    "acctname",
-    "attribute01VAL",
-    "depth",
-    "width",
-    "unitnumber",
-    "siteid",
-    "overlockstatus",
-    "rentalstatus",
-    "currentlyrented",
-    "startdate",
-    "ptd",
-    "ltd",
-    "modate",
-    "delexempt",
-    "delstep",
-    "unitid",
-    "acctid",
-    "contactid",
-    "rentalid",
-    "nextptd",
-    "version"
+        "objperioduom",
+        "objperiod",
+        "rentrate",
+        "addresstype",
+        "addr1",
+        "addr2",
+        "addr3",
+        "city",
+        "state",
+        "postalcode",
+        "country",
+        "phonetype",
+        "phone",
+        "contacttype",
+        "email",
+        "knownas",
+        "firstname",
+        "lastname",
+        "acctclass",
+        "acctname",
+        "attribute01VAL",
+        "depth",
+        "width",
+        "unitnumber",
+        "siteid",
+        "overlockstatus",
+        "rentalstatus",
+        "currentlyrented",
+        "startdate",
+        "ptd",
+        "ltd",
+        "modate",
+        "delexempt",
+        "delstep",
+        "unitid",
+        "acctid",
+        "contactid",
+        "rentalid",
+        "nextptd",
+        "version"
 })
 public class SOAGETPRIMARYRENTALINFO
-    extends BaseEntityOfCollectionSOAGETPRIMARYRENTALINFOColumnIndexes
-{
+        extends BaseEntityOfCollectionSOAGETPRIMARYRENTALINFOColumnIndexes {
 
     @XmlElement(name = "OBJ_PERIOD_UOM")
     protected String objperioduom;
@@ -203,11 +195,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the objperioduom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOBJPERIODUOM() {
         return objperioduom;
@@ -215,11 +205,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the objperioduom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOBJPERIODUOM(String value) {
         this.objperioduom = value;
@@ -227,7 +215,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the objperiod property.
-     * 
      */
     public long getOBJPERIOD() {
         return objperiod;
@@ -235,7 +222,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the objperiod property.
-     * 
      */
     public void setOBJPERIOD(long value) {
         this.objperiod = value;
@@ -243,11 +229,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the rentrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTRATE() {
         return rentrate;
@@ -255,11 +239,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the rentrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTRATE(BigDecimal value) {
         this.rentrate = value;
@@ -267,11 +249,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the addresstype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRESSTYPE() {
         return addresstype;
@@ -279,11 +259,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the addresstype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRESSTYPE(String value) {
         this.addresstype = value;
@@ -291,11 +269,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the addr1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR1() {
         return addr1;
@@ -303,11 +279,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the addr1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR1(String value) {
         this.addr1 = value;
@@ -315,11 +289,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the addr2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR2() {
         return addr2;
@@ -327,11 +299,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the addr2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR2(String value) {
         this.addr2 = value;
@@ -339,11 +309,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the addr3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR3() {
         return addr3;
@@ -351,11 +319,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the addr3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR3(String value) {
         this.addr3 = value;
@@ -363,11 +329,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCITY() {
         return city;
@@ -375,11 +339,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCITY(String value) {
         this.city = value;
@@ -387,11 +349,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATE() {
         return state;
@@ -399,11 +359,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATE(String value) {
         this.state = value;
@@ -411,11 +369,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the postalcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPOSTALCODE() {
         return postalcode;
@@ -423,11 +379,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the postalcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPOSTALCODE(String value) {
         this.postalcode = value;
@@ -435,11 +389,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the country property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOUNTRY() {
         return country;
@@ -447,11 +399,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the country property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOUNTRY(String value) {
         this.country = value;
@@ -459,11 +409,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the phonetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONETYPE() {
         return phonetype;
@@ -471,11 +419,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the phonetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONETYPE(String value) {
         this.phonetype = value;
@@ -483,11 +429,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONE() {
         return phone;
@@ -495,11 +439,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONE(String value) {
         this.phone = value;
@@ -507,11 +449,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the contacttype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCONTACTTYPE() {
         return contacttype;
@@ -519,11 +459,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the contacttype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCONTACTTYPE(String value) {
         this.contacttype = value;
@@ -531,11 +469,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEMAIL() {
         return email;
@@ -543,11 +479,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEMAIL(String value) {
         this.email = value;
@@ -555,11 +489,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the knownas property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getKNOWNAS() {
         return knownas;
@@ -567,11 +499,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the knownas property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setKNOWNAS(String value) {
         this.knownas = value;
@@ -579,11 +509,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFIRSTNAME() {
         return firstname;
@@ -591,11 +519,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFIRSTNAME(String value) {
         this.firstname = value;
@@ -603,11 +529,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTNAME() {
         return lastname;
@@ -615,11 +539,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTNAME(String value) {
         this.lastname = value;
@@ -627,11 +549,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the acctclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTCLASS() {
         return acctclass;
@@ -639,11 +559,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the acctclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTCLASS(String value) {
         this.acctclass = value;
@@ -651,11 +569,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -663,11 +579,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -675,11 +589,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the attribute01VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE01VAL() {
         return attribute01VAL;
@@ -687,11 +599,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the attribute01VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE01VAL(String value) {
         this.attribute01VAL = value;
@@ -699,11 +609,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPTH() {
         return depth;
@@ -711,11 +619,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPTH(BigDecimal value) {
         this.depth = value;
@@ -723,11 +629,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWIDTH() {
         return width;
@@ -735,11 +639,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWIDTH(BigDecimal value) {
         this.width = value;
@@ -747,11 +649,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -759,11 +659,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -771,7 +669,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -779,7 +676,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -787,11 +683,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the overlockstatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOVERLOCKSTATUS() {
         return overlockstatus;
@@ -799,11 +693,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the overlockstatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOVERLOCKSTATUS(String value) {
         this.overlockstatus = value;
@@ -811,11 +703,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the rentalstatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRENTALSTATUS() {
         return rentalstatus;
@@ -823,11 +713,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the rentalstatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRENTALSTATUS(String value) {
         this.rentalstatus = value;
@@ -835,11 +723,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the currentlyrented property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCURRENTLYRENTED() {
         return currentlyrented;
@@ -847,11 +733,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the currentlyrented property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCURRENTLYRENTED(String value) {
         this.currentlyrented = value;
@@ -859,11 +743,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the startdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTDATE() {
         return startdate;
@@ -871,11 +753,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the startdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTDATE(XMLGregorianCalendar value) {
         this.startdate = value;
@@ -883,11 +763,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -895,11 +773,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -907,11 +783,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the ltd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLTD() {
         return ltd;
@@ -919,11 +793,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the ltd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLTD(XMLGregorianCalendar value) {
         this.ltd = value;
@@ -931,11 +803,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the modate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMODATE() {
         return modate;
@@ -943,11 +813,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the modate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMODATE(XMLGregorianCalendar value) {
         this.modate = value;
@@ -955,11 +823,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the delexempt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDELEXEMPT() {
         return delexempt;
@@ -967,11 +833,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the delexempt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDELEXEMPT(String value) {
         this.delexempt = value;
@@ -979,7 +843,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the delstep property.
-     * 
      */
     public int getDELSTEP() {
         return delstep;
@@ -987,7 +850,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the delstep property.
-     * 
      */
     public void setDELSTEP(int value) {
         this.delstep = value;
@@ -995,7 +857,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the unitid property.
-     * 
      */
     public long getUNITID() {
         return unitid;
@@ -1003,7 +864,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the unitid property.
-     * 
      */
     public void setUNITID(long value) {
         this.unitid = value;
@@ -1011,11 +871,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -1023,11 +881,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -1035,7 +891,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -1043,7 +898,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -1051,7 +905,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the rentalid property.
-     * 
      */
     public long getRENTALID() {
         return rentalid;
@@ -1059,7 +912,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the rentalid property.
-     * 
      */
     public void setRENTALID(long value) {
         this.rentalid = value;
@@ -1067,11 +919,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the nextptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getNEXTPTD() {
         return nextptd;
@@ -1079,11 +929,9 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the nextptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setNEXTPTD(XMLGregorianCalendar value) {
         this.nextptd = value;
@@ -1091,7 +939,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Gets the value of the version property.
-     * 
      */
     public int getVERSION() {
         return version;
@@ -1099,7 +946,6 @@ public class SOAGETPRIMARYRENTALINFO
 
     /**
      * Sets the value of the version property.
-     * 
      */
     public void setVERSION(int value) {
         this.version = value;

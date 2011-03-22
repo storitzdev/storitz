@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ApplyPCDs_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ApplyPCDs_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ApplyPCDs_Response", propOrder = {
-    "succeeded"
+        "succeeded"
 })
 public class ApplyPCDsResponse2 {
 
@@ -37,7 +34,6 @@ public class ApplyPCDsResponse2 {
 
     /**
      * Gets the value of the succeeded property.
-     * 
      */
     public boolean isSucceeded() {
         return succeeded;
@@ -45,7 +41,6 @@ public class ApplyPCDsResponse2 {
 
     /**
      * Sets the value of the succeeded property.
-     * 
      */
     public void setSucceeded(boolean value) {
         this.succeeded = value;

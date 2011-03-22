@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for BaseEntityOfCollectionORG_RETAIL_BOMColumnIndexes complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="BaseEntityOfCollectionORG_RETAIL_BOMColumnIndexes">
  *   &lt;complexContent>
@@ -24,15 +19,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BaseEntityOfCollectionORG_RETAIL_BOMColumnIndexes", propOrder = {
-    "transaction"
+        "transaction"
 })
 @XmlSeeAlso({
-    ORGRETAILBOM.class
+        ORGRETAILBOM.class
 })
 public abstract class BaseEntityOfCollectionORGRETAILBOMColumnIndexes {
 
@@ -41,11 +34,9 @@ public abstract class BaseEntityOfCollectionORGRETAILBOMColumnIndexes {
 
     /**
      * Gets the value of the transaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FrameworkTransaction }
-     *     
+     *
+     * @return possible object is
+     *         {@link FrameworkTransaction }
      */
     public FrameworkTransaction getTransaction() {
         return transaction;
@@ -53,11 +44,9 @@ public abstract class BaseEntityOfCollectionORGRETAILBOMColumnIndexes {
 
     /**
      * Sets the value of the transaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FrameworkTransaction }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link FrameworkTransaction }
      */
     public void setTransaction(FrameworkTransaction value) {
         this.transaction = value;

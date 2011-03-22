@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for UpdateUnitStatusExpanded_ResponseData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateUnitStatusExpanded_ResponseData">
  *   &lt;complexContent>
@@ -27,15 +26,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateUnitStatusExpanded_ResponseData", propOrder = {
-    "unitID",
-    "newUnitVersion",
-    "succeeded",
-    "errorMessage"
+        "unitID",
+        "newUnitVersion",
+        "succeeded",
+        "errorMessage"
 })
 public class UpdateUnitStatusExpandedResponseData {
 
@@ -50,7 +47,6 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -58,7 +54,6 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -66,11 +61,9 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Gets the value of the newUnitVersion property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getNewUnitVersion() {
         return newUnitVersion;
@@ -78,11 +71,9 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Sets the value of the newUnitVersion property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setNewUnitVersion(BigDecimal value) {
         this.newUnitVersion = value;
@@ -90,7 +81,6 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Gets the value of the succeeded property.
-     * 
      */
     public boolean isSucceeded() {
         return succeeded;
@@ -98,7 +88,6 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Sets the value of the succeeded property.
-     * 
      */
     public void setSucceeded(boolean value) {
         this.succeeded = value;
@@ -106,11 +95,9 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Gets the value of the errorMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMessage() {
         return errorMessage;
@@ -118,11 +105,9 @@ public class UpdateUnitStatusExpandedResponseData {
 
     /**
      * Sets the value of the errorMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMessage(String value) {
         this.errorMessage = value;

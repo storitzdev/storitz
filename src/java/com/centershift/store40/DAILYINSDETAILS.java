@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for DAILY_INS_DETAILS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="DAILY_INS_DETAILS">
  *   &lt;complexContent>
@@ -50,40 +45,37 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DAILY_INS_DETAILS", propOrder = {
-    "rentalid",
-    "insevent",
-    "inscoverageamt",
-    "inscoverageperc",
-    "insrate",
-    "insstartdate",
-    "insenddate",
-    "dimensions",
-    "unittype",
-    "leasestart",
-    "paidthrudate",
-    "accountname",
-    "accountcontactname",
-    "address",
-    "city",
-    "state",
-    "postalcode",
-    "phonenumber",
-    "unitid",
-    "recordtype",
-    "recorddate",
-    "siteid",
-    "sitename",
-    "ssdate",
-    "unitnumber"
+        "rentalid",
+        "insevent",
+        "inscoverageamt",
+        "inscoverageperc",
+        "insrate",
+        "insstartdate",
+        "insenddate",
+        "dimensions",
+        "unittype",
+        "leasestart",
+        "paidthrudate",
+        "accountname",
+        "accountcontactname",
+        "address",
+        "city",
+        "state",
+        "postalcode",
+        "phonenumber",
+        "unitid",
+        "recordtype",
+        "recorddate",
+        "siteid",
+        "sitename",
+        "ssdate",
+        "unitnumber"
 })
 public class DAILYINSDETAILS
-    extends BaseEntityOfCollectionDAILYINSDETAILSColumnIndexes
-{
+        extends BaseEntityOfCollectionDAILYINSDETAILSColumnIndexes {
 
     @XmlElement(name = "RENTAL_ID", required = true, nillable = true)
     protected BigDecimal rentalid;
@@ -144,11 +136,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTALID() {
         return rentalid;
@@ -156,11 +146,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTALID(BigDecimal value) {
         this.rentalid = value;
@@ -168,11 +156,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the insevent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getINSEVENT() {
         return insevent;
@@ -180,11 +166,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the insevent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setINSEVENT(String value) {
         this.insevent = value;
@@ -192,11 +176,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the inscoverageamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getINSCOVERAGEAMT() {
         return inscoverageamt;
@@ -204,11 +186,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the inscoverageamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setINSCOVERAGEAMT(BigDecimal value) {
         this.inscoverageamt = value;
@@ -216,11 +196,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the inscoverageperc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getINSCOVERAGEPERC() {
         return inscoverageperc;
@@ -228,11 +206,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the inscoverageperc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setINSCOVERAGEPERC(BigDecimal value) {
         this.inscoverageperc = value;
@@ -240,11 +216,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the insrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getINSRATE() {
         return insrate;
@@ -252,11 +226,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the insrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setINSRATE(BigDecimal value) {
         this.insrate = value;
@@ -264,11 +236,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the insstartdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getINSSTARTDATE() {
         return insstartdate;
@@ -276,11 +246,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the insstartdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setINSSTARTDATE(XMLGregorianCalendar value) {
         this.insstartdate = value;
@@ -288,11 +256,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the insenddate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getINSENDDATE() {
         return insenddate;
@@ -300,11 +266,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the insenddate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setINSENDDATE(XMLGregorianCalendar value) {
         this.insenddate = value;
@@ -312,11 +276,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the dimensions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDIMENSIONS() {
         return dimensions;
@@ -324,11 +286,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the dimensions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDIMENSIONS(String value) {
         this.dimensions = value;
@@ -336,11 +296,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the unittype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITTYPE() {
         return unittype;
@@ -348,11 +306,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the unittype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITTYPE(String value) {
         this.unittype = value;
@@ -360,11 +316,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the leasestart property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLEASESTART() {
         return leasestart;
@@ -372,11 +326,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the leasestart property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLEASESTART(XMLGregorianCalendar value) {
         this.leasestart = value;
@@ -384,11 +336,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the paidthrudate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPAIDTHRUDATE() {
         return paidthrudate;
@@ -396,11 +346,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the paidthrudate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPAIDTHRUDATE(XMLGregorianCalendar value) {
         this.paidthrudate = value;
@@ -408,11 +356,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the accountname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCOUNTNAME() {
         return accountname;
@@ -420,11 +366,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the accountname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCOUNTNAME(String value) {
         this.accountname = value;
@@ -432,11 +376,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the accountcontactname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCOUNTCONTACTNAME() {
         return accountcontactname;
@@ -444,11 +386,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the accountcontactname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCOUNTCONTACTNAME(String value) {
         this.accountcontactname = value;
@@ -456,11 +396,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRESS() {
         return address;
@@ -468,11 +406,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRESS(String value) {
         this.address = value;
@@ -480,11 +416,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCITY() {
         return city;
@@ -492,11 +426,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCITY(String value) {
         this.city = value;
@@ -504,11 +436,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATE() {
         return state;
@@ -516,11 +446,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATE(String value) {
         this.state = value;
@@ -528,11 +456,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the postalcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPOSTALCODE() {
         return postalcode;
@@ -540,11 +466,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the postalcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPOSTALCODE(String value) {
         this.postalcode = value;
@@ -552,11 +476,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the phonenumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONENUMBER() {
         return phonenumber;
@@ -564,11 +486,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the phonenumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONENUMBER(String value) {
         this.phonenumber = value;
@@ -576,11 +496,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the unitid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getUNITID() {
         return unitid;
@@ -588,11 +506,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the unitid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setUNITID(BigDecimal value) {
         this.unitid = value;
@@ -600,11 +516,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the recordtype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRECORDTYPE() {
         return recordtype;
@@ -612,11 +526,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the recordtype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRECORDTYPE(String value) {
         this.recordtype = value;
@@ -624,11 +536,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the recorddate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getRECORDDATE() {
         return recorddate;
@@ -636,11 +546,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the recorddate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setRECORDDATE(XMLGregorianCalendar value) {
         this.recorddate = value;
@@ -648,11 +556,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSITEID() {
         return siteid;
@@ -660,11 +566,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSITEID(BigDecimal value) {
         this.siteid = value;
@@ -672,11 +576,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the sitename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENAME() {
         return sitename;
@@ -684,11 +586,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the sitename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENAME(String value) {
         this.sitename = value;
@@ -696,11 +596,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the ssdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSSDATE() {
         return ssdate;
@@ -708,11 +606,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the ssdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSSDATE(XMLGregorianCalendar value) {
         this.ssdate = value;
@@ -720,11 +616,9 @@ public class DAILYINSDETAILS
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -732,11 +626,9 @@ public class DAILYINSDETAILS
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;

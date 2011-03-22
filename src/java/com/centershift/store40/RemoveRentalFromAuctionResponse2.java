@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for RemoveRentalFromAuction_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RemoveRentalFromAuction_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RemoveRentalFromAuction_Response", propOrder = {
-    "rentalsSucceeded",
-    "rentalsFailed"
+        "rentalsSucceeded",
+        "rentalsFailed"
 })
 public class RemoveRentalFromAuctionResponse2 {
 
@@ -41,11 +38,9 @@ public class RemoveRentalFromAuctionResponse2 {
 
     /**
      * Gets the value of the rentalsSucceeded property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfLong4 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfLong4 }
      */
     public ArrayOfLong4 getRentalsSucceeded() {
         return rentalsSucceeded;
@@ -53,11 +48,9 @@ public class RemoveRentalFromAuctionResponse2 {
 
     /**
      * Sets the value of the rentalsSucceeded property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfLong4 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfLong4 }
      */
     public void setRentalsSucceeded(ArrayOfLong4 value) {
         this.rentalsSucceeded = value;
@@ -65,11 +58,9 @@ public class RemoveRentalFromAuctionResponse2 {
 
     /**
      * Gets the value of the rentalsFailed property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfLong5 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfLong5 }
      */
     public ArrayOfLong5 getRentalsFailed() {
         return rentalsFailed;
@@ -77,11 +68,9 @@ public class RemoveRentalFromAuctionResponse2 {
 
     /**
      * Sets the value of the rentalsFailed property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfLong5 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfLong5 }
      */
     public void setRentalsFailed(ArrayOfLong5 value) {
         this.rentalsFailed = value;

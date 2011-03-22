@@ -1,18 +1,17 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AvailableInsurance_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AvailableInsurance_ST">
  *   &lt;complexContent>
@@ -28,16 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AvailableInsurance_ST", propOrder = {
-    "typeID",
-    "typeDesc",
-    "dCoverageAmount",
-    "dCoveragePercentage",
-    "dMonthlyFee"
+        "typeID",
+        "typeDesc",
+        "dCoverageAmount",
+        "dCoveragePercentage",
+        "dMonthlyFee"
 })
 public class AvailableInsuranceST {
 
@@ -54,11 +51,9 @@ public class AvailableInsuranceST {
 
     /**
      * Gets the value of the typeID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTypeID() {
         return typeID;
@@ -66,11 +61,9 @@ public class AvailableInsuranceST {
 
     /**
      * Sets the value of the typeID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTypeID(String value) {
         this.typeID = value;
@@ -78,11 +71,9 @@ public class AvailableInsuranceST {
 
     /**
      * Gets the value of the typeDesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTypeDesc() {
         return typeDesc;
@@ -90,11 +81,9 @@ public class AvailableInsuranceST {
 
     /**
      * Sets the value of the typeDesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTypeDesc(String value) {
         this.typeDesc = value;
@@ -102,11 +91,9 @@ public class AvailableInsuranceST {
 
     /**
      * Gets the value of the dCoverageAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDCoverageAmount() {
         return dCoverageAmount;
@@ -114,11 +101,9 @@ public class AvailableInsuranceST {
 
     /**
      * Sets the value of the dCoverageAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDCoverageAmount(BigDecimal value) {
         this.dCoverageAmount = value;
@@ -126,11 +111,9 @@ public class AvailableInsuranceST {
 
     /**
      * Gets the value of the dCoveragePercentage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDCoveragePercentage() {
         return dCoveragePercentage;
@@ -138,11 +121,9 @@ public class AvailableInsuranceST {
 
     /**
      * Sets the value of the dCoveragePercentage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDCoveragePercentage(BigDecimal value) {
         this.dCoveragePercentage = value;
@@ -150,11 +131,9 @@ public class AvailableInsuranceST {
 
     /**
      * Gets the value of the dMonthlyFee property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDMonthlyFee() {
         return dMonthlyFee;
@@ -162,11 +141,9 @@ public class AvailableInsuranceST {
 
     /**
      * Sets the value of the dMonthlyFee property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDMonthlyFee(BigDecimal value) {
         this.dMonthlyFee = value;

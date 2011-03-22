@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for NewPCDItem complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="NewPCDItem">
  *   &lt;complexContent>
@@ -33,19 +28,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NewPCDItem", propOrder = {
-    "pcdid",
-    "effDate",
-    "endDate",
-    "discountAmount",
-    "reasonCode",
-    "reasonDescription",
-    "revenueCategory",
-    "isPromoDiscCredit"
+        "pcdid",
+        "effDate",
+        "endDate",
+        "discountAmount",
+        "reasonCode",
+        "reasonDescription",
+        "revenueCategory",
+        "isPromoDiscCredit"
 })
 public class NewPCDItem {
 
@@ -70,7 +63,6 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the pcdid property.
-     * 
      */
     public long getPCDID() {
         return pcdid;
@@ -78,7 +70,6 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the pcdid property.
-     * 
      */
     public void setPCDID(long value) {
         this.pcdid = value;
@@ -86,11 +77,9 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the effDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEffDate() {
         return effDate;
@@ -98,11 +87,9 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the effDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEffDate(XMLGregorianCalendar value) {
         this.effDate = value;
@@ -110,11 +97,9 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the endDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEndDate() {
         return endDate;
@@ -122,11 +107,9 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the endDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEndDate(XMLGregorianCalendar value) {
         this.endDate = value;
@@ -134,11 +117,9 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the discountAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDiscountAmount() {
         return discountAmount;
@@ -146,11 +127,9 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the discountAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDiscountAmount(BigDecimal value) {
         this.discountAmount = value;
@@ -158,11 +137,9 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the reasonCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getReasonCode() {
         return reasonCode;
@@ -170,11 +147,9 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the reasonCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setReasonCode(Integer value) {
         this.reasonCode = value;
@@ -182,11 +157,9 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the reasonDescription property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getReasonDescription() {
         return reasonDescription;
@@ -194,11 +167,9 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the reasonDescription property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setReasonDescription(String value) {
         this.reasonDescription = value;
@@ -206,7 +177,6 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the revenueCategory property.
-     * 
      */
     public int getRevenueCategory() {
         return revenueCategory;
@@ -214,7 +184,6 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the revenueCategory property.
-     * 
      */
     public void setRevenueCategory(int value) {
         this.revenueCategory = value;
@@ -222,11 +191,9 @@ public class NewPCDItem {
 
     /**
      * Gets the value of the isPromoDiscCredit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PCDType }
-     *     
+     *
+     * @return possible object is
+     *         {@link PCDType }
      */
     public PCDType getIsPromoDiscCredit() {
         return isPromoDiscCredit;
@@ -234,11 +201,9 @@ public class NewPCDItem {
 
     /**
      * Sets the value of the isPromoDiscCredit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PCDType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PCDType }
      */
     public void setIsPromoDiscCredit(PCDType value) {
         this.isPromoDiscCredit = value;

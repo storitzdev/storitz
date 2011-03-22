@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Rules_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Rules_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Rules_Request", propOrder = {
-    "siteID",
-    "ruleID",
-    "active"
+        "siteID",
+        "ruleID",
+        "active"
 })
 public class RulesRequest {
 
@@ -45,11 +42,9 @@ public class RulesRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -57,11 +52,9 @@ public class RulesRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -69,11 +62,9 @@ public class RulesRequest {
 
     /**
      * Gets the value of the ruleID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRuleID() {
         return ruleID;
@@ -81,11 +72,9 @@ public class RulesRequest {
 
     /**
      * Sets the value of the ruleID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRuleID(Long value) {
         this.ruleID = value;
@@ -93,11 +82,9 @@ public class RulesRequest {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isActive() {
         return active;
@@ -105,11 +92,9 @@ public class RulesRequest {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setActive(Boolean value) {
         this.active = value;

@@ -1,20 +1,15 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for Charge_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Charge_ST">
  *   &lt;complexContent>
@@ -30,16 +25,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Charge_ST", propOrder = {
-    "itemDesc",
-    "dItemAmount",
-    "dItemTax",
-    "tStartDate",
-    "tEndDate"
+        "itemDesc",
+        "dItemAmount",
+        "dItemTax",
+        "tStartDate",
+        "tEndDate"
 })
 public class ChargeST {
 
@@ -58,11 +51,9 @@ public class ChargeST {
 
     /**
      * Gets the value of the itemDesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getItemDesc() {
         return itemDesc;
@@ -70,11 +61,9 @@ public class ChargeST {
 
     /**
      * Sets the value of the itemDesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setItemDesc(String value) {
         this.itemDesc = value;
@@ -82,11 +71,9 @@ public class ChargeST {
 
     /**
      * Gets the value of the dItemAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDItemAmount() {
         return dItemAmount;
@@ -94,11 +81,9 @@ public class ChargeST {
 
     /**
      * Sets the value of the dItemAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDItemAmount(BigDecimal value) {
         this.dItemAmount = value;
@@ -106,11 +91,9 @@ public class ChargeST {
 
     /**
      * Gets the value of the dItemTax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDItemTax() {
         return dItemTax;
@@ -118,11 +101,9 @@ public class ChargeST {
 
     /**
      * Sets the value of the dItemTax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDItemTax(BigDecimal value) {
         this.dItemTax = value;
@@ -130,11 +111,9 @@ public class ChargeST {
 
     /**
      * Gets the value of the tStartDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTStartDate() {
         return tStartDate;
@@ -142,11 +121,9 @@ public class ChargeST {
 
     /**
      * Sets the value of the tStartDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTStartDate(XMLGregorianCalendar value) {
         this.tStartDate = value;
@@ -154,11 +131,9 @@ public class ChargeST {
 
     /**
      * Gets the value of the tEndDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTEndDate() {
         return tEndDate;
@@ -166,11 +141,9 @@ public class ChargeST {
 
     /**
      * Sets the value of the tEndDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTEndDate(XMLGregorianCalendar value) {
         this.tEndDate = value;

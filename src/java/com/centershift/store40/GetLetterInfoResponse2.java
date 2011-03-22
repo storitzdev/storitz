@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetLetterInfo_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetLetterInfo_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetLetterInfo_Response", propOrder = {
-    "details"
+        "details"
 })
 public class GetLetterInfoResponse2 {
 
@@ -37,11 +34,9 @@ public class GetLetterInfoResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACCTLETTERS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACCTLETTERS }
      */
     public ArrayOfACCTLETTERS getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class GetLetterInfoResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACCTLETTERS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACCTLETTERS }
      */
     public void setDetails(ArrayOfACCTLETTERS value) {
         this.details = value;

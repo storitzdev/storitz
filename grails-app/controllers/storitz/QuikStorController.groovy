@@ -1,12 +1,11 @@
 package storitz
 
+import com.storitz.CommissionSchedule
+import com.storitz.QuikStor
+import com.storitz.QuikStorLocation
 import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
-import com.storitz.QuikStor
-import com.storitz.QuikStorLocation
-import grails.converters.JSON
-import com.storitz.CommissionSchedule
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class QuikStorController extends FeedController {
@@ -14,7 +13,7 @@ class QuikStorController extends FeedController {
   def quikStorService
   def imageService
 
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory:"POST"]
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory: "POST"]
 
   def index = {
     redirect(action: "list", params: params)
@@ -95,11 +94,11 @@ class QuikStorController extends FeedController {
           loc.username = params['newUsername:_' + idx]
           loc.password = params['newPassword:_' + idx]
           loc.quikStor = quikStorInstance
-          loc.save(flush:true)
+          loc.save(flush: true)
           quikStorInstance.addToLocations(loc)
         }
       }
-      for(loc in quikStorInstance.locations) {
+      for (loc in quikStorInstance.locations) {
         def sitenameString = "sitename:_" + loc.id
         def usernameString = "username:_" + loc.id
         def passwordString = "password:_" + loc.id
@@ -118,7 +117,7 @@ class QuikStorController extends FeedController {
           changed = true
         }
         if (changed) {
-          loc.save(flush:true)
+          loc.save(flush: true)
         }
       }
 
@@ -160,10 +159,10 @@ class QuikStorController extends FeedController {
     if (loc) {
       def quikStor = loc.quikStor
       quikStor.removeFromLocations(loc)
-      quikStor.save(flush:true)
+      quikStor.save(flush: true)
       // TODO remove the site from the system - cascade everything
     }
-    render (status: 200, contentType:"application/json", text: "{ 'locId': ${loc?.id} }" )
+    render(status: 200, contentType: "application/json", text: "{ 'locId': ${loc?.id} }")
   }
 
   def processLocations = {

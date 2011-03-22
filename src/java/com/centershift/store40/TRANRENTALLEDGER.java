@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_RENTAL_LEDGER complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_RENTAL_LEDGER">
  *   &lt;complexContent>
@@ -59,49 +54,46 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_RENTAL_LEDGER", propOrder = {
-    "siteid",
-    "acctid",
-    "transactiontype",
-    "trantypevalue",
-    "tnxdate",
-    "tnxid",
-    "tnxdetailid",
-    "status",
-    "statusval",
-    "voidstat",
-    "rentalid",
-    "childrentalid",
-    "contactid",
-    "addrid",
-    "assdate",
-    "assid",
-    "parentassid",
-    "reftype",
-    "payref",
-    "descrip",
-    "objname",
-    "itemprice",
-    "qty",
-    "extended",
-    "payamt",
-    "tax",
-    "created",
-    "createdby",
-    "createdname",
-    "gl",
-    "classref",
-    "glmap",
-    "gldesc",
-    "lastfour"
+        "siteid",
+        "acctid",
+        "transactiontype",
+        "trantypevalue",
+        "tnxdate",
+        "tnxid",
+        "tnxdetailid",
+        "status",
+        "statusval",
+        "voidstat",
+        "rentalid",
+        "childrentalid",
+        "contactid",
+        "addrid",
+        "assdate",
+        "assid",
+        "parentassid",
+        "reftype",
+        "payref",
+        "descrip",
+        "objname",
+        "itemprice",
+        "qty",
+        "extended",
+        "payamt",
+        "tax",
+        "created",
+        "createdby",
+        "createdname",
+        "gl",
+        "classref",
+        "glmap",
+        "gldesc",
+        "lastfour"
 })
 public class TRANRENTALLEDGER
-    extends BaseEntityOfCollectionTRANRENTALLEDGERColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANRENTALLEDGERColumnIndexes {
 
     @XmlElement(name = "SITE_ID", required = true, type = Long.class, nillable = true)
     protected Long siteid;
@@ -177,11 +169,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -189,11 +179,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -201,11 +189,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -213,11 +199,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -225,11 +209,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the transactiontype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTRANSACTIONTYPE() {
         return transactiontype;
@@ -237,11 +219,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the transactiontype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTRANSACTIONTYPE(String value) {
         this.transactiontype = value;
@@ -249,11 +229,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the trantypevalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTRANTYPEVALUE() {
         return trantypevalue;
@@ -261,11 +239,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the trantypevalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTRANTYPEVALUE(BigDecimal value) {
         this.trantypevalue = value;
@@ -273,11 +249,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the tnxdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTNXDATE() {
         return tnxdate;
@@ -285,11 +259,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the tnxdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTNXDATE(XMLGregorianCalendar value) {
         this.tnxdate = value;
@@ -297,11 +269,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the tnxid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTNXID() {
         return tnxid;
@@ -309,11 +279,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the tnxid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTNXID(BigDecimal value) {
         this.tnxid = value;
@@ -321,11 +289,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the tnxdetailid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTNXDETAILID() {
         return tnxdetailid;
@@ -333,11 +299,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the tnxdetailid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTNXDETAILID(BigDecimal value) {
         this.tnxdetailid = value;
@@ -345,11 +309,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSTATUS() {
         return status;
@@ -357,11 +319,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSTATUS(Integer value) {
         this.status = value;
@@ -369,11 +329,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the statusval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATUSVAL() {
         return statusval;
@@ -381,11 +339,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the statusval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATUSVAL(String value) {
         this.statusval = value;
@@ -393,11 +349,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the voidstat property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getVOIDSTAT() {
         return voidstat;
@@ -405,11 +359,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the voidstat property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setVOIDSTAT(String value) {
         this.voidstat = value;
@@ -417,11 +369,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTALID() {
         return rentalid;
@@ -429,11 +379,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTALID(BigDecimal value) {
         this.rentalid = value;
@@ -441,11 +389,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the childrentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCHILDRENTALID() {
         return childrentalid;
@@ -453,11 +399,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the childrentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCHILDRENTALID(String value) {
         this.childrentalid = value;
@@ -465,11 +409,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the contactid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCONTACTID() {
         return contactid;
@@ -477,11 +419,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the contactid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCONTACTID(String value) {
         this.contactid = value;
@@ -489,11 +429,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the addrid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRID() {
         return addrid;
@@ -501,11 +439,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the addrid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRID(String value) {
         this.addrid = value;
@@ -513,11 +449,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the assdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getASSDATE() {
         return assdate;
@@ -525,11 +459,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the assdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setASSDATE(XMLGregorianCalendar value) {
         this.assdate = value;
@@ -537,11 +469,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the assid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getASSID() {
         return assid;
@@ -549,11 +479,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the assid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setASSID(BigDecimal value) {
         this.assid = value;
@@ -561,11 +489,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the parentassid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPARENTASSID() {
         return parentassid;
@@ -573,11 +499,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the parentassid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPARENTASSID(BigDecimal value) {
         this.parentassid = value;
@@ -585,11 +509,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the reftype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getREFTYPE() {
         return reftype;
@@ -597,11 +519,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the reftype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setREFTYPE(Integer value) {
         this.reftype = value;
@@ -609,11 +529,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the payref property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPAYREF() {
         return payref;
@@ -621,11 +539,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the payref property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPAYREF(String value) {
         this.payref = value;
@@ -633,11 +549,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the descrip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIP() {
         return descrip;
@@ -645,11 +559,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the descrip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIP(String value) {
         this.descrip = value;
@@ -657,11 +569,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the objname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOBJNAME() {
         return objname;
@@ -669,11 +579,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the objname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOBJNAME(String value) {
         this.objname = value;
@@ -681,11 +589,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the itemprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getITEMPRICE() {
         return itemprice;
@@ -693,11 +599,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the itemprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setITEMPRICE(BigDecimal value) {
         this.itemprice = value;
@@ -705,11 +609,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the qty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getQTY() {
         return qty;
@@ -717,11 +619,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the qty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setQTY(BigDecimal value) {
         this.qty = value;
@@ -729,11 +629,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the extended property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEXTENDED() {
         return extended;
@@ -741,11 +639,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the extended property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEXTENDED(BigDecimal value) {
         this.extended = value;
@@ -753,11 +649,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the payamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPAYAMT() {
         return payamt;
@@ -765,11 +659,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the payamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPAYAMT(BigDecimal value) {
         this.payamt = value;
@@ -777,11 +669,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the tax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAX() {
         return tax;
@@ -789,11 +679,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the tax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAX(BigDecimal value) {
         this.tax = value;
@@ -801,11 +689,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -813,11 +699,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -825,11 +709,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the createdby property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCREATEDBY() {
         return createdby;
@@ -837,11 +719,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the createdby property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setCREATEDBY(Long value) {
         this.createdby = value;
@@ -849,11 +729,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the createdname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREATEDNAME() {
         return createdname;
@@ -861,11 +739,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the createdname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREATEDNAME(String value) {
         this.createdname = value;
@@ -873,11 +749,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the gl property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGL() {
         return gl;
@@ -885,11 +759,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the gl property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGL(BigDecimal value) {
         this.gl = value;
@@ -897,11 +769,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the classref property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCLASSREF() {
         return classref;
@@ -909,11 +779,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the classref property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCLASSREF(BigDecimal value) {
         this.classref = value;
@@ -921,11 +789,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the glmap property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGLMAP() {
         return glmap;
@@ -933,11 +799,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the glmap property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGLMAP(String value) {
         this.glmap = value;
@@ -945,11 +809,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the gldesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGLDESC() {
         return gldesc;
@@ -957,11 +819,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the gldesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGLDESC(String value) {
         this.gldesc = value;
@@ -969,11 +829,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Gets the value of the lastfour property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTFOUR() {
         return lastfour;
@@ -981,11 +839,9 @@ public class TRANRENTALLEDGER
 
     /**
      * Sets the value of the lastfour property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTFOUR(String value) {
         this.lastfour = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAppliedInsurance_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAppliedInsurance_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAppliedInsurance_Response", propOrder = {
-    "details"
+        "details"
 })
 public class GetAppliedInsuranceResponse2 {
 
@@ -37,11 +34,9 @@ public class GetAppliedInsuranceResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANRENTALS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANRENTALS }
      */
     public ArrayOfTRANRENTALS getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class GetAppliedInsuranceResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANRENTALS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANRENTALS }
      */
     public void setDetails(ArrayOfTRANRENTALS value) {
         this.details = value;

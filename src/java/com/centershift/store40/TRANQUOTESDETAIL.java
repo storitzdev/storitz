@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_QUOTES_DETAIL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_QUOTES_DETAIL">
  *   &lt;complexContent>
@@ -81,71 +76,68 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_QUOTES_DETAIL", propOrder = {
-    "quoteid",
-    "unitid",
-    "unitnumber",
-    "siteid",
-    "acctid",
-    "acctname",
-    "rentalid",
-    "siteclassid",
-    "icon",
-    "classtype",
-    "expiration",
-    "status",
-    "quotetype",
-    "attribute01",
-    "attribute01VAL",
-    "attribute02",
-    "attribute02VAL",
-    "climate",
-    "climateval",
-    "width",
-    "depth",
-    "sqfeet",
-    "features",
-    "featuresval",
-    "accesstype",
-    "accesstypeval",
-    "door",
-    "doorval",
-    "price",
-    "lostdemandreason",
-    "inquirysource",
-    "prorateamt",
-    "adminfee",
-    "tax",
-    "deposit",
-    "discamt",
-    "totamt",
-    "quotestartdate",
-    "channel",
-    "mktcode",
-    "mktsource",
-    "resdeposit",
-    "created",
-    "createdby",
-    "createdbyname",
-    "streetrate",
-    "objperiod",
-    "objperioduom",
-    "objperioduomval",
-    "resgroupid",
-    "gatekeypad",
-    "rentnow",
-    "updatedby",
-    "tranquotepcd",
-    "tranquotepcddetail",
-    "tranquotenotesdetail"
+        "quoteid",
+        "unitid",
+        "unitnumber",
+        "siteid",
+        "acctid",
+        "acctname",
+        "rentalid",
+        "siteclassid",
+        "icon",
+        "classtype",
+        "expiration",
+        "status",
+        "quotetype",
+        "attribute01",
+        "attribute01VAL",
+        "attribute02",
+        "attribute02VAL",
+        "climate",
+        "climateval",
+        "width",
+        "depth",
+        "sqfeet",
+        "features",
+        "featuresval",
+        "accesstype",
+        "accesstypeval",
+        "door",
+        "doorval",
+        "price",
+        "lostdemandreason",
+        "inquirysource",
+        "prorateamt",
+        "adminfee",
+        "tax",
+        "deposit",
+        "discamt",
+        "totamt",
+        "quotestartdate",
+        "channel",
+        "mktcode",
+        "mktsource",
+        "resdeposit",
+        "created",
+        "createdby",
+        "createdbyname",
+        "streetrate",
+        "objperiod",
+        "objperioduom",
+        "objperioduomval",
+        "resgroupid",
+        "gatekeypad",
+        "rentnow",
+        "updatedby",
+        "tranquotepcd",
+        "tranquotepcddetail",
+        "tranquotenotesdetail"
 })
 public class TRANQUOTESDETAIL
-    extends BaseEntityOfCollectionTRANQUOTESDETAILColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANQUOTESDETAILColumnIndexes {
 
     @XmlElement(name = "QUOTE_ID")
     protected long quoteid;
@@ -265,7 +257,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the quoteid property.
-     * 
      */
     public long getQUOTEID() {
         return quoteid;
@@ -273,7 +264,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the quoteid property.
-     * 
      */
     public void setQUOTEID(long value) {
         this.quoteid = value;
@@ -281,11 +271,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the unitid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getUNITID() {
         return unitid;
@@ -293,11 +281,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the unitid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setUNITID(Long value) {
         this.unitid = value;
@@ -305,11 +291,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -317,11 +301,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -329,11 +311,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -341,11 +321,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -353,11 +331,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -365,11 +341,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -377,11 +351,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -389,11 +361,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -401,11 +371,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -413,11 +381,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -425,11 +391,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the siteclassid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITECLASSID() {
         return siteclassid;
@@ -437,11 +401,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the siteclassid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITECLASSID(Long value) {
         this.siteclassid = value;
@@ -449,11 +411,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -461,11 +421,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -473,11 +431,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the classtype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCLASSTYPE() {
         return classtype;
@@ -485,11 +441,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the classtype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCLASSTYPE(BigDecimal value) {
         this.classtype = value;
@@ -497,11 +451,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the expiration property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEXPIRATION() {
         return expiration;
@@ -509,11 +461,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the expiration property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEXPIRATION(XMLGregorianCalendar value) {
         this.expiration = value;
@@ -521,7 +471,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -529,7 +478,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -537,11 +485,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the quotetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getQUOTETYPE() {
         return quotetype;
@@ -549,11 +495,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the quotetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setQUOTETYPE(Integer value) {
         this.quotetype = value;
@@ -561,11 +505,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the attribute01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getATTRIBUTE01() {
         return attribute01;
@@ -573,11 +515,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the attribute01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setATTRIBUTE01(Integer value) {
         this.attribute01 = value;
@@ -585,11 +525,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the attribute01VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE01VAL() {
         return attribute01VAL;
@@ -597,11 +535,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the attribute01VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE01VAL(String value) {
         this.attribute01VAL = value;
@@ -609,11 +545,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the attribute02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getATTRIBUTE02() {
         return attribute02;
@@ -621,11 +555,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the attribute02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setATTRIBUTE02(Integer value) {
         this.attribute02 = value;
@@ -633,11 +565,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the attribute02VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE02VAL() {
         return attribute02VAL;
@@ -645,11 +575,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the attribute02VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE02VAL(String value) {
         this.attribute02VAL = value;
@@ -657,11 +585,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the climate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCLIMATE() {
         return climate;
@@ -669,11 +595,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the climate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCLIMATE(Integer value) {
         this.climate = value;
@@ -681,11 +605,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the climateval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLIMATEVAL() {
         return climateval;
@@ -693,11 +615,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the climateval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLIMATEVAL(String value) {
         this.climateval = value;
@@ -705,11 +625,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWIDTH() {
         return width;
@@ -717,11 +635,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWIDTH(BigDecimal value) {
         this.width = value;
@@ -729,11 +645,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPTH() {
         return depth;
@@ -741,11 +655,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPTH(BigDecimal value) {
         this.depth = value;
@@ -753,11 +665,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the sqfeet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSQFEET() {
         return sqfeet;
@@ -765,11 +675,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the sqfeet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSQFEET(Integer value) {
         this.sqfeet = value;
@@ -777,11 +685,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the features property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getFEATURES() {
         return features;
@@ -789,11 +695,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the features property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setFEATURES(Integer value) {
         this.features = value;
@@ -801,11 +705,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the featuresval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEATURESVAL() {
         return featuresval;
@@ -813,11 +715,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the featuresval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEATURESVAL(String value) {
         this.featuresval = value;
@@ -825,11 +725,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the accesstype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getACCESSTYPE() {
         return accesstype;
@@ -837,11 +735,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the accesstype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setACCESSTYPE(Integer value) {
         this.accesstype = value;
@@ -849,11 +745,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the accesstypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCESSTYPEVAL() {
         return accesstypeval;
@@ -861,11 +755,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the accesstypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCESSTYPEVAL(String value) {
         this.accesstypeval = value;
@@ -873,11 +765,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the door property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDOOR() {
         return door;
@@ -885,11 +775,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the door property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDOOR(Integer value) {
         this.door = value;
@@ -897,11 +785,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the doorval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDOORVAL() {
         return doorval;
@@ -909,11 +795,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the doorval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDOORVAL(String value) {
         this.doorval = value;
@@ -921,11 +805,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the price property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPRICE() {
         return price;
@@ -933,11 +815,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the price property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPRICE(BigDecimal value) {
         this.price = value;
@@ -945,7 +825,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the lostdemandreason property.
-     * 
      */
     public int getLOSTDEMANDREASON() {
         return lostdemandreason;
@@ -953,7 +832,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the lostdemandreason property.
-     * 
      */
     public void setLOSTDEMANDREASON(int value) {
         this.lostdemandreason = value;
@@ -961,7 +839,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the inquirysource property.
-     * 
      */
     public int getINQUIRYSOURCE() {
         return inquirysource;
@@ -969,7 +846,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the inquirysource property.
-     * 
      */
     public void setINQUIRYSOURCE(int value) {
         this.inquirysource = value;
@@ -977,11 +853,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the prorateamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPRORATEAMT() {
         return prorateamt;
@@ -989,11 +863,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the prorateamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPRORATEAMT(BigDecimal value) {
         this.prorateamt = value;
@@ -1001,11 +873,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the adminfee property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getADMINFEE() {
         return adminfee;
@@ -1013,11 +883,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the adminfee property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setADMINFEE(BigDecimal value) {
         this.adminfee = value;
@@ -1025,11 +893,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the tax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAX() {
         return tax;
@@ -1037,11 +903,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the tax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAX(BigDecimal value) {
         this.tax = value;
@@ -1049,11 +913,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the deposit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPOSIT() {
         return deposit;
@@ -1061,11 +923,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the deposit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPOSIT(BigDecimal value) {
         this.deposit = value;
@@ -1073,11 +933,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the discamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDISCAMT() {
         return discamt;
@@ -1085,11 +943,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the discamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDISCAMT(BigDecimal value) {
         this.discamt = value;
@@ -1097,11 +953,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the totamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTOTAMT() {
         return totamt;
@@ -1109,11 +963,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the totamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTOTAMT(BigDecimal value) {
         this.totamt = value;
@@ -1121,11 +973,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the quotestartdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getQUOTESTARTDATE() {
         return quotestartdate;
@@ -1133,11 +983,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the quotestartdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setQUOTESTARTDATE(XMLGregorianCalendar value) {
         this.quotestartdate = value;
@@ -1145,11 +993,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the channel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCHANNEL() {
         return channel;
@@ -1157,11 +1003,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the channel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCHANNEL(Integer value) {
         this.channel = value;
@@ -1169,11 +1013,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the mktcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getMKTCODE() {
         return mktcode;
@@ -1181,11 +1023,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the mktcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setMKTCODE(Long value) {
         this.mktcode = value;
@@ -1193,11 +1033,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the mktsource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getMKTSOURCE() {
         return mktsource;
@@ -1205,11 +1043,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the mktsource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setMKTSOURCE(Long value) {
         this.mktsource = value;
@@ -1217,11 +1053,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the resdeposit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRESDEPOSIT() {
         return resdeposit;
@@ -1229,11 +1063,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the resdeposit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRESDEPOSIT(BigDecimal value) {
         this.resdeposit = value;
@@ -1241,11 +1073,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -1253,11 +1083,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -1265,7 +1093,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -1273,7 +1100,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -1281,11 +1107,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the createdbyname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREATEDBYNAME() {
         return createdbyname;
@@ -1293,11 +1117,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the createdbyname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREATEDBYNAME(String value) {
         this.createdbyname = value;
@@ -1305,11 +1127,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the streetrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSTREETRATE() {
         return streetrate;
@@ -1317,11 +1137,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the streetrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSTREETRATE(BigDecimal value) {
         this.streetrate = value;
@@ -1329,11 +1147,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the objperiod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOBJPERIOD() {
         return objperiod;
@@ -1341,11 +1157,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the objperiod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOBJPERIOD(Long value) {
         this.objperiod = value;
@@ -1353,11 +1167,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the objperioduom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getOBJPERIODUOM() {
         return objperioduom;
@@ -1365,11 +1177,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the objperioduom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setOBJPERIODUOM(Integer value) {
         this.objperioduom = value;
@@ -1377,11 +1187,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the objperioduomval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOBJPERIODUOMVAL() {
         return objperioduomval;
@@ -1389,11 +1197,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the objperioduomval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOBJPERIODUOMVAL(String value) {
         this.objperioduomval = value;
@@ -1401,11 +1207,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the resgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRESGROUPID() {
         return resgroupid;
@@ -1413,11 +1217,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the resgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRESGROUPID(BigDecimal value) {
         this.resgroupid = value;
@@ -1425,11 +1227,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the gatekeypad property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getGATEKEYPAD() {
         return gatekeypad;
@@ -1437,11 +1237,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the gatekeypad property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setGATEKEYPAD(Integer value) {
         this.gatekeypad = value;
@@ -1449,11 +1247,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the rentnow property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isRENTNOW() {
         return rentnow;
@@ -1461,11 +1257,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the rentnow property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setRENTNOW(Boolean value) {
         this.rentnow = value;
@@ -1473,7 +1267,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -1481,7 +1274,6 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -1489,11 +1281,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the tranquotepcd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANQUOTEPCD }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANQUOTEPCD }
      */
     public ArrayOfTRANQUOTEPCD getTRANQUOTEPCD() {
         return tranquotepcd;
@@ -1501,11 +1291,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the tranquotepcd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANQUOTEPCD }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANQUOTEPCD }
      */
     public void setTRANQUOTEPCD(ArrayOfTRANQUOTEPCD value) {
         this.tranquotepcd = value;
@@ -1513,11 +1301,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the tranquotepcddetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANQUOTEPCDDETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANQUOTEPCDDETAIL }
      */
     public ArrayOfTRANQUOTEPCDDETAIL getTRANQUOTEPCDDETAIL() {
         return tranquotepcddetail;
@@ -1525,11 +1311,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the tranquotepcddetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANQUOTEPCDDETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANQUOTEPCDDETAIL }
      */
     public void setTRANQUOTEPCDDETAIL(ArrayOfTRANQUOTEPCDDETAIL value) {
         this.tranquotepcddetail = value;
@@ -1537,11 +1321,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Gets the value of the tranquotenotesdetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANQUOTENOTESDETAIL }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANQUOTENOTESDETAIL }
      */
     public ArrayOfTRANQUOTENOTESDETAIL getTRANQUOTENOTESDETAIL() {
         return tranquotenotesdetail;
@@ -1549,11 +1331,9 @@ public class TRANQUOTESDETAIL
 
     /**
      * Sets the value of the tranquotenotesdetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANQUOTENOTESDETAIL }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANQUOTENOTESDETAIL }
      */
     public void setTRANQUOTENOTESDETAIL(ArrayOfTRANQUOTENOTESDETAIL value) {
         this.tranquotenotesdetail = value;

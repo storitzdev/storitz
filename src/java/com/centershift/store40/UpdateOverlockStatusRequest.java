@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateOverlockStatus_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateOverlockStatus_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateOverlockStatus_Request", propOrder = {
-    "orgID",
-    "overlockData"
+        "orgID",
+        "overlockData"
 })
 public class UpdateOverlockStatusRequest {
 
@@ -41,7 +38,6 @@ public class UpdateOverlockStatusRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -49,7 +45,6 @@ public class UpdateOverlockStatusRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -57,11 +52,9 @@ public class UpdateOverlockStatusRequest {
 
     /**
      * Gets the value of the overlockData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentalOverlockData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentalOverlockData }
      */
     public ArrayOfRentalOverlockData getOverlockData() {
         return overlockData;
@@ -69,11 +62,9 @@ public class UpdateOverlockStatusRequest {
 
     /**
      * Sets the value of the overlockData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentalOverlockData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentalOverlockData }
      */
     public void setOverlockData(ArrayOfRentalOverlockData value) {
         this.overlockData = value;

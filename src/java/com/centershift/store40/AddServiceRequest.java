@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddService_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddService_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddService_Request", propOrder = {
-    "siteID",
-    "rentalID",
-    "service"
+        "siteID",
+        "rentalID",
+        "service"
 })
 public class AddServiceRequest {
 
@@ -45,7 +42,6 @@ public class AddServiceRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -53,7 +49,6 @@ public class AddServiceRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -61,7 +56,6 @@ public class AddServiceRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -69,7 +63,6 @@ public class AddServiceRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -77,11 +70,9 @@ public class AddServiceRequest {
 
     /**
      * Gets the value of the service property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ORGSERVICESITEOFFERINGS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ORGSERVICESITEOFFERINGS }
      */
     public ORGSERVICESITEOFFERINGS getService() {
         return service;
@@ -89,11 +80,9 @@ public class AddServiceRequest {
 
     /**
      * Sets the value of the service property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ORGSERVICESITEOFFERINGS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ORGSERVICESITEOFFERINGS }
      */
     public void setService(ORGSERVICESITEOFFERINGS value) {
         this.service = value;

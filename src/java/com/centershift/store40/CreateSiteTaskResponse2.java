@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CreateSiteTask_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateSiteTask_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateSiteTask_Response", propOrder = {
-    "taskID"
+        "taskID"
 })
 public class CreateSiteTaskResponse2 {
 
@@ -37,7 +34,6 @@ public class CreateSiteTaskResponse2 {
 
     /**
      * Gets the value of the taskID property.
-     * 
      */
     public long getTaskID() {
         return taskID;
@@ -45,7 +41,6 @@ public class CreateSiteTaskResponse2 {
 
     /**
      * Sets the value of the taskID property.
-     * 
      */
     public void setTaskID(long value) {
         this.taskID = value;

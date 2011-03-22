@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PaymentReceiptBundle_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="PaymentReceiptBundle_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PaymentReceiptBundle_Request", propOrder = {
-    "makePaymentRequest",
-    "createOrViewReceiptRequest"
+        "makePaymentRequest",
+        "createOrViewReceiptRequest"
 })
 public class PaymentReceiptBundleRequest {
 
@@ -41,11 +38,9 @@ public class PaymentReceiptBundleRequest {
 
     /**
      * Gets the value of the makePaymentRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentRequest }
      */
     public MakePaymentRequest getMakePaymentRequest() {
         return makePaymentRequest;
@@ -53,11 +48,9 @@ public class PaymentReceiptBundleRequest {
 
     /**
      * Sets the value of the makePaymentRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentRequest }
      */
     public void setMakePaymentRequest(MakePaymentRequest value) {
         this.makePaymentRequest = value;
@@ -65,11 +58,9 @@ public class PaymentReceiptBundleRequest {
 
     /**
      * Gets the value of the createOrViewReceiptRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CreateOrViewReceiptRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link CreateOrViewReceiptRequest }
      */
     public CreateOrViewReceiptRequest getCreateOrViewReceiptRequest() {
         return createOrViewReceiptRequest;
@@ -77,11 +68,9 @@ public class PaymentReceiptBundleRequest {
 
     /**
      * Sets the value of the createOrViewReceiptRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CreateOrViewReceiptRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CreateOrViewReceiptRequest }
      */
     public void setCreateOrViewReceiptRequest(CreateOrViewReceiptRequest value) {
         this.createOrViewReceiptRequest = value;

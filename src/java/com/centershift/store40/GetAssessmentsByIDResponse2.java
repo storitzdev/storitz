@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for GetAssessmentsByID_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAssessmentsByID_Response">
  *   &lt;complexContent>
@@ -25,13 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAssessmentsByID_Response", propOrder = {
-    "assessments",
-    "totalDue"
+        "assessments",
+        "totalDue"
 })
 public class GetAssessmentsByIDResponse2 {
 
@@ -42,11 +39,9 @@ public class GetAssessmentsByIDResponse2 {
 
     /**
      * Gets the value of the assessments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfSOAGETASSESSMENTS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfSOAGETASSESSMENTS }
      */
     public ArrayOfSOAGETASSESSMENTS getAssessments() {
         return assessments;
@@ -54,11 +49,9 @@ public class GetAssessmentsByIDResponse2 {
 
     /**
      * Sets the value of the assessments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfSOAGETASSESSMENTS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfSOAGETASSESSMENTS }
      */
     public void setAssessments(ArrayOfSOAGETASSESSMENTS value) {
         this.assessments = value;
@@ -66,11 +59,9 @@ public class GetAssessmentsByIDResponse2 {
 
     /**
      * Gets the value of the totalDue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalDue() {
         return totalDue;
@@ -78,11 +69,9 @@ public class GetAssessmentsByIDResponse2 {
 
     /**
      * Sets the value of the totalDue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalDue(BigDecimal value) {
         this.totalDue = value;

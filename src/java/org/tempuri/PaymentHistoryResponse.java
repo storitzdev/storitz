@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "paymentHistoryResult"
+        "paymentHistoryResult"
 })
 @XmlRootElement(name = "PaymentHistoryResponse")
 public class PaymentHistoryResponse {
@@ -39,11 +32,9 @@ public class PaymentHistoryResponse {
 
     /**
      * Gets the value of the paymentHistoryResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfPaymentHistoryST }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfPaymentHistoryST }
      */
     public ArrayOfPaymentHistoryST getPaymentHistoryResult() {
         return paymentHistoryResult;
@@ -51,11 +42,9 @@ public class PaymentHistoryResponse {
 
     /**
      * Sets the value of the paymentHistoryResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfPaymentHistoryST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfPaymentHistoryST }
      */
     public void setPaymentHistoryResult(ArrayOfPaymentHistoryST value) {
         this.paymentHistoryResult = value;

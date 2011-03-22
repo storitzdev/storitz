@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -28,16 +23,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "iTypeId",
-    "sSpecialID"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "iTypeId",
+        "sSpecialID"
 })
 @XmlRootElement(name = "GetUnitSpecialCoupon")
 public class GetUnitSpecialCoupon {
@@ -51,11 +44,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -63,11 +54,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -75,11 +64,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -87,11 +74,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -99,11 +84,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -111,11 +94,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -123,7 +104,6 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Gets the value of the iTypeId property.
-     * 
      */
     public long getITypeId() {
         return iTypeId;
@@ -131,7 +111,6 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Sets the value of the iTypeId property.
-     * 
      */
     public void setITypeId(long value) {
         this.iTypeId = value;
@@ -139,11 +118,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Gets the value of the sSpecialID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSSpecialID() {
         return sSpecialID;
@@ -151,11 +128,9 @@ public class GetUnitSpecialCoupon {
 
     /**
      * Sets the value of the sSpecialID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSSpecialID(String value) {
         this.sSpecialID = value;

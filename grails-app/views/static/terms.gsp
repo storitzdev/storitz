@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
-  <head>
-    <g:render template="/header" />
-    <meta name="DESCRIPTION" content="Storitz terms of use agreement."/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <g:render template="/header"/>
+  <meta name="DESCRIPTION" content="Storitz terms of use agreement."/>
 
-    <script type="text/javascript">
-//<![CDATA[
+  <script type="text/javascript">
+    //<![CDATA[
 
-//]]>
+    //]]>
   </script>
 
-  </head>
-  <body>
-    <div id="body">
-    <g:render template="/topnav" />
-    <div class="stcontent">
-      <g:render template="/logo_bar" />
-      <div id="staticMenu" class="left" style="margin-top: 26px;">
-        <!-- menu section -->
-      </div>
-      <div style="width: 650px;margin-right: 35px;" class="right">
+</head>
+<body>
+<div id="body">
+  <g:render template="/topnav"/>
+  <div class="stcontent">
+    <g:render template="/logo_bar"/>
+    <div id="staticMenu" class="left" style="margin-top: 26px;">
+      <!-- menu section -->
+    </div>
+    <div style="width: 650px;margin-right: 35px;" class="right">
 
-        <h1>Terms of Use</h1>
-        <p>Thank you for choosing Storitz, the smart and easy way to find and rent storage. The following are the Terms of Use ("Terms")
-          that govern the use of storitz.com (the "Site"). These Terms, including Storitz's Privacy Policy, the terms of any Storage
-          Rental Agreement and any other policies that may be applicable to particular features of the Site ("Additional Terms") are
-          hereby incorporated into these Terms. By using or visiting the Site, you expressly agree to be bound by these Terms and to
-          follow these Terms and all applicable laws and regulations governing the Site. To the extent that there is a conflict between
-          these Terms and Additional Terms for the activity in which you choose to participate, the Additional Terms shall govern.
-          These Terms will remain in full force and effect as long as you are a user of the Site and in the event of termination of
-          any membership, service or feature, you will still be bound by your obligations under these Terms, including any
-          indemnifications, warranties and limitations of liability.
-        </p>
-        <p>
-          We reserve the right at any time to:
-            <ul>
-              <li class="nodot">Change the terms and conditions of these Terms;</li>
-              <li class="nodot">Change the Site, including eliminating or discontinuing any content on or feature of the Site; or</li>
-              <li class="nodot">Change any fees or charges for use of the Site.</li>
-            </ul>
-        </p>
-        <p>
-          Any changes we make will be effective immediately upon notice, which we may provide by any means including, without limitation, posting a revised version of these Terms on the Site. You can determine when these Terms were last revised by referring to the "Last Updated" legend at the top of these Terms. Your continued use of the Site after such notice will be deemed acceptance of such changes. Be sure to return to this page periodically to ensure familiarity with the most current version of these Terms.
-        </p>
-        <p>
-          <span class="legalHeader">By using or attempting to use the Site, you certify that (i) you are a resident of the United States and are at least 13 years of age or, if under the age of 13, you have the consent of your parent or guardian (over the age of 18) to use the Site, or (ii) you are not a resident of the United States and are at least 18 years of age or, if under the age of 18, you have the consent of your parent or guardian (over the age of 18) to use the Site. If you do not meet these requirements or, if for any reason, you do not agree with all of the terms and conditions contained in these Terms, please discontinue using the Site immediately.</span>
-        </p>
-        <p>
-          <span class="legalHeader">2. Code of Conduct.</span> In connection with Submissions (as defined below) and your use of the Site, you agree that you will not (collectively, the "Codes of Conduct"):
-          <ul>
-            <li class="nodot">Restrict or inhibit any other visitor or member from using the Site, including, without limitation, by means of "hacking" or defacing any portion of the Site;</li>
-            <li class="nodot">Use the Site or Materials for any unlawful purpose;</li>
-            <li class="nodot">Express or imply that any statements you make are endorsed by us, without our prior written consent;</li>
-            <li class="nodot">Transmit (a) any content or information that is unlawful, fraudulent, threatening, abusive, libelous, defamatory, obscene or otherwise objectionable, or infringes our or any third party's intellectual property or other rights; (b) any material, non-public information about companies without the authorization to do so; (c) any trade secret of any third party; or (d) any advertisements, solicitations, chain letters, pyramid schemes, investment opportunities or other unsolicited commercial communication (except as otherwise expressly permitted by us),</li>
-            <li class="nodot">Engage in spamming or flooding;</li>
-            <li class="nodot">Transmit any software or other materials that contain any viruses, worms, Trojan horses, defects, date bombs, time bombs or other items of a destructive nature;</li>
-            <li class="nodot">Modify, adapt, sub-license, translate, sell, reverse engineer, decompile or disassemble any portion of the Site;</li>
-            <li class="nodot">Remove any copyright, trademark or other proprietary rights notices contained in the Site;</li>
-            <li class="nodot">"Frame" or "mirror" any part of the Site without our prior written authorization;</li>
-            <li class="nodot">Link to any page of or content on the Site other than the URL located at <a href="http://www.storitz.com">http://www.storitz.com</a> without Storitz's express authorization;</li>
-            <li class="nodot">Use any robot, spider, offline reader, site search/retrieval application or other manual or automatic device or process to retrieve, index, data mine or in any way reproduce or circumvent the navigational structure or presentation of the Site or its contents without our prior written consent, including with respect to any CAPTCHA displayed on the Site. Notwithstanding the foregoing, Storitz grants the operators of public search engines permission to use spiders to copy materials from the site for the sole purpose of and solely to the extent necessary for creating publicly available searchable indices of the materials, but not caches or archives of such materials. Storitz reserves the right to revoke these exceptions either generally or in specific cases;</li>
-            <li class="nodot">Harvest or collect information about Site visitors or members without their express consent;</li>
-            <li class="nodot">Take any action that imposes an unreasonable or disproportionately large load on our infrastructure;</li>
-            <li class="nodot">Access, reload or "refresh" transactional pages, or make any other request to transactional servers, more than once during any three-second interval;</li>
-            <li class="nodot">Request more than 50 pages of the Site in any twenty-four hour period, whether alone or acting in concert with a group of individuals; or</li>
-            <li class="nodot">Use any passcode or password, regardless of whether or not such passcode or password is unique, to participate in an offer on the Site if you are not the original recipient of such passcode or password (i.e., if you did not receive the passcode or password from Storitz, or from an entity with whom Storitz is working to enable such offer) or if your participation in such offer is inconsistent with such offer's terms.</li>
-          </ul>
+      <h1>Terms of Use</h1>
+      <p>Thank you for choosing Storitz, the smart and easy way to find and rent storage. The following are the Terms of Use ("Terms")
+      that govern the use of storitz.com (the "Site"). These Terms, including Storitz's Privacy Policy, the terms of any Storage
+      Rental Agreement and any other policies that may be applicable to particular features of the Site ("Additional Terms") are
+      hereby incorporated into these Terms. By using or visiting the Site, you expressly agree to be bound by these Terms and to
+      follow these Terms and all applicable laws and regulations governing the Site. To the extent that there is a conflict between
+      these Terms and Additional Terms for the activity in which you choose to participate, the Additional Terms shall govern.
+      These Terms will remain in full force and effect as long as you are a user of the Site and in the event of termination of
+      any membership, service or feature, you will still be bound by your obligations under these Terms, including any
+      indemnifications, warranties and limitations of liability.
       </p>
+      <p>
+        We reserve the right at any time to:
+      <ul>
+        <li class="nodot">Change the terms and conditions of these Terms;</li>
+        <li class="nodot">Change the Site, including eliminating or discontinuing any content on or feature of the Site; or</li>
+        <li class="nodot">Change any fees or charges for use of the Site.</li>
+      </ul>
+    </p>
+      <p>
+        Any changes we make will be effective immediately upon notice, which we may provide by any means including, without limitation, posting a revised version of these Terms on the Site. You can determine when these Terms were last revised by referring to the "Last Updated" legend at the top of these Terms. Your continued use of the Site after such notice will be deemed acceptance of such changes. Be sure to return to this page periodically to ensure familiarity with the most current version of these Terms.
+      </p>
+      <p>
+        <span class="legalHeader">By using or attempting to use the Site, you certify that (i) you are a resident of the United States and are at least 13 years of age or, if under the age of 13, you have the consent of your parent or guardian (over the age of 18) to use the Site, or (ii) you are not a resident of the United States and are at least 18 years of age or, if under the age of 18, you have the consent of your parent or guardian (over the age of 18) to use the Site. If you do not meet these requirements or, if for any reason, you do not agree with all of the terms and conditions contained in these Terms, please discontinue using the Site immediately.</span>
+      </p>
+      <p>
+        <span class="legalHeader">2. Code of Conduct.</span> In connection with Submissions (as defined below) and your use of the Site, you agree that you will not (collectively, the "Codes of Conduct"):
+      <ul>
+        <li class="nodot">Restrict or inhibit any other visitor or member from using the Site, including, without limitation, by means of "hacking" or defacing any portion of the Site;</li>
+        <li class="nodot">Use the Site or Materials for any unlawful purpose;</li>
+        <li class="nodot">Express or imply that any statements you make are endorsed by us, without our prior written consent;</li>
+        <li class="nodot">Transmit (a) any content or information that is unlawful, fraudulent, threatening, abusive, libelous, defamatory, obscene or otherwise objectionable, or infringes our or any third party's intellectual property or other rights; (b) any material, non-public information about companies without the authorization to do so; (c) any trade secret of any third party; or (d) any advertisements, solicitations, chain letters, pyramid schemes, investment opportunities or other unsolicited commercial communication (except as otherwise expressly permitted by us),</li>
+        <li class="nodot">Engage in spamming or flooding;</li>
+        <li class="nodot">Transmit any software or other materials that contain any viruses, worms, Trojan horses, defects, date bombs, time bombs or other items of a destructive nature;</li>
+        <li class="nodot">Modify, adapt, sub-license, translate, sell, reverse engineer, decompile or disassemble any portion of the Site;</li>
+        <li class="nodot">Remove any copyright, trademark or other proprietary rights notices contained in the Site;</li>
+        <li class="nodot">"Frame" or "mirror" any part of the Site without our prior written authorization;</li>
+        <li class="nodot">Link to any page of or content on the Site other than the URL located at <a href="http://www.storitz.com">http://www.storitz.com</a> without Storitz's express authorization;</li>
+        <li class="nodot">Use any robot, spider, offline reader, site search/retrieval application or other manual or automatic device or process to retrieve, index, data mine or in any way reproduce or circumvent the navigational structure or presentation of the Site or its contents without our prior written consent, including with respect to any CAPTCHA displayed on the Site. Notwithstanding the foregoing, Storitz grants the operators of public search engines permission to use spiders to copy materials from the site for the sole purpose of and solely to the extent necessary for creating publicly available searchable indices of the materials, but not caches or archives of such materials. Storitz reserves the right to revoke these exceptions either generally or in specific cases;</li>
+        <li class="nodot">Harvest or collect information about Site visitors or members without their express consent;</li>
+        <li class="nodot">Take any action that imposes an unreasonable or disproportionately large load on our infrastructure;</li>
+        <li class="nodot">Access, reload or "refresh" transactional pages, or make any other request to transactional servers, more than once during any three-second interval;</li>
+        <li class="nodot">Request more than 50 pages of the Site in any twenty-four hour period, whether alone or acting in concert with a group of individuals; or</li>
+        <li class="nodot">Use any passcode or password, regardless of whether or not such passcode or password is unique, to participate in an offer on the Site if you are not the original recipient of such passcode or password (i.e., if you did not receive the passcode or password from Storitz, or from an entity with whom Storitz is working to enable such offer) or if your participation in such offer is inconsistent with such offer's terms.</li>
+      </ul>
+    </p>
       <p>
         <span class="legalHeader">3. Ownership and Restrictions on Use.</span> The information and materials provided on or through the Site,
       including any data, text, designs, graphics, images, photographs, illustrations, audio and video clips, logos, icons and links
@@ -115,7 +115,7 @@
       </p>
       <p>
         Notices and counter-notices must meet the then-current statutory requirements imposed by the DMCA; see <a href="http://www.loc.gov/copyright/">http://www.loc.gov/copyright/</a> for details. Notices and counter-notices with respect to the Site should be sent to Copyright Officer, Storitz Inc., 2332 Cotner Avenue, Suite 302, Los Angeles, CA 90064.
-        We suggest that you consult your legal advisor before filing a notice or counter-notice. Also, be aware that there can be penalties for false claims under the DMCA.
+      We suggest that you consult your legal advisor before filing a notice or counter-notice. Also, be aware that there can be penalties for false claims under the DMCA.
       </p>
       <p>
         <span class="legalHeader">8. Access By Minors.</span> Storitz cannot prohibit minors from visiting this site. Storitz must rely on parents, guardians and those responsible for supervising children under 13 to decide which materials are appropriate for such children to view and/or purchase. Pursuant to 47 U.S.C. Section 230 (d), as amended, we hereby notify you that parental control protections (such as computer hardware, software or filtering services) are commercially available that may assist you in limiting access to material that is harmful to minors. Information identifying current providers of such protections is available on the two websites GetNetWise (http://kids.getnetwise.org/) and OnGuard Online (http://onguardonline.gov/). Please note that Storitz does not endorse any of the products or services listed at such websites.
@@ -194,16 +194,15 @@
         <span class="legalHeader">19. Notice for California Users.</span> Under California Civil Code Section 1789.3, California Site users are entitled to the following specific consumer rights notice: The Complaint Assistance Unit of the Division of Consumer Services of the California Department of Consumer Affairs may be contacted in writing at 1625 North Market Blvd., Sacramento, CA 95834, or by telephone at (916) 445-1254 or (800) 952-5210.
       </p>
       <p>
-        &copy; 2010 Storitz Inc. All rights reserved.
+      &copy; 2010 Storitz Inc. All rights reserved.
       </p>
 
-
-      </div>
     </div>
+  </div>
 
-    <div style="clear:both; height:30px;"></div>
-      <g:render template="/footer" />
-    </div>
-  </body>
-  <p:renderDependantJavascript />
+  <div style="clear:both; height:30px;"></div>
+  <g:render template="/footer"/>
+</div>
+</body>
+<p:renderDependantJavascript/>
 </html>

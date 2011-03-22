@@ -36,15 +36,15 @@ public enum ReferrerType {
 
   static list() {
     [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP, WESTSIDE_RENTALS, HOTPADS, APARTMENTGUIDE, RENTALS,
-    RETIREMENTHOMES, FORRENT, HOMES, SENIOROUTLOOK, CORPORATE_HOUSING, RENTALHOUSES, RENT]
+            RETIREMENTHOMES, FORRENT, HOMES, SENIOROUTLOOK, CORPORATE_HOUSING, RENTALHOUSES, RENT]
   }
 
   static public ReferrerType getEnumFromId(String value) {
-      def ret = list().find {it.display == value }
-      if (!ret) {
-        return ReferrerType.valueOf(value)
-      }
-      return ret
+    def ret = list().find {it.display == value }
+    if (!ret) {
+      return ReferrerType.valueOf(value)
+    }
+    return ret
   }
-  
+
 }

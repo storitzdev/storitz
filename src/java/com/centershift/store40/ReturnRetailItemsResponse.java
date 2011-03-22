@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "returnRetailItemsResult"
+        "returnRetailItemsResult"
 })
 @XmlRootElement(name = "ReturnRetailItemsResponse")
 public class ReturnRetailItemsResponse {
@@ -39,11 +32,9 @@ public class ReturnRetailItemsResponse {
 
     /**
      * Gets the value of the returnRetailItemsResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ReturnRetailItemsResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ReturnRetailItemsResponse2 }
      */
     public ReturnRetailItemsResponse2 getReturnRetailItemsResult() {
         return returnRetailItemsResult;
@@ -51,11 +42,9 @@ public class ReturnRetailItemsResponse {
 
     /**
      * Sets the value of the returnRetailItemsResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ReturnRetailItemsResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ReturnRetailItemsResponse2 }
      */
     public void setReturnRetailItemsResult(ReturnRetailItemsResponse2 value) {
         this.returnRetailItemsResult = value;

@@ -4,95 +4,95 @@ import com.storitz.RentalTransaction
 
 class MoveInService {
 
-    def siteLinkService
-    def CShiftService
-    def CShift4Service
-    def quikStorService
-    def exrsService
-    def usiService
+  def siteLinkService
+  def CShiftService
+  def CShift4Service
+  def quikStorService
+  def exrsService
+  def usiService
 
-    boolean transactional = false
+  boolean transactional = false
 
-    def checkRented(RentalTransaction trans) {
-      switch(trans.site.source) {
-        case "SL":
-          return siteLinkService.checkRented(trans)
+  def checkRented(RentalTransaction trans) {
+    switch (trans.site.source) {
+      case "SL":
+        return siteLinkService.checkRented(trans)
 
-        case "CS3":
-          return CShiftService.checkRented(trans)
+      case "CS3":
+        return CShiftService.checkRented(trans)
 
-        case "CS4":
-          return CShift4Service.checkRented(trans)
+      case "CS4":
+        return CShift4Service.checkRented(trans)
 
-        case "QS":
-          return quikStorService.checkRented(trans)
+      case "QS":
+        return quikStorService.checkRented(trans)
 
-        case "EX":
-          return exrsService.checkRented(trans)  
+      case "EX":
+        return exrsService.checkRented(trans)
 
-        case "USI":
-          return usiService.checkRented(trans)
+      case "USI":
+        return usiService.checkRented(trans)
 
-        default:
-          throw new Exception("Unknown service for move in")
-      }
+      default:
+        throw new Exception("Unknown service for move in")
     }
+  }
 
-    def moveInDetail(RentalTransaction trans) {
-      switch(trans.site.source) {
-        case "SL":
-          return siteLinkService.moveInDetail(trans)
+  def moveInDetail(RentalTransaction trans) {
+    switch (trans.site.source) {
+      case "SL":
+        return siteLinkService.moveInDetail(trans)
 
-        case "CS3":
-          return CShiftService.moveInDetail(trans)
+      case "CS3":
+        return CShiftService.moveInDetail(trans)
 
-        case "CS4":
-          return CShift4Service.moveInDetail(trans)
+      case "CS4":
+        return CShift4Service.moveInDetail(trans)
 
-        case "QS":
-          return quikStorService.moveInDetail(trans)
+      case "QS":
+        return quikStorService.moveInDetail(trans)
 
-        case "EX":
-          return exrsService.moveInDetail(trans)
+      case "EX":
+        return exrsService.moveInDetail(trans)
 
-        case "USI":
-          return usiService.moveInDetail(trans)
+      case "USI":
+        return usiService.moveInDetail(trans)
 
-        default:
-          throw new Exception("Unknown service for move in detail")
-      }
+      default:
+        throw new Exception("Unknown service for move in detail")
     }
+  }
 
-    def moveIn(RentalTransaction trans) {
-      switch(trans.site.source) {
-        case "SL":
-          siteLinkService.createTenant(trans)
-          return siteLinkService.moveIn(trans)
+  def moveIn(RentalTransaction trans) {
+    switch (trans.site.source) {
+      case "SL":
+        siteLinkService.createTenant(trans)
+        return siteLinkService.moveIn(trans)
 
-        case "CS3":
-          CShiftService.createTenant(trans)
-          return CShiftService.reserve(trans)
+      case "CS3":
+        CShiftService.createTenant(trans)
+        return CShiftService.reserve(trans)
 
-        case "CS4":
-          CShift4Service.createTenant(trans)
-          return CShift4Service.reserve(trans)
+      case "CS4":
+        CShift4Service.createTenant(trans)
+        return CShift4Service.reserve(trans)
 
-        case "QS":
-          quikStorService.createTenant(trans)
-          return quikStorService.moveIn(trans)
+      case "QS":
+        quikStorService.createTenant(trans)
+        return quikStorService.moveIn(trans)
 
-        case "EX":
-          // TODO - create email notification to fill in form
-          return exrsService.moveIn(trans)
+      case "EX":
+        // TODO - create email notification to fill in form
+        return exrsService.moveIn(trans)
 
-        case "USI":
-          usiService.createTenant(trans)
-          return usiService.reserve(trans)
+      case "USI":
+        usiService.createTenant(trans)
+        return usiService.reserve(trans)
 
-        default:
-          throw new Exception("Unknown service for move in")
-      }
+      default:
+        throw new Exception("Unknown service for move in")
     }
+  }
 
 
 }

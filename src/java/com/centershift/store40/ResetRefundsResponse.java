@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resetRefundsResult"
+        "resetRefundsResult"
 })
 @XmlRootElement(name = "ResetRefundsResponse")
 public class ResetRefundsResponse {
@@ -39,11 +32,9 @@ public class ResetRefundsResponse {
 
     /**
      * Gets the value of the resetRefundsResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefundResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link RefundResponse }
      */
     public RefundResponse getResetRefundsResult() {
         return resetRefundsResult;
@@ -51,11 +42,9 @@ public class ResetRefundsResponse {
 
     /**
      * Sets the value of the resetRefundsResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefundResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RefundResponse }
      */
     public void setResetRefundsResult(RefundResponse value) {
         this.resetRefundsResult = value;

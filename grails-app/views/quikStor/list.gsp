@@ -14,56 +14,56 @@
 </head>
 <body>
 <div id="body">
-<g:render template="/topnav"/>
-<div class="stcontent">
-  <g:render template="/logo_bar"/>
-  <div class="buttons">
-    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-    <span class="button"><g:link action="create">Create New QuikStor Feed</g:link></span>
-  </div>
-  <div class="body">
-
-    <div class="price_options checkout_header white">
-      List QuikStor Feeds
+  <g:render template="/topnav"/>
+  <div class="stcontent">
+    <g:render template="/logo_bar"/>
+    <div class="buttons">
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
+      <span class="button"><g:link action="create">Create New QuikStor Feed</g:link></span>
     </div>
+    <div class="body">
 
-    <g:if test="${flash.message}">
-      <div class="message">${flash.message}</div>
-    </g:if>
-    <div class="list">
-      <table>
-        <thead>
-        <tr>
+      <div class="price_options checkout_header white">
+        List QuikStor Feeds
+      </div>
 
-          <g:sortableColumn property="id" title="${message(code: 'quikStor.id.label', default: 'Id')}"/>
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
+      <div class="list">
+        <table>
+          <thead>
+          <tr>
 
-          <g:sortableColumn property="operatorName" title="${message(code: 'quikStor.operatorName.label', default: 'Operator Name')}"/>
+            <g:sortableColumn property="id" title="${message(code: 'quikStor.id.label', default: 'Id')}"/>
 
-          <th><g:message code="quikStor.manager.label" default="Manager"/></th>
+            <g:sortableColumn property="operatorName" title="${message(code: 'quikStor.operatorName.label', default: 'Operator Name')}"/>
 
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${quikStorInstanceList}" status="i" var="quikStorInstance">
-          <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-            <td><g:link action="show" id="${quikStorInstance.id}">${fieldValue(bean: quikStorInstance, field: "id")}</g:link></td>
-
-            <td>${fieldValue(bean: quikStorInstance, field: "operatorName")}</td>
-
-            <td>${quikStorInstance?.manager?.username}</td>
+            <th><g:message code="quikStor.manager.label" default="Manager"/></th>
 
           </tr>
-        </g:each>
-        </tbody>
-      </table>
-    </div>
-    <div class="paginateButtons">
-      <g:paginate total="${quikStorInstanceTotal}"/>
+          </thead>
+          <tbody>
+          <g:each in="${quikStorInstanceList}" status="i" var="quikStorInstance">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+
+              <td><g:link action="show" id="${quikStorInstance.id}">${fieldValue(bean: quikStorInstance, field: "id")}</g:link></td>
+
+              <td>${fieldValue(bean: quikStorInstance, field: "operatorName")}</td>
+
+              <td>${quikStorInstance?.manager?.username}</td>
+
+            </tr>
+          </g:each>
+          </tbody>
+        </table>
+      </div>
+      <div class="paginateButtons">
+        <g:paginate total="${quikStorInstanceTotal}"/>
+      </div>
     </div>
   </div>
 </div>
-</div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

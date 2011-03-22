@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SOA_ACT_INFO complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_ACT_INFO">
  *   &lt;complexContent>
@@ -34,27 +33,24 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_ACT_INFO", propOrder = {
-    "acctid",
-    "acctname",
-    "accttype",
-    "acctclass",
-    "contactid",
-    "firstname",
-    "lastname",
-    "knownas",
-    "active",
-    "contacttype",
-    "createdby",
-    "updatedby"
+        "acctid",
+        "acctname",
+        "accttype",
+        "acctclass",
+        "contactid",
+        "firstname",
+        "lastname",
+        "knownas",
+        "active",
+        "contacttype",
+        "createdby",
+        "updatedby"
 })
 public class SOAACTINFO
-    extends BaseEntityOfCollectionSOAACTINFOColumnIndexes
-{
+        extends BaseEntityOfCollectionSOAACTINFOColumnIndexes {
 
     @XmlElement(name = "ACCT_ID")
     protected long acctid;
@@ -83,7 +79,6 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -91,7 +86,6 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -99,11 +93,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -111,11 +103,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -123,11 +113,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the accttype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTTYPE() {
         return accttype;
@@ -135,11 +123,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the accttype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTTYPE(String value) {
         this.accttype = value;
@@ -147,11 +133,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the acctclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTCLASS() {
         return acctclass;
@@ -159,11 +143,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the acctclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTCLASS(String value) {
         this.acctclass = value;
@@ -171,7 +153,6 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -179,7 +160,6 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -187,11 +167,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFIRSTNAME() {
         return firstname;
@@ -199,11 +177,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFIRSTNAME(String value) {
         this.firstname = value;
@@ -211,11 +187,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTNAME() {
         return lastname;
@@ -223,11 +197,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTNAME(String value) {
         this.lastname = value;
@@ -235,11 +207,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the knownas property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getKNOWNAS() {
         return knownas;
@@ -247,11 +217,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the knownas property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setKNOWNAS(String value) {
         this.knownas = value;
@@ -259,11 +227,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -271,11 +237,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;
@@ -283,11 +247,9 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the contacttype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCONTACTTYPE() {
         return contacttype;
@@ -295,11 +257,9 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the contacttype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCONTACTTYPE(String value) {
         this.contacttype = value;
@@ -307,7 +267,6 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -315,7 +274,6 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -323,7 +281,6 @@ public class SOAACTINFO
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -331,7 +288,6 @@ public class SOAACTINFO
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

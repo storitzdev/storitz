@@ -17,7 +17,7 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
     private java.util.Vector cachedSerFactories = new java.util.Vector();
     private java.util.Vector cachedDeserFactories = new java.util.Vector();
 
-    static org.apache.axis.description.OperationDesc [] _operations;
+    static org.apache.axis.description.OperationDesc[] _operations;
 
     static {
         _operations = new org.apache.axis.description.OperationDesc[45];
@@ -28,7 +28,7 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
         _initOperationDesc5();
     }
 
-    private static void _initOperationDesc1(){
+    private static void _initOperationDesc1() {
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -213,7 +213,7 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
     }
 
-    private static void _initOperationDesc2(){
+    private static void _initOperationDesc2() {
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -420,7 +420,7 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
     }
 
-    private static void _initOperationDesc3(){
+    private static void _initOperationDesc3() {
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -633,7 +633,7 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
     }
 
-    private static void _initOperationDesc4(){
+    private static void _initOperationDesc4() {
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -894,7 +894,7 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
     }
 
-    private static void _initOperationDesc5(){
+    private static void _initOperationDesc5() {
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
@@ -1017,12 +1017,12 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
     }
 
     public CsKioskSoapBindingStub() throws org.apache.axis.AxisFault {
-         this(null);
+        this(null);
     }
 
     public CsKioskSoapBindingStub(java.net.URL endpointURL, javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
-         this(service);
-         super.cachedEndpoint = endpointURL;
+        this(service);
+        super.cachedEndpoint = endpointURL;
     }
 
     public CsKioskSoapBindingStub(javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
@@ -1031,34 +1031,34 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
         } else {
             super.service = service;
         }
-        ((org.apache.axis.client.Service)super.service).setTypeMappingVersion("1.1");
-            java.lang.Class cls;
-            javax.xml.namespace.QName qName;
-            javax.xml.namespace.QName qName2;
-            TypeMappingRegistry registry = service.getTypeMappingRegistry();
-            TypeMapping typeMapping = registry.createTypeMapping();
-            java.lang.Class beansf = org.apache.axis.encoding.ser.BeanSerializerFactory.class;
-            java.lang.Class beandf = org.apache.axis.encoding.ser.BeanDeserializerFactory.class;
-            java.lang.Class enumsf = org.apache.axis.encoding.ser.EnumSerializerFactory.class;
-            java.lang.Class enumdf = org.apache.axis.encoding.ser.EnumDeserializerFactory.class;
-            java.lang.Class arraysf = org.apache.axis.encoding.ser.ArraySerializerFactory.class;
-            java.lang.Class arraydf = org.apache.axis.encoding.ser.ArrayDeserializerFactory.class;
-            java.lang.Class simplesf = org.apache.axis.encoding.ser.SimpleSerializerFactory.class;
-            java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
-            java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
-            java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://tempuri.org/csKiosk/type/", "UnknownBinaryContent");
-            qName2 = new QName("http://schemas.microsoft.com/soap-toolkit/data-types", "empty");
-            cachedSerQNames.add(qName);
-            cachedSerQNames.add(qName2);
-            cls = byte[].class;
-            Class cls2 = Object.class;
-            cachedSerClasses.add(cls);
-            cachedSerClasses.add(cls2);
-            cachedSerFactories.add(arraysf);
-            cachedSerFactories.add(new EmptySerializerFactory());
-            cachedDeserFactories.add(arraydf);
-            cachedDeserFactories.add(new EmptyDeserializerFactory());
+        ((org.apache.axis.client.Service) super.service).setTypeMappingVersion("1.1");
+        java.lang.Class cls;
+        javax.xml.namespace.QName qName;
+        javax.xml.namespace.QName qName2;
+        TypeMappingRegistry registry = service.getTypeMappingRegistry();
+        TypeMapping typeMapping = registry.createTypeMapping();
+        java.lang.Class beansf = org.apache.axis.encoding.ser.BeanSerializerFactory.class;
+        java.lang.Class beandf = org.apache.axis.encoding.ser.BeanDeserializerFactory.class;
+        java.lang.Class enumsf = org.apache.axis.encoding.ser.EnumSerializerFactory.class;
+        java.lang.Class enumdf = org.apache.axis.encoding.ser.EnumDeserializerFactory.class;
+        java.lang.Class arraysf = org.apache.axis.encoding.ser.ArraySerializerFactory.class;
+        java.lang.Class arraydf = org.apache.axis.encoding.ser.ArrayDeserializerFactory.class;
+        java.lang.Class simplesf = org.apache.axis.encoding.ser.SimpleSerializerFactory.class;
+        java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
+        java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
+        java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
+        qName = new javax.xml.namespace.QName("http://tempuri.org/csKiosk/type/", "UnknownBinaryContent");
+        qName2 = new QName("http://schemas.microsoft.com/soap-toolkit/data-types", "empty");
+        cachedSerQNames.add(qName);
+        cachedSerQNames.add(qName2);
+        cls = byte[].class;
+        Class cls2 = Object.class;
+        cachedSerClasses.add(cls);
+        cachedSerClasses.add(cls2);
+        cachedSerFactories.add(arraysf);
+        cachedSerFactories.add(new EmptySerializerFactory());
+        cachedDeserFactories.add(arraydf);
+        cachedDeserFactories.add(new EmptyDeserializerFactory());
 
     }
 
@@ -1105,16 +1105,15 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
                         java.lang.Object x = cachedSerFactories.get(i);
                         if (x instanceof Class) {
                             java.lang.Class sf = (java.lang.Class)
-                                 cachedSerFactories.get(i);
+                                    cachedSerFactories.get(i);
                             java.lang.Class df = (java.lang.Class)
-                                 cachedDeserFactories.get(i);
+                                    cachedDeserFactories.get(i);
                             _call.registerTypeMapping(cls, qName, sf, df, false);
-                        }
-                        else if (x instanceof javax.xml.rpc.encoding.SerializerFactory) {
+                        } else if (x instanceof javax.xml.rpc.encoding.SerializerFactory) {
                             org.apache.axis.encoding.SerializerFactory sf = (org.apache.axis.encoding.SerializerFactory)
-                                 cachedSerFactories.get(i);
+                                    cachedSerFactories.get(i);
                             org.apache.axis.encoding.DeserializerFactory df = (org.apache.axis.encoding.DeserializerFactory)
-                                 cachedDeserFactories.get(i);
+                                    cachedDeserFactories.get(i);
                             _call.registerTypeMapping(cls, qName, sf, df, false);
                         }
                     }
@@ -1140,22 +1139,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String kioskVer() throws java.rmi.RemoteException {
@@ -1171,22 +1170,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getSiteHours(java.lang.String pUser, java.lang.String pPIN, long pSiteID) throws java.rmi.RemoteException {
@@ -1202,22 +1201,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getSiteDirections(java.lang.String pUser, java.lang.String pPIN, long pSiteID) throws java.rmi.RemoteException {
@@ -1233,22 +1232,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getSitePhones(java.lang.String pUser, java.lang.String pPIN, long pSiteID) throws java.rmi.RemoteException {
@@ -1264,22 +1263,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getSiteAddress(java.lang.String pUser, java.lang.String pPIN, long pSiteID) throws java.rmi.RemoteException {
@@ -1295,22 +1294,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getSiteUnitData(java.lang.String pUser, java.lang.String pPIN, long pSiteID) throws java.rmi.RemoteException {
@@ -1326,22 +1325,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int createAccount(java.lang.String pUser, java.lang.String pPIN, long pSiteID, java.lang.String pTenantFirstName, java.lang.String pTenantLastName, java.lang.String pMailALine1, java.lang.String pMailALine2, java.lang.String pMailACity, java.lang.String pMailAState, java.lang.String pMailAZip, java.lang.String pMailACountry, java.lang.String pTenantPhone, long pTenantPhoneType, java.lang.String pTenantPassword, java.lang.String pDriversLicenseNum, java.lang.String pDriversLicenseST, java.lang.String pDriversLicenseEXP, java.lang.String pGatePIN, java.lang.String pGateTimeZone, java.lang.String pGateKeypadZone) throws java.rmi.RemoteException {
@@ -1357,22 +1356,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), pTenantFirstName, pTenantLastName, pMailALine1, pMailALine2, pMailACity, pMailAState, pMailAZip, pMailACountry, pTenantPhone, new java.lang.Double(pTenantPhoneType), pTenantPassword, pDriversLicenseNum, pDriversLicenseST, pDriversLicenseEXP, pGatePIN, pGateTimeZone, pGateKeypadZone});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), pTenantFirstName, pTenantLastName, pMailALine1, pMailALine2, pMailACity, pMailAState, pMailAZip, pMailACountry, pTenantPhone, new java.lang.Double(pTenantPhoneType), pTenantPassword, pDriversLicenseNum, pDriversLicenseST, pDriversLicenseEXP, pGatePIN, pGateTimeZone, pGateKeypadZone});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getSiteList(java.lang.String pUser, java.lang.String pPIN) throws java.rmi.RemoteException {
@@ -1388,22 +1387,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getAvailableUnits(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAttributeID, java.lang.String pDimensions) throws java.rmi.RemoteException {
@@ -1419,23 +1418,23 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAttributeID), pDimensions});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAttributeID), pDimensions});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-      throw axisFaultException;
-  }
- }
+    }
 
     public java.lang.Object getMoveInCost(java.lang.String pUser, java.lang.String pPIN, long pSiteID, java.lang.String pUnitIDs, java.lang.String pInsuranceIDs) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
@@ -1450,22 +1449,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), pUnitIDs, pInsuranceIDs});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), pUnitIDs, pInsuranceIDs});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String doMoveIn(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pUnitIDs, java.lang.String pInsuranceIDs, java.lang.String pPaymentString, java.lang.String pCCNumOrABA, java.lang.String pCCNameOnCardOrCheckingAccountNum, java.lang.String pCCExpirationMonthOrAccountName, java.lang.String pCCExpirationYear, java.lang.String pCCZipCode, java.lang.String pPayMethod) throws java.rmi.RemoteException {
@@ -1481,22 +1480,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pInsuranceIDs, pPaymentString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pInsuranceIDs, pPaymentString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int updateTenantInfo(java.lang.String pUser, java.lang.String pPIN, long pTenantID, java.lang.String pTenantFirstName, java.lang.String pTenantLastName, java.lang.String pDriversLicenseNum, java.lang.String pDriversLicenseST, java.lang.String pDriversLicenseEXP) throws java.rmi.RemoteException {
@@ -1512,22 +1511,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pTenantID), pTenantFirstName, pTenantLastName, pDriversLicenseNum, pDriversLicenseST, pDriversLicenseEXP});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pTenantID), pTenantFirstName, pTenantLastName, pDriversLicenseNum, pDriversLicenseST, pDriversLicenseEXP});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int updateTenantAddress(java.lang.String pUser, java.lang.String pPIN, long pTenantID, long pAddressID, java.lang.String pLine1, java.lang.String pLine2, java.lang.String pCity, java.lang.String pState, java.lang.String pZip, java.lang.String pCountry, int pAddressType) throws java.rmi.RemoteException {
@@ -1543,22 +1542,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Double(pAddressID), pLine1, pLine2, pCity, pState, pZip, pCountry, new java.lang.Integer(pAddressType)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Double(pAddressID), pLine1, pLine2, pCity, pState, pZip, pCountry, new java.lang.Integer(pAddressType)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int updateTenantPhone(java.lang.String pUser, java.lang.String pPIN, long pTenantID, long pPhoneID, java.lang.String pTenantPhone, int pPhoneType) throws java.rmi.RemoteException {
@@ -1574,22 +1573,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Double(pPhoneID), pTenantPhone, new java.lang.Integer(pPhoneType)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Double(pPhoneID), pTenantPhone, new java.lang.Integer(pPhoneType)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getTenantAddress(java.lang.String pUser, java.lang.String pPIN, long pTenantID, int pAddressType) throws java.rmi.RemoteException {
@@ -1605,22 +1604,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Integer(pAddressType)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Integer(pAddressType)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getTenantPhone(java.lang.String pUser, java.lang.String pPIN, long pTenantID, int pPhoneType) throws java.rmi.RemoteException {
@@ -1636,22 +1635,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Integer(pPhoneType)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pTenantID), new java.lang.Integer(pPhoneType)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int updateTenantPassword(java.lang.String pUser, java.lang.String pPIN, long pTenantID, java.lang.String pOldPasswd, java.lang.String pNewPasswd) throws java.rmi.RemoteException {
@@ -1667,22 +1666,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pTenantID), pOldPasswd, pNewPasswd});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pTenantID), pOldPasswd, pNewPasswd});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getAddressTypes() throws java.rmi.RemoteException {
@@ -1698,22 +1697,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getPhoneTypes() throws java.rmi.RemoteException {
@@ -1729,22 +1728,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object listAccountUnits(java.lang.String pUser, java.lang.String pPIN, long pAccountID) throws java.rmi.RemoteException {
@@ -1760,22 +1759,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pAccountID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pAccountID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getCurrentCharges(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, short pMonths, long pItemId, long pItemPrice, long pItemQuantity) throws java.rmi.RemoteException {
@@ -1791,22 +1790,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Short(pMonths), new java.lang.Double(pItemId), new java.lang.Double(pItemPrice), new java.lang.Double(pItemQuantity)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Short(pMonths), new java.lang.Double(pItemId), new java.lang.Double(pItemPrice), new java.lang.Double(pItemQuantity)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String makePayment(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pPaymentString, java.lang.String pCCNumOrABA, java.lang.String pCCNameOnCardOrCheckingAccountNum, java.lang.String pCCExpirationMonthOrAccountName, java.lang.String pCCExpirationYear, java.lang.String pCCZipCode, java.lang.String pPayMethod) throws java.rmi.RemoteException {
@@ -1822,22 +1821,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pPaymentString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pPaymentString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String getPicture(java.lang.String pUser, java.lang.String pPIN, short pPictureType, long pTenantID, javax.xml.rpc.holders.ByteArrayHolder pFileObj) throws java.rmi.RemoteException {
@@ -1853,29 +1852,29 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Short(pPictureType), new java.lang.Double(pTenantID), pFileObj.value});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Short(pPictureType), new java.lang.Double(pTenantID), pFileObj.value});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            java.util.Map _output;
-            _output = _call.getOutputParams();
-            try {
-                pFileObj.value = (byte[]) _output.get(new javax.xml.namespace.QName("", "pFileObj"));
-            } catch (java.lang.Exception _exception) {
-                pFileObj.value = (byte[]) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "pFileObj")), byte[].class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                java.util.Map _output;
+                _output = _call.getOutputParams();
+                try {
+                    pFileObj.value = (byte[]) _output.get(new javax.xml.namespace.QName("", "pFileObj"));
+                } catch (java.lang.Exception _exception) {
+                    pFileObj.value = (byte[]) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "pFileObj")), byte[].class);
+                }
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
-            }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public void pictureReceived(java.lang.String pUser, java.lang.String pPIN, short pPictureType, long pTenantID) throws java.rmi.RemoteException {
@@ -1891,15 +1890,16 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Short(pPictureType), new java.lang.Double(pTenantID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Short(pPictureType), new java.lang.Double(pTenantID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            }
+            extractAttachments(_call);
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-        extractAttachments(_call);
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int updateAccountName(java.lang.String pUser, java.lang.String pPIN, long pAccountID, java.lang.String pAccountName) throws java.rmi.RemoteException {
@@ -1915,22 +1915,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pAccountID), pAccountName});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pAccountID), pAccountName});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String updatePicture(java.lang.String pUser, java.lang.String pPIN, long pSiteID, short pPictureType, long pTenantID, byte[] pFile) throws java.rmi.RemoteException {
@@ -1946,22 +1946,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Short(pPictureType), new java.lang.Double(pTenantID), pFile});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Short(pPictureType), new java.lang.Double(pTenantID), pFile});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object tenantLogin2(java.lang.String pUser, java.lang.String pPIN, java.lang.String pSiteID, java.lang.String pAccountID, java.lang.String pFirstName, java.lang.String pLastName, java.lang.String pUnitNumber, java.lang.String pGatePIN, java.lang.String pPhoneNumber, java.lang.String pPostal) throws java.rmi.RemoteException {
@@ -1977,22 +1977,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, pSiteID, pAccountID, pFirstName, pLastName, pUnitNumber, pGatePIN, pPhoneNumber, pPostal});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, pSiteID, pAccountID, pFirstName, pLastName, pUnitNumber, pGatePIN, pPhoneNumber, pPostal});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object tenantLogin(java.lang.String pUser, java.lang.String pPIN, long pSiteID, java.lang.String pAccountIDorUnitNumber, java.lang.String pPassword, java.lang.String pSearchBy) throws java.rmi.RemoteException {
@@ -2008,22 +2008,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), pAccountIDorUnitNumber, pPassword, pSearchBy});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), pAccountIDorUnitNumber, pPassword, pSearchBy});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getInsuranceOptions(java.lang.String pUser, java.lang.String pPIN, java.lang.String pSiteID) throws java.rmi.RemoteException {
@@ -2039,22 +2039,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, pSiteID});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, pSiteID});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String getContract(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, long pTenantID, java.lang.String pUnitIDs, java.lang.String pInsuranceIDs, javax.xml.rpc.holders.ByteArrayHolder pFileObj) throws java.rmi.RemoteException {
@@ -2070,29 +2070,29 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pTenantID), pUnitIDs, pInsuranceIDs, pFileObj.value});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pTenantID), pUnitIDs, pInsuranceIDs, pFileObj.value});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            java.util.Map _output;
-            _output = _call.getOutputParams();
-            try {
-                pFileObj.value = (byte[]) _output.get(new javax.xml.namespace.QName("", "pFileObj"));
-            } catch (java.lang.Exception _exception) {
-                pFileObj.value = (byte[]) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "pFileObj")), byte[].class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                java.util.Map _output;
+                _output = _call.getOutputParams();
+                try {
+                    pFileObj.value = (byte[]) _output.get(new javax.xml.namespace.QName("", "pFileObj"));
+                } catch (java.lang.Exception _exception) {
+                    pFileObj.value = (byte[]) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "pFileObj")), byte[].class);
+                }
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
-            }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getMerchandiseCost(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pMerchandiseId, short pQuantity) throws java.rmi.RemoteException {
@@ -2108,22 +2108,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pMerchandiseId, new java.lang.Short(pQuantity)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pMerchandiseId, new java.lang.Short(pQuantity)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String sellMerchandise(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pCCNumOrABA, java.lang.String pCCNameOnCardOrCheckingAccountNum, java.lang.String pCCExpirationMonthOrAccountName, java.lang.String pCCExpirationYear, java.lang.String pCCZipCode, java.lang.String pMerchandiseId, java.lang.String pQuantity, java.lang.String pPaymentString, java.lang.String pPayMethod) throws java.rmi.RemoteException {
@@ -2139,22 +2139,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pMerchandiseId, pQuantity, pPaymentString, pPayMethod});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pMerchandiseId, pQuantity, pPaymentString, pPayMethod});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getInsuranceCost(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pUnitIDs, java.lang.String pInsuranceIDs) throws java.rmi.RemoteException {
@@ -2170,22 +2170,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pInsuranceIDs});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pInsuranceIDs});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String sellInsurance(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pUnitIDs, java.lang.String pInsuranceIDs, java.lang.String pPaymentString, java.lang.String pCCNumOrABA, java.lang.String pCCNameOnCardOrCheckingAccountNum, java.lang.String pCCExpirationMonthOrAccountName, java.lang.String pCCExpirationYear, java.lang.String pCCZipCode, java.lang.String pPayMethod) throws java.rmi.RemoteException {
@@ -2201,22 +2201,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pInsuranceIDs, pPaymentString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pInsuranceIDs, pPaymentString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getReservation(java.lang.String pUser, java.lang.String pPIN, long pSiteID, java.lang.String pReservationID) throws java.rmi.RemoteException {
@@ -2232,22 +2232,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), pReservationID});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), pReservationID});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String updateAutoPay(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pUnitIDs, java.lang.String pCCNumOrABA, java.lang.String pCheckingAccountNum, java.lang.String pCCExpirationMonth, java.lang.String pCCExpirationYear, java.lang.String pAccountHolderName, java.lang.String pStreet, java.lang.String pCity, java.lang.String pState, java.lang.String pZip, java.lang.String pEmail, java.lang.String pDriversLicenseID, java.lang.String pCCorACH, java.lang.String pActive) throws java.rmi.RemoteException {
@@ -2263,22 +2263,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pCCNumOrABA, pCheckingAccountNum, pCCExpirationMonth, pCCExpirationYear, pAccountHolderName, pStreet, pCity, pState, pZip, pEmail, pDriversLicenseID, pCCorACH, pActive});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs, pCCNumOrABA, pCheckingAccountNum, pCCExpirationMonth, pCCExpirationYear, pAccountHolderName, pStreet, pCity, pState, pZip, pEmail, pDriversLicenseID, pCCorACH, pActive});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getAutopayInf(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pUnitIDs) throws java.rmi.RemoteException {
@@ -2294,22 +2294,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitIDs});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getAfterMoveInPromotions(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pUnitID) throws java.rmi.RemoteException {
@@ -2325,22 +2325,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitID});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pUnitID});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getPTDChangeCharges(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, java.lang.String pDesiredPTD) throws java.rmi.RemoteException {
@@ -2356,22 +2356,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pDesiredPTD});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), pDesiredPTD});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getMoveOutCost(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, long pUnitID) throws java.rmi.RemoteException {
@@ -2387,22 +2387,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pUnitID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pUnitID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int doMoveOut(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, long pUnitID, java.lang.String pProcString, java.lang.String pCCNumOrABA, java.lang.String pCCNameOnCardOrCheckingAccountNum, java.lang.String pCCExpirationMonthOrAccountName, java.lang.String pCCExpirationYear, java.lang.String pCCZipCode, java.lang.String pPayMethod) throws java.rmi.RemoteException {
@@ -2418,22 +2418,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pUnitID), pProcString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pUnitID), pProcString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.Object getUnitTransferCharges(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, long pCurrentUnitID, long pNewUnitID) throws java.rmi.RemoteException {
@@ -2449,22 +2449,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pCurrentUnitID), new java.lang.Double(pNewUnitID)});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pCurrentUnitID), new java.lang.Double(pNewUnitID)});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.Object) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.Object) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.Object) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.Object.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public int doUnitTransfer(java.lang.String pUser, java.lang.String pPIN, long pSiteID, long pAccountID, long pCurrentUnitID, long pNewUnitID, java.lang.String pProcString, java.lang.String pCCNumOrABA, java.lang.String pCCNameOnCardOrCheckingAccountNum, java.lang.String pCCExpirationMonthOrAccountName, java.lang.String pCCExpirationYear, java.lang.String pCCZipCode, java.lang.String pPayMethod) throws java.rmi.RemoteException {
@@ -2480,22 +2480,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pCurrentUnitID), new java.lang.Double(pNewUnitID), pProcString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{pUser, pPIN, new java.lang.Double(pSiteID), new java.lang.Double(pAccountID), new java.lang.Double(pCurrentUnitID), new java.lang.Double(pNewUnitID), pProcString, pCCNumOrABA, pCCNameOnCardOrCheckingAccountNum, pCCExpirationMonthOrAccountName, pCCExpirationYear, pCCZipCode, pPayMethod});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Integer) _resp).intValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return ((java.lang.Integer) _resp).intValue();
+                } catch (java.lang.Exception _exception) {
+                    return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
     public java.lang.String TEST() throws java.rmi.RemoteException {
@@ -2511,22 +2511,22 @@ public class CsKioskSoapBindingStub extends org.apache.axis.client.Stub implemen
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+        try {
+            java.lang.Object _resp = _call.invoke(new java.lang.Object[]{});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (java.lang.String) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            if (_resp instanceof java.rmi.RemoteException) {
+                throw (java.rmi.RemoteException) _resp;
+            } else {
+                extractAttachments(_call);
+                try {
+                    return (java.lang.String) _resp;
+                } catch (java.lang.Exception _exception) {
+                    return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                }
             }
+        } catch (org.apache.axis.AxisFault axisFaultException) {
+            throw axisFaultException;
         }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
     }
 
 }

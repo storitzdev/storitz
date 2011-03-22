@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ScheduledFee complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ScheduledFee">
  *   &lt;complexContent>
@@ -31,19 +30,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ScheduledFee", propOrder = {
-    "orgFeeObjectId",
-    "feeObjectId",
-    "refType",
-    "baseFeeType",
-    "feeAmount",
-    "feeDescription",
-    "taxable",
-    "active"
+        "orgFeeObjectId",
+        "feeObjectId",
+        "refType",
+        "baseFeeType",
+        "feeAmount",
+        "feeDescription",
+        "taxable",
+        "active"
 })
 public class ScheduledFee {
 
@@ -66,11 +63,9 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the orgFeeObjectId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgFeeObjectId() {
         return orgFeeObjectId;
@@ -78,11 +73,9 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the orgFeeObjectId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgFeeObjectId(Long value) {
         this.orgFeeObjectId = value;
@@ -90,11 +83,9 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the feeObjectId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getFeeObjectId() {
         return feeObjectId;
@@ -102,11 +93,9 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the feeObjectId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setFeeObjectId(Long value) {
         this.feeObjectId = value;
@@ -114,7 +103,6 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the refType property.
-     * 
      */
     public int getRefType() {
         return refType;
@@ -122,7 +110,6 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the refType property.
-     * 
      */
     public void setRefType(int value) {
         this.refType = value;
@@ -130,7 +117,6 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the baseFeeType property.
-     * 
      */
     public int getBaseFeeType() {
         return baseFeeType;
@@ -138,7 +124,6 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the baseFeeType property.
-     * 
      */
     public void setBaseFeeType(int value) {
         this.baseFeeType = value;
@@ -146,11 +131,9 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the feeAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFeeAmount() {
         return feeAmount;
@@ -158,11 +141,9 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the feeAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFeeAmount(BigDecimal value) {
         this.feeAmount = value;
@@ -170,11 +151,9 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the feeDescription property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFeeDescription() {
         return feeDescription;
@@ -182,11 +161,9 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the feeDescription property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFeeDescription(String value) {
         this.feeDescription = value;
@@ -194,11 +171,9 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the taxable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTaxable() {
         return taxable;
@@ -206,11 +181,9 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the taxable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTaxable(Boolean value) {
         this.taxable = value;
@@ -218,11 +191,9 @@ public class ScheduledFee {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isActive() {
         return active;
@@ -230,11 +201,9 @@ public class ScheduledFee {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setActive(Boolean value) {
         this.active = value;

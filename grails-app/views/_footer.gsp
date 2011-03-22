@@ -12,7 +12,8 @@
         <p class="footer"><g:link class="footer small" controller="static" action="guarantee">Storitz Guarantee</g:link></p>
       </div>
       <div class="left" style="margin: 2em 5em;">
-        <p class="footer"><a href="http://blog.storitz.com" class="footer small" onclick="window.open(this.href,'_blank');return false;">Storitz Blog</a></p>
+        <p class="footer"><a href="http://blog.storitz.com" class="footer small" onclick="window.open(this.href, '_blank');
+        return false;">Storitz Blog</a></p>
         <p class="footer"><g:link class="footer small" controller="pressRelease" action="pressRoom">Press Room</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="privacy">Privacy Policy</g:link></p>
         <p class="footer"><g:link class="footer small" controller="static" action="terms">Terms of Use</g:link></p>
@@ -27,7 +28,7 @@
         <a href="http://twitter.com/Storitzdotcom"><storitz:image style="border: none;" src="icn-twitter.png" width="33" height="33" alt="Storitz on Twitter"/></a>
         <a href="http://www.facebook.com/storitz"><storitz:image style="border: none;" src="icn-facebook.png" width="33" height="33" alt="Storitz on FaceBook"/></a>
         <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><storitz:image style="border: none;" src="icn-stumbleupon.png" width="33" height="33" alt="Storitz on StumbleUpon"/></a>
-        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" ><storitz:image style="border: none;" src="icn-linkedin.png" width="33" height="33" alt="Storitz on LinkedIn"/></a>
+        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge"><storitz:image style="border: none;" src="icn-linkedin.png" width="33" height="33" alt="Storitz on LinkedIn"/></a>
         <a href="http://www.youtube.com/user/Storitzdotcom"><storitz:image style="border: none;" src="icn-youtube.png" width="33" height="33" alt="Storitz Youtube Channel"/></a>
       </div>
     </div>
@@ -36,27 +37,32 @@
         <span id="siteseal"><script type="text/javascript" src="https://seal.starfieldtech.com/getSeal?sealID=4GPUFa2QNzQrd6vGDkVGVQuPb8epKRwk1rH51Cnle8We0usacEm"></script></span>
       </div>
       <div style="margin: 2.5em 1em;">
-        <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal">  <script type="text/javascript">var ANS_customer_id="5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>  <a href="#" id="AuthorizeNetText" onclick="window.open('http://www.authorize.net/','_blank');return false;">Online Payments</a> </div>
+        <!-- (c) 2005, 2010. Authorize.Net is a registered trademark of CyberSource Corporation -->  <div class="AuthorizeNetSeal"><script type="text/javascript">var ANS_customer_id = "5e252e19-e1d0-4b6d-98fa-c7da9f104bac";</script>  <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js"></script>  <a href="#" id="AuthorizeNetText" onclick="window.open('http://www.authorize.net/', '_blank');
+      return false;">Online Payments</a></div>
       </div>
       <div style="margin: 2.5em 1em;">
-        <a href='#' onclick="window.open('http://www.selfstorage.org/','_blank');return false;"><storitz:image style="border:none;" src="logo-ssa.png" width="111" height="58" alt="SSA Logo"/></a>
+        <a href='#' onclick="window.open('http://www.selfstorage.org/', '_blank');
+        return false;"><storitz:image style="border:none;" src="logo-ssa.png" width="111" height="58" alt="SSA Logo"/></a>
       </div>
     </div>
   </div>
 </div>
 <p:dependantJavascript>
-<script type="text/javascript">
+  <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-16012579-1']);
-  _gaq.push(['_setDomainName', '.storitz.com']);
-  _gaq.push(['_trackPageview']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16012579-1']);
+    _gaq.push(['_setDomainName', '.storitz.com']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
 
-</script>
+  </script>
 </p:dependantJavascript>

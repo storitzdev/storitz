@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for ACT_PHONES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACT_PHONES">
  *   &lt;complexContent>
@@ -33,24 +28,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACT_PHONES", propOrder = {
-    "phoneid",
-    "contactid",
-    "phonetype",
-    "phone",
-    "active",
-    "created",
-    "updated",
-    "createdby",
-    "updatedby"
+        "phoneid",
+        "contactid",
+        "phonetype",
+        "phone",
+        "active",
+        "created",
+        "updated",
+        "createdby",
+        "updatedby"
 })
 public class ACTPHONES
-    extends BaseEntityOfCollectionACTPHONESColumnIndexes
-{
+        extends BaseEntityOfCollectionACTPHONESColumnIndexes {
 
     @XmlElement(name = "PHONE_ID")
     protected long phoneid;
@@ -75,7 +67,6 @@ public class ACTPHONES
 
     /**
      * Gets the value of the phoneid property.
-     * 
      */
     public long getPHONEID() {
         return phoneid;
@@ -83,7 +74,6 @@ public class ACTPHONES
 
     /**
      * Sets the value of the phoneid property.
-     * 
      */
     public void setPHONEID(long value) {
         this.phoneid = value;
@@ -91,7 +81,6 @@ public class ACTPHONES
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -99,7 +88,6 @@ public class ACTPHONES
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -107,7 +95,6 @@ public class ACTPHONES
 
     /**
      * Gets the value of the phonetype property.
-     * 
      */
     public int getPHONETYPE() {
         return phonetype;
@@ -115,7 +102,6 @@ public class ACTPHONES
 
     /**
      * Sets the value of the phonetype property.
-     * 
      */
     public void setPHONETYPE(int value) {
         this.phonetype = value;
@@ -123,11 +109,9 @@ public class ACTPHONES
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONE() {
         return phone;
@@ -135,11 +119,9 @@ public class ACTPHONES
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONE(String value) {
         this.phone = value;
@@ -147,7 +129,6 @@ public class ACTPHONES
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -155,7 +136,6 @@ public class ACTPHONES
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -163,11 +143,9 @@ public class ACTPHONES
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -175,11 +153,9 @@ public class ACTPHONES
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -187,11 +163,9 @@ public class ACTPHONES
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -199,11 +173,9 @@ public class ACTPHONES
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;
@@ -211,7 +183,6 @@ public class ACTPHONES
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -219,7 +190,6 @@ public class ACTPHONES
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -227,7 +197,6 @@ public class ACTPHONES
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -235,7 +204,6 @@ public class ACTPHONES
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

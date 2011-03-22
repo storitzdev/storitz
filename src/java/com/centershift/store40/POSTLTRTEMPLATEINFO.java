@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for POST_LTR_TEMPLATE_INFO complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="POST_LTR_TEMPLATE_INFO">
  *   &lt;complexContent>
@@ -39,30 +34,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "POST_LTR_TEMPLATE_INFO", propOrder = {
-    "ltrtypeid",
-    "ltrtypegroup",
-    "groupmeaning",
-    "ltrname",
-    "currversion",
-    "orgid",
-    "siteid",
-    "printspecial",
-    "printmeaning",
-    "status",
-    "statusmeaning",
-    "whocreated",
-    "created",
-    "whoupdated",
-    "updated"
+        "ltrtypeid",
+        "ltrtypegroup",
+        "groupmeaning",
+        "ltrname",
+        "currversion",
+        "orgid",
+        "siteid",
+        "printspecial",
+        "printmeaning",
+        "status",
+        "statusmeaning",
+        "whocreated",
+        "created",
+        "whoupdated",
+        "updated"
 })
 public class POSTLTRTEMPLATEINFO
-    extends BaseEntityOfCollectionPOSTLTRTEMPLATEINFOColumnIndexes
-{
+        extends BaseEntityOfCollectionPOSTLTRTEMPLATEINFOColumnIndexes {
 
     @XmlElement(name = "LTR_TYPE_ID")
     protected long ltrtypeid;
@@ -99,7 +91,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the ltrtypeid property.
-     * 
      */
     public long getLTRTYPEID() {
         return ltrtypeid;
@@ -107,7 +98,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the ltrtypeid property.
-     * 
      */
     public void setLTRTYPEID(long value) {
         this.ltrtypeid = value;
@@ -115,7 +105,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the ltrtypegroup property.
-     * 
      */
     public int getLTRTYPEGROUP() {
         return ltrtypegroup;
@@ -123,7 +112,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the ltrtypegroup property.
-     * 
      */
     public void setLTRTYPEGROUP(int value) {
         this.ltrtypegroup = value;
@@ -131,11 +119,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the groupmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGROUPMEANING() {
         return groupmeaning;
@@ -143,11 +129,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the groupmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGROUPMEANING(String value) {
         this.groupmeaning = value;
@@ -155,11 +139,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the ltrname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLTRNAME() {
         return ltrname;
@@ -167,11 +149,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the ltrname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLTRNAME(String value) {
         this.ltrname = value;
@@ -179,7 +159,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the currversion property.
-     * 
      */
     public int getCURRVERSION() {
         return currversion;
@@ -187,7 +166,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the currversion property.
-     * 
      */
     public void setCURRVERSION(int value) {
         this.currversion = value;
@@ -195,7 +173,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -203,7 +180,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -211,11 +187,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -223,11 +197,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -235,7 +207,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the printspecial property.
-     * 
      */
     public int getPRINTSPECIAL() {
         return printspecial;
@@ -243,7 +214,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the printspecial property.
-     * 
      */
     public void setPRINTSPECIAL(int value) {
         this.printspecial = value;
@@ -251,11 +221,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the printmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPRINTMEANING() {
         return printmeaning;
@@ -263,11 +231,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the printmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPRINTMEANING(String value) {
         this.printmeaning = value;
@@ -275,7 +241,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -283,7 +248,6 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -291,11 +255,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the statusmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATUSMEANING() {
         return statusmeaning;
@@ -303,11 +265,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the statusmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATUSMEANING(String value) {
         this.statusmeaning = value;
@@ -315,11 +275,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the whocreated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getWHOCREATED() {
         return whocreated;
@@ -327,11 +285,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the whocreated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWHOCREATED(String value) {
         this.whocreated = value;
@@ -339,11 +295,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -351,11 +305,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -363,11 +315,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the whoupdated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getWHOUPDATED() {
         return whoupdated;
@@ -375,11 +325,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the whoupdated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWHOUPDATED(String value) {
         this.whoupdated = value;
@@ -387,11 +335,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -399,11 +345,9 @@ public class POSTLTRTEMPLATEINFO
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;

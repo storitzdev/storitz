@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for ACCT_NOTES_ALL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACCT_NOTES_ALL">
  *   &lt;complexContent>
@@ -40,31 +35,28 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACCT_NOTES_ALL", propOrder = {
-    "noteid",
-    "acctid",
-    "rentalid",
-    "typeval",
-    "notetype",
-    "priorityval",
-    "priority",
-    "createdid",
-    "createdby",
-    "note",
-    "subject",
-    "created",
-    "expires",
-    "acctname",
-    "unitid",
-    "rentalstatus"
+        "noteid",
+        "acctid",
+        "rentalid",
+        "typeval",
+        "notetype",
+        "priorityval",
+        "priority",
+        "createdid",
+        "createdby",
+        "note",
+        "subject",
+        "created",
+        "expires",
+        "acctname",
+        "unitid",
+        "rentalstatus"
 })
 public class ACCTNOTESALL
-    extends BaseEntityOfCollectionACCTNOTESALLColumnIndexes
-{
+        extends BaseEntityOfCollectionACCTNOTESALLColumnIndexes {
 
     @XmlElement(name = "NOTE_ID")
     protected long noteid;
@@ -103,7 +95,6 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the noteid property.
-     * 
      */
     public long getNOTEID() {
         return noteid;
@@ -111,7 +102,6 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the noteid property.
-     * 
      */
     public void setNOTEID(long value) {
         this.noteid = value;
@@ -119,7 +109,6 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -127,7 +116,6 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -135,11 +123,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -147,11 +133,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -159,7 +143,6 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the typeval property.
-     * 
      */
     public int getTYPEVAL() {
         return typeval;
@@ -167,7 +150,6 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the typeval property.
-     * 
      */
     public void setTYPEVAL(int value) {
         this.typeval = value;
@@ -175,11 +157,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the notetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTETYPE() {
         return notetype;
@@ -187,11 +167,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the notetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTETYPE(String value) {
         this.notetype = value;
@@ -199,7 +177,6 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the priorityval property.
-     * 
      */
     public int getPRIORITYVAL() {
         return priorityval;
@@ -207,7 +184,6 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the priorityval property.
-     * 
      */
     public void setPRIORITYVAL(int value) {
         this.priorityval = value;
@@ -215,11 +191,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the priority property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPRIORITY() {
         return priority;
@@ -227,11 +201,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the priority property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPRIORITY(String value) {
         this.priority = value;
@@ -239,7 +211,6 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the createdid property.
-     * 
      */
     public long getCREATEDID() {
         return createdid;
@@ -247,7 +218,6 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the createdid property.
-     * 
      */
     public void setCREATEDID(long value) {
         this.createdid = value;
@@ -255,11 +225,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the createdby property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREATEDBY() {
         return createdby;
@@ -267,11 +235,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the createdby property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREATEDBY(String value) {
         this.createdby = value;
@@ -279,11 +245,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the note property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTE() {
         return note;
@@ -291,11 +255,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the note property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTE(String value) {
         this.note = value;
@@ -303,11 +265,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the subject property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSUBJECT() {
         return subject;
@@ -315,11 +275,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the subject property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSUBJECT(String value) {
         this.subject = value;
@@ -327,11 +285,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -339,11 +295,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -351,11 +305,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the expires property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEXPIRES() {
         return expires;
@@ -363,11 +315,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the expires property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEXPIRES(XMLGregorianCalendar value) {
         this.expires = value;
@@ -375,11 +325,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -387,11 +335,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -399,11 +345,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the unitid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITID() {
         return unitid;
@@ -411,11 +355,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the unitid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITID(String value) {
         this.unitid = value;
@@ -423,11 +365,9 @@ public class ACCTNOTESALL
 
     /**
      * Gets the value of the rentalstatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getRENTALSTATUS() {
         return rentalstatus;
@@ -435,11 +375,9 @@ public class ACCTNOTESALL
 
     /**
      * Sets the value of the rentalstatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setRENTALSTATUS(Integer value) {
         this.rentalstatus = value;

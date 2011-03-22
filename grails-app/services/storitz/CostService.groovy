@@ -5,17 +5,17 @@ import com.storitz.*
 
 class CostService {
 
-    boolean transactional = false
+  boolean transactional = false
 
-    def siteLinkService
-    def CShiftService
-    def quikStorService
-    def exrsService
-    def usiService
-    def CShift4Service
+  def siteLinkService
+  def CShiftService
+  def quikStorService
+  def exrsService
+  def usiService
+  def CShift4Service
 
   def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
-    switch(site.source) {
+    switch (site.source) {
 
       case "SL":
         return siteLinkService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
@@ -39,7 +39,7 @@ class CostService {
   }
 
   def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    switch(site.source) {
+    switch (site.source) {
 
       case "SL":
         return siteLinkService.calculateTotals(site, unit, promo, ins, moveInDate)
@@ -67,7 +67,7 @@ class CostService {
 
   def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
 
-    switch(site.source) {
+    switch (site.source) {
 
       case "SL":
         return siteLinkService.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
@@ -95,7 +95,7 @@ class CostService {
   def calculateCommission(BigDecimal monthly, Feed feed) {
 
     CommissionSchedule schedule = feed.commissionSchedule
-    Commission ctype = schedule.entries.find{ it.lowerBound < monthly && it.upperBound >= monthly}
+    Commission ctype = schedule.entries.find { it.lowerBound < monthly && it.upperBound >= monthly}
 
     if (!ctype) return monthly * 0.25
 

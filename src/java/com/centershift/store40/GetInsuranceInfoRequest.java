@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for GetInsuranceInfo_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetInsuranceInfo_Request">
  *   &lt;complexContent>
@@ -27,14 +22,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetInsuranceInfo_Request", propOrder = {
-    "siteID",
-    "claimDate",
-    "accountOrContactName"
+        "siteID",
+        "claimDate",
+        "accountOrContactName"
 })
 public class GetInsuranceInfoRequest {
 
@@ -48,7 +41,6 @@ public class GetInsuranceInfoRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -56,7 +48,6 @@ public class GetInsuranceInfoRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -64,11 +55,9 @@ public class GetInsuranceInfoRequest {
 
     /**
      * Gets the value of the claimDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getClaimDate() {
         return claimDate;
@@ -76,11 +65,9 @@ public class GetInsuranceInfoRequest {
 
     /**
      * Sets the value of the claimDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setClaimDate(XMLGregorianCalendar value) {
         this.claimDate = value;
@@ -88,11 +75,9 @@ public class GetInsuranceInfoRequest {
 
     /**
      * Gets the value of the accountOrContactName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountOrContactName() {
         return accountOrContactName;
@@ -100,11 +85,9 @@ public class GetInsuranceInfoRequest {
 
     /**
      * Sets the value of the accountOrContactName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountOrContactName(String value) {
         this.accountOrContactName = value;

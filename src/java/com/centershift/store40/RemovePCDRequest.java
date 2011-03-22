@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for RemovePCD_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RemovePCD_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RemovePCD_Request", propOrder = {
-    "siteID",
-    "assessmentID"
+        "siteID",
+        "assessmentID"
 })
 public class RemovePCDRequest {
 
@@ -41,7 +38,6 @@ public class RemovePCDRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class RemovePCDRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,7 +52,6 @@ public class RemovePCDRequest {
 
     /**
      * Gets the value of the assessmentID property.
-     * 
      */
     public long getAssessmentID() {
         return assessmentID;
@@ -65,7 +59,6 @@ public class RemovePCDRequest {
 
     /**
      * Sets the value of the assessmentID property.
-     * 
      */
     public void setAssessmentID(long value) {
         this.assessmentID = value;

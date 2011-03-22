@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for UpdateRental_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateRental_Request">
  *   &lt;complexContent>
@@ -27,14 +22,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateRental_Request", propOrder = {
-    "rentalId",
-    "moveOutDate",
-    "createTask"
+        "rentalId",
+        "moveOutDate",
+        "createTask"
 })
 public class UpdateRentalRequest {
 
@@ -48,11 +41,9 @@ public class UpdateRentalRequest {
 
     /**
      * Gets the value of the rentalId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalId() {
         return rentalId;
@@ -60,11 +51,9 @@ public class UpdateRentalRequest {
 
     /**
      * Sets the value of the rentalId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalId(Long value) {
         this.rentalId = value;
@@ -72,11 +61,9 @@ public class UpdateRentalRequest {
 
     /**
      * Gets the value of the moveOutDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMoveOutDate() {
         return moveOutDate;
@@ -84,11 +71,9 @@ public class UpdateRentalRequest {
 
     /**
      * Sets the value of the moveOutDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMoveOutDate(XMLGregorianCalendar value) {
         this.moveOutDate = value;
@@ -96,7 +81,6 @@ public class UpdateRentalRequest {
 
     /**
      * Gets the value of the createTask property.
-     * 
      */
     public boolean isCreateTask() {
         return createTask;
@@ -104,7 +88,6 @@ public class UpdateRentalRequest {
 
     /**
      * Sets the value of the createTask property.
-     * 
      */
     public void setCreateTask(boolean value) {
         this.createTask = value;

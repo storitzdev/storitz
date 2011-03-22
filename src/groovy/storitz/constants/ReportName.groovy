@@ -31,9 +31,9 @@ public enum ReportName {
   }
 
   static public ReportName getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return ReportName.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return ReportName.valueOf(value)
+    return ret
+  }
 
 }

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetRetailReceiptItems_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetRetailReceiptItems_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetRetailReceiptItems_Request", propOrder = {
-    "siteID",
-    "transactionID"
+        "siteID",
+        "transactionID"
 })
 public class GetRetailReceiptItemsRequest {
 
@@ -41,7 +38,6 @@ public class GetRetailReceiptItemsRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class GetRetailReceiptItemsRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,7 +52,6 @@ public class GetRetailReceiptItemsRequest {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -65,7 +59,6 @@ public class GetRetailReceiptItemsRequest {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;

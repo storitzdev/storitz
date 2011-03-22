@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PdfFilePath_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="PdfFilePath_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PdfFilePath_Response", propOrder = {
-    "tntPdfFilePath"
+        "tntPdfFilePath"
 })
 public class PdfFilePathResponse {
 
@@ -37,11 +34,9 @@ public class PdfFilePathResponse {
 
     /**
      * Gets the value of the tntPdfFilePath property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTntPdfFilePath() {
         return tntPdfFilePath;
@@ -49,11 +44,9 @@ public class PdfFilePathResponse {
 
     /**
      * Sets the value of the tntPdfFilePath property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTntPdfFilePath(String value) {
         this.tntPdfFilePath = value;

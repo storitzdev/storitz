@@ -91,7 +91,7 @@ public enum Country {
   GAMBIA("GM", "Gambia"),
   GEORGIA("GE", "Georgia"),
   GERMANY("DE", "Germany"),
-  GHANA ("GH", "Ghana"),
+  GHANA("GH", "Ghana"),
   GIBRALTAR("GI", "Gibraltar"),
   GREECE("GR", "Greece"),
   GREENLAND("GL", "Greenland"),
@@ -102,7 +102,7 @@ public enum Country {
   GUERNSEY("GG", "Guernsey"),
   GUINEA("GN", "Guinea"),
   GUINEA_BISSAU("GW", "Guinea-Bissau"),
-  GUYANA ("GY", "Guyana"),
+  GUYANA("GY", "Guyana"),
   HAITI("HT", "Haiti"),
   HEARD_ISLAND_AND_MCDONALD_ISLANDS("HM", "Heard and McDonald Islands"),
   HOLY_SEE("VA", "Vatican City"),
@@ -309,7 +309,7 @@ public enum Country {
   }
 
   public static Country fromText(String key) {
-    def ret = list().find{ it.getKey() == key }
+    def ret = list().find { it.getKey() == key }
     if (!ret) return Country.valueOf(key)
     return ret
   }

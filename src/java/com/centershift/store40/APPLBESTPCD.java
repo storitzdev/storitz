@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for APPL_BEST_PCD complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APPL_BEST_PCD">
  *   &lt;complexContent>
@@ -59,49 +54,46 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APPL_BEST_PCD", propOrder = {
-    "limittypeval",
-    "delinquencylimit",
-    "pcdid",
-    "orgid",
-    "pcdname",
-    "pcddesc",
-    "pcdrevcat",
-    "pcdrevcatval",
-    "pcdclass",
-    "pcdclassval",
-    "allsites",
-    "starts",
-    "expires",
-    "pcdamtmax",
-    "pcdamtmin",
-    "pcdamtdefault",
-    "pcdperiods",
-    "amttype",
-    "amttypeval",
-    "couponcode",
-    "barcode",
-    "transferable",
-    "paymentrequired",
-    "losreq",
-    "losprepaid",
-    "lospenalty",
-    "lospenaltytype",
-    "lospenaltytypeval",
-    "creditlevel",
-    "creditlevelval",
-    "pcdpriority",
-    "limitaction",
-    "limitactionval",
-    "limittype"
+        "limittypeval",
+        "delinquencylimit",
+        "pcdid",
+        "orgid",
+        "pcdname",
+        "pcddesc",
+        "pcdrevcat",
+        "pcdrevcatval",
+        "pcdclass",
+        "pcdclassval",
+        "allsites",
+        "starts",
+        "expires",
+        "pcdamtmax",
+        "pcdamtmin",
+        "pcdamtdefault",
+        "pcdperiods",
+        "amttype",
+        "amttypeval",
+        "couponcode",
+        "barcode",
+        "transferable",
+        "paymentrequired",
+        "losreq",
+        "losprepaid",
+        "lospenalty",
+        "lospenaltytype",
+        "lospenaltytypeval",
+        "creditlevel",
+        "creditlevelval",
+        "pcdpriority",
+        "limitaction",
+        "limitactionval",
+        "limittype"
 })
 public class APPLBESTPCD
-    extends BaseEntityOfCollectionAPPLBESTPCDColumnIndexes
-{
+        extends BaseEntityOfCollectionAPPLBESTPCDColumnIndexes {
 
     @XmlElement(name = "LIMIT_TYPE_VAL")
     protected String limittypeval;
@@ -176,11 +168,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the limittypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLIMITTYPEVAL() {
         return limittypeval;
@@ -188,11 +178,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the limittypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLIMITTYPEVAL(String value) {
         this.limittypeval = value;
@@ -200,7 +188,6 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the delinquencylimit property.
-     * 
      */
     public int getDELINQUENCYLIMIT() {
         return delinquencylimit;
@@ -208,7 +195,6 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the delinquencylimit property.
-     * 
      */
     public void setDELINQUENCYLIMIT(int value) {
         this.delinquencylimit = value;
@@ -216,7 +202,6 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdid property.
-     * 
      */
     public long getPCDID() {
         return pcdid;
@@ -224,7 +209,6 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdid property.
-     * 
      */
     public void setPCDID(long value) {
         this.pcdid = value;
@@ -232,7 +216,6 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -240,7 +223,6 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -248,11 +230,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDNAME() {
         return pcdname;
@@ -260,11 +240,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDNAME(String value) {
         this.pcdname = value;
@@ -272,11 +250,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcddesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDDESC() {
         return pcddesc;
@@ -284,11 +260,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcddesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDDESC(String value) {
         this.pcddesc = value;
@@ -296,11 +270,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdrevcat property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDREVCAT() {
         return pcdrevcat;
@@ -308,11 +280,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdrevcat property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDREVCAT(Integer value) {
         this.pcdrevcat = value;
@@ -320,11 +290,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdrevcatval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDREVCATVAL() {
         return pcdrevcatval;
@@ -332,11 +300,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdrevcatval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDREVCATVAL(String value) {
         this.pcdrevcatval = value;
@@ -344,11 +310,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDCLASS() {
         return pcdclass;
@@ -356,11 +320,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDCLASS(Integer value) {
         this.pcdclass = value;
@@ -368,11 +330,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdclassval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDCLASSVAL() {
         return pcdclassval;
@@ -380,11 +340,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdclassval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDCLASSVAL(String value) {
         this.pcdclassval = value;
@@ -392,11 +350,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the allsites property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getALLSITES() {
         return allsites;
@@ -404,11 +360,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the allsites property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setALLSITES(String value) {
         this.allsites = value;
@@ -416,11 +370,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the starts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTS() {
         return starts;
@@ -428,11 +380,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the starts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTS(XMLGregorianCalendar value) {
         this.starts = value;
@@ -440,11 +390,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the expires property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEXPIRES() {
         return expires;
@@ -452,11 +400,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the expires property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEXPIRES(XMLGregorianCalendar value) {
         this.expires = value;
@@ -464,11 +410,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdamtmax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMAX() {
         return pcdamtmax;
@@ -476,11 +420,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdamtmax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMAX(BigDecimal value) {
         this.pcdamtmax = value;
@@ -488,11 +430,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdamtmin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMIN() {
         return pcdamtmin;
@@ -500,11 +440,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdamtmin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMIN(BigDecimal value) {
         this.pcdamtmin = value;
@@ -512,11 +450,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdamtdefault property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTDEFAULT() {
         return pcdamtdefault;
@@ -524,11 +460,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdamtdefault property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTDEFAULT(BigDecimal value) {
         this.pcdamtdefault = value;
@@ -536,7 +470,6 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdperiods property.
-     * 
      */
     public int getPCDPERIODS() {
         return pcdperiods;
@@ -544,7 +477,6 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdperiods property.
-     * 
      */
     public void setPCDPERIODS(int value) {
         this.pcdperiods = value;
@@ -552,11 +484,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the amttype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getAMTTYPE() {
         return amttype;
@@ -564,11 +494,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the amttype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setAMTTYPE(Integer value) {
         this.amttype = value;
@@ -576,11 +504,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the amttypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAMTTYPEVAL() {
         return amttypeval;
@@ -588,11 +514,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the amttypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAMTTYPEVAL(String value) {
         this.amttypeval = value;
@@ -600,11 +524,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the couponcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOUPONCODE() {
         return couponcode;
@@ -612,11 +534,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the couponcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOUPONCODE(String value) {
         this.couponcode = value;
@@ -624,11 +544,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the barcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getBARCODE() {
         return barcode;
@@ -636,11 +554,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the barcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setBARCODE(Long value) {
         this.barcode = value;
@@ -648,11 +564,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the transferable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTRANSFERABLE() {
         return transferable;
@@ -660,11 +574,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the transferable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTRANSFERABLE(String value) {
         this.transferable = value;
@@ -672,11 +584,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the paymentrequired property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPAYMENTREQUIRED() {
         return paymentrequired;
@@ -684,11 +594,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the paymentrequired property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPAYMENTREQUIRED(String value) {
         this.paymentrequired = value;
@@ -696,11 +604,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the losreq property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLOSREQ() {
         return losreq;
@@ -708,11 +614,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the losreq property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLOSREQ(BigDecimal value) {
         this.losreq = value;
@@ -720,11 +624,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the losprepaid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLOSPREPAID() {
         return losprepaid;
@@ -732,11 +634,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the losprepaid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLOSPREPAID(BigDecimal value) {
         this.losprepaid = value;
@@ -744,11 +644,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the lospenalty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLOSPENALTY() {
         return lospenalty;
@@ -756,11 +654,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the lospenalty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLOSPENALTY(BigDecimal value) {
         this.lospenalty = value;
@@ -768,11 +664,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the lospenaltytype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getLOSPENALTYTYPE() {
         return lospenaltytype;
@@ -780,11 +674,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the lospenaltytype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setLOSPENALTYTYPE(Integer value) {
         this.lospenaltytype = value;
@@ -792,11 +684,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the lospenaltytypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLOSPENALTYTYPEVAL() {
         return lospenaltytypeval;
@@ -804,11 +694,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the lospenaltytypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLOSPENALTYTYPEVAL(String value) {
         this.lospenaltytypeval = value;
@@ -816,11 +704,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the creditlevel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCREDITLEVEL() {
         return creditlevel;
@@ -828,11 +714,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the creditlevel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCREDITLEVEL(Integer value) {
         this.creditlevel = value;
@@ -840,11 +724,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the creditlevelval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREDITLEVELVAL() {
         return creditlevelval;
@@ -852,11 +734,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the creditlevelval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREDITLEVELVAL(String value) {
         this.creditlevelval = value;
@@ -864,11 +744,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the pcdpriority property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDPRIORITY() {
         return pcdpriority;
@@ -876,11 +754,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the pcdpriority property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDPRIORITY(Integer value) {
         this.pcdpriority = value;
@@ -888,11 +764,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the limitaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getLIMITACTION() {
         return limitaction;
@@ -900,11 +774,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the limitaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setLIMITACTION(Integer value) {
         this.limitaction = value;
@@ -912,11 +784,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the limitactionval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLIMITACTIONVAL() {
         return limitactionval;
@@ -924,11 +794,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the limitactionval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLIMITACTIONVAL(String value) {
         this.limitactionval = value;
@@ -936,11 +804,9 @@ public class APPLBESTPCD
 
     /**
      * Gets the value of the limittype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getLIMITTYPE() {
         return limittype;
@@ -948,11 +814,9 @@ public class APPLBESTPCD
 
     /**
      * Sets the value of the limittype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setLIMITTYPE(Integer value) {
         this.limittype = value;

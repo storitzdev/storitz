@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ReturnRetailItems_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ReturnRetailItems_Response">
  *   &lt;complexContent>
@@ -26,14 +25,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReturnRetailItems_Response", propOrder = {
-    "newReturnTransactionID",
-    "refundMessage",
-    "totalRefundAmount"
+        "newReturnTransactionID",
+        "refundMessage",
+        "totalRefundAmount"
 })
 public class ReturnRetailItemsResponse2 {
 
@@ -46,7 +43,6 @@ public class ReturnRetailItemsResponse2 {
 
     /**
      * Gets the value of the newReturnTransactionID property.
-     * 
      */
     public long getNewReturnTransactionID() {
         return newReturnTransactionID;
@@ -54,7 +50,6 @@ public class ReturnRetailItemsResponse2 {
 
     /**
      * Sets the value of the newReturnTransactionID property.
-     * 
      */
     public void setNewReturnTransactionID(long value) {
         this.newReturnTransactionID = value;
@@ -62,11 +57,9 @@ public class ReturnRetailItemsResponse2 {
 
     /**
      * Gets the value of the refundMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRefundMessage() {
         return refundMessage;
@@ -74,11 +67,9 @@ public class ReturnRetailItemsResponse2 {
 
     /**
      * Sets the value of the refundMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRefundMessage(String value) {
         this.refundMessage = value;
@@ -86,11 +77,9 @@ public class ReturnRetailItemsResponse2 {
 
     /**
      * Gets the value of the totalRefundAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalRefundAmount() {
         return totalRefundAmount;
@@ -98,11 +87,9 @@ public class ReturnRetailItemsResponse2 {
 
     /**
      * Sets the value of the totalRefundAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalRefundAmount(BigDecimal value) {
         this.totalRefundAmount = value;

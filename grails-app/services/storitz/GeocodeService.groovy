@@ -1,10 +1,10 @@
 package storitz
 
 import grails.converters.JSON
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import org.bouncycastle.util.encoders.UrlBase64
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class GeocodeService {
 
@@ -53,7 +53,7 @@ class GeocodeService {
     mac.init(secret);
     byte[] digest = mac.doFinal(uri.getBytes());
 
-    String signature =  new String(UrlBase64.encode(digest)).replace('+','-').replace('/','_')
+    String signature = new String(UrlBase64.encode(digest)).replace('+', '-').replace('/', '_')
     return uri + '&signature=' + signature;
   }
 }

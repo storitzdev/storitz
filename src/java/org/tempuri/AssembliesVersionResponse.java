@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "assembliesVersionResult"
+        "assembliesVersionResult"
 })
 @XmlRootElement(name = "AssembliesVersionResponse")
 public class AssembliesVersionResponse {
@@ -39,11 +32,9 @@ public class AssembliesVersionResponse {
 
     /**
      * Gets the value of the assembliesVersionResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAssembliesVersionResult() {
         return assembliesVersionResult;
@@ -51,11 +42,9 @@ public class AssembliesVersionResponse {
 
     /**
      * Sets the value of the assembliesVersionResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAssembliesVersionResult(String value) {
         this.assembliesVersionResult = value;

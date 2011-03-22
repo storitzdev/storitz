@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AddUpdatePCD_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddUpdatePCD_Request">
  *   &lt;complexContent>
@@ -53,39 +48,37 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddUpdatePCD_Request", propOrder = {
-    "orgid",
-    "pcdid",
-    "active",
-    "allsites",
-    "amttype",
-    "barcode",
-    "couponcode",
-    "creditlevel",
-    "delinquencylimit",
-    "expires",
-    "limitaction",
-    "limittype",
-    "losreq",
-    "paymentrequired",
-    "pcdamtdefault",
-    "pcdamtmax",
-    "pcdamtmin",
-    "pcdclass",
-    "pcddesc",
-    "pcdname",
-    "pcdperiods",
-    "pcdpriority",
-    "pcdrevcat",
-    "pcdstartperiod",
-    "reasonprompt",
-    "rollover",
-    "starts",
-    "transferable"
+        "orgid",
+        "pcdid",
+        "active",
+        "allsites",
+        "amttype",
+        "barcode",
+        "couponcode",
+        "creditlevel",
+        "delinquencylimit",
+        "expires",
+        "limitaction",
+        "limittype",
+        "losreq",
+        "paymentrequired",
+        "pcdamtdefault",
+        "pcdamtmax",
+        "pcdamtmin",
+        "pcdclass",
+        "pcddesc",
+        "pcdname",
+        "pcdperiods",
+        "pcdpriority",
+        "pcdrevcat",
+        "pcdstartperiod",
+        "reasonprompt",
+        "rollover",
+        "starts",
+        "transferable"
 })
 public class AddUpdatePCDRequest {
 
@@ -150,7 +143,6 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -158,7 +150,6 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -166,11 +157,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPCDID() {
         return pcdid;
@@ -178,11 +167,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPCDID(Long value) {
         this.pcdid = value;
@@ -190,11 +177,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isACTIVE() {
         return active;
@@ -202,11 +187,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setACTIVE(Boolean value) {
         this.active = value;
@@ -214,11 +197,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the allsites property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isALLSITES() {
         return allsites;
@@ -226,11 +207,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the allsites property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setALLSITES(Boolean value) {
         this.allsites = value;
@@ -238,11 +217,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the amttype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdAmountType }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdAmountType }
      */
     public PcdAmountType getAMTTYPE() {
         return amttype;
@@ -250,11 +227,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the amttype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdAmountType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdAmountType }
      */
     public void setAMTTYPE(PcdAmountType value) {
         this.amttype = value;
@@ -262,11 +237,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the barcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getBARCODE() {
         return barcode;
@@ -274,11 +247,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the barcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setBARCODE(Long value) {
         this.barcode = value;
@@ -286,11 +257,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the couponcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOUPONCODE() {
         return couponcode;
@@ -298,11 +267,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the couponcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOUPONCODE(String value) {
         this.couponcode = value;
@@ -310,11 +277,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the creditlevel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdCreditLevels }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdCreditLevels }
      */
     public PcdCreditLevels getCREDITLEVEL() {
         return creditlevel;
@@ -322,11 +287,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the creditlevel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdCreditLevels }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdCreditLevels }
      */
     public void setCREDITLEVEL(PcdCreditLevels value) {
         this.creditlevel = value;
@@ -334,11 +297,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the delinquencylimit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDELINQUENCYLIMIT() {
         return delinquencylimit;
@@ -346,11 +307,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the delinquencylimit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDELINQUENCYLIMIT(Integer value) {
         this.delinquencylimit = value;
@@ -358,11 +317,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the expires property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEXPIRES() {
         return expires;
@@ -370,11 +327,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the expires property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEXPIRES(XMLGregorianCalendar value) {
         this.expires = value;
@@ -382,11 +337,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the limitaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdLimitApplicability }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdLimitApplicability }
      */
     public PcdLimitApplicability getLIMITACTION() {
         return limitaction;
@@ -394,11 +347,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the limitaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdLimitApplicability }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdLimitApplicability }
      */
     public void setLIMITACTION(PcdLimitApplicability value) {
         this.limitaction = value;
@@ -406,11 +357,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the limittype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdLimitType }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdLimitType }
      */
     public PcdLimitType getLIMITTYPE() {
         return limittype;
@@ -418,11 +367,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the limittype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdLimitType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdLimitType }
      */
     public void setLIMITTYPE(PcdLimitType value) {
         this.limittype = value;
@@ -430,11 +377,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the losreq property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLOSREQ() {
         return losreq;
@@ -442,11 +387,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the losreq property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLOSREQ(BigDecimal value) {
         this.losreq = value;
@@ -454,11 +397,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the paymentrequired property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isPAYMENTREQUIRED() {
         return paymentrequired;
@@ -466,11 +407,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the paymentrequired property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setPAYMENTREQUIRED(Boolean value) {
         this.paymentrequired = value;
@@ -478,11 +417,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdamtdefault property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTDEFAULT() {
         return pcdamtdefault;
@@ -490,11 +427,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdamtdefault property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTDEFAULT(BigDecimal value) {
         this.pcdamtdefault = value;
@@ -502,11 +437,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdamtmax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMAX() {
         return pcdamtmax;
@@ -514,11 +447,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdamtmax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMAX(BigDecimal value) {
         this.pcdamtmax = value;
@@ -526,11 +457,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdamtmin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPCDAMTMIN() {
         return pcdamtmin;
@@ -538,11 +467,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdamtmin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPCDAMTMIN(BigDecimal value) {
         this.pcdamtmin = value;
@@ -550,11 +477,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdClass }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdClass }
      */
     public PcdClass getPCDCLASS() {
         return pcdclass;
@@ -562,11 +487,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdClass }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdClass }
      */
     public void setPCDCLASS(PcdClass value) {
         this.pcdclass = value;
@@ -574,11 +497,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcddesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDDESC() {
         return pcddesc;
@@ -586,11 +507,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcddesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDDESC(String value) {
         this.pcddesc = value;
@@ -598,11 +517,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPCDNAME() {
         return pcdname;
@@ -610,11 +527,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPCDNAME(String value) {
         this.pcdname = value;
@@ -622,11 +537,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdperiods property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDPERIODS() {
         return pcdperiods;
@@ -634,11 +547,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdperiods property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDPERIODS(Integer value) {
         this.pcdperiods = value;
@@ -646,11 +557,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdpriority property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPCDPRIORITY() {
         return pcdpriority;
@@ -658,11 +567,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdpriority property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPCDPRIORITY(Integer value) {
         this.pcdpriority = value;
@@ -670,11 +577,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdrevcat property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdRevenueCategory }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdRevenueCategory }
      */
     public PcdRevenueCategory getPCDREVCAT() {
         return pcdrevcat;
@@ -682,11 +587,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdrevcat property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdRevenueCategory }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdRevenueCategory }
      */
     public void setPCDREVCAT(PcdRevenueCategory value) {
         this.pcdrevcat = value;
@@ -694,11 +597,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the pcdstartperiod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdStartPeriod }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdStartPeriod }
      */
     public PcdStartPeriod getPCDSTARTPERIOD() {
         return pcdstartperiod;
@@ -706,11 +607,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the pcdstartperiod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdStartPeriod }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdStartPeriod }
      */
     public void setPCDSTARTPERIOD(PcdStartPeriod value) {
         this.pcdstartperiod = value;
@@ -718,11 +617,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the reasonprompt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PcdReasonPrompt }
-     *     
+     *
+     * @return possible object is
+     *         {@link PcdReasonPrompt }
      */
     public PcdReasonPrompt getREASONPROMPT() {
         return reasonprompt;
@@ -730,11 +627,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the reasonprompt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PcdReasonPrompt }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PcdReasonPrompt }
      */
     public void setREASONPROMPT(PcdReasonPrompt value) {
         this.reasonprompt = value;
@@ -742,11 +637,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the rollover property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isROLLOVER() {
         return rollover;
@@ -754,11 +647,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the rollover property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setROLLOVER(Boolean value) {
         this.rollover = value;
@@ -766,11 +657,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the starts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTS() {
         return starts;
@@ -778,11 +667,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the starts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTS(XMLGregorianCalendar value) {
         this.starts = value;
@@ -790,11 +677,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Gets the value of the transferable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTRANSFERABLE() {
         return transferable;
@@ -802,11 +687,9 @@ public class AddUpdatePCDRequest {
 
     /**
      * Sets the value of the transferable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTRANSFERABLE(Boolean value) {
         this.transferable = value;

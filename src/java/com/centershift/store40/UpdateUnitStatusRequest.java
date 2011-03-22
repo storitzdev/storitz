@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for UpdateUnitStatus_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateUnitStatus_Request">
  *   &lt;complexContent>
@@ -27,15 +26,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateUnitStatus_Request", propOrder = {
-    "siteID",
-    "unitID",
-    "version",
-    "putOnHold"
+        "siteID",
+        "unitID",
+        "version",
+        "putOnHold"
 })
 public class UpdateUnitStatusRequest {
 
@@ -50,7 +47,6 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -58,7 +54,6 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -66,7 +61,6 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -74,7 +68,6 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -82,11 +75,9 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVersion() {
         return version;
@@ -94,11 +85,9 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVersion(BigDecimal value) {
         this.version = value;
@@ -106,7 +95,6 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Gets the value of the putOnHold property.
-     * 
      */
     public boolean isPutOnHold() {
         return putOnHold;
@@ -114,7 +102,6 @@ public class UpdateUnitStatusRequest {
 
     /**
      * Sets the value of the putOnHold property.
-     * 
      */
     public void setPutOnHold(boolean value) {
         this.putOnHold = value;

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getSiteUnitDataFilteredResult"
+        "getSiteUnitDataFilteredResult"
 })
 @XmlRootElement(name = "GetSiteUnitDataFilteredResponse")
 public class GetSiteUnitDataFilteredResponse {
@@ -39,11 +32,9 @@ public class GetSiteUnitDataFilteredResponse {
 
     /**
      * Gets the value of the getSiteUnitDataFilteredResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetSiteUnitDataResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetSiteUnitDataResponse }
      */
     public GetSiteUnitDataResponse getGetSiteUnitDataFilteredResult() {
         return getSiteUnitDataFilteredResult;
@@ -51,11 +42,9 @@ public class GetSiteUnitDataFilteredResponse {
 
     /**
      * Sets the value of the getSiteUnitDataFilteredResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetSiteUnitDataResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetSiteUnitDataResponse }
      */
     public void setGetSiteUnitDataFilteredResult(GetSiteUnitDataResponse value) {
         this.getSiteUnitDataFilteredResult = value;

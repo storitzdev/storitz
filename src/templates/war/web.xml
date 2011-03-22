@@ -95,8 +95,8 @@
     </servlet>
 
     <servlet-mapping>
-      <servlet-name>image</servlet-name>
-      <url-pattern>/reports/image/*</url-pattern>
+        <servlet-name>image</servlet-name>
+        <url-pattern>/reports/image/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

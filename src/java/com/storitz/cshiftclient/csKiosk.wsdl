@@ -1,1708 +1,1722 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!-- Generated 02/07/07 by Microsoft SOAP Toolkit WSDL File Generator, Version 3.00.1325.0 --> 
+<!-- Generated 02/07/07 by Microsoft SOAP Toolkit WSDL File Generator, Version 3.00.1325.0 -->
 <definitions
-	name='csKiosk'
-	targetNamespace='http://tempuri.org/csKiosk/wsdl/'
-	xmlns:wsdlns='http://tempuri.org/csKiosk/wsdl/'
-	xmlns:typens='http://tempuri.org/csKiosk/type/'
-	xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
-	xmlns:xsd='http://www.w3.org/2001/XMLSchema'
-	xmlns:stk='http://schemas.microsoft.com/soap-toolkit/wsdl-extension'
-	xmlns:dime='http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/'
-	xmlns:ref='http://schemas.xmlsoap.org/ws/2002/04/reference/'
-	xmlns:content='http://schemas.xmlsoap.org/ws/2002/04/content-type/'
-	xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
-	xmlns='http://schemas.xmlsoap.org/wsdl/'>
-
-	<types>
-		<schema
-			targetNamespace='http://tempuri.org/csKiosk/type/'
-			xmlns='http://www.w3.org/2001/XMLSchema'
-			xmlns:SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/'
-			xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
-			elementFormDefault='qualified'>
-
-			<import namespace='http://schemas.xmlsoap.org/soap/encoding/'/>
-			<import namespace='http://schemas.xmlsoap.org/wsdl/'/>
-			<import namespace='http://schemas.xmlsoap.org/ws/2002/04/reference/'/>
-			<import namespace='http://schemas.xmlsoap.org/ws/2002/04/content-type/'/>
-
-			<complexType name='UnknownBinaryContent'>
-				<simpleContent>
-					<restriction base='base64Binary'>
-						<annotation>
-							<appinfo>
-								<!--
-								You may use one or more of the following elements to describe the binary content:
-								<content:type value='(URI identifying type)'/>
-								<content:mediaType value='(MIME media type)'/>
-								<content:documentType value='(QName of XML document)'/>
-								-->
-							</appinfo>
-						</annotation>
-					</restriction>
-				</simpleContent>
-			</complexType>
-
-		</schema>
-	</types>
-
-	<message name='csKiosk.getKioskMerchandise'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getKioskMerchandiseResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.KioskVer'>
-	</message>
-
-	<message name='csKiosk.KioskVerResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getSiteHours'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getSiteHoursResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getSiteDirections'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getSiteDirectionsResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getSitePhones'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getSitePhonesResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getSiteAddress'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getSiteAddressResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getSiteUnitData'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getSiteUnitDataResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.createAccount'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pTenantFirstName' type='xsd:string'/>
-		<part name='pTenantLastName' type='xsd:string'/>
-		<part name='pMailALine1' type='xsd:string'/>
-		<part name='pMailALine2' type='xsd:string'/>
-		<part name='pMailACity' type='xsd:string'/>
-		<part name='pMailAState' type='xsd:string'/>
-		<part name='pMailAZip' type='xsd:string'/>
-		<part name='pMailACountry' type='xsd:string'/>
-		<part name='pTenantPhone' type='xsd:string'/>
-		<part name='pTenantPhoneType' type='xsd:double'/>
-		<part name='pTenantPassword' type='xsd:string'/>
-		<part name='pDriversLicenseNum' type='xsd:string'/>
-		<part name='pDriversLicenseST' type='xsd:string'/>
-		<part name='pDriversLicenseEXP' type='xsd:string'/>
-		<part name='pGatePIN' type='xsd:string'/>
-		<part name='pGateTimeZone' type='xsd:string'/>
-		<part name='pGateKeypadZone' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.createAccountResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.getSiteList'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getSiteListResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getAvailableUnits'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAttributeID' type='xsd:double'/>
-		<part name='pDimensions' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getAvailableUnitsResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getMoveInCost'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-		<part name='pInsuranceIDs' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getMoveInCostResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.doMoveIn'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-		<part name='pInsuranceIDs' type='xsd:string'/>
-		<part name='pPaymentString' type='xsd:string'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pCCZipCode' type='xsd:string'/>
-		<part name='pPayMethod' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.doMoveInResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.updateTenantInfo'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pTenantFirstName' type='xsd:string'/>
-		<part name='pTenantLastName' type='xsd:string'/>
-		<part name='pDriversLicenseNum' type='xsd:string'/>
-		<part name='pDriversLicenseST' type='xsd:string'/>
-		<part name='pDriversLicenseEXP' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.updateTenantInfoResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.updateTenantAddress'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pAddressID' type='xsd:double'/>
-		<part name='pLine1' type='xsd:string'/>
-		<part name='pLine2' type='xsd:string'/>
-		<part name='pCity' type='xsd:string'/>
-		<part name='pState' type='xsd:string'/>
-		<part name='pZip' type='xsd:string'/>
-		<part name='pCountry' type='xsd:string'/>
-		<part name='pAddressType' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.updateTenantAddressResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.updateTenantPhone'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pPhoneID' type='xsd:double'/>
-		<part name='pTenantPhone' type='xsd:string'/>
-		<part name='pPhoneType' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.updateTenantPhoneResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.getTenantAddress'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pAddressType' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.getTenantAddressResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getTenantPhone'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pPhoneType' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.getTenantPhoneResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.updateTenantPassword'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pOldPasswd' type='xsd:string'/>
-		<part name='pNewPasswd' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.updateTenantPasswordResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.getAddressTypes'>
-	</message>
-
-	<message name='csKiosk.getAddressTypesResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getPhoneTypes'>
-	</message>
-
-	<message name='csKiosk.getPhoneTypesResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.listAccountUnits'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pAccountID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.listAccountUnitsResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getCurrentCharges'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pMonths' type='xsd:short'/>
-		<part name='pItemId' type='xsd:double'/>
-		<part name='pItemPrice' type='xsd:double'/>
-		<part name='pItemQuantity' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getCurrentChargesResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.makePayment'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pPaymentString' type='xsd:string'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pCCZipCode' type='xsd:string'/>
-		<part name='pPayMethod' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.makePaymentResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getPicture'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pPictureType' type='xsd:short'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pFileObj' type='typens:UnknownBinaryContent'/>
-	</message>
-
-	<message name='csKiosk.getPictureResponse'>
-		<part name='Result' type='xsd:string'/>
-		<part name='pFileObj' type='typens:UnknownBinaryContent'/>
-	</message>
-
-	<message name='csKiosk.PictureReceived'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pPictureType' type='xsd:short'/>
-		<part name='pTenantID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.PictureReceivedResponse'>
-	</message>
-
-	<message name='csKiosk.updateAccountName'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pAccountName' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.updateAccountNameResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.updatePicture'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pPictureType' type='xsd:short'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pFile' type='typens:UnknownBinaryContent'/>
-	</message>
-
-	<message name='csKiosk.updatePictureResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.TenantLogin2'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:string'/>
-		<part name='pAccountID' type='xsd:string'/>
-		<part name='pFirstName' type='xsd:string'/>
-		<part name='pLastName' type='xsd:string'/>
-		<part name='pUnitNumber' type='xsd:string'/>
-		<part name='pGatePIN' type='xsd:string'/>
-		<part name='pPhoneNumber' type='xsd:string'/>
-		<part name='pPostal' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.TenantLogin2Response'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.TenantLogin'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountIDorUnitNumber' type='xsd:string'/>
-		<part name='pPassword' type='xsd:string'/>
-		<part name='pSearchBy' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.TenantLoginResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getInsuranceOptions'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getInsuranceOptionsResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getContract'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pTenantID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-		<part name='pInsuranceIDs' type='xsd:string'/>
-		<part name='pFileObj' type='typens:UnknownBinaryContent'/>
-	</message>
-
-	<message name='csKiosk.getContractResponse'>
-		<part name='Result' type='xsd:string'/>
-		<part name='pFileObj' type='typens:UnknownBinaryContent'/>
-	</message>
-
-	<message name='csKiosk.getMerchandiseCost'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pMerchandiseId' type='xsd:string'/>
-		<part name='pQuantity' type='xsd:short'/>
-	</message>
-
-	<message name='csKiosk.getMerchandiseCostResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.sellMerchandise'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pCCZipCode' type='xsd:string'/>
-		<part name='pMerchandiseId' type='xsd:string'/>
-		<part name='pQuantity' type='xsd:string'/>
-		<part name='pPaymentString' type='xsd:string'/>
-		<part name='pPayMethod' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.sellMerchandiseResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getInsuranceCost'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-		<part name='pInsuranceIDs' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getInsuranceCostResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.sellInsurance'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-		<part name='pInsuranceIDs' type='xsd:string'/>
-		<part name='pPaymentString' type='xsd:string'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pCCZipCode' type='xsd:string'/>
-		<part name='pPayMethod' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.sellInsuranceResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getReservation'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pReservationID' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getReservationResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.UpdateAutoPay'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonth' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pAccountHolderName' type='xsd:string'/>
-		<part name='pStreet' type='xsd:string'/>
-		<part name='pCity' type='xsd:string'/>
-		<part name='pState' type='xsd:string'/>
-		<part name='pZip' type='xsd:string'/>
-		<part name='pEmail' type='xsd:string'/>
-		<part name='pDriversLicenseID' type='xsd:string'/>
-		<part name='pCCorACH' type='xsd:string'/>
-		<part name='pActive' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.UpdateAutoPayResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getAutopayInf'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitIDs' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getAutopayInfResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getAfterMoveInPromotions'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitID' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getAfterMoveInPromotionsResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getPTDChangeCharges'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pDesiredPTD' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.getPTDChangeChargesResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.getMoveOutCost'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getMoveOutCostResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.DoMoveOut'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pUnitID' type='xsd:double'/>
-		<part name='pProcString' type='xsd:string'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pCCZipCode' type='xsd:string'/>
-		<part name='pPayMethod' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.DoMoveOutResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.getUnitTransferCharges'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pCurrentUnitID' type='xsd:double'/>
-		<part name='pNewUnitID' type='xsd:double'/>
-	</message>
-
-	<message name='csKiosk.getUnitTransferChargesResponse'>
-		<part name='Result' type='xsd:anyType'/>
-	</message>
-
-	<message name='csKiosk.DoUnitTransfer'>
-		<part name='pUser' type='xsd:string'/>
-		<part name='pPIN' type='xsd:string'/>
-		<part name='pSiteID' type='xsd:double'/>
-		<part name='pAccountID' type='xsd:double'/>
-		<part name='pCurrentUnitID' type='xsd:double'/>
-		<part name='pNewUnitID' type='xsd:double'/>
-		<part name='pProcString' type='xsd:string'/>
-		<part name='pCCNumOrABA' type='xsd:string'/>
-		<part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
-		<part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
-		<part name='pCCExpirationYear' type='xsd:string'/>
-		<part name='pCCZipCode' type='xsd:string'/>
-		<part name='pPayMethod' type='xsd:string'/>
-	</message>
-
-	<message name='csKiosk.DoUnitTransferResponse'>
-		<part name='Result' type='xsd:int'/>
-	</message>
-
-	<message name='csKiosk.TEST'>
-	</message>
-
-	<message name='csKiosk.TESTResponse'>
-		<part name='Result' type='xsd:string'/>
-	</message>
-
-	<portType name='csKioskSoapPort'>
-
-		<operation name='getKioskMerchandise' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getKioskMerchandise'/>
-			<output message='wsdlns:csKiosk.getKioskMerchandiseResponse'/>
-		</operation>
-
-		<operation name='KioskVer' parameterOrder=''>
-			<input message='wsdlns:csKiosk.KioskVer'/>
-			<output message='wsdlns:csKiosk.KioskVerResponse'/>
-		</operation>
-
-		<operation name='getSiteHours' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getSiteHours'/>
-			<output message='wsdlns:csKiosk.getSiteHoursResponse'/>
-		</operation>
-
-		<operation name='getSiteDirections' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getSiteDirections'/>
-			<output message='wsdlns:csKiosk.getSiteDirectionsResponse'/>
-		</operation>
-
-		<operation name='getSitePhones' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getSitePhones'/>
-			<output message='wsdlns:csKiosk.getSitePhonesResponse'/>
-		</operation>
-
-		<operation name='getSiteAddress' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getSiteAddress'/>
-			<output message='wsdlns:csKiosk.getSiteAddressResponse'/>
-		</operation>
-
-		<operation name='getSiteUnitData' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getSiteUnitData'/>
-			<output message='wsdlns:csKiosk.getSiteUnitDataResponse'/>
-		</operation>
-
-		<operation name='createAccount' parameterOrder='pUser pPIN pSiteID pTenantFirstName pTenantLastName pMailALine1 pMailALine2 pMailACity pMailAState pMailAZip pMailACountry pTenantPhone pTenantPhoneType pTenantPassword pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP pGatePIN pGateTimeZone pGateKeypadZone'>
-			<input message='wsdlns:csKiosk.createAccount'/>
-			<output message='wsdlns:csKiosk.createAccountResponse'/>
-		</operation>
-
-		<operation name='getSiteList' parameterOrder='pUser pPIN'>
-			<input message='wsdlns:csKiosk.getSiteList'/>
-			<output message='wsdlns:csKiosk.getSiteListResponse'/>
-		</operation>
-
-		<operation name='getAvailableUnits' parameterOrder='pUser pPIN pSiteID pAttributeID pDimensions'>
-			<input message='wsdlns:csKiosk.getAvailableUnits'/>
-			<output message='wsdlns:csKiosk.getAvailableUnitsResponse'/>
-		</operation>
-
-		<operation name='getMoveInCost' parameterOrder='pUser pPIN pSiteID pUnitIDs pInsuranceIDs'>
-			<input message='wsdlns:csKiosk.getMoveInCost'/>
-			<output message='wsdlns:csKiosk.getMoveInCostResponse'/>
-		</operation>
-
-		<operation name='doMoveIn' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
-			<input message='wsdlns:csKiosk.doMoveIn'/>
-			<output message='wsdlns:csKiosk.doMoveInResponse'/>
-		</operation>
-
-		<operation name='updateTenantInfo' parameterOrder='pUser pPIN pTenantID pTenantFirstName pTenantLastName pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP'>
-			<input message='wsdlns:csKiosk.updateTenantInfo'/>
-			<output message='wsdlns:csKiosk.updateTenantInfoResponse'/>
-		</operation>
-
-		<operation name='updateTenantAddress' parameterOrder='pUser pPIN pTenantID pAddressID pLine1 pLine2 pCity pState pZip pCountry pAddressType'>
-			<input message='wsdlns:csKiosk.updateTenantAddress'/>
-			<output message='wsdlns:csKiosk.updateTenantAddressResponse'/>
-		</operation>
-
-		<operation name='updateTenantPhone' parameterOrder='pUser pPIN pTenantID pPhoneID pTenantPhone pPhoneType'>
-			<input message='wsdlns:csKiosk.updateTenantPhone'/>
-			<output message='wsdlns:csKiosk.updateTenantPhoneResponse'/>
-		</operation>
-
-		<operation name='getTenantAddress' parameterOrder='pUser pPIN pTenantID pAddressType'>
-			<input message='wsdlns:csKiosk.getTenantAddress'/>
-			<output message='wsdlns:csKiosk.getTenantAddressResponse'/>
-		</operation>
-
-		<operation name='getTenantPhone' parameterOrder='pUser pPIN pTenantID pPhoneType'>
-			<input message='wsdlns:csKiosk.getTenantPhone'/>
-			<output message='wsdlns:csKiosk.getTenantPhoneResponse'/>
-		</operation>
-
-		<operation name='updateTenantPassword' parameterOrder='pUser pPIN pTenantID pOldPasswd pNewPasswd'>
-			<input message='wsdlns:csKiosk.updateTenantPassword'/>
-			<output message='wsdlns:csKiosk.updateTenantPasswordResponse'/>
-		</operation>
-
-		<operation name='getAddressTypes' parameterOrder=''>
-			<input message='wsdlns:csKiosk.getAddressTypes'/>
-			<output message='wsdlns:csKiosk.getAddressTypesResponse'/>
-		</operation>
-
-		<operation name='getPhoneTypes' parameterOrder=''>
-			<input message='wsdlns:csKiosk.getPhoneTypes'/>
-			<output message='wsdlns:csKiosk.getPhoneTypesResponse'/>
-		</operation>
-
-		<operation name='listAccountUnits' parameterOrder='pUser pPIN pAccountID'>
-			<input message='wsdlns:csKiosk.listAccountUnits'/>
-			<output message='wsdlns:csKiosk.listAccountUnitsResponse'/>
-		</operation>
-
-		<operation name='getCurrentCharges' parameterOrder='pUser pPIN pSiteID pAccountID pMonths pItemId pItemPrice pItemQuantity'>
-			<input message='wsdlns:csKiosk.getCurrentCharges'/>
-			<output message='wsdlns:csKiosk.getCurrentChargesResponse'/>
-		</operation>
-
-		<operation name='makePayment' parameterOrder='pUser pPIN pSiteID pAccountID pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
-			<input message='wsdlns:csKiosk.makePayment'/>
-			<output message='wsdlns:csKiosk.makePaymentResponse'/>
-		</operation>
-
-		<operation name='getPicture' parameterOrder='pUser pPIN pPictureType pTenantID pFileObj'>
-			<input message='wsdlns:csKiosk.getPicture'/>
-			<output message='wsdlns:csKiosk.getPictureResponse'/>
-		</operation>
-
-		<operation name='PictureReceived' parameterOrder='pUser pPIN pPictureType pTenantID'>
-			<input message='wsdlns:csKiosk.PictureReceived'/>
-			<output message='wsdlns:csKiosk.PictureReceivedResponse'/>
-		</operation>
-
-		<operation name='updateAccountName' parameterOrder='pUser pPIN pAccountID pAccountName'>
-			<input message='wsdlns:csKiosk.updateAccountName'/>
-			<output message='wsdlns:csKiosk.updateAccountNameResponse'/>
-		</operation>
-
-		<operation name='updatePicture' parameterOrder='pUser pPIN pSiteID pPictureType pTenantID pFile'>
-			<input message='wsdlns:csKiosk.updatePicture'/>
-			<output message='wsdlns:csKiosk.updatePictureResponse'/>
-		</operation>
-
-		<operation name='TenantLogin2' parameterOrder='pUser pPIN pSiteID pAccountID pFirstName pLastName pUnitNumber pGatePIN pPhoneNumber pPostal'>
-			<input message='wsdlns:csKiosk.TenantLogin2'/>
-			<output message='wsdlns:csKiosk.TenantLogin2Response'/>
-		</operation>
-
-		<operation name='TenantLogin' parameterOrder='pUser pPIN pSiteID pAccountIDorUnitNumber pPassword pSearchBy'>
-			<input message='wsdlns:csKiosk.TenantLogin'/>
-			<output message='wsdlns:csKiosk.TenantLoginResponse'/>
-		</operation>
-
-		<operation name='getInsuranceOptions' parameterOrder='pUser pPIN pSiteID'>
-			<input message='wsdlns:csKiosk.getInsuranceOptions'/>
-			<output message='wsdlns:csKiosk.getInsuranceOptionsResponse'/>
-		</operation>
-
-		<operation name='getContract' parameterOrder='pUser pPIN pSiteID pAccountID pTenantID pUnitIDs pInsuranceIDs pFileObj'>
-			<input message='wsdlns:csKiosk.getContract'/>
-			<output message='wsdlns:csKiosk.getContractResponse'/>
-		</operation>
-
-		<operation name='getMerchandiseCost' parameterOrder='pUser pPIN pSiteID pAccountID pMerchandiseId pQuantity'>
-			<input message='wsdlns:csKiosk.getMerchandiseCost'/>
-			<output message='wsdlns:csKiosk.getMerchandiseCostResponse'/>
-		</operation>
-
-		<operation name='sellMerchandise' parameterOrder='pUser pPIN pSiteID pAccountID pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pMerchandiseId pQuantity pPaymentString pPayMethod'>
-			<input message='wsdlns:csKiosk.sellMerchandise'/>
-			<output message='wsdlns:csKiosk.sellMerchandiseResponse'/>
-		</operation>
-
-		<operation name='getInsuranceCost' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs'>
-			<input message='wsdlns:csKiosk.getInsuranceCost'/>
-			<output message='wsdlns:csKiosk.getInsuranceCostResponse'/>
-		</operation>
-
-		<operation name='sellInsurance' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
-			<input message='wsdlns:csKiosk.sellInsurance'/>
-			<output message='wsdlns:csKiosk.sellInsuranceResponse'/>
-		</operation>
-
-		<operation name='getReservation' parameterOrder='pUser pPIN pSiteID pReservationID'>
-			<input message='wsdlns:csKiosk.getReservation'/>
-			<output message='wsdlns:csKiosk.getReservationResponse'/>
-		</operation>
-
-		<operation name='UpdateAutoPay' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pCCNumOrABA pCheckingAccountNum pCCExpirationMonth pCCExpirationYear pAccountHolderName pStreet pCity pState pZip pEmail pDriversLicenseID pCCorACH pActive'>
-			<input message='wsdlns:csKiosk.UpdateAutoPay'/>
-			<output message='wsdlns:csKiosk.UpdateAutoPayResponse'/>
-		</operation>
-
-		<operation name='getAutopayInf' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs'>
-			<input message='wsdlns:csKiosk.getAutopayInf'/>
-			<output message='wsdlns:csKiosk.getAutopayInfResponse'/>
-		</operation>
-
-		<operation name='getAfterMoveInPromotions' parameterOrder='pUser pPIN pSiteID pAccountID pUnitID'>
-			<input message='wsdlns:csKiosk.getAfterMoveInPromotions'/>
-			<output message='wsdlns:csKiosk.getAfterMoveInPromotionsResponse'/>
-		</operation>
-
-		<operation name='getPTDChangeCharges' parameterOrder='pUser pPIN pSiteID pAccountID pDesiredPTD'>
-			<input message='wsdlns:csKiosk.getPTDChangeCharges'/>
-			<output message='wsdlns:csKiosk.getPTDChangeChargesResponse'/>
-		</operation>
-
-		<operation name='getMoveOutCost' parameterOrder='pUser pPIN pSiteID pAccountID pUnitID'>
-			<input message='wsdlns:csKiosk.getMoveOutCost'/>
-			<output message='wsdlns:csKiosk.getMoveOutCostResponse'/>
-		</operation>
-
-		<operation name='DoMoveOut' parameterOrder='pUser pPIN pSiteID pAccountID pUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
-			<input message='wsdlns:csKiosk.DoMoveOut'/>
-			<output message='wsdlns:csKiosk.DoMoveOutResponse'/>
-		</operation>
-
-		<operation name='getUnitTransferCharges' parameterOrder='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID'>
-			<input message='wsdlns:csKiosk.getUnitTransferCharges'/>
-			<output message='wsdlns:csKiosk.getUnitTransferChargesResponse'/>
-		</operation>
-
-		<operation name='DoUnitTransfer' parameterOrder='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
-			<input message='wsdlns:csKiosk.DoUnitTransfer'/>
-			<output message='wsdlns:csKiosk.DoUnitTransferResponse'/>
-		</operation>
-
-		<operation name='TEST' parameterOrder=''>
-			<input message='wsdlns:csKiosk.TEST'/>
-			<output message='wsdlns:csKiosk.TESTResponse'/>
-		</operation>
-
-	</portType>
-
-	<binding name='csKioskSoapBinding' type='wsdlns:csKioskSoapPort' >
-
-		<stk:binding preferredEncoding='UTF-8'/>
-		<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
-
-		<operation name='getKioskMerchandise'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getKioskMerchandise'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='KioskVer'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.KioskVer'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getSiteHours'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteHours'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getSiteDirections'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteDirections'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getSitePhones'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSitePhones'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getSiteAddress'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteAddress'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getSiteUnitData'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteUnitData'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='createAccount'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.createAccount'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pTenantFirstName pTenantLastName pMailALine1 pMailALine2 pMailACity pMailAState pMailAZip pMailACountry pTenantPhone pTenantPhoneType pTenantPassword pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP pGatePIN pGateTimeZone pGateKeypadZone'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getSiteList'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteList'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getAvailableUnits'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAvailableUnits'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAttributeID pDimensions'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getMoveInCost'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getMoveInCost'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pUnitIDs pInsuranceIDs'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='doMoveIn'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.doMoveIn'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='updateTenantInfo'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantInfo'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pTenantID pTenantFirstName pTenantLastName pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='updateTenantAddress'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantAddress'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pTenantID pAddressID pLine1 pLine2 pCity pState pZip pCountry pAddressType'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='updateTenantPhone'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantPhone'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pTenantID pPhoneID pTenantPhone pPhoneType'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getTenantAddress'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getTenantAddress'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pTenantID pAddressType'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getTenantPhone'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getTenantPhone'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pTenantID pPhoneType'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='updateTenantPassword'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantPassword'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pTenantID pOldPasswd pNewPasswd'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getAddressTypes'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAddressTypes'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getPhoneTypes'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getPhoneTypes'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='listAccountUnits'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.listAccountUnits'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pAccountID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getCurrentCharges'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getCurrentCharges'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pMonths pItemId pItemPrice pItemQuantity'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='makePayment'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.makePayment'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getPicture'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getPicture'/>
-			<input>
-				<dime:message
-					layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
-					wsdl:required='true'/>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pPictureType pTenantID pFileObj'/>
-			</input>
-			<output>
-				<dime:message
-					layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
-					wsdl:required='true'/>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result pFileObj'/>
-			</output>
-		</operation>
-
-		<operation name='PictureReceived'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.PictureReceived'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pPictureType pTenantID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
-			</output>
-		</operation>
-
-		<operation name='updateAccountName'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateAccountName'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pAccountID pAccountName'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='updatePicture'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updatePicture'/>
-			<input>
-				<dime:message
-					layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
-					wsdl:required='true'/>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pPictureType pTenantID pFile'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='TenantLogin2'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.TenantLogin2'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pFirstName pLastName pUnitNumber pGatePIN pPhoneNumber pPostal'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='TenantLogin'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.TenantLogin'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountIDorUnitNumber pPassword pSearchBy'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getInsuranceOptions'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getInsuranceOptions'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getContract'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getContract'/>
-			<input>
-				<dime:message
-					layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
-					wsdl:required='true'/>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pTenantID pUnitIDs pInsuranceIDs pFileObj'/>
-			</input>
-			<output>
-				<dime:message
-					layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
-					wsdl:required='true'/>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result pFileObj'/>
-			</output>
-		</operation>
-
-		<operation name='getMerchandiseCost'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getMerchandiseCost'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pMerchandiseId pQuantity'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='sellMerchandise'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.sellMerchandise'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pMerchandiseId pQuantity pPaymentString pPayMethod'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getInsuranceCost'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getInsuranceCost'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='sellInsurance'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.sellInsurance'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getReservation'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getReservation'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pReservationID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='UpdateAutoPay'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.UpdateAutoPay'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitIDs pCCNumOrABA pCheckingAccountNum pCCExpirationMonth pCCExpirationYear pAccountHolderName pStreet pCity pState pZip pEmail pDriversLicenseID pCCorACH pActive'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getAutopayInf'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAutopayInf'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitIDs'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getAfterMoveInPromotions'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAfterMoveInPromotions'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getPTDChangeCharges'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getPTDChangeCharges'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pDesiredPTD'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getMoveOutCost'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getMoveOutCost'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='DoMoveOut'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.DoMoveOut'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='getUnitTransferCharges'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getUnitTransferCharges'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='DoUnitTransfer'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.DoUnitTransfer'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-		<operation name='TEST'>
-			<soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.TEST'/>
-			<input>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
-			</input>
-			<output>
-				<soap:body
-					use='encoded'
-					namespace='http://tempuri.org/csKiosk/message/'
-					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
-					parts='Result'/>
-			</output>
-		</operation>
-
-	</binding>
-
-	<service name='csKiosk' >
-		<port name='csKioskSoapPort' binding='wsdlns:csKioskSoapBinding' >
-			<soap:address location='https://host01slc.centershift.com/pxi/kiosks/csKiosk.WSDL'/>
-		</port>
-	</service>
+        name='csKiosk'
+        targetNamespace='http://tempuri.org/csKiosk/wsdl/'
+        xmlns:wsdlns='http://tempuri.org/csKiosk/wsdl/'
+        xmlns:typens='http://tempuri.org/csKiosk/type/'
+        xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+        xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+        xmlns:stk='http://schemas.microsoft.com/soap-toolkit/wsdl-extension'
+        xmlns:dime='http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/'
+        xmlns:ref='http://schemas.xmlsoap.org/ws/2002/04/reference/'
+        xmlns:content='http://schemas.xmlsoap.org/ws/2002/04/content-type/'
+        xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+        xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+    <types>
+        <schema
+                targetNamespace='http://tempuri.org/csKiosk/type/'
+                xmlns='http://www.w3.org/2001/XMLSchema'
+                xmlns:SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/'
+                xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+                elementFormDefault='qualified'>
+
+            <import namespace='http://schemas.xmlsoap.org/soap/encoding/'/>
+            <import namespace='http://schemas.xmlsoap.org/wsdl/'/>
+            <import namespace='http://schemas.xmlsoap.org/ws/2002/04/reference/'/>
+            <import namespace='http://schemas.xmlsoap.org/ws/2002/04/content-type/'/>
+
+            <complexType name='UnknownBinaryContent'>
+                <simpleContent>
+                    <restriction base='base64Binary'>
+                        <annotation>
+                            <appinfo>
+                                <!--
+                                        You may use one or more of the following elements to describe the binary content:
+                                        <content:type value='(URI identifying type)'/>
+                                        <content:mediaType value='(MIME media type)'/>
+                                        <content:documentType value='(QName of XML document)'/>
+                                        -->
+                            </appinfo>
+                        </annotation>
+                    </restriction>
+                </simpleContent>
+            </complexType>
+
+        </schema>
+    </types>
+
+    <message name='csKiosk.getKioskMerchandise'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getKioskMerchandiseResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.KioskVer'>
+    </message>
+
+    <message name='csKiosk.KioskVerResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getSiteHours'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getSiteHoursResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getSiteDirections'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getSiteDirectionsResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getSitePhones'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getSitePhonesResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getSiteAddress'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getSiteAddressResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getSiteUnitData'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getSiteUnitDataResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.createAccount'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pTenantFirstName' type='xsd:string'/>
+        <part name='pTenantLastName' type='xsd:string'/>
+        <part name='pMailALine1' type='xsd:string'/>
+        <part name='pMailALine2' type='xsd:string'/>
+        <part name='pMailACity' type='xsd:string'/>
+        <part name='pMailAState' type='xsd:string'/>
+        <part name='pMailAZip' type='xsd:string'/>
+        <part name='pMailACountry' type='xsd:string'/>
+        <part name='pTenantPhone' type='xsd:string'/>
+        <part name='pTenantPhoneType' type='xsd:double'/>
+        <part name='pTenantPassword' type='xsd:string'/>
+        <part name='pDriversLicenseNum' type='xsd:string'/>
+        <part name='pDriversLicenseST' type='xsd:string'/>
+        <part name='pDriversLicenseEXP' type='xsd:string'/>
+        <part name='pGatePIN' type='xsd:string'/>
+        <part name='pGateTimeZone' type='xsd:string'/>
+        <part name='pGateKeypadZone' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.createAccountResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.getSiteList'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getSiteListResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getAvailableUnits'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAttributeID' type='xsd:double'/>
+        <part name='pDimensions' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getAvailableUnitsResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getMoveInCost'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+        <part name='pInsuranceIDs' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getMoveInCostResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.doMoveIn'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+        <part name='pInsuranceIDs' type='xsd:string'/>
+        <part name='pPaymentString' type='xsd:string'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pCCZipCode' type='xsd:string'/>
+        <part name='pPayMethod' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.doMoveInResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.updateTenantInfo'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pTenantFirstName' type='xsd:string'/>
+        <part name='pTenantLastName' type='xsd:string'/>
+        <part name='pDriversLicenseNum' type='xsd:string'/>
+        <part name='pDriversLicenseST' type='xsd:string'/>
+        <part name='pDriversLicenseEXP' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.updateTenantInfoResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.updateTenantAddress'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pAddressID' type='xsd:double'/>
+        <part name='pLine1' type='xsd:string'/>
+        <part name='pLine2' type='xsd:string'/>
+        <part name='pCity' type='xsd:string'/>
+        <part name='pState' type='xsd:string'/>
+        <part name='pZip' type='xsd:string'/>
+        <part name='pCountry' type='xsd:string'/>
+        <part name='pAddressType' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.updateTenantAddressResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.updateTenantPhone'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pPhoneID' type='xsd:double'/>
+        <part name='pTenantPhone' type='xsd:string'/>
+        <part name='pPhoneType' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.updateTenantPhoneResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.getTenantAddress'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pAddressType' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.getTenantAddressResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getTenantPhone'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pPhoneType' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.getTenantPhoneResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.updateTenantPassword'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pOldPasswd' type='xsd:string'/>
+        <part name='pNewPasswd' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.updateTenantPasswordResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.getAddressTypes'>
+    </message>
+
+    <message name='csKiosk.getAddressTypesResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getPhoneTypes'>
+    </message>
+
+    <message name='csKiosk.getPhoneTypesResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.listAccountUnits'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pAccountID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.listAccountUnitsResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getCurrentCharges'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pMonths' type='xsd:short'/>
+        <part name='pItemId' type='xsd:double'/>
+        <part name='pItemPrice' type='xsd:double'/>
+        <part name='pItemQuantity' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getCurrentChargesResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.makePayment'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pPaymentString' type='xsd:string'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pCCZipCode' type='xsd:string'/>
+        <part name='pPayMethod' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.makePaymentResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getPicture'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pPictureType' type='xsd:short'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pFileObj' type='typens:UnknownBinaryContent'/>
+    </message>
+
+    <message name='csKiosk.getPictureResponse'>
+        <part name='Result' type='xsd:string'/>
+        <part name='pFileObj' type='typens:UnknownBinaryContent'/>
+    </message>
+
+    <message name='csKiosk.PictureReceived'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pPictureType' type='xsd:short'/>
+        <part name='pTenantID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.PictureReceivedResponse'>
+    </message>
+
+    <message name='csKiosk.updateAccountName'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pAccountName' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.updateAccountNameResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.updatePicture'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pPictureType' type='xsd:short'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pFile' type='typens:UnknownBinaryContent'/>
+    </message>
+
+    <message name='csKiosk.updatePictureResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.TenantLogin2'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:string'/>
+        <part name='pAccountID' type='xsd:string'/>
+        <part name='pFirstName' type='xsd:string'/>
+        <part name='pLastName' type='xsd:string'/>
+        <part name='pUnitNumber' type='xsd:string'/>
+        <part name='pGatePIN' type='xsd:string'/>
+        <part name='pPhoneNumber' type='xsd:string'/>
+        <part name='pPostal' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.TenantLogin2Response'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.TenantLogin'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountIDorUnitNumber' type='xsd:string'/>
+        <part name='pPassword' type='xsd:string'/>
+        <part name='pSearchBy' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.TenantLoginResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getInsuranceOptions'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getInsuranceOptionsResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getContract'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pTenantID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+        <part name='pInsuranceIDs' type='xsd:string'/>
+        <part name='pFileObj' type='typens:UnknownBinaryContent'/>
+    </message>
+
+    <message name='csKiosk.getContractResponse'>
+        <part name='Result' type='xsd:string'/>
+        <part name='pFileObj' type='typens:UnknownBinaryContent'/>
+    </message>
+
+    <message name='csKiosk.getMerchandiseCost'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pMerchandiseId' type='xsd:string'/>
+        <part name='pQuantity' type='xsd:short'/>
+    </message>
+
+    <message name='csKiosk.getMerchandiseCostResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.sellMerchandise'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pCCZipCode' type='xsd:string'/>
+        <part name='pMerchandiseId' type='xsd:string'/>
+        <part name='pQuantity' type='xsd:string'/>
+        <part name='pPaymentString' type='xsd:string'/>
+        <part name='pPayMethod' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.sellMerchandiseResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getInsuranceCost'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+        <part name='pInsuranceIDs' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getInsuranceCostResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.sellInsurance'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+        <part name='pInsuranceIDs' type='xsd:string'/>
+        <part name='pPaymentString' type='xsd:string'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pCCZipCode' type='xsd:string'/>
+        <part name='pPayMethod' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.sellInsuranceResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getReservation'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pReservationID' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getReservationResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.UpdateAutoPay'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonth' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pAccountHolderName' type='xsd:string'/>
+        <part name='pStreet' type='xsd:string'/>
+        <part name='pCity' type='xsd:string'/>
+        <part name='pState' type='xsd:string'/>
+        <part name='pZip' type='xsd:string'/>
+        <part name='pEmail' type='xsd:string'/>
+        <part name='pDriversLicenseID' type='xsd:string'/>
+        <part name='pCCorACH' type='xsd:string'/>
+        <part name='pActive' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.UpdateAutoPayResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getAutopayInf'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitIDs' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getAutopayInfResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getAfterMoveInPromotions'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitID' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getAfterMoveInPromotionsResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getPTDChangeCharges'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pDesiredPTD' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.getPTDChangeChargesResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.getMoveOutCost'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getMoveOutCostResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.DoMoveOut'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pUnitID' type='xsd:double'/>
+        <part name='pProcString' type='xsd:string'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pCCZipCode' type='xsd:string'/>
+        <part name='pPayMethod' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.DoMoveOutResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.getUnitTransferCharges'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pCurrentUnitID' type='xsd:double'/>
+        <part name='pNewUnitID' type='xsd:double'/>
+    </message>
+
+    <message name='csKiosk.getUnitTransferChargesResponse'>
+        <part name='Result' type='xsd:anyType'/>
+    </message>
+
+    <message name='csKiosk.DoUnitTransfer'>
+        <part name='pUser' type='xsd:string'/>
+        <part name='pPIN' type='xsd:string'/>
+        <part name='pSiteID' type='xsd:double'/>
+        <part name='pAccountID' type='xsd:double'/>
+        <part name='pCurrentUnitID' type='xsd:double'/>
+        <part name='pNewUnitID' type='xsd:double'/>
+        <part name='pProcString' type='xsd:string'/>
+        <part name='pCCNumOrABA' type='xsd:string'/>
+        <part name='pCCNameOnCardOrCheckingAccountNum' type='xsd:string'/>
+        <part name='pCCExpirationMonthOrAccountName' type='xsd:string'/>
+        <part name='pCCExpirationYear' type='xsd:string'/>
+        <part name='pCCZipCode' type='xsd:string'/>
+        <part name='pPayMethod' type='xsd:string'/>
+    </message>
+
+    <message name='csKiosk.DoUnitTransferResponse'>
+        <part name='Result' type='xsd:int'/>
+    </message>
+
+    <message name='csKiosk.TEST'>
+    </message>
+
+    <message name='csKiosk.TESTResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <portType name='csKioskSoapPort'>
+
+        <operation name='getKioskMerchandise' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getKioskMerchandise'/>
+            <output message='wsdlns:csKiosk.getKioskMerchandiseResponse'/>
+        </operation>
+
+        <operation name='KioskVer' parameterOrder=''>
+            <input message='wsdlns:csKiosk.KioskVer'/>
+            <output message='wsdlns:csKiosk.KioskVerResponse'/>
+        </operation>
+
+        <operation name='getSiteHours' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getSiteHours'/>
+            <output message='wsdlns:csKiosk.getSiteHoursResponse'/>
+        </operation>
+
+        <operation name='getSiteDirections' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getSiteDirections'/>
+            <output message='wsdlns:csKiosk.getSiteDirectionsResponse'/>
+        </operation>
+
+        <operation name='getSitePhones' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getSitePhones'/>
+            <output message='wsdlns:csKiosk.getSitePhonesResponse'/>
+        </operation>
+
+        <operation name='getSiteAddress' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getSiteAddress'/>
+            <output message='wsdlns:csKiosk.getSiteAddressResponse'/>
+        </operation>
+
+        <operation name='getSiteUnitData' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getSiteUnitData'/>
+            <output message='wsdlns:csKiosk.getSiteUnitDataResponse'/>
+        </operation>
+
+        <operation name='createAccount'
+                   parameterOrder='pUser pPIN pSiteID pTenantFirstName pTenantLastName pMailALine1 pMailALine2 pMailACity pMailAState pMailAZip pMailACountry pTenantPhone pTenantPhoneType pTenantPassword pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP pGatePIN pGateTimeZone pGateKeypadZone'>
+            <input message='wsdlns:csKiosk.createAccount'/>
+            <output message='wsdlns:csKiosk.createAccountResponse'/>
+        </operation>
+
+        <operation name='getSiteList' parameterOrder='pUser pPIN'>
+            <input message='wsdlns:csKiosk.getSiteList'/>
+            <output message='wsdlns:csKiosk.getSiteListResponse'/>
+        </operation>
+
+        <operation name='getAvailableUnits' parameterOrder='pUser pPIN pSiteID pAttributeID pDimensions'>
+            <input message='wsdlns:csKiosk.getAvailableUnits'/>
+            <output message='wsdlns:csKiosk.getAvailableUnitsResponse'/>
+        </operation>
+
+        <operation name='getMoveInCost' parameterOrder='pUser pPIN pSiteID pUnitIDs pInsuranceIDs'>
+            <input message='wsdlns:csKiosk.getMoveInCost'/>
+            <output message='wsdlns:csKiosk.getMoveInCostResponse'/>
+        </operation>
+
+        <operation name='doMoveIn'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
+            <input message='wsdlns:csKiosk.doMoveIn'/>
+            <output message='wsdlns:csKiosk.doMoveInResponse'/>
+        </operation>
+
+        <operation name='updateTenantInfo'
+                   parameterOrder='pUser pPIN pTenantID pTenantFirstName pTenantLastName pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP'>
+            <input message='wsdlns:csKiosk.updateTenantInfo'/>
+            <output message='wsdlns:csKiosk.updateTenantInfoResponse'/>
+        </operation>
+
+        <operation name='updateTenantAddress'
+                   parameterOrder='pUser pPIN pTenantID pAddressID pLine1 pLine2 pCity pState pZip pCountry pAddressType'>
+            <input message='wsdlns:csKiosk.updateTenantAddress'/>
+            <output message='wsdlns:csKiosk.updateTenantAddressResponse'/>
+        </operation>
+
+        <operation name='updateTenantPhone' parameterOrder='pUser pPIN pTenantID pPhoneID pTenantPhone pPhoneType'>
+            <input message='wsdlns:csKiosk.updateTenantPhone'/>
+            <output message='wsdlns:csKiosk.updateTenantPhoneResponse'/>
+        </operation>
+
+        <operation name='getTenantAddress' parameterOrder='pUser pPIN pTenantID pAddressType'>
+            <input message='wsdlns:csKiosk.getTenantAddress'/>
+            <output message='wsdlns:csKiosk.getTenantAddressResponse'/>
+        </operation>
+
+        <operation name='getTenantPhone' parameterOrder='pUser pPIN pTenantID pPhoneType'>
+            <input message='wsdlns:csKiosk.getTenantPhone'/>
+            <output message='wsdlns:csKiosk.getTenantPhoneResponse'/>
+        </operation>
+
+        <operation name='updateTenantPassword' parameterOrder='pUser pPIN pTenantID pOldPasswd pNewPasswd'>
+            <input message='wsdlns:csKiosk.updateTenantPassword'/>
+            <output message='wsdlns:csKiosk.updateTenantPasswordResponse'/>
+        </operation>
+
+        <operation name='getAddressTypes' parameterOrder=''>
+            <input message='wsdlns:csKiosk.getAddressTypes'/>
+            <output message='wsdlns:csKiosk.getAddressTypesResponse'/>
+        </operation>
+
+        <operation name='getPhoneTypes' parameterOrder=''>
+            <input message='wsdlns:csKiosk.getPhoneTypes'/>
+            <output message='wsdlns:csKiosk.getPhoneTypesResponse'/>
+        </operation>
+
+        <operation name='listAccountUnits' parameterOrder='pUser pPIN pAccountID'>
+            <input message='wsdlns:csKiosk.listAccountUnits'/>
+            <output message='wsdlns:csKiosk.listAccountUnitsResponse'/>
+        </operation>
+
+        <operation name='getCurrentCharges'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pMonths pItemId pItemPrice pItemQuantity'>
+            <input message='wsdlns:csKiosk.getCurrentCharges'/>
+            <output message='wsdlns:csKiosk.getCurrentChargesResponse'/>
+        </operation>
+
+        <operation name='makePayment'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
+            <input message='wsdlns:csKiosk.makePayment'/>
+            <output message='wsdlns:csKiosk.makePaymentResponse'/>
+        </operation>
+
+        <operation name='getPicture' parameterOrder='pUser pPIN pPictureType pTenantID pFileObj'>
+            <input message='wsdlns:csKiosk.getPicture'/>
+            <output message='wsdlns:csKiosk.getPictureResponse'/>
+        </operation>
+
+        <operation name='PictureReceived' parameterOrder='pUser pPIN pPictureType pTenantID'>
+            <input message='wsdlns:csKiosk.PictureReceived'/>
+            <output message='wsdlns:csKiosk.PictureReceivedResponse'/>
+        </operation>
+
+        <operation name='updateAccountName' parameterOrder='pUser pPIN pAccountID pAccountName'>
+            <input message='wsdlns:csKiosk.updateAccountName'/>
+            <output message='wsdlns:csKiosk.updateAccountNameResponse'/>
+        </operation>
+
+        <operation name='updatePicture' parameterOrder='pUser pPIN pSiteID pPictureType pTenantID pFile'>
+            <input message='wsdlns:csKiosk.updatePicture'/>
+            <output message='wsdlns:csKiosk.updatePictureResponse'/>
+        </operation>
+
+        <operation name='TenantLogin2'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pFirstName pLastName pUnitNumber pGatePIN pPhoneNumber pPostal'>
+            <input message='wsdlns:csKiosk.TenantLogin2'/>
+            <output message='wsdlns:csKiosk.TenantLogin2Response'/>
+        </operation>
+
+        <operation name='TenantLogin' parameterOrder='pUser pPIN pSiteID pAccountIDorUnitNumber pPassword pSearchBy'>
+            <input message='wsdlns:csKiosk.TenantLogin'/>
+            <output message='wsdlns:csKiosk.TenantLoginResponse'/>
+        </operation>
+
+        <operation name='getInsuranceOptions' parameterOrder='pUser pPIN pSiteID'>
+            <input message='wsdlns:csKiosk.getInsuranceOptions'/>
+            <output message='wsdlns:csKiosk.getInsuranceOptionsResponse'/>
+        </operation>
+
+        <operation name='getContract'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pTenantID pUnitIDs pInsuranceIDs pFileObj'>
+            <input message='wsdlns:csKiosk.getContract'/>
+            <output message='wsdlns:csKiosk.getContractResponse'/>
+        </operation>
+
+        <operation name='getMerchandiseCost' parameterOrder='pUser pPIN pSiteID pAccountID pMerchandiseId pQuantity'>
+            <input message='wsdlns:csKiosk.getMerchandiseCost'/>
+            <output message='wsdlns:csKiosk.getMerchandiseCostResponse'/>
+        </operation>
+
+        <operation name='sellMerchandise'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pMerchandiseId pQuantity pPaymentString pPayMethod'>
+            <input message='wsdlns:csKiosk.sellMerchandise'/>
+            <output message='wsdlns:csKiosk.sellMerchandiseResponse'/>
+        </operation>
+
+        <operation name='getInsuranceCost' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs'>
+            <input message='wsdlns:csKiosk.getInsuranceCost'/>
+            <output message='wsdlns:csKiosk.getInsuranceCostResponse'/>
+        </operation>
+
+        <operation name='sellInsurance'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
+            <input message='wsdlns:csKiosk.sellInsurance'/>
+            <output message='wsdlns:csKiosk.sellInsuranceResponse'/>
+        </operation>
+
+        <operation name='getReservation' parameterOrder='pUser pPIN pSiteID pReservationID'>
+            <input message='wsdlns:csKiosk.getReservation'/>
+            <output message='wsdlns:csKiosk.getReservationResponse'/>
+        </operation>
+
+        <operation name='UpdateAutoPay'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs pCCNumOrABA pCheckingAccountNum pCCExpirationMonth pCCExpirationYear pAccountHolderName pStreet pCity pState pZip pEmail pDriversLicenseID pCCorACH pActive'>
+            <input message='wsdlns:csKiosk.UpdateAutoPay'/>
+            <output message='wsdlns:csKiosk.UpdateAutoPayResponse'/>
+        </operation>
+
+        <operation name='getAutopayInf' parameterOrder='pUser pPIN pSiteID pAccountID pUnitIDs'>
+            <input message='wsdlns:csKiosk.getAutopayInf'/>
+            <output message='wsdlns:csKiosk.getAutopayInfResponse'/>
+        </operation>
+
+        <operation name='getAfterMoveInPromotions' parameterOrder='pUser pPIN pSiteID pAccountID pUnitID'>
+            <input message='wsdlns:csKiosk.getAfterMoveInPromotions'/>
+            <output message='wsdlns:csKiosk.getAfterMoveInPromotionsResponse'/>
+        </operation>
+
+        <operation name='getPTDChangeCharges' parameterOrder='pUser pPIN pSiteID pAccountID pDesiredPTD'>
+            <input message='wsdlns:csKiosk.getPTDChangeCharges'/>
+            <output message='wsdlns:csKiosk.getPTDChangeChargesResponse'/>
+        </operation>
+
+        <operation name='getMoveOutCost' parameterOrder='pUser pPIN pSiteID pAccountID pUnitID'>
+            <input message='wsdlns:csKiosk.getMoveOutCost'/>
+            <output message='wsdlns:csKiosk.getMoveOutCostResponse'/>
+        </operation>
+
+        <operation name='DoMoveOut'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
+            <input message='wsdlns:csKiosk.DoMoveOut'/>
+            <output message='wsdlns:csKiosk.DoMoveOutResponse'/>
+        </operation>
+
+        <operation name='getUnitTransferCharges'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID'>
+            <input message='wsdlns:csKiosk.getUnitTransferCharges'/>
+            <output message='wsdlns:csKiosk.getUnitTransferChargesResponse'/>
+        </operation>
+
+        <operation name='DoUnitTransfer'
+                   parameterOrder='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'>
+            <input message='wsdlns:csKiosk.DoUnitTransfer'/>
+            <output message='wsdlns:csKiosk.DoUnitTransferResponse'/>
+        </operation>
+
+        <operation name='TEST' parameterOrder=''>
+            <input message='wsdlns:csKiosk.TEST'/>
+            <output message='wsdlns:csKiosk.TESTResponse'/>
+        </operation>
+
+    </portType>
+
+    <binding name='csKioskSoapBinding' type='wsdlns:csKioskSoapPort'>
+
+        <stk:binding preferredEncoding='UTF-8'/>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+
+        <operation name='getKioskMerchandise'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getKioskMerchandise'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='KioskVer'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.KioskVer'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getSiteHours'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteHours'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getSiteDirections'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteDirections'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getSitePhones'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSitePhones'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getSiteAddress'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteAddress'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getSiteUnitData'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteUnitData'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='createAccount'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.createAccount'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pTenantFirstName pTenantLastName pMailALine1 pMailALine2 pMailACity pMailAState pMailAZip pMailACountry pTenantPhone pTenantPhoneType pTenantPassword pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP pGatePIN pGateTimeZone pGateKeypadZone'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getSiteList'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getSiteList'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getAvailableUnits'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAvailableUnits'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAttributeID pDimensions'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getMoveInCost'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getMoveInCost'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pUnitIDs pInsuranceIDs'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='doMoveIn'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.doMoveIn'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='updateTenantInfo'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantInfo'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pTenantID pTenantFirstName pTenantLastName pDriversLicenseNum pDriversLicenseST pDriversLicenseEXP'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='updateTenantAddress'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantAddress'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pTenantID pAddressID pLine1 pLine2 pCity pState pZip pCountry pAddressType'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='updateTenantPhone'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantPhone'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pTenantID pPhoneID pTenantPhone pPhoneType'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getTenantAddress'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getTenantAddress'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pTenantID pAddressType'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getTenantPhone'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getTenantPhone'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pTenantID pPhoneType'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='updateTenantPassword'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateTenantPassword'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pTenantID pOldPasswd pNewPasswd'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getAddressTypes'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAddressTypes'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getPhoneTypes'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getPhoneTypes'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='listAccountUnits'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.listAccountUnits'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pAccountID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getCurrentCharges'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getCurrentCharges'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pMonths pItemId pItemPrice pItemQuantity'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='makePayment'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.makePayment'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getPicture'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getPicture'/>
+            <input>
+                <dime:message
+                        layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
+                        wsdl:required='true'/>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pPictureType pTenantID pFileObj'/>
+            </input>
+            <output>
+                <dime:message
+                        layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
+                        wsdl:required='true'/>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result pFileObj'/>
+            </output>
+        </operation>
+
+        <operation name='PictureReceived'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.PictureReceived'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pPictureType pTenantID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+
+        <operation name='updateAccountName'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updateAccountName'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pAccountID pAccountName'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='updatePicture'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.updatePicture'/>
+            <input>
+                <dime:message
+                        layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
+                        wsdl:required='true'/>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pPictureType pTenantID pFile'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='TenantLogin2'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.TenantLogin2'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pFirstName pLastName pUnitNumber pGatePIN pPhoneNumber pPostal'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='TenantLogin'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.TenantLogin'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountIDorUnitNumber pPassword pSearchBy'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getInsuranceOptions'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getInsuranceOptions'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getContract'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getContract'/>
+            <input>
+                <dime:message
+                        layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
+                        wsdl:required='true'/>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pTenantID pUnitIDs pInsuranceIDs pFileObj'/>
+            </input>
+            <output>
+                <dime:message
+                        layout='http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout'
+                        wsdl:required='true'/>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result pFileObj'/>
+            </output>
+        </operation>
+
+        <operation name='getMerchandiseCost'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getMerchandiseCost'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pMerchandiseId pQuantity'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='sellMerchandise'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.sellMerchandise'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pMerchandiseId pQuantity pPaymentString pPayMethod'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getInsuranceCost'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getInsuranceCost'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='sellInsurance'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.sellInsurance'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitIDs pInsuranceIDs pPaymentString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getReservation'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getReservation'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pReservationID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='UpdateAutoPay'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.UpdateAutoPay'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitIDs pCCNumOrABA pCheckingAccountNum pCCExpirationMonth pCCExpirationYear pAccountHolderName pStreet pCity pState pZip pEmail pDriversLicenseID pCCorACH pActive'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getAutopayInf'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAutopayInf'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitIDs'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getAfterMoveInPromotions'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getAfterMoveInPromotions'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getPTDChangeCharges'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getPTDChangeCharges'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pDesiredPTD'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getMoveOutCost'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getMoveOutCost'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='DoMoveOut'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.DoMoveOut'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='getUnitTransferCharges'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.getUnitTransferCharges'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='DoUnitTransfer'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.DoUnitTransfer'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='pUser pPIN pSiteID pAccountID pCurrentUnitID pNewUnitID pProcString pCCNumOrABA pCCNameOnCardOrCheckingAccountNum pCCExpirationMonthOrAccountName pCCExpirationYear pCCZipCode pPayMethod'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+        <operation name='TEST'>
+            <soap:operation soapAction='http://tempuri.org/csKiosk/action/csKiosk.TEST'/>
+            <input>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body
+                        use='encoded'
+                        namespace='http://tempuri.org/csKiosk/message/'
+                        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'
+                        parts='Result'/>
+            </output>
+        </operation>
+
+    </binding>
+
+    <service name='csKiosk'>
+        <port name='csKioskSoapPort' binding='wsdlns:csKioskSoapBinding'>
+            <soap:address location='https://host01slc.centershift.com/pxi/kiosks/csKiosk.WSDL'/>
+        </port>
+    </service>
 
 </definitions>

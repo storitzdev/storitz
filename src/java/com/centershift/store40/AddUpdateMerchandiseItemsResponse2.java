@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddUpdateMerchandiseItems_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddUpdateMerchandiseItems_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddUpdateMerchandiseItems_Response", propOrder = {
-    "orgRetailItems",
-    "errorMessage"
+        "orgRetailItems",
+        "errorMessage"
 })
 public class AddUpdateMerchandiseItemsResponse2 {
 
@@ -41,11 +38,9 @@ public class AddUpdateMerchandiseItemsResponse2 {
 
     /**
      * Gets the value of the orgRetailItems property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGRETAILITEMS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGRETAILITEMS }
      */
     public ArrayOfORGRETAILITEMS getOrgRetailItems() {
         return orgRetailItems;
@@ -53,11 +48,9 @@ public class AddUpdateMerchandiseItemsResponse2 {
 
     /**
      * Sets the value of the orgRetailItems property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGRETAILITEMS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGRETAILITEMS }
      */
     public void setOrgRetailItems(ArrayOfORGRETAILITEMS value) {
         this.orgRetailItems = value;
@@ -65,11 +58,9 @@ public class AddUpdateMerchandiseItemsResponse2 {
 
     /**
      * Gets the value of the errorMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMessage() {
         return errorMessage;
@@ -77,11 +68,9 @@ public class AddUpdateMerchandiseItemsResponse2 {
 
     /**
      * Sets the value of the errorMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMessage(String value) {
         this.errorMessage = value;

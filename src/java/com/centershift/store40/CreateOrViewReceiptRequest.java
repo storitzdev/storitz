@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for createOrViewReceipt_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="createOrViewReceipt_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "createOrViewReceipt_Request", propOrder = {
-    "siteID",
-    "transactionID",
-    "acctID",
-    "pdfTemplateID"
+        "siteID",
+        "transactionID",
+        "acctID",
+        "pdfTemplateID"
 })
 public class CreateOrViewReceiptRequest {
 
@@ -49,7 +46,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -57,7 +53,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -65,7 +60,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -73,7 +67,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;
@@ -81,7 +74,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -89,7 +81,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -97,7 +88,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Gets the value of the pdfTemplateID property.
-     * 
      */
     public long getPdfTemplateID() {
         return pdfTemplateID;
@@ -105,7 +95,6 @@ public class CreateOrViewReceiptRequest {
 
     /**
      * Sets the value of the pdfTemplateID property.
-     * 
      */
     public void setPdfTemplateID(long value) {
         this.pdfTemplateID = value;

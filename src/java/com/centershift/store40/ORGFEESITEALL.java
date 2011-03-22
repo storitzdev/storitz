@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_FEE_SITE_ALL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_FEE_SITE_ALL">
  *   &lt;complexContent>
@@ -51,43 +50,40 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_FEE_SITE_ALL", propOrder = {
-    "orgfeeobjectid",
-    "feeobjectid",
-    "feeschedid",
-    "icon",
-    "feename",
-    "feedesc",
-    "feeamt",
-    "feeamtdesc",
-    "taxgroupid",
-    "taxable",
-    "basefeetype",
-    "schedfeetype",
-    "feetypeval",
-    "feebasis",
-    "feebasisval",
-    "percbasis",
-    "percbasisval",
-    "feefixed",
-    "feeperc",
-    "basismin",
-    "basismax",
-    "evalorder",
-    "feelevel",
-    "reftype",
-    "siteid",
-    "orgid",
-    "feeactive",
-    "schedactive"
+        "orgfeeobjectid",
+        "feeobjectid",
+        "feeschedid",
+        "icon",
+        "feename",
+        "feedesc",
+        "feeamt",
+        "feeamtdesc",
+        "taxgroupid",
+        "taxable",
+        "basefeetype",
+        "schedfeetype",
+        "feetypeval",
+        "feebasis",
+        "feebasisval",
+        "percbasis",
+        "percbasisval",
+        "feefixed",
+        "feeperc",
+        "basismin",
+        "basismax",
+        "evalorder",
+        "feelevel",
+        "reftype",
+        "siteid",
+        "orgid",
+        "feeactive",
+        "schedactive"
 })
 public class ORGFEESITEALL
-    extends BaseEntityOfCollectionORGFEESITEALLColumnIndexes
-{
+        extends BaseEntityOfCollectionORGFEESITEALLColumnIndexes {
 
     @XmlElement(name = "ORG_FEE_OBJECT_ID", required = true, type = Long.class, nillable = true)
     protected Long orgfeeobjectid;
@@ -148,11 +144,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the orgfeeobjectid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getORGFEEOBJECTID() {
         return orgfeeobjectid;
@@ -160,11 +154,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the orgfeeobjectid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setORGFEEOBJECTID(Long value) {
         this.orgfeeobjectid = value;
@@ -172,11 +164,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feeobjectid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFEEOBJECTID() {
         return feeobjectid;
@@ -184,11 +174,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feeobjectid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFEEOBJECTID(BigDecimal value) {
         this.feeobjectid = value;
@@ -196,11 +184,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feeschedid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getFEESCHEDID() {
         return feeschedid;
@@ -208,11 +194,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feeschedid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setFEESCHEDID(Long value) {
         this.feeschedid = value;
@@ -220,11 +204,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -232,11 +214,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -244,11 +224,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEENAME() {
         return feename;
@@ -256,11 +234,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEENAME(String value) {
         this.feename = value;
@@ -268,11 +244,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feedesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEEDESC() {
         return feedesc;
@@ -280,11 +254,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feedesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEEDESC(String value) {
         this.feedesc = value;
@@ -292,11 +264,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feeamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFEEAMT() {
         return feeamt;
@@ -304,11 +274,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feeamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFEEAMT(BigDecimal value) {
         this.feeamt = value;
@@ -316,11 +284,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feeamtdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEEAMTDESC() {
         return feeamtdesc;
@@ -328,11 +294,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feeamtdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEEAMTDESC(String value) {
         this.feeamtdesc = value;
@@ -340,11 +304,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAXGROUPID() {
         return taxgroupid;
@@ -352,11 +314,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAXGROUPID(BigDecimal value) {
         this.taxgroupid = value;
@@ -364,11 +324,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the taxable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTAXABLE() {
         return taxable;
@@ -376,11 +334,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the taxable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTAXABLE(Boolean value) {
         this.taxable = value;
@@ -388,11 +344,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the basefeetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getBASEFEETYPE() {
         return basefeetype;
@@ -400,11 +354,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the basefeetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setBASEFEETYPE(Integer value) {
         this.basefeetype = value;
@@ -412,11 +364,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the schedfeetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSCHEDFEETYPE() {
         return schedfeetype;
@@ -424,11 +374,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the schedfeetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSCHEDFEETYPE(Integer value) {
         this.schedfeetype = value;
@@ -436,11 +384,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feetypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEETYPEVAL() {
         return feetypeval;
@@ -448,11 +394,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feetypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEETYPEVAL(String value) {
         this.feetypeval = value;
@@ -460,11 +404,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feebasis property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getFEEBASIS() {
         return feebasis;
@@ -472,11 +414,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feebasis property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setFEEBASIS(Integer value) {
         this.feebasis = value;
@@ -484,11 +424,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feebasisval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEEBASISVAL() {
         return feebasisval;
@@ -496,11 +434,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feebasisval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEEBASISVAL(String value) {
         this.feebasisval = value;
@@ -508,11 +444,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the percbasis property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPERCBASIS() {
         return percbasis;
@@ -520,11 +454,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the percbasis property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPERCBASIS(Integer value) {
         this.percbasis = value;
@@ -532,11 +464,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the percbasisval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPERCBASISVAL() {
         return percbasisval;
@@ -544,11 +474,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the percbasisval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPERCBASISVAL(String value) {
         this.percbasisval = value;
@@ -556,11 +484,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feefixed property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFEEFIXED() {
         return feefixed;
@@ -568,11 +494,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feefixed property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFEEFIXED(BigDecimal value) {
         this.feefixed = value;
@@ -580,11 +504,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feeperc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFEEPERC() {
         return feeperc;
@@ -592,11 +514,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feeperc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFEEPERC(BigDecimal value) {
         this.feeperc = value;
@@ -604,11 +524,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the basismin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getBASISMIN() {
         return basismin;
@@ -616,11 +534,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the basismin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setBASISMIN(BigDecimal value) {
         this.basismin = value;
@@ -628,11 +544,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the basismax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getBASISMAX() {
         return basismax;
@@ -640,11 +554,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the basismax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setBASISMAX(BigDecimal value) {
         this.basismax = value;
@@ -652,11 +564,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the evalorder property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getEVALORDER() {
         return evalorder;
@@ -664,11 +574,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the evalorder property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setEVALORDER(Integer value) {
         this.evalorder = value;
@@ -676,11 +584,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feelevel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEELEVEL() {
         return feelevel;
@@ -688,11 +594,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feelevel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEELEVEL(String value) {
         this.feelevel = value;
@@ -700,11 +604,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the reftype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getREFTYPE() {
         return reftype;
@@ -712,11 +614,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the reftype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setREFTYPE(BigDecimal value) {
         this.reftype = value;
@@ -724,11 +624,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -736,11 +634,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -748,11 +644,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the orgid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getORGID() {
         return orgid;
@@ -760,11 +654,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the orgid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setORGID(Long value) {
         this.orgid = value;
@@ -772,11 +664,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the feeactive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isFEEACTIVE() {
         return feeactive;
@@ -784,11 +674,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the feeactive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setFEEACTIVE(Boolean value) {
         this.feeactive = value;
@@ -796,11 +684,9 @@ public class ORGFEESITEALL
 
     /**
      * Gets the value of the schedactive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isSCHEDACTIVE() {
         return schedactive;
@@ -808,11 +694,9 @@ public class ORGFEESITEALL
 
     /**
      * Sets the value of the schedactive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setSCHEDACTIVE(Boolean value) {
         this.schedactive = value;

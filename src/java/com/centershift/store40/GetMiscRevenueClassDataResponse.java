@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getMiscRevenueClassDataResult"
+        "getMiscRevenueClassDataResult"
 })
 @XmlRootElement(name = "GetMiscRevenueClassDataResponse")
 public class GetMiscRevenueClassDataResponse {
@@ -39,11 +32,9 @@ public class GetMiscRevenueClassDataResponse {
 
     /**
      * Gets the value of the getMiscRevenueClassDataResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetMiscRevenueClassDataResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetMiscRevenueClassDataResponse2 }
      */
     public GetMiscRevenueClassDataResponse2 getGetMiscRevenueClassDataResult() {
         return getMiscRevenueClassDataResult;
@@ -51,11 +42,9 @@ public class GetMiscRevenueClassDataResponse {
 
     /**
      * Sets the value of the getMiscRevenueClassDataResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetMiscRevenueClassDataResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetMiscRevenueClassDataResponse2 }
      */
     public void setGetMiscRevenueClassDataResult(GetMiscRevenueClassDataResponse2 value) {
         this.getMiscRevenueClassDataResult = value;

@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_RETAIL_SOLD complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_RETAIL_SOLD">
  *   &lt;complexContent>
@@ -54,44 +49,41 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_RETAIL_SOLD", propOrder = {
-    "tnxid",
-    "siteid",
-    "acctid",
-    "acctname",
-    "accttype",
-    "retailid",
-    "tnxdetailid",
-    "retailobjectid",
-    "tnxdate",
-    "amt",
-    "itemprice",
-    "taxcharged",
-    "tax",
-    "extended",
-    "fulfilled",
-    "assid",
-    "assref",
-    "icon",
-    "classdesc",
-    "itemname",
-    "description",
-    "qty",
-    "returned",
-    "partnumber",
-    "sku",
-    "barcode",
-    "itemtype",
-    "taxgroupid",
-    "status"
+        "tnxid",
+        "siteid",
+        "acctid",
+        "acctname",
+        "accttype",
+        "retailid",
+        "tnxdetailid",
+        "retailobjectid",
+        "tnxdate",
+        "amt",
+        "itemprice",
+        "taxcharged",
+        "tax",
+        "extended",
+        "fulfilled",
+        "assid",
+        "assref",
+        "icon",
+        "classdesc",
+        "itemname",
+        "description",
+        "qty",
+        "returned",
+        "partnumber",
+        "sku",
+        "barcode",
+        "itemtype",
+        "taxgroupid",
+        "status"
 })
 public class TRANRETAILSOLD
-    extends BaseEntityOfCollectionTRANRETAILSOLDColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANRETAILSOLDColumnIndexes {
 
     @XmlElement(name = "TNX_ID")
     protected long tnxid;
@@ -155,7 +147,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the tnxid property.
-     * 
      */
     public long getTNXID() {
         return tnxid;
@@ -163,7 +154,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the tnxid property.
-     * 
      */
     public void setTNXID(long value) {
         this.tnxid = value;
@@ -171,7 +161,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -179,7 +168,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -187,11 +175,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -199,11 +185,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -211,11 +195,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -223,11 +205,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -235,7 +215,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the accttype property.
-     * 
      */
     public int getACCTTYPE() {
         return accttype;
@@ -243,7 +222,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the accttype property.
-     * 
      */
     public void setACCTTYPE(int value) {
         this.accttype = value;
@@ -251,7 +229,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the retailid property.
-     * 
      */
     public long getRETAILID() {
         return retailid;
@@ -259,7 +236,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the retailid property.
-     * 
      */
     public void setRETAILID(long value) {
         this.retailid = value;
@@ -267,7 +243,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the tnxdetailid property.
-     * 
      */
     public long getTNXDETAILID() {
         return tnxdetailid;
@@ -275,7 +250,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the tnxdetailid property.
-     * 
      */
     public void setTNXDETAILID(long value) {
         this.tnxdetailid = value;
@@ -283,7 +257,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the retailobjectid property.
-     * 
      */
     public long getRETAILOBJECTID() {
         return retailobjectid;
@@ -291,7 +264,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the retailobjectid property.
-     * 
      */
     public void setRETAILOBJECTID(long value) {
         this.retailobjectid = value;
@@ -299,11 +271,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the tnxdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTNXDATE() {
         return tnxdate;
@@ -311,11 +281,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the tnxdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTNXDATE(XMLGregorianCalendar value) {
         this.tnxdate = value;
@@ -323,11 +291,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the amt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAMT() {
         return amt;
@@ -335,11 +301,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the amt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAMT(BigDecimal value) {
         this.amt = value;
@@ -347,11 +311,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the itemprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getITEMPRICE() {
         return itemprice;
@@ -359,11 +321,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the itemprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setITEMPRICE(BigDecimal value) {
         this.itemprice = value;
@@ -371,11 +331,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the taxcharged property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTAXCHARGED() {
         return taxcharged;
@@ -383,11 +341,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the taxcharged property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTAXCHARGED(String value) {
         this.taxcharged = value;
@@ -395,11 +351,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the tax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAX() {
         return tax;
@@ -407,11 +361,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the tax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAX(BigDecimal value) {
         this.tax = value;
@@ -419,11 +371,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the extended property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEXTENDED() {
         return extended;
@@ -431,11 +381,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the extended property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEXTENDED(BigDecimal value) {
         this.extended = value;
@@ -443,11 +391,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the fulfilled property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFULFILLED() {
         return fulfilled;
@@ -455,11 +401,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the fulfilled property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFULFILLED(BigDecimal value) {
         this.fulfilled = value;
@@ -467,7 +411,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the assid property.
-     * 
      */
     public long getASSID() {
         return assid;
@@ -475,7 +418,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the assid property.
-     * 
      */
     public void setASSID(long value) {
         this.assid = value;
@@ -483,7 +425,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the assref property.
-     * 
      */
     public long getASSREF() {
         return assref;
@@ -491,7 +432,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the assref property.
-     * 
      */
     public void setASSREF(long value) {
         this.assref = value;
@@ -499,11 +439,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -511,11 +449,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -523,11 +459,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the classdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLASSDESC() {
         return classdesc;
@@ -535,11 +469,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the classdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLASSDESC(String value) {
         this.classdesc = value;
@@ -547,11 +479,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the itemname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getITEMNAME() {
         return itemname;
@@ -559,11 +489,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the itemname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setITEMNAME(String value) {
         this.itemname = value;
@@ -571,11 +499,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIPTION() {
         return description;
@@ -583,11 +509,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIPTION(String value) {
         this.description = value;
@@ -595,11 +519,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the qty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getQTY() {
         return qty;
@@ -607,11 +529,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the qty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setQTY(BigDecimal value) {
         this.qty = value;
@@ -619,11 +539,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the returned property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRETURNED() {
         return returned;
@@ -631,11 +549,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the returned property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRETURNED(BigDecimal value) {
         this.returned = value;
@@ -643,11 +559,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the partnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPARTNUMBER() {
         return partnumber;
@@ -655,11 +569,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the partnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPARTNUMBER(String value) {
         this.partnumber = value;
@@ -667,11 +579,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the sku property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSKU() {
         return sku;
@@ -679,11 +589,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the sku property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSKU(String value) {
         this.sku = value;
@@ -691,11 +599,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the barcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBARCODE() {
         return barcode;
@@ -703,11 +609,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the barcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBARCODE(String value) {
         this.barcode = value;
@@ -715,7 +619,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the itemtype property.
-     * 
      */
     public int getITEMTYPE() {
         return itemtype;
@@ -723,7 +626,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the itemtype property.
-     * 
      */
     public void setITEMTYPE(int value) {
         this.itemtype = value;
@@ -731,11 +633,9 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAXGROUPID() {
         return taxgroupid;
@@ -743,11 +643,9 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAXGROUPID(BigDecimal value) {
         this.taxgroupid = value;
@@ -755,7 +653,6 @@ public class TRANRETAILSOLD
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -763,7 +660,6 @@ public class TRANRETAILSOLD
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;

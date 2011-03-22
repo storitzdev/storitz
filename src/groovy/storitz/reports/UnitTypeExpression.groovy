@@ -13,14 +13,14 @@ import storitz.constants.UnitType
 class UnitTypeExpression implements CustomExpression {
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          String unitTypeName = (String) fields.get("unitType")
-          if (!unitTypeName || unitTypeName == "") return ""
-          UnitType unitType = UnitType.valueOf(unitTypeName)
-          return unitType.display
+    String unitTypeName = (String) fields.get("unitType")
+    if (!unitTypeName || unitTypeName == "") return ""
+    UnitType unitType = UnitType.valueOf(unitTypeName)
+    return unitType.display
   }
 
   public String getClassName() {
-          return String.class.getName();
+    return String.class.getName();
   }
 
 }

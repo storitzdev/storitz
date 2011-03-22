@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for MultiRetailSalesResults complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MultiRetailSalesResults">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiRetailSalesResults", propOrder = {
-    "retailItemID",
-    "successful",
-    "assessmentID",
-    "errorString"
+        "retailItemID",
+        "successful",
+        "assessmentID",
+        "errorString"
 })
 public class MultiRetailSalesResults {
 
@@ -49,7 +46,6 @@ public class MultiRetailSalesResults {
 
     /**
      * Gets the value of the retailItemID property.
-     * 
      */
     public long getRetailItemID() {
         return retailItemID;
@@ -57,7 +53,6 @@ public class MultiRetailSalesResults {
 
     /**
      * Sets the value of the retailItemID property.
-     * 
      */
     public void setRetailItemID(long value) {
         this.retailItemID = value;
@@ -65,7 +60,6 @@ public class MultiRetailSalesResults {
 
     /**
      * Gets the value of the successful property.
-     * 
      */
     public boolean isSuccessful() {
         return successful;
@@ -73,7 +67,6 @@ public class MultiRetailSalesResults {
 
     /**
      * Sets the value of the successful property.
-     * 
      */
     public void setSuccessful(boolean value) {
         this.successful = value;
@@ -81,7 +74,6 @@ public class MultiRetailSalesResults {
 
     /**
      * Gets the value of the assessmentID property.
-     * 
      */
     public long getAssessmentID() {
         return assessmentID;
@@ -89,7 +81,6 @@ public class MultiRetailSalesResults {
 
     /**
      * Sets the value of the assessmentID property.
-     * 
      */
     public void setAssessmentID(long value) {
         this.assessmentID = value;
@@ -97,11 +88,9 @@ public class MultiRetailSalesResults {
 
     /**
      * Gets the value of the errorString property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorString() {
         return errorString;
@@ -109,11 +98,9 @@ public class MultiRetailSalesResults {
 
     /**
      * Sets the value of the errorString property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorString(String value) {
         this.errorString = value;

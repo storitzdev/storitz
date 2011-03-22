@@ -14,10 +14,10 @@ class AccountExpression implements CustomExpression {
   }
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-    String account =  fields.get(fieldName);
+    String account = fields.get(fieldName);
     def ret = ""
     if (account?.size() > 4) {
-      for(i in 0..account.size() - 4) {
+      for (i in 0..account.size() - 4) {
         ret += "X"
       }
       ret += account.substring(account.size() - 4)
@@ -26,7 +26,7 @@ class AccountExpression implements CustomExpression {
   }
 
   public String getClassName() {
-          return String.class.getName();
+    return String.class.getName();
   }
 
 }

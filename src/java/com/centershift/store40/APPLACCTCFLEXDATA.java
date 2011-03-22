@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for APPL_ACCT_CFLEX_DATA complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APPL_ACCT_CFLEX_DATA">
  *   &lt;complexContent>
@@ -31,24 +30,21 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APPL_ACCT_CFLEX_DATA", propOrder = {
-    "acctid",
-    "orgid",
-    "extcolumnname",
-    "label",
-    "value",
-    "lookupid",
-    "extdataid",
-    "createdby",
-    "updatedby"
+        "acctid",
+        "orgid",
+        "extcolumnname",
+        "label",
+        "value",
+        "lookupid",
+        "extdataid",
+        "createdby",
+        "updatedby"
 })
 public class APPLACCTCFLEXDATA
-    extends BaseEntityOfCollectionAPPLACCTCFLEXDATAColumnIndexes
-{
+        extends BaseEntityOfCollectionAPPLACCTCFLEXDATAColumnIndexes {
 
     @XmlElement(name = "ACCT_ID")
     protected long acctid;
@@ -71,7 +67,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -79,7 +74,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -87,7 +81,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -95,7 +88,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -103,11 +95,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the extcolumnname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEXTCOLUMNNAME() {
         return extcolumnname;
@@ -115,11 +105,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the extcolumnname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEXTCOLUMNNAME(String value) {
         this.extcolumnname = value;
@@ -127,11 +115,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the label property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLABEL() {
         return label;
@@ -139,11 +125,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the label property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLABEL(String value) {
         this.label = value;
@@ -151,11 +135,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the value property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getVALUE() {
         return value;
@@ -163,11 +145,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the value property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setVALUE(String value) {
         this.value = value;
@@ -175,11 +155,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the lookupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getLOOKUPID() {
         return lookupid;
@@ -187,11 +165,9 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the lookupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setLOOKUPID(Long value) {
         this.lookupid = value;
@@ -199,7 +175,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the extdataid property.
-     * 
      */
     public long getEXTDATAID() {
         return extdataid;
@@ -207,7 +182,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the extdataid property.
-     * 
      */
     public void setEXTDATAID(long value) {
         this.extdataid = value;
@@ -215,7 +189,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -223,7 +196,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -231,7 +203,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -239,7 +210,6 @@ public class APPLACCTCFLEXDATA
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

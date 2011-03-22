@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for TransferReturn complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransferReturn">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransferReturn", propOrder = {
-    "escrowID",
-    "tnxID",
-    "rentalDetails"
+        "escrowID",
+        "tnxID",
+        "rentalDetails"
 })
 public class TransferReturn {
 
@@ -45,7 +42,6 @@ public class TransferReturn {
 
     /**
      * Gets the value of the escrowID property.
-     * 
      */
     public long getEscrowID() {
         return escrowID;
@@ -53,7 +49,6 @@ public class TransferReturn {
 
     /**
      * Sets the value of the escrowID property.
-     * 
      */
     public void setEscrowID(long value) {
         this.escrowID = value;
@@ -61,7 +56,6 @@ public class TransferReturn {
 
     /**
      * Gets the value of the tnxID property.
-     * 
      */
     public long getTnxID() {
         return tnxID;
@@ -69,7 +63,6 @@ public class TransferReturn {
 
     /**
      * Sets the value of the tnxID property.
-     * 
      */
     public void setTnxID(long value) {
         this.tnxID = value;
@@ -77,11 +70,9 @@ public class TransferReturn {
 
     /**
      * Gets the value of the rentalDetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfNewRental }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfNewRental }
      */
     public ArrayOfNewRental getRentalDetails() {
         return rentalDetails;
@@ -89,11 +80,9 @@ public class TransferReturn {
 
     /**
      * Sets the value of the rentalDetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfNewRental }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfNewRental }
      */
     public void setRentalDetails(ArrayOfNewRental value) {
         this.rentalDetails = value;

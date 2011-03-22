@@ -1,18 +1,17 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for UnitTypeInfo_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UnitTypeInfo_ST">
  *   &lt;complexContent>
@@ -30,18 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UnitTypeInfo_ST", propOrder = {
-    "dWidth",
-    "dLength",
-    "dHeight",
-    "iFloor",
-    "csUnitType",
-    "csInside",
-    "csDoorType"
+        "dWidth",
+        "dLength",
+        "dHeight",
+        "iFloor",
+        "csUnitType",
+        "csInside",
+        "csDoorType"
 })
 public class UnitTypeInfoST {
 
@@ -58,11 +55,9 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the dWidth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDWidth() {
         return dWidth;
@@ -70,11 +65,9 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the dWidth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDWidth(BigDecimal value) {
         this.dWidth = value;
@@ -82,11 +75,9 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the dLength property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDLength() {
         return dLength;
@@ -94,11 +85,9 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the dLength property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDLength(BigDecimal value) {
         this.dLength = value;
@@ -106,11 +95,9 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the dHeight property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDHeight() {
         return dHeight;
@@ -118,11 +105,9 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the dHeight property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDHeight(BigDecimal value) {
         this.dHeight = value;
@@ -130,7 +115,6 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the iFloor property.
-     * 
      */
     public int getIFloor() {
         return iFloor;
@@ -138,7 +122,6 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the iFloor property.
-     * 
      */
     public void setIFloor(int value) {
         this.iFloor = value;
@@ -146,11 +129,9 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the csUnitType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnitType() {
         return csUnitType;
@@ -158,11 +139,9 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the csUnitType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnitType(String value) {
         this.csUnitType = value;
@@ -170,11 +149,9 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the csInside property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsInside() {
         return csInside;
@@ -182,11 +159,9 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the csInside property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsInside(String value) {
         this.csInside = value;
@@ -194,11 +169,9 @@ public class UnitTypeInfoST {
 
     /**
      * Gets the value of the csDoorType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsDoorType() {
         return csDoorType;
@@ -206,11 +179,9 @@ public class UnitTypeInfoST {
 
     /**
      * Sets the value of the csDoorType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsDoorType(String value) {
         this.csDoorType = value;

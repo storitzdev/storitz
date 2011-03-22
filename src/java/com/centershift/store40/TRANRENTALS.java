@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for TRAN_RENTALS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_RENTALS">
  *   &lt;complexContent>
@@ -56,47 +51,44 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_RENTALS", propOrder = {
-    "rentalid",
-    "acctid",
-    "objecttype",
-    "objectid",
-    "parentrentalid",
-    "status",
-    "startdate",
-    "enddate",
-    "ptd",
-    "ltd",
-    "overlockstatus",
-    "delschedule",
-    "emailcc",
-    "monoticedate",
-    "modate",
-    "transfertoid",
-    "dailydeldate",
-    "delexempt",
-    "legacyrefid",
-    "taxexempt",
-    "taxexemptinfo",
-    "created",
-    "updated",
-    "createdby",
-    "updatedby",
-    "delstep",
-    "atd",
-    "perendday",
-    "version",
-    "mailservid",
-    "emailservid",
-    "transferfromid"
+        "rentalid",
+        "acctid",
+        "objecttype",
+        "objectid",
+        "parentrentalid",
+        "status",
+        "startdate",
+        "enddate",
+        "ptd",
+        "ltd",
+        "overlockstatus",
+        "delschedule",
+        "emailcc",
+        "monoticedate",
+        "modate",
+        "transfertoid",
+        "dailydeldate",
+        "delexempt",
+        "legacyrefid",
+        "taxexempt",
+        "taxexemptinfo",
+        "created",
+        "updated",
+        "createdby",
+        "updatedby",
+        "delstep",
+        "atd",
+        "perendday",
+        "version",
+        "mailservid",
+        "emailservid",
+        "transferfromid"
 })
 public class TRANRENTALS
-    extends BaseEntityOfCollectionTRANRENTALSColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANRENTALSColumnIndexes {
 
     @XmlElement(name = "RENTAL_ID")
     protected long rentalid;
@@ -175,7 +167,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the rentalid property.
-     * 
      */
     public long getRENTALID() {
         return rentalid;
@@ -183,7 +174,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the rentalid property.
-     * 
      */
     public void setRENTALID(long value) {
         this.rentalid = value;
@@ -191,11 +181,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -203,11 +191,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -215,7 +201,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the objecttype property.
-     * 
      */
     public int getOBJECTTYPE() {
         return objecttype;
@@ -223,7 +208,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the objecttype property.
-     * 
      */
     public void setOBJECTTYPE(int value) {
         this.objecttype = value;
@@ -231,7 +215,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the objectid property.
-     * 
      */
     public long getOBJECTID() {
         return objectid;
@@ -239,7 +222,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the objectid property.
-     * 
      */
     public void setOBJECTID(long value) {
         this.objectid = value;
@@ -247,11 +229,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the parentrentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPARENTRENTALID() {
         return parentrentalid;
@@ -259,11 +239,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the parentrentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPARENTRENTALID(Long value) {
         this.parentrentalid = value;
@@ -271,7 +249,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -279,7 +256,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -287,11 +263,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the startdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTDATE() {
         return startdate;
@@ -299,11 +273,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the startdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTDATE(XMLGregorianCalendar value) {
         this.startdate = value;
@@ -311,11 +283,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the enddate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getENDDATE() {
         return enddate;
@@ -323,11 +293,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the enddate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setENDDATE(XMLGregorianCalendar value) {
         this.enddate = value;
@@ -335,11 +303,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -347,11 +313,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -359,11 +323,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the ltd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLTD() {
         return ltd;
@@ -371,11 +333,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the ltd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLTD(XMLGregorianCalendar value) {
         this.ltd = value;
@@ -383,7 +343,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the overlockstatus property.
-     * 
      */
     public int getOVERLOCKSTATUS() {
         return overlockstatus;
@@ -391,7 +350,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the overlockstatus property.
-     * 
      */
     public void setOVERLOCKSTATUS(int value) {
         this.overlockstatus = value;
@@ -399,11 +357,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the delschedule property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDELSCHEDULE() {
         return delschedule;
@@ -411,11 +367,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the delschedule property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setDELSCHEDULE(Long value) {
         this.delschedule = value;
@@ -423,7 +377,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the emailcc property.
-     * 
      */
     public boolean isEMAILCC() {
         return emailcc;
@@ -431,7 +384,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the emailcc property.
-     * 
      */
     public void setEMAILCC(boolean value) {
         this.emailcc = value;
@@ -439,11 +391,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the monoticedate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMONOTICEDATE() {
         return monoticedate;
@@ -451,11 +401,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the monoticedate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMONOTICEDATE(XMLGregorianCalendar value) {
         this.monoticedate = value;
@@ -463,11 +411,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the modate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMODATE() {
         return modate;
@@ -475,11 +421,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the modate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMODATE(XMLGregorianCalendar value) {
         this.modate = value;
@@ -487,11 +431,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the transfertoid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTRANSFERTOID() {
         return transfertoid;
@@ -499,11 +441,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the transfertoid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTRANSFERTOID(Long value) {
         this.transfertoid = value;
@@ -511,11 +451,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the dailydeldate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDAILYDELDATE() {
         return dailydeldate;
@@ -523,11 +461,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the dailydeldate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDAILYDELDATE(XMLGregorianCalendar value) {
         this.dailydeldate = value;
@@ -535,7 +471,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the delexempt property.
-     * 
      */
     public boolean isDELEXEMPT() {
         return delexempt;
@@ -543,7 +478,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the delexempt property.
-     * 
      */
     public void setDELEXEMPT(boolean value) {
         this.delexempt = value;
@@ -551,11 +485,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the legacyrefid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLEGACYREFID() {
         return legacyrefid;
@@ -563,11 +495,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the legacyrefid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLEGACYREFID(String value) {
         this.legacyrefid = value;
@@ -575,7 +505,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the taxexempt property.
-     * 
      */
     public int getTAXEXEMPT() {
         return taxexempt;
@@ -583,7 +512,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the taxexempt property.
-     * 
      */
     public void setTAXEXEMPT(int value) {
         this.taxexempt = value;
@@ -591,11 +519,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the taxexemptinfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTAXEXEMPTINFO() {
         return taxexemptinfo;
@@ -603,11 +529,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the taxexemptinfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTAXEXEMPTINFO(String value) {
         this.taxexemptinfo = value;
@@ -615,11 +539,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -627,11 +549,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -639,11 +559,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -651,11 +569,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;
@@ -663,7 +579,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -671,7 +586,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -679,7 +593,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -687,7 +600,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -695,7 +607,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the delstep property.
-     * 
      */
     public int getDELSTEP() {
         return delstep;
@@ -703,7 +614,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the delstep property.
-     * 
      */
     public void setDELSTEP(int value) {
         this.delstep = value;
@@ -711,11 +621,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the atd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getATD() {
         return atd;
@@ -723,11 +631,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the atd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setATD(XMLGregorianCalendar value) {
         this.atd = value;
@@ -735,11 +641,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the perendday property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getPERENDDAY() {
         return perendday;
@@ -747,11 +651,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the perendday property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setPERENDDAY(Integer value) {
         this.perendday = value;
@@ -759,7 +661,6 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the version property.
-     * 
      */
     public int getVERSION() {
         return version;
@@ -767,7 +668,6 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the version property.
-     * 
      */
     public void setVERSION(int value) {
         this.version = value;
@@ -775,11 +675,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the mailservid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getMAILSERVID() {
         return mailservid;
@@ -787,11 +685,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the mailservid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setMAILSERVID(Long value) {
         this.mailservid = value;
@@ -799,11 +695,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the emailservid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getEMAILSERVID() {
         return emailservid;
@@ -811,11 +705,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the emailservid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setEMAILSERVID(Long value) {
         this.emailservid = value;
@@ -823,11 +715,9 @@ public class TRANRENTALS
 
     /**
      * Gets the value of the transferfromid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTRANSFERFROMID() {
         return transferfromid;
@@ -835,11 +725,9 @@ public class TRANRENTALS
 
     /**
      * Sets the value of the transferfromid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTRANSFERFROMID(Long value) {
         this.transferfromid = value;

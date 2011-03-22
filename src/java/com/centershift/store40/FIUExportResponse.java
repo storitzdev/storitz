@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "fiuExportResult"
+        "fiuExportResult"
 })
 @XmlRootElement(name = "FIUExportResponse")
 public class FIUExportResponse {
@@ -39,11 +32,9 @@ public class FIUExportResponse {
 
     /**
      * Gets the value of the fiuExportResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FIUResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link FIUResponse }
      */
     public FIUResponse getFIUExportResult() {
         return fiuExportResult;
@@ -51,11 +42,9 @@ public class FIUExportResponse {
 
     /**
      * Sets the value of the fiuExportResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FIUResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link FIUResponse }
      */
     public void setFIUExportResult(FIUResponse value) {
         this.fiuExportResult = value;

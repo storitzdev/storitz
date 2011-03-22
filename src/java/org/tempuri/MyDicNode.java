@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for MyDicNode complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MyDicNode">
  *   &lt;complexContent>
@@ -23,13 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MyDicNode", propOrder = {
-    "csKey",
-    "obValue"
+        "csKey",
+        "obValue"
 })
 public class MyDicNode {
 
@@ -38,11 +35,9 @@ public class MyDicNode {
 
     /**
      * Gets the value of the csKey property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsKey() {
         return csKey;
@@ -50,11 +45,9 @@ public class MyDicNode {
 
     /**
      * Sets the value of the csKey property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsKey(String value) {
         this.csKey = value;
@@ -62,11 +55,9 @@ public class MyDicNode {
 
     /**
      * Gets the value of the obValue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
+     *
+     * @return possible object is
+     *         {@link Object }
      */
     public Object getObValue() {
         return obValue;
@@ -74,11 +65,9 @@ public class MyDicNode {
 
     /**
      * Sets the value of the obValue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Object }
      */
     public void setObValue(Object value) {
         this.obValue = value;

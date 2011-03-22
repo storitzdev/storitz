@@ -4,5 +4,5 @@ import com.storitz.StorageUnit
 
 class StorageUnitController {
 
-    def scaffold = StorageUnit
+  def scaffold = StorageUnit
 }

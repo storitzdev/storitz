@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for RULE_VALUES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RULE_VALUES">
  *   &lt;complexContent>
@@ -55,47 +54,44 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RULE_VALUES", propOrder = {
-    "disporder",
-    "entityname",
-    "rulelevel",
-    "ruleid",
-    "depruleid",
-    "depvalue",
-    "rulename",
-    "sitevalue",
-    "sitevaluemeaning",
-    "negonemeaning",
-    "configid",
-    "lookupused",
-    "lookupset",
-    "lookupisvirtual",
-    "ruleclass",
-    "classvalue",
-    "valuedefault",
-    "valuedefaultmeaning",
-    "valuedatatype",
-    "valuelen",
-    "valuemax",
-    "valuemin",
-    "valueisreference",
-    "description",
-    "ruletype",
-    "ableinvoked",
-    "active",
-    "createdby",
-    "updatedby",
-    "parentid",
-    "display",
-    "rulevalues"
+        "disporder",
+        "entityname",
+        "rulelevel",
+        "ruleid",
+        "depruleid",
+        "depvalue",
+        "rulename",
+        "sitevalue",
+        "sitevaluemeaning",
+        "negonemeaning",
+        "configid",
+        "lookupused",
+        "lookupset",
+        "lookupisvirtual",
+        "ruleclass",
+        "classvalue",
+        "valuedefault",
+        "valuedefaultmeaning",
+        "valuedatatype",
+        "valuelen",
+        "valuemax",
+        "valuemin",
+        "valueisreference",
+        "description",
+        "ruletype",
+        "ableinvoked",
+        "active",
+        "createdby",
+        "updatedby",
+        "parentid",
+        "display",
+        "rulevalues"
 })
 public class RULEVALUES
-    extends BaseEntityOfCollectionRULEVALUESColumnIndexes
-{
+        extends BaseEntityOfCollectionRULEVALUESColumnIndexes {
 
     @XmlElement(name = "DISP_ORDER", required = true, type = Integer.class, nillable = true)
     protected Integer disporder;
@@ -164,11 +160,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the disporder property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDISPORDER() {
         return disporder;
@@ -176,11 +170,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the disporder property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDISPORDER(Integer value) {
         this.disporder = value;
@@ -188,11 +180,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the entityname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getENTITYNAME() {
         return entityname;
@@ -200,11 +190,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the entityname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setENTITYNAME(String value) {
         this.entityname = value;
@@ -212,11 +200,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the rulelevel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRULELEVEL() {
         return rulelevel;
@@ -224,11 +210,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the rulelevel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRULELEVEL(String value) {
         this.rulelevel = value;
@@ -236,11 +220,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the ruleid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRULEID() {
         return ruleid;
@@ -248,11 +230,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the ruleid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRULEID(Long value) {
         this.ruleid = value;
@@ -260,11 +240,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the depruleid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPRULEID() {
         return depruleid;
@@ -272,11 +250,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the depruleid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPRULEID(BigDecimal value) {
         this.depruleid = value;
@@ -284,11 +260,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the depvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEPVALUE() {
         return depvalue;
@@ -296,11 +270,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the depvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEPVALUE(String value) {
         this.depvalue = value;
@@ -308,11 +280,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the rulename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRULENAME() {
         return rulename;
@@ -320,11 +290,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the rulename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRULENAME(String value) {
         this.rulename = value;
@@ -332,11 +300,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the sitevalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITEVALUE() {
         return sitevalue;
@@ -344,11 +310,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the sitevalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITEVALUE(String value) {
         this.sitevalue = value;
@@ -356,11 +320,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the sitevaluemeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITEVALUEMEANING() {
         return sitevaluemeaning;
@@ -368,11 +330,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the sitevaluemeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITEVALUEMEANING(String value) {
         this.sitevaluemeaning = value;
@@ -380,11 +340,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the negonemeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNEGONEMEANING() {
         return negonemeaning;
@@ -392,11 +350,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the negonemeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNEGONEMEANING(String value) {
         this.negonemeaning = value;
@@ -404,11 +360,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the configid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCONFIGID() {
         return configid;
@@ -416,11 +370,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the configid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCONFIGID(BigDecimal value) {
         this.configid = value;
@@ -428,11 +380,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the lookupused property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isLOOKUPUSED() {
         return lookupused;
@@ -440,11 +390,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the lookupused property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setLOOKUPUSED(Boolean value) {
         this.lookupused = value;
@@ -452,11 +400,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the lookupset property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLOOKUPSET() {
         return lookupset;
@@ -464,11 +410,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the lookupset property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLOOKUPSET(BigDecimal value) {
         this.lookupset = value;
@@ -476,11 +420,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the lookupisvirtual property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isLOOKUPISVIRTUAL() {
         return lookupisvirtual;
@@ -488,11 +430,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the lookupisvirtual property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setLOOKUPISVIRTUAL(Boolean value) {
         this.lookupisvirtual = value;
@@ -500,11 +440,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the ruleclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRULECLASS() {
         return ruleclass;
@@ -512,11 +450,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the ruleclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRULECLASS(BigDecimal value) {
         this.ruleclass = value;
@@ -524,11 +460,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the classvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLASSVALUE() {
         return classvalue;
@@ -536,11 +470,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the classvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLASSVALUE(String value) {
         this.classvalue = value;
@@ -548,11 +480,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valuedefault property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getVALUEDEFAULT() {
         return valuedefault;
@@ -560,11 +490,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valuedefault property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setVALUEDEFAULT(String value) {
         this.valuedefault = value;
@@ -572,11 +500,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valuedefaultmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getVALUEDEFAULTMEANING() {
         return valuedefaultmeaning;
@@ -584,11 +510,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valuedefaultmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setVALUEDEFAULTMEANING(String value) {
         this.valuedefaultmeaning = value;
@@ -596,11 +520,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valuedatatype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getVALUEDATATYPE() {
         return valuedatatype;
@@ -608,11 +530,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valuedatatype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setVALUEDATATYPE(Integer value) {
         this.valuedatatype = value;
@@ -620,11 +540,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valuelen property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getVALUELEN() {
         return valuelen;
@@ -632,11 +550,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valuelen property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setVALUELEN(Integer value) {
         this.valuelen = value;
@@ -644,11 +560,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valuemax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVALUEMAX() {
         return valuemax;
@@ -656,11 +570,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valuemax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVALUEMAX(BigDecimal value) {
         this.valuemax = value;
@@ -668,11 +580,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valuemin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVALUEMIN() {
         return valuemin;
@@ -680,11 +590,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valuemin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVALUEMIN(BigDecimal value) {
         this.valuemin = value;
@@ -692,11 +600,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the valueisreference property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isVALUEISREFERENCE() {
         return valueisreference;
@@ -704,11 +610,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the valueisreference property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setVALUEISREFERENCE(Boolean value) {
         this.valueisreference = value;
@@ -716,11 +620,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIPTION() {
         return description;
@@ -728,11 +630,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIPTION(String value) {
         this.description = value;
@@ -740,11 +640,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the ruletype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getRULETYPE() {
         return ruletype;
@@ -752,11 +650,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the ruletype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setRULETYPE(Integer value) {
         this.ruletype = value;
@@ -764,11 +660,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the ableinvoked property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getABLEINVOKED() {
         return ableinvoked;
@@ -776,11 +670,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the ableinvoked property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setABLEINVOKED(String value) {
         this.ableinvoked = value;
@@ -788,11 +680,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -800,11 +690,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;
@@ -812,7 +700,6 @@ public class RULEVALUES
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -820,7 +707,6 @@ public class RULEVALUES
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -828,7 +714,6 @@ public class RULEVALUES
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -836,7 +721,6 @@ public class RULEVALUES
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -844,11 +728,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the parentid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPARENTID() {
         return parentid;
@@ -856,11 +738,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the parentid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPARENTID(Long value) {
         this.parentid = value;
@@ -868,11 +748,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the display property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDISPLAY() {
         return display;
@@ -880,11 +758,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the display property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDISPLAY(String value) {
         this.display = value;
@@ -892,11 +768,9 @@ public class RULEVALUES
 
     /**
      * Gets the value of the rulevalues property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRULEVALUES }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRULEVALUES }
      */
     public ArrayOfRULEVALUES getRULEVALUES() {
         return rulevalues;
@@ -904,11 +778,9 @@ public class RULEVALUES
 
     /**
      * Sets the value of the rulevalues property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRULEVALUES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRULEVALUES }
      */
     public void setRULEVALUES(ArrayOfRULEVALUES value) {
         this.rulevalues = value;

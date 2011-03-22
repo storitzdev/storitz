@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for RentalActivityReport complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="RentalActivityReport">
  *   &lt;complexContent>
@@ -36,24 +35,22 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RentalActivityReport", propOrder = {
-    "siteID",
-    "siteNumber",
-    "siteName",
-    "totalUnits",
-    "beginningOccupancy",
-    "newRentals",
-    "terminatedRentals",
-    "endOccupancy",
-    "net",
-    "revenueChange",
-    "percentOccupancy",
-    "sqftOccupancy",
-    "rentalActivityCollection"
+        "siteID",
+        "siteNumber",
+        "siteName",
+        "totalUnits",
+        "beginningOccupancy",
+        "newRentals",
+        "terminatedRentals",
+        "endOccupancy",
+        "net",
+        "revenueChange",
+        "percentOccupancy",
+        "sqftOccupancy",
+        "rentalActivityCollection"
 })
 public class RentalActivityReport {
 
@@ -86,7 +83,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -94,7 +90,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -102,11 +97,9 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the siteNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSiteNumber() {
         return siteNumber;
@@ -114,11 +107,9 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the siteNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSiteNumber(String value) {
         this.siteNumber = value;
@@ -126,11 +117,9 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the siteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSiteName() {
         return siteName;
@@ -138,11 +127,9 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the siteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSiteName(String value) {
         this.siteName = value;
@@ -150,7 +137,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the totalUnits property.
-     * 
      */
     public int getTotalUnits() {
         return totalUnits;
@@ -158,7 +144,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the totalUnits property.
-     * 
      */
     public void setTotalUnits(int value) {
         this.totalUnits = value;
@@ -166,7 +151,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the beginningOccupancy property.
-     * 
      */
     public int getBeginningOccupancy() {
         return beginningOccupancy;
@@ -174,7 +158,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the beginningOccupancy property.
-     * 
      */
     public void setBeginningOccupancy(int value) {
         this.beginningOccupancy = value;
@@ -182,7 +165,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the newRentals property.
-     * 
      */
     public int getNewRentals() {
         return newRentals;
@@ -190,7 +172,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the newRentals property.
-     * 
      */
     public void setNewRentals(int value) {
         this.newRentals = value;
@@ -198,7 +179,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the terminatedRentals property.
-     * 
      */
     public int getTerminatedRentals() {
         return terminatedRentals;
@@ -206,7 +186,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the terminatedRentals property.
-     * 
      */
     public void setTerminatedRentals(int value) {
         this.terminatedRentals = value;
@@ -214,7 +193,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the endOccupancy property.
-     * 
      */
     public int getEndOccupancy() {
         return endOccupancy;
@@ -222,7 +200,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the endOccupancy property.
-     * 
      */
     public void setEndOccupancy(int value) {
         this.endOccupancy = value;
@@ -230,7 +207,6 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the net property.
-     * 
      */
     public int getNet() {
         return net;
@@ -238,7 +214,6 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the net property.
-     * 
      */
     public void setNet(int value) {
         this.net = value;
@@ -246,11 +221,9 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the revenueChange property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRevenueChange() {
         return revenueChange;
@@ -258,11 +231,9 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the revenueChange property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRevenueChange(BigDecimal value) {
         this.revenueChange = value;
@@ -270,11 +241,9 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the percentOccupancy property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPercentOccupancy() {
         return percentOccupancy;
@@ -282,11 +251,9 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the percentOccupancy property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPercentOccupancy(BigDecimal value) {
         this.percentOccupancy = value;
@@ -294,11 +261,9 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the sqftOccupancy property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSQFTOccupancy() {
         return sqftOccupancy;
@@ -306,11 +271,9 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the sqftOccupancy property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSQFTOccupancy(BigDecimal value) {
         this.sqftOccupancy = value;
@@ -318,11 +281,9 @@ public class RentalActivityReport {
 
     /**
      * Gets the value of the rentalActivityCollection property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentalActivityReport }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentalActivityReport }
      */
     public ArrayOfRentalActivityReport getRentalActivityCollection() {
         return rentalActivityCollection;
@@ -330,11 +291,9 @@ public class RentalActivityReport {
 
     /**
      * Sets the value of the rentalActivityCollection property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentalActivityReport }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentalActivityReport }
      */
     public void setRentalActivityCollection(ArrayOfRentalActivityReport value) {
         this.rentalActivityCollection = value;

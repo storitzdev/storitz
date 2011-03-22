@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "endRentalResult"
+        "endRentalResult"
 })
 @XmlRootElement(name = "EndRentalResponse")
 public class EndRentalResponse {
@@ -39,11 +32,9 @@ public class EndRentalResponse {
 
     /**
      * Gets the value of the endRentalResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EndRentalResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link EndRentalResponse2 }
      */
     public EndRentalResponse2 getEndRentalResult() {
         return endRentalResult;
@@ -51,11 +42,9 @@ public class EndRentalResponse {
 
     /**
      * Sets the value of the endRentalResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EndRentalResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link EndRentalResponse2 }
      */
     public void setEndRentalResult(EndRentalResponse2 value) {
         this.endRentalResult = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateStreetRate_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateStreetRate_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateStreetRate_Request", propOrder = {
-    "siteID",
-    "streetRateData"
+        "siteID",
+        "streetRateData"
 })
 public class UpdateStreetRateRequest {
 
@@ -41,7 +38,6 @@ public class UpdateStreetRateRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class UpdateStreetRateRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class UpdateStreetRateRequest {
 
     /**
      * Gets the value of the streetRateData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfUpdateStreetReqData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfUpdateStreetReqData }
      */
     public ArrayOfUpdateStreetReqData getStreetRateData() {
         return streetRateData;
@@ -69,11 +62,9 @@ public class UpdateStreetRateRequest {
 
     /**
      * Sets the value of the streetRateData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfUpdateStreetReqData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfUpdateStreetReqData }
      */
     public void setStreetRateData(ArrayOfUpdateStreetReqData value) {
         this.streetRateData = value;

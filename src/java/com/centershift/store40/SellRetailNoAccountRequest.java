@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SellRetailNoAccount_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SellRetailNoAccount_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SellRetailNoAccount_Request", propOrder = {
-    "orgID",
-    "item",
-    "quantity",
-    "taxExemptNumber"
+        "orgID",
+        "item",
+        "quantity",
+        "taxExemptNumber"
 })
 public class SellRetailNoAccountRequest {
 
@@ -49,7 +46,6 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -57,7 +53,6 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -65,11 +60,9 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Gets the value of the item property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AVAILSITERETAILITEMS }
-     *     
+     *
+     * @return possible object is
+     *         {@link AVAILSITERETAILITEMS }
      */
     public AVAILSITERETAILITEMS getItem() {
         return item;
@@ -77,11 +70,9 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Sets the value of the item property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AVAILSITERETAILITEMS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AVAILSITERETAILITEMS }
      */
     public void setItem(AVAILSITERETAILITEMS value) {
         this.item = value;
@@ -89,7 +80,6 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Gets the value of the quantity property.
-     * 
      */
     public int getQuantity() {
         return quantity;
@@ -97,7 +87,6 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Sets the value of the quantity property.
-     * 
      */
     public void setQuantity(int value) {
         this.quantity = value;
@@ -105,11 +94,9 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Gets the value of the taxExemptNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTaxExemptNumber() {
         return taxExemptNumber;
@@ -117,11 +104,9 @@ public class SellRetailNoAccountRequest {
 
     /**
      * Sets the value of the taxExemptNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTaxExemptNumber(String value) {
         this.taxExemptNumber = value;

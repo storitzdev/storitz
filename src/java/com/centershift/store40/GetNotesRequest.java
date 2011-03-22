@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetNotes_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetNotes_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetNotes_Request", propOrder = {
-    "accountID",
-    "rentalID",
-    "noteID"
+        "accountID",
+        "rentalID",
+        "noteID"
 })
 public class GetNotesRequest {
 
@@ -45,11 +42,9 @@ public class GetNotesRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -57,11 +52,9 @@ public class GetNotesRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -69,11 +62,9 @@ public class GetNotesRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalID() {
         return rentalID;
@@ -81,11 +72,9 @@ public class GetNotesRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalID(Long value) {
         this.rentalID = value;
@@ -93,11 +82,9 @@ public class GetNotesRequest {
 
     /**
      * Gets the value of the noteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getNoteID() {
         return noteID;
@@ -105,11 +92,9 @@ public class GetNotesRequest {
 
     /**
      * Sets the value of the noteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setNoteID(Long value) {
         this.noteID = value;

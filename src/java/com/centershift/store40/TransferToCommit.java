@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for TransferToCommit complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransferToCommit">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransferToCommit", propOrder = {
-    "personID",
-    "escrowID",
-    "tnxID",
-    "fromRentals",
-    "toRentals"
+        "personID",
+        "escrowID",
+        "tnxID",
+        "fromRentals",
+        "toRentals"
 })
 public class TransferToCommit {
 
@@ -53,7 +50,6 @@ public class TransferToCommit {
 
     /**
      * Gets the value of the personID property.
-     * 
      */
     public long getPersonID() {
         return personID;
@@ -61,7 +57,6 @@ public class TransferToCommit {
 
     /**
      * Sets the value of the personID property.
-     * 
      */
     public void setPersonID(long value) {
         this.personID = value;
@@ -69,7 +64,6 @@ public class TransferToCommit {
 
     /**
      * Gets the value of the escrowID property.
-     * 
      */
     public long getEscrowID() {
         return escrowID;
@@ -77,7 +71,6 @@ public class TransferToCommit {
 
     /**
      * Sets the value of the escrowID property.
-     * 
      */
     public void setEscrowID(long value) {
         this.escrowID = value;
@@ -85,7 +78,6 @@ public class TransferToCommit {
 
     /**
      * Gets the value of the tnxID property.
-     * 
      */
     public long getTnxID() {
         return tnxID;
@@ -93,7 +85,6 @@ public class TransferToCommit {
 
     /**
      * Sets the value of the tnxID property.
-     * 
      */
     public void setTnxID(long value) {
         this.tnxID = value;
@@ -101,11 +92,9 @@ public class TransferToCommit {
 
     /**
      * Gets the value of the fromRentals property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentalInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentalInfo }
      */
     public ArrayOfRentalInfo getFromRentals() {
         return fromRentals;
@@ -113,11 +102,9 @@ public class TransferToCommit {
 
     /**
      * Sets the value of the fromRentals property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentalInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentalInfo }
      */
     public void setFromRentals(ArrayOfRentalInfo value) {
         this.fromRentals = value;
@@ -125,11 +112,9 @@ public class TransferToCommit {
 
     /**
      * Gets the value of the toRentals property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentalInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentalInfo }
      */
     public ArrayOfRentalInfo getToRentals() {
         return toRentals;
@@ -137,11 +122,9 @@ public class TransferToCommit {
 
     /**
      * Sets the value of the toRentals property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentalInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentalInfo }
      */
     public void setToRentals(ArrayOfRentalInfo value) {
         this.toRentals = value;

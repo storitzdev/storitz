@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TRAN_AUCTION_RENTALS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_AUCTION_RENTALS">
  *   &lt;complexContent>
@@ -40,30 +35,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_AUCTION_RENTALS", propOrder = {
-    "siteid",
-    "acctid",
-    "rentalid",
-    "acctname",
-    "unitnumber",
-    "icon",
-    "ltd",
-    "ptd",
-    "delrentalid",
-    "lienstate",
-    "delsched",
-    "delschedname",
-    "lastpaymentdate",
-    "totaldue",
-    "lastpaymentamount"
+        "siteid",
+        "acctid",
+        "rentalid",
+        "acctname",
+        "unitnumber",
+        "icon",
+        "ltd",
+        "ptd",
+        "delrentalid",
+        "lienstate",
+        "delsched",
+        "delschedname",
+        "lastpaymentdate",
+        "totaldue",
+        "lastpaymentamount"
 })
 public class TRANAUCTIONRENTALS
-    extends BaseEntityOfCollectionTRANAUCTIONRENTALSColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANAUCTIONRENTALSColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -101,7 +93,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -109,7 +100,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -117,11 +107,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -129,11 +117,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -141,7 +127,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the rentalid property.
-     * 
      */
     public long getRENTALID() {
         return rentalid;
@@ -149,7 +134,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the rentalid property.
-     * 
      */
     public void setRENTALID(long value) {
         this.rentalid = value;
@@ -157,11 +141,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -169,11 +151,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -181,11 +161,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -193,11 +171,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -205,11 +181,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -217,11 +191,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -229,11 +201,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the ltd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLTD() {
         return ltd;
@@ -241,11 +211,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the ltd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLTD(XMLGregorianCalendar value) {
         this.ltd = value;
@@ -253,11 +221,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -265,11 +231,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -277,7 +241,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the delrentalid property.
-     * 
      */
     public long getDELRENTALID() {
         return delrentalid;
@@ -285,7 +248,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the delrentalid property.
-     * 
      */
     public void setDELRENTALID(long value) {
         this.delrentalid = value;
@@ -293,7 +255,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the lienstate property.
-     * 
      */
     public int getLIENSTATE() {
         return lienstate;
@@ -301,7 +262,6 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the lienstate property.
-     * 
      */
     public void setLIENSTATE(int value) {
         this.lienstate = value;
@@ -309,11 +269,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the delsched property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDELSCHED() {
         return delsched;
@@ -321,11 +279,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the delsched property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDELSCHED(BigDecimal value) {
         this.delsched = value;
@@ -333,11 +289,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the delschedname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDELSCHEDNAME() {
         return delschedname;
@@ -345,11 +299,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the delschedname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDELSCHEDNAME(String value) {
         this.delschedname = value;
@@ -357,11 +309,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the lastpaymentdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLASTPAYMENTDATE() {
         return lastpaymentdate;
@@ -369,11 +319,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the lastpaymentdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLASTPAYMENTDATE(XMLGregorianCalendar value) {
         this.lastpaymentdate = value;
@@ -381,11 +329,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the totaldue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTOTALDUE() {
         return totaldue;
@@ -393,11 +339,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the totaldue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTOTALDUE(BigDecimal value) {
         this.totaldue = value;
@@ -405,11 +349,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Gets the value of the lastpaymentamount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getLASTPAYMENTAMOUNT() {
         return lastpaymentamount;
@@ -417,11 +359,9 @@ public class TRANAUCTIONRENTALS
 
     /**
      * Sets the value of the lastpaymentamount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setLASTPAYMENTAMOUNT(BigDecimal value) {
         this.lastpaymentamount = value;

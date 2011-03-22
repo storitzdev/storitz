@@ -15,7 +15,7 @@ class CustomDateClassPropertyEditor extends PropertyEditorSupport {
   def formatList = []
 
   CustomDateClassPropertyEditor(formatStrings) {
-    formatStrings.each{ formatList.add(new SimpleDateFormat(it)) }
+    formatStrings.each { formatList.add(new SimpleDateFormat(it)) }
   }
 
   def String getAsText() {

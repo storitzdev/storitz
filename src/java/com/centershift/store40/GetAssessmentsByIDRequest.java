@@ -1,19 +1,18 @@
-
 package com.centershift.store40;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for GetAssessmentsByID_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAssessmentsByID_Request">
  *   &lt;complexContent>
@@ -26,13 +25,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAssessmentsByID_Request", propOrder = {
-    "assessIDs",
-    "siteID"
+        "assessIDs",
+        "siteID"
 })
 public class GetAssessmentsByIDRequest {
 
@@ -43,25 +40,23 @@ public class GetAssessmentsByIDRequest {
 
     /**
      * Gets the value of the assessIDs property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the assessIDs property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getAssessIDs().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Long }
-     * 
-     * 
      */
     public List<Long> getAssessIDs() {
         if (assessIDs == null) {
@@ -72,11 +67,9 @@ public class GetAssessmentsByIDRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -84,11 +77,9 @@ public class GetAssessmentsByIDRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;

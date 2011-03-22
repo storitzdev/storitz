@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for CreateNotes_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateNotes_Request">
  *   &lt;complexContent>
@@ -30,17 +25,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateNotes_Request", propOrder = {
-    "subject",
-    "note",
-    "highPriority",
-    "accountID",
-    "rentalID",
-    "expires"
+        "subject",
+        "note",
+        "highPriority",
+        "accountID",
+        "rentalID",
+        "expires"
 })
 public class CreateNotesRequest {
 
@@ -60,11 +53,9 @@ public class CreateNotesRequest {
 
     /**
      * Gets the value of the subject property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSubject() {
         return subject;
@@ -72,11 +63,9 @@ public class CreateNotesRequest {
 
     /**
      * Sets the value of the subject property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSubject(String value) {
         this.subject = value;
@@ -84,11 +73,9 @@ public class CreateNotesRequest {
 
     /**
      * Gets the value of the note property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNote() {
         return note;
@@ -96,11 +83,9 @@ public class CreateNotesRequest {
 
     /**
      * Sets the value of the note property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNote(String value) {
         this.note = value;
@@ -108,11 +93,9 @@ public class CreateNotesRequest {
 
     /**
      * Gets the value of the highPriority property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isHighPriority() {
         return highPriority;
@@ -120,11 +103,9 @@ public class CreateNotesRequest {
 
     /**
      * Sets the value of the highPriority property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setHighPriority(Boolean value) {
         this.highPriority = value;
@@ -132,11 +113,9 @@ public class CreateNotesRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -144,11 +123,9 @@ public class CreateNotesRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -156,11 +133,9 @@ public class CreateNotesRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalID() {
         return rentalID;
@@ -168,11 +143,9 @@ public class CreateNotesRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalID(Long value) {
         this.rentalID = value;
@@ -180,11 +153,9 @@ public class CreateNotesRequest {
 
     /**
      * Gets the value of the expires property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getExpires() {
         return expires;
@@ -192,11 +163,9 @@ public class CreateNotesRequest {
 
     /**
      * Sets the value of the expires property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setExpires(XMLGregorianCalendar value) {
         this.expires = value;

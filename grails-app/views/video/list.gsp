@@ -14,58 +14,58 @@
 </head>
 <body>
 <div id="body">
-<g:render template="/topnav"/>
-<div class="stcontent">
-  <g:render template="/logo_bar"/>
-  <div class="buttons">
-    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-    <span class="button"><g:link action="create">Create New Video</g:link></span>
-  </div>
-  <div class="body">
-
-    <div class="price_options checkout_header white">
-      List Videos
+  <g:render template="/topnav"/>
+  <div class="stcontent">
+    <g:render template="/logo_bar"/>
+    <div class="buttons">
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
+      <span class="button"><g:link action="create">Create New Video</g:link></span>
     </div>
+    <div class="body">
 
-    <g:if test="${flash.message}">
-      <div class="message">${flash.message}</div>
-    </g:if>
-    <div class="list">
-      <table>
-        <thead>
-        <tr>
+      <div class="price_options checkout_header white">
+        List Videos
+      </div>
 
-          <g:sortableColumn property="id" title="${message(code: 'video.id.label', default: 'Id')}"/>
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
+      <div class="list">
+        <table>
+          <thead>
+          <tr>
 
-          <g:sortableColumn property="title" title="${message(code: 'video.title.label', default: 'Title')}"/>
+            <g:sortableColumn property="id" title="${message(code: 'video.id.label', default: 'Id')}"/>
 
-          <g:sortableColumn property="release" title="${message(code: 'video.releaseDate.label', default: 'Release Date')}"/>
+            <g:sortableColumn property="title" title="${message(code: 'video.title.label', default: 'Title')}"/>
 
-          <g:sortableColumn property="release" title="${message(code: 'video.releaseDate.label', default: 'External Link')}"/>
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${videoInstanceList}" status="i" var="videoInstance">
-          <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+            <g:sortableColumn property="release" title="${message(code: 'video.releaseDate.label', default: 'Release Date')}"/>
 
-            <td><g:link action="show" id="${videoInstance.id}">${fieldValue(bean: videoInstance, field: "id")}</g:link></td>
-
-            <td>${fieldValue(bean: videoInstance, field: "title")}</td>
-
-            <td>${videoInstance?.releaseDate?.format('MM-dd-yyyy')}</td>
-
-            <td><g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/> </td>
+            <g:sortableColumn property="release" title="${message(code: 'video.releaseDate.label', default: 'External Link')}"/>
           </tr>
-        </g:each>
-        </tbody>
-      </table>
-    </div>
-    <div class="paginateButtons">
-      <g:paginate total="${videoInstanceTotal}"/>
+          </thead>
+          <tbody>
+          <g:each in="${videoInstanceList}" status="i" var="videoInstance">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+
+              <td><g:link action="show" id="${videoInstance.id}">${fieldValue(bean: videoInstance, field: "id")}</g:link></td>
+
+              <td>${fieldValue(bean: videoInstance, field: "title")}</td>
+
+              <td>${videoInstance?.releaseDate?.format('MM-dd-yyyy')}</td>
+
+              <td><g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/></td>
+            </tr>
+          </g:each>
+          </tbody>
+        </table>
+      </div>
+      <div class="paginateButtons">
+        <g:paginate total="${videoInstanceTotal}"/>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

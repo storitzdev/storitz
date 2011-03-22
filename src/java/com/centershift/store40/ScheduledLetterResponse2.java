@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for scheduledLetter_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="scheduledLetter_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "scheduledLetter_Response", propOrder = {
-    "scheduledID"
+        "scheduledID"
 })
 public class ScheduledLetterResponse2 {
 
@@ -37,7 +34,6 @@ public class ScheduledLetterResponse2 {
 
     /**
      * Gets the value of the scheduledID property.
-     * 
      */
     public long getScheduledID() {
         return scheduledID;
@@ -45,7 +41,6 @@ public class ScheduledLetterResponse2 {
 
     /**
      * Sets the value of the scheduledID property.
-     * 
      */
     public void setScheduledID(long value) {
         this.scheduledID = value;

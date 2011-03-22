@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for swsLtrParams complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="swsLtrParams">
  *   &lt;complexContent>
@@ -33,22 +32,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "swsLtrParams", propOrder = {
-    "siteId",
-    "acctId",
-    "rentalId",
-    "unitNum",
-    "ltrTypeId",
-    "siteLtrRule",
-    "isMailLocal",
-    "isCOM",
-    "certifiedType",
-    "contactType",
-    "contactOrAddrId"
+        "siteId",
+        "acctId",
+        "rentalId",
+        "unitNum",
+        "ltrTypeId",
+        "siteLtrRule",
+        "isMailLocal",
+        "isCOM",
+        "certifiedType",
+        "contactType",
+        "contactOrAddrId"
 })
 public class SwsLtrParams {
 
@@ -69,7 +66,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the siteId property.
-     * 
      */
     public long getSiteId() {
         return siteId;
@@ -77,7 +73,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the siteId property.
-     * 
      */
     public void setSiteId(long value) {
         this.siteId = value;
@@ -85,7 +80,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the acctId property.
-     * 
      */
     public long getAcctId() {
         return acctId;
@@ -93,7 +87,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the acctId property.
-     * 
      */
     public void setAcctId(long value) {
         this.acctId = value;
@@ -101,7 +94,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the rentalId property.
-     * 
      */
     public long getRentalId() {
         return rentalId;
@@ -109,7 +101,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the rentalId property.
-     * 
      */
     public void setRentalId(long value) {
         this.rentalId = value;
@@ -117,11 +108,9 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the unitNum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUnitNum() {
         return unitNum;
@@ -129,11 +118,9 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the unitNum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUnitNum(String value) {
         this.unitNum = value;
@@ -141,7 +128,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the ltrTypeId property.
-     * 
      */
     public long getLtrTypeId() {
         return ltrTypeId;
@@ -149,7 +135,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the ltrTypeId property.
-     * 
      */
     public void setLtrTypeId(long value) {
         this.ltrTypeId = value;
@@ -157,11 +142,9 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the siteLtrRule property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SiteRuleLtrTypeGrpVals }
-     *     
+     *
+     * @return possible object is
+     *         {@link SiteRuleLtrTypeGrpVals }
      */
     public SiteRuleLtrTypeGrpVals getSiteLtrRule() {
         return siteLtrRule;
@@ -169,11 +152,9 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the siteLtrRule property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SiteRuleLtrTypeGrpVals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SiteRuleLtrTypeGrpVals }
      */
     public void setSiteLtrRule(SiteRuleLtrTypeGrpVals value) {
         this.siteLtrRule = value;
@@ -181,7 +162,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the isMailLocal property.
-     * 
      */
     public boolean isIsMailLocal() {
         return isMailLocal;
@@ -189,7 +169,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the isMailLocal property.
-     * 
      */
     public void setIsMailLocal(boolean value) {
         this.isMailLocal = value;
@@ -197,7 +176,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the isCOM property.
-     * 
      */
     public boolean isIsCOM() {
         return isCOM;
@@ -205,7 +183,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the isCOM property.
-     * 
      */
     public void setIsCOM(boolean value) {
         this.isCOM = value;
@@ -213,11 +190,9 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the certifiedType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CertifiedVals }
-     *     
+     *
+     * @return possible object is
+     *         {@link CertifiedVals }
      */
     public CertifiedVals getCertifiedType() {
         return certifiedType;
@@ -225,11 +200,9 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the certifiedType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CertifiedVals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CertifiedVals }
      */
     public void setCertifiedType(CertifiedVals value) {
         this.certifiedType = value;
@@ -237,11 +210,9 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the contactType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactTypeVals }
-     *     
+     *
+     * @return possible object is
+     *         {@link ContactTypeVals }
      */
     public ContactTypeVals getContactType() {
         return contactType;
@@ -249,11 +220,9 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the contactType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactTypeVals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ContactTypeVals }
      */
     public void setContactType(ContactTypeVals value) {
         this.contactType = value;
@@ -261,7 +230,6 @@ public class SwsLtrParams {
 
     /**
      * Gets the value of the contactOrAddrId property.
-     * 
      */
     public long getContactOrAddrId() {
         return contactOrAddrId;
@@ -269,7 +237,6 @@ public class SwsLtrParams {
 
     /**
      * Sets the value of the contactOrAddrId property.
-     * 
      */
     public void setContactOrAddrId(long value) {
         this.contactOrAddrId = value;

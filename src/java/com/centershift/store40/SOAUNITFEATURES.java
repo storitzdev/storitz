@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for SOA_UNIT_FEATURES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_UNIT_FEATURES">
  *   &lt;complexContent>
@@ -39,31 +38,28 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_UNIT_FEATURES", propOrder = {
-    "siteid",
-    "width",
-    "depth",
-    "height",
-    "attribute01",
-    "attribute01VAL",
-    "attribute02",
-    "attribute02VAL",
-    "climate",
-    "climateval",
-    "door",
-    "doorval",
-    "accesstype",
-    "accesstypeval",
-    "features",
-    "featuresval"
+        "siteid",
+        "width",
+        "depth",
+        "height",
+        "attribute01",
+        "attribute01VAL",
+        "attribute02",
+        "attribute02VAL",
+        "climate",
+        "climateval",
+        "door",
+        "doorval",
+        "accesstype",
+        "accesstypeval",
+        "features",
+        "featuresval"
 })
 public class SOAUNITFEATURES
-    extends BaseEntityOfCollectionSOAUNITFEATURESColumnIndexes
-{
+        extends BaseEntityOfCollectionSOAUNITFEATURESColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -100,7 +96,6 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -108,7 +103,6 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -116,11 +110,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWIDTH() {
         return width;
@@ -128,11 +120,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWIDTH(BigDecimal value) {
         this.width = value;
@@ -140,11 +130,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPTH() {
         return depth;
@@ -152,11 +140,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPTH(BigDecimal value) {
         this.depth = value;
@@ -164,11 +150,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the height property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getHEIGHT() {
         return height;
@@ -176,11 +160,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the height property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setHEIGHT(BigDecimal value) {
         this.height = value;
@@ -188,7 +170,6 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the attribute01 property.
-     * 
      */
     public int getATTRIBUTE01() {
         return attribute01;
@@ -196,7 +177,6 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the attribute01 property.
-     * 
      */
     public void setATTRIBUTE01(int value) {
         this.attribute01 = value;
@@ -204,11 +184,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the attribute01VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE01VAL() {
         return attribute01VAL;
@@ -216,11 +194,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the attribute01VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE01VAL(String value) {
         this.attribute01VAL = value;
@@ -228,11 +204,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the attribute02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getATTRIBUTE02() {
         return attribute02;
@@ -240,11 +214,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the attribute02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setATTRIBUTE02(Integer value) {
         this.attribute02 = value;
@@ -252,11 +224,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the attribute02VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE02VAL() {
         return attribute02VAL;
@@ -264,11 +234,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the attribute02VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE02VAL(String value) {
         this.attribute02VAL = value;
@@ -276,11 +244,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the climate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCLIMATE() {
         return climate;
@@ -288,11 +254,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the climate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCLIMATE(Integer value) {
         this.climate = value;
@@ -300,11 +264,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the climateval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLIMATEVAL() {
         return climateval;
@@ -312,11 +274,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the climateval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLIMATEVAL(String value) {
         this.climateval = value;
@@ -324,11 +284,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the door property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDOOR() {
         return door;
@@ -336,11 +294,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the door property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDOOR(Integer value) {
         this.door = value;
@@ -348,11 +304,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the doorval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDOORVAL() {
         return doorval;
@@ -360,11 +314,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the doorval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDOORVAL(String value) {
         this.doorval = value;
@@ -372,11 +324,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the accesstype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getACCESSTYPE() {
         return accesstype;
@@ -384,11 +334,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the accesstype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setACCESSTYPE(Integer value) {
         this.accesstype = value;
@@ -396,11 +344,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the accesstypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCESSTYPEVAL() {
         return accesstypeval;
@@ -408,11 +354,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the accesstypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCESSTYPEVAL(String value) {
         this.accesstypeval = value;
@@ -420,11 +364,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the features property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getFEATURES() {
         return features;
@@ -432,11 +374,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the features property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setFEATURES(Integer value) {
         this.features = value;
@@ -444,11 +384,9 @@ public class SOAUNITFEATURES
 
     /**
      * Gets the value of the featuresval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEATURESVAL() {
         return featuresval;
@@ -456,11 +394,9 @@ public class SOAUNITFEATURES
 
     /**
      * Sets the value of the featuresval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEATURESVAL(String value) {
         this.featuresval = value;

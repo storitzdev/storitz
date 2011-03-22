@@ -26,7 +26,7 @@ public enum Province {
   final String display
   final String fullName
 
-  Province(String display, String fullName) { 
+  Province(String display, String fullName) {
     this.display = display
     this.fullName = fullName
   }
@@ -50,9 +50,9 @@ public enum Province {
   }
 
   public static Province getEnumFromId(String value) {
-      def ret = list().find {it.display == value }
-      if (!ret) return Province.valueOf(value)
-      return ret
+    def ret = list().find {it.display == value }
+    if (!ret) return Province.valueOf(value)
+    return ret
   }
 
 }

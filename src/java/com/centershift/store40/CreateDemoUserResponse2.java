@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CreateDemoUser_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateDemoUser_Response">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateDemoUser_Response", propOrder = {
-    "success",
-    "username",
-    "password"
+        "success",
+        "username",
+        "password"
 })
 public class CreateDemoUserResponse2 {
 
@@ -45,7 +42,6 @@ public class CreateDemoUserResponse2 {
 
     /**
      * Gets the value of the success property.
-     * 
      */
     public boolean isSuccess() {
         return success;
@@ -53,7 +49,6 @@ public class CreateDemoUserResponse2 {
 
     /**
      * Sets the value of the success property.
-     * 
      */
     public void setSuccess(boolean value) {
         this.success = value;
@@ -61,11 +56,9 @@ public class CreateDemoUserResponse2 {
 
     /**
      * Gets the value of the username property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUsername() {
         return username;
@@ -73,11 +66,9 @@ public class CreateDemoUserResponse2 {
 
     /**
      * Sets the value of the username property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUsername(String value) {
         this.username = value;
@@ -85,11 +76,9 @@ public class CreateDemoUserResponse2 {
 
     /**
      * Gets the value of the password property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPassword() {
         return password;
@@ -97,11 +86,9 @@ public class CreateDemoUserResponse2 {
 
     /**
      * Sets the value of the password property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPassword(String value) {
         this.password = value;

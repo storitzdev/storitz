@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for GetRefundTypes_RequestData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetRefundTypes_RequestData">
  *   &lt;complexContent>
@@ -27,14 +22,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetRefundTypes_RequestData", propOrder = {
-    "tnxID",
-    "retailRequest",
-    "returnDate"
+        "tnxID",
+        "retailRequest",
+        "returnDate"
 })
 public class GetRefundTypesRequestData {
 
@@ -48,7 +41,6 @@ public class GetRefundTypesRequestData {
 
     /**
      * Gets the value of the tnxID property.
-     * 
      */
     public long getTnxID() {
         return tnxID;
@@ -56,7 +48,6 @@ public class GetRefundTypesRequestData {
 
     /**
      * Sets the value of the tnxID property.
-     * 
      */
     public void setTnxID(long value) {
         this.tnxID = value;
@@ -64,11 +55,9 @@ public class GetRefundTypesRequestData {
 
     /**
      * Gets the value of the retailRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RetailReturn }
-     *     
+     *
+     * @return possible object is
+     *         {@link RetailReturn }
      */
     public RetailReturn getRetailRequest() {
         return retailRequest;
@@ -76,11 +65,9 @@ public class GetRefundTypesRequestData {
 
     /**
      * Sets the value of the retailRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RetailReturn }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RetailReturn }
      */
     public void setRetailRequest(RetailReturn value) {
         this.retailRequest = value;
@@ -88,11 +75,9 @@ public class GetRefundTypesRequestData {
 
     /**
      * Gets the value of the returnDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getReturnDate() {
         return returnDate;
@@ -100,11 +85,9 @@ public class GetRefundTypesRequestData {
 
     /**
      * Sets the value of the returnDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setReturnDate(XMLGregorianCalendar value) {
         this.returnDate = value;

@@ -5,9 +5,9 @@ import grails.plugins.springsecurity.Secured
 import java.text.NumberFormat
 import javax.servlet.http.Cookie
 import org.grails.plugins.imagetools.ImageTool
+import storitz.constants.SearchType
 import storitz.constants.UnitType
 import com.storitz.*
-import storitz.constants.SearchType
 
 class StorageSiteController {
 
@@ -30,19 +30,19 @@ class StorageSiteController {
 
   @Secured(['ROLE_USER'])
   def list = {
-    def username  = springSecurityService.principal.username
+    def username = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
 
     def results
     def count
-    
+
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       if (params.sitename) {
         def q = "%${params.sitename}%"
         def max = Math.min(params.max ? params.int('max') : 10, 100)
         def offset = params.offset ? params.int('offset') : 0
         count = StorageSite.countByTitleLike(q)
-        results = StorageSite.findAllByTitleLike(q, [max:max, sort:"title", offset:offset])
+        results = StorageSite.findAllByTitleLike(q, [max: max, sort: "title", offset: offset])
       } else {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         results = StorageSite.listOrderByTitle(params)
@@ -52,9 +52,9 @@ class StorageSiteController {
       def max = Math.min(params.max ? params.int('max') : 10, 100)
       def offset = params.offset ? params.int('offset') : 0
       if (params.sitename) {
-        results = SiteUser.findAllByUser(user).collect{ it.site }.findAll{ it.title =~ /${params.sitename}/ }.sort{ it.title }
+        results = SiteUser.findAllByUser(user).collect { it.site }.findAll { it.title =~ /${params.sitename}/ }.sort { it.title }
       } else {
-        results = SiteUser.findAllByUser(user).collect{ it.site }.sort{ it.title }
+        results = SiteUser.findAllByUser(user).collect { it.site }.sort { it.title }
       }
       count = results.size()
       results = results.subList(offset, offset + max < count ? offset + max : count)
@@ -65,17 +65,17 @@ class StorageSiteController {
   @Secured(['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'])
   def autocompleteSite = {
 
-    def username  = springSecurityService.principal.username
+    def username = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
     println "Username ${username} hasrole admin: ${UserRole.userHasRole(user, 'ROLE_ADMIN')}"
     params.sort = 'title'
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
-      results = StorageSite.findAllByTitleIlike(params.term + '%', params).collect{it.title}
+      results = StorageSite.findAllByTitleIlike(params.term + '%', params).collect {it.title}
     } else {
-      results = SiteUser.findAllByUser(user).collect{ it.site }.findAll{ it.title ==~ /(?i).*${params.term}.*/ }.collect{it.title}.sort()
+      results = SiteUser.findAllByUser(user).collect { it.site }.findAll { it.title ==~ /(?i).*${params.term}.*/ }.collect {it.title}.sort()
     }
-    render (status: 200, contentType:"application/json", text: results as JSON )
+    render(status: 200, contentType: "application/json", text: results as JSON)
   }
 
   def create = {
@@ -106,8 +106,8 @@ class StorageSiteController {
     }
     else {
       def visitCount = Visit.countBySite(storageSiteInstance)
-      def contacts = SiteUser.findAllBySite(storageSiteInstance).collect{ it.user }.sort{ it.username }      
-      [storageSiteInstance: storageSiteInstance, visitCount:visitCount, contacts: contacts]
+      def contacts = SiteUser.findAllBySite(storageSiteInstance).collect { it.user }.sort { it.username }
+      [storageSiteInstance: storageSiteInstance, visitCount: visitCount, contacts: contacts]
     }
   }
 
@@ -125,14 +125,14 @@ class StorageSiteController {
     }
   }
 
-  @Secured(['ROLE_USER','ROLE_ADMIN','ROLE_MANAGER'])
+  @Secured(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER'])
   def edit = {
     def storageSiteInstance = StorageSite.get(params.id)
     if (!storageSiteInstance) {
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     } else {
-      def username  = springSecurityService.principal.username
+      def username = springSecurityService.principal.username
       def user = User.findByUsername(username as String)
       def rentalAgreementList
       if (!UserRole.userHasRole(user, 'ROLE_ADMIN')) {
@@ -145,8 +145,8 @@ class StorageSiteController {
       } else {
         rentalAgreementList = RentalAgreement.findAll()
       }
-      def contacts = SiteUser.findAllBySite(storageSiteInstance).collect{ it.user }.sort{ it.username }
-      [storageSiteInstance: storageSiteInstance, rentalAgreementList:rentalAgreementList, contacts: contacts]
+      def contacts = SiteUser.findAllBySite(storageSiteInstance).collect { it.user }.sort { it.username }
+      [storageSiteInstance: storageSiteInstance, rentalAgreementList: rentalAgreementList, contacts: contacts]
     }
   }
 
@@ -170,7 +170,7 @@ class StorageSiteController {
 
         // JPW? Shouldn't this just consider the manager(s?) that is currently linked? 
         UserRole.getUsersByRoleName('ROLE_MANAGER').each {
-          SiteUser.unlink (storageSiteInstance, it)
+          SiteUser.unlink(storageSiteInstance, it)
         }
         SiteUser.link(storageSiteInstance, manager)
       }
@@ -189,17 +189,17 @@ class StorageSiteController {
       }
 
       // clear all items
-      for(item in storageSiteInstance.securityItems) {
+      for (item in storageSiteInstance.securityItems) {
         item.delete()
       }
       storageSiteInstance.securityItems.clear();
 
-      for(item in storageSiteInstance.convenienceItems) {
+      for (item in storageSiteInstance.convenienceItems) {
         item.delete()
       }
       storageSiteInstance.convenienceItems.clear();
 
-      for(item in storageSiteInstance.amenityItems) {
+      for (item in storageSiteInstance.amenityItems) {
         item.delete()
       }
       storageSiteInstance.amenityItems.clear()
@@ -273,14 +273,14 @@ class StorageSiteController {
         storageSiteInstance.logo.imgOrder = 0;
       }
 
-      def imgOrder = storageSiteInstance.images.collect{ it.imgOrder }.max()
+      def imgOrder = storageSiteInstance.images.collect { it.imgOrder }.max()
       if (!imgOrder) {
         imgOrder = 0;
       } else {
         imgOrder++
       }
-      
-      params.findAll{ it.key ==~ /imageFile_(\d)+/}.each{ img->
+
+      params.findAll { it.key ==~ /imageFile_(\d)+/}.each { img ->
         def imgFile = request.getFile(img.key)
 
         if (imgFile.size > 0 && imgFile.originalFilename.endsWith('zip')) {
@@ -290,7 +290,7 @@ class StorageSiteController {
           fileUploadService.moveFile(imgFile, '/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
           def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
           def ant = new AntBuilder();
-          ant.unzip(  src: tmpPath, dest:tmpDir,  overwrite:"true"){ mapper(type:"flatten")};
+          ant.unzip(src: tmpPath, dest: tmpDir, overwrite: "true") { mapper(type: "flatten")};
           println("unzipped into temp dir: ${tmpDir.canonicalPath}")
           tmpDir.eachFileMatch ~/(?i).*\.(png|jpg|gif|jpeg)/, { File file ->
             println "Processing file ${file.canonicalFile}"
@@ -313,7 +313,7 @@ class StorageSiteController {
             newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self-storage-units-${imgOrder}${ext}"
           }
           if (imgFile.size > 0 && fileUploadService.moveFile(imgFile, '/images/upload', newName, siteId)) {
-            def tmpPath = fileUploadService.getFilePath('/images/upload',newName, siteId)
+            def tmpPath = fileUploadService.getFilePath('/images/upload', newName, siteId)
             def filePath = fileUploadService.getFilePath('/images/site', newName, siteId)
             def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, siteId)
             def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, siteId)
@@ -327,7 +327,7 @@ class StorageSiteController {
       }
 
 
-      for(specialOffer in storageSiteInstance.specialOffers) {
+      for (specialOffer in storageSiteInstance.specialOffers) {
         def offerString = "specialOffer_" + specialOffer.id
         def featuredOfferString = "featuredOffer_" + specialOffer.id
         def waiveAdminString = "waiveAdmin_" + specialOffer.id
@@ -431,7 +431,7 @@ class StorageSiteController {
     def site = StorageSite.get(params.id)
     def siteImage = SiteImage.get(params.siteImageId)
     imageService.deleteImage(site, siteImage)
-    render (status: 200, contentType:"application/json", text:"{ \"siteImage\": ${params.siteImageId} }")
+    render(status: 200, contentType: "application/json", text: "{ \"siteImage\": ${params.siteImageId} }")
   }
 
   def removeContact = {
@@ -439,8 +439,8 @@ class StorageSiteController {
     def user = User.get(params.userId)
 
     if (site && user) {
-      SiteUser.unlink (site, user)
-      render (status: 200, contentType:"application/json", text:"{ \"userId\": ${params.userId} }")
+      SiteUser.unlink(site, user)
+      render(status: 200, contentType: "application/json", text: "{ \"userId\": ${params.userId} }")
     }
   }
 
@@ -449,11 +449,11 @@ class StorageSiteController {
     def user = User.findByEmail(params.email)
 
     if (site && user && !SiteUser.findBySiteAndUser(site, user)) {
-      SiteUser.link (site, user)
-      render (status: 200, contentType:"application/json", text:"{ \"userId\": ${user.id}, \"username\":\"${user.username}\", \"email\":\"${user.email}\", \"notificationTypes\":\"${User.showNotificationTypes(user)}\" }")
+      SiteUser.link(site, user)
+      render(status: 200, contentType: "application/json", text: "{ \"userId\": ${user.id}, \"username\":\"${user.username}\", \"email\":\"${user.email}\", \"notificationTypes\":\"${User.showNotificationTypes(user)}\" }")
       return
     }
-    render (status: 200, contentType:"application/json", text:"{ \"userId\": -1 }")    
+    render(status: 200, contentType: "application/json", text: "{ \"userId\": -1 }")
   }
 
   def defaultImage = {
@@ -464,7 +464,7 @@ class StorageSiteController {
       it.isCover = it.id == imgId
     }
     site.save(flush: true)
-    render (status: 200, contentType:"application/json", text:"{ \"siteImage\": ${params.siteImageId} }")
+    render(status: 200, contentType: "application/json", text: "{ \"siteImage\": ${params.siteImageId} }")
   }
 
   def detail = {
@@ -476,10 +476,9 @@ class StorageSiteController {
     StorageSite site = StorageSite.get(params.id as Long)
 
     if (site.disabled && !params.adminView) {
-      redirect(controller:"home", action:"index")
+      redirect(controller: "home", action: "index")
       return;
     }
-
 
     //////////////////////////////////////////
     // >>> BEGIN match smartCall action code <<<
@@ -493,24 +492,24 @@ class StorageSiteController {
       searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE
     }
 
-    Collection sizeList = site.units.findAll{ it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
+    Collection sizeList = site.units.findAll { it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
     // output JSON for types
-    Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitsize.searchType == searchType}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+    Collection unitTypes = unitSize ? site.units.findAll { it.unitsize.id == unitSize.id}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll { it.unitsize.searchType == searchType}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
 
     sizeList.sort { it.width * it.length }
 
     def bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+      bestUnit = site.units.findAll { it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
       if (!bestUnit) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+        bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
       }
     } else if (unitSize) {
-      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+      bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
     } else {
       // TODO - decide on best price or best price for a given size
-      bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min{ it.price }
+      bestUnit = site.units.findAll { it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min { it.price }
     }
 
     // >>> END match smartCall action code <<<
@@ -522,8 +521,8 @@ class StorageSiteController {
     String searchDate = params.date
     if (searchDate && searchDate == '') searchDate = null
 
-    Visit visit = new Visit(dateCreated:new Date(), site:site, remoteAddr:remoteAddr, unitSize:unitSize, searchAddress:params.address, searchDate:searchDate)
-    
+    Visit visit = new Visit(dateCreated: new Date(), site: site, remoteAddr: remoteAddr, unitSize: unitSize, searchAddress: params.address, searchDate: searchDate)
+
     if (!visit.save()) println "Visit log save failed!"
 
     if (!session?.shortSessionId) {
@@ -534,7 +533,7 @@ class StorageSiteController {
     def insuranceId = params.insuranceId as Integer
     if (site.noInsuranceWaiver && (!insuranceId || insuranceId < 0)) {
       if (site.insurances.size() > 0) {
-        insuranceId = site.insurances.findAll{ it.active }.min{ it.premium }.id
+        insuranceId = site.insurances.findAll { it.active }.min { it.premium }.id
       } else {
         insuranceId = -999
       }
@@ -543,11 +542,11 @@ class StorageSiteController {
     UnitType chosenUnitType = params.unitType ? UnitType.valueOf(params.unitType) : bestUnit?.unitType
 
     def video = Video.findBySite(site)
-    def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id && it.state == site.state}
+    def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll { !it.disabled && it.id != site.id && it.state == site.state}
 
     def zoom = 12 // may try tighter
     def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
-    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
+    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll {it.id != site.id}.sort { mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
     def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
     if (title.size() > 70) {
@@ -555,11 +554,11 @@ class StorageSiteController {
     }
 
     // If you change this, don't forget the smartCall action also uses this view!
-    [rentalTransactionInstance:rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
+    [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: title,
-            shortSessionId:session.shortSessionId, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
+            shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
-            promoId:params.promoId, insuranceId:insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
+            promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList, nearbyList: nearbyList]
   }
 
   def directions = {
@@ -571,13 +570,11 @@ class StorageSiteController {
     [site: site]
   }
 
-  def getSmartCallDataForId(id)
-  {
+  def getSmartCallDataForId(id) {
     RentalTransactionController.liveSessions[id]
   }
 
-  def getRecentSmartCallData()
-  {
+  def getRecentSmartCallData() {
     def calls = RentalTransactionController.liveSessions.entrySet().sort { -it.value.timestamp }
     if (calls.size() > 50) {
       calls = calls[0..49]
@@ -587,7 +584,7 @@ class StorageSiteController {
 
   @Secured(['ROLE_CALLCENTER'])
   def findCall = {
-    [calls:recentSmartCallData]
+    [calls: recentSmartCallData]
   }
 
   @Secured(['ROLE_CALLCENTER'])
@@ -596,7 +593,7 @@ class StorageSiteController {
 
     if (!callParams) {
 //          flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rentalTransaction.label', default: 'com.storitz.RentalTransaction'), params.id])}"
-        redirect(action:"findCall")
+      redirect(action: "findCall")
     } else {
 
       def site
@@ -610,7 +607,6 @@ class StorageSiteController {
         rentalTransaction = RentalTransaction.get(callParams.rentalTransaction.id)
       }
 
-
       //////////////////////////////////////////
       // >>> BEGIN match detail action code <<<
 
@@ -622,24 +618,24 @@ class StorageSiteController {
         searchType = callParams.searchType ? SearchType.getEnumFromId(callParams.searchType) : SearchType.STORAGE
       }
 
-      Collection sizeList = site.units.findAll{ it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
+      Collection sizeList = site.units.findAll { it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
       // output JSON for types
-      Collection unitTypes = unitSize ? site.units.findAll{ it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitsize.searchType == searchType}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+      Collection unitTypes = unitSize ? site.units.findAll { it.unitsize.id == unitSize.id}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll { it.unitsize.searchType == searchType}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
 
       sizeList.sort { it.width * it.length }
 
       def bestUnit
       // if a size was chosen, use it, else get the "best" price
       if (params.unitType && unitSize) {
-        bestUnit = site.units.findAll{ it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+        bestUnit = site.units.findAll { it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
         if (!bestUnit) {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+          bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
         }
       } else if (unitSize) {
-        bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+        bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
       } else {
         // TODO - decide on best price or best price for a given size
-        bestUnit = site.units.findAll{ it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min{ it.price }
+        bestUnit = site.units.findAll { it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min { it.price }
       }
 
       // >>> END match detail action code <<<
@@ -650,22 +646,22 @@ class StorageSiteController {
       UnitType chosenUnitType = callParams.unitType ? UnitType.valueOf(callParams.unitType) : bestUnit?.unitType
 
       def video = Video.findBySite(site)
-      def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll{ !it.disabled && it.id != site.id && it.state == site.state}
+      def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll { !it.disabled && it.id != site.id && it.state == site.state}
 
       def zoom = 12 // may try tighter
       def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
-      def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll{it.id != site.id}.sort{ mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
+      def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll {it.id != site.id}.sort { mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
 
       def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
       if (title.size() > 70) {
         title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
       }
 
-      def model = [rentalTransactionInstance:rentalTransaction, sizeList: sizeList, unitTypes: unitTypes, site: site,
+      def model = [rentalTransactionInstance: rentalTransaction, sizeList: sizeList, unitTypes: unitTypes, site: site,
               title: title,
-              shortSessionId:session.shortSessionId, id: site.id, chosenUnitType:chosenUnitType, monthlyRate: bestUnit?.price,
+              shortSessionId: session.shortSessionId, id: site.id, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
               pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: callParams.searchType,
-              promoId:callParams.rentalTransaction?.promoId, insuranceId:callParams.rentalTransaction?.insuranceId, video:video, propertyOperatorList:propertyOperatorList, nearbyList:nearbyList ]
+              promoId: callParams.rentalTransaction?.promoId, insuranceId: callParams.rentalTransaction?.insuranceId, video: video, propertyOperatorList: propertyOperatorList, nearbyList: nearbyList]
 
       // We set the landing cookie so the operator looks like the renter would when the transaction is paid.
       params.landingCookie = callParams.landingCookie
@@ -679,15 +675,15 @@ class StorageSiteController {
       params.address = model.address
       params.date = model.date
 
-      render(view: (callParams.page == 'detail' ? '/storageSite/' : '/rentalTransaction/') + callParams.page, model:model)
+      render(view: (callParams.page == 'detail' ? '/storageSite/' : '/rentalTransaction/') + callParams.page, model: model)
     }
   }
 
   def detailTotals = {
 
     def moveInDate
-    def unitType 
-    if(params.unitType) {
+    def unitType
+    if (params.unitType) {
       unitType = (params.unitType instanceof UnitType ? params.unitType : UnitType.valueOf(params.unitType as String))
     }
     if (params.moveInDate && params.moveInDate instanceof Date) {
@@ -710,11 +706,11 @@ class StorageSiteController {
     Collection sizeList
     StorageSize unitSize = params.searchSize ? StorageSize.get(params.searchSize) : null
     if (params.action == 'unitType') {
-      unitTypes = site.units.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitCount > site.minInventory && it.unitType == unitType }.collect{ it.unitsize }.unique()
+      unitTypes = site.units.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+      sizeList = site.units.findAll { it.unitCount > site.minInventory && it.unitType == unitType }.collect { it.unitsize }.unique()
     } else {
-      unitTypes = unitSize ? site.units.findAll{ it.unitCount > 0 && it.unitsize.id == unitSize.id}.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll{ it.unitCount > 0 && it.unitsize.searchType == searchType }.collect{ "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-      sizeList = site.units.findAll{ it.unitCount > site.minInventory && it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
+      unitTypes = unitSize ? site.units.findAll { it.unitCount > 0 && it.unitsize.id == unitSize.id}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll { it.unitCount > 0 && it.unitsize.searchType == searchType }.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
+      sizeList = site.units.findAll { it.unitCount > site.minInventory && it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
     }
 
     // output JSON for types
@@ -724,21 +720,21 @@ class StorageSiteController {
     StorageUnit bestUnit
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll{ it.unitCount > site.minInventory && it.unitType == unitType && it.unitsize.id == unitSize.id }.min{ it.price }
+      bestUnit = site.units.findAll { it.unitCount > site.minInventory && it.unitType == unitType && it.unitsize.id == unitSize.id }.min { it.price }
       if (!bestUnit) {
         if (params.action == 'unitType') {
           // find closest size
-          def bestSize =  site.units.findAll{ it.unitType == unitType  && it.unitCount > site.minInventory }.min{ abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
-          bestUnit = site.units.findAll{ it.unitType == unitType && it.unitsize.id == bestSize && it.unitCount > site.minInventory }.min{ it.price }
+          def bestSize = site.units.findAll { it.unitType == unitType && it.unitCount > site.minInventory }.min { abs(it.unitsize.width * it.unitsize.length - unitSize.width * unitSize.length)}.unitsize.id
+          bestUnit = site.units.findAll { it.unitType == unitType && it.unitsize.id == bestSize && it.unitCount > site.minInventory }.min { it.price }
         } else {
-          bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min{ it.price }
+          bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
         }
       }
     } else if (unitSize) {
-      bestUnit = site.units.findAll{ it.unitsize.id == unitSize.id  && it.unitCount > site.minInventory }.min{ it.price }
+      bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
     } else {
       // TODO - decide on best price or best price for a given size
-      bestUnit = site.units.findAll{ it.unitCount > site.minInventory }.min{ it.price }
+      bestUnit = site.units.findAll { it.unitCount > site.minInventory }.min { it.price }
     }
     if (!bestUnit) {
       println "Best Unit not found for site:${site.id} unitType:${params.unitType} unitSize:${unitSize}"
@@ -751,7 +747,7 @@ class StorageSiteController {
     SpecialOffer specialOffer
     Long chosenPromoId = (params.chosenPromoId ? params.long('chosenPromoId') : -999l)
     if (chosenPromoId > 0) {
-      if (specialOffers.find{it.id == chosenPromoId} || featuredOffers.find{it.id == chosenPromoId}) {
+      if (specialOffers.find {it.id == chosenPromoId} || featuredOffers.find {it.id == chosenPromoId}) {
         specialOffer = SpecialOffer.get(chosenPromoId)
         chosenPromo = specialOffer.promoName
       }
@@ -779,32 +775,32 @@ class StorageSiteController {
   }
 
   def refreshInventory = {
-      println "Refreshing inventory"
-      storitz.UpdateInventoryJob.triggerNow([from:'Admin']);
-      flash.message = "Inventory/units refreshing now"
-      redirect(controller:"admin", action:"index")
+    println "Refreshing inventory"
+    storitz.UpdateInventoryJob.triggerNow([from: 'Admin']);
+    flash.message = "Inventory/units refreshing now"
+    redirect(controller: "admin", action: "index")
   }
 
   def refreshPromo = {
-      def writer = new PrintWriter(System.out)
-      def site = StorageSite.get(params.id as Long)
-      if (site) {
-        feedService.refreshPromos(site, writer)
-      }
-      flash.message = "Promos refreshed"
-      redirect(action: "show", id: site.id)
+    def writer = new PrintWriter(System.out)
+    def site = StorageSite.get(params.id as Long)
+    if (site) {
+      feedService.refreshPromos(site, writer)
+    }
+    flash.message = "Promos refreshed"
+    redirect(action: "show", id: site.id)
   }
 
   def refreshPromos = {
-      storitz.RefreshPromosJob.triggerNow([from:'Admin']);
-      flash.message = "Special Offers/Promotions refreshing now"
-      redirect(controller:"admin", action:"index")
+    storitz.RefreshPromosJob.triggerNow([from: 'Admin']);
+    flash.message = "Special Offers/Promotions refreshing now"
+    redirect(controller: "admin", action: "index")
   }
 
   def refreshPhones = {
-    storitz.RefreshPhoneJob.triggerNow([from:'Admin']);
+    storitz.RefreshPhoneJob.triggerNow([from: 'Admin']);
     flash.message = "Site Phone refreshing now"
-    redirect(controller:"admin", action:"index")
+    redirect(controller: "admin", action: "index")
   }
 
   def kml = {
@@ -813,12 +809,12 @@ class StorageSiteController {
       render(view: 'kmlEmpty')
       return
     }
-    [site:site]
+    [site: site]
   }
 
   @Secured(['ROLE_ADMIN'])
   def updateGeo = {
-    for(site in StorageSite.findAll()) {
+    for (site in StorageSite.findAll()) {
       def address = site.getFullAddress()
       def geoResult = geocodeService.geocode(address)
 
@@ -830,15 +826,15 @@ class StorageSiteController {
       }
 
       println "Updated site ${site.title} lat=${site.lat},lng=${site.lng}"
-      site.save(flush:true)
+      site.save(flush: true)
     }
     flash.message = "Updated lat/lng."
-    redirect(controller:"admin", action:"index")
+    redirect(controller: "admin", action: "index")
   }
 
   def redirectSiteLink = {
     response.status = 301
-    response.setHeader("Location", g.createLink(mapping:'siteLink2', params:[site_title:params.site_title.replaceAll(' ', '-'), id:params.id]) as String)
+    response.setHeader("Location", g.createLink(mapping: 'siteLink2', params: [site_title: params.site_title.replaceAll(' ', '-'), id: params.id]) as String)
     render("")
     return false
   }

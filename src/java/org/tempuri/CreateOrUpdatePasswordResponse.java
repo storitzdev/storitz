@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "createOrUpdatePasswordResult"
+        "createOrUpdatePasswordResult"
 })
 @XmlRootElement(name = "CreateOrUpdatePasswordResponse")
 public class CreateOrUpdatePasswordResponse {
@@ -39,7 +32,6 @@ public class CreateOrUpdatePasswordResponse {
 
     /**
      * Gets the value of the createOrUpdatePasswordResult property.
-     * 
      */
     public boolean isCreateOrUpdatePasswordResult() {
         return createOrUpdatePasswordResult;
@@ -47,7 +39,6 @@ public class CreateOrUpdatePasswordResponse {
 
     /**
      * Sets the value of the createOrUpdatePasswordResult property.
-     * 
      */
     public void setCreateOrUpdatePasswordResult(boolean value) {
         this.createOrUpdatePasswordResult = value;

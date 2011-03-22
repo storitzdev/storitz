@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ACCT_LETTERS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACCT_LETTERS">
  *   &lt;complexContent>
@@ -57,47 +52,44 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACCT_LETTERS", propOrder = {
-    "acctid",
-    "rentalid",
-    "contactid",
-    "cname",
-    "unitnum",
-    "letterid",
-    "ltrnum",
-    "ltrtypeid",
-    "scheduled",
-    "ltrtypeval",
-    "ltrtype",
-    "ltrname",
-    "gentype",
-    "adrtype",
-    "email",
-    "emailto",
-    "emailsent",
-    "emailsts",
-    "stsmeaning",
-    "certified",
-    "processedflag",
-    "mailed",
-    "active",
-    "exportid",
-    "version",
-    "createdby",
-    "createdname",
-    "status",
-    "statusval",
-    "unitnumsts",
-    "maillocal",
-    "sent"
+        "acctid",
+        "rentalid",
+        "contactid",
+        "cname",
+        "unitnum",
+        "letterid",
+        "ltrnum",
+        "ltrtypeid",
+        "scheduled",
+        "ltrtypeval",
+        "ltrtype",
+        "ltrname",
+        "gentype",
+        "adrtype",
+        "email",
+        "emailto",
+        "emailsent",
+        "emailsts",
+        "stsmeaning",
+        "certified",
+        "processedflag",
+        "mailed",
+        "active",
+        "exportid",
+        "version",
+        "createdby",
+        "createdname",
+        "status",
+        "statusval",
+        "unitnumsts",
+        "maillocal",
+        "sent"
 })
 public class ACCTLETTERS
-    extends BaseEntityOfCollectionACCTLETTERSColumnIndexes
-{
+        extends BaseEntityOfCollectionACCTLETTERSColumnIndexes {
 
     @XmlElement(name = "ACCT_ID")
     protected long acctid;
@@ -169,7 +161,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -177,7 +168,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -185,11 +175,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -197,11 +185,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -209,11 +195,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the contactid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCONTACTID() {
         return contactid;
@@ -221,11 +205,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the contactid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setCONTACTID(Long value) {
         this.contactid = value;
@@ -233,11 +215,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the cname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCNAME() {
         return cname;
@@ -245,11 +225,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the cname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCNAME(String value) {
         this.cname = value;
@@ -257,11 +235,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the unitnum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUM() {
         return unitnum;
@@ -269,11 +245,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the unitnum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUM(String value) {
         this.unitnum = value;
@@ -281,7 +255,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the letterid property.
-     * 
      */
     public long getLETTERID() {
         return letterid;
@@ -289,7 +262,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the letterid property.
-     * 
      */
     public void setLETTERID(long value) {
         this.letterid = value;
@@ -297,7 +269,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the ltrnum property.
-     * 
      */
     public long getLTRNUM() {
         return ltrnum;
@@ -305,7 +276,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the ltrnum property.
-     * 
      */
     public void setLTRNUM(long value) {
         this.ltrnum = value;
@@ -313,7 +283,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the ltrtypeid property.
-     * 
      */
     public long getLTRTYPEID() {
         return ltrtypeid;
@@ -321,7 +290,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the ltrtypeid property.
-     * 
      */
     public void setLTRTYPEID(long value) {
         this.ltrtypeid = value;
@@ -329,11 +297,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the scheduled property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSCHEDULED() {
         return scheduled;
@@ -341,11 +307,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the scheduled property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSCHEDULED(XMLGregorianCalendar value) {
         this.scheduled = value;
@@ -353,7 +317,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the ltrtypeval property.
-     * 
      */
     public int getLTRTYPEVAL() {
         return ltrtypeval;
@@ -361,7 +324,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the ltrtypeval property.
-     * 
      */
     public void setLTRTYPEVAL(int value) {
         this.ltrtypeval = value;
@@ -369,11 +331,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the ltrtype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLTRTYPE() {
         return ltrtype;
@@ -381,11 +341,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the ltrtype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLTRTYPE(String value) {
         this.ltrtype = value;
@@ -393,11 +351,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the ltrname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLTRNAME() {
         return ltrname;
@@ -405,11 +361,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the ltrname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLTRNAME(String value) {
         this.ltrname = value;
@@ -417,11 +371,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the gentype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGENTYPE() {
         return gentype;
@@ -429,11 +381,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the gentype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGENTYPE(String value) {
         this.gentype = value;
@@ -441,11 +391,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the adrtype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADRTYPE() {
         return adrtype;
@@ -453,11 +401,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the adrtype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADRTYPE(String value) {
         this.adrtype = value;
@@ -465,7 +411,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the email property.
-     * 
      */
     public boolean isEMAIL() {
         return email;
@@ -473,7 +418,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the email property.
-     * 
      */
     public void setEMAIL(boolean value) {
         this.email = value;
@@ -481,11 +425,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the emailto property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEMAILTO() {
         return emailto;
@@ -493,11 +435,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the emailto property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEMAILTO(String value) {
         this.emailto = value;
@@ -505,11 +445,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the emailsent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEMAILSENT() {
         return emailsent;
@@ -517,11 +455,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the emailsent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEMAILSENT(XMLGregorianCalendar value) {
         this.emailsent = value;
@@ -529,11 +465,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the emailsts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getEMAILSTS() {
         return emailsts;
@@ -541,11 +475,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the emailsts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setEMAILSTS(BigDecimal value) {
         this.emailsts = value;
@@ -553,11 +485,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the stsmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTSMEANING() {
         return stsmeaning;
@@ -565,11 +495,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the stsmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTSMEANING(String value) {
         this.stsmeaning = value;
@@ -577,7 +505,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the certified property.
-     * 
      */
     public boolean isCERTIFIED() {
         return certified;
@@ -585,7 +512,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the certified property.
-     * 
      */
     public void setCERTIFIED(boolean value) {
         this.certified = value;
@@ -593,11 +519,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the processedflag property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROCESSEDFLAG() {
         return processedflag;
@@ -605,11 +529,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the processedflag property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROCESSEDFLAG(String value) {
         this.processedflag = value;
@@ -617,11 +539,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the mailed property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMAILED() {
         return mailed;
@@ -629,11 +549,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the mailed property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMAILED(XMLGregorianCalendar value) {
         this.mailed = value;
@@ -641,11 +559,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACTIVE() {
         return active;
@@ -653,11 +569,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACTIVE(String value) {
         this.active = value;
@@ -665,11 +579,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the exportid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getEXPORTID() {
         return exportid;
@@ -677,11 +589,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the exportid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setEXPORTID(Long value) {
         this.exportid = value;
@@ -689,7 +599,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the version property.
-     * 
      */
     public int getVERSION() {
         return version;
@@ -697,7 +606,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the version property.
-     * 
      */
     public void setVERSION(int value) {
         this.version = value;
@@ -705,7 +613,6 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -713,7 +620,6 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -721,11 +627,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the createdname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREATEDNAME() {
         return createdname;
@@ -733,11 +637,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the createdname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREATEDNAME(String value) {
         this.createdname = value;
@@ -745,11 +647,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isSTATUS() {
         return status;
@@ -757,11 +657,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setSTATUS(Boolean value) {
         this.status = value;
@@ -769,11 +667,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the statusval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATUSVAL() {
         return statusval;
@@ -781,11 +677,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the statusval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATUSVAL(String value) {
         this.statusval = value;
@@ -793,11 +687,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the unitnumsts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMSTS() {
         return unitnumsts;
@@ -805,11 +697,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the unitnumsts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMSTS(String value) {
         this.unitnumsts = value;
@@ -817,11 +707,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the maillocal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMAILLOCAL() {
         return maillocal;
@@ -829,11 +717,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the maillocal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMAILLOCAL(String value) {
         this.maillocal = value;
@@ -841,11 +727,9 @@ public class ACCTLETTERS
 
     /**
      * Gets the value of the sent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSENT() {
         return sent;
@@ -853,11 +737,9 @@ public class ACCTLETTERS
 
     /**
      * Sets the value of the sent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSENT(String value) {
         this.sent = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for TransferUnitData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransferUnitData">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransferUnitData", propOrder = {
-    "rentalData",
-    "newUnitData",
-    "transactionID"
+        "rentalData",
+        "newUnitData",
+        "transactionID"
 })
 public class TransferUnitData {
 
@@ -45,11 +42,9 @@ public class TransferUnitData {
 
     /**
      * Gets the value of the rentalData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTransOldRentalData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTransOldRentalData }
      */
     public ArrayOfTransOldRentalData getRentalData() {
         return rentalData;
@@ -57,11 +52,9 @@ public class TransferUnitData {
 
     /**
      * Sets the value of the rentalData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTransOldRentalData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTransOldRentalData }
      */
     public void setRentalData(ArrayOfTransOldRentalData value) {
         this.rentalData = value;
@@ -69,11 +62,9 @@ public class TransferUnitData {
 
     /**
      * Gets the value of the newUnitData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTransNewRentalData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTransNewRentalData }
      */
     public ArrayOfTransNewRentalData getNewUnitData() {
         return newUnitData;
@@ -81,11 +72,9 @@ public class TransferUnitData {
 
     /**
      * Sets the value of the newUnitData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTransNewRentalData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTransNewRentalData }
      */
     public void setNewUnitData(ArrayOfTransNewRentalData value) {
         this.newUnitData = value;
@@ -93,7 +82,6 @@ public class TransferUnitData {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -101,7 +89,6 @@ public class TransferUnitData {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;

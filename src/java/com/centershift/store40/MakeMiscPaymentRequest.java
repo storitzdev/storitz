@@ -1,20 +1,19 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for MakeMiscPayment_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakeMiscPayment_Request">
  *   &lt;complexContent>
@@ -35,21 +34,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakeMiscPayment_Request", propOrder = {
-    "siteID",
-    "classID",
-    "classRef",
-    "miscellaneousClassID",
-    "description",
-    "taxGroupID",
-    "totalAmtPaid",
-    "creditCardInfo",
-    "checkInfo",
-    "cashInfo"
+        "siteID",
+        "classID",
+        "classRef",
+        "miscellaneousClassID",
+        "description",
+        "taxGroupID",
+        "totalAmtPaid",
+        "creditCardInfo",
+        "checkInfo",
+        "cashInfo"
 })
 public class MakeMiscPaymentRequest {
 
@@ -76,7 +73,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -84,7 +80,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -92,7 +87,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the classID property.
-     * 
      */
     public long getClassID() {
         return classID;
@@ -100,7 +94,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the classID property.
-     * 
      */
     public void setClassID(long value) {
         this.classID = value;
@@ -108,7 +101,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the classRef property.
-     * 
      */
     public long getClassRef() {
         return classRef;
@@ -116,7 +108,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the classRef property.
-     * 
      */
     public void setClassRef(long value) {
         this.classRef = value;
@@ -124,7 +115,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the miscellaneousClassID property.
-     * 
      */
     public long getMiscellaneousClassID() {
         return miscellaneousClassID;
@@ -132,7 +122,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the miscellaneousClassID property.
-     * 
      */
     public void setMiscellaneousClassID(long value) {
         this.miscellaneousClassID = value;
@@ -140,11 +129,9 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDescription() {
         return description;
@@ -152,11 +139,9 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDescription(String value) {
         this.description = value;
@@ -164,7 +149,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the taxGroupID property.
-     * 
      */
     public long getTaxGroupID() {
         return taxGroupID;
@@ -172,7 +156,6 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the taxGroupID property.
-     * 
      */
     public void setTaxGroupID(long value) {
         this.taxGroupID = value;
@@ -180,11 +163,9 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the totalAmtPaid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalAmtPaid() {
         return totalAmtPaid;
@@ -192,11 +173,9 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the totalAmtPaid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalAmtPaid(BigDecimal value) {
         this.totalAmtPaid = value;
@@ -204,25 +183,23 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the creditCardInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the creditCardInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCreditCardInfo().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link CreditCardData }
-     * 
-     * 
      */
     public List<CreditCardData> getCreditCardInfo() {
         if (creditCardInfo == null) {
@@ -233,25 +210,23 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the checkInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the checkInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCheckInfo().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link CheckData }
-     * 
-     * 
      */
     public List<CheckData> getCheckInfo() {
         if (checkInfo == null) {
@@ -262,11 +237,9 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Gets the value of the cashInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCashInfo() {
         return cashInfo;
@@ -274,11 +247,9 @@ public class MakeMiscPaymentRequest {
 
     /**
      * Sets the value of the cashInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCashInfo(BigDecimal value) {
         this.cashInfo = value;

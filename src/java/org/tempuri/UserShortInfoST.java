@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UserShortInfo_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UserShortInfo_ST">
  *   &lt;complexContent>
@@ -23,13 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UserShortInfo_ST", propOrder = {
-    "csEmail",
-    "csKeycode"
+        "csEmail",
+        "csKeycode"
 })
 public class UserShortInfoST {
 
@@ -38,11 +35,9 @@ public class UserShortInfoST {
 
     /**
      * Gets the value of the csEmail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsEmail() {
         return csEmail;
@@ -50,11 +45,9 @@ public class UserShortInfoST {
 
     /**
      * Sets the value of the csEmail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsEmail(String value) {
         this.csEmail = value;
@@ -62,11 +55,9 @@ public class UserShortInfoST {
 
     /**
      * Gets the value of the csKeycode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsKeycode() {
         return csKeycode;
@@ -74,11 +65,9 @@ public class UserShortInfoST {
 
     /**
      * Sets the value of the csKeycode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsKeycode(String value) {
         this.csKeycode = value;

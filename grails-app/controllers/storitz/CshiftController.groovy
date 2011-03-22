@@ -1,10 +1,10 @@
 package storitz
 
 import com.storitz.CenterShift
+import com.storitz.CommissionSchedule
 import grails.plugins.springsecurity.Secured
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
-import com.storitz.CommissionSchedule
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CshiftController extends FeedController {
@@ -14,7 +14,7 @@ class CshiftController extends FeedController {
   def CShift4Service
   def imageService
 
-  static allowedMethods = [save: "POST", update: "POST", uploadLogo: "POST", updateInventory:"POST"]
+  static allowedMethods = [save: "POST", update: "POST", uploadLogo: "POST", updateInventory: "POST"]
 
   def index = {
     redirect(action: "list", params: params)
@@ -69,8 +69,8 @@ class CshiftController extends FeedController {
   def refreshPromos = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      for(site in cshiftInstance.sites) {
-        for(promo in site.specialOffers) {
+      for (site in cshiftInstance.sites) {
+        for (promo in site.specialOffers) {
           promo.delete()
         }
         site.specialOffers.clear()
@@ -91,9 +91,9 @@ class CshiftController extends FeedController {
   def refreshInsurance = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      for(site in cshiftInstance.sites) {
+      for (site in cshiftInstance.sites) {
         if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-          for(ins in site.insurances) {
+          for (ins in site.insurances) {
             ins.delete()
           }
           site.insurances.clear()

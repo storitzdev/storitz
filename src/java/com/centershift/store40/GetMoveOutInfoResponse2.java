@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetMoveOutInfo_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetMoveOutInfo_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetMoveOutInfo_Response", propOrder = {
-    "moveOutInfo",
-    "refundTypes"
+        "moveOutInfo",
+        "refundTypes"
 })
 public class GetMoveOutInfoResponse2 {
 
@@ -41,11 +38,9 @@ public class GetMoveOutInfoResponse2 {
 
     /**
      * Gets the value of the moveOutInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MoveOutInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link MoveOutInfo }
      */
     public MoveOutInfo getMoveOutInfo() {
         return moveOutInfo;
@@ -53,11 +48,9 @@ public class GetMoveOutInfoResponse2 {
 
     /**
      * Sets the value of the moveOutInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MoveOutInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MoveOutInfo }
      */
     public void setMoveOutInfo(MoveOutInfo value) {
         this.moveOutInfo = value;
@@ -65,11 +58,9 @@ public class GetMoveOutInfoResponse2 {
 
     /**
      * Gets the value of the refundTypes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRefundTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRefundTypes }
      */
     public ArrayOfRefundTypes getRefundTypes() {
         return refundTypes;
@@ -77,11 +68,9 @@ public class GetMoveOutInfoResponse2 {
 
     /**
      * Sets the value of the refundTypes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRefundTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRefundTypes }
      */
     public void setRefundTypes(ArrayOfRefundTypes value) {
         this.refundTypes = value;

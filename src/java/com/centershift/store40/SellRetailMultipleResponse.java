@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SellRetailMultiple_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SellRetailMultiple_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SellRetailMultiple_Response", propOrder = {
-    "salesResults"
+        "salesResults"
 })
 public class SellRetailMultipleResponse {
 
@@ -37,11 +34,9 @@ public class SellRetailMultipleResponse {
 
     /**
      * Gets the value of the salesResults property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfMultiRetailSalesResults }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfMultiRetailSalesResults }
      */
     public ArrayOfMultiRetailSalesResults getSalesResults() {
         return salesResults;
@@ -49,11 +44,9 @@ public class SellRetailMultipleResponse {
 
     /**
      * Sets the value of the salesResults property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfMultiRetailSalesResults }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfMultiRetailSalesResults }
      */
     public void setSalesResults(ArrayOfMultiRetailSalesResults value) {
         this.salesResults = value;

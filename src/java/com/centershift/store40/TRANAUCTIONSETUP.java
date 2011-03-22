@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for TRAN_AUCTION_SETUP complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_AUCTION_SETUP">
  *   &lt;complexContent>
@@ -33,24 +28,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_AUCTION_SETUP", propOrder = {
-    "auctionid",
-    "siteid",
-    "auctiondate",
-    "formatdate",
-    "auctioneername",
-    "notes",
-    "status",
-    "auctiontime",
-    "statusvalue"
+        "auctionid",
+        "siteid",
+        "auctiondate",
+        "formatdate",
+        "auctioneername",
+        "notes",
+        "status",
+        "auctiontime",
+        "statusvalue"
 })
 public class TRANAUCTIONSETUP
-    extends BaseEntityOfCollectionTRANAUCTIONSETUPColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANAUCTIONSETUPColumnIndexes {
 
     @XmlElement(name = "AUCTION_ID")
     protected long auctionid;
@@ -74,7 +66,6 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the auctionid property.
-     * 
      */
     public long getAUCTIONID() {
         return auctionid;
@@ -82,7 +73,6 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the auctionid property.
-     * 
      */
     public void setAUCTIONID(long value) {
         this.auctionid = value;
@@ -90,11 +80,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -102,11 +90,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -114,11 +100,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the auctiondate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getAUCTIONDATE() {
         return auctiondate;
@@ -126,11 +110,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the auctiondate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setAUCTIONDATE(XMLGregorianCalendar value) {
         this.auctiondate = value;
@@ -138,11 +120,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the formatdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFORMATDATE() {
         return formatdate;
@@ -150,11 +130,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the formatdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFORMATDATE(String value) {
         this.formatdate = value;
@@ -162,11 +140,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the auctioneername property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAUCTIONEERNAME() {
         return auctioneername;
@@ -174,11 +150,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the auctioneername property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAUCTIONEERNAME(String value) {
         this.auctioneername = value;
@@ -186,11 +160,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTES() {
         return notes;
@@ -198,11 +170,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTES(String value) {
         this.notes = value;
@@ -210,7 +180,6 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -218,7 +187,6 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -226,11 +194,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the auctiontime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAUCTIONTIME() {
         return auctiontime;
@@ -238,11 +204,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the auctiontime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAUCTIONTIME(String value) {
         this.auctiontime = value;
@@ -250,11 +214,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Gets the value of the statusvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATUSVALUE() {
         return statusvalue;
@@ -262,11 +224,9 @@ public class TRANAUCTIONSETUP
 
     /**
      * Sets the value of the statusvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATUSVALUE(String value) {
         this.statusvalue = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PcdCreditLevels.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="PcdCreditLevels">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -22,7 +21,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "PcdCreditLevels")
 @XmlEnum
@@ -49,7 +47,7 @@ public enum PcdCreditLevels {
     }
 
     public static PcdCreditLevels fromValue(String v) {
-        for (PcdCreditLevels c: PcdCreditLevels.values()) {
+        for (PcdCreditLevels c : PcdCreditLevels.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

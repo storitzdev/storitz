@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddMultipleServices_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddMultipleServices_Response">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddMultipleServices_Response", propOrder = {
-    "service",
-    "serviceObjectID",
-    "succeeded",
-    "processMessage"
+        "service",
+        "serviceObjectID",
+        "succeeded",
+        "processMessage"
 })
 public class AddMultipleServicesResponse2 {
 
@@ -49,11 +46,9 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Gets the value of the service property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ORGSERVICESITEOFFERINGS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ORGSERVICESITEOFFERINGS }
      */
     public ORGSERVICESITEOFFERINGS getService() {
         return service;
@@ -61,11 +56,9 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Sets the value of the service property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ORGSERVICESITEOFFERINGS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ORGSERVICESITEOFFERINGS }
      */
     public void setService(ORGSERVICESITEOFFERINGS value) {
         this.service = value;
@@ -73,11 +66,9 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Gets the value of the serviceObjectID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getServiceObjectID() {
         return serviceObjectID;
@@ -85,11 +76,9 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Sets the value of the serviceObjectID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setServiceObjectID(String value) {
         this.serviceObjectID = value;
@@ -97,7 +86,6 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Gets the value of the succeeded property.
-     * 
      */
     public boolean isSucceeded() {
         return succeeded;
@@ -105,7 +93,6 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Sets the value of the succeeded property.
-     * 
      */
     public void setSucceeded(boolean value) {
         this.succeeded = value;
@@ -113,11 +100,9 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Gets the value of the processMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getProcessMessage() {
         return processMessage;
@@ -125,11 +110,9 @@ public class AddMultipleServicesResponse2 {
 
     /**
      * Sets the value of the processMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setProcessMessage(String value) {
         this.processMessage = value;

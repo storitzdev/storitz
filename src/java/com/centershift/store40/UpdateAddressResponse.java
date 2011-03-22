@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "updateAddressResult"
+        "updateAddressResult"
 })
 @XmlRootElement(name = "UpdateAddressResponse")
 public class UpdateAddressResponse {
@@ -39,11 +32,9 @@ public class UpdateAddressResponse {
 
     /**
      * Gets the value of the updateAddressResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddressResponse }
      */
     public AddressResponse getUpdateAddressResult() {
         return updateAddressResult;
@@ -51,11 +42,9 @@ public class UpdateAddressResponse {
 
     /**
      * Sets the value of the updateAddressResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddressResponse }
      */
     public void setUpdateAddressResult(AddressResponse value) {
         this.updateAddressResult = value;

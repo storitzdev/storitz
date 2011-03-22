@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TransOldRentalData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransOldRentalData">
  *   &lt;complexContent>
@@ -26,14 +25,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransOldRentalData", propOrder = {
-    "rentalID",
-    "totalEscrow",
-    "assessments"
+        "rentalID",
+        "totalEscrow",
+        "assessments"
 })
 public class TransOldRentalData {
 
@@ -46,7 +43,6 @@ public class TransOldRentalData {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -54,7 +50,6 @@ public class TransOldRentalData {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -62,11 +57,9 @@ public class TransOldRentalData {
 
     /**
      * Gets the value of the totalEscrow property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalEscrow() {
         return totalEscrow;
@@ -74,11 +67,9 @@ public class TransOldRentalData {
 
     /**
      * Sets the value of the totalEscrow property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalEscrow(BigDecimal value) {
         this.totalEscrow = value;
@@ -86,11 +77,9 @@ public class TransOldRentalData {
 
     /**
      * Gets the value of the assessments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTransRentalAssessments }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTransRentalAssessments }
      */
     public ArrayOfTransRentalAssessments getAssessments() {
         return assessments;
@@ -98,11 +87,9 @@ public class TransOldRentalData {
 
     /**
      * Sets the value of the assessments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTransRentalAssessments }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTransRentalAssessments }
      */
     public void setAssessments(ArrayOfTransRentalAssessments value) {
         this.assessments = value;

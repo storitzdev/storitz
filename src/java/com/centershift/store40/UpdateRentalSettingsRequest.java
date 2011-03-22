@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateRentalSettings_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateRentalSettings_Request">
  *   &lt;complexContent>
@@ -29,18 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateRentalSettings_Request", propOrder = {
-    "taxExempt",
-    "taxInfo",
-    "delStep",
-    "delScheduleID",
-    "delExempt",
-    "overlockStatus",
-    "rentalId"
+        "taxExempt",
+        "taxInfo",
+        "delStep",
+        "delScheduleID",
+        "delExempt",
+        "overlockStatus",
+        "rentalId"
 })
 public class UpdateRentalSettingsRequest {
 
@@ -61,11 +58,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the taxExempt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTaxExempt() {
         return taxExempt;
@@ -73,11 +68,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the taxExempt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTaxExempt(Boolean value) {
         this.taxExempt = value;
@@ -85,11 +78,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the taxInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTaxInfo() {
         return taxInfo;
@@ -97,11 +88,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the taxInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTaxInfo(String value) {
         this.taxInfo = value;
@@ -109,11 +98,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the delStep property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDelStep() {
         return delStep;
@@ -121,11 +108,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the delStep property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDelStep(Integer value) {
         this.delStep = value;
@@ -133,11 +118,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the delScheduleID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDelScheduleID() {
         return delScheduleID;
@@ -145,11 +128,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the delScheduleID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setDelScheduleID(Long value) {
         this.delScheduleID = value;
@@ -157,11 +138,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the delExempt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isDelExempt() {
         return delExempt;
@@ -169,11 +148,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the delExempt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setDelExempt(Boolean value) {
         this.delExempt = value;
@@ -181,11 +158,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the overlockStatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OverlockStatus }
-     *     
+     *
+     * @return possible object is
+     *         {@link OverlockStatus }
      */
     public OverlockStatus getOverlockStatus() {
         return overlockStatus;
@@ -193,11 +168,9 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the overlockStatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OverlockStatus }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link OverlockStatus }
      */
     public void setOverlockStatus(OverlockStatus value) {
         this.overlockStatus = value;
@@ -205,7 +178,6 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Gets the value of the rentalId property.
-     * 
      */
     public long getRentalId() {
         return rentalId;
@@ -213,7 +185,6 @@ public class UpdateRentalSettingsRequest {
 
     /**
      * Sets the value of the rentalId property.
-     * 
      */
     public void setRentalId(long value) {
         this.rentalId = value;

@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AuctionTaxInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionTaxInfo">
  *   &lt;complexContent>
@@ -25,13 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionTaxInfo", propOrder = {
-    "baseAmount",
-    "taxAmount"
+        "baseAmount",
+        "taxAmount"
 })
 public class AuctionTaxInfo {
 
@@ -42,11 +39,9 @@ public class AuctionTaxInfo {
 
     /**
      * Gets the value of the baseAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getBaseAmount() {
         return baseAmount;
@@ -54,11 +49,9 @@ public class AuctionTaxInfo {
 
     /**
      * Sets the value of the baseAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setBaseAmount(BigDecimal value) {
         this.baseAmount = value;
@@ -66,11 +59,9 @@ public class AuctionTaxInfo {
 
     /**
      * Gets the value of the taxAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTaxAmount() {
         return taxAmount;
@@ -78,11 +69,9 @@ public class AuctionTaxInfo {
 
     /**
      * Sets the value of the taxAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTaxAmount(BigDecimal value) {
         this.taxAmount = value;

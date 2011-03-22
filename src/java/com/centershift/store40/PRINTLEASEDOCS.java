@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PRINT_LEASE_DOCS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="PRINT_LEASE_DOCS">
  *   &lt;complexContent>
@@ -42,35 +41,32 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PRINT_LEASE_DOCS", propOrder = {
-    "orgid",
-    "leasegroupid",
-    "groupname",
-    "description",
-    "groupactive",
-    "groupdocid",
-    "leasedefid",
-    "copies",
-    "docactive",
-    "leasename",
-    "languageid",
-    "stateid",
-    "stateval",
-    "langval",
-    "siteid",
-    "unitid",
-    "unitnumber",
-    "rentalid",
-    "acctid",
-    "status"
+        "orgid",
+        "leasegroupid",
+        "groupname",
+        "description",
+        "groupactive",
+        "groupdocid",
+        "leasedefid",
+        "copies",
+        "docactive",
+        "leasename",
+        "languageid",
+        "stateid",
+        "stateval",
+        "langval",
+        "siteid",
+        "unitid",
+        "unitnumber",
+        "rentalid",
+        "acctid",
+        "status"
 })
 public class PRINTLEASEDOCS
-    extends BaseEntityOfCollectionPRINTLEASEDOCSColumnIndexes
-{
+        extends BaseEntityOfCollectionPRINTLEASEDOCSColumnIndexes {
 
     @XmlElement(name = "ORG_ID")
     protected long orgid;
@@ -115,7 +111,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -123,7 +118,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -131,7 +125,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the leasegroupid property.
-     * 
      */
     public long getLEASEGROUPID() {
         return leasegroupid;
@@ -139,7 +132,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the leasegroupid property.
-     * 
      */
     public void setLEASEGROUPID(long value) {
         this.leasegroupid = value;
@@ -147,11 +139,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the groupname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGROUPNAME() {
         return groupname;
@@ -159,11 +149,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the groupname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGROUPNAME(String value) {
         this.groupname = value;
@@ -171,11 +159,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIPTION() {
         return description;
@@ -183,11 +169,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIPTION(String value) {
         this.description = value;
@@ -195,7 +179,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the groupactive property.
-     * 
      */
     public boolean isGROUPACTIVE() {
         return groupactive;
@@ -203,7 +186,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the groupactive property.
-     * 
      */
     public void setGROUPACTIVE(boolean value) {
         this.groupactive = value;
@@ -211,7 +193,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the groupdocid property.
-     * 
      */
     public long getGROUPDOCID() {
         return groupdocid;
@@ -219,7 +200,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the groupdocid property.
-     * 
      */
     public void setGROUPDOCID(long value) {
         this.groupdocid = value;
@@ -227,7 +207,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the leasedefid property.
-     * 
      */
     public long getLEASEDEFID() {
         return leasedefid;
@@ -235,7 +214,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the leasedefid property.
-     * 
      */
     public void setLEASEDEFID(long value) {
         this.leasedefid = value;
@@ -243,7 +221,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the copies property.
-     * 
      */
     public int getCOPIES() {
         return copies;
@@ -251,7 +228,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the copies property.
-     * 
      */
     public void setCOPIES(int value) {
         this.copies = value;
@@ -259,7 +235,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the docactive property.
-     * 
      */
     public boolean isDOCACTIVE() {
         return docactive;
@@ -267,7 +242,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the docactive property.
-     * 
      */
     public void setDOCACTIVE(boolean value) {
         this.docactive = value;
@@ -275,11 +249,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the leasename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLEASENAME() {
         return leasename;
@@ -287,11 +259,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the leasename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLEASENAME(String value) {
         this.leasename = value;
@@ -299,7 +269,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the languageid property.
-     * 
      */
     public int getLANGUAGEID() {
         return languageid;
@@ -307,7 +276,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the languageid property.
-     * 
      */
     public void setLANGUAGEID(int value) {
         this.languageid = value;
@@ -315,7 +283,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the stateid property.
-     * 
      */
     public int getSTATEID() {
         return stateid;
@@ -323,7 +290,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the stateid property.
-     * 
      */
     public void setSTATEID(int value) {
         this.stateid = value;
@@ -331,11 +297,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the stateval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATEVAL() {
         return stateval;
@@ -343,11 +307,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the stateval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATEVAL(String value) {
         this.stateval = value;
@@ -355,11 +317,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the langval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLANGVAL() {
         return langval;
@@ -367,11 +327,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the langval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLANGVAL(String value) {
         this.langval = value;
@@ -379,7 +337,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -387,7 +344,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -395,7 +351,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the unitid property.
-     * 
      */
     public long getUNITID() {
         return unitid;
@@ -403,7 +358,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the unitid property.
-     * 
      */
     public void setUNITID(long value) {
         this.unitid = value;
@@ -411,11 +365,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -423,11 +375,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -435,7 +385,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the rentalid property.
-     * 
      */
     public long getRENTALID() {
         return rentalid;
@@ -443,7 +392,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the rentalid property.
-     * 
      */
     public void setRENTALID(long value) {
         this.rentalid = value;
@@ -451,11 +399,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -463,11 +409,9 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -475,7 +419,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -483,7 +426,6 @@ public class PRINTLEASEDOCS
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;

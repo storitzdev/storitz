@@ -22,7 +22,7 @@ public enum SoftwareType {
 
 
   static list() {
-      [CENTERSHIFT, SITELINK, SELF_STORAGE_MANAGER, DOMICO, QUIKSTOR, STORMAN, OTHER]
+    [CENTERSHIFT, SITELINK, SELF_STORAGE_MANAGER, DOMICO, QUIKSTOR, STORMAN, OTHER]
   }
 
   static public SoftwareType getEnumFromId(String value) {

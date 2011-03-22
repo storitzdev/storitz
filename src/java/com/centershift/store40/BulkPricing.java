@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for BulkPricing complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="BulkPricing">
  *   &lt;complexContent>
@@ -27,15 +26,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BulkPricing", propOrder = {
-    "retailId",
-    "minThreshold",
-    "discountAmount",
-    "discountType"
+        "retailId",
+        "minThreshold",
+        "discountAmount",
+        "discountType"
 })
 public class BulkPricing {
 
@@ -50,11 +47,9 @@ public class BulkPricing {
 
     /**
      * Gets the value of the retailId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRetailId() {
         return retailId;
@@ -62,11 +57,9 @@ public class BulkPricing {
 
     /**
      * Sets the value of the retailId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRetailId(Long value) {
         this.retailId = value;
@@ -74,11 +67,9 @@ public class BulkPricing {
 
     /**
      * Gets the value of the minThreshold property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getMinThreshold() {
         return minThreshold;
@@ -86,11 +77,9 @@ public class BulkPricing {
 
     /**
      * Sets the value of the minThreshold property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setMinThreshold(Integer value) {
         this.minThreshold = value;
@@ -98,11 +87,9 @@ public class BulkPricing {
 
     /**
      * Gets the value of the discountAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDiscountAmount() {
         return discountAmount;
@@ -110,11 +97,9 @@ public class BulkPricing {
 
     /**
      * Sets the value of the discountAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDiscountAmount(BigDecimal value) {
         this.discountAmount = value;
@@ -122,11 +107,9 @@ public class BulkPricing {
 
     /**
      * Gets the value of the discountType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BulkDiscountTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link BulkDiscountTypes }
      */
     public BulkDiscountTypes getDiscountType() {
         return discountType;
@@ -134,11 +117,9 @@ public class BulkPricing {
 
     /**
      * Sets the value of the discountType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BulkDiscountTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BulkDiscountTypes }
      */
     public void setDiscountType(BulkDiscountTypes value) {
         this.discountType = value;

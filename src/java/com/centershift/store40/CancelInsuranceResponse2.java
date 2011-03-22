@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "cancelInsuranceResult"
+        "cancelInsuranceResult"
 })
 @XmlRootElement(name = "CancelInsuranceResponse")
 public class CancelInsuranceResponse2 {
@@ -39,11 +32,9 @@ public class CancelInsuranceResponse2 {
 
     /**
      * Gets the value of the cancelInsuranceResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CancelInsuranceResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link CancelInsuranceResponse }
      */
     public CancelInsuranceResponse getCancelInsuranceResult() {
         return cancelInsuranceResult;
@@ -51,11 +42,9 @@ public class CancelInsuranceResponse2 {
 
     /**
      * Sets the value of the cancelInsuranceResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CancelInsuranceResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CancelInsuranceResponse }
      */
     public void setCancelInsuranceResult(CancelInsuranceResponse value) {
         this.cancelInsuranceResult = value;

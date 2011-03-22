@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for FIUChecksum_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="FIUChecksum_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FIUChecksum_Request", propOrder = {
-    "siteID",
-    "logID",
-    "checksum"
+        "siteID",
+        "logID",
+        "checksum"
 })
 public class FIUChecksumRequest {
 
@@ -45,11 +42,9 @@ public class FIUChecksumRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -57,11 +52,9 @@ public class FIUChecksumRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -69,11 +62,9 @@ public class FIUChecksumRequest {
 
     /**
      * Gets the value of the logID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getLogID() {
         return logID;
@@ -81,11 +72,9 @@ public class FIUChecksumRequest {
 
     /**
      * Sets the value of the logID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setLogID(Long value) {
         this.logID = value;
@@ -93,11 +82,9 @@ public class FIUChecksumRequest {
 
     /**
      * Gets the value of the checksum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getChecksum() {
         return checksum;
@@ -105,11 +92,9 @@ public class FIUChecksumRequest {
 
     /**
      * Sets the value of the checksum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setChecksum(String value) {
         this.checksum = value;

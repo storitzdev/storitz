@@ -36,10 +36,10 @@ public class GmapService {
         // Iterate through the feed entries (maps) and print out info
         // for each map
         for (int i = 0; i < resultFeed.getEntries().size(); i++) {
-          MapEntry entry = resultFeed.getEntries().get(i);
-          System.out.println(entry.getTitle().getPlainText());
-          System.out.println("  Summary: " + entry.getSummary().getPlainText());
-          System.out.println("  Self Link: " + entry.getSelfLink().getHref() +"\n");
+            MapEntry entry = resultFeed.getEntries().get(i);
+            System.out.println(entry.getTitle().getPlainText());
+            System.out.println("  Summary: " + entry.getSummary().getPlainText());
+            System.out.println("  Self Link: " + entry.getSelfLink().getHref() + "\n");
         }
     }
 

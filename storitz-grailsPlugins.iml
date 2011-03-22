@@ -137,6 +137,8 @@
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-api/jars/cxf-api-2.3.0.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/asm/asm/jars/asm-3.3.jar!/" />
           <root url="jar://$MODULE_DIR$/../../.ivy2/cache/org.apache.cxf/cxf-rt-frontend-jaxws/jars/cxf-rt-frontend-jaxws-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.ivy2/cache/xml-resolver/xml-resolver/jars/xml-resolver-1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

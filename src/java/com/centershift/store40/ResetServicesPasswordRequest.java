@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ResetServicesPassword_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ResetServicesPassword_Request">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResetServicesPassword_Request", propOrder = {
-    "orgID"
+        "orgID"
 })
 public class ResetServicesPasswordRequest {
 
@@ -37,11 +34,9 @@ public class ResetServicesPasswordRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -49,11 +44,9 @@ public class ResetServicesPasswordRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;

@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for ACT_CONTACTS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACT_CONTACTS">
  *   &lt;complexContent>
@@ -49,40 +44,37 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACT_CONTACTS", propOrder = {
-    "contactid",
-    "acctid",
-    "firstname",
-    "lastname",
-    "knownas",
-    "contacttype",
-    "employer",
-    "active",
-    "email",
-    "dlnumber",
-    "dlstate",
-    "dob",
-    "ssn",
-    "ecommcode",
-    "cflex01",
-    "cflex02",
-    "cflex03",
-    "cflex04",
-    "cflex05",
-    "created",
-    "updated",
-    "createdby",
-    "updatedby",
-    "acctcontactaddresses",
-    "acctcontactphones"
+        "contactid",
+        "acctid",
+        "firstname",
+        "lastname",
+        "knownas",
+        "contacttype",
+        "employer",
+        "active",
+        "email",
+        "dlnumber",
+        "dlstate",
+        "dob",
+        "ssn",
+        "ecommcode",
+        "cflex01",
+        "cflex02",
+        "cflex03",
+        "cflex04",
+        "cflex05",
+        "created",
+        "updated",
+        "createdby",
+        "updatedby",
+        "acctcontactaddresses",
+        "acctcontactphones"
 })
 public class ACTCONTACTS
-    extends BaseEntityOfCollectionACTCONTACTSColumnIndexes
-{
+        extends BaseEntityOfCollectionACTCONTACTSColumnIndexes {
 
     @XmlElement(name = "CONTACT_ID")
     protected long contactid;
@@ -139,7 +131,6 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -147,7 +138,6 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -155,7 +145,6 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -163,7 +152,6 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -171,11 +159,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFIRSTNAME() {
         return firstname;
@@ -183,11 +169,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFIRSTNAME(String value) {
         this.firstname = value;
@@ -195,11 +179,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTNAME() {
         return lastname;
@@ -207,11 +189,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTNAME(String value) {
         this.lastname = value;
@@ -219,11 +199,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the knownas property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getKNOWNAS() {
         return knownas;
@@ -231,11 +209,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the knownas property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setKNOWNAS(String value) {
         this.knownas = value;
@@ -243,7 +219,6 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the contacttype property.
-     * 
      */
     public int getCONTACTTYPE() {
         return contacttype;
@@ -251,7 +226,6 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the contacttype property.
-     * 
      */
     public void setCONTACTTYPE(int value) {
         this.contacttype = value;
@@ -259,11 +233,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the employer property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEMPLOYER() {
         return employer;
@@ -271,11 +243,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the employer property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEMPLOYER(String value) {
         this.employer = value;
@@ -283,7 +253,6 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -291,7 +260,6 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -299,11 +267,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEMAIL() {
         return email;
@@ -311,11 +277,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEMAIL(String value) {
         this.email = value;
@@ -323,11 +287,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the dlnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDLNUMBER() {
         return dlnumber;
@@ -335,11 +297,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the dlnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDLNUMBER(String value) {
         this.dlnumber = value;
@@ -347,11 +307,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the dlstate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDLSTATE() {
         return dlstate;
@@ -359,11 +317,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the dlstate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDLSTATE(String value) {
         this.dlstate = value;
@@ -371,11 +327,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the dob property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDOB() {
         return dob;
@@ -383,11 +337,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the dob property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDOB(String value) {
         this.dob = value;
@@ -395,11 +347,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the ssn property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSSN() {
         return ssn;
@@ -407,11 +357,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the ssn property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSSN(String value) {
         this.ssn = value;
@@ -419,11 +367,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the ecommcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getECOMMCODE() {
         return ecommcode;
@@ -431,11 +377,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the ecommcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setECOMMCODE(String value) {
         this.ecommcode = value;
@@ -443,11 +387,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the cflex01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX01() {
         return cflex01;
@@ -455,11 +397,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the cflex01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX01(String value) {
         this.cflex01 = value;
@@ -467,11 +407,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the cflex02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX02() {
         return cflex02;
@@ -479,11 +417,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the cflex02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX02(String value) {
         this.cflex02 = value;
@@ -491,11 +427,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the cflex03 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX03() {
         return cflex03;
@@ -503,11 +437,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the cflex03 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX03(String value) {
         this.cflex03 = value;
@@ -515,11 +447,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the cflex04 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX04() {
         return cflex04;
@@ -527,11 +457,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the cflex04 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX04(String value) {
         this.cflex04 = value;
@@ -539,11 +467,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the cflex05 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX05() {
         return cflex05;
@@ -551,11 +477,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the cflex05 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX05(String value) {
         this.cflex05 = value;
@@ -563,11 +487,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -575,11 +497,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -587,11 +507,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the updated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getUPDATED() {
         return updated;
@@ -599,11 +517,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the updated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setUPDATED(XMLGregorianCalendar value) {
         this.updated = value;
@@ -611,7 +527,6 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -619,7 +534,6 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -627,7 +541,6 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -635,7 +548,6 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -643,11 +555,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the acctcontactaddresses property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACCTCONTACTADDRESSES }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACCTCONTACTADDRESSES }
      */
     public ArrayOfACCTCONTACTADDRESSES getACCTCONTACTADDRESSES() {
         return acctcontactaddresses;
@@ -655,11 +565,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the acctcontactaddresses property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACCTCONTACTADDRESSES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACCTCONTACTADDRESSES }
      */
     public void setACCTCONTACTADDRESSES(ArrayOfACCTCONTACTADDRESSES value) {
         this.acctcontactaddresses = value;
@@ -667,11 +575,9 @@ public class ACTCONTACTS
 
     /**
      * Gets the value of the acctcontactphones property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACCTCONTACTPHONES }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACCTCONTACTPHONES }
      */
     public ArrayOfACCTCONTACTPHONES getACCTCONTACTPHONES() {
         return acctcontactphones;
@@ -679,11 +585,9 @@ public class ACTCONTACTS
 
     /**
      * Sets the value of the acctcontactphones property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACCTCONTACTPHONES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACCTCONTACTPHONES }
      */
     public void setACCTCONTACTPHONES(ArrayOfACCTCONTACTPHONES value) {
         this.acctcontactphones = value;

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -25,13 +20,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getRentalLedgerResult",
-    "request"
+        "getRentalLedgerResult",
+        "request"
 })
 @XmlRootElement(name = "GetRentalLedgerResponse")
 public class GetRentalLedgerResponse {
@@ -43,11 +36,9 @@ public class GetRentalLedgerResponse {
 
     /**
      * Gets the value of the getRentalLedgerResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetRentalLedgerResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetRentalLedgerResponse2 }
      */
     public GetRentalLedgerResponse2 getGetRentalLedgerResult() {
         return getRentalLedgerResult;
@@ -55,11 +46,9 @@ public class GetRentalLedgerResponse {
 
     /**
      * Sets the value of the getRentalLedgerResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetRentalLedgerResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetRentalLedgerResponse2 }
      */
     public void setGetRentalLedgerResult(GetRentalLedgerResponse2 value) {
         this.getRentalLedgerResult = value;
@@ -67,11 +56,9 @@ public class GetRentalLedgerResponse {
 
     /**
      * Gets the value of the request property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetRentalLedgerRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetRentalLedgerRequest }
      */
     public GetRentalLedgerRequest getRequest() {
         return request;
@@ -79,11 +66,9 @@ public class GetRentalLedgerResponse {
 
     /**
      * Sets the value of the request property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetRentalLedgerRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetRentalLedgerRequest }
      */
     public void setRequest(GetRentalLedgerRequest value) {
         this.request = value;

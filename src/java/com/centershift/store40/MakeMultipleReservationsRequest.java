@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for MakeMultipleReservations_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakeMultipleReservations_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakeMultipleReservations_Request", propOrder = {
-    "reservations",
-    "orgID"
+        "reservations",
+        "orgID"
 })
 public class MakeMultipleReservationsRequest {
 
@@ -41,11 +38,9 @@ public class MakeMultipleReservationsRequest {
 
     /**
      * Gets the value of the reservations property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfMakeReservationRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfMakeReservationRequest }
      */
     public ArrayOfMakeReservationRequest getReservations() {
         return reservations;
@@ -53,11 +48,9 @@ public class MakeMultipleReservationsRequest {
 
     /**
      * Sets the value of the reservations property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfMakeReservationRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfMakeReservationRequest }
      */
     public void setReservations(ArrayOfMakeReservationRequest value) {
         this.reservations = value;
@@ -65,7 +58,6 @@ public class MakeMultipleReservationsRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -73,7 +65,6 @@ public class MakeMultipleReservationsRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;

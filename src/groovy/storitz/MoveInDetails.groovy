@@ -15,7 +15,7 @@ class MoveInDetails {
 
   def subTotal() {
     def subtotal = 0 as BigDecimal
-    for(item in items) {
+    for (item in items) {
       subtotal += item.amount
     }
     return subtotal
@@ -23,7 +23,7 @@ class MoveInDetails {
 
   def taxTotal() {
     def taxtotal = 0 as BigDecimal
-    for(item in items) {
+    for (item in items) {
       taxtotal += item.tax
     }
     return taxtotal

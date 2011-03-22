@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getSiteDetailsResult"
+        "getSiteDetailsResult"
 })
 @XmlRootElement(name = "GetSiteDetailsResponse")
 public class GetSiteDetailsResponse {
@@ -39,11 +32,9 @@ public class GetSiteDetailsResponse {
 
     /**
      * Gets the value of the getSiteDetailsResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetSiteDetailsResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetSiteDetailsResponse2 }
      */
     public GetSiteDetailsResponse2 getGetSiteDetailsResult() {
         return getSiteDetailsResult;
@@ -51,11 +42,9 @@ public class GetSiteDetailsResponse {
 
     /**
      * Sets the value of the getSiteDetailsResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetSiteDetailsResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetSiteDetailsResponse2 }
      */
     public void setGetSiteDetailsResult(GetSiteDetailsResponse2 value) {
         this.getSiteDetailsResult = value;

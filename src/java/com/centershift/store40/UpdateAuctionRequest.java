@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for UpdateAuction_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateAuction_Request">
  *   &lt;complexContent>
@@ -30,17 +25,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateAuction_Request", propOrder = {
-    "siteID",
-    "auctionID",
-    "auctionDateTime",
-    "auctioneerName",
-    "auctionNotes",
-    "auctionStatus"
+        "siteID",
+        "auctionID",
+        "auctionDateTime",
+        "auctioneerName",
+        "auctionNotes",
+        "auctionStatus"
 })
 public class UpdateAuctionRequest {
 
@@ -60,7 +53,6 @@ public class UpdateAuctionRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -68,7 +60,6 @@ public class UpdateAuctionRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -76,7 +67,6 @@ public class UpdateAuctionRequest {
 
     /**
      * Gets the value of the auctionID property.
-     * 
      */
     public long getAuctionID() {
         return auctionID;
@@ -84,7 +74,6 @@ public class UpdateAuctionRequest {
 
     /**
      * Sets the value of the auctionID property.
-     * 
      */
     public void setAuctionID(long value) {
         this.auctionID = value;
@@ -92,11 +81,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Gets the value of the auctionDateTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getAuctionDateTime() {
         return auctionDateTime;
@@ -104,11 +91,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Sets the value of the auctionDateTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setAuctionDateTime(XMLGregorianCalendar value) {
         this.auctionDateTime = value;
@@ -116,11 +101,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Gets the value of the auctioneerName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAuctioneerName() {
         return auctioneerName;
@@ -128,11 +111,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Sets the value of the auctioneerName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAuctioneerName(String value) {
         this.auctioneerName = value;
@@ -140,11 +121,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Gets the value of the auctionNotes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAuctionNotes() {
         return auctionNotes;
@@ -152,11 +131,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Sets the value of the auctionNotes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAuctionNotes(String value) {
         this.auctionNotes = value;
@@ -164,11 +141,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Gets the value of the auctionStatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AuctionStatusValues }
-     *     
+     *
+     * @return possible object is
+     *         {@link AuctionStatusValues }
      */
     public AuctionStatusValues getAuctionStatus() {
         return auctionStatus;
@@ -176,11 +151,9 @@ public class UpdateAuctionRequest {
 
     /**
      * Sets the value of the auctionStatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AuctionStatusValues }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AuctionStatusValues }
      */
     public void setAuctionStatus(AuctionStatusValues value) {
         this.auctionStatus = value;

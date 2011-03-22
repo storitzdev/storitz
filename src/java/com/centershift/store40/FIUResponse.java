@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for FIU_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="FIU_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FIU_Response", propOrder = {
-    "details"
+        "details"
 })
 public class FIUResponse {
 
@@ -37,11 +34,9 @@ public class FIUResponse {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTRANFIUDATA }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTRANFIUDATA }
      */
     public ArrayOfTRANFIUDATA getDetails() {
         return details;
@@ -49,11 +44,9 @@ public class FIUResponse {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTRANFIUDATA }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTRANFIUDATA }
      */
     public void setDetails(ArrayOfTRANFIUDATA value) {
         this.details = value;

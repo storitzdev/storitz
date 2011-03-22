@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getCustomerAccountBalanceResult"
+        "getCustomerAccountBalanceResult"
 })
 @XmlRootElement(name = "GetCustomerAccountBalanceResponse")
 public class GetCustomerAccountBalanceResponse {
@@ -39,11 +32,9 @@ public class GetCustomerAccountBalanceResponse {
 
     /**
      * Gets the value of the getCustomerAccountBalanceResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfGetCustomerAccountBalanceST }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfGetCustomerAccountBalanceST }
      */
     public ArrayOfGetCustomerAccountBalanceST getGetCustomerAccountBalanceResult() {
         return getCustomerAccountBalanceResult;
@@ -51,11 +42,9 @@ public class GetCustomerAccountBalanceResponse {
 
     /**
      * Sets the value of the getCustomerAccountBalanceResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfGetCustomerAccountBalanceST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfGetCustomerAccountBalanceST }
      */
     public void setGetCustomerAccountBalanceResult(ArrayOfGetCustomerAccountBalanceST value) {
         this.getCustomerAccountBalanceResult = value;

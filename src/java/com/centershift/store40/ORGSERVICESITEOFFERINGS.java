@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_SERVICE_SITE_OFFERINGS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_SERVICE_SITE_OFFERINGS">
  *   &lt;complexContent>
@@ -44,36 +43,33 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_SERVICE_SITE_OFFERINGS", propOrder = {
-    "siteid",
-    "classactive",
-    "serviceobjectid",
-    "leasegroupid",
-    "tangible",
-    "servicetype",
-    "servicetypeval",
-    "servicename",
-    "servicefullname",
-    "servicedesc",
-    "price",
-    "taxgroupid",
-    "objectsactive",
-    "servicecatid",
-    "itemno",
-    "barcode",
-    "status",
-    "lookupvalue",
-    "meaning",
-    "reftype",
-    "icon"
+        "siteid",
+        "classactive",
+        "serviceobjectid",
+        "leasegroupid",
+        "tangible",
+        "servicetype",
+        "servicetypeval",
+        "servicename",
+        "servicefullname",
+        "servicedesc",
+        "price",
+        "taxgroupid",
+        "objectsactive",
+        "servicecatid",
+        "itemno",
+        "barcode",
+        "status",
+        "lookupvalue",
+        "meaning",
+        "reftype",
+        "icon"
 })
 public class ORGSERVICESITEOFFERINGS
-    extends BaseEntityOfCollectionORGSERVICESITEOFFERINGSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGSERVICESITEOFFERINGSColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -120,7 +116,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -128,7 +123,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -136,7 +130,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the classactive property.
-     * 
      */
     public boolean isCLASSACTIVE() {
         return classactive;
@@ -144,7 +137,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the classactive property.
-     * 
      */
     public void setCLASSACTIVE(boolean value) {
         this.classactive = value;
@@ -152,7 +144,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the serviceobjectid property.
-     * 
      */
     public long getSERVICEOBJECTID() {
         return serviceobjectid;
@@ -160,7 +151,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the serviceobjectid property.
-     * 
      */
     public void setSERVICEOBJECTID(long value) {
         this.serviceobjectid = value;
@@ -168,11 +158,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the leasegroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getLEASEGROUPID() {
         return leasegroupid;
@@ -180,11 +168,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the leasegroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setLEASEGROUPID(Long value) {
         this.leasegroupid = value;
@@ -192,7 +178,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the tangible property.
-     * 
      */
     public boolean isTANGIBLE() {
         return tangible;
@@ -200,7 +185,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the tangible property.
-     * 
      */
     public void setTANGIBLE(boolean value) {
         this.tangible = value;
@@ -208,7 +192,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the servicetype property.
-     * 
      */
     public int getSERVICETYPE() {
         return servicetype;
@@ -216,7 +199,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the servicetype property.
-     * 
      */
     public void setSERVICETYPE(int value) {
         this.servicetype = value;
@@ -224,11 +206,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the servicetypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSERVICETYPEVAL() {
         return servicetypeval;
@@ -236,11 +216,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the servicetypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSERVICETYPEVAL(String value) {
         this.servicetypeval = value;
@@ -248,11 +226,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the servicename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSERVICENAME() {
         return servicename;
@@ -260,11 +236,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the servicename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSERVICENAME(String value) {
         this.servicename = value;
@@ -272,11 +246,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the servicefullname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSERVICEFULLNAME() {
         return servicefullname;
@@ -284,11 +256,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the servicefullname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSERVICEFULLNAME(String value) {
         this.servicefullname = value;
@@ -296,11 +266,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the servicedesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSERVICEDESC() {
         return servicedesc;
@@ -308,11 +276,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the servicedesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSERVICEDESC(String value) {
         this.servicedesc = value;
@@ -320,11 +286,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the price property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPRICE() {
         return price;
@@ -332,11 +296,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the price property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPRICE(BigDecimal value) {
         this.price = value;
@@ -344,11 +306,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTAXGROUPID() {
         return taxgroupid;
@@ -356,11 +316,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTAXGROUPID(Long value) {
         this.taxgroupid = value;
@@ -368,7 +326,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the objectsactive property.
-     * 
      */
     public boolean isOBJECTSACTIVE() {
         return objectsactive;
@@ -376,7 +333,6 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the objectsactive property.
-     * 
      */
     public void setOBJECTSACTIVE(boolean value) {
         this.objectsactive = value;
@@ -384,11 +340,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the servicecatid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSERVICECATID() {
         return servicecatid;
@@ -396,11 +350,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the servicecatid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSERVICECATID(Long value) {
         this.servicecatid = value;
@@ -408,11 +360,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the itemno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getITEMNO() {
         return itemno;
@@ -420,11 +370,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the itemno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setITEMNO(String value) {
         this.itemno = value;
@@ -432,11 +380,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the barcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBARCODE() {
         return barcode;
@@ -444,11 +390,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the barcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBARCODE(String value) {
         this.barcode = value;
@@ -456,11 +400,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSTATUS() {
         return status;
@@ -468,11 +410,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSTATUS(Integer value) {
         this.status = value;
@@ -480,11 +420,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the lookupvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLOOKUPVALUE() {
         return lookupvalue;
@@ -492,11 +430,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the lookupvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLOOKUPVALUE(String value) {
         this.lookupvalue = value;
@@ -504,11 +440,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the meaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMEANING() {
         return meaning;
@@ -516,11 +450,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the meaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMEANING(String value) {
         this.meaning = value;
@@ -528,11 +460,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the reftype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getREFTYPE() {
         return reftype;
@@ -540,11 +470,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the reftype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setREFTYPE(BigDecimal value) {
         this.reftype = value;
@@ -552,11 +480,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -564,11 +490,9 @@ public class ORGSERVICESITEOFFERINGS
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;

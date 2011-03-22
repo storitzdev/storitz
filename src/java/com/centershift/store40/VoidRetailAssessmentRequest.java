@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for VoidRetailAssessment_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="VoidRetailAssessment_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VoidRetailAssessment_Request", propOrder = {
-    "siteID",
-    "assessIDs"
+        "siteID",
+        "assessIDs"
 })
 public class VoidRetailAssessmentRequest {
 
@@ -41,7 +38,6 @@ public class VoidRetailAssessmentRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class VoidRetailAssessmentRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class VoidRetailAssessmentRequest {
 
     /**
      * Gets the value of the assessIDs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfLong1 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfLong1 }
      */
     public ArrayOfLong1 getAssessIDs() {
         return assessIDs;
@@ -69,11 +62,9 @@ public class VoidRetailAssessmentRequest {
 
     /**
      * Sets the value of the assessIDs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfLong1 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfLong1 }
      */
     public void setAssessIDs(ArrayOfLong1 value) {
         this.assessIDs = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ReturnRetailItem complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ReturnRetailItem">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReturnRetailItem", propOrder = {
-    "retailObjectID",
-    "quantity",
-    "returnReason"
+        "retailObjectID",
+        "quantity",
+        "returnReason"
 })
 public class ReturnRetailItem {
 
@@ -45,7 +42,6 @@ public class ReturnRetailItem {
 
     /**
      * Gets the value of the retailObjectID property.
-     * 
      */
     public long getRetailObjectID() {
         return retailObjectID;
@@ -53,7 +49,6 @@ public class ReturnRetailItem {
 
     /**
      * Sets the value of the retailObjectID property.
-     * 
      */
     public void setRetailObjectID(long value) {
         this.retailObjectID = value;
@@ -61,7 +56,6 @@ public class ReturnRetailItem {
 
     /**
      * Gets the value of the quantity property.
-     * 
      */
     public int getQuantity() {
         return quantity;
@@ -69,7 +63,6 @@ public class ReturnRetailItem {
 
     /**
      * Sets the value of the quantity property.
-     * 
      */
     public void setQuantity(int value) {
         this.quantity = value;
@@ -77,11 +70,9 @@ public class ReturnRetailItem {
 
     /**
      * Gets the value of the returnReason property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RetailReturnReasons }
-     *     
+     *
+     * @return possible object is
+     *         {@link RetailReturnReasons }
      */
     public RetailReturnReasons getReturnReason() {
         return returnReason;
@@ -89,11 +80,9 @@ public class ReturnRetailItem {
 
     /**
      * Sets the value of the returnReason property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RetailReturnReasons }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RetailReturnReasons }
      */
     public void setReturnReason(RetailReturnReasons value) {
         this.returnReason = value;

@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -29,18 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "sUnitID",
-    "sEmailAddress",
-    "sOldPass",
-    "sNewPass"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "sUnitID",
+        "sEmailAddress",
+        "sOldPass",
+        "sNewPass"
 })
 @XmlRootElement(name = "CreateOrUpdatePassword")
 public class CreateOrUpdatePassword {
@@ -55,11 +52,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -67,11 +62,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -79,11 +72,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -91,11 +82,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -103,11 +92,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -115,11 +102,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -127,11 +112,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the sUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSUnitID() {
         return sUnitID;
@@ -139,11 +122,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the sUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSUnitID(String value) {
         this.sUnitID = value;
@@ -151,11 +132,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the sEmailAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSEmailAddress() {
         return sEmailAddress;
@@ -163,11 +142,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the sEmailAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSEmailAddress(String value) {
         this.sEmailAddress = value;
@@ -175,11 +152,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the sOldPass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSOldPass() {
         return sOldPass;
@@ -187,11 +162,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the sOldPass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSOldPass(String value) {
         this.sOldPass = value;
@@ -199,11 +172,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Gets the value of the sNewPass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSNewPass() {
         return sNewPass;
@@ -211,11 +182,9 @@ public class CreateOrUpdatePassword {
 
     /**
      * Sets the value of the sNewPass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSNewPass(String value) {
         this.sNewPass = value;

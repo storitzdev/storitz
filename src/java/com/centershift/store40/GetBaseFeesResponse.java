@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getBaseFeesResult"
+        "getBaseFeesResult"
 })
 @XmlRootElement(name = "GetBaseFeesResponse")
 public class GetBaseFeesResponse {
@@ -39,11 +32,9 @@ public class GetBaseFeesResponse {
 
     /**
      * Gets the value of the getBaseFeesResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetBaseFeesResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetBaseFeesResponse2 }
      */
     public GetBaseFeesResponse2 getGetBaseFeesResult() {
         return getBaseFeesResult;
@@ -51,11 +42,9 @@ public class GetBaseFeesResponse {
 
     /**
      * Sets the value of the getBaseFeesResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetBaseFeesResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetBaseFeesResponse2 }
      */
     public void setGetBaseFeesResult(GetBaseFeesResponse2 value) {
         this.getBaseFeesResult = value;

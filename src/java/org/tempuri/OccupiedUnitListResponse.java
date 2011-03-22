@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "occupiedUnitListResult"
+        "occupiedUnitListResult"
 })
 @XmlRootElement(name = "OccupiedUnitListResponse")
 public class OccupiedUnitListResponse {
@@ -39,11 +32,9 @@ public class OccupiedUnitListResponse {
 
     /**
      * Gets the value of the occupiedUnitListResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfString }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfString }
      */
     public ArrayOfString getOccupiedUnitListResult() {
         return occupiedUnitListResult;
@@ -51,11 +42,9 @@ public class OccupiedUnitListResponse {
 
     /**
      * Sets the value of the occupiedUnitListResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfString }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfString }
      */
     public void setOccupiedUnitListResult(ArrayOfString value) {
         this.occupiedUnitListResult = value;

@@ -122,8 +122,8 @@ class CShiftService extends BaseProviderService {
 
   def newTenant(rentalTransaction) {
 
-    def rentalType = ((rentalTransaction.rentalUse && rentalTransaction.rentalUse == RentalUse.BUSINESS) ?  294 : 295)
-    def centerShift = (CenterShift)rentalTransaction.site.feed
+    def rentalType = ((rentalTransaction.rentalUse && rentalTransaction.rentalUse == RentalUse.BUSINESS) ? 294 : 295)
+    def centerShift = (CenterShift) rentalTransaction.site.feed
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
@@ -166,15 +166,15 @@ class CShiftService extends BaseProviderService {
 </soapenv:Envelope>"""
 
     println "GetReservationUnitDate: ${payload}"
-    
+
     postAction(url, payload, 'GetReservationUnitData')
   }
 
   def makeReservation(RentalTransaction rentalTransaction) {
-     def centerShift = (CenterShift)rentalTransaction.site.feed
-     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
+    def centerShift = (CenterShift) rentalTransaction.site.feed
+    StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
 
-     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
    <soapenv:Body>
       <csc:MakeReservationNonCCPayment>
@@ -194,7 +194,7 @@ class CShiftService extends BaseProviderService {
 </soapenv:Envelope>"""
 
     println "makeReservation: ${payload}"
-    
+
     postAction(centerShift.location.webUrl, payload, 'MakeReservationNonCCPayment')
   }
 
@@ -267,7 +267,7 @@ class CShiftService extends BaseProviderService {
             ins.delete()
           }
           site.insurances.clear()
-          site.save(flush:true)
+          site.save(flush: true)
         } else {
           site = new StorageSite()
           stats.createCount++
@@ -307,7 +307,7 @@ class CShiftService extends BaseProviderService {
   }
 
   def updateSite(site, stats, writer) {
-    def centerShift = (CenterShift)site.feed
+    def centerShift = (CenterShift) site.feed
 
     def ret = getSites(centerShift.location.webUrl, centerShift.userName, centerShift.pin)
     def records = ret.declareNamespace(
@@ -344,52 +344,52 @@ class CShiftService extends BaseProviderService {
 
   def getSiteDetails(cshift, site, siteSource, tab, stats, newSite, writer) {
 
-      site.sourceId = tab.SITE_ID.text()
-      site.sourceLoc = tab.SITE_NUMBER.text()
-      site.source = siteSource
-      site.title = tab.SITE_NAME.text().replace('/', '-')
+    site.sourceId = tab.SITE_ID.text()
+    site.sourceLoc = tab.SITE_NUMBER.text()
+    site.source = siteSource
+    site.title = tab.SITE_NAME.text().replace('/', '-')
 
-      if (site.title ==~/(?i).*(test|training)\s?+.*/) {
-        writer.println "Test or training site - dropping: ${site.title}"
-        return
-      }
+    if (site.title ==~ /(?i).*(test|training)\s?+.*/) {
+      writer.println "Test or training site - dropping: ${site.title}"
+      return
+    }
 
-      if (!addSiteAddress(cshift, site, writer)) {
-        writer.println "Got a bad address, skipping site creation: ${site.title}"
-        return
-      }
+    if (!addSiteAddress(cshift, site, writer)) {
+      writer.println "Got a bad address, skipping site creation: ${site.title}"
+      return
+    }
 
-      addSiteHours(cshift, site)
-      addSitePhone(cshift, site, writer)
-      addSiteFeatures(cshift, site)
+    addSiteHours(cshift, site)
+    addSitePhone(cshift, site, writer)
+    addSiteFeatures(cshift, site)
 
-      site.extendedHours = false
+    site.extendedHours = false
 
-      site.feed  = cshift
+    site.feed = cshift
 
-      if (newSite) {
-        site.transactionType = TransactionType.RENTAL
-      }
-      site.save()
+    if (newSite) {
+      site.transactionType = TransactionType.RENTAL
+    }
+    site.save()
 
-      if (newSite) {
-        SiteUser.link(site, cshift.manager)
-        site.disabled = false
-        site.netCommission = false
-        site.transactionType = TransactionType.RENTAL
-        site.lastChange = new Date()
-      }
+    if (newSite) {
+      SiteUser.link(site, cshift.manager)
+      site.disabled = false
+      site.netCommission = false
+      site.transactionType = TransactionType.RENTAL
+      site.lastChange = new Date()
+    }
 
-      def email = tab.EMAIL_ADDRESS.text()
-      if (email.size() > 0) {
-        createSiteUser(site, email, email, cshift.manager)
-      }
+    def email = tab.EMAIL_ADDRESS.text()
+    if (email.size() > 0) {
+      createSiteUser(site, email, email, cshift.manager)
+    }
 
-      unitsAvailable(cshift, site, stats, writer)
+    unitsAvailable(cshift, site, stats, writer)
 
-      site.requiresInsurance = loadInsurance(cshift, site)
-      loadPromos(cshift, site, writer)
-      site.save(flush: true)
+    site.requiresInsurance = loadInsurance(cshift, site)
+    loadPromos(cshift, site, writer)
+    site.save(flush: true)
   }
 
   def createSiteUsers(cshift, feedType) {
@@ -440,15 +440,15 @@ class CShiftService extends BaseProviderService {
     def user = User.findByEmail(email)
     if (!user) {
       user = new User(
-        username:email,
-        password: (Math.random() * System.currentTimeMillis()) as String,
-        description: "Site Manager for ${site.title}",
-        email: email,
-        userRealName:realName,
-        accountExpired: false,
-        accountLocked: false,
-        passwordExpired: false,
-        enabled: false
+              username: email,
+              password: (Math.random() * System.currentTimeMillis()) as String,
+              description: "Site Manager for ${site.title}",
+              email: email,
+              userRealName: realName,
+              accountExpired: false,
+              accountLocked: false,
+              passwordExpired: false,
+              enabled: false
       )
       user.manager = manager
       if (user.validate()) {
@@ -466,7 +466,7 @@ class CShiftService extends BaseProviderService {
       def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
       UserNotificationType.create(user, notificationType, true)
     }
-    if (!UserRole.userHasRole(user,'ROLE_USER')) {
+    if (!UserRole.userHasRole(user, 'ROLE_USER')) {
       UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
     }
   }
@@ -522,7 +522,7 @@ class CShiftService extends BaseProviderService {
     def ret = getSitePhones(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
 
     if (!ret) return
-    
+
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -561,7 +561,7 @@ class CShiftService extends BaseProviderService {
       def startGateField
       def endGateField
 
-      switch(day) {
+      switch (day) {
         case "Mon":
           openField = "openMonday"
           startField = "startMonday"
@@ -626,7 +626,7 @@ class CShiftService extends BaseProviderService {
         site."$openField" = false
       } else {
         site."$openField" = true
-        def m = office =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
+        def m = office =~ /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
         if (m.matches()) {
           def start = m[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
           def end = m[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
@@ -654,7 +654,7 @@ class CShiftService extends BaseProviderService {
         }
       }
       def gate = hours.GATE.text()
-      def n = gate =~   /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
+      def n = gate =~ /(?i)(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*(to|-)\s*(\d{1,2}(:\d{0,2})?+\s*[ap]?\.?m?\.?)\s*/
       if (n.matches()) {
         def start = n[0][1].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
         def end = n[0][4].replaceAll(/\./, "").replaceAll(" ", "").toLowerCase()
@@ -723,7 +723,7 @@ class CShiftService extends BaseProviderService {
   }
 
   def updateUnits(site, stats, writer) {
-    def centerShift = (CenterShift)site.feed
+    def centerShift = (CenterShift) site.feed
     unitsAvailable(centerShift, site, stats, writer)
     if (site.units.size() > 0) {
       def unit = site.units.asList().get(0)
@@ -758,7 +758,7 @@ class CShiftService extends BaseProviderService {
 
       def moveInDetails = getCostDetails(centerShift.userName, centerShift.pin, site.sourceId, centerShift.location.kioskUrl, feedUnitId, "-1", writer)
 
-      def depositLine = moveInDetails.items.find{ it.description =~ /(?i).*deposit.*/ }
+      def depositLine = moveInDetails.items.find { it.description =~ /(?i).*deposit.*/ }
       if (depositLine) {
         site.deposit = depositLine.amount
         writer.println "Found deposit ${site.deposit}"
@@ -772,7 +772,7 @@ class CShiftService extends BaseProviderService {
     // set all the unit counts to zero
     for (unit in site.units) {
       unit.unitCount = 0
-      unit.save(flush:true)
+      unit.save(flush: true)
     }
 
     def ret = getSiteUnits(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
@@ -787,7 +787,7 @@ class CShiftService extends BaseProviderService {
     for (unit in records.'soap:Body'.'*:GetSiteUnitDataResponse'.'*:GetSiteUnitDataResult'.'*:SiteUnitData'.'*:Unit') {
 
       def vacant = unit.VACANT.text() as Integer
-      def totalUnits = unit.TOTAL.text () as Integer
+      def totalUnits = unit.TOTAL.text() as Integer
       def typeName = unit.VALUE.text()
       def attributes = unit.ATTRIBUTES.text()
       adminFee = unit.ADMIN_FEE.text() as BigDecimal
@@ -832,7 +832,7 @@ class CShiftService extends BaseProviderService {
           }
 
           def newUnit = false
-          def siteUnit = site.units.find{ it.unitName == attributes && it.displaySize == displaySize}
+          def siteUnit = site.units.find { it.unitName == attributes && it.displaySize == displaySize}
 
           if (!siteUnit) {
             siteUnit = new StorageUnit()
@@ -890,7 +890,7 @@ class CShiftService extends BaseProviderService {
             siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
             stats.unitCount += vacant
           }
-          siteUnit.save(flush:true)
+          siteUnit.save(flush: true)
           if (newUnit) {
             site.addToUnits(siteUnit)
           }
@@ -915,15 +915,15 @@ class CShiftService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     def concessionIds = []
-    
-    for(promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
+
+    for (promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
 
       def description = promo.'promo-desc'.text()
 
       def validGov = true
       def promoSize = null
 
-      for(gov in promo.'promo-governors'.governor) {
+      for (gov in promo.'promo-governors'.governor) {
         def limitFactor = gov.'limiting-factor'.text()
         if (limitFactor ==~ /Existing.*/) {
           validGov = false
@@ -934,9 +934,9 @@ class CShiftService extends BaseProviderService {
 
         def concessionId = promo.'promo-id'.text() as Integer
         concessionIds.add(concessionId)
-        SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == concessionId }
+        SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         boolean newOffer = false
-        if (!specialOffer)  {
+        if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
           specialOffer.active = false;
@@ -947,7 +947,7 @@ class CShiftService extends BaseProviderService {
           newOffer = true
         } else {
           specialOffer.restrictions.clear()
-          specialOffer.save(flush:true)
+          specialOffer.save(flush: true)
         }
         specialOffer.promoSize = promoSize
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
@@ -956,7 +956,7 @@ class CShiftService extends BaseProviderService {
         specialOffer.description = description
         specialOffer.inMonth = 0
         specialOffer.promoQty = promo.'discount-min'.text() as BigDecimal
-        if (specialOffer.promoQty == 0) specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal 
+        if (specialOffer.promoQty == 0) specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal
 
         def ptype = promo.'discount-type'.text()
         switch (ptype) {
@@ -976,7 +976,7 @@ class CShiftService extends BaseProviderService {
             writer.println "Unknown promoType: ${ptype}"
             return
         }
-        specialOffer.save(flush:true)
+        specialOffer.save(flush: true)
         if (newOffer) {
           site.addToSpecialOffers(specialOffer)
         }
@@ -998,7 +998,7 @@ class CShiftService extends BaseProviderService {
 
   protected handleGovernors(SpecialOffer specialOffer, promo) {
     def saveFlag = false
-    for(gov in promo.'promo-governors'.governor) {
+    for (gov in promo.'promo-governors'.governor) {
       def limitFactor = gov.'limiting-factor'.text()
       switch (limitFactor) {
         case '# Vacant':
@@ -1007,7 +1007,7 @@ class CShiftService extends BaseProviderService {
           restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
           restriction.minRange = gov.'range-low'.text() as BigDecimal
           restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
@@ -1017,7 +1017,7 @@ class CShiftService extends BaseProviderService {
           restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
           restriction.minRange = gov.'range-low'.text() as BigDecimal
           restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
@@ -1027,7 +1027,7 @@ class CShiftService extends BaseProviderService {
           restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
           restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
           restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
@@ -1037,7 +1037,7 @@ class CShiftService extends BaseProviderService {
           restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
           restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
           restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
@@ -1065,7 +1065,7 @@ class CShiftService extends BaseProviderService {
           restriction.type = SpecialOfferRestrictionType.UNIT_AREA
           restriction.minRange = gov.'range-low'.text() as BigDecimal
           restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
@@ -1074,7 +1074,7 @@ class CShiftService extends BaseProviderService {
           restriction.restrictive = false
           restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
           restriction.restrictionInfo = gov.'governor-value'.text()
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
@@ -1083,24 +1083,24 @@ class CShiftService extends BaseProviderService {
           restriction.restrictive = false
           restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
           restriction.restrictionInfo = gov.'governor-value'.text()
-          restriction.save(flush:true)
+          restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
           break
       }
     }
     if (saveFlag) {
-      specialOffer.save(flush:true)
+      specialOffer.save(flush: true)
     }
 
   }
 
   def loadInsurance(Feed feed, StorageSite site) {
 
-    CenterShift cshift = (CenterShift)feed
+    CenterShift cshift = (CenterShift) feed
 
     def siteInsurances = [:]
-    site.insurances.each{ siteInsurances[it.provider] = false }
+    site.insurances.each { siteInsurances[it.provider] = false }
 
     URL endPoint = new URL(cshift.location.kioskUrl)
 
@@ -1114,7 +1114,7 @@ class CShiftService extends BaseProviderService {
       println "Return for insurance < 0 : ${insOptions}"
       return 0
     }
-    
+
     if (insOptions) {
       def insId = insOptions[0]
       def insProvider = insOptions[1]
@@ -1123,7 +1123,7 @@ class CShiftService extends BaseProviderService {
       def insCoverage = insOptions[4]
 
       def optionSize = insId.size()
-      for(i in 0..optionSize-1) {
+      for (i in 0..optionSize - 1) {
         def ins = new Insurance()
         ins.active = true
         ins.insuranceId = insId[i] as Integer
@@ -1131,13 +1131,13 @@ class CShiftService extends BaseProviderService {
         ins.provider = insProvider[i]
         ins.premium = insRate[i] as BigDecimal
         ins.totalCoverage = insAmount[i] as BigDecimal
-        
+
         if (!ins.save()) {
           ins.errors.allErrors.each { println it }
         }
 
         println "Adding new insurance: ${ins.dump()}"
-        
+
         site.addToInsurances(ins)
       }
       return optionSize
@@ -1149,7 +1149,7 @@ class CShiftService extends BaseProviderService {
 
   def checkRented(RentalTransaction rentalTransaction) {
     def unit = StorageUnit.get(rentalTransaction.unitId)
-    def cshift = (CenterShift)rentalTransaction.site.feed
+    def cshift = (CenterShift) rentalTransaction.site.feed
 
     if (!unit) return false
 
@@ -1157,7 +1157,7 @@ class CShiftService extends BaseProviderService {
     def ret = getReservationUnitData(cshift.location.webUrl, cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.unitInfo, unit.unitName)
 
     println "Reservation data: ${ret as String}"
-    
+
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -1166,14 +1166,14 @@ class CShiftService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     def found = false
-    for(resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:UnitData') {
+    for (resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:UnitData') {
       rentalTransaction.reservationPeriod = resData.Reservation_Days.text() as Integer
       rentalTransaction.reservationCost = resData.Reservation_Cost.text() as BigDecimal
       found = true
     }
     if (!found) {
       def errCode
-      for(resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:Error')  {
+      for (resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:Error') {
         errCode = resData.ErrorCode.text() as Integer
       }
       if (errCode == 100) {
@@ -1189,7 +1189,7 @@ class CShiftService extends BaseProviderService {
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
     println "checkRented (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
-    
+
     def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
     if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
@@ -1213,7 +1213,7 @@ class CShiftService extends BaseProviderService {
     rentalTransaction.feedUnitId = unitId[0] as Long
     rentalTransaction.feedUnitNumber = unitNumber[0]
     if (promoAvail[0] == 'Y' && rentalTransaction?.promoId > 0) {
-      def promoCheck = rentalTransaction.site.specialOffers.findBy{ it.concessionId == (promoId[0] as Long)}
+      def promoCheck = rentalTransaction.site.specialOffers.findBy { it.concessionId == (promoId[0] as Long)}
       if (promoCheck) {
         rentalTransaction.promoId = promoId[0] as Long
       }
@@ -1233,13 +1233,13 @@ class CShiftService extends BaseProviderService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-    for(acct in records.'soap:Body'.'*:CreateNewAccount2Response'.'*:CreateNewAccount2Result'.'*:CreateNewAccount'.'*:Account') {
+    for (acct in records.'soap:Body'.'*:CreateNewAccount2Response'.'*:CreateNewAccount2Result'.'*:CreateNewAccount'.'*:Account') {
 
       rentalTransaction.tenantId = acct.ACCOUNT_ID.text()
       rentalTransaction.contactId = acct.CONTACT_ID.text()
     }
     // memo as a new Storitz tenant
-    def centerShift = (CenterShift)rentalTransaction.site.feed
+    def centerShift = (CenterShift) rentalTransaction.site.feed
     if (rentalTransaction.tenantId) {
       def noteText = "Storitz tenant: (Storitz transaction id: ${rentalTransaction.id})\n\tTotal Move-In: ${rentalTransaction.cost}\n\tPromotion: ${rentalTransaction.promoName ? rentalTransaction.promoName : 'none'}\n\tInsurance: ${rentalTransaction.insuranceCost}\n\tCall 877-456-2929 if you have any questions"
       insertAccountNote(centerShift.location.webUrl,
@@ -1248,7 +1248,7 @@ class CShiftService extends BaseProviderService {
               rentalTransaction.tenantId,
               noteText)
     }
-    rentalTransaction.save(flush:true)
+    rentalTransaction.save(flush: true)
   }
 
   def getCostDetails(userName, pin, sourceId, url, unitId, insId, writer) {
@@ -1278,9 +1278,9 @@ class CShiftService extends BaseProviderService {
     def moveInDetails = new MoveInDetails()
     moveInDetails.paymentString = (end[itemLength] as String)
 
-    for(i in 0..itemLength - 1) {
+    for (i in 0..itemLength - 1) {
       try {
-        moveInDetails.items.add(new LineItem(description:desc[i], tax:(tax[i] ? tax[i] : 0) as BigDecimal, amount: (price[i] ? price[i] : 0) as BigDecimal))
+        moveInDetails.items.add(new LineItem(description: desc[i], tax: (tax[i] ? tax[i] : 0) as BigDecimal, amount: (price[i] ? price[i] : 0) as BigDecimal))
       } catch (NumberFormatException nfe) {
         writer.println "Bad format for tax: ${tax[i]} or price: ${price[i]}"
       }
@@ -1293,7 +1293,7 @@ class CShiftService extends BaseProviderService {
     def ret = makeReservation(rentalTransaction)
 
     println "MakeReservation return ${ret}"
-    
+
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -1303,12 +1303,12 @@ class CShiftService extends BaseProviderService {
     )
     def errorCode = -1
     def message
-    for(res in records.'soap:Body'.'*:MakeReservationNonCCPaymentResponse'.'*:MakeReservationNonCCPaymentResult'.'*:MakeReservationNonCCPayment'.'*:Completed') {
+    for (res in records.'soap:Body'.'*:MakeReservationNonCCPaymentResponse'.'*:MakeReservationNonCCPaymentResult'.'*:MakeReservationNonCCPayment'.'*:Completed') {
       errorCode = res.ErrorCode.text() as Integer
       message = res.Message.text()
     }
     if (!message) {
-      for(res in records.'soap:Body'.'*:MakeReservationNonCCPaymentResponse'.'*:MakeReservationNonCCPaymentResult'.'*:MakeReservationNonCCPayment'.'*:Error') {
+      for (res in records.'soap:Body'.'*:MakeReservationNonCCPaymentResponse'.'*:MakeReservationNonCCPaymentResult'.'*:MakeReservationNonCCPayment'.'*:Error') {
         errorCode = res.ErrorCode.text() as Integer
         message = res.Message.text()
       }
@@ -1330,7 +1330,7 @@ class CShiftService extends BaseProviderService {
   }
 
   def moveIn(RentalTransaction rentalTransaction, PrintWriter writer) {
-    def cshift = (CenterShift)rentalTransaction.site.feed
+    def cshift = (CenterShift) rentalTransaction.site.feed
 
     def insId = -1
     if (rentalTransaction.insuranceId > 0) {
@@ -1416,7 +1416,7 @@ class CShiftService extends BaseProviderService {
       ret["deposit"] = 0
       ret["paidThruDate"] = cal.time.format('MM/dd/yy')
       ret["paidThruDateMillis"] = cal.time
-      ret["durationMonths"] =  1
+      ret["durationMonths"] = 1
       ret["durationDays"] = 0
       return ret
     }
@@ -1457,17 +1457,17 @@ class CShiftService extends BaseProviderService {
     def rentTotal
     def discountRate
     def durationDays
-    BigDecimal insuranceCost  = 0
+    BigDecimal insuranceCost = 0
     if (site.useProrating) {
       durationDays = (lastDayInMonth - moveInDay) + 1
-      durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
-      insuranceCost = (premium*durationMonths).setScale(2, RoundingMode.HALF_UP)
-      rentTotal = (rate*durationMonths).setScale(2, RoundingMode.HALF_UP)
+      durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
+      insuranceCost = (premium * durationMonths).setScale(2, RoundingMode.HALF_UP)
+      rentTotal = (rate * durationMonths).setScale(2, RoundingMode.HALF_UP)
       subTotal = rentTotal + insuranceCost
-      discountRate = rate * (((lastDayInMonth - moveInDay) + 1)/lastDayInMonth)
+      discountRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
     } else {
-      insuranceCost = (premium*durationMonths)
-      rentTotal = (rate*durationMonths)
+      insuranceCost = (premium * durationMonths)
+      rentTotal = (rate * durationMonths)
       subTotal = rentTotal + insuranceCost
       discountRate = rate
       durationDays = 0
@@ -1483,11 +1483,11 @@ class CShiftService extends BaseProviderService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty/100.0) * (discountRate + (promoMonths - 1) * rate);
+          offerDiscount = (promo.promoQty / 100.0) * (discountRate + (promoMonths - 1) * rate);
           break;
 
         case "FIXED_RATE":
-          offerDiscount = ((discountRate - promo.promoQty) > 0 ? (discountRate - promo.promoQty): 0) * promoMonths;
+          offerDiscount = ((discountRate - promo.promoQty) > 0 ? (discountRate - promo.promoQty) : 0) * promoMonths;
           break;
       }
     }
@@ -1508,7 +1508,7 @@ class CShiftService extends BaseProviderService {
     ret["moveInTotal"] = moveInTotal
     ret["paidThruDate"] = cal.time.format('MM/dd/yy')
     ret["paidThruDateMillis"] = cal.time
-    ret["durationMonths"] =  (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
+    ret["durationMonths"] = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret["durationDays"] = durationDays
 
     return ret

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CreateAuction_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateAuction_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateAuction_Response", propOrder = {
-    "auctionID",
-    "details"
+        "auctionID",
+        "details"
 })
 public class CreateAuctionResponse {
 
@@ -41,7 +38,6 @@ public class CreateAuctionResponse {
 
     /**
      * Gets the value of the auctionID property.
-     * 
      */
     public long getAuctionID() {
         return auctionID;
@@ -49,7 +45,6 @@ public class CreateAuctionResponse {
 
     /**
      * Sets the value of the auctionID property.
-     * 
      */
     public void setAuctionID(long value) {
         this.auctionID = value;
@@ -57,11 +52,9 @@ public class CreateAuctionResponse {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ORGAUCTION }
-     *     
+     *
+     * @return possible object is
+     *         {@link ORGAUCTION }
      */
     public ORGAUCTION getDetails() {
         return details;
@@ -69,11 +62,9 @@ public class CreateAuctionResponse {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ORGAUCTION }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ORGAUCTION }
      */
     public void setDetails(ORGAUCTION value) {
         this.details = value;

@@ -1,18 +1,17 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for Yapstone_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Yapstone_ST">
  *   &lt;complexContent>
@@ -29,17 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Yapstone_ST", propOrder = {
-    "csUnit",
-    "dAmount",
-    "csCCNumber",
-    "csPaymentType",
-    "csRefrenceNumber",
-    "csGUID"
+        "csUnit",
+        "dAmount",
+        "csCCNumber",
+        "csPaymentType",
+        "csRefrenceNumber",
+        "csGUID"
 })
 public class YapstoneST {
 
@@ -53,11 +50,9 @@ public class YapstoneST {
 
     /**
      * Gets the value of the csUnit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnit() {
         return csUnit;
@@ -65,11 +60,9 @@ public class YapstoneST {
 
     /**
      * Sets the value of the csUnit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnit(String value) {
         this.csUnit = value;
@@ -77,11 +70,9 @@ public class YapstoneST {
 
     /**
      * Gets the value of the dAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDAmount() {
         return dAmount;
@@ -89,11 +80,9 @@ public class YapstoneST {
 
     /**
      * Sets the value of the dAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDAmount(BigDecimal value) {
         this.dAmount = value;
@@ -101,11 +90,9 @@ public class YapstoneST {
 
     /**
      * Gets the value of the csCCNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCCNumber() {
         return csCCNumber;
@@ -113,11 +100,9 @@ public class YapstoneST {
 
     /**
      * Sets the value of the csCCNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCCNumber(String value) {
         this.csCCNumber = value;
@@ -125,11 +110,9 @@ public class YapstoneST {
 
     /**
      * Gets the value of the csPaymentType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPaymentType() {
         return csPaymentType;
@@ -137,11 +120,9 @@ public class YapstoneST {
 
     /**
      * Sets the value of the csPaymentType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPaymentType(String value) {
         this.csPaymentType = value;
@@ -149,11 +130,9 @@ public class YapstoneST {
 
     /**
      * Gets the value of the csRefrenceNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsRefrenceNumber() {
         return csRefrenceNumber;
@@ -161,11 +140,9 @@ public class YapstoneST {
 
     /**
      * Sets the value of the csRefrenceNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsRefrenceNumber(String value) {
         this.csRefrenceNumber = value;
@@ -173,11 +150,9 @@ public class YapstoneST {
 
     /**
      * Gets the value of the csGUID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsGUID() {
         return csGUID;
@@ -185,11 +160,9 @@ public class YapstoneST {
 
     /**
      * Sets the value of the csGUID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsGUID(String value) {
         this.csGUID = value;

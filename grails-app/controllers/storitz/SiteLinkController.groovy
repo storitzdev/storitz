@@ -1,9 +1,9 @@
 package storitz
 
+import com.storitz.CommissionSchedule
 import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
-import com.storitz.CommissionSchedule
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController extends FeedController {
@@ -11,7 +11,7 @@ class SiteLinkController extends FeedController {
   def siteLinkService
   def imageService
 
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory:"POST"]
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory: "POST"]
 
   def index = {
     redirect(action: "list", params: params)

@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_SECURITY_DEPOSITS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_SECURITY_DEPOSITS">
  *   &lt;complexContent>
@@ -36,28 +35,25 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_SECURITY_DEPOSITS", propOrder = {
-    "depgroupid",
-    "orgid",
-    "depfix",
-    "depperc",
-    "deptype",
-    "deptypeval",
-    "active",
-    "depgroupname",
-    "depgroupdesc",
-    "depmethod",
-    "depmethodval",
-    "amtdesc",
-    "depamt"
+        "depgroupid",
+        "orgid",
+        "depfix",
+        "depperc",
+        "deptype",
+        "deptypeval",
+        "active",
+        "depgroupname",
+        "depgroupdesc",
+        "depmethod",
+        "depmethodval",
+        "amtdesc",
+        "depamt"
 })
 public class ORGSECURITYDEPOSITS
-    extends BaseEntityOfCollectionORGSECURITYDEPOSITSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGSECURITYDEPOSITSColumnIndexes {
 
     @XmlElement(name = "DEP_GROUP_ID")
     protected long depgroupid;
@@ -88,7 +84,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depgroupid property.
-     * 
      */
     public long getDEPGROUPID() {
         return depgroupid;
@@ -96,7 +91,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depgroupid property.
-     * 
      */
     public void setDEPGROUPID(long value) {
         this.depgroupid = value;
@@ -104,7 +98,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -112,7 +105,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -120,11 +112,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depfix property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPFIX() {
         return depfix;
@@ -132,11 +122,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depfix property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPFIX(BigDecimal value) {
         this.depfix = value;
@@ -144,11 +132,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depperc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPPERC() {
         return depperc;
@@ -156,11 +142,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depperc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPPERC(BigDecimal value) {
         this.depperc = value;
@@ -168,7 +152,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the deptype property.
-     * 
      */
     public int getDEPTYPE() {
         return deptype;
@@ -176,7 +159,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the deptype property.
-     * 
      */
     public void setDEPTYPE(int value) {
         this.deptype = value;
@@ -184,11 +166,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the deptypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEPTYPEVAL() {
         return deptypeval;
@@ -196,11 +176,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the deptypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEPTYPEVAL(String value) {
         this.deptypeval = value;
@@ -208,7 +186,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -216,7 +193,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -224,11 +200,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depgroupname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEPGROUPNAME() {
         return depgroupname;
@@ -236,11 +210,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depgroupname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEPGROUPNAME(String value) {
         this.depgroupname = value;
@@ -248,11 +220,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depgroupdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEPGROUPDESC() {
         return depgroupdesc;
@@ -260,11 +230,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depgroupdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEPGROUPDESC(String value) {
         this.depgroupdesc = value;
@@ -272,7 +240,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depmethod property.
-     * 
      */
     public int getDEPMETHOD() {
         return depmethod;
@@ -280,7 +247,6 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depmethod property.
-     * 
      */
     public void setDEPMETHOD(int value) {
         this.depmethod = value;
@@ -288,11 +254,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depmethodval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEPMETHODVAL() {
         return depmethodval;
@@ -300,11 +264,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depmethodval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEPMETHODVAL(String value) {
         this.depmethodval = value;
@@ -312,11 +274,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the amtdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAMTDESC() {
         return amtdesc;
@@ -324,11 +284,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the amtdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAMTDESC(String value) {
         this.amtdesc = value;
@@ -336,11 +294,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Gets the value of the depamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDEPAMT() {
         return depamt;
@@ -348,11 +304,9 @@ public class ORGSECURITYDEPOSITS
 
     /**
      * Sets the value of the depamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDEPAMT(String value) {
         this.depamt = value;

@@ -28,14 +28,14 @@ public enum UnitType {
   }
 
   static public List getUnitTypeBySearchType(SearchType searchType) {
-    return list().findAll{ it.searchType == searchType }
+    return list().findAll { it.searchType == searchType }
   }
 
   static public UnitType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) {
-          return UnitType.valueOf(value)
-        }
-        return ret
+    def ret = list().find {it.display == value }
+    if (!ret) {
+      return UnitType.valueOf(value)
     }
+    return ret
+  }
 }

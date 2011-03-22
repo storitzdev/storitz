@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -29,17 +24,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "iCustomerID",
-    "iMonth",
-    "csUnitID"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "iCustomerID",
+        "iMonth",
+        "csUnitID"
 })
 @XmlRootElement(name = "GetCustomerAccountBalance")
 public class GetCustomerAccountBalance {
@@ -55,11 +48,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -67,11 +58,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -79,11 +68,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -91,11 +78,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -103,11 +88,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -115,11 +98,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -127,7 +108,6 @@ public class GetCustomerAccountBalance {
 
     /**
      * Gets the value of the iCustomerID property.
-     * 
      */
     public long getICustomerID() {
         return iCustomerID;
@@ -135,7 +115,6 @@ public class GetCustomerAccountBalance {
 
     /**
      * Sets the value of the iCustomerID property.
-     * 
      */
     public void setICustomerID(long value) {
         this.iCustomerID = value;
@@ -143,7 +122,6 @@ public class GetCustomerAccountBalance {
 
     /**
      * Gets the value of the iMonth property.
-     * 
      */
     public long getIMonth() {
         return iMonth;
@@ -151,7 +129,6 @@ public class GetCustomerAccountBalance {
 
     /**
      * Sets the value of the iMonth property.
-     * 
      */
     public void setIMonth(long value) {
         this.iMonth = value;
@@ -159,11 +136,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Gets the value of the csUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnitID() {
         return csUnitID;
@@ -171,11 +146,9 @@ public class GetCustomerAccountBalance {
 
     /**
      * Sets the value of the csUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnitID(String value) {
         this.csUnitID = value;

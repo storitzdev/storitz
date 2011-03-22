@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for APPL_RENTAL_OBJECTS_DETAIL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APPL_RENTAL_OBJECTS_DETAIL">
  *   &lt;complexContent>
@@ -79,71 +78,68 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APPL_RENTAL_OBJECTS_DETAIL", propOrder = {
-    "siteid",
-    "unitid",
-    "orgclassid",
-    "siteclassid",
-    "classdesc",
-    "classref",
-    "icon",
-    "classtype",
-    "active",
-    "status",
-    "statusval",
-    "unitnumber",
-    "attribute01",
-    "attribute01VAL",
-    "attribute02",
-    "attribute02VAL",
-    "accesstype",
-    "accesstypeval",
-    "climate",
-    "climateval",
-    "door",
-    "doorval",
-    "features",
-    "featuresval",
-    "volexempt",
-    "portable",
-    "rentrate",
-    "objperiod",
-    "objperioduom",
-    "objperioduomval",
-    "objinvfreq",
-    "fomind",
-    "gpmultiplier",
-    "width",
-    "depth",
-    "height",
-    "volume",
-    "serial01",
-    "serial02",
-    "notes",
-    "walkthruorder",
-    "linkid",
-    "taxgroupid",
-    "leasegroupid",
-    "delmodelid",
-    "resgroupid",
-    "depgroupid",
-    "mux",
-    "alarm",
-    "version",
-    "feeobjectid",
-    "gatekeypad",
-    "createdby",
-    "updatedby",
-    "resamount",
-    "squarefeet"
+        "siteid",
+        "unitid",
+        "orgclassid",
+        "siteclassid",
+        "classdesc",
+        "classref",
+        "icon",
+        "classtype",
+        "active",
+        "status",
+        "statusval",
+        "unitnumber",
+        "attribute01",
+        "attribute01VAL",
+        "attribute02",
+        "attribute02VAL",
+        "accesstype",
+        "accesstypeval",
+        "climate",
+        "climateval",
+        "door",
+        "doorval",
+        "features",
+        "featuresval",
+        "volexempt",
+        "portable",
+        "rentrate",
+        "objperiod",
+        "objperioduom",
+        "objperioduomval",
+        "objinvfreq",
+        "fomind",
+        "gpmultiplier",
+        "width",
+        "depth",
+        "height",
+        "volume",
+        "serial01",
+        "serial02",
+        "notes",
+        "walkthruorder",
+        "linkid",
+        "taxgroupid",
+        "leasegroupid",
+        "delmodelid",
+        "resgroupid",
+        "depgroupid",
+        "mux",
+        "alarm",
+        "version",
+        "feeobjectid",
+        "gatekeypad",
+        "createdby",
+        "updatedby",
+        "resamount",
+        "squarefeet"
 })
 public class APPLRENTALOBJECTSDETAIL
-    extends BaseEntityOfCollectionAPPLRENTALOBJECTSDETAILColumnIndexes
-{
+        extends BaseEntityOfCollectionAPPLRENTALOBJECTSDETAILColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -260,7 +256,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -268,7 +263,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -276,7 +270,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the unitid property.
-     * 
      */
     public long getUNITID() {
         return unitid;
@@ -284,7 +277,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the unitid property.
-     * 
      */
     public void setUNITID(long value) {
         this.unitid = value;
@@ -292,7 +284,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the orgclassid property.
-     * 
      */
     public long getORGCLASSID() {
         return orgclassid;
@@ -300,7 +291,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the orgclassid property.
-     * 
      */
     public void setORGCLASSID(long value) {
         this.orgclassid = value;
@@ -308,7 +298,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the siteclassid property.
-     * 
      */
     public long getSITECLASSID() {
         return siteclassid;
@@ -316,7 +305,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the siteclassid property.
-     * 
      */
     public void setSITECLASSID(long value) {
         this.siteclassid = value;
@@ -324,11 +312,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the classdesc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLASSDESC() {
         return classdesc;
@@ -336,11 +322,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the classdesc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLASSDESC(String value) {
         this.classdesc = value;
@@ -348,7 +332,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the classref property.
-     * 
      */
     public int getCLASSREF() {
         return classref;
@@ -356,7 +339,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the classref property.
-     * 
      */
     public void setCLASSREF(int value) {
         this.classref = value;
@@ -364,11 +346,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the icon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getICON() {
         return icon;
@@ -376,11 +356,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the icon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setICON(String value) {
         this.icon = value;
@@ -388,7 +366,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the classtype property.
-     * 
      */
     public int getCLASSTYPE() {
         return classtype;
@@ -396,7 +373,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the classtype property.
-     * 
      */
     public void setCLASSTYPE(int value) {
         this.classtype = value;
@@ -404,11 +380,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isACTIVE() {
         return active;
@@ -416,11 +390,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setACTIVE(Boolean value) {
         this.active = value;
@@ -428,7 +400,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -436,7 +407,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -444,11 +414,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the statusval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATUSVAL() {
         return statusval;
@@ -456,11 +424,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the statusval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATUSVAL(String value) {
         this.statusval = value;
@@ -468,11 +434,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -480,11 +444,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -492,7 +454,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the attribute01 property.
-     * 
      */
     public int getATTRIBUTE01() {
         return attribute01;
@@ -500,7 +461,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the attribute01 property.
-     * 
      */
     public void setATTRIBUTE01(int value) {
         this.attribute01 = value;
@@ -508,11 +468,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the attribute01VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE01VAL() {
         return attribute01VAL;
@@ -520,11 +478,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the attribute01VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE01VAL(String value) {
         this.attribute01VAL = value;
@@ -532,11 +488,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the attribute02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getATTRIBUTE02() {
         return attribute02;
@@ -544,11 +498,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the attribute02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setATTRIBUTE02(Integer value) {
         this.attribute02 = value;
@@ -556,11 +508,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the attribute02VAL property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE02VAL() {
         return attribute02VAL;
@@ -568,11 +518,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the attribute02VAL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE02VAL(String value) {
         this.attribute02VAL = value;
@@ -580,11 +528,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the accesstype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getACCESSTYPE() {
         return accesstype;
@@ -592,11 +538,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the accesstype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setACCESSTYPE(Integer value) {
         this.accesstype = value;
@@ -604,11 +548,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the accesstypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCESSTYPEVAL() {
         return accesstypeval;
@@ -616,11 +558,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the accesstypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCESSTYPEVAL(String value) {
         this.accesstypeval = value;
@@ -628,11 +568,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the climate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getCLIMATE() {
         return climate;
@@ -640,11 +578,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the climate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setCLIMATE(Integer value) {
         this.climate = value;
@@ -652,11 +588,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the climateval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCLIMATEVAL() {
         return climateval;
@@ -664,11 +598,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the climateval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCLIMATEVAL(String value) {
         this.climateval = value;
@@ -676,11 +608,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the door property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDOOR() {
         return door;
@@ -688,11 +618,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the door property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDOOR(Integer value) {
         this.door = value;
@@ -700,11 +628,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the doorval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDOORVAL() {
         return doorval;
@@ -712,11 +638,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the doorval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDOORVAL(String value) {
         this.doorval = value;
@@ -724,11 +648,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the features property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getFEATURES() {
         return features;
@@ -736,11 +658,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the features property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setFEATURES(Integer value) {
         this.features = value;
@@ -748,11 +668,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the featuresval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFEATURESVAL() {
         return featuresval;
@@ -760,11 +678,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the featuresval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFEATURESVAL(String value) {
         this.featuresval = value;
@@ -772,7 +688,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the volexempt property.
-     * 
      */
     public boolean isVOLEXEMPT() {
         return volexempt;
@@ -780,7 +695,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the volexempt property.
-     * 
      */
     public void setVOLEXEMPT(boolean value) {
         this.volexempt = value;
@@ -788,7 +702,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the portable property.
-     * 
      */
     public boolean isPORTABLE() {
         return portable;
@@ -796,7 +709,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the portable property.
-     * 
      */
     public void setPORTABLE(boolean value) {
         this.portable = value;
@@ -804,11 +716,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the rentrate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTRATE() {
         return rentrate;
@@ -816,11 +726,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the rentrate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTRATE(BigDecimal value) {
         this.rentrate = value;
@@ -828,7 +736,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the objperiod property.
-     * 
      */
     public long getOBJPERIOD() {
         return objperiod;
@@ -836,7 +743,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the objperiod property.
-     * 
      */
     public void setOBJPERIOD(long value) {
         this.objperiod = value;
@@ -844,7 +750,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the objperioduom property.
-     * 
      */
     public int getOBJPERIODUOM() {
         return objperioduom;
@@ -852,7 +757,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the objperioduom property.
-     * 
      */
     public void setOBJPERIODUOM(int value) {
         this.objperioduom = value;
@@ -860,11 +764,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the objperioduomval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOBJPERIODUOMVAL() {
         return objperioduomval;
@@ -872,11 +774,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the objperioduomval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOBJPERIODUOMVAL(String value) {
         this.objperioduomval = value;
@@ -884,7 +784,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the objinvfreq property.
-     * 
      */
     public long getOBJINVFREQ() {
         return objinvfreq;
@@ -892,7 +791,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the objinvfreq property.
-     * 
      */
     public void setOBJINVFREQ(long value) {
         this.objinvfreq = value;
@@ -900,11 +798,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the fomind property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFOMIND() {
         return fomind;
@@ -912,11 +808,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the fomind property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFOMIND(String value) {
         this.fomind = value;
@@ -924,11 +818,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the gpmultiplier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getGPMULTIPLIER() {
         return gpmultiplier;
@@ -936,11 +828,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the gpmultiplier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setGPMULTIPLIER(BigDecimal value) {
         this.gpmultiplier = value;
@@ -948,11 +838,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWIDTH() {
         return width;
@@ -960,11 +848,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWIDTH(BigDecimal value) {
         this.width = value;
@@ -972,11 +858,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDEPTH() {
         return depth;
@@ -984,11 +868,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDEPTH(BigDecimal value) {
         this.depth = value;
@@ -996,11 +878,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the height property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getHEIGHT() {
         return height;
@@ -1008,11 +888,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the height property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setHEIGHT(BigDecimal value) {
         this.height = value;
@@ -1020,11 +898,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the volume property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVOLUME() {
         return volume;
@@ -1032,11 +908,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the volume property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVOLUME(BigDecimal value) {
         this.volume = value;
@@ -1044,11 +918,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the serial01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSERIAL01() {
         return serial01;
@@ -1056,11 +928,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the serial01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSERIAL01(Long value) {
         this.serial01 = value;
@@ -1068,11 +938,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the serial02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSERIAL02() {
         return serial02;
@@ -1080,11 +948,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the serial02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSERIAL02(Long value) {
         this.serial02 = value;
@@ -1092,11 +958,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTES() {
         return notes;
@@ -1104,11 +968,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTES(String value) {
         this.notes = value;
@@ -1116,11 +978,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the walkthruorder property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getWALKTHRUORDER() {
         return walkthruorder;
@@ -1128,11 +988,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the walkthruorder property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setWALKTHRUORDER(Integer value) {
         this.walkthruorder = value;
@@ -1140,11 +998,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the linkid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getLINKID() {
         return linkid;
@@ -1152,11 +1008,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the linkid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setLINKID(Long value) {
         this.linkid = value;
@@ -1164,11 +1018,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTAXGROUPID() {
         return taxgroupid;
@@ -1176,11 +1028,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTAXGROUPID(Long value) {
         this.taxgroupid = value;
@@ -1188,11 +1038,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the leasegroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getLEASEGROUPID() {
         return leasegroupid;
@@ -1200,11 +1048,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the leasegroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setLEASEGROUPID(Long value) {
         this.leasegroupid = value;
@@ -1212,11 +1058,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the delmodelid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDELMODELID() {
         return delmodelid;
@@ -1224,11 +1068,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the delmodelid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setDELMODELID(Long value) {
         this.delmodelid = value;
@@ -1236,11 +1078,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the resgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRESGROUPID() {
         return resgroupid;
@@ -1248,11 +1088,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the resgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRESGROUPID(Long value) {
         this.resgroupid = value;
@@ -1260,11 +1098,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the depgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDEPGROUPID() {
         return depgroupid;
@@ -1272,11 +1108,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the depgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setDEPGROUPID(Long value) {
         this.depgroupid = value;
@@ -1284,11 +1118,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the mux property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getMUX() {
         return mux;
@@ -1296,11 +1128,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the mux property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setMUX(Integer value) {
         this.mux = value;
@@ -1308,11 +1138,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the alarm property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getALARM() {
         return alarm;
@@ -1320,11 +1148,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the alarm property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setALARM(Integer value) {
         this.alarm = value;
@@ -1332,11 +1158,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the version property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getVERSION() {
         return version;
@@ -1344,11 +1168,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the version property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setVERSION(BigDecimal value) {
         this.version = value;
@@ -1356,11 +1178,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the feeobjectid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getFEEOBJECTID() {
         return feeobjectid;
@@ -1368,11 +1188,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the feeobjectid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setFEEOBJECTID(Long value) {
         this.feeobjectid = value;
@@ -1380,11 +1198,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the gatekeypad property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getGATEKEYPAD() {
         return gatekeypad;
@@ -1392,11 +1208,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the gatekeypad property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setGATEKEYPAD(Integer value) {
         this.gatekeypad = value;
@@ -1404,7 +1218,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -1412,7 +1225,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -1420,7 +1232,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -1428,7 +1239,6 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -1436,11 +1246,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the resamount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRESAMOUNT() {
         return resamount;
@@ -1448,11 +1256,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the resamount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRESAMOUNT(BigDecimal value) {
         this.resamount = value;
@@ -1460,11 +1266,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Gets the value of the squarefeet property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSQUAREFEET() {
         return squarefeet;
@@ -1472,11 +1276,9 @@ public class APPLRENTALOBJECTSDETAIL
 
     /**
      * Sets the value of the squarefeet property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSQUAREFEET(BigDecimal value) {
         this.squarefeet = value;

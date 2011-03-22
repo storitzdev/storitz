@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAuctions_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAuctions_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAuctions_Request", propOrder = {
-    "siteID",
-    "status"
+        "siteID",
+        "status"
 })
 public class GetAuctionsRequest {
 
@@ -41,7 +38,6 @@ public class GetAuctionsRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class GetAuctionsRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class GetAuctionsRequest {
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionStatusValues }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionStatusValues }
      */
     public ArrayOfAuctionStatusValues getStatus() {
         return status;
@@ -69,11 +62,9 @@ public class GetAuctionsRequest {
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionStatusValues }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionStatusValues }
      */
     public void setStatus(ArrayOfAuctionStatusValues value) {
         this.status = value;

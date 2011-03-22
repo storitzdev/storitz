@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ProcessorInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ProcessorInfo">
  *   &lt;complexContent>
@@ -27,17 +26,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProcessorInfo", propOrder = {
-    "csProcessor",
-    "csUserName",
-    "csPassword",
-    "csPropertyCode",
-    "csURL1",
-    "csURL2"
+        "csProcessor",
+        "csUserName",
+        "csPassword",
+        "csPropertyCode",
+        "csURL1",
+        "csURL2"
 })
 public class ProcessorInfo {
 
@@ -50,11 +47,9 @@ public class ProcessorInfo {
 
     /**
      * Gets the value of the csProcessor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsProcessor() {
         return csProcessor;
@@ -62,11 +57,9 @@ public class ProcessorInfo {
 
     /**
      * Sets the value of the csProcessor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsProcessor(String value) {
         this.csProcessor = value;
@@ -74,11 +67,9 @@ public class ProcessorInfo {
 
     /**
      * Gets the value of the csUserName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUserName() {
         return csUserName;
@@ -86,11 +77,9 @@ public class ProcessorInfo {
 
     /**
      * Sets the value of the csUserName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUserName(String value) {
         this.csUserName = value;
@@ -98,11 +87,9 @@ public class ProcessorInfo {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -110,11 +97,9 @@ public class ProcessorInfo {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -122,11 +107,9 @@ public class ProcessorInfo {
 
     /**
      * Gets the value of the csPropertyCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPropertyCode() {
         return csPropertyCode;
@@ -134,11 +117,9 @@ public class ProcessorInfo {
 
     /**
      * Sets the value of the csPropertyCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPropertyCode(String value) {
         this.csPropertyCode = value;
@@ -146,11 +127,9 @@ public class ProcessorInfo {
 
     /**
      * Gets the value of the csURL1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsURL1() {
         return csURL1;
@@ -158,11 +137,9 @@ public class ProcessorInfo {
 
     /**
      * Sets the value of the csURL1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsURL1(String value) {
         this.csURL1 = value;
@@ -170,11 +147,9 @@ public class ProcessorInfo {
 
     /**
      * Gets the value of the csURL2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsURL2() {
         return csURL2;
@@ -182,11 +157,9 @@ public class ProcessorInfo {
 
     /**
      * Sets the value of the csURL2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsURL2(String value) {
         this.csURL2 = value;

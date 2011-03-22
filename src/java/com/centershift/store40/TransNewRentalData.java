@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for TransNewRentalData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TransNewRentalData">
  *   &lt;complexContent>
@@ -31,19 +30,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransNewRentalData", propOrder = {
-    "rentalID",
-    "rentalVersion",
-    "unitID",
-    "unitVersion",
-    "quoteID",
-    "escrowID",
-    "unitTotal",
-    "unitAssessments"
+        "rentalID",
+        "rentalVersion",
+        "unitID",
+        "unitVersion",
+        "quoteID",
+        "escrowID",
+        "unitTotal",
+        "unitAssessments"
 })
 public class TransNewRentalData {
 
@@ -66,7 +63,6 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -74,7 +70,6 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -82,7 +77,6 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the rentalVersion property.
-     * 
      */
     public int getRentalVersion() {
         return rentalVersion;
@@ -90,7 +84,6 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the rentalVersion property.
-     * 
      */
     public void setRentalVersion(int value) {
         this.rentalVersion = value;
@@ -98,7 +91,6 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -106,7 +98,6 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -114,7 +105,6 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the unitVersion property.
-     * 
      */
     public int getUnitVersion() {
         return unitVersion;
@@ -122,7 +112,6 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the unitVersion property.
-     * 
      */
     public void setUnitVersion(int value) {
         this.unitVersion = value;
@@ -130,7 +119,6 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the quoteID property.
-     * 
      */
     public long getQuoteID() {
         return quoteID;
@@ -138,7 +126,6 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the quoteID property.
-     * 
      */
     public void setQuoteID(long value) {
         this.quoteID = value;
@@ -146,7 +133,6 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the escrowID property.
-     * 
      */
     public long getEscrowID() {
         return escrowID;
@@ -154,7 +140,6 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the escrowID property.
-     * 
      */
     public void setEscrowID(long value) {
         this.escrowID = value;
@@ -162,11 +147,9 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the unitTotal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getUnitTotal() {
         return unitTotal;
@@ -174,11 +157,9 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the unitTotal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setUnitTotal(BigDecimal value) {
         this.unitTotal = value;
@@ -186,11 +167,9 @@ public class TransNewRentalData {
 
     /**
      * Gets the value of the unitAssessments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfTransUnitAssessments }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfTransUnitAssessments }
      */
     public ArrayOfTransUnitAssessments getUnitAssessments() {
         return unitAssessments;
@@ -198,11 +177,9 @@ public class TransNewRentalData {
 
     /**
      * Sets the value of the unitAssessments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfTransUnitAssessments }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfTransUnitAssessments }
      */
     public void setUnitAssessments(ArrayOfTransUnitAssessments value) {
         this.unitAssessments = value;

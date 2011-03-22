@@ -12,14 +12,14 @@ import ar.com.fdvs.dj.domain.CustomExpression
 class NetCostExpression implements CustomExpression {
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          BigDecimal cost = (BigDecimal) fields.get("cost");
-          BigDecimal commission = (BigDecimal) fields.get("commission");
-          BigDecimal ret = cost - commission
-          ret
+    BigDecimal cost = (BigDecimal) fields.get("cost");
+    BigDecimal commission = (BigDecimal) fields.get("commission");
+    BigDecimal ret = cost - commission
+    ret
   }
 
   public String getClassName() {
-          return BigDecimal.class.getName();
+    return BigDecimal.class.getName();
   }
 
 }

@@ -24,10 +24,10 @@ public enum SearchType {
   }
 
   static public SearchType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) {
-          return SearchType.valueOf(value)
-        }
-        return ret
+    def ret = list().find {it.display == value }
+    if (!ret) {
+      return SearchType.valueOf(value)
     }
+    return ret
+  }
 }

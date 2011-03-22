@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for APPL_INS_EXPORT complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="APPL_INS_EXPORT">
  *   &lt;complexContent>
@@ -54,44 +49,41 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "APPL_INS_EXPORT", propOrder = {
-    "providerextid",
-    "siterefid",
-    "acctname",
-    "firstname",
-    "lastname",
-    "addr1",
-    "addr2",
-    "city",
-    "state",
-    "postalcode",
-    "unitnumber",
-    "startdate",
-    "coverageamount",
-    "coverageperc",
-    "rate",
-    "acctclass",
-    "attribute01",
-    "attribute02",
-    "sitename",
-    "siteid",
-    "insoptionid",
-    "coveragegroupid",
-    "groupname",
-    "providername",
-    "insproviderid",
-    "orgname",
-    "orgid",
-    "sitenumber",
-    "shortname"
+        "providerextid",
+        "siterefid",
+        "acctname",
+        "firstname",
+        "lastname",
+        "addr1",
+        "addr2",
+        "city",
+        "state",
+        "postalcode",
+        "unitnumber",
+        "startdate",
+        "coverageamount",
+        "coverageperc",
+        "rate",
+        "acctclass",
+        "attribute01",
+        "attribute02",
+        "sitename",
+        "siteid",
+        "insoptionid",
+        "coveragegroupid",
+        "groupname",
+        "providername",
+        "insproviderid",
+        "orgname",
+        "orgid",
+        "sitenumber",
+        "shortname"
 })
 public class APPLINSEXPORT
-    extends BaseEntityOfCollectionAPPLINSEXPORTColumnIndexes
-{
+        extends BaseEntityOfCollectionAPPLINSEXPORTColumnIndexes {
 
     @XmlElement(name = "PROVIDER_EXT_ID")
     protected String providerextid;
@@ -155,11 +147,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the providerextid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROVIDEREXTID() {
         return providerextid;
@@ -167,11 +157,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the providerextid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROVIDEREXTID(String value) {
         this.providerextid = value;
@@ -179,11 +167,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the siterefid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITEREFID() {
         return siterefid;
@@ -191,11 +177,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the siterefid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITEREFID(String value) {
         this.siterefid = value;
@@ -203,11 +187,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -215,11 +197,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -227,11 +207,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFIRSTNAME() {
         return firstname;
@@ -239,11 +217,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFIRSTNAME(String value) {
         this.firstname = value;
@@ -251,11 +227,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTNAME() {
         return lastname;
@@ -263,11 +237,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTNAME(String value) {
         this.lastname = value;
@@ -275,11 +247,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the addr1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR1() {
         return addr1;
@@ -287,11 +257,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the addr1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR1(String value) {
         this.addr1 = value;
@@ -299,11 +267,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the addr2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR2() {
         return addr2;
@@ -311,11 +277,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the addr2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR2(String value) {
         this.addr2 = value;
@@ -323,11 +287,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCITY() {
         return city;
@@ -335,11 +297,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCITY(String value) {
         this.city = value;
@@ -347,11 +307,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATE() {
         return state;
@@ -359,11 +317,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATE(String value) {
         this.state = value;
@@ -371,11 +327,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the postalcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPOSTALCODE() {
         return postalcode;
@@ -383,11 +337,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the postalcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPOSTALCODE(String value) {
         this.postalcode = value;
@@ -395,11 +347,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -407,11 +357,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -419,11 +367,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the startdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getSTARTDATE() {
         return startdate;
@@ -431,11 +377,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the startdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setSTARTDATE(XMLGregorianCalendar value) {
         this.startdate = value;
@@ -443,7 +387,6 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the coverageamount property.
-     * 
      */
     public int getCOVERAGEAMOUNT() {
         return coverageamount;
@@ -451,7 +394,6 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the coverageamount property.
-     * 
      */
     public void setCOVERAGEAMOUNT(int value) {
         this.coverageamount = value;
@@ -459,11 +401,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the coverageperc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCOVERAGEPERC() {
         return coverageperc;
@@ -471,11 +411,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the coverageperc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCOVERAGEPERC(BigDecimal value) {
         this.coverageperc = value;
@@ -483,11 +421,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the rate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRATE() {
         return rate;
@@ -495,11 +431,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the rate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRATE(BigDecimal value) {
         this.rate = value;
@@ -507,11 +441,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the acctclass property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTCLASS() {
         return acctclass;
@@ -519,11 +451,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the acctclass property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTCLASS(String value) {
         this.acctclass = value;
@@ -531,11 +461,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the attribute01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE01() {
         return attribute01;
@@ -543,11 +471,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the attribute01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE01(String value) {
         this.attribute01 = value;
@@ -555,11 +481,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the attribute02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getATTRIBUTE02() {
         return attribute02;
@@ -567,11 +491,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the attribute02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setATTRIBUTE02(String value) {
         this.attribute02 = value;
@@ -579,11 +501,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the sitename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENAME() {
         return sitename;
@@ -591,11 +511,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the sitename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENAME(String value) {
         this.sitename = value;
@@ -603,7 +521,6 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -611,7 +528,6 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -619,7 +535,6 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the insoptionid property.
-     * 
      */
     public long getINSOPTIONID() {
         return insoptionid;
@@ -627,7 +542,6 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the insoptionid property.
-     * 
      */
     public void setINSOPTIONID(long value) {
         this.insoptionid = value;
@@ -635,7 +549,6 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the coveragegroupid property.
-     * 
      */
     public long getCOVERAGEGROUPID() {
         return coveragegroupid;
@@ -643,7 +556,6 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the coveragegroupid property.
-     * 
      */
     public void setCOVERAGEGROUPID(long value) {
         this.coveragegroupid = value;
@@ -651,11 +563,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the groupname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGROUPNAME() {
         return groupname;
@@ -663,11 +573,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the groupname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGROUPNAME(String value) {
         this.groupname = value;
@@ -675,11 +583,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the providername property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPROVIDERNAME() {
         return providername;
@@ -687,11 +593,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the providername property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPROVIDERNAME(String value) {
         this.providername = value;
@@ -699,7 +603,6 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the insproviderid property.
-     * 
      */
     public long getINSPROVIDERID() {
         return insproviderid;
@@ -707,7 +610,6 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the insproviderid property.
-     * 
      */
     public void setINSPROVIDERID(long value) {
         this.insproviderid = value;
@@ -715,11 +617,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the orgname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getORGNAME() {
         return orgname;
@@ -727,11 +627,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the orgname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setORGNAME(String value) {
         this.orgname = value;
@@ -739,7 +637,6 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -747,7 +644,6 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -755,11 +651,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the sitenumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENUMBER() {
         return sitenumber;
@@ -767,11 +661,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the sitenumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENUMBER(String value) {
         this.sitenumber = value;
@@ -779,11 +671,9 @@ public class APPLINSEXPORT
 
     /**
      * Gets the value of the shortname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSHORTNAME() {
         return shortname;
@@ -791,11 +681,9 @@ public class APPLINSEXPORT
 
     /**
      * Sets the value of the shortname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSHORTNAME(String value) {
         this.shortname = value;

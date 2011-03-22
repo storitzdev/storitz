@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SendEmailWithUnit_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SendEmailWithUnit_Request">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SendEmailWithUnit_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "rentalID",
-    "emailType",
-    "unitNumber"
+        "orgID",
+        "siteID",
+        "rentalID",
+        "emailType",
+        "unitNumber"
 })
 public class SendEmailWithUnitRequest {
 
@@ -53,11 +50,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -65,11 +60,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;
@@ -77,11 +70,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -89,11 +80,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -101,11 +90,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalID() {
         return rentalID;
@@ -113,11 +100,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalID(Long value) {
         this.rentalID = value;
@@ -125,11 +110,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Gets the value of the emailType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @return possible object is
+     *         {@link EmailMsgTemplateIds }
      */
     public EmailMsgTemplateIds getEmailType() {
         return emailType;
@@ -137,11 +120,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Sets the value of the emailType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link EmailMsgTemplateIds }
      */
     public void setEmailType(EmailMsgTemplateIds value) {
         this.emailType = value;
@@ -149,11 +130,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Gets the value of the unitNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUnitNumber() {
         return unitNumber;
@@ -161,11 +140,9 @@ public class SendEmailWithUnitRequest {
 
     /**
      * Sets the value of the unitNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUnitNumber(String value) {
         this.unitNumber = value;

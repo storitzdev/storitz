@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for POST_LTR_TNT_INFO complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="POST_LTR_TNT_INFO">
  *   &lt;complexContent>
@@ -41,32 +36,29 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "POST_LTR_TNT_INFO", propOrder = {
-    "ltrnum",
-    "siteid",
-    "acctid",
-    "rentalid",
-    "unitnumber",
-    "ltrtypeid",
-    "ltrname",
-    "version",
-    "certified",
-    "maillocal",
-    "exportid",
-    "whocreated",
-    "created",
-    "ltrtypegroup",
-    "groupmeaning",
-    "printspecial",
-    "printmeaning"
+        "ltrnum",
+        "siteid",
+        "acctid",
+        "rentalid",
+        "unitnumber",
+        "ltrtypeid",
+        "ltrname",
+        "version",
+        "certified",
+        "maillocal",
+        "exportid",
+        "whocreated",
+        "created",
+        "ltrtypegroup",
+        "groupmeaning",
+        "printspecial",
+        "printmeaning"
 })
 public class POSTLTRTNTINFO
-    extends BaseEntityOfCollectionPOSTLTRTNTINFOColumnIndexes
-{
+        extends BaseEntityOfCollectionPOSTLTRTNTINFOColumnIndexes {
 
     @XmlElement(name = "LTR_NUM")
     protected long ltrnum;
@@ -106,7 +98,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the ltrnum property.
-     * 
      */
     public long getLTRNUM() {
         return ltrnum;
@@ -114,7 +105,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the ltrnum property.
-     * 
      */
     public void setLTRNUM(long value) {
         this.ltrnum = value;
@@ -122,7 +112,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -130,7 +119,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -138,7 +126,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -146,7 +133,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -154,11 +140,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -166,11 +150,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -178,11 +160,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -190,11 +170,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -202,7 +180,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the ltrtypeid property.
-     * 
      */
     public long getLTRTYPEID() {
         return ltrtypeid;
@@ -210,7 +187,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the ltrtypeid property.
-     * 
      */
     public void setLTRTYPEID(long value) {
         this.ltrtypeid = value;
@@ -218,11 +194,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the ltrname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLTRNAME() {
         return ltrname;
@@ -230,11 +204,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the ltrname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLTRNAME(String value) {
         this.ltrname = value;
@@ -242,7 +214,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the version property.
-     * 
      */
     public int getVERSION() {
         return version;
@@ -250,7 +221,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the version property.
-     * 
      */
     public void setVERSION(int value) {
         this.version = value;
@@ -258,11 +228,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the certified property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCERTIFIED() {
         return certified;
@@ -270,11 +238,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the certified property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCERTIFIED(String value) {
         this.certified = value;
@@ -282,11 +248,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the maillocal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMAILLOCAL() {
         return maillocal;
@@ -294,11 +258,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the maillocal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMAILLOCAL(String value) {
         this.maillocal = value;
@@ -306,11 +268,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the exportid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getEXPORTID() {
         return exportid;
@@ -318,11 +278,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the exportid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setEXPORTID(Long value) {
         this.exportid = value;
@@ -330,11 +288,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the whocreated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getWHOCREATED() {
         return whocreated;
@@ -342,11 +298,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the whocreated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWHOCREATED(String value) {
         this.whocreated = value;
@@ -354,11 +308,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the created property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCREATED() {
         return created;
@@ -366,11 +318,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the created property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCREATED(XMLGregorianCalendar value) {
         this.created = value;
@@ -378,7 +328,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the ltrtypegroup property.
-     * 
      */
     public int getLTRTYPEGROUP() {
         return ltrtypegroup;
@@ -386,7 +335,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the ltrtypegroup property.
-     * 
      */
     public void setLTRTYPEGROUP(int value) {
         this.ltrtypegroup = value;
@@ -394,11 +342,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the groupmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGROUPMEANING() {
         return groupmeaning;
@@ -406,11 +352,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the groupmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGROUPMEANING(String value) {
         this.groupmeaning = value;
@@ -418,7 +362,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the printspecial property.
-     * 
      */
     public int getPRINTSPECIAL() {
         return printspecial;
@@ -426,7 +369,6 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the printspecial property.
-     * 
      */
     public void setPRINTSPECIAL(int value) {
         this.printspecial = value;
@@ -434,11 +376,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Gets the value of the printmeaning property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPRINTMEANING() {
         return printmeaning;
@@ -446,11 +386,9 @@ public class POSTLTRTNTINFO
 
     /**
      * Sets the value of the printmeaning property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPRINTMEANING(String value) {
         this.printmeaning = value;

@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for NewAccountResult complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="NewAccountResult">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NewAccountResult", propOrder = {
-    "bResult",
-    "csReturnMessage",
-    "iCustomerID",
-    "csAccessCode",
-    "csOrderID"
+        "bResult",
+        "csReturnMessage",
+        "iCustomerID",
+        "csAccessCode",
+        "csOrderID"
 })
 public class NewAccountResult {
 
@@ -49,7 +46,6 @@ public class NewAccountResult {
 
     /**
      * Gets the value of the bResult property.
-     * 
      */
     public boolean isBResult() {
         return bResult;
@@ -57,7 +53,6 @@ public class NewAccountResult {
 
     /**
      * Sets the value of the bResult property.
-     * 
      */
     public void setBResult(boolean value) {
         this.bResult = value;
@@ -65,11 +60,9 @@ public class NewAccountResult {
 
     /**
      * Gets the value of the csReturnMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsReturnMessage() {
         return csReturnMessage;
@@ -77,11 +70,9 @@ public class NewAccountResult {
 
     /**
      * Sets the value of the csReturnMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsReturnMessage(String value) {
         this.csReturnMessage = value;
@@ -89,7 +80,6 @@ public class NewAccountResult {
 
     /**
      * Gets the value of the iCustomerID property.
-     * 
      */
     public long getICustomerID() {
         return iCustomerID;
@@ -97,7 +87,6 @@ public class NewAccountResult {
 
     /**
      * Sets the value of the iCustomerID property.
-     * 
      */
     public void setICustomerID(long value) {
         this.iCustomerID = value;
@@ -105,11 +94,9 @@ public class NewAccountResult {
 
     /**
      * Gets the value of the csAccessCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsAccessCode() {
         return csAccessCode;
@@ -117,11 +104,9 @@ public class NewAccountResult {
 
     /**
      * Sets the value of the csAccessCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsAccessCode(String value) {
         this.csAccessCode = value;
@@ -129,11 +114,9 @@ public class NewAccountResult {
 
     /**
      * Gets the value of the csOrderID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsOrderID() {
         return csOrderID;
@@ -141,11 +124,9 @@ public class NewAccountResult {
 
     /**
      * Sets the value of the csOrderID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsOrderID(String value) {
         this.csOrderID = value;

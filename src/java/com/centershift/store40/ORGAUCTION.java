@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for ORG_AUCTION complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_AUCTION">
  *   &lt;complexContent>
@@ -33,24 +28,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_AUCTION", propOrder = {
-    "siteid",
-    "auctiondate",
-    "auctioneername",
-    "notes",
-    "status",
-    "createdby",
-    "updatedby",
-    "auctiontime",
-    "orgauctionobjs"
+        "siteid",
+        "auctiondate",
+        "auctioneername",
+        "notes",
+        "status",
+        "createdby",
+        "updatedby",
+        "auctiontime",
+        "orgauctionobjs"
 })
 public class ORGAUCTION
-    extends BaseEntityOfCollectionORGAUCTIONColumnIndexes
-{
+        extends BaseEntityOfCollectionORGAUCTIONColumnIndexes {
 
     @XmlElement(name = "SITE_ID", required = true, type = Long.class, nillable = true)
     protected Long siteid;
@@ -74,11 +66,9 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -86,11 +76,9 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -98,11 +86,9 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the auctiondate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getAUCTIONDATE() {
         return auctiondate;
@@ -110,11 +96,9 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the auctiondate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setAUCTIONDATE(XMLGregorianCalendar value) {
         this.auctiondate = value;
@@ -122,11 +106,9 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the auctioneername property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAUCTIONEERNAME() {
         return auctioneername;
@@ -134,11 +116,9 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the auctioneername property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAUCTIONEERNAME(String value) {
         this.auctioneername = value;
@@ -146,11 +126,9 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTES() {
         return notes;
@@ -158,11 +136,9 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTES(String value) {
         this.notes = value;
@@ -170,7 +146,6 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -178,7 +153,6 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -186,7 +160,6 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -194,7 +167,6 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -202,7 +174,6 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -210,7 +181,6 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -218,11 +188,9 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the auctiontime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAUCTIONTIME() {
         return auctiontime;
@@ -230,11 +198,9 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the auctiontime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAUCTIONTIME(String value) {
         this.auctiontime = value;
@@ -242,11 +208,9 @@ public class ORGAUCTION
 
     /**
      * Gets the value of the orgauctionobjs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGAUCTIONOBJS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGAUCTIONOBJS }
      */
     public ArrayOfORGAUCTIONOBJS getORGAUCTIONOBJS() {
         return orgauctionobjs;
@@ -254,11 +218,9 @@ public class ORGAUCTION
 
     /**
      * Sets the value of the orgauctionobjs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGAUCTIONOBJS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGAUCTIONOBJS }
      */
     public void setORGAUCTIONOBJS(ArrayOfORGAUCTIONOBJS value) {
         this.orgauctionobjs = value;

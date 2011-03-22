@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAvailableRetailItems_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAvailableRetailItems_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAvailableRetailItems_Request", propOrder = {
-    "siteID",
-    "filter",
-    "searchTerm"
+        "siteID",
+        "filter",
+        "searchTerm"
 })
 public class GetAvailableRetailItemsRequest {
 
@@ -45,7 +42,6 @@ public class GetAvailableRetailItemsRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -53,7 +49,6 @@ public class GetAvailableRetailItemsRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -61,11 +56,9 @@ public class GetAvailableRetailItemsRequest {
 
     /**
      * Gets the value of the filter property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RetailFilter }
-     *     
+     *
+     * @return possible object is
+     *         {@link RetailFilter }
      */
     public RetailFilter getFilter() {
         return filter;
@@ -73,11 +66,9 @@ public class GetAvailableRetailItemsRequest {
 
     /**
      * Sets the value of the filter property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RetailFilter }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RetailFilter }
      */
     public void setFilter(RetailFilter value) {
         this.filter = value;
@@ -85,11 +76,9 @@ public class GetAvailableRetailItemsRequest {
 
     /**
      * Gets the value of the searchTerm property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSearchTerm() {
         return searchTerm;
@@ -97,11 +86,9 @@ public class GetAvailableRetailItemsRequest {
 
     /**
      * Sets the value of the searchTerm property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSearchTerm(String value) {
         this.searchTerm = value;

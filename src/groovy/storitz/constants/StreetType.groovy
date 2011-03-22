@@ -35,15 +35,15 @@ public enum StreetType {
   String getValue() {
     return this.display;
   }
-  
+
   static list() {
     [STREET, AVENUE, BOULEVARD, DRIVE, ROAD, PLACE, LANE, PARKWAY, ROUTE, JUNCTION, HIGHWAY, EXPRESSWAY, MOTORWAY, PARKWAY, TERRACE, HEIGHTS, WAY]
   }
 
   static public StreetType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return StreetType.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return StreetType.valueOf(value)
+    return ret
+  }
 
 }

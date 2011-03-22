@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for eTaskType.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="eTaskType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -23,7 +22,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "eTaskType")
 @XmlEnum
@@ -52,7 +50,7 @@ public enum ETaskType {
     }
 
     public static ETaskType fromValue(String v) {
-        for (ETaskType c: ETaskType.values()) {
+        for (ETaskType c : ETaskType.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

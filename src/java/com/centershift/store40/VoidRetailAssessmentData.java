@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for VoidRetailAssessmentData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="VoidRetailAssessmentData">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VoidRetailAssessmentData", propOrder = {
-    "assessID",
-    "success",
-    "errorMessage"
+        "assessID",
+        "success",
+        "errorMessage"
 })
 public class VoidRetailAssessmentData {
 
@@ -45,7 +42,6 @@ public class VoidRetailAssessmentData {
 
     /**
      * Gets the value of the assessID property.
-     * 
      */
     public long getAssessID() {
         return assessID;
@@ -53,7 +49,6 @@ public class VoidRetailAssessmentData {
 
     /**
      * Sets the value of the assessID property.
-     * 
      */
     public void setAssessID(long value) {
         this.assessID = value;
@@ -61,7 +56,6 @@ public class VoidRetailAssessmentData {
 
     /**
      * Gets the value of the success property.
-     * 
      */
     public boolean isSuccess() {
         return success;
@@ -69,7 +63,6 @@ public class VoidRetailAssessmentData {
 
     /**
      * Sets the value of the success property.
-     * 
      */
     public void setSuccess(boolean value) {
         this.success = value;
@@ -77,11 +70,9 @@ public class VoidRetailAssessmentData {
 
     /**
      * Gets the value of the errorMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getErrorMessage() {
         return errorMessage;
@@ -89,11 +80,9 @@ public class VoidRetailAssessmentData {
 
     /**
      * Sets the value of the errorMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setErrorMessage(String value) {
         this.errorMessage = value;

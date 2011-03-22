@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SearchBy_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SearchBy_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SearchBy_Request", propOrder = {
-    "searchType",
-    "searchTerm",
-    "siteID",
-    "orgID"
+        "searchType",
+        "searchTerm",
+        "siteID",
+        "orgID"
 })
 public class SearchByRequest {
 
@@ -49,11 +46,9 @@ public class SearchByRequest {
 
     /**
      * Gets the value of the searchType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SearchTypes }
-     *     
+     *
+     * @return possible object is
+     *         {@link SearchTypes }
      */
     public SearchTypes getSearchType() {
         return searchType;
@@ -61,11 +56,9 @@ public class SearchByRequest {
 
     /**
      * Sets the value of the searchType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SearchTypes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SearchTypes }
      */
     public void setSearchType(SearchTypes value) {
         this.searchType = value;
@@ -73,11 +66,9 @@ public class SearchByRequest {
 
     /**
      * Gets the value of the searchTerm property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSearchTerm() {
         return searchTerm;
@@ -85,11 +76,9 @@ public class SearchByRequest {
 
     /**
      * Sets the value of the searchTerm property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSearchTerm(String value) {
         this.searchTerm = value;
@@ -97,11 +86,9 @@ public class SearchByRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -109,11 +96,9 @@ public class SearchByRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -121,11 +106,9 @@ public class SearchByRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -133,11 +116,9 @@ public class SearchByRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;

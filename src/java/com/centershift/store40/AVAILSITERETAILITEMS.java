@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AVAIL_SITE_RETAIL_ITEMS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AVAIL_SITE_RETAIL_ITEMS">
  *   &lt;complexContent>
@@ -42,34 +41,31 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AVAIL_SITE_RETAIL_ITEMS", propOrder = {
-    "retailobjectid",
-    "siteid",
-    "qty",
-    "description",
-    "color",
-    "partnumber",
-    "sku",
-    "barcode",
-    "categoryid",
-    "siteprice",
-    "suggestedprice",
-    "minprice",
-    "maxprice",
-    "taxgroupid",
-    "active",
-    "itemtype",
-    "bundleditem",
-    "costofgoods",
-    "retailid"
+        "retailobjectid",
+        "siteid",
+        "qty",
+        "description",
+        "color",
+        "partnumber",
+        "sku",
+        "barcode",
+        "categoryid",
+        "siteprice",
+        "suggestedprice",
+        "minprice",
+        "maxprice",
+        "taxgroupid",
+        "active",
+        "itemtype",
+        "bundleditem",
+        "costofgoods",
+        "retailid"
 })
 public class AVAILSITERETAILITEMS
-    extends BaseEntityOfCollectionAVAILSITERETAILITEMSColumnIndexes
-{
+        extends BaseEntityOfCollectionAVAILSITERETAILITEMSColumnIndexes {
 
     @XmlElement(name = "RETAIL_OBJECT_ID")
     protected long retailobjectid;
@@ -112,7 +108,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the retailobjectid property.
-     * 
      */
     public long getRETAILOBJECTID() {
         return retailobjectid;
@@ -120,7 +115,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the retailobjectid property.
-     * 
      */
     public void setRETAILOBJECTID(long value) {
         this.retailobjectid = value;
@@ -128,7 +122,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -136,7 +129,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -144,11 +136,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the qty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getQTY() {
         return qty;
@@ -156,11 +146,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the qty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setQTY(Integer value) {
         this.qty = value;
@@ -168,11 +156,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDESCRIPTION() {
         return description;
@@ -180,11 +166,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDESCRIPTION(String value) {
         this.description = value;
@@ -192,11 +176,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the color property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOLOR() {
         return color;
@@ -204,11 +186,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the color property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOLOR(String value) {
         this.color = value;
@@ -216,11 +196,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the partnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPARTNUMBER() {
         return partnumber;
@@ -228,11 +206,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the partnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPARTNUMBER(String value) {
         this.partnumber = value;
@@ -240,11 +216,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the sku property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSKU() {
         return sku;
@@ -252,11 +226,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the sku property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSKU(String value) {
         this.sku = value;
@@ -264,11 +236,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the barcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBARCODE() {
         return barcode;
@@ -276,11 +246,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the barcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBARCODE(String value) {
         this.barcode = value;
@@ -288,7 +256,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the categoryid property.
-     * 
      */
     public int getCATEGORYID() {
         return categoryid;
@@ -296,7 +263,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the categoryid property.
-     * 
      */
     public void setCATEGORYID(int value) {
         this.categoryid = value;
@@ -304,11 +270,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the siteprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSITEPRICE() {
         return siteprice;
@@ -316,11 +280,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the siteprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSITEPRICE(BigDecimal value) {
         this.siteprice = value;
@@ -328,11 +290,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the suggestedprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSUGGESTEDPRICE() {
         return suggestedprice;
@@ -340,11 +300,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the suggestedprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSUGGESTEDPRICE(BigDecimal value) {
         this.suggestedprice = value;
@@ -352,11 +310,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the minprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMINPRICE() {
         return minprice;
@@ -364,11 +320,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the minprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMINPRICE(BigDecimal value) {
         this.minprice = value;
@@ -376,11 +330,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the maxprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMAXPRICE() {
         return maxprice;
@@ -388,11 +340,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the maxprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMAXPRICE(BigDecimal value) {
         this.maxprice = value;
@@ -400,11 +350,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAXGROUPID() {
         return taxgroupid;
@@ -412,11 +360,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAXGROUPID(BigDecimal value) {
         this.taxgroupid = value;
@@ -424,7 +370,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -432,7 +377,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -440,7 +384,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the itemtype property.
-     * 
      */
     public int getITEMTYPE() {
         return itemtype;
@@ -448,7 +391,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the itemtype property.
-     * 
      */
     public void setITEMTYPE(int value) {
         this.itemtype = value;
@@ -456,11 +398,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the bundleditem property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isBUNDLEDITEM() {
         return bundleditem;
@@ -468,11 +408,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the bundleditem property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setBUNDLEDITEM(Boolean value) {
         this.bundleditem = value;
@@ -480,11 +418,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the costofgoods property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCOSTOFGOODS() {
         return costofgoods;
@@ -492,11 +428,9 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the costofgoods property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCOSTOFGOODS(BigDecimal value) {
         this.costofgoods = value;
@@ -504,7 +438,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Gets the value of the retailid property.
-     * 
      */
     public long getRETAILID() {
         return retailid;
@@ -512,7 +445,6 @@ public class AVAILSITERETAILITEMS
 
     /**
      * Sets the value of the retailid property.
-     * 
      */
     public void setRETAILID(long value) {
         this.retailid = value;

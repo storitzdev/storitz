@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for structCreateAccount complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="structCreateAccount">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "structCreateAccount", propOrder = {
-    "accountID",
-    "contactID",
-    "addresses",
-    "phones"
+        "accountID",
+        "contactID",
+        "addresses",
+        "phones"
 })
 public class StructCreateAccount {
 
@@ -49,7 +46,6 @@ public class StructCreateAccount {
 
     /**
      * Gets the value of the accountID property.
-     * 
      */
     public long getAccountID() {
         return accountID;
@@ -57,7 +53,6 @@ public class StructCreateAccount {
 
     /**
      * Sets the value of the accountID property.
-     * 
      */
     public void setAccountID(long value) {
         this.accountID = value;
@@ -65,7 +60,6 @@ public class StructCreateAccount {
 
     /**
      * Gets the value of the contactID property.
-     * 
      */
     public long getContactID() {
         return contactID;
@@ -73,7 +67,6 @@ public class StructCreateAccount {
 
     /**
      * Sets the value of the contactID property.
-     * 
      */
     public void setContactID(long value) {
         this.contactID = value;
@@ -81,11 +74,9 @@ public class StructCreateAccount {
 
     /**
      * Gets the value of the addresses property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACCTCONTACTADDRESSES }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACCTCONTACTADDRESSES }
      */
     public ArrayOfACCTCONTACTADDRESSES getAddresses() {
         return addresses;
@@ -93,11 +84,9 @@ public class StructCreateAccount {
 
     /**
      * Sets the value of the addresses property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACCTCONTACTADDRESSES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACCTCONTACTADDRESSES }
      */
     public void setAddresses(ArrayOfACCTCONTACTADDRESSES value) {
         this.addresses = value;
@@ -105,11 +94,9 @@ public class StructCreateAccount {
 
     /**
      * Gets the value of the phones property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfACCTCONTACTPHONES }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfACCTCONTACTPHONES }
      */
     public ArrayOfACCTCONTACTPHONES getPhones() {
         return phones;
@@ -117,11 +104,9 @@ public class StructCreateAccount {
 
     /**
      * Sets the value of the phones property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfACCTCONTACTPHONES }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfACCTCONTACTPHONES }
      */
     public void setPhones(ArrayOfACCTCONTACTPHONES value) {
         this.phones = value;

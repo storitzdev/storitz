@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for FeeWaiveVoidStats complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="FeeWaiveVoidStats">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FeeWaiveVoidStats", propOrder = {
-    "reqWaiveReason",
-    "limitWaives",
-    "maxWaives",
-    "usedWaives"
+        "reqWaiveReason",
+        "limitWaives",
+        "maxWaives",
+        "usedWaives"
 })
 public class FeeWaiveVoidStats {
 
@@ -46,7 +43,6 @@ public class FeeWaiveVoidStats {
 
     /**
      * Gets the value of the reqWaiveReason property.
-     * 
      */
     public boolean isReqWaiveReason() {
         return reqWaiveReason;
@@ -54,7 +50,6 @@ public class FeeWaiveVoidStats {
 
     /**
      * Sets the value of the reqWaiveReason property.
-     * 
      */
     public void setReqWaiveReason(boolean value) {
         this.reqWaiveReason = value;
@@ -62,11 +57,9 @@ public class FeeWaiveVoidStats {
 
     /**
      * Gets the value of the limitWaives property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link WaiveLimit }
-     *     
+     *
+     * @return possible object is
+     *         {@link WaiveLimit }
      */
     public WaiveLimit getLimitWaives() {
         return limitWaives;
@@ -74,11 +67,9 @@ public class FeeWaiveVoidStats {
 
     /**
      * Sets the value of the limitWaives property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link WaiveLimit }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link WaiveLimit }
      */
     public void setLimitWaives(WaiveLimit value) {
         this.limitWaives = value;
@@ -86,7 +77,6 @@ public class FeeWaiveVoidStats {
 
     /**
      * Gets the value of the maxWaives property.
-     * 
      */
     public int getMaxWaives() {
         return maxWaives;
@@ -94,7 +84,6 @@ public class FeeWaiveVoidStats {
 
     /**
      * Sets the value of the maxWaives property.
-     * 
      */
     public void setMaxWaives(int value) {
         this.maxWaives = value;
@@ -102,11 +91,9 @@ public class FeeWaiveVoidStats {
 
     /**
      * Gets the value of the usedWaives property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUsedWaives() {
         return usedWaives;
@@ -114,11 +101,9 @@ public class FeeWaiveVoidStats {
 
     /**
      * Sets the value of the usedWaives property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUsedWaives(String value) {
         this.usedWaives = value;

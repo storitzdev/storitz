@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_SITE_RETAIL_OBJECTS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_SITE_RETAIL_OBJECTS">
  *   &lt;complexContent>
@@ -37,27 +32,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_SITE_RETAIL_OBJECTS", propOrder = {
-    "retailclassid",
-    "retailid",
-    "taxgroupid",
-    "siteprice",
-    "qty",
-    "reorderqty",
-    "reorderat",
-    "lastinvdate",
-    "active",
-    "createdby",
-    "updatedby",
-    "orgretailadjlog"
+        "retailclassid",
+        "retailid",
+        "taxgroupid",
+        "siteprice",
+        "qty",
+        "reorderqty",
+        "reorderat",
+        "lastinvdate",
+        "active",
+        "createdby",
+        "updatedby",
+        "orgretailadjlog"
 })
 public class ORGSITERETAILOBJECTS
-    extends BaseEntityOfCollectionORGSITERETAILOBJECTSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGSITERETAILOBJECTSColumnIndexes {
 
     @XmlElement(name = "RETAIL_CLASS_ID")
     protected long retailclassid;
@@ -87,7 +79,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the retailclassid property.
-     * 
      */
     public long getRETAILCLASSID() {
         return retailclassid;
@@ -95,7 +86,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the retailclassid property.
-     * 
      */
     public void setRETAILCLASSID(long value) {
         this.retailclassid = value;
@@ -103,7 +93,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the retailid property.
-     * 
      */
     public long getRETAILID() {
         return retailid;
@@ -111,7 +100,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the retailid property.
-     * 
      */
     public void setRETAILID(long value) {
         this.retailid = value;
@@ -119,11 +107,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the taxgroupid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTAXGROUPID() {
         return taxgroupid;
@@ -131,11 +117,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the taxgroupid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setTAXGROUPID(Long value) {
         this.taxgroupid = value;
@@ -143,11 +127,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the siteprice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getSITEPRICE() {
         return siteprice;
@@ -155,11 +137,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the siteprice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setSITEPRICE(BigDecimal value) {
         this.siteprice = value;
@@ -167,11 +147,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the qty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getQTY() {
         return qty;
@@ -179,11 +157,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the qty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setQTY(Integer value) {
         this.qty = value;
@@ -191,11 +167,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the reorderqty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getREORDERQTY() {
         return reorderqty;
@@ -203,11 +177,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the reorderqty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setREORDERQTY(Integer value) {
         this.reorderqty = value;
@@ -215,11 +187,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the reorderat property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getREORDERAT() {
         return reorderat;
@@ -227,11 +197,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the reorderat property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setREORDERAT(Integer value) {
         this.reorderat = value;
@@ -239,11 +207,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the lastinvdate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLASTINVDATE() {
         return lastinvdate;
@@ -251,11 +217,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the lastinvdate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLASTINVDATE(XMLGregorianCalendar value) {
         this.lastinvdate = value;
@@ -263,7 +227,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -271,7 +234,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -279,7 +241,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -287,7 +248,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -295,7 +255,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -303,7 +262,6 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -311,11 +269,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Gets the value of the orgretailadjlog property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfORGRETAILADJLOG }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfORGRETAILADJLOG }
      */
     public ArrayOfORGRETAILADJLOG getORGRETAILADJLOG() {
         return orgretailadjlog;
@@ -323,11 +279,9 @@ public class ORGSITERETAILOBJECTS
 
     /**
      * Sets the value of the orgretailadjlog property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfORGRETAILADJLOG }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfORGRETAILADJLOG }
      */
     public void setORGRETAILADJLOG(ArrayOfORGRETAILADJLOG value) {
         this.orgretailadjlog = value;

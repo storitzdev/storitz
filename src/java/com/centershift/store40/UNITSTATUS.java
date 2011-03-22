@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for UNIT_STATUS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UNIT_STATUS">
  *   &lt;complexContent>
@@ -34,21 +29,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UNIT_STATUS", propOrder = {
-    "unitID",
-    "unitNumber",
-    "accountID",
-    "accountName",
-    "delStep",
-    "ptd",
-    "daysLate",
-    "status",
-    "dimensions",
-    "attributes"
+        "unitID",
+        "unitNumber",
+        "accountID",
+        "accountName",
+        "delStep",
+        "ptd",
+        "daysLate",
+        "status",
+        "dimensions",
+        "attributes"
 })
 public class UNITSTATUS {
 
@@ -76,11 +69,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the unitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getUnitID() {
         return unitID;
@@ -88,11 +79,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the unitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setUnitID(Long value) {
         this.unitID = value;
@@ -100,11 +89,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the unitNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUnitNumber() {
         return unitNumber;
@@ -112,11 +99,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the unitNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUnitNumber(String value) {
         this.unitNumber = value;
@@ -124,11 +109,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -136,11 +119,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -148,11 +129,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the accountName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountName() {
         return accountName;
@@ -160,11 +139,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the accountName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountName(String value) {
         this.accountName = value;
@@ -172,11 +149,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the delStep property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDelStep() {
         return delStep;
@@ -184,11 +159,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the delStep property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDelStep(Integer value) {
         this.delStep = value;
@@ -196,11 +169,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -208,11 +179,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -220,11 +189,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the daysLate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDaysLate() {
         return daysLate;
@@ -232,11 +199,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the daysLate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDaysLate(String value) {
         this.daysLate = value;
@@ -244,11 +209,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getStatus() {
         return status;
@@ -256,11 +219,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setStatus(String value) {
         this.status = value;
@@ -268,11 +229,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the dimensions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDimensions() {
         return dimensions;
@@ -280,11 +239,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the dimensions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDimensions(String value) {
         this.dimensions = value;
@@ -292,11 +249,9 @@ public class UNITSTATUS {
 
     /**
      * Gets the value of the attributes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAttributes() {
         return attributes;
@@ -304,11 +259,9 @@ public class UNITSTATUS {
 
     /**
      * Sets the value of the attributes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAttributes(String value) {
         this.attributes = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "eUnitDoorResult"
+        "eUnitDoorResult"
 })
 @XmlRootElement(name = "eUnitDoorResponse")
 public class EUnitDoorResponse {
@@ -37,11 +34,9 @@ public class EUnitDoorResponse {
 
     /**
      * Gets the value of the eUnitDoorResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfCFGLOOKUPS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfCFGLOOKUPS }
      */
     public ArrayOfCFGLOOKUPS getEUnitDoorResult() {
         return eUnitDoorResult;
@@ -49,11 +44,9 @@ public class EUnitDoorResponse {
 
     /**
      * Sets the value of the eUnitDoorResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfCFGLOOKUPS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfCFGLOOKUPS }
      */
     public void setEUnitDoorResult(ArrayOfCFGLOOKUPS value) {
         this.eUnitDoorResult = value;

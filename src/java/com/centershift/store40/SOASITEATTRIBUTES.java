@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for SOA_SITE_ATTRIBUTES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SOA_SITE_ATTRIBUTES">
  *   &lt;complexContent>
@@ -59,50 +54,47 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SOA_SITE_ATTRIBUTES", propOrder = {
-    "siteid",
-    "sitename",
-    "sitenumber",
-    "gatetypeid",
-    "mapindex",
-    "photoindex",
-    "dirnorth",
-    "dirsouth",
-    "direast",
-    "dirwest",
-    "sitehours",
-    "gatehours",
-    "facilitybuilt",
-    "golive",
-    "parentsite",
-    "emailaddress",
-    "phone",
-    "fax",
-    "altphone",
-    "cflex01",
-    "cflex02",
-    "cflex03",
-    "addresslabel",
-    "line1",
-    "line2",
-    "line3",
-    "city",
-    "state",
-    "postalcode",
-    "country",
-    "propertytype",
-    "timezoneoffset",
-    "appstatus",
-    "appstatusval",
-    "displayname"
+        "siteid",
+        "sitename",
+        "sitenumber",
+        "gatetypeid",
+        "mapindex",
+        "photoindex",
+        "dirnorth",
+        "dirsouth",
+        "direast",
+        "dirwest",
+        "sitehours",
+        "gatehours",
+        "facilitybuilt",
+        "golive",
+        "parentsite",
+        "emailaddress",
+        "phone",
+        "fax",
+        "altphone",
+        "cflex01",
+        "cflex02",
+        "cflex03",
+        "addresslabel",
+        "line1",
+        "line2",
+        "line3",
+        "city",
+        "state",
+        "postalcode",
+        "country",
+        "propertytype",
+        "timezoneoffset",
+        "appstatus",
+        "appstatusval",
+        "displayname"
 })
 public class SOASITEATTRIBUTES
-    extends BaseEntityOfCollectionSOASITEATTRIBUTESColumnIndexes
-{
+        extends BaseEntityOfCollectionSOASITEATTRIBUTESColumnIndexes {
 
     @XmlElement(name = "SITE_ID")
     protected long siteid;
@@ -179,7 +171,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the siteid property.
-     * 
      */
     public long getSITEID() {
         return siteid;
@@ -187,7 +178,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the siteid property.
-     * 
      */
     public void setSITEID(long value) {
         this.siteid = value;
@@ -195,11 +185,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the sitename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENAME() {
         return sitename;
@@ -207,11 +195,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the sitename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENAME(String value) {
         this.sitename = value;
@@ -219,11 +205,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the sitenumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENUMBER() {
         return sitenumber;
@@ -231,11 +215,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the sitenumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENUMBER(String value) {
         this.sitenumber = value;
@@ -243,11 +225,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the gatetypeid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getGATETYPEID() {
         return gatetypeid;
@@ -255,11 +235,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the gatetypeid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setGATETYPEID(Long value) {
         this.gatetypeid = value;
@@ -267,11 +245,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the mapindex property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMAPINDEX() {
         return mapindex;
@@ -279,11 +255,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the mapindex property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMAPINDEX(String value) {
         this.mapindex = value;
@@ -291,11 +265,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the photoindex property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHOTOINDEX() {
         return photoindex;
@@ -303,11 +275,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the photoindex property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHOTOINDEX(String value) {
         this.photoindex = value;
@@ -315,11 +285,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the dirnorth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDIRNORTH() {
         return dirnorth;
@@ -327,11 +295,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the dirnorth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDIRNORTH(String value) {
         this.dirnorth = value;
@@ -339,11 +305,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the dirsouth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDIRSOUTH() {
         return dirsouth;
@@ -351,11 +315,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the dirsouth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDIRSOUTH(String value) {
         this.dirsouth = value;
@@ -363,11 +325,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the direast property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDIREAST() {
         return direast;
@@ -375,11 +335,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the direast property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDIREAST(String value) {
         this.direast = value;
@@ -387,11 +345,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the dirwest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDIRWEST() {
         return dirwest;
@@ -399,11 +355,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the dirwest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDIRWEST(String value) {
         this.dirwest = value;
@@ -411,11 +365,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the sitehours property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITEHOURS() {
         return sitehours;
@@ -423,11 +375,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the sitehours property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITEHOURS(String value) {
         this.sitehours = value;
@@ -435,11 +385,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the gatehours property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getGATEHOURS() {
         return gatehours;
@@ -447,11 +395,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the gatehours property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setGATEHOURS(String value) {
         this.gatehours = value;
@@ -459,11 +405,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the facilitybuilt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getFACILITYBUILT() {
         return facilitybuilt;
@@ -471,11 +415,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the facilitybuilt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setFACILITYBUILT(XMLGregorianCalendar value) {
         this.facilitybuilt = value;
@@ -483,11 +425,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the golive property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getGOLIVE() {
         return golive;
@@ -495,11 +435,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the golive property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setGOLIVE(XMLGregorianCalendar value) {
         this.golive = value;
@@ -507,11 +445,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the parentsite property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPARENTSITE() {
         return parentsite;
@@ -519,11 +455,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the parentsite property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPARENTSITE(Long value) {
         this.parentsite = value;
@@ -531,11 +465,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the emailaddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEMAILADDRESS() {
         return emailaddress;
@@ -543,11 +475,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the emailaddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEMAILADDRESS(String value) {
         this.emailaddress = value;
@@ -555,11 +485,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONE() {
         return phone;
@@ -567,11 +495,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONE(String value) {
         this.phone = value;
@@ -579,11 +505,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the fax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFAX() {
         return fax;
@@ -591,11 +515,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the fax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFAX(String value) {
         this.fax = value;
@@ -603,11 +525,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the altphone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getALTPHONE() {
         return altphone;
@@ -615,11 +535,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the altphone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setALTPHONE(String value) {
         this.altphone = value;
@@ -627,11 +545,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the cflex01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX01() {
         return cflex01;
@@ -639,11 +555,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the cflex01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX01(String value) {
         this.cflex01 = value;
@@ -651,11 +565,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the cflex02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX02() {
         return cflex02;
@@ -663,11 +575,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the cflex02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX02(String value) {
         this.cflex02 = value;
@@ -675,11 +585,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the cflex03 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCFLEX03() {
         return cflex03;
@@ -687,11 +595,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the cflex03 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCFLEX03(String value) {
         this.cflex03 = value;
@@ -699,11 +605,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the addresslabel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRESSLABEL() {
         return addresslabel;
@@ -711,11 +615,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the addresslabel property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRESSLABEL(String value) {
         this.addresslabel = value;
@@ -723,11 +625,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the line1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLINE1() {
         return line1;
@@ -735,11 +635,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the line1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLINE1(String value) {
         this.line1 = value;
@@ -747,11 +645,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the line2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLINE2() {
         return line2;
@@ -759,11 +655,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the line2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLINE2(String value) {
         this.line2 = value;
@@ -771,11 +665,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the line3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLINE3() {
         return line3;
@@ -783,11 +675,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the line3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLINE3(String value) {
         this.line3 = value;
@@ -795,11 +685,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCITY() {
         return city;
@@ -807,11 +695,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCITY(String value) {
         this.city = value;
@@ -819,11 +705,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATE() {
         return state;
@@ -831,11 +715,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATE(String value) {
         this.state = value;
@@ -843,11 +725,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the postalcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPOSTALCODE() {
         return postalcode;
@@ -855,11 +735,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the postalcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPOSTALCODE(String value) {
         this.postalcode = value;
@@ -867,11 +745,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the country property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOUNTRY() {
         return country;
@@ -879,11 +755,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the country property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOUNTRY(String value) {
         this.country = value;
@@ -891,7 +765,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the propertytype property.
-     * 
      */
     public int getPROPERTYTYPE() {
         return propertytype;
@@ -899,7 +772,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the propertytype property.
-     * 
      */
     public void setPROPERTYTYPE(int value) {
         this.propertytype = value;
@@ -907,7 +779,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the timezoneoffset property.
-     * 
      */
     public int getTIMEZONEOFFSET() {
         return timezoneoffset;
@@ -915,7 +786,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the timezoneoffset property.
-     * 
      */
     public void setTIMEZONEOFFSET(int value) {
         this.timezoneoffset = value;
@@ -923,7 +793,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the appstatus property.
-     * 
      */
     public int getAPPSTATUS() {
         return appstatus;
@@ -931,7 +800,6 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the appstatus property.
-     * 
      */
     public void setAPPSTATUS(int value) {
         this.appstatus = value;
@@ -939,11 +807,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the appstatusval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAPPSTATUSVAL() {
         return appstatusval;
@@ -951,11 +817,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the appstatusval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAPPSTATUSVAL(String value) {
         this.appstatusval = value;
@@ -963,11 +827,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Gets the value of the displayname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDISPLAYNAME() {
         return displayname;
@@ -975,11 +837,9 @@ public class SOASITEATTRIBUTES
 
     /**
      * Sets the value of the displayname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDISPLAYNAME(String value) {
         this.displayname = value;

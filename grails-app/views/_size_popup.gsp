@@ -2,7 +2,7 @@
   <div class="helpHeader">
     <div class="helpHeaderText">How much storage do you need?</div>
     <div class="helpClose" id="sizeHelpClose">
-      <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE </div>
+      <div class="left" style="margin-right: 5px; margin-top: 2px;">CLOSE</div>
       <div class="left"><storitz:image style="width:17px;height:16px;vertical-align: middle;" src="popup-checkbox.png" alt="close box"/></div>
     </div>
   </div>

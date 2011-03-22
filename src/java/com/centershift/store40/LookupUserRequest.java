@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for LookupUser_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="LookupUser_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LookupUser_Request", propOrder = {
-    "username",
-    "password",
-    "channel"
+        "username",
+        "password",
+        "channel"
 })
 public class LookupUserRequest {
 
@@ -45,11 +42,9 @@ public class LookupUserRequest {
 
     /**
      * Gets the value of the username property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUsername() {
         return username;
@@ -57,11 +52,9 @@ public class LookupUserRequest {
 
     /**
      * Sets the value of the username property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUsername(String value) {
         this.username = value;
@@ -69,11 +62,9 @@ public class LookupUserRequest {
 
     /**
      * Gets the value of the password property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPassword() {
         return password;
@@ -81,11 +72,9 @@ public class LookupUserRequest {
 
     /**
      * Sets the value of the password property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPassword(String value) {
         this.password = value;
@@ -93,7 +82,6 @@ public class LookupUserRequest {
 
     /**
      * Gets the value of the channel property.
-     * 
      */
     public int getChannel() {
         return channel;
@@ -101,7 +89,6 @@ public class LookupUserRequest {
 
     /**
      * Sets the value of the channel property.
-     * 
      */
     public void setChannel(int value) {
         this.channel = value;

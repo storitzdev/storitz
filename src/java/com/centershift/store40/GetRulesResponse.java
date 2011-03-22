@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for getRules_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="getRules_Response">
  *   &lt;complexContent>
@@ -22,12 +21,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getRules_Response", propOrder = {
-    "ruleCol"
+        "ruleCol"
 })
 public class GetRulesResponse {
 
@@ -35,11 +32,9 @@ public class GetRulesResponse {
 
     /**
      * Gets the value of the ruleCol property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfSiteRuleData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfSiteRuleData }
      */
     public ArrayOfSiteRuleData getRuleCol() {
         return ruleCol;
@@ -47,11 +42,9 @@ public class GetRulesResponse {
 
     /**
      * Sets the value of the ruleCol property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfSiteRuleData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfSiteRuleData }
      */
     public void setRuleCol(ArrayOfSiteRuleData value) {
         this.ruleCol = value;

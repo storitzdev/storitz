@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SellRetailWithAccount_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SellRetailWithAccount_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SellRetailWithAccount_Response", propOrder = {
-    "assessmentID"
+        "assessmentID"
 })
 public class SellRetailWithAccountResponse2 {
 
@@ -37,7 +34,6 @@ public class SellRetailWithAccountResponse2 {
 
     /**
      * Gets the value of the assessmentID property.
-     * 
      */
     public long getAssessmentID() {
         return assessmentID;
@@ -45,7 +41,6 @@ public class SellRetailWithAccountResponse2 {
 
     /**
      * Sets the value of the assessmentID property.
-     * 
      */
     public void setAssessmentID(long value) {
         this.assessmentID = value;

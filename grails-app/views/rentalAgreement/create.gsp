@@ -12,7 +12,7 @@
 <div id="body">
   <g:render template="/topnav"/>
   <div class="stcontent">
-    <g:render template="/logo_bar" />
+    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -53,7 +53,7 @@
 
         <div class="checkout_fields">
           <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalAgreementInstance, field: 'title', 'errors')}">
-            <g:textField id="title" name="title" style="width: 280px;" value="${rentalAgreementInstance?.title}" />
+            <g:textField id="title" name="title" style="width: 280px;" value="${rentalAgreementInstance?.title}"/>
           </div>
           <div style="clear:both;"></div>
         </div>
@@ -80,31 +80,31 @@
           </div>
           <div style="clear:both;height: 15px;"></div>
         </div>
-        
+
         <sec:ifAnyGranted roles="ROLE_ADMIN">
-        <div class="checkout_section_header">
-          Agreement Owner/Manager
-        </div>
-        <div class="formInstructions">
-          This ADMIN only feature allows Storitz to reassign the managerial owner of an agreement.  This can be used if a site is purchase
-          and is now managed by a different operator.
-        </div>
-
-        <div class="checkout_fields">
-          <div style="width:250px;" class="checkout_value ${hasErrors(bean: rentalAgreementInstance, field: 'manager', 'errors')}">
-            <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${rentalAgreementInstance.agreementOwner?.id}" noSelection="['null': '']"/>
+          <div class="checkout_section_header">
+            Agreement Owner/Manager
           </div>
-          <div style="clear:both;"></div>
-        </div>
-
-        <div class="checkout_labels">
-          <div class="checkout_name" style="width:250px;">
-            <label for="manager">Manager/Owner of Agreement</label>
+          <div class="formInstructions">
+            This ADMIN only feature allows Storitz to reassign the managerial owner of an agreement.  This can be used if a site is purchase
+            and is now managed by a different operator.
           </div>
-          <div style="clear:both;"></div>
-        </div>
+
+          <div class="checkout_fields">
+            <div style="width:250px;" class="checkout_value ${hasErrors(bean: rentalAgreementInstance, field: 'manager', 'errors')}">
+              <g:select id="manager" name="manager.id" style="width:250px;" from="${UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionValue="username" optionKey="id" value="${rentalAgreementInstance.agreementOwner?.id}" noSelection="['null': '']"/>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" style="width:250px;">
+              <label for="manager">Manager/Owner of Agreement</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
         </sec:ifAnyGranted>
-        
+
 
         <div class="buttons">
           <span class="button"><g:actionSubmit action="save" value="${message(code: 'default.button.save.label', default: 'Save')}"/></span>
@@ -113,8 +113,8 @@
     </div>
   </div>
   <div style="height:30px;"></div>
-  <g:render template="/footer_admin" />
-  </div>
-  </body>
-  <p:renderDependantJavascript/>
+  <g:render template="/footer_admin"/>
+</div>
+</body>
+<p:renderDependantJavascript/>
 </html>

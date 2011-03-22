@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddRentalsToAuction_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddRentalsToAuction_Request">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddRentalsToAuction_Request", propOrder = {
-    "auctionID",
-    "createLetter",
-    "assessFee",
-    "siteID",
-    "rentals"
+        "auctionID",
+        "createLetter",
+        "assessFee",
+        "siteID",
+        "rentals"
 })
 public class AddRentalsToAuctionRequest {
 
@@ -53,7 +50,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Gets the value of the auctionID property.
-     * 
      */
     public long getAuctionID() {
         return auctionID;
@@ -61,7 +57,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Sets the value of the auctionID property.
-     * 
      */
     public void setAuctionID(long value) {
         this.auctionID = value;
@@ -69,7 +64,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Gets the value of the createLetter property.
-     * 
      */
     public boolean isCreateLetter() {
         return createLetter;
@@ -77,7 +71,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Sets the value of the createLetter property.
-     * 
      */
     public void setCreateLetter(boolean value) {
         this.createLetter = value;
@@ -85,7 +78,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Gets the value of the assessFee property.
-     * 
      */
     public boolean isAssessFee() {
         return assessFee;
@@ -93,7 +85,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Sets the value of the assessFee property.
-     * 
      */
     public void setAssessFee(boolean value) {
         this.assessFee = value;
@@ -101,7 +92,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -109,7 +99,6 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -117,11 +106,9 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Gets the value of the rentals property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionRentalItemData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionRentalItemData }
      */
     public ArrayOfAuctionRentalItemData getRentals() {
         return rentals;
@@ -129,11 +116,9 @@ public class AddRentalsToAuctionRequest {
 
     /**
      * Sets the value of the rentals property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionRentalItemData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionRentalItemData }
      */
     public void setRentals(ArrayOfAuctionRentalItemData value) {
         this.rentals = value;

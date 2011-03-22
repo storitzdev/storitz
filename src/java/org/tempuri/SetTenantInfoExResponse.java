@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "setTenantInfoExResult"
+        "setTenantInfoExResult"
 })
 @XmlRootElement(name = "SetTenantInfoExResponse")
 public class SetTenantInfoExResponse {
@@ -39,7 +32,6 @@ public class SetTenantInfoExResponse {
 
     /**
      * Gets the value of the setTenantInfoExResult property.
-     * 
      */
     public int getSetTenantInfoExResult() {
         return setTenantInfoExResult;
@@ -47,7 +39,6 @@ public class SetTenantInfoExResponse {
 
     /**
      * Sets the value of the setTenantInfoExResult property.
-     * 
      */
     public void setSetTenantInfoExResult(int value) {
         this.setTenantInfoExResult = value;

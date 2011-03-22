@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for WaiveFee_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="WaiveFee_Request">
  *   &lt;complexContent>
@@ -29,17 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "WaiveFee_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "rentalID",
-    "assessmentID",
-    "amount",
-    "reason"
+        "orgID",
+        "siteID",
+        "rentalID",
+        "assessmentID",
+        "amount",
+        "reason"
 })
 public class WaiveFeeRequest {
 
@@ -58,7 +55,6 @@ public class WaiveFeeRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -66,7 +62,6 @@ public class WaiveFeeRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -74,7 +69,6 @@ public class WaiveFeeRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -82,7 +76,6 @@ public class WaiveFeeRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -90,7 +83,6 @@ public class WaiveFeeRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -98,7 +90,6 @@ public class WaiveFeeRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -106,7 +97,6 @@ public class WaiveFeeRequest {
 
     /**
      * Gets the value of the assessmentID property.
-     * 
      */
     public long getAssessmentID() {
         return assessmentID;
@@ -114,7 +104,6 @@ public class WaiveFeeRequest {
 
     /**
      * Sets the value of the assessmentID property.
-     * 
      */
     public void setAssessmentID(long value) {
         this.assessmentID = value;
@@ -122,11 +111,9 @@ public class WaiveFeeRequest {
 
     /**
      * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmount() {
         return amount;
@@ -134,11 +121,9 @@ public class WaiveFeeRequest {
 
     /**
      * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmount(BigDecimal value) {
         this.amount = value;
@@ -146,11 +131,9 @@ public class WaiveFeeRequest {
 
     /**
      * Gets the value of the reason property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getReason() {
         return reason;
@@ -158,11 +141,9 @@ public class WaiveFeeRequest {
 
     /**
      * Sets the value of the reason property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setReason(String value) {
         this.reason = value;

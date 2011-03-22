@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for EndRental_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="EndRental_Request">
  *   &lt;complexContent>
@@ -32,19 +27,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EndRental_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "accountID",
-    "rentalID",
-    "moveOutDate",
-    "paymentData",
-    "refundData",
-    "contactData"
+        "orgID",
+        "siteID",
+        "accountID",
+        "rentalID",
+        "moveOutDate",
+        "paymentData",
+        "refundData",
+        "contactData"
 })
 public class EndRentalRequest {
 
@@ -68,7 +61,6 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -76,7 +68,6 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -84,7 +75,6 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -92,7 +82,6 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -100,7 +89,6 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
      */
     public long getAccountID() {
         return accountID;
@@ -108,7 +96,6 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
      */
     public void setAccountID(long value) {
         this.accountID = value;
@@ -116,7 +103,6 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -124,7 +110,6 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -132,11 +117,9 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the moveOutDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMoveOutDate() {
         return moveOutDate;
@@ -144,11 +127,9 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the moveOutDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMoveOutDate(XMLGregorianCalendar value) {
         this.moveOutDate = value;
@@ -156,11 +137,9 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the paymentData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentRequest }
      */
     public MakePaymentRequest getPaymentData() {
         return paymentData;
@@ -168,11 +147,9 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the paymentData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentRequest }
      */
     public void setPaymentData(MakePaymentRequest value) {
         this.paymentData = value;
@@ -180,11 +157,9 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the refundData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RefundData }
-     *     
+     *
+     * @return possible object is
+     *         {@link RefundData }
      */
     public RefundData getRefundData() {
         return refundData;
@@ -192,11 +167,9 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the refundData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RefundData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RefundData }
      */
     public void setRefundData(RefundData value) {
         this.refundData = value;
@@ -204,11 +177,9 @@ public class EndRentalRequest {
 
     /**
      * Gets the value of the contactData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ContactInfo }
      */
     public ContactInfo getContactData() {
         return contactData;
@@ -216,11 +187,9 @@ public class EndRentalRequest {
 
     /**
      * Sets the value of the contactData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ContactInfo }
      */
     public void setContactData(ContactInfo value) {
         this.contactData = value;

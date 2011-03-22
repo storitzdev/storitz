@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CompleteUnitTransfer_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CompleteUnitTransfer_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CompleteUnitTransfer_Request", propOrder = {
-    "orgID",
-    "transferData",
-    "paymentData"
+        "orgID",
+        "transferData",
+        "paymentData"
 })
 public class CompleteUnitTransferRequest {
 
@@ -45,7 +42,6 @@ public class CompleteUnitTransferRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -53,7 +49,6 @@ public class CompleteUnitTransferRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -61,11 +56,9 @@ public class CompleteUnitTransferRequest {
 
     /**
      * Gets the value of the transferData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TransferToCommit }
-     *     
+     *
+     * @return possible object is
+     *         {@link TransferToCommit }
      */
     public TransferToCommit getTransferData() {
         return transferData;
@@ -73,11 +66,9 @@ public class CompleteUnitTransferRequest {
 
     /**
      * Sets the value of the transferData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TransferToCommit }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TransferToCommit }
      */
     public void setTransferData(TransferToCommit value) {
         this.transferData = value;
@@ -85,11 +76,9 @@ public class CompleteUnitTransferRequest {
 
     /**
      * Gets the value of the paymentData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentRequest }
      */
     public MakePaymentRequest getPaymentData() {
         return paymentData;
@@ -97,11 +86,9 @@ public class CompleteUnitTransferRequest {
 
     /**
      * Sets the value of the paymentData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentRequest }
      */
     public void setPaymentData(MakePaymentRequest value) {
         this.paymentData = value;

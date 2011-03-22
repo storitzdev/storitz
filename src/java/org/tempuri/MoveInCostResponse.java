@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "moveInCostResult"
+        "moveInCostResult"
 })
 @XmlRootElement(name = "MoveInCostResponse")
 public class MoveInCostResponse {
@@ -39,11 +32,9 @@ public class MoveInCostResponse {
 
     /**
      * Gets the value of the moveInCostResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfChargeST }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfChargeST }
      */
     public ArrayOfChargeST getMoveInCostResult() {
         return moveInCostResult;
@@ -51,11 +42,9 @@ public class MoveInCostResponse {
 
     /**
      * Sets the value of the moveInCostResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfChargeST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfChargeST }
      */
     public void setMoveInCostResult(ArrayOfChargeST value) {
         this.moveInCostResult = value;

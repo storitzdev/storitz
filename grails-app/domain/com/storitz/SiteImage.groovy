@@ -2,12 +2,12 @@ package com.storitz
 
 class SiteImage {
 
-  static belongsTo = [ site: StorageSite]
+  static belongsTo = [site: StorageSite]
 
   static constraints = {
-    imgOrder(nullable:true)
-    caption(nullable:true, size:2..1000)
-    tags(nullable:true, size:2..1000)
+    imgOrder(nullable: true)
+    caption(nullable: true, size: 2..1000)
+    tags(nullable: true, size: 2..1000)
   }
 
   Integer imgOrder
@@ -36,6 +36,6 @@ class SiteImage {
   }
 
   def src() {
-    return basename +  fileLocation.encodeAsURL().replace("+", "%20")
+    return basename + fileLocation.encodeAsURL().replace("+", "%20")
   }
 }

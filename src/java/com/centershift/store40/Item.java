@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for item complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="item">
  *   &lt;complexContent>
@@ -28,16 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "item", propOrder = {
-    "tranId",
-    "retailObjectId",
-    "numberReturned",
-    "itemPrice",
-    "returnCondition"
+        "tranId",
+        "retailObjectId",
+        "numberReturned",
+        "itemPrice",
+        "returnCondition"
 })
 public class Item {
 
@@ -50,7 +47,6 @@ public class Item {
 
     /**
      * Gets the value of the tranId property.
-     * 
      */
     public long getTranId() {
         return tranId;
@@ -58,7 +54,6 @@ public class Item {
 
     /**
      * Sets the value of the tranId property.
-     * 
      */
     public void setTranId(long value) {
         this.tranId = value;
@@ -66,7 +61,6 @@ public class Item {
 
     /**
      * Gets the value of the retailObjectId property.
-     * 
      */
     public long getRetailObjectId() {
         return retailObjectId;
@@ -74,7 +68,6 @@ public class Item {
 
     /**
      * Sets the value of the retailObjectId property.
-     * 
      */
     public void setRetailObjectId(long value) {
         this.retailObjectId = value;
@@ -82,7 +75,6 @@ public class Item {
 
     /**
      * Gets the value of the numberReturned property.
-     * 
      */
     public int getNumberReturned() {
         return numberReturned;
@@ -90,7 +82,6 @@ public class Item {
 
     /**
      * Sets the value of the numberReturned property.
-     * 
      */
     public void setNumberReturned(int value) {
         this.numberReturned = value;
@@ -98,11 +89,9 @@ public class Item {
 
     /**
      * Gets the value of the itemPrice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getItemPrice() {
         return itemPrice;
@@ -110,11 +99,9 @@ public class Item {
 
     /**
      * Sets the value of the itemPrice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setItemPrice(BigDecimal value) {
         this.itemPrice = value;
@@ -122,7 +109,6 @@ public class Item {
 
     /**
      * Gets the value of the returnCondition property.
-     * 
      */
     public int getReturnCondition() {
         return returnCondition;
@@ -130,7 +116,6 @@ public class Item {
 
     /**
      * Sets the value of the returnCondition property.
-     * 
      */
     public void setReturnCondition(int value) {
         this.returnCondition = value;

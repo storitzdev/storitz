@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for MoveOutInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MoveOutInfo">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MoveOutInfo", propOrder = {
-    "moveOutDetailObjects",
-    "moveOutSummary"
+        "moveOutDetailObjects",
+        "moveOutSummary"
 })
 public class MoveOutInfo {
 
@@ -41,11 +38,9 @@ public class MoveOutInfo {
 
     /**
      * Gets the value of the moveOutDetailObjects property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfMoveOutDetail }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfMoveOutDetail }
      */
     public ArrayOfMoveOutDetail getMoveOutDetailObjects() {
         return moveOutDetailObjects;
@@ -53,11 +48,9 @@ public class MoveOutInfo {
 
     /**
      * Sets the value of the moveOutDetailObjects property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfMoveOutDetail }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfMoveOutDetail }
      */
     public void setMoveOutDetailObjects(ArrayOfMoveOutDetail value) {
         this.moveOutDetailObjects = value;
@@ -65,11 +58,9 @@ public class MoveOutInfo {
 
     /**
      * Gets the value of the moveOutSummary property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MoveOutSummary }
-     *     
+     *
+     * @return possible object is
+     *         {@link MoveOutSummary }
      */
     public MoveOutSummary getMoveOutSummary() {
         return moveOutSummary;
@@ -77,11 +68,9 @@ public class MoveOutInfo {
 
     /**
      * Sets the value of the moveOutSummary property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MoveOutSummary }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MoveOutSummary }
      */
     public void setMoveOutSummary(MoveOutSummary value) {
         this.moveOutSummary = value;

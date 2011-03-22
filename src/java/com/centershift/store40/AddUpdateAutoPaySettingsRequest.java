@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddUpdateAutoPaySettings_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddUpdateAutoPaySettings_Request">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddUpdateAutoPaySettings_Request", propOrder = {
-    "autoPayInfo"
+        "autoPayInfo"
 })
 public class AddUpdateAutoPaySettingsRequest {
 
@@ -37,11 +34,9 @@ public class AddUpdateAutoPaySettingsRequest {
 
     /**
      * Gets the value of the autoPayInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AutoPayData }
-     *     
+     *
+     * @return possible object is
+     *         {@link AutoPayData }
      */
     public AutoPayData getAutoPayInfo() {
         return autoPayInfo;
@@ -49,11 +44,9 @@ public class AddUpdateAutoPaySettingsRequest {
 
     /**
      * Sets the value of the autoPayInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AutoPayData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AutoPayData }
      */
     public void setAutoPayInfo(AutoPayData value) {
         this.autoPayInfo = value;

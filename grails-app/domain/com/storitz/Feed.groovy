@@ -8,15 +8,15 @@ class Feed {
 
 
   static constraints = {
-    manager(nullable:true)
-    operatorName(nullable:true)
-    address1(nullable:true)
-    address2(nullable:true)
-    city(nullable:true)
-    state(nullable:true)
-    zipcode(nullable:true)
-    transactionBoxLink(size:1..255,nullable:true)
-    transactionBoxBody(size:1..2000,nullable:true)
+    manager(nullable: true)
+    operatorName(nullable: true)
+    address1(nullable: true)
+    address2(nullable: true)
+    city(nullable: true)
+    state(nullable: true)
+    zipcode(nullable: true)
+    transactionBoxLink(size: 1..255, nullable: true)
+    transactionBoxBody(size: 1..2000, nullable: true)
   }
 
   FeedType feedType

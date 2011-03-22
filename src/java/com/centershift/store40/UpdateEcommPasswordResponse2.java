@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateEcommPassword_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateEcommPassword_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateEcommPassword_Response", propOrder = {
-    "successful"
+        "successful"
 })
 public class UpdateEcommPasswordResponse2 {
 
@@ -37,7 +34,6 @@ public class UpdateEcommPasswordResponse2 {
 
     /**
      * Gets the value of the successful property.
-     * 
      */
     public boolean isSuccessful() {
         return successful;
@@ -45,7 +41,6 @@ public class UpdateEcommPasswordResponse2 {
 
     /**
      * Sets the value of the successful property.
-     * 
      */
     public void setSuccessful(boolean value) {
         this.successful = value;

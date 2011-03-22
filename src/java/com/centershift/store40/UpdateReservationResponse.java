@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "updateReservationResult"
+        "updateReservationResult"
 })
 @XmlRootElement(name = "UpdateReservationResponse")
 public class UpdateReservationResponse {
@@ -39,11 +32,9 @@ public class UpdateReservationResponse {
 
     /**
      * Gets the value of the updateReservationResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakeReservationResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakeReservationResponse }
      */
     public MakeReservationResponse getUpdateReservationResult() {
         return updateReservationResult;
@@ -51,11 +42,9 @@ public class UpdateReservationResponse {
 
     /**
      * Sets the value of the updateReservationResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakeReservationResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakeReservationResponse }
      */
     public void setUpdateReservationResult(MakeReservationResponse value) {
         this.updateReservationResult = value;

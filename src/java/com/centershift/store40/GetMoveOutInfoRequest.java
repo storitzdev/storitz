@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for GetMoveOutInfo_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetMoveOutInfo_Request">
  *   &lt;complexContent>
@@ -28,15 +23,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetMoveOutInfo_Request", propOrder = {
-    "siteID",
-    "rentalID",
-    "accountID",
-    "moveOutDate"
+        "siteID",
+        "rentalID",
+        "accountID",
+        "moveOutDate"
 })
 public class GetMoveOutInfoRequest {
 
@@ -52,7 +45,6 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -60,7 +52,6 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -68,7 +59,6 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -76,7 +66,6 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -84,7 +73,6 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
      */
     public long getAccountID() {
         return accountID;
@@ -92,7 +80,6 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
      */
     public void setAccountID(long value) {
         this.accountID = value;
@@ -100,11 +87,9 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Gets the value of the moveOutDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMoveOutDate() {
         return moveOutDate;
@@ -112,11 +97,9 @@ public class GetMoveOutInfoRequest {
 
     /**
      * Sets the value of the moveOutDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMoveOutDate(XMLGregorianCalendar value) {
         this.moveOutDate = value;

@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for GetTotalDuePastDue_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetTotalDuePastDue_Response">
  *   &lt;complexContent>
@@ -26,14 +25,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetTotalDuePastDue_Response", propOrder = {
-    "requestedTotalDue",
-    "pastDueTotal",
-    "pastDueCycles"
+        "requestedTotalDue",
+        "pastDueTotal",
+        "pastDueCycles"
 })
 public class GetTotalDuePastDueResponse2 {
 
@@ -46,11 +43,9 @@ public class GetTotalDuePastDueResponse2 {
 
     /**
      * Gets the value of the requestedTotalDue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRequestedTotalDue() {
         return requestedTotalDue;
@@ -58,11 +53,9 @@ public class GetTotalDuePastDueResponse2 {
 
     /**
      * Sets the value of the requestedTotalDue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRequestedTotalDue(BigDecimal value) {
         this.requestedTotalDue = value;
@@ -70,11 +63,9 @@ public class GetTotalDuePastDueResponse2 {
 
     /**
      * Gets the value of the pastDueTotal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPastDueTotal() {
         return pastDueTotal;
@@ -82,11 +73,9 @@ public class GetTotalDuePastDueResponse2 {
 
     /**
      * Sets the value of the pastDueTotal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPastDueTotal(BigDecimal value) {
         this.pastDueTotal = value;
@@ -94,7 +83,6 @@ public class GetTotalDuePastDueResponse2 {
 
     /**
      * Gets the value of the pastDueCycles property.
-     * 
      */
     public int getPastDueCycles() {
         return pastDueCycles;
@@ -102,7 +90,6 @@ public class GetTotalDuePastDueResponse2 {
 
     /**
      * Sets the value of the pastDueCycles property.
-     * 
      */
     public void setPastDueCycles(int value) {
         this.pastDueCycles = value;

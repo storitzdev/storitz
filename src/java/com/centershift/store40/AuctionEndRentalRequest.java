@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AuctionEndRental_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AuctionEndRental_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuctionEndRental_Request", propOrder = {
-    "siteID",
-    "auctionDetail"
+        "siteID",
+        "auctionDetail"
 })
 public class AuctionEndRentalRequest {
 
@@ -41,7 +38,6 @@ public class AuctionEndRentalRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -49,7 +45,6 @@ public class AuctionEndRentalRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -57,11 +52,9 @@ public class AuctionEndRentalRequest {
 
     /**
      * Gets the value of the auctionDetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionInfo }
      */
     public ArrayOfAuctionInfo getAuctionDetail() {
         return auctionDetail;
@@ -69,11 +62,9 @@ public class AuctionEndRentalRequest {
 
     /**
      * Sets the value of the auctionDetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionInfo }
      */
     public void setAuctionDetail(ArrayOfAuctionInfo value) {
         this.auctionDetail = value;

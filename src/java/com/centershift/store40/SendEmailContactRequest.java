@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SendEmailContact_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SendEmailContact_Request">
  *   &lt;complexContent>
@@ -30,19 +29,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SendEmailContact_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "emailType",
-    "name",
-    "email",
-    "message",
-    "telephone",
-    "unitNumber"
+        "orgID",
+        "siteID",
+        "emailType",
+        "name",
+        "email",
+        "message",
+        "telephone",
+        "unitNumber"
 })
 public class SendEmailContactRequest {
 
@@ -65,11 +62,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -77,11 +72,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;
@@ -89,11 +82,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -101,11 +92,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -113,11 +102,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the emailType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @return possible object is
+     *         {@link EmailMsgTemplateIds }
      */
     public EmailMsgTemplateIds getEmailType() {
         return emailType;
@@ -125,11 +112,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the emailType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link EmailMsgTemplateIds }
      */
     public void setEmailType(EmailMsgTemplateIds value) {
         this.emailType = value;
@@ -137,11 +122,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getName() {
         return name;
@@ -149,11 +132,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setName(String value) {
         this.name = value;
@@ -161,11 +142,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmail() {
         return email;
@@ -173,11 +152,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -185,11 +162,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMessage() {
         return message;
@@ -197,11 +172,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMessage(String value) {
         this.message = value;
@@ -209,11 +182,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the telephone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTelephone() {
         return telephone;
@@ -221,11 +192,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the telephone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTelephone(String value) {
         this.telephone = value;
@@ -233,11 +202,9 @@ public class SendEmailContactRequest {
 
     /**
      * Gets the value of the unitNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUnitNumber() {
         return unitNumber;
@@ -245,11 +212,9 @@ public class SendEmailContactRequest {
 
     /**
      * Sets the value of the unitNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUnitNumber(String value) {
         this.unitNumber = value;

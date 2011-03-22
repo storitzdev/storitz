@@ -1,9 +1,9 @@
 package storitz
 
-import com.storitz.SpecialOffer
-import storitz.constants.PromoType
-import com.storitz.StorageSite
 import com.storitz.CenterShift
+import com.storitz.SpecialOffer
+import com.storitz.StorageSite
+import storitz.constants.PromoType
 
 class UsiService extends CShiftService {
 
@@ -22,14 +22,14 @@ class UsiService extends CShiftService {
     )
     def concessionIds = []
 
-    for(promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
+    for (promo in records.'soap:Body'.'*:GetCurrentPromotionListXMLResponse'.'*:GetCurrentPromotionListXMLResult'.'*:promotions'.'*:promo-info') {
 
       def description = promo.'promo-desc'.text()
 
       def validPromo = true
       def promoSize = null
 
-      for(gov in promo.'promo-governors'.governor) {
+      for (gov in promo.'promo-governors'.governor) {
         def limitFactor = gov.'limiting-factor'.text()
         if (limitFactor ==~ /Existing.*/) {
           validPromo = false
@@ -44,9 +44,9 @@ class UsiService extends CShiftService {
 
         def concessionId = promo.'promo-id'.text() as Integer
         concessionIds.add(concessionId)
-        SpecialOffer specialOffer = site.specialOffers.find{ it.concessionId == concessionId }
+        SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         boolean newOffer = false
-        if (!specialOffer)  {
+        if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
           specialOffer.active = false;
@@ -57,7 +57,7 @@ class UsiService extends CShiftService {
           newOffer = true
         } else {
           specialOffer.restrictions.clear()
-          specialOffer.save(flush:true)
+          specialOffer.save(flush: true)
         }
         specialOffer.promoSize = promoSize
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
@@ -86,7 +86,7 @@ class UsiService extends CShiftService {
             writer.println "Unknown promoType: ${ptype}"
             return
         }
-        specialOffer.save(flush:true)
+        specialOffer.save(flush: true)
         if (newOffer) {
           site.addToSpecialOffers(specialOffer)
         }
@@ -124,10 +124,10 @@ class UsiService extends CShiftService {
       def rList = rateOffers.clone()
       offerFilterService.filterOffer(rList, site, unit)
       if (rList.size() > 0) {
-        def rOffer = rList.max{ it.promoQty }
-        unit.pushRate = (1 - (rOffer.promoQty/100G))*unit.price
+        def rOffer = rList.max { it.promoQty }
+        unit.pushRate = (1 - (rOffer.promoQty / 100G)) * unit.price
         if (unit.pushRate != unit.price) {
-          unit.save(flush:true)
+          unit.save(flush: true)
         }
       }
     }
@@ -143,7 +143,7 @@ class UsiService extends CShiftService {
         }
         promo.active = true
         promo.description = promo.promoName = promo.description.split('-')[1]
-        promo.save(flush:true)
+        promo.save(flush: true)
       }
     }
     for (promo in deleteList) {
@@ -153,6 +153,7 @@ class UsiService extends CShiftService {
   }
 
   // USI will not use online insurance
+
   def loadInsurance(CenterShift cshift, StorageSite site) {
     // do nothing here
     return false

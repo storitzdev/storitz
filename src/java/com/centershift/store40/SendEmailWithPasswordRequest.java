@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SendEmailWithPassword_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SendEmailWithPassword_Request">
  *   &lt;complexContent>
@@ -29,18 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SendEmailWithPassword_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "accountID",
-    "ecommID",
-    "emailType",
-    "email",
-    "password"
+        "orgID",
+        "siteID",
+        "accountID",
+        "ecommID",
+        "emailType",
+        "email",
+        "password"
 })
 public class SendEmailWithPasswordRequest {
 
@@ -61,11 +58,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -73,11 +68,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;
@@ -85,11 +78,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -97,11 +88,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -109,11 +98,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -121,11 +108,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -133,11 +118,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the ecommID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getEcommID() {
         return ecommID;
@@ -145,11 +128,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the ecommID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setEcommID(Long value) {
         this.ecommID = value;
@@ -157,11 +138,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the emailType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @return possible object is
+     *         {@link EmailMsgTemplateIds }
      */
     public EmailMsgTemplateIds getEmailType() {
         return emailType;
@@ -169,11 +148,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the emailType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link EmailMsgTemplateIds }
      */
     public void setEmailType(EmailMsgTemplateIds value) {
         this.emailType = value;
@@ -181,11 +158,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmail() {
         return email;
@@ -193,11 +168,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -205,11 +178,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Gets the value of the password property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPassword() {
         return password;
@@ -217,11 +188,9 @@ public class SendEmailWithPasswordRequest {
 
     /**
      * Sets the value of the password property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPassword(String value) {
         this.password = value;

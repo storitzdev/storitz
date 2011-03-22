@@ -1,214 +1,214 @@
 package com.storitz
 
 import storitz.constants.State
-import storitz.constants.TruckType
 import storitz.constants.TransactionType
+import storitz.constants.TruckType
 
 class StorageSite {
 
-    static hasMany = [
-            units:StorageUnit,
-            specialOffers:SpecialOffer,
-            images:SiteImage,
-            users:SiteUser,
-            insurances:Insurance,
-            visits:Visit,
-            securityItems: Bullet,
-            convenienceItems: Bullet,
-            amenityItems: Bullet
-    ]
-  
-    static mapping = {
-      units cascade:"all,delete-orphan"
-      specialOffers cascade:"all,delete-orphan"
-      images cascade:"all,delete-orphan"
-      insurances cascade:"all,delete-orphan"
-      visits cascade:"all,delete-orphan"
-      securityItems cascade:"all,delete-orphan"
-      convenienceItems cascade:"all,delete-orphan"
-      amenityItems cascade:"all,delete-orphan"
-    }
+  static hasMany = [
+          units: StorageUnit,
+          specialOffers: SpecialOffer,
+          images: SiteImage,
+          users: SiteUser,
+          insurances: Insurance,
+          visits: Visit,
+          securityItems: Bullet,
+          convenienceItems: Bullet,
+          amenityItems: Bullet
+  ]
 
-    static fetchMode = []
+  static mapping = {
+    units cascade: "all,delete-orphan"
+    specialOffers cascade: "all,delete-orphan"
+    images cascade: "all,delete-orphan"
+    insurances cascade: "all,delete-orphan"
+    visits cascade: "all,delete-orphan"
+    securityItems cascade: "all,delete-orphan"
+    convenienceItems cascade: "all,delete-orphan"
+    amenityItems cascade: "all,delete-orphan"
+  }
 
-    static constraints = {
-      description(widget:'textarea', nullable:true, size:2..2000)
-      feed(nullable:true)
-      logo(nullable:true)
-      zipcode(nullable:true)
-      phone(nullable:true)
-      url(nullable:true)
-      source(nullable:true)
-      sourceId(nullable:true)
-      sourceLoc(nullable:true)
-      address2(nullable:true)
-      adminFee(nullable:true)
-      lockFee(nullable:true)
-      freeTruck(nullable:false)
-      openMonday(nullable:true)
-      openTuesday(nullable:true)
-      openWednesday(nullable:true)
-      openThursday(nullable:true)
-      openFriday(nullable:true)
-      openSaturday(nullable:true)
-      openSunday(nullable:true)
-      startMonday(nullable:true)
-      endMonday(nullable:true)
-      startTuesday(nullable:true)
-      endTuesday(nullable:true)
-      startWednesday(nullable:true)
-      endWednesday(nullable:true)
-      startThursday(nullable:true)
-      endThursday(nullable:true)
-      startFriday(nullable:true)
-      endFriday(nullable:true)
-      startSaturday(nullable:true)
-      endSaturday(nullable:true)
-      startSunday(nullable:true)
-      endSunday(nullable:true)
-      startMondayGate(nullable:true)
-      endMondayGate(nullable:true)
-      startTuesdayGate(nullable:true)
-      endTuesdayGate(nullable:true)
-      startWednesdayGate(nullable:true)
-      endWednesdayGate(nullable:true)
-      startThursdayGate(nullable:true)
-      endThursdayGate(nullable:true)
-      startFridayGate(nullable:true)
-      endFridayGate(nullable:true)
-      startSaturdayGate(nullable:true)
-      endSaturdayGate(nullable:true)
-      startSundayGate(nullable:true)
-      endSundayGate(nullable:true)
-      bankAccount(nullable:true)
-      rentalAgreement(nullable:true)
-      taxRateRental(nullable:true)
-      taxRateInsurance(nullable:true)
-      taxRateMerchandise(nullable:true)
-      useProrating(nullable:true)
-      lastChange(nullable:true)
-      prorateStart(nullable:true)
-      prorateCutoff(nullable:true)
-      prorateSecondMonth(nullable:true)
-    }
-  
-    String title
-    String description
-    SiteImage logo
-    BigDecimal lat
-    BigDecimal lng
-    String address
-    String address2
-    String city
-    State state
-    String zipcode
-    String url
-    String phone
-    // Data source -
-    //    SL - SiteLink
-    //    CS3 - CenterShift 3.x
-    //    CS4 - Centershift 4.x
-    String source             // data source
-    String sourceId           // id from data source
-    String sourceLoc          // location name
+  static fetchMode = []
+
+  static constraints = {
+    description(widget: 'textarea', nullable: true, size: 2..2000)
+    feed(nullable: true)
+    logo(nullable: true)
+    zipcode(nullable: true)
+    phone(nullable: true)
+    url(nullable: true)
+    source(nullable: true)
+    sourceId(nullable: true)
+    sourceLoc(nullable: true)
+    address2(nullable: true)
+    adminFee(nullable: true)
+    lockFee(nullable: true)
+    freeTruck(nullable: false)
+    openMonday(nullable: true)
+    openTuesday(nullable: true)
+    openWednesday(nullable: true)
+    openThursday(nullable: true)
+    openFriday(nullable: true)
+    openSaturday(nullable: true)
+    openSunday(nullable: true)
+    startMonday(nullable: true)
+    endMonday(nullable: true)
+    startTuesday(nullable: true)
+    endTuesday(nullable: true)
+    startWednesday(nullable: true)
+    endWednesday(nullable: true)
+    startThursday(nullable: true)
+    endThursday(nullable: true)
+    startFriday(nullable: true)
+    endFriday(nullable: true)
+    startSaturday(nullable: true)
+    endSaturday(nullable: true)
+    startSunday(nullable: true)
+    endSunday(nullable: true)
+    startMondayGate(nullable: true)
+    endMondayGate(nullable: true)
+    startTuesdayGate(nullable: true)
+    endTuesdayGate(nullable: true)
+    startWednesdayGate(nullable: true)
+    endWednesdayGate(nullable: true)
+    startThursdayGate(nullable: true)
+    endThursdayGate(nullable: true)
+    startFridayGate(nullable: true)
+    endFridayGate(nullable: true)
+    startSaturdayGate(nullable: true)
+    endSaturdayGate(nullable: true)
+    startSundayGate(nullable: true)
+    endSundayGate(nullable: true)
+    bankAccount(nullable: true)
+    rentalAgreement(nullable: true)
+    taxRateRental(nullable: true)
+    taxRateInsurance(nullable: true)
+    taxRateMerchandise(nullable: true)
+    useProrating(nullable: true)
+    lastChange(nullable: true)
+    prorateStart(nullable: true)
+    prorateCutoff(nullable: true)
+    prorateSecondMonth(nullable: true)
+  }
+
+  String title
+  String description
+  SiteImage logo
+  BigDecimal lat
+  BigDecimal lng
+  String address
+  String address2
+  String city
+  State state
+  String zipcode
+  String url
+  String phone
+  // Data source -
+  //    SL - SiteLink
+  //    CS3 - CenterShift 3.x
+  //    CS4 - Centershift 4.x
+  String source             // data source
+  String sourceId           // id from data source
+  String sourceLoc          // location name
 
   // site offers
-    Boolean requiresInsurance  = false
-    Boolean noInsuranceWaiver  = false
-    Boolean boxesAvailable     = true
-    TruckType freeTruck
+  Boolean requiresInsurance = false
+  Boolean noInsuranceWaiver = false
+  Boolean boxesAvailable = true
+  TruckType freeTruck
 
   // site security
-    Boolean isGate
-    Boolean isKeypad
-    Boolean isCamera
-    Boolean isUnitAlarmed
-    Boolean isManagerOnsite
-    Boolean hasElevator
+  Boolean isGate
+  Boolean isKeypad
+  Boolean isCamera
+  Boolean isUnitAlarmed
+  Boolean isManagerOnsite
+  Boolean hasElevator
 
   // Fees
-    BigDecimal adminFee     = 0
-    BigDecimal lockFee      = 0
-    BigDecimal deposit      = 0
-    BigDecimal rentalFee    = 0
+  BigDecimal adminFee = 0
+  BigDecimal lockFee = 0
+  BigDecimal deposit = 0
+  BigDecimal rentalFee = 0
 
   // Proration cutoff (SiteLink)
-    Integer prorateStart    = 5
-    Integer prorateCutoff   = 24
-    Boolean prorateSecondMonth = false
+  Integer prorateStart = 5
+  Integer prorateCutoff = 24
+  Boolean prorateSecondMonth = false
 
   // Operation Hours
-    Boolean openMonday
-    Boolean openTuesday
-    Boolean openWednesday
-    Boolean openThursday
-    Boolean openFriday
-    Boolean openSaturday
-    Boolean openSunday
-    Date startMonday
-    Date endMonday
-    Date startTuesday
-    Date endTuesday
-    Date startWednesday
-    Date endWednesday
-    Date startThursday
-    Date endThursday
-    Date startFriday
-    Date endFriday
-    Date startSaturday
-    Date endSaturday
-    Date startSunday
-    Date endSunday
-    Date startMondayGate
-    Date endMondayGate
-    Date startTuesdayGate
-    Date endTuesdayGate
-    Date startWednesdayGate
-    Date endWednesdayGate
-    Date startThursdayGate
-    Date endThursdayGate
-    Date startFridayGate
-    Date endFridayGate
-    Date startSaturdayGate
-    Date endSaturdayGate
-    Date startSundayGate
-    Date endSundayGate
-    Boolean extendedHours
+  Boolean openMonday
+  Boolean openTuesday
+  Boolean openWednesday
+  Boolean openThursday
+  Boolean openFriday
+  Boolean openSaturday
+  Boolean openSunday
+  Date startMonday
+  Date endMonday
+  Date startTuesday
+  Date endTuesday
+  Date startWednesday
+  Date endWednesday
+  Date startThursday
+  Date endThursday
+  Date startFriday
+  Date endFriday
+  Date startSaturday
+  Date endSaturday
+  Date startSunday
+  Date endSunday
+  Date startMondayGate
+  Date endMondayGate
+  Date startTuesdayGate
+  Date endTuesdayGate
+  Date startWednesdayGate
+  Date endWednesdayGate
+  Date startThursdayGate
+  Date endThursdayGate
+  Date startFridayGate
+  Date endFridayGate
+  Date startSaturdayGate
+  Date endSaturdayGate
+  Date startSundayGate
+  Date endSundayGate
+  Boolean extendedHours
 
-    BigDecimal taxRateRental
-    BigDecimal taxRateInsurance
-    BigDecimal taxRateMerchandise
-    Boolean useProrating
+  BigDecimal taxRateRental
+  BigDecimal taxRateInsurance
+  BigDecimal taxRateMerchandise
+  Boolean useProrating
 
-    TransactionType transactionType
+  TransactionType transactionType
 
   // data feeds
-    Feed feed
-    Long lastUpdate
-    Boolean disabled = false
-    Integer minInventory = 0
-    Integer maxReserveDays = 60
+  Feed feed
+  Long lastUpdate
+  Boolean disabled = false
+  Integer minInventory = 0
+  Integer maxReserveDays = 60
 
-    Boolean netCommission = false
-    Boolean allowPushPrice = true
+  Boolean netCommission = false
+  Boolean allowPushPrice = true
 
   // bank account
-    BankAccount bankAccount
+  BankAccount bankAccount
 
-    RentalAgreement rentalAgreement
+  RentalAgreement rentalAgreement
 
-    Date lastChange
+  Date lastChange
 
   def users() {
-      return users.collect{it.user}
+    return users.collect {it.user}
   }
 
   def siteImages() {
-    return images.findAll{ !it.isLogo }.sort{ it.imgOrder }
+    return images.findAll { !it.isLogo }.sort { it.imgOrder }
   }
 
   def coverImage() {
-    def coverImg = images.find{ it.isCover }
+    def coverImg = images.find { it.isCover }
 
     if (coverImg) {
       return coverImg
@@ -217,19 +217,19 @@ class StorageSite {
   }
 
   def featuredOffers() {
-    return specialOffers.findAll{ it.active && it.featured}.sort{ it.id }
+    return specialOffers.findAll { it.active && it.featured}.sort { it.id }
   }
 
   def specialOffers() {
-    return (specialOffers.findAll{ it.active }.sort{ it.id } as List)
+    return (specialOffers.findAll { it.active }.sort { it.id } as List)
   }
 
   def nonFeaturedOffers() {
-    return specialOffers.findAll{ it.active && !it.featured }.sort{ it.id }
+    return specialOffers.findAll { it.active && !it.featured }.sort { it.id }
   }
 
   def rentableUnits() {
-    return units.collect{it.unitCount}.sum()
+    return units.collect {it.unitCount}.sum()
   }
 
   def getFullAddress() {

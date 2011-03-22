@@ -23,10 +23,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -45,10 +45,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -67,10 +67,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -89,10 +89,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -111,10 +111,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -133,10 +133,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -155,10 +155,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -177,10 +177,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -199,10 +199,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -221,10 +221,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -243,10 +243,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -265,10 +265,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -287,10 +287,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -309,10 +309,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -331,10 +331,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -353,10 +353,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -375,10 +375,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -397,10 +397,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -419,10 +419,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -441,10 +441,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -463,10 +463,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -485,10 +485,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -499,7 +499,7 @@ public class CsKioskTestCase extends junit.framework.TestCase {
 
         // Test operation
         java.lang.Object value = null;
-        value = binding.getCurrentCharges(new java.lang.String(), new java.lang.String(), 0, 0, (short)0, 0, 0, 0);
+        value = binding.getCurrentCharges(new java.lang.String(), new java.lang.String(), 0, 0, (short) 0, 0, 0, 0);
         // TBD - validate results
     }
 
@@ -507,10 +507,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -529,10 +529,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -543,7 +543,7 @@ public class CsKioskTestCase extends junit.framework.TestCase {
 
         // Test operation
         java.lang.String value = null;
-        value = binding.getPicture(new java.lang.String(), new java.lang.String(), (short)0, 0, new javax.xml.rpc.holders.ByteArrayHolder(new byte[0]));
+        value = binding.getPicture(new java.lang.String(), new java.lang.String(), (short) 0, 0, new javax.xml.rpc.holders.ByteArrayHolder(new byte[0]));
         // TBD - validate results
     }
 
@@ -551,10 +551,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -564,7 +564,7 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         binding.setTimeout(60000);
 
         // Test operation
-        binding.pictureReceived(new java.lang.String(), new java.lang.String(), (short)0, 0);
+        binding.pictureReceived(new java.lang.String(), new java.lang.String(), (short) 0, 0);
         // TBD - validate results
     }
 
@@ -572,10 +572,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -594,10 +594,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -608,7 +608,7 @@ public class CsKioskTestCase extends junit.framework.TestCase {
 
         // Test operation
         java.lang.String value = null;
-        value = binding.updatePicture(new java.lang.String(), new java.lang.String(), 0, (short)0, 0, new byte[0]);
+        value = binding.updatePicture(new java.lang.String(), new java.lang.String(), 0, (short) 0, 0, new byte[0]);
         // TBD - validate results
     }
 
@@ -616,10 +616,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -638,10 +638,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -660,10 +660,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -682,10 +682,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -704,10 +704,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -718,7 +718,7 @@ public class CsKioskTestCase extends junit.framework.TestCase {
 
         // Test operation
         java.lang.Object value = null;
-        value = binding.getMerchandiseCost(new java.lang.String(), new java.lang.String(), 0, 0, new java.lang.String(), (short)0);
+        value = binding.getMerchandiseCost(new java.lang.String(), new java.lang.String(), 0, 0, new java.lang.String(), (short) 0);
         // TBD - validate results
     }
 
@@ -726,10 +726,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -748,10 +748,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -770,10 +770,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -792,10 +792,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -814,10 +814,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -836,10 +836,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -858,10 +858,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -880,10 +880,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -902,10 +902,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -924,10 +924,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -946,10 +946,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -968,10 +968,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
@@ -990,10 +990,10 @@ public class CsKioskTestCase extends junit.framework.TestCase {
         com.storitz.cshiftclient.CsKioskSoapBindingStub binding;
         try {
             binding = (com.storitz.cshiftclient.CsKioskSoapBindingStub)
-                          new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
+                    new com.storitz.cshiftclient.CsKioskLocator().getcsKioskSoapPort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
-            if(jre.getLinkedCause()!=null)
+            if (jre.getLinkedCause() != null)
                 jre.getLinkedCause().printStackTrace();
             throw new junit.framework.AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }

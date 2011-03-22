@@ -30,9 +30,9 @@ public enum CenterShiftLocations {
   }
 
   static public CenterShiftLocations getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return CenterShiftLocations.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return CenterShiftLocations.valueOf(value)
+    return ret
+  }
 
 }

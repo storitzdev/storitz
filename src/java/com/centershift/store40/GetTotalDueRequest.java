@@ -1,21 +1,16 @@
-
 package com.centershift.store40;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for GetTotalDue_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetTotalDue_Request">
  *   &lt;complexContent>
@@ -33,18 +28,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetTotalDue_Request", propOrder = {
-    "rentalID",
-    "acctID",
-    "siteID",
-    "cycles",
-    "isRetail",
-    "moveOutDate",
-    "isRetailAndRental"
+        "rentalID",
+        "acctID",
+        "siteID",
+        "cycles",
+        "isRetail",
+        "moveOutDate",
+        "isRetailAndRental"
 })
 public class GetTotalDueRequest {
 
@@ -66,25 +59,23 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the rentalID property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getRentalID().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Long }
-     * 
-     * 
      */
     public List<Long> getRentalID() {
         if (rentalID == null) {
@@ -95,11 +86,9 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAcctID() {
         return acctID;
@@ -107,11 +96,9 @@ public class GetTotalDueRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAcctID(Long value) {
         this.acctID = value;
@@ -119,11 +106,9 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -131,11 +116,9 @@ public class GetTotalDueRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -143,25 +126,23 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the cycles property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the cycles property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCycles().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Integer }
-     * 
-     * 
      */
     public List<Integer> getCycles() {
         if (cycles == null) {
@@ -172,11 +153,9 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the isRetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isIsRetail() {
         return isRetail;
@@ -184,11 +163,9 @@ public class GetTotalDueRequest {
 
     /**
      * Sets the value of the isRetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsRetail(Boolean value) {
         this.isRetail = value;
@@ -196,11 +173,9 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the moveOutDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMoveOutDate() {
         return moveOutDate;
@@ -208,11 +183,9 @@ public class GetTotalDueRequest {
 
     /**
      * Sets the value of the moveOutDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMoveOutDate(XMLGregorianCalendar value) {
         this.moveOutDate = value;
@@ -220,11 +193,9 @@ public class GetTotalDueRequest {
 
     /**
      * Gets the value of the isRetailAndRental property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isIsRetailAndRental() {
         return isRetailAndRental;
@@ -232,11 +203,9 @@ public class GetTotalDueRequest {
 
     /**
      * Sets the value of the isRetailAndRental property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsRetailAndRental(Boolean value) {
         this.isRetailAndRental = value;

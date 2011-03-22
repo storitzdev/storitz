@@ -1,6 +1,6 @@
 // Add ant task capabilities
 grails.project.dependency.resolution = {
-  inherits( "global" )
+  inherits("global")
   log "warn"
   repositories {
     grailsPlugins()

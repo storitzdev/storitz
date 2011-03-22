@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for InitiateUnitTransfer_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="InitiateUnitTransfer_Request">
  *   &lt;complexContent>
@@ -32,21 +31,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InitiateUnitTransfer_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "accountID",
-    "primaryFromRental",
-    "setEndDay",
-    "transferInvoice",
-    "transferServices",
-    "transferInsurance",
-    "fromRentals",
-    "toUnits"
+        "orgID",
+        "siteID",
+        "accountID",
+        "primaryFromRental",
+        "setEndDay",
+        "transferInvoice",
+        "transferServices",
+        "transferInsurance",
+        "fromRentals",
+        "toUnits"
 })
 public class InitiateUnitTransferRequest {
 
@@ -73,7 +70,6 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -81,7 +77,6 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -89,7 +84,6 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -97,7 +91,6 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -105,7 +98,6 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
      */
     public long getAccountID() {
         return accountID;
@@ -113,7 +105,6 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
      */
     public void setAccountID(long value) {
         this.accountID = value;
@@ -121,11 +112,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the primaryFromRental property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getPrimaryFromRental() {
         return primaryFromRental;
@@ -133,11 +122,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the primaryFromRental property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setPrimaryFromRental(Long value) {
         this.primaryFromRental = value;
@@ -145,11 +132,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the setEndDay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getSetEndDay() {
         return setEndDay;
@@ -157,11 +142,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the setEndDay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setSetEndDay(Integer value) {
         this.setEndDay = value;
@@ -169,11 +152,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the transferInvoice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTransferInvoice() {
         return transferInvoice;
@@ -181,11 +162,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the transferInvoice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTransferInvoice(Boolean value) {
         this.transferInvoice = value;
@@ -193,11 +172,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the transferServices property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTransferServices() {
         return transferServices;
@@ -205,11 +182,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the transferServices property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTransferServices(Boolean value) {
         this.transferServices = value;
@@ -217,11 +192,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the transferInsurance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isTransferInsurance() {
         return transferInsurance;
@@ -229,11 +202,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the transferInsurance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setTransferInsurance(Boolean value) {
         this.transferInsurance = value;
@@ -241,11 +212,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the fromRentals property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentalInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentalInfo }
      */
     public ArrayOfRentalInfo getFromRentals() {
         return fromRentals;
@@ -253,11 +222,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the fromRentals property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentalInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentalInfo }
      */
     public void setFromRentals(ArrayOfRentalInfo value) {
         this.fromRentals = value;
@@ -265,11 +232,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Gets the value of the toUnits property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfUnitInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfUnitInfo }
      */
     public ArrayOfUnitInfo getToUnits() {
         return toUnits;
@@ -277,11 +242,9 @@ public class InitiateUnitTransferRequest {
 
     /**
      * Sets the value of the toUnits property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfUnitInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfUnitInfo }
      */
     public void setToUnits(ArrayOfUnitInfo value) {
         this.toUnits = value;

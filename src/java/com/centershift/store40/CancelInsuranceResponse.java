@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for CancelInsurance_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CancelInsurance_Response">
  *   &lt;complexContent>
@@ -24,12 +23,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CancelInsurance_Response", propOrder = {
-    "refundAmount"
+        "refundAmount"
 })
 public class CancelInsuranceResponse {
 
@@ -38,11 +35,9 @@ public class CancelInsuranceResponse {
 
     /**
      * Gets the value of the refundAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRefundAmount() {
         return refundAmount;
@@ -50,11 +45,9 @@ public class CancelInsuranceResponse {
 
     /**
      * Sets the value of the refundAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRefundAmount(BigDecimal value) {
         this.refundAmount = value;

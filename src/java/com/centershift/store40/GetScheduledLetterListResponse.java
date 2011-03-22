@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getScheduledLetterListResult"
+        "getScheduledLetterListResult"
 })
 @XmlRootElement(name = "getScheduledLetterListResponse")
 public class GetScheduledLetterListResponse {
@@ -39,11 +32,9 @@ public class GetScheduledLetterListResponse {
 
     /**
      * Gets the value of the getScheduledLetterListResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetScheduledLetterListResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetScheduledLetterListResponse2 }
      */
     public GetScheduledLetterListResponse2 getGetScheduledLetterListResult() {
         return getScheduledLetterListResult;
@@ -51,11 +42,9 @@ public class GetScheduledLetterListResponse {
 
     /**
      * Sets the value of the getScheduledLetterListResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetScheduledLetterListResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetScheduledLetterListResponse2 }
      */
     public void setGetScheduledLetterListResult(GetScheduledLetterListResponse2 value) {
         this.getScheduledLetterListResult = value;

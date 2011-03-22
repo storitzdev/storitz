@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "createNewAccountResult"
+        "createNewAccountResult"
 })
 @XmlRootElement(name = "CreateNewAccountResponse")
 public class CreateNewAccountResponse {
@@ -39,11 +32,9 @@ public class CreateNewAccountResponse {
 
     /**
      * Gets the value of the createNewAccountResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link StructCreateAccount }
-     *     
+     *
+     * @return possible object is
+     *         {@link StructCreateAccount }
      */
     public StructCreateAccount getCreateNewAccountResult() {
         return createNewAccountResult;
@@ -51,11 +42,9 @@ public class CreateNewAccountResponse {
 
     /**
      * Sets the value of the createNewAccountResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link StructCreateAccount }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link StructCreateAccount }
      */
     public void setCreateNewAccountResult(StructCreateAccount value) {
         this.createNewAccountResult = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ViewLtr_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ViewLtr_Request">
  *   &lt;complexContent>
@@ -26,15 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ViewLtr_Request", propOrder = {
-    "siteID",
-    "ltrNum",
-    "rentalId",
-    "acctId"
+        "siteID",
+        "ltrNum",
+        "rentalId",
+        "acctId"
 })
 public class ViewLtrRequest {
 
@@ -49,7 +46,6 @@ public class ViewLtrRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -57,7 +53,6 @@ public class ViewLtrRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -65,7 +60,6 @@ public class ViewLtrRequest {
 
     /**
      * Gets the value of the ltrNum property.
-     * 
      */
     public long getLtrNum() {
         return ltrNum;
@@ -73,7 +67,6 @@ public class ViewLtrRequest {
 
     /**
      * Sets the value of the ltrNum property.
-     * 
      */
     public void setLtrNum(long value) {
         this.ltrNum = value;
@@ -81,7 +74,6 @@ public class ViewLtrRequest {
 
     /**
      * Gets the value of the rentalId property.
-     * 
      */
     public long getRentalId() {
         return rentalId;
@@ -89,7 +81,6 @@ public class ViewLtrRequest {
 
     /**
      * Sets the value of the rentalId property.
-     * 
      */
     public void setRentalId(long value) {
         this.rentalId = value;
@@ -97,7 +88,6 @@ public class ViewLtrRequest {
 
     /**
      * Gets the value of the acctId property.
-     * 
      */
     public long getAcctId() {
         return acctId;
@@ -105,7 +95,6 @@ public class ViewLtrRequest {
 
     /**
      * Sets the value of the acctId property.
-     * 
      */
     public void setAcctId(long value) {
         this.acctId = value;

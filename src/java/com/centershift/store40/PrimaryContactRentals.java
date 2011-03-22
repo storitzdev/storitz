@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PrimaryContactRentals complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="PrimaryContactRentals">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PrimaryContactRentals", propOrder = {
-    "contactID",
-    "rentals"
+        "contactID",
+        "rentals"
 })
 public class PrimaryContactRentals {
 
@@ -41,7 +38,6 @@ public class PrimaryContactRentals {
 
     /**
      * Gets the value of the contactID property.
-     * 
      */
     public long getContactID() {
         return contactID;
@@ -49,7 +45,6 @@ public class PrimaryContactRentals {
 
     /**
      * Sets the value of the contactID property.
-     * 
      */
     public void setContactID(long value) {
         this.contactID = value;
@@ -57,11 +52,9 @@ public class PrimaryContactRentals {
 
     /**
      * Gets the value of the rentals property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAccessableRentals }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAccessableRentals }
      */
     public ArrayOfAccessableRentals getRentals() {
         return rentals;
@@ -69,11 +62,9 @@ public class PrimaryContactRentals {
 
     /**
      * Sets the value of the rentals property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAccessableRentals }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAccessableRentals }
      */
     public void setRentals(ArrayOfAccessableRentals value) {
         this.rentals = value;

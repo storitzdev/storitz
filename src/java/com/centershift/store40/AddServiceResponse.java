@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "addServiceResult"
+        "addServiceResult"
 })
 @XmlRootElement(name = "AddServiceResponse")
 public class AddServiceResponse {
@@ -39,11 +32,9 @@ public class AddServiceResponse {
 
     /**
      * Gets the value of the addServiceResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddServiceResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddServiceResponse2 }
      */
     public AddServiceResponse2 getAddServiceResult() {
         return addServiceResult;
@@ -51,11 +42,9 @@ public class AddServiceResponse {
 
     /**
      * Sets the value of the addServiceResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddServiceResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddServiceResponse2 }
      */
     public void setAddServiceResult(AddServiceResponse2 value) {
         this.addServiceResult = value;

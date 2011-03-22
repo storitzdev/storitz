@@ -40,7 +40,7 @@ public class CsKioskLocator extends org.apache.axis.client.Service implements co
     }
 
     public com.storitz.cshiftclient.CsKioskSoapPort_PortType getcsKioskSoapPort() throws javax.xml.rpc.ServiceException {
-       java.net.URL endpoint;
+        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(csKioskSoapPort_address);
         }
@@ -96,8 +96,7 @@ public class CsKioskLocator extends org.apache.axis.client.Service implements co
         java.lang.String inputPortName = portName.getLocalPart();
         if ("csKioskSoapPort".equals(inputPortName)) {
             return getcsKioskSoapPort();
-        }
-        else  {
+        } else {
             java.rmi.Remote _stub = getPort(serviceEndpointInterface);
             ((org.apache.axis.client.Stub) _stub).setPortName(portName);
             return _stub;
@@ -119,28 +118,28 @@ public class CsKioskLocator extends org.apache.axis.client.Service implements co
     }
 
     /**
-    * Set the endpoint address for the specified port name.
+     * Set the endpoint address for the specified port name.
+     *
      * @param portName
      * @param address
      * @throws javax.xml.rpc.ServiceException
      */
     public void setEndpointAddress(java.lang.String portName, java.lang.String address) throws javax.xml.rpc.ServiceException {
-        
-if ("csKioskSoapPort".equals(portName)) {
+
+        if ("csKioskSoapPort".equals(portName)) {
             setcsKioskSoapPortEndpointAddress(address);
-        }
-        else 
-{ // Unknown Port Name
+        } else { // Unknown Port Name
             throw new javax.xml.rpc.ServiceException(" Cannot set Endpoint Address for Unknown Port" + portName);
         }
     }
 
     /**
-    * Set the endpoint address for the specified port name.
+     * Set the endpoint address for the specified port name.
+     *
      * @param portName
      * @param address
      * @throws javax.xml.rpc.ServiceException
-    */
+     */
     public void setEndpointAddress(javax.xml.namespace.QName portName, java.lang.String address) throws javax.xml.rpc.ServiceException {
         setEndpointAddress(portName.getLocalPart(), address);
     }

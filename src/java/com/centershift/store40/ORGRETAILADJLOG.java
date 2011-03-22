@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ORG_RETAIL_ADJ_LOG complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_RETAIL_ADJ_LOG">
  *   &lt;complexContent>
@@ -29,22 +28,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_RETAIL_ADJ_LOG", propOrder = {
-    "retailobjectid",
-    "adjreason",
-    "adjtype",
-    "preadjqty",
-    "createdby",
-    "updatedby",
-    "postadjqty"
+        "retailobjectid",
+        "adjreason",
+        "adjtype",
+        "preadjqty",
+        "createdby",
+        "updatedby",
+        "postadjqty"
 })
 public class ORGRETAILADJLOG
-    extends BaseEntityOfCollectionORGRETAILADJLOGColumnIndexes
-{
+        extends BaseEntityOfCollectionORGRETAILADJLOGColumnIndexes {
 
     @XmlElement(name = "RETAIL_OBJECT_ID", required = true, type = Long.class, nillable = true)
     protected Long retailobjectid;
@@ -63,11 +59,9 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the retailobjectid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRETAILOBJECTID() {
         return retailobjectid;
@@ -75,11 +69,9 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the retailobjectid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRETAILOBJECTID(Long value) {
         this.retailobjectid = value;
@@ -87,11 +79,9 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the adjreason property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADJREASON() {
         return adjreason;
@@ -99,11 +89,9 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the adjreason property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADJREASON(String value) {
         this.adjreason = value;
@@ -111,7 +99,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the adjtype property.
-     * 
      */
     public int getADJTYPE() {
         return adjtype;
@@ -119,7 +106,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the adjtype property.
-     * 
      */
     public void setADJTYPE(int value) {
         this.adjtype = value;
@@ -127,7 +113,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the preadjqty property.
-     * 
      */
     public int getPREADJQTY() {
         return preadjqty;
@@ -135,7 +120,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the preadjqty property.
-     * 
      */
     public void setPREADJQTY(int value) {
         this.preadjqty = value;
@@ -143,7 +127,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -151,7 +134,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -159,7 +141,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -167,7 +148,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -175,7 +155,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Gets the value of the postadjqty property.
-     * 
      */
     public int getPOSTADJQTY() {
         return postadjqty;
@@ -183,7 +162,6 @@ public class ORGRETAILADJLOG
 
     /**
      * Sets the value of the postadjqty property.
-     * 
      */
     public void setPOSTADJQTY(int value) {
         this.postadjqty = value;

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "addDepositResult"
+        "addDepositResult"
 })
 @XmlRootElement(name = "AddDepositResponse")
 public class AddDepositResponse {
@@ -39,11 +32,9 @@ public class AddDepositResponse {
 
     /**
      * Gets the value of the addDepositResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddDepositResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddDepositResponse2 }
      */
     public AddDepositResponse2 getAddDepositResult() {
         return addDepositResult;
@@ -51,11 +42,9 @@ public class AddDepositResponse {
 
     /**
      * Sets the value of the addDepositResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddDepositResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddDepositResponse2 }
      */
     public void setAddDepositResult(AddDepositResponse2 value) {
         this.addDepositResult = value;

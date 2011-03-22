@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -28,16 +23,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "csUnitID",
-    "st"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "csUnitID",
+        "st"
 })
 @XmlRootElement(name = "ProcessCustomerCCPayment")
 public class ProcessCustomerCCPayment {
@@ -51,11 +44,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -63,11 +54,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -75,11 +64,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -87,11 +74,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -99,11 +84,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -111,11 +94,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -123,11 +104,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Gets the value of the csUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnitID() {
         return csUnitID;
@@ -135,11 +114,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Sets the value of the csUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnitID(String value) {
         this.csUnitID = value;
@@ -147,11 +124,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Gets the value of the st property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PaymentST }
-     *     
+     *
+     * @return possible object is
+     *         {@link PaymentST }
      */
     public PaymentST getST() {
         return st;
@@ -159,11 +134,9 @@ public class ProcessCustomerCCPayment {
 
     /**
      * Sets the value of the st property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PaymentST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PaymentST }
      */
     public void setST(PaymentST value) {
         this.st = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for MakePayment_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakePayment_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakePayment_Response", propOrder = {
-    "tranID",
-    "cashCreditApplied"
+        "tranID",
+        "cashCreditApplied"
 })
 public class MakePaymentResponse {
 
@@ -41,7 +38,6 @@ public class MakePaymentResponse {
 
     /**
      * Gets the value of the tranID property.
-     * 
      */
     public long getTranID() {
         return tranID;
@@ -49,7 +45,6 @@ public class MakePaymentResponse {
 
     /**
      * Sets the value of the tranID property.
-     * 
      */
     public void setTranID(long value) {
         this.tranID = value;
@@ -57,7 +52,6 @@ public class MakePaymentResponse {
 
     /**
      * Gets the value of the cashCreditApplied property.
-     * 
      */
     public boolean isCashCreditApplied() {
         return cashCreditApplied;
@@ -65,7 +59,6 @@ public class MakePaymentResponse {
 
     /**
      * Sets the value of the cashCreditApplied property.
-     * 
      */
     public void setCashCreditApplied(boolean value) {
         this.cashCreditApplied = value;

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "paymentReceiptBundleResult"
+        "paymentReceiptBundleResult"
 })
 @XmlRootElement(name = "PaymentReceiptBundleResponse")
 public class PaymentReceiptBundleResponse {
@@ -39,11 +32,9 @@ public class PaymentReceiptBundleResponse {
 
     /**
      * Gets the value of the paymentReceiptBundleResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PaymentReceiptBundleResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link PaymentReceiptBundleResponse2 }
      */
     public PaymentReceiptBundleResponse2 getPaymentReceiptBundleResult() {
         return paymentReceiptBundleResult;
@@ -51,11 +42,9 @@ public class PaymentReceiptBundleResponse {
 
     /**
      * Sets the value of the paymentReceiptBundleResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PaymentReceiptBundleResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PaymentReceiptBundleResponse2 }
      */
     public void setPaymentReceiptBundleResult(PaymentReceiptBundleResponse2 value) {
         this.paymentReceiptBundleResult = value;

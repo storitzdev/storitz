@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "searchByResult"
+        "searchByResult"
 })
 @XmlRootElement(name = "SearchByResponse")
 public class SearchByResponse {
@@ -39,11 +32,9 @@ public class SearchByResponse {
 
     /**
      * Gets the value of the searchByResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SearchByResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link SearchByResponse2 }
      */
     public SearchByResponse2 getSearchByResult() {
         return searchByResult;
@@ -51,11 +42,9 @@ public class SearchByResponse {
 
     /**
      * Sets the value of the searchByResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SearchByResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SearchByResponse2 }
      */
     public void setSearchByResult(SearchByResponse2 value) {
         this.searchByResult = value;

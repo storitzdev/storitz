@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_RETAIL_PO_DETAIL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_RETAIL_PO_DETAIL">
  *   &lt;complexContent>
@@ -30,22 +29,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_RETAIL_PO_DETAIL", propOrder = {
-    "poid",
-    "retailid",
-    "qtyordered",
-    "qtyreceived",
-    "itemcost",
-    "createdby",
-    "updatedby"
+        "poid",
+        "retailid",
+        "qtyordered",
+        "qtyreceived",
+        "itemcost",
+        "createdby",
+        "updatedby"
 })
 public class ORGRETAILPODETAIL
-    extends BaseEntityOfCollectionORGRETAILPODETAILColumnIndexes
-{
+        extends BaseEntityOfCollectionORGRETAILPODETAILColumnIndexes {
 
     @XmlElement(name = "PO_ID")
     protected long poid;
@@ -64,7 +60,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the poid property.
-     * 
      */
     public long getPOID() {
         return poid;
@@ -72,7 +67,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the poid property.
-     * 
      */
     public void setPOID(long value) {
         this.poid = value;
@@ -80,7 +74,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the retailid property.
-     * 
      */
     public long getRETAILID() {
         return retailid;
@@ -88,7 +81,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the retailid property.
-     * 
      */
     public void setRETAILID(long value) {
         this.retailid = value;
@@ -96,7 +88,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the qtyordered property.
-     * 
      */
     public int getQTYORDERED() {
         return qtyordered;
@@ -104,7 +95,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the qtyordered property.
-     * 
      */
     public void setQTYORDERED(int value) {
         this.qtyordered = value;
@@ -112,7 +102,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the qtyreceived property.
-     * 
      */
     public int getQTYRECEIVED() {
         return qtyreceived;
@@ -120,7 +109,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the qtyreceived property.
-     * 
      */
     public void setQTYRECEIVED(int value) {
         this.qtyreceived = value;
@@ -128,11 +116,9 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the itemcost property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getITEMCOST() {
         return itemcost;
@@ -140,11 +126,9 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the itemcost property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setITEMCOST(BigDecimal value) {
         this.itemcost = value;
@@ -152,7 +136,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -160,7 +143,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -168,7 +150,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -176,7 +157,6 @@ public class ORGRETAILPODETAIL
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

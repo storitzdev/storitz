@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AccessableRentals complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AccessableRentals">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AccessableRentals", propOrder = {
-    "rentalID",
-    "unitID",
-    "unitNumber"
+        "rentalID",
+        "unitID",
+        "unitNumber"
 })
 public class AccessableRentals {
 
@@ -45,7 +42,6 @@ public class AccessableRentals {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -53,7 +49,6 @@ public class AccessableRentals {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -61,7 +56,6 @@ public class AccessableRentals {
 
     /**
      * Gets the value of the unitID property.
-     * 
      */
     public long getUnitID() {
         return unitID;
@@ -69,7 +63,6 @@ public class AccessableRentals {
 
     /**
      * Sets the value of the unitID property.
-     * 
      */
     public void setUnitID(long value) {
         this.unitID = value;
@@ -77,11 +70,9 @@ public class AccessableRentals {
 
     /**
      * Gets the value of the unitNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUnitNumber() {
         return unitNumber;
@@ -89,11 +80,9 @@ public class AccessableRentals {
 
     /**
      * Sets the value of the unitNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUnitNumber(String value) {
         this.unitNumber = value;

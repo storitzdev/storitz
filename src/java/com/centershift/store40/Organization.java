@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Organization complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Organization">
  *   &lt;complexContent>
@@ -35,24 +34,22 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Organization", propOrder = {
-    "orgID",
-    "orgName",
-    "addressLine1",
-    "addressLine2",
-    "city",
-    "state",
-    "postalCode",
-    "country",
-    "appDisplayName",
-    "email",
-    "phone",
-    "fax",
-    "primary"
+        "orgID",
+        "orgName",
+        "addressLine1",
+        "addressLine2",
+        "city",
+        "state",
+        "postalCode",
+        "country",
+        "appDisplayName",
+        "email",
+        "phone",
+        "fax",
+        "primary"
 })
 public class Organization {
 
@@ -85,7 +82,6 @@ public class Organization {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -93,7 +89,6 @@ public class Organization {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -101,11 +96,9 @@ public class Organization {
 
     /**
      * Gets the value of the orgName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOrgName() {
         return orgName;
@@ -113,11 +106,9 @@ public class Organization {
 
     /**
      * Sets the value of the orgName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOrgName(String value) {
         this.orgName = value;
@@ -125,11 +116,9 @@ public class Organization {
 
     /**
      * Gets the value of the addressLine1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddressLine1() {
         return addressLine1;
@@ -137,11 +126,9 @@ public class Organization {
 
     /**
      * Sets the value of the addressLine1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddressLine1(String value) {
         this.addressLine1 = value;
@@ -149,11 +136,9 @@ public class Organization {
 
     /**
      * Gets the value of the addressLine2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddressLine2() {
         return addressLine2;
@@ -161,11 +146,9 @@ public class Organization {
 
     /**
      * Sets the value of the addressLine2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddressLine2(String value) {
         this.addressLine2 = value;
@@ -173,11 +156,9 @@ public class Organization {
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCity() {
         return city;
@@ -185,11 +166,9 @@ public class Organization {
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCity(String value) {
         this.city = value;
@@ -197,11 +176,9 @@ public class Organization {
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getState() {
         return state;
@@ -209,11 +186,9 @@ public class Organization {
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setState(String value) {
         this.state = value;
@@ -221,11 +196,9 @@ public class Organization {
 
     /**
      * Gets the value of the postalCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPostalCode() {
         return postalCode;
@@ -233,11 +206,9 @@ public class Organization {
 
     /**
      * Sets the value of the postalCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPostalCode(String value) {
         this.postalCode = value;
@@ -245,11 +216,9 @@ public class Organization {
 
     /**
      * Gets the value of the country property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCountry() {
         return country;
@@ -257,11 +226,9 @@ public class Organization {
 
     /**
      * Sets the value of the country property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCountry(String value) {
         this.country = value;
@@ -269,11 +236,9 @@ public class Organization {
 
     /**
      * Gets the value of the appDisplayName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAppDisplayName() {
         return appDisplayName;
@@ -281,11 +246,9 @@ public class Organization {
 
     /**
      * Sets the value of the appDisplayName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAppDisplayName(String value) {
         this.appDisplayName = value;
@@ -293,11 +256,9 @@ public class Organization {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmail() {
         return email;
@@ -305,11 +266,9 @@ public class Organization {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -317,11 +276,9 @@ public class Organization {
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPhone() {
         return phone;
@@ -329,11 +286,9 @@ public class Organization {
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPhone(String value) {
         this.phone = value;
@@ -341,11 +296,9 @@ public class Organization {
 
     /**
      * Gets the value of the fax property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFax() {
         return fax;
@@ -353,11 +306,9 @@ public class Organization {
 
     /**
      * Sets the value of the fax property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFax(String value) {
         this.fax = value;
@@ -365,7 +316,6 @@ public class Organization {
 
     /**
      * Gets the value of the primary property.
-     * 
      */
     public boolean isPrimary() {
         return primary;
@@ -373,7 +323,6 @@ public class Organization {
 
     /**
      * Sets the value of the primary property.
-     * 
      */
     public void setPrimary(boolean value) {
         this.primary = value;

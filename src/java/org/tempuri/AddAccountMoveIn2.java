@@ -1,20 +1,14 @@
-
 package org.tempuri;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -35,21 +29,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "pst",
-    "ust",
-    "csUnitID",
-    "iCustomerID",
-    "dInsurance",
-    "iUnitTypeID",
-    "csCoupon"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "pst",
+        "ust",
+        "csUnitID",
+        "iCustomerID",
+        "dInsurance",
+        "iUnitTypeID",
+        "csCoupon"
 })
 @XmlRootElement(name = "AddAccountMoveIn2")
 public class AddAccountMoveIn2 {
@@ -72,11 +64,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -84,11 +74,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -96,11 +84,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -108,11 +94,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -120,11 +104,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -132,11 +114,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -144,11 +124,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the pst property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PaymentST }
-     *     
+     *
+     * @return possible object is
+     *         {@link PaymentST }
      */
     public PaymentST getPST() {
         return pst;
@@ -156,11 +134,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the pst property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PaymentST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PaymentST }
      */
     public void setPST(PaymentST value) {
         this.pst = value;
@@ -168,11 +144,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the ust property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UserAccountST }
-     *     
+     *
+     * @return possible object is
+     *         {@link UserAccountST }
      */
     public UserAccountST getUST() {
         return ust;
@@ -180,11 +154,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the ust property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UserAccountST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link UserAccountST }
      */
     public void setUST(UserAccountST value) {
         this.ust = value;
@@ -192,11 +164,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the csUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnitID() {
         return csUnitID;
@@ -204,11 +174,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the csUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnitID(String value) {
         this.csUnitID = value;
@@ -216,7 +184,6 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the iCustomerID property.
-     * 
      */
     public long getICustomerID() {
         return iCustomerID;
@@ -224,7 +191,6 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the iCustomerID property.
-     * 
      */
     public void setICustomerID(long value) {
         this.iCustomerID = value;
@@ -232,11 +198,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the dInsurance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDInsurance() {
         return dInsurance;
@@ -244,11 +208,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the dInsurance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDInsurance(BigDecimal value) {
         this.dInsurance = value;
@@ -256,7 +218,6 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the iUnitTypeID property.
-     * 
      */
     public long getIUnitTypeID() {
         return iUnitTypeID;
@@ -264,7 +225,6 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the iUnitTypeID property.
-     * 
      */
     public void setIUnitTypeID(long value) {
         this.iUnitTypeID = value;
@@ -272,11 +232,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Gets the value of the csCoupon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCoupon() {
         return csCoupon;
@@ -284,11 +242,9 @@ public class AddAccountMoveIn2 {
 
     /**
      * Sets the value of the csCoupon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCoupon(String value) {
         this.csCoupon = value;

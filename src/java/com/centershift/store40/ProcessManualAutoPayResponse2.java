@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ProcessManualAutoPay_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ProcessManualAutoPay_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProcessManualAutoPay_Response", propOrder = {
-    "tranID"
+        "tranID"
 })
 public class ProcessManualAutoPayResponse2 {
 
@@ -37,7 +34,6 @@ public class ProcessManualAutoPayResponse2 {
 
     /**
      * Gets the value of the tranID property.
-     * 
      */
     public long getTranID() {
         return tranID;
@@ -45,7 +41,6 @@ public class ProcessManualAutoPayResponse2 {
 
     /**
      * Sets the value of the tranID property.
-     * 
      */
     public void setTranID(long value) {
         this.tranID = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for MakeMultipleReservations_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakeMultipleReservations_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakeMultipleReservations_Response", propOrder = {
-    "succeeded",
-    "failed"
+        "succeeded",
+        "failed"
 })
 public class MakeMultipleReservationsResponse2 {
 
@@ -41,11 +38,9 @@ public class MakeMultipleReservationsResponse2 {
 
     /**
      * Gets the value of the succeeded property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfMakeReservationResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfMakeReservationResponse }
      */
     public ArrayOfMakeReservationResponse getSucceeded() {
         return succeeded;
@@ -53,11 +48,9 @@ public class MakeMultipleReservationsResponse2 {
 
     /**
      * Sets the value of the succeeded property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfMakeReservationResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfMakeReservationResponse }
      */
     public void setSucceeded(ArrayOfMakeReservationResponse value) {
         this.succeeded = value;
@@ -65,11 +58,9 @@ public class MakeMultipleReservationsResponse2 {
 
     /**
      * Gets the value of the failed property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfFailedReservation }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfFailedReservation }
      */
     public ArrayOfFailedReservation getFailed() {
         return failed;
@@ -77,11 +68,9 @@ public class MakeMultipleReservationsResponse2 {
 
     /**
      * Sets the value of the failed property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfFailedReservation }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfFailedReservation }
      */
     public void setFailed(ArrayOfFailedReservation value) {
         this.failed = value;

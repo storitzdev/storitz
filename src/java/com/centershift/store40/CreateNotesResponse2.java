@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CreateNotes_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="CreateNotes_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreateNotes_Response", propOrder = {
-    "noteID"
+        "noteID"
 })
 public class CreateNotesResponse2 {
 
@@ -37,7 +34,6 @@ public class CreateNotesResponse2 {
 
     /**
      * Gets the value of the noteID property.
-     * 
      */
     public long getNoteID() {
         return noteID;
@@ -45,7 +41,6 @@ public class CreateNotesResponse2 {
 
     /**
      * Sets the value of the noteID property.
-     * 
      */
     public void setNoteID(long value) {
         this.noteID = value;

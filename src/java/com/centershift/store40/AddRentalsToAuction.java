@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -25,13 +20,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "lookupUserRequest",
-    "request"
+        "lookupUserRequest",
+        "request"
 })
 @XmlRootElement(name = "AddRentalsToAuction")
 public class AddRentalsToAuction {
@@ -43,11 +36,9 @@ public class AddRentalsToAuction {
 
     /**
      * Gets the value of the lookupUserRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LookupUserRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link LookupUserRequest }
      */
     public LookupUserRequest getLookupUserRequest() {
         return lookupUserRequest;
@@ -55,11 +46,9 @@ public class AddRentalsToAuction {
 
     /**
      * Sets the value of the lookupUserRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LookupUserRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link LookupUserRequest }
      */
     public void setLookupUserRequest(LookupUserRequest value) {
         this.lookupUserRequest = value;
@@ -67,11 +56,9 @@ public class AddRentalsToAuction {
 
     /**
      * Gets the value of the request property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddRentalsToAuctionRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddRentalsToAuctionRequest }
      */
     public AddRentalsToAuctionRequest getRequest() {
         return request;
@@ -79,11 +66,9 @@ public class AddRentalsToAuction {
 
     /**
      * Sets the value of the request property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddRentalsToAuctionRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddRentalsToAuctionRequest }
      */
     public void setRequest(AddRentalsToAuctionRequest value) {
         this.request = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateEcommPassword_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateEcommPassword_Request">
  *   &lt;complexContent>
@@ -29,18 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateEcommPassword_Request", propOrder = {
-    "orgID",
-    "email",
-    "ecommID",
-    "accountID",
-    "firstName",
-    "lastName",
-    "newPassword"
+        "orgID",
+        "email",
+        "ecommID",
+        "accountID",
+        "firstName",
+        "lastName",
+        "newPassword"
 })
 public class UpdateEcommPasswordRequest {
 
@@ -61,7 +58,6 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -69,7 +65,6 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -77,11 +72,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmail() {
         return email;
@@ -89,11 +82,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -101,11 +92,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the ecommID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getEcommID() {
         return ecommID;
@@ -113,11 +102,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the ecommID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setEcommID(Long value) {
         this.ecommID = value;
@@ -125,11 +112,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -137,11 +122,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -149,11 +132,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the firstName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFirstName() {
         return firstName;
@@ -161,11 +142,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the firstName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFirstName(String value) {
         this.firstName = value;
@@ -173,11 +152,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the lastName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLastName() {
         return lastName;
@@ -185,11 +162,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the lastName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLastName(String value) {
         this.lastName = value;
@@ -197,11 +172,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Gets the value of the newPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNewPassword() {
         return newPassword;
@@ -209,11 +182,9 @@ public class UpdateEcommPasswordRequest {
 
     /**
      * Sets the value of the newPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNewPassword(String value) {
         this.newPassword = value;

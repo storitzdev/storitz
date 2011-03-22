@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_RETAIL_BULK complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_RETAIL_BULK">
  *   &lt;complexContent>
@@ -30,22 +29,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_RETAIL_BULK", propOrder = {
-    "retailid",
-    "minthreshold",
-    "disctype",
-    "discamt",
-    "active",
-    "createdby",
-    "updatedby"
+        "retailid",
+        "minthreshold",
+        "disctype",
+        "discamt",
+        "active",
+        "createdby",
+        "updatedby"
 })
 public class ORGRETAILBULK
-    extends BaseEntityOfCollectionORGRETAILBULKColumnIndexes
-{
+        extends BaseEntityOfCollectionORGRETAILBULKColumnIndexes {
 
     @XmlElement(name = "RETAIL_ID")
     protected long retailid;
@@ -64,7 +60,6 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the retailid property.
-     * 
      */
     public long getRETAILID() {
         return retailid;
@@ -72,7 +67,6 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the retailid property.
-     * 
      */
     public void setRETAILID(long value) {
         this.retailid = value;
@@ -80,11 +74,9 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the minthreshold property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getMINTHRESHOLD() {
         return minthreshold;
@@ -92,11 +84,9 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the minthreshold property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setMINTHRESHOLD(Integer value) {
         this.minthreshold = value;
@@ -104,11 +94,9 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the disctype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDISCTYPE() {
         return disctype;
@@ -116,11 +104,9 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the disctype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDISCTYPE(Integer value) {
         this.disctype = value;
@@ -128,11 +114,9 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the discamt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDISCAMT() {
         return discamt;
@@ -140,11 +124,9 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the discamt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDISCAMT(BigDecimal value) {
         this.discamt = value;
@@ -152,11 +134,9 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isACTIVE() {
         return active;
@@ -164,11 +144,9 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setACTIVE(Boolean value) {
         this.active = value;
@@ -176,7 +154,6 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -184,7 +161,6 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -192,7 +168,6 @@ public class ORGRETAILBULK
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -200,7 +175,6 @@ public class ORGRETAILBULK
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AutoPayData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AutoPayData">
  *   &lt;complexContent>
@@ -36,25 +35,23 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AutoPayData", propOrder = {
-    "isNew",
-    "autoPayID",
-    "isActive",
-    "siteID",
-    "accountID",
-    "rentalID",
-    "accountType",
-    "streetAddress",
-    "city",
-    "state",
-    "postalCode",
-    "creditCardInfo",
-    "achInfo",
-    "noActiveAP"
+        "isNew",
+        "autoPayID",
+        "isActive",
+        "siteID",
+        "accountID",
+        "rentalID",
+        "accountType",
+        "streetAddress",
+        "city",
+        "state",
+        "postalCode",
+        "creditCardInfo",
+        "achInfo",
+        "noActiveAP"
 })
 public class AutoPayData {
 
@@ -89,7 +86,6 @@ public class AutoPayData {
 
     /**
      * Gets the value of the isNew property.
-     * 
      */
     public boolean isIsNew() {
         return isNew;
@@ -97,7 +93,6 @@ public class AutoPayData {
 
     /**
      * Sets the value of the isNew property.
-     * 
      */
     public void setIsNew(boolean value) {
         this.isNew = value;
@@ -105,11 +100,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the autoPayID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAutoPayID() {
         return autoPayID;
@@ -117,11 +110,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the autoPayID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAutoPayID(Long value) {
         this.autoPayID = value;
@@ -129,7 +120,6 @@ public class AutoPayData {
 
     /**
      * Gets the value of the isActive property.
-     * 
      */
     public boolean isIsActive() {
         return isActive;
@@ -137,7 +127,6 @@ public class AutoPayData {
 
     /**
      * Sets the value of the isActive property.
-     * 
      */
     public void setIsActive(boolean value) {
         this.isActive = value;
@@ -145,7 +134,6 @@ public class AutoPayData {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -153,7 +141,6 @@ public class AutoPayData {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -161,7 +148,6 @@ public class AutoPayData {
 
     /**
      * Gets the value of the accountID property.
-     * 
      */
     public long getAccountID() {
         return accountID;
@@ -169,7 +155,6 @@ public class AutoPayData {
 
     /**
      * Sets the value of the accountID property.
-     * 
      */
     public void setAccountID(long value) {
         this.accountID = value;
@@ -177,7 +162,6 @@ public class AutoPayData {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -185,7 +169,6 @@ public class AutoPayData {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -193,11 +176,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the accountType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link APAccountType }
-     *     
+     *
+     * @return possible object is
+     *         {@link APAccountType }
      */
     public APAccountType getAccountType() {
         return accountType;
@@ -205,11 +186,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the accountType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link APAccountType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link APAccountType }
      */
     public void setAccountType(APAccountType value) {
         this.accountType = value;
@@ -217,11 +196,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the streetAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getStreetAddress() {
         return streetAddress;
@@ -229,11 +206,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the streetAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setStreetAddress(String value) {
         this.streetAddress = value;
@@ -241,11 +216,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCity() {
         return city;
@@ -253,11 +226,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCity(String value) {
         this.city = value;
@@ -265,11 +236,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getState() {
         return state;
@@ -277,11 +246,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setState(String value) {
         this.state = value;
@@ -289,11 +256,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the postalCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPostalCode() {
         return postalCode;
@@ -301,11 +266,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the postalCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPostalCode(String value) {
         this.postalCode = value;
@@ -313,11 +276,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the creditCardInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link APCreditCardData }
-     *     
+     *
+     * @return possible object is
+     *         {@link APCreditCardData }
      */
     public APCreditCardData getCreditCardInfo() {
         return creditCardInfo;
@@ -325,11 +286,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the creditCardInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link APCreditCardData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link APCreditCardData }
      */
     public void setCreditCardInfo(APCreditCardData value) {
         this.creditCardInfo = value;
@@ -337,11 +296,9 @@ public class AutoPayData {
 
     /**
      * Gets the value of the achInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link APACHData }
-     *     
+     *
+     * @return possible object is
+     *         {@link APACHData }
      */
     public APACHData getACHInfo() {
         return achInfo;
@@ -349,11 +306,9 @@ public class AutoPayData {
 
     /**
      * Sets the value of the achInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link APACHData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link APACHData }
      */
     public void setACHInfo(APACHData value) {
         this.achInfo = value;
@@ -361,7 +316,6 @@ public class AutoPayData {
 
     /**
      * Gets the value of the noActiveAP property.
-     * 
      */
     public boolean isNoActiveAP() {
         return noActiveAP;
@@ -369,7 +323,6 @@ public class AutoPayData {
 
     /**
      * Sets the value of the noActiveAP property.
-     * 
      */
     public void setNoActiveAP(boolean value) {
         this.noActiveAP = value;

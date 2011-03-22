@@ -1,19 +1,14 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for EXRFinData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="EXRFinData">
  *   &lt;complexContent>
@@ -29,16 +24,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EXRFinData", propOrder = {
-    "siteID",
-    "siteName",
-    "siteNumber",
-    "transactionDate",
-    "entry"
+        "siteID",
+        "siteName",
+        "siteNumber",
+        "transactionDate",
+        "entry"
 })
 public class EXRFinData {
 
@@ -56,7 +49,6 @@ public class EXRFinData {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -64,7 +56,6 @@ public class EXRFinData {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -72,11 +63,9 @@ public class EXRFinData {
 
     /**
      * Gets the value of the siteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSiteName() {
         return siteName;
@@ -84,11 +73,9 @@ public class EXRFinData {
 
     /**
      * Sets the value of the siteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSiteName(String value) {
         this.siteName = value;
@@ -96,11 +83,9 @@ public class EXRFinData {
 
     /**
      * Gets the value of the siteNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSiteNumber() {
         return siteNumber;
@@ -108,11 +93,9 @@ public class EXRFinData {
 
     /**
      * Sets the value of the siteNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSiteNumber(String value) {
         this.siteNumber = value;
@@ -120,11 +103,9 @@ public class EXRFinData {
 
     /**
      * Gets the value of the transactionDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTransactionDate() {
         return transactionDate;
@@ -132,11 +113,9 @@ public class EXRFinData {
 
     /**
      * Sets the value of the transactionDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTransactionDate(XMLGregorianCalendar value) {
         this.transactionDate = value;
@@ -144,11 +123,9 @@ public class EXRFinData {
 
     /**
      * Gets the value of the entry property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfEntryItem }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfEntryItem }
      */
     public ArrayOfEntryItem getEntry() {
         return entry;
@@ -156,11 +133,9 @@ public class EXRFinData {
 
     /**
      * Sets the value of the entry property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfEntryItem }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfEntryItem }
      */
     public void setEntry(ArrayOfEntryItem value) {
         this.entry = value;

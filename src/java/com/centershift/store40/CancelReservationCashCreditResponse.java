@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "cancelReservationCashCreditResult"
+        "cancelReservationCashCreditResult"
 })
 @XmlRootElement(name = "CancelReservationCashCreditResponse")
 public class CancelReservationCashCreditResponse {
@@ -39,11 +32,9 @@ public class CancelReservationCashCreditResponse {
 
     /**
      * Gets the value of the cancelReservationCashCreditResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CancelReservationCashCreditResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link CancelReservationCashCreditResponse2 }
      */
     public CancelReservationCashCreditResponse2 getCancelReservationCashCreditResult() {
         return cancelReservationCashCreditResult;
@@ -51,11 +42,9 @@ public class CancelReservationCashCreditResponse {
 
     /**
      * Sets the value of the cancelReservationCashCreditResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CancelReservationCashCreditResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CancelReservationCashCreditResponse2 }
      */
     public void setCancelReservationCashCreditResult(CancelReservationCashCreditResponse2 value) {
         this.cancelReservationCashCreditResult = value;

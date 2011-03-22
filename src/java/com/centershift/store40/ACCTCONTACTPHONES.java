@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ACCT_CONTACT_PHONES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACCT_CONTACT_PHONES">
  *   &lt;complexContent>
@@ -31,24 +30,21 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACCT_CONTACT_PHONES", propOrder = {
-    "acctid",
-    "contactid",
-    "phoneid",
-    "phonetype",
-    "phonetypeval",
-    "phone",
-    "active",
-    "createdby",
-    "updatedby"
+        "acctid",
+        "contactid",
+        "phoneid",
+        "phonetype",
+        "phonetypeval",
+        "phone",
+        "active",
+        "createdby",
+        "updatedby"
 })
 public class ACCTCONTACTPHONES
-    extends BaseEntityOfCollectionACCTCONTACTPHONESColumnIndexes
-{
+        extends BaseEntityOfCollectionACCTCONTACTPHONESColumnIndexes {
 
     @XmlElement(name = "ACCT_ID")
     protected long acctid;
@@ -71,7 +67,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -79,7 +74,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -87,7 +81,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -95,7 +88,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -103,7 +95,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the phoneid property.
-     * 
      */
     public long getPHONEID() {
         return phoneid;
@@ -111,7 +102,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the phoneid property.
-     * 
      */
     public void setPHONEID(long value) {
         this.phoneid = value;
@@ -119,7 +109,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the phonetype property.
-     * 
      */
     public int getPHONETYPE() {
         return phonetype;
@@ -127,7 +116,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the phonetype property.
-     * 
      */
     public void setPHONETYPE(int value) {
         this.phonetype = value;
@@ -135,11 +123,9 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the phonetypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONETYPEVAL() {
         return phonetypeval;
@@ -147,11 +133,9 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the phonetypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONETYPEVAL(String value) {
         this.phonetypeval = value;
@@ -159,11 +143,9 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONE() {
         return phone;
@@ -171,11 +153,9 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONE(String value) {
         this.phone = value;
@@ -183,7 +163,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -191,7 +170,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -199,7 +177,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -207,7 +184,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -215,7 +191,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -223,7 +198,6 @@ public class ACCTCONTACTPHONES
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

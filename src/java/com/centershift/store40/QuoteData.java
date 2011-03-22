@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for QuoteData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="QuoteData">
  *   &lt;complexContent>
@@ -29,17 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuoteData", propOrder = {
-    "rentRate",
-    "fees",
-    "discounts",
-    "deposits",
-    "taxes",
-    "total"
+        "rentRate",
+        "fees",
+        "discounts",
+        "deposits",
+        "taxes",
+        "total"
 })
 public class QuoteData {
 
@@ -58,11 +55,9 @@ public class QuoteData {
 
     /**
      * Gets the value of the rentRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRentRate() {
         return rentRate;
@@ -70,11 +65,9 @@ public class QuoteData {
 
     /**
      * Sets the value of the rentRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRentRate(BigDecimal value) {
         this.rentRate = value;
@@ -82,11 +75,9 @@ public class QuoteData {
 
     /**
      * Gets the value of the fees property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getFees() {
         return fees;
@@ -94,11 +85,9 @@ public class QuoteData {
 
     /**
      * Sets the value of the fees property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setFees(BigDecimal value) {
         this.fees = value;
@@ -106,11 +95,9 @@ public class QuoteData {
 
     /**
      * Gets the value of the discounts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDiscounts() {
         return discounts;
@@ -118,11 +105,9 @@ public class QuoteData {
 
     /**
      * Sets the value of the discounts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDiscounts(BigDecimal value) {
         this.discounts = value;
@@ -130,11 +115,9 @@ public class QuoteData {
 
     /**
      * Gets the value of the deposits property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDeposits() {
         return deposits;
@@ -142,11 +125,9 @@ public class QuoteData {
 
     /**
      * Sets the value of the deposits property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDeposits(BigDecimal value) {
         this.deposits = value;
@@ -154,11 +135,9 @@ public class QuoteData {
 
     /**
      * Gets the value of the taxes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTaxes() {
         return taxes;
@@ -166,11 +145,9 @@ public class QuoteData {
 
     /**
      * Sets the value of the taxes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTaxes(BigDecimal value) {
         this.taxes = value;
@@ -178,11 +155,9 @@ public class QuoteData {
 
     /**
      * Gets the value of the total property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotal() {
         return total;
@@ -190,11 +165,9 @@ public class QuoteData {
 
     /**
      * Sets the value of the total property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotal(BigDecimal value) {
         this.total = value;

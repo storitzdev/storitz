@@ -10,14 +10,14 @@ import ar.com.fdvs.dj.domain.constants.Page
 
 dynamicJasper {
 
-    useFullPageWidth = true
+  useFullPageWidth = true
 
-    page = Page.Page_Letter_Landscape()
+  page = Page.Page_Letter_Landscape()
 
-    isUsingImagesToAlign = true
+  isUsingImagesToAlign = true
 
-    intPattern = '#0'
-    floatPattern = '#0.00'
-    datePattern = 'dd/MM/yyyy'
+  intPattern = '#0'
+  floatPattern = '#0.00'
+  datePattern = 'dd/MM/yyyy'
 
 }

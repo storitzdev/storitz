@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for GetUnitData_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetUnitData_Request">
  *   &lt;complexContent>
@@ -44,32 +43,30 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetUnitData_Request", propOrder = {
-    "unitID",
-    "siteID",
-    "width",
-    "depth",
-    "height",
-    "classType",
-    "active",
-    "status",
-    "attribute01",
-    "attribute02",
-    "climate",
-    "door",
-    "accessType",
-    "features",
-    "minRentRate",
-    "maxRentRate",
-    "unitNumber",
-    "unitIDs",
-    "widthDecimal",
-    "depthDecimal",
-    "heightDecimal"
+        "unitID",
+        "siteID",
+        "width",
+        "depth",
+        "height",
+        "classType",
+        "active",
+        "status",
+        "attribute01",
+        "attribute02",
+        "climate",
+        "door",
+        "accessType",
+        "features",
+        "minRentRate",
+        "maxRentRate",
+        "unitNumber",
+        "unitIDs",
+        "widthDecimal",
+        "depthDecimal",
+        "heightDecimal"
 })
 public class GetUnitDataRequest {
 
@@ -118,11 +115,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the unitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getUnitID() {
         return unitID;
@@ -130,11 +125,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the unitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setUnitID(Long value) {
         this.unitID = value;
@@ -142,11 +135,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -154,11 +145,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -166,11 +155,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getWidth() {
         return width;
@@ -178,11 +165,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setWidth(Long value) {
         this.width = value;
@@ -190,11 +175,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDepth() {
         return depth;
@@ -202,11 +185,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setDepth(Long value) {
         this.depth = value;
@@ -214,11 +195,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the height property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getHeight() {
         return height;
@@ -226,11 +205,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the height property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setHeight(Long value) {
         this.height = value;
@@ -238,11 +215,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the classType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getClassType() {
         return classType;
@@ -250,11 +225,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the classType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setClassType(Long value) {
         this.classType = value;
@@ -262,11 +235,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getActive() {
         return active;
@@ -274,11 +245,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setActive(String value) {
         this.active = value;
@@ -286,11 +255,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getStatus() {
         return status;
@@ -298,11 +265,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setStatus(Integer value) {
         this.status = value;
@@ -310,11 +275,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the attribute01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAttribute01() {
         return attribute01;
@@ -322,11 +285,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the attribute01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAttribute01(Long value) {
         this.attribute01 = value;
@@ -334,11 +295,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the attribute02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAttribute02() {
         return attribute02;
@@ -346,11 +305,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the attribute02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAttribute02(Long value) {
         this.attribute02 = value;
@@ -358,11 +315,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the climate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getClimate() {
         return climate;
@@ -370,11 +325,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the climate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setClimate(Long value) {
         this.climate = value;
@@ -382,11 +335,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the door property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDoor() {
         return door;
@@ -394,11 +345,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the door property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setDoor(Long value) {
         this.door = value;
@@ -406,11 +355,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the accessType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccessType() {
         return accessType;
@@ -418,11 +365,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the accessType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccessType(Long value) {
         this.accessType = value;
@@ -430,11 +375,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the features property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getFeatures() {
         return features;
@@ -442,11 +385,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the features property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setFeatures(Long value) {
         this.features = value;
@@ -454,11 +395,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the minRentRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMinRentRate() {
         return minRentRate;
@@ -466,11 +405,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the minRentRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMinRentRate(BigDecimal value) {
         this.minRentRate = value;
@@ -478,11 +415,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the maxRentRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getMaxRentRate() {
         return maxRentRate;
@@ -490,11 +425,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the maxRentRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setMaxRentRate(BigDecimal value) {
         this.maxRentRate = value;
@@ -502,11 +435,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the unitNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUnitNumber() {
         return unitNumber;
@@ -514,11 +445,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the unitNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUnitNumber(String value) {
         this.unitNumber = value;
@@ -526,11 +455,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the unitIDs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfLong2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfLong2 }
      */
     public ArrayOfLong2 getUnitIDs() {
         return unitIDs;
@@ -538,11 +465,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the unitIDs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfLong2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfLong2 }
      */
     public void setUnitIDs(ArrayOfLong2 value) {
         this.unitIDs = value;
@@ -550,11 +475,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the widthDecimal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWidthDecimal() {
         return widthDecimal;
@@ -562,11 +485,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the widthDecimal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWidthDecimal(BigDecimal value) {
         this.widthDecimal = value;
@@ -574,11 +495,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the depthDecimal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDepthDecimal() {
         return depthDecimal;
@@ -586,11 +505,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the depthDecimal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDepthDecimal(BigDecimal value) {
         this.depthDecimal = value;
@@ -598,11 +515,9 @@ public class GetUnitDataRequest {
 
     /**
      * Gets the value of the heightDecimal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getHeightDecimal() {
         return heightDecimal;
@@ -610,11 +525,9 @@ public class GetUnitDataRequest {
 
     /**
      * Sets the value of the heightDecimal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setHeightDecimal(BigDecimal value) {
         this.heightDecimal = value;

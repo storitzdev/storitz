@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for UpdateStreetReqData complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateStreetReqData">
  *   &lt;complexContent>
@@ -33,21 +32,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateStreetReqData", propOrder = {
-    "width",
-    "depth",
-    "height",
-    "attribute01",
-    "attribute02",
-    "climate",
-    "door",
-    "access",
-    "features",
-    "newRate"
+        "width",
+        "depth",
+        "height",
+        "attribute01",
+        "attribute02",
+        "climate",
+        "door",
+        "access",
+        "features",
+        "newRate"
 })
 public class UpdateStreetReqData {
 
@@ -74,11 +71,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getWidth() {
         return width;
@@ -86,11 +81,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setWidth(BigDecimal value) {
         this.width = value;
@@ -98,11 +91,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the depth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDepth() {
         return depth;
@@ -110,11 +101,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the depth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDepth(BigDecimal value) {
         this.depth = value;
@@ -122,11 +111,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the height property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getHeight() {
         return height;
@@ -134,11 +121,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the height property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setHeight(BigDecimal value) {
         this.height = value;
@@ -146,11 +131,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the attribute01 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getAttribute01() {
         return attribute01;
@@ -158,11 +141,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the attribute01 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setAttribute01(Integer value) {
         this.attribute01 = value;
@@ -170,11 +151,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the attribute02 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getAttribute02() {
         return attribute02;
@@ -182,11 +161,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the attribute02 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setAttribute02(Integer value) {
         this.attribute02 = value;
@@ -194,11 +171,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the climate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getClimate() {
         return climate;
@@ -206,11 +181,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the climate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setClimate(Integer value) {
         this.climate = value;
@@ -218,11 +191,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the door property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getDoor() {
         return door;
@@ -230,11 +201,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the door property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setDoor(Integer value) {
         this.door = value;
@@ -242,11 +211,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the access property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getAccess() {
         return access;
@@ -254,11 +221,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the access property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setAccess(Integer value) {
         this.access = value;
@@ -266,11 +231,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the features property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Integer }
      */
     public Integer getFeatures() {
         return features;
@@ -278,11 +241,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the features property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setFeatures(Integer value) {
         this.features = value;
@@ -290,11 +251,9 @@ public class UpdateStreetReqData {
 
     /**
      * Gets the value of the newRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getNewRate() {
         return newRate;
@@ -302,11 +261,9 @@ public class UpdateStreetReqData {
 
     /**
      * Sets the value of the newRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setNewRate(BigDecimal value) {
         this.newRate = value;

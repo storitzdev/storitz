@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getGateCodeInfoResult"
+        "getGateCodeInfoResult"
 })
 @XmlRootElement(name = "GetGateCodeInfoResponse")
 public class GetGateCodeInfoResponse {
@@ -39,11 +32,9 @@ public class GetGateCodeInfoResponse {
 
     /**
      * Gets the value of the getGateCodeInfoResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetGateCodeInfoResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetGateCodeInfoResponse2 }
      */
     public GetGateCodeInfoResponse2 getGetGateCodeInfoResult() {
         return getGateCodeInfoResult;
@@ -51,11 +42,9 @@ public class GetGateCodeInfoResponse {
 
     /**
      * Sets the value of the getGateCodeInfoResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetGateCodeInfoResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetGateCodeInfoResponse2 }
      */
     public void setGetGateCodeInfoResult(GetGateCodeInfoResponse2 value) {
         this.getGateCodeInfoResult = value;

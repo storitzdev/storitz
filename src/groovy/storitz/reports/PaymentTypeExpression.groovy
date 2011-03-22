@@ -12,12 +12,12 @@ import ar.com.fdvs.dj.domain.CustomExpression
 class PaymentTypeExpression implements CustomExpression {
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          Boolean netCommission = (Boolean) fields.get("site.netCommission")
-          return netCommission ? "Net" : "Gross"
+    Boolean netCommission = (Boolean) fields.get("site.netCommission")
+    return netCommission ? "Net" : "Gross"
   }
 
   public String getClassName() {
-          return String.class.getName();
+    return String.class.getName();
   }
 
 }

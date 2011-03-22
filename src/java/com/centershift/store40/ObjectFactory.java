@@ -1,22 +1,20 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the com.centershift.store40 package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the com.centershift.store40 package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -24,14 +22,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.centershift.store40
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link CreateAuctionRequest }
-     * 
      */
     public CreateAuctionRequest createCreateAuctionRequest() {
         return new CreateAuctionRequest();
@@ -39,7 +35,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGCHANNELS }
-     * 
      */
     public ArrayOfORGCHANNELS createArrayOfORGCHANNELS() {
         return new ArrayOfORGCHANNELS();
@@ -47,7 +42,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateGatePINRequest }
-     * 
      */
     public UpdateGatePINRequest createUpdateGatePINRequest() {
         return new UpdateGatePINRequest();
@@ -55,7 +49,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRentalInfo }
-     * 
      */
     public AuctionEndRentalInfo createAuctionEndRentalInfo() {
         return new AuctionEndRentalInfo();
@@ -63,7 +56,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLetterInfoRequest }
-     * 
      */
     public GetLetterInfoRequest createGetLetterInfoRequest() {
         return new GetLetterInfoRequest();
@@ -71,7 +63,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccountMultipleResponse }
-     * 
      */
     public SellRetailWithAccountMultipleResponse createSellRetailWithAccountMultipleResponse() {
         return new SellRetailWithAccountMultipleResponse();
@@ -79,7 +70,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusExpandedResponse2 }
-     * 
      */
     public UpdateUnitStatusExpandedResponse2 createUpdateUnitStatusExpandedResponse2() {
         return new UpdateUnitStatusExpandedResponse2();
@@ -87,7 +77,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidMoveInResponse }
-     * 
      */
     public VoidMoveInResponse createVoidMoveInResponse() {
         return new VoidMoveInResponse();
@@ -95,7 +84,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailResponse }
-     * 
      */
     public SendEmailResponse createSendEmailResponse() {
         return new SendEmailResponse();
@@ -103,7 +91,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CompleteUnitTransferResponse2 }
-     * 
      */
     public CompleteUnitTransferResponse2 createCompleteUnitTransferResponse2() {
         return new CompleteUnitTransferResponse2();
@@ -111,7 +98,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateStreetRate }
-     * 
      */
     public UpdateStreetRate createUpdateStreetRate() {
         return new UpdateStreetRate();
@@ -119,7 +105,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransferUnitData }
-     * 
      */
     public TransferUnitData createTransferUnitData() {
         return new TransferUnitData();
@@ -127,7 +112,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailRefundAmountRequest }
-     * 
      */
     public GetRetailRefundAmountRequest createGetRetailRefundAmountRequest() {
         return new GetRetailRefundAmountRequest();
@@ -135,7 +119,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateReservation }
-     * 
      */
     public UpdateReservation createUpdateReservation() {
         return new UpdateReservation();
@@ -143,7 +126,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteDetails }
-     * 
      */
     public GetSiteDetails createGetSiteDetails() {
         return new GetSiteDetails();
@@ -151,7 +133,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewLeaseRequest }
-     * 
      */
     public ViewLeaseRequest createViewLeaseRequest() {
         return new ViewLeaseRequest();
@@ -159,7 +140,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionTaxInfo }
-     * 
      */
     public ArrayOfAuctionTaxInfo createArrayOfAuctionTaxInfo() {
         return new ArrayOfAuctionTaxInfo();
@@ -167,7 +147,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledLetterListResponse }
-     * 
      */
     public GetScheduledLetterListResponse createGetScheduledLetterListResponse() {
         return new GetScheduledLetterListResponse();
@@ -175,7 +154,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAndViewLetter }
-     * 
      */
     public CreateAndViewLetter createCreateAndViewLetter() {
         return new CreateAndViewLetter();
@@ -183,7 +161,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableRetailItemsResponse2 }
-     * 
      */
     public GetAvailableRetailItemsResponse2 createGetAvailableRetailItemsResponse2() {
         return new GetAvailableRetailItemsResponse2();
@@ -191,7 +168,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidMoveIn }
-     * 
      */
     public VoidMoveIn createVoidMoveIn() {
         return new VoidMoveIn();
@@ -199,7 +175,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePaymentRequest }
-     * 
      */
     public MakePaymentRequest createMakePaymentRequest() {
         return new MakePaymentRequest();
@@ -207,7 +182,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidRetailAssessmentResponse }
-     * 
      */
     public VoidRetailAssessmentResponse createVoidRetailAssessmentResponse() {
         return new VoidRetailAssessmentResponse();
@@ -215,7 +189,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link InitiateUnitTransferRequest }
-     * 
      */
     public InitiateUnitTransferRequest createInitiateUnitTransferRequest() {
         return new InitiateUnitTransferRequest();
@@ -223,7 +196,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUResponse }
-     * 
      */
     public FIUResponse createFIUResponse() {
         return new FIUResponse();
@@ -231,7 +203,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccountRequest }
-     * 
      */
     public SellRetailNoAccountRequest createSellRetailNoAccountRequest() {
         return new SellRetailNoAccountRequest();
@@ -239,7 +210,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransferToCommit }
-     * 
      */
     public TransferToCommit createTransferToCommit() {
         return new TransferToCommit();
@@ -247,7 +217,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGAUCTIONOBJS }
-     * 
      */
     public ORGAUCTIONOBJS createORGAUCTIONOBJS() {
         return new ORGAUCTIONOBJS();
@@ -255,7 +224,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetProcessingMailRules }
-     * 
      */
     public GetProcessingMailRules createGetProcessingMailRules() {
         return new GetProcessingMailRules();
@@ -263,7 +231,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CompleteUnitTransferResponse }
-     * 
      */
     public CompleteUnitTransferResponse createCompleteUnitTransferResponse() {
         return new CompleteUnitTransferResponse();
@@ -271,7 +238,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PaymentReceiptBundle }
-     * 
      */
     public PaymentReceiptBundle createPaymentReceiptBundle() {
         return new PaymentReceiptBundle();
@@ -279,7 +245,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessments }
-     * 
      */
     public GetAssessments createGetAssessments() {
         return new GetAssessments();
@@ -287,7 +252,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAGETASSESSMENTS }
-     * 
      */
     public ArrayOfSOAGETASSESSMENTS createArrayOfSOAGETASSESSMENTS() {
         return new ArrayOfSOAGETASSESSMENTS();
@@ -295,7 +259,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfContactAddress }
-     * 
      */
     public ArrayOfContactAddress createArrayOfContactAddress() {
         return new ArrayOfContactAddress();
@@ -303,7 +266,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FrameworkTransaction }
-     * 
      */
     public FrameworkTransaction createFrameworkTransaction() {
         return new FrameworkTransaction();
@@ -311,7 +273,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailContactRequest }
-     * 
      */
     public SendEmailContactRequest createSendEmailContactRequest() {
         return new SendEmailContactRequest();
@@ -319,7 +280,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link QuoteData }
-     * 
      */
     public QuoteData createQuoteData() {
         return new QuoteData();
@@ -327,7 +287,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessManualAutoPayRequest }
-     * 
      */
     public ProcessManualAutoPayRequest createProcessManualAutoPayRequest() {
         return new ProcessManualAutoPayRequest();
@@ -335,7 +294,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMultipleReservationsResponse }
-     * 
      */
     public MakeMultipleReservationsResponse createMakeMultipleReservationsResponse() {
         return new MakeMultipleReservationsResponse();
@@ -343,7 +301,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateSiteTaskRequest }
-     * 
      */
     public CreateSiteTaskRequest createCreateSiteTaskRequest() {
         return new CreateSiteTaskRequest();
@@ -351,7 +308,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateOverlockStatusResponseData }
-     * 
      */
     public UpdateOverlockStatusResponseData createUpdateOverlockStatusResponseData() {
         return new UpdateOverlockStatusResponseData();
@@ -359,7 +315,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailRefundAmountResponse2 }
-     * 
      */
     public GetRetailRefundAmountResponse2 createGetRetailRefundAmountResponse2() {
         return new GetRetailRefundAmountResponse2();
@@ -367,7 +322,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfContactPhone }
-     * 
      */
     public ArrayOfContactPhone createArrayOfContactPhone() {
         return new ArrayOfContactPhone();
@@ -375,7 +329,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CompleteUnitTransferRequest }
-     * 
      */
     public CompleteUnitTransferRequest createCompleteUnitTransferRequest() {
         return new CompleteUnitTransferRequest();
@@ -383,7 +336,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionRentalItemResponseData }
-     * 
      */
     public AuctionRentalItemResponseData createAuctionRentalItemResponseData() {
         return new AuctionRentalItemResponseData();
@@ -391,7 +343,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MiniKeyStatsResponse2 }
-     * 
      */
     public MiniKeyStatsResponse2 createMiniKeyStatsResponse2() {
         return new MiniKeyStatsResponse2();
@@ -399,7 +350,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUpdateUnitStatusExpandedRequestData }
-     * 
      */
     public ArrayOfUpdateUnitStatusExpandedRequestData createArrayOfUpdateUnitStatusExpandedRequestData() {
         return new ArrayOfUpdateUnitStatusExpandedRequestData();
@@ -407,7 +357,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionTax }
-     * 
      */
     public GetAuctionTax createGetAuctionTax() {
         return new GetAuctionTax();
@@ -415,7 +364,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUSelectResponse }
-     * 
      */
     public FIUSelectResponse createFIUSelectResponse() {
         return new FIUSelectResponse();
@@ -423,7 +371,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetDelinqScheduleResponse2 }
-     * 
      */
     public GetDelinqScheduleResponse2 createGetDelinqScheduleResponse2() {
         return new GetDelinqScheduleResponse2();
@@ -431,7 +378,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransferReturn }
-     * 
      */
     public TransferReturn createTransferReturn() {
         return new TransferReturn();
@@ -439,7 +385,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANAUCTIONRENTALS }
-     * 
      */
     public ArrayOfTRANAUCTIONRENTALS createArrayOfTRANAUCTIONRENTALS() {
         return new ArrayOfTRANAUCTIONRENTALS();
@@ -447,7 +392,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecurTaskData }
-     * 
      */
     public RecurTaskData createRecurTaskData() {
         return new RecurTaskData();
@@ -455,7 +399,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGSERVICESITEOFFERINGS }
-     * 
      */
     public ORGSERVICESITEOFFERINGS createORGSERVICESITEOFFERINGS() {
         return new ORGSERVICESITEOFFERINGS();
@@ -463,7 +406,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefunds }
-     * 
      */
     public GetRefunds createGetRefunds() {
         return new GetRefunds();
@@ -471,7 +413,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContacts }
-     * 
      */
     public GetContacts createGetContacts() {
         return new GetContacts();
@@ -479,7 +420,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACTCONTACTSDEC }
-     * 
      */
     public ACTCONTACTSDEC createACTCONTACTSDEC() {
         return new ACTCONTACTSDEC();
@@ -487,7 +427,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PhoneResponse }
-     * 
      */
     public PhoneResponse createPhoneResponse() {
         return new PhoneResponse();
@@ -495,7 +434,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANFIUDATA }
-     * 
      */
     public TRANFIUDATA createTRANFIUDATA() {
         return new TRANFIUDATA();
@@ -503,7 +441,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Item }
-     * 
      */
     public Item createItem() {
         return new Item();
@@ -511,7 +448,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateLeasePeriodResponse2 }
-     * 
      */
     public UpdateLeasePeriodResponse2 createUpdateLeasePeriodResponse2() {
         return new UpdateLeasePeriodResponse2();
@@ -519,7 +455,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateSiteTaskResponse2 }
-     * 
      */
     public CreateSiteTaskResponse2 createCreateSiteTaskResponse2() {
         return new CreateSiteTaskResponse2();
@@ -527,7 +462,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsByIDResponse }
-     * 
      */
     public GetAssessmentsByIDResponse createGetAssessmentsByIDResponse() {
         return new GetAssessmentsByIDResponse();
@@ -535,7 +469,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewAccountResponse }
-     * 
      */
     public CreateNewAccountResponse createCreateNewAccountResponse() {
         return new CreateNewAccountResponse();
@@ -543,7 +476,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedServicesResponse2 }
-     * 
      */
     public GetAppliedServicesResponse2 createGetAppliedServicesResponse2() {
         return new GetAppliedServicesResponse2();
@@ -551,7 +483,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMiscPaymentResponse }
-     * 
      */
     public MakeMiscPaymentResponse createMakeMiscPaymentResponse() {
         return new MakeMiscPaymentResponse();
@@ -559,7 +490,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGCHANNELS }
-     * 
      */
     public ORGCHANNELS createORGCHANNELS() {
         return new ORGCHANNELS();
@@ -567,7 +497,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteTasksRequest }
-     * 
      */
     public GetSiteTasksRequest createGetSiteTasksRequest() {
         return new GetSiteTasksRequest();
@@ -575,7 +504,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyCreditToAssessmentsRequest }
-     * 
      */
     public ApplyCreditToAssessmentsRequest createApplyCreditToAssessmentsRequest() {
         return new ApplyCreditToAssessmentsRequest();
@@ -583,7 +511,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewEcommAccountRequest }
-     * 
      */
     public CreateNewEcommAccountRequest createCreateNewEcommAccountRequest() {
         return new CreateNewEcommAccountRequest();
@@ -591,7 +518,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANQUOTENOTESDETAIL }
-     * 
      */
     public TRANQUOTENOTESDETAIL createTRANQUOTENOTESDETAIL() {
         return new TRANQUOTENOTESDETAIL();
@@ -599,7 +525,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TerminateServiceRequest }
-     * 
      */
     public TerminateServiceRequest createTerminateServiceRequest() {
         return new TerminateServiceRequest();
@@ -607,7 +532,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateInsuranceResponse }
-     * 
      */
     public UpdateInsuranceResponse createUpdateInsuranceResponse() {
         return new UpdateInsuranceResponse();
@@ -615,7 +539,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemovePCDResponse2 }
-     * 
      */
     public RemovePCDResponse2 createRemovePCDResponse2() {
         return new RemovePCDResponse2();
@@ -623,7 +546,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransNewRentalData }
-     * 
      */
     public TransNewRentalData createTransNewRentalData() {
         return new TransNewRentalData();
@@ -631,7 +553,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetProcessingMailRulesResponse }
-     * 
      */
     public GetProcessingMailRulesResponse createGetProcessingMailRulesResponse() {
         return new GetProcessingMailRulesResponse();
@@ -639,7 +560,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddInsuranceResponse2 }
-     * 
      */
     public AddInsuranceResponse2 createAddInsuranceResponse2() {
         return new AddInsuranceResponse2();
@@ -647,7 +567,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddServiceResponse }
-     * 
      */
     public AddServiceResponse createAddServiceResponse() {
         return new AddServiceResponse();
@@ -655,7 +574,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitClimateResponse }
-     * 
      */
     public EUnitClimateResponse createEUnitClimateResponse() {
         return new EUnitClimateResponse();
@@ -663,7 +581,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionEndRentalSummary }
-     * 
      */
     public ArrayOfAuctionEndRentalSummary createArrayOfAuctionEndRentalSummary() {
         return new ArrayOfAuctionEndRentalSummary();
@@ -671,7 +588,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDueResponse2 }
-     * 
      */
     public GetTotalDueResponse2 createGetTotalDueResponse2() {
         return new GetTotalDueResponse2();
@@ -679,7 +595,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEndRentalRulesResponse }
-     * 
      */
     public GetEndRentalRulesResponse createGetEndRentalRulesResponse() {
         return new GetEndRentalRulesResponse();
@@ -687,7 +602,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelInsurance }
-     * 
      */
     public CancelInsurance createCancelInsurance() {
         return new CancelInsurance();
@@ -695,7 +609,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAutoPaySettings }
-     * 
      */
     public GetAutoPaySettings createGetAutoPaySettings() {
         return new GetAutoPaySettings();
@@ -703,7 +616,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEligibleAuctionRentals }
-     * 
      */
     public GetEligibleAuctionRentals createGetEligibleAuctionRentals() {
         return new GetEligibleAuctionRentals();
@@ -711,7 +623,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactResponse }
-     * 
      */
     public ContactResponse createContactResponse() {
         return new ContactResponse();
@@ -719,7 +630,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAPPLACCTCFLEXDATA }
-     * 
      */
     public ArrayOfAPPLACCTCFLEXDATA createArrayOfAPPLACCTCFLEXDATA() {
         return new ArrayOfAPPLACCTCFLEXDATA();
@@ -727,7 +637,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGSITERETAILOBJECTS }
-     * 
      */
     public ORGSITERETAILOBJECTS createORGSITERETAILOBJECTS() {
         return new ORGSITERETAILOBJECTS();
@@ -735,7 +644,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalActivityRequest }
-     * 
      */
     public RentalActivityRequest createRentalActivityRequest() {
         return new RentalActivityRequest();
@@ -743,7 +651,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPartialPayRulesResponse2 }
-     * 
      */
     public GetPartialPayRulesResponse2 createGetPartialPayRulesResponse2() {
         return new GetPartialPayRulesResponse2();
@@ -751,7 +658,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessRefund }
-     * 
      */
     public ProcessRefund createProcessRefund() {
         return new ProcessRefund();
@@ -759,7 +665,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailContact }
-     * 
      */
     public SendEmailContact createSendEmailContact() {
         return new SendEmailContact();
@@ -767,7 +672,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetGateCodeInfoResponse2 }
-     * 
      */
     public GetGateCodeInfoResponse2 createGetGateCodeInfoResponse2() {
         return new GetGateCodeInfoResponse2();
@@ -775,7 +679,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidMoveInResponse2 }
-     * 
      */
     public VoidMoveInResponse2 createVoidMoveInResponse2() {
         return new VoidMoveInResponse2();
@@ -783,7 +686,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PasswordRequest }
-     * 
      */
     public PasswordRequest createPasswordRequest() {
         return new PasswordRequest();
@@ -791,7 +693,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateEcommPasswordResponse2 }
-     * 
      */
     public UpdateEcommPasswordResponse2 createUpdateEcommPasswordResponse2() {
         return new UpdateEcommPasswordResponse2();
@@ -799,7 +700,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMiscPaymentRequest }
-     * 
      */
     public MakeMiscPaymentRequest createMakeMiscPaymentRequest() {
         return new MakeMiscPaymentRequest();
@@ -807,7 +707,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetNotes }
-     * 
      */
     public GetNotes createGetNotes() {
         return new GetNotes();
@@ -815,7 +714,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EntryItem }
-     * 
      */
     public EntryItem createEntryItem() {
         return new EntryItem();
@@ -823,7 +721,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEndRentalRulesRequest }
-     * 
      */
     public GetEndRentalRulesRequest createGetEndRentalRulesRequest() {
         return new GetEndRentalRulesRequest();
@@ -831,7 +728,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitDataRequest }
-     * 
      */
     public GetUnitDataRequest createGetUnitDataRequest() {
         return new GetUnitDataRequest();
@@ -839,7 +735,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTransUnitAssessments }
-     * 
      */
     public ArrayOfTransUnitAssessments createArrayOfTransUnitAssessments() {
         return new ArrayOfTransUnitAssessments();
@@ -847,7 +742,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEcommRentalInfo }
-     * 
      */
     public GetEcommRentalInfo createGetEcommRentalInfo() {
         return new GetEcommRentalInfo();
@@ -855,7 +749,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfMakeReservationResponse }
-     * 
      */
     public ArrayOfMakeReservationResponse createArrayOfMakeReservationResponse() {
         return new ArrayOfMakeReservationResponse();
@@ -863,7 +756,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableCredits }
-     * 
      */
     public GetAvailableCredits createGetAvailableCredits() {
         return new GetAvailableCredits();
@@ -871,7 +763,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalLedgerResponse }
-     * 
      */
     public GetRentalLedgerResponse createGetRentalLedgerResponse() {
         return new GetRentalLedgerResponse();
@@ -879,7 +770,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLetterInfoResponse2 }
-     * 
      */
     public GetLetterInfoResponse2 createGetLetterInfoResponse2() {
         return new GetLetterInfoResponse2();
@@ -887,7 +777,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteUnitDataFilteredResponse }
-     * 
      */
     public GetSiteUnitDataFilteredResponse createGetSiteUnitDataFilteredResponse() {
         return new GetSiteUnitDataFilteredResponse();
@@ -895,7 +784,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitFeaturesRequest }
-     * 
      */
     public GetUnitFeaturesRequest createGetUnitFeaturesRequest() {
         return new GetUnitFeaturesRequest();
@@ -903,7 +791,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMiscRevenueClassData }
-     * 
      */
     public GetMiscRevenueClassData createGetMiscRevenueClassData() {
         return new GetMiscRevenueClassData();
@@ -911,7 +798,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APPLACCTCFLEXDATA }
-     * 
      */
     public APPLACCTCFLEXDATA createAPPLACCTCFLEXDATA() {
         return new APPLACCTCFLEXDATA();
@@ -919,7 +805,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSEARCH }
-     * 
      */
     public ArrayOfSEARCH createArrayOfSEARCH() {
         return new ArrayOfSEARCH();
@@ -927,7 +812,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssessFeeResponse2 }
-     * 
      */
     public AssessFeeResponse2 createAssessFeeResponse2() {
         return new AssessFeeResponse2();
@@ -935,7 +819,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANAUCTIONRENTALS }
-     * 
      */
     public TRANAUCTIONRENTALS createTRANAUCTIONRENTALS() {
         return new TRANAUCTIONRENTALS();
@@ -943,7 +826,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link InitiateUnitTransferResponse }
-     * 
      */
     public InitiateUnitTransferResponse createInitiateUnitTransferResponse() {
         return new InitiateUnitTransferResponse();
@@ -951,7 +833,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionsRequest }
-     * 
      */
     public GetAuctionsRequest createGetAuctionsRequest() {
         return new GetAuctionsRequest();
@@ -959,7 +840,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidRetailAssessmentsResponse }
-     * 
      */
     public VoidRetailAssessmentsResponse createVoidRetailAssessmentsResponse() {
         return new VoidRetailAssessmentsResponse();
@@ -967,7 +847,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddInsuranceResponse }
-     * 
      */
     public AddInsuranceResponse createAddInsuranceResponse() {
         return new AddInsuranceResponse();
@@ -975,7 +854,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APPLBESTPCD }
-     * 
      */
     public APPLBESTPCD createAPPLBESTPCD() {
         return new APPLBESTPCD();
@@ -983,7 +861,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCashCredits }
-     * 
      */
     public GetCashCredits createGetCashCredits() {
         return new GetCashCredits();
@@ -991,7 +868,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UnitInfo }
-     * 
      */
     public UnitInfo createUnitInfo() {
         return new UnitInfo();
@@ -999,7 +875,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VersResAssessBundleResponse }
-     * 
      */
     public VersResAssessBundleResponse createVersResAssessBundleResponse() {
         return new VersResAssessBundleResponse();
@@ -1007,7 +882,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WaiveFeeResponse }
-     * 
      */
     public WaiveFeeResponse createWaiveFeeResponse() {
         return new WaiveFeeResponse();
@@ -1015,7 +889,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitClassResponse }
-     * 
      */
     public EUnitClassResponse createEUnitClassResponse() {
         return new EUnitClassResponse();
@@ -1023,7 +896,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ResetServicesPassword }
-     * 
      */
     public ResetServicesPassword createResetServicesPassword() {
         return new ResetServicesPassword();
@@ -1031,7 +903,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetChannelList }
-     * 
      */
     public GetChannelList createGetChannelList() {
         return new GetChannelList();
@@ -1039,7 +910,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentRateReqData }
-     * 
      */
     public RentRateReqData createRentRateReqData() {
         return new RentRateReqData();
@@ -1047,7 +917,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddService }
-     * 
      */
     public AddService createAddService() {
         return new AddService();
@@ -1055,7 +924,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantLeaseList }
-     * 
      */
     public GetTenantLeaseList createGetTenantLeaseList() {
         return new GetTenantLeaseList();
@@ -1063,7 +931,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link POSTLTRTEMPLATEINFO }
-     * 
      */
     public POSTLTRTEMPLATEINFO createPOSTLTRTEMPLATEINFO() {
         return new POSTLTRTEMPLATEINFO();
@@ -1071,7 +938,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VerifyEcommLoginResponse }
-     * 
      */
     public VerifyEcommLoginResponse createVerifyEcommLoginResponse() {
         return new VerifyEcommLoginResponse();
@@ -1079,7 +945,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailReceiptItemsRequest }
-     * 
      */
     public GetRetailReceiptItemsRequest createGetRetailReceiptItemsRequest() {
         return new GetRetailReceiptItemsRequest();
@@ -1087,7 +952,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CFGLOOKUPS }
-     * 
      */
     public CFGLOOKUPS createCFGLOOKUPS() {
         return new CFGLOOKUPS();
@@ -1095,7 +959,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitClimate }
-     * 
      */
     public EUnitClimate createEUnitClimate() {
         return new EUnitClimate();
@@ -1103,7 +966,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedServicesRequest }
-     * 
      */
     public GetAppliedServicesRequest createGetAppliedServicesRequest() {
         return new GetAppliedServicesRequest();
@@ -1111,7 +973,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetGateCodeInfoResponse }
-     * 
      */
     public GetGateCodeInfoResponse createGetGateCodeInfoResponse() {
         return new GetGateCodeInfoResponse();
@@ -1119,7 +980,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteUnitData }
-     * 
      */
     public GetSiteUnitData createGetSiteUnitData() {
         return new GetSiteUnitData();
@@ -1127,7 +987,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGSITERETAILOBJECTS }
-     * 
      */
     public ArrayOfORGSITERETAILOBJECTS createArrayOfORGSITERETAILOBJECTS() {
         return new ArrayOfORGSITERETAILOBJECTS();
@@ -1135,7 +994,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalRequest }
-     * 
      */
     public UpdateRentalRequest createUpdateRentalRequest() {
         return new UpdateRentalRequest();
@@ -1143,7 +1001,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APPLRENTALOBJECTSDETAIL }
-     * 
      */
     public APPLRENTALOBJECTSDETAIL createAPPLRENTALOBJECTSDETAIL() {
         return new APPLRENTALOBJECTSDETAIL();
@@ -1151,7 +1008,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RollbackUnitTransferRequest }
-     * 
      */
     public RollbackUnitTransferRequest createRollbackUnitTransferRequest() {
         return new RollbackUnitTransferRequest();
@@ -1159,7 +1015,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailMultipleResponse }
-     * 
      */
     public SellRetailMultipleResponse createSellRetailMultipleResponse() {
         return new SellRetailMultipleResponse();
@@ -1167,7 +1022,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ResetServicesPasswordResponse }
-     * 
      */
     public ResetServicesPasswordResponse createResetServicesPasswordResponse() {
         return new ResetServicesPasswordResponse();
@@ -1175,7 +1029,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExportInsuranceDetail }
-     * 
      */
     public ExportInsuranceDetail createExportInsuranceDetail() {
         return new ExportInsuranceDetail();
@@ -1183,7 +1036,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPOSTLEASETEMPLATEINFO }
-     * 
      */
     public ArrayOfPOSTLEASETEMPLATEINFO createArrayOfPOSTLEASETEMPLATEINFO() {
         return new ArrayOfPOSTLEASETEMPLATEINFO();
@@ -1191,7 +1043,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUReInt }
-     * 
      */
     public FIUReInt createFIUReInt() {
         return new FIUReInt();
@@ -1199,7 +1050,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SearchByRequest }
-     * 
      */
     public SearchByRequest createSearchByRequest() {
         return new SearchByRequest();
@@ -1207,7 +1057,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmail }
-     * 
      */
     public SendEmail createSendEmail() {
         return new SendEmail();
@@ -1215,7 +1064,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDepositsRequest }
-     * 
      */
     public GetAvailableDepositsRequest createGetAvailableDepositsRequest() {
         return new GetAvailableDepositsRequest();
@@ -1223,7 +1071,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPartialPayRules }
-     * 
      */
     public GetPartialPayRules createGetPartialPayRules() {
         return new GetPartialPayRules();
@@ -1231,7 +1078,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccountResponse2 }
-     * 
      */
     public SellRetailWithAccountResponse2 createSellRetailWithAccountResponse2() {
         return new SellRetailWithAccountResponse2();
@@ -1239,7 +1085,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAccount }
-     * 
      */
     public UpdateAccount createUpdateAccount() {
         return new UpdateAccount();
@@ -1247,7 +1092,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccountMultipleRequest }
-     * 
      */
     public SellRetailNoAccountMultipleRequest createSellRetailNoAccountMultipleRequest() {
         return new SellRetailNoAccountMultipleRequest();
@@ -1255,7 +1099,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APACHData }
-     * 
      */
     public APACHData createAPACHData() {
         return new APACHData();
@@ -1263,7 +1106,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatus }
-     * 
      */
     public UpdateUnitStatus createUpdateUnitStatus() {
         return new UpdateUnitStatus();
@@ -1271,7 +1113,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableRetailItems }
-     * 
      */
     public GetAvailableRetailItems createGetAvailableRetailItems() {
         return new GetAvailableRetailItems();
@@ -1279,7 +1120,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EInquirySourceResponse }
-     * 
      */
     public EInquirySourceResponse createEInquirySourceResponse() {
         return new EInquirySourceResponse();
@@ -1287,7 +1127,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdatePCDResponse }
-     * 
      */
     public AddUpdatePCDResponse createAddUpdatePCDResponse() {
         return new AddUpdatePCDResponse();
@@ -1295,7 +1134,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateEcommPassword }
-     * 
      */
     public UpdateEcommPassword createUpdateEcommPassword() {
         return new UpdateEcommPassword();
@@ -1303,7 +1141,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGINSSITEOFFERINGS }
-     * 
      */
     public ArrayOfORGINSSITEOFFERINGS createArrayOfORGINSSITEOFFERINGS() {
         return new ArrayOfORGINSSITEOFFERINGS();
@@ -1311,7 +1148,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAGETSITETASKS }
-     * 
      */
     public ArrayOfSOAGETSITETASKS createArrayOfSOAGETSITETASKS() {
         return new ArrayOfSOAGETSITETASKS();
@@ -1319,7 +1155,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAutoPaySettingsResponse2 }
-     * 
      */
     public GetAutoPaySettingsResponse2 createGetAutoPaySettingsResponse2() {
         return new GetAutoPaySettingsResponse2();
@@ -1327,7 +1162,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGRETAILITEMS }
-     * 
      */
     public ORGRETAILITEMS createORGRETAILITEMS() {
         return new ORGRETAILITEMS();
@@ -1335,7 +1169,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfLong4 }
-     * 
      */
     public ArrayOfLong4 createArrayOfLong4() {
         return new ArrayOfLong4();
@@ -1343,7 +1176,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Organization }
-     * 
      */
     public Organization createOrganization() {
         return new Organization();
@@ -1351,7 +1183,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionRentalItemResponseData }
-     * 
      */
     public ArrayOfAuctionRentalItemResponseData createArrayOfAuctionRentalItemResponseData() {
         return new ArrayOfAuctionRentalItemResponseData();
@@ -1359,7 +1190,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WalkThruListRequest }
-     * 
      */
     public WalkThruListRequest createWalkThruListRequest() {
         return new WalkThruListRequest();
@@ -1367,7 +1197,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRentRateReqData }
-     * 
      */
     public ArrayOfRentRateReqData createArrayOfRentRateReqData() {
         return new ArrayOfRentRateReqData();
@@ -1375,7 +1204,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteListResponse }
-     * 
      */
     public GetSiteListResponse createGetSiteListResponse() {
         return new GetSiteListResponse();
@@ -1383,7 +1211,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WaiveFeeResponse2 }
-     * 
      */
     public WaiveFeeResponse2 createWaiveFeeResponse2() {
         return new WaiveFeeResponse2();
@@ -1391,7 +1218,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyPCDsRequest }
-     * 
      */
     public ApplyPCDsRequest createApplyPCDsRequest() {
         return new ApplyPCDsRequest();
@@ -1399,7 +1225,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalLedgerResponse2 }
-     * 
      */
     public GetRentalLedgerResponse2 createGetRentalLedgerResponse2() {
         return new GetRentalLedgerResponse2();
@@ -1407,7 +1232,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANQUOTEPCDDETAIL }
-     * 
      */
     public ArrayOfTRANQUOTEPCDDETAIL createArrayOfTRANQUOTEPCDDETAIL() {
         return new ArrayOfTRANQUOTEPCDDETAIL();
@@ -1415,7 +1239,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRulesResponse }
-     * 
      */
     public GetRulesResponse createGetRulesResponse() {
         return new GetRulesResponse();
@@ -1423,7 +1246,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewLetterPdf }
-     * 
      */
     public ViewLetterPdf createViewLetterPdf() {
         return new ViewLetterPdf();
@@ -1431,7 +1253,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalActivityResponse }
-     * 
      */
     public RentalActivityResponse createRentalActivityResponse() {
         return new RentalActivityResponse();
@@ -1439,7 +1260,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link BulkPricing }
-     * 
      */
     public BulkPricing createBulkPricing() {
         return new BulkPricing();
@@ -1447,7 +1267,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteListRequest }
-     * 
      */
     public GetSiteListRequest createGetSiteListRequest() {
         return new GetSiteListRequest();
@@ -1455,7 +1274,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PasswordResponse }
-     * 
      */
     public PasswordResponse createPasswordResponse() {
         return new PasswordResponse();
@@ -1463,7 +1281,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledLetterListResponse2 }
-     * 
      */
     public GetScheduledLetterListResponse2 createGetScheduledLetterListResponse2() {
         return new GetScheduledLetterListResponse2();
@@ -1471,7 +1288,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetDelinqSchedule }
-     * 
      */
     public GetDelinqSchedule createGetDelinqSchedule() {
         return new GetDelinqSchedule();
@@ -1479,7 +1295,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionsResponse2 }
-     * 
      */
     public GetAuctionsResponse2 createGetAuctionsResponse2() {
         return new GetAuctionsResponse2();
@@ -1487,7 +1302,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusExpanded }
-     * 
      */
     public UpdateUnitStatusExpanded createUpdateUnitStatusExpanded() {
         return new UpdateUnitStatusExpanded();
@@ -1495,7 +1309,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetQuoteData }
-     * 
      */
     public GetQuoteData createGetQuoteData() {
         return new GetQuoteData();
@@ -1503,7 +1316,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactAddresses }
-     * 
      */
     public GetContactAddresses createGetContactAddresses() {
         return new GetContactAddresses();
@@ -1511,7 +1323,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNotes }
-     * 
      */
     public CreateNotes createCreateNotes() {
         return new CreateNotes();
@@ -1519,7 +1330,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceProvidersRequest }
-     * 
      */
     public GetInsuranceProvidersRequest createGetInsuranceProvidersRequest() {
         return new GetInsuranceProvidersRequest();
@@ -1527,7 +1337,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidTransactionResponse }
-     * 
      */
     public VoidTransactionResponse createVoidTransactionResponse() {
         return new VoidTransactionResponse();
@@ -1535,7 +1344,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RollbackUnitTransferResponse }
-     * 
      */
     public RollbackUnitTransferResponse createRollbackUnitTransferResponse() {
         return new RollbackUnitTransferResponse();
@@ -1543,7 +1351,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfDaysOfWeek }
-     * 
      */
     public ArrayOfDaysOfWeek createArrayOfDaysOfWeek() {
         return new ArrayOfDaysOfWeek();
@@ -1551,7 +1358,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionRentalItemData }
-     * 
      */
     public ArrayOfAuctionRentalItemData createArrayOfAuctionRentalItemData() {
         return new ArrayOfAuctionRentalItemData();
@@ -1559,7 +1365,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetDelinqScheduleRequest }
-     * 
      */
     public GetDelinqScheduleRequest createGetDelinqScheduleRequest() {
         return new GetDelinqScheduleRequest();
@@ -1567,7 +1372,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MoveOutSummary }
-     * 
      */
     public MoveOutSummary createMoveOutSummary() {
         return new MoveOutSummary();
@@ -1575,7 +1379,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantDocListRequest }
-     * 
      */
     public GetTenantDocListRequest createGetTenantDocListRequest() {
         return new GetTenantDocListRequest();
@@ -1583,7 +1386,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddMultipleServiceRequest }
-     * 
      */
     public AddMultipleServiceRequest createAddMultipleServiceRequest() {
         return new AddMultipleServiceRequest();
@@ -1591,7 +1393,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccountMultiple }
-     * 
      */
     public SellRetailNoAccountMultiple createSellRetailNoAccountMultiple() {
         return new SellRetailNoAccountMultiple();
@@ -1599,7 +1400,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewAccountRequest }
-     * 
      */
     public CreateNewAccountRequest createCreateNewAccountRequest() {
         return new CreateNewAccountRequest();
@@ -1607,7 +1407,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactAddress }
-     * 
      */
     public ContactAddress createContactAddress() {
         return new ContactAddress();
@@ -1615,7 +1414,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPrimaryRentalInfo }
-     * 
      */
     public GetPrimaryRentalInfo createGetPrimaryRentalInfo() {
         return new GetPrimaryRentalInfo();
@@ -1623,7 +1421,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfCFGLOOKUPS }
-     * 
      */
     public ArrayOfCFGLOOKUPS createArrayOfCFGLOOKUPS() {
         return new ArrayOfCFGLOOKUPS();
@@ -1631,7 +1428,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateStreetRateResponse2 }
-     * 
      */
     public UpdateStreetRateResponse2 createUpdateStreetRateResponse2() {
         return new UpdateStreetRateResponse2();
@@ -1639,7 +1435,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateLetterResponse }
-     * 
      */
     public CreateLetterResponse createCreateLetterResponse() {
         return new CreateLetterResponse();
@@ -1647,7 +1442,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DAILYINSDETAILS }
-     * 
      */
     public DAILYINSDETAILS createDAILYINSDETAILS() {
         return new DAILYINSDETAILS();
@@ -1655,7 +1449,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RollbackUnitTransfer }
-     * 
      */
     public RollbackUnitTransfer createRollbackUnitTransfer() {
         return new RollbackUnitTransfer();
@@ -1663,7 +1456,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDiscounts }
-     * 
      */
     public GetAvailableDiscounts createGetAvailableDiscounts() {
         return new GetAvailableDiscounts();
@@ -1671,7 +1463,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactsResponse2 }
-     * 
      */
     public GetContactsResponse2 createGetContactsResponse2() {
         return new GetContactsResponse2();
@@ -1679,7 +1470,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitDataResponse }
-     * 
      */
     public GetUnitDataResponse createGetUnitDataResponse() {
         return new GetUnitDataResponse();
@@ -1687,7 +1477,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSiteRuleData }
-     * 
      */
     public ArrayOfSiteRuleData createArrayOfSiteRuleData() {
         return new ArrayOfSiteRuleData();
@@ -1695,7 +1484,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOASITEATTRIBUTES }
-     * 
      */
     public ArrayOfSOASITEATTRIBUTES createArrayOfSOASITEATTRIBUTES() {
         return new ArrayOfSOASITEATTRIBUTES();
@@ -1703,7 +1491,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateOverlockStatusRequest }
-     * 
      */
     public UpdateOverlockStatusRequest createUpdateOverlockStatusRequest() {
         return new UpdateOverlockStatusRequest();
@@ -1711,7 +1498,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidFeeRequest }
-     * 
      */
     public VoidFeeRequest createVoidFeeRequest() {
         return new VoidFeeRequest();
@@ -1719,7 +1505,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateAutoPaySettings }
-     * 
      */
     public AddUpdateAutoPaySettings createAddUpdateAutoPaySettings() {
         return new AddUpdateAutoPaySettings();
@@ -1727,7 +1512,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableServices }
-     * 
      */
     public GetAvailableServices createGetAvailableServices() {
         return new GetAvailableServices();
@@ -1735,7 +1519,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUpdateOverlockStatusResponseData }
-     * 
      */
     public ArrayOfUpdateOverlockStatusResponseData createArrayOfUpdateOverlockStatusResponseData() {
         return new ArrayOfUpdateOverlockStatusResponseData();
@@ -1743,7 +1526,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddNewContact }
-     * 
      */
     public AddNewContact createAddNewContact() {
         return new AddNewContact();
@@ -1751,7 +1533,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRefund }
-     * 
      */
     public ArrayOfRefund createArrayOfRefund() {
         return new ArrayOfRefund();
@@ -1759,7 +1540,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactInfo }
-     * 
      */
     public ContactInfo createContactInfo() {
         return new ContactInfo();
@@ -1767,7 +1547,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePaymentByAssessment }
-     * 
      */
     public MakePaymentByAssessment createMakePaymentByAssessment() {
         return new MakePaymentByAssessment();
@@ -1775,7 +1554,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMiscRevenueClassDataRequest }
-     * 
      */
     public GetMiscRevenueClassDataRequest createGetMiscRevenueClassDataRequest() {
         return new GetMiscRevenueClassDataRequest();
@@ -1783,7 +1561,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccountMultiple }
-     * 
      */
     public SellRetailWithAccountMultiple createSellRetailWithAccountMultiple() {
         return new SellRetailWithAccountMultiple();
@@ -1791,7 +1568,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransOldRentalData }
-     * 
      */
     public TransOldRentalData createTransOldRentalData() {
         return new TransOldRentalData();
@@ -1799,7 +1575,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetBaseFeesResponse2 }
-     * 
      */
     public GetBaseFeesResponse2 createGetBaseFeesResponse2() {
         return new GetBaseFeesResponse2();
@@ -1807,7 +1582,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SWSLOGIN }
-     * 
      */
     public SWSLOGIN createSWSLOGIN() {
         return new SWSLOGIN();
@@ -1815,7 +1589,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteRulesResponse }
-     * 
      */
     public GetSiteRulesResponse createGetSiteRulesResponse() {
         return new GetSiteRulesResponse();
@@ -1823,7 +1596,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link POSTLEASETNTINFO }
-     * 
      */
     public POSTLEASETNTINFO createPOSTLEASETNTINFO() {
         return new POSTLEASETNTINFO();
@@ -1831,7 +1603,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SiteRuleData }
-     * 
      */
     public SiteRuleData createSiteRuleData() {
         return new SiteRuleData();
@@ -1839,7 +1610,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactAddressesResponse2 }
-     * 
      */
     public GetContactAddressesResponse2 createGetContactAddressesResponse2() {
         return new GetContactAddressesResponse2();
@@ -1847,7 +1617,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRefundTypes }
-     * 
      */
     public ArrayOfRefundTypes createArrayOfRefundTypes() {
         return new ArrayOfRefundTypes();
@@ -1855,7 +1624,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ResetServicesPasswordRequest }
-     * 
      */
     public ResetServicesPasswordRequest createResetServicesPasswordRequest() {
         return new ResetServicesPasswordRequest();
@@ -1863,7 +1631,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessRefundResponse2 }
-     * 
      */
     public ProcessRefundResponse2 createProcessRefundResponse2() {
         return new ProcessRefundResponse2();
@@ -1871,7 +1638,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelInsuranceBundle }
-     * 
      */
     public CancelInsuranceBundle createCancelInsuranceBundle() {
         return new CancelInsuranceBundle();
@@ -1879,7 +1645,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailReceiptItems }
-     * 
      */
     public GetRetailReceiptItems createGetRetailReceiptItems() {
         return new GetRetailReceiptItems();
@@ -1887,7 +1652,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceInfoResponse2 }
-     * 
      */
     public GetInsuranceInfoResponse2 createGetInsuranceInfoResponse2() {
         return new GetInsuranceInfoResponse2();
@@ -1895,7 +1659,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddMultipleServicesResponse2 }
-     * 
      */
     public AddMultipleServicesResponse2 createAddMultipleServicesResponse2() {
         return new AddMultipleServicesResponse2();
@@ -1903,7 +1666,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSWSGETRENTALINFO }
-     * 
      */
     public ArrayOfSWSGETRENTALINFO createArrayOfSWSGETRENTALINFO() {
         return new ArrayOfSWSGETRENTALINFO();
@@ -1911,7 +1673,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeEcommReservationRequest }
-     * 
      */
     public MakeEcommReservationRequest createMakeEcommReservationRequest() {
         return new MakeEcommReservationRequest();
@@ -1919,7 +1680,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessRefundRequest }
-     * 
      */
     public ProcessRefundRequest createProcessRefundRequest() {
         return new ProcessRefundRequest();
@@ -1927,7 +1687,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RetrievePasswordResponse }
-     * 
      */
     public RetrievePasswordResponse createRetrievePasswordResponse() {
         return new RetrievePasswordResponse();
@@ -1935,7 +1694,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDueRequest }
-     * 
      */
     public GetTotalDueRequest createGetTotalDueRequest() {
         return new GetTotalDueRequest();
@@ -1943,7 +1701,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddNewContactResponse }
-     * 
      */
     public AddNewContactResponse createAddNewContactResponse() {
         return new AddNewContactResponse();
@@ -1951,7 +1708,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExportRefundsResponse }
-     * 
      */
     public ExportRefundsResponse createExportRefundsResponse() {
         return new ExportRefundsResponse();
@@ -1959,7 +1715,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentRateResponse2 }
-     * 
      */
     public UpdateRentRateResponse2 createUpdateRentRateResponse2() {
         return new UpdateRentRateResponse2();
@@ -1967,7 +1722,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANAUCTIONSETUP }
-     * 
      */
     public TRANAUCTIONSETUP createTRANAUCTIONSETUP() {
         return new TRANAUCTIONSETUP();
@@ -1975,7 +1729,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link StructCreateAccount }
-     * 
      */
     public StructCreateAccount createStructCreateAccount() {
         return new StructCreateAccount();
@@ -1983,7 +1736,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link POSTLTRTNTINFO }
-     * 
      */
     public POSTLTRTNTINFO createPOSTLTRTNTINFO() {
         return new POSTLTRTNTINFO();
@@ -1991,7 +1743,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceProviders }
-     * 
      */
     public GetInsuranceProviders createGetInsuranceProviders() {
         return new GetInsuranceProviders();
@@ -1999,7 +1750,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeEcommReservation }
-     * 
      */
     public MakeEcommReservation createMakeEcommReservation() {
         return new MakeEcommReservation();
@@ -2007,7 +1757,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAGETGATEINFO }
-     * 
      */
     public SOAGETGATEINFO createSOAGETGATEINFO() {
         return new SOAGETGATEINFO();
@@ -2015,7 +1764,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfLong3 }
-     * 
      */
     public ArrayOfLong3 createArrayOfLong3() {
         return new ArrayOfLong3();
@@ -2023,7 +1771,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReceiptRulesResponse }
-     * 
      */
     public GetReceiptRulesResponse createGetReceiptRulesResponse() {
         return new GetReceiptRulesResponse();
@@ -2031,7 +1778,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssessFeeRequest }
-     * 
      */
     public AssessFeeRequest createAssessFeeRequest() {
         return new AssessFeeRequest();
@@ -2039,7 +1785,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLetterTemplateInfo }
-     * 
      */
     public GetLetterTemplateInfo createGetLetterTemplateInfo() {
         return new GetLetterTemplateInfo();
@@ -2047,7 +1792,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APCreditCardData }
-     * 
      */
     public APCreditCardData createAPCreditCardData() {
         return new APCreditCardData();
@@ -2055,7 +1799,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRentalRequest }
-     * 
      */
     public AuctionEndRentalRequest createAuctionEndRentalRequest() {
         return new AuctionEndRentalRequest();
@@ -2063,7 +1806,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccountResponse2 }
-     * 
      */
     public SellRetailNoAccountResponse2 createSellRetailNoAccountResponse2() {
         return new SellRetailNoAccountResponse2();
@@ -2071,7 +1813,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EndRental }
-     * 
      */
     public EndRental createEndRental() {
         return new EndRental();
@@ -2079,7 +1820,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateAutoPaySettingsRequest }
-     * 
      */
     public AddUpdateAutoPaySettingsRequest createAddUpdateAutoPaySettingsRequest() {
         return new AddUpdateAutoPaySettingsRequest();
@@ -2087,7 +1827,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationCashCreditResponse2 }
-     * 
      */
     public CancelReservationCashCreditResponse2 createCancelReservationCashCreditResponse2() {
         return new CancelReservationCashCreditResponse2();
@@ -2095,7 +1834,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetNotesResponse2 }
-     * 
      */
     public GetNotesResponse2 createGetNotesResponse2() {
         return new GetNotesResponse2();
@@ -2103,7 +1841,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAUNITFEATURES }
-     * 
      */
     public SOAUNITFEATURES createSOAUNITFEATURES() {
         return new SOAUNITFEATURES();
@@ -2111,7 +1848,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailRefundAmount }
-     * 
      */
     public GetRetailRefundAmount createGetRetailRefundAmount() {
         return new GetRetailRefundAmount();
@@ -2119,7 +1855,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetQuoteDataRequest }
-     * 
      */
     public GetQuoteDataRequest createGetQuoteDataRequest() {
         return new GetQuoteDataRequest();
@@ -2127,7 +1862,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TenantData }
-     * 
      */
     public TenantData createTenantData() {
         return new TenantData();
@@ -2135,7 +1869,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedInsuranceResponse2 }
-     * 
      */
     public GetAppliedInsuranceResponse2 createGetAppliedInsuranceResponse2() {
         return new GetAppliedInsuranceResponse2();
@@ -2143,7 +1876,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedServicesResponse }
-     * 
      */
     public GetAppliedServicesResponse createGetAppliedServicesResponse() {
         return new GetAppliedServicesResponse();
@@ -2151,7 +1883,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddRentalsToAuctionRequest }
-     * 
      */
     public AddRentalsToAuctionRequest createAddRentalsToAuctionRequest() {
         return new AddRentalsToAuctionRequest();
@@ -2159,7 +1890,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReservationsResponse }
-     * 
      */
     public GetReservationsResponse createGetReservationsResponse() {
         return new GetReservationsResponse();
@@ -2167,7 +1897,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateSiteTask }
-     * 
      */
     public CreateSiteTask createCreateSiteTask() {
         return new CreateSiteTask();
@@ -2175,7 +1904,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CheckData }
-     * 
      */
     public CheckData createCheckData() {
         return new CheckData();
@@ -2183,7 +1911,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AVAILSITERETAILITEMS }
-     * 
      */
     public AVAILSITERETAILITEMS createAVAILSITERETAILITEMS() {
         return new AVAILSITERETAILITEMS();
@@ -2191,7 +1918,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SWSGETRENTALINFO }
-     * 
      */
     public SWSGETRENTALINFO createSWSGETRENTALINFO() {
         return new SWSGETRENTALINFO();
@@ -2199,7 +1925,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReassignRentalResponse2 }
-     * 
      */
     public ReassignRentalResponse2 createReassignRentalResponse2() {
         return new ReassignRentalResponse2();
@@ -2207,7 +1932,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionRentalsResponse2 }
-     * 
      */
     public GetAuctionRentalsResponse2 createGetAuctionRentalsResponse2() {
         return new GetAuctionRentalsResponse2();
@@ -2215,7 +1939,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfEXRFinData }
-     * 
      */
     public ArrayOfEXRFinData createArrayOfEXRFinData() {
         return new ArrayOfEXRFinData();
@@ -2223,7 +1946,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseGroupTemplateInfoResponse }
-     * 
      */
     public GetLeaseGroupTemplateInfoResponse createGetLeaseGroupTemplateInfoResponse() {
         return new GetLeaseGroupTemplateInfoResponse();
@@ -2231,7 +1953,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewReceiptPdf }
-     * 
      */
     public ViewReceiptPdf createViewReceiptPdf() {
         return new ViewReceiptPdf();
@@ -2239,7 +1960,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAPPLORGFLEXFIELDS }
-     * 
      */
     public ArrayOfAPPLORGFLEXFIELDS createArrayOfAPPLORGFLEXFIELDS() {
         return new ArrayOfAPPLORGFLEXFIELDS();
@@ -2247,7 +1967,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteTasksResponse2 }
-     * 
      */
     public GetSiteTasksResponse2 createGetSiteTasksResponse2() {
         return new GetSiteTasksResponse2();
@@ -2255,7 +1974,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SiteUnitData }
-     * 
      */
     public SiteUnitData createSiteUnitData() {
         return new SiteUnitData();
@@ -2263,7 +1981,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEndRentalRules }
-     * 
      */
     public GetEndRentalRules createGetEndRentalRules() {
         return new GetEndRentalRules();
@@ -2271,7 +1988,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReceiptTemplateInfo }
-     * 
      */
     public GetReceiptTemplateInfo createGetReceiptTemplateInfo() {
         return new GetReceiptTemplateInfo();
@@ -2279,7 +1995,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitStatus }
-     * 
      */
     public EUnitStatus createEUnitStatus() {
         return new EUnitStatus();
@@ -2287,7 +2002,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseTemplateInfoRequest }
-     * 
      */
     public GetLeaseTemplateInfoRequest createGetLeaseTemplateInfoRequest() {
         return new GetLeaseTemplateInfoRequest();
@@ -2295,7 +2009,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACCTLETTERS }
-     * 
      */
     public ACCTLETTERS createACCTLETTERS() {
         return new ACCTLETTERS();
@@ -2303,7 +2016,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VerifyEcommLogin }
-     * 
      */
     public VerifyEcommLogin createVerifyEcommLogin() {
         return new VerifyEcommLogin();
@@ -2311,7 +2023,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitData }
-     * 
      */
     public GetUnitData createGetUnitData() {
         return new GetUnitData();
@@ -2319,7 +2030,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemoveRentalFromAuctionResponse }
-     * 
      */
     public RemoveRentalFromAuctionResponse createRemoveRentalFromAuctionResponse() {
         return new RemoveRentalFromAuctionResponse();
@@ -2327,7 +2037,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUnitInfo }
-     * 
      */
     public ArrayOfUnitInfo createArrayOfUnitInfo() {
         return new ArrayOfUnitInfo();
@@ -2335,7 +2044,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteListResponse2 }
-     * 
      */
     public GetSiteListResponse2 createGetSiteListResponse2() {
         return new GetSiteListResponse2();
@@ -2343,7 +2051,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyPCDsResponse }
-     * 
      */
     public ApplyPCDsResponse createApplyPCDsResponse() {
         return new ApplyPCDsResponse();
@@ -2351,7 +2058,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsRequest }
-     * 
      */
     public GetAssessmentsRequest createGetAssessmentsRequest() {
         return new GetAssessmentsRequest();
@@ -2359,7 +2065,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyCreditToAssessmentsResponse2 }
-     * 
      */
     public ApplyCreditToAssessmentsResponse2 createApplyCreditToAssessmentsResponse2() {
         return new ApplyCreditToAssessmentsResponse2();
@@ -2367,7 +2072,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link POSTLEASETEMPLATEINFO }
-     * 
      */
     public POSTLEASETEMPLATEINFO createPOSTLEASETEMPLATEINFO() {
         return new POSTLEASETEMPLATEINFO();
@@ -2375,7 +2079,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateOverlockStatusResponse }
-     * 
      */
     public UpdateOverlockStatusResponse createUpdateOverlockStatusResponse() {
         return new UpdateOverlockStatusResponse();
@@ -2383,7 +2086,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewReceiptPdfResponse }
-     * 
      */
     public ViewReceiptPdfResponse createViewReceiptPdfResponse() {
         return new ViewReceiptPdfResponse();
@@ -2391,7 +2093,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExportInsuranceDetailRequest }
-     * 
      */
     public ExportInsuranceDetailRequest createExportInsuranceDetailRequest() {
         return new ExportInsuranceDetailRequest();
@@ -2399,7 +2100,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessResult }
-     * 
      */
     public ProcessResult createProcessResult() {
         return new ProcessResult();
@@ -2407,7 +2107,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReservationsResponse2 }
-     * 
      */
     public GetReservationsResponse2 createGetReservationsResponse2() {
         return new GetReservationsResponse2();
@@ -2415,7 +2114,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfGetRefundTypesResponseData }
-     * 
      */
     public ArrayOfGetRefundTypesResponseData createArrayOfGetRefundTypesResponseData() {
         return new ArrayOfGetRefundTypesResponseData();
@@ -2423,7 +2121,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitStatusRequest }
-     * 
      */
     public GetUnitStatusRequest createGetUnitStatusRequest() {
         return new GetUnitStatusRequest();
@@ -2431,7 +2128,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddDepositResponse }
-     * 
      */
     public AddDepositResponse createAddDepositResponse() {
         return new AddDepositResponse();
@@ -2439,7 +2135,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANAUCTIONSETUP }
-     * 
      */
     public ArrayOfTRANAUCTIONSETUP createArrayOfTRANAUCTIONSETUP() {
         return new ArrayOfTRANAUCTIONSETUP();
@@ -2447,7 +2142,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailWithUnitRequest }
-     * 
      */
     public SendEmailWithUnitRequest createSendEmailWithUnitRequest() {
         return new SendEmailWithUnitRequest();
@@ -2455,7 +2149,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteRuleValueResponse2 }
-     * 
      */
     public GetSiteRuleValueResponse2 createGetSiteRuleValueResponse2() {
         return new GetSiteRuleValueResponse2();
@@ -2463,7 +2156,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRentalInfo }
-     * 
      */
     public ArrayOfRentalInfo createArrayOfRentalInfo() {
         return new ArrayOfRentalInfo();
@@ -2471,7 +2163,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccount }
-     * 
      */
     public SellRetailWithAccount createSellRetailWithAccount() {
         return new SellRetailWithAccount();
@@ -2479,7 +2170,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAccountResponse2 }
-     * 
      */
     public UpdateAccountResponse2 createUpdateAccountResponse2() {
         return new UpdateAccountResponse2();
@@ -2487,7 +2177,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RollbackUnitTransferResponse2 }
-     * 
      */
     public RollbackUnitTransferResponse2 createRollbackUnitTransferResponse2() {
         return new RollbackUnitTransferResponse2();
@@ -2495,7 +2184,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUExport }
-     * 
      */
     public FIUExport createFIUExport() {
         return new FIUExport();
@@ -2503,7 +2191,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Address }
-     * 
      */
     public Address createAddress() {
         return new Address();
@@ -2511,7 +2198,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundsResponse }
-     * 
      */
     public GetRefundsResponse createGetRefundsResponse() {
         return new GetRefundsResponse();
@@ -2519,7 +2205,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfMultiRetailSalesResults }
-     * 
      */
     public ArrayOfMultiRetailSalesResults createArrayOfMultiRetailSalesResults() {
         return new ArrayOfMultiRetailSalesResults();
@@ -2527,7 +2212,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAssessInfo }
-     * 
      */
     public ArrayOfAssessInfo createArrayOfAssessInfo() {
         return new ArrayOfAssessInfo();
@@ -2535,7 +2219,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExportInsuranceDetailResponse2 }
-     * 
      */
     public ExportInsuranceDetailResponse2 createExportInsuranceDetailResponse2() {
         return new ExportInsuranceDetailResponse2();
@@ -2543,7 +2226,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfLong1 }
-     * 
      */
     public ArrayOfLong1 createArrayOfLong1() {
         return new ArrayOfLong1();
@@ -2551,7 +2233,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuctionEndRental }
-     * 
      */
     public CreateAuctionEndRental createCreateAuctionEndRental() {
         return new CreateAuctionEndRental();
@@ -2559,7 +2240,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfGetRefundTypesRequestData }
-     * 
      */
     public ArrayOfGetRefundTypesRequestData createArrayOfGetRefundTypesRequestData() {
         return new ArrayOfGetRefundTypesRequestData();
@@ -2567,7 +2247,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGRETAILPODETAIL }
-     * 
      */
     public ArrayOfORGRETAILPODETAIL createArrayOfORGRETAILPODETAIL() {
         return new ArrayOfORGRETAILPODETAIL();
@@ -2575,7 +2254,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteAttributes }
-     * 
      */
     public GetSiteAttributes createGetSiteAttributes() {
         return new GetSiteAttributes();
@@ -2583,7 +2261,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ScheduledLetterResponse2 }
-     * 
      */
     public ScheduledLetterResponse2 createScheduledLetterResponse2() {
         return new ScheduledLetterResponse2();
@@ -2591,7 +2268,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ScheduledLetterRequest }
-     * 
      */
     public ScheduledLetterRequest createScheduledLetterRequest() {
         return new ScheduledLetterRequest();
@@ -2599,7 +2275,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactPhoneNumbersResponse }
-     * 
      */
     public GetContactPhoneNumbersResponse createGetContactPhoneNumbersResponse() {
         return new GetContactPhoneNumbersResponse();
@@ -2607,7 +2282,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateStreetRateResponse }
-     * 
      */
     public UpdateStreetRateResponse createUpdateStreetRateResponse() {
         return new UpdateStreetRateResponse();
@@ -2615,7 +2289,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddRentalToAuctionResponse }
-     * 
      */
     public AddRentalToAuctionResponse createAddRentalToAuctionResponse() {
         return new AddRentalToAuctionResponse();
@@ -2623,7 +2296,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANQUOTESDETAIL }
-     * 
      */
     public TRANQUOTESDETAIL createTRANQUOTESDETAIL() {
         return new TRANQUOTESDETAIL();
@@ -2631,7 +2303,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundTypesResponse2 }
-     * 
      */
     public GetRefundTypesResponse2 createGetRefundTypesResponse2() {
         return new GetRefundTypesResponse2();
@@ -2639,7 +2310,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemovePCD }
-     * 
      */
     public RemovePCD createRemovePCD() {
         return new RemovePCD();
@@ -2647,7 +2317,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAccountInfo }
-     * 
      */
     public GetAccountInfo createGetAccountInfo() {
         return new GetAccountInfo();
@@ -2655,7 +2324,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VersResAssessBundleRequest }
-     * 
      */
     public VersResAssessBundleRequest createVersResAssessBundleRequest() {
         return new VersResAssessBundleRequest();
@@ -2663,7 +2331,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableCreditsResponse2 }
-     * 
      */
     public GetAvailableCreditsResponse2 createGetAvailableCreditsResponse2() {
         return new GetAvailableCreditsResponse2();
@@ -2671,7 +2338,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAddressResponse }
-     * 
      */
     public UpdateAddressResponse createUpdateAddressResponse() {
         return new UpdateAddressResponse();
@@ -2679,7 +2345,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateMerchandiseItemsResponse2 }
-     * 
      */
     public AddUpdateMerchandiseItemsResponse2 createAddUpdateMerchandiseItemsResponse2() {
         return new AddUpdateMerchandiseItemsResponse2();
@@ -2687,7 +2352,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SearchByResponse2 }
-     * 
      */
     public SearchByResponse2 createSearchByResponse2() {
         return new SearchByResponse2();
@@ -2695,7 +2359,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPOSTLTRTEMPLATEINFO }
-     * 
      */
     public ArrayOfPOSTLTRTEMPLATEINFO createArrayOfPOSTLTRTEMPLATEINFO() {
         return new ArrayOfPOSTLTRTEMPLATEINFO();
@@ -2703,7 +2366,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACCTCONTACTPHONES }
-     * 
      */
     public ArrayOfACCTCONTACTPHONES createArrayOfACCTCONTACTPHONES() {
         return new ArrayOfACCTCONTACTPHONES();
@@ -2711,7 +2373,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNotesResponse }
-     * 
      */
     public CreateNotesResponse createCreateNotesResponse() {
         return new CreateNotesResponse();
@@ -2719,7 +2380,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WaiveFee }
-     * 
      */
     public WaiveFee createWaiveFee() {
         return new WaiveFee();
@@ -2727,7 +2387,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAPPLRENTALOBJECTSDETAIL }
-     * 
      */
     public ArrayOfAPPLRENTALOBJECTSDETAIL createArrayOfAPPLRENTALOBJECTSDETAIL() {
         return new ArrayOfAPPLRENTALOBJECTSDETAIL();
@@ -2735,7 +2394,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddDepositRequest }
-     * 
      */
     public AddDepositRequest createAddDepositRequest() {
         return new AddDepositRequest();
@@ -2743,7 +2401,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WalkThruListResponse2 }
-     * 
      */
     public WalkThruListResponse2 createWalkThruListResponse2() {
         return new WalkThruListResponse2();
@@ -2751,7 +2408,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccountResponse }
-     * 
      */
     public SellRetailNoAccountResponse createSellRetailNoAccountResponse() {
         return new SellRetailNoAccountResponse();
@@ -2759,7 +2415,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitDataResponse2 }
-     * 
      */
     public GetUnitDataResponse2 createGetUnitDataResponse2() {
         return new GetUnitDataResponse2();
@@ -2767,7 +2422,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetNotesRequest }
-     * 
      */
     public GetNotesRequest createGetNotesRequest() {
         return new GetNotesRequest();
@@ -2775,7 +2429,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACTCONTACTSDEC }
-     * 
      */
     public ArrayOfACTCONTACTSDEC createArrayOfACTCONTACTSDEC() {
         return new ArrayOfACTCONTACTSDEC();
@@ -2783,7 +2436,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccountMultipleResponse }
-     * 
      */
     public SellRetailNoAccountMultipleResponse createSellRetailNoAccountMultipleResponse() {
         return new SellRetailNoAccountMultipleResponse();
@@ -2791,7 +2443,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceInfo }
-     * 
      */
     public GetInsuranceInfo createGetInsuranceInfo() {
         return new GetInsuranceInfo();
@@ -2799,7 +2450,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMiscRevenueClassDataResponse }
-     * 
      */
     public GetMiscRevenueClassDataResponse createGetMiscRevenueClassDataResponse() {
         return new GetMiscRevenueClassDataResponse();
@@ -2807,7 +2457,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfLong }
-     * 
      */
     public ArrayOfLong createArrayOfLong() {
         return new ArrayOfLong();
@@ -2815,7 +2464,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FailedReservation }
-     * 
      */
     public FailedReservation createFailedReservation() {
         return new FailedReservation();
@@ -2823,7 +2471,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemoveRentalFromAuction }
-     * 
      */
     public RemoveRentalFromAuction createRemoveRentalFromAuction() {
         return new RemoveRentalFromAuction();
@@ -2831,7 +2478,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsResponse }
-     * 
      */
     public GetAssessmentsResponse createGetAssessmentsResponse() {
         return new GetAssessmentsResponse();
@@ -2839,7 +2485,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalInfoResponse }
-     * 
      */
     public GetRentalInfoResponse createGetRentalInfoResponse() {
         return new GetRentalInfoResponse();
@@ -2847,7 +2492,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDiscountsResponse2 }
-     * 
      */
     public GetAvailableDiscountsResponse2 createGetAvailableDiscountsResponse2() {
         return new GetAvailableDiscountsResponse2();
@@ -2855,7 +2499,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundTypesResponseData }
-     * 
      */
     public GetRefundTypesResponseData createGetRefundTypesResponseData() {
         return new GetRefundTypesResponseData();
@@ -2863,7 +2506,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateMerchandiseItemsResponse }
-     * 
      */
     public AddUpdateMerchandiseItemsResponse createAddUpdateMerchandiseItemsResponse() {
         return new AddUpdateMerchandiseItemsResponse();
@@ -2871,7 +2513,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EndRentalResponse2 }
-     * 
      */
     public EndRentalResponse2 createEndRentalResponse2() {
         return new EndRentalResponse2();
@@ -2879,7 +2520,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransactionData }
-     * 
      */
     public TransactionData createTransactionData() {
         return new TransactionData();
@@ -2887,7 +2527,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddInsurance }
-     * 
      */
     public AddInsurance createAddInsurance() {
         return new AddInsurance();
@@ -2895,7 +2534,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDiscountsResponse }
-     * 
      */
     public GetAvailableDiscountsResponse createGetAvailableDiscountsResponse() {
         return new GetAvailableDiscountsResponse();
@@ -2903,7 +2541,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantLetterListResponse }
-     * 
      */
     public GetTenantLetterListResponse createGetTenantLetterListResponse() {
         return new GetTenantLetterListResponse();
@@ -2911,7 +2548,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRentalResponse }
-     * 
      */
     public AuctionEndRentalResponse createAuctionEndRentalResponse() {
         return new AuctionEndRentalResponse();
@@ -2919,7 +2555,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfDelinquencySchedule }
-     * 
      */
     public ArrayOfDelinquencySchedule createArrayOfDelinquencySchedule() {
         return new ArrayOfDelinquencySchedule();
@@ -2927,7 +2562,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusExpandedRequest }
-     * 
      */
     public UpdateUnitStatusExpandedRequest createUpdateUnitStatusExpandedRequest() {
         return new UpdateUnitStatusExpandedRequest();
@@ -2935,7 +2569,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalInfo }
-     * 
      */
     public RentalInfo createRentalInfo() {
         return new RentalInfo();
@@ -2943,7 +2576,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUExportResponse }
-     * 
      */
     public FIUExportResponse createFIUExportResponse() {
         return new FIUExportResponse();
@@ -2951,7 +2583,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGRETAILITEMS }
-     * 
      */
     public ArrayOfORGRETAILITEMS createArrayOfORGRETAILITEMS() {
         return new ArrayOfORGRETAILITEMS();
@@ -2959,7 +2590,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateEcommPasswordRequest }
-     * 
      */
     public UpdateEcommPasswordRequest createUpdateEcommPasswordRequest() {
         return new UpdateEcommPasswordRequest();
@@ -2967,7 +2597,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePayment }
-     * 
      */
     public MakePayment createMakePayment() {
         return new MakePayment();
@@ -2975,7 +2604,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPrimaryRentalInfoResponse2 }
-     * 
      */
     public GetPrimaryRentalInfoResponse2 createGetPrimaryRentalInfoResponse2() {
         return new GetPrimaryRentalInfoResponse2();
@@ -2983,7 +2611,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEcommRentalInfoRequest }
-     * 
      */
     public GetEcommRentalInfoRequest createGetEcommRentalInfoRequest() {
         return new GetEcommRentalInfoRequest();
@@ -2991,7 +2618,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SEARCH }
-     * 
      */
     public SEARCH createSEARCH() {
         return new SEARCH();
@@ -2999,7 +2625,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidRetailAssessmentData }
-     * 
      */
     public VoidRetailAssessmentData createVoidRetailAssessmentData() {
         return new VoidRetailAssessmentData();
@@ -3007,7 +2632,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitFeaturesResponse2 }
-     * 
      */
     public GetUnitFeaturesResponse2 createGetUnitFeaturesResponse2() {
         return new GetUnitFeaturesResponse2();
@@ -3015,7 +2639,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPrimaryRentalInfoResponse }
-     * 
      */
     public GetPrimaryRentalInfoResponse createGetPrimaryRentalInfoResponse() {
         return new GetPrimaryRentalInfoResponse();
@@ -3023,7 +2646,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAddUpdateMerchandiseItemsData }
-     * 
      */
     public ArrayOfAddUpdateMerchandiseItemsData createArrayOfAddUpdateMerchandiseItemsData() {
         return new ArrayOfAddUpdateMerchandiseItemsData();
@@ -3031,7 +2653,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemovePCDRequest }
-     * 
      */
     public RemovePCDRequest createRemovePCDRequest() {
         return new RemovePCDRequest();
@@ -3039,7 +2660,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MiniKeyStatsResponse }
-     * 
      */
     public MiniKeyStatsResponse createMiniKeyStatsResponse() {
         return new MiniKeyStatsResponse();
@@ -3047,7 +2667,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelInsuranceBundleResponse }
-     * 
      */
     public CancelInsuranceBundleResponse createCancelInsuranceBundleResponse() {
         return new CancelInsuranceBundleResponse();
@@ -3055,7 +2674,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalActivityReport }
-     * 
      */
     public RentalActivityReport createRentalActivityReport() {
         return new RentalActivityReport();
@@ -3063,7 +2681,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailWithUnitResponse }
-     * 
      */
     public SendEmailWithUnitResponse createSendEmailWithUnitResponse() {
         return new SendEmailWithUnitResponse();
@@ -3071,7 +2688,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfDAILYINSDETAILS }
-     * 
      */
     public ArrayOfDAILYINSDETAILS createArrayOfDAILYINSDETAILS() {
         return new ArrayOfDAILYINSDETAILS();
@@ -3079,7 +2695,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddInsuranceRequest }
-     * 
      */
     public AddInsuranceRequest createAddInsuranceRequest() {
         return new AddInsuranceRequest();
@@ -3087,7 +2702,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TerminateServiceResponse2 }
-     * 
      */
     public TerminateServiceResponse2 createTerminateServiceResponse2() {
         return new TerminateServiceResponse2();
@@ -3095,7 +2709,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSITECLASSES }
-     * 
      */
     public ArrayOfSITECLASSES createArrayOfSITECLASSES() {
         return new ArrayOfSITECLASSES();
@@ -3103,7 +2716,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReassignRentalRequest }
-     * 
      */
     public ReassignRentalRequest createReassignRentalRequest() {
         return new ReassignRentalRequest();
@@ -3111,7 +2723,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseTemplateInfoResponse }
-     * 
      */
     public GetLeaseTemplateInfoResponse createGetLeaseTemplateInfoResponse() {
         return new GetLeaseTemplateInfoResponse();
@@ -3119,7 +2730,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdatePCD }
-     * 
      */
     public AddUpdatePCD createAddUpdatePCD() {
         return new AddUpdatePCD();
@@ -3127,7 +2737,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGFEESITEALL }
-     * 
      */
     public ArrayOfORGFEESITEALL createArrayOfORGFEESITEALL() {
         return new ArrayOfORGFEESITEALL();
@@ -3135,7 +2744,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RefundResponse }
-     * 
      */
     public RefundResponse createRefundResponse() {
         return new RefundResponse();
@@ -3143,7 +2751,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EXRFinData }
-     * 
      */
     public EXRFinData createEXRFinData() {
         return new EXRFinData();
@@ -3151,7 +2758,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccountRequest }
-     * 
      */
     public SellRetailWithAccountRequest createSellRetailWithAccountRequest() {
         return new SellRetailWithAccountRequest();
@@ -3159,7 +2765,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGRETAILBOM }
-     * 
      */
     public ArrayOfORGRETAILBOM createArrayOfORGRETAILBOM() {
         return new ArrayOfORGRETAILBOM();
@@ -3167,7 +2772,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteUnitDataFiltered }
-     * 
      */
     public GetSiteUnitDataFiltered createGetSiteUnitDataFiltered() {
         return new GetSiteUnitDataFiltered();
@@ -3175,7 +2779,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationResponse }
-     * 
      */
     public CancelReservationResponse createCancelReservationResponse() {
         return new CancelReservationResponse();
@@ -3183,7 +2786,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusResponse2 }
-     * 
      */
     public UpdateUnitStatusResponse2 createUpdateUnitStatusResponse2() {
         return new UpdateUnitStatusResponse2();
@@ -3191,7 +2793,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TerminateServiceResponse }
-     * 
      */
     public TerminateServiceResponse createTerminateServiceResponse() {
         return new TerminateServiceResponse();
@@ -3199,7 +2800,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddNewAddress }
-     * 
      */
     public AddNewAddress createAddNewAddress() {
         return new AddNewAddress();
@@ -3207,7 +2807,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link POSTSCHEDULELTRTNTINFO }
-     * 
      */
     public POSTSCHEDULELTRTNTINFO createPOSTSCHEDULELTRTNTINFO() {
         return new POSTSCHEDULELTRTNTINFO();
@@ -3215,7 +2814,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetOrgList }
-     * 
      */
     public GetOrgList createGetOrgList() {
         return new GetOrgList();
@@ -3223,7 +2821,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUReIntResponse }
-     * 
      */
     public FIUReIntResponse createFIUReIntResponse() {
         return new FIUReIntResponse();
@@ -3231,7 +2828,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssessmentData }
-     * 
      */
     public AssessmentData createAssessmentData() {
         return new AssessmentData();
@@ -3239,7 +2835,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreditCardData }
-     * 
      */
     public CreditCardData createCreditCardData() {
         return new CreditCardData();
@@ -3247,7 +2842,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteTasks }
-     * 
      */
     public GetSiteTasks createGetSiteTasks() {
         return new GetSiteTasks();
@@ -3255,7 +2849,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LookupUserRequest }
-     * 
      */
     public LookupUserRequest createLookupUserRequest() {
         return new LookupUserRequest();
@@ -3263,7 +2856,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionStatusValues }
-     * 
      */
     public ArrayOfAuctionStatusValues createArrayOfAuctionStatusValues() {
         return new ArrayOfAuctionStatusValues();
@@ -3271,7 +2863,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeReservationResponse }
-     * 
      */
     public MakeReservationResponse createMakeReservationResponse() {
         return new MakeReservationResponse();
@@ -3279,7 +2870,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailWithPasswordResponse }
-     * 
      */
     public SendEmailWithPasswordResponse createSendEmailWithPasswordResponse() {
         return new SendEmailWithPasswordResponse();
@@ -3287,7 +2877,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionProceeds }
-     * 
      */
     public AuctionProceeds createAuctionProceeds() {
         return new AuctionProceeds();
@@ -3295,7 +2884,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReturnRetailItemsResponse }
-     * 
      */
     public ReturnRetailItemsResponse createReturnRetailItemsResponse() {
         return new ReturnRetailItemsResponse();
@@ -3303,7 +2891,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReservationsRequest }
-     * 
      */
     public GetReservationsRequest createGetReservationsRequest() {
         return new GetReservationsRequest();
@@ -3311,7 +2898,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundTypes }
-     * 
      */
     public GetRefundTypes createGetRefundTypes() {
         return new GetRefundTypes();
@@ -3319,7 +2905,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACTCONTACTS }
-     * 
      */
     public ACTCONTACTS createACTCONTACTS() {
         return new ACTCONTACTS();
@@ -3327,7 +2912,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseTemplateInfoResponse2 }
-     * 
      */
     public GetLeaseTemplateInfoResponse2 createGetLeaseTemplateInfoResponse2() {
         return new GetLeaseTemplateInfoResponse2();
@@ -3335,7 +2919,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalLedger }
-     * 
      */
     public GetRentalLedger createGetRentalLedger() {
         return new GetRentalLedger();
@@ -3343,7 +2926,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PRINTLEASEDOCS }
-     * 
      */
     public PRINTLEASEDOCS createPRINTLEASEDOCS() {
         return new PRINTLEASEDOCS();
@@ -3351,7 +2933,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGSERVICESITEOFFERINGS }
-     * 
      */
     public ArrayOfORGSERVICESITEOFFERINGS createArrayOfORGSERVICESITEOFFERINGS() {
         return new ArrayOfORGSERVICESITEOFFERINGS();
@@ -3359,7 +2940,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemoveRentalFromAuctionRequest }
-     * 
      */
     public RemoveRentalFromAuctionRequest createRemoveRentalFromAuctionRequest() {
         return new RemoveRentalFromAuctionRequest();
@@ -3367,7 +2947,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMultipleReservations }
-     * 
      */
     public MakeMultipleReservations createMakeMultipleReservations() {
         return new MakeMultipleReservations();
@@ -3375,7 +2954,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableRetailItemsResponse }
-     * 
      */
     public GetAvailableRetailItemsResponse createGetAvailableRetailItemsResponse() {
         return new GetAvailableRetailItemsResponse();
@@ -3383,7 +2961,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateLeasePeriodRequest }
-     * 
      */
     public UpdateLeasePeriodRequest createUpdateLeasePeriodRequest() {
         return new UpdateLeasePeriodRequest();
@@ -3391,7 +2968,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAutoPaySettingsResponse }
-     * 
      */
     public GetAutoPaySettingsResponse createGetAutoPaySettingsResponse() {
         return new GetAutoPaySettingsResponse();
@@ -3399,7 +2975,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateDemoUser }
-     * 
      */
     public CreateDemoUser createCreateDemoUser() {
         return new CreateDemoUser();
@@ -3407,7 +2982,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateContact }
-     * 
      */
     public UpdateContact createUpdateContact() {
         return new UpdateContact();
@@ -3415,7 +2989,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPrimaryContactRentals }
-     * 
      */
     public ArrayOfPrimaryContactRentals createArrayOfPrimaryContactRentals() {
         return new ArrayOfPrimaryContactRentals();
@@ -3423,7 +2996,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalInfoResponse2 }
-     * 
      */
     public GetRentalInfoResponse2 createGetRentalInfoResponse2() {
         return new GetRentalInfoResponse2();
@@ -3431,7 +3003,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddServiceResponse2 }
-     * 
      */
     public AddServiceResponse2 createAddServiceResponse2() {
         return new AddServiceResponse2();
@@ -3439,7 +3010,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddServiceRequest }
-     * 
      */
     public AddServiceRequest createAddServiceRequest() {
         return new AddServiceRequest();
@@ -3447,7 +3017,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateLeasePeriodResponse }
-     * 
      */
     public UpdateLeasePeriodResponse createUpdateLeasePeriodResponse() {
         return new UpdateLeasePeriodResponse();
@@ -3455,7 +3024,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailResponse2 }
-     * 
      */
     public SendEmailResponse2 createSendEmailResponse2() {
         return new SendEmailResponse2();
@@ -3463,7 +3031,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRentRateRespData }
-     * 
      */
     public ArrayOfRentRateRespData createArrayOfRentRateRespData() {
         return new ArrayOfRentRateRespData();
@@ -3471,7 +3038,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitClass }
-     * 
      */
     public EUnitClass createEUnitClass() {
         return new EUnitClass();
@@ -3479,7 +3045,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitFeaturesResponse }
-     * 
      */
     public EUnitFeaturesResponse createEUnitFeaturesResponse() {
         return new EUnitFeaturesResponse();
@@ -3487,7 +3052,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationCashCreditResponse }
-     * 
      */
     public CancelReservationCashCreditResponse createCancelReservationCashCreditResponse() {
         return new CancelReservationCashCreditResponse();
@@ -3495,7 +3059,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAccountInfoResponse2 }
-     * 
      */
     public GetAccountInfoResponse2 createGetAccountInfoResponse2() {
         return new GetAccountInfoResponse2();
@@ -3503,7 +3066,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGFEESITEALL }
-     * 
      */
     public ORGFEESITEALL createORGFEESITEALL() {
         return new ORGFEESITEALL();
@@ -3511,7 +3073,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FeeWaiveVoidStats }
-     * 
      */
     public FeeWaiveVoidStats createFeeWaiveVoidStats() {
         return new FeeWaiveVoidStats();
@@ -3519,7 +3080,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACCTCONTACTPHONES }
-     * 
      */
     public ACCTCONTACTPHONES createACCTCONTACTPHONES() {
         return new ACCTCONTACTPHONES();
@@ -3527,7 +3087,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionRentalsResponse }
-     * 
      */
     public GetAuctionRentalsResponse createGetAuctionRentalsResponse() {
         return new GetAuctionRentalsResponse();
@@ -3535,7 +3094,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundTypesRequest }
-     * 
      */
     public GetRefundTypesRequest createGetRefundTypesRequest() {
         return new GetRefundTypesRequest();
@@ -3543,7 +3101,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMoveOutInfoRequest }
-     * 
      */
     public GetMoveOutInfoRequest createGetMoveOutInfoRequest() {
         return new GetMoveOutInfoRequest();
@@ -3551,7 +3108,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SearchByResponse }
-     * 
      */
     public SearchByResponse createSearchByResponse() {
         return new SearchByResponse();
@@ -3559,7 +3115,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelInsuranceRequest }
-     * 
      */
     public CancelInsuranceRequest createCancelInsuranceRequest() {
         return new CancelInsuranceRequest();
@@ -3567,7 +3122,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitStatusResponse2 }
-     * 
      */
     public GetUnitStatusResponse2 createGetUnitStatusResponse2() {
         return new GetUnitStatusResponse2();
@@ -3575,7 +3129,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAccessableRentals }
-     * 
      */
     public ArrayOfAccessableRentals createArrayOfAccessableRentals() {
         return new ArrayOfAccessableRentals();
@@ -3583,7 +3136,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfMoveOutDetail }
-     * 
      */
     public ArrayOfMoveOutDetail createArrayOfMoveOutDetail() {
         return new ArrayOfMoveOutDetail();
@@ -3591,7 +3143,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateOverlockStatus }
-     * 
      */
     public UpdateOverlockStatus createUpdateOverlockStatus() {
         return new UpdateOverlockStatus();
@@ -3599,7 +3150,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableCreditsResponse }
-     * 
      */
     public GetAvailableCreditsResponse createGetAvailableCreditsResponse() {
         return new GetAvailableCreditsResponse();
@@ -3607,7 +3157,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VerifyLoginResponse }
-     * 
      */
     public VerifyLoginResponse createVerifyLoginResponse() {
         return new VerifyLoginResponse();
@@ -3615,7 +3164,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantLeaseListResponse }
-     * 
      */
     public GetTenantLeaseListResponse createGetTenantLeaseListResponse() {
         return new GetTenantLeaseListResponse();
@@ -3623,7 +3171,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfLong5 }
-     * 
      */
     public ArrayOfLong5 createArrayOfLong5() {
         return new ArrayOfLong5();
@@ -3631,7 +3178,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionEndRentalInfo }
-     * 
      */
     public ArrayOfAuctionEndRentalInfo createArrayOfAuctionEndRentalInfo() {
         return new ArrayOfAuctionEndRentalInfo();
@@ -3639,7 +3185,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AccessableRentals }
-     * 
      */
     public AccessableRentals createAccessableRentals() {
         return new AccessableRentals();
@@ -3647,7 +3192,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfMiniKeyStatsReport }
-     * 
      */
     public ArrayOfMiniKeyStatsReport createArrayOfMiniKeyStatsReport() {
         return new ArrayOfMiniKeyStatsReport();
@@ -3655,7 +3199,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceProvidersResponse }
-     * 
      */
     public GetInsuranceProvidersResponse createGetInsuranceProvidersResponse() {
         return new GetInsuranceProvidersResponse();
@@ -3663,7 +3206,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAddress }
-     * 
      */
     public UpdateAddress createUpdateAddress() {
         return new UpdateAddress();
@@ -3671,7 +3213,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAACTINFO }
-     * 
      */
     public ArrayOfSOAACTINFO createArrayOfSOAACTINFO() {
         return new ArrayOfSOAACTINFO();
@@ -3679,7 +3220,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteRulesResponse2 }
-     * 
      */
     public GetSiteRulesResponse2 createGetSiteRulesResponse2() {
         return new GetSiteRulesResponse2();
@@ -3687,7 +3227,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentRateResponse }
-     * 
      */
     public UpdateRentRateResponse createUpdateRentRateResponse() {
         return new UpdateRentRateResponse();
@@ -3695,7 +3234,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddNewAddressResponse }
-     * 
      */
     public AddNewAddressResponse createAddNewAddressResponse() {
         return new AddNewAddressResponse();
@@ -3703,7 +3241,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidFeeResponse2 }
-     * 
      */
     public VoidFeeResponse2 createVoidFeeResponse2() {
         return new VoidFeeResponse2();
@@ -3711,7 +3248,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGINSSITEOFFERINGS }
-     * 
      */
     public ORGINSSITEOFFERINGS createORGINSSITEOFFERINGS() {
         return new ORGINSSITEOFFERINGS();
@@ -3719,7 +3255,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactRequest }
-     * 
      */
     public ContactRequest createContactRequest() {
         return new ContactRequest();
@@ -3727,7 +3262,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDuePastDue }
-     * 
      */
     public GetTotalDuePastDue createGetTotalDuePastDue() {
         return new GetTotalDuePastDue();
@@ -3735,7 +3269,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPartialPayRulesResponse }
-     * 
      */
     public GetPartialPayRulesResponse createGetPartialPayRulesResponse() {
         return new GetPartialPayRulesResponse();
@@ -3743,7 +3276,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGSECURITYDEPOSITS }
-     * 
      */
     public ORGSECURITYDEPOSITS createORGSECURITYDEPOSITS() {
         return new ORGSECURITYDEPOSITS();
@@ -3751,7 +3283,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateOverlockStatusResponse2 }
-     * 
      */
     public UpdateOverlockStatusResponse2 createUpdateOverlockStatusResponse2() {
         return new UpdateOverlockStatusResponse2();
@@ -3759,7 +3290,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfGetAutoPaySettingsResponse }
-     * 
      */
     public ArrayOfGetAutoPaySettingsResponse createArrayOfGetAutoPaySettingsResponse() {
         return new ArrayOfGetAutoPaySettingsResponse();
@@ -3767,7 +3297,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionRentals }
-     * 
      */
     public GetAuctionRentals createGetAuctionRentals() {
         return new GetAuctionRentals();
@@ -3775,7 +3304,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccountMultipleRequest }
-     * 
      */
     public SellRetailWithAccountMultipleRequest createSellRetailWithAccountMultipleRequest() {
         return new SellRetailWithAccountMultipleRequest();
@@ -3783,7 +3311,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGEXTATTRIBUTES }
-     * 
      */
     public ArrayOfORGEXTATTRIBUTES createArrayOfORGEXTATTRIBUTES() {
         return new ArrayOfORGEXTATTRIBUTES();
@@ -3791,7 +3318,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VerifyLogin }
-     * 
      */
     public VerifyLogin createVerifyLogin() {
         return new VerifyLogin();
@@ -3799,7 +3325,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RefundRequest }
-     * 
      */
     public RefundRequest createRefundRequest() {
         return new RefundRequest();
@@ -3807,7 +3332,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionRentalItemData }
-     * 
      */
     public AuctionRentalItemData createAuctionRentalItemData() {
         return new AuctionRentalItemData();
@@ -3815,7 +3339,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailWithAccountResponse }
-     * 
      */
     public SellRetailWithAccountResponse createSellRetailWithAccountResponse() {
         return new SellRetailWithAccountResponse();
@@ -3823,7 +3346,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfCancelReservationData }
-     * 
      */
     public ArrayOfCancelReservationData createArrayOfCancelReservationData() {
         return new ArrayOfCancelReservationData();
@@ -3831,7 +3353,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailRefundAmountResponse }
-     * 
      */
     public GetRetailRefundAmountResponse createGetRetailRefundAmountResponse() {
         return new GetRetailRefundAmountResponse();
@@ -3839,7 +3360,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAGETSITETASKS }
-     * 
      */
     public SOAGETSITETASKS createSOAGETSITETASKS() {
         return new SOAGETSITETASKS();
@@ -3847,7 +3367,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACCTCONTACTADDRESSES }
-     * 
      */
     public ACCTCONTACTADDRESSES createACCTCONTACTADDRESSES() {
         return new ACCTCONTACTADDRESSES();
@@ -3855,7 +3374,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentRateRespData }
-     * 
      */
     public RentRateRespData createRentRateRespData() {
         return new RentRateRespData();
@@ -3863,7 +3381,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MiniKeyStatsReport }
-     * 
      */
     public MiniKeyStatsReport createMiniKeyStatsReport() {
         return new MiniKeyStatsReport();
@@ -3871,7 +3388,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RENTALSERVICES }
-     * 
      */
     public RENTALSERVICES createRENTALSERVICES() {
         return new RENTALSERVICES();
@@ -3879,7 +3395,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AutoPayData }
-     * 
      */
     public AutoPayData createAutoPayData() {
         return new AutoPayData();
@@ -3887,7 +3402,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACTPHONES }
-     * 
      */
     public ACTPHONES createACTPHONES() {
         return new ACTPHONES();
@@ -3895,7 +3409,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateStreetRespData }
-     * 
      */
     public UpdateStreetRespData createUpdateStreetRespData() {
         return new UpdateStreetRespData();
@@ -3903,7 +3416,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRentalActivityReport }
-     * 
      */
     public ArrayOfRentalActivityReport createArrayOfRentalActivityReport() {
         return new ArrayOfRentalActivityReport();
@@ -3911,7 +3423,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Unit }
-     * 
      */
     public Unit createUnit() {
         return new Unit();
@@ -3919,7 +3430,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitAttr01 }
-     * 
      */
     public EUnitAttr01 createEUnitAttr01() {
         return new EUnitAttr01();
@@ -3927,7 +3437,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AccountRequest }
-     * 
      */
     public AccountRequest createAccountRequest() {
         return new AccountRequest();
@@ -3935,7 +3444,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitStatus }
-     * 
      */
     public GetUnitStatus createGetUnitStatus() {
         return new GetUnitStatus();
@@ -3943,7 +3451,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateMerchandiseItems }
-     * 
      */
     public AddUpdateMerchandiseItems createAddUpdateMerchandiseItems() {
         return new AddUpdateMerchandiseItems();
@@ -3951,7 +3458,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEndRentalRulesResponse2 }
-     * 
      */
     public GetEndRentalRulesResponse2 createGetEndRentalRulesResponse2() {
         return new GetEndRentalRulesResponse2();
@@ -3959,7 +3465,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetGateCodeInfo }
-     * 
      */
     public GetGateCodeInfo createGetGateCodeInfo() {
         return new GetGateCodeInfo();
@@ -3967,7 +3472,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACTADDR }
-     * 
      */
     public ACTADDR createACTADDR() {
         return new ACTADDR();
@@ -3975,7 +3479,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRental }
-     * 
      */
     public AuctionEndRental createAuctionEndRental() {
         return new AuctionEndRental();
@@ -3983,7 +3486,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundTypesResponse }
-     * 
      */
     public GetRefundTypesResponse createGetRefundTypesResponse() {
         return new GetRefundTypesResponse();
@@ -3991,7 +3493,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReceiptRules }
-     * 
      */
     public GetReceiptRules createGetReceiptRules() {
         return new GetReceiptRules();
@@ -3999,7 +3500,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGRETAILBOM }
-     * 
      */
     public ORGRETAILBOM createORGRETAILBOM() {
         return new ORGRETAILBOM();
@@ -4007,7 +3507,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PrimaryContactRentals }
-     * 
      */
     public PrimaryContactRentals createPrimaryContactRentals() {
         return new PrimaryContactRentals();
@@ -4015,7 +3514,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateInsuranceRequest }
-     * 
      */
     public UpdateInsuranceRequest createUpdateInsuranceRequest() {
         return new UpdateInsuranceRequest();
@@ -4023,7 +3521,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledLetterList }
-     * 
      */
     public GetScheduledLetterList createGetScheduledLetterList() {
         return new GetScheduledLetterList();
@@ -4031,7 +3528,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailWithPassword }
-     * 
      */
     public SendEmailWithPassword createSendEmailWithPassword() {
         return new SendEmailWithPassword();
@@ -4039,7 +3535,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfMiscellaneousRevenueClassData }
-     * 
      */
     public ArrayOfMiscellaneousRevenueClassData createArrayOfMiscellaneousRevenueClassData() {
         return new ArrayOfMiscellaneousRevenueClassData();
@@ -4047,7 +3542,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAGETGATEINFO }
-     * 
      */
     public ArrayOfSOAGETGATEINFO createArrayOfSOAGETGATEINFO() {
         return new ArrayOfSOAGETGATEINFO();
@@ -4055,7 +3549,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetBaseFeesRequest }
-     * 
      */
     public GetBaseFeesRequest createGetBaseFeesRequest() {
         return new GetBaseFeesRequest();
@@ -4063,7 +3556,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEcommRentalInfoResponse2 }
-     * 
      */
     public GetEcommRentalInfoResponse2 createGetEcommRentalInfoResponse2() {
         return new GetEcommRentalInfoResponse2();
@@ -4071,7 +3563,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetChannelListRequest }
-     * 
      */
     public GetChannelListRequest createGetChannelListRequest() {
         return new GetChannelListRequest();
@@ -4079,7 +3570,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidTransaction }
-     * 
      */
     public VoidTransaction createVoidTransaction() {
         return new VoidTransaction();
@@ -4087,7 +3577,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetOrgListResponse2 }
-     * 
      */
     public GetOrgListResponse2 createGetOrgListResponse2() {
         return new GetOrgListResponse2();
@@ -4095,7 +3584,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEstimatedRefund }
-     * 
      */
     public GetEstimatedRefund createGetEstimatedRefund() {
         return new GetEstimatedRefund();
@@ -4103,7 +3591,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Refund }
-     * 
      */
     public Refund createRefund() {
         return new Refund();
@@ -4111,7 +3598,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEligibleAuctionRentalsRequest }
-     * 
      */
     public GetEligibleAuctionRentalsRequest createGetEligibleAuctionRentalsRequest() {
         return new GetEligibleAuctionRentalsRequest();
@@ -4119,7 +3605,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessManualAutoPayResponse }
-     * 
      */
     public ProcessManualAutoPayResponse createProcessManualAutoPayResponse() {
         return new ProcessManualAutoPayResponse();
@@ -4127,7 +3612,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyPCDsResponse2 }
-     * 
      */
     public ApplyPCDsResponse2 createApplyPCDsResponse2() {
         return new ApplyPCDsResponse2();
@@ -4135,7 +3619,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalOverlockData }
-     * 
      */
     public RentalOverlockData createRentalOverlockData() {
         return new RentalOverlockData();
@@ -4143,7 +3626,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SearchBy }
-     * 
      */
     public SearchBy createSearchBy() {
         return new SearchBy();
@@ -4151,7 +3633,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitAccessType }
-     * 
      */
     public EUnitAccessType createEUnitAccessType() {
         return new EUnitAccessType();
@@ -4159,7 +3640,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedServices }
-     * 
      */
     public GetAppliedServices createGetAppliedServices() {
         return new GetAppliedServices();
@@ -4167,7 +3647,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservation }
-     * 
      */
     public CancelReservation createCancelReservation() {
         return new CancelReservation();
@@ -4175,7 +3654,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuction }
-     * 
      */
     public CreateAuction createCreateAuction() {
         return new CreateAuction();
@@ -4183,7 +3661,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetVersionResponse }
-     * 
      */
     public GetVersionResponse createGetVersionResponse() {
         return new GetVersionResponse();
@@ -4191,7 +3668,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitAttr02Response }
-     * 
      */
     public EUnitAttr02Response createEUnitAttr02Response() {
         return new EUnitAttr02Response();
@@ -4199,7 +3675,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionTaxInfo }
-     * 
      */
     public AuctionTaxInfo createAuctionTaxInfo() {
         return new AuctionTaxInfo();
@@ -4207,7 +3682,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAccountInfoResponse }
-     * 
      */
     public GetAccountInfoResponse createGetAccountInfoResponse() {
         return new GetAccountInfoResponse();
@@ -4215,7 +3689,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTemplateIdRulesResponse }
-     * 
      */
     public GetTemplateIdRulesResponse createGetTemplateIdRulesResponse() {
         return new GetTemplateIdRulesResponse();
@@ -4223,7 +3696,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceProvidersResponse2 }
-     * 
      */
     public GetInsuranceProvidersResponse2 createGetInsuranceProvidersResponse2() {
         return new GetInsuranceProvidersResponse2();
@@ -4231,7 +3703,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANRENTALS }
-     * 
      */
     public TRANRENTALS createTRANRENTALS() {
         return new TRANRENTALS();
@@ -4239,7 +3710,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EXRFIUResponse }
-     * 
      */
     public EXRFIUResponse createEXRFIUResponse() {
         return new EXRFIUResponse();
@@ -4247,7 +3717,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetDelinqScheduleResponse }
-     * 
      */
     public GetDelinqScheduleResponse createGetDelinqScheduleResponse() {
         return new GetDelinqScheduleResponse();
@@ -4255,7 +3724,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledFeesResponse2 }
-     * 
      */
     public GetScheduledFeesResponse2 createGetScheduledFeesResponse2() {
         return new GetScheduledFeesResponse2();
@@ -4263,7 +3731,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAuctionRequest }
-     * 
      */
     public UpdateAuctionRequest createUpdateAuctionRequest() {
         return new UpdateAuctionRequest();
@@ -4271,7 +3738,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTemplateIdRules }
-     * 
      */
     public GetTemplateIdRules createGetTemplateIdRules() {
         return new GetTemplateIdRules();
@@ -4279,7 +3745,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateLetter }
-     * 
      */
     public CreateLetter createCreateLetter() {
         return new CreateLetter();
@@ -4287,7 +3752,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionInfo }
-     * 
      */
     public ArrayOfAuctionInfo createArrayOfAuctionInfo() {
         return new ArrayOfAuctionInfo();
@@ -4295,7 +3759,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGSITEPCDAVAIL }
-     * 
      */
     public ORGSITEPCDAVAIL createORGSITEPCDAVAIL() {
         return new ORGSITEPCDAVAIL();
@@ -4303,7 +3766,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAVAILSITERETAILITEMS }
-     * 
      */
     public ArrayOfAVAILSITERETAILITEMS createArrayOfAVAILSITERETAILITEMS() {
         return new ArrayOfAVAILSITERETAILITEMS();
@@ -4311,7 +3773,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewEcommAccount }
-     * 
      */
     public CreateNewEcommAccount createCreateNewEcommAccount() {
         return new CreateNewEcommAccount();
@@ -4319,7 +3780,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsByIDResponse2 }
-     * 
      */
     public GetAssessmentsByIDResponse2 createGetAssessmentsByIDResponse2() {
         return new GetAssessmentsByIDResponse2();
@@ -4327,7 +3787,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactsResponse }
-     * 
      */
     public GetContactsResponse createGetContactsResponse() {
         return new GetContactsResponse();
@@ -4335,7 +3794,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAUNITFEATURES }
-     * 
      */
     public ArrayOfSOAUNITFEATURES createArrayOfSOAUNITFEATURES() {
         return new ArrayOfSOAUNITFEATURES();
@@ -4343,7 +3801,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfVoidRetailAssessmentData }
-     * 
      */
     public ArrayOfVoidRetailAssessmentData createArrayOfVoidRetailAssessmentData() {
         return new ArrayOfVoidRetailAssessmentData();
@@ -4351,7 +3808,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUChecksumUpdate }
-     * 
      */
     public FIUChecksumUpdate createFIUChecksumUpdate() {
         return new FIUChecksumUpdate();
@@ -4359,7 +3815,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailWithPasswordRequest }
-     * 
      */
     public SendEmailWithPasswordRequest createSendEmailWithPasswordRequest() {
         return new SendEmailWithPasswordRequest();
@@ -4367,7 +3822,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionEndRentalComplete1 }
-     * 
      */
     public ArrayOfAuctionEndRentalComplete1 createArrayOfAuctionEndRentalComplete1() {
         return new ArrayOfAuctionEndRentalComplete1();
@@ -4375,7 +3829,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCashCreditsRequest }
-     * 
      */
     public GetCashCreditsRequest createGetCashCreditsRequest() {
         return new GetCashCreditsRequest();
@@ -4383,7 +3836,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetWaiveVoidFeeStatsRequest }
-     * 
      */
     public GetWaiveVoidFeeStatsRequest createGetWaiveVoidFeeStatsRequest() {
         return new GetWaiveVoidFeeStatsRequest();
@@ -4391,7 +3843,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SWSGETECOMMRENTALINFO }
-     * 
      */
     public SWSGETECOMMRENTALINFO createSWSGETECOMMRENTALINFO() {
         return new SWSGETECOMMRENTALINFO();
@@ -4399,7 +3850,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactPhoneNumbers }
-     * 
      */
     public GetContactPhoneNumbers createGetContactPhoneNumbers() {
         return new GetContactPhoneNumbers();
@@ -4407,7 +3857,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EXRFIUExport }
-     * 
      */
     public EXRFIUExport createEXRFIUExport() {
         return new EXRFIUExport();
@@ -4415,7 +3864,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOALOGIN }
-     * 
      */
     public ArrayOfSOALOGIN createArrayOfSOALOGIN() {
         return new ArrayOfSOALOGIN();
@@ -4423,7 +3871,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailReceiptItemsResponse2 }
-     * 
      */
     public GetRetailReceiptItemsResponse2 createGetRetailReceiptItemsResponse2() {
         return new GetRetailReceiptItemsResponse2();
@@ -4431,7 +3878,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEstimatedRefundRequest }
-     * 
      */
     public GetEstimatedRefundRequest createGetEstimatedRefundRequest() {
         return new GetEstimatedRefundRequest();
@@ -4439,7 +3885,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitAttr01Response }
-     * 
      */
     public EUnitAttr01Response createEUnitAttr01Response() {
         return new EUnitAttr01Response();
@@ -4447,7 +3892,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetWaiveVoidFeeStatsResponse }
-     * 
      */
     public GetWaiveVoidFeeStatsResponse createGetWaiveVoidFeeStatsResponse() {
         return new GetWaiveVoidFeeStatsResponse();
@@ -4455,7 +3899,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CompleteUnitTransfer }
-     * 
      */
     public CompleteUnitTransfer createCompleteUnitTransfer() {
         return new CompleteUnitTransfer();
@@ -4463,7 +3906,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetVersion }
-     * 
      */
     public GetVersion createGetVersion() {
         return new GetVersion();
@@ -4471,7 +3913,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSiteUnitData }
-     * 
      */
     public ArrayOfSiteUnitData createArrayOfSiteUnitData() {
         return new ArrayOfSiteUnitData();
@@ -4479,7 +3920,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGSITEPCDAVAIL }
-     * 
      */
     public ArrayOfORGSITEPCDAVAIL createArrayOfORGSITEPCDAVAIL() {
         return new ArrayOfORGSITEPCDAVAIL();
@@ -4487,7 +3927,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ResetRefundsResponse }
-     * 
      */
     public ResetRefundsResponse createResetRefundsResponse() {
         return new ResetRefundsResponse();
@@ -4495,7 +3934,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddMultipleServices }
-     * 
      */
     public AddMultipleServices createAddMultipleServices() {
         return new AddMultipleServices();
@@ -4503,7 +3941,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPrimaryRentalInfoRequest }
-     * 
      */
     public GetPrimaryRentalInfoRequest createGetPrimaryRentalInfoRequest() {
         return new GetPrimaryRentalInfoRequest();
@@ -4511,7 +3948,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetWaiveVoidFeeStatsResponse2 }
-     * 
      */
     public GetWaiveVoidFeeStatsResponse2 createGetWaiveVoidFeeStatsResponse2() {
         return new GetWaiveVoidFeeStatsResponse2();
@@ -4519,7 +3955,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssessInfo }
-     * 
      */
     public AssessInfo createAssessInfo() {
         return new AssessInfo();
@@ -4527,7 +3962,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANRETAILSOLD }
-     * 
      */
     public ArrayOfTRANRETAILSOLD createArrayOfTRANRETAILSOLD() {
         return new ArrayOfTRANRETAILSOLD();
@@ -4535,7 +3969,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionRentalsRequest }
-     * 
      */
     public GetAuctionRentalsRequest createGetAuctionRentalsRequest() {
         return new GetAuctionRentalsRequest();
@@ -4543,7 +3976,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANRETAILSOLD }
-     * 
      */
     public TRANRETAILSOLD createTRANRETAILSOLD() {
         return new TRANRETAILSOLD();
@@ -4551,7 +3983,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPOSTSCHEDULELTRTNTINFO }
-     * 
      */
     public ArrayOfPOSTSCHEDULELTRTNTINFO createArrayOfPOSTSCHEDULELTRTNTINFO() {
         return new ArrayOfPOSTSCHEDULELTRTNTINFO();
@@ -4559,7 +3990,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedInsuranceRequest }
-     * 
      */
     public GetAppliedInsuranceRequest createGetAppliedInsuranceRequest() {
         return new GetAppliedInsuranceRequest();
@@ -4567,7 +3997,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfLong2 }
-     * 
      */
     public ArrayOfLong2 createArrayOfLong2() {
         return new ArrayOfLong2();
@@ -4575,7 +4004,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTransOldRentalData }
-     * 
      */
     public ArrayOfTransOldRentalData createArrayOfTransOldRentalData() {
         return new ArrayOfTransOldRentalData();
@@ -4583,7 +4011,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGRETAILBULK }
-     * 
      */
     public ORGRETAILBULK createORGRETAILBULK() {
         return new ORGRETAILBULK();
@@ -4591,7 +4018,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseGroupTemplateInfoResponse2 }
-     * 
      */
     public GetLeaseGroupTemplateInfoResponse2 createGetLeaseGroupTemplateInfoResponse2() {
         return new GetLeaseGroupTemplateInfoResponse2();
@@ -4599,7 +4025,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddDepositResponse2 }
-     * 
      */
     public AddDepositResponse2 createAddDepositResponse2() {
         return new AddDepositResponse2();
@@ -4607,7 +4032,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDeposits }
-     * 
      */
     public GetAvailableDeposits createGetAvailableDeposits() {
         return new GetAvailableDeposits();
@@ -4615,7 +4039,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateLeasePeriod }
-     * 
      */
     public UpdateLeasePeriod createUpdateLeasePeriod() {
         return new UpdateLeasePeriod();
@@ -4623,7 +4046,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateStreetRateRequest }
-     * 
      */
     public UpdateStreetRateRequest createUpdateStreetRateRequest() {
         return new UpdateStreetRateRequest();
@@ -4631,7 +4053,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDue }
-     * 
      */
     public GetTotalDue createGetTotalDue() {
         return new GetTotalDue();
@@ -4639,7 +4060,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUpdateStreetRespData }
-     * 
      */
     public ArrayOfUpdateStreetRespData createArrayOfUpdateStreetRespData() {
         return new ArrayOfUpdateStreetRespData();
@@ -4647,7 +4067,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessManualAutoPay }
-     * 
      */
     public ProcessManualAutoPay createProcessManualAutoPay() {
         return new ProcessManualAutoPay();
@@ -4655,7 +4074,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link NewRental }
-     * 
      */
     public NewRental createNewRental() {
         return new NewRental();
@@ -4663,7 +4081,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RetrievePassword }
-     * 
      */
     public RetrievePassword createRetrievePassword() {
         return new RetrievePassword();
@@ -4671,7 +4088,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRetailReceiptItemsResponse }
-     * 
      */
     public GetRetailReceiptItemsResponse createGetRetailReceiptItemsResponse() {
         return new GetRetailReceiptItemsResponse();
@@ -4679,7 +4095,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSWSLOGIN }
-     * 
      */
     public ArrayOfSWSLOGIN createArrayOfSWSLOGIN() {
         return new ArrayOfSWSLOGIN();
@@ -4687,7 +4102,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfFailedReservation }
-     * 
      */
     public ArrayOfFailedReservation createArrayOfFailedReservation() {
         return new ArrayOfFailedReservation();
@@ -4695,7 +4109,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCashCreditsResponse }
-     * 
      */
     public GetCashCreditsResponse createGetCashCreditsResponse() {
         return new GetCashCreditsResponse();
@@ -4703,7 +4116,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOALOGIN }
-     * 
      */
     public SOALOGIN createSOALOGIN() {
         return new SOALOGIN();
@@ -4711,7 +4123,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableServicesResponse2 }
-     * 
      */
     public GetAvailableServicesResponse2 createGetAvailableServicesResponse2() {
         return new GetAvailableServicesResponse2();
@@ -4719,7 +4130,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateContactResponse }
-     * 
      */
     public UpdateContactResponse createUpdateContactResponse() {
         return new UpdateContactResponse();
@@ -4727,7 +4137,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLetterTemplateInfoResponse }
-     * 
      */
     public GetLetterTemplateInfoResponse createGetLetterTemplateInfoResponse() {
         return new GetLetterTemplateInfoResponse();
@@ -4735,7 +4144,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalResponse2 }
-     * 
      */
     public UpdateRentalResponse2 createUpdateRentalResponse2() {
         return new UpdateRentalResponse2();
@@ -4743,7 +4151,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANFIUDATA }
-     * 
      */
     public ArrayOfTRANFIUDATA createArrayOfTRANFIUDATA() {
         return new ArrayOfTRANFIUDATA();
@@ -4751,7 +4158,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalContact }
-     * 
      */
     public RentalContact createRentalContact() {
         return new RentalContact();
@@ -4759,7 +4165,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANQUOTEPCDDETAIL }
-     * 
      */
     public TRANQUOTEPCDDETAIL createTRANQUOTEPCDDETAIL() {
         return new TRANQUOTEPCDDETAIL();
@@ -4767,7 +4172,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANAUCTIONRENTALSPROCESS }
-     * 
      */
     public TRANAUCTIONRENTALSPROCESS createTRANAUCTIONRENTALSPROCESS() {
         return new TRANAUCTIONRENTALSPROCESS();
@@ -4775,7 +4179,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PaymentReceiptBundleRequest }
-     * 
      */
     public PaymentReceiptBundleRequest createPaymentReceiptBundleRequest() {
         return new PaymentReceiptBundleRequest();
@@ -4783,7 +4186,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRentalComplete }
-     * 
      */
     public AuctionEndRentalComplete createAuctionEndRentalComplete() {
         return new AuctionEndRentalComplete();
@@ -4791,7 +4193,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOASITEATTRIBUTES }
-     * 
      */
     public SOASITEATTRIBUTES createSOASITEATTRIBUTES() {
         return new SOASITEATTRIBUTES();
@@ -4799,7 +4200,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteUnitDataRequest }
-     * 
      */
     public GetSiteUnitDataRequest createGetSiteUnitDataRequest() {
         return new GetSiteUnitDataRequest();
@@ -4807,7 +4207,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitFeaturesResponse }
-     * 
      */
     public GetUnitFeaturesResponse createGetUnitFeaturesResponse() {
         return new GetUnitFeaturesResponse();
@@ -4815,7 +4214,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACTACCOUNTS }
-     * 
      */
     public ACTACCOUNTS createACTACCOUNTS() {
         return new ACTACCOUNTS();
@@ -4823,7 +4221,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssessFeeResponse }
-     * 
      */
     public AssessFeeResponse createAssessFeeResponse() {
         return new AssessFeeResponse();
@@ -4831,7 +4228,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEstimatedRefundResponse }
-     * 
      */
     public GetEstimatedRefundResponse createGetEstimatedRefundResponse() {
         return new GetEstimatedRefundResponse();
@@ -4839,7 +4235,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MoveOutDetail }
-     * 
      */
     public MoveOutDetail createMoveOutDetail() {
         return new MoveOutDetail();
@@ -4847,7 +4242,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidTransactionRequest }
-     * 
      */
     public VoidTransactionRequest createVoidTransactionRequest() {
         return new VoidTransactionRequest();
@@ -4855,7 +4249,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRentalOverlockData }
-     * 
      */
     public ArrayOfRentalOverlockData createArrayOfRentalOverlockData() {
         return new ArrayOfRentalOverlockData();
@@ -4863,7 +4256,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAGETSITELIST }
-     * 
      */
     public ArrayOfSOAGETSITELIST createArrayOfSOAGETSITELIST() {
         return new ArrayOfSOAGETSITELIST();
@@ -4871,7 +4263,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusExpandedResponseData }
-     * 
      */
     public UpdateUnitStatusExpandedResponseData createUpdateUnitStatusExpandedResponseData() {
         return new UpdateUnitStatusExpandedResponseData();
@@ -4879,7 +4270,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemovePCDResponse }
-     * 
      */
     public RemovePCDResponse createRemovePCDResponse() {
         return new RemovePCDResponse();
@@ -4887,7 +4277,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateGatePINResponse2 }
-     * 
      */
     public UpdateGatePINResponse2 createUpdateGatePINResponse2() {
         return new UpdateGatePINResponse2();
@@ -4895,7 +4284,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLtrTemplateInfoResponse }
-     * 
      */
     public GetLtrTemplateInfoResponse createGetLtrTemplateInfoResponse() {
         return new GetLtrTemplateInfoResponse();
@@ -4903,7 +4291,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RULEVALUES }
-     * 
      */
     public RULEVALUES createRULEVALUES() {
         return new RULEVALUES();
@@ -4911,7 +4298,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RefundData }
-     * 
      */
     public RefundData createRefundData() {
         return new RefundData();
@@ -4919,7 +4305,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateDemoUserResponse }
-     * 
      */
     public CreateDemoUserResponse createCreateDemoUserResponse() {
         return new CreateDemoUserResponse();
@@ -4927,7 +4312,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDuePastDueResponse }
-     * 
      */
     public GetTotalDuePastDueResponse createGetTotalDuePastDueResponse() {
         return new GetTotalDuePastDueResponse();
@@ -4935,7 +4319,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateOrViewReceiptRequest }
-     * 
      */
     public CreateOrViewReceiptRequest createCreateOrViewReceiptRequest() {
         return new CreateOrViewReceiptRequest();
@@ -4943,7 +4326,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidFeeResponse }
-     * 
      */
     public VoidFeeResponse createVoidFeeResponse() {
         return new VoidFeeResponse();
@@ -4951,7 +4333,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PhoneRequest }
-     * 
      */
     public PhoneRequest createPhoneRequest() {
         return new PhoneRequest();
@@ -4959,7 +4340,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANQUOTESDETAIL }
-     * 
      */
     public ArrayOfTRANQUOTESDETAIL createArrayOfTRANQUOTESDETAIL() {
         return new ArrayOfTRANQUOTESDETAIL();
@@ -4967,7 +4347,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableServicesResponse }
-     * 
      */
     public GetAvailableServicesResponse createGetAvailableServicesResponse() {
         return new GetAvailableServicesResponse();
@@ -4975,7 +4354,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateSiteTaskResponse }
-     * 
      */
     public CreateSiteTaskResponse createCreateSiteTaskResponse() {
         return new CreateSiteTaskResponse();
@@ -4983,7 +4361,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitDoor }
-     * 
      */
     public EUnitDoor createEUnitDoor() {
         return new EUnitDoor();
@@ -4991,7 +4368,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Rental }
-     * 
      */
     public Rental createRental() {
         return new Rental();
@@ -4999,7 +4375,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetWaiveVoidFeeStats }
-     * 
      */
     public GetWaiveVoidFeeStats createGetWaiveVoidFeeStats() {
         return new GetWaiveVoidFeeStats();
@@ -5007,7 +4382,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SDSWALKTHRULIST }
-     * 
      */
     public SDSWALKTHRULIST createSDSWALKTHRULIST() {
         return new SDSWALKTHRULIST();
@@ -5015,7 +4389,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdatePCDResponse2 }
-     * 
      */
     public AddUpdatePCDResponse2 createAddUpdatePCDResponse2() {
         return new AddUpdatePCDResponse2();
@@ -5023,7 +4396,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableServicesRequest }
-     * 
      */
     public GetAvailableServicesRequest createGetAvailableServicesRequest() {
         return new GetAvailableServicesRequest();
@@ -5031,7 +4403,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReturnRetailItems }
-     * 
      */
     public ReturnRetailItems createReturnRetailItems() {
         return new ReturnRetailItems();
@@ -5039,7 +4410,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGAUCTIONOBJS }
-     * 
      */
     public ArrayOfORGAUCTIONOBJS createArrayOfORGAUCTIONOBJS() {
         return new ArrayOfORGAUCTIONOBJS();
@@ -5047,7 +4417,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalSettingsRequest }
-     * 
      */
     public UpdateRentalSettingsRequest createUpdateRentalSettingsRequest() {
         return new UpdateRentalSettingsRequest();
@@ -5055,7 +4424,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAccountResponse }
-     * 
      */
     public UpdateAccountResponse createUpdateAccountResponse() {
         return new UpdateAccountResponse();
@@ -5063,7 +4431,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteAttributesResponse }
-     * 
      */
     public GetSiteAttributesResponse createGetSiteAttributesResponse() {
         return new GetSiteAttributesResponse();
@@ -5071,7 +4438,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeReservationResponse2 }
-     * 
      */
     public MakeReservationResponse2 createMakeReservationResponse2() {
         return new MakeReservationResponse2();
@@ -5079,7 +4445,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UNITSTATUS }
-     * 
      */
     public UNITSTATUS createUNITSTATUS() {
         return new UNITSTATUS();
@@ -5087,7 +4452,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidTransactionResponse2 }
-     * 
      */
     public VoidTransactionResponse2 createVoidTransactionResponse2() {
         return new VoidTransactionResponse2();
@@ -5095,7 +4459,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MiniKeyStatsRequest }
-     * 
      */
     public MiniKeyStatsRequest createMiniKeyStatsRequest() {
         return new MiniKeyStatsRequest();
@@ -5103,7 +4466,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePaymentResponse }
-     * 
      */
     public MakePaymentResponse createMakePaymentResponse() {
         return new MakePaymentResponse();
@@ -5111,7 +4473,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePaymentByAssessmentResponse }
-     * 
      */
     public MakePaymentByAssessmentResponse createMakePaymentByAssessmentResponse() {
         return new MakePaymentByAssessmentResponse();
@@ -5119,7 +4480,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGRETAILBULK }
-     * 
      */
     public ArrayOfORGRETAILBULK createArrayOfORGRETAILBULK() {
         return new ArrayOfORGRETAILBULK();
@@ -5127,7 +4487,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseGroupTemplateInfo }
-     * 
      */
     public GetLeaseGroupTemplateInfo createGetLeaseGroupTemplateInfo() {
         return new GetLeaseGroupTemplateInfo();
@@ -5135,7 +4494,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VersResAssessBundleResponse2 }
-     * 
      */
     public VersResAssessBundleResponse2 createVersResAssessBundleResponse2() {
         return new VersResAssessBundleResponse2();
@@ -5143,7 +4501,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDepositsResponse2 }
-     * 
      */
     public GetAvailableDepositsResponse2 createGetAvailableDepositsResponse2() {
         return new GetAvailableDepositsResponse2();
@@ -5151,7 +4508,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGRETAILADJLOG }
-     * 
      */
     public ORGRETAILADJLOG createORGRETAILADJLOG() {
         return new ORGRETAILADJLOG();
@@ -5159,7 +4515,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelInsuranceResponse2 }
-     * 
      */
     public CancelInsuranceResponse2 createCancelInsuranceResponse2() {
         return new CancelInsuranceResponse2();
@@ -5167,7 +4522,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitAccessTypeResponse }
-     * 
      */
     public EUnitAccessTypeResponse createEUnitAccessTypeResponse() {
         return new EUnitAccessTypeResponse();
@@ -5175,7 +4529,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewLetterPdfResponse }
-     * 
      */
     public ViewLetterPdfResponse createViewLetterPdfResponse() {
         return new ViewLetterPdfResponse();
@@ -5183,7 +4536,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateDemoUserResponse2 }
-     * 
      */
     public CreateDemoUserResponse2 createCreateDemoUserResponse2() {
         return new CreateDemoUserResponse2();
@@ -5191,7 +4543,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteRuleValue }
-     * 
      */
     public GetSiteRuleValue createGetSiteRuleValue() {
         return new GetSiteRuleValue();
@@ -5199,7 +4550,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RulesRequest }
-     * 
      */
     public RulesRequest createRulesRequest() {
         return new RulesRequest();
@@ -5207,7 +4557,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuctionResponse }
-     * 
      */
     public CreateAuctionResponse createCreateAuctionResponse() {
         return new CreateAuctionResponse();
@@ -5215,7 +4564,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PdfFilePathResponse }
-     * 
      */
     public PdfFilePathResponse createPdfFilePathResponse() {
         return new PdfFilePathResponse();
@@ -5223,7 +4571,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentRate }
-     * 
      */
     public UpdateRentRate createUpdateRentRate() {
         return new UpdateRentRate();
@@ -5231,7 +4578,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUSelect }
-     * 
      */
     public FIUSelect createFIUSelect() {
         return new FIUSelect();
@@ -5239,7 +4585,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalResponse }
-     * 
      */
     public UpdateRentalResponse createUpdateRentalResponse() {
         return new UpdateRentalResponse();
@@ -5247,7 +4592,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMiscPayment }
-     * 
      */
     public MakeMiscPayment createMakeMiscPayment() {
         return new MakeMiscPayment();
@@ -5255,7 +4599,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateMerchandiseItemsRequest }
-     * 
      */
     public AddUpdateMerchandiseItemsRequest createAddUpdateMerchandiseItemsRequest() {
         return new AddUpdateMerchandiseItemsRequest();
@@ -5263,7 +4606,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsByIDRequest }
-     * 
      */
     public GetAssessmentsByIDRequest createGetAssessmentsByIDRequest() {
         return new GetAssessmentsByIDRequest();
@@ -5271,7 +4613,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAddMultipleServicesResponse }
-     * 
      */
     public ArrayOfAddMultipleServicesResponse createArrayOfAddMultipleServicesResponse() {
         return new ArrayOfAddMultipleServicesResponse();
@@ -5279,7 +4620,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRentalSummary }
-     * 
      */
     public AuctionEndRentalSummary createAuctionEndRentalSummary() {
         return new AuctionEndRentalSummary();
@@ -5287,7 +4627,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledFeesResponse }
-     * 
      */
     public GetScheduledFeesResponse createGetScheduledFeesResponse() {
         return new GetScheduledFeesResponse();
@@ -5295,7 +4634,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGRETAILADJLOG }
-     * 
      */
     public ArrayOfORGRETAILADJLOG createArrayOfORGRETAILADJLOG() {
         return new ArrayOfORGRETAILADJLOG();
@@ -5303,7 +4641,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMoveOutInfo }
-     * 
      */
     public GetMoveOutInfo createGetMoveOutInfo() {
         return new GetMoveOutInfo();
@@ -5311,7 +4648,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddRentalsToAuctionResponse }
-     * 
      */
     public AddRentalsToAuctionResponse createAddRentalsToAuctionResponse() {
         return new AddRentalsToAuctionResponse();
@@ -5319,7 +4655,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUChecksumUpdateResponse }
-     * 
      */
     public FIUChecksumUpdateResponse createFIUChecksumUpdateResponse() {
         return new FIUChecksumUpdateResponse();
@@ -5327,7 +4662,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPOSTLTRTNTINFO }
-     * 
      */
     public ArrayOfPOSTLTRTNTINFO createArrayOfPOSTLTRTNTINFO() {
         return new ArrayOfPOSTLTRTNTINFO();
@@ -5335,7 +4669,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyCreditToAssessments }
-     * 
      */
     public ApplyCreditToAssessments createApplyCreditToAssessments() {
         return new ApplyCreditToAssessments();
@@ -5343,7 +4676,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeEcommReservationResponse }
-     * 
      */
     public MakeEcommReservationResponse createMakeEcommReservationResponse() {
         return new MakeEcommReservationResponse();
@@ -5351,7 +4683,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionsResponse }
-     * 
      */
     public GetAuctionsResponse createGetAuctionsResponse() {
         return new GetAuctionsResponse();
@@ -5359,7 +4690,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DelinquencySchedule }
-     * 
      */
     public DelinquencySchedule createDelinquencySchedule() {
         return new DelinquencySchedule();
@@ -5367,7 +4697,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSDSWALKTHRULIST }
-     * 
      */
     public ArrayOfSDSWALKTHRULIST createArrayOfSDSWALKTHRULIST() {
         return new ArrayOfSDSWALKTHRULIST();
@@ -5375,7 +4704,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACTCONTACTS }
-     * 
      */
     public ArrayOfACTCONTACTS createArrayOfACTCONTACTS() {
         return new ArrayOfACTCONTACTS();
@@ -5383,7 +4711,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APPLINSEXPORT }
-     * 
      */
     public APPLINSEXPORT createAPPLINSEXPORT() {
         return new APPLINSEXPORT();
@@ -5391,7 +4718,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteAttributesResponse2 }
-     * 
      */
     public GetSiteAttributesResponse2 createGetSiteAttributesResponse2() {
         return new GetSiteAttributesResponse2();
@@ -5399,7 +4725,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRulesRequest }
-     * 
      */
     public GetRulesRequest createGetRulesRequest() {
         return new GetRulesRequest();
@@ -5407,7 +4732,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionTaxResponse }
-     * 
      */
     public GetAuctionTaxResponse createGetAuctionTaxResponse() {
         return new GetAuctionTaxResponse();
@@ -5415,7 +4739,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfReturnRetailItem }
-     * 
      */
     public ArrayOfReturnRetailItem createArrayOfReturnRetailItem() {
         return new ArrayOfReturnRetailItem();
@@ -5423,7 +4746,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WaiveFeeRequest }
-     * 
      */
     public WaiveFeeRequest createWaiveFeeRequest() {
         return new WaiveFeeRequest();
@@ -5431,7 +4753,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateDemoUserRequest }
-     * 
      */
     public CreateDemoUserRequest createCreateDemoUserRequest() {
         return new CreateDemoUserRequest();
@@ -5439,7 +4760,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateInsurance }
-     * 
      */
     public UpdateInsurance createUpdateInsurance() {
         return new UpdateInsurance();
@@ -5447,7 +4767,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EndRentalRequest }
-     * 
      */
     public EndRentalRequest createEndRentalRequest() {
         return new EndRentalRequest();
@@ -5455,7 +4774,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteUnitDataResponse2 }
-     * 
      */
     public GetSiteUnitDataResponse2 createGetSiteUnitDataResponse2() {
         return new GetSiteUnitDataResponse2();
@@ -5463,7 +4781,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGAUCTION }
-     * 
      */
     public ORGAUCTION createORGAUCTION() {
         return new ORGAUCTION();
@@ -5471,7 +4788,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUNITSTATUS }
-     * 
      */
     public ArrayOfUNITSTATUS createArrayOfUNITSTATUS() {
         return new ArrayOfUNITSTATUS();
@@ -5479,7 +4795,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSellRetailNoAccountRequest }
-     * 
      */
     public ArrayOfSellRetailNoAccountRequest createArrayOfSellRetailNoAccountRequest() {
         return new ArrayOfSellRetailNoAccountRequest();
@@ -5487,7 +4802,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransUnitAssessments }
-     * 
      */
     public TransUnitAssessments createTransUnitAssessments() {
         return new TransUnitAssessments();
@@ -5495,7 +4809,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetQuoteDataResponse }
-     * 
      */
     public GetQuoteDataResponse createGetQuoteDataResponse() {
         return new GetQuoteDataResponse();
@@ -5503,7 +4816,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateMerchandiseItemsData }
-     * 
      */
     public AddUpdateMerchandiseItemsData createAddUpdateMerchandiseItemsData() {
         return new AddUpdateMerchandiseItemsData();
@@ -5511,7 +4823,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsByID }
-     * 
      */
     public GetAssessmentsByID createGetAssessmentsByID() {
         return new GetAssessmentsByID();
@@ -5519,7 +4830,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessRefundResponse }
-     * 
      */
     public ProcessRefundResponse createProcessRefundResponse() {
         return new ProcessRefundResponse();
@@ -5527,7 +4837,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TerminateService }
-     * 
      */
     public TerminateService createTerminateService() {
         return new TerminateService();
@@ -5535,7 +4844,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateEcommPasswordResponse }
-     * 
      */
     public UpdateEcommPasswordResponse createUpdateEcommPasswordResponse() {
         return new UpdateEcommPasswordResponse();
@@ -5543,7 +4851,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitFeatures }
-     * 
      */
     public EUnitFeatures createEUnitFeatures() {
         return new EUnitFeatures();
@@ -5551,7 +4858,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ScheduledFee }
-     * 
      */
     public ScheduledFee createScheduledFee() {
         return new ScheduledFee();
@@ -5559,7 +4865,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewLtrRequest }
-     * 
      */
     public ViewLtrRequest createViewLtrRequest() {
         return new ViewLtrRequest();
@@ -5567,7 +4872,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReturnRetailItem }
-     * 
      */
     public ReturnRetailItem createReturnRetailItem() {
         return new ReturnRetailItem();
@@ -5575,7 +4879,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateStreetReqData }
-     * 
      */
     public UpdateStreetReqData createUpdateStreetReqData() {
         return new UpdateStreetReqData();
@@ -5583,7 +4886,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetGateCodeInfoRequest }
-     * 
      */
     public GetGateCodeInfoRequest createGetGateCodeInfoRequest() {
         return new GetGateCodeInfoRequest();
@@ -5591,7 +4893,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACCTCONTACTADDRESSES }
-     * 
      */
     public ArrayOfACCTCONTACTADDRESSES createArrayOfACCTCONTACTADDRESSES() {
         return new ArrayOfACCTCONTACTADDRESSES();
@@ -5599,7 +4900,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EXRFIUExportResponse }
-     * 
      */
     public EXRFIUExportResponse createEXRFIUExportResponse() {
         return new EXRFIUExportResponse();
@@ -5607,7 +4907,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentRateRequest }
-     * 
      */
     public UpdateRentRateRequest createUpdateRentRateRequest() {
         return new UpdateRentRateRequest();
@@ -5615,7 +4914,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAGETPRIMARYRENTALINFO }
-     * 
      */
     public SOAGETPRIMARYRENTALINFO createSOAGETPRIMARYRENTALINFO() {
         return new SOAGETPRIMARYRENTALINFO();
@@ -5623,7 +4921,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceInfoResponse }
-     * 
      */
     public GetInsuranceInfoResponse createGetInsuranceInfoResponse() {
         return new GetInsuranceInfoResponse();
@@ -5631,7 +4928,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSOAGETPRIMARYRENTALINFO }
-     * 
      */
     public ArrayOfSOAGETPRIMARYRENTALINFO createArrayOfSOAGETPRIMARYRENTALINFO() {
         return new ArrayOfSOAGETPRIMARYRENTALINFO();
@@ -5639,7 +4935,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MiscellaneousRevenueClassData }
-     * 
      */
     public MiscellaneousRevenueClassData createMiscellaneousRevenueClassData() {
         return new MiscellaneousRevenueClassData();
@@ -5647,7 +4942,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfDecimal }
-     * 
      */
     public ArrayOfDecimal createArrayOfDecimal() {
         return new ArrayOfDecimal();
@@ -5655,7 +4949,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalSettingsResponse }
-     * 
      */
     public UpdateRentalSettingsResponse createUpdateRentalSettingsResponse() {
         return new UpdateRentalSettingsResponse();
@@ -5663,7 +4956,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewEcommAccountResponse2 }
-     * 
      */
     public CreateNewEcommAccountResponse2 createCreateNewEcommAccountResponse2() {
         return new CreateNewEcommAccountResponse2();
@@ -5671,7 +4963,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailRequest }
-     * 
      */
     public SendEmailRequest createSendEmailRequest() {
         return new SendEmailRequest();
@@ -5679,7 +4970,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateOrViewLtrRequest }
-     * 
      */
     public CreateOrViewLtrRequest createCreateOrViewLtrRequest() {
         return new CreateOrViewLtrRequest();
@@ -5687,7 +4977,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteRules }
-     * 
      */
     public GetSiteRules createGetSiteRules() {
         return new GetSiteRules();
@@ -5695,7 +4984,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetNotesResponse }
-     * 
      */
     public GetNotesResponse createGetNotesResponse() {
         return new GetNotesResponse();
@@ -5703,7 +4991,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelInsuranceResponse }
-     * 
      */
     public CancelInsuranceResponse createCancelInsuranceResponse() {
         return new CancelInsuranceResponse();
@@ -5711,7 +4998,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAuctionResponse }
-     * 
      */
     public UpdateAuctionResponse createUpdateAuctionResponse() {
         return new UpdateAuctionResponse();
@@ -5719,7 +5005,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANAUCTIONRENTALSPROCESS }
-     * 
      */
     public ArrayOfTRANAUCTIONRENTALSPROCESS createArrayOfTRANAUCTIONRENTALSPROCESS() {
         return new ArrayOfTRANAUCTIONRENTALSPROCESS();
@@ -5727,7 +5012,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdatePhoneResponse }
-     * 
      */
     public UpdatePhoneResponse createUpdatePhoneResponse() {
         return new UpdatePhoneResponse();
@@ -5735,7 +5019,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationResponse2 }
-     * 
      */
     public CancelReservationResponse2 createCancelReservationResponse2() {
         return new CancelReservationResponse2();
@@ -5743,7 +5026,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ResetRefunds }
-     * 
      */
     public ResetRefunds createResetRefunds() {
         return new ResetRefunds();
@@ -5751,7 +5033,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTransNewRentalData }
-     * 
      */
     public ArrayOfTransNewRentalData createArrayOfTransNewRentalData() {
         return new ArrayOfTransNewRentalData();
@@ -5759,7 +5040,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAACTINFO }
-     * 
      */
     public SOAACTINFO createSOAACTINFO() {
         return new SOAACTINFO();
@@ -5767,7 +5047,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitDoorResponse }
-     * 
      */
     public EUnitDoorResponse createEUnitDoorResponse() {
         return new EUnitDoorResponse();
@@ -5775,7 +5054,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfBulkPricing }
-     * 
      */
     public ArrayOfBulkPricing createArrayOfBulkPricing() {
         return new ArrayOfBulkPricing();
@@ -5783,7 +5061,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalInfoRequest }
-     * 
      */
     public GetRentalInfoRequest createGetRentalInfoRequest() {
         return new GetRentalInfoRequest();
@@ -5791,7 +5068,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddNewPhone }
-     * 
      */
     public AddNewPhone createAddNewPhone() {
         return new AddNewPhone();
@@ -5799,7 +5075,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRULEVALUES }
-     * 
      */
     public ArrayOfRULEVALUES createArrayOfRULEVALUES() {
         return new ArrayOfRULEVALUES();
@@ -5807,7 +5082,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddNewPhoneResponse }
-     * 
      */
     public AddNewPhoneResponse createAddNewPhoneResponse() {
         return new AddNewPhoneResponse();
@@ -5815,7 +5089,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReassignRental }
-     * 
      */
     public ReassignRental createReassignRental() {
         return new ReassignRental();
@@ -5823,7 +5096,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidRetailAssessmentRequest }
-     * 
      */
     public VoidRetailAssessmentRequest createVoidRetailAssessmentRequest() {
         return new VoidRetailAssessmentRequest();
@@ -5831,7 +5103,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExportRefunds }
-     * 
      */
     public ExportRefunds createExportRefunds() {
         return new ExportRefunds();
@@ -5839,7 +5110,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ScheduledLetter }
-     * 
      */
     public ScheduledLetter createScheduledLetter() {
         return new ScheduledLetter();
@@ -5847,7 +5117,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationRequest }
-     * 
      */
     public CancelReservationRequest createCancelReservationRequest() {
         return new CancelReservationRequest();
@@ -5855,7 +5124,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuctionResponse2 }
-     * 
      */
     public CreateAuctionResponse2 createCreateAuctionResponse2() {
         return new CreateAuctionResponse2();
@@ -5863,7 +5131,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDepositsResponse }
-     * 
      */
     public GetAvailableDepositsResponse createGetAvailableDepositsResponse() {
         return new GetAvailableDepositsResponse();
@@ -5871,7 +5138,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusExpandedRequestData }
-     * 
      */
     public UpdateUnitStatusExpandedRequestData createUpdateUnitStatusExpandedRequestData() {
         return new UpdateUnitStatusExpandedRequestData();
@@ -5879,7 +5145,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeReservation }
-     * 
      */
     public MakeReservation createMakeReservation() {
         return new MakeReservation();
@@ -5887,7 +5152,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDueResponse }
-     * 
      */
     public GetTotalDueResponse createGetTotalDueResponse() {
         return new GetTotalDueResponse();
@@ -5895,7 +5159,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link InitiateUnitTransferResponse2 }
-     * 
      */
     public InitiateUnitTransferResponse2 createInitiateUnitTransferResponse2() {
         return new InitiateUnitTransferResponse2();
@@ -5903,7 +5166,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMultipleReservationsResponse2 }
-     * 
      */
     public MakeMultipleReservationsResponse2 createMakeMultipleReservationsResponse2() {
         return new MakeMultipleReservationsResponse2();
@@ -5911,7 +5173,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIURequest }
-     * 
      */
     public FIURequest createFIURequest() {
         return new FIURequest();
@@ -5919,7 +5180,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuctionEndRentalResponse2 }
-     * 
      */
     public CreateAuctionEndRentalResponse2 createCreateAuctionEndRentalResponse2() {
         return new CreateAuctionEndRentalResponse2();
@@ -5927,7 +5187,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCashCreditsResponse2 }
-     * 
      */
     public GetCashCreditsResponse2 createGetCashCreditsResponse2() {
         return new GetCashCreditsResponse2();
@@ -5935,7 +5194,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAPPLBESTPCD }
-     * 
      */
     public ArrayOfAPPLBESTPCD createArrayOfAPPLBESTPCD() {
         return new ArrayOfAPPLBESTPCD();
@@ -5943,7 +5201,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EndRentalResponse }
-     * 
      */
     public EndRentalResponse createEndRentalResponse() {
         return new EndRentalResponse();
@@ -5951,7 +5208,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewLeasePdfResponse }
-     * 
      */
     public ViewLeasePdfResponse createViewLeasePdfResponse() {
         return new ViewLeasePdfResponse();
@@ -5959,7 +5215,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link NewPCDItem }
-     * 
      */
     public NewPCDItem createNewPCDItem() {
         return new NewPCDItem();
@@ -5967,7 +5222,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReceiptTemplateInfoResponse }
-     * 
      */
     public GetReceiptTemplateInfoResponse createGetReceiptTemplateInfoResponse() {
         return new GetReceiptTemplateInfoResponse();
@@ -5975,7 +5229,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidFee }
-     * 
      */
     public VoidFee createVoidFee() {
         return new VoidFee();
@@ -5983,7 +5236,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetChannelListResponse2 }
-     * 
      */
     public GetChannelListResponse2 createGetChannelListResponse2() {
         return new GetChannelListResponse2();
@@ -5991,7 +5243,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEligibleAuctionRentalsResponse }
-     * 
      */
     public GetEligibleAuctionRentalsResponse createGetEligibleAuctionRentalsResponse() {
         return new GetEligibleAuctionRentalsResponse();
@@ -5999,7 +5250,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitAttr02 }
-     * 
      */
     public EUnitAttr02 createEUnitAttr02() {
         return new EUnitAttr02();
@@ -6007,7 +5257,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactPhone }
-     * 
      */
     public ContactPhone createContactPhone() {
         return new ContactPhone();
@@ -6015,7 +5264,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAndViewLetterResponse }
-     * 
      */
     public CreateAndViewLetterResponse createCreateAndViewLetterResponse() {
         return new CreateAndViewLetterResponse();
@@ -6023,7 +5271,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSellRetailWithAccountRequest }
-     * 
      */
     public ArrayOfSellRetailWithAccountRequest createArrayOfSellRetailWithAccountRequest() {
         return new ArrayOfSellRetailWithAccountRequest();
@@ -6031,7 +5278,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddDeposit }
-     * 
      */
     public AddDeposit createAddDeposit() {
         return new AddDeposit();
@@ -6039,7 +5285,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link APPLORGFLEXFIELDS }
-     * 
      */
     public APPLORGFLEXFIELDS createAPPLORGFLEXFIELDS() {
         return new APPLORGFLEXFIELDS();
@@ -6047,7 +5292,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRentalContact }
-     * 
      */
     public ArrayOfRentalContact createArrayOfRentalContact() {
         return new ArrayOfRentalContact();
@@ -6055,7 +5299,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseTemplateInfo }
-     * 
      */
     public GetLeaseTemplateInfo createGetLeaseTemplateInfo() {
         return new GetLeaseTemplateInfo();
@@ -6063,7 +5306,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SellRetailNoAccount }
-     * 
      */
     public SellRetailNoAccount createSellRetailNoAccount() {
         return new SellRetailNoAccount();
@@ -6071,7 +5313,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WalkThruList }
-     * 
      */
     public WalkThruList createWalkThruList() {
         return new WalkThruList();
@@ -6079,7 +5320,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateInsuranceResponse2 }
-     * 
      */
     public UpdateInsuranceResponse2 createUpdateInsuranceResponse2() {
         return new UpdateInsuranceResponse2();
@@ -6087,7 +5327,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUpdateUnitStatusExpandedResponseData }
-     * 
      */
     public ArrayOfUpdateUnitStatusExpandedResponseData createArrayOfUpdateUnitStatusExpandedResponseData() {
         return new ArrayOfUpdateUnitStatusExpandedResponseData();
@@ -6095,7 +5334,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfProcessResult }
-     * 
      */
     public ArrayOfProcessResult createArrayOfProcessResult() {
         return new ArrayOfProcessResult();
@@ -6103,7 +5341,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionEndRentalResponse2 }
-     * 
      */
     public AuctionEndRentalResponse2 createAuctionEndRentalResponse2() {
         return new AuctionEndRentalResponse2();
@@ -6111,7 +5348,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMoveOutInfoResponse2 }
-     * 
      */
     public GetMoveOutInfoResponse2 createGetMoveOutInfoResponse2() {
         return new GetMoveOutInfoResponse2();
@@ -6119,7 +5355,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MiniKeyStats }
-     * 
      */
     public MiniKeyStats createMiniKeyStats() {
         return new MiniKeyStats();
@@ -6127,7 +5362,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MailCentralizedReceipt }
-     * 
      */
     public MailCentralizedReceipt createMailCentralizedReceipt() {
         return new MailCentralizedReceipt();
@@ -6135,7 +5369,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedInsuranceResponse }
-     * 
      */
     public GetAppliedInsuranceResponse createGetAppliedInsuranceResponse() {
         return new GetAppliedInsuranceResponse();
@@ -6143,7 +5376,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANQUOTENOTESDETAIL }
-     * 
      */
     public ArrayOfTRANQUOTENOTESDETAIL createArrayOfTRANQUOTENOTESDETAIL() {
         return new ArrayOfTRANQUOTENOTESDETAIL();
@@ -6151,7 +5383,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateGatePIN }
-     * 
      */
     public UpdateGatePIN createUpdateGatePIN() {
         return new UpdateGatePIN();
@@ -6159,7 +5390,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalSettingsResponse2 }
-     * 
      */
     public UpdateRentalSettingsResponse2 createUpdateRentalSettingsResponse2() {
         return new UpdateRentalSettingsResponse2();
@@ -6167,7 +5397,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfORGSECURITYDEPOSITS }
-     * 
      */
     public ArrayOfORGSECURITYDEPOSITS createArrayOfORGSECURITYDEPOSITS() {
         return new ArrayOfORGSECURITYDEPOSITS();
@@ -6175,7 +5404,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RemoveRentalFromAuctionResponse2 }
-     * 
      */
     public RemoveRentalFromAuctionResponse2 createRemoveRentalFromAuctionResponse2() {
         return new RemoveRentalFromAuctionResponse2();
@@ -6183,7 +5411,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetInsuranceInfoRequest }
-     * 
      */
     public GetInsuranceInfoRequest createGetInsuranceInfoRequest() {
         return new GetInsuranceInfoRequest();
@@ -6191,7 +5418,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACTACCOUNTS }
-     * 
      */
     public ArrayOfACTACCOUNTS createArrayOfACTACCOUNTS() {
         return new ArrayOfACTACCOUNTS();
@@ -6199,7 +5425,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SwsLtrParams }
-     * 
      */
     public SwsLtrParams createSwsLtrParams() {
         return new SwsLtrParams();
@@ -6207,7 +5432,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledLetterListRequest }
-     * 
      */
     public GetScheduledLetterListRequest createGetScheduledLetterListRequest() {
         return new GetScheduledLetterListRequest();
@@ -6215,7 +5439,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Phone }
-     * 
      */
     public Phone createPhone() {
         return new Phone();
@@ -6223,7 +5446,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePaymentResponse2 }
-     * 
      */
     public MakePaymentResponse2 createMakePaymentResponse2() {
         return new MakePaymentResponse2();
@@ -6231,7 +5453,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEcommRentalInfoResponse }
-     * 
      */
     public GetEcommRentalInfoResponse createGetEcommRentalInfoResponse() {
         return new GetEcommRentalInfoResponse();
@@ -6239,7 +5460,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledFees }
-     * 
      */
     public GetScheduledFees createGetScheduledFees() {
         return new GetScheduledFees();
@@ -6247,7 +5467,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExportInsuranceDetailResponse }
-     * 
      */
     public ExportInsuranceDetailResponse createExportInsuranceDetailResponse() {
         return new ExportInsuranceDetailResponse();
@@ -6255,7 +5474,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReassignRentalResponse }
-     * 
      */
     public ReassignRentalResponse createReassignRentalResponse() {
         return new ReassignRentalResponse();
@@ -6263,7 +5481,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MoveOutInfo }
-     * 
      */
     public MoveOutInfo createMoveOutInfo() {
         return new MoveOutInfo();
@@ -6271,7 +5488,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetChannelListResponse }
-     * 
      */
     public GetChannelListResponse createGetChannelListResponse() {
         return new GetChannelListResponse();
@@ -6279,7 +5495,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReturnRetailItemsRequest }
-     * 
      */
     public ReturnRetailItemsRequest createReturnRetailItemsRequest() {
         return new ReturnRetailItemsRequest();
@@ -6287,7 +5502,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalActivity }
-     * 
      */
     public RentalActivity createRentalActivity() {
         return new RentalActivity();
@@ -6295,7 +5509,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteTasksResponse }
-     * 
      */
     public GetSiteTasksResponse createGetSiteTasksResponse() {
         return new GetSiteTasksResponse();
@@ -6303,7 +5516,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewAccount }
-     * 
      */
     public CreateNewAccount createCreateNewAccount() {
         return new CreateNewAccount();
@@ -6311,7 +5523,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalLedgerRequest }
-     * 
      */
     public GetRentalLedgerRequest createGetRentalLedgerRequest() {
         return new GetRentalLedgerRequest();
@@ -6319,7 +5530,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakePaymentByAssessmentRequest }
-     * 
      */
     public MakePaymentByAssessmentRequest createMakePaymentByAssessmentRequest() {
         return new MakePaymentByAssessmentRequest();
@@ -6327,7 +5537,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidMoveInRequest }
-     * 
      */
     public VoidMoveInRequest createVoidMoveInRequest() {
         return new VoidMoveInRequest();
@@ -6335,7 +5544,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfSWSGETECOMMRENTALINFO }
-     * 
      */
     public ArrayOfSWSGETECOMMRENTALINFO createArrayOfSWSGETECOMMRENTALINFO() {
         return new ArrayOfSWSGETECOMMRENTALINFO();
@@ -6343,7 +5551,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANQUOTEPCD }
-     * 
      */
     public ArrayOfTRANQUOTEPCD createArrayOfTRANQUOTEPCD() {
         return new ArrayOfTRANQUOTEPCD();
@@ -6351,7 +5558,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddMultipleServicesResponse }
-     * 
      */
     public AddMultipleServicesResponse createAddMultipleServicesResponse() {
         return new AddMultipleServicesResponse();
@@ -6359,7 +5565,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EInquirySource }
-     * 
      */
     public EInquirySource createEInquirySource() {
         return new EInquirySource();
@@ -6367,7 +5572,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantLetterList }
-     * 
      */
     public GetTenantLetterList createGetTenantLetterList() {
         return new GetTenantLetterList();
@@ -6375,7 +5579,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SITECLASSES }
-     * 
      */
     public SITECLASSES createSITECLASSES() {
         return new SITECLASSES();
@@ -6383,7 +5586,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactsRequest }
-     * 
      */
     public GetContactsRequest createGetContactsRequest() {
         return new GetContactsRequest();
@@ -6391,7 +5593,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactAddressesResponse }
-     * 
      */
     public GetContactAddressesResponse createGetContactAddressesResponse() {
         return new GetContactAddressesResponse();
@@ -6399,7 +5600,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyPCDs }
-     * 
      */
     public ApplyPCDs createApplyPCDs() {
         return new ApplyPCDs();
@@ -6407,7 +5607,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MailCentralizedReceiptResponse }
-     * 
      */
     public MailCentralizedReceiptResponse createMailCentralizedReceiptResponse() {
         return new MailCentralizedReceiptResponse();
@@ -6415,7 +5614,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RentalActivityResponse2 }
-     * 
      */
     public RentalActivityResponse2 createRentalActivityResponse2() {
         return new RentalActivityResponse2();
@@ -6423,7 +5621,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RetailReturn }
-     * 
      */
     public RetailReturn createRetailReturn() {
         return new RetailReturn();
@@ -6431,7 +5628,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PaymentReceiptBundleResponse2 }
-     * 
      */
     public PaymentReceiptBundleResponse2 createPaymentReceiptBundleResponse2() {
         return new PaymentReceiptBundleResponse2();
@@ -6439,7 +5635,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACCTNOTESALL }
-     * 
      */
     public ArrayOfACCTNOTESALL createArrayOfACCTNOTESALL() {
         return new ArrayOfACCTNOTESALL();
@@ -6447,7 +5642,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLetterInfo }
-     * 
      */
     public GetLetterInfo createGetLetterInfo() {
         return new GetLetterInfo();
@@ -6455,7 +5649,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfRENTALSERVICES }
-     * 
      */
     public ArrayOfRENTALSERVICES createArrayOfRENTALSERVICES() {
         return new ArrayOfRENTALSERVICES();
@@ -6463,7 +5656,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuctionEndRentalRequest }
-     * 
      */
     public CreateAuctionEndRentalRequest createCreateAuctionEndRentalRequest() {
         return new CreateAuctionEndRentalRequest();
@@ -6471,7 +5663,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationCashCredit }
-     * 
      */
     public CancelReservationCashCredit createCancelReservationCashCredit() {
         return new CancelReservationCashCredit();
@@ -6479,7 +5670,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRefundTypesRequestData }
-     * 
      */
     public GetRefundTypesRequestData createGetRefundTypesRequestData() {
         return new GetRefundTypesRequestData();
@@ -6487,7 +5677,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfMakeReservationRequest }
-     * 
      */
     public ArrayOfMakeReservationRequest createArrayOfMakeReservationRequest() {
         return new ArrayOfMakeReservationRequest();
@@ -6495,7 +5684,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGRETAILPODETAIL }
-     * 
      */
     public ORGRETAILPODETAIL createORGRETAILPODETAIL() {
         return new ORGRETAILPODETAIL();
@@ -6503,7 +5691,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TntLtrNumResponse }
-     * 
      */
     public TntLtrNumResponse createTntLtrNumResponse() {
         return new TntLtrNumResponse();
@@ -6511,7 +5698,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMoveOutInfoResponse }
-     * 
      */
     public GetMoveOutInfoResponse createGetMoveOutInfoResponse() {
         return new GetMoveOutInfoResponse();
@@ -6519,7 +5705,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddRentalsToAuction }
-     * 
      */
     public AddRentalsToAuction createAddRentalsToAuction() {
         return new AddRentalsToAuction();
@@ -6527,7 +5712,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteUnitDataResponse }
-     * 
      */
     public GetSiteUnitDataResponse createGetSiteUnitDataResponse() {
         return new GetSiteUnitDataResponse();
@@ -6535,7 +5719,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLtrTemplateInfoRequest }
-     * 
      */
     public GetLtrTemplateInfoRequest createGetLtrTemplateInfoRequest() {
         return new GetLtrTemplateInfoRequest();
@@ -6543,7 +5726,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetBaseFeesResponse }
-     * 
      */
     public GetBaseFeesResponse createGetBaseFeesResponse() {
         return new GetBaseFeesResponse();
@@ -6551,7 +5733,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EUnitStatusResponse }
-     * 
      */
     public EUnitStatusResponse createEUnitStatusResponse() {
         return new EUnitStatusResponse();
@@ -6559,7 +5740,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FIUChecksumRequest }
-     * 
      */
     public FIUChecksumRequest createFIUChecksumRequest() {
         return new FIUChecksumRequest();
@@ -6567,7 +5747,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAuctionEndRentalComplete }
-     * 
      */
     public ArrayOfAuctionEndRentalComplete createArrayOfAuctionEndRentalComplete() {
         return new ArrayOfAuctionEndRentalComplete();
@@ -6575,7 +5754,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAssessmentsResponse2 }
-     * 
      */
     public GetAssessmentsResponse2 createGetAssessmentsResponse2() {
         return new GetAssessmentsResponse2();
@@ -6583,7 +5761,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetBaseFees }
-     * 
      */
     public GetBaseFees createGetBaseFees() {
         return new GetBaseFees();
@@ -6591,7 +5768,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAGETSITELIST }
-     * 
      */
     public SOAGETSITELIST createSOAGETSITELIST() {
         return new SOAGETSITELIST();
@@ -6599,7 +5775,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfNewRental }
-     * 
      */
     public ArrayOfNewRental createArrayOfNewRental() {
         return new ArrayOfNewRental();
@@ -6607,7 +5782,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReturnRetailItemsResponse2 }
-     * 
      */
     public ReturnRetailItemsResponse2 createReturnRetailItemsResponse2() {
         return new ReturnRetailItemsResponse2();
@@ -6615,7 +5789,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantLetterListResponse2 }
-     * 
      */
     public GetTenantLetterListResponse2 createGetTenantLetterListResponse2() {
         return new GetTenantLetterListResponse2();
@@ -6623,7 +5796,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ProcessManualAutoPayResponse2 }
-     * 
      */
     public ProcessManualAutoPayResponse2 createProcessManualAutoPayResponse2() {
         return new ProcessManualAutoPayResponse2();
@@ -6631,7 +5803,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfUpdateStreetReqData }
-     * 
      */
     public ArrayOfUpdateStreetReqData createArrayOfUpdateStreetReqData() {
         return new ArrayOfUpdateStreetReqData();
@@ -6639,7 +5810,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfACCTLETTERS }
-     * 
      */
     public ArrayOfACCTLETTERS createArrayOfACCTLETTERS() {
         return new ArrayOfACCTLETTERS();
@@ -6647,7 +5817,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VersResAssessBundle }
-     * 
      */
     public VersResAssessBundle createVersResAssessBundle() {
         return new VersResAssessBundle();
@@ -6655,7 +5824,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctionTaxResponse2 }
-     * 
      */
     public GetAuctionTaxResponse2 createGetAuctionTaxResponse2() {
         return new GetAuctionTaxResponse2();
@@ -6663,7 +5831,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNewEcommAccountResponse }
-     * 
      */
     public CreateNewEcommAccountResponse createCreateNewEcommAccountResponse() {
         return new CreateNewEcommAccountResponse();
@@ -6671,7 +5838,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link InitiateUnitTransfer }
-     * 
      */
     public InitiateUnitTransfer createInitiateUnitTransfer() {
         return new InitiateUnitTransfer();
@@ -6679,7 +5845,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTotalDuePastDueResponse2 }
-     * 
      */
     public GetTotalDuePastDueResponse2 createGetTotalDuePastDueResponse2() {
         return new GetTotalDuePastDueResponse2();
@@ -6687,7 +5852,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MultiRetailSalesResults }
-     * 
      */
     public MultiRetailSalesResults createMultiRetailSalesResults() {
         return new MultiRetailSalesResults();
@@ -6695,7 +5859,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdatePhone }
-     * 
      */
     public UpdatePhone createUpdatePhone() {
         return new UpdatePhone();
@@ -6703,7 +5866,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ORGEXTATTRIBUTES }
-     * 
      */
     public ORGEXTATTRIBUTES createORGEXTATTRIBUTES() {
         return new ORGEXTATTRIBUTES();
@@ -6711,7 +5873,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPOSTLEASETNTINFO }
-     * 
      */
     public ArrayOfPOSTLEASETNTINFO createArrayOfPOSTLEASETNTINFO() {
         return new ArrayOfPOSTLEASETNTINFO();
@@ -6719,7 +5880,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReservations }
-     * 
      */
     public GetReservations createGetReservations() {
         return new GetReservations();
@@ -6727,7 +5887,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VerifyEcommLoginResponse2 }
-     * 
      */
     public VerifyEcommLoginResponse2 createVerifyEcommLoginResponse2() {
         return new VerifyEcommLoginResponse2();
@@ -6735,7 +5894,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRental }
-     * 
      */
     public UpdateRental createUpdateRental() {
         return new UpdateRental();
@@ -6743,7 +5901,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableRetailItemsRequest }
-     * 
      */
     public GetAvailableRetailItemsRequest createGetAvailableRetailItemsRequest() {
         return new GetAvailableRetailItemsRequest();
@@ -6751,7 +5908,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuctionInfo }
-     * 
      */
     public AuctionInfo createAuctionInfo() {
         return new AuctionInfo();
@@ -6759,7 +5915,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateAuctionEndRentalResponse }
-     * 
      */
     public CreateAuctionEndRentalResponse createCreateAuctionEndRentalResponse() {
         return new CreateAuctionEndRentalResponse();
@@ -6767,7 +5922,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TransRentalAssessments }
-     * 
      */
     public TransRentalAssessments createTransRentalAssessments() {
         return new TransRentalAssessments();
@@ -6775,7 +5929,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableCreditsRequest }
-     * 
      */
     public GetAvailableCreditsRequest createGetAvailableCreditsRequest() {
         return new GetAvailableCreditsRequest();
@@ -6783,7 +5936,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetContactPhoneNumbersResponse2 }
-     * 
      */
     public GetContactPhoneNumbersResponse2 createGetContactPhoneNumbersResponse2() {
         return new GetContactPhoneNumbersResponse2();
@@ -6791,7 +5943,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLeaseGroupTemplateInfoRequest }
-     * 
      */
     public GetLeaseGroupTemplateInfoRequest createGetLeaseGroupTemplateInfoRequest() {
         return new GetLeaseGroupTemplateInfoRequest();
@@ -6799,7 +5950,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteList }
-     * 
      */
     public GetSiteList createGetSiteList() {
         return new GetSiteList();
@@ -6807,7 +5957,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAuction }
-     * 
      */
     public UpdateAuction createUpdateAuction() {
         return new UpdateAuction();
@@ -6815,7 +5964,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateReservationResponse }
-     * 
      */
     public UpdateReservationResponse createUpdateReservationResponse() {
         return new UpdateReservationResponse();
@@ -6823,7 +5971,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetScheduledFeesRequest }
-     * 
      */
     public GetScheduledFeesRequest createGetScheduledFeesRequest() {
         return new GetScheduledFeesRequest();
@@ -6831,7 +5978,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VoidRetailAssessments }
-     * 
      */
     public VoidRetailAssessments createVoidRetailAssessments() {
         return new VoidRetailAssessments();
@@ -6839,7 +5985,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfAPPLINSEXPORT }
-     * 
      */
     public ArrayOfAPPLINSEXPORT createArrayOfAPPLINSEXPORT() {
         return new ArrayOfAPPLINSEXPORT();
@@ -6847,7 +5992,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteAttributesRequest }
-     * 
      */
     public GetSiteAttributesRequest createGetSiteAttributesRequest() {
         return new GetSiteAttributesRequest();
@@ -6855,7 +5999,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEligibleAuctionRentalsResponse2 }
-     * 
      */
     public GetEligibleAuctionRentalsResponse2 createGetEligibleAuctionRentalsResponse2() {
         return new GetEligibleAuctionRentalsResponse2();
@@ -6863,7 +6006,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAvailableDiscountsRequest }
-     * 
      */
     public GetAvailableDiscountsRequest createGetAvailableDiscountsRequest() {
         return new GetAvailableDiscountsRequest();
@@ -6871,7 +6013,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfEntryItem }
-     * 
      */
     public ArrayOfEntryItem createArrayOfEntryItem() {
         return new ArrayOfEntryItem();
@@ -6879,7 +6020,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CASHCREDITS }
-     * 
      */
     public CASHCREDITS createCASHCREDITS() {
         return new CASHCREDITS();
@@ -6887,7 +6027,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANRENTALLEDGER }
-     * 
      */
     public TRANRENTALLEDGER createTRANRENTALLEDGER() {
         return new TRANRENTALLEDGER();
@@ -6895,7 +6034,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteDetailsResponse }
-     * 
      */
     public GetSiteDetailsResponse createGetSiteDetailsResponse() {
         return new GetSiteDetailsResponse();
@@ -6903,7 +6041,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WalkThruListResponse }
-     * 
      */
     public WalkThruListResponse createWalkThruListResponse() {
         return new WalkThruListResponse();
@@ -6911,7 +6048,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ScheduledLetterResponse }
-     * 
      */
     public ScheduledLetterResponse createScheduledLetterResponse() {
         return new ScheduledLetterResponse();
@@ -6919,7 +6055,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailContactResponse }
-     * 
      */
     public SendEmailContactResponse createSendEmailContactResponse() {
         return new SendEmailContactResponse();
@@ -6927,7 +6062,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplyCreditToAssessmentsResponse }
-     * 
      */
     public ApplyCreditToAssessmentsResponse createApplyCreditToAssessmentsResponse() {
         return new ApplyCreditToAssessmentsResponse();
@@ -6935,7 +6069,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssessFee }
-     * 
      */
     public AssessFee createAssessFee() {
         return new AssessFee();
@@ -6943,7 +6076,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateAutoPaySettingsResponse2 }
-     * 
      */
     public AddUpdateAutoPaySettingsResponse2 createAddUpdateAutoPaySettingsResponse2() {
         return new AddUpdateAutoPaySettingsResponse2();
@@ -6951,7 +6083,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ACCTNOTESALL }
-     * 
      */
     public ACCTNOTESALL createACCTNOTESALL() {
         return new ACCTNOTESALL();
@@ -6959,7 +6090,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeReservationRequest }
-     * 
      */
     public MakeReservationRequest createMakeReservationRequest() {
         return new MakeReservationRequest();
@@ -6967,7 +6097,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ViewLeasePdf }
-     * 
      */
     public ViewLeasePdf createViewLeasePdf() {
         return new ViewLeasePdf();
@@ -6975,7 +6104,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANRENTALLEDGER }
-     * 
      */
     public ArrayOfTRANRENTALLEDGER createArrayOfTRANRENTALLEDGER() {
         return new ArrayOfTRANRENTALLEDGER();
@@ -6983,7 +6111,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteRuleValueResponse }
-     * 
      */
     public GetSiteRuleValueResponse createGetSiteRuleValueResponse() {
         return new GetSiteRuleValueResponse();
@@ -6991,7 +6118,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetQuoteDataResponse2 }
-     * 
      */
     public GetQuoteDataResponse2 createGetQuoteDataResponse2() {
         return new GetQuoteDataResponse2();
@@ -6999,7 +6125,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLetterInfoResponse }
-     * 
      */
     public GetLetterInfoResponse createGetLetterInfoResponse() {
         return new GetLetterInfoResponse();
@@ -7007,7 +6132,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateRentalSettings }
-     * 
      */
     public UpdateRentalSettings createUpdateRentalSettings() {
         return new UpdateRentalSettings();
@@ -7015,7 +6139,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateAccountRequest }
-     * 
      */
     public UpdateAccountRequest createUpdateAccountRequest() {
         return new UpdateAccountRequest();
@@ -7023,7 +6146,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelReservationData }
-     * 
      */
     public CancelReservationData createCancelReservationData() {
         return new CancelReservationData();
@@ -7031,7 +6153,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTransRentalAssessments }
-     * 
      */
     public ArrayOfTransRentalAssessments createArrayOfTransRentalAssessments() {
         return new ArrayOfTransRentalAssessments();
@@ -7039,7 +6160,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecurringTask }
-     * 
      */
     public RecurringTask createRecurringTask() {
         return new RecurringTask();
@@ -7047,7 +6167,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SendEmailWithUnit }
-     * 
      */
     public SendEmailWithUnit createSendEmailWithUnit() {
         return new SendEmailWithUnit();
@@ -7055,7 +6174,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetEstimatedRefundResponse2 }
-     * 
      */
     public GetEstimatedRefundResponse2 createGetEstimatedRefundResponse2() {
         return new GetEstimatedRefundResponse2();
@@ -7063,7 +6181,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TRANQUOTEPCD }
-     * 
      */
     public TRANQUOTEPCD createTRANQUOTEPCD() {
         return new TRANQUOTEPCD();
@@ -7071,7 +6188,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateGatePINResponse }
-     * 
      */
     public UpdateGatePINResponse createUpdateGatePINResponse() {
         return new UpdateGatePINResponse();
@@ -7079,7 +6195,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetTenantLeaseListResponse2 }
-     * 
      */
     public GetTenantLeaseListResponse2 createGetTenantLeaseListResponse2() {
         return new GetTenantLeaseListResponse2();
@@ -7087,7 +6202,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetPartialPayRulesRequest }
-     * 
      */
     public GetPartialPayRulesRequest createGetPartialPayRulesRequest() {
         return new GetPartialPayRulesRequest();
@@ -7095,7 +6209,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNotesRequest }
-     * 
      */
     public CreateNotesRequest createCreateNotesRequest() {
         return new CreateNotesRequest();
@@ -7103,7 +6216,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetRentalInfo }
-     * 
      */
     public GetRentalInfo createGetRentalInfo() {
         return new GetRentalInfo();
@@ -7111,7 +6223,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfTRANRENTALS }
-     * 
      */
     public ArrayOfTRANRENTALS createArrayOfTRANRENTALS() {
         return new ArrayOfTRANRENTALS();
@@ -7119,7 +6230,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAutoPaySettingsRequest }
-     * 
      */
     public GetAutoPaySettingsRequest createGetAutoPaySettingsRequest() {
         return new GetAutoPaySettingsRequest();
@@ -7127,7 +6237,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteDetailsRequest }
-     * 
      */
     public GetSiteDetailsRequest createGetSiteDetailsRequest() {
         return new GetSiteDetailsRequest();
@@ -7135,7 +6244,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitFeatures }
-     * 
      */
     public GetUnitFeatures createGetUnitFeatures() {
         return new GetUnitFeatures();
@@ -7143,7 +6251,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusRequest }
-     * 
      */
     public UpdateUnitStatusRequest createUpdateUnitStatusRequest() {
         return new UpdateUnitStatusRequest();
@@ -7151,7 +6258,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAuctions }
-     * 
      */
     public GetAuctions createGetAuctions() {
         return new GetAuctions();
@@ -7159,7 +6265,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MakeMultipleReservationsRequest }
-     * 
      */
     public MakeMultipleReservationsRequest createMakeMultipleReservationsRequest() {
         return new MakeMultipleReservationsRequest();
@@ -7167,7 +6272,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CreateNotesResponse2 }
-     * 
      */
     public CreateNotesResponse2 createCreateNotesResponse2() {
         return new CreateNotesResponse2();
@@ -7175,7 +6279,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetSiteDetailsResponse2 }
-     * 
      */
     public GetSiteDetailsResponse2 createGetSiteDetailsResponse2() {
         return new GetSiteDetailsResponse2();
@@ -7183,7 +6286,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfString }
-     * 
      */
     public ArrayOfString createArrayOfString() {
         return new ArrayOfString();
@@ -7191,7 +6293,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SOAGETASSESSMENTS }
-     * 
      */
     public SOAGETASSESSMENTS createSOAGETASSESSMENTS() {
         return new SOAGETASSESSMENTS();
@@ -7199,7 +6300,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PaymentReceiptBundleResponse }
-     * 
      */
     public PaymentReceiptBundleResponse createPaymentReceiptBundleResponse() {
         return new PaymentReceiptBundleResponse();
@@ -7207,7 +6307,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAppliedInsurance }
-     * 
      */
     public GetAppliedInsurance createGetAppliedInsurance() {
         return new GetAppliedInsurance();
@@ -7215,7 +6314,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddressResponse }
-     * 
      */
     public AddressResponse createAddressResponse() {
         return new AddressResponse();
@@ -7223,7 +6321,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdateAutoPaySettingsResponse }
-     * 
      */
     public AddUpdateAutoPaySettingsResponse createAddUpdateAutoPaySettingsResponse() {
         return new AddUpdateAutoPaySettingsResponse();
@@ -7231,7 +6328,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetOrgListResponse }
-     * 
      */
     public GetOrgListResponse createGetOrgListResponse() {
         return new GetOrgListResponse();
@@ -7239,7 +6335,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfOrganization }
-     * 
      */
     public ArrayOfOrganization createArrayOfOrganization() {
         return new ArrayOfOrganization();
@@ -7247,7 +6342,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ResetServicesPasswordResponse2 }
-     * 
      */
     public ResetServicesPasswordResponse2 createResetServicesPasswordResponse2() {
         return new ResetServicesPasswordResponse2();
@@ -7255,7 +6349,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetUnitStatusResponse }
-     * 
      */
     public GetUnitStatusResponse createGetUnitStatusResponse() {
         return new GetUnitStatusResponse();
@@ -7263,7 +6356,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusExpandedResponse }
-     * 
      */
     public UpdateUnitStatusExpandedResponse createUpdateUnitStatusExpandedResponse() {
         return new UpdateUnitStatusExpandedResponse();
@@ -7271,7 +6363,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UpdateUnitStatusResponse }
-     * 
      */
     public UpdateUnitStatusResponse createUpdateUnitStatusResponse() {
         return new UpdateUnitStatusResponse();
@@ -7279,7 +6370,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMiscRevenueClassDataResponse2 }
-     * 
      */
     public GetMiscRevenueClassDataResponse2 createGetMiscRevenueClassDataResponse2() {
         return new GetMiscRevenueClassDataResponse2();
@@ -7287,7 +6377,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ArrayOfPRINTLEASEDOCS }
-     * 
      */
     public ArrayOfPRINTLEASEDOCS createArrayOfPRINTLEASEDOCS() {
         return new ArrayOfPRINTLEASEDOCS();
@@ -7295,7 +6384,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddUpdatePCDRequest }
-     * 
      */
     public AddUpdatePCDRequest createAddUpdatePCDRequest() {
         return new AddUpdatePCDRequest();

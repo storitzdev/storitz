@@ -22,9 +22,9 @@ public enum CommissionSourceType {
   static list() { [WEBSITE, WHITE_LABEL] }
 
   static public CommissionSourceType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return CommissionSourceType.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return CommissionSourceType.valueOf(value)
+    return ret
+  }
 
 }

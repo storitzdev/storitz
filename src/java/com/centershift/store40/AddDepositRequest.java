@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddDeposit_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddDeposit_Request">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddDeposit_Request", propOrder = {
-    "rentalID",
-    "depositData"
+        "rentalID",
+        "depositData"
 })
 public class AddDepositRequest {
 
@@ -41,7 +38,6 @@ public class AddDepositRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -49,7 +45,6 @@ public class AddDepositRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -57,11 +52,9 @@ public class AddDepositRequest {
 
     /**
      * Gets the value of the depositData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ORGSECURITYDEPOSITS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ORGSECURITYDEPOSITS }
      */
     public ORGSECURITYDEPOSITS getDepositData() {
         return depositData;
@@ -69,11 +62,9 @@ public class AddDepositRequest {
 
     /**
      * Sets the value of the depositData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ORGSECURITYDEPOSITS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ORGSECURITYDEPOSITS }
      */
     public void setDepositData(ORGSECURITYDEPOSITS value) {
         this.depositData = value;

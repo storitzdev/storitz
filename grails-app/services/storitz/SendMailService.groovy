@@ -13,28 +13,28 @@ class SendMailService {
 
   def onMessage(emailMessage) {
 
-      if (!emailMessage.to) return null
-    
-      try {
-          if (emailMessage.body) {
-            mailService.sendMail {
-                to (emailMessage.to instanceof List ? emailMessage.to.toArray() : emailMessage.to)
-                from emailMessage.from
-                subject emailMessage.subject
-                body emailMessage.body
-            }
-          } else {
-            mailService.sendMail {
-                to (emailMessage.to instanceof List ? emailMessage.to.toArray() : emailMessage.to)
-                from emailMessage.from
-                subject emailMessage.subject
-                body(view: emailMessage.view, model: emailMessage.model)
-            }
-          }
-      } catch (Exception e) {
-          log.error("Failed to send email ${emailMessage}", e)
+    if (!emailMessage.to) return null
+
+    try {
+      if (emailMessage.body) {
+        mailService.sendMail {
+          to(emailMessage.to instanceof List ? emailMessage.to.toArray() : emailMessage.to)
+          from emailMessage.from
+          subject emailMessage.subject
+          body emailMessage.body
+        }
+      } else {
+        mailService.sendMail {
+          to(emailMessage.to instanceof List ? emailMessage.to.toArray() : emailMessage.to)
+          from emailMessage.from
+          subject emailMessage.subject
+          body(view: emailMessage.view, model: emailMessage.model)
+        }
       }
-      //Return null to avoid poison messages
-      return null
+    } catch (Exception e) {
+      log.error("Failed to send email ${emailMessage}", e)
+    }
+    //Return null to avoid poison messages
+    return null
   }
 }

@@ -13,7 +13,7 @@ public enum TransactionType {
   }
 
   static list() {
-      [RENTAL, RESERVATION]
+    [RENTAL, RESERVATION]
   }
 
   static public TransactionType getEnumFromId(String value) {

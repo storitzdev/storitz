@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateRentRate_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateRentRate_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateRentRate_Response", propOrder = {
-    "responseData"
+        "responseData"
 })
 public class UpdateRentRateResponse2 {
 
@@ -37,11 +34,9 @@ public class UpdateRentRateResponse2 {
 
     /**
      * Gets the value of the responseData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfRentRateRespData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfRentRateRespData }
      */
     public ArrayOfRentRateRespData getResponseData() {
         return responseData;
@@ -49,11 +44,9 @@ public class UpdateRentRateResponse2 {
 
     /**
      * Sets the value of the responseData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfRentRateRespData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfRentRateRespData }
      */
     public void setResponseData(ArrayOfRentRateRespData value) {
         this.responseData = value;

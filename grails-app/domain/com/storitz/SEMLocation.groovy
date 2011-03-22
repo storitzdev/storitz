@@ -4,17 +4,17 @@ import storitz.constants.State
 
 class SEMLocation {
 
-    Integer locationId
-    String city
-    State state
-    Date created
-    Date updated
+  Integer locationId
+  String city
+  State state
+  Date created
+  Date updated
 
-    static mapping = {
-        cache true
-    }
+  static mapping = {
+    cache true
+  }
 
-    static constraints = {
-      locationId(unique:true)
-    }
+  static constraints = {
+    locationId(unique: true)
+  }
 }

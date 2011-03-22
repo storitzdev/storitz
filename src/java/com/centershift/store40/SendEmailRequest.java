@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for SendEmail_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SendEmail_Request">
  *   &lt;complexContent>
@@ -28,17 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SendEmail_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "accountID",
-    "rentalID",
-    "emailType",
-    "templateData"
+        "orgID",
+        "siteID",
+        "accountID",
+        "rentalID",
+        "emailType",
+        "templateData"
 })
 public class SendEmailRequest {
 
@@ -57,11 +54,9 @@ public class SendEmailRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getOrgID() {
         return orgID;
@@ -69,11 +64,9 @@ public class SendEmailRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setOrgID(Long value) {
         this.orgID = value;
@@ -81,11 +74,9 @@ public class SendEmailRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSiteID() {
         return siteID;
@@ -93,11 +84,9 @@ public class SendEmailRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSiteID(Long value) {
         this.siteID = value;
@@ -105,11 +94,9 @@ public class SendEmailRequest {
 
     /**
      * Gets the value of the accountID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAccountID() {
         return accountID;
@@ -117,11 +104,9 @@ public class SendEmailRequest {
 
     /**
      * Sets the value of the accountID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAccountID(Long value) {
         this.accountID = value;
@@ -129,11 +114,9 @@ public class SendEmailRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRentalID() {
         return rentalID;
@@ -141,11 +124,9 @@ public class SendEmailRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRentalID(Long value) {
         this.rentalID = value;
@@ -153,11 +134,9 @@ public class SendEmailRequest {
 
     /**
      * Gets the value of the emailType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @return possible object is
+     *         {@link EmailMsgTemplateIds }
      */
     public EmailMsgTemplateIds getEmailType() {
         return emailType;
@@ -165,11 +144,9 @@ public class SendEmailRequest {
 
     /**
      * Sets the value of the emailType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EmailMsgTemplateIds }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link EmailMsgTemplateIds }
      */
     public void setEmailType(EmailMsgTemplateIds value) {
         this.emailType = value;
@@ -177,11 +154,9 @@ public class SendEmailRequest {
 
     /**
      * Gets the value of the templateData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTemplateData() {
         return templateData;
@@ -189,11 +164,9 @@ public class SendEmailRequest {
 
     /**
      * Sets the value of the templateData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTemplateData(String value) {
         this.templateData = value;

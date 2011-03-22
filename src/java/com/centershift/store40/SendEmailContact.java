@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -25,13 +20,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "lookupUserRequest",
-    "request"
+        "lookupUserRequest",
+        "request"
 })
 @XmlRootElement(name = "SendEmailContact")
 public class SendEmailContact {
@@ -43,11 +36,9 @@ public class SendEmailContact {
 
     /**
      * Gets the value of the lookupUserRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LookupUserRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link LookupUserRequest }
      */
     public LookupUserRequest getLookupUserRequest() {
         return lookupUserRequest;
@@ -55,11 +46,9 @@ public class SendEmailContact {
 
     /**
      * Sets the value of the lookupUserRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LookupUserRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link LookupUserRequest }
      */
     public void setLookupUserRequest(LookupUserRequest value) {
         this.lookupUserRequest = value;
@@ -67,11 +56,9 @@ public class SendEmailContact {
 
     /**
      * Gets the value of the request property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SendEmailContactRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link SendEmailContactRequest }
      */
     public SendEmailContactRequest getRequest() {
         return request;
@@ -79,11 +66,9 @@ public class SendEmailContact {
 
     /**
      * Sets the value of the request property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SendEmailContactRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SendEmailContactRequest }
      */
     public void setRequest(SendEmailContactRequest value) {
         this.request = value;

@@ -12,8 +12,8 @@ import com.storitz.MetroEntry
 class MetroEntryComparator implements Comparator {
 
   public int compare(Object o1, Object o2) {
-    MetroEntry m1 = (MetroEntry)o1
-    MetroEntry m2 = (MetroEntry)o2
+    MetroEntry m1 = (MetroEntry) o1
+    MetroEntry m2 = (MetroEntry) o2
 
     if (m1.state == m2.state) {
       return m1.city.compareTo(m2.city)

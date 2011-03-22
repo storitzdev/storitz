@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Address complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="Address">
  *   &lt;complexContent>
@@ -28,17 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Address", propOrder = {
-    "address1",
-    "address2",
-    "address3",
-    "city",
-    "state",
-    "postalCode"
+        "address1",
+        "address2",
+        "address3",
+        "city",
+        "state",
+        "postalCode"
 })
 public class Address {
 
@@ -57,11 +54,9 @@ public class Address {
 
     /**
      * Gets the value of the address1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddress1() {
         return address1;
@@ -69,11 +64,9 @@ public class Address {
 
     /**
      * Sets the value of the address1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddress1(String value) {
         this.address1 = value;
@@ -81,11 +74,9 @@ public class Address {
 
     /**
      * Gets the value of the address2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddress2() {
         return address2;
@@ -93,11 +84,9 @@ public class Address {
 
     /**
      * Sets the value of the address2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddress2(String value) {
         this.address2 = value;
@@ -105,11 +94,9 @@ public class Address {
 
     /**
      * Gets the value of the address3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddress3() {
         return address3;
@@ -117,11 +104,9 @@ public class Address {
 
     /**
      * Sets the value of the address3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddress3(String value) {
         this.address3 = value;
@@ -129,11 +114,9 @@ public class Address {
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCity() {
         return city;
@@ -141,11 +124,9 @@ public class Address {
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCity(String value) {
         this.city = value;
@@ -153,11 +134,9 @@ public class Address {
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getState() {
         return state;
@@ -165,11 +144,9 @@ public class Address {
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setState(String value) {
         this.state = value;
@@ -177,11 +154,9 @@ public class Address {
 
     /**
      * Gets the value of the postalCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPostalCode() {
         return postalCode;
@@ -189,11 +164,9 @@ public class Address {
 
     /**
      * Sets the value of the postalCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPostalCode(String value) {
         this.postalCode = value;

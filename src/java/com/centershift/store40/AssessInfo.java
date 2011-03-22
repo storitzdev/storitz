@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for AssessInfo complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AssessInfo">
  *   &lt;complexContent>
@@ -26,14 +25,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AssessInfo", propOrder = {
-    "assessId",
-    "assessVersion",
-    "applyAmt"
+        "assessId",
+        "assessVersion",
+        "applyAmt"
 })
 public class AssessInfo {
 
@@ -46,7 +43,6 @@ public class AssessInfo {
 
     /**
      * Gets the value of the assessId property.
-     * 
      */
     public long getAssessId() {
         return assessId;
@@ -54,7 +50,6 @@ public class AssessInfo {
 
     /**
      * Sets the value of the assessId property.
-     * 
      */
     public void setAssessId(long value) {
         this.assessId = value;
@@ -62,7 +57,6 @@ public class AssessInfo {
 
     /**
      * Gets the value of the assessVersion property.
-     * 
      */
     public int getAssessVersion() {
         return assessVersion;
@@ -70,7 +64,6 @@ public class AssessInfo {
 
     /**
      * Sets the value of the assessVersion property.
-     * 
      */
     public void setAssessVersion(int value) {
         this.assessVersion = value;
@@ -78,11 +71,9 @@ public class AssessInfo {
 
     /**
      * Gets the value of the applyAmt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getApplyAmt() {
         return applyAmt;
@@ -90,11 +81,9 @@ public class AssessInfo {
 
     /**
      * Sets the value of the applyAmt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setApplyAmt(BigDecimal value) {
         this.applyAmt = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AddInsurance_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="AddInsurance_Request">
  *   &lt;complexContent>
@@ -27,16 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AddInsurance_Request", propOrder = {
-    "orgID",
-    "siteID",
-    "acctID",
-    "rentalID",
-    "insuranceOptionID"
+        "orgID",
+        "siteID",
+        "acctID",
+        "rentalID",
+        "insuranceOptionID"
 })
 public class AddInsuranceRequest {
 
@@ -53,7 +50,6 @@ public class AddInsuranceRequest {
 
     /**
      * Gets the value of the orgID property.
-     * 
      */
     public long getOrgID() {
         return orgID;
@@ -61,7 +57,6 @@ public class AddInsuranceRequest {
 
     /**
      * Sets the value of the orgID property.
-     * 
      */
     public void setOrgID(long value) {
         this.orgID = value;
@@ -69,7 +64,6 @@ public class AddInsuranceRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -77,7 +71,6 @@ public class AddInsuranceRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -85,7 +78,6 @@ public class AddInsuranceRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -93,7 +85,6 @@ public class AddInsuranceRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -101,7 +92,6 @@ public class AddInsuranceRequest {
 
     /**
      * Gets the value of the rentalID property.
-     * 
      */
     public long getRentalID() {
         return rentalID;
@@ -109,7 +99,6 @@ public class AddInsuranceRequest {
 
     /**
      * Sets the value of the rentalID property.
-     * 
      */
     public void setRentalID(long value) {
         this.rentalID = value;
@@ -117,7 +106,6 @@ public class AddInsuranceRequest {
 
     /**
      * Gets the value of the insuranceOptionID property.
-     * 
      */
     public long getInsuranceOptionID() {
         return insuranceOptionID;
@@ -125,7 +113,6 @@ public class AddInsuranceRequest {
 
     /**
      * Sets the value of the insuranceOptionID property.
-     * 
      */
     public void setInsuranceOptionID(long value) {
         this.insuranceOptionID = value;

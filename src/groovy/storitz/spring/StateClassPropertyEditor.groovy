@@ -13,7 +13,7 @@ import storitz.constants.State
 class StateClassPropertyEditor extends PropertyEditorSupport {
 
   String getAsText() {
-    return ((State)value).key
+    return ((State) value).key
   }
 
   void setAsText(String text) {

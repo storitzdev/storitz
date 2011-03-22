@@ -22,9 +22,9 @@ public enum IdType {
   }
 
   static public IdType getEnumFromId(String value) {
-        def ret = list().find {it.display == value }
-        if (!ret) return IdType.valueOf(value)
-        return ret
-    }
+    def ret = list().find {it.display == value }
+    if (!ret) return IdType.valueOf(value)
+    return ret
+  }
 
 }

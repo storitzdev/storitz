@@ -6,10 +6,10 @@ import storitz.constants.CenterShiftVersion
 class CenterShift extends Feed {
 
   static constraints = {
-    userName(blank:false, unique:true)
-    pin(blank:false)
-    cshiftVersion(nullable:true)
-    orgId(nullable:true)
+    userName(blank: false, unique: true)
+    pin(blank: false)
+    cshiftVersion(nullable: true)
+    orgId(nullable: true)
   }
 
   String userName

@@ -12,15 +12,15 @@ import ar.com.fdvs.dj.domain.CustomExpression
 class ReservationIdExpression implements CustomExpression {
 
   public Object evaluate(Map fields, Map variables, Map parameters) {
-          Boolean reserved = (Boolean) fields.get("reserved");
-          String reservationId = (String) fields.get("reservationId");
-          String idNumber = (String) fields.get("idNumber");
-          String ret = (reserved ? 'R' + reservationId : idNumber)
-          ret
+    Boolean reserved = (Boolean) fields.get("reserved");
+    String reservationId = (String) fields.get("reservationId");
+    String idNumber = (String) fields.get("idNumber");
+    String ret = (reserved ? 'R' + reservationId : idNumber)
+    ret
   }
 
   public String getClassName() {
-          return String.class.getName();
+    return String.class.getName();
   }
 
 }

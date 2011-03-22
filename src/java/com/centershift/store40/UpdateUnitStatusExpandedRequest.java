@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UpdateUnitStatusExpanded_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="UpdateUnitStatusExpanded_Request">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UpdateUnitStatusExpanded_Request", propOrder = {
-    "unitStatusUpdateData"
+        "unitStatusUpdateData"
 })
 public class UpdateUnitStatusExpandedRequest {
 
@@ -37,11 +34,9 @@ public class UpdateUnitStatusExpandedRequest {
 
     /**
      * Gets the value of the unitStatusUpdateData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfUpdateUnitStatusExpandedRequestData }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfUpdateUnitStatusExpandedRequestData }
      */
     public ArrayOfUpdateUnitStatusExpandedRequestData getUnitStatusUpdateData() {
         return unitStatusUpdateData;
@@ -49,11 +44,9 @@ public class UpdateUnitStatusExpandedRequest {
 
     /**
      * Sets the value of the unitStatusUpdateData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfUpdateUnitStatusExpandedRequestData }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfUpdateUnitStatusExpandedRequestData }
      */
     public void setUnitStatusUpdateData(ArrayOfUpdateUnitStatusExpandedRequestData value) {
         this.unitStatusUpdateData = value;

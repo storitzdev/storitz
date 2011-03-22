@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for createOrViewLtr_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="createOrViewLtr_Request">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "createOrViewLtr_Request", propOrder = {
-    "ltrData"
+        "ltrData"
 })
 public class CreateOrViewLtrRequest {
 
@@ -37,11 +34,9 @@ public class CreateOrViewLtrRequest {
 
     /**
      * Gets the value of the ltrData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SwsLtrParams }
-     *     
+     *
+     * @return possible object is
+     *         {@link SwsLtrParams }
      */
     public SwsLtrParams getLtrData() {
         return ltrData;
@@ -49,11 +44,9 @@ public class CreateOrViewLtrRequest {
 
     /**
      * Sets the value of the ltrData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SwsLtrParams }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SwsLtrParams }
      */
     public void setLtrData(SwsLtrParams value) {
         this.ltrData = value;

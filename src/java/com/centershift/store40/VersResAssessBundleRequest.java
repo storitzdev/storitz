@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for VersResAssessBundle_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="VersResAssessBundle_Request">
  *   &lt;complexContent>
@@ -29,18 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VersResAssessBundle_Request", propOrder = {
-    "getUnitDataRequest",
-    "makeReservationRequest",
-    "assessFeeRequest",
-    "addService",
-    "addInsuranceRequest",
-    "sellRetailWithAccountMultipleRequest",
-    "getAssessmentsRequest"
+        "getUnitDataRequest",
+        "makeReservationRequest",
+        "assessFeeRequest",
+        "addService",
+        "addInsuranceRequest",
+        "sellRetailWithAccountMultipleRequest",
+        "getAssessmentsRequest"
 })
 public class VersResAssessBundleRequest {
 
@@ -61,11 +58,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the getUnitDataRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetUnitDataRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetUnitDataRequest }
      */
     public GetUnitDataRequest getGetUnitDataRequest() {
         return getUnitDataRequest;
@@ -73,11 +68,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the getUnitDataRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetUnitDataRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetUnitDataRequest }
      */
     public void setGetUnitDataRequest(GetUnitDataRequest value) {
         this.getUnitDataRequest = value;
@@ -85,11 +78,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the makeReservationRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakeReservationRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakeReservationRequest }
      */
     public MakeReservationRequest getMakeReservationRequest() {
         return makeReservationRequest;
@@ -97,11 +88,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the makeReservationRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakeReservationRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakeReservationRequest }
      */
     public void setMakeReservationRequest(MakeReservationRequest value) {
         this.makeReservationRequest = value;
@@ -109,11 +98,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the assessFeeRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AssessFeeRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link AssessFeeRequest }
      */
     public AssessFeeRequest getAssessFeeRequest() {
         return assessFeeRequest;
@@ -121,11 +108,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the assessFeeRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AssessFeeRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AssessFeeRequest }
      */
     public void setAssessFeeRequest(AssessFeeRequest value) {
         this.assessFeeRequest = value;
@@ -133,11 +118,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the addService property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddMultipleServiceRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddMultipleServiceRequest }
      */
     public AddMultipleServiceRequest getAddService() {
         return addService;
@@ -145,11 +128,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the addService property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddMultipleServiceRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddMultipleServiceRequest }
      */
     public void setAddService(AddMultipleServiceRequest value) {
         this.addService = value;
@@ -157,11 +138,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the addInsuranceRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddInsuranceRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddInsuranceRequest }
      */
     public AddInsuranceRequest getAddInsuranceRequest() {
         return addInsuranceRequest;
@@ -169,11 +148,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the addInsuranceRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddInsuranceRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddInsuranceRequest }
      */
     public void setAddInsuranceRequest(AddInsuranceRequest value) {
         this.addInsuranceRequest = value;
@@ -181,11 +158,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the sellRetailWithAccountMultipleRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SellRetailWithAccountMultipleRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link SellRetailWithAccountMultipleRequest }
      */
     public SellRetailWithAccountMultipleRequest getSellRetailWithAccountMultipleRequest() {
         return sellRetailWithAccountMultipleRequest;
@@ -193,11 +168,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the sellRetailWithAccountMultipleRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SellRetailWithAccountMultipleRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SellRetailWithAccountMultipleRequest }
      */
     public void setSellRetailWithAccountMultipleRequest(SellRetailWithAccountMultipleRequest value) {
         this.sellRetailWithAccountMultipleRequest = value;
@@ -205,11 +178,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Gets the value of the getAssessmentsRequest property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetAssessmentsRequest }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetAssessmentsRequest }
      */
     public GetAssessmentsRequest getGetAssessmentsRequest() {
         return getAssessmentsRequest;
@@ -217,11 +188,9 @@ public class VersResAssessBundleRequest {
 
     /**
      * Sets the value of the getAssessmentsRequest property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetAssessmentsRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetAssessmentsRequest }
      */
     public void setGetAssessmentsRequest(GetAssessmentsRequest value) {
         this.getAssessmentsRequest = value;

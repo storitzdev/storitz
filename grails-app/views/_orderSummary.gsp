@@ -50,7 +50,8 @@
   </div>
   <div style="height: 10px;"></div>
   <div id="returnLinks" class="returnLink">
-    <a href="#" onclick="details_return(); return false">&laquo; Back to Details</a>&nbsp;|
+    <a href="#" onclick="details_return();
+    return false">&laquo; Back to Details</a>&nbsp;|
     <g:link controller="home" action="index" params="[size: params.searchSize, date: params.date, address: params.address]">
       &laquo; Back to Seach Results
     </g:link>

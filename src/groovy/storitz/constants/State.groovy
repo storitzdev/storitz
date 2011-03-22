@@ -78,7 +78,7 @@ public enum State {
   final String display
   final String fullName
 
-  State(String display, String fullName) { 
+  State(String display, String fullName) {
     this.display = display
     this.fullName = fullName
   }
@@ -120,6 +120,7 @@ public enum State {
             WYOMING
     ]
   }
+
   public static State fromText(String key) {
     def ret = list().find {it.display == key }
     if (!ret) return State.valueOf(key)
@@ -127,9 +128,9 @@ public enum State {
   }
 
   public static State getEnumFromId(String value) {
-      def ret = list().find {it.display == value }
-      if (!ret) return State.valueOf(value)
-      return ret
+    def ret = list().find {it.display == value }
+    if (!ret) return State.valueOf(value)
+    return ret
   }
 
 }

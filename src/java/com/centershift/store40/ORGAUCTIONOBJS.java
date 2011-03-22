@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for ORG_AUCTION_OBJS complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ORG_AUCTION_OBJS">
  *   &lt;complexContent>
@@ -37,29 +36,26 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ORG_AUCTION_OBJS", propOrder = {
-    "auctionid",
-    "rentalid",
-    "unitcontents",
-    "soldto",
-    "amt",
-    "taxcollected",
-    "address",
-    "notes",
-    "status",
-    "phone",
-    "createdby",
-    "updatedby",
-    "taxexempt",
-    "taxexemptnum"
+        "auctionid",
+        "rentalid",
+        "unitcontents",
+        "soldto",
+        "amt",
+        "taxcollected",
+        "address",
+        "notes",
+        "status",
+        "phone",
+        "createdby",
+        "updatedby",
+        "taxexempt",
+        "taxexemptnum"
 })
 public class ORGAUCTIONOBJS
-    extends BaseEntityOfCollectionORGAUCTIONOBJSColumnIndexes
-{
+        extends BaseEntityOfCollectionORGAUCTIONOBJSColumnIndexes {
 
     @XmlElement(name = "AUCTION_ID", required = true, type = Long.class, nillable = true)
     protected Long auctionid;
@@ -92,11 +88,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the auctionid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAUCTIONID() {
         return auctionid;
@@ -104,11 +98,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the auctionid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAUCTIONID(Long value) {
         this.auctionid = value;
@@ -116,11 +108,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getRENTALID() {
         return rentalid;
@@ -128,11 +118,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setRENTALID(Long value) {
         this.rentalid = value;
@@ -140,11 +128,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the unitcontents property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITCONTENTS() {
         return unitcontents;
@@ -152,11 +138,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the unitcontents property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITCONTENTS(String value) {
         this.unitcontents = value;
@@ -164,11 +148,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the soldto property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSOLDTO() {
         return soldto;
@@ -176,11 +158,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the soldto property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSOLDTO(String value) {
         this.soldto = value;
@@ -188,11 +168,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the amt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAMT() {
         return amt;
@@ -200,11 +178,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the amt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAMT(BigDecimal value) {
         this.amt = value;
@@ -212,11 +188,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the taxcollected property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTAXCOLLECTED() {
         return taxcollected;
@@ -224,11 +198,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the taxcollected property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTAXCOLLECTED(BigDecimal value) {
         this.taxcollected = value;
@@ -236,11 +208,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRESS() {
         return address;
@@ -248,11 +218,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRESS(String value) {
         this.address = value;
@@ -260,11 +228,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNOTES() {
         return notes;
@@ -272,11 +238,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNOTES(String value) {
         this.notes = value;
@@ -284,7 +248,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the status property.
-     * 
      */
     public int getSTATUS() {
         return status;
@@ -292,7 +255,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the status property.
-     * 
      */
     public void setSTATUS(int value) {
         this.status = value;
@@ -300,11 +262,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONE() {
         return phone;
@@ -312,11 +272,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONE(String value) {
         this.phone = value;
@@ -324,7 +282,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -332,7 +289,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -340,7 +296,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -348,7 +303,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;
@@ -356,7 +310,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the taxexempt property.
-     * 
      */
     public boolean isTAXEXEMPT() {
         return taxexempt;
@@ -364,7 +317,6 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the taxexempt property.
-     * 
      */
     public void setTAXEXEMPT(boolean value) {
         this.taxexempt = value;
@@ -372,11 +324,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Gets the value of the taxexemptnum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTAXEXEMPTNUM() {
         return taxexemptnum;
@@ -384,11 +334,9 @@ public class ORGAUCTIONOBJS
 
     /**
      * Sets the value of the taxexemptnum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTAXEXEMPTNUM(String value) {
         this.taxexemptnum = value;

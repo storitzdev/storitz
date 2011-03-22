@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetRetailRefundAmount_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetRetailRefundAmount_Request">
  *   &lt;complexContent>
@@ -25,14 +24,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetRetailRefundAmount_Request", propOrder = {
-    "siteID",
-    "transactionID",
-    "returnRetailData"
+        "siteID",
+        "transactionID",
+        "returnRetailData"
 })
 public class GetRetailRefundAmountRequest {
 
@@ -45,7 +42,6 @@ public class GetRetailRefundAmountRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -53,7 +49,6 @@ public class GetRetailRefundAmountRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -61,7 +56,6 @@ public class GetRetailRefundAmountRequest {
 
     /**
      * Gets the value of the transactionID property.
-     * 
      */
     public long getTransactionID() {
         return transactionID;
@@ -69,7 +63,6 @@ public class GetRetailRefundAmountRequest {
 
     /**
      * Sets the value of the transactionID property.
-     * 
      */
     public void setTransactionID(long value) {
         this.transactionID = value;
@@ -77,11 +70,9 @@ public class GetRetailRefundAmountRequest {
 
     /**
      * Gets the value of the returnRetailData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfReturnRetailItem }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfReturnRetailItem }
      */
     public ArrayOfReturnRetailItem getReturnRetailData() {
         return returnRetailData;
@@ -89,11 +80,9 @@ public class GetRetailRefundAmountRequest {
 
     /**
      * Sets the value of the returnRetailData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfReturnRetailItem }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfReturnRetailItem }
      */
     public void setReturnRetailData(ArrayOfReturnRetailItem value) {
         this.returnRetailData = value;

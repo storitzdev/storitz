@@ -1,18 +1,17 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for EntryItem complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="EntryItem">
  *   &lt;complexContent>
@@ -30,18 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EntryItem", propOrder = {
-    "siteID",
-    "account",
-    "notes",
-    "batchID",
-    "debit",
-    "credit",
-    "status"
+        "siteID",
+        "account",
+        "notes",
+        "batchID",
+        "debit",
+        "credit",
+        "status"
 })
 public class EntryItem {
 
@@ -62,7 +59,6 @@ public class EntryItem {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -70,7 +66,6 @@ public class EntryItem {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -78,11 +73,9 @@ public class EntryItem {
 
     /**
      * Gets the value of the account property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccount() {
         return account;
@@ -90,11 +83,9 @@ public class EntryItem {
 
     /**
      * Sets the value of the account property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccount(String value) {
         this.account = value;
@@ -102,11 +93,9 @@ public class EntryItem {
 
     /**
      * Gets the value of the notes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNotes() {
         return notes;
@@ -114,11 +103,9 @@ public class EntryItem {
 
     /**
      * Sets the value of the notes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNotes(String value) {
         this.notes = value;
@@ -126,7 +113,6 @@ public class EntryItem {
 
     /**
      * Gets the value of the batchID property.
-     * 
      */
     public long getBatchID() {
         return batchID;
@@ -134,7 +120,6 @@ public class EntryItem {
 
     /**
      * Sets the value of the batchID property.
-     * 
      */
     public void setBatchID(long value) {
         this.batchID = value;
@@ -142,11 +127,9 @@ public class EntryItem {
 
     /**
      * Gets the value of the debit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDebit() {
         return debit;
@@ -154,11 +137,9 @@ public class EntryItem {
 
     /**
      * Sets the value of the debit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDebit(BigDecimal value) {
         this.debit = value;
@@ -166,11 +147,9 @@ public class EntryItem {
 
     /**
      * Gets the value of the credit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCredit() {
         return credit;
@@ -178,11 +157,9 @@ public class EntryItem {
 
     /**
      * Sets the value of the credit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCredit(BigDecimal value) {
         this.credit = value;
@@ -190,11 +167,9 @@ public class EntryItem {
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getStatus() {
         return status;
@@ -202,11 +177,9 @@ public class EntryItem {
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setStatus(String value) {
         this.status = value;

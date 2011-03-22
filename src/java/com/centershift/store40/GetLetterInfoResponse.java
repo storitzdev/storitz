@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getLetterInfoResult"
+        "getLetterInfoResult"
 })
 @XmlRootElement(name = "GetLetterInfoResponse")
 public class GetLetterInfoResponse {
@@ -39,11 +32,9 @@ public class GetLetterInfoResponse {
 
     /**
      * Gets the value of the getLetterInfoResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetLetterInfoResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetLetterInfoResponse2 }
      */
     public GetLetterInfoResponse2 getGetLetterInfoResult() {
         return getLetterInfoResult;
@@ -51,11 +42,9 @@ public class GetLetterInfoResponse {
 
     /**
      * Sets the value of the getLetterInfoResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetLetterInfoResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetLetterInfoResponse2 }
      */
     public void setGetLetterInfoResult(GetLetterInfoResponse2 value) {
         this.getLetterInfoResult = value;

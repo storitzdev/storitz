@@ -16,7 +16,7 @@
 <div id="body">
   <g:render template="/topnav"/>
   <div class="stcontent">
-    <g:render template="/logo_bar" />
+    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -61,7 +61,8 @@
 
               <td>${rentalAgreementInstance?.agreementOwner?.username}</td>
 
-              <td><a href="${resource(file:rentalAgreementInstance.src())}" onclick="window.open(this.href,'_blank');return false;"><storitz:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a> </td>
+              <td><a href="${resource(file: rentalAgreementInstance.src())}" onclick="window.open(this.href, '_blank');
+              return false;"><storitz:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a></td>
 
             </tr>
           </g:each>
@@ -75,5 +76,5 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

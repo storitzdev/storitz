@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for getScheduledLetterList_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="getScheduledLetterList_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getScheduledLetterList_Response", propOrder = {
-    "tntSchedLtrsCol"
+        "tntSchedLtrsCol"
 })
 public class GetScheduledLetterListResponse2 {
 
@@ -37,11 +34,9 @@ public class GetScheduledLetterListResponse2 {
 
     /**
      * Gets the value of the tntSchedLtrsCol property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfPOSTSCHEDULELTRTNTINFO }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfPOSTSCHEDULELTRTNTINFO }
      */
     public ArrayOfPOSTSCHEDULELTRTNTINFO getTntSchedLtrsCol() {
         return tntSchedLtrsCol;
@@ -49,11 +44,9 @@ public class GetScheduledLetterListResponse2 {
 
     /**
      * Sets the value of the tntSchedLtrsCol property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfPOSTSCHEDULELTRTNTINFO }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfPOSTSCHEDULELTRTNTINFO }
      */
     public void setTntSchedLtrsCol(ArrayOfPOSTSCHEDULELTRTNTINFO value) {
         this.tntSchedLtrsCol = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for PcdStartPeriod.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p/>
  * <pre>
  * &lt;simpleType name="PcdStartPeriod">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -19,7 +18,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
  */
 @XmlType(name = "PcdStartPeriod")
 @XmlEnum
@@ -40,7 +38,7 @@ public enum PcdStartPeriod {
     }
 
     public static PcdStartPeriod fromValue(String v) {
-        for (PcdStartPeriod c: PcdStartPeriod.values()) {
+        for (PcdStartPeriod c : PcdStartPeriod.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

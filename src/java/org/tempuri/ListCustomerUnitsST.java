@@ -1,4 +1,3 @@
-
 package org.tempuri;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ListCustomerUnits_ST complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ListCustomerUnits_ST">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ListCustomerUnits_ST", propOrder = {
-    "csUnitID",
-    "lockedOut"
+        "csUnitID",
+        "lockedOut"
 })
 public class ListCustomerUnitsST {
 
@@ -40,11 +37,9 @@ public class ListCustomerUnitsST {
 
     /**
      * Gets the value of the csUnitID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUnitID() {
         return csUnitID;
@@ -52,11 +47,9 @@ public class ListCustomerUnitsST {
 
     /**
      * Sets the value of the csUnitID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUnitID(String value) {
         this.csUnitID = value;
@@ -64,7 +57,6 @@ public class ListCustomerUnitsST {
 
     /**
      * Gets the value of the lockedOut property.
-     * 
      */
     public boolean isLockedOut() {
         return lockedOut;
@@ -72,7 +64,6 @@ public class ListCustomerUnitsST {
 
     /**
      * Sets the value of the lockedOut property.
-     * 
      */
     public void setLockedOut(boolean value) {
         this.lockedOut = value;

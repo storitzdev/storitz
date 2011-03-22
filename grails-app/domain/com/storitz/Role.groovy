@@ -2,18 +2,18 @@ package com.storitz
 
 class Role {
 
-    static hasMany = [people: User]
+  static hasMany = [people: User]
 
-	String authority
-    /** description */
-    String description
+  String authority
+  /** description  */
+  String description
 
-	static mapping = {
-		cache true
-	}
+  static mapping = {
+    cache true
+  }
 
-	static constraints = {
-		authority blank: false, unique: true
-        description(blank:false)
-	}
+  static constraints = {
+    authority blank: false, unique: true
+    description(blank: false)
+  }
 }

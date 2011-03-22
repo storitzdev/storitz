@@ -1,21 +1,15 @@
-
 package org.tempuri;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -33,18 +27,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "csUser",
-    "csPassword",
-    "csSiteName",
-    "iUnitTypeId",
-    "tMoveInDate",
-    "csCoupon",
-    "dInsurance"
+        "csUser",
+        "csPassword",
+        "csSiteName",
+        "iUnitTypeId",
+        "tMoveInDate",
+        "csCoupon",
+        "dInsurance"
 })
 @XmlRootElement(name = "MoveInCost2")
 public class MoveInCost2 {
@@ -63,11 +55,9 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the csUser property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsUser() {
         return csUser;
@@ -75,11 +65,9 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the csUser property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsUser(String value) {
         this.csUser = value;
@@ -87,11 +75,9 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the csPassword property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsPassword() {
         return csPassword;
@@ -99,11 +85,9 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the csPassword property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsPassword(String value) {
         this.csPassword = value;
@@ -111,11 +95,9 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the csSiteName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsSiteName() {
         return csSiteName;
@@ -123,11 +105,9 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the csSiteName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsSiteName(String value) {
         this.csSiteName = value;
@@ -135,7 +115,6 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the iUnitTypeId property.
-     * 
      */
     public long getIUnitTypeId() {
         return iUnitTypeId;
@@ -143,7 +122,6 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the iUnitTypeId property.
-     * 
      */
     public void setIUnitTypeId(long value) {
         this.iUnitTypeId = value;
@@ -151,11 +129,9 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the tMoveInDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTMoveInDate() {
         return tMoveInDate;
@@ -163,11 +139,9 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the tMoveInDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTMoveInDate(XMLGregorianCalendar value) {
         this.tMoveInDate = value;
@@ -175,11 +149,9 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the csCoupon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCsCoupon() {
         return csCoupon;
@@ -187,11 +159,9 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the csCoupon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCsCoupon(String value) {
         this.csCoupon = value;
@@ -199,11 +169,9 @@ public class MoveInCost2 {
 
     /**
      * Gets the value of the dInsurance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDInsurance() {
         return dInsurance;
@@ -211,11 +179,9 @@ public class MoveInCost2 {
 
     /**
      * Sets the value of the dInsurance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDInsurance(BigDecimal value) {
         this.dInsurance = value;

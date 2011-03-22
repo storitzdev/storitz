@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for MoveOutDetail complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MoveOutDetail">
  *   &lt;complexContent>
@@ -31,17 +26,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MoveOutDetail", propOrder = {
-    "assessmentDate",
-    "description",
-    "originalCharge",
-    "paidAmount",
-    "unappliedAmount",
-    "dueAmount"
+        "assessmentDate",
+        "description",
+        "originalCharge",
+        "paidAmount",
+        "unappliedAmount",
+        "dueAmount"
 })
 public class MoveOutDetail {
 
@@ -61,11 +54,9 @@ public class MoveOutDetail {
 
     /**
      * Gets the value of the assessmentDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getAssessmentDate() {
         return assessmentDate;
@@ -73,11 +64,9 @@ public class MoveOutDetail {
 
     /**
      * Sets the value of the assessmentDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setAssessmentDate(XMLGregorianCalendar value) {
         this.assessmentDate = value;
@@ -85,11 +74,9 @@ public class MoveOutDetail {
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDescription() {
         return description;
@@ -97,11 +84,9 @@ public class MoveOutDetail {
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDescription(String value) {
         this.description = value;
@@ -109,11 +94,9 @@ public class MoveOutDetail {
 
     /**
      * Gets the value of the originalCharge property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOriginalCharge() {
         return originalCharge;
@@ -121,11 +104,9 @@ public class MoveOutDetail {
 
     /**
      * Sets the value of the originalCharge property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOriginalCharge(BigDecimal value) {
         this.originalCharge = value;
@@ -133,11 +114,9 @@ public class MoveOutDetail {
 
     /**
      * Gets the value of the paidAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getPaidAmount() {
         return paidAmount;
@@ -145,11 +124,9 @@ public class MoveOutDetail {
 
     /**
      * Sets the value of the paidAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setPaidAmount(BigDecimal value) {
         this.paidAmount = value;
@@ -157,11 +134,9 @@ public class MoveOutDetail {
 
     /**
      * Gets the value of the unappliedAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getUnappliedAmount() {
         return unappliedAmount;
@@ -169,11 +144,9 @@ public class MoveOutDetail {
 
     /**
      * Sets the value of the unappliedAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setUnappliedAmount(BigDecimal value) {
         this.unappliedAmount = value;
@@ -181,11 +154,9 @@ public class MoveOutDetail {
 
     /**
      * Gets the value of the dueAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getDueAmount() {
         return dueAmount;
@@ -193,11 +164,9 @@ public class MoveOutDetail {
 
     /**
      * Sets the value of the dueAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setDueAmount(BigDecimal value) {
         this.dueAmount = value;

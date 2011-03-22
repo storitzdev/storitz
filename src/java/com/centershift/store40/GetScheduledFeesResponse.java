@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getScheduledFeesResult"
+        "getScheduledFeesResult"
 })
 @XmlRootElement(name = "GetScheduledFeesResponse")
 public class GetScheduledFeesResponse {
@@ -39,11 +32,9 @@ public class GetScheduledFeesResponse {
 
     /**
      * Gets the value of the getScheduledFeesResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetScheduledFeesResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetScheduledFeesResponse2 }
      */
     public GetScheduledFeesResponse2 getGetScheduledFeesResult() {
         return getScheduledFeesResult;
@@ -51,11 +42,9 @@ public class GetScheduledFeesResponse {
 
     /**
      * Sets the value of the getScheduledFeesResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetScheduledFeesResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetScheduledFeesResponse2 }
      */
     public void setGetScheduledFeesResult(GetScheduledFeesResponse2 value) {
         this.getScheduledFeesResult = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ACCT_CONTACT_ADDRESSES complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ACCT_CONTACT_ADDRESSES">
  *   &lt;complexContent>
@@ -46,39 +45,36 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ACCT_CONTACT_ADDRESSES", propOrder = {
-    "orgid",
-    "acctid",
-    "accttype",
-    "accttypeval",
-    "acctclass",
-    "acctclassval",
-    "acctname",
-    "contactid",
-    "contacttype",
-    "contacttypeval",
-    "addrid",
-    "addrtype",
-    "addrtypeval",
-    "address",
-    "addr1",
-    "addr2",
-    "addr3",
-    "city",
-    "state",
-    "postalcode",
-    "country",
-    "active",
-    "createdby",
-    "updatedby"
+        "orgid",
+        "acctid",
+        "accttype",
+        "accttypeval",
+        "acctclass",
+        "acctclassval",
+        "acctname",
+        "contactid",
+        "contacttype",
+        "contacttypeval",
+        "addrid",
+        "addrtype",
+        "addrtypeval",
+        "address",
+        "addr1",
+        "addr2",
+        "addr3",
+        "city",
+        "state",
+        "postalcode",
+        "country",
+        "active",
+        "createdby",
+        "updatedby"
 })
 public class ACCTCONTACTADDRESSES
-    extends BaseEntityOfCollectionACCTCONTACTADDRESSESColumnIndexes
-{
+        extends BaseEntityOfCollectionACCTCONTACTADDRESSESColumnIndexes {
 
     @XmlElement(name = "ORG_ID")
     protected long orgid;
@@ -131,7 +127,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the orgid property.
-     * 
      */
     public long getORGID() {
         return orgid;
@@ -139,7 +134,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the orgid property.
-     * 
      */
     public void setORGID(long value) {
         this.orgid = value;
@@ -147,7 +141,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the acctid property.
-     * 
      */
     public long getACCTID() {
         return acctid;
@@ -155,7 +148,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the acctid property.
-     * 
      */
     public void setACCTID(long value) {
         this.acctid = value;
@@ -163,7 +155,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the accttype property.
-     * 
      */
     public int getACCTTYPE() {
         return accttype;
@@ -171,7 +162,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the accttype property.
-     * 
      */
     public void setACCTTYPE(int value) {
         this.accttype = value;
@@ -179,11 +169,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the accttypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTTYPEVAL() {
         return accttypeval;
@@ -191,11 +179,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the accttypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTTYPEVAL(String value) {
         this.accttypeval = value;
@@ -203,7 +189,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the acctclass property.
-     * 
      */
     public int getACCTCLASS() {
         return acctclass;
@@ -211,7 +196,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the acctclass property.
-     * 
      */
     public void setACCTCLASS(int value) {
         this.acctclass = value;
@@ -219,11 +203,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the acctclassval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTCLASSVAL() {
         return acctclassval;
@@ -231,11 +213,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the acctclassval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTCLASSVAL(String value) {
         this.acctclassval = value;
@@ -243,11 +223,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -255,11 +233,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -267,7 +243,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the contactid property.
-     * 
      */
     public long getCONTACTID() {
         return contactid;
@@ -275,7 +250,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the contactid property.
-     * 
      */
     public void setCONTACTID(long value) {
         this.contactid = value;
@@ -283,7 +257,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the contacttype property.
-     * 
      */
     public int getCONTACTTYPE() {
         return contacttype;
@@ -291,7 +264,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the contacttype property.
-     * 
      */
     public void setCONTACTTYPE(int value) {
         this.contacttype = value;
@@ -299,11 +271,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the contacttypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCONTACTTYPEVAL() {
         return contacttypeval;
@@ -311,11 +281,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the contacttypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCONTACTTYPEVAL(String value) {
         this.contacttypeval = value;
@@ -323,7 +291,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the addrid property.
-     * 
      */
     public long getADDRID() {
         return addrid;
@@ -331,7 +298,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the addrid property.
-     * 
      */
     public void setADDRID(long value) {
         this.addrid = value;
@@ -339,7 +305,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the addrtype property.
-     * 
      */
     public int getADDRTYPE() {
         return addrtype;
@@ -347,7 +312,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the addrtype property.
-     * 
      */
     public void setADDRTYPE(int value) {
         this.addrtype = value;
@@ -355,11 +319,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the addrtypeval property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRTYPEVAL() {
         return addrtypeval;
@@ -367,11 +329,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the addrtypeval property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRTYPEVAL(String value) {
         this.addrtypeval = value;
@@ -379,11 +339,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDRESS() {
         return address;
@@ -391,11 +349,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDRESS(String value) {
         this.address = value;
@@ -403,11 +359,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the addr1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR1() {
         return addr1;
@@ -415,11 +369,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the addr1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR1(String value) {
         this.addr1 = value;
@@ -427,11 +379,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the addr2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR2() {
         return addr2;
@@ -439,11 +389,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the addr2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR2(String value) {
         this.addr2 = value;
@@ -451,11 +399,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the addr3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getADDR3() {
         return addr3;
@@ -463,11 +409,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the addr3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setADDR3(String value) {
         this.addr3 = value;
@@ -475,11 +419,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCITY() {
         return city;
@@ -487,11 +429,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCITY(String value) {
         this.city = value;
@@ -499,11 +439,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSTATE() {
         return state;
@@ -511,11 +449,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSTATE(String value) {
         this.state = value;
@@ -523,11 +459,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the postalcode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPOSTALCODE() {
         return postalcode;
@@ -535,11 +469,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the postalcode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPOSTALCODE(String value) {
         this.postalcode = value;
@@ -547,11 +479,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the country property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCOUNTRY() {
         return country;
@@ -559,11 +489,9 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the country property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCOUNTRY(String value) {
         this.country = value;
@@ -571,7 +499,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isACTIVE() {
         return active;
@@ -579,7 +506,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setACTIVE(boolean value) {
         this.active = value;
@@ -587,7 +513,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -595,7 +520,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -603,7 +527,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -611,7 +534,6 @@ public class ACCTCONTACTADDRESSES
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "makePaymentByAssessmentResult"
+        "makePaymentByAssessmentResult"
 })
 @XmlRootElement(name = "MakePaymentByAssessmentResponse")
 public class MakePaymentByAssessmentResponse {
@@ -39,11 +32,9 @@ public class MakePaymentByAssessmentResponse {
 
     /**
      * Gets the value of the makePaymentByAssessmentResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MakePaymentResponse }
-     *     
+     *
+     * @return possible object is
+     *         {@link MakePaymentResponse }
      */
     public MakePaymentResponse getMakePaymentByAssessmentResult() {
         return makePaymentByAssessmentResult;
@@ -51,11 +42,9 @@ public class MakePaymentByAssessmentResponse {
 
     /**
      * Sets the value of the makePaymentByAssessmentResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MakePaymentResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link MakePaymentResponse }
      */
     public void setMakePaymentByAssessmentResult(MakePaymentResponse value) {
         this.makePaymentByAssessmentResult = value;

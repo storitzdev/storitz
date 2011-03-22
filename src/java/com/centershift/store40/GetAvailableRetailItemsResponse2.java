@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAvailableRetailItems_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAvailableRetailItems_Response">
  *   &lt;complexContent>
@@ -24,13 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAvailableRetailItems_Response", propOrder = {
-    "details",
-    "bulkPricing"
+        "details",
+        "bulkPricing"
 })
 public class GetAvailableRetailItemsResponse2 {
 
@@ -41,11 +38,9 @@ public class GetAvailableRetailItemsResponse2 {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAVAILSITERETAILITEMS }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAVAILSITERETAILITEMS }
      */
     public ArrayOfAVAILSITERETAILITEMS getDetails() {
         return details;
@@ -53,11 +48,9 @@ public class GetAvailableRetailItemsResponse2 {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAVAILSITERETAILITEMS }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAVAILSITERETAILITEMS }
      */
     public void setDetails(ArrayOfAVAILSITERETAILITEMS value) {
         this.details = value;
@@ -65,11 +58,9 @@ public class GetAvailableRetailItemsResponse2 {
 
     /**
      * Gets the value of the bulkPricing property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfBulkPricing }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfBulkPricing }
      */
     public ArrayOfBulkPricing getBulkPricing() {
         return bulkPricing;
@@ -77,11 +68,9 @@ public class GetAvailableRetailItemsResponse2 {
 
     /**
      * Sets the value of the bulkPricing property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfBulkPricing }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfBulkPricing }
      */
     public void setBulkPricing(ArrayOfBulkPricing value) {
         this.bulkPricing = value;

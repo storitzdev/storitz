@@ -31,13 +31,13 @@ public enum CreditCardType {
   }
 
   public static CreditCardType fromText(String key) {
-    return list().find{ it.getKey() == key }
+    return list().find { it.getKey() == key }
   }
 
   static public CreditCardType getEnumFromId(String value) {
-      def ret = list().find {it.display == value }
-      if (!ret) return CreditCardType.valueOf(value)
-      return ret
+    def ret = list().find {it.display == value }
+    if (!ret) return CreditCardType.valueOf(value)
+    return ret
   }
 
 }

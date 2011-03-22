@@ -1,22 +1,17 @@
-
 package com.centershift.store40;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for MakePayment_Request complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="MakePayment_Request">
  *   &lt;complexContent>
@@ -42,26 +37,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakePayment_Request", propOrder = {
-    "siteID",
-    "acctID",
-    "rentalIDs",
-    "cycles",
-    "totalAmtDue",
-    "totalAmtPaid",
-    "creditCardInfo",
-    "checkInfo",
-    "cashInfo",
-    "cashCreditID",
-    "isRetail",
-    "moveOutDate",
-    "isRetailAndRental",
-    "cashCreditAmount",
-    "payAssessData"
+        "siteID",
+        "acctID",
+        "rentalIDs",
+        "cycles",
+        "totalAmtDue",
+        "totalAmtPaid",
+        "creditCardInfo",
+        "checkInfo",
+        "cashInfo",
+        "cashCreditID",
+        "isRetail",
+        "moveOutDate",
+        "isRetailAndRental",
+        "cashCreditAmount",
+        "payAssessData"
 })
 public class MakePaymentRequest {
 
@@ -99,7 +92,6 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the siteID property.
-     * 
      */
     public long getSiteID() {
         return siteID;
@@ -107,7 +99,6 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the siteID property.
-     * 
      */
     public void setSiteID(long value) {
         this.siteID = value;
@@ -115,7 +106,6 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the acctID property.
-     * 
      */
     public long getAcctID() {
         return acctID;
@@ -123,7 +113,6 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the acctID property.
-     * 
      */
     public void setAcctID(long value) {
         this.acctID = value;
@@ -131,25 +120,23 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the rentalIDs property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the rentalIDs property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getRentalIDs().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Long }
-     * 
-     * 
      */
     public List<Long> getRentalIDs() {
         if (rentalIDs == null) {
@@ -160,25 +147,23 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the cycles property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the cycles property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCycles().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link Integer }
-     * 
-     * 
      */
     public List<Integer> getCycles() {
         if (cycles == null) {
@@ -189,11 +174,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the totalAmtDue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalAmtDue() {
         return totalAmtDue;
@@ -201,11 +184,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the totalAmtDue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalAmtDue(BigDecimal value) {
         this.totalAmtDue = value;
@@ -213,11 +194,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the totalAmtPaid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getTotalAmtPaid() {
         return totalAmtPaid;
@@ -225,11 +204,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the totalAmtPaid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setTotalAmtPaid(BigDecimal value) {
         this.totalAmtPaid = value;
@@ -237,25 +214,23 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the creditCardInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the creditCardInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCreditCardInfo().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link CreditCardData }
-     * 
-     * 
      */
     public List<CreditCardData> getCreditCardInfo() {
         if (creditCardInfo == null) {
@@ -266,25 +241,23 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the checkInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the checkInfo property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCheckInfo().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link CheckData }
-     * 
-     * 
      */
     public List<CheckData> getCheckInfo() {
         if (checkInfo == null) {
@@ -295,11 +268,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the cashInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCashInfo() {
         return cashInfo;
@@ -307,11 +278,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the cashInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCashInfo(BigDecimal value) {
         this.cashInfo = value;
@@ -319,7 +288,6 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the cashCreditID property.
-     * 
      */
     public long getCashCreditID() {
         return cashCreditID;
@@ -327,7 +295,6 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the cashCreditID property.
-     * 
      */
     public void setCashCreditID(long value) {
         this.cashCreditID = value;
@@ -335,11 +302,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the isRetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isIsRetail() {
         return isRetail;
@@ -347,11 +312,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the isRetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsRetail(Boolean value) {
         this.isRetail = value;
@@ -359,11 +322,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the moveOutDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getMoveOutDate() {
         return moveOutDate;
@@ -371,11 +332,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the moveOutDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setMoveOutDate(XMLGregorianCalendar value) {
         this.moveOutDate = value;
@@ -383,11 +342,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the isRetailAndRental property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isIsRetailAndRental() {
         return isRetailAndRental;
@@ -395,11 +352,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the isRetailAndRental property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsRetailAndRental(Boolean value) {
         this.isRetailAndRental = value;
@@ -407,11 +362,9 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the cashCreditAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getCashCreditAmount() {
         return cashCreditAmount;
@@ -419,11 +372,9 @@ public class MakePaymentRequest {
 
     /**
      * Sets the value of the cashCreditAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setCashCreditAmount(BigDecimal value) {
         this.cashCreditAmount = value;
@@ -431,25 +382,23 @@ public class MakePaymentRequest {
 
     /**
      * Gets the value of the payAssessData property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the payAssessData property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getPayAssessData().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link AssessmentData }
-     * 
-     * 
      */
     public List<AssessmentData> getPayAssessData() {
         if (payAssessData == null) {

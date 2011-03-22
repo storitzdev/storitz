@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for TRAN_QUOTE_NOTES_DETAIL complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="TRAN_QUOTE_NOTES_DETAIL">
  *   &lt;complexContent>
@@ -29,22 +28,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TRAN_QUOTE_NOTES_DETAIL", propOrder = {
-    "quotenoteid",
-    "quoteid",
-    "quotenotes",
-    "createdby",
-    "createdbyfirstname",
-    "createdbylastname",
-    "updatedby"
+        "quotenoteid",
+        "quoteid",
+        "quotenotes",
+        "createdby",
+        "createdbyfirstname",
+        "createdbylastname",
+        "updatedby"
 })
 public class TRANQUOTENOTESDETAIL
-    extends BaseEntityOfCollectionTRANQUOTENOTESDETAILColumnIndexes
-{
+        extends BaseEntityOfCollectionTRANQUOTENOTESDETAILColumnIndexes {
 
     @XmlElement(name = "QUOTE_NOTE_ID")
     protected long quotenoteid;
@@ -63,7 +59,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the quotenoteid property.
-     * 
      */
     public long getQUOTENOTEID() {
         return quotenoteid;
@@ -71,7 +66,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the quotenoteid property.
-     * 
      */
     public void setQUOTENOTEID(long value) {
         this.quotenoteid = value;
@@ -79,7 +73,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the quoteid property.
-     * 
      */
     public long getQUOTEID() {
         return quoteid;
@@ -87,7 +80,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the quoteid property.
-     * 
      */
     public void setQUOTEID(long value) {
         this.quoteid = value;
@@ -95,11 +87,9 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the quotenotes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getQUOTENOTES() {
         return quotenotes;
@@ -107,11 +97,9 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the quotenotes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setQUOTENOTES(String value) {
         this.quotenotes = value;
@@ -119,7 +107,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the createdby property.
-     * 
      */
     public long getCREATEDBY() {
         return createdby;
@@ -127,7 +114,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the createdby property.
-     * 
      */
     public void setCREATEDBY(long value) {
         this.createdby = value;
@@ -135,11 +121,9 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the createdbyfirstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREATEDBYFIRSTNAME() {
         return createdbyfirstname;
@@ -147,11 +131,9 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the createdbyfirstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREATEDBYFIRSTNAME(String value) {
         this.createdbyfirstname = value;
@@ -159,11 +141,9 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the createdbylastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCREATEDBYLASTNAME() {
         return createdbylastname;
@@ -171,11 +151,9 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the createdbylastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCREATEDBYLASTNAME(String value) {
         this.createdbylastname = value;
@@ -183,7 +161,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Gets the value of the updatedby property.
-     * 
      */
     public long getUPDATEDBY() {
         return updatedby;
@@ -191,7 +168,6 @@ public class TRANQUOTENOTESDETAIL
 
     /**
      * Sets the value of the updatedby property.
-     * 
      */
     public void setUPDATEDBY(long value) {
         this.updatedby = value;

@@ -5,10 +5,10 @@ import storitz.constants.State
 class MetroEntry {
 
   static constraints = {
-    metro(nullable:true)
-    zipcode(blank:false)
-    city(blank:false)
-    state(blank:false)
+    metro(nullable: true)
+    zipcode(blank: false)
+    city(blank: false)
+    state(blank: false)
   }
 
   static mapping = {

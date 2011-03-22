@@ -19,28 +19,28 @@ import com.studentsonly.grails.plugins.uiperformance.taglib.AbstractTaglib
  */
 class JavascriptTagLib extends AbstractTaglib {
 
-	static namespace = 'storitz'
+  static namespace = 'storitz'
 
-	// dependency injection
-	def jsTagPostProcessor
+  // dependency injection
+  def jsTagPostProcessor
 
-	/**
-	 * Generates the tag.
-	 */
-	def javascriptLink = { attrs ->
+  /**
+   * Generates the tag.
+   */
+  def javascriptLink = { attrs ->
 
-		if (!attrs.src) {
-			throwTagError("Tag [javascript] is missing required attribute [src]")
-		}
+    if (!attrs.src) {
+      throwTagError("Tag [javascript] is missing required attribute [src]")
+    }
 
-		String link = generateRelativePath('js', attrs.remove('src'), '.js',
-				attrs.remove('plugin'), attrs.remove('absolute'))
+    String link = generateRelativePath('js', attrs.remove('src'), '.js',
+            attrs.remove('plugin'), attrs.remove('absolute'))
 
-        link = "'$link'"
-		if (jsTagPostProcessor) {
-			link = jsTagPostProcessor.process(link, request)
-		}
-        link = link.substring(1, link.length() - 1)
-		out << link
-	}
+    link = "'$link'"
+    if (jsTagPostProcessor) {
+      link = jsTagPostProcessor.process(link, request)
+    }
+    link = link.substring(1, link.length() - 1)
+    out << link
+  }
 }

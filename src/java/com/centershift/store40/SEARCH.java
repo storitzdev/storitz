@@ -1,20 +1,15 @@
-
 package com.centershift.store40;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 
 
 /**
  * <p>Java class for SEARCH complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="SEARCH">
  *   &lt;complexContent>
@@ -52,42 +47,39 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SEARCH", propOrder = {
-    "quicksearch",
-    "basicnamesearch",
-    "networknamesearch",
-    "acctcontactnamesearch",
-    "phonesearch",
-    "phonecontactnamesearch",
-    "displayrentalstr",
-    "unitsearch",
-    "rentalid",
-    "acctid",
-    "contactid",
-    "objectid",
-    "unitnumber",
-    "siteid",
-    "sitename",
-    "orgid",
-    "rentalstatus",
-    "rstatraw",
-    "acctname",
-    "firstname",
-    "lastname",
-    "contactfullname",
-    "phone",
-    "phonetype",
-    "ptd",
-    "unitstatus",
-    "affiliateid"
+        "quicksearch",
+        "basicnamesearch",
+        "networknamesearch",
+        "acctcontactnamesearch",
+        "phonesearch",
+        "phonecontactnamesearch",
+        "displayrentalstr",
+        "unitsearch",
+        "rentalid",
+        "acctid",
+        "contactid",
+        "objectid",
+        "unitnumber",
+        "siteid",
+        "sitename",
+        "orgid",
+        "rentalstatus",
+        "rstatraw",
+        "acctname",
+        "firstname",
+        "lastname",
+        "contactfullname",
+        "phone",
+        "phonetype",
+        "ptd",
+        "unitstatus",
+        "affiliateid"
 })
 public class SEARCH
-    extends BaseEntityOfCollectionSEARCHColumnIndexes
-{
+        extends BaseEntityOfCollectionSEARCHColumnIndexes {
 
     @XmlElement(name = "QUICK_SEARCH")
     protected String quicksearch;
@@ -147,11 +139,9 @@ public class SEARCH
 
     /**
      * Gets the value of the quicksearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getQUICKSEARCH() {
         return quicksearch;
@@ -159,11 +149,9 @@ public class SEARCH
 
     /**
      * Sets the value of the quicksearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setQUICKSEARCH(String value) {
         this.quicksearch = value;
@@ -171,11 +159,9 @@ public class SEARCH
 
     /**
      * Gets the value of the basicnamesearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBASICNAMESEARCH() {
         return basicnamesearch;
@@ -183,11 +169,9 @@ public class SEARCH
 
     /**
      * Sets the value of the basicnamesearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBASICNAMESEARCH(String value) {
         this.basicnamesearch = value;
@@ -195,11 +179,9 @@ public class SEARCH
 
     /**
      * Gets the value of the networknamesearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getNETWORKNAMESEARCH() {
         return networknamesearch;
@@ -207,11 +189,9 @@ public class SEARCH
 
     /**
      * Sets the value of the networknamesearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNETWORKNAMESEARCH(String value) {
         this.networknamesearch = value;
@@ -219,11 +199,9 @@ public class SEARCH
 
     /**
      * Gets the value of the acctcontactnamesearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTCONTACTNAMESEARCH() {
         return acctcontactnamesearch;
@@ -231,11 +209,9 @@ public class SEARCH
 
     /**
      * Sets the value of the acctcontactnamesearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTCONTACTNAMESEARCH(String value) {
         this.acctcontactnamesearch = value;
@@ -243,11 +219,9 @@ public class SEARCH
 
     /**
      * Gets the value of the phonesearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONESEARCH() {
         return phonesearch;
@@ -255,11 +229,9 @@ public class SEARCH
 
     /**
      * Sets the value of the phonesearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONESEARCH(String value) {
         this.phonesearch = value;
@@ -267,11 +239,9 @@ public class SEARCH
 
     /**
      * Gets the value of the phonecontactnamesearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONECONTACTNAMESEARCH() {
         return phonecontactnamesearch;
@@ -279,11 +249,9 @@ public class SEARCH
 
     /**
      * Sets the value of the phonecontactnamesearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONECONTACTNAMESEARCH(String value) {
         this.phonecontactnamesearch = value;
@@ -291,11 +259,9 @@ public class SEARCH
 
     /**
      * Gets the value of the displayrentalstr property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDISPLAYRENTALSTR() {
         return displayrentalstr;
@@ -303,11 +269,9 @@ public class SEARCH
 
     /**
      * Sets the value of the displayrentalstr property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDISPLAYRENTALSTR(String value) {
         this.displayrentalstr = value;
@@ -315,11 +279,9 @@ public class SEARCH
 
     /**
      * Gets the value of the unitsearch property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITSEARCH() {
         return unitsearch;
@@ -327,11 +289,9 @@ public class SEARCH
 
     /**
      * Sets the value of the unitsearch property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITSEARCH(String value) {
         this.unitsearch = value;
@@ -339,11 +299,9 @@ public class SEARCH
 
     /**
      * Gets the value of the rentalid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRENTALID() {
         return rentalid;
@@ -351,11 +309,9 @@ public class SEARCH
 
     /**
      * Sets the value of the rentalid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRENTALID(BigDecimal value) {
         this.rentalid = value;
@@ -363,11 +319,9 @@ public class SEARCH
 
     /**
      * Gets the value of the acctid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getACCTID() {
         return acctid;
@@ -375,11 +329,9 @@ public class SEARCH
 
     /**
      * Sets the value of the acctid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setACCTID(Long value) {
         this.acctid = value;
@@ -387,11 +339,9 @@ public class SEARCH
 
     /**
      * Gets the value of the contactid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCONTACTID() {
         return contactid;
@@ -399,11 +349,9 @@ public class SEARCH
 
     /**
      * Sets the value of the contactid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setCONTACTID(Long value) {
         this.contactid = value;
@@ -411,11 +359,9 @@ public class SEARCH
 
     /**
      * Gets the value of the objectid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getOBJECTID() {
         return objectid;
@@ -423,11 +369,9 @@ public class SEARCH
 
     /**
      * Sets the value of the objectid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setOBJECTID(BigDecimal value) {
         this.objectid = value;
@@ -435,11 +379,9 @@ public class SEARCH
 
     /**
      * Gets the value of the unitnumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITNUMBER() {
         return unitnumber;
@@ -447,11 +389,9 @@ public class SEARCH
 
     /**
      * Sets the value of the unitnumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITNUMBER(String value) {
         this.unitnumber = value;
@@ -459,11 +399,9 @@ public class SEARCH
 
     /**
      * Gets the value of the siteid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getSITEID() {
         return siteid;
@@ -471,11 +409,9 @@ public class SEARCH
 
     /**
      * Sets the value of the siteid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setSITEID(Long value) {
         this.siteid = value;
@@ -483,11 +419,9 @@ public class SEARCH
 
     /**
      * Gets the value of the sitename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSITENAME() {
         return sitename;
@@ -495,11 +429,9 @@ public class SEARCH
 
     /**
      * Sets the value of the sitename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSITENAME(String value) {
         this.sitename = value;
@@ -507,11 +439,9 @@ public class SEARCH
 
     /**
      * Gets the value of the orgid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getORGID() {
         return orgid;
@@ -519,11 +449,9 @@ public class SEARCH
 
     /**
      * Sets the value of the orgid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setORGID(Long value) {
         this.orgid = value;
@@ -531,11 +459,9 @@ public class SEARCH
 
     /**
      * Gets the value of the rentalstatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRENTALSTATUS() {
         return rentalstatus;
@@ -543,11 +469,9 @@ public class SEARCH
 
     /**
      * Sets the value of the rentalstatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRENTALSTATUS(String value) {
         this.rentalstatus = value;
@@ -555,11 +479,9 @@ public class SEARCH
 
     /**
      * Gets the value of the rstatraw property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getRSTATRAW() {
         return rstatraw;
@@ -567,11 +489,9 @@ public class SEARCH
 
     /**
      * Sets the value of the rstatraw property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setRSTATRAW(BigDecimal value) {
         this.rstatraw = value;
@@ -579,11 +499,9 @@ public class SEARCH
 
     /**
      * Gets the value of the acctname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getACCTNAME() {
         return acctname;
@@ -591,11 +509,9 @@ public class SEARCH
 
     /**
      * Sets the value of the acctname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setACCTNAME(String value) {
         this.acctname = value;
@@ -603,11 +519,9 @@ public class SEARCH
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFIRSTNAME() {
         return firstname;
@@ -615,11 +529,9 @@ public class SEARCH
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFIRSTNAME(String value) {
         this.firstname = value;
@@ -627,11 +539,9 @@ public class SEARCH
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLASTNAME() {
         return lastname;
@@ -639,11 +549,9 @@ public class SEARCH
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLASTNAME(String value) {
         this.lastname = value;
@@ -651,11 +559,9 @@ public class SEARCH
 
     /**
      * Gets the value of the contactfullname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCONTACTFULLNAME() {
         return contactfullname;
@@ -663,11 +569,9 @@ public class SEARCH
 
     /**
      * Sets the value of the contactfullname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCONTACTFULLNAME(String value) {
         this.contactfullname = value;
@@ -675,11 +579,9 @@ public class SEARCH
 
     /**
      * Gets the value of the phone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONE() {
         return phone;
@@ -687,11 +589,9 @@ public class SEARCH
 
     /**
      * Sets the value of the phone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONE(String value) {
         this.phone = value;
@@ -699,11 +599,9 @@ public class SEARCH
 
     /**
      * Gets the value of the phonetype property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPHONETYPE() {
         return phonetype;
@@ -711,11 +609,9 @@ public class SEARCH
 
     /**
      * Sets the value of the phonetype property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPHONETYPE(String value) {
         this.phonetype = value;
@@ -723,11 +619,9 @@ public class SEARCH
 
     /**
      * Gets the value of the ptd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getPTD() {
         return ptd;
@@ -735,11 +629,9 @@ public class SEARCH
 
     /**
      * Sets the value of the ptd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setPTD(XMLGregorianCalendar value) {
         this.ptd = value;
@@ -747,11 +639,9 @@ public class SEARCH
 
     /**
      * Gets the value of the unitstatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUNITSTATUS() {
         return unitstatus;
@@ -759,11 +649,9 @@ public class SEARCH
 
     /**
      * Sets the value of the unitstatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUNITSTATUS(String value) {
         this.unitstatus = value;
@@ -771,11 +659,9 @@ public class SEARCH
 
     /**
      * Gets the value of the affiliateid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAFFILIATEID() {
         return affiliateid;
@@ -783,11 +669,9 @@ public class SEARCH
 
     /**
      * Sets the value of the affiliateid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAFFILIATEID(Long value) {
         this.affiliateid = value;

@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for GetAuctionTax_Response complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="GetAuctionTax_Response">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetAuctionTax_Response", propOrder = {
-    "auctionTaxes"
+        "auctionTaxes"
 })
 public class GetAuctionTaxResponse2 {
 
@@ -37,11 +34,9 @@ public class GetAuctionTaxResponse2 {
 
     /**
      * Gets the value of the auctionTaxes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAuctionTaxInfo }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAuctionTaxInfo }
      */
     public ArrayOfAuctionTaxInfo getAuctionTaxes() {
         return auctionTaxes;
@@ -49,11 +44,9 @@ public class GetAuctionTaxResponse2 {
 
     /**
      * Sets the value of the auctionTaxes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAuctionTaxInfo }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAuctionTaxInfo }
      */
     public void setAuctionTaxes(ArrayOfAuctionTaxInfo value) {
         this.auctionTaxes = value;

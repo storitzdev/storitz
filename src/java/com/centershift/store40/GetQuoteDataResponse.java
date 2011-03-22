@@ -1,18 +1,13 @@
-
 package com.centershift.store40;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getQuoteDataResult"
+        "getQuoteDataResult"
 })
 @XmlRootElement(name = "GetQuoteDataResponse")
 public class GetQuoteDataResponse {
@@ -39,11 +32,9 @@ public class GetQuoteDataResponse {
 
     /**
      * Gets the value of the getQuoteDataResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GetQuoteDataResponse2 }
-     *     
+     *
+     * @return possible object is
+     *         {@link GetQuoteDataResponse2 }
      */
     public GetQuoteDataResponse2 getGetQuoteDataResult() {
         return getQuoteDataResult;
@@ -51,11 +42,9 @@ public class GetQuoteDataResponse {
 
     /**
      * Sets the value of the getQuoteDataResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GetQuoteDataResponse2 }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GetQuoteDataResponse2 }
      */
     public void setGetQuoteDataResult(GetQuoteDataResponse2 value) {
         this.getQuoteDataResult = value;

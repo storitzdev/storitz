@@ -14,121 +14,121 @@
 </head>
 <body>
 <div id="body">
-<g:render template="/topnav"/>
-<div class="stcontent">
-  <g:render template="/logo_bar" />
+  <g:render template="/topnav"/>
+  <div class="stcontent">
+    <g:render template="/logo_bar"/>
 
-  <div style="clear: both;height: 10px"></div>
-  <div class="buttons">
-    <span class="button"><a href="${createLink(controller:'admin', action:'index')}">Menu</a></span>
-    <span class="button"><g:link action="list">List Videos</g:link></span>
-    <sec:ifAnyGranted roles="ROLE_MANAGER">
-      <span class="button"><g:link action="create">Create New Video</g:link></span>
-    </sec:ifAnyGranted>
+    <div style="clear: both;height: 10px"></div>
+    <div class="buttons">
+      <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
+      <span class="button"><g:link action="list">List Videos</g:link></span>
+      <sec:ifAnyGranted roles="ROLE_MANAGER">
+        <span class="button"><g:link action="create">Create New Video</g:link></span>
+      </sec:ifAnyGranted>
 
-  </div>
-  <div class="body">
-
-    <div class="price_options checkout_header white">
-      Video Details
     </div>
+    <div class="body">
 
-    <g:if test="${flash.message}">
-      <div class="message">${flash.message}</div>
-    </g:if>
-    <div class="dialog">
-      <table>
-        <tbody>
+      <div class="price_options checkout_header white">
+        Video Details
+      </div>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.id.label" default="Id"/></td>
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
+      <div class="dialog">
+        <table>
+          <tbody>
 
-          <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "id")}</td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.id.label" default="Id"/></td>
 
-        </tr>
+            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "id")}</td>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.title.label" default="Title"/></td>
+          </tr>
 
-          <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "title")}</td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.title.label" default="Title"/></td>
 
-        </tr>
+            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "title")}</td>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.releaseDate.label" default="Release Date"/></td>
+          </tr>
 
-          <td valign="top" class="value">${videoInstance.releaseDate.format('MM-dd-yyyy')}</td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.releaseDate.label" default="Release Date"/></td>
 
-        </tr>
+            <td valign="top" class="value">${videoInstance.releaseDate.format('MM-dd-yyyy')}</td>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.caption.label" default="Caption"/></td>
+          </tr>
 
-          <td valign="top" class="value">${videoInstance.caption}</td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.caption.label" default="Caption"/></td>
 
-        </tr>
+            <td valign="top" class="value">${videoInstance.caption}</td>
+
+          </tr>
 
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.file.label" default="Video"/></td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.file.label" default="Video"/></td>
 
-          <td valign="top" class="value">
-            <div id="videoContainer"></div>
-            <p:dependantJavascript>
-            <script type="text/javascript">
-                jwplayer("videoContainer").setup({
+            <td valign="top" class="value">
+              <div id="videoContainer"></div>
+              <p:dependantJavascript>
+                <script type="text/javascript">
+                  jwplayer("videoContainer").setup({
                     flashplayer: "${resource(file:'/jwplayer/player.swf')}",
                     file: "${resource(file:videoInstance.fileLocation)}",
                     image: "${resource(file:videoInstance.stillImage)}",
                     height: 480,
                     width: 640
-                });
-            </script>
-            </p:dependantJavascript>
-          </td>
+                  });
+                </script>
+              </p:dependantJavascript>
+            </td>
 
-        </tr>
+          </tr>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.tags.label" default="Tags"/></td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.tags.label" default="Tags"/></td>
 
-          <td valign="top" class="value">${videoInstance.tags}</td>
+            <td valign="top" class="value">${videoInstance.tags}</td>
 
-        </tr>
+          </tr>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.site.label" default="Related Facility"/></td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.site.label" default="Related Facility"/></td>
 
-          <td valign="top" class="value">
-            <g:if test="${videoInstance.site}">
-              <g:link mapping="siteLink2" params="[site_title:videoInstance.site.title, id:videoInstance.site.id]">${videoInstance.site?.title}</g:link>
-            </g:if>
-          </td>
+            <td valign="top" class="value">
+              <g:if test="${videoInstance.site}">
+                <g:link mapping="siteLink2" params="[site_title:videoInstance.site.title, id:videoInstance.site.id]">${videoInstance.site?.title}</g:link>
+              </g:if>
+            </td>
 
-        </tr>
+          </tr>
 
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="video.external.link.label" default="External Link"/></td>
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.external.link.label" default="External Link"/></td>
 
-          <td valign="top" class="value">
-            <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
-          </td>
+            <td valign="top" class="value">
+              <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
+            </td>
 
-        </tr>
+          </tr>
 
-      </table>
-    </div>
-    <div class="buttons">
-      <g:form>
-        <g:hiddenField name="id" value="${videoInstance?.id}"/>
-        <span class="button"><g:actionSubmit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-        <span class="button"><g:actionSubmit action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        <span class="button"><g:link mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]">View as User</g:link></span>
-      </g:form>
+        </table>
+      </div>
+      <div class="buttons">
+        <g:form>
+          <g:hiddenField name="id" value="${videoInstance?.id}"/>
+          <span class="button"><g:actionSubmit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+          <span class="button"><g:actionSubmit action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+          <span class="button"><g:link mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]">View as User</g:link></span>
+        </g:form>
+      </div>
     </div>
   </div>
 </div>
-</div>
 </body>
-<p:renderDependantJavascript />
+<p:renderDependantJavascript/>
 </html>

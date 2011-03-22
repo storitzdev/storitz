@@ -33,13 +33,13 @@ beans = {
     securityMetadataSource = ref("securityMetadataSource")
   }
 
-  switch(GrailsUtil.environment) {
+  switch (GrailsUtil.environment) {
     case "production":
       println "Starting production ActiveMQ 61619"
       jmsBroker(XBeanBrokerService) {
-			useJmx = 'false'
-			persistent = 'false'
-			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61619'))]
+        useJmx = 'false'
+        persistent = 'false'
+        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61619'))]
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
@@ -47,9 +47,9 @@ beans = {
       }
 
       jmsTemplate(JmsTemplate) {
-          connectionFactory =  { SingleConnectionFactory cf ->
-              targetConnectionFactory = ref('connectionFactory')
-          }
+        connectionFactory = { SingleConnectionFactory cf ->
+          targetConnectionFactory = ref('connectionFactory')
+        }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
         brokerURL = "vm://localhost:61619"
@@ -65,9 +65,9 @@ beans = {
     case "preview":
       println "Starting production ActiveMQ 61610"
       jmsBroker(XBeanBrokerService) {
-			useJmx = 'false'
-			persistent = 'false'
-			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61610'))]
+        useJmx = 'false'
+        persistent = 'false'
+        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61610'))]
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
@@ -75,9 +75,9 @@ beans = {
       }
 
       jmsTemplate(JmsTemplate) {
-          connectionFactory =  { SingleConnectionFactory cf ->
-              targetConnectionFactory = ref('connectionFactory')
-          }
+        connectionFactory = { SingleConnectionFactory cf ->
+          targetConnectionFactory = ref('connectionFactory')
+        }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
         brokerURL = "vm://localhost:61610"
@@ -93,9 +93,9 @@ beans = {
     case "development":
       println "Starting development ActiveMQ 61617"
       jmsBroker(XBeanBrokerService) {
-			useJmx = 'false'
-			persistent = 'false'
-			transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61617'))]
+        useJmx = 'false'
+        persistent = 'false'
+        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61617'))]
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
@@ -103,9 +103,9 @@ beans = {
       }
 
       jmsTemplate(JmsTemplate) {
-          connectionFactory =  { SingleConnectionFactory cf ->
-              targetConnectionFactory = ref('connectionFactory')
-          }
+        connectionFactory = { SingleConnectionFactory cf ->
+          targetConnectionFactory = ref('connectionFactory')
+        }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
         brokerURL = "vm://localhost:61617"
@@ -121,9 +121,9 @@ beans = {
     case "test":
       println "Starting test ActiveMQ 61618"
       jmsBroker(XBeanBrokerService) {
-            useJmx = 'false'
-            persistent = 'false'
-            transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61618'))]
+        useJmx = 'false'
+        persistent = 'false'
+        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61618'))]
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
@@ -131,9 +131,9 @@ beans = {
       }
 
       jmsTemplate(JmsTemplate) {
-          connectionFactory =  { SingleConnectionFactory cf ->
-              targetConnectionFactory = ref('connectionFactory')
-          }
+        connectionFactory = { SingleConnectionFactory cf ->
+          targetConnectionFactory = ref('connectionFactory')
+        }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
         brokerURL = "vm://localhost:61618"
@@ -141,7 +141,7 @@ beans = {
       jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
         bean.destroyMethod = "stop"
         connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-            brokerURL = "vm://localhost:61618"
+          brokerURL = "vm://localhost:61618"
         }
       }
       break

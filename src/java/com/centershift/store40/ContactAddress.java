@@ -1,4 +1,3 @@
-
 package com.centershift.store40;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ContactAddress complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="ContactAddress">
  *   &lt;complexContent>
@@ -33,22 +32,20 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ContactAddress", propOrder = {
-    "addrId",
-    "contactId",
-    "addrType",
-    "addr1",
-    "addr2",
-    "addr3",
-    "city",
-    "state",
-    "postalCode",
-    "country",
-    "active"
+        "addrId",
+        "contactId",
+        "addrType",
+        "addr1",
+        "addr2",
+        "addr3",
+        "city",
+        "state",
+        "postalCode",
+        "country",
+        "active"
 })
 public class ContactAddress {
 
@@ -77,11 +74,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the addrId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getAddrId() {
         return addrId;
@@ -89,11 +84,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the addrId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setAddrId(Long value) {
         this.addrId = value;
@@ -101,11 +94,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the contactId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getContactId() {
         return contactId;
@@ -113,11 +104,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the contactId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setContactId(Long value) {
         this.contactId = value;
@@ -125,11 +114,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the addrType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressType }
-     *     
+     *
+     * @return possible object is
+     *         {@link AddressType }
      */
     public AddressType getAddrType() {
         return addrType;
@@ -137,11 +124,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the addrType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AddressType }
      */
     public void setAddrType(AddressType value) {
         this.addrType = value;
@@ -149,11 +134,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the addr1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddr1() {
         return addr1;
@@ -161,11 +144,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the addr1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddr1(String value) {
         this.addr1 = value;
@@ -173,11 +154,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the addr2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddr2() {
         return addr2;
@@ -185,11 +164,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the addr2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddr2(String value) {
         this.addr2 = value;
@@ -197,11 +174,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the addr3 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAddr3() {
         return addr3;
@@ -209,11 +184,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the addr3 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddr3(String value) {
         this.addr3 = value;
@@ -221,11 +194,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCity() {
         return city;
@@ -233,11 +204,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCity(String value) {
         this.city = value;
@@ -245,11 +214,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the state property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getState() {
         return state;
@@ -257,11 +224,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the state property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setState(String value) {
         this.state = value;
@@ -269,11 +234,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the postalCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPostalCode() {
         return postalCode;
@@ -281,11 +244,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the postalCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPostalCode(String value) {
         this.postalCode = value;
@@ -293,11 +254,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the country property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCountry() {
         return country;
@@ -305,11 +264,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the country property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCountry(String value) {
         this.country = value;
@@ -317,11 +274,9 @@ public class ContactAddress {
 
     /**
      * Gets the value of the active property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isActive() {
         return active;
@@ -329,11 +284,9 @@ public class ContactAddress {
 
     /**
      * Sets the value of the active property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setActive(Boolean value) {
         this.active = value;

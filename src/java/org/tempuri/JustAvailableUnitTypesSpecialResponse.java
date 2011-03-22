@@ -1,18 +1,13 @@
-
 package org.tempuri;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "justAvailableUnitTypesSpecialResult"
+        "justAvailableUnitTypesSpecialResult"
 })
 @XmlRootElement(name = "JustAvailableUnitTypesSpecialResponse")
 public class JustAvailableUnitTypesSpecialResponse {
@@ -39,11 +32,9 @@ public class JustAvailableUnitTypesSpecialResponse {
 
     /**
      * Gets the value of the justAvailableUnitTypesSpecialResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ArrayOfAvailableUnitTypesSpecialST }
-     *     
+     *
+     * @return possible object is
+     *         {@link ArrayOfAvailableUnitTypesSpecialST }
      */
     public ArrayOfAvailableUnitTypesSpecialST getJustAvailableUnitTypesSpecialResult() {
         return justAvailableUnitTypesSpecialResult;
@@ -51,11 +42,9 @@ public class JustAvailableUnitTypesSpecialResponse {
 
     /**
      * Sets the value of the justAvailableUnitTypesSpecialResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayOfAvailableUnitTypesSpecialST }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ArrayOfAvailableUnitTypesSpecialST }
      */
     public void setJustAvailableUnitTypesSpecialResult(ArrayOfAvailableUnitTypesSpecialST value) {
         this.justAvailableUnitTypesSpecialResult = value;
