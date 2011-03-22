@@ -114,16 +114,6 @@
                 <td>${rentalTransactionInstance.accessCode}</td>
               </tr>
             </g:if>
-            <tr>
-              <td style="width:200px;">Phone:</td>
-              <td>${rentalTransactionInstance.site.phone}</td>
-            </tr>
-            <g:if test="${siteManager?.userRealName}">
-              <tr>
-                <td style="width:200px;">Manager:</td>
-                <td>${siteManager.userRealName}</td>
-              </tr>
-            </g:if>
             <g:if test="${rentalTransactionInstance.site.phone}">
               <tr>
                 <td style="width:200px;">Phone:</td>
@@ -204,6 +194,11 @@
             </g:else>
           </table>
         </div>
+
+        <div style="height: 30px;"></div>
+        <p>
+          Please be aware of this facilitiy's office and access hours, and to arrive for your move-in during office hours.
+        </p>
 
         <g:if test="${rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION}">
           <div style="height: 30px;"></div>

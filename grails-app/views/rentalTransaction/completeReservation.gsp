@@ -65,7 +65,7 @@
           Checkout Confirmation
         </div>
         <div class="formInstructions">
-          Congratulations, you have successfully rented a self-storage unit. We thank you for choosing Storitz and making your experience as easy as Click. Store. Done.
+          Congratulations, you have successfully reserved a self-storage unit. We thank you for choosing Storitz and making your experience as easy as Click. Store. Done.
           Below is a summary of your transaction.
         </div>
 
@@ -110,18 +110,6 @@
               <td style="width:200px;">Phone:</td>
               <td>${rentalTransactionInstance.site.phone}</td>
             </tr>
-            <g:if test="${siteManager?.userRealName}">
-              <tr>
-                <td style="width:200px;">Manager:</td>
-                <td>${siteManager.userRealName}</td>
-              </tr>
-            </g:if>
-            <g:if test="${rentalTransactionInstance.site.phone}">
-              <tr>
-                <td style="width:200px;">Phone:</td>
-                <td>${rentalTransactionInstance.site.phone}</td>
-              </tr>
-            </g:if>
             <g:if test="${rentalTransactionInstance.idNumber}">
               <tr>
                 <td style="width:200px;">Transaction #:</td>
@@ -158,10 +146,15 @@
             </g:if>
             <tr>
               <td style="width:200px;">Amount Due at Move-In:</td>
-              <td><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></td>
+              <td><g:formatNumber number="${rentalTransactionInstance.moveInCost}" type="currency" currencyCode="USD"/></td>
             </tr>
           </table>
         </div>
+
+        <div style="height: 30px;"></div>
+        <p>
+          Please be aware of this facilitiy's office and access hours, and to arrive for your move-in during office hours.
+        </p>
 
         <div style="height: 30px;"></div>
         <g:if test="${site.rentalAgreement}">
