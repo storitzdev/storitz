@@ -15,6 +15,9 @@
       <meta name="description" content="Search, compare and rent self storage units in ${city}, ${state}. Move-in today with the best prices and no Storitz fees. Thousands of units to choose"/>
     </g:else>
   </g:else>
+  <g:if test="${metro && !neighborhood}">
+    <link rel="canonical" href="${createLink(mapping: 'metro2', absolute:true, params: [state: state, city: metro.city.replaceAll(' ', '-')]) as String}"/>
+  </g:if>
   <META name="y_key" content="9a7a338eec8978fd"/>
   <g:render template="/header_home"/>
   <p:dependantJavascript>

@@ -44,7 +44,7 @@ class HomeController {
           geoResult = geocodeService.geocode(params.zip)
           zip = params.zip
           if (params.city) {
-            city = params.city.replaceAll('-', ' ')
+            searchCity = city = params.city.replaceAll('-', ' ')
           }
           if (params.state) {
             state = params.state
@@ -147,10 +147,11 @@ class HomeController {
       List resList = Metro.createCriteria().list() {
         and {
           eq('isNeighborhood', true)
-          eq('city', metroEntry.city)
+          eq('city', city)
           eq('state', metroEntry.state)
         }
       }
+
       if (resList.size() > 0) {
         neighborhood = resList.get(0)
       }
@@ -303,7 +304,7 @@ class HomeController {
       List resList = Metro.createCriteria().list() {
         and {
           eq('isNeighborhood', true)
-          eq('city', metroEntry.city)
+          eq('city', city)
           eq('state', metroEntry.state)
         }
       }
