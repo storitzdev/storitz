@@ -86,8 +86,11 @@ class UstoreitController {
       if (site.title.contains("/")) {
         title = 'U-Store-It ' + site.title.tokenize("/")[-1]
       } else {
-        def titleArr = site.title.tokenize(" ")
-        title = "U-Store-It " + titleArr[1..titleArr.size() - 1].join(' ')
+        def tm = site.title =~ /(\d{4}) \.+/
+        if (tm.getCount()) {
+          def titleArr = site.title.tokenize(" ")
+          title = "U-Store-It " + titleArr[1..titleArr.size() - 1].join(' ')
+        }
       }
       site.title = title
       site.save(flush: true)

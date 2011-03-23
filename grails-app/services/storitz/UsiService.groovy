@@ -9,7 +9,11 @@ class UsiService extends CShiftService {
 
   def offerFilterService
 
-  static transactional = false
+  def updateUnits(site, stats, writer) {
+    super.updateUnits(site, stats, writer)
+    CenterShift cshift = (CenterShift)site.feed
+    loadPromos(cshift, site, writer)
+  }
 
   def loadPromos(cshift, site, writer) {
     def ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)

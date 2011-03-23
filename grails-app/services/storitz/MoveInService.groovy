@@ -75,11 +75,42 @@ class MoveInService {
 
       case "CS4":
         CShift4Service.createTenant(trans)
-        return CShift4Service.reserve(trans)
+        return CShift4Service.moveIn(trans)
 
       case "QS":
         quikStorService.createTenant(trans)
         return quikStorService.moveIn(trans)
+
+      case "EX":
+        // TODO - create email notification to fill in form
+        return exrsService.moveIn(trans)
+
+      case "USI":
+        usiService.createTenant(trans)
+        return usiService.reserve(trans)
+
+      default:
+        throw new Exception("Unknown service for move in")
+    }
+  }
+
+  def reserve(RentalTransaction trans) {
+    switch (trans.site.source) {
+      case "SL":
+        siteLinkService.createTenant(trans)
+        return siteLinkService.reserve(trans)
+
+      case "CS3":
+        CShiftService.createTenant(trans)
+        return CShiftService.reserve(trans)
+
+      case "CS4":
+        CShift4Service.createTenant(trans)
+        return CShift4Service.reserve(trans)
+
+      case "QS":
+        quikStorService.createTenant(trans)
+        return quikStorService.reserve(trans)
 
       case "EX":
         // TODO - create email notification to fill in form
