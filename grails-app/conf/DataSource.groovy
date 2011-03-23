@@ -35,9 +35,13 @@ environments {
   }
   preview_script {
     dataSource {
-      dbCreate = "update" // one of 'create', 'create-drop','update'
-      jndiName = "java:comp/env/jdbc/storitz_preview"
-      //loggingSql = true
+     dbCreate = "update" // one of 'create', 'create-drop','update'
+     //jndiName = "java:comp/env/jdbc/storitz_preview"
+     //loggingSql = true
+     driverClassName = "com.mysql.jdbc.Driver"
+     url = "jdbc:mysql://preview.storitz.com:3306/storitz_preview?autoReconnect=true"
+     username = "storitz_preview"
+     password = "st4ch@m"
     }
   }
   test {
