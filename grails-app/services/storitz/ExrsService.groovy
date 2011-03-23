@@ -348,6 +348,8 @@ class ExrsService extends CShiftService {
 
     trans.idNumber = trans.bookingDate.format('yyyyddMM') + sprintf('%08d', trans.id)
 
+    StorageUnit unit = StorageUnit.get(trans.unitId as Long)
+
     def buf = new ByteArrayOutputStream()
     PrintWriter bodyWriter = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
 
@@ -373,6 +375,9 @@ class ExrsService extends CShiftService {
     bodyWriter.println "Site Address: ${trans.site.address}"
     bodyWriter.println "Site City: ${trans.site.city}"
     bodyWriter.println "Site State: ${trans.site.state.display}"
+    bodyWriter.println "Unit Size: ${unit.displaySize}"
+    bodyWriter.println "Unit Promotion: ${trans.promoName}"
+    bodyWriter.println "Unit Monthly Rate: ${trans.monthlyRate}"
 
     def body = buf.toString()
     String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"
