@@ -53,6 +53,19 @@ environments {
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = true
   }
+  // For production_script, the given port is unimportant, as long as it does not conflict with the actual port value.
+  // We'll also turn off the public server url and set the Google signatureRequired to false.
+  production_script {
+    grails.serverURL = "http://localhost:18080"
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.nacha.dir = '/usr/share/tomcat6/nacha'
+    storitz.nacha.fileId = '7878782339'
+    storitz.nacha.companyId = '1272912549'
+    storitz.google.signatureRequired = false
+  }
   preview {
     grails.serverURL = "http://preview.storitz.com"
     security.httpsPort = 443
@@ -63,8 +76,30 @@ environments {
     ]
     storitz.google.signatureRequired = true
   }
+  // For preview_script, the given port is unimportant, as long as it does not conflict with the actual port value.
+  // We'll also turn off the public server url and set the Google signatureRequired to false.
+  preview_script {
+    grails.serverURL = "http://localhost:18080"
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],
+            '/STMap/**': ['ROLE_USER', 'ROLE_ADMIN'],
+            '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
+    ]
+    storitz.google.signatureRequired = false
+  }
   development {
     grails.serverURL = "http://localhost:8080/${appName}"
+    security.httpsPort = 8443
+    storitz.nacha.dir = 'c:/temp/nacha'
+    storitz.nacha.fileId = '1234567890'
+    storitz.nacha.companyId = '0123456789'
+    uiperformance.enabled = false
+    storitz.google.signatureRequired = false
+  }
+  // For development_script, the given port is unimportant, as long as it does not conflict with the actual port value
+  development_script {
+    grails.serverURL = "http://localhost:18080/${appName}"
     security.httpsPort = 8443
     storitz.nacha.dir = 'c:/temp/nacha'
     storitz.nacha.fileId = '1234567890'
@@ -80,6 +115,16 @@ environments {
     storitz.nacha.companyId = '0123456789'
     uiperformance.enabled = false
     storitz.google.signatureRequired = true
+  }
+  // For test_script, the given port is unimportant, as long as it does not conflict with the actual port value
+  test_script {
+    grails.serverURL = "http://localhost:18080/${appName}"
+    security.httpsPort = 8443
+    storitz.nacha.dir = 'c:/temp/nacha'
+    storitz.nacha.fileId = '1234567890'
+    storitz.nacha.companyId = '0123456789'
+    uiperformance.enabled = false
+    storitz.google.signatureRequired = false
   }
 
 }

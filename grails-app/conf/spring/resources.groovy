@@ -62,8 +62,38 @@ beans = {
       }
       break
 
+      // for production_script the actual ports do not matter, as long as they don't conflict with the real values
+      case "production_script":
+        println "Starting production_script ActiveMQ 61719"
+        jmsBroker(XBeanBrokerService) {
+          useJmx = 'false'
+          persistent = 'false'
+          transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61719'))]
+        }
+
+        connectionFactory(ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61717"
+        }
+
+        jmsTemplate(JmsTemplate) {
+          connectionFactory = { SingleConnectionFactory cf ->
+            targetConnectionFactory = ref('connectionFactory')
+          }
+        }
+        jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61719"
+        }
+        jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+          bean.destroyMethod = "stop"
+          connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+            brokerURL = "vm://localhost:61719"
+          }
+        }
+        break
+
+
     case "preview":
-      println "Starting production ActiveMQ 61610"
+      println "Starting preview ActiveMQ 61610"
       jmsBroker(XBeanBrokerService) {
         useJmx = 'false'
         persistent = 'false'
@@ -89,6 +119,35 @@ beans = {
         }
       }
       break
+
+      // for preview_script the actual ports do not matter, as long as they don't conflict with the real values
+      case "preview_script":
+        println "Starting preview_script ActiveMQ 61710"
+        jmsBroker(XBeanBrokerService) {
+          useJmx = 'false'
+          persistent = 'false'
+          transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61710'))]
+        }
+
+        connectionFactory(ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61717"
+        }
+
+        jmsTemplate(JmsTemplate) {
+          connectionFactory = { SingleConnectionFactory cf ->
+            targetConnectionFactory = ref('connectionFactory')
+          }
+        }
+        jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61710"
+        }
+        jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+          bean.destroyMethod = "stop"
+          connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+            brokerURL = "vm://localhost:61710"
+          }
+        }
+        break
 
     case "development":
       println "Starting development ActiveMQ 61617"
@@ -118,6 +177,35 @@ beans = {
       }
       break
 
+      // for development_script the actual ports do not matter, as long as they don't conflict with the real values
+      case "development_script":
+        println "Starting development_script ActiveMQ 61717"
+        jmsBroker(XBeanBrokerService) {
+          useJmx = 'false'
+          persistent = 'false'
+          transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61717'))]
+        }
+
+        connectionFactory(ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61717"
+        }
+
+        jmsTemplate(JmsTemplate) {
+          connectionFactory = { SingleConnectionFactory cf ->
+            targetConnectionFactory = ref('connectionFactory')
+          }
+        }
+        jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61717"
+        }
+        jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+          bean.destroyMethod = "stop"
+          connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+            brokerURL = "vm://localhost:61717"
+          }
+        }
+        break
+
     case "test":
       println "Starting test ActiveMQ 61618"
       jmsBroker(XBeanBrokerService) {
@@ -145,5 +233,34 @@ beans = {
         }
       }
       break
+
+      // for test_script the actual ports do not matter, as long as they don't conflict with the real values
+      case "test_script":
+        println "Starting test_script ActiveMQ 61718"
+        jmsBroker(XBeanBrokerService) {
+          useJmx = 'false'
+          persistent = 'false'
+          transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61718'))]
+        }
+
+        connectionFactory(ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61718"
+        }
+
+        jmsTemplate(JmsTemplate) {
+          connectionFactory = { SingleConnectionFactory cf ->
+            targetConnectionFactory = ref('connectionFactory')
+          }
+        }
+        jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+          brokerURL = "vm://localhost:61718"
+        }
+        jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+          bean.destroyMethod = "stop"
+          connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+            brokerURL = "vm://localhost:61718"
+          }
+        }
+        break
   }
 }

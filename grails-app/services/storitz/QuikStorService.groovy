@@ -17,16 +17,41 @@ class QuikStorService extends BaseProviderService {
   def emailService
   def unitSizeService
 
-  private getPort(url) {
-    if (!port[url]) {
-      URL wsUrl = new URL(url)
-      def qsService = new Service1(wsUrl)
-      port[url] = qsService.getService1Soap()
-    }
-    return port[url]
+  // required for script services
+  UnitSizeService getUnitSizeService() {
+      if (!unitSizeService) {
+          println ("unitSizeService is null: instantiating")
+          unitSizeService = new UnitSizeService()
+      }
+      return unitSizeService
   }
 
-  private getFacilityInfo(QuikStorLocation loc) {
+  GeocodeService getGeocodeService() {
+      if (!geocodeServicee) {
+          println ("geocodeService is null: instantiating")
+          geocodeService = new GeocodeService()
+      }
+      return geocodeService
+  }
+
+    EmailService getEmailService() {
+        if (!emailService) {
+            println("emailService is null: instantiating")
+            emailService = new EmailService()
+        }
+        return emailService
+    }
+
+    private getPort(url) {
+        if (!port[url]) {
+            URL wsUrl = new URL(url)
+            def qsService = new Service1(wsUrl)
+            port[url] = qsService.getService1Soap()
+        }
+        return port[url]
+    }
+
+    private getFacilityInfo(QuikStorLocation loc) {
     Service1Soap myProxy = getPort(loc.quikStor.url)
     return myProxy.facilityInfo(loc.username, loc.password, loc.sitename)
   }
@@ -175,7 +200,7 @@ class QuikStorService extends BaseProviderService {
       def address = site.address + ', ' + site.city + ', ' + site.state.display + ' ' + site.zipcode
 
       println "Found address: ${address}"
-      def geoResult = geocodeService.geocode(address)
+      def geoResult = getGeocodeService().geocode(address)
 
       site.lng = geoResult.results[0].geometry.location.lng
       site.lat = geoResult.results[0].geometry.location.lat
@@ -292,7 +317,7 @@ class QuikStorService extends BaseProviderService {
         if (unitInfo.csUnitType == 'Parking') {
           searchType = SearchType.PARKING
         }
-        def unitsize = unitSizeService.getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
+        def unitsize = getUnitSizeService().getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
         if (unitsize) {
           unit = new StorageUnit()
           unit.unitNumber = unitType.iTypeId
@@ -672,7 +697,7 @@ class QuikStorService extends BaseProviderService {
         try {
 
           String body = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\n\nError Message: ${errorMessage}"
-          emailService.sendTextEmail(
+          getEmailService().sendTextEmail(
                   to: "notifications@storitz.com",
                   from: "no-reply@storitz.com",
                   subject: "QUIKSTOR - failed move-in",

@@ -15,6 +15,34 @@ class SiteLinkService extends BaseProviderService {
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
   def siteLinkWsUrl35 = "https://www.smdservers.net/CCWs_3.5/CallCenterWs.asmx"
 
+  // required for script services
+  UnitSizeService getUnitSizeService() {
+      if (!unitSizeService) {
+          println ("unitSizeService is null: instantiating")
+
+          unitSizeService = new UnitSizeService()
+      }
+      return unitSizeService
+  }
+
+  GeocodeService getGeocodeService() {
+      if (!geocodeServicee) {
+          println ("geocodeService is null: instantiating")
+          geocodeService = new GeocodeService()
+      }
+      return geocodeService
+  }
+
+     EmailService getEmailService() {
+        if (!emailService) {
+            println("emailService is null: instantiating")
+            emailService = new EmailService()
+        }
+        return emailService
+     }
+
+
+
   def getSites(corpCode, userName, password) {
 
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
@@ -639,7 +667,7 @@ class SiteLinkService extends BaseProviderService {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
 
     writer << "Found address: ${address}"
-    def geoResult = geocodeService.geocode(address)
+    def geoResult = getGeocodeService().geocode(address)
 
     site.lng = geoResult.results[0].geometry.location.lng
     site.lat = geoResult.results[0].geometry.location.lat
@@ -924,7 +952,7 @@ class SiteLinkService extends BaseProviderService {
             siteUnit.displaySize = width + " X " + length
           }
 
-          def unitSize = unitSizeService.getUnitSize(width, length, searchType)
+          def unitSize = getUnitSizeService().getUnitSize(width, length, searchType)
 
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0) && siteUnit.price > 0) {
             siteUnit.unitsize = unitSize
@@ -1316,7 +1344,7 @@ TODO - evaluate whether we need this going forward
       rentalTransaction.save(flush: true)
 
       try {
-        emailService.sendTextEmail(
+        getEmailService().sendTextEmail(
                 to: "notifications@storitz.com",
                 from: "no-reply@storitz.com",
                 subject: "SITELINK - failed move-in",

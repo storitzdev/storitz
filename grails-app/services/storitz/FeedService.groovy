@@ -7,40 +7,90 @@ import com.storitz.*
 class FeedService {
 
   def siteLinkService
-  def CShiftService
-  def CShift4Service
+  def cShiftService
+  def cShift4Service
   def quikStorService
   def exrsService
   def usiService
 
   boolean transactional = false
 
+  // the following getXYZService() calls are required to support gant script usage
+
+  SiteLinkService getSiteLinkService() {
+      if (!siteLinkService) {
+          //println ("siteLinkService is null. instantiating...")
+          siteLinkService = new SiteLinkService()
+      }
+      return siteLinkService;
+  }
+
+  CShiftService getCShiftService() {
+      if (!cShiftService) {
+          //println ("cShiftService is null. instantiating...")
+          cShiftService = new CShiftService()
+      }
+      return cShiftService;
+  }
+
+  CShift4Service getCShift4Service() {
+      if (!cShift4Service) {
+          //println ("cShift4Service is null. instantiating...")
+          cShift4Service = new CShift4Service()
+      }
+      return cShift4Service;
+  }
+
+  QuikStorService getQuikStorService() {
+      if (!quikStorService) {
+          //println ("quikStorService is null. instantiating...")
+          quikStorService = new QuikStorService()
+      }
+      return quikStorService;
+  }
+
+  ExrsService getExrsService() {
+      if (!exrsService) {
+          //println ("exrsService is null. instantiating...")
+          exrsService = new ExrsService()
+      }
+      return exrsService;
+  }
+
+  UsiService getUsiService() {
+      if (!usiService) {
+          println ("usiService is null. instantiating...")
+          usiService = new UsiService()
+      }
+      return usiService;
+  }
+
   def updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
 
     switch (storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.updateSite(storageSiteInstance, stats, writer)
+        getSiteLinkService().updateSite(storageSiteInstance, stats, writer)
         break
 
       case "CS3":
-        CShiftService.updateSite(storageSiteInstance, stats, writer)
+        getCShiftService().updateSite(storageSiteInstance, stats, writer)
         break
 
       case "QS":
-        quikStorService.updateSite(storageSiteInstance, stats, writer)
+        getQuikStorService().updateSite(storageSiteInstance, stats, writer)
         break
 
       case "EX":
-        exrsService.updateSite(storageSiteInstance, stats, writer)
+        getExrsService().updateSite(storageSiteInstance, stats, writer)
         break
 
       case "USI":
-        usiService.updateSite(storageSiteInstance, stats, writer)
+        getUsiService().updateSite(storageSiteInstance, stats, writer)
         break
 
       case "CS4":
-        CShift4Service.updateSite(storageSiteInstance, stats, writer)
+        getCShift4Service().updateSite(storageSiteInstance, stats, writer)
         break
 
       default:
@@ -53,27 +103,27 @@ class FeedService {
     switch (storageSiteInstance.source) {
 
       case "SL":
-        siteLinkService.updateUnits(storageSiteInstance, stats, writer)
+        getSiteLinkService().updateUnits(storageSiteInstance, stats, writer)
         break
 
       case "CS3":
-        CShiftService.updateUnits(storageSiteInstance, stats, writer)
+        getCShiftService().updateUnits(storageSiteInstance, stats, writer)
         break
 
       case "QS":
-        quikStorService.updateUnits(storageSiteInstance, stats, writer)
+        getQuikStorService().updateUnits(storageSiteInstance, stats, writer)
         break
 
       case "EX":
-        exrsService.updateUnits(storageSiteInstance, stats, writer)
+        getExrsService().updateUnits(storageSiteInstance, stats, writer)
         break
 
       case "USI":
-        usiService.updateUnits(storageSiteInstance, stats, writer)
+        getUsiService().updateUnits(storageSiteInstance, stats, writer)
         break
 
       case "CS4":
-        CShift4Service.updateUnits(storageSiteInstance, stats, writer)
+        getCShift4Service().updateUnits(storageSiteInstance, stats, writer)
         break
 
 
@@ -88,32 +138,32 @@ class FeedService {
 
       case "SL":
         def siteLink = (SiteLink) storageSiteInstance.feed
-        siteLinkService.getPromos(siteLink, storageSiteInstance, writer)
+        getSiteLinkService().getPromos(siteLink, storageSiteInstance, writer)
         break
 
       case "CS3":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        CShiftService.loadPromos(centerShift, storageSiteInstance, writer)
+        getCShiftService().loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       case "QS":
         def quikStor = (QuikStor) storageSiteInstance.feed
-        quikStorService.loadPromos(quikStor, storageSiteInstance, writer)
+        getQuikStorService().loadPromos(quikStor, storageSiteInstance, writer)
         break
 
       case "EX":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        exrsService.loadPromos(centerShift, storageSiteInstance, writer)
+        getExrsService().loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       case "USI":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        usiService.loadPromos(centerShift, storageSiteInstance, writer)
+        getUsiService().loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       case "CS4":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        CShift4Service.loadPromos(centerShift, storageSiteInstance, writer)
+        getCShift4Service().loadPromos(centerShift, storageSiteInstance, writer)
         break
 
       default:
@@ -127,32 +177,32 @@ class FeedService {
 
       case "SL":
         def siteLink = (SiteLink) storageSiteInstance.feed
-        siteLinkService.addPhones(siteLink, storageSiteInstance, writer)
+        getSiteLinkService().addPhones(siteLink, storageSiteInstance, writer)
         break
 
       case "CS3":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        CShiftService.addSitePhone(centerShift, storageSiteInstance, writer)
+        getCShiftService().addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       case "QS":
         def quikStor = (QuikStor) storageSiteInstance.feed
-        quikStorService.addSitePhone(quikStor, storageSiteInstance, writer)
+        getQuikStorService().addSitePhone(quikStor, storageSiteInstance, writer)
         break
 
       case "EX":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        exrsService.addSitePhone(centerShift, storageSiteInstance, writer)
+        getExrsService().addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       case "USI":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        usiService.addSitePhone(centerShift, storageSiteInstance, writer)
+        getUsiService().addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       case "CS4":
         def centerShift = (CenterShift) storageSiteInstance.feed
-        CShift4Service.addSitePhone(centerShift, storageSiteInstance, writer)
+        getCShift4Service().addSitePhone(centerShift, storageSiteInstance, writer)
         break
 
       default:
@@ -164,20 +214,20 @@ class FeedService {
     switch (feed.feedType) {
 
       case FeedType.SITELINK:
-        siteLinkService.refreshInsurance(feed)
+        getSiteLinkService().refreshInsurance(feed)
         break
 
       case FeedType.CENTERSHIFT:
         CenterShift cshift = (CenterShift) feed
         if (cshift.cshiftVersion == CenterShiftVersion.CS3) {
-          CShiftService.refreshInsurance(feed)
+          getCShiftService().refreshInsurance(feed)
         } else {
-          CShift4Service.refreshInsurance(feed)
+          getCShift4Service().refreshInsurance(feed)
         }
         break
 
       case FeedType.QUIKSTOR:
-        quikStorService.refreshInsurance(feed)
+        getQuikStorService().refreshInsurance(feed)
         break
 
       default:

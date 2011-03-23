@@ -15,6 +15,23 @@ class CShiftService extends BaseProviderService {
   def geocodeService
   def unitSizeService
 
+  // required for script services
+  UnitSizeService getUnitSizeService() {
+      if (!unitSizeService) {
+          println ("unitSizeService is null: instantiating")
+          unitSizeService = new UnitSizeService()
+      }
+      return unitSizeService
+  }
+
+  GeocodeService getGeocodeService() {
+      if (!geocodeServicee) {
+          println ("geocodeService is null: instantiating")
+          geocodeService = new GeocodeService()
+      }
+      return geocodeService
+  }
+
   def getSites(url, userName, pin) {
     def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:csc="http://centershift.com/csCallCenter/csCallCenterService">
    <soapenv:Header/>
@@ -502,7 +519,7 @@ class CShiftService extends BaseProviderService {
       def address = addr.STREET.text() + ' ' + ', ' + addr.CITY.text() + ', ' + addr.STATE.text() + ' ' + addr.POSTAL_CODE.text()
 
       writer.println "Found address: ${address}"
-      def geoResult = geocodeService.geocode(address)
+      def geoResult = getGeocodeService().geocode(address)
 
       if (geoResult.status == 'OK') {
         site.lng = geoResult.results[0].geometry.location.lng
@@ -822,7 +839,7 @@ class CShiftService extends BaseProviderService {
 
         }
 
-        def unitSize = unitSizeService.getUnitSize(width, length, searchType)
+        def unitSize = getUnitSizeService().getUnitSize(width, length, searchType)
         if (unitSize && unitSize.id != 1 && (width != 0 && length != 0)) {
           def displaySize
           if (m[0][1].isInteger() && m[0][2].isInteger()) {
