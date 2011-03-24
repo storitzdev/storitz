@@ -17,6 +17,8 @@ class Feed {
     zipcode(nullable: true)
     transactionBoxLink(size: 1..255, nullable: true)
     transactionBoxBody(size: 1..2000, nullable: true)
+    dateCreated(nullable:true)
+    lastUpdated(nullable:true)
   }
 
   FeedType feedType
@@ -29,6 +31,8 @@ class Feed {
   String zipcode
   String transactionBoxLink
   String transactionBoxBody
+  Date dateCreated
+  Date lastUpdated
 
   CommissionSchedule commissionSchedule
 

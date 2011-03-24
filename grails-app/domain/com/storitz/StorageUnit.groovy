@@ -15,6 +15,8 @@ class StorageUnit {
     unitInfo(nullable: true)
     totalUnits(nullable: true)
     deposit(nullable: true)
+    dateCreated(nullable:true)
+    lastUpdated(nullable: true)
   }
 
   String description
@@ -39,4 +41,6 @@ class StorageUnit {
   String unitInfo   // centershift original size
   String unitSizeInfo // used by special offer filter
   String unitTypeInfo // used by special offer filter
+  Date dateCreated
+  Date lastUpdated
 }

@@ -86,6 +86,7 @@ class StorageSite {
     taxRateInsurance(nullable: true)
     taxRateMerchandise(nullable: true)
     useProrating(nullable: true)
+    dateCreated(nullable: true)
     lastChange(nullable: true)
     prorateStart(nullable: true)
     prorateCutoff(nullable: true)
@@ -197,6 +198,7 @@ class StorageSite {
 
   RentalAgreement rentalAgreement
 
+  Date dateCreated
   Date lastChange
 
   def users() {
