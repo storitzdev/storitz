@@ -15,23 +15,38 @@ class UstoreitController {
   def images = {
     def ustoreitManager = User.findByUsername('ustoreit')
     def ustoreitFeed = (CenterShift) Feed.findByManager(ustoreitManager)
+
     def random = new Random()
     def sitemapXml = new URL("http://www.ustoreit.com/sitemap.xml").text
     def matcher = sitemapXml =~ /<loc>(http:\/\/.+?(\d+)\.html)<\/loc>/
-    matcher.each {
-      def pageUrl = it[1]
+    matcher.eachWithIndex { url, i ->
+      def pageUrl = url[1]
       def idMatch = pageUrl =~ /(\d+)/
+      println "Checking URL: ${pageUrl}"
       if (idMatch.getCount()) {
         def idNum = idMatch[0][1]
-        def siteHtml = new URL(pageUrl).text
-        def usiMatch = siteHtml =~ /(?i)usi(\d+)-/
-        if (usiMatch.getCount()) {
-          def usiNum = usiMatch[0][1]
-          if (usiNum.size() < 4) {
-            usiNum = '0' + usiNum
+        def siteHtml = pageUrl.toURL().text
+
+        // TODO match by zip and street
+        def zipMatch = siteHtml =~ /<span class=['"]postal-code['"]>(.+?)<\/span/
+        def zip
+        if (zipMatch.getCount()) {
+          zip = zipMatch[0][1]
+        } else {
+          zipMatch = siteHtml =~ /postal-code/
+          if (zipMatch.getCount()) {
+            println "Did not match, but found postal-code..."
           }
-          def site = StorageSite.findByFeedAndTitleLike(ustoreitFeed, usiNum + '%')
-          println "Searching for feed id = ${ustoreitFeed.id} and title starting with ${usiNum} found = ${site != null} page url= ${pageUrl}"
+        }
+
+        def addrMatch = siteHtml =~ /<span class=['"]street-address['"]>(.+?)<\/span/
+        def addr
+        if (addrMatch.getCount()) {
+          addr = addrMatch[0][1].trim().toLowerCase()
+        }
+
+        if (addr && zip) {
+          def site = ustoreitFeed.sites.find{it.title ==~ /\d{4} .+/ && it.address.trim().toLowerCase() == addr && it.zipcode == zip}
           if (site) {
             def imageList = []
             for (siteImage in site.siteImages()) {
@@ -41,7 +56,7 @@ class UstoreitController {
             for (siteImage in imageList) {
               imageService.deleteImage(site, siteImage)
             }
-            println "Page URL: ${pageUrl} pageId: ${idNum} usiId: ${usiNum} - found site: ${site.title}"
+            println "Page URL: ${pageUrl} pageId: ${idNum} - found site: ${site.title}"
             def xmlUrl = "http://www.ustoreit.com/find-storage-and-rates/xml.ashx?facID=${idNum}|1?cachebuster=${random.nextInt(1000000)}&timestamp=${System.currentTimeMillis()}"
             def gallery = new XmlSlurper().parseText(new URL(xmlUrl).text)
             def basePath = gallery.setup.@path
@@ -82,18 +97,21 @@ class UstoreitController {
     def ustoreitManager = User.findByUsername('ustoreit')
     def ustoreitFeed = (CenterShift) Feed.findByManager(ustoreitManager)
     for (site in ustoreitFeed.sites) {
-      def title
-      if (site.title.contains("/")) {
-        title = 'U-Store-It ' + site.title.tokenize("/")[-1]
-      } else {
-        def tm = site.title =~ /(\d{4}) \.+/
-        if (tm.getCount()) {
+      def tm = site.title =~ /\d{4} .+/
+      if (tm.getCount()) {
+        def title
+        if (site.title.contains("/")) {
+          title = 'U-Store-It ' + site.title.tokenize("/")[-1]
+        } else if (site.title.contains("/")) {
+          title = "U-Store-It " + site.title.tokenize("-")[-1]
+        } else {
           def titleArr = site.title.tokenize(" ")
-          title = "U-Store-It " + titleArr[1..titleArr.size() - 1].join(' ')
+          title = "U-Store-It " + titleArr[1..titleArr.size()-1].join(" ")
         }
+        println "Changing site title from ${site.title} to ${title}"
+        site.title = title
+        site.save(flush: true)
       }
-      site.title = title
-      site.save(flush: true)
     }
     render(status: 200, text: "Done processing titles")
   }

@@ -56,7 +56,7 @@
 <div style="height: 30px;"></div>
 <g:if test="${rentalAgreementLink}">
   <p>
-    Before move-in, please review and print out a copy of your <a href="${rentalAgreementLink}">lease agreement</a>.
+    Before move-in, please review and print out a copy of your <a href="${rentalAgreementLink}">terms and conditions</a>.
   </p>
 </g:if>
 <p>
