@@ -328,15 +328,15 @@ class ExrsService extends CShiftService {
     def siteHtml = new URL(baseUrl + site.url).text
     // build list of valid ids
     def idList = []
-    def idMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl(\d+)_Dimensions" value="${unit.unitSizeInfo}"/
+    def idMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl(\d+)_Dimensions" value="${unit.unitSizeInfo}"/
     if (idMatcher.getCount()) {
       for (idMatch in idMatcher) {
-        def unitId = idMatch[1]
-        def attributeMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_UnitAttributesCode" value="${unit.unitTypeInfo}"/
+        def unitId = idMatch[2]
+        def attributeMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="${unit.unitTypeInfo}"/
         if (attributeMatcher.getCount()) {
-          def reservationMatcher = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+          def reservationMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
           if (reservationMatcher.getCount()) {
-            Integer reservationDeposit = Integer.parseInt(reservationMatcher[0][1])
+            Integer reservationDeposit = Integer.parseInt(reservationMatcher[0][2])
             return (reservationDeposit >= 0)
           }
         }
