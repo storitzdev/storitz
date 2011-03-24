@@ -15,53 +15,55 @@ class ExrsService extends CShiftService {
   // unit availability
 
   def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
-    println "Opening page: ${baseUrl + site.url}"
-    def siteHtml = new URL(baseUrl + site.url).text
+    println "Update units opening page: ${baseUrl + site.url}"
+    def siteHtml = (baseUrl + site.url).toURL().text
     // build list of valid ids
     def idList = []
-    def idMatcher = siteHtml =~ /ctl00_mContent_UnitList_ctl(\d+)_Dimensions/
+    def idMatcher = siteHtml =~ /ctl00_(m|Main)Content_UnitList_ctl(\d+)_Dimensions/
     if (idMatcher.getCount()) {
       idMatcher.each {
-        idList.add(it[1])
+        idList.add(it[2])
       }
+    } else {
+      println "No ids found."
     }
 
     def needSave = false
     for (unitId in idList) {
-      def dimensionsMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
+      def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
       def dimensions
       if (dimensionsMatch.getCount()) {
-        dimensions = dimensionsMatch[0][1]
+        dimensions = dimensionsMatch[0][2]
       }
 
-      def attributesMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
+      def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
       def attributes
       if (attributesMatch.getCount()) {
-        attributes = attributesMatch[0][1]
+        attributes = attributesMatch[0][2]
       }
 
-      def descriptionMatch = siteHtml =~ /id="ctl00_[m|Main]Content_UnitList_ctl${unitId}_FeatureString" value="(.+?)"/
+      def descriptionMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_FeatureString" value="(.+?)"/
       def typeName
       if (descriptionMatch.getCount()) {
-        typeName = descriptionMatch[0][1]
+        typeName = descriptionMatch[0][2]
       }
 
-      def priceMatch = siteHtml =~ /id="ctl00_[m|Main]Content_UnitList_ctl${unitId}_StreetRate" value="(\d+)"/
+      def priceMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_StreetRate" value="(\d+)"/
       BigDecimal price
       if (priceMatch.getCount()) {
-        price = new BigDecimal(priceMatch[0][1])
+        price = new BigDecimal(priceMatch[0][2])
       }
 
-      def pushRateMatch = siteHtml =~ /id="ctl00_[m|Main]Content_UnitList_ctl${unitId}_WebsiteRate" value="(\d+)"/
+      def pushRateMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_WebsiteRate" value="(\d+)"/
       BigDecimal pushRate
       if (pushRateMatch.getCount()) {
-        pushRate = new BigDecimal(pushRateMatch[0][1])
+        pushRate = new BigDecimal(pushRateMatch[0][2])
       }
 
-      def reservationMatch = siteHtml =~ /id="ctl00_[m|Main]Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+      def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
       def reservation
       if (reservationMatch.getCount()) {
-        reservation = Integer.parseInt(reservationMatch[0][1])
+        reservation = Integer.parseInt(reservationMatch[0][2])
       }
 
       def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
@@ -166,7 +168,6 @@ class ExrsService extends CShiftService {
             siteUnit.unitTypeInfo = attributes
             stats.unitCount += 1
 
-            println "Updating unit dimensions ${dimensions} price: ${price} push rate: ${pushRate}"
           }
           if (siteUnit.validate()) {
             siteUnit.save(flush: true)
