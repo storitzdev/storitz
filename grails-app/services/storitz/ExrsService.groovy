@@ -158,6 +158,8 @@ class ExrsService extends CShiftService {
             siteUnit.displaySize = displaySize
             stats.unitCount += 1
 
+            writer.println "Created new unit ${displaySize} price: ${price} pushRate:${pushRate}"
+
           } else {
             siteUnit.unitCount = reservation > 0 ? 100 : 0
             siteUnit.totalUnits = 100
@@ -169,6 +171,7 @@ class ExrsService extends CShiftService {
             siteUnit.unitTypeInfo = attributes
             stats.unitCount += 1
 
+            writer.println "Updating unit attributes ${attributes} size: ${displaySize} price: ${price} pushRate:${pushRate}"
           }
           if (siteUnit.validate()) {
             siteUnit.save(flush: true)
