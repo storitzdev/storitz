@@ -187,19 +187,21 @@ class ExrsService extends CShiftService {
     if (needSave) {
       site.save(flush: true)
     }
+    CenterShift cshift = (CenterShift)site.feed
+    loadPromos(cshift, site, writer)
   }
 
   // promos
 
   def loadPromos(CenterShift feed, StorageSite site, PrintWriter writer) {
-    println "Opening page: ${baseUrl + site.url}"
+    println "loadPromos opening page: ${baseUrl + site.url}"
     def siteHtml = new URL(baseUrl + site.url).text
     // build list of valid ids
     def idList = []
-    def idMatcher = siteHtml =~ /ctl00_mContent_UnitList_ctl(\d+)_Dimensions/
+    def idMatcher = siteHtml =~ /ctl00_(m|Main)Content_UnitList_ctl(\d+)_Dimensions/
     if (idMatcher.getCount()) {
       idMatcher.each {
-        idList.add(it[1])
+        idList.add(it[2])
       }
     }
 
@@ -207,57 +209,55 @@ class ExrsService extends CShiftService {
 
     def needSave = false
     for (unitId in idList) {
-      def reservationMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+      def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
       def reservation
       if (reservationMatch.getCount()) {
-        reservation = Integer.parseInt(reservationMatch[0][1])
+        reservation = Integer.parseInt(reservationMatch[0][2])
       }
 
       if (reservation > 0) {
 
-        def dimensionsMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
+        def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
         def dimensions
         if (dimensionsMatch.getCount()) {
-          dimensions = dimensionsMatch[0][1]
+          dimensions = dimensionsMatch[0][2]
         }
 
-        def attributesMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
+        def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
         def attributes
         if (attributesMatch.getCount()) {
-          attributes = attributesMatch[0][1]
+          attributes = attributesMatch[0][2]
         }
 
-        def promoNameMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_PromoName" value="(.+?)"/
+        def promoNameMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_PromoName" value="(.+?)"/
         def promoName
         if (promoNameMatch.getCount()) {
-          promoName = (promoNameMatch[0][1]).split(" - ")[-1]
+          promoName = (promoNameMatch[0][2]).split(" - ")[-1]
         }
 
-        def discountTypeMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_DiscountType" value="(.+?)"/
+        def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountType" value="(.+?)"/
         def discountType
         if (discountTypeMatch.getCount()) {
-          discountType = discountTypeMatch[0][1]
+          discountType = discountTypeMatch[0][2]
         }
 
-        def discountPeriodMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_DiscountPeriods" value="(\d+)"/
+        def discountPeriodMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountPeriods" value="(\d+)"/
         Integer discountPeriod
         if (discountPeriodMatch.getCount()) {
-          discountPeriod = Integer.parseInt(discountPeriodMatch[0][1])
+          discountPeriod = Integer.parseInt(discountPeriodMatch[0][2])
         }
 
-        def discountMinMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_DiscountMin" value="(\d+)"/
+        def discountMinMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMin" value="(\d+)"/
         Integer discountMin
         if (discountMinMatch.getCount()) {
-          discountMin = Integer.parseInt(discountMinMatch[0][1])
+          discountMin = Integer.parseInt(discountMinMatch[0][2])
         }
 
-        def discountMaxMatch = siteHtml =~ /id="ctl00_mContent_UnitList_ctl${unitId}_DiscountMax" value="(\d+)"/
+        def discountMaxMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMax" value="(\d+)"/
         Integer discountMax
         if (discountMaxMatch.getCount()) {
-          discountMax = Integer.parseInt(discountMaxMatch[0][1])
+          discountMax = Integer.parseInt(discountMaxMatch[0][2])
         }
-
-        println "Found discount type=${discountType} name=${promoName} period=${discountPeriod} min=${discountMin} max=${discountMax}"
 
         SpecialOffer specialOffer = new SpecialOffer()
         specialOffer.concessionId = -999
