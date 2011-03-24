@@ -7,12 +7,12 @@
   <div class="left" style="width:635px;">
     <div>
       <div class="left bannerMasthead">
-        <div class="mastheadCenter mastheadTop"><h2 class="mastheadTop">The Storitz Advantage:</h2></div>
+        <div class="mastheadCenter mastheadTop"><h2 class="mastheadTop">Simplify Your Search for Self Storage.</h2></div>
         <g:if test="${params.controller =='home'}">
-          <div class="mastheadCenter mastheadBottom"><h1 class="mastheadBottom">Find and rent self storage right here, right now.</h1></div>
+          <div class="mastheadCenter mastheadBottom"><h1 class="mastheadBottom">Compare Thousands of Units with One Click.</h1></div>
         </g:if>
         <g:else>
-          <div class="mastheadCenter mastheadBottom"><h2 class="mastheadBottom">Find and rent self storage right here, right now.</h2></div>
+          <div class="mastheadCenter mastheadBottom"><h2 class="mastheadBottom">Compare Thousands of Units with One Click.</h2></div>
         </g:else>
       </div>
       <div class="left tollFree">
