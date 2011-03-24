@@ -105,7 +105,7 @@ class ExrsService extends CShiftService {
           }
 
           def newUnit = false
-          StorageUnit siteUnit = site.units.find { it.unitName == attributes && it.displaySize == displaySize}
+          StorageUnit siteUnit = site.units.find { it.unitNumber == attributes && it.displaySize == displaySize}
 
           if (!siteUnit) {
             siteUnit = new StorageUnit()
@@ -164,6 +164,7 @@ class ExrsService extends CShiftService {
             siteUnit.pushRate = pushRate
             siteUnit.price = price
             siteUnit.taxRate = 0
+            siteUnit.unitName = unitId
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = attributes
             stats.unitCount += 1
