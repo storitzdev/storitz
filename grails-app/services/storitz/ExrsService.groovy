@@ -10,7 +10,7 @@ class ExrsService extends CShiftService {
 
   def emailService
 
-  static String baseUrl = "http://selfstorage.extraspace.com"
+  static String baseUrl = "http://www.extraspace.com"
 
   // unit availability
 
