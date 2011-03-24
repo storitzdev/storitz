@@ -3,7 +3,8 @@ package storitz
 class UpdateInventoryJob {
 
     static triggers = {
-      cron name:'nightlyUpdate', cronExpression:"0 30 1 * * ?"
+      //disable cron for grails script testing
+      //cron name:'nightlyUpdate', cronExpression:"0 30 1 * * ?"
     }
 
     def feedService

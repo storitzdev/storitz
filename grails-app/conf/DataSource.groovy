@@ -67,7 +67,11 @@ environments {
   production_script {
     dataSource {
       dbCreate = "update"
-      jndiName = "java:comp/env/jdbc/storitz"
+      //jndiName = "java:comp/env/jdbc/storitz"
+      driverClassName = "com.mysql.jdbc.Driver"
+      url = "jdbc:mysql://www.storitz.com:3306/storitz?autoReconnect=true"
+      username = "storitz"
+      password = "st3ch@m"
     }
   }
 }
