@@ -1,11 +1,10 @@
 #!/bin/sh
-# update inventory
+# Update Inventory
 
 set `date`
 DATE=$6-$2-$3
-PIDFILE=/tmp/update-inventory.pid
 
-# Important. Change this to preview or production, as appropriate
+# Important!!! Change this to preview or production, as appropriate
 ENVNAME=
 
 if test "$ENVNAME" = ""; then
@@ -13,7 +12,11 @@ if test "$ENVNAME" = ""; then
     return 1
 fi
 
+# Make sure these are correct for your environment
+export JAVA_HOME=/usr/java/latest
 export GRAILS_HOME=/home/deploy/grails-1.3.6
+
+PIDFILE=/tmp/update-inventory.pid
 
 if test -f "$PIDFILE"; then
 	echo "process is already running with PID=`cat $PIDFILE`"
@@ -21,10 +24,11 @@ if test -f "$PIDFILE"; then
 	exit 1
 fi
 
-# save our pid to PIDFILE
+# Save our pid to PIDFILE
 echo $$ > $PIDFILE
 
 cd /home/deploy/projects/storitz
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryScript.groovy > /home/deploy/logs/UpdateInventory.${DATE}.log 2>&1
 
+# Clean up after ourselves
 rm $PIDFILE
