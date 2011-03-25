@@ -16,6 +16,10 @@ fi
 export JAVA_HOME=/usr/java/latest
 export GRAILS_HOME=/home/deploy/grails-1.3.6
 
+# JAVA_OPTS is picked up buy grails automatically. The default memory that
+# grails allocates to Java is not enough to handle the Extraspace string processing requirements.
+export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit"
+
 PIDFILE=/tmp/update-inventory.pid
 
 if test -f "$PIDFILE"; then
