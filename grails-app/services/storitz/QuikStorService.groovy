@@ -375,6 +375,10 @@ class QuikStorService extends BaseProviderService {
 
     def loc = quikStor.locations.find {it.site == storageSiteInstance}
 
+    if (!loc) {
+      println "Could not locate QuikStorLocation"
+    }
+
     Service1Soap myProxy = getPort(loc.quikStor.url)
     def unitTypes = myProxy.availableUnitTypes(loc.username, loc.password, loc.sitename)
     def idList = []

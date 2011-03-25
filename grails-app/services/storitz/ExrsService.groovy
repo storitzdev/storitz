@@ -28,6 +28,7 @@ class ExrsService extends CShiftService {
       println "No ids found."
     }
 
+    site.specialOffers.clear()
     def needSave = false
     for (unitId in idList) {
       def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
@@ -187,15 +188,122 @@ class ExrsService extends CShiftService {
           writer.println "Skipping due to size: length = ${length}, width = ${width}"
         }
       }
+      needSave |= handlePromos(site, siteHtml, unitId, writer)
     }
+
     if (needSave) {
       site.save(flush: true)
     }
-    CenterShift cshift = (CenterShift)site.feed
-    loadPromos(cshift, site, writer)
   }
 
   // promos
+  private handlePromos(site, siteHtml, unitId, writer) {
+    def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+    def reservation
+    if (reservationMatch.getCount()) {
+      reservation = Integer.parseInt(reservationMatch[0][2])
+    }
+
+    if (reservation > 0) {
+
+      def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
+      def dimensions
+      if (dimensionsMatch.getCount()) {
+        dimensions = dimensionsMatch[0][2]
+      }
+
+      def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
+      def attributes
+      if (attributesMatch.getCount()) {
+        attributes = attributesMatch[0][2]
+      }
+
+      def promoNameMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_PromoName" value="(.+?)"/
+      def promoName
+      if (promoNameMatch.getCount()) {
+        promoName = (promoNameMatch[0][2]).split(" - ")[-1]
+      }
+
+      def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountType" value="(.+?)"/
+      def discountType
+      if (discountTypeMatch.getCount()) {
+        discountType = discountTypeMatch[0][2]
+      }
+
+      def discountPeriodMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountPeriods" value="(\d+)"/
+      Integer discountPeriod
+      if (discountPeriodMatch.getCount()) {
+        discountPeriod = Integer.parseInt(discountPeriodMatch[0][2])
+      }
+
+      def discountMinMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMin" value="(\d+)"/
+      Integer discountMin
+      if (discountMinMatch.getCount()) {
+        discountMin = Integer.parseInt(discountMinMatch[0][2])
+      }
+
+      def discountMaxMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMax" value="(\d+)"/
+      Integer discountMax
+      if (discountMaxMatch.getCount()) {
+        discountMax = Integer.parseInt(discountMaxMatch[0][2])
+      }
+
+      SpecialOffer specialOffer = new SpecialOffer()
+      specialOffer.concessionId = -999
+      specialOffer.active = true
+      specialOffer.featured = true
+      specialOffer.waiveAdmin = false;
+      specialOffer.description = promoName
+      specialOffer.promoName = promoName
+      specialOffer.promoSize = null
+      specialOffer.prepay = false
+      specialOffer.expireMonth = 0
+      specialOffer.prepayMonths = 1
+      specialOffer.description = promoName
+      specialOffer.inMonth = 0
+      specialOffer.promoQty = discountMin
+      if (specialOffer.promoQty == 0) {
+        specialOffer.promoQty = discountMax
+      }
+
+      switch (discountType) {
+        case '$':
+          specialOffer.promoType = PromoType.AMOUNT_OFF
+          break
+
+        case '%':
+          specialOffer.promoType = PromoType.PERCENT_OFF
+          break
+
+        case 'O':
+          specialOffer.promoType = PromoType.FIXED_RATE
+          break
+
+        default:
+          writer.println "Unknown promoType: ${discountType}"
+          return
+      }
+      specialOffer.save(flush: true)
+      site.addToSpecialOffers(specialOffer)
+
+      def restriction = new SpecialOfferRestriction()
+      restriction.restrictive = false
+      restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+      restriction.restrictionInfo = attributes
+      restriction.save(flush: true)
+      specialOffer.addToRestrictions(restriction)
+      restriction = new SpecialOfferRestriction()
+      restriction.restrictive = false
+      restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
+      restriction.restrictionInfo = dimensions
+      restriction.save(flush: true)
+      specialOffer.addToRestrictions(restriction)
+      specialOffer.save(flush: true)
+      return true
+    }
+    return false
+
+  }
 
   def loadPromos(CenterShift feed, StorageSite site, PrintWriter writer) {
     println "loadPromos opening page: ${baseUrl + site.url}"
@@ -213,108 +321,7 @@ class ExrsService extends CShiftService {
 
     def needSave = false
     for (unitId in idList) {
-      def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
-      def reservation
-      if (reservationMatch.getCount()) {
-        reservation = Integer.parseInt(reservationMatch[0][2])
-      }
-
-      if (reservation > 0) {
-
-        def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
-        def dimensions
-        if (dimensionsMatch.getCount()) {
-          dimensions = dimensionsMatch[0][2]
-        }
-
-        def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
-        def attributes
-        if (attributesMatch.getCount()) {
-          attributes = attributesMatch[0][2]
-        }
-
-        def promoNameMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_PromoName" value="(.+?)"/
-        def promoName
-        if (promoNameMatch.getCount()) {
-          promoName = (promoNameMatch[0][2]).split(" - ")[-1]
-        }
-
-        def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountType" value="(.+?)"/
-        def discountType
-        if (discountTypeMatch.getCount()) {
-          discountType = discountTypeMatch[0][2]
-        }
-
-        def discountPeriodMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountPeriods" value="(\d+)"/
-        Integer discountPeriod
-        if (discountPeriodMatch.getCount()) {
-          discountPeriod = Integer.parseInt(discountPeriodMatch[0][2])
-        }
-
-        def discountMinMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMin" value="(\d+)"/
-        Integer discountMin
-        if (discountMinMatch.getCount()) {
-          discountMin = Integer.parseInt(discountMinMatch[0][2])
-        }
-
-        def discountMaxMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMax" value="(\d+)"/
-        Integer discountMax
-        if (discountMaxMatch.getCount()) {
-          discountMax = Integer.parseInt(discountMaxMatch[0][2])
-        }
-
-        SpecialOffer specialOffer = new SpecialOffer()
-        specialOffer.concessionId = -999
-        specialOffer.active = true
-        specialOffer.featured = true
-        specialOffer.waiveAdmin = false;
-        specialOffer.description = promoName
-        specialOffer.promoName = promoName
-        specialOffer.promoSize = null
-        specialOffer.prepay = false
-        specialOffer.expireMonth = 0
-        specialOffer.prepayMonths = 1
-        specialOffer.description = promoName
-        specialOffer.inMonth = 0
-        specialOffer.promoQty = discountMin
-        if (specialOffer.promoQty == 0) {
-          specialOffer.promoQty = discountMax
-        }
-
-        switch (discountType) {
-          case '$':
-            specialOffer.promoType = PromoType.AMOUNT_OFF
-            break
-
-          case '%':
-            specialOffer.promoType = PromoType.PERCENT_OFF
-            break
-
-          case 'O':
-            specialOffer.promoType = PromoType.FIXED_RATE
-            break
-
-          default:
-            writer.println "Unknown promoType: ${discountType}"
-            return
-        }
-        specialOffer.save(flush: true)
-        site.addToSpecialOffers(specialOffer)
-
-        def restriction = new SpecialOfferRestriction()
-        restriction.restrictive = false
-        restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-        restriction.restrictionInfo = attributes
-        restriction.save(flush: true)
-        specialOffer.addToRestrictions(restriction)
-        restriction = new SpecialOfferRestriction()
-        restriction.restrictive = false
-        restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
-        restriction.restrictionInfo = dimensions
-        restriction.save(flush: true)
-        specialOffer.addToRestrictions(restriction)
-        specialOffer.save(flush: true)
-      }
+      handlePromos(site, siteHtml, unitId, writer)
     }
   }
 
