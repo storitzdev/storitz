@@ -102,6 +102,11 @@ abstract class BaseProviderService {
     def lastDayInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     def moveInDay = cal.get(Calendar.DAY_OF_MONTH)
 
+    // handle SiteLink case where 2nd month proration is chosen with no promo
+    if (!promo && site.prorateSecondMonth) {
+      durationMonths = 2
+    }
+    
     if (allowExtension && site.useProrating && !site.prorateSecondMonth) {
       if (moveInDay > site.prorateCutoff && (!promo || promo && durationMonths == 1)) {
         durationMonths++;

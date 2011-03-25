@@ -75,7 +75,7 @@
                     name="note"
                     width="650"
                     height="300"
-                    toolbar="Storitz">
+                    toolbar="StoritzPress">
               ${metroInstance?.note}
             </fckeditor:editor>
           </div>
