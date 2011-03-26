@@ -46,4 +46,8 @@
       </div>
     </div>
   </div>
+  <div style="clear: both;"></div>
+  <div class="small" style="width: 1000px; margin-left: auto; margin-right: auto;margin-top:30px;">
+    Storitz is the only place online where you can search for, compare and rent a self storage unit – all from one site.  Use our map to search for the best deals on self storage anywhere in the country.  Storitz lists thousands of storage units, near you and across the United States and lets you sort by distance, price and unit size so you can find the best storage unit for rent without the hassle of calling and driving to multiple locations.  Storitz shows you photos and video of the storage facility before you rent, so you know exactly what you’re getting.  Storitz facilities offer free move-in trucks, $1 move-in specials, online-only coupons and the best storage deals on the internet.  The Storitz Best Price Guarantee means you’re getting the very best deal on self storage anywhere online.  Storitz makes it easy to compare self storage for families, U.S.Military Servicemembers, senior citizens , small business owners and college students.  Storitz lists RV, boat and car parking, climate controlled and air conditioned storage units and wine storage lockers.  Just enter your zip code to get started.
+  </div>
 </div>
