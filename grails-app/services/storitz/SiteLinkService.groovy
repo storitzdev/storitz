@@ -1104,6 +1104,7 @@ class SiteLinkService extends BaseProviderService {
   }
 
   def getPromos(siteLink, site, writer) {
+    def updated = false
     def ret = getPromos(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1113,16 +1114,18 @@ class SiteLinkService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-    def concessionIds = []
+    Long concessionIds = []
     for (promo in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans') {
+
       def showOn = Integer.parseInt(promo.iShowOn.text())
-      def promoName = promo.sPlanName
+      def promoName = promo.sPlanName.text()
       if ((showOn == 0 || showOn == 1) && promoName != 'Manual') {
 
-        def concessionId = promo.ConcessionID.text() as Integer
+        Long concessionId = promo.ConcessionID.text() as Long
         concessionIds.add(concessionId)
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         boolean newOffer = false
+        updated = true
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
@@ -1156,7 +1159,7 @@ class SiteLinkService extends BaseProviderService {
             specialOffer.promoType = PromoType.FIXED_RATE
             specialOffer.promoQty = promo.dcChgAmt.text() as BigDecimal
         }
-        specialOffer.save()
+        specialOffer.save(flush:true)
         if (newOffer) {
           site.addToSpecialOffers(specialOffer)
         }
@@ -1187,16 +1190,19 @@ class SiteLinkService extends BaseProviderService {
         }
       }
     }
+
     def deleteList = []
     for (promo in site.specialOffers) {
       if (!concessionIds.contains(promo.concessionId)) {
         deleteList.add(promo)
       }
     }
+
     for (promo in deleteList) {
       writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
       site.removeFromSpecialOffers(promo)
     }
+
     for (unitRestriction in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionUnitTypes') {
       SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == (unitRestriction.ConcessionID.text() as Integer)}
       if (specialOffer) {
@@ -1217,6 +1223,7 @@ class SiteLinkService extends BaseProviderService {
         specialOffer.save(flush: true)
       }
     }
+
   }
 
   def getTaxes(siteLink, site) {
