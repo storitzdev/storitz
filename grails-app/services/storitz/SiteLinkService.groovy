@@ -1114,7 +1114,7 @@ class SiteLinkService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-    Long concessionIds = []
+    def concessionIds = []
     for (promo in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionPlans') {
 
       def showOn = Integer.parseInt(promo.iShowOn.text())

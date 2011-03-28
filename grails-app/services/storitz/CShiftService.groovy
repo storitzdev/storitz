@@ -949,7 +949,7 @@ class CShiftService extends BaseProviderService {
 
       if (validGov && !(description ==~ /Comp.*/)) {
 
-        def concessionId = promo.'promo-id'.text() as Integer
+        Long concessionId = promo.'promo-id'.text() as Long
         concessionIds.add(concessionId)
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         boolean newOffer = false
