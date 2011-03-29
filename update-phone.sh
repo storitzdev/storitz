@@ -1,5 +1,5 @@
 #!/bin/sh
-# Update Inventory
+# Update Phones
 
 set `date`
 DATE=$6-$2-$3
@@ -29,11 +29,8 @@ echo $$ > $PIDFILE
 
 cd /home/deploy/projects/storitz
 
-# Everyone but ExtraSpace: Manually update the inventory and the promotions (here) as separate processes.
-# Update Inventory
-$GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryScript.groovy > /home/deploy/logs/UpdateInventory.${DATE}.log 2>&1
-# Update Promotions
-$GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/RefreshPromosScript.groovy > /home/deploy/logs/RefreshPromos.${DATE}.log 2>&1
+
+$GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdatePhoneScript.groovy > /home/deploy/logs/UpdatePhone.${DATE}.log 2>&1
 
 # Clean up after ourselves
 rm $PIDFILE

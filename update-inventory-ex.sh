@@ -20,7 +20,7 @@ export GRAILS_HOME=/home/deploy/grails-1.3.6
 # grails allocates to Java is not enough to handle the Extraspace string processing requirements.
 export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit -Dcom.sun.management.jmxremote.port=9595 -Dcom.sun.management.jmxremote.password.file=/home/deploy/jmxremote.password"
 
-PIDFILE=/tmp/update-inventory.pid
+PIDFILE=/tmp/update.pid
 
 if test -f "$PIDFILE"; then
 	echo "process is already running with PID=`cat $PIDFILE`"
@@ -32,6 +32,9 @@ fi
 echo $$ > $PIDFILE
 
 cd /home/deploy/projects/storitz
+
+# Extraspace only: We already automatically update promotions along with inventory as part of the ExrsService.
+#                  There is no need to run that in a separate process here.
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryExScript.groovy > /home/deploy/logs/UpdateInventoryEx.${DATE}.log 2>&1
 
 # Clean up after ourselves

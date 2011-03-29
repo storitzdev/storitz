@@ -1,13 +1,5 @@
 package storitz
 
-class LocalContext {
-    def mergedJobDataMap
-
-    LocalContext(name, src) {
-        mergedJobDataMap = [from : name , source : src ]
-    }
-}
-
 println "Refreshing inventory"
 
 def sources = ['EX']

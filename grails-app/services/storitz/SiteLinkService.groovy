@@ -789,7 +789,7 @@ class SiteLinkService extends BaseProviderService {
   }
 
   def addPhones(siteLink, site, writer) {
-    def ret = getSiteInfo(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+    def ret = getSiteInfo(siteLink?.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
