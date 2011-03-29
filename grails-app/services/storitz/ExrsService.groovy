@@ -306,23 +306,7 @@ class ExrsService extends CShiftService {
   }
 
   def loadPromos(CenterShift feed, StorageSite site, PrintWriter writer) {
-    println "loadPromos opening page: ${baseUrl + site.url}"
-    def siteHtml = new URL(baseUrl + site.url).text
-    // build list of valid ids
-    def idList = []
-    def idMatcher = siteHtml =~ /ctl00_(m|Main)Content_UnitList_ctl(\d+)_Dimensions/
-    if (idMatcher.getCount()) {
-      idMatcher.each {
-        idList.add(it[2])
-      }
-    }
-
-    site.specialOffers.clear()
-
-    def needSave = false
-    for (unitId in idList) {
-      handlePromos(site, siteHtml, unitId, writer)
-    }
+    // This is NOOP for EXRS since the inventory does the promos
   }
 
   // check rented
