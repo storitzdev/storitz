@@ -39,6 +39,7 @@
       var srcIconElevator = ${p.imageLink(src:'icon-green-elevator20.gif')};
       var srcIconTruck = ${p.imageLink(src:'icon-rentaltruck-green-20x20.gif')};
       var srcHome = "${resource(dir:'/') != '/' ? resource(dir:'/') : ''}";
+      var displayStyle = "${session.style}";
       //]]>
     </script>
     <p:javascript src="home"/>
@@ -107,7 +108,8 @@
 
         resultTable = $('#stresults').dataTable({
           "aoColumns": [
-            { "sSortDataType": "moveincost", "sType": "numeric", "sWidth":"120px", "sClass":"curvedLeft stClickable" },
+            { "bSortable": false, "sWidth":"120px", "sClass":"curvedLeft stClickable" },
+            { "sType": "numeric", "bVisible":false },
             { "sType": "numeric", "bVisible":false },
             { "sSortDataType": "distance", "sType": "numeric", "sWidth":"55px", "sClass":"curvedCenter textCenter" },
             { "bSortable":false, "sWidth":"120px", "sType":"html", "sClass":"curvedCenter stVert stClickable" },
@@ -322,66 +324,132 @@
             <tbody>
             <g:each var="site" in="${sites}" status="c">
               <tr>
-                <td class="curvedLeft stClickable">
-                  <div style="width: 120px;">
-                    <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
-                    <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
-                    <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
-                    <div class="stRentMe">
-                      <g:if test="${params.size || params.date}">
-                        <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                          <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
-                            <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-                              <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
-                            </g:if>
-                            <g:else>
-                              <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                            </g:else>
-                          </g:link>
+                <g:if test="${session.style == 'monthly'}">
+                  <td class="curvedLeft stClickable">
+                    <div style="width: 120px;">
+                      <div class="stPrice textCenter">
+                        <g:if test="${siteMoveInPrice[site.id]?.monthly > siteMoveInPrice[site.id]?.pushRate}">
+                          <div style="text-decoration:line-through;"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/></div>
+                          <div class="red"><g:formatNumber number="${siteMoveInPrice[site.id]?.pushRate}" class="red" type="currency" currencyCode="USD"/><span class="stPricePerMonth"> / MO</span></div>
                         </g:if>
                         <g:else>
-                          <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
-                            <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-                              <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
-                            </g:if>
-                            <g:else>
-                              <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                            </g:else>
-                          </g:link>
+                          <g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/><span class="stPricePerMonth"> / MO</span>
                         </g:else>
-                      </g:if>
-                      <g:else>
-                        <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                          <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
-                            <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-                              <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
-                            </g:if>
-                            <g:else>
-                              <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                            </g:else>
-                          </g:link>
+                      </div>
+                      <div class="stRentMe">
+                        <g:if test="${params.size || params.date}">
+                          <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:if>
+                          <g:else>
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:else>
                         </g:if>
                         <g:else>
-                          <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id]">
-                            <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-                              <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
-                            </g:if>
-                            <g:else>
-                              <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
-                            </g:else>
-                          </g:link>
+                          <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:if>
+                          <g:else>
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:else>
                         </g:else>
-                      </g:else>
+                      </div>
                     </div>
-                    <div class="stPriceSub textCenter monthly">
-                      <g:if test="${siteMoveInPrice[site.id]?.monthly > siteMoveInPrice[site.id]?.pushRate}">
-                        <span style="text-decoration:line-through;"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/></span>&nbsp;<span class="red"><g:formatNumber number="${siteMoveInPrice[site.id]?.pushRate}" class="red" type="currency" currencyCode="USD"/></span> / MO
-                      </g:if>
-                      <g:else>
-                        <g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO
-                      </g:else>
+                  </td>
+                </g:if>
+                <g:else>
+                  <td class="curvedLeft stClickable">
+                    <div style="width: 120px;">
+                      <div class="stPrice textCenter"><g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" type="currency" currencyCode="USD"/></div>
+                      <div class="stPriceSub textCenter">Paid thru ${siteMoveInPrice[site.id]?.paidThruDate}</div>
+                      <div class="stPriceSub textCenter">Taxes &amp; fees included</div>
+                      <div class="stRentMe">
+                        <g:if test="${params.size || params.date}">
+                          <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date, promoId:siteMoveInPrice[site.id]?.promo]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:if>
+                          <g:else>
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, size:params.size, date:params.date]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:else>
+                        </g:if>
+                        <g:else>
+                          <g:if test="${siteMoveInPrice[site.id]?.promo}">
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:if>
+                          <g:else>
+                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id]">
+                              <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+                                <storitz:image src='reserve-button-87x31.png' width='87' height='31' border='0'/>
+                              </g:if>
+                              <g:else>
+                                <storitz:image src='rent-me-button.png' width='87' height='31' border='0'/>
+                              </g:else>
+                            </g:link>
+                          </g:else>
+                        </g:else>
+                      </div>
+                      <div class="stPriceSub textCenter monthly">
+                        <g:if test="${siteMoveInPrice[site.id]?.monthly > siteMoveInPrice[site.id]?.pushRate}">
+                          <span style="text-decoration:line-through;"><g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/></span>&nbsp;<span class="red"><g:formatNumber number="${siteMoveInPrice[site.id]?.pushRate}" class="red" type="currency" currencyCode="USD"/></span> / MO
+                        </g:if>
+                        <g:else>
+                          <g:formatNumber number="${siteMoveInPrice[site.id]?.monthly}" type="currency" currencyCode="USD"/> / MO
+                        </g:else>
+                      </div>
                     </div>
-                  </div>
+                  </td>
+                </g:else>
+                <td>
+                  <g:formatNumber number="${siteMoveInPrice[site.id]?.cost}" format="0.00"/>
                 </td>
                 <td>
                   <g:formatNumber number="${siteMoveInPrice[site.id]?.pushRate}" format="0.00"/>

@@ -55,9 +55,11 @@
   <script type="text/javascript">
 
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-16012579-1']);
-    _gaq.push(['_setDomainName', '.storitz.com']);
-    _gaq.push(['_trackPageview']);
+    _gaq.push(['_setAccount', 'UA-16012579-1'],
+              ['_setDomainName', '.storitz.com'],
+              ['_setAllowHash',false],
+              ['_setAllowLinker', true],
+              ['_trackPageview']);
 
     (function() {
       var ga = document.createElement('script');

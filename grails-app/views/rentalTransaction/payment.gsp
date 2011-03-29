@@ -32,12 +32,12 @@
   <script type="text/javascript">
     //<![CDATA[
     var _gaq = _gaq || [];
-    _gaq.push(['pageTracker._setAccount', 'UA-16012579-1'],
-            ['pageTracker._setDomain', '.storitz.com'],
-            ['pageTracker._trackPageview'],
-            ['funnelTracker._setAccount', 'UA-16012579-1'],
-            ['funnelTracker._setDomain', '.storitz.com'],
-            ['funnelTracker._trackPageview', '/payment']);
+    _gaq.push(['_setAccount', 'UA-16012579-1'],
+            ['_setDomain', '.storitz.com'],
+            ['_setAllowHash',false],
+            ['_setAllowLinker', true],
+            ['_trackPageview'],
+            ['_trackPageview', '/goal/payment']);
     // Called a few ms after the page has loaded.
     (function() {
       var ga = document.createElement('script');

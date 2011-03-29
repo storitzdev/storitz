@@ -255,6 +255,11 @@ class HomeController {
       }
     }
 
+    // Set the display style for testing here
+    if (params.s == 'monthly') {
+      session['style'] = 'monthly'
+    }
+
     [sizeList: sizeList, title: title, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch]
   }
 

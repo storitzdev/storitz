@@ -13,7 +13,7 @@ function rentmeClick() {
         var params = new Object();
         params.fs = true;
         $.bbq.pushState(params, 0);
-        _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentme']);
+        _gaq.push(['_trackEvent', 'detail', 'rentme']);
         $('#transMoveInDate').removeClass('validation-failed');
         // TODO - check if all things are cleared
         $('#sizeHelp').hide();
@@ -153,7 +153,7 @@ function setupHelp() {
         width: 440
     }).addTouch();
     $('.sizeGuide').click(function(event) {
-        _gaq.push(['funnelTracker._trackEvent', 'detail', 'size guide']);
+        _gaq.push(['_trackEvent', 'detail', 'size guide']);
         $('#sizeHelp').dialog('open');
     });
 }
@@ -180,7 +180,7 @@ function setupJQueryTabs() {
     $('#detail_tabs').tabs();
 
     $('#detail_tabs').bind('tabsshow', function(event, ui) {
-        _gaq.push(['funnelTracker._trackEvent', 'detail', 'tab', ui.panel.id]);
+        _gaq.push(['_trackEvent', 'detail', 'tab', ui.panel.id]);
         if (ui.panel.id == "tab_directions") {
             refreshMap();
         }
@@ -203,10 +203,10 @@ $(window).bind('hashchange', function(e) {
 $(window).trigger( 'hashchange' );
 
 var _gaq = _gaq || [];
-_gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
-            ['pageTracker._setDomain', '.storitz.com'],
-            ['pageTracker._trackPageview'],
-            ['funnelTracker._setAccount', 'UA-16012579-1'],
-            ['funnelTracker._setDomain', '.storitz.com'],
-            ['funnelTracker._trackPageview', '/detail']);
+_gaq.push(  ['_setAccount', 'UA-16012579-1'],
+            ['_setDomain', '.storitz.com'],
+            ['_setAllowHash',false],
+            ['_setAllowLinker', true],
+            ['_trackPageview'],
+            ['_trackPageview', '/goal/detail']);
 

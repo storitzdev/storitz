@@ -157,35 +157,35 @@ function transactionFormSetup() {
     insuranceId =  $("input[name='insuranceId']:checked").val();
     $('#insuranceId').val(insuranceId);
     showTotals('insurance');
-    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose insurance', insuranceId]);
+    _gaq.push(['_trackEvent', 'detail', 'transaction box', 'chose insurance', insuranceId]);
   });
 
   $('#moreOffers').click(function(event) {
       $('#moreOffers').toggle('fade');
       $('#nonFeaturedOffers').show("blind");
       $('#fewerOffers').toggle('fade');
-      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'show offers']);
+      _gaq.push(['_trackEvent', 'detail', 'transaction box', 'show offers']);
   });
 
   $('#fewerOffers').click(function(event) {
       $('#fewerOffers').toggle('fade');
       $('#nonFeaturedOffers').hide("blind");
       $('#moreOffers').toggle('fade');
-      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'hide offers']);
+      _gaq.push(['_trackEvent', 'detail', 'transaction box', 'hide offers']);
   });
 
   $('#moreInsurance').click(function() {
       $('#moreInsurance').toggle('fade');
       $('#fewerInsurance').toggle('fade');
       $('#insurances').show("blind");
-      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'show insurance']);
+      _gaq.push(['_trackEvent', 'detail', 'transaction box', 'show insurance']);
   });
 
   $('#fewerInsurance').click(function(event) {
       $('#insurances').hide("blind");
       $('#fewerInsurance').toggle('fade');
       $('#moreInsurance').toggle('fade');
-      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'hide insurance']);
+      _gaq.push(['_trackEvent', 'detail', 'transaction box', 'hide insurance']);
   });
 
   $('#clearOffer').click(function(event) {
@@ -195,7 +195,7 @@ function transactionFormSetup() {
     $('#selectedOffer').html('');
     $("input[name='specialOffer']:checked").attr('checked', false);
     showTotals('promo');
-    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'clear offer']);
+    _gaq.push(['_trackEvent', 'detail', 'transaction box', 'clear offer']);
   });
 
   $('#totalMoveInCost').click(function(event) {
@@ -207,14 +207,14 @@ function transactionFormSetup() {
     $('#SC_searchSize').val(searchSize);
     $('#searchSize').val(searchSize);
     showTotals('size');
-      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'unit size', searchSize]);
+      _gaq.push(['_trackEvent', 'detail', 'transaction box', 'unit size', searchSize]);
   });
 
   $('#unitType').change(function(event) {
     chosenUnitType = $('#unitType').val();
     $('#chosenType').val(chosenUnitType);
     showTotals('unitType');
-    _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'unit type ' + chosenUnitType]);
+    _gaq.push(['_trackEvent', 'detail', 'transaction box', 'unit type ' + chosenUnitType]);
   });
 }
 
@@ -224,7 +224,7 @@ function setupPromoHandler() {
       $('#promoId').val(offerId);
       chosenPromoId = offerId;
       showTotals('promo');
-      _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
+      _gaq.push(['_trackEvent', 'detail', 'transaction box', 'chose promo', chosenPromoId]);
     });
 }
 
@@ -241,7 +241,7 @@ function setupCalendar() {
                 $('#moveInDate').val(startDate);
                 $('#transMoveInDate').html(startDate);
                 showTotals('date');
-                _gaq.push(['funnelTracker._trackEvent', 'detail', 'transaction box', 'date change']);
+                _gaq.push(['_trackEvent', 'detail', 'transaction box', 'date change']);
               }
             }).addTouch();
 

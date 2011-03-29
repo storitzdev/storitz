@@ -57,7 +57,7 @@ function redrawMap() {
     }
 
     if (!inDrag) {
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'bounds change']);
+        _gaq.push(['_trackEvent', 'home', 'map', 'bounds change']);
         getMarkers();
     }
 }
@@ -68,7 +68,7 @@ function dragStart() {
 
 function dragEnd() {
     inDrag = false;
-    _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'drag']);
+    _gaq.push(['_trackEvent', 'home', 'map', 'drag']);
     getMarkers();
 }
 
@@ -252,7 +252,7 @@ function setupCalendar() {
         minDate: 0,
         maxDate: "+2M",
         onSelect: function(dateText, inst) {
-            _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 3 date']);
+            _gaq.push(['_trackEvent', 'home', 'search', 'step 3 date']);
             showAddress(getAddress(), $('#size').val(), dateText, searchType);
         }
     }).addTouch();
@@ -265,7 +265,7 @@ function setupHelp() {
         width: 440
     }).addTouch();
     $('.sizeGuide').click(function(event) {
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'size guide']);
+        _gaq.push(['_trackEvent', 'home', 'size guide']);
         $('#sizeHelp').dialog('open');
     });
 }
@@ -275,7 +275,7 @@ function setupForm() {
     $('#address').keypress(function(event) {
         if (event.keyCode == 13) {
             event.preventDefault();
-            _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 1 address']);
+            _gaq.push(['_trackEvent', 'home', 'search', 'step 1 address']);
             showAddress(getAddress(), $('#size').val(), getDate(), searchType);
             return false;
         }
@@ -286,42 +286,42 @@ function setupForm() {
         }
     });
     $('#address').focusout(function(event) {
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 1 address']);
+        _gaq.push(['_trackEvent', 'home', 'search', 'step 1 address']);
         showAddress(getAddress(), $('#size').val(), getDate(), searchType);
         return false;
     });
     $('select#size').change(function(event) {
         var searchUnitSize = $('#size').val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'step 2 unitsize ' + searchUnitSize]);
+        _gaq.push(['_trackEvent', 'home', 'search', 'step 2 unitsize ' + searchUnitSize]);
         showAddress(getAddress(), searchUnitSize, getDate(), searchType);
     });
     $('select#sbUnitsize').change(function(event) {
         var searchUnitSize = $('select#sbUnitsize').val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'results unitsize ' + searchUnitSize]);
+        _gaq.push(['_trackEvent', 'home', 'search', 'results unitsize ' + searchUnitSize]);
         showAddress(getAddress(), searchUnitSize, getDate(), searchType);
     });
     $('select#sbSortSelect').change(function(event) {
         var sortType = $(this).val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'sort', 'results table ' + sortType]);
+        _gaq.push(['_trackEvent', 'home', 'sort', 'results table ' + sortType]);
         switch (sortType) {
             case '0':
                 resultTable.fnSort([
-                    [2, 'asc']
+                    [3, 'asc']
                 ]);
                 break;
             case '1':
                 resultTable.fnSort([
-                    [2, 'desc']
+                    [3, 'desc']
                 ]);
                 break;
             case '2':
                 resultTable.fnSort([
-                    [0, 'asc']
+                    [2, 'asc']
                 ]);
                 break;
             case '3':
                 resultTable.fnSort([
-                    [0, 'desc']
+                    [2, 'desc']
                 ]);
                 break;
             case '4':
@@ -336,12 +336,12 @@ function setupForm() {
                 break;
             case '6':
                 resultTable.fnSort([
-                    [4, 'asc']
+                    [5, 'asc']
                 ]);
                 break;
             case '7':
                 resultTable.fnSort([
-                    [4, 'desc']
+                    [5, 'desc']
                 ]);
                 break;
         }
@@ -350,7 +350,7 @@ function setupForm() {
         // update the dropdown here
         $('#size').children().each(function(index) { $(this).remove(); });
         searchType = $('input[name="searchType"]:checked').val();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'search', 'searchType ' + searchType]);
+        _gaq.push(['_trackEvent', 'home', 'search', 'searchType ' + searchType]);
         $.ajax({
             url: urlChangeSearchType,
             method:'get',
@@ -489,7 +489,22 @@ function createTableRow(s) {
 
     var linkUrl = siteLink(s);
 
-  var priceCol = $('<div>').append($('<div>').css('width', '120px'))
+  var priceCol;
+  if (displayStyle === "monthly") {
+    priceCol = $('<div>').append($('<div>').css('width', '120px'));
+      if (s.monthly > s.pushRate) {
+        priceCol.append($('<div>', { 'class':'stPrice textCenter' })
+          .append($('<div>').css('text-decoration', 'line-through').html('$' + (s.monthly ? s.monthly.toFixed(2) : '')))
+          .append($('<div>', { 'class':'red' }).html('$' + (s.pushRate ? s.pushRate.toFixed(2) : '')).append($('<span>', {'class':'stPricePerMonth'}).html(' / MO'))));
+      } else {
+         priceCol.append($('<div>', { 'class':'stPrice textCenter' }).html('$' + (s.monthly ? s.monthly.toFixed(2) : '')).append($('<span>', { 'class':'stPricePerMonth' }).html(' / MO')));
+      }
+      priceCol.append($('<div>', { 'class':'stRentMe' })
+        .append($('<a>', { href: linkUrl + (s.promoId ? (linkUrl.indexOf('?') != -1 ? '&' : '?') + 'promoId=' + s.promoId : '') })
+        .append($('<img>', { src: s.transactionType == 'RESERVATION' ? srcReserveButton : srcRentMeButton, width:87, height: 31, border: 0 } ))))
+  } else {
+
+    priceCol = $('<div>').append($('<div>').css('width', '120px'))
             .append($('<div>', { 'class':'stPrice textCenter' }).text('$' + (s.moveInCost ? s.moveInCost.toFixed(2) : '')))
             .append($('<div>', { 'class':'stPriceSub textCenter'}).text('Paid thru ' + (s.paidThruDate ? s.paidThruDate : '')))
             .append($('<div>', { 'class':'stPriceSub textCenter'}).html('Taxes &amp; fees included'))
@@ -502,9 +517,11 @@ function createTableRow(s) {
             } else {
                 priceCol.append($('<div>', { 'class':'stPriceSub textCenter monthly'}).text('$' + (s.monthly ? s.monthly.toFixed(2) : '') + ' / MO'));                
             }
+  }
 
   resultTable.fnAddData([
     priceCol.html(),
+    (s.moveInCost ? s.moveInCost.toFixed(2) : 10000),
     (s.pushRate ? s.pushRate.toFixed(2) : 10000),
     distanceCol.html(),
     logoCol.html(),
@@ -571,11 +588,11 @@ function markerClick(feature) {
         savedFeature = null;
     });
     infoWindow.open(map, feature.marker);
-    _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker click']);
+    _gaq.push(['_trackEvent', 'home', 'map', 'marker click']);
     $('div#mapInfoWin').parent().css('overflow', 'hidden');
     $('a.mapIcon').click(function(event) {
         buildState();
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'map', 'marker detail']);
+        _gaq.push(['_trackEvent', 'home', 'map', 'marker detail']);
     });
 }
 
@@ -586,7 +603,7 @@ function setupMap() {
         if (savedTableId) {
             $('#map_icon' + savedTableId).html($('<img>', { src:srcMarkersGreen[features[savedTableId].index], width: 28, height: 35}));
         }
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'results', 'icon click', mapId]);
+        _gaq.push(['_trackEvent', 'home', 'results', 'icon click', mapId]);
         markerClick(features[mapId]);
         savedTableId = mapId;
     });
@@ -594,7 +611,7 @@ function setupMap() {
         var mapDiv = $(this).parent().find('.map_icon');
         var mapId = mapDiv.attr('id').substring(8);
         var linkUrl = siteLink(features[mapId]);
-        _gaq.push(['funnelTracker._trackEvent', 'home', 'results', 'table click', mapId]);
+        _gaq.push(['_trackEvent', 'home', 'results', 'table click', mapId]);
         buildState();
         window.location = linkUrl + (features[mapId].promoId ? (linkUrl.indexOf('?') != -1 ? '&' : '?') + 'promoId=' + features[mapId].promoId : '');
     });
@@ -709,10 +726,10 @@ $(window).bind('hashchange', function(e) {
 
 // setup for google analytics
 var _gaq = _gaq || [];
-_gaq.push(  ['pageTracker._setAccount', 'UA-16012579-1'],
-            ['pageTracker._setDomain', '.storitz.com'],
-            ['pageTracker._trackPageview'],
-            ['funnelTracker._setAccount', 'UA-16012579-1'],
-            ['funnelTracker._setDomain', '.storitz.com'],
-            ['funnelTracker._trackPageview', '/home']);
+_gaq.push(  ['_setAccount', 'UA-16012579-1'],
+            ['_setDomain', '.storitz.com'],
+            ['_setAllowHash',false],
+            ['_setAllowLinker', true],
+            ['_trackPageview'],
+            ['_trackPageview', '/goal/home']);
 

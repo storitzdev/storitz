@@ -43,11 +43,11 @@ function setupRentVsReserve() {
         width: 250
     }).addTouch();
     $('#rentVsReserve').click(function(event) {
-        _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentvsreserve']);
+        _gaq.push(['_trackEvent', 'detail', 'rentvsreserve']);
         $('#rentVsReserveText').dialog({position:[event.pageX-100,event.pageY]}).dialog('open');
     });
     $('#rentmeDisabled').click(function(event) {
-        _gaq.push(['funnelTracker._trackEvent', 'detail', 'rentme']);
+        _gaq.push(['_trackEvent', 'detail', 'rentme']);
         $('#rentVsReserveText').dialog({position:[event.pageX-100,event.pageY]}).dialog('open');
     });
 }
@@ -59,7 +59,7 @@ function setupTransactionBoxLink() {
         width: 250
     }).addTouch();
     $('#transactionBoxLink').click(function(event) {
-        _gaq.push(['funnelTracker._trackEvent', 'detail', 'transactionboxlink']);
+        _gaq.push(['_trackEvent', 'detail', 'transactionboxlink']);
         $('#transactionBoxLinkBody').dialog({position:[event.pageX-100,event.pageY]}).dialog('open');
     });
 }

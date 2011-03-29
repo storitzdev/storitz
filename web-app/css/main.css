@@ -636,7 +636,13 @@ table#stresults thead {
 
 .stPrice {
     font: 14px verdana, arial, helvetica, sans-serif;
-    color: #00529b;
+    color: #000;
+    font-weight: bold;
+}
+
+.stPricePerMonth {
+    font: 10px verdana, arial, helvetica, sans-serif;
+    color: #000;
     font-weight: bold;
 }
 
