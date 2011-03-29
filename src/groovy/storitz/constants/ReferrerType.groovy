@@ -8,6 +8,7 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum ReferrerType {
+  BLOG("blog.storitz.com", "blog.storitz.com"),
   RELOCATION("relocation.com", "relocation.com"),
   GOOGLE("google.com", "google.com"),
   GOOGLECN("googlecn", "Google Content Network"),
@@ -35,8 +36,8 @@ public enum ReferrerType {
   }
 
   static list() {
-    [RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP, WESTSIDE_RENTALS, HOTPADS, APARTMENTGUIDE, RENTALS,
-            RETIREMENTHOMES, FORRENT, HOMES, SENIOROUTLOOK, CORPORATE_HOUSING, RENTALHOUSES, RENT]
+    [BLOG, RELOCATION, GOOGLE, GOOGLECN, YAHOO, BING, YELP, WESTSIDE_RENTALS, HOTPADS, APARTMENTGUIDE,
+            RENTALS, RETIREMENTHOMES, FORRENT, HOMES, SENIOROUTLOOK, CORPORATE_HOUSING, RENTALHOUSES, RENT]
   }
 
   static public ReferrerType getEnumFromId(String value) {
