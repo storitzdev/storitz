@@ -98,7 +98,7 @@
       <script type="text/javascript">
         jwplayer("videoContainer").setup({
           flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-          file: "${resource(file:'/video/add-your-facility-640x360-700kbps.mov')}",
+          file: "${resource(file:'/video/add-your-facility-640x360-500kbps.mov')}",
           autostart: true,
           height: 360,
           width: 640

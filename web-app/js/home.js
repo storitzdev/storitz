@@ -732,4 +732,3 @@ _gaq.push(  ['_setAccount', 'UA-16012579-1'],
             ['_setAllowLinker', true],
             ['_trackPageview'],
             ['_trackPageview', '/goal/home']);
-
