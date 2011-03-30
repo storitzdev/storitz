@@ -959,16 +959,20 @@ class CShiftService extends BaseProviderService {
           specialOffer.active = false;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
-          specialOffer.description = promo.sDescription.text()
+          specialOffer.description = description
           specialOffer.promoName = promo.'promo-name'.text()
           newOffer = true
         } else {
+          if (!specialOffer.description && description) {
+            specialOffer.description = description
+          }
           specialOffer.restrictions.clear()
           specialOffer.save(flush: true)
         }
+        Integer discountPeriods =  promo.'discount-periods'.text() as Integer
         specialOffer.promoSize = promoSize
-        specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
-        specialOffer.expireMonth = specialOffer.prepay ? promo.'discount-periods'.text() as Integer : 0
+        specialOffer.prepay = discountPeriods > 0
+        specialOffer.expireMonth = specialOffer.prepay ? discountPeriods : 0
         specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) : 1
         specialOffer.description = description
         specialOffer.inMonth = 0
@@ -991,7 +995,7 @@ class CShiftService extends BaseProviderService {
 
           default:
             writer.println "Unknown promoType: ${ptype}"
-            return
+            continue
         }
         specialOffer.save(flush: true)
         if (newOffer) {
