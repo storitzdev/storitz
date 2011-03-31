@@ -4,6 +4,7 @@ import com.storitz.StorageSite
 import com.storitz.StorageSize
 import grails.converters.JSON
 import storitz.constants.SearchType
+import com.storitz.Insurance
 
 class STMapController {
 
@@ -144,8 +145,12 @@ class STMapController {
             bestUnit = site.units.min { it.price }
           }
         }
+        Insurance ins = null
+        if (site.noInsuranceWaiver) {
+          ins = site.insurances.findAll { it.active }.min { it.premium }
+        }
         if (bestUnit) {
-          def totals = costService.calculateTotals(site, bestUnit, null, null, moveInDate)
+          def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
           monthly = bestUnit?.price
           pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
           unitType = bestUnit?.unitType.display
@@ -160,7 +165,7 @@ class STMapController {
             moveInCost = 100000
             for (promo in featuredOffers) {
               if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
-                totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate)
+                totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
                 if (moveInCost > totals['moveInTotal']) {
                   monthly = bestUnit?.price
                   unitType = bestUnit?.unitType.display
