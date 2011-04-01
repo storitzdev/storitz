@@ -8,7 +8,7 @@ package storitz.constants
  * To change this template use File | Settings | File Templates.
  */
 public enum ReferrerType {
-  BLOG("blog.storitz.com", "blog.storitz.com"),
+  BLOG("blog", "blog.storitz.com"),
   RELOCATION("relocation.com", "relocation.com"),
   GOOGLE("google.com", "google.com"),
   GOOGLECN("googlecn", "Google Content Network"),
