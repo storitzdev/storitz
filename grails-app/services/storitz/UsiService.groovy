@@ -9,6 +9,14 @@ class UsiService extends CShiftService {
 
   def offerFilterService
 
+  OfferFilterService getOfferFilterService() {
+      if (!offerFilterService) {
+          println ("offerFilterService is null: instantiating")
+          offerFilterService = new OfferFilterService()
+      }
+      return offerFilterService
+  }
+
   def updateUnits(site, stats, writer) {
     super.updateUnits(site, stats, writer)
     CenterShift cshift = (CenterShift)site.feed
@@ -126,7 +134,7 @@ class UsiService extends CShiftService {
 
     for (unit in site.units) {
       def rList = rateOffers.clone()
-      offerFilterService.filterOffer(rList, site, unit)
+      getOfferFilterService().filterOffer(rList, site, unit)
       if (rList.size() > 0) {
         def rOffer = rList.max { it.promoQty }
         unit.pushRate = (1 - (rOffer.promoQty / 100G)) * unit.price
