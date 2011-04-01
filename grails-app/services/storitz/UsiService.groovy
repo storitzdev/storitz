@@ -52,9 +52,9 @@ class UsiService extends CShiftService {
         validPromo = false
       }
 
-      if (validPromo && !(description ==~ /Comp.*/)) {
+      if (validPromo) {
 
-        def concessionId = promo.'promo-id'.text() as Integer
+        Long concessionId = promo.'promo-id'.text() as Long
         concessionIds.add(concessionId)
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         boolean newOffer = false
@@ -96,7 +96,7 @@ class UsiService extends CShiftService {
 
           default:
             writer.println "Unknown promoType: ${ptype}"
-            return
+            continue
         }
         specialOffer.save(flush: true)
         if (newOffer) {
