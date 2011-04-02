@@ -146,16 +146,21 @@ class UsiService extends CShiftService {
 
     // remove rate promos and rename other promos
     deleteList.clear()
+    Integer order = 6
     for (promo in site.specialOffers) {
       if (promo.description.startsWith('WXR') || promo.description.startsWith('WXA')) {
         deleteList.add(promo)
       } else {
         if (promo.description.startsWith('WXD')) {
-          promo.featured = true
+          Integer promoOrder = (promo.description[4] as Integer)
+          if (promoOrder < order) {
+            order = promoOrder
+            promo.featured = true
+            promo.active = true
+            promo.description = promo.promoName = promo.description.split('-')[1]
+            promo.save(flush: true)
+          }
         }
-        promo.active = true
-        promo.description = promo.promoName = promo.description.split('-')[1]
-        promo.save(flush: true)
       }
     }
     for (promo in deleteList) {
