@@ -2,9 +2,8 @@ package storitz
 
 println "Refreshing phones"
 
- // JM: QS placed first to reduce javax/activation/DataHandler linker errors
-// def sources = ['QS','SL','CS3','USI']
-def sources = ['SL','CS3', 'EX']
+// JM: QS placed first to reduce javax/activation/DataHandler linker errors
+def sources = ['QS', 'SL','CS3', 'EX', 'USI']
 
 for (int i = 0; i < sources.size(); i++) {
     def src = sources[i]
