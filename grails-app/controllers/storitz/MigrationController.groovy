@@ -382,7 +382,8 @@ class MigrationController {
           qloc.username = loc.username
           qloc.password = loc.password
           qloc.sitename = loc.sitename
-          qloc.site = feed.sites.find {it.title = loc.site}
+          qloc.quikStor = feed
+          qloc.site = StorageSite.findByTitle(loc.site)
           qloc.save(flush: true)
           feed.addToLocations(qloc)
         }
