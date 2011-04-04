@@ -1046,8 +1046,8 @@ class CShiftService extends BaseProviderService {
           def restriction = new SpecialOfferRestriction()
           restriction.restrictive = false
           restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
-          restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
-          restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
+          restriction.maxRange = (gov.'range-hi'.text() as BigDecimal)
+          restriction.minRange = (gov.'range-low'.text() as BigDecimal)
           restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true
@@ -1056,8 +1056,8 @@ class CShiftService extends BaseProviderService {
           def restriction = new SpecialOfferRestriction()
           restriction.restrictive = true
           restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
-          restriction.minRange = 100.0G - (gov.'range-hi'.text() as BigDecimal)
-          restriction.maxRange = 100.0G - (gov.'range-low'.text() as BigDecimal)
+          restriction.maxRange = (gov.'range-hi'.text() as BigDecimal)
+          restriction.minRange = (gov.'range-low'.text() as BigDecimal)
           restriction.save(flush: true)
           specialOffer.addToRestrictions(restriction)
           saveFlag = true

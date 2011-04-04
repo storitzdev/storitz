@@ -132,6 +132,18 @@ class UsiService extends CShiftService {
       }
     }
 
+    List addedOffers = []
+    for (promo in site.specialOffers) {
+      if (promo.description.startsWith('WXA')) {
+        def pm = promo.description =~ /WXAX\dX-(\d+)\%/
+        if (pm.getCount()) {
+          promo.promoQty = pm[0][1] as BigDecimal
+        }
+        addedOffers.add(promo)
+      }
+    }
+
+
     for (unit in site.units) {
       def rList = rateOffers.clone()
       getOfferFilterService().filterOffer(rList, site, unit)
@@ -146,23 +158,17 @@ class UsiService extends CShiftService {
 
     // remove rate promos and rename other promos
     deleteList.clear()
-    Integer order = 6
     for (promo in site.specialOffers.sort{ it.description }) {
       if (promo.description.startsWith('WXR') || promo.description.startsWith('WXA')) {
         deleteList.add(promo)
       } else {
         if (promo.description.startsWith('WXD')) {
-          Integer promoOrder = (promo.description[4] as Integer)
-          if (promoOrder < order) {
-            order = promoOrder
-            promo.featured = true
-            promo.active = true
-            promo.description = promo.promoName = promo.description.split('-')[1]
-            promo.save(flush: true)
-          } else {
-            deleteList.add(promo)
-          }
+          promo.featured = true
         }
+        Integer promoOrder = (promo.description[4] as Integer)
+        promo.active = true
+        promo.description = promo.promoName = promo.description.split('-')[1]
+        promo.save(flush: true)
       }
     }
     for (promo in deleteList) {
