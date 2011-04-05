@@ -4,7 +4,10 @@ import storitz.constants.PromoType
 import storitz.constants.SearchType
 import storitz.constants.SpecialOfferRestrictionType
 import storitz.constants.UnitType
+
 import com.storitz.*
+
+import com.storitz.exrsclient.ExrsWebFormProcessor
 
 class ExrsService extends CShiftService {
 
@@ -348,6 +351,10 @@ class ExrsService extends CShiftService {
 
     StorageUnit unit = StorageUnit.get(trans.unitId as Long)
 
+    ////////////////////////////////
+    // FIRST EMAIL /////////////////
+    ////////////////////////////////
+
     def buf = new ByteArrayOutputStream()
     PrintWriter bodyWriter = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
 
@@ -376,7 +383,7 @@ class ExrsService extends CShiftService {
     bodyWriter.println "Unit Size: ${unit.displaySize}"
     bodyWriter.println "Unit Promotion: ${trans.promoName}"
     bodyWriter.println "Unit Monthly Rate: ${trans.monthlyRate}"
-
+    bodyWriter.println "\n"
     def body = buf.toString()
     String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"
 
@@ -387,8 +394,60 @@ class ExrsService extends CShiftService {
             body: body
     )
 
+    ////////////////////////////////
+    // SECOND EMAIL ////////////////
+    ////////////////////////////////
+
+    def buf2 = new ByteArrayOutputStream()
+    PrintWriter bodyWriter2 = new PrintWriter(new OutputStreamWriter(buf2, "utf8"), true);
+
+    bodyWriter2.println "EXRS Follow Up Email\n"
+    bodyWriter2.println "First Name: ${trans.contactPrimary.firstName}"
+    bodyWriter2.println "Last Name: ${trans.contactPrimary.lastName}"
+    bodyWriter2.println "\n"
+
+    def success = processMoveIn(trans)
+    if (success) {
+        bodyWriter2.println "Huzzah!"
+        bodyWriter2.println "Automated Move-In was successful."
+        bodyWriter2.println "There is nothing left to do."
+    } else {
+        bodyWriter2.println "Bummer."
+        bodyWriter2.println "Automated Move-In was not successful."
+        bodyWriter2.println "Please navigate to http://selfstorage.extraspace.com/?cid=lg_storitz"
+        bodyWriter2.println "to manually complete the prior transaction."
+    }
+
+    def body2 = buf2.toString()
+    String title2 = "Storitz - New EXRS reservation - id (${trans.idNumber})"
+
+    emailService.sendTextEmail(
+            to: 'exrs@storitz.com',
+            from: 'no-reply@storitz.com',
+            subject: title2,
+            body: body2
+    )
+
     trans.save(flush: true)
 
     return true
   }
+
+    // Post the move in details to the Extraspace web site
+    def processMoveIn(RentalTransaction trans) {
+        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor();
+        def success = exrsWebFormProcessor.processMoveIn(trans);
+
+        // real-time debugging. so fun...
+        if (!success) {
+            emailService.sendTextEmail (
+                to:"tech@storitz.com",
+                from:"no-reply@storitz.com",
+                subject:"EXRS Automatic Move-In Error Log",
+                body:exrsWebFormProcessor.logBuf
+            )
+        }
+
+        return success;
+    }
 }
