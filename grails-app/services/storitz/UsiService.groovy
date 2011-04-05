@@ -4,6 +4,7 @@ import com.storitz.CenterShift
 import com.storitz.SpecialOffer
 import com.storitz.StorageSite
 import storitz.constants.PromoType
+import com.storitz.StoritzUtil
 
 class UsiService extends CShiftService {
 
@@ -24,7 +25,17 @@ class UsiService extends CShiftService {
   }
 
   def loadPromos(cshift, site, writer) {
-    def ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
+    def ret;
+
+    try {
+      ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
+    }
+    catch (org.xml.sax.SAXParseException saxParseException) {
+        def stacktrace = StoritzUtil.stackTraceToString(saxParseException)
+        writer.println "Error getting promotions: ${stacktrace}"
+        return;
+    }
+
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',

@@ -1,5 +1,6 @@
 package com.storitz.exrsclient;
 
+import com.storitz.StoritzUtil;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
 import storitz.ExrsService;
@@ -343,10 +344,7 @@ public class ExrsWebFormProcessor {
     }
 
     private void logStackTrace(Throwable t) {
-        final Writer result = new StringWriter();
-        final PrintWriter printWriter = new PrintWriter(result);
-        t.printStackTrace(printWriter);
-        logMessage(0,result.toString());
+        logMessage(0,StoritzUtil.stackTraceToString(t));
     }
 
     private HtmlForm getHtmlForm (HtmlPage htmlPage, String actionUrl) {
