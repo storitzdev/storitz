@@ -21,10 +21,14 @@ export GRAILS_HOME=/home/deploy/grails-1.3.6
 export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit -Dcom.sun.management.jmxremote.port=9595 -Dcom.sun.management.jmxremote.password.file=/home/deploy/jmxremote.password"
 
 PIDFILE=/tmp/update.pid
+EMAILFILE=/tmp/update.email
 
 if test -f "$PIDFILE"; then
-	echo "process is already running with PID=`cat $PIDFILE`"
-	echo "If you are sure there is no running process then delete $PIDFILE and retry"
+    echo "ENVNAME=$ENVNAME" > $EMAILFILE
+	echo "process is already running with PID=`cat $PIDFILE`" >> $EMAILFILE
+	echo "If you are sure there is no running process then delete $PIDFILE and retry" >> $EMAILFILE
+    /bin/mail -s "Unable to begin inventory update" tech@storitz.com < $EMAILFILE
+    rm $EMAILFILE
 	exit 1
 fi
 

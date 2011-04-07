@@ -44,6 +44,7 @@ grails.enable.native2ascii = true
 environments {
   production {
     grails.serverURL = "http://www.storitz.com"
+    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT"
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/weblog/**': ['ROLE_USER'],
@@ -68,6 +69,7 @@ environments {
   }
   preview {
     grails.serverURL = "http://preview.storitz.com"
+    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT"
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],
@@ -90,6 +92,7 @@ environments {
   }
   development {
     grails.serverURL = "http://localhost:8080/${appName}"
+    grails.serverRoot = "/home/jason/Projects/storitz/web-app"
     security.httpsPort = 8443
     storitz.nacha.dir = 'c:/temp/nacha'
     storitz.nacha.fileId = '1234567890'
@@ -109,6 +112,7 @@ environments {
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"
+    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT"
     security.httpsPort = 8443
     storitz.nacha.dir = 'c:/temp/nacha'
     storitz.nacha.fileId = '1234567890'

@@ -191,7 +191,10 @@ class ExrsService extends CShiftService {
           writer.println "Skipping due to size: length = ${length}, width = ${width}"
         }
       }
-      needSave |= handlePromos(site, siteHtml, unitId, writer)
+      def hp = handlePromos(site, siteHtml, unitId, writer)
+      if (needSave || hp) {
+        needSave = true
+      }
     }
 
     if (needSave) {

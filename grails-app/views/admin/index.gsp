@@ -49,6 +49,7 @@
         <ul>
           <li><g:link controller="pressRelease" action="list">Manage Press Releases</g:link></li>
           <li><g:link controller="video" action="list">Manage Videos</g:link></li>
+          <li><g:link controller="image" action="export">Manage Images</g:link></li>
         </ul>
       </sec:ifAnyGranted>
       <sec:ifAnyGranted roles="ROLE_CALLCENTER">

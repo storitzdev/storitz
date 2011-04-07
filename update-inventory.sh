@@ -17,10 +17,14 @@ export JAVA_HOME=/usr/java/latest
 export GRAILS_HOME=/home/deploy/grails-1.3.6
 
 PIDFILE=/tmp/update.pid
+EMAILFILE=/tmp/update.email
 
 if test -f "$PIDFILE"; then
-	echo "process is already running with PID=`cat $PIDFILE`"
-	echo "If you are sure there is no running process then delete $PIDFILE and retry"
+    echo "ENVNAME=$ENVNAME" > $EMAILFILE
+	echo "process is already running with PID=`cat $PIDFILE`" >> $EMAILFILE
+	echo "If you are sure there is no running process then delete $PIDFILE and retry" >> $EMAILFILE
+    /bin/mail -s "Unable to begin inventory update" tech@storitz.com < $EMAILFILE
+    rm $EMAILFILE
 	exit 1
 fi
 
