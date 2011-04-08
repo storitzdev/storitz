@@ -13,6 +13,8 @@ import com.google.gdata.data.photos.*
 import com.google.gdata.util.ServiceException
 import com.google.gdata.data.media.mediarss.MediaKeywords
 
+import java.io.FileNotFoundException
+
 
 class ImageController {
     def message
@@ -83,6 +85,10 @@ class ImageController {
     def addPicasaAlbum(myService,albumName,albumDescription) {
         AlbumEntry myAlbum = new AlbumEntry()
         myAlbum.setTitle(new PlainTextConstruct(albumName))
+        // Picasa maxes out at 1000 chars for description
+        if (albumDescription.size() > 1000) {
+            albumDescription = albumDescription.substring(0,999)
+        }
         myAlbum.setDescription(new PlainTextConstruct(albumDescription))
         myAlbum.setAccess("public")
         URL url = new URL(picasaFeedURL)
@@ -104,16 +110,6 @@ class ImageController {
 
         return null
     }
-
-    def getPicasaPhotoId (myPhoto) {
-        def photoURL = myPhoto.htmlLink.href.toString()
-        def photoIdmatch = photoURL =~ /https:\/\/picasaweb.google.com\/[0-9]+\/(.*)\?authkey=.*/
-        if (photoIdmatch.getCount()) {
-            return photoIdmatch[0][1]
-        }
-        return null
-    }
-
 
     boolean uploadImagesToPicasa() {
         def myService =  getPicasaWebService()
@@ -216,7 +212,11 @@ class ImageController {
                  return addPicasaPhoto (albumId, bigOlBuf, imageMap, myService, count+1)
             }
             throw e
+        } catch (FileNotFoundException) {
+            def fileName = imageMap.get('image')
+            bigOlBuf.append("   !!! ERROR: File Not Found! ${fileName} !!!\n")
         }
+
         return null
     }
 
@@ -329,7 +329,7 @@ class ImageController {
                 }
 
                 String caption = image.getCaption()
-                String description = image.site.description?.replaceAll("<[^>]*>","")?.replaceAll("&nbsp;","")
+                String description = image.site.description?.replaceAll("<[^>]*>","")?.replaceAll("&nbsp;"," ")?.replaceAll("&quot;","\"")?.replaceAll("&rsquo;","'")
                 String tags = image.getTags()
                 Map imageMap = new HashMap<String,String>()
                 imageMap.put("site", "${siteName}")                              // albumName

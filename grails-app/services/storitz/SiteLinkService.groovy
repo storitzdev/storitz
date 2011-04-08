@@ -5,6 +5,7 @@ import groovyx.net.http.Method
 import com.storitz.*
 import static groovyx.net.http.ContentType.XML
 import storitz.constants.*
+import org.apache.http.conn.HttpHostConnectException
 
 class SiteLinkService extends BaseProviderService {
 
@@ -174,7 +175,22 @@ class SiteLinkService extends BaseProviderService {
        </soapenv:Body>
     </soapenv:Envelope>"""
 
-    postAction(payload, 'MoveInCostRetrieve')
+    // JM: I've noticed occasional http errors here
+    // Assuming these are simply intermittent network hiccups, try again until we succeed or until
+    // we reach our maximum number of allowed attempts
+    def attempts    = 0
+    def maxAttempts = 5
+    def success     = false
+
+      while ((!success) && (attempts < maxAttempts)) {
+          try {
+              postAction(payload, 'MoveInCostRetrieve')
+              success = true
+          } catch (HttpHostConnectException e) {
+              println "Caught HttpHostConnectException exception! [Attempt ${attempts} of ${maxAttempts}]"
+              attempts++
+          }
+      }
   }
 
   def getPromos(corpCode, locationCode, userName, password) {
