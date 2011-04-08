@@ -39,11 +39,11 @@ class ImageController {
     // PICASA ///////////////////////////////
     /////////////////////////////////////////
 
-    def picasaUserName = "jmeade@storitz.com"
-    def picasaPassWord = "clickstoredone99"
+    def picasaUserName = "socialmedia@storitz.com"
+    def picasaPassWord = "clickstoredone"
     def picasaFeedURL  = "https://picasaweb.google.com/data/feed/api/user/${picasaUserName}"
     def picasaRetryCount = 20 // number of times to retry inserting an image before giving up
-    def maxAlbums = 10        // max number of albums to upload. Set to 0 for all albums
+    def maxAlbums = 0         // max number of albums to upload. Set to 0 for all albums
 
     def getPicasaWebService() {
         PicasawebService myService = new PicasawebService("Storitz")
@@ -57,7 +57,6 @@ class ImageController {
         UserFeed myUserFeed = myService.getFeed(feedUrl, UserFeed.class)
         def albums = [:]
         for (AlbumEntry myAlbum : myUserFeed.getAlbumEntries()) {
-            //myAlbum.delete()  //testing only
             albums[myAlbum.getTitle().getPlainText()] = myAlbum
         }
         return albums
