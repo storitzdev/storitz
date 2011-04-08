@@ -4,11 +4,11 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <!-- Google Website Optimizer Control Script -->
-<script>
 <g:if test="${session.style == 'monthly'}">
-  function utmx_section(){}
-  function utmx(){}
+  <!-- Google Website Optimizer Control Script -->
+  <script>
+    function utmx_section(){}
+    function utmx(){}
     (function(){
       var k='2394730963',d=document,l=d.location,c=d.cookie;
       function f(n){

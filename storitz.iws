@@ -17,13 +17,9 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="Added SEO text to footer">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" afterPath="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" />
+    <list default="true" readonly="true" id="08c5015e-9398-4f83-879e-65cd3abf894f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storitz.iws" afterPath="$PROJECT_DIR$/storitz.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/rentalTransaction/completeReservation.gsp" afterPath="$PROJECT_DIR$/grails-app/views/rentalTransaction/completeReservation.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/js/home.js" afterPath="$PROJECT_DIR$/web-app/js/home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/home/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/storitz/MigrationController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/storitz/MigrationController.groovy" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="storagetech.iws" />
@@ -110,10 +106,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="completeReservation.gsp" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="completeReservation.gsp" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/completeReservation.gsp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="38" column="0" selection-start="1302" selection-end="1302" vertical-scroll-proportion="0.9301848">
+                <state line="38" column="0" selection-start="1302" selection-end="1302" vertical-scroll-proportion="-8.882353">
                   <folding />
                 </state>
               </provider>
@@ -139,10 +135,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="29" column="0" selection-start="1283" selection-end="1283" vertical-scroll-proportion="-5.631579">
+                <state line="8" column="0" selection-start="443" selection-end="443" vertical-scroll-proportion="-0.14718615">
                   <folding />
                 </state>
               </provider>
@@ -310,9 +306,9 @@
         <option value="$PROJECT_DIR$/grails-app/services/storitz/OfferFilterService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/storitz/MigrationController.groovy" />
         <option value="$PROJECT_DIR$/web-app/js/home.js" />
-        <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/rentalTransaction/completeReservation.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/home/index.gsp" />
       </list>
     </option>
   </component>
@@ -1415,7 +1411,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes for USI - fixes pricing and specials" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add A/B test code to site - fix typo" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1428,8 +1424,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Regex change for EXRS pages" />
-    <MESSAGE value="Changed wording for site messaging" />
     <MESSAGE value="EXRS pricing updates fixed for regex" />
     <MESSAGE value="More EXRS fixes" />
     <MESSAGE value="Changed regex for checkRented" />
@@ -1453,6 +1447,8 @@
     <MESSAGE value="Tested code for QuikStor migration" />
     <MESSAGE value="Updated Kontera conversion script" />
     <MESSAGE value="Fixes for USI - fixes pricing and specials" />
+    <MESSAGE value="Fix migration feed issue&#10;Add A/B test code to site" />
+    <MESSAGE value="Add A/B test code to site - fix typo" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1592,13 +1588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1283" selection-end="1283" vertical-scroll-proportion="-5.631579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/complete.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="0" selection-start="772" selection-end="1003" vertical-scroll-proportion="-5.45098">
@@ -1608,7 +1597,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/rentalTransaction/completeReservation.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1302" selection-end="1302" vertical-scroll-proportion="0.9301848">
+        <state line="38" column="0" selection-start="1302" selection-end="1302" vertical-scroll-proportion="-8.882353">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/home/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="443" selection-end="443" vertical-scroll-proportion="-0.14718615">
           <folding />
         </state>
       </provider>
