@@ -86,7 +86,7 @@ class MigrationController {
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = State.getEnumFromId(resp.feed.state)
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state) : null
         feed.zipcode = resp.feed.zipcode
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
@@ -102,17 +102,18 @@ class MigrationController {
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = State.getEnumFromId(resp.feed.state)
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state) : null
         feed.zipcode = resp.feed.zipcode
+
       } else if (resp.feed.feedType == 'QUIKSTOR') {
         feed = new QuikStor()
         feed.feedType = FeedType.QUIKSTOR
         feed.operatorName = resp.feed.operatorName
-        feed.url = url
+        feed.url = resp.feed.url
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = State.getEnumFromId(resp.feed.state)
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state) : null
         feed.zipcode = resp.feed.zipcode
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
