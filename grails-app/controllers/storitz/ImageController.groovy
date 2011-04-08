@@ -129,6 +129,7 @@ class ImageController {
         def siteCount = 0
         def updatedSiteCount = 0
         def updatedImageCount = 0
+        def errmsg = ""
         while (i.hasNext()) {
             Map<String,String> imageMap = i.next()
 
@@ -141,19 +142,23 @@ class ImageController {
 
                 // Create the site album if it does not already exist
                 if (!currentAlbum) {
-                    bigOlBuf.append("*** Album does not exist for site. Creating... ***\n")
-                    currentAlbum = addPicasaAlbum(myService,newSiteName,newSiteDescription)
-                    myAlbums[newSiteName] = currentAlbum
-                    updatedSiteCount++
+                    try {
+                        bigOlBuf.append("*** Album does not exist for site. Creating... ***\n")
+                        currentAlbum = addPicasaAlbum(myService,newSiteName,newSiteDescription)
+                        myAlbums[newSiteName] = currentAlbum
+                        updatedSiteCount++
+                    } catch (ServiceException e) {
+                        errmsg = e.toString().replaceAll("\n"," ")
+                        bigOlBuf.append("   !!! ERROR: ${errmsg} !!!\n")
+                        continue
+                    }
                 }
-
                 siteCount++
             }
             oldSiteName = newSiteName
 
             def myPhotos = getPicasaPhotosForAlbum (currentAlbum) ?: [:]
             PhotoEntry currentPhoto = myPhotos[imageMap.get('file')]
-
             // image is new. Add it.
             if (!currentPhoto) {
               try {
@@ -163,15 +168,14 @@ class ImageController {
                         bigOlBuf.append("   !!! Could not determine album id from album ${albumLink}")
                         continue
                     }
-
                     PhotoEntry returnedPhoto = addPicasaPhoto (albumId, bigOlBuf, imageMap, myService, 0)
                     updatedImageCount++
                 } catch (ServiceException e) {
-                    def errmsg = e.toString().replaceAll("\n"," ")
+                    errmsg = e.toString().replaceAll("\n"," ")
                     bigOlBuf.append("   !!! ERROR: ${errmsg} !!!\n")
+                    continue
                 }
-           }
-
+            }
         }
         message = "Sites (processed/created): (${siteCount}/${updatedSiteCount})\nImages (processed/created): (${imageCount}/${updatedImageCount})\n" + bigOlBuf.toString()
         return true
