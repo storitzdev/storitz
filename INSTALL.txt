@@ -17,6 +17,7 @@ grails install-plugin authorize-net
 grails install plugin jms
 grails install-plugin http://mamster.wnx.com/grails-dynamic-jasper-0.7.zip
 grails install-plugin sanitizer
+grails install ui-performance
 # Choose sanitation level?  I used 3 (loose - MySpace). 
 grails install-plugin csv
 
