@@ -409,7 +409,10 @@ class ExrsService extends CShiftService {
     bodyWriter2.println "Last Name: ${trans.contactPrimary.lastName}"
     bodyWriter2.println "\n"
 
-    def success = processMoveIn(trans)
+    //def success = processMoveIn(trans)
+    //JM: Turn off attempts to automatically process extraspace move in
+    //    until we get the A/B testing hashed out.
+    def success = false
     if (success) {
         bodyWriter2.println "Huzzah!"
         bodyWriter2.println "Automated Move-In was successful."
