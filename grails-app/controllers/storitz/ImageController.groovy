@@ -112,12 +112,11 @@ class ImageController {
     }
 
     boolean uploadImagesToPicasa() {
-        def myService =  getPicasaWebService()
-        // testing only
-        //deletePicasaAlbums(myService)
-        def myAlbums = getPicasaAlbums (myService)
-        def myImages = collectAllImages()
-        return uploadImagesToPicasaActual(myService, myAlbums, myImages)
+        // JM: removing guava jars in support of A/B testing
+        //def myService =  getPicasaWebService()
+        //def myAlbums = getPicasaAlbums (myService)
+        //def myImages = collectAllImages()
+        //return uploadImagesToPicasaActual(myService, myAlbums, myImages)
     }
 
     boolean uploadImagesToPicasaActual(myService, myAlbums, myImages) {
