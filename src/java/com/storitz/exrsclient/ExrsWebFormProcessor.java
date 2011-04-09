@@ -1,5 +1,8 @@
 package com.storitz.exrsclient;
 
+/*
+ * JM Disable the ExrsWebFormProcessor until we get the A/B testing hashed out.
+ *
 import com.storitz.StoritzUtil;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
@@ -20,10 +23,13 @@ import com.storitz.Contact;
 import java.io.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
-
+*/
 
 public class ExrsWebFormProcessor {
 
+   /*
+    * JM Disable the ExrsWebFormProcessor until we get the A/B testing hashed out.
+    *
     final WebClient webClient;
     private static final String baseUrl = ExrsService.getBaseUrl();
     private static final String reserveOrHoldAction = "/Storage/ReserveOrHold.aspx";
@@ -447,4 +453,5 @@ public class ExrsWebFormProcessor {
         logMessage(0,"*** Can not find page 1 select button. Returning null. ***");
         return null;
     }
+    */
 }
