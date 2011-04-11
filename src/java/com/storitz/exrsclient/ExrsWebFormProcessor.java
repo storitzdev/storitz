@@ -14,6 +14,8 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.storitz.RentalTransaction;
 import com.storitz.Contact;
 
@@ -161,21 +163,21 @@ public class ExrsWebFormProcessor {
         //Phone:                            ctl00_MainContent_Telephone    [15 digit max]
         //Email:                            ctl00_MainContent_Email
         //Email (Confirm):                  ctl00_MainContent_ConfirmEmail
-        HtmlElement ctl00_MainContent_FirstName          = page2.getElementById("ctl00_MainContent_FirstName");
-        HtmlElement ctl00_MainContent_LastName           = page2.getElementById("ctl00_MainContent_LastName");
-        HtmlElement ctl00_MainContent_Address            = page2.getElementById("ctl00_MainContent_Address");
-        HtmlElement ctl00_MainContent_City               = page2.getElementById("ctl00_MainContent_City");
+        HtmlTextInput ctl00_MainContent_FirstName          = (HtmlTextInput) page2.getElementById("ctl00_MainContent_FirstName");
+        HtmlTextInput ctl00_MainContent_LastName           = (HtmlTextInput) page2.getElementById("ctl00_MainContent_LastName");
+        HtmlTextInput ctl00_MainContent_Address            = (HtmlTextInput) page2.getElementById("ctl00_MainContent_Address");
+        HtmlTextInput ctl00_MainContent_City               = (HtmlTextInput) page2.getElementById("ctl00_MainContent_City");
         HtmlRadioButtonInput ctl00_MainContent_UsingStorageFor_0  = (HtmlRadioButtonInput) page2.getElementById("ctl00_MainContent_UsingStorageFor_0");
         HtmlRadioButtonInput ctl00_MainContent_UsingStorageFor_1  = (HtmlRadioButtonInput) page2.getElementById("ctl00_MainContent_UsingStorageFor_1");
-        HtmlElement ctl00_MainContent_PostalCode         = page2.getElementById("ctl00_MainContent_PostalCode");
-        HtmlElement ctl00_MainContent_Telephone          = page2.getElementById("ctl00_MainContent_Telephone");
-        HtmlElement ctl00_MainContent_Email              = page2.getElementById("ctl00_MainContent_Email");
-        HtmlElement ctl00_MainContent_ConfirmEmail       = page2.getElementById("ctl00_MainContent_ConfirmEmail");
+        HtmlTextInput ctl00_MainContent_PostalCode         = (HtmlTextInput) page2.getElementById("ctl00_MainContent_PostalCode");
+        HtmlTextInput ctl00_MainContent_Telephone          = (HtmlTextInput) page2.getElementById("ctl00_MainContent_Telephone");
+        HtmlTextInput ctl00_MainContent_Email              = (HtmlTextInput) page2.getElementById("ctl00_MainContent_Email");
+        HtmlTextInput ctl00_MainContent_ConfirmEmail       = (HtmlTextInput) page2.getElementById("ctl00_MainContent_ConfirmEmail");
 
-        ctl00_MainContent_FirstName.setTextContent(primaryContact.getFirstName()) ;
-        ctl00_MainContent_LastName.setTextContent(primaryContact.getLastName());
-        ctl00_MainContent_Address.setTextContent(primaryContact.getAddress1()) ;
-        ctl00_MainContent_City.setTextContent(primaryContact.getCity());
+        ctl00_MainContent_FirstName.setText(primaryContact.getFirstName()) ;
+        ctl00_MainContent_LastName.setText(primaryContact.getLastName());
+        ctl00_MainContent_Address.setText(primaryContact.getAddress1()) ;
+        ctl00_MainContent_City.setText(primaryContact.getCity());
 
         // these two are mutually exclusive
         if (trans.getRentalUse().getValue().equalsIgnoreCase("personal")) {
@@ -186,10 +188,10 @@ public class ExrsWebFormProcessor {
             ctl00_MainContent_UsingStorageFor_1.setChecked(true);
         }
 
-        ctl00_MainContent_PostalCode.setTextContent(primaryContact.getZipcode());
-        ctl00_MainContent_Telephone.setTextContent(primaryContact.getPhone());
-        ctl00_MainContent_Email.setTextContent(primaryContact.getEmail());
-        ctl00_MainContent_ConfirmEmail.setTextContent(primaryContact.getEmail());
+        ctl00_MainContent_PostalCode.setText(primaryContact.getZipcode());
+        ctl00_MainContent_Telephone.setText(primaryContact.getPhone());
+        ctl00_MainContent_Email.setText(primaryContact.getEmail());
+        ctl00_MainContent_ConfirmEmail.setText(primaryContact.getEmail());
 
 
 
@@ -203,25 +205,25 @@ public class ExrsWebFormProcessor {
         //Credit Card Expiration (Month):   ctl00_MainContent_ExpiresMonth [01-12]
         //Credit Card Expiration (Year):    ctl00_MainContent_ExpiresYear [11-21]
         //Credit Card Verification Code:    none listed!
-        HtmlElement ctl00_MainContent_CardNumber         = page2.getElementById("ctl00_MainContent_CardNumber");
-        HtmlElement ctl00_MainContent_CouponCode         = page2.getElementById("ctl00_MainContent_CouponCode");
-        //HtmlElement ctl00_MainContent_UpdatePrice        = page2.getElementById("ctl00_MainContent_UpdatePrice");
+        HtmlTextInput ctl00_MainContent_CardNumber         = (HtmlTextInput) page2.getElementById("ctl00_MainContent_CardNumber");
+        HtmlTextInput ctl00_MainContent_CouponCode         = (HtmlTextInput) page2.getElementById("ctl00_MainContent_CouponCode");
+        //HtmlTextInput ctl00_MainContent_UpdatePrice        = (HtmlTextInput) page2.getElementById("ctl00_MainContent_UpdatePrice");
         HtmlCheckBoxInput ctl00_MainContent_ProtectionCheckBox = (HtmlCheckBoxInput) page2.getElementById("ctl00_MainContent_ProtectionCheckBox");
-        HtmlElement ctl00_MainContent_State              = page2.getElementById("ctl00_MainContent_State");
-        HtmlElement ctl00_MainContent_StartDate          = page2.getElementById("ctl00_MainContent_StartDate");
-        HtmlElement ctl00_MainContent_CardType           = page2.getElementById("ctl00_MainContent_CardType");
-        HtmlElement ctl00_MainContent_ExpiresMonth       = page2.getElementById("ctl00_MainContent_ExpiresMonth");
-        HtmlElement ctl00_MainContent_ExpiresYear        = page2.getElementById("ctl00_MainContent_ExpiresYear");
+        HtmlSelect ctl00_MainContent_State              = (HtmlSelect) page2.getElementById("ctl00_MainContent_State");
+        HtmlSelect ctl00_MainContent_StartDate          = (HtmlSelect) page2.getElementById("ctl00_MainContent_StartDate");
+        HtmlSelect ctl00_MainContent_CardType           = (HtmlSelect) page2.getElementById("ctl00_MainContent_CardType");
+        HtmlSelect ctl00_MainContent_ExpiresMonth       = (HtmlSelect) page2.getElementById("ctl00_MainContent_ExpiresMonth");
+        HtmlSelect ctl00_MainContent_ExpiresYear        = (HtmlSelect) page2.getElementById("ctl00_MainContent_ExpiresYear");
 
-        ctl00_MainContent_CardNumber.setTextContent(trans.getCcNum());
-        ctl00_MainContent_CouponCode.setTextContent("");  // no coupon code
-        //ctl00_MainContent_UpdatePrice.setTextContent(""); // no update price
+        ctl00_MainContent_CardNumber.setText(trans.getCcNum());
+        ctl00_MainContent_CouponCode.setText("");  // no coupon code
+        //ctl00_MainContent_UpdatePrice.setText(""); // no update price
         ctl00_MainContent_ProtectionCheckBox.setChecked(true);
-        ctl00_MainContent_State.setTextContent(primaryContact.getState().getValue());
-        ctl00_MainContent_StartDate.setTextContent(formatMoveInDate(trans.getMoveInDate()));
-        ctl00_MainContent_CardType.setTextContent(resolveCCTyp(trans.getCardType().toString()));
-        ctl00_MainContent_ExpiresMonth.setTextContent(resolveExpMonth(trans.getCcExpDate()));
-        ctl00_MainContent_ExpiresYear.setTextContent(resolveExpYear(trans.getCcExpDate()));
+        ctl00_MainContent_State.setSelectedAttribute(primaryContact.getState().getValue(), true);
+        ctl00_MainContent_StartDate.setSelectedAttribute(formatMoveInDate(trans.getMoveInDate()), true);
+        ctl00_MainContent_CardType.setSelectedAttribute(resolveCCTyp(trans.getCardType().toString()), true);
+        ctl00_MainContent_ExpiresMonth.setSelectedAttribute(resolveExpMonth(trans.getCcExpDate()), true);
+        ctl00_MainContent_ExpiresYear.setSelectedAttribute(resolveExpYear(trans.getCcExpDate()), true);
 
 
         logMessage(3, "ctl00_MainContent_setupReservation: " + ctl00_MainContent_setupReservation.getTextContent());
@@ -383,6 +385,17 @@ public class ExrsWebFormProcessor {
         return null;
     }
 
+    // testing only
+    private HtmlPage getHtmlPageNoBase(String url) {
+        try {
+            return webClient.getPage(url);
+        } catch (IOException e) {
+            logStackTrace(e);
+        }
+        return null;
+    }
+
+
     private HtmlElement getPageOneSelectButton (HtmlForm htmlForm, String size, String cost, String offer) {
         DomNodeList<HtmlElement> domNodeList = htmlForm.getElementsByTagName("div");
         for (HtmlElement element : domNodeList) {
@@ -447,4 +460,69 @@ public class ExrsWebFormProcessor {
         logMessage(0,"*** Can not find page 1 select button. Returning null. ***");
         return null;
     }
+
+    /// TESTS ///
+    public boolean testLogin1() {
+        HtmlPage page1 = getHtmlPageNoBase("http://localhost/form.html");
+        System.out.println("*** PAGE1 ***");
+        if (page1 != null) {
+            System.out.println(page1.asXml().toString());
+        }
+        else {
+            System.out.println("PAGE1 is NULL!");
+            return false;
+        }
+
+        HtmlForm htmlForm1 = getHtmlForm(page1,"/action.php");
+        HtmlTextInput username = (HtmlTextInput)page1.getElementById("username");
+        HtmlTextInput password = (HtmlTextInput)page1.getElementById("password");
+        HtmlSelect state = (HtmlSelect)page1.getElementById("state");
+
+        username.setText("testuname");
+        password.setText("testpass");
+        state.setSelectedAttribute("AR",true);
+
+        HtmlElement button = htmlForm1.getInputByValue("Click me");
+        try {
+            HtmlPage page2 = button.click();
+            System.out.println(page2.asXml().toString());
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return false;
+    }
+
+    public boolean testLogin2() {
+        HtmlPage page1 = getHtmlPageNoBase("http://localhost/form.html");
+        System.out.println("*** PAGE1 ***");
+        if (page1 != null) {
+            System.out.println(page1.asXml().toString());
+        }
+        else {
+            System.out.println("PAGE1 is NULL!");
+            return false;
+        }
+
+        HtmlForm htmlForm1 = getHtmlForm(page1,"/action.php");
+        HtmlElement username = page1.getElementById("username");
+        HtmlElement password = page1.getElementById("password");
+        HtmlElement state = page1.getElementById("state");
+
+        username.setTextContent("testuname");
+        password.setTextContent("testpass");
+        state.setTextContent("AK");
+
+        HtmlElement button = htmlForm1.getInputByValue("Click me");
+        try {
+            HtmlPage page2 = button.click();
+            System.out.println(page2.asXml().toString());
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return false;
+    }
+
+
 }

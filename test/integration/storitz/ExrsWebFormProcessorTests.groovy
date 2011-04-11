@@ -15,10 +15,16 @@ class ExrsWebFormProcessorTests extends GroovyTestCase {
         super.tearDown()
     }
 
-    //bogus test
-    void testSomething() {
-        assertTrue(true)
+    void testLogin1() {
+        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
+        assertTrue(exrsWebFormProcessor.testLogin1())
     }
+
+    void testLogin2() {
+        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
+        assertTrue(exrsWebFormProcessor.testLogin2())
+    }
+
 
     //these tests are perishable due to the nature of the inventory in question.
 //    void testExrsFormPost430() {
