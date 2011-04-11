@@ -25,11 +25,11 @@
       </div>
       <div style="clear: both;"></div>
       <div style="margin: 0 5em;" class="left">
-        <a href="http://twitter.com/Storitzdotcom"><storitz:image style="border: none;" src="icn-twitter.png" width="33" height="33" alt="Storitz on Twitter"/></a>
-        <a href="http://www.facebook.com/storitz"><storitz:image style="border: none;" src="icn-facebook.png" width="33" height="33" alt="Storitz on FaceBook"/></a>
-        <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><storitz:image style="border: none;" src="icn-stumbleupon.png" width="33" height="33" alt="Storitz on StumbleUpon"/></a>
-        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge"><storitz:image style="border: none;" src="icn-linkedin.png" width="33" height="33" alt="Storitz on LinkedIn"/></a>
-        <a href="http://www.youtube.com/user/Storitzdotcom"><storitz:image style="border: none;" src="icn-youtube.png" width="33" height="33" alt="Storitz Youtube Channel"/></a>
+        <a href="http://twitter.com/Storitzdotcom"><storitz:image style="border: none;width:33px;height:33px;" src="icn-twitter.png" alt="Storitz on Twitter"/></a>
+        <a href="http://www.facebook.com/storitz"><storitz:image style="border: none;width:33px;height:33px;" src="icn-facebook.png" alt="Storitz on FaceBook"/></a>
+        <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/"><storitz:image style="border: none;width:33px;height:33px;" src="icn-stumbleupon.png" alt="Storitz on StumbleUpon"/></a>
+        <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge"><storitz:image style="border: none;width:33px;height:33px;" src="icn-linkedin.png" alt="Storitz on LinkedIn"/></a>
+        <a href="http://www.youtube.com/user/Storitzdotcom"><storitz:image style="border: none;width:33px;height:33px;" src="icn-youtube.png" alt="Storitz Youtube Channel"/></a>
       </div>
     </div>
     <div style="margin: 1em 0 1em 4em;" class="left">
