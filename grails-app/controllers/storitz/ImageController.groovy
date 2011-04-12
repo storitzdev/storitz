@@ -48,10 +48,15 @@ class ImageController {
     def maxAlbums = 0         // max number of albums to upload. Set to 0 for all albums
 
     def getPicasaWebService() {
-        PicasawebService myService = new PicasawebService("Storitz")
-        myService.setUserCredentials(picasaUserName, picasaPassWord)
-        myService.setChunkedMediaUpload(1024 * 1024)
-        return myService
+        try {
+            PicasawebService myService = new PicasawebService("Storitz")
+            myService.setUserCredentials(picasaUserName, picasaPassWord)
+            myService.setChunkedMediaUpload(1024 * 1024)
+            return myService
+        } catch (Throwable t) {
+            t.printStackTrace()
+        }
+        return null
     }
 
     def getPicasaAlbums(myService) {
@@ -112,11 +117,10 @@ class ImageController {
     }
 
     boolean uploadImagesToPicasa() {
-        // JM: removing guava jars in support of A/B testing
-        //def myService =  getPicasaWebService()
-        //def myAlbums = getPicasaAlbums (myService)
-        //def myImages = collectAllImages()
-        //return uploadImagesToPicasaActual(myService, myAlbums, myImages)
+        def myService =  getPicasaWebService()
+        def myAlbums = getPicasaAlbums (myService)
+        def myImages = collectAllImages()
+        return uploadImagesToPicasaActual(myService, myAlbums, myImages)
     }
 
     boolean uploadImagesToPicasaActual(myService, myAlbums, myImages) {
