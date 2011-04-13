@@ -43,7 +43,10 @@ public enum ReferrerType {
   static public ReferrerType getEnumFromId(String value) {
     def ret = list().find {it.display == value }
     if (!ret) {
-      return ReferrerType.valueOf(value)
+      ret = list().find() { it.id == value }
+      if (!ret) {
+        return ReferrerType.valueOf(value)
+      }
     }
     return ret
   }
