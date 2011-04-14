@@ -32,6 +32,7 @@
           <li><g:link controller="quikStor" action="list">Manage QuikStor</g:link></li>
           <li><g:link controller="exrs" action="list">Manage Extraspace</g:link></li>
           <li><g:link controller="usi" action="list">Manage U-Store-It</g:link></li>
+          <li><g:link controller="EDomico" action="list">Manage EDomico</g:link></li>
         </ul>
         <li>Reference Data</li>
         <ul>

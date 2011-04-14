@@ -14,10 +14,10 @@ grails install-plugin cxf
 grails install-plugin fckeditor
 grails install-plugin quartz
 grails install-plugin authorize-net
-grails install plugin jms
+grails install-plugin jms
 grails install-plugin http://mamster.wnx.com/grails-dynamic-jasper-0.7.zip
 grails install-plugin sanitizer
-grails install ui-performance
+grails install-plugin ui-performance
 # Choose sanitation level?  I used 3 (loose - MySpace). 
 grails install-plugin csv
 

@@ -10,7 +10,8 @@ package storitz.constants
 public enum FeedType {
   SITELINK("SiteLink"),
   CENTERSHIFT("Centershift"),
-  QUIKSTOR("QuikStor")
+  QUIKSTOR("QuikStor"),
+  EDOMICO("EDomico")
 
   final display
 
@@ -19,7 +20,7 @@ public enum FeedType {
   }
 
   static list() {
-    [SITELINK, CENTERSHIFT, QUIKSTOR]
+    [SITELINK, CENTERSHIFT, QUIKSTOR, EDOMICO]
   }
 
   static public FeedType getEnumFromId(String value) {
