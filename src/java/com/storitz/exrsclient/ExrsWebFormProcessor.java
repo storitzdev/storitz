@@ -29,6 +29,7 @@ public class ExrsWebFormProcessor {
     final WebClient webClient;
     private static final String baseUrl = ExrsService.getBaseUrl();
     private static final String reserveOrHoldAction = "/Storage/ReserveOrHold.aspx";
+    private static final String reserveConfirm = "/Storage/Reserve/Confirm.aspx";
     private StringBuffer buf = new StringBuffer(5120);
 
     // 0 = dump errors only
@@ -125,10 +126,18 @@ public class ExrsWebFormProcessor {
     }
 
     private boolean verifyConfirmationNumber(RentalTransaction trans, HtmlPage page4) {
-        return false;
+        //TODO: Actually check the html text for a rental confirmation notice
+        return true;
     }
 
     private HtmlPage processPageThree(RentalTransaction trans, HtmlPage page3) {
+        HtmlForm htmlForm = getHtmlForm(page3,reserveConfirm);
+        HtmlElement ctl00_MainContent_ConfirmButton = page3.getElementById("ctl00_MainContent_ConfirmButton");
+        try {
+            return ctl00_MainContent_ConfirmButton.click();
+        } catch (IOException e) {
+          logStackTrace(e);
+        }
         return null;
     }
 
@@ -269,8 +278,8 @@ public class ExrsWebFormProcessor {
     }
 
     private String resolveExpYear(Date expDate) {
-        SimpleDateFormat sdf_yy = new SimpleDateFormat ("yy");  // CC Year [11-21]
-        return sdf_yy.format(expDate);
+        SimpleDateFormat sdf_yyyy = new SimpleDateFormat ("yyyy");  // CC Year [2011-2021]
+        return sdf_yyyy.format(expDate);
     }
 
     // Move-in dates have no leading zeros (i.e. 04/01/2011 becomes 4/1/2011)
