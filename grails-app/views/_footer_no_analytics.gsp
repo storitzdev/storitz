@@ -51,3 +51,28 @@
     Storitz is the only place online where you can search for, compare and rent a self storage unit – all from one site.  Use our map to search for the best deals on self storage anywhere in the country.  Storitz lists thousands of storage units, near you and across the United States and lets you sort by distance, price and unit size so you can find the best storage unit for rent without the hassle of calling and driving to multiple locations.  Storitz shows you photos and video of the storage facility before you rent, so you know exactly what you’re getting.  Storitz facilities offer free move-in trucks, $1 move-in specials, online-only coupons and the best storage deals on the internet.  The Storitz Best Price Guarantee means you’re getting the very best deal on self storage anywhere online.  Storitz makes it easy to compare self storage for families, U.S.Military Servicemembers, senior citizens , small business owners and college students.  Storitz lists RV, boat and car parking, climate controlled and air conditioned storage units and wine storage lockers.  Just enter your zip code to get started.
   </div>
 </div>
+<p:dependantJavascript>
+    <!-- Quantcast Tag -->
+    <script type="text/javascript">
+        var _qevents = _qevents || [];
+
+        (function() {
+            var elem = document.createElement('script');
+            elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+            elem.async = true;
+            elem.type = "text/javascript";
+            var scpt = document.getElementsByTagName('script')[0];
+            scpt.parentNode.insertBefore(elem, scpt);
+        })();
+
+        _qevents.push({
+            qacct:"p-c6WDbtwCEvH4Q"
+        });
+    </script>
+
+    <noscript>
+        <div style="display:none;">
+            <img src="//pixel.quantserve.com/pixel/p-c6WDbtwCEvH4Q.gif" border="0" height="1" width="1" alt="Quantcast"/>
+        </div>
+    </noscript>
+</p:dependantJavascript>
