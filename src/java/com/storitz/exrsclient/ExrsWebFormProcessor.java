@@ -22,14 +22,15 @@ import com.storitz.Contact;
 import java.io.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class ExrsWebFormProcessor {
 
     final WebClient webClient;
     private static final String baseUrl = ExrsService.getBaseUrl();
     private static final String reserveOrHoldAction = "/Storage/ReserveOrHold.aspx";
-    private static final String reserveConfirm = "/Storage/Reserve/Confirm.aspx";
+    private static final String reserveConfirmAction = "/Storage/Reserve/Confirm.aspx";
     private StringBuffer buf = new StringBuffer(5120);
 
     // 0 = dump errors only
@@ -106,7 +107,11 @@ public class ExrsWebFormProcessor {
             //////////////////////////////////////
             // Wrap Up - Receive Confirmation # //
             //////////////////////////////////////
-            return verifyConfirmationNumber(trans, page4);
+            String confirmationNumber = verifyConfirmationNumber(trans, page4);
+            if (confirmationNumber != null) {
+                logMessage(0,"Confirmation Number: " + confirmationNumber);
+                return true;
+            }
         } catch (Throwable t) {
             logStackTrace(t);
         }
@@ -125,13 +130,27 @@ public class ExrsWebFormProcessor {
         }
     }
 
-    private boolean verifyConfirmationNumber(RentalTransaction trans, HtmlPage page4) {
-        //TODO: Actually check the html text for a rental confirmation notice
-        return true;
+    private String verifyConfirmationNumber(RentalTransaction trans, HtmlPage page4) {
+        // HTML input comes in looking something like this:
+        //	<div class="sub_title" style="border:0; padding:0px 12px 0px;">Confirmation Number: <span style="color:#fff;font-size:12px;">5784404</span></div>
+
+        // The asText() method will strip out the HTML tags, giving us something like this:
+        //	Confirmation Number: 5784404
+
+        String htmlText = page4.asText().toString();
+
+        Pattern p = Pattern.compile("^.*Confirmation Number: *([0-9]+).*$",Pattern.DOTALL);
+        Matcher m = p.matcher(htmlText);
+
+        if (m.matches() && m.groupCount() > 0) {
+            return m.group(1);
+        }
+
+        return null;
     }
 
     private HtmlPage processPageThree(RentalTransaction trans, HtmlPage page3) {
-        HtmlForm htmlForm = getHtmlForm(page3,reserveConfirm);
+        HtmlForm htmlForm = getHtmlForm(page3,reserveConfirmAction);
         HtmlElement ctl00_MainContent_ConfirmButton = page3.getElementById("ctl00_MainContent_ConfirmButton");
         try {
             return ctl00_MainContent_ConfirmButton.click();
@@ -494,7 +513,6 @@ public class ExrsWebFormProcessor {
         HtmlElement button = htmlForm1.getInputByValue("Click me");
         try {
             HtmlPage page2 = button.click();
-            System.out.println(page2.asXml().toString());
             return true;
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -525,7 +543,6 @@ public class ExrsWebFormProcessor {
         HtmlElement button = htmlForm1.getInputByValue("Click me");
         try {
             HtmlPage page2 = button.click();
-            System.out.println(page2.asXml().toString());
             return true;
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

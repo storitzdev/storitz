@@ -446,7 +446,7 @@ class ExrsService extends CShiftService {
             emailService.sendTextEmail (
                 to:"tech@storitz.com",
                 from:"no-reply@storitz.com",
-                subject:"EXRS Automatic Move-In Error Log",
+                subject:"EXRS Automatic Move-In Log",
                 body:exrsWebFormProcessor.logBuf
             )
         }
