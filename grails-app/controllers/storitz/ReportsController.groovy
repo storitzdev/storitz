@@ -45,10 +45,14 @@ class ReportsController {
     [feedList: getFeedList()]
   }
 
+  def getUser() {
+      def username = springSecurityService.principal.username
+      return User.findByUsername(username as String)
+  }
+
   def getFeedList() {
     def feedList = []
-    def username = springSecurityService.principal.username
-    def user = User.findByUsername(username as String)
+    def user = getUser()
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
       feedList = Feed.list()
     } else {
@@ -126,28 +130,55 @@ class ReportsController {
       case ReportName.ACTIVITY:
       case ReportName.PENDING:
       case ReportName.MOVEIN:
-        period.site = StorageSite.findByTitle(params.sitename)
-        if (!period.site) {
-          flash.message = "Bad report parameters - missing site for report."
-          period.reportName = null
-          render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
-          return
+        if (params.sitename) {
+            period.site = StorageSite.findByTitle(params.sitename)
+            if (!period.site) {
+                flash.message = "Bad report parameters - invalid site for report."
+                period.reportName = null
+                render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+                return
+            }
+            results = buildSiteReportSingleSite(drb, reportParams, startDate, endDate, period)
         }
-        results = buildSiteReport(drb, reportParams, startDate, endDate, period)
+        else {
+            if (!UserRole.userHasRole(getUser(), 'ROLE_ADMIN')) {
+                flash.message = "Bad report parameters - invalid site for report."
+                period.reportName = null
+                render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+                return
+            }
+            results = buildSiteReportAllSites(drb, reportParams, startDate, endDate, period)
+        }
         break
 
       case ReportName.TRANSACTION_HISTORY:
-        results = buildCorpTransactionReport(drb, reportParams, startDate, endDate, period)
+        if (period.feed) {
+            results = buildCorpTransactionReportSingleFeed(drb, reportParams, startDate, endDate, period)
+        }
+        else {
+            if (!UserRole.userHasRole(getUser(), 'ROLE_ADMIN')) {
+                flash.message = "Please select a storage location. Only administrators can run this report against all storage locations."
+                period.reportName = null
+                render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+                return
+            }
+            results = buildCorpTransactionReportAllFeeds(drb, reportParams, startDate, endDate, period)
+       }
         break
 
       case ReportName.ACH_TRANSFERS:
-        if (!period.feed) {
-          flash.message = "Bad report parameters - missing feed for report."
-          period.reportName = null
-          render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
-          return
+        if (period.feed) {
+            results = buildCorpPaymentReportSingleFeed(drb, reportParams, startDate, endDate, period)
         }
-        results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
+        else {
+            if (!UserRole.userHasRole(getUser(), 'ROLE_ADMIN')) {
+                flash.message = "Please select a storage location. Only administrators can run this report against all storage locations."
+                period.reportName = null
+                render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+                return
+            }
+            results = buildCorpPaymentReportAllFeeds(drb, reportParams, startDate, endDate, period)
+        }
         break
 
       case ReportName.INVOICE:
@@ -220,12 +251,167 @@ class ReportsController {
     def results = c.list() {
       eq('status', TransactionStatus.BEGUN)
       between('bookingDate', startDate.time, endDate.time)
+      order('site', 'asc')
       order('bookingDate', 'desc')
     }
     return results
   }
 
-  private buildSiteReport(drb, reportParams, startDate, endDate, period) {
+  @Secured(['ROLE_ADMIN'])
+  private buildSiteReportAllSites(drb, reportParams, startDate, endDate, period) {
+
+      def dateField
+      def dateName
+      def transTitle
+      def results
+
+      def c = RentalTransaction.createCriteria()
+
+      switch (period.reportName) {
+        case ReportName.ACTIVITY:
+          reportParams["report_name"] = "Activity Report - All"
+          reportParams["footer_text"] = ""
+          reportParams["report_dates"] = "${reportParams['date_range']}"
+          dateField = "bookingDate"
+          dateName = "Transaction Date"
+          transTitle = "Trans #"
+
+          results = c.list() {
+            or {
+              eq('status', TransactionStatus.COMPLETE)
+              eq('status', TransactionStatus.PAID)
+            }
+            between('bookingDate', startDate.time, endDate.time)
+            order('bookingDate', 'desc')
+            order('site', 'asc')
+          }
+          break
+
+        case ReportName.PENDING:
+          reportParams["report_name"] = "Pending Move In Report - All"
+          reportParams["footer_text"] = ""
+          reportParams["report_dates"] = "${reportParams['date_range']}"
+          dateField = "moveInDate"
+          dateName = "Move-In Date"
+          transTitle = "Reservation #"
+
+          results = c.list() {
+            or {
+              eq('status', TransactionStatus.COMPLETE)
+              eq('status', TransactionStatus.PAID)
+            }
+            between('bookingDate', startDate.time, endDate.time)
+            gt('moveInDate', new Date())
+            order('moveInDate', 'desc')
+            order('site', 'asc')
+          }
+          break
+
+        case ReportName.MOVEIN:
+          reportParams["report_name"] = "Move In Report - All"
+          reportParams["footer_text"] = ""
+          reportParams["report_dates"] = "${reportParams['date_range']}"
+          dateField = "moveInDate"
+          dateName = "Move-In Date"
+          transTitle = "Trans #"
+
+          results = c.list() {
+            or {
+              eq('status', TransactionStatus.COMPLETE)
+              eq('status', TransactionStatus.PAID)
+            }
+            between('moveInDate', startDate.time, endDate.time)
+            order('moveInDate', 'desc')
+            order('site', 'asc')
+          }
+          break
+      }
+
+      drb.setGrandTotalLegend("Grand Total").setGrandTotalLegendStyle(subtotalStyle).setPrintColumnNames(false)
+
+      drb.addField("contactPrimary.firstName", String.class.getName())
+      drb.addField("contactPrimary.lastName", String.class.getName())
+      drb.addField("contactPrimary.suffixName", String.class.getName())
+      drb.addField("bookingDate", Date.class.getName())
+      drb.addField("moveInDate", Date.class.getName())
+      drb.addField("reserved", Boolean.class.getName())
+      drb.addField("reservationId", String.class.getName())
+      drb.addField("idNumber", String.class.getName())
+      drb.addField("site.title", String.class.getName())
+
+      AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField)).setTitle(dateName).setWidth(85).setStyle(groupHeaderStyle).setHeaderStyle(groupHeaderStyle).build();
+
+      AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate')).setTitle("Move-In Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
+              setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
+
+      AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression()).setTitle(transTitle).setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Customer").setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnSite = ColumnBuilder.getInstance().
+              setColumnProperty("site.title", String.class.getName()).
+              setTitle("Facility Name:").setHeaderStyle(headerStyle).build()
+
+      SimpleColumn columnTransType = ColumnBuilder.getInstance().
+                setColumnProperty("transactionType", String.class.getName()).
+                setTitle("Transaction Type").build()
+
+      SimpleColumn columnEmail = ColumnBuilder.getInstance().
+              setColumnProperty("contactPrimary.email", String.class.getName()).
+              setTitle("Email").setWidth(85).build()
+
+      SimpleColumn columnPhone = ColumnBuilder.getInstance().
+              setColumnProperty("contactPrimary.phone", String.class.getName()).
+              setTitle("Phone").setWidth(60).build()
+
+      SimpleColumn columnMonthly = ColumnBuilder.getInstance().
+              setColumnProperty("monthlyRate", BigDecimal.class.getName()).
+              setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnInsurance = ColumnBuilder.getInstance().
+              setColumnProperty("insuranceCost", BigDecimal.class.getName()).
+              setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnFees = ColumnBuilder.getInstance().
+              setColumnProperty("fees", BigDecimal.class.getName()).
+              setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnTax = ColumnBuilder.getInstance().
+              setColumnProperty("tax", BigDecimal.class.getName()).
+              setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnTotalPaidByTenant = ColumnBuilder.getInstance().
+              setColumnProperty("moveInCost", BigDecimal.class.getName()).          // TODO: change moveInCost property?
+              setTitle("Total Paid by Tenant").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      drb.addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle)
+
+      drb.setGlobalFooterVariableHeight(new Integer(25));
+
+      GroupBuilder gb1 = new GroupBuilder();
+
+      DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
+
+      DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate).setFooterLabel(dailySubLabel).setFooterVariablesHeight(new Integer(30)).addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnTotalPaidByTenant, DJCalculation.SUM, moneyTotalStyle).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).build();
+
+      GroupBuilder gb2 = new GroupBuilder()
+
+      DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite).setGroupLayout(GroupLayout.DEFAULT).setHeaderHeight(new Integer(30)).build();
+
+      drb.addColumn(columnDate).addColumn(columnSite).addColumn(columnUnitNumber).addColumn(columnTransType).addColumn(columnReservationId)
+
+      if (period.reportName == ReportName.ACTIVITY) {
+        drb.addColumn(columnMoveInDate)
+      }
+
+      drb.addColumn(columnName).addColumn(columnEmail).addColumn(columnPhone).addColumn(columnMonthly).addColumn(columnInsurance).addColumn(columnFees).addColumn(columnTax).addColumn(columnTotalPaidByTenant).addGroup(g1).addGroup(g2)
+
+      return results
+  }
+
+  private buildSiteReportSingleSite(drb, reportParams, startDate, endDate, period) {
 
     def dateField
     def dateName
@@ -256,6 +442,7 @@ class ReportsController {
             eq('id', period.site.id)
           }
           between('bookingDate', startDate.time, endDate.time)
+          order('site', 'asc')
           order('bookingDate', 'desc')
         }
         break
@@ -282,6 +469,7 @@ class ReportsController {
           }
           between('bookingDate', startDate.time, endDate.time)
           gt('moveInDate', new Date())
+          order('site', 'asc')
           order('moveInDate', 'desc')
         }
         break
@@ -307,6 +495,7 @@ class ReportsController {
             eq('id', period.site.id)
           }
           between('moveInDate', startDate.time, endDate.time)
+          order('site', 'asc')
           order('moveInDate', 'desc')
         }
         break
@@ -385,7 +574,7 @@ class ReportsController {
     return results
   }
 
-  private buildCorpTransactionReport(drb, reportParams, startDate, endDate, period) {
+  private buildCorpTransactionReportSingleFeed(drb, reportParams, startDate, endDate, period) {
 
     def dateField
     def transTitle
@@ -429,6 +618,7 @@ class ReportsController {
         }
       }
       between('bookingDate', startDate.time, endDate.time)
+      order('site', 'asc')
       order('bookingDate', 'desc')
     }
 
@@ -506,7 +696,121 @@ class ReportsController {
     return results
   }
 
-  private buildCorpPaymentReport(drb, reportParams, startDate, endDate, period) {
+    @Secured(['ROLE_ADMIN'])
+    private buildCorpTransactionReportAllFeeds(drb, reportParams, startDate, endDate, period) {
+
+      def dateField
+      def results
+
+      def c = RentalTransaction.createCriteria()
+
+      reportParams["report_name"] = "Transaction History Report - All"
+      reportParams["footer_text"] = ""
+      reportParams["report_dates"] = "${reportParams['date_range']}"
+      dateField = "bookingDate"
+
+      def tmp = c.list() {
+        or {
+          eq('status', TransactionStatus.COMPLETE)
+          eq('status', TransactionStatus.PAID)
+        }
+        between('bookingDate', startDate.time, endDate.time)
+        order('bookingDate', 'desc')
+        order('site', 'asc')
+      }
+
+      results = tmp.sort { e1, e2 ->
+          e1.site.feed.operatorName.compareTo(e2.site.feed.operatorName)
+      }
+
+      drb.setGrandTotalLegend("Grand Total").setGrandTotalLegendStyle(subtotalStyle).setPrintColumnNames(false)
+
+      drb.addField("contactPrimary.firstName", String.class.getName())
+      drb.addField("contactPrimary.lastName", String.class.getName())
+      drb.addField("contactPrimary.suffixName", String.class.getName())
+      drb.addField("site.bankAccount.acctNo", String.class.getName())
+      drb.addField("bookingDate", Date.class.getName())
+      drb.addField("moveInDate", Date.class.getName())
+      drb.addField("paidThruDate", Date.class.getName())
+      drb.addField("reserved", Boolean.class.getName())
+      drb.addField("reservationId", String.class.getName())
+      drb.addField("idNumber", String.class.getName())
+      drb.addField("site.feed.operatorName", String.class.getName())
+
+
+      SimpleColumn columnFeed = ColumnBuilder.getInstance().
+              setColumnProperty("site.feed.operatorName", String.class.getName()).
+              setTitle("Operator Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
+
+      SimpleColumn columnSite = ColumnBuilder.getInstance().
+              setColumnProperty("site.title", String.class.getName()).
+              setTitle("Facility Name:").setStyle(groupHeaderStyle).build()
+
+      AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField)).setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnMoveInDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('moveInDate')).setTitle("Move-In Date").setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnTransType = ColumnBuilder.getInstance().
+                setColumnProperty("transactionType", String.class.getName()).
+                setTitle("Transaction Type").build()
+
+      AbstractColumn columnPaidThruDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('paidThruDate')).setTitle("Paid Through").setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
+              setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
+
+      AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression()).setTitle("Trans #").setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnPromo = ColumnBuilder.getInstance().
+              setColumnProperty("promoName", String.class.getName()).
+              setTitle("Promo Name").build()
+
+      SimpleColumn columnMonthly = ColumnBuilder.getInstance().
+              setColumnProperty("monthlyRate", BigDecimal.class.getName()).
+              setTitle("Monthly Rent").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnMoveInCost = ColumnBuilder.getInstance().
+              setColumnProperty("moveInCost", BigDecimal.class.getName()).
+              setTitle("Move-In Gross").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnInsurance = ColumnBuilder.getInstance().
+              setColumnProperty("insuranceCost", BigDecimal.class.getName()).
+              setTitle("Insurance").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnFees = ColumnBuilder.getInstance().
+              setColumnProperty("fees", BigDecimal.class.getName()).
+              setTitle("Fees").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnTax = ColumnBuilder.getInstance().
+              setColumnProperty("tax", BigDecimal.class.getName()).
+              setTitle("Taxes").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      drb.addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addGlobalFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle)
+
+      drb.setGlobalFooterVariableHeight(new Integer(25));
+
+      GroupBuilder gb1 = new GroupBuilder();
+
+      DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
+
+      DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate).setFooterLabel(dailySubLabel).setDefaultFooterVariableStyle(moneyTotalStyle).setFooterVariablesHeight(new Integer(30)).addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnInsurance, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnFees, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnTax, DJCalculation.SUM, moneyTotalStyle).setGroupLayout(GroupLayout.DEFAULT).build();
+
+      GroupBuilder gb2 = new GroupBuilder();
+
+      //DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnSite).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).setHeaderHeight(new Integer(30)).build();
+      DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnFeed).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).setHeaderHeight(new Integer(30)).build();
+
+      GroupBuilder gb3 = new GroupBuilder()
+      DJGroup g3 = gb3.setCriteriaColumn((PropertyColumn) columnSite).setGroupLayout(GroupLayout.DEFAULT).setHeaderHeight(new Integer(30)).build();
+
+      drb.addColumn(columnSite).addColumn(columnDate).addColumn(columnUnitNumber).addColumn(columnMonthly).addColumn(columnTransType).addColumn(columnReservationId).addColumn(columnName).addColumn(columnMoveInDate).addColumn(columnPaidThruDate).addColumn(columnMoveInCost).addColumn(columnInsurance).addColumn(columnFees).addColumn(columnTax).addColumn(columnPromo).addGroup(g2).addGroup(g3).addGroup(g1)
+
+      return results
+    }
+
+  private buildCorpPaymentReportSingleFeed(drb, reportParams, startDate, endDate, period) {
 
     def dateField
     def transTitle
@@ -621,6 +925,119 @@ class ReportsController {
 
     return results
   }
+
+    @Secured(['ROLE_ADMIN'])
+    private buildCorpPaymentReportAllFeeds(drb, reportParams, startDate, endDate, period) {
+
+      def dateField
+      def results
+
+      def c = RentalTransaction.createCriteria()
+
+      reportParams["report_name"] = "ACH Transfer Report - All"
+      reportParams["footer_text"] = ""
+      reportParams["report_dates"] = "${reportParams['date_range']}"
+      dateField = "bookingDate"
+
+      def tmp = c.list() {
+        or {
+          eq('status', TransactionStatus.COMPLETE)
+          eq('status', TransactionStatus.PAID)
+        }
+        between('bookingDate', startDate.time, endDate.time)
+        order('bookingDate', 'desc')
+        order('site', 'asc')
+      }
+
+      results = tmp.sort { e1, e2 ->
+        e1.site.feed.operatorName.compareTo(e2.site.feed.operatorName)
+      }
+
+      drb.setGrandTotalLegend("Grand Total").setGrandTotalLegendStyle(subtotalStyle).setPrintColumnNames(false)
+
+      drb.addField("contactPrimary.firstName", String.class.getName())
+      drb.addField("contactPrimary.lastName", String.class.getName())
+      drb.addField("contactPrimary.suffixName", String.class.getName())
+      drb.addField("site.bankAccount.acctNo", String.class.getName())
+      drb.addField("bookingDate", Date.class.getName())
+      drb.addField("achTransferDate", Date.class.getName())
+      drb.addField("reserved", Boolean.class.getName())
+      drb.addField("reservationId", String.class.getName())
+      drb.addField("idNumber", String.class.getName())
+      drb.addField("invoice.invoiceId", String.class.getName())
+      drb.addField("site.netCommission", Boolean.class.getName())
+      drb.addField("site.feed.operatorName", String.class.getName())
+
+
+      SimpleColumn columnFeed = ColumnBuilder.getInstance().
+              setColumnProperty("site.feed.operatorName", String.class.getName()).
+              setTitle("Operator Name:").setStyle(groupHeaderStyle).setHeaderStyle(facilityHeaderStyle).build()
+
+      SimpleColumn columnSite = ColumnBuilder.getInstance().
+              setColumnProperty("site.title", String.class.getName()).
+              setTitle("Facility Name:").setStyle(groupHeaderStyle).build()
+
+      AbstractColumn columnDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression(dateField)).setTitle("Transaction Date").setStyle(dateHeaderStyle).setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnAchDate = ColumnBuilder.getInstance().setCustomExpression(new DateExpression('achTransferDate')).setTitle("ACH Date").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnAchAccount = ColumnBuilder.getInstance().setCustomExpression(new AccountExpression('site.bankAccount.acctNo')).setTitle("ACH Account").setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnTransType = ColumnBuilder.getInstance().
+               setColumnProperty("transactionType", String.class.getName()).
+               setTitle("Transaction Type").build()
+
+      SimpleColumn columnUnitNumber = ColumnBuilder.getInstance().
+              setColumnProperty("feedUnitNumber", String.class.getName()).setStyle(detailCenterStyle).setTitle("Unit #").build()
+
+      AbstractColumn columnReservationId = ColumnBuilder.getInstance().setCustomExpression(new ReservationIdExpression()).setTitle("Trans #").setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnName = ColumnBuilder.getInstance().setCustomExpression(new NameExpression()).setTitle("Tenant Name").setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnPaymentType = ColumnBuilder.getInstance().setCustomExpression(new PaymentTypeExpression()).setTitle("Net/Gross Transfer").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+
+      AbstractColumn columnInvoiceNumber = ColumnBuilder.getInstance().setCustomExpression(new InvoiceNumberExpression()).setTitle("Storitz Invoice #").setStyle(detailCenterStyle).setHeaderStyle(headerStyle).build();
+
+      SimpleColumn columnStoritzId = ColumnBuilder.getInstance().
+              setColumnProperty("id", String.class.getName()).setStyle(detailCenterStyle).setTitle("Storitz Trans #").build()
+
+      SimpleColumn columnMoveInCost = ColumnBuilder.getInstance().
+              setColumnProperty("moveInCost", BigDecimal.class.getName()).
+              setTitle("Move-In Cost").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnCommission = ColumnBuilder.getInstance().
+              setColumnProperty("commission", BigDecimal.class.getName()).
+              setTitle("Commission").setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      SimpleColumn columnAchAmount = ColumnBuilder.getInstance().
+              setColumnProperty("achAmount", BigDecimal.class.getName()).
+              setTitle("ACH Amount (if applicable)").setWidth(new Integer(55)).setStyle(moneyStyle).setPattern("\$0.00").build()
+
+      AbstractColumn columnNet = ColumnBuilder.getInstance().setCustomExpression(new NetCostExpression()).setTitle("Net").setStyle(moneyStyle).setHeaderStyle(headerStyle).setPattern("\$0.00").build();
+
+      drb.addGlobalFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle);
+      drb.addGlobalFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle);
+      drb.addGlobalFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle);
+      drb.addGlobalFooterVariable(columnAchAmount, DJCalculation.SUM, moneyTotalStyle);
+      drb.setGlobalFooterVariableHeight(new Integer(25));
+
+      GroupBuilder gb1 = new GroupBuilder();
+
+      DJGroupLabel dailySubLabel = new DJGroupLabel("Daily Subtotal", subtotalStyle, LabelPosition.LEFT);
+
+      DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDate).setFooterLabel(dailySubLabel).setFooterVariablesHeight(new Integer(30)).addFooterVariable(columnMoveInCost, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnCommission, DJCalculation.SUM, moneyTotalStyle).addFooterVariable(columnNet, DJCalculation.SUM, moneyTotalStyle).setGroupLayout(GroupLayout.DEFAULT).build();
+
+      GroupBuilder gb2 = new GroupBuilder();
+
+      DJGroup g2 = gb2.setCriteriaColumn((PropertyColumn) columnFeed).setGroupLayout(GroupLayout.VALUE_IN_HEADER_WITH_HEADERS_AND_COLUMN_NAME).build();
+
+      GroupBuilder gb3 = new GroupBuilder()
+      DJGroup g3 = gb3.setCriteriaColumn((PropertyColumn) columnSite).setGroupLayout(GroupLayout.DEFAULT).setHeaderHeight(new Integer(30)).build();
+
+      drb.addColumn(columnSite).addColumn(columnDate).addColumn(columnUnitNumber).addColumn(columnStoritzId).addColumn(columnTransType).addColumn(columnReservationId).addColumn(columnName).addColumn(columnMoveInCost).addColumn(columnCommission).addColumn(columnNet).addColumn(columnPaymentType).addColumn(columnInvoiceNumber).addColumn(columnAchAmount).addColumn(columnAchDate).addColumn(columnAchAccount).addGroup(g2).addGroup(g3).addGroup(g1)
+
+      return results
+    }
 
   private buildInvoice(drb, reportParams, startDate, endDate, period) {
     def results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)

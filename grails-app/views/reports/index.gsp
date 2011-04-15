@@ -205,7 +205,10 @@
         </div>
 
         <div class="formInstructions">
-          You have picked a report that requires your to select a specifice storage location.  Start by typing the name - the list of matching sites will appear below.  Choose the one upon which you wish to report.
+          You have picked a report that requires your to select a specific storage location.  Start by typing the name - the list of matching sites will appear below.  Choose the one upon which you wish to report.
+          <sec:ifAnyGranted roles="ROLE_ADMIN">
+            If you would like to report on all storage locations, then leave blank.
+          </sec:ifAnyGranted>
         </div>
 
         <div class="checkout_fields">
@@ -238,7 +241,7 @@
             <div style="width:400px;" class="checkout_value ${hasErrors(bean: reportPeriod, field: 'feed', 'errors')}">
               <g:select style="width:400px;" from="${feedList}" value="${reportPeriod?.feed?.id}"
                       optionKey="id" optionValue="operatorName" name="feed.id"
-                      noSelection="['null':'No feed selected']"/>
+                      noSelection="['null':'All feeds (Admin only)']"/>
             </div>
             <div style="clear:both;"></div>
           </div>
