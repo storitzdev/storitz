@@ -1040,7 +1040,7 @@ class ReportsController {
     }
 
   private buildInvoice(drb, reportParams, startDate, endDate, period) {
-    def results = buildCorpPaymentReport(drb, reportParams, startDate, endDate, period)
+    def results = buildCorpPaymentReportSingleFeed(drb, reportParams, startDate, endDate, period)
 
     reportParams["report_name"] = "Storitz Invoice - ${period.feed.operatorName}"
     reportParams["invoice_num"] = "${startDate.format('MM-yyyy')}-${period.feed.id}"
