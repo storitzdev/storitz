@@ -181,16 +181,18 @@ class SiteLinkService extends BaseProviderService {
     def attempts    = 0
     def maxAttempts = 5
     def success     = false
+    def ret         = null
 
       while ((!success) && (attempts < maxAttempts)) {
           try {
-              postAction(payload, 'MoveInCostRetrieve')
+              ret = postAction(payload, 'MoveInCostRetrieve')
               success = true
           } catch (HttpHostConnectException e) {
               println "Caught HttpHostConnectException exception! [Attempt ${attempts} of ${maxAttempts}]"
               attempts++
           }
       }
+    return ret
   }
 
   def getPromos(corpCode, locationCode, userName, password) {
