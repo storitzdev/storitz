@@ -390,6 +390,12 @@ class ExrsService extends CShiftService {
     def body = buf.toString()
     String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"
 
+    //log to catalina.out too
+    println("to: 'exrs@storitz.com'")
+    println("from: 'no-reply@storitz.com'")
+    println("subject: ${title}")
+    println("body: ${body}")
+
     emailService.sendTextEmail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
@@ -424,6 +430,12 @@ class ExrsService extends CShiftService {
     def body2 = buf2.toString()
     String title2 = "Storitz - New EXRS reservation - id (${trans.idNumber})"
 
+    //log to catalina.out too
+    println("to: 'exrs@storitz.com'")
+    println("from: 'no-reply@storitz.com'")
+    println("subject: ${title2}")
+    println("body: ${body2}")
+
     emailService.sendTextEmail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
@@ -443,6 +455,12 @@ class ExrsService extends CShiftService {
 
         // real-time debugging. so fun...
         if (!success) {
+            //log to catalina.out too
+            println("to:'tech@storitz.com'")
+            println("from: 'no-reply@storitz.com'")
+            println("subject: EXRS Automatic Move-In Log")
+            println("body: ${exrsWebFormProcessor.logBuf}")
+
             emailService.sendTextEmail (
                 to:"tech@storitz.com",
                 from:"no-reply@storitz.com",
