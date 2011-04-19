@@ -1016,7 +1016,7 @@ class SiteLinkService extends BaseProviderService {
       site.lastUpdate = lastupdate.lngLastTimePolled.text() as Long
     }
     // check admin fees
-    if (!unitID && site.units.size() > 0) {
+    if (!unitID && site.units?.size() > 0) {
       unitID = site.units.asList().get(0).unitNumber
     }
     if (unitID) {
