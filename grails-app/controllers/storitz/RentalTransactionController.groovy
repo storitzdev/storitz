@@ -415,11 +415,20 @@ class RentalTransactionController {
       rentalTransactionInstance.save(flush: true)
     }
 
-    if (!moveInService.moveIn(rentalTransactionInstance)) {
-      flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
-      // TODO - notify with email to admin
-      redirect(action: 'payment', params: ["id": rentalTransactionInstance.id])
-      return
+    if (rentalTransactionInstance.transactionType == TransactionType.RESERVATION) {
+      if (!moveInService.reserve(rentalTransactionInstance)) {
+        flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+        // TODO - notify with email to admin
+        redirect(action: 'payment', params: ["id": rentalTransactionInstance.id])
+        return
+      }
+    } else {
+      if (!moveInService.moveIn(rentalTransactionInstance)) {
+        flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+        // TODO - notify with email to admin
+        redirect(action: 'payment', params: ["id": rentalTransactionInstance.id])
+        return
+      }
     }
 
     notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)

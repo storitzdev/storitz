@@ -531,6 +531,43 @@ class SiteLinkService extends BaseProviderService {
     postAction(payload, 'ReservationNewWithSource_v2')
   }
 
+  def getReservationPaymentPayload(RentalTransaction rentalTransaction) {
+
+    def siteLink = (SiteLink) rentalTransaction.site.feed
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:ReservationFeeAddWithSource>
+         <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
+         <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
+         <cal:sCorpUserName>""" + siteLink.userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
+         <cal:TenantID>""" + rentalTransaction.tenantId + """</cal:TenantID>
+         <cal:iWaitingListID>""" + rentalTransaction.reservationId + """</cal:iWaitingListID>
+         <cal:iCreditCardType>""" + rentalTransaction.cardType.siteLinkValue + """</cal:iCreditCardType>
+         <cal:sCreditCardNumber>""" + rentalTransaction.ccNum + """</cal:sCreditCardNumber>
+         <cal:sCreditCardCVV>""" + (rentalTransaction.cvv2 ? rentalTransaction.cvv2 : '000') + """</cal:sCreditCardCVV>
+         <cal:dExpirationDate>""" + rentalTransaction.ccExpDate.format("yyyy-MM-dd") + """</cal:dExpirationDate>
+         <cal:sBillingName>""" + rentalTransaction.billingAddress.fullName() + """</cal:sBillingName>
+         <cal:sBillingAddress>""" + "${rentalTransaction.billingAddress.address1}${rentalTransaction.billingAddress.address2 ? ' ' + rentalTransaction.billingAddress.address2 : ''}" + """</cal:sBillingAddress>
+         <cal:sBillingZipCode>""" + rentalTransaction.billingAddress.zipcode + """</cal:sBillingZipCode>
+         <cal:bTestMode>true</cal:bTestMode>
+         <cal:iSource>10</cal:iSource>
+      </cal:ReservationFeeAddWithSource>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    return payload
+  }
+
+  def payReservation(RentalTransaction rentalTransaction) {
+
+    def payload = getReservationPaymentPayload(rentalTransaction)
+    
+    postAction(payload, 'ReservationFeeAddWithSource')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
@@ -1433,6 +1470,38 @@ TODO - evaluate whether we need this going forward
       // insert into bulletin board
       bulletinBoardInsert(siteLink.corpCode, rentalTransaction.site.sourceLoc, siteLink.userName,
               siteLink.password, subject, body)
+
+      if (site.rentalFee && site.rentalFee > 0) {
+        // add payment into SiteLink but in test mode so they do not run the card
+        def addPaymentResult = payReservation(rentalTransaction)
+
+        def payRecords = addPaymentResult.declareNamespace(
+                soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+                xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+                xsd: 'http://www.w3.org/2001/XMLSchema',
+                msdata: 'urn:schemas-microsoft-com:xml-msdata',
+                diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+        )
+        def paymentResult = -1
+        records.'soap:Body'.'*:ReservationFeeAddWithSourceResponse'.'*:ReservationFeeAddWithSourceResult'.'*:diffgram'.NewDataSet.'*:RT'.each {tab ->
+          paymentResult = tab.Ret_Code.text() as Integer
+        }
+        if (paymentResult != 1) {
+          def paymentBody = getReservationPaymentPayload(rentalTransaction)
+          try {
+            getEmailService().sendTextEmail(
+                    to: "notifications@storitz.com",
+                    from: "no-reply@storitz.com",
+                    subject: "SITELINK - failed reservation payment",
+                    body: paymentBody)
+
+          } catch (Exception e) {
+            log.error("${e}", e)
+          }
+
+        }
+      }
+      
     } else {
       def body = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
