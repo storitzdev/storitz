@@ -323,8 +323,10 @@
           <select id="sbSortSelect" name="sbSortSelect">
             <option value="0" selected="true">Distance (nearest)</option>
             <option value="1">Distance (farthest)</option>
-            <option value="2">Move In Cost (lowest)</option>
-            <option value="3">Move In Cost (highest)</option>
+            <g:if test="${session.style != 'monthly'}">
+              <option value="2">Move In Cost (lowest)</option>
+              <option value="3">Move In Cost (highest)</option>
+            </g:if>
             <option value="4">Monthly Rate(lowest)</option>
             <option value="5">Monthly Rate (highest)</option>
             <option value="6">Facility Name (A to Z)</option>
