@@ -122,29 +122,63 @@ class EDomicoController extends FeedController {
       render(status: 200, contentType: "application/json", text: "{ 'locId': ${loc?.id} }")
     }
 
-
-
-
-
     def delete = {
+        def edomicoInstance = EDomico.get(params.id)
+        if (edomicoInstance) {
+          try {
+            edomicoInstance.delete(flush: true)
+            flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'EDomico.label', default: 'com.storitz.EDomico'), params.id])}"
+            redirect(action: "list")
+          }
+          catch (org.springframework.dao.DataIntegrityViolationException e) {
+            flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'EDomico.label', default: 'com.storitz.EDomico'), params.id])}"
+            redirect(action: "show", id: params.id)
+          }
+        }
+        else {
+          flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'EDomico.label', default: 'com.storitz.EDomico'), params.id])}"
+          redirect(action: "list")
+        }
     }
 
     def refresh = {
+        def edomicoInstance = EDomico.get(params.id)
+        def stats = new storitz.SiteStats()
+        def writer = new PrintWriter(System.out)
+        EDomicoService eDomicoService = new EDomicoService(edomicoInstance.edomicoClientID,edomicoInstance.edomicoWebServicesKey)
+        eDomicoService.refreshSites(edomicoInstance,"DOM", stats, writer)
+        flash.message = "Feed " + params.id + ": "+ stats.createCount + " sites created. " + stats.updateCount + " sites updated. " + stats.unitCount + " units added."
+        render(view: "show", model: [edomicoInstance: edomicoInstance])
     }
 
     def updateInventory = {
+        def edomicoInstance = EDomico.get(params.id)
+        flash.message = "Update Inventory not implemented yet"
+        render(view: "show", model: [edomicoInstance: edomicoInstance])
     }
 
     def refreshPromos = {
+        def edomicoInstance = EDomico.get(params.id)
+        flash.message = "Refresh Promos not implemented yet"
+        render(view: "show", model: [edomicoInstance: edomicoInstance])
     }
 
     def refreshInsurance = {
+        def edomicoInstance = EDomico.get(params.id)
+        flash.message = "Refresh Insurance not implemented yet"
+        render(view: "show", model: [edomicoInstance: edomicoInstance])
     }
 
     def createContacts = {
+        def edomicoInstance = EDomico.get(params.id)
+        flash.message = "Create Contacts not implemented yet"
+        render(view: "show", model: [edomicoInstance: edomicoInstance])
     }
 
     def refreshPhones = {
+        def edomicoInstance = EDomico.get(params.id)
+        flash.message = "Refresh Phones not implemented yet"
+        render(view: "show", model: [edomicoInstance: edomicoInstance])
     }
 
     def show = {
@@ -173,7 +207,6 @@ class EDomicoController extends FeedController {
         else {
           render(view: "create", model: [edomicoInstance: edomicoInstance])
         }
-
     }
 
 }

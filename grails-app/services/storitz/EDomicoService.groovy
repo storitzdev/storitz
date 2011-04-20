@@ -5,6 +5,12 @@ import com.storitz.EDomico
 import com.storitz.StorageSite
 import com.edomico.www.*
 import java.io.PrintWriter
+import com.storitz.EDomicoLocation
+import storitz.constants.TruckType
+import storitz.constants.TransactionType
+import com.storitz.StorageUnit
+import storitz.constants.UnitType
+import storitz.constants.SearchType
 
 class EDomicoService extends BaseProviderService {
 
@@ -42,11 +48,179 @@ class EDomicoService extends BaseProviderService {
         return null  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    // Called by EDomicoController class when need feed is created
+    // Called by EDomicoController class when a feed is first created
     def loadSites(EDomico instance, String feedType, SiteStats stats, PrintWriter writer) {
-        def token = readToken()
-        def site = readSiteID(token,instance.address1,instance.city,instance.zipcode)
-        System.out.println("[Stub] SITE: ${site}")
+        // Get a list of the EDomicoLocation objects associated with this EDomico feed
+        List<EDomicoLocation> locations = instance.locations?.asList()
+
+        // Iterate through these locations, processing each StorageSite in turn
+        for (int i = 0; i < locations.size(); i++) {
+            EDomicoLocation location = locations.get(i)
+            StorageSite storageSite = getStorageSiteFromEDomicoLocation(location, stats)
+            // do some magic
+            storageSite.address     = location.address1
+            storageSite.city        = location.city
+            storageSite.state       = instance.state
+            storageSite.title       = location.siteName
+            storageSite.description = instance.operatorName
+            storageSite.zipcode     = location.zipcode
+            storageSite.sourceId    = location.siteID
+            storageSite.sourceLoc   = location.siteName
+            storageSite.feed        = instance
+
+            // now handle the associated units for this site
+            updateUnits(storageSite, stats, writer)
+
+            // and save
+            storageSite.save(flush: true)
+
+        }
+    }
+
+    def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+        EDomico feed = (EDomico)site.feed
+        EDomicoService service = new EDomicoService(feed.edomicoClientID,feed.edomicoWebServicesKey)
+        def token = service.readToken()
+        def siteID  = service.readSiteID(token,site.address,site.city,site.zipcode)
+        def sizes = service.readSizes(token,siteID)
+
+        for (sz in sizes) {
+            def sizeID = new Integer(sz.get("SizeID")).intValue()
+            def units = service.readUnits(token,siteID,sizeID)
+            def currentUpdateCount = stats.updateCount
+            StorageUnit storageUnit = getStorageUnitByNameAndNumber(site,sz.get("SiteID"),sz.get("SizeID"),stats)
+            storageUnit.unitTypeInfo = sz.get("SizeCodeInfo")
+            storageUnit.price = new Double(sz.get("SizeRentRate")).doubleValue()
+            storageUnit.pushRate = new Double(sz.get("SizeRentRate")).doubleValue()
+            storageUnit.displaySize = sz.get("SizeCodeInfo")
+            storageUnit.unitSizeInfo = sz.get("SizeCodeInfo")
+            def unitSize = getUnitSize(sz.get("SizeCodeInfo"))
+            if (!unitSize) {
+                writer.append("Cannot determine unitSize for " + sz.get("SizeCodeInfo") + ". Skipping")
+                continue
+            }
+            storageUnit.unitsize = unitSize
+            storageUnit.description = getStorageUnitDescription(sz.get("SizeCodeInfo"))
+            storageUnit.unitCount = units.size()
+            storageUnit.deposit = new Double(sz.get("SizeRentRateReservationDeposit")).doubleValue()
+
+            // Looks good to go. Wrap up and move on to the next.
+            stats.unitCount += 1
+            storageUnit.save()     // no need to flush since the site flush will handle that momentarily
+            site.addToUnits(storageUnit)
+            site.save(flush: true) // save here just in case we don't come in via 'loadSites'
+        }
+    }
+
+    def getStorageUnitDescription (String desc) {
+        // Matches:
+        // "3 X 4.5"                           : ""
+        // "3.5 X 4"                           : ""
+        // "3 X 4"                             : ""
+        // "4 X 4 Minor Obstruction"           : "Minor Obstruction"
+        // "4 X 6 Asymmetrical"                : "Asymmetrical"
+        // "4.5 X 7 x 8"                       : ""
+        // "5 x 10 Upstairs"                   : "Upstairs"
+        // "5 X 10 X 6 Minor Obstruction"      : "Minor Obstruction"
+
+        String regexp = "^[0123456789.xX ]*";
+        return desc.replaceAll(regexp,"");
+    }
+
+    def getUnitSize(String size) {
+        String [] toks = size.split(" ");
+        if (toks.length < 3) {
+            return null
+        }
+
+        Double width
+        Double length
+        String rest
+
+        try {
+            width    = new Double(toks[0]).doubleValue();
+            String x_ignore = toks[1];
+            length   = new Double(toks[2]).doubleValue();
+            rest     = "";
+        }  catch (NumberFormatException e) {
+            return null
+        }
+
+        for (int i = 3; i < toks.length; i++) {
+            rest += " " + toks[i];
+        }
+
+        UnitSizeService unitSizeService = new UnitSizeService()
+
+        return unitSizeService.getUnitSize(width,length,SearchType.STORAGE)
+    }
+
+    def getStorageUnitByNameAndNumber(StorageSite site, String name, String number, SiteStats stats) {
+        def currentUnits = site.units
+
+        // Find if one already exists
+        for (unit in currentUnits) {
+            if (unit.unitName == name && unit.unitNumber == number) {
+                return unit
+            }
+        }
+
+        // No luck? create a new one
+        StorageUnit storageUnit = new StorageUnit()
+        storageUnit.unitName = name
+        storageUnit.unitNumber = number
+        storageUnit.description = "Self Storage"
+        storageUnit.isAvailable = true
+        storageUnit.isSecure = false
+        storageUnit.isTempControlled = false
+        storageUnit.isAlarm = false
+        storageUnit.isPowered = false
+        storageUnit.isIrregular = false
+        storageUnit.unitType = UnitType.INTERIOR
+        return storageUnit
+    }
+
+    // Find a reference to the StorageSite mapped to this EDomicoLocation,
+    // or create a new reference, as appropriate
+    def getStorageSiteFromEDomicoLocation(EDomicoLocation location, SiteStats stats) {
+        if (!location.site) {
+            stats.createCount += 1
+            location.site = newEDomicoStorageSite()
+        }
+        else {
+            stats.updateCount += 1
+        }
+        return location.site
+    }
+
+
+    // called by the "Refresh Sites" button on the view page
+    def refreshSites(EDomico instance, String feedType, SiteStats stats, PrintWriter writer) {
+        loadSites(instance,feedType,stats,writer)
+    }
+
+    def newEDomicoStorageSite () {
+        StorageSite storageSite = new StorageSite()
+
+        // Basic Defaults
+        storageSite.boxesAvailable = false
+        storageSite.freeTruck = TruckType.NONE
+        storageSite.isGate = false
+        storageSite.isKeypad = false
+        storageSite.isCamera = false
+        storageSite.isUnitAlarmed = false
+        storageSite.lastUpdate = 0
+        storageSite.lat = 0
+        storageSite.lng = 0
+        storageSite.requiresInsurance = false
+        storageSite.extendedHours = false
+        storageSite.isManagerOnsite = false
+        storageSite.source = 'DOM'             // data source
+        storageSite.hasElevator = true
+        storageSite.transactionType = TransactionType.RENTAL
+        storageSite.lastChange = new Date()
+
+        return storageSite
     }
 
     /////////////////////////////////////////

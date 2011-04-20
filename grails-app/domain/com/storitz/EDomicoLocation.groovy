@@ -10,6 +10,7 @@ class EDomicoLocation {
         address1 (nullable: false)
         city (nullable: false)
         zipcode (nullable: false)
+        site (nullable: true)
     }
 
     String siteID
@@ -17,4 +18,5 @@ class EDomicoLocation {
     String address1
     String city
     String zipcode
+    StorageSite site
 }
