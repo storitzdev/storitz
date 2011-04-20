@@ -502,6 +502,35 @@ class SiteLinkService extends BaseProviderService {
     postAction(payload, 'BulletinBoardInsert')
   }
 
+  def doReservation(RentalTransaction rentalTransaction) {
+
+    def siteLink = (SiteLink) rentalTransaction.site.feed
+    def comment = "You have a new Storitz reservation on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")} for Unit ${rentalTransaction.feedUnitNumber}.  They are interested in Promo ${rentalTransaction.promoName}."
+
+
+    def payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://tempuri.org/CallCenterWs/CallCenterWs">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cal:ReservationNewWithSource_v2>
+         <cal:sCorpCode>""" + siteLink.corpCode + """</cal:sCorpCode>
+         <cal:sLocationCode>""" + rentalTransaction.site.sourceLoc + """</cal:sLocationCode>
+         <cal:sCorpUserName>""" + siteLink.userName + """</cal:sCorpUserName>
+         <cal:sCorpPassword>""" + siteLink.password + """</cal:sCorpPassword>
+         <cal:sTenantID>""" + rentalTransaction.tenantId + """</cal:sTenantID>
+         <cal:sUnitID>""" + rentalTransaction.feedUnitId + """</cal:sUnitID>
+         <cal:dNeeded>""" + rentalTransaction.moveInDate.format("yyyy-MM-dd") + """</cal:dNeeded>
+         <cal:sComment>""" + comment + """</cal:sComment>
+         <cal:iSource>5</cal:iSource>
+         <cal:sSource>Storitz</cal:sSource>
+         <cal:QTRentalTypeID>2</cal:QTRentalTypeID>
+         <cal:iInquiryType>2</cal:iInquiryType>
+      </cal:ReservationNewWithSource_v2>
+   </soapenv:Body>
+</soapenv:Envelope>"""
+
+    postAction(payload, 'ReservationNewWithSource_v2')
+  }
+
   private def postAction(payload, action) {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
@@ -1367,6 +1396,63 @@ TODO - evaluate whether we need this going forward
 
     // TODO - fix when Sitelink corrects issue
     return true
+  }
+
+  def reserve(RentalTransaction rentalTransaction) {
+      StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
+      StorageSite site = StorageSite.get(rentalTransaction.siteId)
+
+      rentalTransaction.feedUnitId = unit.unitNumber
+      rentalTransaction.feedUnitNumber = unit.unitName
+
+    def ret = doReservation(rentalTransaction)
+
+    println "ReservationWithSource_v2: ${ret}"
+    
+    def records = ret.declareNamespace(
+            soap: 'http://schemas.xmlsoap.org/soap/envelope/',
+            xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+            xsd: 'http://www.w3.org/2001/XMLSchema',
+            msdata: 'urn:schemas-microsoft-com:xml-msdata',
+            diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
+    )
+
+    def moveInResult = -1
+    records.'soap:Body'.'*:ReservationNewWithSource_v2Response'.'*:ReservationNewWithSource_v2Result'.'*:diffgram'.NewDataSet.'*:RT'.each {tab ->
+      moveInResult = tab.Ret_Code.text() as Integer
+    }
+    if (moveInResult > 3) {
+
+      rentalTransaction.idNumber = moveInResult
+      rentalTransaction.reservationId = moveInResult
+      rentalTransaction.save(flush: true)
+
+      def siteLink = (SiteLink) rentalTransaction.site.feed
+      def subject = "New Storitz Reservation: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
+      def body = "You have a new Storitz reservation on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")} for Unit ${rentalTransaction.feedUnitNumber}.  When the customer, ${rentalTransaction.contactPrimary.fullName()} arrives on their move-in date, just search for them in the tenant list to pull up their account info and complete the move-in process."
+      // insert into bulletin board
+      bulletinBoardInsert(siteLink.corpCode, rentalTransaction.site.sourceLoc, siteLink.userName,
+              siteLink.password, subject, body)
+    } else {
+      def body = getMoveInPayload(rentalTransaction)
+      moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
+      rentalTransaction.idNumber = moveInResult
+      rentalTransaction.save(flush: true)
+
+      try {
+        getEmailService().sendTextEmail(
+                to: "notifications@storitz.com",
+                from: "no-reply@storitz.com",
+                subject: "SITELINK - failed reservation",
+                body: body)
+
+      } catch (Exception e) {
+        log.error("${e}", e)
+      }
+    }
+
+    return true
+
   }
 
   def postMoveInCredit(RentalTransaction rentalTransaction) {
