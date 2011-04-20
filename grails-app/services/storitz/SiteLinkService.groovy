@@ -175,24 +175,9 @@ class SiteLinkService extends BaseProviderService {
        </soapenv:Body>
     </soapenv:Envelope>"""
 
-    // JM: I've noticed occasional http errors here
-    // Assuming these are simply intermittent network hiccups, try again until we succeed or until
-    // we reach our maximum number of allowed attempts
-    def attempts    = 0
-    def maxAttempts = 5
-    def success     = false
-    def ret         = null
+    println "MoveInCostRetrieve: ${payload}"
 
-      while ((!success) && (attempts < maxAttempts)) {
-          try {
-              ret = postAction(payload, 'MoveInCostRetrieve')
-              success = true
-          } catch (HttpHostConnectException e) {
-              println "Caught HttpHostConnectException exception! [Attempt ${attempts} of ${maxAttempts}]"
-              attempts++
-          }
-      }
-    return ret
+    postAction(payload, 'MoveInCostRetrieve')
   }
 
   def getPromos(corpCode, locationCode, userName, password) {
