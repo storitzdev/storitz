@@ -316,22 +316,22 @@ function setupForm() {
                 break;
             case '2':
                 resultTable.fnSort([
-                    [2, 'asc']
+                    [1, 'asc']
                 ]);
                 break;
             case '3':
                 resultTable.fnSort([
-                    [2, 'desc']
+                    [1, 'desc']
                 ]);
                 break;
             case '4':
                 resultTable.fnSort([
-                    [1, 'asc']
+                    [2, 'asc']
                 ]);
                 break;
             case '5':
                 resultTable.fnSort([
-                    [1, 'desc']
+                    [2, 'desc']
                 ]);
                 break;
             case '6':
