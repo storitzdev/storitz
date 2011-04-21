@@ -11,6 +11,14 @@ import storitz.constants.TransactionType
 import com.storitz.StorageUnit
 import storitz.constants.UnitType
 import storitz.constants.SearchType
+import com.storitz.SpecialOffer
+import storitz.constants.PromoType
+import com.storitz.Insurance
+import com.storitz.SiteUser
+import com.storitz.SpecialOfferRestriction
+import storitz.constants.SpecialOfferRestrictionType
+import com.storitz.RentalTransaction
+import storitz.constants.State
 
 class EDomicoService extends BaseProviderService {
 
@@ -54,30 +62,39 @@ class EDomicoService extends BaseProviderService {
         List<EDomicoLocation> locations = instance.locations?.asList()
 
         // Iterate through these locations, processing each StorageSite in turn
-        for (int i = 0; i < locations.size(); i++) {
+        for (int i = 0; i < locations?.size(); i++) {
             EDomicoLocation location = locations.get(i)
             StorageSite storageSite = getStorageSiteFromEDomicoLocation(location, stats)
             // do some magic
             storageSite.address     = location.address1
             storageSite.city        = location.city
-            storageSite.state       = instance.state
+            storageSite.state       = State.fromText(location.state)
             storageSite.title       = location.siteName
             storageSite.description = instance.operatorName
             storageSite.zipcode     = location.zipcode
             storageSite.sourceId    = location.siteID
             storageSite.sourceLoc   = location.siteName
             storageSite.feed        = instance
+            geoCodeSite(storageSite)
 
             // now handle the associated units for this site
-            updateUnits(storageSite, stats, writer)
+            loadUnits(storageSite, stats, writer)
 
             // and save
             storageSite.save(flush: true)
-
+            SiteUser.link(storageSite, instance.manager)
         }
     }
 
-    def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    def geoCodeSite(StorageSite storageSite)  {
+        def address = storageSite.address + ', ' + storageSite.city + ', ' + storageSite.state.display + ' ' + storageSite.zipcode
+        GeocodeService geocodeService = new GeocodeService()
+        def geoResult = geocodeService.geocode(address)
+        storageSite.lng = geoResult.results[0].geometry.location.lng
+        storageSite.lat = geoResult.results[0].geometry.location.lat
+    }
+
+    def loadUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
         EDomico feed = (EDomico)site.feed
         EDomicoService service = new EDomicoService(feed.edomicoClientID,feed.edomicoWebServicesKey)
         def token = service.readToken()
@@ -88,10 +105,11 @@ class EDomicoService extends BaseProviderService {
             def sizeID = new Integer(sz.get("SizeID")).intValue()
             def units = service.readUnits(token,siteID,sizeID)
             def currentUpdateCount = stats.updateCount
+            def price = new Double(sz.get("SizeRentRate")).doubleValue()
             StorageUnit storageUnit = getStorageUnitByNameAndNumber(site,sz.get("SiteID"),sz.get("SizeID"),stats)
-            storageUnit.unitTypeInfo = sz.get("SizeCodeInfo")
-            storageUnit.price = new Double(sz.get("SizeRentRate")).doubleValue()
-            storageUnit.pushRate = new Double(sz.get("SizeRentRate")).doubleValue()
+            storageUnit.unitTypeInfo = sz.get("SiteID") + "-" + sz.get("SizeID") + ":" + sz.get("SizeCodeInfo")
+            storageUnit.price = price
+            storageUnit.pushRate = price
             storageUnit.displaySize = sz.get("SizeCodeInfo")
             storageUnit.unitSizeInfo = sz.get("SizeCodeInfo")
             def unitSize = getUnitSize(sz.get("SizeCodeInfo"))
@@ -104,12 +122,122 @@ class EDomicoService extends BaseProviderService {
             storageUnit.unitCount = units.size()
             storageUnit.deposit = new Double(sz.get("SizeRentRateReservationDeposit")).doubleValue()
 
+            loadPromos(site,storageUnit,sz,writer)
+
             // Looks good to go. Wrap up and move on to the next.
             stats.unitCount += 1
             storageUnit.save()     // no need to flush since the site flush will handle that momentarily
             site.addToUnits(storageUnit)
             site.save(flush: true) // save here just in case we don't come in via 'loadSites'
         }
+    }
+
+    def loadPromos(EDomico eDomico, StorageSite storageSite, PrintWriter printWriter) {
+
+    }
+
+    def loadPromos(StorageSite storageSite, StorageUnit storageUnit, EDomicoNode siteSize, PrintWriter writer) {
+
+        // StorageSite: hasMany StorageUnit, SpecialOffer (hasMany SpecialOfferRestrictions)
+        // DiscountName: $29 Move In Special
+        // DiscountValue: 29
+        String discountName = siteSize.get("DiscountName")
+        BigDecimal discountValue = siteSize.get("DiscountValue") as BigDecimal
+
+        if (discountValue < 0.001) {
+            deleteSpecialOfferAndSpecialOfferRestrictionByStorageSiteAndUnitIfAny(storageSite,storageUnit)
+            return
+        }
+
+        SpecialOffer specialOffer = getSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
+        specialOffer.description = discountName
+        specialOffer.promoName = discountName
+
+        boolean isPercent = new Boolean(siteSize.get("IsPercent")).booleanValue()
+        if (isPercent)  {
+            specialOffer.promoType = PromoType.PERCENT_OFF
+        }
+        else {
+            specialOffer.promoType = PromoType.FIXED_RATE
+        }
+
+        specialOffer.promoQty =  discountValue
+        specialOffer.expireMonth = 1
+        specialOffer.featured = true
+        specialOffer.active = true
+        specialOffer.inMonth = 1
+        specialOffer.prepayMonths = 0
+
+        SpecialOfferRestriction specialOfferRestriction = getSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
+        specialOfferRestriction.restrictionInfo = storageUnit.unitTypeInfo
+        specialOfferRestriction.restrictive = false
+        specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+        specialOfferRestriction.save()
+
+        specialOffer.save()
+
+        storageSite.addToSpecialOffers(specialOffer)
+        storageSite.save(flush: true)
+
+    }
+
+    def deleteSpecialOfferAndSpecialOfferRestrictionByStorageSiteAndUnitIfAny(StorageSite storageSite, StorageUnit storageUnit) {
+        SpecialOffer specialOffer = null
+        SpecialOfferRestriction specialOfferRestriction = null
+
+        ////////////////////////////////////////////////////////////////
+        try {
+           specialOffer = getSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
+           storageSite.removeFromSpecialOffers(specialOffer)
+           specialOffer.delete()
+        }
+        catch (Throwable t) {
+           t.printStackTrace()
+        }
+
+        ////////////////////////////////////////////////////////////////
+        try {
+            specialOfferRestriction = getSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
+            specialOffer.removeFromRestrictions(specialOfferRestriction)
+            specialOfferRestriction.delete()
+        }
+        catch (Throwable t) {
+           t.printStackTrace()
+        }
+    }
+
+    def getSpecialOfferRestrictionByStorageUnitSpecialOffer(StorageUnit storageUnit,SpecialOffer specialOffer) {
+        List<SpecialOfferRestriction> restrictions = specialOffer.restrictions?.asList()
+
+        for (SpecialOfferRestriction restriction : restrictions) {
+            if (restriction.restrictionInfo == storageUnit.unitTypeInfo) {
+                return restriction
+            }
+        }
+
+        SpecialOfferRestriction specialOfferRestriction = new SpecialOfferRestriction()
+        specialOffer.addToRestrictions(specialOfferRestriction)
+        return specialOfferRestriction
+    }
+
+    def getSpecialOfferByStorageSiteAndStorageUnit(StorageSite storageSite,StorageUnit storageUnit) {
+       String code = "${storageUnit.unitName}-${storageUnit.unitNumber}"
+       SpecialOffer specialOffer = null
+
+        // See if we already have the offer listed
+        List<SpecialOffer> specialOffers = storageSite.specialOffers?.asList()
+        for (SpecialOffer offer : specialOffers) {
+            if (offer.code == code) {
+                return offer
+            }
+        }
+
+        // If not, then create one
+        specialOffer = new SpecialOffer()
+        specialOffer.code = code
+        storageSite.addToSpecialOffers(specialOffer)
+
+        return specialOffer
     }
 
     def getStorageUnitDescription (String desc) {
@@ -152,6 +280,7 @@ class EDomicoService extends BaseProviderService {
 
         UnitSizeService unitSizeService = new UnitSizeService()
 
+        println "getUnitSize: width=${width}, length=${length}"
         return unitSizeService.getUnitSize(width,length,SearchType.STORAGE)
     }
 
@@ -218,10 +347,35 @@ class EDomicoService extends BaseProviderService {
         storageSite.source = 'DOM'             // data source
         storageSite.hasElevator = true
         storageSite.transactionType = TransactionType.RENTAL
+        storageSite.taxRateMerchandise = 0
+        storageSite.taxRateInsurance = 0
+        storageSite.taxRateRental = 0
         storageSite.lastChange = new Date()
 
         return storageSite
     }
+
+    // TODO
+    def updateSite(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
+
+    }
+    // TODO
+    def updateUnits(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
+
+    }
+    // TODO
+    def addSitePhone(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
+
+    }
+    // TODO
+    def checkRented(RentalTransaction trans) {
+
+    }
+    // TODO
+    def reserve(RentalTransaction trans) {
+
+    }
+
 
     /////////////////////////////////////////
     // Encapsulated eDomico Web Services ////

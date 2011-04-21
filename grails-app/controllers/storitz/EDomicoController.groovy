@@ -58,6 +58,7 @@ class EDomicoController extends FeedController {
               loc.siteName = params['newSiteName:_' + idx]
               loc.address1 = params['newAddress1:_' + idx]
               loc.city     = params['newCity:_' + idx]
+              loc.state    = params['newState:_' + idx]
               loc.zipcode  = params['newZipcode:_' + idx]
               loc.edomico  = edomicoInstance
               loc.save(flush: true)
@@ -69,6 +70,7 @@ class EDomicoController extends FeedController {
             def siteNameString = "sitename:_" + loc.id
             def address1String = "address1:_" + loc.id
             def cityString = "city:_" + loc.id
+            def stateString = "state:_" + loc.id
             def zipcodeString = "zipcode:_" + loc.id
 
             def changed = false
@@ -86,6 +88,10 @@ class EDomicoController extends FeedController {
             }
             if (params[cityString]) {
               loc.city = params[cityString]
+              changed = true
+            }
+            if (params[stateString]) {
+              loc.state = params[stateString]
               changed = true
             }
             if (params[zipcodeString]) {

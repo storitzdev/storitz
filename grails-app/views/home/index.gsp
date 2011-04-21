@@ -24,7 +24,7 @@
         d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'+'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+'" type="text/javascript" charset="utf-8"></sc'+'ript>')
       })();
     </script>
-    <script>utmx("url",'A/B');</script>
+    <script>//utmx("url",'A/B');</script>
     <!-- End of Google Website Optimizer Control Script -->
   </g:if>
 

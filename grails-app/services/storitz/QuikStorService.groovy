@@ -27,7 +27,7 @@ class QuikStorService extends BaseProviderService {
   }
 
   GeocodeService getGeocodeService() {
-      if (!geocodeServicee) {
+      if (!geocodeService) {
           println ("geocodeService is null: instantiating")
           geocodeService = new GeocodeService()
       }

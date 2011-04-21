@@ -93,6 +93,12 @@ class FeedService {
         getCShift4Service().updateSite(storageSiteInstance, stats, writer)
         break
 
+      case "DOM":
+        EDomico eDomico = (EDomico)site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        eDomicoService.updateSite(storageSiteInstance, stats, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -126,6 +132,11 @@ class FeedService {
         getCShift4Service().updateUnits(storageSiteInstance, stats, writer)
         break
 
+      case "DOM":
+        EDomico eDomico = (EDomico)site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        eDomicoService.updateUnits(storageSiteInstance, stats, writer)
+        break
 
       default:
         throw new Exception("Unknown service for site update")
@@ -166,6 +177,12 @@ class FeedService {
         getCShift4Service().loadPromos(centerShift, storageSiteInstance, writer)
         break
 
+      case "DOM":
+        EDomico eDomico = (EDomico)storageSiteInstance.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        eDomicoService.loadPromos(eDomico, storageSiteInstance, writer)
+        break
+
       default:
         throw new Exception("Unknown service for site update")
     }
@@ -204,6 +221,12 @@ class FeedService {
         def centerShift = (CenterShift) storageSiteInstance.feed
         getCShift4Service().addSitePhone(centerShift, storageSiteInstance, writer)
         break
+
+      case "DOM":
+        EDomico eDomico = (EDomico)storageSiteInstance.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        eDomicoService.addSitePhone(eDomico, storageSiteInstance, writer)
+        break;
 
       default:
         throw new Exception("Unknown service for site update")

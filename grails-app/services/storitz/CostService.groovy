@@ -32,6 +32,11 @@ class CostService {
       case "USI":
         return usiService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
 
+      case "DOM":
+        EDomico eDomico = (EDomico)site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.calculateMoveInCost(site, unit, promo, ins, moveInDate, extended)
+
       default:
         throw new Exception("Unknown service for move in cost calculation")
     }
@@ -58,6 +63,11 @@ class CostService {
 
       case "CS4":
         return CShift4Service.calculateTotals(site, unit, promo, ins, moveInDate)
+
+      case "DOM":
+        EDomico eDomico = (EDomico)site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.calculateTotals(site,unit,promo,ins,moveInDate)
 
       default:
         throw new Exception("Unknown service totals calculation")
@@ -86,6 +96,12 @@ class CostService {
 
       case "CS4":
         return CShift4Service.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
+
+      case "DOM":
+        EDomico eDomico = (EDomico)site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.calculatePaidThruDate(site, promo, moveInDate, allowExtension)
+
 
       default:
         throw new Exception("Unknown service for paid thru date")

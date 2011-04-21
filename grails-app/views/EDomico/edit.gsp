@@ -54,11 +54,12 @@
         if (found) return false;
         var newRow = $("<div>")
                 .append($("<div>", {'class':'newLocation', id:'newLoc:_' + (newCount + 1)})
-                .append($("<input>", {type:'text', name:'newSiteID:_' + (newCount + 1)}).css({width:'150px', 'margin-right':'20px'}))
+                .append($("<input>", {type:'text', name:'newSiteID:_' + (newCount + 1)}).css({width:'50px', 'margin-right':'20px'}))
                 .append($("<input>", {type:'text', name:'newSiteName:_' + (newCount + 1)}).css({width:'150px', 'margin-right':'20px'}))
                 .append($("<input>", {type:'text', name:'newAddress1:_' + (newCount + 1)}).css({width:'150px', 'margin-right':'20px'}))
                 .append($("<input>", {type:'text', name:'newCity:_' + (newCount + 1)}).css({width:'150px', 'margin-right':'20px'}))
-                .append($("<input>", {type:'text', name:'newZipcode:_' + (newCount + 1)}).css({width:'150px', 'margin-right':'20px'}))
+                .append($("<input>", {type:'text', name:'newState:_' + (newCount + 1)}).css({width:'50px', 'margin-right':'20px'}))
+                .append($("<input>", {type:'text', name:'newZipcode:_' + (newCount + 1)}).css({width:'50px', 'margin-right':'20px'}))
                 .append($("<a>", {href:'#', 'class':'removeLocation red'}).text('remove'))
                 );
         $("div#locationList").append(newRow);
@@ -108,6 +109,13 @@
         <div class="formInstructions">
           This should be a user created with ROLE_MANAGER privileges.  This user will have the rights to assign other
           users on this feed.
+        </div>
+
+        <div class="checkout_fields">
+          <div style="width:300px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'manager', 'errors')}">
+             <g:select name="manager.id" style="width:280px;" from="${com.storitz.UserRole.getUsersByRoleName('ROLE_MANAGER')}" optionKey="id" optionValue="username" value="${edomicoInstance?.manager?.id}" noSelection="['null': '']"/>
+          </div>
+          <div style="clear:both;"></div>
         </div>
 
 
@@ -207,6 +215,9 @@
           <div style="width:300px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'city', 'errors')}">
             <g:textField id="city" name="city" style="width: 280px;" value="${edomicoInstance?.city}"/>
           </div>
+          <div style="width:300px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'state', 'errors')}">
+            <g:textField id="state" name="state" style="width: 280px;" value="${edomicoInstance?.state}"/>
+          </div>
            <div style="width:120px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'zipcode', 'errors')}">
             <g:textField id="zipcode" name="zipcode" style="width: 100px;" value="${edomicoInstance?.zipcode}"/>
           </div>
@@ -218,6 +229,9 @@
           <div class="checkout_name" style="width:300px;">
             <label for="city">City</label>
           </div>
+            <div class="checkout_name" style="width:300px;">
+              <label for="state">State</label>
+            </div>
           <div class="checkout_name" style="width:120px;">
             <label for="zipcode">Zip Code</label>
           </div>
@@ -283,21 +297,23 @@
             Add/Edit Locations
           </div>
           <div style="margin-top:10px;">
-            <div style="font-weight:bold; width: 150px;margin-right: 20px;" class="left">Site ID</div>
+            <div style="font-weight:bold; width: 50px;margin-right: 20px;" class="left">Site ID</div>
             <div style="font-weight:bold; width: 150px;margin-right: 20px;" class="left">Site Name</div>
             <div style="font-weight:bold; width: 150px;margin-right: 20px;" class="left">Address1</div>
             <div style="font-weight:bold; width: 150px;margin-right: 20px;" class="left">City</div>
-            <div style="font-weight:bold; width: 150px;margin-right: 20px;" class="left">Zip</div>
+            <div style="font-weight:bold; width: 50px;margin-right: 20px;" class="left">State</div>
+            <div style="font-weight:bold; width: 50px;margin-right: 20px;" class="left">Zip</div>
             <div style="clear:both;height: 10px;"></div>
           </div>
           <div id="locationList">
             <g:each in="${edomicoInstance.locations}" status="i" var="loc">
               <div id="loc:_${loc.id}" class="location">
-                <g:textField name="siteid:_${loc.id}" value="${loc.siteID}" style="width:150; margin-right:20px;"/>
-                <g:textField name="sitename:_${loc.id}" value="${loc.siteName}" style="width:150; margin-right:20px;"/>
-                <g:textField name="address1:_${loc.id}" value="${loc.address1}" style="width:150; margin-right:20px;"/>
-                <g:textField name="city:_${loc.id}" value="${loc.city}" style="width:150; margin-right:20px;"/>
-                <g:textField name="zipcode:_${loc.id}" value="${loc.zipcode}" style="width:150; margin-right:20px;"/>
+                <g:textField name="siteid:_${loc.id}" value="${loc.siteID}" style="width:50px; margin-right:20px;"/>
+                <g:textField name="sitename:_${loc.id}" value="${loc.siteName}" style="width:150px; margin-right:20px;"/>
+                <g:textField name="address1:_${loc.id}" value="${loc.address1}" style="width:150px; margin-right:20px;"/>
+                <g:textField name="city:_${loc.id}" value="${loc.city}" style="width:150px; margin-right:20px;"/>
+                <g:textField name="state:_${loc.id}" value="${loc.state}" style="width:50px; margin-right:20px;"/>
+                <g:textField name="zipcode:_${loc.id}" value="${loc.zipcode}" style="width:50px; margin-right:20px;"/>
                 <a href="#" class="removeLocation red">remove</a>
               </div>
             </g:each>

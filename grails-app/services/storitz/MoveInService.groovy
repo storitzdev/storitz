@@ -1,6 +1,7 @@
 package storitz
 
 import com.storitz.RentalTransaction
+import com.storitz.EDomico
 
 class MoveInService {
 
@@ -33,6 +34,11 @@ class MoveInService {
       case "USI":
         return usiService.checkRented(trans)
 
+      case "DOM":
+        EDomico eDomico = (EDomico)trans.site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.checkRented(trans)
+
       default:
         throw new Exception("Unknown service for move in")
     }
@@ -57,6 +63,11 @@ class MoveInService {
 
       case "USI":
         return usiService.moveInDetail(trans)
+
+      case "DOM":
+        EDomico eDomico = (EDomico)trans.site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.moveInDetail(trans)
 
       default:
         throw new Exception("Unknown service for move in detail")
@@ -89,6 +100,11 @@ class MoveInService {
         usiService.createTenant(trans)
         return usiService.reserve(trans)
 
+      case "DOM":
+        EDomico eDomico = (EDomico)trans.site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.reserve(trans)
+
       default:
         throw new Exception("Unknown service for move in")
     }
@@ -119,6 +135,11 @@ class MoveInService {
       case "USI":
         usiService.createTenant(trans)
         return usiService.reserve(trans)
+
+      case "DOM":
+        EDomico eDomico = (EDomico)trans.site.feed
+        EDomicoService eDomicoService = new EDomicoService(eDomico.edomicoClientID,eDomico.edomicoWebServicesKey)
+        return eDomicoService.reserve(trans)
 
       default:
         throw new Exception("Unknown service for move in")

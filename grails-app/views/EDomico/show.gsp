@@ -78,6 +78,14 @@
 
           </tr>
 
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="storageSite.state.label" default="State"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: edomicoInstance, field: "state")}</td>
+
+          </tr>
+
+
          <tr class="prop">
             <td valign="top" class="name"><g:message code="storageSite.zipcode.label" default="Zipcode"/></td>
 
@@ -127,6 +135,7 @@
                   <th>Site Name</th>
                   <th>Address1</th>
                   <th>City</th>
+                  <th>State</th>
                   <th>Zip</th>
                </tr>
                 </thead>
@@ -137,6 +146,7 @@
                     <td>${s.siteName}</td>
                     <td>${s.address1}</td>
                     <td>${s.city}</td>
+                    <td>${s.state}</td>
                     <td>${s.zipcode}</td>
                   </tr>
                 </g:each>
