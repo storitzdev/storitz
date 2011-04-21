@@ -65,7 +65,9 @@ class ReportsController {
         feedList = Feed.findAllByManager(user.manager)
       }
     }
-    return feedList
+    return feedList.sort { f1, f2 ->
+        f1.operatorName.compareToIgnoreCase(f2.operatorName)
+    }
   }
 
   GregorianCalendar startDate = new GregorianCalendar()
