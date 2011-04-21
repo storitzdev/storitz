@@ -129,6 +129,7 @@ FCKConfig.ToolbarSets["StoritzPress"] = [
     ['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
     ['TextColor','BGColor'],
     '/',
+    ['Image','Flash','Table','Rule','Smiley','SpecialChar','PageBreak'],
 	['Style','FontFormat','FontName','FontSize'],
     ['Link','Unlink','Anchor']
 ] ;
