@@ -18,6 +18,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.storitz.RentalTransaction;
 import com.storitz.Contact;
+import storitz.constants.CreditCardType;
 
 import java.io.*;
 import java.util.*;
@@ -323,16 +324,16 @@ public class ExrsWebFormProcessor {
     }
 
     private String resolveCCTyp(String ccType) {
-        if (ccType.equalsIgnoreCase("visa")) {
+        if (ccType.equalsIgnoreCase(CreditCardType.VISA.toString())) {
             return "VISA";
         }
-        if (ccType.equalsIgnoreCase("master card")) {
+        if (ccType.equalsIgnoreCase(CreditCardType.MASTERCARD.toString())) {
             return "MasterCard";
         }
-        if (ccType.equalsIgnoreCase("american express")) {
+        if (ccType.equalsIgnoreCase(CreditCardType.AMERICAN_EXPRESS.toString())) {
             return "AmEx";
         }
-        if (ccType.equalsIgnoreCase("discover")) {
+        if (ccType.equalsIgnoreCase(CreditCardType.DISCOVER.toString())) {
             return "Discover";
         }
 
