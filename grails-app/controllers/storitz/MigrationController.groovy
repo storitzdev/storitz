@@ -90,6 +90,7 @@ class MigrationController {
         feed.zipcode = resp.feed.zipcode
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
+        feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
 
       } else if (resp.feed.feedType == 'CENTERSHIFT') {
         feed = new CenterShift()
@@ -117,6 +118,7 @@ class MigrationController {
         feed.zipcode = resp.feed.zipcode
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
+        feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
         // TODO - cycle through and build the QuikStorLocations
       }
       CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)

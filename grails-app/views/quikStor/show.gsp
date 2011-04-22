@@ -94,6 +94,15 @@
 
           </tr>
 
+
+          <tr class="prop">
+            <td valign="top" class="name"><g:message code="siteLink.reservationMoveInDescription" default="Reservation Move-In Description"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: quikStorInstance, field: "reservationMoveInDescription")}</td>
+
+          </tr>
+
+
           <tr class="prop">
             <td valign="top" class="name"><g:message code="siteLink.transactionBoxLink" default="Transaction Box Link"/></td>
 

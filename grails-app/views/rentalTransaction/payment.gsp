@@ -127,18 +127,23 @@
                 <div class="right">
                   <g:if test="${site.transactionType == TransactionType.RESERVATION}">
                     <div class="left" style="margin-right:25px;">
-                      <p>Reservation Details</p>
-                      <ul>
-                        <li>Hold your unit until Move-In date</li>
-                        <li>Take Advantage of Special Offer</li>
-                        <li>Get this Rent rate when you Move-In</li>
-                        <g:if test="${site.rentalFee}">
-                          <li>Refundable until Move-In date</li>
+                        <g:if test="${site.feed.reservationMoveInDescription}">
+                             ${site.feed.reservationMoveInDescription}
                         </g:if>
-                      </ul>
-                      <g:if test="${site.feed.transactionBoxLink}">
-                        <span id="transactionBoxLink" class="transactionBoxLink textCenter">${site.feed.transactionBoxLink}</span>
-                      </g:if>
+                        <g:else>
+                          <p>Reservation Details</p>
+                          <ul>
+                              <li>Hold your unit until Move-In date</li>
+                              <li>Take Advantage of Special Offer</li>
+                              <li>Get this Rent rate when you Move-In</li>
+                              <g:if test="${site.rentalFee}">
+                                  <li>Refundable until Move-In date</li>
+                              </g:if>
+                          </ul>
+                       </g:else>
+                       <g:if test="${site.feed.transactionBoxLink}">
+                          <span id="transactionBoxLink" class="transactionBoxLink textCenter">${site.feed.transactionBoxLink}</span>
+                       </g:if>
                     </div>
                   </g:if>
                   <div id="costDetails" class="right">

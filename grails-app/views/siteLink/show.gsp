@@ -109,6 +109,14 @@
           </tr>
 
           <tr class="prop">
+            <td valign="top" class="name"><g:message code="siteLink.reservationMoveInDescription" default="Reservation Move-In Description"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "reservationMoveInDescription")}</td>
+
+          </tr>
+
+
+          <tr class="prop">
             <td valign="top" class="name"><g:message code="siteLink.transactionBoxLink" default="Transaction Box Link"/></td>
 
             <td valign="top" class="value">${fieldValue(bean: siteLinkInstance, field: "transactionBoxLink")}</td>

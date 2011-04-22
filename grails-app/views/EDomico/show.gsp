@@ -100,6 +100,14 @@
 
           </tr>
 
+           <tr class="prop">
+             <td valign="top" class="name"><g:message code="edomico.reservationMoveInDescription" default="Reservation Move-In Description"/></td>
+
+             <td valign="top" class="value">${fieldValue(bean: edomicoInstance, field: "reservationMoveInDescription")}&nbsp;</td>
+
+           </tr>
+
+
          <tr class="prop">
             <td valign="top" class="name"><g:message code="edomico.transactionBoxLink" default="Transaction Box Link"/></td>
 

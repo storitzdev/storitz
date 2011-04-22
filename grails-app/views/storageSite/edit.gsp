@@ -1149,8 +1149,25 @@
               </div>
               <div style="clear:both;height: 15px;"></div>
             </div>
-
-            <div class="checkout_section_header">
+              <div class="checkout_fields">
+                <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'prorateStart', 'errors')}">
+                  <g:textField name="prorateStart" style="width:190px;" value="${storageSiteInstance?.prorateStart}"/>&nbsp;Prorate Start Day
+                </div>
+                <div style="clear:both;height: 15px;"></div>
+              </div>
+              <div class="checkout_fields">
+                <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'prorateCutoff', 'errors')}">
+                  <g:textField name="prorateCutoff" style="width:190px;" value="${storageSiteInstance?.prorateCutoff}"/>&nbsp;Prorate Cutoff Day
+                </div>
+                <div style="clear:both;height: 15px;"></div>
+              </div>
+              <div class="checkout_fields">
+                <div style="width:400px;" class="checkout_value ${hasErrors(bean: storageSiteInstance, field: 'prorateSecondMonth', 'errors')}">
+                  <g:checkBox name="prorateSecondMonth" value="${storageSiteInstance?.prorateSecondMonth}"/>&nbsp;Prorate Second Month
+                </div>
+                <div style="clear:both;height: 15px;"></div>
+              </div>
+           <div class="checkout_section_header">
               Rental/Lease Agreement
             </div>
             <div class="formInstructions">

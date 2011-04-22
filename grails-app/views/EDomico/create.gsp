@@ -173,6 +173,27 @@
           <div style="clear:both;"></div>
         </div>
 
+         <div class="checkout_fields">
+            <div style="width:300px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'reservationMoveInDescription', 'errors')}">
+              <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>
+              <fckeditor:editor
+                      name="reservationMoveInDescription"
+                      width="650"
+                      height="300"
+                      toolbar="Storitz">
+                ${edomicoInstance?.reservationMoveInDescription}
+              </fckeditor:editor>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+            <div class="checkout_name" stype="width:300px">
+              <label for="reservationMoveInDescription">Reservation Move-In Description</label>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+
         <div class="checkout_fields">
           <div style="width:300px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'transactionBoxLink', 'errors')}">
             <g:textField id="transactionBoxLink" name="transactionBoxLink" style="width: 280px;" value="${edomicoInstance?.transactionBoxLink}"/>

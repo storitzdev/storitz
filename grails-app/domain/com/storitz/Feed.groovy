@@ -17,6 +17,7 @@ class Feed {
     zipcode(nullable: true)
     transactionBoxLink(size: 1..255, nullable: true)
     transactionBoxBody(size: 1..2000, nullable: true)
+    reservationMoveInDescription(size: 1..2000, nullable: true)
     dateCreated(nullable:true)
     lastUpdated(nullable:true)
   }
@@ -31,6 +32,7 @@ class Feed {
   String zipcode
   String transactionBoxLink
   String transactionBoxBody
+  String reservationMoveInDescription
   Date dateCreated
   Date lastUpdated
 

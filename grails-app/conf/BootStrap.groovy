@@ -171,6 +171,7 @@ class BootStrap {
       returnArray['sites'] = it.sites
       returnArray['transactionBoxLink'] = it.transactionBoxLink
       returnArray['transactionBoxBody'] = it.transactionBoxBody
+      returnArray['reservationMoveInDescription'] = it.reservationMoveInDescription
 
       return returnArray
 
@@ -196,6 +197,7 @@ class BootStrap {
       returnArray['sites'] = it.sites
       returnArray['transactionBoxLink'] = it.transactionBoxLink
       returnArray['transactionBoxBody'] = it.transactionBoxBody
+      returnArray['reservationMoveInDescription'] = it.reservationMoveInDescription
 
       return returnArray
 
@@ -218,6 +220,7 @@ class BootStrap {
       returnArray['locations'] = it.locations
       returnArray['transactionBoxLink'] = it.transactionBoxLink
       returnArray['transactionBoxBody'] = it.transactionBoxBody
+      returnArray['reservationMoveInDescription'] = it.reservationMoveInDescription
 
       return returnArray
 

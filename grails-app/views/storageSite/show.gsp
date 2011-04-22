@@ -576,6 +576,34 @@
                 <span>${storageSiteInstance.allowPushPrice ? 'Allow' : 'Disallow'}</span>
               </td>
             </tr>
+             <tr class="prop">
+                <td valign="top" class="name"><g:message code="storageSite.allowPushPrice.label" default="Allow Prorate"/></td>
+
+                <td valign="top" style="text-align: left;" class="value">
+                  <span>${storageSiteInstance.useProrating ? 'Allow' : 'Disallow'}</span>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name"><g:message code="storageSite.allowPushPrice.label" default="Prorate Start"/></td>
+
+                <td valign="top" style="text-align: left;" class="value">
+                  <span>${storageSiteInstance.prorateStart}</span>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name"><g:message code="storageSite.allowPushPrice.label" default="Prorate Cutoff"/></td>
+
+                <td valign="top" style="text-align: left;" class="value">
+                  <span>${storageSiteInstance.prorateCutoff}</span>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name"><g:message code="storageSite.allowPushPrice.label" default="Allow Prorate Second Month"/></td>
+
+                <td valign="top" style="text-align: left;" class="value">
+                  <span>${storageSiteInstance.prorateSecondMonth ? 'Allow' : 'Disallow'}</span>
+                </td>
+              </tr>
             <tr class="prop">
               <td valign="top" class="name"><g:message code="storageSite.maxReserveDays.label" default="Maximum Days in Future to Rent/Reserve"/></td>
 

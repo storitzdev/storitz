@@ -119,6 +119,15 @@
 
 
           <tr class="prop">
+            <td valign="top" class="name"><g:message code="cshift.reservationMoveInDescription" default="Move-In Special Description"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "reservationMoveInDescription")}</td>
+
+          </tr>
+
+
+
+          <tr class="prop">
             <td valign="top" class="name"><g:message code="cshift.transactionBoxLink" default="Transaction Box Link"/></td>
 
             <td valign="top" class="value">${fieldValue(bean: cshiftInstance, field: "transactionBoxLink")}</td>
