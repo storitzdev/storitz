@@ -1189,7 +1189,9 @@ class CShiftService extends BaseProviderService {
     def found = false
     for (resData in records.'soap:Body'.'*:GetReservationUnitDataResponse'.'*:GetReservationUnitDataResult'.'*:ReservationUnitData'.'*:UnitData') {
       rentalTransaction.reservationPeriod = resData.Reservation_Days.text() as Integer
-      rentalTransaction.reservationCost = resData.Reservation_Cost.text() as BigDecimal
+      // use the site rentalFee field
+      //rentalTransaction.reservationCost = resData.Reservation_Cost.text() as BigDecimal
+      rentalTransaction.reservationCost =  rentalTransaction.site.rentalFee
       found = true
     }
     if (!found) {
