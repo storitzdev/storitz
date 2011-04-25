@@ -132,20 +132,59 @@ public class ExrsWebFormProcessor {
     }
 
     private String verifyConfirmationNumber(RentalTransaction trans, HtmlPage page4) {
-        // HTML input comes in looking something like this:
-        //	<div class="sub_title" style="border:0; padding:0px 12px 0px;">Confirmation Number: <span style="color:#fff;font-size:12px;">5784404</span></div>
-
-        // The asText() method will strip out the HTML tags, giving us something like this:
-        //	Confirmation Number: 5784404
-
         String htmlText = page4.asText().toString();
 
-        Pattern p = Pattern.compile("^.*Confirmation Number: *([0-9]+).*$",Pattern.DOTALL);
-        Matcher m = p.matcher(htmlText);
+        /* Match the confirmation message
+         * HTML input comes in looking something like this:
+            Your credit card has been charged
+                      <strong>
+                        $10
+                      </strong>
+                      <br/>
+                      <br style="line-height:50%;"/>
 
-        if (m.matches() && m.groupCount() > 0) {
-            return m.group(1);
+            Your Reservation Number is
+                      <strong>
+                        5800776
+                      </strong>
+                      <br/>
+                      <br style="line-height:50%;"/>
+
+            A confirmation email has been sent to
+         */
+        Pattern p0 = Pattern.compile("^.*Your Reservation Number is.*$",Pattern.DOTALL);
+        Matcher m0 = p0.matcher(htmlText);
+
+
+        /* Match the confirmation number
+         * HTML input comes in looking something like this:
+            s.events="event7,event12,event23,purchase"
+            s.prop5="7x10"
+            s.prop6="NDN-Non-Climate Down Normal"
+            s.prop7="CBB - First Month Free"
+            s.prop15="0"
+            s.prop17="Personal"
+            s.eVar1="California"
+            s.state="California"
+            s.products="1122;7x10|NDN-Non-Climate Down Normal|CBB - First Month Free|91.00|107.00|1122;1;91.00;event23=91.00"
+            s.purchaseID="5800776"
+            s.eVar7="07X10"
+            s.eVar8="1122"
+            s.eVar9="91"
+            s.eVar12="91"
+            s.eVar14="107"
+            s.eVar15="91"
+            s.eVar17=""
+            s.eVar18="91"
+         */
+        Pattern p1 = Pattern.compile("^.*s.purchaseID=\"([0-9]+)\".*$",Pattern.DOTALL);
+        Matcher m1 = p1.matcher(htmlText);
+
+
+        if (m0.matches() && m1.matches() && m1.groupCount() > 0) {
+            return m1.group(1);
         }
+
 
         return null;
     }
