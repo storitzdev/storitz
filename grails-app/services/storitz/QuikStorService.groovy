@@ -434,7 +434,7 @@ class QuikStorService extends BaseProviderService {
                     case "FixedRate":
                       so.promoType = PromoType.FIXED_RATE
                       so.promoQty = amount
-                      so.expireMonth = duration
+                      so.expireMonth = duration > 0 ? duration : 1
                       break
                   }
                 }
@@ -459,7 +459,7 @@ class QuikStorService extends BaseProviderService {
                   case "FixedRate":
                     so.promoType = PromoType.FIXED_RATE
                     so.promoQty = amount
-                    so.expireMonth = duration
+                    so.expireMonth = duration > 0 ? duration : 1
                     break
                 }
                 break
@@ -483,7 +483,7 @@ class QuikStorService extends BaseProviderService {
                   case "FixedRate":
                     so.promoType = PromoType.FIXED_RATE
                     so.promoQty = amount
-                    so.expireMonth = duration
+                    so.expireMonth = duration > 0 ? duration : 1
                     break
                 }
                 break
@@ -506,7 +506,7 @@ class QuikStorService extends BaseProviderService {
                     if (!so.promoType || so.promoType == PromoType.FIXED_RATE) {
                       so.promoType = PromoType.FIXED_RATE
                       so.promoQty = amount
-                      so.expireMonth = duration
+                      so.expireMonth = duration > 0 ? duration : 1
                     }
                     break
                 }
