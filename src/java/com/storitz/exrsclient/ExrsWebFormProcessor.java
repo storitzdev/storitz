@@ -132,7 +132,7 @@ public class ExrsWebFormProcessor {
     }
 
     private String verifyConfirmationNumber(RentalTransaction trans, HtmlPage page4) {
-        String htmlText = page4.asText().toString();
+        String htmlText = page4.asXml().toString();
 
         /* Match the confirmation message
          * HTML input comes in looking something like this:
