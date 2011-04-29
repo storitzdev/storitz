@@ -1619,3 +1619,4 @@ div#storitzHelp p {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; // first!
 	filter: alpha(opacity=100);					// second!
 }
+

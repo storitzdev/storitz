@@ -103,5 +103,7 @@ class UrlMappings {
 
     "/"(controller: "home", action: "index")
 
+    "/college/$college"(controller: "home", action: "college")
+
   }
 }

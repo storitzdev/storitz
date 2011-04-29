@@ -40,6 +40,7 @@
           <li><g:link controller="commission" action="list">Manage Commission Table</g:link></li>
           <li><g:link controller="metro" action="list">Manage Metro Descriptions</g:link></li>
           <li><g:link controller="metroEntry" action="list">Manage Metro Neighborhoods/Zips</g:link></li>
+          <li><g:link controller="collegeLanding" action="list">Manage College Landing Pages</g:link></li>
         </ul>
         <li>Refresh Items</li>
         <ul>
