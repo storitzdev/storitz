@@ -2,7 +2,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"  xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en">
 <head>
     <g:if test="${zipSearch}">
         <meta name="description" content="Search, compare and rent self storage units in zip code $zip. Move-in today with the best prices and no Storitz fees. Thousands of units to choose from"/>
@@ -177,7 +177,7 @@
     <p:javascript src="college" />
     <script src="http://maps.google.com/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></script>
     <p:css name="college" />
-    <style type="text/css ">
+    <style type="text/css">
         #main .text-line{
             background:${cPrBGColor ?: 'wheat'} url(../images/bg-text-line.png) repeat-x;
             height:1%;
@@ -191,6 +191,9 @@
             line-height:1.5em;
             text-shadow:-1px -1px 1px #000;
             margin:0 0 3px;
+        }
+        #main .text-line span{
+            color:#fff;
         }
         #main .text-line-2C{
             height:25px;

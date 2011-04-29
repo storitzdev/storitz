@@ -2106,7 +2106,6 @@ a:hover{text-decoration:underline;}
 	color:#6e6e6e;
 }
 #main .visual .text-01 a:hover{text-decoration:none;}
-#main .text-line span{color:#fff;}
 #main .text-line-2C .navC{
     float:left;
 }
@@ -3036,4 +3035,3 @@ div.AuthorizeNetSeal a{
 input {
     border: none;
 }
-
