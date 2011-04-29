@@ -174,9 +174,9 @@
             //]]>
         </script>
     </p:dependantJavascript>
-    <script type='text/javascript' src='/storitz/js/college.js'></script>
+    <p:javascript src="college" />
     <script src="http://maps.google.com/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></script>
-    <link media="all" rel="stylesheet" type="text/css" href="/storitz/css/college.css" />
+    <p:css name="college" />
     <style type="text/css ">
         #main .text-line{
             background:${cPrBGColor ?: 'wheat'} url(../images/bg-text-line.png) repeat-x;
