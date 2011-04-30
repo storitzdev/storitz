@@ -609,7 +609,7 @@ function setupRebateLink() {
     $('#rebate').dialog({
         autoOpen: false,
         resizable: false,
-        width: 250
+        width: 375
     }).addTouch();
     $('#btn-rent').click(function(event) {
         _gaq.push(['_trackEvent', 'detail', 'btn-rent']);

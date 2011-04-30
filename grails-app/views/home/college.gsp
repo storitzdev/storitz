@@ -225,6 +225,16 @@
             font-size:1.1em;
             line-height:1.4em;
         }
+        p.rebate {
+            font-size: larger;
+        }
+        p.rebate a {
+            color: #3fac00;
+        }
+        p.rebate a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body class="college">
@@ -269,7 +279,7 @@
                     <div class="holder">
                         <!-- alignleft -->
                         <div class="alignleft">
-                            <p><a href="http://www.storitz.com">Storitz.com</a> lets you compare 1000s of summer storage units and rent all online with our <em>Best Price Guarantee</em>.</p>
+                            <p><a href="http://www.storitz.com">Storitz.com</a> lets you compare 1000s of summer storage units and rent all online with our <g:link controller="static" action="guarantee"><em>Best Price Guarantee</em></g:link>.</p>
                         </div>
                     </div>
                 </div>
@@ -559,16 +569,18 @@
             </form>
         </div>
     </div>
-    <!-- reabate info -->
+    <!-- rebate info -->
     <div id="rebate" style="display:none">
-        <p><em>How to claim your rebate</em></p>
-        <br />
-        <p>In order to receive your $20 rebate, first rent or reserve a storage unit through Storitz.com. After you
-        check out, print the <g:link controller="static" action="collegerebate" target="_blank">Storitz College
+        <div>
+            <p class="rebate"><strong>How to claim your rebate</strong></p>
+            <br/>
+            <p class="rebate">In order to receive your $20 rebate, first rent or reserve a storage unit through Storitz.com. After you
+            check out, print the <g:link controller="static" class="rebate" action="collegerebate" target="_blank">Storitz College
         Rebate Form.</g:link> Fill it out and mail it, along with a copy of your lease agreement or move-in receipt,
-        to the address provided on the Rebate Form.</p>
-        <br />
-        <p>Then you'll get a check for $20 sent right to you!  Simple!</p>
+            to the address provided on the Rebate Form.</p>
+            <br/>
+            <p class="rebate">Then you'll get a check for $20 sent right to you! <strong>Simple!</strong></p>
+        </div>
     </div>
 </div>
 <!-- ********************* -->
