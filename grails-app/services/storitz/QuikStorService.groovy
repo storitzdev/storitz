@@ -499,7 +499,10 @@ class QuikStorService extends BaseProviderService {
                     if (!so.promoType || so.promoType == PromoType.PERCENT_OFF) {
                       so.promoType = PromoType.PERCENT_OFF
                       so.promoQty = amount
-                      so.expireMonth = duration
+                      so.expireMonth += duration
+                      if (so.expireMonth == 999) {
+                        so.expireMonth = 1 // this is the way QS marks permanent discount
+                      }
                     }
                     break
                   case "FixedRate":
@@ -514,6 +517,7 @@ class QuikStorService extends BaseProviderService {
             }
           }
         }
+        writer.println("Offer saved ${so.promoType} - qty = ${so.promoQty} expire = ${so.expireMonth} prepay = ${so.prepay} prepayMonths = ${so.prepayMonths}")
         // add restriction for type
         SpecialOfferRestriction restriction = new SpecialOfferRestriction()
         restriction.restrictive = false
