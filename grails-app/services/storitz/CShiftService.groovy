@@ -654,7 +654,7 @@ class CShiftService extends BaseProviderService {
           } else if (start.contains('m')) {
             site."$startField" = Date.parse("hha", start)
           } else {
-            site."$startField" = Date.parse("hh", start)
+            site."$startField" = Date.parse("hh", stripChars(start))
           }
           if (end.contains(':') && end.contains('m')) {
             site."$endField" = Date.parse("hh:mma", end)
@@ -663,7 +663,7 @@ class CShiftService extends BaseProviderService {
           } else if (end.contains('m')) {
             site."$endField" = Date.parse("hha", end)
           } else {
-            def endPM = ((end as Integer) + 12) as String
+            def endPM = ((stripChars(end) as Integer) + 12) as String
             site."$endField" = Date.parse("hh", endPM)
           }
         } else {
@@ -682,7 +682,7 @@ class CShiftService extends BaseProviderService {
         } else if (start.contains('m')) {
           site."$startGateField" = Date.parse("HHa", start)
         } else {
-          site."$startGateField" = Date.parse("HH", start)
+         site."$startGateField" = Date.parse("HH", stripChars(start))
         }
         if (end.contains(':') && end.contains('m')) {
           site."$endGateField" = Date.parse("HH:mma", end)
@@ -691,7 +691,7 @@ class CShiftService extends BaseProviderService {
         } else if (end.contains('m')) {
           site."$endGateField" = Date.parse("HHa", end)
         } else {
-          def endPM = ((end as Integer) + 12) as String
+          def endPM = ((stripChars(end) as Integer) + 12) as String
           site."$endGateField" = Date.parse("HH", endPM)
         }
       } else {
@@ -699,6 +699,12 @@ class CShiftService extends BaseProviderService {
       }
 
     }
+  }
+
+  // sometimes dates come in with incomplete date markers (I.E. 10a verses 10am).
+  // strip these characters out if found.
+  def stripChars(timePart) {
+    return timePart.replaceAll("[a-zA-Z]+","")
   }
 
   def addSiteFeatures(cshift, site) {
