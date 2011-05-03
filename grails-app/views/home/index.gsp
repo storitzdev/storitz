@@ -4,6 +4,7 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+  <meta name="msvalidate.01" content="341E6494DB6B0393BB4866E8E337BDBB" /> <!-- Bing validator -->
   <g:if test="${session.style != 'monthly'}">
     <!-- Google Website Optimizer Control Script -->
     <script>
