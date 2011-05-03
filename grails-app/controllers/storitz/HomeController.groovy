@@ -288,6 +288,27 @@ class HomeController {
 
   private CollegeLanding findCollege(String url) {
     ArrayList<CollegeLanding> colleges = CollegeLanding.findAll()
+
+    // Say we have two colleges: UCLA and Duclan College
+    // It is possible for people typeing storitz.com/college/duclan-college
+    // to get redirected to the UCLA landing page because "duclan" contains
+    // "UCLA" as part of it's name. To work-around that use case
+    // we first check if the URL starts with the given college name.
+    // In this case "storitz.com/college/XYZ-Duclan-College-Self-Storage" would
+    // still redirect to the UCLA page, but "storitz.com/college/Duclan-College-Self-Storage"
+    // would be a perfect match and redirect exactly where you expect it to.
+
+    // Exact (starts with) Match
+    for (int  i = 0; i < colleges.size(); i++) {
+        CollegeLanding landing = colleges.get(i)
+        String cleanUrl = url.toLowerCase().replaceAll("-"," ")
+        String cleanName = landing.name.toLowerCase().replaceAll("-"," ")
+        if (cleanUrl.startsWith(cleanName)) {
+            return landing
+        }
+    }
+
+    // Glob (contains) Match
     for (int  i = 0; i < colleges.size(); i++) {
         CollegeLanding landing = colleges.get(i)
         String cleanUrl = url.toLowerCase().replaceAll("-"," ")
