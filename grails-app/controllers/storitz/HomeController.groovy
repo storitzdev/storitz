@@ -25,7 +25,7 @@ class HomeController {
   def cScBGColor
   def cScFGColor
 
-    def doIndex(params) {
+    def doIndex(params, title) {
         def geoResult
         def zipSearch = (params.zip || params.zipSearch)
 
@@ -175,9 +175,15 @@ class HomeController {
             }
         }
 
-        def title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Rent Best Price Guaranteed Self Storage - Storitz"
-        if (title.size() > 70) {
-            title = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Self Storage - Storitz"
+        def displayTitle
+        if (title) {
+           displayTitle = title
+        }
+        else {
+            displayTitle = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Rent Best Price Guaranteed Self Storage - Storitz"
+            if (displayTitle.size() > 70) {
+                displayTitle = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Self Storage - Storitz"
+            }
         }
 
         def sizeList
@@ -259,16 +265,18 @@ class HomeController {
             }
         }
 
-        [sizeList: sizeList, title: title, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch, cname: cname, clogo: clogo, cPrBGColor:cPrBGColor, cPrFGColor:cPrFGColor, cScBGColor:cScBGColor, cScFGColor:cScFGColor]
+        [sizeList: sizeList, title: displayTitle, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch, cname: cname, clogo: clogo, cPrBGColor:cPrBGColor, cPrFGColor:cPrFGColor, cScBGColor:cScBGColor, cScFGColor:cScFGColor]
     }
 
 
   def index = {
-     doIndex(params)
+     doIndex(params, null)
   }
 
   // college landing page
   def college = {
+
+      def title = null
 
       if (params.college) {
           CollegeLanding cl = findCollege(params.college)
@@ -280,10 +288,11 @@ class HomeController {
               cPrFGColor=cl.primaryFGColor
               cScBGColor=cl.secondaryBGColor
               cScFGColor=cl.secondaryFGColor
+              title = "Find Summer Self Storage near ${cl.displayName} - Best Price Guaranteed on Storitz"
           }
       }
 
-      doIndex(params)
+      doIndex(params,title)
   }
 
   private CollegeLanding findCollege(String url) {
