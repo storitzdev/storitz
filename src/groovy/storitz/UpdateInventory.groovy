@@ -65,7 +65,10 @@ class UpdateInventory {
       allStorageSites.each{ site ->
         try {
           def stats = new storitz.SiteStats()
+          // JM: Added timing metrics. This will help determine if we have a gradual decay scenario (VM Heap issue)
+          writer.print("FeedService site [${site.id}] start: " + (new Date()).toString())
           feedService.updateUnits(site, stats, writer)
+          writer.print("FeedService site [${site.id}] end: " + (new Date()).toString())
           writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
         } catch (Exception e) {
           writer.println "Error processing site id=${site.id} Error: ${e} Stacktrace: ${e.stackTrace}"

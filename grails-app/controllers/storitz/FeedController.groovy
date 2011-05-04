@@ -26,7 +26,10 @@ class FeedController {
     def writer = new PrintWriter(System.out)
     for (site in feed.sites) {
       def stats = new storitz.SiteStats()
+      // JM: Added timing metrics. This will help determine if we have a gradual decay scenario (VM Heap issue)
+      writer.print("FeedService site [${site.id}] start: " + (new Date()).toString())
       feedService.updateUnits(site, stats, writer)
+      writer.print("FeedService site [${site.id}] stop: " + (new Date()).toString())
     }
     flash.message = "Feed Inventory Updated."
     redirect(action: "list")
