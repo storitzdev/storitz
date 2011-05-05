@@ -75,7 +75,7 @@
         <li>Strong MS Office and Internet, Social Media skills</li>
         <li>Excellent problem solver with the ability to multitask, and get things done without loosing your cool</li>
         <li>Superior verbal and written communication skills</li>
-        <li>HTML and Java experience are a plus</li>
+        <li>HTML and Java experience are a plus </li>
       </ul>
     </div>
   </div>
