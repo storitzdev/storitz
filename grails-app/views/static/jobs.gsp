@@ -38,44 +38,44 @@
       <p>
         Due to the rapidly changing nature of a startup, all positions are onsite - we are not yet ready to accommodate remote or telecommuting employees.
       </p>
-      <h2>Senior Software Engineer</h2>
+
+      <h2>Web Developer Summer Intern</h2>
       <p>
-        A senior engineer/team lead will become the right hand man for the CTO.  This position is 90% hands on development for large portions of the site functionality.  10% of time
-        will be devoted to mentoring and other duties.  A strong candidate will have a background in data driven website design, proficiency in the tools of the trade
-        and have a strong technical and theoretical background in CS.  Storitz uses Groovy/Grails technology, so a good candidate will have some experience with Groovy/Grails
-        and a good background in Java technologies.  String OOAD skills and the ability to implement designed functionality with a minimum amount
-        of handholding is a must.  Candidate must also be a quick learner - we leverage as much as we can, so knowledge of popular libraries, plugins and open source tools
-        is a definite plus.
+        We're looking for a bright, talented, and highly motivated Web Developer Intern to join us for the summer.
+      </p>
+      <p>
+        You'll learn more about computer science in one summer here than you will in an entire year at school. That's a
+        promise. But you'll need to earn that knowledge. If you're feeling up to the challenge, research storitz.com,
+        and the storitz team. Then send us your resume along with a 5-sentence essay describing why you are the
+        best candidate for this position.
       </p>
       <ul>
-        <li>Bachelor's degree in a related field</li>
-        <li>3+ years of paid work experience in software development</li>
-        <li>Sr. or team lead experience</li>
-        <li>Strong problem-solving/analytical skills</li>
-        <li>Strong foundation in object-oriented design and development</li>
-        <li>Strong Java and ORM experience</li>
-        <li>Strong JavaScript/HTML experience</li>
-        <li>Some Groovy/Grails experience</li>
-        <li>Some Web service/SOA experience</li>
-        <li>Cross-browser development experience</li>
-        <li>Experience utilizing and integrating libraries and components</li>
-        <li>Website design experience a plus</li>
+        <li>Computer science, Mathematics, or Electrical Engineering student with a passion for web development</li>
+        <li>Solid background with HTML, CSS, and JavaScript</li>
+        <li>One year plus experience with Java. (Groovy, Grails knowledge very nice to have!)</li>
+        <li>Firm understanding of multi-paradigm programming (OO, Functional, Procedural and Logical)</li>
+        <li>Must know your way around a Linux or Unix box</li>
+        <li>Relational Database knowledge</li>
+        <li>Excellent problem solver with the ability to multitask, and get things done without loosing your cool</li>
+        <li>Superior verbal and written communication skills</li>
       </ul>
-      <h2>Software Engineer</h2>
+
+      <h2>Marketing Summer Intern</h2>
       <p>
-        A software engineer must be able to take a project and develop according to the design requirements of the CTO and Sr. Engineer.  Code must be well tested, clearly written
-        and be ready for production.  A good Software Engineering candidate will have excellent theoretical background backed by projects that demonstrate a strong understanding
-        of how data driven websites work.  With a strong analytical background, the right candidate will quickly absorb the details of the fast moving world of consumer facing
-        websites.  Bring your problem solving skills and experience writing code, and we will train you on the latest and greatest technologies that we use.
+        Storitz.com, a fast-growing West LA-based technology and real estate company is looking for an undergraduate
+        marketing intern who is whip-smart and ambitious to support the online marketing, seo and sem efforts, social
+        media and blogging, as well as the business development efforts of the company over the coming summer. This
+        position is a gateway to a full-time position or a part-time school-year internship.
+      </p>
+      <p>
+        Please visit storitz.com and research the storitz team before writing a 5-sentence essay that explains why you
+        are the best marketing intern candidate for storitz this summer.
       </p>
       <ul>
-        <li>Bachelor's degree in a related field</li>
-        <li>Strong problem-solving/analytical skills</li>
-        <li>Strong foundation in object-oriented design and development</li>
-        <li>Java development</li>
-        <li>JavaScript/HTML experience</li>
-        <li>Some Groovy/Grails experience a plus</li>
-        <li>Website design experience a plus</li>
+        <li>Strong MS Office and Internet, Social Media skills</li>
+        <li>Excellent problem solver with the ability to multitask, and get things done without loosing your cool</li>
+        <li>Superior verbal and written communication skills</li>
+        <li>HTML and Java experience are a plus</li>
       </ul>
     </div>
   </div>
