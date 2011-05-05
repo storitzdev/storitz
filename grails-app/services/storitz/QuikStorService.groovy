@@ -309,6 +309,10 @@ class QuikStorService extends BaseProviderService {
           unit.price = unit.pushRate = unitType.dPrice
           unit.deposit = unitDeposit
           unit.save(flush: true)
+        } else {
+            unit.price = unit.pushRate = unitType.dPrice
+            unit.deposit = unitDeposit
+            unit.save(flush: true)
         }
       } else {
         def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
