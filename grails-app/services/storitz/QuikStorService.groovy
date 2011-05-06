@@ -300,19 +300,18 @@ class QuikStorService extends BaseProviderService {
         if (unitType.availability > unit.unitCount) {
           stats.updateCount += (unitType.availability - unit.unitCount)
           unit.unitCount = unitType.availability
-          unit.price = unit.pushRate = unitType.dPrice
-          unit.deposit = unitDeposit
-          unit.save(flush: true)
         } else if (unitType.availability < unit.unitCount) {
           stats.removedCount += (unit.unitCount - unitType.availability)
           unit.unitCount = unitType.availability
+        }
+        if (unitType.dPrice != unit.price) {
           unit.price = unit.pushRate = unitType.dPrice
+        }
+        if (unit.deposit != unitDeposit) {
           unit.deposit = unitDeposit
+        }
+        if (unit.isDirty()) {
           unit.save(flush: true)
-        } else {
-            unit.price = unit.pushRate = unitType.dPrice
-            unit.deposit = unitDeposit
-            unit.save(flush: true)
         }
       } else {
         def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
