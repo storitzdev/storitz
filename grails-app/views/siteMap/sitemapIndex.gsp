@@ -9,7 +9,4 @@
   <sitemap>
     <loc>${resource(absolute: "true", file: 'sitemapGeo.xml')}</loc>
   </sitemap>
-  <sitemap>
-    <loc>${resource(absolute: "true", file: 'sitemapCollege.xml')}</loc>
-  </sitemap>
 </sitemapindex>
