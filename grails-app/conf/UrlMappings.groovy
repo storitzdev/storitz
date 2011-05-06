@@ -93,6 +93,8 @@ class UrlMappings {
 
     "/sitemapUrls"(controller: "siteMap", action: "url")
 
+    "/sitemapCollege"(controller: "siteMap", action: "college")
+
     "/$controller/$action?/$id?" {
       constraints {
         // apply constraints here

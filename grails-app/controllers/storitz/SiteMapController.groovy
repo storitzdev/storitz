@@ -3,6 +3,7 @@ package storitz
 import com.storitz.Metro
 import com.storitz.MetroEntry
 import com.storitz.StorageSite
+import com.storitz.CollegeLanding
 
 class SiteMapController {
 
@@ -47,6 +48,15 @@ class SiteMapController {
       xml {
         def siteList = StorageSite.findAllByDisabled(false)
         render(view: "sitemapImage", contentType: 'text/html; charset=utf-8', model: [siteList: siteList])
+      }
+    }
+  }
+
+  def college = {
+    withFormat {
+      xml {
+        def collegeList = CollegeLanding.findAll()
+        render(view: "sitemapCollege", contentType: 'text/html; charset=utf-8', model: [collegeList: collegeList])
       }
     }
   }
