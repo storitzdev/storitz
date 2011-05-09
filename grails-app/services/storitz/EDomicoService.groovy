@@ -65,7 +65,11 @@ class EDomicoService extends BaseProviderService {
         for (int i = 0; i < locations?.size(); i++) {
             EDomicoLocation location = locations.get(i)
             StorageSite storageSite = getStorageSiteFromEDomicoLocation(location, stats)
-            // do some magic
+
+            // Technically, we only need to set these values once when we create the StorageSite.
+            // But, what happens if we ever change the values in the EDomicoLocation, for example
+            // to correct an address mistake. We would want that to propagate outward to the site, no?
+            // To satisfy that use case, we update these values every time.
             storageSite.address     = location.address1
             storageSite.city        = location.city
             storageSite.state       = State.fromText(location.state)
@@ -108,10 +112,8 @@ class EDomicoService extends BaseProviderService {
             def price = new Double(sz.get("SizeRentRate")).doubleValue()
             StorageUnit storageUnit = getStorageUnitByNameAndNumber(site,sz.get("SiteID"),sz.get("SizeID"),stats)
             storageUnit.unitTypeInfo = sz.get("SiteID") + "-" + sz.get("SizeID") + ":" + sz.get("SizeCodeInfo")
-            storageUnit.price = price
-            storageUnit.pushRate = price
-            storageUnit.displaySize = sz.get("SizeCodeInfo")
-            storageUnit.unitSizeInfo = sz.get("SizeCodeInfo")
+            storageUnit.price = storageUnit.pushRate = price
+            storageUnit.displaySize = storageUnit.unitSizeInfo = sz.get("SizeCodeInfo")
             def unitSize = getUnitSize(sz.get("SizeCodeInfo"))
             if (!unitSize) {
                 writer.append("Cannot determine unitSize for " + sz.get("SizeCodeInfo") + ". Skipping")
@@ -162,11 +164,6 @@ class EDomicoService extends BaseProviderService {
         }
 
         specialOffer.promoQty =  discountValue
-        specialOffer.expireMonth = 1
-        specialOffer.featured = true
-        specialOffer.active = true
-        specialOffer.inMonth = 1
-        specialOffer.prepayMonths = 0
 
         SpecialOfferRestriction specialOfferRestriction = getSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
         specialOfferRestriction.restrictionInfo = storageUnit.unitTypeInfo
@@ -234,6 +231,16 @@ class EDomicoService extends BaseProviderService {
 
         // If not, then create one
         specialOffer = new SpecialOffer()
+
+        // Set some meaningful defaults. Since operations can and will update sites and promotions via the UI,
+        // don't set these values upon every load. Rather, set them upon initial creation and let them stay
+        // as-is after that.
+        specialOffer.expireMonth    = 1
+        specialOffer.featured       = false
+        specialOffer.active         = false
+        specialOffer.inMonth        = 1
+        specialOffer.prepayMonths   = 0
+
         specialOffer.code = code
         storageSite.addToSpecialOffers(specialOffer)
 
@@ -296,16 +303,22 @@ class EDomicoService extends BaseProviderService {
 
         // No luck? create a new one
         StorageUnit storageUnit = new StorageUnit()
-        storageUnit.unitName = name
-        storageUnit.unitNumber = number
-        storageUnit.description = "Self Storage"
-        storageUnit.isAvailable = true
-        storageUnit.isSecure = false
-        storageUnit.isTempControlled = false
-        storageUnit.isAlarm = false
-        storageUnit.isPowered = false
-        storageUnit.isIrregular = false
-        storageUnit.unitType = UnitType.INTERIOR
+
+        // We know these values...
+        storageUnit.unitName            = name
+        storageUnit.unitNumber          = number
+
+        // ...But the rest are just basic defaults. It's important to set defaults only when the
+        // object is created, and not when it is updated, to prevent overwriting customizations
+        // that may have been entered via the UI by operations.
+        storageUnit.description         = "Self Storage"
+        storageUnit.isAvailable         = true
+        storageUnit.isSecure            = false
+        storageUnit.isTempControlled    = false
+        storageUnit.isAlarm             = false
+        storageUnit.isPowered           = false
+        storageUnit.isIrregular         = false
+        storageUnit.unitType            = UnitType.UNDEFINED
         return storageUnit
     }
 
@@ -331,26 +344,28 @@ class EDomicoService extends BaseProviderService {
     def newEDomicoStorageSite () {
         StorageSite storageSite = new StorageSite()
 
-        // Basic Defaults
-        storageSite.boxesAvailable = false
-        storageSite.freeTruck = TruckType.NONE
-        storageSite.isGate = false
-        storageSite.isKeypad = false
-        storageSite.isCamera = false
-        storageSite.isUnitAlarmed = false
-        storageSite.lastUpdate = 0
-        storageSite.lat = 0
-        storageSite.lng = 0
-        storageSite.requiresInsurance = false
-        storageSite.extendedHours = false
-        storageSite.isManagerOnsite = false
-        storageSite.source = 'DOM'             // data source
-        storageSite.hasElevator = true
-        storageSite.transactionType = TransactionType.RENTAL
-        storageSite.taxRateMerchandise = 0
-        storageSite.taxRateInsurance = 0
-        storageSite.taxRateRental = 0
-        storageSite.lastChange = new Date()
+        // I only know the following three values...
+        storageSite.transactionType     = TransactionType.RENTAL
+        storageSite.source              = 'DOM' // data source
+        storageSite.lastChange          = new Date()
+
+        // ...The rest are all basic defaults
+        storageSite.boxesAvailable      = false
+        storageSite.freeTruck           = TruckType.NONE
+        storageSite.isGate              = false
+        storageSite.isKeypad            = false
+        storageSite.isCamera            = false
+        storageSite.isUnitAlarmed       = false
+        storageSite.lastUpdate          = 0
+        storageSite.lat                 = 0
+        storageSite.lng                 = 0
+        storageSite.requiresInsurance   = false
+        storageSite.extendedHours       = false
+        storageSite.isManagerOnsite     = false
+        storageSite.hasElevator         = false
+        storageSite.taxRateMerchandise  = 0
+        storageSite.taxRateInsurance    = 0
+        storageSite.taxRateRental       = 0
 
         return storageSite
     }
