@@ -1,34 +1,13 @@
+<%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder" %>
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-  <g:set var="title" value="Storitz College Site Map" scope="request"/>
-  <g:render template="/header"/>
-
-</head>
-<body>
-<div id="body">
-  <g:render template="/topnav"/>
-  <div class="stcontent">
-    <g:render template="/logo_bar"/>
-    <div style="height: 25px;"></div>
-    <div class="body">
-      <h1>College List</h1>
-      %{--When we have enough states, put in a tabular index up top here.--}%
-      <div class="list">
-        <p>
-        <g:each in="${collegeList}" var="college">
-          <g:link url="college/${college.name}">${college.displayName}</g:link>
-          <span>${college.address}</span><br>
-        </g:each>
-        </p>
-      </div>
-    </div>
-    <div style="height: 25px;"></div>
-  </div>
-  <g:render template="/footer"/>
-</div>
-</body>
-<p:renderDependantJavascript/>
-</html>
+<?xml-stylesheet type="text/xsl" href="${resource(absolute: true, dir: 'css', file: 'gss.xsl')}"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:geo="http://www.google.com/geo/schemas/sitemap/1.0">
+    <g:each in="${collegeList}" var="college">
+        <url>
+           <loc><g:createLink absolute="true" url="${ConfigurationHolder.config.grails.serverURL}/college/${college.name}" /></loc>
+           <changefreq>weekly</changefreq>
+           <priority>0.5</priority>
+           <lastmod>${new Date().format('yyyy-MM-dd')}</lastmod>
+        </url>
+    </g:each>
+</urlset>
