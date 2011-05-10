@@ -26,6 +26,8 @@ class HomeController {
   def cScFGColor
 
     def doIndex(params, title) {
+       params = removeNullAddress(params)
+
         def geoResult
         def zipSearch = (params.zip || params.zipSearch)
 
@@ -180,7 +182,7 @@ class HomeController {
            displayTitle = title
         }
         else {
-            displayTitle = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Rent Best Price Guaranteed Self Storage - Storitz"
+           displayTitle = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Rent Best Price Guaranteed Self Storage - Storitz"
             if (displayTitle.size() > 70) {
                 displayTitle = "${searchCity && searchCity != city ? searchCity + ' near ' : ''}${params.address ? params.address : city + ', ' + state}${zipSearch ? ' zip code ' + params.zip : ''} Self Storage - Storitz"
             }
@@ -329,6 +331,48 @@ class HomeController {
     return null
   }
 
+    // JM 2011-05-10
+    // We're getting incoming traffic with address set to null
+    // I.E. /?address=null, /?address=null,null, /?address=null%20null, etc
+    // This is causing two problems: 1) it looks ugly to see null in the title of the page,
+    // and 2) it causes google maps to redirect us to Farmingham, New Mexico, or to Mumbai, India!
+    // Scan for 'null' address (not blank, but actually the word 'null) and correct here.
+    def removeNullAddress(params) {
+        def address = params.address
+
+        // we're good
+        if (!address) {
+            return params
+        }
+
+        // Observed values
+        // /?address=null
+        // /?address=null,null
+        // /?address=null+null
+        // /?address=null,null,null
+        // /home/alt?address=null,null
+        // /home/geoCode?address=null%2Cnull
+        // /home/geoCode?address=null%2Cnull%2Cnull
+        // /home/geoCode?address=null+null
+        // /home/updateMetro?address=null%2Cnull
+        // /home/updateMetro?address=null%2Cnull%2Cnull
+        // /home/updateMetro?address=null+null
+
+        // %2C translates to ','
+        if ('null,null,null'.contains(address)) {
+            params.address=null
+        }
+
+        // %20 and + translate to ' '
+        // Note: I haven't seen this use case except in testing
+        if ('null null null'.contains(address)) {
+            params.address=null
+        }
+
+        return params
+    }
+
+
 
   def alt = {
     session['style'] = 'monthly'
@@ -337,17 +381,17 @@ class HomeController {
   }
 
   def updateMetro = {
+    def tempParams = removeNullAddress(params)  // params are read-only!
 
-    def geoResult
-
-
-    def address = params.address
-    if (params.address && params.address.class.isArray()) {
-      address = params.address.join(' ');
+    def address = tempParams.address
+    if (address && address.class.isArray()) {
+      address = address.join(' ');
     }
 
-    geoResult = geocodeService.geocode(address)
-
+    def geoResult = null
+    if (address) {
+        geoResult = geocodeService.geocode(address)
+    }
     handleGeocode(geoResult)
 
     def neighborhoodList = null
@@ -423,8 +467,10 @@ class HomeController {
   }
 
   def geoCode = {
-    if (params.address) {
-      render(status: 200, contentType: "application/json", text: geocodeService.geocode(params.address))
+    def tempParams = removeNullAddress(params)   // params are read-only!
+
+    if (tempParams.address) {
+      render(status: 200, contentType: "application/json", text: geocodeService.geocode(tempParams.address))
     } else if (params.lat && params.lng) {
       render(status: 200, contentType: "application/json", text: geocodeService.geocode(params.lat as double, params.lng as double))
     }
@@ -432,7 +478,7 @@ class HomeController {
   }
 
   private boolean handleGeocode(geoResult) {
-    if (geoResult.status == "OK") {
+    if (geoResult && geoResult.status == "OK") {
       lng = geoResult.results[0].geometry.location.lng
       lat = geoResult.results[0].geometry.location.lat
       for (comp in geoResult.results[0].address_components) {
@@ -455,8 +501,11 @@ class HomeController {
       lat = loc.latitude
       lng = loc.longitude
       zip = loc.postalCode
-      if (!city) city = loc.city
-      if (!state) state = loc.region
+      //what was the rationale for not updating city and state too?
+      //if (!city) city = loc.city
+      //if (!state) state = loc.region
+      city = loc.city
+      state = loc.region
     }
     return false
   }
