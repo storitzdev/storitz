@@ -17,6 +17,7 @@ class RentalTransactionController {
   def creditCardService
   def notificationService
   def nachaService
+  def emailService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", pay: ["POST", "GET"]]
 
@@ -200,10 +201,12 @@ class RentalTransactionController {
             println "Removing unit from inventory ${myUnit.id}"
             rentalTransactionInstance.site.removeFromUnits(myUnit)
             rentalTransactionInstance.site.save(flush: true)
+            emailUnitNotFound("Removing unit from inventory ${myUnit.id}",rentalTransactionInstance)
           }
         }
       }
       if (!found) {
+        emailUnitNotFound("Unit not found during rental transaction!",rentalTransactionInstance)
         flash.message = "Unit already reserved - refresh and try again"
         redirect(controller: "storageSite", action: "detail", params: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: rentalTransactionInstance.site.id])
         return
@@ -223,6 +226,22 @@ class RentalTransactionController {
             title: "Storitz self-storage for ${rentalTransactionInstance.site.title} - located in ${rentalTransactionInstance.site.city}, ${rentalTransactionInstance.site.state.fullName} ${rentalTransactionInstance.site.zipcode}",
             site: rentalTransactionInstance.site, shortSessionId: session.shortSessionId, moveInDetails: moveInDetails,
             unit: unit, promo: promo, ins: ins, paidThruDate: costService.calculatePaidThruDate(rentalTransactionInstance.site, promo, rentalTransactionInstance.moveInDate, true)]
+  }
+
+  private emailUnitNotFound(String subject, RentalTransaction rentalTransactionInstance) {
+    try {
+      int transID = rentalTransactionInstance.id
+      int unitID = rentalTransactionInstance.unitId
+      String body = "rentalTransactionInstance.id:"+transID+"\nrentalTransactionInstance.unitId:"+unitID+"\n"
+      emailService.sendTextEmail(
+        to: 'tech@storitz.com',
+        from: 'no-reply@storitz.com',
+        subject: subject,
+        body: body
+      )
+    } catch (Throwable t) {
+        t.printStackTrace()
+    }
   }
 
   private performTransaction(RentalTransaction rentalTransactionInstance, boolean isReservation) {
@@ -492,10 +511,12 @@ class RentalTransactionController {
             println "Removing unit from inventory ${myUnit.id}"
             rentalTransactionInstance.site.removeFromUnits(myUnit)
             rentalTransactionInstance.site.save(flush: true)
+            emailUnitNotFound("Removing unit from inventory ${myUnit.id}",rentalTransactionInstance)
           }
         }
       }
       if (!found) {
+        emailUnitNotFound("Unit not found during rental transaction!",rentalTransactionInstance)
         return null
       }
     }
