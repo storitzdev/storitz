@@ -73,7 +73,7 @@
     </div>
     <div class="right">
       <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-        <div class="left" style="margin-right:25px;">
+        <div class="reservationMoveInDescription">
           <g:if test="${site.feed.reservationMoveInDescription}">
                ${site.feed.reservationMoveInDescription}
           </g:if>
