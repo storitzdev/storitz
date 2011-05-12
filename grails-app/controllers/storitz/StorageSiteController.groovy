@@ -718,9 +718,22 @@ class StorageSiteController {
     sizeList.sort { it.width * it.length }
 
     StorageUnit bestUnit
+    StorageUnit bestUnitPushRate
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
       bestUnit = site.units.findAll { it.unitCount > site.minInventory && it.unitType == unitType && it.unitsize.id == unitSize.id }.min { it.price }
+      bestUnitPushRate = site.units.findAll { it.unitCount > site.minInventory && it.unitType == unitType && it.unitsize.id == unitSize.id }.min { it.pushRate }
+
+      // JM: 2011-05-12.
+      // Almost always the push (street) rate will be less than or equal to the normal rate.
+      // However, it is possible for the push rate to be greater than the normal rate.
+      // If this is the case, defer to the normal rate.
+      if (site.allowPushPrice && bestUnitPushRate) {
+        if (!bestUnit || bestUnit.price > bestUnitPushRate.pushRate) {
+          bestUnit = bestUnitPushRate
+        }
+      }
+
       if (!bestUnit) {
         if (params.action == 'unitType') {
           // find closest size
