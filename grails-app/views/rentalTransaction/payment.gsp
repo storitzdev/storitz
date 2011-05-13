@@ -146,7 +146,7 @@
                        </g:if>
                     </div>
                   </g:if>
-                  <div id="costDetails" class="right">
+                  <div id="costDetails" class="right costDetails">
                     <table id="costTotals">
                       <g:each var="item" in="${moveInDetails?.items}">
                         <tr>

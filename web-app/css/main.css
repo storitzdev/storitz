@@ -964,8 +964,12 @@ a.unitPrice:link, a.unitPrice:visited, a.unitPrice:hover {
 
 .reservationMoveInDescription {
     float: left;
-    margin-right:25px;
+    margin-right:20px;
     width:250px;
+}
+
+.costDetails {
+    width: 350px
 }
 
 .left {
@@ -1640,6 +1644,85 @@ div#storitzHelp p {
 
 div.contest {
     border: 1px solid #ccc;
+}
+
+div.organizerbanner {
+    width: 960px;
+    height: 276px;
+    background: #fff url("../images/pro-organizer-contest-banner.jpg") no-repeat;
+}
+
+div.thinline {
+    border-top: 1px solid #D5D5D5;
+}
+
+.search-form{
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	float:right;
+	width:194px;
+	margin:0 0 5px;
+	height:23px;
+	background:url(../images/bg-search.gif) no-repeat;
+}
+
+.search-form label, legend {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+    display:none;
+}
+
+.search-form fieldset{
+    margin: 0;
+	padding: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+    float:left;
+    border: 0px;
+    padding-bottom:0px;
+}
+
+.search-form .text{
+	float:left;
+	width:143px;
+	background:none;
+	border:0;
+	padding:4px 10px;
+	margin:0;
+	color:#7b7b7b;
+	font:11px Arial, Helvetica, sans-serif;
+}
+
+.body .search-form{
+	width:268px;
+	background:url(../images/bg-search-2.gif) no-repeat;
+}
+
+.body .search-form .text{
+    width:217px;
+}
+
+.search-form .submit{
+	float:left;
+	width:31px;
+	height:15px;
+	background:none;
+	border:0;
+	padding:0;
+	margin:0;
+	cursor:pointer;
+    visibility:hidden;
 }
 
 

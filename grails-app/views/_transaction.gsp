@@ -93,7 +93,7 @@
          </g:if>
         </div>
       </g:if>
-      <div id="costDetails" class="right">
+      <div id="costDetails" class="right costDetails">
         <table class="costTotals" cellspacing="0">
           <thead>
           <tr>
