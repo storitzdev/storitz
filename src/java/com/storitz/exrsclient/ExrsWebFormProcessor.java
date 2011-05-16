@@ -493,7 +493,7 @@ public class ExrsWebFormProcessor {
                     logMessage(3,"NODESTRING[" + i + "]: >" + nodeString + "<");
 
                     // try to match the cost
-                    if (nodeString.contains("Internet Rate: $" + cost)) {
+                    if (nodeString.contains("Internet Rate: $" + cost) || nodeString.contains(" Web Rate: $" + cost)) {
                         matchedRate = true;
                         continue;
                     }
