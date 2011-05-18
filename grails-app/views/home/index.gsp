@@ -283,7 +283,7 @@
       </div>
       <div class="leftSection">
         <g:if test="${storitz.OrganizerContestController.isEnabled() && com.storitz.StoritzUtil.isCaliforniaZip(zip)}">
-            <div id="contest" class="contest"><a href="organizer"><img border="0" src="images/pro-organizer-contest-300x250-v2.jpg" /></a></div>
+            <div id="contest" class="contest"><a href="organizer"><img border="0" src="${resource(file: "images/pro-organizer-contest-300x250-v2.jpg")}" /></a></div>
             <div>
                 <h2 class="leftSectionHeader">Video</h2>
             </div>
