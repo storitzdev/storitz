@@ -61,15 +61,16 @@ class UpdateInventory {
       //}
       //println("allStorageSites = ${allStorageSites}")
 
-      int count = 0;
-      boolean flush
+      //int count = 0;
+      //boolean flush
       allStorageSites.each{ site ->
         try {
           def stats = new storitz.SiteStats()
           // JM: Added timing metrics. This will help determine if we have a gradual decay scenario (VM Heap issue)
           writer.print("FeedService site [${site.id}] start: " + (new Date()).toString())
-          flush = ++count % 50 == 0 // flush every 50 sites
-          feedService.updateUnits(site, stats, writer, flush)
+          //flush = ++count % 50 == 0 // flush every 50 sites
+          //feedService.updateUnits(site, stats, writer, flush)
+          feedService.updateUnits(site, stats, writer)
           writer.print("FeedService site [${site.id}] end: " + (new Date()).toString())
           writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
         } catch (Exception e) {
