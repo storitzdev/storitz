@@ -44,7 +44,7 @@
         </ul>
         <li>Contests</li>
         <ul>
-          <li><g:link controller="organizerContest" action="list">Manage Oragnizer Contest</g:link></li>
+          <li><g:link controller="organizerContest" action="list">Manage Organizer Contest</g:link></li>
         </ul>
         <li>Refresh Items</li>
         <ul>
