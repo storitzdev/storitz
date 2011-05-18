@@ -3,6 +3,8 @@ package storitz
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
 import com.storitz.*
+import org.hibernate.SessionFactory
+import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 class FeedService {
 
@@ -12,10 +14,20 @@ class FeedService {
   def quikStorService
   def exrsService
   def usiService
+  def sessionFactory
+  def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+
 
   boolean transactional = false
 
   // the following getXYZService() calls are required to support gant script usage
+    SessionFactory getSessionFactory() {
+        if (!sessionFactory) {
+            println ("sessionFactory is null. instantiating...")
+            sessionFactory = ApplicationHolder.application.mainContext.sessionFactory
+        }
+        return sessionFactory
+    }
 
   SiteLinkService getSiteLinkService() {
       if (!siteLinkService) {
@@ -103,6 +115,27 @@ class FeedService {
         throw new Exception("Unknown service for site update")
     }
   }
+
+  def updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer, boolean flush) {
+      if (flush) {
+          println("flushing hibernate session...")
+          try {
+            def session = getSessionFactory().currentSession
+            session.flush()
+
+            // Clearing session causes following error:
+            // ERROR hibernate.LazyInitializationException  - failed to lazily initialize a collection of role:
+            // com.storitz.StorageSite.units, no session or session was closed
+            //
+            // session.clear()
+            propertyInstanceMap.get().clear()
+          } catch (Throwable t) {
+              t.printStackTrace()
+          }
+      }
+      updateUnits(storageSiteInstance, stats, writer)
+  }
+
 
   def updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
 
