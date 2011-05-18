@@ -1,4 +1,4 @@
-<%@ page import="storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
+<%@ page import="storitz.HomeController; storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -280,9 +280,12 @@
         </div>
       </div>
       <div class="leftSection">
-        <div>
-          <h2 class="leftSectionHeader">Video</h2>
-        </div>
+        <g:if test="${storitz.OrganizerContestController.isEnabled() && com.storitz.StoritzUtil.isCaliforniaZip(zip)}">
+            <div id="contest" class="contest"><a href="organizer"><img border="0" src="images/pro-organizer-contest-300x250-v2.jpg" /></a></div>
+            <div>
+                <h2 class="leftSectionHeader">Video</h2>
+            </div>
+        </g:if>
         <div class="videoContainer">
           <div id="videoContainer"></div>
         </div>

@@ -42,6 +42,10 @@
           <li><g:link controller="metroEntry" action="list">Manage Metro Neighborhoods/Zips</g:link></li>
           <li><g:link controller="collegeLanding" action="list">Manage College Landing Pages</g:link></li>
         </ul>
+        <li>Contests</li>
+        <ul>
+          <li><g:link controller="organizerContest" action="list">Manage Oragnizer Contest</g:link></li>
+        </ul>
         <li>Refresh Items</li>
         <ul>
           <li><g:link controller="storageSite" action="refreshInventory">Refresh Inventory</g:link></li>

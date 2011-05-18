@@ -1,0 +1,197 @@
+package storitz
+
+import com.storitz.OrganizerContest
+import com.storitz.OrganizerContestStatus
+
+class OrganizerContestController {
+
+    def active
+    def enabled
+
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    def index = {
+        redirect(action: "list", params: params)
+    }
+
+    def list = {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        active=OrganizerContestController.isActive()
+        enabled=OrganizerContestController.isEnabled()
+        [organizerContestInstanceList: OrganizerContest.list(params), organizerContestInstanceTotal: OrganizerContest.count(), active: active, enabled: enabled]
+    }
+
+    def create = {
+        if (params.zip && !com.storitz.StoritzUtil.isCaliforniaZip(params.zip)) {
+          redirect(controller: "home", action:"index")
+        }
+
+        if (!OrganizerContestController.isEnabled()) {
+           redirect(controller: "home", action:"index")
+        }
+
+        if (!OrganizerContestController.isActive()) {
+            flash.closed = "true"
+        }
+
+        // These two lines are for testing only.
+        //flash.saved = "true"                  // Simulate saving a record
+        //flash.message = "some error occurred" // Simulate an error
+
+        OrganizerContest organizerContestInstance = new OrganizerContest()
+        organizerContestInstance.properties = params
+        return [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance : organizerContestInstance]
+    }
+
+    def addEntry = {
+        def organizerContestInstance = new OrganizerContest(params)
+        try {
+            if (organizerContestInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
+                flash.saved = "saved"
+                redirect(action: "create", id: organizerContestInstance.id)
+            }
+            else {
+                flash.message = "Failed to save entry. Please try again."
+                render(view: "create", model: [organizerContestInstance: organizerContestInstance])
+            }
+        } catch (Throwable t) {
+            // TODO: Clean up.
+            flash.message = "Failed to save entry. Please try again."
+            render(view: "create", model: [organizerContestInstance: organizerContestInstance])
+        }
+    }
+
+
+    def save = {
+        def organizerContestInstance = new OrganizerContest(params)
+        try {
+            if (organizerContestInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
+                redirect(action: "show", id: organizerContestInstance.id)
+            }
+            else {
+                render(view: "create", model: [organizerContestInstance: organizerContestInstance])
+            }
+        } catch (Throwable t) {
+            render(view: "create", model: [organizerContestInstance: organizerContestInstance])
+        }
+    }
+
+    def show = {
+        def organizerContestInstance = OrganizerContest.get(params.id)
+        if (!organizerContestInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [organizerContestInstance: organizerContestInstance]
+        }
+    }
+
+    def edit = {
+        def organizerContestInstance = OrganizerContest.get(params.id)
+        if (!organizerContestInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            return [organizerContestInstance: organizerContestInstance]
+        }
+    }
+
+    def update = {
+        def organizerContestInstance = OrganizerContest.get(params.id)
+        if (organizerContestInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+                if (organizerContestInstance.version > version) {
+                    
+                    organizerContestInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'organizerContest.label', default: 'OrganizerContest')] as Object[], "Another user has updated this OrganizerContest while you were editing")
+                    render(view: "edit", model: [organizerContestInstance: organizerContestInstance])
+                    return
+                }
+            }
+            organizerContestInstance.properties = params
+            if (!organizerContestInstance.hasErrors() && organizerContestInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
+                redirect(action: "show", id: organizerContestInstance.id)
+            }
+            else {
+                render(view: "edit", model: [organizerContestInstance: organizerContestInstance])
+            }
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+    def delete = {
+        def organizerContestInstance = OrganizerContest.get(params.id)
+        if (organizerContestInstance) {
+            try {
+                organizerContestInstance.delete(flush: true)
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), params.id])}"
+                redirect(action: "list")
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+    private static OrganizerContestStatus getContestStatus() {
+        def slist = OrganizerContestStatus.findAll()
+        if (!slist || slist.size() < 1) {
+            OrganizerContestStatus s = new OrganizerContestStatus()
+            s.enabled=s.active=false
+            return s
+        }
+
+        return slist[0]
+    }
+
+    def activate = {
+        def s = OrganizerContestController.getContestStatus()
+        s.active=true;
+        s.save(flush:true);
+        redirect(action: "list")
+    }
+
+    def deactivate = {
+        def s = OrganizerContestController.getContestStatus()
+        s.active=false;
+        s.save(flush:true);
+        redirect(action: "list")
+    }
+
+    def enable = {
+        def s = OrganizerContestController.getContestStatus()
+        s.enabled=true;
+        s.save(flush:true);
+        redirect(action: "list")
+    }
+
+    def disable = {
+        def s = OrganizerContestController.getContestStatus()
+        s.enabled=false;
+        s.save(flush:true);
+        redirect(action: "list")
+    }
+
+    public static boolean isActive() {
+       def s = OrganizerContestController.getContestStatus()
+       return s.active
+    }
+
+    public static boolean isEnabled() {
+        def s = OrganizerContestController.getContestStatus()
+        return s.enabled
+    }
+}

@@ -270,7 +270,6 @@ class HomeController {
         [sizeList: sizeList, title: displayTitle, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch, cname: cname, clogo: clogo, cPrBGColor:cPrBGColor, cPrFGColor:cPrFGColor, cScBGColor:cScBGColor, cScFGColor:cScFGColor]
     }
 
-
   def index = {
      doIndex(params, null)
   }

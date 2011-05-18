@@ -14,4 +14,15 @@ public class StoritzUtil {
         return result.toString();
     }
 
+    public static boolean isCaliforniaZip(String zip) {
+        if (zip == null) {
+            return false;
+        }
+
+        int iZip = new Integer(zip).intValue();
+
+        return iZip >= 90001 && iZip <= 96162;
+    }
+
+
 }

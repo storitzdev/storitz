@@ -216,6 +216,19 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
     width: 85%;
 }
 
+.orgprop {
+    padding: 5px;
+}
+.orgprop .name {
+    text-align: left;
+    width: 40%;
+    white-space: nowrap;
+}
+.orgprop .value {
+    text-align: left;
+    width: 60%;
+}
+
 .checkout_value {
     text-align: left;
     float: left;
@@ -385,6 +398,10 @@ div.tollFree {
 
 .bold {
     font-weight: bold;
+}
+
+.organizerPink {
+    color: #f7036a;
 }
 
 .large {
@@ -1263,6 +1280,17 @@ p.footer {
     border: 2px #fff solid;
     color: #fff;
     padding: 10px 15px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:10px;
+    display: inline-block;
+}
+
+.organizerButton {
+    border: 0;
+    background: #f7036a;
+    width:250px;
+    color: #fff;
+    padding: 5px 7px;
     -webkit-border-radius:5px;
     -moz-border-radius:10px;
     display: inline-block;
