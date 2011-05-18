@@ -53,12 +53,12 @@ class OrganizerContestController {
             }
             else {
                 flash.message = "Failed to save entry. Please try again."
-                render(view: "create", model: [organizerContestInstance: organizerContestInstance])
+                render(view: "create", model: [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance: organizerContestInstance])
             }
         } catch (Throwable t) {
             // TODO: Clean up.
             flash.message = "Failed to save entry. Please try again."
-            render(view: "create", model: [organizerContestInstance: organizerContestInstance])
+            render(view: "create", model: [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance: organizerContestInstance])
         }
     }
 
