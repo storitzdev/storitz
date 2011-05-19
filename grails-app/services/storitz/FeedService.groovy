@@ -116,25 +116,17 @@ class FeedService {
     }
   }
 
-  def updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer, boolean flush) {
-      if (flush) {
-          println("flushing hibernate session...")
-          try {
+    def clearSession() {
+        println("flushing hibernate session...")
+        try {
             def session = getSessionFactory().currentSession
             session.flush()
-
-            // Clearing session causes following error:
-            // ERROR hibernate.LazyInitializationException  - failed to lazily initialize a collection of role:
-            // com.storitz.StorageSite.units, no session or session was closed
-            //
-            // session.clear()
+            session.clear()
             propertyInstanceMap.get().clear()
-          } catch (Throwable t) {
-              t.printStackTrace()
-          }
-      }
-      updateUnits(storageSiteInstance, stats, writer)
-  }
+        } catch (Throwable t) {
+            t.printStackTrace()
+        }
+    }
 
 
   def updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {

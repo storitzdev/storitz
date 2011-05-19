@@ -10,6 +10,7 @@ package storitz
 
 import com.storitz.StorageSite
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import com.storitz.StorageUnit
 
 class UpdateInventory {
 
@@ -45,15 +46,17 @@ class UpdateInventory {
 
       // If source is provided, then select by that. Otherwise just grab all
       def src = context.mergedJobDataMap.get('source')
-      def allStorageSites
+      //def allStorageSites
+      def allStorageSitesIds
 
       //println ("source is: ${src}")
 
       if (!src) {
-         allStorageSites = StorageSite.findAll()
+         allStorageSitesIds = StorageSite.findAll().collect{ it.id }.sort()
       } else {
-         allStorageSites = StorageSite.findAllBySource(src)
+         allStorageSitesIds = StorageSite.findAllBySource(src).collect{ it.id }.sort()
       }
+      println ("allStorageSitesIds=${allStorageSitesIds}")
 
       // TEST: shrink sample size for testing
       //if (allStorageSites.size() > 3)  {
@@ -61,15 +64,38 @@ class UpdateInventory {
       //}
       //println("allStorageSites = ${allStorageSites}")
 
-      //int count = 0;
-      //boolean flush
+        int batch_size = 50
+        // JM 2011-05-19. Testing loading inventory in batches.
+        for (int i = 0; i < allStorageSitesIds.size(); i+= batch_size) {
+            int lower_i = i
+            int upper_i = i+batch_size-1 >= allStorageSitesIds.size() ? allStorageSitesIds.size() : i+batch_size-1
+            int lower_id = allStorageSitesIds[lower_i]
+            int upper_id = allStorageSitesIds[upper_i]
+
+            println ("lower_i=${lower_i}, upper_i=${upper_i}")
+            println ("lower_di=${lower_id}, upper_id=${upper_id}")
+            List<StorageSite> allStorageSites = StorageSite.findAllByIdBetween(lower_id,upper_id)
+            println ("allStorageSites.size()=${allStorageSites.size()}")
+            println ("allStorageSites=${allStorageSites}")
+
+            println ("START:${new Date().toString()}")
+            for (StorageSite site: allStorageSites) {
+                //println ("START_:${new Date().toString()}")
+                def stats = new storitz.SiteStats()
+                feedService.updateUnits(site, stats, writer)
+                //println ("STOP_:${new Date().toString()}")
+            }
+            println ("STOP:${new Date().toString()}")
+            feedService.clearSession()
+        }
+        // End testing
+
+      /*** Original code
       allStorageSites.each{ site ->
         try {
           def stats = new storitz.SiteStats()
           // JM: Added timing metrics. This will help determine if we have a gradual decay scenario (VM Heap issue)
           writer.print("FeedService site [${site.id}] start: " + (new Date()).toString())
-          //flush = ++count % 50 == 0 // flush every 50 sites
-          //feedService.updateUnits(site, stats, writer, flush)
           feedService.updateUnits(site, stats, writer)
           writer.print("FeedService site [${site.id}] end: " + (new Date()).toString())
           writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
@@ -78,8 +104,8 @@ class UpdateInventory {
         } catch (Throwable t) {
           writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
        }
-
     }
+       ***/
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
       String subject = "[${ConfigurationHolder.config.grails.serverURL}] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
