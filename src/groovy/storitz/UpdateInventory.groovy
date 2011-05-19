@@ -80,10 +80,12 @@ class UpdateInventory {
 
             println ("START:${new Date().toString()}")
             for (StorageSite site: allStorageSites) {
-                //println ("START_:${new Date().toString()}")
-                def stats = new storitz.SiteStats()
-                feedService.updateUnits(site, stats, writer)
-                //println ("STOP_:${new Date().toString()}")
+                try {
+                    def stats = new storitz.SiteStats()
+                    feedService.updateUnits(site, stats, writer)
+                } catch (Throwable t) {
+                    writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
+                }
             }
             println ("STOP:${new Date().toString()}")
             feedService.clearSession()
