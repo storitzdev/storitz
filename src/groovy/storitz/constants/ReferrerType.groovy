@@ -27,7 +27,7 @@ public enum ReferrerType {
   RENTALHOUSES("rentalhouses.com", "rentalhouses.com"),
   RENT("rent.com", "rent.com"),
   MOVINGTODAY("movingtoday.com", "movingtoday.com"),
-  COLLEGE2011("college2011","college2011")
+  COLLEGE2011("fbcollege2011","fbcollege2011")
 
   final String display
   final String id
