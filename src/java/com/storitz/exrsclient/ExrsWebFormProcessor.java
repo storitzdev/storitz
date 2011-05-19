@@ -38,7 +38,7 @@ public class ExrsWebFormProcessor {
     // 1 = dump page source
     // 2 = dump page+form source
     // 3 = dump everything
-    private int debug_level = 1;
+    private int debug_level = 3;
 
     public ExrsWebFormProcessor() {
         webClient = new WebClient(BrowserVersion.FIREFOX_3_6);
