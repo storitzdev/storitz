@@ -248,7 +248,7 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <label class="right" for="essayWhyStorage"><g:message code="organizerContest.essayWhyStorage.label" default=""/>Tell us in 140 characters or<br>less why you need storage</label>
+                                <label class="right" for="essayWhyStorage"><g:message code="organizerContest.essayWhyStorage.label" default=""/>Tell us in 2000 characters or<br>less why you need storage</label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'essayWhyStorage', 'errors')}">
                                 <g:textArea class="required"  cols="50" rows="5" name="essayWhyStorage" value="${organizerContestInstance?.essayWhyStorage}"/>

@@ -7,6 +7,8 @@ class OrganizerContestController {
 
     def active
     def enabled
+    def emailService
+    def toEmailAddress
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -18,7 +20,8 @@ class OrganizerContestController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         active=OrganizerContestController.isActive()
         enabled=OrganizerContestController.isEnabled()
-        [organizerContestInstanceList: OrganizerContest.list(params), organizerContestInstanceTotal: OrganizerContest.count(), active: active, enabled: enabled]
+        toEmailAddress=OrganizerContestController.getToEmailAddress()
+        [organizerContestInstanceList: OrganizerContest.list(params), organizerContestInstanceTotal: OrganizerContest.count(), active: active, enabled: enabled, toEmailAddress : toEmailAddress]
     }
 
     def create = {
@@ -47,6 +50,7 @@ class OrganizerContestController {
         def organizerContestInstance = new OrganizerContest(params)
         try {
             if (organizerContestInstance.save(flush: true)) {
+                sendEmail(organizerContestInstance)
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
                 flash.saved = "saved"
                 redirect(action: "create", id: organizerContestInstance.id)
@@ -155,6 +159,49 @@ class OrganizerContestController {
         }
 
         return slist[0]
+    }
+
+    private static String getToEmailAddress () {
+        def slist = OrganizerContestStatus.findAll()
+        if (!slist || slist.size() < 1) {
+            return null;
+        }
+
+        return slist[0].toEmailAddress
+    }
+
+    private void sendEmail(OrganizerContest organizerContestInstance) {
+        def buf = new ByteArrayOutputStream()
+
+        PrintWriter bodyWriter = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
+        bodyWriter.println "Name    : ${organizerContestInstance.firstName} ${organizerContestInstance.lastName}"
+        bodyWriter.println "Address : ${organizerContestInstance.address1}"
+        bodyWriter.println "          ${organizerContestInstance.address2}"
+        bodyWriter.println "          ${organizerContestInstance.city}, ${organizerContestInstance.state} ${organizerContestInstance.zipcode}"
+        bodyWriter.println "Email   : ${organizerContestInstance.email}"
+        bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
+        bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"
+        bodyWriter.println "Essay   : ${organizerContestInstance.essayWhyStorage}"
+        def body = buf.toString()
+
+        String title = "Storitz - New OrganizerContest Entry"
+
+        def emailAddress = OrganizerContestController.getToEmailAddress()
+        if (emailAddress) {
+            emailService.sendTextEmail(
+                to: emailAddress,
+                from: 'no-reply@storitz.com',
+                subject: title,
+                body: body
+            )
+        }
+    }
+
+    def saveToEmailAddress = {
+        def s = OrganizerContestController.getContestStatus()
+        s.toEmailAddress=params.toEmailAddress
+        s.save(flush:true)
+        redirect(action: "list")
     }
 
     def activate = {

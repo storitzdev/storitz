@@ -33,10 +33,22 @@
         <g:else>
             <span class="button"><a href="${createLink(controller: 'organizerContest', action: 'activate')}">Activate</a></span>
         </g:else>
-        <!--
+
+       <!--
         <span class="button"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         -->
     </div>
+
+    <div>
+        <p> New Contest Entries will be sent to the following email address:</p>
+
+        <g:form controller="organizerContest" action="saveToEmailAddress" method="post">
+            <g:textField name="toEmailAddress" id="toEmailAddress" value="${toEmailAddress}"></g:textField>
+            <span class="button"><g:actionSubmit class="save" action="saveToEmailAddress" value="Update" /></span>
+        </g:form>
+
+    </div>
+
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
