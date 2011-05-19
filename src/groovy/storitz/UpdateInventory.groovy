@@ -51,10 +51,10 @@ class UpdateInventory {
 
       //println ("source is: ${src}")
 
-      if (!src) {
-         allStorageSitesIds = StorageSite.findAll().collect{ it.id }.sort()
+      if (src) {
+        allStorageSitesIds = StorageSite.findAllBySource(src).collect{ it.id }.sort()
       } else {
-         allStorageSitesIds = StorageSite.findAllBySource(src).collect{ it.id }.sort()
+        allStorageSitesIds = StorageSite.findAll().collect{ it.id }.sort()
       }
       println ("allStorageSitesIds=${allStorageSitesIds}")
 
@@ -74,7 +74,12 @@ class UpdateInventory {
 
             println ("lower_i=${lower_i}, upper_i=${upper_i}")
             println ("lower_di=${lower_id}, upper_id=${upper_id}")
-            List<StorageSite> allStorageSites = StorageSite.findAllByIdBetween(lower_id,upper_id)
+            List<StorageSite> allStorageSites
+            if (src) {
+                allStorageSites = StorageSite.findAllByIdBetweenAndSource(lower_id,upper_id,src)
+            } else {
+                allStorageSites = StorageSite.findAllByIdBetween(lower_id,upper_id)
+            }
             println ("allStorageSites.size()=${allStorageSites.size()}")
             println ("allStorageSites=${allStorageSites}")
 
