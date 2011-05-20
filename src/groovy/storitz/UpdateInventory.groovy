@@ -65,9 +65,10 @@ class UpdateInventory {
       //println("allStorageSites = ${allStorageSites}")
 
         int batch_size = 50
-        for (int i = 0; i < allStorageSitesIds.size(); i+= batch_size) {
+	int i = 0;
+	while (i < allStorageSitesIds.size()) {
             int lower_i = i
-            int upper_i = i+batch_size-1 >= allStorageSitesIds.size() ? allStorageSitesIds.size() : i+batch_size-1
+            int upper_i = i+batch_size-1 > allStorageSitesIds.size()-1 ? allStorageSitesIds.size()-1 : i+batch_size-1
             int lower_id = allStorageSitesIds[lower_i]
             int upper_id = allStorageSitesIds[upper_i]
 
@@ -94,6 +95,7 @@ class UpdateInventory {
             }
             //println ("STOP:${new Date().toString()}")
             feedService.clearSession()
+	    i=upper_i+1;
         }
 
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
