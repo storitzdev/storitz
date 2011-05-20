@@ -87,6 +87,7 @@ class UpdateInventory {
                 try {
                     def stats = new storitz.SiteStats()
                     feedService.updateUnits(site, stats, writer)
+                    writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
                 } catch (Throwable t) {
                     writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
                 }
