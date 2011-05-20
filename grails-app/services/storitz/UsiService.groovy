@@ -88,8 +88,19 @@ class UsiService extends CShiftService {
         specialOffer.prepayMonths = specialOffer.prepay ? (promo.'prepay-periods'.text() as Integer) : 1
         specialOffer.description = description
         specialOffer.inMonth = 0
-        specialOffer.promoQty = promo.'discount-min'.text() as BigDecimal
-        if (specialOffer.promoQty == 0) specialOffer.promoQty = promo.'discount-max'.text() as BigDecimal
+
+        // JM 2011-05-19
+        // CenterShift gives us variable promos with min/max range
+        // Typically the min and max are the same (i.e. no range).
+        // Sometimes the max is larger. If that is the case, then take
+        // the max.
+        def promoMin = promo.'discount-min'.text() as BigDecimal
+        def promoMax = promo.'discount-max'.text() as BigDecimal
+
+        // I've never seen a case where the max is smaller than the
+        // min. Be that as it may, verify that the max is larger before
+        // applying just the same.
+        specialOffer.promoQty = promoMax > promoMin ?  promoMax : promoMin
 
         def ptype = promo.'discount-type'.text()
         switch (ptype) {
