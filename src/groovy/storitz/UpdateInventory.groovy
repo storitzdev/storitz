@@ -65,25 +65,24 @@ class UpdateInventory {
       //println("allStorageSites = ${allStorageSites}")
 
         int batch_size = 50
-        // JM 2011-05-19. Testing loading inventory in batches.
         for (int i = 0; i < allStorageSitesIds.size(); i+= batch_size) {
             int lower_i = i
             int upper_i = i+batch_size-1 >= allStorageSitesIds.size() ? allStorageSitesIds.size() : i+batch_size-1
             int lower_id = allStorageSitesIds[lower_i]
             int upper_id = allStorageSitesIds[upper_i]
 
-            println ("lower_i=${lower_i}, upper_i=${upper_i}")
-            println ("lower_di=${lower_id}, upper_id=${upper_id}")
+            //println ("lower_i=${lower_i}, upper_i=${upper_i}")
+            //println ("lower_id=${lower_id}, upper_id=${upper_id}")
             List<StorageSite> allStorageSites
             if (src) {
                 allStorageSites = StorageSite.findAllByIdBetweenAndSource(lower_id,upper_id,src)
             } else {
                 allStorageSites = StorageSite.findAllByIdBetween(lower_id,upper_id)
             }
-            println ("allStorageSites.size()=${allStorageSites.size()}")
-            println ("allStorageSites=${allStorageSites}")
+            //println ("allStorageSites.size()=${allStorageSites.size()}")
+            //println ("allStorageSites=${allStorageSites}")
 
-            println ("START:${new Date().toString()}")
+            //println ("START:${new Date().toString()}")
             for (StorageSite site: allStorageSites) {
                 try {
                     def stats = new storitz.SiteStats()
@@ -92,27 +91,10 @@ class UpdateInventory {
                     writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
                 }
             }
-            println ("STOP:${new Date().toString()}")
+            //println ("STOP:${new Date().toString()}")
             feedService.clearSession()
         }
-        // End testing
 
-      /*** Original code
-      allStorageSites.each{ site ->
-        try {
-          def stats = new storitz.SiteStats()
-          // JM: Added timing metrics. This will help determine if we have a gradual decay scenario (VM Heap issue)
-          writer.print("FeedService site [${site.id}] start: " + (new Date()).toString())
-          feedService.updateUnits(site, stats, writer)
-          writer.print("FeedService site [${site.id}] end: " + (new Date()).toString())
-          writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
-        } catch (Exception e) {
-          writer.println "Error processing site id=${site.id} Error: ${e} Stacktrace: ${e.stackTrace}"
-        } catch (Throwable t) {
-          writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
-       }
-    }
-       ***/
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
       String subject = "[${ConfigurationHolder.config.grails.serverURL}] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
