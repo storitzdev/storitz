@@ -56,17 +56,17 @@ class UpdateInventory {
       } else {
         allStorageSitesIds = StorageSite.findAll().collect{ it.id }.sort()
       }
-      println ("allStorageSitesIds=${allStorageSitesIds}")
 
-      // TEST: shrink sample size for testing
-      //if (allStorageSites.size() > 3)  {
-      //  allStorageSites = allStorageSites.subList(0,3)
-      //}
-      //println("allStorageSites = ${allStorageSites}")
+        // TEST: shrink sample size for testing
+        //if (allStorageSitesIds.size() > 3)  {
+        //    allStorageSitesIds = allStorageSitesIds.subList(0,3)
+        //}
+        //println ("allStorageSitesIds=${allStorageSitesIds}")
 
         int batch_size = 50
-	int i = 0;
-	while (i < allStorageSitesIds.size()) {
+        int i = 0;
+        int num_errors = 0;
+        while (i < allStorageSitesIds.size()) {
             int lower_i = i
             int upper_i = i+batch_size-1 > allStorageSitesIds.size()-1 ? allStorageSitesIds.size()-1 : i+batch_size-1
             int lower_id = allStorageSitesIds[lower_i]
@@ -90,17 +90,18 @@ class UpdateInventory {
                     feedService.updateUnits(site, stats, writer)
                     writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
                 } catch (Throwable t) {
+                    ++num_errors
                     writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
                 }
             }
             //println ("STOP:${new Date().toString()}")
             feedService.clearSession()
-	    i=upper_i+1;
+            i=upper_i+1;
         }
 
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
-      String subject = "[${ConfigurationHolder.config.grails.serverURL}] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
+      String subject = "[${ConfigurationHolder.config.grails.serverURL}, ${src} (SITES:${allStorageSitesIds.size()}/ERRORS:${num_errors})] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
 
       writer.flush()
       writer.close()
