@@ -25,57 +25,66 @@ class ExrsWebFormProcessorTests extends GroovyTestCase {
         assertTrue(exrsWebFormProcessor.testLogin2())
     }
 
-
     //these tests are perishable due to the nature of the inventory in question.
-//    void testExrsFormPost430() {
+//    void testExrsFormPost507() {
 //        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
-//        RentalTransaction trans = RentalTransaction.findById (430)
-//        boolean res = exrsWebFormProcessor.processMoveIn(trans)
-//        assertFalse(res) // no longer available
+//        RentalTransaction trans = RentalTransaction.findById (507)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
+//        assertTrue(res)
 //    }
 //
-//    void testExrsFormPost431() {
+//    void testExrsFormPost526() {
 //        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
-//        RentalTransaction trans = RentalTransaction.findById (431)
-//        boolean res = exrsWebFormProcessor.processMoveIn(trans)
-//        assertFalse(res) // no longer available
+//        RentalTransaction trans = RentalTransaction.findById (526)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
+//        assertTrue(res)
 //    }
 //
-//    void testExrsFormPost432() {
+//    void testExrsFormPost528() {
 //        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
-//        RentalTransaction trans = RentalTransaction.findById (432)
-//        boolean res = exrsWebFormProcessor.processMoveIn(trans)
-//        assertFalse(res) // no longer available
+//        RentalTransaction trans = RentalTransaction.findById (528)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
+//        assertTrue(res)
 //    }
 //
-//    void testExrsFormPost434() {
+//    void testExrsFormPost539() {
 //        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
-//        RentalTransaction trans = RentalTransaction.findById (434)
-//        boolean res = exrsWebFormProcessor.processMoveIn(trans)
-//        assertFalse(res)  // no longer available
+//        RentalTransaction trans = RentalTransaction.findById (539)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
+//        assertTrue(res)
 //    }
 //
-//    void testExrsFormPost437() {
+//    void testExrsFormPost543() {
 //        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
-//        RentalTransaction trans = RentalTransaction.findById (437)
-//        boolean res = exrsWebFormProcessor.processMoveIn(trans)
-//        assertFalse(res)  // no longer available
+//        RentalTransaction trans = RentalTransaction.findById (543)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
+//        assertTrue(res)
 //    }
 //
-//
-//    void testExrsFormPost438() {
+//    void testExrsFormPost544() {
 //        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
-//        RentalTransaction trans = RentalTransaction.findById (438)
-//        boolean res = exrsWebFormProcessor.processMoveIn(trans)
-//        if (!res) {
-//            sendEmail(exrsWebFormProcessor.logBuf)
-//        }
+//        RentalTransaction trans = RentalTransaction.findById (544)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
+//        assertTrue(res)
+//    }
+//
+//    void testExrsFormPost546() {
+//        ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor()
+//        RentalTransaction trans = RentalTransaction.findById (546)
+//        def res = exrsWebFormProcessor.processMoveIn(trans)
+//        sendEmail(exrsWebFormProcessor.logBuf)
 //        assertTrue(res)
 //    }
 
     def sendEmail(message) {
         EmailService es = new EmailService()
-        def args = [to:"tech@storitz.com",from:"no-reply@storitz.com",subject:"EXRS Automatic Move-In Error Log",body:message]
+        def args = [to:"tech@storitz.com",from:"no-reply@storitz.com",subject:"EXRS Integration Test - IGNORE",body:message]
         es.sendTextEmail (args)
     }
 

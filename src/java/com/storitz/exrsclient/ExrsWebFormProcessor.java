@@ -19,6 +19,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.storitz.RentalTransaction;
 import com.storitz.Contact;
 import storitz.constants.CreditCardType;
+import storitz.constants.UnitType;
 
 import java.io.*;
 import java.util.*;
@@ -38,7 +39,7 @@ public class ExrsWebFormProcessor {
     // 1 = dump page source
     // 2 = dump page+form source
     // 3 = dump everything
-    private int debug_level = 3;
+    private int debug_level = 0;
 
     public ExrsWebFormProcessor() {
         webClient = new WebClient(BrowserVersion.FIREFOX_3_6);
@@ -93,6 +94,7 @@ public class ExrsWebFormProcessor {
             logMessage(1,"*** page3 ***");
             logMessage(1,page3.asXml().toString());
 
+
             //////////////////////////////////////
             // PAGE 4 - Receive Confirmation /////
             //////////////////////////////////////
@@ -113,6 +115,7 @@ public class ExrsWebFormProcessor {
                 logMessage(0,"Confirmation Number: " + confirmationNumber);
                 return true;
             }
+
         } catch (Throwable t) {
             logStackTrace(t);
         }
@@ -381,14 +384,31 @@ public class ExrsWebFormProcessor {
         return null;
     }
 
+    private String getUnitType(RentalTransaction trans) {
+        String type = trans.getUnitType().getDisplay().toString().toLowerCase();
+
+        if (type.equalsIgnoreCase("interior")) {
+            return "inside";
+        }
+        if (type.equalsIgnoreCase("upper")) {
+            return "upper";
+        }
+        if (type.equalsIgnoreCase("drive up")) {
+            return "drive";
+        }
+
+        return null; // match anything
+    }
 
     private HtmlPage processPageOne(RentalTransaction trans, HtmlPage page1) {
         String size  = trans.getDisplaySize();
         String cost  = trans.getMonthlyRate().toString();
         String promo = trans.getPromoName();
+        String type  = getUnitType(trans);
 
         logMessage(0,"*** SIZE =" + size + "  ***");
         logMessage(0,"*** COST =" + cost + "  ***");
+        logMessage(0,"*** TYPE =" + type + "  ***");
         logMessage(0,"*** PROMO=" + promo + "  ***");
 
         String actionUrl = page1.getUrl().toString();
@@ -398,7 +418,7 @@ public class ExrsWebFormProcessor {
             return null;
         }
 
-        HtmlElement button = getPageOneSelectButton(htmlForm, size, cost, promo);
+        HtmlElement button = getPageOneSelectButton(htmlForm, size, cost, type, promo);
         if (button == null) {
             return null;
         }
@@ -464,42 +484,52 @@ public class ExrsWebFormProcessor {
     }
 
 
-    private HtmlElement getPageOneSelectButton (HtmlForm htmlForm, String size, String cost, String offer) {
-        DomNodeList<HtmlElement> domNodeList = htmlForm.getElementsByTagName("div");
+    private HtmlElement getPageOneSelectButton (HtmlForm htmlForm, String size, String cost, String type, String offer) {
+        DomNodeList<HtmlElement> domNodeList = htmlForm.getElementsByTagName("tr");
+
         for (HtmlElement element : domNodeList) {
-            String elementText = element.asText().replaceAll(" ","");
-            size = size.replaceAll(" ","");
+            // Each element here is a table row. Scan for text that signifies
+            // this row as the correct row for this unit, and when we find that
+            // row, isolate the button
+            String elementText = element.asText().replaceAll(" ","").toLowerCase();
+            size = size.replaceAll(" ","").toLowerCase();
             logMessage(3,"*** AFTER ELEMENTTEXT: " + elementText);
             logMessage(3,"*** AFTER SIZE: " + size);
 
-            if (elementText.equalsIgnoreCase(size)) {
-                logMessage(3,"ELEMENT: " + element.asText());
-                logMessage(3,"     P1: " + element.getParentNode().asXml().toString());
-                logMessage(3,"     P2: " + element.getParentNode().getParentNode().getChildNodes().toString());
+            if (elementText.contains(size)) {
+                logMessage(3,"POSSIBLE-MATCH ELEMENT: " + element.asText());
 
                 // We know this unit is the correct size. Let's examine the remaining attributes to
                 // see if it is a perfect match.
-                DomNodeList<DomNode> domNodeList2 = element.getParentNode().getParentNode().getChildNodes();
-                int sz = domNodeList2.size();
+                Iterable<DomNode> domNodeChildren = element.getChildren();
+                Iterator<DomNode> domNodeIterator = domNodeChildren.iterator();
 
+                DomNode lastNode = null; // placeholder for the button when we fid it
                 DomNode buttonNode = null;
                 boolean matchedRate = false;
+                boolean matchedType = type == null ? true : false;
                 boolean matchedOffer = false;
 
-                for (int i = 0; i < sz; i++) {
-                    DomNode node = domNodeList2.get(i);
-                    String nodeString = node.asText();
+                while (domNodeIterator.hasNext()) {
+                    DomNode node = domNodeIterator.next();
+                    String nodeString = node.asText().toLowerCase();
 
-                    logMessage(3,"NODESTRING[" + i + "]: >" + nodeString + "<");
+                    logMessage(3,"NODE >" + nodeString + "<");
 
                     // try to match the cost
-                    if (nodeString.contains("Internet Rate: $" + cost) || nodeString.contains("Web Rate: $" + cost)) {
+                    if (nodeString.contains("internet rate: $" + cost) || nodeString.contains("web rate: $" + cost)) {
                         matchedRate = true;
                         continue;
                     }
 
+                    // try to match the type
+                    if ((type != null) && nodeString.contains(type)) {
+                        matchedType = true;
+                        continue;
+                    }
+
                     // try to match the offer
-                    if ((offer != null) && nodeString.contains(offer)) {
+                    if ((offer != null) && nodeString.contains(offer.toLowerCase())) {
                         matchedOffer = true;
                         continue;
                     }
@@ -508,16 +538,19 @@ public class ExrsWebFormProcessor {
                         matchedOffer = true;
                         continue;
                     }
+
+                    lastNode = node;
                 }
 
-                // Found it!
-                if (matchedRate && matchedOffer) {
-                    buttonNode = domNodeList2.get(sz - 1);
+                 // Found it!
+                if (matchedRate && matchedType && matchedOffer) {
+                    buttonNode = lastNode;
                 }
 
                 if (buttonNode != null) {
-                    String buttonId = buttonNode.getChildNodes().get(1).getAttributes().getNamedItem("id").getNodeValue();
-                    logMessage(3," BUTTON: " + buttonId);
+                    logMessage(3," BUTTON NODE: " + buttonNode.asXml().toString().toLowerCase());
+                    String buttonId = buttonNode.getChildNodes().get(1).getChildNodes().get(1).getAttributes().getNamedItem("id").getNodeValue();
+                    logMessage(3," BUTTON ID: " + buttonId);
                     HtmlElement button = htmlForm.getElementById(buttonId);
                     return button;
               }
