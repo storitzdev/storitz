@@ -87,7 +87,7 @@ class ReportsController {
 
   def site = {
 
-    ReportPeriod period = new ReportPeriod(params)
+    ReportPeriod period = new ReportPeriod(params)  // TODO: Easily exploitable security hole? What stops me from submitting a request to see your invoices?
 
     if (!period.validate()) {
       period.errors.allErrors.each {
