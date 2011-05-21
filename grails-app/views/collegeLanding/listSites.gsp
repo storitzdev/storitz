@@ -145,23 +145,16 @@
     </g:if>
 </div>
 <div id="header">
-    <strong class="logo"><a href="listSites.gsp#">Storitz</a></strong>
+    <strong class="logo"><g:link controller="home" action="index">Storitz</g:link></strong>
     <div class="text-holder">
         <strong class="subheading">The Storitz Advantage</strong>
         <strong class="heading">Find and Rent Self Storage right here, right now.</strong>
     </div>
     <a href="listSites.gsp#" class="btn-need-assistance">Need Assistance? (877) 465-29-29</a>
-    <form action="listSites.gsp#" class="search-form" id="gsearch" method="post">
-        <fieldset>
-            <legend>search</legend>
-            <input tabindex="10" class="text" type="text" id="address" value="Enter Address or Zip" title="Enter Address or Zip"/>
-            <input tabindex="11" type="submit" class="submit" id="btn-search" value="" title="search submit"/>
-        </fieldset>
-    </form>
 </div>
 <div id="map_popup" class="tooltip">
     <a class="close button small black">close</a>
-    <p>1234 Main St.</p>
+    <p><!-- 1234 Main St. --></p>
     <div id="maplet_canvas" style="width:320px; height:320px"></div>
 </div>
 <div id="footer">

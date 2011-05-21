@@ -30,11 +30,12 @@ a:hover {
     position: absolute;
     top: 22px;
     left: 120px;
-    height: 108px;
+    height: 104px;
     border-bottom: 1px solid #ddd;
     width: 948px;
 }
-#header .logo{
+#header .logo a {
+    display: block;
 	background:url(../images/logo.gif) no-repeat 0 6px;
 	float:left;
 	height:84px;
