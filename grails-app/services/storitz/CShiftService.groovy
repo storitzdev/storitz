@@ -944,7 +944,7 @@ class CShiftService extends BaseProviderService {
       def description = promo.'promo-desc'.text()
 
       def validGov = true
-      def promoSize = null
+      def promoSize = null // TODO: delete me
 
       for (gov in promo.'promo-governors'.governor) {
         def limitFactor = gov.'limiting-factor'.text()
