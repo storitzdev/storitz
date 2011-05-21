@@ -86,7 +86,7 @@
           <div class="returnLink right" style="padding: 0 0.5em;">
             <a href="#" onClick="window.history.back();
             return false;">
-              Back to Seach Results
+              Back to Search Results
             </a>
           </div>
         </div>
