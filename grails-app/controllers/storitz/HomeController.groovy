@@ -5,25 +5,9 @@ import java.math.RoundingMode
 import storitz.constants.SearchType
 import com.storitz.*
 
-class HomeController {
+class HomeController extends SearchController {
 
-  def mapService
-  def geocodeService
-  def costService
-  def offerFilterService
-
-  double lat
-  double lng
-  def zip
-  def searchCity
-  def city
-  def state
-  def cname
-  def clogo
-  def cPrBGColor
-  def cPrFGColor
-  def cScBGColor
-  def cScFGColor
+    def searchCity
 
     def doIndex(params, title) {
        params = removeNullAddress(params)
@@ -229,6 +213,14 @@ class HomeController {
         def today = new Date()
         def moveInDays = moveInDate - today
 
+        /*
+        logic:
+          find all units with inventory
+          for each unit, find the lowest monthly cost
+          find the valid offers for that unit
+          for each valid offer, find the one that produces the lowest move-in cost
+         */
+
         for (site in sites) {
             if (site.maxReserveDays >= moveInDays) {
                 def bestUnit
@@ -267,67 +259,11 @@ class HomeController {
             }
         }
 
-        [sizeList: sizeList, title: displayTitle, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch, cname: cname, clogo: clogo, cPrBGColor:cPrBGColor, cPrFGColor:cPrFGColor, cScBGColor:cScBGColor, cScFGColor:cScFGColor]
+        [sizeList: sizeList, title: displayTitle, city: city, searchCity: searchCity, state: state, zip: zip, neighborhoodList: neighborhoodList, metro: metro, neighborhood: neighborhood, zoom: zoom, lat: lat, lng: lng, searchSize: searchSize, sites: sites, siteMoveInPrice: siteMoveInPrice, zipSearch: zipSearch]
     }
 
   def index = {
      doIndex(params, null)
-  }
-
-  // college landing page
-  def college = {
-
-      def title = null
-
-      if (params.college) {
-          CollegeLanding cl = findCollege(params.college)
-          if (cl) {
-              params.address=cl.address
-              cname=cl.displayName
-              clogo=cl.logoBaseName + cl.logoFileLoc
-              cPrBGColor=cl.primaryBGColor
-              cPrFGColor=cl.primaryFGColor
-              cScBGColor=cl.secondaryBGColor
-              cScFGColor=cl.secondaryFGColor
-              title = "Find Summer Self Storage near ${cl.displayName} - Best Price Guaranteed on Storitz"
-          }
-      }
-
-      doIndex(params,title)
-  }
-
-  private CollegeLanding findCollege(String url) {
-    ArrayList<CollegeLanding> colleges = CollegeLanding.findAll()
-
-    // Say we have two colleges: UCLA and Duclan College
-    // It is possible for people typeing storitz.com/college/duclan-college
-    // to get redirected to the UCLA landing page because "duclan" contains
-    // "UCLA" as part of it's name. To work-around that use case
-    // we first check if the URL starts with the given college name.
-    // In this case "storitz.com/college/XYZ-Duclan-College-Self-Storage" would
-    // still redirect to the UCLA page, but "storitz.com/college/Duclan-College-Self-Storage"
-    // would be a perfect match and redirect exactly where you expect it to.
-
-    // Exact (starts with) Match
-    for (int  i = 0; i < colleges.size(); i++) {
-        CollegeLanding landing = colleges.get(i)
-        String cleanUrl = url.toLowerCase().replaceAll("-"," ")
-        String cleanName = landing.name.toLowerCase().replaceAll("-"," ")
-        if (cleanUrl.startsWith(cleanName)) {
-            return landing
-        }
-    }
-
-    // Glob (contains) Match
-    for (int  i = 0; i < colleges.size(); i++) {
-        CollegeLanding landing = colleges.get(i)
-        String cleanUrl = url.toLowerCase().replaceAll("-"," ")
-        String cleanName = landing.name.toLowerCase().replaceAll("-"," ")
-        if (cleanUrl.contains(cleanName)) {
-            return landing
-        }
-    }
-    return null
   }
 
     // JM 2011-05-10
@@ -474,39 +410,6 @@ class HomeController {
       render(status: 200, contentType: "application/json", text: geocodeService.geocode(params.lat as double, params.lng as double))
     }
     render(status: 200, contentType: "application/json", text: '')
-  }
-
-  private boolean handleGeocode(geoResult) {
-    if (geoResult && geoResult.status == "OK") {
-      lng = geoResult.results[0].geometry.location.lng
-      lat = geoResult.results[0].geometry.location.lat
-      for (comp in geoResult.results[0].address_components) {
-        switch (comp.types[0]) {
-          case "locality":
-            city = comp.long_name
-            break
-          case "administrative_area_level_1":
-            state = comp.short_name
-            break
-          case "postal_code":
-            zip = comp.long_name
-            break
-        }
-      }
-      return true
-    } else {
-      def loc = mapService.getGeoIp(servletContext, request)
-
-      lat = loc.latitude
-      lng = loc.longitude
-      zip = loc.postalCode
-      //what was the rationale for not updating city and state too?
-      //if (!city) city = loc.city
-      //if (!state) state = loc.region
-      city = loc.city
-      state = loc.region
-    }
-    return false
   }
 
   def redirectGeo = {

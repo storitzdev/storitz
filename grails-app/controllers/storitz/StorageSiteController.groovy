@@ -333,6 +333,7 @@ class StorageSiteController {
         def waiveAdminString = "waiveAdmin_" + specialOffer.id
         def promoNameString = "promoName_" + specialOffer.id
         def promoDescString = "promoDesc_" + specialOffer.id
+        def offerTagsString = "offerTags_" + specialOffer.id
 
         if (params.getAt(offerString)) {
           specialOffer.active = true
@@ -358,7 +359,19 @@ class StorageSiteController {
         if (params.getAt(promoDescString)) {
           specialOffer.description = params.getAt(promoDescString)
         }
-        specialOffer.save()
+        specialOffer.tags.clear()
+        if (params.getAt(offerTagsString)) {
+            for (tagString in params.getAt(offerTagsString).split()) {
+              def newTag = SpecialOfferTag.findByTag(tagString)
+              if (!newTag) {
+                newTag = new SpecialOfferTag()
+                newTag.tag = tagString
+                newTag.save(flush:true)
+              }
+              specialOffer.addToTags(newTag)
+            }
+        }
+        specialOffer.save(flush:true)
       }
       for (ins in storageSiteInstance.insurances) {
         def insString = "insurance_" + ins.id

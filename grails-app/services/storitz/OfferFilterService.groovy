@@ -10,6 +10,19 @@ class OfferFilterService {
 
   static transactional = false
 
+  def getValidUnitsForOffer(StorageSite site, SpecialOffer offer) {
+      def units = []
+      def candidate_offers = []
+      site.units.each { unit ->
+          candidate_offers << offer
+          filterOffer([offer], site, unit)
+          if (candidate_offers.size()) {
+              units << unit
+          }
+          candidate_offers.clear()
+      }
+      units
+  }
   def getValidOffers(StorageSite site, StorageUnit unit) {
     List results = site.specialOffers()
     filterOffer(results, site, unit)

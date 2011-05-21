@@ -7,7 +7,8 @@ class SpecialOffer {
   static belongsTo = StorageSite
 
   static hasMany = [
-          restrictions: SpecialOfferRestriction
+          restrictions: SpecialOfferRestriction,
+          tags: SpecialOfferTag
   ]
 
   static constraints = {
@@ -24,6 +25,7 @@ class SpecialOffer {
 
   static mapping = {
     restrictions cascade: "all,delete-orphan"
+    tags cascade: "all,delete-orphan"
   }
 
   String code
@@ -42,6 +44,6 @@ class SpecialOffer {
 
   Date startDate
   Date endDate
-  StorageSize promoSize
-  String unitType        // this helps associate a given offer with a particular unit type
+  StorageSize promoSize  // TODO: Delete, unused
+  String unitType        // TODO: Delete, unused
 }

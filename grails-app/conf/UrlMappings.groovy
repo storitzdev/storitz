@@ -105,7 +105,8 @@ class UrlMappings {
 
     "/"(controller: "home", action: "index")
 
-    "/college/$college"(controller: "home", action: "college")
+    "/college/storage_tips"(controller:"collegeLanding", action:"storageTips")
+    "/college/$college"(controller: "collegeLanding", action: "listSites")
 
     "/organizer"(controller: "organizerContest", action: "create")
 

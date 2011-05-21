@@ -1055,7 +1055,7 @@
             <div style="clear:both;"></div>
           </div>
 
-          <div class="checkout_section_header">
+          <div class="checkout_section_header" id="special_offers">
             Special Offers
           </div>
 
@@ -1075,6 +1075,7 @@
                   <th>Waive Admin Fee</th>
                   <th>Promotion Name</th>
                   <th>Description</th>
+                  <th>Tags</th>
                   <th>Restrictions</th>
                 </tr>
                 <g:each in="${storageSiteInstance?.specialOffers.sort{it.id}}" var="o">
@@ -1084,6 +1085,7 @@
                     <td><g:checkBox name="waiveAdmin_${o.id}" value="${o.waiveAdmin}"/></td>
                     <td><g:textField style="width:250px;" name="promoName_${o.id}" value="${o.promoName}"/></td>
                     <td><g:textField style="width:250px;" name="promoDesc_${o.id}" value="${o.description}"/></td>
+                    <td><g:textField style="width:250px;" name="offerTags_${o.id}" value="${o.tags.collect { t -> t.tag }.join(' ')}"/></td>
                     <td>
                       <g:each in="${o.restrictions}" var="r">
                         <div>${r.type.display}:${r.type == SpecialOfferRestrictionType.OCCUPANCY_RATE || r.type == SpecialOfferRestrictionType.MINIMUM_AVAILABLE || r.type == SpecialOfferRestrictionType.UNIT_AREA ? r.minRange + ' <= x <=' + r.maxRange : r.restrictionInfo}</div>

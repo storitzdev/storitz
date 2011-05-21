@@ -142,9 +142,13 @@ log4j = {
   // Example of changing the log pattern for the default console
   // appender:
   //
-  //appenders {
-  //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-  //}
+  appenders {
+      console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+  }
+  root {
+    info()
+  }
+
   appender.stdout = "org.apache.log4j.ConsoleAppender"
   appender.'stdout.layout' = "org.apache.log4j.PatternLayout"
   appender.'stdout.layout.ConversionPattern' = '[%r] %c{2} %m%n'
@@ -163,7 +167,9 @@ log4j = {
 
   warn 'org.mortbay.log'
 
-  // debug  'org.apache.axis'
+  info 'grails.app'
+
+    // debug  'org.apache.axis'
 }
 
 //log4j.logger.org.springframework.security='off,stdout'
@@ -246,7 +252,24 @@ uiperformance.bundles = [
                 files: ['jquery-ui-1.8.6.custom',
                         'jquery.ui.selectmenu',
                         'main'
-                ]]
+                ]],
+        [type: 'css',
+                name: 'college_bundled_css',
+                files: ['reset',
+                        'college',
+                        'buttons',
+                        'galleryview',
+                        'datatables']],
+        [type: 'js',
+                name: 'college_bundled_js',
+                files: ["jquery-1.4.2.min",
+                        "jquery.galleryview-2.1.1",
+                        "jquery.validate.min",
+                        "jquery.ba-bbq",
+                        "jwplayer",
+                        "json2",
+                        "college"
+                        ]]
 ]
 
 uiperformance.exclusions = [

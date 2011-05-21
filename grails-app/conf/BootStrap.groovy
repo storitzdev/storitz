@@ -18,6 +18,7 @@ import storitz.constants.UnitType
 import com.storitz.UnitTypeLookup
 import grails.util.Environment
 import com.storitz.SpecialOffer
+import com.storitz.SpecialOfferTag
 import storitz.constants.PromoType
 import com.storitz.UserNotificationType
 import storitz.constants.SearchType
@@ -545,6 +546,11 @@ class BootStrap {
     setupUnitTypes2()
     setupUnitTypes3()
     println "All Unit type lookups are done"
+
+    if (SpecialOfferTag.count() == 0) {
+      new SpecialOfferTag(tag:'college_summer_special_2011').save();
+    }
+
   }
 
   def destroy = {
