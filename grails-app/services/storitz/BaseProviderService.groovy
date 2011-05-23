@@ -173,9 +173,13 @@ abstract class BaseProviderService {
       }
     }
 
+    // Check for null tax rates and handle as appropriate
+    def taxRateInsurance = site.taxRateInsurance ? site.taxRateInsurance : 0
+    def taxRateRental = site.taxRateRental ? site.taxRateRental : 0
+    def taxRateMerchandise = site.taxRateMerchandise ? site.taxRateMerchandise : 0
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def tax = (premium * durationMonths * (site.taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (site.taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (site.taxRateMerchandise / 100)).setScale(2, RoundingMode.HALF_UP)
+    def tax = (premium * durationMonths * (taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (taxRateMerchandise / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
     ret["duration"] = durationMonths
