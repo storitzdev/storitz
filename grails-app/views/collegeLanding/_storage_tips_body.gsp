@@ -8,16 +8,6 @@
 you’ve moved around quite a bit during your, ahem, matriculation.  Which means that you’re actually one
 step ahead of most people who are in the process of packing things up and moving.</p>
 
-<p><span class="tweetable">You’ve got a couple things working for you</span>.  First, you probably don’t have a lot of space because
-you’re sharing a dorm with a weird girl from Wisconsin who insisted on splitting the room exactly in half
-with masking tape like that one episode of Full House.  But not having a lot of space will help you when
-moving out for the summer and moving your things into summer storage because not a lot of space means you
-don't have a lot stuff, either.  Which means fewer boxes, lighter boxes and a generally smoother process.
-Awesome.  The other thing working in your favor is that you’ve probably only lived wherever you’re moving
-out of for a few months.  So not only have you not had the chance to accumulate the amount of stuff that
-comes along with a longer residency, you also have a good idea of how things were once originally packed
-and you might even still have some of those packing materials.</p>
-
 <p>But keeping things in self-storage is a little bit different than just packing everything into the
 back of your Jetta.  It’s better to use boxes instead of duffel bags or garbage bags (like Angelina on
 the first season of Jersey Shore, can you believe her?) because bags will make stacking and packing your
