@@ -14,6 +14,11 @@ class MapService {
 
   // use the following for the default zoom level on a Google map
   def defaultZoom = 12
+
+  // Any zoom less than this will result in radically large map areas
+  // with (potentially) correspondingly large site selection volumes.
+  final int zoomMin = 7
+
   final double R = 3958.761; // mi
 
   // this is the number of degrees of latitude per pixel at zoom 12
@@ -44,6 +49,14 @@ class MapService {
     BigDecimal neLng
 
     def scale = Math.pow(2, defaultZoom - zoom)
+
+    // JM 2011-05-24
+    // Zoom level can get insane if, for example, the user decides to view the
+    // entire continent. Add a little sanity check here before moving forward
+    if (scale > 32) {
+        scale = 32;
+    }
+
     def latInv = gundInv(lat)
     swLat = gund(latInv - (height / 2) * scale * constLatPerPixel)
     swLng = lng - (width / 2) * scale * constLngPerPixel
@@ -87,7 +100,21 @@ class MapService {
 
   def getSites(Long searchSize, SearchType searchType, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
     def sites = StorageSite.createCriteria()
-    return sites.listDistinct {
+
+    def storageSites = sites.listDistinct {
+      //JM 2011-05-24
+      //maxResults will work but only for a basic query (i.e. the contents
+      //of the 'and' block below. If we add the additional searchSize filter
+      //criteria along with the fetchMode settings, then the results are
+      //throttled unexpectedly...
+      //maxResults(20)
+
+      // The contents of this closure basically create a huge multi-join
+      // query. The code runs out of memory when processing huge batches
+      // in real time and just dies.
+
+      // TODO: Break this entire query into smaller chunks
+
       and {
         between("lat", swLat, neLat)
         between("lng", swLng, neLng)
@@ -113,6 +140,7 @@ class MapService {
       fetchMode('specialOffers', FetchMode.EAGER)
     }
 
+    return storageSites;
   }
 
   def getGeoIp(ServletContext servletContext, HttpServletRequest request) {
@@ -140,7 +168,7 @@ class MapService {
       }
     } else if (count == 0) {
       // grow
-      while (zoom > 3 && count == 0) {
+      while (zoom > zoomMin && count == 0) {
         zoom--
         dim = getDimensions(zoom, lat, lng, width, height)
         count = countSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng)
