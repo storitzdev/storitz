@@ -3,7 +3,7 @@ package com.storitz
 class Video {
 
   static constraints = {
-    caption(size: 2..4000)
+    caption(size: 2..10000)
     tags(nullable: true, size: 1..512)
     site(nullable: true)
     stillImage(nullable: true)
