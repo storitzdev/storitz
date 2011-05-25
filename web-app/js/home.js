@@ -47,8 +47,8 @@ function getAddress() {
     return '';
 }
 
+var getMarkersRequests = 0
 function redrawMap() {
-
     bounds = map.getBounds();
 
     if (!firstDraw) {
@@ -57,8 +57,8 @@ function redrawMap() {
     }
 
     if (!inDrag) {
-        _gaq.push(['_trackEvent', 'home', 'map', 'bounds change']);
-        getMarkers();
+        _gaq.push(['_trackEvent', 'home', 'map', 'bounds change']);'' +
+        ++getMarkersRequests  // queue up request
     }
 }
 
@@ -69,7 +69,7 @@ function dragStart() {
 function dragEnd() {
     inDrag = false;
     _gaq.push(['_trackEvent', 'home', 'map', 'drag']);
-    getMarkers();
+    ++getMarkersRequests // queue up request
 }
 
 function setupIdle() {
@@ -131,13 +131,25 @@ function panTo(markerId) {
     markerOver(features[markerId]);
 }
 
+function setupMarkers() {
+    // Redraw the map every second, if the map has changed since last draw.
+    getMarkers();
+    setTimeout('setupMarkers()',1000);
+}
+
 function getMarkers() {
+    if (getMarkersRequests <= 0) {
+        getMarkersRequests = 0; // nothing to do
+        return;
+    }
 
     if (!bounds || typeof(bounds) == 'undefined') {
         return;
     }
 
     $('#mapSpinner').fadeIn();
+
+    getMarkersRequests = 0; // zero out the queue
 
     $.ajax({
         url: urlMapResults,
@@ -156,7 +168,6 @@ function getMarkers() {
             neLng: bounds.getNorthEast().lng()
         },
         success:function(ret) {
-
             if (ret.zoom > 0) {
                 map.setZoom(ret.zoom);
             }
@@ -679,6 +690,7 @@ $(document).ready(function() {
   setupTooltips();
   setupTable();
   setupResults();
+  setupMarkers();
 });
 
 $(window).bind('hashchange', function(e) {

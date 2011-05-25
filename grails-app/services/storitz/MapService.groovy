@@ -6,6 +6,7 @@ import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import org.hibernate.FetchMode
 import storitz.constants.SearchType
+import com.storitz.StorageUnit
 
 class MapService {
   def geoIp;
@@ -99,48 +100,44 @@ class MapService {
   }
 
   def getSites(Long searchSize, SearchType searchType, BigDecimal swLat, BigDecimal swLng, BigDecimal neLat, BigDecimal neLng) {
+
     def sites = StorageSite.createCriteria()
 
     def storageSites = sites.listDistinct {
-      //JM 2011-05-24
-      //maxResults will work but only for a basic query (i.e. the contents
-      //of the 'and' block below. If we add the additional searchSize filter
-      //criteria along with the fetchMode settings, then the results are
-      //throttled unexpectedly...
-      //maxResults(20)
-
-      // The contents of this closure basically create a huge multi-join
-      // query. The code runs out of memory when processing huge batches
-      // in real time and just dies.
-
-      // TODO: Break this entire query into smaller chunks
-
       and {
         between("lat", swLat, neLat)
         between("lng", swLng, neLng)
         eq("disabled", false)
       }
-      if (searchSize && searchSize != 1) {
-        fetchMode('units', FetchMode.EAGER)
-        units {
-          unitsize {
-            eq("id", searchSize)
-          }
-          gt("unitCount", 0)
-        }
-      } else {
-        fetchMode('units', FetchMode.EAGER)
-        units {
-          unitsize {
-            eq("searchType", searchType)
-          }
-          gt("unitCount", 0)
-        }
-      }
-      fetchMode('specialOffers', FetchMode.EAGER)
+      //Note: maxResults won't work when combined with FetchMode.EAGER
+      //Our goal is to find 20 good matches. We throttle at 50 here to
+      //account for sites without applicable units. Note: 50 is almost
+      //certainly overkill.
+      maxResults(50)
+
+      //fetchMode('units', FetchMode.EAGER)
+      //fetchMode('specialOffers', FetchMode.EAGER)
     }
 
-    return storageSites;
+    // We now have all of the sites in this rectangle. Now we need to filter
+    // out the ones that do not contain applicable inventory.
+    def results = []
+    storageSites.each { site ->
+        site.units.find { unit ->
+            def foundit = false
+            if (searchSize && searchSize != 1 && unit.unitsize.id == searchSize && unit.unitCount > 0) {
+                results.add(site);
+                foundit = true
+            }
+            else if (unit.unitsize.searchType == searchType && unit.unitCount > 0) {
+                results.add(site);
+                foundit = true
+            }
+            foundit // breaks the find loop when true
+        }
+    }
+
+    return results.unique();
   }
 
   def getGeoIp(ServletContext servletContext, HttpServletRequest request) {
