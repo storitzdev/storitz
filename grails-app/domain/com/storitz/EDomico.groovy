@@ -15,7 +15,7 @@ class EDomico extends Feed {
     }
 
 
-    int edomicoClientID
+    Integer edomicoClientID
     String edomicoWebServicesKey
 
 }

@@ -13,8 +13,8 @@ class ReportPeriod {
   Feed feed
 
   static constraints = {
-    startDate(blank: false)
-    endDate(blank: false)
+    startDate(nullable: false)
+    endDate(nullable: false)
     site(nullable: true)
     feed(nullable: true)
   }
