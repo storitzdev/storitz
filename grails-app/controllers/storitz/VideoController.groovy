@@ -61,10 +61,15 @@ class VideoController {
         def destFile = new File(request.getRealPath(videoInstance.fileLocation))
         videoFile.transferTo(destFile)
       }
-    } else {
-      flash.message = "Missing Video file"
-      render(view: "create", model: [videoInstance: videoInstance])
-      return
+    }
+    else {
+      // No video file.
+      // Only flash the error we are not using Youtube.
+      if (!videoInstance.useYouTube) {
+          flash.message = "Missing Video file"
+          render(view: "create", model: [videoInstance: videoInstance])
+          return
+      }
     }
     def imageFile = request.getFile("imageFile_0")
     if (imageFile.size > 0) {
@@ -77,10 +82,15 @@ class VideoController {
         def destFile = new File(request.getRealPath(videoInstance.stillImage))
         imageFile.transferTo(destFile)
       }
-    } else {
-      flash.message = "Missing Still Image file"
-      render(view: "create", model: [videoInstance: videoInstance])
-      return
+    }
+    else {
+      // No image file.
+      // Only flash the error we are not using Youtube.
+      if (!videoInstance.useYouTube) {
+        flash.message = "Missing Still Image file"
+        render(view: "create", model: [videoInstance: videoInstance])
+        return
+      }
     }
     if (videoInstance.save(flush: true)) {
       flash.message = "${message(code: 'default.created.message', args: [message(code: 'video.label', default: 'Video'), videoInstance.id])}"
@@ -134,11 +144,24 @@ class VideoController {
         }
       }
       videoInstance.properties = params
+
+      if (params.useYouTube == 'yes') {
+          videoInstance.useYouTube=true
+      }
+      else {
+          videoInstance.useYouTube=false
+      }
+
       site = videoInstance.site
       def videoFile = request.getFile("videoFile_0")
       if (videoFile?.size > 0) {
-        File oldVideoFile = new File(request.getRealPath(videoInstance.fileLocation))
-        if (oldVideoFile.exists()) {
+        File oldVideoFile = null;
+        try {
+            oldVideoFile = new File(request.getRealPath(videoInstance.fileLocation))
+        } catch (java.lang.NullPointerException ne) {
+            ne.printStackTrace()
+        }
+        if (oldVideoFile?.exists()) {
           oldVideoFile.delete()
         }
         if (site) {
@@ -153,8 +176,13 @@ class VideoController {
       def imageFile = request.getFile("imageFile_0")
       if (imageFile?.size > 0) {
         def ext = imageFile.originalFilename.tokenize('.')[-1]
-        File oldImageFile = new File(request.getRealPath(videoInstance.stillImage))
-        if (oldImageFile.exists()) {
+        File oldImageFile = null;
+        try {
+            oldImageFile = new File(request.getRealPath(videoInstance.stillImage))
+        } catch (java.lang.NullPointerException ne) {
+            ne.printStackTrace();
+        }
+        if (oldImageFile?.exists()) {
           oldImageFile.delete()
         }
         if (site) {
@@ -166,12 +194,22 @@ class VideoController {
           imageFile.transferTo(destFile)
         }
       }
-      if (!videoInstance.hasErrors() && videoInstance.save(flush: true)) {
-        flash.message = "${message(code: 'default.updated.message', args: [message(code: 'video.label', default: 'Video'), videoInstance.id])}"
-        redirect(action: "show", id: videoInstance.id)
-      }
       else {
-        render(view: "edit", model: [videoInstance: videoInstance])
+          // No image file.
+          // Only flash the error we are not using Youtube.
+          if (!videoInstance.useYouTube) {
+              flash.message = "Missing Still Image file"
+              render(view: "edit", model: [videoInstance: videoInstance])
+              return
+          }
+      }
+
+      if (videoInstance.hasErrors() || !videoInstance.validate()) {
+          render(view: "edit", model: [videoInstance: videoInstance])
+      } else {
+          videoInstance.save(flush: true)
+          flash.message = "${message(code: 'default.updated.message', args: [message(code: 'video.label', default: 'Video'), videoInstance.id])}"
+          redirect(action: "show", id: videoInstance.id)
       }
     }
     else {
@@ -185,13 +223,19 @@ class VideoController {
     def videoInstance = Video.get(params.id)
     if (videoInstance) {
       try {
-        File videoFile = new File(request.getRealPath(videoInstance.fileLocation))
-        if (videoFile.exists()) {
-          videoFile.delete()
+        // Video files are optional if the user prefers Youtube
+        if (videoInstance.fileLocation) {
+            File videoFile = new File(request.getRealPath(videoInstance.fileLocation))
+            if (videoFile.exists()) {
+              videoFile.delete()
+            }
         }
-        File imageFile = new File(request.getRealPath(videoInstance.stillImage))
-        if (imageFile.exists()) {
-          imageFile.delete()
+        // Still images are also optional if the user prefers Youtube
+        if (videoInstance.stillImage) {
+            File imageFile = new File(request.getRealPath(videoInstance.stillImage))
+            if (imageFile.exists()) {
+              imageFile.delete()
+            }
         }
         videoInstance.delete(flush: true)
         flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"

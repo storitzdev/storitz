@@ -112,7 +112,7 @@
         </div>
 
         <div class="checkout_section_header">
-          Video file
+          Video file (Optional if using YouTube)
         </div>
 
         <div class="checkout_labels">
@@ -123,7 +123,7 @@
         </div>
 
         <div class="checkout_section_header">
-          Still Image
+          Still Image (Optional if using YouTube)
         </div>
 
         <div class="checkout_labels">
@@ -132,6 +132,32 @@
           </div>
           <div style="height:10px;clear:both;"></div>
         </div>
+
+          <div class="checkout_labels">
+              <div class="checkout_name" stype="width:400px">
+                  <input type='radio' name='useYouTube' value='yes'
+                      <g:if test="${videoInstance.useYouTube}">checked='checked'</g:if>/> Yes
+                  <input type='radio' name='useYouTube' value='no'
+                      <g:if test="${!videoInstance.useYouTube}">checked='checked'</g:if>/> No
+              </div>
+              <div style="height:10px;clear:both;"></div>
+          </div>
+
+          <div class="checkout_section_header">
+            Use Youtube Player
+          </div>
+
+
+          <div class="checkout_labels">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'youTubeId', 'errors')}">
+                  <g:textField id="youTubeId" name="youTubeId" style="width: 380px;" value="${videoInstance.youTubeId}"/>
+            </div>
+            <div style="height:10px;clear:both;"></div>
+          </div>
+
+          <div class="checkout_section_header">
+            Youtube Video ID
+          </div>
 
         <div class="checkout_section_header">
           Tags
