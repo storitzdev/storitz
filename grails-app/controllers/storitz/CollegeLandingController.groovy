@@ -23,7 +23,6 @@ class CollegeLandingController extends SearchController  {
         }
 
         // display storage sites near campus
-
         def title = null
         def college = null
         if (params.college && (college = findCollege(params.college))) {

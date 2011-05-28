@@ -4,6 +4,7 @@ import grails.converters.JSON
 import java.math.RoundingMode
 import storitz.constants.SearchType
 import com.storitz.*
+import storitz.constants.TopMetro
 
 class HomeController extends SearchController {
 
@@ -263,7 +264,49 @@ class HomeController extends SearchController {
     }
 
   def index = {
-     doIndex(params, null)
+      // get IP to geo
+      def loc = mapService.getGeoIp(servletContext, request)
+
+      if (loc) {
+          lat = loc.latitude
+          lng = loc.longitude
+          zip = loc.postalCode
+          city = loc.city
+          state = loc.region
+
+          if (!zip) {
+              BigDecimal qLat = new BigDecimal(lat).setScale(10, RoundingMode.HALF_UP)
+              BigDecimal qLng = new BigDecimal(lng).setScale(10, RoundingMode.HALF_UP)
+              def geoLookup = GeoLookup.findByLatAndLng(qLat, qLng)
+              if (geoLookup) {
+                  zip = geoLookup.zip
+              } else {
+                  geoResult = geocodeService.geocode(lat, lng)
+                  if (handleGeocode(geoResult) && city && state) {
+                      new GeoLookup(lat: qLat, lng: qLng, city: city, state: state, zip: zip).save(flush: true)
+                  }
+              }
+          }
+      }
+      def c = StorageSite.createCriteria()
+      def states = []
+      def stateCounts = c.list {
+        projections {
+           groupProperty("state")
+           rowCount()
+         }
+         order("state")
+      }
+      stateCounts.each { pair ->
+          states << [label: pair[0].fullName, path: pair[0].display.replaceAll(' ', '-').toLowerCase()]
+      }
+      // TODO: retrieve top metros from database, just like states, once we
+      // figure out how to execute this query via GORM/Hibernate:
+      //     select city, state from storage_site
+      //     group by city, state
+      //     having count(1) > 5  -- this is the part i don't know how to do
+      //     order by city, state;
+      [ipGeolocation: loc, states: states, metros: TopMetro.list()]
   }
 
     // JM 2011-05-10

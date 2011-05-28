@@ -15,7 +15,12 @@ environments {
   development {
     dataSource {
       dbCreate = "update" // one of 'create', 'create-drop','update'
-      url = "jdbc:hsqldb:file:devDB"
+      //url = "jdbc:hsqldb:file:devDB"
+      driverClassName = "com.mysql.jdbc.Driver"
+      url = "jdbc:mysql://127.0.0.1:3306/storitz_development?autoReconnect=true"
+      username = "storitz"
+      password = "clickstoredone"
+
       //loggingSql = true
     }
   }

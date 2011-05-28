@@ -1,12 +1,5 @@
 package storitz.constants
 
-/**
- * Created by IntelliJ IDEA.
- * User: mamster
- * Date: Apr 2, 2010
- * Time: 4:20:20 PM
- * To change this template use File | Settings | File Templates.
- */
 public enum State {
   NONE("--", "--"),
   ALABAMA("AL", "Alabama"),
@@ -128,7 +121,7 @@ public enum State {
   }
 
   public static State getEnumFromId(String value) {
-    def ret = list().find {it.display == value }
+    def ret = list().find {it.display == value.toLowerCase() }
     if (!ret) return State.valueOf(value)
     return ret
   }

@@ -13,6 +13,12 @@ class SearchController {
     def city
     def state
 
+    def index = {
+    }
+
+    def metro = {
+    }
+
     boolean handleGeocode(geoResult) {
         if (geoResult && geoResult.status == "OK") {
             lng = geoResult.results[0].geometry.location.lng

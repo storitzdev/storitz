@@ -197,79 +197,18 @@ grails.mail.props = ["mail.smtp.auth": "true",
 // UI-performance configuration
 uiperformance.bundles = [
         [type: 'js',
-                name: 'header_all',
+                name: 'all',
                 files: ["jquery-1.4.2.min",
-                        "jquery-ui-1.8.6.custom.min",
-                        "jquery.ui.ipad.alt"
-                ]],
-        [type: 'js',
-                name: 'jquery_basic',
-                files: ["jquery-1.4.2.min",
-                        "jquery-ui-1.8.6.custom.min",
-                        "jquery.ui.ipad.alt",
-                        "jquery.qtip-1.0.min"
-                ]],
-        [type: 'js',
-                name: 'jquery_extended',
-                files: [
-                        "jquery.dataTables",
-                        "jquery.timers-1.2",
-                        "jquery.easing.1.3",
-                        "jquery.galleryview-2.1.1",
-                        "jquery.maskedinput",
-                        "jquery.validate.min",
-                        "jquery.ui.selectmenu",
-                        "jquery.ba-bbq",
-                        "jwplayer",
-                        "json2"
-                ]],
-        [type: 'js',
-                name: 'admin_all',
-                files: ["jquery-1.4.2.min",
-                        "jquery-ui-1.8.6.custom.min",
-                        "jquery.ui.ipad.alt"
-                ]],
-        [type: 'js',
-                name: 'detail_bundle',
-                files: ["transaction",
-                        "directions",
-                        "callCenterPolling",
-                        "detail"
+                        "placeholder",
+                        "jquery.tools.min",
+                        "application"
                 ]],
         [type: 'css',
-                name: 'admin_bundled',
-                files: ["main",
-                        "jquery-ui-1.8.6.custom"]],
-        [type: 'css',
-                name: 'jquery_bundled',
-                files: ['main',
-                        'jquery-ui-1.8.6.custom',
-                        'jquery.ui.selectmenu',
-                        'galleryview',
-                        'datatables']],
-        [type: 'css',
-                name: 'header_bundled',
-                files: ['jquery-ui-1.8.6.custom',
-                        'jquery.ui.selectmenu',
-                        'main'
-                ]],
-        [type: 'css',
-                name: 'college_bundled_css',
-                files: ['reset',
-                        'college',
-                        'buttons',
-                        'galleryview',
-                        'datatables']],
-        [type: 'js',
-                name: 'college_bundled_js',
-                files: ["jquery-1.4.2.min",
-                        "jquery.galleryview-2.1.1",
-                        "jquery.validate.min",
-                        "jquery.ba-bbq",
-                        "jwplayer",
-                        "json2",
-                        "college"
-                        ]]
+                name: 'bundled',
+                files: ["reset",
+                        "buttons",
+                        "application"
+                ]]
 ]
 
 uiperformance.exclusions = [
