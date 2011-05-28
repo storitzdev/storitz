@@ -59,17 +59,7 @@
               <td>${videoInstance?.useYouTube ? "Yes" : "No" }</td>
 
               <td>
-                  <g:if test="${videoInstance.useYouTube}">
-                    <g:if test="${videoInstance.youTubeId}">
-                        &lt;iframe width="640" height="480" src="http://www.youtube.com/embed/${videoInstance.youTubeId}" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
-                    </g:if>
-                    <g:else>
-                        No Youtube Video ID!
-                    </g:else>
-                  </g:if>
-                  <g:else>
-                    <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
-                  </g:else>
+                <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
               </td>
             </tr>
           </g:each>
