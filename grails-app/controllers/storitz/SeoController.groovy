@@ -1,22 +1,56 @@
 package storitz
 
-import com.storitz.Metro
-import com.storitz.MetroEntry
 import com.storitz.SiteImage
 import org.apache.commons.io.FileUtils
+import com.storitz.StorageSite
+import java.math.RoundingMode
 
 class SeoController {
 
   def imageService
   def fileUploadService
 
+  def partition(List list, int numPartitions, int minPerPartition) {
+      ArrayList partitions = new ArrayList();
+      int i = 0;
+      BigDecimal total = new BigDecimal(list.size());
+      int numPerParition = total.divide(numPartitions, 0, RoundingMode.CEILING).intValue();
+      if (numPerParition < minPerPartition) {
+          numPerParition = minPerPartition;
+      }
+      while(i < total) {
+        int j = 0;
+        List partition = new ArrayList();
+        while (j < numPerParition && (i + j) < total) {
+          partition.add(list.get(i + j));
+          j += 1
+        }
+        partitions.add(partition)
+        i += numPerParition;
+      }
+      return partitions;
+  }
+
   def state = {
-    def searchState = storitz.constants.State.getEnumFromId(params.state)
-
-    def metroList = Metro.findAllByState(searchState, [sort: "city", order: "asc"])
-    def metroEntryList = MetroEntry.findAllByState(searchState, [sort: "city", order: "asc"]).unique(new MetroEntryComparator())
-
-    [state: searchState, metroList: metroList, metroEntryList: metroEntryList]
+    def searchState = storitz.constants.State.fromPathParam(params.state)
+    def sitesInState = StorageSite.withCriteria {
+        eq("state", searchState)
+        projections {
+            groupProperty("city")
+            rowCount()
+        }
+        order("city")
+    }
+    def cities = sitesInState.collect { pair ->
+        // TODO: Implement this as a titleize method somewhere else
+        def displayName = pair[0].split().collect { word ->
+          word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase()
+        }.join(" ")
+        // TODO: implement proper codec for url params
+        def queryParam = pair[0].toLowerCase().replaceAll(" ", "-") + "-" + searchState.display.toLowerCase()
+        [name:displayName, numSites:pair[1], asQueryParam:queryParam]
+    }
+    [state: searchState, cityLists: partition(cities, 6, 25)]
   }
 
   def imageRename = {

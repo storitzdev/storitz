@@ -298,7 +298,8 @@ class HomeController extends SearchController {
          order("state")
       }
       stateCounts.each { pair ->
-          states << [label: pair[0].fullName, path: pair[0].display.replaceAll(' ', '-').toLowerCase()]
+          def name = pair[0].fullName
+          states << [label: name, path: name.replaceAll(' ', '-').toLowerCase()]
       }
       // TODO: retrieve top metros from database, just like states, once we
       // figure out how to execute this query via GORM/Hibernate:

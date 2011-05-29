@@ -120,6 +120,10 @@ public enum State {
     return ret
   }
 
+  public static State fromPathParam(String key) {
+    return list().find { it.fullName.replaceAll(" ", "-").toLowerCase() == key.toLowerCase() }
+  }
+
   public static State getEnumFromId(String value) {
     def ret = list().find {it.display == value.toLowerCase() }
     if (!ret) return State.valueOf(value)

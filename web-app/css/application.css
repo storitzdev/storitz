@@ -12,6 +12,22 @@ p {
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
+    clear: left;
+}
+h1.storitz-logo {
+    width: 160px;
+    height: 60px;
+    background: url("../images/v2/home/storitz-logo-small.png") no-repeat;
+    text-indent: -9999px;
+    display: inline-block;
+    /*float: left;*/
+}
+#header {
+    width: 960px;
+    clear: both;
+}
+#header form.search {
+
 }
 #bigbox, #logos, #info, #browse {
     clear: both;
@@ -21,6 +37,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 #bigbox {
     height: 285px;
+    position: relative;
+}
+#bigbox p {
+    font-family: Verdana;
+    display: inline-block;
+    position: absolute;
+    left: 175px;
+    top: 5px;
+    font-size: 19px;
+    font-weight: bold;
+    color: #3ea307;
+}
+#bigbox p span:first-child {
+    font-size: 16px;
+    color: #00529b;
+}
+#bigbox p span {
+    display: block;
 }
 #coverphoto {
     height: 225px;
@@ -126,30 +160,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 14px;
     height: 14px;
     text-indent: -9999px;
-}
-#bigbox h1 {
-    width: 160px;
-    height: 60px;
-    background: url("../images/v2/home/storitz-logo-small.png") no-repeat;
-    text-indent: -9999px;
-    display: inline-block;
-    float: left;
-}
-#bigbox p {
-    font-family: Verdana;
-    display: inline-block;
-    float: left;
-    margin-left: 25px;
-    font-size: 19px;
-    font-weight: bold;
-    color: #3ea307;
-}
-#bigbox p span:first-child {
-    font-size: 16px;
-    color: #00529b;
-}
-#bigbox p span {
-    display: block;
 }
 #logos {
     clear: both;
@@ -300,4 +310,70 @@ h2 {
 }
 #footer a:hover {
     text-decoration: underline;
+}
+body.state_directory h1 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+body.state_directory table {
+    width: 960px;
+}
+body.state_directory td {
+    line-height: 20px;
+    font-family: Helvetica;
+    font-size: 13px;
+    padding-right: 10px;
+}
+body.state_directory td a {
+    text-decoration: none;
+}
+#header {
+    position: relative;
+}
+#header form.search {
+    background: url(../images/v2/home/backgrounds/searchbox-bg.jpg);
+    width: 582px;
+    padding: 6px 0 6px 10px;
+    position: absolute;
+    left: 175px;
+    top: 0px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #c8c8c8;
+}
+#header form.search label {
+    font-family: Verdana;
+    font-size: 15px;
+    color: #3ea307;
+    font-weight: bold;
+    display: inline-block;
+}
+#header form.search input[type=text] {
+    display: inline-block;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #a8a8a8;
+    /*box-shadow: 0 0 6px lightblue;*/
+    font-family: Helvetica;
+    font-size: 15px;
+    color: #d1d1d1;
+    padding: 2px 0 0 8px;
+    width: 350px;
+    padding: 5px;
+}
+#phone_support {
+    width:170px;
+    height:60px;
+    line-height: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background:url(../images/btn-need-assistance.gif) no-repeat;
+    overflow:hidden;
+    text-indent: -9999px;
+}
+#phone_support strong {
+    display: block;
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="bigbox">
-    <h1>Storitz.com - Click. Store. Done.</h1>
+    <h1 class="storitz-logo">Storitz.com - Click. Store. Done.</h1>
     <p>
         <span>Simplify your search for self storage.</span>
         <span>Get prices, availability &amp deals with 1 click...</span>
@@ -102,15 +102,15 @@
 </div>
 <div id="browse">
     <ul class="tabs">
-        <li class="tab" id="states"><a href="#">Storage by State</a></li>
-        <li class="tab" id="cities"><a href="#">Storage by City</a></li>
-        <li class="tab" id="military"><a href="#">Military Storage</a></li>
-        <li class="tab" id="college"><a href="#">College Storage</a></li>
-        <li class="tab" id="business"><a href="#">Business Storage</a></li>
+        <li class="tab" id="states"><a href="#storage-by-state">Storage by State</a></li>
+        <li class="tab" id="cities"><a href="#storage-by-city">Storage by City</a></li>
+        <li class="tab" id="military"><a href="#military-storage">Military Storage</a></li>
+        <li class="tab" id="college"><a href="#college-storage">College Storage</a></li>
+        <li class="tab" id="business"><a href="#business-storage">Business Storage</a></li>
     </ul>
 
     <div class="panes">
-        <div>
+        <div><a name="storage-by-state">
             <table>
                 <tr>
                     <td>
@@ -144,10 +144,10 @@
                         </g:each>
                     </td>
                 </tr>
-            </table>
+            </table></a>
         </div>
 
-        <div>
+        <div id="storge-by-city">
             <table>
                 <tr>
                     <td>
@@ -184,17 +184,17 @@
             </table>
         </div>
 
-        <div>
+        <div id="military-storage">
             <h3>Military Storage</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <div>
+        <div id="college-storage">
             <h3>College Storage</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <div>
+        <div id="business-storage">
             <h3>Business Storage</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

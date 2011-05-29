@@ -1,8 +1,5 @@
 <%@ page import="storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en">
+<html>
 <head>
     <g:render template="/header_college"/>
     <script type="text/javascript">
@@ -144,24 +141,10 @@
         </ul>
     </g:if>
 </div>
-<div id="header">
-    <strong class="logo"><g:link controller="home" action="index">Storitz</g:link></strong>
-    <div class="text-holder">
-        <strong class="subheading">The Storitz Advantage</strong>
-        <strong class="heading">Find and Rent Self Storage right here, right now.</strong>
-    </div>
-    <a href="listSites.gsp#" class="btn-need-assistance">Need Assistance? (877) 465-29-29</a>
-</div>
 <div id="map_popup" class="tooltip">
     <a class="close button small black">close</a>
     <p><!-- 1234 Main St. --></p>
     <div id="maplet_canvas" style="width:320px; height:320px"></div>
-</div>
-<div id="footer">
-    <p class="copyright">
-    &copy; 2010-2011 Storitz Inc. All rights reserved.
-    Use of this website signifies your agreement to the <g:link controller="static" action="terms">Terms of Use</g:link> and
-    Online Privacy Policy.</p>
 </div>
 </body>
 </html>

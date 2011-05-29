@@ -214,6 +214,7 @@ $(document).ready(function() {
     });
     $("#search input[placeholder]").placeholder();
     $("#browse .tabs").tabs("#browse .panes > div", {
-                initialIndex: null
+                initialIndex: null,
+                history: true
             });
 });

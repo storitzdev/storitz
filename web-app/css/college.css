@@ -26,59 +26,12 @@ a:hover {
 	display: block;
 	content: "";
 }
-#header {
-    position: absolute;
-    top: 22px;
-    left: 120px;
-    height: 104px;
-    border-bottom: 1px solid #ddd;
-    width: 948px;
-}
-#header .logo a {
-    display: block;
-	background:url(../images/logo.gif) no-repeat 0 6px;
-	float:left;
-	height:84px;
-	width:250px;
-	margin:0 24px 0 0;
-	overflow:hidden;
-	text-indent:-9999px;
-}
-#header .text-holder{
-	float:left;
-    width:381px;
-    height:85px;
-	text-indent:-9999px;
-	overflow:hidden;
-	padding:8px 0 0;
-    margin:8px 0 0 7px;
-    background:url(../images/text-simplify.gif) no-repeat;
-}
-#header .text-holder .subheading{
-	font:bold 1.8em/1.2em "Century Gothic", Arial, Helvetica, sans-serif;
-	color:#00529b;
-	display:block;
-	padding:1px 0 0 15px;
-}
-#header .text-holder .heading{
-	display:block;
-	font:bold 2.3em/1em "Century Gothic", Arial, Helvetica, sans-serif;
-	color:#65bc44;
-	padding:0 0 0 72px;
-	min-height:66px;
-
-}
-#header .btn-need-assistance{
-	float:right;
-	width:170px;
-	height:60px;
-	text-indent:-9999px;
-	overflow:hidden;
-    margin:5px 0 12px;
-	background:url(../images/btn-need-assistance.gif) no-repeat;
+#phone_support {
+    right: 12px;
 }
 #footer {
     width: 928px;
+    margin-left: 0;
     color: #ccc;
     padding: 10px;
     border: 1px solid #ddd;
@@ -140,7 +93,7 @@ a:hover {
 
 #promo{
 	width:100%;
-    margin: 140px 0 2px 0;
+    margin: 30px 0 2px 0;
 	position:relative;
 }
 #promo img{
@@ -226,7 +179,7 @@ a:link, a:visited { font-weight: normal; }
 }
 #college_logo{
     position:absolute;
-    top:383px;
+    top:365px;
     left:137px;
     width:130px;
     height:131px;
@@ -562,6 +515,7 @@ body.college_storage_tips {
 body.college_storage_tips.min {
     padding-left: 10px;
     margin-top: 0;
+    padding-top: 0;
 }
 
 #college_tips_button {

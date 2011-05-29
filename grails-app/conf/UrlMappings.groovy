@@ -1,4 +1,5 @@
 import storitz.constants.TopMetro
+import storitz.constants.State
 
 class UrlMappings {
   static mappings = {
@@ -14,9 +15,18 @@ class UrlMappings {
 
     name state2: "/$state-self-storage" {
       controller = "seo"
+      action = "redirectState2"
+      constraints {
+        state(matches: /[A-Z]{2}/)
+      }
+    }
+
+    name state3: "/$state-self-storage" {
+      controller = "seo"
       action = "state"
       constraints {
-        state(matches: /[a-zA-Z]{2}/)
+        state(matches: /^[A-Za-z][A-Za-z\-]*[A-Za-z]$/)
+        state(validator: { return State.fromPathParam(it) != null })
       }
     }
 
@@ -54,9 +64,14 @@ class UrlMappings {
       controller = "search"
       action = "metro"
       constraints {
-          metro(matches: /[a-zA-Z\-]+-[a-zA-Z]{2}/)
+          metro(matches: /^[a-zA-Z][a-zA-Z\-]*[a-zA-Z]-[a-zA-Z]{2}$/)
           metro(validator: { return TopMetro.fromText(it) != null })
       }
+    }
+
+    name search: "/search" {
+        controller = "search"
+        action = "index"
     }
 
     "/xxx/$id" {

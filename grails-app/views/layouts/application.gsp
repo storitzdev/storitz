@@ -6,18 +6,20 @@
         <p:favicon src="images/favicon"/>
         <meta name="msvalidate.01" content="341E6494DB6B0393BB4866E8E337BDBB" /> <!-- Bing validator -->
         <META name="y_key" content="9a7a338eec8978fd"/>
-        %{--<p:css name="bundled_css" />--}%
+        <p:css name="bundled" />
         <g:layoutHead />
     </head>
     <body class="${pageProperty(name:'body.class')}">
         <div id="header">
-            <g:link controller="home" action="index" elementId="logo">
-                Storitz.com - Find & Rent Self Storage From 1000s of Facilities Nationwide ... Best Price Guaranteed
-            </g:link>
-            <g:form id="search" controller="search" action="listSites">
+            <h1 class="storitz-logo">
+                <g:link controller="home" action="index" elementId="logo">
+                    Storitz.com - Click. Store. Done.
+                </g:link>
+            </h1>
+            <g:form class="search" controller="search" action="index">
                 <fieldset>
-                    <legend>Enter your address, ZIP code, or city &amp; state:</legend>
-                    <input type="text" name="q" />
+                    <label>Find self storage:</label>
+                    <input type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
                     <input type="submit" name="btn" value="Search" />
                 </fieldset>
             </g:form>
@@ -27,19 +29,11 @@
                 <span id="toll_free">877-456-2929</span>
             </div>
         </div>
-        <div class="body">
-            <g:layoutBody />
-        </div>
-        <div id="footer">
-            <g:link controller="static" action="aboutus">About Us</g:link>
-            <g:link controller="static" action="terms">Terms</g:link>
-            <g:link controller="static" action="privacy">Privacy</g:link>
-        </div>
-        <script src="http://maps.google.com/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></script>
+        <g:layoutBody />
+        <g:render template="/v2footer"></g:render>
         <script type="text/javascript">
           document.write(unescape("%3Cscript src='" + document.location.protocol + "//zopim.com/?OnxU61sHAyKJAixaCrj9vqqwCQ1JzaPN' charset='utf-8' type='text/javascript'%3E%3C/script%3E"));
         </script>
-        %{--<p:javascript name="bundled_js" />--}%
         <g:pageProperty name="page.gwo" />
     </body>
 </html>

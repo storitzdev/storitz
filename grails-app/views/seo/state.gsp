@@ -1,41 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<%@ page import="java.math.RoundingMode" %>
+<html>
 <head>
-  <g:set var="title" value="Self Storage in ${state.display}" scope="request"/>
-  <g:render template="/header"/>
-
+  <title>Self Storage in ${state.fullName}</title>
 </head>
-<body>
-<div id="body">
-  <g:render template="/topnav"/>
-  <div class="stcontent">
-    <g:render template="/logo_bar"/>
-    <div style="height: 25px;"></div>
-    <div class="body">
-      <h1>Self Storage results for ${state.fullName}</h1>
-      <h2>Metro Areas</h2>
-      <div style="width:650px;">
-        <g:each in="${metroList}" var="metro">
-          <div class="site">
-            <g:link mapping="metro2" params="${[city:metro.city, state:metro.state.display]}">${metro.city}, ${metro.state.display}</g:link>
-          </div>
+<body class="state_directory">
+<h1>Self Storage Facilities in ${state.fullName}</h1>
+<table>
+    <tr>
+        <g:each in="${cityLists}" var="cityList">
+            <td>
+                <g:each in="${cityList}" var="city">
+                    <div>
+                          <g:link controller="search" action="metro" params="[metro:city.asQueryParam]">${city.name}</g:link> (${city.numSites})
+                    </div>
+                </g:each>
+            </td>
         </g:each>
-      </div>
-      <h2>Cities and Neighborhoods</h2>
-      <div class="left" style="width:300px;">
-        <g:each in="${metroEntryList}" var="metroEntry">
-          <div class="site">
-            <g:link mapping="geo2" params="${[city:metroEntry.city, state:metroEntry.state.display, zip:metroEntry.zipcode]}">${metroEntry.city} self storage</g:link>
-          </div>
-        </g:each>
-      </div>
-    </div>
-    <div style="height: 25px;"></div>
-  </div>
-  <g:render template="/footer"/>
-</div>
+    </tr>
+</table>
 </body>
-<p:renderDependantJavascript/>
 </html>

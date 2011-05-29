@@ -65,7 +65,7 @@ public enum TopMetro {
   }
 
     String getPathParam() {
-        return this.city.replaceAll(" ", "-").toLowerCase() + "-" + this.stateCode;
+        return this.city.replaceAll(" ", "-").toLowerCase() + "-" + this.stateCode.toLowerCase();
     }
 
     static list() {
