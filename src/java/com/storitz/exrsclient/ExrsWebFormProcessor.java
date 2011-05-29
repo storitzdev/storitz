@@ -194,9 +194,9 @@ public class ExrsWebFormProcessor {
 
     private HtmlPage processPageThree(RentalTransaction trans, HtmlPage page3) {
         HtmlForm htmlForm = getHtmlForm(page3,reserveConfirmAction);
-        HtmlElement ctl00_MainContent_ConfirmButton = page3.getElementById("ctl00_MainContent_ConfirmButton");
+        HtmlElement ctl00_mContent_ConfirmButton = page3.getElementById("ctl00_mContent_ConfirmButton");
         try {
-            return ctl00_MainContent_ConfirmButton.click();
+            return ctl00_mContent_ConfirmButton.click();
         } catch (IOException e) {
           logStackTrace(e);
         }
@@ -206,127 +206,125 @@ public class ExrsWebFormProcessor {
     private HtmlPage processPageTwo(RentalTransaction trans, HtmlPage page2) {
         HtmlForm htmlForm = getHtmlForm(page2,reserveOrHoldAction);
 
+        if (htmlForm == null) {
+            return null;
+        }
+
         Contact primaryContact = trans.getContactPrimary();
 
         //
         //Form Elements:
         //
         // The three below can use the default form values
-        //Setup Reservation                 ctl00_MainContent_setupReservation   (Checked)
-        //Setup Hold                        ctl00_MainContent_setupHold
-        //Returning User                    ctl00_MainContent_ReturningUser
-        HtmlRadioButtonInput ctl00_MainContent_setupReservation = (HtmlRadioButtonInput) page2.getElementById("ctl00_MainContent_setupReservation");
-        HtmlRadioButtonInput ctl00_MainContent_setupHold        = (HtmlRadioButtonInput) page2.getElementById("ctl00_MainContent_setupHold");
-        HtmlCheckBoxInput ctl00_MainContent_ReturningUser       = (HtmlCheckBoxInput) page2.getElementById("ctl00_MainContent_ReturningUser");
+        //Setup Reservation                 ctl00_mContent_setupReservation   (Checked)
+        //Setup Hold                        ctl00_mContent_setupHold
+        HtmlRadioButtonInput ctl00_mContent_setupReservation = (HtmlRadioButtonInput) page2.getElementById("ctl00_mContent_setupReservation");
+        HtmlRadioButtonInput ctl00_mContent_setupHold        = (HtmlRadioButtonInput) page2.getElementById("ctl00_mContent_setupHold");
 
-        ctl00_MainContent_setupReservation.setChecked(true);  // these two are mutually exclusive
-        ctl00_MainContent_setupHold.setChecked(false);        // these two are mutually exclusive
-        ctl00_MainContent_ReturningUser.setChecked(false);
+        ctl00_mContent_setupReservation.setChecked(true);  // these two are mutually exclusive
+        ctl00_mContent_setupHold.setChecked(false);        // these two are mutually exclusive
 
 
-        //First Name:                       ctl00_MainContent_FirstName
-        //Last Name:                        ctl00_MainContent_LastName
-        //Address:                          ctl00_MainContent_Address
-        //City:                             ctl00_MainContent_City
-        //Primary use (Personal):           ctl00_MainContent_UsingStorageFor_0  (Checked)
-        //Primary use (Business):           ctl00_MainContent_UsingStorageFor_1
-        //Zip Code:                         ctl00_MainContent_PostalCode   [5 digit only]
-        //Phone:                            ctl00_MainContent_Telephone    [15 digit max]
-        //Email:                            ctl00_MainContent_Email
-        //Email (Confirm):                  ctl00_MainContent_ConfirmEmail
-        HtmlTextInput ctl00_MainContent_FirstName          = (HtmlTextInput) page2.getElementById("ctl00_MainContent_FirstName");
-        HtmlTextInput ctl00_MainContent_LastName           = (HtmlTextInput) page2.getElementById("ctl00_MainContent_LastName");
-        HtmlTextInput ctl00_MainContent_Address            = (HtmlTextInput) page2.getElementById("ctl00_MainContent_Address");
-        HtmlTextInput ctl00_MainContent_City               = (HtmlTextInput) page2.getElementById("ctl00_MainContent_City");
-        HtmlRadioButtonInput ctl00_MainContent_UsingStorageFor_0  = (HtmlRadioButtonInput) page2.getElementById("ctl00_MainContent_UsingStorageFor_0");
-        HtmlRadioButtonInput ctl00_MainContent_UsingStorageFor_1  = (HtmlRadioButtonInput) page2.getElementById("ctl00_MainContent_UsingStorageFor_1");
-        HtmlTextInput ctl00_MainContent_PostalCode         = (HtmlTextInput) page2.getElementById("ctl00_MainContent_PostalCode");
-        HtmlTextInput ctl00_MainContent_Telephone          = (HtmlTextInput) page2.getElementById("ctl00_MainContent_Telephone");
-        HtmlTextInput ctl00_MainContent_Email              = (HtmlTextInput) page2.getElementById("ctl00_MainContent_Email");
-        HtmlTextInput ctl00_MainContent_ConfirmEmail       = (HtmlTextInput) page2.getElementById("ctl00_MainContent_ConfirmEmail");
+        //First Name:                       ctl00_mContent_FirstName
+        //Last Name:                        ctl00_mContent_LastName
+        //Address:                          ctl00_mContent_Address
+        //City:                             ctl00_mContent_City
+        //State:                            ctl00_mContent_State   [2 char state codes]
+        //Primary use (Personal/Business):  ctl00_mContent_PrimaryUse
+        //Zip Code:                         ctl00_mContent_PostalCode   [5 digit only]
+        //Phone:                            ctl00_mContent_Telephone    [15 digit max]
+        //Email:                            ctl00_mContent_Email
+        //Email (Confirm):                  ctl00_mContent_ConfirmEmail
+        HtmlTextInput ctl00_mContent_FirstName          = (HtmlTextInput) page2.getElementById("ctl00_mContent_FirstName");
+        HtmlTextInput ctl00_mContent_LastName           = (HtmlTextInput) page2.getElementById("ctl00_mContent_LastName");
+        HtmlTextInput ctl00_mContent_Address            = (HtmlTextInput) page2.getElementById("ctl00_mContent_Address");
+        HtmlTextInput ctl00_mContent_City               = (HtmlTextInput) page2.getElementById("ctl00_mContent_City");
+        HtmlSelect ctl00_mContent_State              = (HtmlSelect) page2.getElementById("ctl00_mContent_State");
+        HtmlSelect ctl00_mContent_PrimaryUse            = (HtmlSelect) page2.getElementById("ctl00_mContent_PrimaryUse");
+        HtmlTextInput ctl00_mContent_PostalCode         = (HtmlTextInput) page2.getElementById("ctl00_mContent_PostalCode");
+        HtmlTextInput ctl00_mContent_Telephone          = (HtmlTextInput) page2.getElementById("ctl00_mContent_Telephone");
+        HtmlTextInput ctl00_mContent_Email              = (HtmlTextInput) page2.getElementById("ctl00_mContent_Email");
+        HtmlTextInput ctl00_mContent_ConfirmEmail       = (HtmlTextInput) page2.getElementById("ctl00_mContent_ConfirmEmail");
 
-        ctl00_MainContent_FirstName.setText(primaryContact.getFirstName()) ;
-        ctl00_MainContent_LastName.setText(primaryContact.getLastName());
-        ctl00_MainContent_Address.setText(primaryContact.getAddress1()) ;
-        ctl00_MainContent_City.setText(primaryContact.getCity());
+        ctl00_mContent_FirstName.setText(primaryContact.getFirstName()) ;
+        ctl00_mContent_LastName.setText(primaryContact.getLastName());
+        ctl00_mContent_Address.setText(primaryContact.getAddress1()) ;
+        ctl00_mContent_City.setText(primaryContact.getCity());
+        ctl00_mContent_State.setSelectedAttribute(primaryContact.getState().getValue().toUpperCase(), true);
 
-        // these two are mutually exclusive
         if (trans.getRentalUse().getValue().equalsIgnoreCase("personal")) {
-            ctl00_MainContent_UsingStorageFor_0.setChecked(true);
-            ctl00_MainContent_UsingStorageFor_1.setChecked(false);
+            ctl00_mContent_PrimaryUse.setSelectedAttribute("Personal",true);
         } else {
-            ctl00_MainContent_UsingStorageFor_0.setChecked(false);
-            ctl00_MainContent_UsingStorageFor_1.setChecked(true);
+            ctl00_mContent_PrimaryUse.setSelectedAttribute("Business",true);
         }
 
-        ctl00_MainContent_PostalCode.setText(primaryContact.getZipcode());
-        ctl00_MainContent_Telephone.setText(primaryContact.getPhone());
-        ctl00_MainContent_Email.setText(primaryContact.getEmail());
-        ctl00_MainContent_ConfirmEmail.setText(primaryContact.getEmail());
+        ctl00_mContent_PostalCode.setText(primaryContact.getZipcode());
+        ctl00_mContent_Telephone.setText(primaryContact.getPhone());
+        ctl00_mContent_Email.setText(primaryContact.getEmail());
+        ctl00_mContent_ConfirmEmail.setText(primaryContact.getEmail());
 
 
 
-        //Credit Card Number:               ctl00_MainContent_CardNumber   [16 digit max]
-        //Coupon Code:                      ctl00_MainContent_CouponCode
-        //Update Price:                     ctl00_MainContent_UpdatePrice  // this is a submit button!
-        //Insurance:                        ctl00_MainContent_ProtectionCheckBox
-        //State:                            ctl00_MainContent_State   [2 char state codes]
-        //Move-in date:                     ctl00_MainContent_StartDate  [M/D/YYYY]
-        //Credit Card Type:                 ctl00_MainContent_CardType [VISA,MasterCard,AmEx,Discover]
-        //Credit Card Expiration (Month):   ctl00_MainContent_ExpiresMonth [01-12]
-        //Credit Card Expiration (Year):    ctl00_MainContent_ExpiresYear [11-21]
+        //Credit Card Number:               ctl00_mContent_CardNumber   [16 digit max]
+        //CCV/Verification Code:            ctl00_mContent_VerifyCard
+        //Coupon Code:                      ctl00_mContent_CouponCode
+        //Update Price:                     ctl00_mContent_UpdatePrice  // this is a submit button!
+        //Insurance:                        ctl00_mContent_ProtectionCheckBox
+        //Move-in date:                     ctl00_mContent_StartDate  [M/D/YYYY]
+        //Credit Card Type:                 ctl00_mContent_CardType [VISA,MasterCard,AmEx,Discover]
+        //Credit Card Expiration (Month):   ctl00_mContent_ExpiresMonth [01-12]
+        //Credit Card Expiration (Year):    ctl00_mContent_ExpiresYear [11-21]
         //Credit Card Verification Code:    none listed!
-        HtmlTextInput ctl00_MainContent_CardNumber         = (HtmlTextInput) page2.getElementById("ctl00_MainContent_CardNumber");
-        HtmlTextInput ctl00_MainContent_CouponCode         = (HtmlTextInput) page2.getElementById("ctl00_MainContent_CouponCode");
-        //HtmlTextInput ctl00_MainContent_UpdatePrice        = (HtmlTextInput) page2.getElementById("ctl00_MainContent_UpdatePrice");
-        HtmlCheckBoxInput ctl00_MainContent_ProtectionCheckBox = (HtmlCheckBoxInput) page2.getElementById("ctl00_MainContent_ProtectionCheckBox");
-        HtmlSelect ctl00_MainContent_State              = (HtmlSelect) page2.getElementById("ctl00_MainContent_State");
-        HtmlSelect ctl00_MainContent_StartDate          = (HtmlSelect) page2.getElementById("ctl00_MainContent_StartDate");
-        HtmlSelect ctl00_MainContent_CardType           = (HtmlSelect) page2.getElementById("ctl00_MainContent_CardType");
-        HtmlSelect ctl00_MainContent_ExpiresMonth       = (HtmlSelect) page2.getElementById("ctl00_MainContent_ExpiresMonth");
-        HtmlSelect ctl00_MainContent_ExpiresYear        = (HtmlSelect) page2.getElementById("ctl00_MainContent_ExpiresYear");
+        HtmlTextInput ctl00_mContent_CardNumber         = (HtmlTextInput) page2.getElementById("ctl00_mContent_CardNumber");
+        HtmlTextInput ctl00_mContent_VerifyCard         = (HtmlTextInput) page2.getElementById("ctl00_mContent_VerifyCard");
+        HtmlTextInput ctl00_mContent_CouponCode         = (HtmlTextInput) page2.getElementById("ctl00_mContent_CouponCode");
+        //HtmlTextInput ctl00_mContent_UpdatePrice        = (HtmlTextInput) page2.getElementById("ctl00_mContent_UpdatePrice");
+        HtmlCheckBoxInput ctl00_mContent_ProtectionCheckBox = (HtmlCheckBoxInput) page2.getElementById("ctl00_mContent_ProtectionCheckBox");
+        HtmlSelect ctl00_mContent_StartDate          = (HtmlSelect) page2.getElementById("ctl00_mContent_StartDate");
+        HtmlSelect ctl00_mContent_CardType           = (HtmlSelect) page2.getElementById("ctl00_mContent_CardType");
+        HtmlSelect ctl00_mContent_ExpiresMonth       = (HtmlSelect) page2.getElementById("ctl00_mContent_ExpiresMonth");
+        HtmlSelect ctl00_mContent_ExpiresYear        = (HtmlSelect) page2.getElementById("ctl00_mContent_ExpiresYear");
 
-        ctl00_MainContent_CardNumber.setText(trans.getCcNum());
-        ctl00_MainContent_CouponCode.setText("");  // no coupon code
-        //ctl00_MainContent_UpdatePrice.setText(""); // no update price
-        ctl00_MainContent_ProtectionCheckBox.setChecked(true);
-        ctl00_MainContent_State.setSelectedAttribute(primaryContact.getState().getValue(), true);
-        ctl00_MainContent_StartDate.setSelectedAttribute(formatMoveInDate(trans.getMoveInDate()), true);
-        ctl00_MainContent_CardType.setSelectedAttribute(resolveCCTyp(trans.getCardType().toString()), true);
-        ctl00_MainContent_ExpiresMonth.setSelectedAttribute(resolveExpMonth(trans.getCcExpDate()), true);
-        ctl00_MainContent_ExpiresYear.setSelectedAttribute(resolveExpYear(trans.getCcExpDate()), true);
-
-
-        logMessage(3, "ctl00_MainContent_setupReservation: " + ctl00_MainContent_setupReservation.getTextContent());
-        logMessage(3, "ctl00_MainContent_setupHold: " + ctl00_MainContent_setupHold.getTextContent());
-        logMessage(3, "ctl00_MainContent_ReturningUser: " + ctl00_MainContent_ReturningUser.getTextContent());
-        logMessage(3, "ctl00_MainContent_FirstName: " + ctl00_MainContent_FirstName.getTextContent());
-        logMessage(3, "ctl00_MainContent_LastName: " + ctl00_MainContent_LastName.getTextContent());
-        logMessage(3, "ctl00_MainContent_Address: " + ctl00_MainContent_Address.getTextContent());
-        logMessage(3, "ctl00_MainContent_City: " + ctl00_MainContent_City.getTextContent());
-        logMessage(3, "ctl00_MainContent_UsingStorageFor_0: " + ctl00_MainContent_UsingStorageFor_0.getTextContent());
-        logMessage(3, "ctl00_MainContent_UsingStorageFor_1: " + ctl00_MainContent_UsingStorageFor_1.getTextContent());
-        logMessage(3, "ctl00_MainContent_PostalCode: " + ctl00_MainContent_PostalCode.getTextContent());
-        logMessage(3, "ctl00_MainContent_Telephone: " + ctl00_MainContent_Telephone.getTextContent());
-        logMessage(3, "ctl00_MainContent_Email: " + ctl00_MainContent_Email.getTextContent());
-        logMessage(3, "ctl00_MainContent_ConfirmEmail: " + ctl00_MainContent_ConfirmEmail.getTextContent());
-        logMessage(3, "ctl00_MainContent_CardNumber: " + ctl00_MainContent_CardNumber.getTextContent());
-        logMessage(3, "ctl00_MainContent_CouponCode: " + ctl00_MainContent_CouponCode.getTextContent());
-        //logMessage(3,"ctl00_MainContent_UpdatePrice: " + ctl00_MainContent_UpdatePrice.getTextContent());
-        logMessage(3, "ctl00_MainContent_ProtectionCheckBox: " + ctl00_MainContent_ProtectionCheckBox.getTextContent());
-        logMessage(3, "ctl00_MainContent_State: " + ctl00_MainContent_State.getTextContent());
-        logMessage(3, "ctl00_MainContent_StartDate: " + ctl00_MainContent_StartDate.getTextContent());
-        logMessage(3, "ctl00_MainContent_CardType: " + ctl00_MainContent_CardType.getTextContent());
-        logMessage(3, "ctl00_MainContent_ExpiresMonth: " + ctl00_MainContent_ExpiresMonth.getTextContent());
-        logMessage(3, "ctl00_MainContent_ExpiresYear: " + ctl00_MainContent_ExpiresYear.getTextContent());
+        ctl00_mContent_CardNumber.setText(trans.getCcNum());
+        ctl00_mContent_VerifyCard.setText(trans.getCvv2());
+        ctl00_mContent_CouponCode.setText("");  // no coupon code
+        //ctl00_mContent_UpdatePrice.setText(""); // no update price
+        ctl00_mContent_ProtectionCheckBox.setChecked(true);
+        ctl00_mContent_StartDate.setSelectedAttribute(formatMoveInDate(trans.getMoveInDate()), true);
+        ctl00_mContent_CardType.setSelectedAttribute(resolveCCTyp(trans.getCardType().toString()), true);
+        ctl00_mContent_ExpiresMonth.setSelectedAttribute(resolveExpMonth(trans.getCcExpDate()), true);
+        ctl00_mContent_ExpiresYear.setSelectedAttribute(resolveExpYear(trans.getCcExpDate()), true);
 
 
-        //Submit Button:                    ctl00_MainContent_SubmitData
-        HtmlElement ctl00_MainContent_SubmitData        = page2.getElementById("ctl00_MainContent_SubmitData");
+        logMessage(3, "ctl00_mContent_setupReservation: " + ctl00_mContent_setupReservation.getTextContent());
+        logMessage(3, "ctl00_mContent_setupHold: " + ctl00_mContent_setupHold.getTextContent());
+        logMessage(3, "ctl00_mContent_FirstName: " + ctl00_mContent_FirstName.getTextContent());
+        logMessage(3, "ctl00_mContent_LastName: " + ctl00_mContent_LastName.getTextContent());
+        logMessage(3, "ctl00_mContent_Address: " + ctl00_mContent_Address.getTextContent());
+        logMessage(3, "ctl00_mContent_City: " + ctl00_mContent_City.getTextContent());
+        logMessage(3, "ctl00_mContent_PrimaryUse: " + ctl00_mContent_PrimaryUse.getTextContent());
+        logMessage(3, "ctl00_mContent_VerifyCard: " + ctl00_mContent_VerifyCard.getTextContent());
+        logMessage(3, "ctl00_mContent_PostalCode: " + ctl00_mContent_PostalCode.getTextContent());
+        logMessage(3, "ctl00_mContent_Telephone: " + ctl00_mContent_Telephone.getTextContent());
+        logMessage(3, "ctl00_mContent_Email: " + ctl00_mContent_Email.getTextContent());
+        logMessage(3, "ctl00_mContent_ConfirmEmail: " + ctl00_mContent_ConfirmEmail.getTextContent());
+        logMessage(3, "ctl00_mContent_CardNumber: " + ctl00_mContent_CardNumber.getTextContent());
+        logMessage(3, "ctl00_mContent_CouponCode: " + ctl00_mContent_CouponCode.getTextContent());
+        //logMessage(3,"ctl00_mContent_UpdatePrice: " + ctl00_mContent_UpdatePrice.getTextContent());
+        logMessage(3, "ctl00_mContent_ProtectionCheckBox: " + ctl00_mContent_ProtectionCheckBox.getTextContent());
+        logMessage(3, "ctl00_mContent_State: " + ctl00_mContent_State.getTextContent());
+        logMessage(3, "ctl00_mContent_StartDate: " + ctl00_mContent_StartDate.getTextContent());
+        logMessage(3, "ctl00_mContent_CardType: " + ctl00_mContent_CardType.getTextContent());
+        logMessage(3, "ctl00_mContent_ExpiresMonth: " + ctl00_mContent_ExpiresMonth.getTextContent());
+        logMessage(3, "ctl00_mContent_ExpiresYear: " + ctl00_mContent_ExpiresYear.getTextContent());
+
+
+        //Submit Button:                    ctl00_mContent_SubmitData
+        HtmlElement ctl00_mContent_SubmitData        = page2.getElementById("ctl00_mContent_SubmitData");
 
         // Enable this for production only
         try {
-            return ctl00_MainContent_SubmitData.click();
+            return ctl00_mContent_SubmitData.click();
         } catch (IOException e) {
             logStackTrace(e);
         }
@@ -384,17 +382,22 @@ public class ExrsWebFormProcessor {
         return null;
     }
 
-    private String getUnitType(RentalTransaction trans) {
+    private ArrayList<String> getUnitType(RentalTransaction trans) {
         String type = trans.getUnitType().getDisplay().toString().toLowerCase();
+        ArrayList<String> ret = new ArrayList<String>();
 
         if (type.equalsIgnoreCase("interior")) {
-            return "inside";
+            ret.add("inside");
+            return ret;
         }
         if (type.equalsIgnoreCase("upper")) {
-            return "upper";
+            ret.add("upper");
+            ret.add("elevator");
+            return ret;
         }
         if (type.equalsIgnoreCase("drive up")) {
-            return "drive";
+            ret.add("drive");
+            return ret;
         }
 
         return null; // match anything
@@ -404,11 +407,13 @@ public class ExrsWebFormProcessor {
         String size  = trans.getDisplaySize();
         String cost  = trans.getMonthlyRate().toString();
         String promo = trans.getPromoName();
-        String type  = getUnitType(trans);
+        ArrayList<String> type  = getUnitType(trans);
 
         logMessage(0,"*** SIZE =" + size + "  ***");
         logMessage(0,"*** COST =" + cost + "  ***");
-        logMessage(0,"*** TYPE =" + type + "  ***");
+        for (String s : type) {
+            logMessage(0,"*** TYPE =" + s + " ***");
+        }
         logMessage(0,"*** PROMO=" + promo + "  ***");
 
         String actionUrl = page1.getUrl().toString();
@@ -484,7 +489,7 @@ public class ExrsWebFormProcessor {
     }
 
 
-    private HtmlElement getPageOneSelectButton (HtmlForm htmlForm, String size, String cost, String type, String offer) {
+    private HtmlElement getPageOneSelectButton (HtmlForm htmlForm, String size, String cost, ArrayList<String> type, String offer) {
         DomNodeList<HtmlElement> domNodeList = htmlForm.getElementsByTagName("tr");
 
         for (HtmlElement element : domNodeList) {
@@ -523,7 +528,7 @@ public class ExrsWebFormProcessor {
                     }
 
                     // try to match the type
-                    if ((type != null) && nodeString.contains(type)) {
+                    if ((type != null) && typeMatches(nodeString,type)) {
                         matchedType = true;
                         continue;
                     }
@@ -561,6 +566,16 @@ public class ExrsWebFormProcessor {
         logMessage(0,"*** Can not find page 1 select button. Returning null. ***");
         return null;
     }
+
+    private boolean typeMatches(String nodeString, ArrayList<String> type) {
+        for (String t : type) {
+            if (nodeString.contains(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /// TESTS ///
     public boolean testLogin1() {
