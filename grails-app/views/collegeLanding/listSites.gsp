@@ -69,71 +69,12 @@
         <ul id="search_results">
             <g:each var="site" in="${sites}" status="c">
                 <li class="line" id="site_${site.id}">
-                    <div class="photo cell">
-                        <g:if test="${site.coverImage()}">
-                          <div class="thumb_frame">
-                            <img class="thumb" src="${resource(file: site.coverImage().mid())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
-                          </div>
-                        </g:if>
-                        <g:elseif test="${site?.logo && site.logo != null}">
-                            <img class="logo" src="${resource(file: site.logo.src())}" border="0" alt="${site.title} Logo"/>
-                        </g:elseif>
-                        <g:else>
-                            &nbsp;
-                        </g:else>
-                    </div>
-                    <div class="facility cell" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}">
-                        <g:link mapping="siteLink2" class="name" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
-                            ${site.title}
-                        </g:link>
-                        <div class="street address"><span>${site.address}</span><span class="show_map_popup"> (<a href="#">show map</a>)</span></div>
-                        <div class="distance"><storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> miles</div>
-                    </div>
-                    <div class="unit_info cell">
-                        <div class="dimensions">${siteMoveInPrice[site.id]?.sizeDescription.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2' Unit")}</div>
-                        <div class="location">${siteMoveInPrice[site.id]?.unitType}</div>
-                        <ul>
-                            <g:if test="${siteMoveInPrice[site.id]?.isTempControlled}"><li>Climate control</li></g:if>
-                            <g:if test="${site.isKeypad}"><li>Keypad access</li></g:if>
-                            <g:if test="${site.isCamera}"><li>Security cameras</li></g:if>
-                            <g:if test="${site.isGate}"><li>Gated property</li></g:if>
-                            <g:if test="${site.isUnitAlarmed}"><li>Alarm in unit</li></g:if>
-                            <g:if test="${site.isManagerOnsite}"><li>On-Site manager</li></g:if>
-                            <g:if test="${site.hasElevator}"><li>Elevator access</li></g:if>
-                            <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}"><li>Free truck!</li></g:if>
-                        </ul>
-                    </div>
-                    <div class="special cell">
-                        <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                            ${siteMoveInPrice[site.id]?.promoName}
-                        </g:if>
-                        <g:else>
-                            &nbsp;
-                        </g:else>
-                    </div>
-                    <div class="price cell">
-                        <div class="your_price"><g:formatNumber number="${siteMoveInPrice[site.id]?.yourPrice}" type="currency" currencyCode="USD"/></div>
-                        <g:if test="$siteMoveInPrice[site.id].listPrice">
-                            <div class="list_price"><g:formatNumber number="${siteMoveInPrice[site.id]?.listPrice }" type="currency" currencyCode="USD"/></div>
-                        </g:if>
-                        <div>per month</div>
-                    </div>
-                    <div class="rent_button cell">
-                        <g:if test="${siteMoveInPrice[site.id]?.promo}">
-                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id, promoId:siteMoveInPrice[site.id]?.promo]">
-                                <storitz:image src='btn-rent-me-120x44.png' width='120' height='44' border='0'/>
-                            </g:link>
-                        </g:if>
-                        <g:else>
-                            <g:link mapping="siteLink2" params="[site_title:site.title.replaceAll(' - ','-').replaceAll(' ','-'), id:site.id]">
-                                <storitz:image src='btn-rent-me-120x44.png' width='120' height='44' border='0'/>
-                            </g:link>
-                        </g:else>
-                    </div>
+                    <g:render template="/clientSite" model="['site':site, 'unitInfo':siteMoveInPrice[site.id]]" />
                     <g:if test="${isAdmin}">
                         <div class="admin_strip">
                             <span class="operator_name">Operator: ${site.feed.operatorName}</span>
-                            <g:link controller="storageSite" action="edit" id="${site.id}" class="button white small" fragment="special_offers" target="_blank">specials</g:link>
+                            <g:link controller="storageSite" action="edit" id="${site.id}" class="button white small"
+                                    fragment="special_offers" target="_blank">specials</g:link>
                         </div>
                     </g:if>
                 </li>

@@ -37,8 +37,9 @@ class SearchController {
                 new GeoLookup(lat: lat, lng: lng, city: city, state: state, zip: zip).save(flush: true)
             }
         }
+        def searchResult = findClientSites(SearchType.STORAGE, lat, lng)
 
-        [aMetro:aMetro, clientSites:[1,2,3]]
+        [aMetro:aMetro, clientSites:searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
     }
 
     def findClientSites(SearchType searchType, double lat, double lng) {
