@@ -274,7 +274,6 @@ public class ExrsWebFormProcessor {
         //Credit Card Type:                 ctl00_mContent_CardType [VISA,MasterCard,AmEx,Discover]
         //Credit Card Expiration (Month):   ctl00_mContent_ExpiresMonth [01-12]
         //Credit Card Expiration (Year):    ctl00_mContent_ExpiresYear [11-21]
-        //Credit Card Verification Code:    none listed!
         HtmlTextInput ctl00_mContent_CardNumber         = (HtmlTextInput) page2.getElementById("ctl00_mContent_CardNumber");
         HtmlTextInput ctl00_mContent_VerifyCard         = (HtmlTextInput) page2.getElementById("ctl00_mContent_VerifyCard");
         HtmlTextInput ctl00_mContent_CouponCode         = (HtmlTextInput) page2.getElementById("ctl00_mContent_CouponCode");
