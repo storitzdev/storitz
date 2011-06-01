@@ -176,7 +176,7 @@ $(document).ready(function() {
         return false;
     });
     $(".show_map_popup a").click(function() {
-        map.show_popup(this);
+        _map.show_popup(this);
         return false;
     });
 
@@ -209,12 +209,15 @@ $(document).ready(function() {
     });
 
     // bind home page events
-    $("#advanced_search legend").click(function() {
+    $("#coverphoto fieldset.advanced legend").click(function() {
         $("#advanced_search_controls").slideToggle();
     });
     $("#search input[placeholder]").placeholder();
     $("#browse .tabs").tabs("#browse .panes > div", {
+                //history: true,
                 initialIndex: null,
-                history: true
+                onClick: function() {
+                    //alert("what?");
+                }
             });
 });

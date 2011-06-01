@@ -12,7 +12,7 @@
     <body class="${pageProperty(name:'body.class')}">
         <div id="header">
             <h1 class="storitz-logo">
-                <g:link controller="home" action="index" elementId="logo">
+                <g:link controller="home" action="index">
                     Storitz.com - Click. Store. Done.
                 </g:link>
             </h1>

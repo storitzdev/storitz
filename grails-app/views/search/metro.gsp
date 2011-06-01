@@ -13,13 +13,16 @@
         <div id="amenities"></div>
     </div>
 </g:form>
-<p class="summary">We Found Prices &amp; Availability for ${clientSites.size()} Facilities</p>
+<p class="summary">
+    We Found Prices &amp; Availability for ${clientSites.size()} Facilities
+    <a class="button small black" href="#map-view" id="toggle_map_view">Map View</a>
+</p>
 <g:if test="${clientSites.size() > 0}">
     <div id="big_map_canvas"></div>
     <ul id="search_result_labels">
         <li class="photo">&nbsp;</li>
         <li class="facility">Facility</li>
-        <li class="unit_info">Unit Type <a href="#">filter</a></li>
+        <li class="unit_info">Unit Type</li>
         <li class="special">Special</li>
         <li class="price">Price</li>
         <li class="rent_button"></li>
