@@ -6,27 +6,35 @@
 </head>
 <body>
 <div id="bigbox">
-    <h1 class="storitz-logo">Storitz.com - Click. Store. Done.</h1>
+    <h1 class="storitz-logo">
+        <g:link controller="home" action="index">
+            Storitz.com - Click. Store. Done.
+        </g:link>
+    </h1>
     <p>
         <span>Simplify your search for self storage.</span>
-        <span>Get prices, availability &amp deals with 1 click...</span>
+        <span>Get prices, availability &amp deals with 1 click!</span>
     </p>
     <div id="coverphoto">
-        <h2>Then Rent <em>or</em> Reserve Your Unit!</h2>
         <form action="#" id="search">
-            <fieldset>
-                <legend>Enter the location where you need to find storage:</legend>
-                <input type="text" name="where" placeholder="e.g. Los Angeles, CA or 90026" />
-                <input type="submit" value="Find Storage!" />
+            <fieldset class="basic">
+                <legend>Enter the location where you need storage:</legend>
+                <div class="controls">
+                    <input type="text" name="where" placeholder="e.g. Los Angeles, CA or 90026" /><input type="submit" value="Find Storage!" />
+                </div>
             </fieldset>
-            <fieldset id="advanced_search">
+            <fieldset class="advanced">
                 <legend><span>&#x25b6;</span> More Search Options</legend>
                 <div id="advanced_search_controls">
-                    <div class="storage_type">
-                        <input id="type_storage" type="radio" name="type" value="storage" checked="checked" />
-                        <label for="type_storage">Self Storage</label>
-                        <input id="type_parking" type="radio" name="type" value="parking" disabled="disabled" />
-                        <label for="type_parking">Car, RV &amp; boat storage</label>
+                    <div class="amenities">
+                        <input id="cc_y" type="checkbox" value="y" name="cc" />
+                        <label for="cc_y">Climate Control/AC</label>
+                        <br />
+                        <input id="24h_y" type="checkbox" value="y" name="24h" />
+                        <label for="24h_y">24-hour access</label>
+                        <br />
+                        <input id="truck_y" type="checkbox" value="y" name="truck" />
+                        <label for="truck_y">Free move-in truck</label>
                     </div>
                     <div class="unit_size">
                         <label for="unit_size">Unit size:</label>
@@ -48,16 +56,6 @@
                             <option value="drive-up">Drive-up unit</option>
                         </select>
                         <a href="#" title="What does this mean?">What does this mean?</a>
-                    </div>
-                    <div class="amenities">
-                        <input id="cc_y" type="checkbox" value="y" name="cc" />
-                        <label for="cc_y">Climate Control/AC</label>
-                        <br />
-                        <input id="24h_y" type="checkbox" value="y" name="24h" />
-                        <label for="24h_y">24-hour access</label>
-                        <br />
-                        <input id="truck_y" type="checkbox" value="y" name="truck" />
-                        <label for="truck_y">Free move-in truck</label>
                     </div>
                  </div>
             </fieldset>
@@ -83,8 +81,6 @@
         <h2>How to find and choose a storage unit</h2>
         <p>Why hassle with phone calls and email when you can rent storage right
         now? Only Storitz lets you search, select, pay, and then print your
-        receipt, contract, and gate code.  Or to put it another way: Why hassle with phone calls and email when you can rent storage right
-        now? Only Storitz lets you search, select, pay, and then print your
         receipt, contract, and gate code.</p>
     </div>
     <div id="guarantee">
@@ -92,12 +88,7 @@
         <p>Storitz is the only place online where you can find, compare and rent
         a self storage unit anywhere in the country &mdash; all from one site. We
         list thousands of storage units, and let you sort by distance, price and
-        unit size so you can find the best storage unit near you without
-        the hassle of calling or driving to multiple locations. We show you
-        facility photos and videos before you rent, so you know
-        exactly what you’re getting. Our facilities offer the best storage deals
-        on the internet, including free move-in trucks, $1 move-in specials,
-        online-only coupons, and more.</p>
+        unit size.</p>
     </div>
 </div>
 <div id="browse">
