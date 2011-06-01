@@ -134,7 +134,7 @@ public enum State {
     if (!ret) ret = list().find { it.fullName.replaceAll("[\\W]*","").toUpperCase() == key.replaceAll("[\\W]*","").toUpperCase() }
 
     // If that fails too, then we compare the key value to the enumerated value
-    if (!ret) ret State.valueOf(key.toUpperCase())
+    if (!ret) ret = State.valueOf(key.toUpperCase())
 
     return ret
   }
