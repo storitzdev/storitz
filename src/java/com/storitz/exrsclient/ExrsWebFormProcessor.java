@@ -13,7 +13,6 @@ import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
-import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.storitz.RentalTransaction;
@@ -218,8 +217,8 @@ public class ExrsWebFormProcessor {
         // The three below can use the default form values
         //Setup Reservation                 ctl00_mContent_setupReservation   (Checked)
         //Setup Hold                        ctl00_mContent_setupHold
-        HtmlRadioButtonInput ctl00_mContent_setupReservation = (HtmlRadioButtonInput) page2.getElementById("ctl00_mContent_setupReservation");
-        HtmlRadioButtonInput ctl00_mContent_setupHold        = (HtmlRadioButtonInput) page2.getElementById("ctl00_mContent_setupHold");
+        HtmlCheckBoxInput ctl00_mContent_setupReservation = (HtmlCheckBoxInput) page2.getElementById("ctl00_mContent_setupReservation");
+        HtmlCheckBoxInput ctl00_mContent_setupHold        = (HtmlCheckBoxInput) page2.getElementById("ctl00_mContent_setupHold");
 
         ctl00_mContent_setupReservation.setChecked(true);  // these two are mutually exclusive
         ctl00_mContent_setupHold.setChecked(false);        // these two are mutually exclusive
