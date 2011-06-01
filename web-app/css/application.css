@@ -4,7 +4,9 @@
 body {
   font-family: Verdana;
   font-size: 12px;
-  background: url(../images/v2/home/backgrounds/topbar.gif) repeat-x;
+  background-image: url(../images/v2/home/backgrounds/topbar.gif);
+  background-repeat: repeat-x;
+  /*background-color: #fafafa;*/
   background-position: 0 -12px;
   padding-top: 28px;
   padding-left: 97px;
@@ -78,6 +80,8 @@ a:hover {
 }
 #coverphoto form {
     background: url(../images/v2/home/backgrounds/search-box-horiz-bg.jpg) repeat-x;
+    /*background: #f9c9d5;*/
+    /*background: #f4eaf0;*/
     width: 488px;
     padding: 20px 20px 13px 20px;
     position: absolute;
@@ -100,7 +104,7 @@ a:hover {
 #coverphoto fieldset.basic div.controls {
     clear: both;
     position: relative;
-    height: 72px;
+    height: 52px;
 }
 #coverphoto fieldset.basic input[type=text] {
     display: inline-block;
@@ -199,11 +203,15 @@ a:hover {
 #logos li {
     /*background-position: 25px;*/
     display: inline-block;
+    opacity: 0.3;
     float: left;
     /*margin-left: 25px;*/
     text-indent: -9999px;
     background-repeat: no-repeat;
     height: 38px;
+}
+#logos li:hover {
+    opacity: 1.0;
 }
 #logos li.ustoreit { width: 112px; background-image: url(../images/v2/home/partner-logos/ustoreit.gif); }
 #logos li.storquest { width: 115px; background-image: url(../images/v2/home/partner-logos/storquest.gif); }
