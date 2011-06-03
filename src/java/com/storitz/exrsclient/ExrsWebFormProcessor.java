@@ -138,23 +138,16 @@ public class ExrsWebFormProcessor {
 
         /* Match the confirmation message
          * HTML input comes in looking something like this:
-            Your credit card has been charged
-                      <strong>
-                        $10
-                      </strong>
-                      <br/>
-                      <br style="line-height:50%;"/>
 
-            Your Reservation Number is
-                      <strong>
-                        5800776
-                      </strong>
-                      <br/>
-                      <br style="line-height:50%;"/>
+          <div class="sub_title" style="border:0; padding:0px 12px 0px;"> 
+            Confirmation Number: 
+            <span style="color:#fff;font-size:12px;"> 
+              5878551
+            </span> 
+          </div> 
 
-            A confirmation email has been sent to
          */
-        Pattern p0 = Pattern.compile("^.*Your Reservation Number is.*$",Pattern.DOTALL);
+        Pattern p0 = Pattern.compile("^.*(Confirmation|Reservation) Number.*$",Pattern.DOTALL);
         Matcher m0 = p0.matcher(htmlText);
 
 
