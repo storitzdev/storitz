@@ -3,6 +3,7 @@ package storitz
 import storitz.constants.SearchType
 import storitz.constants.State
 import storitz.constants.QueryMode
+import storitz.constants.GeoType
 
 /**
  * Represents a search for available inventory; contains convenience method for adjusting
@@ -16,38 +17,20 @@ class SearchCriteria {
     public Bounds bounds;
     public String userQuery;
     public String featuredOfferTag;
+    public String neighborhood;
+    public String zip_code;
     public String city;
     public State state;
     public QueryMode queryMode;
+    public GeoType geoType;
 
     public SearchCriteria() {
-        // we'll just re-use these pseudo-singletons
-        this.centroid = new Point(null, null);
-        this.bounds = new Bounds(new Point(null, null), new Point(null, null));
-    }
-
-    /**
-     * Used to determine the minimum number of available units that a site must
-     * have to be included in the result set. This is done based on the "query mode":
-     * When we are in "browse" mode (used esp on the site browse tree, e.g.
-     * storitz.com/chino-ca-self-storage or storitz.com/new-york-ny-10036-self-storage
-     * then we want to display all facilities); when we are in "search mode"
-     * we only care about sites that actually have at least 1 rentable unit.
-     *
-     * TODO: Decide if this method really belongs here. It seems out of place.
-     */
-    public Integer minInventory() {
-      Integer minInventory;
-      switch (queryMode) {
-        case QueryMode.BROWSE_CITY:
-        case QueryMode.BROWSE_NEIGHBORHOOD:
-        case QueryMode.BROWSE_ZIP:
-          minInventory = 0;
-          break;
-        default:
-          minInventory = 1;
-      }
-      return minInventory;
+      // defaults
+      this.queryMode = QueryMode.FIND_UNITS;
+      this.searchType = SearchType.STORAGE;
+      // we'll just re-use these pseudo-singletons
+      this.centroid = new Point(null, null);
+      this.bounds = new Bounds(new Point(null, null), new Point(null, null));
     }
 
     public void setBounds(Integer zoom, Integer width, Integer height) {
@@ -79,10 +62,6 @@ class SearchCriteria {
 
     // use the following for the default zoom level on a Google map
     private final int defaultZoom = 12
-
-    // Any zoom less than this will result in radically large map areas
-    // with (potentially) correspondingly large site selection volumes.
-    private final int zoomMin = 7
 
     // this is the number of degrees of latitude per pixel at zoom 12
     final BigDecimal constLatPerPixel = 5.992112452678278E-6

@@ -5,7 +5,8 @@ import storitz.constants.State;
 import com.storitz.GeoLookup;
 import storitz.constants.SearchType;
 import com.storitz.Insurance;
-import storitz.constants.QueryMode;
+import storitz.constants.QueryMode
+import storitz.constants.GeoType;
 
 
 class SearchController {
@@ -43,12 +44,12 @@ class SearchController {
         }
         SearchCriteria criteria = new SearchCriteria();
         criteria.searchType = SearchType.STORAGE;
+        criteria.queryMode = QueryMode.FIND_SITES;
+        criteria.geoType = GeoType.CITY;
         criteria.centroid.lat = lat;
         criteria.centroid.lng = lng;
         criteria.city = seoDecodedCity;
         criteria.state = State.fromText(params.state);
-        criteria.queryMode = QueryMode.BROWSE_CITY; // we want to find all sites in the city, even if they
-                                                    // don't fit in the box that optimizeZoom produces!
         def searchResult = findClientSites(criteria);
         [aMetro: aMetro, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
     }
@@ -59,13 +60,12 @@ class SearchController {
      * list of available units, because some units featured be available, but not combineable with the featured offer.
      * If _no_ units are combineable with the preferred offer, we return the lowest-rent unit, and find the best
      * available offer for that unit. By default, returns sites with at least 1 unit available. To see all sites,
-     * specify a `minInventory` value of 0 in the SearchCriteria argument.
+     * set the value of criteria.queryMode to FIND_SITES.
      *
      * @param criteria
      * @returnMap containing the list of sites, plus another map identifying the "best available unit" for the site
      */
     def findClientSites(SearchCriteria criteria) {
-        criteria.searchSize = 1;
         // optimize zoom level
         mapService.optimizeZoom(criteria, 617, 284)
         def sites = mapService.getSites(criteria).sort { mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
@@ -158,9 +158,9 @@ class SearchController {
                     }
                 }
             }
-            else if (criteria.minInventory() > 0) {
-                sitesToRemove << site
-            }
+//            else if (criteria.minInventory() > 0) {
+//                sitesToRemove << site
+//            }
             else {
                 moveInPrices[site.id] = null;
             }
