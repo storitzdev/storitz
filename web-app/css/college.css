@@ -37,6 +37,7 @@ a {
     border-color: #ddd;
     border-style: solid;
     width: 100%;
+    position: relative;
 }
 .search-form{
 	float:right;
@@ -81,7 +82,7 @@ a {
 
 #promo{
 	width:100%;
-    margin: 30px 0 2px 0;
+    margin: 12px 0 2px 0;
 	position:relative;
 }
 #promo img{
@@ -142,7 +143,7 @@ a {
 
 a:link, a:visited { font-weight: normal; }
 
-.college h1{
+.college h2{
     height:20px;
     overflow:hidden;
     padding:14px 0 10px 137px;
@@ -153,7 +154,7 @@ a:link, a:visited { font-weight: normal; }
     margin:0 0 2px;
     font-weight: bold;
 }
-.college h1 span{
+.college h2 span{
     color:#fff;
 }
 #secondary-color {
@@ -167,8 +168,8 @@ a:link, a:visited { font-weight: normal; }
 }
 #college_logo{
     position:absolute;
-    top:365px;
-    left:137px;
+    top:-24px;
+    left:17px;
     width:130px;
     height:131px;
 }
@@ -314,8 +315,8 @@ body.college_storage_tips.min {
 #college_tips_button {
     display: block;
     position: absolute;
-    left: 1068px;
-    top: 338px;
+    right: -57px;
+    top: -38px;
     width: 57px;
     height: 149px;
     background-image: url("../images/college-tips-tab.png");

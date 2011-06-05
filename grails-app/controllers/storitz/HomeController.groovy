@@ -459,7 +459,7 @@ class HomeController extends SearchController {
   def redirectGeo = {
     // /self-storage-$zip-$city-$state
     response.status = 301
-    response.setHeader("Location", g.createLink(mapping: 'geo2', params: [city: params.city.replaceAll(' ', '-'), state: params.state, zip: params.zip]) as String)
+    response.setHeader("Location", g.createLink(mapping: 'geo2', params: [state: params.state, city: StoritzUtil.seoEncode(params.city), zip: params.zip]) as String)
     render("")
     return false
   }
@@ -467,7 +467,7 @@ class HomeController extends SearchController {
   def redirectMetro = {
     // /self-storage-$city-$state
     response.status = 301
-    response.setHeader("Location", g.createLink(mapping: 'metro2', params: [state: params.state, city: params.city.replaceAll(' ', '-')]) as String)
+    response.setHeader("Location", g.createLink(mapping: 'metro2', params: [state: params.state, city: StoritzUtil.seoEncode(params.city)]) as String)
     render("")
     return false
   }

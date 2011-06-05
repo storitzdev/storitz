@@ -1,7 +1,7 @@
-<%@ page import="storitz.constants.TruckType" %>
+<%@ page import="com.storitz.StoritzUtil; storitz.constants.TruckType" %>
 <%
-    // TODO: More inline copy/paste urlencoding... :(
-    String site_title = site.title.replaceAll(' - ','-').replaceAll(' ','-');
+    // TODO: More inline copy/paste urlencoding... move to DB :(
+    String site_title = StoritzUtil.seoEncode(site.title);
     def site_url_params;
       if (unitInfo?.promo) {
         site_url_params = [site_title:site_title, id:site.id, promoId:unitInfo?.promo];

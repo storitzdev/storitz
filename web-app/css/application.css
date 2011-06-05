@@ -52,22 +52,20 @@ a:hover {
     height: 285px;
     position: relative;
 }
-#bigbox p {
+#bigbox h2 {
     font-family: Verdana;
-    display: inline-block;
     position: absolute;
     left: 175px;
     top: 5px;
     font-size: 19px;
     font-weight: bold;
     color: #3ea307;
+    color: #a8a8a8;
 }
-#bigbox p span:first-child {
-    font-size: 16px;
-    color: #00529b;
-}
-#bigbox p span {
+#bigbox h2 span:first-child {
     display: block;
+    color: #00529b;
+    margin-bottom: 2px;
 }
 #coverphoto {
     height: 225px;
@@ -83,7 +81,7 @@ a:hover {
     /*background: #f9c9d5;*/
     /*background: #f4eaf0;*/
     width: 488px;
-    padding: 20px 20px 13px 20px;
+    padding: 15px 20px 13px 20px;
     position: absolute;
     left: 393px;
     top: 16px;
@@ -95,11 +93,12 @@ a:hover {
     border-color:  #3EA307;
 }
 #coverphoto fieldset.basic legend {
-    font-size: 11px;
+    font-size: 16px;
     font-family: Helvetica;
     font-weight: bold;
     color: #333;
-    height: 20px;
+    color: #3ea307;
+    height: 25px;
 }
 #coverphoto fieldset.basic div.controls {
     clear: both;
@@ -234,17 +233,14 @@ a:hover {
     width: 460px;
 }
 #browse {
-    margin-left: -97px;
-}
-#browse {
     background-color: #166EC8;
     border-bottom: 1px solid #0e4ca7;
+    width: 960px;
 }
 #browse ul {
     background: url(../images/v2/home/backgrounds/seo-links-1b72cb-bg.jpg) repeat-y;
     background-color: #166EC8;
-    height: 51px;
-    padding-left: 97px;
+    height: 40px;
 }
 #browse .tabs li {
     float: left;
@@ -256,8 +252,8 @@ a:hover {
     float: left;
     width: 192px;
     text-align: center;
-    height: 33px;
-    padding-top: 20px;
+    height: 27px;
+    padding-top: 14px;
     text-decoration: none;
 }
 #browse .tabs a:hover, #browse .tabs a.current {
@@ -266,7 +262,7 @@ a:hover {
 #browse .panes div {
     clear: both;
     display: none;
-    padding: 20px 0 10px 97px;
+    padding: 20px 0 10px 10px;
     color: white;
     background: url(../images/v2/home/backgrounds/seo-content.jpg) repeat-y;
     position: relative;
@@ -297,12 +293,11 @@ a:hover {
 }
 
 #browse .panes div table {
-    width: 960px;
 }
 #browse .panes div td {
-    text-align: left;
+    text-align: center;
     vertical-align: top;
-    width: 17%;
+    width: 183px;
     line-height: 20px;
 }
 #browse .panes div td a {
@@ -393,12 +388,14 @@ h1.storitz-logo a {
 #footer {
     border-top: 1px solid #5998d9;
     background: url(../images/v2/home/backgrounds/seo-links-1b72cb-bg.jpg) no-repeat #166EC8;
-    min-height: 35px;
+    height: 20px;
     font-size: 11px;
     font-family: Helvetica;
     color: #e8e8e8;
-    padding: 20px 0 0 320px;
-    margin-left: -97px;
+    padding-top: 10px;
+    width: 960px;
+    text-align: center;
+    border-radius: 0 0 6px 6px;
 }
 #footer a {
     color: #ddd;

@@ -115,17 +115,17 @@ public enum State {
   }
 
   public static State fromText(String key) {
-    def ret = list().find {it.display == key }
+    def ret = list().find {it.display.equalsIgnoreCase(key) }
     if (!ret) return State.valueOf(key)
     return ret
   }
 
   public static State fromPathParam(String key) {
-    return list().find { it.fullName.replaceAll(" ", "-").toLowerCase() == key.toLowerCase() }
+    return list().find { it.fullName.replaceAll(" ", "-").equalsIgnoreCase(key) }
   }
 
   public static State getEnumFromId(String value) {
-    def ret = list().find {it.display == value.toLowerCase() }
+    def ret = list().find {it.display.equalsIgnoreCase(value) }
     if (!ret) return State.valueOf(value)
     return ret
   }

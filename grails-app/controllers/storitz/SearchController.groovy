@@ -1,9 +1,12 @@
 package storitz
 
-import storitz.constants.TopMetro
-import com.storitz.GeoLookup
-import storitz.constants.SearchType
-import com.storitz.Insurance
+import storitz.constants.TopMetro;
+import storitz.constants.State;
+import com.storitz.GeoLookup;
+import storitz.constants.SearchType;
+import com.storitz.Insurance;
+import storitz.constants.QueryMode;
+
 
 class SearchController {
 
@@ -22,8 +25,9 @@ class SearchController {
     }
 
     def metro = {
-        def aMetro = TopMetro.fromText(params.metro)
-        def geoLookup = GeoLookup.findByCityAndState(aMetro.city, aMetro.stateCode)
+        def aMetro = TopMetro.fromText(params.city + "-" + params.state) // TODO: string-mangling is artifact of when we just passed in params.metro. finish refactoring TopMetro interface to match new 2-param style.
+        def seoDecodedCity = params.city.replaceAll("-", " ").toLowerCase();
+        def geoLookup = GeoLookup.findByCityAndState(seoDecodedCity, params.state)
         if (geoLookup) {
             city = geoLookup.city
             state = geoLookup.state
@@ -32,49 +36,40 @@ class SearchController {
             lng = geoLookup.lng
 
         } else {
-            def geoResult = geocodeService.geocode("${city}, ${state}")
+            def geoResult = geocodeService.geocode("${seoDecodedCity}, ${params.state}")
             if (handleGeocode(geoResult)) {
                 new GeoLookup(lat: lat, lng: lng, city: city, state: state, zip: zip).save(flush: true)
             }
         }
-        def searchResult = findClientSites(SearchType.STORAGE, lat, lng)
-
-        [aMetro:aMetro, clientSites:searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.searchType = SearchType.STORAGE;
+        criteria.centroid.lat = lat;
+        criteria.centroid.lng = lng;
+        criteria.city = seoDecodedCity;
+        criteria.state = State.fromText(params.state);
+        criteria.queryMode = QueryMode.BROWSE_CITY; // we want to find all sites in the city, even if they
+                                                    // don't fit in the box that optimizeZoom produces!
+        def searchResult = findClientSites(criteria);
+        [aMetro: aMetro, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
     }
 
     /**
-     * Finds all facilities that provide the specified type of product (STORAGE or PARKING) near lat/lng; returns a
-     * map containing: 1) that list, 2) another map that identifies the "best available unit" for each facility
-     *
-     * @param searchType from enum com.storitz.constants.SearchType (STORAGE, PARKING, LOCKER or UNDEFINED)
-     * @param lat latitude of center point of search
-     * @param lng longitude of center point of search
-     * @return Map containing the list of facilities, plus another map identifying the "best available unit" for the
-     * facility
-     */
-    def findClientSites(SearchType searchType, double lat, double lng) {
-        return findClientSites(searchType, lat, lng, null)
-    }
-    /**
-     * Finds all facilities that provide the specified type of product (STORAGE or PARKING) near lat/lng; prefers
+     * Finds all sites that provide the specified type of product (STORAGE or PARKING) near lat/lng; prefers
      * offers matching `featuredOfferTag` when selecting special offers. Note that passing in a tag may change the
      * list of available units, because some units featured be available, but not combineable with the featured offer.
      * If _no_ units are combineable with the preferred offer, we return the lowest-rent unit, and find the best
-     * available offer for that unit.
+     * available offer for that unit. By default, returns sites with at least 1 unit available. To see all sites,
+     * specify a `minInventory` value of 0 in the SearchCriteria argument.
      *
-     * @param searchType from enum com.storitz.constants.SearchType (STORAGE, PARKING, LOCKER or UNDEFINED)
-     * @param lat latitude of center point of search
-     * @param lng longitude of center point of search
-     * @param featuredOfferTag - if matching offers are available, use them when selecting the "best value" offer
-     * @returnMap containing the list of facilities, plus another map identifying the "best available unit" for the
-     * facility
+     * @param criteria
+     * @returnMap containing the list of sites, plus another map identifying the "best available unit" for the site
      */
-    def findClientSites(SearchType searchType, double lat, double lng, String featuredOfferTag) {
+    def findClientSites(SearchCriteria criteria) {
+        criteria.searchSize = 1;
         // optimize zoom level
-        Long searchSize = 1
-        def zoom = mapService.optimizeZoom(searchSize, searchType, lat, lng, 617, 284)
-        def dim = mapService.getDimensions(zoom, lat, lng, 617, 284)
-        def sites = mapService.getSites(searchSize, searchType, dim.swLat, dim.swLng, dim.neLat, dim.neLng).sort { mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
+        mapService.optimizeZoom(criteria, 617, 284)
+        def sites = mapService.getSites(criteria).sort { mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
+        log.info("NUM SITES: " + sites.size());
 
         def moveInPrices = [:]
         def sitesToRemove = []
@@ -83,10 +78,6 @@ class SearchController {
         // TODO: collect result statistics (# found, avg distance, min/max price, etc) to be reported to GA, pass to
         // view (somehow), so browser can send to GA as CustomVars
         for (site in sites) {
-            Insurance ins = null
-            if (site.noInsuranceWaiver) {
-                ins = site.insurances.findAll { it.active }.min { it.premium }
-            }
             def availableUnitsMap = [:] // using a map because I don't know how to use a set, and I don't want to do linear search thru an ArrayList
             site.units.findAll { it.unitCount > site.minInventory }.each { unit ->
                 availableUnitsMap[unit.id] = unit
@@ -97,12 +88,12 @@ class SearchController {
                 sitesToRemove << site;
                 continue;
             }
-            if (featuredOfferTag != null) {
+            if (criteria.featuredOfferTag != null) {
                 // Find all featured specials for the facility; then find all available units that are
                 // valid for any of the featured specials.  Store result in a map that ties units
                 // to the list of featured offers that can be applied to them; we will select one of
                 // the offers in the for(promo in featuredOffers) loop below.
-                def featuredOffers = site.specialOffers().findAll { it.tags.any { it.tag.equals(featuredOfferTag) } }
+                def featuredOffers = site.specialOffers().findAll { it.tags.any { it.tag.equals(criteria.featuredOfferTag) } }
                 for (offer in featuredOffers) {
                     for (validUnit in offerFilterService.getValidUnitsForOffer(site, offer)) {
                         if (availableUnitsMap.getAt(validUnit.id)) {
@@ -115,8 +106,8 @@ class SearchController {
                 }
             }
             def featuredUnits = featuredOffersMap.keySet()
-            if (featuredOfferTag != null) {
-                log.info("${site.title} - found ${featuredUnits.size()} units with " + featuredOfferTag + " specials");
+            if (criteria.featuredOfferTag != null) {
+                log.info("${site.title} - found ${featuredUnits.size()} units with " + criteria.featuredOfferTag + " specials");
             }
             // if we found any available units for which featured special offers are valid, then select the "best unit"
             // from those; if not, then select the best unit from the full list of available units
@@ -142,6 +133,10 @@ class SearchController {
                 if (!promos) {
                     promos = offerFilterService.getValidFeaturedOffers(site, bestUnit)
                 }
+                Insurance ins = null
+                if (site.noInsuranceWaiver) {
+                    ins = site.insurances.findAll { it.active }.min { it.premium }
+                }
                 if (promos.size() == 0) {
                     def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
                     moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
@@ -162,18 +157,23 @@ class SearchController {
                         moveInPrices[site.id].cost = oldMoveInCost
                     }
                 }
-            } else {
+            }
+            else if (criteria.minInventory() > 0) {
                 sitesToRemove << site
+            }
+            else {
+                moveInPrices[site.id] = null;
             }
         }
         sitesToRemove.each { s -> sites.remove(s) }
-        return [sites:sites, moveInPrices:moveInPrices]
+        return [sites: sites, moveInPrices: moveInPrices]
     }
 
     boolean handleGeocode(geoResult) {
         if (geoResult && geoResult.status == "OK") {
             lng = geoResult.results[0].geometry.location.lng
             lat = geoResult.results[0].geometry.location.lat
+            log.info("geocoder says: " + lat + "," + lng);
             for (comp in geoResult.results[0].address_components) {
                 switch (comp.types[0]) {
                     case "locality":

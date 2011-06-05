@@ -1,4 +1,4 @@
-<%@ page import="java.math.RoundingMode" %>
+<%@ page import="com.storitz.StoritzUtil" %>
 <html>
 <head>
   <title>Self Storage in ${state.fullName}</title>
@@ -7,15 +7,18 @@
 <h1>Self Storage Facilities in ${state.fullName}</h1>
 <table>
     <tr>
-        <g:each in="${cityLists}" var="cityList">
-            <td>
-                <g:each in="${cityList}" var="city">
-                    <div>
-                          <g:link controller="search" action="metro" params="[metro:city.asQueryParam]">${city.name}</g:link> (${city.numSites})
-                    </div>
-                </g:each>
-            </td>
+        <td>
+        <g:set var="i" value="${0}" />
+        <g:each in="${cities}" var="city">
+            <div>
+                <g:link mapping="metro2" params="[city:StoritzUtil.seoEncode(city.name), state:state.display.toLowerCase()]">${city.name}</g:link> (${city.numSites})
+            </div>
+            <g:set var="i" value="${i + 1}" />
+            <g:if test="${i > 0 && i % citiesPerColumn == 0 && i < cities.size()}">
+        </td><td>
+            </g:if>
         </g:each>
+        </td>
     </tr>
 </table>
 </body>

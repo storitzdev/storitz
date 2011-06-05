@@ -11,14 +11,14 @@
             Storitz.com - Click. Store. Done.
         </g:link>
     </h1>
-    <p>
+    <h2>
         <span>Simplify your search for self storage.</span>
-        <span>Get prices, availability &amp deals with 1 click!</span>
-    </p>
+        <span>Get prices, availability &amp; deals with 1 click!</span>
+    </h2>
     <div id="coverphoto">
         <form action="#" id="search">
             <fieldset class="basic">
-                <legend>Enter the location where you need storage:</legend>
+                <legend>Enter the city, zip code or address where you need storage:</legend>
                 <div class="controls">
                     <input type="text" name="where" placeholder="e.g. Los Angeles, CA or 90026" /><input type="submit" value="Find Storage!" />
                 </div>
@@ -64,7 +64,7 @@
 
 </div>
 <div id="logos">
-    <span>Featured Facilities</span>
+    <span>Now<br />Renting...</span>
     <ul>
         <li class="ustoreit">U-Store-It</li>
         <li class="storquest">StorQuest</li>
@@ -78,7 +78,7 @@
 </div>
 <div id="info">
     <div id="howto">
-        <h2>How to find and choose a storage unit</h2>
+        <h2>Self Storage How To</h2>
         <p>Why hassle with phone calls and email when you can rent storage right
         now? Only Storitz lets you search, select, pay, and then print your
         receipt, contract, and gate code.</p>
@@ -101,92 +101,48 @@
     </ul>
 
     <div class="panes">
-        <div><a name="storage-by-state">
+        <a name="storage-by-state">&nbsp;</a>
+        <div>
             <table>
                 <tr>
-                    <td>
-                        <g:each var="state" in="${states[0..6]}">
-                            <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="state" in="${states[7..13]}">
-                            <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="state" in="${states[14..20]}">
-                            <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="state" in="${states[21..27]}">
-                            <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="state" in="${states[28..34]}">
-                            <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="state" in="${states[35..41]}">
-                            <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                        </g:each>
-                    </td>
-                </tr>
-            </table></a>
-        </div>
-
-        <div id="storge-by-city">
-            <table>
-                <tr>
-                    <td>
-                        <g:each var="metro" in="${metros[0..8]}">
-                            <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="metro" in="${metros[9..17]}">
-                            <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="metro" in="${metros[18..26]}">
-                            <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="metro" in="${metros[27..35]}">
-                            <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="metro" in="${metros[36..44]}">
-                            <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each var="metro" in="${metros[45..50]}">
-                            <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                        </g:each>
-                    </td>
+                    <g:each var="stateList" in="${stateLists}">
+                        <td>
+                            <g:each var="state" in="${stateList}">
+                                <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
+                            </g:each>
+                        </td>
+                    </g:each>
                 </tr>
             </table>
         </div>
 
-        <div id="military-storage">
-            <h3>Military Storage</h3>
+        <div>
+
+            <table>
+                <tr>
+                    <g:each var="metroList" in="${metroLists}">
+                        <td>
+                            <g:each var="metro" in="${metroList}">
+                                <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
+                            </g:each>
+                        </td>
+                    </g:each>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h3>Military Storage<a name="military-storage">&nbsp;</a></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div>
+            <h3>College Storage<a name="college-storage">&nbsp;</a></h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <div id="college-storage">
-            <h3>College Storage</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div id="business-storage">
-            <h3>Business Storage</h3>
+        <div>
+            <h3>Business Storage<a name="business-storage">&nbsp;</a></h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>

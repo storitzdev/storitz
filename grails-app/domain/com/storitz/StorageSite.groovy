@@ -91,6 +91,7 @@ class StorageSite {
     prorateStart(nullable: true)
     prorateCutoff(nullable: true)
     prorateSecondMonth(nullable: true)
+    //seoTitle(unique:true)
   }
 
   String title
@@ -105,6 +106,9 @@ class StorageSite {
   String zipcode
   String url
   String phone
+
+  String seoCity
+  //String seoTitle
   // Data source -
   //    SL - SiteLink
   //    CS3 - CenterShift 3.x
@@ -258,4 +262,28 @@ class StorageSite {
     return siteUser?.user
   }
 
+  def beforeInsert = {
+    seoCity = StoritzUtil.seoEncode(city);
+    //seoTitle = StoritzUtil.seoEncode(title);
+  }
+
+  def beforeUpdate = {
+    seoCity = StoritzUtil.seoEncode(city);
+    //seoTitle = StoritzUtil.seoEncode(title);
+  }
+
+//  private void setSeoTitle() { // TODO: Finish this thing (needs to work for both insert and update cases, needs to check that "twin" isn't self
+//    String title = StoritzUtil.seoEncode(title);
+//    int twins = StorageSite.countBySeoTitle(title);
+//    if (twins > 0) {
+//      for (int i = twins; i < 10; i++) {
+//          title = StoritzUtil.seoEncode(title + "-" + i);
+//          if (StorageSite.countBySeoTitle(title) == 0) {
+//              break;
+//          }
+//      }
+//      title = StoritzUtil.seoEncode(title + "-" + zipcode);
+//    }
+//    seoTitle = title;
+//  }
 }

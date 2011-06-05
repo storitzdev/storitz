@@ -60,18 +60,18 @@ class UrlMappings {
       action = "redirectMetro"
     }
 
-    name metro2: "/$metro-self-storage" {
-      controller = "search"
-      action = "metro"
-      constraints {
-          metro(matches: /^[a-zA-Z][a-zA-Z\-]*[a-zA-Z]-[a-zA-Z]{2}$/)
-          metro(validator: { return TopMetro.fromText(it) != null })
-      }
-    }
-
     name search: "/search" {
         controller = "search"
         action = "index"
+    }
+
+    name metro2: "/$city-$state-self-storage" {
+      controller = "search"
+      action = "metro"
+        constraints {
+          city(matches: /^[a-zA-Z][a-zA-Z\-]*[a-zA-Z]$/)
+          state(matches: /[a-zA-Z]{2}/)
+      }
     }
 
     "/xxx/$id" {

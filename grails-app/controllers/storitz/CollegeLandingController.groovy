@@ -43,7 +43,13 @@ class CollegeLandingController extends SearchController  {
             lng = -98.5833333
         }
 
-        def searchResult = findClientSites(SearchType.STORAGE, lat, lng, "college_special_2011")
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.centroid.lat = lat;
+        criteria.centroid.lng = lng;
+        criteria.searchType = SearchType.STORAGE;
+        criteria.featuredOfferTag = "college_special_2011"
+
+        def searchResult = findClientSites(criteria)
 
         [college: college, title: title, lat: lat, lng: lng, sites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin]
     }

@@ -8,7 +8,7 @@
         // TODO: track additional properties of result set: closest result, avg distance, # results w/in 2/5/10 mi, etc.
     </script>
     <style type="text/css">
-        h1 {
+        h2 {
             color:${college.primaryFGColor ?: 'blue'};
             background:${college.primaryBGColor ?: 'wheat'} url(../images/bg-text-line.png) repeat-x;
         }
@@ -38,7 +38,7 @@
 </div>
 <div id="main_container">
     <div id="college_logo">&nbsp;</div>
-    <h1>Self Storage Units Near <span class="college_name">${college.displayName}</span></h1>
+    <h2>Self Storage Units Near <span class="college_name">${college.displayName}</span></h2>
     <div id="secondary-color">
         <a class="button small black" href="#map-view" id="toggle_map_view">Map View</a>
     </div>
