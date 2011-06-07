@@ -83,10 +83,8 @@ class SearchController {
                 availableUnitsMap[unit.id] = unit
             }
             def featuredOffersMap = [:] // maps units to lists of featured special offers
-            if (availableUnitsMap.size() == 0) {
-                // TODO: log warnings
-                sitesToRemove << site;
-                continue;
+            if (criteria.queryMode == QueryMode.FIND_UNITS && availableUnitsMap.size() == 0) {
+              throw new Error("QueryMode.FIND_UNITS but site ${site.id} has no available units!")
             }
             if (criteria.featuredOfferTag != null) {
                 // Find all featured specials for the facility; then find all available units that are

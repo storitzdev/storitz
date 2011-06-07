@@ -45,7 +45,9 @@ class OfferFilterService {
     for (Iterator iter = results.iterator(); iter.hasNext();) {
       SpecialOffer offer = iter.next();
       boolean valid = false
-      if (offer.restrictions.size() > 0) {
+      int n = offer.restrictions.size(); // .size() selects all rows from special_offer_special_offer_restriction join table (1 query)
+      if (n > 0) {
+        // .findAll() selects all rows, one at a time, from special_offer_restriction join table (n queries)
         def validUnitType = (offer.restrictions.findAll {it.type == SpecialOfferRestrictionType.UNIT_TYPE}.size() == 0)
         def validUnitSize = (offer.restrictions.findAll {it.type == SpecialOfferRestrictionType.UNIT_SIZE}.size() == 0)
         def validOccupancyRate = (offer.restrictions.findAll {it.type == SpecialOfferRestrictionType.OCCUPANCY_RATE}.size() == 0)
