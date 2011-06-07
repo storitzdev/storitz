@@ -71,15 +71,19 @@ class MapService {
         specialOffers {
           eq("active", true)
           eq("featured", true)
+          restrictions {
+
+          }
+          tags {
+
+          }
+        }
+        insurances {
+          eq("active", true)
         }
         images {
           eq("isCover", true)
         }
-
-      }
-      specialOffers {
-        eq("active", true)
-        eq("featured", true)
       }
     }
   }
