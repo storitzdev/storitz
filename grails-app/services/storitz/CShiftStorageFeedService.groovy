@@ -366,12 +366,15 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     site.sourceId = tab.SITE_ID.text()
     site.sourceLoc = tab.SITE_NUMBER.text()
     site.source = siteSource
-    site.title = tab.SITE_NAME.text().replace('/', '-')
 
-    if (site.title ==~ /(?i).*(test|training)\s?+.*/) {
+    def site_title =  tab.SITE_NAME.text().replace('/', '-')
+
+    if (site_title ==~ /(?i).*(test|training)\s?+.*/) {
       writer.println "Test or training site - dropping: ${site.title}"
       return
     }
+
+    if (!site.title) site.title = site_title
 
     if (!addSiteAddress(cshift, site, writer)) {
       writer.println "Got a bad address, skipping site creation: ${site.title}"

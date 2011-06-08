@@ -27,10 +27,20 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
     /**
      * Contact Information:
      * Leslie Ainscough 800-688-6181
-     *
-     * Login Credentials:
+     * =====================
+     * = Login Credentials =
+     * =====================
+     * Storage PRO:
      * eDomico Client ID: 443
      * eDomico Web Service Key: uBvQoE0DtVTMQA8xCv57A3Rw
+     *
+     * SafeGuard:
+     * eDomico Client ID: 400
+     * eDomico Web Service Key: Oukm8#Wn36K?7Xx/bKf0IgW!Tm7
+     *
+     * All Aboard:
+     * eDomico Client ID: 981
+     * eDomico Web Service Key: Qu/y0JsiCI6+kW8H@rO4mo8f
      */
 
 
@@ -125,7 +135,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
             return
         }
 
+        // There is only one special per unit. That special, if any is always active and featured
         SpecialOffer specialOffer = getSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
+        specialOffer.featured    = true
+        specialOffer.active      = true
         specialOffer.description = discountName
         if (!specialOffer.promoName) specialOffer.promoName = discountName
 
@@ -214,8 +227,6 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         // don't set these values upon every load. Rather, set them upon initial creation and let them stay
         // as-is after that.
         specialOffer.expireMonth    = 1
-        specialOffer.featured       = false
-        specialOffer.active         = false
         specialOffer.inMonth        = 1
         specialOffer.prepayMonths   = 0
 
@@ -240,9 +251,9 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         return desc.replaceAll(regexp,"");
     }
 
-    def getUnitSize(sizeInfo) {
+    def getUnitSize(sizeInfo, searchType) {
       UnitSizeService unitSizeService = new UnitSizeService()
-      return unitSizeService.getUnitSize(sizeInfo["width"],sizeInfo["length"],SearchType.STORAGE)
+      return unitSizeService.getUnitSize(sizeInfo["width"],sizeInfo["length"],searchType)
     }
 
     /**
@@ -338,7 +349,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
             location.site = newEDomicoStorageSite()
         }
         else {
-            stats.updateCount--
+            stats.updateCount++
         }
         return location.site
     }
@@ -444,7 +455,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
             storageUnit.unitTypeInfo = sz.get("SiteID") + "-" + sz.get("SizeID") + ":" + sz.get("SizeCodeInfo")
             storageUnit.price = storageUnit.pushRate = price
             storageUnit.displaySize = storageUnit.unitSizeInfo = getStorageUnitDisplaySize(sz.get("SizeCodeInfo"))
-            def unitSize = getUnitSize(unitSizeInfo)
+            def unitSize = getUnitSize(unitSizeInfo,eDomicoAmenitiesMap.searchType)
             if (!unitSize) {
                 writer.append("Cannot determine unitSize for " + sz.get("SizeCodeInfo") + ". Skipping\n")
                 continue
@@ -490,10 +501,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         eDomicoAmenitiesMap.tempControlled = bestGuessClimateControlled(description)
 
         // optional fields
-        if (bestGuessSecure(description))            eDomicoAmenitiesMap.secure = true
-        if (bestGuessAlarmed(description))           eDomicoAmenitiesMap.alarmed = true
-        if (bestGuessPowered(description))           eDomicoAmenitiesMap.powered = true
-        if (bestGuessIrregular(description))         eDomicoAmenitiesMap.irregular = true
+        if (bestGuessSecure(description))    eDomicoAmenitiesMap.secure    = true
+        if (bestGuessAlarmed(description))   eDomicoAmenitiesMap.alarmed   = true
+        if (bestGuessPowered(description))   eDomicoAmenitiesMap.powered   = true
+        if (bestGuessIrregular(description)) eDomicoAmenitiesMap.irregular = true
         eDomicoAmenitiesMap.save() // no flush!
       }
 
@@ -501,6 +512,15 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
     }
 
     def bestGuessSearchType (String description) {
+      if (description.toLowerCase().contains("parking"))
+        return SearchType.PARKING
+      if (description.toLowerCase().contains("vehicle"))
+        return SearchType.PARKING
+      if (description.toLowerCase().contains("garage"))
+        return SearchType.PARKING
+      if (description.contains("RV"))
+        return SearchType.PARKING
+
       return SearchType.STORAGE
     }
 

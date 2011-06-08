@@ -743,7 +743,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     site.sourceId = tab.SiteID.text()
     site.sourceLoc = tab.sLocationCode.text()
     site.source = "SL"
-    site.title = tab.sSiteName.text().replace('/', '-')
+    if (!site.title) site.title = tab.sSiteName.text().replace('/', '-')
     site.address = tab.sSiteAddr1.text()
     site.address2 = tab.sSiteAddr2.text()
     site.city = tab.sSiteCity.text()
@@ -926,7 +926,8 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   def unitsAvailable(siteLink, site, stats, newSite, writer) {
-    writer.println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
+    //writer.println "Getting units available for site: " + site.title + " last update ticks: " + site.lastUpdate
+    writer.println "Getting units available for site: " + site.title
 
     def unitTypeTotalLookup = getUnitTypeCounts(siteLink, site, writer)
 

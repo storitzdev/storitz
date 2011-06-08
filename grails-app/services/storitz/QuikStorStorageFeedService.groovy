@@ -193,7 +193,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
     def facInfo = myProxy.facilityInfo(loc.username, loc.password, loc.sitename)
 
     if (facInfo.success) {
-      site.title = facInfo.csSiteName
+      if (!site.title) site.title = facInfo.csSiteName
       site.address = facInfo.csSiteAddress.trim()
       site.city = facInfo.csSiteCity.trim()
       site.state = State.getEnumFromId(facInfo.csSiteState)
