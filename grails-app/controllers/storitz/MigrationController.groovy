@@ -120,6 +120,9 @@ class MigrationController {
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
         // TODO - cycle through and build the QuikStorLocations
+      } else if (resp.feed.feedType == 'EDOMICO') {
+        // TODO - handle Domico
+        // TODO - cycle through and build the DomicoLocations
       }
       CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)
       // create the manager first

@@ -2,8 +2,12 @@ package storitz
 
 import java.math.RoundingMode
 import com.storitz.*
+import com.storitz.service.ICostStorageFeedService
+import com.storitz.service.IFeedStorageFeedService
+import com.storitz.service.IMoveInStorageFeedService
+import com.storitz.service.CostTotals
 
-abstract class BaseProviderService {
+abstract class BaseProviderStorageFeedService implements ICostStorageFeedService, IFeedStorageFeedService, IMoveInStorageFeedService {
 
   static transactional = false
 
@@ -15,12 +19,24 @@ abstract class BaseProviderService {
 
   abstract loadInsurance(Feed feed, StorageSite site)
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
-    def ret = calculateTotals(site, unit, promo, ins, moveInDate, extended)
-    return ret["moveInTotal"]
+  // Don't delete units that are no longer available. Instead, mark the units
+  // as unavailable, and zero out their unit count.
+  public final void zeroOutUnitsForSite(StorageSite site, SiteStats stats, PrintWriter writer) {
+    site.units.each { unit ->
+      stats.removedCount++
+      unit.isAvailable = false;
+      unit.unitCount = 0;
+    }
   }
 
-  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
+  @Override
+  public double calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
+    CostTotals totals = calculateTotals(site, unit, promo, ins, moveInDate, extended)
+    return totals.moveInTotal
+  }
+
+  @Override
+  public Date calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
     // TODO - handle anniversary date sites (most are first of the month)
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth - 1) + promo.expireMonth) : 1;
 
@@ -42,51 +58,51 @@ abstract class BaseProviderService {
       cal.add(Calendar.MONTH, durationMonths)
       cal.add(Calendar.DAY_OF_MONTH, -1)
     }
-    return cal.time
+    return cal.time as Date
   }
 
-  def moveInDetail(RentalTransaction rentalTransaction) {
+  @Override
+  public MoveInDetails moveInDetail(RentalTransaction rentalTransaction) {
 
-    def insId = -1
     def ins
     if (rentalTransaction.insuranceId > 0) {
       ins = Insurance.get(rentalTransaction.insuranceId)
-      insId = ins.insuranceId
     }
     def unit = StorageUnit.get(rentalTransaction.unitId)
     def promo = rentalTransaction.promoId > 0 ? SpecialOffer.get(rentalTransaction.promoId) : null
 
-    def detailList = calculateTotals(rentalTransaction.site, unit, promo, ins, rentalTransaction.moveInDate)
+    CostTotals costTotals = calculateTotals(rentalTransaction.site, unit, promo, ins, rentalTransaction.moveInDate)
 
     def moveInDetails = new MoveInDetails()
-    if (detailList["rentTotal"] && detailList["rentTotal"] > 0) {
-      moveInDetails.items.add(new LineItem(description: "Rent", tax: 0 as BigDecimal, amount: detailList["rentTotal"] as BigDecimal))
+    if (costTotals.rentTotal && costTotals.rentTotal > 0) {
+      moveInDetails.items.add(new LineItem(description: "Rent", tax: 0 as BigDecimal, amount: costTotals.rentTotal as BigDecimal))
     }
-    if (detailList["feesTotal"] && detailList["feesTotal"] > 0) {
-      moveInDetails.items.add(new LineItem(description: "Fees", tax: 0 as BigDecimal, amount: detailList["feesTotal"] as BigDecimal))
+    if (costTotals.feesTotal && costTotals.feesTotal > 0) {
+      moveInDetails.items.add(new LineItem(description: "Fees", tax: 0 as BigDecimal, amount: costTotals.feesTotal as BigDecimal))
     }
-    if (detailList["insuranceCost"] && detailList["insuranceCost"] > 0) {
-      moveInDetails.items.add(new LineItem(description: "Insurance", tax: 0 as BigDecimal, amount: detailList["insuranceCost"] as BigDecimal))
+    if (costTotals.insuranceCost && costTotals.insuranceCost > 0) {
+      moveInDetails.items.add(new LineItem(description: "Insurance", tax: 0 as BigDecimal, amount: costTotals.insuranceCost as BigDecimal))
     }
-    if (detailList["deposit"] && detailList["deposit"] > 0) {
-      moveInDetails.items.add(new LineItem(description: "Refundable Deposit", tax: 0 as BigDecimal, amount: detailList["deposit"] as BigDecimal))
+    if (costTotals.deposit && costTotals.deposit > 0) {
+      moveInDetails.items.add(new LineItem(description: "Refundable Deposit", tax: 0 as BigDecimal, amount: costTotals.deposit as BigDecimal))
     }
-    if (detailList["discountTotal"] && detailList["discountTotal"] > 0) {
-      moveInDetails.items.add(new LineItem(description: "Selected Promotion", tax: 0 as BigDecimal, amount: -detailList["discountTotal"] as BigDecimal))
+    if (costTotals.discountTotal && costTotals.discountTotal > 0) {
+      moveInDetails.items.add(new LineItem(description: "Selected Promotion", tax: 0 as BigDecimal, amount: -costTotals.discountTotal as BigDecimal))
     }
-    if (detailList["tax"] && detailList["tax"] > 0) {
-      moveInDetails.items.add(new LineItem(description: "Tax", tax: detailList["tax"] as BigDecimal, amount: 0 as BigDecimal))
+    if (costTotals.tax && costTotals.tax > 0) {
+      moveInDetails.items.add(new LineItem(description: "Tax", tax: costTotals.tax as BigDecimal, amount: 0 as BigDecimal))
     }
 
     return moveInDetails
   }
 
-  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    calculateTotals(site, unit, promo, ins, moveInDate, true)
+  @Override
+  public CostTotals calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
+    return calculateTotals(site, unit, promo, ins, moveInDate, true)
   }
 
-  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
-    def ret = [:]
+  public CostTotals calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
+    CostTotals ret = new CostTotals();
     def durationMonths = promo ? (promo.prepay ? promo.prepayMonths + promo.expireMonth : (promo.inMonth - 1) + promo.expireMonth) : 1;
     def offerDiscount = 0
     def rate = unit ? (site.allowPushPrice ? (unit.pushRate < unit.price ? unit.pushRate : unit.price) : unit.price) : 0
@@ -110,9 +126,9 @@ abstract class BaseProviderService {
     if (allowExtension && site.useProrating && !site.prorateSecondMonth) {
       if (moveInDay > site.prorateCutoff && (!promo || promo && durationMonths == 1)) {
         durationMonths++;
-        ret["extended"] = true;
+        ret.extended = true;
       } else {
-        ret["extended"] = false;
+        ret.extended = false;
       }
     }
 
@@ -182,18 +198,17 @@ abstract class BaseProviderService {
     def tax = (premium * durationMonths * (taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (taxRateMerchandise / 100)).setScale(2, RoundingMode.HALF_UP)
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
-    ret["duration"] = durationMonths
-    ret["discountTotal"] = offerDiscount
-    ret["feesTotal"] = feesTotal
-    ret["rentTotal"] = rentTotal
-    ret["insuranceCost"] = insuranceCost
-    ret["tax"] = tax
-    ret["deposit"] = deposit
-    ret["moveInTotal"] = moveInTotal
-    ret["paidThruDate"] = cal.time.format('MM/dd/yy')
-    ret["paidThruDateMillis"] = cal.time
-    ret["durationMonths"] = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
-    ret["durationDays"] = durationDays
+    ret.duration = durationMonths
+    ret.discountTotal = offerDiscount
+    ret.feesTotal = feesTotal
+    ret.rentTotal = rentTotal
+    ret.insuranceCost = insuranceCost
+    ret.tax = tax
+    ret.deposit = deposit
+    ret.moveInTotal = moveInTotal
+    ret.paidThruDate = cal.time
+    ret.durationMonths = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
+    ret.durationDays = durationDays
 
     return ret
   }

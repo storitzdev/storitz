@@ -6,6 +6,7 @@ import com.storitz.Insurance
 import storitz.constants.SearchType
 import com.storitz.UserRole
 import com.storitz.User
+import com.storitz.service.CostTotals
 
 class CollegeLandingController extends SearchController  {
 
@@ -111,18 +112,18 @@ class CollegeLandingController extends SearchController  {
                     featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
                 }
                 if (featuredOffers.size() == 0) {
-                    def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-                    siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
+                    CostTotals totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
+                    siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                 } else {
-                    def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-                    siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
+                    CostTotals totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
+                    siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                     def oldMoveInCost = siteMoveInPrice[site.id].cost
                     siteMoveInPrice[site.id].cost = 100000
                     for (promo in featuredOffers) {
                         if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                             totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
-                            if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
-                                siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: promo.id, promoName: promo.promoName, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
+                            if (siteMoveInPrice[site.id].cost > totals.moveInTotal) {
+                                siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: promo.id, promoName: promo.promoName, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                             }
                         }
                     }

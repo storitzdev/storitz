@@ -5,6 +5,7 @@ import com.storitz.StorageSize
 import grails.converters.JSON
 import storitz.constants.SearchType
 import com.storitz.Insurance
+import com.storitz.service.CostTotals
 
 class STMapController {
 
@@ -150,15 +151,15 @@ class STMapController {
           ins = site.insurances.findAll { it.active }.min { it.premium }
         }
         if (bestUnit) {
-          def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
+          CostTotals totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
           monthly = bestUnit?.price
           pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
           unitType = bestUnit?.unitType.display
           sizeDescription = bestUnit?.displaySize
           promoId = null
           promoName = null
-          moveInCost = totals['moveInTotal']
-          paidThruDate = totals['paidThruDate']
+          moveInCost = totals.moveInTotal
+          paidThruDate = totals.paidThruDateString
           def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
           if (featuredOffers.size() > 0) {
             def oldMoveInCost = moveInCost
@@ -166,15 +167,15 @@ class STMapController {
             for (promo in featuredOffers) {
               if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                 totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
-                if (moveInCost > totals['moveInTotal']) {
+                if (moveInCost > totals.moveInTotal) {
                   monthly = bestUnit?.price
                   unitType = bestUnit?.unitType.display
                   pushRate = site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price
                   sizeDescription = bestUnit?.displaySize
                   promoId = promo.id
                   promoName = promo.promoName
-                  moveInCost = totals['moveInTotal']
-                  paidThruDate = totals['paidThruDate']
+                  moveInCost = totals.moveInTotal
+                  paidThruDate = totals.paidThruDateString
                 }
               }
             }

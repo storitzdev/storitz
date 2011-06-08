@@ -6,7 +6,7 @@ class EDomico extends Feed {
     static hasMany = [locations: EDomicoLocation]
 
     static mapping = {
-        locations cascade: "all-delete-orphan"
+        locations cascade: "all,delete-orphan"
     }
 
     static constraints = {
@@ -14,8 +14,6 @@ class EDomico extends Feed {
         edomicoWebServicesKey (nullable: true, unique: true)
     }
 
-
     Integer edomicoClientID
     String edomicoWebServicesKey
-
 }

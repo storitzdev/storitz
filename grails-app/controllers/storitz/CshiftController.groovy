@@ -10,8 +10,8 @@ import storitz.constants.FeedType
 class CshiftController extends FeedController {
 
 
-  def CShiftService
-  def CShift4Service
+  def CShiftStorageFeedService
+  def CShift4StorageFeedService
   def imageService
 
   static allowedMethods = [save: "POST", update: "POST", uploadLogo: "POST", updateInventory: "POST"]
@@ -39,9 +39,9 @@ class CshiftController extends FeedController {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftService.loadSites(cshiftInstance, "CS3", stats, writer)
+        CShiftStorageFeedService.loadSites(cshiftInstance, "CS3", stats, writer)
       } else {
-        CShift4Service.loadSites(cshiftInstance, stats, writer)
+        CShift4StorageFeedService.loadSites(cshiftInstance, stats, writer)
       }
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
@@ -57,9 +57,9 @@ class CshiftController extends FeedController {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftService.refreshSites(cshiftInstance, 'CS3', stats, writer)
+        CShiftStorageFeedService.refreshSites(cshiftInstance, 'CS3', stats, writer)
       } else {
-        CShift4Service.refreshSites(cshiftInstance, stats, writer)
+        CShift4StorageFeedService.refreshSites(cshiftInstance, stats, writer)
       }
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
@@ -76,9 +76,9 @@ class CshiftController extends FeedController {
         site.specialOffers.clear()
         def writer = new PrintWriter(System.out)
         if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-          CShiftService.loadPromos(cshiftInstance, site, writer)
+          CShiftStorageFeedService.loadPromos(site, writer)
         } else {
-          CShift4Service.loadPromos(cshiftInstance, site, writer)
+          CShift4StorageFeedService.loadPromos(site, writer)
         }
         writer.close()
         println "Promos refreshed for ${site.title}"
@@ -97,9 +97,9 @@ class CshiftController extends FeedController {
             ins.delete()
           }
           site.insurances.clear()
-          CShiftService.loadInsurance(cshiftInstance, site)
+          CShiftStorageFeedService.loadInsurance(cshiftInstance, site)
         } else {
-          CShift4Service.loadInsurance(cshiftInstance, site)
+          CShift4StorageFeedService.loadInsurance(cshiftInstance, site)
         }
         println "Insurance refreshed for ${site.title}"
       }
@@ -112,7 +112,7 @@ class CshiftController extends FeedController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def writer = new PrintWriter(System.out)
-      CShiftService.createSitePhones(cshiftInstance, "CS3", writer)
+      CShiftStorageFeedService.createSitePhones(cshiftInstance, "CS3", writer)
       writer.close()
       flash.message = "Feed phones refreshed."
       redirect(action: "show", id: cshiftInstance.id)
@@ -190,7 +190,7 @@ class CshiftController extends FeedController {
   def createContacts = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      CShiftService.createSiteUsers(cshiftInstance, "CS3")
+      CShiftStorageFeedService.createSiteUsers(cshiftInstance, "CS3")
       flash.message = "Site contacts created."
       redirect(action: "list")
     }

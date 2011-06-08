@@ -5,9 +5,8 @@ import groovyx.net.http.Method
 import com.storitz.*
 import static groovyx.net.http.ContentType.XML
 import storitz.constants.*
-import org.apache.http.conn.HttpHostConnectException
 
-class SiteLinkService extends BaseProviderService {
+class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
   def geocodeService
   def unitSizeService
@@ -829,15 +828,16 @@ class SiteLinkService extends BaseProviderService {
       site.adminFee = fees["admin"] ? fees["admin"] : 0
       site.deposit = fees["deposit"] ? fees["deposit"] : 0
     }
-    getPromos(siteLink, site, writer)
+    loadPromos(site, writer)
     addProration(siteLink, site, writer)
     getTaxes(siteLink, site)
     site.save(flush: true)
   }
 
-  def updateSite(site, stats, writer) {
-    def siteLink = (SiteLink) site.feed
-    def ret = getSiteInfo(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
+  @Override
+  public void updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
+    def siteLink = (SiteLink) storageSiteInstance.feed
+    def ret = getSiteInfo(siteLink.corpCode, storageSiteInstance.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -846,18 +846,20 @@ class SiteLinkService extends BaseProviderService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
     records.'soap:Body'.'*:SiteInformationResponse'.'*:SiteInformationResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
-      site.specialOffers.each {offer ->
+      storageSiteInstance.specialOffers.each {offer ->
         offer.delete()
       }
-      site.specialOffers.clear()
-      site.lastUpdate = 0
-      site.save(flush: true)
-      getSiteDetails(siteLink, site, tab, stats, false, writer)
+      storageSiteInstance.specialOffers.clear()
+      storageSiteInstance.lastUpdate = 0
+      storageSiteInstance.save(flush: true)
+      getSiteDetails(siteLink, storageSiteInstance, tab, stats, false, writer)
     }
 
   }
 
-  def addPhones(siteLink, site, writer) {
+  @Override
+  public void addSitePhone(StorageSite site, PrintWriter writer) {
+    SiteLink siteLink = (SiteLink)site.feed;
     def ret = getSiteInfo(siteLink?.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -893,7 +895,10 @@ class SiteLinkService extends BaseProviderService {
     }
   }
 
-  def updateUnits(site, stats, writer) {
+  @Override
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    zeroOutUnitsForSite(site,stats,writer)
+
     def siteLink = (SiteLink) site.feed
     unitsAvailable(siteLink, site, stats, false, writer)
     site.save(flush: true)
@@ -925,7 +930,8 @@ class SiteLinkService extends BaseProviderService {
 
     def unitTypeTotalLookup = getUnitTypeCounts(siteLink, site, writer)
 
-    def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, newSite ? 0 : site.lastUpdate)
+    //def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, newSite ? 0 : site.lastUpdate)
+    def ret = getUnitsAvailable(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password, 0)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -1047,18 +1053,20 @@ class SiteLinkService extends BaseProviderService {
           } else {
             pushRate = price
           }
-          if (existingUnit.price != price || existingUnit.pushRate != pushRate) {
-            def newPrice = unit.dcStdRate.text() as BigDecimal
-            def newPushRate = unit.dcPushRate.text() as BigDecimal
-            if (newPrice == 0 || newPushRate == 0) {
-              // remove unit from inventory
-              site.removeFromUnits(existingUnit)
-              writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
-            } else {
-              existingUnit.price = newPrice
-              existingUnit.pushRate = newPushRate
-              existingUnit.save()
-            }
+          def newPrice = unit.dcStdRate.text() as BigDecimal
+          def newPushRate = unit.dcPushRate.text() as BigDecimal
+          if (newPrice == 0 || newPushRate == 0) {
+            // remove unit from inventory
+            site.removeFromUnits(existingUnit)
+            writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
+          } else {
+            existingUnit.price = newPrice
+            existingUnit.pushRate = newPushRate
+            existingUnit.isAvailable = true // reset this unit's availability
+            existingUnit.unitCount = 1      // reset this unit's availability
+            stats.removedCount--
+            stats.unitCount++
+            existingUnit.save()
           }
         }
       }
@@ -1172,7 +1180,9 @@ class SiteLinkService extends BaseProviderService {
     return useProrating
   }
 
-  def getPromos(siteLink, site, writer) {
+  @Override
+  public void loadPromos(StorageSite site, PrintWriter writer) {
+    SiteLink siteLink = (SiteLink)site.feed;
     def updated = false
     def ret = getPromos(siteLink.corpCode, site.sourceLoc, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
@@ -1208,7 +1218,7 @@ class SiteLinkService extends BaseProviderService {
           specialOffer.save(flush: true)
         }
         specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
-        specialOffer.promoName = promoName
+        if (!specialOffer.promoName) specialOffer.promoName = promoName
         specialOffer.expireMonth = Integer.parseInt(promo.iExpirMonths.text())
         specialOffer.prepay = promo.bPrepay.text().toLowerCase() == 'true'
         specialOffer.inMonth = Integer.parseInt(promo.iInMonth.text())
@@ -1330,7 +1340,8 @@ class SiteLinkService extends BaseProviderService {
     rentalTransaction.save(flush: true)
   }
 
-  def checkRented(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean checkRented(RentalTransaction rentalTransaction) {
     def siteLink = (SiteLink) rentalTransaction.site.feed
     def ret = getUnitInfoByName(siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
@@ -1382,7 +1393,10 @@ TODO - evaluate whether we need this going forward
   }
 */
 
-  def moveIn(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean moveIn(RentalTransaction rentalTransaction) {
+    createTenant(rentalTransaction)
+
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
     rentalTransaction.feedUnitId = unit.unitNumber
     rentalTransaction.feedUnitNumber = unit.unitName
@@ -1435,7 +1449,10 @@ TODO - evaluate whether we need this going forward
     return true
   }
 
-  def reserve(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean reserve(RentalTransaction rentalTransaction) {
+    createTenant(rentalTransaction)
+
       StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
       StorageSite site = StorageSite.get(rentalTransaction.siteId)
 
@@ -1532,4 +1549,8 @@ TODO - evaluate whether we need this going forward
     }
   }
 
+  @Override
+  void init(StorageSite site) {
+        // nothing to do
+  }
 }

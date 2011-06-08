@@ -4,7 +4,7 @@ import com.storitz.Feed
 import com.storitz.EDomico
 import com.storitz.StorageSite
 import com.edomico.www.*
-import java.io.PrintWriter
+
 import com.storitz.EDomicoLocation
 import storitz.constants.TruckType
 import storitz.constants.TransactionType
@@ -13,14 +13,16 @@ import storitz.constants.UnitType
 import storitz.constants.SearchType
 import com.storitz.SpecialOffer
 import storitz.constants.PromoType
-import com.storitz.Insurance
+
 import com.storitz.SiteUser
 import com.storitz.SpecialOfferRestriction
 import storitz.constants.SpecialOfferRestrictionType
 import com.storitz.RentalTransaction
 import storitz.constants.State
+import com.storitz.EDomicoAmenitiesMap
+import storitz.constants.PhoneType
 
-class EDomicoService extends BaseProviderService {
+class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
 
     /**
      * Contact Information:
@@ -42,18 +44,27 @@ class EDomicoService extends BaseProviderService {
 
     static transactional = true
 
-    public EDomicoService (int id, String key) {
-         clientID = id
-         webServicesKey = key
+    // Contructor used publicly by service factory
+    public EDomicoStorageFeedService() {
     }
 
-    def serviceMethod() {
-
+    // Constructor used internally by the EDomicoController
+    public EDomicoStorageFeedService(int clientID, String webServicesKey) {
+        this.clientID = clientID;
+        this.webServicesKey = webServicesKey;
     }
 
     @Override
-    loadInsurance(Feed feed, StorageSite site) {
-        return null  //To change body of implemented methods use File | Settings | File Templates.
+    void init(StorageSite site) {
+        EDomico eDomico = (EDomico)site.feed;
+        this.clientID = eDomico.edomicoClientID;
+        this.webServicesKey = eDomico.edomicoWebServicesKey;
+    }
+
+    // TODO
+    @Override
+    def loadInsurance(Feed feed, StorageSite site) {
+        return null
     }
 
     // Called by EDomicoController class when a feed is first created
@@ -65,79 +76,42 @@ class EDomicoService extends BaseProviderService {
         for (int i = 0; i < locations?.size(); i++) {
             EDomicoLocation location = locations.get(i)
             StorageSite storageSite = getStorageSiteFromEDomicoLocation(location, stats)
-
-            // Technically, we only need to set these values once when we create the StorageSite.
-            // But, what happens if we ever change the values in the EDomicoLocation, for example
-            // to correct an address mistake. We would want that to propagate outward to the site, no?
-            // To satisfy that use case, we update these values every time.
-            storageSite.address     = location.address1
-            storageSite.city        = location.city
-            storageSite.state       = State.fromText(location.state)
-            storageSite.title       = location.siteName
-            storageSite.description = instance.operatorName
-            storageSite.zipcode     = location.zipcode
-            storageSite.sourceId    = location.siteID
-            storageSite.sourceLoc   = location.siteName
-            storageSite.feed        = instance
-            geoCodeSite(storageSite)
-
-            // now handle the associated units for this site
-            loadUnits(storageSite, stats, writer)
-
-            // and save
-            storageSite.save(flush: true)
+            // If this is initial site creation then the site won't have this
+            // feed bound to it yet, so we bind it here.
+            if (!storageSite.feed) {
+                storageSite.feed = instance
+            }
+            // It also won't have this sourceId bound. Technically this should
+            // not be necessary, since the sourceId gets bound inside the call
+            // to updateSite. However, since updateSite is also referenced from
+            // outside of this context, I (JM) needed to embed a call to find
+            // the EDomicoLocation attached to this site /inside/ the updateSite
+            // call, and for that the sourceId is required.
+            if (!storageSite.sourceId) {
+                storageSite.sourceId = location.siteID
+            }
+            updateSite(storageSite,stats,writer)
             SiteUser.link(storageSite, instance.manager)
         }
     }
 
     def geoCodeSite(StorageSite storageSite)  {
-        def address = storageSite.address + ', ' + storageSite.city + ', ' + storageSite.state.display + ' ' + storageSite.zipcode
+        def maxidx = storageSite.zipcode.size() > 5 ? 5 : storageSite.zipcode.size()
+        def address = storageSite.address + ', ' + storageSite.city + ', ' + storageSite.state.display + ' ' + storageSite.zipcode.substring(0,maxidx)
         GeocodeService geocodeService = new GeocodeService()
         def geoResult = geocodeService.geocode(address)
-        storageSite.lng = geoResult.results[0].geometry.location.lng
-        storageSite.lat = geoResult.results[0].geometry.location.lat
+        storageSite.lng = geoResult?.results[0]?.geometry?.location?.lng
+        storageSite.lat = geoResult?.results[0]?.geometry?.location?.lat
     }
 
-    def loadUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
-        EDomico feed = (EDomico)site.feed
-        EDomicoService service = new EDomicoService(feed.edomicoClientID,feed.edomicoWebServicesKey)
-        def token = service.readToken()
-        def siteID  = service.readSiteID(token,site.address,site.city,site.zipcode)
-        def sizes = service.readSizes(token,siteID)
-
-        for (sz in sizes) {
-            def sizeID = new Integer(sz.get("SizeID")).intValue()
-            def units = service.readUnits(token,siteID,sizeID)
-            def currentUpdateCount = stats.updateCount
-            def price = new Double(sz.get("SizeRentRate")).doubleValue()
-            StorageUnit storageUnit = getStorageUnitByNameAndNumber(site,sz.get("SiteID"),sz.get("SizeID"),stats)
-            storageUnit.unitTypeInfo = sz.get("SiteID") + "-" + sz.get("SizeID") + ":" + sz.get("SizeCodeInfo")
-            storageUnit.price = storageUnit.pushRate = price
-            storageUnit.displaySize = storageUnit.unitSizeInfo = sz.get("SizeCodeInfo")
-            def unitSize = getUnitSize(sz.get("SizeCodeInfo"))
-            if (!unitSize) {
-                writer.append("Cannot determine unitSize for " + sz.get("SizeCodeInfo") + ". Skipping")
-                continue
-            }
-            storageUnit.unitsize = unitSize
-            storageUnit.description = getStorageUnitDescription(sz.get("SizeCodeInfo"))
-            storageUnit.unitCount = units.size()
-            storageUnit.deposit = new Double(sz.get("SizeRentRateReservationDeposit")).doubleValue()
-
-            loadPromos(site,storageUnit,sz,writer)
-
-            // Looks good to go. Wrap up and move on to the next.
-            stats.unitCount += 1
-            storageUnit.save()     // no need to flush since the site flush will handle that momentarily
-            site.addToUnits(storageUnit)
-            site.save(flush: true) // save here just in case we don't come in via 'loadSites'
-        }
+    // TODO
+    @Override
+    public void loadPromos(StorageSite storageSite, PrintWriter printWriter) {
     }
 
-    def loadPromos(EDomico eDomico, StorageSite storageSite, PrintWriter printWriter) {
-
-    }
-
+    // This loads promos for a specific unit. There is a more generic method that
+    // load promos at the site level.
+    // NOTE: Saves but does not flush.
     def loadPromos(StorageSite storageSite, StorageUnit storageUnit, EDomicoNode siteSize, PrintWriter writer) {
 
         // StorageSite: hasMany StorageUnit, SpecialOffer (hasMany SpecialOfferRestrictions)
@@ -153,7 +127,7 @@ class EDomicoService extends BaseProviderService {
 
         SpecialOffer specialOffer = getSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
         specialOffer.description = discountName
-        specialOffer.promoName = discountName
+        if (!specialOffer.promoName) specialOffer.promoName = discountName
 
         boolean isPercent = new Boolean(siteSize.get("IsPercent")).booleanValue()
         if (isPercent)  {
@@ -164,18 +138,22 @@ class EDomicoService extends BaseProviderService {
         }
 
         specialOffer.promoQty =  discountValue
+        specialOffer.save()            // no flush!
 
         SpecialOfferRestriction specialOfferRestriction = getSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
-        specialOfferRestriction.restrictionInfo = storageUnit.unitTypeInfo
         specialOfferRestriction.restrictive = false
         specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-        specialOfferRestriction.save()
+        specialOfferRestriction.save() // no flush!
 
-        specialOffer.save()
+        if (!specialOffer.restrictions?.contains(specialOfferRestriction)) {
+          specialOffer.addToRestrictions(specialOfferRestriction)
+          specialOffer.save()          // no flush!
+        }
 
-        storageSite.addToSpecialOffers(specialOffer)
-        storageSite.save(flush: true)
-
+        if (!storageSite.specialOffers?.contains(specialOffer)) {
+          storageSite.addToSpecialOffers(specialOffer)
+          storageSite.save()           // no flush!
+        }
     }
 
     def deleteSpecialOfferAndSpecialOfferRestrictionByStorageSiteAndUnitIfAny(StorageSite storageSite, StorageUnit storageUnit) {
@@ -213,7 +191,7 @@ class EDomicoService extends BaseProviderService {
         }
 
         SpecialOfferRestriction specialOfferRestriction = new SpecialOfferRestriction()
-        specialOffer.addToRestrictions(specialOfferRestriction)
+        specialOfferRestriction.restrictionInfo = storageUnit.unitTypeInfo
         return specialOfferRestriction
     }
 
@@ -262,33 +240,45 @@ class EDomicoService extends BaseProviderService {
         return desc.replaceAll(regexp,"");
     }
 
-    def getUnitSize(String size) {
-        String [] toks = size.split(" ");
-        if (toks.length < 3) {
-            return null
-        }
+    def getUnitSize(sizeInfo) {
+      UnitSizeService unitSizeService = new UnitSizeService()
+      return unitSizeService.getUnitSize(sizeInfo["width"],sizeInfo["length"],SearchType.STORAGE)
+    }
 
-        Double width
-        Double length
-        String rest
+    /**
+      *
+      * @param size
+      * @return list [width: X, length: Y, description: Z]
+      */
+    def getUnitSizeInfo(String size) {
+      // JM: 2011-05-26
+      // I've seen data come in as follows:
+      // "10 X 16"
+      // "10 X 16 Asymmetrical"
+      // "10X10X8CC"
+      // Since we can't guarantee that spaces will surround the 'X',
+      // we force the space here before moving forward
 
-        try {
-            width    = new Double(toks[0]).doubleValue();
-            String x_ignore = toks[1];
-            length   = new Double(toks[2]).doubleValue();
-            rest     = "";
-        }  catch (NumberFormatException e) {
-            return null
-        }
+      String [] toks = size.replaceAll("[xX]","/").split("/");
+      if (toks.length < 2) {
+        return null
+      }
 
-        for (int i = 3; i < toks.length; i++) {
-            rest += " " + toks[i];
-        }
+      Double width
+      Double length
 
-        UnitSizeService unitSizeService = new UnitSizeService()
+      try {
+        width    = new Double(toks[0].replaceAll("[a-zA-Z]*","")).doubleValue();
+        length   = new Double(toks[1].replaceAll("[a-zA-Z]*","")).doubleValue();
+      }  catch (NumberFormatException e) {
+        return null
+      }
 
-        println "getUnitSize: width=${width}, length=${length}"
-        return unitSizeService.getUnitSize(width,length,SearchType.STORAGE)
+      // Rest may contain leading numerals if the unit size was W X L X H
+      // We ignore the height, so we strip that info away here.
+      def description = getStorageUnitDescription(size)
+
+      return [width: width, length: length, description: description]
     }
 
     def getStorageUnitByNameAndNumber(StorageSite site, String name, String number, SiteStats stats) {
@@ -297,11 +287,14 @@ class EDomicoService extends BaseProviderService {
         // Find if one already exists
         for (unit in currentUnits) {
             if (unit.unitName == name && unit.unitNumber == number) {
+                stats.removedCount--
+                stats.unitCount++
                 return unit
             }
         }
 
         // No luck? create a new one
+        stats.createCount++
         StorageUnit storageUnit = new StorageUnit()
 
         // We know these values...
@@ -325,16 +318,30 @@ class EDomicoService extends BaseProviderService {
     // Find a reference to the StorageSite mapped to this EDomicoLocation,
     // or create a new reference, as appropriate
     def getStorageSiteFromEDomicoLocation(EDomicoLocation location, SiteStats stats) {
-        if (!location.site) {
-            stats.createCount += 1
+
+        // JM: 2011-06-01
+        // When we delete a storage_site the corresponding site_id column is
+        // *note* getting nullified. That's a minor issue until we check for
+        // the existence of the site, below. I'm wrapping the call and catching
+        // the hibernate error as you can see. An invalid linkage is assumed to
+        // mean a deleted site, and thus a bad reference.
+        def exists = false
+
+        try {
+          if (location.site) exists = true
+        } catch (org.hibernate.ObjectNotFoundException e) {
+          e.printStackTrace()
+        }
+
+        if (!exists) {
+            stats.createCount++
             location.site = newEDomicoStorageSite()
         }
         else {
-            stats.updateCount += 1
+            stats.updateCount--
         }
         return location.site
     }
-
 
     // called by the "Refresh Sites" button on the view page
     def refreshSites(EDomico instance, String feedType, SiteStats stats, PrintWriter writer) {
@@ -370,25 +377,253 @@ class EDomicoService extends BaseProviderService {
         return storageSite
     }
 
-    // TODO
-    def updateSite(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
+    @Override
+    public void updateSite(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
+        EDomicoLocation eDomicoLocation = EDomicoLocation.findBySiteID(storageSite.sourceId)
 
+        if (!eDomicoLocation) {
+            printf "Cannot find EDomico Site by Source ID = ${storageSite.sourceId}"
+            return
+        }
+
+        // Technically, we only need to set these values once when we create the StorageSite.
+        // But, what happens if we ever change the values in the EDomicoLocation, for example
+        // to correct an address mistake. We would want that to propagate outward to the site, no?
+        // To satisfy that use case, we update these values every time.
+        storageSite.address     = eDomicoLocation.address1
+        storageSite.city        = eDomicoLocation.city
+        storageSite.state       = State.fromText(eDomicoLocation.state)
+
+        // This item is often manually overridden by operations.
+        // We respect that override.
+        if (!storageSite.title) {
+            storageSite.title = eDomicoLocation.siteName
+        }
+
+        // This item is often manually overridden by operations.
+        // We respect that override.
+        if (!storageSite.description) {
+            storageSite.description = storageSite.feed.operatorName
+        }
+
+        storageSite.zipcode     = eDomicoLocation.zipcode
+        storageSite.sourceId    = eDomicoLocation.siteID
+        storageSite.sourceLoc   = eDomicoLocation.siteName
+        geoCodeSite(storageSite)
+
+        // now handle the associated units for this site
+        updateUnits(storageSite, stats, writer)
+
+        // and save
+        storageSite.save(flush: true)
     }
-    // TODO
-    def updateUnits(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
 
+    @Override
+    public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+        zeroOutUnitsForSite(site,stats,writer)
+
+        EDomico feed = (EDomico)site.feed
+        def token = this.readToken()
+        def siteID  = this.readSiteID(token,site.address,site.city,site.zipcode)
+        def sizes = this.readSizes(token,siteID)
+
+        for (sz in sizes) {
+            def unitSizeInfo = getUnitSizeInfo(sz.get("SizeCodeInfo"))
+            if (!unitSizeInfo) {
+              println "Cannot determine unitSizeInfo for ${sz.get("SizeCodeInfo")}. Skipping"
+              continue
+            }
+
+            // will create the map if it does not exist
+            EDomicoAmenitiesMap eDomicoAmenitiesMap = getAmenitiesMap(unitSizeInfo["description"])
+
+            def sizeID = new Integer(sz.get("SizeID")).intValue()
+            def units = this.readUnits(token,siteID,sizeID)
+            def price = new Double(sz.get("SizeRentRate")).doubleValue()
+            StorageUnit storageUnit = getStorageUnitByNameAndNumber(site,sz.get("SiteID"),sz.get("SizeID"),stats)
+            storageUnit.unitTypeInfo = sz.get("SiteID") + "-" + sz.get("SizeID") + ":" + sz.get("SizeCodeInfo")
+            storageUnit.price = storageUnit.pushRate = price
+            storageUnit.displaySize = storageUnit.unitSizeInfo = getStorageUnitDisplaySize(sz.get("SizeCodeInfo"))
+            def unitSize = getUnitSize(unitSizeInfo)
+            if (!unitSize) {
+                writer.append("Cannot determine unitSize for " + sz.get("SizeCodeInfo") + ". Skipping\n")
+                continue
+            }
+            storageUnit.unitsize = unitSize
+            storageUnit.unitType = eDomicoAmenitiesMap.unitType
+            if (eDomicoAmenitiesMap.secure)            storageUnit.isSecure = true
+            if (eDomicoAmenitiesMap.tempControlled)    storageUnit.isTempControlled = true
+            if (eDomicoAmenitiesMap.alarmed)           storageUnit.isAlarm = true
+            if (eDomicoAmenitiesMap.powered)           storageUnit.isPowered = true
+            if (eDomicoAmenitiesMap.irregular)         storageUnit.isIrregular = true
+            storageUnit.description = getStorageUnitDescription(sz.get("SizeCodeInfo"))
+            storageUnit.isAvailable = true
+            storageUnit.unitCount = units.size()
+            storageUnit.deposit = new Double(sz.get("SizeRentRateReservationDeposit")).doubleValue()
+
+            // Looks good to go. Save and process promos
+            site.save()         // don't flush!
+            storageUnit.save()  // don't flush!
+            site.addToUnits(storageUnit)
+
+            // Process the promotions  (Note: saves but does not flush)
+            loadPromos(site,storageUnit,sz,writer)
+
+            // Now we can save, flush and move on...
+            site.save(flush: true)
+        }
     }
-    // TODO
-    def addSitePhone(StorageSite storageSite, SiteStats stats, PrintWriter writer) {
 
+    def getAmenitiesMap (String description) {
+      EDomicoAmenitiesMap eDomicoAmenitiesMap = EDomicoAmenitiesMap.findByDescription(description)
+
+      // We don't know what this is.
+      // Save into the map so we can figure it out later
+      if (!eDomicoAmenitiesMap) {
+        println "Creating new EDomico Amenities Map Entry: ${description}"
+        eDomicoAmenitiesMap = new EDomicoAmenitiesMap()
+
+        // mandatory fields
+        eDomicoAmenitiesMap.description    = description
+        eDomicoAmenitiesMap.unitType       = bestGuessUnitType(description)
+        eDomicoAmenitiesMap.searchType     = bestGuessSearchType(description)
+        eDomicoAmenitiesMap.tempControlled = bestGuessClimateControlled(description)
+
+        // optional fields
+        if (bestGuessSecure(description))            eDomicoAmenitiesMap.secure = true
+        if (bestGuessAlarmed(description))           eDomicoAmenitiesMap.alarmed = true
+        if (bestGuessPowered(description))           eDomicoAmenitiesMap.powered = true
+        if (bestGuessIrregular(description))         eDomicoAmenitiesMap.irregular = true
+        eDomicoAmenitiesMap.save() // no flush!
+      }
+
+      return eDomicoAmenitiesMap
     }
-    // TODO
-    def checkRented(RentalTransaction trans) {
 
+    def bestGuessSearchType (String description) {
+      return SearchType.STORAGE
     }
-    // TODO
-    def reserve(RentalTransaction trans) {
 
+    def bestGuessUnitType (String description) {
+      if (description.toLowerCase().contains("drive up"))
+        return UnitType.DRIVEUP
+      if (description.toLowerCase().contains("hallway"))
+        return UnitType.INTERIOR
+      if (description.toLowerCase().contains("upstairs"))
+        return UnitType.UPPER
+      return UnitType.UNDEFINED
+    }
+
+  def bestGuessSecure (String description) {
+    return false
+  }
+
+  def bestGuessClimateControlled (String description) {
+    if (description.toLowerCase().contains("climate control"))
+      return true
+    if (description.toLowerCase().contains("cc"))
+      return true
+    return false
+  }
+
+  def bestGuessAlarmed (String description) {
+    return false
+  }
+
+  def bestGuessPowered (String description) {
+    return false
+  }
+
+    def bestGuessIrregular (String description) {
+      if (description.toLowerCase().contains("asymmetrical"))
+        return true
+      if (description.toLowerCase().contains("obstruction"))
+        return true
+      return false
+    }
+
+    /**
+     *
+     * @param sz where sz can be something like "5X5X4GCC", or "5 x 10 Upper"
+     * @return Just the basic size, i.e. "5 X 5", or "5 X 10"
+     */
+    private String getStorageUnitDisplaySize (String sz) {
+        String tmpSize = sz.replaceAll("[xX]","/").replaceAll("[a-zA-Z ]","").replaceAll("/"," X ");
+        String size = tmpSize;
+
+        // I.E. 5 X 5 X 8 => 5 X 5
+        if (tmpSize.count("X") > 1) {
+            int x1 = tmpSize.indexOf('X');
+            int x2 = tmpSize.indexOf('X',x1+1);
+            size = tmpSize.substring(0,x2);
+        }
+
+        return size;
+    }
+
+    // TODO
+    @Override
+    public void addSitePhone(StorageSite storageSite, PrintWriter writer) {
+    }
+
+    // TODO
+    @Override
+    public boolean checkRented(RentalTransaction trans) {
+      return true
+    }
+
+    // TODO: Test. Lots of test.
+    @Override
+    public boolean moveIn(RentalTransaction trans) {
+      def storageUnit       = StorageUnit.findById(trans.unitId)
+      def contact           = trans.contactPrimary
+
+      def token             = this.readToken();
+      def siteID            = trans.site.sourceId;
+      def sizeID            = storageUnit.unitNumber as int;
+      def unitID            = this.readUnitID(token, siteID, sizeID);
+      def lastName          = contact.lastName;
+      def firstName         = contact.firstName;
+      def middleInitial     = null;
+      def emailAddress      = contact.email;
+      def address1          = contact.address1;
+      def address2          = contact.address2;
+      def city              = contact.city;
+      def state             = contact.state.display.toString();
+      def zip               = contact.zipcode;
+      def homePhone         = contact.phoneType == PhoneType.HOME   ? contact.phone : null;
+      def cellPhone         = contact.phoneType == PhoneType.MOBILE ? contact.phone : null;
+      def sendConfirmationEmail = false;
+      def emailContent      = null;
+      def depositAmount     = 0.0; // RESERVATION WITHOUT PAYMENT. WE'll ACH the move-in amount
+
+      def res = this.reserveUnit(token, siteID, unitID, sizeID,
+          lastName, firstName, middleInitial, emailAddress, address1, address2,
+          city, state, zip, homePhone, cellPhone, sendConfirmationEmail,
+          emailContent, depositAmount);
+
+      // XML items
+      def resSuccess       = res.get("Success")
+      def resCustomerID    = res.get("CustomerID")
+      def resUInitID       = res.get("UnitID")
+      def resError         = res.get("Error")
+      def reSeMailMessage  = res.get("EMailMessage")
+
+      if (!resSuccess) {
+        println "resSuccess=${resSuccess}}"
+        println "resCustomerID=${resCustomerID}}"
+        println "resUInitID=${resUInitID}}"
+        println "resError=${resError}}"
+        println "reSeMailMessage=${reSeMailMessage}}"
+      }
+
+      return resSuccess
+    }
+
+    // TODO
+    @Override
+    public boolean reserve(RentalTransaction trans) {
+      return moveIn (trans);
     }
 
 
@@ -589,6 +824,11 @@ class EDomicoService extends BaseProviderService {
     // Note: Note: online reservations will always create NEW accounts even if an existing
     //       customer (multiple accounts for each unit/size for same customer)
     def reserveUnit(java.lang.String token, java.lang.String siteID, int unitID, int sizeID, java.lang.String lastName, java.lang.String firstName, java.lang.String middleInitial, java.lang.String EMailAddress, java.lang.String address1, java.lang.String address2, java.lang.String city, java.lang.String state, java.lang.String zip, java.lang.String homePhone, java.lang.String cellPhone, boolean sendConfirmationEmail, java.lang.String emailContent, double depositAmount) {
-        reservationSoap.reserveUnit(clientID, token, siteID, unitID, sizeID, lastName, firstName, middleInitial, EMailAddress, address1, address2, city, state, zip, homePhone, cellPhone, sendConfirmationEmail, emailContent, depositAmount)
+      com.edomico.www.ReserveUnitResponseReserveUnitResult reserveUnitResponseReserveUnitResult = reservationSoap.reserveUnit(clientID, token, siteID, unitID, sizeID, lastName, firstName, middleInitial, EMailAddress, address1, address2, city, state, zip, homePhone, cellPhone, sendConfirmationEmail, emailContent, depositAmount)
+      org.w3c.dom.NodeList reservationResults =  Util.getTopLevelNodeList(reserveUnitResponseReserveUnitResult,"Authorize")
+      org.w3c.dom.Node n = reservationResults.item(0)
+      org.w3c.dom.NodeList childNodes = n.childNodes
+      def results =  new EDomicoNode (childNodes)
+      return results
     }
 }

@@ -4,6 +4,7 @@ import grails.converters.JSON
 import java.math.RoundingMode
 import storitz.constants.SearchType
 import com.storitz.*
+import com.storitz.service.CostTotals
 
 class HomeController extends SearchController {
 
@@ -236,18 +237,18 @@ class HomeController extends SearchController {
                 if (bestUnit) {
                     def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
                     if (featuredOffers.size() == 0) {
-                        def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-                        siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
+                        CostTotals totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
+                        siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
                     } else {
-                        def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-                        siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
+                        CostTotals totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
+                        siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
                         def oldMoveInCost = siteMoveInPrice[site.id].cost
                         siteMoveInPrice[site.id].cost = 100000
                         for (promo in featuredOffers) {
                             if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                                 totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
-                                if (siteMoveInPrice[site.id].cost > totals['moveInTotal']) {
-                                    siteMoveInPrice[site.id] = [cost: totals['moveInTotal'], promo: promo.id, promoName: promo.promoName, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
+                                if (siteMoveInPrice[site.id].cost > totals.moveInTotal) {
+                                    siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: promo.id, promoName: promo.promoName, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
                                 }
                             }
                         }

@@ -6,7 +6,7 @@ import com.storitz.StorageSite
 import storitz.constants.PromoType
 import com.storitz.StoritzUtil
 
-class UsiService extends CShiftService {
+class UsiStorageFeedService extends CShiftStorageFeedService {
 
   def offerFilterService
 
@@ -18,13 +18,13 @@ class UsiService extends CShiftService {
       return offerFilterService
   }
 
-  def updateUnits(site, stats, writer) {
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
     super.updateUnits(site, stats, writer)
-    CenterShift cshift = (CenterShift)site.feed
-    loadPromos(cshift, site, writer)
+    loadPromos(site, writer)
   }
 
-  def loadPromos(cshift, site, writer) {
+  public void loadPromos(StorageSite site, PrintWriter writer) {
+    CenterShift cshift = (CenterShift)site.feed;
     def ret;
 
     try {
@@ -76,7 +76,7 @@ class UsiService extends CShiftService {
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
-          specialOffer.promoName = promo.'promo-name'.text()
+          if (!specialOffer.promoName) specialOffer.promoName = promo.'promo-name'.text()
           newOffer = true
         } else {
           specialOffer.restrictions.clear()
@@ -189,7 +189,8 @@ class UsiService extends CShiftService {
         }
         Integer promoOrder = (promo.description[4] as Integer)
         promo.active = true
-        promo.description = promo.promoName = promo.description.split('-')[1]
+        promo.description = promo.description.split('-')[1]
+        if (!promo.promoName) promo.promoName = promo.description.split('-')[1]
         promo.save(flush: true)
       }
     }

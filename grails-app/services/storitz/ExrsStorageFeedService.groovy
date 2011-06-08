@@ -9,15 +9,17 @@ import com.storitz.*
 
 import com.storitz.exrsclient.ExrsWebFormProcessor
 
-class ExrsService extends CShiftService {
+class ExrsStorageFeedService extends CShiftStorageFeedService {
 
   def emailService
 
   static String baseUrl = "http://www.extraspace.com"
 
   // unit availability
+  @Override
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    zeroOutUnitsForSite(site,stats,writer)
 
-  def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
     println "Update units opening page: ${baseUrl + site.url}"
     def siteHtml = (baseUrl + site.url).toURL().text
     // build list of valid ids
@@ -173,7 +175,9 @@ class ExrsService extends CShiftService {
             siteUnit.unitName = unitId
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = attributes
-            stats.unitCount += 1
+            siteUnit.isAvailable = true
+            stats.unitCount++
+            stats.removedCount--
 
             writer.println "Updating unit attributes ${attributes} size: ${displaySize} price: ${price} pushRate:${pushRate}"
           }
@@ -260,7 +264,7 @@ class ExrsService extends CShiftService {
       specialOffer.featured = true
       specialOffer.waiveAdmin = false;
       specialOffer.description = promoName
-      specialOffer.promoName = promoName
+      if (!specialOffer.promoName) specialOffer.promoName = promoName
       specialOffer.promoSize = null
       specialOffer.prepay = false
       specialOffer.expireMonth = 0
@@ -311,13 +315,13 @@ class ExrsService extends CShiftService {
 
   }
 
-  def loadPromos(CenterShift feed, StorageSite site, PrintWriter writer) {
+  public void loadPromos(StorageSite site, PrintWriter writer) {
     // This is NOOP for EXRS since the inventory does the promos
   }
 
   // check rented
-
-  def checkRented(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean checkRented(RentalTransaction rentalTransaction) {
 
     StorageSite site = rentalTransaction.site
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
@@ -346,9 +350,8 @@ class ExrsService extends CShiftService {
     return false
   }
 
-  // reserve/move-in
-
-  def moveIn(RentalTransaction trans) {
+  @Override
+  public boolean reserve(RentalTransaction trans) {
 
     trans.idNumber = trans.bookingDate.format('yyyyddMM') + sprintf('%08d', trans.id)
 
@@ -446,6 +449,11 @@ class ExrsService extends CShiftService {
     trans.save(flush: true)
 
     return true
+  }
+
+  @Override
+  public boolean moveIn(RentalTransaction trans) {
+    return reserve(trans);
   }
 
     // Post the move in details to the Extraspace web site

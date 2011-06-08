@@ -1,10 +1,7 @@
 package com.storitz.exrsclient;
 
 import com.storitz.StoritzUtil;
-import groovy.lang.GroovyClassLoader;
-import groovy.lang.GroovyObject;
-import storitz.ExrsService;
-import storitz.EmailService;
+import storitz.ExrsStorageFeedService;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -18,7 +15,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.storitz.RentalTransaction;
 import com.storitz.Contact;
 import storitz.constants.CreditCardType;
-import storitz.constants.UnitType;
 
 import java.io.*;
 import java.util.*;
@@ -29,7 +25,7 @@ import java.util.regex.Matcher;
 public class ExrsWebFormProcessor {
 
     final WebClient webClient;
-    private static final String baseUrl = ExrsService.getBaseUrl();
+    private static final String baseUrl = ExrsStorageFeedService.getBaseUrl();
     private static final String reserveOrHoldAction = "/Storage/ReserveOrHold.aspx";
     private static final String reserveConfirmAction = "/Storage/Reserve/Confirm.aspx";
     private StringBuffer buf = new StringBuffer(5120);
@@ -335,13 +331,15 @@ public class ExrsWebFormProcessor {
 
     // Move-in dates have no leading zeros (i.e. 04/01/2011 becomes 4/1/2011)
     private String formatMoveInDate(Date moveInDate) {
+        Date actualMoveInDate = getActualMoveInDate(moveInDate);
+
         SimpleDateFormat sdf1 = new SimpleDateFormat("MM");
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd");
         SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy");
 
-        String d1 = sdf1.format(moveInDate);
-        String d2 = sdf2.format(moveInDate);
-        String d3 = sdf3.format(moveInDate);
+        String d1 = sdf1.format(actualMoveInDate);
+        String d2 = sdf2.format(actualMoveInDate);
+        String d3 = sdf3.format(actualMoveInDate);
 
         if (d1.charAt(0)=='0') {
             d1 = d1.substring(1);
@@ -352,6 +350,27 @@ public class ExrsWebFormProcessor {
         }
 
         return d1+"/"+d2+"/"+d3;
+    }
+
+    // JM: 2011-06-03
+    // Odd factoid. The Extraspace reservation form does not list Sunday as
+    // a valid move-in date! If a user requests a Sunday move-in, then subtract
+    // one day and move them in on the preceding Saturday.
+    //
+    // Failure to do this will result in a same-day move in, since the code
+    // that sets the selection option will fail, and the default move-in
+    // value is same day.
+    private Date getActualMoveInDate(Date moveInDate) {
+        Date actualMoveInDate = moveInDate;
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(actualMoveInDate);
+        if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+            cal.add(Calendar.DATE,-1);
+            actualMoveInDate = cal.getTime();
+        }
+
+        return actualMoveInDate;
     }
 
     private String resolveCCTyp(String ccType) {
