@@ -4,6 +4,7 @@ import com.storitz.Metro
 import com.storitz.MetroEntry
 import com.storitz.StorageSite
 import com.storitz.CollegeLanding
+import com.storitz.Video
 
 class SiteMapController {
 
@@ -57,6 +58,15 @@ class SiteMapController {
       xml {
         def collegeList = CollegeLanding.findAll()
         render(view: "sitemapCollege", contentType: 'text/html; charset=utf-8', model: [collegeList: collegeList])
+      }
+    }
+  }
+
+  def videos = {
+    withFormat {
+      xml {
+        def videoList = Video.findAll()
+        render(view: "sitemapVideo", contentType: 'text/html; charset=utf-8', model: [videoList : videoList])
       }
     }
   }
