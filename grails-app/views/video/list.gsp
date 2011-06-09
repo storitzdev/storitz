@@ -59,7 +59,7 @@
               <td>${videoInstance?.useYouTube ? "Yes" : "No" }</td>
 
               <td>
-                <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
+                <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.urlTitle ? videoInstance.urlTitle : videoInstance.title]"/>
               </td>
             </tr>
           </g:each>

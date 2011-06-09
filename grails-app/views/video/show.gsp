@@ -55,6 +55,13 @@
           </tr>
 
           <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.urlTitle.label" default="URL Title"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "urlTitle")}</td>
+
+          </tr>
+
+          <tr class="prop">
             <td valign="top" class="name"><g:message code="video.releaseDate.label" default="Release Date"/></td>
 
             <td valign="top" class="value">${videoInstance.releaseDate.format('MM-dd-yyyy')}</td>
@@ -126,7 +133,7 @@
             <td valign="top" class="name"><g:message code="video.external.link.label" default="External Link"/></td>
 
             <td valign="top" class="value">
-              <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
+              <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.urlTitle ? videoInstance.urlTitle : videoInstance.title]"/>
             </td>
 
           </tr>

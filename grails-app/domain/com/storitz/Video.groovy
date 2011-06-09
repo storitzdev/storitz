@@ -12,10 +12,12 @@ class Video {
         return fileLoc || vid.useYouTube
     })
     stillImage(nullable: true)
+    urlTitle(nullable: true)
   }
 
   Date releaseDate
   String title
+  String urlTitle
   String caption
   String tags
   StorageSite site

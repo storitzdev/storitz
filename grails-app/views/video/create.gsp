@@ -94,6 +94,20 @@
           <div style="height:10px;clear:both;"></div>
         </div>
 
+       <div class="checkout_fields">
+          <div style="width:800px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'urlTitle', 'errors')}">
+            <g:textField id="urlTitle" name="urlTitle" style="width: 380px;" value="${fieldValue(bean:videoInstance,field:'urlTitle')}"/>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="checkout_labels">
+            <div class="checkout_name" style="width:800px;">
+              <label for="urlTitle">Video URL Title</label>
+            </div>
+          <div style="height:10px;clear:both;"></div>
+        </div>
+
         <div class="checkout_section_header">
           Video Caption
         </div>
