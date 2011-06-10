@@ -124,6 +124,16 @@ class RentalTransaction {
     displaySize(nullable: true)
   }
 
+  // This event, as expected, will fire after insertion into the database.
+  def afterInsert() {
+    if (status == TransactionStatus.BEGUN) {
+      // TODO:
+      // Spawn a thread that will wait for some suffient length of time
+      // before querying the database for this record. If the status
+      // of this record is still BEGUN, then email a balk message
+    }
+  }
+
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
           'cardType', 'cvv2', 'paymentString']
 }
