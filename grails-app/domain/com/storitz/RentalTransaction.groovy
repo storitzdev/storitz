@@ -1,6 +1,8 @@
 package com.storitz
 
 import storitz.constants.*
+import storitz.UpdateInventoryJob
+import storitz.BalkNotificationJob
 
 class RentalTransaction {
 
@@ -127,10 +129,10 @@ class RentalTransaction {
   // This event, as expected, will fire after insertion into the database.
   def afterInsert() {
     if (status == TransactionStatus.BEGUN) {
-      // TODO:
-      // Spawn a thread that will wait for some suffient length of time
-      // before querying the database for this record. If the status
-      // of this record is still BEGUN, then email a balk message
+      long millisecondsNow = (new Date()).time
+      long millisecondsTenMinutes = 1000 * 60 * 10;
+      Date when = new Date(millisecondsNow + millisecondsTenMinutes)
+      BalkNotificationJob.scheduleBalkNotice(id,when)
     }
   }
 

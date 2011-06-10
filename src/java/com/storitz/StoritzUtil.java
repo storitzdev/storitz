@@ -23,6 +23,4 @@ public class StoritzUtil {
 
         return iZip >= 90001 && iZip <= 96162;
     }
-
-
 }

@@ -537,7 +537,11 @@ class StorageSiteController {
 
     Visit visit = new Visit(dateCreated: new Date(), site: site, remoteAddr: remoteAddr, unitSize: unitSize, searchAddress: params.address, searchDate: searchDate)
 
-    if (!visit.save()) println "Visit log save failed!"
+    try {
+      if (!visit.save()) println "Visit log save failed!"
+    } catch (Throwable t) {
+      t.printStackTrace()
+    }
 
     if (!session?.shortSessionId) {
       session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
