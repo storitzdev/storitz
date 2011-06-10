@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest
 
 import storitz.constants.QueryMode
 import storitz.constants.GeoType
+import org.hibernate.FetchMode
 
 class MapService {
   def geoIp;
@@ -27,12 +28,26 @@ class MapService {
     FETCH
   }
 
-  def getSitesClosure = { criteria, mode ->
+  def unitsCriteria = { criteria ->
     return {
-      if (mode == CRITERIA_MODE.COUNT) {
-        projections {
-          countDistinct("id")
+      units {
+        unitsize {
+          and {
+            eq("searchType", criteria.searchType)
+            if (criteria.searchSize && criteria.searchSize != 1) {
+              eq("id", criteria.searchSize)
+            }
+          }
         }
+        sqlRestriction("unit_count >= min_inventory")
+        //order("currentPrice", "asc") // TODO: uncomment when used by getUnitsClosure
+      }
+    }
+  }
+  def getSitesClosure = { criteria ->
+    return {
+      projections {
+        groupProperty("id")
       }
       and {
         eq("disabled", false)
@@ -54,48 +69,60 @@ class MapService {
           }
         }
       }
-      units {
-        if (criteria.queryMode == QueryMode.FIND_UNITS) {
-          unitsize {
-            and {
-              eq("searchType", criteria.searchType)
-              if (criteria.searchSize && criteria.searchSize != 1) {
-                eq("id", criteria.searchSize)
-              }
-            }
-          }
-          sqlRestriction("unit_count >= min_inventory")
-        }
-      }
-      if (mode == CRITERIA_MODE.FETCH) {
-        specialOffers {
-          eq("active", true)
-          eq("featured", true)
-          restrictions {
-
-          }
-          tags {
-
-          }
-        }
-        insurances {
-          eq("active", true)
-        }
-        images {
-          eq("isCover", true)
-        }
+      if (criteria.queryMode == QueryMode.FIND_UNITS) {
+        unitsCriteria(criteria)
       }
     }
   }
+//  // TODO: use this to avoid in-app sorting of sites by price (in best-unit calculation in SearchController)
+//  //       n.b. order() clause must be uncommented in unitsCriteria for this to work here, and currentPrice
+//  //       must be set (to either price or pushRate) by the ETL process, and stored in the DB
+//  def getUnitsClosure = { siteId, criteria ->
+//    return {
+//      eq("id", siteId)
+//      maxResults(1)
+//      unitsCriteria(criteria)
+//    }
+//  }
 
   def countSites(SearchCriteria criteria) {
-    def c = StorageSite.createCriteria()
-    return c.get(getSitesClosure(criteria, CRITERIA_MODE.COUNT))
+    return StorageSite.withCriteria(getSitesClosure(criteria)).size()
   }
 
   def getSites(SearchCriteria criteria) {
+    // zoom setings
+    Integer zoom = 11;
+    Integer zoomMin = 7;
+    criteria.setBounds(zoom, 617, 284)
     def c = StorageSite.createCriteria();
-    return c.listDistinct(getSitesClosure(criteria, CRITERIA_MODE.FETCH))
+    def siteIds = c.list(getSitesClosure(criteria));
+
+    // adjust zoom if too many/few sitse were returned
+    if (siteIds.size() > 20) {
+      // loop and shrink
+      while (siteIds.size() > 20) {
+        zoom++
+        criteria.setBounds(zoom, width, height)
+        siteIds = c.list(getSitesClosure(criteria));
+      }
+    } else if (siteIds.size() == 0) {
+      // grow
+      while (zoom > zoomMin && siteIds.size() == 0) {
+        zoom--
+        criteria.setBounds(zoom, width, height)
+        siteIds = c.list(getSitesClosure(criteria));
+      }
+    } else if (siteIds.size() <= 3) {
+      // grow up to a couple of notches
+      def targetZoom = zoom - 3
+      while (zoom > targetZoom && siteIds.size() <= 3) {
+        zoom--
+        criteria.setBounds(zoom, width, height)
+        siteIds = c.list(getSitesClosure(criteria));
+      }
+    }
+    // retrieve StorageSite instances from ORM
+    return StorageSite.findAllByIdInList(siteIds);
   }
 
   def getGeoIp(ServletContext servletContext, HttpServletRequest request) {
@@ -109,35 +136,4 @@ class MapService {
 
   }
 
-  public void optimizeZoom(SearchCriteria criteria, Integer width, Integer height) {
-    // TODO: Delete this method when we move to grid-based search
-    Integer zoom = 11;
-    Integer zoomMin = 7;
-
-    criteria.setBounds(zoom, width, height)
-    def count = countSites(criteria)
-    if (count > 20) {
-      // loop and shrink
-      while (count > 20) {
-        zoom++
-        criteria.setBounds(zoom, width, height)
-        count = countSites(criteria)
-      }
-    } else if (count == 0) {
-      // grow
-      while (zoom > zoomMin && count == 0) {
-        zoom--
-        criteria.setBounds(zoom, width, height)
-        count = countSites(criteria)
-      }
-    } else if (count <= 3) {
-      // grow up to a couple of notches
-      def targetZoom = zoom - 3
-      while (zoom > targetZoom && count <= 3) {
-        zoom--
-        criteria.setBounds(zoom, width, height)
-        count = countSites(criteria)
-      }
-    }
-  }
 }

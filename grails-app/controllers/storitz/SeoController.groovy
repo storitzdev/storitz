@@ -28,9 +28,7 @@ class SeoController {
         }
         def cities = sitesInState.collect { pair ->
             // TODO: Implement this as a titleize method somewhere else
-            def displayName = pair[0].split().collect { word ->
-                word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase()
-            }.join(" ")
+            def displayName = StoritzUtil.titleize(pair[0]);
             [name: displayName, numSites: pair[1]]
         }
         [state: searchState, cities: cities, citiesPerColumn: StoritzUtil.partition(cities, 6, 25)]

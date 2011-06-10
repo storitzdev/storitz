@@ -1,47 +1,69 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head><title>Self Storage Prices &amp; Special Offers Near ${aMetro.city}, ${aMetro.stateCode}</title></head>
+<head><title>Self Storage Prices &amp; Special Offers Near ${queryTerm}</title></head>
 
-<body class="serp">
-<h1>Self Storage Prices &amp; Special Offers Near ${aMetro.city}, ${aMetro.stateCode}</h1>
+<body class="serp metro">
+<h1>Self Storage Prices &amp; Special Offers Near <strong>${queryTerm}</strong></h1>
 <g:form>
-    <div id="topbox">
-        <div id="maplet"></div>
-
-        <div id="size_picker"></div>
-
-        <div id="amenities"></div>
+    <div class="panel" id="pickers">
+        <div>
+            <h2>
+              Map
+              <a href="#map-view" id="toggle_map_view">Show big map!</a>
+            </h2>
+            <div id="mini_map_canvas"></div>
+        </div>
+        <div>
+            <h2>Unit size</h2>
+            <ul>
+                <li><input type="radio" name="size" value="5x5" id="size_5x5"/><label for="size_5x5">5 x 5</label></li>
+                <li><input type="radio" name="size" value="5x5" id="size_5x10"/><label for="size_5x10">5 x 10</label></li>
+                <li><input type="radio" name="size" value="5x5" id="size_10x10"/><label for="size_10x10">10 x 10</label></li>
+                <li><input type="radio" name="size" value="5x5" id="size_10x15"/><label for="size_10x15">10 x 15</label></li>
+                <li><input type="radio" name="size" value="5x5" id="size_10x20"/><label for="size_10x20">10 x 20</label></li>
+                <li><input type="radio" name="size" value="5x5" id="size_10x30"/><label for="size_10x30">10 x 30</label></li>
+                <li><input type="radio" name="size" value="all" id="size_all"/><label for="size_all">See All</label></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Unit type</h2>
+            <ul>
+                <li><input type="radio" name="type" value="interior" id="type_interior"/><label for="type_interior">Interior</label></li>
+                <li><input type="radio" name="type" value="upper" id="type_upper"/><label for="type_upper">Upper</label></li>
+                <li><input type="radio" name="type" value="driveup" id="type_driveup"/><label for="type_driveup">Drive-Up</label></li>
+                <li><input type="radio" name="type" value="all" id="type_all"/><label for="type_all">See All</label></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Amenities</h2>
+            <ul>
+                <li><input type="checkbox" name="amenity" value="cc" id="amenity_cc"/><label for="amenity_cc">Climate Control</label></li>
+                <li><input type="checkbox" name="amenity" value="24hr" id="amenity_24hr"/><label for="amenity_24hr">24-hour Access</label></li>
+                <li><input type="checkbox" name="amenity" value="alarm" id="amenity_alarm"/><label for="amenity_alarm">In-Unit Alarm</label></li>
+            </ul>
+        </div>
     </div>
 </g:form>
-<p class="summary">
-    We Found Prices &amp; Availability for ${clientSites.size()} Facilities
-    <a class="button small black" href="#map-view" id="toggle_map_view">Map View</a>
-</p>
-<g:if test="${clientSites.size() > 0}">
-    <div id="big_map_canvas"></div>
-    <ul id="search_result_labels">
-        <li class="photo">&nbsp;</li>
-        <li class="facility">Facility</li>
-        <li class="unit_info">Unit Type</li>
-        <li class="special">Special</li>
-        <li class="price">Price</li>
-        <li class="rent_button"></li>
-    </ul>
-    <ul id="search_results">
-        <g:each var="site" in="${clientSites}" status="c">
-            <li class="line" id="site_${site.id}">
-                <g:render template="/clientSite" model="['site':site, 'unitInfo':siteMoveInPrice[site.id]]"/>
-            </li>
-        </g:each>
-    </ul>
+<div class="panel results_container">
+    <h2>
+        ${clientSites.size()} Locations Found
+    </h2>
+    <g:if test="${clientSites.size() > 0}">
+        <div id="big_map_canvas"></div>
+        <ul id="search_results">
+            <g:each var="site" in="${clientSites}" status="c">
+                <li id="site_${site.id}">
+                    <g:render template="/clientSite" model="['site':site, 'unitInfo':siteMoveInPrice[site.id]]"/>
+                </li>
+            </g:each>
+        </ul>
 
-    <div id="map_popup" class="tooltip">
-        <a class="close button small black">close</a>
-
-        <p><!-- 1234 Main St. --></p>
-
-        <div id="maplet_canvas" style="width:320px; height:320px"></div>
-    </div>
-</g:if>
+    </g:if>
+</div>
+<div id="map_popup" class="tooltip">
+    <a class="close button small black">close</a>
+    <p><!-- 1234 Main St. --></p>
+    <div id="maplet_canvas" style="width:320px; height:320px"></div>
+</div>
 </body>
 </html>

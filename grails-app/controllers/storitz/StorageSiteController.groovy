@@ -557,10 +557,6 @@ class StorageSiteController {
     def video = Video.findBySite(site)
     def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll { !it.disabled && it.id != site.id && it.state == site.state}
 
-    def zoom = 12 // may try tighter
-    def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
-    def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll {it.id != site.id}.sort { mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
-
     def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
     if (title.size() > 70) {
       title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
@@ -571,7 +567,7 @@ class StorageSiteController {
             title: title,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
-            promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList, nearbyList: nearbyList]
+            promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList]
   }
 
   def directions = {
@@ -661,10 +657,6 @@ class StorageSiteController {
       def video = Video.findBySite(site)
       def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll { !it.disabled && it.id != site.id && it.state == site.state}
 
-      def zoom = 12 // may try tighter
-      def dim = mapService.getDimensions(zoom, site.lat, site.lng, 617, 284)
-      def nearbyList = mapService.getSites((bestUnit?.unitsize?.id ? bestUnit?.unitsize?.id : 1) as Integer, (bestUnit?.unitsize ? bestUnit.unitsize.searchType : SearchType.STORAGE), dim.swLat, dim.swLng, dim.neLat, dim.neLng).findAll {it.id != site.id}.sort { mapService.calcDistance(site.lat, it.lat, site.lng, it.lng)} as List
-
       def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
       if (title.size() > 70) {
         title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
@@ -674,7 +666,7 @@ class StorageSiteController {
               title: title,
               shortSessionId: session.shortSessionId, id: site.id, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
               pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: callParams.searchType,
-              promoId: callParams.rentalTransaction?.promoId, insuranceId: callParams.rentalTransaction?.insuranceId, video: video, propertyOperatorList: propertyOperatorList, nearbyList: nearbyList]
+              promoId: callParams.rentalTransaction?.promoId, insuranceId: callParams.rentalTransaction?.insuranceId, video: video, propertyOperatorList: propertyOperatorList]
 
       // We set the landing cookie so the operator looks like the renter would when the transaction is paid.
       params.landingCookie = callParams.landingCookie

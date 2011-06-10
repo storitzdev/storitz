@@ -10,7 +10,7 @@
         site_url_params = [site_title:site_title, id:site.id];
       }
 %>
-<div class="photo cell">
+<div class="photo">
     <g:if test="${site.coverImage()}">
       <div class="thumb_frame">
         <img class="thumb" src="${resource(file: site.coverImage().mid())}"
@@ -24,7 +24,7 @@
         &nbsp;
     </g:else>
 </div>
-<div class="facility cell" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}">
+<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}">
     <g:link mapping='siteLink2' class="name" params="${site_url_params}">${site.title}</g:link>
     <div class="street address">
         <span>${site.address}</span>
@@ -34,7 +34,7 @@
         <storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> miles
     </div>
 </div>
-<div class="unit_info cell">
+<div class="unit_info">
     <div class="dimensions">${unitInfo?.sizeDescription.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2' Unit")}</div>
     <div class="location">${unitInfo?.unitType}</div>
     <ul>
@@ -48,7 +48,7 @@
         <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}"><li>Free truck!</li></g:if>
     </ul>
 </div>
-<div class="special cell">
+<div class="special">
     <g:if test="${unitInfo?.promo}">
         ${unitInfo?.promoName}
     </g:if>
@@ -56,7 +56,7 @@
         &nbsp;
     </g:else>
 </div>
-<div class="price cell">
+<div class="rent_me">
     <div class="your_price">
         <g:formatNumber number="${unitInfo?.yourPrice}" type="currency" currencyCode="USD"/>
     </div>
@@ -65,8 +65,6 @@
             <g:formatNumber number="${unitInfo?.listPrice }" type="currency" currencyCode="USD"/>
         </div>
     </g:if>
-    <div>per month</div>
-</div>
-<div class="rent_button cell">
-    <g:link mapping='siteLink2' class="name" params="${site_url_params}"><storitz:image src='btn-rent-me-120x44.png' width='120' height='44' border='0'/></g:link>
+    <div class="permonth">per month</div>
+    <g:link mapping='siteLink2' class="name" params="${site_url_params}">Rent Me!</g:link>
 </div>

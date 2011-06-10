@@ -19,7 +19,12 @@
             <g:form class="search" controller="search" action="index">
                 <fieldset>
                     <label>Find self storage:</label>
-                    <input type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
+                    <g:if test="${queryTerm}">
+                      <input type="text" name="where" value="${queryTerm}" placeholder="Enter address, zip code, or city &amp; state"/>
+                    </g:if>
+                    <g:else>
+                      <input type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
+                    </g:else>
                     <input type="submit" name="btn" value="Search" />
                 </fieldset>
             </g:form>
@@ -32,7 +37,7 @@
         <g:layoutBody />
         <g:render template="/v2footer"></g:render>
         <script type="text/javascript">
-          document.write(unescape("%3Cscript src='" + document.location.protocol + "//zopim.com/?OnxU61sHAyKJAixaCrj9vqqwCQ1JzaPN' charset='utf-8' type='text/javascript'%3E%3C/script%3E"));
+          //document.write(unescape("%3Cscript src='" + document.location.protocol + "//zopim.com/?OnxU61sHAyKJAixaCrj9vqqwCQ1JzaPN' charset='utf-8' type='text/javascript'%3E%3C/script%3E"));
         </script>
         <g:pageProperty name="page.gwo" />
     </body>

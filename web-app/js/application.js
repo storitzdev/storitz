@@ -46,12 +46,22 @@ var _map = function() {
     var inactive_icon = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
     var current_maplet_marker = null;
     var current_info_window = null;
-    var google_big_map;
-    var google_maplet;
+    var big_map;
+    var popup_map;
+    var mini_map;
     var markers = {}; // maps site IDs to [google.maps.Marker, google.maps.InfoWindow] pairs
-    var maplet_options = {
+    var popup_map_options = {
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var mini_map_options = {
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: false,
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      disableDefaultUI: true
     };
     var big_map_options = {
         zoom: 15,
@@ -82,7 +92,7 @@ var _map = function() {
             $("#search_results > li").click(function() {
                 var site_id = $(this).attr("id").substr(5);
                 var entry = markers[site_id];
-                toggle_info_window(entry[1], google_big_map, entry[0]);
+                toggle_info_window(entry[1], big_map, entry[0]);
             });
             $("#search_results > li").hover(function() {
                 var li = $(this);
@@ -113,29 +123,42 @@ var _map = function() {
             $("#search_results > li").unbind("mouseleave");
         },
         init: function() {
-            var maplet_canvas = document.getElementById("maplet_canvas");
-            if (maplet_canvas) {
-                google_maplet = new google.maps.Map(maplet_canvas, maplet_options);
-            }
             var big_map_canvas = document.getElementById("big_map_canvas");
-            var bounds = new google.maps.LatLngBounds();
+            var maplet_canvas = document.getElementById("maplet_canvas");
+            var mini_map_canvas = document.getElementById("mini_map_canvas");
+            if (maplet_canvas) {
+              popup_map = new google.maps.Map(maplet_canvas, popup_map_options);
+            }
+            if (mini_map_canvas) {
+              mini_map = new google.maps.Map(mini_map_canvas, mini_map_options);
+            }
             if (big_map_canvas) {
-                google_big_map = new google.maps.Map(big_map_canvas, big_map_options);
+                big_map = new google.maps.Map(big_map_canvas, big_map_options);
+                var big_map_bounds = new google.maps.LatLngBounds();
+                var mini_map_bounds = new google.maps.LatLngBounds();
+                var i = 0;
                 $("#search_results .facility").each(function() {
                     var row = $(this);
                     var name = row.children("a").first().text();
                     var site_id = row.attr("site_id");
                     var point = new google.maps.LatLng(row.attr("lat"), row.attr("lng"));
-                    var marker = new google.maps.Marker({ map: google_big_map, position: point, icon: inactive_icon, title: name });
+                    var marker = new google.maps.Marker({ map: big_map, position: point, icon: inactive_icon, title: name });
                     var info_window = new google.maps.InfoWindow( { content: name, maxWidth: 200 });
                     google.maps.event.addListener(marker, "click", function() {
-                        toggle_info_window(info_window, google_big_map, marker);
+                        toggle_info_window(info_window, big_map, marker);
                     });
                     markers[site_id] = [marker, info_window];
-                    bounds.extend(point);
+                    big_map_bounds.extend(point);
+                    if (i < 4) {
+                      mini_map_bounds.extend(point);
+                      new google.maps.Marker({ map: mini_map, position: point, icon: inactive_icon, title: name });
+                      i++;
+                    }
                 });
-                google_big_map.setCenter(bounds.getCenter());
-                google_big_map.fitBounds(bounds);
+                big_map.setCenter(big_map_bounds.getCenter());
+                big_map.fitBounds(big_map_bounds);
+                mini_map.setCenter(mini_map_bounds.getCenter());
+                mini_map.fitBounds(mini_map_bounds);
             }
         },
         show_popup: function(element) {
@@ -147,8 +170,8 @@ var _map = function() {
                 current_maplet_marker.setMap(null);
             }
             var point = markers[site_id][0].getPosition();
-            current_maplet_marker = new google.maps.Marker({ map: google_maplet, position: point, title: name, icon: inactive_icon });  // todo: cache & re-use
-            google_maplet.setCenter(point);
+            current_maplet_marker = new google.maps.Marker({ map: popup_map, position: point, title: name, icon: inactive_icon });  // todo: cache & re-use
+            popup_map.setCenter(point);
             _gaq.push(['_trackEvent', 'detail', 'college-rebate-show-map']);
             _util.display_tooltip("#map_popup", link);
         }

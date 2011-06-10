@@ -26,7 +26,14 @@ class SearchController {
     }
 
     def metro = {
-        def aMetro = TopMetro.fromText(params.city + "-" + params.state) // TODO: string-mangling is artifact of when we just passed in params.metro. finish refactoring TopMetro interface to match new 2-param style.
+        def aMetro =TopMetro.fromText(params.city + "-" + params.state) // TODO: string-mangling is artifact of when we just passed in params.metro. finish refactoring TopMetro interface to match new 2-param style.
+        def queryTerm;
+        if (aMetro != null) {
+          queryTerm = "${aMetro.city}, ${aMetro.stateCode}"
+        }
+        else {
+          queryTerm = StoritzUtil.titl
+        }
         def seoDecodedCity = params.city.replaceAll("-", " ").toLowerCase();
         def geoLookup = GeoLookup.findByCityAndState(seoDecodedCity, params.state)
         if (geoLookup) {
@@ -51,7 +58,7 @@ class SearchController {
         criteria.city = seoDecodedCity;
         criteria.state = State.fromText(params.state);
         def searchResult = findClientSites(criteria);
-        [aMetro: aMetro, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
+        [queryTerm: "${aMetro.city}, ${aMetro.stateCode}", clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
     }
 
     /**
@@ -67,9 +74,13 @@ class SearchController {
      */
     def findClientSites(SearchCriteria criteria) {
         // optimize zoom level
-        mapService.optimizeZoom(criteria, 617, 284)
+
+        def checkpoint1 = System.currentTimeMillis();
+        def start = System.currentTimeMillis();
         def sites = mapService.getSites(criteria).sort { mapService.calcDistance(lat, it.lat, lng, it.lng)} as List
-        log.info("NUM SITES: " + sites.size());
+        def checkpoint2 = System.currentTimeMillis();
+        log.info("mapService.getSites completed: " + (checkpoint2 - checkpoint1));
+        checkpoint1 = checkpoint2;
 
         def moveInPrices = [:]
         def sitesToRemove = []
@@ -78,8 +89,9 @@ class SearchController {
         // TODO: collect result statistics (# found, avg distance, min/max price, etc) to be reported to GA, pass to
         // view (somehow), so browser can send to GA as CustomVars
         for (site in sites) {
+            log.info("processing site " + site.id)
             def availableUnitsMap = [:] // using a map because I don't know how to use a set, and I don't want to do linear search thru an ArrayList
-            site.units.findAll { it.unitCount > site.minInventory }.each { unit ->
+            site.units.each { unit ->
                 availableUnitsMap[unit.id] = unit
             }
             def featuredOffersMap = [:] // maps units to lists of featured special offers
@@ -102,6 +114,9 @@ class SearchController {
                         }
                     }
                 }
+                checkpoint2 = System.currentTimeMillis();
+                log.info("featuredOfferTag retrieval completed: " + (checkpoint2 - checkpoint1));
+                checkpoint1 = checkpoint2;
             }
             def featuredUnits = featuredOffersMap.keySet()
             if (criteria.featuredOfferTag != null) {
@@ -156,14 +171,15 @@ class SearchController {
                     }
                 }
             }
-//            else if (criteria.minInventory() > 0) {
-//                sitesToRemove << site
-//            }
             else {
                 moveInPrices[site.id] = null;
             }
+            checkpoint2 = System.currentTimeMillis();
+            log.info("Best unit calcs completed: " + (checkpoint2 - checkpoint1));
+            checkpoint1 = checkpoint2;
         }
         sitesToRemove.each { s -> sites.remove(s) }
+        log.info("findClientSites completed: " + (System.currentTimeMillis() - start));
         return [sites: sites, moveInPrices: moveInPrices]
     }
 
