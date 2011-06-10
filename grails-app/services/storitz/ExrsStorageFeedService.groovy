@@ -13,6 +13,13 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
 
   def emailService
 
+  def getEmailService() {
+    if (!emailService) {
+      emailService = new EmailService()
+    }
+    return emailService
+  }
+
   static String baseUrl = "http://www.extraspace.com"
 
   // unit availability
@@ -399,7 +406,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("subject: ${title}")
     println("body: ${body}")
 
-    emailService.sendTextEmail(
+    getEmailService().sendTextEmail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
             subject: title,
@@ -439,7 +446,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("subject: ${title2}")
     println("body: ${body2}")
 
-    emailService.sendTextEmail(
+    getEmailService().sendTextEmail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
             subject: title2,
@@ -461,15 +468,18 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
         ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor();
         def success = exrsWebFormProcessor.processMoveIn(trans);
 
-        // real-time debugging. so fun...
-        if (!success) {
+        if (success) {
+          println("Successful Extraspace Move-In!")
+          println(exrsWebFormProcessor.logBuf)
+        }
+        else {
             //log to catalina.out too
             println("to:'tech@storitz.com'")
             println("from: 'no-reply@storitz.com'")
             println("subject: EXRS Automatic Move-In Log")
             println("body: ${exrsWebFormProcessor.logBuf}")
 
-            emailService.sendTextEmail (
+            getEmailService().sendTextEmail (
                 to:"tech@storitz.com",
                 from:"no-reply@storitz.com",
                 subject:"EXRS Automatic Move-In Log",
