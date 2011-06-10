@@ -85,14 +85,6 @@ class UrlMappings {
       }
     }
 
-    name video: "/video/$title/$id" {
-      controller = "video"
-      action = "video"
-      constraints {
-        title(validator: { return !(it ==~ /\d/)})
-      }
-    }
-
     "/sitemap"(controller: "siteMap")
 
     "/sitemapGeo"(controller: "siteMap", action: "geo")
