@@ -43,13 +43,15 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
      * eDomico Web Service Key: Qu/y0JsiCI6+kW8H@rO4mo8f
      */
 
+    // Common across all feeds
+    private static AvailableUnitsSizesSoap availableUnitsSizesSoap = new AvailableUnitsSizesSoap12Stub(new URL("https://www.edomico.com/WebServices/AvailableUnits.asmx"),null)
+    private static CommonMethodsSoap commonMethodsSoap = new CommonMethodsSoap12Stub(new URL("https://www.edomico.com/WebServices/Common.asmx"),null)
+    private static CustomerInfoSoap customerInfoSoap = new CustomerInfoSoap12Stub(new URL("https://www.edomico.com/WebServices/CustomerInfo.asmx"),null)
+    private static PaymentSoap paymentSoap = new PaymentSoap12Stub(new URL("https://www.edomico.com/WebServices/Payment.asmx"),null)
+    private static ReservationSoap reservationSoap = new ReservationSoap12Stub(new URL("https://www.edomico.com/WebServices/Reservation.asmx"),null)
 
-    private AvailableUnitsSizesSoap availableUnitsSizesSoap = new AvailableUnitsSizesSoap12Stub(new URL("https://www.edomico.com/WebServices/AvailableUnits.asmx"),null)
-    private CommonMethodsSoap commonMethodsSoap = new CommonMethodsSoap12Stub(new URL("https://www.edomico.com/WebServices/Common.asmx"),null)
-    private CustomerInfoSoap customerInfoSoap = new CustomerInfoSoap12Stub(new URL("https://www.edomico.com/WebServices/CustomerInfo.asmx"),null)
-    private PaymentSoap paymentSoap = new PaymentSoap12Stub(new URL("https://www.edomico.com/WebServices/Payment.asmx"),null)
-    private ReservationSoap reservationSoap = new ReservationSoap12Stub(new URL("https://www.edomico.com/WebServices/Reservation.asmx"),null)
-    private int clientID
+    // Unique per feed
+    private int    clientID
     private String webServicesKey
 
     static transactional = true
@@ -62,6 +64,15 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
     public EDomicoStorageFeedService(int clientID, String webServicesKey) {
         this.clientID = clientID;
         this.webServicesKey = webServicesKey;
+    }
+
+    def emailService
+
+    EmailService getEmailService() {
+      if (!emailService) {
+        emailService = new EmailService()
+      }
+      return emailService
     }
 
     @Override
@@ -117,6 +128,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
     // TODO
     @Override
     public void loadPromos(StorageSite storageSite, PrintWriter printWriter) {
+      // NO OP : promos are loaded along with inventory.
     }
 
     // This loads promos for a specific unit. There is a more generic method that
@@ -584,12 +596,18 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
     // TODO
     @Override
     public void addSitePhone(StorageSite storageSite, PrintWriter writer) {
+      // NO OP : Api does not give us this info
     }
 
     // TODO
     @Override
-    public boolean checkRented(RentalTransaction trans) {
-      return true
+    public boolean isAvailable(RentalTransaction trans) {
+      def storageUnit       = StorageUnit.findById(trans.unitId)
+      def token             = this.readToken();
+      def siteID            = trans.site.sourceId;
+      def sizeID            = storageUnit.unitNumber as int;
+      def unitID            = this.readUnitID(token, siteID, sizeID);
+      return unitID > 0
     }
 
     // TODO: Test. Lots of test.
@@ -611,8 +629,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def city              = contact.city;
       def state             = contact.state.display.toString();
       def zip               = contact.zipcode;
-      def homePhone         = contact.phoneType == PhoneType.HOME   ? contact.phone : null;
-      def cellPhone         = contact.phoneType == PhoneType.MOBILE ? contact.phone : null;
+      def homePhone         = contact.phoneType == PhoneType.HOME ? contact.phone : null;
+      // Assume all non-home phones are mobile. It may actually be OFFICE,
+      // but Domico has no way to handle that specific type.
+      def cellPhone         = contact.phoneType != PhoneType.HOME ? contact.phone : null;
       def sendConfirmationEmail = false;
       def emailContent      = null;
       def depositAmount     = 0.0; // RESERVATION WITHOUT PAYMENT. WE'll ACH the move-in amount
@@ -625,16 +645,55 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       // XML items
       def resSuccess       = res.get("Success")
       def resCustomerID    = res.get("CustomerID")
-      def resUInitID       = res.get("UnitID")
+      def resUnitID        = res.get("UnitID")
       def resError         = res.get("Error")
       def reSeMailMessage  = res.get("EMailMessage")
 
-      if (!resSuccess) {
-        println "resSuccess=${resSuccess}}"
-        println "resCustomerID=${resCustomerID}}"
-        println "resUInitID=${resUInitID}}"
-        println "resError=${resError}}"
-        println "reSeMailMessage=${reSeMailMessage}}"
+      if (resSuccess) {
+        trans.idNumber = "cust:${resCustomerID},unit:${resUnitID}"
+        trans.save(flush:true)
+      }
+      // Failed move-in!
+      else {
+        StringBuffer body = new StringBuffer()
+        body.append("\n Failed Domico Move In")
+        body.append("\n ")
+        body.append("\n REQUEST")
+        body.append("\n reserveUnit (")
+        body.append("\n    token=${token}")
+        body.append("\n    siteID=${siteID}")
+        body.append("\n    unitID=${unitID}")
+        body.append("\n    sizeID=${sizeID}")
+        body.append("\n    lastName=${lastName}")
+        body.append("\n    firstName=${firstName}")
+        body.append("\n    middleInitial=${middleInitial}")
+        body.append("\n    emailAddress=${emailAddress}")
+        body.append("\n    address1=${address1}")
+        body.append("\n    address2=${address2}")
+        body.append("\n    city=${city}")
+        body.append("\n    state=${state}")
+        body.append("\n    zip=${zip}")
+        body.append("\n    homePhone=${homePhone}")
+        body.append("\n    cellPhone=${cellPhone}")
+        body.append("\n    sendConfirmationEmail=${sendConfirmationEmail}")
+        body.append("\n    emailContent=${emailContent}")
+        body.append("\n    depositAmount=${depositAmount}")
+        body.append("\n )")
+        body.append("\n ")
+        body.append("\n RESPONSE")
+        body.append("\n <Authorize>")
+        body.append("\n     <Success>${resSuccess}</Success>")
+        body.append("\n     <Customer>${resCustomerID}</Customer>")
+        body.append("\n     <UnitID>${resUnitID}</UnitID>")
+        body.append("\n     <Error>${resError}</Error>")
+        body.append("\n     <EMail>${reSeMailMessage}</EMail>")
+        body.append("\n </Authorize>")
+
+        getEmailService().sendTextEmail(
+          to: "notifications@storitz.com",
+          from: "no-reply@storitz.com",
+          subject: "DOMICO - failed move-in",
+          body: body.toString())
       }
 
       return resSuccess

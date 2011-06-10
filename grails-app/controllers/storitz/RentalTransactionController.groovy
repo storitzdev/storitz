@@ -187,13 +187,13 @@ class RentalTransactionController {
       return
     }
 
-    if (!moveInService.checkRented(rentalTransactionInstance)) {
+    if (!moveInService.isAvailable(rentalTransactionInstance)) {
       def found = false
       def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.sort { it.price }
       println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
       for (myUnit in bestUnitList) {
         rentalTransactionInstance.unitId = myUnit.id
-        if (moveInService.checkRented(rentalTransactionInstance)) {
+        if (moveInService.isAvailable(rentalTransactionInstance)) {
           found = true
           unit = myUnit
           emailUnitNotFound("Desired unit not found. Alternate unit selected.",rentalTransactionInstance)
@@ -491,7 +491,7 @@ class RentalTransactionController {
   }
 
   private StorageUnit checkUnit(StorageUnit unit, RentalTransaction rentalTransactionInstance) {
-    if (!moveInService.checkRented(rentalTransactionInstance)) {
+    if (!moveInService.isAvailable(rentalTransactionInstance)) {
       if (--unit.unitCount <= 0) {
         println "Removing unit from inventory ${unit.id}"
         rentalTransactionInstance.site.removeFromUnits(unit)
@@ -504,7 +504,7 @@ class RentalTransactionController {
       for (myUnit in bestUnitList) {
         println "Check unit for availability ${myUnit.id}"
         rentalTransactionInstance.unitId = myUnit.id
-        if (moveInService.checkRented(rentalTransactionInstance)) {
+        if (moveInService.isAvailable(rentalTransactionInstance)) {
           found = true
           unit = myUnit
           flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."

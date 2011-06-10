@@ -510,7 +510,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean checkRented(RentalTransaction trans) {
+  public boolean isAvailable(RentalTransaction trans) {
 
     StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
     BigDecimal unitId = transUnit.unitNumber as BigDecimal

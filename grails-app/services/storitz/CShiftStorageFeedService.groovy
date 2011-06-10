@@ -766,7 +766,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
       CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-      writer.println "checkRented (${centerShift.userName}, ${centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+      writer.println "isAvailable (${centerShift.userName}, ${centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
       def unitInfo = port.getAvailableUnits(centerShift.userName, centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
@@ -1207,7 +1207,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean checkRented(RentalTransaction rentalTransaction) {
+  public boolean isAvailable(RentalTransaction rentalTransaction) {
     def unit = StorageUnit.get(rentalTransaction.unitId)
     def cshift = (CenterShift) rentalTransaction.site.feed
 
@@ -1250,7 +1250,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-    println "checkRented (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+    println "isAvailable (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
     def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 

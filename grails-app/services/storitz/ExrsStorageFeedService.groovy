@@ -321,7 +321,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
 
   // check rented
   @Override
-  public boolean checkRented(RentalTransaction rentalTransaction) {
+  public boolean isAvailable(RentalTransaction rentalTransaction) {
 
     StorageSite site = rentalTransaction.site
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)

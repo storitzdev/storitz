@@ -562,7 +562,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean checkRented(RentalTransaction trans) {
+  public boolean isAvailable(RentalTransaction trans) {
     def unit = StorageUnit.get(trans.unitId)
 
     QuikStor quikStor = (QuikStor) trans.site.feed

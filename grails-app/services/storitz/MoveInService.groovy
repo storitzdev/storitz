@@ -8,8 +8,8 @@ class MoveInService {
 
   boolean transactional = false
 
-  def checkRented(RentalTransaction trans) {
-    StorageFeedServiceFactory.getMoveInServiceInstance(trans.site).checkRented(trans)
+  def isAvailable(RentalTransaction trans) {
+    StorageFeedServiceFactory.getMoveInServiceInstance(trans.site).isAvailable(trans)
   }
 
   def moveInDetail(RentalTransaction trans) {

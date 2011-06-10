@@ -17,7 +17,7 @@ public interface IMoveInStorageFeedService extends IStorageFeedService {
      * @param trans
      * @return
      */
-    public boolean checkRented(RentalTransaction trans);
+    public boolean isAvailable(RentalTransaction trans);
 
     /**
      *

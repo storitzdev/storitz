@@ -1342,11 +1342,11 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean checkRented(RentalTransaction rentalTransaction) {
+  public boolean isAvailable(RentalTransaction rentalTransaction) {
     def siteLink = (SiteLink) rentalTransaction.site.feed
     def ret = getUnitInfoByName(siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
-    println "checkRented ret =${ret}"
+    println "isAvailable ret =${ret}"
 
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',

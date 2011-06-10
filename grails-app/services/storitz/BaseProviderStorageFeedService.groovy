@@ -23,9 +23,11 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
   // as unavailable, and zero out their unit count.
   public final void zeroOutUnitsForSite(StorageSite site, SiteStats stats, PrintWriter writer) {
     site.units.each { unit ->
-      stats.removedCount++
-      unit.isAvailable = false;
-      unit.unitCount = 0;
+      if (unit.isAvailable && unit.unitCount > 0) {
+        stats.removedCount++
+        unit.isAvailable = false;
+        unit.unitCount = 0;
+      }
     }
   }
 
