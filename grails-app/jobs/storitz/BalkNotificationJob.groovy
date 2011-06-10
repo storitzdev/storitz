@@ -3,6 +3,7 @@ package storitz
 import com.storitz.RentalTransaction
 import storitz.constants.TransactionStatus
 import com.storitz.StorageUnit
+import com.storitz.SpecialOffer
 
 class BalkNotificationJob {
     def emailService
@@ -31,6 +32,7 @@ class BalkNotificationJob {
 
   def sendBalkNotification(RentalTransaction trans) {
     StorageUnit storageUnit = StorageUnit.findById(trans.unitId)
+    SpecialOffer specialOffer = SpecialOffer.findById(trans.promoId)
     def unitPrice = storageUnit.bestUnitPrice ? storageUnit.bestUnitPrice : storageUnit.price
 
     StringBuilder body = new StringBuilder()
@@ -40,7 +42,8 @@ class BalkNotificationJob {
     body.append("\n               ${trans.site.address}")
     body.append("\n               ${trans.site.city}, ${trans.site.state.display} ${trans.site.zipcode}")
     body.append("\nUnit         : ${storageUnit.displaySize} ${storageUnit.unitType.display}")
-    body.append("\nMove-In Cost : ${unitPrice}")
+    body.append("\nUnit Price   : ${unitPrice} (${specialOffer?.promoName ? specialOffer?.promoName : 'no promo selected'})}")
+    if (trans.moveInCost) body.append("\nMove-in Cost : ${trans.feedMoveInCost}")
     body.append("\nMove-In Date : ${trans.moveInDate.format('yyyy-MM-dd')}")
     body.append("\nContact      : ${trans.contactPrimary.firstName} ${trans.contactPrimary.lastName}")
     body.append("\n               ${trans.contactPrimary.address1}")
