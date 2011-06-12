@@ -54,15 +54,6 @@ var _map = function() {
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var mini_map_options = {
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      zoomControl: false,
-      streetViewControl: false,
-      scaleControl: false,
-      mapTypeControl: false,
-      disableDefaultUI: true
-    };
     var big_map_options = {
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -82,7 +73,7 @@ var _map = function() {
     // public interface
     return {
         mapify: function() {
-            var link = $("#toggle_map_view");
+            var link = $("#map_toggle_link");
             link.text("List View");
             link.attr("href", "#list-view");
             window.location.hash = "#map-view";
@@ -111,7 +102,7 @@ var _map = function() {
             });
         },
         listify: function() {
-            var link = $("#toggle_map_view");
+            var link = $("#map_toggle_link");
             link.text("Map View");
             link.attr("href", "#map-view");
             window.location.hash = "#list-view";
@@ -124,24 +115,35 @@ var _map = function() {
         },
         init: function() {
             var big_map_canvas = document.getElementById("big_map_canvas");
-            var maplet_canvas = document.getElementById("maplet_canvas");
-            var mini_map_canvas = document.getElementById("mini_map_canvas");
-            if (maplet_canvas) {
-              popup_map = new google.maps.Map(maplet_canvas, popup_map_options);
-            }
-            if (mini_map_canvas) {
-              mini_map = new google.maps.Map(mini_map_canvas, mini_map_options);
+            var popup_map_canvas = document.getElementById("popup_map_canvas");
+            var mini_map_url = "";
+            if (popup_map_canvas) {
+              popup_map = new google.maps.Map(popup_map_canvas, popup_map_options);
             }
             if (big_map_canvas) {
                 big_map = new google.maps.Map(big_map_canvas, big_map_options);
                 var big_map_bounds = new google.maps.LatLngBounds();
-                var mini_map_bounds = new google.maps.LatLngBounds();
+                var mini_map_canvas = $("#mini_map_canvas");
+                var mini_map_width = mini_map_canvas.width();
+                var mini_map_height = mini_map_canvas.height();
+                var mini_map_url = "http://maps.google.com/maps/api/staticmap?maptype=roadmap&sensor=false&size=" // http://maps.google.com/maps/api/staticmap?size=175x108&maptype=roadmap&sensor=false&markers=size:tiny|color:blue|37.598602295,-122.366798401|37.610084534,-122.401283264|...&markers=size:tiny|color:red|37.61666667,-122.3833333
+                mini_map_url += mini_map_width + "x" + mini_map_height;
+                mini_map_url += "&markers=size:tiny|color:blue|"
+                var row;
+                var name;
+                var site_id;
+                var lat;
+                var lng;
+                var facilities = $("#search_results .facility");
                 var i = 0;
-                $("#search_results .facility").each(function() {
-                    var row = $(this);
-                    var name = row.children("a").first().text();
-                    var site_id = row.attr("site_id");
-                    var point = new google.maps.LatLng(row.attr("lat"), row.attr("lng"));
+                var n = facilities.length;
+                facilities.each(function() {
+                    row = $(this);
+                    name = row.children("a").first().text();
+                    site_id = row.attr("site_id");
+                    lat = row.attr("lat");
+                    lng = row.attr("lng");
+                    var point = new google.maps.LatLng(lat, lng);
                     var marker = new google.maps.Marker({ map: big_map, position: point, icon: inactive_icon, title: name });
                     var info_window = new google.maps.InfoWindow( { content: name, maxWidth: 200 });
                     google.maps.event.addListener(marker, "click", function() {
@@ -149,23 +151,22 @@ var _map = function() {
                     });
                     markers[site_id] = [marker, info_window];
                     big_map_bounds.extend(point);
-                    if (i < 4) {
-                      mini_map_bounds.extend(point);
-                      new google.maps.Marker({ map: mini_map, position: point, icon: inactive_icon, title: name });
-                      i++;
+                    mini_map_url += lat + "," + lng;
+                    if (i < n  - 1) {
+                      mini_map_url += "|";
                     }
+                    i++;
                 });
+                mini_map_canvas.html('<a href="#map-view" class="toggle_map_view"><img width="' + mini_map_width + '" height="' + mini_map_height + '" src="' + mini_map_url + '" /></a>');
                 big_map.setCenter(big_map_bounds.getCenter());
                 big_map.fitBounds(big_map_bounds);
-                mini_map.setCenter(mini_map_bounds.getCenter());
-                mini_map.fitBounds(mini_map_bounds);
             }
         },
         show_popup: function(element) {
             var link = $(element);
             var site_id = link.parents(".facility").first().attr("site_id");
             var address = link.parent().prev().text();
-            $("p", "#map_popup").first().text(address);
+            $("p", "#popup_map").first().text(address);
             if (current_maplet_marker) {
                 current_maplet_marker.setMap(null);
             }
@@ -173,7 +174,7 @@ var _map = function() {
             current_maplet_marker = new google.maps.Marker({ map: popup_map, position: point, title: name, icon: inactive_icon });  // todo: cache & re-use
             popup_map.setCenter(point);
             _gaq.push(['_trackEvent', 'detail', 'college-rebate-show-map']);
-            _util.display_tooltip("#map_popup", link);
+            _util.display_tooltip("#popup_map", link);
         }
     }
 }();
@@ -194,7 +195,7 @@ $(document).ready(function() {
     }
 
     // bind map events
-    $("#toggle_map_view").click(function() {
+    $(".toggle_map_view").click(function() {
         $("#search_results").hasClass("map") ? _map.listify() : _map.mapify();
         return false;
     });

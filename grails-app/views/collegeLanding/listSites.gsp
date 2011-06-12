@@ -82,10 +82,10 @@
         </ul>
     </g:if>
 </div>
-<div id="map_popup" class="tooltip">
+<div id="popup_map" class="tooltip">
     <a class="close button small black">close</a>
     <p><!-- 1234 Main St. --></p>
-    <div id="maplet_canvas" style="width:320px; height:320px"></div>
+    <div id="popup_map_canvas" style="width:320px; height:320px"></div>
 </div>
 </body>
 </html>

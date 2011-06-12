@@ -6,8 +6,8 @@ import com.storitz.GeoLookup;
 import storitz.constants.SearchType;
 import com.storitz.Insurance;
 import storitz.constants.QueryMode
-import storitz.constants.GeoType;
-
+import storitz.constants.GeoType
+import com.storitz.StoritzUtil;
 
 class SearchController {
 
@@ -32,7 +32,7 @@ class SearchController {
           queryTerm = "${aMetro.city}, ${aMetro.stateCode}"
         }
         else {
-          queryTerm = StoritzUtil.titl
+          queryTerm = StoritzUtil.titleize(params.city) + ", " + params.state;
         }
         def seoDecodedCity = params.city.replaceAll("-", " ").toLowerCase();
         def geoLookup = GeoLookup.findByCityAndState(seoDecodedCity, params.state)
@@ -58,7 +58,11 @@ class SearchController {
         criteria.city = seoDecodedCity;
         criteria.state = State.fromText(params.state);
         def searchResult = findClientSites(criteria);
-        [queryTerm: "${aMetro.city}, ${aMetro.stateCode}", clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
+        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
+    }
+
+    def results = {
+        render template:"results", contentType: "text/html", model:[queryTerm:"blank", clientSites:[]]
     }
 
     /**

@@ -1,10 +1,13 @@
 package com.storitz;
 
+import sun.tools.tree.ReturnStatement;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -85,25 +88,16 @@ public class StoritzUtil {
         return s;
     }
 
-//    public static <T> List partition(List<T> list, Integer numPartitions, Integer minPerPartition) {
-//        ArrayList<List> partitions = new ArrayList<List>();
-//        int i = 0;
-//        int n = list.size();
-//        int numPerPartition = new BigDecimal(n).divide(new BigDecimal(numPartitions), 0, RoundingMode.CEILING).intValue();
-//        if (numPerPartition < minPerPartition) {
-//            numPerPartition = minPerPartition;
-//        }
-//        while(i < n) {
-//          int j = 0;
-//          List<T> partition = new ArrayList<T>();
-//          while (j < numPerPartition && (i + j) < n) {
-//            partition.add(list.get(i + j));
-//            j += 1;
-//          }
-//          partitions.add(partition);
-//          i += numPerPartition;
-//        }
-//        return partitions;
-//    }
+    public static String titleize(String s) {
+      StringBuilder sb = new StringBuilder();
+      String[] words = s.split("\\s+");
+      for (int i = 0; i < words.length; i++) {
+        sb.append(words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase());
+        if (i < words.length - 1) {
+          sb.append(" ");
+        }
+      }
+      return sb.toString();
+    }
 
 }
