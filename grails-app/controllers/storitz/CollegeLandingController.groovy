@@ -51,7 +51,7 @@ class CollegeLandingController extends SearchController  {
 
         def searchResult = findClientSites(criteria)
 
-        [college: college, title: title, lat: lat, lng: lng, sites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin]
+        [college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin]
     }
 
     def storageTips = {
