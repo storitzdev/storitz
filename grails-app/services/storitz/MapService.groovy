@@ -15,6 +15,8 @@ class MapService {
   boolean transactional = false
 
   final double R = 3958.761; // mi
+  final int MAP_WIDTH = 617;
+  final int MAP_HEIGHT = 284;
 
   def calcDistance(lat1, lat2, lng1, lng2) {
     def d = Math.acos(Math.sin(lat1 / 57.2958) * Math.sin(lat2 / 57.2958) +
@@ -93,32 +95,31 @@ class MapService {
     // zoom setings
     Integer zoom = 11;
     Integer zoomMin = 7;
-    criteria.setBounds(zoom, 617, 284)
-    def c = StorageSite.createCriteria();
-    def siteIds = c.list(getSitesClosure(criteria));
+    criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
+    def siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
 
     // adjust zoom if too many/few sitse were returned
     if (siteIds.size() > 20) {
       // loop and shrink
       while (siteIds.size() > 20) {
         zoom++
-        criteria.setBounds(zoom, width, height)
-        siteIds = c.list(getSitesClosure(criteria));
+        criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
+        siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
       }
     } else if (siteIds.size() == 0) {
       // grow
       while (zoom > zoomMin && siteIds.size() == 0) {
         zoom--
-        criteria.setBounds(zoom, width, height)
-        siteIds = c.list(getSitesClosure(criteria));
+        criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
+        siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
       }
     } else if (siteIds.size() <= 3) {
       // grow up to a couple of notches
       def targetZoom = zoom - 3
       while (zoom > targetZoom && siteIds.size() <= 3) {
         zoom--
-        criteria.setBounds(zoom, width, height)
-        siteIds = c.list(getSitesClosure(criteria));
+        criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
+        siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
       }
     }
     // retrieve StorageSite instances from ORM

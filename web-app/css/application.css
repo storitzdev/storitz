@@ -753,7 +753,7 @@ a.toggle_map_view {
 
 #big_map_canvas {
   position: absolute;
-  top: -2000px;
+  top: -9999px;
   left: 400px;
   width: 546px;
   height: 546px;
