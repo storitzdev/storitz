@@ -347,8 +347,8 @@
         </div>
       </div>
       <div id="stresults_div">
-        <g:if test="${sites.size() > 0}">
-          <table id="stresults">
+        <table id="stresults">
+          <g:if test="${sites.size() > 0}">
             <thead>
             <tr>
             </tr>
@@ -562,8 +562,8 @@
             </g:each>
 
             </tbody>
-          </table>
-        </g:if>
+          </g:if>
+        </table>
       </div>
       <div id="metroBox">
         <g:if test="${metro}">
