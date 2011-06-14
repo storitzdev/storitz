@@ -134,8 +134,8 @@ class CollegeLandingController extends SearchController  {
             } else {
                 sitesToRemove << site
             }
-            sitesToRemove.each { s -> sites.remove(s) }
         }
+        sitesToRemove.each { s -> sites.remove(s) }
 
         [college: college, title: title, lat: lat, lng: lng, sites: sites, siteMoveInPrice: siteMoveInPrice, isAdmin: isAdmin]
     }
