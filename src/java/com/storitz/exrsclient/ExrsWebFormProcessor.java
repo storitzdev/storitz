@@ -611,6 +611,8 @@ public class ExrsWebFormProcessor {
         HtmlElement button = htmlForm1.getInputByValue("Click me");
         try {
             HtmlPage page2 = button.click();
+            System.out.println("*** PAGE2 ***");
+            System.out.println(page2.asXml().toString());
             return true;
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -641,6 +643,8 @@ public class ExrsWebFormProcessor {
         HtmlElement button = htmlForm1.getInputByValue("Click me");
         try {
             HtmlPage page2 = button.click();
+            System.out.println("*** PAGE2 ***");
+            System.out.println(page2.asXml().toString());
             return true;
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
