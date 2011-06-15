@@ -70,7 +70,7 @@ class RefreshPromos {
         }
         writer.println "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
-        String subject = "[${ConfigurationHolder.config.grails.serverURL}] Inventory promos ${new Date().format('yyyy-MM-dd')}"
+        String subject = "[${grails.util.Environment.getCurrent()}] Inventory promos ${new Date().format('yyyy-MM-dd')}"
 
         writer.flush()
         writer.close()
