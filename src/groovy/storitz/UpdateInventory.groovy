@@ -52,9 +52,9 @@ class UpdateInventory {
       //println ("source is: ${src}")
 
       if (src) {
-        allStorageSitesIds = StorageSite.findAllBySource(src).collect{ it.id }.sort()
+        allStorageSitesIds = StorageSite.findAllBySourceAndDisabled(src,false).collect{ it.id }.sort()
       } else {
-        allStorageSitesIds = StorageSite.findAll().collect{ it.id }.sort()
+        allStorageSitesIds = StorageSite.findAllByDisabled(false).collect{ it.id }.sort()
       }
 
         // TEST: shrink sample size for testing
