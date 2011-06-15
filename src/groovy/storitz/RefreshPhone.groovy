@@ -65,7 +65,7 @@ class RefreshPhone {
         }
         writer.println "----------------- Completed in ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
-        String subject = "[${grails.util.Environment.getCurrent()}] Refresh phones ${new Date().format('yyyy-MM-dd')}"
+        String subject = "[${ConfigurationHolder.config.grails.serverURL}] Refresh phones ${new Date().format('yyyy-MM-dd')}"
 
         writer.flush()
         writer.close()
