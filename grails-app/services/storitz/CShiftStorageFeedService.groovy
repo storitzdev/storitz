@@ -366,6 +366,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     site.sourceId = tab.SITE_ID.text()
     site.sourceLoc = tab.SITE_NUMBER.text()
     site.source = siteSource
+    site.feed = cshift
 
     def site_title =  tab.SITE_NAME.text().replace('/', '-')
 
