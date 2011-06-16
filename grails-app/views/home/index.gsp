@@ -1,26 +1,25 @@
 <%@ page import="java.math.RoundingMode" %>
 <html>
 <head>
-    <title>The Fastest, Easiest Way to Find &amp; Rent Self-Storage - Storitz</title>
+    <title>The Fastest, Easiest Way to Find &amp; Rent Self-Storage - Storitz </title>
     <meta name="layout" content="splash"/>
 </head>
 <body>
 <div id="bigbox">
     <h1 class="storitz-logo">
-        <g:link controller="home" action="index">
-            Storitz.com - Click. Store. Done.
-        </g:link>
+        Storitz.com - Click. Store. Done.
+        <g:link controller="home" action="index"></g:link>
     </h1>
     <h2>
-        <span>Simplify your search for self storage.</span>
+        <span class="first-child">Simplify your search for self storage.</span>
         <span>Get prices, availability &amp; deals with 1 click!</span>
     </h2>
     <div id="coverphoto">
         <form action="#" id="search">
             <fieldset class="basic">
-                <legend>Enter the city, zip code or address where you need storage:</legend>
+                <legend>Enter the city, zip code, or address where you need storage:</legend>
                 <div class="controls">
-                    <input type="text" name="where" placeholder="e.g. Los Angeles, CA or 90026" /><input type="submit" value="Find Storage!" />
+                    <input class="text" type="text" name="where" placeholder="e.g. Los Angeles, CA or 90026" /><input type="submit" class="submit" value="Find Storage!" />
                 </div>
             </fieldset>
             <fieldset class="advanced">

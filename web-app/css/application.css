@@ -70,8 +70,8 @@ a:hover {
   color: #3ea307;
   color: #a8a8a8;
 }
-
-#bigbox h2 span:first-child {
+/*:first-child doesn't work in IE, using CSS .first-child class instead */
+#bigbox h2 span.first-child {
   display: block;
   color: #00529b;
   margin-bottom: 2px;
@@ -119,12 +119,13 @@ a:hover {
   height: 52px;
 }
 
-#coverphoto fieldset.basic input[type=text] {
+#coverphoto fieldset.basic input.text {
   position: absolute;
   width: 330px;
 }
-#coverphoto fieldset.basic input[type=text],
-#header form.search input[type=text] {
+
+#coverphoto fieldset.basic input.text,
+#header form.search input.text {
   display: inline-block;
   height: 37px;
   border: 1px solid #a8a8a8;
@@ -140,12 +141,22 @@ a:hover {
   z-index: 1;
 }
 
-#coverphoto fieldset.basic input[type=submit] {
+label.placeholder {
+    color: #ccc;
+    top: 10px;
+    left: 10px;
+    padding: 8px 0px 2px 6px;
+    font-size: 18px;
+    z-index: 1;
+}
+#coverphoto fieldset.basic input.submit {
   position: absolute;
   left: 327px;
   display: inline-block;
   width: 145px;
   height: 38px;
+  font-size: 0;
+  line-height: 0;
   border: none;
   background: url(../images/v2/home/buttons/btn-find-storage-145x38.png) no-repeat;
   text-indent: -9999px;
@@ -178,7 +189,7 @@ a:hover {
 }
 
 #advanced_search_controls div {
-  margin-right: 45px;
+  margin-right: 40px;
   padding-top: 10px;
   display: inline-block;
   float: left;
@@ -232,6 +243,7 @@ a:hover {
   /*background-position: 25px;*/
   display: inline-block;
   opacity: 0.3;
+  filter: alpha(opacity=30);
   float: left;
   /*margin-left: 25px;*/
   text-indent: -9999px;
@@ -239,8 +251,9 @@ a:hover {
   height: 38px;
 }
 
-#logos li:hover {
+#logos li:hover, #logos li.hover {
   opacity: 1.0;
+  filter: alpha(opacity=100);
 }
 
 #logos li.ustoreit {
@@ -403,19 +416,78 @@ body.state_directory td a {
   text-decoration: none;
 }
 
+/*CSS for static/aboutus page*/
+body.about_us .right h1 {
+  color: #006DBA;
+  font-weight: normal;
+  font-size: 16px;
+  margin: .8em 0 13px 0;
+}
+
+body.about_us .search{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin: 5px 0 0 36px;
+    top: -65px;
+    left: 160px;
+}
+
+body.about_us .right {
+    width: 650px;
+    margin-right: 35px;
+    position: relative;
+    left: 160px;
+}
+
+.right h2 {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.right p {
+  padding-bottom: 13px;
+}
+
+.right ul.feat-list {
+  list-style-type: disc;
+  padding-left: 15px;
+}
+
+.right li {
+  padding-bottom: 3px;
+}
+
+.right strong {
+  font-weight: bold;
+}
+
+.right a:link, a:visited {
+  color: #666;
+  font-weight: bold;
+}
+
 /* ------------------------------------------------------------------------------------- */
 /* HEADER & FOOTER */
 
 h1.storitz-logo {
-  display: inline-block;
+  display: block;
+  width: 160px;
+  height: 60px;
+  text-indent: -9999px;
+  vertical-align: top;
+  position: relative;
 }
 
 h1.storitz-logo a {
-  display: inline-block;
+  display: block;
   width: 160px;
   height: 60px;
   background: url("../images/v2/home/storitz-logo-small.png") no-repeat;
-  text-indent: -9999px;
+  vertical-align: top;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #header {

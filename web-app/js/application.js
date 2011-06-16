@@ -187,6 +187,18 @@ $(document).ready(function() {
         return false;
     });
 
+    //hover functionality in logos for IE
+    if ($.browser.msie) {
+        $("#logos li").hover(
+             function() {
+                  $(this).addClass('hover');
+             },
+             function() {
+                 $(this).removeClass('hover');
+             }
+        );
+    }
+
     _map.init();
 
     // show map?
@@ -236,7 +248,7 @@ $(document).ready(function() {
     $("#coverphoto fieldset.advanced legend").click(function() {
         $("#advanced_search_controls").slideToggle();
     });
-    $("#search input[placeholder]").placeholder();
+    $("input[placeholder]").placeholder()
     $("#browse .tabs").tabs("#browse .panes > div", {
                 //history: true,
                 initialIndex: null,

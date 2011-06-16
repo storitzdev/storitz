@@ -20,10 +20,10 @@
                 <fieldset>
                     <label>Find self storage:</label>
                     <g:if test="${queryTerm}">
-                      <input type="text" name="where" value="${queryTerm}" placeholder="Enter address, zip code, or city &amp; state"/>
+                      <input class="text" type="text" name="where" value="${queryTerm}" placeholder="Enter address, zip code, or city &amp; state"/>
                     </g:if>
                     <g:else>
-                      <input type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
+                      <input class="text" type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
                     </g:else>
                     <input type="submit" name="btn" value="Search" />
                 </fieldset>
