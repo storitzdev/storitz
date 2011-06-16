@@ -159,7 +159,7 @@ class ReportsController {
         }
         else {
             if (!UserRole.userHasRole(getUser(), 'ROLE_ADMIN')) {
-                flash.message = "Please select a storage location. Only administrators can run this report against all storage locations."
+                flash.message = "Please select a storage operator. Only administrators can run this report against all storage operators."
                 period.reportName = null
                 render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
                 return
@@ -174,7 +174,7 @@ class ReportsController {
         }
         else {
             if (!UserRole.userHasRole(getUser(), 'ROLE_ADMIN')) {
-                flash.message = "Please select a storage location. Only administrators can run this report against all storage locations."
+                flash.message = "Please select a storage operator. Only administrators can run this report against all storage operators."
                 period.reportName = null
                 render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
                 return
@@ -184,7 +184,15 @@ class ReportsController {
         break
 
       case ReportName.INVOICE:
-        results = buildInvoice(drb, reportParams, startDate, endDate, period)
+        if (period.feed) {
+          results = buildInvoice(drb, reportParams, startDate, endDate, period)
+        }
+        else {
+          flash.message = "Please select a storage operator. This report can not yet be run in this manner."
+          period.reportName = null
+          render view: "index", model: [reportPeriod: period, feedList: getFeedList()]
+          return
+        }
         break
     }
 
