@@ -101,17 +101,19 @@
     </ul>
 
     <div class="panes">
-        <a name="storage-by-state">&nbsp;</a>
         <div>
             <table>
                 <tr>
-                    <g:each var="stateList" in="${stateLists}">
-                        <td>
-                            <g:each var="state" in="${stateList}">
-                                <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
-                            </g:each>
-                        </td>
-                    </g:each>
+                  <td>
+                  <g:set var="i" value="${0}" />
+                  <g:each in="${states}" var="state">
+                    <g:link controller="seo" action="state" params="[state:state.path]">${state.label}</g:link>
+                    <g:set var="i" value="${i + 1}" />
+                    <g:if test="${i > 0 && i % statesPerColumn == 0 && i < states.size()}">
+                  </td><td>
+                    </g:if>
+                  </g:each>
+                  </td>
                 </tr>
             </table>
         </div>
@@ -120,13 +122,16 @@
 
             <table>
                 <tr>
-                    <g:each var="metroList" in="${metroLists}">
-                        <td>
-                            <g:each var="metro" in="${metroList}">
-                                <g:link mapping="metro2" controller="search" action="metro" params="[metro:metro.getPathParam()]">${metro.city}, ${metro.stateCode}</g:link>
-                            </g:each>
-                        </td>
-                    </g:each>
+                  <td>
+                  <g:set var="i" value="${0}" />
+                  <g:each in="${metros}" var="metro">
+                    <g:link mapping="metro2" controller="search" action="metro" params="[city:metro.city, state:metro.stateCode]">${metro.city}, ${metro.stateCode}</g:link>
+                    <g:set var="i" value="${i + 1}" />
+                    <g:if test="${i > 0 && i % metrosPerColumn == 0 && i < metros.size()}">
+                  </td><td>
+                    </g:if>
+                  </g:each>
+                  </td>
                 </tr>
             </table>
         </div>

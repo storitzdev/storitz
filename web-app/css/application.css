@@ -284,7 +284,7 @@ a:hover {
 }
 
 #info {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 #howto {
@@ -298,15 +298,12 @@ a:hover {
 }
 
 #browse {
-  background-color: #166EC8;
-  border-bottom: 1px solid #0e4ca7;
+  border-top: 1px solid #e8e8e8;
   width: 960px;
 }
 
 #browse ul {
-  background: url(../images/v2/home/backgrounds/seo-links-1b72cb-bg.jpg) repeat-y;
-  background-color: #166EC8;
-  height: 40px;
+  height: 41px;
 }
 
 #browse .tabs li {
@@ -315,7 +312,7 @@ a:hover {
 
 #browse .tabs a {
   display: inline-block;
-  color: #ddd;
+  color: #aaa;
   font-family: Helvetica;
   float: left;
   width: 192px;
@@ -325,8 +322,11 @@ a:hover {
   text-decoration: none;
 }
 
-#browse .tabs a:hover, #browse .tabs a.current {
-  background: url(../images/v2/home/backgrounds/seo-bg.jpg) repeat-x;
+#browse .tabs a.current {
+  background-color: #f9f9f9;
+}
+#browse .tabs a:hover {
+  background-color: #f4f4f4;
 }
 
 #browse .panes div {
@@ -334,30 +334,31 @@ a:hover {
   display: none;
   padding: 20px 0 10px 10px;
   color: white;
-  background: url(../images/v2/home/backgrounds/seo-content.jpg) repeat-y;
   position: relative;
+  background-color: #f9f9f9;
+  border-top:  1px solid #f3f3f3;
 }
 
 #browse .panes div a {
   font-size: 12px;
   font-family: Helvetica;
-  color: #d3ff87;
+  color: #aaa;
   text-decoration: none;
 }
 
 #browse .panes div h3 {
   font-size: 13px;
-  color: #d3ff87;
+  color: #777;
   margin-bottom: 15px;
 }
 
 #browse .panes div p {
-  color: #d9f4ff;
+  color: #666;
 }
 
 #browse .panes div p.right {
   position: absolute;
-  left: 577px;
+  left: 490px;
   top: 48px;
   padding-right: 0;
 }
@@ -373,8 +374,9 @@ a:hover {
 #browse .panes div td {
   text-align: center;
   vertical-align: top;
-  width: 183px;
+  width: 173px;
   line-height: 20px;
+  padding-left: 10px;
 }
 
 #browse .panes div td a {
@@ -483,12 +485,11 @@ h1.storitz-logo a {
 }
 
 #footer {
-  border-top: 1px solid #5998d9;
-  background: url(../images/v2/home/backgrounds/seo-links-1b72cb-bg.jpg) no-repeat #166EC8;
+  border-top: 1px solid #f3f3f3;
   height: 20px;
   font-size: 11px;
   font-family: Helvetica;
-  color: #e8e8e8;
+  color: #ccc;
   padding-top: 10px;
   width: 960px;
   text-align: center;
@@ -496,7 +497,7 @@ h1.storitz-logo a {
 }
 
 #footer a {
-  color: #ddd;
+  color: #ccc;
   text-decoration: none;
   margin-left: 10px;
 }

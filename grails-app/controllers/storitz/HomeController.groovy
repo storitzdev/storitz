@@ -307,7 +307,8 @@ class HomeController extends SearchController {
       //     group by city, state
       //     having count(1) > 5  -- this is the part i don't know how to do
       //     order by city, state;
-      [ipGeolocation: loc, states: states, metros: TopMetro.list()]
+      def metros = TopMetro.list()
+      [ipGeolocation: loc, states: states, statesPerColumn: StoritzUtil.partition(states, 6, 7), metros: metros, metrosPerColumn: StoritzUtil.partition(metros, 6, 7)]
   }
 
     // JM 2011-05-10
