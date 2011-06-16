@@ -161,10 +161,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="dontSendMeUpdates"><g:message code="organizerContest.dontSendMeUpdates.label" default="Don't Send Me Updates" /></label>
+                                  <label for="sendMeUpdates"><g:message code="organizerContest.sendMeUpdates.label" default="Send Me Updates" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'dontSendMeUpdates', 'errors')}">
-                                    <g:checkBox name="dontSendMeUpdates" value="${organizerContestInstance?.dontSendMeUpdates}" />
+                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'sendMeUpdates', 'errors')}">
+                                    <g:checkBox name="sendMeUpdates" value="${organizerContestInstance?.sendMeUpdates}" />
                                 </td>
                             </tr>
                         

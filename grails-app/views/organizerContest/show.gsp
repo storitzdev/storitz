@@ -132,9 +132,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="organizerContest.dontSendMeUpdates.label" default="Don't Send Me Updates" /></td>
+                            <td valign="top" class="name"><g:message code="organizerContest.sendMeUpdates.label" default="Send Me Updates" /></td>
                             
-                            <td valign="top" class="value"><g:formatBoolean boolean="${organizerContestInstance?.dontSendMeUpdates}" /></td>
+                            <td valign="top" class="value"><g:formatBoolean boolean="${organizerContestInstance?.sendMeUpdates}" /></td>
                             
                         </tr>
                     

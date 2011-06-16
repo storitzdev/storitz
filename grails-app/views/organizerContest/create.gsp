@@ -122,7 +122,7 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <span class="left"><storitz:image src="pink_organizer_button_1_sm.jpg" alt="Your Contact Info"/></span>
+                                <span class="left"><storitz:image src="pink_organizer_button_1_sm.gif" alt="Your Contact Info"/></span>
                                 <label class="right" for="firstName"><g:message code="organizerContest.firstName.label" default="First Name"/></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'firstName', 'errors')}">
@@ -179,8 +179,16 @@
                         </tr>
 
                         <tr class="orgprop">
+                            <td valign="top" class="name">&nbsp;</td>
+                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'sendMeUpdates', 'errors')}">
+                                <g:checkBox class="left" name="sendMeUpdates" value="${organizerContestInstance?.sendMeUpdates}" checked="true"/>
+                                <label style="padding-left:10px;" for="sendMeUpdates"><g:message code="organizerContest.sendMeUpdates.label" default=""/>Yes, I want to receive updates from Storitz about new contests, features and storage news.</label>
+                            </td>
+                        </tr>
+
+                        <tr class="orgprop">
                             <td valign="top" class="name">
-                                <span class="left"><storitz:image src="pink_organizer_button_2_sm.jpg" alt="Your Primary Residence"/></span>
+                                <span class="left"><storitz:image src="pink_organizer_button_2_sm.gif" alt="Your Primary Residence"/></span>
                                 <label class="right" for="address1"><g:message code="organizerContest.address1.label" default="Address Line 1"/></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'address1', 'errors')}">
@@ -226,7 +234,7 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <span class="left"><storitz:image src="pink_organizer_button_3_sm.jpg" alt="About Storage"/></span>
+                                <span class="left"><storitz:image src="pink_organizer_button_3_sm.gif" alt="About Storage"/></span>
                                 <label class="right" for="zipcode"><g:message code="organizerContest.zipcode.label" default=""/>Zip Code where you are<br>looking for storage?</label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode', 'errors')}">
@@ -259,20 +267,7 @@
                         </tr>
 
                         <tr class="orgprop">
-                            <td valign="top" class="name">&nbsp;</td>
-                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'dontSendMeUpdates', 'errors')}">
-                                <g:checkBox class="left" name="dontSendMeUpdates" value="${organizerContestInstance?.dontSendMeUpdates}"/>
-                                <label style="padding-left:10px;" for="dontSendMeUpdates"><g:message code="organizerContest.dontSendMeUpdates.label" default=""/>No, I don't want to receive updates from Storitz about new contests, features and storage news.</label>
-                            </td>
-                        </tr>
-
-                        <tr class="orgprop">
-                            <td valign="top" class="name">&nbsp;</td>
-                            <td valign="top" class="name"><span class="organizerButton"><g:submitButton name="create" class="organizerButton" value="${message(code: 'default.button.submit.label', default: 'Submit')}"/></span></td>
-                        </tr>
-
-                        <tr class="orgprop">
-                            <td valign="top" class="name">&nbsp</td>
+                            <td valign="top" class="name"><span class="left"><storitz:image src="pink_organizer_button_4_sm.gif" alt="Terms and Conditions"/></span></td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'readTermsAndConditions', 'errors')}">
                                 <g:checkBox class="required left" name="readTermsAndConditions" value="${organizerContestInstance?.readTermsAndConditions}"/>
                                 <label style="padding-left:10px;" for="readTermsAndConditions"><g:message code="organizerContest.readTermsAndConditions.label" default=""/>Yes, I have read and agree to the Storitz Terms and Conditions</label>
@@ -283,11 +278,16 @@
                         </tr>
 
                         <tr class="orgprop">
-                            <td valign="top" class="name"><span class="left"><storitz:image src="pink_organizer_button_4_sm.jpg" alt="Terms and Conditions"/></span></td>
+                            <td valign="top" class="name">&nbsp;</td>
                             <td valign="top" class="name">
-                                <textarea style="width:610px; height: 50px;" name="termText">Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent. By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property. By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
+                                <textarea style="width:610px; height: 50px;" name="termText" id="termText">Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent. By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property. By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
                                 </textarea>
                             </td>
+                        </tr>
+
+                        <tr class="orgprop">
+                            <td valign="top" class="name">&nbsp;</td>
+                            <td valign="top" class="name"><span class="organizerButton"><g:submitButton name="create" class="organizerButton" value="${message(code: 'default.button.submit.label', default: 'Submit')}"/></span></td>
                         </tr>
 
                         </tbody>

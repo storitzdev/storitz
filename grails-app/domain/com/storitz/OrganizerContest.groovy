@@ -19,7 +19,7 @@ class OrganizerContest {
         referralSource(nullable:true, blank:true)
         essayWhyStorage(nullable:false, blank:false, maxSize: 2000)
         readTermsAndConditions(nullable:false, validator: { entry -> entry == true } )
-        dontSendMeUpdates(nullable:true)
+        sendMeUpdates(nullable:true)
     }
 
     String firstName
@@ -35,6 +35,6 @@ class OrganizerContest {
     String referralSource
     String essayWhyStorage
     Boolean readTermsAndConditions
-    Boolean dontSendMeUpdates
+    Boolean sendMeUpdates
 
 }
