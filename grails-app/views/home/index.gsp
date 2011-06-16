@@ -159,7 +159,7 @@
     //]]>
 </script>
 <content tag='gwo'>
-    <g:if test="${session.style != 'monthly'}">
+    <g:if test="${session.style != 'monthly'} && false"><!-- && false to disable GWO experiments until we're launched -->
         <g:if env="production">
             <!-- Google Website Optimizer Control Script -->
             <script type="text/javascript">
