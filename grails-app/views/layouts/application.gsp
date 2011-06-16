@@ -9,7 +9,7 @@
         <p:css name="bundled" />
         <g:layoutHead />
     </head>
-    <body class="${pageProperty(name:'body.class')}">
+    <body class="${pageProperty(name:'body.class') ? pageProperty(name:'body.class') : 'default'}">
         <div id="header">
             <h1 class="storitz-logo">
                 <g:link controller="home" action="index">
