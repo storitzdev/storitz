@@ -1,4 +1,4 @@
-<%@ page import="storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType; com.storitz.OrganizerContest" %>
+<%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder; storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType; com.storitz.OrganizerContest" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -115,7 +115,10 @@
 
                 </g:if>
                 <g:else>
-                    <p>Please tell your friends...</p>
+                    <p><strong>Thanks for Entering for a chance to win a day of organization with Justin Klosky!</strong></p>
+                    <p>Be sure to check back on [date tbd] when we announce our finalists!</p>
+                    <p>In the meantime, share the contest with your friends using the link below:</p>
+                    <p><g:link controller="organizerContest" action="create">${ConfigurationHolder.config.grails.serverURL}/organizer</g:link></p>
                 </g:else>
                 <!-- AddThis Button BEGIN -->
                 <div class="addthis_toolbox addthis_default_style addthis_32x32_style" style="position:relative;left:345px;padding:10px;">
