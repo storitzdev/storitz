@@ -40,6 +40,7 @@ class OrganizerContestController {
         // These two lines are for testing only.
         //flash.saved = "true"                  // Simulate saving a record
         //flash.message = "some error occurred" // Simulate an error
+        //flash.update = "yes"                  // send to page 2
 
         OrganizerContest organizerContestInstance = new OrganizerContest()
         organizerContestInstance.properties = params
@@ -53,6 +54,7 @@ class OrganizerContestController {
                 sendEmail(organizerContestInstance)
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
                 flash.saved = "saved"
+                flash.update = "yes"
                 redirect(action: "create", id: organizerContestInstance.id)
             }
             else {
@@ -66,6 +68,26 @@ class OrganizerContestController {
         }
     }
 
+    def updateEntry = {
+      def organizerContestInstance = OrganizerContest.findById(params.id)
+      organizerContestInstance.properties = params
+      try {
+          if (organizerContestInstance.save(flush: true)) {
+              sendEmail(organizerContestInstance)
+              flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
+              flash.saved = "saved"
+              redirect(action: "create", id: organizerContestInstance.id)
+          }
+          else {
+              flash.message = "Failed to save entry. Please try again."
+              render(view: "create", model: [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance: organizerContestInstance])
+          }
+      } catch (Throwable t) {
+          // TODO: Clean up.
+          flash.message = "Failed to save entry. Please try again."
+          render(view: "create", model: [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance: organizerContestInstance])
+      }
+    }
 
     def save = {
         def organizerContestInstance = new OrganizerContest(params)

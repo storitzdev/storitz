@@ -132,7 +132,16 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
+                        <tr class="prop">
+                            <td valign="top" class="name">
+                              <label for="zipcode2"><g:message code="organizerContest.zipcode2.label" default="Zipcode2" /></label>
+                            </td>
+                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode2', 'errors')}">
+                                <g:textField name="zipcode2" value="${organizerContestInstance?.zipcode2}" />
+                            </td>
+                        </tr>
+
+                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="referralSource"><g:message code="organizerContest.referralSource.label" default="Referral Source" /></label>
                                 </td>

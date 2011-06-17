@@ -22,8 +22,8 @@
             <div class="left" style="width:635px;">
                 <div>
                     <div class="left bannerMastheadAlt">
-                        <div class="bannerMastheadAltText"><h2>Simplify Your Search for Self Storage.</h2></div>
-                         <div class="bannerMastheadAltText"><h2>Compare Thousands of Units with One Click.</h2></div>
+                        <div class="bannerMastheadAltText"><g:link controller="home" action="index"><h2>Simplify Your Search for Self Storage.</h2></g:link></div>
+                         <div class="bannerMastheadAltText"><g:link controller="home" action="index"><h2>Compare Thousands of Units with One Click.</h2></g:link></div>
                     </div>
                     <div class="left tollFree">
                         <div style="font-family:verdana;font-size:9px;text-transform:capitalize;color:#266e00;line-height:15px;margin: 10px 0 0 34px;">NEED ASSISTANCE?</div>
@@ -62,7 +62,7 @@
 
         <div class="thinline"></div>
 
-        <g:link controller="organizerContest" action="create"><div class="organizerbanner"></div></g:link>
+        <div class="organizerbanner"></div>
 
     <!-- ################# -->
     <!-- CONTENT GOES HERE -->
@@ -72,7 +72,51 @@
         <g:if test="${flash.saved}">
             <div id="contestthankyou" style="text-align:center">
                 <h1 class="bold">Thanks for entering!</h1>
-                <p>Please tell your friends...</p>
+
+                <g:if test="${flash.update}">
+
+                    <div style="organizerContest">
+                        <p>We'd love to hear more from you!</p>
+                        <p>Please let us know how you heard about us, and sign up to receive valuable updates from us on Twitter.</p>
+
+                        <g:form controller="organizerContest" action="updateEntry">
+                            <g:hiddenField name="id" value="${id}" />
+                            <table width="100%">
+                                <tbody>
+
+                                <tr class="orgprop">
+                                    <td valign="top" class="name">
+                                        <label class="right" for="referralSource"><g:message code="organizerContest.referralSource.label" default=""/>How did you find out<br>about Storitz.com?</label>
+                                    </td>
+                                    <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'referralSource', 'errors')}">
+                                        <g:select name="referralSource" id="referralSource" from="${storitz.constants.OrganizerContestReferral.selectList()}"/>
+                                    </td>
+                                </tr>
+
+                                <tr class="orgprop">
+                                    <td valign="top" class="name">
+                                        <label class="right" for="twitterName"><g:message code="organizerContest.twitterName.label" default="Twitter Name (optional)"/></label>
+                                    </td>
+                                    <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'twitterName', 'errors')}">
+                                        <g:textField name="twitterName" value="${organizerContestInstance?.twitterName}"/>
+                                    </td>
+                                </tr>
+
+                                <tr class="orgprop">
+                                    <td valign="top" class="name">&nbsp;</td>
+                                    <td valign="top" class="name"><span class="organizerButton"><g:submitButton name="create" class="organizerButton" value="${message(code: 'default.button.submit.label', default: 'Submit')}"/></span></td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </g:form>
+                    </div>
+
+                </g:if>
+                <g:else>
+                    <p>Please tell your friends...</p>
+                </g:else>
                 <!-- AddThis Button BEGIN -->
                 <div class="addthis_toolbox addthis_default_style addthis_32x32_style" style="position:relative;left:345px;padding:10px;">
                     <a class="addthis_button_preferred_1"></a>
@@ -115,7 +159,8 @@
 
                 <p>Plus, since moving into storage can be a messy process, you'll get a day with a Professional Organizer who will help you sort, organize and declutter your space.</p>
 
-                <p>Storitz has already simplified your search for self storage. Let us help you simplify your life. Enter now!</p>
+                <p>Storitz has already simplified your search for self storage. Let us help you simplify your life*. Enter now!</p>
+
                 <g:form controller="organizerContest" action="addEntry">
                     <table>
                         <tbody>
@@ -150,7 +195,7 @@
                                 <label class="right" for="phone"><g:message code="organizerContest.phone.label" default="Phone Number"/></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'phone', 'errors')}">
-                                <g:textField name="phone" class="required"  value="${organizerContestInstance?.phone}"/>
+                                <g:textField name="phone" class="required phone"  value="${organizerContestInstance?.phone}"/>
                                 <g:hasErrors bean="${organizerContestInstance}" field="phone">
                                     <span style="color: red;">Required</span>
                                 </g:hasErrors>
@@ -164,17 +209,8 @@
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'email', 'errors')}">
                                 <g:textField name="email" class="required"  value="${organizerContestInstance?.email}"/>
                                 <g:hasErrors bean="${organizerContestInstance}" field="email">
-                                    <span style="color: red;">Required</span>
+                                    <span style="color: red;">Required (valid email addresses only)</span>
                                 </g:hasErrors>
-                            </td>
-                        </tr>
-
-                        <tr class="orgprop">
-                            <td valign="top" class="name">
-                                <label class="right" for="twitterName"><g:message code="organizerContest.twitterName.label" default="Twitter Name (optional)"/></label>
-                            </td>
-                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'twitterName', 'errors')}">
-                                <g:textField name="twitterName" value="${organizerContestInstance?.twitterName}"/>
                             </td>
                         </tr>
 
@@ -189,7 +225,7 @@
                         <tr class="orgprop">
                             <td valign="top" class="name">
                                 <span class="left"><storitz:image src="pink_organizer_button_2_sm.gif" alt="Your Primary Residence"/></span>
-                                <label class="right" for="address1"><g:message code="organizerContest.address1.label" default="Address Line 1"/></label>
+                                <label class="right" for="address1"><g:message code="organizerContest.address1.label" default="Address"/></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'address1', 'errors')}">
                                 <g:textField name="address1" class="required"  value="${organizerContestInstance?.address1}"/>
@@ -201,7 +237,7 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <label class="right" for="address2"><g:message code="organizerContest.address2.label" default="Address Line 2"/></label>
+                                <label class="right" for="address2"><g:message code="organizerContest.address2.label" default="Suite/Apt"/></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'address2', 'errors')}">
                                 <g:textField name="address2" value="${organizerContestInstance?.address2}"/>
@@ -234,8 +270,7 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <span class="left"><storitz:image src="pink_organizer_button_3_sm.gif" alt="About Storage"/></span>
-                                <label class="right" for="zipcode"><g:message code="organizerContest.zipcode.label" default=""/>Zip Code where you are<br>looking for storage?</label>
+                                <label class="right" for="zipcode"><g:message code="organizerContest.zipcode.label" default=""/>Zip Code</label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode', 'errors')}">
                                 <g:textField name="zipcode" class="required"  value="${organizerContestInstance?.zipcode}"/>
@@ -247,10 +282,14 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <label class="right" for="referralSource"><g:message code="organizerContest.referralSource.label" default=""/>How did you find out<br>about Storitz.com?</label>
+                                <span class="left"><storitz:image src="pink_organizer_button_3_sm.gif" alt="About Storage"/></span>
+                                <label class="right" for="zipcode2"><g:message code="organizerContest.zipcode2.label" default=""/>Zip Code where you are<br>looking for storage?<br>(California Only)</label>
                             </td>
-                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'referralSource', 'errors')}">
-                                <g:select name="referralSource" id="referralSource" from="${storitz.constants.OrganizerContestReferral.selectList()}"/>
+                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode2', 'errors')}">
+                                <g:textField name="zipcode2" class="required"  value="${organizerContestInstance?.zipcode2}"/>
+                                <g:hasErrors bean="${organizerContestInstance}" field="zipcode2">
+                                    <span style="color: red;">Required. Only California Zip Codes (90001 - 96162) are allowed</span>
+                                </g:hasErrors>
                             </td>
                         </tr>
 
@@ -272,7 +311,7 @@
                                 <g:checkBox class="required left" name="readTermsAndConditions" value="${organizerContestInstance?.readTermsAndConditions}"/>
                                 <label style="padding-left:10px;" for="readTermsAndConditions"><g:message code="organizerContest.readTermsAndConditions.label" default=""/>Yes, I have read and agree to the Storitz Terms and Conditions</label>
                                 <g:hasErrors bean="${organizerContestInstance}" field="readTermsAndConditions">
-                                    <p style="color: red;">Required</p>
+                                    <p style="color: red;">Required. You must agree to the Storitz terms and conditions to enter.</p>
                                 </g:hasErrors>
                             </td>
                         </tr>
@@ -280,8 +319,17 @@
                         <tr class="orgprop">
                             <td valign="top" class="name">&nbsp;</td>
                             <td valign="top" class="name">
-                                <textarea style="width:610px; height: 50px;" name="termText" id="termText">Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent. By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property. By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
-                                </textarea>
+                                <p>* Contest open to people seeking to rent storage in California only.<br>
+                                Storage property owner does not carry insurance to cover the loss or<br>
+                                damage of your items. Your existing Homeowner’s Insurance or Renter’s<br>
+                                Insurance may cover items you keep in storage. Alternatively, you may<br>
+                                select (are required to select) the level of monthly insurance coverage<br>
+                                that you may pay for as part of your monthly rent. By Checking Here,<br>
+                                I acknowledge that I am responsible for damage or loss to my goods<br>
+                                while stored at Storage Property. By checking here, I agree to not store<br>
+                                hazardous items according to Federal Code, which includes but is not<br>
+                                limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental<br>
+                                or Toxic Waste and Perishable Food.</p>
                             </td>
                         </tr>
 
