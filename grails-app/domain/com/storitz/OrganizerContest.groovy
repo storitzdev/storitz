@@ -16,7 +16,7 @@ class OrganizerContest {
         city(nullable:false, blank:false)
         state(nullable:false)
         zipcode(nullable:false, blank:false)
-        zipcode2(nullable:false, blank:false, validator: { entry -> entry >= 90001 && entry <= 96162 } )
+        zipcode2(nullable:false, validator: { entry -> entry >= 90001 && entry <= 96162 } )
         referralSource(nullable:true, blank:true)
         essayWhyStorage(nullable:false, blank:false, maxSize: 2000)
         readTermsAndConditions(nullable:false, validator: { entry -> entry == true } )

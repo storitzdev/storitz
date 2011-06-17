@@ -1,11 +1,11 @@
 package storitz.service
 
-import com.storitz.service.IService
+import com.storitz.service.IStorageFeedService
 import com.storitz.StorageSite
 import com.storitz.ServiceMap
-import com.storitz.service.ICostService
-import com.storitz.service.IMoveInService
-import com.storitz.service.IFeedService
+import com.storitz.service.ICostStorageFeedService
+import com.storitz.service.IMoveInStorageFeedService
+import com.storitz.service.IFeedStorageFeedService
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +16,7 @@ import com.storitz.service.IFeedService
  */
 class ServiceFactory {
 
-    private static HashMap<String,IService> serviceHashMap = new HashMap<String,IService>();
+    private static HashMap<String,IStorageFeedService> serviceHashMap = new HashMap<String,IStorageFeedService>();
 
     /**
      *
@@ -24,8 +24,8 @@ class ServiceFactory {
      * @return
      */
 
-    private static IService getServiceInstance (StorageSite site) {
-        IService iService = null;
+    private static IStorageFeedService getServiceInstance (StorageSite site) {
+        IStorageFeedService iStorageFeedService = null;
         Class klass = null;
         ServiceMap serviceMap = null;
 
@@ -38,13 +38,13 @@ class ServiceFactory {
         }
 
         klass = Class.forName(serviceMap.serviceHandler,false,Thread.currentThread().contextClassLoader);
-        iService = klass.newInstance();
-        iService.init(site);
+        iStorageFeedService = klass.newInstance();
+        iStorageFeedService.init(site);
 
-        println "Adding new IService to map: ${serviceMapKey}"
-        serviceHashMap.put(serviceMapKey,iService);
+        println "Adding new IStorageFeedService to map: ${serviceMapKey}"
+        serviceHashMap.put(serviceMapKey,iStorageFeedService);
 
-        return iService;
+        return iStorageFeedService;
     }
 
     /**
@@ -52,8 +52,8 @@ class ServiceFactory {
      * @param site
      * @return
      */
-    public static ICostService getCostServiceInstance (StorageSite site) {
-        return (ICostService)getServiceInstance(site);
+    public static ICostStorageFeedService getCostServiceInstance (StorageSite site) {
+        return (ICostStorageFeedService)getServiceInstance(site);
     }
 
     /**
@@ -61,8 +61,8 @@ class ServiceFactory {
      * @param site
      * @return
      */
-    public static IMoveInService getMoveInServiceInstance (StorageSite site) {
-        return (IMoveInService)getServiceInstance(site);
+    public static IMoveInStorageFeedService getMoveInServiceInstance (StorageSite site) {
+        return (IMoveInStorageFeedService)getServiceInstance(site);
     }
 
     /**
@@ -70,8 +70,8 @@ class ServiceFactory {
      * @param site
      * @return
      */
-    public static IFeedService getFeedServiceInstance (StorageSite site) {
-        return (IFeedService)getServiceInstance(site);
+    public static IFeedStorageFeedService getFeedServiceInstance (StorageSite site) {
+        return (IFeedStorageFeedService)getServiceInstance(site);
     }
 
 }
