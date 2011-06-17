@@ -3,63 +3,40 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-      <g:render template="/header"/>
-      <style type="text/css">
-        h1 {
-          height:50px;
-          font-size: 20pt;
-        }
-        table {
-           border-style:none;
-        }
-        tr {
-            height:100px;
-        }
-        td {
-           vertical-align:top;
-           text-align:right;
-           border-style:dotted;
-           font-weight:bold;
-        }
-        p.address {
-          font-weight:bold;
-          font-size:larger;
-        }
-      </style>
+   <meta name="DESCRIPTION" content="College Rebate Form">
 </head>
-<body id="body">
-<g:render template="/topnav"/>
-<div class="stcontent">
-    <g:render template="/logo_bar"/>
+<body class="static">
+    <div class="collegerebate right">
+
     <h1>Storitz College Storage Rebate Form</h1>
-    <table width="800" border="1">
+    <table>
         <tr>
-            <td width="200">Full Name: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">Full Name: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
         <tr>
-            <td width="200">Phone #: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">Phone #: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
         <tr>
-            <td width="200">Email Address: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">Email Address: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
         <tr>
-            <td width="200">Name of Storage Facility: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">Name of Storage Facility: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
         <tr>
-            <td width="200">Storitz Transaction ID #: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">Storitz Transaction ID #: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
         <tr>
-            <td width="200">Date of Move-in: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">Date of Move-in: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
         <tr>
-            <td width="200">College/University: </td>
-            <td width="600">&nbsp;</td>
+            <td class="question">College/University: </td>
+            <td class="answer">&nbsp;</td>
         </tr>
     </table>
 

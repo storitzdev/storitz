@@ -201,7 +201,8 @@ uiperformance.bundles = [
                 files: ["jquery-1.4.2.min",
                         "placeholder",
                         "jquery.tools.min",
-                        "application"
+                        "application",
+                        "jquery.validate.min"
                 ]],
         [type: 'css',
                 name: 'bundled',

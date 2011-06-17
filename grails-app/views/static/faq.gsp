@@ -3,25 +3,10 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:render template="/header"/>
   <meta name="DESCRIPTION" content="Frequently asked questions about self storage, Storitz and the rental process."/>
-
-  <script type="text/javascript">
-    //<![CDATA[
-
-    //]]>
-  </script>
-
 </head>
-<body>
-<div id="body">
-  <g:render template="/topnav"/>
-  <div class="stcontent">
-    <g:render template="/logo_bar"/>
-    <div id="staticMenu" class="left" style="margin-top: 26px;">
-      <!-- menu section -->
-    </div>
-    <div style="width: 650px;margin-right: 35px;" class="right">
+<body class="static">
+    <div class="right">
 
       <h1>Frequently Asked Questions</h1>
 
@@ -96,10 +81,10 @@
       <p>
       <div class="faqQuestion"><a name="q7">And “interior” vs. “exterior”?</a></div>
       <div class="faqAnswer">
-        You access an <span style="font-weight:bold;">interior</span> unit by entering a building. It may be on a ground floor, upper floor or basement level. Advantages to Interior units are that they are less affected by weather and experience fewer visits from rodents or pests.
+        You access an <strong>interior</strong> unit by entering a building. It may be on a ground floor, upper floor or basement level. Advantages to Interior units are that they are less affected by weather and experience fewer visits from rodents or pests.
       </div>
       <div class="faqAnswer">
-        Conversely, an <span style="font-weight:bold;">exterior</span> unit is accessed from outside which means easier, more immediate access but can mean harsher conditions for both your stuff and yourself every time you visit.
+        Conversely, an <strong>exterior</strong> unit is accessed from outside which means easier, more immediate access but can mean harsher conditions for both your stuff and yourself every time you visit.
       </div>
     </p>
 
@@ -176,28 +161,28 @@
       </div>
       <div class="faqAnswer">
         <div>
-          <span style="font-weight:bold;">5x5:</span> This small size is ideal for dorm rooms, decorations, paintings and small items.
+          <strong>5x5:</strong> This small size is ideal for dorm rooms, decorations, paintings and small items.
         </div>
         <div>
-          <span style="font-weight:bold;">5x10:</span> These units are about the size of a walk-in closet, making them ideal for narrow items & documents boxes.
+          <strong>5x10:</strong> These units are about the size of a walk-in closet, making them ideal for narrow items & documents boxes.
         </div>
         <div>
-          <span style="font-weight:bold;">7x10:</span> A bit larger, this unit will fit a small bedroom & living room or tools & equipment.
+          <strong>7x10:</strong> A bit larger, this unit will fit a small bedroom & living room or tools & equipment.
         </div>
         <div>
-          <span style="font-weight:bold;">10X10:</span> You can fit an entire 1-bedroom apartment in this size unit, Queen sized mattress and all.
+          <strong>10X10:</strong> You can fit an entire 1-bedroom apartment in this size unit, Queen sized mattress and all.
         </div>
         <div>
-          <span style="font-weight:bold;">10X15:</span> This is a good size if you’re looking to store the contents of a small house or a boat or trailer.
+          <strong>10X15:</strong> This is a good size if you’re looking to store the contents of a small house or a boat or trailer.
         </div>
         <div>
-          <span style="font-weight:bold;">10x20:</span> A good size for a 3-bedroom house, business equipment, or a car/SUV.
+          <strong>10x20:</strong> A good size for a 3-bedroom house, business equipment, or a car/SUV.
         </div>
         <div>
-          <span style="font-weight:bold;">10x25:</span> Spacious, for a 4-bedroom house or use as a mini-warehouse.
+          <strong>10x25:</strong> Spacious, for a 4-bedroom house or use as a mini-warehouse.
         </div>
         <div>
-          <span style="font-weight:bold;">10x30:</span> The perfect expansive size for use as a mini-warehouse
+          <strong>10x30:</strong> The perfect expansive size for use as a mini-warehouse
         </div>
       </div>
       <div class="faqAnswer">
@@ -213,11 +198,11 @@
       </div>
       <div class="faqAnswer">
         <ul>
-          <li><span style="font-weight:bold;">Unit Alarms and Surveillance Systems.</span> Most storage properties have gates with codes to enter. Storage properties that also have alarm sensors in each storage unit door, connected to a computer that checks your gate code upon entry and exit against your unit door opening and closing offer the most complete way to protect access to your goods.  A camera in the office and at the gate are a good start. But advanced facilities have cameras throughout the property, at all entrances, in heavily traveled hallways and stairwells, and over the RV and vehicle parking areas.  An owner who spends extra money on cameras and security devices is sure to care more about each tenant.</li>
-          <li><span style="font-weight:bold;">Management.</span> Friendly but dedicated managers who are aware of their tenants and what goes on in that property are the very best kind. Look for a manager who smiles and who is sincere. There are many excellent managers that will keep an eye out for you, your needs, your goods, and be a lifeline to helping you through your storage situation.</li>
-          <li><span style="font-weight:bold;">Customer Convenience Centers.</span> A desk or table where you can organize a box of documents and free WiFi so you can easily check your email while you’re moving in or accessing your unit are awesome amenities that are not available at all properties but may be important to you.</li>
-          <li><span style="font-weight:bold;">Added services.</span>  Many storage facilities offer mailboxes and package services that mean the facility will accept packages on your behalf and sometimes even ship them.  This can be very useful services if you are in the process of moving or other transitions.</li>
-          <li><span style="font-weight:bold;">Move-in Truck.</span> Whether you have to rent it there, or in some cases are given free use of a truck for your move-in, it is a huge convenience to store your goods at a location with a move-in truck option.</li>
+          <li><strong>Unit Alarms and Surveillance Systems.</strong> Most storage properties have gates with codes to enter. Storage properties that also have alarm sensors in each storage unit door, connected to a computer that checks your gate code upon entry and exit against your unit door opening and closing offer the most complete way to protect access to your goods.  A camera in the office and at the gate are a good start. But advanced facilities have cameras throughout the property, at all entrances, in heavily traveled hallways and stairwells, and over the RV and vehicle parking areas.  An owner who spends extra money on cameras and security devices is sure to care more about each tenant.</li>
+          <li><strong>Management.</strong> Friendly but dedicated managers who are aware of their tenants and what goes on in that property are the very best kind. Look for a manager who smiles and who is sincere. There are many excellent managers that will keep an eye out for you, your needs, your goods, and be a lifeline to helping you through your storage situation.</li>
+          <li><strong>Customer Convenience Centers.</strong> A desk or table where you can organize a box of documents and free WiFi so you can easily check your email while you’re moving in or accessing your unit are awesome amenities that are not available at all properties but may be important to you.</li>
+          <li><strong>Added services.</strong>  Many storage facilities offer mailboxes and package services that mean the facility will accept packages on your behalf and sometimes even ship them.  This can be very useful services if you are in the process of moving or other transitions.</li>
+          <li><strong>Move-in Truck.</strong> Whether you have to rent it there, or in some cases are given free use of a truck for your move-in, it is a huge convenience to store your goods at a location with a move-in truck option.</li>
         </ul>
       </div>
     </p>
@@ -275,9 +260,7 @@
     </div>
   </div>
 
-  <div style="clear:both; height:30px;"></div>
-  <g:render template="/footer"/>
+
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

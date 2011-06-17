@@ -3,15 +3,15 @@
   <meta name="DESCRIPTION" content="Find out more about Storitz the company on our about us page."/>
 </head>
 
-<body class="about_us">
+<body class="static">
 <div class="right">
 <h1>THE SMART AND EASY WAY TO FIND STORAGE</h1>
 
 <p>When we founded this company, we decided to set some new standards for the way people find self storage.</p>
 
 <p>
-<ul class="feat-list">
-  <li><em>Make a one-stop-shop for finding self storage</em></li>
+<ul>
+  <li><strong>Make a one-stop-shop for finding self storage</strong></li>
   <li><strong>Charge the lowest price possible</strong> for each storage unit</li>
   <li><strong>Let customers choose their storage unit from factual information</strong> and photos, not from a sales pitch, a pushy call center, or an annoyed storage manager</li>
   <li><strong>Allow customers to search based on location</strong>, using both a list and a map, because storage, like real estate, is all about location, location, location</li>
