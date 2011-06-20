@@ -59,6 +59,9 @@ class MigrationController {
       } else if (myFeed.feedType == FeedType.QUIKSTOR) {
         QuikStor f = myFeed as QuikStor
         render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
+      } else if (myFeed.feedType == FeedType.EDOMICO) {
+        EDomico f = myFeed as EDomico
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
       }
     }
   }
@@ -91,7 +94,6 @@ class MigrationController {
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
-
       } else if (resp.feed.feedType == 'CENTERSHIFT') {
         feed = new CenterShift()
         feed.userName = resp.feed.userName
@@ -105,7 +107,9 @@ class MigrationController {
         feed.city = resp.feed.city
         feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state) : null
         feed.zipcode = resp.feed.zipcode
-
+        feed.transactionBoxLink = resp.feed.transactionBoxLink
+        feed.transactionBoxBody = resp.feed.transactionBoxBody
+        feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
       } else if (resp.feed.feedType == 'QUIKSTOR') {
         feed = new QuikStor()
         feed.feedType = FeedType.QUIKSTOR
@@ -119,10 +123,20 @@ class MigrationController {
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
-        // TODO - cycle through and build the QuikStorLocations
       } else if (resp.feed.feedType == 'EDOMICO') {
-        // TODO - handle Domico
-        // TODO - cycle through and build the DomicoLocations
+        feed = new EDomico()
+        feed.feedType = FeedType.EDOMICO
+        feed.operatorName = resp.feed.operatorName
+        feed.edomicoClientID = resp.feed.edomicoClientID
+        feed.edomicoWebServicesKey = resp.feed.edomicoWebServicesKey
+        feed.address1 = resp.feed.address1
+        feed.address2 = resp.feed.address2
+        feed.city = resp.feed.city
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state) : null
+        feed.zipcode = resp.feed.zipcode
+        feed.transactionBoxLink = resp.feed.transactionBoxLink
+        feed.transactionBoxBody = resp.feed.transactionBoxBody
+        feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
       }
       CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)
       // create the manager first
@@ -382,6 +396,8 @@ class MigrationController {
         SiteUser.link(site, manager)
       }
       feed.save(flush: true)
+
+      // QuikStor Locations
       if (resp.feed.feedType == 'QUIKSTOR') {
         for (loc in resp.feed.locations) {
           def qloc = new QuikStorLocation()
@@ -394,6 +410,23 @@ class MigrationController {
           feed.addToLocations(qloc)
         }
         feed.save(flush: true)
+      }
+
+      // EDomico Locations
+      if (resp.feed.feedType == 'EDOMICO') {
+        for (loc in resp.feed.locations) {
+          def eloc = new EDomicoLocation()
+          eloc.address1 = loc.address1
+          eloc.city = loc.city
+          eloc.zipcode = loc.zipcode
+          eloc.state = loc.state
+          eloc.edomico = EDomico.findById(loc.edomico)
+          eloc.siteID = loc.siteID
+          eloc.siteName = loc.siteName
+          eloc.site = StorageSite.findByid(loc.site)
+          eloc.save(flush:true)
+          feed.addToLocations(eloc)
+        }
       }
 
       for (su in resp.siteUsers) {
