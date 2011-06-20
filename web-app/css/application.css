@@ -868,4 +868,95 @@ a.toggle_map_view {
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
   box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+}/* ------------------------------------------------------------------------------------- */
+/* BLOG PAGE STYLES */
+
+body.blog h1.storitz-logo a {
+  background: url("/blog/wp-content/themes/storitz/images/logo.png") no-repeat;
+  width: 210px;
+}
+body.blog #container {
+  width: 960px;
+  position: relative;
+}
+body.blog #left-col {
+  width: 640px;
+}
+body.blog #sidebar {
+  width: 280px;
+  padding-left: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+body.blog #sidebar a {
+  color: #4f4f4f;
+}
+body.blog #sidebar li.widget {
+  margin-bottom: 10px;
+}
+body.blog #sidebar li.widget li {
+  list-style-image: url(/blog/wp-content/themes/storitz/images/icon-sidebar-link.png);
+  display: list-item;
+  margin-left: 15px;
+}
+body.blog div.entry_header h2 {
+  font-size: 24px;
+  font-family: Helvetica;
+  font-weight: normal;
+}
+body.blog a {
+  color: #087DB6;
+  text-decoration: none;
+}
+body.blog h2 span.editpost a {
+  font-size: 10px;
+  color: #ccc;
+}
+body.blog p {
+  line-height: 125%;
+  margin-bottom: 10px;
+}
+body.blog .categories a:link,
+body.blog .categories a:hover,
+body.blog .categories a:visited {
+  color: white;
+  background: #21A0DE;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+body.blog div.entry_content {
+  font-family: Helvetica;
+}
+body.blog div.entry_content li {
+  display: list-item;
+  margin-left: 15px;
+  list-style-image: url(/blog/wp-content/themes/storitz/images/icon-sidebar-link.png);
+  margin-bottom: 5px;
+}
+body.blog div.entry_content ol li {
+  list-style-type: decimal; 
+  list-style-image: none;
+}
+body.blog h6.zemanta-related-title {
+  margin-bottom: 5px;
+}
+body.blog .postedinfo {
+  line-height: 125%;
+}
+body.blog .comment-icon {
+  background: url(/blog/wp-content/themes/intrepidity/images/icon-comment.gif) no-repeat;
+  padding-left: 18px;
+}
+body.blog div.post {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eeeeee;
+}
+body.blog p.entry-date {
+  color: #4f4f4f;
+  font-size: 10px;
+}
+body.blog div.zemanta-pixie {
+  float: right;
 }

@@ -234,3 +234,5 @@ uiperformance.exclusions = [
         "**/images/email/**",
         "**/images/themes/**"
 ]
+
+uiperformance.keepOriginals = true // for use in by non-grails apps, e.g. wordpress
