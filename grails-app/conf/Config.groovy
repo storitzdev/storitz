@@ -138,12 +138,22 @@ environments {
 grails.gorm.failOnError = true
 
 // log4j configuration
+
+def logDirectory = '.' 
+// per http://stackoverflow.com/questions/3171816/grails-app-will-not-deploy-on-tomcat-fail-application-could-not-be-started
+def catalinaBase = System.properties.getProperty('catalina.base') 
+if (!catalinaBase) catalinaBase = '.'   // just in case 
+logDirectory = "${catalinaBase}/logs" 
+
 log4j = {
   // Example of changing the log pattern for the default console
   // appender:
   //
   appenders {
-      console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    // per http://stackoverflow.com/questions/3171816/grails-app-will-not-deploy-on-tomcat-fail-application-could-not-be-started
+    rollingFile name:'stdout', file:"${logDirectory}/${appName}.log".toString()
+    rollingFile name:'stacktrace', file:"${logDirectory}/${appName}_stack.log".toString() 
   }
   root {
     info()
