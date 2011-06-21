@@ -11,7 +11,7 @@ class EDomicoAmenitiesMapController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 25, 500)
+        params.max = Math.min(params.max ? params.int('max') : 50, 100)
         [EDomicoAmenitiesMapInstanceList: EDomicoAmenitiesMap.list(params), EDomicoAmenitiesMapInstanceTotal: EDomicoAmenitiesMap.count()]
     }
 
@@ -69,7 +69,7 @@ class EDomicoAmenitiesMapController {
             EDomicoAmenitiesMapInstance.properties = params
             if (!EDomicoAmenitiesMapInstance.hasErrors() && EDomicoAmenitiesMapInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'EDomicoAmenitiesMap.label', default: 'EDomicoAmenitiesMap'), EDomicoAmenitiesMapInstance.id])}"
-                redirect(action: "show", id: EDomicoAmenitiesMapInstance.id)
+                redirect(action: "list", id: EDomicoAmenitiesMapInstance.id)
             }
             else {
                 render(view: "edit", model: [EDomicoAmenitiesMapInstance: EDomicoAmenitiesMapInstance])

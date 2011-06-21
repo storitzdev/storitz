@@ -1,7 +1,5 @@
 package com.storitz
 
-import storitz.constants.UnitType
-
 class EDomicoAmenitiesMap extends UnitTypeLookup {
 
     static constraints = {
@@ -10,10 +8,8 @@ class EDomicoAmenitiesMap extends UnitTypeLookup {
       alarmed(nullable: true)
       irregular(nullable: true)
     }
-
     Boolean secure
     Boolean alarmed
     Boolean powered
     Boolean irregular
-
 }

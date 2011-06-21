@@ -41,11 +41,17 @@
 
                         <g:sortableColumn property="unitType" title="${message(code: 'EDomicoAmenitiesMap.unitType.label', default: 'Unit Type')}" />
 
+                        <g:sortableColumn property="searchType" title="${message(code: 'EDomicoAmenitiesMap.searchType.label', default: 'Search Type')}" />
+
                         <g:sortableColumn property="secure" title="${message(code: 'EDomicoAmenitiesMap.secure.label', default: 'Secure')}" />
 
                         <g:sortableColumn property="tempControlled" title="${message(code: 'EDomicoAmenitiesMap.tempControlled.label', default: 'temperature Controlled')}" />
 
                         <g:sortableColumn property="powered" title="${message(code: 'EDomicoAmenitiesMap.powered.label', default: 'Powered')}" />
+
+                        <g:sortableColumn property="alarmed" title="${message(code: 'EDomicoAmenitiesMap.alarmed.label', default: 'Alarmed')}" />
+
+                        <g:sortableColumn property="irregular" title="${message(code: 'EDomicoAmenitiesMap.irregular.label', default: 'Irregular')}" />
 
                     </tr>
                     </thead>
@@ -53,17 +59,23 @@
                     <g:each in="${EDomicoAmenitiesMapInstanceList}" status="i" var="EDomicoAmenitiesMapInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-                            <td><g:link action="show" id="${EDomicoAmenitiesMapInstance.id}">${fieldValue(bean: EDomicoAmenitiesMapInstance, field: "id")}</g:link></td>
+                            <td><g:link action="edit" id="${EDomicoAmenitiesMapInstance.id}">${fieldValue(bean: EDomicoAmenitiesMapInstance, field: "id")}</g:link></td>
 
                             <td>${fieldValue(bean: EDomicoAmenitiesMapInstance, field: "description")}</td>
 
                             <td>${fieldValue(bean: EDomicoAmenitiesMapInstance, field: "unitType")}</td>
+
+                            <td>${fieldValue(bean: EDomicoAmenitiesMapInstance, field: "searchType")}</td>
 
                             <td><g:formatBoolean boolean="${EDomicoAmenitiesMapInstance.secure}" /></td>
 
                             <td><g:formatBoolean boolean="${EDomicoAmenitiesMapInstance.tempControlled}" /></td>
 
                             <td><g:formatBoolean boolean="${EDomicoAmenitiesMapInstance.powered}" /></td>
+
+                            <td><g:formatBoolean boolean="${EDomicoAmenitiesMapInstance.alarmed}" /></td>
+
+                            <td><g:formatBoolean boolean="${EDomicoAmenitiesMapInstance.irregular}" /></td>
 
                         </tr>
                     </g:each>

@@ -51,6 +51,13 @@
                     </tr>
 
                     <tr class="prop">
+                        <td valign="top" class="name"><g:message code="EDomicoAmenitiesMap.searchType.label" default="Search Type" /></td>
+
+                        <td valign="top" class="value">${EDomicoAmenitiesMapInstance?.searchType?.encodeAsHTML()}</td>
+
+                    </tr>
+
+                    <tr class="prop">
                         <td valign="top" class="name"><g:message code="EDomicoAmenitiesMap.secure.label" default="Secure" /></td>
 
                         <td valign="top" class="value"><g:formatBoolean boolean="${EDomicoAmenitiesMapInstance?.secure}" /></td>

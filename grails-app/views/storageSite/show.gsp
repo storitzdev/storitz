@@ -18,9 +18,11 @@
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="list">List Storage Sites</g:link></span>
+      <!-- Storage Sites are created through feed import, not by hand
       <sec:ifAnyGranted roles="ROLE_ADMIN">
         <span class="button"><g:link action="create">Create New Storage Site</g:link></span>
       </sec:ifAnyGranted>
+      -->
     </div>
     <div class="body">
 

@@ -57,6 +57,15 @@
 
                         <tr class="prop">
                             <td valign="top" class="name">
+                                <label for="unitType"><g:message code="EDomicoAmenitiesMap.searchType.label" default="Search Type" /></label>
+                            </td>
+                            <td valign="top" class="value ${hasErrors(bean: EDomicoAmenitiesMapInstance, field: 'searchType', 'errors')}">
+                                <g:select name="searchType" from="${storitz.constants.SearchType?.values()}" keys="${storitz.constants.SearchType?.values()*.name()}" value="${EDomicoAmenitiesMapInstance?.searchType?.name()}"  />
+                            </td>
+                        </tr>
+
+                        <tr class="prop">
+                            <td valign="top" class="name">
                                 <label for="secure"><g:message code="EDomicoAmenitiesMap.secure.label" default="Secure" /></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: EDomicoAmenitiesMapInstance, field: 'secure', 'errors')}">
