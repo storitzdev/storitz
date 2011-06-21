@@ -14,10 +14,13 @@ class BalkNotificationJob {
 
     def static transQueue = [:]
 
-    static void scheduleBalkNotice(long id,Date when) {
+    static void scheduleBalkNotice(long id) {
       def scheduled = transQueue[id]
       if (!scheduled) {
         transQueue[id] = true
+        long millisecondsNow = (new Date()).time
+        long millisecondsFifteenMinutes = 1000 * 60 * 15;
+        Date when = new Date(millisecondsNow + millisecondsFifteenMinutes)
         BalkNotificationJob.schedule(when,[id:id])
       }
     }
@@ -26,11 +29,12 @@ class BalkNotificationJob {
       def id = context.mergedJobDataMap.get('id')
       RentalTransaction trans = RentalTransaction.findById(id)
       if (trans.status == TransactionStatus.BEGUN) {
-        sendBalkNotification(trans)
+        sendInternalBalkNotification(trans)
+        sendExternalBalkNotification(trans)
       }
     }
 
-  def sendBalkNotification(RentalTransaction trans) {
+  def sendInternalBalkNotification(RentalTransaction trans) {
     StorageUnit storageUnit = StorageUnit.findById(trans.unitId)
     SpecialOffer specialOffer = SpecialOffer.findById(trans.promoId)
     def unitPrice = storageUnit.bestUnitPrice ? storageUnit.bestUnitPrice : storageUnit.price
@@ -62,4 +66,59 @@ class BalkNotificationJob {
       t.printStackTrace()
     }
   }
+
+  def sendExternalBalkNotification(RentalTransaction trans) {
+    StringBuilder body = new StringBuilder()
+
+    body.append("Hi ${trans.contactPrimary.firstName},");
+    body.append("\n");
+    body.append("\nEarlier today, you visited Storitz.com and searched for self storage.");
+    body.append("\nWe’re really glad that you decided to check out our site! Still, we");
+    body.append("\ncouldn’t help but notice that you didn’t manage to complete your");
+    body.append("\ntransaction and rent a storage unit.");
+    body.append("\n");
+    body.append("\n");
+    body.append("\nAt Storitz, we’re constantly striving to improve our site and our");
+    body.append("\ncustomer service, so we wanted to drop you a line and see if you had");
+    body.append("\nany problems with the site that we could help you with.  Did something");
+    body.append("\nbreak or fail?  Was something about Storitz too confusing?");
+    body.append("\n");
+    body.append("\n");
+    body.append("\nIf there is anything I can help you with, please don’t hesitate to");
+    body.append("\ncontact me. You can give me a call on the toll-free number listed");
+    body.append("\nbelow, or just respond to this email and I’ll get back to you right");
+    body.append("\naway.");
+    body.append("\n");
+    body.append("\n");
+    body.append("\nThen, if you do decide to rent with us, we’d like to offer you a \$20");
+    body.append("\ncredit on your first move-in.");
+    body.append("\n");
+    body.append("\n");
+    body.append("\nWe look forward to talking to you soon and helping you with all your");
+    body.append("\nself-storage needs!");
+    body.append("\n");
+    body.append("\n");
+    body.append("\nSincerely,");
+    body.append("\n");
+    body.append("\nGillian Singletary");
+    body.append("\nCustomer Service Specialist");
+    body.append("\nStoritz, Inc.");
+    body.append("\n(877) 456-2929");
+    body.append("\ngsingletary@storitz.com");
+
+    try {
+      emailService.sendTextEmail (
+          to:      trans.contactPrimary.email,
+          from:    "gsingletary@storitz.com",
+          subject: "Thank you for visiting Storitz!",
+          body: body.toString()
+      )
+    } catch (Throwable t) {
+      t.printStackTrace()
+    }
+  }
+
+
+
+
 }

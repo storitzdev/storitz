@@ -129,10 +129,7 @@ class RentalTransaction {
   // This event, as expected, will fire after insertion into the database.
   def afterInsert() {
     if (status == TransactionStatus.BEGUN) {
-      long millisecondsNow = (new Date()).time
-      long millisecondsTenMinutes = 1000 * 60 * 10;
-      Date when = new Date(millisecondsNow + millisecondsTenMinutes)
-      BalkNotificationJob.scheduleBalkNotice(id,when)
+      BalkNotificationJob.scheduleBalkNotice(id)
     }
   }
 

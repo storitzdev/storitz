@@ -79,7 +79,7 @@ class MigrationController {
       def resp = JSON.parse(respText)
       clearNulls(resp)
       def feed
-      if (resp.feed.feedType == 'SITELINK') {
+      if (feedTypeEquals(resp.feed.feedType,'SITELINK')) {
         feed = new SiteLink()
         feed.feedType = FeedType.SITELINK
         feed.corpCode = resp.feed.corpCode
@@ -94,7 +94,7 @@ class MigrationController {
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
-      } else if (resp.feed.feedType == 'CENTERSHIFT') {
+      } else if (feedTypeEquals(resp.feed.feedType,'CENTERSHIFT')) {
         feed = new CenterShift()
         feed.userName = resp.feed.userName
         feed.pin = resp.feed.pin
@@ -110,7 +110,7 @@ class MigrationController {
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
-      } else if (resp.feed.feedType == 'QUIKSTOR') {
+      } else if (feedTypeEquals(resp.feed.feedType,'QUIKSTOR')) {
         feed = new QuikStor()
         feed.feedType = FeedType.QUIKSTOR
         feed.operatorName = resp.feed.operatorName
@@ -124,9 +124,7 @@ class MigrationController {
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
       }
-      // EDOMICO is coming across quite odd. Needed to add *.name to account for
-      // the diffences in JSON of this versus other feeds.
-      else if (resp.feed.feedType == 'EDOMICO' || resp.feed.feedType.name == 'EDOMICO') {
+      else if (feedTypeEquals(resp.feed.feedType,'EDOMICO')) {
         feed = new EDomico()
         feed.feedType = FeedType.EDOMICO
         feed.operatorName = resp.feed.operatorName
@@ -401,7 +399,7 @@ class MigrationController {
       feed.save(flush: true)
 
       // QuikStor Locations
-      if (resp.feed.feedType == 'QUIKSTOR') {
+      if (feedTypeEquals(resp.feed.feedType,'QUIKSTOR')) {
         for (loc in resp.feed.locations) {
           def qloc = new QuikStorLocation()
           qloc.username = loc.username
@@ -416,20 +414,21 @@ class MigrationController {
       }
 
       // EDomico Locations
-      if (resp.feed.feedType == 'EDOMICO') {
+      if (feedTypeEquals(resp.feed.feedType,'EDOMICO')) {
         for (loc in resp.feed.locations) {
           def eloc = new EDomicoLocation()
           eloc.address1 = loc.address1
           eloc.city = loc.city
           eloc.zipcode = loc.zipcode
           eloc.state = loc.state
-          eloc.edomico = EDomico.findById(loc.edomico)
+          eloc.edomico = feed
           eloc.siteID = loc.siteID
           eloc.siteName = loc.siteName
-          eloc.site = StorageSite.findByid(loc.site)
+          eloc.site = StorageSite.findBySourceId(loc.siteID)
           eloc.save(flush:true)
           feed.addToLocations(eloc)
         }
+        feed.save(flush: true)
       }
 
       for (su in resp.siteUsers) {
@@ -444,7 +443,6 @@ class MigrationController {
   }
 
   private clearNulls(Object obj) {
-
     if (obj instanceof Map) {
       def map = (Map) obj
       for (r in map.entrySet()) {
@@ -464,6 +462,10 @@ class MigrationController {
         }
       }
     }
-
   }
+
+  def feedTypeEquals(feedType,feedName) {
+    return feedType == feedName || feedType.name == feedName
+  }
+
 }
