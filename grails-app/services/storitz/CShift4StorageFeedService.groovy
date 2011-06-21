@@ -432,7 +432,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       discReq.unitID = unit.unitNumber as Long
       def lookupUser = getLookupUser(cshift)
       def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
-      for (discount in discountList.details.applbestpcd) {
+      for (discount in discountList.details?.applbestpcd) {
         println "Processing discount: ${discount.dump()}"
 
         def offer = site.specialOffers.find {discount.pcdid == it.concessionId}
