@@ -123,7 +123,10 @@ class MigrationController {
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
-      } else if (resp.feed.feedType == 'EDOMICO') {
+      }
+      // EDOMICO is coming across quite odd. Needed to add *.name to account for
+      // the diffences in JSON of this versus other feeds.
+      else if (resp.feed.feedType == 'EDOMICO' || resp.feed.feedType.name == 'EDOMICO') {
         feed = new EDomico()
         feed.feedType = FeedType.EDOMICO
         feed.operatorName = resp.feed.operatorName
@@ -132,7 +135,7 @@ class MigrationController {
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
-        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state) : null
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state.name) : null
         feed.zipcode = resp.feed.zipcode
         feed.transactionBoxLink = resp.feed.transactionBoxLink
         feed.transactionBoxBody = resp.feed.transactionBoxBody
