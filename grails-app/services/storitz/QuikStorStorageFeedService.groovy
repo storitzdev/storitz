@@ -302,7 +302,13 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
       def unit = site.units.find {(it.unitNumber as Integer) == unitType.iTypeId }
       siteUnitTypes[unitType.iTypeId as Integer] = true
-      if (unit) {
+      def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
+      def searchType = SearchType.STORAGE
+      if (unitInfo.csUnitType == 'Parking') {
+        searchType = SearchType.PARKING
+      }
+      def unitsize = getUnitSizeService().getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
+      if (unit && unitsize) {
         if (unitType.availability > unit.unitCount) {
           stats.updateCount += (unitType.availability - unit.unitCount)
           unit.unitCount = unitType.availability
@@ -321,13 +327,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         stats.unitCount++
         unit.save(flush: true)
       } else {
-        def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
         writer.println("retrieved unitInfo ${unitInfo.dump()}")
-        def searchType = SearchType.STORAGE
-        if (unitInfo.csUnitType == 'Parking') {
-          searchType = SearchType.PARKING
-        }
-        def unitsize = getUnitSizeService().getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
         if (unitsize) {
           unit = new StorageUnit()
           unit.unitNumber = unitType.iTypeId

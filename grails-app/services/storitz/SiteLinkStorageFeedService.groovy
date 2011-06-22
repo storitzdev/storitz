@@ -959,10 +959,10 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         unitID = unit.UnitID.text()
         StorageUnit existingUnit = site.units.find { it.unitNumber == unitID }
 
-        if (!existingUnit) {
+        Double width = unit.dcWidth.text() as Double
+        Double length = unit.dcLength.text() as Double
 
-          Double width = unit.dcWidth.text() as Double
-          Double length = unit.dcLength.text() as Double
+        if (!existingUnit) {
 
           def searchType
           def siteUnit = new StorageUnit()
@@ -1056,15 +1056,22 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
           }
           def newPrice = unit.dcStdRate.text() as BigDecimal
           def newPushRate = unit.dcPushRate.text() as BigDecimal
+          def newUnitSize = getUnitSizeService().getUnitSize(width, length, existingUnit.unitsize.searchType)
           if (newPrice == 0 || newPushRate == 0) {
             // remove unit from inventory
             site.removeFromUnits(existingUnit)
             writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
+          }
+          else if (!newUnitSize) {
+            // remove unit from inventory
+            site.removeFromUnits(existingUnit)
+            writer.println "Removing unit from inventory - cannot determine unit size - ${existingUnit.unitNumber}"
           } else {
             existingUnit.price = newPrice
             existingUnit.pushRate = newPushRate
             existingUnit.isAvailable = true // reset this unit's availability
             existingUnit.unitCount = 1      // reset this unit's availability
+            existingUnit.unitsize = newUnitSize
             stats.removedCount--
             stats.unitCount++
             existingUnit.save()
