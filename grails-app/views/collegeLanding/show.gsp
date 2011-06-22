@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.CollegeLanding" %>
+<%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder; com.storitz.CollegeLanding" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -105,6 +105,14 @@
                             <td valign="top" class="value">${fieldValue(bean: collegeLandingInstance, field: "secondaryFGColor")}</td>
                             
                         </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name"><g:message code="collegeLanding.url.label" default="URL" /></td>
+
+                        <td valign="top" class="value">${ConfigurationHolder.config.grails.serverURL}/college/${fieldValue(bean: collegeLandingInstance, field: "name").toString().toLowerCase()}</td>
+
+                    </tr>
+
                     
                     </tbody>
                 </table>
