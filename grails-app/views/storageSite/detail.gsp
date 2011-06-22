@@ -4,455 +4,659 @@
   <title>${title}</title>
   <meta name="DESCRIPTION" content="Storitz guarantees you the best deal on storage at ${site.title} in ${site.city}, ${site.state.display}.  Get photos, descriptions, driving directions and move-in today. "/>
   <g:meta name="keywords" content="Storage unit, self storage units, storage units, moving, storage units for rent, cheap storage units, storage unit rental, self storage, self storage facility, self storage facilities, air conditioned storage units, self storage rental, public self storage, security self storage, find self storage, self storage companies, Mini storage, mini self storage"/>
+  <!-- change the height attribute when done. -->
+    <style>
+
+    body {
+        width: 1000px;
+    }
+
+    .the_page {
+        width: 990px;
+        display: block;
+        position: relative;
+    }
+
+    /* everything that is on the left of the page */
+    #left_panel {
+        display: inline-block;
+        width: 690px;
+        background-color: white;
+        position: relative;
+    }
+
+    .site_logo {
+        display: block;
+        width: 680px;
+        height: 130px;
+        margin: 10px 0 10px 10px;
+        background-color: white;
+    }
+
+    #site_logopic {
+        display: block;
+        float: left;
+        width: 250px;
+        height: 100px;
+        padding-top: 16px;
+    }
+
+    #site_address {
+        float: left;
+        display: block;
+        width: 420px;
+        padding: 20px 0 0 10px;
+        font-size: 10px;
+    }
+
+    .site_logo h1.title {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .site_desc {
+        display: block;
+        width: 680px;
+        margin: 10px 0 10px 10px;
+        background-color: white;
+    }
+
+    .site_all_features {
+        display: block;
+        width: 680px;
+        background-color: white;
+        margin: 10px 0 10px 10px;
+    }
+
+    .site_all_features h2 {
+        margin: 5px 0 0 0;
+        color: white;
+        background: url(../images/bkg-tablehead-666x30.gif) no-repeat;
+        height: 30px;
+        padding: 7px 0 10px 10px;
+        width: 660px;
+    }
+
+    .site_features {
+        display: block;
+        float: left;
+        width: 340px;
+        height: 40px;
+        padding: 10px 0 0 10px;
+    }
+
+    .site_features img {
+        width: 20px;
+        height: 20px;
+        float: left;
+        padding-right:5px;
+    }
+
+    #featuresList ul {
+        -moz-border-radius:8px 8px 8px 8px;
+        border:1px solid #dfdfdf;
+        background-color:#fcfcfc;
+        background-image:url(../images/bkg-features-list.jpg);
+        background-position:center bottom;
+        border-radius:8px 8px 8px 8px;
+        background-repeat:repeat-x;
+        margin:0 17px 0 0;
+        overflow:hidden;
+        padding:0;
+        vertical-align:top;
+        width:204px;
+        display: inline-block;
+    }
+
+    #featuresList li {
+        background:url(../images/check-mark.png) no-repeat left center;
+        border-bottom: 1px solid #dfdfdf;
+        border-top: 1px solid #fff;
+        color:#333;
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:11px;
+        padding:10px 0 10px 45px;
+        list-style:none;
+        margin:0;
+    }
+
+    #featuresList li.safety {
+        background:url(../images/icon-safety-security.png) no-repeat left center;
+        border-bottom: 1px solid #dfdfdf;
+        border-top:none;
+        margin:0;
+        padding:10px 0 10px 45px;
+        vertical-align:middle;
+    }
+
+    .listHeader {
+        color:#134b98;
+        font-size:12px;
+        font-weight:bold;
+        margin: 0;
+    }
+
+    #featuresList li.convenience {
+        background:url(../images/icon-convenience.png) no-repeat left center;
+        border-bottom: 1px solid #dfdfdf;
+        border-top:none;
+        color:#134b98;
+        font-size:12px;
+        font-weight:bold;
+        margin:0;
+        padding:10px 0 10px 45px;
+        vertical-align:middle;
+    }
+
+    #featuresList li.amenities {
+        background:url(../images/icon-checkmark.png) no-repeat left center;
+        border-bottom: 1px solid #dfdfdf;
+        border-top:none;
+        color:#134b98;
+        font-size:12px;
+        font-weight:bold;
+        margin:0;
+        padding:10px 0 10px 45px;
+        vertical-align:middle;
+
+    }
+
+    #featuresList li.last {
+        border-bottom:none;
+        margin-bottom:10px;
+    }
+
+    #featuresList a {
+        color:#333;
+        text-decoration:none;
+    }
+
+    #featuresList a:hover {
+        color:#4595df;
+        text-decoration:underline;
+    }
+
+    .tabs {
+        padding: 0 0 0 12px;
+        list-style-type: none;
+        text-align: center;
+        height:30px;
+        border-bottom:1px solid #d3d3d3;
+    }
+
+    .tabs li {
+        display: inline;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tabs li a {
+        float:left;
+        font-size:13px;
+        display:block;
+        padding:5px 20px;
+        border:1px solid #d3d3d3;
+        border-bottom:0px;
+        height:18px;
+        background-color:#efffff;
+        text-decoration:none;
+        font-weight: bold;
+        color:#00008b;
+        margin-right:2px;
+        position:relative;
+        top:1px;
+        outline:0;
+        -moz-border-radius-topright: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -khtml-border-radius-top-right: 5px;
+        border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -khtml-border-radius-top-left: 5px;
+        border-top-left-radius: 5px;
+        -moz-box-shadow: 0px 0px 15px skyblue;
+        -webkit-box-shadow: 0px 0px 15px skyblue;
+        box-shadow: 0px 0px 15px skyblue;
+    }
+
+    .tabs li a:hover {
+        background-color:#90c0f0;
+    }
+
+    .tabs li a.current {
+        background-color:#fff;
+        border-bottom:1px solid #fff;
+        cursor:default;
+        -moz-box-shadow: 0px -5px 10px skyblue;
+        -webkit-box-shadow: 0px -5px 10px skyblue;
+        box-shadow: 0px -5px 10px skyblue;
+    }
+
+    .panes {
+        display: block;
+        width: 680px;
+        overflow: hidden;
+    }
+
+    .panes>div {
+        display:block;
+        border:1px solid #666;
+        border-width:0 0 0 0;
+        padding:10px 12px 0 0;
+        background-color:#fff;
+    }
+
+    .panes .main_pic {
+        display: block;
+        width: 240px;
+        height: 160px;
+        margin: 10px 0 10px 10px;
+    }
+
+    .panes .left_panes {
+        display: inline-block;
+        float: left;
+        width: 265px;
+    }
+
+    .panes .right_panes {
+        display: inline-block;
+        width: 350px;
+        padding-top: 10px;
+    }
+
+    .right_panes .yelp_icons {
+        width: inherit;
+        height: 30px;
+        display: block;
+        margin: 0 0 20px 0;
+        background-color: white;
+    }
+
+    .yelp_icons input, .yelp_icons a {
+        float: right;
+    }
+
+    .right_panes .overview_desc {
+        width: inherit;
+        display: block;
+    }
+
+    .stbutton {
+        float: right;
+        font-weight: bold;
+        padding-top: 3px;
+    }
+
+    .stbutton .chicklets {
+        color: #3EA307;
+    }
+
+    .printIcon {
+        background: url("../images/details_printIcon.png") no-repeat;
+        padding-right: 10px;
+        border: none;
+        font-weight: bold;
+        color: #3EA307;
+        cursor: pointer;
+    }
+
+    .printIcon:hover {
+        opacity: 0.6;
+    }
+
+    /*everything that is on the right of the page */
+    #right_panel {
+        display: block;
+        width: 300px;
+        background-color: white;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    .transaction {
+        display: block;
+        width: 280px;
+        margin: 10px 10px 0 0;
+    }
+
+    .sim_units {
+        display: block;
+        width: 300px;
+        background-color: white;
+        margin: 30px 0 0 0;
+    }
+
+    .sim_units #units {
+        display: block;
+        width: inherit;
+        padding: 10px 0 10px 0;
+    }
+
+    .sim_units .units_bottom {
+        display: block;
+        width: inherit;
+        height: 40px;
+    }
+
+    .separator {
+        height: 0;
+        clear: both;
+        width: 280px;
+        border-bottom: 1px solid #dfdfdf;
+        margin: 0 0 10px 0;
+    }
+
+    #units .unit {
+        display: block;
+        width: inherit;
+        height: 100px;
+    }
+
+    .unit img {
+        width: 80px;
+        height: 80px;
+        display: block;
+        float: left;
+        padding: 10px 10px 10px 0;
+    }
+
+    .unit .unit_text {
+        display: block;
+        float: left;
+        width: 210px;
+        height: 100px;
+        padding: 10px 0 0 0;
+    }
+
+    .transBox {
+        padding: 0;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 5px;
+        border:1px solid #dfdfdf;
+        background-color:#fcfcfc;
+        background-image:url("../images/bkg-features-list.jpg");
+        background-position: center bottom;
+        border-radius:8px;
+        background-repeat:repeat-x;
+        vertical-align:top;
+        box-shadow: 0 0 6px #888;
+    }
+
+    .transBox .price {
+        vertical-align: bottom;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .transBox .rent_reserve {
+        margin-top: 5px;
+    }
+
+    .transBox .rent_reserve h3 {
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    #rentme {
+        width: 260px;
+        height: 36px;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px 5px 10px;
+    }
+
+    .transBox .move_in {
+        width: 278px;
+        padding: 10px 0 10px 0;
+        background-color: #87F1F8;
+    }
+
+    .transDateHeader {
+        width: 80px;
+        display: inline-block;
+        font: 12px arial, verdana, helvetica, sans-serif;
+        font-weight: bold;
+        text-align: left;
+        padding: 0 0 5px 10px;
+    }
+
+    .paidThrough {
+        font: 12px arial, verdana, helvetica, sans-serif;
+        text-align: left;
+        padding: 0 0 5px 10px;
+        font-weight: bold;
+        color: #888888;
+        width: auto;
+        display: inline-block;
+    }
+
+    .move_in .calendar {
+        width: 25px;
+        float: right;
+        display: inline-block;
+    }
+
+    #calendarPic {
+        cursor: pointer;
+        width: 23px;
+        height: 19px;
+    }
+
+    .transDate {
+        display: inline-block;
+        float: right;
+        font: 12px arial, verdana, helvetica, sans-serif;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    .changeDate {
+        display: inline-block;
+        float: right;
+    }
+
+    .unit_size, .amenities, .compare_unit {
+        padding-top: 5px;
+        margin-left: 10px;
+    }
+
+    .unit_size h4 {
+        display: inline;
+    }
+
+    .transBox a {
+        float: right;
+        font-size: 10px;
+    }
+
+    .transPrice {
+        font: 18px arial, verdana, helvetica, sans-serif;
+        font-weight: bold;
+    }
+
+    .promos {
+        font-size: 14px;
+        color: #87ceeb;
+        margin-left: 10px;
+        padding-top: 10px;
+    }
+
+    .compare_unit {
+        font: 12px arial, verdana, helvetica, sans-serif;
+        font-weight: bold;
+        color: #00008b;
+        text-align: right;
+    }
+
+    .transTotalMoveIn {
+        margin-left: 30px;
+        font: 12px arial, verdana, helvetica, sans-serif;
+        font-weight: bold;
+    }
+
+    #totalMoveInCost {
+        float: right;
+        margin-right: 20px;
+    }
+
+    .transTotalMoveIn p {
+        font: 10px arial, verdana, helvetica, sans-serif;
+        margin-top: 2px;
+        padding-bottom: 15px;
+    }
+
+    .sim_units h1 {
+        font: 16px arial, verdana, helvetica, sans-serif;
+        font-weight: bold;
+        color: #00529B;
+    }
+
+    </style>
 </head>
 <body>
-<div id="site_info" class="left" style="margin-top: 26px;">
-  <g:render template="/siteInfo"/>
-</div>
-  <div id="detailInfo">
-<div style="margin-top:10px;">
-  <div class="returnLink right" style="padding: 0 0 0 0.5em;">
-    <g:link controller="home" action="index">
-      New Search
-    </g:link>
-  </div>
-  <div class="returnLink right">|</div>
-  <div class="returnLink right" style="padding: 0 0.5em;">
-    <a href="#" onClick="window.history.back();
-    return false;">
-      Back to Search Results
-    </a>
-  </div>
-</div>
-
-<div id="transaction">
-  <g:render template="/transaction"/>
-</div>
-
-<div id="detail_tabs" style="width:650px;">
-  <ul>
-    <li><a href="#tab_summary">Description</a></li>
-    <li><a href="#tab_photos">Photos</a></li>
-    <li><a href="#tab_directions">Map &amp; Directions</a></li>
-    <g:if test="${video}">
-      <li><a href="#tab_video">Video</a></li>
-    </g:if>
-  </ul>
-  <div id="tab_summary">
-    <div class="left">
-      <g:if test="${site.coverImage()}">
-        <div class="left">
-          <img src="${resource(file: site.coverImage().mid())}" width="320" height="240" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
+    <div class="the_page">
+    <div id="left_panel">
+        <div class="site_logo">
+            <g:render template="/siteInfo"/>
         </div>
-      </g:if>
-      <p style="margin: 0;">
-      <h2 class="descriptionTitle">${site.title}</h2>
-    </p>
-      <p style="margin: 0;">
-        ${site.address}${site.address2 && site.address2.size() > 0 ? '&nbsp;' + site.address2 : ''}, ${site.city}, ${site.state.display} ${site.zipcode}
-      </p>
-      <div class="descriptionText" style="margin: 18px">
-        ${site.description}
-      </div>
-      <div style="clear:both;"></div>
-      <div id="featuresList">
-        <ul>
-          <li class="safety"><h3 class="listHeader">Safety/Security</h3></li>
-          <g:each in="${site.securityItems}" status="i" var="item">
-            <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
-          </g:each>
-        </ul>
-        <ul>
-          <li class="convenience"><h3 class="listHeader">Convenience</h3></li>
-          <g:each in="${site.convenienceItems}" status="i" var="item">
-            <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
-          </g:each>
-        </ul>
-        <ul>
-          <li class="amenities"><h3 class="listHeader">Amenities</h3></li>
-          <g:each in="${site.amenityItems}" status="i" var="item">
-            <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
-          </g:each>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div id="tab_photos" style="width:650px;">
-    <div style="margin-bottom:7px;">
-      <h2 class="section_header">Images for ${site.title}</h2>
-    </div>
-    <div style="margin:auto;">
-      <g:if test="${site.siteImages().size() > 0}">
-        <ul id="galleryView">
-          <g:each var="siteImg" in="${site.siteImages()}" status="i">
-            <li>
-              <img width="60" height="40" src="${resource(file: siteImg.thumbnail())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.display}"/>
-              <div class="panel-content">
-                <img src="${resource(file: siteImg.src())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.display}"/>
-              </div>
-            </li>
-          </g:each>
-        </ul>
-      </g:if>
-      <g:else>
-        <storitz:image src="placeholder.jpg" width="320" height="240" style="margin-left:155px;" alt="place holder"/>
-      </g:else>
-    </div>
-  </div>
-  <div id="tab_directions">
-    <div style="margin-bottom:7px;">
-      <h2 class="section_header">Map and Directions for ${site.title}</h2>
-    </div>
-    <g:render template="/directions"/>
-  </div>
-  <g:if test="${video}">
-    <div id="tab_video">
-   <h2 class="section_header">${video.title}</h2>
-    <h3>${video.releaseDate.format('MM-dd-yyyy')}</h3>
+        <div class="site_desc">
+            <!-- the tabs -->
+            <ul class="tabs">
+                <li><a class="current" href="#tab_overview">Overview</a></li>
+                <li><a class="current" href="#tab_allunits">All Units</a></li>
+                <li><a class="current" href="#tab_video">Video</a></li>
+                <li><a class="current" href="#tab_maphours">Map &amp; Hours</a></li>
+                <li><a class="current" href="#tab_reviews">Reviews</a></li>
+                <li><a class="current" href="#tab_auctions">Auctions</a></li>
+            </ul>
+            <!-- the panes -->
+            <div class="panes">
+                <div>  <!-- first tab -->
 
-    <p>
-    <div>
-      <div id="videoContainer"></div>
-    </div>
-    <p:dependantJavascript>
-      <script type="text/javascript">
-        jwplayer("videoContainer").setup({
-          flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-          file: "${resource(file:video.fileLocation)}",
-          image: "${resource(file:video.stillImage)}",
-          height: 480,
-          width: 640
-        });
-      </script>
-    </p:dependantJavascript>
-    </p>
-    <div>
-      ${video.caption}
-    </div>
-    <div class="buttons" style="margin-bottom: 0.5em;">
-      <span class="button"><a href="#" class="embed">Embed</a></span>
-      <div id="embed" style="display:none;margin:10px 0;">
-        To embed this video, cut and paste the code from the box and place it in your page:
-        <textarea style="width:600px; height:75px;"><video id="storitzvid" width="640" height="480" src="${resource(absolute: true, file: video.fileLocation)}" poster="${resource(absolute: true, file: video.stillImage)}" controls="controls"></video><script type="text/javascript" src="${resource(absolute: true, file: '/jwplayer/jwplayer.js')}"></script><script type="text/javascript">jwplayer("storitzvid").setup({flashplayer: "${resource(absolute:true, file:'/jwplayer/player.swf')}"});</script></textarea>
-      </div>
-    </div>
-    <!-- AddThis Button BEGIN -->
-    <div class="addthis_toolbox addthis_default_style ">
-      <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4d11385a59ec26da" class="addthis_button_compact">Share</a>
-      <span class="addthis_separator">|</span>
-      <a class="addthis_button_preferred_1"></a>
-      <a class="addthis_button_preferred_2"></a>
-      <a class="addthis_button_preferred_3"></a>
-      <a class="addthis_button_preferred_4"></a>
-    </div>
-    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4d11385a59ec26da"></script>
-    <!-- AddThis Button END -->
-    <p>
-      <span style="font-weight:bold;">Tags:</span>${video.tags}
-    </p>
-
-    </div>
-  </g:if>
-</div>
-<div style="clear:both;height:20px;"></div>
-<g:if test="${propertyOperatorList?.size()>0}">
-  <div class="wideTextbox">
-    <div><h3>Other facilities in the state from this operator:</h3></div>
-    <g:each var="psite" in="${propertyOperatorList}">
-      <div class="left" style="width:310px;">
-        <g:link mapping="siteLink2" params="[site_title:psite.title.replaceAll(' - ','-').replaceAll(' ','-'), id:psite.id]">${psite.title}</g:link>
-      </div>
-    </g:each>
-    <div style="clear:both;"></div>
-  </div>
-</g:if>
-</div>
-
-<div id="rentalForm" style="display: none;">
-<g:form action="save" controller="rentalTransaction" method="post" useToken="true" name="rentalTransaction" id="${rentalTransactionInstance?.id}">
-
-  <div>
-    <input type="hidden" name="unitId" id="unitId" value="${rentalTransactionInstance ? rentalTransactionInstance.unitId : unitId}"/>
-    <input type="hidden" name="promoId" id="promoId" value="${rentalTransactionInstance?.promoId}"/>
-    <input type="hidden" name="insuranceId" id="insuranceId" value="${rentalTransactionInstance?.insuranceId}"/>
-    <input type="hidden" name="site" value="${rentalTransactionInstance ? rentalTransactionInstance.site.id : params.id}"/>
-    <input type="hidden" name="moveInDate" id="moveInDate" value="${rentalTransactionInstance?.moveInDate}"/>
-    <input type="hidden" name="chosenType" id="chosenType" value="${unitType ? unitType : rentalTransactionInstance?.unitType}"/>
-    <input type="hidden" name="searchSize" id="searchSize" value="${searchSize ? searchSize : rentalTransactionInstance?.searchSize}"/>
-
-    <input style="display:none" type="text" name="SC_searchSize" id="SC_searchSize" value="${params.size}"/>
-    <input style="display:none" type="text" name="SC_address" id="SC_address" value="${params.address}"/>
-    <input style="display:none" type="text" name="SC_date" id="SC_date" value="${params.date}"/>
-    <input style="display:none" type="text" name="SC_page" id="SC_page" value="detail"/>
-    <input style="display:none" type="text" name="SC_searchType" id="SC_searchType" value="${params.searchType}"/>
-  </div>
-
-  <div class="vert_text" style="margin-top:10px;">
-    <span id="step1_bullet" class="bullet">&#8226;</span><span id="step1" class="step_header_hi">Renter Information</span>
-    <span id="step2_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step2" class="step_header">Payment</span>
-    <span id="step3_bullet" class="bullet" style="display: none;">&#8226;</span><span id="step3" class="step_header">Order Complete</span>
-  </div>
-
-  <!-- Renter Information -->
-  <div id="primary_contact">
-    <div class="price_options checkout_header white">
-      Renter Information
-    </div>
-    <div id="errorMessage" class="formErrors">
-      <div id="errorInfo" class="errorInfo"></div>
-      <div id="errorList" class="errorList"></div>
-    </div>
-    <div class="formInstructions">
-      Information collected is for purposes of completing the Storage Rental Agreement, and will not be used for any other purpose except as described in our <a href="${createLink(controller: 'static', action: 'privacy')}" onclick="window.open(this.href, '_blank');
-    return false;">Privacy Policy</a>
-    </div>
-    <div class="checkout_section_header">
-      Name
-    </div>
-    <div class="checkout_fields">
-      <input type="hidden" name="contactPrimary.id" value="${rentalTransactionInstance?.contactPrimary?.id}"/>
-      <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.firstName', 'errors')}">
-        <g:textField id="contactPrimary.firstName" name="contactPrimary.firstName" style="width: 180px;" class="required" value="${rentalTransactionInstance?.contactPrimary?.firstName}"/>
-      </div>
-      <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.lastName', 'errors')}">
-        <g:textField id="contactPrimary.lastName" name="contactPrimary.lastName" style="width: 180px;" class="required" value="${rentalTransactionInstance?.contactPrimary?.lastName}"/>
-      </div>
-      <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.suffixName', 'errors')}">
-        <g:textField id="contactPrimary.suffixName" name="contactPrimary.suffixName" style="width: 80px;" class="ignore" value="${rentalTransactionInstance?.contactPrimary?.suffixName}"/>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_labels">
-      <div class="checkout_name" style="width:200px;">
-        <label for="contactPrimary.firstName">First Name</label>
-      </div>
-      <div class="checkout_name" style="width:200px;">
-        <label for="contactPrimary.lastName">Last Name</label>
-      </div>
-      <div class="checkout_name" style="width:100px;">
-        <label for="contactPrimary.suffixName">Suffix</label>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_section_header">
-      Address
-    </div>
-    <div class="checkout_fields">
-      <div style="width:315px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address1', 'errors')}">
-        <g:textField name="contactPrimary.address1" id="contactPrimary.address1" class="required" style="width:295px;" value="${rentalTransactionInstance?.contactPrimary?.address1}"/>
-      </div>
-      <div style="width:315px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.address2', 'errors')}">
-        <g:textField name="contactPrimary.address2" id="contactPrimary.address2" style="width:295px;" class="ignore" value="${rentalTransactionInstance?.contactPrimary?.address2}"/>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_labels">
-      <div style="width:315px;" class="checkout_name">
-        <label for="contactPrimary.address1">Address line 1</label>
-      </div>
-      <div style="width:315px;" class="checkout_name">
-        <label for="contactPrimary.address2">Address line 2</label>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_fields">
-      <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.city', 'errors')}">
-        <g:textField name="contactPrimary.city" id="contactPrimary.city" class="required" style="width:180px;" value="${rentalTransactionInstance?.contactPrimary?.city}"/>
-      </div>
-      <div id="primaryStateField" style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.state', 'errors')}">
-        <g:select name="contactPrimary.state" id="contactPrimary.state" class="state" style="width:80px;" from="${storitz.constants.State.list()}" value="${rentalTransactionInstance?.contactPrimary?.state}" optionValue="value"/>
-      </div>
-      <div style="width: 120px;display: none;" id="primaryProvinceField" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.province', 'errors')}">
-        <g:textField name="contactPrimary.province" id="contactPrimary.province" class="province" style="width:100px;" value="${rentalTransactionInstance?.contactPrimary?.province}"/>
-      </div>
-      <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.zipcode', 'errors')}">
-        <g:textField name="contactPrimary.zipcode" id="contactPrimary.zipcode" class="required zipcode" style="width:80px;" value="${rentalTransactionInstance?.contactPrimary?.zipcode}"/>
-      </div>
-      <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.country', 'errors')}">
-        <g:select name="contactPrimary.country" id="contactPrimary-country" style="width:180px;" class="country" from="${storitz.constants.Country.list()}" value="${rentalTransactionInstance?.contactPrimary?.country?.key}" optionKey="key" optionValue="display"/>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_labels">
-      <div style="width:200px;" class="checkout_name">
-        <label for="contactPrimary.city">City</label>
-      </div>
-      <div style="width:100px;" id="primaryStateLabel" class="checkout_name">
-        <label for="contactPrimary.state">State</label>
-      </div>
-      <div style="width: 120px;display: none;" id="primaryProvinceLabel" class="checkout_name">
-        <label for="contactPrimary.province">Province</label>
-      </div>
-      <div style="width:100px;" class="checkout_name">
-        <label for="contactPrimary.zipcode">Postal Code</label>
-      </div>
-      <div style="width:200px;" class="checkout_name">
-        <label for="contactPrimary.country">Country</label>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div style="height: 10px;"></div>
-    <div class="checkout_section_header">
-      Phone / Email
-    </div>
-    <div class="checkout_fields">
-      <div style="width:100px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.phoneType', 'errors')}">
-        <g:select name="contactPrimary.phoneType" id="contactPrimary.phoneType" style="width:80px;" from="${storitz.constants.PhoneType.list()}" value="${rentalTransactionInstance?.contactPrimary?.phoneType}" optionValue="value"/>
-      </div>
-      <div style="width:200px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.phone', 'errors')}">
-        <g:textField name="contactPrimary.phone" id="contactPrimary.phone" class="required phone" style="width:180px;" value="${rentalTransactionInstance?.contactPrimary?.phone}"/>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_labels">
-      <div style="width:100px;" class="checkout_name">
-        <label for="contactPrimary.phoneType">Phone Type</label>
-      </div>
-      <div style="width:200px;" class="checkout_name">
-        <label for="contactPrimary.phone">Phone Number (XXX-XXX-XXXX)</label>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_fields">
-      <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
-        <g:textField name="contactPrimary.email" id="contactPrimary-email" class="required email" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}"/>
-      </div>
-      <div style="width:300px;" class="checkout_value ${hasErrors(bean: rentalTransactionInstance, field: 'contactPrimary.email', 'errors')}">
-        <g:textField name="contactPrimary.emailRepeat" id="contactPrimary.emailRepeat" style="width:280px;" value="${rentalTransactionInstance?.contactPrimary?.email}"/>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="checkout_labels">
-      <div style="width:300px;" class="checkout_name">
-        <label for="contactPrimary-email">Email</label>
-      </div>
-      <div style="width:300px;" class="checkout_name">
-        <label for="contactPrimary.emailRepeat">Confirm Email</label>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div style="height: 10px;"></div>
-    <div class="checkout_section_header">
-      Rental Use
-    </div>
-    <div class="checkout_fields">
-      <div id="rentalUse" class="validate-one-radio value ${hasErrors(bean: rentalTransactionInstance, field: 'rentalUse', 'errors')}">
-        <g:radioGroup name="rentalUse" labels="${storitz.constants.RentalUse.labels()}" values="${storitz.constants.RentalUse.list()}" value="${rentalTransactionInstance?.rentalUse}">
-          <div class="left" style="width:200px;">${it.radio} ${it.label}</div>
-        </g:radioGroup>
-        <div style="clear:both;"></div>
-      </div>
-    </div>
-    <div style="height: 10px;"></div>
-    <div class="checkout_section_header">
-      Active Military
-    </div>
-    <div class="formInstructions">
-      Section 307 of the <a href="${resource(file: '/SCRA Section 307.pdf')}" onclick="window.open(this.href, '_blank');
-    return false;">Servicemembers Civil Relief Act</a> protects servicemembers currently serving or 90 days removed from a period of active duty against lien auctions on their property. Checking this box will protect your rights as a servicemember.
-    </div>
-    <div class="checkout_fields">
-      <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'activeMilitary', 'errors')}">
-        <div class="left"><g:checkBox name="activeMilitary" value="${rentalTransactionInstance?.activeMilitary}"/></div><div class="checkBoxText">I am servicemember in the US Armed Forces and on a period of active duty</div>
-        <div style="clear:both;"></div>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    <div style="height: 10px;"></div>
-    <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}">
-      <div class="checkout_section_header">
-        Free Truck
-      </div>
-      <div class="checkout_fields">
-        <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'reserveTruck', 'errors')}">
-          <div class="left"><g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransactionInstance?.reserveTruck}"/></div><div class="checkBoxText">Reserve Free Truck for this move in</div>
-          <div style="clear:both;"></div>
+                    <div class="left_panes"> <!-- more elems inside this div -->
+                    <g:if test="${site.coverImage()}">
+                      <img class="main_pic" src="${resource(file: site.coverImage().mid())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
+                    </g:if>
+                    </div>
+                    <div class="right_panes"> <!-- icons and description here -->
+                        <div class="yelp_icons">
+                            <span  class='st_email' displayText='Share'></span>
+                            <input type="button" class="printIcon" value="    Print" onclick="window.print()" />
+                        </div>
+                        <div class="overview_desc">
+                            <p>${site.description}</p>
+                        </div>
+                    </div>
+                    <a name="tab_overview">&nbsp;</a>
+                </div>
+                <div><a name="tab_allunits">&nbsp;</a><!-- second tab-->blah blah blah blah blah</div>
+                <div><a name="tab_video">&nbsp;</a><!-- third tab-->blah blah blah blah blah</div>
+                <div><a name="tab_maphours">&nbsp;</a><!-- fourth tab-->blah blah blah blah blah</div>
+                <div><a name="tab_reviews">&nbsp;</a><!-- fifth tab-->blah blah blah blah blah</div>
+                <div><a name="tab_auctions">&nbsp;</a><!-- sixth tab-->blah blah blah blah blah</div>
+            </div>
         </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div style="height: 10px;"></div>
-    </g:if>
-    <g:elseif test="${site.freeTruck == storitz.constants.TruckType.RENTAL}">
-      <div class="checkout_section_header">
-        Rental Truck
-      </div>
-      <div class="checkout_fields">
-        <div class="value ${hasErrors(bean: rentalTransactionInstance, field: 'reserveTruck', 'errors')}">
-          <div class="left"><g:checkBox name="reserveTruck" id="reserveTruck" value="${rentalTransactionInstance?.reserveTruck}"/></div><div class="checkBoxText">Reserve Rental Truck for this move in</div>
-          <div style="clear:both;"></div>
+        <div class="site_all_features">
+            <h2>Site Features</h2>
+            <div id="featuresList">
+                <ul>
+                  <li class="safety"><h3 class="listHeader">Safety/Security</h3></li>
+                  <g:each in="${site.securityItems}" status="i" var="item">
+                    <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
+                  </g:each>
+                </ul>
+                <ul>
+                  <li class="convenience"><h3 class="listHeader">Convenience</h3></li>
+                  <g:each in="${site.convenienceItems}" status="i" var="item">
+                    <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
+                  </g:each>
+                </ul>
+                <ul>
+                  <li class="amenities"><h3 class="listHeader">Amenities</h3></li>
+                  <g:each in="${site.amenityItems}" status="i" var="item">
+                    <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
+                  </g:each>
+                </ul>
+            </div>
         </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div style="height: 20px;"></div>
-    </g:elseif>
-    <div class="checkout_section_header">
-      Terms
     </div>
-    <div class="checkout_fields">
-      <textarea style="width:610px; height: 50px;" name="termText">
-        Storage property owner does not carry insurance to cover the loss or damage of your items. Your existing Homeowner’s Insurance or Renter’s Insurance may cover items you keep in storage. Alternatively, you may select (are required to select) the level of monthly insurance coverage that you may pay for as part of your monthly rent.
-        By Checking Here, I acknowledge that I am responsible for damage or loss to my goods while stored at Storage Property
-        By checking here, I agree to not store hazardous items according to Federal Code, which includes but is not limited to Tires, Oil, Gasoline or Flammables, Paints, Environmental or Toxic Waste and Perishable Food.
-      </textarea>
-      <div id="termsHolder" style="margin-top:7px;" class="${hasErrors(bean: rentalTransactionInstance, field: 'terms', 'errors')}">
-        <div class="left">
-          <g:checkBox name="terms" id="terms" class="required" value="${rentalTransactionInstance?.terms}"/></div><div class="checkBoxText">I agree to the <a href="${createLink(controller: 'static', action: 'terms')}" onclick="window.open(this.href, '_blank');
-      return false;">Storitz Inc. Terms of Use</a>
-        <g:if test="${site.rentalAgreement}">
-          and the <a href="${resource(file: site.rentalAgreement.src())}" onclick="window.open(this.href, '_blank');
-        return false;">${site.feed.operatorName} Terms and Conditions</a>
-        </g:if>
-      </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div style="clear:both;"></div>
+    <div id="right_panel">
+        <div class="transaction">
+            <g:render template="/transaction"/>
+        </div>
+        <div class="sim_units">
+            <h1>Similar Units in your Area</h1>
+            <div id="units">
+                <div class="separator"></div>
+                <div class="unit">
+                    <img src="#" />
+                    <div class="unit_text">
+                        <h2>Pacoima - Glen Oaks Blvd</h2>
+                        <h2>$79.00/mo.</h2>
+                        <p>5.8 miles from this facility</p>
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <div class="unit">
+                    <img src="#" />
+                    <div class="unit_text">
+                        <h2>Pacoima - Glen Oaks Blvd</h2>
+                        <h2>$79.00/mo.</h2>
+                        <p>5.8 miles from this facility</p>
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <div class="unit">
+                    <img src="#" />
+                    <div class="unit_text">
+                        <h2>Pacoima - Glen Oaks Blvd</h2>
+                        <h2>$79.00/mo.</h2>
+                        <p>5.8 miles from this facility</p>
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <div class="unit">
+                    <img src="#" />
+                    <div class="unit_text">
+                        <h2>Pacoima - Glen Oaks Blvd</h2>
+                        <h2>$79.00/mo.</h2>
+                        <p>5.8 miles from this facility</p>
+                    </div>
+                </div>
+                <div class="separator"></div>
+            </div>
+            <div class="units_bottom">
+                <a href="#">View More...</a>
+                <input type="button" value="Compare" />
+            </div>
+        </div>
     </div>
-    <sec:ifAnyGranted roles="ROLE_CALLCENTER">
-      <div class="checkout_section_header">
-        Call Center Notes
-      </div>
-      <div class="checkout_fields">
-        <div style="width:100px;" class="checkout_value">
-          <g:textField name="operatorInitials" id="operatorInitials" style="width:80px;" value="${operatorInitials}"/>
-        </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div class="checkout_labels">
-        <div style="width:100px;" class="checkout_name">
-          <label for="operatorInitials">Operator Initials</label>
-        </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div class="checkout_fields">
-        <div style="width:500px;" class="checkout_value">
-          <g:textArea name="operatorNote" id="operatorNote" cols="40" rows="5" style="width:480px;">${operatorNote}</g:textArea>
-        </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div class="checkout_labels">
-        <div style="width:500px;" class="checkout_name">
-          <label for="operatorNote">Operator Note</label>
-        </div>
-        <div style="clear:both;"></div>
-      </div>
-    </sec:ifAnyGranted>
-    <div style="margin-top: 20px;">
-      <div class="left"><p:inputImage style="width:108px;height:36px;border:none;" src="btn-previous2.png" onclick="leave_form(); return false" alt="Back"/></div>
-      <div class="right">
-        <g:if test="${site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0}">
-          <p:inputImage style="width:108px;height:36px;border:none;" src="btn-reserve-108x36.png" alt="Reserve"/>
-        </g:if>
-        <g:else>
-          <p:inputImage style="width:108px;height:36px;border:none;" src="btn-next2.png" alt="Next"/>
-        </g:else>
-      </div>
-      <div style="clear:both;"></div>
     </div>
-  </div>
+        <p:dependantJavascript>
+            <script type="text/javascript">var switchTo5x=true;</script>
+            <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+            <script type="text/javascript">stLight.options({publisher:'fcffc560-5a11-434a-b976-a60a57d870ed'});</script>
+            <script type="text/javascript">
+            $(document).ready(function() {
+                $("ul.tabs").tabs("div.panes > div");
 
-</g:form>
-</div>
-<div id="helpDeskStatus">STATUS</div>
+                var left = $("#left_panel").height();
+                var right = $("#right_panel").height();
+                var max_height = Math.max(left, right);
+
+                $(".the_page").height(max_height);
+
+                //browser specifics for IE
+                if ($.browser.msie) {
+                    $("#featuresList ul").css("float", "left");
+
+                    $("#rentme").css("margin-left", "10px");
+                }
+            });
+            </script>
+        </p:dependantJavascript>
 </body>
-<p:renderDependantJavascript/>
 </html>
