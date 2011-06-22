@@ -416,15 +416,22 @@ body.state_directory td a {
   text-decoration: none;
 }
 
-/*CSS for static/aboutus page*/
-body.about_us .right h1 {
+/*CSS for static pages*/
+body.static .right {
+    width: 665px;
+    margin-right: 35px;
+    position: relative;
+    left: 160px;
+}
+
+body.static .right h1 {
   color: #006DBA;
   font-weight: normal;
   font-size: 16px;
   margin: .8em 0 13px 0;
 }
 
-body.about_us .search{
+body.static .search{
     display: inline-block;
     vertical-align: top;
     position: relative;
@@ -433,23 +440,18 @@ body.about_us .search{
     left: 160px;
 }
 
-body.about_us .right {
-    width: 650px;
-    margin-right: 35px;
-    position: relative;
-    left: 160px;
-}
-
 .right h2 {
+  display: block;
   font-weight: bold;
   font-size: 14px;
+  margin-top: 10px;
 }
 
 .right p {
   padding-bottom: 13px;
 }
 
-.right ul.feat-list {
+.right ul {
   list-style-type: disc;
   padding-left: 15px;
 }
@@ -467,11 +469,81 @@ body.about_us .right {
   font-weight: bold;
 }
 
+.right .faqQuestion {
+  font: 12px verdana,arial,helvetica,sans-serif;
+  font-weight: bold;
+}
+
+.right .faqAnswer {
+  font: 12px verdana,arial,helvetica,sans-serif;
+  margin-bottom: 1em;
+}
+
+.right .legalHeader {
+  font-weight: bold;
+}
+
+.right .supports-images {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.right .nodot {
+  list-style: none;
+}
+
+.collegerebate h1 {
+  height: 50px;
+  font-size: 20pt;
+}
+
+.collegerebate table {
+  border-style:none;
+  width: 800px;
+  border: 1px;
+}
+
+.collegerebate tr {
+  height: 100px;
+}
+
+.collegerebate td.question {
+  vertical-align: top;
+  text-align: right;
+  border-style: dotted;
+  font-weight: bold;
+  width: 200px;
+}
+
+.collegerebate td.answer {
+  width: 600px;
+}
+
+.collegerebate p.address {
+  font-weight: bold;
+  font-size: larger;
+}
+
+body.operatorsignup form input,
+body.operatorsignup form label,
+body.operatorsignup form fieldset {
+    display:block;
+}
+body.operatorsignup form input,
+body.operatorsignup form fieldset {
+    margin-bottom: 10px;
+}
+select#softwareType,
+input#otherSoftware {
+    display: inline-block;
+    float:left;
+}
+
 /* ------------------------------------------------------------------------------------- */
 /* HEADER & FOOTER */
 
 h1.storitz-logo {
-  display: block;
+  display: inline-block;
   width: 160px;
   height: 60px;
   text-indent: -9999px;
@@ -504,8 +576,8 @@ h1.storitz-logo a {
   position: relative;
   margin-left: 36px;
   margin-top: 5px;
-  /*left: 210px;*/
-  /*top: 4px;*/
+  left: 0px;
+  top: 0px;
 }
 #header form.search label {
   font-family: Verdana;
