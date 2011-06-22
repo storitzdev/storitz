@@ -650,7 +650,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def reSeMailMessage  = res.get("EMailMessage")
 
       if (resSuccess) {
-        trans.idNumber = "cust:${resCustomerID},unit:${resUnitID}"
+        trans.idNumber = "${resCustomerID}-${resUnitID}"
         trans.save(flush:true)
       }
       // Failed move-in!
