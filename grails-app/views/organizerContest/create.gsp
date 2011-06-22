@@ -158,7 +158,7 @@
                     <div class="message">${flash.message}</div>
                 </g:if>
 
-                <h1 class="bold">Get a head start on spring cleaning with <span class="organizerPink">3 months of free storage</span> from storitz.com.</h1>
+                <h1 class="bold">Get a handle on your summer situation with <span class="organizerPink">3 months of free storage</span> from storitz.com.</h1>
 
                 <p>Plus, since moving into storage can be a messy process, you'll get a day with a Professional Organizer who will help you sort, organize and declutter your space.</p>
 
