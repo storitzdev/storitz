@@ -110,7 +110,7 @@ class BalkNotificationJob {
       emailService.sendTextEmail (
           to:      trans.contactPrimary.email,
           from:    "gsingletary@storitz.com",
-          subject: "Thank you for visiting Storitz!",
+          subject: "Thanks for visiting Storitz!",
           body: body.toString()
       )
     } catch (Throwable t) {
