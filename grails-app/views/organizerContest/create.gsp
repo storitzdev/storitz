@@ -116,7 +116,7 @@
                 </g:if>
                 <g:else>
                     <p><strong>Thanks for Entering for a chance to win a day of organization with Justin Klosky!</strong></p>
-                    <p>Be sure to check back on [date tbd] when we announce our finalists!</p>
+                    <p>Be sure to check back on July 31<sup>st</sup> 2011 when we announce our finalists!</p>
                     <p>In the meantime, share the contest with your friends using the link below:</p>
                     <p><g:link controller="organizerContest" action="create">${ConfigurationHolder.config.grails.serverURL}/organizer</g:link></p>
                 </g:else>
