@@ -69,6 +69,12 @@ environments {
       jndiName = "java:comp/env/jdbc/storitz"
     }
   }
+  next {
+    dataSource {
+      dbCreate = "update"
+      jndiName = "java:comp/env/jdbc/storitz"
+    }
+  }
   production_script {
     dataSource {
       dbCreate = "update"

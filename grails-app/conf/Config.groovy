@@ -54,6 +54,15 @@ environments {
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = true
   }
+  next {
+    grails.serverURL = "http://next.storitz.com"
+    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT" // DOES THIS MATTER?
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.google.signatureRequired = true
+  }
   // For production_script, the given port is unimportant, as long as it does not conflict with the actual port value.
   // We'll also turn off the public server url and set the Google signatureRequired to false.
   production_script {
