@@ -354,7 +354,7 @@
     </div>
 
 
-    <g:render template="/footer_no_analytics"/>
+    <g:render template="/footer"/>
 </div>
 </body>
 <p:renderDependantJavascript/>
