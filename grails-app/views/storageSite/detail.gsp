@@ -46,16 +46,13 @@
         display: block;
         width: 420px;
         padding: 20px 0 0 10px;
-        font: 11px arial, verdana, helvetica, sans-serif;
-        font-weight: bold;
+        font-size: 10px;
     }
 
     .site_logo h1.title {
         display: block;
-        font-size: 18px;
+        font-size: 14px;
         margin-bottom: 5px;
-        color: #00529B;
-        font-family: arial, verdana, helvetica, sans-serif;
     }
 
     .site_desc {
@@ -63,11 +60,6 @@
         width: 680px;
         margin: 10px 0 10px 10px;
         background-color: white;
-    }
-
-    .site_desc p {
-        font-family: arial, verdana, helvetica, sans-serif;
-        font-size: 13px;
     }
 
     .site_all_features {
@@ -84,7 +76,6 @@
         height: 30px;
         padding: 7px 0 10px 10px;
         width: 660px;
-        font-family: verdana, arial, helvetica, sans-serif;
     }
 
     .site_features {
@@ -140,8 +131,7 @@
     }
 
     .listHeader {
-        color:#00529B;
-        font-family: verdana, arial, helvetica, sans-serif;
+        color:#134b98;
         font-size:12px;
         font-weight:bold;
         margin: 0;
@@ -180,8 +170,6 @@
     #featuresList a {
         color:#333;
         text-decoration:none;
-        font-family: Arial, verdana, helvetica, sans-serif;
-        font-weight: bold;
     }
 
     #featuresList a:hover {
@@ -206,7 +194,6 @@
     .tabs li a {
         float:left;
         font-size:13px;
-        font-family: verdana, arial, helvetica, sans-serif;
         display:block;
         padding:5px 20px;
         border:1px solid #d3d3d3;
@@ -215,7 +202,7 @@
         background-color:#efffff;
         text-decoration:none;
         font-weight: bold;
-        color:#00529B;
+        color:#00008b;
         margin-right:2px;
         position:relative;
         top:1px;
@@ -282,37 +269,13 @@
     .right_panes .yelp_icons {
         width: inherit;
         height: 30px;
-        display: inline-block;
+        display: block;
         margin: 0 0 20px 0;
         background-color: white;
     }
 
     .yelp_icons input, .yelp_icons a {
         float: right;
-        display: inline-block;
-    }
-
-    .yelp_icons .icons {
-        display: inline-block;
-        width: 140px;
-        height: 20px;
-        float: right;
-    }
-
-    .icons #print_button {
-        background: url("../images/print-icon-15x13.png") no-repeat;
-        width: 33px;
-        height: 20px;
-        padding: 0 8px 0 22px;
-        font: 12px Arial, Verdana, Helvetica, sans-serif;
-        font-weight: bold;
-        text-decoration: none;
-        color: #00529B;
-    }
-
-    #print_button:hover {
-        opacity: 0.7;
-        filter: alpha(opacity=70);
     }
 
     .right_panes .overview_desc {
@@ -323,20 +286,24 @@
     .stbutton {
         float: right;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 3px;
     }
 
-    .icons .stbutton .email {
-        background-position: 0 20px;
-        background: url("../images/email-icon-13x10.png") no-repeat;
+    .stbutton .chicklets {
+        color: #3EA307;
     }
 
-    .icons .stbutton .chicklets {
-        color: #00529B;
-        padding-left: 20px;
-        line-height: 10px;
-        font-family: arial, verdana, helvetica, sans-serif;
-        font-size: 12px;
+    .printIcon {
+        background: url("../images/details_printIcon.png") no-repeat;
+        padding-right: 10px;
+        border: none;
+        font-weight: bold;
+        color: #3EA307;
+        cursor: pointer;
+    }
+
+    .printIcon:hover {
+        opacity: 0.6;
     }
 
     /*everything that is on the right of the page */
@@ -402,23 +369,6 @@
         width: 210px;
         height: 100px;
         padding: 10px 0 0 0;
-        font-family: arial;
-        font-weight: bold;
-    }
-
-    .unit_text h2 {
-        font-family: arial;
-        font-weight: bold;
-        color: #00529B;
-        margin-bottom:5px;
-        font-size: 14px;
-    }
-
-    .unit_text h3 {
-        font-family: arial;
-        font-weight: bold;
-        display: inline;
-        font-size: 14px;
     }
 
     .transBox {
@@ -448,10 +398,6 @@
     .transBox .rent_reserve h3 {
         text-align: center;
         padding-bottom: 10px;
-        color: green;
-        font-weight: bold;
-        font-family: arial;
-        font-size: 11px;
     }
 
     #rentme {
@@ -463,9 +409,8 @@
     }
 
     .transBox .move_in {
-        width: 263px;
-        height: 40px;
-        padding: 22px 15px 10px 0;
+        width: 278px;
+        padding: 10px 0 10px 0;
         background-color: #87F1F8;
     }
 
@@ -481,9 +426,10 @@
     .paidThrough {
         font: 12px arial, verdana, helvetica, sans-serif;
         text-align: left;
-        padding: 8px 0 5px 0;
+        padding: 0 0 5px 10px;
         font-weight: bold;
         color: #888888;
+        width: auto;
         display: inline-block;
     }
 
@@ -491,7 +437,6 @@
         width: 25px;
         float: right;
         display: inline-block;
-        margin-top: -2px;
     }
 
     #calendarPic {
@@ -503,7 +448,7 @@
     .transDate {
         display: inline-block;
         float: right;
-        font: 12px  arial, verdana, helvetica, sans-serif;
+        font: 12px arial, verdana, helvetica, sans-serif;
         font-weight: bold;
         text-align: right;
     }
@@ -513,36 +458,13 @@
         float: right;
     }
 
-    .changeDate a {
-        font-family: helvetica;
-        color: #00529B;
-    }
-
     .unit_size, .amenities, .compare_unit {
-        padding-top: 12px;
+        padding-top: 5px;
         margin-left: 10px;
-        margin-right: 10px;
     }
 
     .unit_size h4 {
         display: inline;
-        font-family: verdana;
-        color: #00008b;
-    }
-
-    .unit_size a {
-        color: green;
-        font-family: arial;
-        font-weight: bold;
-    }
-
-    .amenities ul {
-        line-height: 15px;
-    }
-
-    .amenities li {
-        font-family: helvetica;
-        font-weight: bold;
     }
 
     .transBox a {
@@ -555,32 +477,24 @@
         font-weight: bold;
     }
 
-    .transPerMonth {
-        font-family: helvetica, arial, verdana, sans-serif;
-        font-weight: bold;
-    }
-
     .promos {
         font-size: 14px;
-        color: #00529B;
-        margin: 0 10px 0 10px;
-        padding: 15px 0 10px 0;
-        font-family: helvetica;
-        font-weight: bold;
+        color: #87ceeb;
+        margin-left: 10px;
+        padding-top: 10px;
     }
 
     .compare_unit {
         font: 12px arial, verdana, helvetica, sans-serif;
         font-weight: bold;
-        color: #00529B;
+        color: #00008b;
         text-align: right;
     }
 
     .transTotalMoveIn {
-        margin-left: 10px;
-        font: 13px verdana, helvetica, sans-serif;
+        margin-left: 30px;
+        font: 12px arial, verdana, helvetica, sans-serif;
         font-weight: bold;
-        color: #00008b;
     }
 
     #totalMoveInCost {
@@ -589,14 +503,13 @@
     }
 
     .transTotalMoveIn p {
-        font: 11px helvetica, sans-serif;
+        font: 10px arial, verdana, helvetica, sans-serif;
         margin-top: 2px;
         padding-bottom: 15px;
-        font-weight: bold;
     }
 
     .sim_units h1 {
-        font: 15px verdana, helvetica, sans-serif;
+        font: 16px arial, verdana, helvetica, sans-serif;
         font-weight: bold;
         color: #00529B;
     }
@@ -630,12 +543,8 @@
                     </div>
                     <div class="right_panes"> <!-- icons and description here -->
                         <div class="yelp_icons">
-                            <div class="icons">
-                                <span  class='st_email' displayText='Share'></span>
-                                <a id="print_button" href="#"> Print
-                                    %{--<img src="../images/print-icon-15x13.png" />Print--}%
-                                </a>
-                            </div>
+                            <span  class='st_email' displayText='Share'></span>
+                            <input type="button" class="printIcon" value="    Print" onclick="window.print()" />
                         </div>
                         <div class="overview_desc">
                             <p>${site.description}</p>
@@ -686,7 +595,7 @@
                     <img src="#" />
                     <div class="unit_text">
                         <h2>Pacoima - Glen Oaks Blvd</h2>
-                        <h3>$79.00</h3>/mo.
+                        <h2>$79.00/mo.</h2>
                         <p>5.8 miles from this facility</p>
                     </div>
                 </div>
@@ -695,7 +604,7 @@
                     <img src="#" />
                     <div class="unit_text">
                         <h2>Pacoima - Glen Oaks Blvd</h2>
-                        <h3>$79.00</h3>/mo.
+                        <h2>$79.00/mo.</h2>
                         <p>5.8 miles from this facility</p>
                     </div>
                 </div>
@@ -704,7 +613,7 @@
                     <img src="#" />
                     <div class="unit_text">
                         <h2>Pacoima - Glen Oaks Blvd</h2>
-                        <h3>$79.00</h3>/mo.
+                        <h2>$79.00/mo.</h2>
                         <p>5.8 miles from this facility</p>
                     </div>
                 </div>
@@ -713,7 +622,7 @@
                     <img src="#" />
                     <div class="unit_text">
                         <h2>Pacoima - Glen Oaks Blvd</h2>
-                        <h3>$79.00</h3>/mo.
+                        <h2>$79.00/mo.</h2>
                         <p>5.8 miles from this facility</p>
                     </div>
                 </div>
@@ -733,10 +642,6 @@
             <script type="text/javascript">
             $(document).ready(function() {
                 $("ul.tabs").tabs("div.panes > div");
-                $("#print_button").click(function() {
-                    window.print();
-                    return false;
-                });
 
                 var left = $("#left_panel").height();
                 var right = $("#right_panel").height();
@@ -753,6 +658,5 @@
             });
             </script>
         </p:dependantJavascript>
-
 </body>
 </html>

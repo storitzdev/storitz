@@ -4,7 +4,7 @@
       <div id="regPrice" class="transStrikethru"></div>
       <div>
         <div id="pushPrice" class="transPrice">$72.00</div>
-        <div class="transPerMonth">per month</div>
+        <div class="transPerMonth">Per Month</div>
       </div>
     </div>
     <div class="rent_reserve">
@@ -35,13 +35,16 @@
             </div>
         </div>
         <div>
+            <div class="paidThrough">
+              Paid Through July 20, 2011
+            </div>
             <div class="changeDate">
                 <a href="#">Edit date</a>
             </div>
         </div>
     </div>
     <div class="unit_size">
-        <h4>10' x 10' Unit</h4>
+        <h4>10' x 10' Unit Size</h4>
         <a href="#">See more sizes</a>
     </div>
     <div class="amenities">
@@ -54,13 +57,13 @@
     <div class="promos">
         Military Discount - Save 50% off first two months
     </div>
+    <div class="compare_unit">
+        Compare this unit <input type="checkbox" id="compare_unit" />
+    </div>
     <div style="height: 10px;clear:both;width: 270px; border-bottom:1px solid #dfdfdf;margin: 0 5px 10px 5px;"></div>
     <div class="transTotalMoveIn">
         Total Move-In Cost:
         <span id="totalMoveInCost">$38.00</span>
-        <div class="paidThrough">
-              Paid thru July 20, 2011
-        </div>
         <p>*Includes discounts and facility fees</p>
     </div>
 </div>
