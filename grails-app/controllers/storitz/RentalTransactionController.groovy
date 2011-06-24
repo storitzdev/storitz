@@ -8,6 +8,7 @@ import java.math.RoundingMode
 import java.text.ParseException
 import com.storitz.*
 import storitz.constants.*
+import com.storitz.service.CostTotals
 
 class RentalTransactionController {
 
@@ -186,13 +187,13 @@ class RentalTransactionController {
       return
     }
 
-    if (!moveInService.checkRented(rentalTransactionInstance)) {
+    if (!moveInService.isAvailable(rentalTransactionInstance)) {
       def found = false
       def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitType == rentalTransactionInstance.unitType && it.unitsize.id == rentalTransactionInstance.searchSize.id && it.id != unit?.id }.sort { it.price }
       println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
       for (myUnit in bestUnitList) {
         rentalTransactionInstance.unitId = myUnit.id
-        if (moveInService.checkRented(rentalTransactionInstance)) {
+        if (moveInService.isAvailable(rentalTransactionInstance)) {
           found = true
           unit = myUnit
           emailUnitNotFound("Desired unit not found. Alternate unit selected.",rentalTransactionInstance)
@@ -237,7 +238,7 @@ class RentalTransactionController {
       emailService.sendTextEmail(
         to: 'tech@storitz.com',
         from: 'no-reply@storitz.com',
-        subject: subject,
+        subject: grails.util.Environment.getCurrent().toString() + ":" + subject,
         body: body
       )
     } catch (Throwable t) {
@@ -300,22 +301,22 @@ class RentalTransactionController {
 
     // TODO - compare calculated cost to our cost
     rentalTransactionInstance.moveInCost = costService.calculateMoveInCost(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate, false)
-    def costTotals = costService.calculateTotals(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate)
+    CostTotals costTotals = costService.calculateTotals(rentalTransactionInstance.site, unit, promo, ins, rentalTransactionInstance.moveInDate)
     if (rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION) {
       rentalTransactionInstance.cost = rentalTransactionInstance.site.rentalFee
     } else {
-      rentalTransactionInstance.cost = costTotals["moveInTotal"]
+      rentalTransactionInstance.cost = costTotals.moveInTotal
     }
-    rentalTransactionInstance.moveInCost = costTotals["moveInTotal"]
-    rentalTransactionInstance.duration = costTotals["duration"]
-    rentalTransactionInstance.discount = costTotals["discountTotal"]
-    rentalTransactionInstance.fees = costTotals["feesTotal"]
-    rentalTransactionInstance.insuranceCost = costTotals["insuranceCost"]
-    rentalTransactionInstance.tax = costTotals["tax"]
-    rentalTransactionInstance.deposit = costTotals["deposit"]
-    rentalTransactionInstance.durationDays = costTotals["durationDays"]
-    rentalTransactionInstance.durationMonths = costTotals["durationMonths"]
-    rentalTransactionInstance.paidThruDate = costTotals["paidThruDateMillis"]
+    rentalTransactionInstance.moveInCost = costTotals.moveInTotal
+    rentalTransactionInstance.duration = costTotals.duration
+    rentalTransactionInstance.discount = costTotals.discountTotal
+    rentalTransactionInstance.fees = costTotals.feesTotal
+    rentalTransactionInstance.insuranceCost = costTotals.insuranceCost
+    rentalTransactionInstance.tax = costTotals.tax
+    rentalTransactionInstance.deposit = costTotals.deposit
+    rentalTransactionInstance.durationDays = costTotals.durationDays
+    rentalTransactionInstance.durationMonths = costTotals.durationMonths
+    rentalTransactionInstance.paidThruDate = costTotals.paidThruDate
     rentalTransactionInstance.displaySize = unit?.displaySize
 
     if (promo) {
@@ -490,7 +491,7 @@ class RentalTransactionController {
   }
 
   private StorageUnit checkUnit(StorageUnit unit, RentalTransaction rentalTransactionInstance) {
-    if (!moveInService.checkRented(rentalTransactionInstance)) {
+    if (!moveInService.isAvailable(rentalTransactionInstance)) {
       if (--unit.unitCount <= 0) {
         println "Removing unit from inventory ${unit.id}"
         rentalTransactionInstance.site.removeFromUnits(unit)
@@ -503,7 +504,7 @@ class RentalTransactionController {
       for (myUnit in bestUnitList) {
         println "Check unit for availability ${myUnit.id}"
         rentalTransactionInstance.unitId = myUnit.id
-        if (moveInService.checkRented(rentalTransactionInstance)) {
+        if (moveInService.isAvailable(rentalTransactionInstance)) {
           found = true
           unit = myUnit
           flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."

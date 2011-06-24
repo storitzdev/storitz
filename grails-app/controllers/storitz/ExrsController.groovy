@@ -10,7 +10,8 @@ class ExrsController extends CshiftController {
 
   def fileUploadService
   def imageService
-  def exrsService
+  def exrsStorageFeedService
+  def CShiftStorageFeedService
 
   static String baseUrl = "http://selfstorage.extraspace.com"
 
@@ -28,7 +29,7 @@ class ExrsController extends CshiftController {
       // read in sites
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
-      exrsService.loadSites(cshiftInstance, "EX", stats, writer)
+      exrsStorageFeedService.loadSites(cshiftInstance, "EX", stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
@@ -46,7 +47,7 @@ class ExrsController extends CshiftController {
           promo.delete()
         }
         site.specialOffers.clear()
-        exrsService.loadPromos(cshiftInstance, site, writer)
+        exrsStorageFeedService.loadPromos(site, writer)
         println "Promos refreshed for ${site.title}"
       }
       flash.message = "Feed promotions refreshed."
@@ -59,7 +60,7 @@ class ExrsController extends CshiftController {
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
-      exrsService.refreshSites(cshiftInstance, 'EX', stats, writer)
+      exrsStorageFeedService.refreshSites(cshiftInstance, 'EX', stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
@@ -68,7 +69,7 @@ class ExrsController extends CshiftController {
   def createContacts = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      CShiftService.createSiteUsers(cshiftInstance, "EX")
+      CShiftStorageFeedService.createSiteUsers(cshiftInstance, "EX")
       flash.message = "Site contacts created."
       redirect(action: "list")
     }
@@ -78,7 +79,7 @@ class ExrsController extends CshiftController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def writer = new PrintWriter(System.out)
-      CShiftService.createSitePhones(cshiftInstance, "EX", writer)
+      CShiftStorageFeedService.createSitePhones(cshiftInstance, "EX", writer)
       writer.close()
       flash.message = "Feed phones refreshed."
       redirect(action: "show", id: cshiftInstance.id)

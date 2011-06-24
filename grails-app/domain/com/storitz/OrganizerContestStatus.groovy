@@ -8,7 +8,7 @@ class OrganizerContestStatus {
         toEmailAddress(nullable:true)
     }
 
-    boolean enabled
-    boolean active
+    Boolean enabled
+    Boolean active
     String toEmailAddress
 }

@@ -132,7 +132,16 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
+                        <tr class="prop">
+                            <td valign="top" class="name">
+                              <label for="zipcode2"><g:message code="organizerContest.zipcode2.label" default="Zipcode2" /></label>
+                            </td>
+                            <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode2', 'errors')}">
+                                <g:textField name="zipcode2" value="${organizerContestInstance?.zipcode2}" />
+                            </td>
+                        </tr>
+
+                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="referralSource"><g:message code="organizerContest.referralSource.label" default="Referral Source" /></label>
                                 </td>
@@ -161,10 +170,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="dontSendMeUpdates"><g:message code="organizerContest.dontSendMeUpdates.label" default="Don't Send Me Updates" /></label>
+                                  <label for="sendMeUpdates"><g:message code="organizerContest.sendMeUpdates.label" default="Send Me Updates" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'dontSendMeUpdates', 'errors')}">
-                                    <g:checkBox name="dontSendMeUpdates" value="${organizerContestInstance?.dontSendMeUpdates}" />
+                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'sendMeUpdates', 'errors')}">
+                                    <g:checkBox name="sendMeUpdates" value="${organizerContestInstance?.sendMeUpdates}" />
                                 </td>
                             </tr>
                         

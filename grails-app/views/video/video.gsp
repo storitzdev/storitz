@@ -35,19 +35,25 @@
 
       <p>
       <div>
-        <div id="videoContainer"></div>
+        <div id="videoContainer">
+        </div>
       </div>
-      <p:dependantJavascript>
-        <script type="text/javascript">
-          jwplayer("videoContainer").setup({
-            flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-            file: "${resource(file:videoInstance.fileLocation)}",
-            image: "${resource(file:videoInstance.stillImage)}",
-            height: 480,
-            width: 640
-          });
-        </script>
-      </p:dependantJavascript>
+        <p:dependantJavascript>
+            <script type="text/javascript">
+                jwplayer("videoContainer").setup({
+                flashplayer: "${resource(file:'/jwplayer/player.swf')}",
+            <g:if test="${videoInstance.useYouTube}">
+                file: "http://www.youtube.com/watch?v=${videoInstance.youTubeId}",
+            </g:if>
+            <g:else>
+                file: "${resource(file:videoInstance.fileLocation)}",
+                image: "${resource(file:videoInstance.stillImage)}",
+            </g:else>
+                height: 480,
+                width: 640
+              });
+            </script>
+        </p:dependantJavascript>
     </p>
       <div style="margin-top: 10px;">
         <g:if test="${videoInstance.site}">
@@ -57,13 +63,23 @@
       <div>
         ${videoInstance.caption}
       </div>
-      <div class="buttons" style="margin-bottom: 0.5em;">
-        <span class="button"><a href="#" class="embed">Embed</a></span>
-        <div id="embed" style="display:none;margin:10px 0;">
-          To embed this video, cut and paste the code from the box and place it in your page:
-          <textarea style="width:600px; height:75px;"><video id="storitzvid" width="640" height="480" src="${resource(absolute: true, file: videoInstance.fileLocation)}" poster="${resource(absolute: true, file: videoInstance.stillImage)}" controls="controls"></video><script type="text/javascript" src="${resource(absolute: true, file: '/jwplayer/jwplayer.js')}"></script><script type="text/javascript">jwplayer("storitzvid").setup({flashplayer: "${resource(absolute:true, file:'/jwplayer/player.swf')}"});</script></textarea>
+        <div class="buttons" style="margin-bottom: 0.5em;">
+            <span class="button"><a href="#" class="embed">Embed</a></span>
+            <div id="embed" style="display:none;margin:10px 0;">
+                To embed this video, cut and paste the code from the box and place it in your page:
+                <g:if test="${videoInstance.useYouTube}">
+                    <g:if test="${videoInstance.youTubeId}">
+                        <textarea style="width:600px; height:75px;">&lt;iframe width="640" height="480" src="http://www.youtube.com/embed/${videoInstance.youTubeId}" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                    </g:if>
+                    <g:else>
+                        <textarea style="width:600px; height:75px;">No Youtube Video ID!</textarea>
+                    </g:else>
+                </g:if>
+                <g:else>
+                    <textarea style="width:600px; height:75px;"><video id="storitzvid" width="640" height="480" src="${resource(absolute: true, file: videoInstance.fileLocation)}" poster="${resource(absolute: true, file: videoInstance.stillImage)}" controls="controls"></video><script type="text/javascript" src="${resource(absolute: true, file: '/jwplayer/jwplayer.js')}"></script><script type="text/javascript">jwplayer("storitzvid").setup({flashplayer: "${resource(absolute:true, file:'/jwplayer/player.swf')}"});</script></textarea>
+                </g:else>
+            </div>
         </div>
-      </div>
       <!-- AddThis Button BEGIN -->
       <div class="addthis_toolbox addthis_default_style ">
         <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4d11385a59ec26da" class="addthis_button_compact">Share</a>

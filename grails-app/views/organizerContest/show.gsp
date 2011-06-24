@@ -110,7 +110,14 @@
                             
                         </tr>
                     
-                        <tr class="prop">
+                    <tr class="prop">
+                        <td valign="top" class="name"><g:message code="organizerContest.zipcode2.label" default="Zipcode2" /></td>
+
+                        <td valign="top" class="value">${fieldValue(bean: organizerContestInstance, field: "zipcode2")}</td>
+
+                    </tr>
+
+                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="organizerContest.referralSource.label" default="Referral Source" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: organizerContestInstance, field: "referralSource")}</td>
@@ -132,9 +139,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="organizerContest.dontSendMeUpdates.label" default="Don't Send Me Updates" /></td>
+                            <td valign="top" class="name"><g:message code="organizerContest.sendMeUpdates.label" default="Send Me Updates" /></td>
                             
-                            <td valign="top" class="value"><g:formatBoolean boolean="${organizerContestInstance?.dontSendMeUpdates}" /></td>
+                            <td valign="top" class="value"><g:formatBoolean boolean="${organizerContestInstance?.sendMeUpdates}" /></td>
                             
                         </tr>
                     

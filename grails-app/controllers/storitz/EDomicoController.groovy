@@ -2,7 +2,7 @@ package storitz
 
 import com.storitz.EDomico
 import com.storitz.CommissionSchedule
-import grails.plugins.springsecurity.Secured
+
 import storitz.constants.FeedType
 import com.storitz.EDomicoLocation
 
@@ -151,7 +151,7 @@ class EDomicoController extends FeedController {
         def edomicoInstance = EDomico.get(params.id)
         def stats = new storitz.SiteStats()
         def writer = new PrintWriter(System.out)
-        EDomicoService eDomicoService = new EDomicoService(edomicoInstance.edomicoClientID,edomicoInstance.edomicoWebServicesKey)
+        EDomicoStorageFeedService eDomicoService = new EDomicoStorageFeedService(edomicoInstance.edomicoClientID,edomicoInstance.edomicoWebServicesKey)
         eDomicoService.refreshSites(edomicoInstance,"DOM", stats, writer)
         flash.message = "Feed " + params.id + ": "+ stats.createCount + " sites created. " + stats.updateCount + " sites updated. " + stats.unitCount + " units added."
         render(view: "show", model: [edomicoInstance: edomicoInstance])
@@ -205,7 +205,7 @@ class EDomicoController extends FeedController {
             // read in sites
             def stats = new storitz.SiteStats()
             def writer = new PrintWriter(System.out)
-            EDomicoService eDomicoService = new EDomicoService(edomicoInstance.edomicoClientID,edomicoInstance.edomicoWebServicesKey)
+            EDomicoStorageFeedService eDomicoService = new EDomicoStorageFeedService(edomicoInstance.edomicoClientID,edomicoInstance.edomicoWebServicesKey)
             eDomicoService.loadSites(edomicoInstance, "DOM", stats, writer)
             flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
             redirect(action: "show", id: edomicoInstance.id)

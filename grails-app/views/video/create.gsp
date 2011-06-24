@@ -67,7 +67,7 @@
 
       <g:uploadForm action="save">
         <div class="formInstructions">
-          To create the video page, make sure to have the video and the still image handy.  Enter a caption and title and choose a release date
+          To create the video page, make sure to have the video (Local or YouTube) and the still image handy.  Enter a caption and title and choose a release date.
         </div>
 
         <div class="checkout_section_header">
@@ -94,6 +94,20 @@
           <div style="height:10px;clear:both;"></div>
         </div>
 
+       <div class="checkout_fields">
+          <div style="width:800px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'urlTitle', 'errors')}">
+            <g:textField id="urlTitle" name="urlTitle" style="width: 380px;" value="${fieldValue(bean:videoInstance,field:'urlTitle')}"/>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="checkout_labels">
+            <div class="checkout_name" style="width:800px;">
+              <label for="urlTitle">Video URL Title</label>
+            </div>
+          <div style="height:10px;clear:both;"></div>
+        </div>
+
         <div class="checkout_section_header">
           Video Caption
         </div>
@@ -113,7 +127,7 @@
         </div>
 
         <div class="checkout_section_header">
-          Video file
+          Video file (Optional if using YouTube)
         </div>
 
         <div class="checkout_labels">
@@ -124,7 +138,7 @@
         </div>
 
         <div class="checkout_section_header">
-          Still Image
+          Still Image (Optional if using YouTube)
         </div>
 
         <div class="checkout_labels">
@@ -133,6 +147,30 @@
           </div>
           <div style="height:10px;clear:both;"></div>
         </div>
+
+          <div class="checkout_labels">
+              <div class="checkout_name" stype="width:400px">
+                  <input type='radio' name='useYouTube' value='yes'/> Yes
+                  <input type='radio' name='useYouTube' value='no'/> No
+              </div>
+              <div style="height:10px;clear:both;"></div>
+          </div>
+
+          <div class="checkout_section_header">
+            Use Youtube
+          </div>
+
+
+          <div class="checkout_labels">
+              <div style="width:400px;" class="checkout_value ${hasErrors(bean: videoInstance, field: 'youTubeId', 'errors')}">
+                  <g:textField id="youTubeId" name="youTubeId" style="width: 380px;" value="${videoInstance.youTubeId}"/>
+            </div>
+            <div style="height:10px;clear:both;"></div>
+          </div>
+
+          <div class="checkout_section_header">
+            Youtube Video ID
+          </div>
 
         <div class="checkout_section_header">
           Tags

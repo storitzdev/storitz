@@ -25,6 +25,7 @@ import storitz.constants.SearchType
 import com.storitz.SpecialOfferRestriction
 import com.storitz.QuikStor
 import com.storitz.QuikStorLocation
+import com.storitz.ServiceMap
 
 class BootStrap {
 
@@ -394,6 +395,16 @@ class BootStrap {
       UserRole.create(operator, roleCallCenter, true)
     }
 
+    if (ServiceMap.list().size() == 0) {
+        new ServiceMap(serviceName: 'SL',  serviceHandler: 'storitz.SiteLinkStorageFeedService').save()
+        new ServiceMap(serviceName: 'CS3', serviceHandler: 'storitz.CShiftStorageFeedService').save()
+        new ServiceMap(serviceName: 'CS4', serviceHandler: 'storitz.CShift4StorageFeedService').save()
+        new ServiceMap(serviceName: 'QS',  serviceHandler: 'storitz.QuikStorStorageFeedService').save()
+        new ServiceMap(serviceName: 'EX',  serviceHandler: 'storitz.ExrsStorageFeedService').save()
+        new ServiceMap(serviceName: 'USI', serviceHandler: 'storitz.UsiStorageFeedService').save()
+        new ServiceMap(serviceName: 'DOM', serviceHandler: 'storitz.EDomicoStorageFeedService').save()
+    }
+
     if (StorageSize.list().size() == 0) {
       new StorageSize(description: 'Choose the size you need', width: 0, length: 0, searchType: SearchType.UNDEFINED).save();
       new StorageSize(description: '5 x 5', width: 5, length: 5, searchType: SearchType.STORAGE).save();
@@ -541,7 +552,6 @@ class BootStrap {
 
     // Unit Description types from vendors
     println "Starting unit type lookup creation"
-    UnitTypeLookup.executeUpdate('delete from UnitTypeLookup')
     setupUnitTypes1()
     setupUnitTypes2()
     setupUnitTypes3()
@@ -557,6 +567,10 @@ class BootStrap {
   }
 
   def setupUnitTypes1() {
+    if (UnitTypeLookup.findByDescription("Climate Controlled Ground Level")) {
+      return // already processed this segment
+    }
+
     new UnitTypeLookup(id: 1, description: "Climate Controlled Ground Level", unitType: UnitType.INTERIOR, searchType: SearchType.STORAGE, tempControlled: true).save(validate: false)
     new UnitTypeLookup(id: 2, description: "Lower Level Climate Controlled", unitType: UnitType.INTERIOR, searchType: SearchType.STORAGE, tempControlled: true).save(validate: false)
     new UnitTypeLookup(id: 3, description: "Upper", unitType: UnitType.UPPER, searchType: SearchType.STORAGE, tempControlled: false).save(validate: false)
@@ -1011,6 +1025,10 @@ class BootStrap {
 
 
   def setupUnitTypes2() {
+    if (UnitTypeLookup.findByDescription("NXN-Non-Climate Stacked Normal")) {
+      return // already processed this segment
+    }
+
     new UnitTypeLookup(id: 451, description: "NXN-Non-Climate Stacked Normal", unitType: UnitType.UNDEFINED, searchType: SearchType.STORAGE, tempControlled: false).save(validate: false)
     new UnitTypeLookup(id: 452, description: "CLNM-Climate UP Normal", unitType: UnitType.UPPER, searchType: SearchType.STORAGE, tempControlled: true).save(validate: false)
     new UnitTypeLookup(id: 453, description: "NLNM-Non-Climate UP Normal", unitType: UnitType.UPPER, searchType: SearchType.STORAGE, tempControlled: false).save(validate: false)
@@ -1465,6 +1483,10 @@ class BootStrap {
   }
 
   def setupUnitTypes3() {
+    if (UnitTypeLookup.findByDescription("NEN")) {
+      return // already processed this segment
+    }
+
     new UnitTypeLookup(id: 901, description: "NEN", unitType: UnitType.UPPER, searchType: SearchType.STORAGE, tempControlled: false).save(validate: false)
     new UnitTypeLookup(id: 902, description: "NENM", unitType: UnitType.UPPER, searchType: SearchType.STORAGE, tempControlled: false).save(validate: false)
     new UnitTypeLookup(id: 903, description: "NENU", unitType: UnitType.UNDEFINED, searchType: SearchType.STORAGE, tempControlled: false).save(validate: false)

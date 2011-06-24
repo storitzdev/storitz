@@ -8,7 +8,7 @@ class MetroEntry {
     metro(nullable: true)
     zipcode(blank: false)
     city(blank: false)
-    state(blank: false)
+    state(nullable: false)
   }
 
   static mapping = {

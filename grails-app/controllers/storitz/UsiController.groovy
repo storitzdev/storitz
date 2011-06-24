@@ -9,7 +9,7 @@ class UsiController extends CshiftController {
 
   def fileUploadService
   def imageService
-  def usiService
+  def usiStorageFeedService
 
   def list = {
     def usiManager = User.findByUsername('ustoreit')
@@ -25,7 +25,7 @@ class UsiController extends CshiftController {
       // read in sites
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
-      usiService.loadSites(cshiftInstance, "USI", stats, writer)
+      usiStorageFeedService.loadSites(cshiftInstance, "USI", stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
@@ -43,7 +43,7 @@ class UsiController extends CshiftController {
           promo.delete()
         }
         site.specialOffers.clear()
-        usiService.loadPromos(cshiftInstance, site, writer)
+        usiStorageFeedService.loadPromos(site, writer)
         println "Promos refreshed for ${site.title}"
       }
       flash.message = "Feed promotions refreshed."
@@ -56,7 +56,7 @@ class UsiController extends CshiftController {
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
-      usiService.refreshSites(cshiftInstance, 'USI', stats, writer)
+      usiStorageFeedService.refreshSites(cshiftInstance, 'USI', stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
@@ -65,7 +65,7 @@ class UsiController extends CshiftController {
   def createContacts = {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
-      usiService.createSiteUsers(cshiftInstance, "USI")
+      usiStorageFeedService.createSiteUsers(cshiftInstance, "USI")
       flash.message = "Site contacts created."
       redirect(action: "list")
     }
@@ -75,7 +75,7 @@ class UsiController extends CshiftController {
     def cshiftInstance = CenterShift.get(params.id)
     if (cshiftInstance) {
       def writer = new PrintWriter(System.out)
-      usiService.createSitePhones(cshiftInstance, "USI", writer)
+      usiStorageFeedService.createSitePhones(cshiftInstance, "USI", writer)
       writer.close()
       flash.message = "Feed phones refreshed."
       redirect(action: "show", id: cshiftInstance.id)

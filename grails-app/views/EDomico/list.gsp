@@ -20,6 +20,8 @@
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="create">Create New EDomico Feed</g:link></span>
+      <span class="button"><g:link controller="EDomicoAmenitiesMap" class="list" action="list">Manage Amenities Mapping</g:link></span>
+
     </div>
     <div class="body">
 

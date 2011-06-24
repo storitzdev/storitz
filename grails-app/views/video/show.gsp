@@ -55,6 +55,13 @@
           </tr>
 
           <tr class="prop">
+            <td valign="top" class="name"><g:message code="video.urlTitle.label" default="URL Title"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "urlTitle")}</td>
+
+          </tr>
+
+          <tr class="prop">
             <td valign="top" class="name"><g:message code="video.releaseDate.label" default="Release Date"/></td>
 
             <td valign="top" class="value">${videoInstance.releaseDate.format('MM-dd-yyyy')}</td>
@@ -72,21 +79,36 @@
           <tr class="prop">
             <td valign="top" class="name"><g:message code="video.file.label" default="Video"/></td>
 
-            <td valign="top" class="value">
-              <div id="videoContainer"></div>
-              <p:dependantJavascript>
-                <script type="text/javascript">
-                  jwplayer("videoContainer").setup({
-                    flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-                    file: "${resource(file:videoInstance.fileLocation)}",
-                    image: "${resource(file:videoInstance.stillImage)}",
-                    height: 480,
-                    width: 640
-                  });
-                </script>
-              </p:dependantJavascript>
-            </td>
+              <td valign="top" class="value">
+                  <div id="videoContainer"></div>
+                  <p:dependantJavascript>
+                      <script type="text/javascript">
+                          jwplayer("videoContainer").setup({
+                              flashplayer: "${resource(file:'/jwplayer/player.swf')}",
+                              <g:if test="${videoInstance.useYouTube}">
+                              file: "http://www.youtube.com/watch?v=${videoInstance.youTubeId}",
+                              </g:if>
+                              <g:else>
+                              file: "${resource(file:videoInstance.fileLocation)}",
+                              image: "${resource(file:videoInstance.stillImage)}",
+                              </g:else>
+                              height: 480,
+                              width: 640
+                          });
+                      </script>
+                  </p:dependantJavascript>
+              </td>
 
+          </tr>
+
+          <tr class="prop">
+              <td valign="top" class="name">Use Youtube</td>
+              <td valign="top" class="value">${videoInstance.useYouTube ? "Yes" : "No"}</td>
+          </tr>
+
+          <tr class="prop">
+              <td valign="top" class="name">Youtube Video ID</td>
+              <td valign="top" class="value">${videoInstance.youTubeId}</td>
           </tr>
 
           <tr class="prop">
@@ -111,7 +133,7 @@
             <td valign="top" class="name"><g:message code="video.external.link.label" default="External Link"/></td>
 
             <td valign="top" class="value">
-              <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.title]"/>
+              <g:createLink mapping="video" absolute="true" params="[id:videoInstance.id, date:videoInstance.releaseDate.format('MM-dd-yyyy'), title:videoInstance.urlTitle ? videoInstance.urlTitle : videoInstance.title]"/>
             </td>
 
           </tr>

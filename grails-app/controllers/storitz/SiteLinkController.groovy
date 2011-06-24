@@ -8,7 +8,7 @@ import storitz.constants.FeedType
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController extends FeedController {
 
-  def siteLinkService
+  def siteLinkStorageFeedService
   def imageService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory: "POST"]
@@ -34,7 +34,7 @@ class SiteLinkController extends FeedController {
     if (siteLinkInstance.validate() && siteLinkInstance.save(flush: true)) {
       // read in sites
       def stats = new storitz.SiteStats()
-      siteLinkService.corpSites(siteLinkInstance, stats)
+      siteLinkStorageFeedService.corpSites(siteLinkInstance, stats)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)
     }
@@ -47,7 +47,7 @@ class SiteLinkController extends FeedController {
     def siteLinkInstance = SiteLink.get(params.id)
     if (siteLinkInstance) {
       def stats = new storitz.SiteStats()
-      siteLinkService.refreshSites(siteLinkInstance, stats)
+      siteLinkStorageFeedService.refreshSites(siteLinkInstance, stats)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)
     }
@@ -124,7 +124,7 @@ class SiteLinkController extends FeedController {
   def createContacts = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (siteLinkInstance) {
-      siteLinkService.createSiteUsers(siteLinkInstance)
+      siteLinkStorageFeedService.createSiteUsers(siteLinkInstance)
       flash.message = "Site contacts created."
       redirect(action: "list")
     }
@@ -133,7 +133,7 @@ class SiteLinkController extends FeedController {
   def updateTax = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (siteLinkInstance) {
-      siteLinkService.createSiteTaxes(siteLinkInstance)
+      siteLinkStorageFeedService.createSiteTaxes(siteLinkInstance)
       flash.message = "Site taxes updated."
       redirect(action: "list")
     }
@@ -142,7 +142,7 @@ class SiteLinkController extends FeedController {
   def updateProration = {
     def siteLinkInstance = SiteLink.get(params.id)
     if (siteLinkInstance) {
-      siteLinkService.createProration(siteLinkInstance)
+      siteLinkStorageFeedService.createProration(siteLinkInstance)
       flash.message = "Site proration updated."
       redirect(action: "list")
     }

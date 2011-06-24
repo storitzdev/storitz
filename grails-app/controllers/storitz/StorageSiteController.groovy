@@ -8,6 +8,7 @@ import org.grails.plugins.imagetools.ImageTool
 import storitz.constants.SearchType
 import storitz.constants.UnitType
 import com.storitz.*
+import com.storitz.service.CostTotals
 
 class StorageSiteController {
 
@@ -536,7 +537,11 @@ class StorageSiteController {
 
     Visit visit = new Visit(dateCreated: new Date(), site: site, remoteAddr: remoteAddr, unitSize: unitSize, searchAddress: params.address, searchDate: searchDate)
 
-    if (!visit.save()) println "Visit log save failed!"
+    try {
+      if (!visit.save()) println "Visit log save failed!"
+    } catch (Throwable t) {
+      t.printStackTrace()
+    }
 
     if (!session?.shortSessionId) {
       session.shortSessionId = (10000 + (Math.random() * 89999)) as Integer
@@ -785,10 +790,10 @@ class StorageSiteController {
       }
     }
 
-    def totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
+    CostTotals totals = costService.calculateTotals(site, bestUnit, specialOffer, ins, moveInDate)
 
     JSON.use("default")
-    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"sizeList\":${sizeList as JSON}, \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price }, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"actualSize\":\"${bestUnit?.displaySize}\", \"additionalFees\":${totals["feesTotal"]}, \"premium\":${premium}, \"duration\":${totals["duration"]}, \"durationDays\":${totals["durationDays"]}, \"durationMonths\":${totals["durationMonths"]}, \"discountTotal\":${totals["discountTotal"]}, \"totalMoveInCost\":${totals["moveInTotal"]}, \"tax\":${totals["tax"]}, \"extended\":${totals["extended"]}, \"paidThruDate\":\"${totals["paidThruDate"]}\", \"deposit\":${totals["deposit"]}, \"featuredOffers\": ${featuredOffers as JSON}, \"specialOffers\": ${specialOffers as JSON } } }")
+    render(status: 200, contentType: "application/json", text: "{ \"totals\": { \"unitTypes\":[ ${unitTypes.join(',')} ], \"sizeList\":${sizeList as JSON}, \"chosenInsurance\":\"${chosenInsurance}\", \"chosenPromo\":\"${chosenPromo}\", \"monthlyRate\":${bestUnit?.price}, \"pushRate\":${site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price }, \"unitId\":${bestUnit?.id}, \"chosenUnitType\":\"${bestUnit?.unitType}\", \"chosenUnitTypeDisplay\":\"${bestUnit?.unitType?.display}\", \"actualSize\":\"${bestUnit?.displaySize}\", \"additionalFees\":${totals.feesTotal}, \"premium\":${premium}, \"duration\":${totals.duration}, \"durationDays\":${totals.durationDays}, \"durationMonths\":${totals.durationMonths}, \"discountTotal\":${totals.discountTotal}, \"totalMoveInCost\":${totals.moveInTotal}, \"tax\":${totals.tax}, \"extended\":${totals.extended}, \"paidThruDate\":\"${totals.paidThruDateString}\", \"deposit\":${totals.deposit}, \"featuredOffers\": ${featuredOffers as JSON}, \"specialOffers\": ${specialOffers as JSON } } }")
 
   }
 

@@ -9,20 +9,29 @@ import com.storitz.*
 
 import com.storitz.exrsclient.ExrsWebFormProcessor
 
-class ExrsService extends CShiftService {
+class ExrsStorageFeedService extends CShiftStorageFeedService {
 
   def emailService
+
+  def getEmailService() {
+    if (!emailService) {
+      emailService = new EmailService()
+    }
+    return emailService
+  }
 
   static String baseUrl = "http://www.extraspace.com"
 
   // unit availability
+  @Override
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    zeroOutUnitsForSite(site,stats,writer)
 
-  def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
     println "Update units opening page: ${baseUrl + site.url}"
     def siteHtml = (baseUrl + site.url).toURL().text
     // build list of valid ids
     def idList = []
-    def idMatcher = siteHtml =~ /ctl00_(m|Main)Content_UnitList_ctl(\d+)_Dimensions/
+    def idMatcher = siteHtml =~ /ctl00_(m|Main)Content_UnitList_ctrl(\d+)_Dimensions/
     if (idMatcher.getCount()) {
       idMatcher.each {
         idList.add(it[2])
@@ -34,37 +43,37 @@ class ExrsService extends CShiftService {
     site.specialOffers.clear()
     def needSave = false
     for (unitId in idList) {
-      def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
+      def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_Dimensions" value="(.+?)"/
       def dimensions
       if (dimensionsMatch.getCount()) {
         dimensions = dimensionsMatch[0][2]
       }
 
-      def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
+      def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_UnitAttributesCode" value="(\d+)"/
       def attributes
       if (attributesMatch.getCount()) {
         attributes = attributesMatch[0][2]
       }
 
-      def descriptionMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_FeatureString" value="(.+?)"/
+      def descriptionMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_FeatureString" value="(.+?)"/
       def typeName
       if (descriptionMatch.getCount()) {
         typeName = descriptionMatch[0][2]
       }
 
-      def priceMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_StreetRate" value="(\d+)"/
+      def priceMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_StreetRate" value="(\d+)"/
       BigDecimal price
       if (priceMatch.getCount()) {
         price = new BigDecimal(priceMatch[0][2])
       }
 
-      def pushRateMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_WebsiteRate" value="(\d+)"/
+      def pushRateMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_WebsiteRate" value="(\d+)"/
       BigDecimal pushRate
       if (pushRateMatch.getCount()) {
         pushRate = new BigDecimal(pushRateMatch[0][2])
       }
 
-      def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+      def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_ReservationDeposit" value="(.+?)"/
       def reservation
       if (reservationMatch.getCount()) {
         reservation = Integer.parseInt(reservationMatch[0][2])
@@ -173,7 +182,9 @@ class ExrsService extends CShiftService {
             siteUnit.unitName = unitId
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = attributes
-            stats.unitCount += 1
+            siteUnit.isAvailable = true
+            stats.unitCount++
+            stats.removedCount--
 
             writer.println "Updating unit attributes ${attributes} size: ${displaySize} price: ${price} pushRate:${pushRate}"
           }
@@ -204,7 +215,7 @@ class ExrsService extends CShiftService {
 
   // promos
   private handlePromos(site, siteHtml, unitId, writer) {
-    def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+    def reservationMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_ReservationDeposit" value="(.+?)"/
     def reservation
     if (reservationMatch.getCount()) {
       reservation = Integer.parseInt(reservationMatch[0][2])
@@ -212,43 +223,43 @@ class ExrsService extends CShiftService {
 
     if (reservation > 0) {
 
-      def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_Dimensions" value="(.+?)"/
+      def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_Dimensions" value="(.+?)"/
       def dimensions
       if (dimensionsMatch.getCount()) {
         dimensions = dimensionsMatch[0][2]
       }
 
-      def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="(\d+)"/
+      def attributesMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_UnitAttributesCode" value="(\d+)"/
       def attributes
       if (attributesMatch.getCount()) {
         attributes = attributesMatch[0][2]
       }
 
-      def promoNameMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_PromoName" value="(.+?)"/
+      def promoNameMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_PromoName" value="(.+?)"/
       def promoName
       if (promoNameMatch.getCount()) {
         promoName = (promoNameMatch[0][2]).split(" - ")[-1]
       }
 
-      def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountType" value="(.+?)"/
+      def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountType" value="(.+?)"/
       def discountType
       if (discountTypeMatch.getCount()) {
         discountType = discountTypeMatch[0][2]
       }
 
-      def discountPeriodMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountPeriods" value="(\d+)"/
+      def discountPeriodMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountPeriods" value="(\d+)"/
       Integer discountPeriod
       if (discountPeriodMatch.getCount()) {
         discountPeriod = Integer.parseInt(discountPeriodMatch[0][2])
       }
 
-      def discountMinMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMin" value="(\d+)"/
+      def discountMinMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountMin" value="(\d+)"/
       Integer discountMin
       if (discountMinMatch.getCount()) {
         discountMin = Integer.parseInt(discountMinMatch[0][2])
       }
 
-      def discountMaxMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_DiscountMax" value="(\d+)"/
+      def discountMaxMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountMax" value="(\d+)"/
       Integer discountMax
       if (discountMaxMatch.getCount()) {
         discountMax = Integer.parseInt(discountMaxMatch[0][2])
@@ -260,7 +271,7 @@ class ExrsService extends CShiftService {
       specialOffer.featured = true
       specialOffer.waiveAdmin = false;
       specialOffer.description = promoName
-      specialOffer.promoName = promoName
+      if (!specialOffer.promoName) specialOffer.promoName = promoName
       specialOffer.promoSize = null
       specialOffer.prepay = false
       specialOffer.expireMonth = 0
@@ -311,13 +322,13 @@ class ExrsService extends CShiftService {
 
   }
 
-  def loadPromos(CenterShift feed, StorageSite site, PrintWriter writer) {
+  public void loadPromos(StorageSite site, PrintWriter writer) {
     // This is NOOP for EXRS since the inventory does the promos
   }
 
   // check rented
-
-  def checkRented(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean isAvailable(RentalTransaction rentalTransaction) {
 
     StorageSite site = rentalTransaction.site
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId)
@@ -329,13 +340,13 @@ class ExrsService extends CShiftService {
     def siteHtml = new URL(baseUrl + site.url).text
     // build list of valid ids
     def idList = []
-    def idMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl(\d+)_Dimensions" value="${unit.unitSizeInfo}"/
+    def idMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl(\d+)_Dimensions" value="${unit.unitSizeInfo}"/
     if (idMatcher.getCount()) {
       for (idMatch in idMatcher) {
         def unitId = idMatch[2]
-        def attributeMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_UnitAttributesCode" value="${unit.unitTypeInfo}"/
+        def attributeMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_UnitAttributesCode" value="${unit.unitTypeInfo}"/
         if (attributeMatcher.getCount()) {
-          def reservationMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctl${unitId}_ReservationDeposit" value="(.+?)"/
+          def reservationMatcher = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_ReservationDeposit" value="(.+?)"/
           if (reservationMatcher.getCount()) {
             Integer reservationDeposit = Integer.parseInt(reservationMatcher[0][2])
             return (reservationDeposit >= 0)
@@ -346,9 +357,8 @@ class ExrsService extends CShiftService {
     return false
   }
 
-  // reserve/move-in
-
-  def moveIn(RentalTransaction trans) {
+  @Override
+  public boolean reserve(RentalTransaction trans) {
 
     trans.idNumber = trans.bookingDate.format('yyyyddMM') + sprintf('%08d', trans.id)
 
@@ -396,7 +406,7 @@ class ExrsService extends CShiftService {
     println("subject: ${title}")
     println("body: ${body}")
 
-    emailService.sendTextEmail(
+    getEmailService().sendTextEmail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
             subject: title,
@@ -436,7 +446,7 @@ class ExrsService extends CShiftService {
     println("subject: ${title2}")
     println("body: ${body2}")
 
-    emailService.sendTextEmail(
+    getEmailService().sendTextEmail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
             subject: title2,
@@ -448,20 +458,28 @@ class ExrsService extends CShiftService {
     return true
   }
 
+  @Override
+  public boolean moveIn(RentalTransaction trans) {
+    return reserve(trans);
+  }
+
     // Post the move in details to the Extraspace web site
     def processMoveIn(RentalTransaction trans) {
         ExrsWebFormProcessor exrsWebFormProcessor = new ExrsWebFormProcessor();
         def success = exrsWebFormProcessor.processMoveIn(trans);
 
-        // real-time debugging. so fun...
-        if (!success) {
+        if (success) {
+          println("Successful Extraspace Move-In!")
+          println(exrsWebFormProcessor.logBuf)
+        }
+        else {
             //log to catalina.out too
             println("to:'tech@storitz.com'")
             println("from: 'no-reply@storitz.com'")
             println("subject: EXRS Automatic Move-In Log")
             println("body: ${exrsWebFormProcessor.logBuf}")
 
-            emailService.sendTextEmail (
+            getEmailService().sendTextEmail (
                 to:"tech@storitz.com",
                 from:"no-reply@storitz.com",
                 subject:"EXRS Automatic Move-In Log",

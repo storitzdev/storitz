@@ -115,8 +115,20 @@ public enum State {
   }
 
   public static State fromText(String key) {
-    def ret = list().find {it.display.equalsIgnoreCase(key) }
-    if (!ret) return State.valueOf(key)
+    // JM: 2011-05-31
+    // A proper match is something like key = 'FL', which matches against the
+    // 2 character display value above. If we get a non alpha character we'll
+    // simply strip it out before attempting our search.
+    def ret = list().find { it.display.toUpperCase() == key.replaceAll("[\\W]*","").toUpperCase() }
+
+    // However, what if we get something like key = 'West Virginia'? In this case
+    // we attempt to match that against the full name. We strip out non alphas on
+    // both sides and convert to uppercase to facilitate the matching process.
+    if (!ret) ret = list().find { it.fullName.replaceAll("[\\W]*","").toUpperCase() == key.replaceAll("[\\W]*","").toUpperCase() }
+
+    // If that fails too, then we compare the key value to the enumerated value
+    if (!ret) ret = State.valueOf(key.toUpperCase())
+
     return ret
   }
 
@@ -125,9 +137,7 @@ public enum State {
   }
 
   public static State getEnumFromId(String value) {
-    def ret = list().find {it.display.equalsIgnoreCase(value) }
-    if (!ret) return State.valueOf(value)
-    return ret
+    return State.fromText(value);
   }
 
 }

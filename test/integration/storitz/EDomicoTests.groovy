@@ -2,7 +2,6 @@ package storitz
 
 import com.edomico.www.*
 import com.storitz.EDomico
-import com.storitz.Feed
 
 class EDomicoTests extends GroovyTestCase {
     protected void setUp() {
@@ -14,14 +13,14 @@ class EDomicoTests extends GroovyTestCase {
     }
 
     void testGetToken() {
-        EDomicoService service = new EDomicoService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
+        EDomicoStorageFeedService service = new EDomicoStorageFeedService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
         def token = service.readToken()
         System.out.println("TOKEN: ${token}")
         assertTrue(token != null)
     }
 
     void testGetSite() {
-        EDomicoService service = new EDomicoService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
+        EDomicoStorageFeedService service = new EDomicoStorageFeedService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
         def token = service.readToken()
         def site = service.readSiteID(token,"2227 SAN PABLO AVENUE","OAKLAND","94612")
         System.out.println("SITE: ${site}")
@@ -29,7 +28,7 @@ class EDomicoTests extends GroovyTestCase {
     }
 
     void testGetSizes() {
-        EDomicoService service = new EDomicoService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
+        EDomicoStorageFeedService service = new EDomicoStorageFeedService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
         def token = service.readToken()
         def site = service.readSiteID(token,"2227 SAN PABLO AVENUE","OAKLAND","94612")
         def sizes = service.readSizes(token,site)
@@ -52,7 +51,7 @@ class EDomicoTests extends GroovyTestCase {
     }
 
     void testGetUnitId() {
-        EDomicoService service = new EDomicoService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
+        EDomicoStorageFeedService service = new EDomicoStorageFeedService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
         def token = service.readToken()
         def site = service.readSiteID(token,"2227 SAN PABLO AVENUE","OAKLAND","94612")
         def sizes = service.readSizes(token,site)
@@ -63,7 +62,7 @@ class EDomicoTests extends GroovyTestCase {
     }
 
     void testGetUnitInfo() {
-        EDomicoService service = new EDomicoService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
+        EDomicoStorageFeedService service = new EDomicoStorageFeedService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
         def token = service.readToken()
         def site = service.readSiteID(token, "2227 SAN PABLO AVENUE", "OAKLAND", "94612")
         def sizes = service.readSizes(token, site)
@@ -82,7 +81,7 @@ class EDomicoTests extends GroovyTestCase {
     }
 
     void testGetUnits() {
-        EDomicoService service = new EDomicoService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
+        EDomicoStorageFeedService service = new EDomicoStorageFeedService(443,"uBvQoE0DtVTMQA8xCv57A3Rw")
         def token = service.readToken()
         def site = service.readSiteID(token, "2227 SAN PABLO AVENUE", "OAKLAND", "94612")
         def sizes = service.readSizes(token, site)
@@ -108,7 +107,7 @@ class EDomicoTests extends GroovyTestCase {
 
         for (feed in feeds) {
             System.out.println("${feed.edomicoClientID}, ${feed.edomicoWebServicesKey}")
-            EDomicoService service = new EDomicoService(feed.edomicoClientID,feed.edomicoWebServicesKey)
+            EDomicoStorageFeedService service = new EDomicoStorageFeedService(feed.edomicoClientID,feed.edomicoWebServicesKey)
             def token = service.readToken()
             for (loc in feed.locations) {
                 def site  = service.readSiteID(token,loc.address1,loc.city,loc.zipcode)

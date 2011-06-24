@@ -4,7 +4,7 @@ class ReservationMoveInJob {
   private static final boolean AUTOMATIC_FLUSH = true;
   private static final String DEFAULT_CHARSET = "utf8";
 
-  def CShiftService
+  def CShiftStorageFeedService
   def emailService
 
   static triggers = {
@@ -42,7 +42,7 @@ class ReservationMoveInJob {
       for(rt in results) {
         writer.println "Processing reservation id: ${rt.id} moveInDate: ${rt.moveInDate.format('MM/dd/yy')}"
         if (rt.site.source.startsWith('CS')) {
-          if (CShiftService.moveIn(rt, writer)) {
+          if (CShiftStorageFeedService.moveIn(rt, writer)) {
             rt.reserved = false
             rt.save()
           } else {

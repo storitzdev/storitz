@@ -14,12 +14,13 @@ class OrganizerContest {
         address1(nullable:false, blank:false)
         address2(nullable:true, blank:true)
         city(nullable:false, blank:false)
-        state(nullable:false, blank:false)
+        state(nullable:false)
         zipcode(nullable:false, blank:false)
+        zipcode2(nullable:false, validator: { entry -> entry >= 90001 && entry <= 96162 } )
         referralSource(nullable:true, blank:true)
         essayWhyStorage(nullable:false, blank:false, maxSize: 2000)
-        readTermsAndConditions(nullable:false, blank:false, validator: { entry -> entry == true } )
-        dontSendMeUpdates(nullable:true, blank:true)
+        readTermsAndConditions(nullable:false, validator: { entry -> entry == true } )
+        sendMeUpdates(nullable:true)
     }
 
     String firstName
@@ -32,9 +33,10 @@ class OrganizerContest {
     String city
     State  state
     String zipcode
+    Integer zipcode2
     String referralSource
     String essayWhyStorage
     Boolean readTermsAndConditions
-    Boolean dontSendMeUpdates
+    Boolean sendMeUpdates
 
 }

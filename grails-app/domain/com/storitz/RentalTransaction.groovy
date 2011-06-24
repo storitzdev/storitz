@@ -1,6 +1,8 @@
 package com.storitz
 
 import storitz.constants.*
+import storitz.UpdateInventoryJob
+import storitz.BalkNotificationJob
 
 class RentalTransaction {
 
@@ -122,6 +124,13 @@ class RentalTransaction {
     invoice(nullable: true)
     achAmount(nullable: true)
     displaySize(nullable: true)
+  }
+
+  // This event, as expected, will fire after insertion into the database.
+  def afterInsert() {
+    if (status == TransactionStatus.BEGUN) {
+      BalkNotificationJob.scheduleBalkNotice(id)
+    }
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',

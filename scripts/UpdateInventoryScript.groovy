@@ -2,8 +2,7 @@ package storitz
 
 println "Refreshing inventory"
 
- // JM: QS placed first to reduce javax/activation/DataHandler linker errors
-def sources = ['QS', 'SL','CS3', 'USI']
+def sources = ['QS', 'SL','CS3', 'USI', 'DOM']
 
 for (int i = 0; i < sources.size(); i++) {
     def src = sources[i]

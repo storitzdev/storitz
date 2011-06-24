@@ -10,7 +10,7 @@ import org.tempuri.UserAccountST
 import com.storitz.*
 import storitz.constants.*
 
-class QuikStorService extends BaseProviderService {
+class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
   def port = [:]
   def geocodeService
@@ -61,7 +61,7 @@ class QuikStorService extends BaseProviderService {
       if (loc.site) {
         // TODO this one already exists
         println "Found an existing site: ${loc.site.title}"
-        updateSite(site, stats, writer)
+        updateSite(loc.site, stats, writer)
       } else {
         def site = new StorageSite()
         site.feed = quikStor
@@ -75,7 +75,7 @@ class QuikStorService extends BaseProviderService {
         def facInfo = getFacilityInfo(loc)
         createSiteUser(site, facInfo.csSiteEmail, facInfo.csSiteEmail, quikStor.manager)
         loadInsurance(site, loc)
-        loadPromos(quikStor, site, writer)
+        loadPromos(site, writer)
       }
     }
 
@@ -116,6 +116,7 @@ class QuikStorService extends BaseProviderService {
     }
   }
 
+  @Override
   def refreshInsurance(Feed feed) {
     QuikStor quikStor = (QuikStor) feed
 
@@ -124,6 +125,7 @@ class QuikStorService extends BaseProviderService {
     }
   }
 
+  @Override
   def loadInsurance(Feed feed, StorageSite site) {
 
   }
@@ -182,7 +184,8 @@ class QuikStorService extends BaseProviderService {
 
   }
 
-  def updateSite(StorageSite site, SiteStats stats, PrintWriter writer) {
+  @Override
+  public void updateSite(StorageSite site, SiteStats stats, PrintWriter writer) {
     def quikStor = (QuikStor) site.feed
     def loc = quikStor.locations.find {it.site == site}
 
@@ -190,7 +193,7 @@ class QuikStorService extends BaseProviderService {
     def facInfo = myProxy.facilityInfo(loc.username, loc.password, loc.sitename)
 
     if (facInfo.success) {
-      site.title = facInfo.csSiteName
+      if (!site.title) site.title = facInfo.csSiteName
       site.address = facInfo.csSiteAddress.trim()
       site.city = facInfo.csSiteCity.trim()
       site.state = State.getEnumFromId(facInfo.csSiteState)
@@ -275,7 +278,10 @@ class QuikStorService extends BaseProviderService {
     }
   }
 
-  def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+  @Override
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    zeroOutUnitsForSite(site,stats,writer)
+
     def siteUnitTypes = [:]
     site.units.each { siteUnitTypes[it.unitNumber as Integer] = false }
     def quikStor = (QuikStor) site.feed
@@ -296,7 +302,13 @@ class QuikStorService extends BaseProviderService {
 
       def unit = site.units.find {(it.unitNumber as Integer) == unitType.iTypeId }
       siteUnitTypes[unitType.iTypeId as Integer] = true
-      if (unit) {
+      def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
+      def searchType = SearchType.STORAGE
+      if (unitInfo.csUnitType == 'Parking') {
+        searchType = SearchType.PARKING
+      }
+      def unitsize = getUnitSizeService().getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
+      if (unit && unitsize) {
         if (unitType.availability > unit.unitCount) {
           stats.updateCount += (unitType.availability - unit.unitCount)
           unit.unitCount = unitType.availability
@@ -310,17 +322,12 @@ class QuikStorService extends BaseProviderService {
         if (unit.deposit != unitDeposit) {
           unit.deposit = unitDeposit
         }
-        if (unit.isDirty()) {
-          unit.save(flush: true)
-        }
+        unit.isAvailable = true;
+        stats.removedCount--
+        stats.unitCount++
+        unit.save(flush: true)
       } else {
-        def unitInfo = myProxy.unitTypeInfo(loc.username, loc.password, loc.sitename, unitType.iTypeId)
         writer.println("retrieved unitInfo ${unitInfo.dump()}")
-        def searchType = SearchType.STORAGE
-        if (unitInfo.csUnitType == 'Parking') {
-          searchType = SearchType.PARKING
-        }
-        def unitsize = getUnitSizeService().getUnitSize(unitInfo.dWidth, unitInfo.dLength, searchType)
         if (unitsize) {
           unit = new StorageUnit()
           unit.unitNumber = unitType.iTypeId
@@ -368,7 +375,9 @@ class QuikStorService extends BaseProviderService {
     }
   }
 
-  def loadPromos(QuikStor quikStor, StorageSite storageSiteInstance, PrintWriter writer) {
+  @Override
+  public void loadPromos(StorageSite storageSiteInstance, PrintWriter writer) {
+    QuikStor quikStor = (QuikStor)storageSiteInstance.feed;
 
     // clear old restrictions
     for (specialOffer in storageSiteInstance.specialOffers) {
@@ -405,7 +414,7 @@ class QuikStorService extends BaseProviderService {
         } else {
           writer.println "Found existing special id = ${specialId}"
         }
-        so.promoName = specialOffer.Title.text()
+        if (!so.promoName) so.promoName = specialOffer.Title.text()
         writer.println "Special offer id = ${specialId} - Title = ${so.promoName}"
         so.inMonth = 1
         so.prepayMonths = 0
@@ -546,11 +555,14 @@ class QuikStorService extends BaseProviderService {
     storageSiteInstance.save(flush: true)
   }
 
-  def addSitePhone(QuikStor quikStor, StorageSite storageSiteInstance, PrintWriter writer) {
+  @Override
+  public void addSitePhone(StorageSite storageSiteInstance, PrintWriter writer) {
+    QuikStor quikStor = (QuikStor)storageSiteInstance.feed;
     // Do nothing
   }
 
-  def checkRented(RentalTransaction trans) {
+  @Override
+  public boolean isAvailable(RentalTransaction trans) {
     def unit = StorageUnit.get(trans.unitId)
 
     QuikStor quikStor = (QuikStor) trans.site.feed
@@ -569,11 +581,13 @@ class QuikStorService extends BaseProviderService {
     return false
   }
 
-  def createTenant(RentalTransaction trans) {
-
+  @Override
+  public boolean reserve(RentalTransaction trans) {
+    return moveIn(trans);
   }
 
-  def moveIn(RentalTransaction trans) {
+  @Override
+  public boolean moveIn(RentalTransaction trans) {
     def unit = StorageUnit.get(trans.unitId)
     String specialId = null
     if (trans.promoId != -999) {
@@ -721,7 +735,7 @@ class QuikStorService extends BaseProviderService {
       }
       return retVal
     }
-
+    return retVal;
   }
 
   private String buildMoveInParams(RentalTransaction trans, String unitID) {
@@ -788,4 +802,8 @@ class QuikStorService extends BaseProviderService {
     return writer.toString()
   }
 
+    @Override
+    void init(StorageSite site) {
+        //Do nothing
+    }
 }

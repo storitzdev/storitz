@@ -11,7 +11,7 @@ package storitz
 // This class is used by inventory, promos, phones update scripts
 
 class LocalContext {
-    def mergedJobDataMap
+  def mergedJobDataMap
 
     LocalContext(name, src) {
         mergedJobDataMap = [from : name , source : src ]

@@ -17,6 +17,7 @@ class StorageUnit {
     deposit(nullable: true)
     dateCreated(nullable:true)
     lastUpdated(nullable: true)
+    bestUnitPrice(nullable: true)
   }
 
   String description
@@ -31,7 +32,8 @@ class StorageUnit {
   Date startAvail
   BigDecimal price
   BigDecimal pushRate
-  StorageSize unitsize    // used for searching
+  BigDecimal bestUnitPrice // price or pushRate. Used for finding BestUnit *only*
+  StorageSize unitsize     // used for searching
   String displaySize
   Boolean isAvailable
   Integer unitCount

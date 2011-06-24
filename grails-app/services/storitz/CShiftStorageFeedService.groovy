@@ -9,8 +9,9 @@ import java.math.RoundingMode
 import com.storitz.*
 import static groovyx.net.http.ContentType.XML
 import storitz.constants.*
+import com.storitz.service.CostTotals
 
-class CShiftService extends BaseProviderService {
+class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
   def geocodeService
   def unitSizeService
@@ -323,7 +324,8 @@ class CShiftService extends BaseProviderService {
     }
   }
 
-  def updateSite(site, stats, writer) {
+  @Override
+  public void updateSite(StorageSite site, SiteStats stats, PrintWriter writer) {
     def centerShift = (CenterShift) site.feed
 
     def ret = getSites(centerShift.location.webUrl, centerShift.userName, centerShift.pin)
@@ -364,12 +366,16 @@ class CShiftService extends BaseProviderService {
     site.sourceId = tab.SITE_ID.text()
     site.sourceLoc = tab.SITE_NUMBER.text()
     site.source = siteSource
-    site.title = tab.SITE_NAME.text().replace('/', '-')
+    site.feed = cshift
 
-    if (site.title ==~ /(?i).*(test|training)\s?+.*/) {
+    def site_title =  tab.SITE_NAME.text().replace('/', '-')
+
+    if (site_title ==~ /(?i).*(test|training)\s?+.*/) {
       writer.println "Test or training site - dropping: ${site.title}"
       return
     }
+
+    if (!site.title) site.title = site_title
 
     if (!addSiteAddress(cshift, site, writer)) {
       writer.println "Got a bad address, skipping site creation: ${site.title}"
@@ -377,7 +383,7 @@ class CShiftService extends BaseProviderService {
     }
 
     addSiteHours(cshift, site)
-    addSitePhone(cshift, site, writer)
+    addSitePhone(site, writer)
     addSiteFeatures(cshift, site)
 
     site.extendedHours = false
@@ -405,7 +411,7 @@ class CShiftService extends BaseProviderService {
     unitsAvailable(cshift, site, stats, writer)
 
     site.requiresInsurance = loadInsurance(cshift, site)
-    loadPromos(cshift, site, writer)
+    loadPromos(site, writer)
     site.save(flush: true)
   }
 
@@ -448,7 +454,7 @@ class CShiftService extends BaseProviderService {
       StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
       writer.println "Create phone for site ${tab.SITE_ID.text()}"
       if (site) {
-        addSitePhone(cshift, site, writer)
+        addSitePhone(site, writer)
       }
     }
   }
@@ -535,7 +541,9 @@ class CShiftService extends BaseProviderService {
     return true
   }
 
-  def addSitePhone(cshift, site, writer) {
+  @Override
+  public void addSitePhone(StorageSite site, PrintWriter writer) {
+    CenterShift cshift = (CenterShift)site.feed;
     def ret = getSitePhones(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
 
     if (!ret) return
@@ -745,7 +753,10 @@ class CShiftService extends BaseProviderService {
     }
   }
 
-  def updateUnits(site, stats, writer) {
+  @Override
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    zeroOutUnitsForSite(site,stats,writer)
+
     def centerShift = (CenterShift) site.feed
     unitsAvailable(centerShift, site, stats, writer)
     if (site.units.size() > 0) {
@@ -756,13 +767,13 @@ class CShiftService extends BaseProviderService {
 
       CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-      writer.println "checkRented (${centerShift.userName}, ${centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+      writer.println "isAvailable (${centerShift.userName}, ${centerShift.pin}, ${site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
       def unitInfo = port.getAvailableUnits(centerShift.userName, centerShift.pin, site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
       if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
         writer.println "Return for getAvailableUnits < 0 : ${unitInfo}"
-        return false
+        return
       }
 
       def unitId = unitInfo[0]
@@ -810,6 +821,12 @@ class CShiftService extends BaseProviderService {
     for (unit in records.'soap:Body'.'*:GetSiteUnitDataResponse'.'*:GetSiteUnitDataResult'.'*:SiteUnitData'.'*:Unit') {
 
       def vacant = unit.VACANT.text() as Integer
+
+      // Really? What do you expect me to do with a unit of zero count!?!
+      if (vacant <= 0) {
+        continue;
+      }
+
       def totalUnits = unit.TOTAL.text() as Integer
       def typeName = unit.VALUE.text()
       def attributes = unit.ATTRIBUTES.text()
@@ -907,11 +924,13 @@ class CShiftService extends BaseProviderService {
             stats.unitCount += vacant
 
           } else {
+            siteUnit.isAvailable = true;
             siteUnit.unitCount = vacant
             siteUnit.totalUnits = totalUnits
             siteUnit.pushRate = siteUnit.price = unit.STREET_RATE.text() as BigDecimal
             siteUnit.taxRate = unit.TAX_RATE.text() as BigDecimal
             stats.unitCount += vacant
+            stats.removedCount--
           }
           siteUnit.save(flush: true)
           if (newUnit) {
@@ -928,7 +947,9 @@ class CShiftService extends BaseProviderService {
     }
   }
 
-  def loadPromos(cshift, site, writer) {
+  @Override
+  public void loadPromos(StorageSite site, PrintWriter writer) {
+    CenterShift cshift = (CenterShift)site.feed
     def ret = getPromos(cshift.location.webUrl, cshift.userName, cshift.pin, site.sourceId)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -966,7 +987,7 @@ class CShiftService extends BaseProviderService {
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = description
-          specialOffer.promoName = promo.'promo-name'.text()
+          if (!specialOffer.promoName) specialOffer.promoName = promo.'promo-name'.text()
           newOffer = true
         } else {
           if (!specialOffer.description && description) {
@@ -1133,6 +1154,7 @@ class CShiftService extends BaseProviderService {
 
   }
 
+  @Override
   def loadInsurance(Feed feed, StorageSite site) {
 
     CenterShift cshift = (CenterShift) feed
@@ -1185,7 +1207,8 @@ class CShiftService extends BaseProviderService {
     }
   }
 
-  def checkRented(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean isAvailable(RentalTransaction rentalTransaction) {
     def unit = StorageUnit.get(rentalTransaction.unitId)
     def cshift = (CenterShift) rentalTransaction.site.feed
 
@@ -1228,7 +1251,7 @@ class CShiftService extends BaseProviderService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-    println "checkRented (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+    println "isAvailable (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
     def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
@@ -1329,7 +1352,14 @@ class CShiftService extends BaseProviderService {
     return moveInDetails
   }
 
-  def reserve(RentalTransaction rentalTransaction) {
+  @Override
+  public boolean moveIn(RentalTransaction rentalTransaction) {
+      return reserve(rentalTransaction)
+  }
+
+  @Override
+  public boolean reserve(RentalTransaction rentalTransaction) {
+    createTenant(rentalTransaction)
     def ret = makeReservation(rentalTransaction)
 
     println "MakeReservation return ${ret}"
@@ -1404,12 +1434,14 @@ class CShiftService extends BaseProviderService {
 
   }
 
-  def calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
+  @Override
+  public double calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
     def ret = calculateTotals(site, unit, promo, ins, moveInDate, extended)
-    return ret["moveInTotal"]
+    return ret.moveInTotal as double
   }
 
-  def calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
+  @Override
+  public Date calculatePaidThruDate(StorageSite site, SpecialOffer promo, Date moveInDate, boolean allowExtension) {
     BigDecimal durationMonths = promo ? (promo.prepay ? promo.expireMonth : promo.prepayMonths) : 1
 
     def cal = new GregorianCalendar()
@@ -1434,30 +1466,30 @@ class CShiftService extends BaseProviderService {
     return cal.time
   }
 
-  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
-    calculateTotals(site, unit, promo, ins, moveInDate, true)
+  public CostTotals calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate) {
+    return calculateTotals(site, unit, promo, ins, moveInDate, true)
   }
 
-  def calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
+  @Override
+  public CostTotals calculateTotals(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean allowExtension) {
 
-    def ret = [:]
+    CostTotals ret = new CostTotals();
 
     if (!unit) {
       def cal = new GregorianCalendar()
       cal.setTime(moveInDate)
 
-      ret["duration"] = 1
-      ret["discountTotal"] = 0
-      ret["feesTotal"] = 0
-      ret["rentTotal"] = 0
-      ret["insuranceCost"] = 0
-      ret["tax"] = 0
-      ret["moveInTotal"] = 0
-      ret["deposit"] = 0
-      ret["paidThruDate"] = cal.time.format('MM/dd/yy')
-      ret["paidThruDateMillis"] = cal.time
-      ret["durationMonths"] = 1
-      ret["durationDays"] = 0
+      ret.duration = 1
+      ret.discountTotal = 0
+      ret.feesTotal = 0
+      ret.rentTotal = 0
+      ret.insuranceCost = 0
+      ret.tax = 0
+      ret.moveInTotal = 0
+      ret.deposit = 0
+      ret.paidThruDate = cal.time
+      ret.durationMonths = 1
+      ret.durationDays = 0
       return ret
     }
 
@@ -1480,9 +1512,9 @@ class CShiftService extends BaseProviderService {
       if (allowExtension) {
         if (promo && moveInDay > site.prorateCutoff) {
           durationMonths++;
-          ret["extended"] = true;
+          ret.extended = true;
         } else {
-          ret["extended"] = false;
+          ret.extended = false;
         }
       }
       if (durationMonths - 1 > 0) {
@@ -1538,20 +1570,24 @@ class CShiftService extends BaseProviderService {
 
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
-    ret["duration"] = durationMonths
-    ret["discountTotal"] = offerDiscount
-    ret["feesTotal"] = feesTotal
-    ret["rentTotal"] = rentTotal
-    ret["insuranceCost"] = insuranceCost
-    ret["tax"] = tax
-    ret["deposit"] = deposit
-    ret["moveInTotal"] = moveInTotal
-    ret["paidThruDate"] = cal.time.format('MM/dd/yy')
-    ret["paidThruDateMillis"] = cal.time
-    ret["durationMonths"] = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
-    ret["durationDays"] = durationDays
+    ret.duration = durationMonths
+    ret.discountTotal = offerDiscount
+    ret.feesTotal = feesTotal
+    ret.rentTotal = rentTotal
+    ret.insuranceCost = insuranceCost
+    ret.tax = tax
+    ret.deposit = deposit
+    ret.moveInTotal = moveInTotal
+    ret.paidThruDate = cal.time
+    ret.durationMonths = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
+    ret.durationDays = durationDays
 
     return ret
+  }
+
+  @Override
+  void init(StorageSite site) {
+      // nothing to do
   }
 }
 

@@ -210,7 +210,6 @@ function getMarkers() {
 }
 
 function showAddress(address, size, date, searchType) {
-
     var validAddr = address.length > 4 && !/^Enter /.test(address);
 
     if (validAddr) {
@@ -253,6 +252,7 @@ function showAddress(address, size, date, searchType) {
     }
     // only redraw markers if date or size changed
     if (oldSearchAddr == searchAddr) {
+        ++getMarkersRequests
         getMarkers();
     }
 }

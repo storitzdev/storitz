@@ -10,7 +10,7 @@ import storitz.constants.FeedType
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class QuikStorController extends FeedController {
 
-  def quikStorService
+  def quikStorStorageFeedService
   def imageService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", uploadLogo: "POST", updateInventory: "POST"]
@@ -45,7 +45,7 @@ class QuikStorController extends FeedController {
     def quikStorInstance = QuikStor.get(params.id)
     if (quikStorInstance) {
       def stats = new storitz.SiteStats()
-      quikStorService.refreshSites(quikStorInstance, stats)
+      quikStorStorageFeedService.refreshSites(quikStorInstance, stats)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: quikStorInstance.id)
     }
@@ -170,7 +170,7 @@ class QuikStorController extends FeedController {
     if (quikStorInstance) {
       def writer = new PrintWriter(System.out)
       def stats = new storitz.SiteStats()
-      quikStorService.processLocations(quikStorInstance, stats, writer)
+      quikStorStorageFeedService.processLocations(quikStorInstance, stats, writer)
       flash.message = "Locations processed."
       redirect(action: "list")
     }
@@ -179,7 +179,7 @@ class QuikStorController extends FeedController {
   def createContacts = {
     def quikStorInstance = QuikStor.get(params.id)
     if (quikStorInstance) {
-      quikStorService.createSiteUsers(quikStorInstance)
+      quikStorStorageFeedService.createSiteUsers(quikStorInstance)
       flash.message = "Site contacts created."
       redirect(action: "list")
     }
@@ -188,7 +188,7 @@ class QuikStorController extends FeedController {
   def updateTax = {
     def quikStorInstance = QuikStor.get(params.id)
     if (quikStorInstance) {
-      quikStorService.createSiteTaxes(quikStorInstance)
+      quikStorStorageFeedService.createSiteTaxes(quikStorInstance)
       flash.message = "Site taxes updated."
       redirect(action: "list")
     }

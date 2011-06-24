@@ -2,7 +2,6 @@ package storitz
 
 import com.storitz.CollegeLanding
 import javax.servlet.http.*
-import com.storitz.Insurance
 import storitz.constants.SearchType
 import com.storitz.UserRole
 import com.storitz.User

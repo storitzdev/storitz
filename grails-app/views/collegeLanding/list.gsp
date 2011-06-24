@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.CollegeLanding" %>
+<%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder; com.storitz.CollegeLanding" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -38,6 +38,8 @@
                             <g:sortableColumn property="address" title="${message(code: 'collegeLanding.address.label', default: 'Address')}" />
                         
                             <g:sortableColumn property="displayName" title="${message(code: 'collegeLanding.displayName.label', default: 'Display Name')}" />
+
+                            <g:sortableColumn property="url" title="${message(code: 'collegeLanding.url.label', default: 'URL')}" />
                       </tr>
                     </thead>
                     <tbody>
@@ -51,6 +53,8 @@
                             <td>${fieldValue(bean: collegeLandingInstance, field: "address")}</td>
                         
                             <td>${fieldValue(bean: collegeLandingInstance, field: "displayName")}</td>
+
+                            <td>${ConfigurationHolder.config.grails.serverURL}/college/${fieldValue(bean: collegeLandingInstance, field: "name").toString().toLowerCase()}</td>
                         </tr>
                     </g:each>
                     </tbody>

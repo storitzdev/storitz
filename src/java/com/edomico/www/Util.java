@@ -15,7 +15,7 @@ public class Util {
 
     public static MessageElement getBody (AnyContentType  anyContentType) {
         MessageElement [] messageElements = anyContentType.get_any();
-        MessageElement head = messageElements[0];
+        MessageElement head = messageElements[0]; // ignore the head
         MessageElement body = messageElements[1];
         return body;
     }

@@ -4,7 +4,7 @@ import com.centershift.store40.*
 import com.storitz.*
 import storitz.constants.*
 
-class CShift4Service extends BaseProviderService {
+class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
   def geocodeService
   def unitSizeService
@@ -66,6 +66,12 @@ class CShift4Service extends BaseProviderService {
     loadSites(cshift, stats, writer)
   }
 
+  // TODO - handle update case
+  @Override
+  public void updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
+
+  }
+
   def loadSites(CenterShift cshift, SiteStats stats, PrintWriter writer) {
     WSSoap myProxy = getProxy(cshift)
     def siteListRequest = new GetSiteListRequest()
@@ -77,7 +83,7 @@ class CShift4Service extends BaseProviderService {
     for (site in siteList.details.soagetsitelist) {
       StorageSite foundSite = StorageSite.findBySourceAndSourceId("CS4", site.siteid)
       if (foundSite) {
-        // TODO - handle update case
+        updateSite(foundSite, stats, writer)
       } else {
         if (site.propertytype == 1 && (site.sitestauts == 1 | site.sitestauts == 2)) {
 
@@ -238,7 +244,7 @@ class CShift4Service extends BaseProviderService {
 
           loadInsurance(cshift, csite)
           updateUnits(csite, stats, writer)
-          loadPromos(cshift, csite, writer)
+          loadPromos(csite, writer)
 
           csite.save(flush: true)
 
@@ -252,6 +258,7 @@ class CShift4Service extends BaseProviderService {
     }
   }
 
+  @Override
   def loadInsurance(Feed feed, StorageSite site) {
     CenterShift cshift = (CenterShift) feed
     def myProxy = getProxy(cshift)
@@ -291,7 +298,9 @@ class CShift4Service extends BaseProviderService {
     }
   }
 
-  def updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+  @Override
+  public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
+    zeroOutUnitsForSite(site,stats,writer)
 
     def unitList = []
 
@@ -382,6 +391,7 @@ class CShift4Service extends BaseProviderService {
           myUnit.pushRate = unit.currentrate
           stats.unitCount += unit.available
           stats.updateCount++
+          stats.removedCount--
         }
         myUnit.save(flush: true)
         if (newUnit) {
@@ -409,7 +419,9 @@ class CShift4Service extends BaseProviderService {
     }
   }
 
-  def loadPromos(CenterShift cshift, StorageSite site, PrintWriter writer) {
+  @Override
+  public void loadPromos(StorageSite site, PrintWriter writer) {
+    CenterShift cshift = (CenterShift)site.feed;
     def myProxy = getProxy(cshift)
 
     Long siteID = site.sourceId as Long
@@ -420,14 +432,14 @@ class CShift4Service extends BaseProviderService {
       discReq.unitID = unit.unitNumber as Long
       def lookupUser = getLookupUser(cshift)
       def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
-      for (discount in discountList.details.applbestpcd) {
+      for (discount in discountList.details?.applbestpcd) {
         println "Processing discount: ${discount.dump()}"
 
         def offer = site.specialOffers.find {discount.pcdid == it.concessionId}
         if (!offer) {
           offer = new SpecialOffer()
           offer.concessionId = discount.pcdid
-          offer.promoName = discount.pcdname
+          if (!offer.promoName) offer.promoName = discount.pcdname
           offer.description = discount.pcddesc
           offer.active = offer.featured = false
         }
@@ -497,7 +509,8 @@ class CShift4Service extends BaseProviderService {
 
   }
 
-  def checkRented(RentalTransaction trans) {
+  @Override
+  public boolean isAvailable(RentalTransaction trans) {
 
     StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
     BigDecimal unitId = transUnit.unitNumber as BigDecimal
@@ -531,6 +544,12 @@ class CShift4Service extends BaseProviderService {
       }
     }
     return false
+  }
+
+  // TODO
+  @Override
+  public void addSitePhone(StorageSite storageSiteInstance, PrintWriter writer) {
+
   }
 
   def createTenant(RentalTransaction trans) {
@@ -568,7 +587,14 @@ class CShift4Service extends BaseProviderService {
 
   }
 
-  def moveIn(RentalTransaction trans) {
+  @Override
+  public boolean reserve(RentalTransaction trans) {
+    return moveIn(trans);
+  }
+
+  @Override
+  public boolean moveIn(RentalTransaction trans) {
+    createTenant(trans)
     StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
 
   }
@@ -583,4 +609,8 @@ class CShift4Service extends BaseProviderService {
     return Date.parse("hh:mma", end)
   }
 
+  @Override
+  void init(StorageSite site) {
+        // nothing to do
+  }
 }

@@ -18,9 +18,11 @@
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="list">List Storage Sites</g:link></span>
+      <!-- Storage Sites are created through feed import, not by hand
       <sec:ifAnyGranted roles="ROLE_ADMIN">
         <span class="button"><g:link action="create">Create New Storage Site</g:link></span>
       </sec:ifAnyGranted>
+      -->
     </div>
     <div class="body">
 
@@ -638,7 +640,7 @@
           <g:hiddenField name="id" value="${storageSiteInstance?.id}"/>
           <span class="button"><g:actionSubmit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
           <span class="button"><g:actionSubmit action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-          <span class="button"><g:actionSubmit action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}"/></span>
+          <span class="button"><g:actionSubmit action="refresh" value="${message(code: 'default.button.refresh.label', default: 'Refresh Storage Site from Feed')}" onclick="return confirm('${message(code: 'default.button.refresh.confirm.message', default: 'Are you sure?')}');"/></span>
           <span class="button"><g:actionSubmit action="units" value="${message(code: 'default.button.refresh.label', default: 'Reload Available Units')}"/></span>
           <span class="button"><g:actionSubmit action="report" value="${message(code: 'default.button.report.label', default: 'Activity Report')}"/></span>
           <span class="button"><g:actionSubmit action="refreshPromo" value="${message(code: 'default.button.refreshPromo.label', default: 'Refresh Promos')}"/></span>
