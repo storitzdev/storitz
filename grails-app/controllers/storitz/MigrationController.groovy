@@ -465,7 +465,11 @@ class MigrationController {
   }
 
   def feedTypeEquals(feedType,feedName) {
-    return feedType == feedName || feedType.name == feedName
+    if (feedType == feedName)
+      return true
+    if (feedType.name == feedName)
+      return true
+    return false
   }
 
 }
