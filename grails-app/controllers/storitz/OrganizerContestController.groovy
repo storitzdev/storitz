@@ -55,7 +55,8 @@ class OrganizerContestController {
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
                 flash.saved = "saved"
                 flash.update = "yes"
-                redirect(action: "create", id: organizerContestInstance.id)
+                flash.id = organizerContestInstance.id // workaround for hsqlDB
+                redirect(action: "create")
             }
             else {
                 flash.message = "Failed to save entry. Please try again."
@@ -76,7 +77,8 @@ class OrganizerContestController {
               sendEmail(organizerContestInstance)
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
               flash.saved = "saved"
-              redirect(action: "create", id: organizerContestInstance.id)
+              flash.id = organizerContestInstance.id // workaround for hsqlDB
+              redirect(action: "create")
           }
           else {
               flash.message = "Failed to save entry. Please try again."

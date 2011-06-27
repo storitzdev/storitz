@@ -80,7 +80,7 @@
                         <p>Please let us know how you heard about us, and sign up to receive valuable updates from us on Twitter.</p>
 
                         <g:form controller="organizerContest" action="updateEntry">
-                            <g:hiddenField name="id" value="${id}" />
+                            <g:hiddenField name="id" value="${flash.id}" />
                             <table width="100%">
                                 <tbody>
 
