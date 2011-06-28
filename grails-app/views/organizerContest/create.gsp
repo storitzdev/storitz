@@ -22,14 +22,6 @@
             </div>
             <div class="left" style="width:635px;">
                 <div>
-                    %{--<div class="left bannerMastheadAlt">--}%
-                        %{--<div class="bannerMastheadAltText"><g:link controller="home" action="index"><h2>Simplify Your Search for Self Storage.</h2></g:link></div>--}%
-                         %{--<div class="bannerMastheadAltText"><g:link controller="home" action="index"><h2>Compare Thousands of Units with One Click.</h2></g:link></div>--}%
-                    %{--</div>--}%
-                    %{--<div class="left tollFree">--}%
-                        %{--<div style="font-family:verdana;font-size:9px;text-transform:capitalize;color:#266e00;line-height:15px;margin: 10px 0 0 34px;">NEED ASSISTANCE?</div>--}%
-                        %{--<div style="font-family:verdana; font-weight: bold; font-size:13px;color:#fff;margin-left: 34px;">(877) 456-2929</div>--}%
-                    %{--</div>--}%
                     <div style="clear:both;"></div>
                 </div>
             </div>
@@ -248,51 +240,6 @@
                         <tr class="orgprop">
                             <td valign="middle" class="name">
                                 <span class="left"><storitz:image src="2-your-primary-residence.gif" alt="Your Primary Residence Zip"/></span>
-                                %{--<label class="right" for="address1"><g:message code="organizerContest.address1.label" default="Address"/></label>--}%
-                            %{--</td>--}%
-                            %{--<td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'address1', 'errors')}">--}%
-                                %{--<g:textField name="address1" class="required"  value="${organizerContestInstance?.address1}"/>--}%
-                                %{--<g:hasErrors bean="${organizerContestInstance}" field="address1">--}%
-                                    %{--<span style="color: red;">Required</span>--}%
-                                %{--</g:hasErrors>--}%
-                            %{--</td>--}%
-                        %{--</tr>--}%
-
-                        %{--<tr class="orgprop">--}%
-                            %{--<td valign="middle" class="name">--}%
-                                %{--<label class="right" for="address2"><g:message code="organizerContest.address2.label" default="Suite/Apt"/></label>--}%
-                            %{--</td>--}%
-                            %{--<td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'address2', 'errors')}">--}%
-                                %{--<g:textField name="address2" value="${organizerContestInstance?.address2}"/>--}%
-                            %{--</td>--}%
-                        %{--</tr>--}%
-
-                        %{--<tr class="orgprop">--}%
-                            %{--<td valign="middle" class="name">--}%
-                                %{--<label class="right" for="city"><g:message code="organizerContest.city.label" default="City"/></label>--}%
-                            %{--</td>--}%
-                            %{--<td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'city', 'errors')}">--}%
-                                %{--<g:textField name="city" class="required"  value="${organizerContestInstance?.city}"/>--}%
-                                %{--<g:hasErrors bean="${organizerContestInstance}" field="city">--}%
-                                    %{--<span style="color: red;">Required</span>--}%
-                                %{--</g:hasErrors>--}%
-                            %{--</td>--}%
-                        %{--</tr>--}%
-
-                        %{--<tr class="orgprop">--}%
-                            %{--<td valign="middle" class="name">--}%
-                                %{--<label class="right" for="state"><g:message code="organizerContest.state.label" default="State"/></label>--}%
-                            %{--</td>--}%
-                            %{--<td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'state', 'errors')}">--}%
-                                %{--<g:select name="state" class="required"  from="${storitz.constants.State?.values()}" keys="${storitz.constants.State?.values()*.name()}" value="${organizerContestInstance?.state?.name()}"/>--}%
-                                %{--<g:hasErrors bean="${organizerContestInstance}" field="state">--}%
-                                    %{--<span style="color: red;">Required</span>--}%
-                                %{--</g:hasErrors>--}%
-                            %{--</td>--}%
-                        %{--</tr>--}%
-
-                        %{--<tr class="orgprop">--}%
-                            %{--<td valign="middle" class="name">--}%
                                 <label class="right firstfield" for="zipcode"><g:message code="organizerContest.zipcode.label" default=""/>Zip Code</label>
                             </td>
                             <td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode', 'errors')}">

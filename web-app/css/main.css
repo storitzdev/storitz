@@ -23,7 +23,7 @@ a:link, a:visited {
 } 
 
 h1 {
-    color: #006dba;
+    color: #099EC8;
     font-weight: normal;
     font-size: 16px;
     margin: .8em 0 .3em 0;
@@ -216,8 +216,77 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
     width: 85%;
 }
 
+/* Added css for changes in contest page */
+#LikePluginPagelet div.connect_button_container {
+    padding-left: 40px;
+}
+
+#contest_top {
+    width: 960px;
+    display: block;
+}
+
+#contestformdiv .organizer_intro {
+    display: inline-block;
+    float: left;
+    width:470px;
+    padding-right: 10px;
+    font-size: 15px;
+    font-family: helvetica;
+}
+
+#contestformdiv .video_container {
+    display: inline-block;
+    /*float: left;*/
+    width: 465px;
+    height: 270px;
+}
+
+#contest_footer {
+    height: 60px;
+    background-image: url("../images/bkg_footer.gif");
+    color: white;
+}
+
+.orgprop label.right {
+    font-family: arial;
+    font-size: 13px;
+    text-align: right;
+    /*padding-top: 6px;*/
+}
+
+.orgprop input.required {
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 26px;
+    width: 240px;
+}
+
+.orgprop input:focus, .orgprop textarea:focus {
+    box-shadow: 0 0 15px #006DBA;
+}
+
+.orgprop textarea {
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 240px;
+}
+
+.orgprop .firstfield {
+    padding-top: 6px;
+}
+
+.orgprop input.tac {
+    width: 13px;
+    height: 13px;
+}
+
+/* Additions end here */
+
 .orgprop {
     padding: 5px;
+    height: 50px;
 }
 .orgprop .name {
     text-align: left;

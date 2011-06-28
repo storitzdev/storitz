@@ -9,6 +9,7 @@ class OrganizerContestController {
     def enabled
     def emailService
     def toEmailAddress
+    def id
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -54,7 +55,7 @@ class OrganizerContestController {
                 sendEmail(organizerContestInstance)
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
                 flash.saved = "saved"
-                flash.update = "yes"
+//                flash.update = "yes"
                 flash.id = organizerContestInstance.id // workaround for hsqlDB
                 redirect(action: "create")
             }
@@ -199,9 +200,10 @@ class OrganizerContestController {
 
         PrintWriter bodyWriter = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
         bodyWriter.println "Name    : ${organizerContestInstance.firstName} ${organizerContestInstance.lastName}"
-        bodyWriter.println "Address : ${organizerContestInstance.address1}"
-        bodyWriter.println "          ${organizerContestInstance.address2}"
-        bodyWriter.println "          ${organizerContestInstance.city}, ${organizerContestInstance.state} ${organizerContestInstance.zipcode}"
+//        bodyWriter.println "Address : ${organizerContestInstance.address1}"
+//        bodyWriter.println "          ${organizerContestInstance.address2}"
+//        bodyWriter.println "          ${organizerContestInstance.city}, ${organizerContestInstance.state} ${organizerContestInstance.zipcode}"
+        bodyWriter.println "          ${organizerContestInstance.zipcode}"
         bodyWriter.println "Email   : ${organizerContestInstance.email}"
         bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
         bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"

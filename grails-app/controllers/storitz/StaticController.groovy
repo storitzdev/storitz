@@ -45,4 +45,8 @@ class StaticController {
   def collegerebate = {
      [title: 'Storitz College Storage Rebate Form']
   }
+
+  def contestrules = {
+     [title: 'Contest Rules and Regulations']
+  }
 }
