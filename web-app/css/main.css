@@ -290,7 +290,7 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 }
 .orgprop .name {
     text-align: left;
-    width: 40%;
+    width: 60%;
     white-space: nowrap;
 }
 .orgprop .value {
