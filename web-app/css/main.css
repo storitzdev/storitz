@@ -239,7 +239,7 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
     display: inline-block;
     /*float: left;*/
     width: 465px;
-    height: 270px;
+    height: 300px;
 }
 
 #contest_footer {
