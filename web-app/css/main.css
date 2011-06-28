@@ -257,7 +257,9 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 
 .orgprop input.required {
     border: 1px solid gray;
-    border-radius: 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
     height: 26px;
     width: 240px;
 }
@@ -268,7 +270,9 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 
 .orgprop textarea {
     border: 1px solid gray;
-    border-radius: 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
     margin-top: 10px;
     width: 240px;
 }
@@ -295,7 +299,7 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 }
 .orgprop .value {
     text-align: left;
-    width: 60%;
+    width: 30%;
 }
 
 .checkout_value {
@@ -511,7 +515,7 @@ div.leftSection {
 }
 
 input.inputBox:focus {
-    border: #154A99 solid 2px;
+    border: 2px solid #154A99;
 }
 
 .inputSelect {
@@ -1356,12 +1360,15 @@ p.footer {
 
 .organizerButton {
     border: 0;
-    background: #f7036a;
-    width:250px;
-    color: #fff;
-    padding: 5px 7px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:10px;
+    /*background: #f7036a;*/
+    background: url("../images/pro-organizer-submit-251x56.png") no-repeat;
+    /*width:250px;*/
+    width:251px;
+    height:56px;
+    /*color: #fff;*/
+    /*padding: 5px 7px;*/
+    /*-webkit-border-radius:5px;*/
+    /*-moz-border-radius:10px;*/
     display: inline-block;
 }
 

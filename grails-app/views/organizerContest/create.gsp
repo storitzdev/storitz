@@ -215,7 +215,8 @@
 
                         <tr class="orgprop">
                             <td valign="middle" class="name">&nbsp;</td>
-                            <td valign="middle" class="name"><span class="organizerButton"><g:submitButton name="create" class="organizerButton" value="${message(code: 'default.button.submit.label', default: 'Submit')}"/></span></td>
+                            %{--<td valign="middle" class="name"><span class="organizerButton"><g:submitButton name="create" class="organizerButton" value="${message(code: 'default.button.submit.label', default: 'Submit')}"/></span></td>--}%
+                            <td valign="middle" class="name"><g:submitButton name="create" class="organizerButton" value=""/></td>
                         </tr>
 
                         </tbody>
