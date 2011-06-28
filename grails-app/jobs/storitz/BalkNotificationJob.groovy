@@ -113,6 +113,13 @@ class BalkNotificationJob {
           subject: "Thanks for visiting Storitz!",
           body: body.toString()
       )
+      // CC Gillian too
+      emailService.sendTextEmail (
+          to:      "gsingletary@storitz.com",
+          from:    "gsingletary@storitz.com",
+          subject: "Thanks for visiting Storitz!",
+          body: body.toString()
+      )
     } catch (Throwable t) {
       t.printStackTrace()
     }
