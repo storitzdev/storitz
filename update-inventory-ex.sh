@@ -35,6 +35,9 @@ echo $$ > $PIDFILE
 
 cd /home/deploy/src/storitz
 
+# Running as cron we don't automatically get the local shell environment.
+source /home/deploy/.bash_profile
+
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryExScript.groovy > /home/deploy/logs/UpdateInventoryEx.${ENVNAME}.${DATE}.log 2>&1
 
 # Clean up after ourselves
