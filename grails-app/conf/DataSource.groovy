@@ -39,7 +39,7 @@ environments {
      //jndiName = "java:comp/env/jdbc/storitz_preview"
      //loggingSql = true
      driverClassName = "com.mysql.jdbc.Driver"
-     url = "jdbc:mysql://preview.storitz.com:3306/storitz_preview?autoReconnect=true"
+     url = "jdbc:mysql://localhost:3306/storitz_preview?autoReconnect=true"
      username = "storitz_preview"
      password = "st4ch@m"
     }
@@ -69,7 +69,7 @@ environments {
       dbCreate = "update"
       //jndiName = "java:comp/env/jdbc/storitz"
       driverClassName = "com.mysql.jdbc.Driver"
-      url = "jdbc:mysql://www.storitz.com:3306/storitz?autoReconnect=true"
+      url = "jdbc:mysql://localhost:3306/storitz?autoReconnect=true"
       username = "storitz"
       password = "st3ch@m"
     }
