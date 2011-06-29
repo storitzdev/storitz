@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<g:render template="/topnav"/>
+
 <div class="stcontent">
   <div class="nav">
     <span class="menuButton"><a class="home" href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>

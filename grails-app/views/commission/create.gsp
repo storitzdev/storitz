@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="body">
-  <g:render template="/topnav"/>
+
   <div class="stcontent">
     <g:render template="/logo_bar"/>
 

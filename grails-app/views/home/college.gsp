@@ -238,7 +238,7 @@
     </style>
 </head>
 <body class="college">
-<g:render template="/topnav"/>
+
 <!-- *********************** -->
 <!-- COLLEGE CONTENT [START] -->
 <!-- *********************** -->

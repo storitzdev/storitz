@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="body">
-    <g:render template="/topnav"/>
+
     <div class="stcontent" style="margin-top:15px;">
 
         <div id="headerdiv" style="border:1">
@@ -354,7 +354,7 @@
     </div>
 
 
-    <g:render template="/footer"/>
+
 </div>
 </body>
 <p:renderDependantJavascript/>

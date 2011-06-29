@@ -15,7 +15,7 @@
         <p:javascript src='header_all'/>
     </head>
     <body id="body">
-    <g:render template="/topnav"/>
+
     <g:render template="/logo_bar"/>
     <div class="buttons">
         <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>

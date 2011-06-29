@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="body">
-  <g:render template="/topnav"/>
+
   <div class="stcontent">
     <g:render template="/logo_bar"/>
     <div id="staticMenu" class="left" style="margin-top: 26px;">
@@ -70,7 +70,7 @@
 
         <div class="checkout_fields">
           <div style="width:610px;" class="checkout_value ${hasErrors(bean: contactUsInstance, field: 'message', 'errors')}">
-            <g:textArea name="message" id="message" style="width:600px; height:300px;" value="${contactUsInstance?.message}"/>
+            <g:textArea name="message" id="message" rows="12" cols="80" style="width:600px; height:300px;" value="${contactUsInstance?.message}"/>
           </div>
           <div style="clear:both;"></div>
         </div>
@@ -89,7 +89,7 @@
   </div>
 
   <div style="clear:both; height:30px;"></div>
-  <g:render template="/footer"/>
+
 </div>
 </body>
 <p:renderDependantJavascript/>

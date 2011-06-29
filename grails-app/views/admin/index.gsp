@@ -8,7 +8,6 @@
 </head>
 <body>
 <div id="body">
-  <g:render template="/topnav"/>
   <div class="stcontent">
     <g:render template="/logo_bar"/>
     <H1>Admin Links</H1>
@@ -66,7 +65,6 @@
     </ul>
   </div>
   <div style="height:30px;"></div>
-  <g:render template="/footer_no_analytics"/>
 </div>
 </body>
 <p:renderDependantJavascript/>

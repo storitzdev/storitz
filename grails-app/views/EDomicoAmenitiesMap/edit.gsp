@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="body">
-    <g:render template="/topnav"/>
+
     <div class="stcontent">
         <div class="buttons">
             <span class="button"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>

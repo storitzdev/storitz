@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="body">
-  <g:render template="/topnav"/>
+
   <div class="stcontent">
     <g:render template="/logo_bar"/>
     <div id="staticMenu" class="left" style="margin-top: 26px;">
@@ -33,7 +33,7 @@
     </div>
   </div>
   <div style="clear:both; height:30px;"></div>
-  <g:render template="/footer"/>
+
 </div>
 </body>
 <p:renderDependantJavascript/>
