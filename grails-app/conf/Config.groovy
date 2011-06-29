@@ -184,7 +184,7 @@ grails.plugins.springsecurity.logout.afterLogoutUrl = "/logout.gsp"
 grails.date.formats = ['dd-MM-yyyy', 'h:mma', 'MM/dd/yyyy', "yyyy-MM-dd'T'HH:mm:ss'Z'"]
 
 // Mail configuration
-grails.mail.host = "mail.storitz.com"
+grails.mail.host = "mx.storitz.com"
 grails.mail.port = 587
 grails.mail.username = "no-reply@storitz.com"
 grails.mail.password = "ylper!0n"
