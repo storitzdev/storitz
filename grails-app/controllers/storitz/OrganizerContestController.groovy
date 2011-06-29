@@ -205,8 +205,8 @@ class OrganizerContestController {
 //        bodyWriter.println "          ${organizerContestInstance.city}, ${organizerContestInstance.state} ${organizerContestInstance.zipcode}"
         bodyWriter.println "          ${organizerContestInstance.zipcode}"
         bodyWriter.println "Email   : ${organizerContestInstance.email}"
-        bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
-        bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"
+//        bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
+//        bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"
         bodyWriter.println "Essay   : ${organizerContestInstance.essayWhyStorage}"
         def body = buf.toString()
 
