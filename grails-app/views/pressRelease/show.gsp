@@ -75,14 +75,21 @@
 
           </tr>
 
+          <g:if test="${pressReleaseInstance.pdfLocation==null}">
+              <tr class="prop">
+                  <td valign="top" class="name"><g:message code="rentalAgreement.file.label" default="Agreement PDF"/></td>
+                  <td valign="top" class="value"></td>
+              </tr>
+          </g:if>
 
-          <tr class="prop">
-            <td valign="top" class="name"><g:message code="rentalAgreement.file.label" default="Agreement PDF"/></td>
+          <g:else>
+              <tr class="prop">
+                  <td valign="top" class="name"><g:message code="rentalAgreement.file.label" default="Agreement PDF"/></td>
 
-            <td valign="top" class="value"><a href="${resource(file: pressReleaseInstance.pdfLocation)}" onclick="window.open(this.href, '_blank');
-            return false;"><storitz:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a></td>
-
-          </tr>
+                  <td valign="top" class="value"><a href="${resource(file: pressReleaseInstance.pdfLocation)}" onclick="window.open(this.href, '_blank');
+                  return false;"><storitz:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a></td>
+              </tr>
+          </g:else>
         </table>
       </div>
       <div class="buttons">

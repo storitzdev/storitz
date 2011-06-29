@@ -52,17 +52,13 @@ class PressReleaseController {
       pressReleaseInstance.pdfLocation = '/pdfs/pressReleases/' + pdfFile.originalFilename
       def destFile = new File(request.getRealPath(pressReleaseInstance.pdfLocation))
       pdfFile.transferTo(destFile)
-    } else {
-      flash.message = "Missing PDF file"
-      render(view: "create", model: [pressReleaseInstance: pressReleaseInstance])
-      return
     }
     if (pressReleaseInstance.save(flush: true)) {
       flash.message = "${message(code: 'default.created.message', args: [message(code: 'pressRelease.label', default: 'PressRelease'), pressReleaseInstance.id])}"
       redirect(action: "show", id: pressReleaseInstance.id)
     }
     else {
-      render(view: "create", model: [pressReleaseInstance: pressReleaseInstance])
+        render(view: "create", model: [pressReleaseInstance: pressReleaseInstance])
     }
   }
 

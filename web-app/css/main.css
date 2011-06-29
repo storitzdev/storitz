@@ -29,6 +29,14 @@ h1 {
     margin: .8em 0 1em 0;
 }
 
+h1.press_release {
+    color: #099EC8;
+    font-weight: normal;
+    font-size: 18px;
+    font-weight: bold;
+    margin: .8em 0 1em 0;
+}
+
 h3.metro {
     font: bold 10px verdana, arial, helvetica, sans-serif;
     margin: .25em 0;
@@ -156,6 +164,7 @@ input.validation-passed, div.validation-passed, textarea.validation-passed, sele
 
 .list tr {
     border: 1px solid;
+    text-align: center;
 }
 
 .list th, .dialog th {
