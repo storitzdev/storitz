@@ -11,8 +11,11 @@ fi
 set `date`
 DATE=$6-$2-$3
 
+# Running as cron we don't automatically get the local shell environment.
+source /home/deploy/.bash_profile
+
 # Used only as a last resort if the regular JRE has linkage errors.
-#export JAVA_HOME=/home/deploy/jre.invload
+export JAVA_HOME=/home/deploy/jre.invload
 
 # JAVA_OPTS is picked up by grails automatically.
 export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit"
@@ -35,10 +38,7 @@ echo $$ > $PIDFILE
 
 cd /home/deploy/src/storitz
 
-# Running as cron we don't automatically get the local shell environment.
-source /home/deploy/.bash_profile
-
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/RefreshPromosScript.groovy > /home/deploy/logs/RefreshPromos.${ENVNAME}.${DATE}.log 2>&1
 
 # Clean up after ourselves
-rm $PIDFILE
+/bin/rm $PIDFILE
