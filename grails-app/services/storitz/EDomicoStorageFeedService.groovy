@@ -656,7 +656,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       println "    <UnitID>${resUnitID}</UnitID>"
       println "    <Error>${resError}</Error>"
       println "    <EMail>${reSeMailMessage}</EMail>"
-      println "</Authorize>")
+      println "</Authorize>"
 
       if (resSuccess) {
         trans.idNumber = "${resCustomerID}"
