@@ -366,9 +366,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         return location.site
     }
 
-    // called by the "Refresh Sites" button on the view page
-    def refreshSites(EDomico instance, String feedType, SiteStats stats, PrintWriter writer) {
-        loadSites(instance,feedType,stats,writer)
+    @Override
+    void refreshSites(StorageSite storageSiteInstance, String source, SiteStats stats, PrintWriter writer) {
+      EDomico instance = (EDomico)storageSiteInstance
+      loadSites(instance,source,stats,writer)
     }
 
     def newEDomicoStorageSite () {
@@ -648,6 +649,15 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def resUnitID        = res.get("UnitID")
       def resError         = res.get("Error")
       def reSeMailMessage  = res.get("EMailMessage")
+
+      println "/// DOMICO RESERVATION RESULTS ///"
+      println "<Authorize>"
+      println "    <Success>${resSuccess}</Success>"
+      println "    <Customer>${resCustomerID}</Customer>"
+      println "    <UnitID>${resUnitID}</UnitID>"
+      println "    <Error>${resError}</Error>"
+      println "    <EMail>${reSeMailMessage}</EMail>"
+      println "</Authorize>")
 
       if (resSuccess) {
         trans.idNumber = "${resCustomerID}"

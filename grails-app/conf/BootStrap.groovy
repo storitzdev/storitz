@@ -381,7 +381,7 @@ class BootStrap {
 
 
     if (!User.findByUsername('admin')) {
-      def admin = new User(username: 'admin', password: springSecurityService.encodePassword('WWCharter'), userRealName: 'Administrator', enabled: true, email: 'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
+      def admin = new User(username: 'admin', password: springSecurityService.encodePassword('WWCharter'), userRealName: 'Administrator', enabled: true, email: 'charlie@storitz.com', accountExpired: false, accountLocked: false, passwordExpired: false)
       admin.manager = admin;
       admin.save(flush: true)
       UserRole.create(admin, roleUser, true)
@@ -390,7 +390,7 @@ class BootStrap {
     }
 
     if (!User.findByUsername('operator')) {
-      def operator = new User(username: 'operator', password: springSecurityService.encodePassword('WWCharter'), userRealName: 'Operator', enabled: true, email: 'mamster@wnx.com', accountExpired: false, accountLocked: false, passwordExpired: false)
+      def operator = new User(username: 'operator', password: springSecurityService.encodePassword('WWCharter'), userRealName: 'Operator', enabled: true, email: 'charlie@storitz.com', accountExpired: false, accountLocked: false, passwordExpired: false)
       operator.save(flush: true)
       UserRole.create(operator, roleCallCenter, true)
     }
@@ -403,6 +403,9 @@ class BootStrap {
         new ServiceMap(serviceName: 'EX',  serviceHandler: 'storitz.ExrsStorageFeedService').save()
         new ServiceMap(serviceName: 'USI', serviceHandler: 'storitz.UsiStorageFeedService').save()
         new ServiceMap(serviceName: 'DOM', serviceHandler: 'storitz.EDomicoStorageFeedService').save()
+    }
+    if (ServiceMap.list().size() == 7) {
+      new ServiceMap(serviceName: 'BOB', serviceHandler: 'storitz.UncleBobsStorageFeedService').save()
     }
 
     if (StorageSize.list().size() == 0) {
