@@ -113,9 +113,9 @@ class BalkNotificationJob {
           subject: "Thanks for visiting Storitz!",
           body: body.toString()
       )
-      // CC Gillian too
+      // CC us too
       emailService.sendTextEmail (
-          to:      "gsingletary@storitz.com",
+          to:      "balk@storitz.com",
           from:    "gsingletary@storitz.com",
           subject: "Thanks for visiting Storitz!",
           body: body.toString()
