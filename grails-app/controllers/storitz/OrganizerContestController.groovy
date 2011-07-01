@@ -240,6 +240,13 @@ class OrganizerContestController {
         redirect(action: "list")
     }
 
+    def saveVideoId = {
+        def s = OrganizerContestController.getContestStatus()
+        s.videoId=params.videoId
+        s.save(flush:true)
+        redirect(action: "list")
+    }
+
     def activate = {
         def s = OrganizerContestController.getContestStatus()
         s.active=true;
