@@ -14,28 +14,26 @@ hibernate {
 environments {
   development {
     dataSource {
-      dbCreate = "update" // one of 'create', 'create-drop','update'
+      dbCreate = "validate"
       url = "jdbc:hsqldb:file:devDB"
       //loggingSql = true
     }
   }
   development_script {
     dataSource {
-      dbCreate = "update" // one of 'create', 'create-drop','update'
+      dbCreate = "validate"
       url = "jdbc:hsqldb:file:devDB"
       //loggingSql = true
     }
   }
   preview {
     dataSource {
-      dbCreate = "update" // one of 'create', 'create-drop','update'
       jndiName = "java:comp/env/jdbc/storitz_preview"
       //loggingSql = true
     }
   }
   preview_script {
     dataSource {
-     dbCreate = "update" // one of 'create', 'create-drop','update'
      //jndiName = "java:comp/env/jdbc/storitz_preview"
      //loggingSql = true
      driverClassName = "com.mysql.jdbc.Driver"
@@ -46,27 +44,23 @@ environments {
   }
   test {
     dataSource {
-      dbCreate = "update" // one of 'create', 'create-drop','update'
       jndiName = "java:comp/env/jdbc/storitz_test"
       //loggingSql = true
     }
   }
   test_script {
      dataSource {
-        dbCreate = "update" // one of 'create', 'create-drop','update'
         jndiName = "java:comp/env/jdbc/storitz_test"
         //loggingSql = true
      }
   }
   production {
     dataSource {
-      dbCreate = "update"
       jndiName = "java:comp/env/jdbc/storitz"
     }
   }
   production_script {
     dataSource {
-      dbCreate = "update"
       //jndiName = "java:comp/env/jdbc/storitz"
       driverClassName = "com.mysql.jdbc.Driver"
       url = "jdbc:mysql://localhost:3306/storitz?autoReconnect=true"
