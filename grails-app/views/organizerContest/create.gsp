@@ -92,16 +92,12 @@
 
                     <p>Enter below to win 3 months of FREE storage and a day with professional organizer and founder of
                     the O.C.D. Experience, Justin Klosky. Justin Klosky will organize your home or office space as well
-                    as provide the winner with tips and tricks for maintaining an organized lifestyle.</p>
-
-                    <p>Just fill out this entry form with your contact info and give us a short & sweet reason why you need
-                    Justin and Storitz to help you make your organizational dreams come true.  5 finalists will be
-                    chosen from all the entries received, which will then be voted on by our facebook fans.
-                    </p>
+                    as provide the winner with tips and tricks for maintaining an organized lifestyle. 5 finalists will
+                    be chosen from all the entries received, which will then be voted on by our facebook fans. </p>
                 </div>
 
                 <div class="video_container">
-                    <iframe width="465" height="270" src="https://www.youtube.com/embed/e2bEbZyMSw0" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="465" height="270" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
                 </div>
                 </div>
                 <div style="clear:both;"></div>
@@ -156,7 +152,7 @@
 
                         <tr class="orgprop">
                             <td valign="middle" class="name">
-                                <span class="left"><storitz:image src="2-your-primary-residence.gif" alt="Your Primary Residence Zip"/></span>
+                                <span class="left"><storitz:image src="2-your-primary-residence.gif" alt="Your ZIPs"/></span>
                                 <label class="right firstfield" for="zipcode"><g:message code="organizerContest.zipcode.label" default=""/>Zip Code</label>
                             </td>
                             <td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode', 'errors')}">
@@ -165,12 +161,8 @@
                                     <span style="color: red;">Required</span>
                                 </g:hasErrors>
                             </td>
-                        </tr>
-
-                        <tr class="orgprop">
                             <td valign="middle" class="name">
-                                <span class="left"><storitz:image src="3-about-you-getting-organization.gif" alt="About Storage" style="margin-top:9px;"/></span>
-                                <label class="right firstfield" for="zipcode2"><g:message code="organizerContest.zipcode2.label" default=""/>Storage Zip Code<br>(California Only)</label>
+                                <label class="right" for="zipcode2"><g:message code="organizerContest.zipcode2.label" default=""/>Storage Zip Code<br>(California Only)</label>
                             </td>
                             <td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'zipcode2', 'errors')}">
                                 <g:textField name="zipcode2" class="required"  value="${organizerContestInstance?.zipcode2}"/>
@@ -181,9 +173,15 @@
                         </tr>
 
                         <tr class="orgprop">
-                            <td valign="middle" class="name">
-                                <label class="right" for="essayWhyStorage"><g:message code="organizerContest.essayWhyStorage.label" default=""/>Tell us in 120 characters or<br>less why you need a day with<br>Justin to help organize your space.
-                                </label>
+                            <td valign="top" class="name">
+                                <table>
+                                    <tr>
+                                        <span class="left"><storitz:image src="3-about-you-getting-organization.gif" alt="About Storage" style="margin-top:11px;"/></span>
+                                    </tr>
+                                    <tr class="right">
+                                        <label class="right" for="essayWhyStorage" style="padding-top:23px"><g:message code="organizerContest.essayWhyStorage.label" default=""/>Tell us in 120 characters or<br>less why you need Justin to<br>help organize your space.</label>
+                                    </tr>
+                                </table>
                             </td>
                             <td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'essayWhyStorage', 'errors')}">
                                 <g:textArea class="required"  cols="50" rows="5" name="essayWhyStorage" value="${organizerContestInstance?.essayWhyStorage}"/>
@@ -244,6 +242,11 @@
                         'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
                 popupWindow = window.open(url,winName,settings)
             }
+            $(document).ready(function() {
+                if ($.browser.msie) {
+                    $(".orgprop tr.right label.right").css("padding-left", "162px");
+                }
+             });
         </script>
     </p:dependantJavascript>
 </div>

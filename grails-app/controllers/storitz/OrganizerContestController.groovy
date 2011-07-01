@@ -9,6 +9,7 @@ class OrganizerContestController {
     def enabled
     def emailService
     def toEmailAddress
+    def videoId
     def id
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -42,10 +43,10 @@ class OrganizerContestController {
         //flash.saved = "true"                  // Simulate saving a record
         //flash.message = "some error occurred" // Simulate an error
         //flash.update = "yes"                  // send to page 2
-
+        videoId = OrganizerContestController.getVideoId()
         OrganizerContest organizerContestInstance = new OrganizerContest()
         organizerContestInstance.properties = params
-        return [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance : organizerContestInstance]
+        return [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance : organizerContestInstance, videoId : videoId]
     }
 
     def addEntry = {
@@ -193,6 +194,15 @@ class OrganizerContestController {
         }
 
         return slist[0].toEmailAddress
+    }
+
+    private static String getVideoId () {
+        def slist = OrganizerContestStatus.findAll()
+        if (!slist || slist.size() < 1) {
+            return null;
+        }
+
+        return slist[0].videoId
     }
 
     private void sendEmail(OrganizerContest organizerContestInstance) {
