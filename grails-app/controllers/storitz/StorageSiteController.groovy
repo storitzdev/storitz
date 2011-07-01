@@ -9,9 +9,14 @@ import storitz.constants.SearchType
 import storitz.constants.UnitType
 import com.storitz.*
 import com.storitz.service.CostTotals
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import org.codehaus.groovy.grails.web.mapping.UrlCreator
+import org.springframework.context.ApplicationContext
+import org.springframework.context.ApplicationContextAware
 
-class StorageSiteController {
+class StorageSiteController implements ApplicationContextAware {
 
+  ApplicationContext applicationContext
   def authenticateService
   def feedService
   def geocodeService
@@ -487,9 +492,30 @@ class StorageSiteController {
     if (params.rentalTransactionId) {
       rentalTransactionInstance = RentalTransaction.get(params.rentalTransactionId as Long)
     }
-    StorageSite site = StorageSite.get(params.id as Long)
+    StorageSite site = StorageSite.findById(params.id as Long)
 
-    if (site.disabled && !params.adminView) {
+    if (site == null) {
+        StorageSite temp = StorageSite.findByTitleLike("%" + params.site_title.replaceAll("-","%") + "%")
+        if (temp != null) {
+            params.id = temp.id
+//            TODO: figure out how to use this stupid stuff so we can use the named UrlMapping 'siteLink2'
+//            def urlMappings = applicationContext.getBean("grailsUrlMappingsHolder")
+//            UrlCreator mapping = urlMappings.getReverseMapping("StorageSite","detail",params)
+//            def url = mapping.createURL(params, request.characterEncoding)
+            def  url =  "${ConfigurationHolder.config.grails.serverURL}/self-storage-${params.site_title}/${params.id}"  //?promoId=${params.promoId}
+            if (params.promoId) {
+                url += "?promoId=${params.promoId}"
+            }
+            response.setHeader("Location", url)
+            render(status:301) // short-circuits view rendering, otherwise grails will try to render details.gsp
+            return false;
+        }
+        else { //else issue 404
+            response.sendError(404);
+        }
+    }
+
+    if (site.disabled && !params.adminView) {   //if site is disabled and you are not in adminview, redirect
       redirect(controller: "home", action: "index")
       return;
     }
