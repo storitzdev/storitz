@@ -366,10 +366,9 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         return location.site
     }
 
-    @Override
-    void refreshSites(StorageSite storageSiteInstance, String source, SiteStats stats, PrintWriter writer) {
-      EDomico instance = (EDomico)storageSiteInstance
-      loadSites(instance,source,stats,writer)
+    // called by the "Refresh Sites" button on the view page
+    def refreshSites(EDomico instance, String feedType, SiteStats stats, PrintWriter writer) {
+        loadSites(instance,feedType,stats,writer)
     }
 
     def newEDomicoStorageSite () {
