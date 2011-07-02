@@ -94,6 +94,9 @@
                     the O.C.D. Experience, Justin Klosky. Justin Klosky will organize your home or office space as well
                     as provide the winner with tips and tricks for maintaining an organized lifestyle. 5 finalists will
                     be chosen from all the entries received, which will then be voted on by our facebook fans. </p>
+
+                    <p>Can't wait until July 31st?  Rent a unit today and if you win, we'll apply the cost of 3 months
+                    in your current unit to your account.</p>
                 </div>
 
                 <div class="video_container">

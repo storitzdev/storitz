@@ -23,7 +23,8 @@ class OrganizerContestController {
         active=OrganizerContestController.isActive()
         enabled=OrganizerContestController.isEnabled()
         toEmailAddress=OrganizerContestController.getToEmailAddress()
-        [organizerContestInstanceList: OrganizerContest.list(params), organizerContestInstanceTotal: OrganizerContest.count(), active: active, enabled: enabled, toEmailAddress : toEmailAddress]
+        videoId = OrganizerContestController.getVideoId()
+        [organizerContestInstanceList: OrganizerContest.list(params), organizerContestInstanceTotal: OrganizerContest.count(), active: active, enabled: enabled, toEmailAddress : toEmailAddress, videoId : videoId]
     }
 
     def create = {
