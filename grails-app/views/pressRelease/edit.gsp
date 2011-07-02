@@ -95,14 +95,15 @@
 
       <div class="checkout_fields">
         <div style="width:660px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'blurb', 'errors')}">
-          <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>
-          <fckeditor:editor
-                  name="blurb"
-                  width="650"
-                  height="300"
-                  toolbar="StoritzPress">
-            ${pressReleaseInstance?.blurb}
-          </fckeditor:editor>
+          %{--<fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>--}%
+          %{--<fckeditor:editor--}%
+                  %{--name="blurb"--}%
+                  %{--width="650"--}%
+                  %{--height="300"--}%
+                  %{--toolbar="StoritzPress">--}%
+            %{--${pressReleaseInstance?.blurb}--}%
+          %{--</fckeditor:editor>--}%
+          <g:textArea name="blurb" style="width:620px;height:300px;" value="${pressReleaseInstance?.blurb}" />
         </div>
         <div style="height:10px;clear:both;"></div>
       </div>
@@ -113,14 +114,15 @@
 
       <div class="checkout_fields">
         <div style="width:660px;" class="checkout_value ${hasErrors(bean: pressReleaseInstance, field: 'body', 'errors')}">
-          <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>
-          <fckeditor:editor
-                  name="body"
-                  width="650"
-                  height="400"
-                  toolbar="StoritzPress">
-            ${pressReleaseInstance?.body}
-          </fckeditor:editor>
+          %{--<fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>--}%
+          %{--<fckeditor:editor--}%
+                  %{--name="body"--}%
+                  %{--width="650"--}%
+                  %{--height="400"--}%
+                  %{--toolbar="StoritzPress">--}%
+            %{--${pressReleaseInstance?.body}--}%
+          %{--</fckeditor:editor>--}%
+          <g:textArea name="body" style="width:620px;height:300px;" value="${pressReleaseInstance?.body}" />
         </div>
         <div style="height:10px;clear:both;"></div>
       </div>

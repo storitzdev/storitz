@@ -9,6 +9,8 @@ class OrganizerContestController {
     def enabled
     def emailService
     def toEmailAddress
+    def videoId
+    def id
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -41,10 +43,10 @@ class OrganizerContestController {
         //flash.saved = "true"                  // Simulate saving a record
         //flash.message = "some error occurred" // Simulate an error
         //flash.update = "yes"                  // send to page 2
-
+        videoId = OrganizerContestController.getVideoId()
         OrganizerContest organizerContestInstance = new OrganizerContest()
         organizerContestInstance.properties = params
-        return [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance : organizerContestInstance]
+        return [title: "Storitz Organizer Contest with Justin Klosky", organizerContestInstance : organizerContestInstance, videoId : videoId]
     }
 
     def addEntry = {
@@ -54,8 +56,9 @@ class OrganizerContestController {
                 sendEmail(organizerContestInstance)
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
                 flash.saved = "saved"
-                flash.update = "yes"
-                redirect(action: "create", id: organizerContestInstance.id)
+//                flash.update = "yes"
+                flash.id = organizerContestInstance.id // workaround for hsqlDB
+                redirect(action: "create")
             }
             else {
                 flash.message = "Failed to save entry. Please try again."
@@ -76,7 +79,8 @@ class OrganizerContestController {
               sendEmail(organizerContestInstance)
               flash.message = "${message(code: 'default.created.message', args: [message(code: 'organizerContest.label', default: 'OrganizerContest'), organizerContestInstance.id])}"
               flash.saved = "saved"
-              redirect(action: "create", id: organizerContestInstance.id)
+              flash.id = organizerContestInstance.id // workaround for hsqlDB
+              redirect(action: "create")
           }
           else {
               flash.message = "Failed to save entry. Please try again."
@@ -192,17 +196,27 @@ class OrganizerContestController {
         return slist[0].toEmailAddress
     }
 
+    private static String getVideoId () {
+        def slist = OrganizerContestStatus.findAll()
+        if (!slist || slist.size() < 1) {
+            return null;
+        }
+
+        return slist[0].videoId
+    }
+
     private void sendEmail(OrganizerContest organizerContestInstance) {
         def buf = new ByteArrayOutputStream()
 
         PrintWriter bodyWriter = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
         bodyWriter.println "Name    : ${organizerContestInstance.firstName} ${organizerContestInstance.lastName}"
-        bodyWriter.println "Address : ${organizerContestInstance.address1}"
-        bodyWriter.println "          ${organizerContestInstance.address2}"
-        bodyWriter.println "          ${organizerContestInstance.city}, ${organizerContestInstance.state} ${organizerContestInstance.zipcode}"
+//        bodyWriter.println "Address : ${organizerContestInstance.address1}"
+//        bodyWriter.println "          ${organizerContestInstance.address2}"
+//        bodyWriter.println "          ${organizerContestInstance.city}, ${organizerContestInstance.state} ${organizerContestInstance.zipcode}"
+        bodyWriter.println "          ${organizerContestInstance.zipcode}"
         bodyWriter.println "Email   : ${organizerContestInstance.email}"
-        bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
-        bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"
+//        bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
+//        bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"
         bodyWriter.println "Essay   : ${organizerContestInstance.essayWhyStorage}"
         def body = buf.toString()
 
@@ -222,6 +236,13 @@ class OrganizerContestController {
     def saveToEmailAddress = {
         def s = OrganizerContestController.getContestStatus()
         s.toEmailAddress=params.toEmailAddress
+        s.save(flush:true)
+        redirect(action: "list")
+    }
+
+    def saveVideoId = {
+        def s = OrganizerContestController.getContestStatus()
+        s.videoId=params.videoId
         s.save(flush:true)
         redirect(action: "list")
     }

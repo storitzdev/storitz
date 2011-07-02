@@ -44,12 +44,12 @@ grails.enable.native2ascii = true
 environments {
   production {
     grails.serverURL = "http://www.storitz.com"
-    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT"
+    grails.serverRoot = "/home/deploy/tomcat-current/www.storitz.com/ROOT"
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/weblog/**': ['ROLE_USER'],
     ]
-    storitz.nacha.dir = '/usr/share/tomcat6/nacha'
+    storitz.nacha.dir = '/home/deploy/tomcat-current/www.storitz.com/nacha'
     storitz.nacha.fileId = '7878782339'
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = true
@@ -71,14 +71,14 @@ environments {
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/weblog/**': ['ROLE_USER'],
     ]
-    storitz.nacha.dir = '/usr/share/tomcat6/nacha'
+    storitz.nacha.dir = '/home/deploy/tomcat-current/www.storitz.com/nacha'
     storitz.nacha.fileId = '7878782339'
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = false
   }
   preview {
     grails.serverURL = "http://preview.storitz.com"
-    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT"
+    grails.serverRoot = "/home/deploy/tomcat-current/preview.storitz.com/ROOT"
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],
@@ -121,7 +121,7 @@ environments {
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"
-    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT"
+    grails.serverRoot = "/home/deploy/tomcat-current/test.storitz.com/ROOT"
     security.httpsPort = 8443
     storitz.nacha.dir = 'c:/temp/nacha'
     storitz.nacha.fileId = '1234567890'
@@ -203,15 +203,12 @@ grails.plugins.springsecurity.logout.afterLogoutUrl = "/logout.gsp"
 grails.date.formats = ['dd-MM-yyyy', 'h:mma', 'MM/dd/yyyy', "yyyy-MM-dd'T'HH:mm:ss'Z'"]
 
 // Mail configuration
-grails.mail.host = "mail.storitz.com"
+grails.mail.host = "mx.storitz.com"
 grails.mail.port = 587
 grails.mail.username = "no-reply@storitz.com"
 grails.mail.password = "ylper!0n"
 grails.mail.props = ["mail.smtp.auth": "true",
-        "mail.smtp.socketFactory.port": "587",
-        "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
-        "mail.smtp.socketFactory.fallback": "false",
-        "mail.smtp.starttls.enable": "true"]
+        "mail.smtp.socketFactory.port": "587"]
 
 // UI-performance configuration
 uiperformance.bundles = [

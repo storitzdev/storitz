@@ -649,6 +649,15 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def resError         = res.get("Error")
       def reSeMailMessage  = res.get("EMailMessage")
 
+      println "/// DOMICO RESERVATION RESULTS ///"
+      println "<Authorize>"
+      println "    <Success>${resSuccess}</Success>"
+      println "    <Customer>${resCustomerID}</Customer>"
+      println "    <UnitID>${resUnitID}</UnitID>"
+      println "    <Error>${resError}</Error>"
+      println "    <EMail>${reSeMailMessage}</EMail>"
+      println "</Authorize>"
+
       if (resSuccess) {
         trans.idNumber = "${resCustomerID}"
         trans.feedUnitNumber = "${resUnitID}"

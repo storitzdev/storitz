@@ -24,16 +24,18 @@
     </div>
     <div style="width: 650px;margin-right: 35px;" class="right">
 
-      <h1>${pressReleaseInstance.title}</h1>
+      <h1 class="press_release">${pressReleaseInstance.title}</h1>
       <h3>${pressReleaseInstance.releaseDate.format('MM-dd-yyyy')}</h3>
 
       <p>
         ${pressReleaseInstance.body}
       </p>
-      <p>
-        <a href="${resource(file: pressReleaseInstance.pdfLocation)}" onclick="window.open(this.href, '_blank');
-        return false;"><storitz:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a>
-      </p>
+      <g:if test="${pressReleaseInstance.pdfLocation!=null}">
+          <p>
+              <a href="${resource(file: pressReleaseInstance.pdfLocation)}" onclick="window.open(this.href, '_blank');
+              return false;"><storitz:image src="icn_pdf.jpg" width="36" height="36" alt="PDF"/></a>
+          </p>
+      </g:if>
       <p>
         <span style="font-weight:bold;">Tags:</span>${pressReleaseInstance.tags}
       </p>

@@ -465,7 +465,15 @@ class MigrationController {
   }
 
   def feedTypeEquals(feedType,feedName) {
-    return feedType == feedName || feedType.name == feedName
+    try {
+      if (feedType == feedName)
+        return true
+      if (feedType.name && feedType.name == feedName)
+        return true
+    } catch (Throwable t) {
+      t.printStackTrace()
+    }
+    return false;
   }
 
 }

@@ -1,44 +1,44 @@
 #!/bin/sh
 # Update Promotions
 
+ENVNAME=$1
+
+if test "$ENVNAME" = ""; then
+    echo "usage: update-promotions.sh [development|preview|production]"
+    exit 1
+fi
+
 set `date`
 DATE=$6-$2-$3
 
-# Important!!! Change this to preview or production, as appropriate
-ENVNAME=
+# Running as cron we don't automatically get the local shell environment.
+source /home/deploy/.bash_profile
 
-if test "$ENVNAME" = ""; then
-    echo "ENVNAME is not set!"
-    return 1
-fi
+# Used only as a last resort if the regular JRE has linkage errors.
+export JAVA_HOME=/home/deploy/jre.invload
 
-# Make sure these are correct for your environment
-export JAVA_HOME=/usr/java/latest
-export GRAILS_HOME=/home/deploy/grails-1.3.6
-
-# JAVA_OPTS is picked up by grails automatically. The default memory that
-# grails allocates to Java is not enough to handle the Extraspace string processing requirements.
-export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit -Dcom.sun.management.jmxremote.port=9595 -Dcom.sun.management.jmxremote.password.file=/home/deploy/jmxremote.password"
+# JAVA_OPTS is picked up by grails automatically.
+export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit"
 
 PIDFILE=/tmp/update.pid
 EMAILFILE=/tmp/update.email
+HOST=`hostname`
 
 if test -f "$PIDFILE"; then
     echo "ENVNAME=$ENVNAME" > $EMAILFILE
-	echo "process is already running with PID=`cat $PIDFILE`" >> $EMAILFILE
-	echo "If you are sure there is no running process then delete $PIDFILE and retry" >> $EMAILFILE
-    /bin/mail -s "Unable to begin promotions update" tech@storitz.com < $EMAILFILE
+    echo "process is already running with PID=`cat $PIDFILE`" >> $EMAILFILE
+    echo "If you are sure there is no running process then delete $PIDFILE and retry" >> $EMAILFILE
+    /bin/mail -s "$ENVNAME ($HOST): Unable to begin promotions update" tech@storitz.com < $EMAILFILE
     rm $EMAILFILE
-	exit 1
+    exit 1
 fi
 
 # Save our pid to PIDFILE
 echo $$ > $PIDFILE
 
-cd /home/deploy/projects/storitz
+cd /home/deploy/src/storitz
 
-# Everyone but ExtraSpace: Manually update the promotions
-$GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/RefreshPromosScript.groovy > /home/deploy/logs/RefreshPromos.${DATE}.log 2>&1
+$GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/RefreshPromosScript.groovy > /home/deploy/logs/RefreshPromos.${ENVNAME}.${DATE}.log 2>&1
 
 # Clean up after ourselves
-rm $PIDFILE
+/bin/rm $PIDFILE

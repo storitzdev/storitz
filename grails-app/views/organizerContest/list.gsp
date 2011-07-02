@@ -47,6 +47,13 @@
             <span class="button"><g:actionSubmit class="save" action="saveToEmailAddress" value="Update" /></span>
         </g:form>
 
+        <p> Enter the video ID of the youtube video you wish to show:</p>
+
+        <g:form controller="organizerContest" action="saveVideoId" method="post">
+            <g:textField name="videoId" id="videoId" value="${videoId}"/>
+            <span class="button"><g:actionSubmit class="save" action="saveVideoId" value="Update"/></span>
+        </g:form>
+
     </div>
 
         <div class="body">
