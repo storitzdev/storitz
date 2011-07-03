@@ -12,19 +12,28 @@
 .container {
   position: relative;
 }
+body.site_detail .container {
+  margin-top: 10px;
+}
 
 body.site_detail {
   font-family: Arial;
 }
+body.site_detail #header form {
+  display: none;
+}
 body.site_detail #left_panel {
   display: inline-block;
   width: 657px;
+  margin-right: 3px;
   background-color: white;
   position: relative;
 }
 
 body.site_detail .vcard {
-  height: 130px;
+  height: 140px;
+  background: url("../images/v2/site_detail/bg-fade-facility-tabs.jpg") repeat-x;
+  background-position: left bottom;
   clear: both;
 }
 body.site_detail .vcard > div {
@@ -41,9 +50,15 @@ body.site_detail #site_address {
   width: 387px;
   font-size: 11px;
 }
+body.site_detail .site_info {
+  margin-top: -30px;
+}
 .breadcrumbs {
   color: #025895;
   margin-bottom: 5px;
+  margin-left: 5px;
+  font-size: 11px;
+  font-family: Arial;
 }
 .breadcrumbs a {
   color: #3EA307;
@@ -58,26 +73,25 @@ body.site_detail h3,
 .breadcrumbs a.current {
   color: #025895;
 }
-body.site_detail h1 {
+body.site_detail .vcard h1 {
   font-family: Arial;
   font-size: 24px;
   font-weight: normal;
   margin: 10px 0 5px 0;
 }
 
-.site_all_features {
-  display: block;
-  background-color: white;
-  margin: 10px 0 10px 10px;
-}
-
-.site_all_features h2 {
-  margin: 5px 0 0 0;
+body.site_detail .site_features h2 {
+  /*margin: 5px 0 0 0;*/
   color: white;
-  background: url(../images/bkg-tablehead-666x30.gif) no-repeat;
-  height: 30px;
-  padding: 7px 0 10px 10px;
-  width: 660px;
+  background: url("../images/v2/site_detail/facility-subheader-bg-tile.png") repeat-x;
+  height: 24px;
+  padding-top: 9px;
+  padding-left: 9px;
+  color: white;
+  font-family: Verdana;
+  font-weight:normal;
+  border-radius: 4px 4px 4px 4px;
+  margin-right: 9px;
 }
 
 .site_features {
@@ -91,7 +105,7 @@ body.site_detail h1 {
   padding-right: 5px;
 }
 
-#featuresList ul {
+.site_features div {
   -moz-border-radius: 8px 8px 8px 8px;
   border: 1px solid #dfdfdf;
   background-color: #fcfcfc;
@@ -99,87 +113,56 @@ body.site_detail h1 {
   background-position: center bottom;
   border-radius: 8px 8px 8px 8px;
   background-repeat: repeat-x;
-  margin: 0 17px 0 0;
+  margin: 0 12px 0 0;
   overflow: hidden;
   padding: 0;
   vertical-align: top;
   width: 204px;
   display: inline-block;
 }
-
-#featuresList li {
-  background: url(../images/check-mark.png) no-repeat left center;
+.site_features div.last {
+  margin-right: 0;
+}
+.site_features li,
+.site_features h3 {
   border-bottom: 1px solid #dfdfdf;
-  border-top: 1px solid #fff;
-  color: #333;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 11px;
   padding: 10px 0 10px 45px;
-  list-style: none;
   margin: 0;
-}
-
-#featuresList li.safety {
-  background: url(../images/icon-safety-security.png) no-repeat left center;
-  border-bottom: 1px solid #dfdfdf;
-  border-top: none;
-  margin: 0;
-  padding: 10px 0 10px 45px;
   vertical-align: middle;
-}
-
-.listHeader {
-  color: #134b98;
-  font-size: 12px;
   font-weight: bold;
-  margin: 0;
 }
-
-#featuresList li.convenience {
-  background: url(../images/icon-convenience.png) no-repeat left center;
-  border-bottom: 1px solid #dfdfdf;
-  border-top: none;
-  color: #134b98;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0;
-  padding: 10px 0 10px 45px;
-  vertical-align: middle;
-}
-
-#featuresList li.amenities {
-  background: url(../images/icon-checkmark.png) no-repeat left center;
-  border-bottom: 1px solid #dfdfdf;
-  border-top: none;
-  color: #134b98;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0;
-  padding: 10px 0 10px 45px;
-  vertical-align: middle;
-
-}
-
-#featuresList li.last {
-  border-bottom: none;
-  margin-bottom: 10px;
-}
-
-#featuresList a {
+.site_features li {
   color: #333;
-  text-decoration: none;
+  list-style: none;
+  border-top: 1px solid #fff;
+  background: url(../images/check-mark.png) no-repeat left center;
 }
-
-#featuresList a:hover {
-  color: #4595df;
-  text-decoration: underline;
+.site_features li.last {
+  border-bottom: none;
+}
+.site_features h3 {
+  color: #134b98;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
+.site_features h3.safety {
+  background: url(../images/icon-safety-security.png) no-repeat left center;
+}
+.site_features h3.convenience {
+  background: url(../images/icon-convenience.png) no-repeat left center;
+}
+.site_features h3.amenities {
+  background: url(../images/icon-checkmark.png) no-repeat left center;
 }
 
 .tabs {
   padding: 0 0 0 12px;
   list-style-type: none;
   text-align: center;
-  height: 36px;
+  height: 28px;
 }
 
 .tabs li {
@@ -192,11 +175,11 @@ body.site_detail h1 {
   float: left;
   font-size: 13px;
   display: inline-block;
-  padding: 10px 20px 7px 20px;
+  padding: 7px 20px 7px 20px;
   border-color: #d3d3d3;
   border-style: solid;
   border-width: 1px 1px 0 1px;
-  height: 18px;
+  height: 13px;
   text-decoration: none;
   font-weight: bold;
   margin-right: 2px;
@@ -246,62 +229,59 @@ body.site_detail h1 {
   display: block;
   width: 240px;
   height: 160px;
-  margin: 10px 0 10px 10px;
+  margin: 10px 0 10px 0;
 }
 
-.panes .left_panes {
+.panes .overview .photos {
   display: inline-block;
   float: left;
   width: 265px;
 }
 
-.panes .right_panes {
+.panes .overview .description {
   display: inline-block;
   width: 350px;
   padding-top: 10px;
 }
 
-.right_panes .yelp_icons {
-  width: inherit;
-  height: 30px;
-  display: block;
-  margin: 0 0 20px 0;
-  background-color: white;
-}
-
-.yelp_icons input, .yelp_icons a {
+.panes .overview ul.action_links {
+  display: inline-block;
   float: right;
+  margin: 0 0 10px 10px;
+  padding-left: 10px;
+  border-left: 1px dotted #ccc;
 }
-
-.right_panes .overview_desc {
-  width: inherit;
+.panes .overview ul.action_links li {
   display: block;
+  margin-bottom: 4px;
 }
 
-.stbutton {
-  float: right;
-  font-weight: bold;
-  padding-top: 3px;
+.panes .overview ul.action_links li a.print {
+  display: inline-block;
+  padding-top: 4px;
+  background: url("../images/v2/buttons/printer_icon_small.gif") no-repeat;
+  background-position: 4px center;
+  padding-left: 24px;
+  height: 16px;
+  font-family: Verdana, Helvetica, sans-serif;
 }
 
-.stbutton .chicklets {
-  color: #3EA307;
-}
-
-.printIcon {
-  background: url("../images/details_printIcon.png") no-repeat;
-  padding-right: 10px;
-  border: none;
-  font-weight: bold;
-  color: #3EA307;
-  cursor: pointer;
-}
-
-.printIcon:hover {
+a.print:hover {
   opacity: 0.6;
 }
 
   /*everything that is on the right of the page */
+
+.move_in_quote { position: relative; }
+a.help_button {
+  display: inline-block;
+  background: url("../images/v2/buttons/help-12x12.png") no-repeat;
+  width: 12px;
+  height: 12px;
+  text-indent: -9999px;
+  position: absolute;
+  margin-left: 3px;
+}
 #right_panel {
   display: block;
   width: 300px;
@@ -311,15 +291,124 @@ body.site_detail h1 {
   right: 0px;
 }
 
-.transaction {
-  display: block;
-  width: 280px;
-  margin: 10px 10px 0 0;
+.rent_me {
+  padding: 0;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: 1px solid #aaaaaa;
+  background-image: url("../images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
+  background-position: center bottom;
+  border-radius: 8px;
+  background-repeat: repeat-x;
+  vertical-align: top;
+  box-shadow: 0 0 8px #cccccc;
+}
+.rent_me > div {
+  padding: 12px 12px;
+  border-color: #aaa;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+}
+
+.rent_me > div.price .original_price {
+  font-size: 16px;
+  font-weight: normal;
+  color: red;
+  text-decoration: line-through;
+}
+
+.rent_me > div.price {
+  font: 22px arial, verdana, helvetica, sans-serif;
+  font-weight: bold;
+  padding-bottom: 0;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+.rent_me > div.rent_reserve {
+  padding-bottom: 4px;
+}
+
+.rent_me > div.price,
+.rent_me > div.rent_reserve {
+  border-width: 0;
+}
+
+.rent_me > div.price .per_month {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.rent_me > div.rent_reserve .guarantee {
+  background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat;
+  background-position: 50px center;
+  padding: 13px 0 10px 75px;
+  font-weight: bold;
+  color: #3EA307;
+}
+
+.rent_me > div.move_in_date {
+  padding-top: 15px;
+  padding-bottom: 30px;
+  font-weight: bold;
+}
+
+.rent_me > div.move_in_date a.edit_date {
+  padding-left: 28px;
+  background: url("../images/icn-calendar.png") no-repeat;
+  background-position: left top;
+  float: right;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 150%;
+  margin-top: -5px;
+}
+.rent_me > div.move_in_date a.edit_date .date_label {
+  font-weight:bold;
+  color: black;
+}
+.rent_me > div.move_in_date a.edit_date .link {
+  text-decoration: underline;
+  text-align: right;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.rent_me > div.unit_info a.view_more {
+  float: right;
+  font-size: 11px;
+  margin-top: 1px;
+}
+.rent_me > div.unit_info .promos a.view_more {
+  margin-top: 0px;
+}
+.rent_me div.unit_info h4 {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 7px;
+  color: #025895;
+}
+.rent_me > div.unit_info .promos .label { display : none; }
+.rent_me > div.unit_info .promos .label,
+.rent_me > div.unit_info .promos a.view_more {
+  font-weight: normal;
+}
+.rent_me > div.unit_info .promos {
+  margin-top: 5px;
+  font-weight: bold;
+}
+#move_in_cost {
+  float: right;
+}
+.rent_me > div.move_in_quote h4 {
+  margin-bottom: 4px;
+}
+.rent_me > div.move_in_quote p {
+  font: 10px arial, verdana, helvetica, sans-serif;
+  margin-top: 2px;
 }
 
 .sim_units {
-  display: block;
-  width: 300px;
   background-color: white;
   margin: 30px 0 0 0;
 }
@@ -364,143 +453,6 @@ body.site_detail h1 {
   width: 210px;
   height: 100px;
   padding: 10px 0 0 0;
-}
-
-.transBox {
-  padding: 0;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  background-color: #fcfcfc;
-  background-image: url("../images/bkg-features-list.jpg");
-  background-position: center bottom;
-  border-radius: 8px;
-  background-repeat: repeat-x;
-  vertical-align: top;
-  box-shadow: 0 0 6px #888;
-}
-
-.transBox .price {
-  vertical-align: bottom;
-  text-align: center;
-  padding-top: 10px;
-}
-
-.transBox .rent_reserve {
-  margin-top: 5px;
-}
-
-.transBox .rent_reserve h3 {
-  text-align: center;
-  padding-bottom: 10px;
-}
-
-#rentme {
-  width: 260px;
-  height: 36px;
-  border: none;
-  cursor: pointer;
-  padding: 5px 10px 5px 10px;
-}
-
-.transBox .move_in {
-  width: 278px;
-  padding: 10px 0 10px 0;
-  background-color: #87F1F8;
-}
-
-.transDateHeader {
-  width: 80px;
-  display: inline-block;
-  font: 12px arial, verdana, helvetica, sans-serif;
-  font-weight: bold;
-  text-align: left;
-  padding: 0 0 5px 10px;
-}
-
-.paidThrough {
-  font: 12px arial, verdana, helvetica, sans-serif;
-  text-align: left;
-  padding: 0 0 5px 10px;
-  font-weight: bold;
-  color: #888888;
-  width: auto;
-  display: inline-block;
-}
-
-.move_in .calendar {
-  width: 25px;
-  float: right;
-  display: inline-block;
-}
-
-#calendarPic {
-  cursor: pointer;
-  width: 23px;
-  height: 19px;
-}
-
-.transDate {
-  display: inline-block;
-  float: right;
-  font: 12px arial, verdana, helvetica, sans-serif;
-  font-weight: bold;
-  text-align: right;
-}
-
-.changeDate {
-  display: inline-block;
-  float: right;
-}
-
-.unit_size, .amenities, .compare_unit {
-  padding-top: 5px;
-  margin-left: 10px;
-}
-
-.unit_size h4 {
-  display: inline;
-}
-
-.transBox a {
-  float: right;
-  font-size: 10px;
-}
-
-.transPrice {
-  font: 18px arial, verdana, helvetica, sans-serif;
-  font-weight: bold;
-}
-
-.promos {
-  font-size: 14px;
-  color: #87ceeb;
-  margin-left: 10px;
-  padding-top: 10px;
-}
-
-.compare_unit {
-  font: 12px arial, verdana, helvetica, sans-serif;
-  font-weight: bold;
-  color: #00008b;
-  text-align: right;
-}
-
-.transTotalMoveIn {
-  margin-left: 30px;
-  font: 12px arial, verdana, helvetica, sans-serif;
-  font-weight: bold;
-}
-
-#totalMoveInCost {
-  float: right;
-  margin-right: 20px;
-}
-
-.transTotalMoveIn p {
-  font: 10px arial, verdana, helvetica, sans-serif;
-  margin-top: 2px;
-  padding-bottom: 15px;
 }
 
 .sim_units h1 {
@@ -562,7 +514,7 @@ body.site_detail h1 {
         </div>
       </div>
     </div>
-    <div class="site_desc">
+    <div class="site_info">
       <!-- the tabs -->
       <ul class="tabs">
         <li><a class="current" href="#tab_overview">Overview</a></li>
@@ -574,73 +526,86 @@ body.site_detail h1 {
       </ul>
       <!-- the panes -->
       <div class="panes">
-        <div><!-- first tab -->
-
-          <div class="left_panes"><!-- more elems inside this div -->
+        <div class="overview"><!-- first tab -->
+          <div class="photos"><!-- more elems inside this div -->
             <g:if test="${site.coverImage()}">
               <img class="main_pic" src="${resource(file: site.coverImage().mid())}"
                    alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
             </g:if>
           </div>
-
-          <div class="right_panes"><!-- icons and description here -->
-            <div class="yelp_icons">
-              <span class='st_email' displayText='Share'></span>
-              <input type="button" class="printIcon" value="    Print" onclick="window.print()"/>
-            </div>
-
-            <div class="overview_desc">
-              <p>${site.description}</p>
-            </div>
-          </div>
+          <p class="description">
+            <ul class="action_links">
+              <li><span class="st_email" displayText="Share"></span></li>
+              <li><a class="print" href="#" onclick="window.print();">Print</a></li>
+            </ul>
+            ${site.description}
+         </p>
           <a name="tab_overview">&nbsp;</a>
         </div>
 
-        <div><a name="tab_allunits">&nbsp;</a><!-- second tab-->blah blah blah blah blah</div>
+        <div><!-- second tab-->
+          blah blah blah blah blah
+          <a name="tab_allunits">&nbsp;</a>
+        </div>
 
-        <div><a name="tab_video">&nbsp;</a><!-- third tab-->blah blah blah blah blah</div>
+        <div><!-- third tab-->
+          blah blah blah blah blah
+          <a name="tab_video">&nbsp;</a>
+        </div>
 
-        <div><a name="tab_maphours">&nbsp;</a><!-- fourth tab-->blah blah blah blah blah</div>
+        <div>
+          <!-- fourth tab-->
+          blah blah blah blah blah
+          <a name="tab_maphours">&nbsp;</a>
+        </div>
 
-        <div><a name="tab_reviews">&nbsp;</a><!-- fifth tab-->blah blah blah blah blah</div>
+        <div>
+          <!-- fifth tab-->
+          blah blah blah blah blah
+          <a name="tab_reviews">&nbsp;</a>
+        </div>
 
-        <div><a name="tab_auctions">&nbsp;</a><!-- sixth tab-->blah blah blah blah blah</div>
+        <div>
+          <!-- sixth tab-->
+          blah blah blah blah blah
+          <a name="tab_auctions">&nbsp;</a>
+        </div>
       </div>
     </div>
 
-    <div class="site_all_features">
+    <div class="site_features">
       <h2>Site Features</h2>
-
-      <div id="featuresList">
+      <div>
+        <h3 class="safety">Safety/Security</h3>
         <ul>
-          <li class="safety"><h3 class="listHeader">Safety/Security</h3></li>
           <g:each in="${site.securityItems}" status="i" var="item">
-            <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
+            <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
           </g:each>
         </ul>
+      </div>
+      <div>
+        <h3 class="convenience">Convenience</h3></li>
         <ul>
-          <li class="convenience"><h3 class="listHeader">Convenience</h3></li>
-          <g:each in="${site.convenienceItems}" status="i" var="item">
-            <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
-          </g:each>
+        <g:each in="${site.convenienceItems}" status="i" var="item">
+          <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
+        </g:each>
         </ul>
-        <ul>
-          <li class="amenities"><h3 class="listHeader">Amenities</h3></li>
-          <g:each in="${site.amenityItems}" status="i" var="item">
-            <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}><a href="#">${item.bullet}</a></li>
-          </g:each>
+      </div>
+      <div class="last">
+        <h3 class="amenities">Amenities</h3></li>
+        <g:each in="${site.amenityItems}" status="i" var="item">
+          <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
+        </g:each>
         </ul>
       </div>
     </div>
   </div>
 
   <div id="right_panel">
-    <div class="transaction">
-      <g:render template="/transaction"/>
-    </div>
+    <g:render template="/transaction"/>
 
     <div class="sim_units">
-      <h1>Similar Units in your Area</h1>
+      <h1>Similar units nearby</h1>
 
       <div id="units">
         <div class="separator"></div>

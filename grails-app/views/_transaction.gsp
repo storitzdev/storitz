@@ -1,70 +1,48 @@
 <%@ page import="storitz.constants.TransactionType" %>
-<div class="transBox">
-    <div class="price">
-      <div id="regPrice" class="transStrikethru"></div>
-      <div>
-        <div id="pushPrice" class="transPrice">$72.00</div>
-        <div class="transPerMonth">Per Month</div>
-      </div>
-    </div>
-    <div class="rent_reserve">
-      <g:if test="${params.action != 'payment'}">
-        <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-          <p:inputImage id="rentme" src="btn-reserve-108x36.png" alt="Reserve"/>
-        </g:if>
-        <g:else>
-          <p:inputImage id="rentme" src="btn-rent-me.png" alt="Rent Me"/>
-        </g:else>
+<div class="rent_me">
+  <div class="price">
+    $72.00 <span class="original_price">$80</span>
+    <div class="per_month">per month</div>
+  </div>
+  <div class="rent_reserve">
+    <g:if test="${params.action != 'payment'}">
+      <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+        <p:inputImage class="rent_me_button" src="../images/v2/site_detail/rent-me-275x56.png" alt="Reserve"/>
       </g:if>
       <g:else>
-        <div id="rentme" style="display:none"></div>
+        <p:inputImage id="rent_me_button" src="../images/v2/site_detail/rent-me-275x56.png" alt="Rent Me"/>
       </g:else>
-      <h3>Storitz Price Guarantee</h3>
-    </div>
-    <div class="move_in">
-        <div>
-            <div class="transDateHeader">
-              Move-In Date:
-            </div>
-            <input type="hidden" id="date" name="date"/>
-            <div class="transDate" id="transMoveInDate">
-                June 20, 2011
-            </div>
-            <div class="calendar">
-                <storitz:image id="calendarPic" src="icn-calendar.png" alt="calendar"/>
-            </div>
-        </div>
-        <div>
-            <div class="paidThrough">
-              Paid Through July 20, 2011
-            </div>
-            <div class="changeDate">
-                <a href="#">Edit date</a>
-            </div>
-        </div>
-    </div>
-    <div class="unit_size">
-        <h4>10' x 10' Unit Size</h4>
-        <a href="#">See more sizes</a>
-    </div>
-    <div class="amenities">
-        <ul>
-            <li>Drive-up</li>
-            <li>Roll-up Door</li>
-            <li>Climate Control</li>
-        </ul>
-    </div>
+    </g:if>
+    <div class="guarantee">Storitz Price Guarantee</div>
+  </div>
+  <div class="move_in_date">
+    Move-in Date <a class="help_button" href="/help#move_in_date">huh?</a>
+    <a class="edit_date" title="click to change date" href="#">
+      <div class="date_label">June 20, 2011</div>
+      <div class="link">Change</div>
+    </a>
+    <input type="hidden" id="date" name="date"/>
+  </div>
+  <div class="unit_info">
+    <a class="view_more" href="#">See more sizes</a>
+    <h4>10' x 10' Unit</h4>
+    <ul>
+      <li>Drive-up</li>
+      <li>Roll-up Door</li>
+      <li>Climate Control</li>
+    </ul>
     <div class="promos">
-        Military Discount - Save 50% off first two months
+      <a class="view_more" href="#">See more offers</a>
+      <span class="label">Special offer</span> First month free for witches and labrador retrievers
     </div>
-    <div class="compare_unit">
-        Compare this unit <input type="checkbox" id="compare_unit" />
-    </div>
-    <div style="height: 10px;clear:both;width: 270px; border-bottom:1px solid #dfdfdf;margin: 0 5px 10px 5px;"></div>
-    <div class="transTotalMoveIn">
-        Total Move-In Cost:
-        <span id="totalMoveInCost">$38.00</span>
-        <p>*Includes discounts and facility fees</p>
-    </div>
+  </div>
+  <div class="move_in_quote">
+    <h4>
+      Total Move-In Cost <a class="help_button" href="/help#move_in_cost">huh?</a>
+      <span id="move_in_cost">$38.00</span>
+    </h4>
+    <p>* Includes discounts and facility fees</p>
+    <p>* Paid through July 20, 2011</p>
+  </div>
 </div>
 
