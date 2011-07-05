@@ -7,6 +7,7 @@
         <meta name="msvalidate.01" content="341E6494DB6B0393BB4866E8E337BDBB" /> <!-- Bing validator -->
         <META name="y_key" content="9a7a338eec8978fd"/>
         <p:css name="bundled" />
+        <!--[if IE]> <link href="${resource(dir:'css', file:'application_ie.css')}" rel="stylesheet" type="text/css"> <![endif]-->
         <g:layoutHead />
     </head>
     <body class="${pageProperty(name:'body.class') ? pageProperty(name:'body.class') : 'default'}">
@@ -25,7 +26,7 @@
                     <g:else>
                       <input class="text" type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
                     </g:else>
-                    <input type="submit" name="btn" value="Search" />
+                    <input id="search_button" type="submit" name="btn" value="Search" />
                 </fieldset>
             </g:form>
             <div id="phone_support">

@@ -37,7 +37,7 @@
 <div class="unit_info">
     <div class="dimensions">${unitInfo?.sizeDescription.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2' Unit")}</div>
     <div class="location">${unitInfo?.unitType}</div>
-    <ul>
+    <ul id="site_features">
         <g:if test="${unitInfo?.isTempControlled}"><li>Climate control</li></g:if>
         <g:if test="${site.isKeypad}"><li>Keypad access</li></g:if>
         <g:if test="${site.isCamera}"><li>Security cameras</li></g:if>

@@ -199,11 +199,6 @@ $(document).ready(function() {
         );
     }
 
-    //hover functionality in footer for IE
-    if ($.browser.msie) {
-        $("#browse .tabs a").css('height', '41px');
-    }
-
     _map.init();
 
     // show map?
@@ -253,7 +248,7 @@ $(document).ready(function() {
     $("#coverphoto fieldset.advanced legend").click(function() {
         $("#advanced_search_controls").slideToggle();
     });
-    $("input[placeholder]").placeholder()
+    $("input[placeholder]").placeholder();
     $("#browse .tabs").tabs("#browse .panes > div", {
                 //history: true,
                 initialIndex: null,

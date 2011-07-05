@@ -3,6 +3,7 @@
 <head>
     <title>The Fastest, Easiest Way to Find &amp; Rent Self-Storage - Storitz </title>
     <meta name="layout" content="splash"/>
+    <!--[if IE]> <link href="${resource(dir:'css', file:'application_ie.css')}" rel="stylesheet" type="text/css"> <![endif]-->
 </head>
 <body>
 <div id="bigbox">
@@ -137,18 +138,37 @@
 
         <div>
             <h3>Military Storage<a name="military-storage">&nbsp;</a></h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Frequent relocation can be a challenge for any family, but can especially be an
+            added stress or for military service members and their families.  Finding an affordable
+            storage unit near a military base can be a challenge.  Storitz lists thousands of
+            </p>
+            <p class="right">
+            storage units near military bases, including Henderson Hall storage, Fort Myer
+            storage, Fort McNair storage units and storage near Fort Hamilton.  To compare self
+            storage military deals, simply enter your zip code and search near you.</p>
         </div>
         <div>
             <h3>College Storage<a name="college-storage">&nbsp;</a></h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>For many new college students, going to college means living with much less
+            storage space than they are used to at home.  Storitz makes it easy to find college
+            student storage across the country.  Whether it is you or your son or daughter
+            who is seeking summer storage, college storage, dorm storage or simply an affordable</p>
+            <p class="right">
+            storage unit near USC Storitz has you covered.  You can even compare
+            storage near the University of Arizona and rent college storage at any time of the
+            day, online.  Just type in your campus address or zip code to start your search.
+            </p>
         </div>
         <div>
             <h3>Business Storage<a name="business-storage">&nbsp;</a></h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>There are many reasons that business owners need storage.  A business
+            storage unit can be an affordable solution for inventory overstock.  Small
+            business storage makes operating a business possible where there is not much
+            space in your storefront or</p>
+            <p class="right">home. Business storage can also be an affordable place to
+            storage business tools or to storage business vehicles, utilizing a facility’s
+            trailer storage or boat storage.  Enter your zip code to search and compare business
+            storage locations near you.</p>
         </div>
     </div>
 </div>
