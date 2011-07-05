@@ -44,7 +44,7 @@
   <div class="move_in_quote">
     <h4>
       Total Move-In Cost <a class="help_button" href="/help#move_in_cost">huh?</a>
-      <span id="move_in_cost">$38.00</span>
+      <span class="move_in_cost">$38.00</span>
     </h4>
     <p>* Includes discounts and facility fees</p>
     <p>* Paid through July 20, 2011</p>

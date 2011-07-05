@@ -29,6 +29,14 @@ body.site_detail #left_panel {
   background-color: white;
   position: relative;
 }
+body.site_detail #right_panel {
+  display: block;
+  width: 300px;
+  background-color: white;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
 
 body.site_detail .vcard {
   height: 160px;
@@ -81,7 +89,6 @@ body.site_detail .vcard h1 {
 }
 
 body.site_detail .site_features h2 {
-  /*margin: 5px 0 0 0;*/
   color: white;
   background: url("../images/v2/site_detail/facility-subheader-bg-tile.png") repeat-x;
   height: 24px;
@@ -94,18 +101,18 @@ body.site_detail .site_features h2 {
   margin-right: 9px;
 }
 
-.site_features {
+body.site_detail .site_features {
   padding-top: 10px;
 }
 
-.site_features img {
+body.site_detail .site_features img {
   width: 20px;
   height: 20px;
   float: left;
   padding-right: 5px;
 }
 
-.site_features div {
+body.site_detail .site_features div {
   -moz-border-radius: 8px 8px 8px 8px;
   border: 1px solid #dfdfdf;
   background-color: #fcfcfc;
@@ -120,11 +127,11 @@ body.site_detail .site_features h2 {
   width: 204px;
   display: inline-block;
 }
-.site_features div.last {
+body.site_detail .site_features div.last {
   margin-right: 0;
 }
-.site_features li,
-.site_features h3 {
+body.site_detail .site_features li,
+body.site_detail .site_features h3 {
   border-bottom: 1px solid #dfdfdf;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 11px;
@@ -133,45 +140,45 @@ body.site_detail .site_features h2 {
   vertical-align: middle;
   font-weight: bold;
 }
-.site_features li {
+body.site_detail .site_features li {
   color: #333;
   list-style: none;
   border-top: 1px solid #fff;
   background: url(../images/check-mark.png) no-repeat left center;
 }
-.site_features li.last {
+body.site_detail .site_features li.last {
   border-bottom: none;
 }
-.site_features h3 {
+body.site_detail .site_features h3 {
   color: #134b98;
   font-size: 12px;
   font-weight: bold;
   margin: 0;
 }
-.site_features h3.safety {
+body.site_detail .site_features h3.safety {
   background: url(../images/icon-safety-security.png) no-repeat left center;
 }
-.site_features h3.convenience {
+body.site_detail .site_features h3.convenience {
   background: url(../images/icon-convenience.png) no-repeat left center;
 }
-.site_features h3.amenities {
+body.site_detail .site_features h3.amenities {
   background: url(../images/icon-checkmark.png) no-repeat left center;
 }
 
-.tabs {
+body.site_detail .tabs {
   padding: 0 0 0 12px;
   list-style-type: none;
   text-align: center;
   height: 28px;
 }
 
-.tabs li {
+body.site_detail .tabs li {
   display: inline;
   padding: 0;
   margin: 0;
 }
 
-.tabs li a {
+body.site_detail .tabs li a {
   float: left;
   font-size: 13px;
   display: inline-block;
@@ -196,11 +203,11 @@ body.site_detail .site_features h2 {
   border-top-left-radius: 5px;
 }
 
-.tabs li a:hover {
+body.site_detail .tabs li a:hover {
   background-color: #90c0f0;
 }
 
-.tabs li a.current {
+body.site_detail .tabs li a.current {
   background-color: #fff;
   border-bottom-width: 0px;
   cursor: default;
@@ -209,7 +216,7 @@ body.site_detail .site_features h2 {
   box-shadow: 0px 0px 4px #025895;
 }
 
-.panes {
+body.site_detail .panes {
   display: block;
   overflow: hidden;
   border-top: 1px solid #aaa;
@@ -217,7 +224,7 @@ body.site_detail .site_features h2 {
   position: relative;
 }
 
-.panes>div {
+body.site_detail .panes>div {
   display: block;
   border: 1px solid #666;
   border-width: 0 0 0 0;
@@ -225,38 +232,38 @@ body.site_detail .site_features h2 {
   background-color: #fff;
 }
 
-.panes .main_pic {
+body.site_detail .panes .main_pic {
   display: block;
   width: 240px;
   height: 160px;
   margin: 10px 0 10px 0;
 }
 
-.panes .overview .photos {
+body.site_detail .panes .overview .photos {
   display: inline-block;
   float: left;
   width: 265px;
 }
 
-.panes .overview .description {
+body.site_detail .panes .overview .description {
   display: inline-block;
   width: 350px;
   padding-top: 10px;
 }
 
-.panes .overview ul.action_links {
+body.site_detail .panes .overview ul.action_links {
   display: inline-block;
   float: right;
   margin: 0 0 10px 10px;
   padding-left: 10px;
   border-left: 1px dotted #ccc;
 }
-.panes .overview ul.action_links li {
+body.site_detail .panes .overview ul.action_links li {
   display: block;
   margin-bottom: 4px;
 }
 
-.panes .overview ul.action_links li a.print {
+body.site_detail .panes .overview ul.action_links li a.print {
   display: inline-block;
   padding-top: 4px;
   background: url("../images/v2/buttons/printer_icon_small.gif") no-repeat;
@@ -269,14 +276,13 @@ body.site_detail .site_features h2 {
   color: black;
 }
 
-a.print:hover {
+body.site_detail a.print:hover {
   opacity: 0.6;
 }
 
-  /*everything that is on the right of the page */
+body.site_detail .move_in_quote { position: relative; }
 
-.move_in_quote { position: relative; }
-a.help_button {
+body.site_detail a.help_button {
   display: inline-block;
   background: url("../images/v2/buttons/help-12x12.png") no-repeat;
   width: 12px;
@@ -285,16 +291,8 @@ a.help_button {
   position: absolute;
   margin-left: 3px;
 }
-#right_panel {
-  display: block;
-  width: 300px;
-  background-color: white;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
 
-.rent_me {
+body.site_detail .rent_me {
   padding: 0;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -307,21 +305,21 @@ a.help_button {
   box-shadow: 0 0 8px #cccccc;
   font-size: 13px;
 }
-.rent_me > div {
+body.site_detail .rent_me > div {
   padding: 12px 12px;
   border-color: #aaa;
   border-width: 1px 0 0 0;
   border-style: solid;
 }
 
-.rent_me > div.price .original_price {
+body.site_detail .rent_me > div.price .original_price {
   font-size: 16px;
   font-weight: normal;
   color: red;
   text-decoration: line-through;
 }
 
-.rent_me > div.price {
+body.site_detail .rent_me > div.price {
   font: 22px arial, verdana, helvetica, sans-serif;
   font-weight: bold;
   padding-bottom: 0;
@@ -329,21 +327,21 @@ a.help_button {
   text-align: center;
 }
 
-.rent_me > div.rent_reserve {
+body.site_detail .rent_me > div.rent_reserve {
   padding-bottom: 4px;
 }
 
-.rent_me > div.price,
-.rent_me > div.rent_reserve {
+body.site_detail .rent_me > div.price,
+body.site_detail .rent_me > div.rent_reserve {
   border-width: 0;
 }
 
-.rent_me > div.price .per_month {
+body.site_detail .rent_me > div.price .per_month {
   font-size: 12px;
   font-weight: normal;
 }
 
-.rent_me > div.rent_reserve .guarantee {
+body.site_detail .rent_me > div.rent_reserve .guarantee {
   background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat;
   background-position: 50px center;
   padding: 13px 0 10px 75px;
@@ -351,13 +349,13 @@ a.help_button {
   color: #3EA307;
 }
 
-.rent_me > div.move_in_date {
+body.site_detail .rent_me > div.move_in_date {
   padding-top: 15px;
   padding-bottom: 30px;
   font-weight: bold;
 }
 
-.rent_me > div.move_in_date a.edit_date {
+body.site_detail .rent_me > div.move_in_date a.edit_date {
   padding-left: 28px;
   background: url("../images/icn-calendar.png") no-repeat;
   background-position: left top;
@@ -367,77 +365,77 @@ a.help_button {
   line-height: 150%;
   margin-top: -5px;
 }
-.rent_me > div.move_in_date a.edit_date .date_label {
+body.site_detail .rent_me > div.move_in_date a.edit_date .date_label {
   font-weight:bold;
   color: black;
 }
-.rent_me > div.move_in_date a.edit_date .link {
+body.site_detail .rent_me > div.move_in_date a.edit_date .link {
   text-decoration: underline;
   text-align: right;
   font-size: 11px;
   font-weight: normal;
 }
 
-.rent_me > div.unit_info ul {
+body.site_detail .rent_me > div.unit_info ul {
   line-height: 110%;
   font-size: 12px;
   margin-bottom: 7px;
 }
-.rent_me > div.unit_info a.view_more {
+body.site_detail .rent_me > div.unit_info a.view_more {
   float: right;
   font-size: 11px;
   margin-top: 1px;
 }
-.rent_me > div.unit_info .promos a.view_more {
+body.site_detail .rent_me > div.unit_info .promos a.view_more {
   margin-top: 0px;
 }
-.rent_me div.unit_info h4 {
+body.site_detail .rent_me div.unit_info h4 {
   font-size: 14px;
   color: black;
   margin-bottom: 7px;
   color: #025895;
 }
-.rent_me > div.unit_info .promos .label,
-.rent_me > div.unit_info .promos a.view_more {
+body.site_detail .rent_me > div.unit_info .promos .label,
+body.site_detail .rent_me > div.unit_info .promos a.view_more {
   font-weight: normal;
 }
-.rent_me > div.unit_info .promos {
+body.site_detail .rent_me > div.unit_info .promos {
   margin-top: 5px;
   font-weight: bold;
   color: red;
 }
-.rent_me > div.unit_info .promos ul {
+body.site_detail .rent_me > div.unit_info .promos ul {
   display: none;
 }
-#move_in_cost {
+body.site_detail .rent_me .move_in_quote .move_in_cost {
   float: right;
 }
-.rent_me > div.move_in_quote h4 {
+body.site_detail .rent_me > div.move_in_quote h4 {
   margin-bottom: 4px;
 }
-.rent_me > div.move_in_quote p {
+body.site_detail .rent_me > div.move_in_quote p {
   font: 11px arial, verdana, helvetica, sans-serif;
   margin-top: 2px;
 }
 
-.sim_units {
+body.site_detail .sim_units {
   background-color: white;
   margin: 30px 0 0 0;
 }
 
-.sim_units #units {
+body.site_detail .sim_units #units {
   display: block;
   width: inherit;
   padding: 10px 0 10px 0;
 }
 
-.sim_units .units_bottom {
+body.site_detail .sim_units .units_bottom {
   display: block;
   width: inherit;
   height: 40px;
 }
 
-.separator {
+body.site_detail .separator {
   height: 0;
   clear: both;
   width: 280px;
@@ -445,13 +443,13 @@ a.help_button {
   margin: 0 0 10px 0;
 }
 
-#units .unit {
+body.site_detail .sim_units #units .unit {
   display: block;
   width: inherit;
   height: 100px;
 }
 
-.unit img {
+body.site_detail .sim_units #units .unit img {
   width: 80px;
   height: 80px;
   display: block;
@@ -459,7 +457,7 @@ a.help_button {
   padding: 10px 10px 10px 0;
 }
 
-.unit .unit_text {
+body.site_detail .sim_units #units .unit .unit_text {
   display: block;
   float: left;
   width: 210px;
@@ -467,7 +465,7 @@ a.help_button {
   padding: 10px 0 0 0;
 }
 
-.sim_units h1 {
+body.site_detail .sim_units h1 {
   font: 16px arial, verdana, helvetica, sans-serif;
   font-weight: bold;
 }
