@@ -147,75 +147,24 @@
 
   <div id="right_panel">
     <g:render template="/transaction"/>
-
-    <div class="sim_units">
-      <h1>Similar Units Nearby</h1>
-
-      <div id="units">
-        <div class="separator"></div>
-
-        <div class="unit">
-          <img src="#"/>
-
-          <div class="unit_text">
+    <g:if test="${nearbyUnits?.size() > 0}">
+      <div class="sim_units">
+        <h1>Similar Units Nearby</h1>
+        <ul>
+          <li>
+            <img src="#" />
             <h2>Pacoima - Glen Oaks Blvd</h2>
-
-            <h2>$79.00/mo.</h2>
-
+            <div class="price">
+              $79.00<span>/mo.</span>
+            </div>
             <p>5.8 miles from this facility</p>
-          </div>
+          </li>
+        </ul>
+        <div class="units_bottom">
+          <a href="#">View More...</a>
         </div>
-
-        <div class="separator"></div>
-
-        <div class="unit">
-          <img src="#"/>
-
-          <div class="unit_text">
-            <h2>Pacoima - Glen Oaks Blvd</h2>
-
-            <h2>$79.00/mo.</h2>
-
-            <p>5.8 miles from this facility</p>
-          </div>
-        </div>
-
-        <div class="separator"></div>
-
-        <div class="unit">
-          <img src="#"/>
-
-          <div class="unit_text">
-            <h2>Pacoima - Glen Oaks Blvd</h2>
-
-            <h2>$79.00/mo.</h2>
-
-            <p>5.8 miles from this facility</p>
-          </div>
-        </div>
-
-        <div class="separator"></div>
-
-        <div class="unit">
-          <img src="#"/>
-
-          <div class="unit_text">
-            <h2>Pacoima - Glen Oaks Blvd</h2>
-
-            <h2>$79.00/mo.</h2>
-
-            <p>5.8 miles from this facility</p>
-          </div>
-        </div>
-
-        <div class="separator"></div>
       </div>
-
-      <div class="units_bottom">
-        <a href="#">View More...</a>
-        <input type="button" value="Compare"/>
-      </div>
-    </div>
+    </g:if>
   </div>
 </div>
 
@@ -232,7 +181,7 @@
       var right = $("#right_panel").height();
       var max_height = Math.max(left, right);
 
-      $(".the_page").height(max_height);
+      $(".container").height(max_height);
 
       //browser specifics for IE
       if ($.browser.msie) {
