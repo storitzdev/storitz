@@ -1034,15 +1034,13 @@ body.blog div.zemanta-pixie {
 /* ------------------------------------------------------------------------------------- */
 /* Site detail page */
 
-.container {
-  position: relative;
-}
 body.site_detail .container {
   margin-top: 10px;
+  position: relative;
 }
 
 body.site_detail {
-  font-family: Arial;
+  font-family: Arial, Helvetica, sans-serif;
 }
 body.site_detail #header form {
   display: none;
