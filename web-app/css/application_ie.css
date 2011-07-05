@@ -99,3 +99,138 @@ a.toggle_map_view {
   line-height: 0;
   text-indent: 0;
 }
+/* Site details */
+body.site_detail .container {
+  margin-top: 10px;
+  position: relative;
+  width: 960px;
+}
+body.site_detail .vcard div {
+  float: left;
+  display:inline-block;
+}
+body.site_detail .vcard .site_logo {
+  margin-right: 20px;
+  width: 250px;
+}
+body.site_detail .rent_me div {
+  padding: 12px 12px;
+  border-color: #aaa;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+}
+body.site_detail .rent_me div.price .original_price {
+  font-size: 16px;
+  font-weight: normal;
+  color: red;
+  text-decoration: line-through;
+}
+
+body.site_detail .rent_me div.price {
+  font: 22px arial, verdana, helvetica, sans-serif;
+  font-weight: bold;
+  padding-bottom: 0;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+body.site_detail .rent_me div.rent_reserve {
+  padding-bottom: 4px;
+}
+
+body.site_detail .rent_me div.price,
+body.site_detail .rent_me div.rent_reserve {
+  border-width: 0px;
+}
+
+body.site_detail .rent_me div.price .per_month {
+  font-size: 12px;
+  font-weight: normal;
+  border-top-width: 0;
+}
+
+body.site_detail .rent_me div.rent_reserve .guarantee {
+  background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat;
+  background-position: 50px center;
+  padding: 13px 0 10px 75px;
+  font-weight: bold;
+  color: #3EA307;
+  border-top-width: 0;
+}
+
+body.site_detail .rent_me div.move_in_date {
+  padding-top: 15px;
+  padding-bottom: 30px;
+  font-weight: bold;
+}
+
+body.site_detail .rent_me div.move_in_date a.edit_date {
+  padding-left: 28px;
+  background: url("../images/icn-calendar.png") no-repeat;
+  background-position: left top;
+  /*float: right;*/
+  display: inline-block;
+  text-decoration: none;
+  line-height: 150%;
+  margin-top: -5px;
+}
+body.site_detail .rent_me div.move_in_date a.edit_date .date_label {
+  font-weight:bold;
+  color: black;
+  border-top-width: 0;
+}
+body.site_detail .rent_me div.move_in_date a.edit_date .link {
+  text-decoration: underline;
+  text-align: right;
+  font-size: 11px;
+  font-weight: normal;
+  border-top-width: 0;
+}
+
+body.site_detail .rent_me div.unit_info ul {
+  line-height: 110%;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+body.site_detail .rent_me div.unit_info a.view_more {
+  /*float: right;*/
+  font-size: 11px;
+  margin-top: 1px;
+}
+body.site_detail .rent_me div.unit_info .promos a.view_more {
+  margin-top: 0px;
+}
+body.site_detail .rent_me div.unit_info .promos .label,
+body.site_detail .rent_me div.unit_info .promos a.view_more {
+  font-weight: normal;
+}
+body.site_detail .rent_me div.unit_info .promos {
+  margin-top: 5px;
+  font-weight: bold;
+  color: red;
+}
+body.site_detail .rent_me div.unit_info .promos ul {
+  display: none;
+}
+body.site_detail .rent_me .move_in_quote .move_in_cost {
+  float: right;
+}
+body.site_detail .rent_me div.move_in_quote h4 {
+  margin-bottom: 4px;
+}
+body.site_detail .rent_me div.move_in_quote p {
+  font: 11px arial, verdana, helvetica, sans-serif;
+  margin-top: 2px;
+}
+body.site_detail a.help_button {
+  display: inline;
+  background: url("../images/v2/buttons/help-12x12.png") no-repeat;
+  width: 12px;
+  height: 12px;
+  text-indent: -9999px;
+  position: absolute;
+  margin-left: 3px;
+}
+body.site_detail .site_features div {
+  float: left;
+}
