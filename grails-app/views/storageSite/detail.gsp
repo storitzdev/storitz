@@ -31,7 +31,7 @@ body.site_detail #left_panel {
 }
 
 body.site_detail .vcard {
-  height: 140px;
+  height: 160px;
   background: url("../images/v2/site_detail/bg-fade-facility-tabs.jpg") repeat-x;
   background-position: left bottom;
   clear: both;
@@ -54,7 +54,7 @@ body.site_detail .site_info {
   margin-top: -30px;
 }
 .breadcrumbs {
-  color: #025895;
+  color: #00529b;
   margin-bottom: 5px;
   margin-left: 5px;
   font-size: 11px;
@@ -71,7 +71,7 @@ body.site_detail a.action_links,
 body.site_detail h2,
 body.site_detail h3,
 .breadcrumbs a.current {
-  color: #025895;
+  color: #00529b;
 }
 body.site_detail .vcard h1 {
   font-family: Arial;
@@ -182,7 +182,7 @@ body.site_detail .site_features h2 {
   height: 13px;
   text-decoration: none;
   font-weight: bold;
-  margin-right: 2px;
+  margin-right: 5px;
   position: relative;
   top: 1px;
   outline: 0;
@@ -264,6 +264,9 @@ body.site_detail .site_features h2 {
   padding-left: 24px;
   height: 16px;
   font-family: Verdana, Helvetica, sans-serif;
+  text-decoration: none;
+  font-size: 11px;
+  color: black;
 }
 
 a.print:hover {
@@ -302,6 +305,7 @@ a.help_button {
   background-repeat: repeat-x;
   vertical-align: top;
   box-shadow: 0 0 8px #cccccc;
+  font-size: 13px;
 }
 .rent_me > div {
   padding: 12px 12px;
@@ -374,6 +378,11 @@ a.help_button {
   font-weight: normal;
 }
 
+.rent_me > div.unit_info ul {
+  line-height: 110%;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
 .rent_me > div.unit_info a.view_more {
   float: right;
   font-size: 11px;
@@ -388,7 +397,6 @@ a.help_button {
   margin-bottom: 7px;
   color: #025895;
 }
-.rent_me > div.unit_info .promos .label { display : none; }
 .rent_me > div.unit_info .promos .label,
 .rent_me > div.unit_info .promos a.view_more {
   font-weight: normal;
@@ -396,6 +404,10 @@ a.help_button {
 .rent_me > div.unit_info .promos {
   margin-top: 5px;
   font-weight: bold;
+  color: red;
+}
+.rent_me > div.unit_info .promos ul {
+  display: none;
 }
 #move_in_cost {
   float: right;
@@ -404,7 +416,7 @@ a.help_button {
   margin-bottom: 4px;
 }
 .rent_me > div.move_in_quote p {
-  font: 10px arial, verdana, helvetica, sans-serif;
+  font: 11px arial, verdana, helvetica, sans-serif;
   margin-top: 2px;
 }
 
@@ -458,7 +470,6 @@ a.help_button {
 .sim_units h1 {
   font: 16px arial, verdana, helvetica, sans-serif;
   font-weight: bold;
-  color: #00529B;
 }
 
 </style>
@@ -605,7 +616,7 @@ a.help_button {
     <g:render template="/transaction"/>
 
     <div class="sim_units">
-      <h1>Similar units nearby</h1>
+      <h1>Similar Units Nearby</h1>
 
       <div id="units">
         <div class="separator"></div>

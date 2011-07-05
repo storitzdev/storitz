@@ -24,7 +24,7 @@
     <input type="hidden" id="date" name="date"/>
   </div>
   <div class="unit_info">
-    <a class="view_more" href="#">See more sizes</a>
+    <a class="view_more" href="#">All sizes</a>
     <h4>10' x 10' Unit</h4>
     <ul>
       <li>Drive-up</li>
@@ -32,8 +32,13 @@
       <li>Climate Control</li>
     </ul>
     <div class="promos">
-      <a class="view_more" href="#">See more offers</a>
-      <span class="label">Special offer</span> First month free for witches and labrador retrievers
+      <a class="view_more" href="#">All special offers</a>
+      First month free for witches and labrador retrievers!
+      <ul>
+        <li>First Month Free! <a href="#">Use this one</a></li>
+        <li>50% off 1st 3 months! <a href="#">Use this one</a></li>
+        <li>Free box of hair! <a href="#">Use this one</a></li>
+      </ul>
     </div>
   </div>
   <div class="move_in_quote">
