@@ -1,0 +1,1 @@
+<g:render template="/transaction" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate]"/>

@@ -33,20 +33,12 @@ class RentalTransactionController {
     [rentalTransactionInstanceList: RentalTransaction.list(params), rentalTransactionInstanceTotal: RentalTransaction.count()]
   }
 
-  def create = {
-    def rentalTransactionInstance = new RentalTransaction()
-    rentalTransactionInstance.properties = params
-    return [rentalTransactionInstance: rentalTransactionInstance]
+  def begin = {
   }
 
-  def ajaxPoll = {
-    render {
-      span("${session.shortSessionId} ${new Date()}")
-    }
-  }
-
-  def ajaxUpdate = {
-
+  void updateSessions(params) {
+    def site, searchSize, address, date, page, searchType, unitType, shortSessionId;
+    /*
     def site = params.site
     params.remove('site')
     def searchSize = params.SC_searchSize
@@ -79,8 +71,27 @@ class RentalTransactionController {
     def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: params.id, unitType: unitType, site: site,
             searchSize: searchSize, address: address, date: date, page: page, searchType: searchType,
             rentalTransaction: rentalTransactionInstance, landingCookie: params.landingCookie]
+     */
+    def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: shortSessionId, unitType: unitType, site: site,
+            searchSize: searchSize, address: address, date: date, page: page, searchType: searchType,
+            rentalTransaction: rentalTransactionInstance, landingCookie: params.landingCookie]
 
     liveSessions[params.id] = callParams
+  }
+
+  def create = {
+    def rentalTransactionInstance = new RentalTransaction()
+    rentalTransactionInstance.properties = params
+    return [rentalTransactionInstance: rentalTransactionInstance]
+  }
+
+  def ajaxPoll = {
+    render {
+      span("${session.shortSessionId} ${new Date()}")
+    }
+  }
+
+  def ajaxUpdate = {
 
     render(status: 200, contentType: "application/json", text: "{ 'update':false }")
   }

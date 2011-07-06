@@ -147,7 +147,9 @@
   </div>
 
   <div id="right_panel">
-    <g:render template="/transaction"/>
+    <g:form mapping="checkout" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
+      <g:render template="/transaction" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate]"/>
+    </g:form>
     <g:if test="${nearbyUnits?.size() > 0}">
       <div class="sim_units">
         <h1>Similar Units Nearby</h1>

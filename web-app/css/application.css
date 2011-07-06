@@ -1356,6 +1356,15 @@ body.site_detail .rent_me > div.rent_reserve {
   border-width: 0;
 }
 
+body.site_detail .rent_me > div.rent_reserve input.rent_me_button {
+  display: block;
+  background: url("../images/v2/site_detail/rent-me-275x56.png") no-repeat;
+  width: 275px;
+  height: 56px;
+  text-indent: -9999px;
+  border-width: 0;
+}
+
 body.site_detail .rent_me > div.price .per_month {
   font-size: 12px;
   font-weight: normal;
@@ -1401,13 +1410,10 @@ body.site_detail .rent_me > div.unit_info ul {
   font-size: 12px;
   margin-bottom: 7px;
 }
-body.site_detail .rent_me > div.unit_info a.view_more {
+body.site_detail .rent_me > div.unit_info a.more_sizes {
   float: right;
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 1px;
-}
-body.site_detail .rent_me > div.unit_info .promos a.view_more {
-  margin-top: 0px;
 }
 body.site_detail .rent_me div.unit_info h4 {
   font-size: 14px;
@@ -1415,17 +1421,38 @@ body.site_detail .rent_me div.unit_info h4 {
   margin-bottom: 7px;
   color: #025895;
 }
-body.site_detail .rent_me > div.unit_info .promos .label,
-body.site_detail .rent_me > div.unit_info .promos a.view_more {
+body.site_detail .rent_me > div.unit_info .promos .label {
   font-weight: normal;
+}
+body.site_detail .rent_me > div.unit_info .promos .offer_links {
+  font-weight: normal;
+}
+body.site_detail .rent_me > div.unit_info .promos .offer_links a {
+  color: red;
 }
 body.site_detail .rent_me > div.unit_info .promos {
   margin-top: 5px;
   font-weight: bold;
-  color: red;
+}
+body.site_detail .rent_me > div.unit_info .promos li a {
+  text-decoration: none;
+  display: inline-block;
+  background-color: #7e7975;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  padding: 2px 10px 3px;
+  margin-right: 10px;
+}
+body.site_detail .rent_me > div.unit_info .promos li {
+  display: block;
+  margin: 3px 0;
 }
 body.site_detail .rent_me > div.unit_info .promos ul {
   display: none;
+  clear: both;
+  margin-top: 10px;
+  margin-bottom: 2px;
 }
 body.site_detail .rent_me .move_in_quote .move_in_cost {
   float: right;

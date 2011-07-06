@@ -8,6 +8,16 @@ class UrlMappings {
     "404"(view: '/notfound')
     "/help"(view: '/help')
 
+    name checkout: "/checkout" {
+      controller = "rentalTransaction"
+      action = "begin"
+    }
+
+    name rentMePanel: "/rent-me-panel" {
+      controller = "storageSite"
+      action = "rentMePanel"
+    }
+
     name state: "/self-storage/state/$state" {
       controller = "seo"
       action = "redirectState"

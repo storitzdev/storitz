@@ -10,9 +10,9 @@ import storitz.constants.UnitType
 import com.storitz.*
 import com.storitz.service.CostTotals
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import org.codehaus.groovy.grails.web.mapping.UrlCreator
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
+import java.text.SimpleDateFormat
 
 class StorageSiteController implements ApplicationContextAware {
 
@@ -594,11 +594,44 @@ class StorageSiteController implements ApplicationContextAware {
     }
 
     // If you change this, don't forget the smartCall action also uses this view!
+    def moveInDate = new Date();
+    def promo = params.promoId ? SpecialOffer.get(params.promoId as Long) : null;
+    def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
+    promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
     [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: title,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
-            promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList]
+            promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList,
+            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos]
+  }
+
+  def rentMePanel = {
+    if(!(params.unitId && params.siteId)) {
+      render(status:400, contentType: "text/plain", text: "Missing required parameter(s) unitId and/or siteId.");
+    }
+    def promo = null;
+    if (params.promoId && params.promoId != "-1") {
+      promo = SpecialOffer.get(params.promoId as Long);
+      if (!promo) {
+        render(status:400, contentType: "text/plain", text: "promo ${params.promoId} could not be found");
+      }
+    }
+    def unit = StorageUnit.get(params.unitId as Long);
+    if (!unit) {
+      render(status:400, contentType: "text/plain", text: "unit ${params.unitId} could not be found");
+    }
+    def site = StorageSite.get(params.siteId as Long);
+    if (!site) {
+      render(status:400, contentType: "text/plain", text:"site ${params.siteId} could not be found");
+    }
+    // TODO: Verify that unit and promo both belong to site
+    def moveInDate = params.moveInDate ? new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate) : new Date();
+    def promos = offerFilterService.getValidFeaturedOffers(site, unit);
+    promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
+    render(template:"rentMePanel",
+            contentType: "text/html",
+            model:[site:site, unit:unit, promo: promo, promos: promos, moveInDate:moveInDate]);
   }
 
   def directions = {
