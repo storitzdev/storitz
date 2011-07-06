@@ -4,37 +4,12 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en">
 <head>
+    %{--<p:css name='organizer'/>--}%
     <g:render template="/header_home"/>
     <p:javascript src="contest" />
 </head>
 <body>
 <div id="body">
-
-    <div class="stcontent" style="margin-top:15px;">
-
-        <div id="headerdiv" style="border:1">
-
-            <div class="left" style="width:300px;margin-right:15px;">
-                <g:link controller="home" action="index">
-                    <storitz:image src="storitz-logo-small.png" class="noborder"/>
-                </g:link>
-            </div>
-            <div class="left" style="width:635px;">
-                <div id="searchform" style="float:right; padding-right:3px; margin:0;">
-                    <g:form controller="home" action="index" class="search-form" id="gsearch" method="get">
-                        <fieldset>
-                                <legend class="hidden">search</legend>
-                                <input class="text" type="text" id="address" name="address" value="Enter Address or Zip" title="Enter Address or Zip"/>
-                                <input type="submit" class="submit" id="btn-search" value="" title="search submit"/>
-                            </fieldset>
-                    </g:form>
-                </div>
-
-                <div style="clear:both;"></div>
-            </div>
-
-        </div> <!-- END HEADER DIV -->
-
         <div style="clear:both;"></div>
 
         <div class="organizerbanner"></div>
@@ -93,6 +68,9 @@
                     the O.C.D. Experience, Justin Klosky. Justin Klosky will organize your home or office space as well
                     as provide the winner with tips and tricks for maintaining an organized lifestyle. 5 finalists will
                     be chosen from all the entries received, which will then be voted on by our facebook fans. </p>
+
+                    <p>Can't wait until July 31st? Rent a unit today and if you win, we'll apply the cost of 3 months in
+                    your current unit to your account.</p>
                 </div>
 
                 <div class="video_container">
@@ -227,8 +205,7 @@
     <!-- ################# -->
     <!-- END CONTENT GOES HERE -->
     <!-- ################# -->
-    </div>
-
+    %{--</div>--}%
     <p:dependantJavascript>
         <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         <script>

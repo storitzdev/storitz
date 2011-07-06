@@ -1507,3 +1507,190 @@ body.site_detail .sim_units ul li img {
 body.site_detail .sim_units .units_bottom {
   text-align: right;
 }
+/*Organizer contest CSS begins here*/
+#body {
+    color: #333;
+    font: 11px verdana,arial,helvetica,sans-serif;
+}
+#body strong, #body b {
+    font-weight: bolder;
+}
+#body span, #body label, #body img {
+    vertical-align: 0;
+}
+h1 {
+    color: #099EC8;
+    font-weight: normal;
+    font-size: 16px;
+    margin: .8em 0 1em 0;
+}
+a:link, a:visited {
+    color: #666;
+    font-weight: bold;
+}
+div.contest {
+    border: 1px solid #ccc;
+}
+div.organizerbanner {
+    width: 960px;
+    height: 227px;
+    background: #fff url("../images/pro-organizer-contest-banner.jpg") no-repeat;
+}
+/* Added css for changes in contest page */
+#LikePluginPagelet div.connect_button_container {
+    padding-left: 40px;
+}
+#contest_top {
+    width: 960px;
+    display: block;
+}
+#contestformdiv .organizer_intro {
+    display: inline-block;
+    float: left;
+    width: 470px;
+    padding-right: 10px;
+    font-size: 15px;
+    font-family: helvetica;
+}
+#contestformdiv table {
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+.organizer_intro p {
+    font-size: 15px;
+    line-height: 17px;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+#contestformdiv .video_container {
+    display: inline-block;
+    /*float: left;*/
+    width: 465px;
+    height: 300px;
+}
+#contest_footer {
+    height: 60px;
+    background-image: url("../images/bkg_footer.gif");
+    color: white;
+}
+.orgprop label.right {
+    font-family: arial;
+    font-size: 13px;
+    text-align: right;
+    /*padding-top: 6px;*/
+}
+.orgprop input.required {
+    border: 1px solid gray;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    height: 30px;
+    width: 240px;
+}
+.orgprop input:focus, .orgprop textarea:focus {
+    box-shadow: 0 0 15px #006DBA;
+}
+.orgprop textarea {
+    border: 1px solid gray;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    width: 240px;
+    height: 150px;
+    vertical-align: top;
+    background-color: #fcfcfc;
+    margin: 12px 0;
+}
+.orgprop .firstfield {
+    padding-top: 6px;
+}
+.orgprop input.tac {
+    width: 13px;
+    height: 13px;
+}
+/* Additions end here */
+
+.orgprop {
+    padding: 5px;
+    height: 50px;
+}
+.orgprop .name {
+    text-align: left;
+    width: 60%;
+    white-space: nowrap;
+}
+.orgprop .value {
+    text-align: left;
+    width: 30%;
+}
+.checkout_value {
+    text-align: left;
+    float: left;
+}
+.checkout_name {
+    text-align: left;
+    white-space: nowrap;
+    float: left;
+}
+
+/* ACTION BUTTONS */
+#contestformdiv .buttons {
+    font-size: 10px;
+    display: block;
+}
+.buttons a, .buttons input, .buttonSmall a, .buttonSmall input {
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 10px;
+}
+
+/*
+
+Added styles
+*/
+.organizerButton {
+    border: 0;
+    background: url("../images/pro-organizer-submit-251x56.png") no-repeat;
+    width:251px;
+    height:56px;
+    display: inline-block;
+}
+.noborder {
+    border-style: none;
+}
+.stcontent {
+    margin-left: auto;
+    margin-right: auto;
+    width: 950px;
+}
+
+#topnav {
+    height: 26px;
+    background-image: url("../images/bkg_topbar.gif");
+}
+.organizerPink {
+    color: #f7036a;
+}
+.small {
+    font: 11px verdana, arial, helvetica, sans-serif;
+}
+.bold {
+    font-weight: bold;
+}
+.message {
+    background: #f3f8fc url(../images/skin/information.png) 8px 50% no-repeat;
+    border: 1px solid #b2d1ff;
+    color: #006dba;
+    margin: 10px 0 5px 0;
+    padding: 5px 5px 5px 30px
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+/* Organizer contest CSS ends here */
