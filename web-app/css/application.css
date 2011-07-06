@@ -1518,13 +1518,13 @@ body.site_detail .sim_units .units_bottom {
 #body span, #body label, #body img {
     vertical-align: 0;
 }
-h1 {
+#body h1 {
     color: #099EC8;
     font-weight: normal;
     font-size: 16px;
     margin: .8em 0 1em 0;
 }
-a:link, a:visited {
+#contestformdiv a:link, #contestformdiv a:visited {
     color: #666;
     font-weight: bold;
 }
@@ -1536,7 +1536,6 @@ div.organizerbanner {
     height: 227px;
     background: #fff url("../images/pro-organizer-contest-banner.jpg") no-repeat;
 }
-/* Added css for changes in contest page */
 #LikePluginPagelet div.connect_button_container {
     padding-left: 40px;
 }

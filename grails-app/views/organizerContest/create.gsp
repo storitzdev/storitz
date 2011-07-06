@@ -4,7 +4,6 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en">
 <head>
-    %{--<p:css name='organizer'/>--}%
     <g:render template="/header_home"/>
     <p:javascript src="contest" />
 </head>
