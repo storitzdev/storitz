@@ -100,7 +100,7 @@ a.toggle_map_view {
   text-indent: 0;
 }
 /* Site details */
-body.site_detail .container {
+body.site_detail .container_detail {
   margin-top: 10px;
   position: relative;
   width: 960px;
@@ -147,6 +147,7 @@ body.site_detail .rent_me div.price .per_month {
   font-size: 12px;
   font-weight: normal;
   border-top-width: 0;
+  padding: 0;
 }
 
 body.site_detail .rent_me div.rent_reserve .guarantee {
@@ -168,16 +169,18 @@ body.site_detail .rent_me div.move_in_date a.edit_date {
   padding-left: 28px;
   background: url("../images/icn-calendar.png") no-repeat;
   background-position: left top;
-  /*float: right;*/
+  float: right;
+  position: absolute;
   display: inline-block;
   text-decoration: none;
-  line-height: 150%;
-  margin-top: -5px;
+  line-height: 100%;
+  margin: -3px 0 0 56px;
 }
 body.site_detail .rent_me div.move_in_date a.edit_date .date_label {
   font-weight:bold;
   color: black;
   border-top-width: 0;
+  padding: 2px 0 2px 0;
 }
 body.site_detail .rent_me div.move_in_date a.edit_date .link {
   text-decoration: underline;
@@ -185,6 +188,7 @@ body.site_detail .rent_me div.move_in_date a.edit_date .link {
   font-size: 11px;
   font-weight: normal;
   border-top-width: 0;
+  padding: 2px;
 }
 
 body.site_detail .rent_me div.unit_info ul {
@@ -193,12 +197,13 @@ body.site_detail .rent_me div.unit_info ul {
   margin-bottom: 7px;
 }
 body.site_detail .rent_me div.unit_info a.view_more {
-  /*float: right;*/
+  float: right;
   font-size: 11px;
   margin-top: 1px;
 }
 body.site_detail .rent_me div.unit_info .promos a.view_more {
   margin-top: 0px;
+  /*float: right;*/
 }
 body.site_detail .rent_me div.unit_info .promos .label,
 body.site_detail .rent_me div.unit_info .promos a.view_more {
@@ -208,12 +213,17 @@ body.site_detail .rent_me div.unit_info .promos {
   margin-top: 5px;
   font-weight: bold;
   color: red;
+  border-top-width: 0;
+  padding: 0;
 }
 body.site_detail .rent_me div.unit_info .promos ul {
   display: none;
 }
 body.site_detail .rent_me .move_in_quote .move_in_cost {
-  float: right;
+  /*float: right;*/
+  display: inline-block;
+  position: absolute;
+  padding: 2px 0 0 95px;
 }
 body.site_detail .rent_me div.move_in_quote h4 {
   margin-bottom: 4px;
@@ -223,14 +233,23 @@ body.site_detail .rent_me div.move_in_quote p {
   margin-top: 2px;
 }
 body.site_detail a.help_button {
-  display: inline;
+  display: inline-block;
+  position: relative;
   background: url("../images/v2/buttons/help-12x12.png") no-repeat;
   width: 12px;
   height: 12px;
   text-indent: -9999px;
-  position: absolute;
   margin-left: 3px;
 }
 body.site_detail .site_features div {
   float: left;
+}
+body.site_detail .panes .overview ul.action_links {
+  display: inline-block;
+  width: 65px;
+  position: relative;
+  float: right;
+}
+body.site_detail .panes .overview ul.action_links li {
+  width: 63px;
 }

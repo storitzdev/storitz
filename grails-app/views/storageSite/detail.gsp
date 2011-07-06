@@ -15,7 +15,7 @@
   <a href="#">Los Angeles</a> &gt;
   <a href="#" class="current">${site.title}</a>
 </div>
-<div class="container">
+<div class="container_detail">
   <div id="left_panel">
     <div class="vcard">%{-- TODO: vcardify --}%
       <g:if test="${site?.logo}">
@@ -137,6 +137,7 @@
       </div>
       <div class="last">
         <h3 class="amenities">Amenities</h3></li>
+        <ul>
         <g:each in="${site.amenityItems}" status="i" var="item">
           <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
         </g:each>
