@@ -253,3 +253,15 @@ body.site_detail .panes .overview ul.action_links {
 body.site_detail .panes .overview ul.action_links li {
   width: 63px;
 }
+/*contest page begin */
+#contestformdiv tr.orgprop table.inner {
+    width: 330px;
+    margin-right: 0px;
+}
+#contestformdiv table {
+    width: 330px;
+}
+#contestformdiv tr.orgprop tr.right label.right {
+  padding-left: 162px;
+}
+/*contest page end*/

@@ -1266,6 +1266,18 @@ body.site_detail .panes .overview .photos {
   width: 265px;
 }
 
+body.site_detail .panes .overview .photos ul.image_list {
+  width: 265px;
+  overflow: hidden;
+  border-bottom: 1px solid #B2B2B2;
+  background-color: yellow;
+}
+
+div.photos ul.image_list li img {
+    width: 63px;
+    height: 42px;
+}
+
 body.site_detail .panes .overview .description {
   display: inline-block;
   width: 350px;
@@ -1561,10 +1573,7 @@ div.organizerbanner {
     font-size: 15px;
     line-height: 17px;
     display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
+    margin-top: 1em;
 }
 #contestformdiv .video_container {
     display: inline-block;
@@ -1582,6 +1591,10 @@ div.organizerbanner {
     font-size: 13px;
     text-align: right;
     /*padding-top: 6px;*/
+}
+#contestformdiv tr.orgprop table.inner {
+    width: 319px;
+    margin-right: 0px;
 }
 .orgprop input.required {
     border: 1px solid gray;
@@ -1620,7 +1633,7 @@ div.organizerbanner {
 }
 .orgprop .name {
     text-align: left;
-    width: 60%;
+    width: 30%;
     white-space: nowrap;
 }
 .orgprop .value {

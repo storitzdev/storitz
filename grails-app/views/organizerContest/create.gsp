@@ -150,13 +150,19 @@
 
                         <tr class="orgprop">
                             <td valign="top" class="name">
-                                <table>
+                                <table class="inner">
+                                    <tbody>
                                     <tr>
+                                        <td>
                                         <span class="left"><storitz:image src="3-about-you-getting-organization.gif" alt="About Storage" style="margin-top:11px;"/></span>
+                                        </td>
                                     </tr>
                                     <tr class="right">
-                                        <label class="right" for="essayWhyStorage" style="padding-top:23px"><g:message code="organizerContest.essayWhyStorage.label" default=""/>Tell us in 120 characters or<br>less why you need Justin to<br>help organize your space.</label>
+                                        <td>
+                                        <label class="right" for="essayWhyStorage" style="padding-top:23px;"><g:message code="organizerContest.essayWhyStorage.label" default=""/>Tell us in 120 characters or<br>less why you need Justin to<br>help organize your space.</label>
+                                        </td>
                                     </tr>
+                                    </tbody>
                                 </table>
                             </td>
                             <td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'essayWhyStorage', 'errors')}">
