@@ -1535,6 +1535,7 @@ div.organizerbanner {
     width: 960px;
     height: 227px;
     background: #fff url("../images/pro-organizer-contest-banner.jpg") no-repeat;
+    margin-top: 10px;
 }
 #LikePluginPagelet div.connect_button_container {
     padding-left: 40px;
@@ -1554,6 +1555,7 @@ div.organizerbanner {
 #contestformdiv table {
     border-collapse: separate;
     border-spacing: 2px;
+    margin-right: 13px;
 }
 .organizer_intro p {
     font-size: 15px;
