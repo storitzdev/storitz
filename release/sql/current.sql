@@ -30,6 +30,8 @@ CREATE TABLE `releases` (
 /* Release 1000: Changes to feed in support of new Uncle Bob's feed type */
 alter table feed add column  `ubcompany_name` varchar(255) default NULL;
 
+insert into service_map (service_handler,service_name) values ('storitz.UncleBobsStorageFeedService','BOB');
+
 /* update the releases table last */
 insert into releases (revision, release_date,description)
             values (1000,curdate(),'Uncle Bobs inventory load');

@@ -19,8 +19,14 @@ public class StoritzUtil {
             return false;
         }
 
-        int iZip = new Integer(zip).intValue();
+        try {
+            int iZip = new Integer(zip).intValue();
 
-        return iZip >= 90001 && iZip <= 96162;
+            return iZip >= 90001 && iZip <= 96162;
+        } catch (NumberFormatException n) {
+            n.printStackTrace();
+        }
+
+        return false;
     }
 }
