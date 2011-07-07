@@ -5,6 +5,7 @@ import com.storitz.CommissionSchedule
 import grails.plugins.springsecurity.Secured
 import storitz.constants.CenterShiftVersion
 import storitz.constants.FeedType
+import com.storitz.Feed
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class CshiftController extends FeedController {
@@ -57,9 +58,9 @@ class CshiftController extends FeedController {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
       if (cshiftInstance.cshiftVersion == CenterShiftVersion.CS3) {
-        CShiftStorageFeedService.refreshSites(cshiftInstance, 'CS3', stats, writer)
+        CShiftStorageFeedService.refreshSites((Feed)cshiftInstance, 'CS3', stats, writer)
       } else {
-        CShift4StorageFeedService.refreshSites(cshiftInstance, stats, writer)
+        CShift4StorageFeedService.refreshSites((Feed)cshiftInstance, 'CS4', stats, writer)
       }
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)

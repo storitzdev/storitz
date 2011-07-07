@@ -5,6 +5,7 @@ import com.storitz.CommissionSchedule
 
 import storitz.constants.FeedType
 import com.storitz.EDomicoLocation
+import com.storitz.Feed
 
 class EDomicoController extends FeedController {
 
@@ -152,7 +153,7 @@ class EDomicoController extends FeedController {
         def stats = new storitz.SiteStats()
         def writer = new PrintWriter(System.out)
         EDomicoStorageFeedService eDomicoService = new EDomicoStorageFeedService(edomicoInstance.edomicoClientID,edomicoInstance.edomicoWebServicesKey)
-        eDomicoService.refreshSites(edomicoInstance,"DOM", stats, writer)
+        eDomicoService.refreshSites((Feed)edomicoInstance,"DOM", stats, writer)
         flash.message = "Feed " + params.id + ": "+ stats.createCount + " sites created. " + stats.updateCount + " sites updated. " + stats.unitCount + " units added."
         render(view: "show", model: [edomicoInstance: edomicoInstance])
     }

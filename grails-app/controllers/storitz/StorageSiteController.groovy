@@ -611,7 +611,10 @@ class StorageSiteController implements ApplicationContextAware {
     if (!site) {
       // TODO - handle missing site
     }
-    [site: site]
+
+    def title = "Storitz - Driving Directions to ${site.title}"
+
+    [site: site, title : title]
   }
 
   def getSmartCallDataForId(id) {

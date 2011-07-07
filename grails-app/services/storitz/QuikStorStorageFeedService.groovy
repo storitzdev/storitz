@@ -180,8 +180,10 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
   }
 
-  def refreshSites(QuikStor, SiteStats stats) {
-
+  @Override
+  void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
+    def quikStor = (QuikStor)feed
+    processLocations(quikStor, stats, writer)
   }
 
   @Override

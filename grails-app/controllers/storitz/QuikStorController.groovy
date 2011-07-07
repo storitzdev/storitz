@@ -6,6 +6,7 @@ import com.storitz.QuikStorLocation
 import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
+import com.storitz.Feed
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class QuikStorController extends FeedController {
@@ -45,7 +46,8 @@ class QuikStorController extends FeedController {
     def quikStorInstance = QuikStor.get(params.id)
     if (quikStorInstance) {
       def stats = new storitz.SiteStats()
-      quikStorStorageFeedService.refreshSites(quikStorInstance, stats)
+      def writer = new PrintWriter(System.out)
+      quikStorStorageFeedService.refreshSites((Feed)quikStorInstance, 'QS', stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: quikStorInstance.id)
     }

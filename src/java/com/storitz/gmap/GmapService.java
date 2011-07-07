@@ -54,6 +54,7 @@ public class GmapService {
         MapEntry myEntry = new MapEntry();
         myEntry.setTitle(new PlainTextConstruct("StorageTech"));
         myEntry.setSummary(new PlainTextConstruct("StorageTech Storage facilities map"));
+        // TODO: Change these credentials..?
         Person author = new Person("StorageTech", null, "mamster@webeasy.com");
         myEntry.getAuthors().add(author);
 
@@ -64,6 +65,7 @@ public class GmapService {
         myService = new MapsService("storitz");
 
         try {
+            // TODO: Change these credentials..?
             myService.setUserCredentials("mamster@webeasy.com", "fpb123");
         } catch (AuthenticationException e) {
             System.err.println("Could not authenticate to map service: " + e.getMessage());

@@ -31,6 +31,16 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     }
   }
 
+  def geoCodeSite(StorageSite storageSite)  {
+      def maxidx = storageSite.zipcode.size() > 5 ? 5 : storageSite.zipcode.size()
+      def address = storageSite.address + ', ' + storageSite.city + ', ' + storageSite.state.display + ' ' + storageSite.zipcode.substring(0,maxidx)
+      GeocodeService geocodeService = new GeocodeService()
+      def geoResult = geocodeService.geocode(address)
+      storageSite.lng = geoResult?.results[0]?.geometry?.location?.lng
+      storageSite.lat = geoResult?.results[0]?.geometry?.location?.lat
+  }
+
+
   @Override
   public double calculateMoveInCost(StorageSite site, StorageUnit unit, SpecialOffer promo, Insurance ins, Date moveInDate, boolean extended) {
     CostTotals totals = calculateTotals(site, unit, promo, ins, moveInDate, extended)

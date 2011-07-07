@@ -299,7 +299,9 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  def refreshSites(cshift, feedType, stats, writer) {
+    @Override
+  void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
+    def cshift = (CenterShift)feed
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -309,9 +311,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
-      StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
+      StorageSite site = StorageSite.findBySourceAndSourceId(source, tab.SITE_ID.text())
       if (!site) {
         writer.println "Found and creating new site: ${tab.SITE_NAME.text()}"
         site = new StorageSite()
@@ -319,7 +320,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         site.lastUpdate = 0
         site.minInventory = 0
         site.rentalFee = 0
-        getSiteDetails(cshift, site, feedType, tab, stats, true, writer)
+        getSiteDetails(cshift, site, source, tab, stats, true, writer)
       }
     }
   }

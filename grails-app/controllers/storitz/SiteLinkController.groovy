@@ -4,6 +4,7 @@ import com.storitz.CommissionSchedule
 import com.storitz.SiteLink
 import grails.plugins.springsecurity.Secured
 import storitz.constants.FeedType
+import com.storitz.Feed
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SiteLinkController extends FeedController {
@@ -47,7 +48,8 @@ class SiteLinkController extends FeedController {
     def siteLinkInstance = SiteLink.get(params.id)
     if (siteLinkInstance) {
       def stats = new storitz.SiteStats()
-      siteLinkStorageFeedService.refreshSites(siteLinkInstance, stats)
+      def writer = new PrintWriter(System.out)
+      siteLinkStorageFeedService.refreshSites((Feed)siteLinkInstance, 'SL', stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: siteLinkInstance.id)
     }

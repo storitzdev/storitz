@@ -60,7 +60,7 @@ class ExrsController extends CshiftController {
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
-      exrsStorageFeedService.refreshSites(cshiftInstance, 'EX', stats, writer)
+      exrsStorageFeedService.refreshSites((Feed)cshiftInstance, 'EX', stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }

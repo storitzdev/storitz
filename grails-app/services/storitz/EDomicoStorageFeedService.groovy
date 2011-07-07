@@ -116,15 +116,6 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         }
     }
 
-    def geoCodeSite(StorageSite storageSite)  {
-        def maxidx = storageSite.zipcode.size() > 5 ? 5 : storageSite.zipcode.size()
-        def address = storageSite.address + ', ' + storageSite.city + ', ' + storageSite.state.display + ' ' + storageSite.zipcode.substring(0,maxidx)
-        GeocodeService geocodeService = new GeocodeService()
-        def geoResult = geocodeService.geocode(address)
-        storageSite.lng = geoResult?.results[0]?.geometry?.location?.lng
-        storageSite.lat = geoResult?.results[0]?.geometry?.location?.lat
-    }
-
     // TODO
     @Override
     public void loadPromos(StorageSite storageSite, PrintWriter printWriter) {
@@ -366,9 +357,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         return location.site
     }
 
-    // called by the "Refresh Sites" button on the view page
-    def refreshSites(EDomico instance, String feedType, SiteStats stats, PrintWriter writer) {
-        loadSites(instance,feedType,stats,writer)
+    @Override
+    void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
+      EDomico instance = (EDomico)feed
+      loadSites(instance,source,stats,writer)
     }
 
     def newEDomicoStorageSite () {

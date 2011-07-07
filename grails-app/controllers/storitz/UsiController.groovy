@@ -56,7 +56,7 @@ class UsiController extends CshiftController {
     if (cshiftInstance) {
       def stats = new storitz.SiteStats()
       def writer = new PrintWriter(System.out)
-      usiStorageFeedService.refreshSites(cshiftInstance, 'USI', stats, writer)
+      usiStorageFeedService.refreshSites((Feed)cshiftInstance, 'USI', stats, writer)
       flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
       redirect(action: "show", id: cshiftInstance.id)
     }
