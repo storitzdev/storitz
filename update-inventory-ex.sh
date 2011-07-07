@@ -36,7 +36,7 @@ fi
 # Save our pid to PIDFILE
 echo $$ > $PIDFILE
 
-cd /home/deploy/src/storitz
+cd /home/deploy/src/storitz.${ENVNAME}
 
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryExScript.groovy > /home/deploy/logs/UpdateInventoryEx.${ENVNAME}.${DATE}.log 2>&1
 
