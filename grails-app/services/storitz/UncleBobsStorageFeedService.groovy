@@ -18,6 +18,7 @@ import com.storitz.SpecialOffer
 import storitz.constants.PromoType
 import com.storitz.SpecialOfferRestriction
 import storitz.constants.SpecialOfferRestrictionType
+import com.storitz.SiteUser
 
 class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -43,6 +44,15 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
   private String getStoreReservationFeedURL() {
     return uncleBobsStoreReservationFeedURL.replace("<COMPANY>", UBCompanyName)
+  }
+
+  def emailService
+
+  EmailService getEmailService() {
+    if (!emailService) {
+      emailService = new EmailService()
+    }
+    return emailService
   }
 
   ///////////////////////
@@ -99,36 +109,36 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
     // Unit specific info.
     for (int i = 0; i < xmlNodes.space.size(); i++) {
-      def space_id        = xmlNodes.space[i].@id
-      def space_width     = xmlNodes.space[i].width
-      def space_length    = xmlNodes.space[i].length
-      def space_height    = xmlNodes.space[i].height
-      def space_climate   = xmlNodes.space[i].climate
-      def space_access    = xmlNodes.space[i].access
-      def space_floor     = xmlNodes.space[i].floor
-      def space_regprice  = xmlNodes.space[i].regprice
-      def space_curprice  = xmlNodes.space[i].curprice
-      def space_avail     = xmlNodes.space[i].avail
-      def space_special   = xmlNodes.space[i].special
+      def space_id        = xmlNodes.space[i].@id           as String
+      def space_width     = xmlNodes.space[i].width         as String
+      def space_length    = xmlNodes.space[i].length        as String
+      def space_height    = xmlNodes.space[i].height        as String
+      def space_climate   = xmlNodes.space[i].climate       as String
+      def space_access    = xmlNodes.space[i].access        as String
+      def space_floor     = xmlNodes.space[i].floor         as String
+      def space_regprice  = xmlNodes.space[i].regprice      as String
+      def space_curprice  = xmlNodes.space[i].curprice      as String
+      def space_avail     = xmlNodes.space[i].avail         as String
+      def space_special   = xmlNodes.space[i].special       as String
       def unit = createUpdateUnit(
           storageSiteInstance
           ,stats
           ,writer
-          ,space_id.toString()
-          ,new Double(space_width.toString()).doubleValue()
-          ,new Double(space_length.toString()).doubleValue()
-          ,new Double(space_height.toString()).doubleValue()
-          ,space_climate.toString()
-          ,space_access.toString()
-          ,new Double(space_floor.toString()).doubleValue()
-          ,new Double(space_regprice.toString()).doubleValue()
-          ,new Double(space_curprice.toString()).doubleValue()
-          ,new Double(space_avail.toString()).doubleValue()
-          ,space_special.toString().trim())
+          ,space_id
+          ,new Double(space_width).doubleValue()
+          ,new Double(space_length).doubleValue()
+          ,new Double(space_height).doubleValue()
+          ,space_climate
+          ,space_access
+          ,new Double(space_floor).doubleValue()
+          ,new Double(space_regprice).doubleValue()
+          ,new Double(space_curprice).doubleValue()
+          ,new Double(space_avail).doubleValue()
+          ,space_special.trim())
 
       if (unit) {
         storageSiteInstance.addToUnits(unit)
-        loadPromos(storageSiteInstance,unit,space_special.toString().trim())
+        loadPromos(storageSiteInstance,unit,space_special.trim())
       }
     }
   }
@@ -163,8 +173,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
     // Unit specific info.
     for (int i = 0; i < xmlNodes.space.size(); i++) {
-      def space_id        = xmlNodes.space[i].@id
-      def space_avail     = xmlNodes.space[i].avail
+      def space_id        = xmlNodes.space[i].@id   as String
+      def space_avail     = xmlNodes.space[i].avail as String
 
       if (space_id == unit_number) {
         return space_avail > 0
@@ -181,12 +191,75 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   boolean moveIn(RentalTransaction trans) {
-    return false
+    return reserve(trans)
   }
 
   @Override
   boolean reserve(RentalTransaction trans) {
-    return moveIn(trans)
+    def contact = trans.contactPrimary
+    def address = contact.address2 ? "${contact.address1}, ${contact.address2}" : contact.address1
+    def unit = StorageUnit.findById(trans.unitId)
+
+    def payload = """<leadinfo>
+  <note id="0">
+    <ResID>""" + trans.bookingDate.format('yyyyMMdd') + sprintf('%08d', trans.id) + """</ResID>
+    <dateNeeded>""" + trans.moveInDate.format("MM/dd/yyyy") + """</dateNeeded>
+    <dateSubmitted>""" + trans.bookingDate.format("MM/dd/yyyy hh:mm:ss a") + """</dateSubmitted>
+    <Email>""" + contact.email + """</Email>
+    <NameFirst>""" + contact.firstName + """</NameFirst>
+    <NameLast>""" + contact.lastName + """</NameLast>
+    <Phone>""" + contact.phone + """</Phone>
+    <Address>""" + address + """</Address>
+    <City>""" + contact.city + """</City>
+    <State>""" + contact.state.display + """</State>
+    <Zip>""" + contact.zipcode + """</Zip>
+    <Store>""" + trans.site.sourceLoc + """</Store>
+    <Space>""" + unit.unitNumber + """</Space>
+  </note>
+</leadinfo>
+    """
+
+    println "/// UNCLE BOB'S RESERVATION REQUEST ///"
+    println payload
+
+    def resText     = httpPostAction (payload,getStoreReservationFeedURL())
+
+    println "/// UNCLE BOB'S RESERVATION RESPONSE ///"
+    println resText
+
+    def retVal      = false
+    def resMatcher  = resText =~ /(.*):(.*)/
+    def resStatus   = null
+    def resDetails  = null
+    if (resMatcher.getCount()) {
+      resStatus     = resMatcher[0][1]?.trim()
+      resDetails    = resMatcher[0][2]?.trim()
+    }
+
+    if (resStatus?.startsWith("Success")) {
+      retVal = true
+      trans.idNumber = resDetails
+      trans.feedUnitNumber = unit.unitNumber
+      trans.save(flush:true)
+    }
+    else {
+      StringBuffer body = new StringBuffer()
+      body.append("Failed Uncle Bob's Reservation")
+      body.append("\n ")
+      body.append("\n REQUEST")
+      body.append("\n ${payload}")
+      body.append("\n ")
+      body.append("\n RESPONSE")
+      body.append("\n ${resText}")
+
+      getEmailService().sendTextEmail(
+        to: "notifications@storitz.com",
+        from: "no-reply@storitz.com",
+        subject: "UNCLEBOB - failed move-in",
+        body: body.toString())
+    }
+
+    return retVal
   }
 
   @Override
@@ -213,6 +286,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       def store_phone    = xmlNodes.store[i].phone    as String
       def site = createUpdateSite(store_id,store_name,store_address,store_city,store_state,store_zip,store_phone)
       feed.addToSites(site)
+      SiteUser.link(site, feed.manager)
     }
   }
 
@@ -380,8 +454,14 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   private bestGuessTempControl (space_climate) {
+    // options:
+    // "non-climate controlled"           // no
+    // "climate-controlled"               // yes
+    // "humidity controlled"              // yes
+    // "humidity/climate controlled"      // yes
+
     String climate = space_climate;
-    if (climate.toLowerCase().contains("non")) {
+    if (climate.equalsIgnoreCase("non-climate controlled")) {
       return false
     }
     return true
