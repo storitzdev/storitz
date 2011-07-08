@@ -1141,7 +1141,7 @@ body.site_detail .site_features div {
   background-position: center bottom;
   border-radius: 8px 8px 8px 8px;
   background-repeat: repeat-x;
-  margin: 0 12px 0 0;
+  margin: 0 6px 0 0;
   overflow: hidden;
   padding: 0;
   vertical-align: top;
@@ -1187,7 +1187,7 @@ body.site_detail .site_features h3.amenities {
 }
 
 body.site_detail .tabs {
-  padding: 0 0 0 12px;
+  padding: 0 0 0 70px;
   list-style-type: none;
   text-align: center;
   height: 28px;
@@ -1210,7 +1210,7 @@ body.site_detail .tabs li a {
   height: 13px;
   text-decoration: none;
   font-weight: bold;
-  margin-right: 5px;
+  margin-right: 7px;
   position: relative;
   top: 1px;
   outline: 0;
@@ -1831,6 +1831,5 @@ input#srcAddr {
     height: 30px;
     padding: 9px;
     border: 1px solid gray;
-    box-shadow: 0 0 8px #006DBA;
     margin-left: 5px;
 }

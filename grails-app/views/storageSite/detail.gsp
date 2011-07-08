@@ -62,7 +62,6 @@
       <!-- the tabs -->
       <ul class="tabs">
         <li><a class="current" href="#tab_overview">Overview</a></li>
-        <li><a class="current" href="#tab_allunits">All Units</a></li>
         <li><a class="current" href="#tab_video">Video</a></li>
         <li><a class="current" href="#tab_maphours" id="display_map" title="${site.title}" lat="${site.lat}" lng="${site.lng}">Map &amp; Hours</a></li>
         <li><a class="current" href="#tab_reviews">Reviews</a></li>
@@ -93,12 +92,35 @@
             </ul>
             ${site.description}
          </p>
+            %{--Insert site features here--}%
+            <div class="site_features">
+                <h2>Site Features</h2>
+                <div>
+                    <h3 class="safety">Safety/Security</h3>
+                    <ul>
+                        <g:each in="${site.securityItems}" status="i" var="item">
+                            <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
+                        </g:each>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="convenience">Convenience</h3></li>
+                    <ul>
+                        <g:each in="${site.convenienceItems}" status="i" var="item">
+                            <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
+                        </g:each>
+                    </ul>
+                </div>
+                <div class="last">
+                    <h3 class="amenities">Amenities</h3></li>
+                    <ul>
+                        <g:each in="${site.amenityItems}" status="i" var="item">
+                            <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
+                        </g:each>
+                    </ul>
+                </div>
+            </div>
           <a name="tab_overview">&nbsp;</a>
-        </div>
-
-        <div><!-- second tab-->
-          blah blah blah blah blah
-          <a name="tab_allunits">&nbsp;</a>
         </div>
 
         <div><!-- third tab-->
@@ -125,33 +147,6 @@
       </div>
     </div>
 
-    <div class="site_features">
-      <h2>Site Features</h2>
-      <div>
-        <h3 class="safety">Safety/Security</h3>
-        <ul>
-          <g:each in="${site.securityItems}" status="i" var="item">
-            <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
-          </g:each>
-        </ul>
-      </div>
-      <div>
-        <h3 class="convenience">Convenience</h3></li>
-        <ul>
-        <g:each in="${site.convenienceItems}" status="i" var="item">
-          <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
-        </g:each>
-        </ul>
-      </div>
-      <div class="last">
-        <h3 class="amenities">Amenities</h3></li>
-        <ul>
-        <g:each in="${site.amenityItems}" status="i" var="item">
-          <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
-        </g:each>
-        </ul>
-      </div>
-    </div>
   </div>
 
   <div id="right_panel">

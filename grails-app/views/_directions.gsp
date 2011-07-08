@@ -15,7 +15,7 @@
   <div style="clear:both;"></div>
 </div>
 <div style="margin-top:-2px;" class="left">
-  <p:inputImage src="btn-find-it.png" style="width:108px;height:34px;border:none;" name="getDirections" value="Get Directions"/>
+  <p:inputImage src="get-directions-form-button.png" style="width:132px;height:32px;border:none;padding:2px 0 0 4px;" name="getDirections" value="Get Directions"/>
 </div>
 <div style="clear:both;"></div>
 <div id="dirPanel" style="display:none;">
