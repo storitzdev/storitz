@@ -6,7 +6,7 @@
   <div id="directionMapCanvas"></div>
 </div>
 <div class="dirInstructions">
-  <h2>Driving Directions</h2> Enter the city, address, or zip where you need storage
+  <h2>Driving Directions</h2> Enter your start address below
 </div>
 <div class="left">
   <div style="width:330px;" class="checkout_value">
@@ -19,7 +19,7 @@
 </div>
 <div style="clear:both;"></div>
 <div id="dirPanel" style="display:none;">
-  <div class="specialOfferText" id="directionsDistance" style="margin: 6px 0;"></div>
+  <div class="specialOfferText" id="directionsDistance" style="margin: 15px 0;"></div>
   <div id="directionsWarnings" class="directionsWarnings"></div>
   <div class="transBox">
     <div class="left" style="margin:5px 15px;">
@@ -28,7 +28,7 @@
     <div id="directionsStartAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
     <div style="clear:both;"></div>
   </div>
-  <table id="directionsSteps" style="width:650px; margin: 15px 10px 15px 0;">
+  <table id="directionsSteps" style="width:648px; margin: 15px 10px 15px 0;">
   </table>
   <div class="transBox">
     <div class="left" style="margin:5px 15px;">
@@ -39,9 +39,9 @@
   </div>
   <div id="directionsCopyrights" class="directionsCopyrights"></div>
 </div>
-<div id="directionMapDestination" style="display:none;">
-  <div id="directionMapDestinationCanvas"></div>
-</div>
+%{--<div id="directionMapDestination" style="display:none;">--}%
+  %{--<div id="directionMapDestinationCanvas"></div>--}%
+%{--</div>--}%
 <div id="printThis" class="right" style="display:none; margin: 10px;">
   <a href="#" onclick="window.print();
   return false;">print</a>

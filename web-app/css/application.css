@@ -1732,16 +1732,22 @@ Added styles
 /* Organizer contest CSS ends here */
 /* Map & directions css begins here*/
 #directionMap, #directionMapDestination {
-    background: #fff url(../images/map-frame-650.png) no-repeat;
+    /*background: #fff url(../images/map-frame-650.png) no-repeat;*/
     width: 650px;
     height: 339px;
-    padding: 10px;
+    padding: 2px;
     margin: 20px 0;
 }
 
 #directionMapCanvas, #directionMapDestinationCanvas {
     width: 630px;
     height: 319px;
+    border: 8px solid #BDEDFF;
+}
+
+#dirPanel {
+    border-top: 1px solid #DFDFDF;
+    margin-top: 30px;
 }
 
 .checkout_fields {
@@ -1753,8 +1759,31 @@ Added styles
     padding-left: 20px;
     color: #154A99;
 }
+
+#directionsDistance {
+    font: 12px verdana,arial,helvetica,sans-serif;
+    font-weight: bold;
+}
+
 #directionsSteps tr {
     border-bottom: 1px solid #dfdfdf;
+}
+
+#directionsSteps tr.directionStepLast {
+    border-bottom-width: 0px;
+}
+
+#directionsSteps tr.directionStep td b {
+    font-weight: bold;
+}
+
+#directionsSteps td {
+    margin: 15px 0;
+    padding: 1em 0;
+    font-size: 13px;
+    border: 0;
+    display: table-cell;
+    border-collapse: collapse;
 }
 
 .directionsWarnings li {
@@ -1763,19 +1792,19 @@ Added styles
 }
 
 .directionsCopyrights {
-    margin-top: 5px;
+    margin-top: 20px;
     font-size:10px;
 }
 #dirPanel .transBox {
-    width: 650px;
+    width: 648px;
     padding: 0;
-	-moz-border-radius: 8px;
-    -webkit-border-radius: 5px;
-	border:1px solid #dfdfdf;
-	background-color:#fcfcfc;
-	background-image:url("../images/bkg-features-list.jpg");
+	/*-moz-border-radius: 8px;*/
+    /*-webkit-border-radius: 5px;*/
+	/*border:1px solid #dfdfdf;*/
+	background-color:#BDEDFF;
+	/*background-image:url("../images/bkg-features-list.jpg");*/
 	background-position: center bottom;
-	border-radius:8px;
+	/*border-radius:8px;*/
 	background-repeat:repeat-x;
 	vertical-align:top;
 }

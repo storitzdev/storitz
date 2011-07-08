@@ -43,19 +43,24 @@ var _util = {
 //detail page map
 var _direction = function() {
     var map;
+    var directionsDisplay;
+    var markerGreen = '/storitz/images/icn_map_grn.png';
+    var markerBlue = '/storitz/images/icn_map_blue.png';
+    var directionsService = new google.maps.DirectionsService();
     var site = $(".site_info .tabs #display_map");
-    var title = site.attr('title');
-    var lat = site.attr('lat');
-    var lng = site.attr('lng');
-    var latlng = new google.maps.LatLng(lat, lng);
+    var site_title = site.attr('title');
+    var site_lat = site.attr('lat');
+    var site_lng = site.attr('lng');
+    var site_latlng = new google.maps.LatLng(site_lat, site_lng);
     var myOptions = {
       zoom: 15,
-      center: latlng,
+      center: site_latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var marker = new google.maps.Marker({
-      position: latlng,
-      title: title
+      position: site_latlng,
+      title: site_title,
+      icon: markerGreen
     });
 
     return {
@@ -63,9 +68,105 @@ var _direction = function() {
             map = new google.maps.Map(document.getElementById("directionMapCanvas"),
                     myOptions);
             marker.setMap(map);
+        },
+        calculate: function() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            //directionsDisplay.setMap(map);
+            //directionsDisplay.setPanel(document.getElementById("dirPanel"));
+            var start = $("#srcAddr").val();
+            var request = {
+                origin: start,
+                destination: site_latlng,
+                unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, _direction.drawDirections);
+        },
+        drawDirections: function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                var polyline = new google.maps.Polyline({
+                            path: [],
+                            strokeColor: '#3bad00',
+                            strokeWeight: 3
+                });
+                var bounds = new google.maps.LatLngBounds();
+                var route = response.routes[0];
+                var legs = route.legs;
+                var startLocation = new Object();
+                var endLocation = new Object();
+
+                $('#directionsSteps').children().each(function(index) { $(this).remove() });
+                marker.setMap(null);
+
+                for (i=0; i < legs.length; i++) {
+                    if (i == 0) {
+                        startLocation.latlng = legs[i].start_location;
+                        startLocation.address = legs[i].start_address;
+                        new google.maps.Marker({
+                            map: map,
+                            title: "Start",
+                            position: startLocation.latlng,
+                            icon: markerBlue
+                        });
+                        if (legs[i].distance && legs[i].duration) {
+                            $('#directionsDistance').html('Total distance: ' + legs[i].distance.text + ' in approximately ' + legs[i].duration.text);
+                        }
+                    }
+                    endLocation.latlng = legs[i].end_location;
+                    endLocation.address = legs[i].end_address;
+                    var steps = legs[i].steps;
+                    var elem;
+                    for (j=0; j < steps.length; j++) {
+                        var nextSegment = steps[j].path;
+                        var durationText = steps[j].duration.text ? steps[j].duration.text : "&nbsp;";
+                        var distanceText = steps[j].distance.text ? steps[j].distance.text : "&nbsp;";
+                        if (j != steps.length - 1) {
+                            elem = $('<tr>', { "class": "directionStep" })
+                                    .append($('<td>', { style:"width:95px;text-align:right;"}).html((j + 1) + '.'))
+                                    .append($('<td>', { style:"width:380px; padding-left:10px;" }).html(steps[j].instructions))
+                                    .append($('<td>', { style:"width: 75px; padding-right: 10px;text-align:right;"}).html(distanceText))
+                                    .append($('<td>', { style:"width: 115px; padding-right: 15px;text-align:right;"}).html(durationText));
+                        }
+                        else {
+                            elem = $('<tr>', { "class": "directionStepLast" })
+                                    .append($('<td>', { style:"width:95px;text-align:right;"}).html((j + 1) + '.'))
+                                    .append($('<td>', { style:"width:380px; padding-left:10px; line-height:140%;" }).html(steps[j].instructions))
+                                    .append($('<td>', { style:"width: 75px; padding-right: 10px;text-align:right;"}).html(distanceText))
+                                    .append($('<td>', { style:"width: 115px; padding-right: 15px;text-align:right;"}).html(durationText));
+                        }
+
+                        $('#directionsSteps').append(elem);
+                        for (k=0; k < nextSegment.length; k++) {
+                            polyline.getPath().push(nextSegment[k]);
+                            bounds.extend(nextSegment[k]);
+                        }
+                    }
+                }
+                if (route.copyrights) {
+                    $('#directionsCopyrights').html(route.copyrights);
+                }
+                if (route.warnings && route.warnings.length > 0) {
+                    var warnings = $('<ul>');
+                    $.each(route.warnings, function(index, warn) {
+                        warnings.append($('<li>').text(warn))
+                    });
+                    $('#directionsWarnings').html(warnings);
+                }
+                polyline.setMap(map);
+                map.fitBounds(bounds);
+                new google.maps.Marker({
+                    map: map,
+                    title: site_title,
+                    position: endLocation.latlng,
+                    icon: markerGreen
+                });
+                $('#directionsStartAddr').html(startLocation.address);
+                $('#directionsEndAddr').html(endLocation.address);
+            }
         }
     }
-  }();
+}();
 
 var _map = function() {
     // private variables
@@ -238,7 +339,10 @@ $(document).ready(function() {
     $("#display_map").click(function() {
         _direction.init();
     });
-
+    $("#getDirections").click(function () {
+        _direction.calculate();
+        $("#dirPanel").css("display", "block");
+    });
 
     _map.init();
     // show map?
