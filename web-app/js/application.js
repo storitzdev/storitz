@@ -40,6 +40,33 @@ var _util = {
     }
 };
 
+//detail page map
+var _direction = function() {
+    var map;
+    var site = $(".site_info .tabs #display_map");
+    var title = site.attr('title');
+    var lat = site.attr('lat');
+    var lng = site.attr('lng');
+    var latlng = new google.maps.LatLng(lat, lng);
+    var myOptions = {
+      zoom: 15,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var marker = new google.maps.Marker({
+      position: latlng,
+      title: title
+    });
+
+    return {
+        init: function() {
+            map = new google.maps.Map(document.getElementById("directionMapCanvas"),
+                    myOptions);
+            marker.setMap(map);
+        }
+    }
+  }();
+
 var _map = function() {
     // private variables
     var active_icon = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
@@ -199,12 +226,26 @@ $(document).ready(function() {
         );
     }
 
-    _map.init();
+    //image gallery in detail page.
+    $(".photos ul.image_list li img").click(
+            function() {
+                var new_img = $(this).attr('src');
+                $(".main_pic").attr('src', new_img);
+            }
+    );
 
+    //map tab
+    $("#display_map").click(function() {
+        _direction.init();
+    });
+
+
+    _map.init();
     // show map?
     if (window.location.hash == "#map-view") {
         _map.mapify();
     }
+
 
     // bind map events
     $(".toggle_map_view").click(function() {

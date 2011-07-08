@@ -64,7 +64,7 @@
         <li><a class="current" href="#tab_overview">Overview</a></li>
         <li><a class="current" href="#tab_allunits">All Units</a></li>
         <li><a class="current" href="#tab_video">Video</a></li>
-        <li><a class="current" href="#tab_maphours">Map &amp; Hours</a></li>
+        <li><a class="current" href="#tab_maphours" id="display_map" title="${site.title}" lat="${site.lat}" lng="${site.lng}">Map &amp; Hours</a></li>
         <li><a class="current" href="#tab_reviews">Reviews</a></li>
         <li><a class="current" href="#tab_auctions">Auctions</a></li>
       </ul>
@@ -75,6 +75,15 @@
             <g:if test="${site.coverImage()}">
               <img class="main_pic" src="${resource(file: site.coverImage().mid())}"
                    alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
+            </g:if>
+            <g:if test="${site.siteImages().size() > 0}">
+                <ul class="image_list">
+                    <g:each var="siteImg" in="${site.siteImages()}" status="i">
+                        <li>
+                            <a href="#" onClick="return false;"><img src="${resource(file: siteImg.src())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.display}" /></a>
+                        </li>
+                    </g:each>
+                </ul>
             </g:if>
           </div>
           <p class="description">
@@ -98,8 +107,7 @@
         </div>
 
         <div>
-          <!-- fourth tab-->
-          blah blah blah blah blah
+          <g:render template="/directions"/>
           <a name="tab_maphours">&nbsp;</a>
         </div>
 

@@ -5,26 +5,17 @@
 <div id="directionMap">
   <div id="directionMapCanvas"></div>
 </div>
-<div class="price_options checkout_header white">
-  Driving Directions
+<div class="dirInstructions">
+  <h2>Driving Directions</h2> Enter the city, address, or zip where you need storage
 </div>
-<div class="formInstructions">
-  Enter your starting address to get driving directions to this facility.
-</div>
-<div class="left checkout_fields">
-  <div style="width:350px;" class="checkout_value">
-    <g:textField id="srcAddr" name="srcAddr" style="width: 330px;"/>
+<div class="left">
+  <div style="width:330px;" class="checkout_value">
+    <g:textField id="srcAddr" name="srcAddr" placeholder="Enter city, address, or zip"/>
   </div>
   <div style="clear:both;"></div>
 </div>
-<div style="margin-top:0;" class="left">
-  <p:inputImage src="btn-find-it.png" style="width:108px;height:36px;border:none;" name="getDirections" value="Get Directions"/>
-</div>
-<div class="checkout_labels">
-  <div class="checkout_name" style="width:400px; margin-top: -10px;">
-    <label for="srcAddr">Enter start address</label>
-  </div>
-  <div style="clear:both;"></div>
+<div style="margin-top:-2px;" class="left">
+  <p:inputImage src="btn-find-it.png" style="width:108px;height:34px;border:none;" name="getDirections" value="Get Directions"/>
 </div>
 <div style="clear:both;"></div>
 <div id="dirPanel" style="display:none;">

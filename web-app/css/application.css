@@ -1255,7 +1255,7 @@ body.site_detail .panes>div {
 
 body.site_detail .panes .main_pic {
   display: block;
-  width: 240px;
+  width: 284px;
   height: 160px;
   margin: 10px 0 10px 0;
 }
@@ -1263,19 +1263,41 @@ body.site_detail .panes .main_pic {
 body.site_detail .panes .overview .photos {
   display: inline-block;
   float: left;
-  width: 265px;
+  width: 290px;
+  padding-right: 2px;
 }
 
 body.site_detail .panes .overview .photos ul.image_list {
-  width: 265px;
+  width: 290px;
   overflow: hidden;
   border-bottom: 1px solid #B2B2B2;
-  background-color: yellow;
+  padding: 0 0 11px;
+  margin: 0 0 8px;
+}
+
+div.photos ul.image_list li {
+    float: left;
+    width: 69px;
+    height: 48px;
+    margin: 0 3px 3px 0;
+}
+
+div.photos ul.image_list a {
+    float: left;
+    border: 1px solid #AFAFAF;
+    margin: 1px;
+}
+
+div.photos ul.image_list li.active,
+div.photos ul.image_list li a:hover {
+    border:2px solid #00529b;
+	margin:0;
 }
 
 div.photos ul.image_list li img {
     width: 63px;
     height: 42px;
+    border: 1px solid white;
 }
 
 body.site_detail .panes .overview .description {
@@ -1708,3 +1730,78 @@ Added styles
     float: right;
 }
 /* Organizer contest CSS ends here */
+/* Map & directions css begins here*/
+#directionMap, #directionMapDestination {
+    background: #fff url(../images/map-frame-650.png) no-repeat;
+    width: 650px;
+    height: 339px;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+#directionMapCanvas, #directionMapDestinationCanvas {
+    width: 630px;
+    height: 319px;
+}
+
+.checkout_fields {
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.checkout_labels {
+    padding-left: 20px;
+    color: #154A99;
+}
+#directionsSteps tr {
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.directionsWarnings li {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+.directionsCopyrights {
+    margin-top: 5px;
+    font-size:10px;
+}
+#dirPanel .transBox {
+    width: 650px;
+    padding: 0;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 5px;
+	border:1px solid #dfdfdf;
+	background-color:#fcfcfc;
+	background-image:url("../images/bkg-features-list.jpg");
+	background-position: center bottom;
+	border-radius:8px;
+	background-repeat:repeat-x;
+	vertical-align:top;
+}
+.directionsAddress {
+    font: 13px verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+.dirInstructions {
+    display: block;
+    margin-left: 3px;
+}
+.dirInstructions h2 {
+    display: inline-block;
+    font-weight: bold;
+    padding-right: 10px;
+    font-size: 14px;
+}
+input#srcAddr {
+    width: 330px;
+    font-weight: bold;
+    font-family: helvetica;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    height: 30px;
+    padding: 9px;
+    border: 1px solid gray;
+    box-shadow: 0 0 8px #006DBA;
+    margin-left: 5px;
+}
