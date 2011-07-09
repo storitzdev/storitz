@@ -7,6 +7,7 @@ import com.storitz.UncleBobs
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
 import static groovyx.net.http.ContentType.XML
+import static groovyx.net.http.ContentType.TEXT
 import storitz.constants.State
 import storitz.constants.TruckType
 import storitz.constants.TransactionType
@@ -19,6 +20,9 @@ import storitz.constants.PromoType
 import com.storitz.SpecialOfferRestriction
 import storitz.constants.SpecialOfferRestrictionType
 import com.storitz.SiteUser
+import com.storitz.Bullet
+import java.text.SimpleDateFormat
+import java.text.DateFormat
 
 class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -68,24 +72,16 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     }
 
     for (int i = 0; i < xmlNodes.store.size(); i++) {
-      def store_id       = xmlNodes.store[i].@id      as String
-      def store_name     = xmlNodes.store[i].name     as String
-      def store_address  = xmlNodes.store[i].address  as String
-      def store_city     = xmlNodes.store[i].city     as String
-      def store_state    = xmlNodes.store[i].state    as String
-      def store_zip      = xmlNodes.store[i].zip      as String
-      def store_phone    = xmlNodes.store[i].phone    as String
-      if (storageSiteInstance.sourceLoc == store_id) {
-        writer.println "Updating site ${store_name}}"
-        storageSiteInstance.address = store_address
-        storageSiteInstance.city = store_city
-        storageSiteInstance.state = State.fromText(store_state)
-        storageSiteInstance.zipcode = store_zip
-        storageSiteInstance.phone = store_phone
-        geoCodeSite(storageSiteInstance)
-        updateUnits (storageSiteInstance, stats, writer)
-        storageSiteInstance.save(flush:true)
+      def xmlstore = xmlNodes.store[i]
+      def store_id = xmlstore.@id as String
+      if (store_id != storageSiteInstance.sourceLoc) {
+        continue // not this site
       }
+      updateSiteHelper(storageSiteInstance,xmlstore,stats,writer)
+      geoCodeSite(storageSiteInstance)
+      updateUnits (storageSiteInstance, stats, writer)
+      storageSiteInstance.save(flush:true)
+      break
     }
   }
 
@@ -176,8 +172,11 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       def space_id        = xmlNodes.space[i].@id   as String
       def space_avail     = xmlNodes.space[i].avail as String
 
+      // prep for int compare
+      def space_avail_i = space_avail as int
+
       if (space_id == unit_number) {
-        return space_avail > 0
+        return space_avail_i > 0
       }
     }
 
@@ -199,6 +198,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     def contact = trans.contactPrimary
     def address = contact.address2 ? "${contact.address1}, ${contact.address2}" : contact.address1
     def unit = StorageUnit.findById(trans.unitId)
+
+    // <?xml version='1.0' encoding='utf-8'?>
 
     def payload = """<leadinfo>
   <note id="0">
@@ -222,7 +223,10 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     println "/// UNCLE BOB'S RESERVATION REQUEST ///"
     println payload
 
-    def resText     = httpPostAction (payload,getStoreReservationFeedURL())
+    StringReader res     = httpPostAction (getStoreReservationFeedURL(),payload)
+    List<String> result = res.readLines()
+    def resText = result.get(0)
+    resText = resText.trim()
 
     println "/// UNCLE BOB'S RESERVATION RESPONSE ///"
     println resText
@@ -236,7 +240,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       resDetails    = resMatcher[0][2]?.trim()
     }
 
-    if (resStatus?.startsWith("Success")) {
+    if (resStatus?.startsWith("Reservation Received")) {
       retVal = true
       trans.idNumber = resDetails
       trans.feedUnitNumber = unit.unitNumber
@@ -252,11 +256,13 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       body.append("\n RESPONSE")
       body.append("\n ${resText}")
 
+      //to: "notifications@storitz.com",
+
       getEmailService().sendTextEmail(
-        to: "notifications@storitz.com",
-        from: "no-reply@storitz.com",
-        subject: "UNCLEBOB - failed move-in",
-        body: body.toString())
+          to: "jmeade@storitz.com",
+          from: "no-reply@storitz.com",
+          subject: "UNCLEBOB - failed move-in",
+          body: body.toString())
     }
 
     return retVal
@@ -277,14 +283,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     }
 
     for (int i = 0; i < xmlNodes.store.size(); i++) {
-      def store_id       = xmlNodes.store[i].@id      as String
-      def store_name     = xmlNodes.store[i].name     as String
-      def store_address  = xmlNodes.store[i].address  as String
-      def store_city     = xmlNodes.store[i].city     as String
-      def store_state    = xmlNodes.store[i].state    as String
-      def store_zip      = xmlNodes.store[i].zip      as String
-      def store_phone    = xmlNodes.store[i].phone    as String
-      def site = createUpdateSite(store_id,store_name,store_address,store_city,store_state,store_zip,store_phone)
+      def xmlstore = xmlNodes.store[i]
+      def site = createUpdateSite(xmlstore)
       feed.addToSites(site)
       SiteUser.link(site, feed.manager)
     }
@@ -302,8 +302,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
         println "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
       }
 
-      http.request(Method.POST, XML) { req ->
-        delegate.headers['Content-Type'] = "text/xml"
+      http.request(Method.POST, TEXT) { req ->
+        delegate.headers['Content-Type'] = "text/plain"
 
         body = payload
 
@@ -320,15 +320,24 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     url.toURL().text
   }
 
-  private def createUpdateSite (id,name,address,city,state,zip,phone) {
-    StorageSite site = StorageSite.findBySourceAndSourceLoc('BOB',id)
+  private def createUpdateSite (xmlstore) {
+    def store_id       = xmlstore.@id      as String
+    def store_name     = xmlstore.name     as String
+    def store_address  = xmlstore.address  as String
+    def store_city     = xmlstore.city     as String
+    def store_state    = xmlstore.state    as String
+    def store_zip      = xmlstore.zip      as String
+    def store_phone    = xmlstore.phone    as String
+
+    StorageSite site = StorageSite.findBySourceAndSourceLoc('BOB',store_id)
     if (!site) {
       site = new StorageSite()
 
       // I know these values...
       site.source              = "BOB"
-      site.sourceLoc           = id
-      site.title               = "${name} - ${city} - ${id}"
+      site.sourceId            = store_id
+      site.sourceLoc           = store_id
+      site.title               = "${store_name} - ${store_city} - ${store_id}"
       site.transactionType     = TransactionType.RENTAL
       site.lastChange          = new Date()
 
@@ -349,19 +358,14 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       site.taxRateMerchandise  = 0
       site.taxRateInsurance    = 0
       site.taxRateRental       = 0
+      site.maxReserveDays      = 30
 
     }
-    site.address = address
-    site.city = city
-    site.state = State.fromText(state)
-    site.zipcode = zip
-    site.phone = phone
-    geoCodeSite(site)
-
     SiteStats stats = new SiteStats()
     PrintWriter writer = new PrintWriter(System.out)
+    updateSiteHelper(site,xmlstore,stats,writer)
+    geoCodeSite(site)
     updateUnits (site, stats, writer)
-
     return site.save(flush:true)
   }
 
@@ -493,4 +497,147 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     return grails.converters.XML.parse(feedString.substring(start))
   }
 
+  private def updateSiteHelper(site, xmlstore, stats, writer) {
+    def store_id                     = xmlstore.@id                         as String
+
+    // Sanity check
+    if (store_id != site.sourceLoc) {
+      return
+    }
+
+    def store_name                   = xmlstore.name                        as String
+    def store_address                = xmlstore.address                     as String
+    def store_city                   = xmlstore.city                        as String
+    def store_state                  = xmlstore.state                       as String
+    def store_zip                    = xmlstore.zip                         as String
+    def store_phone                  = xmlstore.phone                       as String
+    def store_access24hr             = xmlstore.access24hr                  as String
+    def store_truckrental            = xmlstore.truckrental                 as String
+    def store_freetruckrental        = xmlstore.freetruckrental             as String
+    def store_surveillancecameras    = xmlstore.surveillancecameras         as String
+    def store_electronicgate         = xmlstore.electronicgate              as String
+    def store_fencedandlighted       = xmlstore.fencedandlighted            as String
+
+    // start office hours
+    // We currently don't use office hours.
+    // For completeness I capture them just the same.
+    def store_office_sunday_open     = xmlstore.officehours.sunday.open     as String
+    def store_office_sunday_close    = xmlstore.officehours.sunday.close    as String
+    def store_office_monday_open     = xmlstore.officehours.monday.open     as String
+    def store_office_monday_close    = xmlstore.officehours.monday.close    as String
+    def store_office_tuesday_open    = xmlstore.officehours.tuesday.open    as String
+    def store_office_tuesday_close   = xmlstore.officehours.tuesday.close   as String
+    def store_office_wednesday_open  = xmlstore.officehours.wednesday.open  as String
+    def store_office_wednesday_close = xmlstore.officehours.wednesday.close as String
+    def store_office_thursday_open   = xmlstore.officehours.thursday.open   as String
+    def store_office_thursday_close  = xmlstore.officehours.thursday.close  as String
+    def store_office_friday_open     = xmlstore.officehours.friday.open     as String
+    def store_office_friday_close    = xmlstore.officehours.friday.close    as String
+    def store_office_saturday_open   = xmlstore.officehours.saturday.open   as String
+    def store_office_saturday_close  = xmlstore.officehours.saturday.close  as String
+    //  end office hours
+
+    def store_access_hours           = xmlstore.accesshours                 as String
+
+    // prep-work
+    store_access24hr            = store_access24hr as int
+    store_truckrental           = store_truckrental as int
+    store_freetruckrental       = store_freetruckrental as int
+    store_surveillancecameras   = store_surveillancecameras as int
+    store_electronicgate        = store_electronicgate as int
+    store_fencedandlighted      = store_fencedandlighted as int
+    store_access_hours          = store_access_hours.trim()
+    if (!site.securityItems)    site.securityItems = []
+    if (!site.convenienceItems) site.convenienceItems = []
+
+    writer.println "Updating site ${store_name}}"
+
+    site.address = store_address
+    site.city = store_city
+    site.state = State.fromText(store_state)
+    site.zipcode = store_zip
+    site.phone = store_phone
+    if (store_access24hr) {
+      add_bullet(site.convenienceItems,"24 Hour Access")
+    }
+    if (store_truckrental) {
+      if (store_freetruckrental) {
+        site.freeTruck = TruckType.FREE
+      }
+      else {
+        site.freeTruck = TruckType.RENTAL
+      }
+    }
+    else {
+      site.freeTruck = TruckType.NONE
+    }
+    if (store_surveillancecameras) {
+      site.isCamera = true
+      add_bullet(site.securityItems,"Video Surveillance Cameras")
+    }
+    if (store_electronicgate) {
+      site.isGate = true
+      add_bullet(site.securityItems,"Electronic Gate")
+    }
+    if (store_fencedandlighted) {
+      add_bullet(site.securityItems,"Fenced and Lighted")
+    }
+
+    try {
+      def hoursMatcher = store_access_hours =~ /(.*)M to (.*)M (.*)/
+      if (hoursMatcher.getCount()) {
+        DateFormat df = new SimpleDateFormat("hh:mm a")
+        Date hoursStart   = df.parse("${hoursMatcher[0][1]?.trim()}M")
+        Date hoursEnd     = df.parse("${hoursMatcher[0][2]?.trim()}M}")
+        String days = hoursMatcher[0][3]?.trim()
+        if (days.equalsIgnoreCase("daily")) {
+          site.openSunday           = true
+          site.startSundayGate      = site.startSunday    = hoursStart
+          site.endSundayGate        = site.endSunday      = hoursEnd
+
+          site.openMonday           = true
+          site.startMondayGate      = site.startMonday    = hoursStart
+          site.endMondayGate        = site.endMonday      = hoursEnd
+
+          site.openTuesday          = true
+          site.startTuesdayGate     = site.startTuesday   = hoursStart
+          site.endTuesdayGate       = site.endTuesday     = hoursEnd
+
+          site.openWednesday        = true
+          site.startWednesdayGate   = site.startWednesday = hoursStart
+          site.endWednesdayGate     = site.endWednesday   = hoursEnd
+
+          site.openThursday         = true
+          site.startThursdayGate    = site.startThursday  = hoursStart
+          site.endThursdayGate      = site.endThursday    = hoursEnd
+
+          site.openFriday           = true
+          site.startFridayGate      = site.startFriday    = hoursStart
+          site.endFridayGate        = site.endFriday      = hoursEnd
+
+          site.openSaturday         = true
+          site.startSaturdayGate    = site.startSaturday  = hoursStart
+          site.endSaturdayGate      = site.endSaturday    = hoursEnd
+        }
+      }
+    } // hours
+    catch (Throwable t) {
+      // Worst case scenario is hours don't parse. Handle manually then.
+      t.printStackTrace()
+    }
+  }
+
+  private def new_bullet(text) {
+    def b = new Bullet()
+    b.bullet = text
+    b.save()
+    return b
+  }
+
+  // add bullet if it does not already exist
+  private def add_bullet (l, t) {
+    if (!l.find { it.bullet == t }) {
+      l.add(new_bullet (t))
+    }
+  }
 }
