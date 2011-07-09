@@ -21,6 +21,7 @@ class ChannelConfig {
 
     // resources that must be served over https
     requestMap.put new RequestKey("/auth/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
+    requestMap.put new RequestKey("/checkout/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/login/auth/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/admin/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/reports/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]

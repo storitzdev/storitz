@@ -30,6 +30,10 @@ h2 {
   margin-bottom: 15px;
 }
 
+pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
 a:hover {
   text-decoration: underline;
 }
@@ -1141,7 +1145,7 @@ body.site_detail .site_features div {
   background-position: center bottom;
   border-radius: 8px 8px 8px 8px;
   background-repeat: repeat-x;
-  margin: 0 6px 0 0;
+  margin: 0 12px 0 0;
   overflow: hidden;
   padding: 0;
   vertical-align: top;
@@ -1187,7 +1191,7 @@ body.site_detail .site_features h3.amenities {
 }
 
 body.site_detail .tabs {
-  padding: 0 0 0 70px;
+  padding: 0 0 0 12px;
   list-style-type: none;
   text-align: center;
   height: 28px;
@@ -1210,7 +1214,7 @@ body.site_detail .tabs li a {
   height: 13px;
   text-decoration: none;
   font-weight: bold;
-  margin-right: 7px;
+  margin-right: 5px;
   position: relative;
   top: 1px;
   outline: 0;
@@ -1255,7 +1259,7 @@ body.site_detail .panes>div {
 
 body.site_detail .panes .main_pic {
   display: block;
-  width: 284px;
+  width: 240px;
   height: 160px;
   margin: 10px 0 10px 0;
 }
@@ -1263,41 +1267,7 @@ body.site_detail .panes .main_pic {
 body.site_detail .panes .overview .photos {
   display: inline-block;
   float: left;
-  width: 290px;
-  padding-right: 2px;
-}
-
-body.site_detail .panes .overview .photos ul.image_list {
-  width: 290px;
-  overflow: hidden;
-  border-bottom: 1px solid #B2B2B2;
-  padding: 0 0 11px;
-  margin: 0 0 8px;
-}
-
-div.photos ul.image_list li {
-    float: left;
-    width: 69px;
-    height: 48px;
-    margin: 0 3px 3px 0;
-}
-
-div.photos ul.image_list a {
-    float: left;
-    border: 1px solid #AFAFAF;
-    margin: 1px;
-}
-
-div.photos ul.image_list li.active,
-div.photos ul.image_list li a:hover {
-    border:2px solid #00529b;
-	margin:0;
-}
-
-div.photos ul.image_list li img {
-    width: 63px;
-    height: 42px;
-    border: 1px solid white;
+  width: 265px;
 }
 
 body.site_detail .panes .overview .description {
@@ -1540,6 +1510,211 @@ body.site_detail .sim_units ul li img {
 }
 body.site_detail .sim_units .units_bottom {
   text-align: right;
+}
+/* ------------------------------------------------------------------------------------- */          
+/* CHECKOUT */
+
+body.checkout form.checkout {
+  position: relative;
+  font-size: 13px;
+  margin-top: 10px;
+}
+body.checkout .booking_summary > h1 {
+  color: #00529b;
+}
+body.checkout .booking_summary > div,
+body.checkout .booking_summary > h1 {
+  padding: 15px;
+}
+body.checkout .booking_summary .site_info .image_container {
+  width: 100px;
+  height: 110px;
+  display: inline-block;
+  float: left;
+  margin-right: 5px;
+}
+body.checkout .booking_summary .site_info img {
+  width: 100px;
+}
+body.checkout .booking_summary .site_info .tel {
+  font-weight: bold;
+}
+body.checkout .booking_summary .site_info p {
+  margin: 3px 0;
+  line-height: 100%;
+}
+body.checkout .booking_summary .site_info h2 {
+  clear: none;
+  color: black;
+  font-size: 10pt;
+  margin-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body.checkout .customer_info > div {
+  border-top: 1px solid #ccc;
+  margin-bottom: 40px;
+}
+body.checkout .customer_info > div,
+body.checkout .customer_info .row {
+  position: relative;
+  margin-top: 15px;
+}
+body.checkout .customer_info > div.first {
+  border-width: 0;
+  margin-top: 0;
+}
+body.checkout .customer_info .assurances {
+  margin: 30px 0;
+}
+body.checkout .customer_info p {
+  margin: 10px 0;
+}
+body.checkout .customer_info > div,
+body.checkout .customer_info > h1 {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+body.checkout .customer_info h1 {
+  padding-top: 10px;
+  margin-bottom: 20px;
+  color: #00529b;
+}
+body.checkout .customer_info {
+  width: 650px;
+  vertical-align: top;
+  border: 1px solid #aaaaaa;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  background-image: url("../images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
+  background-position: center bottom;
+  background-repeat: repeat-x;
+}
+body.checkout .booking_summary {
+  position: absolute;
+  width: 300px;
+  left: 660px;
+  top: 0;
+  padding: 0;
+  vertical-align: top;
+  border: 1px solid #aaaaaa;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  box-shadow: 0 0 8px #cccccc;
+  background-image: url("/images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
+  background-position: center bottom;
+  background-repeat: repeat-x;
+}
+body.checkout .customer_info .pay_button {
+  height: 120px;
+}
+body.checkout .customer_info .pay_button .col2 p {
+  text-align: right;
+  font-size: 10pt;
+}
+body.checkout .customer_info .pay_button .col2 p strong {
+  font-weight: bold;
+  display: block;
+  font-size: 12pt;
+}
+body.checkout .customer_info .terms .col2,
+body.checkout .customer_info .pay_button .col2 {
+  margin-top: 18px;
+}
+body.checkout .customer_info .pay_button p {
+  margin-top: 0;
+}
+
+body.checkout .customer_info .col2 {
+  position: absolute;
+  top: 0;
+  left: 315px;
+ }
+body.checkout .customer_info .col3 {
+  position: absolute;
+  top: 0;
+  left: 385px;
+}
+body.checkout .customer_info .col1 {
+  width: 320px;
+}
+body.checkout label {
+  display: block;
+  font-family: Arial;
+  font-size: 9pt;
+  color: #444;
+  margin-bottom: 5px;
+  padding-left: 2px;
+}
+body.checkout input[type=text] {
+  display: block;
+  border:  1px solid #ccc;
+  border-radius: 4px;
+  width: 290px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13pt;
+  padding: 4px 2px;
+}
+body.checkout input[type=text].cvv2 {
+  width: 100px;  
+}
+body.checkout input[type=text].zipcode {
+  width: 130px;  
+}
+body.checkout .ccimages {
+  margin: 5px 0 0 12px;
+}
+body.checkout input.rent_me_button {
+  display: block;
+  background: url("../images/v2/site_detail/rent-me-275x56.png") no-repeat;
+  width: 275px;
+  height: 56px;
+  text-indent: -9999px;
+  border-width: 0;
+  margin-bottom: 10px;
+}
+body.checkout .booking_summary table.cost_breakdown {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9pt;
+}
+body.checkout .booking_summary table.cost_breakdown td {
+  vertical-align: top;
+}
+body.checkout .booking_summary table.cost_breakdown td,
+body.checkout .booking_summary table.cost_breakdown th {
+  text-align: center;
+  padding: 4px;
+}
+body.checkout .booking_summary table.cost_breakdown th {
+  border-bottom: 1px solid #aaa;
+  vertical-align: bottom;
+  
+}
+body.checkout .booking_summary table.cost_breakdown td.item,
+body.checkout .booking_summary table.cost_breakdown th.item {
+  padding-left: 20px;
+  text-align: left;
+}
+body.checkout .booking_summary table.cost_breakdown td.last,
+body.checkout .booking_summary table.cost_breakdown th.last {
+  padding-right: 20px;
+}
+body.checkout .booking_summary table.cost_breakdown td.item {
+  font-weight: bold;
+}
+body.checkout .booking_summary table.cost_breakdown td.summary {
+  border-top: 1px solid #aaa;
+  text-align: right;
+}                       
+
+body.checkout .booking_summary dt {
+  float: left;
+  clear: left;
+}
+body.checkout .booking_summary dd {
+  float: right;
+  clear: right;
 }
 /*Organizer contest CSS begins here*/
 #body {

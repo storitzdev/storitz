@@ -10,7 +10,7 @@ class UrlMappings {
 
     name checkout: "/checkout" {
       controller = "rentalTransaction"
-      action = "begin"
+      action = "create"
     }
 
     name rentMePanel: "/rent-me-panel" {

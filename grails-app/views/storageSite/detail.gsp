@@ -150,8 +150,8 @@
   </div>
 
   <div id="right_panel">
-    <g:form mapping="checkout" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
-      <g:render template="/transaction" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate]"/>
+    <g:form mapping="checkout" method="GET" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
+      <g:render template="/transaction" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, moveInCost:moveInCost, paidThruDate:paidThruDate]"/>
     </g:form>
     <g:if test="${nearbyUnits?.size() > 0}">
       <div class="sim_units">

@@ -80,9 +80,15 @@ class RentalTransactionController {
   }
 
   def create = {
-    def rentalTransactionInstance = new RentalTransaction()
-    rentalTransactionInstance.properties = params
-    return [rentalTransactionInstance: rentalTransactionInstance]
+    def rentalTransactionInstance
+    def site
+    if (params.id) {
+      rentalTransactionInstance = RentalTransaction.get(params.id as Long)
+    } else {
+      rentalTransactionInstance = new RentalTransaction(params)
+      rentalTransactionInstance.site = StorageSite.get(params.siteId as Long)
+    }
+    return [rentalTransactionInstance: rentalTransactionInstance, unit:StorageUnit.get(rentalTransactionInstance.unitId as Long)]
   }
 
   def ajaxPoll = {

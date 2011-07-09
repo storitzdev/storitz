@@ -593,17 +593,19 @@ class StorageSiteController implements ApplicationContextAware {
       title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
     }
 
-    // If you change this, don't forget the smartCall action also uses this view!
     def moveInDate = new Date();
     def promo = params.promoId ? SpecialOffer.get(params.promoId as Long) : null;
     def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
+    def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate);
+    // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: title,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
             promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList,
-            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos]
+            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos,
+            moveInCost: totals.moveInTotal, paidThruDate: totals.paidThruDate]
   }
 
   def rentMePanel = {
@@ -629,9 +631,16 @@ class StorageSiteController implements ApplicationContextAware {
     def moveInDate = params.moveInDate ? new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate) : new Date();
     def promos = offerFilterService.getValidFeaturedOffers(site, unit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
+    def totals = costService.calculateTotals(site, unit, promo, null, moveInDate);
     render(template:"rentMePanel",
             contentType: "text/html",
-            model:[site:site, unit:unit, promo: promo, promos: promos, moveInDate:moveInDate]);
+            model:[site:site,
+                    unit:unit,
+                    promo: promo,
+                    promos: promos,
+                    moveInDate:moveInDate,
+                    moveInCost: totals.moveInTotal,
+                    paidThruDate: totals.paidThruDate]);
   }
 
   def directions = {

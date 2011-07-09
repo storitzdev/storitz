@@ -1,13 +1,14 @@
 <%@ page import="storitz.constants.TransactionType" %>
 <div class="rent_me">
   <div class="price">
-    $72.00 <span class="original_price">$80</span>
+    <g:formatNumber number="${unit.bestUnitPrice}" type="currency" currencyCode="USD" />
+    <g:if test="${unit.price && unit.price > unit.bestUnitPrice}"><span class="original_price"><g:formatNumber number="${unit.price}" type="currency" currencyCode="USD" /></span></g:if>
     <div class="per_month">per month</div>
   </div>
   <div class="rent_reserve">
-    <g:submitButton name="submit"
-                    value="${(site.transactionType == TransactionType.RESERVATION) ? "Reserve Now!" : "Rent Me!"}"
-                    class="rent_me_button" mapping="checkout" />
+    <g:submitButton name="action"
+                    value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
+                    class="rent_me_button" />
     <div class="guarantee">Storitz Price Guarantee</div>
   </div>
   <div class="unit_info">
@@ -50,10 +51,10 @@
   <div class="move_in_quote">
     <h4>
       Total Move-In Cost <a class="help_button" href="/help#move_in_cost">huh?</a>
-      <span class="move_in_cost">$38.00</span>
+      <span class="move_in_cost"><g:formatNumber number="${moveInCost}" type="currency" currencyCode="USD" /></span>
     </h4>
     <p>* Includes discounts and facility fees</p>
-    <p>* Paid through July 20, 2011</p>
+    <p>* Paid through <g:formatDate type="date" style="MEDIUM" date="${paidThruDate}" /></p>
   </div>
 </div>
 <g:hiddenField name="siteId" value="${site?.id}" />
