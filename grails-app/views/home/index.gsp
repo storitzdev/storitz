@@ -1,4 +1,4 @@
-<%@ page import="java.math.RoundingMode" %>
+<%@ page import="com.storitz.StoritzUtil; java.math.RoundingMode" %>
 <html>
 <head>
     <title>The Fastest, Easiest Way to Find &amp; Rent Self-Storage - Storitz </title>
@@ -125,7 +125,7 @@
                   <td>
                   <g:set var="i" value="${0}" />
                   <g:each in="${metros}" var="metro">
-                    <g:link mapping="metro2" controller="search" action="metro" params="[city:metro.city, state:metro.stateCode]">${metro.city}, ${metro.stateCode}</g:link>
+                    <g:link mapping="metro2" controller="search" action="metro" params="[city:StoritzUtil.seoEncode(metro.city), state:metro.stateCode]">${metro.city}, ${metro.stateCode}</g:link>
                     <g:set var="i" value="${i + 1}" />
                     <g:if test="${i > 0 && i % metrosPerColumn == 0 && i < metros.size()}">
                   </td><td>
