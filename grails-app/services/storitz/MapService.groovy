@@ -95,13 +95,14 @@ class MapService {
     // zoom setings
     Integer zoom = 11;
     Integer zoomMin = 7;
+    Integer zoomMax = 16;
     criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
     def siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
 
     // adjust zoom if too many/few sitse were returned
     if (siteIds.size() > 20) {
       // loop and shrink
-      while (siteIds.size() > 20) {
+      while (siteIds.size() > 20 && zoom <= zoomMax) {
         zoom++
         criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
         siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
@@ -123,6 +124,9 @@ class MapService {
       }
     }
     // retrieve StorageSite instances from ORM
+    if (siteIds.size() > 20) {
+      siteIds = siteIds[0..19];
+    }
     return StorageSite.findAllByIdInList(siteIds);
   }
 
