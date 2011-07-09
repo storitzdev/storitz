@@ -1145,7 +1145,7 @@ body.site_detail .site_features div {
   background-position: center bottom;
   border-radius: 8px 8px 8px 8px;
   background-repeat: repeat-x;
-  margin: 0 12px 0 0;
+  margin: 0 6px 0 0;
   overflow: hidden;
   padding: 0;
   vertical-align: top;
@@ -1259,16 +1259,50 @@ body.site_detail .panes>div {
 
 body.site_detail .panes .main_pic {
   display: block;
-  width: 240px;
-  height: 160px;
+  width: 284px;
   margin: 10px 0 10px 0;
 }
 
 body.site_detail .panes .overview .photos {
   display: inline-block;
   float: left;
-  width: 265px;
+  width: 290px;
+  padding-right: 2px;
 }
+
+body.site_detail .panes .overview .photos ul.image_list {
+  width: 290px;
+  overflow: hidden;
+  border-bottom: 1px solid #B2B2B2;
+  padding: 0 0 11px;
+  margin: 0 0 8px;
+}
+
+div.photos ul.image_list li {
+    float: left;
+    width: 69px;
+    height: 48px;
+    margin: 0 3px 3px 0;
+}
+
+div.photos ul.image_list a {
+    float: left;
+    border: 1px solid #AFAFAF;
+    margin: 1px;
+}
+
+div.photos ul.image_list li.active,
+div.photos ul.image_list li a:hover {
+    border:2px solid #00529b;
+	margin:0;
+}
+
+div.photos ul.image_list li img {
+    width: 63px;
+    height: 42px;
+    border: 1px solid white;
+}
+
 
 body.site_detail .panes .overview .description {
   display: inline-block;
