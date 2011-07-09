@@ -199,8 +199,6 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     def address = contact.address2 ? "${contact.address1}, ${contact.address2}" : contact.address1
     def unit = StorageUnit.findById(trans.unitId)
 
-    // <?xml version='1.0' encoding='utf-8'?>
-
     def payload = """<leadinfo>
   <note id="0">
     <ResID>""" + trans.bookingDate.format('yyyyMMdd') + sprintf('%08d', trans.id) + """</ResID>
@@ -256,10 +254,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       body.append("\n RESPONSE")
       body.append("\n ${resText}")
 
-      //to: "notifications@storitz.com",
-
       getEmailService().sendTextEmail(
-          to: "jmeade@storitz.com",
+          to: "notifications@storitz.com",
           from: "no-reply@storitz.com",
           subject: "UNCLEBOB - failed move-in",
           body: body.toString())
