@@ -1,5 +1,7 @@
 package storitz.constants
 
+import com.storitz.StoritzUtil
+
 public enum TopMetro {
 
     ALBUQUERQUE("Albuquerque", "NM"),
@@ -65,7 +67,7 @@ public enum TopMetro {
   }
 
     String getPathParam() {
-        return this.city.replaceAll(" ", "-").toLowerCase() + "-" + this.stateCode.toLowerCase();
+        return StoritzUtil.seoEncode(this.city).toLowerCase() + "-" + this.stateCode.toLowerCase();
     }
 
     static list() {
