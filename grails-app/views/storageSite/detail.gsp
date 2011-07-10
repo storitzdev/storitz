@@ -179,6 +179,7 @@
   <script type="text/javascript">
     var switchTo5x = true; // sharethis hack
     var d=document,l=d.location;
+    d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://maps-api-ssl':'://maps')+'.google.com'+'/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></sc'+'ript>');
     d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://':'://')+'w.sharethis.com'+'/button/buttons.js" type="text/javascript"></sc'+'ript>');
     $(document).ready(function() {
       initialize_site_detail_page();

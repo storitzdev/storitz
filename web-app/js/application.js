@@ -47,24 +47,19 @@ var _direction = function() {
     var markerGreen;
     var markerBlue;
     var directionsService;
-    var site;
     var site_title;
-    var site_lat;
-    var site_lng;
     var site_latlng;
-    var myOptions;
     var marker;
 
     return {
         init: function() {
-            markerGreen = google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
-            markerGreen = google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
+            markerGreen = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
+            markerGreen = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
             directionsService = new google.maps.DirectionsService();
-            site = $(".site_info .tabs #display_map");
+            var  site = $(".site_info .tabs #display_map");
             site_title = site.attr('title');
-            site_lat = site.attr('lat');
-            site_lng = site.attr('lng');
-            myOptions = {
+            site_latlng = new google.maps.LatLng(site.attr('lat'), site.attr('lng'));
+            var myOptions = {
               zoom: 15,
               center: site_latlng,
               mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -74,7 +69,6 @@ var _direction = function() {
               title: site_title,
               icon: markerGreen
             });
-            site_latlng = new google.maps.LatLng(site_lat, site_lng);
             map = new google.maps.Map(document.getElementById("directionMapCanvas"),
                     myOptions);
             marker.setMap(map);
