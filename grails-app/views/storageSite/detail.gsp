@@ -176,25 +176,12 @@
 
 
 <p:dependantJavascript>
-  <script type="text/javascript">var switchTo5x = true;</script>
-  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-  <script type="text/javascript">stLight.options({publisher:'fcffc560-5a11-434a-b976-a60a57d870ed'});</script>
   <script type="text/javascript">
+    var switchTo5x = true; // sharethis hack
+    var d=document,l=d.location;
+    d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://':'://')+'w.sharethis.com'+'/button/buttons.js" type="text/javascript"></sc'+'ript>');
     $(document).ready(function() {
-      $("ul.tabs").tabs("div.panes > div");
-
-      var left = $("#left_panel").height();
-      var right = $("#right_panel").height();
-      var max_height = Math.max(left, right);
-
-      $(".container").height(max_height);
-
-      //browser specifics for IE
-      if ($.browser.msie) {
-        $("#featuresList ul").css("float", "left");
-
-        $("#rentme").css("margin-left", "10px");
-      }
+      initialize_site_detail_page();
     });
   </script>
 </p:dependantJavascript>

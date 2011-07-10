@@ -172,7 +172,17 @@
         </div>
     </div>
 </div>
+<p:dependantJavascript>
 <script type="text/javascript">
+  //<![CDATA[
+  $(document).ready(function() {
+    initialize_splash();
+  });
+  //]]>
+</script>
+</p:dependantJavascript>
+<script type="text/javascript">
+  %{-- TODO: necessary? --}%
     //<![CDATA[
     var _gaq = _gaq || [];
     //]]>

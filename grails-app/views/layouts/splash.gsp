@@ -11,7 +11,8 @@
     </head>
     <body class="${pageProperty(name:'body.class')}">
         <g:layoutBody />
-        <g:render template="/v2footer"></g:render>
+        <g:render template="/v2footer" />
         <g:pageProperty name="page.gwo" /> <% // TODO: move to footer? %>
+        <p:renderDependantJavascript/>
     </body>
 </html>

@@ -44,27 +44,37 @@ var _util = {
 var _direction = function() {
     var map;
     var directionsDisplay;
-    var markerGreen = '/storitz/images/icn_map_grn.png';
-    var markerBlue = '/storitz/images/icn_map_blue.png';
-    var directionsService = new google.maps.DirectionsService();
-    var site = $(".site_info .tabs #display_map");
-    var site_title = site.attr('title');
-    var site_lat = site.attr('lat');
-    var site_lng = site.attr('lng');
-    var site_latlng = new google.maps.LatLng(site_lat, site_lng);
-    var myOptions = {
-      zoom: 15,
-      center: site_latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var marker = new google.maps.Marker({
-      position: site_latlng,
-      title: site_title,
-      icon: markerGreen
-    });
+    var markerGreen;
+    var markerBlue;
+    var directionsService;
+    var site;
+    var site_title;
+    var site_lat;
+    var site_lng;
+    var site_latlng;
+    var myOptions;
+    var marker;
 
     return {
         init: function() {
+            markerGreen = google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
+            markerGreen = google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
+            directionsService = new google.maps.DirectionsService();
+            site = $(".site_info .tabs #display_map");
+            site_title = site.attr('title');
+            site_lat = site.attr('lat');
+            site_lng = site.attr('lng');
+            myOptions = {
+              zoom: 15,
+              center: site_latlng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            marker = new google.maps.Marker({
+              position: site_latlng,
+              title: site_title,
+              icon: markerGreen
+            });
+            site_latlng = new google.maps.LatLng(site_lat, site_lng);
             map = new google.maps.Map(document.getElementById("directionMapCanvas"),
                     myOptions);
             marker.setMap(map);
@@ -170,22 +180,16 @@ var _direction = function() {
 
 var _map = function() {
     // private variables
-    var active_icon = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
-    var inactive_icon = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
+    var active_icon;
+    var inactive_icon;
     var current_maplet_marker = null;
     var current_info_window = null;
     var big_map;
     var popup_map;
     var mini_map;
     var markers = {}; // maps site IDs to [google.maps.Marker, google.maps.InfoWindow] pairs
-    var popup_map_options = {
-      zoom: 14,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var big_map_options = {
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+    var popup_map_options;
+    var big_map_options;
     var toggle_info_window = function(info_window, map, marker) {
         if (current_info_window) {
             current_info_window.close();
@@ -194,7 +198,7 @@ var _map = function() {
         info_window.open(map, marker);
     };
 
-    // TODO: This is very fragile; t will break if the DOM structure isn't exactly right.
+    // TODO: This is very fragile; it will break if the DOM structure isn't exactly right.
     // When calling init(), the caller should provide the selectors to which the various
     // click/hover events should be bound
 
@@ -242,6 +246,16 @@ var _map = function() {
             $("#search_results > li").unbind("mouseleave");
         },
         init: function() {
+            active_icon = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
+            inactive_icon = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
+            popup_map_options = {
+              zoom: 14,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            big_map_options = {
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
             var big_map_canvas = document.getElementById("big_map_canvas");
             var popup_map_canvas = document.getElementById("popup_map_canvas");
             var mini_map_url = "";
@@ -307,14 +321,12 @@ var _map = function() {
     }
 }();
 
-$(document).ready(function() {
-
+$(document).ready(function() { // common event bindings
     // bind tooltip events
     $(".tooltip a.close").click(function() {
         $(this).parents(".tooltip").first().css("left", -2000);
         return false;
     });
-
     //hover functionality in logos for IE
     if ($.browser.msie) {
         $("#logos li").hover(
@@ -326,6 +338,10 @@ $(document).ready(function() {
              }
         );
     }
+});
+
+function initialize_site_detail_page() {
+    stLight.options({publisher:'fcffc560-5a11-434a-b976-a60a57d870ed'});
 
     //image gallery in detail page.
     $(".photos ul.image_list li img").click(
@@ -334,7 +350,35 @@ $(document).ready(function() {
                 $(".main_pic").attr('src', new_img);
             }
     );
+    $("ul.tabs").tabs("div.panes > div");
 
+    var left = $("#left_panel").height();
+    var right = $("#right_panel").height();
+    var max_height = Math.max(left, right);
+
+    $(".container").height(max_height);
+
+    //browser specifics for IE
+    if ($.browser.msie) {
+      $("#featuresList ul").css("float", "left");
+
+      $("#rentme").css("margin-left", "10px");
+    }
+
+    $("body.site_detail .rent_me > div.unit_info .promos ul a").live("click", function() {
+      $("#promoId").val($(this).attr("promo_id"));
+      update_rent_me_panel();
+      return false;
+    });
+    $("body.site_detail .rent_me > div.unit_info .promos a.remove").live("click", function() {
+      $("#promoId").val("-1");
+      update_rent_me_panel();
+      return false;
+    });
+    $("body.site_detail .rent_me > div.unit_info .promos .offer_links a.more").live("click", function() {
+      $(this).parent(".offer_links").next("ul").slideToggle();
+      return false;
+    });
     //map tab
     $("#display_map").click(function() {
         _direction.init();
@@ -343,24 +387,9 @@ $(document).ready(function() {
         _direction.calculate();
         $("#dirPanel").css("display", "block");
     });
-
-    _map.init();
-    // show map?
-    if (window.location.hash == "#map-view") {
-        _map.mapify();
-    }
-
-
-    // bind map events
-    $(".toggle_map_view").click(function() {
-        $("#search_results").hasClass("map") ? _map.listify() : _map.mapify();
-        return false;
-    });
-    $(".show_map_popup a").click(function() {
-        _map.show_popup(this);
-        return false;
-    });
-
+}
+function initialize_college_landing_page() {
+    initialize_serp();
     // bind college landing page events
     var rebate_clicked = false;
     $("#rebate_tile").click(function() {
@@ -388,7 +417,9 @@ $(document).ready(function() {
         $("#college_tips_panel").slideUp();
         return false;
     });
+}
 
+function initialize_splash() {
     // bind home page events
     $("#coverphoto fieldset.advanced legend").click(function() {
         $("#advanced_search_controls").slideToggle();
@@ -401,22 +432,24 @@ $(document).ready(function() {
                     //alert("what?");
                 }
             });
-    $("body.site_detail .rent_me > div.unit_info .promos ul a").live("click", function() {
-      $("#promoId").val($(this).attr("promo_id"));
-      update_rent_me_panel();
-      return false;
-    });
-    $("body.site_detail .rent_me > div.unit_info .promos a.remove").live("click", function() {
-      $("#promoId").val("-1");
-      update_rent_me_panel();
-      return false;
-    });
-    $("body.site_detail .rent_me > div.unit_info .promos .offer_links a.more").live("click", function() {
-      $(this).parent(".offer_links").next("ul").slideToggle();
-      return false;
-    });
-});
+}
 
+function initialize_serp() {
+  _map.init();
+  // show map?
+  if (window.location.hash == "#map-view") {
+      _map.mapify();
+  }
+  // bind map events
+  $(".toggle_map_view").click(function() {
+      $("#search_results").hasClass("map") ? _map.listify() : _map.mapify();
+      return false;
+  });
+  $(".show_map_popup a").click(function() {
+      _map.show_popup(this);
+      return false;
+  });
+}
 function update_rent_me_panel() {
   var f = $("#rent_me_form");
   f.css("opacity", "0.5")

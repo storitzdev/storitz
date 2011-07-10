@@ -50,5 +50,15 @@
       <iframe src="<g:createLink action="storageTips" params="[layout:'min']" />"></iframe>
     </div>
     <g:render template="/search/results" />
+</div>
+<p:dependantJavascript>
+<script type="text/javascript">
+  var d=document,l=d.location;
+  d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://maps-api-ssl':'://maps')+'.google.com'+'/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></sc'+'ript>');
+  $(d).ready(function() {
+    initialize_college_landing_page();
+  });
+</script>
+</p:dependantJavascript>
 </body>
 </html>
