@@ -34,6 +34,8 @@ class SearchController {
         else {
           queryTerm = StoritzUtil.titleize(params.city) + ", " + params.state;
         }
+        // TODO: Fix to look up city name using seoCity value of StorageSite table;
+        // this will fail if the city name includes any punctuation
         def seoDecodedCity = params.city.replaceAll("-", " ").toLowerCase();
         def geoLookup = GeoLookup.findByCityAndState(seoDecodedCity, params.state)
         if (geoLookup) {
