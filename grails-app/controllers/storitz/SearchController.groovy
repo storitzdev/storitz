@@ -98,7 +98,9 @@ class SearchController {
             log.info("processing site " + site.id)
             def availableUnitsMap = [:] // using a map because I don't know how to use a set, and I don't want to do linear search thru an ArrayList
             site.units.each { unit ->
-                availableUnitsMap[unit.id] = unit
+                if (unit.unitCount > site.minInventory) {
+                  availableUnitsMap[unit.id] = unit
+                }
             }
             def featuredOffersMap = [:] // maps units to lists of featured special offers
             if (criteria.queryMode == QueryMode.FIND_UNITS && availableUnitsMap.size() == 0) {
