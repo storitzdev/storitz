@@ -1277,7 +1277,6 @@ body.site_detail .panes .overview .photos {
 body.site_detail .panes .overview .photos ul.image_list {
   width: 290px;
   overflow: hidden;
-  border-bottom: 1px solid #B2B2B2;
   padding: 0 0 11px;
   margin: 0 0 8px;
 }
