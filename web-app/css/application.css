@@ -136,7 +136,7 @@ a:hover {
   box-shadow: 0 0 6px lightblue;
   font-family: Helvetica;
   font-size: 18px;
-  color: #2f4f4f;
+  color: #000;
   padding: 2px 0 0 8px;
   margin-top: 1px;
   z-index: 1;
@@ -2000,12 +2000,30 @@ Added styles
     height: 339px;
     padding: 2px;
     margin: 20px 0;
+    display: block;
 }
 
 #directionMapCanvas, #directionMapDestinationCanvas {
-    width: 630px;
+    width: 410px;
     height: 319px;
     border: 8px solid #BDEDFF;
+    display: inline-block;
+}
+
+#facilityHours {
+    display: inline-block;
+    width: 210px;
+}
+
+#facilityHours h2 {
+    margin: 5px 0 10px 0;
+    color: #000;
+}
+
+#facilityHours h4 {
+    font-style: italic;
+    font-weight: normal;
+    padding-bottom: 10px;
 }
 
 #dirPanel {
@@ -2036,7 +2054,8 @@ Added styles
     border-bottom-width: 0px;
 }
 
-#directionsSteps tr.directionStep td b {
+#directionsSteps tr.directionStep td b,
+#directionsSteps tr.directionStepLast td b {
     font-weight: bold;
 }
 
@@ -2095,4 +2114,37 @@ input#srcAddr {
     padding: 9px;
     border: 1px solid gray;
     margin-left: 5px;
+}
+#printThis, #shareThis {
+    display: inline-block;
+    text-indent: -9999px;
+    width: 92px;
+    height: 32px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+#printThis a, #shareThis a {
+    width: 92px;
+    height: 32px;
+    display: block;
+}
+#printThis {
+    background: url("../images/map-print-button.png") no-repeat;
+}
+#shareThis {
+    background: url("../images/map-share-button.png") no-repeat;
+}
+/* detail page video tab */
+body.site_detail #videoContainer {
+    width: 580px;
+    height: 300px;
+    border: 8px solid #BDEDFF;
+    display: block;
+    margin: 10px 0 10px 28px;
+}
+body.site_detail h2.video_title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: helvetica;
 }

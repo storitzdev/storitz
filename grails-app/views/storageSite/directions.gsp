@@ -1,51 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <g:render template="/header_home"/>
-
   <script type="text/javascript">
     //<![CDATA[
-
     <g:render template="/directions_js" />
-
-    $(document).ready(function() {
-      getDirections();
-      createDirectionMap();
-    });
+    var d=document,l=d.location;
+    d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://maps-api-ssl':'://maps')+'.google.com'+'/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></sc'+'ript>');
 
     //]]>
   </script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&sensor=false&key=ABQIAAAAEDNru_s_vCsZdWplqCj4hxSjGMYCLTKEQ0TzQvUUxxIh1qVrLhTUMUuVByc3xGunRlZ-4Jv6pHfFHA"></script>
 
 </head>
 <body>
-<div id="body">
-
-  <div class="stcontent">
-    <g:render template="/logo_bar"/>
-    <div id="site_info" class="left" style="margin-top: 26px;">
-      <g:render template="/siteInfo"/>
-    </div>
-
-    <div style="width: 650px;" class="left">
-
-      <div id="detailInfo">
-        <div style="height: 25px; clear: both;"></div>
-
-
-        <div id="detail_tabs">
-          <g:render template="/directions"/>
-        </div>
-        <div style="clear:both;"></div>
-      </div>
-
-    </div>
-  </div>
-  <div style="clear:both; height:30px;"></div>
-
-</div>
+<g:render template="/directions"/>
+<p:dependantJavascript>
+    <script>
+        _direction.init(siteTitle, siteLat, siteLng);
+    </script>
+    <g:if test="${params.origin}">
+    <script>
+        _direction.calculate("${params.origin}", siteLat, siteLng);
+       $("#dirPanel").css("display", "block");
+       $("#srcAddr").val("${params.origin}");
+       $("#shareThis").hide();
+    </script>
+    </g:if>
+</p:dependantJavascript>
 </body>
 <p:renderDependantJavascript/>
 </html>

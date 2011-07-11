@@ -52,13 +52,15 @@ var _direction = function() {
     var marker;
 
     return {
-        init: function() {
+        init: function() { //optional args: title, lat, lng
             markerGreen = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png");
             markerGreen = new google.maps.MarkerImage("http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png");
             directionsService = new google.maps.DirectionsService();
             var  site = $(".site_info .tabs #display_map");
-            site_title = site.attr('title');
-            site_latlng = new google.maps.LatLng(site.attr('lat'), site.attr('lng'));
+            site_title = (arguments[0]) ? arguments[0] : site.attr('title');
+            var site_lat = (arguments[1]) ? arguments[1] : site.attr('lat');
+            var site_lng = (arguments[2]) ? arguments[2] : site.attr('lng');
+            site_latlng = new google.maps.LatLng(site_lat, site_lng);
             var myOptions = {
               zoom: 15,
               center: site_latlng,
@@ -73,17 +75,30 @@ var _direction = function() {
                     myOptions);
             marker.setMap(map);
         },
-        calculate: function() {
+        calculate: function() { //optional args: start,lat,lng
             directionsDisplay = new google.maps.DirectionsRenderer();
-            //directionsDisplay.setMap(map);
-            //directionsDisplay.setPanel(document.getElementById("dirPanel"));
-            var start = $("#srcAddr").val();
-            var request = {
-                origin: start,
-                destination: site_latlng,
-                unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
-                travelMode: google.maps.TravelMode.DRIVING
-            };
+            var request;
+            var start;
+            if (arguments[0] && arguments[1] && arguments[2]) {
+                directionsService = new google.maps.DirectionsService();
+                var destLatLng = new google.maps.LatLng(arguments[1], arguments[2]);
+                start = arguments[0];
+                request = {
+                    origin: start,
+                    destination: destLatLng,
+                    unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+            }
+            else {
+                start = $("#srcAddr").val();
+                request = {
+                    origin: start,
+                    destination: site_latlng,
+                    unitSystem: google.maps.DirectionsUnitSystem.IMPERIAL,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+            }
             directionsService.route(request, _direction.drawDirections);
         },
         drawDirections: function(response, status) {

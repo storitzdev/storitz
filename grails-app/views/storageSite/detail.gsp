@@ -64,8 +64,8 @@
         <li><a class="current" href="#tab_overview">Overview</a></li>
         <li><a class="current" href="#tab_video">Video</a></li>
         <li><a class="current" href="#tab_maphours" id="display_map" title="${site.title}" lat="${site.lat}" lng="${site.lng}">Map &amp; Hours</a></li>
-        <li><a class="current" href="#tab_reviews">Reviews</a></li>
-        <li><a class="current" href="#tab_auctions">Auctions</a></li>
+        %{--<li><a class="current" href="#tab_reviews">Reviews</a></li>--}%
+        %{--<li><a class="current" href="#tab_auctions">Auctions</a></li>--}%
       </ul>
       <!-- the panes -->
       <div class="panes">
@@ -124,7 +124,25 @@
         </div>
 
         <div><!-- third tab-->
-          blah blah blah blah blah
+            <g:if test="${video}">
+                <div id="videoContainer"></div>
+                <h2 class="video_title">${video.title}</h2>
+                <p:dependantJavascript>
+                    <script type="text/javascript">
+                        jwplayer("videoContainer").setup({
+                                    flashplayer: "${resource(file:'/jwplayer/player.swf')}",
+                                    skin: "${resource(file:'/jwplayer/stijl.zip')}",
+                                    file: "${resource(file:video.fileLocation)}",
+                                    image: "${resource(file:video.stillImage)}",
+                                    height: 300,
+                                    width: 580
+                                });
+                    </script>
+                </p:dependantJavascript>
+            </g:if>
+            <g:else>
+                <h2>This site has no videos.</h2>
+            </g:else>
           <a name="tab_video">&nbsp;</a>
         </div>
 
@@ -133,17 +151,17 @@
           <a name="tab_maphours">&nbsp;</a>
         </div>
 
-        <div>
-          <!-- fifth tab-->
-          blah blah blah blah blah
-          <a name="tab_reviews">&nbsp;</a>
-        </div>
+        %{--<div>--}%
+          %{--<!-- fifth tab-->--}%
+          %{--blah blah blah blah blah--}%
+          %{--<a name="tab_reviews">&nbsp;</a>--}%
+        %{--</div>--}%
 
-        <div>
-          <!-- sixth tab-->
-          blah blah blah blah blah
-          <a name="tab_auctions">&nbsp;</a>
-        </div>
+        %{--<div>--}%
+          %{--<!-- sixth tab-->--}%
+          %{--blah blah blah blah blah--}%
+          %{--<a name="tab_auctions">&nbsp;</a>--}%
+        %{--</div>--}%
       </div>
     </div>
   </div>

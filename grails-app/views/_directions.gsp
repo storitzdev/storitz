@@ -4,12 +4,16 @@
 </div>
 <div id="directionMap">
   <div id="directionMapCanvas"></div>
+  <div id="facilityHours" class="right">
+      <h2>Hours of Operation</h2>
+      <g:render template="/siteHours" />
+  </div>
 </div>
 <div class="dirInstructions">
   <h2>Driving Directions</h2> Enter your start address below
 </div>
 <div class="left">
-  <div style="width:330px;" class="checkout_value">
+  <div style="width:294px;" class="checkout_value">
     <g:textField id="srcAddr" name="srcAddr" placeholder="Enter city, address, or zip"/>
   </div>
   <div style="clear:both;"></div>
@@ -37,12 +41,13 @@
     <div id="directionsEndAddr" class="left directionsAddress" style="margin: 14px 0;"></div>
     <div style="clear:both;"></div>
   </div>
-  <div id="directionsCopyrights" class="directionsCopyrights"></div>
-</div>
-%{--<div id="directionMapDestination" style="display:none;">--}%
-  %{--<div id="directionMapDestinationCanvas"></div>--}%
-%{--</div>--}%
-<div id="printThis" class="right" style="display:none; margin: 10px;">
-  <a href="#" onclick="window.print();
-  return false;">print</a>
+    <div id="directionsCopyrights" class="directionsCopyrights"></div>
+
+    <div id="printThis">
+        <a href="#" onclick="window.print();
+        return false;">print</a>
+    </div>
+    <div id="shareThis">
+        <g:link controller="storageSite" action="directions" id="${params.id}" params="[origin:'los angeles, ca']">Share</g:link>
+    </div>
 </div>
