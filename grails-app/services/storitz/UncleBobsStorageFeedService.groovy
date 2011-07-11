@@ -513,10 +513,6 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     def store_surveillancecameras    = xmlstore.surveillancecameras         as String
     def store_electronicgate         = xmlstore.electronicgate              as String
     def store_fencedandlighted       = xmlstore.fencedandlighted            as String
-
-    // start office hours
-    // We currently don't use office hours.
-    // For completeness I capture them just the same.
     def store_office_sunday_open     = xmlstore.officehours.sunday.open     as String
     def store_office_sunday_close    = xmlstore.officehours.sunday.close    as String
     def store_office_monday_open     = xmlstore.officehours.monday.open     as String
@@ -531,8 +527,6 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     def store_office_friday_close    = xmlstore.officehours.friday.close    as String
     def store_office_saturday_open   = xmlstore.officehours.saturday.open   as String
     def store_office_saturday_close  = xmlstore.officehours.saturday.close  as String
-    //  end office hours
-
     def store_access_hours           = xmlstore.accesshours                 as String
 
     // prep-work
@@ -576,45 +570,61 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       add_bullet(site.securityItems,"Electronic Gate")
     }
     if (store_fencedandlighted) {
+      site.isGate = true
       add_bullet(site.securityItems,"Fenced and Lighted")
     }
+
+    site.startSunday = office_hours(store_office_sunday_open)
+    site.endSunday = office_hours(store_office_sunday_close)
+    site.startMonday = office_hours(store_office_monday_open)
+    site.endMonday = office_hours(store_office_monday_close)
+    site.startTuesday = office_hours(store_office_tuesday_open)
+    site.endTuesday = office_hours(store_office_tuesday_close)
+    site.startWednesday = office_hours(store_office_wednesday_open)
+    site.endWednesday = office_hours(store_office_wednesday_close)
+    site.startThursday = office_hours(store_office_thursday_open)
+    site.endThursday = office_hours(store_office_thursday_close)
+    site.startFriday = office_hours(store_office_friday_open)
+    site.endFriday = office_hours(store_office_friday_close)
+    site.startSaturday = office_hours(store_office_saturday_open)
+    site.endSaturday = office_hours(store_office_saturday_close)
 
     try {
       def hoursMatcher = store_access_hours =~ /(.*)M to (.*)M (.*)/
       if (hoursMatcher.getCount()) {
-        DateFormat df = new SimpleDateFormat("hh:mm a")
-        Date hoursStart   = df.parse("${hoursMatcher[0][1]?.trim()}M")
-        Date hoursEnd     = df.parse("${hoursMatcher[0][2]?.trim()}M}")
+        DateFormat dfAccess = new SimpleDateFormat("hh:mm a")
+        Date accessHoursStart   = dfAccess.parse("${hoursMatcher[0][1]?.trim()}M")
+        Date accessHoursEnd     = dfAccess.parse("${hoursMatcher[0][2]?.trim()}M}")
         String days = hoursMatcher[0][3]?.trim()
         if (days.equalsIgnoreCase("daily")) {
           site.openSunday           = true
-          site.startSundayGate      = site.startSunday    = hoursStart
-          site.endSundayGate        = site.endSunday      = hoursEnd
+          site.startSundayGate      = accessHoursStart
+          site.endSundayGate        = accessHoursEnd
 
           site.openMonday           = true
-          site.startMondayGate      = site.startMonday    = hoursStart
-          site.endMondayGate        = site.endMonday      = hoursEnd
+          site.startMondayGate      = accessHoursStart
+          site.endMondayGate        = accessHoursEnd
 
           site.openTuesday          = true
-          site.startTuesdayGate     = site.startTuesday   = hoursStart
-          site.endTuesdayGate       = site.endTuesday     = hoursEnd
+          site.startTuesdayGate     = accessHoursStart
+          site.endTuesdayGate       = accessHoursEnd
 
           site.openWednesday        = true
-          site.startWednesdayGate   = site.startWednesday = hoursStart
-          site.endWednesdayGate     = site.endWednesday   = hoursEnd
+          site.startWednesdayGate   = accessHoursStart
+          site.endWednesdayGate     = accessHoursEnd
 
           site.openThursday         = true
-          site.startThursdayGate    = site.startThursday  = hoursStart
-          site.endThursdayGate      = site.endThursday    = hoursEnd
+          site.startThursdayGate    = accessHoursStart
+          site.endThursdayGate      = accessHoursEnd
 
           site.openFriday           = true
-          site.startFridayGate      = site.startFriday    = hoursStart
-          site.endFridayGate        = site.endFriday      = hoursEnd
+          site.startFridayGate      = accessHoursStart
+          site.endFridayGate        = accessHoursEnd
 
           site.openSaturday         = true
-          site.startSaturdayGate    = site.startSaturday  = hoursStart
-          site.endSaturdayGate      = site.endSaturday    = hoursEnd
-        }
+          site.startSaturdayGate    = accessHoursStart
+          site.endSaturdayGate      = accessHoursEnd
+         }
       }
     } // hours
     catch (Throwable t) {
@@ -635,5 +645,20 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     if (!l.find { it.bullet == t }) {
       l.add(new_bullet (t))
     }
+  }
+
+  private def office_hours(hours) {
+    if (!hours) {
+      return null
+    }
+
+    DateFormat dfOffice = new SimpleDateFormat("HH:mm")
+    try {
+        return dfOffice.parse(hours)
+    } catch (Throwable t) {
+      t.printStackTrace()
+    }
+
+    return null
   }
 }
