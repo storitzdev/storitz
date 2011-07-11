@@ -1455,8 +1455,6 @@ body.site_detail .rent_me > .move_in_quote a.edit_date {
 #datepicker {
   display:none;
   position: absolute;
-  left: -150px;
-  top: -120px;
 }
 body.site_detail .rent_me > div.unit_info ul {
   line-height: 110%;

@@ -361,18 +361,20 @@ function initialize_site_detail_page() {
     $("#datepicker").datepicker(
             { dateFormat: 'yy-mm-dd',
               minDate: 0,
-              maxDate: 30,
-              onSelect: function(dateText, inst) {
-                startDate = dateText;
-                $('#moveInDate').val(startDate);
+              onSelect: function(date) {
+                $('#moveInDate').val(date);
                 _gaq.push(['_trackEvent', 'detail', 'transaction box', 'date change']);
                 $("#datepicker").hide();
+                update_rent_me_panel();
               }
             }).datepicker("hide");
 
-    $("body.site_detail .rent_me > div.move_in_quote a.edit_date").live("click", function() {
-//      $("#datepicker").datepicker("show");
-      $("#datepicker").show();
+    $("body.site_detail .rent_me > div.move_in_quote a.edit_date").live("click", function(evt) {
+      var element = $("#datepicker");
+      element.datepicker("option", "maxDate", $(this).attr("max-days"));
+      element.css("top", (evt.pageY - element.innerHeight() + 30) + "px");
+      element.css("left", (evt.pageX - element.innerWidth()) + "px");
+      element.show();
       return false;
     });
 

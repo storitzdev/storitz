@@ -146,9 +146,7 @@
         </div>
       </div>
     </div>
-
   </div>
-
   <div id="right_panel">
     <g:form mapping="checkout" method="GET" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
       <g:render template="rentMePanel" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, totals:totals]"/>
@@ -173,8 +171,7 @@
     </g:if>
   </div>
 </div>
-
-
+<div id="datepicker"></div>
 <p:dependantJavascript>
   <script type="text/javascript">
     var switchTo5x = true; // sharethis hack

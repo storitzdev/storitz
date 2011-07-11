@@ -62,7 +62,7 @@
       <dd><g:formatNumber number="${totals.getMoveInTotal()}" type="currency" currencyCode="USD" />*</dd>
       <dt>Move-In Date</dt>
       <dd>
-        <a class="edit_date" title="Click to Change" href="#"><g:formatDate type="date" style="MEDIUM" date="${moveInDate}" /><div id="datepicker"></div></a>
+        <a class="edit_date" title="Click to Change" href="#" max-days="${site.maxReserveDays}"><g:formatDate type="date" style="MEDIUM" date="${moveInDate}" /></a>
       </dd>
       <dt>Paid Thru</dt>
       <dd><g:formatDate type="date" style="MEDIUM" date="${totals.paidThruDate}" /></dd>
