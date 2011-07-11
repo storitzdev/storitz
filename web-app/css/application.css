@@ -411,6 +411,7 @@ body.state_directory td {
   font-family: Helvetica;
   font-size: 13px;
   padding-right: 10px;
+  vertical-align: top;
 }
 
 body.state_directory td a {
@@ -1106,6 +1107,9 @@ body.site_detail h3,
 .breadcrumbs a.current {
   color: #00529b;
 }
+body.site_detail {
+  font-family:  arial, helvetica, verdana, sans-serif;
+}
 body.site_detail .vcard h1 {
   font-family: Arial;
   font-size: 24px;
@@ -1416,33 +1420,44 @@ body.site_detail .rent_me > div.rent_reserve .guarantee {
   color: #3EA307;
 }
 
-body.site_detail .rent_me > div.move_in_date {
-  padding-top: 15px;
-  padding-bottom: 30px;
+.move_in_quote dl.summary {
+  clear: both;
+  height: 67px;
+}
+.move_in_quote dl.summary dt {
+  float: left;
+  clear: left;
+  margin-bottom: 4px;
+}
+.move_in_quote dl.summary dd {
+  float: right;
+  clear: right;
   font-weight: bold;
 }
+.move_in_quote dl.summary .none {
+  font-weight: normal;
+  font-style: italic;
+}
 
-body.site_detail .rent_me > div.move_in_date a.edit_date {
+body.site_detail .rent_me > .move_in_quote a.edit_date {
   padding-left: 28px;
   background: url("../images/icn-calendar.png") no-repeat;
   background-position: left top;
   float: right;
   display: inline-block;
   text-decoration: none;
-  line-height: 150%;
-  margin-top: -5px;
+  height: 15px;
+  margin-top: -4px;
+  padding-top: 4px;
+  color: #1982de;
+  position: relative;
 }
-body.site_detail .rent_me > div.move_in_date a.edit_date .date_label {
-  font-weight:bold;
-  color: black;
+#datepicker {
+  display:none;
+  position: absolute;
+  left: -150px;
+  top: -120px;
 }
-body.site_detail .rent_me > div.move_in_date a.edit_date .link {
-  text-decoration: underline;
-  text-align: right;
-  font-size: 11px;
-  font-weight: normal;
-}
-
 body.site_detail .rent_me > div.unit_info ul {
   line-height: 110%;
   font-size: 12px;
@@ -1451,7 +1466,9 @@ body.site_detail .rent_me > div.unit_info ul {
 body.site_detail .rent_me > div.unit_info a.more_sizes {
   float: right;
   font-size: 13px;
-  margin-top: 1px;
+  text-decoration: none;
+  /*color: #025895;*/
+  color: #1982de;
 }
 body.site_detail .rent_me div.unit_info h4 {
   font-size: 14px;
@@ -1459,20 +1476,28 @@ body.site_detail .rent_me div.unit_info h4 {
   margin-bottom: 7px;
   color: #025895;
 }
-body.site_detail .rent_me > div.unit_info .promos .label {
-  font-weight: normal;
+body.site_detail .rent_me div.unit_info ul.amenities {
+  display: inline-block;
+  width: 135px;
 }
-body.site_detail .rent_me > div.unit_info .promos .offer_links {
+body.site_detail .rent_me > div.move_in_quote .offer_links {
   font-weight: normal;
+  text-align: right;
+  color: #1982de;
 }
-body.site_detail .rent_me > div.unit_info .promos .offer_links a {
+body.site_detail .rent_me > div.move_in_quote .offer_links a {
   color: red;
+  color: #1982de;
+  text-decoration: none;
+  font-size: 9pt;
 }
-body.site_detail .rent_me > div.unit_info .promos {
-  margin-top: 5px;
-  font-weight: bold;
+body.site_detail .rent_me > div.move_in_quote .promos {
+  display: none;
+  clear: both;
+  margin-top: 10px;
+  margin-bottom: 2px;
 }
-body.site_detail .rent_me > div.unit_info .promos li a {
+body.site_detail .rent_me > div.move_in_quote .promos li a {
   text-decoration: none;
   display: inline-block;
   background-color: #7e7975;
@@ -1482,25 +1507,17 @@ body.site_detail .rent_me > div.unit_info .promos li a {
   padding: 2px 10px 3px;
   margin-right: 10px;
 }
-body.site_detail .rent_me > div.unit_info .promos li {
+body.site_detail .rent_me > div.move_in_quote .promos li {
   display: block;
   margin: 3px 0;
 }
-body.site_detail .rent_me > div.unit_info .promos ul {
-  display: none;
-  clear: both;
-  margin-top: 10px;
-  margin-bottom: 2px;
-}
-body.site_detail .rent_me .move_in_quote .move_in_cost {
-  float: right;
-}
-body.site_detail .rent_me > div.move_in_quote h4 {
-  margin-bottom: 4px;
-}
 body.site_detail .rent_me > div.move_in_quote p {
-  font: 11px arial, verdana, helvetica, sans-serif;
-  margin-top: 2px;
+  font-size: 11px;
+  margin-top: 7px;
+  text-align: center;
+}
+body.site_detail .rent_me > div.move_in_quote .cost_breakdown {
+  display: none;
 }
 
 
@@ -1708,39 +1725,66 @@ body.checkout input.rent_me_button {
   border-width: 0;
   margin-bottom: 10px;
 }
-body.checkout .booking_summary table.cost_breakdown {
+.cost_breakdown {
+  margin-top: 5px;
+  border-bottom: 1px solid #777;
+}
+.cost_breakdown table {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 9pt;
 }
-body.checkout .booking_summary table.cost_breakdown td {
+.cost_breakdown td.negative {
+  color: red;
+}
+.cost_breakdown td.numeric,
+.cost_breakdown th.numeric {
+  text-align: right;
+  white-space: nowrap;
+}
+.cost_breakdown td {
   vertical-align: top;
 }
-body.checkout .booking_summary table.cost_breakdown td,
-body.checkout .booking_summary table.cost_breakdown th {
+.cost_breakdown td,
+.cost_breakdown th {
   text-align: center;
   padding: 4px;
 }
-body.checkout .booking_summary table.cost_breakdown th {
-  border-bottom: 1px solid #aaa;
+.cost_breakdown th {
+  border-bottom: 1px dotted #777;
   vertical-align: bottom;
   
 }
-body.checkout .booking_summary table.cost_breakdown td.item,
-body.checkout .booking_summary table.cost_breakdown th.item {
+.cost_breakdown td.item,
+.cost_breakdown th.item {
   padding-left: 20px;
   text-align: left;
 }
-body.checkout .booking_summary table.cost_breakdown td.last,
-body.checkout .booking_summary table.cost_breakdown th.last {
+.cost_breakdown td.last,
+.cost_breakdown th.last {
   padding-right: 20px;
 }
-body.checkout .booking_summary table.cost_breakdown td.item {
+.rent_me .cost_breakdown td.item,
+.rent_me .cost_breakdown th.item,
+.rent_me .cost_breakdown td.last,
+.rent_me .cost_breakdown th.last {
+  padding: 4px;
+}
+.cost_breakdown td.item {
   font-weight: bold;
 }
-body.checkout .booking_summary table.cost_breakdown td.summary {
+.cost_breakdown td.summary {
   border-top: 1px solid #aaa;
   text-align: right;
-}                       
+  font-weight: bold;
+}
+.cost_breakdown caption {
+  /*background: #777;*/
+  /*color: white;*/
+  border-top: 1px solid #777;
+  border-bottom: 1px dotted #777;
+  padding: 2px;
+  font-weight: bold;
+}
 
 body.checkout .booking_summary dt {
   float: left;

@@ -358,19 +358,40 @@ function initialize_site_detail_page() {
 
       $("#rentme").css("margin-left", "10px");
     }
+    $("#datepicker").datepicker(
+            { dateFormat: 'yy-mm-dd',
+              minDate: 0,
+              maxDate: 30,
+              onSelect: function(dateText, inst) {
+                startDate = dateText;
+                $('#moveInDate').val(startDate);
+                _gaq.push(['_trackEvent', 'detail', 'transaction box', 'date change']);
+                $("#datepicker").hide();
+              }
+            }).datepicker("hide");
 
-    $("body.site_detail .rent_me > div.unit_info .promos ul a").live("click", function() {
+    $("body.site_detail .rent_me > div.move_in_quote a.edit_date").live("click", function() {
+//      $("#datepicker").datepicker("show");
+      $("#datepicker").show();
+      return false;
+    });
+
+    $("body.site_detail .rent_me > div.move_in_quote .promos a").live("click", function() {
       $("#promoId").val($(this).attr("promo_id"));
       update_rent_me_panel();
       return false;
     });
-    $("body.site_detail .rent_me > div.unit_info .promos a.remove").live("click", function() {
+    $("body.site_detail .rent_me > div.move_in_quote .offer_links a.remove").live("click", function() {
       $("#promoId").val("-1");
       update_rent_me_panel();
       return false;
     });
-    $("body.site_detail .rent_me > div.unit_info .promos .offer_links a.more").live("click", function() {
+    $("body.site_detail .rent_me > div.move_in_quote .offer_links a.more").live("click", function() {
       $(this).parent(".offer_links").next("ul").slideToggle();
+      return false;
+    });
+    $("body.site_detail .rent_me > div.move_in_quote a.breakdown").live("click", function() {
+      $(this).parent().next(".cost_breakdown").slideToggle();
       return false;
     });
     //map tab

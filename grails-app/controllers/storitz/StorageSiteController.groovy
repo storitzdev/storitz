@@ -574,12 +574,12 @@ class StorageSiteController implements ApplicationContextAware {
     }
 
     // preload required insurance
-    def insuranceId = params.insuranceId as Integer
-    if (site.noInsuranceWaiver && (!insuranceId || insuranceId < 0)) {
+    def insurance = null;
+    if (site.noInsuranceWaiver) {
       if (site.insurances.size() > 0) {
-        insuranceId = site.insurances.findAll { it.active }.min { it.premium }.id
+        insurance = site.insurances.findAll { it.active }.min { it.premium }
       } else {
-        insuranceId = -999
+        // TODO: Log SEVERE warning
       }
     }
 
@@ -597,15 +597,14 @@ class StorageSiteController implements ApplicationContextAware {
     def promo = params.promoId ? SpecialOffer.get(params.promoId as Long) : null;
     def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
-    def totals = costService.calculateTotals(site, bestUnit, promo, null, moveInDate);
+    def totals = costService.calculateTotals(site, bestUnit, promo, insurance, moveInDate);
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
             title: title,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
-            promoId: params.promoId, insuranceId: insuranceId, video: video, propertyOperatorList: propertyOperatorList,
-            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos,
-            moveInCost: totals.moveInTotal, paidThruDate: totals.paidThruDate]
+            promoId: params.promoId, insurance: insurance, video: video, propertyOperatorList: propertyOperatorList,
+            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos, totals: totals]
   }
 
   def rentMePanel = {
@@ -631,7 +630,16 @@ class StorageSiteController implements ApplicationContextAware {
     def moveInDate = params.moveInDate ? new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate) : new Date();
     def promos = offerFilterService.getValidFeaturedOffers(site, unit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
-    def totals = costService.calculateTotals(site, unit, promo, null, moveInDate);
+    // preload required insurance
+    def insurance = null;
+    if (site.noInsuranceWaiver) {
+      if (site.insurances.size() > 0) {
+        insurance = site.insurances.findAll { it.active }.min { it.premium }
+      } else {
+        // TODO: Log SEVERE warning
+      }
+    }
+    def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
     render(template:"rentMePanel",
             contentType: "text/html",
             model:[site:site,
@@ -639,8 +647,8 @@ class StorageSiteController implements ApplicationContextAware {
                     promo: promo,
                     promos: promos,
                     moveInDate:moveInDate,
-                    moveInCost: totals.moveInTotal,
-                    paidThruDate: totals.paidThruDate]);
+                    totals: totals,
+                    insurance: insurance]);
   }
 
   def directions = {

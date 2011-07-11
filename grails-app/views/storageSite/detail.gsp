@@ -1,4 +1,4 @@
-<%@ page import="storitz.constants.TransactionType" %>
+<%@ page import="com.storitz.StoritzUtil; storitz.constants.TransactionType" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>${title}</title>
@@ -10,10 +10,10 @@
 
 <body class="site_detail">
 <div class="breadcrumbs">
-  <a href="#">Home</a> &gt;
-  <a href="#">California</a> &gt;
-  <a href="#">Los Angeles</a> &gt;
-  <a href="#" class="current">${site.title}</a>
+  <g:link controller="home" action="index">Home</g:link> &gt;
+  <g:link controller="seo" action="state" params="[state:StoritzUtil.seoEncode(site.state.fullName)]">${site.state.fullName}</g:link> &gt;
+  <g:link mapping="metro2" params="[city:StoritzUtil.seoEncode(site.city), state:site.state.display]">${site.city}</g:link> &gt;
+  <span class="current">${site.title}</span>
 </div>
 <div class="container_detail">
   <div id="left_panel">
@@ -151,7 +151,7 @@
 
   <div id="right_panel">
     <g:form mapping="checkout" method="GET" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
-      <g:render template="rentMePanel" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, moveInCost:moveInCost, paidThruDate:paidThruDate]"/>
+      <g:render template="rentMePanel" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, totals:totals]"/>
     </g:form>
     <g:if test="${nearbyUnits?.size() > 0}">
       <div class="sim_units">

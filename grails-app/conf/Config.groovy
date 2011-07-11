@@ -215,6 +215,7 @@ uiperformance.bundles = [
         [type: 'js',
                 name: 'all',
                 files: ["jquery-1.4.2.min",
+                        "jquery-ui-1.8.6.custom.min",
                         "placeholder",
                         "jquery.tools.min",
                         "application",
@@ -224,7 +225,8 @@ uiperformance.bundles = [
                 name: 'bundled',
                 files: ["reset",
                         "buttons",
-                        "application"
+                        "application",
+                        "jquery-ui-1.8.6.custom"
                 ]]
 ]
 
