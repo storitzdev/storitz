@@ -9,6 +9,7 @@ import java.text.ParseException
 import com.storitz.*
 import storitz.constants.*
 import com.storitz.service.CostTotals
+import java.text.SimpleDateFormat
 
 class RentalTransactionController {
 
@@ -19,6 +20,7 @@ class RentalTransactionController {
   def notificationService
   def nachaService
   def emailService
+  def offerFilterService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", pay: ["POST", "GET"]]
 
@@ -31,9 +33,6 @@ class RentalTransactionController {
   def list = {
     params.max = Math.min(params.max ? params.int('max') : 10, 100)
     [rentalTransactionInstanceList: RentalTransaction.list(params), rentalTransactionInstanceTotal: RentalTransaction.count()]
-  }
-
-  def begin = {
   }
 
   void updateSessions(params) {
@@ -80,15 +79,21 @@ class RentalTransactionController {
   }
 
   def create = {
-    def rentalTransactionInstance
-    def site
+    def transaction
     if (params.id) {
-      rentalTransactionInstance = RentalTransaction.get(params.id as Long)
+      transaction = RentalTransaction.get(params.id as Long)
     } else {
-      rentalTransactionInstance = new RentalTransaction(params)
-      rentalTransactionInstance.site = StorageSite.get(params.siteId as Long)
+      transaction = new RentalTransaction(params)
+      transaction.moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
+      transaction.site = StorageSite.get(params.siteId as Long)
     }
-    return [rentalTransactionInstance: rentalTransactionInstance, unit:StorageUnit.get(rentalTransactionInstance.unitId as Long)]
+    def unit = StorageUnit.get(transaction.unitId as Long)
+    def promos = offerFilterService.getValidFeaturedOffers(transaction.site, unit);
+    promos.addAll(offerFilterService.getValidNonFeaturedOffers(transaction.site, unit));
+    def insurance = Insurance.get(transaction.insuranceId)
+    def promo = SpecialOffer.get(transaction.promoId)
+    def totals = costService.calculateTotals(transaction.site, unit, promo, insurance, transaction.moveInDate);
+    return [transaction:transaction, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals]
   }
 
   def ajaxPoll = {

@@ -642,13 +642,14 @@ class StorageSiteController implements ApplicationContextAware {
     def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
     render(template:"rentMePanel",
             contentType: "text/html",
-            model:[site:site,
-                    unit:unit,
-                    promo: promo,
-                    promos: promos,
-                    moveInDate:moveInDate,
-                    totals: totals,
-                    insurance: insurance]);
+            model:[editable:true,
+                   site:site,
+                   unit:unit,
+                   promo: promo,
+                   promos: promos,
+                   moveInDate:moveInDate,
+                   totals: totals,
+                   insurance: insurance]);
   }
 
   def directions = {
