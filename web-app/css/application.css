@@ -1645,9 +1645,11 @@ body.checkout form.checkout {
 body.checkout .booking_summary > h1 {
   color: #00529b;
 }
-body.checkout .booking_summary > div,
-body.checkout .booking_summary > h1 {
+body.checkout .booking_summary > div {
   padding: 15px;
+}
+body.checkout .booking_summary > h1 {
+  padding: 15px 15px 5px;
 }
 body.checkout .booking_summary .site_info .image_container {
   width: 100px;
@@ -1673,19 +1675,6 @@ body.checkout .booking_summary .site_info h2 {
   margin-bottom: 5px;
   font-family: Arial, Helvetica, sans-serif;
 }
-body.checkout .customer_info > div {
-  border-top: 1px solid #ccc;
-  margin-bottom: 40px;
-}
-body.checkout .customer_info > div,
-body.checkout .customer_info .row {
-  position: relative;
-  margin-top: 15px;
-}
-body.checkout .customer_info > div.first {
-  border-width: 0;
-  margin-top: 0;
-}
 body.checkout .customer_info .assurances {
   margin: 30px 0;
 }
@@ -1696,11 +1685,22 @@ body.checkout .customer_info > div,
 body.checkout .customer_info > h1 {
   padding-top: 10px;
   padding-left: 20px;
+  position: relative;
 }
 body.checkout .customer_info h1 {
-  padding-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  padding-top: 20px;
+  margin-bottom: 10px;
   color: #00529b;
+  clear: both;
+  border-top: 1px solid #ccc;
+}
+body.checkout .customer_info h1.first {
+  border: none;
+  margin-top: 0;
+}
+body.checkout .customer_info h1.pay {
+  clear: none;
 }
 body.checkout .customer_info {
   width: 650px;
@@ -1729,35 +1729,48 @@ body.checkout .booking_summary {
   background-position: center bottom;
   background-repeat: repeat-x;
 }
-body.checkout .customer_info .pay_button {
-  height: 120px;
+body.checkout #header form.search {
+  display: none;
 }
-body.checkout .customer_info .pay_button .col2 p {
+body.checkout .customer_info h1.free {
+  height: 80px;
+}
+body.checkout .customer_info h1.pay {
+  height: 140px;
+}
+body.checkout .customer_info h1.pay.first {
+  height: auto;
+}
+body.checkout .customer_info h1.pay.first .col2 {
+  top: 0;
+}
+body.checkout .customer_info h1.pay .col2 p {
   text-align: right;
   font-size: 10pt;
 }
-body.checkout .customer_info .pay_button .col2 p strong {
+body.checkout .customer_info h1.pay .col2 p strong {
   font-weight: bold;
   display: block;
   font-size: 12pt;
 }
 body.checkout .customer_info .terms .col2,
-body.checkout .customer_info .pay_button .col2 {
-  margin-top: 18px;
-}
-body.checkout .customer_info .pay_button p {
+body.checkout .customer_info h1.pay p {
   margin-top: 0;
 }
 
 body.checkout .customer_info .col2 {
   position: absolute;
-  top: 0;
-  left: 315px;
+  top: 10px;
+  left: 325px;
+}
+body.checkout .customer_info h1 .col2 {
+  top: 18px;
+  font-weight: normal;
  }
 body.checkout .customer_info .col3 {
   position: absolute;
-  top: 0;
-  left: 385px;
+  top: 10px;
+  left: 390px;
 }
 body.checkout .customer_info .col1 {
   width: 320px;
