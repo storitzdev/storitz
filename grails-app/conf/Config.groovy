@@ -219,7 +219,8 @@ uiperformance.bundles = [
                         "placeholder",
                         "jquery.tools.min",
                         "application",
-                        "jquery.validate.min"
+                        "jquery.validate.min",
+                        "jwplayer"
                 ]],
         [type: 'css',
                 name: 'bundled',

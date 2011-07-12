@@ -1518,25 +1518,33 @@ body.site_detail .rent_me > div.rent_reserve .guarantee {
   display:none;
   position: absolute;
 }
-body.site_detail .rent_me > div.unit_info ul {
+body.checkout #booking_summary .unit_info {
+  border-top: 1px solid #ccc;
+}
+
+body.site_detail .rent_me .unit_info ul,
+body.checkout #booking_summary .unit_info ul {
   line-height: 110%;
   font-size: 12px;
   margin-bottom: 7px;
 }
-body.site_detail .rent_me > div.unit_info a.more_sizes {
+body.site_detail .rent_me .unit_info a.more_sizes,
+body.checkout #booking_summary .unit_info a.more_sizes {
   float: right;
   font-size: 13px;
   text-decoration: none;
   /*color: #025895;*/
   color: #1982de;
 }
-body.site_detail .rent_me div.unit_info h4 {
+body.site_detail .rent_me .unit_info h4,
+body.checkout #booking_summary .unit_info h4 {
   font-size: 14px;
   color: black;
   margin-bottom: 7px;
   color: #025895;
 }
-body.site_detail .rent_me div.unit_info ul.amenities {
+body.site_detail .rent_me .unit_info ul.amenities,
+body.checkout #booking_summary .unit_info ul.amenities {
   display: inline-block;
   width: 135px;
 }
@@ -1554,7 +1562,7 @@ body.checkout .move_in_quote {
   border-top: 1px solid #ccc;
 }
 body.checkout .cost_breakdown {
-  margin: 0 -10px;
+  margin: 5px -10px;
   border-bottom-width: 0;
 }
 .move_in_quote .offer_links a {
@@ -1642,33 +1650,33 @@ body.checkout form.checkout {
   font-size: 13px;
   margin-top: 10px;
 }
-body.checkout .booking_summary > h1 {
+body.checkout #booking_summary > h1 {
   color: #00529b;
 }
-body.checkout .booking_summary > div {
-  padding: 15px;
+body.checkout #booking_summary > div {
+  padding: 12px;
 }
-body.checkout .booking_summary > h1 {
-  padding: 15px 15px 5px;
+body.checkout #booking_summary > h1 {
+  padding: 15px 12px 5px;
 }
-body.checkout .booking_summary .site_info .image_container {
+body.checkout #booking_summary .site_info .image_container {
   width: 100px;
   height: 96px;
   display: inline-block;
   float: left;
   margin-right: 5px;
 }
-body.checkout .booking_summary .site_info img {
+body.checkout #booking_summary .site_info img {
   width: 100px;
 }
-body.checkout .booking_summary .site_info .tel {
+body.checkout #booking_summary .site_info .tel {
   font-weight: bold;
 }
-body.checkout .booking_summary .site_info p {
+body.checkout #booking_summary .site_info p {
   margin: 3px 0;
   line-height: 100%;
 }
-body.checkout .booking_summary .site_info h2 {
+body.checkout #booking_summary .site_info h2 {
   clear: none;
   color: black;
   font-size: 10pt;
@@ -1713,7 +1721,7 @@ body.checkout .customer_info {
   background-position: center bottom;
   background-repeat: repeat-x;
 }
-body.checkout .booking_summary {
+body.checkout #booking_summary {
   position: absolute;
   width: 300px;
   left: 660px;
@@ -1857,8 +1865,10 @@ body.checkout input.rent_me_button {
 .cost_breakdown td.item {
   font-weight: bold;
 }
-.cost_breakdown td.summary {
+.cost_breakdown tr.total td {
   border-top: 1px solid #aaa;
+}
+.cost_breakdown tr.total td.last {
   text-align: right;
   font-weight: bold;
 }
@@ -1871,11 +1881,11 @@ body.checkout input.rent_me_button {
   font-weight: bold;
 }
 
-body.checkout .booking_summary dt {
+body.checkout #booking_summary dt {
   float: left;
   clear: left;
 }
-body.checkout .booking_summary dd {
+body.checkout #booking_summary dd {
   float: right;
   clear: right;
 }

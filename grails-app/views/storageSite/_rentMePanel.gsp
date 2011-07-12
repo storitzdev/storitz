@@ -25,7 +25,7 @@
       </ul>
     </div>
   </div>
-  <g:render template="moveInQuote" model="[editable:true, site:site, unit:unit, promo:promo, promos:promos, totals:totals, moveInDate:moveInDate, insurance:insurance]" />
+  <g:render template="moveInQuote" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, insurance:insurance, totals:totals]" />
 </div>
 <g:hiddenField name="siteId" value="${site?.id}" />
 <g:hiddenField name="unitId" value="${unit?.id}" />

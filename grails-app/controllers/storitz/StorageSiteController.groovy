@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import java.text.SimpleDateFormat
 
-class StorageSiteController implements ApplicationContextAware {
+class StorageSiteController extends BaseTransactionController implements ApplicationContextAware {
 
   ApplicationContext applicationContext
   def authenticateService
@@ -619,48 +619,7 @@ class StorageSiteController implements ApplicationContextAware {
   }
 
   def rentMePanel = {
-    if(!(params.unitId && params.siteId)) {
-      render(status:400, contentType: "text/plain", text: "Missing required parameter(s) unitId and/or siteId.");
-    }
-    def promo = null;
-    if (params.promoId && params.promoId != "-1") {
-      promo = SpecialOffer.get(params.promoId as Long);
-      if (!promo) {
-        render(status:400, contentType: "text/plain", text: "promo ${params.promoId} could not be found");
-      }
-    }
-    def unit = StorageUnit.get(params.unitId as Long);
-    if (!unit) {
-      render(status:400, contentType: "text/plain", text: "unit ${params.unitId} could not be found");
-    }
-    def site = StorageSite.get(params.siteId as Long);
-    if (!site) {
-      render(status:400, contentType: "text/plain", text:"site ${params.siteId} could not be found");
-    }
-    // TODO: Verify that unit and promo both belong to site
-    def moveInDate = params.moveInDate ? new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate) : new Date();
-    def promos = offerFilterService.getValidFeaturedOffers(site, unit);
-    promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
-    // preload required insurance
-    def insurance = null;
-    if (site.noInsuranceWaiver) {
-      if (site.insurances.size() > 0) {
-        insurance = site.insurances.findAll { it.active }.min { it.premium }
-      } else {
-        // TODO: Log SEVERE warning
-      }
-    }
-    def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
-    render(template:"rentMePanel",
-            contentType: "text/html",
-            model:[editable:true,
-                   site:site,
-                   unit:unit,
-                   promo: promo,
-                   promos: promos,
-                   moveInDate:moveInDate,
-                   totals: totals,
-                   insurance: insurance]);
+    renderTransactionPanel("/storageSite/rentMePanel")
   }
 
   def directions = {

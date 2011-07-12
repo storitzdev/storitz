@@ -10,12 +10,17 @@ class UrlMappings {
 
     name checkout: "/checkout" {
       controller = "rentalTransaction"
-      action = "create"
+      action = "begin"
     }
 
     name rentMePanel: "/rent-me-panel" {
       controller = "storageSite"
       action = "rentMePanel"
+    }
+
+    name bookingSummaryPanel: "/booking-summary-panel" {
+      controller = "rentalTransaction"
+      action = "bookingSummaryPanel"
     }
 
     name state: "/self-storage/state/$state" {

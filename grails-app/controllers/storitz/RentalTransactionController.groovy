@@ -11,7 +11,7 @@ import storitz.constants.*
 import com.storitz.service.CostTotals
 import java.text.SimpleDateFormat
 
-class RentalTransactionController {
+class RentalTransactionController extends BaseTransactionController {
 
   def springSecurityService
   def costService
@@ -33,6 +33,10 @@ class RentalTransactionController {
   def list = {
     params.max = Math.min(params.max ? params.int('max') : 10, 100)
     [rentalTransactionInstanceList: RentalTransaction.list(params), rentalTransactionInstanceTotal: RentalTransaction.count()]
+  }
+
+  def bookingSummaryPanel = {
+    renderTransactionPanel("/rentalTransaction/bookingSummaryPanel")
   }
 
   void updateSessions(params) {
@@ -78,22 +82,24 @@ class RentalTransactionController {
     liveSessions[params.id] = callParams
   }
 
-  def create = {
-    def transaction
-    if (params.id) {
-      transaction = RentalTransaction.get(params.id as Long)
-    } else {
-      transaction = new RentalTransaction(params)
-      transaction.moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
-      transaction.site = StorageSite.get(params.siteId as Long)
+  def begin = {
+    def site = StorageSite.get(params.siteId as Long)
+    def unit = StorageUnit.get(params.unitId as Long)
+    def promos = offerFilterService.getValidFeaturedOffers(site, unit);
+    promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
+    def insurance = Insurance.get(params.insuranceId)
+    def promo = SpecialOffer.get(params.promoId)
+    def moveInDate = new Date();
+    if (params.moveInDate) {
+      try {
+        moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
+      }
+      catch (ParseException p) {
+        // TODO: Log warning
+      }
     }
-    def unit = StorageUnit.get(transaction.unitId as Long)
-    def promos = offerFilterService.getValidFeaturedOffers(transaction.site, unit);
-    promos.addAll(offerFilterService.getValidNonFeaturedOffers(transaction.site, unit));
-    def insurance = Insurance.get(transaction.insuranceId)
-    def promo = SpecialOffer.get(transaction.promoId)
-    def totals = costService.calculateTotals(transaction.site, unit, promo, insurance, transaction.moveInDate);
-    return [transaction:transaction, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals]
+    def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
+    [site:site, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals, moveInDate:moveInDate]
   }
 
   def ajaxPoll = {
@@ -107,36 +113,73 @@ class RentalTransactionController {
     render(status: 200, contentType: "application/json", text: "{ 'update':false }")
   }
 
-  def save = {
-
+  def create = {
     def site = StorageSite.get(params.site)
     params.remove('site')
-    def storageSize = StorageSize.get(params.searchSize as Long)
-    params.remove('searchSize')
+    def unit = StorageUnit.get(params.unitId as Long)
+    def promos = offerFilterService.getValidFeaturedOffers(site, unit);
+    promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
+    def insurance = Insurance.get(params.insuranceId)
+    def promo = SpecialOffer.get(params.promoId)
+    def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
 
-    def rentalTransactionInstance
-    if (params.id) {
-      rentalTransactionInstance = RentalTransaction.get(params.id as Long)
-      rentalTransactionInstance.properties = params
-    } else {
-      rentalTransactionInstance = new RentalTransaction(params)
-    }
+    def rentalTransactionInstance = new RentalTransaction(params)
     rentalTransactionInstance.status = TransactionStatus.BEGUN
     rentalTransactionInstance.bookingDate = new Date()
-    if (params.moveInDate && params.moveInDate instanceof Date) {
-      rentalTransactionInstance.moveInDate = params.moveInDate
-    } else {
+    rentalTransactionInstance.moveInDate = new Date();
+    if (params.moveInDate) {
       try {
-        rentalTransactionInstance.moveInDate = Date.parse('MM/dd/yy', params.moveInDate)
-      } catch (ParseException e) {
-        rentalTransactionInstance.moveInDate = new Date()
+        rentalTransactionInstance.moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
+      }
+      catch (ParseException p) {
+        // TODO: Log warning
       }
     }
     rentalTransactionInstance.site = site
-    rentalTransactionInstance.searchSize = storageSize
-    rentalTransactionInstance.unitType = UnitType.getEnumFromId(params.chosenType)
-    rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false)
+    rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false) // TODO: restore checkbox in UI
     rentalTransactionInstance.transactionType = rentalTransactionInstance.site.transactionType
+    // check if no promo selected
+    if (!params.promoId || params.promoId < 0) {
+      rentalTransactionInstance.promoId = -999;
+    } else {
+      rentalTransactionInstance.promoId = params.long('promoId')
+    }
+    if (!params.insuranceId || params.insuranceId < 0) {
+      rentalTransactionInstance.insuranceId = -999
+    } else {
+      rentalTransactionInstance.insuranceId = params.long('insuranceId')
+    }
+
+    if (!moveInService.isAvailable(rentalTransactionInstance)) {
+      def found = false
+      def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitType == unit.unitType && it.unitsize.id == unit.unitsize.id && it.id != unit?.id }.sort { it.price }
+      println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
+      for (myUnit in bestUnitList) {
+        rentalTransactionInstance.unitId = myUnit.id
+        if (moveInService.isAvailable(rentalTransactionInstance)) {
+          found = true
+          unit = myUnit
+          emailUnitNotFound("Desired unit not found. Alternate unit selected.",rentalTransactionInstance)
+          flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
+          break
+        } else {
+          if (--myUnit.unitCount <= 0) {
+            println "Removing unit from inventory ${myUnit.id}"
+            rentalTransactionInstance.site.removeFromUnits(myUnit)
+            rentalTransactionInstance.site.save(flush: true)
+            emailUnitNotFound("Removing unit from inventory ${myUnit.id}",rentalTransactionInstance)
+          }
+        }
+      }
+      if (!found) {
+        emailUnitNotFound("Unit not found during rental transaction!",rentalTransactionInstance)
+        flash.message = "Unit already reserved - refresh and try again"
+      }
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals]);
+      return
+    }
+
+    // TODO: Verify that commission is recorded with transaction!
 
     if (!springSecurityService.principal.equals('anonymousUser')) {
       def person = User.findByUsername(springSecurityService.principal.username)
@@ -153,25 +196,26 @@ class RentalTransactionController {
       rentalTransactionInstance.isCallCenter = false
     }
 
-    // check if no promo selected
-    if (!params.promoId) {
-      rentalTransactionInstance.promoId = -999;
-    } else if (!rentalTransactionInstance.promoId) {
-      rentalTransactionInstance.promoId = params.long('promoId')
+    if (!rentalTransactionInstance.validate()) {
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals]);
+      return;
     }
-    if (!params.insuranceId) {
-      rentalTransactionInstance.insuranceId = -999
-    } else if (!rentalTransactionInstance.insuranceId) {
-      rentalTransactionInstance.insuranceId = params.long('insuranceId')
-    }
-    if (rentalTransactionInstance.validate() && rentalTransactionInstance.save(flush: true)) {
-      redirect(action: "payment", id: rentalTransactionInstance.id)
-    } else {
-      println "RentalTransaction errors:"
-      rentalTransactionInstance.errors.allErrors.each {
-        println it
+
+    def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
+    rentalTransactionInstance.feedMoveInCost = moveInDetails?.total()
+
+    if (rentalTransactionInstance.site.transactionType == TransactionType.RESERVATION && rentalTransactionInstance.site.rentalFee == 0) {
+      if (!performTransaction(rentalTransactionInstance, true)) {
+        render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals]);
+        render;
       }
-      redirect(controller: "storageSite", action: "detail", model: [rentalTransactionInstance: rentalTransactionInstance, rentalTransactionId: rentalTransactionInstance.id, id: site.id])
+    }
+
+    if (!rentalTransactionInstance.save(flush: true)) {
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals]);
+    }
+    else {
+      redirect(mapping:'thank_you', params:[transactionId:rentalTransactionInstance.id])
     }
   }
 
