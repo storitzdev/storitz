@@ -18,11 +18,33 @@ class SearchController {
 
     double lat
     double lng
-    def zip
+    def address
     def city
     def state
+    def zip
 
     def index = {
+      def queryTerm = params.where;
+      def geoResult = geocodeService.geocode(queryTerm)
+
+      handleGeocode(geoResult)
+      params.address = address
+      params.city = city
+      params.state = state
+      params.zip = zip
+
+      SearchCriteria criteria = new SearchCriteria();
+      criteria.searchType = SearchType.STORAGE;
+      criteria.queryMode = QueryMode.FIND_UNITS;
+      criteria.geoType = GeoType.CITY;
+      criteria.centroid.lat = lat;
+      criteria.centroid.lng = lng;
+      criteria.city = params.city;
+      criteria.state = State.fromText(params.state);
+
+      def searchResult = findClientSites(criteria);
+
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
     }
 
     def metro = {
@@ -193,11 +215,19 @@ class SearchController {
 
     boolean handleGeocode(geoResult) {
         if (geoResult && geoResult.status == "OK") {
+            def street_number = ""
+            def route = ""
             lng = geoResult.results[0].geometry.location.lng
             lat = geoResult.results[0].geometry.location.lat
             log.info("geocoder says: " + lat + "," + lng);
             for (comp in geoResult.results[0].address_components) {
                 switch (comp.types[0]) {
+                    case "street_number":
+                        street_number = comp.long_name
+                        break
+                    case "route":
+                        route = comp.long_name
+                        break
                     case "locality":
                         city = comp.long_name
                         break
@@ -208,6 +238,14 @@ class SearchController {
                         zip = comp.long_name
                         break
                 }
+            }
+            if (street_number && route) {
+              address = "${street_number} ${route}"
+            }
+            // JM: It makes sense to show only street, if the user gives us that
+            // it does not make sense to give only address sans street
+            else if (route) {
+              address = route
             }
             return true
         } else {
