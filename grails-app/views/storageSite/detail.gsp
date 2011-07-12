@@ -91,35 +91,45 @@
               <li><a class="print" href="#" onclick="window.print();">Print</a></li>
             </ul>
             ${site.description}
-         </p>
-            %{--Insert site features here--}%
-            <div class="site_features">
-                <h2>Site Features</h2>
-                <div>
-                    <h3 class="safety">Safety/Security</h3>
-                    <ul>
-                        <g:each in="${site.securityItems}" status="i" var="item">
-                            <li ${i == site.securityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
-                        </g:each>
-                    </ul>
+          </p>
+          <div class="all_units">
+            <h2><a name="all_units">Available Units at This Facility</a></h2>
+            <ul>
+              <g:each in="${availableUnits}" var="entry">
+              <li class="${entry['unit'].unitsize.description.replaceAll(' ', '')}">
+                <div class="unit_info">
+                  <h3><g:render template="unitSizeLabel" model="[unit:entry['unit']]" /></h3>
+                  <ul class="amenities">
+                    <li>Climate Control: <g:formatBoolean boolean="${unit.isTempControlled}" true="Yes" false="No" /></li>
+                    <li>Resident Manager: <g:formatBoolean boolean="${site.isManagerOnsite}" true="Yes" false="No" /></li>
+                    <li>Elevator: <g:formatBoolean boolean="${site.hasElevator}" true="Yes" false="No" /></li>
+                    <li><g:if test="${site.freeTruck == 'FREE'}">Free Move-In Truck: Yes </g:if><g:elseif test="${site.freeTruck == 'RENTAL'}">Move-In Truck: Yes</g:elseif><g:else>Move-In Truck: No</g:else></li>
+                    <li>Unit Alarmed: <g:formatBoolean boolean="${unit.isAlarm || site.isUnitAlarmed}" true="Yes" false="No" /></li>
+                    <li>Gated Entry: <g:formatBoolean boolean="${site.isGate}" true="Yes" false="No" /></li>
+                    <li>Keypad Entry: <g:formatBoolean boolean="${site.isKeypad}" true="Yes" false="No" /></li>
+                    <li>Security Cameras: <g:formatBoolean boolean="${site.isCamera}" true="Yes" false="No" /></li>
+                  </ul>
                 </div>
-                <div>
-                    <h3 class="convenience">Convenience</h3></li>
-                    <ul>
-                        <g:each in="${site.convenienceItems}" status="i" var="item">
-                            <li ${i == site.convenienceItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
-                        </g:each>
-                    </ul>
+                <div class="special">${entry['promo']?.promoName}</div>
+                <div class="rent_me">
+                  <g:form mapping="checkout" method="GET">
+                    <g:render template="unitPrice" model="[unit:entry['unit']]" />
+                    <g:submitButton name="action"
+                                    value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
+                                    class="rent_me_button" />
+                    <g:hiddenField id="siteId_${entry['unit'].id}" name="siteId" value="${site?.id}" />
+                    <g:hiddenField id="unitId_${entry['unit'].id}" name="unitId" value="${entry['unit'].id}" />
+                    <g:hiddenField id="moveInDate_${entry['unit'].id}" name="moveInDate" value="${formatDate(format:'yyyy-MM-dd', date:moveInDate)}" />
+                    <g:if test="${entry['promo']}">
+                      <g:hiddenField id="promoId_${entry['unit'].id}" name="promoId" value="${entry['promo']?.id}" />
+                    </g:if>
+                    <g:hiddenField id="insuranceId_${entry['unit'].id}" name="insuranceId" value="${insurance?.id}" />
+                  </g:form>
                 </div>
-                <div class="last">
-                    <h3 class="amenities">Amenities</h3></li>
-                    <ul>
-                        <g:each in="${site.amenityItems}" status="i" var="item">
-                            <li ${i == site.amenityItems.size() - 1 ? 'class="last"' : ''}>${item.bullet}</li>
-                        </g:each>
-                    </ul>
-                </div>
-            </div>
+              </li>
+            </g:each>
+            </ul>
+          </div>
           <a name="tab_overview">&nbsp;</a>
         </div>
 

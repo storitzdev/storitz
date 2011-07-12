@@ -538,18 +538,29 @@ class StorageSiteController implements ApplicationContextAware {
 
     sizeList.sort { it.width * it.length }
 
-    def bestUnit
+    def units;
     // if a size was chosen, use it, else get the "best" price
     if (params.unitType && unitSize) {
-      bestUnit = site.units.findAll { it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
-      if (!bestUnit) {
-        bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
+      units = site.units.findAll { it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }
+      if (!units || units.size() == 0) {
+        units = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }
       }
     } else if (unitSize) {
-      bestUnit = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }.min { it.price }
+      units = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }
     } else {
       // TODO - decide on best price or best price for a given size
-      bestUnit = site.units.findAll { it.unitsize.searchType == searchType && it.unitCount > site.minInventory }.min { it.price }
+      units = site.units.findAll { it.unitsize.searchType == searchType && it.unitCount > site.minInventory }
+    }
+    def bestUnit = units.min { it.bestUnitPrice }
+    units.sort {}
+    def availableUnits = []
+    units.each { unit ->
+      def map = [unit:unit]
+      def offers = offerFilterService.getValidFeaturedOffers(site, unit);
+      if (offers != null && offers.size() > 0) {
+        map["promo"] = offers[0];
+      }
+      availableUnits << map
     }
 
     // >>> END match smartCall action code <<<
@@ -604,7 +615,7 @@ class StorageSiteController implements ApplicationContextAware {
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
             promoId: params.promoId, insurance: insurance, video: video, propertyOperatorList: propertyOperatorList,
-            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos, totals: totals]
+            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos, totals: totals, availableUnits: availableUnits]
   }
 
   def rentMePanel = {

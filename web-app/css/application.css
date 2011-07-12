@@ -1271,7 +1271,7 @@ body.site_detail .panes .overview .photos {
   display: inline-block;
   float: left;
   width: 290px;
-  padding-right: 2px;
+  padding-right: 5px;
 }
 
 body.site_detail .panes .overview .photos ul.image_list {
@@ -1279,6 +1279,54 @@ body.site_detail .panes .overview .photos ul.image_list {
   overflow: hidden;
   padding: 0 0 11px;
   margin: 0 0 8px;
+}
+body.site_detail .panes .overview .all_units h2 {
+  font-size: 13pt;
+  padding: 5px 5px 0;
+  margin-bottom: 10px;
+}
+body.site_detail .panes .overview .all_units > ul > li:first-child {
+  border-top-color: #777;
+}
+body.site_detail .panes .overview .all_units > ul > li {
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  padding-left: 150px;
+  vertical-align: top;
+  height: 100px;
+  background: url("../images/v2/unit-size-placeholder-151x86.jpg") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units > ul > li > div {
+  display: inline-block;
+  float: left;
+  /*border: 1px solid pink;*/
+  /*margin: 1px;*/
+}
+body.site_detail .panes .overview .all_units .unit_info {
+  width: 245;
+}
+body.site_detail .panes .overview .all_units .special {
+  width: 125px;
+  color: #00529b;
+  height: 100px;
+}
+body.site_detail .panes .overview .all_units .rent_me {
+  width: 120px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+body.site_detail .panes .overview .all_units .rent_me .price {
+  margin-bottom: 5px;
+}
+body.site_detail .panes .overview .all_units .rent_me input.rent_me_button {
+  display: inline-block;
+  background:  url("../images/v2/buttons/rent-me-blue-106x38.png") no-repeat;
+  width: 106px;
+  height:38px;
+  text-indent: -9999px;
+  border:none;
 }
 
 div.photos ul.image_list li {
@@ -1374,7 +1422,7 @@ body.site_detail .rent_me > div {
   border-style: solid;
 }
 
-body.site_detail .rent_me > div.price .original_price {
+body.site_detail .rent_me div.price .original_price {
   font-size: 16px;
   font-weight: normal;
   color: red;
@@ -1382,13 +1430,24 @@ body.site_detail .rent_me > div.price .original_price {
 }
 
 body.site_detail .rent_me > div.price {
-  font: 22px arial, verdana, helvetica, sans-serif;
+  font: 22px arial, helvetica, verdana, sans-serif;
   font-weight: bold;
   padding-bottom: 0;
   vertical-align: bottom;
   text-align: center;
 }
+body.site_detail .all_units .rent_me {
+  text-align: center;
+}
+body.site_detail .all_units .rent_me div.price {
+  font-size: 16px;
+  font-weight: bold;
+}
 
+body.site_detail .all_units .rent_me div.price .original_price {
+  font-size: 13px;
+  display: block;
+}
 body.site_detail .rent_me > div.rent_reserve {
   padding-bottom: 4px;
 }
@@ -1407,11 +1466,14 @@ body.site_detail .rent_me > div.rent_reserve input.rent_me_button {
   border-width: 0;
 }
 
-body.site_detail .rent_me > div.price .per_month {
+body.site_detail .rent_me div.price .per_month {
   font-size: 12px;
   font-weight: normal;
 }
 
+body.site_detail .rent_me .all_units div.price .per_month {
+  font-size: 10px;
+}
 body.site_detail .rent_me > div.rent_reserve .guarantee {
   background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat;
   background-position: 50px center;
@@ -1663,7 +1725,7 @@ body.checkout .booking_summary {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   box-shadow: 0 0 8px #cccccc;
-  background-image: url("..//images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
+  background-image: url("../images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
   background-position: center bottom;
   background-repeat: repeat-x;
 }

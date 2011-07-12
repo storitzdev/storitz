@@ -128,7 +128,7 @@
                     onclick="window.open(this.href, '_blank');
                     return false;">Storitz Inc. Terms of Use</a>
     <g:if test="${transaction.site.rentalAgreement}">
-    and the <a href="${resource(file: rentalAgreement.site.rentalAgreement.src())}" onclick="window.open(this.href, '_blank'); return false;">${transaction.site.feed.operatorName} Terms and Conditions</a>
+    and the <a href="${resource(file: transaction.site.rentalAgreement.src())}" onclick="window.open(this.href, '_blank'); return false;">${transaction.site.feed.operatorName} Terms and Conditions</a>
     </g:if>
     </div>
   </div>

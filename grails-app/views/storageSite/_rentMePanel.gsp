@@ -1,10 +1,6 @@
-<%@ page import="storitz.constants.PromoType; storitz.constants.UnitType; storitz.constants.TransactionType" %>
+<%@ page import="storitz.constants.TransactionType" %>
 <div class="rent_me">
-  <div class="price">
-    <g:formatNumber number="${unit.bestUnitPrice}" type="currency" currencyCode="USD" />
-    <g:if test="${unit.price && unit.price > unit.bestUnitPrice}"><span class="original_price"><g:formatNumber number="${unit.price}" type="currency" currencyCode="USD" /></span></g:if>
-    <div class="per_month">per month</div>
-  </div>
+  <g:render template="unitPrice" model="[unit:unit]" />
   <div class="rent_reserve">
     <g:submitButton name="action"
                     value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
@@ -12,38 +8,14 @@
     <div class="guarantee">Storitz Price Guarantee</div>
   </div>
   <div class="unit_info">
-    <a class="more_sizes" href="#">All sizes</a>
-    <h4>
-      ${unit.displaySize ? unit.displaySize.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2'") : "??"}
-      <g:if test="${unit.unitType == UnitType.INTERIOR}">
-        Interior Unit (Ground Floor)
-      </g:if>
-      <g:elseif test="${unit.unitType == UnitType.DRIVEUP}">
-        Drive-Up Unit
-      </g:elseif>
-      <g:elseif test="${unit.unitType == UnitType.UPPER}">
-        Upper Floor Unit
-      </g:elseif>
-      <g:elseif test="${unit.unitType == UnitType.COVERED}">
-        Covered Parking Space
-      </g:elseif>
-      <g:elseif test="${unit.unitType == UnitType.COVERED}">
-        Covered Parking Space
-      </g:elseif>
-      <g:elseif test="${unit.unitType == UnitType.COVERED}">
-        Uncovered Parking Space
-      </g:elseif>
-      <g:else>
-        Unit
-      </g:else>
-    </h4>
+    <a class="more_sizes" href="#all_units">See all sizes</a>
+    <h4><g:render template="unitSizeLabel" model="[unit:unit]" /></h4>
     <div>
       <ul class="amenities">
         <li>Climate Control: <g:formatBoolean boolean="${unit.isTempControlled}" true="Yes" false="No" /></li>
         <li>Resident Manager: <g:formatBoolean boolean="${site.isManagerOnsite}" true="Yes" false="No" /></li>
         <li>Elevator: <g:formatBoolean boolean="${site.hasElevator}" true="Yes" false="No" /></li>
-        <li><g:if test="${site.freeTruck == 'FREE'}">Free </g:if><g:elseif test="${site.freeTruck == 'RENTAL'}">Rental </g:elseif>Truck:
-        <g:formatBoolean boolean="${site.freeTruck == 'NONE'}" true="No" false="Yes" /></li>
+        <li><g:if test="${site.freeTruck == 'FREE'}">Free Move-In Truck: Yes </g:if><g:elseif test="${site.freeTruck == 'RENTAL'}">Move-In Truck: Yes</g:elseif><g:else>Move-In Truck: No</g:else></li>
       </ul>
       <ul class="amenities">
         <li>Unit Alarmed: <g:formatBoolean boolean="${unit.isAlarm || site.isUnitAlarmed}" true="Yes" false="No" /></li>
