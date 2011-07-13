@@ -93,6 +93,7 @@
             ${site.description}
           </p>
           <div class="all_units">
+            <g:if test="${availableUnits?.size()}">
             <h2><a name="all_units">Available Units at This Facility</a></h2>
             <ul>
               <g:each in="${availableUnits}" var="entry">
@@ -129,6 +130,7 @@
               </li>
             </g:each>
             </ul>
+            </g:if>
           </div>
           <a name="tab_overview">&nbsp;</a>
         </div>
@@ -177,25 +179,32 @@
   </div>
   <div id="right_panel">
     <g:form mapping="checkout" method="GET" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
+      <g:if test="${unit != null}">
       <g:render template="rentMePanel" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, totals:totals]"/>
+      </g:if>
+      <g:else>
+      <div class="rent_me" style="padding:30px; background: none">
+        <h2 style="font-size: 14pt; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-style: italic; color: #999;">No units currently available at this facility.</h2>
+      </div>
+      </g:else>
     </g:form>
     <g:if test="${nearbyUnits?.size() > 0}">
-      <div class="sim_units">
-        <h1>Similar Units Nearby</h1>
-        <ul>
-          <li>
-            <img src="#" />
-            <h2>Pacoima - Glen Oaks Blvd</h2>
-            <div class="price">
-              $79.00<span>/mo.</span>
-            </div>
-            <p>5.8 miles from this facility</p>
-          </li>
-        </ul>
-        <div class="units_bottom">
-          <a href="#">View More...</a>
-        </div>
+    <div class="sim_units">
+      <h1>Similar Units Nearby</h1>
+      <ul>
+        <li>
+          <img src="#" />
+          <h2>Pacoima - Glen Oaks Blvd</h2>
+          <div class="price">
+            $79.00<span>/mo.</span>
+          </div>
+          <p>5.8 miles from this facility</p>
+        </li>
+      </ul>
+      <div class="units_bottom">
+        <a href="#">View More...</a>
       </div>
+    </div>
     </g:if>
   </div>
 </div>

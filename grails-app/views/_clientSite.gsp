@@ -34,10 +34,11 @@
         <storitz:calcDistance lat1="${lat}" lat2="${site.lat}" lng1="${lng}" lng2="${site.lng}"/> miles
     </div>
 </div>
+<g:if test="${unitInfo != null}">
 <div class="unit_info">
     <div class="dimensions">${unitInfo?.sizeDescription?.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2' Unit")}</div>
     <div class="location">${unitInfo?.unitType}</div>
-    <ul id="site_features">
+    <ul class="site_features">
         <g:if test="${unitInfo?.isTempControlled}"><li>Climate control</li></g:if>
         <g:if test="${site.isKeypad}"><li>Keypad access</li></g:if>
         <g:if test="${site.isCamera}"><li>Security cameras</li></g:if>
@@ -68,3 +69,20 @@
     <div class="permonth">per month</div>
     <g:link mapping='siteLink2' class="name" params="${site_url_params}">Rent Me!</g:link>
 </div>
+</g:if>
+<g:else>
+<div class="unit_info">
+    <div class="unavailable">No Units Available</div>
+    <ul class="site_features">
+        <g:if test="${site.isKeypad}"><li>Keypad access</li></g:if>
+        <g:if test="${site.isCamera}"><li>Security cameras</li></g:if>
+        <g:if test="${site.isGate}"><li>Gated property</li></g:if>
+        <g:if test="${site.isUnitAlarmed}"><li>Alarm in unit</li></g:if>
+        <g:if test="${site.isManagerOnsite}"><li>On-Site manager</li></g:if>
+        <g:if test="${site.hasElevator}"><li>Elevator access</li></g:if>
+        <g:if test="${site.freeTruck == TruckType.FREE || site.freeTruck == TruckType.RENTAL}"><li>Free truck!</li></g:if>
+    </ul>
+</div>
+<div class="special">&nbsp;</div>
+<div class="rent_me">&nbsp;</div>
+</g:else>

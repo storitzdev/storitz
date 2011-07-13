@@ -815,6 +815,10 @@ a.toggle_map_view {
   font-weight: bold;
 }
 
+#search_results .unit_info .unavailable {
+  font-style: italic;
+  color: #999;
+}
 #search_results .unit_info .dimensions {
   font-weight: bold
 }
