@@ -163,8 +163,6 @@ class RentalTransactionController extends BaseTransactionController {
       return
     }
 
-    // TODO: Verify that commission is recorded with transaction!
-
     if (!springSecurityService.principal.equals('anonymousUser')) {
       def person = User.findByUsername(springSecurityService.principal.username)
       rentalTransactionInstance.isCallCenter = (UserRole.userHasRole(person, 'ROLE_CALLCENTER'))
@@ -323,7 +321,7 @@ class RentalTransactionController extends BaseTransactionController {
     }
   }
 
-  private performTransaction(RentalTransaction rentalTransactionInstance, boolean isReservation) {
+  private boolean performTransaction(RentalTransaction rentalTransactionInstance, boolean isReservation) {
     SpecialOffer promo = null
     if (rentalTransactionInstance.promoId > 0) {
       promo = SpecialOffer.get(rentalTransactionInstance.promoId)
