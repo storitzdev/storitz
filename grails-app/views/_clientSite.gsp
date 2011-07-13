@@ -35,7 +35,7 @@
     </div>
 </div>
 <div class="unit_info">
-    <div class="dimensions">${unitInfo?.sizeDescription.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2' Unit")}</div>
+    <div class="dimensions">${unitInfo?.sizeDescription?.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2' Unit")}</div>
     <div class="location">${unitInfo?.unitType}</div>
     <ul id="site_features">
         <g:if test="${unitInfo?.isTempControlled}"><li>Climate control</li></g:if>
@@ -60,7 +60,7 @@
     <div class="your_price">
         <g:formatNumber number="${unitInfo?.yourPrice}" type="currency" currencyCode="USD"/>
     </div>
-    <g:if test="$unitInfo.listPrice">
+    <g:if test="$unitInfo?.listPrice">
         <div class="list_price">
             <g:formatNumber number="${unitInfo?.listPrice }" type="currency" currencyCode="USD"/>
         </div>

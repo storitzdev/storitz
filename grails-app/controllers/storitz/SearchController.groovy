@@ -15,6 +15,10 @@ class SearchController {
     def geocodeService
     def costService
     def offerFilterService
+    def unitSizeService
+    def unitSize
+    def unitType
+    def amenities
 
     double lat
     double lng
@@ -41,10 +45,29 @@ class SearchController {
       criteria.centroid.lng = lng;
       criteria.city = params.city;
       criteria.state = State.fromText(params.state);
+      criteria.searchSize = 0 // Default. Overridden below.
+
+      def sz = getUnitSize(params.unit_size)
+      if (sz) {
+        unitSize = params.unit_size
+        criteria.searchSize = sz.id
+      }
+
+      def tp = getUnitType(params.unit_type)
+      if (tp) {
+        unitType = params.unit_type
+        //TODO: Make search criteria aware of unit type!
+      }
+
+      def am = getAmenities(params.amenity)
+      if (am.size()) {
+        amenities = am
+        //TODO: Make search criteria aware of amenities
+      }
 
       def searchResult = findClientSites(criteria);
 
-      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities]
     }
 
     def metro = {
@@ -82,7 +105,7 @@ class SearchController {
         criteria.city = seoDecodedCity;
         criteria.state = State.fromText(params.state);
         def searchResult = findClientSites(criteria);
-        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng]
+        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: 'all', unitType: null, amenities: [:]]
     }
 
     def results = {
@@ -120,13 +143,18 @@ class SearchController {
             log.info("processing site " + site.id)
             def availableUnitsMap = [:] // using a map because I don't know how to use a set, and I don't want to do linear search thru an ArrayList
             site.units.each { unit ->
-                if (unit.unitCount > site.minInventory) {
+                if (unit.unitCount > site.minInventory && criteria.searchSize <= unit.unitsize.id) {
                   availableUnitsMap[unit.id] = unit
                 }
             }
             def featuredOffersMap = [:] // maps units to lists of featured special offers
             if (criteria.queryMode == QueryMode.FIND_UNITS && availableUnitsMap.size() == 0) {
-              throw new Error("QueryMode.FIND_UNITS but site ${site.id} has no available units!")
+              // JM: Don't panic. If the user asks for 10x30 (for example) and one or more of the
+              //     sites in their region has no 10x30, then simply remove that site. Tossing an
+              //     exception here causes the entire query for all sites to fail.
+              //throw new Error("QueryMode.FIND_UNITS but site ${site.id} has no available units!")
+              sitesToRemove.add(site)
+              continue;
             }
             if (criteria.featuredOfferTag != null) {
                 // Find all featured specials for the facility; then find all available units that are
@@ -262,5 +290,45 @@ class SearchController {
         }
         return false
     }
+
+  def getUnitSize(sz) {
+    if (!sz) {
+      return null
+    }
+
+    def sza = sz.split("x")
+    def width = sza[0] as int
+    def length = sza[1] as int
+
+    return unitSizeService.getUnitSize(width,length,SearchType.STORAGE)
+  }
+
+  def getUnitType (tp) {
+    if (!tp) {
+      return null
+    }
+
+    //  select distinct unit_type from storage_unit where unitsize_id in (
+    //    select id from storage_size where search_type like 'STORAGE');
+    if (tp == 'interior') return 'INTERIOR'
+    if (tp == 'upper') return 'UPPER'
+    if (tp == 'drive-up') return 'DRIVEUP'
+
+    return null
+  }
+
+  def getAmenities (amenity) {
+    if (!amenity) {
+      return [:]
+    }
+
+    def amen = [:]
+
+    for (a in amenity) {
+      amen[a]=true
+    }
+
+    return amen
+  }
 
 }

@@ -4,6 +4,7 @@
 body {
   font-family: Verdana;
   font-size: 12px;
+  background: white;
   background-image: url(../images/v2/home/backgrounds/topbar.gif);
   background-repeat: repeat-x;
   /*background-color: #fafafa;*/

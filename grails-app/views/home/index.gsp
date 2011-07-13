@@ -27,22 +27,24 @@
                 <legend><span>&#x25b6;</span> More Search Options</legend>
                 <div id="advanced_search_controls">
                     <div class="amenities">
-                        <input id="cc_y" type="checkbox" value="y" name="cc" />
-                        <label for="cc_y">Climate Control/AC</label>
+                        <input id="amenity_cc" type="checkbox" value="cc" name="amenity" />
+                        <label for="amenity_cc">Climate Control/AC</label>
                         <br />
-                        <input id="24h_y" type="checkbox" value="y" name="24h" />
-                        <label for="24h_y">24-hour access</label>
+                        <input id="amenity_24hr" type="checkbox" value="24hr" name="amenity" />
+                        <label for="amenity_24hr">24-hour Access</label>
                         <br />
-                        <input id="truck_y" type="checkbox" value="y" name="truck" />
-                        <label for="truck_y">Free move-in truck</label>
-                    </div>
+                        <input id="amenity_alarm" type="checkbox" value="alarm" name="amenity" />
+                        <label for="amenity_alarm">In-Unit Alarm</label>
+                        <br />
+                     </div>
                     <div class="unit_size">
                         <label for="unit_size">Unit size:</label>
-                        <select id="unit_size">
+                        <select id="unit_size" name="unit_size">
                             <option value="">Any</option>
                             <option value="5x5">5 x 5</option>
                             <option value="5x10">5 x 10</option>
                             <option value="10x10">10 x 10</option>
+                            <option value="10x15">10 x 15</option>
                             <option value="10x20">10 x 20</option>
                             <option value="10x30">10 x 30</option>
                         </select>
@@ -50,9 +52,10 @@
                     </div>
                     <div class="unit_type">
                         <label for="unit_type">Unit type:</label>
-                        <select id="unit_type">
+                        <select id="unit_type" name="unit_type">
                             <option value="">Any</option>
                             <option value="interior">Interior unit</option>
+                            <option value="upper">Upper unit</option>
                             <option value="drive-up">Drive-up unit</option>
                         </select>
                         <a href="#" title="What does this mean?">What does this mean?</a>

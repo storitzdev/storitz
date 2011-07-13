@@ -10,31 +10,32 @@
         <div>
             <h2>Unit size</h2>
             <ul>
-                <li><input type="radio" name="size" value="5x5" id="size_5x5"/><label for="size_5x5">5 x 5</label></li>
-                <li><input type="radio" name="size" value="5x5" id="size_5x10"/><label for="size_5x10">5 x 10</label></li>
-                <li><input type="radio" name="size" value="5x5" id="size_10x10"/><label for="size_10x10">10 x 10</label></li>
-                <li><input type="radio" name="size" value="5x5" id="size_10x15" /><label for="size_10x15">10 x 15</label></li>
-                <li><input type="radio" name="size" value="5x5" id="size_10x20"/><label for="size_10x20">10 x 20</label></li>
-                <li><input type="radio" name="size" value="5x5" id="size_10x30"/><label for="size_10x30">10 x 30</label></li>
-                <li><input type="radio" name="size" value="all" id="size_all"/><label for="size_all">See All</label></li>
+                <li><input type="radio" name="size" value="5x5" id="size_5x5" <g:if test="${unitSize == '5x5'}">checked="checked"</g:if> /><label for="size_5x5">5 x 5</label></li>
+                <li><input type="radio" name="size" value="5x10" id="size_5x10" <g:if test="${unitSize == '5x10'}">checked="checked"</g:if> /><label for="size_5x10">5 x 10</label></li>
+                <li><input type="radio" name="size" value="10x10" id="size_10x10" <g:if test="${unitSize == '10x10'}">checked="checked"</g:if> /><label for="size_10x10">10 x 10</label></li>
+                <li><input type="radio" name="size" value="10x15" id="size_10x15" <g:if test="${unitSize == '10x15'}">checked="checked"</g:if> /><label for="size_10x15">10 x 15</label></li>
+                <li><input type="radio" name="size" value="10x20" id="size_10x20" <g:if test="${unitSize == '10x20'}">checked="checked"</g:if> /><label for="size_10x20">10 x 20</label></li>
+                <li><input type="radio" name="size" value="10x30" id="size_10x30" <g:if test="${unitSize == '10x30'}">checked="checked"</g:if> /><label for="size_10x30">10 x 30</label></li>
+                <li><input type="radio" name="size" value="all" id="size_all" <g:if test="${unitSize == ''}">checked="checked"</g:if> /><label for="size_all">See All</label></li>
             </ul>
         </div>
         <div>
             <h2>Unit type</h2>
             <ul>
-                <li><input type="radio" name="type" value="interior" id="type_interior"/><label for="type_interior">Interior</label></li>
-                <li><input type="radio" name="type" value="upper" id="type_upper"/><label for="type_upper">Upper</label></li>
-                <li><input type="radio" name="type" value="driveup" id="type_driveup"/><label for="type_driveup">Drive-Up</label></li>
-                <li><input type="radio" name="type" value="all" id="type_all"/><label for="type_all">See All</label></li>
+                <li><input type="radio" name="type" value="interior" id="type_interior" <g:if test="${unitType == 'interior'}">checked="checked"</g:if> /><label for="type_interior">Interior</label></li>
+                <li><input type="radio" name="type" value="upper" id="type_upper" <g:if test="${unitType == 'upper'}">checked="checked"</g:if> /><label for="type_upper">Upper</label></li>
+                <li><input type="radio" name="type" value="driveup" id="type_driveup" <g:if test="${unitType == 'drive-up'}">checked="checked"</g:if> /><label for="type_driveup">Drive-Up</label></li>
+                <li><input type="radio" name="type" value="all" id="type_all" <g:if test="${unitType == ''}">checked="checked"</g:if> /><label for="type_all">See All</label></li>
             </ul>
         </div>
         <div>
             <h2>Amenities</h2>
             <ul>
-                <li><input type="checkbox" name="amenity" value="cc" id="amenity_cc"/><label for="amenity_cc">Climate Control</label></li>
-                <li><input type="checkbox" name="amenity" value="24hr" id="amenity_24hr"/><label for="amenity_24hr">24-hour Access</label></li>
-                <li><input type="checkbox" name="amenity" value="alarm" id="amenity_alarm"/><label for="amenity_alarm">In-Unit Alarm</label></li>
-            </ul>
+                <li><input type="checkbox" name="amenity" value="cc" id="amenity_cc" <g:if test="${amenities['cc']}">checked="checked"</g:if> /><label for="amenity_cc">Climate Control</label></li>
+                <li><input type="checkbox" name="amenity" value="24hr" id="amenity_24hr" <g:if test="${amenities['24hr']}">checked="checked"</g:if> /><label for="amenity_24hr">24-hour Access</label></li>
+                <li><input type="checkbox" name="amenity" value="alarm" id="amenity_alarm" <g:if test="${amenities['alarm']}">checked="checked"</g:if> /><label for="amenity_alarm">In-Unit Alarm</label></li>
+                <li><input type="checkbox" name="amenity" value="truck" id="amenity_truck" <g:if test="${amenities['truck']}">checked="checked"</g:if> /><label for="amenity_truck">Free Move-In Truck</label></li>
+               </ul>
         </div>
     </div>
 </g:form>
