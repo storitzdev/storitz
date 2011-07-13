@@ -548,6 +548,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     site.zipcode = store_zip
     site.phone = store_phone
     if (store_access24hr) {
+      site.isKeypad = true;
       add_bullet(site.convenienceItems,"24 Hour Access")
     }
     if (store_truckrental) {
@@ -567,6 +568,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     }
     if (store_electronicgate) {
       site.isGate = true
+      site.isKeypad = true;
       add_bullet(site.securityItems,"Electronic Gate")
     }
     if (store_fencedandlighted) {
