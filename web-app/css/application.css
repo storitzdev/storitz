@@ -1046,7 +1046,9 @@ body.site_detail .container_detail {
   margin-top: 10px;
   position: relative;
 }
-
+body.site_detail h2.none {
+  padding:  13px;
+}
 body.site_detail {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -1369,7 +1371,7 @@ body.site_detail .panes .overview .description {
 body.site_detail .panes .overview ul.action_links {
   display: inline-block;
   float: right;
-  margin: 0 0 10px 10px;
+  margin: 0 0 29px 10px;
   padding-left: 10px;
   border-left: 1px dotted #ccc;
 }
@@ -2237,4 +2239,93 @@ body.site_detail h2.video_title {
     font-weight: bold;
     font-size: 16px;
     font-family: helvetica;
+}
+/* detail page reviews tab */
+.overview div.yelp_rating {
+    width: 266px;
+    height: 73px;
+    display: inline-block;
+    float: left;
+}
+.overview div.yelp_rating img {
+    width: 84px;
+    height: 17px;
+    display: inline-block;
+    padding: 2px 5px 0 30px;
+}
+.overview div.yelp_rating p {
+    display: inline-block;
+    position: absolute;
+    top: 19px;
+    font-weight: bold;
+    font-size: 13px;
+}
+div.yelp_pic {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+div.yelp_pic img {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+div.yelp_rating .yelp_logo {
+    background: url(../images/reviewsFromYelpWHT.gif) no-repeat;
+    width: 115px;
+    height: 25px;
+    display: block;
+    text-indent: -9999px;
+    background-position: 3px 3px;
+    margin-left: 25px;
+}
+div.yelp_reviews {
+    display: block;
+    width: 650px;
+}
+#yelp_reviews ul.user_reviews{
+    display: block;
+    padding-left: 10px;
+    list-style-type: decimal;
+}
+#yelp_reviews ul.user_reviews li.review {
+    display: block;
+    width: 600px;
+    padding: 0 0 20px 10px;
+    border-bottom: 1px solid #aaa;
+}
+li.review img.revImage {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    float: left;
+    margin: 5px;
+}
+li.review h2.reviewer {
+    display: block;
+    width: 120px;
+    vertical-align: top;
+    margin-bottom: 8px;
+    padding: 5px 0 0 5px;
+    clear: none;
+}
+li.review img.revRating {
+    display: block;
+}
+li.review p.revExcerpt {
+    clear: both;
+    display: block;
+    margin-left: 5px;
+}
+#yelp_reviews h2.review_title {
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+#yelp_reviews a.read_more {
+    display: none;
+    float: right;
+    padding: 15px;
+    color: red;
+    font-weight: bold;
 }

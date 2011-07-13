@@ -64,7 +64,7 @@
         <li><a class="current" href="#tab_overview">Overview</a></li>
         <li><a class="current" href="#tab_video">Video</a></li>
         <li><a class="current" href="#tab_maphours" id="display_map" title="${site.title}" lat="${site.lat}" lng="${site.lng}">Map &amp; Hours</a></li>
-        %{--<li><a class="current" href="#tab_reviews">Reviews</a></li>--}%
+        <li><a class="current" href="#tab_reviews" id="display_review" lat="${site.lat}" lng="${site.lng}">Reviews</a></li>
         %{--<li><a class="current" href="#tab_auctions">Auctions</a></li>--}%
       </ul>
       <!-- the panes -->
@@ -86,6 +86,10 @@
             </g:if>
           </div>
           <p class="description">
+            <div class="yelp_rating">
+                <img src="#"><p> reviews</p>
+                <a class="yelp_logo" href="http://www.yelp.com">Reviews from yelp</a>
+            </div>
             <ul class="action_links">
               <li><span class="st_email" displayText="Share"></span></li>
               <li><a class="print" href="#" onclick="window.print();">Print</a></li>
@@ -153,7 +157,7 @@
                 </p:dependantJavascript>
             </g:if>
             <g:else>
-                <h2>This site has no videos.</h2>
+                <h2 class="none">This site has no videos.</h2>
             </g:else>
           <a name="tab_video">&nbsp;</a>
         </div>
@@ -163,11 +167,15 @@
           <a name="tab_maphours">&nbsp;</a>
         </div>
 
-        %{--<div>--}%
-          %{--<!-- fifth tab-->--}%
-          %{--blah blah blah blah blah--}%
-          %{--<a name="tab_reviews">&nbsp;</a>--}%
-        %{--</div>--}%
+        <div>
+          <div id="yelp_reviews">
+              <ul class="user_reviews"></ul>
+              <a href="#" class="read_more">
+                  Read More Reviews From YELP
+              </a>
+          </div>
+          <a name="tab_reviews">&nbsp;</a>
+        </div>
 
         %{--<div>--}%
           %{--<!-- sixth tab-->--}%
@@ -219,6 +227,8 @@
       initialize_site_detail_page();
     });
   </script>
+<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 </p:dependantJavascript>
 </body>
 </html>
