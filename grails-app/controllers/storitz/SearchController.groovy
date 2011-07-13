@@ -105,7 +105,7 @@ class SearchController {
         criteria.city = seoDecodedCity;
         criteria.state = State.fromText(params.state);
         def searchResult = findClientSites(criteria);
-        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: 'all', unitType: null, amenities: [:]]
+        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:]]
     }
 
     def results = {
