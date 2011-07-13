@@ -85,6 +85,7 @@ class RentalTransactionController extends BaseTransactionController {
   def begin = {
     def site = StorageSite.get(params.siteId as Long)
     def unit = StorageUnit.get(params.unitId as Long)
+    // TODO: Check availability here
     def promos = offerFilterService.getValidFeaturedOffers(site, unit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
     def insurance = Insurance.get(params.insuranceId)
@@ -121,7 +122,6 @@ class RentalTransactionController extends BaseTransactionController {
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
     def insurance = Insurance.get(params.insuranceId)
     def promo = SpecialOffer.get(params.promoId)
-    def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
 
     def rentalTransactionInstance = new RentalTransaction(params)
     rentalTransactionInstance.status = TransactionStatus.BEGUN
@@ -135,6 +135,7 @@ class RentalTransactionController extends BaseTransactionController {
         // TODO: Log warning
       }
     }
+    def totals = costService.calculateTotals(site, unit, promo, insurance, rentalTransactionInstance.moveInDate);
     rentalTransactionInstance.site = site
     rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false) // TODO: restore checkbox in UI
     rentalTransactionInstance.transactionType = rentalTransactionInstance.site.transactionType
@@ -151,31 +152,14 @@ class RentalTransactionController extends BaseTransactionController {
     }
 
     if (!moveInService.isAvailable(rentalTransactionInstance)) {
-      def found = false
-      def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitType == unit.unitType && it.unitsize.id == unit.unitsize.id && it.id != unit?.id }.sort { it.price }
-      println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
-      for (myUnit in bestUnitList) {
-        rentalTransactionInstance.unitId = myUnit.id
-        if (moveInService.isAvailable(rentalTransactionInstance)) {
-          found = true
-          unit = myUnit
-          emailUnitNotFound("Desired unit not found. Alternate unit selected.",rentalTransactionInstance)
-          flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
-          break
-        } else {
-          if (--myUnit.unitCount <= 0) {
-            println "Removing unit from inventory ${myUnit.id}"
-            rentalTransactionInstance.site.removeFromUnits(myUnit)
-            rentalTransactionInstance.site.save(flush: true)
-            emailUnitNotFound("Removing unit from inventory ${myUnit.id}",rentalTransactionInstance)
-          }
-        }
+      def alternateUnit = findAlternateUnit(rentalTransactionInstance, unit)
+      promos = offerFilterService.getValidFeaturedOffers(site, alternateUnit);
+      promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, alternateUnit));
+      if (promo && !promos.contains(promo)) {
+        promo = null;
       }
-      if (!found) {
-        emailUnitNotFound("Unit not found during rental transaction!",rentalTransactionInstance)
-        flash.message = "Unit already reserved - refresh and try again"
-      }
-      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals]);
+      totals = costService.calculateTotals(site, alternateUnit, promo, insurance, rentalTransactionInstance.moveInDate);
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:alternateUnit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals]);
       return
     }
 
@@ -217,6 +201,33 @@ class RentalTransactionController extends BaseTransactionController {
     else {
       redirect(mapping:'thank_you', params:[transactionId:rentalTransactionInstance.id])
     }
+  }
+
+  def findAlternateUnit = { rentalTransactionInstance, unit ->
+    def alternateUnit = null;
+    def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitType == unit.unitType && it.unitsize.id == unit.unitsize.id && it.id != unit?.id }.sort { it.price }
+    println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
+    for (myUnit in bestUnitList) {
+      rentalTransactionInstance.unitId = myUnit.id
+      if (moveInService.isAvailable(rentalTransactionInstance)) {
+        alternateUnit = myUnit
+        emailUnitNotFound("Desired unit not found. Alternate unit selected.", rentalTransactionInstance)
+        flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
+        break
+      } else {
+        if (--myUnit.unitCount <= 0) {
+          println "Removing unit from inventory ${myUnit.id}"
+          rentalTransactionInstance.site.removeFromUnits(myUnit)
+          rentalTransactionInstance.site.save(flush: true)
+          emailUnitNotFound("Removing unit from inventory ${myUnit.id}", rentalTransactionInstance)
+        }
+      }
+    }
+    if (alternateUnit == null) {
+      emailUnitNotFound("Unit not found during rental transaction!", rentalTransactionInstance)
+      flash.message = "Unit already reserved - refresh and try again"
+    }
+    return alternateUnit;
   }
 
   def show = {

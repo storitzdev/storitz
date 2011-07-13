@@ -9,6 +9,7 @@ class MoveInService {
   boolean transactional = false
 
   def isAvailable(RentalTransaction trans) {
+    // TODO: Refactor to accept StorageUnit, not RentalTransaction
     StorageFeedServiceFactory.getMoveInServiceInstance(trans.site).isAvailable(trans)
   }
 
