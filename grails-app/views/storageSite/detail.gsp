@@ -171,7 +171,7 @@
           <div id="yelp_reviews">
               <ul class="user_reviews"></ul>
               <a href="#" class="read_more">
-                  Read More Reviews From YELP
+                  Read More Reviews From Yelp
               </a>
           </div>
           <a name="tab_reviews">&nbsp;</a>
