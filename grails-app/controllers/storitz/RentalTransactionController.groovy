@@ -181,7 +181,7 @@ class RentalTransactionController extends BaseTransactionController {
       rentalTransactionInstance.promoName = promo.promoName
     }
     if (insurance) {
-      rentalTransactionInstance.insuranceName = "Total Coverage: ${g.formatNumber(number: ins.totalCoverage, type: 'currency', currencyCode: 'USD')} Theft: ${g.formatNumber(number: ins.percentTheft, type: 'percent')}"
+      rentalTransactionInstance.insuranceName = "Total Coverage: ${g.formatNumber(number: insurance.totalCoverage, type: 'currency', currencyCode: 'USD')} Theft: ${g.formatNumber(number: insurance.percentTheft, type: 'percent')}"
     } else {
       rentalTransactionInstance.insuranceName = "None purchased"
     }
