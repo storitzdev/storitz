@@ -12,16 +12,7 @@
     initialize_serp();
   });
 
-  bindPickerFormHandler('.formpicker',function() {
-    var form = document.getElementById('picker');
-    if (form) {
-        //$('.pickers').fadeTo(0,.5);
-        $('.results_container').fadeTo(0,.5);
-        //$('.popup_map').fadeTo(0,.5);
-        $('.spinner').show()
-        form.submit();
-    }
-  });
+  bindPickerFormHandler('.formpicker','picker','.results_container','.spinner');
 </script>
 </p:dependantJavascript>
 </body>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest
 import storitz.constants.QueryMode
 import storitz.constants.GeoType
 import org.hibernate.FetchMode
+import storitz.constants.TruckType
 
 class MapService {
   def geoIp;
@@ -33,15 +34,23 @@ class MapService {
   def unitsCriteria = { criteria ->
     return {
       units {
-        unitsize {
-          and {
-            eq("searchType", criteria.searchType)
-            if (criteria.searchSize && criteria.searchSize != 1) {
-              eq("id", criteria.searchSize)
+        and {
+          unitsize {
+            and {
+              eq("searchType", criteria.searchType)
+              gt(criteria.searchSize, "id")
             }
           }
+          if (criteria.unitType) {
+            eq(criteria.unitType,"unitType")
+          }
+          if (criteria.amenities) {
+            if (criteria.amenities.get("cc")) eq("isTempControlled",true)
+            if (criteria.amenities.get("24hr")) eq("isTwentyFourHour",true)
+            if (criteria.amenities.get("alarm")) eq("isAlarm",true)
+          }
+          sqlRestriction("storage_unit.unit_count >= storage_site.min_inventory")
         }
-        sqlRestriction("unit_count >= min_inventory")
         //order("currentPrice", "asc") // TODO: uncomment when used by getUnitsClosure
       }
     }
@@ -69,6 +78,9 @@ class MapService {
               eq("zipcode", criteria.zip_code);
               break;
           }
+        }
+        if (criteria.amenities) {
+          if (criteria.amenities.get("truck")) eq("freeTruck",TruckType.FREE)
         }
       }
       if (criteria.queryMode == QueryMode.FIND_UNITS) {

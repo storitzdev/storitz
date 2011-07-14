@@ -217,6 +217,7 @@ uiperformance.bundles = [
                 name: 'all',
                 files: ["jquery-1.4.2.min",
                         "jquery-ui-1.8.6.custom.min",
+                        "jquery.cookie",
                         "placeholder",
                         "jquery.tools.min",
                         "application",
