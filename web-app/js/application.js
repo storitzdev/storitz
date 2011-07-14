@@ -221,6 +221,11 @@ var _map = function() {
             $("#search_results").addClass("map");
             $("#search_result_labels").addClass("map");
             $("#big_map_canvas").addClass("visible");
+            $("body.serp").css('width', '80%'); //2
+            $("body.serp .results_container").addClass('map_view'); //1
+            $("#big_map_canvas").css('width', '100%'); //3
+            $(".map_container").show(); //4
+            google.maps.event.trigger(big_map, 'resize');
             $("#search_results > li").click(function() {
                 var site_id = $(this).attr("id").substr(5);
                 var entry = markers[site_id];
@@ -250,6 +255,10 @@ var _map = function() {
             $("#search_results").removeClass("map");
             $("#search_result_labels").removeClass("map");
             $("#big_map_canvas").removeClass("visible");
+            $("body.serp").css('width', '960px');   //2
+            $("#big_map_canvas").css('width', '546px'); //3
+            $("body.serp .results_container").removeClass('map_view'); //1
+            $(".map_container").hide() //4
             $("#search_results > li").unbind("click");
             $("#search_results > li").unbind("mouseenter");
             $("#search_results > li").unbind("mouseleave");

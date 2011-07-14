@@ -45,7 +45,6 @@
         ${clientSites.size()} Locations Found
     </h2>
     <g:if test="${clientSites.size() > 0}">
-        <div id="big_map_canvas"></div>
         <ul id="search_results">
             <g:each var="site" in="${clientSites}" status="c">
                 <li id="site_${site.id}">
@@ -53,6 +52,7 @@
                 </li>
             </g:each>
         </ul>
+        <div class="map_container"><div id="big_map_canvas"></div></div>
 
     </g:if>
 </div>
