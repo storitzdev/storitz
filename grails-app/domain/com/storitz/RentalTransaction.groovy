@@ -124,6 +124,11 @@ class RentalTransaction {
     invoice(nullable: true)
     achAmount(nullable: true)
     displaySize(nullable: true)
+    ccNum(blank: false)
+    cvv2(blank: false)
+    cardType(blank: false)
+    ccExpDate(blank: false)
+    terms(validator: { val -> val })
   }
 
   // This event, as expected, will fire after insertion into the database.

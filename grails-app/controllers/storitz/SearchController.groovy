@@ -201,7 +201,7 @@ class SearchController {
             // if we found any available units for which featured special offers are valid, then select the "best unit"
             // from those; if not, then select the best unit from the full list of available units
             def unitList = featuredUnits.size() ? featuredUnits : availableUnitsMap.values();
-            def bestUnit = unitList.min { site.allowPushPrice ? it.pushRate : it.price }
+            def bestUnit = unitList.min { it.bestUnitPrice }
             if (bestUnit) {
                 def yourPrice = null
                 def listPrice = null

@@ -5,6 +5,8 @@
 <div id="directionMap">
   <div id="directionMapCanvas"></div>
   <div id="facilityHours" class="right">
+      <h2>${site.title}</h2>
+      <div>${site.address}<br />${site.city} ${site.state.display}<br />${site.zipcode}</div>
       <h2>Hours of Operation</h2>
       <g:render template="/siteHours" />
   </div>
@@ -13,7 +15,7 @@
   <h2>Driving Directions</h2> Enter your start address below
 </div>
 <div class="left">
-  <div style="width:294px;" class="checkout_value">
+  <div style="width:294px; margin-bottom: 10px" class="checkout_value">
     <g:textField id="srcAddr" name="srcAddr" placeholder="Enter city, address, or zip"/>
   </div>
   <div style="clear:both;"></div>

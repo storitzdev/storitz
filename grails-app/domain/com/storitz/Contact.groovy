@@ -28,7 +28,13 @@ class Contact {
     country(nullable: true)
     address2(nullable: true)
     phoneType(nullable: true)
-    phone(nullable: true)
+    phone(blank: false)
+    state(blank: false, validator: { val -> val != State.NONE })
+    firstName(blank: false)
+    lastName(blank: false)
+    address1(blank: false)
+    city(blank: false)
+    zipcode(blank: false)
   }
 
   static belongsTo = [rental: RentalTransaction]

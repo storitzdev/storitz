@@ -13,6 +13,10 @@ class UrlMappings {
       action = "begin"
     }
 
+    name thankYou: "/thank-you" {
+      controller = "rentalTransaction"
+      action = "thankYou"
+    }
     name rentMePanel: "/rent-me-panel" {
       controller = "storageSite"
       action = "rentMePanel"

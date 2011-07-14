@@ -108,6 +108,7 @@ environments {
     storitz.nacha.companyId = '0123456789'
     uiperformance.enabled = false
     storitz.google.signatureRequired = false
+    storitz.rentals.sandboxMode = true
   }
   // For development_script, the given port is unimportant, as long as it does not conflict with the actual port value
   development_script {

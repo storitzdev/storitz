@@ -1657,6 +1657,36 @@ body.checkout form.checkout {
   font-size: 13px;
   margin-top: 10px;
 }
+body.checkout form.checkout div.errors {
+  width: 640px;
+  padding: 10px;
+  line-height: 120%;
+}
+body.checkout form.checkout div.errors h2 {
+  color: red;
+  font-size: 14pt;
+  line-height: 120%;
+}
+body.checkout form.checkout div.errors p b {
+  font-weight: bold;
+}
+body.checkout form.checkout div.errors p {
+  line-height: 120%;
+}
+body.checkout form.checkout div.errors li {
+  display: list-item;
+}
+body.checkout form.checkout div.errors ul {
+  display: inline-block;
+  margin-left: 2em;
+  border: 1px solid #ccc;
+  padding: 1em;
+  background-color: #eee;
+}
+body.checkout form.checkout div.errors li .field {
+  font-weight: bold;
+  margin-right: 0.6em;
+}
 body.checkout #booking_summary > h1 {
   color: #00529b;
 }
@@ -2342,4 +2372,40 @@ li.review p.revExcerpt {
     font-weight: bold;
     left-margin: 5px;
     top-margin: 5px;
+}
+
+body.thankyou {
+  font-size: 11pt;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body.thankyou #header {
+  margin-bottom: 10px;
+}
+body.thankyou .print {
+  float:right;
+  margin-right:10px;
+}
+body.thankyou .print a {
+  color: #00529b;
+  text-decoration: none;
+}
+body.thankyou h1 {
+  font-size: 18pt;
+  margin-bottom: 15px;
+  color: #00529b;
+}
+body.thankyou h2 {
+  font-size: 14pt;
+  margin-bottom: 10px;
+  color: #00529b;
+}
+body.thankyou table {
+  margin: 10px 0 20px 20px;
+}
+body.thankyou td {
+  padding: 2px;
+  width: 300px;
+}
+body.thankyou p {
+  margin-bottom: 15px;
 }
