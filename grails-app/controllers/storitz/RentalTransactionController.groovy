@@ -272,7 +272,7 @@ class RentalTransactionController extends BaseTransactionController {
     [rentalTransactionInstance:rentalTransactionInstance, promo:promo]
   }
 
-  def removeUnit = { RentalTransactionInstance, unit ->
+  def removeUnit = { rentalTransactionInstance, unit ->
     println "Removing unit from inventory ${unit.id}"
     rentalTransactionInstance.site.removeFromUnits(unit)
     rentalTransactionInstance.site.save(flush: true)
