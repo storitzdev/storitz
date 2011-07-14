@@ -79,4 +79,13 @@ environments {
       password = "st3ch@m"
     }
   }
+  next_script {
+    dataSource {
+      dbCreate = "update"
+      driverClassName = "com.mysql.jdbc.Driver"
+      url = "jdbc:mysql://localhost:3306/storitz_next?autoReconnect=true"
+      username = "storitz_next"
+      password = "st6ch@m"
+    }
+  }
 }

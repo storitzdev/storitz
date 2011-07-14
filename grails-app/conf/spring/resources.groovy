@@ -62,8 +62,37 @@ beans = {
       }
       break
 
+    // for production_script the actual ports do not matter, as long as they don't conflict with the real values
+    case "production_script":
+      println "Starting production_script ActiveMQ 61719"
+      jmsBroker(XBeanBrokerService) {
+        useJmx = 'false'
+        persistent = 'false'
+        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61719'))]
+      }
+
+      connectionFactory(ActiveMQConnectionFactory) {
+        brokerURL = "vm://localhost:61717"
+      }
+
+      jmsTemplate(JmsTemplate) {
+        connectionFactory = { SingleConnectionFactory cf ->
+          targetConnectionFactory = ref('connectionFactory')
+        }
+      }
+      jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
+        brokerURL = "vm://localhost:61719"
+      }
+      jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
+        bean.destroyMethod = "stop"
+        connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
+          brokerURL = "vm://localhost:61719"
+        }
+      }
+      break
+
     case "next":
-      println "Starting production ActiveMQ 61620"
+      println "Starting 'production' ActiveMQ 61620"
       jmsBroker(XBeanBrokerService) {
         useJmx = 'false'
         persistent = 'false'
@@ -90,17 +119,16 @@ beans = {
       }
       break
 
-    // for production_script the actual ports do not matter, as long as they don't conflict with the real values
-    case "production_script":
-      println "Starting production_script ActiveMQ 61719"
+    case "next_script":
+      println "Starting 'next' ActiveMQ 61621"
       jmsBroker(XBeanBrokerService) {
         useJmx = 'false'
         persistent = 'false'
-        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61719'))]
+        transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:61621'))]
       }
 
       connectionFactory(ActiveMQConnectionFactory) {
-        brokerURL = "vm://localhost:61717"
+        brokerURL = "vm://localhost:61617"
       }
 
       jmsTemplate(JmsTemplate) {
@@ -109,12 +137,12 @@ beans = {
         }
       }
       jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-        brokerURL = "vm://localhost:61719"
+        brokerURL = "vm://localhost:61621"
       }
       jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
         bean.destroyMethod = "stop"
         connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-          brokerURL = "vm://localhost:61719"
+          brokerURL = "vm://localhost:61621"
         }
       }
       break

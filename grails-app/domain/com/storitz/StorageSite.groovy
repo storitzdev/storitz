@@ -91,6 +91,8 @@ class StorageSite {
     prorateStart(nullable: true)
     prorateCutoff(nullable: true)
     prorateSecondMonth(nullable: true)
+    seoCity(nullable: true)
+    isTwentyFourHour(nullable: true)
     //seoTitle(unique:true)
   }
 
