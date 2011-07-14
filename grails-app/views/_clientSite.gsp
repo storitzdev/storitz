@@ -2,13 +2,14 @@
 <%
     // TODO: More inline copy/paste urlencoding... move to DB :(
     String site_title = StoritzUtil.seoEncode(site.title);
-    def site_url_params;
+    def site_url_params = [site_title:site_title, id:site.id];
       if (unitInfo?.promo) {
-        site_url_params = [site_title:site_title, id:site.id, promoId:unitInfo?.promo];
+        site_url_params['promoId']=unitInfo.promo;
       }
-      else {
-        site_url_params = [site_title:site_title, id:site.id];
+      if (unitInfo?.bestUnit) {
+        site_url_params['bestUnit']=unitInfo.bestUnit.id;
       }
+
 %>
 <div class="photo">
     <g:if test="${site.coverImage()}">

@@ -4,6 +4,7 @@ import storitz.constants.SearchType
 import storitz.constants.State
 import storitz.constants.QueryMode
 import storitz.constants.GeoType
+import storitz.constants.UnitType
 
 /**
  * Represents a search for available inventory; contains convenience method for adjusting
@@ -23,6 +24,8 @@ class SearchCriteria {
     public State state;
     public QueryMode queryMode;
     public GeoType geoType;
+    public UnitType unitType;
+    public HashMap<String,Boolean> amenities = new HashMap<String,Integer>()
 
     public SearchCriteria() {
       // defaults

@@ -551,7 +551,17 @@ class StorageSiteController extends BaseTransactionController implements Applica
       // TODO - decide on best price or best price for a given size
       units = site.units.findAll { it.unitsize.searchType == searchType && it.unitCount > site.minInventory }
     }
-    def bestUnit = units.min { it.bestUnitPrice }
+
+    // JM: We're passing in bestUnit parameter now. If that's available then
+    // use it and ignore all of this other garbage.
+    def bestUnit
+    if (params.bestUnit) {
+        bestUnit = StorageUnit.findById(params.bestUnit)
+    }
+    else {
+        bestUnit = units.min { it.bestUnitPrice }
+    }
+
     units.sort {}
     def availableUnits = []
     units.each { unit ->

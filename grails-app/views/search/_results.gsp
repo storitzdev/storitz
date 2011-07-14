@@ -31,10 +31,10 @@
         <div>
             <h2>Amenities</h2>
             <ul>
-                <li><input type="checkbox" name="amenity" value="cc" id="amenity_cc" <g:if test="${amenities['cc']}">checked="checked"</g:if> /><label for="amenity_cc">Climate Control</label></li>
-                <li><input type="checkbox" name="amenity" value="24hr" id="amenity_24hr" <g:if test="${amenities['24hr']}">checked="checked"</g:if> /><label for="amenity_24hr">24-hour Access</label></li>
-                <li><input type="checkbox" name="amenity" value="alarm" id="amenity_alarm" <g:if test="${amenities['alarm']}">checked="checked"</g:if> /><label for="amenity_alarm">In-Unit Alarm</label></li>
-                <li><input type="checkbox" name="amenity" value="truck" id="amenity_truck" <g:if test="${amenities['truck']}">checked="checked"</g:if> /><label for="amenity_truck">Free Move-In Truck</label></li>
+                <li><input type="checkbox" name="amenity" value="cc" id="amenity_cc" <g:if test="${amenities && amenities['cc']}">checked="checked"</g:if> /><label for="amenity_cc">Climate Control</label></li>
+                <li><input type="checkbox" name="amenity" value="24hr" id="amenity_24hr" <g:if test="${amenities && amenities['24hr']}">checked="checked"</g:if> /><label for="amenity_24hr">24-hour Access</label></li>
+                <li><input type="checkbox" name="amenity" value="alarm" id="amenity_alarm" <g:if test="${amenities && amenities['alarm']}">checked="checked"</g:if> /><label for="amenity_alarm">In-Unit Alarm</label></li>
+                <li><input type="checkbox" name="amenity" value="truck" id="amenity_truck" <g:if test="${amenities && amenities['truck']}">checked="checked"</g:if> /><label for="amenity_truck">Free Move-In Truck</label></li>
                </ul>
         </div>
     </div>

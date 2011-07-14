@@ -35,7 +35,6 @@
                         <br />
                         <input id="amenity_alarm" type="checkbox" value="alarm" name="amenity" />
                         <label for="amenity_alarm">In-Unit Alarm</label>
-                        <br />
                      </div>
                     <div class="unit_size">
                         <label for="unit_size">Unit size:</label>

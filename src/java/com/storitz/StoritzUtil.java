@@ -100,4 +100,44 @@ public class StoritzUtil {
       return sb.toString();
     }
 
+    public static String storageSiteCanonicalLink (String s) {
+        // URLS come through like this:
+        // http://www.storitz.com/storageSite/index/222?promoId=202127&bestUnit=1796528&site_title=storquest-self-storage-hill-street
+        // which is really nice and all, but we would much rather have something like this:
+        // http://www.storitz.com/self-storage-storquest-self-storage-hill-street/222
+        String site_title_equals = "site_title=";
+        String self_storage_dash = "self-storage-";
+        String storageSite_index = "storageSite/index";
+        String ampersand = "&";
+
+        int site_title_start = s.indexOf(site_title_equals);
+        if (site_title_start < 0) {
+            return removeQueryString(s);
+        }
+
+        int site_title_end = s.indexOf(ampersand,site_title_start);
+        if (site_title_end < 0) {
+            site_title_end = s.length();
+        }
+
+        String site_title = s.substring(site_title_start+site_title_equals.length(),site_title_end);
+
+        String s2 = s.replaceAll(storageSite_index,self_storage_dash+site_title);
+
+        return removeQueryString(s2);
+    }
+
+    public static String removeQueryString (String s) {
+        if (s == null) {
+            return s;
+        }
+
+        String question_mark = "?";
+        int question_mark_start = s.indexOf(question_mark);
+        if (question_mark_start >= 0) {
+            return s.substring(0,question_mark_start);
+        }
+        return s;
+    }
+
 }

@@ -7,7 +7,10 @@ import storitz.constants.SearchType;
 import com.storitz.Insurance;
 import storitz.constants.QueryMode
 import storitz.constants.GeoType
-import com.storitz.StoritzUtil;
+import com.storitz.StoritzUtil
+import com.storitz.StorageUnit
+import com.storitz.StorageSite
+import storitz.constants.TruckType;
 
 class SearchController {
 
@@ -56,13 +59,16 @@ class SearchController {
       def tp = getUnitType(params.unit_type)
       if (tp) {
         unitType = params.unit_type
-        //TODO: Make search criteria aware of unit type!
+        criteria.unitType = tp
       }
 
       def am = getAmenities(params.amenity)
       if (am.size()) {
         amenities = am
-        //TODO: Make search criteria aware of amenities
+        Boolean t = new Boolean(true);
+        for (a in am) {
+          if (a.value) criteria.amenities.put(a.key,t)
+        }
       }
 
       def searchResult = findClientSites(criteria);
@@ -142,10 +148,15 @@ class SearchController {
         for (site in sites) {
             log.info("processing site " + site.id)
             def availableUnitsMap = [:] // using a map because I don't know how to use a set, and I don't want to do linear search thru an ArrayList
-            site.units.each { unit ->
-                if (unit.unitCount > site.minInventory && criteria.searchSize <= unit.unitsize.id) {
-                  availableUnitsMap[unit.id] = unit
-                }
+
+            for (unit in site.units) {
+                // filter here
+                if (criteria.searchSize > unit.unitsize.id) continue
+                if (criteria.unitType && criteria.unitType != unit.unitType) continue
+                if (doesNotHaveRequiredAmenities(site,unit,criteria.amenities)) continue
+
+                // whatever gets through is good
+                availableUnitsMap[unit.id] = unit
             }
             def featuredOffersMap = [:] // maps units to lists of featured special offers
             if (criteria.queryMode == QueryMode.FIND_UNITS && availableUnitsMap.size() == 0) {
@@ -210,17 +221,17 @@ class SearchController {
                 }
                 if (promos.size() == 0) {
                     def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-                    moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
+                    moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, bestUnit: bestUnit, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                 } else {
                     def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
-                    moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
+                    moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, bestUnit: bestUnit, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                     def oldMoveInCost = moveInPrices[site.id].cost
                     moveInPrices[site.id].cost = 100000
                     for (promo in promos) {
                         if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                             totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
                             if (moveInPrices[site.id].cost > totals['moveInTotal']) {
-                                moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: promo.id, promoName: promo.promoName, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
+                                moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: promo.id, promoName: promo.promoName, bestUnit: bestUnit, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                             }
                         }
                     }
@@ -310,9 +321,9 @@ class SearchController {
 
     //  select distinct unit_type from storage_unit where unitsize_id in (
     //    select id from storage_size where search_type like 'STORAGE');
-    if (tp == 'interior') return 'INTERIOR'
-    if (tp == 'upper') return 'UPPER'
-    if (tp == 'drive-up') return 'DRIVEUP'
+    if (tp == 'interior')  return storitz.constants.UnitType.getEnumFromId("INTERIOR")
+    if (tp == 'upper')     return storitz.constants.UnitType.getEnumFromId("UPPER")
+    if (tp == 'drive-up')  return storitz.constants.UnitType.getEnumFromId("DRIVEUP")
 
     return null
   }
@@ -324,11 +335,32 @@ class SearchController {
 
     def amen = [:]
 
+    if (amenity instanceof String) {
+        amenity = [amenity]
+    }
+
     for (a in amenity) {
       amen[a]=true
     }
 
     return amen
+  }
+
+  // reverse boolean logic...
+  // returns TRUE if the site/unit in question FAILS to have the required amenities
+  def doesNotHaveRequiredAmenities (StorageSite site, StorageUnit unit, HashMap<String,Boolean> amenities) {
+    def cc    = amenities.get("cc")
+    def hr24  = amenities.get("24hr")
+    def alarm = amenities.get("alarm")
+    def truck = amenities.get("truck")
+
+    if (cc && !unit.isTempControlled) return true
+    if (hr24 && !site.isTwentyFourHour) return true
+    if (alarm && !unit.isAlarm) return true
+    if (truck && !(site.freeTruck == TruckType.FREE)) return true
+
+    return false
+
   }
 
 }

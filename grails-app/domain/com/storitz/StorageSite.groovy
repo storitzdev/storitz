@@ -130,6 +130,7 @@ class StorageSite {
   Boolean isUnitAlarmed
   Boolean isManagerOnsite
   Boolean hasElevator
+  Boolean isTwentyFourHour
 
   // Fees
   BigDecimal adminFee = 0
