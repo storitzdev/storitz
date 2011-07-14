@@ -1345,7 +1345,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
       rentalTransaction.tenantId = tab.TenantID.text()
       rentalTransaction.accessCode = tab.AccessCode.text()
     }
-    rentalTransaction.save(flush: true)
+//    rentalTransaction.save(flush: true)
   }
 
   @Override
@@ -1426,7 +1426,7 @@ TODO - evaluate whether we need this going forward
     }
     if (moveInResult > 3) {
       rentalTransaction.idNumber = moveInResult
-      rentalTransaction.save(flush: true)
+//      rentalTransaction.save(flush: true)
 
       def siteLink = (SiteLink) rentalTransaction.site.feed
       def subject = "New Storitz Move-In: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
@@ -1439,7 +1439,7 @@ TODO - evaluate whether we need this going forward
       def body = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
       rentalTransaction.idNumber = moveInResult
-      rentalTransaction.save(flush: true)
+//      rentalTransaction.save(flush: true)
 
       try {
         getEmailService().sendTextEmail(
@@ -1487,7 +1487,7 @@ TODO - evaluate whether we need this going forward
 
       rentalTransaction.idNumber = moveInResult
       rentalTransaction.reservationId = moveInResult
-      rentalTransaction.save(flush: true)
+//      rentalTransaction.save(flush: true)
 
       def siteLink = (SiteLink) rentalTransaction.site.feed
       def subject = "New Storitz Reservation: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
@@ -1531,7 +1531,7 @@ TODO - evaluate whether we need this going forward
       def body = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
       rentalTransaction.idNumber = moveInResult
-      rentalTransaction.save(flush: true)
+//      rentalTransaction.save(flush: true)
 
       try {
         getEmailService().sendTextEmail(

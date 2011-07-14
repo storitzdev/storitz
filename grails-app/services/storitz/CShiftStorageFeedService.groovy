@@ -1281,7 +1281,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         rentalTransaction.promoId = promoId[0] as Long
       }
     }
-    rentalTransaction.save(flush: true)
+//    rentalTransaction.save(flush: true)
     return true
   }
 
@@ -1311,7 +1311,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
               rentalTransaction.tenantId,
               noteText)
     }
-    rentalTransaction.save(flush: true)
+//    rentalTransaction.save(flush: true)
   }
 
   def getCostDetails(userName, pin, sourceId, url, unitId, insId, writer) {
@@ -1393,7 +1393,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
       rentalTransaction.idNumber = "R${rentalTransaction.reservationId}"
     }
     println "Reservation ID = ${rentalTransaction.reservationId}"
-    rentalTransaction.save()
+//    rentalTransaction.save()
 
     return errorCode == 0
 
@@ -1428,7 +1428,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     writer.println "Return from doMoveIn: ${ret}"
 
     rentalTransaction.idNumber = ret
-    rentalTransaction.save(flush: true)
+//    rentalTransaction.save(flush: true)
 
     return true
 

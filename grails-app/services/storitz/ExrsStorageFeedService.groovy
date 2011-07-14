@@ -453,7 +453,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
             body: body2
     )
 
-    trans.save(flush: true)
+//    trans.save(flush: true)
 
     return true
   }

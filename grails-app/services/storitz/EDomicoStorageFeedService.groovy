@@ -661,7 +661,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       if (resSuccess) {
         trans.idNumber = "${resCustomerID}"
         trans.feedUnitNumber = "${resUnitID}"
-        trans.save(flush:true)
+//        trans.save(flush:true)
       }
       // Failed move-in!
       else {

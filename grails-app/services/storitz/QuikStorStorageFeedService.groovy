@@ -643,7 +643,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
           trans.tenantId = moveInResultsXml.iCustomerID.text()
           trans.accessCode = moveInResultsXml.sAccessCode.text()
           trans.idNumber = moveInResultsXml.sOrderID.text()
-          trans.save(flush: true)
+//          trans.save(flush: true)
         }
         errorMessage = moveInResultsXml.sReturnMessage.text()
       } else {
@@ -713,7 +713,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
           trans.tenantId = moveInResult.iCustomerID
           trans.accessCode = moveInResult.csAccessCode
           trans.idNumber = moveInResult.csOrderID
-          trans.save(flush: true)
+//          trans.save(flush: true)
         }
       }
 
