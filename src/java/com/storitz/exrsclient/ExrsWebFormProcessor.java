@@ -108,6 +108,7 @@ public class ExrsWebFormProcessor {
             String confirmationNumber = verifyConfirmationNumber(trans, page4);
             if (confirmationNumber != null) {
                 logMessage(0,"Confirmation Number: " + confirmationNumber);
+                trans.setIdNumber(confirmationNumber);
                 return true;
             }
 
