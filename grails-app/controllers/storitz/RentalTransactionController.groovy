@@ -207,7 +207,7 @@ class RentalTransactionController extends BaseTransactionController {
     def totals = costService.calculateTotals(site, unit, promo, insurance, rentalTransactionInstance.moveInDate);
 
     if (!moveInService.isAvailable(rentalTransactionInstance)) {
-      removeUnit(rentalTransactionInstance)
+      removeUnit(rentalTransactionInstance, unit)
       def alternateUnit = findAlternateUnit(rentalTransactionInstance, unit)
       promos = offerFilterService.getValidFeaturedOffers(site, alternateUnit);
       promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, alternateUnit));
