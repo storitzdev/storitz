@@ -389,7 +389,7 @@ class RentalTransactionController extends BaseTransactionController {
         def authResp = s.submit();
         println "Credit card response: ${authResp.dump()}"
         if (authResp.responseCode as Integer != 1) {
-          flash.message = "Credit card not accepted ${authResp.responseReasonText}"
+          flash.message = "We were unable to process your transaction because your credit card could not be charged. </>Please double-check your card and customer billing information, and try again</b>. Please note that your contact information must match the billing information for the card. (Error message: '${authResp.responseReasonText}')"
           return false
         }
         println "Logged transaction = ${authResp.dump()}"

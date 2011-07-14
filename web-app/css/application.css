@@ -1658,8 +1658,8 @@ body.checkout form.checkout {
   margin-top: 10px;
 }
 body.checkout form.checkout div.errors {
-  width: 640px;
-  padding: 10px;
+  width: 630px;
+  padding: 15px;
   line-height: 120%;
 }
 body.checkout form.checkout div.errors h2 {
@@ -1676,9 +1676,12 @@ body.checkout form.checkout div.errors p {
 body.checkout form.checkout div.errors li {
   display: list-item;
 }
-body.checkout form.checkout div.errors ul {
+body.checkout form.checkout div.errors .messages ul {
+   margin-top: 10px;
+}
+body.checkout form.checkout div.errors .messages {
   display: inline-block;
-  margin-left: 2em;
+  margin: 0 3em 0 2em;
   border: 1px solid #ccc;
   padding: 1em;
   background-color: #eee;

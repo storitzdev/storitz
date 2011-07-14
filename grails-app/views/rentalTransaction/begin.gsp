@@ -9,24 +9,35 @@
 <div class="customer_info">
   <g:if test="${rentalTransactionInstance?.hasErrors() || contact?.hasErrors()}">
   <div class="errors">
-    <h2>Oh noes! Some of the information we need to complete your order was missing or incomplete.</h2>
+    <h2>Oh noes!</h2>
+
+    <div class="messages">
+      Some of the information we need to complete your order was missing or incomplete:
+      <ul>
+        <li><g:eachError model="[contact:contact]" field="firstName"><span class="field">First name</span>Please enter your first name as it appears on your card</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="lastName"><span class="field">Last name</span>Please enter your last name as it appears on your card</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="address1"><span class="field">Address Line 1</span>Please enter the street address of the billing address for your card.</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="city"><span class="field">City</span>Please enter the city of the billing address for your card.</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="state"><span class="field">State</span>Please enter the state of the billing address for your card.</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="zipcode"><span class="field">ZIP Code</span>Please enter the ZIP code of the billing address for your card.</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="email"><span class="field">Email</span>Please enter a valid email address where we can send a confirmation notice.</g:eachError></li>
+        <li><g:eachError model="[contact:contact]" field="phone"><span class="field">Phone Number</span>Please enter your phone number.</g:eachError></li>
+        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccNum"><span class="field">Credit Card Number</span>Please enter your credit card number.</g:eachError></li>
+        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="cvv2"><span class="field">Credit Card Security Code</span>Please enter the security code from your credit card.</g:eachError></li>
+        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccExpDate"><span class="field">Card Expiration Date</span>Please specify the month and year of the expiration date for your card.</g:eachError></li>
+        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="terms"><span class="field">Terms and Conditions</span>You must accept the Terms of Use before you can book a unit.</g:eachError></li>
+      </ul>
+    </div>
     <p>Please review the information shown below and submit your order again. If you'd rather complete your order by phone, please just give us a call at <b>(877) 456-2929</b>!</p>
-    <ul>
-      <li><g:eachError model="[contact:contact]" field="firstName"><span class="field">First name</span>Please enter your first name as it appears on your card</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="lastName"><span class="field">Last name</span>Please enter your last name as it appears on your card</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="address1"><span class="field">Address Line 1</span>Please enter the street address of the billing address for your card.</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="city"><span class="field">City</span>Please enter the city of the billing address for your card.</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="state"><span class="field">State</span>Please enter the state of the billing address for your card.</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="zipcode"><span class="field">ZIP Code</span>Please enter the ZIP code of the billing address for your card.</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="email"><span class="field">Email</span>Please enter a valid email address where we can send a confirmation notice.</g:eachError></li>
-      <li><g:eachError model="[contact:contact]" field="phone"><span class="field">Phone Number</span>Please enter your phone number.</g:eachError></li>
-      <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccNum"><span class="field">Credit Card Number</span>Please enter your credit card number.</g:eachError></li>
-      <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="cvv2"><span class="field">Credit Card Security Code</span>Please enter the security code from your credit card.</g:eachError></li>
-      <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccExpDate"><span class="field">Card Expiration Date</span>Please specify the month and year of the expiration date for your card.</g:eachError></li>
-      <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="terms"><span class="field">Terms and Conditions</span>You must accept the Terms of Use before you can book a unit.</g:eachError></li>
-    </ul>
   </div>
   </g:if>
+  <g:elseif test="${flash.message}">
+    <div class="errors">
+      <h2>Bad news...</h2>
+      <p class="messages"><g:message code="${flash.message}" /></p>
+      <p>Or if you'd rather complete your order by phone, please just give us a call at <b>(877) 456-2929</b>!</p>
+    </div>
+  </g:elseif>
   <g:if test="${!(site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0)}">
   <h1 class="pay first">
     Billing Information
