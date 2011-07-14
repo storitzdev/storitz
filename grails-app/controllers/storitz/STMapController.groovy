@@ -6,6 +6,7 @@ import grails.converters.JSON
 import storitz.constants.SearchType
 import com.storitz.Insurance
 import com.storitz.service.CostTotals
+import com.storitz.StoritzUtil
 
 class STMapController {
 
@@ -13,7 +14,6 @@ class STMapController {
   def mapService
   def costService
   def offerFilterService
-
   def index = { }
 
   def countSites = {
@@ -126,7 +126,7 @@ class STMapController {
         def unitSiz
         def monthly
         def pushRate
-        def moveInCost = 100000
+        def moveInCost = StoritzUtil.BOGUS_MOVE_IN_COST
         def promoId
         def promoName
         def paidThruDate
@@ -163,7 +163,7 @@ class STMapController {
           def featuredOffers = offerFilterService.getValidFeaturedOffers(site, bestUnit)
           if (featuredOffers.size() > 0) {
             def oldMoveInCost = moveInCost
-            moveInCost = 100000
+            moveInCost = StoritzUtil.BOGUS_MOVE_IN_COST
             for (promo in featuredOffers) {
               if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                 totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
@@ -179,7 +179,7 @@ class STMapController {
                 }
               }
             }
-            if (moveInCost == 100000) {
+            if (moveInCost == StoritzUtil.BOGUS_MOVE_IN_COST) {
               moveInCost = oldMoveInCost
             }
           }

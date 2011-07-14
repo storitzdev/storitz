@@ -244,7 +244,7 @@ class HomeController extends SearchController {
                         CostTotals totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
                         siteMoveInPrice[site.id] = [cost: totals.moveInTotal, promo: null, promoName: null, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals.paidThruDateString, sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display]
                         def oldMoveInCost = siteMoveInPrice[site.id].cost
-                        siteMoveInPrice[site.id].cost = 100000
+                        siteMoveInPrice[site.id].cost = StoritzUtil.BOGUS_MOVE_IN_COST
                         for (promo in featuredOffers) {
                             if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                                 totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
@@ -253,7 +253,7 @@ class HomeController extends SearchController {
                                 }
                             }
                         }
-                        if (siteMoveInPrice[site.id].cost == 100000) {
+                        if (siteMoveInPrice[site.id].cost == StoritzUtil.BOGUS_MOVE_IN_COST) {
                             siteMoveInPrice[site.id].cost = oldMoveInCost
                         }
                     }

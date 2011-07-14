@@ -2328,3 +2328,18 @@ li.review p.revExcerpt {
     padding: 15px;
     font-weight: bold;
 }
+#spinner {
+    display: none;
+    position: absolute;
+    width: 150px;
+    left: 580;
+    left-margin: -75px;
+    top: 320px;
+    background: white;
+}
+#spinner .message {
+    color: blue;
+    font-weight: bold;
+    left-margin: 5px;
+    top-margin: 5px;
+}

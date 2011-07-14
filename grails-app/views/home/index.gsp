@@ -16,7 +16,7 @@
         <span>Get prices, availability &amp; deals with 1 click!</span>
     </h2>
     <div id="coverphoto">
-        <g:form controller="search" action="index" name="search" id="search" method="post">
+        <g:form controller="search" action="index" name="search" id="search" method="get">
             <fieldset class="basic">
                 <legend>Enter the city, zip code, or address where you need storage:</legend>
                 <div class="controls">

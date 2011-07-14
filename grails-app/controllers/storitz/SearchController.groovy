@@ -85,6 +85,7 @@ class SearchController {
         else {
           queryTerm = StoritzUtil.titleize(params.city) + ", " + params.state;
         }
+        params.where = queryTerm // required for subsequent searches using from _results.gsp
         // TODO: Fix to look up city name using seoCity value of StorageSite table;
         // this will fail if the city name includes any punctuation
         def seoDecodedCity = params.city.replaceAll("-", " ").toLowerCase();
@@ -143,6 +144,10 @@ class SearchController {
         def sitesToRemove = []
         Date moveInDate = new Date()
 
+        if (criteria.unitType || criteria.searchSize || criteria.amenities) {
+            criteria.queryMode = QueryMode.FIND_UNITS
+        }
+
         // TODO: collect result statistics (# found, avg distance, min/max price, etc) to be reported to GA, pass to
         // view (somehow), so browser can send to GA as CustomVars
         for (site in sites) {
@@ -151,6 +156,7 @@ class SearchController {
 
             for (unit in site.units) {
                 // filter here
+                if (unit.unitCount < site.minInventory) continue;
                 if (criteria.searchSize > unit.unitsize.id) continue
                 if (criteria.unitType && criteria.unitType != unit.unitType) continue
                 if (doesNotHaveRequiredAmenities(site,unit,criteria.amenities)) continue
@@ -158,6 +164,7 @@ class SearchController {
                 // whatever gets through is good
                 availableUnitsMap[unit.id] = unit
             }
+
             def featuredOffersMap = [:] // maps units to lists of featured special offers
             if (criteria.queryMode == QueryMode.FIND_UNITS && availableUnitsMap.size() == 0) {
               // JM: Don't panic. If the user asks for 10x30 (for example) and one or more of the
@@ -226,7 +233,7 @@ class SearchController {
                     def totals = costService.calculateTotals(site, bestUnit, null, ins, moveInDate)
                     moveInPrices[site.id] = [cost: totals['moveInTotal'], promo: null, promoName: null, bestUnit: bestUnit, monthly: bestUnit?.price, pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), paidThruDate: totals['paidThruDate'], sizeDescription: bestUnit?.displaySize, unitType: bestUnit?.unitType?.display, cc: bestUnit?.isTempControlled, yourPrice: yourPrice, listPrice: listPrice]
                     def oldMoveInCost = moveInPrices[site.id].cost
-                    moveInPrices[site.id].cost = 100000
+                    moveInPrices[site.id].cost = StoritzUtil.BOGUS_MOVE_IN_COST
                     for (promo in promos) {
                         if (!(promo.promoName ==~ /(?i).*(military|senior).*/)) {
                             totals = costService.calculateTotals(site, bestUnit, promo, ins, moveInDate)
@@ -235,7 +242,7 @@ class SearchController {
                             }
                         }
                     }
-                    if (moveInPrices[site.id].cost == 100000) {
+                    if (moveInPrices[site.id].cost == StoritzUtil.BOGUS_MOVE_IN_COST) {
                         moveInPrices[site.id].cost = oldMoveInCost
                     }
                 }

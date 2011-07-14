@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 public class StoritzUtil {
 
+    public static final int BOGUS_MOVE_IN_COST = 100000;
+
     public static String stackTraceToString(Throwable t) {
         final Writer result = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(result);
@@ -139,5 +141,4 @@ public class StoritzUtil {
         }
         return s;
     }
-
 }
