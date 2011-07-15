@@ -281,22 +281,22 @@ class RentalTransactionController extends BaseTransactionController {
 
   def findAlternateUnit = { rentalTransactionInstance, unit ->
     def alternateUnit = null;
-    def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitType == unit.unitType && it.unitsize.id == unit.unitsize.id && it.id != unit?.id }.sort { it.price }
+    def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitCount > rentalTransactionInstance.site.minInventory && it.unitsize.id == unit.unitsize.id && it.id != unit?.id }.sort { it.bestUnitPrice }
     println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
     for (myUnit in bestUnitList) {
       rentalTransactionInstance.unitId = myUnit.id
       if (moveInService.isAvailable(rentalTransactionInstance)) {
         alternateUnit = myUnit
         emailMoveInProblemReportToTechTeam("Desired unit not found. Alternate unit selected.", rentalTransactionInstance)
-        flash.message = "The unit you have selected is no longer available.  We have found the next best unit that matches your search criteria."
+        flash.message = "The unit you have selected is no longer available. We have found the best-priced available unit in the same size category."
         break
       } else {
-        removeUnit(rentalTransactionInstance, unit)
+        removeUnit(rentalTransactionInstance, myUnit)
       }
     }
     if (alternateUnit == null) {
       emailMoveInProblemReportToTechTeam("Unit not found during rental transaction!", rentalTransactionInstance)
-      flash.message = "Unit already reserved - refresh and try again"
+      flash.message = "The unit you selected is no longer available, and we were unable to locate another unit in the same size category at this facility. Please go back and select a differnt size, or try another facility."
     }
     return alternateUnit;
   }
