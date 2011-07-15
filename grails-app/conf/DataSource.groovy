@@ -64,12 +64,6 @@ environments {
       jndiName = "java:comp/env/jdbc/storitz"
     }
   }
-  next {
-    dataSource {
-      dbCreate = "validate"
-      jndiName = "java:comp/env/jdbc/storitz_next"
-    }
-  }
   production_script {
     dataSource {
       //jndiName = "java:comp/env/jdbc/storitz"
@@ -79,6 +73,12 @@ environments {
       password = "st3ch@m"
     }
   }
+  next {
+    dataSource {
+      dbCreate = "validate"
+      jndiName = "java:comp/env/jdbc/storitz_next"
+    }
+  }
   next_script {
     dataSource {
       dbCreate = "validate"
@@ -86,6 +86,20 @@ environments {
       url = "jdbc:mysql://localhost:3306/storitz_next?autoReconnect=true"
       username = "storitz_next"
       password = "st6ch@m"
+    }
+  }
+  beta {
+    dataSource {
+      jndiName = "java:comp/env/jdbc/storitz"
+    }
+  }
+  beta_script {
+    dataSource {
+      //jndiName = "java:comp/env/jdbc/storitz"
+      driverClassName = "com.mysql.jdbc.Driver"
+      url = "jdbc:mysql://localhost:3306/storitz?autoReconnect=true"
+      username = "storitz"
+      password = "st3ch@m"
     }
   }
 }

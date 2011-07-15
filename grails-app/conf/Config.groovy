@@ -54,16 +54,6 @@ environments {
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = true
   }
-  next {
-    grails.serverURL = "http://next.storitz.com"
-    grails.serverRoot = "/usr/share/tomcat6/webapps/ROOT" // DOES THIS MATTER?
-    security.httpsPort = 443
-    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
-            '/weblog/**': ['ROLE_USER'],
-    ]
-    storitz.google.signatureRequired = true
-    storitz.rentals.sandboxMode = true
-  }
   // For production_script, the given port is unimportant, as long as it does not conflict with the actual port value.
   // We'll also turn off the public server url and set the Google signatureRequired to false.
   production_script {
@@ -142,7 +132,38 @@ environments {
     uiperformance.enabled = false
     storitz.google.signatureRequired = false
   }
-
+  next {
+    grails.serverURL = "http://next.storitz.com"
+    grails.serverRoot = "/home/deploy/tomcat-current/next.storitz.com/ROOT" // DOES THIS MATTER?
+    security.httpsPort = 8443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.google.signatureRequired = true
+    storitz.rentals.sandboxMode = true
+  }
+  beta {
+    grails.serverURL = "http://beta.storitz.com"
+    grails.serverRoot = "/home/deploy/tomcat-current/beta.storitz.com/ROOT" // DOES THIS MATTER?
+    security.httpsPort = 8443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.nacha.dir = '/home/deploy/tomcat-current/beta.storitz.com/nacha'
+    storitz.nacha.fileId = '7878782339'
+    storitz.nacha.companyId = '1272912549'
+    storitz.google.signatureRequired = true
+    storitz.rentals.sandboxMode = false
+  }
+  beta_script {
+    grails.serverURL = "http://beta.storitz.com:18080"
+    security.httpsPort = 8443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.google.signatureRequired = true
+    storitz.rentals.sandboxMode = false
+  }
 }
 
 // This should be true at least during development.
