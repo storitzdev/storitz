@@ -1106,7 +1106,7 @@ body.site_detail #site_address .tel {
 }
 body.site_detail #site_address {
   width: 387px;
-  font-size: 11px;
+  font-size: 12px;
 }
 body.site_detail .site_info {
   margin-top: -30px;
@@ -1141,19 +1141,6 @@ body.site_detail .vcard h1 {
   margin: 10px 0 5px 0;
 }
 
-body.site_detail .site_features h2 {
-  color: white;
-  background: url("../images/v2/site_detail/facility-subheader-bg-tile.png") repeat-x;
-  height: 24px;
-  padding-top: 9px;
-  padding-left: 9px;
-  color: white;
-  font-family: Verdana;
-  font-weight:normal;
-  border-radius: 4px 4px 4px 4px;
-  margin-right: 9px;
-}
-
 body.site_detail .site_features {
   padding-top: 10px;
 }
@@ -1163,59 +1150,6 @@ body.site_detail .site_features img {
   height: 20px;
   float: left;
   padding-right: 5px;
-}
-
-body.site_detail .site_features div {
-  -moz-border-radius: 8px 8px 8px 8px;
-  border: 1px solid #dfdfdf;
-  background-color: #fcfcfc;
-  background-image: url(../images/bkg-features-list.jpg);
-  background-position: center bottom;
-  border-radius: 8px 8px 8px 8px;
-  background-repeat: repeat-x;
-  margin: 0 6px 0 0;
-  overflow: hidden;
-  padding: 0;
-  vertical-align: top;
-  width: 204px;
-  display: inline-block;
-}
-body.site_detail .site_features div.last {
-  margin-right: 0;
-}
-body.site_detail .site_features li,
-body.site_detail .site_features h3 {
-  border-bottom: 1px solid #dfdfdf;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 11px;
-  padding: 10px 0 10px 45px;
-  margin: 0;
-  vertical-align: middle;
-  font-weight: bold;
-}
-body.site_detail .site_features li {
-  color: #333;
-  list-style: none;
-  border-top: 1px solid #fff;
-  background: url(../images/check-mark.png) no-repeat left center;
-}
-body.site_detail .site_features li.last {
-  border-bottom: none;
-}
-body.site_detail .site_features h3 {
-  color: #134b98;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0;
-}
-body.site_detail .site_features h3.safety {
-  background: url(../images/icon-safety-security.png) no-repeat left center;
-}
-body.site_detail .site_features h3.convenience {
-  background: url(../images/icon-convenience.png) no-repeat left center;
-}
-body.site_detail .site_features h3.amenities {
-  background: url(../images/icon-checkmark.png) no-repeat left center;
 }
 
 body.site_detail .tabs {
@@ -1295,7 +1229,7 @@ body.site_detail .panes .overview .photos {
   display: inline-block;
   float: left;
   width: 290px;
-  padding-right: 5px;
+  padding-right: 15px;
 }
 
 body.site_detail .panes .overview .photos ul.image_list {
@@ -1304,13 +1238,44 @@ body.site_detail .panes .overview .photos ul.image_list {
   padding: 0 0 11px;
   margin: 0 0 8px;
 }
+body.site_detail .panes .overview .all_units h3 {
+  font-size: 14px;
+}
+body.site_detail .panes .overview .site_features ul {
+  line-height: 16px;
+  margin-top: 2px;
+}
+body.site_detail .panes .overview .site_features li {
+  display: block;
+}
+body.site_detail .panes .overview .site_features {
+  margin-bottom: 20px;
+}
+body.site_detail .panes .overview .site_features table {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+body.site_detail .panes .overview .site_features td h3 {
+  font-size: 13px;
+  color: black;
+}
+body.site_detail .panes .overview .site_features td {
+  width: 200px;
+  vertical-align: top;
+}
+body.site_detail .panes .overview .site_features h2,
 body.site_detail .panes .overview .all_units h2 {
-  font-size: 13pt;
-  padding: 5px 5px 0;
+  font-size: 10pt;
   margin-bottom: 10px;
+  font-family: Verdana, sans-serif;
+  padding: 5px 5px 0;
+}
+body.site_detail .panes .overview .site_features h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #afafaf;
 }
 body.site_detail .panes .overview .all_units > ul > li:first-child {
-  border-top-color: #777;
+  border-top-color: #afafaf;
 }
 body.site_detail .panes .overview .all_units > ul > li {
   padding: 10px 0;
@@ -1326,11 +1291,14 @@ body.site_detail .panes .overview .all_units > ul > li > div {
   /*border: 1px solid pink;*/
   /*margin: 1px;*/
 }
+body.site_detail .panes .overview .all_units .unit_info ul {
+  line-height: 120%;
+}
 body.site_detail .panes .overview .all_units .unit_info {
-  width: 245;
+  width: 200px;
 }
 body.site_detail .panes .overview .all_units .special {
-  width: 125px;
+  width: 170px;
   color: #00529b;
   height: 100px;
 }
@@ -1381,16 +1349,18 @@ div.photos ul.image_list li img {
 
 body.site_detail .panes .overview .description {
   display: inline-block;
-  width: 350px;
+  width: 340px;
   padding-top: 10px;
 }
 
 body.site_detail .panes .overview ul.action_links {
   display: inline-block;
   float: right;
-  margin: 0 0 29px 10px;
+  margin: 0 10px 10px;
   padding-left: 10px;
   border-left: 1px dotted #ccc;
+  height: 44px;
+  width: 63px;
 }
 body.site_detail .panes .overview ul.action_links li {
   display: block;
@@ -1506,29 +1476,62 @@ body.site_detail .rent_me > div.rent_reserve .guarantee {
   color: #3EA307;
 }
 
-.move_in_quote dl.summary {
+.move_in_quote table.summary {
+  width: 100%;
+}
+.move_in_quote table.summary.first {
   clear: both;
-  height: 67px;
 }
-.move_in_quote dl.summary dt {
-  float: left;
-  clear: left;
-  margin-bottom: 4px;
+.move_in_quote table.summary td,
+.move_in_quote table.summary th {
+  vertical-align: top;
+  padding-bottom: 4px;
 }
-.move_in_quote dl.summary dd {
-  float: right;
-  clear: right;
+.move_in_quote table.summary th {
+  text-align: left;
+}
+.move_in_quote .summary td {
   font-weight: bold;
+  width: 158px;
+  text-align: right;
+  height: 19px;
 }
-.move_in_quote dl.summary .none {
+.move_in_quote tr.total td {
+  padding-top: 5px;
+  font-size: 110%;
+}
+.move_in_quote tr.total span.label {
+  float: left;
+  margin-top: 1px;
+}
+.move_in_quote .summary .none {
   font-weight: normal;
   font-style: italic;
 }
-
+.move_in_quote .summary a.remove_offer {
+  background-color: #ddd;
+  color: #7c6c88;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  margin: -1px 0 0 4px;
+  padding: 1px 4px 2px;
+  float: right;
+}
+.move_in_quote .summary a.more_offers {
+  color: #1982de;
+  text-decoration: none;
+  display: block;
+  font-weight: normal;
+  margin-top: 3px;
+  font-size: 11px;
+}
 .move_in_quote a.edit_date {
-  padding-left: 28px;
-  background: url("../images/icn-calendar.png") no-repeat;
-  background-position: left top;
+  padding-left: 23px;
+  background: url("../images/v2/buttons/calendar-16x14.gif") no-repeat;
+  background-position: left 3px;
   float: right;
   display: inline-block;
   text-decoration: none;
@@ -1589,19 +1592,13 @@ body.checkout .cost_breakdown {
   margin: 5px -10px;
   border-bottom-width: 0;
 }
-.move_in_quote .offer_links a {
-  color: red;
-  color: #1982de;
-  text-decoration: none;
-  font-size: 9pt;
+.move_in_quote #promo_list {
+  padding: 10px;
+  border: 4px solid #afafaf;
+  width: 255px;
+  background-color: white;
 }
-.move_in_quote .promos {
-  display: none;
-  clear: both;
-  margin-top: 10px;
-  margin-bottom: 2px;
-}
-.move_in_quote .promos li a {
+.move_in_quote #promo_list li a {
   text-decoration: none;
   display: inline-block;
   background-color: #7e7975;
@@ -1610,8 +1607,9 @@ body.checkout .cost_breakdown {
   border-radius: 2px;
   padding: 2px 10px 3px;
   margin-right: 10px;
+  opacity: 1.0;
 }
-.move_in_quote .promos li {
+.move_in_quote #promo_list li {
   display: block;
   margin: 3px 0;
 }
@@ -1619,6 +1617,10 @@ body.checkout .cost_breakdown {
   font-size: 11px;
   margin-top: 7px;
   text-align: center;
+}
+.move_in_quote p a {
+  color: #1982de;
+  text-decoration: none;
 }
 body.site_detail .rent_me > div.move_in_quote .cost_breakdown {
   display: none;
@@ -2292,21 +2294,17 @@ body.site_detail h2.video_title {
 }
 /* detail page reviews tab */
 .overview div.yelp_rating {
-    width: 266px;
-    height: 73px;
-    display: inline-block;
-    float: left;
+    height: 60px;
+    padding-top: 5px;
 }
 .overview div.yelp_rating img {
     width: 84px;
     height: 17px;
-    display: inline-block;
-    padding: 2px 5px 0 30px;
+    float: left;
+    margin: -2px 5px 0 30px
 }
-.overview div.yelp_rating p {
-    display: inline-block;
-    position: absolute;
-    top: 19px;
+.overview div.yelp_rating a {
+    display: block;
     font-weight: bold;
     font-size: 13px;
 }

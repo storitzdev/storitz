@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.StoritzUtil; storitz.constants.TransactionType" %>
+<%@ page import="storitz.constants.UnitType; com.storitz.StoritzUtil; storitz.constants.TransactionType" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>${title}</title>
@@ -33,28 +33,28 @@
         </sec:ifAnyGranted>
         <div class="site_features">
             <g:if test="${site.freeTruck  == storitz.constants.TruckType.FREE}">
-                <storitz:image src="icon3d-rentaltruck32f.gif" alt="Free Truck"/>
+                <storitz:image src="icon3d-rentaltruck32f.gif" title="Free Move-In Truck Available" />
             </g:if>
             <g:if test="${site.freeTruck  == storitz.constants.TruckType.RENTAL}">
-                <storitz:image src="icon3d-rentaltruck32r.gif" alt="Rental Truck"/>
+                <storitz:image src="icon3d-rentaltruck32r.gif" title="Move-In Truck Available to Rent" />
             </g:if>
             <g:if test="${site.isGate}">
-                <storitz:image src="icon3d-gate32.jpg" alt="Gated"/>
+                <storitz:image src="icon3d-gate32.jpg" title="Gated Entry"/>
             </g:if>
             <g:if test="${site.isKeypad}">
-                <storitz:image src="icon3d-keypad32.jpg" alt="Keypad"/>
+                <storitz:image src="icon3d-keypad32.jpg" title="Keypad Access"/>
             </g:if>
             <g:if test="${site.isCamera}">
-                <storitz:image src="icon3d-camera32.jpg" alt="Camera"/>
+                <storitz:image src="icon3d-camera32.jpg" title="Video Security Cameras" />
             </g:if>
             <g:if test="${site.isUnitAlarmed}">
-                <storitz:image src="icon3d-alarm32.jpg" alt="Alarmed"/>
+                <storitz:image src="icon3d-alarm32.jpg" title="Units Alarmed"/>
             </g:if>
             <g:if test="${site.isManagerOnsite}">
-                <storitz:image src="icon3d-mgr32b.jpg" alt="Manager Onsite"/>
+                <storitz:image src="icon3d-mgr32b.jpg" title="Resident Manager On-site"/>
             </g:if>
             <g:if test="${site.hasElevator}">
-                <storitz:image src="icon3d-elevator32.jpg" alt="Elevator Available"/>
+                <storitz:image src="icon3d-elevator32.jpg" title="Elevator to Upper Floors"/>
             </g:if>
         </div>
       </div>
@@ -86,34 +86,68 @@
                 </ul>
             </g:if>
           </div>
-          <p class="description">
-            <div class="yelp_rating">
-                <img src="#"><p> reviews</p>
-                <a class="yelp_logo" href="http://www.yelp.com">Reviews from yelp</a>
-            </div>
+          <div class="description">
             <ul class="action_links">
-              <li><span class="st_email" displayText="Share"></span></li>
               <li><a class="print" href="#" onclick="window.print();">Print</a></li>
+              <li><span class="st_email" displayText="Share"></span></li>
             </ul>
-            ${site.description}
-          </p>
+            <div class="yelp_rating">
+                <img src="#"> reviews
+                <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Reviews from yelp</a>
+            </div>
+            <p>
+              ${site.description}
+            </p>
+          </div>
+          <div class="site_features">
+            <h2>Facility Features &amp; Amenities</h2>
+            <table>
+              <tr>
+                <td>
+                  <h3>Safety/Security</h3>
+                  <ul>
+                    <g:if test="${site.isGate}"><li>Gated Entry</li></g:if>
+                    <g:if test="${site.isKeypad}"><li>Keypad Access</li></g:if>
+                    <g:if test="${site.isCamera}"><li>Video Security</li></g:if>
+                    <g:if test="${site.isUnitAlarmed}"><li>Alarms in Units</li></g:if>
+                  </ul>
+                </td>
+                <g:if test="${site.hasElevator || site.isTwentyFourHour}">
+                <td>
+                  <h3>Convenience/Access</h3>
+                  <ul>
+                    <g:if test="${site.hasElevator}"><li>Elevator</li></g:if>
+                    <g:if test="${site.isTwentyFourHour}"><li>24-Hour Access</li></g:if>
+                  </ul>
+                </td>
+                </g:if>
+                <td>
+                  <h3>Amenities</h3>
+                  <ul>
+                    <g:if test="${site.isManagerOnsite}"><li>Resident Manager On-site</li></g:if>
+                    <g:if test="${site.boxesAvailable}"><li>Boxes &amp; Moving Supplies For Sale</li></g:if>
+                    <g:if test="${site.freeTruck == storitz.constants.TruckType.FREE}"><li>Free Move-In Truck</li></g:if>
+                    <g:elseif test="${site.freeTruck == storitz.constants.TruckType.RENTAL}"><li>Move-In Truck Available to Rent</li></g:elseif>
+                  </ul>
+
+                </td>
+              </tr>
+            </table>
+          </div>
           <div class="all_units">
             <g:if test="${availableUnits?.size()}">
-            <h2><a name="all_units">Available Units at This Facility</a></h2>
+            <h2><a name="all_units">Available Units at ${site.title}</a></h2>
             <ul>
               <g:each in="${availableUnits}" var="entry">
               <li class="${entry['unit'].unitsize.description.replaceAll(' ', '')}">
                 <div class="unit_info">
-                  <h3><g:render template="unitSizeLabel" model="[unit:entry['unit']]" /></h3>
+                  <h3><g:render template="unitSizeLabel" model="[unit:entry['unit'], omitType:true]" /></h3>
                   <ul class="amenities">
-                    <li>Climate Control: <g:formatBoolean boolean="${unit.isTempControlled}" true="Yes" false="No" /></li>
-                    <li>Resident Manager: <g:formatBoolean boolean="${site.isManagerOnsite}" true="Yes" false="No" /></li>
-                    <li>Elevator: <g:formatBoolean boolean="${site.hasElevator}" true="Yes" false="No" /></li>
-                    <li><g:if test="${site.freeTruck == 'FREE'}">Free Move-In Truck: Yes </g:if><g:elseif test="${site.freeTruck == 'RENTAL'}">Move-In Truck: Yes</g:elseif><g:else>Move-In Truck: No</g:else></li>
-                    <li>Unit Alarmed: <g:formatBoolean boolean="${unit.isAlarm || site.isUnitAlarmed}" true="Yes" false="No" /></li>
-                    <li>Gated Entry: <g:formatBoolean boolean="${site.isGate}" true="Yes" false="No" /></li>
-                    <li>Keypad Entry: <g:formatBoolean boolean="${site.isKeypad}" true="Yes" false="No" /></li>
-                    <li>Security Cameras: <g:formatBoolean boolean="${site.isCamera}" true="Yes" false="No" /></li>
+                    <li>${entry['unit'].unitType.display} Unit</li>
+                    <g:if test="${unit.isTempControlled}"><li>Climate Control</li></g:if>
+                    <g:if test="${(entry['unit'].unitType == UnitType.UPPER) && site.hasElevator}"><li>Elevator</li></g:if>
+                    <g:if test="${unit.isAlarm || site.isUnitAlarmed}"><li>Alarm in Unit</li></g:if>
+                    <g:if test="${entry['unit'].isPowered}"><li>Electrical Outlet</li></g:if>
                   </ul>
                 </div>
                 <div class="special">${entry['promo']?.promoName}</div>

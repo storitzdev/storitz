@@ -12,7 +12,6 @@ import com.storitz.service.CostTotals
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
-import java.text.SimpleDateFormat
 
 class StorageSiteController extends BaseTransactionController implements ApplicationContextAware {
 
@@ -520,38 +519,6 @@ class StorageSiteController extends BaseTransactionController implements Applica
       return;
     }
 
-    //////////////////////////////////////////
-    // >>> BEGIN match smartCall action code <<<
-    // TODO: refactor
-
-    SearchType searchType
-    StorageSize unitSize = params.size ? StorageSize.get(params.size) : null
-    if (unitSize) {
-      searchType = unitSize.searchType
-    } else {
-      searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE
-    }
-
-    Collection sizeList = site.units.findAll { it.unitsize.searchType == searchType }.collect { it.unitsize }.unique()
-    // output JSON for types
-    Collection unitTypes = unitSize ? site.units.findAll { it.unitsize.id == unitSize.id}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique() : site.units.findAll { it.unitsize.searchType == searchType}.collect { "{\"type\":\"${it.unitType}\",\"value\":\"${it.unitType.display}\"}" }.unique()
-
-    sizeList.sort { it.width * it.length }
-
-    def units;
-    // if a size was chosen, use it, else get the "best" price
-    if (params.unitType && unitSize) {
-      units = site.units.findAll { it.unitType == params.unitType && it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }
-      if (!units || units.size() == 0) {
-        units = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }
-      }
-    } else if (unitSize) {
-      units = site.units.findAll { it.unitsize.id == unitSize.id && it.unitCount > site.minInventory }
-    } else {
-      // TODO - decide on best price or best price for a given size
-      units = site.units.findAll { it.unitsize.searchType == searchType && it.unitCount > site.minInventory }
-    }
-
     // JM: We're passing in bestUnit parameter now. If that's available then
     // use it and ignore all of this other garbage.
     def bestUnit
@@ -559,35 +526,8 @@ class StorageSiteController extends BaseTransactionController implements Applica
         bestUnit = StorageUnit.findById(params.bestUnit)
     }
     else {
-        bestUnit = units.min { it.bestUnitPrice }
-    }
-
-    units.sort {}
-    def availableUnits = []
-    units.each { unit ->
-      def map = [unit:unit]
-      def offers = offerFilterService.getValidFeaturedOffers(site, unit);
-      if (offers != null && offers.size() > 0) {
-        map["promo"] = offers[0];
-      }
-      availableUnits << map
-    }
-
-    // >>> END match smartCall action code <<<
-    //////////////////////////////////////////
-
-    def remoteAddr = request.remoteAddr
-
-    // Don't try to store a non-date.
-    String searchDate = params.date
-    if (searchDate && searchDate == '') searchDate = null
-
-    Visit visit = new Visit(dateCreated: new Date(), site: site, remoteAddr: remoteAddr, unitSize: unitSize, searchAddress: params.address, searchDate: searchDate)
-
-    try {
-      if (!visit.save()) println "Visit log save failed!"
-    } catch (Throwable t) {
-      t.printStackTrace()
+      def units = site.units.findAll { it.unitsize.searchType == SearchType.STORAGE && it.unitCount > site.minInventory }
+      bestUnit = units.min { it.bestUnitPrice }
     }
 
     if (!session?.shortSessionId) {
@@ -614,16 +554,32 @@ class StorageSiteController extends BaseTransactionController implements Applica
       title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
     }
 
+    def availableUnitList = site.units.findAll { it.unitsize.searchType == SearchType.STORAGE && it.unitCount > site.minInventory }
+    def sortedUnitList = availableUnitList.sort { unit1, unit2 -> unit1.unitsize.width * unit1.unitsize.length <=> unit2.unitsize.width * unit2.unitsize.length ?: unit1.unitType.display <=> unit2.unitType.display ?: unit1.bestUnitPrice <=> unit2.bestUnitPrice }
+    def availableUnits = [];
+    String curSizeDescription = null;
+    String curTypeDisplay = null;
+    sortedUnitList.each { unit ->
+      if (unit.unitsize.description != curSizeDescription || unit.unitType.display != curTypeDisplay) {
+        curSizeDescription = unit.unitsize.description;
+        curTypeDisplay = unit.unitType.display;
+        def offer = null;
+        def offers = offerFilterService.getValidFeaturedOffers(site, unit);
+        if (offers != null && offers.size() > 0) {
+          offer = offers[0];
+        }
+        availableUnits << [unit:unit, promo:offer]
+      }
+    }
     def moveInDate = new Date();
     def promo = params.promoId ? SpecialOffer.get(params.promoId as Long) : null;
     def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
     def totals = costService.calculateTotals(site, bestUnit, promo, insurance, moveInDate);
     // If you change this, don't forget the smartCall action also uses this view!
-    [rentalTransactionInstance: rentalTransactionInstance, sizeList: sizeList, unitTypes: unitTypes, site: site,
-            title: title,
+    [rentalTransactionInstance: rentalTransactionInstance, site: site, title: title,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
-            pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id, searchType: searchType,
+            pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
             promoId: params.promoId, insurance: insurance, video: video, propertyOperatorList: propertyOperatorList,
             moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos, totals: totals, availableUnits: availableUnits]
   }

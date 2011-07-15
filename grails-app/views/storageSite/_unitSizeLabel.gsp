@@ -1,8 +1,11 @@
 <%@ page import="storitz.constants.UnitType" %>
 ${unit.displaySize ? unit.displaySize.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2'") : "??"}
-<g:if test="${unit.unitType == UnitType.INTERIOR}">
-  Interior Unit (Ground Floor)
+<g:if test="${omitType}">
+  Unit
 </g:if>
+<g:elseif test="${unit.unitType == UnitType.INTERIOR}">
+  Interior Unit (Ground Floor)
+</g:elseif>
 <g:elseif test="${unit.unitType == UnitType.DRIVEUP}">
   Drive-Up Unit
 </g:elseif>

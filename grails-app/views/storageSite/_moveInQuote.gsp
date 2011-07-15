@@ -1,31 +1,25 @@
 <div class="move_in_quote">
-  <dl class="summary">
-    <dt>Total Move-In Cost
-      %{--<g:if test="${site.useProrating}"><a class="help_button move_in_cost_calendar" href="/help#move_in_cost__with_calendar_billing">huh?</a></g:if>--}%
-      %{--<g:else><a class="help_button move_in_cost_anniversary" href="/help#move_in_cost_with_anniverary_billing">huh?</a></g:else>--}%
-    </dt>
-    <dd><g:formatNumber number="${totals.getMoveInTotal()}" type="currency" currencyCode="USD" /><span class="move_in_cost_asterisk">*</span></dd>
-    <dt>Move-In Date</dt>
-    <dd>
+  <table class="summary first">
+    <tr><th>Move-In Date</th>
+    <td>
       <a class="edit_date" title="Click to Change" href="#" max-days="${site.maxReserveDays}"><g:formatDate type="date" style="MEDIUM" date="${moveInDate}" /></a>
-    </dd>
-    <dt>Paid Thru</dt>
-    <dd><g:formatDate type="date" style="MEDIUM" date="${totals.paidThruDate}" /></dd>
-    <dt>Special Offer</dt>
-    <dd>
+    </td></tr>
+    <tr><th>Paid Until</th>
+    <td><g:formatDate type="date" style="MEDIUM" date="${totals.paidThruDate}" /></td></tr>
+    <tr><th>Special Offer</th>
+    <td>
       <g:if test="${promos.size() == 0}"><span class="none">No specials available</span></g:if>
       <g:elseif test="${promo == null}"><span class="none">No special selected</span></g:elseif>
-      <g:else>${promo.promoName}</g:else>
-    </dd>
-  </dl>
-  <div class="offer_links">
-    <g:if test="${promo != null}"><a class="remove" href="#">Remove</a></g:if>
-    <g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">
-      <g:if test="${promo != null}">|</g:if> <a class="more" href="#">View offers</a>
-    </g:if>
-  </div>
+      <g:else>${promo.promoName}<a class="remove_offer" href="#">x</a></g:else>
+      <g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">
+        <a class="more_offers" href="#">View offers</a>
+      </g:if>
+      </td>
+    </tr>
+    <tr class="total"><td colspan="2"><span class="label">Total Move-In Cost</span><g:formatNumber number="${totals.getMoveInTotal()}" type="currency" currencyCode="USD" /><span class="move_in_cost_asterisk">*</span></td></tr>
+  </table>
   <g:if test="${(promo == null && promos?.size() > 0) || promos?.size() > 1}">
-  <ul class="promos">
+  <ul id="promo_list" class="tooltip">
   <g:each in="${promos}" var="p">
     <li><a href="#" promo_id="${p.id}">Select Offer</a> ${p.promoName}</li>
   </g:each>

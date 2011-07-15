@@ -454,18 +454,23 @@ function initialize_transaction_box(callback) {
     return false;
   });
 
-  $(".move_in_quote .promos a").live("click", function() {
+  $(".move_in_quote #promo_list a").live("click", function() {
     $("#promoId").val($(this).attr("promo_id"));
+    $("#promo_list").css("left", -2000)
     callback();
     return false;
   });
-  $(".move_in_quote .offer_links a.remove").live("click", function() {
+  $(".move_in_quote a.remove_offer").live("click", function() {
     $("#promoId").val("-1");
     callback();
     return false;
   });
-  $(".move_in_quote .offer_links a.more").live("click", function() {
-    $(this).parent(".offer_links").next("ul").slideToggle();
+  $(".move_in_quote a.more_offers").live("click", function() {
+    _util.display_tooltip("#promo_list", $(this), {
+      left: -60,
+      top: 50
+    });
+//    $("#promo_list").slideToggle();
     return false;
   });
   $(".move_in_quote a.breakdown").live("click", function() {
