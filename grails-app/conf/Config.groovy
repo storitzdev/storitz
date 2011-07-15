@@ -62,6 +62,7 @@ environments {
             '/weblog/**': ['ROLE_USER'],
     ]
     storitz.google.signatureRequired = true
+    storitz.rentals.sandboxMode = true
   }
   // For production_script, the given port is unimportant, as long as it does not conflict with the actual port value.
   // We'll also turn off the public server url and set the Google signatureRequired to false.
@@ -86,6 +87,7 @@ environments {
             '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
     ]
     storitz.google.signatureRequired = true
+    storitz.rentals.sandboxMode = true
   }
   // For preview_script, the given port is unimportant, as long as it does not conflict with the actual port value.
   // We'll also turn off the public server url and set the Google signatureRequired to false.
