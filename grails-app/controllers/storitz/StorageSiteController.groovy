@@ -519,13 +519,12 @@ class StorageSiteController extends BaseTransactionController implements Applica
       return;
     }
 
-    // JM: We're passing in bestUnit parameter now. If that's available then
-    // use it and ignore all of this other garbage.
+    // We're passing in bestUnit parameter now. If that's available then try to use it
     def bestUnit
     if (params.bestUnit) {
         bestUnit = StorageUnit.findById(params.bestUnit)
     }
-    else {
+    if (!bestUnit) {
       def units = site.units.findAll { it.unitsize.searchType == SearchType.STORAGE && it.unitCount > site.minInventory }
       bestUnit = units.min { it.bestUnitPrice }
     }
