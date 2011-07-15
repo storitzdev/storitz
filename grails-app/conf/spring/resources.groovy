@@ -92,7 +92,7 @@ beans = {
       break
 
     case "next":
-      println "Starting 'production' ActiveMQ 61620"
+      println "Starting 'next' ActiveMQ 61620"
       jmsBroker(XBeanBrokerService) {
         useJmx = 'false'
         persistent = 'false'
@@ -120,7 +120,7 @@ beans = {
       break
 
     case "next_script":
-      println "Starting 'next' ActiveMQ 61621"
+      println "Starting 'next_script' ActiveMQ 61621"
       jmsBroker(XBeanBrokerService) {
         useJmx = 'false'
         persistent = 'false'
