@@ -66,7 +66,7 @@ environments {
   }
   next {
     dataSource {
-      dbCreate = "update"
+      dbCreate = "validate"
       jndiName = "java:comp/env/jdbc/storitz_next"
     }
   }
@@ -81,7 +81,7 @@ environments {
   }
   next_script {
     dataSource {
-      dbCreate = "update"
+      dbCreate = "validate"
       driverClassName = "com.mysql.jdbc.Driver"
       url = "jdbc:mysql://localhost:3306/storitz_next?autoReconnect=true"
       username = "storitz_next"
