@@ -2428,3 +2428,78 @@ body.thankyou td {
 body.thankyou p {
   margin-bottom: 15px;
 }
+/* search map's info window */
+body.serp div.info_window {
+    text-align: left;
+    padding: 5px;
+    float: left;
+    width: 285px;
+    height: 140px;
+    /*font-family: verdana;*/
+    display: block;
+}
+body.serp div.info_window div.info_left {
+    display: inline-block;
+    width: 180px;
+    float: left;
+}
+body.serp div.info_window div.info_right {
+    display: inline-block;
+    width: 100px;
+}
+body.serp div.info_window div.info_left h3.info {
+    font-weight: bold;
+    font-size: 13px;
+    font-family: verdana;
+    color: #3ea307;
+    padding-bottom: 10px;
+    /*display: block;*/
+    /*position: relative;*/
+}
+body.serp div.info_window .info_left p {
+    line-height: 14px;
+    font-size: 12px;
+    font-family: helvetica;
+    color: #333;
+}
+body.serp div.info_window .info_left .yelp_rating_map {
+    width: 180px;
+    height: 50px;
+    /*background-color: pink;*/
+    padding-top: 10px;
+    position: relative;
+}
+body.serp .info_left .yelp_rating_map img {
+    width: 84px;
+    height: 17px;
+    display: inline-block;
+    padding: 2px 5px 0 0;
+}
+body.serp .info_left .yelp_rating_map p {
+    display: inline-block;
+    position: absolute;
+    top: 12px;
+    font-weight: bold;
+    font-size: 13px;
+    font-family: helvetica;
+}
+body.serp .info_left .yelp_rating_map .yelp_logo {
+    background: url(../images/reviewsFromYelpWHT.gif) no-repeat;
+    width: 115px;
+    height: 25px;
+    display: block;
+    text-indent: -9999px;
+    background-position: 3px 3px;
+    /*margin-left: 25px;*/
+}
+body.serp div.info_window .info_right img {
+    width: 100px;
+    height: 80px;
+    padding: 1px;
+    /*background-color: red;*/
+}
+body.serp div.info_window .info_right a {
+    width: 80px;
+    height: 25px;
+    background-color: blue;
+}

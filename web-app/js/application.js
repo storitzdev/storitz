@@ -293,23 +293,45 @@ var _map = function() {
                 mini_map_url += "&markers=size:tiny|color:blue|"
                 var row;
                 var name;
+                var hoverName;
                 var site_id;
                 var lat;
                 var lng;
+                var addr1;
+                var addr2;
+                var phone;
+                var infoContainer;
+                var image;
+                var yelp;
+                var link;
                 var facilities = $("#search_results .facility");
                 var i = 0;
                 var n = facilities.length;
                 facilities.each(function() {
                     row = $(this);
-                    name = row.children("a").first().text();
+                    hoverName = row.children("a").first().text();
+                    name = "<h3 class='info'>"+row.children("a").first().text()+"</h2>";
+                    addr1 = "<p>"+row.attr("addr")+"</p>";
+                    addr2 = "<p>"+row.attr("city")+", "+row.attr("state")+" "+row.attr("zip")+"</p>";
                     site_id = row.attr("site_id");
                     lat = row.attr("lat");
                     lng = row.attr("lng");
+                    yelp = "<div class='yelp_rating_map'>" +
+                            "<img src='#'/><p> reviews</p>" +
+                            "<a class='yelp_logo' href='http://www.yelp.com'>Reviews from yelp</a></div>";
+                    phone = "<p>(877) 456-2929</p>";
+                    image = "<img src="+row.attr('pic')+" />";
+                    link = "<a href='#'>Rent</a>"
+                    infoContainer="<div class='info_window'>" +
+                            "<div class='info_left'>"+name+addr1+addr2+phone+yelp+"</div>" +
+                            "<div class='info_right'>"+image+link+"</div></div>";
                     var point = new google.maps.LatLng(lat, lng);
-                    var marker = new google.maps.Marker({ map: big_map, position: point, icon: inactive_icon, title: name });
-                    var info_window = new google.maps.InfoWindow( { content: name, maxWidth: 200 });
+                    var marker = new google.maps.Marker({ map: big_map, position: point, icon: inactive_icon, title: hoverName });
+                    var info_window = new google.maps.InfoWindow( { content: infoContainer, maxWidth: 300});
                     google.maps.event.addListener(marker, "click", function() {
                         toggle_info_window(info_window, big_map, marker);
+                        console.log("lat:" + lat + "lng:"+ lng);
+                        genReviews(lat, lng);
                     });
                     markers[site_id] = [marker, info_window];
                     big_map_bounds.extend(point);
@@ -319,6 +341,11 @@ var _map = function() {
                     }
                     i++;
                 });
+                console.log(markers);
+               for (var mark in markers) {
+                    console.log("value of info window"+mark[0].position);
+                    var lat = mark[0].position;
+                }
                 mini_map_canvas.html('<a href="#map-view" class="toggle_map_view"><img width="' + mini_map_width + '" height="' + mini_map_height + '" src="' + mini_map_url + '" /></a>');
                 big_map.setCenter(big_map_bounds.getCenter());
                 big_map.fitBounds(big_map_bounds);
@@ -541,8 +568,8 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
     var category_filter = 'selfstorage';
     var limit = '1';
     var sort = '1';
-    var radius_filter = '300';
-
+    var radius_filter = '1000';
+    console.log("i got here 1"); //debug
     var accessor = {
         consumerSecret: auth.consumerSecret,
         tokenSecret: auth.accessTokenSecret
@@ -586,6 +613,7 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
 
     var parameterMap = OAuth.getParameterMap(message.parameters);
     parameterMap.oauth_signature = parameterMap.oauth_signature.replace(/\+/g, '%2B');
+    console.log(parameterMap);
 
     if (!isBusiness) {
         $.ajax({
@@ -595,6 +623,7 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
                     'jsonpCallback': 'cb',
                     'success': function(data, textStats, XMLHttpRequest) {
                         console.log(data);
+                        console.log("i got here 2"); //debug
                         procReview(data, isBusiness);
                     }
                 });
@@ -614,8 +643,9 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
 }
 function procReview(data, isBusiness) {
     if (!isBusiness && data.businesses.length == 0) {
-        $(".yelp_rating img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
-        $(".yelp_rating p").prepend("0");
+        console.log("i got here 3"); //debug
+        $(".yelp_rating img, .yelp_rating_map img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
+        $(".yelp_rating p, .yelp_rating_map p").prepend("0");
         $("#yelp_reviews").prepend("<h2 class='none'>This site has no reviews yet.</h2>");
         return;
     }
@@ -624,9 +654,10 @@ function procReview(data, isBusiness) {
         genReviews(data.region.center.latitude, data.region.center.longitude, site.id);
     }
     else {
+        console.log("i got here 4"); //debug
         var site = data;
-        $(".yelp_rating img").attr('src', site.rating_img_url);
-        $(".yelp_rating p").prepend(site.review_count);
+        $(".yelp_rating img, .yelp_rating_map img").attr('src', site.rating_img_url);
+        $(".yelp_rating p, .yelp_rating_map p").prepend(site.review_count);
         $("#yelp_reviews").prepend("<h2 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h2>");
         if (site.review_count > site.reviews.length) {
             $("#yelp_reviews a.read_more").css("display", "block");

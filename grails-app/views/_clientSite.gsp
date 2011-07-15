@@ -25,7 +25,7 @@
         &nbsp;
     </g:else>
 </div>
-<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}">
+<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}" addr="${site.address}" city="${site.city}" state="${site.state.display}" zip="${site.zipcode}" pic="${resource(file: site.coverImage().mid())}">
     <g:link mapping='siteLink2' class="name" params="${site_url_params}">${site.title}</g:link>
     <div class="street address">
         <span>${site.address}</span>

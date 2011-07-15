@@ -228,8 +228,6 @@
       initialize_site_detail_page();
     });
   </script>
-<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
-<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 </p:dependantJavascript>
 </body>
 </html>
