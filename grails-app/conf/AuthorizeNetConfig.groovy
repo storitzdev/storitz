@@ -5,6 +5,13 @@ authorizeNet {
 }
 
 environments {
+  next {
+    authorizeNet {
+      login = '2E3jsfH7L5F'
+      transactionKey = '979cxZC5g8dDRf9b'
+      urlString = 'https://test.authorize.net/gateway/transact.dll'
+    }
+  }
   development {
     authorizeNet {
       login = '2E3jsfH7L5F'
@@ -55,6 +62,13 @@ environments {
     }
   }
   production_script {
+    authorizeNet {
+      login = '92c4zN6Xj'
+      transactionKey = '9764C6T9DtAmU9uD'
+      urlString = 'https://secure.authorize.net/gateway/transact.dll'
+    }
+  }
+  beta {
     authorizeNet {
       login = '92c4zN6Xj'
       transactionKey = '9764C6T9DtAmU9uD'
