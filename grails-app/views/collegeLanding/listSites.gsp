@@ -49,7 +49,7 @@
       <a class="close" href="#">Close</a>
       <iframe src="<g:createLink action="storageTips" params="[layout:'min']" />"></iframe>
     </div>
-    <g:render template="/search/results" />
+    <g:render template="/search/results" model="${resultsModel}" />
 </div>
 <p:dependantJavascript>
 <script type="text/javascript">
@@ -58,6 +58,7 @@
   $(d).ready(function() {
     initialize_college_landing_page();
   });
+  bindPickerFormHandler('.formpicker','picker','.results_container','.spinner');
 </script>
 </p:dependantJavascript>
 </body>

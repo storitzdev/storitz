@@ -12,6 +12,4 @@ class WebUtilService {
     response.setIntHeader('Expires', -1) //prevents caching at the proxy server
     response.addHeader('cache-Control', 'private') //IE5.x only
   }
-
-
 }

@@ -529,6 +529,7 @@ function initialize_serp() {
   // show map?
   if (window.location.hash == "#map-view" || $.cookie('view-mode') == 'map-view') {
       _map.mapify();
+      $.cookie('view-mode',null) // delete this cookie in case user navigates away
   }
   // bind map events
   $(".toggle_map_view").click(function() {

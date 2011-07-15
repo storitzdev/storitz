@@ -42,7 +42,7 @@
     <div class="left">
       <g:if test="${site.coverImage()}">
         <div class="left">
-          <img src="${resource(file: site.coverImage().mid())}" width="320" height="240" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
+          <img src="${resource(file: site.coverImage()?.mid())}" width="320" height="240" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}" style="width:240px; height:160px; margin: 0 20px 20px 0px;">
         </div>
       </g:if>
       <p style="margin: 0;">

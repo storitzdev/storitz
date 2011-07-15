@@ -14,7 +14,7 @@
 <div class="photo">
     <g:if test="${site.coverImage()}">
       <div class="thumb_frame">
-        <img class="thumb" src="${resource(file: site.coverImage().mid())}"
+        <img class="thumb" src="${resource(file: site.coverImage()?.mid())}"
              alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
       </div>
     </g:if>
@@ -25,7 +25,7 @@
         &nbsp;
     </g:else>
 </div>
-<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}" addr="${site.address}" city="${site.city}" state="${site.state.display}" zip="${site.zipcode}" pic="${resource(file: site.coverImage().mid())}">
+<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}" addr="${site.address}" city="${site.city}" state="${site.state.display}" zip="${site.zipcode}" pic="${resource(file: site.coverImage()?.mid())}">
     <g:link mapping='siteLink2' class="name" params="${site_url_params}">${site.title}</g:link>
     <div class="street address">
         <span>${site.address}</span>

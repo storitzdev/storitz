@@ -16,7 +16,7 @@
         </image:image>
         <g:each var="image" in="${site.images}">
           <image:image>
-            <image:loc><g:createLinkTo absolute="true" file="${resource(file: image.mid())}"/></image:loc>
+            <image:loc><g:createLinkTo absolute="true" file="${resource(file: image?.mid())}"/></image:loc>
             <image:caption>Image of ${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:caption>
             <image:geo_location>${site.getFullAddress().replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:geo_location>
             <image:title>${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:title>

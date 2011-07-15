@@ -89,7 +89,7 @@ public class StoritzUtil {
 
     public static String titleize(String s) {
       StringBuilder sb = new StringBuilder();
-      String[] words = s.split("\\s+");
+      String[] words = s.trim().split("\\s+");
       for (int i = 0; i < words.length; i++) {
         sb.append(words[i].substring(0, 1).toUpperCase());
         if (words[i].length() > 0) {

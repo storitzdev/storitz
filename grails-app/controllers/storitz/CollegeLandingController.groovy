@@ -5,11 +5,18 @@ import javax.servlet.http.*
 import storitz.constants.SearchType
 import com.storitz.UserRole
 import com.storitz.User
+import storitz.constants.QueryMode
 
 class CollegeLandingController extends SearchController  {
 
     def fileUploadService
     def springSecurityService
+    def searchService
+    def queryTerm
+    def unitSize
+    def unitType
+    def amenities
+    def resultsModel = ['controller':'collegeLanding' , 'action':'listSites', 'name':'picker']
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -21,6 +28,11 @@ class CollegeLandingController extends SearchController  {
           isAdmin = (user && UserRole.userHasRole(user, 'ROLE_ADMIN'))
         }
 
+        // subsequent college searches.
+        if (!params.college && params.where) {
+          params.college = params.where
+        }
+
         // display storage sites near campus
         def title = null
         def college = null
@@ -30,12 +42,15 @@ class CollegeLandingController extends SearchController  {
         }
 
         def geoResult
+
+      if (params.address) {
         def address = params.address
-        if (params.address.class.isArray()) {
-            address = params.address.join(' ');
+        if (params.address?.class?.isArray()) {
+          address = params.address.join(' ');
         }
         geoResult = geocodeService.geocode(address)
         handleGeocode(geoResult)
+      }
 
         if (!lat || !lng) {
             lat = 39.8333333
@@ -46,17 +61,41 @@ class CollegeLandingController extends SearchController  {
         criteria.centroid.lat = lat;
         criteria.centroid.lng = lng;
         criteria.searchType = SearchType.STORAGE;
+        criteria.queryMode = QueryMode.FIND_UNITS;
         criteria.featuredOfferTag = "college_special_2011"
+      criteria.searchSize = 0 // Default. Overridden below.
 
-        def searchResult = findClientSites(criteria)
+      def sz = searchService.getUnitSize(params.unit_size)
+      if (sz) {
+        unitSize = params.unit_size
+        criteria.searchSize = sz.id
+      }
 
-        [college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin]
+      def tp = searchService.getUnitType(params.unit_type)
+      if (tp) {
+        unitType = params.unit_type
+        criteria.unitType = tp
+      }
+
+      def am = searchService.getAmenities(params.amenity)
+      if (am.size()) {
+        amenities = am
+        Boolean t = new Boolean(true);
+        for (a in am) {
+          if (a.value) criteria.amenities.put(a.key,t)
+        }
+      }
+
+        def searchResult = searchService.findClientSites(criteria)
+
+
+        resultsModel['where'] = queryTerm = "${college.name}"
+        [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel]
     }
 
     def storageTips = {
         [title: 'Storage 101: College Summer Storage Tips for Students']
     }
-
 
     private CollegeLanding findCollege(String url) {
         ArrayList<CollegeLanding> colleges = CollegeLanding.findAll()
@@ -91,7 +130,6 @@ class CollegeLandingController extends SearchController  {
         }
         return null
     }
-
 
     def index = {
         redirect(action: "list", params: params)
@@ -191,7 +229,7 @@ class CollegeLandingController extends SearchController  {
         }
     }
 
-    def handleImage(HttpServletRequest req, CollegeLanding college) {
+    private def handleImage(HttpServletRequest req, CollegeLanding college) {
         def logoFile = req.getFile('logoFile')
         if (logoFile.size > 0) {
             Integer collegeId = college.id
@@ -201,5 +239,18 @@ class CollegeLandingController extends SearchController  {
             college.logoBaseName='/images/college' + fileUploadService.getWebIdPath(collegeId)
             college.logoFileLoc=newName
         }
+    }
+
+    // helper function
+    private boolean handleGeocode (geoResult) {
+      def out = [:]
+      def res = searchService.handleGeocode(servletContext,request,geoResult,out)
+      if (out['lng'])     lng=out['lng']
+      if (out['lat'])     lat=out['lat']
+      if (out['city'])    city=out['city']
+      if (out['state'])   state=out['state']
+      if (out['zip'])     zip=out['zip']
+      if (out['address']) address=out['address']
+      return res
     }
 }

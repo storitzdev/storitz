@@ -73,7 +73,7 @@
         <div class="overview"><!-- first tab -->
           <div class="photos"><!-- more elems inside this div -->
             <g:if test="${site.coverImage()}">
-              <img class="main_pic" src="${resource(file: site.coverImage().mid())}"
+              <img class="main_pic" src="${resource(file: site.coverImage()?.mid())}"
                    alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
             </g:if>
             <g:if test="${site.siteImages().size() > 0}">
