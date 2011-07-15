@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.UnitType" %>
 <h1>Your Booking Summary</h1>
 <div class="site_info">
   <div class="image_container">
@@ -13,28 +14,27 @@
   <p>${site.city}, ${site.state.display} ${site.zipcode}</p>
   <p class="tel">(877) 456-2929</p>
 </div>
+%{-- It's possible for unit to be null if we discovered that the unit was unavailable, and then failed to find another unit --}%
+<g:if test="${unit != null}">
 <div class="unit_info">
   <h4><g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" /></h4>
   <div>
     <ul class="amenities">
-      <li>Climate Control: <g:formatBoolean boolean="${unit.isTempControlled}" true="Yes" false="No" /></li>
-      <li>Resident Manager: <g:formatBoolean boolean="${site.isManagerOnsite}" true="Yes" false="No" /></li>
-      <li>Elevator: <g:formatBoolean boolean="${site.hasElevator}" true="Yes" false="No" /></li>
-      <li><g:if test="${site.freeTruck == 'FREE'}">Free Move-In Truck: Yes </g:if><g:elseif test="${site.freeTruck == 'RENTAL'}">Move-In Truck: Yes</g:elseif><g:else>Move-In Truck: No</g:else></li>
-    </ul>
-    <ul class="amenities">
-      <li>Unit Alarmed: <g:formatBoolean boolean="${unit.isAlarm || site.isUnitAlarmed}" true="Yes" false="No" /></li>
-      <li>Gated Entry: <g:formatBoolean boolean="${site.isGate}" true="Yes" false="No" /></li>
-      <li>Keypad Entry: <g:formatBoolean boolean="${site.isKeypad}" true="Yes" false="No" /></li>
-      <li>Security Cameras: <g:formatBoolean boolean="${site.isCamera}" true="Yes" false="No" /></li>
+      <g:if test="${unit.isTempControlled}"><li>Climate Control</li></g:if>
+      <g:if test="${unit.unitType == UnitType.UPPER && site.hasElevator}">Elevator Access</li></g:if>
+      <g:if test="${site.freeTruck == 'FREE'}"><li><i>Free Move-In Truck!</i><br />Call to check availability</li></g:if>
+      <g:elseif test="${site.freeTruck == 'RENTAL'}"><li>Move-In Truck at Facility</li></g:elseif>
+      <g:if test="${unit.isAlarm || site.isUnitAlarmed}"><li>Alarm In Unit </li></g:if>
+      <g:if test="${unit.isPowered}"><li>Electrical Outlet</li></g:if>
     </ul>
   </div>
 </div>
 <g:render template="/storageSite/moveInQuote" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, insurance:insurance, totals:totals]" />
 <g:hiddenField name="siteId" value="${site.id}" />
-<g:hiddenField name="unitId" value="${unit.id}" />
+<g:hiddenField name="unitId" value="${unit?.id}" />
 <g:hiddenField name="moveInDate" value="${formatDate(format:'yyyy-MM-dd', date:moveInDate)}" />
 <g:if test="${promo != null}"><g:hiddenField name="promoId" value="${promo.id}" /></g:if>
 <g:else><g:hiddenField name="promoId" value="-1" /></g:else>
 <g:if test="${insurance != null}"><g:hiddenField name="insuranceId" value="${insurance.id}" /></g:if>
 <g:else><g:hiddenField name="insuranceId" value="-1" /></g:else>
+</g:if>
