@@ -1,3 +1,17 @@
+// slurp the query-string into a variable QueryString
+// Thanks to http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
+var QueryString = (function(a) {
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i)
+    {
+        var p=a[i].split('=');
+        if (p.length != 2) continue;
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+})(window.location.search.substr(1).split('&'));
+
 // setup for google analytics
 var _gaq = _gaq || [];
 _gaq.push(  ['_setAccount', 'UA-16012579-1'],
@@ -218,7 +232,7 @@ var _map = function() {
             link.text("List View");
             link.attr("href", "#list-view");
             window.location.hash = "#map-view";
-            $.cookie('view-mode','map-view');
+            $("input:hidden[name=view-mode]").val("map-view");
             $("#search_results").addClass("map");
             $("#search_result_labels").addClass("map");
             $("#big_map_canvas").addClass("visible");
@@ -253,7 +267,7 @@ var _map = function() {
             link.text("Map View");
             link.attr("href", "#map-view");
             window.location.hash = "#list-view";
-            $.cookie('view-mode','list-view');
+            $("input:hidden[name=view-mode]").val("list-view");
             $("#search_results").removeClass("map");
             $("#search_result_labels").removeClass("map");
             $("#big_map_canvas").removeClass("visible");
@@ -527,9 +541,8 @@ function initialize_splash() {
 function initialize_serp() {
   _map.init();
   // show map?
-  if (window.location.hash == "#map-view" || $.cookie('view-mode') == 'map-view') {
+  if (window.location.hash == "#map-view" || QueryString["view-mode"]=="map-view") {
       _map.mapify();
-      $.cookie('view-mode',null) // delete this cookie in case user navigates away
   }
   // bind map events
   $(".toggle_map_view").click(function() {
