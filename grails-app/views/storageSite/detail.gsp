@@ -92,7 +92,7 @@
               <li><span class="st_email" displayText="Share"></span></li>
             </ul>
             <div class="yelp_rating">
-                <img src="#"> reviews
+                <img src="#" /><span> reviews</span>
                 <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Reviews from yelp</a>
             </div>
             <p>

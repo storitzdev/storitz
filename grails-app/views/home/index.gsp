@@ -13,7 +13,7 @@
     </h1>
     <h2>
         <span class="first-child">Simplify your search for self storage.</span>
-        <span>Get prices, availability &amp; deals with 1 click!</span>
+        %{--<span>Get prices, availability &amp; deals with 1 click!</span>--}%
     </h2>
     <div id="coverphoto">
         <g:form controller="search" action="index" name="search" id="search" method="get">
@@ -80,7 +80,7 @@
 </div>
 <div id="info">
     <div id="howto">
-        <h2>Self Storage How To</h2>
+        <h2>Rent your unit online.</h2>
         <p>Why hassle with phone calls and email when you can rent storage right
         now? Only Storitz lets you search, select, pay, and then print your
         receipt, contract, and gate code.</p>
@@ -140,37 +140,33 @@
 
         <div>
             <h3>Military Storage<a name="military-storage">&nbsp;</a></h3>
-            <p>Frequent relocation can be a challenge for any family, but can especially be an
-            added stress or for military service members and their families.  Finding an affordable
-            storage unit near a military base can be a challenge.  Storitz lists thousands of
+            <p>Frequent relocation is a challenge for any family, but can be especially stressful for military
+            service members and their families. Finding an affordable storage unit near a military base can be
+            a challenge. Storitz lists hundreds of self storage facilities
             </p>
             <p class="right">
-            storage units near military bases, including Henderson Hall storage, Fort Myer
-            storage, Fort McNair storage units and storage near Fort Hamilton.  To compare self
-            storage military deals, simply enter your zip code and search near you.</p>
+            near military bases, including Henderson Hall storage, Fort Myer storage,
+            Fort McNair storage units and storage near Fort Hamilton. To compare self storage
+            military deals, enter your zip code to search near you.</p>
         </div>
         <div>
             <h3>College Storage<a name="college-storage">&nbsp;</a></h3>
-            <p>For many new college students, going to college means living with much less
-            storage space than they are used to at home.  Storitz makes it easy to find college
-            student storage across the country.  Whether it is you or your son or daughter
-            who is seeking summer storage, college storage, dorm storage or simply an affordable</p>
+            <p>For many new college students, going to college means living with much less storage space than they are
+            used to at home. Storitz makes it easy to find college student self storage across the country. Whether it
+            is you or your son or daughter who is seeking summer storage, college storage, dorm storage or simply an affordable</p>
             <p class="right">
-            storage unit near USC Storitz has you covered.  You can even compare
-            storage near the University of Arizona and rent college storage at any time of the
-            day, online.  Just type in your campus address or zip code to start your search.
+            self storage unit near USC, Storitz has you covered. You can even compare self storage
+            near the University of Arizona and rent college storage units at any time of the day, online. Just type in
+            your campus address or zip code to start your search.
             </p>
         </div>
         <div>
             <h3>Business Storage<a name="business-storage">&nbsp;</a></h3>
-            <p>There are many reasons that business owners need storage.  A business
-            storage unit can be an affordable solution for inventory overstock.  Small
-            business storage makes operating a business possible where there is not much
-            space in your storefront or</p>
-            <p class="right">home. Business storage can also be an affordable place to
-            storage business tools or to storage business vehicles, utilizing a facility’s
-            trailer storage or boat storage.  Enter your zip code to search and compare business
-            storage locations near you.</p>
+            <p>Business owners may need to rent self storage for many reasons.  A business storage unit can be an affordable
+            solution to store inventory overstock. Small business storage makes operating a business possible where there
+            is not much space in your storefront or home. Self storage for business can also be an affordable place to </p>
+            <p class="right">store business tools or to store business vehicles, by utilizing a facility’s trailer storage or boat storage. Enter your zip code to search
+            and compare business self storage locations near you.</p>
         </div>
     </div>
 </div>
