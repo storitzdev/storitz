@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.StoritzUtil; java.math.RoundingMode" %>
+<%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder; com.storitz.StoritzUtil; java.math.RoundingMode" %>
 <html>
 <head>
     <title>The Fastest, Easiest Way to Find &amp; Rent Self-Storage - Storitz </title>
@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="bigbox">
-    <h1 class="storitz-logo">
+    <h1 class="storitz-logo ${(true || ConfigurationHolder.config?.storitz?.beta) ? 'beta' : ''}">
         Storitz.com - Click. Store. Done.
         <g:link controller="home" action="index"></g:link>
     </h1>

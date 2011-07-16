@@ -154,6 +154,7 @@ environments {
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = true
     storitz.rentals.sandboxMode = false
+    storitz.beta = true
   }
   beta_script {
     grails.serverURL = "http://beta.storitz.com:18080"

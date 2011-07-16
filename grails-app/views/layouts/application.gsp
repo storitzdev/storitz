@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder" contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <title><g:layoutTitle default="Rent Best Price Guaranteed Self Storage - Storitz" /></title>
@@ -16,7 +16,7 @@
     </head>
     <body class="${pageProperty(name:'body.class') ? pageProperty(name:'body.class') : 'default'}">
         <div id="header">
-            <h1 class="storitz-logo">
+            <h1 class="storitz-logo ${(true || ConfigurationHolder.config?.storitz?.beta) ? 'beta' : ''}">
                 <g:link controller="home" action="index">
                     Storitz.com - Click. Store. Done.
                 </g:link>

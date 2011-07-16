@@ -565,6 +565,9 @@ h1.storitz-logo a {
   top: 0;
   left: 0;
 }
+h1.storitz-logo.beta a {
+  background: url("../images/v2/home/storitz-logo-small-beta.png") no-repeat;
+}
 
 #header {
   width: 960px;
