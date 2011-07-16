@@ -34,65 +34,65 @@ beans = {
   }
 
   // default ports for production
-  def port1 = 61619
-  def port2 = 61617
+  def activeMQport1 = 61619
+  def activeMQport2 = 61617
 
   switch (GrailsUtil.environment) {
     case "production_script":
-      port1 = 61719
-      port2 = 61717
+      activeMQport1 = 61719
+      activeMQport2 = 61717
       break
     case "next":
-      port1 = 61620
-      port2 = 61621
+      activeMQport1 = 61620
+      activeMQport2 = 61621
       break
     case "next_script":
-      port1 = 61622
-      port2 = 61623
+      activeMQport1 = 61622
+      activeMQport2 = 61623
       break
     case "preview":
-      port1 = 61624
-      port2 = 61625
+      activeMQport1 = 61624
+      activeMQport2 = 61625
       break
     case "preview_script":
-      port1 = 61626
-      port2 = 61627
+      activeMQport1 = 61626
+      activeMQport2 = 61627
       break
     case "beta":
-      port1 = 61628
-      port2 = 61629
+      activeMQport1 = 61628
+      activeMQport2 = 61629
       break
     case "beta_script":
-      port1 = 61630
-      port2 = 61631
+      activeMQport1 = 61630
+      activeMQport2 = 61631
       break
     case "development":
-      port1 = 61632
-      port2 = 61633
+      activeMQport1 = 61632
+      activeMQport2 = 61633
       break
     case "development_script":
-      port1 = 61634
-      port2 = 61635
+      activeMQport1 = 61634
+      activeMQport2 = 61635
       break
     case "test":
-      port1 = 61636
-      port2 = 61637
+      activeMQport1 = 61636
+      activeMQport2 = 61637
       break
     case "test_script":
-      port1 = 61638
-      port2 = 61639
+      activeMQport1 = 61638
+      activeMQport2 = 61639
       break
   }
 
-  println "Starting ActiveMQ service for ${GrailsUtil.environment} on ports ${port1}, ${port2}"
+  println "Starting ActiveMQ service for ${GrailsUtil.environment} on ports ${activeMQport1}, ${activeMQport2}"
   jmsBroker(XBeanBrokerService) {
     useJmx = 'false'
     persistent = 'false'
-    transportConnectors = [new TransportConnector(uri: new URI('tcp://localhost:${port1}'))]
+    transportConnectors = [new TransportConnector(uri: new URI("tcp://localhost:${activeMQport1}"))]
   }
 
   connectionFactory(ActiveMQConnectionFactory) {
-    brokerURL = "vm://localhost:${port2}"
+    brokerURL = "vm://localhost:${activeMQport2}"
   }
 
   jmsTemplate(JmsTemplate) {
@@ -101,12 +101,12 @@ beans = {
     }
   }
   jmsFactory(org.apache.activemq.ActiveMQConnectionFactory) {
-    brokerURL = "vm://localhost:${port1}"
+    brokerURL = "vm://localhost:${activeMQport1}"
   }
   jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
     bean.destroyMethod = "stop"
     connectionFactory = { org.apache.activemq.ActiveMQConnectionFactory cf ->
-      brokerURL = "vm://localhost:${port1}"
+      brokerURL = "vm://localhost:${activeMQport1}"
     }
   }
 }
