@@ -213,12 +213,16 @@ var _map = function() {
     var markers = {}; // maps site IDs to [google.maps.Marker, google.maps.InfoWindow] pairs
     var popup_map_options;
     var big_map_options;
-    var toggle_info_window = function(info_window, map, marker) {
+    var toggle_info_window = function(info_window, map, marker, site_id) {
         if (current_info_window) {
             current_info_window.close();
         }
         current_info_window = info_window;
         info_window.open(map, marker);
+        var link = $("div.facility[site_id~="+site_id+"] a.name").attr("href");
+        console.log(link.toString());
+        $("div.info_window .info_right a").attr("href", link.toString());
+        $("div.info_window h3.info a").attr("href", link.toString());
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
         genReviews(lat, lng);
@@ -247,7 +251,7 @@ var _map = function() {
             $("#search_results > li").click(function() {
                 var site_id = $(this).attr("id").substr(5);
                 var entry = markers[site_id];
-                toggle_info_window(entry[1], big_map, entry[0]);
+                toggle_info_window(entry[1], big_map, entry[0], site_id);
             });
             $("#search_results > li").hover(function() {
                 var li = $(this);
@@ -311,7 +315,6 @@ var _map = function() {
                 var row;
                 var name;
                 var hoverName;
-                var site_id;
                 var addr1;
                 var addr2;
                 var phone;
@@ -325,18 +328,18 @@ var _map = function() {
                 facilities.each(function() {
                     row = $(this);
                     hoverName = row.children("a").first().text();
-                    name = "<h3 class='info'>"+row.children("a").first().text()+"</h2>";
+                    name = "<h3 class='info'><a href='#'>"+row.children("a").first().text()+"</a></h3>";
                     addr1 = "<p>"+row.attr("addr")+"</p>";
                     addr2 = "<p>"+row.attr("city")+", "+row.attr("state")+" "+row.attr("zip")+"</p>";
-                    site_id = row.attr("site_id");
+                    var site_id = row.attr("site_id");
                     var lat = row.attr("lat");
                     var lng = row.attr("lng");
                     yelp = "<div class='yelp_rating_map'>" +
                             "<img src='#'/><span> reviews</span>" +
                             "<a class='yelp_logo' href='http://www.yelp.com'>Reviews from yelp</a></div>";
                     phone = "<p>(877) 456-2929</p>";
-                    image = "<img src="+row.attr('pic')+" />";
-                    link = "<a href='#'>Details</a>"
+                    image = "<a href='#'><img src="+row.attr('pic')+" /></a>";
+                    link = "<a class='site_link' href='#'>Details</a>"
                     infoContainer="<div class='info_window'>" +
                             "<div class='info_left'>"+name+addr1+addr2+phone+yelp+"</div>" +
                             "<div class='info_right'>"+image+link+"</div></div>";
@@ -344,8 +347,7 @@ var _map = function() {
                     var marker = new google.maps.Marker({ map: big_map, position: point, icon: inactive_icon, title: hoverName });
                     var info_window = new google.maps.InfoWindow( { content: infoContainer, maxWidth: 300});
                     google.maps.event.addListener(marker, "click", function() {
-                        toggle_info_window(info_window, big_map, marker);
-                        genReviews(lat, lng);
+                        toggle_info_window(info_window, big_map, marker, site_id);
                     });
                     markers[site_id] = [marker, info_window];
                     big_map_bounds.extend(point);

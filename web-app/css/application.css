@@ -2453,11 +2453,16 @@ body.serp div.info_window div.info_right {
     width: 100px;
 }
 body.serp div.info_window div.info_left h3.info {
+    display: block;
+    padding-bottom: 10px;
+}
+body.serp div.info_window div.info_left h3.info a{
     font-weight: bold;
     font-size: 13px;
     font-family: verdana;
     color: #3ea307;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
+    text-decoration: none;
     /*display: block;*/
     /*position: relative;*/
 }
@@ -2500,7 +2505,7 @@ body.serp div.info_window .info_right img {
     padding: 1px;
     /*background-color: red;*/
 }
-body.serp div.info_window .info_right a {
+body.serp div.info_window .info_right a.site_link {
     width: 96px;
     height: 25px;
     background: url(../images/details-button-96x25.png) no-repeat;
