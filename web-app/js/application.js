@@ -666,7 +666,7 @@ function procReview(data, isBusiness) {
     else {
         var site = data;
         $(".yelp_rating img, .yelp_rating_map img").attr('src', site.rating_img_url);
-        $(".yelp_rating p, .yelp_rating_map span").prepend(site.review_count);
+        $(".yelp_rating span, .yelp_rating_map span").prepend(site.review_count);
         $("#yelp_reviews").prepend("<h2 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h2>");
         if (site.review_count > site.reviews.length) {
             $("#yelp_reviews a.read_more").css("display", "block");
