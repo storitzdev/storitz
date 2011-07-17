@@ -418,10 +418,12 @@ function initialize_site_detail_page() {
     $("ul.tabs").tabs("div.panes > div");
 
     // fix height so footer isn't hidden behind body content
-    var left = $("#left_panel").height();
-    var right = $("#right_panel").height();
-    var max_height = Math.max(left, right);
-    $(".container").height(max_height);
+    $("ul.tabs li").click(function () {
+        var left = $("#left_panel").height();
+        var right = $("#right_panel").height();
+        var max_height = Math.max(left, right);
+        $(".container_detail").height(max_height);
+    });
 
     initialize_transaction_box(update_rent_me_panel);
 
