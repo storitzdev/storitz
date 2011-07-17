@@ -55,7 +55,7 @@
 </p>
 <p>
 <div><a href="https://www.storitz.com/admin">Storitz Admin</a></div>
-<div>Phone: (310) 444-5550 x 104</div>
+<div>Phone: (877) 456-2929</div>
 <div>Email: info@storitz.com</div>
 </p>
 <div style="height: 30px;"></div>
