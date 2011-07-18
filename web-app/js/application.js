@@ -418,7 +418,7 @@ function initialize_site_detail_page() {
     $("ul.tabs").tabs("div.panes > div");
 
     // fix height so footer isn't hidden behind body content
-    $("ul.tabs li").click(function () {
+    $("ul.tabs li, div.yelp_rating a").click(function () {
         var left = $("#left_panel").height();
         var right = $("#right_panel").height();
         var max_height = Math.max(left, right);
