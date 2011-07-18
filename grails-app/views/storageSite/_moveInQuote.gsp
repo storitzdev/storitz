@@ -58,18 +58,30 @@
           <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getInsuranceCost()}" /></td>
         </tr>
       </g:if>
-      <tr>
-        <td class="item">Facility fee</td>
-        <td></td>
-        <td class="numeric"></td>
-        <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getFeesTotal()}" /></td>
-      </tr>
-      <tr>
-        <td class="item">Sales tax</td>
-        <td></td>
-        <td class="numeric"></td>
-        <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getTax()}" /></td>
-      </tr>
+      <g:if test="${totals.getFeesTotal() > 0}">
+	<tr>
+          <td class="item">Facility fee</td>
+          <td></td>
+          <td class="numeric"></td>
+          <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getFeesTotal()}" /></td>
+	</tr>
+      </g:if>
+      <g:if test="${totals.getDeposit() > 0}">
+	<tr>
+          <td class="item">Refundable deposit</td>
+          <td></td>
+          <td class="numeric"></td>
+          <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getDeposit()}" /></td>
+	</tr>
+      </g:if>
+      <g:if test="${totals.getTax() > 0}">
+	<tr>
+          <td class="item">Sales tax</td>
+          <td></td>
+          <td class="numeric"></td>
+          <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getTax()}" /></td>
+	</tr>
+      </g:if>
       <tr class="total">
         <td class="item">Total</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal()}" /></td>
       </tr>
