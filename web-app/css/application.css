@@ -2403,6 +2403,15 @@ body.thankyou {
   font-size: 11pt;
   font-family: Arial, Helvetica, sans-serif;
 }
+body.thankyou .conf_box {
+  width: 657px;
+  display: block;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 18px;
+}
 body.thankyou #header {
   margin-bottom: 10px;
 }
@@ -2414,25 +2423,135 @@ body.thankyou .print a {
   color: #00529b;
   text-decoration: none;
 }
-body.thankyou h1 {
-  font-size: 18pt;
+body.thankyou .conf_box h1 {
+  font-size: 11pt;
   margin-bottom: 15px;
   color: #00529b;
+  font-weight: bold;
 }
-body.thankyou h2 {
-  font-size: 14pt;
+body.thankyou .conf_box h2 {
+  font-size: 13pt;
   margin-bottom: 10px;
+  color: #000;
+  display: inline-block;
+}
+body.thankyou .conf_box span {
   color: #00529b;
+  font-size: 13pt;
+  margin-bottom: 10px;
+  padding-left: 7px;
+  font-weight: bold;
 }
-body.thankyou table {
-  margin: 10px 0 20px 20px;
-}
-body.thankyou td {
-  padding: 2px;
-  width: 300px;
-}
-body.thankyou p {
+/*body.thankyou table {*/
+  /*margin: 10px 0 20px 20px;*/
+/*}*/
+/*body.thankyou td {*/
+  /*padding: 2px;*/
+  /*width: 300px;*/
+/*}*/
+body.thankyou .conf_box p {
   margin-bottom: 15px;
+  font-family: arial;
+  font-size: 10pt;
+}
+body.thankyou .conf_box .formInstructions {
+  font-size: 10pt;
+}
+body.thankyou .conf_box .formInstructions b{
+  font-weight: bold;
+}
+.conf_box div.userInfo {
+  display: block;
+}
+.conf_box .column { /*#billInfo, #paymentInfo, #orderInfo*/
+  display: inline-block;
+  width: 205px;
+  margin: 30px 10px 0 0;
+  vertical-align: top;
+}
+.conf_box .extColumn {
+  display: inline-block;
+  width: 410px;
+  margin: 30px 10px 0 0;
+  vertical-align: top;
+}
+.conf_box h3 {
+  font-weight: bold;
+  font-size: 11pt;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+}
+.conf_box div.userInfo p {
+  margin-bottom: 0;
+  margin-top: 7px;
+}
+.conf_box div.userInfo span,
+.conf_box div.icons span,
+.conf_box div.storageInfo span {
+  color: #000;
+  font-weight: bold;
+  font-size: 10pt;
+  padding: 0;
+  margin-bottom: 0;
+}
+.conf_box .icons a.map,
+.conf_box .icons a.print,
+.conf_box .icons a.check {
+  width: 53px;
+  height: 52px;
+  display: inline-block;
+  margin-right: 8px;
+  float: none;
+}
+.conf_box .icons a.map {
+  background: url(../images/map-53x52.png) no-repeat;
+}
+.conf_box .icons a.print {
+  background: url(../images/print-53x52.png) no-repeat;
+}
+.conf_box .icons a.check {
+  background: url(../images/checklist-53x52.png) no-repeat;
+}
+.conf_box .icons span.icn_label {
+  vertical-align: top;
+  display: inline-block;
+  width: 140px;
+}
+.conf_box .storageInfo a {
+  text-decoration: none;
+  color: #00529B;
+  font-size: 10pt;
+}
+.conf_box .storageInfo .days {
+  display: inline-block;
+  width: 78px;
+  margin-right: 10px;
+}
+.conf_box .storageInfo .hours {
+  display: inline-block;
+  width: 120px;
+}
+.conf_box .storageInfo .important {
+  display: inline-block;
+  width: 172px;
+  padding-left: 22px;
+  vertical-align: top;
+}
+.conf_box .storageInfo .important p{
+  color: red;
+  margin: 0;
+  line-height: 15px;
+}
+.conf_box .storageInfo .days p,
+.conf_box .storageInfo .hours p {
+  text-align: right;
+  margin-bottom: 0;
+  line-height: 17px;
+}
+.conf_box div.promos {
+  display: block;
+  margin-bottom: 10px;
 }
 /* search map's info window */
 body.serp div.info_window {
