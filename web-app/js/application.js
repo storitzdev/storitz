@@ -396,6 +396,9 @@ $(document).ready(function() { // common event bindings
              }
         );
     }
+    $("#purchaseSummary .move_in_info a").click(function() { //temporary binding for thankyoupage summary
+        $("#purchaseSummary div.cost_details").toggle();
+    });
 });
 
 function initialize_checkout_page() {

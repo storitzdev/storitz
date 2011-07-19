@@ -2413,7 +2413,7 @@ body.thankyou .conf_box {
   width: 657px;
   display: block;
   position: relative;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   margin-bottom: 20px;
   padding: 18px;
   border-radius: 8px;
@@ -2461,7 +2461,8 @@ body.thankyou .conf_box span {
   /*padding: 2px;*/
   /*width: 300px;*/
 /*}*/
-body.thankyou .conf_box p {
+body.thankyou .conf_box p,
+body.thankyou #purchaseSummary p {
   margin-bottom: 15px;
   font-family: arial;
   font-size: 10pt;
@@ -2530,7 +2531,8 @@ body.thankyou .conf_box .formInstructions b{
   display: inline-block;
   width: 140px;
 }
-.conf_box .storageInfo a {
+.conf_box .storageInfo a,
+#purchaseSummary .move_in_info a {
   text-decoration: none;
   color: #00529B;
   font-size: 10pt;
@@ -2561,6 +2563,11 @@ body.thankyou .conf_box .formInstructions b{
   margin-bottom: 0;
   line-height: 17px;
 }
+.conf_box .storageInfo .hours p.siteClosed {
+  text-align: center;
+  font-style: italic;
+  padding-left: 12px;
+}
 .conf_box div.promos {
   display: block;
   margin-bottom: 10px;
@@ -2569,7 +2576,7 @@ body.thankyou #purchaseSummary {
   position: absolute;
   width: 300px;
   left: 800px;
-  top: 100px;
+  top: 98px;
   padding: 0;
   vertical-align: top;
   border: 1px solid #AAA;
@@ -2585,8 +2592,91 @@ body.thankyou #purchaseSummary {
   color: #00529B;
   padding: 20px 10px;
 }
+body.thankyou #purchaseSummary div.unit_info {
+  padding-bottom: 0px;
+}
 #purchaseSummary .unit_info h1{
-  padding: 0 0 20px 10px;
+  padding: 0 0 20px 0;
+}
+#purchaseSummary .site_info img {
+  margin-top: 3px;
+}
+body.thankyou #purchaseSummary .unit_info p {
+  line-height: 15px;
+  margin-bottom: 0px;
+}
+#purchaseSummary .move_in_info {
+  display: block;
+}
+.move_in_info table.summary {
+  width: 100%;
+}
+.move_in_info table.summary th {
+  text-align: left;
+  vertical-align: top;
+  padding-bottom: 3px;
+}
+.move_in_info table.summary td {
+  font-weight: bold;
+  width: 158px;
+  text-align: right;
+  height: 15px;
+  padding-bottom: 3px;
+}
+#purchaseSummary .cost_details { /*Maybe merge this with existing css for bookingSummary */
+  display: none;
+}
+.cost_details table {
+  font-size: 9pt;
+}
+.cost_details th {
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  vertical-align: bottom;
+  padding: 4px;
+}
+.cost_details td {
+  padding: 4px;
+}
+.cost_details th.item,
+.cost_details td.item {
+  text-align: left;
+}
+.cost_details th.numeric,
+.cost_details td.numeric{
+  text-align: right;
+  white-space: nowrap;
+}
+.cost_details td.item {
+  font-weight: bold;
+}
+.cost_details td {
+  vertical-align: top;
+}
+.cost_details td.negative {
+  color: red;
+}
+#purchaseSummary .total_cost {
+  display: block;
+  border-top: 1px solid #ccc;
+}
+#purchaseSummary .total_cost h2 {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+#purchaseSummary .total_cost span {
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+  float: right;
+  font-size: 14px;
+}
+body.thankYou #purchaseSummary .total_cost p {
+  font-size: 8pt;
+  margin: 0;
 }
 /* search map's info window */
 body.serp div.info_window {

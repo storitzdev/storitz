@@ -74,14 +74,14 @@
                 <p>Saturday</p>
                 <p>Sunday</p>
             </div>
-            <div class="hours"> <!-- check if site is open on a day -->
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startMonday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endMonday}"/></p>
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startTuesday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endTuesday}"/></p>
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startWednesday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endWednesday}"/></p>
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startThursday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endThursday}"/></p>
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startFriday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endFriday}"/></p>
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startSaturday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endSaturday}"/></p>
-                <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startSunday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endSunday}"/></p>
+            <div class="hours">
+                <g:if test="${site.openMonday}"><p><g:formatDate format="h:mma" date="${site.startMonday}"/> - <g:formatDate format="h:mma" date="${site.endMonday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
+                <g:if test="${site.openTuesday}"><p><g:formatDate format="h:mma" date="${site.startTuesday}"/> - <g:formatDate format="h:mma" date="${site.endTuesday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
+                <g:if test="${site.openWednesday}"><p><g:formatDate format="h:mma" date="${site.startWednesday}"/> - <g:formatDate format="h:mma" date="${site.endWednesday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
+                <g:if test="${site.openThursday}"><p><g:formatDate format="h:mma" date="${site.startThursday}"/> - <g:formatDate format="h:mma" date="${site.endThursday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
+                <g:if test="${site.openFriday}"><p><g:formatDate format="h:mma" date="${site.startFriday}"/> - <g:formatDate format="h:mma" date="${site.endFriday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
+                <g:if test="${site.openSaturday}"><p><g:formatDate format="h:mma" date="${site.startSaturday}"/> - <g:formatDate format="h:mma" date="${site.endSaturday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
+                <g:if test="${site.openSunday}"><p><g:formatDate format="h:mma" date="${site.startSunday}"/> - <g:formatDate format="h:mma" date="${site.endSunday}"/></p></g:if><g:else><p class="siteClosed">Closed</p></g:else>
             </div>
             <div class="important">
                 <p>IMPORTANT! When checking in to your unit for the first time, please arrive two hours <em>before</em> facility office closes.</p>
