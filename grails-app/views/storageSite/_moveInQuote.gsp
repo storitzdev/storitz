@@ -1,3 +1,4 @@
+<%@ page import="storitz.constants.TransactionType" %>
 <div class="move_in_quote">
   <table class="summary first">
     <tr><th>Move-In Date</th>
@@ -82,9 +83,19 @@
           <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getTax()}" /></td>
 	</tr>
       </g:if>
-      <tr class="total">
-        <td class="item">Total</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal()}" /></td>
-      </tr>
+      <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+          <tr class="total">
+              <td class="item">Total due today</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${site.rentalFee}" /></td>
+          </tr>
+          <tr class="total">
+              <td class="item">Total due at move-in</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal() - site.rentalFee}" /></td>
+          </tr>
+      </g:if>
+      <g:else>
+          <tr class="total">
+              <td class="item">Total</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal()}" /></td>
+          </tr>
+      </g:else>
       </tbody>
     </table>
   </div>

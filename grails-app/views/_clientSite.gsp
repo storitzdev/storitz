@@ -1,4 +1,4 @@
-<%@ page import="com.storitz.StoritzUtil; storitz.constants.TruckType" %>
+<%@ page import="storitz.constants.TransactionType; com.storitz.StoritzUtil; storitz.constants.TruckType" %>
 <%
     // TODO: More inline copy/paste urlencoding... move to DB :(
     String site_title = StoritzUtil.seoEncode(site.title);
