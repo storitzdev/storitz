@@ -268,8 +268,14 @@ class RentalTransactionController extends BaseTransactionController {
 
   def thankYou = {
     def rentalTransactionInstance = RentalTransaction.get(params.id as Long)
+    def site = rentalTransactionInstance.site
+    def unit = StorageUnit.get(rentalTransactionInstance.unitId)
     def promo = SpecialOffer.get(rentalTransactionInstance.promoId);
-    [rentalTransactionInstance:rentalTransactionInstance, promo:promo]
+    def insurance = Insurance.get(rentalTransactionInstance.insuranceId)
+    def movein = rentalTransactionInstance.moveInDate
+    def totals = costService.calculateTotals(site,unit,promo,insurance,movein)
+
+    [rentalTransactionInstance:rentalTransactionInstance, promo:promo, totals:totals, site:site, unit:unit, insurance:insurance]
   }
 
   def removeUnit = { rentalTransactionInstance, unit ->
