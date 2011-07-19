@@ -1717,30 +1717,36 @@ body.checkout form.checkout div.errors li .field {
 body.checkout #booking_summary > h1 {
   color: #00529b;
 }
-body.checkout #booking_summary > div {
+body.checkout #booking_summary > div,
+body.thankyou #purchaseSummary > div {
   padding: 12px;
 }
 body.checkout #booking_summary > h1 {
   padding: 15px 12px 5px;
 }
-body.checkout #booking_summary .site_info .image_container {
+body.checkout #booking_summary .site_info .image_container,
+body.thankyou #purchaseSummary .site_info .image_container {
   width: 100px;
   height: 96px;
   display: inline-block;
   float: left;
   margin-right: 5px;
 }
-body.checkout #booking_summary .site_info img {
+body.checkout #booking_summary .site_info img,
+body.thankyou #purchaseSummary .site_info img {
   width: 100px;
 }
-body.checkout #booking_summary .site_info .tel {
+body.checkout #booking_summary .site_info .tel,
+body.thankyou #purchaseSummary .site_info .tel {
   font-weight: bold;
 }
-body.checkout #booking_summary .site_info p {
+body.checkout #booking_summary .site_info p,
+body.thankyou #purchaseSummary .site_info p {
   margin: 3px 0;
   line-height: 100%;
 }
-body.checkout #booking_summary .site_info h2 {
+body.checkout #booking_summary .site_info h2,
+body.thankyou #purchaseSummary .site_info h2{
   clear: none;
   color: black;
   font-size: 10pt;
@@ -2408,9 +2414,15 @@ body.thankyou .conf_box {
   display: block;
   position: relative;
   border: 1px solid #ccc;
-  border-radius: 10px;
   margin-bottom: 20px;
   padding: 18px;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  box-shadow: 0 0 8px #CCC;
+  background-image: url("../images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
+  background-position: center bottom;
+  background-repeat: repeat-x;
 }
 body.thankyou #header {
   margin-bottom: 10px;
@@ -2552,6 +2564,29 @@ body.thankyou .conf_box .formInstructions b{
 .conf_box div.promos {
   display: block;
   margin-bottom: 10px;
+}
+body.thankyou #purchaseSummary {
+  position: absolute;
+  width: 300px;
+  left: 800px;
+  top: 100px;
+  padding: 0;
+  vertical-align: top;
+  border: 1px solid #AAA;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  box-shadow: 0 0 8px #CCC;
+  background-image: url("../images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
+  background-position: center bottom;
+  background-repeat: repeat-x;
+}
+#purchaseSummary h1 {
+  color: #00529B;
+  padding: 20px 10px;
+}
+#purchaseSummary .unit_info h1{
+  padding: 0 0 20px 10px;
 }
 /* search map's info window */
 body.serp div.info_window {

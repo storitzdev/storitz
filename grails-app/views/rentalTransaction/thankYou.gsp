@@ -74,7 +74,7 @@
                 <p>Saturday</p>
                 <p>Sunday</p>
             </div>
-            <div class="hours">
+            <div class="hours"> <!-- check if site is open on a day -->
                 <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startMonday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endMonday}"/></p>
                 <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startTuesday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endTuesday}"/></p>
                 <p><g:formatDate format="h:mma" date="${rentalTransactionInstance.site.startWednesday}"/> - <g:formatDate format="h:mma" date="${rentalTransactionInstance.site.endWednesday}"/></p>
@@ -96,8 +96,8 @@
         <div class="column" style="background-color:gray;border-radius:10px;height:110px;">Blah</div>
     </div>
 </div>
-%{--<div id="booking_summary" src="${createLink(mapping:'bookingSummaryPanel')}">--}%
-  %{--<g:render template="bookingSummaryPanel" model="[unit:unit, site:site, insurance:insurance, promo:promo, promos:promos, totals:totals, moveInDate:moveInDate]" />--}%
-%{--</div>--}%
+<div id="purchaseSummary" src="${createLink(mapping:'purchaseSummaryPanel')}">
+  <g:render template="purchaseSummaryPanel" model="[unit:unit, site:site, insurance:insurance, promo:promo, promos:promos, totals:totals, moveInDate:moveInDate]" />
+</div>
 </body>
 </html>
