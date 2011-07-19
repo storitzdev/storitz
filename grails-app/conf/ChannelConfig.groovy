@@ -29,7 +29,6 @@ class ChannelConfig {
     requestMap.put new RequestKey("/rentalTransaction/payment/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/rentalTransaction/pay/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/commission/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
-    requestMap.put new RequestKey("/thank-you/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap
   }
 }
