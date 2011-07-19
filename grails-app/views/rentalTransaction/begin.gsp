@@ -155,7 +155,7 @@
   <g:if test="${!(site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0)}">
   <h1 class="pay">Submit Booking
     <div class="col2">
-      <p><strong>You will be charged a total of <span class="moveInCostTotal"><g:formatNumber type="currency" currencyCode="USD" number="${totals.moveInTotal}" /></span></strong> (including all discounts and facility fees)</p>
+      <p><strong>You will be charged a total of <span class="moveInCostTotal"><g:formatNumber type="currency" currencyCode="USD" number="${site.transactionType == TransactionType.RENTAL ? totals.moveInTotal : site.rentalFee}" /></span></strong> (including all discounts and facility fees)</p>
       <g:submitButton name="action"
                       value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
                       class="rent_me_button" />
