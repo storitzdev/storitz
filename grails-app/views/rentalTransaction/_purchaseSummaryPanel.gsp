@@ -15,9 +15,14 @@
   <p class="tel">(877) 456-2929</p>
 </div>
 <div class="unit_info">
-  <h1><g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" /><br />Unit Id: ${rentalTransactionInstance.idNumber}</h1>
+    <g:if test="${unit != null}">
+        <h1><g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" /><br />Unit Id: ${rentalTransactionInstance.idNumber}</h1>
+    </g:if>
+    <g:else>
+        <h1>${rentalTransactionInstance.displaySize.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2'")} ${rentalTransactionInstance.unitType} Unit <br /> Unit Id: ${rentalTransactionInstance.idNumber}</h1>
+    </g:else>
   <p>
-    <g:if test="${unit.isTempControlled}">Climate control,</g:if>
+    <g:if test="${unit != null && unit.isTempControlled}">Climate control,</g:if>
     <g:if test="${site.isKeypad}">Keypad access,</g:if>
     <g:if test="${site.isCamera}">Security cameras,</g:if>
     <g:if test="${site.isGate}">Gated property,</g:if>
