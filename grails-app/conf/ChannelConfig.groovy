@@ -29,6 +29,17 @@ class ChannelConfig {
     requestMap.put new RequestKey("/rentalTransaction/payment/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/rentalTransaction/pay/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/commission/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
-    requestMap
+
+    // Stupid groovy and their IMPLICIT return values.
+    // You know, I have absolutely no problem with the last statement of a method being the return value,
+    // IF the language does not already have the 'return' keyword. BUT, groovy goes and 
+    // does stuff like this implicit return. I come along and delete it (since it LOOKS like
+    // an incomplete statement), then next.storitz.com breaks and I waste half a day figuring it out.
+    // Rediculous!!! AND, since I just came back from the dentist where I had a crown prepped,
+    // my jaw is aching and I have a massive headache, and, you know, this $*!% is just not
+    // appreciated. SO, to make a long story short, I am adding an EXPLICIT return to this
+    // method so the next fool who gets caught by this 'feature' will have a heads-up.
+  
+    return requestMap
   }
 }
