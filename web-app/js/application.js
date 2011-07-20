@@ -487,7 +487,7 @@ function initialize_transaction_box(callback) {
   });
   $(".move_in_quote a.more_offers").live("click", function() {
     _util.display_tooltip("#promo_list", $(this), {
-      left: -60,
+      left: -250,
       top: 50
     });
 //    $("#promo_list").slideToggle();
