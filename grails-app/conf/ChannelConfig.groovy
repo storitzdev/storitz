@@ -26,8 +26,7 @@ class ChannelConfig {
     requestMap.put new RequestKey("/admin/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/reports/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     //requestMap.put new RequestKey("/siteLink/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
-    requestMap.put new RequestKey("/rentalTransaction/payment/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
-    requestMap.put new RequestKey("/rentalTransaction/pay/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
+    requestMap.put new RequestKey("/rentalTransaction/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
     requestMap.put new RequestKey("/commission/**"), [new SecurityConfig("REQUIRES_SECURE_CHANNEL")]
 
     // Stupid groovy and their IMPLICIT return values.

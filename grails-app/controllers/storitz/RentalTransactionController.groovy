@@ -263,7 +263,7 @@ class RentalTransactionController extends BaseTransactionController {
       return;
     }
 
-    redirect(url:createLink(mapping:'thankYou', params:[id:rentalTransactionInstance.id], absolute:false))
+    redirect(action:"thankYou",params:[id:rentalTransactionInstance.id])
   }
 
   def thankYou = {
