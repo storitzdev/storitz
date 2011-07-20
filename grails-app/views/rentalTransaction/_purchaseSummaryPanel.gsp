@@ -15,7 +15,7 @@
   <p class="tel">(877) 456-2929</p>
 </div>
 <div class="unit_info">
-  <h1><g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" /></h1>
+  <h1><g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" /><br />Unit Id: ${rentalTransactionInstance.idNumber}</h1>
   <p>
     <g:if test="${unit.isTempControlled}">Climate control,</g:if>
     <g:if test="${site.isKeypad}">Keypad access,</g:if>
@@ -35,7 +35,7 @@
             <td><g:formatDate type="date" style="MEDIUM" date="${rentalTransactionInstance.moveInDate}" /></td>
         </tr>
         <tr>
-            <th>Paid Thru</th>
+            <th>Paid Through</th>
             <td><g:formatDate type="date" style="MEDIUM" date="${rentalTransactionInstance.paidThruDate}" /></td>
         </tr>
         <tr>

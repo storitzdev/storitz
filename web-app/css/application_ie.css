@@ -269,4 +269,17 @@ body.site_detail .panes .overview ul.action_links li {
 body.site_detail .panes .overview .photos {
   position: relative;
 }
+body.site_detail .panes .overview .all_units ul li {
+  padding: 10px 0;
+  border-top: 1px solid #CCC;
+  padding-left: 150px;
+  vertical-align: top;
+  height: 100px;
+  background: url("../images/v2/unit-size-placeholder-151x86.jpg") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units ul li div{
+  display: inline;
+  float: left;
+}
+
 /*site detail page end*/

@@ -399,6 +399,10 @@ $(document).ready(function() { // common event bindings
     $("#purchaseSummary .move_in_info a").click(function() { //temporary binding for thankyoupage summary
         $("#purchaseSummary div.cost_details").toggle();
     });
+//    $("body.thankyou .conf_box .icons a.map").click(function() {
+//        var from = $("body.thankyou .conf_box #billInfo #customerAddr").text();
+//        $("body.site_detail .checkout_value input#srcAddr").val(from);
+//    });
 });
 
 function initialize_checkout_page() {

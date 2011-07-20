@@ -17,7 +17,7 @@
             <p>Name:</p>
             <span>${rentalTransactionInstance.billingAddress.fullName()}</span>
             <p>Address:</p>
-            <span>${rentalTransactionInstance.billingAddress.fullAddress()}</span>
+            <span id="customerAddr">${rentalTransactionInstance.billingAddress.fullAddress()}</span>
             <p>Phone:</p>
             <span>(310) 308-3495</span> <!-- placeholder -->
         </div>
@@ -38,6 +38,8 @@
             <span>${rentalTransactionInstance.bookingDate.format('MM/dd/yy')}</span>
             <p>Order Confirmation:</p>
             <span>${rentalTransactionInstance.bookingDate.format('yyyyMMdd')}${sprintf('%08d', rentalTransactionInstance.id)}</span>
+            <p>Unit Id:</p>
+            <span>${rentalTransactionInstance.idNumber}</span>
         </div>
     </div>
     <div style="width:693px;border-bottom: 1px solid #ccc; margin: 20px 0 20px -18px;position:relative;"></div>
