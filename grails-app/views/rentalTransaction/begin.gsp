@@ -14,18 +14,18 @@
     <div class="messages">
       Some of the information we need to complete your order was missing or incomplete:
       <ul>
-        <li><g:eachError model="[contact:contact]" field="firstName"><span class="field">First name</span>Please enter your first name as it appears on your card</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="lastName"><span class="field">Last name</span>Please enter your last name as it appears on your card</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="address1"><span class="field">Address Line 1</span>Please enter the street address of the billing address for your card.</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="city"><span class="field">City</span>Please enter the city of the billing address for your card.</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="state"><span class="field">State</span>Please enter the state of the billing address for your card.</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="zipcode"><span class="field">ZIP Code</span>Please enter the ZIP code of the billing address for your card.</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="email"><span class="field">Email</span>Please enter a valid email address where we can send a confirmation notice.</g:eachError></li>
-        <li><g:eachError model="[contact:contact]" field="phone"><span class="field">Phone Number</span>Please enter your phone number.</g:eachError></li>
-        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccNum"><span class="field">Credit Card Number</span>Please enter your credit card number.</g:eachError></li>
-        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="cvv2"><span class="field">Credit Card Security Code</span>Please enter the security code from your credit card.</g:eachError></li>
-        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccExpDate"><span class="field">Card Expiration Date</span>Please specify the month and year of the expiration date for your card.</g:eachError></li>
-        <li><g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="terms"><span class="field">Terms and Conditions</span>You must accept the Terms of Use before you can book a unit.</g:eachError></li>
+        <g:eachError model="[contact:contact]" field="firstName"><li><span class="field">First name</span>Please enter your first name as it appears on your card</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="lastName"><li><span class="field">Last name</span>Please enter your last name as it appears on your card</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="address1"><li><span class="field">Address Line 1</span>Please enter the street address of the billing address for your card.</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="city"><li><span class="field">City</span>Please enter the city of the billing address for your card.</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="state"><li><span class="field">State</span>Please enter the state of the billing address for your card.</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="zipcode"><li><span class="field">ZIP Code</span>Please enter the ZIP code of the billing address for your card.</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="email"><li><span class="field">Email</span>Please enter a valid email address where we can send a confirmation notice.</li></g:eachError>
+        <g:eachError model="[contact:contact]" field="phone"><li><span class="field">Phone Number</span>Please enter your phone number.</li></g:eachError>
+        <g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccNum"><li><span class="field">Credit Card Number</span>Please enter your credit card number.</li></g:eachError>
+        <g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="cvv2"><li><span class="field">Credit Card Security Code</span>Please enter the security code from your credit card.</li></g:eachError>
+        <g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="ccExpDate"><li><span class="field">Card Expiration Date</span>Please specify the month and year of the expiration date for your card.</li></g:eachError>
+        <g:eachError model="[rentalTransactionInstance:rentalTransactionInstance]" field="terms"><li><span class="field">Terms and Conditions</span>You must accept the Terms of Use before you can book a unit.</li></g:eachError>
       </ul>
     </div>
     <p>Please review the information shown below and submit your order again. If you'd rather complete your order by phone, please just give us a call at <b>(877) 456-2929</b>!</p>
