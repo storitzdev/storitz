@@ -160,9 +160,12 @@
       </p>
       <p>
         <span class="legalHeader">10. Contacting Storitz Regarding this Site.</span> If you have any questions concerning this Policy, you may send them by email to our Privacy Officer at privacy@storitz.com. Please note that email communications will not necessarily be secure; accordingly you should not include credit card information or other sensitive information in your email correspondence with us. You must send any official correspondence via postal mail to:
-      </p>
-      <p>
-          Storitz Inc., 2332 Cotner Ave., Suite 302, Los Angeles, CA 90064 Attention: Privacy Officer, Legal
+      <div class="address">
+          Storitz Inc.
+        <br /> Attention: Privacy Officer, Legal
+        <br />2332 Cotner Ave., Suite 302
+        <br />Los Angeles, CA 90064
+      </div>
       </p>
       <p>
         <span class="legalHeader">11. Your California Privacy Rights.</span> If you are a California resident, you have the right to request information about how we share certain categories of personal information with third parties. California law gives you the right to send us a request at a designated address to receive the following information:
