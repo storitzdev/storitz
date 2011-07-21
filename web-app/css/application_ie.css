@@ -64,11 +64,28 @@
 }
 
 /*search list page*/
+body.serp #pickers {
+  top: 142px;
+}
+body.serp #results_container div.map_container {
+  width: 100%;
+}
+body.serp #results_container div.map_container #big_map_canvas,
+body.serp #results_container #search_results {
+  height: 728px;
+}
+body.serp div.info_window div.info_right {
+  float: right;
+}
 #search_results li {
   border-top: 1px solid #ddd;
   padding: 10px 0;
   position: relative;
   display: block;
+}
+#search_results .site_features li {
+  padding: 0;
+  border-width: 0;
 }
 #search_results li div {
   vertical-align:top;
