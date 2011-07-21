@@ -37,6 +37,12 @@ pre {
 a:hover {
   text-decoration: underline;
 }
+em {
+  font-style: italic;
+}
+strong {
+  font-weight: bold;
+}
 
 .line {
   clear: both;
@@ -500,11 +506,13 @@ body.static .search{
   font-weight: bold;
   margin: 10px 0;
 }
-
-#videoContainer {
-    padding: 9px;
+.static dl {
+  margin-bottom: 15px;
 }
-
+.static dt {
+  font-weight: bold;
+  margin-top: 10px;
+}
 .right h3 {
   margin-bottom: 10px;
 }

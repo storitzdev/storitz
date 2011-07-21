@@ -54,4 +54,8 @@ class StaticController {
   def contestrules = {
      [title: 'Contest Rules and Regulations']
   }
+
+  def customerservice = {
+    [title: 'Help for Self-Storage Customers from Storitz.com']
+  }
 }
