@@ -253,20 +253,34 @@ var _map = function() {
                 var entry = markers[site_id];
                 toggle_info_window(entry[1], big_map, entry[0], site_id);
             });
-            $("#search_results > li").hover(function() {
+            $("#search_results > li").hover(function() { //we need to create a new markerImage for hoverIn and hoverOut
                 var li = $(this);
                 var site_id = li.attr("id").substr(5);
                 li.css("background-color", "lightcyan");
                 li.css("cursor", "pointer");
                 var marker = markers[site_id][0];
-//                marker.setIcon(active_icon);
+                var markerUrl = marker.getIcon().url;
+                var markerSize = marker.getIcon().size;
+                var markerOrigin = marker.getIcon().origin;
+                var xCoord = markerOrigin.x;
+                var yCoord = markerOrigin.y;
+                var newMarkerOffset = new google.maps.Point(xCoord - (markerSize.width + 1), yCoord); //+1 because of the weird sprite image size.
+                var newMarker = new google.maps.MarkerImage(markerUrl, markerSize, newMarkerOffset);
+                marker.setIcon(newMarker);
             }, function() {
                 var li = $(this);
                 var site_id = li.attr("id").substr(5);
                 li.css("background", "none");
                 li.css("cursor", "default");
                 var marker = markers[site_id][0];
-//                marker.setIcon(inactive_icon);
+                var markerUrl = marker.getIcon().url;
+                var markerSize = marker.getIcon().size;
+                var markerOrigin = marker.getIcon().origin;
+                var xCoord = markerOrigin.x;
+                var yCoord = markerOrigin.y;
+                var newMarkerOffset = new google.maps.Point(xCoord + (markerSize.width + 1), yCoord); //+1 because of the weird sprite image size.
+                var newMarker = new google.maps.MarkerImage(markerUrl, markerSize, newMarkerOffset);
+                marker.setIcon(newMarker);
             });
         },
         listify: function() {
@@ -352,17 +366,17 @@ var _map = function() {
                     var pinHeight = 50;
                     if (price < 100) {
                         markerUrl = pinurl1;
-                        markerSize = new google.maps.Size(43, 47);
+                        markerSize = new google.maps.Size(43, 47); //size of the image to display in x, y pixels
                         offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10))-1),pinHeight*(price%10));
                     }
                     else if (price > 99 && price < 200) {
                         markerUrl = pinurl2;
-                        markerSize = new google.maps.Size(51, 49);
+                        markerSize = new google.maps.Size(51, 49); //size of the image to display in x, y pixels
                         offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10));
                     }
                     else {
                         markerUrl = pinurl3;
-                        markerSize = new google.maps.Size(51, 49);
+                        markerSize = new google.maps.Size(51, 49); //size of the image to display in x, y pixels
                         offset = (price != 300)? new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10)) : new google.maps.Point(1092, 0);
                     }
                     var priceMarker = new google.maps.MarkerImage(markerUrl, markerSize, offset);
