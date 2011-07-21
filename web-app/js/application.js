@@ -259,14 +259,14 @@ var _map = function() {
                 li.css("background-color", "lightcyan");
                 li.css("cursor", "pointer");
                 var marker = markers[site_id][0];
-                marker.setIcon(active_icon);
+//                marker.setIcon(active_icon);
             }, function() {
                 var li = $(this);
                 var site_id = li.attr("id").substr(5);
                 li.css("background", "none");
                 li.css("cursor", "default");
                 var marker = markers[site_id][0];
-                marker.setIcon(inactive_icon);
+//                marker.setIcon(inactive_icon);
             });
         },
         listify: function() {
@@ -331,6 +331,7 @@ var _map = function() {
                     name = "<h3 class='info'><a href='#'>"+row.children("a").first().text()+"</a></h3>";
                     addr1 = "<p>"+row.attr("addr")+"</p>";
                     addr2 = "<p>"+row.attr("city")+", "+row.attr("state")+" "+row.attr("zip")+"</p>";
+                    var price = Math.floor(row.attr("price"));
                     var site_id = row.attr("site_id");
                     var lat = row.attr("lat");
                     var lng = row.attr("lng");
@@ -344,7 +345,28 @@ var _map = function() {
                             "<div class='info_left'>"+name+addr1+addr2+phone+yelp+"</div>" +
                             "<div class='info_right'>"+image+link+"</div></div>";
                     var point = new google.maps.LatLng(lat, lng);
-                    var marker = new google.maps.Marker({ map: big_map, position: point, icon: inactive_icon, title: hoverName });
+                    var markerUrl;  //the pin sprite to use.
+                    var markerSize;  //size of a pin
+                    var offset;    //position of the pin in sprite
+                    var pinWidth = (price < 100) ? 44 : 52;
+                    var pinHeight = 50;
+                    if (price < 100) {
+                        markerUrl = pinurl1;
+                        markerSize = new google.maps.Size(43, 47);
+                        offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10))-1),pinHeight*(price%10));
+                    }
+                    else if (price > 99 && price < 200) {
+                        markerUrl = pinurl2;
+                        markerSize = new google.maps.Size(51, 49);
+                        offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10));
+                    }
+                    else {
+                        markerUrl = pinurl3;
+                        markerSize = new google.maps.Size(51, 49);
+                        offset = (price != 300)? new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10)) : new google.maps.Point(1092, 0);
+                    }
+                    var priceMarker = new google.maps.MarkerImage(markerUrl, markerSize, offset);
+                    var marker = new google.maps.Marker({ map: big_map, position: point, icon: priceMarker, title: hoverName });
                     var info_window = new google.maps.InfoWindow( { content: infoContainer, maxWidth: 300});
                     google.maps.event.addListener(marker, "click", function() {
                         toggle_info_window(info_window, big_map, marker, site_id);
