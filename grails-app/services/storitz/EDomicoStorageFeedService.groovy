@@ -611,7 +611,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def token             = this.readToken();
       def siteID            = trans.site.sourceId;
       def sizeID            = storageUnit.unitNumber as int;
-      def unitID            = this.readUnitID(token, siteID, sizeID);
+      //def unitID            = this.readUnitID(token, siteID, sizeID);
+      EDomicoNode unitInfo  = this.readUnitInfo (token, siteID, sizeID)
+      def unitID            = unitInfo.get("UnitID")    // internal (pk) unit id
+      def unitMask          = unitInfo.get("UnitMask")  // external (public) unit id
       def lastName          = contact.lastName;
       def firstName         = contact.firstName;
       def middleInitial     = null;
@@ -652,7 +655,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
 
       if (resSuccess) {
         trans.idNumber = "${resCustomerID}"
-        trans.feedUnitNumber = "${resUnitID}"
+        trans.feedUnitNumber = "${unitMask}"
         trans.save(flush:true)
       }
       // Failed move-in!
