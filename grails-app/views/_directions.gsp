@@ -14,14 +14,16 @@
 <div class="dirInstructions">
   <h2>Driving Directions</h2> Enter your start address below
 </div>
-<div class="left">
-  <div style="width:294px; margin-bottom: 10px" class="checkout_value">
-    <g:textField id="srcAddr" name="srcAddr" placeholder="Enter city, address, or zip"/>
-  </div>
-  <div style="clear:both;"></div>
-</div>
-<div style="margin-top:-2px;" class="left">
-  <p:inputImage src="get-directions-form-button.png" style="width:132px;height:32px;border:none;padding:2px 0 0 4px;" name="getDirections" value="Get Directions"/>
+<div class="ieDivContainer">
+    <div class="left ieLeft">
+        <div style="width:294px; margin-bottom: 10px" class="checkout_value">
+            <g:textField id="srcAddr" name="srcAddr" placeholder="Enter city, address, or zip"/>
+        </div>
+        %{--<div style="clear:both;"></div>--}%
+    </div>
+    <div style="margin-top:-2px;" class="left ieLeft">
+        <p:inputImage src="get-directions-form-button.png" style="width:132px;height:32px;border:none;padding:2px 0 0 4px;" name="getDirections" value="Get Directions"/>
+    </div>
 </div>
 <div style="clear:both;"></div>
 <div id="dirPanel" style="display:none;">
@@ -44,7 +46,7 @@
     <div style="clear:both;"></div>
   </div>
     <div id="directionsCopyrights" class="directionsCopyrights"></div>
-
+  <div class="ieDivContainer">
     <div id="printThis">
         <a href="#" onclick="window.print();
         return false;">print</a>
@@ -52,4 +54,5 @@
     <div id="shareThis">
         <g:link controller="storageSite" action="directions" id="${params.id}" params="[origin:'los angeles, ca']">Share</g:link>
     </div>
+  </div>
 </div>

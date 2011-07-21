@@ -196,6 +196,10 @@ body.site_detail .rent_me div.unit_info ul {
   font-size: 12px;
   margin-bottom: 7px;
 }
+body.site_detail .rent_me div.unit_info ul.amenities {
+  margin-top: 8px;
+  margin-left: -11px;
+}
 body.site_detail .rent_me div.unit_info a.view_more {
   float: right;
   font-size: 11px;
@@ -270,16 +274,115 @@ body.site_detail .panes .overview .photos {
   position: relative;
 }
 body.site_detail .panes .overview .all_units ul li {
-  padding: 10px 0;
+  padding: 10px 0 0 0;
   border-top: 1px solid #CCC;
   padding-left: 150px;
   vertical-align: top;
   height: 100px;
   background: url("../images/v2/unit-size-placeholder-151x86.jpg") -10px center no-repeat;
 }
+body.site_detail .panes .overview .all_units ul.amenities li {
+  background: none;
+  padding: 0;
+  border-width: 0;
+  height: auto;
+}
 body.site_detail .panes .overview .all_units ul li div{
   display: inline;
   float: left;
 }
-
+body.site_detail .panes .overview .all_units .rent_me input.rent_me_button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+}
+body.site_detail .panes .overview .all_units .rent_me div.price {
+  padding-left: 30px;
+  padding-right: 0;
+}
+body.site_detail .panes .overview div.yelp_rating .yelp_logo {
+  margin-top: 3px;
+}
+body.site_detail .rent_me div.rent_reserve input.rent_me_button {
+  display: block;
+  background: url("../images/v2/site_detail/rent-me-275x56.png") no-repeat;
+  width: 275px;
+  height: 56px;
+  text-indent: -9999px;
+  border-width: 0;
+  font-size: 0;
+  line-height: 0;
+}
+body.site_detail .rent_me .unit_info h4 {
+  display: inline;
+}
+body.site_detail .rent_me .unit_info div {
+  border-width: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+body.site_detail .rent_me .move_in_quote table.summary {
+  width: 92%;
+}
+body.site_detail .rent_me .move_in_quote table.summary td{
+  width: auto;
+}
+body.site_detail .rent_me .move_in_quote tr.total span {
+  display: inline;
+  clear: both
+}
+body.site_detail .rent_me .move_in_quote .cost_breakdown {
+  border-top-width: 0;
+  display: none;
+  padding: 0;
+}
+body.site_detail .panes #directionMap {
+  display: block;
+  vertical-align: top;
+}
+body.site_detail .panes #directionMap #directionMapCanvas {
+  display: inline;
+  vertical-align: top;
+}
+body.site_detail .panes #directionMap #facilityHours {
+  display: inline;
+  float: none;
+  vertical-align: top;
+  margin-left: 20px;
+}
+body.site_detail .panes #directionMap #facilityHours table.operatingHours tr {
+  line-height: 11px;
+}
+body.site_detail .panes .dirInstructions h2 {
+  display: inline;
+  margin-bottom: 0;
+}
+body.site_detail .panes div.ieLeft {
+  float: none;
+  display: inline;
+}
+body.site_detail .panes div.ieLeft div.checkout_value {
+  float: none;
+}
+body.site_detail .panes div.ieDivContainer {
+  display: block;
+  position: relative;
+  padding-top: 15px;
+}
+body.site_detail .panes div.ieDivContainer input#getDirections {
+  position: absolute;
+  left: 332px;
+  top: 16px;
+}
+body.site_detail .panes #dirPanel  #directionsSteps tr.directionStep {
+  border-bottom: 1px solid #dfdfdf;
+}
+body.site_detail .panes div.ieDivContainer #shareThis {
+  position: absolute;
+  top: -5px;
+  left: 100px;
+}
+body.site_detail .panes #yelp_reviews {
+  padding-top: 10px;
+}
 /*site detail page end*/
