@@ -2,7 +2,7 @@
 /* GENERIC PAGE STYLES */
 
 body {
-  font-family: Verdana;
+  font-family: Helvetica, Arial, san-serif;
   font-size: 12px;
   background: white;
   background-image: url(../images/v2/home/backgrounds/topbar.gif);
@@ -15,7 +15,6 @@ body {
 }
 
 p {
-  font-family: Helvetica;
   color: #333;
   line-height: 20px;
 }
@@ -48,6 +47,40 @@ a:hover {
   clear: both;
   display: block;
   content: "";
+}
+
+.errors {
+  width: 630px;
+  padding: 15px;
+  line-height: 120%;
+}
+.errors h2 {
+  color: red;
+  font-size: 14pt;
+  line-height: 120%;
+}
+.errors p b {
+  font-weight: bold;
+}
+.errors p {
+  line-height: 120%;
+}
+.errors li {
+  display: list-item;
+}
+.errors .messages ul {
+   margin-top: 10px;
+}
+.errors .messages {
+  display: inline-block;
+  margin: 0 3em 0 2em;
+  border: 1px solid #ccc;
+  padding: 1em;
+  background-color: #eee;
+}
+.errors li .field {
+  font-weight: bold;
+  margin-right: 0.6em;
 }
 
 /* ------------------------------------------------------------------------------------- */
@@ -421,19 +454,26 @@ body.state_directory td a {
 }
 
 /*CSS for static pages*/
+body.static .right .errors {
+  color: red;
+}
+body.static .right li {
+  line-height: 20px;
+}
 body.static .right {
-    width: 665px;
-    margin-right: 35px;
-    position: relative;
-    left: 160px;
-    float: none;
+  width: 665px;
+  margin-right: 35px;
+  margin-bottom: 20px;
+  position: relative;
+  left: 160px;
+  float: none;
 }
 
 body.static .right h1 {
   color: #006DBA;
   font-weight: normal;
   font-size: 16px;
-  margin: .8em 0 13px 0;
+  margin: 20px 0 13px 0;
 }
 
 body.static .search{
@@ -443,6 +483,12 @@ body.static .search{
     margin: 5px 0 0 36px;
     top: -65px;
     left: 160px;
+}
+
+.static form label {
+  display: block;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .right h2 {
@@ -1702,39 +1748,6 @@ body.checkout form.checkout {
   position: relative;
   font-size: 13px;
   margin-top: 10px;
-}
-body.checkout form.checkout div.errors {
-  width: 630px;
-  padding: 15px;
-  line-height: 120%;
-}
-body.checkout form.checkout div.errors h2 {
-  color: red;
-  font-size: 14pt;
-  line-height: 120%;
-}
-body.checkout form.checkout div.errors p b {
-  font-weight: bold;
-}
-body.checkout form.checkout div.errors p {
-  line-height: 120%;
-}
-body.checkout form.checkout div.errors li {
-  display: list-item;
-}
-body.checkout form.checkout div.errors .messages ul {
-   margin-top: 10px;
-}
-body.checkout form.checkout div.errors .messages {
-  display: inline-block;
-  margin: 0 3em 0 2em;
-  border: 1px solid #ccc;
-  padding: 1em;
-  background-color: #eee;
-}
-body.checkout form.checkout div.errors li .field {
-  font-weight: bold;
-  margin-right: 0.6em;
 }
 body.checkout #booking_summary > h1 {
   color: #00529b;
