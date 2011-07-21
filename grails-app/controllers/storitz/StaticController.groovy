@@ -1,5 +1,7 @@
 package storitz
 
+import com.storitz.PressRelease
+
 class StaticController {
 
   def privacy = {
@@ -15,7 +17,10 @@ class StaticController {
   }
 
   def aboutus = {
-    [title: 'Storitz About Us']
+    params.max = 10
+    params.sort = 'releaseDate'
+    params.order = 'desc'
+    [pressReleases:PressRelease.list(params)]
   }
 
   def refund = {

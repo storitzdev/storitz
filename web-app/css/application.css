@@ -82,6 +82,16 @@ a:hover {
   font-weight: bold;
   margin-right: 0.6em;
 }
+.toc {
+  display: inline-block;
+  float: right;
+  padding: 1em;
+  background-color: #eee;
+}
+.toc a {
+  display: block;
+  margin: 5px 5px 10px 0;
+}
 
 /* ------------------------------------------------------------------------------------- */
 /* HOME PAGE */
@@ -495,6 +505,9 @@ body.static .search{
     padding: 9px;
 }
 
+.right h3 {
+  margin-bottom: 10px;
+}
 .right h2 {
   color: #006DBA;
   display: block;
