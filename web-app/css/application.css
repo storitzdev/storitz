@@ -491,11 +491,16 @@ body.static .search{
   margin: 10px 0;
 }
 
+#videoContainer {
+    padding: 9px;
+}
+
 .right h2 {
+  color: #006DBA;
   display: block;
-  font-weight: bold;
   font-size: 14px;
   margin-top: 10px;
+  font-weight: normal;
 }
 
 .right p {
@@ -504,7 +509,7 @@ body.static .search{
 
 .right ul {
   list-style-type: disc;
-  padding-left: 15px;
+  padding-left: 30px;
 }
 
 .right li {
@@ -575,10 +580,18 @@ body.static .search{
   font-size: larger;
 }
 
+body.operatorsignup .video {
+  width: 640px;
+  height: 360px;
+  margin-bottom: 20px;
+}
 body.operatorsignup form input,
 body.operatorsignup form label,
 body.operatorsignup form fieldset {
     display:block;
+}
+body.operatorsignup form input {
+  width: 250px;
 }
 body.operatorsignup form input,
 body.operatorsignup form fieldset {

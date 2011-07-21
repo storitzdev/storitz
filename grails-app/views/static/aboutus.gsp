@@ -5,11 +5,10 @@
 
 <body class="static">
 <div class="right">
-<h1>THE SMART AND EASY WAY TO FIND STORAGE</h1>
+<h1>The Smart and Easy Way to Find Storage</h1>
 
 <p>When we founded this company, we decided to set some new standards for the way people find self storage.</p>
 
-<p>
 <ul>
   <li><strong>Make a one-stop-shop for finding self storage</strong></li>
   <li><strong>Charge the lowest price possible</strong> for each storage unit</li>
@@ -18,9 +17,8 @@
   <li><strong>Offer the most discounts, specials and promotions</strong> so the customer can choose which one is best for her</li>
   <li><strong>No additional fees to you</strong> (you’ll pay the same price to us that you would at the storage property or the storage property owner’s Website)</li>
 </ul>
-</p>
 
-<h2>WHO WE ARE</h2>
+<h2>Who we are</h2>
 <p>We are comprised of individuals with decades of experience in both technology and self storage.</p>
 
 <p>We design and build everything in-house, in Los Angeles, CA so that we can control the customer experience for you.</p>
@@ -52,14 +50,12 @@
           style="border: none;" src="icn-linkedin.png" width="33" height="33" alt="Storitz on LinkedIn"/></a>
 </p>
 
-<p>&nbsp;</p>
-
 <p>
   If you are interested in employment, please see
   <g:link controller="static" action="jobs">our jobs and careers page</g:link>.
 </p>
 
-<h2>LEGAL</h2>
+<h2>Legal</h2>
 
 <p>
   Storitz Inc. is a privately held Delaware-based corporation registered to do business in the State of California.
