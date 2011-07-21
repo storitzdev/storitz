@@ -115,7 +115,13 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       def space_regprice  = xmlNodes.space[i].regprice      as String
       def space_curprice  = xmlNodes.space[i].curprice      as String
       def space_avail     = xmlNodes.space[i].avail         as String
-      def space_special   = xmlNodes.space[i].special       as String
+      // promotions
+      def space_special_description     = xmlNodes.space[i].special.description       as String
+      def space_special_type            = xmlNodes.space[i].special.type              as String
+      def space_special_amount          = xmlNodes.space[i].special.amount            as String
+      def space_special_month           = xmlNodes.space[i].special.month             as String
+      def space_special_applytoprorate  = xmlNodes.space[i].special.applytoprorate    as String
+
       def unit = createUpdateUnit(
           storageSiteInstance
           ,stats
@@ -129,12 +135,11 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
           ,new Double(space_floor).doubleValue()
           ,new Double(space_regprice).doubleValue()
           ,new Double(space_curprice).doubleValue()
-          ,new Double(space_avail).doubleValue()
-          ,space_special.trim())
+          ,new Double(space_avail).doubleValue())
 
       if (unit) {
         storageSiteInstance.addToUnits(unit)
-        loadPromos(storageSiteInstance,unit,space_special.trim())
+        loadPromoForUnit(storageSiteInstance,unit,space_special_description.trim(),space_special_type,space_special_amount,space_special_month,space_special_applytoprorate)
       }
     }
   }
@@ -281,8 +286,10 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     for (int i = 0; i < xmlNodes.store.size(); i++) {
       def xmlstore = xmlNodes.store[i]
       def site = createUpdateSite(xmlstore)
-      feed.addToSites(site)
-      SiteUser.link(site, feed.manager)
+      if (site) {
+        feed.addToSites(site)
+        SiteUser.link(site, feed.manager)
+      }
     }
   }
 
@@ -362,19 +369,24 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     updateSiteHelper(site,xmlstore,stats,writer)
     geoCodeSite(site)
     updateUnits (site, stats, writer)
-    return site.save(flush:true)
+    if (site.validate()) {
+      return site.save(flush:true)
+    }
+    else {
+      println "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
+    }
   }
 
   private def createUpdateUnit(site,stats,writer,space_id,space_width,space_length,
                                space_height,space_climate,space_access,
                                space_floor,space_regprice,space_curprice,
-                               space_avail,space_special) {
+                               space_avail) {
 
     // Check the unit size (and possibly eliminate this as a potential unit)
     // before we fetch/create the actual unit so our site stats remain accurate.
     StorageSize unitSize = unitSizeService.getUnitSize(space_width, space_length, SearchType.STORAGE)
     if (!unitSize) {
-      printf ("Cannot determine unitSize for ${space_width}, ${space_length}. Skipping\n")
+      println ("Cannot determine unitSize for ${space_width}, ${space_length}. Skipping\n")
       return
     }
 
@@ -409,8 +421,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     return unit.save()
   }
 
-  def loadPromos(StorageSite site, StorageUnit unit, special) {
-    def code = "${site.sourceLoc}:${unit.unitSizeInfo}"
+  def loadPromoForUnit(StorageSite site, StorageUnit unit, special_description,special_type,special_amount,special_month,special_applytoprorate) {
+    def code = "${unit.unitName}:${unit.unitSizeInfo}" // promos are tied 0-to-1 to units
 
     ///////////////////
     // SPECIAL OFFER //
@@ -419,23 +431,42 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     if (!specialOffer) {
       specialOffer = new SpecialOffer()
       specialOffer.expireMonth  = 1
-      specialOffer.inMonth      = 1
       specialOffer.prepayMonths = 0
       specialOffer.code         = code
       site.addToSpecialOffers(specialOffer)
     }
-    if (!special) {
-      specialOffer.featured     = false
-      specialOffer.active       = false
+
+    // sanity checking
+    if (!special_description) {
+      return site.removeFromSpecialOffers(specialOffer)
     }
-    else {
-      specialOffer.featured     = true
-      specialOffer.active       = true
+
+    // preemptive error handling
+    try {
+      BigDecimal bd = new BigDecimal(special_amount)
+      Integer inMonth = new Integer(special_month)
+      specialOffer.promoQty = bd
+      specialOffer.inMonth = inMonth.intValue()
+    } catch (NumberFormatException e) {
+      println "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
+      e.printStackTrace()
+      return site.removeFromSpecialOffers(specialOffer)
     }
-    specialOffer.description  = special
-    if (!specialOffer.promoName) specialOffer.promoName = special
-    specialOffer.promoType    = PromoType.AMOUNT_OFF // non-quantifiable special
-    specialOffer.promoQty     = 0                    // non-quantifiable special
+
+    specialOffer.featured     = true
+    specialOffer.active       = true
+    specialOffer.description  = special_description
+
+    if (!specialOffer.promoName) specialOffer.promoName = special_description
+
+    if (special_type == "fixed")      specialOffer.promoType = PromoType.FIXED_RATE
+    if (special_type == "percentage") specialOffer.promoType = PromoType.PERCENT_OFF
+    if (special_type == "discount")   specialOffer.promoType = PromoType.AMOUNT_OFF
+
+    if (special_applytoprorate) {
+      specialOffer.prepayMonths = 1
+    }
+
     specialOffer.save()
 
     ///////////////////////////////
@@ -576,62 +607,70 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       add_bullet(site.securityItems,"Fenced and Lighted")
     }
 
-    site.startSunday = office_hours(store_office_sunday_open)
-    site.endSunday = office_hours(store_office_sunday_close)
-    site.startMonday = office_hours(store_office_monday_open)
-    site.endMonday = office_hours(store_office_monday_close)
-    site.startTuesday = office_hours(store_office_tuesday_open)
-    site.endTuesday = office_hours(store_office_tuesday_close)
-    site.startWednesday = office_hours(store_office_wednesday_open)
-    site.endWednesday = office_hours(store_office_wednesday_close)
-    site.startThursday = office_hours(store_office_thursday_open)
-    site.endThursday = office_hours(store_office_thursday_close)
-    site.startFriday = office_hours(store_office_friday_open)
-    site.endFriday = office_hours(store_office_friday_close)
-    site.startSaturday = office_hours(store_office_saturday_open)
-    site.endSaturday = office_hours(store_office_saturday_close)
+    site.startSunday      = office_hours(store_office_sunday_open)
+    site.endSunday        = office_hours(store_office_sunday_close)
+    site.startMonday      = office_hours(store_office_monday_open)
+    site.endMonday        = office_hours(store_office_monday_close)
+    site.startTuesday     = office_hours(store_office_tuesday_open)
+    site.endTuesday       = office_hours(store_office_tuesday_close)
+    site.startWednesday   = office_hours(store_office_wednesday_open)
+    site.endWednesday     = office_hours(store_office_wednesday_close)
+    site.startThursday    = office_hours(store_office_thursday_open)
+    site.endThursday      = office_hours(store_office_thursday_close)
+    site.startFriday      = office_hours(store_office_friday_open)
+    site.endFriday        = office_hours(store_office_friday_close)
+    site.startSaturday    = office_hours(store_office_saturday_open)
+    site.endSaturday      = office_hours(store_office_saturday_close)
 
-    try {
-      def hoursMatcher = store_access_hours =~ /(.*)M to (.*)M (.*)/
-      if (hoursMatcher.getCount()) {
-        DateFormat dfAccess = new SimpleDateFormat("hh:mm a")
-        Date accessHoursStart   = dfAccess.parse("${hoursMatcher[0][1]?.trim()}M")
-        Date accessHoursEnd     = dfAccess.parse("${hoursMatcher[0][2]?.trim()}M}")
-        String days = hoursMatcher[0][3]?.trim()
-        if (days.equalsIgnoreCase("daily")) {
-          site.openSunday           = true
-          site.startSundayGate      = accessHoursStart
-          site.endSundayGate        = accessHoursEnd
+    if (store_access24hr) {
+      site.openSunday = site.openMonday = site.openTuesday = site.openWednesday = site.openThursday = site.openFriday = site.openSaturday = true
+      site.startSundayGate = site.startMondayGate = site.startTuesdayGate = site.startWednesdayGate = site.startThursdayGate = site.startFridayGate = site.startSaturdayGate = office_hours("00:00")
+      site.endSundayGate = site.endMondayGate = site.endTuesdayGate = site.endWednesdayGate = site.endThursdayGate = site.endFridayGate = site.endSaturdayGate = office_hours("23:59")
+    }
+    // brute force it
+    else {
+      try {
+        def hoursMatcher = store_access_hours =~ /(.*)M to (.*)M (.*)/
+        if (hoursMatcher.getCount()) {
+          DateFormat dfAccess = new SimpleDateFormat("hh:mm a")
+          Date accessHoursStart   = dfAccess.parse("${hoursMatcher[0][1]?.trim()}M")
+          Date accessHoursEnd     = dfAccess.parse("${hoursMatcher[0][2]?.trim()}M}")
+          String days = hoursMatcher[0][3]?.trim()
+          if (days.equalsIgnoreCase("daily")) {
+            site.openSunday           = true
+            site.startSundayGate      = accessHoursStart
+            site.endSundayGate        = accessHoursEnd
 
-          site.openMonday           = true
-          site.startMondayGate      = accessHoursStart
-          site.endMondayGate        = accessHoursEnd
+            site.openMonday           = true
+            site.startMondayGate      = accessHoursStart
+            site.endMondayGate        = accessHoursEnd
 
-          site.openTuesday          = true
-          site.startTuesdayGate     = accessHoursStart
-          site.endTuesdayGate       = accessHoursEnd
+            site.openTuesday          = true
+            site.startTuesdayGate     = accessHoursStart
+            site.endTuesdayGate       = accessHoursEnd
 
-          site.openWednesday        = true
-          site.startWednesdayGate   = accessHoursStart
-          site.endWednesdayGate     = accessHoursEnd
+            site.openWednesday        = true
+            site.startWednesdayGate   = accessHoursStart
+            site.endWednesdayGate     = accessHoursEnd
 
-          site.openThursday         = true
-          site.startThursdayGate    = accessHoursStart
-          site.endThursdayGate      = accessHoursEnd
+            site.openThursday         = true
+            site.startThursdayGate    = accessHoursStart
+            site.endThursdayGate      = accessHoursEnd
 
-          site.openFriday           = true
-          site.startFridayGate      = accessHoursStart
-          site.endFridayGate        = accessHoursEnd
+            site.openFriday           = true
+            site.startFridayGate      = accessHoursStart
+            site.endFridayGate        = accessHoursEnd
 
-          site.openSaturday         = true
-          site.startSaturdayGate    = accessHoursStart
-          site.endSaturdayGate      = accessHoursEnd
-         }
+            site.openSaturday         = true
+            site.startSaturdayGate    = accessHoursStart
+            site.endSaturdayGate      = accessHoursEnd
+          }
+        }
+      } // hours
+      catch (Throwable t) {
+        // Worst case scenario is hours don't parse. Handle manually then.
+        t.printStackTrace()
       }
-    } // hours
-    catch (Throwable t) {
-      // Worst case scenario is hours don't parse. Handle manually then.
-      t.printStackTrace()
     }
   }
 

@@ -487,7 +487,11 @@ class MigrationController {
         return true
       if (feedType.name && feedType.name == feedName)
         return true
+    } catch (groovy.lang.MissingPropertyException mpe) {
+      // This is expected for cases where `feedType instanceof lava.lang.String` is true.
+      // Ignore this one
     } catch (Throwable t) {
+      // Something really unexpected happened. Log it and march on.
       t.printStackTrace()
     }
     return false;
