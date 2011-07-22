@@ -263,11 +263,29 @@ class RentalTransactionController extends BaseTransactionController {
       return;
     }
 
+    // JM: Stick this rental transaction id into session (good until the broswer closes)
+    // memory. We'll use this in the thankYou action to validate that the user has
+    // need-to-know before showing them the transaction details. (No snooping)
+    if (!session.transaction) {
+      session.transaction = [:]
+    }
+    session.transaction[(int)rentalTransactionInstance.id] =  true
+
     redirect(action:"thankYou",params:[id:rentalTransactionInstance.id])
   }
 
   def thankYou = {
     def rentalTransactionInstance = RentalTransaction.get(params.id as Long)
+    if (!rentalTransactionInstance) {
+      println "RentalTransactionController.thankYou: Failed to find rental transaction for id=${params.id}"
+      redirect (controller: "home", action: "index");
+    }
+
+    // JM: If this user did not just rent this unit, then bail out. (No snooping)
+    if (!(session.transaction && session.transaction[(int)rentalTransactionInstance.id])) {
+      redirect (controller: "home", action: "index");
+    }
+
     def site = rentalTransactionInstance.site
     def unit = StorageUnit.get(rentalTransactionInstance.unitId)
     def promo = SpecialOffer.get(rentalTransactionInstance.promoId);

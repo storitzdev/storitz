@@ -8,8 +8,8 @@
         <META name="y_key" content="9a7a338eec8978fd"/>
         <p:css name="bundled" />
         <p:dependantJavascript>
-            <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
-            <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+            <script type="text/javascript" src="${request.isSecure() ? "https" : "http"}://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+            <script type="text/javascript" src="${request.isSecure() ? "https" : "http"}://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
         </p:dependantJavascript>
         <!--[if IE]> <link href="${resource(dir:'css', file:'application_ie.css')}" rel="stylesheet" type="text/css"> <![endif]-->
         <g:layoutHead />

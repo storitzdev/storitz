@@ -15,22 +15,22 @@
         <div id="billInfo" class="column">
             <h3>Billing Information:</h3>
             <p>Name:</p>
-            <span>${rentalTransactionInstance.billingAddress.fullName()}</span>
+            <span>${rentalTransactionInstance.billingAddress?.fullName()}</span>
             <p>Address:</p>
-            <span id="customerAddr">${rentalTransactionInstance.billingAddress.fullAddress()}</span>
+            <span id="customerAddr">${rentalTransactionInstance.billingAddress?.fullAddress()}</span>
             <p>Phone:</p>
             <span>${rentalTransactionInstance.contactPrimary.phone}</span>
         </div>
         <div id="paymentInfo" class="column">
             <h3>Payment Information:</h3>
             <p>Type:</p>
-            <span>${rentalTransactionInstance.cardType.display}</span>
+            <span>${rentalTransactionInstance.cardType?.display}</span>
             <p>Card No.:</p>
             <span>${rentalTransactionInstance.cleanCCNum}</span>
             <p>Amount:</p>
             <span><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></span>
             <p>Name on Card:</p>
-            <span>${rentalTransactionInstance.billingAddress.fullName()}</span>
+            <span>${rentalTransactionInstance.billingAddress?.fullName()}</span>
         </div>
         <div id="orderInfo" class="column">
             <h3>Order Information:</h3>
