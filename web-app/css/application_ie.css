@@ -403,3 +403,45 @@ body.site_detail .panes #yelp_reviews {
   padding-top: 10px;
 }
 /*site detail page end*/
+/*thankyou page begin*/
+body.thankyou .conf_box {
+  padding-right: 0px;
+}
+body.thankyou .conf_box h2 {
+  display: inline;
+}
+body.thankyou .conf_box span {
+  display: inline-block;
+}
+body.thankyou .conf_box .column {
+  display: inline;
+  margin: 30px 7px 0 0;
+}
+body.thankyou .conf_box .extColumn,
+body.thankyou .conf_box .extColumn div {
+  display: inline;
+}
+body.thankyou #purchaseSummary div {
+  padding: 12px;
+}
+body.thankyou #purchaseSummary div div {
+  padding: 0;
+}
+body.thankyou #purchaseSummary .site_info {
+  position: relative;
+  padding-bottom: 12px;
+}
+body.thankyou #purchaseSummary .total_cost {
+  width: 320px;
+}
+body.thankyou #purchaseSummary .total_cost h2,
+body.thankyou #purchaseSummary .total_cost span {
+  display: inline;
+}
+body.thankyou #purchaseSummary .total_cost h2 {
+  margin-right: 95px;
+}
+body.thankyou #purchaseSummary .total_cost span {
+  float: none;
+}
+/*thankyou page end*/
