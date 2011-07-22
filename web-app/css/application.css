@@ -1561,6 +1561,15 @@ body.site_detail .rent_me > div.rent_reserve input.rent_me_button {
   border-width: 0;
 }
 
+body.site_detail .rent_me > div.rent_reserve input.reserve_me_button {
+  display: block;
+  background: url("../images/v2/site_detail/reserve-me-275x56.png") no-repeat;
+  width: 275px;
+  height: 56px;
+  text-indent: -9999px;
+  border-width: 0;
+}
+
 body.site_detail .rent_me div.price .per_month {
   font-size: 12px;
   font-weight: normal;
