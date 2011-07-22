@@ -2509,20 +2509,42 @@ li.review p.revExcerpt {
 }
 
 body.thankyou {
-  font-size: 11pt;
+  font-size: 10pt;
   font-family: Arial, Helvetica, sans-serif;
 }
+body.thankyou .conf_box > h1,
+body.thankyou .conf_box > h2,
+body.thankyou .conf_box > div > h2,
+body.thankyou .conf_box > p {
+  margin-left: 15px;
+}
+body.thankyou .conf_box > p {
+  margin-top: 10px;
+}
+body.thankyou .conf_box .userInfo > div,
+body.thankyou .conf_box .storageInfo > div,
+body.thankyou .conf_box .icons > div,
+body.thankyou .conf_box .promos > div {
+  margin-left: 15px;
+}
+body.thankyou .conf_box .promos > div.column {
+  background-color:gray;
+  border-radius:10px;
+  height:110px;
+  text-align: center;
+  padding-top: 10px;
+  color: #a7a7a7;
+}
 body.thankyou .conf_box {
-  width: 657px;
+  padding-top: 20px;
+  width: 685px;
   display: block;
   position: relative;
   border: 1px solid #aaa;
   margin-bottom: 20px;
-  padding: 18px;
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
-  box-shadow: 0 0 8px #CCC;
   background-image: url("../images/v2/site_detail/bg-transaction-box-align-bottom.jpg");
   background-position: center bottom;
   background-repeat: repeat-x;
@@ -2546,55 +2568,49 @@ body.thankyou .conf_box h1 {
 }
 body.thankyou .conf_box h2 {
   font-size: 13pt;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   color: #000;
-  display: inline-block;
 }
-body.thankyou .conf_box span {
-  color: #00529b;
-  font-size: 13pt;
-  margin-bottom: 10px;
-  padding-left: 7px;
+body.thankyou .conf_box h2 span {
+  color: #1982de;
   font-weight: bold;
 }
-/*body.thankyou table {*/
-  /*margin: 10px 0 20px 20px;*/
-/*}*/
-/*body.thankyou td {*/
-  /*padding: 2px;*/
-  /*width: 300px;*/
-/*}*/
 body.thankyou .conf_box p,
 body.thankyou #purchaseSummary p {
-  margin-bottom: 15px;
-  font-family: arial;
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, san-serif;
   font-size: 10pt;
+  line-height: 16px;
+  padding-right: 10px;
 }
-body.thankyou .conf_box .formInstructions {
-  font-size: 10pt;
-}
-body.thankyou .conf_box .formInstructions b{
-  font-weight: bold;
-}
-.conf_box div.userInfo {
+.conf_box div.userInfo,
+.conf_box div.storageInfo {
   display: block;
+  margin-bottom: 30px;
+}
+.conf_box div.icons, .conf_box div.promos {
+  border-top: 1px solid #a7a7a7;
+  padding-top: 20px;
+}
+.conf_box div.storageInfo {
+  margin-top: 10px;
 }
 .conf_box .column { /*#billInfo, #paymentInfo, #orderInfo*/
   display: inline-block;
-  width: 205px;
-  margin: 30px 10px 0 0;
+  width: 195px;
+  margin-top: 15px;
   vertical-align: top;
 }
 .conf_box .extColumn {
   display: inline-block;
   width: 410px;
-  margin: 30px 10px 0 0;
+  margin: 15px 10px 0 0;
   vertical-align: top;
 }
 .conf_box h3 {
   font-weight: bold;
-  font-size: 11pt;
-  border-bottom: 1px solid #ccc;
+  font-size: 10pt;
+  border-bottom: 1px solid #a7a7a7;
   padding-bottom: 7px;
   margin-bottom: 7px;
 }
@@ -2605,11 +2621,10 @@ body.thankyou .conf_box .formInstructions b{
 .conf_box div.userInfo span,
 .conf_box div.icons span,
 .conf_box div.storageInfo span {
-  color: #000;
   font-weight: bold;
-  font-size: 10pt;
-  padding: 0;
-  margin-bottom: 0;
+}
+.conf_box div.storageInfo span {
+  font-size: 9pt;
 }
 .conf_box .icons a.map,
 .conf_box .icons a.print,
@@ -2617,7 +2632,7 @@ body.thankyou .conf_box .formInstructions b{
   width: 53px;
   height: 52px;
   display: inline-block;
-  margin-right: 8px;
+  margin-right: 5px;
   float: none;
 }
 .conf_box .icons a.map {
@@ -2632,33 +2647,35 @@ body.thankyou .conf_box .formInstructions b{
 .conf_box .icons span.icn_label {
   vertical-align: top;
   display: inline-block;
-  width: 140px;
+  width: 130px;
+  margin-top: 1px;
 }
 .conf_box .storageInfo a,
 #purchaseSummary .move_in_info a {
   text-decoration: none;
-  color: #00529B;
+  color: #1982de;
   font-size: 10pt;
+}
+.conf_box .storageInfo .days p,
+.conf_box .storageInfo .hours p {
+  font-size: 9pt;
 }
 .conf_box .storageInfo .days {
   display: inline-block;
-  width: 78px;
-  margin-right: 10px;
 }
 .conf_box .storageInfo .hours {
   display: inline-block;
-  width: 120px;
 }
 .conf_box .storageInfo .important {
   display: inline-block;
   width: 172px;
-  padding-left: 22px;
   vertical-align: top;
 }
 .conf_box .storageInfo .important p{
   color: red;
   margin: 0;
   line-height: 15px;
+  font-size: 9pt;
 }
 .conf_box .storageInfo .days p,
 .conf_box .storageInfo .hours p {
@@ -2666,14 +2683,22 @@ body.thankyou .conf_box .formInstructions b{
   margin-bottom: 0;
   line-height: 17px;
 }
+.conf_box .storageInfo .hours p {
+  width: 110px;
+  padding-right: 22px;
+}
 .conf_box .storageInfo .hours p.siteClosed {
   text-align: center;
   font-style: italic;
   padding-left: 12px;
 }
+.conf_box div.icons {
+  margin: 10px 0 20px;
+}
 .conf_box div.promos {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  /*display: none;*/
 }
 body.thankyou #purchaseSummary {
   position: absolute;
@@ -2693,13 +2718,15 @@ body.thankyou #purchaseSummary {
 }
 #purchaseSummary h1 {
   color: #00529B;
-  padding: 20px 10px;
+  padding: 20px 10px 0;
+  font-size: 11pt;
 }
 body.thankyou #purchaseSummary div.unit_info {
   padding-bottom: 0px;
 }
 #purchaseSummary .unit_info h1{
-  padding: 0 0 20px 0;
+  padding: 0 0 10px 0;
+  line-height: 125%;
 }
 #purchaseSummary .site_info img {
   margin-top: 3px;
@@ -2779,7 +2806,7 @@ body.thankyou #purchaseSummary .unit_info p {
 }
 body.thankYou #purchaseSummary .total_cost p {
   font-size: 8pt;
-  margin: 0;
+  margin: 5px 0 0;
 }
 /* search map's info window */
 body.serp div.info_window {

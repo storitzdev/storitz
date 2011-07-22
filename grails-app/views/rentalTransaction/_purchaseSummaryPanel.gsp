@@ -16,10 +16,16 @@
 </div>
 <div class="unit_info">
     <g:if test="${unit != null}">
-        <h1><g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" /><br />Unit Id: ${rentalTransactionInstance.idNumber}</h1>
+        <h1>
+          <g:render template="/storageSite/unitSizeLabel" model="[unit:unit]" />
+          <g:if test="${rentalTransactionInstance.idNumber}"><br />Unit #: ${rentalTransactionInstance.idNumber}</g:if>
+        </h1>
     </g:if>
     <g:else>
-        <h1>${rentalTransactionInstance.displaySize.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2'")} ${rentalTransactionInstance.unitType} Unit <br /> Unit Id: ${rentalTransactionInstance.idNumber}</h1>
+        <h1>
+          ${rentalTransactionInstance.displaySize.replaceAll(/(\d+) X (\d+)/, "\$1' x \$2'")} ${rentalTransactionInstance.unitType.display} Unit
+          <g:if test="${rentalTransactionInstance.idNumber}"><br />Unit #: ${rentalTransactionInstance.idNumber}</g:if>
+        </h1>
     </g:else>
   <p>
     <g:if test="${unit != null && unit.isTempControlled}">Climate control,</g:if>
