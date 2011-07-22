@@ -24,3 +24,6 @@
         <p>Searching...</p>
     </div>
 </div>
+<!--[if IE]>
+<div id="ieSerpFix"></div>
+<![endif]-->

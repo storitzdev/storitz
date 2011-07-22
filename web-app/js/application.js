@@ -435,10 +435,7 @@ $(document).ready(function() { // common event bindings
     $("#purchaseSummary .move_in_info a").click(function() { //temporary binding for thankyoupage summary
         $("#purchaseSummary div.cost_details").toggle();
     });
-//    $("body.thankyou .conf_box .icons a.map").click(function() {
-//        var from = $("body.thankyou .conf_box #billInfo #customerAddr").text();
-//        $("body.site_detail .checkout_value input#srcAddr").val(from);
-//    });
+
 });
 
 function initialize_checkout_page() {
@@ -582,13 +579,29 @@ function initialize_splash() {
 
 function initialize_serp() {
   _map.init();
+  var resHeight = $("#results_container").height();
+  var pickHeight = $("div#pickers").height();
+  if (resHeight < pickHeight  ) {
+     $("div#footer").css('margin-top', pickHeight - resHeight + 10);
+  }
   // show map?
   if (window.location.hash == "#map-view" || QueryString["view-mode"]=="map-view") {
       _map.mapify();
   }
   // bind map events
   $(".toggle_map_view").click(function() {
-      $("#search_results").hasClass("map") ? _map.listify() : _map.mapify();
+      if ($("#search_results").hasClass("map")) {
+          _map.listify();
+          if ($.browser.msie && (resHeight < pickHeight)) {
+            $("div#footer").css("margin-top", pickHeight - resHeight + 10);
+          }
+      }
+      else {
+          _map.mapify();
+          if ($.browser.msie) {
+            $("div#footer").css("margin-top", 0);
+          }
+      }
       return false;
   });
   $(".show_map_popup a").click(function() {

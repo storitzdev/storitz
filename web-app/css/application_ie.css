@@ -71,7 +71,7 @@ body.serp #results_container div.map_container {
   width: 100%;
 }
 body.serp #results_container div.map_container #big_map_canvas,
-body.serp #results_container #search_results {
+body.serp #results_container .map {
   height: 728px;
 }
 body.serp div.info_window div.info_right {
