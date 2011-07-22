@@ -19,7 +19,7 @@
             <p>Address:</p>
             <span id="customerAddr">${rentalTransactionInstance.billingAddress.fullAddress()}</span>
             <p>Phone:</p>
-            <span>(310) 308-3495</span> <!-- placeholder -->
+            <span>${rentalTransactionInstance.contactPrimary.phone}</span>
         </div>
         <div id="paymentInfo" class="column">
             <h3>Payment Information:</h3>
@@ -30,7 +30,7 @@
             <p>Amount:</p>
             <span><g:formatNumber number="${rentalTransactionInstance.cost}" type="currency" currencyCode="USD"/></span>
             <p>Name on Card:</p>
-            <span>${rentalTransactionInstance.billingAddress.fullName()}</span>  <!-- placeholder -->
+            <span>${rentalTransactionInstance.billingAddress.fullName()}</span>
         </div>
         <div id="orderInfo" class="column">
             <h3>Order Information:</h3>
