@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <meta name="DESCRIPTION" content="Storage site operators signup with Storitz.  This page details what you need to know to start hosting your sites with Storitz."/>
+  <title>Add Your Self-Storage Facility to Storitz.com</title>
+  <meta name="DESCRIPTION" content="Storage facility operators: Sign up with storitz.com for free. This page details what you need to know to start list your units on Storitz."/>
   <p:dependantJavascript>
     <script type="text/javascript">
       //<![CDATA[
@@ -77,91 +78,50 @@
       //]]>
     </script>
   </p:dependantJavascript>
-
 </head>
 <body class="static operatorsignup">
 
 <div class="right">
-  <h1>Be part of Storitz and start renting units today!</h1>
+  <h1>Facility Operators: Sign Up Free Today!</h1>
+  <p>Ready to sign up?  Send us your info and we'll get back to you right away!</p>
 
+  <g:form controller="contactUs" action="operatorSignup" name="operatorsignup" method="post">
+    <div class="line"><fieldset>
+      <label for="firstName">First Name</label>
+      <g:textField name="firstName" id="firstName" class="required text"/>
+    </fieldset>
+    <fieldset>
+      <label for="lastName">Last Name</label>
+      <g:textField name="lastName" id="lastName" class="required text"/>
+    </fieldset></div>
+    <div class="line"><fieldset><label for="companyName">Company Name</label>
+    <g:textField name="companyName" id="companyName" class="required text"/></fieldset>
+    <fieldset><label for="email">Your Email</label>
+    <g:textField name="email" id="email" class="required email text"/></fieldset>
+    <fieldset><label for="email">Phone (XXX-XXX-XXXX)</label>
+    <g:textField name="phone" id="phone" class="required phone text"/></fieldset></div>
+    <div class="line">
+      <label for="softwareType">Storage Software Package</label>
+      <fieldset>
+        <g:select name="softwareType" id="softwareType" from="${storitz.constants.SoftwareType.list()}" optionValue="display"/>
+        <g:textField placeholder="Other package name" name="otherSoftware" id="otherSoftware" disabled="true" class="othersoftware" class="text" />
+      </fieldset>
+    </div>
+    <g:submitButton name="operatorsignup" class="save button green" value="Send" />
+  </g:form>
+
+  <h1>Get listed on Storitz and start renting units today!</h1>
   <ul>
-    <li>$0 up-front investment</li>
-    <li>$0 subscription fees</li>
-    <li>Lowest Commissions - <em>Guaranteed</em></li>
-    <li>Month-to-Month Agreement</li>
-    <li>Easy to get started</li>
+    <li>Get a 90% conversation rate with Storitz rentals</li>
+    <li>Gain access to an affiliate network with over 7 million unique visitors per month</li>
+    <li>NO set-up costs</li>
+    <li>NO monthly fees</li>
+    <li>NO set-up required from you; we do all the work</li>
+    <li>Month-to-month agreement &mdash; cancel at any time</li>
   </ul>
   <div class="video">
     <div id="videoContainer"></div>
   </div>
-  <h2>Why?</h2>
-  <ul>
-      <li>Get Tenants – for your vacant units, at your prices and promotions.</li>
-      <li>Get them for no up-front cost, and with no set up effort (we do all the setup for you)</li>
-    </ul>
-  <h2>How?</h2>
-    <ul>
-      <li>Storitz advertises online and offline to draw traffic to its site.</li>
-      <li>Storitz integrates with your management software and rents your storage units</li>
-      <li>Storitz does not get paid until it delivers you a prepaid tenant.</li>
-    </ul>
-  <h2>Wait, Something is Different Here...</h2>
-    <ul>
-      <li>That’s right.  We are not like other online “reservation centers”; we do not offer leads or reservations that have little or no obligation to the customer and require you to a) close the deal and b) reconcile end-of-month invoices to see which leads actually turned into rentals.</li>
-      <li>Instead, we simply rent the unit in advance to your customer, with whatever move-in promotions and fees you require.  We pay you the move-in transaction amount, and then you pay us our one-time move-in booking commission.</li>
-    </ul>
-  <h2>How much does it cost me?</h2>
-    <ul>
-      <li>We have the lowest commissions in the industry, starting at $40 per move-in. No subscriptions, no exceptions. No hidden fees.</li>
-    </ul>
-  <h2>How much do I control the way my properties look on Storitz?</h2>
-    <ul>
-      <li>Complete control. If you change rents in your software program, the rents automatically update on Storitz.  Add, edit or delete images, your company logo, or descriptive text of your property,  at anytime</li>
-    </ul>
-  <h2>What else do I get?</h2>
-    <ul>
-      <li>Want to see how you are stacking up against your competition on Storitz? Full reporting and analytics related to your locations and performance on Storitz.</li>
-      <li>You control all email notifications, reporting and analytics access for your employees</li>
-    </ul>
-  <h2>Now wait a second. Do I still have to build my pages?</h2>
-    <ul>
-      <li>We do all the set up for you. After you create a software login for us, we will build your property page(s) and prepare them for you to review. You review them and approve them, and then we  put them on our live Website and start renting units.</li>
-    </ul>
-  <h2>Great.. How do I get started?</h2>
-    <ul>
-      <li>Easy: fill-out the form below and click “send”, or simply call us at (877) 456-2929.</li>
-    </ul>
-  <p>
-    Not quite there yet, and you still want to know more? Call us (877) 456-2929 or email our Business Development Specialist, Eric G. Morse <a href="mailto:sales@storitz.com?subject=New%20Operator%20Question">sales@storitz.com</a>
-  </p>
-
-  <h2 class="checkout_header">
-    Add Your Facility
-  </h2>
-
-  <div id="errorMessage" class="formErrors">
-    <div id="errorInfo" class="errorInfo"></div>
-    <div id="errorList" class="errorList"></div>
-  </div>
-
-  <g:form controller="contactUs" action="operatorSignup" name="operatorsignup" method="post">
-    <label for="firstName">First Name</label>
-    <g:textField name="firstName" id="firstName" class="required"/>
-    <label for="lastName">Last Name</label>
-    <g:textField name="lastName" id="lastName"class="required"/>
-    <label for="companyName">Company Name</label>
-    <g:textField name="companyName" id="companyName" class="required"/>
-    <label for="email">Your Email</label>
-    <g:textField name="email" id="email" class="required email"/>
-    <label for="email">Phone (XXX-XXX-XXXX)</label>
-    <g:textField name="phone" id="phone" class="required phone"/>
-    <label for="softwareType">Storage Software Package</label>
-    <fieldset>
-      <g:select name="softwareType" id="softwareType" from="${storitz.constants.SoftwareType.list()}" optionValue="display"/>
-      <g:textField placeholder="Other package name" name="otherSoftware" id="otherSoftware" disabled="true" class="othersoftware" />
-    </fieldset>
-    <g:submitButton name="operatorsignup" class="save" value="Send" />
-  </g:form>
 
 </div>
 </body>

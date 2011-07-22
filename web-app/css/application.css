@@ -604,19 +604,34 @@ body.static .search{
 body.operatorsignup .video {
   width: 640px;
   height: 360px;
-  margin-bottom: 20px;
+  margin: 20px 0;
+}
+body.operatorsignup form {
+  margin-bottom: 10px;
+}
+body.operatorsignup form fieldset {
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+body.operatorsignup form input.text {
+  border:  1px solid #a7a7a7;
+  padding: 4px;
 }
 body.operatorsignup form input,
-body.operatorsignup form label,
-body.operatorsignup form fieldset {
-    display:block;
+body.operatorsignup form label {
+  display:block;
+}
+body.operatorsignup form select {
+  margin-top: 5px;
+}
+body.operatorsignup form input.save.button {
+  margin-top: 10px;
+  width: 150px;
 }
 body.operatorsignup form input {
-  width: 250px;
-}
-body.operatorsignup form input,
-body.operatorsignup form fieldset {
-    margin-bottom: 10px;
+  width: 200px;
+  margin-bottom: 10px;
 }
 select#softwareType,
 input#otherSoftware {
