@@ -17,8 +17,27 @@
       </g:if>
       </td>
     </tr>
-    <tr class="total"><td colspan="2"><span class="label">Total Move-In Cost</span><g:formatNumber number="${totals.getMoveInTotal()}" type="currency" currencyCode="USD" /><span class="move_in_cost_asterisk">*</span></td></tr>
+
+    <g:if test="${site.transactionType == TransactionType.RESERVATION}">
+        <tr class="total"><td colspan="2"><span class="label">Total Due Today</span><g:formatNumber number="${site.rentalFee}" type="currency" currencyCode="USD" /></td></tr>
+        <tr>
+            <th><span class="label">Total Move-In Cost</span></th>
+            <th><span class="right"><g:formatNumber number="${totals.getMoveInTotal()}" type="currency" currencyCode="USD" /><span class="move_in_cost_asterisk">*</span></span></th>
+        </tr>
+    </g:if>
+    <g:else>
+        <tr class="total"><td colspan="2"><span class="label">Total Move-In Cost</span><g:formatNumber number="${totals.getMoveInTotal()}" type="currency" currencyCode="USD" /><span class="move_in_cost_asterisk">*</span></td></tr>
+    </g:else>
   </table>
+
+   <g:if test="${site.transactionType == TransactionType.RESERVATION && site.feed.reservationMoveInDescription}">
+      <div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.reservationMoveInDescription}</div>
+   </g:if>
+    %{--What to do with this? --}%
+    %{--<g:if test="${site.transactionType == TransactionType.RESERVATION && site.feed.transactionBoxLink}">--}%
+        %{--<div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.transactionBoxLink}</div>--}%
+       %{--<div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.transactionBoxBody}</div>--}%
+    %{--</g:if>--}%
   <g:if test="${(promo == null && promos?.size() > 0) || promos?.size() > 1}">
   <ul id="promo_list" class="tooltip">
       <h2>Select an Offer</h2>
@@ -85,19 +104,20 @@
           <td class="numeric last"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getTax()}" /></td>
 	</tr>
       </g:if>
-      <g:if test="${site.transactionType == TransactionType.RESERVATION}">
-          <tr class="total">
-              <td class="item">Total due today</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${site.rentalFee}" /></td>
-          </tr>
-          <tr class="total">
-              <td class="item">Total due at move-in</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal() - site.rentalFee}" /></td>
-          </tr>
+     <g:if test="${site.transactionType == TransactionType.RESERVATION && site.rentalFee}">
+          <td class="item">Reservation Deposit</td>
+          <td class="numeric"></td>
+          <td class="numeric"></td>
+          <td class="numeric last negative">-<g:formatNumber type="currency" currencyCode="USD"  number="${site.rentalFee}" /></td>
       </g:if>
-      <g:else>
-          <tr class="total">
+      <tr class="total">
+          <g:if test="${site.transactionType == TransactionType.RESERVATION && site.rentalFee}">
+              <td class="item" colspan="3">Total Due at Move-In</td><td class="last" colspan="1"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal() - site.rentalFee}" /></td>
+          </g:if>
+          <g:else>
               <td class="item">Total</td><td class="last" colspan="3"><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal()}" /></td>
-          </tr>
-      </g:else>
+          </g:else>
+      </tr>
       </tbody>
     </table>
   </div>
