@@ -24,7 +24,7 @@
         <div id="paymentInfo" class="column">
             <h3>Payment Information:</h3>
             <p>Type:</p>
-            <span>American Express</span> <!-- placeholder -->
+            <span>${rentalTransactionInstance.cardType.display}</span>
             <p>Card No.:</p>
             <span>${rentalTransactionInstance.cleanCCNum}</span>
             <p>Amount:</p>
