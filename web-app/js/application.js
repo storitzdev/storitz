@@ -440,6 +440,10 @@ $(document).ready(function() { // common event bindings
 
 function initialize_checkout_page() {
   initialize_transaction_box(update_billing_summary_panel);
+  if ($.browser.msie) {   //non-css possible ie fixes.
+    $("body.checkout .customer_info > div, body.checkout .customer_info > h1").css({'position':'relative', 'padding':'10px 0 0 20px;'});
+    $("body.checkout #booking_summary > div").css('padding', '12px');
+  }
 }
 
 function initialize_site_detail_page() {

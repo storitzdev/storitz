@@ -455,3 +455,34 @@ body.thankyou #purchaseSummary .total_cost span {
   float: none;
 }
 /*thankyou page end*/
+/*begin checkout page (some fixes also in application.js*/
+body.checkout input.rent_me_button {
+  font-size: 0;
+  line-height: 0;
+}
+body.checkout .ccimages {
+  margin: 5px 0 0 0;
+}
+body.checkout .customer_info h1.first {
+  height: 30px;
+}
+body.checkout .customer_info h1.pay .col2 p {
+  margin-bottom: 5px;
+}
+body.checkout #booking_summary h1 {
+  color: #00529b;
+  padding: 15px 12px 5px 12px;
+}
+body.checkout .move_in_quote table.summary th {
+  font-weight: normal;
+}
+body.checkout .move_in_quote table.summary tr.total td {
+  text-align: right;
+}
+body.checkout #booking_summary .unit_info {
+  margin-right: -24px;
+}
+body.checkout .cost_breakdown {
+  margin: 5px -36px 5px -12px;
+}
+/* end checkout page*/
