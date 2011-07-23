@@ -68,8 +68,7 @@
         setupForm();
         jwplayer("videoContainer").setup({
           flashplayer: "${resource(file:'/jwplayer/player.swf')}",
-          file: "${resource(file:'/video/add-your-facility-640x360-500kbps.mov')}",
-          autostart: true,
+          file: "http://www.youtube.com/watch?v=NoXWn9H8PZo",
           height: 360,
           width: 640
         });
