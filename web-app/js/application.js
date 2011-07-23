@@ -201,6 +201,22 @@ var _direction = function() {
     }
 }();
 
+function changeMapMarker(marker) {
+    var markerUrl = marker.getIcon().url;
+    var markerSize = marker.getIcon().size;
+    var markerOrigin = marker.getIcon().origin;
+    var xCoord = markerOrigin.x;
+    var yCoord = markerOrigin.y;
+    var newMarkerOffset;
+    if (xCoord % ((markerSize.width+1)*2) == 0) {   //do we have a blue marker or green? (remove +1 when new sprite images come.)
+        newMarkerOffset = new google.maps.Point(xCoord + (markerSize.width + 1), yCoord); // we have blue
+    }
+    else {
+        newMarkerOffset = new google.maps.Point(xCoord - (markerSize.width + 1), yCoord); //we have green
+    }
+    var newMarker = new google.maps.MarkerImage(markerUrl, markerSize, newMarkerOffset);
+    marker.setIcon(newMarker);
+}
 var _map = function() {
     // private variables
     var active_icon;
@@ -220,7 +236,6 @@ var _map = function() {
         current_info_window = info_window;
         info_window.open(map, marker);
         var link = $("div.facility[site_id~="+site_id+"] a.name").attr("href");
-        console.log(link.toString());
         $("div.info_window .info_right a").attr("href", link.toString());
         $("div.info_window h3.info a").attr("href", link.toString());
         var lat = marker.getPosition().lat();
@@ -259,28 +274,14 @@ var _map = function() {
                 li.css("background-color", "lightcyan");
                 li.css("cursor", "pointer");
                 var marker = markers[site_id][0];
-                var markerUrl = marker.getIcon().url;
-                var markerSize = marker.getIcon().size;
-                var markerOrigin = marker.getIcon().origin;
-                var xCoord = markerOrigin.x;
-                var yCoord = markerOrigin.y;
-                var newMarkerOffset = new google.maps.Point(xCoord - (markerSize.width + 1), yCoord); //+1 because of the weird sprite image size.
-                var newMarker = new google.maps.MarkerImage(markerUrl, markerSize, newMarkerOffset);
-                marker.setIcon(newMarker);
+                changeMapMarker(marker);
             }, function() {
                 var li = $(this);
                 var site_id = li.attr("id").substr(5);
                 li.css("background", "none");
                 li.css("cursor", "default");
                 var marker = markers[site_id][0];
-                var markerUrl = marker.getIcon().url;
-                var markerSize = marker.getIcon().size;
-                var markerOrigin = marker.getIcon().origin;
-                var xCoord = markerOrigin.x;
-                var yCoord = markerOrigin.y;
-                var newMarkerOffset = new google.maps.Point(xCoord + (markerSize.width + 1), yCoord); //+1 because of the weird sprite image size.
-                var newMarker = new google.maps.MarkerImage(markerUrl, markerSize, newMarkerOffset);
-                marker.setIcon(newMarker);
+                changeMapMarker(marker);
             });
         },
         listify: function() {
@@ -382,8 +383,19 @@ var _map = function() {
                     var priceMarker = new google.maps.MarkerImage(markerUrl, markerSize, offset);
                     var marker = new google.maps.Marker({ map: big_map, position: point, icon: priceMarker, title: hoverName });
                     var info_window = new google.maps.InfoWindow( { content: infoContainer, maxWidth: 300});
+                    google.maps.event.addListener(marker, "mouseover", function() {
+                        changeMapMarker(marker);
+                        $("ul#search_results li#site_"+site_id).css('background-color', 'lightcyan');
+                    });
+                    google.maps.event.addListener(marker, "mouseout", function() {
+                        changeMapMarker(marker);
+                        $("ul#search_results li#site_"+site_id).css('background-color', 'white');
+                    });
                     google.maps.event.addListener(marker, "click", function() {
                         toggle_info_window(info_window, big_map, marker, site_id);
+                        var fac_offset = $("ul#search_results li#site_"+site_id).offset();
+                        var destination = fac_offset.top;
+                        $("ul#search_results").scrollTop(destination);
                     });
                     markers[site_id] = [marker, info_window];
                     big_map_bounds.extend(point);
