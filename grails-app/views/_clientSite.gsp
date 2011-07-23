@@ -14,12 +14,12 @@
 <div class="photo">
     <g:if test="${site.coverImage()}">
       <div class="thumb_frame">
-        <img class="thumb" src="${resource(file: site.coverImage()?.mid())}"
-             alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
+        <g:link mapping='siteLink2' class="name" params="${site_url_params}"><img class="thumb" src="${resource(file: site.coverImage()?.mid())}"
+             alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"></g:link>
       </div>
     </g:if>
     <g:elseif test="${site?.logo && site.logo != null}">
-        <img class="logo" src="${resource(file: site.logo.src())}" border="0" alt="${site_title} Logo"/>
+        <g:link mapping='siteLink2' class="name" params="${site_url_params}"><img class="logo" src="${resource(file: site.logo.src())}" border="0" alt="${site_title} Logo"/></g:link>
     </g:elseif>
     <g:else>
         &nbsp;
