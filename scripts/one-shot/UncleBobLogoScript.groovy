@@ -3,11 +3,11 @@
 import com.storitz.*;
 import storitz.*;
 
-def alexandria_site = StorageSite.get(4547)
+def alexandria_site = StorageSite.get(1782)
 def alexandria_site_logo = alexandria_site.logo
 
 StorageSite.findAllBySource('BOB').each { bob ->
-    if (bob.id == 4547) {
+    if (bob.id == 1782) {
         println "Skipping Alexandria Site..."
     }
     else {
