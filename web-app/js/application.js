@@ -429,7 +429,7 @@ var _map = function() {
 
 $(document).ready(function() { // common event bindings
     // bind tooltip events
-    $(".tooltip a.close").click(function() {
+    $(".tooltip a.close").live("click", function() {
         $(this).parents(".tooltip").first().css("left", -2000);
         return false;
     });
@@ -523,7 +523,7 @@ function initialize_transaction_box(callback) {
     return false;
   });
 
-  $(".move_in_quote #promo_list a").live("click", function() {
+  $(".move_in_quote #promo_list a.promo").live("click", function() {
     $("#promoId").val($(this).attr("promo_id"));
     $("#promo_list").css("left", -2000)
     callback();
@@ -536,8 +536,8 @@ function initialize_transaction_box(callback) {
   });
   $(".move_in_quote a.more_offers").live("click", function() {
     _util.display_tooltip("#promo_list", $(this), {
-      left: -250,
-      top: 50
+      left: -40,
+      top: 70
     });
 //    $("#promo_list").slideToggle();
     return false;

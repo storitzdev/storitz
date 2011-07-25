@@ -42,9 +42,9 @@
   <ul id="promo_list" class="tooltip">
       <h2>Select an Offer</h2>
   <g:each in="${promos}" var="p">
-    <li><a href="#" promo_id="${p.id}">${p.promoName}</a></li>
+    <li><a href="#" class="promo" promo_id="${p.id}">${p.promoName}</a></li>
   </g:each>
-    <li class="close"><a href="#">Close <b>X</b></a></li>
+    <li class="close"><a href="#" class="close">Close X</a></li>
   </ul>
   </g:if>
   <p>* Includes <a class="breakdown" href="#">initial rent, discounts and facility fees</a></p>

@@ -1704,45 +1704,43 @@ body.checkout .cost_breakdown {
 }
 .move_in_quote #promo_list {
   width: 255px;
-  background-color: white;
+  background: url("../images/v2/backgrounds/popup-titlebar-light-3x27.jpg") repeat-x #ffffff;
 }
 .move_in_quote #promo_list h2 {
   text-align: center;
   font-size: 15px;
-  background-color: #f0f0f0;
   border-bottom: 1px solid #ccc;
   margin: 0;
   padding: 5px;
 }
 .move_in_quote #promo_list li a {
   text-decoration: none;
+}
+.move_in_quote #promo_list li a.promo {
   display: inline-block;
   color: black;
-  margin: 10px 20px 10px 38px;
+  width: 197px;
+  padding: 10px 20px 10px 38px;
   text-align: left;
 }
-.move_in_quote #promo_list li a:hover {
-  font-weight: bold;
-  color: #1982DE;
+.move_in_quote #promo_list li a.promo:hover {
+  background-color: #ddd;
 }
 .move_in_quote #promo_list li {
   display: block;
-  margin: 3px 0;
   border-bottom: 1px solid #ccc;
 }
 .move_in_quote #promo_list li.close {
-  border-bottom-width: 0px;
-  padding: 0;
+  border-bottom-width: 0;
+  padding: 5px 10px 0;
   margin: 0;
   text-align: right;
 }
 .move_in_quote #promo_list li.close a {
-  margin: 5px 8px;
-  font-family: verdana;
-  color: #066;
-}
-.move_in_quote #promo_list li.close b {
-  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #777777;
+  font-weight:bold;
+  font-size: 9pt;
 }
 .move_in_quote p {
   font-size: 11px;
