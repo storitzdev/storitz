@@ -55,7 +55,7 @@
           <span class="icn_label">Print order confirmation and bring to storage facility</span>
       </div>
       <div id="check_icon" class="column">
-          <a class="check" href="#"></a>
+          <a class="check" href="${resource(dir:'files',file:'mini-checklist-2b-071511.pdf')}" target="_new"></a>
           <span class="icn_label">Review mini checklist for useful moving &amp; packing tips</span>
       </div>
     </div>
