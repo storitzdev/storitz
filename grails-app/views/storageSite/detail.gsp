@@ -251,7 +251,11 @@
     </g:if>
   </div>
 </div>
-<div id="datepicker"></div>
+<div id="datepicker" class="tooltip" style="background-color: white;">
+    <div class="close_button">
+    <a class="close" href="#">Close X</a>
+    </div>
+</div>
 <p:dependantJavascript>
   <script type="text/javascript">
     var switchTo5x = true; // sharethis hack

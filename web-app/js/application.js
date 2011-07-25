@@ -505,6 +505,7 @@ function initialize_site_detail_page() {
 function initialize_transaction_box(callback) {
   $("#datepicker").datepicker(
           { dateFormat: 'yy-mm-dd',
+            dayNamesMin: $.datepicker._defaults.dayNamesShort,
             minDate: 0,
             onSelect: function(date) {
               $('#moveInDate').val(date);
