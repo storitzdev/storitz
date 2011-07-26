@@ -30,9 +30,6 @@
                         <input id="amenity_cc" type="checkbox" value="cc" name="amenity" />
                         <label for="amenity_cc">Climate Control/AC</label>
                         <br />
-                        <input id="amenity_24hr" type="checkbox" value="24hr" name="amenity" />
-                        <label for="amenity_24hr">24-hour Access</label>
-                        <br />
                         <input id="amenity_alarm" type="checkbox" value="alarm" name="amenity" />
                         <label for="amenity_alarm">In-Unit Alarm</label>
                      </div>

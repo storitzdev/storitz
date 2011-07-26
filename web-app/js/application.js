@@ -365,7 +365,12 @@ var _map = function() {
                     var offset;    //position of the pin in sprite
                     var pinWidth = (price < 100) ? 44 : 52;
                     var pinHeight = 50;
-                    if (price < 100) {
+                    if (price < 10) {
+                        markerUrl = pinurl0;
+                        markerSize = new google.maps.Size(36, 49);
+                        offset = new google.maps.Point(36, price*49); //custom offset due to a two column sprite.
+                    }
+                    else if (price < 100) {
                         markerUrl = pinurl1;
                         markerSize = new google.maps.Size(43, 47); //size of the image to display in x, y pixels
                         offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10))-1),pinHeight*(price%10));

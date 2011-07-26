@@ -2874,8 +2874,7 @@ body.serp div.info_window {
     padding: 5px;
     float: left;
     width: 285px;
-    height: 140px;
-    /*font-family: verdana;*/
+    height: 150px;
     display: block;
 }
 body.serp div.info_window div.info_left {
