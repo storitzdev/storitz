@@ -484,6 +484,7 @@ function initialize_checkout_page() {
   if ($.browser.msie) {   //non-css possible ie fixes.
     $("body.checkout .customer_info > div, body.checkout .customer_info > h1").css({'position':'relative', 'padding':'10px 0 0 20px;'});
     $("body.checkout #booking_summary > div").css('padding', '12px');
+    $("body.checkout input[type=text]").addClass('typeText');
   }
 }
 

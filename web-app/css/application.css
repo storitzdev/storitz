@@ -2014,7 +2014,7 @@ body.checkout label {
   margin-bottom: 5px;
   padding-left: 2px;
 }
-body.checkout input[type=text] {
+body.checkout input[type=text], body.checkout input.typeText {
   display: block;
   border:  1px solid #ccc;
   border-radius: 4px;

@@ -417,19 +417,57 @@ body.site_detail .panes #yelp_reviews {
 body.thankyou .conf_box {
   padding-right: 0px;
 }
+body.thankyou .conf_box h1 {
+  margin-left: 15px;
+}
 body.thankyou .conf_box h2 {
-  display: inline;
+  margin-left: 15px;
+}
+body.thankyou .conf_box p {
+  margin: 10px 0 0 15px;
+}
+body.thankyou .conf_box .userInfo p {
+  margin: 7px 0 0 0;
+}
+body.thankyou .conf_box * p {
+  margin: 0;
 }
 body.thankyou .conf_box span {
   display: inline-block;
+}
+body.thankyou .conf_box .icons span.icn_label {
+  height: 65px;
 }
 body.thankyou .conf_box .column {
   display: inline;
   margin: 30px 7px 0 0;
 }
+body.thankyou .conf_box .extColumn {
+  margin: 30px, 7px, 0 0;
+}
+body.thankyou .conf_box .userInfo div,
+body.thankyou .conf_box .icons div,
+body.thankyou .conf_box .storageInfo div,
+body.thankyou .conf_box .promos div {
+  margin-left: 15px;
+}
+body.thankyou .conf_box .storageInfo * div {
+  margin-left: 0;
+}
+body.thankyou .conf_box .storageInfo .hours p {
+  width: auto;
+}
 body.thankyou .conf_box .extColumn,
 body.thankyou .conf_box .extColumn div {
   display: inline;
+}
+body.thankyou .conf_box .promos div.column {
+  background-color: gray;
+  border-radius: 10px;
+  height: 110px;
+  text-align: center;
+  padding-top: 10px;
+  color: #A7A7A7;
 }
 body.thankyou #purchaseSummary div {
   padding: 12px;
@@ -459,6 +497,12 @@ body.thankyou #purchaseSummary .total_cost span {
 body.checkout input.rent_me_button {
   font-size: 0;
   line-height: 0;
+}
+body.checkout input.typeText.zipcode {
+  width: 130px;
+}
+body.checkout input.typeText.cvv2 {
+  width: 100px;
 }
 body.checkout .ccimages {
   margin: 5px 0 0 0;
