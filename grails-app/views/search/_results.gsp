@@ -1,9 +1,13 @@
 <p:dependantJavascript>
     <script>
-    var pinurl0=<storitz:imageLink src="map-pins-0thru9-36x50.png" />;
-    var pinurl1=<storitz:imageLink src="map-pins-10thru99-44x50.png" />;
-    var pinurl2=<storitz:imageLink src="map-pins-100thru199-52x50.png" />;
-    var pinurl3=<storitz:imageLink src="map-pins-200thru300-52x50.png" />;
+    var pinurl0=<storitz:imageLink src="map-0-9.png" />;
+    var pinurl1=<storitz:imageLink src="map-10-99.png" />;
+    var pinurl2=<storitz:imageLink src="map-100-199.png" />;
+    var pinurl3=<storitz:imageLink src="map-200-299.png" />;
+    var pinurl4=<storitz:imageLink src="map-300-399.png" />;
+    var pinurl5=<storitz:imageLink src="map-400-499.png" />;
+    var pinurl6=<storitz:imageLink src="map-500-599.png" />;
+    var pinurl7=<storitz:imageLink src="map-600-699.png" />;
     </script>
 </p:dependantJavascript>
 

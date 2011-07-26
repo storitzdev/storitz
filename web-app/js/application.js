@@ -208,11 +208,11 @@ function changeMapMarker(marker) {
     var xCoord = markerOrigin.x;
     var yCoord = markerOrigin.y;
     var newMarkerOffset;
-    if (xCoord % ((markerSize.width+1)*2) == 0) {   //do we have a blue marker or green? (remove +1 when new sprite images come.)
-        newMarkerOffset = new google.maps.Point(xCoord + (markerSize.width + 1), yCoord); // we have blue
+    if (xCoord % ((markerSize.width)*2) == 0) {   //do we have a blue marker or green?
+        newMarkerOffset = new google.maps.Point(xCoord + (markerSize.width), yCoord); // we have blue
     }
     else {
-        newMarkerOffset = new google.maps.Point(xCoord - (markerSize.width + 1), yCoord); //we have green
+        newMarkerOffset = new google.maps.Point(xCoord - (markerSize.width), yCoord); //we have green
     }
     var newMarker = new google.maps.MarkerImage(markerUrl, markerSize, newMarkerOffset);
     marker.setIcon(newMarker);
@@ -365,25 +365,25 @@ var _map = function() {
                     var offset;    //position of the pin in sprite
                     var pinWidth = (price < 100) ? 44 : 52;
                     var pinHeight = 50;
+                    if (price < 10) { markerUrl = pinurl0; }
+                    else if (price < 100) { markerUrl = pinurl1; }
+                    else if (price < 200) { markerUrl = pinurl2; }
+                    else if (price < 300) { markerUrl = pinurl3; }
+                    else if (price < 400) { markerUrl = pinurl4; }
+                    else if (price < 500) { markerUrl = pinurl5; }
+                    else if (price < 600) { markerUrl = pinurl6; }
+                    else { markerUrl = pinurl7; }
                     if (price < 10) {
-                        markerUrl = pinurl0;
-                        markerSize = new google.maps.Size(36, 49);
-                        offset = new google.maps.Point(36, price*49); //custom offset due to a two column sprite.
+                        markerSize = new google.maps.Size(36, pinHeight);
+                        offset = new google.maps.Point(36, price*pinHeight); //custom offset due to a two column sprite.
                     }
                     else if (price < 100) {
-                        markerUrl = pinurl1;
-                        markerSize = new google.maps.Size(43, 47); //size of the image to display in x, y pixels
+                        markerSize = new google.maps.Size(pinWidth, pinHeight); //size of the image to display in x, y pixels
                         offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10))-1),pinHeight*(price%10));
                     }
-                    else if (price > 99 && price < 200) {
-                        markerUrl = pinurl2;
-                        markerSize = new google.maps.Size(51, 49); //size of the image to display in x, y pixels
-                        offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10));
-                    }
                     else {
-                        markerUrl = pinurl3;
-                        markerSize = new google.maps.Size(51, 49); //size of the image to display in x, y pixels
-                        offset = (price != 300)? new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10)) : new google.maps.Point(1092, 0);
+                        markerSize = new google.maps.Size(pinWidth, pinHeight); //size of the image to display in x, y pixels
+                        offset = new google.maps.Point(pinWidth*((2*Math.floor(price/10%10))+1),pinHeight*(price%10));
                     }
                     var priceMarker = new google.maps.MarkerImage(markerUrl, markerSize, offset);
                     var marker = new google.maps.Marker({ map: big_map, position: point, icon: priceMarker, title: hoverName });
