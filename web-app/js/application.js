@@ -393,9 +393,33 @@ var _map = function() {
                     });
                     google.maps.event.addListener(marker, "click", function() {
                         toggle_info_window(info_window, big_map, marker, site_id);
-                        var fac_offset = $("ul#search_results li#site_"+site_id).offset();
-                        var destination = fac_offset.top;
-                        $("ul#search_results").scrollTop(destination);
+                        var list = $("#search_results");
+                        var target = $("li#site_" + site_id);
+                        if (target.length > 0) {
+                          var target_top = target.offset().top;
+                          var list_top = list.offset().top;
+                          // we need to scroll if either of the following are true:
+                          //   target_top < list_top (top edge is scrolled up out of view)
+                          //   target_top + target.height() > list_top + list.height()) (bottom edge is scrolled out of view)
+                          var do_scroll = ((target_top < list_top) || (target_top + target.height() > list_top + list.height()));
+                          if (do_scroll) {
+                            var found = false;
+                            var scroll_y = 0;
+                            var siblings = list.children();
+                            for (var i = 0; i < siblings.length; i++) {
+                              if (siblings[i] == target[0]) {
+                                found = true;
+                                break;
+                              }
+                              else {
+                                scroll_y += $(siblings[i]).height();
+                              }
+                            }
+                            if (found) {
+                              list.scrollTop(scroll_y);
+                            }
+                          }
+                        }
                     });
                     markers[site_id] = [marker, info_window];
                     big_map_bounds.extend(point);
