@@ -1015,6 +1015,7 @@ a.toggle_map_view {
   width: 320px;
   height: 345px;
   padding: 5px;
+  z-index: 5;
 }
 
 #big_map_canvas {

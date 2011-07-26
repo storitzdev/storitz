@@ -49,7 +49,8 @@
     <div class="icons">
       <h2>Checking into your unit is as easy 1-2-3...</h2>
       <div id="map_icon" class="column">
-          <g:link class="map" absolute="true" mapping="siteLink2" controller="storageSite" action="detail" id="${rentalTransactionInstance.site.id}" params="[site_title:rentalTransactionInstance.site.title.replaceAll(' - ','-').replaceAll(' ', '-'), bestUnit:rentalTransactionInstance.unitId, promoId:rentalTransactionInstance.promoId]"/>
+          %{--<g:link class="map" absolute="true" target="_new" mapping="siteLink2" controller="storageSite" action="detail" id="${rentalTransactionInstance.site.id}" params="[site_title:rentalTransactionInstance.site.title.replaceAll(' - ','-').replaceAll(' ', '-'), bestUnit:rentalTransactionInstance.unitId, promoId:rentalTransactionInstance.promoId]"/>--}%
+          <g:link class="map" target="_blank" controller="storageSite" action="directions" id="${rentalTransactionInstance.site.id}" />
           <span class="icn_label">Get driving <br />directions</span>
       </div>
       <div id="print_icon" class="column">
@@ -66,7 +67,7 @@
             <h3>Storage Facility</h3>
             <span>${rentalTransactionInstance.site.title}</span>
             <p style="margin:0;">${rentalTransactionInstance.site.getFullAddress()}</p>
-            <g:link class="map" absolute="true" mapping="siteLink2" controller="storageSite" action="detail" id="${rentalTransactionInstance.site.id}" params="[site_title:rentalTransactionInstance.site.title.replaceAll(' - ','-').replaceAll(' ', '-'), bestUnit:rentalTransactionInstance.unitId, promoId:rentalTransactionInstance.promoId]">Get Directions</g:link>
+            <g:link class="map" target="_blank" controller="storageSite" action="directions" id="${rentalTransactionInstance.site.id}">Get Directions</g:link>
         </div>
         <div id="storHours" class="extColumn">
             <h3>Office Hours</h3>

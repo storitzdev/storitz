@@ -626,6 +626,7 @@ function initialize_splash() {
 
 function initialize_serp() {
   _map.init();
+  $("input[placeholder]").placeholder();
   var resHeight = $("#results_container").height();
   var pickHeight = $("div#pickers").height();
   if (resHeight < pickHeight  ) {

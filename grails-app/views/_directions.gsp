@@ -56,3 +56,12 @@
     </div>
   </div>
 </div>
+<p:dependantJavascript>
+    <script>
+    $("#getDirections").click(function () {
+        _direction.calculate();
+        $("#dirPanel").css("display", "block");
+    });
+    $("#shareThis").hide();
+    </script>
+</p:dependantJavascript>

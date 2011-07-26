@@ -26,6 +26,18 @@
   left: -24px;
   z-index: 2;
 }
+#header form.search label.placeholder {
+  display: block;
+  position: absolute;
+  left: -24px;
+  text-indent: -2px;
+  background: none;
+  width: 350px;
+  z-index: 2;
+  padding: 8px 0 2px 35px;
+  color: #ccc;
+  font-family: arial;
+}
 #header form.search input.text {
   width: 388px;
   height: 30px;
@@ -62,7 +74,9 @@
 #browse .tabs a {
   height: 41px;
 }
-
+#coverphoto fieldset.basic input.text {
+  padding-top: 7px;
+}
 /*search list page*/
 body.serp #pickers {
   top: 142px;
@@ -530,3 +544,39 @@ body.checkout .cost_breakdown {
   margin: 5px -36px 5px -12px;
 }
 /* end checkout page*/
+/*direction share page*/
+#directionMap #facilityHours {
+  float: none;
+  display: inline;
+  vertical-align: top;
+  margin-left: 20px;
+}
+#directionMap #directionMapCanvas {
+  display: inline;
+}
+#directionMap {
+  display: block;
+  position: relative;
+}
+.dirInstructions h2 {
+  display: inline;
+  margin-bottom: 0;
+}
+.dirInstructions {
+  display: block;
+  margin-left: 3px;
+}
+div.ieDivContainer {
+  display: block;
+  position: relative;
+  padding-top: 15px;
+}
+div.ieDivContainer input#getDirections {
+  position: absolute;
+  top: 16px;
+  left: -2px;
+}
+#dirPanel {
+  width: 560px;
+}
+
