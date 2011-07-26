@@ -1689,10 +1689,6 @@ body.site_detail .rent_me > div.rent_reserve .guarantee {
   color: #516476;
   font-weight: bold;
 }
-.ui-datepicker table.ui-datepicker-calendar td.ui-state-disabled {
-  opacity: 1;
-  filter: alpha(opacity=1);
-}
 .ui-datepicker table.ui-datepicker-calendar td span,
 .ui-datepicker table.ui-datepicker-calendar td a {
   font-family: helvetica;
