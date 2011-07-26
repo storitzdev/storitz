@@ -13,6 +13,7 @@ class BalkNotificationJob {
     }
 
     def static transQueue = [:]
+    def static sentEmails = [:]
 
     static void scheduleBalkNotice(long id) {
       def scheduled = transQueue[id]
@@ -28,9 +29,11 @@ class BalkNotificationJob {
     def execute(context) {
       def id = context.mergedJobDataMap.get('id')
       RentalTransaction trans = RentalTransaction.findById(id)
-      if (trans.status == TransactionStatus.BEGUN) {
+      def sentEmailBefore = sentEmails[trans.contactPrimary.email]
+      if (trans.status == TransactionStatus.BEGUN && !sentEmailBefore) {
         sendInternalBalkNotification(trans)
         sendExternalBalkNotification(trans)
+        sentEmails[trans.contactPrimary.email] = true; // don't email this person again
       }
     }
 
