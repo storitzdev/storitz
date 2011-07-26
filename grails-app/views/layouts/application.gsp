@@ -21,7 +21,7 @@
                     Storitz.com - Click. Store. Done.
                 </g:link>
             </h1>
-            <g:form class="search" controller="search" action="index">
+            <g:form class="search" controller="search" action="index" name="search" id="search" method="get">
                 <fieldset>
                     <label>Find self storage:</label>
                     <g:if test="${queryTerm}">
