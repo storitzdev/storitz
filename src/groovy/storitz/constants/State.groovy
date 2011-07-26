@@ -115,6 +115,9 @@ public enum State {
   }
 
   public static State fromText(String key) {
+    if (key == null) {
+      return null;
+    }
     // JM: 2011-05-31
     // A proper match is something like key = 'FL', which matches against the
     // 2 character display value above. If we get a non alpha character we'll
