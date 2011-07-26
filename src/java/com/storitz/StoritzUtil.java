@@ -3,6 +3,8 @@ package com.storitz;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.math.BigDecimal;
+import java.util.IllegalFormatException;
 
 
 public class StoritzUtil {
@@ -29,4 +31,17 @@ public class StoritzUtil {
 
         return false;
     }
+
+    /**
+     *  convert stuff like 19.949999999999999289457264239899814128875732421875
+     *  to 19.95
+     */
+    public static Double roundToMoney (BigDecimal bigDecimal) {
+        if (bigDecimal == null) {
+            return null; // garbage in, garbage out
+        }
+        return bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+
 }

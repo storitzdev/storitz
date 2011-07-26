@@ -1534,8 +1534,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     if (site.useProrating) {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
-      insuranceCost = (premium * durationMonths).setScale(2, RoundingMode.HALF_UP)
-      rentTotal = (rate * durationMonths).setScale(2, RoundingMode.HALF_UP)
+      insuranceCost = StoritzUtil.roundToMoney(premium * durationMonths)
+      rentTotal = StoritzUtil.roundToMoney(rate * durationMonths)
       subTotal = rentTotal + insuranceCost
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
     } else {
@@ -1578,7 +1578,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     ret.insuranceCost = insuranceCost
     ret.tax = tax
     ret.deposit = deposit
-    ret.moveInTotal = moveInTotal
+    ret.moveInTotal = StoritzUtil.roundToMoney(moveInTotal)
     ret.paidThruDate = cal.time
     ret.durationMonths = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret.durationDays = durationDays

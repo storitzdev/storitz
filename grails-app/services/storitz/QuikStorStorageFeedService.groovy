@@ -513,7 +513,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
                     if (!so.promoType || so.promoType == PromoType.PERCENT_OFF) {
                       so.promoType = PromoType.PERCENT_OFF
                       so.promoQty = amount
-                      so.expireMonth += duration
+                      so.expireMonth = so.expireMonth ? so.expireMonth + duration : duration
                       if (so.expireMonth == 999) {
                         so.expireMonth = 1 // this is the way QS marks permanent discount
                       }
@@ -616,6 +616,12 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
           sUnitID = availUnitType.sLastUnit
         }
       }
+
+      def insurancePremium = 0
+      if (trans.insuranceCost) {
+        insurancePremium = trans.insuranceCost
+      }
+
       if (specialId) {
         // grab the XML for the special
         def availUnitSpecials = myProxy.getUnitActiveSpecials(loc.username, loc.password, loc.sitename, unitTypeId)
@@ -634,24 +640,31 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         String paymentST = buildPaymentST(trans)
         String tenantInfo = buildTenantParams(trans)
 
-        println "params: moveInResult - ${moveInCostResult}\npaymentInfo - ${paymentST}\ntenantInfo - ${tenantInfo}"
+        println "params: moveInResult - ${moveInCostResult}\npaymentInfo - ${paymentST}\ntenantInfo - ${tenantInfo}\nmoveInParams - ${moveInParams}"
 
         def moveInResults = myProxy.addAccountMoveInSpecial(loc.username, loc.password, loc.sitename, moveInCostResult, paymentST, tenantInfo, moveInParams)
 
         println "MoveInResults = ${moveInResults}"
         def moveInResultsXml = new XmlSlurper().parseText(moveInResults)
         retVal = moveInResultsXml.bResult.text().toLowerCase() == 'true'
-        if (retVal) {
+        if (!retVal) {
+          errorMessage = moveInResultsXml.sReturnMessage.text()
+        }
+        else {
           trans.tenantId = moveInResultsXml.iCustomerID.text()
           trans.accessCode = moveInResultsXml.sAccessCode.text()
           trans.idNumber = moveInResultsXml.sOrderID.text()
           trans.save(flush: true)
         }
-        errorMessage = moveInResultsXml.sReturnMessage.text()
+
       } else {
         GregorianCalendar gcal = new GregorianCalendar();
         gcal.setTime(trans.moveInDate)
         XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+
+        // moveInCost does not factor in insurance. We can call moveInCost2, which does
+        // factor in insurance, but since we already know the insurance premium that
+        // alternate call won't really give us anything new.
         def moveInCostResult = myProxy.moveInCost(loc.username, loc.password, loc.sitename, unitTypeId, xgcal)
 
         println "MoveInCost returns:"
@@ -672,7 +685,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         pst.csCVV = trans.cvv2
         pst.csExpirationDate = trans.ccExpDate.format("MM-yyyyy")
         pst.csPaymentMethod = "CREDITCARD"
-        pst.dPaymentAmount = trans.moveInCost
+        pst.dPaymentAmount =  trans.moveInCost
         pst.sProcessor = "Storitz"
 
         def ust = new UserAccountST()
@@ -720,10 +733,9 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
       }
 
       // compare calculated cost vs. feed cost - send discrepancies
-      if (!retVal || totalMoveInCost != trans.moveInCost) {
+      if (!retVal) {
         try {
-
-          String body = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\n\nError Message: ${errorMessage}"
+          String body = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\nInsurance premium=${trans.insuranceCost}\n\nError Message: ${errorMessage}"
           getEmailService().sendTextEmail(
                   to: "notifications@storitz.com",
                   from: "no-reply@storitz.com",

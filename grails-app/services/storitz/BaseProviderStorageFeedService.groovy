@@ -177,8 +177,8 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - (durationDays) / lastDayInMonth)
-      insuranceCost = (premium * durationMonths).setScale(2, RoundingMode.HALF_UP)
-      rentTotal = (rate * durationMonths).setScale(2, RoundingMode.HALF_UP)
+      insuranceCost = StoritzUtil.roundToMoney(premium * durationMonths)
+      rentTotal = StoritzUtil.roundToMoney(rate * durationMonths)
       subTotal = rentTotal + insuranceCost
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
     } else {
@@ -222,7 +222,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     def taxRateMerchandise = site.taxRateMerchandise ? site.taxRateMerchandise : 0
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def tax = (premium * durationMonths * (taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (taxRateMerchandise / 100)).setScale(2, RoundingMode.HALF_UP)
+    def tax = StoritzUtil.roundToMoney(premium * durationMonths * (taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (taxRateRental / 100)) + StoritzUtil.roundToMoney(lockFee * (taxRateMerchandise / 100))
 
     // don't allow negative move-in
     if (offerDiscount > (feesTotal + subTotal + deposit + tax)) {
@@ -238,7 +238,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     ret.insuranceCost = insuranceCost
     ret.tax = tax
     ret.deposit = deposit
-    ret.moveInTotal = moveInTotal
+    ret.moveInTotal = StoritzUtil.roundToMoney(moveInTotal)
     ret.paidThruDate = cal.time
     ret.durationMonths = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret.durationDays = durationDays
