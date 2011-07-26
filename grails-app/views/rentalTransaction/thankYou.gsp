@@ -21,6 +21,7 @@
             <p>Phone:</p>
             <span>${rentalTransactionInstance.contactPrimary.phone}</span>
         </div>
+        <g:if test="${(site.transactionType == TransactionType.RESERVATION && site.rentalFee) || site.transactionType == TransactionType.RENTAL}">
         <div id="paymentInfo" class="column">
             <h3>Payment Information:</h3>
             <p>Type:</p>
@@ -32,6 +33,7 @@
             <p>Name on Card:</p>
             <span>${rentalTransactionInstance.billingAddress?.fullName()}</span>
         </div>
+        </g:if>
         <div id="orderInfo" class="column">
             <h3>Order Information:</h3>
             <p>Date Purchased:</p>
