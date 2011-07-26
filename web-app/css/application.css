@@ -2508,6 +2508,16 @@ div.yelp_reviews {
     display: block;
     width: 650px;
 }
+#yelp_reviews a.yelp_logo {
+  background: url(../images/Powered_By_Yelp_White.png) no-repeat;
+  width: 115px;
+  height: 25px;
+  display: block;
+  text-indent: -9999px;
+  background-position: 3px 3px;
+  margin: 6px;
+  float: left;
+}
 #yelp_reviews ul.user_reviews{
     display: block;
     padding-left: 10px;

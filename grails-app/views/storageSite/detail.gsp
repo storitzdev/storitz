@@ -205,6 +205,7 @@
         <div>
           <div id="yelp_reviews">
               <ul class="user_reviews"></ul>
+              <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Powered by Yelp</a>
               <a href="#" class="read_more">
                   Read More Reviews From Yelp
               </a>
