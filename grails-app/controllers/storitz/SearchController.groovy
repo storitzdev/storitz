@@ -33,11 +33,7 @@ class SearchController {
       def queryTerm = params.where;
       def geoResult = geocodeService.geocode(queryTerm)
 
-      handleGeocode(geoResult)
-      params.address = address
-      params.city = city
-      params.state = state
-      params.zip = zip
+      handleGeocode(geoResult) // sets a bunch of instance variables
 
       SearchCriteria criteria = new SearchCriteria();
       criteria.searchType = SearchType.STORAGE;
@@ -45,8 +41,8 @@ class SearchController {
       criteria.geoType = GeoType.CITY;
       criteria.centroid.lat = lat;
       criteria.centroid.lng = lng;
-      criteria.city = params.city;
-      criteria.state = State.fromText(params.state);
+      criteria.city = city;
+      criteria.state = State.fromText(state);
       criteria.searchSize = 0 // Default. Overridden below.
 
       def sz = searchService.getUnitSize(params.unit_size)
