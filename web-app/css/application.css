@@ -1240,7 +1240,8 @@ body.site_detail .vcard h1 {
   font-family: Arial, Helvetica, san-serif;
   font-size: 24px;
   font-weight: normal;
-  margin: 10px 0;
+  margin: 0 0 5px 0;
+  line-height: 25px;
 }
 
 body.site_detail .site_features {
