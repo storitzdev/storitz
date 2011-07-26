@@ -1206,8 +1206,9 @@ body.site_detail #site_address .tel {
   font-weight: bold;
 }
 body.site_detail #site_address {
-  width: 387px;
+  width: 380px;
   font-size: 12px;
+  line-height: 120%;
 }
 body.site_detail .site_info {
   margin-top: -30px;
@@ -1236,10 +1237,10 @@ body.site_detail, body.checkout {
   font-family:  arial, helvetica, verdana, sans-serif;
 }
 body.site_detail .vcard h1 {
-  font-family: Arial;
+  font-family: Arial, Helvetica, san-serif;
   font-size: 24px;
   font-weight: normal;
-  margin: 10px 0 5px 0;
+  margin: 10px 0;
 }
 
 body.site_detail .site_features {
@@ -1413,13 +1414,19 @@ body.site_detail .panes .overview .all_units .rent_me {
 body.site_detail .panes .overview .all_units .rent_me .price {
   margin-bottom: 5px;
 }
+body.site_detail .panes .overview .all_units .rent_me input.reserve_me_button,
 body.site_detail .panes .overview .all_units .rent_me input.rent_me_button {
   display: inline-block;
-  background:  url("../images/v2/buttons/rent-me-blue-106x38.png") no-repeat;
   width: 106px;
   height:38px;
   text-indent: -9999px;
   border:none;
+}
+body.site_detail .panes .overview .all_units .rent_me input.rent_me_button {
+  background:  url("../images/v2/buttons/rent-me-blue-106x38.png") no-repeat;
+}
+body.site_detail .panes .overview .all_units .rent_me input.reserve_me_button {
+  background:  url("../images/v2/buttons/reserve-blue-106x38.png") no-repeat;
 }
 
 div.photos ul.image_list li {

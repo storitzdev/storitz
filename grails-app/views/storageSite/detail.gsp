@@ -25,9 +25,9 @@
       <div id="site_address">
         <h1 class="title">${site.title}</h1>
         ${site.address}
-        ${site.address2}
+        ${site.address2},
         ${site.city}, ${site.state.display} ${site.zipcode}
-        <span class="tel">(877) 456-2929</span>
+        <br /><span class="tel">(877)&nbsp;456-2929</span>
         <sec:ifAnyGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
             Direct Phone: ${site.phone}
         </sec:ifAnyGranted>
@@ -156,7 +156,7 @@
                     <g:render template="unitPrice" model="[unit:entry['unit']]" />
                     <g:submitButton name="action"
                                     value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
-                                    class="rent_me_button" />
+                                    class="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve_me_button' : 'rent_me_button'}" />
                     <g:hiddenField id="siteId_${entry['unit'].id}" name="siteId" value="${site?.id}" />
                     <g:hiddenField id="unitId_${entry['unit'].id}" name="unitId" value="${entry['unit'].id}" />
                     <g:hiddenField id="moveInDate_${entry['unit'].id}" name="moveInDate" value="${formatDate(format:'yyyy-MM-dd', date:moveInDate)}" />
