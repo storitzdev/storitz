@@ -254,17 +254,18 @@ class SearchService {
           return true
       } else {
           def loc = mapService.getGeoIp(servletContext, request)
-
-          out['lat'] = loc.latitude
-          out['lng'] = loc.longitude
-          out['zip'] = loc.postalCode
-          //what was the rationale for not updating city and state too?
-          //if (!city) city = loc.city
-          //if (!state) state = loc.region
-          out['city'] = loc.city
-          out['state'] = loc.region
+          if (loc) {
+            out['lat'] = loc.latitude
+            out['lng'] = loc.longitude
+            out['zip'] = loc.postalCode
+            //what was the rationale for not updating city and state too?
+            //if (!city) city = loc.city
+            //if (!state) state = loc.region
+            out['city'] = loc.city
+            out['state'] = loc.region
+          }
+        return false
       }
-      return false
   }
 
 
