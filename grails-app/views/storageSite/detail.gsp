@@ -23,7 +23,7 @@
         <div class="site_logo"><img src="${resource(file: site.logo.src())}" width="250" height="100" alt="${site.title} Logo"/></div>
       </g:if>
       <div id="site_address">
-        <h1 class="title">${StoritzUtil.titleize(site.title)}</h1>
+        <h1 class="title">${site.title}</h1>
         ${StoritzUtil.titleize(site.address)},
         <g:if test="${site.address2}">
           ${StoritzUtil.titleize(site.address2)},

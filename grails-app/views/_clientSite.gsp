@@ -25,10 +25,10 @@
         &nbsp;
     </g:else>
 </div>
-<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}" addr="${site.address}" city="${site.city}" state="${site.state.display}" zip="${site.zipcode}" price="${unitInfo?.yourPrice}" pic="${resource(file: site.coverImage()?.mid())}">
+<div class="facility" site_id="${site.id}" lat="${site.lat}" lng="${site.lng}" addr="${StoritzUtil.titleize(site.address)}" city="${StoritzUtil.titleize(site.city)}" state="${site.state.display}" zip="${site.zipcode}" price="${unitInfo?.yourPrice}" pic="${resource(file: site.coverImage()?.mid())}">
     <g:link mapping='siteLink2' class="name" params="${site_url_params}">${site.title}</g:link>
     <div class="street address">
-        <span>${site.address}</span>
+        <span>${StoritzUtil.titleize(site.address)}</span>
         <span class="show_map_popup">(<a href="#">show map</a>)</span>
     </div>
     <div class="distance">
