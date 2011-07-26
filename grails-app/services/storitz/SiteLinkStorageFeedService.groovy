@@ -945,6 +945,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
       boolean rented = unit.bRented.text().toLowerCase() == 'true'
       def typeName = unit.sTypeName.text()
 
+      /* Unit is rented */
       if (rented) {
         unitID = unit.UnitID.text()
         writer.println "Rented unit ${unitID} checking for deletion"
@@ -953,57 +954,39 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
           site.removeFromUnits(deletedUnit)
           stats.removedCount++
         }
+      }
 
-      } else {
+      /* Unit is not rented */
+      else {
         unitID = unit.UnitID.text()
         StorageUnit existingUnit = site.units.find { it.unitNumber == unitID }
 
         Double width = unit.dcWidth.text() as Double
         Double length = unit.dcLength.text() as Double
 
-        if (!existingUnit) {
+        def iFloor = unit.iFloor.text() as Integer
+        def bInside = unit.bInside.text().toLowerCase() != 'false'
 
-          def searchType
+        /* Unit is new */
+        if (!existingUnit) {
           def siteUnit = new StorageUnit()
           Integer unitTypeID = unit.UnitTypeID.text() as Integer
           String key = "${unitTypeID}:${unit.dcWidth.text()}X${unit.dcLength.text()}${unit.bClimate.text()}"
           siteUnit.unitTypeInfo = "${unitTypeID}:${unit.dcWidth.text()}X${unit.dcLength.text()}"
           siteUnit.totalUnits = unitTypeTotalLookup[key]
           siteUnit.unitSizeInfo = "${unit.dcWidth.text()}X${unit.dcLength.text()}"
+
+          // We're not using the unitTypeLookup for actual unit type anymore
+          // since many units have a type of 'Self Storage' (which defaults
+          // to 'UPPER'), and that's pretty much useless.
+          unit.unitType = grokUnitType (typeName, iFloor, bInside)
+
+          // However, we're still using it for determining temp control.
           def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
-          if (unitTypeLookup) {
-            searchType = unitTypeLookup.searchType
-            if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
-              siteUnit.unitType = unitTypeLookup.unitType
-              siteUnit.isTempControlled = unitTypeLookup.tempControlled
-            } else {
-              writer.println "Skipping illegal type ${typeName}"
-              continue
-            }
-          } else {
-
-            writer.println "Unknown unit type description ${typeName}"
-
-            if ((typeName ==~ /(?i).*(cell|mail|slip|apartment|office|container|portable|wine|locker).*/)) continue
-
-            def floor = unit.iFloor.text() as Integer
-            if ((typeName ==~ /(?i).*(parking|rv).*/)) {
-              searchType = SearchType.PARKING
-              siteUnit.unitType = UnitType.UNCOVERED
-            } else {
-              searchType = SearchType.STORAGE
-              if (floor > 1 || floor == 1 && typeName ==~ /(2ND|3RD).+/) {
-                siteUnit.unitType = UnitType.UPPER
-              } else if ((unit.bInside.text().toLowerCase() != 'false') || typeName ==~ /(?i)main floor.*/) {
-                siteUnit.unitType = UnitType.INTERIOR
-              } else if (typeName ==~ /(?i).*drive.*/) {
-                siteUnit.unitType = UnitType.DRIVEUP
-              }
-              if (!siteUnit.unitType) {
-                siteUnit.unitType = UnitType.UPPER
-              }
-            }
+          if (unitTypeLookup?.tempControlled) {
+            siteUnit.isTempControlled = unitTypeLookup?.tempControlled
           }
+
           siteUnit.isTempControlled = (unit.bClimate.text().toLowerCase() == 'true')
           siteUnit.unitCount = 1
           siteUnit.description = typeName
@@ -1027,6 +1010,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
             siteUnit.displaySize = width + " X " + length
           }
 
+          def searchType = getSearchTypeFromUnitType(unit.unitType)
           def unitSize = getUnitSizeService().getUnitSize(width, length, searchType)
 
           if (unitSize && unitSize.id != 1 && (width != 0 && length != 0) && siteUnit.price > 0) {
@@ -1044,7 +1028,10 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
               writer.println "Skipping unit due to size: width=" + width + " length=" + length
             }
           }
-        } else {
+        }
+
+        /* Unit is not new */
+        else {
           // update pricing
           def price = unit.dcStdRate.text() as BigDecimal
           def pushRate
@@ -1056,16 +1043,20 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
           def newPrice = unit.dcStdRate.text() as BigDecimal
           def newPushRate = unit.dcPushRate.text() as BigDecimal
           def newUnitSize = getUnitSizeService().getUnitSize(width, length, existingUnit.unitsize.searchType)
+
+          // remove unit from inventory
           if (newPrice == 0 || newPushRate == 0) {
-            // remove unit from inventory
             site.removeFromUnits(existingUnit)
             writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
           }
+          // remove unit from inventory
           else if (!newUnitSize) {
-            // remove unit from inventory
             site.removeFromUnits(existingUnit)
             writer.println "Removing unit from inventory - cannot determine unit size - ${existingUnit.unitNumber}"
-          } else {
+          }
+          // update the unit
+          else {
+            existingUnit.unitType = grokUnitType (typeName, iFloor, bInside)
             existingUnit.price = newPrice
             existingUnit.pushRate = newPushRate
             existingUnit.isAvailable = true // reset this unit's availability
@@ -1075,7 +1066,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
             stats.unitCount++
             existingUnit.save()
           }
-        }
+        } // end else (unit is not new)
       }
     }
     for (lastupdate in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table1') {
@@ -1092,6 +1083,43 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
       site.useProrating = checkProrating(siteLink, unitID, site)
     }
+  }
+
+  // Figure out the unit type
+  private def grokUnitType (typeName, iFloor, bInside) {
+    /////////////
+    // Parking //
+    /////////////
+    if ((typeName ==~ /(?i).*(parking|rv).*/)) {
+      return UnitType.UNCOVERED
+    }
+
+    /////////////
+    // Storage //
+    /////////////
+
+    // Inside
+    if (bInside) {
+      if (iFloor > 1 || iFloor == 1 && typeName ==~ /(2ND|3RD).+/) {
+        return UnitType.UPPER
+      }
+      return UnitType.INTERIOR
+    }
+
+    // Outside
+    if (typeName ==~ /(?i).*drive.*/ || iFloor == 1) {
+      return UnitType.DRIVEUP
+    }
+
+    // Default
+    return UnitType.UPPER
+  }
+
+  private def getSearchTypeFromUnitType (UnitType unitType) {
+    if (unitType == UnitType.UNCOVERED) {
+      return SearchType.PARKING
+    }
+    return SearchType.STORAGE
   }
 
   def loadInsurance(Feed feed, StorageSite site) {
