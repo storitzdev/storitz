@@ -19,7 +19,7 @@ class SiteMapController {
       }
 
       xml {
-        render(view: "sitemapIndex", contentType: 'text/html; charset=utf-8', model: [])
+        render(view: "sitemapIndex",  contentType: 'text/xml; charset=utf-8', model: [])
       }
     }
   }
@@ -30,7 +30,7 @@ class SiteMapController {
         def siteList = StorageSite.findAllByDisabled(false)
         def metroList = Metro.list().unique(new MetroComparator())
         def metroEntryList = MetroEntry.list()
-        render(view: "sitemap", contentType: 'text/html; charset=utf-8', model: [siteList: siteList, metroList: metroList, metroEntryList: metroEntryList])
+        render(view: "sitemap", contentType: 'text/xml; charset=utf-8', model: [siteList: siteList, metroList: metroList, metroEntryList: metroEntryList])
       }
     }
   }
@@ -39,7 +39,7 @@ class SiteMapController {
     withFormat {
       xml {
         def siteList = StorageSite.findAllByDisabled(false)
-        render(view: "sitemapGeo", contentType: 'text/html; charset=utf-8', model: [siteList: siteList])
+        render(view: "sitemapGeo", contentType: 'text/xml; charset=utf-8', model: [siteList: siteList])
       }
     }
   }
@@ -48,7 +48,7 @@ class SiteMapController {
     withFormat {
       xml {
         def siteList = StorageSite.findAllByDisabled(false)
-        render(view: "sitemapImage", contentType: 'text/html; charset=utf-8', model: [siteList: siteList])
+        render(view: "sitemapImage", contentType: 'text/xml; charset=utf-8', model: [siteList: siteList])
       }
     }
   }
@@ -57,7 +57,7 @@ class SiteMapController {
     withFormat {
       xml {
         def collegeList = CollegeLanding.findAll()
-        render(view: "sitemapCollege", contentType: 'text/html; charset=utf-8', model: [collegeList: collegeList])
+        render(view: "sitemapCollege", contentType: 'text/xml; charset=utf-8', model: [collegeList: collegeList])
       }
     }
   }
@@ -66,7 +66,7 @@ class SiteMapController {
     withFormat {
       xml {
         def videoList = Video.findAll()
-        render(view: "sitemapVideo", contentType: 'text/html; charset=utf-8', model: [videoList : videoList])
+        render(view: "sitemapVideo", contentType: 'text/xml; charset=utf-8', model: [videoList : videoList])
       }
     }
   }
