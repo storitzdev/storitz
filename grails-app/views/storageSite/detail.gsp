@@ -13,7 +13,7 @@
 <div class="breadcrumbs">
   <g:link controller="home" action="index">Home</g:link> &gt;
   <g:link controller="seo" action="state" params="[state:StoritzUtil.seoEncode(site.state.fullName)]">${site.state.fullName}</g:link> &gt;
-  <g:link mapping="metro2" params="[city:StoritzUtil.seoEncode(site.city), state:site.state.display]">${site.city}</g:link> &gt;
+  <g:link mapping="metro2" params="[city:StoritzUtil.seoEncode(site.city), state:site.state.display]">${StoritzUtil.titleize(site.city)}</g:link> &gt;
   <span class="current">${site.title}</span>
 </div>
 <div class="container_detail">
@@ -23,10 +23,12 @@
         <div class="site_logo"><img src="${resource(file: site.logo.src())}" width="250" height="100" alt="${site.title} Logo"/></div>
       </g:if>
       <div id="site_address">
-        <h1 class="title">${site.title}</h1>
-        ${site.address}
-        ${site.address2},
-        ${site.city}, ${site.state.display} ${site.zipcode}
+        <h1 class="title">${StoritzUtil.titleize(site.title)}</h1>
+        ${StoritzUtil.titleize(site.address)},
+        <g:if test="${site.address2}">
+          ${StoritzUtil.titleize(site.address2)},
+        </g:if>
+        ${StoritzUtil.titleize(site.city)}, ${site.state.display} ${site.zipcode}
         <br /><span class="tel">(877)&nbsp;456-2929</span>
         <sec:ifAnyGranted roles="ROLE_CALLCENTER, ROLE_CALLCENTER_ADMIN">
             Direct Phone: ${site.phone}
