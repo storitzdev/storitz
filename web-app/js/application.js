@@ -197,10 +197,25 @@ var _direction = function() {
                 $('#directionsStartAddr').html(startLocation.address);
                 $('#directionsEndAddr').html(endLocation.address);
                 $(".container_detail").height($("#left_panel").height()); //hack for correct footer placement
+                updateShareLink();
             }
         }
     }
 }();
+
+function updateShareLink() {
+  var origin = $("#srcAddr").val();
+  var currentHref = $("#shareThisLink").attr('href');
+  var newHref;
+  if (currentHref.search(/\?origin=.*/) > 0) {
+    newHref = currentHref.replace(/\?origin=.*/, "?origin="+origin);
+  }
+  else {
+    newHref = currentHref + "?origin="+origin;
+  }
+  $("#shareThisLink").attr('href', newHref);
+  return false;
+}
 
 function changeMapMarker(marker) {
     var markerUrl = marker.getIcon().url;

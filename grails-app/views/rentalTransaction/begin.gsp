@@ -178,7 +178,11 @@
   <g:render template="bookingSummaryPanel" model="[unit:unit, site:site, insurance:insurance, promo:promo, promos:promos, totals:totals, moveInDate:moveInDate]" />
 </div>
 </g:form>
-<div id="datepicker"></div>
+<div id="datepicker" class="tooltip" style="background-color: white;">
+    <div class="close_button">
+    <a class="close" href="#">Close X</a>
+    </div>
+</div>
 <p:dependantJavascript>
   <script type="text/javascript">
     $(document).ready(function() {

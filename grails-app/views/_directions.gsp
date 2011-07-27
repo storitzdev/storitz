@@ -51,9 +51,7 @@
         return false;">print</a>
     </div>
     <div id="shareThis">
-        %{--<a id="shareButton" href="" onclick="return false;">Share</a>--}%
-        %{--<g:link controller="storageSite" action="directions" id="${params.id}" params="[origin:'los angeles, ca']">Share</g:link>--}%
-        <g:link target="_blank" controller="storageSite" action="directions" id="${params.id}">Share</g:link>
+        <a id="shareThisLink" target="_blank" href="${createLink(controller:'storageSite', action:'directions', id:params.id)}">Share</a>
     </div>
   </div>
 </div>
@@ -63,12 +61,5 @@
         _direction.calculate();
         $("#dirPanel").css("display", "block");
     });
-    var dirOrigin = "origin="+$("#srcAddr").val();
-    var dirSite = ${params.id};
-    %{--$("#shareButton").click(function() {--}%
-        %{----}%
-        %{--console.log (origin, site);--}%
-        %{--window.location = ${createLink(controller:"storageSite", action:"directions", id:site, params:origin)};--}%
-    %{--});--}%
     </script>
 </p:dependantJavascript>
