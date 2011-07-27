@@ -159,6 +159,7 @@
                     <g:submitButton name="action"
                                     value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
                                     class="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve_me_button' : 'rent_me_button'}" />
+                    <g:hiddenField id="xid_${entry['unit'].id}" name="xid" value="${xid}" />
                     <g:hiddenField id="siteId_${entry['unit'].id}" name="siteId" value="${site?.id}" />
                     <g:hiddenField id="unitId_${entry['unit'].id}" name="unitId" value="${entry['unit'].id}" />
                     <g:hiddenField id="moveInDate_${entry['unit'].id}" name="moveInDate" value="${formatDate(format:'yyyy-MM-dd', date:moveInDate)}" />
@@ -226,7 +227,7 @@
   <div id="right_panel">
     <g:form mapping="checkout" method="GET" name="rent_me_form" src="${createLink(mapping:'rentMePanel')}">
       <g:if test="${unit != null}">
-      <g:render template="rentMePanel" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, totals:totals]"/>
+      <g:render template="rentMePanel" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, totals:totals, xid:xid]"/>
       </g:if>
       <g:else>
       <div class="rent_me" style="padding:30px; background: none">

@@ -20,6 +20,8 @@ START TRANSACTION;
 
 /* JM: This merge will cause conflicts. Make sure you get everything from both versions. */
 alter table storage_site add is_twenty_four_hour bit(1) null;
+alter table rental_transaction add xid varchar(255) null;
+
 
 /************************/
 /* ADD YOUR EDITS ABOVE */

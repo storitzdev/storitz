@@ -82,6 +82,15 @@ class RentalTransactionController extends BaseTransactionController {
   }
 
   def begin = {
+    def xid = params.xid
+    if (xid) {
+      RentalTransaction trans = RentalTransaction.findByXid(xid)
+      if (trans) {
+        // TODO: Is this really where I want to redirect folks?
+        redirect(action:"thankYou",params:[id:trans.id])
+      }
+    }
+
     def site = StorageSite.get(params.siteId as Long)
     def unit = StorageUnit.get(params.unitId as Long)
     // TODO: Check availability here
@@ -93,14 +102,14 @@ class RentalTransactionController extends BaseTransactionController {
         moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
       }
       catch (ParseException p) {
-        // TODO: Log warning
+        p.printStackTrace()
       }
     }
     def promos = offerFilterService.getValidFeaturedOffers(site, unit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
     // TODO: validate that promo is in promos and is valid
     def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
-    [site:site, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals, moveInDate:moveInDate]
+    [site:site, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals, moveInDate:moveInDate, xid:xid]
   }
 
   def ajaxPoll = {

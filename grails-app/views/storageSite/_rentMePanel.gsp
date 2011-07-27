@@ -23,6 +23,7 @@
   </div>
   <g:render template="moveInQuote" model="[site:site, unit:unit, promo:promo, promos:promos, moveInDate:moveInDate, insurance:insurance, totals:totals]" />
 </div>
+<g:hiddenField name="xid" value="${xid}" />
 <g:hiddenField name="siteId" value="${site?.id}" />
 <g:hiddenField name="unitId" value="${unit?.id}" />
 <g:hiddenField name="moveInDate" value="${formatDate(format:'yyyy-MM-dd', date:moveInDate)}" />

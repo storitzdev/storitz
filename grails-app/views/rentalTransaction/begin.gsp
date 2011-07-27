@@ -6,6 +6,7 @@
 <body class="checkout">
 <g:form action="create" controller="rentalTransaction" method="post" useToken="true" name="rental_transaction_form"
         class="checkout">
+    <input type="hidden" id="xid" name="xid" value="${xid}" />
 <div class="customer_info">
   <g:if test="${rentalTransactionInstance?.hasErrors() || contact?.hasErrors()}">
   <div class="errors">

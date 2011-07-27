@@ -575,12 +575,14 @@ class StorageSiteController extends BaseTransactionController implements Applica
     def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
     def totals = costService.calculateTotals(site, bestUnit, promo, insurance, moveInDate);
+    def xid = UUID.randomUUID().toString().toUpperCase()
+
     // If you change this, don't forget the smartCall action also uses this view!
     [rentalTransactionInstance: rentalTransactionInstance, site: site, title: title,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
             promoId: params.promoId, insurance: insurance, video: video, propertyOperatorList: propertyOperatorList,
-            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos, totals: totals, availableUnits: availableUnits]
+            moveInDate: moveInDate, unit: bestUnit, promo: promo, promos: promos, totals: totals, availableUnits: availableUnits, xid: xid]
   }
 
   def rentMePanel = {

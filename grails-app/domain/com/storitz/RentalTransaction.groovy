@@ -28,6 +28,7 @@ class RentalTransaction {
   String feedUnitNumber       // for email, etc.
   Long promoId
   String promoName
+  String xid                  // UUID
 
   Long insuranceId
   String insuranceName
@@ -113,6 +114,7 @@ class RentalTransaction {
     duration(nullable: true)
     insuranceCost(nullable: true)
     promoName(nullable: true)
+    xid(nullable:true)
     insuranceName(nullable: true)
     fees(nullable: true)
     tax(nullable: true)
