@@ -26,7 +26,7 @@ class EmailController {
     println "Sending email..."
 
     try {
-      emailService.sendEmail(to: "mamster@storitz.com",
+      emailService.sendEmail(to: "charlie@storitz.com",
               from: "no-response@storitz.com",
               subject: "New Storitz Move-In",
               model: [transactionId: 1234,

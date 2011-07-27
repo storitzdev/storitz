@@ -62,7 +62,10 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  def refreshSites(cshift, stats, writer) {
+
+  @Override
+  void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
+    def cshift = (CenterShift)feed
     loadSites(cshift, stats, writer)
   }
 

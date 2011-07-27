@@ -1,20 +1,21 @@
 <%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder; com.storitz.StoritzUtil; java.math.RoundingMode" %>
 <html>
 <head>
-    <title>The Fastest, Easiest Way to Find &amp; Rent Self-Storage - Storitz </title>
+    <title>Self Storage Units - Best Price Guaranteed - Storitz.com</title>
+    <meta name="keywords" content="self storage, storage units, self storage units, mini storage, storitz" />
+    <meta name="description" content="Find, compare and rent self storage units and mini storage near you. Storitz guarantees that you will get the best deal.  It's the smartest way to shop for self storage anywhere in the U.S." />
     <meta name="layout" content="splash"/>
     <!--[if IE]> <link href="${resource(dir:'css', file:'application_ie.css')}" rel="stylesheet" type="text/css"> <![endif]-->
 </head>
 <body>
 <div id="bigbox">
-    <h1 class="storitz-logo ${(true || ConfigurationHolder.config?.storitz?.beta) ? 'beta' : ''}">
-        Storitz.com - Click. Store. Done.
+    <span id="storitz-logo"${(ConfigurationHolder.config?.storitz?.beta) ? ' class="beta"' : ''}">
+        Storitz.com. Click. Store. Done.
         <g:link controller="home" action="index"></g:link>
-    </h1>
-    <h2>
+    </span>
+    <h1>
         <span class="first-child">Simplify your search for self storage.</span>
-        %{--<span>Get prices, availability &amp; deals with 1 click!</span>--}%
-    </h2>
+    </h1>
     <div id="coverphoto">
         <g:form controller="search" action="index" name="search" id="search" method="get">
             <fieldset class="basic">
@@ -101,6 +102,7 @@
 
     <div class="panes">
         <div>
+          <h3 class="tab_pane_title">Storage by State<a name="storage-by-state">&nbsp;</a></h3>
             <table>
                 <tr>
                   <td>
@@ -118,7 +120,7 @@
         </div>
 
         <div>
-
+            <h3 class="tab_pane_title">Storage by City<a name="storage-by-city">&nbsp;</a></h3>
             <table>
                 <tr>
                   <td>

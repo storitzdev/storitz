@@ -762,7 +762,7 @@ function procReview(data, isBusiness) {
     if (!isBusiness && data.businesses.length == 0) {
         $(".yelp_rating img, .yelp_rating_map img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
         $(".yelp_rating span, .yelp_rating_map span").prepend("0");
-        $("#yelp_reviews").prepend("<h2 class='none'>This site has no reviews yet.</h2>");
+        $("#yelp_reviews").prepend("<p class='none'>This site has no reviews yet.</p>");
         return;
     }
     else if (!isBusiness) {
@@ -773,7 +773,7 @@ function procReview(data, isBusiness) {
         var site = data;
         $(".yelp_rating img, .yelp_rating_map img").attr('src', site.rating_img_url);
         $(".yelp_rating span, .yelp_rating_map span").prepend(site.review_count);
-        $("#yelp_reviews").prepend("<h2 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h2>");
+        $("#yelp_reviews").prepend("<h3 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h3>");
         if (site.review_count > site.reviews.length) {
             $("#yelp_reviews a.read_more").css("display", "block");
             $("#yelp_reviews a.read_more").attr('href', site.url);
@@ -783,9 +783,9 @@ function procReview(data, isBusiness) {
             var review = site.reviews[i];
             var d = new Date(review.time_created*1000);
             var revTime = (d.getUTCMonth()+1).toString() + "/" + d.getUTCDate().toString() + "/" + d.getUTCFullYear().toString();
-            var userName = "<h2 class='reviewer'>" + review.user.name + "</h2>";
+            var userName = "<h4 class='reviewer'>" + review.user.name + "</h4>";
             var userImage = "<img class='revImage' src="+ review.user.image_url + " alt='user image' />";
-            var excerpt = "<p class='revExcerpt'>" + review.excerpt + "<a href="+data.url+">read more</a></p>";
+            var excerpt = "<p class='revExcerpt'>" + review.excerpt + " ... <a href="+data.url+">read more</a></p>";
             var rating = "<img class='revRating' src="+ review.rating_image_url + " alt=" + review.rating + "stars" + "/>" + revTime;
 
             $(".user_reviews").append("<li class='review'>"+userImage+userName+rating+excerpt+"</li>");

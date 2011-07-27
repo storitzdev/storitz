@@ -51,6 +51,7 @@ class UpdateInventory {
 
       //println ("source is: ${src}")
 
+      // JM: Notice that here we filter out disabled sites...
       if (src) {
         allStorageSitesIds = StorageSite.findAllBySourceAndDisabled(src,false).collect{ it.id }.sort()
       } else {
@@ -74,7 +75,13 @@ class UpdateInventory {
 
             //println ("lower_i=${lower_i}, upper_i=${upper_i}")
             //println ("lower_id=${lower_id}, upper_id=${upper_id}")
+
             List<StorageSite> allStorageSites
+
+            // JM: ... But notice here that we *don't* filter by disabled! I'd
+            //     like to but GORM only gives us two fields by default, so to
+            //     get around that I'd need to use a context, or closure, or
+            //     some other method...
             if (src) {
                 allStorageSites = StorageSite.findAllByIdBetweenAndSource(lower_id,upper_id,src)
             } else {
@@ -85,6 +92,10 @@ class UpdateInventory {
 
             //println ("START:${new Date().toString()}")
             for (StorageSite site: allStorageSites) {
+
+                // JM: ... Here's the other method.
+                if (site.disabled) continue
+
                 try {
                     def stats = new storitz.SiteStats()
                     feedService.updateUnits(site, stats, writer)

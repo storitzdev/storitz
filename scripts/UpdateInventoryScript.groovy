@@ -2,7 +2,7 @@ package storitz
 
 println "Refreshing inventory"
 
-def sources = ['QS', 'SL','CS3', 'USI', 'DOM']
+def sources = ['QS', 'SL','CS3', 'USI', 'DOM', 'BOB']
 
 for (int i = 0; i < sources.size(); i++) {
     def src = sources[i]

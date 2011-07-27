@@ -1,5 +1,6 @@
 package com.storitz.service;
 
+import com.storitz.Feed;
 import com.storitz.StorageSite;
 import storitz.SiteStats;
 
@@ -13,6 +14,15 @@ import java.io.PrintWriter;
  * To change this template use File | Settings | File Templates.
  */
 public interface IFeedStorageFeedService extends IStorageFeedService {
+
+    /**
+     *
+     * @param feed
+     * @param source
+     * @param stats
+     * @param writer
+     */
+    public void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer);
 
     /**
      *

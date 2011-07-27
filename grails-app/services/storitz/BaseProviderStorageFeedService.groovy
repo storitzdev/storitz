@@ -6,6 +6,7 @@ import com.storitz.service.ICostStorageFeedService
 import com.storitz.service.IFeedStorageFeedService
 import com.storitz.service.IMoveInStorageFeedService
 import com.storitz.service.CostTotals
+import java.util.regex.Pattern
 
 abstract class BaseProviderStorageFeedService implements ICostStorageFeedService, IFeedStorageFeedService, IMoveInStorageFeedService {
 
@@ -29,6 +30,30 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
         unit.unitCount = 0;
       }
     }
+  }
+
+  def geoCodeSite(StorageSite storageSite)  {
+      def maxidx = storageSite.zipcode.size() > 5 ? 5 : storageSite.zipcode.size()
+      def address = cleanAddress(storageSite.address) + ', ' + storageSite.city + ', ' + storageSite.state.display + ' ' + storageSite.zipcode.substring(0,maxidx)
+      GeocodeService geocodeService = new GeocodeService()
+      def geoResult = geocodeService.geocode(address)
+      storageSite.lng = geoResult?.results[0]?.geometry?.location?.lng
+      storageSite.lat = geoResult?.results[0]?.geometry?.location?.lat
+  }
+
+  // JM: removes parenthesis from address
+  // This is needed for google maps geolookup to work.
+  // For example:= Uncle Bos site 226 gives us this:
+  // 1171 Turnpike Street (Route 114)
+  // Google geolookup can't handle that. If we strip off the (Route 114)
+  // part (i.e. 1171 Turnpike Street), then it works fine.
+  private String cleanAddress (String address) {
+    if (address == null) {
+      return address
+    }
+    String input = new String(address); // work on a copy
+	  String regex = "\\(.+?\\)";
+	  return Pattern.compile(regex).matcher(input).replaceAll("");
   }
 
   @Override
@@ -152,8 +177,8 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - (durationDays) / lastDayInMonth)
-      insuranceCost = (premium * durationMonths).setScale(2, RoundingMode.HALF_UP)
-      rentTotal = (rate * durationMonths).setScale(2, RoundingMode.HALF_UP)
+      insuranceCost = StoritzUtil.roundToMoney(premium * durationMonths)
+      rentTotal = StoritzUtil.roundToMoney(rate * durationMonths)
       subTotal = rentTotal + insuranceCost
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
     } else {
@@ -197,7 +222,13 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     def taxRateMerchandise = site.taxRateMerchandise ? site.taxRateMerchandise : 0
 
     def feesTotal = (waiveAdmin ? additionalFees - adminFee : additionalFees)
-    def tax = (premium * durationMonths * (taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (taxRateRental / 100)).setScale(2, RoundingMode.HALF_UP) + (lockFee * (taxRateMerchandise / 100)).setScale(2, RoundingMode.HALF_UP)
+    def tax = StoritzUtil.roundToMoney(premium * durationMonths * (taxRateInsurance / 100) + (rate * durationMonths - offerDiscount) * (taxRateRental / 100)) + StoritzUtil.roundToMoney(lockFee * (taxRateMerchandise / 100))
+
+    // don't allow negative move-in
+    if (offerDiscount > (feesTotal + subTotal + deposit + tax)) {
+      offerDiscount = (feesTotal + subTotal + deposit + tax)
+    }
+
     def moveInTotal = feesTotal + subTotal + deposit + tax - offerDiscount;
 
     ret.duration = durationMonths
@@ -207,7 +238,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     ret.insuranceCost = insuranceCost
     ret.tax = tax
     ret.deposit = deposit
-    ret.moveInTotal = moveInTotal
+    ret.moveInTotal = StoritzUtil.roundToMoney(moveInTotal)
     ret.paidThruDate = cal.time
     ret.durationMonths = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret.durationDays = durationDays

@@ -384,7 +384,7 @@ class RentalTransactionController extends BaseTransactionController {
           zip rentalTransactionInstance.billingAddress.zipcode
           ccNumber rentalTransactionInstance.ccNum
           ccExpDate ccExpVal
-          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          amount StoritzUtil.roundToMoney(rentalTransactionInstance.cost) as String
         }
       } else if (rentalTransactionInstance.site.source == "EX") {
         s.authorizeOnly {
@@ -397,7 +397,7 @@ class RentalTransactionController extends BaseTransactionController {
           ccNumber rentalTransactionInstance.ccNum
           cvv rentalTransactionInstance.cvv2
           ccExpDate ccExpVal
-          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          amount StoritzUtil.roundToMoney(rentalTransactionInstance.cost) as String
         }
       } else {
         s.authorizeAndCapture {
@@ -410,7 +410,7 @@ class RentalTransactionController extends BaseTransactionController {
           ccNumber rentalTransactionInstance.ccNum
           cvv rentalTransactionInstance.cvv2
           ccExpDate ccExpVal
-          amount rentalTransactionInstance.cost.setScale(2, RoundingMode.HALF_UP) as String
+          amount StoritzUtil.roundToMoney(rentalTransactionInstance.cost) as String
         }
       }
 

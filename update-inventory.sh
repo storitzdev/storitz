@@ -18,7 +18,7 @@ source /home/deploy/.bash_profile
 export JAVA_HOME=/home/deploy/jre.invload
 
 # JAVA_OPTS is picked up by grails automatically.
-export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms512m -Xmx1024m -XX:-UseGCOverheadLimit"
+export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms768m -Xmx1536m -XX:-UseGCOverheadLimit"
 
 PIDFILE=/tmp/update.pid
 EMAILFILE=/tmp/update.email
@@ -36,7 +36,7 @@ fi
 # Save our pid to PIDFILE
 echo $$ > $PIDFILE
 
-cd /home/deploy/src/storitz
+cd /home/deploy/src/storitz.${ENVNAME}
 
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryScript.groovy > /home/deploy/logs/UpdateInventory.${ENVNAME}.${DATE}.log 2>&1
 

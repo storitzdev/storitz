@@ -111,7 +111,7 @@ strong {
   position: relative;
 }
 
-#bigbox h2 {
+#bigbox h1 {
   font-family: Verdana;
   position: absolute;
   left: 175px;
@@ -122,7 +122,7 @@ strong {
   color: #a8a8a8;
 }
 /*:first-child doesn't work in IE, using CSS .first-child class instead */
-#bigbox h2 span.first-child {
+#bigbox h1 span.first-child {
   display: block;
   color: #00529b;
   margin-bottom: 2px;
@@ -642,7 +642,7 @@ input#otherSoftware {
 /* ------------------------------------------------------------------------------------- */
 /* HEADER & FOOTER */
 
-h1.storitz-logo {
+#storitz-logo {
   display: inline-block;
   width: 160px;
   height: 60px;
@@ -651,7 +651,7 @@ h1.storitz-logo {
   position: relative;
 }
 
-h1.storitz-logo a {
+#storitz-logo a {
   display: block;
   width: 160px;
   height: 60px;
@@ -661,7 +661,7 @@ h1.storitz-logo a {
   top: 0;
   left: 0;
 }
-h1.storitz-logo.beta a {
+#storitz-logo.beta a {
   background: url("../images/v2/home/storitz-logo-small-beta.png") no-repeat;
 }
 
@@ -1165,7 +1165,7 @@ body.site_detail .container_detail {
   margin-top: 10px;
   position: relative;
 }
-body.site_detail h2.none {
+body.site_detail p.none {
   padding:  13px;
 }
 body.site_detail {
@@ -1336,6 +1336,9 @@ body.site_detail .panes .overview .photos {
   padding-right: 15px;
 }
 
+.tab_pane_title { /* tab panes already have titles ... in their tabs! this is just their for structure for parsers */
+  display: none;
+}
 body.site_detail .panes .overview .photos ul.image_list {
   width: 290px;
   overflow: hidden;
@@ -2465,11 +2468,11 @@ body.site_detail #videoContainer {
     display: block;
     margin: 10px 0 10px 28px;
 }
-body.site_detail h2.video_title {
+body.site_detail .video_title {
     text-align: center;
     font-weight: bold;
     font-size: 16px;
-    font-family: helvetica;
+    font-family: Arial, Helvetica, sans-serif;
 }
 /* detail page reviews tab */
 .overview div.yelp_rating {
@@ -2541,7 +2544,7 @@ li.review img.revImage {
     float: left;
     margin: 5px;
 }
-li.review h2.reviewer {
+li.review .reviewer {
     display: block;
     width: 180px;
     vertical-align: top;
@@ -2557,8 +2560,8 @@ li.review p.revExcerpt {
     display: block;
     margin-left: 5px;
 }
-#yelp_reviews h2.review_title {
-    padding-left: 20px;
+#yelp_reviews .review_title {
+    padding: 10px 0 10px 20px;
     font-weight: bold;
     font-size: 16px;
 }

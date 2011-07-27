@@ -2,13 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>${title}</title>
-<meta name="DESCRIPTION"
-      content="Storitz guarantees you the best deal on storage at ${site.title} in ${site.city}, ${site.state.display}.  Get photos, descriptions, driving directions and move-in today. "/>
-<g:meta name="keywords"
-        content="Storage unit, self storage units, storage units, moving, storage units for rent, cheap storage units, storage unit rental, self storage, self storage facility, self storage facilities, air conditioned storage units, self storage rental, public self storage, security self storage, find self storage, self storage companies, Mini storage, mini self storage"/>
+<meta name="description" content="Get reviews, photos, videos, maps, hours, directions, current prices &amp; special offers for self storage units at ${site.title}, located at ${StoritzUtil.titleize(site.address)} in ${StoritzUtil.titleize(site.city)}, ${site.state.display}." />
+<meta name="keywords" content="${site.title}, ${StoritzUtil.titleize(site.city)} self storage, self storage, storage units, self storage units, mini storage" />
 <link rel="canonical" href="${StoritzUtil.storageSiteCanonicalLink(createLink(mapping: 'detail', absolute: true, params: params) as String)}" />
 </head>
-
 <body class="site_detail">
 <div class="breadcrumbs">
   <g:link controller="home" action="index">Home</g:link> &gt;
@@ -73,12 +70,13 @@
       <!-- the panes -->
       <div class="panes">
         <div class="overview"><!-- first tab -->
+          <h2 class="tab_pane_title">Photos</h2>
           <div class="photos"><!-- more elems inside this div -->
             <g:if test="${site.coverImage()}">
               <img class="main_pic" src="${resource(file: site.coverImage()?.mid())}"
                    alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
             </g:if>
-            <g:if test="${site.siteImages().size() > 0}">
+            <g:if test="${site.siteImages().size() > 1}">
                 <ul class="image_list">
                     <g:each var="siteImg" in="${site.siteImages()}" status="i">
                         <li>
@@ -88,6 +86,7 @@
                 </ul>
             </g:if>
           </div>
+          <h2 class="tab_pane_title">Description</h2>
           <div class="description">
             <ul class="action_links">
               <li><a class="print" href="#" onclick="window.print();">Print</a></li>
@@ -177,10 +176,11 @@
           <a name="tab_overview">&nbsp;</a>
         </div>
 
-        <div><!-- third tab-->
+        <div><!-- second tab-->
+          <h2 class="tab_pane_title">Video</h2>
             <g:if test="${video}">
                 <div id="videoContainer"></div>
-                <h2 class="video_title">${video.title}</h2>
+                <h3>${video.title}</h3>
                 <p:dependantJavascript>
                     <script type="text/javascript">
                         jwplayer("videoContainer").setup({
@@ -195,23 +195,23 @@
                 </p:dependantJavascript>
             </g:if>
             <g:else>
-                <h2 class="none">This site has no videos.</h2>
+                <p class="none">This site has no videos.</p>
             </g:else>
           <a name="tab_video">&nbsp;</a>
         </div>
 
         <div>
+          <h2 class="tab_pane_title">Map, Hours &amp; Directions</h2>
           <g:render template="/directions"/>
           <a name="tab_maphours">&nbsp;</a>
         </div>
 
         <div>
+          <h2 class="tab_pane_title">User Reviews</h2>
           <div id="yelp_reviews">
               <ul class="user_reviews"></ul>
               <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Powered by Yelp</a>
-              <a href="#" class="read_more">
-                  Read More Reviews From Yelp
-              </a>
+              <a href="#" class="read_more">Read More Reviews From Yelp</a>
           </div>
           <a name="tab_reviews">&nbsp;</a>
         </div>

@@ -588,8 +588,9 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  def refreshSites(siteLink, stats) {
-    def writer = new PrintWriter(System.out)
+  @Override
+  void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
+    def siteLink = (SiteLink)feed
     def ret = getSites(siteLink.corpCode, siteLink.userName, siteLink.password)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -598,7 +599,6 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
             msdata: 'urn:schemas-microsoft-com:xml-msdata',
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
-
 
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
       StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
@@ -614,7 +614,6 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         }
       }
     }
-    writer.close()
   }
 
   def corpSites(siteLink, stats) {
@@ -1561,4 +1560,5 @@ TODO - evaluate whether we need this going forward
   void init(StorageSite site) {
         // nothing to do
   }
+
 }

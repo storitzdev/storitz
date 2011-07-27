@@ -548,11 +548,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
     def video = Video.findBySite(site)
     def propertyOperatorList = StorageSite.findAllByFeed(site.feed).findAll { !it.disabled && it.id != site.id && it.state == site.state}
 
-    def title = "Best Price Guaranteed Self Storage for ${site.title} in ${site.city}, ${site.state.display} - Storitz"
-    if (title.size() > 70) {
-      title = "${site.title} in ${site.city}, ${site.state.display} - Storitz"
-    }
-
+    def title = "${StoritzUtil.titleize(site.city)} Self Storage Units at ${site.title} - ${StoritzUtil.titleize(site.city)}, ${site.state.display} - ${site.zipcode}"
     def availableUnitList = site.units.findAll { it.unitsize.searchType == SearchType.STORAGE && it.unitCount > site.minInventory }
     def sortedUnitList = availableUnitList.sort { unit1, unit2 -> unit1.unitsize.width * unit1.unitsize.length <=> unit2.unitsize.width * unit2.unitsize.length ?: unit1.unitType.display <=> unit2.unitType.display ?: unit1.bestUnitPrice <=> unit2.bestUnitPrice }
     def availableUnits = [];
@@ -595,7 +591,10 @@ class StorageSiteController extends BaseTransactionController implements Applica
     if (!site) {
       // TODO - handle missing site
     }
-    [site: site]
+
+    def title = "Storitz - Driving Directions to ${site.title}"
+
+    [site: site, title : title]
   }
 
   def getSmartCallDataForId(id) {

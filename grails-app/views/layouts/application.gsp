@@ -16,11 +16,11 @@
     </head>
     <body class="${pageProperty(name:'body.class') ? pageProperty(name:'body.class') : 'default'}">
         <div id="header">
-            <h1 class="storitz-logo ${(true || ConfigurationHolder.config?.storitz?.beta) ? 'beta' : ''}">
-                <g:link controller="home" action="index">
-                    Storitz.com - Click. Store. Done.
-                </g:link>
-            </h1>
+
+            <span id="storitz-logo"${(ConfigurationHolder.config?.storitz?.beta) ? ' class="beta"' : ''}">
+                Storitz.com. Click. Store. Done.
+                <g:link controller="home" action="index"></g:link>
+            </span>
             <g:form class="search" controller="search" action="index" name="search" id="search" method="get">
                 <fieldset>
                     <label>Find self storage:</label>

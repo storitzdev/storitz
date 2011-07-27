@@ -299,7 +299,9 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  def refreshSites(cshift, feedType, stats, writer) {
+    @Override
+  void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
+    def cshift = (CenterShift)feed
     def ret = getSites(cshift.location.webUrl, cshift.userName, cshift.pin)
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -309,9 +311,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             diffgr: 'urn:schemas-microsoft-com:xml-diffgram-v1'
     )
 
-
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
-      StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
+      StorageSite site = StorageSite.findBySourceAndSourceId(source, tab.SITE_ID.text())
       if (!site) {
         writer.println "Found and creating new site: ${tab.SITE_NAME.text()}"
         site = new StorageSite()
@@ -319,7 +320,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         site.lastUpdate = 0
         site.minInventory = 0
         site.rentalFee = 0
-        getSiteDetails(cshift, site, feedType, tab, stats, true, writer)
+        getSiteDetails(cshift, site, source, tab, stats, true, writer)
       }
     }
   }
@@ -1533,8 +1534,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     if (site.useProrating) {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - ((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
-      insuranceCost = (premium * durationMonths).setScale(2, RoundingMode.HALF_UP)
-      rentTotal = (rate * durationMonths).setScale(2, RoundingMode.HALF_UP)
+      insuranceCost = StoritzUtil.roundToMoney(premium * durationMonths)
+      rentTotal = StoritzUtil.roundToMoney(rate * durationMonths)
       subTotal = rentTotal + insuranceCost
       discountRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
     } else {
@@ -1577,7 +1578,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     ret.insuranceCost = insuranceCost
     ret.tax = tax
     ret.deposit = deposit
-    ret.moveInTotal = moveInTotal
+    ret.moveInTotal = StoritzUtil.roundToMoney(moveInTotal)
     ret.paidThruDate = cal.time
     ret.durationMonths = (durationMonths as BigDecimal).setScale(0, RoundingMode.FLOOR)
     ret.durationDays = durationDays

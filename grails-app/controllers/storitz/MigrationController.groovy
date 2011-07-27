@@ -62,6 +62,9 @@ class MigrationController {
       } else if (myFeed.feedType == FeedType.EDOMICO) {
         EDomico f = myFeed as EDomico
         render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
+      } else if (myFeed.feedType == FeedType.UNCLEBOBS) {
+        UncleBobs f = myFeed as UncleBobs
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
       }
     }
   }
@@ -130,6 +133,20 @@ class MigrationController {
         feed.operatorName = resp.feed.operatorName
         feed.edomicoClientID = resp.feed.edomicoClientID
         feed.edomicoWebServicesKey = resp.feed.edomicoWebServicesKey
+        feed.address1 = resp.feed.address1
+        feed.address2 = resp.feed.address2
+        feed.city = resp.feed.city
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state.name) : null
+        feed.zipcode = resp.feed.zipcode
+        feed.transactionBoxLink = resp.feed.transactionBoxLink
+        feed.transactionBoxBody = resp.feed.transactionBoxBody
+        feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
+      }
+      else if (feedTypeEquals(resp.feed.feedType,'UNCLEBOBS')) {
+        feed = new UncleBobs()
+        feed.feedType = FeedType.UNCLEBOBS
+        feed.operatorName = resp.feed.operatorName
+        feed.UBCompanyName = resp.feed.UBCompanyName
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city
@@ -470,7 +487,11 @@ class MigrationController {
         return true
       if (feedType.name && feedType.name == feedName)
         return true
+    } catch (groovy.lang.MissingPropertyException mpe) {
+      // This is expected for cases where `feedType instanceof lava.lang.String` is true.
+      // Ignore this one
     } catch (Throwable t) {
+      // Something really unexpected happened. Log it and march on.
       t.printStackTrace()
     }
     return false;
