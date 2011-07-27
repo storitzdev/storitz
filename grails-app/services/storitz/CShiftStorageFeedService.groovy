@@ -760,6 +760,9 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
     def centerShift = (CenterShift) site.feed
     unitsAvailable(centerShift, site, stats, writer)
+
+    // N.B. All the following block does is get the deposit amount for the *site*,
+    // using the first unit to construct the necessary web service call parameters
     if (site.units.size() > 0) {
       def unit = site.units.asList().get(0)
 
