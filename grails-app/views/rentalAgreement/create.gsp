@@ -1,8 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.storitz.UserRole" %>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
   <g:set var="title" value="Create Rental Agreement" scope="request"/>
-  <g:render template="/header_admin"/>
   <p:dependantJavascript>
     <p:javascript src="jquery.MetaDeta"/>
     <p:javascript src="jquery.MultiFile"/>
@@ -12,7 +12,6 @@
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -113,8 +112,6 @@
     </div>
   </div>
   <div style="height:30px;"></div>
-  <g:render template="/footer_admin"/>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

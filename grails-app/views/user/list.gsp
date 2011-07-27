@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
 <head>
   <g:set var="title" value="User List" scope="request"/>
-  <g:render template="/header_admin"/>
 
   <p:dependantJavascript>
     <script type="text/javascript">
@@ -27,7 +24,6 @@
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="create">New User</g:link></span>
@@ -102,5 +98,4 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

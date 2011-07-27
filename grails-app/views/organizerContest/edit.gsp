@@ -1,22 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.storitz.OrganizerContest" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'organizerContest.label', default: 'OrganizerContest')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
-        <meta name="keywords" content="self-storage, household storage, self storage, storage unit, self storage unit, moving and  relocation storage, storage pods, container storage, compare self storage, storage comparison, lowest storage rent, best storage prices, storage units for rent,  storage unit rental, self storage, self-storage search engine, self-storage directory, self storage facility,  find self storage, mini storage, Military storage, College student storage, University storage, Senior citizen storage"/>
-        <p:favicon src="images/favicon"/>
-        <p:css name='header_bundled'/>
-        <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-        <p:javascript src='header_all'/>
-    </head>
+   </head>
     <body id="body">
-
-    <g:render template="/logo_bar"/>
     <div class="buttons">
         <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
         <span class="button"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
@@ -84,42 +73,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'twitterName', 'errors')}">
                                     <g:textField name="twitterName" value="${organizerContestInstance?.twitterName}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="address1"><g:message code="organizerContest.address1.label" default="Address1" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'address1', 'errors')}">
-                                    <g:textField name="address1" value="${organizerContestInstance?.address1}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="address2"><g:message code="organizerContest.address2.label" default="Address2" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'address2', 'errors')}">
-                                    <g:textField name="address2" value="${organizerContestInstance?.address2}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="city"><g:message code="organizerContest.city.label" default="City" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'city', 'errors')}">
-                                    <g:textField name="city" value="${organizerContestInstance?.city}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="state"><g:message code="organizerContest.state.label" default="State" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: organizerContestInstance, field: 'state', 'errors')}">
-                                    <g:select name="state" from="${storitz.constants.State?.values()}" keys="${storitz.constants.State?.values()*.name()}" value="${organizerContestInstance?.state?.name()}"  />
                                 </td>
                             </tr>
                         

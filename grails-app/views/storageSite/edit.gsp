@@ -1,9 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="storitz.constants.SpecialOfferRestrictionType; com.storitz.User; com.storitz.UserRole" %>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
   <g:set var="title" value="Edit Storage Site" scope="request"/>
   <p:css name="timepicker"/>
-  <g:render template="/header_admin"/>
 
   <p:dependantJavascript>
     <p:javascript src="jquery.MetaData"/>
@@ -216,7 +216,6 @@
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -1334,5 +1333,4 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

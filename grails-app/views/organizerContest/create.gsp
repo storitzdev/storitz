@@ -1,10 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder; storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType; com.storitz.OrganizerContest" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en">
+<html>
 <head>
-    <g:render template="/header_home"/>
     <p:javascript src="contest" />
 </head>
 <body>
@@ -231,5 +228,4 @@
     </p:dependantJavascript>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

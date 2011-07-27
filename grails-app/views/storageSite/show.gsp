@@ -1,18 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="storitz.constants.SpecialOfferRestrictionType; com.storitz.UserNotificationType" %>
-
-
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
   <g:set var="title" value="Show Storage Site" scope="request"/>
-  <g:render template="/header_admin"/>
 
 </head>
 <body>
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
 
     <div style="clear: both;height: 10px"></div>
     <div class="buttons">
@@ -652,5 +648,4 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

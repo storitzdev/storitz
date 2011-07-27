@@ -1,14 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="storitz.constants.ReportName" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
 
   <g:set var="title" value="Stortiz Reporting Menu" scope="request"/>
-
-  <g:render template="/header_admin"/>
-
   <p:dependantJavascript>
     <p:javascript src="jquery.string.1.0"/>
     <p:javascript src="date"/>
@@ -107,8 +102,6 @@
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
-
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Admin Menu</a></span>
     </div>
@@ -265,8 +258,6 @@
     </g:form>
   </div>
   <div style="height:30px;"></div>
-  <g:render template="/footer_admin"/>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

@@ -1,23 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <g:set var="title" value="Export Images" scope="request"/>
-  <g:render template="/header"/>
-
-  <script type="text/javascript">
-    //<![CDATA[
-    //]]>
-  </script>
-
 </head>
 <body>
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
     <div class="body">
+
+        <div class="buttons">
+          <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
+        </div>
+
 
     <h1>Image Export and Upload Service</h1>
     <h3>${status}</h3>
@@ -42,11 +37,8 @@
           <span class="button"><input class="save" type="submit" value="Export & Upload Images"/></span>
         </div>
     </g:form>
-
-
     </div>
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

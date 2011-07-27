@@ -1,20 +1,16 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.storitz.EDomicoAmenitiesMap" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'EDomicoAmenitiesMap.label', default: 'EDomicoAmenitiesMap')}" />
     <g:set var="title" value="Show EDomico Amenities Mappings" scope="request"/>
-    <g:render template="/header"/>
 </head>
 <body>
 <div id="body">
 
     <div class="stcontent">
-        <g:render template="/logo_bar"/>
         <div class="buttons">
             <span class="button"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="button"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>

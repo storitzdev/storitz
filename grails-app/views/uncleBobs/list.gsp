@@ -1,23 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.storitz.UncleBobs" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
   <g:set var="title" value="List Uncle Bob's Feeds" scope="request"/>
-  <g:render template="/header"/>
-
-  <script type="text/javascript">
-    //<![CDATA[
-    //]]>
-  </script>
-
 </head>
 <body>
 <div id="body">
-  <g:render template="/topnav"/>
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="create">Create New Uncle Bob's Feed</g:link></span>
@@ -70,5 +59,4 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

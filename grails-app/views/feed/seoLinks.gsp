@@ -1,22 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
 <head>
   <g:set var="title" value="SEO links for Feed" scope="request"/>
-  <g:render template="/header"/>
-
-  <script type="text/javascript">
-    //<![CDATA[
-    //]]>
-  </script>
-
 </head>
 <body>
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
     </div>
@@ -48,7 +38,7 @@
           <g:each in="${feed.sites}" status="i" var="site">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-              <td><g:link action="show" id="${site.id}">${fieldValue(bean: site, field: "id")}</g:link></td>
+              <td><g:link controller="storageSite" action="detail" id="${site.id}">${fieldValue(bean: site, field: "id")}</g:link></td>
 
               <td>${fieldValue(bean: site, field: "title")}</td>
 
@@ -74,5 +64,4 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>

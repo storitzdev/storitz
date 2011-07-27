@@ -1,11 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.storitz.UserRole; com.storitz.StorageSite" %>
-
-
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
   <g:set var="title" value="Edit QuikStor Feed" scope="request"/>
-  <g:render template="/header"/>
 
   <script type="text/javascript">
     //<![CDATA[
@@ -75,7 +72,6 @@
 <div id="body">
 
   <div class="stcontent">
-    <g:render template="/logo_bar"/>
     <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Admin</a></span>
       <span class="button"><g:link action="list">List QuikStor Feeds</g:link></span>
@@ -344,5 +340,4 @@
   </div>
 </div>
 </body>
-<p:renderDependantJavascript/>
 </html>
