@@ -12,6 +12,9 @@
   left: 160px;
   top: 0px;
 }
+#storitz-logo {
+  display: block;
+}
 #header form.search label {
   font-family: Verdana;
   font-size: 15px;
@@ -19,7 +22,7 @@
   font-weight: bold;
   display: inline;
   text-indent: -9999px;
-  background: url(../images/v2/masthead/magnifying-glass.png) no-repeat;
+  background: url(../images/v2/masthead/mag-glass.png) no-repeat;
   width: 52px;
   height: 58px;
   position: absolute;
@@ -79,7 +82,7 @@
 }
 /*search list page*/
 body.serp #pickers {
-  top: 142px;
+  top: 127px;
 }
 body.serp #results_container div.map_container {
   width: 100%;
@@ -322,7 +325,8 @@ body.site_detail .panes .overview .all_units ul li div{
   display: inline;
   float: left;
 }
-body.site_detail .panes .overview .all_units .rent_me input.rent_me_button {
+body.site_detail .panes .overview .all_units .rent_me input.rent_me_button,
+body.site_detail .panes .overview .all_units .rent_me input.reserve_me_button {
   font-size: 0;
   line-height: 0;
   display: block;
@@ -492,6 +496,8 @@ body.thankyou #purchaseSummary div div {
 body.thankyou #purchaseSummary .site_info {
   position: relative;
   padding-bottom: 12px;
+  padding-top: 0;
+  margin-top: 12px;
 }
 body.thankyou #purchaseSummary .total_cost {
   width: 320px;
@@ -535,7 +541,11 @@ body.checkout .move_in_quote table.summary th {
   font-weight: normal;
 }
 body.checkout .move_in_quote table.summary tr.total td {
+  width: auto;
   text-align: right;
+}
+.move_in_quote table.summary tr.total span.label {
+  display: inline;
 }
 body.checkout #booking_summary .unit_info {
   margin-right: -24px;

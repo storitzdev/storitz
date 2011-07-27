@@ -19,14 +19,13 @@
         <div style="width:294px; margin-bottom: 10px" class="checkout_value">
             <g:textField id="srcAddr" name="srcAddr" placeholder="Enter city, address, or zip"/>
         </div>
-        %{--<div style="clear:both;"></div>--}%
     </div>
     <div style="margin-top:-2px;" class="left ieLeft">
         <p:inputImage src="get-directions-form-button.png" style="width:132px;height:32px;border:none;padding:2px 0 0 4px;" name="getDirections" value="Get Directions"/>
     </div>
 </div>
 <div style="clear:both;"></div>
-<div id="dirPanel" style="display:none;">
+<div id="dirPanel" style="display: none;">
   <div class="specialOfferText" id="directionsDistance" style="margin: 15px 0;"></div>
   <div id="directionsWarnings" class="directionsWarnings"></div>
   <div class="transBox">
@@ -52,7 +51,9 @@
         return false;">print</a>
     </div>
     <div id="shareThis">
-        <g:link controller="storageSite" action="directions" id="${params.id}" params="[origin:'los angeles, ca']">Share</g:link>
+        %{--<a id="shareButton" href="" onclick="return false;">Share</a>--}%
+        %{--<g:link controller="storageSite" action="directions" id="${params.id}" params="[origin:'los angeles, ca']">Share</g:link>--}%
+        <g:link target="_blank" controller="storageSite" action="directions" id="${params.id}">Share</g:link>
     </div>
   </div>
 </div>
@@ -62,6 +63,12 @@
         _direction.calculate();
         $("#dirPanel").css("display", "block");
     });
-    $("#shareThis").hide();
+    var dirOrigin = "origin="+$("#srcAddr").val();
+    var dirSite = ${params.id};
+    %{--$("#shareButton").click(function() {--}%
+        %{----}%
+        %{--console.log (origin, site);--}%
+        %{--window.location = ${createLink(controller:"storageSite", action:"directions", id:site, params:origin)};--}%
+    %{--});--}%
     </script>
 </p:dependantJavascript>
