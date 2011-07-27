@@ -102,7 +102,7 @@ class RentalTransactionController extends BaseTransactionController {
         moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
       }
       catch (ParseException p) {
-        p.printStackTrace()
+        // TODO: Log warning
       }
     }
     def promos = offerFilterService.getValidFeaturedOffers(site, unit);
