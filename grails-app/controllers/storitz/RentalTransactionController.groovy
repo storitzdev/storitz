@@ -140,7 +140,7 @@ class RentalTransactionController extends BaseTransactionController {
     rentalTransactionInstance.unitType = unit.unitType;
     rentalTransactionInstance.status = TransactionStatus.BEGUN
     rentalTransactionInstance.site = site
-    rentalTransactionInstance.reserveTruck = (params.reserveTruck ? params.reserveTruck : false) // TODO: restore checkbox in UI
+    rentalTransactionInstance.reserveTruck = (params.reserveTruck ? (params.reserveTruck == 'y') : false) // TODO: restore checkbox in UI
     rentalTransactionInstance.transactionType = rentalTransactionInstance.site.transactionType
     rentalTransactionInstance.bookingDate = new Date()
     rentalTransactionInstance.moveInDate = new Date();
