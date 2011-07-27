@@ -42,7 +42,7 @@
         <g:layoutBody />
         <g:render template="/v2footer"></g:render>
         <script type="text/javascript">
-          //document.write(unescape("%3Cscript src='" + document.location.protocol + "//zopim.com/?OnxU61sHAyKJAixaCrj9vqqwCQ1JzaPN' charset='utf-8' type='text/javascript'%3E%3C/script%3E"));
+          document.write(unescape("%3Cscript src='" + document.location.protocol + "//zopim.com/?OnxU61sHAyKJAixaCrj9vqqwCQ1JzaPN' charset='utf-8' type='text/javascript'%3E%3C/script%3E"));
         </script>
         <g:pageProperty name="page.gwo" />
         <p:renderDependantJavascript />
