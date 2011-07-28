@@ -31,6 +31,7 @@ CREATE TABLE `releases` (
 /* alter table feed add column  `ubcompany_name` varchar(255) default NULL; */
 /* alter table storage_site add is_twenty_four_hour bit(1) null; */
 alter table rental_transaction add xid varchar(255) null;
+alter table storage_site add seo_city varchar(255) null;
 
 /* insert into service_map (service_handler,service_name) values ('storitz.UncleBobsStorageFeedService','BOB'); */
 
