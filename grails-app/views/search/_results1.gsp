@@ -15,7 +15,7 @@
             <li><input class="formpicker" type="radio" name="unit_size" value="10x15" id="size_10x15" <g:if test="${unitSize == '10x15'}">checked="checked"</g:if> /><label for="size_10x15">10 x 15</label></li>
             <li><input class="formpicker" type="radio" name="unit_size" value="10x20" id="size_10x20" <g:if test="${unitSize == '10x20'}">checked="checked"</g:if> /><label for="size_10x20">10 x 20</label></li>
             <li><input class="formpicker" type="radio" name="unit_size" value="10x30" id="size_10x30" <g:if test="${unitSize == '10x30'}">checked="checked"</g:if> /><label for="size_10x30">10 x 30</label></li>
-            <li><input class="formpicker" type="radio" name="unit_size" value="" id="size_all" <g:if test="${!unitSize}">checked="checked"</g:if> /><label for="size_all">See All</label></li>
+            <li><input class="formpicker" type="radio" name="unit_size" value="" id="size_all" <g:if test="${!unitSize}">checked="checked"</g:if> /><label for="size_all">Any</label></li>
         </ul>
     </div>
     <div>
@@ -24,7 +24,7 @@
             <li><input class="formpicker" type="radio" name="unit_type" value="interior" id="type_interior" <g:if test="${unitType == 'interior'}">checked="checked"</g:if> /><label for="type_interior">Interior</label></li>
             <li><input class="formpicker" type="radio" name="unit_type" value="upper" id="type_upper" <g:if test="${unitType == 'upper'}">checked="checked"</g:if> /><label for="type_upper">Upper</label></li>
             <li><input class="formpicker" type="radio" name="unit_type" value="drive-up" id="type_driveup" <g:if test="${unitType == 'drive-up'}">checked="checked"</g:if> /><label for="type_driveup">Drive-Up</label></li>
-            <li><input class="formpicker" type="radio" name="unit_type" value="" id="type_all" <g:if test="${!unitType}">checked="checked"</g:if> /><label for="type_all">See All</label></li>
+            <li><input class="formpicker" type="radio" name="unit_type" value="" id="type_all" <g:if test="${!unitType}">checked="checked"</g:if> /><label for="type_all">Any</label></li>
         </ul>
     </div>
     <div>
