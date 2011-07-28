@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Self Storage in ${state.fullName}</title>
+  <meta name="keywords" content="${state.fullName} self storage, ${state.display} self storage, self storage, mini storage, storage units, self storage units, mini storage units, storage lockers, rv storage, boat storage, military storage, student storage, storage, storitz" />
+  <meta name="description" content="Self storage in ${state.fullName}, listed city by city" />
 </head>
 <body class="state_directory">
 <h1>Self Storage Facilities in ${state.fullName}</h1>

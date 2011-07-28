@@ -1,7 +1,9 @@
 <%@ page import="storitz.constants.TransactionType; storitz.constants.SearchType; storitz.constants.UnitType; storitz.constants.TruckType" %>
 <html>
 <head>
-    <g:render template="/header_college"/>
+    <title>${title}</title>
+    <meta name="keywords" content="${college.displayName}, self storage, mini storage, storage units, self storage units, mini storage units, storage lockers, rv storage, boat storage, military storage, student storage, storage, storitz" />
+    <p:css name="college" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
         _gaq.push(["_setCustomVar", 1, "nresults", "${clientSites.size}"]);

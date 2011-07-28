@@ -3,7 +3,7 @@
 <head>
 <title>${title}</title>
 <meta name="description" content="Get reviews, photos, videos, maps, hours, directions, current prices &amp; special offers for self storage units at ${site.title}, located at ${StoritzUtil.titleize(site.address)} in ${StoritzUtil.titleize(site.city)}, ${site.state.display}." />
-<meta name="keywords" content="${site.title}, ${StoritzUtil.titleize(site.city)} self storage, self storage, storage units, self storage units, mini storage" />
+<meta name="keywords" content="${site.title}, ${StoritzUtil.titleize(site.city)}, self storage, mini storage, storage units, self storage units, mini storage units, storage lockers, rv storage, boat storage, military storage, student storage, storage, storitz" />
 <link rel="canonical" href="${StoritzUtil.storageSiteCanonicalLink(createLink(mapping: 'detail', absolute: true, params: params) as String)}" />
 </head>
 <body class="site_detail">

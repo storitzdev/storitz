@@ -3,6 +3,8 @@
 <html>
 <head>
     <p:javascript src="contest" />
+    <meta name="description" content="Enter the Storitz 'Organize Yourself' Contest with Justin Klosky - Organize Your Stuff and Win Free Storage!" />
+    <meta name="keywords" content="contest, organize yourself, justin klosky, self storage, mini storage, storage units, self storage units, mini storage units, storage lockers, rv storage, boat storage, military storage, student storage, storage, storitz" />
 </head>
 <body>
 <div id="body">

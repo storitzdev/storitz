@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Self Storage Units - Best Price Guaranteed - Storitz.com</title>
-    <meta name="keywords" content="self storage, storage units, self storage units, mini storage, storitz" />
+    <meta name="keywords" content="self storage, mini storage, storage units, self storage units, mini storage units, storage lockers, rv storage, boat storage, military storage, student storage, storage, storitz" />
     <meta name="description" content="Find, compare and rent self storage units and mini storage near you. Storitz guarantees that you will get the best deal.  It's the smartest way to shop for self storage anywhere in the U.S." />
     <meta name="layout" content="splash"/>
     <!--[if IE]> <link href="${resource(dir:'css', file:'application_ie.css')}" rel="stylesheet" type="text/css"> <![endif]-->
