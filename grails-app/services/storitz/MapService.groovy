@@ -49,7 +49,7 @@ class MapService {
             if (criteria.amenities.get("24hr")) eq("isTwentyFourHour",true)
             if (criteria.amenities.get("alarm")) eq("isAlarm",true)
           }
-          sqlRestriction("storage_unit.unit_count >= storage_site.min_inventory")
+          sqlRestriction("storage_unit.unit_count > storage_site.min_inventory")
         }
         //order("currentPrice", "asc") // TODO: uncomment when used by getUnitsClosure
       }
