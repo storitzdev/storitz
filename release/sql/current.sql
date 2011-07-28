@@ -28,11 +28,11 @@ CREATE TABLE `releases` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /* Release 1000: Changes to feed in support of new Uncle Bob's feed type */
---alter table feed add column  `ubcompany_name` varchar(255) default NULL;
---alter table storage_site add is_twenty_four_hour bit(1) null;
+/* alter table feed add column  `ubcompany_name` varchar(255) default NULL; */
+/* alter table storage_site add is_twenty_four_hour bit(1) null; */
 alter table rental_transaction add xid varchar(255) null;
 
---insert into service_map (service_handler,service_name) values ('storitz.UncleBobsStorageFeedService','BOB');
+/* insert into service_map (service_handler,service_name) values ('storitz.UncleBobsStorageFeedService','BOB'); */
 
 /* update the releases table last */
 insert into releases (revision, release_date,description)
