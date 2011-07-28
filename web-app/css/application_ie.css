@@ -431,8 +431,8 @@ body.site_detail .panes #dirPanel  #directionsSteps tr.directionStep {
 }
 body.site_detail .panes div.ieDivContainer #shareThis {
   position: absolute;
-  top: -5px;
-  left: 100px;
+  top: 15px;
+  left: 0px;
 }
 body.site_detail .panes #yelp_reviews {
   padding-top: 10px;

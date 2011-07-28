@@ -47,20 +47,21 @@
     <div id="directionsCopyrights" class="directionsCopyrights"></div>
   <div class="ieDivContainer">
     <div id="printThis">
-        <a href="#" onclick="window.print();
-        return false;">print</a>
+        <a href="#" onclick="window.print(); return false;">print</a>
     </div>
     <div id="shareThis">
-        %{--<a id="shareThisLink" class="st_email" target="_blank" href="${createLink(controller:'storageSite', action:'directions', id:params.id)}">Share</a>--}%
-        <span id="shareThisLink" class="st_email" displayText="Share"></span>
     </div>
   </div>
 </div>
 <p:dependantJavascript>
     <script>
-    $("#getDirections").click(function () {
-        _direction.calculate();
-        $("#dirPanel").css("display", "block");
-    });
+      var shareLink = "${createLink(absolute:'true', controller:'storageSite', action:'directions', id:params.id)}";
+      if ($("body.site_detail").length == 0) {
+          $("#getDirections").click(function () {
+              _direction.calculate();
+              $("#dirPanel").css("display", "block");
+              $("#shareThis").hide();
+          });
+      }
     </script>
 </p:dependantJavascript>

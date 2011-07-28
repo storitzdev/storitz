@@ -205,7 +205,7 @@ var _direction = function() {
 
 function updateShareLink() {
   var origin = $("#srcAddr").val();
-  var currentHref = $("#shareThisLink").attr('href');
+  var currentHref = shareLink;
   var newHref;
   if (currentHref.search(/\?origin=.*/) > 0) {
     newHref = currentHref.replace(/\?origin=.*/, "?origin="+origin);
@@ -213,7 +213,15 @@ function updateShareLink() {
   else {
     newHref = currentHref + "?origin="+origin;
   }
-  $("#shareThisLink").attr('href', newHref);
+  if (typeof stLight != "undefined") {
+    stWidget.addEntry({
+              "service":"sharethis",
+              "element":document.getElementById('shareThis'),
+              "url":newHref,
+              "title":"Directions to Site",
+              "text":"Share"
+            });
+  }
   return false;
 }
 

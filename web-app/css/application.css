@@ -2457,6 +2457,9 @@ input#srcAddr {
 #printThis {
     background: url("../images/map-print-button.png") no-repeat;
 }
+body.site_detail #printThis {
+  float: left;
+}
 #shareThis {
     background: url("../images/map-share-button.png") no-repeat;
 }
