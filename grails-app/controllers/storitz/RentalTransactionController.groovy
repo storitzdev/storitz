@@ -81,15 +81,20 @@ class RentalTransactionController extends BaseTransactionController {
     liveSessions[params.id] = callParams
   }
 
-  def begin = {
+  def redirectIfBackButtonIsPressedAfterTransactionIsComplete (params) {
     def xid = params.xid
     if (xid) {
       RentalTransaction trans = RentalTransaction.findByXid(xid)
       if (trans) {
-        // TODO: Is this really where I want to redirect folks?
-        redirect(action:"thankYou",params:[id:trans.id])
+        flash.message = "Thank you! Your transaction is complete."
+        redirect (controller: "storageSite", action: "detail", id:trans.site.id)
       }
     }
+  }
+
+
+  def begin = {
+    redirectIfBackButtonIsPressedAfterTransactionIsComplete (params)
 
     def site = StorageSite.get(params.siteId as Long)
     def unit = StorageUnit.get(params.unitId as Long)
@@ -109,7 +114,7 @@ class RentalTransactionController extends BaseTransactionController {
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
     // TODO: validate that promo is in promos and is valid
     def totals = costService.calculateTotals(site, unit, promo, insurance, moveInDate);
-    [site:site, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals, moveInDate:moveInDate, xid:xid]
+    [site:site, unit:unit, promos:promos, promo:promo, insurance:insurance, totals:totals, moveInDate:moveInDate, xid:params.xid]
   }
 
   def ajaxPoll = {
@@ -124,8 +129,11 @@ class RentalTransactionController extends BaseTransactionController {
   }
 
   def create = {
+    redirectIfBackButtonIsPressedAfterTransactionIsComplete (params)
+
     def site = StorageSite.get(params.siteId as Long)
     def unit = StorageUnit.get(params.unitId as Long)
+
     def insurance = Insurance.get(params.insuranceId ? params.insuranceId as Long : -1L)
     def promo = SpecialOffer.get(params.promoId ? params.promoId as Long : -1L)
     params.terms = (params._terms == 'y')
@@ -224,7 +232,7 @@ class RentalTransactionController extends BaseTransactionController {
         promo = null;
       }
       totals = costService.calculateTotals(site, alternateUnit, promo, insurance, rentalTransactionInstance.moveInDate);
-      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:alternateUnit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate]);
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:alternateUnit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
       return
     }
 
@@ -250,12 +258,12 @@ class RentalTransactionController extends BaseTransactionController {
     contact.validate();
 
     if (rentalTransactionInstance.hasErrors()) {
-      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate]);
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
       return;
     }
 
     if (!performTransaction(rentalTransactionInstance, isFreeReservation)) {
-      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate]);
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
       return;
     }
 
@@ -268,7 +276,7 @@ class RentalTransactionController extends BaseTransactionController {
     }
 
     if (!rentalTransactionInstance.save(flush: true)) {
-      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate]);
+      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
       return;
     }
 
@@ -538,7 +546,7 @@ class RentalTransactionController extends BaseTransactionController {
       maxResults(1)
     }
 
-    render(view: "complete", model: [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager: siteManager])
+    render(view: "complete", model: [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager: siteManager, xid:params.xid])
 
   }
 
@@ -582,7 +590,7 @@ class RentalTransactionController extends BaseTransactionController {
       maxResults(1)
     }
 
-    render(view: "complete", model: [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager: siteManager])
+    render(view: "complete", model: [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager: siteManager, xid:params.xid])
 
   }
 
