@@ -144,7 +144,7 @@ strong {
   /*background: #f9c9d5;*/
   /*background: #f4eaf0;*/
   width: 488px;
-  padding: 15px 20px 6px 20px;
+  padding: 15px 20px 13px;
   position: absolute;
   left: 393px;
   top: 16px;
@@ -218,7 +218,6 @@ label.placeholder {
 #coverphoto fieldset.advanced legend {
   font-size: 12px;
   font-family: Helvetica;
-  margin-bottom: 10px;
   color: #788792;
   cursor: pointer;
 }
@@ -245,7 +244,7 @@ label.placeholder {
   padding-top: 10px;
   display: inline-block;
   float: left;
-  height: 60px;
+  height: 42px;
 }
 
 #advanced_search_controls label[for=type_parking] {
