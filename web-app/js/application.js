@@ -558,6 +558,7 @@ function initialize_transaction_box(callback) {
               $('#moveInDate').val(date);
               _gaq.push(['_trackEvent', 'detail', 'transaction box', 'date change']);
               $("#datepicker").hide();
+              update_rent_me_panel();
               callback();
             }
           }).datepicker("hide");
@@ -676,18 +677,24 @@ function initialize_serp() {
 }
 function update_rent_me_panel() {
   var f = $("#rent_me_form");
-  f.css("opacity", "0.5")
+  if (!$.browser.msie) {f.css("opacity", "0.5");}
   f.load(f.attr("src"), f.serialize(), function() {
-    f.css("opacity", "1");
+    if (!$.browser.msie) {f.css("opacity", "1");}
   });
 }
 function update_billing_summary_panel() {
   var panel = $("#booking_summary");
   var inputs = $("input[type=hidden]", panel);
-  panel.css("opacity", "0.5")
+  if (!$.browser.msie) {panel.css("opacity", "0.5");}
   panel.load(panel.attr("src"), inputs.serialize(), function() {
-    panel.css("opacity", "1");
+    if (!$.browser.msie) {panel.css("opacity", "1");}
     $("#rental_transaction_form h1.pay .moveInCostTotal").html($(".cost_breakdown tr.total td.last").html());
+    if ($.browser.msie) {
+      $("body.checkout .customer_info > div, body.checkout .customer_info > h1").css({'position':'relative', 'padding':'10px 0 0 20px;'});
+      $("body.checkout #booking_summary > div").css('padding', '12px');
+      $("body.checkout #booking_summary .site_info").css({'padding-top':'0', 'margin-top':'12px'});
+      $("body.checkout input[type=text]").addClass('typeText');
+    }
   });
 }
 //yelp reviews
