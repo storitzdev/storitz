@@ -28,47 +28,54 @@ class SearchController {
     def city
     def state
     def zip
+    def geoType
 
     def index = {
       def queryTerm = params.where;
       def geoResult = geocodeService.geocode(queryTerm)
+      def searchResult;
 
-      handleGeocode(geoResult) // sets a bunch of instance variables
+      if (handleGeocode(geoResult)) { // N.B, sets a bunch of instance variables
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.searchType = SearchType.STORAGE;
+        criteria.queryMode = QueryMode.FIND_UNITS;
+        criteria.geoType = geoType;
+        criteria.centroid.lat = lat;
+        criteria.centroid.lng = lng;
+        criteria.zip_code = zip;
+        criteria.city = city;
+        criteria.state = State.fromText(state);
+        criteria.searchSize = 0 // Default. Overridden below.
 
-      SearchCriteria criteria = new SearchCriteria();
-      criteria.searchType = SearchType.STORAGE;
-      criteria.queryMode = QueryMode.FIND_UNITS;
-      criteria.geoType = GeoType.CITY;
-      criteria.centroid.lat = lat;
-      criteria.centroid.lng = lng;
-      criteria.city = city;
-      criteria.state = State.fromText(state);
-      criteria.searchSize = 0 // Default. Overridden below.
-
-      def sz = searchService.getUnitSize(params.unit_size)
-      if (sz) {
-        unitSize = params.unit_size
-        criteria.searchSize = sz.id
-      }
-
-      def tp = searchService.getUnitType(params.unit_type)
-      if (tp) {
-        unitType = params.unit_type
-        criteria.unitType = tp
-      }
-
-      def am = searchService.getAmenities(params.amenity)
-      if (am.size()) {
-        amenities = am
-        Boolean t = new Boolean(true);
-        for (a in am) {
-          if (a.value) criteria.amenities.put(a.key,t)
+        def sz = searchService.getUnitSize(params.unit_size)
+        if (sz) {
+          unitSize = params.unit_size
+          criteria.searchSize = sz.id
         }
+
+        def tp = searchService.getUnitType(params.unit_type)
+        if (tp) {
+          unitType = params.unit_type
+          criteria.unitType = tp
+        }
+
+        def am = searchService.getAmenities(params.amenity)
+        if (am.size()) {
+          amenities = am
+          Boolean t = new Boolean(true);
+          for (a in am) {
+            if (a.value) criteria.amenities.put(a.key,t)
+          }
+        }
+
+        searchResult = searchService.findClientSites(criteria);
+
+        resultsModel['where'] = queryTerm
       }
-
-      def searchResult = searchService.findClientSites(criteria);
-
-      resultsModel['where']=queryTerm
+      else {
+        resultsModel['where'] = "Unable to determine location"
+        searchResult = [sites:[], moveInPrices:[:]]
+      }
       [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel]
     }
 
@@ -127,6 +134,7 @@ class SearchController {
       if (out['state'])   state=out['state']
       if (out['zip'])     zip=out['zip']
       if (out['address']) address=out['address']
+      if (out['type'])    geoType=out['type']
       return res
     }
 }

@@ -5,6 +5,7 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import org.bouncycastle.util.encoders.UrlBase64
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import org.codehaus.groovy.grails.web.json.JSONElement
 
 class GeocodeService {
 
@@ -30,7 +31,9 @@ class GeocodeService {
 
     JSON.use("deep")
     def url = new URL(host + uri)
-    return JSON.parse(url.text)
+    String text = url.text;
+    JSONElement e = JSON.parse(text);
+    return e;
   }
 
   def geocode(double lat, double lng) {

@@ -7,6 +7,7 @@ import storitz.constants.TruckType
 import storitz.constants.QueryMode
 import com.storitz.StoritzUtil
 import storitz.constants.SearchType
+import storitz.constants.GeoType
 
 class SearchService {
 
@@ -217,14 +218,50 @@ class SearchService {
     return [sites: sites, moveInPrices: moveInPrices]
   }
 
-  boolean handleGeocode(servletContext,request,geoResult, out) {
+  boolean handleGeocode(servletContext, request, geoResult, out) {
+      // if the Google geocoder gave us a result, use it, otherwise try the ip geolocator
       if (geoResult && geoResult.status == "OK") {
+          // we only care about US results; use the first, ignore the rest.
+          def US_result = null;
+          for (result in geoResult.results) {
+            for (comp in result.address_components) {
+              if (comp.types[0] == "country") {
+                out['country'] = comp.long_name
+                if (comp.short_name == "US") {
+                  US_result = result;
+                  break;
+                }
+              }
+            }
+          }
+          // no U.S. results? give up.
+          if (US_result == null) {
+            return false;
+          }
           def street_number = ""
           def route = ""
-          out['lng'] = geoResult.results[0].geometry.location.lng
-          out['lat'] = geoResult.results[0].geometry.location.lat
+          // what type of region is the user looking for? (city? zip? street_address)
+          out['type'] = null;
+          switch (US_result.types[0]) {
+            case "locality":
+              out['type'] = GeoType.CITY;
+              break;
+            case "postal_code":
+              out['type'] = GeoType.ZIP_CODE;
+              break;
+            case "neighborhood":
+              out['type'] = GeoType.NEIGHBORHOOD;
+              break;
+            case "street_address":
+              out['type'] = GeoType.POINT;
+              break;
+          }
+          // record the centroid of the region (we ignore the bounding box, which is also in the response)
+          out['lng'] = US_result.geometry.location.lng
+          out['lat'] = US_result.geometry.location.lat
           log.info("geocoder says: " + out['lat'] + "," + out['lng']);
-          for (comp in geoResult.results[0].address_components) {
+          // record additional information about the given point/region, and the regions that enclose it
+          for (comp in US_result.address_components) {
               switch (comp.types[0]) {
                   case "street_number":
                       street_number = comp.long_name
@@ -258,13 +295,14 @@ class SearchService {
             out['lat'] = loc.latitude
             out['lng'] = loc.longitude
             out['zip'] = loc.postalCode
-            //what was the rationale for not updating city and state too?
-            //if (!city) city = loc.city
-            //if (!state) state = loc.region
             out['city'] = loc.city
             out['state'] = loc.region
+            out['type'] = GeoType.POINT;
+            return true;
           }
-        return false
+           else {
+              return false
+          }
       }
   }
 
