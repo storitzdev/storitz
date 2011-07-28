@@ -2448,10 +2448,11 @@ input#srcAddr {
     margin-top: 20px;
     margin-right: 10px;
 }
-#printThis a, #shareThis a {
+#printThis a, #shareThis a, #shareThis span {
     width: 92px;
     height: 32px;
     display: block;
+    cursor: pointer;
 }
 #printThis {
     background: url("../images/map-print-button.png") no-repeat;

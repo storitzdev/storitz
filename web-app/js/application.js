@@ -497,17 +497,15 @@ $(document).ready(function() { // common event bindings
 
 function initialize_checkout_page() {
   initialize_transaction_box(update_billing_summary_panel);
-  if ($.browser.msie) {   //non-css possible ie fixes.
-    $("body.checkout .customer_info > div, body.checkout .customer_info > h1").css({'position':'relative', 'padding':'10px 0 0 20px;'});
-    $("body.checkout #booking_summary > div").css('padding', '12px');
-    $("body.checkout #booking_summary .site_info").css({'padding-top':'0', 'margin-top':'12px'});
-    $("body.checkout input[type=text]").addClass('typeText');
-  }
+  ie_reapply_styles();
 }
 
 function initialize_site_detail_page() {
     if(typeof stLight != "undefined") {
-      stLight.options({publisher:'fcffc560-5a11-434a-b976-a60a57d870ed'});
+      stLight.options({
+                publisher:'fcffc560-5a11-434a-b976-a60a57d870ed',
+                onHover: false
+              });
     }
 
     //image gallery in detail page.
@@ -558,7 +556,6 @@ function initialize_transaction_box(callback) {
               $('#moveInDate').val(date);
               _gaq.push(['_trackEvent', 'detail', 'transaction box', 'date change']);
               $("#datepicker").hide();
-              update_rent_me_panel();
               callback();
             }
           }).datepicker("hide");
@@ -679,7 +676,8 @@ function update_rent_me_panel() {
   var f = $("#rent_me_form");
   if (!$.browser.msie) {f.css("opacity", "0.5");}
   f.load(f.attr("src"), f.serialize(), function() {
-    if (!$.browser.msie) {f.css("opacity", "1");}
+    if (!$.browser.msie) { f.css("opacity", "1"); }
+    ie_reapply_styles();
   });
 }
 function update_billing_summary_panel() {
@@ -689,13 +687,17 @@ function update_billing_summary_panel() {
   panel.load(panel.attr("src"), inputs.serialize(), function() {
     if (!$.browser.msie) {panel.css("opacity", "1");}
     $("#rental_transaction_form h1.pay .moveInCostTotal").html($(".cost_breakdown tr.total td.last").html());
-    if ($.browser.msie) {
+    ie_reapply_styles();
+  });
+}
+function ie_reapply_styles() { //reapply styles to transaction panel.
+  if ($.browser.msie) {
       $("body.checkout .customer_info > div, body.checkout .customer_info > h1").css({'position':'relative', 'padding':'10px 0 0 20px;'});
       $("body.checkout #booking_summary > div").css('padding', '12px');
       $("body.checkout #booking_summary .site_info").css({'padding-top':'0', 'margin-top':'12px'});
       $("body.checkout input[type=text]").addClass('typeText');
-    }
-  });
+      $("body.site_detail #right_panel .move_in_quote a.edit_date").css({'position':'absolute','top':'13px','right':'13px'});
+  }
 }
 //yelp reviews
 function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and optional id.

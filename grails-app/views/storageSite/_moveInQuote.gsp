@@ -4,7 +4,8 @@
     <tr><th>Move-In Date</th>
     <td>
       <a class="edit_date" title="Click to Change" href="#" max-days="${site.maxReserveDays}"><g:formatDate type="date" style="MEDIUM" date="${moveInDate}" /></a>
-    </td></tr>
+    </td>
+    </tr>
     <tr><th>Paid Until</th>
     <td><g:formatDate type="date" style="MEDIUM" date="${totals.paidThruDate}" /></td></tr>
     <tr><th>Special Offer</th>

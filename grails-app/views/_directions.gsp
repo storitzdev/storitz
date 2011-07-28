@@ -51,7 +51,8 @@
         return false;">print</a>
     </div>
     <div id="shareThis">
-        <a id="shareThisLink" target="_blank" href="${createLink(controller:'storageSite', action:'directions', id:params.id)}">Share</a>
+        %{--<a id="shareThisLink" class="st_email" target="_blank" href="${createLink(controller:'storageSite', action:'directions', id:params.id)}">Share</a>--}%
+        <span id="shareThisLink" class="st_email" displayText="Share"></span>
     </div>
   </div>
 </div>

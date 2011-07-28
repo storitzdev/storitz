@@ -42,7 +42,7 @@
   <g:if test="${!(site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0)}">
   <h1 class="pay first">
     Billing Information
-    <div class="col2 ccimages"><storitz:image src="credit-cards.gif" width="302" height="38" alt="Credit Cards"/></div>
+    <div class="col2 ccimages"><storitz:image src="credit-cards.gif" width="302" height="38" alt="Credit Cards" /></div>
   </h1>
   </g:if>
   <g:else>

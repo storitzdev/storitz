@@ -3,7 +3,7 @@
 <div class="site_info">
   <div class="image_container">
   <g:if test="${site.coverImage()}">
-    <img src="${resource(file: site.coverImage()?.mid())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}">
+    <img src="${resource(file: site.coverImage()?.mid())}" alt="Image of ${site.title} located in ${site.city}, ${site.state.fullName}"/>
   </g:if>
   <g:elseif test="${site?.logo && site.logo != null}">
     <img src="${resource(file: site.logo.src())}" alt="${site_title} Logo"/>

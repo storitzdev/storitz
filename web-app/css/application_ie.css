@@ -147,11 +147,18 @@ body.site_detail .vcard .site_logo {
   margin-right: 20px;
   width: 250px;
 }
+body.site_detail .rent_me .move_in_quote div#reservation_move_in_description {
+  border-top-width: 0px;
+  padding-bottom: 0px;
+}
 body.site_detail .rent_me div {
   padding: 12px 12px;
   border-color: #aaa;
   border-width: 1px 0 0 0;
   border-style: solid;
+}
+body.site_detail .all_units .rent_me div.price {
+  padding-top:0;
 }
 body.site_detail .rent_me div.price .original_price {
   font-size: 16px;
