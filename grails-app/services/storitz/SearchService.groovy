@@ -115,7 +115,7 @@ class SearchService {
 
       for (unit in site.units) {
         // filter here
-        if (unit.unitCount < site.minInventory) continue;
+        if (unit.unitCount <= site.minInventory) continue;
         if (criteria.searchSize > unit.unitsize.id) continue
         if (criteria.unitType && criteria.unitType != unit.unitType) continue
         if (doesNotHaveRequiredAmenities(site,unit,criteria.amenities)) continue
