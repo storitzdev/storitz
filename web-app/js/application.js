@@ -819,7 +819,7 @@ function procReview(data, isBusiness) {
             var revTime = (d.getUTCMonth()+1).toString() + "/" + d.getUTCDate().toString() + "/" + d.getUTCFullYear().toString();
             var userName = "<h4 class='reviewer'>" + review.user.name + "</h4>";
             var userImage = "<img class='revImage' src="+ review.user.image_url + " alt='user image' />";
-            var excerpt = "<p class='revExcerpt'>" + review.excerpt + " ... <a href="+data.url+">read more</a></p>";
+            var excerpt = "<p class='revExcerpt'>" + review.excerpt + " ... <a target='_blank' href="+data.url+">read more</a></p>";
             var rating = "<img class='revRating' src="+ review.rating_image_url + " alt=" + review.rating + "stars" + "/>" + revTime;
 
             $(".user_reviews").append("<li class='review'>"+userImage+userName+rating+excerpt+"</li>");
