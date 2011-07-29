@@ -942,10 +942,10 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
     def unitID
     for (unit in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table') {
-      boolean available = (unit.bRented.text().toLowerCase() == 'true') || (unit.bWaitingListReserved.text().toLowerCase() == 'true')
+      boolean unAvailable = (unit.bRented.text().toLowerCase() == 'true') || (unit.bWaitingListReserved.text().toLowerCase() == 'true')
       def typeName = unit.sTypeName.text()
 
-      if (!available) {
+      if (unAvailable) {
         unitID = unit.UnitID.text()
         writer.println "Rented unit ${unitID} checking for deletion"
         def deletedUnit = site.units.find { it.unitNumber == unitID }
