@@ -74,7 +74,7 @@ class ImageTagLib extends AbstractTaglib {
       }
     }
     else {
-      src = '/favicon.ico'
+      src = '/storitz-favicon.ico'
     }
     src = generateRelativePath(null, src, null, attrs.remove('plugin'), attrs.remove('absolute'))
 

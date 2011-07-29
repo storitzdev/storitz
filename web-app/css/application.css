@@ -1391,6 +1391,30 @@ body.site_detail .panes .overview .all_units > ul > li {
   height: 100px;
   background: url("../images/v2/unit-size-placeholder-151x86.jpg") -10px center no-repeat;
 }
+body.site_detail .panes .overview .all_units li.unit5x5 {
+  background: url("../images/unit_sizes/unit-size-5x5.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit5x10 {
+  background: url("../images/unit_sizes/unit-size-5x10.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit7x10 {
+  background: url("../images/unit_sizes/unit-size-7x10.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit10x10 {
+  background: url("../images/unit_sizes/unit-size-10x10.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit10x15 {
+  background: url("../images/unit_sizes/unit-size-10x15.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit10x20 {
+  background: url("../images/unit_sizes/unit-size-10x20.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit10x25 {
+  background: url("../images/unit_sizes/unit-size-10x25.gif") -10px center no-repeat;
+}
+body.site_detail .panes .overview .all_units li.unit10x30 {
+  background: url("../images/unit_sizes/unit-size-10x30.gif") -10px center no-repeat;
+}
 body.site_detail .panes .overview .all_units > ul > li > div {
   display: inline-block;
   float: left;

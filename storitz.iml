@@ -149,6 +149,7 @@
     <orderEntry type="module" module-name="storitz-grailsPlugins" />
     <orderEntry type="library" name="grails-1.3.6" level="application" />
     <orderEntry type="library" name="grails-1.3.6" level="application" />
+    <orderEntry type="library" name="grails-1.3.6" level="application" />
   </component>
 </module>
 

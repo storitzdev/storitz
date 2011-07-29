@@ -140,7 +140,7 @@
             <h2><a name="all_units">Available Units at ${site.title}</a></h2>
             <ul>
               <g:each in="${availableUnits}" var="entry">
-              <li class="${entry['unit'].unitsize.description.replaceAll(' ', '')}">
+              <li class="unit${entry['unit'].unitsize.description.replaceAll(' ', '')}">
                 <div class="unit_info">
                   <h3><g:render template="unitSizeLabel" model="[unit:entry['unit'], omitType:true]" /></h3>
                   <ul class="amenities">
