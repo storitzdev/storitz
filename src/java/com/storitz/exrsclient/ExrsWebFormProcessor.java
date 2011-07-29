@@ -422,9 +422,17 @@ public class ExrsWebFormProcessor {
 
         logMessage(0,"*** SIZE =" + size + "  ***");
         logMessage(0,"*** COST =" + cost + "  ***");
-        for (String s : type) {
-            logMessage(0,"*** TYPE =" + s + " ***");
+
+        // type is allowed to be null
+        if (type != null) {
+            for (String s : type) {
+                logMessage(0,"*** TYPE =" + s + " ***");
+            }
         }
+        else {
+            logMessage(0,"*** TYPE =null ***");
+        }
+
         logMessage(0,"*** PROMO=" + promo + "  ***");
 
         String actionUrl = page1.getUrl().toString();
