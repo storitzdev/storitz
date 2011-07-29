@@ -18,3 +18,4 @@ for (int i = 0; i < sources.size(); i++) {
     }
 }
 
+StoritzGroovyUtil.validatePromos(100,true)

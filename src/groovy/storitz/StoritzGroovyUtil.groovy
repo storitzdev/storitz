@@ -1,33 +1,35 @@
 package storitz
 
 import com.storitz.SpecialOffer
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
-class ValidatePromosJob {
+class StoritzGroovyUtil {
 
-  private static final boolean AUTOMATIC_FLUSH = true;
-  private static final String DEFAULT_CHARSET = "utf8";
-
-  def emailService
-
-  static triggers = {
-    // Check every six hours
-    cron name:'checkPromos', cronExpression:"0 0 0,6,12,18 * * ?"
-  }
-
-  // Grab all active promos with quantity greater than $100
+  // Grab all active promos with quantity greater than threshold
   // Eliminate the promotions that contain the quantity value in the name.
   // [ I.E. If a promo is $800 but the name says "$800 off" then assume
   // everything is correct.]
   // Whatever remains is potentially bad so report it via email.
-  def execute(context) {
+  static def validatePromos(threshold, onlyactive) {
     def buf = new ByteArrayOutputStream()
-    PrintWriter writer = new PrintWriter(new OutputStreamWriter(buf, DEFAULT_CHARSET), AUTOMATIC_FLUSH);
+    PrintWriter writer = new PrintWriter(new OutputStreamWriter(buf, "utf8"), true);
     int count = 0
 
-    def specialOffers = SpecialOffer.findAllByActiveAndPromoQtyGreaterThan(true,100)
+    def specialOffers
+    if (onlyactive) {
+      specialOffers= SpecialOffer.findAllByActiveAndPromoQtyGreaterThan(true,threshold)
+    }
+    else {
+      specialOffers= SpecialOffer.findAllByPromoQtyGreaterThan(threshold)
+    }
+
     if (specialOffers) {
-      writer.println "Active promotions only..."
+      if (onlyactive) {
+        writer.println "Active promotions only..."
+      }
+      else {
+        writer.println "All promotions..."
+      }
+
       writer.println ""
       specialOffers.each { offer ->
         if (!offer.promoName.contains(((Integer)offer.promoQty).toString())) {
@@ -41,6 +43,7 @@ class ValidatePromosJob {
       String subject = "[${grails.util.Environment.getCurrent().toString()}] Potentially Bad Promos (${count})"
       String body = buf.toString()
       try {
+        def emailService = new EmailService()
         emailService.sendTextEmail(
             to: "tech@storitz.com",
             from: "no-reply@storitz.com",
