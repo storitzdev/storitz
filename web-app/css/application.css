@@ -2137,7 +2137,13 @@ body.checkout input.rent_me_button {
 .reservation_move_in_description p {
     text-align: left;
     font-family: arial,helvetica,verdana,sans-serif;
-    font-size: 12px;
+    font-size: 11px;
+    color: #000000;
+}
+.reservation_move_in_description li {
+    text-align: left;
+    font-family: arial,helvetica,verdana,sans-serif;
+    font-size: 11px;
     color: #000000;
 }
 .reservation_move_in_description p strong {
