@@ -14,12 +14,12 @@ hibernate {
 environments {
   development {
     dataSource {
-      dbCreate = "update"
+      dbCreate = "validate"
       //url = "jdbc:hsqldb:file:devDB"
       driverClassName = "com.mysql.jdbc.Driver"
-      url = "jdbc:mysql://127.0.0.1:3306/storitz_prod?autoReconnect=true"
-      username = "root"
-      password = "root"
+      url = "jdbc:mysql://127.0.0.1:3306/storitz_development?autoReconnect=true"
+      username = "storitz"
+      password = "clickstoredone"
 
       //loggingSql = true
     }
