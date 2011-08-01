@@ -12,6 +12,7 @@ import com.storitz.service.CostTotals
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
+import java.util.Random
 
 class StorageSiteController extends BaseTransactionController implements ApplicationContextAware {
 
@@ -583,6 +584,25 @@ class StorageSiteController extends BaseTransactionController implements Applica
 
   def rentMePanel = {
     renderTransactionPanel("/storageSite/rentMePanel")
+  }
+
+  def yelpTest = {
+    def random = new Random();
+    int max = 2000;
+    int counter = 0;
+    def siteList = [ ];
+    while (siteList.size() < 100) {
+      int temp = random.nextInt(max+1);
+      StorageSite site = StorageSite.findById(temp);
+      if (site && !site.disabled) {
+        siteList[counter] = site;
+        counter+=1;
+      }
+      else {
+        continue;
+      }
+    }
+    return [siteList: siteList];
   }
 
   def directions = {

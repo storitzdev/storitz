@@ -2998,3 +2998,20 @@ body.serp div.info_window .info_right a.site_link {
     text-indent: -9999px;
     margin: 9px 0 0 3px;
 }
+/*yelp test css*/
+body.yelp_test {
+  display: block;
+  width: 960px;
+}
+body.yelp_test table {
+  border: 2px solid #ccc;
+  width: 800px;
+}
+body.yelp_test table th,
+body.yelp_test table td {
+  width: 50%;
+  text-align: left;
+  border: 1px solid blue;
+  height: 15px;
+}
+
