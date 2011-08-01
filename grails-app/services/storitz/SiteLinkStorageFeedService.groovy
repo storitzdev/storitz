@@ -241,6 +241,11 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   def newTenant(RentalTransaction rentalTransaction) {
+    // JM: SiteLink requires country information. If none is provided,
+    // assume good 'ol US of A
+    if (!rentalTransaction.contactPrimary.country) {
+      rentalTransaction.contactPrimary.country = Country.UNITED_STATES
+    }
 
     def siteLink = (SiteLink) rentalTransaction.site.feed
 
@@ -271,7 +276,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
          <!--Optional:-->
          <cal:sAddr1>""" + rentalTransaction.contactPrimary.address1 + """</cal:sAddr1>
          <!--Optional:-->
-         <cal:sAddr2>""" + (rentalTransaction.contactPrimary?.address2 ? rentalTransaction.contactPrimary.address2 : '') + """</cal:sAddr2>
+         <cal:sAddr2>""" + (rentalTransaction.contactPrimary?.address2 ? rentalTransaction.contactPrimary?.address2 : '') + """</cal:sAddr2>
          <!--Optional:-->
          <cal:sCity>""" + rentalTransaction.contactPrimary.city + """</cal:sCity>
          <!--Optional:-->
@@ -279,7 +284,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
          <!--Optional:-->
          <cal:sPostalCode>""" + rentalTransaction.contactPrimary.zipcode + """</cal:sPostalCode>
          <!--Optional:-->
-         <cal:sCountry>""" + rentalTransaction.contactPrimary.country.display + """</cal:sCountry>
+         <cal:sCountry>""" + rentalTransaction.contactPrimary.country?.display + """</cal:sCountry>
          <!--Optional:-->
          <cal:sPhone>""" + rentalTransaction.contactPrimary.phone + """</cal:sPhone>
          <!--Optional:-->
