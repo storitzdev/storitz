@@ -6,7 +6,7 @@ import storitz.constants.SoftwareType
 
 class ContactUsController {
 
-  def emailService
+  def mailService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", operatorsignup: "POST"]
 
@@ -40,7 +40,7 @@ class ContactUsController {
       String fromField = contactUsInstance.userEmail
 
       try {
-        emailService.sendTextEmail(
+        mailService.sendMail(
                 to: toField,
                 from: fromField,
                 subject: subj,
@@ -139,7 +139,7 @@ class ContactUsController {
     String fromField = "${params.email}"
 
     try {
-      emailService.sendTextEmail(
+      mailService.sendMail(
               to: toField,
               from: fromField,
               subject: subj,

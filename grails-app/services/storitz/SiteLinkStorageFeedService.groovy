@@ -5,12 +5,13 @@ import groovyx.net.http.Method
 import com.storitz.*
 import static groovyx.net.http.ContentType.XML
 import storitz.constants.*
+import org.grails.mail.MailService
 
 class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
   def geocodeService
   def unitSizeService
-  def emailService
+  def mailService
 
   def siteLinkWsUrl = "https://www.smdservers.net/ccws/callcenterws.asmx"
   def siteLinkWsUrl35 = "https://www.smdservers.net/CCWs_3.5/CallCenterWs.asmx"
@@ -33,12 +34,12 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
       return geocodeService
   }
 
-     EmailService getEmailService() {
-        if (!emailService) {
-            println("emailService is null: instantiating")
-            emailService = new EmailService()
+     MailService getMailService() {
+        if (!mailService) {
+            println("mailService is null: instantiating")
+            mailService = new MailService()
         }
-        return emailService
+        return mailService
      }
 
 
@@ -1446,7 +1447,7 @@ TODO - evaluate whether we need this going forward
 //      rentalTransaction.save(flush: true)
 
       try {
-        getEmailService().sendTextEmail(
+        getMailService().sendMail(
                 to: "notifications@storitz.com",
                 from: "no-reply@storitz.com",
                 subject: "SITELINK - failed move-in",
@@ -1518,7 +1519,7 @@ TODO - evaluate whether we need this going forward
         if (paymentResult != 1) {
           def paymentBody = getReservationPaymentPayload(rentalTransaction)
           try {
-            getEmailService().sendTextEmail(
+            getMailService().sendMail(
                     to: "notifications@storitz.com",
                     from: "no-reply@storitz.com",
                     subject: "SITELINK - failed reservation payment",
@@ -1538,7 +1539,7 @@ TODO - evaluate whether we need this going forward
 //      rentalTransaction.save(flush: true)
 
       try {
-        getEmailService().sendTextEmail(
+        getMailService().sendMail(
                 to: "notifications@storitz.com",
                 from: "no-reply@storitz.com",
                 subject: "SITELINK - failed reservation",

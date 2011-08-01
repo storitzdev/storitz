@@ -9,7 +9,7 @@ import storitz.constants.TransactionType
 
 class NotificationService {
 
-  def emailService
+  def mailService
 
   boolean transactional = false
 
@@ -147,7 +147,7 @@ class NotificationService {
         break
     }
     try {
-      emailService.sendEmail(to: rentalTransaction.contactPrimary.email,
+      mailService.sendMail(to: rentalTransaction.contactPrimary.email,
               from: "no-response@storitz.com",
               subject: operSubj,
               model: model,
@@ -158,7 +158,7 @@ class NotificationService {
     }
 
     try {
-      emailService.sendEmail(
+      mailService.sendMail(
               to: siteManagerEmails,
               from: "no-response@storitz.com",
               subject: tenantSubj,
@@ -170,7 +170,7 @@ class NotificationService {
     }
 
     try {
-      emailService.sendEmail(
+      mailService.sendMail(
               to: operAcctEmails,
               from: "no-response@storitz.com",
               subject: "EVENT - NEW TENANT " + tenantSubj,
@@ -182,7 +182,7 @@ class NotificationService {
     }
 
     try {
-      emailService.sendEmail(
+      mailService.sendMail(
               to: "notifications@storitz.com",
               from: "no-response@storitz.com",
               subject: tenantSubj,
@@ -215,7 +215,7 @@ class NotificationService {
     operAcctEmails.add("achnotify@storitz.com")
 
     try {
-      emailService.sendEmail(
+      mailService.sendMail(
               to: operAcctEmails,
               from: "no-response@storitz.com",
               subject: "EVENT - ACH Transfer ",

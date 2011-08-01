@@ -9,12 +9,13 @@ import org.tempuri.Service1Soap
 import org.tempuri.UserAccountST
 import com.storitz.*
 import storitz.constants.*
+import org.grails.mail.MailService
 
 class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
   def port = [:]
   def geocodeService
-  def emailService
+  def mailService
   def unitSizeService
 
   // required for script services
@@ -34,12 +35,12 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
       return geocodeService
   }
 
-    EmailService getEmailService() {
-        if (!emailService) {
-            println("emailService is null: instantiating")
-            emailService = new EmailService()
+    MailService getMailService() {
+        if (!mailService) {
+            println("mailService is null: instantiating")
+            mailService = new MailService()
         }
-        return emailService
+        return mailService
     }
 
     private getPort(url) {
@@ -736,7 +737,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
       if (!retVal) {
         try {
           String body = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\nInsurance premium=${trans.insuranceCost}\n\nError Message: ${errorMessage}"
-          getEmailService().sendTextEmail(
+          getMailService().sendMail(
                   to: "notifications@storitz.com",
                   from: "no-reply@storitz.com",
                   subject: "QUIKSTOR - failed move-in",

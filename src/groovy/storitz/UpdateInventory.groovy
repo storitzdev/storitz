@@ -10,7 +10,7 @@ package storitz
 
 import com.storitz.StorageSite
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import com.storitz.StorageUnit
+import org.grails.mail.MailService
 
 class UpdateInventory {
 
@@ -18,18 +18,18 @@ class UpdateInventory {
     private static final String DEFAULT_CHARSET = "utf8";
 
     private FeedService feedService;
-    private EmailService emailService;
+    private MailService mailService;
 
     // Run from jobs (Tomcat context)
-    public UpdateInventory(FeedService feedService1, EmailService emailService1) {
+    public UpdateInventory(FeedService feedService1, MailService mailService1) {
         feedService = feedService1;
-        emailService = emailService1;
+        mailService = mailService1;
     }
 
     // Run from scripts!  (Spring dependency injector fails from scripts)
     public UpdateInventory() {
         feedService = new FeedService();
-        emailService = new EmailService();
+        mailService = new MailService();
     }
 
 
@@ -122,7 +122,7 @@ class UpdateInventory {
       //println("subject: ${subject}")          // test
       //println(buf.toString())                 // test
 
-     emailService.sendTextEmail(to: 'tech@storitz.com',
+     mailService.sendMail(to: 'tech@storitz.com',
        from: 'no-reply@storitz.com',
        subject: subject,
        body: buf.toString())

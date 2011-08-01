@@ -8,10 +8,10 @@ class UpdateInventoryJob {
     }
 
     def feedService
-    def emailService
+    def mailService
 
     def execute(context) {
-        UpdateInventory updateInventory = new UpdateInventory(feedService,emailService)
+        UpdateInventory updateInventory = new UpdateInventory(feedService, mailService)
         updateInventory.execute(context)
     }
 }

@@ -5,7 +5,7 @@ import storitz.constants.CommissionSourceType
 
 class EmailController {
 
-  def emailService
+  def mailService
   def unitSizeService
 
   def email = {
@@ -26,7 +26,7 @@ class EmailController {
     println "Sending email..."
 
     try {
-      emailService.sendEmail(to: "charlie@storitz.com",
+      mailService.sendMail(to: "charlie@storitz.com",
               from: "no-response@storitz.com",
               subject: "New Storitz Move-In",
               model: [transactionId: 1234,

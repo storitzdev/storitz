@@ -6,7 +6,7 @@ import com.storitz.Feed
 import com.storitz.UncleBobs
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
-import static groovyx.net.http.ContentType.XML
+
 import static groovyx.net.http.ContentType.TEXT
 import storitz.constants.State
 import storitz.constants.TruckType
@@ -23,6 +23,7 @@ import com.storitz.SiteUser
 import com.storitz.Bullet
 import java.text.SimpleDateFormat
 import java.text.DateFormat
+import org.grails.mail.MailService
 
 class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -50,13 +51,13 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     return uncleBobsStoreReservationFeedURL.replace("<COMPANY>", UBCompanyName)
   }
 
-  def emailService
+  def mailService
 
-  EmailService getEmailService() {
-    if (!emailService) {
-      emailService = new EmailService()
+  MailService getMailService() {
+    if (!mailService) {
+      mailService = new MailService()
     }
-    return emailService
+    return mailService
   }
 
   ///////////////////////
@@ -259,7 +260,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       body.append("\n RESPONSE")
       body.append("\n ${resText}")
 
-      getEmailService().sendTextEmail(
+      getMailService().sendMail(
           to: "notifications@storitz.com",
           from: "no-reply@storitz.com",
           subject: "UNCLEBOB - failed move-in",

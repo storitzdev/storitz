@@ -8,16 +8,17 @@ import storitz.constants.UnitType
 import com.storitz.*
 
 import com.storitz.exrsclient.ExrsWebFormProcessor
+import org.grails.mail.MailService
 
 class ExrsStorageFeedService extends CShiftStorageFeedService {
 
-  def emailService
+  def mailService
 
-  def getEmailService() {
-    if (!emailService) {
-      emailService = new EmailService()
+  def getMailService() {
+    if (!mailService) {
+      mailService = new MailService()
     }
-    return emailService
+    return mailService
   }
 
   static String baseUrl = "http://www.extraspace.com"
@@ -406,7 +407,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("subject: ${title}")
     println("body: ${body}")
 
-    getEmailService().sendTextEmail(
+    getMailService().sendMail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
             subject: title,
@@ -446,7 +447,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("subject: ${title2}")
     println("body: ${body2}")
 
-    getEmailService().sendTextEmail(
+    getMailService().sendMail(
             to: 'exrs@storitz.com',
             from: 'no-reply@storitz.com',
             subject: title2,
@@ -479,7 +480,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
             println("subject: EXRS Automatic Move-In Log")
             println("body: ${exrsWebFormProcessor.logBuf}")
 
-            getEmailService().sendTextEmail (
+            getMailService().sendMail (
                 to:"tech@storitz.com",
                 from:"no-reply@storitz.com",
                 subject:"EXRS Automatic Move-In Log",

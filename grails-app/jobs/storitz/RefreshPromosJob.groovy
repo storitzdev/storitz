@@ -8,10 +8,10 @@ class RefreshPromosJob {
   }
 
   def feedService
-  def emailService
+  def mailService
 
   def execute(context) {
-      RefreshPromos refreshPromos = new RefreshPromos(feedService,emailService)
+      RefreshPromos refreshPromos = new RefreshPromos(feedService,mailService)
       refreshPromos.execute(context)
   }
 }

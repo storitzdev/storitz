@@ -1,6 +1,7 @@
 package storitz
 
 import com.storitz.SpecialOffer
+import org.grails.mail.MailService
 
 class StoritzGroovyUtil {
 
@@ -43,8 +44,8 @@ class StoritzGroovyUtil {
       String subject = "[${grails.util.Environment.getCurrent().toString()}] Potentially Bad Promos (${count})"
       String body = buf.toString()
       try {
-        def emailService = new EmailService()
-        emailService.sendTextEmail(
+        def mailService = new MailService()
+        mailService.sendMail(
             to: "tech@storitz.com",
             from: "no-reply@storitz.com",
             subject: subject,

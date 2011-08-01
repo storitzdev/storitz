@@ -18,7 +18,7 @@ class RentalTransactionController extends BaseTransactionController {
   def creditCardService
   def notificationService
   def nachaService
-  def emailService
+  def mailService
   def offerFilterService
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", pay: ["POST", "GET"]]
@@ -358,7 +358,7 @@ class RentalTransactionController extends BaseTransactionController {
       int transID = rentalTransactionInstance.id
       int unitID = rentalTransactionInstance.unitId
       String body = "rentalTransactionInstance.id:"+transID+"\nrentalTransactionInstance.unitId:"+unitID+"\n"
-      emailService.sendTextEmail(
+      mailService.sendMail(
         to: 'tech@storitz.com',
         from: 'no-reply@storitz.com',
         subject: grails.util.Environment.getCurrent().toString() + ":" + subject,

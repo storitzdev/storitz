@@ -7,7 +7,7 @@ class OrganizerContestController {
 
     def active
     def enabled
-    def emailService
+    def mailService
     def toEmailAddress
     def videoId
     def id
@@ -224,7 +224,7 @@ class OrganizerContestController {
 
         def emailAddress = OrganizerContestController.getToEmailAddress()
         if (emailAddress) {
-            emailService.sendTextEmail(
+            mailService.sendMail(
                 to: emailAddress,
                 from: 'no-reply@storitz.com',
                 subject: title,

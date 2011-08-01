@@ -5,6 +5,7 @@ import com.storitz.exrsclient.ExrsWebFormProcessor
 import com.storitz.RentalTransaction
 import com.storitz.StorageUnit
 import com.storitz.StorageSite
+import org.grails.mail.MailService
 
 class ExrsWebFormProcessorTests extends GroovyTestCase {
     protected void setUp() {
@@ -83,9 +84,9 @@ class ExrsWebFormProcessorTests extends GroovyTestCase {
 //    }
 
     def sendEmail(message) {
-        EmailService es = new EmailService()
+        MailService ms = new MailService()
         def args = [to:"tech@storitz.com",from:"no-reply@storitz.com",subject:"EXRS Integration Test - IGNORE",body:message]
-        es.sendTextEmail (args)
+        ms.sendMail (args)
     }
 
 }

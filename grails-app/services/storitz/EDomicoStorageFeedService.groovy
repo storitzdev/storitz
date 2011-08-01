@@ -21,6 +21,7 @@ import com.storitz.RentalTransaction
 import storitz.constants.State
 import com.storitz.EDomicoAmenitiesMap
 import storitz.constants.PhoneType
+import org.grails.mail.MailService
 
 class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -66,13 +67,13 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         this.webServicesKey = webServicesKey;
     }
 
-    def emailService
+    def mailService
 
-    EmailService getEmailService() {
-      if (!emailService) {
-        emailService = new EmailService()
+    MailService getMailService() {
+      if (!mailService) {
+        mailService = new MailService()
       }
-      return emailService
+      return mailService
     }
 
     @Override
@@ -694,7 +695,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         body.append("\n     <EMail>${reSeMailMessage}</EMail>")
         body.append("\n </Authorize>")
 
-        getEmailService().sendTextEmail(
+        getMailService().sendMail(
           to: "notifications@storitz.com",
           from: "no-reply@storitz.com",
           subject: "DOMICO - failed move-in",

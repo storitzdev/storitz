@@ -6,7 +6,7 @@ import com.storitz.StorageUnit
 import com.storitz.SpecialOffer
 
 class BalkNotificationJob {
-    def emailService
+    def mailService
 
     static triggers = {
       // no automatic triggers
@@ -59,7 +59,7 @@ class BalkNotificationJob {
     body.append("\n               ${trans.contactPrimary.phone} (${trans.contactPrimary.phoneType.display})")
 
     try {
-      emailService.sendTextEmail (
+      mailService.sendMail (
           to:      "balk@storitz.com",
           from:    "no-reply@storitz.com",
           subject: grails.util.Environment.getCurrent().toString() + ":Balk Notification",
@@ -110,14 +110,14 @@ class BalkNotificationJob {
     body.append("\ngsingletary@storitz.com");
 
     try {
-      emailService.sendTextEmail (
+      mailService.sendMail (
           to:      trans.contactPrimary.email,
           from:    "gsingletary@storitz.com",
           subject: "Thanks for visiting Storitz!",
           body: body.toString()
       )
       // CC us too
-      emailService.sendTextEmail (
+      mailService.sendMail (
           to:      "balk@storitz.com",
           from:    "gsingletary@storitz.com",
           subject: "Thanks for visiting Storitz!",

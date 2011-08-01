@@ -5,7 +5,7 @@ class ReservationMoveInJob {
   private static final String DEFAULT_CHARSET = "utf8";
 
   def CShiftStorageFeedService
-  def emailService
+  def mailService
 
   static triggers = {
     cron name: 'reservationMoveIn', cronExpression: "0 01 1 * * ?"
@@ -57,7 +57,7 @@ class ReservationMoveInJob {
       writer.flush()
       writer.close()
 
-      emailService.sendTextEmail(to: 'tech@storitz.com',
+      mailService.sendTextEmail(to: 'tech@storitz.com',
         from: 'no-reply@storitz.com',
         subject: subject,
         body: buf.toString())
