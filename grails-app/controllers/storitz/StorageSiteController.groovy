@@ -587,13 +587,14 @@ class StorageSiteController extends BaseTransactionController implements Applica
   }
 
   def yelpTest = {
+    def idList = StorageSite.getAll();
     def random = new Random();
-    int max = 2000;
+    int max = idList.size();
     int counter = 0;
     def siteList = [ ];
-    while (siteList.size() < 100) {
+    while (siteList.size() < 10) {
       int temp = random.nextInt(max+1);
-      StorageSite site = StorageSite.findById(temp);
+      StorageSite site = idList[temp];
       if (site && !site.disabled) {
         siteList[counter] = site;
         counter+=1;

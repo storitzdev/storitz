@@ -708,7 +708,7 @@ function ie_reapply_styles() { //reapply styles to transaction panel.
   }
 }
 //yelp reviews
-function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and optional id.
+function genReviews(lat, lng, id, yelpRow, cbnum) {  //provide the lat, and lng of the site. and optional id. yelprow is temp.
     var auth = {
         consumerKey: "XGY74hMiq2Vqe_2rXTGkXg",
         consumerSecret: "BjvEVIe7XDavXGyOlnVxz8Qo_Qk",
@@ -725,6 +725,8 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
     var limit = '1';
     var sort = '1';
     var radius_filter = '300';
+    callbacks[0] = function(data){procReview(data, isBusiness);};
+    if (!cbnum) {cbnum = 0};
     var accessor = {
         consumerSecret: auth.consumerSecret,
         tokenSecret: auth.accessTokenSecret
@@ -738,11 +740,8 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
         parameters.push(['sort', sort]);
         parameters.push(['category_filter', category_filter]);
         parameters.push(['radius_filter', radius_filter]);
-        parameters.push(['callback', 'cb']);
     }
-    if (isBusiness) {
-        parameters.push(['callback', 'ncb']);
-    }
+    parameters.push(['callback', 'callbacks['+cbnum+']']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
     parameters.push(['oauth_token', auth.accessToken]);
@@ -769,31 +768,24 @@ function genReviews(lat, lng, id) {  //provide the lat, and lng of the site. and
     var parameterMap = OAuth.getParameterMap(message.parameters);
     parameterMap.oauth_signature = parameterMap.oauth_signature.replace(/\+/g, '%2B');
 
-    if (!isBusiness) {
-        $.ajax({
-                    'url': message.action,
-                    'data': parameterMap,
-                    'dataType': 'jsonp',
-                    'jsonpCallback': 'cb',
-                    'success': function(data, textStats, XMLHttpRequest) {
-                        procReview(data, isBusiness);
-                    }
-                });
-    }
-    else {
-        $.ajax({
-                    'url': message.action,
-                    'data': parameterMap,
-                    'dataType': 'jsonp',
-                    'jsonpCallback': 'ncb',
-                    'success': function(data, textStats, XMLHttpRequest) {
-                        procReview(data, isBusiness);
-                    }
-                });
-    }
+    $.ajax({
+              'url': message.action,
+              'data': parameterMap,
+              'dataType': 'jsonp',
+              'jsonpCallback': 'callbacks['+cbnum+']',
+              'success': function(data, textStats, XMLHttpRequest) {
+                if (yelpRow) {
+                  procYelp(data, yelpRow);
+                }
+                else {
+                  procReview(data, isBusiness);
+                }
+              }
+            });
 }
+
 function procReview(data, isBusiness) {
-    if (!isBusiness && data.businesses.length == 0) {
+    if (!isBusiness && data.businesses.length == 0) { // no response from yelp.
         $(".yelp_rating img, .yelp_rating_map img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
         $(".yelp_rating span, .yelp_rating_map span").prepend("0");
         $("#yelp_reviews").prepend("<p class='none'>This site has no reviews yet.</p>");
@@ -825,6 +817,29 @@ function procReview(data, isBusiness) {
             $(".user_reviews").append("<li class='review'>"+userImage+userName+rating+excerpt+"</li>");
         }
     }
+}
+var callbacks = {}; //a dictionary of callbacks for use in yelpreviews.
+function yelpTest() {
+  var sites = $("#sites .site-test");
+  var n = 1;
+  sites.each(function() {
+    var site = $(this).children().first();
+    var lat = site.attr('lat');
+    var lng = site.attr('lng');
+    var id = "yelp"+site.attr('id');
+    callbacks[n] = function(data){procYelp(data, id)};
+    genReviews(lat, lng, false, id, n);
+    n++;
+  });
+}
+function procYelp(data, yelpRow) {
+  if (data.businesses.length > 0) {
+    var site = data.businesses[0];
+    $("."+yelpRow).append(site.id+", "+site.url+", "+site.review_count);
+  }
+  else {
+    $("."+yelpRow).append("Site has no reviews.");
+  }
 }
 
 function bindPickerFormHandler (target,picker,container,spinner) {
