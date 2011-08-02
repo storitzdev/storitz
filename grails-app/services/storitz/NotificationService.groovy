@@ -147,48 +147,47 @@ class NotificationService {
         break
     }
     try {
-      mailService.sendMail(to: rentalTransaction.contactPrimary.email,
-              from: "no-response@storitz.com",
-              subject: operSubj,
-              model: model,
-              view: tenantView)
+      mailService.sendMail {
+        to        rentalTransaction.contactPrimary.email
+        from      "no-response@storitz.com"
+        subject   operSubj
+        body      (model: model, view: tenantView)
+     }
+    } catch (Exception e) {
+      log.error("${e}", e)
+    }
+
+    try {
+      mailService.sendMail {
+              to        siteManagerEmails.toArray()
+              from      "no-response@storitz.com"
+              subject   tenantSubj
+              body      (model: model, view: mgrView)
+              }
 
     } catch (Exception e) {
       log.error("${e}", e)
     }
 
     try {
-      mailService.sendMail(
-              to: siteManagerEmails,
-              from: "no-response@storitz.com",
-              subject: tenantSubj,
-              model: model,
-              view: mgrView)
-
+      def subject =  "EVENT - NEW TENANT ${tenantSubj}"
+      mailService.sendMail {
+              to        operAcctEmails.toArray()
+              from      "no-response@storitz.com"
+              subject   subject.toString()
+              body      (model: model, view: operView)
+      }
     } catch (Exception e) {
       log.error("${e}", e)
     }
 
     try {
-      mailService.sendMail(
-              to: operAcctEmails,
-              from: "no-response@storitz.com",
-              subject: "EVENT - NEW TENANT " + tenantSubj,
-              model: model,
-              view: operView)
-
-    } catch (Exception e) {
-      log.error("${e}", e)
-    }
-
-    try {
-      mailService.sendMail(
-              to: "notifications@storitz.com",
-              from: "no-response@storitz.com",
-              subject: tenantSubj,
-              model: model,
-              view: operView)
-
+      mailService.sendMail {
+              to        "notifications@storitz.com"
+              from      "no-response@storitz.com"
+              subject   tenantSubj
+              body      (model: model,view: operView)
+      }
     } catch (Exception e) {
       log.error("${e}", e)
     }
@@ -215,13 +214,12 @@ class NotificationService {
     operAcctEmails.add("achnotify@storitz.com")
 
     try {
-      mailService.sendMail(
-              to: operAcctEmails,
-              from: "no-response@storitz.com",
-              subject: "EVENT - ACH Transfer ",
-              model: model,
-              view: "/notifications/achOperMgr")
-
+      mailService.sendMail {
+              to        operAcctEmails.toArray()
+              from      "no-response@storitz.com"
+              subject   "EVENT - ACH Transfer "
+              body      (model: model, view: "/notifications/achOperMgr")
+      }
     } catch (Exception e) {
       log.error("${e}", e)
     }

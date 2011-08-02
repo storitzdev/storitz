@@ -260,11 +260,12 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       body.append("\n RESPONSE")
       body.append("\n ${resText}")
 
-      getMailService().sendMail(
-          to: "notifications@storitz.com",
-          from: "no-reply@storitz.com",
-          subject: "UNCLEBOB - failed move-in",
-          body: body.toString())
+      getMailService().sendMail {
+          to        "notifications@storitz.com"
+          from      "no-reply@storitz.com"
+          subject   "UNCLEBOB - failed move-in"
+          body      body.toString()
+      }
     }
 
     return retVal

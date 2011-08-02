@@ -59,12 +59,13 @@ class BalkNotificationJob {
     body.append("\n               ${trans.contactPrimary.phone} (${trans.contactPrimary.phoneType.display})")
 
     try {
-      mailService.sendMail (
-          to:      "balk@storitz.com",
-          from:    "no-reply@storitz.com",
-          subject: grails.util.Environment.getCurrent().toString() + ":Balk Notification",
-          body: body.toString()
-      )
+      def subject = "${grails.util.Environment.getCurrent().toString()} Balk Notification"
+      mailService.sendMail {
+          to        "balk@storitz.com"
+          from      "no-reply@storitz.com"
+          subject   subject.toString()
+          body      body.toString()
+      }
     } catch (Throwable t) {
       t.printStackTrace()
     }
@@ -110,19 +111,19 @@ class BalkNotificationJob {
     body.append("\ngsingletary@storitz.com");
 
     try {
-      mailService.sendMail (
-          to:      trans.contactPrimary.email,
-          from:    "gsingletary@storitz.com",
-          subject: "Thanks for visiting Storitz!",
-          body: body.toString()
-      )
+      mailService.sendMail {
+          to        trans.contactPrimary.email
+          from      "gsingletary@storitz.com"
+          subject   "Thanks for visiting Storitz!"
+          body      body.toString()
+      }
       // CC us too
-      mailService.sendMail (
-          to:      "balk@storitz.com",
-          from:    "gsingletary@storitz.com",
-          subject: "Thanks for visiting Storitz!",
-          body: body.toString()
-      )
+      mailService.sendMail {
+          to        "balk@storitz.com"
+          from      "gsingletary@storitz.com"
+          subject   "Thanks for visiting Storitz!"
+          body      body.toString()
+      }
     } catch (Throwable t) {
       t.printStackTrace()
     }

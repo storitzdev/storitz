@@ -407,12 +407,12 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("subject: ${title}")
     println("body: ${body}")
 
-    getMailService().sendMail(
-            to: 'exrs@storitz.com',
-            from: 'no-reply@storitz.com',
-            subject: title,
-            body: body
-    )
+    getMailService().sendMail {
+            to        'exrs@storitz.com'
+            from      'no-reply@storitz.com'
+            subject   title
+            body      body
+    }
 
     ////////////////////////////////
     // SECOND EMAIL ////////////////
@@ -447,12 +447,12 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("subject: ${title2}")
     println("body: ${body2}")
 
-    getMailService().sendMail(
-            to: 'exrs@storitz.com',
-            from: 'no-reply@storitz.com',
-            subject: title2,
-            body: body2
-    )
+    getMailService().sendMail {
+            to        'exrs@storitz.com'
+            from      'no-reply@storitz.com'
+            subject   title2
+            body      body2
+  }
 
 //    trans.save(flush: true)
 
@@ -480,12 +480,12 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
             println("subject: EXRS Automatic Move-In Log")
             println("body: ${exrsWebFormProcessor.logBuf}")
 
-            getMailService().sendMail (
-                to:"tech@storitz.com",
-                from:"no-reply@storitz.com",
-                subject:"EXRS Automatic Move-In Log",
-                body:exrsWebFormProcessor.logBuf
-            )
+            getMailService().sendMail {
+                to        "tech@storitz.com"
+                from      "no-reply@storitz.com"
+                subject   "EXRS Automatic Move-In Log"
+                body      exrsWebFormProcessor.logBuf
+          }
         }
 
         return success;

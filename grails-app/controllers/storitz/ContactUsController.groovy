@@ -40,11 +40,12 @@ class ContactUsController {
       String fromField = contactUsInstance.userEmail
 
       try {
-        mailService.sendMail(
-                to: toField,
-                from: fromField,
-                subject: subj,
-                body: message)
+        mailService.sendMail {
+                to        toField
+                from      fromField
+                subject   subj
+                body      message
+        }
 
       } catch (Exception e) {
         log.error("${e}", e)
@@ -139,12 +140,12 @@ class ContactUsController {
     String fromField = "${params.email}"
 
     try {
-      mailService.sendMail(
-              to: toField,
-              from: fromField,
-              subject: subj,
-              body: message)
-
+      mailService.sendMail {
+              to        toField
+              from      fromField
+              subject   subj
+              body      message
+      }
     } catch (Exception e) {
       log.error("${e}", e)
     }

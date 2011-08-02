@@ -1447,12 +1447,12 @@ TODO - evaluate whether we need this going forward
 //      rentalTransaction.save(flush: true)
 
       try {
-        getMailService().sendMail(
-                to: "notifications@storitz.com",
-                from: "no-reply@storitz.com",
-                subject: "SITELINK - failed move-in",
-                body: body)
-
+        getMailService().sendMail {
+                to        "notifications@storitz.com"
+                from      "no-reply@storitz.com"
+                subject   "SITELINK - failed move-in"
+                body      body
+        }
       } catch (Exception e) {
         log.error("${e}", e)
       }
@@ -1519,12 +1519,12 @@ TODO - evaluate whether we need this going forward
         if (paymentResult != 1) {
           def paymentBody = getReservationPaymentPayload(rentalTransaction)
           try {
-            getMailService().sendMail(
-                    to: "notifications@storitz.com",
-                    from: "no-reply@storitz.com",
-                    subject: "SITELINK - failed reservation payment",
-                    body: paymentBody)
-
+            getMailService().sendMail {
+                    to        "notifications@storitz.com"
+                    from      "no-reply@storitz.com"
+                    subject   "SITELINK - failed reservation payment"
+                    body      paymentBody
+            }
           } catch (Exception e) {
             log.error("${e}", e)
           }
@@ -1539,12 +1539,12 @@ TODO - evaluate whether we need this going forward
 //      rentalTransaction.save(flush: true)
 
       try {
-        getMailService().sendMail(
-                to: "notifications@storitz.com",
-                from: "no-reply@storitz.com",
-                subject: "SITELINK - failed reservation",
-                body: body)
-
+        getMailService().sendMail {
+                to          "notifications@storitz.com"
+                from        "no-reply@storitz.com"
+                subject     "SITELINK - failed reservation"
+                body        body
+        }
       } catch (Exception e) {
         log.error("${e}", e)
       }

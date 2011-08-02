@@ -224,12 +224,12 @@ class OrganizerContestController {
 
         def emailAddress = OrganizerContestController.getToEmailAddress()
         if (emailAddress) {
-            mailService.sendMail(
-                to: emailAddress,
-                from: 'no-reply@storitz.com',
-                subject: title,
-                body: body
-            )
+            mailService.sendMail {
+                to        emailAddress
+                from      'no-reply@storitz.com'
+                subject   title
+                body      body
+          }
         }
     }
 

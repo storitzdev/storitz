@@ -695,11 +695,12 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         body.append("\n     <EMail>${reSeMailMessage}</EMail>")
         body.append("\n </Authorize>")
 
-        getMailService().sendMail(
-          to: "notifications@storitz.com",
-          from: "no-reply@storitz.com",
-          subject: "DOMICO - failed move-in",
-          body: body.toString())
+        getMailService().sendMail {
+          to        "notifications@storitz.com"
+          from      "no-reply@storitz.com"
+          subject   "DOMICO - failed move-in"
+          body      body.toString()
+        }
       }
 
       return resSuccess

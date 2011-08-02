@@ -45,11 +45,12 @@ class StoritzGroovyUtil {
       String body = buf.toString()
       try {
         def mailService = new MailService()
-        mailService.sendMail(
-            to: "tech@storitz.com",
-            from: "no-reply@storitz.com",
-            subject: subject,
-            body: body)
+        mailService.sendMail {
+            to        "tech@storitz.com"
+            from      "no-reply@storitz.com"
+            subject   subject
+            body      body
+        }
       }
       catch (Exception e) {
         println "ERROR sending email!"

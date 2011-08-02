@@ -115,12 +115,12 @@ class NachaService {
     def body = buf.toString()
     String title = "Storitz - NACHA file generated ${settlementDate}-${dayCount}"
 
-    mailService.sendMail(
-            to: 'wells@storitz.com',
-            from: 'no-reply@storitz.com',
-            subject: title,
-            body: body
-    )
+    mailService.sendMail {
+            to        'wells@storitz.com'
+            from      'no-reply@storitz.com'
+            subject   title
+            body      body
+    }
 
   }
 }

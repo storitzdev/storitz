@@ -122,10 +122,11 @@ class UpdateInventory {
       //println("subject: ${subject}")          // test
       //println(buf.toString())                 // test
 
-     mailService.sendMail(to: 'tech@storitz.com',
-       from: 'no-reply@storitz.com',
-       subject: subject,
-       body: buf.toString())
-
+     mailService.sendMail {
+       to       'tech@storitz.com'
+       from     'no-reply@storitz.com'
+       subject  subject
+       body     buf.toString()
+      }
     }
 }

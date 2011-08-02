@@ -358,12 +358,13 @@ class RentalTransactionController extends BaseTransactionController {
       int transID = rentalTransactionInstance.id
       int unitID = rentalTransactionInstance.unitId
       String body = "rentalTransactionInstance.id:"+transID+"\nrentalTransactionInstance.unitId:"+unitID+"\n"
-      mailService.sendMail(
-        to: 'tech@storitz.com',
-        from: 'no-reply@storitz.com',
-        subject: grails.util.Environment.getCurrent().toString() + ":" + subject,
-        body: body
-      )
+      def subj = "${grails.util.Environment.getCurrent().toString()} : ${subject}"
+      mailService.sendMail {
+        to        'tech@storitz.com'
+        from      'no-reply@storitz.com'
+        subject   subj.toString()
+        body      body
+      }
     } catch (Throwable t) {
         t.printStackTrace()
     }

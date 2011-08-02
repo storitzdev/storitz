@@ -85,8 +85,12 @@ class ExrsWebFormProcessorTests extends GroovyTestCase {
 
     def sendEmail(message) {
         MailService ms = new MailService()
-        def args = [to:"tech@storitz.com",from:"no-reply@storitz.com",subject:"EXRS Integration Test - IGNORE",body:message]
-        ms.sendMail (args)
+        ms.sendMail {
+            to          "tech@storitz.com"
+            from        "no-reply@storitz.com"
+            subject     "EXRS Integration Test - IGNORE"
+            body        message
+        }
     }
 
 }
