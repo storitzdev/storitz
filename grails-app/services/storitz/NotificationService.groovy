@@ -163,18 +163,18 @@ class NotificationService {
               from      "no-response@storitz.com"
               subject   tenantSubj
               body      (model: model, view: mgrView)
-              }
+      }
 
     } catch (Exception e) {
       log.error("${e}", e)
     }
 
     try {
-      def subject =  "EVENT - NEW TENANT ${tenantSubj}"
+      def subj =  "EVENT - NEW TENANT ${tenantSubj}"
       mailService.sendMail {
               to        operAcctEmails.toArray()
               from      "no-response@storitz.com"
-              subject   subject.toString()
+              subject   subj.toString()
               body      (model: model, view: operView)
       }
     } catch (Exception e) {
