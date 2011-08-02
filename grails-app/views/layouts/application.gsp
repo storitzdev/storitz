@@ -30,6 +30,7 @@
                     <g:else>
                       <input class="text" type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
                     </g:else>
+                    <input class="text" type="hidden" name="collegeName" value="${college?.name}" />
                     <input id="search_button" type="submit" name="btn" value="Search" />
                 </fieldset>
             </g:form>

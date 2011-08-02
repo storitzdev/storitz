@@ -57,4 +57,29 @@ class StoritzGroovyUtil {
       }
     }
   }
+
+  // Brain-dead helper. Turn a list of amenities
+  // into a boolean look-up hash table.
+  static def parseAmenities (amenity) {
+    if (!amenity) {
+      return [:]
+    }
+
+    def amen = [:]
+
+    if (amenity instanceof String) {
+      amenity = [amenity]
+    }
+
+    for (a in amenity) {
+      amen[a]=true
+    }
+
+    return amen
+  }
+
+
+
+
+
 }

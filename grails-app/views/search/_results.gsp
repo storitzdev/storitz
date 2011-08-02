@@ -14,6 +14,7 @@
 <g:form controller="${controller}" action="${action}" name="${name}" method="get">
     <input type="hidden" name="where" id="where" value="${where}" />
     <input type="hidden" name="view-mode" id="view-mode" value="" />
+    <input class="text" type="hidden" name="collegeName" value="${college?.name}" />
     <g:render template="/search/results1" />
 </g:form>
 <g:render template="/search/results2" />

@@ -59,7 +59,7 @@ class SearchController {
           criteria.unitType = tp
         }
 
-        def am = searchService.getAmenities(params.amenity)
+        def am = storitz.StoritzGroovyUtil.parseAmenities(params.amenity)
         if (am.size()) {
           amenities = am
           Boolean t = new Boolean(true);
@@ -76,8 +76,17 @@ class SearchController {
         resultsModel['where'] = "Unable to determine location"
         searchResult = [sites:[], moveInPrices:[:]]
       }
+
+      // If the user is on a college landing page, and they decide to search
+      // using the top search bar, they will end up here. Make sure they
+      // are redirected back to the correct college page.
+      if (params.collegeName) {
+        resultsModel['collegeName'] = params.collegeName
+        redirect(controller: "collegeLanding", action: "listSites", params:resultsModel)
+      }
+
       [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel]
-    }
+      }
 
     def metro = {
         def aMetro =TopMetro.fromText(params.city + "-" + params.state) // TODO: string-mangling is artifact of when we just passed in params.metro. finish refactoring TopMetro interface to match new 2-param style.

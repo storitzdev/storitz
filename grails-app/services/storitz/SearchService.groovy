@@ -34,24 +34,6 @@ class SearchService {
     return false
   }
 
-  def getAmenities (amenity) {
-    if (!amenity) {
-      return [:]
-    }
-
-    def amen = [:]
-
-    if (amenity instanceof String) {
-      amenity = [amenity]
-    }
-
-    for (a in amenity) {
-      amen[a]=true
-    }
-
-    return amen
-  }
-
   def getUnitType (tp) {
     if (!tp) {
       return null
