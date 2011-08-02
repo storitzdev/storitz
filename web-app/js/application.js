@@ -207,6 +207,7 @@ function updateShareLink() {
   var origin = $("#srcAddr").val();
   var currentHref = shareLink;
   var newHref;
+  var siteTitle = $("#facilityHours h2:first-child").text();
   if (currentHref.search(/\?origin=.*/) > 0) {
     newHref = currentHref.replace(/\?origin=.*/, "?origin="+origin);
   }
@@ -218,7 +219,7 @@ function updateShareLink() {
               "service":"sharethis",
               "element":document.getElementById('shareThis'),
               "url":newHref,
-              "title":"Directions to Site",
+              "title":"Directions to "+siteTitle,
               "text":"Share"
             });
   }
@@ -797,9 +798,9 @@ function procReview(data, isBusiness) {
     }
     else {
         var site = data;
-        $(".yelp_rating img, .yelp_rating_map img").attr('src', site.rating_img_url);
-        $(".yelp_rating span, .yelp_rating_map span").prepend(site.review_count);
-        $("#yelp_reviews").prepend("<h3 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h3>");
+//        $(".yelp_rating img, .yelp_rating_map img").attr('src', site.rating_img_url);
+//        $(".yelp_rating span, .yelp_rating_map span").prepend(site.review_count);
+//        $("#yelp_reviews").prepend("<h3 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h3>");
         if (site.review_count > site.reviews.length) {
             $("#yelp_reviews a.read_more").css("display", "block");
             $("#yelp_reviews a.read_more").attr('href', site.url);
