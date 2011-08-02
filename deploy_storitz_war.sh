@@ -15,7 +15,7 @@ while getopts ":e:d:" opt; do
       grails_env=$OPTARG
       ;;
     d)
-      dir=$OPTARG
+      dest=$OPTARG
       ;;
     :)
       echo "Error: $OPTARG requires an argument" >&2
@@ -35,19 +35,17 @@ if [ "x$@" == "x" ]; then
   usage
   exit 1
 fi
+hostname=$@
+if [ "x$dest" == "x" ]; then
+  dest=$hostname
+fi
 if [ "x$grails_env" == "x" ]; then
   grails_env=development
 fi
-hostname=$@
-if [ "x$dir" == "x" ]; then
-  dest="$HOME/tomcat-current/$hostname"
-else
-  dest="$HOME/tomcat-current/$dir"
-fi
 
-echo "DEPLOYING .war"
-echo "  src: src/$hostname"
-echo "  destination: $dest"
+echo "Deploying latest revision of storitz.com .war files"
+echo "  src: $HOME/src/$hostname"
+echo "  destination: $HOME/tomcat-instances/*/$dest"
 echo "  env: $grails_env"
 sleep 2
 
@@ -62,18 +60,29 @@ else
   echo $ouput
   exit $?
 fi
-cp target/storitz-0.1.war $dest/ROOT.war
-if [ ! -d $dest/ROOT ]; then
-  mkdir $dest/ROOT
-fi
-cd $dest/ROOT
-echo -n "Unarchiving .war file ... "
-output=`jar xf ../ROOT.war`
-if [ $? -eq 0 ]; then 
-  echo "done."
-else
-  echo "failed."
-  echo $ouput
-  exit $?
-fi
-echo "Application deployed to $dest/ROOT. Please restart tomcat."
+
+echo "Deploying .war file to Tomcat instances:"
+for server in `ls -1 $HOME/tomcat-instances/`; do
+  dir="$HOME/tomcat-instances/$server/$dest"
+  echo -n "  $dir ... "
+  cp $HOME/src/$hostname/target/storitz-0.1.war $dir/ROOT.war
+  if [ $? -ne 0 ]; then
+    exit $?;
+  fi
+  if [ ! -d $dir/ROOT ]; then
+    mkdir $dir/ROOT
+    if [ $? -ne 0 ]; then
+      exit $?;
+    fi
+  fi
+  cd $dir/ROOT
+  output=`jar xf ../ROOT.war`
+  if [ $? -eq 0 ]; then
+    echo "done."
+  else
+    echo "failed."
+    echo $ouput
+    exit $?
+  fi
+done
+echo "Deployment complete. Tomcat instances may be restarted."
