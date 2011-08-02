@@ -112,7 +112,7 @@ class UpdateInventory {
 
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
 
-      String subject = "[${ConfigurationHolder.config.grails.serverURL}, ${src} (SITES:${allStorageSitesIds.size()}/ERRORS:${num_errors})] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
+      String subj = "[${ConfigurationHolder.config.grails.serverURL}, ${src} (SITES:${allStorageSitesIds.size()}/ERRORS:${num_errors})] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
 
       writer.flush()
       writer.close()
@@ -122,11 +122,11 @@ class UpdateInventory {
       //println("subject: ${subject}")          // test
       //println(buf.toString())                 // test
 
-     mailService.sendMail {
-       to       'tech@storitz.com'
-       from     'no-reply@storitz.com'
-       subject  subject
-       body     buf.toString()
+      mailService.sendMail {
+        to       "tech@storitz.com"
+        from     "no-reply@storitz.com"
+        subject  subj
+        body     buf.toString()
       }
     }
 }

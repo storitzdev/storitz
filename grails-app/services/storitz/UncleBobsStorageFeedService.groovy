@@ -251,20 +251,20 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       trans.save(flush:true)
     }
     else {
-      StringBuffer body = new StringBuffer()
-      body.append("Failed Uncle Bob's Reservation")
-      body.append("\n ")
-      body.append("\n REQUEST")
-      body.append("\n ${payload}")
-      body.append("\n ")
-      body.append("\n RESPONSE")
-      body.append("\n ${resText}")
+      StringBuffer bdy = new StringBuffer()
+      bdy.append("Failed Uncle Bob's Reservation")
+      bdy.append("\n ")
+      bdy.append("\n REQUEST")
+      bdy.append("\n ${payload}")
+      bdy.append("\n ")
+      bdy.append("\n RESPONSE")
+      bdy.append("\n ${resText}")
 
       getMailService().sendMail {
           to        "notifications@storitz.com"
           from      "no-reply@storitz.com"
           subject   "UNCLEBOB - failed move-in"
-          body      body.toString()
+          body      bdy.toString()
       }
     }
 

@@ -1441,7 +1441,7 @@ TODO - evaluate whether we need this going forward
               siteLink.password, subject, body)
 
     } else {
-      def body = getMoveInPayload(rentalTransaction)
+      def bdy = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
       rentalTransaction.idNumber = moveInResult
 //      rentalTransaction.save(flush: true)
@@ -1451,7 +1451,7 @@ TODO - evaluate whether we need this going forward
                 to        "notifications@storitz.com"
                 from      "no-reply@storitz.com"
                 subject   "SITELINK - failed move-in"
-                body      body
+                body      bdy
         }
       } catch (Exception e) {
         log.error("${e}", e)
@@ -1533,7 +1533,7 @@ TODO - evaluate whether we need this going forward
       }
       
     } else {
-      def body = getMoveInPayload(rentalTransaction)
+      def bdy = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
       rentalTransaction.idNumber = moveInResult
 //      rentalTransaction.save(flush: true)
@@ -1543,7 +1543,7 @@ TODO - evaluate whether we need this going forward
                 to          "notifications@storitz.com"
                 from        "no-reply@storitz.com"
                 subject     "SITELINK - failed reservation"
-                body        body
+                body        bdy
         }
       } catch (Exception e) {
         log.error("${e}", e)

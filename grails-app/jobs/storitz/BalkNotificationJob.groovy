@@ -42,29 +42,29 @@ class BalkNotificationJob {
     SpecialOffer specialOffer = SpecialOffer.findById(trans.promoId)
     def unitPrice = storageUnit.bestUnitPrice ? storageUnit.bestUnitPrice : storageUnit.price
 
-    StringBuilder body = new StringBuilder()
-    body.append("Transaction  : ${trans.id}")
-    body.append("\nOperator     : ${trans.site.feed.operatorName}")
-    body.append("\nSite         : ${trans.site.title}")
-    body.append("\n               ${trans.site.address}")
-    body.append("\n               ${trans.site.city}, ${trans.site.state.display} ${trans.site.zipcode}")
-    body.append("\nUnit         : ${storageUnit.displaySize} ${storageUnit.unitType.display}")
-    body.append("\nUnit Price   : ${unitPrice} (${specialOffer?.promoName ? specialOffer?.promoName : 'no promo selected'})}")
-    if (trans.moveInCost) body.append("\nMove-in Cost : ${trans.feedMoveInCost}")
-    body.append("\nMove-In Date : ${trans.moveInDate.format('yyyy-MM-dd')}")
-    body.append("\nContact      : ${trans.contactPrimary.firstName} ${trans.contactPrimary.lastName}")
-    body.append("\n               ${trans.contactPrimary.address1}")
-    body.append("\n               ${trans.contactPrimary.city}, ${trans.contactPrimary.state.display} ${trans.contactPrimary.zipcode}")
-    body.append("\n               ${trans.contactPrimary.email}")
-    body.append("\n               ${trans.contactPrimary.phone} (${trans.contactPrimary.phoneType.display})")
+    StringBuilder bdy = new StringBuilder()
+    bdy.append("Transaction  : ${trans.id}")
+    bdy.append("\nOperator     : ${trans.site.feed.operatorName}")
+    bdy.append("\nSite         : ${trans.site.title}")
+    bdy.append("\n               ${trans.site.address}")
+    bdy.append("\n               ${trans.site.city}, ${trans.site.state.display} ${trans.site.zipcode}")
+    bdy.append("\nUnit         : ${storageUnit.displaySize} ${storageUnit.unitType.display}")
+    bdy.append("\nUnit Price   : ${unitPrice} (${specialOffer?.promoName ? specialOffer?.promoName : 'no promo selected'})}")
+    if (trans.moveInCost) bdy.append("\nMove-in Cost : ${trans.feedMoveInCost}")
+    bdy.append("\nMove-In Date : ${trans.moveInDate.format('yyyy-MM-dd')}")
+    bdy.append("\nContact      : ${trans.contactPrimary.firstName} ${trans.contactPrimary.lastName}")
+    bdy.append("\n               ${trans.contactPrimary.address1}")
+    bdy.append("\n               ${trans.contactPrimary.city}, ${trans.contactPrimary.state.display} ${trans.contactPrimary.zipcode}")
+    bdy.append("\n               ${trans.contactPrimary.email}")
+    bdy.append("\n               ${trans.contactPrimary.phone} (${trans.contactPrimary.phoneType.display})")
 
     try {
-      def subject = "${grails.util.Environment.getCurrent().toString()} Balk Notification"
+      def subj = "${grails.util.Environment.getCurrent().toString()} Balk Notification"
       mailService.sendMail {
           to        "balk@storitz.com"
           from      "no-reply@storitz.com"
-          subject   subject.toString()
-          body      body.toString()
+          subject   subj.toString()
+          body      bdy.toString()
       }
     } catch (Throwable t) {
       t.printStackTrace()
@@ -72,64 +72,60 @@ class BalkNotificationJob {
   }
 
   def sendExternalBalkNotification(RentalTransaction trans) {
-    StringBuilder body = new StringBuilder()
+    StringBuilder bdy = new StringBuilder()
 
-    body.append("Hi ${trans.contactPrimary.firstName},");
-    body.append("\n");
-    body.append("\nEarlier today, you visited Storitz.com and searched for self storage.");
-    body.append("\nWe’re really glad that you decided to check out our site! Still, we");
-    body.append("\ncouldn’t help but notice that you didn’t manage to complete your");
-    body.append("\ntransaction and rent a storage unit.");
-    body.append("\n");
-    body.append("\n");
-    body.append("\nAt Storitz, we’re constantly striving to improve our site and our");
-    body.append("\ncustomer service, so we wanted to drop you a line and see if you had");
-    body.append("\nany problems with the site that we could help you with.  Did something");
-    body.append("\nbreak or fail?  Was something about Storitz too confusing?");
-    body.append("\n");
-    body.append("\n");
-    body.append("\nIf there is anything I can help you with, please don’t hesitate to");
-    body.append("\ncontact me. You can give me a call on the toll-free number listed");
-    body.append("\nbelow, or just respond to this email and I’ll get back to you right");
-    body.append("\naway.");
-    body.append("\n");
-    body.append("\n");
-    body.append("\nThen, if you do decide to rent with us, we’d like to offer you a \$20");
-    body.append("\ncredit on your first move-in.");
-    body.append("\n");
-    body.append("\n");
-    body.append("\nWe look forward to talking to you soon and helping you with all your");
-    body.append("\nself-storage needs!");
-    body.append("\n");
-    body.append("\n");
-    body.append("\nSincerely,");
-    body.append("\n");
-    body.append("\nGillian Singletary");
-    body.append("\nCustomer Service Specialist");
-    body.append("\nStoritz, Inc.");
-    body.append("\n(877) 456-2929");
-    body.append("\ngsingletary@storitz.com");
+    bdy.append("Hi ${trans.contactPrimary.firstName},");
+    bdy.append("\n");
+    bdy.append("\nEarlier today, you visited Storitz.com and searched for self storage.");
+    bdy.append("\nWe’re really glad that you decided to check out our site! Still, we");
+    bdy.append("\ncouldn’t help but notice that you didn’t manage to complete your");
+    bdy.append("\ntransaction and rent a storage unit.");
+    bdy.append("\n");
+    bdy.append("\n");
+    bdy.append("\nAt Storitz, we’re constantly striving to improve our site and our");
+    bdy.append("\ncustomer service, so we wanted to drop you a line and see if you had");
+    bdy.append("\nany problems with the site that we could help you with.  Did something");
+    bdy.append("\nbreak or fail?  Was something about Storitz too confusing?");
+    bdy.append("\n");
+    bdy.append("\n");
+    bdy.append("\nIf there is anything I can help you with, please don’t hesitate to");
+    bdy.append("\ncontact me. You can give me a call on the toll-free number listed");
+    bdy.append("\nbelow, or just respond to this email and I’ll get back to you right");
+    bdy.append("\naway.");
+    bdy.append("\n");
+    bdy.append("\n");
+    bdy.append("\nThen, if you do decide to rent with us, we’d like to offer you a \$20");
+    bdy.append("\ncredit on your first move-in.");
+    bdy.append("\n");
+    bdy.append("\n");
+    bdy.append("\nWe look forward to talking to you soon and helping you with all your");
+    bdy.append("\nself-storage needs!");
+    bdy.append("\n");
+    bdy.append("\n");
+    bdy.append("\nSincerely,");
+    bdy.append("\n");
+    bdy.append("\nGillian Singletary");
+    bdy.append("\nCustomer Service Specialist");
+    bdy.append("\nStoritz, Inc.");
+    bdy.append("\n(877) 456-2929");
+    bdy.append("\ngsingletary@storitz.com");
 
     try {
       mailService.sendMail {
           to        trans.contactPrimary.email
           from      "gsingletary@storitz.com"
           subject   "Thanks for visiting Storitz!"
-          body      body.toString()
+          body      bdy.toString()
       }
       // CC us too
       mailService.sendMail {
           to        "balk@storitz.com"
           from      "gsingletary@storitz.com"
           subject   "Thanks for visiting Storitz!"
-          body      body.toString()
+          body      bdy.toString()
       }
     } catch (Throwable t) {
       t.printStackTrace()
     }
   }
-
-
-
-
 }

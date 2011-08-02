@@ -41,15 +41,15 @@ class StoritzGroovyUtil {
     }
 
     if (count > 0) {
-      String subject = "[${grails.util.Environment.getCurrent().toString()}] Potentially Bad Promos (${count})"
-      String body = buf.toString()
+      String subj = "[${grails.util.Environment.getCurrent().toString()}] Potentially Bad Promos (${count})"
+      String bdy = buf.toString()
       try {
         def mailService = new MailService()
         mailService.sendMail {
             to        "tech@storitz.com"
             from      "no-reply@storitz.com"
-            subject   subject
-            body      body
+            subject   subj
+            body      bdy
         }
       }
       catch (Exception e) {

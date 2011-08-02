@@ -398,20 +398,20 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     bodyWriter.println "Unit Promotion: ${trans.promoName}"
     bodyWriter.println "Unit Monthly Rate: ${trans.monthlyRate}"
     bodyWriter.println "\n"
-    def body = buf.toString()
+    def body1 = buf.toString()
     String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"
 
     //log to catalina.out too
     println("to: 'exrs@storitz.com'")
     println("from: 'no-reply@storitz.com'")
     println("subject: ${title}")
-    println("body: ${body}")
+    println("body: ${body1}")
 
     getMailService().sendMail {
             to        'exrs@storitz.com'
             from      'no-reply@storitz.com'
             subject   title
-            body      body
+            body      body1
     }
 
     ////////////////////////////////

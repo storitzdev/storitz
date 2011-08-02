@@ -736,12 +736,12 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
       // compare calculated cost vs. feed cost - send discrepancies
       if (!retVal) {
         try {
-          String body = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\nInsurance premium=${trans.insuranceCost}\n\nError Message: ${errorMessage}"
+          String bdy = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\nInsurance premium=${trans.insuranceCost}\n\nError Message: ${errorMessage}"
           getMailService().sendMail {
                   to        "notifications@storitz.com"
                   from      "no-reply@storitz.com"
                   subject   "QUIKSTOR - failed move-in"
-                  body      body
+                  body      bdy
           }
         } catch (Exception e) {
           log.error("${e}", e)

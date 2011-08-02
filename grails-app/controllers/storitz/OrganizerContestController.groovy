@@ -218,7 +218,7 @@ class OrganizerContestController {
 //        bodyWriter.println "Twitter : ${organizerContestInstance.twitterName}"
 //        bodyWriter.println "Ref Src : ${organizerContestInstance.referralSource}"
         bodyWriter.println "Essay   : ${organizerContestInstance.essayWhyStorage}"
-        def body = buf.toString()
+        def bdy = buf.toString()
 
         String title = "Storitz - New OrganizerContest Entry"
 
@@ -228,7 +228,7 @@ class OrganizerContestController {
                 to        emailAddress
                 from      'no-reply@storitz.com'
                 subject   title
-                body      body
+                body      bdy
           }
         }
     }

@@ -89,7 +89,7 @@ class ExrsWebFormProcessorTests extends GroovyTestCase {
             to          "tech@storitz.com"
             from        "no-reply@storitz.com"
             subject     "EXRS Integration Test - IGNORE"
-            body        message
+            body        message.toString()
         }
     }
 
