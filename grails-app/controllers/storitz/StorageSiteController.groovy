@@ -12,7 +12,10 @@ import com.storitz.service.CostTotals
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
-import java.util.Random
+
+import com.storitz.yelp.Yelp
+import com.storitz.yelp.YelpReview
+import java.text.SimpleDateFormat
 
 class StorageSiteController extends BaseTransactionController implements ApplicationContextAware {
 
@@ -520,6 +523,32 @@ class StorageSiteController extends BaseTransactionController implements Applica
       return;
     }
 
+    Yelp yelp = Yelp.newInstance(); //start the yelp request (local search)
+    def request = yelp.search(site.lat, site.lng, "")
+    def searchResponse = JSON.parse(request)
+    def bizTotal = searchResponse.total
+    def newResponse
+    def review
+    def reviewDates = [];
+
+    if (bizTotal > 0) {   //do a business search
+      def bizId = searchResponse.businesses[0].id
+      def bizRequest = yelp.search(site.lat, site.lng, bizId)
+      newResponse = JSON.parse(bizRequest)
+      review = new YelpReview()
+      review.reviewCount = newResponse.review_count
+      review.id = newResponse.id
+      review.starUrl = newResponse.rating_img_url
+      review.bizUrl = newResponse.url
+      review.reviews = newResponse.reviews
+      for (int i=0; i < review.reviews.size(); i++) {
+        def df = new SimpleDateFormat("MM/dd/yyyy")
+        long milsec = review.reviews[i].time_created * 1000L
+        def revTime = new Date(milsec)
+        reviewDates[i] = df.format(revTime)
+      }
+    }
+
     // We're passing in bestUnit parameter now. If that's available then try to use it
     def bestUnit
     if (params.bestUnit) {
@@ -575,7 +604,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
     def xid = UUID.randomUUID().toString().toUpperCase()
 
     // If you change this, don't forget the smartCall action also uses this view!
-    [rentalTransactionInstance: rentalTransactionInstance, site: site, title: title,
+    [rentalTransactionInstance: rentalTransactionInstance, site: site, title: title, review: review, bizTotal: bizTotal, reviewDates: reviewDates,
             shortSessionId: session.shortSessionId, chosenUnitType: chosenUnitType, monthlyRate: bestUnit?.price,
             pushRate: (site.allowPushPrice ? bestUnit?.pushRate : bestUnit?.price), unitId: bestUnit?.id, searchSize: bestUnit?.unitsize?.id,
             promoId: params.promoId, insurance: insurance, video: video, propertyOperatorList: propertyOperatorList,
@@ -586,7 +615,11 @@ class StorageSiteController extends BaseTransactionController implements Applica
     renderTransactionPanel("/storageSite/rentMePanel")
   }
 
+
   def yelpTest = {
+      Yelp yelp = Yelp.newInstance();
+      yelp.search(30.361471, -87.164326, "")
+
     def idList = StorageSite.getAll();
     def random = new Random();
     int max = idList.size();

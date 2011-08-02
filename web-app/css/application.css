@@ -2599,7 +2599,7 @@ li.review p.revExcerpt {
     font-size: 16px;
 }
 #yelp_reviews a.read_more {
-    display: none;
+    display: block;
     float: right;
     padding: 15px;
     font-weight: bold;

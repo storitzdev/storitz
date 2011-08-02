@@ -93,8 +93,11 @@
               <li><span class="st_email" displayText="Share"></span></li>
             </ul>
             <div class="yelp_rating">
-                <a href="#tab_reviews"><img src="#" /></a><span> reviews</span>
+                <g:if test="${bizTotal > 0}">
+                <a href="#tab_reviews"><img src="${review.starUrl}" /></a><span>${review.reviewCount} reviews</span>
                 <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Reviews from yelp</a>
+                </g:if>
+                <g:else><strong>No Reviews</strong></g:else>
             </div>
             <p>
               ${site.description}
@@ -209,9 +212,30 @@
         <div>
           <h2 class="tab_pane_title">User Reviews</h2>
           <div id="yelp_reviews">
-              <ul class="user_reviews"></ul>
+              <g:if test="${bizTotal > 0}">
+                  <h3 class="review_title">Showing ${review.reviews.size()} of ${review.reviewCount} Yelp reviews</h3>
+              </g:if>
+              <g:else>
+                <p class="none">This site has no reviews yet.</p>
+              </g:else>
+              <ul class="user_reviews">
+                  <g:if test="${bizTotal > 0}">
+                    <g:each in="${review.reviews}" var="entry" status="i">
+                        <li class="review">
+                            <img class="revImage" src="${entry.user.image_url}" alt="Reviewer Image" />
+                            <h4 class="reviewer">${entry.user.name}</h4>
+                            <img class="revRating" src="${entry.rating_image_url}" alt="${entry.rating} stars" />${reviewDates[i]}
+                            <p class="revExcerpt">${entry.excerpt}
+                            ...<a target="_blank" href="${review.bizUrl}">read more</a>
+                            </p>
+                        </li>
+                    </g:each>
+                  </g:if>
+              </ul>
               <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Powered by Yelp</a>
-              <a href="#" class="read_more">Read More Reviews From Yelp</a>
+              <g:if test="${bizTotal > 0 && review.reviewCount > review.reviews.size()}">
+                <a href="#" class="read_more">Read More Reviews From Yelp</a>
+              </g:if>
           </div>
           <a name="tab_reviews">&nbsp;</a>
         </div>

@@ -553,7 +553,7 @@ function initialize_site_detail_page() {
     var site_review = $(".site_info .tabs #display_review");
     var lat = site_review.attr('lat');
     var lng = site_review.attr('lng');
-    genReviews(lat,lng);
+//    genReviews(lat,lng);
 }
 
 function initialize_transaction_box(callback) {
@@ -787,9 +787,8 @@ function genReviews(lat, lng, id, yelpRow, cbnum) {  //provide the lat, and lng 
 
 function procReview(data, isBusiness) {
     if (!isBusiness && data.businesses.length == 0) { // no response from yelp.
-        $(".yelp_rating img, .yelp_rating_map img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
-        $(".yelp_rating span, .yelp_rating_map span").prepend("0");
-        $("#yelp_reviews").prepend("<p class='none'>This site has no reviews yet.</p>");
+        $(".yelp_rating_map img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
+        $(".yelp_rating_map span").prepend("0");
         return;
     }
     else if (!isBusiness) {
@@ -798,24 +797,11 @@ function procReview(data, isBusiness) {
     }
     else {
         var site = data;
-//        $(".yelp_rating img, .yelp_rating_map img").attr('src', site.rating_img_url);
-//        $(".yelp_rating span, .yelp_rating_map span").prepend(site.review_count);
-//        $("#yelp_reviews").prepend("<h3 class='review_title'>Showing "+site.reviews.length+" of "+site.review_count+" Yelp reviews</h3>");
+        $(".yelp_rating_map img").attr('src', site.rating_img_url);
+        $(".yelp_rating_map span").prepend(site.review_count);
         if (site.review_count > site.reviews.length) {
             $("#yelp_reviews a.read_more").css("display", "block");
             $("#yelp_reviews a.read_more").attr('href', site.url);
-        }
-        var i = 0;
-        for(i = 0; i < site.reviews.length; i++) {
-            var review = site.reviews[i];
-            var d = new Date(review.time_created*1000);
-            var revTime = (d.getUTCMonth()+1).toString() + "/" + d.getUTCDate().toString() + "/" + d.getUTCFullYear().toString();
-            var userName = "<h4 class='reviewer'>" + review.user.name + "</h4>";
-            var userImage = "<img class='revImage' src="+ review.user.image_url + " alt='user image' />";
-            var excerpt = "<p class='revExcerpt'>" + review.excerpt + " ... <a target='_blank' href="+data.url+">read more</a></p>";
-            var rating = "<img class='revRating' src="+ review.rating_image_url + " alt=" + review.rating + "stars" + "/>" + revTime;
-
-            $(".user_reviews").append("<li class='review'>"+userImage+userName+rating+excerpt+"</li>");
         }
     }
 }
