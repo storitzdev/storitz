@@ -70,7 +70,7 @@
             <td class="item">Unit Rental</td>
             <td><g:if test="${rentalTransactionInstance.durationMonths > 0}">${rentalTransactionInstance.durationMonths} mos </g:if><g:if test="${rentalTransactionInstance.durationDays > 0}">${rentalTransactionInstance.durationDays} days</g:if></td>
             <td class="numeric"><g:formatNumber number="${rentalTransactionInstance.monthlyRate}" type="currency" currencyCode="USD" /></td>
-            <td class="numeric"><g:formatNumber number="${totals.getRentTotal()}" type="currency" currencyCode="USD" /></td>
+            <td class="numeric"><g:formatNumber number="${rentalTransactionInstance.durationMonths * rentalTransactionInstance.monthlyRate}" type="currency" currencyCode="USD" /></td>
         </tr>
         <g:if test="${promo != null}">
         <tr>
@@ -117,6 +117,6 @@
 </div>
 <div class="total_cost">
     <h2>Total Move-In Cost</h2>
-    <span><g:formatNumber type="currency" currencyCode="USD"  number="${totals.getMoveInTotal()}" />*</span>
+    <span><g:formatNumber type="currency" currencyCode="USD"  number="${rentalTransactionInstance.moveInCost}" />*</span>
     <p>*Includes initial rent, all discounts and facility fees.</p>
 </div>

@@ -39,7 +39,9 @@
   <li>Rent is Paid Through: ${paidThruDate}</li>
   <li>Promotion(s): ${promoName}</li>
   <li>Property Protection: ${insuranceName}</li>
-  <li>Total to be paid at Move-In: ${moveInCost}</li>
+  <li>Reservation Fee Collected: ${rentalFee}</li>
+  <li>Total to be paid at Move-In: ${remainderDueAtMoveIn}</li>
+  <li>Total Move-In Cost: ${moveInCost}</li>
 </ul>
 <p style="font-weight:bold;">
   Tenant Information:

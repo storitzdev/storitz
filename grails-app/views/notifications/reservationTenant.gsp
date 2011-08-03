@@ -50,8 +50,9 @@
   <li>Unit Size: ${displaySize}</li>
   <li>Promotion(s): ${promoName}</li>
   <li>Property Protection: ${insuranceName}</li>
-  <li>Amount due at Move-In: ${moveInCost}</li>
   <li>Reservation Fee billed to your credit card: ${rentalFee}</li>
+  <li>Amount due at Move-In: ${remainderDueAtMoveIn}</li>
+  <li>Total Move-In Cost: ${moveInCost}</li>
 </ul>
 <div style="height: 30px;"></div>
 <g:if test="${rentalAgreementLink}">

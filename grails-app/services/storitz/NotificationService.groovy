@@ -90,6 +90,7 @@ class NotificationService {
             insuranceName: insuranceName,
             paymentTotal: nf.format(rentalTransaction.moveInCost),
             moveInCost: nf.format(rentalTransaction.moveInCost),
+            remainderDueAtMoveIn: nf.format(rentalTransaction.moveInCost - rentalTransaction.cost),
             rentalFee: nf.format(rentalTransaction.cost),
             rentalAgreementLink: rentalAgreementLink,
             unitNumber: rentalTransaction.feedUnitNumber,
