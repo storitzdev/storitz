@@ -92,10 +92,11 @@ class CollegeLandingController extends SearchController  {
     }
 
     def searchResult = searchService.findClientSites(criteria)
+    genReviews(searchResult.sites);
 
     resultsModel['collegeName'] = "${params.college}"
     resultsModel['where'] = queryTerm = "${params.address}"
-    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel]
+    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews]
   }
 
   def storageTips = {
