@@ -265,7 +265,6 @@ var _map = function() {
         $("div.info_window h3.info a").attr("href", link.toString());
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
-        genReviews(lat, lng);
     };
 
     // TODO: This is very fragile; it will break if the DOM structure isn't exactly right.
@@ -375,9 +374,20 @@ var _map = function() {
                     var site_id = row.attr("site_id");
                     var lat = row.attr("lat");
                     var lng = row.attr("lng");
-                    yelp = "<div class='yelp_rating_map'>" +
-                            "<img src='#'/><span> reviews</span>" +
+                    var revCount = $("#search_results li#site_"+site_id).attr('revCount');
+                    var revStar = $("#search_results li#site_"+site_id).attr('revStar');
+                    if (revCount && revStar) {
+                      yelp = "<div class='yelp_rating_map'>" +
+                            "<img src="+revStar+"></img>" +
+                            "<span>"+revCount+" reviews</span>" +
                             "<a class='yelp_logo' href='http://www.yelp.com'>Reviews from yelp</a></div>";
+                    }
+                    else {
+                      yelp ="<div class='yelp_rating_map'>" +
+                            "<img src='http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png'/>" +
+                            "<span>0 reviews</span>" +
+                            "<a class='yelp_logo' href='http://www.yelp.com'>Reviews from yelp</a></div>";
+                    }
                     phone = "<p>(877) 456-2929</p>";
                     image = "<a href='#'><img src="+row.attr('pic')+" /></a>";
                     link = "<a class='site_link' href='#'>Details</a>"
@@ -553,7 +563,6 @@ function initialize_site_detail_page() {
     var site_review = $(".site_info .tabs #display_review");
     var lat = site_review.attr('lat');
     var lng = site_review.attr('lng');
-//    genReviews(lat,lng);
 }
 
 function initialize_transaction_box(callback) {
@@ -708,117 +717,7 @@ function ie_reapply_styles() { //reapply styles to transaction panel.
       $("body.site_detail #right_panel .move_in_quote a.edit_date").css({'position':'absolute','top':'13px','right':'13px'});
   }
 }
-//yelp reviews
-function genReviews(lat, lng, id, yelpRow, cbnum) {  //provide the lat, and lng of the site. and optional id. yelprow is temp.
-    var auth = {
-        consumerKey: "XGY74hMiq2Vqe_2rXTGkXg",
-        consumerSecret: "BjvEVIe7XDavXGyOlnVxz8Qo_Qk",
-        accessToken: "1F3P66uwRv-t9NwIXzhz371tkTbO8rgz",
-        accessTokenSecret: "03LJdE-bst4sX-SNQvnvKqtsRNE",
-        serviceProvider: {
-            signatureMethod: "HMAC-SHA1"
-        }
-    };
-    var isBusiness = (id) ? true : false;  //is this a yelp search or yelp business?
-    var terms = 'self+storage';
-    var ll = lat.toString() + ',' + lng.toString();
-    var category_filter = 'selfstorage';
-    var limit = '1';
-    var sort = '1';
-    var radius_filter = '300';
-    callbacks[0] = function(data){procReview(data, isBusiness);};
-    if (!cbnum) {cbnum = 0};
-    var accessor = {
-        consumerSecret: auth.consumerSecret,
-        tokenSecret: auth.accessTokenSecret
-    };
 
-    parameters = [];
-    if (!isBusiness) {
-        parameters.push(['term', terms]);
-        parameters.push(['ll', ll]);
-        parameters.push(['limit', limit]);
-        parameters.push(['sort', sort]);
-        parameters.push(['category_filter', category_filter]);
-        parameters.push(['radius_filter', radius_filter]);
-    }
-    parameters.push(['callback', 'callbacks['+cbnum+']']);
-    parameters.push(['oauth_consumer_key', auth.consumerKey]);
-    parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
-    parameters.push(['oauth_token', auth.accessToken]);
-    parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
-    var message;
-    if (isBusiness) {
-        message = {
-            'action': 'http://api.yelp.com/v2/business/' + id,
-            'method': 'GET',
-            'parameters': parameters
-        };
-    }
-    else {
-        message = {
-            'action': 'http://api.yelp.com/v2/search',
-            'method': 'GET',
-            'parameters': parameters
-        };
-    }
-
-    OAuth.setTimestampAndNonce(message);
-    OAuth.SignatureMethod.sign(message, accessor);
-
-    var parameterMap = OAuth.getParameterMap(message.parameters);
-    parameterMap.oauth_signature = parameterMap.oauth_signature.replace(/\+/g, '%2B');
-
-    $.ajax({
-              'url': message.action,
-              'data': parameterMap,
-              'dataType': 'jsonp',
-              'jsonpCallback': 'callbacks['+cbnum+']',
-              'success': function(data, textStats, XMLHttpRequest) {
-                if (yelpRow) {
-                  procYelp(data, yelpRow);
-                }
-                else {
-                  procReview(data, isBusiness);
-                }
-              }
-            });
-}
-
-function procReview(data, isBusiness) {
-    if (!isBusiness && data.businesses.length == 0) { // no response from yelp.
-        $(".yelp_rating_map img").attr('src', 'http://media2.px.yelpcdn.com/static/201012164084228337/i/ico/stars/stars_0.png');
-        $(".yelp_rating_map span").prepend("0");
-        return;
-    }
-    else if (!isBusiness) {
-        var site = data.businesses[0];
-        genReviews(data.region.center.latitude, data.region.center.longitude, site.id);
-    }
-    else {
-        var site = data;
-        $(".yelp_rating_map img").attr('src', site.rating_img_url);
-        $(".yelp_rating_map span").prepend(site.review_count);
-        if (site.review_count > site.reviews.length) {
-            $("#yelp_reviews a.read_more").css("display", "block");
-            $("#yelp_reviews a.read_more").attr('href', site.url);
-        }
-    }
-}
-var callbacks = {}; //a dictionary of callbacks for use in yelpreviews.
-function yelpTest() {
-  var sites = $("#sites .site-test");
-  var n = 1;
-  sites.each(function() {
-    var site = $(this).children().first();
-    var lat = site.attr('lat');
-    var lng = site.attr('lng');
-    var id = "yelp"+site.attr('id');
-    callbacks[n] = function(data){procYelp(data, id)};
-    genReviews(lat, lng, false, id, n);
-    n++;
-  });
-}
 function procYelp(data, yelpRow) {
   if (data.businesses.length > 0) {
     var site = data.businesses[0];

@@ -5,7 +5,12 @@
     <g:if test="${clientSites.size() > 0}">
         <ul id="search_results">
             <g:each var="site" in="${clientSites}" status="c">
-                <li id="site_${site.id}">
+                <g:if test="${yelpReviews[c]}">
+                    <li id="site_${site.id}" revCount="${yelpReviews[c].reviewCount}" revStar="${yelpReviews[c].starUrl}">
+                </g:if>
+                <g:else>
+                    <li id="site_${site.id}">
+                </g:else>
                     <g:render template="/clientSite" model="['site':site, 'unitInfo':siteMoveInPrice[site.id]]"/>
                 </li>
             </g:each>

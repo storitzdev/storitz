@@ -11,6 +11,10 @@ import com.storitz.StoritzUtil
 import com.storitz.StorageUnit
 import com.storitz.StorageSite
 import storitz.constants.TruckType;
+import com.storitz.yelp.Yelp
+import com.storitz.yelp.YelpReview
+import java.text.SimpleDateFormat
+import grails.converters.JSON
 
 class SearchController {
 
@@ -29,6 +33,7 @@ class SearchController {
     def state
     def zip
     def geoType
+    def yelpReviews = []
 
     def index = {
       def queryTerm = params.where;
@@ -69,6 +74,7 @@ class SearchController {
         }
 
         searchResult = searchService.findClientSites(criteria);
+        genReviews(searchResult.sites);
 
         resultsModel['where'] = queryTerm
       }
@@ -85,7 +91,7 @@ class SearchController {
         redirect(controller: "collegeLanding", action: "listSites", params:resultsModel)
       }
 
-      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel]
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews]
       }
 
     def metro = {
@@ -124,13 +130,14 @@ class SearchController {
         criteria.city = seoDecodedCity;
         criteria.state = State.fromText(params.state);
         def searchResult = searchService.findClientSites(criteria);
+        genReviews(searchResult.sites);
 
         resultsModel['where']=queryTerm
-        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:], resultsModel: resultsModel]
+        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:], resultsModel: resultsModel, yelpReviews:yelpReviews]
     }
 
     def results = {
-        render template:"results", contentType: "text/html", model:[queryTerm:"blank", clientSites:[]]
+        render template:"results", contentType: "text/html", model:[queryTerm:"blank", clientSites:[], yelpReviews:yelpReviews]
     }
 
     // helper function
@@ -145,5 +152,26 @@ class SearchController {
       if (out['address']) address=out['address']
       if (out['type'])    geoType=out['type']
       return res
+    }
+
+    private genReviews(results) {
+      for (int i=0; i < results.size(); i++) {    //start the yelp request (local search)
+        Yelp yelp = Yelp.newInstance();
+        def request = yelp.search(results[i].lat, results[i].lng, "")
+        def searchResponse = JSON.parse(request)
+        def bizTotal = searchResponse.total
+        def newResponse
+        def review = 0
+
+        if (bizTotal > 0) {   //do a business search
+          def bizId = searchResponse.businesses[0].id
+          def bizRequest = yelp.search(results[i].lat, results[i].lng, bizId)
+          newResponse = JSON.parse(bizRequest)
+          review = new YelpReview()
+          review.reviewCount = newResponse.review_count
+          review.starUrl = newResponse.rating_img_url
+        }
+        yelpReviews[i] = review
+      }
     }
 }
