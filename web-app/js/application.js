@@ -734,6 +734,11 @@ function bindPickerFormHandler (target,picker,container,spinner) {
         if (form) {
             var scrollTop = $(window).scrollTop();
             var viewportHeight = $(window).height();
+            var parent = $(spinner).parent().get(0).tagName;
+            if (parent != "BODY") {
+              var spin = $(spinner).detach();
+              spin.appendTo('.college');
+            }
             $(container).fadeTo(0,.5);
             $(spinner).css('top',scrollTop+(viewportHeight/2)-10);
             $(spinner).show()

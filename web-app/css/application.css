@@ -2608,15 +2608,15 @@ li.review p.revExcerpt {
     display: none;
     position: absolute;
     width: 150px;
-    left: 580;
-    left-margin: -75px;
+    left: 580px;
+    margin-left: -75px;
     background: white;
 }
 #spinner .message {
     color: blue;
     font-weight: bold;
-    left-margin: 5px;
-    top-margin: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 body.thankyou {
