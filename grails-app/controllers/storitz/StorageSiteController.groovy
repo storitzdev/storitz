@@ -615,30 +615,6 @@ class StorageSiteController extends BaseTransactionController implements Applica
     renderTransactionPanel("/storageSite/rentMePanel")
   }
 
-
-  def yelpTest = {
-      Yelp yelp = Yelp.newInstance();
-      yelp.search(30.361471, -87.164326, "")
-
-    def idList = StorageSite.getAll();
-    def random = new Random();
-    int max = idList.size();
-    int counter = 0;
-    def siteList = [ ];
-    while (siteList.size() < 10) {
-      int temp = random.nextInt(max+1);
-      StorageSite site = idList[temp];
-      if (site && !site.disabled) {
-        siteList[counter] = site;
-        counter+=1;
-      }
-      else {
-        continue;
-      }
-    }
-    return [siteList: siteList];
-  }
-
   def directions = {
     StorageSite site = StorageSite.get(params.id)
 

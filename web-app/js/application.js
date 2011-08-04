@@ -718,16 +718,6 @@ function ie_reapply_styles() { //reapply styles to transaction panel.
   }
 }
 
-function procYelp(data, yelpRow) {
-  if (data.businesses.length > 0) {
-    var site = data.businesses[0];
-    $("."+yelpRow).append(site.id+", "+site.url+", "+site.review_count);
-  }
-  else {
-    $("."+yelpRow).append("Site has no reviews.");
-  }
-}
-
 function bindPickerFormHandler (target,picker,container,spinner) {
     var handler = function() {
         var form = document.getElementById(picker);
