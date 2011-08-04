@@ -24,7 +24,9 @@ try {
     def searchResponse = JSON.parse(request)
     def bizTotal = searchResponse.total
     def newResponse
-    def yelp_serp_url = "http://www.yelp.com/search?find_desc="+site.feed.operatorName.replaceAll(/\s/, "+")+"&ns=1&find_loc="+site.city.replaceAll(/\s/, "+")+"%2C+"+site.state.display
+    def operator = site.feed.operatorName.replaceAll(/([A-Z])/, /\+$1/)
+    def operatorName = operator.replaceFirst(/\+/, "").replaceAll(/\s/, "")
+    def yelp_serp_url = "http://www.yelp.com/search?find_desc="+operatorName.trim()+"&ns=1&find_loc="+site.city.replaceAll(/\s/, "+").trim()+"%2C+"+site.state.display.trim()
     if (bizTotal > 0) {
       def bizId = searchResponse.businesses[0].id
       def bizRequest = yelp.search(site.lat, site.lng, bizId)
@@ -34,17 +36,18 @@ try {
       def aveRating = ratingUrl[0][1]
       def isHalf = (ratingUrl[0][2])? ".5" : ""
       def yelp_detail_url = newResponse.url
-      printf("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \n", site.id, site.title, site.address, site.city, site.state.display, site.zipcode, numReviews, aveRating+isHalf, yelp_detail_url, yelp_serp_url)
+      printf("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \n", site.id, site.title.trim(), site.address.trim(), site.city.trim(), site.state.display.trim(), site.zipcode, numReviews, aveRating+isHalf, yelp_detail_url.trim(), yelp_serp_url.trim())
       counter += 1
     }
     else {
-      printf("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \n",site.id, site.title, site.address, site.city, site.state.display, site.zipcode, "--", "--", "--", yelp_serp_url);
+      printf("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \n", site.id, site.title.trim(), site.address.trim(), site.city.trim(), site.state.display.trim(), site.zipcode, "--", "--", "--", yelp_serp_url.trim());
       counter += 1;
     }
   }
   println("Job Complete.");
 }
 catch (Exception e) {
-  println("ERROR:")
+  println("ERROR:" + e)
+  println(e.stackTrace)
   e.printStackTrace()
 }
