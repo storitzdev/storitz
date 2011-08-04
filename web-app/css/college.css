@@ -143,12 +143,19 @@ a {
 
 a:link, a:visited { font-weight: normal; }
 
+body.serp.college #search_results {
+  width: 758px;
+}
+body.serp.college #search_results.map {
+  width: 351px;
+}
 body.serp.college #search_results .facility {
-  width: 218px;
+  width: 160px;
 }
 body.serp.college .results_container {
-  width: 758px;
+  width: auto;
   left: 190px;
+  margin-bottom: 0;
 }
 body.serp.college .results_container h2:first-child,
 body.serp.college #pickers div:first-child h2 {
