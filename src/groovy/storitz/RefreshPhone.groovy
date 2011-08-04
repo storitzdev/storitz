@@ -77,10 +77,10 @@ class RefreshPhone {
         //println(buf.toString())                 // test
 
         mailService.sendMail {
-              to        'tech@storitz.com'
-              from      'no-reply@storitz.com'
-              subject   subj.toString()
-              body      buf.toString()
+              to 'tech@storitz.com'
+              from 'no-reply@storitz.com'
+              subject subj.toString()
+              body buf.toString()
         }
 
     }

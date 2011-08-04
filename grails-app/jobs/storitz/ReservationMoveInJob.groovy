@@ -57,10 +57,12 @@ class ReservationMoveInJob {
       writer.flush()
       writer.close()
 
-      mailService.sendTextEmail(to: 'tech@storitz.com',
-        from: 'no-reply@storitz.com',
-        subject: subject,
-        body: buf.toString())
+      mailService.sendEmail {
+          to 'tech@storitz.com'
+          from 'no-reply@storitz.com'
+          subject subject
+          body buf.toString()
+        }
 
 */
   }

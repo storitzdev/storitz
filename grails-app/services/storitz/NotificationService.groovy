@@ -11,7 +11,7 @@ class NotificationService {
 
   def mailService
 
-  boolean transactional = false
+  static transactional = true
 
   def notify(NotificationEventType eventType, RentalTransaction rentalTransaction) {
 
@@ -147,47 +147,52 @@ class NotificationService {
         tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant reservation at ${rentalTransaction.site.title} - (Confirmation # ${rentalTransaction.idNumber} )"
         break
     }
+
+    //// TENANT
     try {
       mailService.sendMail {
-        to        rentalTransaction.contactPrimary.email
-        from      "no-response@storitz.com"
-        subject   operSubj
-        body      (model: model, view: tenantView)
-     }
+        to rentalTransaction.contactPrimary.email
+        from "no-response@storitz.com"
+        subject operSubj
+        body (model:model,view:tenantView)
+      }
     } catch (Exception e) {
       log.error("${e}", e)
     }
 
+    ///// ON-SITE MANAGERS
     try {
       mailService.sendMail {
-              to        siteManagerEmails.toArray()
-              from      "no-response@storitz.com"
-              subject   tenantSubj
-              body      (model: model, view: mgrView)
+              to siteManagerEmails.toArray()
+              from "no-response@storitz.com"
+              subject tenantSubj
+              body (model:model,view:mgrView)
       }
 
     } catch (Exception e) {
       log.error("${e}", e)
     }
 
+    ///// SITE OPERATORS
     try {
       def subj =  "EVENT - NEW TENANT ${tenantSubj}"
       mailService.sendMail {
-              to        operAcctEmails.toArray()
-              from      "no-response@storitz.com"
-              subject   subj.toString()
-              body      (model: model, view: operView)
+              to operAcctEmails.toArray()
+              from "no-response@storitz.com"
+              subject subj.toString()
+              body (model:model,view:operView)
       }
     } catch (Exception e) {
       log.error("${e}", e)
     }
 
+    ///// US
     try {
       mailService.sendMail {
-              to        "notifications@storitz.com"
-              from      "no-response@storitz.com"
-              subject   tenantSubj
-              body      (model: model,view: operView)
+              to "notifications@storitz.com"
+              from "no-response@storitz.com"
+              subject tenantSubj
+              body (model:model,view:operView)
       }
     } catch (Exception e) {
       log.error("${e}", e)
@@ -216,10 +221,10 @@ class NotificationService {
 
     try {
       mailService.sendMail {
-              to        operAcctEmails.toArray()
-              from      "no-response@storitz.com"
-              subject   "EVENT - ACH Transfer "
-              body      (model: model, view: "/notifications/achOperMgr")
+              to operAcctEmails.toArray()
+              from "no-response@storitz.com"
+              subject "EVENT - ACH Transfer "
+              body (model:model, view:"/notifications/achOperMgr")
       }
     } catch (Exception e) {
       log.error("${e}", e)

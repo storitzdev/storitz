@@ -116,10 +116,10 @@ class NachaService {
     String title = "Storitz - NACHA file generated ${settlementDate}-${dayCount}"
 
     mailService.sendMail {
-            to        'wells@storitz.com'
-            from      'no-reply@storitz.com'
-            subject   title
-            body      bdy
+            to 'wells@storitz.com'
+            from 'no-reply@storitz.com'
+            subject title
+            body bdy
     }
 
   }

@@ -21,6 +21,8 @@ class RentalTransactionController extends BaseTransactionController {
   def mailService
   def offerFilterService
 
+  static transactional = true
+
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", pay: ["POST", "GET"]]
 
   static Map liveSessions = [:]
@@ -353,17 +355,17 @@ class RentalTransactionController extends BaseTransactionController {
     }
   }
 
-  private emailMoveInProblemReportToTechTeam(String subject, RentalTransaction rentalTransactionInstance) {
+  private emailMoveInProblemReportToTechTeam(String subjt, RentalTransaction rentalTransactionInstance) {
     try {
       int transID = rentalTransactionInstance.id
       int unitID = rentalTransactionInstance.unitId
       String bdy = "rentalTransactionInstance.id:"+transID+"\nrentalTransactionInstance.unitId:"+unitID+"\n"
-      def subj = "${grails.util.Environment.getCurrent().toString()} : ${subject}"
+      def subj = "${grails.util.Environment.getCurrent().toString()} : ${subjt}"
       mailService.sendMail {
-        to        'tech@storitz.com'
-        from      'no-reply@storitz.com'
-        subject   subj.toString()
-        body      bdy
+        to 'tech@storitz.com'
+        from 'no-reply@storitz.com'
+        subject subj.toString()
+        body bdy
       }
     } catch (Throwable t) {
         t.printStackTrace()

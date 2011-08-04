@@ -696,10 +696,10 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         bdy.append("\n </Authorize>")
 
         getMailService().sendMail {
-          to        "notifications@storitz.com"
-          from      "no-reply@storitz.com"
-          subject   "DOMICO - failed move-in"
-          body      bdy.toString()
+          to "notifications@storitz.com"
+          from "no-reply@storitz.com"
+          subject "DOMICO - failed move-in"
+          body bdy.toString()
         }
       }
 

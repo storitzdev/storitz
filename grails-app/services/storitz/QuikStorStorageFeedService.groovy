@@ -738,10 +738,10 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         try {
           String bdy = "Rental Transaction ID:${trans.id}\n\nQuikStor calculated total=${totalMoveInCost}\nStoritz calculated total=${trans.moveInCost}\nInsurance premium=${trans.insuranceCost}\n\nError Message: ${errorMessage}"
           getMailService().sendMail {
-                  to        "notifications@storitz.com"
-                  from      "no-reply@storitz.com"
-                  subject   "QUIKSTOR - failed move-in"
-                  body      bdy
+                  to "notifications@storitz.com"
+                  from "no-reply@storitz.com"
+                  subject "QUIKSTOR - failed move-in"
+                  body bdy
           }
         } catch (Exception e) {
           log.error("${e}", e)

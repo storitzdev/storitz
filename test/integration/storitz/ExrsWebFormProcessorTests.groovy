@@ -84,7 +84,7 @@ class ExrsWebFormProcessorTests extends GroovyTestCase {
 //    }
 
     def sendEmail(message) {
-        MailService ms = new MailService()
+      MailService ms = new MailService()
         ms.sendMail {
             to          "tech@storitz.com"
             from        "no-reply@storitz.com"

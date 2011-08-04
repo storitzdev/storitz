@@ -408,10 +408,10 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("body: ${body1}")
 
     getMailService().sendMail {
-            to        'exrs@storitz.com'
-            from      'no-reply@storitz.com'
-            subject   title
-            body      body1
+            to 'exrs@storitz.com'
+            from 'no-reply@storitz.com'
+            subject title
+            body body1
     }
 
     ////////////////////////////////
@@ -448,11 +448,11 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     println("body: ${body2}")
 
     getMailService().sendMail {
-            to        'exrs@storitz.com'
-            from      'no-reply@storitz.com'
-            subject   title2
-            body      body2
-  }
+            to 'exrs@storitz.com'
+            from 'no-reply@storitz.com'
+            subject title2
+            body body2
+    }
 
 //    trans.save(flush: true)
 
@@ -481,11 +481,11 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
             println("body: ${exrsWebFormProcessor.logBuf}")
 
             getMailService().sendMail {
-                to        "tech@storitz.com"
-                from      "no-reply@storitz.com"
-                subject   "EXRS Automatic Move-In Log"
-                body      exrsWebFormProcessor.logBuf
-          }
+                to "tech@storitz.com"
+                from "no-reply@storitz.com"
+                subject "EXRS Automatic Move-In Log"
+                body exrsWebFormProcessor.logBuf
+            }
         }
 
         return success;

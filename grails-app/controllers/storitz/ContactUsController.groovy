@@ -41,11 +41,11 @@ class ContactUsController {
 
       try {
         mailService.sendMail {
-                to        toField
-                from      fromField
-                subject   subj
-                body      message
-        }
+                to toField
+                from fromField
+                subject subj
+                body message
+      }
 
       } catch (Exception e) {
         log.error("${e}", e)
@@ -141,11 +141,11 @@ class ContactUsController {
 
     try {
       mailService.sendMail {
-              to        toField
-              from      fromField
-              subject   subj
-              body      message
-      }
+              to toField
+              from fromField
+              subject subj
+              body message
+    }
     } catch (Exception e) {
       log.error("${e}", e)
     }

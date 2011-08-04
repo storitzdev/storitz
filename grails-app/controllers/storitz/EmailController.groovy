@@ -27,22 +27,22 @@ class EmailController {
 
     try {
       mailService.sendMail {
-              to      "charlie@storitz.com"
-              from    "no-response@storitz.com"
+              to "charlie@storitz.com"
+              from "no-response@storitz.com"
               subject "New Storitz Move-In"
-              body    (model: [transactionId: 1234
-                            ,siteName: "Test site"
-                            ,unitNumber: "445A"
-                            ,moveInDate: "10/1/10"
-                            ,rentalRate: "\$99.00"
-                            ,paidThruDate: "11/1/1"
-                            ,promoName: "\$1 Move-In"
-                            ,paymentTotal: "\$119.00"
-                            ,tenantName: "John Doe"
-                            ,phone: "310-555-1212"
-                            ,email: "jdoe@gmail.com"]
-                      ,view: "/notifications/test")
-      }
+              body (model:[transactionId: 1234
+                       ,siteName: "Test site"
+                       ,unitNumber: "445A"
+                       ,moveInDate: "10/1/10"
+                       ,rentalRate: "\$99.00"
+                       ,paidThruDate: "11/1/1"
+                       ,promoName: "\$1 Move-In"
+                       ,paymentTotal: "\$119.00"
+                       ,tenantName: "John Doe"
+                       ,phone: "310-555-1212"
+                       ,email: "jdoe@gmail.com"]
+               ,view:"/notifications/test")
+       }
     } catch (Exception e) {
       log.error("${e}", e)
       flash.message = "Mail not sent: ${e}"

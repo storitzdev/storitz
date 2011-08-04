@@ -46,11 +46,11 @@ class StoritzGroovyUtil {
       try {
         def mailService = new MailService()
         mailService.sendMail {
-            to        "tech@storitz.com"
-            from      "no-reply@storitz.com"
-            subject   subj
-            body      bdy
-        }
+            to "tech@storitz.com"
+            from "no-reply@storitz.com"
+            subject subj
+            body bdy
+      }
       }
       catch (Exception e) {
         println "ERROR sending email!"

@@ -1448,10 +1448,10 @@ TODO - evaluate whether we need this going forward
 
       try {
         getMailService().sendMail {
-                to        "notifications@storitz.com"
-                from      "no-reply@storitz.com"
-                subject   "SITELINK - failed move-in"
-                body      bdy
+                to "notifications@storitz.com"
+                from "no-reply@storitz.com"
+                subject "SITELINK - failed move-in"
+                body bdy
         }
       } catch (Exception e) {
         log.error("${e}", e)
@@ -1495,11 +1495,11 @@ TODO - evaluate whether we need this going forward
 //      rentalTransaction.save(flush: true)
 
       def siteLink = (SiteLink) rentalTransaction.site.feed
-      def subject = "New Storitz Reservation: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
-      def body = "You have a new Storitz reservation on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")} for Unit ${rentalTransaction.feedUnitNumber}.  When the customer, ${rentalTransaction.contactPrimary.fullName()} arrives on their move-in date, just search for them in the tenant list to pull up their account info and complete the move-in process."
+      def subj = "New Storitz Reservation: ${rentalTransaction.contactPrimary.lastName}, ${rentalTransaction.contactPrimary.firstName} move in on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")}"
+      def bdy = "You have a new Storitz reservation on ${rentalTransaction.moveInDate.format("MM/dd/yyyy")} for Unit ${rentalTransaction.feedUnitNumber}.  When the customer, ${rentalTransaction.contactPrimary.fullName()} arrives on their move-in date, just search for them in the tenant list to pull up their account info and complete the move-in process."
       // insert into bulletin board
       bulletinBoardInsert(siteLink.corpCode, rentalTransaction.site.sourceLoc, siteLink.userName,
-              siteLink.password, subject, body)
+              siteLink.password, subj, bdy)
 
       if (site.rentalFee && site.rentalFee > 0) {
         // add payment into SiteLink but in test mode so they do not run the card
@@ -1518,20 +1518,18 @@ TODO - evaluate whether we need this going forward
         }
         if (paymentResult != 1) {
           def paymentBody = getReservationPaymentPayload(rentalTransaction)
-          try {
-            getMailService().sendMail {
-                    to        "notifications@storitz.com"
-                    from      "no-reply@storitz.com"
-                    subject   "SITELINK - failed reservation payment"
-                    body      paymentBody
-            }
+           try {
+           getMailService().sendMail {
+                    to "notifications@storitz.com"
+                    from "no-reply@storitz.com"
+                    subject "SITELINK - failed reservation payment"
+                    body paymentBody.toString()
+           }
           } catch (Exception e) {
             log.error("${e}", e)
           }
-
         }
       }
-      
     } else {
       def bdy = getMoveInPayload(rentalTransaction)
       moveInResult = new Date().format('yyyyMMdd') + sprintf('%08d', rentalTransaction.id)
@@ -1540,10 +1538,10 @@ TODO - evaluate whether we need this going forward
 
       try {
         getMailService().sendMail {
-                to          "notifications@storitz.com"
-                from        "no-reply@storitz.com"
-                subject     "SITELINK - failed reservation"
-                body        bdy
+                to "notifications@storitz.com"
+                from "no-reply@storitz.com"
+                subject "SITELINK - failed reservation"
+                body bdy
         }
       } catch (Exception e) {
         log.error("${e}", e)

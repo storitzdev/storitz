@@ -61,10 +61,10 @@ class BalkNotificationJob {
     try {
       def subj = "${grails.util.Environment.getCurrent().toString()} Balk Notification"
       mailService.sendMail {
-          to        "balk@storitz.com"
-          from      "no-reply@storitz.com"
-          subject   subj.toString()
-          body      bdy.toString()
+          to "balk@storitz.com"
+          from "no-reply@storitz.com"
+          subject subj.toString()
+          body bdy.toString()
       }
     } catch (Throwable t) {
       t.printStackTrace()
@@ -112,18 +112,18 @@ class BalkNotificationJob {
 
     try {
       mailService.sendMail {
-          to        trans.contactPrimary.email
-          from      "gsingletary@storitz.com"
-          subject   "Thanks for visiting Storitz!"
-          body      bdy.toString()
-      }
+          to trans.contactPrimary.email
+          from "gsingletary@storitz.com"
+          subject "Thanks for visiting Storitz!"
+          body bdy.toString()
+    }
       // CC us too
       mailService.sendMail {
-          to        "balk@storitz.com"
-          from      "gsingletary@storitz.com"
-          subject   "Thanks for visiting Storitz!"
-          body      bdy.toString()
-      }
+          to "balk@storitz.com"
+          from "gsingletary@storitz.com"
+          subject "Thanks for visiting Storitz!"
+          body bdy.toString()
+    }
     } catch (Throwable t) {
       t.printStackTrace()
     }
