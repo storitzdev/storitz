@@ -318,6 +318,7 @@ var _map = function() {
             $("#search_result_labels").removeClass("map");
             $("#big_map_canvas").removeClass("visible");
             $("body.serp").css('width', '960px');   //2
+            $("body.college").css('width', '947px');
             $("#big_map_canvas").css('width', '546px'); //3
             $("body.serp .results_container").removeClass('map_view'); //1
             $(".map_container").hide() //4
@@ -673,12 +674,14 @@ function initialize_serp() {
   $(".toggle_map_view").click(function() {
       if ($("#search_results").hasClass("map")) {
           _map.listify();
+          $("body.serp.college .results_container").css('width', 'none')
           if ($.browser.msie && (resHeight < pickHeight)) {
             $("div#footer").css("margin-top", pickHeight - resHeight + 10);
           }
       }
       else {
           _map.mapify();
+          $("body.serp.college .results_container").css('width', 'auto')
           if ($.browser.msie) {
             $("div#footer").css("margin-top", 0);
           }

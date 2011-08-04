@@ -152,8 +152,10 @@ body.serp.college #search_results.map {
 body.serp.college #search_results .facility {
   width: 160px;
 }
+body.serp.college .map_view {
+  height: 703px;
+}
 body.serp.college .results_container {
-  width: auto;
   left: 190px;
   margin-bottom: 0;
 }
