@@ -171,7 +171,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
 
     def subTotal
     def rentTotal
-    def discountRate
+    def monthOneProRate
     def durationDays
     BigDecimal insuranceCost = 0
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
@@ -180,12 +180,12 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
       insuranceCost = StoritzUtil.roundToMoney(premium * durationMonths)
       rentTotal = StoritzUtil.roundToMoney(rate * durationMonths)
       subTotal = rentTotal + insuranceCost
-      discountRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
+      monthOneProRate = rate * (((lastDayInMonth - moveInDay) + 1) / lastDayInMonth)
     } else {
       insuranceCost = (premium * durationMonths)
       rentTotal = (rate * durationMonths)
       subTotal = rentTotal + insuranceCost
-      discountRate = rate
+      monthOneProRate = rate // no pro-rate
       durationDays = 0
     }
 
@@ -200,7 +200,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
 
         case "PERCENT_OFF":
           if (promo.inMonth == 1 && !promo.prepay) {
-            offerDiscount = (promo.promoQty / 100.0) * (discountRate + (promo.expireMonth - 1) * rate);
+            offerDiscount = (promo.promoQty / 100.0) * (monthOneProRate + (promo.expireMonth - 1) * rate);
           } else {
             offerDiscount = (promo.promoQty / 100.0) * (promo.expireMonth) * rate;
           }
@@ -208,7 +208,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
 
         case "FIXED_RATE":
           if (promo.inMonth == 1 && promo.prepayMonths == 1) {
-            offerDiscount = ((discountRate - promo.promoQty) > 0 ? (discountRate - promo.promoQty) : 0) * promo.expireMonth;
+            offerDiscount = ((monthOneProRate - promo.promoQty) > 0 ? (monthOneProRate - promo.promoQty) : 0) * promo.expireMonth;
           } else {
             offerDiscount = ((rate - promo.promoQty) > 0 ? (rate - promo.promoQty) : 0) * promo.expireMonth;
           }

@@ -4,17 +4,13 @@ import storitz.constants.TopMetro;
 import storitz.constants.State;
 import com.storitz.GeoLookup;
 import storitz.constants.SearchType;
-import com.storitz.Insurance;
 import storitz.constants.QueryMode
 import storitz.constants.GeoType
 import com.storitz.StoritzUtil
-import com.storitz.StorageUnit
-import com.storitz.StorageSite
-import storitz.constants.TruckType;
 import com.storitz.yelp.Yelp
 import com.storitz.yelp.YelpReview
-import java.text.SimpleDateFormat
 import grails.converters.JSON
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class SearchController {
 
@@ -24,7 +20,7 @@ class SearchController {
     def unitSize
     def unitType
     def amenities
-    def resultsModel = ['controller':'search' , 'action':'index', 'name':'picker']
+    def resultsModel = ['action':"${ConfigurationHolder.config.grails.serverURL}/search"]
 
     double lat
     double lng
@@ -34,6 +30,7 @@ class SearchController {
     def zip
     def geoType
     def yelpReviews = []
+    def topSearchAction = resultsModel['action']
 
     def index = {
       def queryTerm = params.where;
@@ -83,15 +80,7 @@ class SearchController {
         searchResult = [sites:[], moveInPrices:[:]]
       }
 
-      // If the user is on a college landing page, and they decide to search
-      // using the top search bar, they will end up here. Make sure they
-      // are redirected back to the correct college page.
-      if (params.collegeName) {
-        resultsModel['collegeName'] = params.collegeName
-        redirect(controller: "collegeLanding", action: "listSites", params:resultsModel)
-      }
-
-      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews]
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews, action:topSearchAction]
       }
 
     def metro = {
@@ -133,7 +122,7 @@ class SearchController {
         genReviews(searchResult.sites);
 
         resultsModel['where']=queryTerm
-        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:], resultsModel: resultsModel, yelpReviews:yelpReviews]
+        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:], resultsModel: resultsModel, yelpReviews:yelpReviews, action:topSearchAction]
     }
 
     def results = {

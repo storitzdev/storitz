@@ -6,6 +6,7 @@ import storitz.constants.SearchType
 import com.storitz.UserRole
 import com.storitz.User
 import storitz.constants.QueryMode
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class CollegeLandingController extends SearchController  {
 
@@ -16,7 +17,8 @@ class CollegeLandingController extends SearchController  {
   def unitSize
   def unitType
   def amenities
-  def resultsModel = ['controller':'collegeLanding' , 'action':'listSites', 'name':'picker']
+  def resultsModel = [:]
+  def topSearchAction
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -29,22 +31,19 @@ class CollegeLandingController extends SearchController  {
     }
 
     // display storage sites near campus
-    def title = null
-    def college = null
+    def college = findCollege(params.college)
 
     // initial load
-    if (params.college) {
-      college = findCollege(params.college)
-      params.address = college.address
+    if (!params.where) {
+      resultsModel['where'] = params.address = college.address
+      queryTerm = college.displayName
     }
-    // subsequent load
+    // subsequent load (via picker or search)
     else {
-      params.college = params.collegeName
-      college = findCollege(params.college)
-      params.address = params.where
+      resultsModel['where'] = params.address = params.where
     }
 
-    title = "Find Summer Self Storage near ${college.displayName} - Best Price Guaranteed on Storitz"
+    def title = "Find Summer Self Storage near ${college.displayName} - Best Price Guaranteed on Storitz"
 
     def geoResult
 
@@ -94,9 +93,17 @@ class CollegeLandingController extends SearchController  {
     def searchResult = searchService.findClientSites(criteria)
     genReviews(searchResult.sites);
 
-    resultsModel['collegeName'] = "${params.college}"
-    resultsModel['where'] = queryTerm = "${params.address}"
-    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews]
+    // Display college name when using pickers unless the user is engaged with
+    // a manual search.
+    if (params.form_name == 'picker')
+      queryTerm = (params.where == college.address) ? college.displayName : params.where
+
+    // Always display search field when using search.
+    if (params.form_name == 'search')
+      queryTerm = "${params.where}"
+
+    topSearchAction = resultsModel['action'] = "${ConfigurationHolder.config.grails.serverURL}/college/${college.name}"
+    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews, action:topSearchAction]
   }
 
   def storageTips = {

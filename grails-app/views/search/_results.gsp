@@ -11,12 +11,12 @@
     </script>
 </p:dependantJavascript>
 
-<g:form controller="${controller}" action="${action}" name="${name}" method="get">
+<form action="${action}" name="picker" id="picker" method="get">
     <input type="hidden" name="where" id="where" value="${where}" />
     <input type="hidden" name="view-mode" id="view-mode" value="" />
-    <input class="text" type="hidden" name="collegeName" value="${college?.name}" />
+    <input type="hidden" name="form_name" id="form_name" value="picker" />
     <g:render template="/search/results1" />
-</g:form>
+</form>
 <g:render template="/search/results2" />
 
 
