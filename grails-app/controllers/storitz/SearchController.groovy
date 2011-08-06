@@ -30,7 +30,6 @@ class SearchController {
     def zip
     def geoType
     def yelpReviews = []
-    def topSearchAction = resultsModel['action']
 
     def index = {
       def queryTerm = params.where;
@@ -80,7 +79,7 @@ class SearchController {
         searchResult = [sites:[], moveInPrices:[:]]
       }
 
-      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews, action:topSearchAction]
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews]
       }
 
     def metro = {
@@ -122,7 +121,7 @@ class SearchController {
         genReviews(searchResult.sites);
 
         resultsModel['where']=queryTerm
-        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:], resultsModel: resultsModel, yelpReviews:yelpReviews, action:topSearchAction]
+        [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: '', unitType: null, amenities: [:], resultsModel: resultsModel, yelpReviews:yelpReviews]
     }
 
     def results = {

@@ -18,7 +18,6 @@ class CollegeLandingController extends SearchController  {
   def unitType
   def amenities
   def resultsModel = [:]
-  def topSearchAction
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -102,8 +101,8 @@ class CollegeLandingController extends SearchController  {
     if (params.form_name == 'search')
       queryTerm = "${params.where}"
 
-    topSearchAction = resultsModel['action'] = "${ConfigurationHolder.config.grails.serverURL}/college/${college.name}"
-    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews, action:topSearchAction]
+    resultsModel['action'] = "${ConfigurationHolder.config.grails.serverURL}/college/${college.name}"
+    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews]
   }
 
   def storageTips = {

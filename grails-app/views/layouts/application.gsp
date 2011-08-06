@@ -22,8 +22,7 @@
                 <g:link controller="home" action="index"></g:link>
             </span>
             <g:form class="search" controller="search" action="index" name="search" id="search" method="get">
-            <!-- form class="search" action="${action}" name="search" id="search" method="get" -->
-                <fieldset>
+                 <fieldset>
                     <label>Find self storage:</label>
                     <g:if test="${queryTerm}">
                       <input class="text" type="text" name="where" value="${queryTerm}" placeholder="Enter address, zip code, or city &amp; state"/>
@@ -32,9 +31,7 @@
                       <input class="text" type="text" name="where" placeholder="Enter address, zip code, or city &amp; state"/>
                     </g:else>
                     <input id="search_button" type="submit" name="btn" value="Search" />
-                    <!-- input type="hidden" name="form_name" id="form_name" value="search" /-->
                 </fieldset>
-            <!-- /form -->
             </g:form>
             <div id="phone_support">
                 <strong>Need assistance?</strong>
