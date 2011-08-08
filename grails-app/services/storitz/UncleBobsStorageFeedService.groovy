@@ -432,7 +432,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     def specialOffer = site.specialOffers.find { it.code == code}
     if (!specialOffer) {
       specialOffer = new SpecialOffer()
-      specialOffer.expireMonth  = 1
+      specialOffer.expireMonth  = 0
       specialOffer.prepayMonths = 0
       specialOffer.code         = code
       site.addToSpecialOffers(specialOffer)

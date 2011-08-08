@@ -65,7 +65,7 @@
         <td class="numeric"><g:formatNumber number="${unit.bestUnitPrice}" type="currency" currencyCode="USD" /></td>
         <td class="numeric last"><g:formatNumber number="${totals.getRentTotal()}" type="currency" currencyCode="USD" /></td>
       </tr>
-      <g:if test="${promo != null}">
+      <g:if test="${promo != null && totals.getDiscountTotal() != 0}">
         <tr>
           <td class="item">${promo.promoName}</td>
           <td>${promo.expireMonth}mo</td>

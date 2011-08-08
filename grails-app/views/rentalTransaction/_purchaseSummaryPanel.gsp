@@ -72,7 +72,7 @@
             <td class="numeric"><g:formatNumber number="${rentalTransactionInstance.monthlyRate}" type="currency" currencyCode="USD" /></td>
             <td class="numeric"><g:formatNumber number="${rentalTransactionInstance.durationMonths * rentalTransactionInstance.monthlyRate}" type="currency" currencyCode="USD" /></td>
         </tr>
-        <g:if test="${promo != null}">
+        <g:if test="${promo != null && totals.getDiscountTotal() != 0}">
         <tr>
             <td class="item">${promo.promoName}</td>
             <td>${promo.expireMonth} mos</td>
