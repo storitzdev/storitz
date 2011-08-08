@@ -550,7 +550,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
     }
 
     // We're passing in bestUnit parameter now. If that's available then try to use it
-    def bestUnit
+    def bestUnit = null;
     if (params.bestUnit) {
         bestUnit = StorageUnit.findById(params.bestUnit)
     }
@@ -597,8 +597,26 @@ class StorageSiteController extends BaseTransactionController implements Applica
       }
     }
     def moveInDate = new Date();
-    def promo = params.promoId ? SpecialOffer.get(params.promoId as Long) : null;
+    def promo = null;
     def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
+    if (params.promoId) {
+      promo = SpecialOffer.get(params.promoId as Long);
+    }
+    else if (bestUnit) {
+      // TODO: More $#@! copy/paste ... refactor best-promo calculation out into a method of StorageSite
+      if (promos) {
+        BigDecimal lowestMoveInCost = Integer.MAX_VALUE;
+        BigDecimal currentMoveInCost;
+        for (p in promos) {
+          if (!(p.promoName ==~ /(?i).*(military|senior).*/)) {
+            currentMoveInCost = costService.calculateTotals(site, bestUnit, p, insurance, moveInDate)['moveInTotal']
+            if (currentMoveInCost < lowestMoveInCost) {
+              promo = p
+            }
+          }
+        }
+      }
+    }
     promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
     def totals = costService.calculateTotals(site, bestUnit, promo, insurance, moveInDate);
     def xid = UUID.randomUUID().toString().toUpperCase()
