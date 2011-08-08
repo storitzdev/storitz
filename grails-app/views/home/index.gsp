@@ -16,6 +16,14 @@
     <h1>
         <span class="first-child">Simplify your search for self storage.</span>
     </h1>
+    <div class="socialButtons">
+        ${"<g:plusone size='medium'></g:plusone>"}
+        <div id="fb-root">
+        <!-- the script is in here in order for it to work on IE -->
+        <script src="http://connect.facebook.net/en_US/all.js#appId=184263671639621&amp;xfbml=1"></script>
+        ${"<fb:like href='http://www.storitz.com' send='false' layout='button_count' width='90' show_faces='false' font=''></fb:like>"}
+        </div>
+    </div>
     <div id="coverphoto">
         <g:form controller="search" action="index" name="search" id="search" method="get">
             <fieldset class="basic">
@@ -175,6 +183,11 @@
   $(document).ready(function() {
     initialize_splash();
   });
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
   //]]>
 </script>
 </p:dependantJavascript>

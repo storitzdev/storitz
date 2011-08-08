@@ -128,7 +128,18 @@ strong {
   margin-bottom: 2px;
   margin-top: 7px;
 }
-
+#bigbox div.socialButtons {
+  display: inline-block;
+  width: 155px;
+  float: right;
+  padding-top: 13px;
+}
+#bigbox div.socialButtons #fb-root {
+  display: inline-block;
+  position: absolute;
+  left: 880px;
+  top: 13px;
+}
 #coverphoto {
   height: 225px;
   background: url(../images/v2/home/backgrounds/bigbox.jpg) no-repeat;
@@ -734,7 +745,7 @@ input#otherSoftware {
   height: 20px;
   font-size: 11px;
   font-family: Helvetica;
-  color: #ccc;
+  color: #686868;
   padding-top: 10px;
   width: 960px;
   text-align: center;
@@ -742,9 +753,14 @@ input#otherSoftware {
 }
 
 #footer a {
-  color: #ccc;
+  color: #686868;
   text-decoration: none;
   margin-left: 10px;
+}
+
+#footer a.operators {
+  color: #505050;
+  font-weight: bold;
 }
 
 #footer a.piped:before {

@@ -4,6 +4,6 @@
     <g:link controller="static" action="terms" class="piped">Terms</g:link>
     <g:link controller="static" action="privacy" class="piped">Privacy Policy</g:link>
     <g:link controller="static" action="customerservice" class="piped"> Customer Service</g:link>
-    <g:link controller="static" action="operatorsignup" class="piped">Facility Operators</g:link>
+    <g:link controller="static" action="operatorsignup" class="piped operators">Facility Operators</g:link>
 </div>
 <p:javascript src="all" />
