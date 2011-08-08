@@ -5,7 +5,9 @@
         <g:set var="entityName" value="${message(code: 'collegeLanding.label', default: 'CollegeLanding')}" />
         <g:set var="title" value="Create College Landing Page" scope="request"/>
     </head>
-    <body id="body">
+    <body>
+    <div id="body">
+        <div class="stcontent">
         <div class="buttons">
             <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
             <span class="button"><g:link action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
@@ -110,5 +112,7 @@
                 </div>
             </g:form>
         </div>
+       </div>
+    </div>
     </body>
 </html>

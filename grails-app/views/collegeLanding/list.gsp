@@ -5,11 +5,14 @@
         <g:set var="entityName" value="${message(code: 'collegeLanding.label', default: 'CollegeLanding')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
-    <body id="body">
+   <body>
+   <div id="body">
+   <div class="stcontent">
    <div class="buttons">
         <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
         <span class="button"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
     </div>
+
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -53,5 +56,7 @@
                 <g:paginate total="${collegeLandingInstanceTotal}" />
             </div>
         </div>
+    </div>
+   </div>
     </body>
 </html>

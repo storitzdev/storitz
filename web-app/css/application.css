@@ -3014,4 +3014,76 @@ body.yelp_test table td {
   border: 1px solid blue;
   height: 15px;
 }
-
+/* temporary Admin page styling */
+#body div.stcontent ul li {
+  padding: 3px 0;
+}
+#body div.stcontent ul ul li{
+  list-style: disc;
+  padding: 3px 0;
+  margin-left: 30px;
+}
+#body div.stcontent .buttons {
+  padding-bottom: 10px;
+}
+#body div.stcontent span.button {
+  margin-right: 5px;
+  background: #3EA307;
+}
+#body div.stcontent span.button a {
+  font-weight: bold;
+}
+#body div.stcontent form {
+  padding: 10px 0;
+}
+#body div.stcontent .dialog table {
+  width: 500px;
+}
+.dialog table td.name {
+  width: 15%;
+  vertical-align: middle;
+}
+#body div.stcontent form span.button {
+  padding-left: 0;
+  padding-right: 0;
+}
+#body div.stcontent form input[type=submit] {
+  border: none;
+  background: #3EA307;
+  cursor: pointer;
+}
+#body div.stcontent div.list table{
+  width: 940px;
+  border: solid 1px black;
+}
+#body div.stcontent div.list table th {
+  text-align: center;
+  height: 20px;
+  font-weight: bold;
+  border: 1px solid black;
+}
+#body div.stcontent div.list table tbody tr.odd {
+  background-color: #e8e8e8;
+}
+#body div.stcontent div.list table tbody td {
+  text-align: center;
+  border: 1px solid black;
+  height: 17px;
+}
+#body div.stcontent div.paginateButtons {
+  padding-top: 10px;
+}
+#body div.stcontent div.paginateButtons a,
+#body div.stcontent div.paginateButtons span {
+  margin-right: 3px;
+}
+#body div.stcontent div.nav span.menuButton {
+  display: inline-block;
+  padding: 5px 7px;
+  background: #3EA307;
+  border-radius: 5px;
+}
+#body div.stcontent div.nav span.menuButton a {
+  color: black;
+  text-decoration: none;
+}

@@ -5,7 +5,9 @@
          <g:set var="entityName" value="${message(code: 'organizerContest.label', default: 'OrganizerContest')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
-    <body id="body">
+    <body>
+    <div id="body">
+        <div class="stcontent">
     <div class="buttons">
         <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
 
@@ -94,5 +96,7 @@
                 <g:paginate total="${organizerContestInstanceTotal}" />
             </div>
         </div>
+       </div>
+    </div>
     </body>
 </html>
