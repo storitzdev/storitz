@@ -25,8 +25,6 @@ class RentalTransactionController extends BaseTransactionController {
 
   static allowedMethods = [save: "POST", update: "POST", delete: "POST", pay: ["POST", "GET"]]
 
-  static Map liveSessions = [:]
-
   def index = {
     redirect(action: "list", params: params)
   }
@@ -38,49 +36,6 @@ class RentalTransactionController extends BaseTransactionController {
 
   def bookingSummaryPanel = {
     renderTransactionPanel("/rentalTransaction/bookingSummaryPanel")
-  }
-
-  void updateSessions(params) {
-    def site, searchSize, address, date, page, searchType, unitType, shortSessionId;
-    /*
-    def site = params.site
-    params.remove('site')
-    def searchSize = params.SC_searchSize
-    params.remove('SC_searchSize')
-    def address = params.SC_address
-    params.remove('SC_address')
-    def date = params.SC_date
-    params.remove('SC_date')
-    def page = params.SC_page
-    params.remove('SC_page')
-    def searchType = params.SC_searchType
-    params.remove('SC_searchType')
-    if (!searchType) {
-      searchType = SearchType.STORAGE
-    }
-    def unitType = params.chosenUnitType
-
-    def rentalTransactionInstance
-    if (page == 'payment') {
-      def c = RentalTransaction.createCriteria()
-      rentalTransactionInstance = c.get {
-        eq("id", params.rentalTransactionId as Long)
-        fetchMode('contactPrimary', FM.EAGER)
-        fetchMode('site', FM.EAGER)
-      }
-    } else {
-      rentalTransactionInstance = new RentalTransaction(params)
-    }
-
-    def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: params.id, unitType: unitType, site: site,
-            searchSize: searchSize, address: address, date: date, page: page, searchType: searchType,
-            rentalTransaction: rentalTransactionInstance, landingCookie: params.landingCookie]
-     */
-    def callParams = [timestamp: System.currentTimeMillis(), shortSessionId: shortSessionId, unitType: unitType, site: site,
-            searchSize: searchSize, address: address, date: date, page: page, searchType: searchType,
-            rentalTransaction: rentalTransactionInstance, landingCookie: params.landingCookie]
-
-    liveSessions[params.id] = callParams
   }
 
   def redirectIfBackButtonIsPressedAfterTransactionIsComplete (params) {
