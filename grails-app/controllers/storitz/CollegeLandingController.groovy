@@ -32,6 +32,10 @@ class CollegeLandingController extends SearchController  {
     // display storage sites near campus
     def college = findCollege(params.college)
 
+    if (!college) {
+      redirect(controller: "search", action: "index", params:[where:params.college])
+    }
+
     // initial load
     if (!params.where) {
       resultsModel['where'] = params.address = college.address
