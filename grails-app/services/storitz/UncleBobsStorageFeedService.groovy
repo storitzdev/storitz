@@ -493,11 +493,11 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     // "humidity controlled"              // yes
     // "humidity/climate controlled"      // yes
 
-    String climate = space_climate;
-    if (climate.equalsIgnoreCase("non-climate controlled")) {
-      return false
+    String climate = space_climate.toLowerCase();
+    if (climate.indexOf("non-climate")) {
+      return false;
     }
-    return true
+    return climate.indexOf("climate") > -1;
   }
 
   private bestGuessUnitType (space_floor, space_access) {
