@@ -189,8 +189,13 @@
                         jwplayer("videoContainer").setup({
                                     flashplayer: "${resource(file:'/jwplayer/player.swf')}",
                                     skin: "${resource(file:'/jwplayer/stijl.zip')}",
+                                    <g:if test="${video.useYouTube}">
+                                    file: "http://www.youtube.com/watch?v=${video.youTubeId}",
+                                    </g:if>
+                                    <g:else>
                                     file: "${resource(file:video.fileLocation)}",
                                     image: "${resource(file:video.stillImage)}",
+                                    </g:else>
                                     height: 300,
                                     width: 580
                                 });
