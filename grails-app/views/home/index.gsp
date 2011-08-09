@@ -18,11 +18,7 @@
     </h1>
     <div class="socialButtons">
         ${"<g:plusone size='medium'></g:plusone>"}
-        <div id="fb-root">
-        <!-- the script is in here in order for it to work on IE -->
-        <script src="http://connect.facebook.net/en_US/all.js#appId=184263671639621&amp;xfbml=1"></script>
-        ${"<fb:like href='http://www.storitz.com' send='false' layout='button_count' width='90' show_faces='false' font=''></fb:like>"}
-        </div>
+        <iframe id="splash_fb" src="http://www.facebook.com/plugins/like.php?app_id=204418169614657&amp;href=http%3A%2F%2Fwww.storitz.com&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
     </div>
     <div id="coverphoto">
         <g:form controller="search" action="index" name="search" id="search" method="get">

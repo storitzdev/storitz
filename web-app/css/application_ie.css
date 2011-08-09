@@ -606,9 +606,4 @@ div.ieDivContainer input#getDirections {
   top: 0;
   left: 800px;
 }
-#bigbox div.socialButtons #fb-root {
-  display: inline-block;
-  position: absolute;
-  left: 75px;
-  top: 13px;
-}
+

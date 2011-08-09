@@ -133,11 +133,11 @@ strong {
   width: 155px;
   float: right;
   padding-top: 13px;
+  position: relative;
 }
-#bigbox div.socialButtons #fb-root {
-  display: inline-block;
+#bigbox div.socialButtons #splash_fb {
   position: absolute;
-  left: 880px;
+  left: 77px;
   top: 13px;
 }
 #coverphoto {
