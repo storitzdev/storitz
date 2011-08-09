@@ -38,20 +38,20 @@ class RentalTransactionController extends BaseTransactionController {
     renderTransactionPanel("/rentalTransaction/bookingSummaryPanel")
   }
 
-  def redirectIfBackButtonIsPressedAfterTransactionIsComplete (params) {
+  def redirectIfPageReloadsAfterTransactionIsComplete (params) {
     def xid = params.xid
     if (xid) {
       RentalTransaction trans = RentalTransaction.findByXid(xid)
       if (trans && (trans.status != TransactionStatus.BEGUN)) {
+        // StorageSite => detail.gsp ignores flash.message. Someday...
         flash.message = "Thank you! Your transaction is complete."
         redirect (controller: "storageSite", action: "detail", id:trans.site.id)
       }
     }
   }
 
-
   def begin = {
-    redirectIfBackButtonIsPressedAfterTransactionIsComplete (params)
+    redirectIfPageReloadsAfterTransactionIsComplete (params)
 
     def site = StorageSite.get(params.siteId as Long)
     def unit = StorageUnit.get(params.unitId as Long)
@@ -90,9 +90,11 @@ class RentalTransactionController extends BaseTransactionController {
     render(status: 200, contentType: "application/json", text: "{ 'update':false }")
   }
 
-  def create = {
-    redirectIfBackButtonIsPressedAfterTransactionIsComplete (params)
-
+  // Wrapped by create
+  // Returns -1 and redirects if some data is missing
+  // Returns transaction id (int > 0) if successful
+  // Throws an exception is something goes horribly, horribly wrong
+  def doCreate (params) {
     def site = StorageSite.get(params.siteId as Long)
     def unit = StorageUnit.get(params.unitId as Long)
 
@@ -101,7 +103,7 @@ class RentalTransactionController extends BaseTransactionController {
     params.terms = (params._terms == 'y')
     def rentalTransactionInstance
 
-    // redirectIfBackButtonIsPressedAfterTransactionIsComplete (above)
+    // redirectIfPageReloadsAfterTransactionIsComplete (called before this method)
     // guarantees that the rental transaction (if any) has a status of BEGUN
     // If we have an XID and if that XID links to a transaction then it's
     // save to use that here.
@@ -151,7 +153,7 @@ class RentalTransactionController extends BaseTransactionController {
         // date values are drawn from the date picker, and not typed-in.
         log.error("create: Unable to parse ${params.moveInDate} as Date!", p)
         redirect (action: "begin", params:params)
-        return
+        return -1 // redirect/render
       }
     }
     // check if no promo selected
@@ -227,7 +229,7 @@ class RentalTransactionController extends BaseTransactionController {
       }
       totals = costService.calculateTotals(site, alternateUnit, promo, insurance, rentalTransactionInstance.moveInDate);
       render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, unit:alternateUnit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
-      return
+      return -1 // redirect/render
     }
 
     def moveInDetails = moveInService.moveInDetail(rentalTransactionInstance)
@@ -253,7 +255,7 @@ class RentalTransactionController extends BaseTransactionController {
 
     if (rentalTransactionInstance.hasErrors()) {
       render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
-      return;
+      return -1; // redirect/render
     }
 
     boolean paid, movedIn, notified
@@ -290,7 +292,7 @@ class RentalTransactionController extends BaseTransactionController {
     // address the failure post-transaction.
     if (!paid) {
       render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
-      return;
+      return -1; // redirect/render
     }
 
     // Unit housekeeping
@@ -306,7 +308,51 @@ class RentalTransactionController extends BaseTransactionController {
     }
     session.transaction[(int)rentalTransactionInstance.id] =  true
 
-    redirect(action:"thankYou",params:[id:rentalTransactionInstance.id])
+    return rentalTransactionInstance.id // success!
+  }
+
+  def create = {
+    try {
+      // If the XID refers to a rental transaction and the rental transaction
+      // is not in the BEGUN status, then redirectIfPageReloadsAfterTransactionIsComplete
+      // will redirect the user back to the storage site page.
+      redirectIfPageReloadsAfterTransactionIsComplete (params)
+
+      // If doCreate encounters a recoverable error, then it will redirect/render
+      // the begun page view again and allow the user to correct whatever data
+      // caused the error.
+      def id = doCreate (params)
+
+      // If id is greater than zero then id is the id of the just-created
+      // rental transaction. Take the user to the thank-you page
+      if (id > 0) {
+        redirect(action:"thankYou",params:[id:id])
+        return // placing the return here for the sake of clarity only
+      }
+
+      // We should never get here. If we do, then a horrible error has
+      // occurred, and we should all panic, and run around with our hands
+      // in the air, screaming 'the sky is falling'.
+      throw new Exception ("RentalTransactionController.create: Something really odd just happened")
+    }
+    catch (Throwable t) {
+      // OK. since we are here, something went horribly wrong. Send a message
+      // to tech to investigate and resolve
+      try {
+        mailService.sendMail {
+          to      "jmeade@storitz.com"
+          from    "no-reply@storitz.com"
+          subject "RentalTransactionController.create: Exception!"
+          body     StoritzUtil.stackTraceToString(t)
+        }
+      } catch (Throwable t2) {
+        // You have got to be kidding me...
+        log.error ("ERROR: Error caught while sending email to report previous error!", t2)
+        log.error ("ERROR: Original error", t)
+      }
+      flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+      redirect (action: "begin", params: params)
+    }
   }
 
   def thankYou = {

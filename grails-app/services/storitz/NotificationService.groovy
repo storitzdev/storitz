@@ -156,8 +156,8 @@ class NotificationService {
         subject operSubj
         body (model:model,view:tenantView)
       }
-    } catch (Exception e) {
-      log.error("${e}", e)
+    } catch (Throwable t) {
+      log.error("${t}", t)
     }
 
     ///// ON-SITE MANAGERS
@@ -169,8 +169,8 @@ class NotificationService {
               body (model:model,view:mgrView)
       }
 
-    } catch (Exception e) {
-      log.error("${e}", e)
+    } catch (Throwable t) {
+      log.error("${t}", t)
     }
 
     ///// SITE OPERATORS
@@ -182,8 +182,8 @@ class NotificationService {
               subject subj.toString()
               body (model:model,view:operView)
       }
-    } catch (Exception e) {
-      log.error("${e}", e)
+    } catch (Throwable t) {
+      log.error("${t}", t)
     }
 
     ///// US
@@ -194,8 +194,8 @@ class NotificationService {
               subject tenantSubj
               body (model:model,view:operView)
       }
-    } catch (Exception e) {
-      log.error("${e}", e)
+    } catch (Throwable t) {
+      log.error("${t}", t)
     }
   }
 
