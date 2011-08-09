@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>Internal Server Error</title>
+  <meta name="layout" content="application" />
 </head>
 <body>
 <g:if test="${exception}">
