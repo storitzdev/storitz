@@ -35,7 +35,7 @@ class NotificationService {
 
   def handleNewTenant(rentalTransaction) {
 
-    def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+   def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
 
     def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
     def districtManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_DISTRICT_MANAGER')

@@ -42,7 +42,7 @@ class RentalTransactionController extends BaseTransactionController {
     def xid = params.xid
     if (xid) {
       RentalTransaction trans = RentalTransaction.findByXid(xid)
-      if (trans) {
+      if (trans && (trans.status != TransactionStatus.BEGUN)) {
         flash.message = "Thank you! Your transaction is complete."
         redirect (controller: "storageSite", action: "detail", id:trans.site.id)
       }
@@ -64,7 +64,12 @@ class RentalTransactionController extends BaseTransactionController {
         moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
       }
       catch (ParseException p) {
-        // TODO: Log warning
+        // Note: If the move-in date can't be parsed, the subsequent code will
+        // translate the null moveInDate as today. This is a silent error.
+        // We'll insert a message into the flash memory to warn the user
+        // so they can reset their move-in date.
+        flash.message = "Problem reading move-in date.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+        log.error("begin: Unable to parse ${params.moveInDate} as Date!", p)
       }
     }
     def promos = offerFilterService.getValidFeaturedOffers(site, unit);
@@ -94,7 +99,31 @@ class RentalTransactionController extends BaseTransactionController {
     def insurance = Insurance.get(params.insuranceId ? params.insuranceId as Long : -1L)
     def promo = SpecialOffer.get(params.promoId ? params.promoId as Long : -1L)
     params.terms = (params._terms == 'y')
-    def rentalTransactionInstance = new RentalTransaction(params)
+    def rentalTransactionInstance
+
+    // redirectIfBackButtonIsPressedAfterTransactionIsComplete (above)
+    // guarantees that the rental transaction (if any) has a status of BEGUN
+    // If we have an XID and if that XID links to a transaction then it's
+    // save to use that here.
+    def xid = params.xid
+    if (xid) {
+      rentalTransactionInstance = RentalTransaction.findByXid(xid)
+      if (rentalTransactionInstance) {
+        // Since we don't persist the CC details, we need to recapture
+        // from the environment or we'll get CC auth errors.
+        def tempTrans = new RentalTransaction(params)
+        rentalTransactionInstance.ccExpDate = tempTrans.ccExpDate
+        rentalTransactionInstance.cardType  = tempTrans.cardType
+        rentalTransactionInstance.ccNum     = tempTrans.ccNum
+        rentalTransactionInstance.cvv2      = tempTrans.cvv2
+        tempTrans = null
+      }
+    }
+
+    // If we have no rental transaction then make a fresh one
+    if (!rentalTransactionInstance)
+      rentalTransactionInstance = new RentalTransaction(params)
+
     def contact = new com.storitz.Contact(params)
     contact.rental = rentalTransactionInstance;
     rentalTransactionInstance.contactPrimary = contact;
@@ -114,7 +143,15 @@ class RentalTransactionController extends BaseTransactionController {
         rentalTransactionInstance.moveInDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.moveInDate);
       }
       catch (ParseException p) {
-        // TODO: Log warning
+        // JM: In the create method, failing to parse the move-in date was a
+        // nuisance, since we could always reset that value prior to entering
+        // create. Now that we are actually in create, failure to fully grok
+        // this value is a show-stopper. Bring the user back to the form
+        // to resolve. Realistically there is nothing the user can do, since
+        // date values are drawn from the date picker, and not typed-in.
+        log.error("create: Unable to parse ${params.moveInDate} as Date!", p)
+        redirect (action: "begin", params:params)
+        return
       }
     }
     // check if no promo selected
@@ -219,23 +256,47 @@ class RentalTransactionController extends BaseTransactionController {
       return;
     }
 
-    if (!performTransaction(rentalTransactionInstance, isFreeReservation)) {
+    boolean paid, movedIn, notified
+    paid = movedIn = notified = false
+    try {
+      rentalTransactionInstance.save (flush:true)                          // BEGUN
+      paid = capturePayment (rentalTransactionInstance, isFreeReservation) // PAID/RESERVED
+      if (paid) {
+        movedIn = performMoveInSlashReservation (rentalTransactionInstance, isFreeReservation)
+        if (movedIn) {
+          notified = sendNotifications(rentalTransactionInstance)
+          if (notified) {
+            // Yippee! Nothing more to do!
+          }
+        }
+      }
+    }
+    catch (Throwable t) {
+      log.error "Error processing move-in ${t}}"
+      String stackTrace = StoritzUtil.stackTraceToString (t)
+      StringBuilder emailBody = new StringBuilder()
+      emailBody.append("customer: ${rentalTransactionInstance.contactPrimary.firstName} ${rentalTransactionInstance.contactPrimary.lastName}")
+      emailBody.append("\npaid: ${paid?'yes':'no'}")
+      emailBody.append("\nmoved-in: ${movedIn?'yes':'no'}")
+      emailBody.append("\nmotified: ${notified?'yes':'no'}")
+      emailBody.append("\n\n${stackTrace}}")
+      emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "RentalTransactionController.create Exception!", emailBody.toString())
+    }
+
+    // If the customer has not paid then redirect them back to the beginning so
+    // they can pay. But, if they HAVE paid then (as far as the customer is
+    // concerned) then they are DONE. Forward them to the thank you page.
+    // However, if move-in or notification fails, then notify TECH so we can
+    // address the failure post-transaction.
+    if (!paid) {
       render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
       return;
     }
 
-    // remove unit from inventory
-    if (--unit.unitCount <= 0) {
-      rentalTransactionInstance.site.removeFromUnits(unit)
-      rentalTransactionInstance.save(flush: true)
-    } else {
-      unit.save(flush: true)
-    }
-
-    if (!rentalTransactionInstance.save(flush: true)) {
-      render(view:"begin", model:[rentalTransactionInstance:rentalTransactionInstance, contact:contact, unit:unit, site:site, promo:promo, promos:promos, insurance:insurance, totals:totals, moveInDate: rentalTransactionInstance.moveInDate, xid:params.xid, cardType:params.cardType, cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
-      return;
-    }
+    // Unit housekeeping
+    if (--unit.unitCount < 0)
+      unit.unitCount = 0
+    unit.save(flush: true)
 
     // JM: Stick this rental transaction id into session (good until the broswer closes)
     // memory. We'll use this in the thankYou action to validate that the user has
@@ -274,7 +335,7 @@ class RentalTransactionController extends BaseTransactionController {
     println "Removing unit from inventory ${unit.id}"
     rentalTransactionInstance.site.removeFromUnits(unit)
     rentalTransactionInstance.site.save(flush: true)
-    emailMoveInProblemReportToTechTeam("Removing unit from inventory ${unit.id}", rentalTransactionInstance)
+    emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "Removing unit from inventory ${unit.id}", null)
   }
 
   def findAlternateUnit = { rentalTransactionInstance, unit ->
@@ -285,7 +346,7 @@ class RentalTransactionController extends BaseTransactionController {
       rentalTransactionInstance.unitId = myUnit.id
       if (moveInService.isAvailable(rentalTransactionInstance)) {
         alternateUnit = myUnit
-        emailMoveInProblemReportToTechTeam("Desired unit not found. Alternate unit selected.", rentalTransactionInstance)
+        emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "Desired unit not found. Alternate unit selected.", null)
         flash.message = "The unit you have selected is no longer available. We have found the best-priced available unit in the same size category."
         break
       } else {
@@ -293,7 +354,7 @@ class RentalTransactionController extends BaseTransactionController {
       }
     }
     if (alternateUnit == null) {
-      emailMoveInProblemReportToTechTeam("Unit not found during rental transaction!", rentalTransactionInstance)
+      emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "Unit not found during rental transaction!", null)
       flash.message = "The unit you selected is no longer available, and we were unable to locate another unit in the same size category at this facility. Please go back and select a differnt size, or try another facility."
     }
     return alternateUnit;
@@ -310,11 +371,11 @@ class RentalTransactionController extends BaseTransactionController {
     }
   }
 
-  private emailMoveInProblemReportToTechTeam(String subjt, RentalTransaction rentalTransactionInstance) {
+  private emailMoveInProblemReportToTechTeam(RentalTransaction rentalTransactionInstance, String subjt, String bodee) {
     try {
       int transID = rentalTransactionInstance.id
       int unitID = rentalTransactionInstance.unitId
-      String bdy = "rentalTransactionInstance.id:"+transID+"\nrentalTransactionInstance.unitId:"+unitID+"\n"
+      String bdy = "rentalTransactionInstance.id:"+transID+"\nrentalTransactionInstance.unitId:"+unitID+"\n"+bodee;
       def subj = "${grails.util.Environment.getCurrent().toString()} : ${subjt}"
       mailService.sendMail {
         to 'tech@storitz.com'
@@ -327,20 +388,26 @@ class RentalTransactionController extends BaseTransactionController {
     }
   }
 
-  private boolean performTransaction(RentalTransaction rentalTransactionInstance, boolean isFreeReservation) {
-
+  /**
+   *
+   * @param rentalTransactionInstance
+   * @param isFreeReservation
+   * @return true if all is well, false if there is an error
+   */
+  private boolean capturePayment (RentalTransaction rentalTransactionInstance, boolean isFreeReservation) {
+    // Unless this is a free reservation, we will authorize and/or capture
+    // the amount from the customer card. This process can fail.
     if (!isFreeReservation) {
       def ccExpVal = String.format("%02d", params.cc_month as Integer) + params.cc_year
-
       def s = new AuthorizeNet()
-
       def user = null
+
       if (!springSecurityService.principal.equals('anonymousUser')) {
         def username = springSecurityService.principal.username
         user = User.findByUsername(username as String)
       }
-      if (!springSecurityService.principal.equals('anonymousUser') && user && UserRole.userHasRole(user, 'ROLE_CALLCENTER')) {
 
+      if (!springSecurityService.principal.equals('anonymousUser') && user && UserRole.userHasRole(user, 'ROLE_CALLCENTER')) {
         s.authorizeAndCapture {
           firstName rentalTransactionInstance.billingAddress.firstName
           lastName rentalTransactionInstance.billingAddress.lastName
@@ -352,7 +419,8 @@ class RentalTransactionController extends BaseTransactionController {
           ccExpDate ccExpVal
           amount StoritzUtil.roundToMoney(rentalTransactionInstance.cost) as String
         }
-      } else if (rentalTransactionInstance.site.source == "EX") {
+      }
+      else if (rentalTransactionInstance.site.source == "EX") {
         s.authorizeOnly {
           firstName rentalTransactionInstance.billingAddress.firstName
           lastName rentalTransactionInstance.billingAddress.lastName
@@ -365,7 +433,8 @@ class RentalTransactionController extends BaseTransactionController {
           ccExpDate ccExpVal
           amount StoritzUtil.roundToMoney(rentalTransactionInstance.cost) as String
         }
-      } else {
+      }
+      else {
         s.authorizeAndCapture {
           firstName rentalTransactionInstance.billingAddress.firstName
           lastName rentalTransactionInstance.billingAddress.lastName
@@ -392,8 +461,8 @@ class RentalTransactionController extends BaseTransactionController {
           return false
         }
         println "Logged transaction = ${authResp.dump()}"
-
         rentalTransactionInstance.transactionId = authResp.transactionId
+        rentalTransactionInstance.status = isFreeReservation ? TransactionStatus.RESERVED : TransactionStatus.PAID
       }
 
       def ccString = "XXXX XXXX "
@@ -404,45 +473,30 @@ class RentalTransactionController extends BaseTransactionController {
       rentalTransactionInstance.cleanCCNum = ccString
     }
 
-    rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.monthlyRate, rentalTransactionInstance.site.feed)
-    rentalTransactionInstance.status = isFreeReservation ? TransactionStatus.RESERVED : TransactionStatus.PAID
-    rentalTransactionInstance.save(flush: true)
-
     def landing = CookieCodec.decodeCookieValue(CookieCodec.getCookie(request, CookieCodec.LANDING_COOKIE_NAME).getValue())
-
     def ser
     if (landing?.serId) {
       ser = SearchEngineReferral.get(landing.serId as Long)
     }
+
     if (ser) {
       // TODO - handle possible multiple rentals
-
       // record transaction
       ser.bookingDate = new Date()
       ser.commission = rentalTransactionInstance.commission
       ser.save(flush: true)
       rentalTransactionInstance.searchEngineReferral = ser
-      rentalTransactionInstance.save(flush: true)
     }
 
-    if (ConfigurationHolder.config?.storitz?.rentals?.sandboxMode) {
-      println "SANDBOX MODE: Skipping moveIn"
-    }
-    else {
-      if (rentalTransactionInstance.transactionType == TransactionType.RESERVATION) {
-        if (!moveInService.reserve(rentalTransactionInstance)) {
-          flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
-          emailMoveInProblemReportToTechTeam("moveInService failed for reservation!", rentalTransactionInstance)
-          return false;
-        }
-      } else {
-        if (!moveInService.moveIn(rentalTransactionInstance)) {
-          flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
-          emailMoveInProblemReportToTechTeam("moveInService failed for rental!", rentalTransactionInstance)
-          return false;
-        }
-      }
-    }
+    rentalTransactionInstance.save(flush: true)
+    return true
+  }
+
+  /**
+   * @param rentalTransactionInstance
+   * @return true unless there is an exception
+   */
+  private boolean sendNotifications (RentalTransaction rentalTransactionInstance) {
     if (ConfigurationHolder.config?.storitz?.rentals?.sandboxMode) {
       println "SANDBOX MODE: Skipping notification"
     }
@@ -452,60 +506,34 @@ class RentalTransactionController extends BaseTransactionController {
     return true;
   }
 
-  @Secured(['ROLE_ADMIN'])
-  def forceBook = {
-    RentalTransaction rentalTransactionInstance = RentalTransaction.get(params.id)
-    rentalTransactionInstance.cardType = params.cardType ? CreditCardType.getEnumFromId(params.cardType) : CreditCardType.VISA
-    rentalTransactionInstance.ccNum = params.ccNum
-    rentalTransactionInstance.ccExpDate = Date.parse('yyyy-MM-dd', params.ccExpDate)
-    rentalTransactionInstance.cvv2 = params.cvv2
+  /**
+   * @param rentalTransactionInstance
+   * @param isFreeReservation
+   * @return true if all is well, false if there is an error
+   */
+  private boolean performMoveInSlashReservation (RentalTransaction rentalTransactionInstance, boolean isFreeReservation) {
+    rentalTransactionInstance.commission = costService.calculateCommission(rentalTransactionInstance.monthlyRate, rentalTransactionInstance.site.feed)
+    rentalTransactionInstance.save(flush: true)
 
-    if (!rentalTransactionInstance) {
-      // TODO - send them to an error page
+    if (ConfigurationHolder.config?.storitz?.rentals?.sandboxMode) {
+      println "SANDBOX MODE: Skipping moveIn"
     }
-
-    SpecialOffer promo = null
-    if (rentalTransactionInstance.promoId > 0) {
-      promo = SpecialOffer.get(rentalTransactionInstance.promoId)
-    }
-    def unit = StorageUnit.get(rentalTransactionInstance.unitId)
-    Insurance ins = null
-    if (rentalTransactionInstance.insuranceId > 0) {
-      ins = Insurance.get(rentalTransactionInstance.insuranceId)
-    }
-
-    if (!moveInService.moveIn(rentalTransactionInstance)) {
-      flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
-      // TODO - notify with email to admin
-      redirect(action: 'payment', params: ["id": rentalTransactionInstance.id])
-      return
-    }
-
-    if (params.notify) {
-      notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
-    }
-
-    // remove unit from inventory
-    if (unit && --unit.unitCount <= 0) {
-      rentalTransactionInstance.site.removeFromUnits(unit)
-      rentalTransactionInstance.save(flush: true)
-    } else if (unit) {
-      unit.save(flush: true)
-    }
-
-    def siteManagerNotification = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
-    def siteManager = User.createCriteria().get {
-      sites {
-        eq("site.id", rentalTransactionInstance.site.id)
+    else {
+      if (rentalTransactionInstance.transactionType == TransactionType.RESERVATION) {
+        if (!moveInService.reserve(rentalTransactionInstance)) {
+          flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+          emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "moveInService failed for reservation!", null)
+          return false;
+        }
+      } else {
+        if (!moveInService.moveIn(rentalTransactionInstance)) {
+          flash.message = "Problem with move-in.  Please contact technical support. (877) 456-2929 or support@storitz.com"
+          emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "moveInService failed for rental!", null)
+          return false;
+        }
       }
-      notificationTypes {
-        eq("notificationType.id", siteManagerNotification.id)
-      }
-      maxResults(1)
     }
-
-    render(view: "complete", model: [rentalTransactionInstance: rentalTransactionInstance, site: rentalTransactionInstance.site, promo: promo, unit: unit, siteManager: siteManager, xid:params.xid])
-
+    return true
   }
 
   @Secured(['ROLE_ADMIN'])
