@@ -116,8 +116,8 @@ class SeoController {
     def redirectState2 = {
         response.status = 301
         State state = State.fromText(params.state)
-        seoStateName = state.fullName.
-                response.setHeader("Location", g.createLink(mapping: 'state3', params: [state: params.state]) as String)
+        seoStateName = state.fullName
+        response.setHeader("Location", g.createLink(mapping: 'state3', params: [state: params.state]) as String)
         render("")
         return false
     }
