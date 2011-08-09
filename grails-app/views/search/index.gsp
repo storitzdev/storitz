@@ -6,7 +6,15 @@
   <meta name="description" content="Find and rent self storage in ${queryTerm} with Storitz.com" />
 </head>
 <body class="serp metro">
-<h1>Self Storage Prices &amp; Special Offers Near <strong>${queryTerm ? queryTerm : "You!"}</strong></h1>
+<h1>
+    Self Storage Prices &amp; Special Offers Near <strong>${queryTerm ? queryTerm : "You!"}</strong>
+    <g:if test="${params.searchType == 'PARKING'}">
+    <g:link controller="search" action="index" params="[searchType: 'STORAGE', where: params.where, unit_size: params.unit_size, unit_type: params.unit_type]">search for Storage instead</g:link>
+    </g:if>
+    <g:else>
+    <g:link controller="search" action="index" params="[searchType: 'PARKING', where: params.where, parking_size: params.parking_size, parking_type: params.parking_type]">search for RV Parking instead</g:link>
+    </g:else>
+</h1>
 <g:render template="/search/results" model="${resultsModel}"/>
 <p:dependantJavascript>
 <script type="text/javascript">

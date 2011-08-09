@@ -15,6 +15,7 @@
     <input type="hidden" name="where" id="where" value="${where}" />
     <input type="hidden" name="view-mode" id="view-mode" value="" />
     <input type="hidden" name="form_name" id="form_name" value="picker" />
+    <input type="hidden" name="search-type" id="search-type" value="${searchType}" />
     <g:render template="/search/results1" />
 </form>
 <g:render template="/search/results2" />

@@ -38,7 +38,7 @@ class SearchController {
 
       if (handleGeocode(geoResult)) { // N.B, sets a bunch of instance variables
         SearchCriteria criteria = new SearchCriteria();
-        criteria.searchType = SearchType.STORAGE;
+        criteria.searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE;
         criteria.queryMode = QueryMode.FIND_UNITS;
         criteria.geoType = geoType;
         criteria.centroid.lat = lat;
