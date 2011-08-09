@@ -34,11 +34,12 @@ class SearchController {
     def index = {
       def queryTerm = params.where;
       def geoResult = geocodeService.geocode(queryTerm)
+      def searchType = params.searchType;
       def searchResult;
 
       if (handleGeocode(geoResult)) { // N.B, sets a bunch of instance variables
         SearchCriteria criteria = new SearchCriteria();
-        criteria.searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE;
+        criteria.searchType = searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE;
         criteria.queryMode = QueryMode.FIND_UNITS;
         criteria.geoType = geoType;
         criteria.centroid.lat = lat;
@@ -48,7 +49,7 @@ class SearchController {
         criteria.state = State.fromText(state);
         criteria.searchSize = 0 // Default. Overridden below.
 
-        def sz = searchService.getUnitSize(params.unit_size)
+        def sz = searchService.getUnitSize(params.unit_size, criteria.searchType)
         if (sz) {
           unitSize = params.unit_size
           criteria.searchSize = sz.id
@@ -73,6 +74,7 @@ class SearchController {
         genReviews(searchResult.sites);
 
         resultsModel['where'] = queryTerm
+        resultsModel['searchType'] = criteria.searchType
       }
       else {
         resultsModel['where'] = "Unable to determine location"
@@ -110,7 +112,8 @@ class SearchController {
             }
         }
         SearchCriteria criteria = new SearchCriteria();
-        criteria.searchType = SearchType.STORAGE;
+//        criteria.searchType = SearchType.STORAGE;
+        criteria.searchType = params.searchType ? SearchType.getEnumFromId(params.searchType) : SearchType.STORAGE;
         criteria.queryMode = QueryMode.FIND_SITES;
         criteria.geoType = GeoType.CITY;
         criteria.centroid.lat = lat;

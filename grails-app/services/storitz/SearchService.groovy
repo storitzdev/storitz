@@ -44,11 +44,14 @@ class SearchService {
     if (tp == 'interior')  return storitz.constants.UnitType.getEnumFromId("INTERIOR")
     if (tp == 'upper')     return storitz.constants.UnitType.getEnumFromId("UPPER")
     if (tp == 'drive-up')  return storitz.constants.UnitType.getEnumFromId("DRIVEUP")
+    //adding some values for parking
+    if (tp == 'covered') return storitz.constants.UnitType.getEnumFromId("COVERED")
+    if (tp == 'uncovered') return storitz.constants.UnitType.getEnumFromId("UNCOVERED")
 
     return null
   }
 
-  def getUnitSize(sz) {
+  def getUnitSize(sz, searchType) {
     if (!sz) {
       return null
     }
@@ -57,7 +60,8 @@ class SearchService {
     def width = sza[0] as int
     def length = sza[1] as int
 
-    return unitSizeService.getUnitSize(width,length,SearchType.STORAGE)
+//    return unitSizeService.getUnitSize(width,length,SearchType.STORAGE)
+    return unitSizeService.getUnitSize(width,length,searchType)
   }
 
   /**

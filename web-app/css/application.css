@@ -785,8 +785,15 @@ body.serp.metro h1 {
   font-size: 24px;
   margin-bottom: 15px;
   font-weight: normal;
+  display: inline-block;
 }
-body.serp.metro h1 a {
+body.serp.metro #select_site_rv {
+  display: inline-block;
+  font-size:12px;
+  float: right;
+  padding:  9px;
+}
+body.serp.metro #select_site_rv a {
   font-size: 12px;
   color: #0259a0;
   font-weight: bold;

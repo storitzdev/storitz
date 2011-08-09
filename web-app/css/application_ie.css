@@ -91,6 +91,17 @@ body.serp #results_container div.map_container #big_map_canvas,
 body.serp #results_container .map {
   height: 728px;
 }
+body.metro h1 {
+  height: 27px;
+  margin-bottom: 12px;
+}
+body.serp.metro #select_site_rv {
+  display: block;
+  font-size:12px;
+  position: absolute;
+  top: 90px;
+  left: 895px;
+}
 body.serp div.info_window div.info_right {
   float: right;
 }
