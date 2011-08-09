@@ -611,10 +611,9 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def token             = this.readToken();
       def siteID            = trans.site.sourceId;
       def sizeID            = storageUnit.unitNumber as int;
-      //def unitID            = this.readUnitID(token, siteID, sizeID);
       EDomicoNode unitInfo  = this.readUnitInfo (token, siteID, sizeID)
-      def unitID            = unitInfo.get("UnitID")    // internal (pk) unit id
-      def unitMask          = unitInfo.get("UnitMask")  // external (public) unit id
+      def unitID            = Integer.parseInt(unitInfo.get("UnitID")) // internal (pk) unit id
+      def unitMask          = unitInfo.get("UnitMask")                 // external (public) unit id
       def lastName          = contact.lastName;
       def firstName         = contact.firstName;
       def middleInitial     = null;

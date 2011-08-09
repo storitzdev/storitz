@@ -1,0 +1,8 @@
+This branch is from /branches/v2_ui revision 1582.
+
+The following revision have been merged into this branch:
+
+rev  branch comment
+1615 v2_ui  Merge 1532 (sitelink unit update) from trunk to v2_ui
+(slipped past first time).
+1616 v2_ui  Convert unitid to int for move-in processing.
