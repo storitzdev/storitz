@@ -67,6 +67,17 @@ environments {
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = false
   }
+  production_script_bob {
+    grails.serverURL = "http://www.storitz.com:18081"
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/weblog/**': ['ROLE_USER'],
+    ]
+    storitz.nacha.dir = '/home/deploy/tomcat-current/www.storitz.com/nacha'
+    storitz.nacha.fileId = '7878782339'
+    storitz.nacha.companyId = '1272912549'
+    storitz.google.signatureRequired = false
+  }
   preview {
     grails.serverURL = "http://preview.storitz.com"
     grails.serverRoot = "/home/deploy/tomcat-current/preview.storitz.com/ROOT"
