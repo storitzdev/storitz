@@ -404,6 +404,7 @@ public class ExrsWebFormProcessor {
         if (type.equalsIgnoreCase("upper")) {
             ret.add("upper");
             ret.add("elevator");
+            ret.add("lift");
             return ret;
         }
         if (type.equalsIgnoreCase("drive up")) {
