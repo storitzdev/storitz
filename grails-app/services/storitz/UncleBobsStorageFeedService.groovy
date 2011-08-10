@@ -24,6 +24,7 @@ import com.storitz.Bullet
 import java.text.SimpleDateFormat
 import java.text.DateFormat
 import org.grails.mail.MailService
+import java.text.ParseException
 
 class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -116,6 +117,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       def space_regprice  = xmlNodes.space[i].regprice      as String
       def space_curprice  = xmlNodes.space[i].curprice      as String
       def space_avail     = xmlNodes.space[i].avail         as String
+      def space_limitdate = xmlNodes.space[i].limitdate     as String
+
       // promotions
       def space_special_description     = xmlNodes.space[i].special.description       as String
       def space_special_type            = xmlNodes.space[i].special.type              as String
@@ -136,7 +139,8 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
           ,new Double(space_floor).doubleValue()
           ,new Double(space_regprice).doubleValue()
           ,new Double(space_curprice).doubleValue()
-          ,new Double(space_avail).doubleValue())
+          ,new Double(space_avail).doubleValue()
+          ,space_limitdate)
 
       if (unit) {
         storageSiteInstance.addToUnits(unit)
@@ -363,7 +367,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       site.taxRateMerchandise  = 0
       site.taxRateInsurance    = 0
       site.taxRateRental       = 0
-      site.maxReserveDays      = 30
+      site.maxReserveDays      = 7
 
     }
     SiteStats stats = new SiteStats()
@@ -382,7 +386,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
   private def createUpdateUnit(site,stats,writer,space_id,space_width,space_length,
                                space_height,space_climate,space_access,
                                space_floor,space_regprice,space_curprice,
-                               space_avail) {
+                               space_avail,space_limitdate) {
 
     // Check the unit size (and possibly eliminate this as a potential unit)
     // before we fetch/create the actual unit so our site stats remain accurate.
@@ -409,6 +413,19 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       stats.removedCount--
     }
 
+    Calendar maxReserveDate = GregorianCalendar.getInstance();
+    maxReserveDate.roll(Calendar.DAY_OF_MONTH, site.maxReserveDays);
+    try {
+      DateFormat df = new SimpleDateFormat("MM/dd/yy");
+      df.setLenient(false);
+      Date date = df.parse(space_limitdate);
+      maxReserveDate.setTime(date);
+    }
+    catch (ParseException e) {
+      println "WARNING: Failed to parse limitdate: '" + space_limitdate + "'"
+    }
+
+    unit.maxReserveDays     = (long)Math.ceil((maxReserveDate.getTimeInMillis() - System.currentTimeMillis()) / 1000.0 / 86400.0);
     unit.price              = space_regprice
     unit.pushRate           = space_curprice
     unit.unitsize           = unitSize
@@ -494,7 +511,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     // "humidity/climate controlled"      // yes
 
     String climate = space_climate.toLowerCase();
-    if (climate.indexOf("non-climate")) {
+    if (climate.indexOf("non-climate") > -1) {
       return false;
     }
     return climate.indexOf("climate") > -1;

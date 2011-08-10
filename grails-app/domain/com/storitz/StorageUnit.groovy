@@ -18,6 +18,7 @@ class StorageUnit {
     dateCreated(nullable:true)
     lastUpdated(nullable: true)
     bestUnitPrice(nullable: true)
+    maxReserveDays(nullable: true)
   }
 
   String description
@@ -45,4 +46,5 @@ class StorageUnit {
   String unitTypeInfo // used by special offer filter
   Date dateCreated
   Date lastUpdated
+  Integer maxReserveDays
 }

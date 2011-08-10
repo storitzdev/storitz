@@ -149,7 +149,7 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     if (!promo && site.prorateSecondMonth) {
       durationMonths = 2
     }
-    
+
     if (allowExtension && site.useProrating && !site.prorateSecondMonth) {
       if (moveInDay > site.prorateCutoff && (!promo || promo && durationMonths == 1)) {
         durationMonths++;
@@ -201,7 +201,11 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
         case "PERCENT_OFF":
           if (promo.inMonth == 1 && !promo.prepay) {
             offerDiscount = (promo.promoQty / 100.0) * (monthOneProRate + (promo.expireMonth - 1) * rate);
-          } else {
+          }
+          else if (promo.inMonth > 1 && !promo.prepay) {
+            offerDiscount = 0.0; // offer only reduces move-in cost if it requires *prepayment* and hits in month 1
+          }
+          else {
             offerDiscount = (promo.promoQty / 100.0) * (promo.expireMonth) * rate;
           }
           break;

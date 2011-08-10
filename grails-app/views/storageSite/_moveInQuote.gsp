@@ -3,7 +3,7 @@
   <table class="summary first">
     <tr><th>Move-In Date</th>
     <td>
-      <a class="edit_date" title="Click to Change" href="#" max-days="${site.maxReserveDays}"><g:formatDate type="date" style="MEDIUM" date="${moveInDate}" /></a>
+      <a class="edit_date" title="Click to Change" href="#" max-days="${(unit.maxReserveDays != null) ? unit.maxReserveDays : site.maxReserveDays}"><g:formatDate type="date" style="MEDIUM" date="${moveInDate}" /></a>
     </td>
     </tr>
     <tr><th>Paid Until</th>
