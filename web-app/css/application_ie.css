@@ -203,12 +203,12 @@ body.site_detail .rent_me div.price .per_month {
 }
 
 body.site_detail .rent_me div.rent_reserve .guarantee {
-  background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat;
-  background-position: 50px center;
+  background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat 50px 10px center;
   padding: 13px 0 10px 75px;
   font-weight: bold;
   color: #3EA307;
   border-top-width: 0;
+  margin-left: 20px;
 }
 
 body.site_detail .rent_me div.move_in_date {
