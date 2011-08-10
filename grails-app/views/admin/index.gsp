@@ -28,6 +28,7 @@
           <li><g:link controller="usi" action="list">Manage U-Store-It</g:link></li>
           <li><g:link controller="EDomico" action="list">Manage EDomico</g:link></li>
           <li><g:link controller="uncleBobs" action="list">Manage Uncle Bob's (Sovran)</g:link></li>
+          <li><g:link controller="storageMart" action="list">Manage Storage Mart</g:link></li>
         </ul>
         <li>Reference Data</li>
         <ul>

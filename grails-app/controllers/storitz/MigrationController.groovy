@@ -65,7 +65,11 @@ class MigrationController {
       } else if (myFeed.feedType == FeedType.UNCLEBOBS) {
         UncleBobs f = myFeed as UncleBobs
         render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
+      } else if (myFeed.feedType == FeedType.STORAGEMART) {
+        StorageMart f = myFeed as StorageMart
+        render(status: 200, contentType: "application/json", text: "{ \"assetFile\": \"${tmpFile.canonicalFile}\", \"feed\": ${f as JSON}, \"users\": ${users as JSON}, \"siteUsers\": ${siteUsers as JSON} }, \"rentalAgrements\":${rentalAgreements as JSON} }")
       }
+
     }
   }
 
@@ -147,6 +151,21 @@ class MigrationController {
         feed.feedType = FeedType.UNCLEBOBS
         feed.operatorName = resp.feed.operatorName
         feed.UBCompanyName = resp.feed.UBCompanyName
+        feed.address1 = resp.feed.address1
+        feed.address2 = resp.feed.address2
+        feed.city = resp.feed.city
+        feed.state = resp.feed.state ? State.getEnumFromId(resp.feed.state.name) : null
+        feed.zipcode = resp.feed.zipcode
+        feed.transactionBoxLink = resp.feed.transactionBoxLink
+        feed.transactionBoxBody = resp.feed.transactionBoxBody
+        feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
+      }
+      else if (feedTypeEquals(resp.feed.feedType,'STORAGEMART')) {
+        feed = new StorageMart()
+        feed.feedType = FeedType.STORAGEMART
+        feed.operatorName = resp.feed.operatorName
+        feed.stmUser = resp.feed.stmUser
+        feed.stmPass = resp.feed.stmPass
         feed.address1 = resp.feed.address1
         feed.address2 = resp.feed.address2
         feed.city = resp.feed.city

@@ -12,7 +12,8 @@ public enum FeedType {
   CENTERSHIFT("Centershift"),
   QUIKSTOR("QuikStor"),
   EDOMICO("EDomico"),
-  UNCLEBOBS("UncleBobs")
+  UNCLEBOBS("UncleBobs"),
+  STORAGEMART("StorageMart")
 
   final display
 
@@ -21,7 +22,7 @@ public enum FeedType {
   }
 
   static list() {
-    [SITELINK, CENTERSHIFT, QUIKSTOR, EDOMICO, UNCLEBOBS]
+    [SITELINK, CENTERSHIFT, QUIKSTOR, EDOMICO, UNCLEBOBS, STORAGEMART]
   }
 
   static public FeedType getEnumFromId(String value) {
