@@ -1643,8 +1643,8 @@ body.site_detail .rent_me .all_units div.price .per_month {
 }
 body.site_detail .rent_me > div.rent_reserve .guarantee {
   background: url("../images/v2/site_detail/checkmark-20x19.png") no-repeat;
-  background-position: 50px center;
-  padding: 13px 0 10px 75px;
+  background-position: 75px center;
+  padding: 13px 0 10px 100px;
   font-weight: bold;
   color: #3EA307;
 }
