@@ -147,10 +147,9 @@
                 <div class="unit_info">
                   <h3><g:render template="unitSizeLabel" model="[unit:entry['unit'], omitType:true]" /></h3>
                   <ul class="amenities">
-                    <li>${entry['unit'].unitType.display} Unit</li>
-                    <g:if test="${unit.isTempControlled}"><li>Climate Control</li></g:if>
+                    <g:if test="${entry['unit'].isTempControlled}"><li>Climate Control</li></g:if>
                     <g:if test="${(entry['unit'].unitType == UnitType.UPPER) && site.hasElevator}"><li>Elevator</li></g:if>
-                    <g:if test="${unit.isAlarm || site.isUnitAlarmed}"><li>Alarm in Unit</li></g:if>
+                    <g:if test="${entry['unit'].isAlarm || site.isUnitAlarmed}"><li>Alarm in Unit</li></g:if>
                     <g:if test="${entry['unit'].isPowered}"><li>Electrical Outlet</li></g:if>
                   </ul>
                 </div>

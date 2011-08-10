@@ -580,17 +580,20 @@ class StorageSiteController extends BaseTransactionController implements Applica
 
     def title = "${StoritzUtil.titleize(site.city)} Self Storage Units at ${site.title} - ${StoritzUtil.titleize(site.city)}, ${site.state.display} - ${site.zipcode}"
     def availableUnitList = site.units.findAll { it.unitsize.searchType == SearchType.STORAGE && it.unitCount > site.minInventory }
-    def sortedUnitList = availableUnitList.sort { unit1, unit2 -> unit1.unitsize.width * unit1.unitsize.length <=> unit2.unitsize.width * unit2.unitsize.length ?: unit1.unitType.display <=> unit2.unitType.display ?: unit1.bestUnitPrice <=> unit2.bestUnitPrice }
+    def sortedUnitList = availableUnitList.sort { unit1, unit2 -> unit1.unitsize.width * unit1.unitsize.length <=> unit2.unitsize.width * unit2.unitsize.length ?: unit1.unitType.display <=> unit2.unitType.display ?: unit1.isTempControlled <=> unit2.isTempControlled ?: unit1.bestUnitPrice <=> unit2.bestUnitPrice }
     def availableUnits = [];
     String curSizeDescription = null;
     String curTypeDisplay = null;
+    Boolean curTempControl = null;
     sortedUnitList.each { unit ->
-      if (unit.unitsize.description != curSizeDescription || unit.unitType.display != curTypeDisplay) {
+      if (unit.unitsize.description != curSizeDescription || unit.unitType.display != curTypeDisplay || unit.isTempControlled != curTempControl) {
         curSizeDescription = unit.unitsize.description;
         curTypeDisplay = unit.unitType.display;
+        curTempControl = unit.isTempControlled;
         def offer = null;
         def offers = offerFilterService.getValidFeaturedOffers(site, unit);
         if (offers != null && offers.size() > 0) {
+          // TODO: Pick the *best* offer, not the first (code can be found 10 lines down)
           offer = offers[0];
         }
         availableUnits << [unit:unit, promo:offer]
