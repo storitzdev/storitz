@@ -72,7 +72,7 @@ class CollegeLandingController extends SearchController  {
     criteria.featuredOfferTag = "college_special_2011"
     criteria.searchSize = 0 // Default. Overridden below.
 
-    def sz = searchService.getUnitSize(params.unit_size)
+    def sz = searchService.getUnitSize(params.unit_size, criteria.searchType)
     if (sz) {
       unitSize = params.unit_size
       criteria.searchSize = sz.id
