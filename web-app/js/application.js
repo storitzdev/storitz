@@ -284,7 +284,7 @@ var _map = function() {
             $("#big_map_canvas").addClass("visible");
             $("body.serp").css('width', '80%'); //2
             $("body.serp .results_container").addClass('map_view'); //1
-            $("body.serp.college .results_container").css('width', 'auto') //addition for college page.
+//            $("body.serp.college .results_container").css('width', 'auto') //addition for college page.
             $("#big_map_canvas").css('width', '100%'); //3
             $(".map_container").show(); //4
             google.maps.event.trigger(big_map, 'resize');
@@ -321,10 +321,40 @@ var _map = function() {
             $("body.serp").css('width', '960px');   //2
             $("body.college").css('width', '947px');
             $("#big_map_canvas").css('width', '546px'); //3
-            $("body.serp.college .results_container").css('width', 'none') //map college landing page
+//            $("body.serp.college .results_container").css('width', 'none') //map college landing page
             $("body.serp .results_container").removeClass('map_view'); //1
             $(".map_container").hide() //4
             $("#search_results > li").unbind("click");
+            $("#search_results > li").unbind("mouseenter");
+            $("#search_results > li").unbind("mouseleave");
+        },
+        college_mapify: function() {
+            $(".college_map_container").show();
+            google.maps.event.trigger(big_map, 'resize');
+//            $("#search_results > li").click(function() {
+//                var site_id = $(this).attr("id").substr(5);
+//                var entry = markers[site_id];
+//                toggle_info_window(entry[1], big_map, entry[0], site_id);
+//            });
+            $("#search_results > li").hover(function() { //we need to create a new markerImage for hoverIn and hoverOut
+                var li = $(this);
+                var site_id = li.attr("id").substr(5);
+                li.css("background-color", "lightcyan");
+                li.css("cursor", "pointer");
+                var marker = markers[site_id][0];
+                changeMapMarker(marker);
+            }, function() {
+                var li = $(this);
+                var site_id = li.attr("id").substr(5);
+                li.css("background", "none");
+                li.css("cursor", "default");
+                var marker = markers[site_id][0];
+                changeMapMarker(marker);
+            });
+        },
+        college_listify: function() {
+            $(".college_map_container").hide();
+//            $("#search_results > li").unbind("click");
             $("#search_results > li").unbind("mouseenter");
             $("#search_results > li").unbind("mouseleave");
         },
@@ -339,7 +369,7 @@ var _map = function() {
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            var big_map_canvas = document.getElementById("big_map_canvas");
+            var big_map_canvas = (document.getElementById("college_map_canvas") != null)? document.getElementById("college_map_canvas") : document.getElementById("big_map_canvas");
             var popup_map_canvas = document.getElementById("popup_map_canvas");
             var mini_map_url = "";
             if (popup_map_canvas) {
@@ -472,7 +502,12 @@ var _map = function() {
                     }
                     i++;
                 });
-                mini_map_canvas.html('<a href="#map-view" class="toggle_map_view"><img width="' + mini_map_width + '" height="' + mini_map_height + '" src="' + mini_map_url + '" /></a>');
+                if (document.getElementById("college_map_canvas") == null) {
+                  mini_map_canvas.html('<a href="#map-view" class="toggle_map_view"><img width="' + mini_map_width + '" height="' + mini_map_height + '" src="' + mini_map_url + '" /></a>');
+                }
+                else {
+                  mini_map_canvas.html('<a href="#" class="toggle_map_view"><img width="' + mini_map_width + '" height="' + mini_map_height + '" src="' + mini_map_url + '" /></a>')
+                }
                 big_map.setCenter(big_map_bounds.getCenter());
                 big_map.fitBounds(big_map_bounds);
             }
@@ -681,6 +716,15 @@ function initialize_serp() {
   }
   // bind map events
   $(".toggle_map_view").click(function() {
+    if(document.getElementById("college_map_canvas")) {
+      if ($(".college_map_container").css("display") == "none") {
+        _map.college_mapify();
+      }
+      else {
+        _map.college_listify();
+      }
+    }
+    else {
       if ($("#search_results").hasClass("map")) {
           _map.listify();
           if ($.browser.msie && (resHeight < pickHeight)) {
@@ -693,7 +737,8 @@ function initialize_serp() {
             $("div#footer").css("margin-top", 0);
           }
       }
-      return false;
+    }
+    return false;
   });
   $(".show_map_popup a").click(function() {
       _map.show_popup(this);

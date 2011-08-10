@@ -51,6 +51,9 @@
       <a class="close" href="#">Close</a>
       <iframe src="<g:createLink action="storageTips" params="[layout:'min']" />"></iframe>
     </div>
+    <div class="college_map_container">
+        <div id="college_map_canvas"></div>
+    </div>
     <g:render template="/search/results" model="${resultsModel}" />
 </div>
 <p:dependantJavascript>

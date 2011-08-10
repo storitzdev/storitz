@@ -144,7 +144,7 @@ a {
 a:link, a:visited { font-weight: normal; }
 
 body.serp.college #search_results {
-  width: 758px;
+  width: 757px;
 }
 body.serp.college #search_results.map {
   width: 351px;
@@ -356,6 +356,21 @@ body.college_storage_tips.min {
     width: 947px;
     height: 1275px;
 }
-
-
+/* the new map*/
+#main_container .college_map_container {
+  display: none;
+  width: 937px;
+  height: 424px;
+  background: #ccc;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+#college_map_canvas {
+  position: relative;
+  width: 937px;
+  height: 424px;
+  border-color: #ddd;
+  border-width: 1px 0;
+  border-style: solid;
+}
 
