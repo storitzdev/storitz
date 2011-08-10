@@ -5,7 +5,7 @@
     <g:submitButton name="action"
                     value="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve' : 'rent'}"
                     class="${(site.transactionType == TransactionType.RESERVATION) ? 'reserve_me_button' : 'rent_me_button'}" />
-    <div class="guarantee">Storitz Price Guarantee</div>
+    <div class="guarantee">Web-Only Price</div>
   </div>
   <div class="unit_info">
     <a class="more_sizes" href="#all_units">See all sizes</a>
