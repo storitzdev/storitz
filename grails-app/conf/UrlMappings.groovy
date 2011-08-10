@@ -88,7 +88,7 @@ class UrlMappings {
       controller = "search"
       action = "metro"
         constraints {
-          city(matches: /^[a-zA-Z][a-zA-Z\-]*[a-zA-Z]$/)
+          city(matches: /^[0-9a-zA-Z][0-9a-zA-Z\-]*[a-zA-Z]$/)
           state(matches: /[a-zA-Z]{2}/)
       }
     }
