@@ -231,6 +231,7 @@ class SearchService {
           out['type'] = null;
           switch (US_result.types[0]) {
             case "locality":
+            case "sublocality":
               out['type'] = GeoType.CITY;
               break;
             case "postal_code":
@@ -257,6 +258,7 @@ class SearchService {
                       route = comp.long_name
                       break
                   case "locality":
+                  case "sublocality":
                       out['city'] = comp.long_name
                       break
                   case "administrative_area_level_1":

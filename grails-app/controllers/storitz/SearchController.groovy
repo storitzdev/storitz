@@ -85,17 +85,17 @@ class SearchController {
       }
 
     def metro = {
+      // TODO: Fix to look up city name using seoCity value of StorageSite table; calls to
+      // params.city.replaceAll("-", " ") will fail if the city name includes any punctuation
         def aMetro =TopMetro.fromText(params.city + "-" + params.state) // TODO: string-mangling is artifact of when we just passed in params.metro. finish refactoring TopMetro interface to match new 2-param style.
         def queryTerm;
         if (aMetro != null) {
           queryTerm = "${aMetro.city}, ${aMetro.stateCode}"
         }
         else {
-          queryTerm = StoritzUtil.titleize(params.city) + ", " + params.state;
+          queryTerm = StoritzUtil.titleize(params.city.replaceAll("-", " ")) + ", " + params.state.toUpperCase();
         }
         params.where = queryTerm // required for subsequent searches using from _results.gsp
-        // TODO: Fix to look up city name using seoCity value of StorageSite table;
-        // this will fail if the city name includes any punctuation
         def seoDecodedCity = params.city.replaceAll("-", " ").toLowerCase();
         def geoLookup = GeoLookup.findByCityAndState(seoDecodedCity, params.state)
         if (geoLookup) {

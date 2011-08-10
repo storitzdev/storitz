@@ -552,7 +552,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
     // We're passing in bestUnit parameter now. If that's available then try to use it
     def bestUnit = null;
     if (params.bestUnit) {
-        bestUnit = StorageUnit.findById(params.bestUnit)
+        bestUnit = StorageUnit.findById(params.bestUnit.replaceAll("\\D", "") as Long)
     }
     if (!bestUnit) {
       def units = site.units.findAll { it.unitsize.searchType == SearchType.STORAGE && it.unitCount > site.minInventory }
@@ -601,9 +601,13 @@ class StorageSiteController extends BaseTransactionController implements Applica
     }
     def moveInDate = new Date();
     def promo = null;
-    def promos = offerFilterService.getValidFeaturedOffers(site, bestUnit);
     if (params.promoId) {
       promo = SpecialOffer.get(params.promoId as Long);
+    }
+    def promos = [];
+    if (bestUnit != null) {
+      promos.addAll(offerFilterService.getValidFeaturedOffers(site, bestUnit));
+      promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, bestUnit));
     }
     else if (bestUnit) {
       // TODO: More $#@! copy/paste ... refactor best-promo calculation out into a method of StorageSite
