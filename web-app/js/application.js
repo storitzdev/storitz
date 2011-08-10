@@ -284,6 +284,7 @@ var _map = function() {
             $("#big_map_canvas").addClass("visible");
             $("body.serp").css('width', '80%'); //2
             $("body.serp .results_container").addClass('map_view'); //1
+            $("body.serp.college .results_container").css('width', 'auto') //addition for college page.
             $("#big_map_canvas").css('width', '100%'); //3
             $(".map_container").show(); //4
             google.maps.event.trigger(big_map, 'resize');
@@ -320,6 +321,7 @@ var _map = function() {
             $("body.serp").css('width', '960px');   //2
             $("body.college").css('width', '947px');
             $("#big_map_canvas").css('width', '546px'); //3
+            $("body.serp.college .results_container").css('width', 'none') //map college landing page
             $("body.serp .results_container").removeClass('map_view'); //1
             $(".map_container").hide() //4
             $("#search_results > li").unbind("click");
@@ -681,14 +683,12 @@ function initialize_serp() {
   $(".toggle_map_view").click(function() {
       if ($("#search_results").hasClass("map")) {
           _map.listify();
-          $("body.serp.college .results_container").css('width', 'none')
           if ($.browser.msie && (resHeight < pickHeight)) {
             $("div#footer").css("margin-top", pickHeight - resHeight + 10);
           }
       }
       else {
           _map.mapify();
-          $("body.serp.college .results_container").css('width', 'auto')
           if ($.browser.msie) {
             $("div#footer").css("margin-top", 0);
           }
