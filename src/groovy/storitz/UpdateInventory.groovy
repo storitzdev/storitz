@@ -67,6 +67,7 @@ class UpdateInventory {
         int batch_size = 50
         int i = 0;
         int num_errors = 0;
+        println "Beginning inventory refresh for ${allStorageSiteIds.size()} sites"
         while (i < allStorageSitesIds.size()) {
             int lower_i = i
             int upper_i = i+batch_size-1 > allStorageSitesIds.size()-1 ? allStorageSitesIds.size()-1 : i+batch_size-1
@@ -100,6 +101,7 @@ class UpdateInventory {
                     def stats = new storitz.SiteStats()
                     feedService.updateUnits(site, stats, writer)
                     writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
+                    println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
                 } catch (Throwable t) {
                     ++num_errors
                     writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
@@ -108,6 +110,7 @@ class UpdateInventory {
             //println ("STOP:${new Date().toString()}")
             feedService.clearSession()
             i=upper_i+1;
+            println "Completed ${upper_i} sites"
         }
 
       writer.println "----------------- Complete ${System.currentTimeMillis() - startTime} millis ----------------------------"
