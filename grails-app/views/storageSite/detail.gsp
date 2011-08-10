@@ -92,13 +92,13 @@
               <li><a class="print" href="#" onclick="window.print();">Print</a></li>
               <li><span class="st_email" displayText="Share"></span></li>
             </ul>
-            <div class="yelp_rating">
-                <g:if test="${bizTotal > 0}">
-                <a href="#tab_reviews"><img src="${review.starUrl}" /></a><span>${review.reviewCount} reviews</span>
-                <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Reviews from yelp</a>
-                </g:if>
-                <g:else><strong>No Reviews</strong></g:else>
-            </div>
+              <g:if test="${bizTotal > 0}">
+                  <div class="yelp_rating">
+                      <a href="#tab_reviews"><img src="${review.starUrl}" /></a><span>${review.reviewCount} reviews</span>
+                      <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Reviews from yelp</a>
+                      %{--<g:else><strong>No Reviews</strong></g:else>--}%
+                  </div>
+              </g:if>
             <p>
               ${site.description}
             </p>
