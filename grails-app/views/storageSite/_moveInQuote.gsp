@@ -11,16 +11,13 @@
     <tr>
         <th>Special Offer
             <g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">
-                (<a class="more_offers" href="#">View all</a>)
+                (<a class="more_offers" href="#">view all</a>)
             </g:if>
         </th>
     <td>
       <g:if test="${promos.size() == 0}"><span class="none">No specials available</span></g:if>
       <g:elseif test="${promo == null}"><span class="none">No special selected</span></g:elseif>
-      <g:else>${promo.promoName}<br/><a class="remove_offer" href="#">remove</a><a class="offer_details" href="#">details |&nbsp</a></g:else>
-      %{--<g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">--}%
-        %{--<a class="more_offers" href="#">View offers</a>--}%
-      %{--</g:if>--}%
+      <g:else>${promo.promoName}<br/><a class="remove_offer" href="#">remove</a>%{--<a class="offer_details" href="#">details |&nbsp;</a>--}%</g:else>
       </td>
     </tr>
 
@@ -39,11 +36,6 @@
    <g:if test="${site.transactionType == TransactionType.RESERVATION && site.feed.reservationMoveInDescription}">
       <div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.reservationMoveInDescription}</div>
    </g:if>
-    %{--What to do with this? --}%
-    %{--<g:if test="${site.transactionType == TransactionType.RESERVATION && site.feed.transactionBoxLink}">--}%
-        %{--<div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.transactionBoxLink}</div>--}%
-       %{--<div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.transactionBoxBody}</div>--}%
-    %{--</g:if>--}%
   <g:if test="${(promo == null && promos?.size() > 0) || promos?.size() > 1}">
   <ul id="promo_list" class="tooltip">
       <h2>Select an Offer</h2>
