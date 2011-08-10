@@ -67,7 +67,7 @@ environments {
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = false
   }
-  production_script_bob {
+  production_bob_script {
     grails.serverURL = "http://www.storitz.com:18081"
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
@@ -94,6 +94,16 @@ environments {
   // We'll also turn off the public server url and set the Google signatureRequired to false.
   preview_script {
     grails.serverURL = "http://preview.storitz.com:18080"
+    security.httpsPort = 443
+    grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+            '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],
+            '/STMap/**': ['ROLE_USER', 'ROLE_ADMIN'],
+            '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
+    ]
+    storitz.google.signatureRequired = false
+  }
+  preview_bob_script {
+    grails.serverURL = "http://preview.storitz.com:18081"
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],

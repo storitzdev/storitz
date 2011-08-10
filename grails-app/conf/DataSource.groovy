@@ -47,6 +47,16 @@ environments {
      password = "st4ch@m"
     }
   }
+  preview_bob_script {
+    dataSource {
+     //jndiName = "java:comp/env/jdbc/storitz_preview"
+     //loggingSql = true
+     driverClassName = "com.mysql.jdbc.Driver"
+     url = "jdbc:mysql://localhost:3306/storitz_preview?autoReconnect=true"
+     username = "storitz_preview"
+     password = "st4ch@m"
+    }
+  }
   test {
     dataSource {
       jndiName = "java:comp/env/jdbc/storitz_test"
@@ -65,6 +75,15 @@ environments {
     }
   }
   production_script {
+    dataSource {
+      //jndiName = "java:comp/env/jdbc/storitz"
+      driverClassName = "com.mysql.jdbc.Driver"
+      url = "jdbc:mysql://localhost:3306/storitz?autoReconnect=true"
+      username = "storitz"
+      password = "st3ch@m"
+    }
+  }
+  production_bob_script {
     dataSource {
       //jndiName = "java:comp/env/jdbc/storitz"
       driverClassName = "com.mysql.jdbc.Driver"

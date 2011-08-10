@@ -4,7 +4,7 @@
 ENVNAME=$1
 
 if test "$ENVNAME" = ""; then
-    echo "usage: update-inventory-bob.sh [development|preview|production_bob]"
+    echo "usage: update-inventory-bob.sh [development|preview_bob|production_bob]"
     exit 1
 fi
 
