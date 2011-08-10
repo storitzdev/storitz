@@ -19,7 +19,7 @@ document.write(unescape("%3Cscript src='" + gaJsHost + " google-analytics.com/ga
 </script>
 <script type="text/javascript">
 try{
-var pageTracker = _gat._getTracker("UA-16012579-4");
+var pageTracker = _gat._getTracker("UA-16012579-1");
 pageTracker._trackPageview("/404.html?page=" + document.location.pathname + document.location.search + "&from=" + document.referrer);
 } catch(err) {}
 </script>
