@@ -13,7 +13,6 @@ class CollegeLandingController extends SearchController  {
   def fileUploadService
   def springSecurityService
   def searchService
-  def queryTerm
   def unitSize
   def unitType
   def amenities
@@ -39,7 +38,6 @@ class CollegeLandingController extends SearchController  {
     // initial load
     if (!params.where) {
       resultsModel['where'] = params.address = college.address
-      queryTerm = college.displayName
     }
     // subsequent load (via picker or search)
     else {
@@ -96,17 +94,8 @@ class CollegeLandingController extends SearchController  {
     def searchResult = searchService.findClientSites(criteria)
     genReviews(searchResult.sites);
 
-    // Display college name when using pickers unless the user is engaged with
-    // a manual search.
-    if (params.form_name == 'picker')
-      queryTerm = (params.where == college.address) ? college.displayName : params.where
-
-    // Always display search field when using search.
-    if (params.form_name == 'search')
-      queryTerm = "${params.where}"
-
     resultsModel['action'] = "${ConfigurationHolder.config.grails.serverURL}/college/${college.name}"
-    [queryTerm: queryTerm, college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews]
+    [college: college, title: title, lat: lat, lng: lng, clientSites: searchResult.sites, siteMoveInPrice: searchResult.moveInPrices, isAdmin: isAdmin, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews: yelpReviews]
   }
 
   def storageTips = {
