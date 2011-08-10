@@ -109,7 +109,7 @@ class MapService {
     Integer zoomMin = 7;
     Integer zoomMax = 16;
     criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
-    def siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
+    def siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria))
 
     // adjust zoom if too many/few sitse were returned
     if (siteIds.size() > 20) {
@@ -135,11 +135,14 @@ class MapService {
         siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
       }
     }
-    // retrieve StorageSite instances from ORM
-    if (siteIds.size() > 20) {
-      siteIds = siteIds[0..19];
+
+    // Sort by proximity before reducing
+    def sites = StorageSite.findAllByIdInList(siteIds).sort { calcDistance(criteria.centroid.lat, it.lat, criteria.centroid.lng, it.lng)}
+    if (sites.size() > 20) {
+      sites = sites.subList(0,20)
     }
-    return StorageSite.findAllByIdInList(siteIds);
+
+    return sites;
   }
 
   def getGeoIp(ServletContext servletContext, HttpServletRequest request) {
