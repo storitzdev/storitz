@@ -20,8 +20,8 @@ export JAVA_HOME=/home/deploy/jre.invload
 # JAVA_OPTS is picked up by grails automatically.
 export JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=384m -Xms768m -Xmx1536m -XX:-UseGCOverheadLimit"
 
-PIDFILE=/tmp/update.pid
-EMAILFILE=/tmp/update.email
+PIDFILE=/tmp/update-bob.pid
+EMAILFILE=/tmp/update-bob.email
 HOST=`hostname`
 
 if test -f "$PIDFILE"; then
@@ -36,7 +36,7 @@ fi
 # Save our pid to PIDFILE
 echo $$ > $PIDFILE
 
-cd /home/deploy/src/storitz.${ENVNAME}
+cd /home/deploy/src/storitz.`echo ${ENVNAME} | sed 's/_bob//g'`
 
 $GRAILS_HOME/bin/grails -Dgrails.env=${ENVNAME}_script run-script scripts/UpdateInventoryBobScript.groovy > /home/deploy/logs/UpdateInventoryBob.${ENVNAME}.${DATE}.log 2>&1
 
