@@ -80,7 +80,7 @@ class SearchService {
 
     def checkpoint1 = System.currentTimeMillis();
     def start = System.currentTimeMillis();
-    def sites = mapService.getSites(criteria).sort { mapService.calcDistance(criteria.centroid.lat, it.lat, criteria.centroid.lng, it.lng)} as List
+    def sites = mapService.getSites(criteria)
     def checkpoint2 = System.currentTimeMillis();
     log.info("mapService.getSites completed: " + (checkpoint2 - checkpoint1));
     checkpoint1 = checkpoint2;
