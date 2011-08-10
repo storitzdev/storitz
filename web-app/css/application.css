@@ -1665,7 +1665,7 @@ body.site_detail .rent_me > div.rent_reserve .guarantee {
 }
 .move_in_quote .summary td {
   font-weight: bold;
-  width: 158px;
+  width: 142px;
   text-align: right;
   height: 19px;
 }
@@ -1681,22 +1681,19 @@ body.site_detail .rent_me > div.rent_reserve .guarantee {
   font-weight: normal;
   font-style: italic;
 }
-.move_in_quote .summary a.remove_offer {
-  background-color: #ddd;
-  color: #7c6c88;
-  border-radius: 7px;
-  font-size: 13px;
-  font-weight: bold;
-  display: inline-block;
+.move_in_quote .summary a.remove_offer,
+.move_in_quote .summary a.offer_details {
+  color: #1982DE;
+  font-size: 11px;
   text-decoration: none;
-  margin: -1px 0 0 4px;
-  padding: 1px 4px 2px;
+  margin-top: 3px;
   float: right;
+  font-weight: normal;
 }
 .move_in_quote .summary a.more_offers {
   color: #1982de;
   text-decoration: none;
-  display: block;
+  /*display: block;*/
   font-weight: normal;
   margin-top: 3px;
   font-size: 11px;

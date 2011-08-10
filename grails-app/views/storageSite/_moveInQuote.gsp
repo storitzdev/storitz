@@ -8,14 +8,19 @@
     </tr>
     <tr><th>Paid Until</th>
     <td><g:formatDate type="date" style="MEDIUM" date="${totals.paidThruDate}" /></td></tr>
-    <tr><th>Special Offer</th>
+    <tr>
+        <th>Special Offer
+            <g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">
+                (<a class="more_offers" href="#">View all</a>)
+            </g:if>
+        </th>
     <td>
       <g:if test="${promos.size() == 0}"><span class="none">No specials available</span></g:if>
       <g:elseif test="${promo == null}"><span class="none">No special selected</span></g:elseif>
-      <g:else>${promo.promoName}<a class="remove_offer" href="#">x</a></g:else>
-      <g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">
-        <a class="more_offers" href="#">View offers</a>
-      </g:if>
+      <g:else>${promo.promoName}<br/><a class="remove_offer" href="#">remove</a><a class="offer_details" href="#">details |&nbsp</a></g:else>
+      %{--<g:if test="${(promo == null && promos?.size() > 0) || promos.size() > 1}">--}%
+        %{--<a class="more_offers" href="#">View offers</a>--}%
+      %{--</g:if>--}%
       </td>
     </tr>
 
