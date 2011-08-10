@@ -387,7 +387,7 @@ body.site_detail .rent_me .unit_info div {
 body.site_detail .rent_me .move_in_quote table.summary {
   width: 92%;
 }
-body.site_detail .rent_me .move_in_quote table.summary td{
+body.site_detail .rent_me .move_in_quote table.summary tr.total td{
   width: auto;
 }
 body.site_detail .rent_me .move_in_quote tr.total span {
@@ -611,10 +611,10 @@ div.ieDivContainer input#getDirections {
 #bigbox div.socialButtons {
   display: inline;
   width: 155px;
-  /*float: right;*/
   padding-top: 13px;
   position: absolute;
   top: 0;
   left: 800px;
 }
+
 

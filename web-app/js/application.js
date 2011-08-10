@@ -607,6 +607,13 @@ function initialize_transaction_box(callback) {
 //    $("#promo_list").slideToggle();
     return false;
   });
+  $(".move_in_quote a.offer_details").live("click", function() {
+     _util.display_tooltip("#promo_details", $(this), {
+      left: -40,
+      top: 70
+    });
+    return false;
+  });
   $(".move_in_quote a.breakdown").live("click", function() {
     $(this).parent().next(".cost_breakdown").slideToggle();
     return false;

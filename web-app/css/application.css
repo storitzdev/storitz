@@ -1820,18 +1820,21 @@ body.checkout .cost_breakdown {
   margin: 5px -10px;
   border-bottom-width: 0;
 }
-.move_in_quote #promo_list {
+.move_in_quote #promo_list,
+.move_in_quote #promo_details {
   width: 255px;
   background: url("../images/v2/backgrounds/popup-titlebar-light-3x27.jpg") repeat-x #ffffff;
 }
-.move_in_quote #promo_list h2 {
+.move_in_quote #promo_list h2,
+.move_in_quote #promo_details h2 {
   text-align: center;
   font-size: 15px;
   border-bottom: 1px solid #ccc;
   margin: 0;
   padding: 5px;
 }
-.move_in_quote #promo_list li a {
+.move_in_quote #promo_list li a,
+.move_in_quote #promo_details li a {
   text-decoration: none;
 }
 .move_in_quote #promo_list li a.promo {
@@ -1844,21 +1847,28 @@ body.checkout .cost_breakdown {
 .move_in_quote #promo_list li a.promo:hover {
   background-color: #ddd;
 }
-.move_in_quote #promo_list li {
+.move_in_quote #promo_list li,
+.move_in_quote #promo_details li {
   display: block;
   border-bottom: 1px solid #ccc;
 }
-.move_in_quote #promo_list li.close {
+.move_in_quote #promo_list li.close,
+.move_in_quote #promo_details li.close {
   border-bottom-width: 0;
   padding: 5px 10px 0;
   margin: 0;
   text-align: right;
 }
-.move_in_quote #promo_list li.close a {
+.move_in_quote #promo_list li.close a,
+.move_in_quote #promo_details li.close a {
   font-family: Arial, Helvetica, sans-serif;
   color: #777777;
   font-weight:bold;
   font-size: 9pt;
+}
+.move_in_quote #promo_details li {
+  padding: 10px 0;
+  text-align: center;
 }
 .move_in_quote p {
   font-size: 11px;

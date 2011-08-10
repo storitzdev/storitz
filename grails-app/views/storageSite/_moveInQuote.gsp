@@ -17,7 +17,11 @@
     <td>
       <g:if test="${promos.size() == 0}"><span class="none">No specials available</span></g:if>
       <g:elseif test="${promo == null}"><span class="none">No special selected</span></g:elseif>
-      <g:else>${promo.promoName}<br/><a class="remove_offer" href="#">remove</a>%{--<a class="offer_details" href="#">details |&nbsp;</a>--}%</g:else>
+      <g:else>${promo.promoName}<br/><a class="remove_offer" href="#">remove</a>
+          <g:if test="${promo.description != promo.promoName && promo.description != null}">
+              <a class="offer_details" href="#">details |&nbsp;</a>
+          </g:if>
+      </g:else>
       </td>
     </tr>
 
@@ -33,6 +37,13 @@
     </g:else>
   </table>
 
+   <g:if test="${promo != null}">
+       <ul id="promo_details" class="tooltip">
+           <h2>Promo Details</h2>
+           <li>${promo.description}</li>
+           <li class="close"><a href="#" class="close">Close X</a></li>
+       </ul>
+   </g:if>
    <g:if test="${site.transactionType == TransactionType.RESERVATION && site.feed.reservationMoveInDescription}">
       <div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.reservationMoveInDescription}</div>
    </g:if>
