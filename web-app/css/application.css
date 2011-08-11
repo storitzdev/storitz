@@ -132,13 +132,16 @@ strong {
   display: inline-block;
   width: 155px;
   float: right;
-  padding-top: 13px;
+  padding-top: 2px;
   position: relative;
 }
 #bigbox div.socialButtons #splash_fb {
   position: absolute;
-  left: 77px;
-  top: 13px;
+  left: 79px;
+  top: 30px;
+}
+#bigbox div.socialButtons .twitter-follow-button {
+  padding-bottom: 9px;
 }
 #coverphoto {
   height: 225px;
@@ -848,6 +851,9 @@ body.serp #pickers li:first-child {
 body.serp #pickers li {
   padding: 5px;
   border-top: 1px solid white;
+}
+body.serp #pickers li a {
+  padding: 8px;
 }
 body.serp #pickers {
   width: 190px;

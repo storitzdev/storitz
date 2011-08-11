@@ -17,6 +17,7 @@
         <span class="first-child">Simplify your search for self storage.</span>
     </h1>
     <div class="socialButtons">
+        <a href="http://twitter.com/storitzdotcom" class="twitter-follow-button" data-show-count="false" data-width="160px">Follow @storitzdotcom</a>
         ${"<g:plusone size='medium'></g:plusone>"}
         <iframe id="splash_fb" src="http://www.facebook.com/plugins/like.php?app_id=204418169614657&amp;href=http%3A%2F%2Fwww.storitz.com&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
     </div>
@@ -174,6 +175,7 @@
     </div>
 </div>
 <p:dependantJavascript>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 <script type="text/javascript">
   //<![CDATA[
   $(document).ready(function() {

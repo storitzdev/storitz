@@ -26,6 +26,7 @@
             <li><input class="formpicker" type="radio" name="unit_type" value="upper" id="type_upper" <g:if test="${unitType == 'upper'}">checked="checked"</g:if> /><label for="type_upper">Upper</label></li>
             <li><input class="formpicker" type="radio" name="unit_type" value="drive-up" id="type_driveup" <g:if test="${unitType == 'drive-up'}">checked="checked"</g:if> /><label for="type_driveup">Drive-Up</label></li>
             <li><input class="formpicker" type="radio" name="unit_type" value="" id="type_all" <g:if test="${!unitType}">checked="checked"</g:if> /><label for="type_all">Any</label></li>
+            <li><g:link controller="search" action="index" params="[searchType: 'PARKING', where: params.where]">Looking for RV Parking?</g:link></li>
         </ul>
     </div>
     <div>
