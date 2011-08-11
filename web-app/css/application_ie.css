@@ -82,7 +82,7 @@
 }
 /*search list page*/
 body.serp #pickers {
-  top: 127px;
+  top: 11px;
 }
 body.serp #results_container div.map_container {
   width: 100%;
@@ -617,8 +617,17 @@ div.ieDivContainer input#getDirections {
   left: 800px;
 }
 /*college landing edits*/
-h2.collegeiate {
-  height: 44px;
+#main_container h2.collegiate {
+  height: 100%;
+}
+body.college.serp div#main_container {
+  width: 948px;
+}
+body.college.serp #main_container #pickers {
+  top: 0px;
+}
+body.college.serp form#picker {
+  position: relative;
 }
 
 
