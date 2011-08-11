@@ -18,13 +18,16 @@ class StorageMartTests extends GroovyTestCase {
 
   void testLoadFacilities() {
     def service
+    def ret
     def all = StorageMart.findAll()
     if (all && all.size() > 0) {
       def one = all[0]
-      println "username: ${one.stmUser}, password: ${one.stmPass}"
+      println "username: ${one.stmUser}"
+      println "password: ${one.stmPass}"
+      println "endpoint: ${one.url}"
       service = new StorageMartStorageFeedService(one.stmUser,one.stmPass,one.url)
-      service.loadFacilities();
+      ret = service.loadFacilities();
     }
-    assertTrue(service != null)
+    assertTrue(ret)
   }
 }
