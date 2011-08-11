@@ -6,6 +6,7 @@
         </h2>
         <div id="mini_map_canvas"></div>
     </div>
+    <div class='college_map_link'><a href='#' class='toggle_map_view'>Show big map!</a></div>
     <div>
         <h2>Unit Size</h2>
         <ul>

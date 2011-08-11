@@ -238,7 +238,7 @@
               </ul>
               <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Powered by Yelp</a>
               <g:if test="${bizTotal > 0 && review.reviewCount > review.reviews.size()}">
-                <a href="#" class="read_more">Read More Reviews From Yelp</a>
+                <a href="${review.bizUrl}" target="_blank" class="read_more">Read More Reviews From Yelp</a>
               </g:if>
           </div>
           <a name="tab_reviews">&nbsp;</a>

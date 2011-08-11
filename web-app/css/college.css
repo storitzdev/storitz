@@ -170,7 +170,7 @@ body.serp.college .panel {
 h2.collegiate {
     height:20px;
     overflow:hidden;
-    padding:14px 0 10px 137px;
+    padding:14px 0 10px 0px;
     text-align:center;
     letter-spacing:4px;
     text-transform:uppercase;
@@ -358,19 +358,38 @@ body.college_storage_tips.min {
 }
 /* the new map*/
 #main_container .college_map_container {
-  display: none;
-  width: 937px;
-  height: 424px;
   background: #ccc;
+}
+.map_container_visible {
   padding: 5px;
   margin-bottom: 5px;
 }
 #college_map_canvas {
-  position: relative;
+  position: absolute;
+  top: -9999px;
+  left: 0;
   width: 937px;
-  height: 424px;
+  height: 324px;
   border-color: #ddd;
   border-width: 1px 0;
   border-style: solid;
+}
+#college_map_canvas.visible {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+div.college_map_link {
+  display: none;
+  height: 16px;
+  background: #FFB90F;
+  padding-top: 3px;
+  padding-right: 4px;
+}
+div.college_map_link a {
+  text-decoration: none;
+  font-size: 12px;
+  float: right;
+  color: black;
 }
 
