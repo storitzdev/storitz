@@ -1,6 +1,7 @@
 package storitz
 
 import grails.test.*
+import com.storitz.StorageMart
 
 class StorageMartStorageFeedServiceTests extends GrailsUnitTestCase {
     protected void setUp() {

@@ -50,6 +50,13 @@
           </tr>
 
           <tr class="prop">
+            <td valign="top" class="name"><g:message code="storageMart.url.label" default="Storage Mart URL"/></td>
+
+            <td valign="top" class="value">${fieldValue(bean: storageMartInstance, field: "url")}</td>
+
+          </tr>
+
+          <tr class="prop">
             <td valign="top" class="name"><g:message code="storageSite.address.label" default="Address1"/></td>
 
             <td valign="top" class="value">${fieldValue(bean: storageMartInstance, field: "address1")}</td>

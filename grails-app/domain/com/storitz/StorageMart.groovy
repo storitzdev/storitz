@@ -3,10 +3,12 @@ package com.storitz
 class StorageMart extends Feed {
 
     static constraints = {
-      stmUser (nullable:false)
-      stmPass (nullable:false)
+      stmUser (nullable:true)
+      stmPass (nullable:true)
+      url (nullable:true)
     }
 
     String stmUser
     String stmPass
+    String url
 }

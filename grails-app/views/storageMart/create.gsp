@@ -91,6 +91,19 @@
               <div style="clear:both;"></div>
           </div>
 
+          <div class="checkout_fields">
+              <div style="width:300px;" class="checkout_value ${hasErrors(bean: storageMartInstance, field: 'url', 'errors')}">
+                  <g:textField id="url" name="url" style="width: 700px;" value="${storageMartInstance?.url}"/>
+              </div>
+              <div style="clear:both;"></div>
+          </div>
+
+          <div class="checkout_labels">
+              <div class="checkout_name" style="width:300px;">
+                  <label for="url">Storage Mart URL</label>
+              </div>
+              <div style="clear:both;"></div>
+          </div>
 
 
         <div class="checkout_section_header">
