@@ -6,3 +6,6 @@ rev  branch comment
 1615 v2_ui  Merge 1532 (sitelink unit update) from trunk to v2_ui (slipped past first time).
 1616 v2_ui  Convert unitid to int for move-in processing.
 1634 v2_ui  Sort sites by proximity before reducing quantity.
+1667 v2_ui  Cleaned up CenterShift inventory load. TempControl is now properly pulled for both initial load and refresh.
+1675 v2_ui  account for climate as last word in description
+

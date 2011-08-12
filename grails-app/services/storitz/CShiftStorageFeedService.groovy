@@ -805,6 +805,31 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     site.save(flush: true)
   }
 
+  private def setUnitTypeAndTempControl (siteUnit, unitTypeLookup, searchType, typeName) {
+    if (unitTypeLookup) {
+        siteUnit.unitType = unitTypeLookup.unitType
+        siteUnit.isTempControlled = unitTypeLookup.tempControlled
+    }
+    else {
+      if (searchType == SearchType.PARKING) {
+        siteUnit.unitType = UnitType.UNCOVERED
+      }
+      else {
+        if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
+          siteUnit.unitType = UnitType.UPPER
+        } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
+          siteUnit.unitType = UnitType.DRIVEUP
+        } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
+          siteUnit.unitType = UnitType.INTERIOR
+        }
+        if (!siteUnit.unitType) {
+          siteUnit.unitType = UnitType.UPPER
+        }
+      }
+      siteUnit.isTempControlled = (typeName ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(typeName ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    }
+  }
+
   def unitsAvailable(cshift, site, stats, writer) {
 
     // set all the unit counts to zero
@@ -885,33 +910,11 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             siteUnit.unitTypeInfo = typeName
             newUnit = true
 
-            if (unitTypeLookup) {
-              if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
-                siteUnit.unitType = unitTypeLookup.unitType
-                siteUnit.isTempControlled = unitTypeLookup.tempControlled
-              } else {
-                writer.println "Skipping illegal type ${typeName}"
-                continue
-              }
-            } else {
-              writer.println "Unknown unit type description ${typeName}"
-
-              if (searchType == SearchType.PARKING) {
-                siteUnit.unitType = UnitType.UNCOVERED
-              } else {
-                if ((typeName ==~ /(?i).*\s+up\s+.*/ && !(typeName ==~ /(?i).*drive.*/)) || typeName ==~ /(?i).*(2nd|3rd|second|third).*/) {
-                  siteUnit.unitType = UnitType.UPPER
-                } else if (typeName ==~ /(?i).*(drive|roll-up|roll up).*/) {
-                  siteUnit.unitType = UnitType.DRIVEUP
-                } else if (!(typeName ==~ /(?i).*outer.*/) || (typeName ==~ /(?i).*(interior|ground|1st).*/)) {
-                  siteUnit.unitType = UnitType.INTERIOR
-                }
-                if (!siteUnit.unitType) {
-                  siteUnit.unitType = UnitType.UPPER
-                }
-              }
-              siteUnit.isTempControlled = (typeName ==~ /(?i).*climate\s+.*/ && !(typeName ==~ /(?i).*non-climate\s+.*/))
+            if (unitTypeLookup && (unitTypeLookup.unitType == UnitType.UNDEFINED)) {
+              writer.println "Skipping illegal type ${typeName}"
+              continue
             }
+
             siteUnit.unitsize = unitSize
             siteUnit.totalUnits = totalUnits
             siteUnit.unitCount = vacant
@@ -926,8 +929,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             siteUnit.isSecure = false
             siteUnit.displaySize = displaySize
             stats.unitCount += vacant
-
-          } else {
+          }
+          else {
             siteUnit.isAvailable = true;
             siteUnit.unitCount = vacant
             siteUnit.totalUnits = totalUnits
@@ -936,6 +939,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             stats.unitCount += vacant
             stats.removedCount--
           }
+
+          setUnitTypeAndTempControl (siteUnit, unitTypeLookup, searchType, typeName)
           siteUnit.save(flush: true)
           if (newUnit) {
             site.addToUnits(siteUnit)
