@@ -740,7 +740,8 @@ for (int i = 0; i < descriptions_extraspace.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "Extraspace| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -754,7 +755,8 @@ for (int i = 0; i < descriptions_lockup.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -768,7 +770,8 @@ for (int i = 0; i < descriptions_metro.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "Metro| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -782,7 +785,8 @@ for (int i = 0; i < descriptions_price.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "Price| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -796,7 +800,8 @@ for (int i = 0; i < descriptions_simply.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "Simply| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -810,7 +815,8 @@ for (int i = 0; i < descriptions_sst.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "SST| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -824,7 +830,8 @@ for (int i = 0; i < descriptions_storquest.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "StorQuest| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -838,7 +845,8 @@ for (int i = 0; i < descriptions_ustoreit.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "U-Store-It| ${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
 
@@ -852,6 +860,7 @@ for (int i = 0; i < descriptions_valuestor.size(); i++) {
   else {
     def cc = (desc ==~ /(?i).*climate\s+.*/ && !(desc ==~ /(?i).*non-climate\s+.*/))
     def cc1 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
-    println "Value|${desc}| [Regexp] | ${cc}| ${cc1}"
+    def cc2 = (desc ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(desc ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
+    println "Lock Up| ${desc}| [Regexp] | ${cc}| ${cc1}| ${cc2}"
   }
 }
