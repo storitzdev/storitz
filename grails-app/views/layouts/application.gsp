@@ -10,6 +10,7 @@
         <p:dependantJavascript>
             <script type="text/javascript" src="${request.isSecure() ? "https" : "http"}://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
             <script type="text/javascript" src="${request.isSecure() ? "https" : "http"}://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         </p:dependantJavascript>
         <!--[if IE]> <link href="${resource(dir:'css', file:'application_ie.css')}" rel="stylesheet" type="text/css"> <![endif]-->
         <g:layoutHead />

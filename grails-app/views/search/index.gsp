@@ -12,6 +12,9 @@
 <g:else>
     <h1>Self Storage Prices &amp; Special Offers Near <strong>${queryTerm ? queryTerm : "You!"}</strong></h1>
 </g:else>
+<div id="tweet_serp">
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="storitzdotcom">Tweet</a>
+</div>
 <g:render template="/search/results" model="${resultsModel}"/>
 <p:dependantJavascript>
 <script type="text/javascript">

@@ -96,7 +96,6 @@
                   <div class="yelp_rating">
                       <a href="#tab_reviews"><img src="${review.starUrl}" /></a><span>${review.reviewCount} reviews</span>
                       <a class="yelp_logo" href="http://www.yelp.com" target="_blank">Reviews from yelp</a>
-                      %{--<g:else><strong>No Reviews</strong></g:else>--}%
                   </div>
               </g:if>
             <p>

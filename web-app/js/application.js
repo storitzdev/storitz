@@ -221,7 +221,7 @@ function updateShareLink() {
               "url":newHref,
               "title":"Directions to "+siteTitle,
               "text":"Share"
-            });
+            }, {button:true,onmouseover:false});
   }
   return false;
 }
@@ -563,7 +563,8 @@ function initialize_site_detail_page() {
     if(typeof stLight != "undefined") {
       stLight.options({
                 publisher:'fcffc560-5a11-434a-b976-a60a57d870ed',
-                onHover: false
+                button: true,
+                onhover: false
               });
     }
 

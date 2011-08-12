@@ -95,12 +95,12 @@ body.metro h1 {
   height: 27px;
   margin-bottom: 12px;
 }
-body.serp.metro #select_site_rv {
+body.serp.metro #tweet_serp {
   display: block;
   font-size:12px;
   position: absolute;
-  top: 90px;
-  left: 895px;
+  top: 87px;
+  left: 935px;
 }
 body.serp div.info_window div.info_right {
   float: right;
@@ -611,10 +611,14 @@ div.ieDivContainer input#getDirections {
 #bigbox div.socialButtons {
   display: inline;
   width: 155px;
-  padding-top: 13px;
+  padding-top: 11px;
   position: absolute;
   top: 0;
   left: 800px;
+}
+#bigbox div.socialButtons .twitter-follow-button {
+  padding-bottom: 0px;
+  margin: -9px 0 9px 0;
 }
 /*college landing edits*/
 #main_container h2.collegiate {
