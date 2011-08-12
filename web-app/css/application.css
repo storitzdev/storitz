@@ -2694,7 +2694,7 @@ body.thankyou .conf_box {
   display: block;
   position: relative;
   border: 1px solid #aaa;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -2852,6 +2852,15 @@ body.thankyou #purchaseSummary p {
   display: block;
   margin-bottom: 20px;
   /*display: none;*/
+}
+body.thankyou #conf_share {
+  display: block;
+  position: relative;
+  padding-bottom : 10px;
+  margin-left: 499px;
+}
+body.thankyou #conf_share #splash_fb{
+  position: absolute;
 }
 body.thankyou #purchaseSummary {
   position: absolute;

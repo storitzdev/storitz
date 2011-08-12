@@ -101,6 +101,10 @@
       <div class="column">Other</div>
     </div>
 </div>
+<div id="conf_share">
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.storitz.com" data-text="I just rented a unit from storitz.com!" data-count="horizontal">Tweet</a>
+    <iframe id="splash_fb" src="http://www.facebook.com/plugins/like.php?app_id=204418169614657&amp;href=http%3A%2F%2Fwww.storitz.com&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+</div>
 <div id="purchaseSummary" src="${createLink(mapping:'purchaseSummaryPanel')}">
   <g:render template="purchaseSummaryPanel" model="[unit:unit, site:site, insurance:insurance, promo:promo, promos:promos, totals:totals, moveInDate:moveInDate]" />
 </div>
