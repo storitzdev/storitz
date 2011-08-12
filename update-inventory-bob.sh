@@ -1,5 +1,5 @@
 #!/bin/sh
-# Update Inventory Extraspace
+# Update Inventory for Uncle Bob's
 
 ENVNAME=$1
 
