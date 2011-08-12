@@ -236,14 +236,7 @@
 
           <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: edomicoInstance, field: 'reservationMoveInDescription', 'errors')}">
-              <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>
-              <fckeditor:editor
-                      name="reservationMoveInDescription"
-                      width="650"
-                      height="300"
-                      toolbar="Storitz">
-                ${edomicoInstance?.reservationMoveInDescription}
-              </fckeditor:editor>
+                <g:textArea name="reservationMoveInDescription" rows="5" cols="100"> ${edomicoInstance?.reservationMoveInDescription} </g:textArea>
             </div>
             <div style="clear:both;"></div>
           </div>

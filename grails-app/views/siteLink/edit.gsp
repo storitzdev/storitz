@@ -163,14 +163,7 @@
 
           <div class="checkout_fields">
             <div style="width:300px;" class="checkout_value ${hasErrors(bean: siteLinkInstance, field: 'reservationMoveInDescription', 'errors')}">
-              <fckeditor:config CustomConfigurationsPath="${storitz.javascriptLink(src:'fckstoritz')}"/>
-              <fckeditor:editor
-                      name="reservationMoveInDescription"
-                      width="650"
-                      height="300"
-                      toolbar="Storitz">
-                ${siteLinkInstance?.reservationMoveInDescription}
-              </fckeditor:editor>
+                <g:textArea name="reservationMoveInDescription" rows="5" cols="100">${siteLinkInstance?.reservationMoveInDescription} </g:textArea>
             </div>
             <div style="clear:both;"></div>
           </div>

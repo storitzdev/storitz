@@ -45,7 +45,14 @@
        </ul>
    </g:if>
    <g:if test="${site.transactionType == TransactionType.RESERVATION && site.feed.reservationMoveInDescription}">
-      <div id="reservation_move_in_description" class="reservation_move_in_description">${site.feed.reservationMoveInDescription}</div>
+      <div id="reservation_move_in_description" class="reservation_move_in_description">
+          <strong>Reservation Details</strong>
+          <ul>
+          <g:each in="${site.feed.reservationMoveInDescription.split(/(\r|\n|\r\n)+/)}" var="line">
+              <li>${line}</li>
+          </g:each>
+          </ul>
+      </div>
    </g:if>
   <g:if test="${(promo == null && promos?.size() > 0) || promos?.size() > 1}">
   <ul id="promo_list" class="tooltip">

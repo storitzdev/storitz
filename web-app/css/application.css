@@ -2175,11 +2175,18 @@ body.checkout input.rent_me_button {
   padding: 2px;
   font-weight: bold;
 }
+.reservation_move_in_description {
+  padding-top: 10px;
+}
+.reservation_move_in_description strong {
+  font-size: 110%;
+}
 .reservation_move_in_description p {
     text-align: left;
     font-family: arial,helvetica,verdana,sans-serif;
     font-size: 11px;
     color: #000000;
+    line-height: 5px;
 }
 .reservation_move_in_description li {
     text-align: left;
