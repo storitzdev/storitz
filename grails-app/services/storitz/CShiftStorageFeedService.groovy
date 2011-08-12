@@ -826,7 +826,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
           siteUnit.unitType = UnitType.UPPER
         }
       }
-      siteUnit.isTempControlled = (typeName ==~ /(?i).*(heated|climate)[\p{Punct}\s]+.*/ && !(typeName ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]+.*/))
+      siteUnit.isTempControlled = (typeName ==~ /(?i).*(heated|climate)[\p{Punct}\s]*.*/ && !(typeName ==~ /(?i).*non[ -](heated|climate)[\p{Punct}\s]*.*/))
     }
   }
 
