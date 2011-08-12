@@ -1559,7 +1559,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
           break;
 
         case "PERCENT_OFF":
-          offerDiscount = (promo.promoQty / 100.0) * (discountRate + (promoMonths - 1) * rate);
+          offerDiscount = (promo.promoQty / 100.0) * (discountRate + promoMonths * rate);
           break;
 
         case "FIXED_RATE":
