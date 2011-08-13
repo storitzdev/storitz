@@ -67,7 +67,7 @@ class UpdateInventory {
         int batch_size = 50
         int i = 0;
         int num_errors = 0;
-        println "Beginning inventory refresh for ${allStorageSiteIds.size()} sites"
+        println "Beginning inventory refresh for ${allStorageSitesIds.size()} sites"
         while (i < allStorageSitesIds.size()) {
             int lower_i = i
             int upper_i = i+batch_size-1 > allStorageSitesIds.size()-1 ? allStorageSitesIds.size()-1 : i+batch_size-1
