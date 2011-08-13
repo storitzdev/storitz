@@ -12,11 +12,7 @@ class StorageMartTests extends GroovyTestCase {
       super.tearDown()
   }
 
-  void testSomething() {
-
-  }
-
-  void testLoadFacilities() {
+  void testLoadFacilitiesAndUnits() {
     def service
     def ret
     def all = StorageMart.findAll()
@@ -26,7 +22,7 @@ class StorageMartTests extends GroovyTestCase {
       println "password: ${one.stmPass}"
       println "endpoint: ${one.url}"
       service = new StorageMartStorageFeedService(one.stmUser,one.stmPass,one.url)
-      ret = service.loadFacilities();
+      ret = service.testLoadFacilitiesAndUnits();
     }
     assertTrue(ret)
   }

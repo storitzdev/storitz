@@ -8,6 +8,7 @@ import org.datacontract.schemas._2004._07.StorageMart_Services.Credentials
 import org.datacontract.schemas._2004._07.StorageMart_Services.FacilityOutput
 import org.datacontract.schemas._2004._07.StorageMart_Services.UnitTypeOutput
 import org.datacontract.schemas._2004._07.StorageMart_Services.ReservationRequest
+import org.datacontract.schemas._2004._07.StorageMart_Services.FacilityHoursOutput
 
 import java.net.URL
 import javax.xml.rpc.Service
@@ -79,7 +80,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   ///// FEED SERVICE METHODS /////
-  boolean loadFacilities () {
+  boolean testLoadFacilitiesAndUnits () {
     Credentials creds = new Credentials(this.passWord,this.userName); // yes, password/username
     BasicHttpBinding_IAvailabilityDataStub stub = new BasicHttpBinding_IAvailabilityDataStub(this.endpointURL, this.service);
     FacilityOutput [] output = stub.loadFacilities(creds);
@@ -89,13 +90,26 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       println "   NAME: ${o.name}"
       println "   DESC: ${o.description}"
       println "   PROMO: ${o.promotion}"
-      println "   IMG: ${o.image_Urls}"
+      println "   PROMO (LONG): ${o.promotionLongFormText}"
+      for (int i = 0; i < o.image_Urls.size(); i++) {
+        def image = o.image_Urls[i]
+        println "   IMG[${i}]: ${image}"
+      }
+      println "   ADDRESS: ${o.address}"
       println "   CITY: ${o.city}"
       println "   STATE: ${o.state}"
       println "   ZIP: ${o.zip}"
       println "   PHONE: ${o.phone}"
-      println "   OFFICE: ${o.office_Hours}"
-      println "   ACCESS: ${o.access_Hours}"
+      for (int i = 0; i < o.office_Hours.size(); i++) {
+        FacilityHoursOutput hours = o.office_Hours[i]
+        def daily_hrs = "${hours.open} - ${hours.closed}"
+        println "   OFFICE[${i}] : ${hours.day} (${hours.is_Closed ? 'closed' : 'open'}), \t${hours.is_24_Hours ? '24 hour' : daily_hrs}"
+      }
+      for (int i = 0; i < o.access_Hours.size(); i++) {
+        FacilityHoursOutput hours = o.access_Hours[i]
+        def daily_hrs = "${hours.open} - ${hours.closed}"
+        println "   ACCESS[${i}] : ${hours.day} (${hours.is_Closed ? 'closed' : 'open'}), \t${hours.is_24_Hours ? '24 hour' : daily_hrs}"
+      }
       println "   TRUCK: ${o.has_Truck_Rental}"
       println "   FREE TRUCK: ${o.has_Free_Truck_Rental}"
       println "   DOCK: ${o.has_Loading_Dock}"
@@ -106,22 +120,56 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       println "   24 HR: ${o.has_24_Hour_Access}"
       println "   HARDCART: ${o.has_Handcarts}"
       println "   FEE: ${o.admin_Fee}"
-      println "   MANAGER EMAIL: ${o.manager_Email_Address}"
+      for (int i = 0; i < o.manager_Email_Address.size(); i++) {
+        def email = o.manager_Email_Address[i]
+        println "   MANAGER EMAIL[${i}]: ${email}"
+      }
+
+      try {
+        testLoadUnitTypesByFacility (o.facility_Id)
+      }
+      catch (Throwable t) {
+        println "ERROR!!! FACILITY ID=${o.facility_Id}"
+        t.printStackTrace(System.err)
+      }
+
     }
-    return false
+    return true
   }
 
-  boolean loadUnitTypesByFacility (String facilityID) {
+  boolean testLoadUnitTypesByFacility (String facilityID) {
     Credentials creds = new Credentials(this.passWord,this.userName); // yes, password/username
     BasicHttpBinding_IAvailabilityDataStub stub = new BasicHttpBinding_IAvailabilityDataStub(this.endpointURL, this.service);
     UnitTypeOutput[] output = stub.loadUnitTypesByFacility(creds, facilityID)
     for (UnitTypeOutput o : output) {
-      println "UNIT: ${o.toString()}"
+      println "   UNIT: ${o.toString()}"
+      println "      can_Store_Vehicle:${o.can_Store_Vehicle}"
+      println "      discount_Price:${o.discount_Price}"
+      println "      door_Height:${o.door_Height}"
+      println "      door_Type:${o.door_Type}"
+      println "      door_Width:${o.door_Width}"
+      println "      electricity:${o.electricity}"
+      println "      floor:${o.floor}"
+      println "      has_Alarm:${o.has_Alarm}"
+      println "      has_Drive_Up_Access:${o.has_Drive_Up_Access}"
+      println "      has_Outdoor_Access:${o.has_Outdoor_Access}"
+      println "      height:${o.height}"
+      println "      is_Climate_Controlled:${o.is_Climate_Controlled}"
+      println "      is_Covered_Parking_Spot:${o.is_Covered_Parking_Spot}"
+      println "      is_Humidity_Controlled:${o.is_Humidity_Controlled}"
+      println "      length:${o.length}"
+      println "      price:${o.price}"
+      println "      promotion:${o.promotion}"
+      println "      promotionLongFormText:${o.promotionLongFormText}"
+      println "      quantity_Available:${o.quantity_Available}"
+      println "      type:${o.type}"
+      println "      unit_Type_Id:${o.unit_Type_Id}"
+      println "      width:${o.width}"
     }
     return false
   }
 
-  boolean addReservation () {
+  boolean testAddReservation () {
     ReservationRequest request = new ReservationRequest(
         "jmeade@storitz.com"  // java.lang.String customer_Email_Address
         ,"Testy"              // java.lang.String customer_First_Name
