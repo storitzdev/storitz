@@ -177,6 +177,9 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     if (site.useProrating && !site.prorateSecondMonth && (moveInDay > site.prorateStart)) {
       durationDays = (lastDayInMonth - moveInDay) + 1
       durationMonths -= (1 - (durationDays) / lastDayInMonth)
+      if (durationMonths < 0) {
+        durationMonths = 1 + durationMonths;
+      }
       insuranceCost = StoritzUtil.roundToMoney(premium * durationMonths)
       rentTotal = StoritzUtil.roundToMoney(rate * durationMonths)
       subTotal = rentTotal + insuranceCost
