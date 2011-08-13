@@ -47,4 +47,25 @@ class StorageUnit {
   Date dateCreated
   Date lastUpdated
   Integer maxReserveDays
+
+  String displayType() {
+    if (this.unitType == UnitType.INTERIOR) {
+      return "Interior Unit (Ground Floor)"
+    }
+    else if (this.unitType == UnitType.DRIVEUP) {
+      return "Drive-Up Unit";
+    }
+    else if (this.unitType == UnitType.UPPER) {
+      return "Upper Floor Unit";
+    }
+    else if (this.unitType == UnitType.COVERED) {
+      return "Covered Parking Space";
+    }
+    else if (this.unitType == UnitType.UNCOVERED) {
+      return "Uncovered Parking Space";
+    }
+    else {
+      return "";
+    }
+  }
 }
