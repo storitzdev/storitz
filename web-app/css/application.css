@@ -3145,5 +3145,14 @@ body.yelp_test table td {
   color: black;
   text-decoration: none;
 }
-
+body.checkout span.coupon_optional {
+  font-style: italic;
+  color: #444;
+  font-weight: normal;
+}
+body.checkout input#coupon_code {
+  display: inline-block;
+  width: 110px;
+  margin-left: 286px;
+}
 

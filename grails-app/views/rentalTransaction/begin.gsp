@@ -141,17 +141,21 @@
 
 
     <h1>Terms and Conditions
-    <div class="col2">
-    <input type="checkBox" name="_terms" class="required" value="y" ${(params._terms == 'y' ? 'checked="checked" ' : '')} />
-    I agree to the <a href="${createLink(controller: 'static', action: 'terms')}"
-                    onclick="window.open(this.href, '_blank');
-                    return false;">Storitz Inc. Terms of Use</a>
-    <g:if test="${site.rentalAgreement}">
-    and the <a href="${resource(file: site.rentalAgreement.src())}" onclick="window.open(this.href, '_blank'); return false;">${site.feed.operatorName} Terms and Conditions</a>
-    </g:if>
-    </div>
+        <div class="col2">
+            <input type="checkBox" name="_terms" class="required" value="y" ${(params._terms == 'y' ? 'checked="checked" ' : '')} />
+            I agree to the <a href="${createLink(controller: 'static', action: 'terms')}"
+                              onclick="window.open(this.href, '_blank');
+                              return false;">Storitz Inc. Terms of Use</a>
+            <g:if test="${site.rentalAgreement}">
+                and the <a href="${resource(file: site.rentalAgreement.src())}" onclick="window.open(this.href, '_blank'); return false;">${site.feed.operatorName} Terms and Conditions</a>
+            </g:if>
+        </div>
     </h1>
 
+    <h1>
+        Enter a Coupon Code<span class="coupon_optional"> (Optional)</span>
+        <input type="text" name="coupon_code" id="coupon_code">
+    </h1>
 
   <g:if test="${!(site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0)}">
   <h1 class="pay">Submit Booking
