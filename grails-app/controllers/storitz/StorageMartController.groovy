@@ -107,8 +107,8 @@ class StorageMartController {
     def storageMartInstance = StorageMart.get(params.id)
     def stats = new storitz.SiteStats()
     def writer = new PrintWriter(System.out)
-    StorageMartStorageFeedService storageMartService = new StorageMartStorageFeedService(storageMartInstance.stmUser, storageMartInstance.stmPass)
-    storageMartService.refreshSites((Feed)storageMartInstance,"BOB",stats,writer)
+    StorageMartStorageFeedService storageMartService = new StorageMartStorageFeedService(storageMartInstance.stmUser, storageMartInstance.stmPass, storageMartInstance.url)
+    storageMartService.refreshSites((Feed)storageMartInstance,"STM",stats,writer)
     flash.message = "Feed " + stats.createCount + " sites created " + stats.updateCount + " sites updated " + stats.unitCount + " units added."
     redirect(action: "show", id: storageMartInstance.id)
 
