@@ -88,7 +88,15 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
         def length = m[0][2] as Double
 
         def searchType
-        def unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+
+        def unitTypeLookup = null
+
+        // It's very unusual, but Extraspace has been known on at least one
+        // occasion to have no description for unit, and hence no typename
+        // for unit.
+        if (typeName)
+          unitTypeLookup = UnitTypeLookup.findByDescription(typeName)
+
         if (unitTypeLookup) {
           if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
             searchType = unitTypeLookup.searchType
