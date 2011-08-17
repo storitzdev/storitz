@@ -491,7 +491,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     ///////////////////////////////
     // SPECIAL OFFER RESTRICTION //
     ///////////////////////////////
-    def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo = unit.unitTypeInfo }
+    def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
     if (!specialOfferRestriction) {
       specialOfferRestriction = new SpecialOfferRestriction()
       specialOfferRestriction.restrictionInfo = unit.unitTypeInfo

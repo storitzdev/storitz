@@ -21,6 +21,10 @@ import com.storitz.StorageUnit
 import com.storitz.StorageSize
 import storitz.constants.SearchType
 import storitz.constants.UnitType
+import com.storitz.SpecialOffer
+import storitz.constants.PromoType
+import com.storitz.SpecialOfferRestriction
+import storitz.constants.SpecialOfferRestrictionType
 
 class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -131,7 +135,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
       if (unit) {
         storageSiteInstance.addToUnits (unit)
-        // load promos here
+        loadPromoForUnit (storageSiteInstance, unit, unit_promotion, unit_promotion_long)
       }
     }
   }
@@ -218,6 +222,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
     StorageSite site = StorageSite.findBySourceAndSourceId (source,site_id)
     if (!site) {
+      stats.createCount++
       site                     = new StorageSite()
       site.source              = source
       site.sourceId            = site_id
@@ -238,6 +243,9 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       site.taxRateRental       = 0
       site.maxReserveDays      = 30
     }
+    else {
+      stats.updateCount++
+    }
 
     site.address               = site_address
     site.city                  = site_city
@@ -247,7 +255,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       site.state               = State.fromText (site_state)
     }
     catch (Throwable t) {
-      t.printStackTrace()
+      println "Cannot handle state: ${site_state}"
       return null
     }
 
@@ -323,11 +331,11 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     SearchType searchType = unit_can_store_vehicle ? SearchType.PARKING : SearchType.STORAGE
     StorageSize unitSize = unitSizeService.getUnitSize(unit_width,unit_length, searchType)
     if (!unitSize) {
-      println ("Cannot determine unitSize for $unit_width}, ${unit_length},  search type ${searchType}. Skipping\n")
+      println ("Cannot determine unitSize for ${unit_width}, ${unit_length},  search type ${searchType}. Skipping\n")
       return
     }
 
-    StorageUnit unit = site.units.find { it.unitName = unit_type_id }
+    StorageUnit unit = site.units.find { it.unitName == unit_type_id }
 
     if (!unit) {
       unit = new StorageUnit()
@@ -339,9 +347,8 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       stats.createCount++
     }
     else {
-      stats.updateCount++
-      stats.unitCount++
       stats.removedCount--
+      stats.unitCount++
     }
     unit.unitType     = bestGuessUnitType (unit_drive_up,unit_has_outdoor_access,unit_floor)
     unit.pushRate     = unit_discount_price
@@ -369,6 +376,80 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       return UnitType.UPPER
 
     return UnitType.INTERIOR
+  }
+
+  private def loadPromoForUnit (site, unit, unit_promotion, unit_promotion_long) {
+    def code = "${site.sourceId}:${unit.unitNumber}"
+
+    ///////////////////
+    // SPECIAL OFFER //
+    ///////////////////
+    def specialOffer = site.specialOffers.find { it.code == code }
+    if (!specialOffer) {
+      specialOffer = new SpecialOffer()
+      specialOffer.code = code
+      specialOffer.featured = true
+      specialOffer.active = true
+      site.addToSpecialOffers(specialOffer)
+    }
+
+    try {
+      def vals = parsePromo (unit_promotion_long)
+
+      BigDecimal amount = new BigDecimal (vals['amount'])
+
+      // sanity checking
+      if (amount < 0.01)
+        return site.removeFromSpecialOffers (specialOffer)
+
+      Integer period = new Integer (vals['period'])
+      specialOffer.inMonth = 1                        //TODO: Hard-coded!!!
+      specialOffer.promoType = PromoType.PERCENT_OFF  //TODO: Hard-coded!!!
+      specialOffer.prepayMonths = period.intValue()
+      specialOffer.expireMonth = period.intValue()
+      specialOffer.promoQty = amount
+    }
+    catch (NumberFormatException e) {
+      println "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
+      e.printStackTrace()
+      return site.removeFromSpecialOffers (specialOffer)
+    }
+
+    specialOffer.description = unit_promotion_long // JM: Maybe flip-flop these?
+    if (!specialOffer.promoName)
+      specialOffer.promoName = unit_promotion      // JM: Maybe flip-flop these?
+
+    specialOffer.save()
+
+    ///////////////////////////////
+    // SPECIAL OFFER RESTRICTION //
+    ///////////////////////////////
+    def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
+    if (!specialOfferRestriction) {
+      specialOfferRestriction = new SpecialOfferRestriction()
+      specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
+      specialOfferRestriction.restrictive = false
+      specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+      specialOfferRestriction.save()
+      specialOffer.addToRestrictions(specialOfferRestriction)
+    }
+  }
+
+  // current promos:
+  // promo 20% Off Rental Promotion, promo long: 20% Off First Month's Rent
+  // promo 50% Off Rental Special, promo long: 50% Off First Month's Rent
+  // promo 99% Off - 1 Month, promo long: 99% Off First Month's Rent
+  // promo 99% Off - 2 Months, promo long: 99% Off First 2 Month's Rent
+  // promo No Discount, promo long: Limited Availability.  Reserve Today!
+  private def parsePromo (promo) {
+    def vals = ['amount':0, 'period':1]
+    def valsMatcher = promo =~ /(\d+)% Off First (\d?).*/
+    if (valsMatcher.getCount())
+      valsMatcher.each {
+        if (it[1]) vals['amount']=it[1]
+        if (it[2]) vals['period']=it[2]
+      }
+    return vals
   }
 
   ///////////////////////////////////////////////////
