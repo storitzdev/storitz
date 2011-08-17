@@ -25,6 +25,9 @@ import com.storitz.SpecialOffer
 import storitz.constants.PromoType
 import com.storitz.SpecialOfferRestriction
 import storitz.constants.SpecialOfferRestrictionType
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import com.storitz.User
 
 class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -75,7 +78,16 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   void updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
-    //To change body of implemented methods use File | Settings | File Templates.
+    FacilityOutput [] sites = loadFacilities()
+    FacilityOutput theSite = null
+    for (int i = 0; i < sites.size(); i++) {
+      theSite = sites[i]
+      if (theSite.facility_Id.equalsIgnoreCase(storageSiteInstance.sourceId)) {
+        createUpdateSite (theSite, 'STM', stats, writer)
+        return
+      }
+    }
+    println "Unable to update site! ID=${storageSiteInstance.id} SOURCE_ID=${storageSiteInstance.sourceId}"
   }
 
   @Override
@@ -266,6 +278,11 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     site.isKeypad              = site_electronic_gate
     site.isCamera              = site_camera
     site.isTwentyFourHour      = site_24_hr
+
+    setOfficeHours (site, site_office_hours)
+    setAccessHours (site, site_access_hours)
+    createSiteUsers (site, site_manager_emails)
+
     site.lastChange            = new Date()
     site.lastUpdate            = site.lastChange.time
 
@@ -280,6 +297,97 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       println "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
     }
     return null
+  }
+
+  private def setOfficeHours (site, hours) {
+    DateFormat df = new SimpleDateFormat("hh:mm a")
+    if (hours && hours.size() == 7) {
+      if (!hours[0].is_Closed) {
+        site.openMonday = true
+        site.startMonday = df.parse(hours[0].open)
+        site.endMonday = df.parse(hours[0].closed)
+      }
+      if (!hours[1].is_Closed) {
+        site.openTuesday = true
+        site.startTuesday = df.parse(hours[1].open)
+        site.endTuesday = df.parse(hours[1].closed)
+      }
+      if (!hours[2].is_Closed) {
+        site.openWednesday = true
+        site.startWednesday = df.parse(hours[2].open)
+        site.endWednesday = df.parse(hours[2].closed)
+      }
+      if (!hours[3].is_Closed) {
+        site.openThursday = true
+        site.startThursday = df.parse(hours[3].open)
+        site.endThursday = df.parse(hours[3].closed)
+      }
+      if (!hours[4].is_Closed) {
+        site.openFriday = true
+        site.startFriday = df.parse(hours[4].open)
+        site.endFriday = df.parse(hours[4].closed)
+      }
+      if (!hours[5].is_Closed) {
+        site.openSaturday = true
+        site.startSaturday = df.parse(hours[5].open)
+        site.endSaturday = df.parse(hours[5].closed)
+      }
+      if (!hours[6].is_Closed) {
+        site.openSunday = true
+        site.startSunday = df.parse(hours[6].open)
+        site.endSunday = df.parse(hours[6].closed)
+      }
+    }
+  }
+
+  private def setAccessHours (site, hours) {
+    DateFormat df = new SimpleDateFormat("hh:mm a")
+    if (hours && hours.size() == 7) {
+      if (!hours[0].is_Closed) {
+        site.openMonday = true
+        site.startMondayGate = df.parse(hours[0].open)
+        site.endMondayGate = df.parse(hours[0].closed)
+      }
+      if (!hours[1].is_Closed) {
+        site.openTuesday = true
+        site.startTuesdayGate = df.parse(hours[1].open)
+        site.endTuesdayGate = df.parse(hours[1].closed)
+      }
+      if (!hours[2].is_Closed) {
+        site.openWednesday = true
+        site.startWednesdayGate = df.parse(hours[2].open)
+        site.endWednesdayGate = df.parse(hours[2].closed)
+      }
+      if (!hours[3].is_Closed) {
+        site.openThursday = true
+        site.startThursdayGate = df.parse(hours[3].open)
+        site.endThursdayGate = df.parse(hours[3].closed)
+      }
+      if (!hours[4].is_Closed) {
+        site.openFriday = true
+        site.startFridayGate = df.parse(hours[4].open)
+        site.endFridayGate = df.parse(hours[4].closed)
+      }
+      if (!hours[5].is_Closed) {
+        site.openSaturday = true
+        site.startSaturdayGate = df.parse(hours[5].open)
+        site.endSaturdayGate = df.parse(hours[5].closed)
+      }
+      if (!hours[6].is_Closed) {
+        site.openSunday = true
+        site.startSundayGate = df.parse(hours[6].open)
+        site.endSundayGate = df.parse(hours[6].closed)
+      }
+    }
+  }
+
+  private def createSiteUsers (site, site_manager_emails) {
+    if (site_manager_emails) {
+      for (int i = 0; i < site_manager_emails.size(); i++) {
+        def email = site_manager_emails[i]
+        createSiteUser(site, email, null, site.feed.manager)
+      }
+    }
   }
 
   private String siteTitle (String city, String name) {
@@ -344,12 +452,11 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       unit.isIrregular  = false
       unit.isSecure     = true
       unit.isAvailable  = true
-      stats.createCount++
     }
     else {
       stats.removedCount--
-      stats.unitCount++
     }
+    stats.unitCount++
     unit.unitType     = bestGuessUnitType (unit_drive_up,unit_has_outdoor_access,unit_floor)
     unit.pushRate     = unit_discount_price
     unit.isPowered    = unit_powered

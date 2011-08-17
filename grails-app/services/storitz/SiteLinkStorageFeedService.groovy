@@ -704,38 +704,6 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  def createSiteUser(site, email, realName, manager) {
-    def user = User.findByEmail(email)
-
-    if (!email || email.size() == 0) return
-
-    if (!realName || realName.size() == 0) realName = email
-
-    if (!user) {
-      user = new User(
-              username: email,
-              password: (Math.random() * System.currentTimeMillis()) as String,
-              description: "Site Manager for ${site.title}",
-              email: email,
-              userRealName: realName,
-              accountExpired: false,
-              accountLocked: false,
-              passwordExpired: false,
-              enabled: false
-      )
-      user.manager = manager
-      user.save(flush: true)
-      SiteUser.link(site, user)
-    }
-    if (!UserNotificationType.userHasNotificationType(user, 'NOTIFICATION_SITE_MANAGER')) {
-      def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
-      UserNotificationType.create(user, notificationType, true)
-    }
-    if (!UserRole.userHasRole(user, 'ROLE_USER')) {
-      UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
-    }
-  }
-
   def getSiteDetails(siteLink, site, tab, stats, newSite, writer) {
     def address = tab.sSiteAddr1.text() + ' ' + tab.sSiteAddr2.text() + ', ' + tab.sSiteCity.text() + ', ' + tab.sSiteRegion.text() + ' ' + tab.sSitePostalCode.text()
 

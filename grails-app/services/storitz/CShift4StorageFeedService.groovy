@@ -35,34 +35,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     return lookupUser
   }
 
-  def createSiteUser(site, email, realName, manager) {
-    def user = User.findByEmail(email)
-    if (!user) {
-      user = new User(
-              username: email,
-              password: ((Math.random() * System.currentTimeMillis()) as String),
-              description: "Site Manager for ${site.title}",
-              email: email,
-              userRealName: realName,
-              accountExpired: false,
-              accountLocked: false,
-              passwordExpired: false,
-              enabled: false
-      )
-      user.manager = manager
-      user.save(flush: true)
-      SiteUser.link(site, user)
-    }
-    if (!UserNotificationType.userHasNotificationType(user, 'NOTIFICATION_SITE_MANAGER')) {
-      def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
-      UserNotificationType.create(user, notificationType, true)
-    }
-    if (!UserRole.userHasRole(user, 'ROLE_USER')) {
-      UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
-    }
-  }
-
-
   @Override
   void refreshSites(Feed feed, String source, SiteStats stats, PrintWriter writer) {
     def cshift = (CenterShift)feed
@@ -242,7 +214,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           csite.save(flush: true)
           SiteUser.link(csite, cshift.manager)
           if (site.emailaddress?.size() > 0) {
-            createSiteUser(csite, site.emailaddress, site.emailaddress, cshift.manager)
+            createSiteUser(csite, site.emailaddress, null, cshift.manager)
           }
 
           loadInsurance(cshift, csite)

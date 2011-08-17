@@ -406,7 +406,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
     def email = tab.EMAIL_ADDRESS.text()
     if (email.size() > 0) {
-      createSiteUser(site, email, email, cshift.manager)
+      createSiteUser(site, email, null, cshift.manager)
     }
 
     unitsAvailable(cshift, site, stats, writer)
@@ -434,7 +434,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         def email = tab.EMAIL_ADDRESS.text()
         println "Checking contact for email: ${email}"
         if (email.size() > 0) {
-          createSiteUser(site, email, email, cshift.manager)
+          createSiteUser(site, email, null, cshift.manager)
         }
       }
     }
@@ -457,41 +457,6 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
       if (site) {
         addSitePhone(site, writer)
       }
-    }
-  }
-
-  def createSiteUser(site, email, realName, manager) {
-    def user = User.findByEmail(email)
-    if (!user) {
-      user = new User(
-              username: email,
-              password: (Math.random() * System.currentTimeMillis()) as String,
-              description: "Site Manager for ${site.title}",
-              email: email,
-              userRealName: realName,
-              accountExpired: false,
-              accountLocked: false,
-              passwordExpired: false,
-              enabled: false
-      )
-      user.manager = manager
-      if (user.validate()) {
-        user.save(flush: true)
-        SiteUser.link(site, user)
-      } else {
-        println "Bad user from feed - errors below: "
-        user.errors.allErrors.each {
-          println it
-        }
-        return;
-      }
-    }
-    if (!UserNotificationType.userHasNotificationType(user, 'NOTIFICATION_SITE_MANAGER')) {
-      def notificationType = NotificationType.findByNotificationType('NOTIFICATION_SITE_MANAGER')
-      UserNotificationType.create(user, notificationType, true)
-    }
-    if (!UserRole.userHasRole(user, 'ROLE_USER')) {
-      UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
     }
   }
 
