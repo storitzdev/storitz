@@ -75,7 +75,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     }
 
     for (int i = 0; i < sites.size(); i++) {
-      StorageSite theSite = createUpdateSite (sites[i], source, stats, writer)
+      StorageSite theSite = createUpdateSite (sites[i], feed.manager, source, stats, writer)
       if (theSite) {
         feed.addToSites (theSite)
         SiteUser.link (theSite, feed.manager)
@@ -181,12 +181,12 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   boolean moveIn(RentalTransaction trans) {
-    return false  //To change body of implemented methods use File | Settings | File Templates.
+    return reserve (trans)
   }
 
   @Override
   boolean reserve(RentalTransaction trans) {
-    return false  //To change body of implemented methods use File | Settings | File Templates.
+    return false
   }
 
   @Override
@@ -202,7 +202,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   ///// HELPER METHODS /////
   //////////////////////////
 
-  StorageSite createUpdateSite (FacilityOutput theSite, String source, SiteStats stats, PrintWriter writer) {
+  StorageSite createUpdateSite (FacilityOutput theSite, User feedManager, String source, SiteStats stats, PrintWriter writer) {
     def site_id = theSite.facility_Id
     def site_name = theSite.name
     def site_desc = theSite.description
@@ -288,7 +288,6 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
     setOfficeHours (site, site_office_hours)
     setAccessHours (site, site_access_hours)
-    createSiteUsers (site, site_manager_emails)
 
     site.lastChange            = new Date()
     site.lastUpdate            = site.lastChange.time
@@ -299,7 +298,8 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
     if (site.validate()) {
       site.save ()                  // force gen site.id
-      setImages (site, site_images) // images after save to guarantee site.id
+      createSiteUsers (site, site_manager_emails, feedManager)
+      setImages (site, site_images)
       site.save (flush:true)        // final save
       return site
     }
@@ -391,17 +391,22 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  private def createSiteUsers (site, site_manager_emails) {
+  private def createSiteUsers (site, site_manager_emails, feed_manager) {
     if (site_manager_emails) {
       for (int i = 0; i < site_manager_emails.size(); i++) {
         def email = site_manager_emails[i]
-        createSiteUser(site, email, null, site.feed.manager)
+        createSiteUser(site, email, null, feed_manager)
       }
     }
   }
 
   private def setImages (site, site_images) {
     if (!site_images)
+      return
+
+    // Only pull the images from the feed once.
+    // This may be subject to change
+    if (site.siteImages())
       return
 
     def imgOrder = site.images.collect { it.imgOrder }.max()
@@ -415,9 +420,19 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       MultipartFile imgFile = new MockMultipartFile(site_images[i].substring(site_images[i].lastIndexOf("/")+1), imgSrc)
 
       def ext
+      def web
       def newName
       if (imgFile.size > 0) {
         ext = site_images[i].substring(site_images[i].lastIndexOf("."))
+        web = site_images[i].substring(site_images[i].lastIndexOf(".")-3)
+
+        // Web-sized images come in with names ending like "0105web.jpg".
+        // These web-sized images get rasterized horribly by our thumbnail routines.
+        // If we see an image with "web" just before the extension, then assume
+        // it to be one of these and ignore it.
+        if (web && web.startsWith("web"))
+          continue
+
         newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
         if (fileUploadService.moveFile(imgFile, '/images/upload', newName, site.id)) {
           def tmpPath = fileUploadService.getFilePath('/images/upload', newName, site.id)
