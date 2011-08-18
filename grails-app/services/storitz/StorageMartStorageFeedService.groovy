@@ -90,7 +90,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     for (int i = 0; i < sites.size(); i++) {
       theSite = sites[i]
       if (theSite.facility_Id.equalsIgnoreCase(storageSiteInstance.sourceId)) {
-        createUpdateSite (theSite, 'STM', stats, writer)
+        createUpdateSite (theSite, storageSiteInstance.feed.manager, 'STM', stats, writer)
         return
       }
     }
