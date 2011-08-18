@@ -2,6 +2,7 @@ package storitz
 
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class FileUploadService implements ApplicationContextAware {
 
@@ -12,7 +13,9 @@ class FileUploadService implements ApplicationContextAware {
   def moveFile(file, folderRelativePath, fileName, objectId) {
     try {
       File filePath = new File(getAbsolutePath(folderRelativePath + getIdPath(objectId), fileName))
-      filePath.mkdirs()
+      filePath.mkdirs()        // CommonsMultipartFile.transferTo can handle directories (file upload)
+      filePath.delete()        // MockMultipartFile.transferTo cannot (feed refresh)
+      filePath.createNewFile()
       file.transferTo(filePath)
       return true
     } catch (Exception exception) {
@@ -22,7 +25,11 @@ class FileUploadService implements ApplicationContextAware {
   }
 
   public String getAbsolutePath(folderPath, fileName) {
-    "${applicationContext.getResource(folderPath).getFile()}${File.separatorChar}${fileName}"
+    // prefer application context, if available
+    if (applicationContext)
+        return "${applicationContext.getResource(folderPath).getFile()}${File.separatorChar}${fileName}"
+
+    return "${ConfigurationHolder.config.grails.serverRoot}${folderPath}${fileName}"
   }
 
   public String getIdPath(id) {

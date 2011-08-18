@@ -11,6 +11,9 @@ import org.datacontract.schemas._2004._07.StorageMart_Services.ReservationReques
 import org.datacontract.schemas._2004._07.StorageMart_Services.FacilityHoursOutput
 
 import java.net.URL
+import org.springframework.mock.web.MockMultipartFile
+import org.springframework.web.multipart.commons.CommonsMultipartFile
+import org.apache.commons.fileupload.disk.DiskFileItem
 import javax.xml.rpc.Service
 import com.storitz.StorageMart
 import com.storitz.SiteUser
@@ -28,12 +31,16 @@ import storitz.constants.SpecialOfferRestrictionType
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import com.storitz.User
+import org.springframework.mock.web.MockMultipartHttpServletRequest
+import org.springframework.web.multipart.MultipartFile
 
 class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   static transactional = true
 
   def unitSizeService = new UnitSizeService()
+  def fileUploadService = new FileUploadService()
+  def imageService = new ImageService()
 
   private URL endpointURL
   private Service service
@@ -291,7 +298,10 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     updateUnits (site, stats, writer)
 
     if (site.validate()) {
-      return site.save (flush:true)
+      site.save ()                  // force gen site.id
+      setImages (site, site_images) // images after save to guarantee site.id
+      site.save (flush:true)        // final save
+      return site
     }
     else {
       println "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
@@ -386,6 +396,40 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       for (int i = 0; i < site_manager_emails.size(); i++) {
         def email = site_manager_emails[i]
         createSiteUser(site, email, null, site.feed.manager)
+      }
+    }
+  }
+
+  private def setImages (site, site_images) {
+    if (!site_images)
+      return
+
+    def imgOrder = site.images.collect { it.imgOrder }.max()
+    if (!imgOrder)
+      imgOrder = 0;
+    else
+      imgOrder++
+
+    for (int i = 0; i < site_images.size(); i++) {
+      byte [] imgSrc = site_images[i].toURL().bytes
+      MultipartFile imgFile = new MockMultipartFile(site_images[i].substring(site_images[i].lastIndexOf("/")+1), imgSrc)
+
+      def ext
+      def newName
+      if (imgFile.size > 0) {
+        ext = site_images[i].substring(site_images[i].lastIndexOf("."))
+        newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
+        if (fileUploadService.moveFile(imgFile, '/images/upload', newName, site.id)) {
+          def tmpPath = fileUploadService.getFilePath('/images/upload', newName, site.id)
+          def filePath = fileUploadService.getFilePath('/images/site', newName, site.id)
+          def filePathMid = fileUploadService.getFilePath('/images/site', 'mid-' + newName, site.id)
+          def filePathThumb = fileUploadService.getFilePath('/images/site', 'thumb-' + newName, site.id)
+          imageService.scaleImages(new File(tmpPath), site.id, imgOrder, filePath, filePathMid, filePathThumb, site)
+          imageService.iptcTagImage(new File(filePath), site, imgOrder, 'FULL')
+          imageService.iptcTagImage(new File(filePathMid), site, imgOrder, 'MID')
+          imageService.iptcTagImage(new File(filePathThumb), site, imgOrder, 'THUMB')
+          ++imgOrder
+        }
       }
     }
   }

@@ -17,7 +17,7 @@ import org.grails.plugins.imagetools.ImageTool
 
 class ImageService {
 
-  def fileUploadService
+  def fileUploadService = new FileUploadService()
 
   boolean transactional = false
 
