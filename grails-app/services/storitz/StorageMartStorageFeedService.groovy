@@ -182,7 +182,9 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     UnitTypeOutput [] unitTypeOutput = loadUnitTypesByFacility (trans.site.sourceId)
     for (int i = 0; i < unitTypeOutput.length; i++) {
       UnitTypeOutput theUnit = unitTypeOutput[i]
-      if (theUnit.unit_Type_Id == unit.unitNumber)
+      int unitTypeId = theUnit.unit_Type_Id.intValue()
+      int unitNumber = Integer.parseInt(unit.unitNumber).intValue()
+      if (unitTypeId == unitNumber)
         return theUnit.quantity_Available > trans.site.minInventory
     }
 
