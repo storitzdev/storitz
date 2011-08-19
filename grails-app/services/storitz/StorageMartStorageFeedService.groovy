@@ -94,7 +94,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         return
       }
     }
-    println "Unable to update site! ID=${storageSiteInstance.id} SOURCE_ID=${storageSiteInstance.sourceId}"
+    log.info "Unable to update site! ID=${storageSiteInstance.id} SOURCE_ID=${storageSiteInstance.sourceId}"
   }
 
   @Override
@@ -321,7 +321,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       site.state               = State.fromText (site_state)
     }
     catch (Throwable t) {
-      println "Cannot handle state: ${site_state}"
+      log.info "Cannot handle state: ${site_state}"
       return null
     }
 
@@ -352,7 +352,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       return site
     }
     else {
-      println "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
+      log.info "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
     }
     return null
   }
@@ -546,7 +546,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     SearchType searchType = unit_can_store_vehicle ? SearchType.PARKING : SearchType.STORAGE
     StorageSize unitSize = unitSizeService.getUnitSize(unit_width,unit_length, searchType)
     if (!unitSize) {
-      println ("Cannot determine unitSize for ${unit_width}, ${unit_length},  search type ${searchType}. Skipping\n")
+      log.info ("Cannot determine unitSize for ${unit_width}, ${unit_length},  search type ${searchType}. Skipping\n")
       return
     }
 
@@ -624,7 +624,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       specialOffer.promoQty = amount
     }
     catch (NumberFormatException e) {
-      println "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
+      log.info "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
       e.printStackTrace()
       return site.removeFromSpecialOffers (specialOffer)
     }
@@ -690,51 +690,51 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   public boolean testLoadFacilitiesAndUnits () {
     FacilityOutput [] output = loadFacilities()
     for (FacilityOutput o : output) {
-      println "FACILITY: ${o.toString()}"
-      println "   ID: ${o.facility_Id}"
-      println "   NAME: ${o.name}"
-      println "   DESC: ${o.description}"
-      println "   PROMO: ${o.promotion}"
-      println "   PROMO (LONG): ${o.promotionLongFormText}"
+      log.info "FACILITY: ${o.toString()}"
+      log.info "   ID: ${o.facility_Id}"
+      log.info "   NAME: ${o.name}"
+      log.info "   DESC: ${o.description}"
+      log.info "   PROMO: ${o.promotion}"
+      log.info "   PROMO (LONG): ${o.promotionLongFormText}"
       for (int i = 0; i < o.image_Urls.size(); i++) {
         def image = o.image_Urls[i]
-        println "   IMG[${i}]: ${image}"
+        log.info "   IMG[${i}]: ${image}"
       }
-      println "   ADDRESS: ${o.address}"
-      println "   CITY: ${o.city}"
-      println "   STATE: ${o.state}"
-      println "   ZIP: ${o.zip}"
-      println "   PHONE: ${o.phone}"
+      log.info "   ADDRESS: ${o.address}"
+      log.info "   CITY: ${o.city}"
+      log.info "   STATE: ${o.state}"
+      log.info "   ZIP: ${o.zip}"
+      log.info "   PHONE: ${o.phone}"
       for (int i = 0; i < o.office_Hours.size(); i++) {
         FacilityHoursOutput hours = o.office_Hours[i]
         def daily_hrs = "${hours.open} - ${hours.closed}"
-        println "   OFFICE[${i}] : ${hours.day} (${hours.is_Closed ? 'closed' : 'open'}), \t${hours.is_24_Hours ? '24 hour' : daily_hrs}"
+        log.info "   OFFICE[${i}] : ${hours.day} (${hours.is_Closed ? 'closed' : 'open'}), \t${hours.is_24_Hours ? '24 hour' : daily_hrs}"
       }
       for (int i = 0; i < o.access_Hours.size(); i++) {
         FacilityHoursOutput hours = o.access_Hours[i]
         def daily_hrs = "${hours.open} - ${hours.closed}"
-        println "   ACCESS[${i}] : ${hours.day} (${hours.is_Closed ? 'closed' : 'open'}), \t${hours.is_24_Hours ? '24 hour' : daily_hrs}"
+        log.info "   ACCESS[${i}] : ${hours.day} (${hours.is_Closed ? 'closed' : 'open'}), \t${hours.is_24_Hours ? '24 hour' : daily_hrs}"
       }
-      println "   TRUCK: ${o.has_Truck_Rental}"
-      println "   FREE TRUCK: ${o.has_Free_Truck_Rental}"
-      println "   DOCK: ${o.has_Loading_Dock}"
-      println "   DOCK SZ: ${o.loading_Dock_Size}"
-      println "   ELECTRONIC GATE: ${o.has_Electronic_Gate_Access}"
-      println "   CAMERA: ${o.has_Surveillance_Cameras}"
-      println "   FENCED: ${o.is_Fenced_And_Lighted}"
-      println "   24 HR: ${o.has_24_Hour_Access}"
-      println "   HARDCART: ${o.has_Handcarts}"
-      println "   FEE: ${o.admin_Fee}"
+      log.info "   TRUCK: ${o.has_Truck_Rental}"
+      log.info "   FREE TRUCK: ${o.has_Free_Truck_Rental}"
+      log.info "   DOCK: ${o.has_Loading_Dock}"
+      log.info "   DOCK SZ: ${o.loading_Dock_Size}"
+      log.info "   ELECTRONIC GATE: ${o.has_Electronic_Gate_Access}"
+      log.info "   CAMERA: ${o.has_Surveillance_Cameras}"
+      log.info "   FENCED: ${o.is_Fenced_And_Lighted}"
+      log.info "   24 HR: ${o.has_24_Hour_Access}"
+      log.info "   HARDCART: ${o.has_Handcarts}"
+      log.info "   FEE: ${o.admin_Fee}"
       for (int i = 0; i < o.manager_Email_Address.size(); i++) {
         def email = o.manager_Email_Address[i]
-        println "   MANAGER EMAIL[${i}]: ${email}"
+        log.info "   MANAGER EMAIL[${i}]: ${email}"
       }
 
       try {
         testLoadUnitTypesByFacility (o.facility_Id)
       }
       catch (Throwable t) {
-        println "ERROR!!! FACILITY ID=${o.facility_Id}"
+        log.info "ERROR!!! FACILITY ID=${o.facility_Id}"
         t.printStackTrace(System.err)
       }
 
@@ -745,29 +745,29 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   public boolean testLoadUnitTypesByFacility (String facilityID) {
     UnitTypeOutput[] output = loadUnitTypesByFacility(facilityID)
     for (UnitTypeOutput o : output) {
-      println "   UNIT: ${o.toString()}"
-      println "      can_Store_Vehicle:${o.can_Store_Vehicle}"
-      println "      discount_Price:${o.discount_Price}"
-      println "      door_Height:${o.door_Height}"
-      println "      door_Type:${o.door_Type}"
-      println "      door_Width:${o.door_Width}"
-      println "      electricity:${o.electricity}"
-      println "      floor:${o.floor}"
-      println "      has_Alarm:${o.has_Alarm}"
-      println "      has_Drive_Up_Access:${o.has_Drive_Up_Access}"
-      println "      has_Outdoor_Access:${o.has_Outdoor_Access}"
-      println "      height:${o.height}"
-      println "      is_Climate_Controlled:${o.is_Climate_Controlled}"
-      println "      is_Covered_Parking_Spot:${o.is_Covered_Parking_Spot}"
-      println "      is_Humidity_Controlled:${o.is_Humidity_Controlled}"
-      println "      length:${o.length}"
-      println "      price:${o.price}"
-      println "      promotion:${o.promotion}"
-      println "      promotionLongFormText:${o.promotionLongFormText}"
-      println "      quantity_Available:${o.quantity_Available}"
-      println "      type:${o.type}"
-      println "      unit_Type_Id:${o.unit_Type_Id}"
-      println "      width:${o.width}"
+      log.info "   UNIT: ${o.toString()}"
+      log.info "      can_Store_Vehicle:${o.can_Store_Vehicle}"
+      log.info "      discount_Price:${o.discount_Price}"
+      log.info "      door_Height:${o.door_Height}"
+      log.info "      door_Type:${o.door_Type}"
+      log.info "      door_Width:${o.door_Width}"
+      log.info "      electricity:${o.electricity}"
+      log.info "      floor:${o.floor}"
+      log.info "      has_Alarm:${o.has_Alarm}"
+      log.info "      has_Drive_Up_Access:${o.has_Drive_Up_Access}"
+      log.info "      has_Outdoor_Access:${o.has_Outdoor_Access}"
+      log.info "      height:${o.height}"
+      log.info "      is_Climate_Controlled:${o.is_Climate_Controlled}"
+      log.info "      is_Covered_Parking_Spot:${o.is_Covered_Parking_Spot}"
+      log.info "      is_Humidity_Controlled:${o.is_Humidity_Controlled}"
+      log.info "      length:${o.length}"
+      log.info "      price:${o.price}"
+      log.info "      promotion:${o.promotion}"
+      log.info "      promotionLongFormText:${o.promotionLongFormText}"
+      log.info "      quantity_Available:${o.quantity_Available}"
+      log.info "      type:${o.type}"
+      log.info "      unit_Type_Id:${o.unit_Type_Id}"
+      log.info "      width:${o.width}"
     }
     return false
   }
@@ -786,7 +786,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     Credentials creds = new Credentials(this.passWord,this.userName); // yes, password/username
     BasicHttpBinding_IAvailabilityDataStub stub = new BasicHttpBinding_IAvailabilityDataStub(this.endpointURL, this.service);
     Integer confID = stub.addReservation (creds, request);
-    println "CONFIRMATION: ${confID}"
+    log.info "CONFIRMATION: ${confID}"
     return false
   }
 

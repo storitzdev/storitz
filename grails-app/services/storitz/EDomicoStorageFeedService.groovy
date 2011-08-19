@@ -446,7 +446,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         for (sz in sizes) {
             def unitSizeInfo = getUnitSizeInfo(sz.get("SizeCodeInfo"))
             if (!unitSizeInfo) {
-              println "Cannot determine unitSizeInfo for ${sz.get("SizeCodeInfo")}. Skipping"
+              log.info "Cannot determine unitSizeInfo for ${sz.get("SizeCodeInfo")}. Skipping"
               continue
             }
 
@@ -497,7 +497,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       // We don't know what this is.
       // Save into the map so we can figure it out later
       if (!eDomicoAmenitiesMap) {
-        println "Creating new EDomico Amenities Map Entry: ${description}"
+        log.info "Creating new EDomico Amenities Map Entry: ${description}"
         eDomicoAmenitiesMap = new EDomicoAmenitiesMap()
 
         // mandatory fields
@@ -645,14 +645,14 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
       def resError         = res.get("Error")
       def reSeMailMessage  = res.get("EMailMessage")
 
-      println "/// DOMICO RESERVATION RESULTS ///"
-      println "<Authorize>"
-      println "    <Success>${resSuccess}</Success>"
-      println "    <Customer>${resCustomerID}</Customer>"
-      println "    <UnitID>${resUnitID}</UnitID>"
-      println "    <Error>${resError}</Error>"
-      println "    <EMail>${reSeMailMessage}</EMail>"
-      println "</Authorize>"
+      log.info "/// DOMICO RESERVATION RESULTS ///"
+      log.info "<Authorize>"
+      log.info "    <Success>${resSuccess}</Success>"
+      log.info "    <Customer>${resCustomerID}</Customer>"
+      log.info "    <UnitID>${resUnitID}</UnitID>"
+      log.info "    <Error>${resError}</Error>"
+      log.info "    <EMail>${reSeMailMessage}</EMail>"
+      log.info "</Authorize>"
 
       if (resSuccess) {
         trans.idNumber = "${resCustomerID}"

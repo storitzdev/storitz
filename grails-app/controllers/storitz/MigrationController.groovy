@@ -47,7 +47,7 @@ class MigrationController {
       def tmpFile = File.createTempFile("migration", ".zip")
       tmpFile.delete()
       def ant = new AntBuilder();
-      println "Files for bundle:${tmpFile.canonicalFile} basedir: ${request.getRealPath("/")} - ${fileList.dump()}"
+      log.info "Files for bundle:${tmpFile.canonicalFile} basedir: ${request.getRealPath("/")} - ${fileList.dump()}"
       ant.zip(destfile: tmpFile.canonicalFile, basedir: request.getRealPath("/"), includes: fileList)
       JSON.use("default")
       if (myFeed.feedType == FeedType.SITELINK) {

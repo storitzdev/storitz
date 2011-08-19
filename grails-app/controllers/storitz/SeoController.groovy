@@ -39,19 +39,19 @@ class SeoController {
             def ext = '.' + img.src().tokenize('.')[-1]
             def newName = "Storitz-${img.site.city}-${img.site.state.display}-${img.site.title}-self storage units-${img.imgOrder}${ext}"
             if (!img.isLogo) {
-                println "Source: ${request.getRealPath(img.basename + img.fileLocation)} Destination: ${img.basename + newName}"
+                log.info "Source: ${request.getRealPath(img.basename + img.fileLocation)} Destination: ${img.basename + newName}"
                 def file = new File(request.getRealPath(img.basename + img.fileLocation))
                 def destFile = new File(request.getRealPath(img.basename + newName))
                 if (file.exists() && !destFile.exists()) {
                     FileUtils.moveFile(file, destFile)
                 }
-                println "Source mid: ${request.getRealPath(img.basename + 'mid_' + img.fileLocation)} Destination: ${img.basename + 'mid-' + newName}"
+                log.info "Source mid: ${request.getRealPath(img.basename + 'mid_' + img.fileLocation)} Destination: ${img.basename + 'mid-' + newName}"
                 file = new File(request.getRealPath(img.basename + 'mid_' + img.fileLocation))
                 destFile = new File(request.getRealPath(img.basename + 'mid-' + newName))
                 if (file.exists() && !destFile.exists()) {
                     FileUtils.moveFile(file, destFile)
                 }
-                println "Source thumbnail: ${request.getRealPath(img.basename + 'thumb_' + img.fileLocation)} Destination: ${img.basename + 'thumb-' + newName}"
+                log.info "Source thumbnail: ${request.getRealPath(img.basename + 'thumb_' + img.fileLocation)} Destination: ${img.basename + 'thumb-' + newName}"
                 file = new File(request.getRealPath(img.basename + 'thumb_' + img.fileLocation))
                 destFile = new File(request.getRealPath(img.basename + 'thumb-' + newName))
                 if (file.exists() && !destFile.exists()) {
@@ -59,7 +59,7 @@ class SeoController {
                 }
                 img.fileLocation = newName
             } else {
-                println "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
+                log.info "Source: ${request.getRealPath(img.src())} Destination: ${img.basename + 'logo-' + newName}"
                 def file = new File(request.getRealPath(img.src()))
                 def destFile = new File(request.getRealPath(img.basename + 'logo-' + newName))
                 if (file.exists() && !destFile.exists()) {

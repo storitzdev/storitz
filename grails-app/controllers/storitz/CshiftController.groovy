@@ -82,7 +82,7 @@ class CshiftController extends FeedController {
           CShift4StorageFeedService.loadPromos(site, writer)
         }
         writer.close()
-        println "Promos refreshed for ${site.title}"
+        log.info "Promos refreshed for ${site.title}"
       }
       flash.message = "Feed promotions refreshed."
       redirect(action: "show", id: cshiftInstance.id)
@@ -102,7 +102,7 @@ class CshiftController extends FeedController {
         } else {
           CShift4StorageFeedService.loadInsurance(cshiftInstance, site)
         }
-        println "Insurance refreshed for ${site.title}"
+        log.info "Insurance refreshed for ${site.title}"
       }
       flash.message = "Feed insurance refreshed."
       redirect(action: "show", id: cshiftInstance.id)

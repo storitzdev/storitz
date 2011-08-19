@@ -19,7 +19,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
   // required for script services
   UnitSizeService getUnitSizeService() {
       if (!unitSizeService) {
-          println ("unitSizeService is null: instantiating")
+          log.info ("unitSizeService is null: instantiating")
           unitSizeService = new UnitSizeService()
       }
       return unitSizeService
@@ -27,7 +27,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
   GeocodeService getGeocodeService() {
       if (!geocodeService) {
-          println ("geocodeService is null: instantiating")
+          log.info ("geocodeService is null: instantiating")
           geocodeService = new GeocodeService()
       }
       return geocodeService
@@ -183,7 +183,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    println "GetReservationUnitDate: ${payload}"
+    log.info "GetReservationUnitDate: ${payload}"
 
     postAction(url, payload, 'GetReservationUnitData')
   }
@@ -211,7 +211,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    println "makeReservation: ${payload}"
+    log.info "makeReservation: ${payload}"
 
     postAction(centerShift.location.webUrl, payload, 'MakeReservationNonCCPayment')
   }
@@ -231,7 +231,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
    </soap:Body>
 </soap:Envelope>"""
 
-    println "account note: ${payload}"
+    log.info "account note: ${payload}"
 
     postAction(url, payload, "InsertAccountNote")
 
@@ -241,7 +241,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     def http = new HTTPBuilder(url)
 
     http.handler.failure = {resp, req ->
-      println "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
+      log.info "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
     }
 
     http.request(Method.POST, XML) {req ->
@@ -253,7 +253,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
       body = payload
 
       response.error = {resp ->
-        println "${resp.statusLine}"
+        log.info "${resp.statusLine}"
       }
     }
   }
@@ -429,10 +429,10 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
     for (tab in records.'soap:Body'.'*:GetSiteListResponse'.'*:GetSiteListResult'.'*:SiteList'.'*:Site') {
       StorageSite site = StorageSite.findBySourceAndSourceId(feedType, tab.SITE_ID.text())
-      println "Create contact for site ${tab.SITE_ID.text()}"
+      log.info "Create contact for site ${tab.SITE_ID.text()}"
       if (site) {
         def email = tab.EMAIL_ADDRESS.text()
-        println "Checking contact for email: ${email}"
+        log.info "Checking contact for email: ${email}"
         if (email.size() > 0) {
           createSiteUser(site, email, null, cshift.manager)
         }
@@ -497,7 +497,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         site.lng = geoResult.results[0].geometry.location.lng
         site.lat = geoResult.results[0].geometry.location.lat
       } else {
-        println "GEOCODE problem for address: ${address}"
+        log.info "GEOCODE problem for address: ${address}"
         site.lat = 0
         site.lng = 0
       }
@@ -641,7 +641,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             site."$endField" = Date.parse("hh", endPM)
           }
         } else {
-          println "Hours do not match: ${office}"
+          log.info "Hours do not match: ${office}"
         }
       }
       def gate = hours.GATE.text()
@@ -669,7 +669,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
           site."$endGateField" = Date.parse("HH", endPM)
         }
       } else {
-        println "Gate does not match: ${gate}"
+        log.info "Gate does not match: ${gate}"
       }
 
     }
@@ -1146,7 +1146,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     def insOptions = port.getInsuranceOptions(cshift.userName, cshift.pin, site.sourceId)
 
     if (insOptions instanceof Integer && insOptions < 0) {
-      println "Return for insurance < 0 : ${insOptions}"
+      log.info "Return for insurance < 0 : ${insOptions}"
       return 0
     }
 
@@ -1168,16 +1168,16 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         ins.totalCoverage = insAmount[i] as BigDecimal
 
         if (!ins.save()) {
-          ins.errors.allErrors.each { println it }
+          ins.errors.allErrors.each { log.info it }
         }
 
-        println "Adding new insurance: ${ins.dump()}"
+        log.info "Adding new insurance: ${ins.dump()}"
 
         site.addToInsurances(ins)
       }
       return optionSize
     } else {
-      println "Could not obtain insurance information"
+      log.info "Could not obtain insurance information"
       return 0
     }
   }
@@ -1192,7 +1192,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     // get the number of reservation days
     def ret = getReservationUnitData(cshift.location.webUrl, cshift.userName, cshift.pin, rentalTransaction.site.sourceId, unit.unitInfo, unit.unitName)
 
-    println "Reservation data: ${ret as String}"
+    log.info "Reservation data: ${ret as String}"
 
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1226,16 +1226,16 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
     CsKioskSoapPort_PortType port = service.getcsKioskSoapPort(endPoint)
 
-    println "isAvailable (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
+    log.info "isAvailable (${cshift.userName}, ${cshift.pin}, ${rentalTransaction.site.sourceId as Long}, ${unit.unitName as Long}, ${unit.displaySize})"
 
     def unitInfo = port.getAvailableUnits(cshift.userName, cshift.pin, rentalTransaction.site.sourceId as Long, unit.unitName as Long, unit.unitInfo)
 
     if ((unitInfo instanceof Integer || unitInfo instanceof String) && (unitInfo as Integer) < 0) {
-      println "Return for getAvailableUnits < 0 : ${unitInfo}"
+      log.info "Return for getAvailableUnits < 0 : ${unitInfo}"
       return false
     }
 
-    println "Dumping unit info: ${unitInfo.dump()}"
+    log.info "Dumping unit info: ${unitInfo.dump()}"
 
     def unitId = unitInfo[0]
     def dimensions = unitInfo[1]
@@ -1337,7 +1337,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     createTenant(rentalTransaction)
     def ret = makeReservation(rentalTransaction)
 
-    println "MakeReservation return ${ret}"
+    log.info "MakeReservation return ${ret}"
 
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1360,14 +1360,14 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
     }
     rentalTransaction.reserved = true
 
-    println "errorCode = ${errorCode} and message = ${message}"
+    log.info "errorCode = ${errorCode} and message = ${message}"
     // parse the message to get the reservation ID - Reservation Payment Successful. RentalID: 6225002, UnitID: 2528340
     def m = message =~ /.+RentalID:\s+(\d+),.+/
     if (m.matches()) {
       rentalTransaction.reservationId = m[0][1]
       rentalTransaction.idNumber = "R${rentalTransaction.reservationId}"
     }
-    println "Reservation ID = ${rentalTransaction.reservationId}"
+    log.info "Reservation ID = ${rentalTransaction.reservationId}"
 //    rentalTransaction.save()
 
     return errorCode == 0

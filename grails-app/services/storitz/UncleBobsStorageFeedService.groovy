@@ -165,7 +165,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
     StorageUnit unit = StorageUnit.findById(trans.unitId)
     if (!unit) {
-      println "Storage Unit ${trans.unitId} not found for transaction ${trans.id}!"
+      log.info "Storage Unit ${trans.unitId} not found for transaction ${trans.id}!"
       return false
     }
 
@@ -229,16 +229,16 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 </leadinfo>
     """
 
-    println "/// UNCLE BOB'S RESERVATION REQUEST ///"
-    println payload
+    log.info "/// UNCLE BOB'S RESERVATION REQUEST ///"
+    log.info payload
 
     StringReader res     = httpPostAction (getStoreReservationFeedURL(),payload)
     List<String> result = res.readLines()
     def resText = result.get(0)
     resText = resText.trim()
 
-    println "/// UNCLE BOB'S RESERVATION RESPONSE ///"
-    println resText
+    log.info "/// UNCLE BOB'S RESERVATION RESPONSE ///"
+    log.info resText
 
     def retVal      = false
     def resMatcher  = resText =~ /(.*):(.*)/
@@ -309,7 +309,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       def http = new HTTPBuilder(url)
 
       http.handler.failure = {resp, req ->
-        println "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
+        log.info "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
       }
 
       http.request(Method.POST, TEXT) { req ->
@@ -318,7 +318,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
         body = payload
 
         response.error = {resp ->
-          println "${resp.statusLine}"
+          log.info "${resp.statusLine}"
         }
       }
     } catch (Throwable t) {
@@ -380,7 +380,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       return site.save(flush:true)
     }
     else {
-      println "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
+      log.info "Validation failed for site: ${site.title}, ${site.address}, ${site.city}, ${site.state}}"
     }
   }
 
@@ -393,7 +393,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     // before we fetch/create the actual unit so our site stats remain accurate.
     StorageSize unitSize = unitSizeService.getUnitSize(space_width, space_length, SearchType.STORAGE)
     if (!unitSize) {
-      println ("Cannot determine unitSize for ${space_width}, ${space_length}. Skipping\n")
+      log.info ("Cannot determine unitSize for ${space_width}, ${space_length}. Skipping\n")
       return
     }
 
@@ -423,7 +423,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       maxReserveDate.setTime(date);
     }
     catch (ParseException e) {
-      println "WARNING: Failed to parse limitdate: '" + space_limitdate + "'"
+      log.info "WARNING: Failed to parse limitdate: '" + space_limitdate + "'"
     }
 
     unit.maxReserveDays     = (long)Math.ceil((maxReserveDate.getTimeInMillis() - System.currentTimeMillis()) / 1000.0 / 86400.0);
@@ -468,7 +468,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       specialOffer.promoQty = bd
       specialOffer.inMonth = inMonth.intValue()
     } catch (NumberFormatException e) {
-      println "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
+      log.info "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
       e.printStackTrace()
       return site.removeFromSpecialOffers(specialOffer)
     }
@@ -538,7 +538,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
   private def getXmlFromFeedString(feedString, feedNode) {
     int start = feedString.indexOf(feedNode)
     if (start < 0) {
-      println "Cannot determine start for Uncle Bob's! ${feedNode}}"
+      log.info "Cannot determine start for Uncle Bob's! ${feedNode}}"
       return null
     }
     return grails.converters.XML.parse(feedString.substring(start))

@@ -22,7 +22,7 @@ class UstoreitController {
     matcher.eachWithIndex { url, i ->
       def pageUrl = url[1]
       def idMatch = pageUrl =~ /(\d+)/
-      println "Checking URL: ${pageUrl}"
+      log.info "Checking URL: ${pageUrl}"
       if (idMatch.getCount()) {
         def idNum = idMatch[0][1]
         def siteHtml = pageUrl.toURL().text
@@ -35,7 +35,7 @@ class UstoreitController {
         } else {
           zipMatch = siteHtml =~ /postal-code/
           if (zipMatch.getCount()) {
-            println "Did not match, but found postal-code..."
+            log.info "Did not match, but found postal-code..."
           }
         }
 
@@ -52,17 +52,17 @@ class UstoreitController {
             for (siteImage in site.siteImages()) {
               imageList.add(siteImage)
             }
-            println "Getting ready to delete ${imageList.size()}"
+            log.info "Getting ready to delete ${imageList.size()}"
             for (siteImage in imageList) {
               imageService.deleteImage(site, siteImage)
             }
-            println "Page URL: ${pageUrl} pageId: ${idNum} - found site: ${site.title}"
+            log.info "Page URL: ${pageUrl} pageId: ${idNum} - found site: ${site.title}"
             def xmlUrl = "http://www.ustoreit.com/find-storage-and-rates/xml.ashx?facID=${idNum}|1?cachebuster=${random.nextInt(1000000)}&timestamp=${System.currentTimeMillis()}"
             def gallery = new XmlSlurper().parseText(new URL(xmlUrl).text)
             def basePath = gallery.setup.@path
             def imgOrder = 0
             for (item in gallery.item) {
-              println "\tImage: ${item.img}"
+              log.info "\tImage: ${item.img}"
               def address = "http://www.ustoreit.com${basePath}${(item.img as String).replaceAll(' ', '%20')}"
               def fileName = address.tokenize("/")[-1]
               def ext = '.' + fileName.tokenize('.')[-1]
@@ -83,7 +83,7 @@ class UstoreitController {
               imageService.iptcTagImage(new File(filePathMid), site, imgOrder, 'MID')
               imageService.iptcTagImage(new File(filePathThumb), site, imgOrder, 'THUMB')
 
-              println "\tProcessed to ${filePath}"
+              log.info "\tProcessed to ${filePath}"
               site.save(flush: true)
             }
           }
@@ -108,7 +108,7 @@ class UstoreitController {
           def titleArr = site.title.tokenize(" ")
           title = "U-Store-It " + titleArr[1..titleArr.size()-1].join(" ")
         }
-        println "Changing site title from ${site.title} to ${title}"
+        log.info "Changing site title from ${site.title} to ${title}"
         site.title = title
         site.save(flush: true)
       }

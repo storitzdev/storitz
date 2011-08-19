@@ -293,9 +293,9 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
         SiteUser.link(site, user)
       }
       else {
-        println "Bad user from feed - errors below: "
+        log.info "Bad user from feed - errors below: "
         user.errors.allErrors.each {
-          println it
+          log.info it
         }
         return null;
       }

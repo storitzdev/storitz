@@ -55,7 +55,7 @@ class FeedService {
     }
 
     def clearSession() {
-        println("flushing hibernate session...")
+        log.info("flushing hibernate session...")
         try {
             def session = getSessionFactory().currentSession
             session.flush()

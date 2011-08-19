@@ -12,7 +12,7 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
 
   OfferFilterService getOfferFilterService() {
       if (!offerFilterService) {
-          println ("offerFilterService is null: instantiating")
+          log.info ("offerFilterService is null: instantiating")
           offerFilterService = new OfferFilterService()
       }
       return offerFilterService

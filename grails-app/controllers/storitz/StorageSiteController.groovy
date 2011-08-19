@@ -76,7 +76,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
 
     def username = springSecurityService.principal.username
     def user = User.findByUsername(username as String)
-    println "Username ${username} hasrole admin: ${UserRole.userHasRole(user, 'ROLE_ADMIN')}"
+    log.info "Username ${username} hasrole admin: ${UserRole.userHasRole(user, 'ROLE_ADMIN')}"
     params.sort = 'title'
     def results
     if (UserRole.userHasRole(user, 'ROLE_ADMIN')) {
@@ -123,7 +123,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
   def report = {
     def storageSiteInstance = StorageSite.get(params.id)
     if (!storageSiteInstance) {
-      println "Failed to get site in report"
+      log.info "Failed to get site in report"
       flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'storageSite.label', default: 'com.storitz.StorageSite'), params.id])}"
       redirect(action: "list")
     }
@@ -300,9 +300,9 @@ class StorageSiteController extends BaseTransactionController implements Applica
           def tmpPath = fileUploadService.getFilePath('/images/upload', imgFile.originalFilename.encodeAsURL(), siteId)
           def ant = new AntBuilder();
           ant.unzip(src: tmpPath, dest: tmpDir, overwrite: "true") { mapper(type: "flatten")};
-          println("unzipped into temp dir: ${tmpDir.canonicalPath}")
+          log.info("unzipped into temp dir: ${tmpDir.canonicalPath}")
           tmpDir.eachFileMatch ~/(?i).*\.(png|jpg|gif|jpeg)/, { File file ->
-            println "Processing file ${file.canonicalFile}"
+            log.info "Processing file ${file.canonicalFile}"
             ext = '.' + file.canonicalFile.tokenize('.')[-1]
             newName = "Storitz-${storageSiteInstance.city}-${storageSiteInstance.state.display}-${storageSiteInstance.title}-self storage units-${imgOrder}${ext}"
             file.renameTo(new File(newName))
@@ -828,7 +828,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
       bestUnit = site.units.findAll { it.unitCount > site.minInventory }.min { it.price }
     }
     if (!bestUnit) {
-      println "Best Unit not found for site:${site.id} unitType:${params.unitType} unitSize:${unitSize}"
+      log.info "Best Unit not found for site:${site.id} unitType:${params.unitType} unitSize:${unitSize}"
     }
 
     def specialOffers = offerFilterService.getValidNonFeaturedOffers(site, bestUnit)
@@ -866,7 +866,7 @@ class StorageSiteController extends BaseTransactionController implements Applica
   }
 
   def refreshInventory = {
-    println "Refreshing inventory"
+    log.info "Refreshing inventory"
     storitz.UpdateInventoryJob.triggerNow([from: 'Admin']);
     flash.message = "Inventory/units refreshing now"
     redirect(controller: "admin", action: "index")
@@ -913,10 +913,10 @@ class StorageSiteController extends BaseTransactionController implements Applica
         site.lng = geoResult.Placemark[0].Point.coordinates[0]
         site.lat = geoResult.Placemark[0].Point.coordinates[1]
       } else {
-        println "Could not find address ${address} for site: ${site.title}"
+        log.info "Could not find address ${address} for site: ${site.title}"
       }
 
-      println "Updated site ${site.title} lat=${site.lat},lng=${site.lng}"
+      log.info "Updated site ${site.title} lat=${site.lat},lng=${site.lng}"
       site.save(flush: true)
     }
     flash.message = "Updated lat/lng."

@@ -26,7 +26,7 @@ class CollegeLanding {
 
     def logoSrc() {
         def loc = logoBaseName + logoFileLoc
-        println loc
+        log.info loc
         return loc
     }
 }

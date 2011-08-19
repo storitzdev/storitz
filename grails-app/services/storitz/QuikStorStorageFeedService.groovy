@@ -21,7 +21,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
   // required for script services
   UnitSizeService getUnitSizeService() {
       if (!unitSizeService) {
-          println ("unitSizeService is null: instantiating")
+          log.info ("unitSizeService is null: instantiating")
           unitSizeService = new UnitSizeService()
       }
       return unitSizeService
@@ -29,7 +29,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
   GeocodeService getGeocodeService() {
       if (!geocodeService) {
-          println ("geocodeService is null: instantiating")
+          log.info ("geocodeService is null: instantiating")
           geocodeService = new GeocodeService()
       }
       return geocodeService
@@ -37,7 +37,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
     MailService getMailService() {
         if (!mailService) {
-            println("mailService is null: instantiating")
+            log.info("mailService is null: instantiating")
             mailService = new MailService()
         }
         return mailService
@@ -61,7 +61,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
     for (loc in quikStor.locations) {
       if (loc.site) {
         // TODO this one already exists
-        println "Found an existing site: ${loc.site.title}"
+        log.info "Found an existing site: ${loc.site.title}"
         updateSite(loc.site, stats, writer)
       } else {
         def site = new StorageSite()
@@ -108,7 +108,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
       siteInsurances[ins.typeDesc] = true
       if (myIns) {
         myIns.premium = ins.dMonthlyFee
-        println "Updating insurance Coverage:${myIns.totalCoverage} percentTheft: ${myIns.percentTheft} Monthly: ${myIns.premium}"
+        log.info "Updating insurance Coverage:${myIns.totalCoverage} percentTheft: ${myIns.percentTheft} Monthly: ${myIns.premium}"
         myIns.save(flush: true)
       } else {
         if (ins.typeID && ins.typeDesc) {
@@ -121,14 +121,14 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
           myIns.provider = ins.typeDesc
           myIns.save(flush: true)
           site.addToInsurances(myIns)
-          println "Created insurance Coverage:${myIns.totalCoverage} percentTheft: ${myIns.percentTheft} Monthly: ${myIns.premium}"
+          log.info "Created insurance Coverage:${myIns.totalCoverage} percentTheft: ${myIns.percentTheft} Monthly: ${myIns.premium}"
         }
       }
     }
     for (entry in siteInsurances.entrySet()) {
       if (!entry.value) {
         def ins = site.insurances.find {it.provider == entry.key}
-        println "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
+        log.info "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
         site.removeFromInsurances(ins)
       }
     }
@@ -170,7 +170,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
 
       def address = site.address + ', ' + site.city + ', ' + site.state.display + ' ' + site.zipcode
 
-      println "Found address: ${address}"
+      log.info "Found address: ${address}"
       def geoResult = getGeocodeService().geocode(address)
 
       site.lng = geoResult.results[0].geometry.location.lng
@@ -357,7 +357,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
     def loc = quikStor.locations.find {it.site == storageSiteInstance}
 
     if (!loc) {
-      println "Could not locate QuikStorLocation"
+      log.info "Could not locate QuikStorLocation"
     }
 
     Service1Soap myProxy = getPort(loc.quikStor.url)
@@ -600,18 +600,18 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         }
         String moveInParams = buildMoveInParams(trans, sUnitID)
         def moveInCostResult = myProxy.getMoveIncostSpecial(loc.username, loc.password, loc.sitename, specialXml, moveInParams)
-        println "MoveInCostSpecial specialId = ${specialId} returns ${moveInCostResult}"
+        log.info "MoveInCostSpecial specialId = ${specialId} returns ${moveInCostResult}"
         def moveInXml = new XmlSlurper().parseText(moveInCostResult)
         totalMoveInCost = moveInXml.TotalAmount.text() as BigDecimal
 
         String paymentST = buildPaymentST(trans)
         String tenantInfo = buildTenantParams(trans)
 
-        println "params: moveInResult - ${moveInCostResult}\npaymentInfo - ${paymentST}\ntenantInfo - ${tenantInfo}\nmoveInParams - ${moveInParams}"
+        log.info "params: moveInResult - ${moveInCostResult}\npaymentInfo - ${paymentST}\ntenantInfo - ${tenantInfo}\nmoveInParams - ${moveInParams}"
 
         def moveInResults = myProxy.addAccountMoveInSpecial(loc.username, loc.password, loc.sitename, moveInCostResult, paymentST, tenantInfo, moveInParams)
 
-        println "MoveInResults = ${moveInResults}"
+        log.info "MoveInResults = ${moveInResults}"
         def moveInResultsXml = new XmlSlurper().parseText(moveInResults)
         retVal = moveInResultsXml.bResult.text().toLowerCase() == 'true'
         if (!retVal) {
@@ -634,9 +634,9 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         // alternate call won't really give us anything new.
         def moveInCostResult = myProxy.moveInCost(loc.username, loc.password, loc.sitename, unitTypeId, xgcal)
 
-        println "MoveInCost returns:"
+        log.info "MoveInCost returns:"
         for (charge in moveInCostResult.chargeST) {
-          println "Charge: ${charge.dump()}"
+          log.info "Charge: ${charge.dump()}"
           totalMoveInCost += charge.dItemAmount
         }
 
@@ -683,11 +683,11 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         ust.csBillingZip = trans.billingAddress.zipcode
         ust.csEmail = trans.contactPrimary.email
 
-        println "Calling move in with pst=${pst.dump()} and ust=${ust.dump()} unitID=${sUnitID}"
+        log.info "Calling move in with pst=${pst.dump()} and ust=${ust.dump()} unitID=${sUnitID}"
 
         def moveInResult = myProxy.addAccountMoveIn(loc.username, loc.password, loc.sitename, pst, ust, sUnitID, 0l)
 
-        println "Move In result: ${moveInResult.dump()}"
+        log.info "Move In result: ${moveInResult.dump()}"
         retVal = moveInResult.bResult
         if (!retVal) {
           errorMessage = moveInResult.csReturnMessage
@@ -735,7 +735,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
       INVENTORY_LIST()
       sUnitID(unitID)
     }
-    println "Generated MoveInParams ${writer.toString()}"
+    log.info "Generated MoveInParams ${writer.toString()}"
     return writer.toString()
   }
 

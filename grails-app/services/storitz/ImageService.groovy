@@ -62,7 +62,7 @@ class ImageService {
 
     deleteList.each {
       def file = new File(it)
-      println "Delete image ${it}"
+      log.info "Delete image ${it}"
       file.delete()
     }
 
@@ -112,7 +112,7 @@ class ImageService {
         site.logo.imgOrder = 0;
         def targetDir = new File(site.logo.basename)
         targetDir.mkdirs()
-        println "Copying logo for site ${site.title} - ${srcFile} to ${fileUploadService.getAbsolutePath(site.logo.basename, site.logo.fileLocation)}"
+        log.info "Copying logo for site ${site.title} - ${srcFile} to ${fileUploadService.getAbsolutePath(site.logo.basename, site.logo.fileLocation)}"
         org.apache.commons.io.FileUtils.copyFile(srcFile, new File(fileUploadService.getAbsolutePath(site.logo.basename, site.logo.fileLocation)))
       }
       if (srcFile) {
@@ -134,7 +134,7 @@ class ImageService {
       try {
         metadata = new JpegImageParser().getPhotoshopMetadata(byteSource, params);
       } catch (Exception E) {
-        println "This file ${imageFile.canonicalPath} is not a JPEG"
+        log.info "This file ${imageFile.canonicalPath} is not a JPEG"
         return
       }
       List newBlocks = new ArrayList()

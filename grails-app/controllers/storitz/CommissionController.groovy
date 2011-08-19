@@ -97,7 +97,7 @@ class CommissionController {
       for (param in params.keySet()) {
         if (param.startsWith('new_lowerBound_')) {
           Long entryId = param.substring(15) as Long
-          println "EntryId = ${entryId}"
+          log.info "EntryId = ${entryId}"
           def lowerBoundString = "new_lowerBound_" + entryId
           def upperBoundString = "new_upperBound_" + entryId
           def amountString = "new_amount_" + entryId

@@ -79,7 +79,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
           def address = csite.address + ', ' + csite.city + ', ' + csite.state.display + ' ' + csite.zipcode
 
-          println "Found address: ${address}"
+          log.info "Found address: ${address}"
           def geoResult = geocodeService.geocode(address)
 
           csite.lng = geoResult.results[0].geometry.location.lng
@@ -119,7 +119,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           } else {
             hm = sitehours =~ /Monday\s*\w+?\s*Friday\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
             if (hm.getCount()) {
-              println "Monday - Friday match"
+              log.info "Monday - Friday match"
               ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each { day ->
                 def hrs = hm[0][1].toUpperCase()
                 def open = "open${day}"
@@ -166,7 +166,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           for (siteFee in siteFees.details.orgfeesiteall) {
             if (siteFee.feename == "Admin Fee") {
               csite.adminFee = siteFee.feeamt
-              println "Found admin fee = ${csite.adminFee}"
+              log.info "Found admin fee = ${csite.adminFee}"
             }
           }
 
@@ -179,7 +179,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           for (depositFee in depositFees.details.orgsecuritydeposits) {
             if (depositFee.deptypeval == "Security" && depositFee.active && depositFee.depfix && depositFee.deptype == 1 && csite.deposit == 0) {
               csite.deposit = depositFee.depfix
-              println "Found deposit fee = ${csite.deposit}"
+              log.info "Found deposit fee = ${csite.deposit}"
             }
           }
 
@@ -207,7 +207,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
             if (svc.servicetypeval == "24 Hour Access") {
               // TODO mark 24 access
               csite.extendedHours = true
-              println "Found 24 hr access"
+              log.info "Found 24 hr access"
             }
           }
 
@@ -226,7 +226,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           stats.createCount++
 
         } else {
-          println "Skipped site ${site.displayname} due to status ${site.sitestauts} or property type ${site.propertytype}"
+          log.info "Skipped site ${site.displayname} due to status ${site.sitestauts} or property type ${site.propertytype}"
         }
       }
 
@@ -243,7 +243,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     def lookupUser = getLookupUser(cshift)
     def insuranceProviders = myProxy.getInsuranceProviders(lookupUser, insuranceRequest)
     for (ins in insuranceProviders.details.orginssiteofferings) {
-      println "Found insurance ${ins.dump()}"
+      log.info "Found insurance ${ins.dump()}"
       Insurance siteIns = site.insurances.find { it.insuranceId == ins.insoptionid }
       boolean newIns = false
       if (!siteIns) {
@@ -268,7 +268,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       }
     }
     for (ins in deleteList) {
-      println("Removing stale insurance from site ${site.title}: ${ins.dump()}")
+      log.info("Removing stale insurance from site ${site.title}: ${ins.dump()}")
       site.removeFromInsurances(ins)
     }
   }
@@ -373,14 +373,14 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           site.addToUnits(myUnit)
         }
       } else {
-        println "Skipping unit due to size width: ${width}, length: ${length} features: ${unit.featuresval}"
+        log.info "Skipping unit due to size width: ${width}, length: ${length} features: ${unit.featuresval}"
       }
     }
     // Loop through and remove old units
     def deleteList = []
     for (unit in site.units) {
       if (!(unitList.contains(unit.unitNumber as BigDecimal))) {
-        println "Added unit for deletion: ${unit.unitNumber}"
+        log.info "Added unit for deletion: ${unit.unitNumber}"
         deleteList.add(unit)
       }
     }
@@ -409,7 +409,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       def lookupUser = getLookupUser(cshift)
       def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
       for (discount in discountList.details?.applbestpcd) {
-        println "Processing discount: ${discount.dump()}"
+        log.info "Processing discount: ${discount.dump()}"
 
         def offer = site.specialOffers.find {discount.pcdid == it.concessionId}
         if (!offer) {
@@ -421,7 +421,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         }
         offer.startDate = discount.starts?.toGregorianCalendar()?.getTime()
         offer.endDate = discount.expires?.toGregorianCalendar()?.getTime()
-        println "Processing offer: ${discount.dump()}"
+        log.info "Processing offer: ${discount.dump()}"
         switch (discount.amttype) {
           case 1:
             offer.promoType = PromoType.AMOUNT_OFF
@@ -460,15 +460,15 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
             break
 
           default:
-            println "Unexpected amttype: ${discount.dump()}"
+            log.info "Unexpected amttype: ${discount.dump()}"
             break
         }
         if (offer.validate()) {
           offer.save(flush: true)
           site.addToSpecialOffers(offer)
-          println "Created offer: ${offer.dump()}"
+          log.info "Created offer: ${offer.dump()}"
         } else {
-          println "offer did not validate ${offer.dump()}"
+          log.info "offer did not validate ${offer.dump()}"
         }
         def restriction = offer.restrictions.find { (it.restrictionInfo as Long) == discReq.unitID }
         if (!restriction && offer.validate()) {
@@ -512,7 +512,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     quoteReq.rentRate = trans.site.allowPushPrice ? transUnit.pushRate : transUnit.price
     def quotes = myProxy.getQuoteData(lookupUser, quoteReq)
 
-    println "Quote information = ${quotes.details.dump()}"
+    log.info "Quote information = ${quotes.details.dump()}"
 
     for (unit in siteUnitData.details.siteUnitData) {
       if (unit.unitid == unitId && unit.available > trans.site.minInventory) {

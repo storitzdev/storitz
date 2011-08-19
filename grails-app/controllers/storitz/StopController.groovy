@@ -10,10 +10,10 @@ class StopController {
   // Want to use normal shutdown to flush caches when using file db.
   def index = {
     if (Environment.DEVELOPMENT.is(Environment.current)) {
-      println "Stopping..."
+      log.info "Stopping..."
       System.exit(1)
     } else {
-      println "Not in DEVELOPMENT environment!"
+      log.info "Not in DEVELOPMENT environment!"
     }
     [:]
   }

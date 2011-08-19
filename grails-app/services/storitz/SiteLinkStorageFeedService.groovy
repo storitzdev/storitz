@@ -19,7 +19,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
   // required for script services
   UnitSizeService getUnitSizeService() {
       if (!unitSizeService) {
-          println ("unitSizeService is null: instantiating")
+          log.info ("unitSizeService is null: instantiating")
 
           unitSizeService = new UnitSizeService()
       }
@@ -28,7 +28,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
   GeocodeService getGeocodeService() {
       if (!geocodeService) {
-          println ("geocodeService is null: instantiating")
+          log.info ("geocodeService is null: instantiating")
           geocodeService = new GeocodeService()
       }
       return geocodeService
@@ -36,7 +36,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
      MailService getMailService() {
         if (!mailService) {
-            println("mailService is null: instantiating")
+            log.info("mailService is null: instantiating")
             mailService = new MailService()
         }
         return mailService
@@ -175,7 +175,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
        </soapenv:Body>
     </soapenv:Envelope>"""
 
-    println "MoveInCostRetrieve: ${payload}"
+    log.info "MoveInCostRetrieve: ${payload}"
 
     postAction(payload, 'MoveInCostRetrieve')
   }
@@ -236,7 +236,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    println "MoveInCostRetrieveWithDiscount: ${payload}"
+    log.info "MoveInCostRetrieveWithDiscount: ${payload}"
 
     postAction(payload, 'MoveInCostRetrieveWithDiscount')
   }
@@ -410,7 +410,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
     def payload = getMoveInPayload(rentalTransaction)
 
-    println "MoveInWithDiscount: ${payload}"
+    log.info "MoveInWithDiscount: ${payload}"
 
     postAction(payload, "MoveInWithDiscount")
   }
@@ -577,7 +577,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     def http = new HTTPBuilder(siteLinkWsUrl35)
 
     http.handler.failure = {resp, req ->
-      println "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
+      log.info "Unexpected failure: ${resp.statusLine} ${resp.dump()}"
     }
 
     http.request(Method.POST, XML) {req ->
@@ -589,7 +589,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
       body = payload
 
       response.error = {resp ->
-        println "${resp.statusLine}"
+        log.info "${resp.statusLine}"
       }
     }
   }
@@ -609,7 +609,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     records.'soap:Body'.'*:SiteSearchByPostalCodeResponse'.'*:SiteSearchByPostalCodeResult'.'*:diffgram'.NewDataSet.'*:Table'.each {tab ->
       StorageSite site = StorageSite.findByFeedAndSourceId(siteLink as Feed, tab.SiteID.text())
       if (!site) {
-        println "Found and creating new site: ${tab.sSiteName.text()}, postal code: ${tab.sSitePostalCode.text()}"
+        log.info "Found and creating new site: ${tab.sSiteName.text()}, postal code: ${tab.sSitePostalCode.text()}"
         site = new StorageSite()
         stats.createCount++
         site.lastUpdate = 0
@@ -1137,7 +1137,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     for (entry in siteInsurances.entrySet()) {
       if (!entry.value) {
         def ins = site.insurances.find {(it.insuranceId as Integer) == entry.key}
-        println "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
+        log.info "Cleanup found deleted type: ${entry.key} - removing ${ins.id}"
         site.removeFromInsurances(ins)
       }
     }
@@ -1356,7 +1356,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     def siteLink = (SiteLink) rentalTransaction.site.feed
     def ret = getUnitInfoByName(siteLink, rentalTransaction.site.sourceLoc, rentalTransaction.unitId)
 
-    println "isAvailable ret =${ret}"
+    log.info "isAvailable ret =${ret}"
 
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1384,7 +1384,7 @@ TODO - evaluate whether we need this going forward
 
     def ret = getMoveInWithDiscount(rentalTransaction, unit)
 
-    println "moveInDetail ret =${ret}"
+    log.info "moveInDetail ret =${ret}"
     
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -1414,7 +1414,7 @@ TODO - evaluate whether we need this going forward
 
     def ret = doMoveIn(rentalTransaction)
 
-    println "MoveInWithDiscount: ${ret}"
+    log.info "MoveInWithDiscount: ${ret}"
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',
             xsi: 'http://www.w3.org/2001/XMLSchema-instance',
@@ -1472,7 +1472,7 @@ TODO - evaluate whether we need this going forward
 
     def ret = doReservation(rentalTransaction)
 
-    println "ReservationWithSource_v2: ${ret}"
+    log.info "ReservationWithSource_v2: ${ret}"
     
     def records = ret.declareNamespace(
             soap: 'http://schemas.xmlsoap.org/soap/envelope/',

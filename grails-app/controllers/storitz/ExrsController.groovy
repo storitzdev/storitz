@@ -48,7 +48,7 @@ class ExrsController extends CshiftController {
         }
         site.specialOffers.clear()
         exrsStorageFeedService.loadPromos(site, writer)
-        println "Promos refreshed for ${site.title}"
+        log.info "Promos refreshed for ${site.title}"
       }
       flash.message = "Feed promotions refreshed."
       redirect(action: "show", id: cshiftInstance.id)
@@ -96,7 +96,7 @@ class ExrsController extends CshiftController {
       def matcher = sitemapXml =~ /(\/Storage\/Facilities\/US\/.+?(\d+)\/Facility.aspx)/
       matcher.each {
         def pageUrl = it[1]
-        println "Opening page: ${baseUrl}${pageUrl}"
+        log.info "Opening page: ${baseUrl}${pageUrl}"
         def siteHtml = new URL(baseUrl + pageUrl).text
         def addrMatch = siteHtml =~ /<div class="street-address">(.+?)<\/div>/
         def addr
@@ -129,13 +129,13 @@ class ExrsController extends CshiftController {
           maxResults(1)
         }
         if (site) {
-          println "Found EXRS facility ${site.title} at addr=${addr} city=${city} state=${state} zip=${zip}"
+          log.info "Found EXRS facility ${site.title} at addr=${addr} city=${city} state=${state} zip=${zip}"
           // grab image URLS of the form
           def imageList = []
           for (siteImage in site.siteImages()) {
             imageList.add(siteImage)
           }
-          println "Getting ready to delete ${imageList.size()}"
+          log.info "Getting ready to delete ${imageList.size()}"
           for (siteImage in imageList) {
             imageService.deleteImage(site, siteImage)
           }
@@ -145,7 +145,7 @@ class ExrsController extends CshiftController {
             imageMatch.each {
               def imageUrl = it[1]
               def address = "${baseUrl}${imageUrl}"
-              println "Image found at URL ${address}"
+              log.info "Image found at URL ${address}"
               def ext = '.' + imageUrl.tokenize('.')[-1]
               def newName = "Storitz-${site.city}-${site.state.display}-${site.title}-self-storage-units-${imgOrder}${ext}"
               def tmpPath = fileUploadService.getFilePath('/images/upload', newName, site.id)
@@ -165,15 +165,15 @@ class ExrsController extends CshiftController {
                 imageService.iptcTagImage(new File(filePathThumb), site, imgOrder, 'THUMB')
                 ++imgOrder
 
-                println "\tProcessed to ${filePath}"
+                log.info "\tProcessed to ${filePath}"
                 site.save(flush: true)
               } catch (Exception e) {
-                println "Could not open image ${address}"
+                log.info "Could not open image ${address}"
               }
             }
           }
         } else {
-          println "Could not locate storage facility for address |${addr}| and zip |${zip}| and feed id = ${exrsFeed.id}"
+          log.info "Could not locate storage facility for address |${addr}| and zip |${zip}| and feed id = ${exrsFeed.id}"
         }
       }
     }
@@ -190,7 +190,7 @@ class ExrsController extends CshiftController {
       def matcher = sitemapXml =~ /(\/Storage\/Facilities\/US\/.+?(\d+)\/Facility.aspx)/
       matcher.each {
         def pageUrl = it[1]
-        println "Opening page: ${baseUrl}${pageUrl}"
+        log.info "Opening page: ${baseUrl}${pageUrl}"
         def siteHtml = new URL(baseUrl + pageUrl).text
         def addrMatch = siteHtml =~ /<div class="street-address">(.+?)<\/div>/
         def addr
@@ -223,11 +223,11 @@ class ExrsController extends CshiftController {
           maxResults(1)
         }
         if (site) {
-          println "Found EXRS facility ${site.title} at addr=${addr} city=${city} state=${state} zip=${zip} saving URL"
+          log.info "Found EXRS facility ${site.title} at addr=${addr} city=${city} state=${state} zip=${zip} saving URL"
           site.url = pageUrl
           site.save(flush: true)
         } else {
-          println "Could not locate storage facility for address |${addr}| and zip |${zip}| and feed id = ${exrsFeed.id}"
+          log.info "Could not locate storage facility for address |${addr}| and zip |${zip}| and feed id = ${exrsFeed.id}"
         }
       }
     }

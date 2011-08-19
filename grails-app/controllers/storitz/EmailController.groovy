@@ -21,9 +21,9 @@ class EmailController {
         ge("upperBound", cost)
       }
     }
-    println "Cost = ${cost} Result = ${ctype}"
+    log.info "Cost = ${cost} Result = ${ctype}"
 
-    println "Sending email..."
+    log.info "Sending email..."
 
     try {
       mailService.sendMail {

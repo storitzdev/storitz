@@ -91,7 +91,7 @@ class ReportsController {
 
     if (!period.validate()) {
       period.errors.allErrors.each {
-        println "Error in report validation: ${it}"
+        log.info "Error in report validation: ${it}"
       }
       flash.message = "Bad report parameters - please re-enter dates and output type."
       render view: "index", model: [reportPeriod: period, feedList: getFeedList()]

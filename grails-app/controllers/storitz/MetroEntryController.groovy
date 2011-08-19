@@ -187,7 +187,7 @@ class MetroEntryController {
             metroEntry.save()
           }
         } else {
-          println "Skipping missing metro: ${metroCity}, ${state.display}"
+          log.info "Skipping missing metro: ${metroCity}, ${state.display}"
         }
       }
     }

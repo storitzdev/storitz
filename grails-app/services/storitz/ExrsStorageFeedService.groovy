@@ -28,7 +28,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
   public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
     zeroOutUnitsForSite(site,stats,writer)
 
-    println "Update units opening page: ${baseUrl + site.url}"
+    log.info "Update units opening page: ${baseUrl + site.url}"
     def siteHtml = (baseUrl + site.url).toURL().text
     // build list of valid ids
     def idList = []
@@ -38,7 +38,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
         idList.add(it[2])
       }
     } else {
-      println "No ids found."
+      log.info "No ids found."
     }
 
     site.specialOffers.clear()
@@ -411,10 +411,10 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     String title = "Storitz - New EXRS reservation - id (${trans.idNumber})"
 
     //log to catalina.out too
-    println("to: 'exrs@storitz.com'")
-    println("from: 'no-reply@storitz.com'")
-    println("subject: ${title}")
-    println("body: ${body1}")
+    log.info("to: 'exrs@storitz.com'")
+    log.info("from: 'no-reply@storitz.com'")
+    log.info("subject: ${title}")
+    log.info("body: ${body1}")
 
     getMailService().sendMail {
             to 'exrs@storitz.com'
@@ -451,10 +451,10 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     String title2 = "Storitz - New EXRS reservation - id (${trans.idNumber})"
 
     //log to catalina.out too
-    println("to: 'exrs@storitz.com'")
-    println("from: 'no-reply@storitz.com'")
-    println("subject: ${title2}")
-    println("body: ${body2}")
+    log.info("to: 'exrs@storitz.com'")
+    log.info("from: 'no-reply@storitz.com'")
+    log.info("subject: ${title2}")
+    log.info("body: ${body2}")
 
     getMailService().sendMail {
             to 'exrs@storitz.com'
@@ -479,15 +479,15 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
         def success = exrsWebFormProcessor.processMoveIn(trans);
 
         if (success) {
-          println("Successful Extraspace Move-In!")
-          println(exrsWebFormProcessor.logBuf)
+          log.info("Successful Extraspace Move-In!")
+          log.info(exrsWebFormProcessor.logBuf)
         }
         else {
             //log to catalina.out too
-            println("to:'tech@storitz.com'")
-            println("from: 'no-reply@storitz.com'")
-            println("subject: EXRS Automatic Move-In Log")
-            println("body: ${exrsWebFormProcessor.logBuf}")
+            log.info("to:'tech@storitz.com'")
+            log.info("from: 'no-reply@storitz.com'")
+            log.info("subject: EXRS Automatic Move-In Log")
+            log.info("body: ${exrsWebFormProcessor.logBuf}")
 
             getMailService().sendMail {
                 to "tech@storitz.com"

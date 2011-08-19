@@ -2,7 +2,8 @@ package storitz
 
 println "Refreshing inventory"
 
-def sources = ['QS', 'SL','CS3', 'USI', 'DOM']
+// TODO: refactor these scripts into one script
+def sources = ['QS', 'SL','CS3', 'USI', 'DOM', 'STM']
 
 for (int i = 0; i < sources.size(); i++) {
     def src = sources[i]

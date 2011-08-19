@@ -44,7 +44,7 @@ class UsiController extends CshiftController {
         }
         site.specialOffers.clear()
         usiStorageFeedService.loadPromos(site, writer)
-        println "Promos refreshed for ${site.title}"
+        log.info "Promos refreshed for ${site.title}"
       }
       flash.message = "Feed promotions refreshed."
       redirect(action: "show", id: cshiftInstance.id)

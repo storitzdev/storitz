@@ -329,18 +329,13 @@ class RentalTransactionController extends BaseTransactionController {
         redirect(action:"thankYou",params:[id:id])
         return // placing the return here for the sake of clarity only
       }
-
-      // We should never get here. If we do, then a horrible error has
-      // occurred, and we should all panic, and run around with our hands
-      // in the air, screaming 'the sky is falling'.
-      throw new Exception ("RentalTransactionController.create: Something really odd just happened")
     }
     catch (Throwable t) {
       // OK. since we are here, something went horribly wrong. Send a message
       // to tech to investigate and resolve
       try {
         mailService.sendMail {
-          to      "jmeade@storitz.com"
+          to      "tech@storitz.com"
           from    "no-reply@storitz.com"
           subject "RentalTransactionController.create: Exception!"
           body     StoritzUtil.stackTraceToString(t)
@@ -358,7 +353,7 @@ class RentalTransactionController extends BaseTransactionController {
   def thankYou = {
     def rentalTransactionInstance = RentalTransaction.get(params.id as Long)
     if (!rentalTransactionInstance) {
-      println "RentalTransactionController.thankYou: Failed to find rental transaction for id=${params.id}"
+      log.info "RentalTransactionController.thankYou: Failed to find rental transaction for id=${params.id}"
       redirect (controller: "home", action: "index");
     }
 
@@ -378,7 +373,7 @@ class RentalTransactionController extends BaseTransactionController {
   }
 
   def removeUnit = { rentalTransactionInstance, unit ->
-    println "Removing unit from inventory ${unit.id}"
+    log.info "Removing unit from inventory ${unit.id}"
     rentalTransactionInstance.site.removeFromUnits(unit)
     rentalTransactionInstance.site.save(flush: true)
     emailMoveInProblemReportToTechTeam(rentalTransactionInstance, "Removing unit from inventory ${unit.id}", null)
@@ -387,7 +382,7 @@ class RentalTransactionController extends BaseTransactionController {
   def findAlternateUnit = { rentalTransactionInstance, unit ->
     def alternateUnit = null;
     def bestUnitList = rentalTransactionInstance.site.units.findAll { it.unitCount > rentalTransactionInstance.site.minInventory && it.unitsize.id == unit.unitsize.id && it.id != unit?.id }.sort { it.bestUnitPrice }
-    println "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
+    log.info "BestUnit size = ${bestUnitList.size()} rentalTransaction = ${rentalTransactionInstance.dump()}"
     for (myUnit in bestUnitList) {
       rentalTransactionInstance.unitId = myUnit.id
       if (moveInService.isAvailable(rentalTransactionInstance)) {
@@ -496,17 +491,17 @@ class RentalTransactionController extends BaseTransactionController {
       }
 
       if (ConfigurationHolder.config?.storitz?.rentals?.sandboxMode) {
-        println "SANDBOX MODE: Skipping credit card auth/change"
+        log.info "SANDBOX MODE: Skipping credit card auth/change"
         rentalTransactionInstance.transactionId = "123456"
       }
       else {
         def authResp = s.submit();
-        println "Credit card response: ${authResp.dump()}"
+        log.info "Credit card response: ${authResp.dump()}"
         if (authResp.responseCode as Integer != 1) {
           flash.message = "We were unable to process your transaction because your credit card could not be charged. <b>Please double-check your card and customer billing information, and try again</b>. Please note that your contact information must match the billing information for the card. (Error message: '${authResp.responseReasonText}')"
           return false
         }
-        println "Logged transaction = ${authResp.dump()}"
+        log.info "Logged transaction = ${authResp.dump()}"
         rentalTransactionInstance.transactionId = authResp.transactionId
         rentalTransactionInstance.status = isFreeReservation ? TransactionStatus.RESERVED : TransactionStatus.PAID
       }
@@ -544,7 +539,7 @@ class RentalTransactionController extends BaseTransactionController {
    */
   private boolean sendNotifications (RentalTransaction rentalTransactionInstance) {
     if (ConfigurationHolder.config?.storitz?.rentals?.sandboxMode) {
-      println "SANDBOX MODE: Skipping notification"
+      log.info "SANDBOX MODE: Skipping notification"
     }
     else {
       notificationService.notify(NotificationEventType.NEW_TENANT, rentalTransactionInstance)
@@ -562,7 +557,7 @@ class RentalTransactionController extends BaseTransactionController {
     rentalTransactionInstance.save(flush: true)
 
     if (ConfigurationHolder.config?.storitz?.rentals?.sandboxMode) {
-      println "SANDBOX MODE: Skipping moveIn"
+      log.info "SANDBOX MODE: Skipping moveIn"
     }
     else {
       if (rentalTransactionInstance.transactionType == TransactionType.RESERVATION) {

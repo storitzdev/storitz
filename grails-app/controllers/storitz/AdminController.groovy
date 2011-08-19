@@ -12,7 +12,7 @@ class AdminController {
     def username = session["username"] = springSecurityService.principal.username
     session["user"] = User.findByUsername(username as String)
 
-    println "Authenticated as: " + springSecurityService.principal.username
+    log.info "Authenticated as: " + springSecurityService.principal.username
 
     [title: 'Admin Pages']
   }

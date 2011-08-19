@@ -80,7 +80,7 @@ environments {
   }
   preview {
     grails.serverURL = "http://preview.storitz.com"
-    grails.serverRoot = "/home/deploy/tomcat-current/preview.storitz.com/ROOT"
+    grails.serverRoot = "/home/deploy/tomcat-current/preview.storitz.com/ROOT" // Used by StorageMart site creation
     security.httpsPort = 443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/home/**': ['ROLE_USER', 'ROLE_ADMIN'],
@@ -155,7 +155,7 @@ environments {
   }
   next {
     grails.serverURL = "http://next.storitz.com"
-    grails.serverRoot = "/home/deploy/tomcat-current/next.storitz.com/ROOT" // DOES THIS MATTER?
+    grails.serverRoot = "/home/deploy/tomcat-current/next.storitz.com/ROOT" // Used by StorageMart site creation
     security.httpsPort = 8443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/weblog/**': ['ROLE_USER'],
@@ -165,7 +165,7 @@ environments {
   }
   beta {
     grails.serverURL = "http://beta.storitz.com"
-    grails.serverRoot = "/home/deploy/tomcat-current/beta.storitz.com/ROOT" // DOES THIS MATTER?
+    grails.serverRoot = "/home/deploy/tomcat-current/beta.storitz.com/ROOT" // Used by StorageMart site creation
     security.httpsPort = 8443
     grails.plugins.springsecurity.controllerAnnotations.staticRules = [
             '/weblog/**': ['ROLE_USER'],
