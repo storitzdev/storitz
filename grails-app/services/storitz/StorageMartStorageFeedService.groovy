@@ -223,6 +223,10 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       Credentials creds = new Credentials(this.passWord,this.userName) // yes, password/username
       BasicHttpBinding_IAvailabilityDataStub stub = new BasicHttpBinding_IAvailabilityDataStub(this.endpointURL, this.service)
       trans.idNumber = stub.addReservation (creds, request)
+      // unitID is actually a unit-type in StorageMart, not specific unit per-se
+      /* Leaving as comment pending further review
+      trans.feedUnitNumber = "${unitID}"
+      */
       return true
     }
     catch (Throwable t) {

@@ -80,7 +80,6 @@ class NotificationService {
             directionsLink: directionsLink,
             phone: rentalTransaction.site.phone,
             manager: siteManager.userRealName,
-            bookingDate: rentalTransaction.bookingDate.format('yyyyMMdd'),
             storitzId: storitzId,
             billingName: billingName,
             billingAddress: billingAddress,
@@ -137,14 +136,14 @@ class NotificationService {
         tenantView = "/notifications/moveInTenant"
         mgrView = "/notifications/moveInSiteMgr"
         operSubj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} move-in"
-        tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant move-in at ${rentalTransaction.site.title} - (Confirmation # ${rentalTransaction.idNumber} )"
+        tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant move-in at ${rentalTransaction.site.title} (Confirmation #${rentalTransaction.idNumber})"
         break
       case TransactionType.RESERVATION:
         operView = "/notifications/reservationOperMgr"
         tenantView = "/notifications/reservationTenant"
         mgrView = "/notifications/reservationOperMgr"
         operSubj = "Storitz - Confirmation for your ${rentalTransaction.moveInDate.format('MM/dd/yy')} ${rentalTransaction.site.title} reservation"
-        tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant reservation at ${rentalTransaction.site.title} - (Confirmation # ${rentalTransaction.idNumber} )"
+        tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant reservation at ${rentalTransaction.site.title} (Confirmation #${rentalTransaction.idNumber})"
         break
     }
 
