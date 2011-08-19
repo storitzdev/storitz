@@ -172,7 +172,21 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   boolean isAvailable(RentalTransaction trans) {
-    return false  //To change body of implemented methods use File | Settings | File Templates.
+    StorageUnit unit = StorageUnit.get (trans.unitId)
+    if (!unit) {
+      log.warn ("Storage Unit ${trans.unitId} not found during transaction ${trans.id}!")
+      return false
+    }
+
+    // check the feed to see if this unit is available
+    UnitTypeOutput [] unitTypeOutput = loadUnitTypesByFacility (trans.site.sourceId)
+    for (int i = 0; i < unitTypeOutput.length; i++) {
+      UnitTypeOutput theUnit = unitTypeOutput[i]
+      if (theUnit.unit_Type_Id == unit.unitNumber)
+        return theUnit.quantity_Available > trans.site.minInventory
+    }
+
+    return false
   }
 
   @Override
@@ -260,6 +274,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     def site_fenced = theSite.is_Fenced_And_Lighted
     def site_24_hr = theSite.has_24_Hour_Access
     def site_handcart = theSite.has_Handcarts
+    def site_admin_fee = theSite.admin_Fee
     def site_manager_emails = []
     for (int i = 0; i < theSite.manager_Email_Address.size(); i++) {
       site_manager_emails[i] = theSite.manager_Email_Address[i]
@@ -311,6 +326,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     site.isKeypad              = site_electronic_gate
     site.isCamera              = site_camera
     site.isTwentyFourHour      = site_24_hr
+    site.adminFee              = site_admin_fee
 
     setOfficeHours (site, site_office_hours)
     setAccessHours (site, site_access_hours)
@@ -528,7 +544,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       return
     }
 
-    StorageUnit unit = site.units.find { it.unitName == unit_type_id }
+    StorageUnit unit = site.units.find { it.unitNumber == unit_type_id }
 
     if (!unit) {
       unit = new StorageUnit()
