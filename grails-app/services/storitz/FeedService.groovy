@@ -72,18 +72,7 @@ class FeedService {
 
     def updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
         StorageFeedServiceFactory.getFeedServiceInstance(storageSiteInstance).updateUnits(storageSiteInstance, stats, writer)
-
-        // JM: 2011-06-07 Post op processing.
-        // bestUnitPrice is pushRate or price, as appropriate.
-        // this is used in calls to find BestUnit *only*.
-        storageSiteInstance.units.each { unit ->
-          if (storageSiteInstance.allowPushPrice)
-            unit.bestUnitPrice = unit.pushRate;
-          else
-            unit.bestUnitPrice = unit.price
-          unit.save(flush:true)
-        }
-    }
+   }
 
     def refreshPromos(StorageSite storageSiteInstance, PrintWriter writer) {
         StorageFeedServiceFactory.getFeedServiceInstance(storageSiteInstance).loadPromos(storageSiteInstance, writer)

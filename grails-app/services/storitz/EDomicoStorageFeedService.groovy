@@ -488,6 +488,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
             // Now we can save, flush and move on...
             site.save(flush: true)
         }
+      updateBestUnitPrice (site)
     }
 
     def getAmenitiesMap (String description) {

@@ -875,6 +875,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     def siteLink = (SiteLink) site.feed
     unitsAvailable(siteLink, site, stats, false, writer)
     site.save(flush: true)
+    updateBestUnitPrice (site)
   }
 
   def getUnitTypeCounts(siteLink, site, writer) {

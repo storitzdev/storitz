@@ -341,6 +341,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         site.removeFromUnits(unit)
       }
     }
+    updateBestUnitPrice (site)
   }
 
   @Override

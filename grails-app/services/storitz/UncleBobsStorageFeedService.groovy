@@ -147,6 +147,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
         loadPromoForUnit(storageSiteInstance,unit,space_special_description.trim(),space_special_type,space_special_amount,space_special_month,space_special_applytoprorate)
       }
     }
+    updateBestUnitPrice (storageSiteInstance)
   }
 
   @Override

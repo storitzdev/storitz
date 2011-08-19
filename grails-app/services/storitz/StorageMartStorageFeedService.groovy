@@ -157,6 +157,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         loadPromoForUnit (storageSiteInstance, unit, unit_promotion, unit_promotion_long)
       }
     }
+    updateBestUnitPrice (storageSiteInstance)
   }
 
   @Override
@@ -181,11 +182,36 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   boolean moveIn(RentalTransaction trans) {
+    // Sites are set up a reserve, since we want to process the credit card for
+    // payment. However, Storage Mart only exposes reserve via the API, so we
+    // use that here.
     return reserve (trans)
   }
 
   @Override
   boolean reserve(RentalTransaction trans) {
+    try {
+      StorageUnit unit = StorageUnit.get (trans.unitId)
+      DateFormat df = new SimpleDateFormat("yyyy/MM/dd")
+      Integer unitID = new Integer(unit.unitNumber)
+      ReservationRequest request = new ReservationRequest(
+          trans.contactPrimary.email     // java.lang.String customer_Email_Address
+         ,trans.contactPrimary.firstName // java.lang.String customer_First_Name
+         ,trans.contactPrimary.lastName  // java.lang.String customer_Last_Name
+         ,trans.contactPrimary.phone     // java.lang.String customer_Phone
+         ,trans.site.sourceId            // java.lang.String facility_Id
+         ,df.format(trans.moveInDate)    // java.lang.String move_In_Date
+         ,trans.cost                     // java.lang.Double quoted_Price
+         ,unitID                         // java.lang.Integer unit_Id
+      )
+      Credentials creds = new Credentials(this.passWord,this.userName) // yes, password/username
+      BasicHttpBinding_IAvailabilityDataStub stub = new BasicHttpBinding_IAvailabilityDataStub(this.endpointURL, this.service)
+      trans.idNumber = stub.addReservation (creds, request)
+      return true
+    }
+    catch (Throwable t) {
+      t.printStackTrace()
+    }
     return false
   }
 
@@ -607,6 +633,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   // promo 99% Off - 1 Month, promo long: 99% Off First Month's Rent
   // promo 99% Off - 2 Months, promo long: 99% Off First 2 Month's Rent
   // promo No Discount, promo long: Limited Availability.  Reserve Today!
+  // TODO: Need new methodology for parsing promos. See https://www.pivotaltracker.com/story/show/17204913
   private def parsePromo (promo) {
     def vals = ['amount':0, 'period':1]
     def valsMatcher = promo =~ /(\d+)% Off First (\d?).*/

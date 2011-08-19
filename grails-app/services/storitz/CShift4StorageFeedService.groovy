@@ -392,6 +392,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     if (deleteList.size() > 0) {
       site.save(flush: true)
     }
+    updateBestUnitPrice (site)
   }
 
   @Override

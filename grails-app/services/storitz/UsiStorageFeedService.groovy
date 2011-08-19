@@ -21,6 +21,7 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
   public void updateUnits(StorageSite site, SiteStats stats, PrintWriter writer) {
     super.updateUnits(site, stats, writer)
     loadPromos(site, writer)
+    updateBestUnitPrice (site)
   }
 
   public void loadPromos(StorageSite site, PrintWriter writer) {

@@ -220,6 +220,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     if (needSave) {
       site.save(flush: true)
     }
+    updateBestUnitPrice (site)
   }
 
   // promos
