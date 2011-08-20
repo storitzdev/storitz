@@ -35,7 +35,6 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
   public static void updateBestUnitPrice (StorageSite site) {
       // JM: 2011-06-07 Post op processing.
       // bestUnitPrice is pushRate or price, as appropriate.
-      // this is used in calls to find BestUnit *only*.
       site.units.each { unit ->
         if (site.allowPushPrice)
           unit.bestUnitPrice = unit.pushRate;

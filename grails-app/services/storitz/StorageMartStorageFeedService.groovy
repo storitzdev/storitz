@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat
 import com.storitz.User
 import org.springframework.web.multipart.MultipartFile
 import org.grails.mail.MailService
+import com.storitz.StorageMartSpecialOfferLookup
 
 class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
@@ -44,10 +45,6 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   private Service service
   private String userName
   private String passWord
-
-  // Temporary way to track and report bad promos.
-  // TODO: Need new methodology for handling bad promos. See https://www.pivotaltracker.com/story/show/17204913
-  private ArrayList <String> malformedPomos = new ArrayList<String> ()
 
   private def cityCount = [:] // used to help name the sites
 
@@ -103,7 +100,6 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   void updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
     zeroOutUnitsForSite(storageSiteInstance,stats,writer)
     UnitTypeOutput [] unitTypeOutput = loadUnitTypesByFacility (storageSiteInstance.sourceId)
-    malformedPomos.clear()
     for (int i = 0; i < unitTypeOutput.length; i++) {
       UnitTypeOutput theUnit = unitTypeOutput[i]
       def unit_can_store_vehicle        = theUnit.can_Store_Vehicle
@@ -157,28 +153,10 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
       if (unit) {
         storageSiteInstance.addToUnits (unit)
-        loadPromoForUnit (storageSiteInstance, unit, unit_promotion, unit_promotion_long)
+        loadPromoForUnit (storageSiteInstance, unit, unit_promotion_long)
       }
     }
-    if (malformedPomos.size() > 0) {
-      sendMalformedPomosAlert (storageSiteInstance)
-    }
     updateBestUnitPrice (storageSiteInstance)
-  }
-
-  private def sendMalformedPomosAlert (site) {
-    StringBuilder sb = new StringBuilder ()
-    sb.append ("${site.title} (${site.id})\n\n".toString())  // gstring (no-pun intended)
-    sb.append ("Was not able to parse the following promotions:\n\n")
-    for (int i = 0; i < malformedPomos.size(); i++) {
-      sb.append (malformedPomos[i] + "\n")
-    }
-    mailService.sendMail {
-      to "tech@storitz.com"
-      from "no-reply@storitz.com"
-      subject "StorageMart Promotions"
-      body sb.toString()
-    }
   }
 
   @Override
@@ -613,48 +591,43 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     return UnitType.INTERIOR
   }
 
-  private def loadPromoForUnit (site, unit, unit_promotion, unit_promotion_long) {
+  private def loadPromoForUnit (site, unit, unit_promotion_long) {
     def code = "${site.sourceId}:${unit.unitNumber}"
 
     ///////////////////
     // SPECIAL OFFER //
     ///////////////////
-    def specialOffer = site.specialOffers.find { it.code == code }
-    if (!specialOffer) {
-      specialOffer = new SpecialOffer()
-      specialOffer.code = code
-      specialOffer.featured = true
-      specialOffer.active = true
-      site.addToSpecialOffers(specialOffer)
-    }
-
+    SpecialOffer specialOffer
     try {
-      def vals = parsePromo (unit_promotion_long)
+      specialOffer = site.specialOffers.find { it.code == code }
+      boolean addToSite = false
+      if (!specialOffer) {
+        specialOffer = new SpecialOffer()
+        specialOffer.code = code
+        specialOffer.featured = true
+        specialOffer.active = true
+        addToSite = true
+      }
 
-      BigDecimal amount = new BigDecimal (vals['amount'])
-
-      // sanity checking
-      if (amount < 0.01)
-        return site.removeFromSpecialOffers (specialOffer)
-
-      Integer period = new Integer (vals['period'])
-      specialOffer.inMonth = 1                        //TODO: Hard-coded!!!
-      specialOffer.promoType = PromoType.PERCENT_OFF  //TODO: Hard-coded!!!
-      specialOffer.prepayMonths = period.intValue()
-      specialOffer.expireMonth = period.intValue()
-      specialOffer.promoQty = amount
+      StorageMartSpecialOfferLookup lookup = lookupPromo (unit_promotion_long)
+      if (lookup && !lookup.isNew()) {
+        specialOffer.inMonth = lookup.startMonth
+        specialOffer.promoType = lookup.type
+        specialOffer.prepayMonths = lookup.prepayMonths
+        specialOffer.expireMonth = lookup.expireMonth
+        specialOffer.promoQty = lookup.amount
+        specialOffer.description = unit_promotion_long
+        if (!specialOffer.promoName)
+          specialOffer.promoName = unit_promotion_long
+        specialOffer.save(flush:true)
+        if (addToSite)
+          site.addToSpecialOffers(specialOffer)
+      }
     }
-    catch (NumberFormatException e) {
-      log.info "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
-      e.printStackTrace()
-      return site.removeFromSpecialOffers (specialOffer)
+    catch (Throwable t) {
+      def err = "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
+      log.error (err, t)
     }
-
-    specialOffer.description = unit_promotion_long // JM: Maybe flip-flop these?
-    if (!specialOffer.promoName)
-      specialOffer.promoName = unit_promotion      // JM: Maybe flip-flop these?
-
-    specialOffer.save()
 
     ///////////////////////////////
     // SPECIAL OFFER RESTRICTION //
@@ -670,27 +643,16 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     }
   }
 
-  // current promos:
-  // promo 20% Off Rental Promotion, promo long: 20% Off First Month's Rent
-  // promo 50% Off Rental Special, promo long: 50% Off First Month's Rent
-  // promo 99% Off - 1 Month, promo long: 99% Off First Month's Rent
-  // promo 99% Off - 2 Months, promo long: 99% Off First 2 Month's Rent
-  // promo No Discount, promo long: Limited Availability.  Reserve Today!
-  // TODO: Need new methodology for parsing promos. See https://www.pivotaltracker.com/story/show/17204913
-  private def parsePromo (promo) {
-    def vals = ['amount':0, 'period':1]
-    def valsMatcher = promo =~ /(\d+)% Off First (\d?).*/
-    if (valsMatcher.getCount()) {
-      valsMatcher.each {
-        if (it[1]) vals['amount']=it[1]
-        if (it[2]) vals['period']=it[2]
-      }
+  private StorageMartSpecialOfferLookup lookupPromo (String promoName) {
+    StorageMartSpecialOfferLookup lookup = StorageMartSpecialOfferLookup.findByName(promoName)
+
+    if (!lookup) {
+      lookup = new StorageMartSpecialOfferLookup()
+      lookup.name = promoName
+      lookup.save ()
     }
-    else {
-      if (!malformedPomos.contains (promo.toString()))
-        malformedPomos.add (promo.toString())
-    }
-    return vals
+
+    return lookup
   }
 
   ///////////////////////////////////////////////////
