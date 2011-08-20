@@ -51,7 +51,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `special_offer_lookup` WRITE;
 /*!40000 ALTER TABLE `special_offer_lookup` DISABLE KEYS */;
-INSERT INTO `special_offer_lookup` VALUES (1,0,0,1,'Limited Availability.  Reserve Today!',1,1,'AMOUNT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(2,0,99,1,'99% Off First Month\'s Rent',1,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(3,0,20,1,'20% Off First Month\'s Rent',1,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(4,0,50,1,'50% Off First Month\'s Rent',1,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(5,0,99,1,'99% Off First 2 Month\'s Rent',2,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup');
+INSERT INTO `special_offer_lookup` VALUES (1,0,0,1,'Limited Availability.  Reserve Today!',1,1,'AMOUNT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(2,0,99,1,'99% Off First Month\'s Rent',1,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(3,0,20,1,'20% Off First Month\'s Rent',1,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(4,0,50,1,'50% Off First Month\'s Rent',1,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup'),(5,0,99,2,'99% Off First 2 Month\'s Rent',2,1,'PERCENT_OFF','com.storitz.StorageMartSpecialOfferLookup');
 /*!40000 ALTER TABLE `special_offer_lookup` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
