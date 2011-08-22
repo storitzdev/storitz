@@ -36,7 +36,7 @@
                                 <label for="name"><g:message code="storageMartSpecialOfferLookup.name.label" default="Name" /></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: storageMartSpecialOfferLookupInstance, field: 'name', 'errors')}">
-                                <g:textField name="name" size="50" value="${storageMartSpecialOfferLookupInstance?.name}" />
+                                ${storageMartSpecialOfferLookupInstance?.name}
                             </td>
                         </tr>
 
