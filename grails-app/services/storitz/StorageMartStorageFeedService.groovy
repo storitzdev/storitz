@@ -197,10 +197,10 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
-    // Sites are set up a reserve, since we want to process the credit card for
+    // Sites are set up as rental, since we want to process the credit card for
     // payment. However, Storage Mart only exposes reserve via the API, so we
     // use that here.
-    return reserve (trans)
+    return reserve (trans, sandboxMode)
   }
 
   @Override
@@ -221,7 +221,13 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       )
       Credentials creds = new Credentials(this.passWord,this.userName) // yes, password/username
       BasicHttpBinding_IAvailabilityDataStub stub = new BasicHttpBinding_IAvailabilityDataStub(this.endpointURL, this.service)
-      trans.idNumber = stub.addReservation (creds, request)
+
+      // Sanboxmode: don't notify the operator of reservation.
+      if (sandboxMode)
+        trans.idNumber = "12345" // Bogus id
+      else
+        trans.idNumber = stub.addReservation (creds, request)
+
       // unitID is actually a unit-type in StorageMart, not specific unit per-se
       /* Leaving as comment pending further review
       trans.feedUnitNumber = "${unitID}"

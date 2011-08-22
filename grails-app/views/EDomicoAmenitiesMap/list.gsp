@@ -3,7 +3,6 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'EDomicoAmenitiesMap.label', default: 'EDomicoAmenitiesMap')}" />
     <g:set var="title" value="List EDomico Amenities Mappings" scope="request"/>
 </head>

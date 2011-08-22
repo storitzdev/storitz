@@ -7,9 +7,10 @@
 <body>
 <div id="body">
   <div class="stcontent">
-    <div class="buttons">
+      <div class="buttons">
       <span class="button"><a href="${createLink(controller: 'admin', action: 'index')}">Menu</a></span>
       <span class="button"><g:link action="create">Create New Storage Mart Feed</g:link></span>
+      <span class="button"><g:link controller="storageMartSpecialOfferLookup" class="list" action="list">Manage Special Offer Lookup</g:link></span>
     </div>
     <div class="body">
 
@@ -57,6 +58,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </body>
 </html>

@@ -70,7 +70,8 @@ class StoritzGroovyUtil {
     SpecialOfferLookup.findAll().each { lookup ->
       if (lookup.isNew())
         ++count
-        writer.println "[CLASS: ${lookup.class.name}] [NAME: ${lookup.name}]"
+        def opName = lookup.class.name.toString().replace("com.storitz.","").replace("SpecialOfferLookup","")
+        writer.println "[FEED: ${opName}] [NAME: ${lookup.name}]"
     }
 
     writer.println ""

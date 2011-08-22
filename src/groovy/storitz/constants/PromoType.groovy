@@ -5,6 +5,10 @@ public enum PromoType {
   PERCENT_OFF,
   FIXED_RATE;
 
+  def getDisplay() {
+    return this.name()
+  }
+
   static list() {
     [AMOUNT_OFF, PERCENT_OFF, FIXED_RATE]
   }
@@ -12,5 +16,4 @@ public enum PromoType {
   static public PromoType getEnumFromId(String value) {
     return PromoType.valueOf(value)
   }
-
 }

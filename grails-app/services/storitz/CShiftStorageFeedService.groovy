@@ -1329,7 +1329,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   public boolean moveIn(RentalTransaction rentalTransaction, boolean sandboxMode) {
-      return reserve(rentalTransaction)
+      return reserve(rentalTransaction, sandboxMode)
   }
 
   @Override
