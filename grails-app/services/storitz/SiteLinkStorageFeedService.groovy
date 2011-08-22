@@ -1405,7 +1405,13 @@ TODO - evaluate whether we need this going forward
 */
 
   @Override
-  public boolean moveIn(RentalTransaction rentalTransaction) {
+  public boolean moveIn(RentalTransaction rentalTransaction, boolean sandboxMode) {
+    if (sandboxMode) {
+      rentalTransaction.feedUnitId = "SANDBOX"
+      rentalTransaction.feedUnitNumber = "SANDBOX"
+      rentalTransaction.idNumber = "SANDBOX"
+      return true;
+    }
     createTenant(rentalTransaction)
 
     StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)
@@ -1461,7 +1467,15 @@ TODO - evaluate whether we need this going forward
   }
 
   @Override
-  public boolean reserve(RentalTransaction rentalTransaction) {
+  public boolean reserve(RentalTransaction rentalTransaction, boolean sandboxMode) {
+    if (sandboxMode) {
+      rentalTransaction.feedUnitId = "SANDBOX"
+      rentalTransaction.feedUnitNumber = "SANDBOX"
+      rentalTransaction.idNumber = "SANDBOX"
+      rentalTransaction.reservationId = "SANDBOX"
+      return true;
+    }
+
     createTenant(rentalTransaction)
 
       StorageUnit unit = StorageUnit.get(rentalTransaction.unitId as Long)

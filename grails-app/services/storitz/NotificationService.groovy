@@ -14,10 +14,14 @@ class NotificationService {
   static transactional = true
 
   def notify(NotificationEventType eventType, RentalTransaction rentalTransaction) {
+    notify(eventType, rentalTransaction, false);
+  }
+
+  def notify(NotificationEventType eventType, RentalTransaction rentalTransaction, boolean sandboxMode) {
 
     switch (eventType) {
       case NotificationEventType.NEW_TENANT:
-        handleNewTenant(rentalTransaction)
+        handleNewTenant(rentalTransaction, sandboxMode)
         break
 
       case NotificationEventType.PRE_MOVE_IN_TENANT:
@@ -33,7 +37,7 @@ class NotificationService {
 
   }
 
-  def handleNewTenant(rentalTransaction) {
+  def handleNewTenant(rentalTransaction, boolean sandboxMode) {
 
    def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
 
@@ -61,7 +65,7 @@ class NotificationService {
     String promoName = rentalTransaction.promoName
     String insuranceName = rentalTransaction.insuranceName
     String siteAddress = rentalTransaction.site.getFullAddress()
-    String directionsLink = g.createLink(controller: "storageSite", action: "directions", id: rentalTransaction.site.id)
+    String directionsLink = g.createLink(controller: "storageSite", action: "directions", id: rentalTransaction.site.id, absolute:true)
     String billingName = rentalTransaction.billingAddress.fullName()
     String billingAddress = rentalTransaction.billingAddress.fullAddress()
     String storitzId = rentalTransaction.bookingDate.format('yyyyddMM') + sprintf('%08d', rentalTransaction.id)
@@ -146,11 +150,22 @@ class NotificationService {
         tenantSubj = "Storitz - Confirmation for ${rentalTransaction.moveInDate.format('MM/dd/yy')} new tenant reservation at ${rentalTransaction.site.title} (Confirmation #${rentalTransaction.idNumber})"
         break
     }
+    if (sandboxMode) {
+      tenantSubj = "SANDBOX: " + tenantSubj;
+      operSubj = "SANDBOX: " + operSubj;
+    }
 
     //// TENANT
     try {
+      def recipient
+      if (sandboxMode) {
+        recipient = rentalTransaction.contactPrimary.email.endsWith("storitz.com") ? rentalTransaction.contactPrimary.email : "tech@storitz.com"
+      }
+      else {
+        recipient = rentalTransaction.contactPrimary.email
+      }
       mailService.sendMail {
-        to rentalTransaction.contactPrimary.email
+        to recipient
         from "no-response@storitz.com"
         subject operSubj
         body (model:model,view:tenantView)
@@ -161,8 +176,9 @@ class NotificationService {
 
     ///// ON-SITE MANAGERS
     try {
+      def recipients = filterEmails(siteManagerEmails, sandboxMode)
       mailService.sendMail {
-              to siteManagerEmails.toArray()
+              to recipients
               from "no-response@storitz.com"
               subject tenantSubj
               body (model:model,view:mgrView)
@@ -174,9 +190,10 @@ class NotificationService {
 
     ///// SITE OPERATORS
     try {
+      def recipients = filterEmails(operAcctEmails, sandboxMode)
       def subj =  "EVENT - NEW TENANT ${tenantSubj}"
       mailService.sendMail {
-              to operAcctEmails.toArray()
+              to recipients
               from "no-response@storitz.com"
               subject subj.toString()
               body (model:model,view:operView)
@@ -187,8 +204,9 @@ class NotificationService {
 
     ///// US
     try {
+      def recipient = sandboxMode ? "tech@storitz.com" : "notifications@storitz.com"
       mailService.sendMail {
-              to "notifications@storitz.com"
+              to recipient
               from "no-response@storitz.com"
               subject tenantSubj
               body (model:model,view:operView)
@@ -196,6 +214,20 @@ class NotificationService {
     } catch (Throwable t) {
       log.error("${t}", t)
     }
+  }
+
+  def filterEmails(List<String> emails, boolean sandboxMode) {
+    def recipients
+    if (sandboxMode) {
+      recipients = emails.findAll { it.endsWith("storitz.com") }
+      if (recipients.size() == 0) {
+        recipients.add("tech@storitz.com")
+      }
+    }
+    else {
+      recipients = emails
+    }
+    return recipients.toArray()
   }
 
   def handleAchTransfer(rentalTransaction) {

@@ -368,9 +368,13 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
   }
 
   @Override
-  public boolean reserve(RentalTransaction trans) {
+  public boolean reserve(RentalTransaction trans, boolean sandboxMode) {
 
     trans.idNumber = trans.bookingDate.format('yyyyddMM') + sprintf('%08d', trans.id)
+
+    if (sandboxMode) {
+      return true;
+    }
 
     StorageUnit unit = StorageUnit.get(trans.unitId as Long)
 
@@ -469,8 +473,8 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
   }
 
   @Override
-  public boolean moveIn(RentalTransaction trans) {
-    return reserve(trans);
+  public boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
+    return reserve(trans, sandboxMode);
   }
 
     // Post the move in details to the Extraspace web site

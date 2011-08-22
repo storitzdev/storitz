@@ -17,6 +17,10 @@ class UrlMappings {
       controller = "rentalTransaction"
       action = "thankYou"
     }
+    name xidExpired: "/rentalTransaction/beginCheckoutError" {
+      controller = "rentalTransaction"
+      action = "beginCheckoutError"
+    }
     name rentMePanel: "/rent-me-panel" {
       controller = "storageSite"
       action = "rentMePanel"

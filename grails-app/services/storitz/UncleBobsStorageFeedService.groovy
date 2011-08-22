@@ -200,12 +200,17 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  boolean moveIn(RentalTransaction trans) {
-    return reserve(trans)
+  boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
+    return reserve(trans, sandboxMode)
   }
 
   @Override
-  boolean reserve(RentalTransaction trans) {
+  boolean reserve(RentalTransaction trans, boolean sandboxMode) {
+    if (sandboxMode) {
+      trans.idNumber = "SANDBOX"
+      trans.feedUnitNumber = "SANDBOX"
+      return true;
+    }
     def contact = trans.contactPrimary
     def address = contact.address2 ? "${contact.address1}, ${contact.address2}" : contact.address1
     def unit = StorageUnit.findById(trans.unitId)

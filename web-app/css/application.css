@@ -1934,6 +1934,16 @@ body.site_detail .sim_units .units_bottom {
 /* ------------------------------------------------------------------------------------- */          
 /* CHECKOUT */
 
+body.checkout-error h1 {
+  font-size: 24px;
+  margin: 20px 0;
+}
+body.checkout-error p {
+  line-height: 120%;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
 body.checkout form.checkout {
   position: relative;
   font-size: 13px;

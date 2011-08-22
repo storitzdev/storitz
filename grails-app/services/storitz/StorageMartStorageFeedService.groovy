@@ -196,7 +196,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  boolean moveIn(RentalTransaction trans) {
+  boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
     // Sites are set up a reserve, since we want to process the credit card for
     // payment. However, Storage Mart only exposes reserve via the API, so we
     // use that here.
@@ -204,7 +204,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  boolean reserve(RentalTransaction trans) {
+  boolean reserve(RentalTransaction trans, boolean sandboxMode) {
     try {
       StorageUnit unit = StorageUnit.get (trans.unitId)
       DateFormat df = new SimpleDateFormat("yyyy/MM/dd")

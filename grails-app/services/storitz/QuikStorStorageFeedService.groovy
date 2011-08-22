@@ -551,12 +551,18 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean reserve(RentalTransaction trans) {
-    return moveIn(trans);
+  public boolean reserve(RentalTransaction trans, boolean sandboxMode) {
+    return moveIn(trans, sandboxMode);
   }
 
   @Override
-  public boolean moveIn(RentalTransaction trans) {
+  public boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
+    if (sandboxMode) {
+      trans.tenantId = "SANDBOX"
+      trans.accessCode = "SANDBOX"
+      trans.idNumber = "SANDBOX"
+      return true;
+    }
     def unit = StorageUnit.get(trans.unitId)
     String specialId = null
     if (trans.promoId != -999) {

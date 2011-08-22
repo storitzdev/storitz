@@ -1328,12 +1328,18 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean moveIn(RentalTransaction rentalTransaction) {
+  public boolean moveIn(RentalTransaction rentalTransaction, boolean sandboxMode) {
       return reserve(rentalTransaction)
   }
 
   @Override
-  public boolean reserve(RentalTransaction rentalTransaction) {
+  public boolean reserve(RentalTransaction rentalTransaction, boolean sandboxMode) {
+    if (sandboxMode) {
+      rentalTransaction.reservationId = "SANDBOX"
+      rentalTransaction.idNumber = "SANDBOX"
+      rentalTransaction.reserved = true
+      return true;
+    }
     createTenant(rentalTransaction)
     def ret = makeReservation(rentalTransaction)
 

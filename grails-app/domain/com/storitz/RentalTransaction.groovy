@@ -77,6 +77,7 @@ class RentalTransaction {
   CreditCardType cardType
   String ccNum
   String cvv2
+  String errorMessage
 
   TransactionType transactionType
 
@@ -141,5 +142,5 @@ class RentalTransaction {
   }
 
   static transients = ['terms', 'hazardousMaterials', 'insuranceTerms', 'ccExpDate', 'ccNum',
-          'cardType', 'cvv2', 'paymentString']
+          'cardType', 'cvv2', 'paymentString', 'errorMessage']
 }

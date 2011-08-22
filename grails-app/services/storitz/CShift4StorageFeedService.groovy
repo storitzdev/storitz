@@ -564,12 +564,12 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
   }
 
   @Override
-  public boolean reserve(RentalTransaction trans) {
-    return moveIn(trans);
+  public boolean reserve(RentalTransaction trans, boolean sandboxMode) {
+    return moveIn(trans, sandboxMode);
   }
 
   @Override
-  public boolean moveIn(RentalTransaction trans) {
+  public boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
     createTenant(trans)
     StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
 

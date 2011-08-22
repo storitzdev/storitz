@@ -31,12 +31,12 @@ public interface IMoveInStorageFeedService extends IStorageFeedService {
      * @param trans
      * @return
      */
-    public boolean moveIn(RentalTransaction trans);
+    public boolean moveIn(RentalTransaction trans, boolean sandboxMode);
 
     /**
      *
      * @param trans
      * @return
      */
-    public boolean reserve(RentalTransaction trans);
+    public boolean reserve(RentalTransaction trans, boolean sandboxMode);
 }

@@ -606,7 +606,13 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
 
     // TODO: Test. Lots of test.
     @Override
-    public boolean moveIn(RentalTransaction trans) {
+    public boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
+      if (sandboxMode) {
+        trans.idNumber = "SANDBOX"
+        trans.feedUnitNumber = "SANDBOX"
+        return true;
+      }
+
       def storageUnit       = StorageUnit.findById(trans.unitId)
       def contact           = trans.contactPrimary
 
@@ -708,8 +714,8 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
 
     // TODO
     @Override
-    public boolean reserve(RentalTransaction trans) {
-      return moveIn (trans);
+    public boolean reserve(RentalTransaction trans, boolean sandboxMode) {
+      return moveIn (trans, sandboxMode);
     }
 
 
