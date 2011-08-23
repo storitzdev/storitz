@@ -9,8 +9,22 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
   def geocodeService
   def unitSizeService
 
-  def cshiftUrl = "https://slc.centershift.com:443/Store40/SWS.asmx?WSDL"
-  def cshiftSandboxUrl = "https://slc.centershift.com/Sandbox40/SWS.asmx?WSDL"
+  // required for script services
+  UnitSizeService getUnitSizeService() {
+      if (!unitSizeService) {
+          log.info ("unitSizeService is null: instantiating")
+          unitSizeService = new UnitSizeService()
+      }
+      return unitSizeService
+  }
+
+  GeocodeService getGeocodeService() {
+      if (!geocodeService) {
+          log.info ("geocodeService is null: instantiating")
+          geocodeService = new GeocodeService()
+      }
+      return geocodeService
+  }
 
   def proxy = [:]
 
@@ -41,10 +55,130 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     loadSites(cshift, stats, writer)
   }
 
-  // TODO - handle update case
   @Override
   public void updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
+    def cshift = (CenterShift)storageSiteInstance.feed
+    WSSoap myProxy = getProxy(cshift)
 
+    // grab site details
+    GetSiteDetailsRequest detailsReq = new GetSiteDetailsRequest()
+    detailsReq.setSiteID(new ArrayOfLong())
+    detailsReq.siteID.getLong().add(new Long(storageSiteInstance.sourceId))
+    def lookupUser = getLookupUser(cshift)
+    def siteDetails = myProxy.getSiteDetails(lookupUser, detailsReq)
+
+    def siteDetail = siteDetails.details.soasiteattributes[0]
+
+    def sitehours = siteDetail.sitehours
+    def gatehours = siteDetail.gatehours?.toLowerCase()
+
+    def hm = sitehours =~ /Monday:\s*(.+?)\s*Tuesday:\s*(.+?)\s*Wednesday:\s*(.+?)\s*Thursday:\s*(.+?)\s*Friday:\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
+    if (hm.getCount()) {
+
+      ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].eachWithIndex {
+        day, i ->
+        def hrs = hm[0][i + 1].toUpperCase()
+        def open = "open${day}"
+        def start = "start${day}"
+        def end = "end${day}"
+        if (hrs == "CLOSED") {
+          storageSiteInstance."$open" = false
+        } else {
+          storageSiteInstance."$open" = true
+          storageSiteInstance."$start" = getStartTime(hrs)
+          storageSiteInstance."$end" = getEndTime(hrs)
+        }
+      }
+    } else {
+      hm = sitehours =~ /Monday\s*\w+?\s*Friday\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
+      if (hm.getCount()) {
+        log.info "Monday - Friday match"
+        ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each { day ->
+          def hrs = hm[0][1].toUpperCase()
+          def open = "open${day}"
+          def start = "start${day}"
+          def end = "end${day}"
+          storageSiteInstance."$open" = true
+          storageSiteInstance."$start" = getStartTime(hrs)
+          storageSiteInstance."$end" = getEndTime(hrs)
+        }
+        ["Saturday", "Sunday"].eachWithIndex { day, i ->
+          def hrs = hm[0][i + 2].toUpperCase()
+          def open = "open${day}"
+          def start = "start${day}"
+          def end = "end${day}"
+          if (hrs == "CLOSED") {
+            storageSiteInstance."$open" = false
+          } else {
+            storageSiteInstance."$open" = true
+            storageSiteInstance."$start" = getStartTime(hrs)
+            storageSiteInstance."$end" = getEndTime(hrs)
+          }
+        }
+      }
+    }
+    if (gatehours == "24 hours") {
+      def start = Date.parse("hh:mma", "12:00am")
+      def end = Date.parse("hh:mma", "11:59pm")
+      storageSiteInstance.startMondayGate = storageSiteInstance.startTuesdayGate = storageSiteInstance.startWednesdayGate = storageSiteInstance.startThursdayGate = storageSiteInstance.startFridayGate = storageSiteInstance.startSaturdayGate = storageSiteInstance.startSundayGate = start
+      storageSiteInstance.endMondayGate = storageSiteInstance.endTuesdayGate = storageSiteInstance.endWednesdayGate = storageSiteInstance.endThursdayGate = storageSiteInstance.endFridayGate = storageSiteInstance.endSaturdayGate = storageSiteInstance.endSundayGate = end
+    } else {
+      def gm = gatehours =~ /(.+?)\s+\w+?\s+(.+)/
+      if (gm.getCount()) {
+        def start = Date.parse("hh:mma", gm[0][1].toUpperCase())
+        def end = Date.parse("hh:mma", gm[0][2].toUpperCase())
+        storageSiteInstance.startMondayGate = storageSiteInstance.startTuesdayGate = storageSiteInstance.startWednesdayGate = storageSiteInstance.startThursdayGate = storageSiteInstance.startFridayGate = storageSiteInstance.startSaturdayGate = storageSiteInstance.startSundayGate = start
+        storageSiteInstance.endMondayGate = storageSiteInstance.endTuesdayGate = storageSiteInstance.endWednesdayGate = storageSiteInstance.endThursdayGate = storageSiteInstance.endFridayGate = storageSiteInstance.endSaturdayGate = storageSiteInstance.endSundayGate = end
+      }
+    }
+
+    GetBaseFeesRequest siteFeesRequest = new GetBaseFeesRequest()
+    siteFeesRequest.siteID = new Long(storageSiteInstance.sourceId)
+    def siteFees = myProxy.getBaseFees(lookupUser, siteFeesRequest)
+
+    for (siteFee in siteFees.details.orgfeesiteall) {
+      if (siteFee.feename == "Admin Fee") {
+        storageSiteInstance.adminFee = siteFee.feeamt
+        log.info "Found admin fee = ${storageSiteInstance.adminFee}"
+        break
+      }
+    }
+
+    // check deposits
+    GetAvailableDepositsRequest depositRequest = new GetAvailableDepositsRequest()
+    depositRequest.orgID = cshift.orgId
+    def depositFees = myProxy.getAvailableDeposits(lookupUser, depositRequest)
+
+    storageSiteInstance.deposit = 0
+    for (depositFee in depositFees.details.orgsecuritydeposits) {
+      if (depositFee.deptypeval == "Security" && depositFee.active && depositFee.depfix && depositFee.deptype == 1 && storageSiteInstance.deposit == 0) {
+        storageSiteInstance.deposit = depositFee.depfix
+        log.info "Found deposit fee = ${storageSiteInstance.deposit}"
+        break
+      }
+    }
+
+    GetAvailableServicesRequest availSvcReq = new GetAvailableServicesRequest()
+    availSvcReq.siteID = new Long(storageSiteInstance.sourceId)
+    def availSvcs = myProxy.getAvailableServices(lookupUser, availSvcReq)
+    for (svc in availSvcs.details.orgservicesiteofferings) {
+      if (svc.servicetypeval == "24 Hour Access") {
+        storageSiteInstance.extendedHours = true
+        storageSiteInstance.isTwentyFourHour = true
+        log.info "Found 24 hr access"
+      }
+    }
+
+    storageSiteInstance.save(flush: true)
+    if (siteDetail.emailaddress) {
+      createSiteUser(storageSiteInstance, siteDetail.emailaddress, null, cshift.manager)
+    }
+
+    loadInsurance(cshift, storageSiteInstance)
+    updateUnits(storageSiteInstance, stats, writer)
+    loadPromos(storageSiteInstance, writer)
+
+    storageSiteInstance.save(flush: true)
   }
 
   def loadSites(CenterShift cshift, SiteStats stats, PrintWriter writer) {
@@ -56,179 +190,51 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     def siteList = myProxy.getSiteList(lookupUser, siteListRequest)
 
     for (site in siteList.details.soagetsitelist) {
-      StorageSite foundSite = StorageSite.findBySourceAndSourceId("CS4", site.siteid)
-      if (foundSite) {
-        updateSite(foundSite, stats, writer)
-      } else {
-        if (site.propertytype == 1 && (site.sitestauts == 1 | site.sitestauts == 2)) {
+      StorageSite csite = StorageSite.findBySourceAndSourceId("CS4", site.siteid)
+      if (!csite && site.propertytype == 1 && (site.sitestauts == 1 | site.sitestauts == 2)) {
+        csite = new StorageSite()
+        csite.source = "CS4"
+        csite.sourceId = site.siteid
+        csite.sourceLoc = site.sitenumber
+        csite.title = site.displayname
+        csite.disabled = true
+        csite.feed = cshift
+        csite.phone = site.phone
+        csite.address = site.line1
+        csite.address2 = site.line2
+        csite.city = site.city
+        csite.state = State.fromText(site.state)
+        csite.zipcode = site.postalcode
+        def address = csite.address + ', ' + csite.city + ', ' + csite.state.display + ' ' + csite.zipcode
+        log.info "Found address: ${address}"
+        def geoResult = getGeocodeService().geocode(address)
+        csite.lng = geoResult.results[0].geometry.location.lng
+        csite.lat = geoResult.results[0].geometry.location.lat
+        csite.transactionType = TransactionType.RENTAL
 
-          def csite = new StorageSite()
-          csite.source = "CS4"
-          csite.sourceId = site.siteid
-          csite.sourceLoc = site.sitenumber
-          csite.title = site.displayname
-          csite.disabled = true
-          csite.feed = cshift
+        // set attributes
+        csite.extendedHours = false
+        csite.isManagerOnsite = false
+        csite.isGate = true
+        csite.isKeypad = true
+        csite.isCamera = false
+        csite.hasElevator = false
+        csite.requiresInsurance = false
+        csite.boxesAvailable = false
+        csite.freeTruck = TruckType.NONE
+        csite.isUnitAlarmed = false
 
-          csite.phone = site.phone
-          csite.address = site.line1
-          csite.address2 = site.line2
-          csite.city = site.city
-          csite.state = State.fromText(site.state)
-          csite.zipcode = site.postalcode
+        // TODO get taxes
+        csite.taxRateInsurance = 0
+        csite.taxRateRental = 0
+        csite.taxRateMerchandise = 0
 
-          def address = csite.address + ', ' + csite.city + ', ' + csite.state.display + ' ' + csite.zipcode
-
-          log.info "Found address: ${address}"
-          def geoResult = geocodeService.geocode(address)
-
-          csite.lng = geoResult.results[0].geometry.location.lng
-          csite.lat = geoResult.results[0].geometry.location.lat
-
-          csite.transactionType = TransactionType.RENTAL
-          csite.lastUpdate = 0
-
-          // grab site details
-          GetSiteDetailsRequest detailsReq = new GetSiteDetailsRequest()
-          detailsReq.setSiteID(new ArrayOfLong())
-          detailsReq.siteID.getLong().add(site.siteid)
-          def siteDetails = myProxy.getSiteDetails(lookupUser, detailsReq)
-
-          def siteDetail = siteDetails.details.soasiteattributes[0]
-
-          def sitehours = siteDetail.sitehours
-          def gatehours = siteDetail.gatehours?.toLowerCase()
-
-          def hm = sitehours =~ /Monday:\s*(.+?)\s*Tuesday:\s*(.+?)\s*Wednesday:\s*(.+?)\s*Thursday:\s*(.+?)\s*Friday:\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
-          if (hm.getCount()) {
-
-            ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].eachWithIndex {
-              day, i ->
-              def hrs = hm[0][i + 1].toUpperCase()
-              def open = "open${day}"
-              def start = "start${day}"
-              def end = "end${day}"
-              if (hrs == "CLOSED") {
-                csite."$open" = false
-              } else {
-                csite."$open" = true
-                csite."$start" = getStartTime(hrs)
-                csite."$end" = getEndTime(hrs)
-              }
-            }
-          } else {
-            hm = sitehours =~ /Monday\s*\w+?\s*Friday\s*(.+?)\s*Saturday:\s*(.+?)\s*Sunday:\s*(.+)/
-            if (hm.getCount()) {
-              log.info "Monday - Friday match"
-              ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each { day ->
-                def hrs = hm[0][1].toUpperCase()
-                def open = "open${day}"
-                def start = "start${day}"
-                def end = "end${day}"
-                csite."$open" = true
-                csite."$start" = getStartTime(hrs)
-                csite."$end" = getEndTime(hrs)
-              }
-              ["Saturday", "Sunday"].eachWithIndex { day, i ->
-                def hrs = hm[0][i + 2].toUpperCase()
-                def open = "open${day}"
-                def start = "start${day}"
-                def end = "end${day}"
-                if (hrs == "CLOSED") {
-                  csite."$open" = false
-                } else {
-                  csite."$open" = true
-                  csite."$start" = getStartTime(hrs)
-                  csite."$end" = getEndTime(hrs)
-                }
-              }
-            }
-          }
-          if (gatehours == "24 hours") {
-            def start = Date.parse("hh:mma", "12:00am")
-            def end = Date.parse("hh:mma", "11:59pm")
-            csite.startMondayGate = csite.startTuesdayGate = csite.startWednesdayGate = csite.startThursdayGate = csite.startFridayGate = csite.startSaturdayGate = csite.startSundayGate = start
-            csite.endMondayGate = csite.endTuesdayGate = csite.endWednesdayGate = csite.endThursdayGate = csite.endFridayGate = csite.endSaturdayGate = csite.endSundayGate = end
-          } else {
-            def gm = gatehours =~ /(.+?)\s+\w+?\s+(.+)/
-            if (gm.getCount()) {
-              def start = Date.parse("hh:mma", gm[0][1].toUpperCase())
-              def end = Date.parse("hh:mma", gm[0][2].toUpperCase())
-              csite.startMondayGate = csite.startTuesdayGate = csite.startWednesdayGate = csite.startThursdayGate = csite.startFridayGate = csite.startSaturdayGate = csite.startSundayGate = start
-              csite.endMondayGate = csite.endTuesdayGate = csite.endWednesdayGate = csite.endThursdayGate = csite.endFridayGate = csite.endSaturdayGate = csite.endSundayGate = end
-            }
-          }
-
-          GetBaseFeesRequest siteFeesRequest = new GetBaseFeesRequest()
-          siteFeesRequest.siteID = site.siteid
-          def siteFees = myProxy.getBaseFees(lookupUser, siteFeesRequest)
-
-          for (siteFee in siteFees.details.orgfeesiteall) {
-            if (siteFee.feename == "Admin Fee") {
-              csite.adminFee = siteFee.feeamt
-              log.info "Found admin fee = ${csite.adminFee}"
-            }
-          }
-
-          // check deposits
-          GetAvailableDepositsRequest depositRequest = new GetAvailableDepositsRequest()
-          depositRequest.orgID = cshift.orgId
-          def depositFees = myProxy.getAvailableDeposits(lookupUser, depositRequest)
-
-          csite.deposit = 0
-          for (depositFee in depositFees.details.orgsecuritydeposits) {
-            if (depositFee.deptypeval == "Security" && depositFee.active && depositFee.depfix && depositFee.deptype == 1 && csite.deposit == 0) {
-              csite.deposit = depositFee.depfix
-              log.info "Found deposit fee = ${csite.deposit}"
-            }
-          }
-
-          // set attributes
-          csite.extendedHours = false
-          csite.isManagerOnsite = false
-          csite.isGate = true
-          csite.isKeypad = true
-          csite.isCamera = false
-          csite.hasElevator = false
-          csite.requiresInsurance = false
-          csite.boxesAvailable = false
-          csite.freeTruck = TruckType.NONE
-          csite.isUnitAlarmed = false
-
-          // TODO get taxes
-          csite.taxRateInsurance = 0
-          csite.taxRateRental = 0
-          csite.taxRateMerchandise = 0
-
-          GetAvailableServicesRequest availSvcReq = new GetAvailableServicesRequest()
-          availSvcReq.siteID = site.siteid
-          def availSvcs = myProxy.getAvailableServices(lookupUser, availSvcReq)
-          for (svc in availSvcs.details.orgservicesiteofferings) {
-            if (svc.servicetypeval == "24 Hour Access") {
-              // TODO mark 24 access
-              csite.extendedHours = true
-              log.info "Found 24 hr access"
-            }
-          }
-
-          csite.save(flush: true)
-          SiteUser.link(csite, cshift.manager)
-          if (site.emailaddress?.size() > 0) {
-            createSiteUser(csite, site.emailaddress, null, cshift.manager)
-          }
-
-          loadInsurance(cshift, csite)
-          updateUnits(csite, stats, writer)
-          loadPromos(csite, writer)
-
-          csite.save(flush: true)
-
-          stats.createCount++
-
-        } else {
-          log.info "Skipped site ${site.displayname} due to status ${site.sitestauts} or property type ${site.propertytype}"
-        }
+        csite.lastUpdate = 0
+        stats.createCount++
+        SiteUser.link(csite, cshift.manager)
       }
+      // Update will also save site
+      updateSite(csite, stats, writer)
 
     }
   }
@@ -328,7 +334,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           }
         }
       }
-      StorageSize storageSize = unitSizeService.getUnitSize(width, length, searchType)
+      StorageSize storageSize = getUnitSizeService().getUnitSize(width, length, searchType)
       if (storageSize) {
         unitList.add(unit.unitid)
         StorageUnit myUnit = site.units.find {(it.unitNumber as BigDecimal) == unit.unitid}
