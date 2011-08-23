@@ -152,7 +152,6 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
                                    ,unit_width)
 
       if (unit) {
-        storageSiteInstance.addToUnits (unit)
         loadPromoForUnit (storageSiteInstance, unit, unit_promotion_long)
       }
     }
@@ -559,6 +558,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
     if (!unit) {
       unit = new StorageUnit()
+      unit.site         = site
       unit.unitName     = unit_type_id
       unit.unitNumber   = unit_type_id
       unit.isIrregular  = false

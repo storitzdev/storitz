@@ -298,6 +298,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         writer.println("retrieved unitInfo ${unitInfo.dump()}")
         if (unitsize) {
           unit = new StorageUnit()
+          unit.site = site;
           unit.unitNumber = unitType.iTypeId
           unit.unitTypeInfo = unitType.iTypeId
           unit.price = unit.pushRate = unitType.dPrice
@@ -325,7 +326,6 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
             }
           }
           unit.save(flush: true)
-          site.addToUnits(unit)
           writer.println "Created new unit ${unit.dump()}"
         } else {
           writer.println "Skipped due to unit size: ${unitInfo.dWidth} X ${unitInfo.dLength}"
@@ -338,7 +338,8 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         def unit = site.units.find {(it.unitNumber as Integer) == entry.key}
         writer.println "Cleanup found deleted type: ${entry.key} - removing ${unit.unitCount} units"
         stats.removedCount += unit.unitCount
-        site.removeFromUnits(unit)
+        unit.unitCount = 0
+        unit.save(flush: true)
       }
     }
     updateBestUnitPrice (site)

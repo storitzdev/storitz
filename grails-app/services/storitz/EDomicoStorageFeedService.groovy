@@ -457,6 +457,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
             def units = this.readUnits(token,siteID,sizeID)
             def price = new Double(sz.get("SizeRentRate")).doubleValue()
             StorageUnit storageUnit = getStorageUnitByNameAndNumber(site,sz.get("SiteID"),sz.get("SizeID"),stats)
+            storageUnit.site = site
             storageUnit.unitTypeInfo = sz.get("SiteID") + "-" + sz.get("SizeID") + ":" + sz.get("SizeCodeInfo")
             storageUnit.price = storageUnit.pushRate = price
             storageUnit.displaySize = storageUnit.unitSizeInfo = getStorageUnitDisplaySize(sz.get("SizeCodeInfo"))
@@ -480,7 +481,6 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
             // Looks good to go. Save and process promos
             site.save()         // don't flush!
             storageUnit.save()  // don't flush!
-            site.addToUnits(storageUnit)
 
             // Process the promotions  (Note: saves but does not flush)
             loadPromos(site,storageUnit,sz,writer)

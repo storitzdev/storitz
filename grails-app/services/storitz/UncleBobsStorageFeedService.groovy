@@ -143,7 +143,6 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
           ,space_limitdate)
 
       if (unit) {
-        storageSiteInstance.addToUnits(unit)
         loadPromoForUnit(storageSiteInstance,unit,space_special_description.trim(),space_special_type,space_special_amount,space_special_month,space_special_applytoprorate)
       }
     }
@@ -405,6 +404,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     StorageUnit unit = site.units.find { it.unitName == space_id }
     if (!unit) {
       unit              = new StorageUnit()
+      unit.site         = site
       unit.unitName     = space_id
       unit.unitNumber   = space_id
       unit.isAlarm      = false;

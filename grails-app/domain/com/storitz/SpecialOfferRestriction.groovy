@@ -4,8 +4,6 @@ import storitz.constants.SpecialOfferRestrictionType
 
 class SpecialOfferRestriction {
 
-  static belongsTo = SpecialOffer
-
   SpecialOfferRestrictionType type
   Date startDate
   Date endDate
@@ -15,6 +13,7 @@ class SpecialOfferRestriction {
   Integer sizeType
   String restrictionInfo
   String description
+  SpecialOffer specialOffer
 
   static constraints = {
     startDate(nullable: true)

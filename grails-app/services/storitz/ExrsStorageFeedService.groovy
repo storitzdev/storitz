@@ -131,6 +131,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
 
           if (!siteUnit) {
             siteUnit = new StorageUnit()
+            siteUnit.site = site;
             siteUnit.unitInfo = dimensions
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = attributes
@@ -200,7 +201,6 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
           if (siteUnit.validate()) {
             siteUnit.save(flush: true)
             if (newUnit) {
-              site.addToUnits(siteUnit)
               needSave = true
             }
           } else {

@@ -338,9 +338,9 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       if (storageSize) {
         unitList.add(unit.unitid)
         StorageUnit myUnit = site.units.find {(it.unitNumber as BigDecimal) == unit.unitid}
-        def newUnit = false
         if (!myUnit) {
           myUnit = new StorageUnit()
+          myUnit.site = site;
           myUnit.unitName = unit.unitnumber
           myUnit.unitNumber = unit.unitid
           myUnit.price = unit.maxrentrate
@@ -364,7 +364,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           stats.unitCount += unit.available
           stats.createCount++
 
-          newUnit = true
         } else {
           myUnit.totalUnits = unit.quantity
           myUnit.unitCount = unit.available
@@ -374,10 +373,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           stats.updateCount++
           stats.removedCount--
         }
+
         myUnit.save(flush: true)
-        if (newUnit) {
-          site.addToUnits(myUnit)
-        }
       } else {
         log.info "Skipping unit due to size width: ${width}, length: ${length} features: ${unit.featuresval}"
       }
@@ -393,7 +390,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     for (unit in deleteList) {
       stats.removedCount++
-      site.removeFromUnits(unit)
+      unit.unitCount = 0;
+      unit.save.flush(true);
     }
     if (deleteList.size() > 0) {
       site.save(flush: true)

@@ -16,7 +16,20 @@ import com.storitz.service.IFeedStorageFeedService
  */
 class StorageFeedServiceFactory {
 
-    private static HashMap<String,IStorageFeedService> serviceHashMap = new HashMap<String,IStorageFeedService>();
+    private static HashMap<String,IStorageFeedService> serviceInstanceMap = new HashMap<String,IStorageFeedService>();
+    private static final HashMap<String,IStorageFeedService> serviceClassMap = new HashMap<String,IStorageFeedService>();
+
+    static { // maps codes from storage_site table to class names
+        serviceClassMap.put("SL", "storitz.SiteLinkStorageFeedService");
+        serviceClassMap.put("CS3", "storitz.CShiftStorageFeedService");
+        serviceClassMap.put("CS4", "storitz.CShift4StorageFeedService");
+        serviceClassMap.put("QS", "storitz.QuikStorStorageFeedService");
+        serviceClassMap.put("EX", "storitz.ExrsStorageFeedService");
+        serviceClassMap.put("USI", "storitz.UsiStorageFeedService");
+        serviceClassMap.put("DOM", "storitz.EDomicoStorageFeedService");
+        serviceClassMap.put("BOB", "storitz.UncleBobsStorageFeedService");
+        serviceClassMap.put("STM", "storitz.StorageMartStorageFeedService");
+    }
 
     /**
      *
@@ -25,25 +38,14 @@ class StorageFeedServiceFactory {
      */
 
     private static synchronized IStorageFeedService getServiceInstance (StorageSite site) {
-        IStorageFeedService iService = null;
-        Class klass = null;
-        ServiceMap serviceMap = null;
-
-        serviceMap = ServiceMap.findByServiceName(site.source);
-
-        String serviceMapKey = serviceMap.serviceName + ":" + site.feed.id + ":" + serviceMap.serviceHandler;
-
-        if (serviceHashMap.containsKey(serviceMapKey)) {
-            return serviceHashMap.get(serviceMapKey);
+        String key = site.source + ":" + site.feed.id;
+        if (serviceInstanceMap.containsKey(key)) {
+            return serviceInstanceMap.get(key);
         }
-
-        klass = Class.forName(serviceMap.serviceHandler,false,Thread.currentThread().contextClassLoader);
-        iService = klass.newInstance();
+        Class klass = Class.forName(serviceClassMap.get(site.source), false, Thread.currentThread().contextClassLoader);
+        IStorageFeedService iService = klass.newInstance();
         iService.init(site);
-
-        println "Adding new IStorageFeedService to map: ${serviceMapKey}"
-        serviceHashMap.put(serviceMapKey,iService);
-
+        serviceInstanceMap.put(key, iService);
         return iService;
     }
 

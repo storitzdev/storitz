@@ -29,7 +29,7 @@ class StorageSite {
     amenityItems cascade: "all,delete-orphan"
   }
 
-  static fetchMode = []
+  static fetchMode = [units:"eager"]
 
   static constraints = {
     description(widget: 'textarea', nullable: true, size: 2..2000)

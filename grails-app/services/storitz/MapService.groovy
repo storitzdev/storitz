@@ -9,10 +9,14 @@ import storitz.constants.QueryMode
 import storitz.constants.GeoType
 import org.hibernate.FetchMode
 import storitz.constants.TruckType
+import org.hibernate.Hibernate
+import org.hibernate.SessionFactory
+import org.hibernate.Session
 
 class MapService {
   def geoIp;
 
+  def sessionFactory;
   boolean transactional = false
 
   final double R = 3958.761; // mi
@@ -31,63 +35,6 @@ class MapService {
     FETCH
   }
 
-  def unitsCriteria = { criteria ->
-    return {
-      units {
-        and {
-          unitsize {
-            and {
-              eq("searchType", criteria.searchType)
-              gt(criteria.searchSize, "id")
-            }
-          }
-          if (criteria.unitType) {
-            eq(criteria.unitType,"unitType")
-          }
-          if (criteria.amenities) {
-            if (criteria.amenities.get("cc")) eq("isTempControlled",true)
-            if (criteria.amenities.get("24hr")) eq("isTwentyFourHour",true)
-            if (criteria.amenities.get("alarm")) eq("isAlarm",true)
-          }
-          sqlRestriction("storage_unit.unit_count > storage_site.min_inventory")
-        }
-        //order("currentPrice", "asc") // TODO: uncomment when used by getUnitsClosure
-      }
-    }
-  }
-  def getSitesClosure = { criteria ->
-    return {
-      projections {
-        groupProperty("id")
-      }
-      and {
-        eq("disabled", false)
-        or { // geo filters (must satisfy *any*)
-          and {
-            between("lat", criteria.bounds.sw.lat, criteria.bounds.ne.lat)
-            between("lng", criteria.bounds.sw.lng, criteria.bounds.ne.lng)
-          }
-          switch (criteria.geoType) { // TODO: Do string matching for neighborhood names, too?
-            case GeoType.CITY:
-              and {
-                eq("city", criteria.city);
-                eq("state", criteria.state);
-              }
-              break;
-            case GeoType.ZIP_CODE:
-              eq("zipcode", criteria.zip_code);
-              break;
-          }
-        }
-        if (criteria.amenities) {
-          if (criteria.amenities.get("truck")) eq("freeTruck",TruckType.FREE)
-        }
-      }
-      if (criteria.queryMode == QueryMode.FIND_UNITS) {
-        unitsCriteria(criteria)
-      }
-    }
-  }
 //  // TODO: use this to avoid in-app sorting of sites by price (in best-unit calculation in SearchController)
 //  //       n.b. order() clause must be uncommented in unitsCriteria for this to work here, and currentPrice
 //  //       must be set (to either price or pushRate) by the ETL process, and stored in the DB
@@ -100,7 +47,52 @@ class MapService {
 //  }
 
   def countSites(SearchCriteria criteria) {
-    return StorageSite.withCriteria(getSitesClosure(criteria)).size()
+    return getSiteIds(criteria).size();
+  }
+
+  private String buildSearchQuery(SearchCriteria criteria) {
+    StringBuilder qb = new StringBuilder("SELECT ss.id FROM storage_site ss LEFT OUTER JOIN storage_unit su ON su.site_id = ss.id");
+    qb.append(" WHERE ss.disabled=0");
+    qb.append(" AND ((ss.lat BETWEEN ").append(criteria.bounds.sw.lat).append(" AND ").append(criteria.bounds.ne.lat).append(" AND ").append("ss.lng BETWEEN ").append(criteria.bounds.sw.lng).append(" AND ").append(criteria.bounds.ne.lng).append(")");
+    switch(criteria.geoType) {
+      case GeoType.CITY:
+        qb.append(" OR (ss.city='").append(criteria.city).append("' AND ss.state='").append(criteria.state).append("')");
+        break;
+      case GeoType.ZIP_CODE:
+        qb.append(" OR zipcode='").append(criteria.zip_code).append("'");
+        break;
+    }
+    qb.append(")");
+    if (criteria.amenities) {
+      if (criteria.amenities.get("freeTruck")) {
+        qb.append(" AND free_truck = '").append(TruckType.FREE).append("'")
+      }
+    }
+    if (criteria.queryMode == QueryMode.FIND_UNITS) {
+      qb.append(" AND unit_count > min_inventory AND unitsize_id IN (SELECT id FROM storage_size sz WHERE sz.id > ").append(criteria.searchSize).append(" AND sz.search_type = '").append(criteria.searchType).append("')");
+      if (criteria.unitType) {
+        qb.append(" AND unit_type = '").append(criteria.unitType).append("'");
+      }
+      if (criteria.amenities) {
+        if (criteria.amenities.get("cc")) {
+          qb.append(" AND is_temp_controlled = 1")
+        }
+        if (criteria.amenities.get("24hr")) {
+          qb.append(" AND is_twenty_four_hour = 1")
+        }
+        if (criteria.amenities.get("alarm")) {
+          qb.append(" AND is_alarm = 1")
+        }
+      }
+    }
+    qb.append(" GROUP BY ss.id")
+    return qb.toString();
+  }
+
+  private List<Long> getSiteIds(SearchCriteria criteria) {
+    String q = buildSearchQuery(criteria);
+    Session s = sessionFactory.getCurrentSession();
+    return s.createSQLQuery(q).addScalar("ID", Hibernate.LONG).list()
   }
 
   def getSites(SearchCriteria criteria) {
@@ -109,7 +101,7 @@ class MapService {
     Integer zoomMin = 7;
     Integer zoomMax = 16;
     criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
-    def siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria))
+    List siteIds = getSiteIds(criteria);
 
     // adjust zoom if too many/few sitse were returned
     if (siteIds.size() > 20) {
@@ -117,14 +109,14 @@ class MapService {
       while (siteIds.size() > 20 && zoom <= zoomMax) {
         zoom++
         criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
-        siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
+        siteIds = getSiteIds(criteria);
       }
     } else if (siteIds.size() == 0) {
       // grow
       while (zoom > zoomMin && siteIds.size() == 0) {
         zoom--
         criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
-        siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
+        siteIds = getSiteIds(criteria);
       }
     } else if (siteIds.size() <= 3) {
       // grow up to a couple of notches
@@ -132,7 +124,7 @@ class MapService {
       while (zoom > targetZoom && siteIds.size() <= 3) {
         zoom--
         criteria.setBounds(zoom, MAP_WIDTH, MAP_HEIGHT)
-        siteIds = StorageSite.createCriteria().list(getSitesClosure(criteria));
+        siteIds = getSiteIds(criteria);
       }
     }
 

@@ -4,8 +4,6 @@ import storitz.constants.UnitType
 
 class StorageUnit {
 
-  static belongsTo = StorageSite
-
   static constraints = {
     description(nullable: true)
     startAvail(nullable: true)
@@ -20,6 +18,8 @@ class StorageUnit {
     bestUnitPrice(nullable: true)
     maxReserveDays(nullable: true)
   }
+
+  static fetchMode = [unitsize:"eager"]
 
   String description
   String unitNumber
@@ -47,6 +47,7 @@ class StorageUnit {
   Date dateCreated
   Date lastUpdated
   Integer maxReserveDays
+  StorageSite site
 
   String displayType() {
     if (this.unitType == UnitType.INTERIOR) {

@@ -866,11 +866,11 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             displaySize = "${width} X ${length}"
           }
 
-          def newUnit = false
           def siteUnit = site.units.find { it.unitName == attributes && it.displaySize == displaySize}
 
           if (!siteUnit) {
             siteUnit = new StorageUnit()
+            siteUnit.site = site
             siteUnit.unitInfo = dimensions
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = typeName
@@ -908,9 +908,6 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
 
           setUnitTypeAndTempControl (siteUnit, unitTypeLookup, searchType, typeName)
           siteUnit.save(flush: true)
-          if (newUnit) {
-            site.addToUnits(siteUnit)
-          }
 
         } else {
           writer.println "Skipping due to size: length = ${length}, width = ${width}"
@@ -1215,7 +1212,8 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         errCode = resData.ErrorCode.text() as Integer
       }
       if (errCode == 100) {
-        rentalTransaction.site.removeFromUnits(unit)
+        unit.unitCount = 0;
+        unit.save(flush: true)
       }
       return false
     }

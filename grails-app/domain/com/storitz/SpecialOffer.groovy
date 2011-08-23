@@ -4,8 +4,6 @@ import storitz.constants.PromoType
 
 class SpecialOffer {
 
-  static belongsTo = StorageSite
-
   static hasMany = [
           restrictions: SpecialOfferRestriction,
           tags: SpecialOfferTag
@@ -22,6 +20,8 @@ class SpecialOffer {
     promoSize(nullable: true)
     unitType(nullable: true)
   }
+
+  static fetchMode = [restrictions:"eager"]
 
   static mapping = {
     restrictions cascade: "all,delete-orphan"
@@ -41,6 +41,7 @@ class SpecialOffer {
   Boolean active
   Boolean featured
   Boolean waiveAdmin
+  StorageSite site
 
   Date startDate
   Date endDate

@@ -926,7 +926,8 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         writer.println "Rented unit ${unitID} checking for deletion"
         def deletedUnit = site.units.find { it.unitNumber == unitID }
         if (deletedUnit) {
-          site.removeFromUnits(deletedUnit)
+          deletedUnit.unitCount = 0;
+          deletedUnit.save(flush: true)
           stats.removedCount++
         }
       }
@@ -945,6 +946,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         /* Unit is new */
         if (!existingUnit) {
           def siteUnit = new StorageUnit()
+          siteUnit.site = site;
           Integer unitTypeID = unit.UnitTypeID.text() as Integer
           String key = "${unitTypeID}:${unit.dcWidth.text()}X${unit.dcLength.text()}${unit.bClimate.text()}"
           siteUnit.unitTypeInfo = "${unitTypeID}:${unit.dcWidth.text()}X${unit.dcLength.text()}"
@@ -995,7 +997,6 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
             }
             stats.unitCount++;
 
-            site.addToUnits(siteUnit)
           } else {
             if (siteUnit.price <= 0) {
               writer.println "Skipping unit due to price=" + siteUnit.price
@@ -1021,12 +1022,12 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
 
           // remove unit from inventory
           if (newPrice == 0 || newPushRate == 0) {
-            site.removeFromUnits(existingUnit)
+            existingUnit.unitCount = 0
             writer.println "Removing unit from inventory - price was changed to \$0 - ${existingUnit.unitNumber}"
           }
           // remove unit from inventory
           else if (!newUnitSize) {
-            site.removeFromUnits(existingUnit)
+            existingUnit.unitCount = 0
             writer.println "Removing unit from inventory - cannot determine unit size - ${existingUnit.unitNumber}"
           }
           // update the unit

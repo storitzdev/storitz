@@ -448,8 +448,8 @@ class RentalTransactionController extends BaseTransactionController {
 
   def removeUnit = { trans, unit ->
     log.info "Removing unit from inventory ${unit.id}"
-    trans.site.removeFromUnits(unit)
-    trans.site.save(flush: true)
+    unit.unitCount = 0
+    unit.save(flush: true)
     emailMoveInProblemReportToTechTeam(trans.id, unit.id, "Removing unit from inventory ${unit.id}", null)
   }
 
