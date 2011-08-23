@@ -259,6 +259,7 @@ class SearchService {
                       break
                   case "locality":
                   case "sublocality":
+                  case "administrative_area_level_3":
                       out['city'] = comp.long_name
                       break
                   case "administrative_area_level_1":
