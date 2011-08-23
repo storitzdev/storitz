@@ -27,7 +27,7 @@
             <li><input class="formpicker" type="radio" name="unit_type" value="covered" id="type_covered" <g:if test="${unitType == 'covered'}">checked="checked"</g:if> /><label for="type_covered">Covered</label></li>
             <li><input class="formpicker" type="radio" name="unit_type" value="uncovered" id="type_uncovered" <g:if test="${unitType == 'uncovered'}">checked="checked"</g:if> /><label for="type_uncovered">Uncovered</label></li>
             <li><input class="formpicker" type="radio" name="unit_type" value="" id="type_all" <g:if test="${!unitType}">checked="checked"</g:if> /><label for="type_all">Any</label></li>
-            <li><g:link controller="search" action="index" params="[searchType: 'STORAGE', where: params.where]">Looking for Storage Unit?</g:link></li>
+            <li><g:link controller="search" action="index" params="[searchType: 'STORAGE', where: params.where]">Looking for Self Storage?</g:link></li>
         </ul>
     </div>
 </div>
