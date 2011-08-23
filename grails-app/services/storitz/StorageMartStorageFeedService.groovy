@@ -22,7 +22,6 @@ import com.storitz.StorageSize
 import storitz.constants.SearchType
 import storitz.constants.UnitType
 import com.storitz.SpecialOffer
-import storitz.constants.PromoType
 import com.storitz.SpecialOfferRestriction
 import storitz.constants.SpecialOfferRestrictionType
 import java.text.DateFormat
@@ -85,7 +84,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   @Override
   void updateSite(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
     FacilityOutput [] sites = loadFacilities()
-    FacilityOutput theSite = null
+    FacilityOutput theSite
     for (int i = 0; i < sites.size(); i++) {
       theSite = sites[i]
       if (theSite.facility_Id.equalsIgnoreCase(storageSiteInstance.sourceId)) {
@@ -600,12 +599,11 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   private def loadPromoForUnit (site, unit, unit_promotion_long) {
     def code = "${site.sourceId}:${unit.unitNumber}"
 
-    ///////////////////
-    // SPECIAL OFFER //
-    ///////////////////
-    SpecialOffer specialOffer
     try {
-      specialOffer = site.specialOffers.find { it.code == code }
+      ///////////////////
+      // SPECIAL OFFER //
+      ///////////////////
+      SpecialOffer specialOffer = site.specialOffers.find { it.code == code }
       boolean addToSite = false
       if (!specialOffer) {
         specialOffer = new SpecialOffer()
@@ -629,23 +627,23 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         if (addToSite)
           site.addToSpecialOffers(specialOffer)
       }
+
+      ///////////////////////////////
+      // SPECIAL OFFER RESTRICTION //
+      ///////////////////////////////
+      def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
+      if (!specialOfferRestriction) {
+        specialOfferRestriction = new SpecialOfferRestriction()
+        specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
+        specialOfferRestriction.restrictive = false
+        specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+        specialOfferRestriction.save()
+        specialOffer.addToRestrictions(specialOfferRestriction)
+      }
     }
     catch (Throwable t) {
       def err = "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
       log.error (err, t)
-    }
-
-    ///////////////////////////////
-    // SPECIAL OFFER RESTRICTION //
-    ///////////////////////////////
-    def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
-    if (!specialOfferRestriction) {
-      specialOfferRestriction = new SpecialOfferRestriction()
-      specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
-      specialOfferRestriction.restrictive = false
-      specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-      specialOfferRestriction.save()
-      specialOffer.addToRestrictions(specialOfferRestriction)
     }
   }
 
