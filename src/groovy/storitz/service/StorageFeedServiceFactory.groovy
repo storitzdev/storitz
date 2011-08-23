@@ -2,7 +2,6 @@ package storitz.service
 
 import com.storitz.service.IStorageFeedService
 import com.storitz.StorageSite
-import com.storitz.ServiceMap
 import com.storitz.service.ICostStorageFeedService
 import com.storitz.service.IMoveInStorageFeedService
 import com.storitz.service.IFeedStorageFeedService

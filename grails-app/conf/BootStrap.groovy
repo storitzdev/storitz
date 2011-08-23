@@ -25,7 +25,6 @@ import storitz.constants.SearchType
 import com.storitz.SpecialOfferRestriction
 import com.storitz.QuikStor
 import com.storitz.QuikStorLocation
-import com.storitz.ServiceMap
 
 class BootStrap {
 
@@ -33,11 +32,11 @@ class BootStrap {
 
   def init = { servletContext ->
 
-    if (Environment.current == Environment.DEVELOPMENT) {
-      println "Starting hsqldb"
-      String[] databaseManagerOptions = ['--url', 'jdbc:hsqldb:file:devDB', '--noexit'];
-      org.hsqldb.util.DatabaseManagerSwing.main(databaseManagerOptions)
-    }
+    //if (Environment.current == Environment.DEVELOPMENT) {
+    //  println "Starting hsqldb"
+    //  String[] databaseManagerOptions = ['--url', 'jdbc:hsqldb:file:devDB', '--noexit'];
+    //  org.hsqldb.util.DatabaseManagerSwing.main(databaseManagerOptions)
+    //}
 
     JSON.registerObjectMarshaller(new CustomDomainMarshaller())
 
@@ -393,19 +392,6 @@ class BootStrap {
       def operator = new User(username: 'operator', password: springSecurityService.encodePassword('WWCharter'), userRealName: 'Operator', enabled: true, email: 'charlie@storitz.com', accountExpired: false, accountLocked: false, passwordExpired: false)
       operator.save(flush: true)
       UserRole.create(operator, roleCallCenter, true)
-    }
-
-    if (ServiceMap.list().size() == 0) {
-        new ServiceMap(serviceName: 'SL',  serviceHandler: 'storitz.SiteLinkStorageFeedService').save()
-        new ServiceMap(serviceName: 'CS3', serviceHandler: 'storitz.CShiftStorageFeedService').save()
-        new ServiceMap(serviceName: 'CS4', serviceHandler: 'storitz.CShift4StorageFeedService').save()
-        new ServiceMap(serviceName: 'QS',  serviceHandler: 'storitz.QuikStorStorageFeedService').save()
-        new ServiceMap(serviceName: 'EX',  serviceHandler: 'storitz.ExrsStorageFeedService').save()
-        new ServiceMap(serviceName: 'USI', serviceHandler: 'storitz.UsiStorageFeedService').save()
-        new ServiceMap(serviceName: 'DOM', serviceHandler: 'storitz.EDomicoStorageFeedService').save()
-    }
-    if (ServiceMap.list().size() == 7) {
-      new ServiceMap(serviceName: 'BOB', serviceHandler: 'storitz.UncleBobsStorageFeedService').save()
     }
 
     if (StorageSize.list().size() == 0) {
