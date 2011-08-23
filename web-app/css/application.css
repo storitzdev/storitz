@@ -2868,7 +2868,7 @@ body.thankyou #purchaseSummary p {
 .conf_box div.promos {
   display: block;
   margin-bottom: 20px;
-  /*display: none;*/
+  display: none;
 }
 body.thankyou #conf_share {
   display: block;

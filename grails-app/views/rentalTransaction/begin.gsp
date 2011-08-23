@@ -152,10 +152,10 @@
         </div>
     </h1>
 
-    <h1>
-        Enter a Coupon Code<span class="coupon_optional"> (Optional)</span>
-        <input type="text" name="coupon_code" id="coupon_code">
-    </h1>
+    %{--<h1>--}%
+        %{--Enter a Coupon Code<span class="coupon_optional"> (Optional)</span>--}%
+        %{--<input type="text" name="coupon_code" id="coupon_code">--}%
+    %{--</h1>--}%
 
   <g:if test="${!(site.transactionType == TransactionType.RESERVATION && site.rentalFee == 0)}">
   <h1 class="pay">Submit Booking
