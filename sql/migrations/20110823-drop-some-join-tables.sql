@@ -8,6 +8,11 @@ alter table special_offer_restriction add column special_offer_id bigint(20) not
 update special_offer_restriction sor, special_offer_special_offer_restriction sosor set sor.special_offer_id = sosor.special_offer_restrictions_id where sosor.special_offer_restriction_id = sor.id;
 create index special_offer_restriction_special_offer_id_idx on special_offer_restriction(special_offer_id);
 
-/* Document our progress */
-insert into releases (revision, release_date,description)
-            values (1003,curdate(),'Dropped M-to-M join tables');
+drop table storage_site_storage_unit;
+drop table storage_site_special_offer;
+drop table special_offer_special_offer_restriction;
+
+analyze table storage_unit;
+analyze table special_offer;
+analyze table special_offer_restriction;
+analyze table storage_site;
