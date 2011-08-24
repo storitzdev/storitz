@@ -345,12 +345,11 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
     geoCodeSite (site)
 
-    updateUnits (site, stats, writer)
-
     if (site.validate()) {
       site.save ()                  // force gen site.id
       createSiteUsers (site, site_manager_emails, feedManager)
       setImages (site, site_images)
+      updateUnits (site, stats, writer)
       site.save (flush:true)        // final save
       return site
     }
@@ -610,6 +609,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         specialOffer.code = code
         specialOffer.featured = true
         specialOffer.active = true
+        specialOffer.site = site
         addToSite = true
       }
 
@@ -637,12 +637,13 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
         specialOfferRestriction.restrictive = false
         specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+        specialOfferRestriction.specialOffer = specialOffer
         specialOfferRestriction.save()
         specialOffer.addToRestrictions(specialOfferRestriction)
       }
     }
     catch (Throwable t) {
-      def err = "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
+      def err = "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${unit_promotion_long}"
       log.error (err, t)
     }
   }
