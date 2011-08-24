@@ -964,9 +964,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
           if (!specialOffer.description && description) {
             specialOffer.description = description
           }
-          for (restriction in specialOffer.restrictions) {
-            restriction.delete(flush:true);
-          }
+          specialOffer.deleteRestrictions();
           specialOffer.save(flush: true)
         }
         Integer discountPeriods =  promo.'discount-periods'.text() as Integer
@@ -1014,17 +1012,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         handleGovernors(specialOffer, promo)
       }
     }
-    // mark obsolete offers as inactive; delete associated requirements
-    for (offer in site.specialOffers.find { it.active } ) {
-      if (!concessionIds.contains(offer.concessionId)) {
-        writer.println "Removing stale concession: ${site.title} - ${offer.concessionId} ${offer.promoName} - ${offer.description}"
-        offer.active = false
-        offer.save(flush: true)
-        for (restriction in offer.restrictions) {
-          restriction.delete(flush:true)
-        }
-      }
-    }
+    deactivateDeletedOffers(site, concessionIds, CONCESSION_ID_FIELD, writer)
   }
 
   protected handleGovernors(SpecialOffer specialOffer, promo) {

@@ -428,6 +428,9 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           offer.description = discount.pcddesc
           offer.featured = false
         }
+        else {
+          offer.deleteRestrictions();
+        }
         offer.active = true
         offer.startDate = discount.starts?.toGregorianCalendar()?.getTime()
         offer.endDate = discount.expires?.toGregorianCalendar()?.getTime()
@@ -491,17 +494,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         }
       }
     }
-    // mark obsolete offers as inactive; delete associated requirements
-    for (offer in site.specialOffers.find { it.active }) {
-      if (!concessionIds.contains(offer.concessionId)) {
-        offer.active = false;
-        offer.save(flush: true);
-        for (restriction in offer.restrictions) {
-          restriction.delete(flush:true);
-        }
-      }
-    }
-
+    deactivateDeletedOffers(site, concessionIds, CONCESSION_ID_FIELD, writer)
   }
 
   @Override

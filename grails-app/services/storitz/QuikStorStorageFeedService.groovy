@@ -377,6 +377,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
           so.description = specialOffer.Title.text()
         } else {
           writer.println "Found existing special id = ${specialId}"
+          so.deleteRestrictions();
         }
         if (!so.promoName) so.promoName = specialOffer.Title.text()
         writer.println "Special offer id = ${specialId} - Title = ${so.promoName}"
@@ -505,16 +506,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         so.save(flush: true)
       }
     }
-    // mark obsolete offers as inactive; delete associated requirements
-    for (offer in storageSiteInstance.specialOffers.find { it.active }) {
-      if (!idList.contains(offer.code)) {
-        offer.active = false;
-        offer.save(flush: true);
-        for (restriction in offer.restrictions) {
-          restriction.delete(flush:true);
-        }
-      }
-    }
+    deactivateDeletedOffers(storageSiteInstance, idList, CODE_FIELD, writer);
     storageSiteInstance.save(flush: true)
   }
 

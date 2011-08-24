@@ -1215,8 +1215,6 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         Long concessionId = promo.ConcessionID.text() as Long
         concessionIds.add(concessionId)
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
-        boolean newOffer = false
-        updated = true
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.site = site
@@ -1225,7 +1223,9 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
-          newOffer = true
+        }
+        else {
+          specialOffer.deleteRestrictions();
         }
         specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
         if (!specialOffer.promoName) specialOffer.promoName = promoName
@@ -1277,18 +1277,6 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
       }
     }
 
-    // mark obsolete offers as inactive; delete associated requirements
-    for (offer in site.specialOffers.find { it.active }) {
-      if (!concessionIds.contains(offer.concessionId)) {
-        writer.println "Deactivating stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
-        offer.active = false;
-        offer.save(flush: true);
-        for (restriction in offer.restrictions) {
-          restriction.delete(flush:true);
-        }
-      }
-    }
-
     for (unitRestriction in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionUnitTypes') {
       SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == (unitRestriction.ConcessionID.text() as Integer)}
       if (specialOffer) {
@@ -1308,7 +1296,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         restriction.save(flush: true)
       }
     }
-
+    deactivateDeletedOffers(site, concessionIds, CONCESSION_ID_FIELD, writer);
   }
 
   def getTaxes(siteLink, site) {

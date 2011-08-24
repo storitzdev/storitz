@@ -72,15 +72,13 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
-          specialOffer.active = false;
+          specialOffer.active = true;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
           if (!specialOffer.promoName) specialOffer.promoName = promo.'promo-name'.text()
         } else {
-          for (restriction in specialOffer.restrictions) {
-            restriction.delete(flush:true);
-          }
+          specialOffer.deleteRestrictions();
         }
         specialOffer.promoSize = promoSize
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
@@ -124,16 +122,7 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
         handleGovernors(specialOffer, promo)
       }
     }
-    for (offer in site.specialOffers.find { it.active }) {
-      if (!concessionIds.contains(offer.concessionId)) {
-        writer.println "Removing stale concession: ${site.title} - ${offer.concessionId} ${offer.promoName} - ${offer.description}"
-        offer.active = false
-        offer.save(flush: true)
-        for (restriction in offer.restrictions) {
-          restriction.delete(flush:true)
-        }
-      }
-    }
+    deactivateDeletedOffers(site, concessionIds, CONCESSION_ID_FIELD, writer);
 
     // clear all push prices
     for (unit in site.units) {
@@ -150,19 +139,20 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
         rateOffers.add(promo)
       }
     }
+    List offersToDelete = []
+    offersToDelete.addAll(rateOffers);
 
-    List addedOffers = []
     for (promo in site.specialOffers) {
       if (promo.description.startsWith('WXA')) {
         def pm = promo.description =~ /WXAX\dX-(\d+)\%/
         if (pm.getCount()) {
           promo.promoQty = pm[0][1] as BigDecimal
         }
-        addedOffers.add(promo)
+        offersToDelete(promo)
       }
     }
 
-
+    // Special case: Rate offers  (type WXR) cause us to lower the published rate by promoQty percent
     for (unit in site.units) {
       def rList = rateOffers.clone()
       getOfferFilterService().filterOffer(rList, site, unit)
@@ -175,27 +165,21 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
       }
     }
 
-    // remove rate promos and rename other promos
-    def deleteList = []
-    for (promo in site.specialOffers.sort{ it.description }) {
-      if (promo.description.startsWith('WXR') || promo.description.startsWith('WXA')) {
-        deleteList.add(promo)
-      } else {
-        if (promo.description.startsWith('WXD')) {
-          promo.featured = true
-        }
-        Integer promoOrder = (promo.description[4] as Integer)
-        promo.active = true
-        promo.description = promo.description.split('-')[1]
-        if (!promo.promoName) promo.promoName = promo.description.split('-')[1]
-        promo.save(flush: true)
-      }
-    }
-    for (promo in deleteList) {
-      promo.active = false;
-      promo.save(flush: true)
+    // Delete all offers of type WXR or WXA
+    for (SpecialOffer o : offersToDelete) {
+      o.active = false;
+      o.save(flush: true)
+      o.deleteRestrictions()
     }
 
+    // fix up promo names; feature any promos of type WXD
+    for (promo in site.specialOffers.sort{ it.description }) {
+      if (promo.description.startsWith('WXD')) {
+        promo.featured = true
+      }
+      if (!promo.promoName) promo.promoName = promo.description.split('-')[1]
+      promo.save(flush: true)
+    }
   }
 
   // USI will not use online insurance

@@ -212,12 +212,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       }
     }
 
-    for (offer in site.specialOffers) {
-      if (!offerCodes.contains(offer)) {
-        offer.active = false;
-        offer.save(flush: true)
-      }
-    }
+    deactivateDeletedOffers(site, offerCodes, CODE_FIELD, writer);
     updateBestUnitPrice(site)
   }
 
@@ -294,6 +289,9 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       if (specialOffer == null) {
         specialOffer = new SpecialOffer();
         specialOffer.code = code;
+      }
+      else {
+        specialOffer.deleteRestrictions();
       }
       specialOffer.promoType = t;
       specialOffer.concessionId = -999

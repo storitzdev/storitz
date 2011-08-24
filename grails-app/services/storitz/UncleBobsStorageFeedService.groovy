@@ -149,21 +149,12 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
           def code = loadPromoForUnit(storageSiteInstance,unit, special_text, space_special_type,
                   space_special_amount, space_special_month, space_special_applytoprorate)
           if (code != null) {
-            offerCodes << code
+            offerCodes.add(code)
           }
-
         }
       }
     }
-    for (offer in storageSiteInstance.specialOffers.find { it.active }) {
-      if (!offerCodes.contains(offer.code)) {
-        offer.active = false;
-        offer.save(flash:true)
-        for (restriction in offer.restrictions) {
-          restriction.delete(flush:true)
-        }
-      }
-    }
+    deactivateDeletedOffers(storageSiteInstance, offerCodes, CODE_FIELD, writer)
     updateBestUnitPrice (storageSiteInstance)
   }
 
@@ -476,6 +467,9 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
         specialOffer.site         = site
         specialOffer.featured     = true
         specialOffer.active       = true
+      }
+      else {
+        specialOffer.deleteRestrictions();
       }
       BigDecimal bd = new BigDecimal(special_amount)
       Integer inMonth = new Integer(special_month)

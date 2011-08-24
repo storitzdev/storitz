@@ -47,4 +47,10 @@ class SpecialOffer {
   Date endDate
   StorageSize promoSize  // TODO: Delete, unused
   String unitType        // TODO: Delete, unused
+
+  public void deleteRestrictions() {
+    for (SpecialOfferRestriction r : this.restrictions) {
+      r.delete(flush:true);
+    }
+  }
 }

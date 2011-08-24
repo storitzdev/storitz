@@ -157,16 +157,8 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
           offerCodes << code
         }
       }
-      for (offer in storageSiteInstance.specialOffers.find { it.active }) {
-        if (!offerCodes.contains(offer.code)) {
-          offer.active = false;
-          offer.save(flash:true)
-          for (restriction in offer.restrictions) {
-            restriction.delete(flush:true)
-          }
-        }
-      }
     }
+    deactivateDeletedOffers(storageSiteInstance, offerCodes, CODE_FIELD, writer)
     updateBestUnitPrice (storageSiteInstance)
   }
 
@@ -618,6 +610,9 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         specialOffer.code = code
         specialOffer.featured = true
         specialOffer.active = true
+      }
+      else {
+        specialOffer.deleteRestrictions();
       }
 
       StorageMartSpecialOfferLookup lookup = lookupPromo (unit_promotion_long)

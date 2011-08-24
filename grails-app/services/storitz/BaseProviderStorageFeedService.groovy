@@ -310,8 +310,31 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
     return user
   }
 
-
-
-
+  /**
+   * names of keys to be used by deactivateDeletedOffers below
+   */
+  protected static final String CONCESSION_ID_FIELD = "concessionId";
+  protected static final String CODE_FIELD = "code";
+  /**
+   * Mark obsolete offers as inactive; do not delete associated requirements
+   * @param site
+   * @param currentOfferKeys
+   * @param keyName
+   * @param writer
+   */
+  protected void deactivateDeletedOffers(StorageSite site, ArrayList currentOfferKeys, String keyName, PrintWriter writer) {
+    if (!(keyName == CONCESSION_ID_FIELD || keyName == CODE_FIELD)) {
+      log.warn("Uknown keyName ${keyName} passed to deactivateDeletedOffers() for ${site}");
+      return;
+    }
+    for (offer in site.specialOffers.find { it.active }) {
+      boolean found = (keyName == CONCESSION_ID_FIELD) ? currentOfferKeys.contains(offer.concessionId) : currentOfferKeys.contains(offer.code);
+      if (!found) {
+        writer.println "Removing stale concession: ${site.title} - ${offer.concessionId} - ${offer.code} ${offer.promoName} - ${offer.description}"
+        offer.active = false
+        offer.save(flush: true)
+      }
+    }
+  }
 
 }
