@@ -185,7 +185,7 @@
                             <td valign="middle" class="value ${hasErrors(bean: organizerContestInstance, field: 'readTermsAndConditions', 'errors')}">
                                 <g:checkBox class="tac required left" name="readTermsAndConditions" value="${organizerContestInstance?.readTermsAndConditions}"/>
                                 <label style="padding-left:7px;" for="readTermsAndConditions"><g:message code="organizerContest.readTermsAndConditions.label" default=""/>
-                                Yes, I have read and agree to the <a href='#' onClick='centeredPopup("<g:createLinkTo absolute="true" file="/static/contestrules.gsp"/>","myWindow","500","350","yes")'>Contest Rules.</a>
+                                Yes, I have read and agree to the <a href='#' onClick='centeredPopup("<g:resource absolute="true" file="/static/contestrules.gsp"/>","myWindow","500","350","yes")'>Contest Rules.</a>
                                 </label>
                                 <g:hasErrors bean="${organizerContestInstance}" field="readTermsAndConditions">
                                     <p style="color: red;">Required. You must agree to the Storitz terms and conditions to enter.</p>

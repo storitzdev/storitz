@@ -9,14 +9,14 @@
         <priority>0.75</priority>
         <lastmod>${site.lastChange ? site.lastChange.format('yyyy-MM-dd') : new Date().format('yyyy-MM-dd')}</lastmod>
         <image:image>
-          <image:loc><g:createLinkTo absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
+          <image:loc><g:resource absolute="true" file="${resource(file: site.coverImage()?.mid())}"/></image:loc>
           <image:caption>Image of ${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:caption>
           <image:geo_location>${site.getFullAddress().replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:geo_location>
           <image:title>${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:title>
         </image:image>
         <g:each var="image" in="${site.images}">
           <image:image>
-            <image:loc><g:createLinkTo absolute="true" file="${resource(file: image?.mid())}"/></image:loc>
+            <image:loc><g:resource absolute="true" file="${resource(file: image?.mid())}"/></image:loc>
             <image:caption>Image of ${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:caption>
             <image:geo_location>${site.getFullAddress().replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:geo_location>
             <image:title>${site.title.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;")}</image:title>
