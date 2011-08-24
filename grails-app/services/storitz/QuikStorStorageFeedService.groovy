@@ -736,7 +736,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
     def xml = new MarkupBuilder(writer)
     // build sPaymentST
     xml.PaymentInfo('xmlns:xsi': "http://www.w3.org/2001/XMLSchema-instance", 'xmlns:xsd': "http://www.w3.org/2001/XMLSchema") {
-      dPaymentAmount(trans.moveInCost)
+      dPaymentAmount(StoritzUtil.roundToMoney(trans.moveInCost))
       sCCType(trans.cardType.display)
       sCCNumber(trans.ccNum)
       sExpirationDate(trans.ccExpDate.format("MM-yyyy"))
