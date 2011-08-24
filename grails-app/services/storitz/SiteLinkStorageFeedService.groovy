@@ -1048,16 +1048,13 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
     for (lastupdate in records.'soap:Body'.'*:UnitsInformationAvailableUnitsOnly_v2Response'.'*:UnitsInformationAvailableUnitsOnly_v2Result'.'*:diffgram'.NewDataSet.'*:Table1') {
       site.lastUpdate = lastupdate.lngLastTimePolled.text() as Long
     }
-    // check admin fees
-    if (!unitID && site.units?.size() > 0) {
-      unitID = site.units.asList().get(0).unitNumber
-    }
-    if (unitID) {
-      def fees = adminFees(siteLink, unitID, site)
+    // Check admin fees
+    if (site.units?.size() > 0) {
+      def uid = site.units.asList().get(0).unitNumber
+      def fees = adminFees(siteLink, uid, site)
       site.adminFee = fees["admin"]
       site.deposit = fees["deposit"]
-
-      site.useProrating = checkProrating(siteLink, unitID, site)
+      site.useProrating = checkProrating(siteLink, uid, site)
     }
   }
 
