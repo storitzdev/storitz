@@ -105,6 +105,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
     def store_state   = xmlNodes.state
     def store_zip     = xmlNodes.zip
 
+    def offerCodes = []
     // Unit specific info.
     for (int i = 0; i < xmlNodes.space.size(); i++) {
       def space_id        = xmlNodes.space[i].@id           as String
@@ -143,7 +144,24 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
           ,space_limitdate)
 
       if (unit) {
-        loadPromoForUnit(storageSiteInstance,unit,space_special_description.trim(),space_special_type,space_special_amount,space_special_month,space_special_applytoprorate)
+        String special_text = space_special_description.trim();
+        if (special_text) {
+          def code = loadPromoForUnit(storageSiteInstance,unit, special_text, space_special_type,
+                  space_special_amount, space_special_month, space_special_applytoprorate)
+          if (code != null) {
+            offerCodes << code
+          }
+
+        }
+      }
+    }
+    for (offer in storageSiteInstance.specialOffers.find { it.active }) {
+      if (!offerCodes.contains(offer.code)) {
+        offer.active = false;
+        offer.save(flash:true)
+        for (restriction in offer.restrictions) {
+          restriction.delete(flush:true)
+        }
       }
     }
     updateBestUnitPrice (storageSiteInstance)
@@ -448,65 +466,54 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
 
   def loadPromoForUnit(StorageSite site, StorageUnit unit, special_description,special_type,special_amount,special_month,special_applytoprorate) {
     def code = "${unit.unitName}:${unit.unitSizeInfo}" // promos are tied 0-to-1 to units
-
-    ///////////////////
-    // SPECIAL OFFER //
-    ///////////////////
-    def specialOffer = site.specialOffers.find { it.code == code}
-    if (!specialOffer) {
-      specialOffer = new SpecialOffer()
-      specialOffer.expireMonth  = 0
-      specialOffer.prepayMonths = 0
-      specialOffer.code         = code
-      site.addToSpecialOffers(specialOffer)
-    }
-
-    // sanity checking
-    if (!special_description) {
-      return site.removeFromSpecialOffers(specialOffer)
-    }
-
-    // preemptive error handling
     try {
+      def specialOffer = site.specialOffers.find { it.code == code}
+      if (!specialOffer) {
+        specialOffer = new SpecialOffer()
+        specialOffer.expireMonth  = 0
+        specialOffer.prepayMonths = 0
+        specialOffer.code         = code
+        specialOffer.site         = site
+        specialOffer.featured     = true
+        specialOffer.active       = true
+      }
       BigDecimal bd = new BigDecimal(special_amount)
       Integer inMonth = new Integer(special_month)
       specialOffer.promoQty = bd
       specialOffer.inMonth = inMonth.intValue()
-    } catch (NumberFormatException e) {
-      log.info "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}"
-      e.printStackTrace()
-      return site.removeFromSpecialOffers(specialOffer)
+      specialOffer.description  = special_description
+      if (!specialOffer.promoName) {
+        specialOffer.promoName = special_description
+      }
+      else {
+        log.info("Ignoring special description '${special_description}', using '${specialOffer.promoName}'")
+      }
+      if (special_type == "fixed")           specialOffer.promoType = PromoType.FIXED_RATE
+      else if (special_type == "percentage") specialOffer.promoType = PromoType.PERCENT_OFF
+      else if (special_type == "discount")   specialOffer.promoType = PromoType.AMOUNT_OFF
+      else log.warn("Unknown special type ${special_type}")
+      if (special_applytoprorate) {
+        specialOffer.prepayMonths = 1
+      }
+      ///////////////////////////////
+      // SPECIAL OFFER RESTRICTION //
+      ///////////////////////////////
+      def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
+      if (!specialOfferRestriction) {
+        specialOfferRestriction = new SpecialOfferRestriction()
+        specialOfferRestriction.specialOffer = specialOffer;
+        specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
+        specialOfferRestriction.restrictive = false
+        specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+        specialOfferRestriction.save()
+      }
+      specialOffer.save()
     }
-
-    specialOffer.featured     = true
-    specialOffer.active       = true
-    specialOffer.description  = special_description
-
-    if (!specialOffer.promoName) specialOffer.promoName = special_description
-
-    if (special_type == "fixed")      specialOffer.promoType = PromoType.FIXED_RATE
-    if (special_type == "percentage") specialOffer.promoType = PromoType.PERCENT_OFF
-    if (special_type == "discount")   specialOffer.promoType = PromoType.AMOUNT_OFF
-
-    if (special_applytoprorate) {
-      specialOffer.prepayMonths = 1
+    catch (Throwable t) {
+      log.warn("Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}", e)
+      code = null;
     }
-
-    specialOffer.save()
-
-    ///////////////////////////////
-    // SPECIAL OFFER RESTRICTION //
-    ///////////////////////////////
-    def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
-    if (!specialOfferRestriction) {
-      specialOfferRestriction = new SpecialOfferRestriction()
-      specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
-      specialOfferRestriction.restrictive = false
-      specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-      specialOfferRestriction.save()
-      specialOffer.addToRestrictions(specialOfferRestriction)
-    }
-
+    return code;
   }
 
   private bestGuessTempControl (space_climate) {

@@ -268,18 +268,16 @@ class MigrationController {
         def specialOffers = []
         for (i in s.specialOffers) {
           def si = new SpecialOffer()
-          def restrictions = []
+          si.site = site
+          si.save(flush: true)
           for (j in i.restrictions) {
             def sor = new SpecialOfferRestriction()
             bindData(sor, j)
-            restrictions.add(sor)
+            sor.specialOffer = si;
+            sor.save(flush: true)
           }
           i.restrictions.clear()
           bindData(si, i)
-          si.save(flush: true)
-          for (sor in restrictions) {
-            si.addToRestrictions(sor)
-          }
           specialOffers.add(si)
         }
         s.amenityItems.clear()
@@ -405,9 +403,6 @@ class MigrationController {
           site.logo = logo
           logo.save(flush: true)
           site.save(flush: true)
-        }
-        for (so in specialOffers) {
-          site.addToSpecialOffers(so)
         }
         for (i in insurances) {
           site.addToInsurances(i)

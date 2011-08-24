@@ -69,7 +69,6 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
         Long concessionId = promo.'promo-id'.text() as Long
         concessionIds.add(concessionId)
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
-        boolean newOffer = false
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
           specialOffer.concessionId = concessionId
@@ -78,10 +77,10 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
           if (!specialOffer.promoName) specialOffer.promoName = promo.'promo-name'.text()
-          newOffer = true
         } else {
-          specialOffer.restrictions.clear()
-          specialOffer.save(flush: true)
+          for (restriction in specialOffer.restrictions) {
+            restriction.delete(flush:true);
+          }
         }
         specialOffer.promoSize = promoSize
         specialOffer.prepay = (promo.'discount-periods'.text() as Integer) > 0
@@ -122,21 +121,18 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
             continue
         }
         specialOffer.save(flush: true)
-        if (newOffer) {
-          site.addToSpecialOffers(specialOffer)
-        }
         handleGovernors(specialOffer, promo)
       }
     }
-    def deleteList = []
-    for (promo in site.specialOffers) {
-      if (!concessionIds.contains(promo.concessionId)) {
-        deleteList.add(promo)
+    for (offer in site.specialOffers.find { it.active }) {
+      if (!concessionIds.contains(offer.concessionId)) {
+        writer.println "Removing stale concession: ${site.title} - ${offer.concessionId} ${offer.promoName} - ${offer.description}"
+        offer.active = false
+        offer.save(flush: true)
+        for (restriction in offer.restrictions) {
+          restriction.delete(flush:true)
+        }
       }
-    }
-    for (promo in deleteList) {
-      writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
-      site.removeFromSpecialOffers(promo)
     }
 
     // clear all push prices
@@ -180,7 +176,7 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
     }
 
     // remove rate promos and rename other promos
-    deleteList.clear()
+    def deleteList = []
     for (promo in site.specialOffers.sort{ it.description }) {
       if (promo.description.startsWith('WXR') || promo.description.startsWith('WXA')) {
         deleteList.add(promo)
@@ -196,7 +192,8 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
       }
     }
     for (promo in deleteList) {
-      site.removeFromSpecialOffers(promo)
+      promo.active = false;
+      promo.save(flush: true)
     }
 
   }

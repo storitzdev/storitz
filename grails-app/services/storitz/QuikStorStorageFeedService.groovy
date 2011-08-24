@@ -349,12 +349,6 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
   public void loadPromos(StorageSite storageSiteInstance, PrintWriter writer) {
     QuikStor quikStor = (QuikStor)storageSiteInstance.feed;
 
-    // clear old restrictions
-    for (specialOffer in storageSiteInstance.specialOffers) {
-      specialOffer?.restrictions.clear()
-      specialOffer.save(flush: true)
-    }
-
     def loc = quikStor.locations.find {it.site == storageSiteInstance}
 
     if (!loc) {
@@ -505,22 +499,21 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         restriction.restrictive = false
         restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
         restriction.restrictionInfo = iTypeId as String
+        restriction.specialOffer = so;
         restriction.save(flush: true)
-        so.addToRestrictions(restriction)
+        so.site = storageSiteInstance;
         so.save(flush: true)
-        storageSiteInstance.addToSpecialOffers(so)
       }
     }
-    // clean up
-    def deleteList = []
-    for (offer in storageSiteInstance.specialOffers) {
-      if (!(offer.code in idList)) {
-        writer.println "Found old promo - deleting specialId = ${offer.code}"
-        deleteList.add(offer)
+    // mark obsolete offers as inactive; delete associated requirements
+    for (offer in storageSiteInstance.specialOffers.find { it.active }) {
+      if (!idList.contains(offer.code)) {
+        offer.active = false;
+        offer.save(flush: true);
+        for (restriction in offer.restrictions) {
+          restriction.delete(flush:true);
+        }
       }
-    }
-    for (offer in deleteList) {
-      storageSiteInstance.removeFromSpecialOffers(offer)
     }
     storageSiteInstance.save(flush: true)
   }

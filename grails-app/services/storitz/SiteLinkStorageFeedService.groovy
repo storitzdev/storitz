@@ -1219,15 +1219,13 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
         updated = true
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
+          specialOffer.site = site
           specialOffer.concessionId = concessionId
           specialOffer.active = false;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = promo.sDescription.text()
           newOffer = true
-        } else {
-          specialOffer.restrictions.clear()
-          specialOffer.save(flush: true)
         }
         specialOffer.prepayMonths = promo.iPrePaidMonths.text() as Integer
         if (!specialOffer.promoName) specialOffer.promoName = promoName
@@ -1251,47 +1249,44 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
             specialOffer.promoQty = promo.dcChgAmt.text() as BigDecimal
         }
         specialOffer.save(flush:true)
-        if (newOffer) {
-          site.addToSpecialOffers(specialOffer)
-        }
         // check restrictions
         if (promo.dcMaxOccPct && promo.dcMaxOccPct.text().isNumber()) {
           BigDecimal maxRange = (promo.dcMaxOccPct.text() as BigDecimal)
           if (maxRange > 0) {
             SpecialOfferRestriction restriction = new SpecialOfferRestriction()
+            restriction.specialOffer = specialOffer
             restriction.restrictive = false
             restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
             restriction.minRange = 0
             restriction.maxRange = maxRange
             restriction.save(flush: true)
-            specialOffer.addToRestrictions(restriction)
           }
         }
         if (promo.iExcludeIfLessThanUnitsTotal && promo.iExcludeIfLessThanUnitsTotal.text().isNumber()) {
           Integer minRange = promo.iExcludeIfLessThanUnitsTotal.text() as Integer
           if (minRange > 0) {
             SpecialOfferRestriction restriction = new SpecialOfferRestriction()
+            restriction.specialOffer = specialOffer
             restriction.restrictive = false
             restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
             restriction.minRange = minRange
             restriction.maxRange = 1000
             restriction.save(flush: true)
-            specialOffer.addToRestrictions(restriction)
           }
         }
       }
     }
 
-    def deleteList = []
-    for (promo in site.specialOffers) {
-      if (!concessionIds.contains(promo.concessionId)) {
-        deleteList.add(promo)
+    // mark obsolete offers as inactive; delete associated requirements
+    for (offer in site.specialOffers.find { it.active }) {
+      if (!concessionIds.contains(offer.concessionId)) {
+        writer.println "Deactivating stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
+        offer.active = false;
+        offer.save(flush: true);
+        for (restriction in offer.restrictions) {
+          restriction.delete(flush:true);
+        }
       }
-    }
-
-    for (promo in deleteList) {
-      writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
-      site.removeFromSpecialOffers(promo)
     }
 
     for (unitRestriction in records.'soap:Body'.'*:PromotionsRetrieveResponse'.'*:PromotionsRetrieveResult'.'*:diffgram'.NewDataSet.'*:ConcessionUnitTypes') {
@@ -1299,19 +1294,18 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
       if (specialOffer) {
         // add unit type
         def restriction = new SpecialOfferRestriction()
+        restriction.specialOffer = specialOffer
         restriction.restrictive = false
         restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
         restriction.restrictionInfo = "${unitRestriction.UnitTypeID.text()}:${unitRestriction.dcWidth.text()}X${unitRestriction.dcLength.text()}"
         restriction.save(flush: true)
-        specialOffer.addToRestrictions(restriction)
         // add size type
         restriction = new SpecialOfferRestriction()
+        restriction.specialOffer = specialOffer
         restriction.restrictive = false
         restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
         restriction.restrictionInfo = unitRestriction.dcWidth.text() + "X" + unitRestriction.dcLength.text()
         restriction.save(flush: true)
-        specialOffer.addToRestrictions(restriction)
-        specialOffer.save(flush: true)
       }
     }
 

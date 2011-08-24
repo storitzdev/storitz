@@ -405,6 +405,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     def myProxy = getProxy(cshift)
 
     Long siteID = site.sourceId as Long
+    def concessionIds = []
+    def unitIds = []
     for (unit in site.units) {
       GetAvailableDiscountsRequest discReq = new GetAvailableDiscountsRequest()
       discReq.orgID = cshift.orgId
@@ -414,15 +416,19 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
       for (discount in discountList.details?.applbestpcd) {
         log.info "Processing discount: ${discount.dump()}"
+        concessionIds << discount.pcdid
+        unitIds << discReq.unitID
 
         def offer = site.specialOffers.find {discount.pcdid == it.concessionId}
         if (!offer) {
           offer = new SpecialOffer()
+          offer.site = site
           offer.concessionId = discount.pcdid
           if (!offer.promoName) offer.promoName = discount.pcdname
           offer.description = discount.pcddesc
-          offer.active = offer.featured = false
+          offer.featured = false
         }
+        offer.active = true
         offer.startDate = discount.starts?.toGregorianCalendar()?.getTime()
         offer.endDate = discount.expires?.toGregorianCalendar()?.getTime()
         log.info "Processing offer: ${discount.dump()}"
@@ -469,7 +475,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         }
         if (offer.validate()) {
           offer.save(flush: true)
-          site.addToSpecialOffers(offer)
           log.info "Created offer: ${offer.dump()}"
         } else {
           log.info "offer did not validate ${offer.dump()}"
@@ -480,9 +485,19 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
           restriction.restrictionInfo = discReq.unitID
           restriction.restrictive = false
+          restriction.specialOffer = offer
           restriction.save(flush: true)
-          offer.addToRestrictions(restriction)
           offer.save(flush: true)
+        }
+      }
+    }
+    // mark obsolete offers as inactive; delete associated requirements
+    for (offer in site.specialOffers.find { it.active }) {
+      if (!concessionIds.contains(offer.concessionId)) {
+        offer.active = false;
+        offer.save(flush: true);
+        for (restriction in offer.restrictions) {
+          restriction.delete(flush:true);
         }
       }
     }

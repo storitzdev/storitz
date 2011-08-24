@@ -951,21 +951,22 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
         Long concessionId = promo.'promo-id'.text() as Long
         concessionIds.add(concessionId)
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
-        boolean newOffer = false
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
+          specialOffer.site = site
           specialOffer.concessionId = concessionId
           specialOffer.active = false;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
           specialOffer.description = description
           if (!specialOffer.promoName) specialOffer.promoName = promo.'promo-name'.text()
-          newOffer = true
         } else {
           if (!specialOffer.description && description) {
             specialOffer.description = description
           }
-          specialOffer.restrictions.clear()
+          for (restriction in specialOffer.restrictions) {
+            restriction.delete(flush:true);
+          }
           specialOffer.save(flush: true)
         }
         Integer discountPeriods =  promo.'discount-periods'.text() as Integer
@@ -1004,126 +1005,79 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             break
 
           default:
+            // TODO: This leaves existing offers as-is in our db, despite the fact that their
+            // "discount-type" has been changed to something we don't even recognize!
             writer.println "Unknown promoType: ${ptype}"
             continue
         }
         specialOffer.save(flush: true)
-        if (newOffer) {
-          site.addToSpecialOffers(specialOffer)
-        }
         handleGovernors(specialOffer, promo)
       }
     }
-    def deleteList = []
-    for (promo in site.specialOffers) {
-      if (!concessionIds.contains(promo.concessionId)) {
-        deleteList.add(promo)
+    // mark obsolete offers as inactive; delete associated requirements
+    for (offer in site.specialOffers.find { it.active } ) {
+      if (!concessionIds.contains(offer.concessionId)) {
+        writer.println "Removing stale concession: ${site.title} - ${offer.concessionId} ${offer.promoName} - ${offer.description}"
+        offer.active = false
+        offer.save(flush: true)
+        for (restriction in offer.restrictions) {
+          restriction.delete(flush:true)
+        }
       }
     }
-    for (promo in deleteList) {
-      writer.println "Removing stale concession: ${site.title} - ${promo.concessionId} ${promo.promoName} - ${promo.description}"
-      site.removeFromSpecialOffers(promo)
-    }
-
   }
 
   protected handleGovernors(SpecialOffer specialOffer, promo) {
-    def saveFlag = false
     for (gov in promo.'promo-governors'.governor) {
       def limitFactor = gov.'limiting-factor'.text()
+      if (limitFactor == 'At Move-In Only' || limitFactor == 'Existing Tenants Only' || limitFactor == 'Insurance' || limitFactor == 'New Customers Only' || limitFactor == 'Non-Delinquent Rentals Only (less than Step 1)' || limitFactor == 'RentalRate') {
+        continue;
+      }
+      def restriction = new SpecialOfferRestriction()
+      restriction.specialOffer = specialOffer
+      restriction.restrictive = (limitFactor == '# Vacant (Restrictive)' || limitFactor == '% Vacant (Restrictive)' || limitFactor == 'Rental Square Feet');
       switch (limitFactor) {
         case '# Vacant':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = false
-          restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
-          restriction.minRange = gov.'range-low'.text() as BigDecimal
-          restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
-          break
-        case '# Vacant (Restrictive)':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = true
-          restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
-          restriction.minRange = gov.'range-low'.text() as BigDecimal
-          restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
-          break
         case '% Vacant':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = false
-          restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
-          restriction.maxRange = (gov.'range-hi'.text() as BigDecimal)
-          restriction.minRange = (gov.'range-low'.text() as BigDecimal)
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
-          break
+        case '# Vacant (Restrictive)':
         case '% Vacant (Restrictive)':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = true
-          restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
-          restriction.maxRange = (gov.'range-hi'.text() as BigDecimal)
-          restriction.minRange = (gov.'range-low'.text() as BigDecimal)
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
-          break
-        case 'At Move-In Only':
-          // ignore
-          break
-        case 'Existing Tenants Only':
-          // this should be filtered above and never happen here
-          break
-        case 'Insurance':
-          // ignore
-          break
-        case 'New Customers Only':
-          // ignore
-          break
-        case 'Non-Delinquent Rentals Only (less than Step 1)':
-          // ignore
-          break
-        case 'Rental Rate':
-          // ignore
-          break
         case 'Rental Square Feet':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = true
-          restriction.type = SpecialOfferRestrictionType.UNIT_AREA
           restriction.minRange = gov.'range-low'.text() as BigDecimal
           restriction.maxRange = gov.'range-hi'.text() as BigDecimal
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
           break
         case 'Unit Attributes':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = false
-          restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+        case 'Unit Dimensions/Size':
           restriction.restrictionInfo = gov.'governor-value'.text()
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
+          break;
+      }
+      boolean valid = true;
+      switch (limitFactor) {
+        case '# Vacant':
+        case '# Vacant (Restrictive)':
+          restriction.type = SpecialOfferRestrictionType.MINIMUM_AVAILABLE
+          break
+        case '% Vacant':
+        case '% Vacant (Restrictive)':
+          restriction.type = SpecialOfferRestrictionType.OCCUPANCY_RATE
+          break
+        case 'Rental Square Feet':
+          restriction.type = SpecialOfferRestrictionType.UNIT_AREA
+          break
+        case 'Unit Attributes':
+          restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
           break
         case 'Unit Dimensions/Size':
-          def restriction = new SpecialOfferRestriction()
-          restriction.restrictive = false
           restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
-          restriction.restrictionInfo = gov.'governor-value'.text()
-          restriction.save(flush: true)
-          specialOffer.addToRestrictions(restriction)
-          saveFlag = true
           break
+        default:
+          log.warn("Unknown limiting factor for specialOffer ${specialOffer.id}")
+          valid = false;
+          break;
+      }
+      if (valid) {
+        restriction.save(flush:true)
       }
     }
-    if (saveFlag) {
-      specialOffer.save(flush: true)
-    }
-
   }
 
   @Override

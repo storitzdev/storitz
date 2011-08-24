@@ -41,7 +41,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       log.info "No ids found."
     }
 
-    site.specialOffers.clear()
+    def offerCodes = []
     def needSave = false
     for (unitId in idList) {
       def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_Dimensions" value="(.+?)"/
@@ -126,7 +126,6 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
             displaySize = "${width} X ${length}"
           }
 
-          def newUnit = false
           StorageUnit siteUnit = site.units.find { it.unitNumber == attributes && it.displaySize == displaySize}
 
           if (!siteUnit) {
@@ -135,7 +134,6 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
             siteUnit.unitInfo = dimensions
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = attributes
-            newUnit = true
 
             if (unitTypeLookup) {
               if (unitTypeLookup.unitType != UnitType.UNDEFINED) {
@@ -200,9 +198,6 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
           }
           if (siteUnit.validate()) {
             siteUnit.save(flush: true)
-            if (newUnit) {
-              needSave = true
-            }
           } else {
             writer.println "Found bad Extraspace unit: ${siteUnit.dump()}"
           }
@@ -211,16 +206,19 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
           writer.println "Skipping due to size: length = ${length}, width = ${width}"
         }
       }
-      def hp = handlePromos(site, siteHtml, unitId, writer)
-      if (needSave || hp) {
-        needSave = true
+      def offerCode = handlePromos(site, siteHtml, unitId, writer)
+      if (offerCode != null) {
+        offerCodes.add(offerCode);
       }
     }
 
-    if (needSave) {
-      site.save(flush: true)
+    for (offer in site.specialOffers) {
+      if (!offerCodes.contains(offer)) {
+        offer.active = false;
+        offer.save(flush: true)
+      }
     }
-    updateBestUnitPrice (site)
+    updateBestUnitPrice(site)
   }
 
   // promos
@@ -232,6 +230,27 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
     }
 
     if (reservation > 0) {
+
+      def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountType" value="(.+?)"/
+      def discountType
+      if (discountTypeMatch.getCount()) {
+        discountType = discountTypeMatch[0][2]
+      }
+      PromoType t;
+      switch (discountType) {
+        case '$':
+          t = PromoType.AMOUNT_OFF
+          break
+        case '%':
+          t = PromoType.PERCENT_OFF
+          break
+        case 'O':
+          t = PromoType.FIXED_RATE
+          break
+        default:
+          writer.println "Unknown promoType: ${discountType}"
+          return
+      }
 
       def dimensionsMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_Dimensions" value="(.+?)"/
       def dimensions
@@ -249,12 +268,6 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       def promoName
       if (promoNameMatch.getCount()) {
         promoName = (promoNameMatch[0][2]).split(" - ")[-1]
-      }
-
-      def discountTypeMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountType" value="(.+?)"/
-      def discountType
-      if (discountTypeMatch.getCount()) {
-        discountType = discountTypeMatch[0][2]
       }
 
       def discountPeriodMatch = siteHtml =~ /id="ctl00_(m|Main)Content_UnitList_ctrl${unitId}_DiscountPeriods" value="(\d+)"/
@@ -275,13 +288,22 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
         discountMax = Integer.parseInt(discountMaxMatch[0][2])
       }
 
-      SpecialOffer specialOffer = new SpecialOffer()
+
+      String code = "${attributes}:${dimensions}"
+      SpecialOffer specialOffer = SpecialOffer.findByCode(code);
+      if (specialOffer == null) {
+        specialOffer = new SpecialOffer();
+        specialOffer.code = code;
+      }
+      specialOffer.promoType = t;
       specialOffer.concessionId = -999
       specialOffer.active = true
       specialOffer.featured = true
       specialOffer.waiveAdmin = false;
       specialOffer.description = promoName
-      if (!specialOffer.promoName) specialOffer.promoName = promoName
+      if (!specialOffer.promoName) {
+        specialOffer.promoName = promoName
+      }
       specialOffer.promoSize = null
       specialOffer.prepay = false
       specialOffer.expireMonth = 0
@@ -292,44 +314,26 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       if (specialOffer.promoQty == 0) {
         specialOffer.promoQty = discountMax
       }
-
-      switch (discountType) {
-        case '$':
-          specialOffer.promoType = PromoType.AMOUNT_OFF
-          break
-
-        case '%':
-          specialOffer.promoType = PromoType.PERCENT_OFF
-          break
-
-        case 'O':
-          specialOffer.promoType = PromoType.FIXED_RATE
-          break
-
-        default:
-          writer.println "Unknown promoType: ${discountType}"
-          return
-      }
+      specialOffer.site = site
       specialOffer.save(flush: true)
-      site.addToSpecialOffers(specialOffer)
 
       def restriction = new SpecialOfferRestriction()
       restriction.restrictive = false
       restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
       restriction.restrictionInfo = attributes
+      restriction.specialOffer = specialOffer
       restriction.save(flush: true)
-      specialOffer.addToRestrictions(restriction)
       restriction = new SpecialOfferRestriction()
       restriction.restrictive = false
       restriction.type = SpecialOfferRestrictionType.UNIT_SIZE
       restriction.restrictionInfo = dimensions
+      restriction.specialOffer = specialOffer
       restriction.save(flush: true)
-      specialOffer.addToRestrictions(restriction)
-      specialOffer.save(flush: true)
-      return true
+      return code
     }
-    return false
-
+    else {
+      return null;
+    }
   }
 
   public void loadPromos(StorageSite site, PrintWriter writer) {

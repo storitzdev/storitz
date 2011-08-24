@@ -99,6 +99,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
   void updateUnits(StorageSite storageSiteInstance, SiteStats stats, PrintWriter writer) {
     zeroOutUnitsForSite(storageSiteInstance,stats,writer)
     UnitTypeOutput [] unitTypeOutput = loadUnitTypesByFacility (storageSiteInstance.sourceId)
+    def offerCodes = []
     for (int i = 0; i < unitTypeOutput.length; i++) {
       UnitTypeOutput theUnit = unitTypeOutput[i]
       def unit_can_store_vehicle        = theUnit.can_Store_Vehicle
@@ -151,7 +152,19 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
                                    ,unit_width)
 
       if (unit) {
-        loadPromoForUnit (storageSiteInstance, unit, unit_promotion_long)
+        def code = loadPromoForUnit (storageSiteInstance, unit, unit_promotion_long)
+        if (code != null) {
+          offerCodes << code
+        }
+      }
+      for (offer in storageSiteInstance.specialOffers.find { it.active }) {
+        if (!offerCodes.contains(offer.code)) {
+          offer.active = false;
+          offer.save(flash:true)
+          for (restriction in offer.restrictions) {
+            restriction.delete(flush:true)
+          }
+        }
       }
     }
     updateBestUnitPrice (storageSiteInstance)
@@ -597,20 +610,14 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
 
   private def loadPromoForUnit (site, unit, unit_promotion_long) {
     def code = "${site.sourceId}:${unit.unitNumber}"
-
     try {
-      ///////////////////
-      // SPECIAL OFFER //
-      ///////////////////
       SpecialOffer specialOffer = site.specialOffers.find { it.code == code }
-      boolean addToSite = false
       if (!specialOffer) {
         specialOffer = new SpecialOffer()
+        specialOffer.site = site
         specialOffer.code = code
         specialOffer.featured = true
         specialOffer.active = true
-        specialOffer.site = site
-        addToSite = true
       }
 
       StorageMartSpecialOfferLookup lookup = lookupPromo (unit_promotion_long)
@@ -621,32 +628,30 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
         specialOffer.expireMonth = lookup.expireMonth
         specialOffer.promoQty = lookup.amount
         specialOffer.description = unit_promotion_long
-        if (!specialOffer.promoName)
+        if (!specialOffer.promoName) {
           specialOffer.promoName = unit_promotion_long
+        }
         specialOffer.save(flush:true)
-        if (addToSite)
-          site.addToSpecialOffers(specialOffer)
-      }
-
-      ///////////////////////////////
-      // SPECIAL OFFER RESTRICTION //
-      ///////////////////////////////
-      def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
-      if (!specialOfferRestriction) {
-        specialOfferRestriction = new SpecialOfferRestriction()
-        specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
-        specialOfferRestriction.restrictive = false
-        specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-        specialOfferRestriction.specialOffer = specialOffer
-        specialOfferRestriction.save()
-        specialOffer.addToRestrictions(specialOfferRestriction)
+        def specialOfferRestriction = specialOffer.restrictions.find { it.restrictionInfo == unit.unitTypeInfo }
+        if (!specialOfferRestriction) {
+          specialOfferRestriction = new SpecialOfferRestriction()
+          specialOfferRestriction.specialOffer = specialOffer
+          specialOfferRestriction.restrictionInfo = unit.unitTypeInfo
+          specialOfferRestriction.restrictive = false
+          specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+          specialOfferRestriction.save()
+        }
       }
     }
     catch (Throwable t) {
       def err = "Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${unit_promotion_long}"
       log.error (err, t)
+      code = null;
     }
+    return code;
   }
+
+
 
   private StorageMartSpecialOfferLookup lookupPromo (String promoName) {
     StorageMartSpecialOfferLookup lookup = StorageMartSpecialOfferLookup.findByName(promoName)
