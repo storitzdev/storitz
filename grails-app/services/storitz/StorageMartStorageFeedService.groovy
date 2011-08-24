@@ -552,7 +552,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       return
     }
 
-    StorageUnit unit = site.units.find { it.unitNumber == unit_type_id }
+    StorageUnit unit = site.units.find { it.unitNumber.equals(unit_type_id as String) }
 
     if (!unit) {
       unit = new StorageUnit()
@@ -561,7 +561,6 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
       unit.unitNumber   = unit_type_id
       unit.isIrregular  = false
       unit.isSecure     = true
-      unit.isAvailable  = true
     }
     else {
       stats.removedCount--
@@ -578,6 +577,7 @@ class StorageMartStorageFeedService extends BaseProviderStorageFeedService {
     unit.displaySize  = "${unit_width as int} X ${unit_length as int}"
     unit.unitSizeInfo = "${unit_width}X${unit_length}"
     unit.unitTypeInfo = "${unit_type_id}:${unit_width}X${unit_length}"
+    unit.isAvailable  = true
 
     return unit.save()
   }
