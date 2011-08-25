@@ -9,3 +9,4 @@ rev  branch comment
 1667 v2_ui  Cleaned up CenterShift inventory load. TempControl is now properly pulled for both initial load and refresh.
 1675 v2_ui  account for climate as last word in description
 1720 v2_ui  Base admin fees and refundable deposits on actual units, not mailboxes, parking, etc.
+1718 v2_ui  Explicity set rounding to money for QuikStor.
