@@ -149,7 +149,7 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
         if (pm.getCount()) {
           promo.promoQty = pm[0][1] as BigDecimal
         }
-        offersToDelete(promo)
+        offersToDelete.add(promo)
       }
     }
 
