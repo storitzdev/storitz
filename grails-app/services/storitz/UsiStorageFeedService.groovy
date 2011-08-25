@@ -71,6 +71,7 @@ class UsiStorageFeedService extends CShiftStorageFeedService {
         SpecialOffer specialOffer = site.specialOffers.find { it.concessionId == concessionId }
         if (!specialOffer) {
           specialOffer = new SpecialOffer()
+          specialOffer.site = site
           specialOffer.concessionId = concessionId
           specialOffer.active = true;
           specialOffer.featured = false;
