@@ -82,7 +82,7 @@
 <div style="height: 30px;"></div>
 <div>
   <a href="http://twitter.com/Storitzdotcom" target="_blank"><storitz:image style="border: none;" absolute="true" src="${resource(dir:'images/email', file:'twitter-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on Twitter"/></a>
-  <a href="http://www.facebook.com/storitz" target="_blank"><storitz:image style="border: none;" absolute="true" src="${resource:'images/email', file:'facebook-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on FaceBook"/></a>
+  <a href="http://www.facebook.com/storitz" target="_blank"><storitz:image style="border: none;" absolute="true" src="${resource(dir:'images/email', file:'facebook-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on FaceBook"/></a>
   <a href="http://www.stumbleupon.com/submit?url=http://www.storitz.com/" target="_blank"><storitz:image style="border: none;" absolute="true" src="${resource(dir:'images/email', file:'stumbleupon-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on StumbleUpon"/></a>
   <a href="http://www.linkedin.com/companies/storitz-inc?trk=fc_badge" target="_blank"><storitz:image style="border: none;" absolute="true" src="${resource(dir:'images/email', file:'linkedin-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz on LinkedIn"/></a>
   <a href="http://www.youtube.com/user/Storitzdotcom" target="_blank"><storitz:image style="border: none;" absolute="true" src="${resource(dir:'images/email', file:'youtube-icon-page.gif', absolute: true)}" width="20" height="20" alt="Storitz Youtube Channel"/></a>
