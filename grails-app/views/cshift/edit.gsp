@@ -3,22 +3,35 @@
 <html>
 <head>
   <g:set var="title" value="Edit CenterShift Feed" scope="request"/>
-  <script type="text/javascript">
-    //<![CDATA[
-    $(document).ready(function() {
-      jQuery.noConflict();
+    <p:dependantJavascript>
+        <script type="text/javascript">
+            //<![CDATA[
+            $(document).ready(function() {
+                setupForm();
+                showHideOrgId();
+            });
 
-      setupForm();
-    });
+            function showHideOrgId() {
+                var val = $('#cshiftVersion').val();
+                if (val == "CS4") {
+                    $('#orgId_label').show()
+                    $('#orgId').show()
+                }
+                else {
+                    $('#orgId_label').hide()
+                    $('#orgId').hide()
+                }
+            }
 
-    function setupForm() {
-      jQuery('#cshiftVersion').change(function(event) {
-        jQuery('#orgId_label').toggle('blind', {}, 500);
-        jQuery('#orgId').toggle('blind', {}, 500);
-      });
-    }
-    //]]>
-  </script>
+
+            function setupForm() {
+                $('#cshiftVersion').change(function(event) {
+                    showHideOrgId()
+                });
+            }
+            //]]>
+        </script>
+    </p:dependantJavascript>
 
 </head>
 <body>

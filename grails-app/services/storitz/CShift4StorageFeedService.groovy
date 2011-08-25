@@ -3,6 +3,9 @@ package storitz
 import com.centershift.store40.*
 import com.storitz.*
 import storitz.constants.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.text.ParseException
 
 class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
@@ -176,8 +179,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     loadInsurance(cshift, storageSiteInstance)
     updateUnits(storageSiteInstance, stats, writer)
-    loadPromos(storageSiteInstance, writer)
-
     storageSiteInstance.save(flush: true)
   }
 
@@ -191,7 +192,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     for (site in siteList.details.soagetsitelist) {
       StorageSite csite = StorageSite.findBySourceAndSourceId("CS4", site.siteid)
-      if (!csite && site.propertytype == 1 && (site.sitestauts == 1 | site.sitestauts == 2)) {
+      //if (!csite && site.propertytype == 1 && (site.sitestauts == 1 || site.sitestauts == 2)) {
+      if (!csite) {
         csite = new StorageSite()
         csite.source = "CS4"
         csite.sourceId = site.siteid
@@ -231,10 +233,12 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
         csite.lastUpdate = 0
         stats.createCount++
+        csite.save()
         SiteUser.link(csite, cshift.manager)
       }
       // Update will also save site
-      updateSite(csite, stats, writer)
+      if (csite)
+        updateSite(csite, stats, writer)
 
     }
   }
@@ -396,6 +400,9 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     if (deleteList.size() > 0) {
       site.save(flush: true)
     }
+
+    loadPromos(site, writer)
+
     updateBestUnitPrice (site)
   }
 
@@ -412,6 +419,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       discReq.orgID = cshift.orgId
       discReq.siteID = siteID
       discReq.unitID = unit.unitNumber as Long
+      //discReq.rentalID = null // This value is only required if this is an existing rental
       def lookupUser = getLookupUser(cshift)
       def discountList = myProxy.getAvailableDiscounts(lookupUser, discReq)
       for (discount in discountList.details?.applbestpcd) {
@@ -588,13 +596,36 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
   }
 
   private Date getStartTime(String hrs) {
-    def start = hrs.split("-")[0].trim()
-    return Date.parse("hh:mma", start)
+    def start = (splitHours(hrs))[0].trim()
+    return parseTime (start)
   }
 
   private Date getEndTime(String hrs) {
-    def end = hrs.split("-")[-1].trim()
-    return Date.parse("hh:mma", end)
+    def end = (splitHours(hrs))[-1].trim()
+    return parseTime (end)
+  }
+
+  private String [] splitHours (String hrs) {
+    return hrs.split("-")
+  }
+
+  private Date parseTime (String t) {
+    ArrayList <DateFormat> df = new ArrayList<DateFormat>() // make this static?
+    df.push (new SimpleDateFormat("hh:mma"));
+    df.push (new SimpleDateFormat("hha"));
+
+    Date d = null;
+    for (DateFormat df1 : df) {
+      try {
+        d = df1.parse (t);
+        break; // if the parse works, then bail 'cause we're done.
+      }
+      catch (ParseException pe) {
+        String err = "failed to parse date string " + pe;
+        log.info (err, pe);
+      }
+    }
+    return d;
   }
 
   @Override
