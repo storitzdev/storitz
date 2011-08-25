@@ -49,10 +49,12 @@ class SpecialOffer {
   String unitType        // TODO: Delete, unused
 
   public void deleteRestrictions() {
-    def restrictions = this.restrictions
     try {
-      this.restrictions = null // remove the back-reference before delete
-      for (SpecialOfferRestriction r : restrictions) {
+      Iterator iter = this.restrictions.iterator()
+      SpecialOfferRestriction r;
+      while (iter.hasNext()) {
+        r = iter.next();
+        iter.remove()
         r.delete (flush:true);
       }
     } catch (Throwable t) {
