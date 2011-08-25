@@ -11,6 +11,8 @@ package storitz
 import com.storitz.StorageSite
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.grails.mail.MailService
+import org.hibernate.Session
+import org.hibernate.Hibernate
 
 class UpdateInventory {
 
@@ -52,11 +54,14 @@ class UpdateInventory {
       //println ("source is: ${src}")
 
       // JM: Notice that here we filter out disabled sites...
+      String sql;
       if (src) {
-        allStorageSitesIds = StorageSite.findAllBySourceAndDisabled(src,false).collect{ it.id }.sort()
+        sql = "SELECT id FROM storage_site WHERE source = '${src}' AND disabled = 0";
       } else {
-        allStorageSitesIds = StorageSite.findAllByDisabled(false).collect{ it.id }.sort()
+        sql = "SELECT id FROM storage_site WHERE disabled = 0";
       }
+      Session s = feedService.getSessionFactory().currentSession;
+      allStorageSitesIds = s.createSQLQuery(sql).addScalar("ID", Hibernate.LONG).list()
 
         // TEST: shrink sample size for testing
         //if (allStorageSitesIds.size() > 3)  {

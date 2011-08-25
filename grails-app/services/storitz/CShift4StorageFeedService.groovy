@@ -487,18 +487,17 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         if (offer.validate()) {
           offer.save(flush: true)
           log.info "Created offer: ${offer.dump()}"
+          def restriction = offer.restrictions.find { (it.restrictionInfo as Long) == discReq.unitID }
+          if (!restriction) {
+            restriction = new SpecialOfferRestriction()
+            restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
+            restriction.restrictionInfo = discReq.unitID
+            restriction.restrictive = false
+            restriction.specialOffer = offer
+            restriction.save(flush: true)
+          }
         } else {
           log.info "offer did not validate ${offer.dump()}"
-        }
-        def restriction = offer.restrictions.find { (it.restrictionInfo as Long) == discReq.unitID }
-        if (!restriction && offer.validate()) {
-          restriction = new SpecialOfferRestriction()
-          restriction.type = SpecialOfferRestrictionType.UNIT_TYPE
-          restriction.restrictionInfo = discReq.unitID
-          restriction.restrictive = false
-          restriction.specialOffer = offer
-          restriction.save(flush: true)
-          offer.save(flush: true)
         }
       }
     }

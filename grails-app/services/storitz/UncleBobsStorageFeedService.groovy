@@ -489,6 +489,7 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
       if (special_applytoprorate) {
         specialOffer.prepayMonths = 1
       }
+      specialOffer.save()
       ///////////////////////////////
       // SPECIAL OFFER RESTRICTION //
       ///////////////////////////////
@@ -501,7 +502,6 @@ class UncleBobsStorageFeedService extends BaseProviderStorageFeedService {
         specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
         specialOfferRestriction.save()
       }
-      specialOffer.save()
     }
     catch (Throwable t) {
       log.warn("Error processing special offer! site: ${site.title} (${site.id}), unit: ${unit.displaySize} (${unit.id}), special offer: ${special_description} (${special_amount}), month: ${special_month}", e)
