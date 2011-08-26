@@ -140,7 +140,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         }
 
         // There is only one special per unit. That special, if any is always active and featured
-        SpecialOffer specialOffer = getSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
+        SpecialOffer specialOffer = findOrCreateSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
         specialOffer.site        = storageSite
         specialOffer.featured    = true
         specialOffer.active      = true
@@ -158,7 +158,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         specialOffer.promoQty =  discountValue
         specialOffer.save()            // no flush!
 
-        SpecialOfferRestriction specialOfferRestriction = getSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
+        SpecialOfferRestriction specialOfferRestriction = findOrCreateSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
         specialOfferRestriction.specialOffer = specialOffer;
         specialOfferRestriction.restrictive = false
         specialOfferRestriction.type = SpecialOfferRestrictionType.UNIT_TYPE
@@ -166,30 +166,18 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
     }
 
     def deleteSpecialOfferAndSpecialOfferRestrictionByStorageSiteAndUnitIfAny(StorageSite storageSite, StorageUnit storageUnit) {
-        SpecialOffer specialOffer = null
-        SpecialOfferRestriction specialOfferRestriction = null
-
-        ////////////////////////////////////////////////////////////////
-        try {
-           specialOffer = getSpecialOfferByStorageSiteAndStorageUnit(storageSite,storageUnit)
-           specialOffer.active = false;
-           specialOffer.save(flush: true)
-        }
-        catch (Throwable t) {
-           t.printStackTrace()
-        }
-
-        ////////////////////////////////////////////////////////////////
-        try {
-            specialOfferRestriction = getSpecialOfferRestrictionByStorageUnitSpecialOffer(storageUnit,specialOffer)
-            specialOfferRestriction.delete()
-        }
-        catch (Throwable t) {
-           t.printStackTrace()
+        String code = "${storageUnit.unitName}-${storageUnit.unitNumber}"
+        List<SpecialOffer> specialOffers = storageSite.specialOffers?.asList()
+        for (SpecialOffer offer : specialOffers) {
+            if (offer.code == code) {
+                offer.deleteRestrictions();
+                offer.active = false;
+                offer.save(flush: true);
+            }
         }
     }
 
-    def getSpecialOfferRestrictionByStorageUnitSpecialOffer(StorageUnit storageUnit,SpecialOffer specialOffer) {
+    def findOrCreateSpecialOfferRestrictionByStorageUnitSpecialOffer(StorageUnit storageUnit,SpecialOffer specialOffer) {
         List<SpecialOfferRestriction> restrictions = specialOffer.restrictions?.asList()
 
         for (SpecialOfferRestriction restriction : restrictions) {
@@ -204,7 +192,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         return specialOfferRestriction
     }
 
-    def getSpecialOfferByStorageSiteAndStorageUnit(StorageSite storageSite,StorageUnit storageUnit) {
+    def findOrCreateSpecialOfferByStorageSiteAndStorageUnit(StorageSite storageSite,StorageUnit storageUnit) {
        String code = "${storageUnit.unitName}-${storageUnit.unitNumber}"
        SpecialOffer specialOffer = null
 
