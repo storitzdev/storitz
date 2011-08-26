@@ -625,17 +625,18 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     trans.contactId = "${contactID}"
 
     // Validate new account by fetching down information from CenterShift
+    /*
     AccountRequest accountRequest = new AccountRequest()
     accountRequest.contactID = contactID
     accountRequest.acctID = accountID
     GetAccountInfoResponse2 getAccountInfoResponse2 = myProxy.getAccountInfo (lookupUser, accountRequest)
+    */
 
     if (trans.tenantId) {
       String noteText = StoritzGroovyUtil.getCSAccountNoteText (trans)
       CreateNotesRequest createNotesRequest = new CreateNotesRequest()
       createNotesRequest.subject = "Storitz.com Customer Reservation"
       createNotesRequest.note = noteText
-      createNotesRequest.highPriority = true
       createNotesRequest.accountID = accountID
       try {
         myProxy.createNotes (lookupUser, createNotesRequest)
