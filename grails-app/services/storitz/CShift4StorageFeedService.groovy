@@ -72,6 +72,16 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     def siteDetail = siteDetails.details.soasiteattributes[0]
 
+    if (siteDetail.PHONE)
+      storageSiteInstance.phone=siteDetail.PHONE
+
+    // Update geo-code
+    def address = storageSiteInstance.address + ', ' + storageSiteInstance.city + ', ' + storageSiteInstance.state.display + ' ' + storageSiteInstance.zipcode
+    log.info "Found address: ${address}"
+    def geoResult = getGeocodeService().geocode(address)
+    storageSiteInstance.lng = geoResult.results[0].geometry.location.lng
+    storageSiteInstance.lat = geoResult.results[0].geometry.location.lat
+
     def sitehours = siteDetail.sitehours
     def gatehours = siteDetail.gatehours?.toLowerCase()
 
@@ -172,6 +182,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       }
     }
 
+
     storageSiteInstance.save(flush: true)
     if (siteDetail.emailaddress) {
       createSiteUser(storageSiteInstance, siteDetail.emailaddress, null, cshift.manager)
@@ -179,6 +190,10 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     loadInsurance(cshift, storageSiteInstance)
     updateUnits(storageSiteInstance, stats, writer)
+
+    Date now = new Date()
+    storageSiteInstance.lastChange = now
+    storageSiteInstance.lastUpdate = now.time
     storageSiteInstance.save(flush: true)
   }
 
@@ -192,7 +207,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     for (site in siteList.details.soagetsitelist) {
       StorageSite csite = StorageSite.findBySourceAndSourceId("CS4", site.siteid)
-      //if (!csite && site.propertytype == 1 && (site.sitestauts == 1 || site.sitestauts == 2)) {
       if (!csite) {
         csite = new StorageSite()
         csite.source = "CS4"
@@ -207,12 +221,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         csite.city = site.city
         csite.state = State.fromText(site.state)
         csite.zipcode = site.postalcode
-        def address = csite.address + ', ' + csite.city + ', ' + csite.state.display + ' ' + csite.zipcode
-        log.info "Found address: ${address}"
-        def geoResult = getGeocodeService().geocode(address)
-        csite.lng = geoResult.results[0].geometry.location.lng
-        csite.lat = geoResult.results[0].geometry.location.lat
-        csite.transactionType = TransactionType.RENTAL
+        csite.lng = 0  // will set in updateSite
+        csite.lat = 0  // will set in updateSite
 
         // set attributes
         csite.extendedHours = false
@@ -395,7 +405,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     for (unit in deleteList) {
       stats.removedCount++
       unit.unitCount = 0;
-      unit.save.flush(true);
+      unit.save(flush:true);
     }
     if (deleteList.size() > 0) {
       site.save(flush: true)
@@ -548,38 +558,56 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
   }
 
   def createTenant(RentalTransaction trans) {
-
     CenterShift cshift = (CenterShift) trans.site.feed
     def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
 
     CreateNewAccountRequest acctReq = new CreateNewAccountRequest()
     acctReq.orgID = cshift.orgId
     acctReq.siteID = trans.site.sourceId as Long
     acctReq.firstName = trans.contactPrimary.firstName
     acctReq.lastName = trans.contactPrimary.lastName
-    acctReq.email = trans.contactPrimary.email
+    acctReq.accountName = "what is this?"
     acctReq.accountClass = (trans.rentalUse == RentalUse.BUSINESS ? AccountClass.BUSINESS : AccountClass.PERSONAL)
     acctReq.contactType = ContactType.ACCOUNT_USER
+    acctReq.email = trans.contactPrimary.email
 
     ContactAddress contactPrimary = new ContactAddress()
+    contactPrimary.addrType = AddressType.HOME
     contactPrimary.addr1 = trans.contactPrimary.address1
     contactPrimary.addr2 = trans.contactPrimary.address2
-    contactPrimary.active = true
-    contactPrimary.addrType = AddressType.HOME
     contactPrimary.city = trans.contactPrimary.city
     contactPrimary.state = trans.contactPrimary.state.display
-    contactPrimary.country = trans.contactPrimary.country.display
     contactPrimary.postalCode = trans.contactPrimary.zipcode
+    contactPrimary.country = trans.contactPrimary.country ? trans.contactPrimary.country.display : "US"
+    contactPrimary.active = true
+    acctReq.getContactAddress().add(contactPrimary) // contactAddress
 
     ACCTCONTACTPHONES phoneInfo = new ACCTCONTACTPHONES()
-    phoneInfo.phone = trans.contactPrimary.phone
     phoneInfo.phonetype = (trans.contactPrimary.phoneType == PhoneType.HOME ? 1 : 2)
     phoneInfo.phonetypeval = trans.contactPrimary.phoneType.display
+    phoneInfo.phone = trans.contactPrimary.phone
     phoneInfo.active = true
+    acctReq.getContactPhone().add(phoneInfo) // contactPhone
 
-    acctReq.getContactAddress().add(contactPrimary)
-    acctReq.getContactPhone().add(phoneInfo)
+    StructCreateAccount structCreateAccount = myProxy.createNewAccount (lookupUser, acctReq)
+    long accountID = structCreateAccount.accountID
+    long contactID = structCreateAccount.contactID
 
+    trans.tenantId = "${accountID}"
+    trans.contactId = "${contactID}"
+
+    // CS3.1 uses account notes to let the site manager know this is a reservation
+    // from us. let's see if CS4.0 has the same functionality
+
+    if (trans.tenantId) {
+      def noteText = StoritzGroovyUtil.getCSAccountNoteText (trans)
+      CreateNotesRequest createNotesRequest = new CreateNotesRequest()
+      createNotesRequest.subject = "Storitz.com Customer Reservation"
+      createNotesRequest.note = noteText
+      createNotesRequest.accountID = cshift.orgId
+      myProxy.createNotes (lookupUser, createNotesRequest)
+    }
   }
 
   @Override
@@ -589,6 +617,13 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
   @Override
   public boolean moveIn(RentalTransaction trans, boolean sandboxMode) {
+    if (sandboxMode) {
+      trans.reservationId = "SANDBOX"
+      trans.idNumber = "SANDBOX"
+      trans.reserved = true
+      return true;
+    }
+
     createTenant(trans)
     StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
 

@@ -3,6 +3,7 @@ package storitz
 import com.storitz.SpecialOffer
 import org.grails.mail.MailService
 import com.storitz.SpecialOfferLookup
+import com.storitz.RentalTransaction
 
 class StoritzGroovyUtil {
 
@@ -115,7 +116,10 @@ class StoritzGroovyUtil {
     return amen
   }
 
-
+  static def getCSAccountNoteText (RentalTransaction trans) {
+    def noteText = "Storitz tenant: (Storitz transaction id: ${trans.id})\n\tTotal Move-In: ${trans.cost}\n\tPromotion: ${trans.promoName ? trans.promoName : 'none'}\n\tInsurance: ${trans.insuranceCost}\n\tCall 877-456-2929 if you have any questions"
+    return noteText
+  }
 
 
 
