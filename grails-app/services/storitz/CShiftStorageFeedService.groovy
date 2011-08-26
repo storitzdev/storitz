@@ -828,7 +828,7 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
       adminFee = unit.ADMIN_FEE.text() as BigDecimal
 
       def dimensions = unit.DIMENSIONS.text()
-      def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)/
+      def m = dimensions =~ /(\d+\.*\d*)\s*X\s*(\d+\.*\d*)(\s*X\s*\d+\.*\d*)?/
       if (m.matches()) {
 
         // legal dimensions
