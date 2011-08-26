@@ -567,7 +567,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     acctReq.siteID = trans.site.sourceId as Long
     acctReq.firstName = trans.contactPrimary.firstName
     acctReq.lastName = trans.contactPrimary.lastName
-    acctReq.accountName = "what is this?"
     acctReq.accountClass = (trans.rentalUse == RentalUse.BUSINESS ? AccountClass.BUSINESS : AccountClass.PERSONAL)
     acctReq.contactType = ContactType.ACCOUNT_USER
     acctReq.email = trans.contactPrimary.email
