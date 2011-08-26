@@ -874,7 +874,6 @@ class CShiftStorageFeedService extends BaseProviderStorageFeedService {
             siteUnit.unitInfo = dimensions
             siteUnit.unitSizeInfo = dimensions
             siteUnit.unitTypeInfo = typeName
-            newUnit = true
 
             if (unitTypeLookup && (unitTypeLookup.unitType == UnitType.UNDEFINED)) {
               writer.println "Skipping illegal type ${typeName}"
