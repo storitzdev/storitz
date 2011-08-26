@@ -107,7 +107,7 @@ class UpdateInventory {
                     def start = System.currentTimeMillis()
                     feedService.updateUnits(site, stats, writer)
                     def end = System.currentTimeMillis()
-                    def elapsed = "${(end - start) / 1000 / 60}m ${(((end - start) / 1000) as Long) % 60}s"
+                    def elapsed = "${Math.floor((end - start) / 1000 / 60) as Integer}m ${(((end - start) / 1000) as Long) % 60}s"
                     writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units in ${elapsed} seconds"
                     println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units in ${elapsed} seconds"
                 } catch (Throwable t) {
@@ -122,7 +122,7 @@ class UpdateInventory {
             println "Completed ${upper_i} sites"
         }
       def endTime = System.currentTimeMillis()
-      def totalTime = "${(endTime - startTime) / 1000 / 60}m ${(((endTime - startTime) / 1000) as Long) % 60}s"
+      def totalTime = "${Math.floor((endTime - startTime) / 1000 / 60) as Integer}m ${(((endTime - startTime) / 1000) as Long) % 60}s"
       writer.println "----------------- Completed in ${totalTime} ----------------------------"
 
       String subj = "[${ConfigurationHolder.config.grails.serverURL}, ${src} (SITES:${allStorageSitesIds.size()}/ERRORS:${num_errors})] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
