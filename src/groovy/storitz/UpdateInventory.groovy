@@ -104,11 +104,12 @@ class UpdateInventory {
 
                 try {
                     def stats = new storitz.SiteStats()
-                    def start = System.currentTimeMillis();
+                    def start = System.currentTimeMillis()
                     feedService.updateUnits(site, stats, writer)
-                    def elapsed = "${(System.currentTimeMillis() - start) / 1000 / 60}m ${((System.currentTimeMillis() - start) / 1000) % 60}s"
+                    def end = System.currentTimeMillis()
+                    def elapsed = "${(end - start) / 1000 / 60}m ${(((end - start) / 1000) as Long) % 60}s"
                     writer.println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units in ${elapsed} seconds"
-                    println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units"
+                    println "${site.title} refreshed ${stats.unitCount} units, deleted ${stats.removedCount} units in ${elapsed} seconds"
                 } catch (Throwable t) {
                     ++num_errors
                     writer.println "Error processing site id=${site.id} Error: ${t} Stacktrace: ${t.stackTrace}"
@@ -120,7 +121,8 @@ class UpdateInventory {
             i=upper_i+1;
             println "Completed ${upper_i} sites"
         }
-      def totalTime = "${(System.currentTimeMillis() - startTime) / 1000 / 60}m ${((System.currentTimeMillis() - startTime) / 1000) % 60}s"
+      def endTime = System.currentTimeMillis()
+      def totalTime = "${(endTime - startTime) / 1000 / 60}m ${(((endTime - startTime) / 1000) as Long) % 60}s"
       writer.println "----------------- Completed in ${totalTime} ----------------------------"
 
       String subj = "[${ConfigurationHolder.config.grails.serverURL}, ${src} (SITES:${allStorageSitesIds.size()}/ERRORS:${num_errors})] Inventory refresh ${new Date().format('yyyy-MM-dd')}"
