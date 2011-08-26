@@ -199,6 +199,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         }
 
         SpecialOfferRestriction specialOfferRestriction = new SpecialOfferRestriction()
+        specialOfferRestriction.specialOffer = specialOffer
         specialOfferRestriction.restrictionInfo = storageUnit.unitTypeInfo
         return specialOfferRestriction
     }
@@ -224,7 +225,7 @@ class EDomicoStorageFeedService extends BaseProviderStorageFeedService {
         specialOffer.expireMonth    = 1
         specialOffer.inMonth        = 1
         specialOffer.prepayMonths   = 0
-
+        specialOffer.site = storageSite;
         specialOffer.code = code
 
         return specialOffer

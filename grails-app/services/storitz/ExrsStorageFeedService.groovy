@@ -288,6 +288,7 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       SpecialOffer specialOffer = SpecialOffer.findByCode(code);
       if (specialOffer == null) {
         specialOffer = new SpecialOffer();
+        specialOffer.site = site
         specialOffer.code = code;
       }
       else {
@@ -312,7 +313,6 @@ class ExrsStorageFeedService extends CShiftStorageFeedService {
       if (specialOffer.promoQty == 0) {
         specialOffer.promoQty = discountMax
       }
-      specialOffer.site = site
       specialOffer.save(flush: true)
 
       def restriction = new SpecialOfferRestriction()

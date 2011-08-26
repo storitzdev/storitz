@@ -369,6 +369,7 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
         SpecialOffer so = storageSiteInstance.specialOffers.find { it.code == specialId }
         if (!so) {
           so = new SpecialOffer()
+          so.site = storageSiteInstance;
           so.code = specialId
           so.active = false
           so.concessionId = 0
@@ -494,7 +495,6 @@ class QuikStorStorageFeedService extends BaseProviderStorageFeedService {
             }
           }
         }
-        so.site = storageSiteInstance;
         so.save(flush: true)
         writer.println("Offer saved ${so.promoType} - qty = ${so.promoQty} expire = ${so.expireMonth} prepay = ${so.prepay} prepayMonths = ${so.prepayMonths}")
         // add restriction for type
