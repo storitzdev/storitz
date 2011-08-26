@@ -6,13 +6,24 @@ import storitz.constants.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.text.ParseException
+import org.grails.mail.MailService
+import javax.xml.datatype.XMLGregorianCalendar
 
 class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
   def geocodeService
   def unitSizeService
+  def mailService
 
   // required for script services
+  MailService getMailService() {
+    if (!mailService) {
+      log.info ("mailService is null: instantiating")
+      mailService = new MailService()
+    }
+    return mailService;
+  }
+
   UnitSizeService getUnitSizeService() {
       if (!unitSizeService) {
           log.info ("unitSizeService is null: instantiating")
@@ -223,6 +234,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         csite.zipcode = site.postalcode
         csite.lng = 0  // will set in updateSite
         csite.lat = 0  // will set in updateSite
+        csite.transactionType = TransactionType.RENTAL
 
         // set attributes
         csite.extendedHours = false
@@ -580,14 +592,30 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     contactPrimary.postalCode = trans.contactPrimary.zipcode
     contactPrimary.country = trans.contactPrimary.country ? trans.contactPrimary.country.display : "US"
     contactPrimary.active = true
-    acctReq.getContactAddress().add(contactPrimary) // contactAddress
+
+    if (!acctReq.getContactAddress()) {
+      ArrayOfContactAddress arrayOfContactAddress = new ArrayOfContactAddress()
+      arrayOfContactAddress.getContactAddress().add (contactPrimary)
+      acctReq.setContactAddress (arrayOfContactAddress)
+    }
+    else {
+      acctReq.getContactAddress().add(contactPrimary) // contactAddress
+    }
 
     ACCTCONTACTPHONES phoneInfo = new ACCTCONTACTPHONES()
-    phoneInfo.phonetype = (trans.contactPrimary.phoneType == PhoneType.HOME ? 1 : 2)
-    phoneInfo.phonetypeval = trans.contactPrimary.phoneType.display
+    phoneInfo.phonetype = (trans.contactPrimary.phoneType && trans.contactPrimary.phoneType == PhoneType.MOBILE ? 2 : 1)
+    phoneInfo.phonetypeval = trans.contactPrimary.phoneType ? trans.contactPrimary.phoneType.display : PhoneType.HOME.toString()
     phoneInfo.phone = trans.contactPrimary.phone
     phoneInfo.active = true
-    acctReq.getContactPhone().add(phoneInfo) // contactPhone
+
+    if (!acctReq.getContactPhone()) {
+      ArrayOfACCTCONTACTPHONES arrayOfACCTCONTACTPHONES = new ArrayOfACCTCONTACTPHONES()
+      arrayOfACCTCONTACTPHONES.getACCTCONTACTPHONES().add (phoneInfo)
+      acctReq.setContactPhone (arrayOfACCTCONTACTPHONES)
+    }
+    else {
+      acctReq.getContactPhone().add(phoneInfo) // contactPhone
+    }
 
     StructCreateAccount structCreateAccount = myProxy.createNewAccount (lookupUser, acctReq)
     long accountID = structCreateAccount.accountID
@@ -596,16 +624,42 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     trans.tenantId = "${accountID}"
     trans.contactId = "${contactID}"
 
-    // CS3.1 uses account notes to let the site manager know this is a reservation
-    // from us. let's see if CS4.0 has the same functionality
+    // Validate new account by fetching down information from CenterShift
+    AccountRequest accountRequest = new AccountRequest()
+    accountRequest.contactID = contactID
+    accountRequest.acctID = accountID
+    GetAccountInfoResponse2 getAccountInfoResponse2 = myProxy.getAccountInfo (lookupUser, accountRequest)
 
     if (trans.tenantId) {
-      def noteText = StoritzGroovyUtil.getCSAccountNoteText (trans)
+      String noteText = StoritzGroovyUtil.getCSAccountNoteText (trans)
       CreateNotesRequest createNotesRequest = new CreateNotesRequest()
       createNotesRequest.subject = "Storitz.com Customer Reservation"
       createNotesRequest.note = noteText
-      createNotesRequest.accountID = cshift.orgId
-      myProxy.createNotes (lookupUser, createNotesRequest)
+      createNotesRequest.highPriority = true
+      createNotesRequest.accountID = accountID
+      try {
+        myProxy.createNotes (lookupUser, createNotesRequest)
+      }
+      catch (Throwable t) {
+        // The question is what to do now? We've already created the new tenant
+        // in the system, so the bulk of the work is done. However, without
+        // the note the site manager won't know that this is a storitz
+        // tenant. Of course that's not totally true since they will receive
+        // an email from us too. In light of this, we'll send an email to
+        String stackTrace = StoritzUtil.stackTraceToString (t)
+        StringBuilder sb = new StringBuilder()
+        sb.append ("Note:\n")
+        sb.append (noteText)
+        sb.append ("\n\n")
+        sb.append ("StackTrace:\n")
+        sb.append (stackTrace)
+        getMailService().sendMail {
+          to "notifications@storitz.com"
+          from "no-reply@storitz.com"
+          subject "Error Attaching Note to New CS4 Tenant Record"
+          body sb.toString()
+        }
+      }
     }
   }
 
