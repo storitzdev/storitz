@@ -17,6 +17,7 @@ class StorageUnit {
     lastUpdated(nullable: true)
     bestUnitPrice(nullable: true)
     maxReserveDays(nullable: true)
+    cs4Version(nullable: true)
   }
 
   static fetchMode = [unitsize:"eager"]
@@ -48,6 +49,7 @@ class StorageUnit {
   Date lastUpdated
   Integer maxReserveDays
   StorageSite site
+  Integer cs4Version
 
   String displayType() {
     if (this.unitType == UnitType.INTERIOR) {

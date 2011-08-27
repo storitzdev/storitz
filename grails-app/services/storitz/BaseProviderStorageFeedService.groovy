@@ -33,16 +33,19 @@ abstract class BaseProviderStorageFeedService implements ICostStorageFeedService
   }
 
   public static void updateBestUnitPrice (StorageSite site) {
-      // JM: 2011-06-07 Post op processing.
-      // bestUnitPrice is pushRate or price, as appropriate.
-      site.units.each { unit ->
-        if (site.allowPushPrice)
-          unit.bestUnitPrice = unit.pushRate;
-        else
-          unit.bestUnitPrice = unit.price
-        unit.save(flush:true)
-      }
-   }
+    // JM: 2011-06-07 Post op processing.
+    // bestUnitPrice is pushRate or price, as appropriate.
+    def units = StorageUnit.findAllBySite (site)
+
+    for (int i = 0; i < units.size(); i++) {
+      StorageUnit unit = (StorageUnit)units[i];
+      if (site.allowPushPrice)
+        unit.bestUnitPrice = unit.pushRate;
+      else
+        unit.bestUnitPrice = unit.price;
+      unit.save(flush:true);
+    }
+  }
 
   def geoCodeSite(StorageSite storageSite)  {
       def maxidx = storageSite.zipcode.size() > 5 ? 5 : storageSite.zipcode.size()

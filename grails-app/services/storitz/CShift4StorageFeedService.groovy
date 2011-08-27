@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat
 import java.text.ParseException
 import org.grails.mail.MailService
 import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.datatype.DatatypeFactory
 
 class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
@@ -378,6 +379,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           myUnit.unitType = unitType
           myUnit.totalUnits = unit.quantity
           myUnit.unitCount = unit.available
+          myUnit.cs4Version = unit.version
 
           // TODO grab attributes
           myUnit.isAlarm = false
@@ -395,6 +397,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
           myUnit.unitCount = unit.available
           myUnit.price = unit.maxrentrate
           myUnit.pushRate = unit.currentrate
+          myUnit.cs4Version = unit.version
           stats.unitCount += unit.available
           stats.updateCount++
           stats.removedCount--
@@ -557,6 +560,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
     for (unit in siteUnitData.details.siteUnitData) {
       if (unit.unitid == unitId && unit.available > trans.site.minInventory) {
+        trans.feedUnitNumber  = unitId
+        trans.feedUnitId = unitId
         return true
       }
     }
@@ -569,7 +574,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
   }
 
-  def createTenant(RentalTransaction trans) {
+  private GetAccountInfoResponse2 createTenant(RentalTransaction trans) {
     CenterShift cshift = (CenterShift) trans.site.feed
     def myProxy = getProxy(cshift)
     def lookupUser = getLookupUser(cshift)
@@ -603,7 +608,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     }
 
     ACCTCONTACTPHONES phoneInfo = new ACCTCONTACTPHONES()
-    phoneInfo.phonetype = (trans.contactPrimary.phoneType && trans.contactPrimary.phoneType == PhoneType.MOBILE ? 2 : 1)
+    phoneInfo.phonetype = (trans.contactPrimary.phoneType && trans.contactPrimary.phoneType == PhoneType.OFFICE ? 2 : 1)
     phoneInfo.phonetypeval = trans.contactPrimary.phoneType ? trans.contactPrimary.phoneType.display : PhoneType.HOME.toString()
     phoneInfo.phone = trans.contactPrimary.phone
     phoneInfo.active = true
@@ -624,18 +629,15 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     trans.tenantId = "${accountID}"
     trans.contactId = "${contactID}"
 
-    // Validate new account by fetching down information from CenterShift
+    // Notes. This is blowing up on the server... I need to address this
+    // with CenterShift to find out why that is. For the moment there is
+    // nothing that can be done on our end.
     /*
-    AccountRequest accountRequest = new AccountRequest()
-    accountRequest.contactID = contactID
-    accountRequest.acctID = accountID
-    GetAccountInfoResponse2 getAccountInfoResponse2 = myProxy.getAccountInfo (lookupUser, accountRequest)
-    */
-
     if (trans.tenantId) {
       String noteText = StoritzGroovyUtil.getCSAccountNoteText (trans)
+      String noteSubject = "Storitz.com Customer Reservation"
       CreateNotesRequest createNotesRequest = new CreateNotesRequest()
-      createNotesRequest.subject = "Storitz.com Customer Reservation"
+      createNotesRequest.subject = noteSubject
       createNotesRequest.note = noteText
       createNotesRequest.accountID = accountID
       try {
@@ -662,6 +664,138 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         }
       }
     }
+    */
+    AccountRequest accountRequest = new AccountRequest()
+    accountRequest.contactID = contactID
+    accountRequest.acctID = accountID
+    GetAccountInfoResponse2 getAccountInfoResponse2 = myProxy.getAccountInfo (lookupUser, accountRequest)
+    return getAccountInfoResponse2
+  }
+
+  private MakeReservationResponse makeReservation (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    try {
+      CenterShift cshift = (CenterShift) trans.site.feed
+      def myProxy = getProxy(cshift)
+      def lookupUser = getLookupUser(cshift)
+
+      StorageUnit theUnit = StorageUnit.get (trans.unitId)
+
+      UpdateUnitStatusRequest updateUnitStatusRequest = new UpdateUnitStatusRequest()
+      updateUnitStatusRequest.siteID = trans.site.sourceId as long; // long siteID;
+      updateUnitStatusRequest.unitID = trans.feedUnitId as long; // long unitID;
+      updateUnitStatusRequest.version = theUnit.cs4Version as BigDecimal; // BigDecimal version;
+      updateUnitStatusRequest.putOnHold = true; // boolean putOnHold;
+      UpdateUnitStatusResponse2 updateUnitStatusResponse2 = myProxy.updateUnitStatus (lookupUser, updateUnitStatusRequest)
+
+      MakeReservationRequest makeReservationRequest = new MakeReservationRequest()
+      makeReservationRequest.siteID = trans.site.sourceId as long; // long siteID;
+      makeReservationRequest.acctID = trans.tenantId as long; // long acctID;
+      makeReservationRequest.unitID = trans.feedUnitId as long; // long unitID;
+      makeReservationRequest.version = updateUnitStatusResponse2.newVersion; // BigDecimal version;
+      //makeReservationRequest.quoteID = 0; // Long quoteID;
+      //makeReservationRequest.quoteType = ; // QuoteTypes quoteType;
+      makeReservationRequest.rentNow = false; // boolean rentNow;
+      makeReservationRequest.price = trans.cost; // BigDecimal price;
+      makeReservationRequest.quoteStartDate = getReservationMoveInDate(trans, getAccountInfoResponse2); // XMLGregorianCalendar quoteStartDate;
+      //makeReservationRequest.inquirySource = ; // Integer inquirySource;
+      makeReservationRequest.contacts = getReservationArrayOfContact(trans, getAccountInfoResponse2) ; // ArrayOfRentalContact contacts;
+
+      makeReservationResponse.pcds = getReservationPCDS (trans, getAccountInfoResponse2); // ArrayOfTRANQUOTEPCDDETAIL pcds;
+      //makeReservationResponse.overrideReservationAmount = ; // BigDecimal overrideReservationAmount;
+      MakeReservationResponse makeReservationResponse = myProxy.makeReservation (lookupUser, makeReservationRequest)
+
+      return makeReservationResponse
+    }
+    catch (Exception e) {
+      log.info ("Error creating reservation", e)
+      throw e
+    }
+  }
+
+  private ArrayOfTRANQUOTEPCDDETAIL getReservationPCDS (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    CenterShift cshift = (CenterShift) trans.site.feed
+    def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
+
+    StorageUnit theUnit = StorageUnit.get (trans.unitId)
+
+    GetAvailableDiscountsRequest getAvailableDiscountsRequest = new GetAvailableDiscountsRequest()
+    getAvailableDiscountsRequest.orgID = cshift.orgId
+    getAvailableDiscountsRequest.siteID = trans.site.sourceId as long
+    getAvailableDiscountsRequest.unitID = theUnit.unitNumber as Long
+
+    GetAvailableDiscountsResponse2 getAvailableDiscountsResponse2 = myProxy.getAvailableDiscounts (lookupUser, getAvailableDiscountsRequest)
+  }
+
+  private XMLGregorianCalendar getReservationMoveInDate (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    CenterShift cshift = (CenterShift) trans.site.feed
+    def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
+
+    GregorianCalendar gcal = new GregorianCalendar();
+    gcal.time = trans.moveInDate
+    XMLGregorianCalendar xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+
+    return xgcal
+  }
+
+  private ArrayOfRentalContact getReservationArrayOfContact (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    CenterShift cshift = (CenterShift) trans.site.feed
+    def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
+
+    ArrayOfRentalContact arrayOfRentalContact = new ArrayOfRentalContact()
+
+    // to make the array or rental contact, first create the rental contact
+    RentalContact rentalContact = new RentalContact()
+    rentalContact.contactId = trans.contactId as long
+    rentalContact.addressId = getReservationAddressId (trans, getAccountInfoResponse2)
+    rentalContact.phoneId = getReservationPhoneId (trans, getAccountInfoResponse2)
+    rentalContact.gateCode = getReservationGateCode (trans, getAccountInfoResponse2)
+    rentalContact.primaryFlag = true;
+    arrayOfRentalContact.getRentalContact().add (rentalContact)
+
+    return arrayOfRentalContact
+  }
+
+  private long getReservationPhoneId (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    CenterShift cshift = (CenterShift) trans.site.feed
+    def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
+
+    AccountRequest accountRequest = new AccountRequest()
+    accountRequest.contactID = trans.contactId as long
+    accountRequest.acctID = trans.tenantId as long
+
+    GetContactPhoneNumbersResponse2 getContactPhoneNumbersResponse2 = myProxy.getContactPhoneNumbers (lookupUser, accountRequest)
+
+    return getContactPhoneNumbersResponse2.details.ACCTCONTACTPHONES.get(0).PHONEID
+  }
+
+  private String getReservationGateCode (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    CenterShift cshift = (CenterShift) trans.site.feed
+    def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
+
+    GetGateCodeInfoRequest getGateCodeInfoRequest = new GetGateCodeInfoRequest()
+    getGateCodeInfoRequest.contactID = trans.contactId as long
+    getGateCodeInfoRequest.unitID = trans.feedUnitId as long
+
+    GetGateCodeInfoResponse2 getGateCodeInfoResponse2 = myProxy.getGateCodeInfo (lookupUser, getGateCodeInfoRequest)
+
+    return getGateCodeInfoResponse2.details.SOAGETGATEINFO.get(0).GATECODE
+  }
+
+  private long getReservationAddressId (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
+    CenterShift cshift = (CenterShift) trans.site.feed
+    def myProxy = getProxy(cshift)
+    def lookupUser = getLookupUser(cshift)
+
+    AccountRequest accountRequest = new AccountRequest()
+    accountRequest.contactID = trans.contactId as long
+    accountRequest.acctID = trans.tenantId as long
+    GetContactAddressesResponse2 getContactAddressesResponse2 = myProxy.getContactAddresses (lookupUser, accountRequest)
+    return  getContactAddressesResponse2.details.ACCTCONTACTADDRESSES.get(0).ADDRID
   }
 
   @Override
@@ -678,9 +812,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
       return true;
     }
 
-    createTenant(trans)
-    StorageUnit transUnit = StorageUnit.get(trans.unitId as Long)
-
+    GetAccountInfoResponse2 getAccountInfoResponse2 = createTenant (trans)
+    MakeReservationResponse makeReservationResponse = makeReservation (trans, getAccountInfoResponse2)
   }
 
   private Date getStartTime(String hrs) {
