@@ -629,13 +629,13 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     trans.tenantId = "${accountID}"
     trans.contactId = "${contactID}"
 
-    // Notes. This is blowing up on the server... I need to address this
-    // with CenterShift to find out why that is. For the moment there is
-    // nothing that can be done on our end.
-    /*
     if (trans.tenantId) {
+      // Note: Subject limited to 30 chars
+      // http://centershiftdevx.com/2011/04/29/sws-createnotes-method/
+      String noteSubject = "Storitz.com Reservation"
+
       String noteText = StoritzGroovyUtil.getCSAccountNoteText (trans)
-      String noteSubject = "Storitz.com Customer Reservation"
+
       CreateNotesRequest createNotesRequest = new CreateNotesRequest()
       createNotesRequest.subject = noteSubject
       createNotesRequest.note = noteText
@@ -664,7 +664,7 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
         }
       }
     }
-    */
+
     AccountRequest accountRequest = new AccountRequest()
     accountRequest.contactID = contactID
     accountRequest.acctID = accountID
@@ -680,34 +680,41 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
 
       StorageUnit theUnit = StorageUnit.get (trans.unitId)
 
-      UpdateUnitStatusRequest updateUnitStatusRequest = new UpdateUnitStatusRequest()
-      updateUnitStatusRequest.siteID = trans.site.sourceId as long; // long siteID;
-      updateUnitStatusRequest.unitID = trans.feedUnitId as long; // long unitID;
-      updateUnitStatusRequest.version = theUnit.cs4Version as BigDecimal; // BigDecimal version;
-      updateUnitStatusRequest.putOnHold = true; // boolean putOnHold;
-      UpdateUnitStatusResponse2 updateUnitStatusResponse2 = myProxy.updateUnitStatus (lookupUser, updateUnitStatusRequest)
+      //UpdateUnitStatusRequest updateUnitStatusRequest = new UpdateUnitStatusRequest()
+      //updateUnitStatusRequest.siteID = trans.site.sourceId as long; // long siteID;
+      //updateUnitStatusRequest.unitID = trans.feedUnitId as long; // long unitID;
+      //updateUnitStatusRequest.version = theUnit.cs4Version as BigDecimal; // BigDecimal version;
+      //updateUnitStatusRequest.putOnHold = true; // boolean putOnHold;
+      //UpdateUnitStatusResponse2 updateUnitStatusResponse2 = myProxy.updateUnitStatus (lookupUser, updateUnitStatusRequest)
 
       MakeReservationRequest makeReservationRequest = new MakeReservationRequest()
-      makeReservationRequest.siteID = trans.site.sourceId as long; // long siteID;
       makeReservationRequest.acctID = trans.tenantId as long; // long acctID;
-      makeReservationRequest.unitID = trans.feedUnitId as long; // long unitID;
-      makeReservationRequest.version = updateUnitStatusResponse2.newVersion; // BigDecimal version;
-      //makeReservationRequest.quoteID = 0; // Long quoteID;
-      //makeReservationRequest.quoteType = ; // QuoteTypes quoteType;
-      makeReservationRequest.rentNow = false; // boolean rentNow;
-      makeReservationRequest.price = trans.cost; // BigDecimal price;
-      makeReservationRequest.quoteStartDate = getReservationMoveInDate(trans, getAccountInfoResponse2); // XMLGregorianCalendar quoteStartDate;
-      //makeReservationRequest.inquirySource = ; // Integer inquirySource;
       makeReservationRequest.contacts = getReservationArrayOfContact(trans, getAccountInfoResponse2) ; // ArrayOfRentalContact contacts;
+      makeReservationRequest.quoteType = com.centershift.store40.QuoteTypes.HARD_RESERVATION; // QuoteTypes quoteType;
+      makeReservationRequest.rentNow = false; // boolean rentNow;
+      makeReservationRequest.siteID = trans.site.sourceId as long; // long siteID;
+      makeReservationRequest.unitID = trans.feedUnitId as long; // long unitID;
+      makeReservationRequest.version = theUnit.cs4Version
+      makeReservationRequest.quoteStartDate = getReservationMoveInDate(trans, getAccountInfoResponse2); // XMLGregorianCalendar quoteStartDate;
 
-      makeReservationResponse.pcds = getReservationPCDS (trans, getAccountInfoResponse2); // ArrayOfTRANQUOTEPCDDETAIL pcds;
-      //makeReservationResponse.overrideReservationAmount = ; // BigDecimal overrideReservationAmount;
+      //makeReservationRequest.version = updateUnitStatusResponse2.newVersion; // BigDecimal version;
+      //makeReservationRequest.quoteID = 0; // Long quoteID;
+      //makeReservationRequest.price = trans.cost; // BigDecimal price;
+      //makeReservationRequest.inquirySource = ; // Integer inquirySource;
+      //makeReservationRequest.pcds = getReservationPCDS (trans, getAccountInfoResponse2); // ArrayOfTRANQUOTEPCDDETAIL pcds;
+      //makeReservationRequest.overrideReservationAmount = ; // BigDecimal overrideReservationAmount;
+
       MakeReservationResponse makeReservationResponse = myProxy.makeReservation (lookupUser, makeReservationRequest)
 
+      trans.reserved = true
+      trans.reservationId = "${makeReservationResponse.rentalID}"
+      trans.idNumber ="R${makeReservationResponse.rentalID}"
+
+      log.info ("Successful CS4 Reservation: Rental=${makeReservationResponse.rentalID}, Quote=${makeReservationResponse.quoteID}")
       return makeReservationResponse
     }
     catch (Exception e) {
-      log.info ("Error creating reservation", e)
+      log.info ("Error creating CS4 reservation", e)
       throw e
     }
   }
@@ -740,10 +747,6 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
   }
 
   private ArrayOfRentalContact getReservationArrayOfContact (RentalTransaction trans, GetAccountInfoResponse2 getAccountInfoResponse2) {
-    CenterShift cshift = (CenterShift) trans.site.feed
-    def myProxy = getProxy(cshift)
-    def lookupUser = getLookupUser(cshift)
-
     ArrayOfRentalContact arrayOfRentalContact = new ArrayOfRentalContact()
 
     // to make the array or rental contact, first create the rental contact
@@ -751,8 +754,8 @@ class CShift4StorageFeedService extends BaseProviderStorageFeedService {
     rentalContact.contactId = trans.contactId as long
     rentalContact.addressId = getReservationAddressId (trans, getAccountInfoResponse2)
     rentalContact.phoneId = getReservationPhoneId (trans, getAccountInfoResponse2)
-    rentalContact.gateCode = getReservationGateCode (trans, getAccountInfoResponse2)
-    rentalContact.primaryFlag = true;
+    //rentalContact.gateCode = getReservationGateCode (trans, getAccountInfoResponse2)
+    //rentalContact.primaryFlag = true;
     arrayOfRentalContact.getRentalContact().add (rentalContact)
 
     return arrayOfRentalContact
