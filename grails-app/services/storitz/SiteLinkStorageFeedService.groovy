@@ -1211,7 +1211,7 @@ class SiteLinkStorageFeedService extends BaseProviderStorageFeedService {
           specialOffer.active = false;
           specialOffer.featured = false;
           specialOffer.waiveAdmin = false;
-          specialOffer.description = promo.sDescription.text()
+          specialOffer.description = StoritzUtil.truncateStringDefaultLengthForDB (promo.sDescription.text())
         }
         else {
           specialOffer.deleteRestrictions();

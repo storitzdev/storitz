@@ -158,4 +158,29 @@ public class StoritzUtil {
         }
         return bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+
+    /**
+     * Safely truncate any ol' string
+     * @param str
+     * @param max
+     * @return
+     */
+    public static String truncateString (String str, int max) {
+        if (str == null)
+            return null;
+
+        if (str.length() <= max)
+            return str;
+
+        return str.substring(0, max-1);
+    }
+
+    /**
+     * Prepare a string for GORM default varchar(255) length
+     * @param str
+     * @return
+     */
+    public static String truncateStringDefaultLengthForDB (String str) {
+        return truncateString (str, 255);
+    }
 }
