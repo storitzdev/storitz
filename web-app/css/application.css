@@ -902,6 +902,14 @@ a.toggle_map_view {
   width: 120px;
 }
 
+#search_results .unit_info div.location.sponsored {
+  padding-bottom: 1px;
+}
+
+#search_results .unit_info ul.site_features.sponsored > li {
+  padding: 1px 0;
+}
+
 #search_results .special {
   width: 118px;
 }
@@ -945,6 +953,27 @@ a.toggle_map_view {
 
 }
 
+#search_results li.sponsored {
+  border-width: 0px;
+  padding: 0 0 10px 0;
+  margin: 0;
+  background-color: #ffffea
+}
+
+#search_results .sponsoredSite {
+  display: block;
+  text-align:center;
+  padding: 7px 0;
+  margin-bottom: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  letter-spacing: 2px;
+  color: #333;
+  font-size: 10px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
 .show_map_popup a {
   text-decoration: none;
 }
@@ -967,7 +996,9 @@ a.toggle_map_view {
 #search_results .unit_info .dimensions {
   font-weight: bold
 }
-
+#search_results .unit_info div.dimensions.sponsored {
+  padding-bottom: 5px;
+}
 #search_results .your_price {
   font-size: 16px;
   font-weight: bold;

@@ -11,6 +11,7 @@ import com.storitz.yelp.Yelp
 import com.storitz.yelp.YelpReview
 import grails.converters.JSON
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import com.storitz.StorageSite
 
 class SearchController {
 
@@ -30,6 +31,7 @@ class SearchController {
     def zip
     def geoType
     def yelpReviews = []
+    def sponsored_site
 
     def index = {
       def queryTerm = params.where;
@@ -73,6 +75,9 @@ class SearchController {
         searchResult = searchService.findClientSites(criteria);
         genReviews(searchResult.sites);
 
+        //temp code for sponsored site.
+        sponsored_site = StorageSite.get(1732); //placeholder extraspace site.
+
         resultsModel['where'] = queryTerm
         resultsModel['searchType'] = criteria.searchType
       }
@@ -81,8 +86,8 @@ class SearchController {
         searchResult = [sites:[], moveInPrices:[:]]
       }
 
-      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews]
-      }
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews, sponsored_site:sponsored_site]
+    }
 
     def metro = {
       // TODO: Fix to look up city name using seoCity value of StorageSite table; calls to
