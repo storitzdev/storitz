@@ -85,7 +85,7 @@ class MigrationController {
       def respText = conn.content.text
       def resp = JSON.parse(respText)
       clearNulls(resp)
-      def feed
+      Feed feed
       if (feedTypeEquals(resp.feed.feedType,'SITELINK')) {
         feed = new SiteLink()
         feed.feedType = FeedType.SITELINK
@@ -176,6 +176,9 @@ class MigrationController {
         feed.reservationMoveInDescription = resp.feed.reservationMoveInDescription
       }
       CommissionSchedule commissionSchedule = CommissionSchedule.get(1L)
+      feed.commissionSchedule = commissionSchedule
+      feed.save (flush:true)
+
       // create the manager first
       // handle users
       def users = []
@@ -229,7 +232,32 @@ class MigrationController {
         rentalAgreement.save(flush: true)
       }
       for (s in resp.feed.sites) {
-        def site = new StorageSite()
+        StorageSite site = new StorageSite()
+        bindData(site, s)
+        def rentalAgreement
+        if (s.rentalAgreement) {
+          rentalAgreement = RentalAgreement.findByAgreementOwnerAndTitle(manager, s.rentalAgreement.title)
+          s.rentalAgreement = null
+        }
+        def bankAccount
+        if (s.bankAccount) {
+          bankAccount = new BankAccount()
+          bindData(bankAccount, s.bankAccount)
+          s.bankAccount = null
+        }
+        site.rentalAgreement = rentalAgreement
+        site.bankAccount = bankAccount
+        site.feed = feed
+
+        // prevent java.lang.IllegalArgumentException: object is not an instance of declaring class
+        site.securityItems = [] // was JSON object after bindData
+        site.convenienceItems = [] // was JSON object after bindData
+        site.amenityItems = [] // was JSON object after bindData
+        site.images = [] // was JSON object after bindData
+        site.insurances = [] // was JSON object after bindData
+        site.specialOffers = [] // was JSON object after bindData
+
+        site.save(flush: true)
         def securityItems = []
         for (i in s.securityItems) {
           def si = new Bullet()
@@ -268,7 +296,9 @@ class MigrationController {
         def specialOffers = []
         for (i in s.specialOffers) {
           def si = new SpecialOffer()
+          bindData(si, i)
           si.site = site
+          si.restrictions = [] // was JSON object after bindData
           si.save(flush: true)
           for (j in i.restrictions) {
             def sor = new SpecialOfferRestriction()
@@ -277,7 +307,6 @@ class MigrationController {
             sor.save(flush: true)
           }
           i.restrictions.clear()
-          bindData(si, i)
           specialOffers.add(si)
         }
         s.amenityItems.clear()
@@ -287,27 +316,6 @@ class MigrationController {
         s.insurances.clear()
         s.specialOffers.clear()
 
-        def rentalAgreement
-        if (s.rentalAgreement) {
-          rentalAgreement = RentalAgreement.findByAgreementOwnerAndTitle(manager, s.rentalAgreement.title)
-        }
-        def bankAccount
-        if (s.bankAccount) {
-          bankAccount = new BankAccount()
-          bindData(bankAccount, s.bankAccount)
-          s.bankAccount = null
-        }
-        def logo
-        if (s.logo) {
-          logo = new SiteImage()
-          bindData(logo, s.logo)
-          s.logo = null
-        }
-        s.rentalAgreement = null
-        bindData(site, s)
-        site.rentalAgreement = rentalAgreement
-        site.bankAccount = bankAccount
-        site.save(flush: true)
         // adjust times by our timezone
         if (site.startMonday) {
           site.startMonday = DateUtils.addHours(site.startMonday, (TimeZone.getDefault().getRawOffset() / TimeZone.ONE_HOUR) as int)
@@ -398,6 +406,12 @@ class MigrationController {
           site.addToImages(image)
           image.save(flush: true)
         }
+        def logo
+        if (s.logo) {
+          logo = new SiteImage()
+          bindData(logo, s.logo)
+          s.logo = null
+        }
         if (logo) {
           logo.site = site
           site.logo = logo
@@ -418,10 +432,8 @@ class MigrationController {
         }
         site.save(flush: true)
         sites.add(site)
-
       }
       feed.manager = manager
-      feed.commissionSchedule = commissionSchedule
       feed.save(flush: true)
       for (site in sites) {
         feed.addToSites(site)
