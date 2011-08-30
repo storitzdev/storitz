@@ -3,3 +3,5 @@ Merge List
 ----- ---------	--------------------------------------------------------------
 #     branch	comment
 ----- ---------	--------------------------------------------------------------
+1751  v2_ui     missing null pointer guard in RentalTransactionController.create... :(
+
