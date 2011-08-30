@@ -207,12 +207,14 @@ class RentalTransactionController extends BaseTransactionController {
       if (!moveInService.isAvailable(trans)) { // requires trans.unitId and trans.site to be populated
         removeUnit(trans, unit) // ... and this also requires trans.site
         unit = findAlternateUnit(trans, unit) // ... as does this :(
-        promos = offerFilterService.getValidFeaturedOffers(site, unit);
-        promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
-        if (promo && !promos.contains(promo)) {
-          promo = null;
+        if (unit) {
+          promos = offerFilterService.getValidFeaturedOffers(site, unit);
+          promos.addAll(offerFilterService.getValidNonFeaturedOffers(site, unit));
+          if (promo && !promos.contains(promo)) {
+            promo = null;
+          }
+          totals = costService.calculateTotals(site, unit, promo, insurance, trans.moveInDate);
         }
-        totals = costService.calculateTotals(site, unit, promo, insurance, trans.moveInDate);
         trans.status = TransactionStatus.UNIT_UNAVAILABILITY_FAILED;
         throw new Error(trans.status.name)
       }
@@ -412,7 +414,7 @@ class RentalTransactionController extends BaseTransactionController {
         case TransactionStatus.UNIT_UNAVAILABILITY_FAILED:
         case TransactionStatus.CREDIT_CARD_FAILED:
           render(view:"begin",
-                  model:[rentalTransactionInstance:trans, contact:trans.contactPrimary, unit:unit, site:site,
+                model:[rentalTransactionInstance:trans, contact:trans.contactPrimary, unit:unit, site:site,
                           promo:promo, promos:promos, insurance:insurance, totals:totals,
                           moveInDate:trans.moveInDate, xid:params.xid, cardType:params.cardType,
                           cc_month:params.cc_month, cc_year:params.cc_year, cvv2:params.cvv2]);
