@@ -76,7 +76,7 @@ class SearchController {
         genReviews(searchResult.sites);
 
         //temp code for sponsored site.
-        sponsored_site = StorageSite.get(1732); //placeholder extraspace site.
+        //sponsored_site = StorageSite.get(1732); //placeholder extraspace site.
 
         resultsModel['where'] = queryTerm
         resultsModel['searchType'] = criteria.searchType
@@ -86,7 +86,7 @@ class SearchController {
         searchResult = [sites:[], moveInPrices:[:]]
       }
 
-      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews, sponsored_site:sponsored_site]
+      [queryTerm: queryTerm, clientSites: searchResult.sites, siteMoveInPrice:searchResult.moveInPrices, lat: lat, lng: lng, unitSize: unitSize, unitType: unitType, amenities: amenities, resultsModel: resultsModel, yelpReviews:yelpReviews]
     }
 
     def metro = {

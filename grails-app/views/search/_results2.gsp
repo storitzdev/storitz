@@ -14,9 +14,6 @@
                     <g:render template="/clientSite" model="['site':site, 'unitInfo':siteMoveInPrice[site.id]]"/>
                 </li>
             </g:each>
-            <li id="site_1732" class="sponsored">
-                <g:render template="sponsoredSite" model="['site':sponsored_site]" />
-            </li>
         </ul>
         <div class="map_container"><div id="big_map_canvas"></div></div>
 
