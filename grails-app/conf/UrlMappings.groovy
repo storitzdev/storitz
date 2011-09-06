@@ -125,6 +125,8 @@ class UrlMappings {
       }
     }
 
+    "/signup"(controller: "static", action: "operatorsignup")
+
     "/sitemap"(controller: "siteMap")
 
     "/sitemapGeo"(controller: "siteMap", action: "geo")
