@@ -59,7 +59,7 @@
 <p:dependantJavascript>
 <script type="text/javascript">
   var d=document,l=d.location;
-  d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://maps-api-ssl':'://maps')+'.google.com'+'/maps/api/js?v=3&client=gme-storitz&sensor=false" type="text/javascript"></sc'+'ript>');
+  d.write('<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s':'')+'://maps.googleapis.com/maps/api/js?key=AIzaSyBFwOS98y0mDcMVTvOO7jG7SVyBPMOrFUc&sensor=false" type="text/javascript"></sc'+'ript>');
   $(d).ready(function() {
     initialize_college_landing_page();
   });

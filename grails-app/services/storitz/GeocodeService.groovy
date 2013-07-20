@@ -1,62 +1,53 @@
 package storitz
 
-import grails.converters.JSON
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
-import org.bouncycastle.util.encoders.UrlBase64
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import org.codehaus.groovy.grails.web.json.JSONElement
+import static groovyx.net.http.ContentType.JSON
+import groovyx.net.http.HTTPBuilder
+import static groovyx.net.http.Method.GET
 
 class GeocodeService {
 
   boolean transactional = false
 
-  static String keyString = 'J3Nopobjuhb22dBD7XoE3fktDOE='
-  static key = UrlBase64.decode(keyString)
-  static String clientId = 'gme-storitz'
-
-  def host = 'http://maps.googleapis.com'
-
-  boolean signatureRequired = ConfigurationHolder.config?.storitz?.google?.signatureRequired
-
   def geocode(String address) {
-
-    def uri = '/maps/api/geocode/json?address=' + URLEncoder.encode(address, "UTF-8") +
-            '&sensor=false'
-
-    if (signatureRequired) {
-      uri += '&client=' + clientId
-      uri = sign(uri)
-    }
-
-    JSON.use("deep")
-    def url = new URL(host + uri)
-    String text = url.text;
-    JSONElement e = JSON.parse(text);
-    return e;
+    log.info "looking up geocode location foraddress: $address"
+    String results = getLocation([address: address, sensor: 'true'])
+    return grails.converters.JSON.parse(results)
   }
 
   def geocode(double lat, double lng) {
-    def uri = "/maps/api/geocode/json?latlng=${lat},${lng}&sensor=false"
-
-    if (signatureRequired) {
-      uri += '&client=' + clientId
-      uri = sign(uri)
-    }
-
-    JSON.use("deep")
-    def url = new URL(host + uri)
-    return JSON.parse(url.text)
+    log.info "looking up geocode location for cordinates: $lat, $lng"
+    String results = getLocation([latlng: "$lat,$lng", sensor: 'true'])
+    return grails.converters.JSON.parse(results)
   }
 
-  private String sign(String uri) {
+  /**
+   * Use of the Google Geocoding API is subject to a query limit of 2,500 geolocation requests per day
+   * For more information, visit: http://code.google.com/apis/maps/documentation/geocoding/
+   * @param address
+   * @return
+   */
+  def getLocation(Map query) {
+    def http = new HTTPBuilder("http://maps.googleapis.com")
+    try {
+      http.request(GET, JSON) {
+        uri.path = '/maps/api/geocode/json'
+        uri.query = query
 
-    Mac mac = Mac.getInstance("HmacSHA1");
-    SecretKeySpec secret = new SecretKeySpec(key, mac.getAlgorithm());
-    mac.init(secret);
-    byte[] digest = mac.doFinal(uri.getBytes());
-
-    String signature = new String(UrlBase64.encode(digest)).replace('+', '-').replace('/', '_')
-    return uri + '&signature=' + signature;
+        response.success = {resp, json ->
+          if(json.status == 'OK') {
+            return json
+          } else {
+            log.warn "google could not find location with query: $query"
+            return null
+          }
+        }
+        response.failure = { resp ->
+          log.error "location lookup failed for params $query, with response: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}"
+          return null
+        }
+      }
+    } catch(Exception ex) {
+      log.error("Exception trying to lookup location using google maps", ex)
+    }
   }
 }
