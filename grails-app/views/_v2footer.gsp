@@ -1,6 +1,6 @@
 <%@ page import="org.codehaus.groovy.grails.commons.ConfigurationHolder" %>
 <div id="footer">
-    <span>&copy; 2011 Storitz Inc. All rights reserved.</span>
+    <span>&copy; Storitz Holding Company, LLC 2013 All rights reserved.</span>
     <g:link controller="static" action="aboutus">About Us</g:link>
     <g:link controller="static" action="terms" class="piped">Terms</g:link>
     <g:link controller="static" action="privacy" class="piped">Privacy Policy</g:link>
