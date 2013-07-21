@@ -1,5 +1,6 @@
 package storitz
 
+import com.maxmind.geoip.Location
 import com.storitz.StorageSite
 import com.storitz.geoip.GeoIp
 import javax.servlet.ServletContext
@@ -14,7 +15,7 @@ import org.hibernate.SessionFactory
 import org.hibernate.Session
 
 class MapService {
-  def geoIp;
+  def lookupService;
 
   def sessionFactory;
   boolean transactional = false
@@ -137,14 +138,16 @@ class MapService {
     return sites;
   }
 
-  def getGeoIp(ServletContext servletContext, HttpServletRequest request) {
-    def geoLoc
-
-    if (!geoIp) {
-      geoIp = new GeoIp(servletContext)
+  def Location getLocation(String ipAddr) {
+    if (ipAddr.equals("127.0.0.1") || ipAddr.startsWith("192.168") || ipAddr.startsWith("10.")) {
+      ipAddr = "71.118.52.85"
     }
+    Location loc = lookupService.getLocation(ipAddr)
+    return loc
+  }
 
-    return geoIp.getLocation(request.getRemoteAddr())
+  def getGeoIp(ServletContext servletContext, HttpServletRequest request) {
+    return getLocation(request.getRemoteAddr())
 
   }
 

@@ -53,6 +53,7 @@ environments {
     storitz.nacha.fileId = '7878782339'
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = true
+    storitz.geoip.file = '/usr/share/maxmind/GeoIPCity.dat'
   }
   // For production_script, the given port is unimportant, as long as it does not conflict with the actual port value.
   // We'll also turn off the public server url and set the Google signatureRequired to false.
@@ -66,6 +67,7 @@ environments {
     storitz.nacha.fileId = '7878782339'
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = false
+    storitz.geoip.file = '/usr/share/maxmind/GeoIPCity.dat'
   }
   production_bob_script {
     grails.serverURL = "http://www.storitz.com:18081"
@@ -77,6 +79,7 @@ environments {
     storitz.nacha.fileId = '7878782339'
     storitz.nacha.companyId = '1272912549'
     storitz.google.signatureRequired = false
+    storitz.geoip.file = '/usr/share/maxmind/GeoIPCity.dat'
   }
   preview {
     grails.serverURL = "http://preview.storitz.com"
@@ -88,6 +91,7 @@ environments {
             '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
     ]
     storitz.google.signatureRequired = true
+    storitz.geoip.file = '/usr/share/maxmind/GeoIPCity.dat'
   }
   // For preview_script, the given port is unimportant, as long as it does not conflict with the actual port value.
   // We'll also turn off the public server url and set the Google signatureRequired to false.
@@ -100,6 +104,7 @@ environments {
             '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
     ]
     storitz.google.signatureRequired = false
+    storitz.geoip.file = '/usr/share/maxmind/GeoIPCity.dat'
   }
   preview_bob_script {
     grails.serverURL = "http://preview.storitz.com:18081"
@@ -110,6 +115,7 @@ environments {
             '/storageSite/**': ['ROLE_USER', 'ROLE_ADMIN']
     ]
     storitz.google.signatureRequired = false
+    storitz.geoip.file = '/usr/share/maxmind/GeoIPCity.dat'
   }
   development {
     grails.serverURL = "http://localhost:8080/${appName}"
@@ -121,6 +127,7 @@ environments {
     uiperformance.enabled = false
     storitz.google.signatureRequired = false
     storitz.rentals.sandboxMode = true
+    storitz.geoip.file = 'GeoIPCity.dat'
   }
   // For development_script, the given port is unimportant, as long as it does not conflict with the actual port value
   development_script {
@@ -131,6 +138,7 @@ environments {
     storitz.nacha.companyId = '0123456789'
     uiperformance.enabled = false
     storitz.google.signatureRequired = false
+    storitz.geoip.file = 'GeoIPCity.dat'
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"

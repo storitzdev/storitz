@@ -1,3 +1,5 @@
+import com.maxmind.geoip.LookupService
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import storitz.spring.CustomPropertyEditorRegistrar
 import org.springframework.security.web.util.AntUrlPathMatcher
 import org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource
@@ -26,6 +28,8 @@ beans = {
     channelDecisionManager = ref("channelDecisionManager")
     securityMetadataSource = ref("securityMetadataSource")
   }
+
+  lookupService(LookupService, new File(ConfigurationHolder.config.storitz.geoip.file as String), LookupService.GEOIP_MEMORY_CACHE | LookupService.GEOIP_CHECK_CACHE)
 
   jmsConnectionFactory(org.apache.activemq.pool.PooledConnectionFactory) { bean ->
     bean.destroyMethod = "stop"

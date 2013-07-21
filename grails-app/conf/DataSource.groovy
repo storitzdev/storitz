@@ -15,19 +15,19 @@ environments {
   development {
     dataSource {
       dbCreate = "validate"
-      //url = "jdbc:hsqldb:file:devDB"
       driverClassName = "com.mysql.jdbc.Driver"
       url = "jdbc:mysql://127.0.0.1:3306/storitz_development?autoReconnect=true"
       username = "storitz"
       password = "clickstoredone"
-
-      //loggingSql = true
     }
   }
   development_script {
     dataSource {
       dbCreate = "validate"
-      url = "jdbc:hsqldb:file:devDB"
+      driverClassName = "com.mysql.jdbc.Driver"
+      url = "jdbc:mysql://127.0.0.1:3306/storitz_development?autoReconnect=true"
+      username = "storitz"
+      password = "clickstoredone"
       //loggingSql = true
     }
   }
