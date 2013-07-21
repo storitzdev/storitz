@@ -17,6 +17,7 @@ grails.project.dependency.resolution = {
     mavenRepo "http://download.java.net/maven/2/"
     mavenRepo "http://repo.grails.org/grails/plugins"
     mavenRepo "http://repo1.maven.org/maven2"
+    mavenRepo "http://archiva.fdvs.com.ar/repository/public1"
   }
   dependencies {
     runtime "org.apache.ant:ant:1.7.1"
