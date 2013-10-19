@@ -1,0 +1,11 @@
+cd src/storitz
+grails clean
+grails compile
+grails war ROOT.war
+
+
+rm -rf /home/deploy/tomcat-current/webapps/ROOT
+rm -rf /home/deploy/tomcat-current/webapps/ROOT.war
+
+cp /target/ROOT.war /home/deploy/tomcat-current/webapps
+ln -s /home/deploy/images/site /home/deploy/tomcat-current/webapps/ROOT/images/site
