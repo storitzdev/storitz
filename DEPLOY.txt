@@ -1,11 +1,30 @@
-cd src/storitz
-grails clean
-grails compile
-grails war ROOT.war
+1) Pull the lastest code from the git@github.com:storitzdev/storitz.git repo
+   NOTE: you are on the prod_live_20110830 branch, not master
 
+$ cd src/storitz
+$ git pull --rebase
 
-rm -rf /home/deploy/tomcat-current/webapps/ROOT
-rm -rf /home/deploy/tomcat-current/webapps/ROOT.war
+2) Create the war file
 
-cp /target/ROOT.war /home/deploy/tomcat-current/webapps
-ln -s /home/deploy/images/site /home/deploy/tomcat-current/webapps/ROOT/images/site
+$ grails clean
+$ grails compile
+$ grails war ROOT.war
+
+3) shut down the app
+
+$ /etc/init.d/tomcat stop
+
+4) Clean out the existing war
+
+$ rm -rf /home/deploy/tomcat-current/webapps/ROOT
+$ rm -rf /home/deploy/tomcat-current/webapps/ROOT.war
+
+5) Copy the new war over 
+$ cp /target/ROOT.war /home/deploy/tomcat-current/webapps
+
+6) Start tomcat
+
+$ /etc/init.d/tomcat start
+
+7) Setup the site images
+$ ln -s /home/deploy/images/site /home/deploy/tomcat-current/webapps/ROOT/images/site
